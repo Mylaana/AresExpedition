@@ -1,0 +1,22 @@
+<div class="ressource-card">
+    <div class="wrapper-ressource box-one">
+        <div class="box-ressource-icon">
+            <img [src]="ressourceCard.imageUrl" [alt]="ressourceCard.description">
+        </div>
+        <div *ngIf="ressourceCard.valueMod" class="box-ressource-mod">
+            <div class="box-ressource-mod-icon center">
+                <img src="/assets/ressource/mod.png" alt="ressourceCard.description">
+            </div>
+            <div class="box-ressource-mod-value">
+                <p class="center">{{ressourceCard.valueMod}}</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="box-two">
+        <p class="center">{{ressourceCard.valueProd}}</p>
+    </div>
+    <div class="stock-zone box-three">
+        <p class="center">{{ressourceCard.valueStock}}</p>
+    </div>
+</div>
