@@ -5,3 +5,13 @@ body {
 div {
     border: red 1px solid;
 }
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+img {
+    width: 100%;
+}

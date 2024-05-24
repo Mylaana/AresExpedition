@@ -1,1 +1,19 @@
-<p>tag-card works!</p>
+<div class="tag-card">
+    <div class="wrapper-tag box-one">
+        <div class="box-tag-icon">
+            <img [src]="tagCard.imageUrl" [alt]="tagCard.description">
+        </div>
+        <div *ngIf="tagCard.valueMod===0" class="box-tag-mod">
+            <div class="box-tag-mod-icon center">
+                <img src="/assets/ressource/mod.png" alt="tagCard.description">
+            </div>
+            <div class="box-tag-mod-value">
+                <p class="center">{{tagCard.valueMod}}</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="stock-zone box-three">
+        <p class="center">{{tagCard.valueCount}}</p>
+    </div>
+</div>

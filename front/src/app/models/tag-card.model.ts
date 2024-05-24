@@ -1,4 +1,4 @@
-export class RessourceCardModel {
+export class TagCardModel {
     id!: number;
     description!: string;
     imageUrl!: string;

@@ -5,4 +5,5 @@ export class RessourceCardModel {
     valueMod!: number;
     valueProd!: number;
     valueStock!: number;
+    hasStock?: boolean;
 }
