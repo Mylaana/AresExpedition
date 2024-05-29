@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SelfInfoComponent } from './self-info/self-info.component';
 import { CommonModule } from '@angular/common';
+import { SelfInfoComponent } from './components/player-info/self-info/self-info.component';
+import { PlayerHandComponent } from './components/project-hand/player-hand/player-hand.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    SelfInfoComponent,
     CommonModule,
+    SelfInfoComponent,
+    PlayerHandComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RessourceCardModel } from '../models/ressource-card.model';
+import { RessourceCardModel } from '../../../models/ressource-card.model';
+
 
 @Component({
   selector: 'app-ressource-card',
@@ -12,9 +13,12 @@ import { RessourceCardModel } from '../models/ressource-card.model';
 export class RessourceCardComponent implements OnInit {
   @Input() ressourceCard!: RessourceCardModel;
 
-  hasStock!: boolean;
-
   ngOnInit(): void {
-    this.hasStock = true
+    if (this.ressourceCard.id <= 3){
+      this.ressourceCard.hasStock = true
+    } else {
+      this.ressourceCard.hasStock = false
+    }
+      
   }
 }

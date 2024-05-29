@@ -11,14 +11,14 @@ export class TagInfoService {
             description: 'building',
             imageUrl: 'assets/tag/building.png',
             valueMod: 0,
-            valueCount: 0
+            valueCount: 1
         },
         {
             id: 2,
             description: 'space',
             imageUrl: 'assets/tag/space.png',
             valueMod: 0,
-            valueCount: 0
+            valueCount: 5
         },
         {
             id: 3,
@@ -38,8 +38,8 @@ export class TagInfoService {
             id: 5,
             description: 'earth',
             imageUrl: 'assets/tag/earth.png',
-            valueMod: 0,
-            valueCount: 0
+            valueMod: -2,
+            valueCount: 3
         },
         {
             id: 6,
@@ -74,7 +74,7 @@ export class TagInfoService {
             description: 'event',
             imageUrl: 'assets/tag/event.png',
             valueMod: 0,
-            valueCount: 0
+            valueCount: 120
         },
     ];
 

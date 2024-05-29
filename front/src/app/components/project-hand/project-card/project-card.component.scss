@@ -1,0 +1,77 @@
+$ares-red: rgb(253, 79, 36);
+$ares-blue: rgb(100, 167, 255);
+$ares-green: rgb(0, 185, 46);
+
+$colors: (
+  red: $ares-red,
+  blue: $ares-blue,
+  green: $ares-green
+);
+
+.wrapper-card{
+    border: black solid 1px;
+    border-radius: 15px;
+    height: 300px;
+    width: 200px;
+    padding: 0px;
+    margin: 50px;
+    &:hover{
+        border: gold 1px solid;
+    }
+}
+.wrapper-tag{
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.tag-zone{
+    $bordersize: 5px;
+    $borderbottomwidth: 15px;
+    $borderoffset: $bordersize + $borderbottomwidth;
+    
+    width: 0;
+    height: 0;
+    border: $borderoffset solid transparent;
+    position: relative;
+    top: -90px;
+    border-bottom-color: grey;
+    border-left-color: grey;
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: -$borderoffset;
+        top: $borderoffset;
+        width: $borderbottomwidth;
+        height: 0;
+        border: $bordersize solid transparent;
+        border-top-color: grey;
+        border-width: $bordersize + 7.5px;       
+    }
+
+    @each $color-name, $color-value in $colors {
+        &.#{$color-name}-card {
+            border-bottom-color: $color-value;
+            border-left-color: $color-value;
+    
+            &:after {
+            border-top-color: $color-value;
+            }
+        }
+    }
+  }
+.tag-icon{
+    position: relative;
+    top: -75px;
+    left: -35px;
+    padding: 3px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: grey;
+    @each $color-name, $color-value in $colors {
+        &.#{$color-name}-card {
+            background: darken($color-value, 15%);
+        }
+    }
+}

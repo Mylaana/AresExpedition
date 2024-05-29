@@ -1,9 +1,9 @@
 <div class="tag-card">
-    <div class="wrapper-tag box-one">
+    <div class="box-one wrapper-tag">
         <div class="box-tag-icon">
-            <img [src]="tagCard.imageUrl" [alt]="tagCard.description">
+            <img [ngClass]="{'grey-tag': tagCard.valueCount===0}" [src]="tagCard.imageUrl" [alt]="tagCard.description">
         </div>
-        <div *ngIf="tagCard.valueMod===0" class="box-tag-mod">
+        <div *ngIf="tagCard.valueMod" class="box-tag-mod">
             <div class="box-tag-mod-icon center">
                 <img src="/assets/ressource/mod.png" alt="tagCard.description">
             </div>
@@ -13,7 +13,7 @@
 
         </div>
     </div>
-    <div class="stock-zone box-three">
+    <div class="box-two">
         <p class="center">{{tagCard.valueCount}}</p>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TagCardModel } from '../models/tag-card.model';
+import { TagCardModel } from '../../../models/tag-card.model';
 
 
 @Component({

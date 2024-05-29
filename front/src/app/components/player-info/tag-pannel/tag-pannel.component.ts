@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagCardComponent } from '../tag-card/tag-card.component';
-import { TagCardModel } from '../models/tag-card.model';
-import { TagInfoService } from '../service/tag-info.service';
+import { TagCardModel } from '../../../models/tag-card.model';
+import { TagInfoService } from '../../../service/tag-info.service';
 
 @Component({
   selector: 'app-tag-pannel',

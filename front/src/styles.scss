@@ -1,9 +1,13 @@
+* {
+    padding:0;
+    margin:0;
+}
 body {
     margin: 0;
     padding: 0;
 }
 div {
-    border: red 1px solid;
+    border: red 0px solid;
 }
 .center{
     display: flex;
@@ -14,4 +18,8 @@ div {
 }
 img {
     width: 100%;
+    aspect-ratio: 1/1;
+}
+p {
+    font-size: 12px;
 }

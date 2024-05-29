@@ -1,4 +1,4 @@
-<div class="ressource-card">
+<div class="ressource-card ressource-card--nostock">
     <div class="wrapper-ressource box-one">
         <div class="box-ressource-icon">
             <img [src]="ressourceCard.imageUrl" [alt]="ressourceCard.description">
@@ -10,13 +10,12 @@
             <div class="box-ressource-mod-value">
                 <p class="center">{{ressourceCard.valueMod}}</p>
             </div>
-
         </div>
     </div>
     <div class="box-two">
-        <p class="center">{{ressourceCard.valueProd}}</p>
+        <p class="center">+ {{ressourceCard.valueProd}}</p>
     </div>
-    <div class="stock-zone box-three">
+    <div *ngIf="ressourceCard.hasStock" class="box-three">
         <p class="center">{{ressourceCard.valueStock}}</p>
     </div>
 </div>
