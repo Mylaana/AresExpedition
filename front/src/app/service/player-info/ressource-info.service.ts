@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { RessourceCardModel } from "../models/ressource-card.model";
+import { RessourceCardModel } from "../../models/player-info/ressource-card.model";
 
 @Injectable({
     providedIn: 'root'

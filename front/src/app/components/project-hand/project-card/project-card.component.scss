@@ -3,54 +3,179 @@ $ares-blue: rgb(100, 167, 255);
 $ares-green: rgb(0, 185, 46);
 
 $colors: (
-  red: $ares-red,
-  blue: $ares-blue,
-  green: $ares-green
+  "red": $ares-red,
+  "blue": $ares-blue,
+  "green": $ares-green
+);
+$dark-colors: (
+    "red": darken($ares-red, 15%),
+    "blue": darken($ares-blue, 15%),
+    "green": darken($ares-green, 15%)
+);
+$light-colors: (
+    "red": lighten($ares-red, 25%),
+    "blue": lighten($ares-blue, 15%),
+    "green": lighten($ares-green, 50%)
+);
+$card-back-colors: (
+    "red": rgba(150, 40, 60, 0.301),
+    "blue": rgba(0, 60, 150, 0.301),
+    "green": rgba(40, 150, 40, 0.301)
 );
 
 .wrapper-card{
+    z-index: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.7fr 1fr 1fr 1fr 0.5fr 1fr;
+
     border: black solid 1px;
     border-radius: 15px;
     height: 300px;
     width: 200px;
     padding: 0px;
-    margin: 50px;
+    margin: 0px;
     &:hover{
         border: gold 1px solid;
     }
+    @each $color-name, $color-value in $card-back-colors {
+        &.#{$color-name}Project {
+            background: $color-value;
+        }
+    }
+}
+.grid-box-cost{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.wrapper-cost{
+    position: relative;
+    height: 100%;
+    width: 100%;    
+    
+    &.cost-mod{
+        z-index: 3;
+        top: -15px;
+        filter: grayscale(20%);
+        opacity: 80%;
+        & img{
+            width: 50%;
+        }
+    }
+}
+.wrapper-cost--image {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+    
+    & img{
+        width: 70%;
+        aspect-ratio: 1;
+    }
+}
+.wrapper-cost--value {
+    z-index: 3;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grid-box-title{
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > p {
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+        font-style: italic;
+
+        text-shadow:
+          -0.5px -0.5px 0 #000,  
+           0.5px -0.5px 0 #000,
+          -0.5px  0.5px 0 #000,
+           0.5px  0.5px 0 #000;  
+    }
+}
+.grid-box-tag{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 5;
+    padding-top: 10px;
+}
+.grid-box-summary{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 5;
+    grid-row-end: 7;
+}
+.grid-box-vp{
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 6;
+    grid-row-end: 7;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 7px;
+}
+.grid-box-description{
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 5;
 }
 .wrapper-tag{
-    margin-bottom: 5px;
-    display: flex;
+    width: 100%;
+    height: 29%;
 }
-
 .tag-zone{
     $bordersize: 5px;
-    $borderbottomwidth: 15px;
-    $borderoffset: $bordersize + $borderbottomwidth;
+    $border-bottom-width: 15px;
+    $border-offset: $bordersize + $border-bottom-width;
     
     width: 0;
     height: 0;
-    border: $borderoffset solid transparent;
+    border: $border-offset solid transparent;
     position: relative;
-    top: -90px;
+    top: 0;
     border-bottom-color: grey;
     border-left-color: grey;
 
     &:after {
         content: '';
         position: absolute;
-        left: -$borderoffset;
-        top: $borderoffset;
-        width: $borderbottomwidth;
+        left: -$border-offset;
+        top: $border-offset;
+        width: $border-bottom-width;
         height: 0;
         border: $bordersize solid transparent;
         border-top-color: grey;
-        border-width: $bordersize + 7.5px;       
+        border-bottom: 0px;
+        border-width: $bordersize + 7.5px;
     }
 
     @each $color-name, $color-value in $colors {
-        &.#{$color-name}-card {
+        &.#{$color-name}Project {
             border-bottom-color: $color-value;
             border-left-color: $color-value;
     
@@ -62,16 +187,31 @@ $colors: (
   }
 .tag-icon{
     position: relative;
-    top: -75px;
-    left: -35px;
+    top: -28px;
+    left: 4px;
     padding: 3px;
     width: 25px;
     height: 25px;
     border-radius: 50%;
     background: grey;
-    @each $color-name, $color-value in $colors {
-        &.#{$color-name}-card {
-            background: darken($color-value, 15%);
+    @each $color-name, $color-value in $dark-colors {
+        &.#{$color-name}Project {
+            background: $color-value;
         }
+    }
+}
+.victory-point-icon{
+    border-radius: 50%;
+    border: black solid 3px;
+    height: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(143, 92, 63);
+    background: linear-gradient(0deg, rgba(66,45,23,1) 0%, rgba(143,92,63,1) 40%, rgba(255,239,213,1) 100%);
+    & p{
+        font-size: 20px;
+        font-weight: bold;       
     }
 }

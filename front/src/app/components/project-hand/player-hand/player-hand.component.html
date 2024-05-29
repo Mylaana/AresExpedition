@@ -1,5 +1,4 @@
 <h1>Cards in Hand</h1>
 <div class="wrapper-hand">
-    <app-project-card></app-project-card>
-    <app-project-card></app-project-card>
+    <app-project-card *ngFor="let card of projectHand" [projectCard]="card"></app-project-card>
 </div>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RessourceCardComponent } from '../ressource-card/ressource-card.component';
-import { RessourceCardModel } from '../../../models/ressource-card.model';
-import { RessourceProdService } from '../../../service/ressource-info.service';
+import { RessourceCardModel } from '../../../models/player-info/ressource-card.model';
+import { RessourceProdService } from '../../../service/player-info/ressource-info.service';
 
 @Component({
   selector: 'app-ressource-pannel',

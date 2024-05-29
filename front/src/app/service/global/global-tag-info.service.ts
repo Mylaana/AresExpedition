@@ -1,84 +1,79 @@
 import { Injectable } from "@angular/core";
-import { TagCardModel } from "../models/tag-card.model";
+
+type TagInfo = {
+    id: number;
+    description: string;
+    imageUrl: string;
+};
 
 @Injectable({
     providedIn: 'root'
 })
-export class TagInfoService {
-    tagInfo: TagCardModel[] = [
+export class GlobalTagInfoService {
+
+    
+    private tagInfo: TagInfo[] = [
         {
-            id: 1,
+            id: 0,
             description: 'building',
             imageUrl: 'assets/tag/building.png',
-            valueMod: 0,
-            valueCount: 1
+        },
+        {
+            id: 1,
+            description: 'space',
+            imageUrl: 'assets/tag/space.png',
         },
         {
             id: 2,
-            description: 'space',
-            imageUrl: 'assets/tag/space.png',
-            valueMod: 0,
-            valueCount: 5
+            description: 'science',
+            imageUrl: 'assets/tag/science.png',
         },
         {
             id: 3,
-            description: 'science',
-            imageUrl: 'assets/tag/science.png',
-            valueMod: 0,
-            valueCount: 0
+            description: 'power',
+            imageUrl: 'assets/tag/power.png',
         },
         {
             id: 4,
-            description: 'power',
-            imageUrl: 'assets/tag/power.png',
-            valueMod: 0,
-            valueCount: 0
+            description: 'earth',
+            imageUrl: 'assets/tag/earth.png',
         },
         {
             id: 5,
-            description: 'earth',
-            imageUrl: 'assets/tag/earth.png',
-            valueMod: -2,
-            valueCount: 3
+            description: 'jovian',
+            imageUrl: 'assets/tag/jovian.png',
         },
         {
             id: 6,
-            description: 'jovian',
-            imageUrl: 'assets/tag/jovian.png',
-            valueMod: 0,
-            valueCount: 0
+            description: 'plant',
+            imageUrl: 'assets/tag/plant.png',
         },
         {
             id: 7,
-            description: 'plant',
-            imageUrl: 'assets/tag/plant.png',
-            valueMod: 0,
-            valueCount: 0
+            description: 'animal',
+            imageUrl: 'assets/tag/animal.png',
         },
         {
             id: 8,
-            description: 'animal',
-            imageUrl: 'assets/tag/animal.png',
-            valueMod: 0,
-            valueCount: 0
+            description: 'microbe',
+            imageUrl: 'assets/tag/microbe.png',
         },
         {
             id: 9,
-            description: 'microbe',
-            imageUrl: 'assets/tag/microbe.png',
-            valueMod: 0,
-            valueCount: 0
-        },
-        {
-            id: 10,
             description: 'event',
             imageUrl: 'assets/tag/event.png',
-            valueMod: 0,
-            valueCount: 120
         },
     ];
 
-    getTagStatus(): TagCardModel[] {
-        return this.tagInfo;
+    getTagUrlFromID(id: number): string {
+        if(id < 0 ){
+            return ''
+        }
+        for(let i = 0; i < this.tagInfo.length; i++){
+            if (this.tagInfo[i].id === id) {
+                return this.tagInfo[i].imageUrl
+            }
+        }
+        return '';
     }
 }

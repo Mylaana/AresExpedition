@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RessourceCardModel } from '../../../models/ressource-card.model';
+import { RessourceCardModel } from '../../../models/player-info/ressource-card.model';
 
 
 @Component({
