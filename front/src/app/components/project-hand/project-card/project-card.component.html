@@ -1,43 +1,62 @@
 <div class="wrapper-card" [ngClass]="projectCard.cardType">
-    <div class="grid-box-cost">
-        <div class="wrapper-cost">
-            <div class="wrapper-cost--image">
-                <img src="/assets/ressource/mod.png" alt="ressourceCard.description">
+    <div class="wrapper-card-grid">
+        <div class="grid-box-cost">
+            <div class="wrapper-cost">
+                <div class="wrapper-cost--image">
+                    <img src="/assets/ressource/mod.png" alt="ressourceCard.description">
+                </div>
+                <div class="wrapper-cost--value">
+                    <p>{{projectCard.cost}}</p>
+                </div>
             </div>
-            <div class="wrapper-cost--value">
-                <p>{{projectCard.cost}}</p>
-            </div>
-        </div>
-        <div *ngIf="projectCard.costMod" class="wrapper-cost cost-mod">
-            <div class="wrapper-cost--image">
-                <img src="/assets/ressource/mod.png" alt="ressourceCard.description">
-            </div>
-            <div class="wrapper-cost--value">
-                <p>{{projectCard.cost + projectCard.costMod}}</p>
-            </div>
-        </div>
-    </div>
-    <div class="grid-box-title">
-        <p>{{projectCard.title}}</p>
-    </div>
-    <div class="grid-box-description">
-        <p>description</p>
-    </div>
-    <div *ngIf="projectCard.vp" class="grid-box-vp">
-        <div class="victory-point-icon">
-            <p>{{projectCard.vp}}</p>
-        </div>
-    </div>
-    
-    <div class="grid-box-summary">
-        <p>{{projectCard.cardSummaryType}}</p>
-    </div>
-    <div class="grid-box-tag">
-        <div *ngFor="let tag of projectCard.tagsUrl" class="wrapper-tag">
-            <div class="tag-zone" [ngClass]="projectCard.cardType"></div>
-            <div class="tag-icon" [ngClass]="projectCard.cardType">
-                <img *ngIf="tag" [src]="tag" alt="">
+            <div *ngIf="projectCard.costMod" class="wrapper-cost cost-mod">
+                <div class="wrapper-cost--image">
+                    <img src="/assets/ressource/mod.png" alt="ressourceCard.description">
+                </div>
+                <div class="wrapper-cost--value">
+                    <p>{{projectCard.cost + projectCard.costMod}}</p>
+                </div>
             </div>
         </div>
+        <div class="grid-box-title">
+            <p>{{projectCard.title}}</p>
+        </div>
+        <div class="grid-box-description">
+            <p>description</p>
+        </div>
+        <div *ngIf="projectCard.vp" class="grid-box-vp">
+            <div class="victory-point-icon">
+                <p>{{projectCard.vp}}</p>
+            </div>
+        </div>
+        <div class="grid-box-summary">
+            <div *ngIf="projectCard.cardSummaryType" class="wrapper-summary">
+                <div class="summary-background" 
+                    [ngClass]="{ 'summary-background-production': projectCard.cardSummaryType==='production',
+                                  'summary-background-action': projectCard.cardSummaryType==='action',
+                                  'summary-background-grey-production':projectCard.cardSummaryType==='greyProduction',
+                                  'summary-background-trigger':projectCard.cardSummaryType==='trigger'}">
+                </div>
+                <div class="summary-description">
+                    <p>{{projectCard.cardSummaryType}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-box-tag">
+            <div *ngFor="let tag of projectCard.tagsUrl" class="wrapper-tag">
+                <div class="tag-zone-mask">
+                    <div class="tag-zone" [ngClass]="projectCard.cardType">
+                    </div>
+                </div>
+                <div class="tag-icon" [ngClass]="projectCard.cardType">
+                    <img *ngIf="tag" [src]="tag" alt="">
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="wrapper-left-layout">
+        <div class="left-layout" [ngClass]="projectCard.cardType"></div>
+        <div class="top-left-layout" [ngClass]="projectCard.cardType"></div>
+    </div>    
 </div>
