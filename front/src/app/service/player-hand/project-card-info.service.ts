@@ -14,6 +14,8 @@ export class ProjectCardInfoService {
             tagsId: [2],
             cardSummaryType: "production",
             cardType: "greenProject",
+            descriptionEffect: "During the production phase, draw a card for every 3 $tag-science$ you have, including this.",
+            descriptionSummary: "$ressource-card$/3$tag-science$"
         },
         {
             id: 1,
@@ -22,10 +24,14 @@ export class ProjectCardInfoService {
             tagsId: [7],
             cardSummaryType: "trigger",
             cardType: "blueProject",
-            vp: '*',
-            conditionTresholdType: "min",
-            conditionType: "ocean",
-            conditionTresholdValue: 2
+            vpNumber: '*',
+            prerequisiteTresholdType: "min",
+            prerequisiteType: "ocean",
+            prerequisiteTresholdValue: 2,
+            descriptionPrerequisite: "Requires 2 ocean tiles to be flipped.",
+            descriptionVp: "*=1VP per 3 animals on this card.",
+            descriptionEffect: "When you add any number of microbes to ANOTHER* card, add an animal to this card.",
+            descriptionSummary: "$ressource-microbe$*/$ressource-animal"
         },
         {
             id: 2,
@@ -34,7 +40,10 @@ export class ProjectCardInfoService {
             tagsId: [1, 3],
             cardSummaryType: "greyProduction",
             cardType: "greenProject",
-            vp: '1'
+            vpNumber: '1',
+            descriptionPlayed: "Draw a card for each $tag-power$ you have, including this.",
+            descriptionEffect: "When you play a $tag-space$, you pay 6MC less for it.",
+            descriptionSummary: "$ressource-titanium$ $ressource-titanium$"
         },
         {
             id: 3,
@@ -42,6 +51,7 @@ export class ProjectCardInfoService {
             title: 'Synthetic Catastrophe',
             tagsId: [9],
             cardType: "redProject",
+            descriptionPlayed: "You may return another red card you have in play to your hand."
         },
         {
             id: 4,
@@ -50,6 +60,9 @@ export class ProjectCardInfoService {
             tagsId: [0, 3],
             cardSummaryType: "action",
             cardType: "blueProject",
+            descriptionPlayed: "Draw two cards.",
+            descriptionEffect: "Discard a card in hand to gain 6MC.",
+            descriptionSummary: "$ressource-card$ $other-redarrow$ $ressource-megacreditvoid-6$"
         }
     ]
     dummyGetCardList(): ProjectCardModel[] {

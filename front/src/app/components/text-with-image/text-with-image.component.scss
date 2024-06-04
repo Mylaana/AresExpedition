@@ -1,0 +1,31 @@
+.wrapper-text-with-image{
+    width: 100%;
+}
+.text-tag {
+    position: relative;
+    display: inline;
+    top: 3px;
+    width: 15px;
+    aspect-ratio: 1;
+}
+p {
+    display: inline;
+}
+.wrapper-meagacredit{
+    position: relative;
+    width: 15px;
+    & img {
+        position: absolute;
+        top: 0;
+    }
+    & p {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+.megacredit-text{
+    color: black;
+    font-weight: bold;
+}

@@ -1,0 +1,32 @@
+$hex-color: white;
+.hex {
+    z-index: 1;
+    position: relative;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    aspect-ratio: 1;
+    background: $hex-color;
+    opacity: 40%;
+
+    $offset-height: 25%;
+    $offset-width: 7%;
+    $thickness: 1.5%;
+    clip-path: 
+        polygon(50% 0,
+        calc(100% - $offset-width) $offset-height,
+        calc(100% - $offset-width) calc(100% - $offset-height),
+        50% 100%,
+        $offset-width calc(100% - $offset-height),
+        $offset-width $offset-height,
+        calc(50%) calc(0%),
+        calc(50%) calc($thickness),
+        calc($offset-width + $thickness) calc($offset-height + $thickness),
+        calc($offset-width + $thickness) calc(100% - $offset-height - $thickness),
+        calc(50%) calc(100% - $thickness),
+        calc(100% - $offset-width - $thickness) calc(100% - $offset-height - $thickness),
+        calc(100% - $offset-width - $thickness) calc($offset-height + $thickness),
+        calc(50%) calc($thickness),
+        );
+}

@@ -1,0 +1,19 @@
+$card-height: 400px;
+$card-width: calc($card-height * 63 / 88);
+
+.hex{
+    position: absolute;
+    width: calc($card-width * .2);
+    aspect-ratio: 1;
+}
+.hex1{top: calc($card-height * .1);left: calc($card-width * .1);opacity: 55%;}
+.hex2{top: calc($card-height * .21);left: calc($card-width * .188);opacity: 25%;}
+.hex3{top: calc($card-height * .1);left: calc($card-width * .28);opacity: 15%;}
+.hex4{top: calc($card-height * -.01);left: calc($card-width * .188);opacity: 35%;}
+.hex5{top: calc($card-height * -.01);left: calc($card-width * .85);opacity: 65%;}
+.hex6{top: calc($card-height * .10);left: calc($card-width * .76);opacity: 30%;}
+.hex7{top: calc($card-height * .10);left: calc($card-width * .94);opacity: 25%;}
+.hex8{top: calc($card-height * -.01);left: calc($card-width * .67);opacity: 40%;}
+.hex9{top: calc($card-height * .47);left: calc($card-width * .1);opacity: 45%;}
+.hex10{top: calc($card-height * .58);left: calc($card-width * .188);opacity: 60%;}
+.hex11{top: calc($card-height * .58);left: calc($card-width * .01);opacity: 80%;}

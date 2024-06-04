@@ -2,12 +2,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
 import { GlobalTagInfoService } from '../../../service/global/global-tag-info.service';
-
+import { TextWithImageComponent } from '../../text-with-image/text-with-image.component';
+import { LayoutCardBackgroundHexagonsComponent } from '../../layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    TextWithImageComponent,
+    LayoutCardBackgroundHexagonsComponent,
+  ],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss'
 })
@@ -28,7 +33,6 @@ export class ProjectCardComponent implements OnInit {
     }
     return newTagsId
   }
-
   ngOnInit() {
     this.projectCard.tagsUrl = []
     

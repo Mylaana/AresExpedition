@@ -4,64 +4,73 @@ type TagInfo = {
     id: number;
     description: string;
     imageUrl: string;
+    textTagName: string;
 };
 
 @Injectable({
     providedIn: 'root'
 })
 export class GlobalTagInfoService {
-
-    
     private tagInfo: TagInfo[] = [
         {
             id: 0,
             description: 'building',
             imageUrl: 'assets/tag/building.png',
+            textTagName: "$tag-building$",
         },
         {
             id: 1,
             description: 'space',
             imageUrl: 'assets/tag/space.png',
+            textTagName: "$tag-space$",
         },
         {
             id: 2,
             description: 'science',
             imageUrl: 'assets/tag/science.png',
+            textTagName: "$tag-science$",
         },
         {
             id: 3,
             description: 'power',
             imageUrl: 'assets/tag/power.png',
+            textTagName: "$tag-power$",
         },
         {
             id: 4,
             description: 'earth',
             imageUrl: 'assets/tag/earth.png',
+            textTagName: "$tag-earth$",
         },
         {
             id: 5,
             description: 'jovian',
             imageUrl: 'assets/tag/jovian.png',
+            textTagName: "$tag-jovian$",
         },
         {
             id: 6,
             description: 'plant',
             imageUrl: 'assets/tag/plant.png',
+            textTagName: "$tag-plant$",
         },
         {
             id: 7,
             description: 'animal',
             imageUrl: 'assets/tag/animal.png',
+            textTagName: "$tag-animal$",
         },
         {
             id: 8,
             description: 'microbe',
             imageUrl: 'assets/tag/microbe.png',
+            textTagName: "$tag-microbe$",
         },
         {
             id: 9,
             description: 'event',
             imageUrl: 'assets/tag/event.png',
+            textTagName: "$tag-event$",
         },
     ];
 
@@ -75,5 +84,14 @@ export class GlobalTagInfoService {
             }
         }
         return '';
+    }
+    getTagUrlFromTextTagName(tagName:string): string {
+        var result: string = '';
+            for(let i = 0; i < this.tagInfo.length; i++) {
+                if(this.tagInfo[i].textTagName===tagName){
+                    return this.tagInfo[i].imageUrl
+                }
+            }
+        return result;
     }
 }

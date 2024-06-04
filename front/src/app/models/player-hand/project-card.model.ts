@@ -1,7 +1,7 @@
 type SummaryType = 'action' | 'trigger' | 'production' | 'greyProduction' | undefined
 type CardType = 'redProject' | 'greenProject' | 'blueProject'
-type ConditionType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | 'heat' | 'tr'
-type conditionTresholdType = 'min' | 'max'
+type PrerequisiteType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | 'heat' | 'tr'
+type PrerequisiteTresholdType = 'min' | 'max'
 
 export class ProjectCardModel {
     id!: number;
@@ -12,9 +12,15 @@ export class ProjectCardModel {
     tagsUrl?: string[];
     cardSummaryType?: SummaryType;
     cardType!: CardType;
-    vp?: string;
-    conditionType?: ConditionType;
-    conditionTagId?: number;
-    conditionTresholdType?: conditionTresholdType;
-    conditionTresholdValue?: number;
+    vpNumber?: string;
+    description?: string;
+    descriptionVp?: string;
+    descriptionSummary?: string;
+    descriptionEffect?: string;
+    descriptionPlayed?: string;
+    descriptionPrerequisite?: string;
+    prerequisiteType?: PrerequisiteType;
+    prerequisiteTagId?: number;
+    prerequisiteTresholdType?: PrerequisiteTresholdType;
+    prerequisiteTresholdValue?: number;
 }
