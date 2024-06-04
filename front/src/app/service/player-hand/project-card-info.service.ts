@@ -29,6 +29,7 @@ export class ProjectCardInfoService {
             prerequisiteType: "ocean",
             prerequisiteTresholdValue: 2,
             descriptionPrerequisite: "Requires 2 ocean tiles to be flipped.",
+            descriptionPrerequisiteSummary: "2$other-ocean$",
             descriptionVp: "*=1VP per 3 animals on this card.",
             descriptionEffect: "When you add any number of microbes to ANOTHER* card, add an animal to this card.",
             descriptionSummary: "$ressource-microbe$*/$ressource-animal"
@@ -63,6 +64,16 @@ export class ProjectCardInfoService {
             descriptionPlayed: "Draw two cards.",
             descriptionEffect: "Discard a card in hand to gain 6MC.",
             descriptionSummary: "$ressource-card$ $other-redarrow$ $ressource-megacreditvoid-6$"
+        },
+        {
+            id: 5,
+            cost: 8,
+            title: 'Self-Replicating Bacteria',
+            tagsId: [8],
+            cardSummaryType: "action",
+            cardType: "blueProject",
+            descriptionEffect: "Add a microbe to this card, or remove 5 microbes from this card to play a card from your hand. You pay 25 MC less for it.",
+            descriptionSummary: "$other-redarrow$ $ressource-microbe$ -5$ressource-microbe$ $other-redarrow$$ressource-card$ $ressource-megacreditvoid-25$"
         }
     ]
     dummyGetCardList(): ProjectCardModel[] {

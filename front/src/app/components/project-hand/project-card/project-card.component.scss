@@ -1,7 +1,7 @@
-$ares-red: rgb(253, 79, 36);
-$ares-blue: rgb(100, 167, 255);
-$ares-green: rgb(0, 185, 46);
-$ares-purple: rgb(180, 15, 180);
+$ares-red: rgb(237, 53, 49);
+$ares-blue: rgb(39, 177, 229);
+$ares-green: rgb(42, 180, 92);
+$ares-purple: rgb(98, 70, 156);
 
 $card-height: 400px;
 $card-width: calc($card-height * 63 / 88);
@@ -14,27 +14,34 @@ $colors: (
 );
 $dark-colors: (
     "red": darken($ares-red, 15%),
-    "blue": darken($ares-blue, 15%),
-    "green": darken($ares-green, 15%),
+    "blue": rgb(17, 114, 186),
+    "green": rgb(0, 113, 58),
     "purple": darken($ares-purple, 15%)
 );
 $light-colors: (
-    "red": lighten($ares-red, 25%),
-    "blue": lighten($ares-blue, 15%),
-    "green": lighten($ares-green, 50%),
-    "purple": rgb(255, 148, 166)
+    "red": lighten($ares-red, 5%),
+    "blue": lighten($ares-blue, 5%),
+    "green": lighten($ares-green, 5%),
+    "purple": rgb(244, 172, 205)
 );
 $card-back-colors: (
-    "red": rgba(200, 150, 150, 1),
-    "blue": rgba(150, 150, 200, 1),
-    "green": rgba(150, 200, 150, 1)
+    "red": rgba(130, 30, 30, 1),
+    "blue": rgba(50, 100, 150, 1),
+    "green": rgba(10, 90, 40, 1)
 );
+.shadowed-text{
+    background: rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 5px;
+}
 .wrapper-card{
     z-index: 0;
     position: relative;
     height: $card-height;
     width: $card-width;
     
+    overflow: hidden;
 
     padding-bottom: 15px;
     border: black solid 1px;
@@ -54,7 +61,7 @@ $card-back-colors: (
     position: relative;
     display: grid;
     grid-template-columns: 1fr 0.5fr 1fr 1fr 1fr;
-    grid-template-rows: 0.7fr 0.2fr 2fr 1fr 1fr;
+    grid-template-rows: 0.9fr 0.4fr 2fr 1fr 1fr;
 
     height: 100%;
     width: 100%;
@@ -124,6 +131,11 @@ $card-back-colors: (
     grid-row-start: 1;
     grid-row-end: 2;
     
+    height: 100%;
+    width: auto;
+    padding-right: 5%;
+    padding-top: 0%;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,6 +144,7 @@ $card-back-colors: (
         font-weight: bold;
         font-size: calc($card-width / 14);
         font-style: italic;
+        text-align: center;
 
         text-shadow:
           -0.5px -0.5px 0 #000,  
@@ -154,18 +167,55 @@ $card-back-colors: (
     flex-direction: column;
     justify-content: space-between;
 }
-.wrapper-prerequisite{
-    grid-column-start: 2;
+.grid-box-prerequisite{
+    grid-column-start: 1;
     grid-column-end: 6;
     grid-row-start: 2;
     grid-row-end: 3;
+}
+.wrapper-prerequisite{
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 5fr;
+    position: relative;
 
     width: 100%;
     height: 100%;
+
     font-size: small;
     & p {
         font-size: small;
     }
+}
+.prerequisite-summary{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    width: auto;
+    height: auto;
+    max-height: 80%;
+    border: grey 1.5px solid;
+    background: rgba($color: grey, $alpha: .6);
+    border-radius: 25%;
+    &.min{
+        border: gold 1.5px solid;
+    }
+    &.max{
+        border: orangered 1.5px solid;
+    }
+}
+.prerequisite-description{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+    padding-left: 5%;
+    width: auto;
+    height: 100%;
 }
 .grid-box-tag{
     grid-column-start: 1;
@@ -229,7 +279,7 @@ $card-back-colors: (
     width: 100%;
     height: 100%;
 
-    @each $color-name, $color-value in $colors {
+    @each $color-name, $color-value in $light-colors {
         &.#{$color-name}Project {
             background: $color-value;
         }
@@ -253,11 +303,21 @@ $card-back-colors: (
     aspect-ratio: 1/1;
     border-radius: 50%;
     background: grey;
+
+    $darken-value: 5%;
     @each $color-name, $color-value in $dark-colors {
         &.#{$color-name}Project {
             background: $color-value;
+            background: radial-gradient(circle, rgba(darken($color-value, calc($darken-value - 1%)), 1) 0%, rgba(darken($color-value, calc($darken-value - 1%)), 1) 40%, rgba(darken($color-value, $darken-value), 1) 55%, rgba($color-value, 1) 65%,rgba($color-value, 1) 100%);
+            border: darken($color-value, 10%) 1px solid;
         }
     }
+    @each $color-name, $color-value in $light-colors {
+        &.#{$color-name}Project {
+            outline: rgba($color-value, .7) 2px solid;
+        }
+    }
+
 }
 .wrapper-vp{
     width: 100%;
@@ -283,26 +343,68 @@ $card-back-colors: (
         width: 100%;
     }
 }
+.wrapper-vp-icon{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-left: 30%;
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
 .vp-icon{
+    z-index: 1;
+    position: relative;
+
     border-radius: 50%;
     border-width: 2px;
     border-style: solid;
-    border-color: white;
-    
+    border-color: rgb(61, 61, 61);
+
+    outline: rgb(216, 216, 216) 1px solid;
+    outline-offset: 0px;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
     height: 70%;
-    aspect-ratio: 1;
-    max-width: 100%;
-    max-height: 100%;
+    aspect-ratio: 1;    
 
-    background: linear-gradient(0deg, rgba(66,45,23,1) 0%, rgba(143,92,63,1) 40%, rgba(255,239,213,1) 100%);
+    background: linear-gradient(0deg, rgb(26, 17, 9) 0%, rgba(143,92,63,1) 35%, rgba(255,239,213,1) 100%);
     & p{
         font-size: 20px;
         font-weight: bold;       
     }
+}
+.wrapper-vp-background{
+    z-index: 0;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding-left: 12%;
+}
+.layout-vp-right{
+    width: 75%;
+}
+.layout-vp-left{
+    width: 10%;
+}
+.layout-vp-right, .layout-vp-left{
+    z-index: 0;
+    position: relative;
+    top: 0px;
+    height: 90%;
+    border: transparent 0px solid;
+    outline: white 1px solid;
+    outline-offset: 2px;
+    background-color: rgba($color: grey, $alpha: .7);
 }
 .wrapper-left-layout{
     top: -100%;
@@ -313,7 +415,7 @@ $card-back-colors: (
     z-index: 0;
     position: relative;
     height: $card-height * .74;
-    width: 16%;
+    width: 18%;
     border-top-left-radius: 15px;
     
 
@@ -329,7 +431,7 @@ $card-back-colors: (
         }
     }
 
-    &:after{
+    &:before{
         $color-one: rgba(0, 0, 0, 1);
         $color-two: rgba(0, 0, 0, 0);
         content: "";
@@ -343,9 +445,18 @@ $card-back-colors: (
         linear-gradient(135deg, $color-one 0%, $color-one 30%, $color-two 30%, $color-two 70%, $color-one 70%, $color-one 100%),
         linear-gradient(225deg, $color-one 0%, $color-one 30%, $color-two 30%, $color-two 70%, $color-one 70%, $color-one 100%),
         linear-gradient(315deg, $color-one 0%, $color-one 30%, $color-two 30%, $color-two 70%, $color-one 70%, $color-one 100%);
-        background-size: 5px 5px; // Taille du dégradé
-        background-repeat: repeat; // Répétition du dégradé
+        background-size: 7px 7px;
+        background-repeat: repeat;
         transform: rotate(0deg);
+    }
+    &:after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(95deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .5) 40%, rgba(0, 0, 0, 0.2) 80%);
     }
 }
 .top-left-layout{
@@ -534,11 +645,17 @@ $card-back-colors: (
     background: rgba(100,100,100,.5);
 }
 .summary-background-production{
-    background: repeating-linear-gradient(-45deg, lighten($ares-red, 10%),orange 10%, $ares-red 20%);
-    background-size: 30px 20px;
+    $color-one: $ares-red;
+    $color-two: rgb(253, 157, 67);
+    $step1: 2%;
+    $step2: 4%;
+    $step3: 6%;
+    background: repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
 .summary-background-grey-production{
-    background: repeating-linear-gradient(-45deg, rgb(184, 184, 184), rgb(184, 184, 184) 12%, rgb(66, 66, 66) 20%);
+    background: repeating-linear-gradient(135deg, rgb(184, 184, 184), rgb(184, 184, 184) 12%, rgb(66, 66, 66) 20%);
     background-size: 30px 20px;
 }
 .summary-background-radial-grid{

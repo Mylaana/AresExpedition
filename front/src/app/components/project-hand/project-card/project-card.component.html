@@ -21,23 +21,34 @@
         <div class="grid-box-title">
             <p>{{projectCard.title}}</p>
         </div>
-        <div *ngIf="projectCard.descriptionPrerequisite" class="wrapper-prerequisite">
-            <app-text-with-image *ngIf="projectCard.descriptionPrerequisite" [rawText]="projectCard.descriptionPrerequisite"></app-text-with-image>
+        <div *ngIf="projectCard.descriptionPrerequisite" class="grid-box-prerequisite wrapper-prerequisite">
+            <div class="prerequisite-summary" [ngClass]="projectCard.prerequisiteTresholdType">
+                <app-text-with-image *ngIf="projectCard.descriptionPrerequisiteSummary" [rawText]="projectCard.descriptionPrerequisiteSummary"></app-text-with-image>
+            </div>
+            <div class="prerequisite-description shadowed-text">
+                <app-text-with-image *ngIf="projectCard.descriptionPrerequisite" [rawText]="projectCard.descriptionPrerequisite"></app-text-with-image>
+            </div>
         </div>
         <div class="grid-box-main">
-            <div class="wrapper-description-played">
-                <app-text-with-image *ngIf="projectCard.descriptionPlayed" [rawText]="projectCard.descriptionPlayed"></app-text-with-image>
+            <div *ngIf="projectCard.descriptionPlayed" class="wrapper-description-played shadowed-text">
+                <app-text-with-image [rawText]="projectCard.descriptionPlayed"></app-text-with-image>
             </div>
             <div class="wrapper-description">
                 <app-text-with-image *ngIf="projectCard.description" [rawText]="projectCard.description"></app-text-with-image>
             </div>
             <div *ngIf="projectCard.vpNumber" class="wrapper-vp">
-                <div *ngIf="projectCard.descriptionVp" class="grid-box-description-vp">
+                <div *ngIf="projectCard.descriptionVp" class="grid-box-description-vp shadowed-text">
                     <p>{{projectCard.descriptionVp}}</p>
                 </div>
                 <div class="grid-box-vp-icon">
-                    <div class="vp-icon">
-                        <p>{{projectCard.vpNumber}}</p>
+                    <div class="wrapper-vp-icon">
+                        <div class="vp-icon">
+                            <p>{{projectCard.vpNumber}}</p>
+                        </div>
+                        <div class="wrapper-vp-background">
+                            <div class="layout-vp-left"></div>
+                            <div class="layout-vp-right"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,7 +73,10 @@
             </div>
         </div>
         <div class="grid-box-description-effect">
-            <app-text-with-image *ngIf="projectCard.descriptionEffect" [rawText]="projectCard.descriptionEffect"></app-text-with-image>
+            <div *ngIf="projectCard.descriptionEffect" class="shadowed-text">
+                <app-text-with-image [rawText]="projectCard.descriptionEffect"></app-text-with-image>
+            </div>
+            
         </div>
         <div class="grid-box-tag">
             <div class="wrapper-tag-zone">

@@ -19,6 +19,7 @@ export class ProjectCardModel {
     descriptionEffect?: string;
     descriptionPlayed?: string;
     descriptionPrerequisite?: string;
+    descriptionPrerequisiteSummary?: string;
     prerequisiteType?: PrerequisiteType;
     prerequisiteTagId?: number;
     prerequisiteTresholdType?: PrerequisiteTresholdType;

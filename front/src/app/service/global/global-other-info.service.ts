@@ -18,15 +18,21 @@ export class GlobalItemInfoService {
             imageUrl: 'assets/other/arrow.png',
             textItemName: "$other-redarrow$",
         },
+        {
+            id: 1,
+            description: 'ocean',
+            imageUrl: 'assets/other/ocean.png',
+            textItemName: "$other-ocean$",
+        },
     ];
 
     getItemUrlFromTextItemName(itemName:string): string {
         var result: string = '';
-            for(let i = 0; i < this.itemInfo.length; i++) {
-                if(this.itemInfo[i].textItemName===itemName){
-                    return this.itemInfo[i].imageUrl
-                }
+        for(let i = 0; i < this.itemInfo.length; i++) {
+            if(this.itemInfo[i].textItemName===itemName){
+                return this.itemInfo[i].imageUrl
             }
+        }
         return result;
     }
 }
