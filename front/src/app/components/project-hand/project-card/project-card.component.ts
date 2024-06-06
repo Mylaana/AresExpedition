@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
 import { GlobalTagInfoService } from '../../../service/global/global-tag-info.service';
@@ -14,7 +14,7 @@ import { LayoutCardBackgroundHexagonsComponent } from '../../layouts/layout-card
     LayoutCardBackgroundHexagonsComponent,
   ],
   templateUrl: './project-card.component.html',
-  styleUrl: './project-card.component.scss'
+  styleUrl: './project-card.component.scss',
 })
 export class ProjectCardComponent implements OnInit {
   @Input() projectCard!: ProjectCardModel;
