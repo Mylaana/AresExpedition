@@ -11,7 +11,7 @@ type HtmlTag = 'p' | 'img'| 'div'
   imports: [],
   templateUrl: './text-with-image.component.html',
   styleUrl: './text-with-image.component.scss',
-  encapsulation: ViewEncapsulation.None
+
 })
 export class TextWithImageComponent {
   @Input() rawText!: string;
