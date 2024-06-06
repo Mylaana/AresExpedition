@@ -1,19 +1,11 @@
-.wrapper-text-with-image{
+:host ::ng-deep .wrapper-text-with-image{
     width: 100%;
     height: 100%;
 }
-.text-tag {
-    position: relative;
-    display: inline;
-    top: 3px;
-    object-fit: scale-down;
-    max-width: 15px;
-    max-height: 15px;
-}
-p {
+:host ::ng-deep p {
     display: inline;
 }
-.wrapper-meagacredit{
+:host ::ng-deep .wrapper-meagacredit{
     position: relative;
     width: 15px;
     & img {
@@ -27,7 +19,12 @@ p {
         text-align: center;
     }
 }
-.megacredit-text{
+:host ::ng-deep .megacredit-text{
     color: black;
     font-weight: bold;
+}
+:host ::ng-deep .text-tag {
+    position: relative;
+    display: inline;
+    object-fit: scale-down;
 }

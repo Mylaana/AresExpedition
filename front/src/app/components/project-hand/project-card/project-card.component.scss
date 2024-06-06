@@ -32,12 +32,25 @@ $card-back-colors: (
 :host ::ng-deep p  {
     color: white;
 }
-
+:host ::ng-deep .grid-box-description-effect .text-tag,
+:host ::ng-deep .wrapper-description-played .text-tag {
+    $tag-max-size: calc($card-width / 16);
+    top: calc($tag-max-size / 4);
+    max-width: $tag-max-size;
+    max-height: $tag-max-size;
+}
+img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
 .shadowed-text{
     background: rgba(0, 0, 0, .5);
     border-radius: 5px;
-    padding: 3px;
-    padding-left: 5px;
+    width: 100%;
+    padding-bottom: 3%;
+    padding-top: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 .wrapper-card{
     z-index: 0;
@@ -210,6 +223,12 @@ $card-back-colors: (
         border: orangered 1.5px solid;
     }
 }
+:host ::ng-deep .prerequisite-summary .text-tag {
+    $tag-max-size: calc($card-width / 15);
+    top: calc($tag-max-size / 4);
+    width: $tag-max-size;
+    height: $tag-max-size;
+}
 .prerequisite-description{
     display: flex;
     align-items: center;
@@ -321,14 +340,14 @@ $card-back-colors: (
             outline: rgba($color-value, .7) 2px solid;
         }
     }
-
 }
 .wrapper-vp{
     width: 100%;
     height: 20%;
+    margin-bottom: 2%;
 
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr;
     & .grid-box-description-vp{
         grid-column-start: 1;
         grid-column-end: 2;
@@ -745,6 +764,12 @@ $card-back-colors: (
     display: flex;
     justify-content: center;
     align-items: center;
+}
+:host ::ng-deep .summary-description .text-tag {
+    $tag-max-size: calc($card-width / 16);
+    top: calc($tag-max-size / 4);
+    max-width: $tag-max-size;
+    max-height: $tag-max-size;
 }
 .wrapper-background-layout{
     z-index: -1;
