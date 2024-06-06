@@ -29,6 +29,10 @@ $card-back-colors: (
     "blue": rgba(50, 100, 150, 1),
     "green": rgba(10, 90, 40, 1)
 );
+:host ::ng-deep p  {
+    color: white;
+}
+
 .shadowed-text{
     background: rgba(0, 0, 0, .5);
     border-radius: 5px;

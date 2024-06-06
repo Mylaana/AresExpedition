@@ -1,0 +1,39 @@
+{
+    "id": 1,
+    "cost": 9,
+    "tagsId": [7],
+    "cardSummaryType": "trigger",
+    "cardType": "blueProject",
+    "vpNumber": "*",
+    "prerequisiteTresholdType": "min",
+    "prerequisiteType": "ocean",
+    "prerequisiteTresholdValue": 2,
+    "title": {
+        "en":"Filter Feeders",
+        "fr":""
+    },
+    "descriptionPlayed":{
+        "en":"",
+        "fr":""
+    },
+    "descriptionPrerequisite": {
+        "en":"Requires 2 ocean tiles to be flipped.",
+        "fr":""
+    },
+    "descriptionPrerequisiteSummary": {
+        "en": "$other-ocean$",
+        "fr": ""
+    },
+    "descriptionVp": {
+        "en":"*=1VP per 3 animals on this card.",
+        "fr":""
+    },
+    "descriptionEffect": {
+        "en":"When you add any number of microbes to ANOTHER* card, add an animal to this card.",
+        "fr":""
+    },
+    "descriptionSummary": {
+        "en": "$ressource-microbe$*/$ressource-animal",
+        "fr": ""
+    }
+}
