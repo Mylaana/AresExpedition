@@ -22,3 +22,9 @@ p {
     font-size: 13px;
     color: black;
 }
+.clickable{
+    &:hover{
+        filter: brightness(85%);
+        cursor: pointer;
+    }
+}

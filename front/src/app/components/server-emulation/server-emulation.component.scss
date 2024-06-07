@@ -1,0 +1,18 @@
+.wrapper-phase-changer{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    height: 20%;
+    border: grey solid 2px;
+}
+.phase-selection-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: black solid 1px;
+    padding: 2%;
+    border-radius: 10px;
+    min-width: 10%;
+    width: auto;
+}

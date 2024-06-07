@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
-import { GlobalTagInfoService } from '../../../service/global/global-tag-info.service';
+import { GlobalTagInfoService } from '../../../services/global/global-tag-info.service';
 import { TextWithImageComponent } from '../../text-with-image/text-with-image.component';
 import { LayoutCardBackgroundHexagonsComponent } from '../../layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
 

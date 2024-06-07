@@ -1,1 +1,10 @@
-<p>server-emulation works!</p>
+<h1>Server emulation - phase selection</h1>
+<h2>Actual phase: {{ phase }}</h2>
+<div class="wrapper-phase-changer">
+    <button (click)="setNewPhase('planification')" class="phase-planification phase-selection-button clickable">Planification</button>
+    <button (click)="setNewPhase('development')" class="phase-development phase-selection-button clickable">Development</button>
+    <button (click)="setNewPhase('construction')" class="phase-construction phase-selection-button clickable">Construction</button>
+    <button (click)="setNewPhase('action')" class="phase-action phase-selection-button clickable">Action</button>
+    <button (click)="setNewPhase('production')" class="phase-production phase-selection-button clickable">Production</button>
+    <button (click)="setNewPhase('research')" class="phase-research phase-selection-button clickable">Research</button>
+</div>

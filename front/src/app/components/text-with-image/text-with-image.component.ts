@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { GlobalTagInfoService } from '../../service/global/global-tag-info.service';
-import { GlobalRessourceInfoService } from '../../service/global/global-ressource-info.service';
-import { GlobalItemInfoService } from '../../service/global/global-other-info.service';
+import { GlobalTagInfoService } from '../../services/global/global-tag-info.service';
+import { GlobalRessourceInfoService } from '../../services/global/global-ressource-info.service';
+import { GlobalItemInfoService } from '../../services/global/global-other-info.service';
 
 type HtmlTag = 'p' | 'img'| 'div'
 

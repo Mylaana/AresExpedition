@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProjectCardComponent } from '../project-card/project-card.component';
-import { ProjectCardInfoService } from '../../../service/player-hand/project-card-info.service';
+import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
 
