@@ -1,3 +1,8 @@
 <div class="wrapper-game-event">
-    <app-phase-selector></app-phase-selector>
+    <app-phase-selector *ngIf="currentPhase==='planification'"></app-phase-selector>
+    <app-phase-development *ngIf="currentPhase==='development'"></app-phase-development>
+    <app-phase-construction *ngIf="currentPhase==='construction'"></app-phase-construction>
+    <app-phase-action *ngIf="currentPhase==='action'"></app-phase-action>
+    <app-phase-production *ngIf="currentPhase==='production'"></app-phase-production>
+    <app-phase-research *ngIf="currentPhase==='research'"></app-phase-research>
 </div>

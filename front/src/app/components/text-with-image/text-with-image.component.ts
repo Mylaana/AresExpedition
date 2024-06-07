@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { GlobalTagInfoService } from '../../services/global/global-tag-info.service';
 import { GlobalRessourceInfoService } from '../../services/global/global-ressource-info.service';
 import { GlobalItemInfoService } from '../../services/global/global-other-info.service';
@@ -13,7 +13,7 @@ type HtmlTag = 'p' | 'img'| 'div'
   styleUrl: './text-with-image.component.scss',
 
 })
-export class TextWithImageComponent {
+export class TextWithImageComponent implements OnInit{
   @Input() rawText!: string;
   textWithImages!: string;
 

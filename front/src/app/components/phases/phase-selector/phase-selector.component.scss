@@ -1,0 +1,24 @@
+$colors: (
+  "construction": red,
+  "action": blue,
+  "development": green,
+  "research": yellow,
+  "production": orange,
+);
+.wrapper-phase-card{
+    display: flex;
+}
+.phase-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    border-radius: 20px;
+    border: black 1px solid;
+    min-width: 10%;
+    @each $phase-name, $color-value in $colors {
+        &.phase-#{$phase-name} {
+            background: $color-value;
+        }
+    }
+}

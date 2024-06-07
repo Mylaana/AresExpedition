@@ -15,16 +15,16 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
 })
 export class ServerEmulationComponent implements OnInit {
 
-  phase!: Phase;
+  currentPhase: string = "planification";
   constructor(private gameStateService: GameState){}
 
   ngOnInit(){
-    this.phase = this.gameStateService.getPhase()
+    this.gameStateService.currentPhase.subscribe(
+      phase => this.currentPhase = phase
+    )
   }
-
-  setNewPhase(newPhase:Phase): void {
-    //triggers phase change to emulate server response
-    this.gameStateService.setNewPhase(newPhase)
-    this.phase = this.gameStateService.getPhase()
+  updatePhase(newPhase:Phase): void {
+    //sends phase update to service's subject
+    this.gameStateService.updatePhase(newPhase)
   }
 }
