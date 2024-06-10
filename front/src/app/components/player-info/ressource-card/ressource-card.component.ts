@@ -1,24 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RessourceCardModel } from '../../../models/player-info/ressource-card.model';
-
+import { RessourceState } from '../../../interfaces/global.interface';
+import { GlobalRessourceInfoService } from '../../../services/global/global-ressource-info.service';
 
 @Component({
   selector: 'app-ressource-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './ressource-card.component.html',
   styleUrl: './ressource-card.component.scss'
 })
 export class RessourceCardComponent implements OnInit {
-  @Input() ressourceCard!: RessourceCardModel;
+  //@Input() ressourceCard!: RessourceCardModel;
+  @Input() playerId!: number;
+  @Input() ressourceState!: RessourceState;
+
+  imageUrl!: string;
+
+  constructor(private globalRessourceService: GlobalRessourceInfoService){}
 
   ngOnInit(): void {
-    if (this.ressourceCard.id <= 3){
-      this.ressourceCard.hasStock = true
-    } else {
-      this.ressourceCard.hasStock = false
-    }
-      
+    this.imageUrl = this.globalRessourceService.getRessourceUrlFromID(this.ressourceState.imageUrlId)
   }
 }

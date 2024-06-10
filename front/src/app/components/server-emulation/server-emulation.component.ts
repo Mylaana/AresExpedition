@@ -14,7 +14,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
   styleUrl: './server-emulation.component.scss'
 })
 export class ServerEmulationComponent implements OnInit {
-
+  currentGroupPlayerState!: {};
   currentPhase: string = "planification";
   constructor(private gameStateService: GameState){}
 
@@ -22,9 +22,17 @@ export class ServerEmulationComponent implements OnInit {
     this.gameStateService.currentPhase.subscribe(
       phase => this.currentPhase = phase
     )
+    this.gameStateService.currentGroupPlayerState.subscribe(
+      groupPlayerState => this.currentGroupPlayerState = groupPlayerState
+    )
+    this.gameStateService.addPlayer("joueur 1", "rgb(0, 0, 255)")
+    this.gameStateService.addPlayer("joueur 2", "rgb(255, 0, 0)")
   }
   updatePhase(newPhase:Phase): void {
     //sends phase update to service's subject
     this.gameStateService.updatePhase(newPhase)
   }
+  printPlayersState(): void {
+    console.log(this.currentGroupPlayerState)
+}
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TagCardModel } from '../../../models/player-info/tag-card.model';
+import { GlobalTagInfoService } from '../../../services/global/global-tag-info.service';
+import { TagState } from '../../../interfaces/global.interface';
 
 
 @Component({
@@ -10,6 +11,13 @@ import { TagCardModel } from '../../../models/player-info/tag-card.model';
   templateUrl: './tag-card.component.html',
   styleUrl: './tag-card.component.scss'
 })
-export class TagCardComponent {
-  @Input() tagCard!: TagCardModel;
+export class TagCardComponent implements OnInit{
+  @Input() tagState!: TagState;
+  imageUrl!: string;
+
+  constructor(private globalTagService: GlobalTagInfoService){}
+
+  ngOnInit(): void {
+    this.imageUrl = this.globalTagService.getTagUrlFromID(this.tagState.idImageUrl)
+}
 }

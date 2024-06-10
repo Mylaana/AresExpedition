@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagCardComponent } from '../tag-card/tag-card.component';
-import { TagCardModel } from '../../../models/player-info/tag-card.model';
 import { TagInfoService } from '../../../services/player-info/tag-info.service';
+import { TagState } from '../../../interfaces/global.interface';
 
 @Component({
   selector: 'app-tag-pannel',
@@ -15,11 +15,13 @@ import { TagInfoService } from '../../../services/player-info/tag-info.service';
   styleUrl: './tag-pannel.component.scss'
 })
 export class TagPannelComponent {
-  tagCards!: TagCardModel[];
+  @Input() playerId!: number;
+  @Input() tagState!: TagState[];
+  
 
   constructor(private tagInfoService: TagInfoService){}
 
   ngOnInit(): void {
-    this.tagCards = this.tagInfoService.getTagStatus();
+
   }
 }

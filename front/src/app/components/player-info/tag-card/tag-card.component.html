@@ -1,19 +1,19 @@
 <div class="tag-card">
     <div class="box-one wrapper-tag">
         <div class="box-tag-icon">
-            <img [ngClass]="{'grey-tag': tagCard.valueCount===0}" [src]="tagCard.imageUrl" [alt]="tagCard.description">
+            <img [ngClass]="{'grey-tag': tagState.valueCount===0}" [src]="imageUrl" [alt]="tagState.name">
         </div>
-        <div *ngIf="tagCard.valueMod" class="box-tag-mod">
+        <div *ngIf="tagState.valueMod" class="box-tag-mod">
             <div class="box-tag-mod-icon center">
-                <img src="/assets/ressource/megacreditvoid.png" alt="tagCard.description">
+                <img src="imageUrl" alt="tagState.name">
             </div>
             <div class="box-tag-mod-value">
-                <p class="center">{{tagCard.valueMod}}</p>
+                <p class="center">{{tagState.valueMod}}</p>
             </div>
 
         </div>
     </div>
     <div class="box-two">
-        <p class="center">{{tagCard.valueCount}}</p>
+        <p class="center">{{tagState.valueCount}}</p>
     </div>
 </div>

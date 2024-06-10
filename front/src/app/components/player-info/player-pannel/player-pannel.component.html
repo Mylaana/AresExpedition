@@ -1,8 +1,12 @@
+<div class="wrapper-player-info">
+    <p>id: {{ playerId }}</p>
+    <p>name: {{ playerState.name }}</p>
+</div>
 <div class="wrapper-player-pannel">
     <div class="wrapper-ressource-pannel">
-        <app-ressource-pannel></app-ressource-pannel>
+        <app-ressource-pannel [playerId]="playerId" [ressourceState]="playerState.ressource"></app-ressource-pannel>
     </div>
     <div class="wrapper-tag-pannel">
-        <app-tag-pannel></app-tag-pannel>
+        <app-tag-pannel [playerId]="playerId" [tagState]="playerState.tag"></app-tag-pannel>
     </div>
 </div>

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RessourceCardComponent } from '../ressource-card/ressource-card.component';
-import { RessourceCardModel } from '../../../models/player-info/ressource-card.model';
 import { RessourceProdService } from '../../../services/player-info/ressource-info.service';
+import { RessourceState } from '../../../interfaces/global.interface';
 
 @Component({
   selector: 'app-ressource-pannel',
@@ -15,11 +15,13 @@ import { RessourceProdService } from '../../../services/player-info/ressource-in
   styleUrl: './ressource-pannel.component.scss'
 })
 export class RessourcePannelComponent {
-  ressourceCards!: RessourceCardModel[];
+  @Input() playerId!: number;
+  @Input() ressourceState!: RessourceState[];
+
 
   constructor(private ressourceProdService: RessourceProdService){}
 
   ngOnInit(): void {
-    this.ressourceCards = this.ressourceProdService.getRessourceStatus();
+
   }
 }
