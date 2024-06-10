@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagCardComponent } from '../tag-card/tag-card.component';
-import { TagInfoService } from '../../../services/player-info/tag-info.service';
 import { TagState } from '../../../interfaces/global.interface';
 
 @Component({
@@ -18,9 +17,6 @@ export class TagPannelComponent {
   @Input() playerId!: number;
   @Input() tagState!: TagState[];
   
-
-  constructor(private tagInfoService: TagInfoService){}
-
   ngOnInit(): void {
 
   }
