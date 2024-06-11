@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../services/global/game-state.service';
-import { PhaseSelectorComponent } from '../components/phases/phase-selector/phase-selector.component';
+import { GameState } from '../services/core-game/game-state.service';
+import { PhasePlanificationComponent } from '../components/phases/phase-planification/phase-planification.component';
 import { PhaseDevelopmentComponent } from '../components/phases/phase-development/phase-development.component';
 import { PhaseConstructionComponent } from '../components/phases/phase-construction/phase-construction.component';
 import { PhaseActionComponent } from '../components/phases/phase-action/phase-action.component';
@@ -16,7 +16,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
   standalone: true,
   imports: [
     CommonModule,
-    PhaseSelectorComponent,
+    PhasePlanificationComponent,
     PhaseDevelopmentComponent,
     PhaseConstructionComponent,
     PhaseActionComponent,
@@ -27,7 +27,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
   styleUrl: './game-event.component.scss'
 })
 export class GameEventComponent {
-
+  playerId!:number;
   currentPhase: string = "planification";
   constructor(private gameStateService: GameState){}
 
@@ -35,6 +35,7 @@ export class GameEventComponent {
     this.gameStateService.currentPhase.subscribe(
       phase => this.updatePhase(phase)
     )
+    this.playerId = this.gameStateService.playerId
   }
   updatePhase(phase:any):void{
     this.currentPhase = phase

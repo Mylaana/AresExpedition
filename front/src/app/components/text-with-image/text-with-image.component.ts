@@ -44,6 +44,8 @@ export class TextWithImageComponent implements OnInit{
         }
       }else if(value.split("-")[0]==="other"){
         splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, this.otherImageService.getItemUrlFromTextItemName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
+      }else if(value==='skipline'){
+        splittedText[index] = `<br>`
       }else{
         splittedText[index] = `<p>${value}</p>`
       }

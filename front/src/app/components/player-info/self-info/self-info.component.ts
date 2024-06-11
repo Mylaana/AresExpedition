@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { PlayerPannelComponent } from '../player-pannel/player-pannel.component';
-import { GameState } from '../../../services/global/game-state.service';
+import { GameState } from '../../../services/core-game/game-state.service';
 
 @Component({
   selector: 'app-self-info',

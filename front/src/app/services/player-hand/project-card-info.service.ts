@@ -73,7 +73,7 @@ export class ProjectCardInfoService {
             cardSummaryType: "action",
             cardType: "blueProject",
             descriptionEffect: "Add a microbe to this card, or remove 5 microbes from this card to play a card from your hand. You pay 25 MC less for it.",
-            descriptionSummary: "$other-redarrow$ $ressource-microbe$ -5$ressource-microbe$ $other-redarrow$$ressource-card$ $ressource-megacreditvoid-25$"
+            descriptionSummary: "$other-redarrow$ $ressource-microbe$ $skipline$ -5$ressource-microbe$ $other-redarrow$$ressource-card$ $ressource-megacreditvoid-25$"
         }
     ]
     dummyGetCardList(): ProjectCardModel[] {

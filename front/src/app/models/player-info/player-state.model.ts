@@ -11,6 +11,7 @@ export class PlayerStateModel {
         "hand": number[],
         "played": number[]
     };
+    
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){
             if(this.ressource[i].id === ressourceId){
@@ -27,4 +28,9 @@ export class PlayerStateModel {
         }
         return
     }
+}
+export class PlayerReadyModel {
+    id!: number;
+    name!:string;
+    isReady: boolean = false;
 }

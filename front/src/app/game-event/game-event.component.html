@@ -1,5 +1,5 @@
 <div class="wrapper-game-event">
-    <app-phase-selector *ngIf="currentPhase==='planification'"></app-phase-selector>
+    <app-phase-planification *ngIf="currentPhase==='planification'" [playerId]="playerId"></app-phase-planification>
     <app-phase-development *ngIf="currentPhase==='development'"></app-phase-development>
     <app-phase-construction *ngIf="currentPhase==='construction'"></app-phase-construction>
     <app-phase-action *ngIf="currentPhase==='action'"></app-phase-action>

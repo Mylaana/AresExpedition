@@ -1,28 +1,32 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { PlayerStateModel } from "../../models/player-info/player-state.model";
+import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { RGB } from "../../types/global.type";
-
-type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
+import { PhaseHandlerService } from "./phase-handler.service";
+import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 
 @Injectable({
     providedIn: 'root'
 })
 export class GameState{
-    constructor(){}
+    constructor(private phaseHandlerService: PhaseHandlerService){}
 
     playerId = 0; //should be changed to reflect the client's player's id
     groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
-    phase = new BehaviorSubject("planification")
+    groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([])
+    playerCount: number = 0;
+    phase = new BehaviorSubject<NonSelectablePhase>("planification")
 
     currentPhase = this.phase.asObservable();
     currentGroupPlayerState = this.groupPlayerState.asObservable();
+    currentGroupPlayerReady = this.groupPlayerReady.asObservable();
     
     addPlayer(playerName: string, playerColor: RGB): void {
-        var newPlayer = new PlayerStateModel
-        newPlayer.id = this.groupPlayerState.getValue().length
-        newPlayer.name = playerName
-        newPlayer.color = playerColor
+        //creates and add player to groupPlayerState
+        var newPlayer = new PlayerStateModel;
+        newPlayer.id = this.groupPlayerState.getValue().length;
+        newPlayer.name = playerName;
+        newPlayer.color = playerColor;
         newPlayer.ressource = [
             {
                 "id":0,
@@ -78,7 +82,7 @@ export class GameState{
                 "hasStock": true,
                 "imageUrlId": 8,
             },
-        ]
+        ];
         newPlayer.tag = [
             {
                 "id": 0,
@@ -150,20 +154,112 @@ export class GameState{
                 "valueCount": 0,
                 "valueMod": 0,
             },
-        ]
+        ];
         newPlayer.cards = {
             "hand": [],
             "played": []
-        }
+        };
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
-    }
-    updatePhase(newPhase: Phase): void {
-        //updates phase
-        this.phase.next(String(newPhase))
-    }
+
+        //creates and add player to groupPlayerReady
+        var newPlayerReady = new PlayerReadyModel;
+        newPlayerReady.id = newPlayer.id
+        newPlayerReady.name = playerName;
+        newPlayerReady.isReady = false
+        this.groupPlayerReady.next(this.groupPlayerReady.getValue().concat(newPlayerReady))
+
+        //updates player count
+        this.playerCount++
+
+        //sends new player ID to phase handler
+        this.phaseHandlerService.addPlayer(newPlayer.id)
+    };
+
+    /**
+     * 
+     * @param newPhase
+     * gets the new phase to set
+     * 
+     * sets all players to not be ready
+     */
+    updatePhase(newPhase: NonSelectablePhase): void {
+        console.log(`newphase: ${newPhase} thisphase: ${this.phase.getValue()}`)
+        if(newPhase === this.phase.getValue())
+            return
+        this.setPlayerReady(false)
+        this.phase.next(newPhase)
+        console.log(`updatePhase: ${newPhase}`)
+    };
+
+    /**
+     * @param playerId
+     * @returns
+     * set player with id to be ready or not according to {playerReady}
+
+     * if no id specified, will set all players to not {playerReady}
+     * */
+    setPlayerReady(playerReady: boolean, playerId?: number){  
+        var ready = this.groupPlayerReady.getValue()
+        var loopStart: number;
+        var loopFinish: number;
+
+        if(playerId != undefined){
+            loopStart = playerId
+            loopFinish = playerId
+        } else {
+            loopStart = 0
+            loopFinish = this.playerCount - 1
+        }
+        for(let i=loopStart; i<=loopFinish; i++){
+            ready[i].isReady = playerReady
+        }
+        this.groupPlayerReady.next(ready)
+
+        console.log(this.groupPlayerReady.getValue())
+        console.log(`check for rooting next phase: ${this.getPlayerReady()}`)
+        if(this.getPlayerReady()===true){
+            console.log('next phase')
+            this.GoToNextPhaseIfPlayerReady()
+            return
+        }
+        console.log(`not next phase, getPlayerReady: ${this.getPlayerReady()}`)
+    };
+
+    /**
+     * @arg playerId
+     * @returns @type {boolean} if the player is ready or not
+
+     * if no id specified, will return if all players are ready or not
+     * */
+    getPlayerReady(playerId?: number): boolean {
+        var ready = this.groupPlayerReady.getValue()
+        var loopStart: number;
+        var loopFinish: number;
+
+        if(playerId != undefined){
+            loopStart = playerId
+            loopFinish = playerId
+        } else {
+            loopStart = 0
+            loopFinish = this.playerCount - 1
+        }
+        for(let i=loopStart; i<=loopFinish; i++){
+            if(ready[i].isReady === false){
+                return false
+            }
+        }
+        return true
+    };
+
+    GoToNextPhaseIfPlayerReady(){
+        var newPhase = this.phaseHandlerService.goToNextPhase(this.phase.getValue())
+        this.updatePhase(newPhase)
+    };
+
     getPhase(): string {
         return this.phase.value
-    }
+    };
+
     getPlayerStateFromId(playerId: number){
         var states: PlayerStateModel[] = [];
         states = this.groupPlayerState.getValue().slice()
@@ -173,7 +269,16 @@ export class GameState{
                 return states[i]
             }
         }
-
         return undefined
-    }
+    };
+
+    updateGroupPlayerState(newState: PlayerStateModel[]): void{
+        if(newState != this.groupPlayerState.getValue()){
+            this.groupPlayerState.next(newState)
+        }
+    };
+
+    playerSelectPhase(playerId:number, phase:SelectablePhase){
+        this.phaseHandlerService.playerSelectPhase(playerId, phase)
+    };
 }

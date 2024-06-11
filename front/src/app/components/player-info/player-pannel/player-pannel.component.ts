@@ -1,7 +1,7 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { RessourcePannelComponent } from '../ressource-pannel/ressource-pannel.component';
 import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
-import { GameState } from '../../../services/global/game-state.service';
+import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 
 @Component({

@@ -1,0 +1,6 @@
+<h3>player status:</h3>
+<div class="wrapper-player-ready">
+    <div *ngFor="let player of currentGroupPlayerReady" class="player-ready">
+        <p [ngClass]="{'green':player.isReady===true, 'red':player.isReady===false}">{{player.name}}</p>
+    </div>
+</div>

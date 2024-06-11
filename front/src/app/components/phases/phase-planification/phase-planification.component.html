@@ -1,0 +1,19 @@
+<h2>Select a phase :</h2>
+<div class="wrapper-phase-card">
+    <div class="phase-card phase-development clickable">
+        <button (click)="selectPhase('development')">I development</button>
+    </div>
+    <div class="phase-card phase-construction clickable">
+        <button (click)="selectPhase('construction')">II construction</button>
+    </div>
+    <div class="phase-card phase-action clickable">
+        <button (click)="selectPhase('action')">III action</button>
+    </div>
+    <div class="phase-card phase-production clickable">
+        <button (click)="selectPhase('production')">IV production</button>
+    </div>
+    <div class="phase-card phase-research clickable">
+        <button (click)="selectPhase('research')">V research</button>
+    </div>
+</div>
+<app-player-ready></app-player-ready>
