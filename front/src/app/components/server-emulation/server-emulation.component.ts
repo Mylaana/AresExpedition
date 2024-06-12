@@ -18,6 +18,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
   styleUrl: './server-emulation.component.scss'
 })
 export class ServerEmulationComponent implements OnInit {
+  debug: boolean = false;
   currentGroupPlayerState!: {};
   currentPhase: string = "planification";
 

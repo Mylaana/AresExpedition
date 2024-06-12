@@ -63,11 +63,10 @@ export class PhaseHandlerService {
      */
     goToNextPhase(currentPhase:NonSelectablePhase):NonSelectablePhase{
         var nextPhase: NonSelectablePhase;
-        //start looping at phase index +1 or 1
-        var startCounting: number = Math.max(this.phaseIndex + 1, 1)
-        
+        var startCounting: number = Math.max(this.phaseIndex + 1, 1) //start looping at phase index +1 or 1
         for(let i=startCounting; i<=phaseCount; i++){
             if(this.accessSelectedPhase(this.accessPhaseOrder(i))===true){
+                this.phaseIndex = i
                 nextPhase = this.accessPhaseOrder(i)
                 this.setPhaseAsPlayed(currentPhase)
                 return nextPhase

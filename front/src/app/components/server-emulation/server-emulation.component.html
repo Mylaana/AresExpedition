@@ -1,15 +1,16 @@
-<h1>Server emulation - phase selection</h1>
-<h2>Actual phase: {{ currentPhase }}</h2>
-<div class="wrapper-phase-changer">
-    <button (click)="updatePhase('planification')" class="phase-planification phase-selection-button clickable">Planification</button>
-    <button (click)="updatePhase('development')" class="phase-development phase-selection-button clickable">Development</button>
-    <button (click)="updatePhase('construction')" class="phase-construction phase-selection-button clickable">Construction</button>
-    <button (click)="updatePhase('action')" class="phase-action phase-selection-button clickable">Action</button>
-    <button (click)="updatePhase('production')" class="phase-production phase-selection-button clickable">Production</button>
-    <button (click)="updatePhase('research')" class="phase-research phase-selection-button clickable">Research</button>
+<div *ngIf="debug===true">
+    <h1>Server emulation - phase selection</h1>
+    <h2>Actual phase: {{ currentPhase }}</h2>
+    <div class="wrapper-phase-changer">
+        <button (click)="updatePhase('planification')" class="phase-planification phase-selection-button clickable">Planification</button>
+        <button (click)="updatePhase('development')" class="phase-development phase-selection-button clickable">Development</button>
+        <button (click)="updatePhase('construction')" class="phase-construction phase-selection-button clickable">Construction</button>
+        <button (click)="updatePhase('action')" class="phase-action phase-selection-button clickable">Action</button>
+        <button (click)="updatePhase('production')" class="phase-production phase-selection-button clickable">Production</button>
+        <button (click)="updatePhase('research')" class="phase-research phase-selection-button clickable">Research</button>
+    </div>
+    <div class="wrapper-game-state">
+        <button (click)="printPlayersState()">players state</button>
+        <button (click)="botReady()">bot ready</button>
+    </div>
 </div>
-<div class="wrapper-game-state">
-    <button (click)="printPlayersState()">players state</button>
-    <button (click)="botReady()">bot ready</button>
-</div>
-<app-player-ready></app-player-ready>

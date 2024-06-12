@@ -4,7 +4,7 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
 
 @Component({
-  selector: 'app-player-ready',
+  selector: 'app-player-ready-pannel',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './player-ready-pannel.component.html',

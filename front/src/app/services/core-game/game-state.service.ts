@@ -183,12 +183,10 @@ export class GameState{
      * sets all players to not be ready
      */
     updatePhase(newPhase: NonSelectablePhase): void {
-        console.log(`newphase: ${newPhase} thisphase: ${this.phase.getValue()}`)
         if(newPhase === this.phase.getValue())
             return
         this.setPlayerReady(false)
         this.phase.next(newPhase)
-        console.log(`updatePhase: ${newPhase}`)
     };
 
     /**
@@ -215,14 +213,10 @@ export class GameState{
         }
         this.groupPlayerReady.next(ready)
 
-        console.log(this.groupPlayerReady.getValue())
-        console.log(`check for rooting next phase: ${this.getPlayerReady()}`)
         if(this.getPlayerReady()===true){
-            console.log('next phase')
             this.GoToNextPhaseIfPlayerReady()
             return
         }
-        console.log(`not next phase, getPlayerReady: ${this.getPlayerReady()}`)
     };
 
     /**

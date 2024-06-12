@@ -1,3 +1,15 @@
+$ares-red: rgb(237, 53, 49);
+$ares-blue: rgb(39, 177, 229);
+$ares-green: rgb(42, 180, 92);
+$ares-purple: rgb(98, 70, 156);
+
+$dark-colors: (
+    "red": darken($ares-red, 15%),
+    "blue": rgb(17, 114, 186),
+    "green": rgb(0, 113, 58),
+    "purple": darken($ares-purple, 15%)
+);
+
 .wrapper-player-ready{
     display: flex;
     justify-content: space-between;
@@ -5,7 +17,14 @@
     width: 20%;
 }
 button{
-    padding: 5%;
+    padding: 4%;
     width: 40%;
-    border-radius: 10px;
+
+    background: rgb(31, 31, 31);
+    font-size: larger;
+    color: $ares-blue;
+    background: linear-gradient(rgb(31, 31, 31),rgb(31, 31, 31)) padding-box,
+                linear-gradient(135deg, rgb(17, 114, 186), rgb(0, 113, 58)) border-box;
+    border-radius: 50em;
+    border: 5px solid transparent;
 }

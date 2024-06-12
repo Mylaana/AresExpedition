@@ -5,6 +5,7 @@ import { SelfInfoComponent } from './components/player-info/self-info/self-info.
 import { PlayerHandComponent } from './components/project-hand/player-hand/player-hand.component';
 import { ServerEmulationComponent } from './components/server-emulation/server-emulation.component';
 import { GameEventComponent } from './game-event/game-event.component';
+import { PlayerReadyPannelComponent } from './components/player-info/player-ready-pannel/player-ready-pannel.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { GameEventComponent } from './game-event/game-event.component';
     PlayerHandComponent,
     ServerEmulationComponent,
     GameEventComponent,
+    PlayerReadyPannelComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
