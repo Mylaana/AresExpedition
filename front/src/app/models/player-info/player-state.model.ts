@@ -11,6 +11,10 @@ export class PlayerStateModel {
         "hand": number[],
         "played": number[]
     };
+    research: {} = {
+        "drawMod": 0,
+        "keepMod": 0
+    }
     
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){
@@ -20,6 +24,7 @@ export class PlayerStateModel {
         }
         return
     }
+
     getRessourceStateFromName(ressourceName: string): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){
             if(this.ressource[i].name === ressourceName){
@@ -29,6 +34,8 @@ export class PlayerStateModel {
         return
     }
 }
+
+
 export class PlayerReadyModel {
     id!: number;
     name!:string;

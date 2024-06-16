@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { SelectablePhase, NonSelectablePhase } from "../../types/global.type";
+import { PlayerStateModel } from "../../models/player-info/player-state.model";
 
 interface PlayerPhase {
     playerId: number;
@@ -30,6 +31,7 @@ const phaseCount = 5;
 export class PhaseHandlerService {
     playerPhase: PlayerPhase[] = [];
     phaseIndex: number = 0;
+    clientPlayerId!: number;
 
     phaseOrder: PhaseOrder = {
         "0":"planification",
@@ -46,6 +48,7 @@ export class PhaseHandlerService {
         "production": false,
         "research": false
     }
+
     addPlayer(playerId: number){
         var newPlayer: PlayerPhase;
         newPlayer = {
@@ -55,6 +58,7 @@ export class PhaseHandlerService {
         }
         this.playerPhase.push(newPlayer)
     }
+
     /**
      * @param currentPhase as NonSelectablePhase
      * @returns next phase name
@@ -64,6 +68,7 @@ export class PhaseHandlerService {
     goToNextPhase(currentPhase:NonSelectablePhase):NonSelectablePhase{
         var nextPhase: NonSelectablePhase;
         var startCounting: number = Math.max(this.phaseIndex + 1, 1) //start looping at phase index +1 or 1
+
         for(let i=startCounting; i<=phaseCount; i++){
             if(this.accessSelectedPhase(this.accessPhaseOrder(i))===true){
                 this.phaseIndex = i
@@ -72,19 +77,24 @@ export class PhaseHandlerService {
                 return nextPhase
             }
         }
-
         //if no phase left selected to be played, restart to planification phase
+        this.phaseIndex = 0
+        this.setPhaseAsPlayed(currentPhase)
         return this.phaseOrder["0"]
     }
+
     accessPhaseOrder(key: string | number): NonSelectablePhase{
         return this.phaseOrder[String(key) as keyof PhaseOrder]
     }
+
     accessSelectedPhase(key: string): boolean{
         return this.selectedPhase[key as keyof SelectedPhase]
     }
+
     setPhaseAsPlayed(phaseName: string){
         this.selectedPhase[phaseName as keyof SelectedPhase] = false
     }
+
     /**
      * 
      * @param playerId 
@@ -108,7 +118,15 @@ export class PhaseHandlerService {
         }
         //global selectedPhase
         this.selectedPhase[phase]=true
-        console.log('selectedPhase :')
-        console.log(this.selectedPhase)
+    }
+
+    /**
+     * adds client player's production to stocks
+     */
+    applyProductionPhase(clientState: PlayerStateModel): PlayerStateModel | void{
+        //apply client's production
+        var newClientState: PlayerStateModel
+        newClientState = clientState
+        console.log("this is production")
     }
 }

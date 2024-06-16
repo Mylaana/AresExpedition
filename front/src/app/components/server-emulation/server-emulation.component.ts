@@ -64,5 +64,5 @@ export class ServerEmulationComponent implements OnInit {
   printPlayersState(): void {
     console.log(this.currentGroupPlayerState)
     console.log(this.gameStateService.groupPlayerReady.getValue())
-}
+  }
 }

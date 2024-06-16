@@ -9,8 +9,6 @@ import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
     providedIn: 'root'
 })
 export class GameState{
-    constructor(private phaseHandlerService: PhaseHandlerService){}
-
     playerId = 0; //should be changed to reflect the client's player's id
     groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([])
@@ -20,7 +18,12 @@ export class GameState{
     currentPhase = this.phase.asObservable();
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
-    
+
+    //initialize phaseHandler sub-service
+    constructor(private phaseHandlerService: PhaseHandlerService){
+        this.phaseHandlerService.clientPlayerId = this.playerId
+    }
+
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
         var newPlayer = new PlayerStateModel;
@@ -187,6 +190,10 @@ export class GameState{
             return
         this.setPlayerReady(false)
         this.phase.next(newPhase)
+        
+        if(newPhase==="production"){
+            this.phaseHandlerService.applyProductionPhase(this.getClientPlayerState())
+        }
     };
 
     /**
@@ -275,4 +282,14 @@ export class GameState{
     playerSelectPhase(playerId:number, phase:SelectablePhase){
         this.phaseHandlerService.playerSelectPhase(playerId, phase)
     };
+
+    getClientPlayerState(): PlayerStateModel{
+        return this.groupPlayerState.getValue()[this.playerId]
+    }
+
+    updateClientPlayerState(clientState: PlayerStateModel): void{
+        this.groupPlayerState.getValue()[this.playerId] = clientState
+        //calls the groupState update to next the subscriptions
+        this.updateGroupPlayerState(this.groupPlayerState.getValue())
+    }
 }
