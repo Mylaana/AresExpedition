@@ -1,3 +1,5 @@
+import { SelectablePhase } from "../types/global.type";
+
 export interface RessourceState {
     "id": number,
     "name": string,
@@ -13,4 +15,10 @@ export interface TagState {
     "idImageUrl": number;
     "valueMod": number;
     "valueCount": number;
+}
+
+export interface PlayerPhase {
+    playerId: number;
+    currentSelectedPhase: SelectablePhase;
+    previousSelectedPhase: SelectablePhase;
 }

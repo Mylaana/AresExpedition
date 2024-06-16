@@ -14,13 +14,13 @@ import { GameState } from '../../../services/core-game/game-state.service';
   styleUrl: './self-info.component.scss'
 })
 export class SelfInfoComponent {
-  selfPlayerId!: number;
+  clientPlayerId!: number;
   currentGroupPlayerState!: {};
 
   constructor(private gameStateService: GameState){}
 
   ngOnInit(){
-    this.selfPlayerId = this.gameStateService.playerId
+    this.clientPlayerId = this.gameStateService.clientPlayerId
 
     this.gameStateService.currentGroupPlayerState.subscribe(
       playersState => this.currentGroupPlayerState = playersState

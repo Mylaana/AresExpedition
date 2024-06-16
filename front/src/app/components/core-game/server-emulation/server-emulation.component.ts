@@ -1,9 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../services/core-game/game-state.service';
-import { PlayerReadyPannelComponent } from '../player-info/player-ready-pannel/player-ready-pannel.component';
-import { PhaseHandlerService } from '../../services/core-game/phase-handler.service';
-import { SelectablePhase } from '../../types/global.type';
+import { GameState } from '../../../services/core-game/game-state.service';
+import { PlayerReadyPannelComponent } from '../../player-info/player-ready-pannel/player-ready-pannel.component';
+import { SelectablePhase } from '../../../types/global.type';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -22,10 +21,7 @@ export class ServerEmulationComponent implements OnInit {
   currentGroupPlayerState!: {};
   currentPhase: string = "planification";
 
-  constructor(
-    private gameStateService: GameState,
-    private phaseHandler: PhaseHandlerService
-  ){}
+  constructor(private gameStateService: GameState){}
 
 
   ngOnInit(){
@@ -38,29 +34,32 @@ export class ServerEmulationComponent implements OnInit {
     this.gameStateService.currentGroupPlayerState.subscribe(
       groupPlayerState => this.currentGroupPlayerState = groupPlayerState
     )
-
   }
+
   phaseChanged(phase: Phase){
     this.currentPhase = phase
     if(phase==="planification"){
       let phaseList = ["development","construction","action","production","research"]
       let randomPhase = phaseList[Math.floor(Math.random() * 5)]
-      this.phaseHandler.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
+      this.gameStateService.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
     }
     this.gameStateService.setPlayerReady(true, 1)
   }
+
   botReady(){
     this.gameStateService.setPlayerReady(true, 1)
   }
+
   updatePhase(newPhase:Phase): void {
     //sends phase update to service's subject
     this.gameStateService.updatePhase(newPhase)
 
     let phaseList = ["development","construction","action","production","research"]
     let randomPhase = phaseList[Math.floor(Math.random() * 5)]
-    this.phaseHandler.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
+    this.gameStateService.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
     this.gameStateService.setPlayerReady(true, 1)
   }
+
   printPlayersState(): void {
     console.log(this.currentGroupPlayerState)
     console.log(this.gameStateService.groupPlayerReady.getValue())

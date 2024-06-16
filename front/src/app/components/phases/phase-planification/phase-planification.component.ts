@@ -11,11 +11,11 @@ import { SelectablePhase } from '../../../types/global.type';
   styleUrl: './phase-planification.component.scss'
 })
 export class PhasePlanificationComponent {
-  @Input() playerId!: number;
+  @Input() clientPlayerId!: number;
 
   constructor(private gameStateService: GameState){}
 
   selectPhase(phaseName: string){
-    this.gameStateService.playerSelectPhase(this.playerId, phaseName as keyof SelectablePhase)
+    this.gameStateService.playerSelectPhase(this.clientPlayerId, phaseName as keyof SelectablePhase)
   }
 }

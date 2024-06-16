@@ -1,0 +1,6 @@
+<div class="wrapper-player-selected-phase">
+    <h3>Selected phase:</h3>
+    <div *ngFor="let line of currentGroupPlayerSelectedPhase" class="player-phase">
+        <p>{{line.playerId}} - {{line.currentSelectedPhase}} ({{line.previousSelectedPhase}})</p>
+    </div>
+</div>
