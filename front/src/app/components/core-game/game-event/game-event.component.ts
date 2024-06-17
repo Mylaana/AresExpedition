@@ -10,6 +10,7 @@ import { PhaseResearchComponent } from '../../phases/phase-research/phase-resear
 import { NonSelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { RessourceState } from '../../../interfaces/global.interface';
+import { DrawModel } from '../../../models/core-game/draw.model';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
@@ -58,13 +59,21 @@ export class GameEventComponent {
       newClientRessource = clientState.ressource
 
       for(let i=0; i<newClientRessource.length; i++){
-        if(newClientRessource[i].hasStock===false){
+        if(i===3 || i===4){
           continue
         }
-        
         //megacredit prod
         if(i===0){
-          newClientRessource[0].valueStock = newClientRessource[0].valueStock + newClientRessource[0].valueProd + clientState.terraformingRating
+          newClientRessource[i].valueStock = newClientRessource[i].valueStock + newClientRessource[i].valueProd + clientState.terraformingRating
+          continue
+        }
+        //cards prod
+        if(i===5){
+          var draw = new DrawModel;
+          draw.playerId = this.clientPlayerId
+          draw.cardNumber = newClientRessource[i].valueProd
+          draw.drawRule = 'draw'
+          this.gameStateService.addDrawQueue(draw)
           continue
         }
         //other prod

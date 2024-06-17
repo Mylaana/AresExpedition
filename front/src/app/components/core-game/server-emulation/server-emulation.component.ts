@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerReadyPannelComponent } from '../../player-info/player-ready-pannel/player-ready-pannel.component';
 import { SelectablePhase } from '../../../types/global.type';
+import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
+import { DrawModel } from '../../../models/core-game/draw.model';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -20,8 +22,11 @@ export class ServerEmulationComponent implements OnInit {
   debug: boolean = false;
   currentGroupPlayerState!: {};
   currentPhase: string = "planification";
+  cardsDeck: number[] = [];
 
-  constructor(private gameStateService: GameState){}
+  constructor(private gameStateService: GameState,
+    private cardInfoService: ProjectCardInfoService
+  ){}
 
 
   ngOnInit(){
@@ -34,6 +39,14 @@ export class ServerEmulationComponent implements OnInit {
     this.gameStateService.currentGroupPlayerState.subscribe(
       groupPlayerState => this.currentGroupPlayerState = groupPlayerState
     )
+    this.gameStateService.currentDrawQueue.subscribe(
+      drawQueue => this.addCardsToPlayersHand(drawQueue)
+    )
+
+    var cardsNumber = this.cardInfoService.getCardNumber()
+    for(let i=0; i< cardsNumber; i++){
+      this.cardsDeck.push(i)
+    }
   }
 
   phaseChanged(phase: Phase){
@@ -63,5 +76,15 @@ export class ServerEmulationComponent implements OnInit {
   printPlayersState(): void {
     console.log(this.currentGroupPlayerState)
     console.log(this.gameStateService.groupPlayerReady.getValue())
+  }
+
+  addCardsToPlayersHand(drawQueue: DrawModel[]):void{
+    if(drawQueue.length===0){
+      return
+    }
+    drawQueue.forEach(element => {
+      var cards = [element.cardNumber, 0]
+      this.gameStateService.updateClientPlayerStateHand(cards)
+    });
   }
 }

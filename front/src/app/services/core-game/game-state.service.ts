@@ -4,6 +4,7 @@ import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/pla
 import { RGB } from "../../types/global.type";
 import { PlayerPhase } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
+import { DrawModel } from "../../models/core-game/draw.model";
 
 interface SelectedPhase {
     "development": boolean,
@@ -33,11 +34,13 @@ export class GameState{
     groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
     playerCount: number = 0;
     phase = new BehaviorSubject<NonSelectablePhase>("planification")
+    drawQueue = new BehaviorSubject<DrawModel[]>([])
 
     currentPhase = this.phase.asObservable();
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
     currentGroupPlayerSelectedPhase = this.groupPlayerSelectedPhase
+    currentDrawQueue = this.drawQueue.asObservable()
 
 
     phaseIndex: number = 0;
@@ -114,7 +117,7 @@ export class GameState{
                 "id":5,
                 "name": "card",
                 "valueMod": 0,
-                "valueProd": 0,
+                "valueProd": 1,
                 "valueStock": 0,
                 "hasStock": false,
                 "imageUrlId": 8,
@@ -194,7 +197,7 @@ export class GameState{
         ];
         newPlayer.cards = {
             "hand": [1,2,3],
-            "played": []
+            "played": [4]
         };
         newPlayer.terraformingRating = 5;
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
@@ -206,11 +209,18 @@ export class GameState{
         newPlayerReady.isReady = false
         this.groupPlayerReady.next(this.groupPlayerReady.getValue().concat(newPlayerReady))
 
+        //creates and add player to groupPlayerSelectedPhase
+        var newPlayerPhase: PlayerPhase;
+        newPlayerPhase = {
+            "playerId": newPlayer.id,
+            "currentSelectedPhase": undefined,
+            "currentPhaseType": undefined,
+            "previousSelectedPhase": undefined
+        }
+        this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
+
         //updates player count
         this.playerCount++
-
-        //sends new player ID to phase handler
-        this.addPlayerToGroupSelectedPhase(newPlayer.id)
     };
 
     /**
@@ -283,23 +293,6 @@ export class GameState{
         return true
     };
 
-    /**
-     * 
-     * @param playerId 
-     * @returns 
-     */
-    getPlayerStateFromId(playerId: number){
-        var states: PlayerStateModel[] = [];
-        states = this.groupPlayerState.getValue().slice()
-
-        for(var i=0; i<states.length; i++){
-            if(states[i].id === playerId){
-                return states[i]
-            }
-        }
-        return undefined
-    };
-
     GoToNextPhaseIfPlayerReady(){
         var newPhase = this.goToNextPhase(this.phase.getValue())
         this.updatePhase(newPhase)
@@ -338,24 +331,19 @@ export class GameState{
         }
     };
 
-    getClientPlayerState(): PlayerStateModel{
-        return this.groupPlayerState.getValue()[this.clientPlayerId]
+    getPlayerStateFromId(playerId: number): PlayerStateModel{
+        return this.groupPlayerState.getValue()[playerId]
     }
+
+    getClientPlayerState(): PlayerStateModel{
+        return this.getPlayerStateFromId(this.clientPlayerId)
+    }
+
 
     updateClientPlayerState(clientState: PlayerStateModel): void{
         this.groupPlayerState.getValue()[this.clientPlayerId] = clientState
         //calls the groupState update to next subscriptions
         this.updateGroupPlayerState(this.groupPlayerState.getValue())
-    }
-
-    addPlayerToGroupSelectedPhase(playerId: number){
-    var newPlayer: PlayerPhase;
-    newPlayer = {
-        "playerId": playerId,
-        "currentSelectedPhase": undefined,
-        "previousSelectedPhase": undefined
-    }
-    this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayer]))
     }
 
     accessPhaseOrder(key: string | number): NonSelectablePhase{
@@ -394,11 +382,11 @@ export class GameState{
         //global selectedPhase
         this.selectedPhase[phase]=true
     }
+
     /**
      * clears up current phase selection for players and adds previous selected phase
      */
     resetPhaseSelection(){
-        //player phase selection
         for(let i=0; i<this.groupPlayerSelectedPhase.getValue().length; i++){
             this.groupPlayerSelectedPhase.getValue()[i].previousSelectedPhase = this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase
             this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase = undefined
@@ -407,5 +395,31 @@ export class GameState{
     
     updateGroupPlayerSelectedPhase(newGroupPlayerSelectedPhase: PlayerPhase[]):void{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
+    }
+
+    getClientPlayerStateHand(): number[] {
+        var playerState = this.getPlayerStateFromId(this.clientPlayerId)
+        if(playerState===undefined){
+            return []
+        }
+        return playerState.cards.hand
+    }
+
+    updateClientPlayerStateHand(cardList: number[]): void {
+        var clientState = this.getClientPlayerState()
+        console.log(cardList)
+        console.log(clientState)
+        clientState.cards.hand = clientState.cards.hand.concat(clientState.cards.hand, cardList)
+        console.log(clientState)
+        this.updateClientPlayerState(clientState)
+    }
+
+    addCardToPlayerHand(playerId: number, cardToAdd: number | number[]):void{
+        //this.getClientPlayerHandStateId()
+    }
+
+    addDrawQueue(draw: DrawModel):void{
+        this.drawQueue.next(this.drawQueue.getValue().concat([draw]));
+        console.log(draw)
     }
 }

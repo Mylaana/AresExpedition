@@ -1,4 +1,5 @@
 import { SelectablePhase } from "../types/global.type";
+import { PhaseCardType } from "../types/phase-card.type";
 
 export interface RessourceState {
     "id": number,
@@ -20,5 +21,6 @@ export interface TagState {
 export interface PlayerPhase {
     playerId: number;
     currentSelectedPhase: SelectablePhase;
+    currentPhaseType: PhaseCardType;
     previousSelectedPhase: SelectablePhase;
 }

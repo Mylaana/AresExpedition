@@ -76,7 +76,22 @@ export class ProjectCardInfoService {
             descriptionSummary: "$other-redarrow$ $ressource-microbe$ $skipline$ -5$ressource-microbe$ $other-redarrow$$ressource-card$ $ressource-megacreditvoid-25$"
         }
     ]
-    dummyGetCardList(): ProjectCardModel[] {
-        return this.projectCardInfo;
+    getCardById(cardId:number): ProjectCardModel | undefined {
+        return this.projectCardInfo.find(x => x.id === cardId)
+    }
+
+    getProjectCardList(cardIdList: number[]): ProjectCardModel[] {
+        var resultProjectCardList: ProjectCardModel[] = [];
+        cardIdList.forEach(element => {
+            let card = this.getCardById(element)
+            if(card!=undefined){
+                resultProjectCardList.push(card)
+            }
+        });
+        return resultProjectCardList;
+    }
+
+    getCardNumber(){
+        return this.projectCardInfo.length
     }
 }
