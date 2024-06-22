@@ -12,9 +12,9 @@ export class PlayerStateModel {
         "hand": number[],
         "played": number[]
     };
-    research: {} = {
-        "drawMod": 0,
-        "keepMod": 0
+    research!: {
+        "drawMod": number,
+        "keepMod": number
     }
     
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{

@@ -1,3 +1,6 @@
+<div *ngIf="cardToSelect.length!=0" class="wrapper-card-selector">
+    <app-project-card-list [cardList]="cardToSelect"></app-project-card-list>
+</div>
 <div class="wrapper-game-event">
     <app-phase-planification *ngIf="currentPhase==='planification'" [clientPlayerId]="clientPlayerId"></app-phase-planification>
     <app-phase-development *ngIf="currentPhase==='development'"></app-phase-development>

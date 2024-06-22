@@ -4,7 +4,9 @@ export type PhaseCardType = undefined |
     "action_base" | "action_repeat_two" | "action_scan_cards" |
     "production_base" | "production_7mc" | "production_1mc_activate_card" |
     "research_base" | "research_scan2_keep2" | "research_scan6_keep1"
-/**
+export type PhaseFilter =  undefined | "development" | "construction"
+
+    /**
 export type PhaseCardDevelopment = PhaseCardStandard
 export type PhaseCardConstruction = PhaseCardStandard
 export type PhaseCardAction = PhaseCardStandard

@@ -22,14 +22,21 @@ export class ServerEmulationComponent implements OnInit {
   debug: boolean = false;
   currentGroupPlayerState!: {};
   currentPhase: string = "planification";
+  currentDrawQueue: DrawModel[] = []
   cardsDeck: number[] = [];
+  cardsDiscarded: number[] = [];
 
   constructor(private gameStateService: GameState,
-    private cardInfoService: ProjectCardInfoService
+    private cardInfoService: ProjectCardInfoService,
   ){}
 
 
   ngOnInit(){
+    var cardsNumber = this.cardInfoService.getCardNumber()
+    for(let i=0; i< cardsNumber; i++){
+      this.cardsDeck.push(i)
+    }
+
     this.gameStateService.addPlayer("joueur 1", "rgb(0, 0, 255)")
     this.gameStateService.addPlayer("joueur 2", "rgb(255, 0, 0)")
 
@@ -40,13 +47,8 @@ export class ServerEmulationComponent implements OnInit {
       groupPlayerState => this.currentGroupPlayerState = groupPlayerState
     )
     this.gameStateService.currentDrawQueue.subscribe(
-      drawQueue => this.addCardsToPlayersHand(drawQueue)
+      drawQueue => this.handleDrawQueueRequest(drawQueue)
     )
-
-    var cardsNumber = this.cardInfoService.getCardNumber()
-    for(let i=0; i< cardsNumber; i++){
-      this.cardsDeck.push(i)
-    }
   }
 
   phaseChanged(phase: Phase){
@@ -64,7 +66,7 @@ export class ServerEmulationComponent implements OnInit {
   }
 
   updatePhase(newPhase:Phase): void {
-    //sends phase update to service's subject
+    //sends phase update to service's behaviorSubject
     this.gameStateService.updatePhase(newPhase)
 
     let phaseList = ["development","construction","action","production","research"]
@@ -78,13 +80,45 @@ export class ServerEmulationComponent implements OnInit {
     console.log(this.gameStateService.groupPlayerReady.getValue())
   }
 
-  addCardsToPlayersHand(drawQueue: DrawModel[]):void{
+  /**
+   * provides cards from deck, updates all objects in queue with a list of cards requested
+   * @param drawQueue 
+   * @returns 
+   */
+  handleDrawQueueRequest(drawQueue: DrawModel[]):void{
+    this.currentDrawQueue = drawQueue
     if(drawQueue.length===0){
       return
     }
-    drawQueue.forEach(element => {
-      var cards = [element.cardNumber, 0]
-      this.gameStateService.updateClientPlayerStateHand(cards)
-    });
+    for(let element of drawQueue){
+      if(this.cardsDeck.length===0){break}
+      if(element.isFinalized===true){continue}
+      if(element.cardList.length!=0){continue}
+      if(element.playerId!=0){
+        //preventing bot players to draw
+        element.isFinalized = true
+        continue
+      }
+      element.cardList = this.drawCardFromDeck(element.cardNumber)
+    };
+  }
+
+  drawCardFromDeck(drawNumber?: number): number[]{
+    var resultList: number[] = [];
+
+    if(drawNumber===undefined){
+      drawNumber=1
+    }
+    for(let i=0; i<drawNumber; i++){
+      if(this.cardsDeck.length===0){
+        //no more cards in deck, need to add reshuffle
+        return []
+      }
+      let index = Math.floor(Math.random()*this.cardsDeck.length);
+      resultList.push(this.cardsDeck[index])
+      this.cardsDeck.splice(index, 1)
+    }
+    console.log(this.cardsDeck)
+    return resultList
   }
 }

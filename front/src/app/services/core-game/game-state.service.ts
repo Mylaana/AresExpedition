@@ -22,24 +22,27 @@ interface PhaseOrder {
     "5": NonSelectablePhase,
 }
 
-const phaseCount = 5;
+const phaseCount: number = 5;
+const handSizeStart: number = 1;
 
 @Injectable({
     providedIn: 'root'
 })
 export class GameState{
     clientPlayerId = 0; //should be changed to reflect the client's player's id
+    playerCount: number = 0;
+
     groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
     groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
-    playerCount: number = 0;
     phase = new BehaviorSubject<NonSelectablePhase>("planification")
     drawQueue = new BehaviorSubject<DrawModel[]>([])
 
-    currentPhase = this.phase.asObservable();
+
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
-    currentGroupPlayerSelectedPhase = this.groupPlayerSelectedPhase
+    currentGroupPlayerSelectedPhase = this.groupPlayerSelectedPhase.asObservable()
+    currentPhase = this.phase.asObservable();
     currentDrawQueue = this.drawQueue.asObservable()
 
 
@@ -196,10 +199,24 @@ export class GameState{
             },
         ];
         newPlayer.cards = {
-            "hand": [1,2,3],
-            "played": [4]
+            "hand": [],
+            "played": []
         };
+        newPlayer.research = {
+            'drawMod': 0,
+            'keepMod': 0,
+        }
+
+        //fill player's hand
+        let newPlayerDraw = new DrawModel;
+        newPlayerDraw.playerId = newPlayer.id
+        newPlayerDraw.cardNumber = handSizeStart
+        newPlayerDraw.drawRule = 'draw'
+        this.addDrawQueue(newPlayerDraw)
+
         newPlayer.terraformingRating = 5;
+
+        //adds newplayer's state to  groupPlayerState
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
 
         //creates and add player to groupPlayerReady
@@ -326,9 +343,7 @@ export class GameState{
     }
 
     updateGroupPlayerState(newState: PlayerStateModel[]): void{
-        if(newState != this.groupPlayerState.getValue()){
-            this.groupPlayerState.next(newState)
-        }
+        this.groupPlayerState.next(newState)
     };
 
     getPlayerStateFromId(playerId: number): PlayerStateModel{
@@ -340,10 +355,14 @@ export class GameState{
     }
 
 
-    updateClientPlayerState(clientState: PlayerStateModel): void{
-        this.groupPlayerState.getValue()[this.clientPlayerId] = clientState
+    updatePlayerState(playerId:number, playerState: PlayerStateModel): void{
+        this.groupPlayerState.getValue()[playerId] = playerState
         //calls the groupState update to next subscriptions
         this.updateGroupPlayerState(this.groupPlayerState.getValue())
+    }
+
+    updateClientPlayerState(clientState: PlayerStateModel): void{
+        this.updatePlayerState(this.clientPlayerId, clientState)
     }
 
     accessPhaseOrder(key: string | number): NonSelectablePhase{
@@ -398,7 +417,15 @@ export class GameState{
     }
 
     getClientPlayerStateHand(): number[] {
+        return this.getPlayerStateHand(this.clientPlayerId)
         var playerState = this.getPlayerStateFromId(this.clientPlayerId)
+        if(playerState===undefined){
+            return []
+        }
+        return playerState.cards.hand
+    }
+    getPlayerStateHand(playerId: number): number[] {
+        var playerState = this.getPlayerStateFromId(playerId)
         if(playerState===undefined){
             return []
         }
@@ -407,19 +434,50 @@ export class GameState{
 
     updateClientPlayerStateHand(cardList: number[]): void {
         var clientState = this.getClientPlayerState()
-        console.log(cardList)
-        console.log(clientState)
-        clientState.cards.hand = clientState.cards.hand.concat(clientState.cards.hand, cardList)
-        console.log(clientState)
+        clientState.cards.hand = clientState.cards.hand.concat(cardList)
         this.updateClientPlayerState(clientState)
     }
+    updatePlayerStateHand(playerId: number, newCardList: number[]): void {
+        var playerState = this.getPlayerStateFromId(playerId)
+        playerState.cards.hand = newCardList
+        this.updatePlayerState(playerId, playerState)
+    }
 
-    addCardToPlayerHand(playerId: number, cardToAdd: number | number[]):void{
-        //this.getClientPlayerHandStateId()
+    addCardToPlayerHand(playerId: number, cardsToAdd: number[]):void{
+        var playerStateHand = this.getPlayerStateHand(playerId)
+        this.updatePlayerStateHand(playerId, playerStateHand.concat(cardsToAdd))
     }
 
     addDrawQueue(draw: DrawModel):void{
         this.drawQueue.next(this.drawQueue.getValue().concat([draw]));
-        console.log(draw)
+    }
+
+    removeDrawQueue(drawQueueElement: DrawModel[]): void{
+        const newDrawQueue: DrawModel[] = this.drawQueue.getValue();
+
+        drawQueueElement.forEach(element => {
+            for(let i=0; i<this.drawQueue.getValue().length; i++){
+                if(element===this.drawQueue.getValue()[i]){
+                    newDrawQueue.splice(i,1)
+                }
+            }
+        });
+        this.drawQueue.next(newDrawQueue)
+    }
+
+    /**
+     * gets nothing
+     * returns nothing
+     * emits a next signal for drawQueue.next()
+     */
+    cleanAndNextDrawQueue(): void{
+        var newDrawQueue: DrawModel[] = [];
+        //clean draw queue
+        for(let drawTicket of this.drawQueue.getValue()){
+            if(drawTicket.isFinalized!=true){
+                newDrawQueue.push(drawTicket)
+            }
+        }
+        this.drawQueue.next(newDrawQueue)
     }
 }

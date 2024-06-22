@@ -13,4 +13,12 @@
         <button (click)="printPlayersState()">players state</button>
         <button (click)="botReady()">bot ready</button>
     </div>
+    <p>drawQueue :</p>
+    <div *ngFor="let queue of currentDrawQueue">
+        <p>{{queue.playerId}} [{{queue.cardList}}] {{queue.isFinalized}}</p>
+    </div>
+    <div>
+        <p>cards in deck:</p>
+        <p>{{cardsDeck.length}}</p>
+    </div>
 </div>

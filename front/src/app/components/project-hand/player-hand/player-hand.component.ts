@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
 import { GameState } from '../../../services/core-game/game-state.service';
+import { PhaseFilter } from '../../../types/phase-card.type';
 
-type PhaseFilter =  undefined | "development" | "construction"
 
 @Component({
   selector: 'app-player-hand',
@@ -17,10 +17,11 @@ type PhaseFilter =  undefined | "development" | "construction"
   templateUrl: './player-hand.component.html',
   styleUrl: './player-hand.component.scss'
 })
-export class PlayerHandComponent {
+export class PlayerHandComponent implements OnInit{
   @Input() cardsPhaseFilter!: PhaseFilter;
   projectHand!: ProjectCardModel[];
   displayedCards!: ProjectCardModel[];
+  handCardList: number[] = [];
 
   constructor(
     private projectCardInfoService: ProjectCardInfoService,
@@ -28,8 +29,20 @@ export class PlayerHandComponent {
   ){}
 
   ngOnInit(): void {
-    this.projectHand = this.projectCardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand());
-    this.displayedCards = this.filterHand(this.projectHand.slice(), this.cardsPhaseFilter);
+    //this.displayedCards = this.refreshHand(this.projectHand.slice(), this.cardsPhaseFilter);
+    this.gameStateService.currentGroupPlayerState.subscribe(
+      state => this.updateHandOnStateChange()
+    )
+  }
+
+  updateHandOnStateChange():void{
+    var stateHand = this.gameStateService.getClientPlayerStateHand()
+    if(stateHand===this.handCardList){
+      return
+    }
+    this.handCardList = stateHand
+    this.projectHand = this.projectCardInfoService.getProjectCardList(this.handCardList);
+    this.displayedCards = this.filterHand(this.projectHand, this.cardsPhaseFilter)
   }
 
   filterHand(cards:ProjectCardModel[], filter: PhaseFilter): ProjectCardModel[] {

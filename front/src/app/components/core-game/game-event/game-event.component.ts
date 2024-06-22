@@ -11,10 +11,11 @@ import { NonSelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { RessourceState } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
+import { ProjectCardListComponent } from '../../project-hand/project-card-list/project-card-list.component';
+import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
+import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
-type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
-
 
 @Component({
   selector: 'app-game-event',
@@ -27,27 +28,35 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
     PhaseActionComponent,
     PhaseProductionComponent,
     PhaseResearchComponent,
+    ProjectCardListComponent
   ],
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.scss'
 })
 export class GameEventComponent {
-  constructor(private gameStateService: GameState){}
+  constructor(
+    private gameStateService: GameState,
+    private cardInfoService: ProjectCardInfoService
+  ){}
 
   clientPlayerId!:number;
   currentPhase: NonSelectablePhase = "planification";
+  cardToSelect: ProjectCardModel[] = []
 
   ngOnInit(): void {
+    this.clientPlayerId = this.gameStateService.clientPlayerId
     this.gameStateService.currentPhase.subscribe(
       phase => this.updatePhase(phase)
     )
-    this.clientPlayerId = this.gameStateService.clientPlayerId
+    this.gameStateService.currentDrawQueue.subscribe(
+      drawQueue => this.handleDrawQueueEvents(drawQueue)
+    )
   }
 
   updatePhase(phase:NonSelectablePhase):void{
     this.currentPhase = phase
-
     if(phase==="production"){this.applyProductionPhase(this.gameStateService.getClientPlayerState())}
+    if(phase==="research"){this.applyResearchPhase(this.gameStateService.getClientPlayerState())}
   }
 
   /**
@@ -69,8 +78,8 @@ export class GameEventComponent {
         }
         //cards prod
         if(i===5){
-          var draw = new DrawModel;
-          draw.playerId = this.clientPlayerId
+          let draw = new DrawModel;
+          draw.playerId = clientState.id
           draw.cardNumber = newClientRessource[i].valueProd
           draw.drawRule = 'draw'
           this.gameStateService.addDrawQueue(draw)
@@ -81,5 +90,49 @@ export class GameEventComponent {
       }
 
       this.gameStateService.updateClientPlayerState(clientState)
+  }
+  applyResearchPhase(clientState: PlayerStateModel): void{
+    let draw = new DrawModel;
+    draw.playerId = clientState.id
+    draw.cardNumber = clientState.research.drawMod + 2
+    draw.drawRule = 'research'
+    this.gameStateService.addDrawQueue(draw)
+  }
+
+  handleDrawQueueEvents(drawQueue: DrawModel[]): void {
+    if(drawQueue.length===0){
+      return
+    }
+    var callCleanAndNext: boolean = false;
+
+    //var drawQueueUpdated: boolean = false;
+    for(let element of drawQueue){
+      if(element.isFinalized===true){
+        callCleanAndNext = true
+        continue
+      }
+      if(element.cardList.length===0){continue}
+      if(element.playerId!=0){
+        //preventing bot players to draw
+        element.isFinalized = true
+        callCleanAndNext = true
+        continue
+      }
+      if(element.drawRule==='draw'){
+        this.gameStateService.addCardToPlayerHand(element.playerId, element.cardList)
+        element.isFinalized = true
+        callCleanAndNext = true
+      }
+      if(element.drawRule==='research'){
+        this.cardToSelect = this.cardInfoService.getProjectCardList(element.cardList)
+        
+        element.isFinalized = true
+        callCleanAndNext = true
+      }
+    };
+    if(callCleanAndNext===true){
+      this.gameStateService.cleanAndNextDrawQueue()
+    }
+    //this.gameStateService.removeDrawQueue(treatedQueue)
   }
 }
