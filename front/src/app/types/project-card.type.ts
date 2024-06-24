@@ -1,0 +1,1 @@
+export type CardState = 'default' | 'selected' | 'disabled'

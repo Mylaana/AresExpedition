@@ -118,7 +118,6 @@ export class ServerEmulationComponent implements OnInit {
       resultList.push(this.cardsDeck[index])
       this.cardsDeck.splice(index, 1)
     }
-    console.log(this.cardsDeck)
     return resultList
   }
 }

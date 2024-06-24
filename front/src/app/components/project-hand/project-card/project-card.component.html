@@ -1,4 +1,4 @@
-<div class="wrapper-card" [ngClass]="projectCard.cardType">
+<button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, state, selectable ? 'selectable': '']">
     <div class="wrapper-card-grid">
         <div class="grid-box-cost">
             <div class="wrapper-cost">
@@ -98,4 +98,5 @@
     <div class="wrapper-background-layout">
         <app-layout-card-background-hexagons></app-layout-card-background-hexagons>
     </div>
-</div>
+</button>
+

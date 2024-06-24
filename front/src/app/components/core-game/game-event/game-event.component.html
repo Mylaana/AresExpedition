@@ -1,7 +1,9 @@
-<div *ngIf="cardToSelect.length!=0" class="wrapper-card-selector">
-    <app-project-card-list [cardList]="cardToSelect"></app-project-card-list>
-</div>
 <div class="wrapper-game-event">
+    <div *ngIf="cardToSelect.length!=0" class="wrapper-card-selector">
+        <h2>Select {{6}} cards</h2>
+        <app-project-card-list [cardList]="cardToSelect" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+        <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[0]"></app-button>
+    </div>
     <app-phase-planification *ngIf="currentPhase==='planification'" [clientPlayerId]="clientPlayerId"></app-phase-planification>
     <app-phase-development *ngIf="currentPhase==='development'"></app-phase-development>
     <app-phase-construction *ngIf="currentPhase==='construction'"></app-phase-construction>

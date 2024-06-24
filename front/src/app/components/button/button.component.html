@@ -1,0 +1,5 @@
+<div class="wrapper-button">
+    <div [ngClass]="{'mask-disabled': button.enabled===false}">
+        <button [disabled]="button.enabled===false" (click)="onClick()" class="clickable validation-button" >{{button.caption}}</button>
+    </div>
+</div>

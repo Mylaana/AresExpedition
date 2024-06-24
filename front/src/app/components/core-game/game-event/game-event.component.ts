@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
@@ -14,6 +14,9 @@ import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../project-hand/project-card-list/project-card-list.component';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
 import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
+import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
+import { ChildButton } from '../../../interfaces/global.interface';
+import { ButtonComponent } from '../../button/button.component';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 
@@ -28,7 +31,9 @@ import { ProjectCardInfoService } from '../../../services/player-hand/project-ca
     PhaseActionComponent,
     PhaseProductionComponent,
     PhaseResearchComponent,
-    ProjectCardListComponent
+    ProjectCardListComponent,
+    PlayerReadyComponent,
+    ButtonComponent
   ],
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.scss'
@@ -41,7 +46,11 @@ export class GameEventComponent {
 
   clientPlayerId!:number;
   currentPhase: NonSelectablePhase = "planification";
-  cardToSelect: ProjectCardModel[] = []
+  cardToSelect: ProjectCardModel[] = [];
+  selectedCardList: number[] = [];
+  cardNumberToSelect!: number;
+  buttons: ChildButton[] = []
+  buttonResearchValidateId!: number;
 
   ngOnInit(): void {
     this.clientPlayerId = this.gameStateService.clientPlayerId
@@ -51,12 +60,21 @@ export class GameEventComponent {
     this.gameStateService.currentDrawQueue.subscribe(
       drawQueue => this.handleDrawQueueEvents(drawQueue)
     )
+
+    this.buttonResearchValidateId = this.buttons.length
+    let validateResearch: ChildButton = {
+      id: this.buttonResearchValidateId,
+      caption: "Validate",
+      enabled: false
+    }
+    this.buttons.push(validateResearch)
   }
 
   updatePhase(phase:NonSelectablePhase):void{
     this.currentPhase = phase
     if(phase==="production"){this.applyProductionPhase(this.gameStateService.getClientPlayerState())}
     if(phase==="research"){this.applyResearchPhase(this.gameStateService.getClientPlayerState())}
+    this.selectedCardList = [];
   }
 
   /**
@@ -91,6 +109,7 @@ export class GameEventComponent {
 
       this.gameStateService.updateClientPlayerState(clientState)
   }
+
   applyResearchPhase(clientState: PlayerStateModel): void{
     let draw = new DrawModel;
     draw.playerId = clientState.id
@@ -128,11 +147,38 @@ export class GameEventComponent {
         
         element.isFinalized = true
         callCleanAndNext = true
+        this.cardNumberToSelect = 2
       }
     };
     if(callCleanAndNext===true){
       this.gameStateService.cleanAndNextDrawQueue()
     }
     //this.gameStateService.removeDrawQueue(treatedQueue)
+  }
+  public updateSelectedCardList(cardList: number[]){
+    this.selectedCardList = cardList
+
+    if(this.currentPhase==='research'){
+      this.updateButtonState(this.buttonResearchValidateId, this.cardNumberToSelect === this.selectedCardList.length)
+    }
+  }
+  public childButtonClicked(button: ChildButton ){
+    if(button.id===this.buttonResearchValidateId){
+      this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.selectedCardList)
+      //reset research phase
+      this.selectedCardList = []
+      this.cardToSelect = []
+      this.cardNumberToSelect = 0
+      this.buttons[this.buttonResearchValidateId].enabled = false
+    }
+  }
+  /**
+   * 
+   * @param buttonId 
+   * @param option 
+   * option.enabled will set the state to default if true and to disabled if false
+   */
+  updateButtonState(buttonId:number, enabled: boolean): void{
+    this.buttons[buttonId].enabled = enabled
   }
 }

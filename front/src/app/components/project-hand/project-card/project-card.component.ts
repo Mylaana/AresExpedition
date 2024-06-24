@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
 import { GlobalTagInfoService } from '../../../services/global/global-tag-info.service';
 import { TextWithImageComponent } from '../../text-with-image/text-with-image.component';
 import { LayoutCardBackgroundHexagonsComponent } from '../../layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
+import { CardOptions } from '../../../interfaces/global.interface';
+import { CardState } from '../../../types/project-card.type';
 
 @Component({
   selector: 'app-project-card',
@@ -18,6 +20,10 @@ import { LayoutCardBackgroundHexagonsComponent } from '../../layouts/layout-card
 })
 export class ProjectCardComponent implements OnInit {
   @Input() projectCard!: ProjectCardModel;
+  @Input() options?: CardOptions;
+  @Output() cardStateChange: EventEmitter<{cardId: number, state:CardState}> = new EventEmitter<{cardId: number, state:CardState}>()
+  state: CardState = 'default';
+  selectable: boolean = false;
 
   readonly tagNumber = 3;
 
@@ -41,5 +47,28 @@ export class ProjectCardComponent implements OnInit {
     for(let i = 0; i < this.projectCard.tagsId.length; i++) {
       this.projectCard.tagsUrl.push(this.globalTagInfoService.getTagUrlFromID(this.projectCard.tagsId[i]))
     }
+
+    //loading options
+    if(this.options===undefined){this.options = {}}
+    if(this.options.initialState===undefined){this.state='default'}else{this.state=this.options.initialState}
+    if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=this.options.selectable}
+  }
+  cardClick(){
+    //non selectable card should not be clickable either
+    if(this.selectable!=true){return}
+    switch(this.state){
+      case 'disabled': {
+        return
+      };
+      case 'default': {
+        this.state = 'selected'
+        break
+      };
+      case 'selected': {
+        this.state = 'default'
+        break
+      };
+    }
+    this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
   }
 }
