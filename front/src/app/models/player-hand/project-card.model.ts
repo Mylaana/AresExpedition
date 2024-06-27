@@ -3,6 +3,7 @@ type CardType = 'redProject' | 'greenProject' | 'blueProject'
 type PrerequisiteType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | 'heat' | 'tr'
 type PrerequisiteTresholdType = 'min' | 'max'
 
+
 export class ProjectCardModel {
     id!: number;
     cost!: number;
@@ -25,3 +26,24 @@ export class ProjectCardModel {
     prerequisiteTresholdType?: PrerequisiteTresholdType;
     prerequisiteTresholdValue?: number;
 }
+/**
+export class CardSelector {
+    selectFrom!: ProjectCardModel[];
+    selectedIdList!: number[];
+    selectionQuantity!: number;
+    phaseFilter?: PhaseFilter
+
+    constructor(){
+        this.selectionQuantity = 3
+    }
+    resetSelectionVariables():void{
+        this.selectedIdList = []
+        this.selectFrom = []
+        this.selectionQuantity = 0
+        this.phaseFilter = undefined
+    }
+    getLength(): number {
+        return this.selectFrom.length
+    }
+} */
+

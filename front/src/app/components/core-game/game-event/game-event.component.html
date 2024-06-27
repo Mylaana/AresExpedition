@@ -1,13 +1,17 @@
 <div class="wrapper-game-event">
-    <div *ngIf="cardToSelect.length!=0" class="wrapper-card-selector">
-        <h2>Select {{6}} cards</h2>
-        <app-project-card-list [cardList]="cardToSelect" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
-        <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[0]"></app-button>
+    <h1>{{ currentPhase }}</h1>
+    <div *ngIf="cardSelector.selectionQuantity!=0" class="wrapper-card-selector">
+        <h2>{{cardSelector.title}}</h2>
+        <app-project-card-list [cardList]="cardSelector.selectFrom" [cardOptions]="cardSelector.cardOptions" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+        <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[cardSelector.buttonId]"></app-button>
     </div>
-    <app-phase-planification *ngIf="currentPhase==='planification'" [clientPlayerId]="clientPlayerId"></app-phase-planification>
-    <app-phase-development *ngIf="currentPhase==='development'"></app-phase-development>
+    <app-phase-planification *ngIf="currentPhase==='planification'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
+    <app-phase-development [cardList]="cardSelector.selectFrom" *ngIf="currentPhase==='development'"></app-phase-development>
     <app-phase-construction *ngIf="currentPhase==='construction'"></app-phase-construction>
     <app-phase-action *ngIf="currentPhase==='action'"></app-phase-action>
     <app-phase-production *ngIf="currentPhase==='production'"></app-phase-production>
     <app-phase-research *ngIf="currentPhase==='research'"></app-phase-research>
+    <div *ngIf="currentPhase==='planification'" class="wrapper-validate-button">
+        <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('defaultValidate')]"></app-button>
+    </div>
 </div>

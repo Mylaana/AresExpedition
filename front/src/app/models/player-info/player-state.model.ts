@@ -10,7 +10,8 @@ export class PlayerStateModel {
     tag!: TagState[];
     cards!: {
         "hand": number[],
-        "played": number[]
+        "played": number[],
+        "maximum": number;
     };
     research!: {
         "drawMod": number,

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
 import { GlobalTagInfoService } from '../../../services/global/global-tag-info.service';
@@ -18,27 +18,18 @@ import { CardState } from '../../../types/project-card.type';
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss',
 })
-export class ProjectCardComponent implements OnInit {
+export class ProjectCardComponent implements OnInit, OnChanges {
   @Input() projectCard!: ProjectCardModel;
   @Input() options?: CardOptions;
   @Output() cardStateChange: EventEmitter<{cardId: number, state:CardState}> = new EventEmitter<{cardId: number, state:CardState}>()
-  state: CardState = 'default';
-  selectable: boolean = false;
+  state!: CardState;
+  selectable!: boolean;
 
   readonly tagNumber = 3;
 
   constructor(private globalTagInfoService: GlobalTagInfoService){}
 
-  fillTagId(tagsId:number[]): number[] {
-    // ensures having 3 tags id in tagId
-    // gets number array
-    // returns number array
-    var newTagsId = this.projectCard.tagsId.slice();
-    for (let i = this.projectCard.tagsId.length; i < this.tagNumber; i++) {
-      newTagsId.push(-1)
-    }
-    return newTagsId
-  }
+
   ngOnInit() {
     this.projectCard.tagsUrl = []
     
@@ -49,9 +40,25 @@ export class ProjectCardComponent implements OnInit {
     }
 
     //loading options
-    if(this.options===undefined){this.options = {}}
-    if(this.options.initialState===undefined){this.state='default'}else{this.state=this.options.initialState}
-    if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=this.options.selectable}
+    this.resetCardState()
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['options'] && changes['options'].currentValue) {
+      console.log('onChange')
+      this.resetCardState()
+    }
+  }
+
+  fillTagId(tagsId:number[]): number[] {
+    // ensures having 3 tags id in tagId
+    // gets number array
+    // returns number array
+    var newTagsId = this.projectCard.tagsId.slice();
+    for (let i = this.projectCard.tagsId.length; i < this.tagNumber; i++) {
+      newTagsId.push(-1)
+    }
+    return newTagsId
   }
   cardClick(){
     //non selectable card should not be clickable either
@@ -70,5 +77,11 @@ export class ProjectCardComponent implements OnInit {
       };
     }
     this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
+  }
+
+  resetCardState(): void {
+    if(this.options===undefined){this.options = {}}
+    if(this.options.initialState===undefined){this.state='default'}else{this.state=this.options.initialState}
+    if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=this.options.selectable}
   }
 }

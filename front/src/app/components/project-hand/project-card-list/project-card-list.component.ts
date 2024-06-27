@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
@@ -15,25 +15,23 @@ import { CardState } from '../../../types/project-card.type';
   templateUrl: './project-card-list.component.html',
   styleUrl: './project-card-list.component.scss'
 })
-export class ProjectCardListComponent {
+export class ProjectCardListComponent implements OnChanges{
   @Input() cardsPhaseFilter!: PhaseFilter;
   @Input() cardList!:ProjectCardModel[];
   @Input() cardOptions?: CardOptions;
   @Output() updateSelectedCardList: EventEmitter<number[]> = new EventEmitter<number[]>()
   projectHand!: ProjectCardModel[];
   displayedCards!: ProjectCardModel[];
-  handCardList: number[] = [];
   selectedCardList: number[] = [];
 
   ngOnInit(){
-    this.displayedCards = this.filterCards(this.cardList, this.cardsPhaseFilter)
-    
-    if(this.cardOptions===undefined){this.cardOptions = {}}
-    if(this.cardOptions.initialState===undefined){this.cardOptions.initialState='default'}else{this.cardOptions.initialState=this.cardOptions.initialState}
-    if(this.cardOptions.selectable===undefined){this.cardOptions.selectable=false}else{this.cardOptions.selectable=this.cardOptions.selectable}
+    this.resetCardList()
+  }
 
-    //test
-    this.cardOptions.selectable = true
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['cardList'] && changes['cardList'].currentValue) {
+      this.resetCardList()
+    }
   }
 
   filterCards(cards:ProjectCardModel[], filter: PhaseFilter): ProjectCardModel[] {
@@ -69,6 +67,15 @@ export class ProjectCardListComponent {
       }
     }
     this.updateSelectedCardList.emit(this.selectedCardList)
+  }
+
+  resetCardList(): void {
+    this.displayedCards = this.filterCards(this.cardList, this.cardsPhaseFilter)
+    if(this.cardOptions===undefined){this.cardOptions = {}}
+    if(this.cardOptions.initialState===undefined){this.cardOptions.initialState='default'}
+    if(this.cardOptions.selectable===undefined){this.cardOptions.selectable=false}
+
+    this.selectedCardList = []
   }
 }
 

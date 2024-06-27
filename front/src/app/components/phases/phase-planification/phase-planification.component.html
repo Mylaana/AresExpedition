@@ -1,9 +1,6 @@
-<h2>Select a phase :</h2>
+<h2>Select a phase card:</h2>
 <div class="wrapper-phase-card">
-    <button class="phase-card phase-development clickable" (click)="selectPhase('development')">I development</button>
-    <button class="phase-card phase-construction clickable" (click)="selectPhase('construction')">II construction</button>
-    <button class="phase-card phase-action clickable" (click)="selectPhase('action')">III action</button>
-    <button class="phase-card phase-production clickable" (click)="selectPhase('production')">IV production</button>
-    <button class="phase-card phase-research clickable" (click)="selectPhase('research')">V research</button>
+    <div class="wrapper-button" *ngFor="let phase of phaseList">
+        <button  [ngClass]="phase.cssClass" class="phase-card clickable" (click)="selectPhase(phase.name)">{{phase.caption}}</button>
+    </div>
 </div>
-<app-player-ready></app-player-ready>

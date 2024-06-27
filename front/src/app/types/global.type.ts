@@ -4,3 +4,4 @@ export type SelectablePhase = undefined | "development" | "construction" | "acti
 /**this should only be used for non-player related events/core game mechanics as players cannot select planification phase*/
 export type NonSelectablePhase = "planification" | "development" | "construction" | "action" | "production" | "research"
 export type StandardState = 'default' | 'disabled'
+export type MinMaxEqualType = 'min' | 'max' | 'equal'

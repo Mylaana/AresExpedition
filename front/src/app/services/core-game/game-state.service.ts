@@ -23,7 +23,8 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 1;
+const handSizeStart: number = 3;
+const handSizeMaximum: number = 10;
 
 @Injectable({
     providedIn: 'root'
@@ -200,7 +201,8 @@ export class GameState{
         ];
         newPlayer.cards = {
             "hand": [],
-            "played": []
+            "played": [],
+            "maximum": handSizeMaximum
         };
         newPlayer.research = {
             'drawMod': 0,
@@ -393,7 +395,6 @@ export class GameState{
         //player phase selection
         for(let i=0; i<this.groupPlayerSelectedPhase.getValue().length; i++){
             if(i===playerId){
-                //this.groupPlayerSelectedPhase.getValue()[i].previousSelectedPhase = this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase
                 this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase = phase
                 break
             }
@@ -446,6 +447,12 @@ export class GameState{
     addCardToPlayerHand(playerId: number, cardsToAdd: number[]):void{
         var playerStateHand = this.getPlayerStateHand(playerId)
         this.updatePlayerStateHand(playerId, playerStateHand.concat(cardsToAdd))
+    }
+
+    removeCardFromPlayerHand(playerId: number, cardsToRemove: number[]):void{
+        let playerStateHand = this.getPlayerStateHand(playerId)
+        playerStateHand = playerStateHand.filter( ( el ) => !cardsToRemove.includes( el ) );
+        this.updatePlayerStateHand(playerId, playerStateHand)
     }
 
     addDrawQueue(draw: DrawModel):void{
