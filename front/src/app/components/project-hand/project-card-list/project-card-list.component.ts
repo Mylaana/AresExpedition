@@ -26,10 +26,13 @@ export class ProjectCardListComponent implements OnChanges{
 
   ngOnInit(){
     this.resetCardList()
+    console.log(this.cardList)
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('change detection')
     if (changes['cardList'] && changes['cardList'].currentValue) {
+      console.log(this.cardList)
       this.resetCardList()
     }
   }

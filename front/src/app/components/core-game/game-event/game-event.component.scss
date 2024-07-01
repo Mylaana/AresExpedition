@@ -1,3 +1,24 @@
 .wrapper-card-selector{
     width: 100%;
 }
+.wrapper-play-card{
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+}
+.play-card-zone{
+    $card-height: 400px;
+    $card-width: calc($card-height * 63 / 88);
+
+    width: $card-width;
+    height: $card-height;
+    border: black solid 1px;
+}
+.zone-two{
+    display: flex;
+}
+.wrapper-alternative{
+    display: flex;
+    width: 200px;
+    border: black solid 1px;
+}

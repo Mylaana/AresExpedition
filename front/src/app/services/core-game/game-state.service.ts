@@ -5,6 +5,7 @@ import { RGB } from "../../types/global.type";
 import { PlayerPhase } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
+import { PhaseCardType } from "../../types/phase-card.type";
 
 interface SelectedPhase {
     "development": boolean,
@@ -404,6 +405,49 @@ export class GameState{
     }
 
     /**
+     * 
+     * @param playerId  
+     * @param currentPhase 
+     * @returns undefined if the player didnt select the current phase or the phase card type they selected if equal to current phase
+     */
+    getPlayerSelectedPhaseCardType(playerId:number, currentPhase: SelectablePhase): PhaseCardType | undefined {
+        let selectedPhase = this.getPlayerPhase(playerId)
+        if(selectedPhase===undefined){return undefined}
+        if(selectedPhase.currentSelectedPhase != currentPhase){
+            return undefined
+        }
+        return selectedPhase.currentPhaseType
+    }
+
+    /**
+     * 
+     * @param playerId 
+     * @returns the player's current selected phase
+     */
+    getPlayerSelectedPhase(playerId: number): SelectablePhase | undefined {
+        for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){
+            if(playerSelcted.playerId === playerId){
+                return playerSelcted.currentSelectedPhase
+            }
+        }
+        return undefined
+    }
+
+    /**
+     * 
+     * @param playerId 
+     * @returns the player's selected PlayerPhase
+     */
+    getPlayerPhase(playerId: number): PlayerPhase | undefined {
+        for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){
+            if(playerSelcted.playerId === playerId){
+                return playerSelcted
+            }
+        }
+        return undefined
+    }
+
+    /**
      * clears up current phase selection for players and adds previous selected phase
      */
     resetPhaseSelection(){
@@ -425,6 +469,7 @@ export class GameState{
         }
         return playerState.cards.hand
     }
+
     getPlayerStateHand(playerId: number): number[] {
         var playerState = this.getPlayerStateFromId(playerId)
         if(playerState===undefined){
@@ -438,6 +483,7 @@ export class GameState{
         clientState.cards.hand = clientState.cards.hand.concat(cardList)
         this.updateClientPlayerState(clientState)
     }
+
     updatePlayerStateHand(playerId: number, newCardList: number[]): void {
         var playerState = this.getPlayerStateFromId(playerId)
         playerState.cards.hand = newCardList

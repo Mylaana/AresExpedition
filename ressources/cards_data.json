@@ -12,27 +12,27 @@
         "en":"Filter Feeders",
         "fr":""
     },
-    "descriptionPlayed":{
+    "playedText":{
         "en":"",
         "fr":""
     },
-    "descriptionPrerequisite": {
+    "prerequisiteText": {
         "en":"Requires 2 ocean tiles to be flipped.",
         "fr":""
     },
-    "descriptionPrerequisiteSummary": {
+    "prerequisiteSummary": {
         "en": "$other-ocean$",
         "fr": ""
     },
-    "descriptionVp": {
+    "vpText": {
         "en":"*=1VP per 3 animals on this card.",
         "fr":""
     },
-    "descriptionEffect": {
+    "effectText": {
         "en":"When you add any number of microbes to ANOTHER* card, add an animal to this card.",
         "fr":""
     },
-    "descriptionSummary": {
+    "effectSummary": {
         "en": "$ressource-microbe$*/$ressource-animal",
         "fr": ""
     }

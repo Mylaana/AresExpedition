@@ -45,7 +45,6 @@ export class ProjectCardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['options'] && changes['options'].currentValue) {
-      console.log('onChange')
       this.resetCardState()
     }
   }

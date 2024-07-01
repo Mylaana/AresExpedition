@@ -32,6 +32,7 @@ export interface PlayerPhase {
 
 export interface CardOptions {
     selectable?: boolean;
+    playable?: boolean;
     initialState?: CardState;
 }
 
@@ -52,4 +53,5 @@ export interface CardSelector {
     selectionQuantityTreshold: MinMaxEqualType;
     phaseFilter?: PhaseFilter;
     cardOptions?: CardOptions;
+    playCardActive?: boolean;
 }
