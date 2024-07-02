@@ -12,7 +12,7 @@ body {
     padding: 0;
 }
 div {
-    border: red 0px solid;
+    border: red 1px solid;
 }
 .center{
     display: flex;
@@ -33,7 +33,7 @@ p {
 }
 .validation-button{
     padding: 4%;
-    width: 40%;
+    width: 100%;
 
     background: rgb(31, 31, 31);
     font-size: larger;

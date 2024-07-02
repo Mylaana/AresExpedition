@@ -3,21 +3,32 @@
     <h2>Play card selection active : {{cardSelector.playCardActive}}</h2>
     <div *ngIf="currentPhase==='development' || currentPhase==='construction'" class="wrapper-play-card">
         <div class="play-card-zone play-card-one zone-one">
-            <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectFirstCard')]"></app-button>
-            <app-project-card-list [cardList]="playCardList[0]" [cardOptions]="cardSelector.cardOptions" [cardsPhaseFilter]="cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+			<div class="wrapper-select-button">
+				<app-button class="button-select-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectFirstCard')]"></app-button>
+			</div>
+			<div class="wrapper-cancel-button">
+				<app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelFirstCard')]"></app-button>
+			</div>
+			<app-project-card-list class="play-card-zone-list" [cardList]="playCardZone[0].cardList" [cardOptions]="playCardZone[0].options" [cardsPhaseFilter]="playCardZone[0].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+			<app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildFirstCard')]"></app-button>
         </div>
         <div class="zone-two">
             <div class="play-card-zone play-card-two">
-                <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectSecondCard')]"></app-button>
+				<div class="wrapper-select-button">
+                	<app-button class="button-select-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectSecondCard')]"></app-button>
+				</div>
+				<div class="wrapper-cancel-button">
+					<app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelSecondCard')]"></app-button>
+				</div>
+				<app-project-card-list class="play-card-zone-list" [cardList]="playCardZone[1].cardList" [cardOptions]="playCardZone[1].options" [cardsPhaseFilter]="playCardZone[1].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+				<app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildSecondCard')]"></app-button>
             </div>
             <div class="wrapper-alternative">
                 <h1>Or</h1>
                 <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectAlternative')]"></app-button>
-                <app-project-card-list [cardList]="playCardList[1]" [cardOptions]="cardSelector.cardOptions" [cardsPhaseFilter]="cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
         </div>
     </div>
-    <p>main card selection list</p>
     <div *ngIf="cardSelector.selectionQuantity!=0 || currentPhase==='development' || currentPhase==='construction'" class="wrapper-card-selector">
         <h2>{{cardSelector.title}}</h2>
         <app-project-card-list [cardList]="cardSelector.selectFrom" [cardOptions]="cardSelector.cardOptions" [cardsPhaseFilter]="cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
@@ -25,10 +36,10 @@
     <app-phase-planification *ngIf="currentPhase==='planification'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
     <app-phase-production *ngIf="currentPhase==='production'"></app-phase-production>
     <app-phase-research *ngIf="currentPhase==='research'"></app-phase-research>
-    <div *ngIf="currentPhase==='planification'" class="wrapper-validate-button">
-        <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('defaultValidate')]"></app-button>
-    </div>
-    <div *ngIf="currentPhase!='planification'" class="wrapper-validate-button">
-        <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[cardSelector.buttonId]"></app-button>
-    </div>
+	<ng-container *ngFor="let ph of phaseList">
+		<div *ngIf="currentPhase===ph" class="wrapper-validate-button">
+			<app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName(phaseButtons.get(ph))]"></app-button>
+		</div>
+	</ng-container>
 </div>
+

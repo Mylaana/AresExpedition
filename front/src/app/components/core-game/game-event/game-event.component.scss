@@ -22,3 +22,30 @@
     width: 200px;
     border: black solid 1px;
 }
+.wrapper-select-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.wrapper-cancel-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.play-card-zone{
+    position: relative;
+	display: flex;
+	flex-wrap: wrap;
+}
+.play-card-zone-list{
+    z-index: 0;
+    position: absolute;
+	border: blue 1px solid;
+    top: 0;
+    left: 0;
+}
+.button-select-card, .button-cancel-card, .button-build-card{
+	z-index: 1;
+}
