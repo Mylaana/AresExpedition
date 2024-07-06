@@ -478,6 +478,14 @@ export class GameState{
         return playerState.cards.hand
     }
 
+    getPlayerStatePlayed(playerId: number): number[] {
+        var playerState = this.getPlayerStateFromId(playerId)
+        if(playerState===undefined){
+            return []
+        }
+        return playerState.cards.played
+    }
+
     updateClientPlayerStateHand(cardList: number[]): void {
         var clientState = this.getClientPlayerState()
         clientState.cards.hand = clientState.cards.hand.concat(cardList)
@@ -490,6 +498,12 @@ export class GameState{
         this.updatePlayerState(playerId, playerState)
     }
 
+    updatePlayerStatePlayed(playerId: number, newCardList: number[]): void {
+        var playerState = this.getPlayerStateFromId(playerId)
+        playerState.cards.played = newCardList
+        this.updatePlayerState(playerId, playerState)
+    }
+
     addCardToPlayerHand(playerId: number, cardsToAdd: number[]):void{
         var playerStateHand = this.getPlayerStateHand(playerId)
         this.updatePlayerStateHand(playerId, playerStateHand.concat(cardsToAdd))
@@ -499,6 +513,11 @@ export class GameState{
         let playerStateHand = this.getPlayerStateHand(playerId)
         playerStateHand = playerStateHand.filter( ( el ) => !cardsToRemove.includes( el ) );
         this.updatePlayerStateHand(playerId, playerStateHand)
+    }
+
+    addCardToPlayerPlayed(playerId: number, cardsToAdd: number[]):void{
+        var playerStatePlayed = this.getPlayerStatePlayed(playerId)
+        this.updatePlayerStatePlayed(playerId, playerStatePlayed.concat(cardsToAdd))
     }
 
     addDrawQueue(draw: DrawModel):void{

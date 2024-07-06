@@ -100,9 +100,10 @@ export class GameEventComponent {
 		this.createButton('validatePlanification', 'Select Phase', false)
 		this.createButton('validateDevelopment', 'End Development phase', true)
 		this.createButton('validateConstruction', 'End Constructuction phase', true)
+		this.createButton('validateAction', 'End Action phase', true)
 
 		this.createButton('selectFirstCard', 'Select a card', true)
-		this.createButton('cancelFirstCard', 'X', false)
+		this.createButton('cancelFirstCard', 'Cancel <X>', false)
 		this.createButton('buildFirstCard', 'Build', false)
 
 		this.createButton('selectSecondCard', 'Select a card', true)
@@ -158,6 +159,7 @@ export class GameEventComponent {
 		this.cardSelector.buttonId = this.getButtonIdFromName('validateDevelopment')
 		this.cardSelector.phaseFilter = 'development'
 		this.cardSelector.playCardActive = false
+		this.resetPlayable()
   	}
 
 	applyConstructionPhase(): void {
@@ -167,6 +169,7 @@ export class GameEventComponent {
 		this.cardSelector.cardOptions = {initialState: 'default', selectable: true, playable: true}
 		this.cardSelector.buttonId = this.getButtonIdFromName('validateConstruction')
 		this.cardSelector.phaseFilter = 'construction'
+		this.resetPlayable()
 	}
 
 	applyActionPhase(): void {
@@ -270,57 +273,88 @@ export class GameEventComponent {
 		let zoneId: number =-1
 		switch(this.currentButtonSelectorId){
 			case(this.playCardZone[0].selectionButtonId):{
-			zoneId = 0
-			break
+				zoneId = 0
+				this.updateButtonState('selectFirstCard', false)
+				this.updateButtonState('buildFirstCard', true)
+				this.updateButtonState('cancelFirstCard', true)
+				break
 			}
 			case(this.playCardZone[1].selectionButtonId):{
-			zoneId = 1
-			break
+				zoneId = 1
+				this.updateButtonState('selectSecondCard', false)
+				this.updateButtonState('buildSecondCard', true)
+				this.updateButtonState('cancelSecondCard', true)
+				break
 			}
 			default:{
-			return
+				return
 			}
 		}
 		this.selectPlayableCard(zoneId, this.cardSelector.selectedIdList[0])
+		this.cardSelector.playCardActive = false
 		}
 	}
 
 	public childButtonClicked(button: ChildButton ){
-		switch(button.id){
-		case(this.getButtonIdFromName('validatePlanification')):{
-			this.gameStateService.setPlayerReady(true, this.clientPlayerId)
-			this.updateButtonState('validatePlanification',false)
-			break
-		}
-		case(this.getButtonIdFromName('validateResearch')):{
-			this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.cardSelector.selectedIdList)
-			//reset research phase
-			this.buttons[button.id].enabled = false
-			this.checkCleanAndReady()
-			break
-		}
-		case(this.getButtonIdFromName('sellCardsEndPhase')):{
-			this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.cardSelector.selectedIdList)
-			this.updateButtonState('sellCardsEndPhase',false)
-			this.checkCleanAndReady()
-			break
-		}
-		case(this.getButtonIdFromName('selectFirstCard')):{
-			this.cardSelector.playCardActive = true
-			this.cardSelector.cardOptions = {initialState: 'default', selectable: true, playable: true}
-			this.cardSelector.buttonName = 'selectFirstCard'
-			this.currentButtonSelectorId = button.id
-			this.cardSelector.buttonId = button.id
-			break
-		}
-		case(this.getButtonIdFromName('selectSecondCard')):{
-			this.cardSelector.playCardActive = true
-			this.cardSelector.cardOptions = {initialState: 'default', selectable: true, playable: true}
-			this.cardSelector.buttonName = 'selectSecondCard'
-			this.currentButtonSelectorId = button.id
-			this.cardSelector.buttonId = button.id
-			break
-		}
+		let clickedButtonName: ButtonNames | undefined = this.getButtonNameFromId(button.id)
+		switch(clickedButtonName){
+			case(undefined):{return}
+			
+			case('validatePlanification'):{
+				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
+				this.updateButtonState('validatePlanification',false)
+				break
+			}
+			case('validateResearch'):{
+				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.cardSelector.selectedIdList)
+				//reset research phase
+				this.buttons[button.id].enabled = false
+				this.checkCleanAndReady()
+				break
+			}
+			case('sellCardsEndPhase'):{
+				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.cardSelector.selectedIdList)
+				this.updateButtonState('sellCardsEndPhase',false)
+				this.checkCleanAndReady()
+				break
+			}
+			case('selectFirstCard'):
+			case('selectSecondCard'):{
+				this.cardSelector.playCardActive = true
+				this.cardSelector.cardOptions = {initialState: 'default', selectable: true, playable: true}
+				this.cardSelector.buttonName = clickedButtonName
+				this.currentButtonSelectorId = button.id
+				this.cardSelector.buttonId = button.id
+				break
+			}
+			case('cancelFirstCard'):{
+				this.cancelBuildCardSelection(0)
+				break
+			}
+			case('cancelSecondCard'):{
+				this.cancelBuildCardSelection(1)
+				break
+			}
+			case('buildFirstCard'):{
+				this.buildCard(0)
+				break
+			}
+			case('buildSecondCard'):{
+				this.buildCard(1)
+				break
+			}
+			case('validateDevelopment'):
+			case('validateConstruction'):
+			case('validateAction'):
+			{
+				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
+				break
+			}
+			case('selectAlternative'):{
+				this.updateButtonState('selectSecondCard', false)
+				this.updateButtonState('buildSecondCard', false)
+				this.updateButtonState('cancelSecondCard', false)
+			}
 		}
 	}
 
@@ -398,6 +432,14 @@ export class GameEventComponent {
 		return result
 	}
 
+	getButtonNameFromId(id: number): ButtonNames | undefined {
+		for(let [key, value] of this.buttonsIds){
+			if(value===id){
+				return key
+			}
+		}
+		return undefined
+	  }
 	/**
 	 *
 	 * @param treshold
@@ -425,12 +467,12 @@ export class GameEventComponent {
 		let selectedCardIndex: number = 0
 
 		for(let i=0; i< this.cardSelector.selectFrom.length; i++){
-		if(this.cardSelector.selectFrom[i].id===playedCardId){
-			selectedCardIndex = i
-		} else {
-			newList.push(this.cardSelector.selectFrom[i])
-			newListId.push(this.cardSelector.selectFrom[i].id)
-		}
+			if(this.cardSelector.selectFrom[i].id===playedCardId){
+				selectedCardIndex = i
+			} else {
+				newList.push(this.cardSelector.selectFrom[i])
+				newListId.push(this.cardSelector.selectFrom[i].id)
+			}
 		}
 
 		this.playCardZone[playCardListId].cardList = this.cardSelector.selectFrom.splice(selectedCardIndex, 1)
@@ -438,5 +480,72 @@ export class GameEventComponent {
 		//update card selector state
 		this.cardSelector.selectFrom = newList
 		this.cardSelector.cardOptions = {selectable: false}
+	}
+
+	buildCard(playableCardListId: number): void {
+		let buttonCancel: ButtonNames
+		let buttonSelect: ButtonNames
+		let buttonBuild: ButtonNames
+		let card: number[]
+
+		if(playableCardListId===0){
+			buttonBuild = 'buildFirstCard'
+			buttonSelect = 'selectFirstCard'
+			buttonCancel = 'cancelFirstCard'
+		} else {
+			buttonBuild = 'buildSecondCard'
+			buttonSelect = 'selectSecondCard'
+			buttonCancel = 'cancelSecondCard'
+		}
+
+		this.updateButtonState(buttonBuild, false)
+		this.updateButtonState(buttonSelect, false)
+		this.updateButtonState(buttonCancel, false)
+		
+		card = [this.playCardZone[playableCardListId].cardList[0].id]
+
+		this.gameStateService.addCardToPlayerPlayed(this.clientPlayerId, card)
+		this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, card)
+		console.log(this.gameStateService.getPlayerStatePlayed(this.clientPlayerId))
+		this.playCardZone[playableCardListId].cardList = []
+	}
+
+	cancelBuildCardSelection(playableCardListId: number): void {
+		let buttonCancel: ButtonNames
+		let buttonSelect: ButtonNames
+		let buttonBuild: ButtonNames
+		let card: number[]
+
+		if(playableCardListId===0){
+			buttonBuild = 'buildFirstCard'
+			buttonSelect = 'selectFirstCard'
+			buttonCancel = 'cancelFirstCard'
+		} else {
+			buttonBuild = 'buildSecondCard'
+			buttonSelect = 'selectSecondCard'
+			buttonCancel = 'cancelSecondCard'
+			this.updateButtonState('selectAlternative', false)
+		}
+
+		this.updateButtonState(buttonBuild, false)
+		this.updateButtonState(buttonSelect, true)
+		this.updateButtonState(buttonCancel, false)
+
+		let newList: ProjectCardModel[] = []
+		for(let c of this.cardSelector.selectFrom){
+			newList.push(c)
+		}
+		newList.push(this.playCardZone[playableCardListId].cardList[0])
+		this.cardSelector.selectFrom = newList
+
+		this.playCardZone[playableCardListId].cardList = []
+	}
+
+	resetPlayable():void{
+		this.playCardZone[0].cardList = []
+		this.playCardZone[1].cardList = []
+		this.updateButtonState('selectFirstCard', true)
+		this.updateButtonState('selectSecondCard', true)
+		this.updateButtonState('selectAlternative', true)
 	}
 }

@@ -6,11 +6,13 @@
 			<div class="wrapper-select-button">
 				<app-button class="button-select-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectFirstCard')]"></app-button>
 			</div>
-			<div class="wrapper-cancel-button">
+            <div class="wrapper-build-button">
+                <app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildFirstCard')]"></app-button>
+            </div>
+            <div class="wrapper-cancel-button">
 				<app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelFirstCard')]"></app-button>
 			</div>
 			<app-project-card-list class="play-card-zone-list" [cardList]="playCardZone[0].cardList" [cardOptions]="playCardZone[0].options" [cardsPhaseFilter]="playCardZone[0].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
-			<app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildFirstCard')]"></app-button>
         </div>
         <div class="zone-two">
             <div class="play-card-zone play-card-two">
