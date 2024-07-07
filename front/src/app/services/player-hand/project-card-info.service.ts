@@ -63,7 +63,7 @@ export class ProjectCardInfoService {
             card.origin = jsonCard.origin
             card.cost = jsonCard.cost
             card.tagsId = this.convertTagList(jsonCard.tagsId)
-            card.cardSummaryType = this.convertSummaryType(jsonCard.cardSummaryType)
+            card.cardSummaryType = this.convertSummaryType(jsonCard.effectSummaryType)
             card.cardType = this.convertCardType(jsonCard.cardType)
             card.vpNumber = jsonCard.vpNumber
             card.prerequisiteTresholdType = this.convertPrerequisiteTresholdType(jsonCard.prerequisiteTresholdType)
