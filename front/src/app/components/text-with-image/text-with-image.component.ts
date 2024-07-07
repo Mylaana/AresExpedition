@@ -30,7 +30,6 @@ export class TextWithImageComponent implements OnInit{
   replaceImageTags(text: string): string {
     var splittedText = text.split("$")
     splittedText.forEach((value, index) => {
-      console.log(value)
       if(value.split("_")[0]==="tag"){
         splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, this.tagImageService.getTagUrlFromTextTagName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
       }else if(value.split("_")[0]==="ressource"){

@@ -4,7 +4,7 @@ import jsonData from '../../../assets/data/cards_data.json'
 import { json } from "stream/consumers";
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
 
-const language = 'fr'
+const language = 'en'
 
 @Injectable({
     providedIn: 'root'

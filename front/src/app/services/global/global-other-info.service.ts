@@ -14,15 +14,51 @@ export class GlobalItemInfoService {
     private itemInfo: ItemInfo[] = [
         {
             id: 0,
-            description: 'arrow',
+            description: 'redarrow',
             imageUrl: 'assets/other/arrow.png',
             textItemName: "$other_redarrow$",
         },
         {
             id: 1,
+            description: 'arrow',
+            imageUrl: 'assets/other/arrow.png',
+            textItemName: "$other_arrow$",
+        },
+        {
+            id: 2,
+            description: 'card',
+            imageUrl: 'assets/other/card.png',
+            textItemName: "$other_card$",
+        },
+        {
+            id: 3,
+            description: 'tr',
+            imageUrl: 'assets/other/tr.png',
+            textItemName: "$other_tr$",
+        },
+        {
+            id: 4,
             description: 'ocean',
             imageUrl: 'assets/other/ocean.png',
             textItemName: "$other_ocean$",
+        },
+        {
+            id: 5,
+            description: 'oxygen',
+            imageUrl: 'assets/other/oxygen.png',
+            textItemName: "$other_oxygen$",
+        },
+        {
+            id: 6,
+            description: 'forest',
+            imageUrl: 'assets/other/forest.png',
+            textItemName: "$other_forest$",
+        },
+        {
+            id: 7,
+            description: 'temperature',
+            imageUrl: 'assets/other/temperature.png',
+            textItemName: "$other_temperature$",
         },
     ];
 

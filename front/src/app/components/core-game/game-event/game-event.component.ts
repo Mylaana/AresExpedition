@@ -506,7 +506,6 @@ export class GameEventComponent {
 
 		this.gameStateService.addCardToPlayerPlayed(this.clientPlayerId, card)
 		this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, card)
-		console.log(this.gameStateService.getPlayerStatePlayed(this.clientPlayerId))
 		this.playCardZone[playableCardListId].cardList = []
 	}
 
