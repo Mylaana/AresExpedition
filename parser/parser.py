@@ -122,6 +122,8 @@ def main():
                 skipped_header = True
                 map_csv_columns(row)
                 continue
+            if row[0] == '':
+                continue
 
             parsed.append(copy.deepcopy(parse_row(row)))
     
