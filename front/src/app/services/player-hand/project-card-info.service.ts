@@ -19,7 +19,8 @@ export class ProjectCardInfoService {
     getProjectCardIdList(): number[] {
         let cardList: number[] = []
         for(let card of this.projectCardInfo){
-            cardList.push(card.id)
+            //cardList.push(card.id)
+            cardList.push(25)
         }
         return cardList
     }

@@ -30,19 +30,20 @@ export class TextWithImageComponent implements OnInit{
   replaceImageTags(text: string): string {
     var splittedText = text.split("$")
     splittedText.forEach((value, index) => {
-      if(value.split("-")[0]==="tag"){
+      console.log(value)
+      if(value.split("_")[0]==="tag"){
         splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, this.tagImageService.getTagUrlFromTextTagName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
-      }else if(value.split("-")[0]==="ressource"){
-        let splittedValue = value.split("-")
+      }else if(value.split("_")[0]==="ressource"){
+        let splittedValue = value.split("_")
         if (splittedValue[1] != 'megacreditvoid') {
           splittedText[index] = this.htmlTag('img', {inputValue:value.replace(value, this.ressourceImageService.getRessourceUrlFromTextRessourceName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
         } else {
-          value = 'ressource-megacreditvoid'
+          value = 'ressource_megacreditvoid'
           var theImage = this.htmlTag('img',{inputValue:value.replace(value, this.ressourceImageService.getRessourceUrlFromTextRessourceName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
           var theText = this.htmlTag('p', {inputValue:splittedValue[2], inputClass:"megacredit-text"})
           splittedText[index] = this.htmlTag('div',{inputClass:"wrapper-meagacredit",inputValue: theImage + theText})
         }
-      }else if(value.split("-")[0]==="other"){
+      }else if(value.split("_")[0]==="other"){
         splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, this.otherImageService.getItemUrlFromTextItemName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
       }else if(value==='skipline'){
         splittedText[index] = `<br>`

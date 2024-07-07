@@ -16,13 +16,13 @@ export class GlobalItemInfoService {
             id: 0,
             description: 'arrow',
             imageUrl: 'assets/other/arrow.png',
-            textItemName: "$other-redarrow$",
+            textItemName: "$other_redarrow$",
         },
         {
             id: 1,
             description: 'ocean',
             imageUrl: 'assets/other/ocean.png',
-            textItemName: "$other-ocean$",
+            textItemName: "$other_ocean$",
         },
     ];
 
