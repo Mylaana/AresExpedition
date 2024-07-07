@@ -1,30 +1,35 @@
-type SummaryType = 'action' | 'trigger' | 'production' | 'greyProduction' | undefined
-type CardType = 'redProject' | 'greenProject' | 'blueProject'
-type PrerequisiteType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | 'heat' | 'tr'
-type PrerequisiteTresholdType = 'min' | 'max'
-
+import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType } from "../../types/project-card.type"
 
 export class ProjectCardModel {
     id!: number;
+    cardCode!: string;
+    origin!: string;
     cost!: number;
-    costMod?: number;
-    title!: string;
     tagsId!: number[];
-    tagsUrl?: string[];
     cardSummaryType?: SummaryType;
     cardType!: CardType;
     vpNumber?: string;
-    description?: string;
-    descriptionVp?: string;
-    descriptionSummary?: string;
-    descriptionEffect?: string;
-    descriptionPlayed?: string;
-    descriptionPrerequisite?: string;
-    descriptionPrerequisiteSummary?: string;
-    prerequisiteType?: PrerequisiteType;
-    prerequisiteTagId?: number;
     prerequisiteTresholdType?: PrerequisiteTresholdType;
+    prerequisiteType?: PrerequisiteType;
     prerequisiteTresholdValue?: number;
+    phaseUp?: string;
+    phaseDown?: string;
+    title!: string;
+    vpText?: string;
+    effectSummaryText?: string;
+    effectText?: string;
+    playedText?: string;
+    prerequisiteText?: string;
+    prerequisiteSummaryText?: string;
+    prerequisiteTagId?: number;
+
+    //not loaded from data
+
+    costMod?: number;
+    tagsUrl?: string[];
+
+    //delete
+    description?: string;
 }
 /**
 export class CardSelector {

@@ -24,7 +24,7 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 3;
+const handSizeStart: number = 100;
 const handSizeMaximum: number = 10;
 
 @Injectable({
