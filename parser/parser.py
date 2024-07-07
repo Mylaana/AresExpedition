@@ -14,6 +14,7 @@ parser_columns_map = [
     {'column_name': 'cost', 'column_id': -1 , 'output_field_name': 'cost', 'split_per_language': False},
     {'column_name': 'card_Type', 'column_id': -1 , 'output_field_name': 'cardType', 'split_per_language': False},
     {'column_name': 'tagsId', 'column_id': -1 , 'output_field_name': 'tagsId', 'split_per_language': False},
+    {'column_name': 'effectSummaryType', 'column_id': -1 , 'output_field_name': 'effectSummaryType', 'split_per_language': False},
     {'column_name': 'vpNumber', 'column_id': -1 , 'output_field_name': 'vpNumber', 'split_per_language': False},
     {'column_name': 'effectSummaryType', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'prerequisiteType', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
@@ -45,7 +46,7 @@ PARSER_CARD_INFO_MODEL = {
     "origin": "",
     "cost": 0,
     "tagsId": [],
-    "cardSummaryType": "",
+    "effectSummaryType": "",
     "cardType": "",
     "vpNumber": "",
     "prerequisiteTresholdType": "",
@@ -106,10 +107,12 @@ def parse_row(csv_row: str):
 
 
 def main():
-    input_path = os.path.join(os.path.dirname(__file__), 'Input/')
+    dir_name = os.path.dirname(__file__)
+    input_path = os.path.join(dir_name, 'Input/')
     input_name = 'card_list'
-    output_path = os.path.dirname(__file__)
+    output_path = os.path.join(os.path.abspath(os.path.join(dir_name, os.pardir)), 'front', 'src', 'assets', 'data')
     output_name = 'cards_data.json'
+    
     parsed = []
     with open(file=input_path + input_name + ".csv", mode="r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
@@ -121,7 +124,7 @@ def main():
                 continue
 
             parsed.append(copy.deepcopy(parse_row(row)))
-
+    
     with open(os.path.join(output_path, output_name), 'w') as f:
         json.dump(parsed, f, indent=4)
     

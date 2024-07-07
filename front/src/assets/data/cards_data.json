@@ -7,7 +7,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -52,7 +52,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -97,7 +97,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -143,7 +143,7 @@
             3,
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -188,7 +188,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -233,7 +233,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -278,7 +278,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -323,7 +323,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -368,7 +368,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -413,7 +413,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -458,7 +458,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -503,7 +503,7 @@
         "tagsId": [
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -548,7 +548,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -593,7 +593,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -638,7 +638,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -683,7 +683,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -728,7 +728,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -775,7 +775,7 @@
             9,
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -820,7 +820,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -865,7 +865,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -910,7 +910,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -956,7 +956,7 @@
             3,
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1002,7 +1002,7 @@
             1,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -1048,7 +1048,7 @@
             7,
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1093,7 +1093,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1139,7 +1139,7 @@
             3,
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1184,7 +1184,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1229,7 +1229,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1274,7 +1274,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1319,7 +1319,7 @@
         "tagsId": [
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1365,7 +1365,7 @@
             3,
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1411,7 +1411,7 @@
             1,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1456,7 +1456,7 @@
         "tagsId": [
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -1501,7 +1501,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -1547,7 +1547,7 @@
             2,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1592,7 +1592,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1637,7 +1637,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1682,7 +1682,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1727,7 +1727,7 @@
         "tagsId": [
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1773,7 +1773,7 @@
             3,
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -1818,7 +1818,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1863,7 +1863,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1908,7 +1908,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1955,7 +1955,7 @@
             1,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2000,7 +2000,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2046,7 +2046,7 @@
             3,
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2092,7 +2092,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "*",
         "prerequisiteTresholdType": "",
@@ -2137,7 +2137,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2182,7 +2182,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2228,7 +2228,7 @@
             3,
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2274,7 +2274,7 @@
             3,
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2319,7 +2319,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2364,7 +2364,7 @@
         "tagsId": [
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "*",
         "prerequisiteTresholdType": "",
@@ -2410,7 +2410,7 @@
             2,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2455,7 +2455,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2500,7 +2500,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2545,7 +2545,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2590,7 +2590,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2635,7 +2635,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2681,7 +2681,7 @@
             3,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -2727,7 +2727,7 @@
             9,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2772,7 +2772,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -2818,7 +2818,7 @@
             2,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2863,7 +2863,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2910,7 +2910,7 @@
             8,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2955,7 +2955,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -3001,7 +3001,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3046,7 +3046,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3092,7 +3092,7 @@
             5,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "-2",
         "prerequisiteTresholdType": "",
@@ -3138,7 +3138,7 @@
             5,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -3183,7 +3183,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3230,7 +3230,7 @@
             6,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3276,7 +3276,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -3322,7 +3322,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "-1",
         "prerequisiteTresholdType": "",
@@ -3367,7 +3367,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3413,7 +3413,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3459,7 +3459,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3505,7 +3505,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3550,7 +3550,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3597,7 +3597,7 @@
             5,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3644,7 +3644,7 @@
             5,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3691,7 +3691,7 @@
             5,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3737,7 +3737,7 @@
             3,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "-1",
         "prerequisiteTresholdType": "",
@@ -3783,7 +3783,7 @@
             5,
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3830,7 +3830,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3875,7 +3875,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -3922,7 +3922,7 @@
             5,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3967,7 +3967,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -4012,7 +4012,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4058,7 +4058,7 @@
             7,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -4104,7 +4104,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4149,7 +4149,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4195,7 +4195,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4241,7 +4241,7 @@
             7,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -4286,7 +4286,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4333,7 +4333,7 @@
             3,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4378,7 +4378,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4423,7 +4423,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4470,7 +4470,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -4517,7 +4517,7 @@
             6,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -4563,7 +4563,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -4608,7 +4608,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4654,7 +4654,7 @@
             1,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4700,7 +4700,7 @@
             9,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4745,7 +4745,7 @@
         "tagsId": [
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -4790,7 +4790,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4835,7 +4835,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -4880,7 +4880,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -4925,7 +4925,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -4971,7 +4971,7 @@
             2,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5016,7 +5016,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5061,7 +5061,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5107,7 +5107,7 @@
             2,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "*",
         "prerequisiteTresholdType": "",
@@ -5152,7 +5152,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5197,7 +5197,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5244,7 +5244,7 @@
             6,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -5290,7 +5290,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5336,7 +5336,7 @@
             2,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5381,7 +5381,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5426,7 +5426,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5471,7 +5471,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5518,7 +5518,7 @@
             2,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5563,7 +5563,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5608,7 +5608,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5653,7 +5653,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5699,7 +5699,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5745,7 +5745,7 @@
             3,
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5790,7 +5790,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5835,7 +5835,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "greyProduction",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5880,7 +5880,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5925,7 +5925,7 @@
         "tagsId": [
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -5971,7 +5971,7 @@
             1,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6016,7 +6016,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6061,7 +6061,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6106,7 +6106,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6152,7 +6152,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6199,7 +6199,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6245,7 +6245,7 @@
             2,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6290,7 +6290,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6336,7 +6336,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6382,7 +6382,7 @@
             2,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6427,7 +6427,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6473,7 +6473,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6518,7 +6518,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6563,7 +6563,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -6609,7 +6609,7 @@
             2,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6655,7 +6655,7 @@
             2,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6700,7 +6700,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6745,7 +6745,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6790,7 +6790,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6836,7 +6836,7 @@
             1,
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6881,7 +6881,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6928,7 +6928,7 @@
             2,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -6973,7 +6973,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7018,7 +7018,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7064,7 +7064,7 @@
             3,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7109,7 +7109,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7155,7 +7155,7 @@
             5,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7202,7 +7202,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7247,7 +7247,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7293,7 +7293,7 @@
             2,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7338,7 +7338,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7384,7 +7384,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7429,7 +7429,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7476,7 +7476,7 @@
             5,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7521,7 +7521,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7566,7 +7566,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7611,7 +7611,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7657,7 +7657,7 @@
             3,
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7703,7 +7703,7 @@
             7,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7748,7 +7748,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7794,7 +7794,7 @@
             1,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7839,7 +7839,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7885,7 +7885,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7931,7 +7931,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -7976,7 +7976,7 @@
         "tagsId": [
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8022,7 +8022,7 @@
             1,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8069,7 +8069,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8114,7 +8114,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8159,7 +8159,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8204,7 +8204,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8249,7 +8249,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "-1",
         "prerequisiteTresholdType": "",
@@ -8295,7 +8295,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8340,7 +8340,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8386,7 +8386,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8431,7 +8431,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8476,7 +8476,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8521,7 +8521,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8566,7 +8566,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8611,7 +8611,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8656,7 +8656,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8701,7 +8701,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8747,7 +8747,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8792,7 +8792,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8837,7 +8837,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8882,7 +8882,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8927,7 +8927,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -8972,7 +8972,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9017,7 +9017,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9062,7 +9062,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9107,7 +9107,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9153,7 +9153,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9198,7 +9198,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9245,7 +9245,7 @@
             2,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "greyProduction",
         "cardType": "greenProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -9290,7 +9290,7 @@
         "tagsId": [
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9336,7 +9336,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9381,7 +9381,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9426,7 +9426,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9471,7 +9471,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9517,7 +9517,7 @@
             2,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9562,7 +9562,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9607,7 +9607,7 @@
         "tagsId": [
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9652,7 +9652,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9698,7 +9698,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9744,7 +9744,7 @@
             2,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9790,7 +9790,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9835,7 +9835,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9880,7 +9880,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9925,7 +9925,7 @@
         "tagsId": [
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -9970,7 +9970,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10015,7 +10015,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10061,7 +10061,7 @@
             9,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10106,7 +10106,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10151,7 +10151,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10196,7 +10196,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10241,7 +10241,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10286,7 +10286,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10331,7 +10331,7 @@
         "tagsId": [
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10376,7 +10376,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10421,7 +10421,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10467,7 +10467,7 @@
             9,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10512,7 +10512,7 @@
         "tagsId": [
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10557,7 +10557,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10602,7 +10602,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10647,7 +10647,7 @@
         "tagsId": [
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10693,7 +10693,7 @@
             3,
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10738,7 +10738,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10784,7 +10784,7 @@
             3,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10830,7 +10830,7 @@
             3,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10876,7 +10876,7 @@
             2,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10921,7 +10921,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -10967,7 +10967,7 @@
             3,
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11012,7 +11012,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11059,7 +11059,7 @@
             7,
             6
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11105,7 +11105,7 @@
             3,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11151,7 +11151,7 @@
             9,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11197,7 +11197,7 @@
             2,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11242,7 +11242,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11289,7 +11289,7 @@
             6,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11334,7 +11334,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11380,7 +11380,7 @@
             "",
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11425,7 +11425,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11471,7 +11471,7 @@
             1,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11516,7 +11516,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11561,7 +11561,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11606,7 +11606,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11651,7 +11651,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11696,7 +11696,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11741,7 +11741,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11786,7 +11786,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "mixedProduction",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11832,7 +11832,7 @@
             2,
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11877,7 +11877,7 @@
         "tagsId": [
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11923,7 +11923,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -11968,7 +11968,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12014,7 +12014,7 @@
             3,
             2
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12060,7 +12060,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12106,7 +12106,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12151,7 +12151,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12196,7 +12196,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12241,7 +12241,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12287,7 +12287,7 @@
             1,
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12332,7 +12332,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12377,7 +12377,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12422,7 +12422,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12467,7 +12467,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12512,7 +12512,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12559,7 +12559,7 @@
             2,
             5
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12604,7 +12604,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12649,7 +12649,7 @@
         "tagsId": [
             8
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12695,7 +12695,7 @@
             1,
             4
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12740,7 +12740,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12785,7 +12785,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12832,7 +12832,7 @@
             6,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12879,7 +12879,7 @@
             4,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12924,7 +12924,7 @@
         "tagsId": [
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -12971,7 +12971,7 @@
             7,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13018,7 +13018,7 @@
             7,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13064,7 +13064,7 @@
             1,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13110,7 +13110,7 @@
             3,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13156,7 +13156,7 @@
             4,
             10
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13201,7 +13201,7 @@
         "tagsId": [
             1
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13246,7 +13246,7 @@
         "tagsId": [
             7
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13291,7 +13291,7 @@
         "tagsId": [
             ""
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13337,7 +13337,7 @@
             1,
             9
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -13382,7 +13382,7 @@
         "tagsId": [
             3
         ],
-        "cardSummaryType": "",
+        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
