@@ -4,37 +4,24 @@ import jsonData from '../../../assets/data/cards_data.json'
 import { json } from "stream/consumers";
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
 
-const language = 'en'
+const language = 'fr'
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProjectCardInfoService {
     projectCardInfo: ProjectCardModel[] = this.loadJson()
-    old = [
-        {
-            id: 0,
-            cardCode: "1",
-            origin: "base",
-            cost: 9,
-            title: 'Filter Feeders',
-            tagsId: [7],
-            cardSummaryType: "trigger",
-            cardType: "blueProject",
-            vpNumber: '*',
-            prerequisiteTresholdType: "min",
-            prerequisiteType: "ocean",
-            prerequisiteTresholdValue: 2,
-            prerequisiteText: "Requires 2 ocean tiles to be flipped.",
-            prerequisiteSummaryText: "2$other-ocean$",
-            vpText: "*=1VP per 3 animals on this card.",
-            effectText: "When you add any number of microbes to ANOTHER* card, add an animal to this card.",
-            effectSummaryText: "$ressource-microbe$*/$ressource-animal"
-        },
-    ]
 
     getCardById(cardId:number): ProjectCardModel | undefined {
         return this.projectCardInfo.find(x => x.id === cardId)
+    }
+
+    getProjectCardIdList(): number[] {
+        let cardList: number[] = []
+        for(let card of this.projectCardInfo){
+            cardList.push(card.id)
+        }
+        return cardList
     }
 
     getProjectCardList(cardIdList: number[]): ProjectCardModel[] {
@@ -82,7 +69,6 @@ export class ProjectCardInfoService {
 
             cardList.push(JSON.parse(JSON.stringify(card)))
         }
-        console.log(cardList)
         return cardList
     }
     convertTagList(input: any[]): number[] {

@@ -32,10 +32,7 @@ export class ServerEmulationComponent implements OnInit {
 
 
   ngOnInit(){
-    var cardsNumber = this.cardInfoService.getCardNumber()
-    for(let i=0; i< cardsNumber; i++){
-      this.cardsDeck.push(i)
-    }
+    this.cardsDeck = this.cardInfoService.getProjectCardIdList()
 
     this.gameStateService.addPlayer("joueur 1", "rgb(0, 0, 255)")
     this.gameStateService.addPlayer("joueur 2", "rgb(255, 0, 0)")
