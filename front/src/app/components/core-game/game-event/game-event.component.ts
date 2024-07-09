@@ -19,6 +19,7 @@ import { ButtonComponent } from '../../button/button.component';
 import { CardSelector, CardOptions } from '../../../interfaces/global.interface';
 import { PhaseFilter } from '../../../types/phase-card.type';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
+import { EventModel } from '../../../models/core-game/event.model';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 
@@ -61,6 +62,9 @@ export class GameEventComponent {
 	){}
 
   clientPlayerId!:number;
+  currentEvent: EventModel = new EventModel;
+  currentEventId: number = -1
+  eventCounter: number = -1
   currentPhase: NonSelectablePhase = "planification";
   cardSelector!: CardSelector;
   buttons: ChildButton[] = [];
@@ -86,13 +90,29 @@ export class GameEventComponent {
 		]
 	)
 	ngOnInit(): void {
-		this.resetCardSelector()
+		//this.resetCardSelector()
+		this.currentEvent.cardSelector = {
+				title: '',
+				buttonId: -1,
+				buttonName: '',
+				selectFrom: [],
+				selectedIdList: [],
+				selectionQuantity: 0,
+				selectionQuantityTreshold: 'equal',
+				phaseFilter: undefined,
+				cardOptions: undefined,
+			}
+			this.currentButtonSelectorId = -1
+
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.gameStateService.currentPhase.subscribe(
 			phase => this.updatePhase(phase)
 		)
 		this.gameStateService.currentDrawQueue.subscribe(
-			drawQueue => this.handleDrawQueueEvents(drawQueue)
+			drawQueue => this.handleDrawQueueNext(drawQueue)
+		)
+		this.gameStateService.currentEventQueue.subscribe(
+			eventQueue => this.handleEventQueueNext(eventQueue)
 		)
 
 		this.createButton('validateResearch', 'Validate', false)
@@ -125,7 +145,7 @@ export class GameEventComponent {
 	}
 
   updatePhase(phase:NonSelectablePhase):void{
-    this.resetCardSelector()
+    //this.resetCardSelector()
     this.currentPhase = phase
     switch(phase){
       case('development'):{
@@ -152,27 +172,64 @@ export class GameEventComponent {
   }
 
 	applyDevelopmentPhase(): void {
-		this.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand())
-		this.cardSelector.selectionQuantity = 0
-		this.cardSelector.selectionQuantityTreshold = 'min'
-		this.cardSelector.cardOptions = {initialState: 'default', playable: true}
-		this.cardSelector.buttonId = this.getButtonIdFromName('validateDevelopment')
-		this.cardSelector.phaseFilter = 'development'
-		this.cardSelector.playCardActive = false
+		let newEvent = new EventModel
+		newEvent.type = 'selectCardToBuild'
+		newEvent.cardSelector = {
+			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'min',
+			cardOptions: {initialState: 'default', playable: true},
+			buttonId: this.getButtonIdFromName('validateDevelopment'),
+			phaseFilter: 'development',
+			playCardActive: false,
+			title: 'Play Green cards :',
+			selectedIdList: [],
+			buttonName: 'validateDevelopment'
+		}
+
+		this.addEndOfPhaseEvent()
+		this.gameStateService.addEventQueue(newEvent)
 		this.resetPlayable()
   	}
 
 	applyConstructionPhase(): void {
-		this.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand())
-		this.cardSelector.selectionQuantity = 0
-		this.cardSelector.selectionQuantityTreshold = 'min'
-		this.cardSelector.cardOptions = {initialState: 'default', selectable: true, playable: true}
-		this.cardSelector.buttonId = this.getButtonIdFromName('validateConstruction')
-		this.cardSelector.phaseFilter = 'construction'
+		let newEvent = new EventModel
+		newEvent.type = 'selectCardToBuild'
+		newEvent.cardSelector = {
+			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'min',
+			cardOptions: {initialState: 'default', playable: true},
+			buttonId: this.getButtonIdFromName('validateConstruction'),
+			phaseFilter: 'construction',
+			playCardActive: false,
+			title: 'Play Blue/Red cards :',
+			selectedIdList: [],
+			buttonName: 'validateConstruction'
+		}
+		this.addEndOfPhaseEvent()
+		this.gameStateService.addEventQueue(newEvent)
 		this.resetPlayable()
 	}
 
 	applyActionPhase(): void {
+		let newEvent = new EventModel
+		newEvent.type = 'selectCardToActivate'
+		newEvent.cardSelector = {
+			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'min',
+			cardOptions: {initialState: 'activable', selectable: false, playable: false},
+			buttonId: this.getButtonIdFromName('validateAction'),
+			phaseFilter: 'action',
+			playCardActive: false,
+			title: 'Activate cards :',
+			selectedIdList: [],
+			buttonName: 'validateAction'
+		}
+		this.addEndOfPhaseEvent()
+		this.gameStateService.addEventQueue(newEvent)
+		this.resetPlayable()
 	}
 
 	/**
@@ -216,44 +273,105 @@ export class GameEventComponent {
 		this.gameStateService.addDrawQueue(draw)
 	}
 
-	handleDrawQueueEvents(drawQueue: DrawModel[]): void {
-		if(drawQueue.length===0){
-		return
+	addEndOfPhaseEvent(): void {
+		let newEvent = new EventModel
+		newEvent.type = 'forcedSell'
+		newEvent.cardSelector = {
+			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'min',
+			cardOptions: {initialState: 'default', selectable: true},
+			buttonId: this.getButtonIdFromName('sellCardsEndPhase'),
+			phaseFilter: 'action',
+			playCardActive: false,
+			title: ``,
+			selectedIdList: [],
+			buttonName: 'sellCardsEndPhase'
 		}
-		var callCleanAndNext: boolean = false;
+		this.gameStateService.addEventQueue(newEvent)
+	}
+
+	handleDrawQueueNext(drawQueue: DrawModel[]): void {
+		if(drawQueue.length===0){
+			return
+		}
+		let callCleanAndNext: boolean = false;
 
 		for(let element of drawQueue){
-		if(element.isFinalized===true){
+			if(element.isFinalized===true){
+				callCleanAndNext = true
+				continue
+			}
+			if(element.cardList.length===0){continue}
+
+			//elements found
+			element.isFinalized = true
 			callCleanAndNext = true
-			continue
-		}
-		if(element.cardList.length===0){continue}
 
-		//elements found
-		element.isFinalized = true
-		callCleanAndNext = true
-
-		//preventing bot players to draw
-		if(element.playerId!=0){continue}
-		if(element.drawRule==='draw'){
-			this.gameStateService.addCardToPlayerHand(element.playerId, element.cardList)
-		}
-		if(element.drawRule==='research'){
-			this.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(element.cardList)
-			this.cardSelector.selectionQuantity = 2
-			this.cardSelector.selectionQuantityTreshold = 'equal'
-			this.cardSelector.cardOptions = {initialState: 'default', selectable: true}
-			this.cardSelector.buttonId = this.getButtonIdFromName('validateResearch')
-			this.cardSelector.buttonName = 'validateResearch'
-		}
+			//preventing bot players to draw
+			if(element.playerId!=0){continue}
+			if(element.drawRule==='draw'){
+				this.gameStateService.addCardToPlayerHand(element.playerId, element.cardList)
+			}
+			if(element.drawRule==='research'){
+				this.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(element.cardList)
+				this.cardSelector.selectionQuantity = 2
+				this.cardSelector.selectionQuantityTreshold = 'equal'
+				this.cardSelector.cardOptions = {initialState: 'default', selectable: true}
+				this.cardSelector.buttonId = this.getButtonIdFromName('validateResearch')
+				this.cardSelector.buttonName = 'validateResearch'
+			}
 		};
 		if(callCleanAndNext===true){
 		this.gameStateService.cleanAndNextDrawQueue()
 		}
 	}
 
+	handleEventQueueNext(eventQueue: EventModel[]): void {
+		if(eventQueue.length===0){
+			return
+		}
+		if(eventQueue[0].isFinalized===true){
+			this.gameStateService.cleanAndNextDrawQueue()
+			return
+		}
+
+		//sets event id if undefined
+		if(eventQueue[0].eventId === undefined){
+			this.eventCounter++
+			eventQueue[0].eventId = this.eventCounter
+		}
+
+		let ticket = eventQueue[0]
+
+		if(this.currentEvent != ticket){
+			//saves current event status in event queue
+			for(let e of eventQueue){
+				if(e.eventId === this.currentEventId){
+					e = this.currentEvent
+					break
+				}
+			}
+		}
+
+		switch(ticket.type){
+			case('forcedSell'):{
+				let playerCards = this.gameStateService.getClientPlayerState().cards
+				if(playerCards.hand.length <= playerCards.maximum){break}
+				ticket.cardSelector.selectionQuantity = playerCards.hand.length - playerCards.maximum
+				ticket.cardSelector.title = `Too many cards in hand, please select at least ${ticket.cardSelector.selectionQuantity} cards to sell.`
+				break
+			}
+		}
+		
+		//sets current event to be the first event of the pile
+		this.currentEvent = ticket
+		console.log('Current event: ', ticket)
+		console.log('eventQueue: ',eventQueue)
+	}
+
 	public updateSelectedCardList(cardList: number[]){
-		this.cardSelector.selectedIdList = cardList
+		this.currentEvent.cardSelector.selectedIdList = cardList
 
 		if(String(this.cardSelector.buttonName)==='sellCardsEndPhase'){
 		this.updateButtonState(
@@ -269,29 +387,29 @@ export class GameEventComponent {
 		)
 		return
 		}
-		if(this.currentPhase==='development' || this.currentPhase==='construction'){
-		let zoneId: number =-1
-		switch(this.currentButtonSelectorId){
-			case(this.playCardZone[0].selectionButtonId):{
-				zoneId = 0
-				this.updateButtonState('selectFirstCard', false)
-				this.updateButtonState('buildFirstCard', true)
-				this.updateButtonState('cancelFirstCard', true)
-				break
+		if(this.currentEvent.type === 'selectCardToBuild'){
+			let zoneId: number =-1
+			switch(this.currentButtonSelectorId){
+				case(this.playCardZone[0].selectionButtonId):{
+					zoneId = 0
+					this.updateButtonState('selectFirstCard', false)
+					this.updateButtonState('buildFirstCard', true)
+					this.updateButtonState('cancelFirstCard', true)
+					break
+				}
+				case(this.playCardZone[1].selectionButtonId):{
+					zoneId = 1
+					this.updateButtonState('selectSecondCard', false)
+					this.updateButtonState('buildSecondCard', true)
+					this.updateButtonState('cancelSecondCard', true)
+					break
+				}
+				default:{
+					return
+				}
 			}
-			case(this.playCardZone[1].selectionButtonId):{
-				zoneId = 1
-				this.updateButtonState('selectSecondCard', false)
-				this.updateButtonState('buildSecondCard', true)
-				this.updateButtonState('cancelSecondCard', true)
-				break
-			}
-			default:{
-				return
-			}
-		}
-		this.selectPlayableCard(zoneId, this.cardSelector.selectedIdList[0])
-		this.cardSelector.playCardActive = false
+			this.selectPlayableCard(zoneId, this.currentEvent.cardSelector.selectedIdList[0])
+			this.cardSelector.playCardActive = false
 		}
 	}
 
@@ -320,11 +438,11 @@ export class GameEventComponent {
 			}
 			case('selectFirstCard'):
 			case('selectSecondCard'):{
-				this.cardSelector.playCardActive = true
-				this.cardSelector.cardOptions = {initialState: 'default', selectable: true, playable: true}
-				this.cardSelector.buttonName = clickedButtonName
+				this.currentEvent.cardSelector.playCardActive = true
+				this.currentEvent.cardSelector.cardOptions = {initialState: 'default', selectable: true, playable: true}
+				this.currentEvent.cardSelector.buttonName = clickedButtonName
 				this.currentButtonSelectorId = button.id
-				this.cardSelector.buttonId = button.id
+				this.currentEvent.cardSelector.buttonId = button.id
 				break
 			}
 			case('cancelFirstCard'):{
@@ -397,7 +515,7 @@ export class GameEventComponent {
 	}
 
 	checkCleanAndReady(): void {
-		this.resetCardSelector()
+		//this.resetCardSelector()
 		let clientCards = this.gameStateService.getClientPlayerState().cards
 		if(clientCards.hand.length > clientCards.maximum){
 		this.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(clientCards.hand)
@@ -466,20 +584,20 @@ export class GameEventComponent {
 		let newListId: number[] = []
 		let selectedCardIndex: number = 0
 
-		for(let i=0; i< this.cardSelector.selectFrom.length; i++){
-			if(this.cardSelector.selectFrom[i].id===playedCardId){
+		for(let i=0; i< this.currentEvent.cardSelector.selectFrom.length; i++){
+			if(this.currentEvent.cardSelector.selectFrom[i].id===playedCardId){
 				selectedCardIndex = i
 			} else {
-				newList.push(this.cardSelector.selectFrom[i])
-				newListId.push(this.cardSelector.selectFrom[i].id)
+				newList.push(this.currentEvent.cardSelector.selectFrom[i])
+				newListId.push(this.currentEvent.cardSelector.selectFrom[i].id)
 			}
 		}
 
-		this.playCardZone[playCardListId].cardList = this.cardSelector.selectFrom.splice(selectedCardIndex, 1)
+		this.playCardZone[playCardListId].cardList = this.currentEvent.cardSelector.selectFrom.splice(selectedCardIndex, 1)
 
 		//update card selector state
-		this.cardSelector.selectFrom = newList
-		this.cardSelector.cardOptions = {selectable: false}
+		this.currentEvent.cardSelector.selectFrom = newList
+		this.currentEvent.cardSelector.cardOptions = {selectable: false}
 	}
 
 	buildCard(playableCardListId: number): void {
@@ -513,7 +631,6 @@ export class GameEventComponent {
 		let buttonCancel: ButtonNames
 		let buttonSelect: ButtonNames
 		let buttonBuild: ButtonNames
-		let card: number[]
 
 		if(playableCardListId===0){
 			buttonBuild = 'buildFirstCard'
@@ -531,11 +648,11 @@ export class GameEventComponent {
 		this.updateButtonState(buttonCancel, false)
 
 		let newList: ProjectCardModel[] = []
-		for(let c of this.cardSelector.selectFrom){
+		for(let c of this.currentEvent.cardSelector.selectFrom){
 			newList.push(c)
 		}
 		newList.push(this.playCardZone[playableCardListId].cardList[0])
-		this.cardSelector.selectFrom = newList
+		this.currentEvent.cardSelector.selectFrom = newList
 
 		this.playCardZone[playableCardListId].cardList = []
 	}

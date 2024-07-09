@@ -6,4 +6,6 @@
 <app-server-emulation></app-server-emulation>
 <app-game-event></app-game-event>
 <h1>Cards in hand:</h1>
-<app-player-hand></app-player-hand>
+<app-project-card-list [cardList]="playerHand"></app-project-card-list>
+<h1>Cards Played:</h1>
+<app-project-card-list [cardList]="playerPlayed"></app-project-card-list>

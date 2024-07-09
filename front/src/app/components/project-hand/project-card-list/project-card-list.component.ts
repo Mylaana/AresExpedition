@@ -29,11 +29,8 @@ export class ProjectCardListComponent implements OnChanges{
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log('change detection:')
-		console.log(this.cardList)
 		if (changes['cardList'] && changes['cardList'].currentValue) {
-		this.resetCardList()
-
+			this.resetCardList()
 		}
 	}
 
@@ -44,30 +41,32 @@ export class ProjectCardListComponent implements OnChanges{
 
 		var result: ProjectCardModel[] = [];
 		cards.forEach(element => {
-		if((element.cardType === "greenProject" && filter === 'development')
-			|| (element.cardType != "greenProject" && filter === 'construction')){
-			result.push(element)
-		}
+			if((element.cardType === "greenProject" && filter === 'development')
+				|| (element.cardType != "greenProject" && filter === 'construction')
+				|| (element.cardSummaryType === 'action' && filter === 'action')
+			){
+				result.push(element)
+			}
 		});
 		return result
 	}
 
 	public cardStateChange(cardState: {cardId: number, state:CardState}): void {
 		switch(cardState.state){
-		case('selected'): {
-			this.selectedCardList.push(cardState.cardId)
-			break
-		};
-		default: {
-			//remove card from selected card list
-			for(let i=0; i<this.selectedCardList.length; i++){
-			if(this.selectedCardList[i]===cardState.cardId){
-				this.selectedCardList.splice(i, 1)
+			case('selected'): {
+				this.selectedCardList.push(cardState.cardId)
+				break
+			};
+			default: {
+				//remove card from selected card list
+				for(let i=0; i<this.selectedCardList.length; i++){
+				if(this.selectedCardList[i]===cardState.cardId){
+					this.selectedCardList.splice(i, 1)
+					break
+				}
+				}
 				break
 			}
-			}
-			break
-		}
 		}
 		this.updateSelectedCardList.emit(this.selectedCardList)
 	}

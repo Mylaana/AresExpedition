@@ -38,7 +38,7 @@ export class ProjectCardComponent implements OnInit, OnChanges {
     for(let i = 0; i < this.projectCard.tagsId.length; i++) {
       this.projectCard.tagsUrl.push(this.globalTagInfoService.getTagUrlFromID(this.projectCard.tagsId[i]))
     }
-
+  
     //loading options
     this.resetCardState()
   }
@@ -76,11 +76,20 @@ export class ProjectCardComponent implements OnInit, OnChanges {
       };
     }
     this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
+    console.log('card clicked: ',this.projectCard)
   }
 
   resetCardState(): void {
     if(this.options===undefined){this.options = {}}
     if(this.options.initialState===undefined){this.state='default'}else{this.state=this.options.initialState}
     if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=this.options.selectable}
+  }
+  
+  play(): void {
+		console.log('Played: ', this.projectCard.title)
+	}
+
+  activate(activationCount: number): void {
+    console.log('Activated: ', this.projectCard.title)
   }
 }

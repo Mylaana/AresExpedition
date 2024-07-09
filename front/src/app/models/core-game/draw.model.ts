@@ -1,7 +1,4 @@
 type DrawRule = 'draw' | 'research'
-type CardType = 'redProject' | 'greenProject' | 'blueProject'
-type PrerequisiteType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | 'heat' | 'tr'
-type PrerequisiteTresholdType = 'min' | 'max'
 
 /**
  * cardNumber should be the requested card number

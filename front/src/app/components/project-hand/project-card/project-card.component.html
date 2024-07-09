@@ -99,4 +99,7 @@
         <app-layout-card-background-hexagons></app-layout-card-background-hexagons>
     </div>
 </button>
-
+<div *ngIf="state==='activable'" class="wrapper-activation">
+    <button  (click)="activate(1)" class="validation-button">Activate</button>
+    <button  (click)="activate(2)" class="validation-button">Activate again</button>
+</div>

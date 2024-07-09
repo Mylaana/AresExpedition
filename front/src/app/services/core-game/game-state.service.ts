@@ -6,6 +6,7 @@ import { PlayerPhase } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
+import { EventModel } from "../../models/core-game/event.model";
 
 interface SelectedPhase {
     "development": boolean,
@@ -24,7 +25,7 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 33;
+const handSizeStart: number = 10;
 const handSizeMaximum: number = 10;
 
 @Injectable({
@@ -39,14 +40,14 @@ export class GameState{
     groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
     phase = new BehaviorSubject<NonSelectablePhase>("planification")
     drawQueue = new BehaviorSubject<DrawModel[]>([])
-
+    eventQueue = new BehaviorSubject<EventModel[]>([])
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
     currentGroupPlayerSelectedPhase = this.groupPlayerSelectedPhase.asObservable()
     currentPhase = this.phase.asObservable();
     currentDrawQueue = this.drawQueue.asObservable()
-
+    currentEventQueue = this.eventQueue.asObservable()
 
     phaseIndex: number = 0;
   
@@ -68,7 +69,7 @@ export class GameState{
 
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
-        var newPlayer = new PlayerStateModel;
+        let newPlayer = new PlayerStateModel;
         newPlayer.id = this.groupPlayerState.getValue().length;
         newPlayer.name = playerName;
         newPlayer.color = playerColor;
@@ -223,14 +224,14 @@ export class GameState{
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
 
         //creates and add player to groupPlayerReady
-        var newPlayerReady = new PlayerReadyModel;
+        let newPlayerReady = new PlayerReadyModel;
         newPlayerReady.id = newPlayer.id
         newPlayerReady.name = playerName;
         newPlayerReady.isReady = false
         this.groupPlayerReady.next(this.groupPlayerReady.getValue().concat(newPlayerReady))
 
         //creates and add player to groupPlayerSelectedPhase
-        var newPlayerPhase: PlayerPhase;
+        let newPlayerPhase: PlayerPhase;
         newPlayerPhase = {
             "playerId": newPlayer.id,
             "currentSelectedPhase": undefined,
@@ -265,9 +266,9 @@ export class GameState{
      * if no id specified, will set all players to not {playerReady}
      * */
     setPlayerReady(playerReady: boolean, playerId?: number){  
-        var ready = this.groupPlayerReady.getValue()
-        var loopStart: number;
-        var loopFinish: number;
+        let ready = this.groupPlayerReady.getValue()
+        let loopStart: number;
+        let loopFinish: number;
 
         if(playerId != undefined){
             loopStart = playerId
@@ -294,9 +295,9 @@ export class GameState{
      * if no id specified, will return if all players are ready or not
      * */
     getPlayerReady(playerId?: number): boolean {
-        var ready = this.groupPlayerReady.getValue()
-        var loopStart: number;
-        var loopFinish: number;
+        let ready = this.groupPlayerReady.getValue()
+        let loopStart: number;
+        let loopFinish: number;
 
         if(playerId != undefined){
             loopStart = playerId
@@ -314,7 +315,7 @@ export class GameState{
     };
 
     GoToNextPhaseIfPlayerReady(){
-        var newPhase = this.goToNextPhase(this.phase.getValue())
+        let newPhase = this.goToNextPhase(this.phase.getValue())
         this.updatePhase(newPhase)
     };
 
@@ -325,8 +326,8 @@ export class GameState{
      * triggers all phase change and cleaning related stuff
      */
     goToNextPhase(currentPhase:NonSelectablePhase):NonSelectablePhase{
-        var nextPhase: NonSelectablePhase;
-        var startCounting: number = Math.max(this.phaseIndex + 1, 1) //start looping at phase index +1 or 1
+        let nextPhase: NonSelectablePhase;
+        let startCounting: number = Math.max(this.phaseIndex + 1, 1) //start looping at phase index +1 or 1
 
 
 
@@ -463,23 +464,22 @@ export class GameState{
 
     getClientPlayerStateHand(): number[] {
         return this.getPlayerStateHand(this.clientPlayerId)
-        var playerState = this.getPlayerStateFromId(this.clientPlayerId)
-        if(playerState===undefined){
-            return []
-        }
-        return playerState.cards.hand
     }
 
     getPlayerStateHand(playerId: number): number[] {
-        var playerState = this.getPlayerStateFromId(playerId)
+        let playerState = this.getPlayerStateFromId(playerId)
         if(playerState===undefined){
             return []
         }
         return playerState.cards.hand
     }
 
+    getClientPlayerStatePlayed(): number[] {
+        return this.getPlayerStatePlayed(this.clientPlayerId)
+    }
+
     getPlayerStatePlayed(playerId: number): number[] {
-        var playerState = this.getPlayerStateFromId(playerId)
+        let playerState = this.getPlayerStateFromId(playerId)
         if(playerState===undefined){
             return []
         }
@@ -487,25 +487,25 @@ export class GameState{
     }
 
     updateClientPlayerStateHand(cardList: number[]): void {
-        var clientState = this.getClientPlayerState()
+        let clientState = this.getClientPlayerState()
         clientState.cards.hand = clientState.cards.hand.concat(cardList)
         this.updateClientPlayerState(clientState)
     }
 
     updatePlayerStateHand(playerId: number, newCardList: number[]): void {
-        var playerState = this.getPlayerStateFromId(playerId)
+        let playerState = this.getPlayerStateFromId(playerId)
         playerState.cards.hand = newCardList
         this.updatePlayerState(playerId, playerState)
     }
 
     updatePlayerStatePlayed(playerId: number, newCardList: number[]): void {
-        var playerState = this.getPlayerStateFromId(playerId)
+        let playerState = this.getPlayerStateFromId(playerId)
         playerState.cards.played = newCardList
         this.updatePlayerState(playerId, playerState)
     }
 
     addCardToPlayerHand(playerId: number, cardsToAdd: number[]):void{
-        var playerStateHand = this.getPlayerStateHand(playerId)
+        let playerStateHand = this.getPlayerStateHand(playerId)
         this.updatePlayerStateHand(playerId, playerStateHand.concat(cardsToAdd))
     }
 
@@ -516,7 +516,7 @@ export class GameState{
     }
 
     addCardToPlayerPlayed(playerId: number, cardsToAdd: number[]):void{
-        var playerStatePlayed = this.getPlayerStatePlayed(playerId)
+        let playerStatePlayed = this.getPlayerStatePlayed(playerId)
         this.updatePlayerStatePlayed(playerId, playerStatePlayed.concat(cardsToAdd))
     }
 
@@ -543,7 +543,7 @@ export class GameState{
      * emits a next signal for drawQueue.next()
      */
     cleanAndNextDrawQueue(): void{
-        var newDrawQueue: DrawModel[] = [];
+        let newDrawQueue: DrawModel[] = [];
         //clean draw queue
         for(let drawTicket of this.drawQueue.getValue()){
             if(drawTicket.isFinalized!=true){
@@ -551,5 +551,27 @@ export class GameState{
             }
         }
         this.drawQueue.next(newDrawQueue)
+    }
+
+    addEventQueue(event: EventModel): void {
+        let newQueue: EventModel[] = []
+        newQueue.push(event)
+        this.eventQueue.next(newQueue.concat(this.eventQueue.getValue()));
+    }
+
+    /**
+     * gets nothing
+     * returns nothing
+     * emits a next signal for eventQueue.next()
+     */
+    cleanAndNextEventQueue(): void{
+        let newEventQueue: EventModel[] = [];
+        //clean draw queue
+        for(let ticket of this.eventQueue.getValue()){
+            if(ticket.isFinalized!=true){
+                newEventQueue.push(ticket)
+            }
+        }
+        this.eventQueue.next(newEventQueue)
     }
 }
