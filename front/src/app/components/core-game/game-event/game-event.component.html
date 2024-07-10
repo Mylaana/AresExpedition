@@ -1,8 +1,9 @@
 <div class="wrapper-game-event">
     <p>current event :</p>
-    <p>{{ currentEvent }}</p>
+    <div *ngFor="let event of delete">
+        <p>{{ event.type }} {{ event.isFinalized }}</p>
+    </div>
     <h1>{{ currentPhase }}</h1>
-    <h2 *ngIf="currentEvent.cardSelector.playCardActive != undefined">Play card selection active : {{currentEvent.cardSelector.playCardActive}}</h2>
     <div *ngIf="currentPhase==='development' || currentPhase==='construction'" class="wrapper-play-card">
         <div class="play-card-zone play-card-one zone-one">
 			<div class="wrapper-select-button">
@@ -33,17 +34,17 @@
             </div>
         </div>
     </div>
-    <div *ngIf="currentEvent.cardSelector.selectionQuantity!=0 || currentPhase==='development' || currentPhase==='construction' || currentPhase==='action'" class="wrapper-card-selector">
-        <h2>{{cardSelector.title}}</h2>
+    <div *ngIf="currentEvent!=undefined || currentPhase==='development' || currentPhase==='construction' || currentPhase==='action'" class="wrapper-card-selector">
+        <h2 *ngIf="currentEvent!=undefined ">{{currentEvent.cardSelector.title}}</h2>
         <app-project-card-list [cardList]="currentEvent.cardSelector.selectFrom" [cardOptions]="currentEvent.cardSelector.cardOptions" [cardsPhaseFilter]="currentEvent.cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
     </div>
     <app-phase-planification *ngIf="currentPhase==='planification'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
     <app-phase-production *ngIf="currentPhase==='production'"></app-phase-production>
-    <app-phase-research *ngIf="currentPhase==='research'"></app-phase-research>
 	<ng-container *ngFor="let ph of phaseList">
 		<div *ngIf="currentPhase===ph" class="wrapper-validate-button">
 			<app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName(phaseButtons.get(ph))]"></app-button>
 		</div>
 	</ng-container>
+    <app-button *ngIf="currentEvent!=undefined" (childButtonClicked)="childButtonClicked($event)" [button]="currentEvent.cardSelector.buttonName"></app-button>
 </div>
 

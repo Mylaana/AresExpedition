@@ -25,7 +25,7 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 10;
+const handSizeStart: number = 8;
 const handSizeMaximum: number = 10;
 
 @Injectable({
@@ -553,10 +553,16 @@ export class GameState{
         this.drawQueue.next(newDrawQueue)
     }
 
-    addEventQueue(event: EventModel): void {
+    addEventQueue(event: EventModel, addOnTop?: boolean): void {
         let newQueue: EventModel[] = []
-        newQueue.push(event)
-        this.eventQueue.next(newQueue.concat(this.eventQueue.getValue()));
+        if(addOnTop===true){
+            newQueue.push(event)
+            this.eventQueue.next(newQueue.concat(this.eventQueue.getValue()));
+        } else {
+            newQueue = newQueue.concat(this.eventQueue.getValue())
+            newQueue.push(event)
+            this.eventQueue.next(newQueue);
+        }
     }
 
     /**

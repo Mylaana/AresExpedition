@@ -76,7 +76,6 @@ export class ProjectCardComponent implements OnInit, OnChanges {
       };
     }
     this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
-    console.log('card clicked: ',this.projectCard)
   }
 
   resetCardState(): void {
