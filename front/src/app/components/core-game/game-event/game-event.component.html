@@ -40,11 +40,8 @@
     </div>
     <app-phase-planification *ngIf="currentPhase==='planification'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
     <app-phase-production *ngIf="currentPhase==='production'"></app-phase-production>
-	<ng-container *ngFor="let ph of phaseList">
-		<div *ngIf="currentPhase===ph" class="wrapper-validate-button">
-			<app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName(phaseButtons.get(ph))]"></app-button>
-		</div>
-	</ng-container>
-    <app-button *ngIf="currentEvent!=undefined" (childButtonClicked)="childButtonClicked($event)" [button]="currentEvent.cardSelector.buttonName"></app-button>
+    <div class="wrapper-validate-button">
+        <app-button *ngIf="currentEvent.button!=undefined" (childButtonClicked)="childButtonClicked($event)" [button]="currentEvent.button"></app-button>
+    </div>
 </div>
 

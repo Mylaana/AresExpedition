@@ -106,15 +106,7 @@ export class GameEventComponent {
 			this.currentButtonSelectorId = -1
 
 		this.clientPlayerId = this.gameStateService.clientPlayerId
-		this.gameStateService.currentPhase.subscribe(
-			phase => this.updatePhase(phase)
-		)
-		this.gameStateService.currentDrawQueue.subscribe(
-			drawQueue => this.handleDrawQueueNext(drawQueue)
-		)
-		this.gameStateService.currentEventQueue.subscribe(
-			eventQueue => this.handleEventQueueNext(eventQueue)
-		)
+
 
 
 		this.createButton('validatePlanification', 'Select Phase', false)
@@ -145,33 +137,68 @@ export class GameEventComponent {
 			}
 			this.playCardZone.push(cardZone)
 		}
+
+		this.gameStateService.currentPhase.subscribe(
+			phase => this.updatePhase(phase)
+		)
+		this.gameStateService.currentDrawQueue.subscribe(
+			drawQueue => this.handleDrawQueueNext(drawQueue)
+		)
+		this.gameStateService.currentEventQueue.subscribe(
+			eventQueue => this.handleEventQueueNext(eventQueue)
+		)
 	}
 
   updatePhase(phase:NonSelectablePhase):void{
 	this.currentPhase = phase
     switch(phase){
-      case('development'):{
-        this.applyDevelopmentPhase()
-        break
-      }
-      case('construction'):{
-        this.applyConstructionPhase()
-        break
-      }
-      case('action'):{
-        this.applyActionPhase()
-        break
-      }
-      case('production'):{
-        this.applyProductionPhase(this.gameStateService.getClientPlayerState())
-        break
-      }
-      case('research'):{
-        this.applyResearchPhase(this.gameStateService.getClientPlayerState())
-        break
-      }
+		case('planification'):{
+			this.applyPlanificationPhase()
+			break
+		}
+		case('development'):{
+			this.applyDevelopmentPhase()
+			break
+		}
+		case('construction'):{
+			this.applyConstructionPhase()
+			break
+		}
+		case('action'):{
+			this.applyActionPhase()
+			break
+		}
+		case('production'):{
+			this.applyProductionPhase(this.gameStateService.getClientPlayerState())
+			break
+		}
+		case('research'):{
+			this.applyResearchPhase(this.gameStateService.getClientPlayerState())
+			break
+		}
     }
+
+	this.addHandSizeCheckEvent()
+	this.addEndOfPhaseEvent()
   }
+
+	applyPlanificationPhase(): void {
+		let newEvent = new EventModel
+		newEvent.type = 'planification'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'max',
+			buttonId: this.getButtonIdFromName('validatePlanification'),
+			playCardActive: false,
+			title: '',
+			selectedIdList: [],
+			buttonName: 'validatePlanification'
+		}
+		newEvent.button = this.buttons[this.getButtonIdFromName('validatePlanification')]
+
+		this.gameStateService.addEventQueue(newEvent)
+  	}
 
 	applyDevelopmentPhase(): void {
 		let newEvent = new EventModel
@@ -188,10 +215,9 @@ export class GameEventComponent {
 			selectedIdList: [],
 			buttonName: 'validateDevelopment'
 		}
+		newEvent.button = this.buttons[this.getButtonIdFromName('validateDevelopment')]
 
 		this.gameStateService.addEventQueue(newEvent)
-		this.addHandSizeCheckEvent()
-		this.addEndOfPhaseEvent()
 		this.resetPlayable()
   	}
 
@@ -210,9 +236,9 @@ export class GameEventComponent {
 			selectedIdList: [],
 			buttonName: 'validateConstruction'
 		}
+		newEvent.button = this.buttons[this.getButtonIdFromName('validateConstruction')]
+
 		this.gameStateService.addEventQueue(newEvent)
-		this.addHandSizeCheckEvent()
-		this.addEndOfPhaseEvent()
 		this.resetPlayable()
 	}
 
@@ -231,10 +257,9 @@ export class GameEventComponent {
 			selectedIdList: [],
 			buttonName: 'validateAction'
 		}
+		newEvent.button = this.buttons[this.getButtonIdFromName('validateAction')]
 
 		this.gameStateService.addEventQueue(newEvent)
-		this.addHandSizeCheckEvent()
-		this.addEndOfPhaseEvent()
 		this.resetPlayable()
 	}
 
@@ -269,6 +294,7 @@ export class GameEventComponent {
 		}
 
 		this.gameStateService.updateClientPlayerState(clientState)
+
 		let newEvent = new EventModel
 		newEvent.type = 'production'
 		newEvent.cardSelector = {
@@ -281,10 +307,9 @@ export class GameEventComponent {
 			selectedIdList: [],
 			buttonName: 'validateProduction'
 		}
+		newEvent.button = this.buttons[this.getButtonIdFromName('validateProduction')]
 
 		this.gameStateService.addEventQueue(newEvent)
-		this.addHandSizeCheckEvent()
-		this.addEndOfPhaseEvent()
 		this.resetPlayable()
 	}
 
@@ -310,6 +335,8 @@ export class GameEventComponent {
 			selectedIdList: [],
 			buttonName: 'sellCardsEndPhase'
 		}
+		newEvent.button = this.buttons[this.getButtonIdFromName('sellCardsEndPhase')]
+
 		this.gameStateService.addEventQueue(newEvent)
 	}
 	addEndOfPhaseEvent(): void {
@@ -355,10 +382,9 @@ export class GameEventComponent {
 					selectedIdList: [],
 					buttonName: 'validateResearch'
 				}
+				newEvent.button = this.buttons[this.getButtonIdFromName('validateResearch')]
 
 				this.gameStateService.addEventQueue(newEvent)
-				this.addHandSizeCheckEvent()
-				this.addEndOfPhaseEvent()
 			}
 		};
 		if(callCleanAndNext===true){
@@ -478,8 +504,9 @@ export class GameEventComponent {
 			case(undefined):{return}
 			
 			case('validatePlanification'):{
-				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
-				this.updateButtonState('validatePlanification',false)
+				this.updateButtonState('validatePlanification', false)
+				this.currentEvent.isFinalized = true
+				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}
 			case('validateResearch'):{
@@ -529,6 +556,7 @@ export class GameEventComponent {
 			case('validateDevelopment'):
 			case('validateConstruction'):
 			case('validateAction'):
+			case('validateProduction'):
 			{
 				this.currentEvent.isFinalized = true
 				this.gameStateService.cleanAndNextEventQueue()
@@ -544,10 +572,7 @@ export class GameEventComponent {
 	}
 
 	public phaseSelected(): void {
-		this.updateButtonState(
-		'validatePlanification',
-		true
-		)
+		this.updateButtonState('validatePlanification', true)
 	}
 
 	/**

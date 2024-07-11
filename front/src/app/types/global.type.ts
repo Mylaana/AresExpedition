@@ -5,4 +5,4 @@ export type SelectablePhase = undefined | "development" | "construction" | "acti
 export type NonSelectablePhase = "planification" | "development" | "construction" | "action" | "production" | "research"
 export type StandardState = 'default' | 'disabled'
 export type MinMaxEqualType = 'min' | 'max' | 'equal'
-export type EventType = 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' | 'production'
+export type EventType = 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' | 'production' | 'planification'

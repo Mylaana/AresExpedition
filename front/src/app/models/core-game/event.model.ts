@@ -1,5 +1,6 @@
 import { EventType } from "../../types/global.type";
 import { CardSelector } from "../../interfaces/global.interface";
+import { ChildButton } from "../../interfaces/global.interface";
 
 /**
  * cardNumber should be the requested card number
@@ -11,4 +12,5 @@ export class EventModel {
     cardSelector!: CardSelector
     isFinalized: boolean = false
     eventId?: number
+    button?: ChildButton
 }
