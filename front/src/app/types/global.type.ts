@@ -6,3 +6,9 @@ export type NonSelectablePhase = "planification" | "development" | "construction
 export type StandardState = 'default' | 'disabled'
 export type MinMaxEqualType = 'min' | 'max' | 'equal'
 export type EventType = 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' | 'production' | 'planification'
+export type ButtonNames =
+ 'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'
+| 'sellCardsEndPhase' | 'defaultValidate'
+| 'selectFirstCard' | 'cancelFirstCard' | 'buildFirstCard'
+| 'selectSecondCard' | 'cancelSecondCard' | 'buildSecondCard'
+| 'selectAlternative'

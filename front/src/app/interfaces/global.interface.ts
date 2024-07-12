@@ -4,6 +4,7 @@ import { CardState } from "../types/project-card.type";
 import { PhaseFilter } from "../types/phase-card.type";
 import { ProjectCardModel } from "../models/player-hand/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
+import { ButtonNames } from "../types/global.type";
 
 
 export interface RessourceState {
@@ -41,17 +42,23 @@ export interface ChildButton {
     caption?: string,
     value?: any,
     enabled: boolean
+    name?: ButtonNames
 }
 
 export interface CardSelector {
     title: string;
-    buttonId: number;
-    buttonName: any;
     selectFrom: ProjectCardModel[];
     selectedIdList: number[];
     selectionQuantity: number;
     selectionQuantityTreshold: MinMaxEqualType;
     phaseFilter?: PhaseFilter;
     cardOptions?: CardOptions;
-    playCardActive?: boolean;
+    playCardActive?: number;
+}
+
+export interface PlayableCardZone {
+	cardList: ProjectCardModel[],
+	selectionButtonId: number,
+	options?: CardOptions,
+	phaseFilter?: PhaseFilter,
 }
