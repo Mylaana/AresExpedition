@@ -58,7 +58,8 @@ export interface CardSelector {
 
 export interface PlayableCardZone {
 	cardList: ProjectCardModel[],
-	selectionButtonId: number,
-	options?: CardOptions,
+	selectionButtonId?: number,
+	cardOptions?: CardOptions,
 	phaseFilter?: PhaseFilter,
+    currentButton?: ChildButton
 }

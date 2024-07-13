@@ -91,8 +91,6 @@ export class GameEventComponent {
 
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 
-
-
 		this.createButton('validatePlanification', 'Select Phase', false)
 		this.createButton('validateDevelopment', 'End Development phase', true)
 		this.createButton('validateConstruction', 'End Constructuction phase', true)
@@ -184,18 +182,18 @@ export class GameEventComponent {
 			selectedIdList: [],
 		}
 		newEvent.button = this.buttons[this.getButtonIdFromName('validateDevelopment')]
+		newEvent.playCardZone = []
 
 		for(let i=0; i<2; i++){
 			let buttonId: number
 			if(i===0){buttonId=this.getButtonIdFromName('selectFirstCard')}else{buttonId=this.getButtonIdFromName('selectSecondCard')}
 			let cardZone: PlayableCardZone = {
 				cardList: [],
-				selectionButtonId: buttonId,
-				options: {selectable: false, initialState: 'default'},
+				cardOptions: {selectable: false, initialState: 'default'},
+				currentButton: undefined
 			}
-			this.currentEvent.playCardZone.push(cardZone)
+			newEvent.playCardZone.push(cardZone)
 		}
-
 		this.gameStateService.addEventQueue(newEvent)
 		this.resetPlayable()
   	}
@@ -214,7 +212,18 @@ export class GameEventComponent {
 			selectedIdList: [],
 		}
 		newEvent.button = this.buttons[this.getButtonIdFromName('validateConstruction')]
+		newEvent.playCardZone = []
 
+		for(let i=0; i<2; i++){
+			let buttonId: number
+			if(i===0){buttonId=this.getButtonIdFromName('selectFirstCard')}else{buttonId=this.getButtonIdFromName('selectSecondCard')}
+			let cardZone: PlayableCardZone = {
+				cardList: [],
+				cardOptions: {selectable: false, initialState: 'default'},
+				currentButton: undefined
+			}
+			newEvent.playCardZone.push(cardZone)
+		}
 		this.gameStateService.addEventQueue(newEvent)
 		this.resetPlayable()
 	}
@@ -360,7 +369,6 @@ export class GameEventComponent {
 	handleEventQueueNext(eventQueue: EventModel[]): void {
 		this.delete = eventQueue
 		if(eventQueue.length===0){
-			console.log(eventQueue[0])
 			this.currentEvent=eventQueue[0]
 			return
 		}
@@ -686,8 +694,6 @@ export class GameEventComponent {
 	}
 
 	resetPlayable():void{
-		this.currentEvent.playCardZone[0].cardList = []
-		this.currentEvent.playCardZone[1].cardList = []
 		this.updateButtonState('selectFirstCard', true)
 		this.updateButtonState('selectSecondCard', true)
 		this.updateButtonState('selectAlternative', true)

@@ -15,7 +15,7 @@
             <div class="wrapper-cancel-button">
 				<app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelFirstCard')]"></app-button>
 			</div>
-			<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[0].cardList" [cardOptions]="currentEvent.playCardZone[0].options" [cardsPhaseFilter]="currentEvent.playCardZone[0].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+			<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[0].cardList" [cardOptions]="currentEvent.playCardZone[0].cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[0].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
         </div>
         <div class="zone-two">
             <div class="play-card-zone play-card-two">
@@ -25,7 +25,7 @@
 				<div class="wrapper-cancel-button">
 					<app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelSecondCard')]"></app-button>
 				</div>
-				<app-project-card-list class="play-card-zone-list" [cardList]="playCardZone[1].card" [cardOptions]="currentEvent.playCardZone[1].cardSelector.cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[1].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+				<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[1].cardList" [cardOptions]="currentEvent.playCardZone[1].cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[1].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
 				<app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildSecondCard')]"></app-button>
             </div>
             <div class="wrapper-alternative">
