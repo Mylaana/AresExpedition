@@ -46,6 +46,14 @@ export class ServerEmulationComponent implements OnInit {
     this.gameStateService.currentDrawQueue.subscribe(
       drawQueue => this.handleDrawQueueRequest(drawQueue)
     )
+
+    //force draw card list for debug purpose
+    let forceDrawActive: boolean = true
+    let cardDrawList: number[] = [46, 217, 135]
+
+    if(forceDrawActive===true){
+      this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
+    }
   }
 
   phaseChanged(phase: Phase){

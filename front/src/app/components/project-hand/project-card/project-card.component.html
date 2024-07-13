@@ -2,18 +2,18 @@
     <div class="wrapper-card-grid">
         <div class="grid-box-cost">
             <div class="wrapper-cost">
-                <div class="wrapper-cost--image">
+                <div class="wrapper-cost-image">
                     <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
                 </div>
-                <div class="wrapper-cost--value">
+                <div class="wrapper-cost-value">
                     <p>{{projectCard.cost}}</p>
                 </div>
             </div>
             <div *ngIf="projectCard.costMod" class="wrapper-cost cost-mod">
-                <div class="wrapper-cost--image">
+                <div class="wrapper-cost-image">
                     <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
                 </div>
-                <div class="wrapper-cost--value">
+                <div class="wrapper-cost-value">
                     <p>{{projectCard.cost + projectCard.costMod}}</p>
                 </div>
             </div>
@@ -22,23 +22,20 @@
             <p>{{projectCard.title}}</p>
         </div>
         <div *ngIf="projectCard.prerequisiteText" class="grid-box-prerequisite wrapper-prerequisite">
-            <div class="prerequisite-summary" [ngClass]="projectCard.prerequisiteTresholdType">
+            <div class="prerequisite-summary-Text" [ngClass]="projectCard.prerequisiteTresholdType">
                 <app-text-with-image *ngIf="projectCard.prerequisiteSummaryText" [rawText]="projectCard.prerequisiteSummaryText"></app-text-with-image>
             </div>
-            <div class="prerequisite-description shadowed-text">
+            <div class="prerequisite-text shadowed-text">
                 <app-text-with-image *ngIf="projectCard.prerequisiteText" [rawText]="projectCard.prerequisiteText"></app-text-with-image>
             </div>
         </div>
         <div class="grid-box-main">
-            <div *ngIf="projectCard.playedText" class="wrapper-description-played shadowed-text">
+            <div *ngIf="projectCard.playedText" class="wrapper-played-text shadowed-text">
                 <app-text-with-image [rawText]="projectCard.playedText"></app-text-with-image>
             </div>
-            <div class="wrapper-description">
-                <app-text-with-image *ngIf="projectCard.description" [rawText]="projectCard.description"></app-text-with-image>
-            </div>
             <div *ngIf="projectCard.vpNumber" class="wrapper-vp">
-                <div *ngIf="projectCard.vpText" class="grid-box-description-vp shadowed-text">
-                    <p>{{projectCard.vpText}}</p>
+                <div *ngIf="projectCard.vpText" class="grid-box-vp-text shadowed-text">
+                    <app-text-with-image [rawText]="projectCard.vpText"></app-text-with-image>
                 </div>
                 <div class="grid-box-vp-icon">
                     <div class="wrapper-vp-icon">
@@ -53,20 +50,20 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="projectCard.cardSummaryType" class="grid-box-summary">
-            <div class="wrapper-summary-border">
-                <div class="summary-top-shape"></div>
-                <div class="summary-bottom-shape"></div>
-                <div class="wrapper-summary">
-                    <div class="summary-foreground-radial-white" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
-                    <div class="summary-background-radial-grid" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
-                    <div class="summary-background" 
-                        [ngClass]="{'summary-background-production': projectCard.cardSummaryType==='production',
-                                    'summary-background-action': projectCard.cardSummaryType==='action',
-                                    'summary-background-grey-production':projectCard.cardSummaryType==='greyProduction',
-                                    'summary-background-trigger':projectCard.cardSummaryType==='trigger'}">
+        <div *ngIf="projectCard.cardSummaryType" class="grid-box-effect">
+            <div class="wrapper-effect-summary-border">
+                <div class="effect-summary-top-shape"></div>
+                <div class="effect-summary-bottom-shape"></div>
+                <div class="wrapper-effect-summary">
+                    <div class="effect-summary-foreground-radial-white" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
+                    <div class="effect-summary-background-radial-grid" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
+                    <div class="effect-summary-background" 
+                        [ngClass]="{'effect-summary-background-production': projectCard.cardSummaryType==='production',
+                                    'effect-summary-background-action': projectCard.cardSummaryType==='action',
+                                    'effect-summary-background-grey-production':projectCard.cardSummaryType==='greyProduction',
+                                    'effect-summary-background-trigger':projectCard.cardSummaryType==='trigger'}">
                     </div>
-                    <div class="summary-description">
+                    <div class="effect-summary-text">
                         <app-text-with-image *ngIf="projectCard.effectSummaryText" [rawText]="projectCard.effectSummaryText"></app-text-with-image>
                     </div>
                 </div>

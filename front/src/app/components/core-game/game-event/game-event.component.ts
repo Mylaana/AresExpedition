@@ -416,9 +416,6 @@ export class GameEventComponent {
 				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
 			}
 		}
-		
-		//sets current event to be the first event of the pile
-		console.log('eventQueue: ', eventQueue)
 	}
 
 	public updateSelectedCardList(cardList: number[]){

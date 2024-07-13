@@ -32,8 +32,7 @@ $card-back-colors: (
 :host ::ng-deep p  {
     color: white;
 }
-:host ::ng-deep .grid-box-description-effect .text-tag,
-:host ::ng-deep .wrapper-description-played .text-tag {
+:host ::ng-deep app-text-with-image .text-tag{
     $tag-max-size: calc($card-width / 16);
     top: calc($tag-max-size / 4);
     max-width: $tag-max-size;
@@ -123,7 +122,7 @@ button {
         }
     }
 }
-.wrapper-cost--image {
+.wrapper-cost-image {
     z-index: 2;
     position: absolute;
     top: 0;
@@ -140,7 +139,7 @@ button {
         aspect-ratio: 1;
     }
 }
-.wrapper-cost--value {
+.wrapper-cost-value {
     z-index: 3;
     position: absolute;
     height: 100%;
@@ -212,7 +211,7 @@ button {
         font-size: small;
     }
 }
-.prerequisite-summary{
+.prerequisite-summary-Text{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -232,13 +231,13 @@ button {
         border: orangered 1.5px solid;
     }
 }
-:host ::ng-deep .prerequisite-summary .text-tag {
+:host ::ng-deep .prerequisite-summary-Text .text-tag {
     $tag-max-size: calc($card-width / 15);
     top: calc($tag-max-size / 4);
     width: $tag-max-size;
     height: $tag-max-size;
 }
-.prerequisite-description{
+.prerequisite-Text{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -255,7 +254,7 @@ button {
     grid-row-start: 2;
     grid-row-end: 5;
 }
-.grid-box-summary{
+.grid-box-effect{
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 5;
@@ -263,7 +262,7 @@ button {
     height: 100%;
     width: 100%;
 }
-.grid-box-description-vp{
+.grid-box-vp-text{
     display: flex;
     align-items: center;
     justify-content: right;
@@ -357,7 +356,7 @@ button {
 
     display: grid;
     grid-template-columns: 3fr 1fr;
-    & .grid-box-description-vp{
+    & .grid-box-vp-text{
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
@@ -512,7 +511,7 @@ button {
         }
     }
 }
-.wrapper-summary-border{
+.wrapper-effect-summary-border{
     position: relative;
     width: 100%;
     height: 100%;
@@ -550,7 +549,7 @@ button {
         calc($top-inside-width) calc(100% - $top-offset-height),
         0 calc(100% - $top-offset-height), 0 calc($top-left-angle + $top-offset-height));
 }
-.wrapper-summary{
+.wrapper-effect-summary{
     position: absolute;
     top: 0;
     left: 0;
@@ -592,7 +591,7 @@ button {
         0 $bottom-height,
         0 calc($top-left-angle + $top-offset-height));
 }
-.summary-top-shape{
+.effect-summary-top-shape{
     position: absolute;
     z-index: 5;
     top: 0;
@@ -630,7 +629,7 @@ button {
     0 calc($top-left-angle + $bottom-height),
     0 calc($top-left-angle + $top-offset-height));
 }
-.summary-bottom-shape{
+.effect-summary-bottom-shape{
     position: absolute;
     z-index: 5;
     top: 0%;
@@ -668,7 +667,7 @@ button {
         $top-inside-width  $bottom-inside-height,
         0 $bottom-inside-height);
 }
-.summary-background{
+.effect-summary-background{
     z-index: 2;
     position: relative;
     width: 100%;
@@ -676,7 +675,7 @@ button {
     
     background: rgba(100,100,100,.5);
 }
-.summary-background-production{
+.effect-summary-background-production{
     $color-one: $ares-red;
     $color-two: rgb(253, 157, 67);
     $step1: 2%;
@@ -686,11 +685,11 @@ button {
     background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
-.summary-background-grey-production{
+.effect-summary-background-grey-production{
     background: repeating-linear-gradient(135deg, rgb(184, 184, 184), rgb(184, 184, 184) 12%, rgb(66, 66, 66) 20%);
     background-size: 30px 20px;
 }
-.summary-background-radial-grid{
+.effect-summary-background-radial-grid{
     z-index: 1;
     position: absolute;
     
@@ -743,28 +742,28 @@ button {
         }
     }
 }
-.summary-background-action{
+.effect-summary-background-action{
     z-index: 1;
     position: absolute;
     top: 0;
     $back-color: map-get($dark-colors, "blue");
     background: linear-gradient(0deg, rgba($back-color,.5) 0%, $back-color 45%, $back-color 65%, rgba($back-color,.5) 100%);
 }
-.summary-background-trigger{
+.effect-summary-background-trigger{
     z-index: 1;
     position: absolute;
     top: 0;
     $back-color: map-get($dark-colors, "purple");
     background: linear-gradient(0deg, rgba($back-color,.5) 0%, $back-color 45%, $back-color 65%, rgba($back-color,.5) 100%);
 }
-.summary-foreground-radial-white{
+.effect-summary-foreground-radial-white{
     z-index: 3;
     position: relative;
     width: 100%;
     height: 100%;
     background: radial-gradient(ellipse 200% 80%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%,  rgba(255,255,255, .7) 55%, rgba(255,255,255,1) 100%);
 }
-.summary-description{
+.effect-summary-text{
     z-index: 3;
     position: absolute;
     top: 0;
@@ -773,12 +772,6 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-:host ::ng-deep .summary-description .text-tag {
-    $tag-max-size: calc($card-width / 16);
-    top: calc($tag-max-size / 4);
-    max-width: $tag-max-size;
-    max-height: $tag-max-size;
 }
 .wrapper-background-layout{
     z-index: -1;
