@@ -40,16 +40,21 @@ export class TextWithImageComponent implements OnInit{
           value = 'ressource_megacreditvoid'
           var theImage = this.htmlTag('img',{inputValue:value.replace(value, this.ressourceImageService.getRessourceUrlFromTextRessourceName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
           var theText = this.htmlTag('p', {inputValue:splittedValue[2], inputClass:"megacredit-text"})
-          splittedText[index] = this.htmlTag('div',{inputClass:"wrapper-meagacredit",inputValue: theImage + theText})
+          splittedText[index] = this.htmlTag('div',{inputClass:"wrapper-megacredit",inputValue: theImage + theText})
         }
       }else if(value.split("_")[0]==="other"){
         splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, this.otherImageService.getItemUrlFromTextItemName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
       }else if(value==='skipline'){
         splittedText[index] = `<br>`
-      }else{
+      }else if(value!=''){
         splittedText[index] = `<p>${value}</p>`
       }
     }); 
+    for(let i=splittedText.length; i<0; i--){
+      if(String(splittedText[i])===''){
+        splittedText.splice(i,1)
+      }
+    }
     return splittedText.join("")
   }
   htmlTag(tag:HtmlTag,  options:{inputValue?:string, imgAlt?:string, inputClass?:string}): string {
@@ -58,7 +63,6 @@ export class TextWithImageComponent implements OnInit{
     if(options.inputClass){
       resultClass = ` class="${options.inputClass}" `
     }
-    
     if(tag === 'img'){
       return `<${tag} ${resultClass} src=${options.inputValue} alt=${options.imgAlt}>`
     }

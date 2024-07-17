@@ -29,7 +29,6 @@ export class ProjectCardComponent implements OnInit, OnChanges {
 
   constructor(private globalTagInfoService: GlobalTagInfoService){}
 
-
   ngOnInit() {
     this.projectCard.tagsUrl = []
     

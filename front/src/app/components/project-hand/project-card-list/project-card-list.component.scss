@@ -1,9 +1,11 @@
+.wrapper-main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 .wrapper-list{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    width: 77%;
     gap: 2%;
-    width: 94%;
-    padding-left: 3%;
-    padding-right: 3%;
 }
