@@ -1,10 +1,11 @@
-import { SelectablePhase } from "../types/global.type";
+import { GlobalParameterColor, SelectablePhase } from "../types/global.type";
 import { PhaseCardType } from "../types/phase-card.type";
 import { CardState } from "../types/project-card.type";
 import { PhaseFilter } from "../types/phase-card.type";
 import { ProjectCardModel } from "../models/player-hand/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
 import { ButtonNames } from "../types/global.type";
+import { GlobalParameterName } from "../types/global.type";
 
 
 export interface RessourceState {
@@ -62,4 +63,12 @@ export interface PlayableCardZone {
 	cardOptions?: CardOptions,
 	phaseFilter?: PhaseFilter,
     currentButton?: ChildButton
+}
+
+export interface GlobalParameter {
+    name: GlobalParameterName,
+    value?: number,
+    addEndOfPhase?: number,
+    color?: GlobalParameterColor
+    imageUrl?: string,
 }

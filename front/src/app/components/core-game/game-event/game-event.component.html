@@ -1,9 +1,4 @@
 <div class="wrapper-game-event">
-    <p>current event :</p>
-    <div *ngFor="let event of delete">
-        <p>{{ event.type }} {{ event.isFinalized }}</p>
-    </div>
-    <h1>{{ currentPhase }}</h1>
     <div *ngIf="currentPhase==='development' || currentPhase==='construction'" class="wrapper-play-card">
         <div class="play-card-zone play-card-one zone-one">
 			<div class="wrapper-select-button">

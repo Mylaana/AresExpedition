@@ -11,6 +11,7 @@ import { ProjectCardListComponent } from './components/project-hand/project-card
 import { GameState } from './services/core-game/game-state.service';
 import { ProjectCardModel } from './models/player-hand/project-card.model';
 import { ProjectCardInfoService } from './services/player-hand/project-card-info.service';
+import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ import { ProjectCardInfoService } from './services/player-hand/project-card-info
     GameEventComponent,
     PlayerReadyPannelComponent,
     PlayerSelectedPhasePannelComponent,
-    ProjectCardListComponent
+    ProjectCardListComponent,
+    NavigationComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

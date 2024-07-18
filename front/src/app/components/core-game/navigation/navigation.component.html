@@ -1,0 +1,15 @@
+<nav>
+    <div class="top-pannel">
+        <div *ngFor="let param of globalParameters" class="global-parameter">
+            <img [src]="param.imageUrl" [alt]="param.name">
+            <div class="wrapper-parameter-text">
+                <p class="parameter-text">{{param.value}}</p>
+                <p *ngIf="param.addEndOfPhase" class="parameter-text-add"> (+{{param.addEndOfPhase}})</p>
+            </div>
+        </div>
+        <p>{{ currentPhase }}</p>
+    </div>
+    <div class="bottom-pannel">
+        <p>settings</p>
+    </div>
+</nav>

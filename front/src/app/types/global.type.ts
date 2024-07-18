@@ -12,3 +12,5 @@ export type ButtonNames =
 | 'selectFirstCard' | 'cancelFirstCard' | 'buildFirstCard'
 | 'selectSecondCard' | 'cancelSecondCard' | 'buildSecondCard'
 | 'selectAlternative'
+export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
+export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'

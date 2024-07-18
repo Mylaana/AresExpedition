@@ -1,3 +1,14 @@
+.wrapper-window{
+    display: flex;
+    flex-direction: row;
+}
+.wrapper-navigation{
+    display: block;
+    width: 15%;
+}
+.wrapper-main{
+    flex-grow: 1;
+}
 .wrapper-top-pannel{
     display: flex;
     justify-content: space-between;
