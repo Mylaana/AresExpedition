@@ -1,6 +1,7 @@
 img {
-    width: 100%;
-    aspect-ratio: 1/1;
+    max-width: 100%;
+    max-height: 100%;
+    
 }
 .ressource-card{
     border: black solid 1px;
@@ -18,6 +19,7 @@ img {
 .box-one {
     grid-template-columns: 1/2;
     grid-template-rows: 1/2;
+    height: 100%;
 }
 .box-two {
     grid-template-columns: 2/3;
@@ -39,6 +41,7 @@ img {
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 3;
+    height: 35px;
 }
 .box-ressource-mod{
     grid-column-start: 2;

@@ -7,6 +7,7 @@ export class PlayerStateModel {
     color!: RGB; 
     ressource!: RessourceState[];
     terraformingRating!: number;
+    vp!: number;
     tag!: TagState[];
     cards!: {
         "hand": number[],

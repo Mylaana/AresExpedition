@@ -3,6 +3,7 @@ import { RessourcePannelComponent } from '../ressource-pannel/ressource-pannel.c
 import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
+import { GlobalPannelComponent } from '../global-pannel/global-pannel.component';
 
 @Component({
   selector: 'app-player-pannel',
@@ -10,6 +11,7 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
   imports: [
     RessourcePannelComponent,
     TagPannelComponent,
+    GlobalPannelComponent
   ],
   templateUrl: './player-pannel.component.html',
   styleUrl: './player-pannel.component.scss'
@@ -19,7 +21,6 @@ export class PlayerPannelComponent implements OnInit{
 
   playerState!: PlayerStateModel;
   playerName!: string;
-  currentPlayersState!: {};
   
   constructor(private gameStateService: GameState){}
 

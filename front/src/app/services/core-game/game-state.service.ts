@@ -219,6 +219,7 @@ export class GameState{
         this.addDrawQueue(newPlayerDraw)
 
         newPlayer.terraformingRating = 5;
+        newPlayer.vp = newPlayer.terraformingRating
 
         //adds newplayer's state to  groupPlayerState
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
