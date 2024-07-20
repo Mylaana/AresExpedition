@@ -2,6 +2,34 @@ $ares-red: rgb(237, 53, 49);
 $ares-blue: rgb(39, 177, 229);
 $ares-green: rgb(42, 180, 92);
 $ares-purple: rgb(98, 70, 156);
+
+$card-height: 300px;
+$card-width: calc($card-height * 63 / 88);
+
+$colors: (
+  "red": $ares-red,
+  "blue": $ares-blue,
+  "green": $ares-green,
+  "purple": $ares-purple
+);
+$dark-colors: (
+    "red": darken($ares-red, 15%),
+    "blue": rgb(17, 114, 186),
+    "green": rgb(0, 113, 58),
+    "purple": darken($ares-purple, 15%)
+);
+$light-colors: (
+    "red": lighten($ares-red, 5%),
+    "blue": lighten($ares-blue, 5%),
+    "green": lighten($ares-green, 5%),
+    "purple": rgb(244, 172, 205)
+);
+$card-back-colors: (
+    "red": rgba(130, 30, 30, 1),
+    "blue": rgba(50, 100, 150, 1),
+    "green": rgba(10, 90, 40, 1)
+);
+
 * {
     padding:0;
     margin:0;
@@ -23,7 +51,6 @@ div {
 }
 p {
     font-size: 13px;
-    color: black;
 }
 .clickable{
     &:hover{
@@ -46,4 +73,16 @@ p {
     &:disabled{
         color: linen;
     }
+}
+.ares-background{
+    background: rgba(black, .2);
+}
+.ares-card{
+    background: rgba(black, .1);
+    & p {
+        color: white;
+    }
+}
+.ares-border{
+    border: 1px solid rgba(lightblue, .4);
 }

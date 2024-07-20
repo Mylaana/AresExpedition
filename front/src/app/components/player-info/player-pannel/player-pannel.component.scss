@@ -1,14 +1,16 @@
 .wrapper-player-pannel {
     display: flex;
-    height: auto;
-    padding: 10px;
-    background-color: lightgrey;
+    align-items: center;
+    height: 70px;
+    gap: 5px;
+    padding: 2px;
+    margin: 1px;
 }
 .wrapper-ressource-pannel {
     height: 100%;
-    width: 520px;
+    width: auto;
 }
 .wrapper-tag-pannel {
     height: 100%;
-    width: 420px;
+    width: auto;
 }

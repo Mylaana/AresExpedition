@@ -5,7 +5,6 @@ nav{
     height: 100vh;
     width: 100%;
 
-    background-color: grey;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -18,12 +17,11 @@ nav{
     height: 50%;
     max-height: 500px;
 }
-.global-parameter{
+.global-parameter-card{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border: black solid 1px;
     border-radius: 5px;
     padding: 3px;
     min-height: 20%;

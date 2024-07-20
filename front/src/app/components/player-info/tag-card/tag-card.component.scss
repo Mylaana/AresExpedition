@@ -3,17 +3,14 @@ img {
     aspect-ratio: 1/1;
 }
 .tag-card{
-    border: black solid 1px;
     border-radius: 5px;
 
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: 1fr 3fr;
 
-    height: 70px;
+    height: 100%;
     width: 35px;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 .box-one {
     grid-column-start: 1;
