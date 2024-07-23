@@ -4,11 +4,10 @@
     max-width: 100%;
     max-height: 100%;
 }
-:host ::ng-deep p {
-    display: inline-block;
+:host ::ng-deep * {
     vertical-align: top;
-    margin-right: 1px;
-    margin-left: 1px;
+    display: inline;
+    word-wrap: break-word;
 }
 :host ::ng-deep .wrapper-megacredit{
     position: relative;
@@ -34,7 +33,5 @@
     font-weight: bold;
 }
 :host ::ng-deep .text-tag {
-    position: relative;
-    display: inline-block;
     object-fit: scale-down;
 }
