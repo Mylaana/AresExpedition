@@ -51,6 +51,10 @@ div {
 }
 p {
     font-size: 13px;
+    &.text-cost-mod.center{
+        color: black;
+        font-weight: bold;
+    }
 }
 .clickable{
     &:hover{
@@ -78,11 +82,42 @@ p {
     background: rgba(black, .2);
 }
 .ares-card{
-    background: rgba(black, .1);
+    background: rgba(black, .5);
+    border-radius: 5px;
     & p {
         color: white;
     }
 }
 .ares-border{
-    border: 1px solid rgba(lightblue, .4);
+    border: 2px solid rgba(lightblue, .4);
+}
+.background-production{
+    $color-one: $ares-red;
+    $color-two: rgb(253, 157, 67);
+    $step1: 2%;
+    $step2: 4%;
+    $step3: 6%;
+    background: repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+}
+.background-production-grey{
+    $color-one: rgb(66, 66, 66);
+    $color-two: rgb(184, 184, 184);
+    $step1: 0%;
+    $step2: 4%;
+    $step3: 6%;
+    background: repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+}
+.background-production-blue{
+    $color-one: rgb(66, 66, 66);
+    $color-two: $ares-blue;
+    $step1: 2%;
+    $step2: 4%;
+    $step3: 6%;
+    background: repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }

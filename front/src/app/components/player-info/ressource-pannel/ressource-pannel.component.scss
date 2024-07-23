@@ -1,8 +1,11 @@
 .ressource-pannel {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
 
     width: auto;
+    height: 100%;
+}
+app-ressource-card{
     height: 100%;
 }

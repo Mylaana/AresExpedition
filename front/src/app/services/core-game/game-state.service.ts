@@ -25,7 +25,7 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 33;
+const handSizeStart: number = 10;
 const handSizeMaximum: number = 10;
 
 @Injectable({
@@ -78,7 +78,7 @@ export class GameState{
                 "id":0,
                 "name": "megacredit",
                 "valueMod": 0,
-                "valueProd": 5,
+                "valueProd": 99,
                 "valueStock": 0,
                 "hasStock": true,
                 "imageUrlId": 9,
@@ -87,8 +87,8 @@ export class GameState{
                 "id":1,
                 "name": "heat",
                 "valueMod": 0,
-                "valueProd": 2,
-                "valueStock": 0,
+                "valueProd": 99,
+                "valueStock": 250,
                 "hasStock": true,
                 "imageUrlId": 7,
             },
@@ -96,7 +96,7 @@ export class GameState{
                 "id":2,
                 "name": "plant",
                 "valueMod": 0,
-                "valueProd": 3,
+                "valueProd": 120,
                 "valueStock": 0,
                 "hasStock": true,
                 "imageUrlId": 4,

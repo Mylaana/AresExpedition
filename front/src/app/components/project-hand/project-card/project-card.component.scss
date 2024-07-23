@@ -212,6 +212,19 @@ button {
     flex-direction: column;
     justify-content: space-between;
 }
+.wrapper-played{
+    display: flex;
+    flex-direction: row;
+}
+.played-icon{
+    height: calc($card-height * .06);
+    border: 1px gold solid;
+    border-radius: 25%;
+    background: rgba(0, 0, 0, .5);
+    & img{
+        height: 100%;
+    }
+}
 .grid-box-prerequisite{
     grid-column-start: 2;
     grid-column-end: 6;
@@ -691,8 +704,14 @@ button {
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
 .effect-summary-background-grey-production{
-    background: repeating-linear-gradient(135deg, rgb(184, 184, 184), rgb(184, 184, 184) 12%, rgb(66, 66, 66) 20%);
-    background-size: 30px 20px;
+    $color-one: rgb(66, 66, 66);
+    $color-two: rgb(184, 184, 184);
+    $step1: 0%;
+    $step2: 4%;
+    $step3: 6%;
+    background: repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
 .effect-summary-background-radial-grid{
     z-index: 1;

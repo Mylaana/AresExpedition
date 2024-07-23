@@ -1,16 +1,21 @@
 .wrapper-player-pannel {
     display: flex;
     align-items: center;
-    height: 70px;
+    height: 45px;
     gap: 5px;
     padding: 2px;
     margin: 1px;
+    width: 100%;
 }
-.wrapper-ressource-pannel {
+app-global-pannel, app-ressource-pannel, app-tag-pannel{
     height: 100%;
     width: auto;
 }
-.wrapper-tag-pannel {
+.wrapper-tag-pannel, .wrapper-ressource-pannel{
     height: 100%;
     width: auto;
+}
+.wrapper-global-pannel, app-global-pannel{
+    height: 100%;
+    flex-grow: 1;
 }

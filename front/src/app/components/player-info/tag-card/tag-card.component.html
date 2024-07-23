@@ -1,6 +1,6 @@
-<div class="tag-card ares-card">
-    <div class="box-one wrapper-tag">
-        <div class="box-tag-icon">
+<div class="tag-card">
+    <div class="wrapper-tag box-one">
+        <div class="wrapper-tag-icon">
             <img [ngClass]="{'grey-tag': tagState.valueCount===0}" [src]="imageUrl" [alt]="tagState.name">
         </div>
         <div *ngIf="tagState.valueMod" class="box-tag-mod">
@@ -10,10 +10,9 @@
             <div class="box-tag-mod-value">
                 <p class="center">{{tagState.valueMod}}</p>
             </div>
-
         </div>
     </div>
-    <div class="box-two">
+    <div class="wrapper-tag-text">
         <p class="center">{{tagState.valueCount}}</p>
     </div>
 </div>

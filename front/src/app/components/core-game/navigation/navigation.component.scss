@@ -1,8 +1,8 @@
 nav{
-    position: sticky;
+    z-index: 10;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: 100%;
 
     display: flex;
@@ -11,22 +11,27 @@ nav{
     align-items: center;
 }
 .top-pannel{
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     height: 50%;
     max-height: 500px;
+    width: 100%;
 }
 .global-parameter-card{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     border-radius: 5px;
-    padding: 3px;
-    min-height: 20%;
+    max-height: 18%;
+    width: 100%;
+    left: 0;
     & img{
-        width: 80%;
+        max-width: 80%;
+        max-height: 50%;
     }
 }
 .wrapper-parameter-text{
@@ -44,4 +49,11 @@ nav{
 }
 p{
     font-size:10px;
+}
+.wrapper-phase{
+    inline-size: 100%;
+    overflow-wrap: break-word;
+    & p {
+        font-size: 15px;
+    }
 }
