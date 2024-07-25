@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
-import { PhaseDevelopmentComponent } from '../../phases/phase-development/phase-development.component';
-import { PhaseConstructionComponent } from '../../phases/phase-construction/phase-construction.component';
 import { PhaseActionComponent } from '../../phases/phase-action/phase-action.component';
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
@@ -16,7 +14,6 @@ import { ProjectCardInfoService } from '../../../services/player-hand/project-ca
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
 import { ChildButton } from '../../../interfaces/global.interface';
 import { ButtonComponent } from '../../button/button.component';
-import { CardSelector, CardOptions } from '../../../interfaces/global.interface';
 import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
 import { EventModel } from '../../../models/core-game/event.model';
 import { ButtonNames } from '../../../types/global.type';
@@ -30,8 +27,6 @@ import { PlayableCardZone } from '../../../interfaces/global.interface';
   imports: [
     CommonModule,
     PhasePlanificationComponent,
-    PhaseDevelopmentComponent,
-    PhaseConstructionComponent,
     PhaseActionComponent,
     PhaseProductionComponent,
     PhaseResearchComponent,

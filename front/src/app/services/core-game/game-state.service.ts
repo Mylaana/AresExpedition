@@ -25,15 +25,17 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 0;
+const handSizeStart: number = 56;
 const handSizeMaximum: number = 10;
 
 @Injectable({
     providedIn: 'root'
 })
 export class GameState{
+    loading = new BehaviorSubject<boolean>(true);
+
     clientPlayerId = 0; //should be changed to reflect the client's player's id
-    playerCount: number = 0;
+    playerCount = new BehaviorSubject<number[]>([]);
 
     groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
@@ -48,6 +50,8 @@ export class GameState{
     currentPhase = this.phase.asObservable();
     currentDrawQueue = this.drawQueue.asObservable()
     currentEventQueue = this.eventQueue.asObservable()
+    currentPlayerCount = this.playerCount.asObservable()
+    currentLoadingState = this.loading.asObservable()
 
     phaseIndex: number = 0;
   
@@ -240,10 +244,11 @@ export class GameState{
             "previousSelectedPhase": undefined
         }
         this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
-
-        //updates player count
-        this.playerCount++
     };
+
+    setPlayerIdList(playerIdList: number[]):void{
+        this.playerCount.next(playerIdList)
+    }
 
     /**
      * 
@@ -276,7 +281,7 @@ export class GameState{
             loopFinish = playerId
         } else {
             loopStart = 0
-            loopFinish = this.playerCount - 1
+            loopFinish = this.playerCount.getValue().length - 1
         }
         for(let i=loopStart; i<=loopFinish; i++){
             ready[i].isReady = playerReady
@@ -305,7 +310,7 @@ export class GameState{
             loopFinish = playerId
         } else {
             loopStart = 0
-            loopFinish = this.playerCount - 1
+            loopFinish = this.playerCount.getValue().length - 1
         }
         for(let i=loopStart; i<=loopFinish; i++){
             if(ready[i].isReady === false){

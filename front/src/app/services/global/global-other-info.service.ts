@@ -66,6 +66,12 @@ export class GlobalItemInfoService {
             imageUrl: 'assets/other/infrastructure.png',
             textItemName: "$other_infrastructure$",
         },
+        {
+            id: 9,
+            description: 'objective',
+            imageUrl: 'assets/other/objective.png',
+            textItemName: "$other_objective$",
+        },
     ];
 
     getItemUrlFromTextItemName(itemName:string): string {

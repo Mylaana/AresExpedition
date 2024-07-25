@@ -1,4 +1,4 @@
-.wrapper-window{
+.wrapper-app{
     position: relative;
     top: 0;
     left: 0;
@@ -16,14 +16,31 @@
 }
 .wrapper-main{
     flex-grow: 1;
-    margin-top: 9vh;
+    padding-top: 7vh;
     margin-left: 8vh;
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    top: 0;
+}
+.wrapper-other{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .wrapper-top-pannel{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    flex-direction: column;
+    width: 78%;
+    left: 5vh;
+    border: red 1px solid;
+}
+.wrapper-other-player{
+    display: flex;
+    flex-direction: column;
 }
 .background{
     position: fixed;
@@ -36,7 +53,12 @@
 }
 app-self-info{
     z-index: 10;
-    width: 75%;
     position: fixed;
     top: 0;
+}
+.wrapper-hand{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerReadyPannelComponent } from '../../player-info/player-ready-pannel/player-ready-pannel.component';
@@ -18,7 +18,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
   templateUrl: './server-emulation.component.html',
   styleUrl: './server-emulation.component.scss'
 })
-export class ServerEmulationComponent implements OnInit {
+export class ServerEmulationComponent implements OnInit, AfterViewInit {
   debug: boolean = false;
   currentGroupPlayerState!: {};
   currentPhase: string = "planification";
@@ -36,6 +36,8 @@ export class ServerEmulationComponent implements OnInit {
 
     this.gameStateService.addPlayer("joueur 1", "rgb(0, 0, 255)")
     this.gameStateService.addPlayer("joueur 2", "rgb(255, 0, 0)")
+    this.gameStateService.addPlayer("joueur 3", "rgb(0, 255, 0)")
+    this.gameStateService.addPlayer("joueur 4", "rgb(255, 255, 255)")
 
     this.gameStateService.currentPhase.subscribe(
       phase => this.phaseChanged(phase)
@@ -46,11 +48,15 @@ export class ServerEmulationComponent implements OnInit {
     this.gameStateService.currentDrawQueue.subscribe(
       drawQueue => this.handleDrawQueueRequest(drawQueue)
     )
-
+    return
     //force draw card list for debug purpose
     let cardDrawList: number[] = [37, 217, 135, 65, 92]
 
     this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)    
+  }
+
+  ngAfterViewInit(): void {
+    this.gameStateService.setPlayerIdList([0,1,2,3])
   }
 
   phaseChanged(phase: Phase){
