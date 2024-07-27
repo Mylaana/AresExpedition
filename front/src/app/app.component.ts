@@ -70,7 +70,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   updatePlayerList(playerIdList: number[]){
     this.playerIdList = playerIdList
-    console.log('playerIDList : ' , this.playerIdList)
   }
 
   loadingFinished(loading: boolean):void{
