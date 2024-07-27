@@ -1,6 +1,10 @@
 <h2>Select a phase card:</h2>
 <div class="wrapper-phase-card">
     <div class="wrapper-button" *ngFor="let phase of phaseList">
-        <button  [ngClass]="phase.cssClass" class="phase-card clickable" (click)="selectPhase(phase.name)">{{phase.caption}}</button>
+        <button  [ngClass]="phase.cssClass" class="phase-card clickable" (click)="selectPhase(phase.name)">
+            <img class="phase-image" src="/assets/other/phase_{{phase.name}}.png" alt="">
+        </button>
+
     </div>
+
 </div>

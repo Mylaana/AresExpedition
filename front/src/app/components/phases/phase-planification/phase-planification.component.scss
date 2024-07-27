@@ -7,19 +7,17 @@ $colors: (
 );
 .wrapper-phase-card{
     display: flex;
-    border: 1px red solid;
+    gap: 1vw;
 }
 .phase-card{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1%;
-    border-radius: 20px;
-    border: black 1px solid;
-    min-width: 10%;
-    @each $phase-name, $color-value in $colors {
-        &.phase-#{$phase-name} {
-            background: $color-value;
-        }
-    }
+    width: 6vw;
+    background-color: transparent;
+    border: 0;
+}
+.phase-image{
+    max-height: 100%;
+    max-width: 100%;
 }

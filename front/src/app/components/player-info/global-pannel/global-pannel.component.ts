@@ -11,4 +11,5 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
 export class GlobalPannelComponent{
   @Input() playerId!: number;
   @Input() playerState!: PlayerStateModel
+  @Input() playerIsReady!: boolean
 }

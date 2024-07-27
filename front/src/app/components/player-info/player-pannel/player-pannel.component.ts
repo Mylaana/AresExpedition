@@ -4,6 +4,7 @@ import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { GlobalPannelComponent } from '../global-pannel/global-pannel.component';
+import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
 
 @Component({
   selector: 'app-player-pannel',
@@ -20,6 +21,7 @@ export class PlayerPannelComponent implements OnInit{
   @Input() playerId!: number;
 
   playerState!: PlayerStateModel;
+  playerIsReady!: boolean;
   playerName!: string;
   
   constructor(private gameStateService: GameState){}
@@ -27,6 +29,9 @@ export class PlayerPannelComponent implements OnInit{
   ngOnInit(){
     this.gameStateService.currentGroupPlayerState.subscribe(
       playersState => this.updatePlayerState()
+    )
+    this.gameStateService.currentGroupPlayerReady.subscribe(
+      playersReady => this.updatePlayerReady()
     )
     this.updatePlayerState()
   }
@@ -40,5 +45,8 @@ export class PlayerPannelComponent implements OnInit{
       this.playerState = checkPlayerState
       this.playerName = checkPlayerState.name
     }
+  }
+  updatePlayerReady() : void {
+    this.playerIsReady = this.gameStateService.getPlayerReady(this.playerId)
   }
 }

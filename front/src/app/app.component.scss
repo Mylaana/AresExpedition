@@ -30,15 +30,16 @@
     align-items: center;
 }
 .wrapper-top-pannel{
+    $player-pannel-width: 70vw;
     display: flex;
     justify-content: space-between;
     align-items: left;
     flex-direction: column;
-    width: 78vw;
+    width: $player-pannel-width;
     left: 5vw;
     padding-top: 7.5vh;
     app-self-info{
-        width: 78vw;
+        width: $player-pannel-width;
     }
 }
 .wrapper-other-player{

@@ -48,6 +48,9 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.gameStateService.currentDrawQueue.subscribe(
       drawQueue => this.handleDrawQueueRequest(drawQueue)
     )
+    this.gameStateService.currentLoadingState.subscribe(
+      loading => this.loadingFinished(loading)
+    )
     return
     //force draw card list for debug purpose
     let cardDrawList: number[] = [37, 217, 135, 65, 92]
@@ -60,17 +63,25 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   }
 
   phaseChanged(phase: Phase){
+    if(this.gameStateService.loading.getValue()===true){return}
     this.currentPhase = phase
-    if(phase==="planification"){
-      let phaseList = ["development","construction","action","production","research"]
-      let randomPhase = phaseList[Math.floor(Math.random() * 5)]
-      this.gameStateService.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
-    }
-    this.gameStateService.setPlayerReady(true, 1)
+
+    this.botReady()
   }
 
   botReady(){
-    this.gameStateService.setPlayerReady(true, 1)
+    for(let index of this.gameStateService.playerCount.getValue()){
+      if(index===this.gameStateService.clientPlayerId){continue}
+      if(this.currentPhase==="planification"){
+        let phaseList = ["development","construction","action","production","research"]
+        let randomPhase = phaseList[Math.floor(Math.random() * 5)]
+        this.gameStateService.playerSelectPhase(index, randomPhase as keyof SelectablePhase)
+      }
+
+      //random timeout before bot becomes rdy
+      let randomInt = Math.floor(Math.random() * 3) * 1000
+      setTimeout(() => {this.gameStateService.setPlayerReady(true, index)}, randomInt)
+    }
   }
 
   updatePhase(newPhase:Phase): void {
@@ -127,5 +138,9 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
       this.cardsDeck.splice(index, 1)
     }
     return resultList
+  }
+  loadingFinished(loading: boolean):void{
+    if(loading===true){return}
+    this.botReady()
   }
 }
