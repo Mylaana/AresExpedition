@@ -5,6 +5,8 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { GlobalPannelComponent } from '../global-pannel/global-pannel.component';
 import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
+import { PlayerPhase } from '../../../interfaces/global.interface';
+import { NonSelectablePhase } from '../../../types/global.type';
 
 @Component({
   selector: 'app-player-pannel',
@@ -23,6 +25,8 @@ export class PlayerPannelComponent implements OnInit{
   playerState!: PlayerStateModel;
   playerIsReady!: boolean;
   playerName!: string;
+  playerPhase!: PlayerPhase;
+  currentPhase!: NonSelectablePhase;
   
   constructor(private gameStateService: GameState){}
 
@@ -32,6 +36,12 @@ export class PlayerPannelComponent implements OnInit{
     )
     this.gameStateService.currentGroupPlayerReady.subscribe(
       playersReady => this.updatePlayerReady()
+    )
+    this.gameStateService.currentGroupPlayerSelectedPhase.subscribe(
+      playerPhase => this.updatePlayerPhase(playerPhase)
+    )
+    this.gameStateService.currentPhase.subscribe(
+      phase => this.currentPhase = phase
     )
     this.updatePlayerState()
   }
@@ -48,5 +58,13 @@ export class PlayerPannelComponent implements OnInit{
   }
   updatePlayerReady() : void {
     this.playerIsReady = this.gameStateService.getPlayerReady(this.playerId)
+  }
+  updatePlayerPhase(playerPhase: PlayerPhase[]): void {
+    for(let phase of playerPhase){
+      if(phase.playerId===this.playerId){
+        this.playerPhase = phase
+        break
+      }
+    }
   }
 }

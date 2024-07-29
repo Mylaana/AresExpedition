@@ -115,38 +115,38 @@ export class GameEventComponent {
 		)
 	}
 
-  updatePhase(phase:NonSelectablePhase):void{
-	this.currentPhase = phase
-    switch(phase){
-		case('planification'):{
-			this.applyPlanificationPhase()
-			break
+	updatePhase(phase:NonSelectablePhase):void{
+		this.currentPhase = phase
+		switch(phase){
+			case('planification'):{
+				this.applyPlanificationPhase()
+				break
+			}
+			case('development'):{
+				this.applyDevelopmentPhase()
+				break
+			}
+			case('construction'):{
+				this.applyConstructionPhase()
+				break
+			}
+			case('action'):{
+				this.applyActionPhase()
+				break
+			}
+			case('production'):{
+				this.applyProductionPhase(this.gameStateService.getClientPlayerState())
+				break
+			}
+			case('research'):{
+				this.applyResearchPhase(this.gameStateService.getClientPlayerState())
+				break
+			}
 		}
-		case('development'):{
-			this.applyDevelopmentPhase()
-			break
-		}
-		case('construction'):{
-			this.applyConstructionPhase()
-			break
-		}
-		case('action'):{
-			this.applyActionPhase()
-			break
-		}
-		case('production'):{
-			this.applyProductionPhase(this.gameStateService.getClientPlayerState())
-			break
-		}
-		case('research'):{
-			this.applyResearchPhase(this.gameStateService.getClientPlayerState())
-			break
-		}
-    }
 
-	this.addHandSizeCheckEvent()
-	this.addEndOfPhaseEvent()
-  }
+		this.addHandSizeCheckEvent()
+		this.addEndOfPhaseEvent()
+	}
 
 	applyPlanificationPhase(): void {
 		let newEvent = new EventModel
@@ -465,7 +465,7 @@ export class GameEventComponent {
 
 	public childButtonClicked(button: ChildButton ){
 		let clickedButtonName: ButtonNames | undefined = this.getButtonNameFromId(button.id)
-
+		console.log('event comp:', button)
 		switch(clickedButtonName){
 			case(undefined):{return}
 			

@@ -1,5 +1,8 @@
 <div class="wrapper-button">
-    <div [ngClass]="{'mask-disabled': button.enabled===false}">
-        <button [disabled]="button.enabled===false" (click)="onClick()" class="clickable validation-button" >{{button.caption}}</button>
+    <div [ngClass]="{'element-disabled': button.enabled===false}">
+        <button [disabled]="button.enabled===false" [ngClass]="[button.imageUrl ? 'image-button':'validation-button', button.enabled===true ? 'element-clickable':'']" (click)="onClick()"  >
+            <p>{{button.caption}}</p>
+            <img *ngIf="button.imageUrl" [src]="button.imageUrl" alt="">
+        </button>
     </div>
 </div>

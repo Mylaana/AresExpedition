@@ -1,7 +1,7 @@
 <div class="tag-card">
     <div class="wrapper-tag box-one">
         <div class="wrapper-tag-icon">
-            <img [ngClass]="{'grey-tag': tagState.valueCount===0}" [src]="imageUrl" [alt]="tagState.name">
+            <img [ngClass]="{'full-greyed-filter': tagState.valueCount===0}" [src]="imageUrl" [alt]="tagState.name">
         </div>
         <div *ngIf="tagState.valueMod" class="box-tag-mod">
             <div class="box-tag-mod-icon center">

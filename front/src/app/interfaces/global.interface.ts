@@ -39,11 +39,13 @@ export interface CardOptions {
 }
 
 export interface ChildButton {
-    id: number,
-    caption?: string,
-    value?: any,
+    id: number
     enabled: boolean
-    name?: ButtonNames
+
+    caption?: string
+    value?: any
+    name?: ButtonNames | SelectablePhase
+    imageUrl?: string
 }
 
 export interface CardSelector {

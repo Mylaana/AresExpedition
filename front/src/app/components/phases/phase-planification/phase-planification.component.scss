@@ -8,16 +8,25 @@ $colors: (
 .wrapper-phase-card{
     display: flex;
     gap: 1vw;
+    width: 45vw;
+    height: auto;
 }
 .phase-card{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 6vw;
+
     background-color: transparent;
-    border: 0;
+    max-width: 90%;
 }
 .phase-image{
     max-height: 100%;
     max-width: 100%;
+}
+.wrapper-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    aspect-ratio: 1;
 }

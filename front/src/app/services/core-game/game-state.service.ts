@@ -443,7 +443,7 @@ export class GameState{
     /**
      * 
      * @param playerId 
-     * @returns the player's selected PlayerPhase
+     * @returns the player's PlayerPhase interface
      */
     getPlayerPhase(playerId: number): PlayerPhase | undefined {
         for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){

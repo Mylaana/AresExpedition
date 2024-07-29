@@ -1,11 +1,8 @@
 .wrapper-button{
     width: 100%;
     height: 100%;
-}
-.mask-disabled{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    -webkit-mask-image: radial-gradient(circle, grey 20%, rgba(grey, 0.8) 50%, grey 80%);
-    mask-image: radial-gradient(circle, rgba(grey, .6) 0% ,rgba(grey, .8) 30% , rgba(grey, .6) 100% );
+    & button {
+        width: 100%;
+        height: 100%;
+    }
 }

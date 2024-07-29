@@ -2,24 +2,17 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { SelectablePhase } from '../../../types/global.type';
-import { state } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-
-type PhaseState = 'default' | 'disabled'
-
-interface Phase {
-  name: SelectablePhase,
-  caption: string,
-  state: PhaseState,
-  cssClass: string
-}
+import { ButtonComponent } from '../../button/button.component';
+import { ChildButton } from '../../../interfaces/global.interface';
 
 @Component({
   selector: 'app-phase-planification',
   standalone: true,
   imports: [
     CommonModule,
-    PlayerReadyComponent
+    PlayerReadyComponent,
+    ButtonComponent
   ],
   templateUrl: './phase-planification.component.html',
   styleUrl: './phase-planification.component.scss'
@@ -27,30 +20,37 @@ interface Phase {
 export class PhasePlanificationComponent {
   @Input() clientPlayerId!: number;
   @Output() phaseSelected: EventEmitter<any> = new EventEmitter<any>()
-  phaseList: Phase[]= []
+  buttonList: ChildButton [] = []
+  currentPhaseSelected!: string;
+
+
   constructor(private gameStateService: GameState){}
 
   ngOnInit(){
-    this.createPhaseCard('development', 'I - Development', 'phase-development')
-    this.createPhaseCard('construction', 'II - Construction', 'phase-construction')
-    this.createPhaseCard('action', 'III - Action', 'phase-action')
-    this.createPhaseCard('production', 'IV - Production', 'phase-production')
-    this.createPhaseCard('research', 'V - Research', 'phase-research')
+    let phaseList = ["development", "construction", "action", "production", "research"]
+    let playerPhase = this.gameStateService.getPlayerPhase(this.clientPlayerId)
+    if(playerPhase===undefined){return}
+    for(let phase of phaseList){
+      this.createPhaseCard(phase as keyof SelectablePhase, playerPhase.previousSelectedPhase!=phase)
+    }
   }
 
-  selectPhase(phaseName: string | undefined){
-    if(phaseName===undefined){return}
-    this.gameStateService.playerSelectPhase(this.clientPlayerId, phaseName as keyof SelectablePhase)
-    this.phaseSelected.emit()
-  }
-  createPhaseCard(name: SelectablePhase, caption: string, cssClass:string, state?: PhaseState): void {
-    if(state===undefined){state='default'}
-    let newPhase: Phase = {
-      name: name,
-      caption: caption,
-      state: state,
-      cssClass: cssClass
+  createPhaseCard(buttonName: SelectablePhase, enabled: boolean): void {
+    
+    let newButton: ChildButton =  {
+      id: this.buttonList.length,
+      name: buttonName,
+      enabled: enabled,
+      imageUrl: `/assets/other/phase_${buttonName}.png`
     }
-    this.phaseList.push(newPhase)
+    this.buttonList.push(newButton)
+
+  }
+  public childButtonClicked(button: ChildButton ){
+    if(button.name===undefined){return}
+
+    this.currentPhaseSelected = button.name
+    this.gameStateService.playerSelectPhase(this.clientPlayerId, button.name as keyof SelectablePhase)
+    this.phaseSelected.emit()
   }
 }
