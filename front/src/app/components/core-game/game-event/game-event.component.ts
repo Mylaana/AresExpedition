@@ -49,6 +49,7 @@ export class GameEventComponent {
 	currentEvent: EventModel = new EventModel;
 	currentEventId: number = -1
 	eventCounter: number = -1
+	eventSelectionActive: boolean = false
 	
 	currentPhase: NonSelectablePhase = "planification";
 	buttons: ChildButton[] = [];
@@ -391,6 +392,7 @@ export class GameEventComponent {
 		}
 		
 		this.currentEvent = ticket
+		this.eventSelectionActive = false
 
 		switch(ticket.type){
 			case('forcedSell'):{
@@ -403,12 +405,18 @@ export class GameEventComponent {
 				this.currentEvent.cardSelector.selectionQuantity = playerCards.hand.length - playerCards.maximum
 				this.currentEvent.cardSelector.title = `Too many cards in hand, please select at least ${ticket.cardSelector.selectionQuantity} cards to sell.`
 				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(playerCards.hand)
+
+				this.eventSelectionActive = true
 				break
 			}
 			case('endOfPhase'):{
 				ticket.isFinalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
+				break
+			}
+			case('selectCard'):{
+				this.eventSelectionActive = true
 			}
 		}
 	}
@@ -458,6 +466,7 @@ export class GameEventComponent {
 					return
 				}
 			}
+			this.eventSelectionActive = false
 			this.selectPlayableCard(zoneId, this.currentEvent.cardSelector.selectedIdList[0])
 			this.currentEvent.cardSelector.playCardActive = undefined
 		}
@@ -504,6 +513,8 @@ export class GameEventComponent {
 				if(clickedButtonName==='selectSecondCard'){
 					this.updateButtonState('selectAlternative', false)
 				}
+
+				this.eventSelectionActive = true
 				break
 			}
 			case('cancelFirstCard'):{
@@ -536,6 +547,7 @@ export class GameEventComponent {
 				this.updateButtonState('selectSecondCard', false)
 				this.updateButtonState('buildSecondCard', false)
 				this.updateButtonState('cancelSecondCard', false)
+				this.updateButtonState('selectAlternative', false)
 				console.log(clickedButtonName)
 			}
 		}

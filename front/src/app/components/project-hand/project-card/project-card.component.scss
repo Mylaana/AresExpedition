@@ -85,13 +85,16 @@ button {
         }
     }
 }
-.selected{
-    filter: drop-shadow(0 0 0.75rem gold);
-}
-.selectable{
-    &:hover{
-        cursor: pointer;
-    }
+.wrapper-selection-border{
+    z-index: -1;
+
+    $selection-offset: 0px;
+    border-radius: calc(($card-height + $selection-offset)* .05);
+    height: calc($card-height + $selection-offset);
+    width: calc($card-width + $selection-offset);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .wrapper-card-grid{
     z-index: 1;

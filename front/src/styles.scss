@@ -6,6 +6,8 @@ $ares-purple: rgb(98, 70, 156);
 $card-height: 300px;
 $card-width: calc($card-height * 63 / 88);
 
+$fade-transition-time: .2s;
+
 $colors: (
   "red": $ares-red,
   "blue": $ares-blue,
@@ -55,12 +57,6 @@ p {
         font-weight: bold;
     }
 }
-.element-clickable{
-    &:hover{
-        filter: brightness(85%);
-        cursor: pointer;
-    }
-}
 .validation-button{
     padding: 4%;
     width: 100%;
@@ -106,19 +102,55 @@ p {
 .ares-border{
     border: 2px solid rgba(lightblue, .2);
 }
-.element-selected{
+.element-clickable{
+    &:hover{
+        filter: brightness(80%);
+        cursor: pointer;
+    }
+}
+.element-selectable{
+    filter: grayscale(40%);
+    &:hover{
+        cursor: pointer;
+        filter: grayscale(0%);
+        background: rgba($color: #000000, $alpha: .5);
+        outline-offset: 5px;
+        outline: $ares-blue solid 3px;
+    }
+}
+.element-selected-bracket{
     $border-color-one: rgba($ares-blue, .8);
     $border-color-none: transparent;
     border: 4px solid;
-
-    border-image:   linear-gradient(to right, $border-color-one 25%, $border-color-none 25%, $border-color-none 75%, $border-color-one 75%) 5;
+    border-image: linear-gradient(to right, $border-color-one 25%, $border-color-none 25%, $border-color-none 75%, $border-color-one 75%) 5;
+}
+.element-selected{
+    $border-color-one: rgba($ares-blue, .8);
+    $border-color-none: transparent;
+    outline: 4px solid $ares-blue;
+    outline-offset: 0px;
+    border: 4px solid transparent;
+    filter: drop-shadow(0 0 0.75rem $ares-blue);
 }
 .element-not-selected{
     border: transparent solid 4px;
 }
 .element-disabled{
     filter: grayscale(100%)
-
+}
+@keyframes fadeInOpacity {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+.element-fade-in {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity $fade-transition-time linear;
+}
+.element-fade-out {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s $fade-transition-time, opacity $fade-transition-time linear;
 }
 .background-production{
     $color-one: $ares-red;
