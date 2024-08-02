@@ -55,6 +55,8 @@ export class GameEventComponent {
 	buttons: ChildButton[] = [];
 	buttonsIds = new Map<ButtonNames, number>();
 	currentButtonSelectorId!: number;
+	sellCardsButton!: ChildButton;
+
 	phaseList: NonSelectablePhase[] = [
 		'planification',
 		'development',
@@ -104,6 +106,10 @@ export class GameEventComponent {
 		this.createButton('buildSecondCard', 'Build', false)
 
 		this.createButton('selectAlternative', 'Alternative', true)
+
+		this.createButton('validateOptionalSellCards', 'Sell selected cards', true)
+		this.createButton('callOptionalSellCards', 'Sell C.', true)
+		this.sellCardsButton = this.buttons[this.getButtonIdFromName('callOptionalSellCards')]
 
 		this.gameStateService.currentPhase.subscribe(
 			phase => this.updatePhase(phase)
@@ -417,6 +423,11 @@ export class GameEventComponent {
 			}
 			case('selectCard'):{
 				this.eventSelectionActive = true
+				break
+			}
+			case('optionalSell'):{
+				this.eventSelectionActive = true
+				break
 			}
 		}
 	}
@@ -425,22 +436,22 @@ export class GameEventComponent {
 		this.currentEvent.cardSelector.selectedIdList = cardList
 
 		if(this.currentEvent.button?.id===this.getButtonIdFromName('sellCardsEndPhase')){
-		this.updateButtonState(
-			'sellCardsEndPhase',
-			this.compareValueToTreshold(
-				this.currentEvent.cardSelector.selectionQuantity,
-				this.currentEvent.cardSelector.selectedIdList.length,
-				this.currentEvent.cardSelector.selectionQuantityTreshold)
-		)
-		return
+			this.updateButtonState(
+				'sellCardsEndPhase',
+				this.compareValueToTreshold(
+					this.currentEvent.cardSelector.selectionQuantity,
+					this.currentEvent.cardSelector.selectedIdList.length,
+					this.currentEvent.cardSelector.selectionQuantityTreshold)
+			)
+			return
 		}
 		if(this.currentPhase==='research'){
-		this.updateButtonState(
-			'validateResearch',
-			this.compareValueToTreshold(
-				this.currentEvent.cardSelector.selectionQuantity,
-				this.currentEvent.cardSelector.selectedIdList.length,
-				this.currentEvent.cardSelector.selectionQuantityTreshold)
+			this.updateButtonState(
+				'validateResearch',
+				this.compareValueToTreshold(
+					this.currentEvent.cardSelector.selectionQuantity,
+					this.currentEvent.cardSelector.selectedIdList.length,
+					this.currentEvent.cardSelector.selectionQuantityTreshold)
 		)
 		return
 		}
@@ -492,7 +503,8 @@ export class GameEventComponent {
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}
-			case('sellCardsEndPhase'):{
+			case('sellCardsEndPhase'):
+			case('validateOptionalSellCards'):{
 				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
 				this.updateButtonState('sellCardsEndPhase',false)
 				this.currentEvent.isFinalized = true
@@ -549,6 +561,21 @@ export class GameEventComponent {
 				this.updateButtonState('cancelSecondCard', false)
 				this.updateButtonState('selectAlternative', false)
 				console.log(clickedButtonName)
+				break
+			}
+			case('callOptionalSellCards'):{
+				let newEvent = new EventModel
+				newEvent.type = 'optionalSell'
+				newEvent.cardSelector = {
+					selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
+					selectionQuantity: 0,
+					selectionQuantityTreshold: 'min',
+					cardOptions: {initialState: 'default', selectable: true},
+					title: `Sell any card number :`,
+					selectedIdList: [],
+				}
+				newEvent.button = this.buttons[this.getButtonIdFromName('validateOptionalSellCards')]
+				this.gameStateService.addEventQueue(newEvent, true)
 			}
 		}
 	}

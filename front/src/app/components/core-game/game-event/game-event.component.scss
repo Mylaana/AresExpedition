@@ -1,6 +1,9 @@
 $ares-blue: rgb(39, 177, 229);
-$command-pannel-height: 15vh;
+$command-pannel-height: 8vh;
 $command-pannel-padding: 5px;
+$command-pannel-width: 15%;
+$navigation-bar-width: 3vw;
+
 .wrapper-card-selector{
     width: 100%;
 }
@@ -50,7 +53,7 @@ $command-pannel-padding: 5px;
     left: 0;
 }
 .wrapper-selection-active{
-    z-index: -1000;
+    z-index: -1;
     position: fixed;
     width: 95.9vw;
     height: 100vh;
@@ -73,6 +76,10 @@ $command-pannel-padding: 5px;
     width: 66%;
     max-height: 100%;
 }
+.wrapper-sell-button{
+    width: 66%;
+    max-height: 100%;
+}
 .wrapper-game-event{
     position: relative;
     display: flex;
@@ -83,14 +90,16 @@ $command-pannel-padding: 5px;
     position: relative;
     top:  calc(-1 * ($command-pannel-height + $command-pannel-padding * 2));
     width: 100%;
+    margin-bottom: calc(-1 * ($command-pannel-height + $command-pannel-padding *2));
 }
 .wrapper-event-top{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
-    width: 50%;
-    margin-left: 25%;
-}
+    width: calc(100% - ($navigation-bar-width + $command-pannel-width *2));
+    margin-left: calc($navigation-bar-width + $command-pannel-width);
+    min-height: calc($command-pannel-height + $command-pannel-padding *2);
+}   
 .wrapper-event-bottom{
     display: flex;
 }
@@ -101,7 +110,7 @@ $command-pannel-padding: 5px;
     top: 8vh;
     max-height: 100%;
     height: $command-pannel-height;
-    width: 20%;
+    width: $command-pannel-width;
     padding: $command-pannel-padding;
 
     display: flex;

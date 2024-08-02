@@ -31,13 +31,15 @@
 }
 .wrapper-top-pannel{
     $player-pannel-width: 70vw;
+    
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: left;
     flex-direction: column;
     width: $player-pannel-width;
     left: 5vw;
-    padding-top: 7.5vh;
+    margin-top: 7.5vh;
     app-self-info{
         width: $player-pannel-width;
     }

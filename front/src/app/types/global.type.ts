@@ -8,7 +8,7 @@ export type MinMaxEqualType = 'min' | 'max' | 'equal'
 export type EventType = 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' | 'production' | 'planification'
 export type ButtonNames =
  'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'
-| 'sellCardsEndPhase' | 'defaultValidate'
+| 'sellCardsEndPhase' | 'defaultValidate' | 'callOptionalSellCards' | 'validateOptionalSellCards'
 | 'selectFirstCard' | 'cancelFirstCard' | 'buildFirstCard'
 | 'selectSecondCard' | 'cancelSecondCard' | 'buildSecondCard'
 | 'selectAlternative'

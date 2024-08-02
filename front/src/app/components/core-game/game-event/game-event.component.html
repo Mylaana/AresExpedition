@@ -3,10 +3,14 @@
         <div class="wrapper-validate-button">
             <app-button *ngIf="currentEvent.button!=undefined" (childButtonClicked)="childButtonClicked($event)" [button]="currentEvent.button"></app-button>
         </div>
+        <div class="wrapper-sell-button">
+            <app-button (childButtonClicked)="childButtonClicked($event)" [button]="sellCardsButton"></app-button>
+        </div>
     </div>
     <div class="wrapper-event-main">
         <div class="wrapper-event-top">
-            <div *ngIf="currentPhase==='development' || currentPhase==='construction'" class="wrapper-play-card">
+            <h2 *ngIf="currentEvent!=undefined ">{{currentEvent.cardSelector.title}}</h2>
+            <div *ngIf="(currentPhase==='development' || currentPhase==='construction') && currentEvent.type==='selectCardToBuild' " class="wrapper-play-card">
                 <div class="play-card-zone play-card-one zone-one">
                     <div class="wrapper-select-button">
                         <app-button class="button-select-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectFirstCard')]"></app-button>
@@ -37,12 +41,11 @@
                 </div>
             </div>
             
-            <app-phase-planification *ngIf="currentPhase==='planification'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
-            <app-phase-production *ngIf="currentPhase==='production'"></app-phase-production> 
+            <app-phase-planification *ngIf="currentPhase==='planification' && currentEvent.type==='planification'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
+            <app-phase-production *ngIf="currentPhase==='production' && currentEvent.type==='production'"></app-phase-production> 
         </div>
         <div class="wrapper-event-bottom">
             <div *ngIf="currentEvent!=undefined || currentPhase==='development' || currentPhase==='construction' || currentPhase==='action'" class="wrapper-card-selector">
-                <h2 *ngIf="currentEvent!=undefined ">{{currentEvent.cardSelector.title}}</h2>
                 <app-project-card-list [cardList]="currentEvent.cardSelector.selectFrom" [cardOptions]="currentEvent.cardSelector.cardOptions" [cardsPhaseFilter]="currentEvent.cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
         </div>

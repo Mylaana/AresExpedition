@@ -7,9 +7,11 @@ $colors: (
 );
 .wrapper-phase-card{
     display: flex;
+    justify-content: center;
     gap: 1vw;
-    width: 45vw;
+    width: 100%;
     height: auto;
+    border: red solid 1px;
 }
 .phase-card{
     display: flex;
