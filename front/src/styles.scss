@@ -2,6 +2,9 @@ $ares-red: rgb(237, 53, 49);
 $ares-blue: rgb(39, 177, 229);
 $ares-green: rgb(42, 180, 92);
 $ares-purple: rgb(98, 70, 156);
+:root{
+	--test-card-height: 300px;
+}
 
 $card-height: 300px;
 $card-width: calc($card-height * 63 / 88);

@@ -1,5 +1,5 @@
 <div class="wrapper-game-event">
-    <div class="wrapper-commands ares-pannel ares-card ares-border">
+    <div class="wrapper-commands ares-background ares-border">
         <div class="wrapper-validate-button">
             <app-button *ngIf="currentEvent.button!=undefined" (childButtonClicked)="childButtonClicked($event)" [button]="currentEvent.button"></app-button>
         </div>
@@ -10,42 +10,53 @@
     <div class="wrapper-event-main">
         <div class="wrapper-event-top">
             <h2 *ngIf="currentEvent!=undefined ">{{currentEvent.cardSelector.title}}</h2>
-            <div *ngIf="(currentPhase==='development' || currentPhase==='construction') && currentEvent.type==='selectCardToBuild' " class="wrapper-play-card">
-                <div class="play-card-zone play-card-one zone-one">
-                    <div class="wrapper-select-button">
-                        <app-button class="button-select-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectFirstCard')]"></app-button>
-                    </div>
-                    <div class="wrapper-build-button">
-                        <app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildFirstCard')]"></app-button>
-                    </div>
-                    <div class="wrapper-cancel-button">
-                        <app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelFirstCard')]"></app-button>
-                    </div>
-                    <app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[0].cardList" [cardOptions]="currentEvent.playCardZone[0].cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[0].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
-                </div>
-                <div class="zone-two">
-                    <div class="play-card-zone play-card-two">
-                        <div class="wrapper-select-button">
-                            <app-button class="button-select-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectSecondCard')]"></app-button>
-                        </div>
-                        <div class="wrapper-cancel-button">
-                            <app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelSecondCard')]"></app-button>
-                        </div>
-                        <app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[1].cardList" [cardOptions]="currentEvent.playCardZone[1].cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[1].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
-                        <app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildSecondCard')]"></app-button>
-                    </div>
-                    <div class="wrapper-alternative">
-                        <h1>Or</h1>
-                        <app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectAlternative')]"></app-button>
-                    </div>
-                </div>
-            </div>
-            
+			<div class="wrapper-event-top-main">
+				<div *ngIf="(currentPhase==='development' || currentPhase==='construction') && currentEvent.type==='selectCardToBuild' " class="wrapper-play-card">
+					<div class="play-card-one ares-background ares-border">
+						<div class="play-card-zone ares-card">
+							<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[0].cardList" [cardOptions]="currentEvent.playCardZone[0].cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[0].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+						</div>
+						<div class="wrapper-buttons">
+							<div class="wrapper-select-button" *ngIf="buttons[getButtonIdFromName('selectFirstCard')].enabled===true">
+								<app-button class="button-select-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectFirstCard')]"></app-button>
+							</div>
+							<div class="wrapper-build-button" *ngIf="buttons[getButtonIdFromName('buildFirstCard')].enabled===true">
+								<app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildFirstCard')]"></app-button>
+							</div>
+							<div class="wrapper-cancel-button" *ngIf="buttons[getButtonIdFromName('cancelFirstCard')].enabled===true">
+								<app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelFirstCard')]"></app-button>
+							</div>
+						</div>
+					</div>
+					<div class="play-card-two ares-background ares-border">
+						<div>
+							<div class="play-card-zone ares-card">
+								<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[1].cardList" [cardOptions]="currentEvent.playCardZone[1].cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[1].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+							</div>
+							<div class="wrapper-buttons">
+								<div class="wrapper-select-button" *ngIf="buttons[getButtonIdFromName('selectSecondCard')].enabled===true">
+									<app-button class="button-select-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectSecondCard')]"></app-button>
+								</div>
+								<div class="wrapper-cancel-button" *ngIf="buttons[getButtonIdFromName('buildSecondCard')].enabled===true">
+									<app-button class="button-build-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('buildSecondCard')]"></app-button>
+								</div>
+								<div class="wrapper-cancel-button" *ngIf="buttons[getButtonIdFromName('cancelSecondCard')].enabled===true">
+									<app-button class="button-cancel-card" (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('cancelSecondCard')]"></app-button>
+								</div>
+							</div>
+						</div>
+						<h1>Or</h1>
+						<div class="wrapper-alternative ares-card">
+							<app-button (childButtonClicked)="childButtonClicked($event)" [button]="buttons[getButtonIdFromName('selectAlternative')]"></app-button>
+						</div>
+					</div>
+				</div>
+			</div>
             <app-phase-planification *ngIf="currentPhase==='planification' && currentEvent.type==='planification'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
-            <app-phase-production *ngIf="currentPhase==='production' && currentEvent.type==='production'"></app-phase-production> 
+            <app-phase-production *ngIf="currentPhase==='production' && currentEvent.type==='production'"></app-phase-production>
         </div>
         <div class="wrapper-event-bottom">
-            <div *ngIf="currentEvent!=undefined || currentPhase==='development' || currentPhase==='construction' || currentPhase==='action'" class="wrapper-card-selector">
+            <div *ngIf="currentEvent!=undefined || currentPhase==='development' || currentPhase==='construction' || currentPhase==='action'" class="wrapper-card-selector ares-background">
                 <app-project-card-list [cardList]="currentEvent.cardSelector.selectFrom" [cardOptions]="currentEvent.cardSelector.cardOptions" [cardsPhaseFilter]="currentEvent.cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
         </div>

@@ -3,36 +3,46 @@ $command-pannel-height: 8vh;
 $command-pannel-padding: 5px;
 $command-pannel-width: 15%;
 $navigation-bar-width: 3vw;
+$card-height: 310px;
+$card-width: calc($card-height * 63 / 88);
+$alternative-width: 200px;
 
 .wrapper-card-selector{
     width: 100%;
 }
 .wrapper-play-card{
     display: flex;
-    justify-content: center;
-    gap: 2%;
+    justify-content: space-between;
+	width: calc($card-width * 2 + $alternative-width + 15%);
+	padding: 20px;
 }
 .play-card-zone{
-    $card-height: 400px;
-    $card-width: calc($card-height * 63 / 88);
-
     width: $card-width;
     height: $card-height;
-    border: black solid 1px;
 }
-.zone-two{
+.wrapper-buttons{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.play-card-one, .play-card-two{
+	padding: 10px;
+}
+.play-card-two{
     display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: calc($card-width + $alternative-width + 10% );
 }
 .wrapper-alternative{
     display: flex;
-    width: 200px;
-    border: black solid 1px;
+    width: $alternative-width;
 }
 .wrapper-select-button, .wrapper-cancel-button, .wrapper-build-button{
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	width: 100%;
-    border: blue 1px solid;
     padding: 0px;
     margin: 0;
     height: 70px;
@@ -99,7 +109,14 @@ $navigation-bar-width: 3vw;
     width: calc(100% - ($navigation-bar-width + $command-pannel-width *2));
     margin-left: calc($navigation-bar-width + $command-pannel-width);
     min-height: calc($command-pannel-height + $command-pannel-padding *2);
-}   
+}
+.wrapper-event-top-main{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
 .wrapper-event-bottom{
     display: flex;
 }
