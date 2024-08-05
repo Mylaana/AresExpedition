@@ -36,6 +36,8 @@ $alternative-width: 200px;
 }
 .wrapper-alternative{
     display: flex;
+	justify-content: center;
+	align-items: center;
     width: $alternative-width;
 }
 .wrapper-select-button, .wrapper-cancel-button, .wrapper-build-button{
