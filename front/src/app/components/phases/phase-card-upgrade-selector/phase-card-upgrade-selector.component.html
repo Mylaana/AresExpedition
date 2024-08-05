@@ -1,0 +1,5 @@
+<h1>Upgrade ONE phase card</h1>
+<div *ngFor="let phaseIndex of phaseList" class="wrapper-phase-upgrade-selection">
+	<p>Phase {{phaseIndex}}</p>
+	<app-phase-card-upgrade-list [phaseIndex]="phaseIndex"></app-phase-card-upgrade-list>
+</div>

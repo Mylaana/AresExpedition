@@ -5,6 +5,7 @@ import { PlayerReadyPannelComponent } from '../../player-info/player-ready-panne
 import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
 import { DrawModel } from '../../../models/core-game/draw.model';
+import { EventModel } from '../../../models/core-game/event.model';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -55,7 +56,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     //force draw card list for debug purpose
     let cardDrawList: number[] = [37, 217, 135, 65, 92]
 
-    this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)    
+    this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
   }
 
   ngAfterViewInit(): void {
@@ -101,8 +102,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 
   /**
    * provides cards from deck, updates all objects in queue with a list of cards requested
-   * @param drawQueue 
-   * @returns 
+   * @param drawQueue
+   * @returns
    */
   handleDrawQueueRequest(drawQueue: DrawModel[]):void{
     this.currentDrawQueue = drawQueue

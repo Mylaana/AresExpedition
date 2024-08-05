@@ -18,6 +18,7 @@ import { ProjectCardModel } from '../../../models/player-hand/project-card.model
 import { EventModel } from '../../../models/core-game/event.model';
 import { ButtonNames } from '../../../types/global.type';
 import { PlayableCardZone } from '../../../interfaces/global.interface';
+import { PhaseCardUpgradeSelectorComponent } from '../../phases/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 
@@ -32,7 +33,8 @@ import { PlayableCardZone } from '../../../interfaces/global.interface';
     PhaseResearchComponent,
     ProjectCardListComponent,
     PlayerReadyComponent,
-    ButtonComponent
+    ButtonComponent,
+	PhaseCardUpgradeSelectorComponent
   ],
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.scss'
@@ -50,7 +52,7 @@ export class GameEventComponent {
 	currentEventId: number = -1
 	eventCounter: number = -1
 	eventSelectionActive: boolean = false
-	
+
 	currentPhase: NonSelectablePhase = "planification";
 	buttons: ChildButton[] = [];
 	buttonsIds = new Map<ButtonNames, number>();
@@ -111,6 +113,8 @@ export class GameEventComponent {
 		this.createButton('callOptionalSellCards', 'Sell C.', true)
 		this.sellCardsButton = this.buttons[this.getButtonIdFromName('callOptionalSellCards')]
 
+		this.createButton('upgradePhase', 'End upgrade phase selection', true)
+
 		this.gameStateService.currentPhase.subscribe(
 			phase => this.updatePhase(phase)
 		)
@@ -120,6 +124,19 @@ export class GameEventComponent {
 		this.gameStateService.currentEventQueue.subscribe(
 			eventQueue => this.handleEventQueueNext(eventQueue)
 		)
+
+		let newEvent: EventModel = new EventModel
+		newEvent.type = 'upgradePhase'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'max',
+			title: '',
+			selectedIdList: [],
+		}
+		newEvent.button = this.buttons[this.getButtonIdFromName('upgradePhase')]
+
+		this.gameStateService.addEventQueue(newEvent, true)
 	}
 
 	updatePhase(phase:NonSelectablePhase):void{
@@ -396,7 +413,7 @@ export class GameEventComponent {
 				}
 			}
 		}
-		
+
 		this.currentEvent = ticket
 		this.eventSelectionActive = false
 
@@ -429,6 +446,10 @@ export class GameEventComponent {
 				this.eventSelectionActive = true
 				break
 			}
+			case('upgradePhase'):{
+				this.eventSelectionActive = true
+				break
+			}
 		}
 	}
 
@@ -457,7 +478,7 @@ export class GameEventComponent {
 		}
 		if(this.currentEvent.type === 'selectCardToBuild'){
 			if(this.currentEvent.cardSelector.playCardActive===undefined){return}
-			
+
 			let zoneId = this.currentEvent.cardSelector.playCardActive
 
 			switch(zoneId){
@@ -485,10 +506,9 @@ export class GameEventComponent {
 
 	public childButtonClicked(button: ChildButton ){
 		let clickedButtonName: ButtonNames | undefined = this.getButtonNameFromId(button.id)
-		console.log('event comp:', button)
 		switch(clickedButtonName){
 			case(undefined):{return}
-			
+
 			case('validatePlanification'):{
 				this.updateButtonState('validatePlanification', false)
 				this.currentEvent.isFinalized = true
@@ -576,6 +596,11 @@ export class GameEventComponent {
 				}
 				newEvent.button = this.buttons[this.getButtonIdFromName('validateOptionalSellCards')]
 				this.gameStateService.addEventQueue(newEvent, true)
+				break
+			}
+			case('upgradePhase'):{
+				this.currentEvent.isFinalized = true
+				this.gameStateService.cleanAndNextEventQueue()
 			}
 		}
 	}
@@ -686,7 +711,7 @@ export class GameEventComponent {
 		this.updateButtonState(buttonBuild, false)
 		this.updateButtonState(buttonSelect, false)
 		this.updateButtonState(buttonCancel, false)
-		
+
 		card = [this.currentEvent.playCardZone[playableCardListId].cardList[0].id]
 
 		this.gameStateService.addCardToPlayerPlayed(this.clientPlayerId, card)

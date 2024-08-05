@@ -1,0 +1,38 @@
+$card-height: 310px;
+$card-width: calc($card-height * 63 / 88);
+.wrapper-main{
+	width: $card-width;
+	padding: 10px;
+}
+.wrapper-phase-card{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+
+	width: $card-width;
+	height: $card-height;
+	border: black solid 1px;
+	border-radius: 5px;
+}
+.wrapper-button{
+	margin-top: 20px;
+}
+.phase1{
+	border: green solid 2px;
+}
+.phase2{
+	$border-color-one: blue;
+	$border-color-two: red;
+	border: red solid 2px;
+	border-image: linear-gradient(to right, $border-color-one, $border-color-two) 5;
+}
+.phase3{
+	border: blue solid 2px;
+}
+.phase4{
+	border: orange solid 2px;
+}
+.phase5{
+	border: yellow solid 2px;
+}

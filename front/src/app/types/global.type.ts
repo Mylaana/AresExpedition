@@ -5,12 +5,13 @@ export type SelectablePhase = undefined | "development" | "construction" | "acti
 export type NonSelectablePhase = "planification" | "development" | "construction" | "action" | "production" | "research"
 export type StandardState = 'default' | 'disabled'
 export type MinMaxEqualType = 'min' | 'max' | 'equal'
-export type EventType = 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' | 'production' | 'planification'
+export type EventType = 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' | 'production' | 'planification' | 'upgradePhase'
 export type ButtonNames =
  'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'
 | 'sellCardsEndPhase' | 'defaultValidate' | 'callOptionalSellCards' | 'validateOptionalSellCards'
 | 'selectFirstCard' | 'cancelFirstCard' | 'buildFirstCard'
 | 'selectSecondCard' | 'cancelSecondCard' | 'buildSecondCard'
 | 'selectAlternative'
+| 'upgradePhase'
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'

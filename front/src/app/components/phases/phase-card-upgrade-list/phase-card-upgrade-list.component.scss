@@ -1,0 +1,13 @@
+.wrapper-main{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.wrapper-phase-card-zone{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 50%;
+	padding: 20px;
+}
