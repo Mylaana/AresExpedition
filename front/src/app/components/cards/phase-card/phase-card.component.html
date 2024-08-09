@@ -1,10 +1,12 @@
-<div class="wrapper-main ares-card">
-	<div class="wrapper-phase-card" [ngClass]="'phase' + phaseIndex">
-		<p>global text</p>
-		<p>owner text</p>
+<div class="wrapper-main">
+	<div class="wrapper-selection-border" [ngClass]="state==='selected'? 'element-selected-bracket':'element-not-selected'">
+		<button (click)="cardClick()" class="wrapper-phase-card ares-card" [ngClass]="['phase' + phaseIndex, selectable ? 'element-selectable': '', state!='selected'? state:'']">
+			<p>global text</p>
+			<p>owner text</p>
+		</button>
 	</div>
-	<div *ngIf="phaseCardLevel!=0" class="wrapper-button">
-		<button  (click)="upgrade()" class="validation-button element-clickable">Upgrade</button>
+	<div *ngIf="state!='selected' && options?.selectable==true" class="wrapper-button">
+		<button  (click)="cardClick()" class="validation-button element-clickable">Upgrade</button>
 	</div>
 </div>
 

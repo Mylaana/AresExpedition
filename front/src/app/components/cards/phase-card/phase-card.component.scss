@@ -16,7 +16,7 @@ $card-width: calc($card-height * 63 / 88);
 	border-radius: 5px;
 }
 .wrapper-button{
-	margin-top: 20px;
+	margin-top: 4vh;
 }
 .phase1{
 	border: green solid 2px;
@@ -25,7 +25,7 @@ $card-width: calc($card-height * 63 / 88);
 	$border-color-one: blue;
 	$border-color-two: red;
 	border: red solid 2px;
-	border-image: linear-gradient(to right, $border-color-one, $border-color-two) 5;
+	border-image: linear-gradient(to right, $border-color-one, $border-color-two) 10;
 }
 .phase3{
 	border: blue solid 2px;
@@ -35,4 +35,15 @@ $card-width: calc($card-height * 63 / 88);
 }
 .phase5{
 	border: yellow solid 2px;
+}
+.wrapper-selection-border{
+	z-index: -1;
+
+    $selection-offset: 20px;
+    border-radius: calc(($card-height + $selection-offset)* .05);
+    height: calc($card-height + $selection-offset);
+    width: calc($card-width + $selection-offset);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

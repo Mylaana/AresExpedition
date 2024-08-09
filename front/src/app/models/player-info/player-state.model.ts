@@ -4,7 +4,7 @@ import { RGB } from "../../types/global.type";
 export class PlayerStateModel {
     id!: number;
     name!: string;
-    color!: RGB; 
+    color!: RGB;
     ressource!: RessourceState[];
     terraformingRating!: number;
     vp!: number;
@@ -18,7 +18,10 @@ export class PlayerStateModel {
         "drawMod": number,
         "keepMod": number
     }
-    
+	phaseCard!: {
+		""
+	}
+
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){
             if(this.ressource[i].id === ressourceId){
