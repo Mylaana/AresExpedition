@@ -7,6 +7,8 @@ import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
 import { EventModel } from "../../models/core-game/event.model";
+import { PhaseCardInfoService } from "../phase/phase-card-info.service";
+import { PhaseCardHolderModel } from "../../models/core-game/phase-card.model";
 
 interface SelectedPhase {
     "development": boolean,
@@ -27,6 +29,8 @@ interface PhaseOrder {
 const phaseCount: number = 5;
 const handSizeStart: number = 10;
 const handSizeMaximum: number = 10;
+const phaseNumber: number = 5;
+const phaseCardNumberPerPhase: number = 3;
 
 @Injectable({
     providedIn: 'root'
@@ -54,7 +58,7 @@ export class GameState{
     currentLoadingState = this.loading.asObservable()
 
     phaseIndex: number = 0;
-  
+
     phaseOrder: PhaseOrder = {
         "0":"planification",
         "1":"development",
@@ -70,6 +74,8 @@ export class GameState{
         "production": false,
         "research": false
     }
+
+	constructor(private phaseCardService: PhaseCardInfoService){}
 
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
@@ -244,6 +250,9 @@ export class GameState{
             "previousSelectedPhase": undefined
         }
         this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
+
+		//adds phase cards info to model
+		newPlayer.phaseCard = this.phaseCardService.getNewPhaseHolderModel(phaseNumber, phaseCardNumberPerPhase)
     };
 
     setPlayerIdList(playerIdList: number[]):void{
@@ -251,10 +260,10 @@ export class GameState{
     }
 
     /**
-     * 
+     *
      * @param newPhase
      * gets the new phase to set
-     * 
+     *
      * sets all players to not be ready
      */
     updatePhase(newPhase: NonSelectablePhase): void {
@@ -271,7 +280,7 @@ export class GameState{
 
      * if no id specified, will set all players to not {playerReady}
      * */
-    setPlayerReady(playerReady: boolean, playerId?: number){  
+    setPlayerReady(playerReady: boolean, playerId?: number){
         let ready = this.groupPlayerReady.getValue()
         let loopStart: number;
         let loopFinish: number;
@@ -328,7 +337,7 @@ export class GameState{
     /**
      * @param currentPhase as NonSelectablePhase
      * @returns next phase name
-     * 
+     *
      * triggers all phase change and cleaning related stuff
      */
     goToNextPhase(currentPhase:NonSelectablePhase):NonSelectablePhase{
@@ -388,12 +397,12 @@ export class GameState{
     }
 
     /**
-     * 
-     * @param playerId 
-     * @param phase 
-     * @returns 
+     *
+     * @param playerId
+     * @param phase
+     * @returns
      * sets up the phase selection for player
-     * 
+     *
      * updates the global selectedPhase
      */
     playerSelectPhase(playerId:number, phase:SelectablePhase):void{
@@ -412,9 +421,9 @@ export class GameState{
     }
 
     /**
-     * 
-     * @param playerId  
-     * @param currentPhase 
+     *
+     * @param playerId
+     * @param currentPhase
      * @returns undefined if the player didnt select the current phase or the phase card type they selected if equal to current phase
      */
     getPlayerSelectedPhaseCardType(playerId:number, currentPhase: SelectablePhase): PhaseCardType | undefined {
@@ -427,8 +436,8 @@ export class GameState{
     }
 
     /**
-     * 
-     * @param playerId 
+     *
+     * @param playerId
      * @returns the player's current selected phase
      */
     getPlayerSelectedPhase(playerId: number): SelectablePhase | undefined {
@@ -441,8 +450,8 @@ export class GameState{
     }
 
     /**
-     * 
-     * @param playerId 
+     *
+     * @param playerId
      * @returns the player's PlayerPhase interface
      */
     getPlayerPhase(playerId: number): PlayerPhase | undefined {
@@ -463,7 +472,7 @@ export class GameState{
             this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase = undefined
         }
     }
-    
+
     updateGroupPlayerSelectedPhase(newGroupPlayerSelectedPhase: PlayerPhase[]):void{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
@@ -586,4 +595,13 @@ export class GameState{
         }
         this.eventQueue.next(newEventQueue)
     }
+
+	getPlayerUpgradedPhaseCard(playerId: number): PhaseCardHolderModel {
+		return this.groupPlayerState.getValue()[playerId].phaseCard
+	}
+	setPlayerUpgradedPhaseCard(playerId: number, phaseCardHolder :PhaseCardHolderModel): void {
+		let playerState = this.getPlayerStateFromId(playerId)
+		playerState.phaseCard = phaseCardHolder
+		this.updatePlayerState(playerId, playerState)
+	}
 }

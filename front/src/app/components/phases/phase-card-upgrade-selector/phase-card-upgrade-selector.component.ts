@@ -15,14 +15,14 @@ import { GameState } from '../../../services/core-game/game-state.service';
   styleUrl: './phase-card-upgrade-selector.component.scss'
 })
 export class PhaseCardUpgradeSelectorComponent {
-	@Input() phaseList: number[] = [1,2,3,4,5]
+	@Input() phaseList: number[] = [0,1,2,3,4]
 
-	cardOptions: CardOptions = {selectable: true};
+	cardOptions: CardOptions = {selectable: false, upgradable: true};
 
 	constructor(private gameStateService: GameState){}
 
 	public cardUpgraded(phaseCard: {phaseIndex: number, phaseCardLevel: number}): void {
-		this.cardOptions.selectable = false
-		this.gameStateService.
+		this.cardOptions.selectable = true
+		this.cardOptions.upgradable = false
 	}
 }

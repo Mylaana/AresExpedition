@@ -18,22 +18,22 @@ $card-width: calc($card-height * 63 / 88);
 .wrapper-button{
 	margin-top: 4vh;
 }
-.phase1{
+.phase0{
 	border: green solid 2px;
 }
-.phase2{
+.phase1{
 	$border-color-one: blue;
 	$border-color-two: red;
 	border: red solid 2px;
 	border-image: linear-gradient(to right, $border-color-one, $border-color-two) 10;
 }
-.phase3{
+.phase2{
 	border: blue solid 2px;
 }
-.phase4{
+.phase3{
 	border: orange solid 2px;
 }
-.phase5{
+.phase4{
 	border: yellow solid 2px;
 }
 .wrapper-selection-border{

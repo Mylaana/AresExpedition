@@ -1,5 +1,6 @@
 import { RessourceState, TagState } from "../../interfaces/global.interface";
 import { RGB } from "../../types/global.type";
+import { PhaseCardHolderModel } from "../core-game/phase-card.model";
 
 export class PlayerStateModel {
     id!: number;
@@ -18,9 +19,7 @@ export class PlayerStateModel {
         "drawMod": number,
         "keepMod": number
     }
-	phaseCard!: {
-		""
-	}
+	phaseCard = new PhaseCardHolderModel
 
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){

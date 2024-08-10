@@ -36,6 +36,7 @@ export interface CardOptions {
     selectable?: boolean;
     playable?: boolean;
     initialState?: CardState;
+	upgradable?: boolean;
 }
 
 export interface ChildButton {
