@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhaseCardUpgradeListComponent } from '../phase-card-upgrade-list/phase-card-upgrade-list.component';
 import { CardOptions } from '../../../interfaces/global.interface';
 import { GameState } from '../../../services/core-game/game-state.service';
+import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 
 @Component({
   selector: 'app-phase-card-upgrade-selector',
@@ -15,14 +16,34 @@ import { GameState } from '../../../services/core-game/game-state.service';
   styleUrl: './phase-card-upgrade-selector.component.scss'
 })
 export class PhaseCardUpgradeSelectorComponent {
-	@Input() phaseList: number[] = [0,1,2,3,4]
+	@Input() phaseList!: number[]
 
 	cardOptions: CardOptions = {selectable: false, upgradable: true};
+	clientPlayerId!: number
+	upgradeNumber: number = 0
 
 	constructor(private gameStateService: GameState){}
 
+	ngOnInit():void{
+		if(this.phaseList===null){this.phaseList= [0,1,2,3,4]}
+		this.clientPlayerId = this.gameStateService.clientPlayerId
+		this.gameStateService.currentGroupPlayerState.subscribe(
+			state => this.upgradeNumberUpdate(state)
+		)
+	}
+
 	public cardUpgraded(phaseCard: {phaseIndex: number, phaseCardLevel: number}): void {
-		this.cardOptions.selectable = true
-		this.cardOptions.upgradable = false
+		this.gameStateService.removePhaseCardUpgradeNumber(this.clientPlayerId)
+	}
+
+	upgradeNumberUpdate(state: PlayerStateModel[]):void{
+		if(state[this.clientPlayerId].phaseCardUpgradeNumber!=this.upgradeNumber){
+			this.upgradeNumber = state[this.clientPlayerId].phaseCardUpgradeNumber
+		}
+
+		if(this.upgradeNumber===0){
+			this.cardOptions.selectable = true
+			this.cardOptions.upgradable = false
+		}
 	}
 }

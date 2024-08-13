@@ -13,4 +13,5 @@ export class EventModel {
     eventId?: number
     button?: ChildButton
     playCardZone!: PlayableCardZone []
+	value?: any
 }

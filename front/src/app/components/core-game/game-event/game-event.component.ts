@@ -124,19 +124,6 @@ export class GameEventComponent {
 		this.gameStateService.currentEventQueue.subscribe(
 			eventQueue => this.handleEventQueueNext(eventQueue)
 		)
-
-		let newEvent: EventModel = new EventModel
-		newEvent.type = 'upgradePhase'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 0,
-			selectionQuantityTreshold: 'max',
-			title: '',
-			selectedIdList: [],
-		}
-		newEvent.button = this.buttons[this.getButtonIdFromName('upgradePhase')]
-
-		this.gameStateService.addEventQueue(newEvent, true)
 	}
 
 	updatePhase(phase:NonSelectablePhase):void{
@@ -340,7 +327,21 @@ export class GameEventComponent {
 		newEvent.type = 'endOfPhase'
 		this.gameStateService.addEventQueue(newEvent)
 	}
-
+	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
+		let newEvent: EventModel = new EventModel
+		newEvent.type = 'upgradePhase'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: upgradeNumber,
+			selectionQuantityTreshold: 'max',
+			title: '',
+			selectedIdList: [],
+		}
+		newEvent.value = phaseIndexToUpgrade
+		newEvent.button = this.buttons[this.getButtonIdFromName('upgradePhase')]
+		this.gameStateService.addEventQueue(newEvent, true)
+		this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
+	}
 	handleDrawQueueNext(drawQueue: DrawModel[]): void {
 		if(drawQueue.length===0){
 			return
@@ -600,6 +601,7 @@ export class GameEventComponent {
 			}
 			case('upgradePhase'):{
 				this.currentEvent.isFinalized = true
+				this.gameStateService.removePhaseCardUpgradeNumber(this.clientPlayerId, 0 , true)
 				this.gameStateService.cleanAndNextEventQueue()
 			}
 		}

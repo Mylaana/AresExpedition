@@ -56,6 +56,7 @@ export class PhaseCardInfoService {
 		newPhaseCard.phaseType = this.getPhaseCardTypeFromIds(phaseIndex, phaseCardLevel)
 		newPhaseCard.phaseCardLevel = phaseCardLevel
 		newPhaseCard.phaseCardUpgraded = phaseCardLevel===0
+		newPhaseCard.phaseCardSelected = phaseCardLevel===0
 
 		return newPhaseCard
 	}

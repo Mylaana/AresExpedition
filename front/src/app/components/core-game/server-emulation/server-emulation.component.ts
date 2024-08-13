@@ -22,6 +22,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
 export class ServerEmulationComponent implements OnInit, AfterViewInit {
   debug: boolean = false;
   currentGroupPlayerState!: {};
+  currentEventQueue: EventModel[] = [];
   currentPhase: string = "planification";
   currentDrawQueue: DrawModel[] = []
   cardsDeck: number[] = [];
@@ -52,6 +53,9 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.gameStateService.currentLoadingState.subscribe(
       loading => this.loadingFinished(loading)
     )
+	this.gameStateService.currentEventQueue.subscribe(
+		event => this.currentEventQueue = event
+	  )
     return
     //force draw card list for debug purpose
     let cardDrawList: number[] = [37, 217, 135, 65, 92]

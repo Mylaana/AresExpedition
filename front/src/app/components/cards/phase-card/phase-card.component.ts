@@ -19,7 +19,7 @@ export class PhaseCardComponent {
 	@Input() phaseCardLevel: number = 0;
 	@Input() phaseIndex!: number;
 	@Input() state!: CardState;
-	@Output() cardStateChange: EventEmitter<{cardId: number, state:CardState}> = new EventEmitter<{cardId: number, state:CardState}>()
+	@Output() cardStateChange: EventEmitter<{cardId: number, state:CardState, stateUpdateType:string}> = new EventEmitter<{cardId: number, state:CardState, stateUpdateType:string}>()
 
 	selectable!: boolean;
 
@@ -34,6 +34,12 @@ export class PhaseCardComponent {
 			newState.upgraded = true
 		}
 		newState.selected = true
-		this.cardStateChange.emit({cardId:this.phaseCardLevel, state: newState})
+
+		if(updateType==='upgradeAndSelect'){
+			this.cardStateChange.emit({cardId:this.phaseCardLevel, state: newState, stateUpdateType: 'upgrade'})
+		} else {
+			this.cardStateChange.emit({cardId:this.phaseCardLevel, state: newState, stateUpdateType: 'select'})
+		}
+
 	}
 }

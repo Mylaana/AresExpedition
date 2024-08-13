@@ -59,7 +59,7 @@
             <div *ngIf="currentEvent.type==='selectCard' || currentEvent.type==='selectCardToBuild'" class="wrapper-card-selector ares-background">
                 <app-project-card-list [cardList]="currentEvent.cardSelector.selectFrom" [cardOptions]="currentEvent.cardSelector.cardOptions" [cardsPhaseFilter]="currentEvent.cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
-			<app-phase-card-upgrade-selector *ngIf="currentEvent.type==='upgradePhase'"></app-phase-card-upgrade-selector>
+			<app-phase-card-upgrade-selector *ngIf="currentEvent.type==='upgradePhase'" [phaseList]="currentEvent.value!=undefined ? currentEvent.value:null"></app-phase-card-upgrade-selector>
         </div>
     </div>
 </div>

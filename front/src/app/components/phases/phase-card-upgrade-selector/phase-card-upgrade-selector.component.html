@@ -1,4 +1,5 @@
-<h1>Upgrade ONE phase card</h1>
+<h1 *ngIf="upgradeNumber>0">Upgrade up to {{upgradeNumber}} phase card</h1>
+<h1 *ngIf="upgradeNumber===0">Change upgraded phase card selection</h1>
 <div *ngFor="let phaseIndex of phaseList" class="wrapper-phase-upgrade-selection">
 	<p>Phase {{phaseIndex}}</p>
 	<app-phase-card-upgrade-list [phaseIndex]="phaseIndex" [cardOptions]="cardOptions" (cardUpgraded)="cardUpgraded($event)"></app-phase-card-upgrade-list>

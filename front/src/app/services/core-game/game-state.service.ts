@@ -9,6 +9,7 @@ import { PhaseCardType } from "../../types/phase-card.type";
 import { EventModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../phase/phase-card-info.service";
 import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/core-game/phase-card.model";
+import { deepCopy } from "../../functions/global.functions";
 
 interface SelectedPhase {
     "development": boolean,
@@ -605,6 +606,26 @@ export class GameState{
 	setPlayerUpgradedPhaseCardFromPhaseCardGroup(playerId: number, phaseIndex: number, phaseCardGroup: PhaseCardGroupModel): void {
 		let playerState = this.getPlayerStateFromId(playerId)
 		playerState.phaseCard.phaseGroup[phaseIndex] = phaseCardGroup
+		this.updatePlayerState(playerId, playerState)
+	}
+	addPhaseCardUpgradeNumber(playerId:number, upgradeNumber: number):void{
+		let playerState = this.getPlayerStateFromId(playerId)
+		playerState.phaseCardUpgradeNumber =+ upgradeNumber
+		this.updatePlayerState(playerId, playerState)
+	}
+	removePhaseCardUpgradeNumber(playerId:number, upgradeNumber: number = 1, removeAll: boolean = false):void{
+		console.log('remove phase called')
+		let playerState = this.getPlayerStateFromId(playerId)
+		console.log('upgradenumber: ',upgradeNumber)
+		console.log('state before: ',deepCopy(playerState.phaseCardUpgradeNumber))
+
+		if(removeAll===true){
+			playerState.phaseCardUpgradeNumber = 0
+			console.log('remove all')
+		} else {
+			playerState.phaseCardUpgradeNumber -= upgradeNumber
+		}
+		console.log('state after: ', deepCopy(playerState.phaseCardUpgradeNumber))
 		this.updatePlayerState(playerId, playerState)
 	}
 }

@@ -21,4 +21,8 @@
         <p>cards in deck:</p>
         <p>{{cardsDeck.length}}</p>
     </div>
+	<p>eventQueue :</p>
+    <div *ngFor="let queue of currentEventQueue">
+        <p>{{queue.type}} {{queue.isFinalized}}</p>
+    </div>
 </div>

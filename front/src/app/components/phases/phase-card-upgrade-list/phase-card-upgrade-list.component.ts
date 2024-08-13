@@ -40,26 +40,23 @@ export class PhaseCardUpgradeListComponent{
 		)
 	}
 
-	public cardStateChange(card: {cardId: number, state:CardState}): void {
+	public cardStateChange(card: {cardId: number, state:CardState, stateUpdateType:string}): void {
 		let newPhaseCardState : PhaseCardGroupModel = this.clientPlayerPhaseCardGroupState
 
 		newPhaseCardState.setPhaseCardUpgraded(card.cardId)
 		newPhaseCardState.setPhaseCardSelection(card.cardId, true)
 
-		this.cardUpgraded.emit({phaseIndex: this.phaseIndex, phaseCardLevel: card.cardId})
+		if(card.stateUpdateType==='upgrade'){
+			this.cardUpgraded.emit({phaseIndex: this.phaseIndex, phaseCardLevel: card.cardId})
+		}
+
 		this.gameStateService.setPlayerUpgradedPhaseCardFromPhaseCardGroup(this.clientPlayerId, this.phaseIndex, newPhaseCardState)
 	}
 	updateState(state: PlayerStateModel[]): void{
-		//console.log('global state: ', state[this.clientPlayerId].phaseCard)
-		//console.log('phase state: ', this.clientPlayerPhaseCardState)
 		if(this.phaseCardState.length!=0 && deepCopy(state[this.clientPlayerId].phaseCard.phaseGroup[this.phaseIndex]) == deepCopy(this.clientPlayerPhaseCardGroupState)){return}
 		if(this.phaseCardState.length!=0){
-			console.log('card state before: ', deepCopy(this.phaseCardState))
 		}
 		this.clientPlayerPhaseCardGroupState = state[this.clientPlayerId].phaseCard.phaseGroup[this.phaseIndex]
 		this.phaseCardState = this.clientPlayerPhaseCardGroupState.getPhaseCardStateList()
-		if(this.phaseCardState.length!=0){
-			console.log('card state after: ', deepCopy(this.phaseCardState))
-		}
 	}
 }
