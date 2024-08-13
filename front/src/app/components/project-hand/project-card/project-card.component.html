@@ -1,5 +1,5 @@
-<div class="wrapper-selection-border" [ngClass]="state==='selected'? 'element-selected':'element-not-selected'">
-    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, selectable ? 'element-selectable': '', state!='selected'? state:'']">
+<div class="wrapper-selection-border" [ngClass]="state.selected===true? 'element-selected':'element-not-selected'">
+    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, selectable ? 'element-selectable': '', state.selected!=true? 'selected':'']">
         <div class="wrapper-card-grid">
             <div class="grid-box-cost">
                 <div class="wrapper-cost">
@@ -67,7 +67,7 @@
                     <div class="wrapper-effect-summary">
                         <div class="effect-summary-foreground-radial-white" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
                         <div class="effect-summary-background-radial-grid" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
-                        <div class="effect-summary-background" 
+                        <div class="effect-summary-background"
                             [ngClass]="{'effect-summary-background-production': projectCard.cardSummaryType==='production',
                                         'effect-summary-background-action': projectCard.cardSummaryType==='action',
                                         'effect-summary-background-grey-production':projectCard.cardSummaryType==='greyProduction',
@@ -83,7 +83,7 @@
                 <div *ngIf="projectCard.effectText" class="shadowed-text">
                     <app-text-with-image class="white-text" [rawText]="projectCard.effectText"></app-text-with-image>
                 </div>
-                
+
             </div>
             <div class="grid-box-tag">
                 <div class="wrapper-tag-zone">
@@ -107,8 +107,8 @@
         </div>
     </button>
 </div>
-    
-<div *ngIf="state==='activable'" class="wrapper-activation">
+
+<div *ngIf="options?.activable===true" class="wrapper-activation">
     <button  (click)="activate(1)" class="validation-button">Activate</button>
     <button  (click)="activate(2)" class="validation-button">Activate again</button>
 </div>

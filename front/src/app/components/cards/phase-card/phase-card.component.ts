@@ -1,7 +1,11 @@
 import { Component, Input, OnInit, Output, EventEmitter, input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardState } from '../../../types/project-card.type';
+import { CardState } from '../../../interfaces/global.interface';
 import { CardOptions } from '../../../interfaces/global.interface';
+import { deepCopy } from '../../../functions/global.functions';
+
+
+type updateType = 'select' | 'upgradeAndSelect'
 
 @Component({
   selector: 'app-phase-card',
@@ -24,22 +28,12 @@ export class PhaseCardComponent {
 		this.selectable = false
 	}
 
-	cardClick(){
-		//non selectable card should not be clickable either
-		//if(this.selectable!=true){return}
-		switch(this.state){
-		  case 'disabled': {
-			return
-		  };
-		  case 'default': {
-			this.state = 'selected'
-			break
-		  };
-		  case 'selected': {
-			this.state = 'default'
-			break
-		  };
+	updateState(updateType: updateType){
+		let newState: CardState = deepCopy(this.state)
+		if(updateType==='upgradeAndSelect'){
+			newState.upgraded = true
 		}
-		this.cardStateChange.emit({cardId:this.phaseCardLevel, state: this.state})
-	  }
+		newState.selected = true
+		this.cardStateChange.emit({cardId:this.phaseCardLevel, state: newState})
+	}
 }

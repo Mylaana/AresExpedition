@@ -5,7 +5,7 @@ import { GlobalTagInfoService } from '../../../services/global/global-tag-info.s
 import { TextWithImageComponent } from '../../text-with-image/text-with-image.component';
 import { LayoutCardBackgroundHexagonsComponent } from '../../layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
 import { CardOptions } from '../../../interfaces/global.interface';
-import { CardState } from '../../../types/project-card.type';
+import { CardState } from '../../../interfaces/global.interface';
 
 @Component({
   selector: 'app-project-card',
@@ -31,13 +31,13 @@ export class ProjectCardComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.projectCard.tagsUrl = []
-    
+
     this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
     // fills tagUrl
     for(let i = 0; i < this.projectCard.tagsId.length; i++) {
       this.projectCard.tagsUrl.push(this.globalTagInfoService.getTagUrlFromID(this.projectCard.tagsId[i]))
     }
-  
+
     //loading options
     this.resetCardState()
   }
@@ -61,28 +61,17 @@ export class ProjectCardComponent implements OnInit, OnChanges {
   cardClick(){
     //non selectable card should not be clickable either
     if(this.selectable!=true){return}
-    switch(this.state){
-      case 'disabled': {
-        return
-      };
-      case 'default': {
-        this.state = 'selected'
-        break
-      };
-      case 'selected': {
-        this.state = 'default'
-        break
-      };
-    }
+	if(this.state.enabled!=true){return}
+	if(this.state.selected=!true){this.state.selected = true}
     this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
   }
 
   resetCardState(): void {
     if(this.options===undefined){this.options = {}}
-    if(this.options.initialState===undefined){this.state='default'}else{this.state=this.options.initialState}
+    if(this.options.initialState===undefined){this.state.selected=false}else{this.state=this.options.initialState}
     if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=this.options.selectable}
   }
-  
+
   play(): void {
 		console.log('Played: ', this.projectCard.title)
 	}

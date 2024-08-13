@@ -1,16 +1,17 @@
 <div class="wrapper-main">
-	<div class="wrapper-selection-border" [ngClass]="state==='selected'? 'element-selected-bracket':'element-not-selected'">
-		<div class="wrapper-phase-card ares-card" [ngClass]="['phase' + phaseIndex, selectable ? 'element-selectable': '', state!='selected'? state:'']">
+	<div class="wrapper-selection-border" [ngClass]="state.selected===true? 'element-selected-bracket':'element-not-selected'">
+		<div class="wrapper-phase-card ares-card" [ngClass]="['phase' + phaseIndex, selectable ? 'element-selectable': '', state.selected===true? 'selected':'']">
 			<p>global text</p>
 			<p>owner text</p>
-			<p>state: {{state}}</p>
+			<p>upgraded: {{state.upgraded}}</p>
+			<p>selected: {{state.selected}}</p>
 		</div>
 	</div>
-	<div *ngIf="state!='upgraded' && options?.upgradable==true" class="wrapper-button">
-		<button  (click)="cardClick()" class="validation-button element-clickable">Upgrade</button>
+	<div *ngIf="state.upgraded!=true && options?.upgradable==true" class="wrapper-button">
+		<button  (click)="updateState('upgradeAndSelect')" class="validation-button element-clickable">Upgrade</button>
 	</div>
-	<div *ngIf="state!='upgraded' && options?.selectable==true" class="wrapper-button">
-		<button  (click)="cardClick()" class="validation-button element-clickable">Select</button>
+	<div *ngIf="state.upgraded==true && state.selected!=true && options?.selectable==true" class="wrapper-button">
+		<button  (click)="updateState('select')" class="validation-button element-clickable">Select</button>
 	</div>
 </div>
 

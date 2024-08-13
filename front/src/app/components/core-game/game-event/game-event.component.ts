@@ -194,7 +194,7 @@ export class GameEventComponent {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
-			cardOptions: {initialState: 'default', playable: true},
+			cardOptions: {playable: true},
 			phaseFilter: 'development',
 			playCardActive: -1,
 			title: 'Play Green cards :',
@@ -208,7 +208,7 @@ export class GameEventComponent {
 			if(i===0){buttonId=this.getButtonIdFromName('selectFirstCard')}else{buttonId=this.getButtonIdFromName('selectSecondCard')}
 			let cardZone: PlayableCardZone = {
 				cardList: [],
-				cardOptions: {selectable: false, initialState: 'default'},
+				cardOptions: {selectable: false},
 				currentButton: undefined
 			}
 			newEvent.playCardZone.push(cardZone)
@@ -224,7 +224,7 @@ export class GameEventComponent {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
-			cardOptions: {initialState: 'default', playable: true},
+			cardOptions: {playable: true},
 			phaseFilter: 'construction',
 			playCardActive: -1,
 			title: 'Play Blue/Red cards :',
@@ -238,7 +238,7 @@ export class GameEventComponent {
 			if(i===0){buttonId=this.getButtonIdFromName('selectFirstCard')}else{buttonId=this.getButtonIdFromName('selectSecondCard')}
 			let cardZone: PlayableCardZone = {
 				cardList: [],
-				cardOptions: {selectable: false, initialState: 'default'},
+				cardOptions: {selectable: false},
 				currentButton: undefined
 			}
 			newEvent.playCardZone.push(cardZone)
@@ -254,7 +254,7 @@ export class GameEventComponent {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStatePlayed()),
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
-			cardOptions: {initialState: 'activable', selectable: false, playable: false},
+			cardOptions: {activable: true, selectable: false, playable: false},
 			phaseFilter: 'action',
 			title: 'Activate cards :',
 			selectedIdList: [],
@@ -327,7 +327,7 @@ export class GameEventComponent {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
-			cardOptions: {initialState: 'default', selectable: true},
+			cardOptions: {selectable: true},
 			title: ``,
 			selectedIdList: [],
 		}
@@ -371,7 +371,7 @@ export class GameEventComponent {
 					selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
 					selectionQuantity: quantity,
 					selectionQuantityTreshold: 'equal',
-					cardOptions: {initialState: 'default', selectable: true},
+					cardOptions: {selectable: true},
 					title: `Select ${quantity} cards to draw`,
 					selectedIdList: [],
 				}
@@ -540,7 +540,7 @@ export class GameEventComponent {
 					zoneId = 1
 				}
 				this.currentEvent.cardSelector.playCardActive = zoneId
-				this.currentEvent.cardSelector.cardOptions = {initialState: 'default', selectable: true, playable: true}
+				this.currentEvent.cardSelector.cardOptions = {selectable: true, playable: true}
 
 				if(clickedButtonName==='selectSecondCard'){
 					this.updateButtonState('selectAlternative', false)
@@ -590,7 +590,7 @@ export class GameEventComponent {
 					selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
 					selectionQuantity: 0,
 					selectionQuantityTreshold: 'min',
-					cardOptions: {initialState: 'default', selectable: true},
+					cardOptions: {selectable: true},
 					title: `Sell any card number :`,
 					selectedIdList: [],
 				}

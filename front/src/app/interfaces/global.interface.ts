@@ -1,6 +1,5 @@
 import { GlobalParameterColor, SelectablePhase } from "../types/global.type";
 import { PhaseCardType } from "../types/phase-card.type";
-import { CardState } from "../types/project-card.type";
 import { PhaseFilter } from "../types/phase-card.type";
 import { ProjectCardModel } from "../models/player-hand/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
@@ -33,10 +32,11 @@ export interface PlayerPhase {
 }
 
 export interface CardOptions {
+	initialState?: CardState;
     selectable?: boolean;
     playable?: boolean;
-    initialState?: CardState;
 	upgradable?: boolean;
+	activable?:boolean;
 }
 
 export interface ChildButton {
@@ -74,4 +74,10 @@ export interface GlobalParameter {
     addEndOfPhase?: number,
     color?: GlobalParameterColor
     imageUrl?: string,
+}
+
+export interface CardState {
+	enabled?: boolean,
+	selected?: boolean,
+	upgraded?: boolean
 }

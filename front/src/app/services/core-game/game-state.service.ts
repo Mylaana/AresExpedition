@@ -8,7 +8,7 @@ import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
 import { EventModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../phase/phase-card-info.service";
-import { PhaseCardHolderModel } from "../../models/core-game/phase-card.model";
+import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/core-game/phase-card.model";
 
 interface SelectedPhase {
     "development": boolean,
@@ -596,12 +596,15 @@ export class GameState{
         this.eventQueue.next(newEventQueue)
     }
 
-	getPlayerUpgradedPhaseCard(playerId: number): PhaseCardHolderModel {
+	getPlayerPhaseCardHolder(playerId: number): PhaseCardHolderModel {
 		return this.groupPlayerState.getValue()[playerId].phaseCard
 	}
-	setPlayerUpgradedPhaseCard(playerId: number, phaseCardHolder :PhaseCardHolderModel): void {
+	getPlayerPhaseCardGroup(playerId: number, phaseIndex: number): PhaseCardGroupModel {
+		return this.groupPlayerState.getValue()[playerId].phaseCard.phaseGroup[phaseIndex]
+	}
+	setPlayerUpgradedPhaseCardFromPhaseCardGroup(playerId: number, phaseIndex: number, phaseCardGroup: PhaseCardGroupModel): void {
 		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.phaseCard = phaseCardHolder
+		playerState.phaseCard.phaseGroup[phaseIndex] = phaseCardGroup
 		this.updatePlayerState(playerId, playerState)
 	}
 }
