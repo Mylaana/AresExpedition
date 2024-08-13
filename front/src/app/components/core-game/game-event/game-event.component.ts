@@ -691,6 +691,7 @@ export class GameEventComponent {
 		//update card selector state
 		this.currentEvent.cardSelector.selectFrom = newList
 		this.currentEvent.cardSelector.cardOptions = {selectable: false}
+		console.log(this.currentEvent.cardSelector.cardOptions)
 	}
 
 	buildCard(playableCardListId: number): void {

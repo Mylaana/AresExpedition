@@ -60,7 +60,7 @@ export class ProjectCardComponent implements OnInit, OnChanges {
   }
   cardClick(){
     if(this.selectable!=true){return}
-	this.state.selected = true
+	this.state.selected = this.state.selected===false
     this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
   }
 
@@ -68,6 +68,7 @@ export class ProjectCardComponent implements OnInit, OnChanges {
     if(this.options===undefined){this.options = {}}
     if(this.options.initialState===undefined){this.state.selected=false}else{this.state=this.options.initialState}
     if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=this.options.selectable}
+	console.log(this.state)
   }
 
   play(): void {
