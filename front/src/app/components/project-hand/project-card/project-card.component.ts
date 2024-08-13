@@ -59,10 +59,8 @@ export class ProjectCardComponent implements OnInit, OnChanges {
     return newTagsId
   }
   cardClick(){
-    //non selectable card should not be clickable either
     if(this.selectable!=true){return}
-	if(this.state.enabled!=true){return}
-	if(this.state.selected=!true){this.state.selected = true}
+	this.state.selected = true
     this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
   }
 

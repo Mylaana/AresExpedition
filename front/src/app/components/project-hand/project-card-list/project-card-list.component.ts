@@ -57,10 +57,10 @@ export class ProjectCardListComponent implements OnChanges{
 		} else {
 			//remove card from selected card list
 			for(let i=0; i<this.selectedCardList.length; i++){
-			if(this.selectedCardList[i]===cardState.cardId){
-				this.selectedCardList.splice(i, 1)
-				break
-			}
+				if(this.selectedCardList[i]===cardState.cardId){
+					this.selectedCardList.splice(i, 1)
+					break
+				}
 			}
 		}
 		this.updateSelectedCardList.emit(this.selectedCardList)
