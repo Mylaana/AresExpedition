@@ -3,7 +3,7 @@ import { PlayerReadyComponent } from '../../player-info/player-ready/player-read
 import { GameState } from '../../../services/core-game/game-state.service';
 import { SelectablePhase } from '../../../types/global.type';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from '../../button/button.component';
+import { ButtonComponent } from '../../tools/button/button.component';
 import { ChildButton } from '../../../interfaces/global.interface';
 
 @Component({
@@ -36,7 +36,7 @@ export class PhasePlanificationComponent {
   }
 
   createPhaseCard(buttonName: SelectablePhase, enabled: boolean): void {
-    
+
     let newButton: ChildButton =  {
       id: this.buttonList.length,
       name: buttonName,

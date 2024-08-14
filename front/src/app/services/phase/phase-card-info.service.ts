@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { PhaseCardType } from "../../types/phase-card.type";
-import { PhaseCardGroupModel, PhaseCardModel, PhaseCardHolderModel } from "../../models/core-game/phase-card.model";
+import { PhaseCardGroupModel, PhaseCardModel, PhaseCardHolderModel } from "../../models/cards/phase-card.model";
 
 @Injectable({
     providedIn: 'root'

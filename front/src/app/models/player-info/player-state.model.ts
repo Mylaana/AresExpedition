@@ -1,6 +1,6 @@
 import { RessourceState, TagState } from "../../interfaces/global.interface";
 import { RGB } from "../../types/global.type";
-import { PhaseCardHolderModel } from "../core-game/phase-card.model";
+import { PhaseCardHolderModel } from "../cards/phase-card.model";
 
 export class PlayerStateModel {
     id!: number;

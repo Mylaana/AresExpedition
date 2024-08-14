@@ -1,9 +1,9 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CardOptions } from '../../../../interfaces/global.interface';
+import { GameState } from '../../../../services/core-game/game-state.service';
+import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { PhaseCardUpgradeListComponent } from '../phase-card-upgrade-list/phase-card-upgrade-list.component';
-import { CardOptions } from '../../../interfaces/global.interface';
-import { GameState } from '../../../services/core-game/game-state.service';
-import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 
 @Component({
   selector: 'app-phase-card-upgrade-selector',

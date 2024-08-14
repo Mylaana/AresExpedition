@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter, input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardState } from '../../../interfaces/global.interface';
-import { CardOptions } from '../../../interfaces/global.interface';
-import { deepCopy } from '../../../functions/global.functions';
+import { CardState } from '../../../../interfaces/global.interface';
+import { CardOptions } from '../../../../interfaces/global.interface';
+import { deepCopy } from '../../../../functions/global.functions';
 
 
 type updateType = 'select' | 'upgradeAndSelect'

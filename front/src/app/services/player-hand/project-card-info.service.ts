@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ProjectCardModel } from "../../models/player-hand/project-card.model";
+import { ProjectCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
 import { json } from "stream/consumers";
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
@@ -44,7 +44,7 @@ export class ProjectCardInfoService {
         let cardList: ProjectCardModel[] = []
 
         for(let jsonCard of jsonData){
-            
+
             card.id = jsonCard.id
             card.cardCode = jsonCard.card_code
             card.origin = jsonCard.origin

@@ -9,17 +9,16 @@ import { MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../t
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { RessourceState } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
-import { ProjectCardListComponent } from '../../project-hand/project-card-list/project-card-list.component';
+import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
 import { ChildButton } from '../../../interfaces/global.interface';
-import { ButtonComponent } from '../../button/button.component';
-import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
+import { ButtonComponent } from '../../tools/button/button.component';
+import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { EventModel } from '../../../models/core-game/event.model';
 import { ButtonNames } from '../../../types/global.type';
 import { PlayableCardZone } from '../../../interfaces/global.interface';
-import { PhaseCardUpgradeSelectorComponent } from '../../phases/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
-import { deepCopy } from '../../../functions/global.functions';
+import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 

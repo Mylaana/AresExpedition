@@ -6,9 +6,9 @@ import { ServerEmulationComponent } from './components/core-game/server-emulatio
 import { GameEventComponent } from './components/core-game/game-event/game-event.component';
 import { PlayerReadyPannelComponent } from './components/player-info/player-ready-pannel/player-ready-pannel.component';
 import { PlayerSelectedPhasePannelComponent } from './components/player-info/player-selected-phase-pannel/player-selected-phase-pannel.component';
-import { ProjectCardListComponent } from './components/project-hand/project-card-list/project-card-list.component';
+import { ProjectCardListComponent } from './components/cards/project/project-card-list/project-card-list.component';
 import { GameState } from './services/core-game/game-state.service';
-import { ProjectCardModel } from './models/player-hand/project-card.model';
+import { ProjectCardModel } from './models/cards/project-card.model';
 import { ProjectCardInfoService } from './services/player-hand/project-card-info.service';
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { PlayerPannelComponent } from './components/player-info/player-pannel/player-pannel.component';

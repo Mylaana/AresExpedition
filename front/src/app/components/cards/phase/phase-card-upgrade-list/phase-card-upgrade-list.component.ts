@@ -1,12 +1,13 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PhaseCardComponent } from '../../cards/phase-card/phase-card.component';
-import { CardState } from '../../../interfaces/global.interface';
-import { CardOptions } from '../../../interfaces/global.interface';
-import { GameState } from '../../../services/core-game/game-state.service';
-import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { PhaseCardGroupModel, PhaseCardHolderModel } from '../../../models/core-game/phase-card.model';
-import { deepCopy } from '../../../functions/global.functions';
+import { PhaseCardComponent } from '../phase-card/phase-card.component';
+import { CardState } from '../../../../interfaces/global.interface';
+import { CardOptions } from '../../../../interfaces/global.interface';
+import { GameState } from '../../../../services/core-game/game-state.service';
+import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
+import { PhaseCardGroupModel } from '../../../../models/cards/phase-card.model';
+import { deepCopy } from '../../../../functions/global.functions';
+
 
 @Component({
   selector: 'app-phase-card-upgrade-list',

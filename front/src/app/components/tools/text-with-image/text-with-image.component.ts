@@ -1,7 +1,7 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { GlobalTagInfoService } from '../../services/global/global-tag-info.service';
-import { GlobalRessourceInfoService } from '../../services/global/global-ressource-info.service';
-import { GlobalItemInfoService } from '../../services/global/global-other-info.service';
+import { GlobalTagInfoService } from '../../../services/global/global-tag-info.service';
+import { GlobalRessourceInfoService } from '../../../services/global/global-ressource-info.service';
+import { GlobalItemInfoService } from '../../../services/global/global-other-info.service';
 
 type HtmlTag = 'p' | 'img'| 'div'
 
@@ -49,7 +49,7 @@ export class TextWithImageComponent implements OnInit{
       }else if(value!=''){
         splittedText[index] = `<p>${value}</p>`
       }
-    }); 
+    });
     for(let i=splittedText.length; i<0; i--){
       if(String(splittedText[i])===''){
         splittedText.splice(i,1)

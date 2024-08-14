@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
-import { ProjectCardModel } from '../../../models/player-hand/project-card.model';
-import { PhaseFilter } from '../../../types/phase-card.type';
-import { CardOptions } from '../../../interfaces/global.interface';
-import { CardState } from '../../../interfaces/global.interface';
+import { ProjectCardModel } from '../../../../models/cards/project-card.model';
+import { PhaseFilter } from '../../../../types/phase-card.type';
+import { CardOptions } from '../../../../interfaces/global.interface';
+import { CardState } from '../../../../interfaces/global.interface';
 
 @Component({
   selector: 'app-project-card-list',

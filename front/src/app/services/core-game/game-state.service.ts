@@ -8,7 +8,7 @@ import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
 import { EventModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../phase/phase-card-info.service";
-import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/core-game/phase-card.model";
+import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
 import { deepCopy } from "../../functions/global.functions";
 
 interface SelectedPhase {
