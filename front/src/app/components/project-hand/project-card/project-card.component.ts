@@ -6,6 +6,7 @@ import { TextWithImageComponent } from '../../text-with-image/text-with-image.co
 import { LayoutCardBackgroundHexagonsComponent } from '../../layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
 import { CardOptions } from '../../../interfaces/global.interface';
 import { CardState } from '../../../interfaces/global.interface';
+import { deepCopy } from '../../../functions/global.functions';
 
 @Component({
   selector: 'app-project-card',
@@ -61,14 +62,14 @@ export class ProjectCardComponent implements OnInit, OnChanges {
   cardClick(){
     if(this.selectable!=true){return}
 	this.state.selected = this.state.selected===false
+	console.log(this.projectCard.title, this.state.selected)
     this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
   }
 
   resetCardState(): void {
     if(this.options===undefined){this.options = {}}
-    if(this.options.initialState===undefined){this.state.selected=false}else{this.state=this.options.initialState}
-    if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=this.options.selectable}
-	console.log(this.state)
+    if(this.options.initialState===undefined){this.state.selected=false}else{this.state=deepCopy(this.options.initialState)}
+    if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=deepCopy(this.options.selectable)}
   }
 
   play(): void {

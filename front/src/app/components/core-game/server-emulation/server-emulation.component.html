@@ -24,5 +24,6 @@
 	<p>eventQueue :</p>
     <div *ngFor="let queue of currentEventQueue">
         <p>{{queue.type}} {{queue.isFinalized}}</p>
+		<p *ngIf="queue.cardSelector">initial state selected: {{queue.cardSelector.cardOptions && queue.cardSelector.cardOptions.initialState && queue.cardSelector.cardOptions.initialState.selected!=undefined? queue.cardSelector.cardOptions.initialState.selected:''}}</p>
     </div>
 </div>

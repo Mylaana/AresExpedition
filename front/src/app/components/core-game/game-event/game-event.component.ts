@@ -19,6 +19,7 @@ import { EventModel } from '../../../models/core-game/event.model';
 import { ButtonNames } from '../../../types/global.type';
 import { PlayableCardZone } from '../../../interfaces/global.interface';
 import { PhaseCardUpgradeSelectorComponent } from '../../phases/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
+import { deepCopy } from '../../../functions/global.functions';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 
@@ -456,7 +457,6 @@ export class GameEventComponent {
 
 	public updateSelectedCardList(cardList: number[]){
 		this.currentEvent.cardSelector.selectedIdList = cardList
-
 		if(this.currentEvent.button?.id===this.getButtonIdFromName('sellCardsEndPhase')){
 			this.updateButtonState(
 				'sellCardsEndPhase',
@@ -691,7 +691,6 @@ export class GameEventComponent {
 		//update card selector state
 		this.currentEvent.cardSelector.selectFrom = newList
 		this.currentEvent.cardSelector.cardOptions = {selectable: false}
-		console.log(this.currentEvent.cardSelector.cardOptions)
 	}
 
 	buildCard(playableCardListId: number): void {

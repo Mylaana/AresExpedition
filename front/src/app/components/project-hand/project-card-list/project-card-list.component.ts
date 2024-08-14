@@ -52,8 +52,6 @@ export class ProjectCardListComponent implements OnChanges{
 	}
 
 	public cardStateChange(cardState: {cardId: number, state:CardState}): void {
-		console.log(cardState)
-		console.log(this.cardOptions)
 		if(cardState.state.selected===true){
 			this.selectedCardList.push(cardState.cardId)
 		} else {
@@ -66,7 +64,6 @@ export class ProjectCardListComponent implements OnChanges{
 			}
 		}
 		this.updateSelectedCardList.emit(this.selectedCardList)
-		console.log(this.selectedCardList)
 	}
 
 	resetCardList(): void {
