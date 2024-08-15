@@ -5,6 +5,7 @@ import { ProjectCardModel } from "../models/cards/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
 import { ButtonNames } from "../types/global.type";
 import { GlobalParameterName } from "../types/global.type";
+import { CardState } from "../models/cards/card.model";
 
 
 export interface RessourceState {
@@ -56,14 +57,15 @@ export interface CardSelector {
     selectionQuantity: number;
     selectionQuantityTreshold: MinMaxEqualType;
     phaseFilter?: PhaseFilter;
-    cardOptions?: CardOptions;
+    cardInitialState?: CardState;
+	stateFromParent?: CardState;
     playCardActive?: number;
 }
 
 export interface PlayableCardZone {
 	cardList: ProjectCardModel[],
 	selectionButtonId?: number,
-	cardOptions?: CardOptions,
+	cardInitialState?: CardState,
 	phaseFilter?: PhaseFilter,
     currentButton?: ChildButton
 }
@@ -76,8 +78,3 @@ export interface GlobalParameter {
     imageUrl?: string,
 }
 
-export interface CardState {
-	enabled?: boolean,
-	selected?: boolean,
-	upgraded?: boolean
-}

@@ -1,5 +1,5 @@
 <div class="wrapper-selection-border" [ngClass]="state.selected===true? 'element-selected':'element-not-selected'">
-    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, selectable ? 'element-selectable': '', state.selected!=true? 'selected':'']">
+    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, state.selectable ? 'element-selectable': '', state.selected!=true? 'selected':'']">
         <div class="wrapper-card-grid">
             <div class="grid-box-cost">
                 <div class="wrapper-cost">
@@ -108,7 +108,7 @@
     </button>
 </div>
 
-<div *ngIf="options?.activable===true" class="wrapper-activation">
+<div *ngIf="state?.activable===true" class="wrapper-activation">
     <button  (click)="activate(1)" class="validation-button">Activate</button>
     <button  (click)="activate(2)" class="validation-button">Activate again</button>
 </div>

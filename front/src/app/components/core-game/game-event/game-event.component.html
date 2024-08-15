@@ -14,7 +14,7 @@
 				<div *ngIf="(currentPhase==='development' || currentPhase==='construction') && currentEvent.type==='selectCardToBuild' " class="wrapper-play-card">
 					<div class="play-card-one ares-background ares-border">
 						<div class="play-card-zone ares-card">
-							<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[0].cardList" [cardOptions]="currentEvent.playCardZone[0].cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[0].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+							<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[0].cardList" [cardInitialState]="currentEvent.playCardZone[0].cardInitialState" [cardsPhaseFilter]="currentEvent.playCardZone[0].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
 						</div>
 						<div class="wrapper-buttons">
 							<div class="wrapper-select-button" *ngIf="buttons[getButtonIdFromName('selectFirstCard')].enabled===true">
@@ -31,7 +31,7 @@
 					<div class="play-card-two ares-background ares-border">
 						<div>
 							<div class="play-card-zone ares-card">
-								<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[1].cardList" [cardOptions]="currentEvent.playCardZone[1].cardOptions" [cardsPhaseFilter]="currentEvent.playCardZone[1].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+								<app-project-card-list class="play-card-zone-list" [cardList]="currentEvent.playCardZone[1].cardList" [cardInitialState]="currentEvent.playCardZone[1].cardInitialState" [cardsPhaseFilter]="currentEvent.playCardZone[1].phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
 							</div>
 							<div class="wrapper-buttons">
 								<div class="wrapper-select-button" *ngIf="buttons[getButtonIdFromName('selectSecondCard')].enabled===true">
@@ -57,7 +57,7 @@
         </div>
         <div class="wrapper-event-bottom">
             <div *ngIf="currentEvent.type==='selectCard' || currentEvent.type==='selectCardToBuild' || currentEvent.type==='forcedSell' || currentEvent.type==='optionalSell'" class="wrapper-card-selector ares-background">
-                <app-project-card-list [cardList]="currentEvent.cardSelector.selectFrom" [cardOptions]="currentEvent.cardSelector.cardOptions" [cardsPhaseFilter]="currentEvent.cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+                <app-project-card-list [cardList]="currentEvent.cardSelector.selectFrom" [stateFromParent]="currentEvent.cardSelector.stateFromParent" [cardInitialState]="currentEvent.cardSelector.cardInitialState" [cardsPhaseFilter]="currentEvent.cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
 			<app-phase-card-upgrade-selector *ngIf="currentEvent.type==='upgradePhase'" [phaseList]="currentEvent.value!=undefined ? currentEvent.value:null"></app-phase-card-upgrade-selector>
         </div>

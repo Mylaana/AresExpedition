@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhaseCardComponent } from '../phase-card/phase-card.component';
-import { CardState } from '../../../../interfaces/global.interface';
-import { CardOptions } from '../../../../interfaces/global.interface';
+import { CardState } from '../../../../models/cards/card.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { PhaseCardGroupModel } from '../../../../models/cards/phase-card.model';
@@ -21,7 +20,7 @@ import { deepCopy } from '../../../../functions/global.functions';
 })
 export class PhaseCardUpgradeListComponent{
 	@Input() phaseIndex!: number;
-	@Input() cardOptions!: CardOptions;
+	@Input() cardInitialState!: CardState;
 	@Output() cardUpgraded: EventEmitter<{phaseIndex: number, phaseCardLevel: number}> = new EventEmitter<{phaseIndex: number, phaseCardLevel: number}>()
 
 	phaseCardLevelList!: number[];

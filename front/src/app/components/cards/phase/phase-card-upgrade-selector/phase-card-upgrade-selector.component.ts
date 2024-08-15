@@ -1,6 +1,6 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardOptions } from '../../../../interfaces/global.interface';
+import { CardState } from '../../../../models/cards/card.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { PhaseCardUpgradeListComponent } from '../phase-card-upgrade-list/phase-card-upgrade-list.component';
@@ -18,7 +18,7 @@ import { PhaseCardUpgradeListComponent } from '../phase-card-upgrade-list/phase-
 export class PhaseCardUpgradeSelectorComponent {
 	@Input() phaseList!: number[]
 
-	cardOptions: CardOptions = {selectable: false, upgradable: true};
+	cardInitialState: CardState = {selectable: false, upgradable: true};
 	clientPlayerId!: number
 	upgradeNumber: number = 0
 
@@ -42,8 +42,8 @@ export class PhaseCardUpgradeSelectorComponent {
 		}
 
 		if(this.upgradeNumber===0){
-			this.cardOptions.selectable = true
-			this.cardOptions.upgradable = false
+			this.cardInitialState.selectable = true
+			this.cardInitialState.upgradable = false
 		}
 	}
 }

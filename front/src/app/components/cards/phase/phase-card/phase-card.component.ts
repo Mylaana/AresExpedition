@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, Output, EventEmitter, input} from '@angular/core';
+import { Component, Input, Output, EventEmitter, input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardState } from '../../../../interfaces/global.interface';
-import { CardOptions } from '../../../../interfaces/global.interface';
+import { CardState } from '../../../../models/cards/card.model';
 import { deepCopy } from '../../../../functions/global.functions';
+import { BaseCardComponent } from '../../base/base-card/base-card.component';
 
 
 type updateType = 'select' | 'upgradeAndSelect'
@@ -14,18 +14,13 @@ type updateType = 'select' | 'upgradeAndSelect'
   templateUrl: './phase-card.component.html',
   styleUrl: './phase-card.component.scss'
 })
-export class PhaseCardComponent {
-	@Input() options?: CardOptions;
+export class PhaseCardComponent extends BaseCardComponent {
 	@Input() phaseCardLevel: number = 0;
 	@Input() phaseIndex!: number;
-	@Input() state!: CardState;
-	@Output() cardStateChange: EventEmitter<{cardId: number, state:CardState, stateUpdateType:string}> = new EventEmitter<{cardId: number, state:CardState, stateUpdateType:string}>()
 
-	selectable!: boolean;
-
-	ngOnInit():void {
+	override ngOnInit():void {
+		super.ngOnInit()
 		if(this.phaseIndex===undefined){this.phaseIndex=0}
-		this.selectable = false
 	}
 
 	updateState(updateType: updateType){

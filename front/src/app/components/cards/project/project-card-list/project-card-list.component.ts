@@ -3,8 +3,7 @@ import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { PhaseFilter } from '../../../../types/phase-card.type';
-import { CardOptions } from '../../../../interfaces/global.interface';
-import { CardState } from '../../../../interfaces/global.interface';
+import { CardState } from '../../../../models/cards/card.model';
 
 @Component({
   selector: 'app-project-card-list',
@@ -18,7 +17,8 @@ import { CardState } from '../../../../interfaces/global.interface';
 export class ProjectCardListComponent implements OnChanges{
 	@Input() cardsPhaseFilter!: PhaseFilter;
 	@Input() cardList!:ProjectCardModel[];
-	@Input() cardOptions?: CardOptions;
+	@Input() cardInitialState?: CardState;
+	@Input() stateFromParent?: CardState;
 	@Output() updateSelectedCardList: EventEmitter<number[]> = new EventEmitter<number[]>()
 	projectHand!: ProjectCardModel[];
 	displayedCards!: ProjectCardModel[];
@@ -52,6 +52,7 @@ export class ProjectCardListComponent implements OnChanges{
 	}
 
 	public cardStateChange(cardState: {cardId: number, state:CardState}): void {
+		console.log('cardstate received: ', cardState.state)
 		if(cardState.state.selected===true){
 			this.selectedCardList.push(cardState.cardId)
 		} else {
@@ -68,9 +69,7 @@ export class ProjectCardListComponent implements OnChanges{
 
 	resetCardList(): void {
 		this.displayedCards = this.filterCards(this.cardList, this.cardsPhaseFilter)
-		if(this.cardOptions===undefined){this.cardOptions = {}}
-		if(this.cardOptions.initialState===undefined){this.cardOptions.initialState={selected:false}}
-		if(this.cardOptions.selectable===undefined){this.cardOptions.selectable=false}
+		if(this.cardInitialState===undefined){this.cardInitialState = {selected:false, selectable:false}}
 
 		this.selectedCardList = []
 	}

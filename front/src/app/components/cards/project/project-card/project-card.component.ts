@@ -1,14 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { GlobalTagInfoService } from '../../../../services/global/global-tag-info.service';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
-import { CardOptions } from '../../../../interfaces/global.interface';
-import { CardState } from '../../../../interfaces/global.interface';
-import { deepCopy } from '../../../../functions/global.functions';
 import { Card } from '../../../../models/cards/card.model';
-import { inject } from '@angular/core';
+import { BaseCardComponent } from '../../base/base-card/base-card.component';
+import { deepCopy } from '../../../../functions/global.functions';
 
 @Component({
   selector: 'app-project-card',
@@ -22,36 +20,25 @@ import { inject } from '@angular/core';
   styleUrl: './project-card.component.scss',
   providers: [Card],
 })
-export class ProjectCardComponent implements OnInit, OnChanges {
+export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
-	@Input() options?: CardOptions;
-	@Output() cardStateChange: EventEmitter<{cardId: number, state:CardState}> = new EventEmitter<{cardId: number, state:CardState}>()
-	state!: CardState;
-	selectable!: boolean;
 
-	private readonly card = inject(Card);
+	//private readonly card = inject(Card);
 
 	readonly tagNumber = 3;
 
-	constructor(private globalTagInfoService: GlobalTagInfoService){}
+	constructor(private globalTagInfoService: GlobalTagInfoService){
+		super();
+	}
 
-	ngOnInit() {
+	override ngOnInit() {
+		super.ngOnInit()
 		this.projectCard.tagsUrl = []
 
 		this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
 		// fills tagUrl
 		for(let i = 0; i < this.projectCard.tagsId.length; i++) {
 		this.projectCard.tagsUrl.push(this.globalTagInfoService.getTagUrlFromID(this.projectCard.tagsId[i]))
-		}
-
-		//loading options
-		this.resetCardState()
-		this.card.cardMethodTest()
-	}
-
-	ngOnChanges(changes: SimpleChanges) {
-		if (changes['options'] && changes['options'].currentValue) {
-		this.resetCardState()
 		}
 	}
 
@@ -66,16 +53,9 @@ export class ProjectCardComponent implements OnInit, OnChanges {
 		return newTagsId
 	}
 	cardClick(){
-		if(this.selectable!=true){return}
+		if(this.state.selectable!=true){return}
 		this.state.selected = this.state.selected===false
-		console.log(this.projectCard.title, this.state.selected)
 		this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
-	}
-
-	resetCardState(): void {
-		if(this.options===undefined){this.options = {}}
-		if(this.options.initialState===undefined){this.state.selected=false}else{this.state=deepCopy(this.options.initialState)}
-		if(this.options.selectable===undefined){this.selectable=false}else{this.selectable=deepCopy(this.options.selectable)}
 	}
 
 	play(): void {
