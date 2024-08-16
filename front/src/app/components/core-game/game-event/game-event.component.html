@@ -56,7 +56,7 @@
             <app-phase-production *ngIf="currentPhase==='production' && currentEvent.type==='production'"></app-phase-production>
         </div>
         <div class="wrapper-event-bottom">
-            <div *ngIf="currentEvent.type==='selectCard' || currentEvent.type==='selectCardToBuild' || currentEvent.type==='forcedSell' || currentEvent.type==='optionalSell'" class="wrapper-card-selector ares-background">
+            <div *ngIf="currentEvent.type==='selectCard' || currentEvent.type==='selectCardToBuild' || currentEvent.type==='forcedSell' || currentEvent.type==='optionalSell' || currentEvent.type==='research'" class="wrapper-card-selector ares-background">
                 <app-project-card-list [cardList]="currentEvent.cardSelector.selectFrom" [stateFromParent]="currentEvent.cardSelector.stateFromParent" [cardInitialState]="currentEvent.cardSelector.cardInitialState" [cardsPhaseFilter]="currentEvent.cardSelector.phaseFilter" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
 			<app-phase-card-upgrade-selector *ngIf="currentEvent.type==='upgradePhase'" [phaseList]="currentEvent.value!=undefined ? currentEvent.value:null"></app-phase-card-upgrade-selector>

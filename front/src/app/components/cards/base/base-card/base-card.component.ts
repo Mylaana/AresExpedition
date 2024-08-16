@@ -48,8 +48,10 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 	}
 
 	changeStateFromParent():void{
+		if(!this.state){return}
+
 		if(this.stateFromParent?.activable){this.state.activable=deepCopy(this.stateFromParent.activable)}
-		if(this.stateFromParent?.playable){this.state.playable=deepCopy(this.stateFromParent.playable)}
+		if(this.stateFromParent?.playable!=undefined){this.state.playable=deepCopy(this.stateFromParent.playable)}
 		if(this.stateFromParent?.selectable){this.state.selectable=deepCopy(this.stateFromParent.selectable)}
 		if(this.stateFromParent?.selected){this.state.selected=deepCopy(this.stateFromParent.selected)}
 		if(this.stateFromParent?.upgradable){this.state.upgradable=deepCopy(this.stateFromParent.upgradable)}

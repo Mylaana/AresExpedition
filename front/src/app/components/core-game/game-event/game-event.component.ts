@@ -367,7 +367,7 @@ export class GameEventComponent {
 			if(element.drawRule==='research'){
 				let newEvent = new EventModel
 				let quantity: number = 2
-				newEvent.type = 'selectCard'
+				newEvent.type = 'research'
 				newEvent.cardSelector = {
 					selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
 					selectionQuantity: quantity,
@@ -466,7 +466,7 @@ export class GameEventComponent {
 			)
 			return
 		}
-		if(this.currentPhase==='research'){
+		if(this.currentEvent.type === 'research'){
 			this.updateButtonState(
 				'validateResearch',
 				this.compareValueToTreshold(
@@ -746,7 +746,7 @@ export class GameEventComponent {
 			newList.push(c)
 		}
 		newList.push(this.currentEvent.playCardZone[playableCardListId].cardList[0])
-		console.log('cancel: ',this.currentEvent.playCardZone[playableCardListId].cardList[0].title)
+		console.log('cancel: ',this.currentEvent.playCardZone[playableCardListId].cardList[0])
 		this.currentEvent.cardSelector.selectFrom = newList
 
 		this.currentEvent.playCardZone[playableCardListId].cardList = []
