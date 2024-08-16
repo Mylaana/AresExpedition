@@ -21,6 +21,7 @@ export class PlayerStateModel {
     }
 	phaseCard = new PhaseCardHolderModel
 	phaseCardUpgradeNumber: number = 0
+	sellCardValueMod: number = 0
 
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){

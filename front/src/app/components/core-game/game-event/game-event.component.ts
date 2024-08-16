@@ -51,7 +51,6 @@ export class GameEventComponent {
 	currentEvent: EventModel = new EventModel;
 	currentEventId: number = -1
 	eventCounter: number = -1
-	eventSelectionActive: boolean = false
 
 	currentPhase: NonSelectablePhase = "planification";
 	buttons: ChildButton[] = [];
@@ -405,6 +404,8 @@ export class GameEventComponent {
 
 		let ticket = eventQueue[0]
 
+
+
 		if(this.currentEvent != ticket){
 			//saves current event status in event queue
 			for(let e of eventQueue){
@@ -414,9 +415,15 @@ export class GameEventComponent {
 				}
 			}
 		}
+		if (this.currentEvent === ticket){return}
+		//remove stateFromParent before switching event
+		if(this.currentEvent && this.currentEvent.cardSelector && this.currentEvent.cardSelector.stateFromParent){this.currentEvent.cardSelector.stateFromParent=undefined}
 
 		this.currentEvent = ticket
-		this.eventSelectionActive = false
+
+		console.log('currentevent : ', this.currentEvent)
+		//reset currentEvent parameters
+		this.currentEvent.selectionActive = false
 
 		switch(ticket.type){
 			case('forcedSell'):{
@@ -430,7 +437,7 @@ export class GameEventComponent {
 				this.currentEvent.cardSelector.title = `Too many cards in hand, please select at least ${ticket.cardSelector.selectionQuantity} cards to sell.`
 				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(playerCards.hand)
 
-				this.eventSelectionActive = true
+				this.currentEvent.selectionActive = true
 				break
 			}
 			case('endOfPhase'):{
@@ -440,15 +447,19 @@ export class GameEventComponent {
 				break
 			}
 			case('selectCard'):{
-				this.eventSelectionActive = true
+				this.currentEvent.selectionActive = true
 				break
 			}
 			case('optionalSell'):{
-				this.eventSelectionActive = true
+				this.currentEvent.selectionActive = true
 				break
 			}
 			case('upgradePhase'):{
-				this.eventSelectionActive = true
+				this.currentEvent.selectionActive = true
+				break
+			}
+			case('selectCardToBuild'):{
+				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand())
 				break
 			}
 		}
@@ -498,7 +509,7 @@ export class GameEventComponent {
 					return
 				}
 			}
-			this.eventSelectionActive = false
+			this.currentEvent.selectionActive = false
 			this.selectPlayableCard(zoneId, this.currentEvent.cardSelector.selectedIdList[0])
 			this.currentEvent.cardSelector.playCardActive = undefined
 		}
@@ -527,6 +538,7 @@ export class GameEventComponent {
 			case('validateOptionalSellCards'):{
 				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
 				this.updateButtonState('sellCardsEndPhase',false)
+				this.gameStateService.sellCardsFromClientHand( this.currentEvent.cardSelector.selectedIdList.length)
 				this.currentEvent.isFinalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
@@ -540,14 +552,13 @@ export class GameEventComponent {
 					zoneId = 1
 				}
 				this.currentEvent.cardSelector.playCardActive = zoneId
-				this.currentEvent.cardSelector.stateFromParent = {selectable: true, playable: true}
-				console.log(this.currentEvent)
+				this.currentEvent.cardSelector.stateFromParent = {selectable: true}
 
 				if(clickedButtonName==='selectSecondCard'){
 					this.updateButtonState('selectAlternative', false)
 				}
 
-				this.eventSelectionActive = true
+				this.currentEvent.selectionActive = true
 				break
 			}
 			case('cancelFirstCard'):{
@@ -591,7 +602,7 @@ export class GameEventComponent {
 					selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
 					selectionQuantity: 0,
 					selectionQuantityTreshold: 'min',
-					cardInitialState: {selectable: true},
+					cardInitialState: {selectable:true, sellable: true},
 					title: `Sell any card number :`,
 					selectedIdList: [],
 				}
@@ -697,7 +708,7 @@ export class GameEventComponent {
 		let buttonCancel: ButtonNames
 		let buttonSelect: ButtonNames
 		let buttonBuild: ButtonNames
-		let card: number[]
+		let card: ProjectCardModel
 
 		if(playableCardListId===0){
 			buttonBuild = 'buildFirstCard'
@@ -714,10 +725,9 @@ export class GameEventComponent {
 		this.updateButtonState(buttonSelect, false)
 		this.updateButtonState(buttonCancel, false)
 
-		card = [this.currentEvent.playCardZone[playableCardListId].cardList[0].id]
+		card = this.currentEvent.playCardZone[playableCardListId].cardList[0]
 
-		this.gameStateService.addCardToPlayerPlayed(this.clientPlayerId, card)
-		this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, card)
+		this.gameStateService.playCardFromClientHand(card)
 		this.currentEvent.playCardZone[playableCardListId].cardList = []
 	}
 

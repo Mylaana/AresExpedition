@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
-import { json } from "stream/consumers";
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
 
 const language = 'en'
@@ -48,7 +47,7 @@ export class ProjectCardInfoService {
             card.id = jsonCard.id
             card.cardCode = jsonCard.card_code
             card.origin = jsonCard.origin
-            card.cost = jsonCard.cost
+            card.costInitial = jsonCard.cost
             card.tagsId = this.convertTagList(jsonCard.tagsId)
             card.cardSummaryType = this.convertSummaryType(jsonCard.effectSummaryType)
             card.cardType = this.convertCardType(jsonCard.cardType)

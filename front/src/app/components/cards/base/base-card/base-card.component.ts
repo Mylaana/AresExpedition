@@ -22,6 +22,9 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
+		if (changes['initialState'] && changes['initialState'].currentValue) {
+			this.resetCardState()
+		}
 		if (changes['stateFromParent'] && changes['stateFromParent'].currentValue) {
 			this.changeStateFromParent()
 		}
@@ -34,15 +37,21 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 			selectable:false,
 			selected:false,
 			upgradable:false,
-			upgraded:false
+			upgraded:false,
+			sellable:false
 		}
 	}
 
 	resetCardState(): void {
+		if(!this.state){return}
+
 		if(this.initialState?.activable){this.state.activable=deepCopy(this.initialState.activable)}else{this.state.activable=false}
 		if(this.initialState?.playable){this.state.playable=deepCopy(this.initialState.playable)}else{this.state.playable=false}
+		if(this.initialState?.sellable){this.state.sellable=deepCopy(this.initialState.sellable)}else{this.state.sellable=false}
+
 		if(this.initialState?.selectable){this.state.selectable=deepCopy(this.initialState.selectable)}else{this.state.selectable=false}
 		if(this.initialState?.selected){this.state.selected=deepCopy(this.initialState.selected)}else{this.state.selected=false}
+
 		if(this.initialState?.upgradable){this.state.upgradable=deepCopy(this.initialState.upgradable)}else{this.state.upgradable=false}
 		if(this.initialState?.upgraded){this.state.upgraded=deepCopy(this.initialState.upgraded)}else{this.state.upgraded=false}
 	}

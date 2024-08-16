@@ -4,7 +4,8 @@ export class ProjectCardModel {
     id!: number;
     cardCode!: string;
     origin!: string;
-    cost!: number;
+    costInitial!: number;
+	cost!: number;
     tagsId!: number[];
     cardSummaryType?: SummaryType;
     cardType!: CardType;

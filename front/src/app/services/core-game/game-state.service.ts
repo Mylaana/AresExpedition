@@ -10,6 +10,7 @@ import { EventModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../phase/phase-card-info.service";
 import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
 import { deepCopy } from "../../functions/global.functions";
+import { ProjectCardModel } from "../../models/cards/project-card.model";
 
 interface SelectedPhase {
     "development": boolean,
@@ -28,10 +29,11 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 10;
+const handSizeStart: number = 0;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
+const cardSellCost: number = 3;
 
 @Injectable({
     providedIn: 'root'
@@ -89,8 +91,8 @@ export class GameState{
                 "id":0,
                 "name": "megacredit",
                 "valueMod": 0,
-                "valueProd": 99,
-                "valueStock": 0,
+                "valueProd": 0,
+                "valueStock": 5,
                 "hasStock": true,
                 "imageUrlId": 9,
             },
@@ -626,6 +628,21 @@ export class GameState{
 			playerState.phaseCardUpgradeNumber -= upgradeNumber
 		}
 		console.log('state after: ', deepCopy(playerState.phaseCardUpgradeNumber))
+		this.updatePlayerState(playerId, playerState)
+	}
+	sellCardsFromClientHand(quantity: number){
+		let playerState = this.getClientPlayerState()
+		playerState.ressource[0].valueStock += quantity * (cardSellCost + playerState.sellCardValueMod)
+		this.updateClientPlayerState(playerState)
+	}
+	playCardFromClientHand(card: ProjectCardModel):void{
+		this.addCardToPlayerPlayed(this.clientPlayerId, [card.id])
+		this.removeCardFromPlayerHand(this.clientPlayerId, [card.id])
+		this.removeMegaCreditsFromPlayer(this.clientPlayerId, card.cost)
+	}
+	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
+		let playerState = this.getPlayerStateFromId(playerId)
+		playerState.ressource[0].valueStock -= quantity
 		this.updatePlayerState(playerId, playerState)
 	}
 }

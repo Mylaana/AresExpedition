@@ -14,4 +14,5 @@ export class EventModel {
     button?: ChildButton
     playCardZone!: PlayableCardZone []
 	value?: any
+	selectionActive: boolean = false
 }

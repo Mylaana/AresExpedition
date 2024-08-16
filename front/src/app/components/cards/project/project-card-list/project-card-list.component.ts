@@ -52,7 +52,6 @@ export class ProjectCardListComponent implements OnChanges{
 	}
 
 	public cardStateChange(cardState: {cardId: number, state:CardState}): void {
-		console.log('cardstate received: ', cardState.state)
 		if(cardState.state.selected===true){
 			this.selectedCardList.push(cardState.cardId)
 		} else {
