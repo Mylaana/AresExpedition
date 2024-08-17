@@ -6,13 +6,15 @@ import { MinMaxEqualType } from "../types/global.type";
 import { ButtonNames } from "../types/global.type";
 import { GlobalParameterName } from "../types/global.type";
 import { CardState } from "../models/cards/card.model";
+import { RessourceType } from "../types/global.type";
 
 
 export interface RessourceState {
     "id": number,
-    "name": string,
+    "name": RessourceType,
     "valueMod": number,
     "valueProd": number,
+	"valueBaseProd": number,
     "valueStock": number,
     "hasStock": boolean,
     "imageUrlId": number,
@@ -78,3 +80,7 @@ export interface GlobalParameter {
     imageUrl?: string,
 }
 
+export interface RessourceValue {
+	name: RessourceType,
+	value: number
+}

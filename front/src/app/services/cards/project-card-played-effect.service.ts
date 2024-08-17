@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType, RessourceType } from "../../types/global.type";
+import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 
 @Injectable({
     providedIn: 'root'
@@ -9,6 +10,8 @@ import { AdvancedRessourceType, RessourceType } from "../../types/global.type";
 export class ProjectCardPlayedEffectService {
 	playedCardList: number [] = []
 	clientPlayerState!: PlayerStateModel
+
+	constructor(private scalingProductionService: ProjectCardScalingProductionsService){}
 
 	setCardStockableRessource(card:ProjectCardModel, ressource: AdvancedRessourceType):void{
 		if(!card.stock){
@@ -32,6 +35,7 @@ export class ProjectCardPlayedEffectService {
 	playCard(card: ProjectCardModel, playerState: PlayerStateModel): PlayerStateModel {
 		this.clientPlayerState = playerState
 		this.clientPlayerState.playCard(card)
+		this.clientPlayerState.updateProductions()
 
 		switch(card.cardCode){
 			//Decomposing Fungus

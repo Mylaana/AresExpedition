@@ -4,7 +4,6 @@ import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { RessourceType } from "../../types/global.type";
 
-
 const ressourceIndex = new  Map<RessourceType, number>(
 	[
 		['megacredit', 0],
@@ -36,6 +35,9 @@ export class PlayerStateModel {
 	phaseCardUpgradeNumber: number = 0
 	sellCardValueMod: number = 0
 
+	//private readonly scalingProd = inject(ProjectCardScalingProductionsService);
+	//constructor(private scalingProductionService: ProjectCardScalingProductionsService){}
+
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){
             if(this.ressource[i].id === ressourceId){
@@ -58,6 +60,7 @@ export class PlayerStateModel {
 		this.addCardsPlayed([card.id])
 		this.removeCardsFromHand([card.id])
 		this.payCardCost(card)
+		this.updateProductions()
 	}
 	addCardsPlayed(cardList: number[]):void{
 		for(let card of cardList){
@@ -76,12 +79,16 @@ export class PlayerStateModel {
 		this.addRessource('megacredit', -card.cost)
 	}
 	addProduction(ressource: RessourceType, quantity: number){
-		this.ressource[Number(ressourceIndex.get(ressource))].valueProd += quantity
+		this.ressource[Number(ressourceIndex.get(ressource))].valueBaseProd += quantity
 	}
 	addRessource(ressource: RessourceType, quantity: number){
 		this.ressource[Number(ressourceIndex.get(ressource))].valueStock += quantity
 	}
-
+	/**update productions with flat + scaling values*/
+	updateProductions(ressource: RessourceType, scalingProduction:number):void{
+		this.ressource[Number(ressourceIndex.get(ressource))].valueProd =
+			this.ressource[Number(ressourceIndex.get(ressource))].valueBaseProd + scalingProduction
+	}
 }
 
 
