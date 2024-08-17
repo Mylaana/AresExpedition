@@ -58,7 +58,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	  )
     //return
     //force draw card list for debug purpose
-    let cardDrawList: number[] = [135, 37, 217,  65, 92, 25, 54]
+    let cardDrawList: number[] = [204,213,232,260]
 
     this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
   }

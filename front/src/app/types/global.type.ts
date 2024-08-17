@@ -16,3 +16,4 @@ export type ButtonNames =
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
+export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'

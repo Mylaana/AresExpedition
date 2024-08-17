@@ -138,6 +138,51 @@
         }
     },
     {
+        "id": 20,
+        "card_code": "20",
+        "origin": "base",
+        "cost": 10,
+        "tagsId": [
+            8
+        ],
+        "effectSummaryType": "action",
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "Decomposing Fungus",
+            "fr": "Champignons en D\u00e9composition"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "-$ressourve_animal$/$ressource_microbe$$skipline$$other_arrow$ 3 $ressource_plant$",
+            "fr": "-$ressourve_animal$/$ressource_microbe$$skipline$$other_arrow$ 3 $ressource_plant$"
+        },
+        "effectText": {
+            "en": "Action: Remove 1 animal or 1 microbe from one of your cards to gain 3 plants.",
+            "fr": "Action: Retirez 1 animal ou 1 microbe de l'une de vos cartes pour gagner 3 plantes."
+        },
+        "playedText": {
+            "en": "Place 2 microbes on this card.",
+            "fr": "Placez 2 microbes sur cette carte."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
         "id": 25,
         "card_code": "25",
         "origin": "base",
@@ -245,15 +290,15 @@
         "phaseDown": "",
         "title": {
             "en": "Interns",
-            "fr": ""
+            "fr": "Internes"
         },
         "vpText": {
             "en": "",
             "fr": ""
         },
         "effectSummaryText": {
-            "en": "",
-            "fr": ""
+            "en": "$other_researchsymbol$ : + $other_researchcard2$",
+            "fr": "$other_researchsymbol$ : + $other_researchcard2$"
         },
         "effectText": {
             "en": "Effect: When you draw cards during the research phase, draw 2 additional cards.",
@@ -451,6 +496,51 @@
         "prerequisiteSummaryText": {
             "en": "4 $tag_science$",
             "fr": "4 $tag_science$"
+        }
+    },
+    {
+        "id": 49,
+        "card_code": "49",
+        "origin": "base",
+        "cost": 4,
+        "tagsId": [
+            ""
+        ],
+        "effectSummaryType": "action",
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "Redrafted Contracts",
+            "fr": "Contrats Renouvel\u00e9s"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "1-3 $other_card$$other_arrow$1-3$other_card$",
+            "fr": "1-3 $other_card$$other_arrow$1-3$other_card$"
+        },
+        "effectText": {
+            "en": "ACTION: Discard up to 3 cards from your hand. Draw that number of cards.",
+            "fr": "Action: D\u00e9faussez jusqu'\u00e0 trois cartes de votre main. Piochez un m\u00eame nombre de cartes."
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
         }
     },
     {
@@ -819,6 +909,52 @@
         }
     },
     {
+        "id": 76,
+        "card_code": "76",
+        "origin": "base",
+        "cost": 30,
+        "tagsId": [
+            1,
+            9
+        ],
+        "effectSummaryType": "",
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Deimos Down",
+            "fr": "Destruction de Deimos"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Increase the temperature 3 steps.$skipline$Earn 7 MC.",
+            "fr": "Augmentez la temp\u00e9rature de 3 niveaux.$skipline$Gagnez 7 MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
         "id": 77,
         "card_code": "77",
         "origin": "base",
@@ -1003,6 +1139,52 @@
         }
     },
     {
+        "id": 93,
+        "card_code": "93",
+        "origin": "base",
+        "cost": 32,
+        "tagsId": [
+            1,
+            9
+        ],
+        "effectSummaryType": "",
+        "cardType": "redProject",
+        "vpNumber": "1",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Phobos Falls",
+            "fr": "Chute de Phobos"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Increase the temperature 1 step.$skipline$Flip an ocean tile.$skipline$Draw 2 cards.",
+            "fr": "Augmentez la temp\u00e9rature de 1 niveau.$skipline$R\u00e9v\u00e9lez une tuile Oc\u00e9an.$skipline$Piochez 2 cartes."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
         "id": 96,
         "card_code": "96",
         "origin": "base",
@@ -1092,6 +1274,51 @@
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
+        }
+    },
+    {
+        "id": 123,
+        "card_code": "123",
+        "origin": "base",
+        "cost": 6,
+        "tagsId": [
+            4
+        ],
+        "effectSummaryType": "production",
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Cartel",
+            "fr": "Cartel"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_1$/$tag_earth$",
+            "fr": "$ressource_megacreditvoid_1$/$tag_earth$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_earth$ en votre possession, y compris celui-ci."
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
         }
     },
     {
@@ -1216,6 +1443,51 @@
         "effectText": {
             "en": "During the production phase, this card produce 3 heat.",
             "fr": "Lors de la phase de production, cette carte produit 3 chaleurs."
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
+        "id": 144,
+        "card_code": "144",
+        "origin": "base",
+        "cost": 3,
+        "tagsId": [
+            ""
+        ],
+        "effectSummaryType": "production",
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "I-II",
+        "phaseDown": "",
+        "title": {
+            "en": "Great Escarpment Consortium",
+            "fr": "Consortium du Grand Escarpement"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$ressource_steel$",
+            "fr": "$ressource_steel$"
+        },
+        "effectText": {
+            "en": "When you play a $tag_building$, you pay 2 MC less for it.",
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
         },
         "playedText": {
             "en": "",
@@ -1367,6 +1639,52 @@
         }
     },
     {
+        "id": 163,
+        "card_code": "163",
+        "origin": "base",
+        "cost": 17,
+        "tagsId": [
+            0,
+            3
+        ],
+        "effectSummaryType": "production",
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Microprocessors",
+            "fr": "Microprocesseurs"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "3 $ressource_heat$",
+            "fr": "3 $ressource_heat$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produce 3 heat.",
+            "fr": "Lors de la phase de production, cette carte produit 3 chaleurs."
+        },
+        "playedText": {
+            "en": "Draw 2 cards. Then, discard a card.",
+            "fr": "Piochez 2 cartes. Puis, d\u00e9faussez une carte."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
         "id": 171,
         "card_code": "171",
         "origin": "base",
@@ -1443,6 +1761,51 @@
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
             "fr": "Durant la phase de production, cette carte produit 1 chaleur."
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
+        "id": 180,
+        "card_code": "180",
+        "origin": "base",
+        "cost": 17,
+        "tagsId": [
+            1
+        ],
+        "effectSummaryType": "production",
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Satellite Farms",
+            "fr": "Fermes de Satellite"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$ressource_heat$/$tag_space$",
+            "fr": "$ressource_heat$/$tag_space$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 heat for each $tag_space$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur par $tag_space$ en votre possession, y compris celui-ci."
         },
         "playedText": {
             "en": "",
@@ -1774,6 +2137,51 @@
         }
     },
     {
+        "id": 201,
+        "card_code": "201",
+        "origin": "base",
+        "cost": 7,
+        "tagsId": [
+            0
+        ],
+        "effectSummaryType": "mixedProduction",
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "I-II",
+        "title": {
+            "en": "Underground City",
+            "fr": "Cit\u00e9 Souterraine"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_1$$skipline$$ressource_steel$",
+            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_steel$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 MC. When you play a BUILDING, you pay 2 MC less for it.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC.$skipline$Lorsque vous jouez un $other_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
         "id": 202,
         "card_code": "202",
         "origin": "base",
@@ -1838,7 +2246,7 @@
         "phaseUp": "I-II",
         "phaseDown": "",
         "title": {
-            "en": "Westa Shipyard",
+            "en": "Vesta Shipyard",
             "fr": "Chantier de Vesta"
         },
         "vpText": {
@@ -2003,6 +2411,52 @@
         }
     },
     {
+        "id": 222,
+        "card_code": "P19",
+        "origin": "promo",
+        "cost": 7,
+        "tagsId": [
+            8,
+            4
+        ],
+        "effectSummaryType": "trigger",
+        "cardType": "blueProject",
+        "vpNumber": "1",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "I-II, V",
+        "phaseDown": "",
+        "title": {
+            "en": "Bacterial Aggregates",
+            "fr": "Agr\u00e9gats de Bact\u00e9ries"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$tag_earth$ : $ressource_microbe$$skipline$$other_researchsymbol$ :$other_researchcard$/$ressource_microbe$",
+            "fr": "$tag_earth$ : $ressource_microbe$$skipline$$other_researchsymbol$ :$other_researchcard$/$ressource_microbe$"
+        },
+        "effectText": {
+            "en": "Effect: When you play a $tag_earth$, including this, add a microbe to this card (5 max).$skipline$Effect: When you draw cards during the research phase, draw an additional card for each $ressource_microbe$ on this card.",
+            "fr": "Effet: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$Effet: Lorsque vous piochez des cartes pendant la phase de recherche, piochez une carte suppl\u00e9mentaire pour chaque $ressource_microbe$ sur cette carte."
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
         "id": 223,
         "card_code": "P20",
         "origin": "promo",
@@ -2033,6 +2487,51 @@
         "effectText": {
             "en": "Action: Draw a card. Draw 1 additional card for each Objective you have.",
             "fr": "Action: Piochez 1 carte. Piochez 1 carte suppl\u00e9mentaire pour chaque Objectif en votre possession."
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
+        "id": 224,
+        "card_code": "P21",
+        "origin": "promo",
+        "cost": 13,
+        "tagsId": [
+            6
+        ],
+        "effectSummaryType": "action",
+        "cardType": "blueProject",
+        "vpNumber": "1",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "Community Afforestation",
+            "fr": "Communaut\u00e9 de Reforestation"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $otherobjective$",
+            "fr": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $otherobjective$"
+        },
+        "effectText": {
+            "en": "Action: Spend 14 MC to take 1 Forest VP and raise the oxygen 1 step. Reduce its cost by 4 MC for each Objective you have.",
+            "fr": "Action: D\u00e9pensez 14 MC pour gagner un PV For\u00eat et augmenter l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 4 MC pour chaque Objectif en votre possession."
         },
         "playedText": {
             "en": "",
@@ -2093,6 +2592,51 @@
         }
     },
     {
+        "id": 230,
+        "card_code": "P27",
+        "origin": "promo",
+        "cost": 11,
+        "tagsId": [
+            9
+        ],
+        "effectSummaryType": "",
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Martian Studies Scholarship",
+            "fr": "Bourse d'Etudes Martienne"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Upgrade your Phase card II. Collect the associate \"Bonus\" during this phase.",
+            "fr": "Am\u00e9liorer Votre carte Phase II. Gagnez le \"Bonus\" associ\u00e9 lors de cette phase."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
         "id": 232,
         "card_code": "P29",
         "origin": "promo",
@@ -2127,6 +2671,51 @@
         "playedText": {
             "en": "",
             "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
+        "id": 233,
+        "card_code": "P30",
+        "origin": "promo",
+        "cost": 8,
+        "tagsId": [
+            4
+        ],
+        "effectSummaryType": "production",
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Tourism",
+            "fr": "Tourisme"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_2$",
+            "fr": "$ressource_megacreditvoid_2$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produce 2 MC.",
+            "fr": "Lors de la phase de production, cette carte produit 2 MC."
+        },
+        "playedText": {
+            "en": "Increase your $other_tr$ by 1 level for each Objective you have.",
+            "fr": "Augmentez votre $other_tr$ de 1 niveau pour chaque Objectif en votre possession."
         },
         "prerequisiteText": {
             "en": "",
@@ -2412,6 +3001,53 @@
         }
     },
     {
+        "id": 277,
+        "card_code": "F05",
+        "origin": "foundations",
+        "cost": 15,
+        "tagsId": [
+            2,
+            1,
+            4
+        ],
+        "effectSummaryType": "action",
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "Interplanetary Superhighway",
+            "fr": "Liaison Interplan\u00e9taire Express"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ Si 4 $tag_science$",
+            "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ Si 4 $tag_science$"
+        },
+        "effectText": {
+            "en": "Action: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 5 MC if you have 4 $tag_science$ or more.",
+            "fr": "Action: D\u00e9pensez 10 MC pour augmentr l'infrastructure de 1 niveau. Ce Co\u00fbt est r\u00e9duit de 5 MC si vous avez 4 $tag_science$ ou plus."
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        }
+    },
+    {
         "id": 278,
         "card_code": "F06",
         "origin": "foundations",
@@ -2436,11 +3072,11 @@
             "fr": ""
         },
         "effectSummaryText": {
-            "en": "$other_arrow$ $other_card$$skipline$si ",
-            "fr": ""
+            "en": "$other_arrow$ $other_card$$skipline$If $other_infrastructure$ + $other_card$",
+            "fr": "$other_arrow$ $other_card$$skipline$If $other_infrastructure$ + $other_card$"
         },
         "effectText": {
-            "en": "Action: Draw a card.$skipline$",
+            "en": "Action: Draw a card.$skipline$If the infrastructure was at the yellow level or higher at the beginning of this phase, draw 1 additional card.",
             "fr": "Action: Piochez 1 carte.$skipline$Si l'infrastructure \u00e9tait au niveau jaune ou sup\u00e9rieur au d\u00e9but de cette phase, piochez 1 carte suppl\u00e9mentaire."
         },
         "playedText": {

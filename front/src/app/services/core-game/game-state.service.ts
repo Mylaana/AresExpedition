@@ -96,7 +96,7 @@ export class GameState{
                 "name": "megacredit",
                 "valueMod": 0,
                 "valueProd": 0,
-                "valueStock": 5,
+                "valueStock": 20,
                 "hasStock": true,
                 "imageUrlId": 9,
             },
@@ -104,8 +104,8 @@ export class GameState{
                 "id":1,
                 "name": "heat",
                 "valueMod": 0,
-                "valueProd": 99,
-                "valueStock": 250,
+                "valueProd": 0,
+                "valueStock": 0,
                 "hasStock": true,
                 "imageUrlId": 7,
             },
@@ -113,7 +113,7 @@ export class GameState{
                 "id":2,
                 "name": "plant",
                 "valueMod": 0,
-                "valueProd": 120,
+                "valueProd": 0,
                 "valueStock": 0,
                 "hasStock": true,
                 "imageUrlId": 4,
@@ -122,7 +122,7 @@ export class GameState{
                 "id":3,
                 "name": "steel",
                 "valueMod": 2,
-                "valueProd": 1,
+                "valueProd": 0,
                 "valueStock": 0,
                 "hasStock": false,
                 "imageUrlId": 0,
@@ -131,7 +131,7 @@ export class GameState{
                 "id":4,
                 "name": "titanium",
                 "valueMod": 3,
-                "valueProd": 2,
+                "valueProd": 0,
                 "valueStock": 0,
                 "hasStock": false,
                 "imageUrlId": 1,
@@ -140,7 +140,7 @@ export class GameState{
                 "id":5,
                 "name": "card",
                 "valueMod": 0,
-                "valueProd": 1,
+                "valueProd": 0,
                 "valueStock": 0,
                 "hasStock": false,
                 "imageUrlId": 8,
@@ -642,10 +642,8 @@ export class GameState{
 		this.updateClientPlayerState(playerState)
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
-		let newList: number[] = this.addCardToPlayerPlayed(this.clientPlayerId, [card.id])
-		this.removeCardFromPlayerHand(this.clientPlayerId, [card.id])
 		//this.removeMegaCreditsFromPlayer(this.clientPlayerId, card.cost)
-		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, newList, this.getClientPlayerState())
+		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
 		this.updateClientPlayerState(newState)
 	}
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {

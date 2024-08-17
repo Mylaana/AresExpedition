@@ -1,7 +1,20 @@
 import { RessourceState, TagState } from "../../interfaces/global.interface";
 import { RGB } from "../../types/global.type";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
+import { ProjectCardModel } from "../cards/project-card.model";
+import { RessourceType } from "../../types/global.type";
 
+
+const ressourceIndex = new  Map<RessourceType, number>(
+	[
+		['megacredit', 0],
+		['heat', 1],
+		['plant', 2],
+		['steel', 3],
+		['titanium', 4],
+		['card', 5],
+	]
+)
 export class PlayerStateModel {
     id!: number;
     name!: string;
@@ -40,6 +53,35 @@ export class PlayerStateModel {
         }
         return
     }
+
+	playCard(card:ProjectCardModel):void{
+		this.addCardsPlayed([card.id])
+		this.removeCardsFromHand([card.id])
+		this.payCardCost(card)
+	}
+	addCardsPlayed(cardList: number[]):void{
+		for(let card of cardList){
+			this.cards.played.push(Number(card))
+		}
+	}
+	removeCardsFromHand(cardList: number[]):void{
+		for(let card of cardList){
+			let index = this.cards.hand.indexOf(Number(card), 0);
+			if (index > -1) {
+				this.cards.hand.splice(index, 1);
+			}
+		}
+	}
+	payCardCost(card: ProjectCardModel):void{
+		this.addRessource('megacredit', -card.cost)
+	}
+	addProduction(ressource: RessourceType, quantity: number){
+		this.ressource[Number(ressourceIndex.get(ressource))].valueProd += quantity
+	}
+	addRessource(ressource: RessourceType, quantity: number){
+		this.ressource[Number(ressourceIndex.get(ressource))].valueStock += quantity
+	}
+
 }
 
 

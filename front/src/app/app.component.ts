@@ -49,9 +49,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.gameStateService.currentGroupPlayerState.subscribe(
       state => this.updateHandOnStateChange()
     )
-    this.gameStateService.currentGroupPlayerState.subscribe(
-      state => this.updateHandOnStateChange()
-    )
     this.gameStateService.currentLoadingState.subscribe(
       loading => this.loadingFinished(loading)
     )
