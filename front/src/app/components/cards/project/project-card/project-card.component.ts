@@ -54,7 +54,6 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 			state => this.updateRessourceState(state[this.clientPlayerId].ressource)
 		)
 		this.checkPlayable()
-		console.log('state: ', this.projectCard.title ,this.state)
 	}
 	override resetCardState(): void {
 		super.resetCardState()

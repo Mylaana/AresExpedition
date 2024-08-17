@@ -7,10 +7,11 @@ import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
 import { EventModel } from "../../models/core-game/event.model";
-import { PhaseCardInfoService } from "../phase/phase-card-info.service";
+import { PhaseCardInfoService } from "../cards/phase-card-info.service";
 import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
 import { deepCopy } from "../../functions/global.functions";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
+import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 
 interface SelectedPhase {
     "development": boolean,
@@ -78,7 +79,10 @@ export class GameState{
         "research": false
     }
 
-	constructor(private phaseCardService: PhaseCardInfoService){}
+	constructor(
+		private phaseCardService: PhaseCardInfoService,
+		private readonly projectCardPlayed : ProjectCardPlayedEffectService
+	){}
 
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
@@ -533,9 +537,11 @@ export class GameState{
         this.updatePlayerStateHand(playerId, playerStateHand)
     }
 
-    addCardToPlayerPlayed(playerId: number, cardsToAdd: number[]):void{
+    addCardToPlayerPlayed(playerId: number, cardsToAdd: number[]):number[]{
         let playerStatePlayed = this.getPlayerStatePlayed(playerId)
-        this.updatePlayerStatePlayed(playerId, playerStatePlayed.concat(cardsToAdd))
+		let newList: number[] = playerStatePlayed.concat(cardsToAdd)
+        this.updatePlayerStatePlayed(playerId, newList)
+		return newList
     }
 
     addDrawQueue(draw: DrawModel):void{
@@ -636,9 +642,11 @@ export class GameState{
 		this.updateClientPlayerState(playerState)
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
-		this.addCardToPlayerPlayed(this.clientPlayerId, [card.id])
+		let newList: number[] = this.addCardToPlayerPlayed(this.clientPlayerId, [card.id])
 		this.removeCardFromPlayerHand(this.clientPlayerId, [card.id])
-		this.removeMegaCreditsFromPlayer(this.clientPlayerId, card.cost)
+		//this.removeMegaCreditsFromPlayer(this.clientPlayerId, card.cost)
+		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, newList, this.getClientPlayerState())
+		this.updateClientPlayerState(newState)
 	}
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
 		let playerState = this.getPlayerStateFromId(playerId)

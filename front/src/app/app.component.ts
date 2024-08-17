@@ -9,7 +9,7 @@ import { PlayerSelectedPhasePannelComponent } from './components/player-info/pla
 import { ProjectCardListComponent } from './components/cards/project/project-card-list/project-card-list.component';
 import { GameState } from './services/core-game/game-state.service';
 import { ProjectCardModel } from './models/cards/project-card.model';
-import { ProjectCardInfoService } from './services/player-hand/project-card-info.service';
+import { ProjectCardInfoService } from './services/cards/project-card-info.service';
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { PlayerPannelComponent } from './components/player-info/player-pannel/player-pannel.component';
 

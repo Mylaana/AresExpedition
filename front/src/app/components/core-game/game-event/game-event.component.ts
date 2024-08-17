@@ -10,7 +10,7 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
 import { RessourceState } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
-import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
+import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
 import { ChildButton } from '../../../interfaces/global.interface';
 import { ButtonComponent } from '../../tools/button/button.component';
@@ -421,7 +421,6 @@ export class GameEventComponent {
 
 		this.currentEvent = ticket
 
-		console.log('currentevent : ', this.currentEvent)
 		//reset currentEvent parameters
 		this.currentEvent.selectionActive = false
 
@@ -756,9 +755,7 @@ export class GameEventComponent {
 			newList.push(c)
 		}
 		newList.push(this.currentEvent.playCardZone[playableCardListId].cardList[0])
-		console.log('cancel: ',this.currentEvent.playCardZone[playableCardListId].cardList[0])
 		this.currentEvent.cardSelector.selectFrom = newList
-
 		this.currentEvent.playCardZone[playableCardListId].cardList = []
 	}
 

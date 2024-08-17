@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerReadyPannelComponent } from '../../player-info/player-ready-pannel/player-ready-pannel.component';
 import { SelectablePhase } from '../../../types/global.type';
-import { ProjectCardInfoService } from '../../../services/player-hand/project-card-info.service';
+import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawModel } from '../../../models/core-game/draw.model';
 import { EventModel } from '../../../models/core-game/event.model';
 
