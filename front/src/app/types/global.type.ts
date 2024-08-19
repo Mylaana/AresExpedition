@@ -17,3 +17,4 @@ export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastr
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
+export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event' | 'wild'

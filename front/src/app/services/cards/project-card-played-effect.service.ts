@@ -35,7 +35,6 @@ export class ProjectCardPlayedEffectService {
 	playCard(card: ProjectCardModel, playerState: PlayerStateModel): PlayerStateModel {
 		this.clientPlayerState = playerState
 		this.clientPlayerState.playCard(card)
-		this.clientPlayerState.updateProductions()
 
 		switch(card.cardCode){
 			//Decomposing Fungus
@@ -162,6 +161,17 @@ export class ProjectCardPlayedEffectService {
 				break
 			}
 		}
+
+		for(let i=0 ;i<this.clientPlayerState.ressource.length; i++){
+			let scalingProd =
+				this.scalingProductionService.getScalingProduction(
+					this.clientPlayerState.ressource[i].name,
+					this.clientPlayerState.cards.played,
+					this.clientPlayerState.tag
+				)
+			this.clientPlayerState.updateProductions(this.clientPlayerState.ressource[i].name, scalingProd)
+		}
+
 		return this.clientPlayerState
 	}
 }

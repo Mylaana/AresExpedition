@@ -1,4 +1,4 @@
-import { GlobalParameterColor, SelectablePhase } from "../types/global.type";
+import { GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type";
 import { PhaseCardType } from "../types/phase-card.type";
 import { PhaseFilter } from "../types/phase-card.type";
 import { ProjectCardModel } from "../models/cards/project-card.model";
@@ -21,7 +21,7 @@ export interface RessourceState {
 }
 export interface TagState {
     "id": number,
-    "name": string,
+    "name": TagType,
     "idImageUrl": number;
     "valueMod": number;
     "valueCount": number;

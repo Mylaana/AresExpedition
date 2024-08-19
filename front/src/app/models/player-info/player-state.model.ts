@@ -60,7 +60,7 @@ export class PlayerStateModel {
 		this.addCardsPlayed([card.id])
 		this.removeCardsFromHand([card.id])
 		this.payCardCost(card)
-		this.updateProductions()
+		this.addPlayedCardTags(card)
 	}
 	addCardsPlayed(cardList: number[]):void{
 		for(let card of cardList){
@@ -83,6 +83,15 @@ export class PlayerStateModel {
 	}
 	addRessource(ressource: RessourceType, quantity: number){
 		this.ressource[Number(ressourceIndex.get(ressource))].valueStock += quantity
+	}
+	addPlayedCardTags(card: ProjectCardModel):void{
+		for(let tagId of card.tagsId){
+			this.addTag(tagId)
+		}
+	}
+	addTag(tagId:number):void{
+		if(tagId===-1){return}
+		this.tag[tagId].valueCount += 1
 	}
 	/**update productions with flat + scaling values*/
 	updateProductions(ressource: RessourceType, scalingProduction:number):void{
