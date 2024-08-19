@@ -8,13 +8,26 @@ import { TagType } from "../../types/global.type";
 })
 export class ProjectCardScalingProductionsService {
 	getScalingProduction(ressource: RessourceType, playedCardList: number[], tagState:TagState[]): number{
+		console.log(playedCardList)
 		let scalingProductions = 0
 		switch(ressource){
 			case('megacredit'):{
 				//Cartel
-				if(123 in playedCardList){
+				if(playedCardList.includes(123)){
 					scalingProductions += this.getCardScalingProduction(123, tagState)
 				}
+				//Satellites
+				if(playedCardList.includes(181)){
+					scalingProductions += this.getCardScalingProduction(181, tagState)
+				}
+				break
+			}
+			case('heat'):{
+				//Satellite Farms
+				if(playedCardList.includes(180)){
+					scalingProductions += this.getCardScalingProduction(180, tagState)
+				}
+				break
 			}
 		}
 		return scalingProductions
@@ -22,8 +35,19 @@ export class ProjectCardScalingProductionsService {
 	getCardScalingProduction(cardId:number, tagState:TagState[]):number{
 		let scalingProduction: number = 0
 		switch(cardId){
+			//Cartel
 			case(123):{
 				scalingProduction = this.getPlayedTagNumber('earth', tagState)
+				break
+			}
+			//Satellite Farms
+			case(180):{
+				scalingProduction = this.getPlayedTagNumber('space', tagState)
+				break
+			}
+			//Satellites
+			case(181):{
+				scalingProduction = this.getPlayedTagNumber('space', tagState)
 				break
 			}
 		}

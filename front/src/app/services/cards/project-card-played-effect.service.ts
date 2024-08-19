@@ -163,6 +163,7 @@ export class ProjectCardPlayedEffectService {
 		}
 
 		for(let i=0 ;i<this.clientPlayerState.ressource.length; i++){
+			console.log(this.clientPlayerState.ressource[i])
 			let scalingProd =
 				this.scalingProductionService.getScalingProduction(
 					this.clientPlayerState.ressource[i].name,
