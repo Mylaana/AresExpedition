@@ -72,6 +72,18 @@ export class GlobalItemInfoService {
             imageUrl: 'assets/other/objective.png',
             textItemName: "$other_objective$",
         },
+        {
+            id: 10,
+            description: 'research symbol',
+            imageUrl: 'assets/other/research_symbol.png',
+            textItemName: "$other_researchsymbol$",
+        },
+        {
+            id: 11,
+            description: 'research card',
+            imageUrl: 'assets/other/research_card.png',
+            textItemName: "$other_researchcard$",
+        },
     ];
 
     getItemUrlFromTextItemName(itemName:string): string {

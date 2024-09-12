@@ -38,5 +38,5 @@ export class CardState {
     playable?: boolean = false
 	activable?:boolean = false
 
-	sellable?:boolean = false
+	ignoreCost?:boolean = false
 }

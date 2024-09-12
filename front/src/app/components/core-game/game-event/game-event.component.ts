@@ -371,7 +371,7 @@ export class GameEventComponent {
 					selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
 					selectionQuantity: quantity,
 					selectionQuantityTreshold: 'equal',
-					cardInitialState: {selectable: true},
+					cardInitialState: {selectable:true, ignoreCost: true},
 					title: `Select ${quantity} cards to draw`,
 					selectedIdList: [],
 				}
@@ -601,7 +601,7 @@ export class GameEventComponent {
 					selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
 					selectionQuantity: 0,
 					selectionQuantityTreshold: 'min',
-					cardInitialState: {selectable:true, sellable: true},
+					cardInitialState: {selectable:true, ignoreCost: true},
 					title: `Sell any card number :`,
 					selectedIdList: [],
 				}

@@ -38,7 +38,7 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 			selected:false,
 			upgradable:false,
 			upgraded:false,
-			sellable:false
+			ignoreCost:false
 		}
 	}
 
@@ -47,7 +47,7 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 
 		if(this.initialState?.activable){this.state.activable=deepCopy(this.initialState.activable)}else{this.state.activable=false}
 		if(this.initialState?.playable){this.state.playable=deepCopy(this.initialState.playable)}else{this.state.playable=false}
-		if(this.initialState?.sellable){this.state.sellable=deepCopy(this.initialState.sellable)}else{this.state.sellable=false}
+		if(this.initialState?.ignoreCost){this.state.ignoreCost=deepCopy(this.initialState.ignoreCost)}else{this.state.ignoreCost=false}
 
 		if(this.initialState?.selectable){this.state.selectable=deepCopy(this.initialState.selectable)}else{this.state.selectable=false}
 		if(this.initialState?.selected){this.state.selected=deepCopy(this.initialState.selected)}else{this.state.selected=false}

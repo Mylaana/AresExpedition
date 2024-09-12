@@ -1,5 +1,5 @@
-<div class="wrapper-selection-border" [ngClass]="[state.selected===true? 'element-selected':'element-not-selected', (state.playable===false && state.selectable===true && state.sellable!=true)? 'unplayable':'']">
-    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, ((state.selectable===true && state.playable===true) || (state.selectable===true && !state.playable) || state.sellable)? 'element-selectable': '', state.selected!=true? 'selected':'']">
+<div class="wrapper-selection-border" [ngClass]="[state.selected===true? 'element-selected':'element-not-selected', (state.playable===false && state.selectable===true && state.ignoreCost!=true)? 'unplayable':'']">
+    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, ((state.selectable===true && state.playable===true) || (state.selectable===true && !state.playable) || state.ignoreCost)? 'element-selectable': '', state.selected!=true? 'selected':'']">
         <div class="wrapper-card-grid">
             <div class="grid-box-cost">
                 <div class="wrapper-cost">
