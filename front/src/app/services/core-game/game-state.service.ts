@@ -650,7 +650,15 @@ export class GameState{
 	playCardFromClientHand(card: ProjectCardModel):void{
 		//this.removeMegaCreditsFromPlayer(this.clientPlayerId, card.cost)
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
-		this.updateClientPlayerState(newState)
+		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
+        this.updateClientPlayerState(newState)
+
+        //resolve played card events
+        if(playedCardEvents === undefined){return}
+        playedCardEvents.reverse()
+        for(let event of playedCardEvents){
+            this.addEventQueue(event, true)
+        }
 	}
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
 		let playerState = this.getPlayerStateFromId(playerId)

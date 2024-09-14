@@ -3,6 +3,7 @@ import { ProjectCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
+import { EventModel } from "../../models/core-game/event.model";
 
 @Injectable({
     providedIn: 'root'
@@ -121,6 +122,12 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('plant',2)
 				break
 			}
+			//Smelting
+			case('183'):{
+				this.addProductionToPlayer('heat',5)
+				
+				break
+			}
 			//Sponsor
 			case('190'):{
 				this.addProductionToPlayer('megacredit',2)
@@ -174,5 +181,55 @@ export class ProjectCardPlayedEffectService {
 		}
 
 		return this.clientPlayerState
+	}
+	/**
+	 * 
+	 * @param card 
+	 * @returns Event List
+	 
+	* Events should be filled to the list according to their order of execution.
+	 */
+	getPlayedCardEvent(card: ProjectCardModel): EventModel[] | undefined{
+		let result: EventModel[] = []
+		switch(card.id){
+			//Smelting
+			case(183):{
+				result.push(this.createEventDraw(2))
+				result.push(this.createEventDiscard(1))
+				break
+			}
+			default:{
+				return undefined
+			}
+		}
+		return result
+	}
+	createEventDraw(drawNumber: Number): EventModel {
+		let newEvent = new EventModel
+		newEvent.type = 'drawCards'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+			title: 'Draw cards',
+			selectedIdList: [],
+		}
+		newEvent.value = drawNumber
+		
+		return newEvent
+	}
+	createEventDiscard(discardNumber: Number): EventModel {
+		let newEvent = new EventModel
+		newEvent.type = 'drawCards'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+			title: `Select ${discardNumber} card(s) to discard.`,
+			selectedIdList: [],
+		}
+		newEvent.value = discardNumber
+		
+		return newEvent
 	}
 }

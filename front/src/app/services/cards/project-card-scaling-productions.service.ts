@@ -29,6 +29,12 @@ export class ProjectCardScalingProductionsService {
 				}
 				break
 			}
+			case('card'):{
+				//Laboratories
+				if(playedCardList.includes(213)){
+					scalingProductions += this.getCardScalingProduction(213, tagState)
+				}
+			}
 		}
 		return scalingProductions
 	}
@@ -48,6 +54,11 @@ export class ProjectCardScalingProductionsService {
 			//Satellites
 			case(181):{
 				scalingProduction = this.getPlayedTagNumber('space', tagState)
+				break
+			}
+			//Laboratories
+			case(213):{
+				scalingProduction = Math.floor(this.getPlayedTagNumber('science', tagState) / 3)
 				break
 			}
 		}
