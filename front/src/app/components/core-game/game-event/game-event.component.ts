@@ -114,6 +114,8 @@ export class GameEventComponent {
 
 		this.createButton('upgradePhase', 'End upgrade phase selection', true)
 
+		this.createButton('drawCards', 'Draw', true)
+		this.createButton('discardCards', 'Discard', true)
 		this.gameStateService.currentPhase.subscribe(
 			phase => this.updatePhase(phase)
 		)
@@ -306,6 +308,14 @@ export class GameEventComponent {
 		this.gameStateService.addDrawQueue(draw)
 	}
 
+	addDrawQueue(playerId: number, cardNumber: number): void {
+		let draw = new DrawModel;
+		draw.playerId = playerId
+		draw.cardNumber = cardNumber
+		draw.drawRule = 'draw'
+		this.gameStateService.addDrawQueue(draw)
+	}
+
 	addHandSizeCheckEvent(): void {
 		let newEvent = new EventModel
 		newEvent.type = 'forcedSell'
@@ -313,7 +323,7 @@ export class GameEventComponent {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
-			cardInitialState: {selectable: true},
+			cardInitialState: {selectable: true, ignoreCost: true},
 			title: ``,
 			selectedIdList: [],
 		}
@@ -380,9 +390,9 @@ export class GameEventComponent {
 				this.gameStateService.addEventQueue(newEvent)
 			}
 		};
-		if(callCleanAndNext===true){
+		if(callCleanAndNext===false){return}
+		console.log('draw queue cleaning called')
 		this.gameStateService.cleanAndNextDrawQueue()
-		}
 	}
 
 	handleEventQueueNext(eventQueue: EventModel[]): void {
@@ -429,7 +439,6 @@ export class GameEventComponent {
 				let playerCards = this.gameStateService.getClientPlayerState().cards
 				if(playerCards.hand.length <= playerCards.maximum){
 					ticket.isFinalized = true
-					this.gameStateService.cleanAndNextEventQueue()
 					break
 				}
 				this.currentEvent.cardSelector.selectionQuantity = playerCards.hand.length - playerCards.maximum
@@ -441,7 +450,6 @@ export class GameEventComponent {
 			}
 			case('endOfPhase'):{
 				ticket.isFinalized = true
-				this.gameStateService.cleanAndNextEventQueue()
 				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
 				break
 			}
@@ -461,7 +469,21 @@ export class GameEventComponent {
 				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand())
 				break
 			}
+			case('drawCards'):{
+				ticket.isFinalized = true
+				this.currentEvent.button = this.buttons[this.getButtonIdFromName('drawCards')]
+				this.addDrawQueue(this.clientPlayerId, ticket.value)
+				break
+			}
+			case('discardCards'):{
+				this.currentEvent.button = this.buttons[this.getButtonIdFromName('discardCards')]
+				this.currentEvent.selectionActive = true
+				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerState().cards.hand)			
+				break
+			}
 		}
+		if(ticket.isFinalized===false){return}
+		this.gameStateService.cleanAndNextEventQueue()
 	}
 
 	public updateSelectedCardList(cardList: number[]){
@@ -726,8 +748,11 @@ export class GameEventComponent {
 
 		card = this.currentEvent.playCardZone[playableCardListId].cardList[0]
 
+		console.log('line 748')
 		this.gameStateService.playCardFromClientHand(card)
+		console.log('line 750', this.currentEvent, 'card list id: ', playableCardListId)
 		this.currentEvent.playCardZone[playableCardListId].cardList = []
+		console.log('line 752')
 	}
 
 	cancelBuildCardSelection(playableCardListId: number): void {

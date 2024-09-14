@@ -8,7 +8,6 @@ import { TagType } from "../../types/global.type";
 })
 export class ProjectCardScalingProductionsService {
 	getScalingProduction(ressource: RessourceType, playedCardList: number[], tagState:TagState[]): number{
-		console.log(playedCardList)
 		let scalingProductions = 0
 		switch(ressource){
 			case('megacredit'):{

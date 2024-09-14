@@ -13,6 +13,7 @@ export type ButtonNames =
 | 'selectSecondCard' | 'cancelSecondCard' | 'buildSecondCard'
 | 'selectAlternative'
 | 'upgradePhase'
+|'drawCards' | 'discardCards'
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'

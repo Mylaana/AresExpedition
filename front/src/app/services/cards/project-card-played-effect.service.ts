@@ -170,7 +170,6 @@ export class ProjectCardPlayedEffectService {
 		}
 
 		for(let i=0 ;i<this.clientPlayerState.ressource.length; i++){
-			console.log(this.clientPlayerState.ressource[i])
 			let scalingProd =
 				this.scalingProductionService.getScalingProduction(
 					this.clientPlayerState.ressource[i].name,
@@ -204,7 +203,7 @@ export class ProjectCardPlayedEffectService {
 		}
 		return result
 	}
-	createEventDraw(drawNumber: Number): EventModel {
+	createEventDraw(drawNumber: number): EventModel {
 		let newEvent = new EventModel
 		newEvent.type = 'drawCards'
 		newEvent.cardSelector = {
@@ -218,15 +217,16 @@ export class ProjectCardPlayedEffectService {
 		
 		return newEvent
 	}
-	createEventDiscard(discardNumber: Number): EventModel {
+	createEventDiscard(discardNumber: number): EventModel {
 		let newEvent = new EventModel
-		newEvent.type = 'drawCards'
+		newEvent.type = 'discardCards'
 		newEvent.cardSelector = {
 			selectFrom: [],
-			selectionQuantity: 0,
+			selectionQuantity: discardNumber,
 			selectionQuantityTreshold: 'equal',
 			title: `Select ${discardNumber} card(s) to discard.`,
 			selectedIdList: [],
+			cardInitialState: {selectable: true, ignoreCost: true}
 		}
 		newEvent.value = discardNumber
 		
