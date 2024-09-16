@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardState } from '../../../../models/cards/card.model';
+import { CardState } from '../../../../models/cards/card-cost.model';
 import { deepCopy } from '../../../../functions/global.functions';
 
 @Component({
@@ -16,12 +16,17 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 	state!: CardState;
 	@Output() cardStateChange: EventEmitter<any> = new EventEmitter<any>()
 
+	initialized = false
+
 	ngOnInit():void{
 		this.initializeCardState()
 		this.resetCardState()
+		this.changeStateFromParent()
+		this.initialized = true
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
+		if(this.initialized===false){return}
 		if (changes['initialState'] && changes['initialState'].currentValue) {
 			this.resetCardState()
 		}

@@ -3,7 +3,7 @@ import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { PhaseFilter } from '../../../../types/phase-card.type';
-import { CardState } from '../../../../models/cards/card.model';
+import { CardState } from '../../../../models/cards/card-cost.model';
 
 @Component({
   selector: 'app-project-card-list',

@@ -1,4 +1,4 @@
-import { CardState } from "./card.model";
+import { CardState } from "./card-cost.model";
 import { PhaseCardType } from "../../types/phase-card.type";
 
 export class PhaseCardHolderModel {

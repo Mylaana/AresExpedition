@@ -4,7 +4,7 @@ import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { GlobalTagInfoService } from '../../../../services/global/global-tag-info.service';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
-import { CardCost } from '../../../../models/cards/card.model';
+import { CardCost } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { deepCopy } from '../../../../functions/global.functions';
 import { GameState } from '../../../../services/core-game/game-state.service';

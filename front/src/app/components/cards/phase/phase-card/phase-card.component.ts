@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardState } from '../../../../models/cards/card.model';
+import { CardState } from '../../../../models/cards/card-cost.model';
 import { deepCopy } from '../../../../functions/global.functions';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 

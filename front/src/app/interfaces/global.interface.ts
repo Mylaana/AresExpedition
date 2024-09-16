@@ -5,7 +5,7 @@ import { ProjectCardModel } from "../models/cards/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
 import { ButtonNames } from "../types/global.type";
 import { GlobalParameterName } from "../types/global.type";
-import { CardState } from "../models/cards/card.model";
+import { CardState } from "../models/cards/card-cost.model";
 import { RessourceType } from "../types/global.type";
 
 

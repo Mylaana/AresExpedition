@@ -107,6 +107,11 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('heat',2)
 				break
 			}
+			//Microprocessor
+			case('163'):{
+				this.addProductionToPlayer('heat',3)
+				break
+			}
 			//Nitrophilic Moss
 			case('171'):{
 				this.addProductionToPlayer('plant',2)
@@ -125,7 +130,6 @@ export class ProjectCardPlayedEffectService {
 			//Smelting
 			case('183'):{
 				this.addProductionToPlayer('heat',5)
-				
 				break
 			}
 			//Sponsor
@@ -161,6 +165,11 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('heat',4)
 				break
 			}
+			//Biofoundries
+			case('D22'):{
+				this.addProductionToPlayer('plant',2)
+				break
+			}
 			//Hematite Mining
 			case('D29'):{
 				this.addProductionToPlayer('card',2)
@@ -190,11 +199,21 @@ export class ProjectCardPlayedEffectService {
 	 */
 	getPlayedCardEvent(card: ProjectCardModel): EventModel[] | undefined{
 		let result: EventModel[] = []
-		switch(card.id){
+		switch(card.cardCode){
+			//Microprocessor
+			case('163'):{
+				result.push(this.createEventDraw(2))
+				break
+			}
 			//Smelting
-			case(183):{
+			case('183'):{
 				result.push(this.createEventDraw(2))
 				result.push(this.createEventDiscard(1))
+				break
+			}
+			//Biofoundries
+			case('D22'):{
+				result.push(this.createEventUpgradePhaseCard(1))
 				break
 			}
 			default:{
@@ -226,9 +245,32 @@ export class ProjectCardPlayedEffectService {
 			selectionQuantityTreshold: 'equal',
 			title: `Select ${discardNumber} card(s) to discard.`,
 			selectedIdList: [],
-			cardInitialState: {selectable: true, ignoreCost: true}
-		}
+			cardInitialState: {selectable: true, ignoreCost: true},
+		}	
 		newEvent.value = discardNumber
+		
+		return newEvent
+	}
+	/**
+	 * 
+	 * @param phaseCardList 
+	 * @returns newEvent
+	 * 
+	 * undefined phaseCardList will be treated as all phase cards being upgradable
+	 */
+	createEventUpgradePhaseCard(phaseCardUpgradeNumber: number, phaseCardList?: number[]): EventModel {
+		let newEvent = new EventModel
+		newEvent.type = 'upgradePhase'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: phaseCardUpgradeNumber,
+			selectionQuantityTreshold: 'equal',
+			title: 'Select a phase card to upgrade',
+			selectedIdList: [],
+		}
+		if(phaseCardList){
+			newEvent.value = phaseCardList
+		}
 		
 		return newEvent
 	}

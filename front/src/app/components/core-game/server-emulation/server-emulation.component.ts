@@ -20,7 +20,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
   styleUrl: './server-emulation.component.scss'
 })
 export class ServerEmulationComponent implements OnInit, AfterViewInit {
-  debug: boolean = true;
+  debug: boolean = false;
   currentGroupPlayerState!: {};
   currentEventQueue: EventModel[] = [];
   currentPhase: string = "planification";
@@ -58,7 +58,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	  )
     //return
     //force draw card list for debug purpose
-    let cardDrawList: number[] = [ 183]
+    let cardDrawList: number[] = [253]
 
     this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
   }

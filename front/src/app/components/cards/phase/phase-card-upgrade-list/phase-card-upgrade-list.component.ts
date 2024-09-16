@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhaseCardComponent } from '../phase-card/phase-card.component';
-import { CardState } from '../../../../models/cards/card.model';
+import { CardState } from '../../../../models/cards/card-cost.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { PhaseCardGroupModel } from '../../../../models/cards/phase-card.model';
@@ -38,6 +38,7 @@ export class PhaseCardUpgradeListComponent{
 		this.gameStateService.groupPlayerState.subscribe(
 			state => this.updateState(state)
 		)
+		console.log(this.phaseCardState)
 	}
 
 	public cardStateChange(card: {cardId: number, state:CardState, stateUpdateType:string}): void {

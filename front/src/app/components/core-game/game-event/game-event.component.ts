@@ -5,7 +5,7 @@ import { PhasePlanificationComponent } from '../../phases/phase-planification/ph
 import { PhaseActionComponent } from '../../phases/phase-action/phase-action.component';
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
-import { MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../types/global.type';
+import { EventType, MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { RessourceState } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
@@ -76,6 +76,13 @@ export class GameEventComponent {
 				['research', 'validateResearch']
 			]
 		)
+	eventMainButton = new Map<EventType, ButtonNames>(
+		[
+			['discardCards','discardCards'],
+			['drawCards','drawCards'],
+			['upgradePhase','upgradePhase']
+		]
+	)
 	ngOnInit(): void {
 		this.currentEvent.cardSelector = {
 				title: '',
@@ -115,7 +122,7 @@ export class GameEventComponent {
 		this.createButton('upgradePhase', 'End upgrade phase selection', true)
 
 		this.createButton('drawCards', 'Draw', true)
-		this.createButton('discardCards', 'Discard', true)
+		this.createButton('discardCards', 'Discard', false)
 		this.gameStateService.currentPhase.subscribe(
 			phase => this.updatePhase(phase)
 		)
@@ -391,7 +398,6 @@ export class GameEventComponent {
 			}
 		};
 		if(callCleanAndNext===false){return}
-		console.log('draw queue cleaning called')
 		this.gameStateService.cleanAndNextDrawQueue()
 	}
 
@@ -434,6 +440,11 @@ export class GameEventComponent {
 		//reset currentEvent parameters
 		this.currentEvent.selectionActive = false
 
+		//bind unbound current event to their main button
+		if(!this.currentEvent.button){
+			this.currentEvent.button = this.getEventMainButton(this.currentEvent.type)
+		}
+
 		switch(ticket.type){
 			case('forcedSell'):{
 				let playerCards = this.gameStateService.getClientPlayerState().cards
@@ -463,6 +474,7 @@ export class GameEventComponent {
 			}
 			case('upgradePhase'):{
 				this.currentEvent.selectionActive = true
+				this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, this.currentEvent.cardSelector.selectionQuantity)
 				break
 			}
 			case('selectCardToBuild'):{
@@ -476,7 +488,6 @@ export class GameEventComponent {
 				break
 			}
 			case('discardCards'):{
-				this.currentEvent.button = this.buttons[this.getButtonIdFromName('discardCards')]
 				this.currentEvent.selectionActive = true
 				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerState().cards.hand)			
 				break
@@ -488,52 +499,66 @@ export class GameEventComponent {
 
 	public updateSelectedCardList(cardList: number[]){
 		this.currentEvent.cardSelector.selectedIdList = cardList
-		if(this.currentEvent.button?.id===this.getButtonIdFromName('sellCardsEndPhase')){
-			this.updateButtonState(
-				'sellCardsEndPhase',
-				this.compareValueToTreshold(
-					this.currentEvent.cardSelector.selectionQuantity,
-					this.currentEvent.cardSelector.selectedIdList.length,
-					this.currentEvent.cardSelector.selectionQuantityTreshold)
+		switch(this.currentEvent.type){
+			case('forcedSell'):{
+				this.updateButtonState(
+					'sellCardsEndPhase',
+					this.compareValueToTreshold(
+						this.currentEvent.cardSelector.selectionQuantity,
+						this.currentEvent.cardSelector.selectedIdList.length,
+						this.currentEvent.cardSelector.selectionQuantityTreshold)
+				)
+				return
+			}
+			case('research'):{
+				this.updateButtonState(
+					'validateResearch',
+					this.compareValueToTreshold(
+						this.currentEvent.cardSelector.selectionQuantity,
+						this.currentEvent.cardSelector.selectedIdList.length,
+						this.currentEvent.cardSelector.selectionQuantityTreshold)
 			)
 			return
-		}
-		if(this.currentEvent.type === 'research'){
-			this.updateButtonState(
-				'validateResearch',
-				this.compareValueToTreshold(
-					this.currentEvent.cardSelector.selectionQuantity,
-					this.currentEvent.cardSelector.selectedIdList.length,
-					this.currentEvent.cardSelector.selectionQuantityTreshold)
-		)
-		return
-		}
-		if(this.currentEvent.type === 'selectCardToBuild'){
-			if(this.currentEvent.cardSelector.playCardActive===undefined){return}
-
-			let zoneId = this.currentEvent.cardSelector.playCardActive
-
-			switch(zoneId){
-				case(0):{
-					this.updateButtonState('selectFirstCard', false)
-					this.updateButtonState('buildFirstCard', true)
-					this.updateButtonState('cancelFirstCard', true)
-					break
-				}
-				case(1):{
-					this.updateButtonState('selectSecondCard', false)
-					this.updateButtonState('buildSecondCard', true)
-					this.updateButtonState('cancelSecondCard', true)
-					break
-				}
-				default:{
-					return
-				}
 			}
-			this.currentEvent.selectionActive = false
-			this.selectPlayableCard(zoneId, this.currentEvent.cardSelector.selectedIdList[0])
-			this.currentEvent.cardSelector.playCardActive = undefined
+			case('selectCardToBuild'):{
+				if(this.currentEvent.cardSelector.playCardActive===undefined){return}
+
+				let zoneId = this.currentEvent.cardSelector.playCardActive
+
+				switch(zoneId){
+					case(0):{
+						this.updateButtonState('selectFirstCard', false)
+						this.updateButtonState('buildFirstCard', true)
+						this.updateButtonState('cancelFirstCard', true)
+						break
+					}
+					case(1):{
+						this.updateButtonState('selectSecondCard', false)
+						this.updateButtonState('buildSecondCard', true)
+						this.updateButtonState('cancelSecondCard', true)
+						break
+					}
+					default:{
+						return
+					}
+				}
+				this.currentEvent.selectionActive = false
+				this.selectPlayableCard(zoneId, this.currentEvent.cardSelector.selectedIdList[0])
+				this.currentEvent.cardSelector.playCardActive = undefined
+				return
+			}
+			case('discardCards'):{
+				this.updateButtonState(
+					'discardCards',
+					this.compareValueToTreshold(
+						this.currentEvent.cardSelector.selectionQuantity,
+						this.currentEvent.cardSelector.selectedIdList.length,
+						this.currentEvent.cardSelector.selectionQuantityTreshold)
+				)
+				return
+			}
 		}
+		
 	}
 
 	public childButtonClicked(button: ChildButton ){
@@ -634,6 +659,12 @@ export class GameEventComponent {
 			case('upgradePhase'):{
 				this.currentEvent.isFinalized = true
 				this.gameStateService.removePhaseCardUpgradeNumber(this.clientPlayerId, 0 , true)
+				this.gameStateService.cleanAndNextEventQueue()
+				break
+			}
+			case('discardCards'):{
+				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
+				this.currentEvent.isFinalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 			}
 		}
@@ -748,11 +779,8 @@ export class GameEventComponent {
 
 		card = this.currentEvent.playCardZone[playableCardListId].cardList[0]
 
-		console.log('line 748')
-		this.gameStateService.playCardFromClientHand(card)
-		console.log('line 750', this.currentEvent, 'card list id: ', playableCardListId)
 		this.currentEvent.playCardZone[playableCardListId].cardList = []
-		console.log('line 752')
+		this.gameStateService.playCardFromClientHand(card)
 	}
 
 	cancelBuildCardSelection(playableCardListId: number): void {
@@ -788,5 +816,13 @@ export class GameEventComponent {
 		this.updateButtonState('selectFirstCard', true)
 		this.updateButtonState('selectSecondCard', true)
 		this.updateButtonState('selectAlternative', true)
+	}
+	getEventMainButton(eventType: EventType): ChildButton {
+		let buttonName = this.eventMainButton.get(eventType)
+		let button: ChildButton
+		if(!buttonName){buttonName='defaultValidate'}
+		button = this.buttons[this.getButtonIdFromName(buttonName)]
+		
+		return button
 	}
 }
