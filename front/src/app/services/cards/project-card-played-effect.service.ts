@@ -170,10 +170,25 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('plant',2)
 				break
 			}
+			//Industrial Complex
+			case('D32'):{
+				this.addProductionToPlayer('heat',4)
+				break
+			}
 			//Hematite Mining
 			case('D29'):{
 				this.addProductionToPlayer('card',2)
 				this.addProductionToPlayer('steel',1)
+				break
+			}
+			//Perfluorocarbon Production
+			case('D37'):{
+				this.addProductionToPlayer('heat',1)
+				break
+			}
+			//Biological Factories
+			case('D40'):{
+				this.addProductionToPlayer('plant',1)
 				break
 			}
 		}
@@ -214,6 +229,21 @@ export class ProjectCardPlayedEffectService {
 			//Biofoundries
 			case('D22'):{
 				result.push(this.createEventUpgradePhaseCard(1))
+				break
+			}
+			//Industrial Complex
+			case('D32'):{
+				result.push(this.createEventUpgradePhaseCard(1))
+				break
+			}
+			//Perfluorocarbon Production
+			case('D37'):{
+				result.push(this.createEventUpgradePhaseCard(1, [0]))
+				break
+			}
+			//Biological Factories
+			case('D40'):{
+				result.push(this.createEventUpgradePhaseCard(1, [3]))
 				break
 			}
 			default:{
