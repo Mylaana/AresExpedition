@@ -35,6 +35,5 @@ export class PhaseCardComponent extends BaseCardComponent {
 		} else {
 			this.cardStateChange.emit({cardId:this.phaseCardLevel, state: newState, stateUpdateType: 'select'})
 		}
-
 	}
 }

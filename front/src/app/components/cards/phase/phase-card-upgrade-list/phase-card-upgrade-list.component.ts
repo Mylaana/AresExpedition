@@ -38,7 +38,6 @@ export class PhaseCardUpgradeListComponent{
 		this.gameStateService.groupPlayerState.subscribe(
 			state => this.updateState(state)
 		)
-		console.log(this.phaseCardState)
 	}
 
 	public cardStateChange(card: {cardId: number, state:CardState, stateUpdateType:string}): void {
@@ -55,8 +54,6 @@ export class PhaseCardUpgradeListComponent{
 	}
 	updateState(state: PlayerStateModel[]): void{
 		if(this.phaseCardState.length!=0 && deepCopy(state[this.clientPlayerId].phaseCard.phaseGroup[this.phaseIndex]) == deepCopy(this.clientPlayerPhaseCardGroupState)){return}
-		if(this.phaseCardState.length!=0){
-		}
 		this.clientPlayerPhaseCardGroupState = state[this.clientPlayerId].phaseCard.phaseGroup[this.phaseIndex]
 		this.phaseCardState = this.clientPlayerPhaseCardGroupState.getPhaseCardStateList()
 	}
