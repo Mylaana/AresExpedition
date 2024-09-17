@@ -74,8 +74,8 @@ export interface PlayableCardZone {
 
 export interface GlobalParameter {
     name: GlobalParameterName,
-    value?: number,
-    addEndOfPhase?: number,
+    value: number,
+    addEndOfPhase: number,
     color?: GlobalParameterColor
     imageUrl?: string,
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { RGB } from "../../types/global.type";
+import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PlayerPhase } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
@@ -665,4 +665,9 @@ export class GameState{
 		playerState.ressource[0].valueStock -= quantity
 		this.updatePlayerState(playerId, playerState)
 	}
+    addGlobalParameterStepsEOPtoPlayerId(playerId:number, parameter:GlobalParameterName, steps:number): void {
+        let playerState = this.getPlayerStateFromId(playerId)
+		playerState.globalParameter.addStepToParameterEOP(parameter, steps)
+		this.updatePlayerState(playerId, playerState)
+    }
 }

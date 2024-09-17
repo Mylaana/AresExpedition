@@ -1,8 +1,9 @@
-import { RessourceState, TagState } from "../../interfaces/global.interface";
-import { RGB } from "../../types/global.type";
+import { GlobalParameter, RessourceState, TagState } from "../../interfaces/global.interface";
+import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { RessourceType } from "../../types/global.type";
+import { GlobalParameterModel } from "../core-game/global-parameter.model";
 
 const ressourceIndex = new  Map<RessourceType, number>(
 	[
@@ -34,6 +35,7 @@ export class PlayerStateModel {
 	phaseCard = new PhaseCardHolderModel
 	phaseCardUpgradeNumber: number = 0
 	sellCardValueMod: number = 0
+	globalParameter = new GlobalParameterModel
 
 	//private readonly scalingProd = inject(ProjectCardScalingProductionsService);
 	//constructor(private scalingProductionService: ProjectCardScalingProductionsService){}
@@ -97,6 +99,9 @@ export class PlayerStateModel {
 	updateProductions(ressource: RessourceType, scalingProduction:number):void{
 		this.ressource[Number(ressourceIndex.get(ressource))].valueProd =
 			this.ressource[Number(ressourceIndex.get(ressource))].valueBaseProd + scalingProduction
+	}
+	addGlobalParameterStep(parameterName: GlobalParameterName, steps: number): void {
+		this.globalParameter.addStepToParameterEOP(parameterName, steps)
 	}
 }
 

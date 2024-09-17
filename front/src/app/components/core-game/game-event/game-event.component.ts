@@ -7,7 +7,7 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
 import { EventType, MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { RessourceState } from '../../../interfaces/global.interface';
+import { GlobalParameter, RessourceState } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
@@ -490,6 +490,12 @@ export class GameEventComponent {
 			case('discardCards'):{
 				this.currentEvent.selectionActive = true
 				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerState().cards.hand)			
+				break
+			}
+			case('increaseGlobalParameter'):{
+				console.log(this.currentEvent)
+				let parameter: GlobalParameter = this.currentEvent.value
+				this.gameStateService.addGlobalParameterStepsEOPtoPlayerId(this.clientPlayerId, parameter.name, parameter.addEndOfPhase)
 				break
 			}
 		}

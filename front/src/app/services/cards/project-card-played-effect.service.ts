@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { AdvancedRessourceType, RessourceType } from "../../types/global.type";
+import { AdvancedRessourceType, GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventModel } from "../../models/core-game/event.model";
+import { GlobalParameter } from "../../interfaces/global.interface";
+
 
 @Injectable({
     providedIn: 'root'
@@ -61,6 +63,11 @@ export class ProjectCardPlayedEffectService {
 			//Bribed Commitee
 			case('69'):{
 				this.addTrToPlayer(2)
+				break
+			}
+			//Deimos Down
+			case('76'):{
+				this.addRessourceToPlayer("megacredit", 7)
 				break
 			}
 			//Archaebacteria
@@ -215,6 +222,11 @@ export class ProjectCardPlayedEffectService {
 	getPlayedCardEvent(card: ProjectCardModel): EventModel[] | undefined{
 		let result: EventModel[] = []
 		switch(card.cardCode){
+			//Deimos Down
+			case('76'):{
+				result.push(this.createEventIncreaseGlobalParameter("temperature",3))
+				break
+			}
 			//Microprocessor
 			case('163'):{
 				result.push(this.createEventDraw(2))
@@ -302,6 +314,28 @@ export class ProjectCardPlayedEffectService {
 			newEvent.value = phaseCardList
 		}
 		
+		return newEvent
+	}
+
+	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, value:number): EventModel {
+		let newEvent = new EventModel
+		let parameter: GlobalParameter
+
+		newEvent.type = 'increaseGlobalParameter'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+			title: 'Increase Global parameter',
+			selectedIdList: [],
+		}
+		parameter = {
+			name: parameterName,
+			addEndOfPhase: value,
+			value: 0
+		}
+		newEvent.value = parameter
+
 		return newEvent
 	}
 }
