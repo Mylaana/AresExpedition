@@ -97,6 +97,8 @@ export class GameEventComponent {
 
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 
+		this.createButton('defaultValidate', 'default validation button', true)
+
 		this.createButton('validatePlanification', 'Select Phase', false)
 		this.createButton('validateDevelopment', 'End Development phase', true)
 		this.createButton('validateConstruction', 'End Constructuction phase', true)
@@ -493,7 +495,7 @@ export class GameEventComponent {
 				break
 			}
 			case('increaseGlobalParameter'):{
-				console.log(this.currentEvent)
+				this.currentEvent.isFinalized = true
 				let parameter: GlobalParameter = this.currentEvent.value
 				this.gameStateService.addGlobalParameterStepsEOPtoPlayerId(this.clientPlayerId, parameter.name, parameter.addEndOfPhase)
 				break

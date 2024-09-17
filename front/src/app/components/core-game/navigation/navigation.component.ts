@@ -25,6 +25,13 @@ export class NavigationComponent implements OnInit{
 
   ngOnInit(): void {
     this.clientPlayerId = this.gameStateService.clientPlayerId
+    this.gameStateService.currentGroupPlayerState.subscribe(
+      groupPlayerState => this.updateState(groupPlayerState)
+    )
+    this.gameStateService.currentPhase.subscribe(
+      phase => this.currentPhase = phase
+    )
+    return
     let parameter!: GlobalParameter
     for(let i=0; i<4; i++){
       switch(i){
@@ -71,16 +78,11 @@ export class NavigationComponent implements OnInit{
       this.globalParameters.push(parameter)
     }
 
-    this.gameStateService.currentGroupPlayerState.subscribe(
-      groupPlayerState => this.updateState(groupPlayerState)
-    )
-    this.gameStateService.currentPhase.subscribe(
-      phase => this.currentPhase = phase
-    )
+
   }
   updateState(state:PlayerStateModel[]): void {
+    if(state[this.clientPlayerId]===undefined){return}
     if(this.currentGroupPlayerState===state){return}
-    console.log('state:', state)
     this.globalParameters = state[this.clientPlayerId].globalParameter.parameters
   }
 }

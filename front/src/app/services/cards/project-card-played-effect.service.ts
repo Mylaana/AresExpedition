@@ -139,9 +139,19 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('heat',5)
 				break
 			}
+			//Soil Warming
+			case('184'):{
+				this.addProductionToPlayer('plant',2)
+				break
+			}
 			//Sponsor
 			case('190'):{
 				this.addProductionToPlayer('megacredit',2)
+				break
+			}
+			//Trapped Heat
+			case('197'):{
+				this.addProductionToPlayer('heat',2)
 				break
 			}
 			//Trees
@@ -177,15 +187,21 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('plant',2)
 				break
 			}
+			//Hematite Mining
+			case('D29'):{
+				this.addProductionToPlayer('card',2)
+				this.addProductionToPlayer('steel',1)
+				break
+			}
 			//Industrial Complex
 			case('D32'):{
 				this.addProductionToPlayer('heat',4)
 				break
 			}
-			//Hematite Mining
-			case('D29'):{
-				this.addProductionToPlayer('card',2)
-				this.addProductionToPlayer('steel',1)
+			//Award Winning Reflector Material
+			case('D35'):{
+				this.addProductionToPlayer('heat',3)
+				//TO DO : ADD OBJECTIVE BONUS
 				break
 			}
 			//Perfluorocarbon Production
@@ -222,6 +238,11 @@ export class ProjectCardPlayedEffectService {
 	getPlayedCardEvent(card: ProjectCardModel): EventModel[] | undefined{
 		let result: EventModel[] = []
 		switch(card.cardCode){
+			//Artificial Lake
+			case('66'):{
+				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				break
+			}
 			//Deimos Down
 			case('76'):{
 				result.push(this.createEventIncreaseGlobalParameter("temperature",3))
@@ -236,6 +257,16 @@ export class ProjectCardPlayedEffectService {
 			case('183'):{
 				result.push(this.createEventDraw(2))
 				result.push(this.createEventDiscard(1))
+				break
+			}
+			//Soil Warming
+			case('184'):{
+				result.push(this.createEventIncreaseGlobalParameter("temperature",1))
+				break
+			}
+			//Trapped Heat
+			case('197'):{
+				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
 				break
 			}
 			//Biofoundries
@@ -317,7 +348,7 @@ export class ProjectCardPlayedEffectService {
 		return newEvent
 	}
 
-	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, value:number): EventModel {
+	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, steps:number): EventModel {
 		let newEvent = new EventModel
 		let parameter: GlobalParameter
 
@@ -331,10 +362,12 @@ export class ProjectCardPlayedEffectService {
 		}
 		parameter = {
 			name: parameterName,
-			addEndOfPhase: value,
+			addEndOfPhase: steps,
 			value: 0
 		}
 		newEvent.value = parameter
+
+		this.addTrToPlayer(steps)
 
 		return newEvent
 	}
