@@ -214,6 +214,11 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('plant',1)
 				break
 			}
+			//Grain Silos
+			case('F14'):{
+				this.addRessourceToPlayer('plant',4)
+				break
+			}
 		}
 
 		for(let i=0 ;i<this.clientPlayerState.ressource.length; i++){
@@ -243,9 +248,38 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
 				break
 			}
+			//Convoy from Europa
+			case('74'):{
+				result.push(this.createEventDraw(1))
+				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				break
+			}
+			//Giant Ice Asteroid
+			case('77'):{
+				result.push(this.createEventIncreaseGlobalParameter("temperature",2))
+				result.push(this.createEventIncreaseGlobalParameter("ocean",2))
+				break
+			}
 			//Deimos Down
 			case('76'):{
 				result.push(this.createEventIncreaseGlobalParameter("temperature",3))
+				break
+			}
+			//Permafrost Extraction
+			case('92'):{
+				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				break
+			}
+			//Phobos Falls
+			case('93'):{
+				result.push(this.createEventIncreaseGlobalParameter("temperature",1))
+				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				result.push(this.createEventDraw(2))
+				break
+			}
+			//Research
+			case('96'):{
+				result.push(this.createEventDraw(2))
 				break
 			}
 			//Microprocessor
@@ -287,6 +321,36 @@ export class ProjectCardPlayedEffectService {
 			//Biological Factories
 			case('D40'):{
 				result.push(this.createEventUpgradePhaseCard(1, [3]))
+				break
+			}
+			//Architecture Blueprints
+			case('F09'):{
+				result.push(this.createEventIncreaseGlobalParameter("infrastructure",1))
+				result.push(this.createEventDraw(2))
+				result.push(this.createEventDiscard(1))
+				break
+			}
+			//Bedrock Wellbore
+			case('F10'):{
+				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				result.push(this.createEventIncreaseGlobalParameter("infrastructure",1))
+				break
+			}
+			//CHP Combustion Turbines
+			case('F12'):{
+				result.push(this.createEventIncreaseGlobalParameter("infrastructure",1))
+				result.push(this.createEventIncreaseGlobalParameter("oxygen",1))
+				result.push(this.createEventIncreaseGlobalParameter("temperature",1))
+				break
+			}
+			//Grain Silos
+			case('F14'):{
+				result.push(this.createEventIncreaseGlobalParameter("infrastructure",2))
+				break
+			}
+			//Low-Atmosphere Planes
+			case('F17'):{
+				result.push(this.createEventIncreaseGlobalParameter("infrastructure",3))
 				break
 			}
 			default:{
