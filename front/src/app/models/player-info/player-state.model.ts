@@ -1,9 +1,10 @@
-import { GlobalParameter, RessourceState, TagState } from "../../interfaces/global.interface";
+import { ProjectCardState, RessourceState, TagState } from "../../interfaces/global.interface";
 import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { RessourceType } from "../../types/global.type";
 import { GlobalParameterModel } from "../core-game/global-parameter.model";
+
 
 const ressourceIndex = new  Map<RessourceType, number>(
 	[
@@ -23,11 +24,7 @@ export class PlayerStateModel {
     terraformingRating!: number;
     vp!: number;
     tag!: TagState[];
-    cards!: {
-        "hand": number[],
-        "played": number[],
-        "maximum": number;
-    };
+    cards!: ProjectCardState
     research!: {
         "drawMod": number,
         "keepMod": number

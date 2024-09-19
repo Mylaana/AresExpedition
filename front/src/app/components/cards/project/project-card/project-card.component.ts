@@ -9,6 +9,7 @@ import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { deepCopy } from '../../../../functions/global.functions';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { RessourceState } from '../../../../interfaces/global.interface';
+import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 
 @Component({
   selector: 'app-project-card',
@@ -51,7 +52,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 
 		// subscribe to gameState
 		this.gameStateService.currentGroupPlayerState.subscribe(
-			state => this.updateRessourceState(state[this.clientPlayerId].ressource)
+			state => this.updatePlayerState(state[this.clientPlayerId])
 		)
 		this.checkPlayable()
 	}
@@ -82,12 +83,17 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	play(): void {
 		console.log('Played: ', this.projectCard.title)
 	}
-
+	updatePlayerState(state: PlayerStateModel): void {
+		this.updateRessourceState(state.ressource)
+	}
 	updateRessourceState(ressourceState: RessourceState[]):void{
 		if(this.ressourceState===ressourceState){return}
 		this.ressourceState = deepCopy(ressourceState)
 		this.updateCost()
 		this.checkPlayable()
+	}
+	updateCardState(cardState: {}): void {
+		
 	}
 
 	updateCost():void{

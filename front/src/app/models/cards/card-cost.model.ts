@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CostMod } from "../../types/project-card.type";
+import { ProjectCardCostService } from "../../services/cards/project-card-cost-modification.service";
 
 
 @Injectable()
@@ -7,6 +8,8 @@ export class CardCost {
 	cost!: number
 	costInitial!: number
 	costMod!: number
+
+	constructor(private cardCostService: ProjectCardCostService){}
 
 	initialize(initialCost: number):void{
 		this.costInitial = initialCost

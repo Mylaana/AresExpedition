@@ -84,3 +84,9 @@ export interface RessourceValue {
 	name: RessourceType,
 	value: number
 }
+
+export interface ProjectCardState {
+    hand: number[],
+    played: number[],
+    maximum: number;
+}
