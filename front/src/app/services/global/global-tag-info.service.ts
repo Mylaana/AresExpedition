@@ -1,16 +1,25 @@
 import { Injectable } from "@angular/core";
-
-type TagInfo = {
-    id: number;
-    description: string;
-    imageUrl: string;
-    textTagName: string;
-};
+import { TagInfo, TagType } from "../../types/global.type";
 
 @Injectable({
     providedIn: 'root'
 })
 export class GlobalTagInfoService {
+    private tags = new Map<TagType, number>(
+        [
+            ['building', 0],
+            ['space', 1],
+            ['science', 2],
+            ['power',3],
+            ['earth',4],
+            ['jovian',5],
+            ['plant',6],
+            ['animal',7],
+            ['microbe',8],
+            ['event',9],
+            ['wild',10],
+        ]
+    )
     private tagInfo: TagInfo[] = [
         {
             id: 0,
@@ -93,5 +102,10 @@ export class GlobalTagInfoService {
                 }
             }
         return result;
+    }
+    getTagIdFromType(tag: TagType): number {
+        let tagId = this.tags.get(tag)
+        if(tagId===undefined){tagId=-1}
+        return tagId
     }
 }

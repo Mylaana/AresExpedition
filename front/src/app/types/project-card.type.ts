@@ -3,4 +3,4 @@ export type SummaryType = 'action' | 'trigger' | 'production' | 'greyProduction'
 export type CardType = 'redProject' | 'greenProject' | 'blueProject' | undefined
 export type PrerequisiteType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | 'heat' | 'tr' | undefined
 export type PrerequisiteTresholdType = 'min' | 'max' | undefined
-export type CostMod = {tagList?:number[], steelState?: RessourceState, titaniumState?: RessourceState}
+export type CostMod = {tagList?:number[], steelState?: RessourceState, titaniumState?: RessourceState, playedTriggersList?: number[]}

@@ -8,8 +8,9 @@ import { CardCost } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { deepCopy } from '../../../../functions/global.functions';
 import { GameState } from '../../../../services/core-game/game-state.service';
-import { RessourceState } from '../../../../interfaces/global.interface';
+import { ProjectCardState, RessourceState } from '../../../../interfaces/global.interface';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
+
 
 @Component({
   selector: 'app-project-card',
@@ -27,6 +28,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
 	clientPlayerId!: number
 	ressourceState: RessourceState[] = []
+	cardState!: ProjectCardState
 	private readonly cardCost = inject(CardCost);
 
 	readonly tagNumber = 3;
@@ -85,22 +87,27 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	}
 	updatePlayerState(state: PlayerStateModel): void {
 		this.updateRessourceState(state.ressource)
+		this.updateCardState(state.cards)
+		this.checkPlayable()
 	}
 	updateRessourceState(ressourceState: RessourceState[]):void{
 		if(this.ressourceState===ressourceState){return}
 		this.ressourceState = deepCopy(ressourceState)
+	}
+	updateCardState(cardState: ProjectCardState): void {
+		if(!this.cardState===undefined && deepCopy(this.cardState)===deepCopy(cardState)){return}
+		this.cardState=deepCopy(cardState)
+		console.log(deepCopy(this.cardState))
+		console.log(deepCopy(cardState))
+		console.log('update card state: ', cardState, this.cardState)
 		this.updateCost()
-		this.checkPlayable()
 	}
-	updateCardState(cardState: {}): void {
-		
-	}
-
 	updateCost():void{
 		this.projectCard.cost = this.cardCost.updateCost({
 			tagList: this.projectCard.tagsId,
 			steelState: this.ressourceState[3],
-			titaniumState: this.ressourceState[4]
+			titaniumState: this.ressourceState[4],
+			playedTriggersList: this.cardState.playedTriggers
 		})
 	}
 

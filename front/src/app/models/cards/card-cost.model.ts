@@ -25,6 +25,7 @@ export class CardCost {
 		let newMod: number = 0
 		if(mod.steelState && mod.tagList?.includes(0)){newMod += mod.steelState.valueProd * mod.steelState.valueMod}
 		if(mod.titaniumState && mod.tagList?.includes(1)){newMod += mod.titaniumState.valueProd * mod.titaniumState.valueMod}
+		if(mod.playedTriggersList){newMod += this.cardCostService.getCostModFromTriggers(mod)}
 
 		return newMod
 	}

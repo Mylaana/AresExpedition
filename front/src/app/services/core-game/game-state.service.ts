@@ -30,7 +30,7 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 8;
+const handSizeStart: number = 0;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
@@ -225,9 +225,10 @@ export class GameState{
             },
         ];
         newPlayer.cards = {
-            "hand": [],
-            "played": [],
-            "maximum": handSizeMaximum
+            hand: [],
+            played: [],
+            playedTriggers: [],
+            maximum: handSizeMaximum
         };
         newPlayer.research = {
             'drawMod': 0,
