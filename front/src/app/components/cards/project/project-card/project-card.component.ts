@@ -28,7 +28,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
 	clientPlayerId!: number
 	ressourceState: RessourceState[] = []
-	cardState!: ProjectCardState
+	projectCardState!: ProjectCardState
 	private readonly cardCost = inject(CardCost);
 
 	readonly tagNumber = 3;
@@ -95,19 +95,20 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		this.ressourceState = deepCopy(ressourceState)
 	}
 	updateCardState(cardState: ProjectCardState): void {
-		if(!this.cardState===undefined && deepCopy(this.cardState)===deepCopy(cardState)){return}
-		this.cardState=deepCopy(cardState)
-		console.log(deepCopy(this.cardState))
-		console.log(deepCopy(cardState))
-		console.log('update card state: ', cardState, this.cardState)
+		if(!this.projectCardState===undefined && deepCopy(this.projectCardState)===deepCopy(cardState)){return}
+		this.projectCardState=deepCopy(cardState)
 		this.updateCost()
 	}
 	updateCost():void{
+		if(this.state.playable!=true){
+			this.projectCard.cost=this.projectCard.costInitial
+			return
+		}
 		this.projectCard.cost = this.cardCost.updateCost({
 			tagList: this.projectCard.tagsId,
 			steelState: this.ressourceState[3],
 			titaniumState: this.ressourceState[4],
-			playedTriggersList: this.cardState.playedTriggers
+			playedTriggersList: this.projectCardState.playedTriggers
 		})
 	}
 

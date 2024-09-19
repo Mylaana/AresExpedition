@@ -56,9 +56,8 @@ export class PlayerStateModel {
     }
 
 	playCard(card:ProjectCardModel):void{
-		console.log('play card: ', card)
 		this.addCardsPlayed([card.id])
-		if(card.effectSummaryText==='trigger'){
+		if(card.cardSummaryType==='trigger'){
 			this.addCardsTriggersPlayed([card.id])
 		}
 		this.removeCardsFromHand([card.id])
@@ -72,7 +71,7 @@ export class PlayerStateModel {
 	}
 	addCardsTriggersPlayed(cardList: number[]):void{
 		for(let card of cardList){
-			this.cards.played.push(Number(card))
+			this.cards.playedTriggers.push(Number(card))
 		}
 	}
 	removeCardsFromHand(cardList: number[]):void{

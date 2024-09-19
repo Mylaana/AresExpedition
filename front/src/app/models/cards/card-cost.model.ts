@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CostMod } from "../../types/project-card.type";
-import { ProjectCardCostService } from "../../services/cards/project-card-cost-modification.service";
-
+import { ProjectCardTriggersService } from "../../services/cards/project-card-triggers.service";
 
 @Injectable()
 export class CardCost {
@@ -9,7 +8,7 @@ export class CardCost {
 	costInitial!: number
 	costMod!: number
 
-	constructor(private cardCostService: ProjectCardCostService){}
+	constructor(private cardTriggerService: ProjectCardTriggersService){}
 
 	initialize(initialCost: number):void{
 		this.costInitial = initialCost
@@ -25,7 +24,7 @@ export class CardCost {
 		let newMod: number = 0
 		if(mod.steelState && mod.tagList?.includes(0)){newMod += mod.steelState.valueProd * mod.steelState.valueMod}
 		if(mod.titaniumState && mod.tagList?.includes(1)){newMod += mod.titaniumState.valueProd * mod.titaniumState.valueMod}
-		if(mod.playedTriggersList){newMod += this.cardCostService.getCostModFromTriggers(mod)}
+		if(mod.playedTriggersList){newMod += this.cardTriggerService.getCostModFromTriggers(mod)}
 
 		return newMod
 	}

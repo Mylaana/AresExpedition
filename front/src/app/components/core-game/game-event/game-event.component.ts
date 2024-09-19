@@ -205,7 +205,7 @@ export class GameEventComponent {
 			if(i===0){buttonId=this.getButtonIdFromName('selectFirstCard')}else{buttonId=this.getButtonIdFromName('selectSecondCard')}
 			let cardZone: PlayableCardZone = {
 				cardList: [],
-				cardInitialState: {selectable: false},
+				cardInitialState: {selectable: false, playable: true},
 				currentButton: undefined
 			}
 			newEvent.playCardZone.push(cardZone)
@@ -235,7 +235,7 @@ export class GameEventComponent {
 			if(i===0){buttonId=this.getButtonIdFromName('selectFirstCard')}else{buttonId=this.getButtonIdFromName('selectSecondCard')}
 			let cardZone: PlayableCardZone = {
 				cardList: [],
-				cardInitialState: {selectable: false},
+				cardInitialState: {selectable: false, playable: true},
 				currentButton: undefined
 			}
 			newEvent.playCardZone.push(cardZone)

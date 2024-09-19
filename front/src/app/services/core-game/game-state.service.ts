@@ -12,6 +12,7 @@ import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/ph
 import { deepCopy } from "../../functions/global.functions";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
+import { ProjectCardTriggersService } from "../cards/project-card-triggers.service";
 
 interface SelectedPhase {
     "development": boolean,
@@ -81,7 +82,8 @@ export class GameState{
 
 	constructor(
 		private phaseCardService: PhaseCardInfoService,
-		private readonly projectCardPlayed : ProjectCardPlayedEffectService
+		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
+        private readonly projectTriggerEffect:ProjectCardTriggersService
 	){}
 
     addPlayer(playerName: string, playerColor: RGB): void {
@@ -649,15 +651,23 @@ export class GameState{
 		this.updateClientPlayerState(playerState)
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
+        let events: EventModel[] = []
 		//this.removeMegaCreditsFromPlayer(this.clientPlayerId, card.cost)
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
+        let triggerCardEvents = this.projectTriggerEffect.getEventFromTrigger(card, newState.cards.playedTriggers)
         this.updateClientPlayerState(newState)
 
         //resolve played card events
-        if(playedCardEvents === undefined){return}
-        playedCardEvents.reverse()
-        for(let event of playedCardEvents){
+        if(triggerCardEvents!=undefined){
+            events = events.concat(triggerCardEvents)
+        }
+        if(playedCardEvents!=undefined){
+            events = events.concat(playedCardEvents)
+        }
+        if(events.length===0){return}
+        events.reverse()
+        for(let event of events){
             this.addEventQueue(event, true)
         }
 	}
