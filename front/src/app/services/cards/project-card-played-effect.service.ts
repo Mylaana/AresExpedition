@@ -5,6 +5,8 @@ import { AdvancedRessourceType, GlobalParameterName, RessourceType } from "../..
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventModel } from "../../models/core-game/event.model";
 import { GlobalParameter } from "../../interfaces/global.interface";
+import { CostMod } from "../../types/project-card.type";
+import { GlobalTagInfoService } from "../global/global-tag-info.service";
 
 
 @Injectable({
@@ -14,7 +16,10 @@ export class ProjectCardPlayedEffectService {
 	playedCardList: number [] = []
 	clientPlayerState!: PlayerStateModel
 
-	constructor(private scalingProductionService: ProjectCardScalingProductionsService){}
+	constructor(
+		private scalingProductionService: ProjectCardScalingProductionsService,
+		private tagInfoService: GlobalTagInfoService
+	){}
 
 	setCardStockableRessource(card:ProjectCardModel, ressource: AdvancedRessourceType):void{
 		if(!card.stock){
@@ -357,6 +362,82 @@ export class ProjectCardPlayedEffectService {
 				return undefined
 			}
 		}
+		return result
+	}
+	
+	getCostModFromTriggers(mod: CostMod): number {
+		if(!mod || !mod.playedTriggersList){return 0}
+		let newMod: number = 0
+		let tags: number[] = []
+		
+		if(mod.tagList!=undefined){
+			tags = mod.tagList.filter((e, i) => e !== -1); 
+		}
+		for(let triggerId of mod.playedTriggersList){
+			newMod += this.calculateCostModFromTrigger(triggerId, mod)
+		}
+
+		return newMod
+	}
+	calculateCostModFromTrigger(triggerId: number, mod:CostMod): number {
+		if(!mod || !mod.tagList){return 0}
+		let costMod: number = 0
+
+		switch(triggerId){
+			//Energy Subsidies
+			case(25):{
+				if(mod.tagList.includes(this.tagInfoService.getTagIdFromType('power'))!=true){break}
+				costMod += 4
+				break
+			}
+			//Interplanetary Conference
+			case(37):{
+				if(mod.tagList.includes(this.tagInfoService.getTagIdFromType('earth'))===true){costMod += 3}
+				if(mod.tagList.includes(this.tagInfoService.getTagIdFromType('jovian'))===true){costMod += 3}
+				break
+			}
+		}
+
+		return costMod
+	}
+	getEventFromTrigger(playedCard: ProjectCardModel, triggerIdList: number[]): EventModel[] | undefined{
+		if(triggerIdList.length===0){return}
+		let events: EventModel[] = []
+
+		for(let triggerId of triggerIdList){
+			let newEvent = this.generateEventFromTrigger(triggerId, playedCard.tagsId, triggerId===playedCard.id)
+			if(newEvent){
+				events = events.concat(newEvent)
+			}
+		}
+		return events
+	}
+	generateEventFromTrigger(triggerId: number, playedCardTags: number[], cardPlayedIsTheTrigger: boolean): EventModel[] | undefined {
+		let result: EventModel[] = []
+
+		switch(triggerId){
+			//Energy Subsidies
+			case(25):{
+				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('power'))!=true){break}
+				result.push(this.createEventDraw(1))
+				break
+			}
+			//Interplanetary Conference
+			case(37):{
+				//self triggering excluded
+				if(cardPlayedIsTheTrigger===true){break}
+				if(
+					playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true
+					&& playedCardTags.includes(this.tagInfoService.getTagIdFromType('jovian'))!=true
+				){break}
+				result.push(this.createEventDraw(1))
+				break
+			}
+			default:{
+				return
+			}
+		}
+
 		return result
 	}
 	createEventDraw(drawNumber: number): EventModel {

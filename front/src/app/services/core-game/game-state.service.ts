@@ -12,7 +12,6 @@ import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/ph
 import { deepCopy } from "../../functions/global.functions";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
-import { ProjectCardTriggersService } from "../cards/project-card-triggers.service";
 
 interface SelectedPhase {
     "development": boolean,
@@ -83,7 +82,6 @@ export class GameState{
 	constructor(
 		private phaseCardService: PhaseCardInfoService,
 		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
-        private readonly projectTriggerEffect:ProjectCardTriggersService
 	){}
 
     addPlayer(playerName: string, playerColor: RGB): void {
@@ -655,7 +653,7 @@ export class GameState{
 		//this.removeMegaCreditsFromPlayer(this.clientPlayerId, card.cost)
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
-        let triggerCardEvents = this.projectTriggerEffect.getEventFromTrigger(card, newState.cards.playedTriggers)
+        let triggerCardEvents = this.projectCardPlayed.getEventFromTrigger(card, newState.cards.playedTriggers)
         this.updateClientPlayerState(newState)
 
         //resolve played card events
