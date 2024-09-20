@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterName, RGB } from "../../types/global.type";
-import { PlayerPhase } from "../../interfaces/global.interface";
+import { PlayerPhase, RessourceGain } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
@@ -678,5 +678,13 @@ export class GameState{
         let playerState = this.getPlayerStateFromId(playerId)
 		playerState.globalParameter.addStepToParameterEOP(parameter, steps)
 		this.updatePlayerState(playerId, playerState)
+    }
+    addRessourceToClientPlayer(ressources: RessourceGain[]): void {
+        let playerState = this.getClientPlayerState()
+
+        for(let ressource of ressources){
+            playerState.addRessource(ressource.name, ressource.valueStock)
+        }
+        this.updateClientPlayerState(playerState)
     }
 }

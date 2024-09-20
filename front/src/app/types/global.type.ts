@@ -8,7 +8,7 @@ export type MinMaxEqualType = 'min' | 'max' | 'equal'
 export type EventType = 
 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' 
 | 'production' | 'planification' | 'upgradePhase' | 'research' | 'drawCards' | 'discardCards'
-| 'increaseGlobalParameter'
+| 'increaseGlobalParameter' | 'ressourceGain'
 export type ButtonNames =
 'defaultValidate' 
 | 'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'

@@ -19,6 +19,10 @@ export interface RessourceState {
     "hasStock": boolean,
     "imageUrlId": number,
 }
+export interface RessourceGain {
+    "name": RessourceType,
+    'valueStock': number
+}
 export interface TagState {
     "id": number,
     "name": TagType,

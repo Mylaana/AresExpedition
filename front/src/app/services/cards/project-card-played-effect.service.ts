@@ -4,7 +4,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType, GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventModel } from "../../models/core-game/event.model";
-import { GlobalParameter } from "../../interfaces/global.interface";
+import { GlobalParameter, RessourceGain, RessourceState } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
 import { GlobalTagInfoService } from "../global/global-tag-info.service";
 
@@ -433,6 +433,13 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventDraw(1))
 				break
 			}
+			//Optimal Aerobraking
+			case(45):{
+				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('event'))!=true){break}
+				result.push(this.createEventAddRessource("plant", 2))
+				result.push(this.createEventAddRessource("heat", 2))
+				break
+			}
 			default:{
 				return
 			}
@@ -513,6 +520,27 @@ export class ProjectCardPlayedEffectService {
 		newEvent.value = parameter
 
 		this.addTrToPlayer(steps)
+
+		return newEvent
+	}
+	createEventAddRessource(ressourceType: RessourceType, valueGain: number): EventModel {
+		let newEvent = new EventModel
+		let ressource: RessourceGain
+
+		newEvent.type = 'ressourceGain'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+			title: 'Increase Global parameter',
+			selectedIdList: [],
+		}
+		ressource = {
+			name: ressourceType,
+			valueStock: valueGain
+		}
+		newEvent.value = ressource
+
 
 		return newEvent
 	}

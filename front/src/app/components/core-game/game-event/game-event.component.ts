@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
@@ -7,7 +7,7 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
 import { EventType, MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GlobalParameter, RessourceState } from '../../../interfaces/global.interface';
+import { GlobalParameter, RessourceGain, RessourceState } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
@@ -19,6 +19,7 @@ import { EventModel } from '../../../models/core-game/event.model';
 import { ButtonNames } from '../../../types/global.type';
 import { PlayableCardZone } from '../../../interfaces/global.interface';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
+import { types } from 'node:util';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 
@@ -498,6 +499,13 @@ export class GameEventComponent {
 				this.currentEvent.isFinalized = true
 				let parameter: GlobalParameter = this.currentEvent.value
 				this.gameStateService.addGlobalParameterStepsEOPtoPlayerId(this.clientPlayerId, parameter.name, parameter.addEndOfPhase)
+				break
+			}
+			case('ressourceGain'):{
+				this.currentEvent.isFinalized = true
+				let ressources: RessourceGain[] = [].concat(this.currentEvent.value)
+				this.gameStateService.addRessourceToClientPlayer(ressources)
+				console.log(ressources)
 				break
 			}
 		}
