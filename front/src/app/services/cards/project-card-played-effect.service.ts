@@ -4,9 +4,10 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType, GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventModel } from "../../models/core-game/event.model";
-import { GlobalParameter, RessourceGain, RessourceState } from "../../interfaces/global.interface";
+import { GlobalParameter, RessourceStock, RessourceState } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
 import { GlobalTagInfoService } from "../global/global-tag-info.service";
+import { AdvancedRessourceStock } from "../../interfaces/global.interface";
 
 
 @Injectable({
@@ -20,7 +21,7 @@ export class ProjectCardPlayedEffectService {
 		private scalingProductionService: ProjectCardScalingProductionsService,
 		private tagInfoService: GlobalTagInfoService
 	){}
-
+	/*
 	setCardStockableRessource(card:ProjectCardModel, ressource: AdvancedRessourceType):void{
 		if(!card.stock){
 			card.stock = new Object()
@@ -30,6 +31,9 @@ export class ProjectCardPlayedEffectService {
 	addRessourceToCard(card:ProjectCardModel, ressource:AdvancedRessourceType, quantity:number):void{
 		if(!card.stock || !card.stock.ressource){this.setCardStockableRessource(card, ressource)}
 		card.stock[ressource] =  Number(card.stock[ressource]) + quantity
+	}*/
+	addRessourceToCard(card: ProjectCardModel, ressource: AdvancedRessourceStock): void {
+		card.addRessourceToStock(ressource)
 	}
 	addRessourceToPlayer(ressource: RessourceType, quantity:number):void{
 		this.clientPlayerState.addRessource(ressource, quantity)
@@ -47,22 +51,22 @@ export class ProjectCardPlayedEffectService {
 		switch(card.cardCode){
 			//Decomposing Fungus
 			case('20'):{
-				this.addRessourceToCard(card, 'microbe', 2)
+				this.addRessourceToCard(card, {name: 'microbe',valueStock: 2})
 				break
 			}
 			//Farming Co-ops
 			case('29'):{
-				this.clientPlayerState.addRessource('plant', 3)
+				//this.clientPlayerState.addRessource('plant', 3)
 				break
 			}
 			//Physics Complex
 			case('46'):{
-				this.setCardStockableRessource(card,'science')
+				//this.setCardStockableRessource(card,'science')
 				break
 			}
 			//Tardigrades
 			case('58'):{
-				this.setCardStockableRessource(card, 'microbe')
+				//this.setCardStockableRessource(card, 'microbe')
 				break
 			}
 			//Bribed Commitee
@@ -230,7 +234,7 @@ export class ProjectCardPlayedEffectService {
 			let scalingProd =
 				this.scalingProductionService.getScalingProduction(
 					this.clientPlayerState.ressource[i].name,
-					this.clientPlayerState.cards.played,
+					this.clientPlayerState.cards.getProjectIdList(),
 					this.clientPlayerState.tag
 				)
 			this.clientPlayerState.updateProductions(this.clientPlayerState.ressource[i].name, scalingProd)
@@ -436,8 +440,11 @@ export class ProjectCardPlayedEffectService {
 			//Optimal Aerobraking
 			case(45):{
 				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('event'))!=true){break}
-				result.push(this.createEventAddRessource("plant", 2))
-				result.push(this.createEventAddRessource("heat", 2))
+				result.push(
+					this.createEventAddRessource([
+					{name: 'plant', valueStock: 2},
+					{name: 'heat', valueStock: 2}])
+				)
 				break
 			}
 			default:{
@@ -523,9 +530,9 @@ export class ProjectCardPlayedEffectService {
 
 		return newEvent
 	}
-	createEventAddRessource(ressourceType: RessourceType, valueGain: number): EventModel {
+	createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventModel {
 		let newEvent = new EventModel
-		let ressource: RessourceGain
+		let ressource: RessourceStock
 
 		newEvent.type = 'ressourceGain'
 		newEvent.cardSelector = {
@@ -535,11 +542,7 @@ export class ProjectCardPlayedEffectService {
 			title: 'Increase Global parameter',
 			selectedIdList: [],
 		}
-		ressource = {
-			name: ressourceType,
-			valueStock: valueGain
-		}
-		newEvent.value = ressource
+		newEvent.value = gain
 
 
 		return newEvent

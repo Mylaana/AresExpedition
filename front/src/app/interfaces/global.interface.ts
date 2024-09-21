@@ -1,4 +1,4 @@
-import { GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type";
+import { AdvancedRessourceType, GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type";
 import { PhaseCardType } from "../types/phase-card.type";
 import { PhaseFilter } from "../types/phase-card.type";
 import { ProjectCardModel } from "../models/cards/project-card.model";
@@ -19,8 +19,12 @@ export interface RessourceState {
     "hasStock": boolean,
     "imageUrlId": number,
 }
-export interface RessourceGain {
+export interface RessourceStock {
     "name": RessourceType,
+    'valueStock': number
+}
+export interface AdvancedRessourceStock {
+    "name": AdvancedRessourceType,
     'valueStock': number
 }
 export interface TagState {
@@ -87,11 +91,4 @@ export interface GlobalParameter {
 export interface RessourceValue {
 	name: RessourceType,
 	value: number
-}
-
-export interface ProjectCardState {
-    hand: number[],
-    played: number[],
-    playedTriggers: number[],
-    maximum: number;
 }

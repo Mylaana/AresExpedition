@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProjectCardModel } from '../../../../models/cards/project-card.model';
+import { ProjectCardModel, ProjectCardState } from '../../../../models/cards/project-card.model';
 import { GlobalTagInfoService } from '../../../../services/global/global-tag-info.service';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
@@ -8,7 +8,7 @@ import { CardCost } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { deepCopy } from '../../../../functions/global.functions';
 import { GameState } from '../../../../services/core-game/game-state.service';
-import { ProjectCardState, RessourceState } from '../../../../interfaces/global.interface';
+import { RessourceState } from '../../../../interfaces/global.interface';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 
 
@@ -54,7 +54,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 
 		// subscribe to gameState
 		this.gameStateService.currentGroupPlayerState.subscribe(
-			state => this.updatePlayerState(state[this.clientPlayerId])
+			state => this.updatePlayerState(state)
 		)
 		this.checkPlayable()
 	}
@@ -85,9 +85,11 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	play(): void {
 		console.log('Played: ', this.projectCard.title)
 	}
-	updatePlayerState(state: PlayerStateModel): void {
-		this.updateRessourceState(state.ressource)
-		this.updateCardState(state.cards)
+	updatePlayerState(state: PlayerStateModel[]): void {
+		if(state[this.clientPlayerId]===undefined){return}
+		let playerState = state[this.clientPlayerId]
+		this.updateRessourceState(playerState.ressource)
+		this.updateCardState(playerState.cards)
 		this.checkPlayable()
 	}
 	updateRessourceState(ressourceState: RessourceState[]):void{
@@ -95,8 +97,8 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		this.ressourceState = deepCopy(ressourceState)
 	}
 	updateCardState(cardState: ProjectCardState): void {
-		if(!this.projectCardState===undefined && deepCopy(this.projectCardState)===deepCopy(cardState)){return}
-		this.projectCardState=deepCopy(cardState)
+		if(!this.projectCardState===undefined &&  deepCopy(this.projectCardState)===deepCopy(cardState)){return}
+		this.projectCardState=cardState
 		this.updateCost()
 	}
 	updateCost():void{
@@ -108,7 +110,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 			tagList: this.projectCard.tagsId,
 			steelState: this.ressourceState[3],
 			titaniumState: this.ressourceState[4],
-			playedTriggersList: this.projectCardState.playedTriggers
+			playedTriggersList: this.projectCardState.getTriggersIdListActive()
 		})
 	}
 

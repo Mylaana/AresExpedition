@@ -12,6 +12,7 @@ import { ProjectCardModel } from './models/cards/project-card.model';
 import { ProjectCardInfoService } from './services/cards/project-card-info.service';
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { PlayerPannelComponent } from './components/player-info/player-pannel/player-pannel.component';
+import { PlayerStateModel } from './models/player-info/player-state.model';
 
 @Component({
   selector: 'app-root',
@@ -33,8 +34,8 @@ import { PlayerPannelComponent } from './components/player-info/player-pannel/pl
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'AresExpedition';
-  playerHand!: ProjectCardModel[];
-  playerPlayed!: ProjectCardModel[];
+  playerHand: ProjectCardModel[] = [];
+  playerPlayed: ProjectCardModel[] = [];
   playerIdList: number[] = this.gameStateService.playerCount.getValue()
   clientPlayerId!: number;
   loading: boolean = false
@@ -46,9 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.clientPlayerId = this.gameStateService.clientPlayerId
-    this.gameStateService.currentGroupPlayerState.subscribe(
-      state => this.updateHandOnStateChange()
-    )
+
     this.gameStateService.currentLoadingState.subscribe(
       loading => this.loadingFinished(loading)
     )
@@ -61,9 +60,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     }, 0)
   }
 
-  updateHandOnStateChange(): void {
-    this.playerHand = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand())
-    this.playerPlayed = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStatePlayed())
+  updateHandOnStateChange(state: PlayerStateModel[]): void {
+    let cardState = state[this.clientPlayerId].cards
+    this.playerHand = this.cardInfoService.getProjectCardList(cardState.hand)
+    this.playerPlayed = cardState.getProjectPlayedList()
   }
   updatePlayerList(playerIdList: number[]){
     this.playerIdList = playerIdList
@@ -75,6 +75,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.loading = loading
     this.gameStateService.currentPlayerCount.subscribe(
       playerCount => this.updatePlayerList(playerCount)
+    )
+    this.gameStateService.currentGroupPlayerState.subscribe(
+      state => this.updateHandOnStateChange(state)
     )
   }
 }

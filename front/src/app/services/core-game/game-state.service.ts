@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterName, RGB } from "../../types/global.type";
-import { PlayerPhase, RessourceGain } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, PlayerPhase, RessourceStock } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
@@ -10,7 +10,7 @@ import { EventModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
 import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
 import { deepCopy } from "../../functions/global.functions";
-import { ProjectCardModel } from "../../models/cards/project-card.model";
+import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 
 interface SelectedPhase {
@@ -224,12 +224,10 @@ export class GameState{
                 "valueMod": 0,
             },
         ];
-        newPlayer.cards = {
-            hand: [],
-            played: [],
-            playedTriggers: [],
-            maximum: handSizeMaximum
-        };
+
+        newPlayer.cards = new ProjectCardState
+        newPlayer.cards.maximum = handSizeMaximum
+
         newPlayer.research = {
             'drawMod': 0,
             'keepMod': 0,
@@ -496,23 +494,23 @@ export class GameState{
     }
 
     getPlayerStateHand(playerId: number): number[] {
-        let playerState = this.getPlayerStateFromId(playerId)
-        if(playerState===undefined){
-            return []
-        }
-        return playerState.cards.hand
+        return this.getPlayerStateFromId(playerId).cards.hand
     }
 
-    getClientPlayerStatePlayed(): number[] {
-        return this.getPlayerStatePlayed(this.clientPlayerId)
+    getClientPlayerPlayedCardsId(): number[] {
+        return this.getPlayerPlayedCardsId(this.clientPlayerId)
     }
 
-    getPlayerStatePlayed(playerId: number): number[] {
-        let playerState = this.getPlayerStateFromId(playerId)
-        if(playerState===undefined){
-            return []
-        }
-        return playerState.cards.played
+    getPlayerPlayedCardsId(playerId: number): number[] {
+        return this.getPlayerStateFromId(playerId).cards.getProjectIdList()
+    }
+
+    getClientPlayerPlayedCardsProject(): ProjectCardModel [] {
+        return this.getPlayerPlayedCardsProject(this.clientPlayerId)
+    }
+    
+    getPlayerPlayedCardsProject(playerId: number): ProjectCardModel[] {
+        return this.getPlayerStateFromId(playerId).cards.getProjectPlayedList()
     }
 
     updateClientPlayerStateHand(cardList: number[]): void {
@@ -527,12 +525,13 @@ export class GameState{
         this.updatePlayerState(playerId, playerState)
     }
 
-    updatePlayerStatePlayed(playerId: number, newCardList: number[]): void {
+    /*
+    TODELupdatePlayerStatePlayed(playerId: number, newCardList: number[]): void {
         let playerState = this.getPlayerStateFromId(playerId)
         playerState.cards.played = newCardList
         this.updatePlayerState(playerId, playerState)
     }
-
+    */
     addCardToPlayerHand(playerId: number, cardsToAdd: number[]):void{
         let playerStateHand = this.getPlayerStateHand(playerId)
         this.updatePlayerStateHand(playerId, playerStateHand.concat(cardsToAdd))
@@ -544,12 +543,14 @@ export class GameState{
         this.updatePlayerStateHand(playerId, playerStateHand)
     }
 
-    addCardToPlayerPlayed(playerId: number, cardsToAdd: number[]):number[]{
+    /*
+    TODELaddCardToPlayerPlayed(playerId: number, cardsToAdd: number[]):number[]{
         let playerStatePlayed = this.getPlayerStatePlayed(playerId)
 		let newList: number[] = playerStatePlayed.concat(cardsToAdd)
         this.updatePlayerStatePlayed(playerId, newList)
 		return newList
     }
+        */
 
     addDrawQueue(draw: DrawModel):void{
         this.drawQueue.next(this.drawQueue.getValue().concat([draw]));
@@ -650,10 +651,9 @@ export class GameState{
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
         let events: EventModel[] = []
-		//this.removeMegaCreditsFromPlayer(this.clientPlayerId, card.cost)
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
-        let triggerCardEvents = this.projectCardPlayed.getEventFromTrigger(card, newState.cards.playedTriggers)
+        let triggerCardEvents = this.projectCardPlayed.getEventFromTrigger(card, newState.cards.getTriggersIdListActive())
         this.updateClientPlayerState(newState)
 
         //resolve played card events
@@ -679,12 +679,18 @@ export class GameState{
 		playerState.globalParameter.addStepToParameterEOP(parameter, steps)
 		this.updatePlayerState(playerId, playerState)
     }
-    addRessourceToClientPlayer(ressources: RessourceGain[]): void {
+    addRessourceToClientPlayer(ressources: RessourceStock[]): void {
         let playerState = this.getClientPlayerState()
 
         for(let ressource of ressources){
             playerState.addRessource(ressource.name, ressource.valueStock)
         }
+        this.updateClientPlayerState(playerState)
+    }
+    addRessourceToClientPlayerCard(ressource: AdvancedRessourceStock, cardId: number): void {
+        let playerState = this.getClientPlayerState()
+
+        playerState.cards.addRessourceToCard(cardId, ressource)
         this.updateClientPlayerState(playerState)
     }
 }

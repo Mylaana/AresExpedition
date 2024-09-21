@@ -7,7 +7,7 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
 import { EventType, MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GlobalParameter, RessourceGain, RessourceState } from '../../../interfaces/global.interface';
+import { GlobalParameter, RessourceStock, RessourceState } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
@@ -249,7 +249,7 @@ export class GameEventComponent {
 		let newEvent = new EventModel
 		newEvent.type = 'selectCardToActivate'
 		newEvent.cardSelector = {
-			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStatePlayed()),
+			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerPlayedCardsId()),
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
 			cardInitialState: {activable: true, selectable: false, playable: false},
@@ -503,9 +503,8 @@ export class GameEventComponent {
 			}
 			case('ressourceGain'):{
 				this.currentEvent.isFinalized = true
-				let ressources: RessourceGain[] = [].concat(this.currentEvent.value)
+				let ressources: RessourceStock[] = [].concat(this.currentEvent.value)
 				this.gameStateService.addRessourceToClientPlayer(ressources)
-				console.log(ressources)
 				break
 			}
 		}

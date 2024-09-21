@@ -1,10 +1,9 @@
-import { ProjectCardState, RessourceState, TagState } from "../../interfaces/global.interface";
+import { RessourceState, TagState } from "../../interfaces/global.interface";
 import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
-import { ProjectCardModel } from "../cards/project-card.model";
+import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
 import { RessourceType } from "../../types/global.type";
 import { GlobalParameterModel } from "../core-game/global-parameter.model";
-
 
 const ressourceIndex = new  Map<RessourceType, number>(
 	[
@@ -45,7 +44,6 @@ export class PlayerStateModel {
         }
         return
     }
-
     getRessourceStateFromName(ressourceName: string): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){
             if(this.ressource[i].name === ressourceName){
@@ -54,25 +52,11 @@ export class PlayerStateModel {
         }
         return
     }
-
 	playCard(card:ProjectCardModel):void{
-		this.addCardsPlayed([card.id])
-		if(card.cardSummaryType==='trigger'){
-			this.addCardsTriggersPlayed([card.id])
-		}
+		this.cards.playCard(card)
 		this.removeCardsFromHand([card.id])
 		this.payCardCost(card)
 		this.addPlayedCardTags(card)
-	}
-	addCardsPlayed(cardList: number[]):void{
-		for(let card of cardList){
-			this.cards.played.push(Number(card))
-		}
-	}
-	addCardsTriggersPlayed(cardList: number[]):void{
-		for(let card of cardList){
-			this.cards.playedTriggers.push(Number(card))
-		}
 	}
 	removeCardsFromHand(cardList: number[]):void{
 		for(let card of cardList){
