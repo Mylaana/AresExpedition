@@ -21,17 +21,6 @@ export class ProjectCardPlayedEffectService {
 		private scalingProductionService: ProjectCardScalingProductionsService,
 		private tagInfoService: GlobalTagInfoService
 	){}
-	/*
-	setCardStockableRessource(card:ProjectCardModel, ressource: AdvancedRessourceType):void{
-		if(!card.stock){
-			card.stock = new Object()
-		}
-		card.stock[ressource]=0
-	}
-	addRessourceToCard(card:ProjectCardModel, ressource:AdvancedRessourceType, quantity:number):void{
-		if(!card.stock || !card.stock.ressource){this.setCardStockableRessource(card, ressource)}
-		card.stock[ressource] =  Number(card.stock[ressource]) + quantity
-	}*/
 	addRessourceToCard(card: ProjectCardModel, ressource: AdvancedRessourceStock): void {
 		card.addRessourceToStock(ressource)
 	}
@@ -404,19 +393,19 @@ export class ProjectCardPlayedEffectService {
 
 		return costMod
 	}
-	getEventFromTrigger(playedCard: ProjectCardModel, triggerIdList: number[]): EventModel[] | undefined{
+	getEventTriggerByPlayedCard(playedCard: ProjectCardModel, triggerIdList: number[]): EventModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventModel[] = []
 
 		for(let triggerId of triggerIdList){
-			let newEvent = this.generateEventFromTrigger(triggerId, playedCard.tagsId, triggerId===playedCard.id)
+			let newEvent = this.generateEventTriggerByPlayedCard(triggerId, playedCard.tagsId, triggerId===playedCard.id)
 			if(newEvent){
 				events = events.concat(newEvent)
 			}
 		}
 		return events
 	}
-	generateEventFromTrigger(triggerId: number, playedCardTags: number[], cardPlayedIsTheTrigger: boolean): EventModel[] | undefined {
+	generateEventTriggerByPlayedCard(triggerId: number, playedCardTags: number[], cardPlayedIsTheTrigger: boolean): EventModel[] | undefined {
 		let result: EventModel[] = []
 
 		switch(triggerId){
@@ -451,7 +440,6 @@ export class ProjectCardPlayedEffectService {
 			case(222):{
 				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true){break}
 				result.push(this.createEventAddRessourceToCard({name:'microbe', valueStock: 1},triggerId))
-				result.push(this.createEventIncreaseResearchScan(1))
 				break
 			}
 			default:{
@@ -462,6 +450,39 @@ export class ProjectCardPlayedEffectService {
 		return result
 	}
 
+	getEventTriggerByRessourceAddedToCard(targetCard: ProjectCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventModel[] | undefined{
+		if(triggerIdList.length===0){return}
+		let events: EventModel[] = []
+
+		for(let triggerId of triggerIdList){
+			let newEvent = this.generateEventTriggerByRessourceAddedToCard(triggerId, targetCard, ressource)
+			if(newEvent){
+				events = events.concat(newEvent)
+			}
+		}
+		return events
+	}
+
+	generateEventTriggerByRessourceAddedToCard(triggerId: number, targetCard: ProjectCardModel, ressource: AdvancedRessourceStock): EventModel[] | undefined {
+		let result: EventModel[] = []
+
+		switch(triggerId){
+			//Bacterial Aggregate
+			case(222):{
+				console.log('event capté', ressource.name!!='microbe'||ressource.valueStock<1, )
+				if(ressource.name!!='microbe'||ressource.valueStock<1){break}
+				if(targetCard.getStockValue('microbe')>5){break}
+				result.push(this.createEventIncreaseResearchScan(1))
+				console.log(result)
+				break
+			}
+			default:{
+				return
+			}
+		}
+
+		return result
+	}
 	getTriggerListToDeactivate(state: PlayerStateModel): number[] {
 		let result: number[] = []
 		for(let trigger of state.cards.getTriggersIdList()){

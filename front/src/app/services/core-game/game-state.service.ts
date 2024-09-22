@@ -638,7 +638,7 @@ export class GameState{
         
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
-        let triggerCardEvents = this.projectCardPlayed.getEventFromTrigger(card, newState.cards.getTriggersIdListActive())
+        let triggerCardEvents = this.projectCardPlayed.getEventTriggerByPlayedCard(card, newState.cards.getTriggersIdListActive())
         this.updateClientPlayerState(newState)
 
         //add events to queue
@@ -687,13 +687,31 @@ export class GameState{
         this.updateClientPlayerState(playerState)
     }
     addRessourceToClientPlayerCard(cardStock: CardRessourceStock): void {
-        let playerState = this.getClientPlayerState()
+        let newState = this.getClientPlayerState()
 
         for(let stock of cardStock.stock){
-            playerState.cards.addRessourceToCard(cardStock.cardId, stock)
+            newState.cards.addRessourceToCard(cardStock.cardId, stock)
         }
 
-        this.updateClientPlayerState(playerState)
+        this.updateClientPlayerState(newState)
+
+        for(let ressource of cardStock.stock){
+            let card = newState.cards.getPlayedProjectCardFromId(cardStock.cardId)
+            if(!card){continue}
+            
+            let events = this.projectCardPlayed.getEventTriggerByRessourceAddedToCard(
+                card,
+                newState.cards.getTriggersIdListActive(),
+                ressource
+            )
+            if(!events){continue}
+
+            for(let event of events){
+                this.addEventQueue(event, true)
+            }
+        }
+
+
     }
     addClientPlayerResearchScanValue(scan: number): void {
         let newState = this.getClientPlayerState()
