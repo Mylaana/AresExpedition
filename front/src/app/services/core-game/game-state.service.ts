@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterName, RGB } from "../../types/global.type";
-import { AdvancedRessourceStock, PlayerPhase, RessourceStock } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardRessourceStock, PlayerPhase, ResearchState, RessourceStock } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
@@ -229,8 +229,8 @@ export class GameState{
         newPlayer.cards.maximum = handSizeMaximum
 
         newPlayer.research = {
-            'drawMod': 0,
-            'keepMod': 0,
+            keep: 0,
+            scan: 0,
         }
 
         //fill player's hand
@@ -525,13 +525,6 @@ export class GameState{
         this.updatePlayerState(playerId, playerState)
     }
 
-    /*
-    TODELupdatePlayerStatePlayed(playerId: number, newCardList: number[]): void {
-        let playerState = this.getPlayerStateFromId(playerId)
-        playerState.cards.played = newCardList
-        this.updatePlayerState(playerId, playerState)
-    }
-    */
     addCardToPlayerHand(playerId: number, cardsToAdd: number[]):void{
         let playerStateHand = this.getPlayerStateHand(playerId)
         this.updatePlayerStateHand(playerId, playerStateHand.concat(cardsToAdd))
@@ -542,15 +535,6 @@ export class GameState{
         playerStateHand = playerStateHand.filter( ( el ) => !cardsToRemove.includes( el ) );
         this.updatePlayerStateHand(playerId, playerStateHand)
     }
-
-    /*
-    TODELaddCardToPlayerPlayed(playerId: number, cardsToAdd: number[]):number[]{
-        let playerStatePlayed = this.getPlayerStatePlayed(playerId)
-		let newList: number[] = playerStatePlayed.concat(cardsToAdd)
-        this.updatePlayerStatePlayed(playerId, newList)
-		return newList
-    }
-        */
 
     addDrawQueue(draw: DrawModel):void{
         this.drawQueue.next(this.drawQueue.getValue().concat([draw]));
@@ -651,12 +635,13 @@ export class GameState{
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
         let events: EventModel[] = []
+        
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
         let triggerCardEvents = this.projectCardPlayed.getEventFromTrigger(card, newState.cards.getTriggersIdListActive())
         this.updateClientPlayerState(newState)
 
-        //resolve played card events
+        //add events to queue
         if(triggerCardEvents!=undefined){
             events = events.concat(triggerCardEvents)
         }
@@ -668,7 +653,21 @@ export class GameState{
         for(let event of events){
             this.addEventQueue(event, true)
         }
+
+        this.setClientPlayerTriggerAsInactive()
 	}
+    setClientPlayerTriggerAsInactive(): void {
+        let newState: PlayerStateModel = this.getClientPlayerState()
+        if(newState.cards.getTriggersIdListActive().length===0){return}
+        
+        let deactivateList: number[] = this.projectCardPlayed.getTriggerListToDeactivate(newState)
+        if(deactivateList.length===0){return}
+
+        for(let trigger of deactivateList){
+            newState.cards.setTriggerAsInactive(trigger)
+        }        
+        this.updateClientPlayerState(newState)
+    }
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
 		let playerState = this.getPlayerStateFromId(playerId)
 		playerState.ressource[0].valueStock -= quantity
@@ -687,10 +686,27 @@ export class GameState{
         }
         this.updateClientPlayerState(playerState)
     }
-    addRessourceToClientPlayerCard(ressource: AdvancedRessourceStock, cardId: number): void {
+    addRessourceToClientPlayerCard(cardStock: CardRessourceStock): void {
         let playerState = this.getClientPlayerState()
 
-        playerState.cards.addRessourceToCard(cardId, ressource)
+        for(let stock of cardStock.stock){
+            playerState.cards.addRessourceToCard(cardStock.cardId, stock)
+        }
+
         this.updateClientPlayerState(playerState)
+    }
+    addClientPlayerResearchScanValue(scan: number): void {
+        let newState = this.getClientPlayerState()
+        newState.research.scan += scan
+        this.updateClientPlayerState(newState)
+        console.log(newState)
+    }
+    addClientPlayerResearchKeepValue(keep: number): void {
+        let newState = this.getClientPlayerState()
+        newState.research.keep += keep
+        this.updateClientPlayerState(newState)
+    }
+    getClientPlayerResearchMods(): ResearchState {
+        return this.getClientPlayerState().research
     }
 }

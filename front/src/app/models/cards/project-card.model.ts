@@ -36,8 +36,8 @@ export class ProjectCardModel {
     prerequisiteText?: string;
     prerequisiteSummaryText?: string;
     prerequisiteTagId?: number;
-	stock!: AdvancedRessourceStock[];
-    stockable!: AdvancedRessourceType[]
+	stock?: AdvancedRessourceStock[];
+    stockable?: AdvancedRessourceType[]
 
     //not loaded from data
 
@@ -48,7 +48,46 @@ export class ProjectCardModel {
     description?: string;
 
     addRessourceToStock(ressource: AdvancedRessourceStock): void {
+        if(this.checkStockable(ressource.name)===false){return}
+        if(this.checkStockExists(ressource.name)===false){
+            this.setInitialStock(ressource.name)
+        }
+        if(!this.stock){return}
 
+        for(let s of this.stock){
+            if(s.name===ressource.name){
+                s.valueStock += ressource.valueStock
+            }
+        }
+    }
+    checkStockable(ressourceType: AdvancedRessourceType): boolean {
+        //add a check if ressource is stockable on this card
+        return true
+    }
+    checkStockExists(ressource:AdvancedRessourceType): boolean {
+        if(!this.stock){return false}
+        
+        for(let s of this.stock){
+            if(s.name===ressource){
+                return true
+            }
+        }
+        return false
+    }
+    setInitialStock(ressource: AdvancedRessourceType): void {
+        if(!this.stock){
+            this.stock = []
+        }
+        this.stock.push({name: ressource,valueStock: 0})
+    }
+    getStockValue(ressourceName:AdvancedRessourceType): number {
+        if(!this.stock){return 0}
+        for(let s of this.stock){
+            if(s.name===ressourceName){
+                return s.valueStock
+            }
+        }
+        return 0
     }
 }
 export class ProjectCardState {
@@ -103,6 +142,11 @@ export class ProjectCardState {
     addRessourceToCard(cardId: number, ressource: AdvancedRessourceStock ): void {
         let card = this.getPlayedProjectCardFromId(cardId)
         if(!card){return}
-        
+        card.addRessourceToStock(ressource)
+    }
+    getCardStockValue(cardId:number, ressourceName: AdvancedRessourceType): number {
+        let result = this.getPlayedProjectCardFromId(cardId)?.getStockValue(ressourceName)
+        if(!result){return 0}
+        return result
     }
 }

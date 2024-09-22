@@ -4,7 +4,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType, GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventModel } from "../../models/core-game/event.model";
-import { GlobalParameter, RessourceStock, RessourceState } from "../../interfaces/global.interface";
+import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
 import { GlobalTagInfoService } from "../global/global-tag-info.service";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
@@ -447,12 +447,41 @@ export class ProjectCardPlayedEffectService {
 				)
 				break
 			}
+			//Bacterial Aggregate
+			case(222):{
+				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true){break}
+				result.push(this.createEventAddRessourceToCard({name:'microbe', valueStock: 1},triggerId))
+				result.push(this.createEventIncreaseResearchScan(1))
+				break
+			}
 			default:{
 				return
 			}
 		}
 
 		return result
+	}
+
+	getTriggerListToDeactivate(state: PlayerStateModel): number[] {
+		let result: number[] = []
+		for(let trigger of state.cards.getTriggersIdList()){
+			if(this.checkTriggerShouldDeactivate(trigger, state)===true){
+				result.push(trigger)
+			}
+		}
+		return result
+	}
+	checkTriggerShouldDeactivate(triggerId:number, state: PlayerStateModel): boolean {
+		switch(triggerId){
+			//Bacterial Aggregate
+			case(222):{
+				let trigger = state.cards.getCardStockValue(triggerId, 'microbe')
+				return state.cards.getCardStockValue(triggerId, 'microbe') >= 5
+			}
+			default:{
+				return false
+			}
+		}
 	}
 	createEventDraw(drawNumber: number): EventModel {
 		let newEvent = new EventModel
@@ -506,7 +535,6 @@ export class ProjectCardPlayedEffectService {
 		
 		return newEvent
 	}
-
 	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, steps:number): EventModel {
 		let newEvent = new EventModel
 		let parameter: GlobalParameter
@@ -532,7 +560,6 @@ export class ProjectCardPlayedEffectService {
 	}
 	createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventModel {
 		let newEvent = new EventModel
-		let ressource: RessourceStock
 
 		newEvent.type = 'ressourceGain'
 		newEvent.cardSelector = {
@@ -544,6 +571,46 @@ export class ProjectCardPlayedEffectService {
 		}
 		newEvent.value = gain
 
+		return newEvent
+	}
+	createEventAddRessourceToCard(gain: AdvancedRessourceStock | AdvancedRessourceStock[], cardId: number): EventModel {
+		let newEvent = new EventModel
+		let newGain: AdvancedRessourceStock[] = []
+
+		newEvent.type = 'cardRessourceGain'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+			title: 'Increase Global parameter',
+			selectedIdList: [],
+		}		
+
+		if(Array.isArray(gain)){
+			newGain = gain
+		} else {
+			newGain = []
+			newGain.push(gain)
+		}
+
+		newEvent.value = {cardId: cardId,stock: newGain}
+
+		return newEvent
+	}
+	createEventIncreaseResearchScan(scan: number): EventModel {
+		let newEvent = new EventModel
+		let newGain: AdvancedRessourceStock[] = []
+
+		newEvent.type = 'increaseResearchScanValue'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+			title: 'Increase Global parameter',
+			selectedIdList: [],
+		}		
+
+		newEvent.value = scan
 
 		return newEvent
 	}

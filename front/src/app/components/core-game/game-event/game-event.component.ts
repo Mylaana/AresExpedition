@@ -313,7 +313,7 @@ export class GameEventComponent {
 	applyResearchPhase(clientState: PlayerStateModel): void{
 		let draw = new DrawModel;
 		draw.playerId = clientState.id
-		draw.cardNumber = clientState.research.drawMod + 2
+		draw.cardNumber = clientState.research.scan + 2
 		draw.drawRule = 'research'
 		this.gameStateService.addDrawQueue(draw)
 	}
@@ -385,7 +385,7 @@ export class GameEventComponent {
 			}
 			if(element.drawRule==='research'){
 				let newEvent = new EventModel
-				let quantity: number = 2
+				let quantity: number = 2 + this.gameStateService.getClientPlayerResearchMods().keep
 				newEvent.type = 'research'
 				newEvent.cardSelector = {
 					selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
@@ -505,6 +505,22 @@ export class GameEventComponent {
 				this.currentEvent.isFinalized = true
 				let ressources: RessourceStock[] = [].concat(this.currentEvent.value)
 				this.gameStateService.addRessourceToClientPlayer(ressources)
+				break
+			}
+			case('cardRessourceGain'):{
+				this.currentEvent.isFinalized = true
+				this.gameStateService.addRessourceToClientPlayerCard(this.currentEvent.value)
+				break
+			}
+			case('increaseResearchScanValue'):{
+				this.currentEvent.isFinalized = true
+				this.gameStateService.addClientPlayerResearchScanValue(this.currentEvent.value)
+				console.log('add scan value')
+				break
+			}
+			case('increaseResearchKeepValue'):{
+				this.currentEvent.isFinalized = true
+				this.gameStateService.addClientPlayerResearchKeepValue(this.currentEvent.value)
 				break
 			}
 		}
@@ -763,7 +779,6 @@ export class GameEventComponent {
 				newList.push(this.currentEvent.cardSelector.selectFrom[i])
 			}
 		}
-
 		this.currentEvent.playCardZone[playCardListId].cardList = this.currentEvent.cardSelector.selectFrom.splice(selectedCardIndex, 1)
 
 		//update card selector state

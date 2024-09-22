@@ -88,7 +88,12 @@ export interface GlobalParameter {
     imageUrl?: string,
 }
 
-export interface RessourceValue {
-	name: RessourceType,
-	value: number
+export interface CardRessourceStock {
+    cardId: number,
+    stock: AdvancedRessourceStock[]
+}
+
+export interface ResearchState {
+    scan: number,
+    keep: number
 }
