@@ -651,7 +651,8 @@ export class GameEventComponent {
 				this.buildCard(0)
 				break
 			}
-			case('buildSecondCard'):{
+			case('buildSecondCard'):
+			{
 				this.buildCard(1)
 				break
 			}
@@ -787,6 +788,7 @@ export class GameEventComponent {
 	}
 
 	buildCard(playableCardListId: number): void {
+		console.log('before build')
 		let buttonCancel: ButtonNames
 		let buttonSelect: ButtonNames
 		let buttonBuild: ButtonNames
@@ -811,6 +813,7 @@ export class GameEventComponent {
 
 		this.currentEvent.playCardZone[playableCardListId].cardList = []
 		this.gameStateService.playCardFromClientHand(card)
+		console.log('after build')
 	}
 
 	cancelBuildCardSelection(playableCardListId: number): void {

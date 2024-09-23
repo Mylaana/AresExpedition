@@ -648,7 +648,7 @@ export class GameState{
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)
         }
-        if(events.length===0){return}
+        if(events.length===0){console.log('escaped');return}
         events.reverse()
         for(let event of events){
             this.addEventQueue(event, true)

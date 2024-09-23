@@ -469,11 +469,9 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Bacterial Aggregate
 			case(222):{
-				console.log('event capté', ressource.name!!='microbe'||ressource.valueStock<1, )
 				if(ressource.name!!='microbe'||ressource.valueStock<1){break}
 				if(targetCard.getStockValue('microbe')>5){break}
 				result.push(this.createEventIncreaseResearchScan(1))
-				console.log(result)
 				break
 			}
 			default:{
@@ -496,7 +494,6 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Bacterial Aggregate
 			case(222):{
-				let trigger = state.cards.getCardStockValue(triggerId, 'microbe')
 				return state.cards.getCardStockValue(triggerId, 'microbe') >= 5
 			}
 			default:{
