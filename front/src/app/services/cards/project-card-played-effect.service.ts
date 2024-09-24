@@ -454,7 +454,64 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
+	getTriggerByTagGained(playedCard: ProjectCardModel, triggerIdList: number[]): EventModel[] | undefined{
+		if(triggerIdList.length===0){return}
+		let events: EventModel[] = []
 
+		for(let triggerId of triggerIdList){
+			let newEvent = this.generateEventTriggerByTagGained(triggerId, playedCard)
+			if(newEvent){
+				events = events.concat(newEvent)
+			}
+		}
+		return events
+	}
+	generateEventTriggerByTagGained(triggerId: number, playedCard: ProjectCardModel): EventModel[] | undefined {
+		let result: EventModel[] = []
+		let playedCardTags = playedCard.tagsId
+		let cardPlayedIsTheTrigger = triggerId===playedCard.id
+
+		switch(triggerId){
+			//Energy Subsidies
+			case(25):{
+				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('power'))!=true){break}
+				result.push(this.createEventDraw(1))
+				break
+			}
+			//Interplanetary Conference
+			case(37):{
+				//self triggering excluded
+				if(cardPlayedIsTheTrigger===true){break}
+				if(
+					playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true
+					&& playedCardTags.includes(this.tagInfoService.getTagIdFromType('jovian'))!=true
+				){break}
+				result.push(this.createEventDraw(1))
+				break
+			}
+			//Optimal Aerobraking
+			case(45):{
+				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('event'))!=true){break}
+				result.push(
+					this.createEventAddRessource([
+					{name: 'plant', valueStock: 2},
+					{name: 'heat', valueStock: 2}])
+				)
+				break
+			}
+			//Bacterial Aggregate
+			case(222):{
+				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true){break}
+				result.push(this.createEventAddRessourceToCard({name:'microbe', valueStock: 1},triggerId))
+				break
+			}
+			default:{
+				return
+			}
+		}
+
+		return result
+	}
 	getEventTriggerByRessourceAddedToCard(targetCard: ProjectCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventModel[] = []
@@ -475,7 +532,10 @@ export class ProjectCardPlayedEffectService {
 			//Bacterial Aggregate
 			case(222):{
 				if(ressource.name!!='microbe'||ressource.valueStock<1){break}
-				if(targetCard.getStockValue('microbe')>5){break}
+				if(targetCard.getStockValue('microbe')>5){
+					result.push(this.createEventDeactivateTrigger(triggerId))
+					break
+				}
 				result.push(this.createEventIncreaseResearchScan(1))
 				break
 			}
@@ -503,7 +563,7 @@ export class ProjectCardPlayedEffectService {
 		let result: EventModel[] = []
 
 		switch(triggerId){
-			//Bacterial Aggregate
+			//Physiscs Complex
 			case(46):{
 				if(parameter.name!='temperature'){break}
 				result.push(this.createEventAddRessourceToCard({name:"science", valueStock:parameter.steps}, triggerId))
@@ -521,26 +581,6 @@ export class ProjectCardPlayedEffectService {
 		}
 
 		return result
-	}
-	getTriggerListToDeactivate(state: PlayerStateModel): number[] {
-		let result: number[] = []
-		for(let trigger of state.cards.getTriggersIdList()){
-			if(this.checkTriggerShouldDeactivate(trigger, state)===true){
-				result.push(trigger)
-			}
-		}
-		return result
-	}
-	checkTriggerShouldDeactivate(triggerId:number, state: PlayerStateModel): boolean {
-		switch(triggerId){
-			//Bacterial Aggregate
-			case(222):{
-				return state.cards.getCardStockValue(triggerId, 'microbe') >= 5
-			}
-			default:{
-				return false
-			}
-		}
 	}
 	createEventDraw(drawNumber: number): EventModel {
 		let newEvent = new EventModel
@@ -625,7 +665,7 @@ export class ProjectCardPlayedEffectService {
 			selectFrom: [],
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'equal',
-			title: 'Increase Global parameter',
+			title: 'Add ressource to player',
 			selectedIdList: [],
 		}
 		newEvent.value = gain
@@ -641,7 +681,7 @@ export class ProjectCardPlayedEffectService {
 			selectFrom: [],
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'equal',
-			title: 'Increase Global parameter',
+			title: 'Add ressource to card',
 			selectedIdList: [],
 		}		
 
@@ -665,11 +705,27 @@ export class ProjectCardPlayedEffectService {
 			selectFrom: [],
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'equal',
-			title: 'Increase Global parameter',
+			title: 'Increase Research scan',
 			selectedIdList: [],
 		}		
 
 		newEvent.value = scan
+
+		return newEvent
+	}
+	createEventDeactivateTrigger(triggerId: number): EventModel {
+		let newEvent = new EventModel
+
+		newEvent.type = 'deactivateTrigger'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+			title: 'Deactivate Trigger',
+			selectedIdList: [],
+		}		
+
+		newEvent.value = triggerId
 
 		return newEvent
 	}

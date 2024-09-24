@@ -110,7 +110,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 			tagList: this.projectCard.tagsId,
 			steelState: this.ressourceState[3],
 			titaniumState: this.ressourceState[4],
-			playedTriggersList: this.projectCardState.getTriggersIdListActive()
+			playedTriggersList: this.projectCardState.getTriggerCostMod()
 		})
 	}
 

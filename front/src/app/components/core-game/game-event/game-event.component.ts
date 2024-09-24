@@ -523,6 +523,11 @@ export class GameEventComponent {
 				this.gameStateService.addClientPlayerResearchKeepValue(this.currentEvent.value)
 				break
 			}
+			case('deactivateTrigger'):{
+				this.currentEvent.isFinalized = true
+				this.gameStateService.setClientPlayerTriggerAsInactive(this.currentEvent.value)
+ 				break
+			}
 		}
 		if(ticket.isFinalized===false){return}
 		this.gameStateService.cleanAndNextEventQueue()

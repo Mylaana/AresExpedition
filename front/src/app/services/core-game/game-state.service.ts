@@ -12,6 +12,7 @@ import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/ph
 import { deepCopy } from "../../functions/global.functions";
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
+import { trigger } from "@angular/animations";
 
 interface SelectedPhase {
     "development": boolean,
@@ -569,14 +570,19 @@ export class GameState{
         this.drawQueue.next(newDrawQueue)
     }
 
-    addEventQueue(event: EventModel, addOnTop?: boolean): void {
+    addEventQueue(events: EventModel | EventModel[], addOnTop?: boolean): void {
         let newQueue: EventModel[] = []
+
+        if(!Array.isArray(events)){
+            newQueue = [events]
+        } else {
+            newQueue = events
+        }
+
         if(addOnTop===true){
-            newQueue.push(event)
             this.eventQueue.next(newQueue.concat(this.eventQueue.getValue()));
         } else {
             newQueue = newQueue.concat(this.eventQueue.getValue())
-            newQueue.push(event)
             this.eventQueue.next(newQueue);
         }
     }
@@ -638,34 +644,39 @@ export class GameState{
         
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
-        let triggerCardEvents = this.projectCardPlayed.getEventTriggerByPlayedCard(card, newState.cards.getTriggersIdListActive())
+
         this.updateClientPlayerState(newState)
 
-        //add events to queue
-        if(triggerCardEvents!=undefined){
-            events = events.concat(triggerCardEvents)
+
+        //check for triggers and add them to queue
+        let onPlayedTriggers = newState.cards.getTriggersOnPlayedCard()
+        if(onPlayedTriggers.length!=0){
+            let eventsOnPlayed = this.projectCardPlayed.getEventTriggerByPlayedCard(card, onPlayedTriggers)
+            if(eventsOnPlayed!=undefined){
+                events = events.concat(eventsOnPlayed)
+            }
         }
+
+        let onTagGainedTriggers = newState.cards.getTriggersOnGainedTag()
+        if(onTagGainedTriggers.length!=0){
+            let eventsOnTagGained = this.projectCardPlayed.getTriggerByTagGained(card, onTagGainedTriggers)
+            if(eventsOnTagGained!=undefined){
+                events = events.concat(eventsOnTagGained)
+            }
+        }
+       
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)
         }
         if(events.length===0){return}
+
         events.reverse()
-        for(let event of events){
-            this.addEventQueue(event, true)
-        }
-
-        this.setClientPlayerTriggerAsInactive()
+        this.addEventQueue(events, true)
 	}
-    setClientPlayerTriggerAsInactive(): void {
+    setClientPlayerTriggerAsInactive(triggerId: number): void {
         let newState: PlayerStateModel = this.getClientPlayerState()
-        if(newState.cards.getTriggersIdListActive().length===0){return}
-        
-        let deactivateList: number[] = this.projectCardPlayed.getTriggerListToDeactivate(newState)
-        if(deactivateList.length===0){return}
-
-        for(let trigger of deactivateList){
-            newState.cards.setTriggerAsInactive(trigger)
-        }        
+        newState.cards.setTriggerAsInactive(triggerId)
+    
         this.updateClientPlayerState(newState)
     }
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
@@ -678,10 +689,10 @@ export class GameState{
 		newState.globalParameter.addStepToParameterEOP(parameter)
 		this.updatePlayerState(playerId, newState)
 
-        let events = this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(
-            newState.cards.getTriggersIdListActive(),
-            parameter
-        )
+        let triggers = newState.cards.getTriggersOnParameterIncreaseId()
+        if(triggers.length===0){return}
+
+        let events = this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)
         if(!events){return}
 
         for(let event of events){
@@ -709,9 +720,12 @@ export class GameState{
             let card = newState.cards.getPlayedProjectCardFromId(cardStock.cardId)
             if(!card){continue}
             
+            let triggers = newState.cards.getTriggersOnRessourceAddedToCardId()
+            if(triggers.length===0){break}
+
             let events = this.projectCardPlayed.getEventTriggerByRessourceAddedToCard(
                 card,
-                newState.cards.getTriggersIdListActive(),
+                triggers,
                 ressource
             )
             if(!events){continue}

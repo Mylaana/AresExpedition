@@ -2,12 +2,6 @@ import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType } from "../../types/project-card.type"
 
-type playedTrigger = {
-    playedIdList: number[],
-    playedIdListActive: number[], /*this is for when triggers have limited activation number, trigger detection
-    effect uses this field.*/
-    playedProjectList: ProjectCardModel[]
-}
 type playedProject = {
     playedIdList: number[],
     playedProjectList: ProjectCardModel[]
@@ -96,11 +90,7 @@ export class ProjectCardState {
         playedIdList: [],
         playedProjectList: []
     }
-    triggers: playedTrigger = {
-        playedIdList: [],
-        playedIdListActive: [],
-        playedProjectList: []
-    }
+    triggers = new TriggerState
     maximum: number = 0
 
     playCard(card: ProjectCardModel): void {
@@ -108,22 +98,32 @@ export class ProjectCardState {
         this.projects.playedProjectList.push(card)
 
         if(card.cardSummaryType!='trigger'){return}
-        this.triggers.playedIdList.push(card.id)
-        this.triggers.playedIdListActive.push(card.id)
-        this.triggers.playedProjectList.push(card)
+        this.triggers.playTrigger(card.id)
 		
     }
-    getTriggersIdList(): number[] {
-        return this.triggers.playedIdList
+    getPlayedTriggersId(): number[] {
+        return this.triggers.getPlayedTriggers()
     }
-    getTriggersIdListActive(): number[] {
-        return this.triggers.playedIdListActive
+    getActivePlayedTriggersId(): number[] {
+        return this.triggers.getActivePlayedTriggers()
     }
-    getTriggersPlayedList(): ProjectCardModel[] {
-        return this.triggers.playedProjectList
+    getTriggersOnRessourceAddedToCardId(): number[] {
+        return this.triggers.getOnRessourceAddedToCard()
+    }
+    getTriggersOnParameterIncreaseId(): number[] {
+        return this.triggers.getOnParameterIncrease()
+    }
+    getTriggersOnPlayedCard(): number[] {
+        return this.triggers.getOnPlayedCard()
+    }
+    getTriggersOnGainedTag(): number[] {
+        return this.triggers.getOnGainedTag()
+    }
+    getTriggerCostMod(): number[] {
+        return this.triggers.getCostMod()
     }
     setTriggerAsInactive(triggerId: number): void {
-        this.triggers.playedIdListActive = this.triggers.playedIdListActive.filter((e, i) => e !== triggerId); 
+        this.triggers.setTriggerInactive(triggerId)
     }
     getProjectIdList(): number[] {
         return this.projects.playedIdList
@@ -148,5 +148,102 @@ export class ProjectCardState {
         let result = this.getPlayedProjectCardFromId(cardId)?.getStockValue(ressourceName)
         if(!result){return 0}
         return result
+    }
+}
+
+/**
+ * This Class handles Blue project card with trigger effects
+ */
+class TriggerState {
+    playedCardsId: number[] = []
+    activeCardsId: number[] = []
+    activeOnRessourceAddedToCard: number[] = []
+    activeOnParameterIncrease: number[] = []
+    activeOnPlayedCard: number[] = []
+    activeOnGainedTag: number[] = []
+    activeCostModTrigger: number[] = []
+
+    getPlayedTriggers(): number[] {
+        return this.playedCardsId
+    }
+    getActivePlayedTriggers(): number[] {
+        return this.activeCardsId
+    }
+    getOnRessourceAddedToCard(): number[] {
+        return this.activeOnRessourceAddedToCard
+    }
+    getOnParameterIncrease(): number[] {
+        return this.activeOnParameterIncrease
+    }
+    getOnPlayedCard(): number[] {
+        return this.activeOnPlayedCard
+    }
+    getOnGainedTag(): number [] {
+        return this.activeOnGainedTag
+    }
+    getCostMod(): number [] {
+        return this.activeCostModTrigger
+    }
+    playTrigger(cardId: number): void {
+        this.playedCardsId.push(cardId)
+        this.activeCardsId.push(cardId)
+
+        //adds played trigger to relevant lists
+        this.addTriggerOnRessource(cardId)
+        this.addTriggerOnParameter(cardId)
+        this.addTriggerOnPlayedCard(cardId)
+        this.addTriggerOnPlayedTag(cardId)
+    }
+    addTriggerOnRessource(cardId: number): void {
+        switch(cardId){
+            case(222):{break} //Bacterial Aggregate
+            default:{return}
+        }
+        this.activeOnRessourceAddedToCard.push(cardId)
+    }
+
+    
+    addTriggerOnParameter(cardId: number): void {
+        switch(cardId){
+            case(46):{break} //Physics Complex
+            case(279):{break} //Pets
+            default:{return}
+        }
+        this.activeOnRessourceAddedToCard.push(cardId)
+    }
+    addTriggerOnPlayedCard(cardId: number): void {
+        switch(cardId){
+            default:{return}
+        }
+        this.activeOnRessourceAddedToCard.push(cardId)
+    }
+    addTriggerOnPlayedTag(cardId: number): void {
+        switch(cardId){
+            case(25):{break} //Energy Subsidies
+            case(37):{break} //Interplanetary Conference
+            case(45):{break} //Optimal aerobreaking
+            case(222):{break} //Bacterial Aggregate
+            default:{return}
+        }
+        this.activeOnRessourceAddedToCard.push(cardId)
+    }
+    addCostModTrigger(cardId: number): void {
+        switch(cardId){
+            case(25):{break} //Energy Subsidies
+            case(37):{break} //Interplanetary Conference
+            default:{return}
+        }
+        this.activeCostModTrigger.push(cardId)
+    }
+    setTriggerInactive(cardId: number): void {
+        this.activeCardsId = this.activeCardsId.filter((e, i) => e !== cardId)
+
+        switch(cardId){
+            //Bacterial Aggregate
+            case(222):{
+                this.activeOnRessourceAddedToCard = this.activeOnRessourceAddedToCard.filter((e, i) => e !== cardId)
+                break
+            }
+        }
     }
 }
