@@ -1,4 +1,4 @@
-import { GlobalParameter } from "../../interfaces/global.interface";
+import { GlobalParameter, GlobalParameterValue } from "../../interfaces/global.interface";
 import { GlobalParameterName } from "../../types/global.type";
 
 export class GlobalParameterModel {
@@ -23,15 +23,15 @@ export class GlobalParameterModel {
 
         return undefined
     }
-    addStepToParameterEOP(parameter: GlobalParameterName, steps: number): void {
-        let parameterIndex = this.getGlobalParameterIndex(parameter)
+    addStepToParameterEOP(parameter: GlobalParameterValue): void {
+        let parameterIndex = this.getGlobalParameterIndex(parameter.name)
         if(parameterIndex===undefined){return}
 
         if(this.parameters[parameterIndex].addEndOfPhase===undefined){
-            this.parameters[parameterIndex].addEndOfPhase=steps
+            this.parameters[parameterIndex].addEndOfPhase=parameter.steps
             return
         }
-        this.parameters[parameterIndex].addEndOfPhase += steps
+        this.parameters[parameterIndex].addEndOfPhase += parameter.steps
     }
 }
 

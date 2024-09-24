@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterName, RGB } from "../../types/global.type";
-import { AdvancedRessourceStock, CardRessourceStock, PlayerPhase, ResearchState, RessourceStock } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardRessourceStock, GlobalParameterValue, PlayerPhase, ResearchState, RessourceStock } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
@@ -648,7 +648,7 @@ export class GameState{
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)
         }
-        if(events.length===0){console.log('escaped');return}
+        if(events.length===0){return}
         events.reverse()
         for(let event of events){
             this.addEventQueue(event, true)
@@ -673,10 +673,20 @@ export class GameState{
 		playerState.ressource[0].valueStock -= quantity
 		this.updatePlayerState(playerId, playerState)
 	}
-    addGlobalParameterStepsEOPtoPlayerId(playerId:number, parameter:GlobalParameterName, steps:number): void {
-        let playerState = this.getPlayerStateFromId(playerId)
-		playerState.globalParameter.addStepToParameterEOP(parameter, steps)
-		this.updatePlayerState(playerId, playerState)
+    addGlobalParameterStepsEOPtoPlayerId(playerId:number, parameter:GlobalParameterValue): void {
+        let newState = this.getPlayerStateFromId(playerId)
+		newState.globalParameter.addStepToParameterEOP(parameter)
+		this.updatePlayerState(playerId, newState)
+
+        let events = this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(
+            newState.cards.getTriggersIdListActive(),
+            parameter
+        )
+        if(!events){return}
+
+        for(let event of events){
+            this.addEventQueue(event, true)
+        }
     }
     addRessourceToClientPlayer(ressources: RessourceStock[]): void {
         let playerState = this.getClientPlayerState()

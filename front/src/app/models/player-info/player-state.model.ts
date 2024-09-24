@@ -1,4 +1,4 @@
-import { RessourceState, TagState, ResearchState } from "../../interfaces/global.interface";
+import { RessourceState, TagState, ResearchState, GlobalParameterValue } from "../../interfaces/global.interface";
 import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
@@ -86,8 +86,8 @@ export class PlayerStateModel {
 		this.ressource[Number(ressourceIndex.get(ressource))].valueProd =
 			this.ressource[Number(ressourceIndex.get(ressource))].valueBaseProd + scalingProduction
 	}
-	addGlobalParameterStep(parameterName: GlobalParameterName, steps: number): void {
-		this.globalParameter.addStepToParameterEOP(parameterName, steps)
+	addGlobalParameterStep(parameter: GlobalParameterValue): void {
+		this.globalParameter.addStepToParameterEOP(parameter)
 	}
 }
 

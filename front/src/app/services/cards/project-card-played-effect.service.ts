@@ -4,7 +4,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType, GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventModel } from "../../models/core-game/event.model";
-import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock } from "../../interfaces/global.interface";
+import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, GlobalParameterValue } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
 import { GlobalTagInfoService } from "../global/global-tag-info.service";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
@@ -241,6 +241,11 @@ export class ProjectCardPlayedEffectService {
 	getPlayedCardEvent(card: ProjectCardModel): EventModel[] | undefined{
 		let result: EventModel[] = []
 		switch(card.cardCode){
+			//Interns
+			case('36'):{
+				result.push(this.createEventIncreaseResearchScan(2))
+				break
+			}
 			//Artificial Lake
 			case('66'):{
 				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
@@ -472,6 +477,36 @@ export class ProjectCardPlayedEffectService {
 				if(ressource.name!!='microbe'||ressource.valueStock<1){break}
 				if(targetCard.getStockValue('microbe')>5){break}
 				result.push(this.createEventIncreaseResearchScan(1))
+				break
+			}
+			default:{
+				return
+			}
+		}
+
+		return result
+	}
+	getEventTriggerByGlobalParameterIncrease(triggerIdList: number[], parameter: GlobalParameterValue): EventModel[] | undefined{
+		if(triggerIdList.length===0){return}
+		let events: EventModel[] = []
+
+		for(let triggerId of triggerIdList){
+			let newEvent = this.generateEventTriggerByGlobalParameterIncrease(triggerId, parameter)
+			if(newEvent){
+				events = events.concat(newEvent)
+			}
+		}
+		return events
+	}
+
+	generateEventTriggerByGlobalParameterIncrease(triggerId: number, parameter: GlobalParameterValue): EventModel[] | undefined {
+		let result: EventModel[] = []
+
+		switch(triggerId){
+			//Bacterial Aggregate
+			case(46):{
+				if(parameter.name!='temperature'){break}
+				result.push(this.createEventAddRessourceToCard({name:"science", valueStock:parameter.steps}, 46))
 				break
 			}
 			default:{

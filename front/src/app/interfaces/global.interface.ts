@@ -88,6 +88,11 @@ export interface GlobalParameter {
     imageUrl?: string,
 }
 
+export interface GlobalParameterValue {
+    name: GlobalParameterName,
+    steps: number
+}
+
 export interface CardRessourceStock {
     cardId: number,
     stock: AdvancedRessourceStock[]

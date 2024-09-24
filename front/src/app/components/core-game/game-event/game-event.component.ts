@@ -498,7 +498,7 @@ export class GameEventComponent {
 			case('increaseGlobalParameter'):{
 				this.currentEvent.isFinalized = true
 				let parameter: GlobalParameter = this.currentEvent.value
-				this.gameStateService.addGlobalParameterStepsEOPtoPlayerId(this.clientPlayerId, parameter.name, parameter.addEndOfPhase)
+				this.gameStateService.addGlobalParameterStepsEOPtoPlayerId(this.clientPlayerId, {name:parameter.name, steps:parameter.addEndOfPhase})
 				break
 			}
 			case('ressourceGain'):{
@@ -788,7 +788,6 @@ export class GameEventComponent {
 	}
 
 	buildCard(playableCardListId: number): void {
-		console.log('before build')
 		let buttonCancel: ButtonNames
 		let buttonSelect: ButtonNames
 		let buttonBuild: ButtonNames
@@ -813,7 +812,6 @@ export class GameEventComponent {
 
 		this.currentEvent.playCardZone[playableCardListId].cardList = []
 		this.gameStateService.playCardFromClientHand(card)
-		console.log('after build')
 	}
 
 	cancelBuildCardSelection(playableCardListId: number): void {
