@@ -162,8 +162,8 @@
             "fr": ""
         },
         "effectSummaryText": {
-            "en": "-$ressourve_animal$/$ressource_microbe$$skipline$$other_arrow$ 3 $ressource_plant$",
-            "fr": "-$ressourve_animal$/$ressource_microbe$$skipline$$other_arrow$ 3 $ressource_plant$"
+            "en": "-$ressource_animal$/$ressource_microbe$$skipline$$other_arrow$ 3 $ressource_plant$",
+            "fr": "-$ressource_animal$/$ressource_microbe$$skipline$$other_arrow$ 3 $ressource_plant$"
         },
         "effectText": {
             "en": "Action: Remove 1 animal or 1 microbe from one of your cards to gain 3 plants.",
@@ -297,8 +297,8 @@
             "fr": ""
         },
         "effectSummaryText": {
-            "en": "$other_researchsymbol$ : + $other_researchcard2$",
-            "fr": "$other_researchsymbol$ : + $other_researchcard2$"
+            "en": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$",
+            "fr": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$"
         },
         "effectText": {
             "en": "Effect: When you draw cards during the research phase, draw 2 additional cards.",

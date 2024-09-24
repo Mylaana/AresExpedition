@@ -506,7 +506,13 @@ export class ProjectCardPlayedEffectService {
 			//Bacterial Aggregate
 			case(46):{
 				if(parameter.name!='temperature'){break}
-				result.push(this.createEventAddRessourceToCard({name:"science", valueStock:parameter.steps}, 46))
+				result.push(this.createEventAddRessourceToCard({name:"science", valueStock:parameter.steps}, triggerId))
+				break
+			}
+			//Pets
+			case(279):{
+				if(parameter.name!='infrastructure'){break}
+				result.push(this.createEventAddRessourceToCard({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}
 			default:{
