@@ -585,17 +585,6 @@ export class GameState{
             newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
         }
         this.eventQueue.next(newQueue)
-        /*
-        let newQueue: EventModel[] = []
-        if(addOnTop===true){
-            newQueue.push(event)
-            this.eventQueue.next(newQueue.concat(this.eventQueue.getValue()));
-        } else {
-            newQueue = newQueue.concat(this.eventQueue.getValue())
-            newQueue.push(event)
-            this.eventQueue.next(newQueue);
-        }
-        */  
     }
 
     /**

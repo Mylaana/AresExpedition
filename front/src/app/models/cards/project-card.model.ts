@@ -225,7 +225,6 @@ class TriggerState {
             case(222):{break} //Bacterial Aggregate
             default:{return}
         }
-        console.log('adding: ', cardId)
         this.activeOnGainedTag.push(cardId)
     }
     addCostModTrigger(cardId: number): void {
