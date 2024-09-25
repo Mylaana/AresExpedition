@@ -225,7 +225,6 @@ export class GameState{
                 "valueMod": 0,
             },
         ];
-
         newPlayer.cards = new ProjectCardState
         newPlayer.cards.maximum = handSizeMaximum
 
@@ -572,19 +571,31 @@ export class GameState{
 
     addEventQueue(events: EventModel | EventModel[], addOnTop?: boolean): void {
         let newQueue: EventModel[] = []
+        let addEvents: EventModel[] = []
 
         if(!Array.isArray(events)){
-            newQueue = [events]
+            addEvents.push(events)
         } else {
-            newQueue = events
+            addEvents = events
         }
-
+        
         if(addOnTop===true){
+            newQueue = newQueue.concat(addEvents, this.eventQueue.getValue())
+        } else {
+            newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
+        }
+        this.eventQueue.next(newQueue)
+        /*
+        let newQueue: EventModel[] = []
+        if(addOnTop===true){
+            newQueue.push(event)
             this.eventQueue.next(newQueue.concat(this.eventQueue.getValue()));
         } else {
             newQueue = newQueue.concat(this.eventQueue.getValue())
+            newQueue.push(event)
             this.eventQueue.next(newQueue);
         }
+        */  
     }
 
     /**
@@ -620,18 +631,13 @@ export class GameState{
 		this.updatePlayerState(playerId, playerState)
 	}
 	removePhaseCardUpgradeNumber(playerId:number, upgradeNumber: number = 1, removeAll: boolean = false):void{
-		console.log('remove phase called')
 		let playerState = this.getPlayerStateFromId(playerId)
-		console.log('upgradenumber: ',upgradeNumber)
-		console.log('state before: ',deepCopy(playerState.phaseCardUpgradeNumber))
 
 		if(removeAll===true){
 			playerState.phaseCardUpgradeNumber = 0
-			console.log('remove all')
 		} else {
 			playerState.phaseCardUpgradeNumber -= upgradeNumber
 		}
-		console.log('state after: ', deepCopy(playerState.phaseCardUpgradeNumber))
 		this.updatePlayerState(playerId, playerState)
 	}
 	sellCardsFromClientHand(quantity: number){
@@ -695,9 +701,9 @@ export class GameState{
         let events = this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)
         if(!events){return}
 
-        for(let event of events){
-            this.addEventQueue(event, true)
-        }
+
+        this.addEventQueue(events, true)
+
     }
     addRessourceToClientPlayer(ressources: RessourceStock[]): void {
         let playerState = this.getClientPlayerState()
@@ -729,19 +735,13 @@ export class GameState{
                 ressource
             )
             if(!events){continue}
-
-            for(let event of events){
-                this.addEventQueue(event, true)
-            }
+            this.addEventQueue(events, true)
         }
-
-
     }
     addClientPlayerResearchScanValue(scan: number): void {
         let newState = this.getClientPlayerState()
         newState.research.scan += scan
         this.updateClientPlayerState(newState)
-        console.log(newState)
     }
     addClientPlayerResearchKeepValue(keep: number): void {
         let newState = this.getClientPlayerState()

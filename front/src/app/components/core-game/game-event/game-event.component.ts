@@ -423,8 +423,7 @@ export class GameEventComponent {
 
 		let ticket = eventQueue[0]
 
-
-
+		
 		if(this.currentEvent != ticket){
 			//saves current event status in event queue
 			for(let e of eventQueue){
@@ -434,6 +433,7 @@ export class GameEventComponent {
 				}
 			}
 		}
+
 		if (this.currentEvent === ticket){return}
 		//remove stateFromParent before switching event
 		if(this.currentEvent && this.currentEvent.cardSelector && this.currentEvent.cardSelector.stateFromParent){this.currentEvent.cardSelector.stateFromParent=undefined}
@@ -515,7 +515,6 @@ export class GameEventComponent {
 			case('increaseResearchScanValue'):{
 				this.currentEvent.isFinalized = true
 				this.gameStateService.addClientPlayerResearchScanValue(this.currentEvent.value)
-				console.log('add scan value')
 				break
 			}
 			case('increaseResearchKeepValue'):{

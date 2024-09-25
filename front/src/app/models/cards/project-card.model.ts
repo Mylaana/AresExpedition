@@ -192,7 +192,7 @@ class TriggerState {
         this.addTriggerOnRessource(cardId)
         this.addTriggerOnParameter(cardId)
         this.addTriggerOnPlayedCard(cardId)
-        this.addTriggerOnPlayedTag(cardId)
+        this.addTriggerOnGainedTag(cardId)
     }
     addTriggerOnRessource(cardId: number): void {
         switch(cardId){
@@ -209,15 +209,15 @@ class TriggerState {
             case(279):{break} //Pets
             default:{return}
         }
-        this.activeOnRessourceAddedToCard.push(cardId)
+        this.activeOnParameterIncrease.push(cardId)
     }
     addTriggerOnPlayedCard(cardId: number): void {
         switch(cardId){
             default:{return}
         }
-        this.activeOnRessourceAddedToCard.push(cardId)
+        this.activeOnPlayedCard.push(cardId)
     }
-    addTriggerOnPlayedTag(cardId: number): void {
+    addTriggerOnGainedTag(cardId: number): void {
         switch(cardId){
             case(25):{break} //Energy Subsidies
             case(37):{break} //Interplanetary Conference
@@ -225,7 +225,8 @@ class TriggerState {
             case(222):{break} //Bacterial Aggregate
             default:{return}
         }
-        this.activeOnRessourceAddedToCard.push(cardId)
+        console.log('adding: ', cardId)
+        this.activeOnGainedTag.push(cardId)
     }
     addCostModTrigger(cardId: number): void {
         switch(cardId){
