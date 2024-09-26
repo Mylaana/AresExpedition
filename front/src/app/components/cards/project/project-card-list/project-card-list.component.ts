@@ -19,6 +19,7 @@ export class ProjectCardListComponent implements OnChanges{
 	@Input() cardList!:ProjectCardModel[];
 	@Input() cardInitialState?: CardState;
 	@Input() stateFromParent?: CardState;
+	@Input() eventId?: number;
 	@Output() updateSelectedCardList: EventEmitter<number[]> = new EventEmitter<number[]>()
 	projectHand!: ProjectCardModel[];
 	displayedCards!: ProjectCardModel[];
@@ -31,6 +32,9 @@ export class ProjectCardListComponent implements OnChanges{
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['cardList'] && changes['cardList'].currentValue) {
 			this.resetCardList()
+		}
+		if (changes['eventId'] && changes['eventId'].currentValue) {
+			this.eventIdChange()
 		}
 	}
 
@@ -71,6 +75,9 @@ export class ProjectCardListComponent implements OnChanges{
 		if(this.cardInitialState===undefined){this.cardInitialState = {selected:false, selectable:false}}
 
 		this.selectedCardList = []
+	}
+	eventIdChange(): void {
+		this.resetCardList()
 	}
 }
 

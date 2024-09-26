@@ -41,6 +41,7 @@ export class PhasePlanificationComponent {
       id: this.buttonList.length,
       name: buttonName,
       enabled: enabled,
+      startEnabled: enabled,
       imageUrl: `/assets/other/phase_${buttonName}.png`
     }
     this.buttonList.push(newButton)

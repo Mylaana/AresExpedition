@@ -53,6 +53,7 @@ export interface CardOptions {
 export interface ChildButton {
     id: number
     enabled: boolean
+    startEnabled: boolean
 
     caption?: string
     value?: any

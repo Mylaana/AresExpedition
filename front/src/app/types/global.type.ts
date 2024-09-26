@@ -9,7 +9,7 @@ export type EventType =
 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' 
 | 'production' | 'planification' | 'upgradePhase' | 'research' | 'drawCards' | 'discardCards'
 | 'increaseGlobalParameter' | 'ressourceGain' | 'cardRessourceGain' | 'increaseResearchScanValue' | 'increaseResearchKeepValue'
-| 'deactivateTrigger'
+| 'deactivateTrigger' | 'addRessourceToTargetCard'
 export type ButtonNames =
 'defaultValidate' 
 | 'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'
@@ -19,6 +19,7 @@ export type ButtonNames =
 | 'selectAlternative'
 | 'upgradePhase'
 | 'drawCards' | 'discardCards'
+| 'addRessourceToSelectedCard'
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'

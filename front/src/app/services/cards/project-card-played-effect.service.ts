@@ -68,6 +68,12 @@ export class ProjectCardPlayedEffectService {
 				this.addRessourceToPlayer("megacredit", 7)
 				break
 			}
+			//Imported Nitrogen
+			case('81'):{
+				this.addRessourceToPlayer("plant", 4)
+				this.addTrToPlayer(1)
+				break
+			}
 			//Archaebacteria
 			case('108'):{
 				this.addProductionToPlayer('plant',1)
@@ -268,6 +274,12 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventIncreaseGlobalParameter("temperature",3))
 				break
 			}
+			//Imported Nitrogen
+			case('81'):{
+				result.push(this.createEventAddRessourceToSelectedCard({name:'animal', valueStock:2}))
+				result.push(this.createEventAddRessourceToSelectedCard({name:'microbe', valueStock:3}))
+				break
+			}
 			//Permafrost Extraction
 			case('92'):{
 				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
@@ -444,7 +456,7 @@ export class ProjectCardPlayedEffectService {
 			//Bacterial Aggregate
 			case(222):{
 				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true){break}
-				result.push(this.createEventAddRessourceToCard({name:'microbe', valueStock: 1},triggerId))
+				result.push(this.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
 				break
 			}
 			default:{
@@ -502,7 +514,7 @@ export class ProjectCardPlayedEffectService {
 			//Bacterial Aggregate
 			case(222):{
 				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true){break}
-				result.push(this.createEventAddRessourceToCard({name:'microbe', valueStock: 1},triggerId))
+				result.push(this.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
 				break
 			}
 			default:{
@@ -566,13 +578,13 @@ export class ProjectCardPlayedEffectService {
 			//Physiscs Complex
 			case(46):{
 				if(parameter.name!='temperature'){break}
-				result.push(this.createEventAddRessourceToCard({name:"science", valueStock:parameter.steps}, triggerId))
+				result.push(this.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}
 			//Pets
 			case(279):{
 				if(parameter.name!='infrastructure'){break}
-				result.push(this.createEventAddRessourceToCard({name:"science", valueStock:parameter.steps}, triggerId))
+				result.push(this.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}
 			default:{
@@ -672,7 +684,7 @@ export class ProjectCardPlayedEffectService {
 
 		return newEvent
 	}
-	createEventAddRessourceToCard(gain: AdvancedRessourceStock | AdvancedRessourceStock[], cardId: number): EventModel {
+	createEventAddRessourceToCardId(gain: AdvancedRessourceStock | AdvancedRessourceStock[], cardId: number): EventModel {
 		let newEvent = new EventModel
 		let newGain: AdvancedRessourceStock[] = []
 
@@ -698,7 +710,6 @@ export class ProjectCardPlayedEffectService {
 	}
 	createEventIncreaseResearchScan(scan: number): EventModel {
 		let newEvent = new EventModel
-		let newGain: AdvancedRessourceStock[] = []
 
 		newEvent.type = 'increaseResearchScanValue'
 		newEvent.cardSelector = {
@@ -713,6 +724,23 @@ export class ProjectCardPlayedEffectService {
 
 		return newEvent
 	}
+	createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock): EventModel {
+		let newEvent = new EventModel
+
+		newEvent.type = 'addRessourceToTargetCard'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 1,
+			selectionQuantityTreshold: 'equal',
+			title: `Select a card to add ${ressource.valueStock} ${ressource.name}(s).`,
+			selectedIdList: [],
+			cardInitialState: {selectable:true, ignoreCost:true}
+		}		
+
+		newEvent.value = ressource
+
+		return newEvent
+	}
 	createEventDeactivateTrigger(triggerId: number): EventModel {
 		let newEvent = new EventModel
 
@@ -723,7 +751,7 @@ export class ProjectCardPlayedEffectService {
 			selectionQuantityTreshold: 'equal',
 			title: 'Deactivate Trigger',
 			selectedIdList: [],
-		}		
+		}
 
 		newEvent.value = triggerId
 

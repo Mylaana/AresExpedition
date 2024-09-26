@@ -7,7 +7,7 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
 import { EventType, MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GlobalParameter, RessourceStock, RessourceState } from '../../../interfaces/global.interface';
+import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, AdvancedRessourceStock } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
@@ -126,6 +126,7 @@ export class GameEventComponent {
 
 		this.createButton('drawCards', 'Draw', true)
 		this.createButton('discardCards', 'Discard', false)
+		this.createButton('addRessourceToSelectedCard', 'Add ressources', false)
 		this.gameStateService.currentPhase.subscribe(
 			phase => this.updatePhase(phase)
 		)
@@ -448,6 +449,9 @@ export class GameEventComponent {
 			this.currentEvent.button = this.getEventMainButton(this.currentEvent.type)
 		}
 
+		//reset current event button state
+		this.currentEvent.button.enabled = this.currentEvent.button.startEnabled
+
 		switch(ticket.type){
 			case('forcedSell'):{
 				let playerCards = this.gameStateService.getClientPlayerState().cards
@@ -527,7 +531,14 @@ export class GameEventComponent {
 				this.gameStateService.setClientPlayerTriggerAsInactive(this.currentEvent.value)
  				break
 			}
+			case('addRessourceToTargetCard'):{
+				this.currentEvent.selectionActive = true
+				this.currentEvent.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList()
+				this.currentEvent.button = this.buttons[this.getButtonIdFromName('addRessourceToSelectedCard')]
+				break
+			}
 		}
+
 		if(ticket.isFinalized===false){return}
 		this.gameStateService.cleanAndNextEventQueue()
 	}
@@ -585,6 +596,16 @@ export class GameEventComponent {
 			case('discardCards'):{
 				this.updateButtonState(
 					'discardCards',
+					this.compareValueToTreshold(
+						this.currentEvent.cardSelector.selectionQuantity,
+						this.currentEvent.cardSelector.selectedIdList.length,
+						this.currentEvent.cardSelector.selectionQuantityTreshold)
+				)
+				return
+			}
+			case('addRessourceToTargetCard'):{
+				this.updateButtonState(
+					'addRessourceToSelectedCard',
 					this.compareValueToTreshold(
 						this.currentEvent.cardSelector.selectionQuantity,
 						this.currentEvent.cardSelector.selectedIdList.length,
@@ -702,6 +723,24 @@ export class GameEventComponent {
 				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
 				this.currentEvent.isFinalized = true
 				this.gameStateService.cleanAndNextEventQueue()
+				break
+			}
+			case('addRessourceToSelectedCard'):{
+				let stockList: AdvancedRessourceStock[] = []
+				if(!Array.isArray(this.currentEvent.value)){
+					stockList.push(this.currentEvent.value)
+				} else {
+					stockList = this.currentEvent.value
+				}
+				let cardStock: CardRessourceStock = {
+					cardId: this.currentEvent.cardSelector.selectedIdList[0],
+					stock: stockList
+				}
+				this.gameStateService.addRessourceToClientPlayerCard(cardStock)
+				this.currentEvent.isFinalized = true
+				this.currentEvent.cardSelector.stateFromParent = {selected:false, selectable:false, activable:false, ignoreCost:false, playable:false, upgradable:false, upgraded:false}
+				this.gameStateService.cleanAndNextEventQueue()
+				break
 			}
 		}
 	}
@@ -727,7 +766,8 @@ export class GameEventComponent {
 		let newButton: ChildButton = {
 		id: this.buttons.length,
 		caption: caption,
-		enabled: startEnabled
+		enabled: startEnabled,
+		startEnabled: startEnabled
 		}
 		this.buttonsIds.set(buttonName, this.buttons.length)
 		this.buttons.push(newButton)
@@ -857,6 +897,9 @@ export class GameEventComponent {
 		let button: ChildButton
 		if(!buttonName){buttonName='defaultValidate'}
 		button = this.buttons[this.getButtonIdFromName(buttonName)]
+
+		//reset enabled
+		button.enabled = button.startEnabled
 		
 		return button
 	}
