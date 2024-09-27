@@ -95,9 +95,11 @@ def parse_row(csv_row: str):
 
         match str(type(PARSER_CARD_INFO_MODEL[map['output_field_name']])):
             case "<class 'list'>":
-                parsed_value = parsed_value.split(',')
                 if parsed_value == '':
-                    continue
+                    parsed_value = []
+                else:
+                    parsed_value = parsed_value.split(',')
+
                 parsed_row[map['output_field_name']] = parsed_value
 
                 for index in range(len(parsed_value)):

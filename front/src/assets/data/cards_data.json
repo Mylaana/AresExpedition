@@ -44,18 +44,14 @@
             "en": "5 $tag_science$",
             "fr": "5 $tag_science$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 9,
         "card_code": "9",
         "origin": "base",
         "cost": 5,
-        "tagsId": [
-            ""
-        ],
+        "tagsId": [],
         "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
@@ -92,9 +88,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 18,
@@ -142,9 +136,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 20,
@@ -190,9 +182,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 25,
@@ -238,9 +228,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 29,
@@ -286,9 +274,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 36,
@@ -334,9 +320,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 37,
@@ -382,9 +366,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 42,
@@ -430,9 +412,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 45,
@@ -478,9 +458,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 46,
@@ -527,18 +505,14 @@
             "en": "4 $tag_science$",
             "fr": "4 $tag_science$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 49,
         "card_code": "49",
         "origin": "base",
         "cost": 4,
-        "tagsId": [
-            ""
-        ],
+        "tagsId": [],
         "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
@@ -575,9 +549,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 54,
@@ -624,9 +596,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 58,
@@ -672,9 +642,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 62,
@@ -720,9 +688,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 65,
@@ -770,9 +736,7 @@
             "en": "$tag_animal$ $tag_microbe$ $tag_plant$",
             "fr": "$tag_animal$ $tag_microbe$ $tag_plant$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 66,
@@ -818,9 +782,7 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 69,
@@ -867,9 +829,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 71,
@@ -915,9 +875,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 74,
@@ -964,9 +922,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 76,
@@ -1013,9 +969,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 77,
@@ -1062,9 +1016,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 81,
@@ -1112,9 +1064,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 83,
@@ -1161,9 +1111,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 92,
@@ -1209,9 +1157,7 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 93,
@@ -1258,9 +1204,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 96,
@@ -1308,9 +1252,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 108,
@@ -1356,9 +1298,7 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 123,
@@ -1404,18 +1344,14 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 129,
         "card_code": "129",
         "origin": "base",
         "cost": 2,
-        "tagsId": [
-            ""
-        ],
+        "tagsId": [],
         "effectSummaryType": "greyProduction",
         "cardType": "greenProject",
         "vpNumber": "",
@@ -1452,9 +1388,7 @@
             "en": "max 3 $other_ocean$",
             "fr": "max 3 $other_ocean$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 135,
@@ -1500,9 +1434,7 @@
             "en": "-3 $ressource_heat$",
             "fr": "-3 $ressource_heat$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 141,
@@ -1549,18 +1481,14 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 144,
         "card_code": "144",
         "origin": "base",
         "cost": 3,
-        "tagsId": [
-            ""
-        ],
+        "tagsId": [],
         "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
@@ -1597,9 +1525,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 145,
@@ -1645,9 +1571,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 155,
@@ -1693,9 +1617,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 161,
@@ -1742,9 +1664,7 @@
             "en": "$other_oxygen$",
             "fr": "$other_oxygen$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 163,
@@ -1791,9 +1711,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 171,
@@ -1839,9 +1757,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 175,
@@ -1888,9 +1804,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 180,
@@ -1936,9 +1850,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 181,
@@ -1984,9 +1896,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 182,
@@ -2032,9 +1942,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 183,
@@ -2081,9 +1989,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 184,
@@ -2129,9 +2035,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 190,
@@ -2177,18 +2081,14 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 197,
         "card_code": "197",
         "origin": "base",
         "cost": 20,
-        "tagsId": [
-            ""
-        ],
+        "tagsId": [],
         "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
@@ -2225,9 +2125,7 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 198,
@@ -2273,9 +2171,7 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 201,
@@ -2321,9 +2217,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 202,
@@ -2370,9 +2264,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 204,
@@ -2420,9 +2312,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 213,
@@ -2468,9 +2358,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 214,
@@ -2517,9 +2405,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 217,
@@ -2565,9 +2451,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 222,
@@ -2662,9 +2546,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 224,
@@ -2710,9 +2592,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 229,
@@ -2758,9 +2638,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 230,
@@ -2806,9 +2684,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 232,
@@ -2854,9 +2730,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 233,
@@ -2902,9 +2776,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 253,
@@ -2951,9 +2823,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 260,
@@ -2999,9 +2869,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 263,
@@ -3048,9 +2916,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 266,
@@ -3097,9 +2963,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 268,
@@ -3145,9 +3009,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 271,
@@ -3194,9 +3056,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 277,
@@ -3244,9 +3104,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 278,
@@ -3292,9 +3150,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 279,
@@ -3389,9 +3245,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 281,
@@ -3437,9 +3291,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 282,
@@ -3485,9 +3337,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 284,
@@ -3535,9 +3385,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 286,
@@ -3585,9 +3433,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 289,
@@ -3634,9 +3480,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     },
     {
         "id": 292,
@@ -3682,8 +3526,6 @@
             "en": "$other_infrastructure$",
             "fr": ""
         },
-        "stockable": [
-            ""
-        ]
+        "stockable": []
     }
 ]
