@@ -20,3 +20,7 @@ Prerequisites feature
 ## Misc
 Global parameter increase applied at EOT  
 Lakes feature
+
+## Clean Code
+Comments
+Tests ?
