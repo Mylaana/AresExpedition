@@ -1,4 +1,4 @@
-import { RessourceState, TagState, ResearchState, GlobalParameterValue } from "../../interfaces/global.interface";
+import { RessourceState, TagState, ScanKeep, GlobalParameterValue } from "../../interfaces/global.interface";
 import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
@@ -24,7 +24,7 @@ export class PlayerStateModel {
     vp!: number;
     tag!: TagState[];
     cards!: ProjectCardState
-    research!: ResearchState
+    research!: ScanKeep
 	phaseCard = new PhaseCardHolderModel
 	phaseCardUpgradeCount: number = 0
 	sellCardValueMod: number = 0

@@ -4,7 +4,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType, GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventModel } from "../../models/core-game/event.model";
-import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, GlobalParameterValue } from "../../interfaces/global.interface";
+import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, GlobalParameterValue, ScanKeep } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
 import { GlobalTagInfoService } from "../global/global-tag-info.service";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
@@ -292,6 +292,11 @@ export class ProjectCardPlayedEffectService {
 			case('81'):{
 				result.push(this.createEventAddRessourceToSelectedCard({name:'animal', valueStock:2}))
 				result.push(this.createEventAddRessourceToSelectedCard({name:'microbe', valueStock:3}))
+				break
+			}
+			//Invention Contest
+			case('83'):{
+				result.push(this.createEventScanKeep({scan:3, keep:1}))
 				break
 			}
 			//Permafrost Extraction
@@ -737,6 +742,22 @@ export class ProjectCardPlayedEffectService {
 		}
 
 		newEvent.value = triggerId
+
+		return newEvent
+	}
+	createEventScanKeep(scanKeep: ScanKeep): EventModel {
+		let newEvent = new EventModel
+
+		newEvent.type = 'scanKeepQuery'
+		newEvent.cardSelector = {
+			selectFrom: [],
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+			title: `Select ${scanKeep.keep} cards to draw.`,
+			selectedIdList: [],
+		}
+
+		newEvent.value = scanKeep
 
 		return newEvent
 	}
