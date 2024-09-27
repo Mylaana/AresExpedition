@@ -7,9 +7,10 @@ export type StandardState = 'default' | 'disabled'
 export type MinMaxEqualType = 'min' | 'max' | 'equal'
 export type EventType = 
 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' 
-| 'production' | 'planification' | 'upgradePhase' | 'research' | 'drawCards' | 'discardCards'
+| 'production' | 'planification' | 'upgradePhase' | 'research' | 'drawCards' | 'discardCards' 
 | 'increaseGlobalParameter' | 'ressourceGain' | 'cardRessourceGain' | 'increaseResearchScanValue' | 'increaseResearchKeepValue'
 | 'deactivateTrigger' | 'addRessourceToSelectedCard'
+| 'scanKeepQuery' | 'scanKeepResult'
 export type ButtonNames =
 'defaultValidate' 
 | 'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'
@@ -18,7 +19,7 @@ export type ButtonNames =
 | 'selectSecondCard' | 'cancelSecondCard' | 'buildSecondCard'
 | 'selectAlternative'
 | 'upgradePhase'
-| 'drawCards' | 'discardCards'
+| 'drawCards' | 'discardCards' | 'scanKeep'
 | 'addRessourceToSelectedCard'
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
@@ -31,3 +32,4 @@ export type TagInfo = {
     imageUrl: string;
     textTagName: string;
 };
+export type DrawRule = 'draw' | 'research' | 'scanKeep'

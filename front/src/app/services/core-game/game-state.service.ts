@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterName, RGB } from "../../types/global.type";
-import { AdvancedRessourceStock, CardRessourceStock, GlobalParameterValue, PlayerPhase, ResearchState, RessourceStock } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
@@ -737,7 +737,7 @@ export class GameState{
         newState.research.keep += keep
         this.updateClientPlayerState(newState)
     }
-    getClientPlayerResearchMods(): ResearchState {
+    getClientPlayerResearchMods(): ScanKeep {
         return this.getClientPlayerState().research
     }
 }

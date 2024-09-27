@@ -1,4 +1,4 @@
-type DrawRule = 'draw' | 'research'
+import { DrawRule } from "../../types/global.type";
 
 /**
  * cardNumber should be the requested card number
@@ -12,4 +12,5 @@ export class DrawModel {
     drawDate = new Date();
     isFinalized: boolean = false;
     cardList: number[] = [];
+    keepCardNumber?: number;
 }

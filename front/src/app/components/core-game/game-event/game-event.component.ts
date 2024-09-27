@@ -7,7 +7,7 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
 import { EventType, MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, AdvancedRessourceStock } from '../../../interfaces/global.interface';
+import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, AdvancedRessourceStock, ScanKeep } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
@@ -128,6 +128,8 @@ export class GameEventComponent {
 		this.createButton('drawCards', 'Draw', true)
 		this.createButton('discardCards', 'Discard', false)
 		this.createButton('addRessourceToSelectedCard', 'Add ressources', false)
+		this.createButton('scanKeep', 'Drawn selection', false)
+		
 		this.gameStateService.currentPhase.subscribe(
 			phase => this.updatePhase(phase)
 		)
@@ -401,6 +403,23 @@ export class GameEventComponent {
 
 				this.gameStateService.addEventQueue(newEvent)
 			}
+			if(element.drawRule==='scanKeep'){
+				if(!element.keepCardNumber){break}
+				let newEvent = new EventModel
+				let quantity: number = element.keepCardNumber
+				newEvent.type = 'scanKeepResult'
+				newEvent.cardSelector = {
+					selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
+					selectionQuantity: element.keepCardNumber,
+					selectionQuantityTreshold: 'equal',
+					cardInitialState: {selectable:true, ignoreCost: true},
+					title: `Select ${quantity} cards to draw`,
+					selectedIdList: [],
+				}
+				newEvent.button = this.buttons[this.getButtonIdFromName('scanKeep')]
+
+				this.gameStateService.addEventQueue(newEvent,true)
+			}
 		};
 		if(callCleanAndNext===false){return}
 		this.gameStateService.cleanAndNextDrawQueue()
@@ -545,6 +564,22 @@ export class GameEventComponent {
 				}
 				break
 			}
+			case('scanKeepQuery'):{
+				this.currentEvent.isFinalized = true
+				let scanKeep: ScanKeep = this.currentEvent.value
+				let draw = new DrawModel;
+				draw.playerId = this.clientPlayerId
+				draw.cardNumber = scanKeep.scan
+				draw.drawRule = 'scanKeep'
+				draw.keepCardNumber = scanKeep.keep
+				this.gameStateService.addDrawQueue(draw)
+				console.log('scanKeepQuery: ',draw)
+				break
+			}
+			case('scanKeepResult'):{
+				this.currentEvent.selectionActive = true
+				console.log('scanKeepResult!')
+			}
 		}
 
 		if(ticket.isFinalized===false){return}
@@ -614,6 +649,16 @@ export class GameEventComponent {
 			case('addRessourceToSelectedCard'):{
 				this.updateButtonState(
 					'addRessourceToSelectedCard',
+					this.compareValueToTreshold(
+						this.currentEvent.cardSelector.selectionQuantity,
+						this.currentEvent.cardSelector.selectedIdList.length,
+						this.currentEvent.cardSelector.selectionQuantityTreshold)
+				)
+				return
+			}
+			case('scanKeepResult'):{
+				this.updateButtonState(
+					'scanKeep',
 					this.compareValueToTreshold(
 						this.currentEvent.cardSelector.selectionQuantity,
 						this.currentEvent.cardSelector.selectedIdList.length,
@@ -747,6 +792,13 @@ export class GameEventComponent {
 				this.gameStateService.addRessourceToClientPlayerCard(cardStock)
 				this.currentEvent.isFinalized = true
 				this.currentEvent.cardSelector.stateFromParent = {selected:false, selectable:false, activable:false, ignoreCost:false, playable:false, upgradable:false, upgraded:false}
+				this.gameStateService.cleanAndNextEventQueue()
+				break
+			}
+			case('scanKeep'):{
+				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
+				this.buttons[button.id].enabled = false
+				this.currentEvent.isFinalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}

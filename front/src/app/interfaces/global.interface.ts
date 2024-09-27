@@ -98,7 +98,7 @@ export interface CardRessourceStock {
     stock: AdvancedRessourceStock[]
 }
 
-export interface ResearchState {
+export interface ScanKeep {
     scan: number,
     keep: number
 }
