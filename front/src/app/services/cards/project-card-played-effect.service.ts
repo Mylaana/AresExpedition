@@ -727,7 +727,7 @@ export class ProjectCardPlayedEffectService {
 	createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock): EventModel {
 		let newEvent = new EventModel
 
-		newEvent.type = 'addRessourceToTargetCard'
+		newEvent.type = 'addRessourceToSelectedCard'
 		newEvent.cardSelector = {
 			selectFrom: [],
 			selectionQuantity: 1,

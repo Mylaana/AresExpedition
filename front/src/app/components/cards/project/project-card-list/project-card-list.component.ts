@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChange
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
-import { PhaseFilter } from '../../../../types/phase-card.type';
+import { DisplayFilter } from '../../../../types/project-card.type';
 import { CardState } from '../../../../models/cards/card-cost.model';
 
 @Component({
@@ -15,7 +15,7 @@ import { CardState } from '../../../../models/cards/card-cost.model';
   styleUrl: './project-card-list.component.scss'
 })
 export class ProjectCardListComponent implements OnChanges{
-	@Input() cardsPhaseFilter!: PhaseFilter;
+	@Input() cardsPhaseFilter!: DisplayFilter;
 	@Input() cardList!:ProjectCardModel[];
 	@Input() cardInitialState?: CardState;
 	@Input() stateFromParent?: CardState;
@@ -38,7 +38,7 @@ export class ProjectCardListComponent implements OnChanges{
 		}
 	}
 
-	filterCards(cards:ProjectCardModel[], filter: PhaseFilter): ProjectCardModel[] {
+	filterCards(cards:ProjectCardModel[], filter: DisplayFilter): ProjectCardModel[] {
 		if(filter === undefined){
 		return cards
 		}

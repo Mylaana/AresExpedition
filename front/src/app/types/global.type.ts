@@ -9,7 +9,7 @@ export type EventType =
 'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' 
 | 'production' | 'planification' | 'upgradePhase' | 'research' | 'drawCards' | 'discardCards'
 | 'increaseGlobalParameter' | 'ressourceGain' | 'cardRessourceGain' | 'increaseResearchScanValue' | 'increaseResearchKeepValue'
-| 'deactivateTrigger' | 'addRessourceToTargetCard'
+| 'deactivateTrigger' | 'addRessourceToSelectedCard'
 export type ButtonNames =
 'defaultValidate' 
 | 'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'

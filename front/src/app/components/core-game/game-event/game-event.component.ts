@@ -81,7 +81,8 @@ export class GameEventComponent {
 		[
 			['discardCards','discardCards'],
 			['drawCards','drawCards'],
-			['upgradePhase','upgradePhase']
+			['upgradePhase','upgradePhase'],
+			['addRessourceToSelectedCard', 'addRessourceToSelectedCard']
 		]
 	)
 	ngOnInit(): void {
@@ -450,7 +451,10 @@ export class GameEventComponent {
 		}
 
 		//reset current event button state
-		this.currentEvent.button.enabled = this.currentEvent.button.startEnabled
+		if(ticket.button){
+			let button = this.buttons[ticket.button.id]
+			button.enabled = button.startEnabled
+		}
 
 		switch(ticket.type){
 			case('forcedSell'):{
@@ -531,10 +535,9 @@ export class GameEventComponent {
 				this.gameStateService.setClientPlayerTriggerAsInactive(this.currentEvent.value)
  				break
 			}
-			case('addRessourceToTargetCard'):{
+			case('addRessourceToSelectedCard'):{
 				this.currentEvent.selectionActive = true
 				this.currentEvent.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList()
-				this.currentEvent.button = this.buttons[this.getButtonIdFromName('addRessourceToSelectedCard')]
 				break
 			}
 		}
@@ -603,7 +606,7 @@ export class GameEventComponent {
 				)
 				return
 			}
-			case('addRessourceToTargetCard'):{
+			case('addRessourceToSelectedCard'):{
 				this.updateButtonState(
 					'addRessourceToSelectedCard',
 					this.compareValueToTreshold(

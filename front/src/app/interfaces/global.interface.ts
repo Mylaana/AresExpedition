@@ -1,6 +1,6 @@
 import { AdvancedRessourceType, GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type";
 import { PhaseCardType } from "../types/phase-card.type";
-import { PhaseFilter } from "../types/phase-card.type";
+import { DisplayFilter } from "../types/project-card.type";
 import { ProjectCardModel } from "../models/cards/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
 import { ButtonNames } from "../types/global.type";
@@ -67,7 +67,7 @@ export interface CardSelector {
     selectedIdList: number[];
     selectionQuantity: number;
     selectionQuantityTreshold: MinMaxEqualType;
-    phaseFilter?: PhaseFilter;
+    phaseFilter?: DisplayFilter;
     cardInitialState?: CardState;
 	stateFromParent?: CardState;
     playCardActive?: number;
@@ -77,7 +77,7 @@ export interface PlayableCardZone {
 	cardList: ProjectCardModel[],
 	selectionButtonId?: number,
 	cardInitialState?: CardState,
-	phaseFilter?: PhaseFilter,
+	phaseFilter?: DisplayFilter,
     currentButton?: ChildButton
 }
 
