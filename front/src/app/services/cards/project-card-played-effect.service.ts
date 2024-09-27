@@ -318,13 +318,13 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Microprocessor
 			case('163'):{
+				result.push(this.createEventDiscard(1))
 				result.push(this.createEventDraw(2))
 				break
 			}
 			//Smelting
 			case('183'):{
 				result.push(this.createEventDraw(2))
-				result.push(this.createEventDiscard(1))
 				break
 			}
 			//Soil Warming
