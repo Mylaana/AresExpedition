@@ -23,7 +23,7 @@ parser_columns_map = [
     {'column_name': 'prerequisiteTagId', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'prerequisiteTresholdStep', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'prerequisiteTresholdValue', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
-    {'column_name': 'stockableRessource', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
+    {'column_name': 'stockableRessource', 'column_id': -1 , 'output_field_name': 'stockable', 'split_per_language': False},
     {'column_name': 'title_en', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
     {'column_name': 'title_fr', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
     {'column_name': 'vpText_en', 'column_id': -1 , 'output_field_name': 'vpText', 'split_per_language': True},
@@ -60,15 +60,18 @@ PARSER_CARD_INFO_MODEL = {
     "effectText": {},
     "playedText": {},
     "prerequisiteText": {},
-    "prerequisiteSummaryText": {}
+    "prerequisiteSummaryText": {},
+    "stockable": []
 }
+
 
 def map_csv_columns(csv_header: str):
     for column_index in range(len(csv_header)):
         for c in parser_columns_map:
-            if c['column_name']==csv_header[column_index]:
+            if c['column_name'] == csv_header[column_index]:
                 c['column_id'] = column_index
                 break
+
 
 def parse_row(csv_row: str):
     """
@@ -83,21 +86,29 @@ def parse_row(csv_row: str):
         if map['output_field_name'] == '':
             continue
 
-        if map['split_per_language'] == True:
+        if map['split_per_language'] is True:
             language = map['column_name'].split('_')[1]
             parsed_row[map['output_field_name']][language] = csv_row[map['column_id']]
             continue
-        
+
         parsed_value = csv_row[map['column_id']]
 
         match str(type(PARSER_CARD_INFO_MODEL[map['output_field_name']])):
             case "<class 'list'>":
                 parsed_value = parsed_value.split(',')
+                if parsed_value == '':
+                    continue
                 parsed_row[map['output_field_name']] = parsed_value
+
                 for index in range(len(parsed_value)):
                     if parsed_value[index] == '':
                         continue
-                    parsed_value[index] = int(parsed_value[index])
+
+                    match map['output_field_name']:
+                        case 'tagsId':
+                            parsed_value[index] = int(parsed_value[index])
+                        case _:
+                            parsed_value[index] = parsed_value[index]
             case "<class 'int'>":
                 parsed_row[map['output_field_name']] = int(parsed_value)
             case _:
@@ -112,7 +123,7 @@ def main():
     input_name = 'card_list'
     output_path = os.path.join(os.path.abspath(os.path.join(dir_name, os.pardir)), 'front', 'src', 'assets', 'data')
     output_name = 'cards_data.json'
-    
+
     parsed = []
     with open(file=input_path + input_name + ".csv", mode="r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
@@ -126,11 +137,12 @@ def main():
                 continue
 
             parsed.append(copy.deepcopy(parse_row(row)))
-    
+
     with open(os.path.join(output_path, output_name), 'w') as f:
         json.dump(parsed, f, indent=4)
-    
+
     print('Done')
+
 
 if __name__ == '__main__':
     main()

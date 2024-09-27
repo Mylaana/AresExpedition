@@ -43,7 +43,10 @@
         "prerequisiteSummaryText": {
             "en": "5 $tag_science$",
             "fr": "5 $tag_science$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 9,
@@ -88,7 +91,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 18,
@@ -135,7 +141,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 20,
@@ -180,7 +189,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 25,
@@ -225,7 +237,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 29,
@@ -270,7 +285,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 36,
@@ -297,7 +315,7 @@
             "fr": ""
         },
         "effectSummaryText": {
-            "en": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$",
+            "en": "$other_researchsymbol$ : + $other_researchcard2$",
             "fr": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$"
         },
         "effectText": {
@@ -315,7 +333,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 37,
@@ -360,7 +381,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 42,
@@ -405,7 +429,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 45,
@@ -450,7 +477,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 46,
@@ -496,7 +526,10 @@
         "prerequisiteSummaryText": {
             "en": "4 $tag_science$",
             "fr": "4 $tag_science$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 49,
@@ -541,7 +574,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 54,
@@ -587,7 +623,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 58,
@@ -632,7 +671,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 62,
@@ -677,7 +719,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 65,
@@ -724,7 +769,10 @@
         "prerequisiteSummaryText": {
             "en": "$tag_animal$ $tag_microbe$ $tag_plant$",
             "fr": "$tag_animal$ $tag_microbe$ $tag_plant$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 66,
@@ -769,7 +817,10 @@
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 69,
@@ -815,7 +866,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 71,
@@ -860,7 +914,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 74,
@@ -906,7 +963,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 76,
@@ -952,7 +1012,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 77,
@@ -998,7 +1061,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 81,
@@ -1045,7 +1111,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 83,
@@ -1091,7 +1160,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 92,
@@ -1136,7 +1208,10 @@
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 93,
@@ -1182,7 +1257,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 96,
@@ -1229,7 +1307,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 108,
@@ -1274,7 +1355,10 @@
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 123,
@@ -1319,7 +1403,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 129,
@@ -1364,7 +1451,10 @@
         "prerequisiteSummaryText": {
             "en": "max 3 $other_ocean$",
             "fr": "max 3 $other_ocean$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 135,
@@ -1409,7 +1499,10 @@
         "prerequisiteSummaryText": {
             "en": "-3 $ressource_heat$",
             "fr": "-3 $ressource_heat$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 141,
@@ -1455,7 +1548,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 144,
@@ -1500,7 +1596,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 145,
@@ -1545,7 +1644,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 155,
@@ -1590,7 +1692,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 161,
@@ -1636,7 +1741,10 @@
         "prerequisiteSummaryText": {
             "en": "$other_oxygen$",
             "fr": "$other_oxygen$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 163,
@@ -1682,7 +1790,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 171,
@@ -1727,7 +1838,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 175,
@@ -1773,7 +1887,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 180,
@@ -1818,7 +1935,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 181,
@@ -1863,7 +1983,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 182,
@@ -1908,7 +2031,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 183,
@@ -1954,7 +2080,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 184,
@@ -1999,7 +2128,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 190,
@@ -2044,7 +2176,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 197,
@@ -2089,7 +2224,10 @@
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 198,
@@ -2134,7 +2272,10 @@
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 201,
@@ -2179,7 +2320,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 202,
@@ -2225,7 +2369,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 204,
@@ -2272,7 +2419,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 213,
@@ -2317,7 +2467,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 214,
@@ -2363,7 +2516,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 217,
@@ -2408,7 +2564,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 222,
@@ -2454,7 +2613,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            "microbe"
+        ]
     },
     {
         "id": 223,
@@ -2499,7 +2661,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 224,
@@ -2544,7 +2709,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 229,
@@ -2563,7 +2731,7 @@
         "phaseUp": "",
         "phaseDown": "",
         "title": {
-            "en": "Innovative Teachnologies Award",
+            "en": "Innovative Technologies Award",
             "fr": "Prix de l'Innovation Technologique"
         },
         "vpText": {
@@ -2589,7 +2757,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 230,
@@ -2634,7 +2805,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 232,
@@ -2679,7 +2853,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 233,
@@ -2724,7 +2901,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 253,
@@ -2770,7 +2950,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 260,
@@ -2815,7 +2998,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 263,
@@ -2861,7 +3047,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 266,
@@ -2907,7 +3096,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 268,
@@ -2952,7 +3144,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 271,
@@ -2998,7 +3193,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 277,
@@ -3045,7 +3243,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 278,
@@ -3090,7 +3291,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 279,
@@ -3135,7 +3339,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            "animal"
+        ]
     },
     {
         "id": 280,
@@ -3181,7 +3388,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 281,
@@ -3226,7 +3436,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 282,
@@ -3271,7 +3484,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 284,
@@ -3318,7 +3534,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 286,
@@ -3365,7 +3584,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 289,
@@ -3411,7 +3633,10 @@
         "prerequisiteSummaryText": {
             "en": "",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     },
     {
         "id": 292,
@@ -3456,6 +3681,9 @@
         "prerequisiteSummaryText": {
             "en": "$other_infrastructure$",
             "fr": ""
-        }
+        },
+        "stockable": [
+            ""
+        ]
     }
 ]
