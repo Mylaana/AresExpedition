@@ -2,8 +2,17 @@ import { Injectable } from "@angular/core";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
+import { AdvancedRessourceType } from "../../types/global.type";
 
 const language = 'en'
+
+const stockableMap = new Map<string, AdvancedRessourceType>(
+    [
+        ['microbe', 'microbe'],
+        ['animal', 'animal'],
+        ['science', 'science']
+    ]
+)
 
 @Injectable({
     providedIn: 'root'
@@ -66,17 +75,27 @@ export class ProjectCardInfoService {
             card.playedText = jsonCard.playedText[language]
             card.prerequisiteText = jsonCard.prerequisiteText[language]
             card.prerequisiteSummaryText = jsonCard.prerequisiteSummaryText[language]
+            card.stockable = this.convertStockable(jsonCard.stockable)
 
             cardList.push(card)
         }
         return cardList
     }
-    convertTagList(input: any[]): number[] {
+    convertTagList(inputList: any[]): number[] {
         let tags = []
-        for(let tag of input){
+        for(let tag of inputList){
             tags.push(Number(tag))
         }
         return tags
+    }
+    convertStockable(inputList: string[]): AdvancedRessourceType[] {
+        let result: AdvancedRessourceType[] = []
+        for(let input of inputList){
+            let ressource = stockableMap.get(input)
+            if(!ressource){continue}
+            result.push(ressource)
+        }
+        return result
     }
     convertSummaryType(input: string): SummaryType {
         switch(input){

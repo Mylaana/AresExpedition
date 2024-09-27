@@ -195,7 +195,7 @@ export class GameEventComponent {
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
 			cardInitialState: {playable: true},
-			phaseFilter: 'development',
+			phaseFilter: {type:'development'},
 			playCardActive: -1,
 			title: 'Play Green cards :',
 			selectedIdList: [],
@@ -225,7 +225,7 @@ export class GameEventComponent {
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
 			cardInitialState: {playable: true},
-			phaseFilter: 'construction',
+			phaseFilter: {type:'construction'},
 			playCardActive: -1,
 			title: 'Play Blue/Red cards :',
 			selectedIdList: [],
@@ -255,7 +255,7 @@ export class GameEventComponent {
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'min',
 			cardInitialState: {activable: true, selectable: false, playable: false},
-			phaseFilter: 'action',
+			phaseFilter: {type:'action'},
 			title: 'Activate cards :',
 			selectedIdList: [],
 		}
@@ -537,7 +537,12 @@ export class GameEventComponent {
 			}
 			case('addRessourceToSelectedCard'):{
 				this.currentEvent.selectionActive = true
-				this.currentEvent.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList()
+				this.currentEvent.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(
+					this.currentEvent.cardSelector.phaseFilter)
+				if(this.currentEvent.cardSelector.selectFrom.length===0){
+					console.log('no cards found to add:', this.currentEvent.value)
+					this.currentEvent.isFinalized = true
+				}
 				break
 			}
 		}

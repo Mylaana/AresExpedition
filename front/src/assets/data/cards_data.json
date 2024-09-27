@@ -301,7 +301,7 @@
             "fr": ""
         },
         "effectSummaryText": {
-            "en": "$other_researchsymbol$ : + $other_researchcard2$",
+            "en": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$",
             "fr": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$"
         },
         "effectText": {

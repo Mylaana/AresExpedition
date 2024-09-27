@@ -1,6 +1,7 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType } from "../../types/global.type"
-import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType } from "../../types/project-card.type"
+import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType} from "../../types/project-card.type"
+import { ProjectFilter } from "../../interfaces/global.interface"
 
 type playedProject = {
     playedIdList: number[],
@@ -54,9 +55,10 @@ export class ProjectCardModel {
             }
         }
     }
-    checkStockable(ressourceType: AdvancedRessourceType): boolean {
+    checkStockable(ressourceType: any): boolean {
         //add a check if ressource is stockable on this card
-        return true
+        if(this.stockable===undefined || this.stockable.length===0){return false}
+        return this.stockable.includes(ressourceType)
     }
     checkStockExists(ressource:AdvancedRessourceType): boolean {
         if(!this.stock){return false}
@@ -82,6 +84,46 @@ export class ProjectCardModel {
             }
         }
         return 0
+    }
+    isFilterOk(filter: ProjectFilter): boolean {
+        switch(filter.type){
+            case('development'):{
+                if(this.cardType==='greenProject'){
+                    return true
+                }
+                break
+            }
+            case('construction'):{
+                if(this.cardType!='greenProject'){
+                    return true
+                }
+                break
+            }
+            case('action'):{
+                if(this.cardSummaryType==='action'){
+                    return true
+                }
+                break
+            }
+            case('stockable'):{
+                //converts filterValue into stockable name list
+                if(!filter.value){return false}
+                let filterValueList: any[] = []
+                if(!Array.isArray(filter.value)){
+                    filterValueList.push(filter.value)
+                } else {
+                    filterValueList = filter.value
+                }
+
+                for(let f of filterValueList){
+                    if(this.checkStockable(f)){
+                        return true
+                    }
+                }
+                break
+            }
+        }
+        return false
     }
 }
 export class ProjectCardState {
@@ -128,8 +170,17 @@ export class ProjectCardState {
     getProjectIdList(): number[] {
         return this.projects.playedIdList
     }
-    getProjectPlayedList(): ProjectCardModel[] {
-        return this.projects.playedProjectList
+    getProjectPlayedList(filter?: ProjectFilter): ProjectCardModel[] {
+        if(!filter){return this.projects.playedProjectList}
+        
+        let projectList:ProjectCardModel[] = []
+
+        for(let card of this.projects.playedProjectList){
+            if(card.isFilterOk(filter)===true){
+                projectList.push(card)
+            }
+        }
+        return projectList
     }
     getPlayedProjectCardFromId(cardId: number): ProjectCardModel | undefined {
         for(let card of this.projects.playedProjectList){

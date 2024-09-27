@@ -1,13 +1,12 @@
 import { AdvancedRessourceType, GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type";
 import { PhaseCardType } from "../types/phase-card.type";
-import { DisplayFilter } from "../types/project-card.type";
 import { ProjectCardModel } from "../models/cards/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
 import { ButtonNames } from "../types/global.type";
 import { GlobalParameterName } from "../types/global.type";
 import { CardState } from "../models/cards/card-cost.model";
 import { RessourceType } from "../types/global.type";
-
+import { ProjectFilterType } from "../types/project-card.type";
 
 export interface RessourceState {
     "id": number,
@@ -67,7 +66,7 @@ export interface CardSelector {
     selectedIdList: number[];
     selectionQuantity: number;
     selectionQuantityTreshold: MinMaxEqualType;
-    phaseFilter?: DisplayFilter;
+    phaseFilter?: ProjectFilter;
     cardInitialState?: CardState;
 	stateFromParent?: CardState;
     playCardActive?: number;
@@ -77,7 +76,7 @@ export interface PlayableCardZone {
 	cardList: ProjectCardModel[],
 	selectionButtonId?: number,
 	cardInitialState?: CardState,
-	phaseFilter?: DisplayFilter,
+	phaseFilter?: ProjectFilter,
     currentButton?: ChildButton
 }
 
@@ -102,4 +101,9 @@ export interface CardRessourceStock {
 export interface ResearchState {
     scan: number,
     keep: number
+}
+
+export interface ProjectFilter {
+    type: ProjectFilterType,
+    value?: AdvancedRessourceType | AdvancedRessourceType[]
 }

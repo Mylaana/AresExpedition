@@ -2,8 +2,9 @@ import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChange
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
-import { DisplayFilter } from '../../../../types/project-card.type';
 import { CardState } from '../../../../models/cards/card-cost.model';
+import { ProjectFilter } from '../../../../interfaces/global.interface';
+import { AdvancedRessourceType } from '../../../../types/global.type';
 
 @Component({
   selector: 'app-project-card-list',
@@ -15,7 +16,7 @@ import { CardState } from '../../../../models/cards/card-cost.model';
   styleUrl: './project-card-list.component.scss'
 })
 export class ProjectCardListComponent implements OnChanges{
-	@Input() cardsPhaseFilter!: DisplayFilter;
+	@Input() cardsPhaseFilter?: ProjectFilter;
 	@Input() cardList!:ProjectCardModel[];
 	@Input() cardInitialState?: CardState;
 	@Input() stateFromParent?: CardState;
@@ -38,22 +39,19 @@ export class ProjectCardListComponent implements OnChanges{
 		}
 	}
 
-	filterCards(cards:ProjectCardModel[], filter: DisplayFilter): ProjectCardModel[] {
-		if(filter === undefined){
-		return cards
+	filterCards(cards:ProjectCardModel[], filter: ProjectFilter | undefined): ProjectCardModel[] {
+		if(filter === undefined){return cards}
+
+		let result: ProjectCardModel[] = [];
+		for(let card of cards){
+			if(card.isFilterOk(filter)===true){
+				result.push(card)
+			}
 		}
 
-		var result: ProjectCardModel[] = [];
-		cards.forEach(element => {
-			if((element.cardType === "greenProject" && filter === 'development')
-				|| (element.cardType != "greenProject" && filter === 'construction')
-				|| (element.cardSummaryType === 'action' && filter === 'action')
-			){
-				result.push(element)
-			}
-		});
 		return result
 	}
+	
 
 	public cardStateChange(cardState: {cardId: number, state:CardState}): void {
 		if(cardState.state.selected===true){

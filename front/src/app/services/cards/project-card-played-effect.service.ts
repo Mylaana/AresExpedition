@@ -548,7 +548,7 @@ export class ProjectCardPlayedEffectService {
 					result.push(this.createEventDeactivateTrigger(triggerId))
 					break
 				}
-				result.push(this.createEventIncreaseResearchScan(1))
+				result.push(this.createEventIncreaseResearchScan(ressource.valueStock))
 				break
 			}
 			default:{
@@ -734,7 +734,8 @@ export class ProjectCardPlayedEffectService {
 			selectionQuantityTreshold: 'equal',
 			title: `Select a card to add ${ressource.valueStock} ${ressource.name}(s).`,
 			selectedIdList: [],
-			cardInitialState: {selectable:true, ignoreCost:true}
+			cardInitialState: {selectable:true, ignoreCost:true},
+			phaseFilter: {type:'stockable', value:ressource.name}
 		}		
 
 		newEvent.value = ressource
