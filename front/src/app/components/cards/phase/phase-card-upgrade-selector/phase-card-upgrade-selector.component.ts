@@ -37,8 +37,8 @@ export class PhaseCardUpgradeSelectorComponent {
 	}
 
 	upgradeNumberUpdate(state: PlayerStateModel[]):void{
-		if(state[this.clientPlayerId].phaseCardUpgradeNumber!=this.upgradeNumber){
-			this.upgradeNumber = state[this.clientPlayerId].phaseCardUpgradeNumber
+		if(state[this.clientPlayerId].phaseCardUpgradeCount!=this.upgradeNumber){
+			this.upgradeNumber = state[this.clientPlayerId].phaseCardUpgradeCount
 		}
 
 		if(this.upgradeNumber===0){

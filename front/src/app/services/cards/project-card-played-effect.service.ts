@@ -8,6 +8,7 @@ import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, Gl
 import { CostMod } from "../../types/project-card.type";
 import { GlobalTagInfoService } from "../global/global-tag-info.service";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
+import { state } from "@angular/animations";
 
 
 @Injectable({
@@ -205,7 +206,9 @@ export class ProjectCardPlayedEffectService {
 			//Award Winning Reflector Material
 			case('D35'):{
 				this.addProductionToPlayer('heat',3)
-				//TO DO : ADD OBJECTIVE BONUS
+				if(this.clientPlayerState.milestoneCount>0){
+					this.addRessourceToPlayer('heat', 4)
+				}
 				break
 			}
 			//Perfluorocarbon Production
@@ -221,6 +224,17 @@ export class ProjectCardPlayedEffectService {
 			//Grain Silos
 			case('F14'):{
 				this.addRessourceToPlayer('plant',4)
+				break
+			}
+			//Innovative Technologies Award
+			case('P26'):{
+				this.addTrToPlayer(this.clientPlayerState.phaseCardUpgradeCount)
+				break
+			}
+			//Tourism
+			case('P30'):{
+				this.addProductionToPlayer('megacredit',2)
+				this.addTrToPlayer(this.clientPlayerState.milestoneCount)
 				break
 			}
 		}
@@ -410,55 +424,23 @@ export class ProjectCardPlayedEffectService {
 
 		return costMod
 	}
-	getEventTriggerByPlayedCard(playedCard: ProjectCardModel, triggerIdList: number[]): EventModel[] | undefined{
+	getEventTriggerByPlayedCard(playedCard: ProjectCardModel, triggerIdList: number[], state: PlayerStateModel): EventModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventModel[] = []
 
 		for(let triggerId of triggerIdList){
-			let newEvent = this.generateEventTriggerByPlayedCard(triggerId, playedCard.tagsId, triggerId===playedCard.id)
+			let newEvent = this.generateEventTriggerByPlayedCard(triggerId, playedCard, state)
 			if(newEvent){
 				events = events.concat(newEvent)
 			}
 		}
 		return events
 	}
-	generateEventTriggerByPlayedCard(triggerId: number, playedCardTags: number[], cardPlayedIsTheTrigger: boolean): EventModel[] | undefined {
+	generateEventTriggerByPlayedCard(triggerId: number, playedCard: ProjectCardModel, state: PlayerStateModel): EventModel[] | undefined {
 		let result: EventModel[] = []
 
 		switch(triggerId){
-			//Energy Subsidies
-			case(25):{
-				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('power'))!=true){break}
-				result.push(this.createEventDraw(1))
-				break
-			}
-			//Interplanetary Conference
-			case(37):{
-				//self triggering excluded
-				if(cardPlayedIsTheTrigger===true){break}
-				if(
-					playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true
-					&& playedCardTags.includes(this.tagInfoService.getTagIdFromType('jovian'))!=true
-				){break}
-				result.push(this.createEventDraw(1))
-				break
-			}
-			//Optimal Aerobraking
-			case(45):{
-				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('event'))!=true){break}
-				result.push(
-					this.createEventAddRessource([
-					{name: 'plant', valueStock: 2},
-					{name: 'heat', valueStock: 2}])
-				)
-				break
-			}
-			//Bacterial Aggregate
-			case(222):{
-				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true){break}
-				result.push(this.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
-				break
-			}
+
 			default:{
 				return
 			}
@@ -630,12 +612,12 @@ export class ProjectCardPlayedEffectService {
 	 * 
 	 * undefined phaseCardList will be treated as all phase cards being upgradable
 	 */
-	createEventUpgradePhaseCard(phaseCardUpgradeNumber: number, phaseCardList?: number[]): EventModel {
+	createEventUpgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventModel {
 		let newEvent = new EventModel
 		newEvent.type = 'upgradePhase'
 		newEvent.cardSelector = {
 			selectFrom: [],
-			selectionQuantity: phaseCardUpgradeNumber,
+			selectionQuantity: phaseCardUpgradeCount,
 			selectionQuantityTreshold: 'equal',
 			title: 'Select a phase card to upgrade',
 			selectedIdList: [],

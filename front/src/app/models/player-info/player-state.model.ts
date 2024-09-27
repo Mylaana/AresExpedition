@@ -26,9 +26,10 @@ export class PlayerStateModel {
     cards!: ProjectCardState
     research!: ResearchState
 	phaseCard = new PhaseCardHolderModel
-	phaseCardUpgradeNumber: number = 0
+	phaseCardUpgradeCount: number = 0
 	sellCardValueMod: number = 0
 	globalParameter = new GlobalParameterModel
+	milestoneCount: number = 3
 
 	//private readonly scalingProd = inject(ProjectCardScalingProductionsService);
 	//constructor(private scalingProductionService: ProjectCardScalingProductionsService){}

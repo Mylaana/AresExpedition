@@ -616,16 +616,16 @@ export class GameState{
 	}
 	addPhaseCardUpgradeNumber(playerId:number, upgradeNumber: number):void{
 		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.phaseCardUpgradeNumber =+ upgradeNumber
+		playerState.phaseCardUpgradeCount =+ upgradeNumber
 		this.updatePlayerState(playerId, playerState)
 	}
 	removePhaseCardUpgradeNumber(playerId:number, upgradeNumber: number = 1, removeAll: boolean = false):void{
 		let playerState = this.getPlayerStateFromId(playerId)
 
 		if(removeAll===true){
-			playerState.phaseCardUpgradeNumber = 0
+			playerState.phaseCardUpgradeCount = 0
 		} else {
-			playerState.phaseCardUpgradeNumber -= upgradeNumber
+			playerState.phaseCardUpgradeCount -= upgradeNumber
 		}
 		this.updatePlayerState(playerId, playerState)
 	}
@@ -646,7 +646,7 @@ export class GameState{
         //check for triggers and add them to queue
         let onPlayedTriggers = newState.cards.getTriggersOnPlayedCard()
         if(onPlayedTriggers.length!=0){
-            let eventsOnPlayed = this.projectCardPlayed.getEventTriggerByPlayedCard(card, onPlayedTriggers)
+            let eventsOnPlayed = this.projectCardPlayed.getEventTriggerByPlayedCard(card, onPlayedTriggers, newState)
             if(eventsOnPlayed!=undefined){
                 events = events.concat(eventsOnPlayed)
             }
