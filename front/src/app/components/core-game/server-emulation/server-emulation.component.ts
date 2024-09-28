@@ -5,7 +5,7 @@ import { PlayerReadyPannelComponent } from '../../player-info/player-ready-panne
 import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawModel } from '../../../models/core-game/draw.model';
-import { EventModel } from '../../../models/core-game/event.model';
+import { EventBaseModel } from '../../../models/core-game/event.model';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -22,7 +22,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
 export class ServerEmulationComponent implements OnInit, AfterViewInit {
   debug: boolean = true;
   currentGroupPlayerState!: {};
-  currentEventQueue: EventModel[] = [];
+  currentEventQueue: EventBaseModel[] = [];
   currentPhase: string = "planification";
   currentDrawQueue: DrawModel[] = []
   cardsDeck: number[] = [];

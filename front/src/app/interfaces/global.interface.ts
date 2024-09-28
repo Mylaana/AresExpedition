@@ -61,15 +61,14 @@ export interface ChildButton {
 }
 
 export interface CardSelector {
-    title: string;
     selectFrom: ProjectCardModel[];
     selectedIdList: number[];
     selectionQuantity: number;
-    selectionQuantityTreshold: MinMaxEqualType;
-    phaseFilter?: ProjectFilter;
+
+    selectionQuantityTreshold?: MinMaxEqualType;
+    filter?: ProjectFilter;
     cardInitialState?: CardState;
 	stateFromParent?: CardState;
-    playCardActive?: number;
 }
 
 export interface PlayableCardZone {
@@ -106,4 +105,17 @@ export interface ScanKeep {
 export interface ProjectFilter {
     type: ProjectFilterType,
     value?: AdvancedRessourceType | AdvancedRessourceType[]
+}
+
+export interface EventValue {
+    advancedRessource?: AdvancedRessourceStock,
+    baseRessource?: RessourceStock | RessourceStock[],
+    increaseParameter?: GlobalParameterValue,
+    scanKeep?: ScanKeep,
+    drawDiscard?: DrawDiscard
+}
+
+export interface DrawDiscard {
+    draw: number,
+    discard: number
 }

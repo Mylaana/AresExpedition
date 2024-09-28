@@ -5,12 +5,6 @@ export type SelectablePhase = undefined | "development" | "construction" | "acti
 export type NonSelectablePhase = "planification" | "development" | "construction" | "action" | "production" | "research"
 export type StandardState = 'default' | 'disabled'
 export type MinMaxEqualType = 'min' | 'max' | 'equal'
-export type EventType = 
-'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' 
-| 'production' | 'planification' | 'upgradePhase' | 'research' | 'drawCards' | 'discardCards' 
-| 'increaseGlobalParameter' | 'ressourceGain' | 'cardRessourceGain' | 'increaseResearchScanValue' | 'increaseResearchKeepValue'
-| 'deactivateTrigger' | 'addRessourceToSelectedCard'
-| 'scanKeepQuery' | 'scanKeepResult'
 export type ButtonNames =
 'defaultValidate' 
 | 'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'

@@ -5,9 +5,9 @@ import { PhasePlanificationComponent } from '../../phases/phase-planification/ph
 import { PhaseActionComponent } from '../../phases/phase-action/phase-action.component';
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
-import { EventType, MinMaxEqualType, NonSelectablePhase, SelectablePhase } from '../../../types/global.type';
+import { MinMaxEqualType, NonSelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, AdvancedRessourceStock, ScanKeep } from '../../../interfaces/global.interface';
+import { RessourceState, CardRessourceStock, AdvancedRessourceStock } from '../../../interfaces/global.interface';
 import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
@@ -15,11 +15,12 @@ import { PlayerReadyComponent } from '../../player-info/player-ready/player-read
 import { ChildButton } from '../../../interfaces/global.interface';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
-import { EventModel } from '../../../models/core-game/event.model';
+import { EventHandler } from '../../../models/core-game/handlers.model';
+import { EventBaseModel } from '../../../models/core-game/event.model';
+import { EventType } from '../../../types/event.type';
 import { ButtonNames } from '../../../types/global.type';
 import { PlayableCardZone } from '../../../interfaces/global.interface';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
-import { types } from 'node:util';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 
@@ -46,10 +47,10 @@ export class GameEventComponent {
 		private cardInfoService: ProjectCardInfoService
 	){}
 
-	delete: EventModel[] = []
+	delete: EventBaseModel[] = []
 
 	clientPlayerId!:number;
-	currentEvent: EventModel = new EventModel;
+	currentEvent: EventBaseModel = new EventBaseModel;
 	currentEventId: number = -1
 	eventCounter: number = -1
 
@@ -85,7 +86,10 @@ export class GameEventComponent {
 			['addRessourceToSelectedCard', 'addRessourceToSelectedCard']
 		]
 	)
+	eventHandler!: EventHandler 
+
 	ngOnInit(): void {
+		this.eventHandler = new EventHandler(this.gameStateService)
 		this.currentEvent.cardSelector = {
 				title: '',
 				selectFrom: [],
@@ -175,7 +179,7 @@ export class GameEventComponent {
 	}
 
 	applyPlanificationPhase(): void {
-		let newEvent = new EventModel
+		let newEvent = new EventBaseModel
 		newEvent.type = 'planification'
 		newEvent.cardSelector = {
 			selectFrom: [],
@@ -190,7 +194,7 @@ export class GameEventComponent {
   	}
 
 	applyDevelopmentPhase(): void {
-		let newEvent = new EventModel
+		let newEvent = new EventBaseModel
 		newEvent.type = 'selectCardToBuild'
 		newEvent.cardSelector = {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
@@ -220,7 +224,7 @@ export class GameEventComponent {
   	}
 
 	applyConstructionPhase(): void {
-		let newEvent = new EventModel
+		let newEvent = new EventBaseModel
 		newEvent.type = 'selectCardToBuild'
 		newEvent.cardSelector = {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
@@ -250,7 +254,7 @@ export class GameEventComponent {
 	}
 
 	applyActionPhase(): void {
-		let newEvent = new EventModel
+		let newEvent = new EventBaseModel
 		newEvent.type = 'selectCardToActivate'
 		newEvent.cardSelector = {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerPlayedCardsId()),
@@ -299,7 +303,7 @@ export class GameEventComponent {
 
 		this.gameStateService.updateClientPlayerState(clientState)
 
-		let newEvent = new EventModel
+		let newEvent = new EventBaseModel
 		newEvent.type = 'production'
 		newEvent.cardSelector = {
 			selectFrom: [],
@@ -331,7 +335,7 @@ export class GameEventComponent {
 	}
 
 	addHandSizeCheckEvent(): void {
-		let newEvent = new EventModel
+		let newEvent = new EventBaseModel
 		newEvent.type = 'forcedSell'
 		newEvent.cardSelector = {
 			selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
@@ -346,12 +350,12 @@ export class GameEventComponent {
 		this.gameStateService.addEventQueue(newEvent)
 	}
 	addEndOfPhaseEvent(): void {
-		let newEvent = new EventModel
+		let newEvent = new EventBaseModel
 		newEvent.type = 'endOfPhase'
 		this.gameStateService.addEventQueue(newEvent)
 	}
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
-		let newEvent: EventModel = new EventModel
+		let newEvent: EventBaseModel = new EventBaseModel
 		newEvent.type = 'upgradePhase'
 		newEvent.cardSelector = {
 			selectFrom: [],
@@ -372,14 +376,14 @@ export class GameEventComponent {
 		let callCleanAndNext: boolean = false;
 
 		for(let element of drawQueue){
-			if(element.isFinalized===true){
+			if(element.finalized===true){
 				callCleanAndNext = true
 				continue
 			}
 			if(element.cardList.length===0){continue}
 
 			//elements found
-			element.isFinalized = true
+			element.finalized = true
 			callCleanAndNext = true
 
 			//preventing bot players to draw
@@ -388,7 +392,7 @@ export class GameEventComponent {
 				this.gameStateService.addCardToPlayerHand(element.playerId, element.cardList)
 			}
 			if(element.drawRule==='research'){
-				let newEvent = new EventModel
+				let newEvent = new EventBaseModel
 				let quantity: number = 2 + this.gameStateService.getClientPlayerResearchMods().keep
 				newEvent.type = 'research'
 				newEvent.cardSelector = {
@@ -405,7 +409,7 @@ export class GameEventComponent {
 			}
 			if(element.drawRule==='scanKeep'){
 				if(!element.keepCardNumber){break}
-				let newEvent = new EventModel
+				let newEvent = new EventBaseModel
 				let quantity: number = element.keepCardNumber
 				newEvent.type = 'scanKeepResult'
 				newEvent.cardSelector = {
@@ -425,44 +429,10 @@ export class GameEventComponent {
 		this.gameStateService.cleanAndNextDrawQueue()
 	}
 
-	handleEventQueueNext(eventQueue: EventModel[]): void {
-		this.delete = eventQueue
-		if(eventQueue.length===0){
-			this.currentEvent=eventQueue[0]
-			return
-		}
-		if(eventQueue[0].isFinalized===true){
-			this.gameStateService.cleanAndNextEventQueue()
-			return
-		}
-
-		//sets event id if undefined
-		if(eventQueue[0].eventId === undefined){
-			this.eventCounter++
-			eventQueue[0].eventId = this.eventCounter
-		}
-
-		let ticket = eventQueue[0]
-
-		
-		if(this.currentEvent != ticket){
-			//saves current event status in event queue
-			for(let e of eventQueue){
-				if(e.eventId === this.currentEventId){
-					e = this.currentEvent
-					break
-				}
-			}
-		}
-
-		if (this.currentEvent === ticket){return}
-		//remove stateFromParent before switching event
-		if(this.currentEvent && this.currentEvent.cardSelector && this.currentEvent.cardSelector.stateFromParent){this.currentEvent.cardSelector.stateFromParent=undefined}
-
-		this.currentEvent = ticket
-
-		//reset currentEvent parameters
-		this.currentEvent.selectionActive = false
+	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
+		let result = this.eventHandler.switchEvent(eventQueue, this.currentEvent)
+		if(!result){return}
+		this.currentEvent = result
 
 		//bind unbound current event to their main button
 		if(!this.currentEvent.button){
@@ -470,120 +440,15 @@ export class GameEventComponent {
 		}
 
 		//reset current event button state
-		if(ticket.button){
-			let button = this.buttons[ticket.button.id]
+		if(this.currentEvent.button){
+			let button = this.buttons[this.currentEvent.button.id]
 			button.enabled = button.startEnabled
 		}
 
-		switch(ticket.type){
-			case('forcedSell'):{
-				let playerCards = this.gameStateService.getClientPlayerState().cards
-				if(playerCards.hand.length <= playerCards.maximum){
-					ticket.isFinalized = true
-					break
-				}
-				this.currentEvent.cardSelector.selectionQuantity = playerCards.hand.length - playerCards.maximum
-				this.currentEvent.cardSelector.title = `Too many cards in hand, please select at least ${ticket.cardSelector.selectionQuantity} cards to sell.`
-				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(playerCards.hand)
-
-				this.currentEvent.selectionActive = true
-				break
-			}
-			case('endOfPhase'):{
-				ticket.isFinalized = true
-				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
-				break
-			}
-			case('selectCard'):{
-				this.currentEvent.selectionActive = true
-				break
-			}
-			case('optionalSell'):{
-				this.currentEvent.selectionActive = true
-				break
-			}
-			case('upgradePhase'):{
-				this.currentEvent.selectionActive = true
-				this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, this.currentEvent.cardSelector.selectionQuantity)
-				break
-			}
-			case('selectCardToBuild'):{
-				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand())
-				break
-			}
-			case('drawCards'):{
-				ticket.isFinalized = true
-				this.currentEvent.button = this.buttons[this.getButtonIdFromName('drawCards')]
-				this.addDrawQueue(this.clientPlayerId, ticket.value)
-				break
-			}
-			case('discardCards'):{
-				this.currentEvent.selectionActive = true
-				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerState().cards.hand)			
-				break
-			}
-			case('increaseGlobalParameter'):{
-				this.currentEvent.isFinalized = true
-				let parameter: GlobalParameter = this.currentEvent.value
-				this.gameStateService.addGlobalParameterStepsEOPtoPlayerId(this.clientPlayerId, {name:parameter.name, steps:parameter.addEndOfPhase})
-				break
-			}
-			case('ressourceGain'):{
-				this.currentEvent.isFinalized = true
-				let ressources: RessourceStock[] = [].concat(this.currentEvent.value)
-				this.gameStateService.addRessourceToClientPlayer(ressources)
-				break
-			}
-			case('cardRessourceGain'):{
-				this.currentEvent.isFinalized = true
-				this.gameStateService.addRessourceToClientPlayerCard(this.currentEvent.value)
-				break
-			}
-			case('increaseResearchScanValue'):{
-				this.currentEvent.isFinalized = true
-				this.gameStateService.addClientPlayerResearchScanValue(this.currentEvent.value)
-				break
-			}
-			case('increaseResearchKeepValue'):{
-				this.currentEvent.isFinalized = true
-				this.gameStateService.addClientPlayerResearchKeepValue(this.currentEvent.value)
-				break
-			}
-			case('deactivateTrigger'):{
-				this.currentEvent.isFinalized = true
-				this.gameStateService.setClientPlayerTriggerAsInactive(this.currentEvent.value)
- 				break
-			}
-			case('addRessourceToSelectedCard'):{
-				this.currentEvent.selectionActive = true
-				this.currentEvent.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(
-					this.currentEvent.cardSelector.phaseFilter)
-				if(this.currentEvent.cardSelector.selectFrom.length===0){
-					console.log('no cards found to add:', this.currentEvent.value)
-					this.currentEvent.isFinalized = true
-				}
-				break
-			}
-			case('scanKeepQuery'):{
-				this.currentEvent.isFinalized = true
-				let scanKeep: ScanKeep = this.currentEvent.value
-				let draw = new DrawModel;
-				draw.playerId = this.clientPlayerId
-				draw.cardNumber = scanKeep.scan
-				draw.drawRule = 'scanKeep'
-				draw.keepCardNumber = scanKeep.keep
-				this.gameStateService.addDrawQueue(draw)
-				console.log('scanKeepQuery: ',draw)
-				break
-			}
-			case('scanKeepResult'):{
-				this.currentEvent.selectionActive = true
-				console.log('scanKeepResult!')
-			}
+		this.currentEvent = this.eventHandler.resolveEventEffect(this.currentEvent)
+		if(this.currentEvent.finalized===true){
+			this.gameStateService.cleanAndNextEventQueue()
 		}
-
-		if(ticket.isFinalized===false){return}
-		this.gameStateService.cleanAndNextEventQueue()
 	}
 
 	public updateSelectedCardList(cardList: number[]){
@@ -677,7 +542,7 @@ export class GameEventComponent {
 
 			case('validatePlanification'):{
 				this.updateButtonState('validatePlanification', false)
-				this.currentEvent.isFinalized = true
+				this.currentEvent.finalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}
@@ -685,7 +550,7 @@ export class GameEventComponent {
 				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
 				//reset research phase
 				this.buttons[button.id].enabled = false
-				this.currentEvent.isFinalized = true
+				this.currentEvent.finalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}
@@ -694,7 +559,7 @@ export class GameEventComponent {
 				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
 				this.updateButtonState('sellCardsEndPhase',false)
 				this.gameStateService.sellCardsFromClientHand( this.currentEvent.cardSelector.selectedIdList.length)
-				this.currentEvent.isFinalized = true
+				this.currentEvent.finalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}
@@ -739,7 +604,7 @@ export class GameEventComponent {
 			case('validateAction'):
 			case('validateProduction'):
 			{
-				this.currentEvent.isFinalized = true
+				this.currentEvent.finalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}
@@ -752,7 +617,7 @@ export class GameEventComponent {
 				break
 			}
 			case('callOptionalSellCards'):{
-				let newEvent = new EventModel
+				let newEvent = new EventBaseModel
 				newEvent.type = 'optionalSell'
 				newEvent.cardSelector = {
 					selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
@@ -767,14 +632,14 @@ export class GameEventComponent {
 				break
 			}
 			case('upgradePhase'):{
-				this.currentEvent.isFinalized = true
+				this.currentEvent.finalized = true
 				this.gameStateService.removePhaseCardUpgradeNumber(this.clientPlayerId, 0 , true)
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}
 			case('discardCards'):{
 				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
-				this.currentEvent.isFinalized = true
+				this.currentEvent.finalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}
@@ -790,7 +655,7 @@ export class GameEventComponent {
 					stock: stockList
 				}
 				this.gameStateService.addRessourceToClientPlayerCard(cardStock)
-				this.currentEvent.isFinalized = true
+				this.currentEvent.finalized = true
 				this.currentEvent.cardSelector.stateFromParent = {selected:false, selectable:false, activable:false, ignoreCost:false, playable:false, upgradable:false, upgraded:false}
 				this.gameStateService.cleanAndNextEventQueue()
 				break
@@ -798,7 +663,7 @@ export class GameEventComponent {
 			case('scanKeep'):{
 				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
 				this.buttons[button.id].enabled = false
-				this.currentEvent.isFinalized = true
+				this.currentEvent.finalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}

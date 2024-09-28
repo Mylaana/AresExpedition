@@ -6,13 +6,14 @@ import { AdvancedRessourceStock, CardRessourceStock, GlobalParameterValue, Playe
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
-import { EventModel } from "../../models/core-game/event.model";
+import { EventBaseModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
 import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
 import { deepCopy } from "../../functions/global.functions";
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { trigger } from "@angular/animations";
+import { ProjectCardInfoService } from "../cards/project-card-info.service";
 
 interface SelectedPhase {
     "development": boolean,
@@ -51,7 +52,7 @@ export class GameState{
     groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
     phase = new BehaviorSubject<NonSelectablePhase>("planification")
     drawQueue = new BehaviorSubject<DrawModel[]>([])
-    eventQueue = new BehaviorSubject<EventModel[]>([])
+    eventQueue = new BehaviorSubject<EventBaseModel[]>([])
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
@@ -81,6 +82,7 @@ export class GameState{
     }
 
 	constructor(
+        private projectCardService: ProjectCardInfoService,
 		private phaseCardService: PhaseCardInfoService,
 		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
 	){}
@@ -225,7 +227,7 @@ export class GameState{
                 "valueMod": 0,
             },
         ];
-        newPlayer.cards = new ProjectCardState
+        newPlayer.cards = new ProjectCardState(this.projectCardService)
         newPlayer.cards.maximum = handSizeMaximum
 
         newPlayer.research = {
@@ -492,6 +494,10 @@ export class GameState{
     getClientPlayerStateHand(): number[] {
         return this.getPlayerStateHand(this.clientPlayerId)
     }
+    
+    getClientPlayerStateHandProject(): ProjectCardModel[] {
+        return this.getClientPlayerState().cards.getHandProject()
+    }
 
     getPlayerStateHand(playerId: number): number[] {
         return this.getPlayerStateFromId(playerId).cards.hand
@@ -569,9 +575,9 @@ export class GameState{
         this.drawQueue.next(newDrawQueue)
     }
 
-    addEventQueue(events: EventModel | EventModel[], addOnTop?: boolean): void {
-        let newQueue: EventModel[] = []
-        let addEvents: EventModel[] = []
+    addEventQueue(events: EventBaseModel | EventBaseModel[], addOnTop?: boolean): void {
+        let newQueue: EventBaseModel[] = []
+        let addEvents: EventBaseModel[] = []
 
         if(!Array.isArray(events)){
             addEvents.push(events)
@@ -593,10 +599,10 @@ export class GameState{
      * emits a next signal for eventQueue.next()
      */
     cleanAndNextEventQueue(): void{
-        let newEventQueue: EventModel[] = [];
+        let newEventQueue: EventBaseModel[] = [];
         //clean draw queue
         for(let ticket of this.eventQueue.getValue()){
-            if(ticket.isFinalized!=true){
+            if(ticket.finalized!=true){
                 newEventQueue.push(ticket)
             }
         }
@@ -635,7 +641,7 @@ export class GameState{
 		this.updateClientPlayerState(playerState)
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
-        let events: EventModel[] = []
+        let events: EventBaseModel[] = []
         
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)

@@ -23,7 +23,6 @@
     </div>
 	<p>eventQueue :</p>
     <div *ngFor="let queue of currentEventQueue">
-        <p>{{queue.type}} {{queue.isFinalized}}</p>
-		<p *ngIf="queue.cardSelector">initial state selected: {{queue.cardSelector.cardInitialState && queue.cardSelector.cardInitialState && queue.cardSelector.cardInitialState.selected!=undefined? queue.cardSelector.cardInitialState.selected:''}} button:{{queue.button?.id}}</p>
+        <p>{{queue.type}} {{queue.finalized}}</p>
     </div>
 </div>
