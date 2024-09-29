@@ -582,7 +582,7 @@ export class ProjectCardPlayedEffectService {
 		return result
 	}
 	createEventDraw(drawNumber: number): EventBaseModel {
-		return EventDesigner.createDrawEvent('drawQuery')
+		return EventDesigner.createDeckQueryEvent('drawQuery')
 	}
 	createEventDiscard(discardNumber: number): EventCardSelector {
 		return EventDesigner.createCardSelector("discardCards", {
@@ -623,6 +623,6 @@ export class ProjectCardPlayedEffectService {
 		return EventDesigner.createTargetCard('deactivateTrigger', triggerId)
 	}
 	createEventScanKeep(scanKeep: ScanKeep): EventBaseModel {
-		return EventDesigner.createDrawEvent('scanKeepQuery', {value:{scanKeep:scanKeep}})
+		return EventDesigner.createDeckQueryEvent('scanKeepQuery', {value:{scanKeep:scanKeep}})
 	}
 }
