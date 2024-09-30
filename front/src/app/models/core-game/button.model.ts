@@ -2,7 +2,6 @@ import { getValueVsTreshold } from "../../functions/global.functions"
 import { MinMaxEqualTreshold } from "../../interfaces/global.interface"
 import { EventUnionSubTypes } from "../../types/event.type"
 import { ButtonNames, EventSecondaryButtonNames } from "../../types/global.type"
-import { MinMaxEqualType } from "../../types/global.type"
 
 export class ChildButton {
     id!: number
@@ -28,15 +27,16 @@ export abstract class EventButtonBase extends ButtonBase {
     updateEnabled(enabled: boolean){
         this.enabled = enabled
     }
+}
 
-}
-export class EventMainButton extends EventButtonBase {
-}
+export class EventMainButton extends EventButtonBase {}
+
 export class EventMainButtonSelector extends EventMainButton {
     updateEnabledTreshold(args: MinMaxEqualTreshold): void {
         this.enabled = getValueVsTreshold(args)
     }
 }
+
 export class EventSecondaryButton extends EventButtonBase {
     imageUrl?: string
     value?: any

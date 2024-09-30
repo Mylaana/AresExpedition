@@ -3,9 +3,23 @@ import { EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessourc
 import { EventCardSelectorPlayZoneSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventTargetCardSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, EventValue } from "../../interfaces/global.interface";
 import { ButtonDesigner } from "./button-designer.service";
+import { ProjectCardModel } from "../../models/cards/project-card.model";
+import { MinMaxEqualType } from "../../types/global.type";
+import { ProjectFilter } from "../../interfaces/global.interface";
+import { CardState } from "../../models/cards/card-cost.model";
+
+interface CardSelectorOptions {
+    selectFrom?: ProjectCardModel[];
+    selectedIdList?: number[];
+    selectionQuantity?: number;
+    selectionQuantityTreshold?: MinMaxEqualType;
+    filter?: ProjectFilter;
+    cardInitialState?: CardState;
+	stateFromParent?: CardState;
+}
 
 interface CreateEventOptions {
-    cardSelector?: CardSelector
+    cardSelector?: CardSelectorOptions
 
     title?: string
     value?: EventValue
@@ -20,20 +34,23 @@ interface CreateEventOptions {
 export class EventDesigner{
     private static generateCardSelector(args?: CreateEventOptions): CardSelector {
         let selector: CardSelector
-        if(args?.cardSelector){
-            selector = args.cardSelector
-        } else {
-            selector = {
-                selectFrom: args?.cardSelector?.selectFrom? args.cardSelector.selectFrom:[],
-                selectedIdList:  args?.cardSelector?.selectedIdList? args.cardSelector.selectedIdList:[],
-                selectionQuantity: args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0
-            }
+
+        selector ={
+            selectFrom: args?.cardSelector?.selectFrom? args.cardSelector.selectFrom:[],
+            selectedIdList:  args?.cardSelector?.selectedIdList? args.cardSelector.selectedIdList:[],
+            selectionQuantity: args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0,
+            selectionQuantityTreshold: args?.cardSelector?.selectionQuantityTreshold? args.cardSelector.selectionQuantityTreshold:'equal',
+            cardInitialState: args?.cardSelector?.cardInitialState? args.cardSelector.cardInitialState:undefined,
+            filter: args?.cardSelector?.filter? args.cardSelector.filter:undefined,
+            stateFromParent: args?.cardSelector?.filter? args.cardSelector.stateFromParent:undefined
         }
+
         return selector
     }
     public static createCardSelector(subType:EventCardSelectorSubType, args?: CreateEventOptions): EventCardSelector {
         let event = new EventCardSelector
         event.cardSelector = this.generateCardSelector(args)
+        event.subType = subType
 
         switch(subType){
             case('discardCards'):{
@@ -61,7 +78,7 @@ export class EventDesigner{
                 break
             }
         }
-        event.button = ButtonDesigner.createEventMainButton(event.subType)
+        event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
         return event
     }
     public static createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: CreateEventOptions): EventCardSelectorRessource {
@@ -73,7 +90,7 @@ export class EventDesigner{
         event.title = args?.title? args.title: `Select a card to add ${event.value.advancedRessource?.valueStock} ${event.value.advancedRessource?.name}(s).`
         event.cardSelector.filter =  {type:'stockable', value:event.value.advancedRessource?.name}
         event.cardSelector.cardInitialState
-        event.button = ButtonDesigner.createEventMainButton(event.subType)
+        event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 
         return event
     }
@@ -83,7 +100,7 @@ export class EventDesigner{
         event.cardSelector.cardInitialState = {selectable: false, playable: true}
         event.subType = subType
         event.playCardZone = []
-        event.button = ButtonDesigner.createEventMainButton(event.subType)
+        event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
         
 
         switch(subType){
@@ -112,6 +129,7 @@ export class EventDesigner{
         let event = new EventTargetCard
 
         event.targetCardId = targetCardId
+        event.subType = subType
 
         switch(subType){
             case('addRessourceToCardId'):{
@@ -125,6 +143,7 @@ export class EventDesigner{
     public static createGeneric(subType:EventGenericSubType, args?: CreateEventOptions): EventGeneric {
         let event = new EventGeneric
 
+        event.subType = subType
         switch(subType){
             case('increaseGlobalParameter'):{
                 event.value.increaseParameter = args?.value?.increaseParameter
@@ -145,7 +164,7 @@ export class EventDesigner{
                 break
             }
             case('endOfPhase'):
-            case('planification'):
+            case('planificationPhase'):
             case('productionPhase'):
             {break}
         }
@@ -155,6 +174,7 @@ export class EventDesigner{
     public static createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptions ) : EventDeckQuery {
         let event = new EventDeckQuery
         
+        event.subType = subType
         switch(subType){
             case('scanKeepQuery'):{
                 event.value = {scanKeep:args?.value?.scanKeep}

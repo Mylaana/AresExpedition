@@ -358,8 +358,6 @@ export class GameState{
         let nextPhase: NonSelectablePhase;
         let startCounting: number = Math.max(this.phaseIndex + 1, 1) //start looping at phase index +1 or 1
 
-
-
         for(let i=startCounting; i<=phaseCount; i++){
             if(this.accessSelectedPhase(this.accessPhaseOrder(i))===true){
                 this.phaseIndex = i

@@ -22,7 +22,7 @@
         <p>{{cardsDeck.length}}</p>
     </div>
 	<p>eventQueue :</p>
-    <div *ngFor="let queue of currentEventQueue">
-        <p>{{queue.type}} {{queue.finalized}}</p>
+    <div *ngFor="let event of currentEventQueue">
+        <p>type:{{event.type}} subtype:{{event.subType}} finalized:{{event.finalized}}</p>
     </div>
 </div>

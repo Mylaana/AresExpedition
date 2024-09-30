@@ -585,16 +585,10 @@ export class ProjectCardPlayedEffectService {
 		return EventDesigner.createDeckQueryEvent('drawQuery')
 	}
 	createEventDiscard(discardNumber: number): EventCardSelector {
-		return EventDesigner.createCardSelector("discardCards", {
-			cardSelector: {
-				selectionQuantity: discardNumber,
-				selectedIdList: [],
-				selectFrom: []
-			}
-		})
+		return EventDesigner.createCardSelector("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
 	}
 	createEventUpgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
-		return EventDesigner.createGeneric('upgradePhase', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
+		return EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
 	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, steps:number): EventBaseModel {
 		this.addTrToPlayer(steps)
@@ -610,14 +604,7 @@ export class ProjectCardPlayedEffectService {
 		return EventDesigner.createGeneric('increaseResearchScanKeep', {value:{scanKeep:scanKeep}})
 	}
 	createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock, cardSelectionQuantity:number=1): EventBaseModel {
-		return EventDesigner.createCardSelectorRessource(
-			ressource, 
-			{cardSelector:{
-				selectionQuantity:cardSelectionQuantity,
-				selectedIdList:[],
-				selectFrom: []
-			}}
-		)
+		return EventDesigner.createCardSelectorRessource(ressource, {cardSelector:{selectionQuantity:cardSelectionQuantity}})
 	}
 	createEventDeactivateTrigger(triggerId: number): EventBaseModel {
 		return EventDesigner.createTargetCard('deactivateTrigger', triggerId)

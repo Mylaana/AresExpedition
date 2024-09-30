@@ -123,6 +123,7 @@ $alternative-width: 200px;
     display: flex;
 }
 .wrapper-commands {
+    border: red 3px solid;
     z-index: 10;
     position: sticky;
     left: 0;

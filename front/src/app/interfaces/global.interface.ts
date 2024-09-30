@@ -2,7 +2,6 @@ import { AdvancedRessourceType, GlobalParameterColor, SelectablePhase, TagType }
 import { PhaseCardType } from "../types/phase-card.type";
 import { ProjectCardModel } from "../models/cards/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
-import { ChildButton, EventSecondaryButton } from "../models/core-game/button.model";
 import { GlobalParameterName } from "../types/global.type";
 import { CardState } from "../models/cards/card-cost.model";
 import { RessourceType } from "../types/global.type";
@@ -53,8 +52,8 @@ export interface CardSelector {
     selectFrom: ProjectCardModel[];
     selectedIdList: number[];
     selectionQuantity: number;
+    selectionQuantityTreshold: MinMaxEqualType;
 
-    selectionQuantityTreshold?: MinMaxEqualType;
     filter?: ProjectFilter;
     cardInitialState?: CardState;
 	stateFromParent?: CardState;

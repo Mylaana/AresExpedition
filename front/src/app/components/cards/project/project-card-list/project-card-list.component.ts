@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { ProjectFilter } from '../../../../interfaces/global.interface';
-import { AdvancedRessourceType } from '../../../../types/global.type';
+import { EventBaseModel, EventCardSelector } from '../../../../models/core-game/event.model';
 
 @Component({
   selector: 'app-project-card-list',
@@ -16,6 +16,7 @@ import { AdvancedRessourceType } from '../../../../types/global.type';
   styleUrl: './project-card-list.component.scss'
 })
 export class ProjectCardListComponent implements OnChanges{
+	@Input() event?:EventBaseModel;
 	@Input() cardsPhaseFilter?: ProjectFilter;
 	@Input() cardList!:ProjectCardModel[];
 	@Input() cardInitialState?: CardState;
@@ -51,7 +52,6 @@ export class ProjectCardListComponent implements OnChanges{
 
 		return result
 	}
-	
 
 	public cardStateChange(cardState: {cardId: number, state:CardState}): void {
 		if(cardState.state.selected===true){
