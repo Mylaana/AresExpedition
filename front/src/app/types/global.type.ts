@@ -14,8 +14,8 @@ export type ButtonNames =
 | 'drawCards' | 'discardCards' | 'scanKeep'
 | 'addRessourceToSelectedCard'
 
-export type EventSecondaryButtonNames = | 'selectFirstCard' | 'cancelFirstCard' | 'buildFirstCard'
-| 'selectSecondCard' | 'cancelSecondCard' | 'buildSecondCard'
+export type EventSecondaryButtonNames = 'sellOptionalCard'
+export type EventPlayZoneButtonNames =  'selectCard' | 'cancelCard' | 'buildCard' | 'alternative'
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'

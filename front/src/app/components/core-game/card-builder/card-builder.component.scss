@@ -1,0 +1,52 @@
+$card-height: 310px;
+$card-width: calc($card-height * 63 / 88);
+$alternative-width: 200px;
+.wrapper-play-card{
+    display: flex;
+    justify-content: space-between;
+	width: calc($card-width * 2 + $alternative-width + 15%);
+	padding: 20px;
+}
+.play-card-zone{
+    width: $card-width;
+    height: $card-height;
+}
+.play-card-one, .play-card-two{
+	padding: 10px;
+}
+.play-card-two{
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: calc($card-width + $alternative-width + 10% );
+}
+.wrapper-alternative{
+    display: flex;
+	justify-content: center;
+	align-items: center;
+    width: $alternative-width;
+}
+.wrapper-select-button, .wrapper-cancel-button, .wrapper-build-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+    padding: 0px;
+    margin: 0;
+    height: 70px;
+}
+.button-select-card, .button-cancel-card, .button-build-card{
+	z-index: 1;
+}
+.play-card-zone{
+    position: relative;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.play-card-zone-list{
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

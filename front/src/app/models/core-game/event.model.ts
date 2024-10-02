@@ -1,7 +1,7 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardSelectorPlayZoneSubType, EventGenericSubType, EventDeckQuerySubType } from "../../types/event.type";
 import { CardSelector, EventValue } from "../../interfaces/global.interface";
-import { EventMainButton, EventMainButtonSelector, EventSecondaryButton } from "./button.model";
-import { ButtonNames, EventSecondaryButtonNames } from "../../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventPlayZoneButton, EventSecondaryButton } from "./button.model";
+import { ButtonNames, EventPlayZoneButtonNames, EventSecondaryButtonNames } from "../../types/global.type";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { CardState } from "../cards/card-cost.model";
 
@@ -19,9 +19,8 @@ export abstract class EventBaseModel {
     readonly value!: any
     readonly title?: string
 
-    hasSelector(): boolean {
-        return false
-    }
+    hasSelector(): boolean {return false}
+    hasCardBuilder(): boolean {return false}
 }
 
 export abstract class EventBaseCardSelector extends EventBaseModel {
@@ -32,12 +31,43 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
         selectionQuantity: 0,
         selectionQuantityTreshold: 'equal'
     }
-    selectionActive: boolean = false
+    private selectionActive: boolean = false
+
     updateCardSelection(selectionId:number[]): void {
         this.cardSelector.selectedIdList = selectionId
     }
     override hasSelector(): boolean {
         return true
+    }
+    /**
+     * 
+     * @param stateFromParent 
+     * default state from parent {selectable:true}
+     */
+    activateSelection(stateFromParent?:CardState): void {
+        this.selectionActive = true
+        if(this.cardSelector.stateFromParent===undefined){
+            this.cardSelector.stateFromParent = {}
+        }
+        if(!stateFromParent){
+            this.cardSelector.stateFromParent.selectable = true
+            this.cardSelector.stateFromParent.playable = true
+        }
+    }
+        /**
+     * 
+     * @param stateFromParent 
+     * default state from parent {selectable:true}
+     */
+    deactivateSelection(stateFromParent?:CardState): void {
+        this.selectionActive = false
+        if(this.cardSelector.stateFromParent===undefined){
+            this.cardSelector.stateFromParent = {}
+        }
+        if(!stateFromParent){
+            this.cardSelector.stateFromParent.selectable = false
+            this.cardSelector.stateFromParent.playable = false
+        }
     }
 }
 
@@ -65,12 +95,12 @@ export class EventCardSelectorRessource extends EventBaseCardSelector {
 export class PlayableCardZone {
 	cardList: ProjectCardModel[] = []
 	cardInitialState?: CardState
-    buttons: EventSecondaryButton[] = []
+    buttons: EventPlayZoneButton[] = []
 
-    addButtons(buttons: EventSecondaryButton[]): void {
+    addButtons(buttons: EventPlayZoneButton[]): void {
         this.buttons = buttons
     }
-    getButtonFromName(name: EventSecondaryButtonNames): EventSecondaryButton | undefined {
+    getButtonFromName(name: EventPlayZoneButtonNames): EventPlayZoneButton | undefined {
         for(let button of this.buttons){
             if(button.name===name){
                 return button
@@ -78,55 +108,47 @@ export class PlayableCardZone {
         }
         return
     }
-    updateButtonEnabled(name: EventSecondaryButtonNames, enabled: boolean): void {
+    updateButtonEnabled(name: EventPlayZoneButtonNames, enabled: boolean): void {
         let button = this.getButtonFromName(name)
         if(!button){return}
         button.enabled = enabled
     }
-    updateButtonGroupState(buttonName: EventSecondaryButtonNames): void {
+    updateButtonGroupState(buttonName: EventPlayZoneButtonNames): void {
         switch(buttonName){
-            case('selectFirstCard'):{
-                this.updateButtonEnabled('selectFirstCard', false)
-                this.updateButtonEnabled('buildFirstCard', true)
-                this.updateButtonEnabled('cancelFirstCard', true)
+            case('selectCard'):{
+                this.updateButtonEnabled('selectCard', false)
+                this.updateButtonEnabled('buildCard', true)
+                this.updateButtonEnabled('cancelCard', true)
+                this.updateButtonEnabled('alternative', false)
                 break
             }
-            case('cancelFirstCard'):{
-                this.updateButtonEnabled('selectFirstCard', true)
-                this.updateButtonEnabled('buildFirstCard', false)
-                this.updateButtonEnabled('cancelFirstCard', false)
+            case('cancelCard'):{
+                this.updateButtonEnabled('selectCard', true)
+                this.updateButtonEnabled('buildCard', false)
+                this.updateButtonEnabled('cancelCard', false)
+                this.updateButtonEnabled('alternative', true)
                 break
             }
-            case('buildFirstCard'):{
-                this.updateButtonEnabled('selectFirstCard', false)
-                this.updateButtonEnabled('buildFirstCard', false)
-                this.updateButtonEnabled('cancelFirstCard', false)
+            case('buildCard'):{
+                this.updateButtonEnabled('selectCard', false)
+                this.updateButtonEnabled('buildCard', false)
+                this.updateButtonEnabled('cancelCard', false)
+                this.updateButtonEnabled('alternative', false)
                 break
             }
-            case('selectSecondCard'):{
-                this.updateButtonEnabled('selectSecondCard', false)
-                this.updateButtonEnabled('buildSecondCard', true)
-                this.updateButtonEnabled('cancelSecondCard', true)
-                break
-            }
-            case('cancelSecondCard'):{
-                this.updateButtonEnabled('selectSecondCard', true)
-                this.updateButtonEnabled('buildSecondCard', false)
-                this.updateButtonEnabled('cancelSecondCard', false)
-                break
-            }
-            case('buildSecondCard'):{
-                this.updateButtonEnabled('selectFirstCard', false)
-                this.updateButtonEnabled('buildSecondCard', false)
-                this.updateButtonEnabled('cancelSecondCard', false)
+            case('alternative'):{
+                this.updateButtonEnabled('selectCard', false)
+                this.updateButtonEnabled('buildCard', false)
+                this.updateButtonEnabled('cancelCard', false)
+                this.updateButtonEnabled('alternative', false)
                 break
             }
         }
     }
-    secondaryButtonClicked(buttonName:EventSecondaryButtonNames){
+    secondaryButtonClicked(buttonName:EventPlayZoneButtonNames){
         console.log('play card zone button clicked: ', buttonName)
         switch(buttonName){
-            case('selectFirstCard'):case('selectSecondCard'):{
+            case('selectCard'):{
 
                 break
             }
@@ -228,7 +250,8 @@ export class EventCardSelectorPlayZone extends EventBaseCardSelector {
     override readonly type: EventType = 'cardSelectorPlayZone'
     override subType!: EventCardSelectorPlayZoneSubType;
     playCardZone: PlayableCardZone [] = []
-    playCardActive?: number
+    playCardZoneIdHavingFocus?: number
+    override hasCardBuilder(): boolean {return true}
 }
 
 export class EventTargetCard extends EventBaseModel {

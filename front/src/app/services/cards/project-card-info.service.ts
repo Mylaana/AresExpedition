@@ -43,10 +43,10 @@ export class ProjectCardInfoService {
         return resultProjectCardList;
     }
 
-    getCardNumber(){
+    private getCardNumber(){
         return this.projectCardInfo.length
     }
-    loadJson(): ProjectCardModel[] {
+    private loadJson(): ProjectCardModel[] {
 
         this.projectCardInfo = []
         let cardList: ProjectCardModel[] = []
@@ -81,14 +81,14 @@ export class ProjectCardInfoService {
         }
         return cardList
     }
-    convertTagList(inputList: any[]): number[] {
+    private convertTagList(inputList: any[]): number[] {
         let tags = []
         for(let tag of inputList){
             tags.push(Number(tag))
         }
         return tags
     }
-    convertStockable(inputList: string[]): AdvancedRessourceType[] {
+    private convertStockable(inputList: string[]): AdvancedRessourceType[] {
         let result: AdvancedRessourceType[] = []
         for(let input of inputList){
             let ressource = stockableMap.get(input)
@@ -97,7 +97,7 @@ export class ProjectCardInfoService {
         }
         return result
     }
-    convertSummaryType(input: string): SummaryType {
+    private convertSummaryType(input: string): SummaryType {
         switch(input){
             case('action'):{
                 return 'action'
@@ -116,7 +116,7 @@ export class ProjectCardInfoService {
             }
         }
     }
-    convertCardType(input: string): CardType {
+    private convertCardType(input: string): CardType {
         switch(input){
             case('redProject'):{
                 return 'redProject'
@@ -132,7 +132,7 @@ export class ProjectCardInfoService {
             }
         }
     }
-    convertPrerequisiteTresholdType(input: string): PrerequisiteTresholdType {
+    private convertPrerequisiteTresholdType(input: string): PrerequisiteTresholdType {
         switch(input){
             case('min'):{
                 return 'min'
@@ -145,7 +145,7 @@ export class ProjectCardInfoService {
             }
         }
     }
-    convertPrerequisiteType(input: string): PrerequisiteType {
+    private convertPrerequisiteType(input: string): PrerequisiteType {
         switch(input){
             case('tag'):{
                 return 'tag'

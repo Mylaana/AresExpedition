@@ -1,17 +1,17 @@
 <div class="wrapper-game-event" *ngIf="currentEvent">
     <div class="wrapper-commands ares-background ares-border">
         <div class="wrapper-validate-button">
-            <app-event-main-button *ngIf="currentEvent.button!=undefined" [button]="currentEvent.button" (eventMainButtonClicked)="eventMainButtonClicked()"></app-event-main-button>
+            <app-event-main-button *ngIf="currentEvent.button" [button]="currentEvent.button" (eventMainButtonClicked)="eventMainButtonClicked()"></app-event-main-button>
         </div>
         <div class="wrapper-sell-button">
-            <app-event-secondary-button [button]="sellCardsButton"></app-event-secondary-button>
+            <app-event-secondary-button *ngIf="sellCardsButton" [button]="sellCardsButton"></app-event-secondary-button>
         </div>
     </div>
     <div class="wrapper-event-main">
         <div class="wrapper-event-top">
             <h2 *ngIf="currentEvent!=undefined && currentEvent.title!=undefined">{{currentEvent.title}}</h2>
 			<div class="wrapper-event-top-main">
-				<!--play card zones here-->
+                <app-card-builder *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent"></app-card-builder>
 			</div>
             <app-phase-planification *ngIf="currentPhase==='planification' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
             <app-phase-production *ngIf="currentPhase==='production' && currentEvent.subType==='productionPhase'"></app-phase-production>

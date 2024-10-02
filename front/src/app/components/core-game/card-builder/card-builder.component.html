@@ -1,0 +1,42 @@
+
+<div class="wrapper-play-card">
+    <div class="play-card-one ares-background ares-border">
+        <div class="play-card-zone ares-card">
+            <app-project-card-list class="play-card-zone-list" [event]="currentEvent" [eventId]="event.id" [playZoneId]="0" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+        </div>
+        <div class="wrapper-buttons">
+            <div class="wrapper-select-button">
+                <app-event-play-zone-button [button]="currentEvent.playCardZone[0].buttons[0]" (childButtonClicked)="childButtonClicked($event)"></app-event-play-zone-button>
+            </div>
+            <div class="wrapper-build-button">
+                <app-event-play-zone-button [button]="currentEvent.playCardZone[0].buttons[1]" (childButtonClicked)="childButtonClicked($event)"></app-event-play-zone-button>
+            </div>
+            <div class="wrapper-cancel-button">
+                <app-event-play-zone-button [button]="currentEvent.playCardZone[0].buttons[2]" (childButtonClicked)="childButtonClicked($event)"></app-event-play-zone-button>
+            </div>
+        </div>
+    </div>
+    <div class="play-card-two ares-background ares-border">
+        <div>
+            <div class="play-card-zone ares-card">
+                <app-project-card-list class="play-card-zone-list" [event]="currentEvent" [eventId]="event.id" [playZoneId]="1" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+            </div>
+            <div class="wrapper-buttons">
+                <div class="wrapper-select-button">
+                    <app-event-play-zone-button [button]="currentEvent.playCardZone[1].buttons[0]" (childButtonClicked)="childButtonClicked($event)"></app-event-play-zone-button>
+                </div>
+                <div class="wrapper-select-button">
+                    <app-event-play-zone-button [button]="currentEvent.playCardZone[1].buttons[1]" (childButtonClicked)="childButtonClicked($event)"></app-event-play-zone-button>
+                </div>
+                <div class="wrapper-select-button">
+                    <app-event-play-zone-button [button]="currentEvent.playCardZone[1].buttons[2]" (childButtonClicked)="childButtonClicked($event)"></app-event-play-zone-button>
+                </div>
+           
+            </div>
+        </div>
+        <h1>Or</h1>
+        <div class="wrapper-alternative">
+            <app-event-play-zone-button [button]="currentEvent.playCardZone[1].buttons[3]" (childButtonClicked)="childButtonClicked($event)"></app-event-play-zone-button>
+        </div>
+    </div>
+</div>

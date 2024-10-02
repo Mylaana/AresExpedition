@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventSecondaryButton } from "../../models/core-game/button.model";
+import { EventMainButton, EventMainButtonSelector, EventPlayZoneButton, EventSecondaryButton } from "../../models/core-game/button.model";
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,8 @@ export class ButtonDesigner{
 
             default:{button.caption='default validation';button.startEnabled=true;break}
         }
-
+        
+        button.enabled = button.startEnabled
         return button
     }
     public static createEventSelectorMainButton(eventSubType: EventUnionSubTypes): EventMainButtonSelector {
@@ -37,27 +38,35 @@ export class ButtonDesigner{
             default:{button.caption='default validation';button.startEnabled=true;break}
         }
 
+        button.enabled = button.startEnabled
         return button
     }
-    public static createEventSecondaryButton(eventSubType:EventUnionSubTypes, args: {zoneId?: number}): EventSecondaryButton[] {
-        let buttons: EventSecondaryButton[] = []
+    public static createEventSecondaryButton(eventSubType:EventUnionSubTypes, args: {zoneId?: number}): EventPlayZoneButton[] {
+        let buttons: EventPlayZoneButton[] = []
         switch(eventSubType){
             case('developmentPhase'):case('constructionPhase'):{
-                for(let i=0; i<3; i++){
-                    let button = new EventSecondaryButton
-                    if(args?.zoneId===0){
+                if(args===undefined || args.zoneId===undefined){break}
+                let buttonCount: number
+                if(args.zoneId===0){buttonCount = 3}else{buttonCount = 4}
+
+                for(let i=0; i<buttonCount; i++){
+                    let button = new EventPlayZoneButton
+                    if(args.zoneId===0){
                         switch(i){
-                            case(0):{button.name='selectFirstCard';button.caption='Select a card';button.startEnabled=true;break}
-                            case(1):{button.name='cancelFirstCard';button.caption='Cancel <X>';break}
-                            case(2):{button.name='buildFirstCard';button.caption='Build';break}
+                            case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
+                            case(1):{button.name='cancelCard';button.caption='Cancel <X>';break}
+                            case(2):{button.name='buildCard';button.caption='Build';break}
                         }
                     } else {
                         switch(i){
-                            case(0):{button.name='selectSecondCard';button.caption='Select a card';button.startEnabled=true;break}
-                            case(1):{button.name='cancelSecondCard';button.caption='Cancel <X>';break}
-                            case(2):{button.name='buildSecondCard';button.caption='Build';break}
+                            case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
+                            case(1):{button.name='cancelCard';button.caption='Cancel <X>';break}
+                            case(2):{button.name='buildCard';button.caption='Build';break}
+                            case(3):{button.name='alternative';button.caption='Alternative';break}
                         }
                     }
+                    button.parentPlayZoneId=args.zoneId
+                    button.enabled = button.startEnabled
                     buttons.push(button)
                 }
             }

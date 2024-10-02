@@ -21,6 +21,7 @@ import { EventDesigner } from '../../../services/core-game/event-designer.servic
 import { EventButtonComponent } from '../../tools/event-button/event-button.component';
 import { EventMainButtonComponent } from "../../tools/event-main-button/event-main-button.component";
 import { EventSecondaryButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
+import { CardBuilderComponent } from '../card-builder/card-builder.component';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 
@@ -39,7 +40,8 @@ import { EventSecondaryButtonComponent } from '../../tools/event-secondary-butto
     PhaseCardUpgradeSelectorComponent,
     EventButtonComponent,
     EventMainButtonComponent,
-	EventSecondaryButtonComponent
+	EventSecondaryButtonComponent,
+	CardBuilderComponent
 ],
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.scss',
@@ -90,48 +92,18 @@ export class GameEventComponent {
 
 	updatePhase(phase:NonSelectablePhase):void{
 		this.currentPhase = phase
+		let events: EventBaseModel[] = []
 		switch(phase){
-			case('planification'):{this.applyPlanificationPhase();break}
-			case('development'):{this.applyDevelopmentPhase();break}
-			case('construction'):{this.applyConstructionPhase();break}
-			case('action'):{this.applyActionPhase();break}
+			case('planification'):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
+			case('development'):{events.push(EventDesigner.createCardSelectorPlayZone('developmentPhase'));break}
+			case('construction'):{events.push(EventDesigner.createCardSelectorPlayZone('constructionPhase'));break}
+			case('action'):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
 			case('production'):{this.applyProductionPhase(this.gameStateService.getClientPlayerState());break}
 			case('research'):{this.applyResearchPhase(this.gameStateService.getClientPlayerState());break}
 		}
-		//this.addHandSizeCheckEvent()
-		//this.addEndOfPhaseEvent()
-	}
-
-	applyPlanificationPhase(): void {
-		let newEvent = EventDesigner.createGeneric('planificationPhase')
-		this.gameStateService.addEventQueue(newEvent)
-  	}
-
-	applyDevelopmentPhase(): void {
-		let newEvent = EventDesigner.createCardSelectorPlayZone('developmentPhase')
-		this.gameStateService.addEventQueue(newEvent)
-  	}
-
-	applyConstructionPhase(): void {
-		let newEvent = EventDesigner.createCardSelectorPlayZone('constructionPhase')
-		this.gameStateService.addEventQueue(newEvent)
-	}
-
-	applyActionPhase(): void {
-		let newEvent = EventDesigner.createCardSelector(
-			'actionPhase',
-			{
-				cardSelector: {
-					selectFrom: [],
-					selectedIdList: [],
-					selectionQuantity: 0,
-					filter:{type: 'action'},
-					cardInitialState:{activable: true, selectable: false, playable: false, ignoreCost:true}
-				},
-				title:'Activate cards :'
-			}
-		)
-		this.gameStateService.addEventQueue(newEvent)
+		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))
+		events.push(EventDesigner.createGeneric('endOfPhase'))
+		this.gameStateService.addEventQueue(events)
 	}
 
 	/**
@@ -185,14 +157,6 @@ export class GameEventComponent {
 		this.gameStateService.addDrawQueue(draw)
 	}
 
-	addHandSizeCheckEvent(): void {
-		let newEvent = EventDesigner.createCardSelector('selectCardForcedSell')
-		this.gameStateService.addEventQueue(newEvent)
-	}
-	addEndOfPhaseEvent(): void {
-		let newEvent = EventDesigner.createGeneric('endOfPhase')
-		this.gameStateService.addEventQueue(newEvent)
-	}
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
 		let newEvent = EventDesigner.createGeneric(
 			'upgradePhaseCards',
@@ -259,26 +223,7 @@ export class GameEventComponent {
 	}
 
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
-		if(eventQueue.length===0){return}
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
-
-		/*
-		//bind unbound current event to their main button
-		if(!this.currentEvent.button){
-			//this.currentEvent.button = this.buttonHandler.getEventMainButton(this.currentEvent.type)
-		}
-
-		//reset current event button state
-		if(this.currentEvent.button){
-			//let button = this.buttons[this.currentEvent.button.id]
-			//button.enabled = button.startEnabled
-		}
-
-		this.currentEvent = this.eventHandler.resolveEventEffect(this.currentEvent)
-		if(this.currentEvent.finalized===true){
-			this.gameStateService.cleanAndNextEventQueue()
-		}
-			*/
 	}
 
 	public updateSelectedCardList(cardList: number[]){
@@ -291,7 +236,7 @@ export class GameEventComponent {
 	}
 
 	public eventMainButtonClicked(){
-		this.eventHandler.resolveEventEffect()
+		this.eventHandler.eventMainButtonClicked()
 	}
 
 	public phaseSelected(): void {

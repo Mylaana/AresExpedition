@@ -23,6 +23,6 @@
     </div>
 	<p>eventQueue :</p>
     <div *ngFor="let event of currentEventQueue">
-        <p>type:{{event.type}} subtype:{{event.subType}} finalized:{{event.finalized}}</p>
+        <p>[id]:{{event.id}}  [type]:{{event.type}}  [subtype]:{{event.subType}}  [finalized]:{{event.finalized}}  [autoFinalize]:{{event.autoFinalize}}</p>
     </div>
 </div>

@@ -67,7 +67,9 @@ export class EventDesigner{
                 break
             }
             case('actionPhase'):{
-
+                event.cardSelector.filter = {type: 'action'}
+                event.cardSelector.cardInitialState = {activable: true, selectable: false, playable: false, ignoreCost:true}
+                event.title = 'Activate cards :'
                 break
             }
             case('researchPhaseResult'):
@@ -163,8 +165,11 @@ export class EventDesigner{
                 event.value.scanKeep = args?.value?.scanKeep
                 break
             }
+            case('planificationPhase'):{
+                event.autoFinalize = false
+                break
+            }
             case('endOfPhase'):
-            case('planificationPhase'):
             case('productionPhase'):
             {break}
         }
