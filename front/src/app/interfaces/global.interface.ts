@@ -50,7 +50,7 @@ export interface CardOptions {
 
 export interface CardSelector {
     selectFrom: ProjectCardModel[];
-    selectedIdList: number[];
+    selectedList: ProjectCardModel[];
     selectionQuantity: number;
     selectionQuantityTreshold: MinMaxEqualType;
 
@@ -93,6 +93,7 @@ export interface EventValue {
     increaseParameter?: GlobalParameterValue,
     scanKeep?: ScanKeep,
     drawDiscard?: DrawDiscard
+    cardBuildId?: number
 }
 
 export interface DrawDiscard {

@@ -10,7 +10,7 @@ import { CardState } from "../../models/cards/card-cost.model";
 
 interface CardSelectorOptions {
     selectFrom?: ProjectCardModel[];
-    selectedIdList?: number[];
+    selectedList?: ProjectCardModel[];
     selectionQuantity?: number;
     selectionQuantityTreshold?: MinMaxEqualType;
     filter?: ProjectFilter;
@@ -37,7 +37,7 @@ export class EventDesigner{
 
         selector ={
             selectFrom: args?.cardSelector?.selectFrom? args.cardSelector.selectFrom:[],
-            selectedIdList:  args?.cardSelector?.selectedIdList? args.cardSelector.selectedIdList:[],
+            selectedList:  args?.cardSelector?.selectedList? args.cardSelector.selectedList:[],
             selectionQuantity: args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0,
             selectionQuantityTreshold: args?.cardSelector?.selectionQuantityTreshold? args.cardSelector.selectionQuantityTreshold:'equal',
             cardInitialState: args?.cardSelector?.cardInitialState? args.cardSelector.cardInitialState:undefined,
@@ -56,6 +56,7 @@ export class EventDesigner{
             case('discardCards'):{
                 event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0} card(s) to discard.`
                 event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
+                event.locksEventpile = true
                 break
             }
             case('selectCardForcedSell'):{
@@ -120,7 +121,7 @@ export class EventDesigner{
 
         //add playable card zones
         for(let i=0; i<=1; i++){
-            let playableCardZone: PlayableCardZone = new PlayableCardZone
+            let playableCardZone: PlayableCardZone = new PlayableCardZone()
             playableCardZone.addButtons(ButtonDesigner.createEventSecondaryButton(subType, {zoneId:i}))
             event.playCardZone.push(playableCardZone)
         }
@@ -167,6 +168,10 @@ export class EventDesigner{
             }
             case('planificationPhase'):{
                 event.autoFinalize = false
+                break
+            }
+            case('buildCard'):{
+                event.value = {cardBuildId:args?.cardId}
                 break
             }
             case('endOfPhase'):

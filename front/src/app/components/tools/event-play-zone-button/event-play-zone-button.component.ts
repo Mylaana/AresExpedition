@@ -10,10 +10,10 @@ import { EventPlayZoneButton } from '../../../models/core-game/button.model';
   styleUrl: './event-play-zone-button.component.scss'
 })
 export class EventPlayZoneButtonComponent {
-  @Output() childButtonClicked: EventEmitter<EventPlayZoneButton> = new EventEmitter<EventPlayZoneButton>()
+  @Output() eventPlayZoneButtonClicked: EventEmitter<EventPlayZoneButton> = new EventEmitter<EventPlayZoneButton>()
   @Input() button!: EventPlayZoneButton;
   
   onClick(){
-    this.childButtonClicked.emit(this.button)
+    this.eventPlayZoneButtonClicked.emit(this.button)
   }
 }

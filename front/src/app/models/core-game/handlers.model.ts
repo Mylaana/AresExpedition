@@ -1,5 +1,8 @@
+import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
+import { EventDesigner } from "../../services/core-game/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
-import { EventMainButton } from "./button.model";
+import { ProjectCardModel } from "../cards/project-card.model";
+import { EventMainButton, EventPlayZoneButton } from "./button.model";
 import { EventBaseModel, EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard } from "./event.model";
 import { Injectable } from "@angular/core";
 
@@ -11,7 +14,10 @@ export class EventHandler {
 	private currentEvent!: EventBaseModel
 	private clientPlayerId = this.gameStateService.clientPlayerId
 
-    constructor(private gameStateService: GameState){}
+    constructor(
+		private gameStateService: GameState,
+		private projectCardInfoService: ProjectCardInfoService
+	){}
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
 		if(eventQueue.length===0){return undefined}
@@ -24,6 +30,29 @@ export class EventHandler {
 		this.switchEvent(eventQueue, this.currentEvent)
 		this.checkFinalized()
 		return this.currentEvent
+	}
+	eventMainButtonClicked(): void {
+		this.resolveEventEffect()
+	}
+	updateEventMainButton(enabled: boolean): void {
+		this.currentEvent.button?.updateEnabled(enabled)
+	}
+	playZoneButtonClicked(button: EventPlayZoneButton): void {
+		let event = this.currentEvent as EventCardSelectorPlayZone
+		event.playZoneButtonClicked(button)
+		switch(button.name){
+			case('buildCard'):{
+				let cardId = event.getCardToBuildId()
+				if(cardId===undefined){return}
+				let buildEvent = EventDesigner.createGeneric('buildCard', {cardId:cardId})
+				this.gameStateService.addEventQueue(buildEvent, true)
+				break
+			}
+		}
+	}
+	updateSelectedCardList(selection: ProjectCardModel[]): void {
+		let event = this.currentEvent as EventCardSelector
+		event.updateCardSelection(selection)
 	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
@@ -40,7 +69,7 @@ export class EventHandler {
 		return this.currentEvent
 	}
     private switchEvent(eventQueue: EventBaseModel[], event: EventBaseModel): void {
-		if(eventQueue[0]===event){return }
+		if(eventQueue[0]===event){return}
 		
 		//switching current event to top of the pile
 		this.currentEvent = eventQueue[0]
@@ -50,7 +79,7 @@ export class EventHandler {
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
 
 		this.applyAutoFinalize()
-		console.log(this.currentEvent)
+		console.log('switched to event: ',this.currentEvent)
         return 
     }
 	private applyAutoFinalize(): void {
@@ -70,24 +99,24 @@ export class EventHandler {
 		//check per subType special rules:
 		switch(event.subType){
 			case('selectCardForcedSell'):{
-				event.activateSelection()
-
                 let playerCards = this.gameStateService.getClientPlayerState().cards
                 if(playerCards.hand.length <= playerCards.maximum){
                     event.finalized = true
                     break
                 }
+				event.cardSelector.selectFrom = this.gameStateService.getClientPlayerStateHandProject()
+				event.activateSelection()
+				event.cardSelector.stateFromParent = {selectable:true, ignoreCost:true}
+				break
+			}
+			case('discardCards'):case('selectCardOptionalSell'):{
+				event.cardSelector.selectFrom = this.gameStateService.getClientPlayerStateHandProject()
+				event.activateSelection()
+				event.cardSelector.stateFromParent = {selectable:true, ignoreCost:true}
+				break
 			}
 		}
     }
-
-	eventMainButtonClicked(): void {
-		this.resolveEventEffect()
-	}
-	updateEventMainButton(enabled: boolean): void {
-		this.currentEvent.button?.updateEnabled(enabled)
-	}
-
     private resolveEventEffect(){
         switch(this.currentEvent.type){
             case('cardSelector'):{this.resolveEventCardSelector(this.currentEvent as EventCardSelector); break}
@@ -103,26 +132,21 @@ export class EventHandler {
     private resolveEventCardSelector(event: EventCardSelector): void {
 		console.log('resolving event: ','EventCardSelector ', event.subType)
         switch(event.subType){
-            case('selectCardForcedSell'):{
-                let playerCards = this.gameStateService.getClientPlayerState().cards
-                event.cardSelector.selectionQuantity = playerCards.hand.length - playerCards.maximum
-                event.title = `Too many cards in hand, please select at least ${event.cardSelector.selectionQuantity} cards to sell.`
-                event.cardSelector.selectFrom = this.gameStateService.getClientPlayerStateHandProject()
-
-                event.activateSelection()
-                break
-            }
-            case('discardCards'):case('selectCardOptionalSell'):{
-                event.activateSelection()
-                event.cardSelector.selectFrom = this.gameStateService.getClientPlayerStateHandProject()
-                break
-            }
+			case('selectCardForcedSell'):case('selectCardOptionalSell'):case('discardCards'):{
+				event.finalized = true
+				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, event.cardSelector.selectedList)
+				
+				if(event.subType==='discardCards'){break}
+				this.gameStateService.sellCardsFromClientHand(event.cardSelector.selectedList.length)
+				break
+			}
 			case('actionPhase'):{
 				event.finalized = true
 				break
 			}
 			default:{console.log('Non mapped event in handler.resolveEventCardSelector: ', this.currentEvent)}
         }
+		if(event.subType!='actionPhase'){event.activateSelection()}
     }
     private resolveEventCardSelectorRessource(event: EventCardSelectorRessource): void {
 		console.log('resolving event: ','EventCardSelectorRessource ', event.subType)
@@ -160,6 +184,14 @@ export class EventHandler {
 			}
 			case('planificationPhase'):{
 				this.currentEvent.finalized = true
+				break
+			}
+			case('buildCard'):{
+				let cardId = event.value.cardBuildId
+				if(cardId===undefined){break}
+				let card = this.projectCardInfoService.getCardById(cardId)
+				if(card===undefined){break}
+				this.gameStateService.playCardFromClientHand(card)
 				break
 			}
 			default:{console.log('Non mapped event in handler.resolveEventGeneric: ', this.currentEvent)}
@@ -218,19 +250,10 @@ export class EventHandler {
 				this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, this.currentEvent.cardSelector.selectionQuantity)
 				break
 			}
-			case('selectCardToBuild'):{
-				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand())
-				break
-			}
 			case('drawCards'):{
 				ticket.isFinalized = true
 				this.currentEvent.button = this.buttons[this.getButtonIdFromName('drawCards')]
 				this.addDrawQueue(this.clientPlayerId, ticket.value)
-				break
-			}
-			case('discardCards'):{
-				this.currentEvent.selectionActive = true
-				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerState().cards.hand)			
 				break
 			}
 			case('increaseGlobalParameter'):{
@@ -294,36 +317,6 @@ export class EventHandler {
 		}
  */
 /**
-export class ButtonHandler{
-	buttonList: ChildButton[] = []
-	buttons: ChildButton[] = [];
-	buttonsIds = new Map<ButtonNames, number>();
-
-	phaseButtons = new  Map<NonSelectablePhase, ButtonNames>(
-		[
-			['planification', 'validatePlanification'],
-			['development', 'validateDevelopment'],
-			['construction', 'validateConstruction'],
-			['action', 'validateAction'],
-			['production', 'validateProduction'],
-			['research', 'validateResearch']
-		]
-	)
-
-	//marche en vidant la map et en l'initialisant avec un set()
-	eventMainButton = new Map<EventUnionSubTypes, ButtonNames>(
-		[
-			['discardCards','discardCards'],
-			['drawCards','drawCards'],
-			['upgradePhase','upgradePhase'],
-			['addRessourceToSelectedCard', 'addRessourceToSelectedCard']
-		]
-	)
-	buttonClicked(clickedButtonName: ChildButton) : void {
-		clickedButtonName = this.getButtonNameFromId(button.id)
-		switch(clickedButtonName){
-			case(undefined):{return}
-
 
 			case('validateResearch'):{
 				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
@@ -413,12 +406,6 @@ export class ButtonHandler{
 			case('upgradePhase'):{
 				this.currentEvent.finalized = true
 				this.gameStateService.removePhaseCardUpgradeNumber(this.clientPlayerId, 0 , true)
-				this.gameStateService.cleanAndNextEventQueue()
-				break
-			}
-			case('discardCards'):{
-				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
-				this.currentEvent.finalized = true
 				this.gameStateService.cleanAndNextEventQueue()
 				break
 			}

@@ -11,22 +11,22 @@
         <div class="wrapper-event-top">
             <h2 *ngIf="currentEvent!=undefined && currentEvent.title!=undefined">{{currentEvent.title}}</h2>
 			<div class="wrapper-event-top-main">
-                <app-card-builder *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent"></app-card-builder>
+                <app-card-builder *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent" (gameEventPlayZoneButtonClicked)="eventCardBuilderButtonClicked($event)"></app-card-builder>
 			</div>
             <app-phase-planification *ngIf="currentPhase==='planification' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
             <app-phase-production *ngIf="currentPhase==='production' && currentEvent.subType==='productionPhase'"></app-phase-production>
         </div>
         <div class="wrapper-event-bottom">
             <div *ngIf="currentEvent.hasSelector()===true" class="wrapper-card-selector ares-background">
-                <app-project-card-list [event]="currentEvent" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+                <app-project-card-list [cardListId]="'game event list'" [event]="currentEvent" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
 			<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [phaseList]="currentEvent.value!=undefined ? currentEvent.value:null"></app-phase-card-upgrade-selector>
         </div>
     </div>
 </div>
-<!--
-<div class="wrapper-selection-active" [ngClass]="currentEvent.selectionActive? 'element-fade-in':'element-fade-out'">
+
+<div class="wrapper-selection-active" [ngClass]="currentEvent?.getSelectionActive()===true?  'element-fade-in':'element-fade-out'">
     <div class="selection-active-left"></div>
     <div class="selection-active-right"></div>
 </div>
--->
+

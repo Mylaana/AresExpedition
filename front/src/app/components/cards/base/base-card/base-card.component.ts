@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges  } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { deepCopy } from '../../../../functions/global.functions';
@@ -10,7 +10,7 @@ import { deepCopy } from '../../../../functions/global.functions';
   templateUrl: './base-card.component.html',
   styleUrl: './base-card.component.scss'
 })
-export abstract class BaseCardComponent implements OnInit, OnChanges {
+export abstract class BaseCardComponent implements OnInit, OnChanges, DoCheck {
 	@Input() initialState?: CardState;
 	@Input() stateFromParent?: CardState
 	state!: CardState;
@@ -30,9 +30,11 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 		if (changes['initialState'] && changes['initialState'].currentValue) {
 			this.resetCardState()
 		}
-		if (changes['stateFromParent'] && changes['stateFromParent'].currentValue) {
-			this.changeStateFromParent()
-		}
+	}
+	ngDoCheck(): void {
+		if(this.initialized===false){return}
+		if(this.initialState!=undefined){this.resetCardState}
+		if(this.stateFromParent!=undefined){this.changeStateFromParent()}
 	}
 
 	initializeCardState():void{
@@ -50,15 +52,15 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 	resetCardState(): void {
 		if(!this.state){return}
 
-		if(this.initialState?.activable){this.state.activable=deepCopy(this.initialState.activable)}else{this.state.activable=false}
-		if(this.initialState?.playable){this.state.playable=deepCopy(this.initialState.playable)}else{this.state.playable=false}
-		if(this.initialState?.ignoreCost){this.state.ignoreCost=deepCopy(this.initialState.ignoreCost)}else{this.state.ignoreCost=false}
+		if(this.initialState?.activable){this.state.activable=this.initialState.activable}else{this.state.activable=false}
+		if(this.initialState?.playable){this.state.playable=this.initialState.playable}else{this.state.playable=false}
+		if(this.initialState?.ignoreCost){this.state.ignoreCost=this.initialState.ignoreCost}else{this.state.ignoreCost=false}
 
-		if(this.initialState?.selectable){this.state.selectable=deepCopy(this.initialState.selectable)}else{this.state.selectable=false}
-		if(this.initialState?.selected){this.state.selected=deepCopy(this.initialState.selected)}else{this.state.selected=false}
+		if(this.initialState?.selectable){this.state.selectable=this.initialState.selectable}else{this.state.selectable=false}
+		if(this.initialState?.selected){this.state.selected=this.initialState.selected}else{this.state.selected=false}
 
-		if(this.initialState?.upgradable){this.state.upgradable=deepCopy(this.initialState.upgradable)}else{this.state.upgradable=false}
-		if(this.initialState?.upgraded){this.state.upgraded=deepCopy(this.initialState.upgraded)}else{this.state.upgraded=false}
+		if(this.initialState?.upgradable){this.state.upgradable=(this.initialState.upgradable)}else{this.state.upgradable=false}
+		if(this.initialState?.upgraded){this.state.upgraded=this.initialState.upgraded}else{this.state.upgraded=false}
 	}
 
 	changeStateFromParent():void{
@@ -69,6 +71,6 @@ export abstract class BaseCardComponent implements OnInit, OnChanges {
 		if(this.stateFromParent.selectable!=undefined){this.state.selectable=deepCopy(this.stateFromParent.selectable)}
 		if(this.stateFromParent.selected!=undefined){this.state.selected=deepCopy(this.stateFromParent.selected)}
 		if(this.stateFromParent.upgradable!=undefined){this.state.upgradable=deepCopy(this.stateFromParent.upgradable)}
-		if(this.stateFromParent.upgraded!=undefined){this.state.upgraded=deepCopy(this.stateFromParent.upgraded)}
+		if(this.stateFromParent.upgraded!=undefined){this.state.upgraded=deepCopy(this.stateFromParent.upgraded)}	
 	}
 }

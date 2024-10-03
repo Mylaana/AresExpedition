@@ -12,7 +12,7 @@ import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
-import { ChildButton, EventSecondaryButton } from '../../../models/core-game/button.model';
+import { ChildButton, EventPlayZoneButton, EventSecondaryButton } from '../../../models/core-game/button.model';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { EventHandler } from '../../../models/core-game/handlers.model';
 import { EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
@@ -22,6 +22,7 @@ import { EventButtonComponent } from '../../tools/event-button/event-button.comp
 import { EventMainButtonComponent } from "../../tools/event-main-button/event-main-button.component";
 import { EventSecondaryButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
 import { CardBuilderComponent } from '../card-builder/card-builder.component';
+import { ProjectCardModel } from '../../../models/cards/project-card.model';
 
 //this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
 
@@ -72,7 +73,8 @@ export class GameEventComponent {
 		'production',
 		'research'
 	]
-	
+	selectionActive: boolean = false
+
 	private readonly eventHandler = inject(EventHandler)
 
 	ngOnInit(): void {
@@ -226,21 +228,15 @@ export class GameEventComponent {
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
 	}
 
-	public updateSelectedCardList(cardList: number[]){
-		let event = this.currentEvent as EventCardSelector
-		event.updateCardSelection(cardList)
+	public updateSelectedCardList(cardList: ProjectCardModel[]){
+		this.eventHandler.updateSelectedCardList(cardList)
 	}
 
 	public childButtonClicked(button: ChildButton ){
 		//this.currentEvent.
 	}
-
-	public eventMainButtonClicked(){
-		this.eventHandler.eventMainButtonClicked()
-	}
-
-	public phaseSelected(): void {
-		this.eventHandler.updateEventMainButton(true)
-	}
+	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
+	public eventCardBuilderButtonClicked(button: EventPlayZoneButton){this.eventHandler.playZoneButtonClicked(button)}
+	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
 
 }
