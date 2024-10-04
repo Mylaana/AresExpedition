@@ -1,9 +1,10 @@
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
-import { EventDesigner } from "../../services/core-game/event-designer.service";
+import { DrawEventDesigner, EventDesigner } from "../../services/core-game/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
+import { EventUnionSubTypes } from "../../types/event.type";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { EventMainButton, EventPlayZoneButton } from "./button.model";
-import { EventBaseModel, EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard } from "./event.model";
+import { DrawEvent, EventBaseModel, EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter } from "./event.model";
 import { Injectable } from "@angular/core";
 
 
@@ -13,6 +14,7 @@ export class EventHandler {
     private eventCounter: number = 0
 	private currentEvent!: EventBaseModel
 	private clientPlayerId = this.gameStateService.clientPlayerId
+	private waiterResolved: number[] = []
 
     constructor(
 		private gameStateService: GameState,
@@ -21,13 +23,15 @@ export class EventHandler {
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
 		if(eventQueue.length===0){return undefined}
-		if(!this.initialized){this.initialized=true; return this.initializeFirstEvent(eventQueue)}
+		console.log(eventQueue)
+		//if(!this.initialized){this.initialized=true; return this.initializeFirstEvent(eventQueue)}
 		
 		if(eventQueue[0].finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()
 			return
 		}
 		this.switchEvent(eventQueue, this.currentEvent)
+		if(this.waiterResolved.length!=0){this.resolveWaiters(eventQueue)}
 		this.checkFinalized()
 		return this.currentEvent
 	}
@@ -125,6 +129,7 @@ export class EventHandler {
 			case('generic'):{this.resolveEventGeneric(this.currentEvent as EventGeneric); break}
 			case('deck'):{this.resolveEventDeckQuery(this.currentEvent as EventDeckQuery); break}
 			case('targetCard'):{this.resolveEventTargetCards(this.currentEvent as EventTargetCard); break}
+			case('waiter'):{this.resolveEventWaiter(this.currentEvent as EventWaiter);break}
 			default:{console.log('Non mapped event in handler.resolveEventEffect: ', this.currentEvent)}
         }
 		this.checkFinalized()
@@ -194,16 +199,42 @@ export class EventHandler {
 				this.gameStateService.playCardFromClientHand(card)
 				break
 			}
+			case('drawResult'):{
+				event.finalized = true
+				if(event.value.drawResultList===undefined){console.log('EXIT: ', event);break}
+				this.gameStateService.addCardToPlayerHand(this.clientPlayerId,event.value.drawResultList)
+				this.waiterResolved.push(event.id)
+				break
+			}
 			default:{console.log('Non mapped event in handler.resolveEventGeneric: ', this.currentEvent)}
 		}
 	}
 	private resolveEventDeckQuery(event: EventDeckQuery): void {
 		console.log('resolving event: ','EventDeckQuery ', event.subType)
+		let resolveType!: EventUnionSubTypes
 		switch(event.subType){
 			case('drawQuery'):{
+				resolveType = 'drawResult'
+				event.value.waiterId = event.id
 				break
 			}
 			default:{console.log('Non mapped event in handler.resolveEventDeckQuery: ', this.currentEvent)}
+		}
+
+		if(event.value.drawDiscard===undefined || event.value.waiterId===undefined || resolveType===undefined){return}
+
+		//adding a deck waiter event until drawEvent resolution
+		this.gameStateService.addEventQueue(EventDesigner.createWaiter('deckWaiter', event.id), true)
+		this.gameStateService.addDrawQueue(DrawEventDesigner.createDrawEvent(resolveType, event.value.drawDiscard.draw,event.id))
+		this.gameStateService.cleanAndNextEventQueue()
+	}
+	private resolveEventWaiter(event: EventWaiter): void {
+		console.log('resolving event: ','EventWaiter ', event.subType)
+		switch(event.subType){
+			case('deckWaiter'):{
+				return
+			}
+			default:{console.log('Non mapped event in handler.EventWaiter: ', this.currentEvent)}
 		}
 	}
 	private resolveEventTargetCards(event: EventTargetCard): void {
@@ -216,32 +247,33 @@ export class EventHandler {
 			default:{console.log('Non mapped event in handler.resolveEventTargetCards: ', this.currentEvent)}
 		}
 	}
+	private resolveWaiters(eventQueue: EventBaseModel[]){
+		let newWaiters: number[] = []
+		console.log('resolve Waiter: ',this.waiterResolved, eventQueue)
+		for(let waiterId of this.waiterResolved){
+			if(this.resolveWaiterId(waiterId, eventQueue)===false){
+				newWaiters.push(waiterId)
+			}
+		}
+		this.waiterResolved = newWaiters
+		console.log('resolved Waiter: ',this.waiterResolved)
+	}
+	private resolveWaiterId(waiterId: number, eventQueue: EventBaseModel[]): boolean {
+		for(let event of eventQueue){
+			if(event.type!=='waiter'){continue}
+			let waiterEvent = event as EventWaiter
+			if(waiterId!==waiterEvent.waiterId){continue}
+			event.finalized=true
+			return true
+		}
+		return false
+	}
 }
 
 /**
- * case('forcedSell'):{
-				let playerCards = this.gameStateService.getClientPlayerState().cards
-				if(playerCards.hand.length <= playerCards.maximum){
-					ticket.isFinalized = true
-					break
-				}
-				this.currentEvent.cardSelector.selectionQuantity = playerCards.hand.length - playerCards.maximum
-				this.currentEvent.cardSelector.title = `Too many cards in hand, please select at least ${ticket.cardSelector.selectionQuantity} cards to sell.`
-				this.currentEvent.cardSelector.selectFrom = this.cardInfoService.getProjectCardList(playerCards.hand)
 
-				this.currentEvent.selectionActive = true
-				break
-			}
-			case('endOfPhase'):{
-				ticket.isFinalized = true
-				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
-				break
-			}
+
 			case('selectCard'):{
-				this.currentEvent.selectionActive = true
-				break
-			}
-			case('optionalSell'):{
 				this.currentEvent.selectionActive = true
 				break
 			}
@@ -436,3 +468,67 @@ export class EventHandler {
 		}
 	}
  */
+@Injectable()
+export class DrawEventHandler {
+	constructor(
+		private gameStateService:GameState,
+		private projectCardInfoService: ProjectCardInfoService
+	){}
+
+	handleQueueUpdate(drawQueue: DrawEvent[]): void {
+		if(drawQueue.length===0 || drawQueue[0].served===false){
+			return
+		}
+		let event = drawQueue[0]
+		this.resolveDrawEvent(event)
+		event.finalized = true
+		this.gameStateService.cleanAndNextDrawQueue()
+	}
+	private resolveDrawEvent(drawEvent: DrawEvent): void {
+		let resultEvent!: EventBaseModel
+		switch(drawEvent.resolveEventSubType){
+			case('drawResult'):{
+				resultEvent = EventDesigner.createGeneric(
+					'drawResult',
+					{
+						drawResult:drawEvent.drawResultCardList,
+						waiterId:drawEvent.waiterId
+					}
+				)
+				break
+			}
+			case('researchPhaseResult'):{
+				resultEvent = EventDesigner.createCardSelector(
+					'researchPhaseResult',
+					{
+						cardSelector:{
+							selectFrom: this.projectCardInfoService.getProjectCardList(drawEvent.drawResultCardList),
+							selectedList: [],
+							selectionQuantity: this.gameStateService.getClientPlayerResearchMods().keep
+						},
+						waiterId:drawEvent.waiterId
+					}
+				)
+				break
+			}
+			case('scanKeepResult'):{
+				if(drawEvent.keepCardNumber===undefined){break}
+				resultEvent = EventDesigner.createCardSelector(
+					'scanKeepResult',
+					{
+						cardSelector:{
+							selectFrom: this.projectCardInfoService.getProjectCardList(drawEvent.drawResultCardList),
+							selectedList: [],
+							selectionQuantity: drawEvent.keepCardNumber
+						},
+						waiterId:drawEvent.waiterId
+					}
+				)
+			}
+		}
+		console.log('result event: ',resultEvent)
+		console.log('resolved drawEvent: ', drawEvent)
+		if(resultEvent===undefined){return}
+		this.gameStateService.addEventQueue(resultEvent,true)
+	}
+}

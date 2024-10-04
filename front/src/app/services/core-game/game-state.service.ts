@@ -6,7 +6,7 @@ import { AdvancedRessourceStock, CardRessourceStock, GlobalParameterValue, Playe
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
-import { EventBaseModel } from "../../models/core-game/event.model";
+import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
 import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
 import { deepCopy } from "../../functions/global.functions";
@@ -14,6 +14,7 @@ import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-c
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { trigger } from "@angular/animations";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
+import { DrawEventDesigner, EventDesigner } from "./event-designer.service";
 
 interface SelectedPhase {
     "development": boolean,
@@ -32,7 +33,7 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 0;
+const handSizeStart: number = 8;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
@@ -51,7 +52,7 @@ export class GameState{
     groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
     groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
     phase = new BehaviorSubject<NonSelectablePhase>("planification")
-    drawQueue = new BehaviorSubject<DrawModel[]>([])
+    drawQueue = new BehaviorSubject<DrawEvent[]>([])
     eventQueue = new BehaviorSubject<EventBaseModel[]>([])
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
@@ -236,11 +237,9 @@ export class GameState{
         }
 
         //fill player's hand
-        let newPlayerDraw = new DrawModel;
-        newPlayerDraw.playerId = newPlayer.id
-        newPlayerDraw.cardNumber = handSizeStart
-        newPlayerDraw.drawRule = 'draw'
-        this.addDrawQueue(newPlayerDraw)
+        if(newPlayer.id===this.clientPlayerId){
+            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{value:{drawDiscard:{draw:handSizeStart,discard:0}}}))
+        }
 
         newPlayer.terraformingRating = 5;
         newPlayer.vp = newPlayer.terraformingRating
@@ -541,12 +540,12 @@ export class GameState{
         this.updatePlayerStateHand(playerId, playerStateHand)
     }
 
-    addDrawQueue(draw: DrawModel):void{
-        this.drawQueue.next(this.drawQueue.getValue().concat([draw]));
+    addDrawQueue(drawEvent: DrawEvent):void{
+        this.drawQueue.next(this.drawQueue.getValue().concat([drawEvent]));
     }
 
-    removeDrawQueue(drawQueueElement: DrawModel[]): void{
-        const newDrawQueue: DrawModel[] = this.drawQueue.getValue();
+    removeDrawQueue(drawQueueElement: DrawEvent[]): void{
+        const newDrawQueue: DrawEvent[] = this.drawQueue.getValue();
 
         drawQueueElement.forEach(element => {
             for(let i=0; i<this.drawQueue.getValue().length; i++){
@@ -564,11 +563,11 @@ export class GameState{
      * emits a next signal for drawQueue.next()
      */
     cleanAndNextDrawQueue(): void{
-        let newDrawQueue: DrawModel[] = [];
+        let newDrawQueue: DrawEvent[] = [];
         //clean draw queue
-        for(let drawTicket of this.drawQueue.getValue()){
-            if(drawTicket.isFinalized!=true){
-                newDrawQueue.push(drawTicket)
+        for(let drawEvent of this.drawQueue.getValue()){
+            if(drawEvent.finalized!=true){
+                newDrawQueue.push(drawEvent)
             }
         }
         this.drawQueue.next(newDrawQueue)

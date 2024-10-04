@@ -14,8 +14,8 @@ import { ProjectCardInfoService } from '../../../services/cards/project-card-inf
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
 import { ChildButton, EventPlayZoneButton, EventSecondaryButton } from '../../../models/core-game/button.model';
 import { ButtonComponent } from '../../tools/button/button.component';
-import { EventHandler } from '../../../models/core-game/handlers.model';
-import { EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
+import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
+import { DrawEvent, EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { EventDesigner } from '../../../services/core-game/event-designer.service';
 import { EventButtonComponent } from '../../tools/event-button/event-button.component';
@@ -46,7 +46,10 @@ import { ProjectCardModel } from '../../../models/cards/project-card.model';
 ],
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.scss',
-  providers: [EventHandler]
+  providers: [
+	EventHandler,
+	DrawEventHandler
+]
 })
 export class GameEventComponent {
 	constructor(
@@ -76,6 +79,7 @@ export class GameEventComponent {
 	selectionActive: boolean = false
 
 	private readonly eventHandler = inject(EventHandler)
+	private readonly drawHandler = inject(DrawEventHandler)
 
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
@@ -128,11 +132,10 @@ export class GameEventComponent {
 			}
 			//cards prod
 			if(i===5){
-			let draw = new DrawModel;
-			draw.playerId = clientState.id
-			draw.cardNumber = newClientRessource[i].valueProd
-			draw.drawRule = 'draw'
-			this.gameStateService.addDrawQueue(draw)
+			this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent(
+				'drawQuery',
+				{value:{drawDiscard:{draw:newClientRessource[i].valueProd,discard:0}}}
+			))
 			continue
 			}
 			//other prod
@@ -144,13 +147,9 @@ export class GameEventComponent {
 	}
 
 	applyResearchPhase(clientState: PlayerStateModel): void{
-		let draw = new DrawModel;
-		draw.playerId = clientState.id
-		draw.cardNumber = clientState.research.scan + 2
-		draw.drawRule = 'research'
-		this.gameStateService.addDrawQueue(draw)
+		this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('researchPhaseQuery',{value:{scanKeep:{scan:clientState.research.scan + 2,keep:clientState.research.keep}}}))
 	}
-
+	/*
 	addDrawQueue(playerId: number, cardNumber: number): void {
 		let draw = new DrawModel;
 		draw.playerId = playerId
@@ -158,6 +157,7 @@ export class GameEventComponent {
 		draw.drawRule = 'draw'
 		this.gameStateService.addDrawQueue(draw)
 	}
+		*/
 
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
 		let newEvent = EventDesigner.createGeneric(
@@ -170,58 +170,8 @@ export class GameEventComponent {
 		this.gameStateService.addEventQueue(newEvent, true)
 		this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
 	}
-	handleDrawQueueNext(drawQueue: DrawModel[]): void {
-		if(drawQueue.length===0){
-			return
-		}
-		let callCleanAndNext: boolean = false;
-
-		for(let element of drawQueue){
-			if(element.isFinalized===true){
-				callCleanAndNext = true
-				continue
-			}
-			if(element.cardList.length===0){continue}
-
-			//elements found
-			element.isFinalized = true
-			callCleanAndNext = true
-
-			//preventing bot players to draw
-			if(element.playerId!=0){continue}
-			if(element.drawRule==='draw'){
-				this.gameStateService.addCardToPlayerHand(element.playerId, element.cardList)
-			}
-			if(element.drawRule==='research'){
-				let newEvent = EventDesigner.createCardSelector(
-					'researchPhaseResult',
-					{
-						cardSelector:{
-							selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
-							selectedList: [],
-							selectionQuantity: this.gameStateService.getClientPlayerResearchMods().keep
-						}
-					}
-				)
-				this.gameStateService.addEventQueue(newEvent)
-			}
-			if(element.drawRule==='scanKeep'){
-				if(!element.keepCardNumber){break}
-				let newEvent = EventDesigner.createCardSelector(
-					'scanKeepResult',
-					{
-						cardSelector:{
-							selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
-							selectedList: [],
-							selectionQuantity: element.keepCardNumber
-						}
-					}
-				)
-				this.gameStateService.addEventQueue(newEvent,true)
-			}
-		};
-		if(callCleanAndNext===false){return}
-		this.gameStateService.cleanAndNextDrawQueue()
+	handleDrawQueueNext(drawQueue: DrawEvent[]): void {
+		this.drawHandler.handleQueueUpdate(drawQueue)
 	}
 
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
@@ -234,7 +184,7 @@ export class GameEventComponent {
 	}
 
 	public childButtonClicked(button: ChildButton ){
-		//this.currentEvent.
+		console.log('game event child button push clicked received')
 	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public eventCardBuilderButtonClicked(button: EventPlayZoneButton){this.eventHandler.playZoneButtonClicked(button)}

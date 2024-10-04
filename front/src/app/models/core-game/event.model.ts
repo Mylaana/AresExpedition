@@ -1,4 +1,4 @@
-import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardSelectorPlayZoneSubType, EventGenericSubType, EventDeckQuerySubType } from "../../types/event.type";
+import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardSelectorPlayZoneSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
 import { CardSelector, EventValue } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventPlayZoneButton, EventSecondaryButton } from "./button.model";
 import { EventPlayZoneButtonNames } from "../../types/global.type";
@@ -251,8 +251,29 @@ export class EventGeneric extends EventBaseModel {
 
 export class EventDeckQuery extends EventBaseModel {
     override readonly type: EventType = 'deck'
+    override locksEventpile!: boolean
     override subType!: EventDeckQuerySubType;
     override value!: EventValue
     override autoFinalize: boolean = true
 }
-    
+
+export class EventWaiter extends EventBaseModel {
+    override readonly type: EventType = 'waiter'
+    override locksEventpile: boolean = true
+    override subType!: EventWaiterSubType;
+    override value!: EventValue
+    override autoFinalize: boolean = true
+    waiterId!: number
+}
+
+export class DrawEvent {
+    id!: number
+    resolveEventSubType!: EventUnionSubTypes
+    drawCardNumber!: number
+    keepCardNumber?:number
+    drawDate = new Date()
+    drawResultCardList: number[] = []
+    finalized: boolean = false
+    served: boolean = false
+    waiterId!: number
+}

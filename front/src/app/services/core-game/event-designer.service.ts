@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, PlayableCardZone } from "../../models/core-game/event.model";
-import { EventCardSelectorPlayZoneSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventTargetCardSubType } from "../../types/event.type";
+import { DrawEvent, EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, PlayableCardZone } from "../../models/core-game/event.model";
+import { EventCardSelectorPlayZoneSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, EventValue } from "../../interfaces/global.interface";
 import { ButtonDesigner } from "./button-designer.service";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
@@ -26,6 +26,8 @@ interface CreateEventOptions {
     cardId?: number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number
+    waiterId?:number
+    drawResult?:number[]
 }
 
 @Injectable({
@@ -80,6 +82,7 @@ export class EventDesigner{
                 event.cardSelector.selectionQuantityTreshold = 'equal'
                 break
             }
+            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
         return event
@@ -117,6 +120,7 @@ export class EventDesigner{
                 event.cardSelector.filter = {type:'construction'}
                 break
             }
+            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
 
         //add playable card zones
@@ -139,6 +143,7 @@ export class EventDesigner{
                 event.value = {advancedRessource: args?.value?.advancedRessource}
                 break
             }
+            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
         return event
@@ -174,9 +179,18 @@ export class EventDesigner{
                 event.value = {cardBuildId:args?.cardId}
                 break
             }
-            case('endOfPhase'):
-            case('productionPhase'):
-            {break}
+            case('productionPhase'):{
+                event.autoFinalize = false
+                break
+            }
+            case('endOfPhase'):{break}
+            case('drawResult'):{
+                //event.value = {waiterId:1} = args?.waiterId? args.waiterId:-1
+                //event.value .drawResultList = args?.drawResult
+                event.value = {drawResultList: args?.drawResult, waiterId:args?.waiterId}
+                break
+            }
+            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
         return event
@@ -191,9 +205,26 @@ export class EventDesigner{
                 break
             }
             case('drawQuery'):{
+                console.log('DRAW QUERY :', args, event)
                 event.value = {drawDiscard:args?.value?.drawDiscard}
                 break
             }
+            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+        }
+        return event
+    }
+    public static createWaiter(subType:EventWaiterSubType, waiterId: number, args?: CreateEventOptions ) : EventWaiter {
+        let event = new EventWaiter
+        
+        event.subType = subType
+        switch(subType){
+            case('deckWaiter'):{
+                event.autoFinalize = false
+                event.locksEventpile = true
+                event.waiterId = waiterId
+                break
+            }
+            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         return event
     }
@@ -215,4 +246,16 @@ export class EventDesigner{
         return event
     }
     */
+}
+@Injectable({
+    providedIn: 'root'
+})
+export class DrawEventDesigner {
+    public static createDrawEvent(resolveType:EventUnionSubTypes, drawCardNumber:number, waiterId:number): DrawEvent {
+        let event = new DrawEvent
+        event.drawCardNumber= drawCardNumber,
+        event.resolveEventSubType = resolveType
+        event.waiterId = waiterId
+        return event
+    }
 }

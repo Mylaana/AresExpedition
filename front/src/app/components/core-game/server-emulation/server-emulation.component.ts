@@ -5,7 +5,7 @@ import { PlayerReadyPannelComponent } from '../../player-info/player-ready-panne
 import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawModel } from '../../../models/core-game/draw.model';
-import { EventBaseModel } from '../../../models/core-game/event.model';
+import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -24,7 +24,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   currentGroupPlayerState!: {};
   currentEventQueue: EventBaseModel[] = [];
   currentPhase: string = "planification";
-  currentDrawQueue: DrawModel[] = []
+  currentDrawQueue: DrawEvent[] = []
   cardsDeck: number[] = [];
   cardsDiscarded: number[] = [];
 
@@ -110,22 +110,24 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
    * @param drawQueue
    * @returns
    */
-  handleDrawQueueRequest(drawQueue: DrawModel[]):void{
+  handleDrawQueueRequest(drawQueue: DrawEvent[]):void{
     this.currentDrawQueue = drawQueue
+
     if(drawQueue.length===0){
       return
     }
-    for(let element of drawQueue){
-      if(this.cardsDeck.length===0){break}
-      if(element.isFinalized===true){continue}
-      if(element.cardList.length!=0){continue}
-      if(element.playerId!=0){
-        //preventing bot players to draw
-        element.isFinalized = true
-        continue
-      }
-      element.cardList = this.drawCardFromDeck(element.cardNumber)
-    };
+    let currentDrawEvent = drawQueue[0]
+    if(currentDrawEvent.finalized===true || currentDrawEvent.served===true){return}
+    if(this.cardsDeck.length===0){
+      console.log('no cards left in deck')
+      currentDrawEvent.finalized = true
+      this.gameStateService.cleanAndNextDrawQueue()
+      return
+    }
+
+    currentDrawEvent.served=true
+    currentDrawEvent.drawResultCardList = this.drawCardFromDeck(currentDrawEvent.drawCardNumber)
+    this.gameStateService.cleanAndNextDrawQueue()
   }
 
   drawCardFromDeck(drawNumber?: number): number[]{

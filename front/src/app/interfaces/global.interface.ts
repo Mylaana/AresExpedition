@@ -94,6 +94,8 @@ export interface EventValue {
     scanKeep?: ScanKeep,
     drawDiscard?: DrawDiscard
     cardBuildId?: number
+    waiterId?: number
+    drawResultList?:number[]
 }
 
 export interface DrawDiscard {
