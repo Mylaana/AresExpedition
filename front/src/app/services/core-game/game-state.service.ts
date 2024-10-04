@@ -497,7 +497,7 @@ export class GameState{
         return this.getClientPlayerState().cards.getHandProject()
     }
 
-    getPlayerStateHand(playerId: number): ProjectCardModel[] {
+    getPlayerStateHand(playerId: number): number[] {
         return this.getPlayerStateFromId(playerId).cards.hand
     }
 
@@ -531,12 +531,13 @@ export class GameState{
 
     addCardToPlayerHand(playerId: number, cardsToAdd: number[]):void{
         let playerStateHand = this.getPlayerStateHand(playerId)
-        this.updatePlayerStateHand(playerId, playerStateHand.concat(cardsToAdd))
+        this.updatePlayerStateHand(playerId,  playerStateHand.concat(cardsToAdd))
     }
 
     removeCardFromPlayerHand(playerId: number, cardsToRemove: ProjectCardModel[]):void{
         let playerStateHand = this.getPlayerStateHand(playerId)
-        playerStateHand = playerStateHand.filter( ( el ) => !cardsToRemove.includes( el ) );
+        let cardsIdToRemove = this.projectCardService.getProjectCardIdListFromModel(cardsToRemove)
+        playerStateHand = playerStateHand.filter( ( el ) => !cardsIdToRemove.includes( el ));
         this.updatePlayerStateHand(playerId, playerStateHand)
     }
 

@@ -23,13 +23,13 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	@Input() eventId?: number;
 	@Input() playZoneId!: number; //this indicates whitch playZone this component should read
 	@Input() cardList!: ProjectCardModel[] //takes display priority
-	@Output() updateSelectedCardList: EventEmitter<number[]> = new EventEmitter<number[]>()
+	@Output() updateSelectedCardList: EventEmitter<ProjectCardModel[]> = new EventEmitter<ProjectCardModel[]>()
 	@Input() cardListId!: string
 	
 	_eventId!: number | undefined
 	cardSelector!: CardSelector
 	displayedCards!: ProjectCardModel[] | undefined;
-	selectedCardList: number[] = [];
+	selectedCardList: ProjectCardModel[] = [];
 	loaded: boolean = false
 
 	testState!: CardState | undefined
@@ -44,7 +44,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	resetSelector(): void {
 		this.cardSelector = {
 			selectFrom: [],
-			selectedIdList: [],
+			selectedList: [],
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'equal'
 		}
@@ -92,13 +92,14 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		return result
 	}
 
-	public cardStateChange(cardState: {cardId: number, state:CardState}): void {
+	public cardStateChange(cardState: {card: ProjectCardModel, state:CardState}): void {
+
 		if(cardState.state.selected===true){
-			this.selectedCardList.push(cardState.cardId)
+			this.selectedCardList.push(cardState.card)
 		} else {
 			//remove card from selected card list
 			for(let i=0; i<this.selectedCardList.length; i++){
-				if(this.selectedCardList[i]===cardState.cardId){
+				if(this.selectedCardList[i]===cardState.card){
 					this.selectedCardList.splice(i, 1)
 					break
 				}
@@ -113,17 +114,17 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		//will root the cards to selected id list, not to selectFrom
 		let card = event.playCardZone[this.playZoneId].selectedCard
 		if(card===undefined){
-			this.cardSelector.selectedIdList
+			this.cardSelector.selectedList
 			this.cardSelector.selectionQuantity = 0
 		} else {
-			this.cardSelector.selectedIdList = [card.id]
+			this.cardSelector.selectedList = [card]
 			this.cardSelector.selectionQuantity = 1
 		}
 	}
 	getSelectorFromCardList(): void {
 		this.cardSelector = {
 			selectFrom: this.cardList,
-			selectedIdList: [],
+			selectedList: [],
 			selectionQuantity: 0,
 			selectionQuantityTreshold: 'equal',
 		}
@@ -164,7 +165,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		)
 	}
 	getDisplayFromSelected(): ProjectCardModel[] {
-		return this.cardInfoService.getProjectCardList(this.cardSelector.selectedIdList) 
+		return this.cardSelector.selectedList
 	}
 	resetCardList(): void {
 		this.selectedCardList = []

@@ -42,7 +42,13 @@ export class ProjectCardInfoService {
         });
         return resultProjectCardList;
     }
-
+    getProjectCardIdListFromModel(cards: ProjectCardModel[]): number[] {
+        let idList: number[] = []
+        for(let card of cards){
+            idList.push(card.id)
+        }
+        return idList
+    }
     private getCardNumber(){
         return this.projectCardInfo.length
     }

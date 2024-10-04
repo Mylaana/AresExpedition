@@ -198,7 +198,7 @@ export class GameEventComponent {
 					{
 						cardSelector:{
 							selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
-							selectedIdList: [],
+							selectedList: [],
 							selectionQuantity: this.gameStateService.getClientPlayerResearchMods().keep
 						}
 					}
@@ -212,7 +212,7 @@ export class GameEventComponent {
 					{
 						cardSelector:{
 							selectFrom: this.cardInfoService.getProjectCardList(element.cardList),
-							selectedIdList: [],
+							selectedList: [],
 							selectionQuantity: element.keepCardNumber
 						}
 					}
@@ -229,6 +229,7 @@ export class GameEventComponent {
 	}
 
 	public updateSelectedCardList(cardList: ProjectCardModel[]){
+		console.log('game event push received: ', cardList)
 		this.eventHandler.updateSelectedCardList(cardList)
 	}
 

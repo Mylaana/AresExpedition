@@ -79,7 +79,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		if(this.state.selectable!=true){return}
 		if(this.state.playable===false && this.state.ignoreCost!=true){return}
 		this.state.selected = this.state.selected===false
-		this.cardStateChange.emit({cardId:this.projectCard.id, state: this.state})
+		this.cardStateChange.emit({card:this.projectCard, state: this.state})
 	}
 
 	play(): void {

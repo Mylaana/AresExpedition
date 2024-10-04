@@ -4,6 +4,7 @@ import { EventBaseModel, EventCardSelectorPlayZone } from '../../../models/core-
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { EventPlayZoneButton } from '../../../models/core-game/button.model';
 import { EventPlayZoneButtonComponent } from '../../tools/event-play-zone-button/event-play-zone-button.component';
+import { ProjectCardModel } from '../../../models/cards/project-card.model';
 
 @Component({
   selector: 'app-card-builder',
@@ -44,7 +45,7 @@ export class CardBuilderComponent implements OnInit, OnChanges, DoCheck{
     this.currentEvent.playCardZoneIdHavingFocus = button.parentPlayZoneId
     this.gameEventPlayZoneButtonClicked.emit(button)
   }
-  public updateSelectedCardList(cardList: number[]): void {
+  public updateSelectedCardList(cardList: ProjectCardModel[]): void {
     console.log('card list updated: ', cardList)
   }
 }
