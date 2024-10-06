@@ -1,9 +1,34 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardSelectorPlayZoneSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
-import { CardSelector, EventValue } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventPlayZoneButton, EventSecondaryButton } from "./button.model";
 import { EventPlayZoneButtonNames } from "../../types/global.type";
 import { CardState } from "../cards/card-cost.model";
 import { ProjectCardModel } from "../cards/project-card.model";
+
+
+interface CreateEventOptionsSelector {
+    cardSelector?: Partial<CardSelector>
+    title?: string
+    waiterId?:number
+}
+interface CreateEventOptionsTargetCard {
+    advancedRessource?: AdvancedRessourceStock
+}
+interface CreateEventOptionsGeneric {
+    increaseParameter?: GlobalParameterValue
+    baseRessource?: RessourceStock | RessourceStock[]
+    scanKeep?: ScanKeep
+    cardId?: number
+    drawEventResult?:number[]
+    waiterId?:number
+    phaseCardUpgradeList?: number[]
+    phaseCardUpgradeNumber?: number
+}
+interface CreateEventOptionsDeckQuery {
+    drawDiscard?: Partial<DrawDiscard>
+    scanKeep?: Partial<ScanKeep>,
+}
+
 
 /**
  * isFinalized should become true when object should go to garbage
@@ -16,7 +41,6 @@ export abstract class EventBaseModel {
     autoFinalize: boolean = false
     id!: number
     button?: EventMainButton
-    readonly value!: any
     readonly title?: string
 
     hasSelector(): boolean {return false}
@@ -80,7 +104,7 @@ export class EventCardSelector extends EventBaseCardSelector{
 export class EventCardSelectorRessource extends EventBaseCardSelector {
     override readonly type: EventType = 'cardSelectorRessource'
     override subType!: EventCardSelectorRessourceSubType;
-    override value!:EventValue
+    advancedRessource?: AdvancedRessourceStock
 }
 
 export class PlayableCardZone {
@@ -236,32 +260,38 @@ export class EventCardSelectorPlayZone extends EventBaseCardSelector {
 export class EventTargetCard extends EventBaseModel {
     override readonly type: EventType = 'targetCard'
     override subType!: EventTargetCardSubType;
-    override value!: EventValue
     targetCardId!: number
     override autoFinalize: boolean = true
+    advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock[]
 }
 
 export class EventGeneric extends EventBaseModel {
     override readonly type: EventType = 'generic'
-    override subType!: EventGenericSubType;
-    override value!: EventValue
+    override subType!: EventGenericSubType
     override autoFinalize: boolean = true
     override title!: string
+    increaseParameter?: GlobalParameterValue
+    increaseResearchScanKeep?: Partial<ScanKeep>
+    baseRessource?:RessourceStock | RessourceStock[]
+    cardIdToBuild?: number
+    drawResultList?: number[]
+    waiterId?: number
 }
 
 export class EventDeckQuery extends EventBaseModel {
     override readonly type: EventType = 'deck'
     override locksEventpile!: boolean
     override subType!: EventDeckQuerySubType;
-    override value!: EventValue
     override autoFinalize: boolean = true
+    waiterId!:number
+    scanKeep?: Partial<ScanKeep>
+    drawDiscard?: Partial<DrawDiscard>
 }
 
 export class EventWaiter extends EventBaseModel {
     override readonly type: EventType = 'waiter'
     override locksEventpile: boolean = true
     override subType!: EventWaiterSubType;
-    override value!: EventValue
     override autoFinalize: boolean = true
     waiterId!: number
 }

@@ -20,7 +20,7 @@
             <div *ngIf="currentEvent.hasSelector()===true" class="wrapper-card-selector ares-background">
                 <app-project-card-list [cardListId]="'game event list'" [event]="currentEvent" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
-			<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [phaseList]="currentEvent.value!=undefined ? currentEvent.value:null"></app-phase-card-upgrade-selector>
+			<!--<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [phaseList]="currentEvent.value!=undefined?currentEvent.value:null"></app-phase-card-upgrade-selector>-->
         </div>
     </div>
 </div>

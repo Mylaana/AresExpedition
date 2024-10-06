@@ -582,7 +582,7 @@ export class ProjectCardPlayedEffectService {
 		return result
 	}
 	createEventDraw(drawNumber: number): EventBaseModel {
-		return EventDesigner.createDeckQueryEvent('drawQuery')
+		return EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 	}
 	createEventDiscard(discardNumber: number): EventCardSelector {
 		return EventDesigner.createCardSelector("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
@@ -592,16 +592,16 @@ export class ProjectCardPlayedEffectService {
 	}
 	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, steps:number): EventBaseModel {
 		this.addTrToPlayer(steps)
-		return EventDesigner.createGeneric('increaseGlobalParameter', {value:{increaseParameter:{name:parameterName,steps: steps}}})
+		return EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter:{name:parameterName,steps: steps}})
 	}
 	createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventBaseModel {
-		return EventDesigner.createGeneric('addRessourceToPlayer', {value:{baseRessource:gain}})
+		return EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:gain})
 	}
 	createEventAddRessourceToCardId(gain: AdvancedRessourceStock, cardId: number): EventBaseModel {
-		return EventDesigner.createTargetCard('addRessourceToCardId', cardId, {value:{advancedRessource:gain}})
+		return EventDesigner.createTargetCard('addRessourceToCardId', cardId, {advancedRessource:gain})
 	}
 	createEventIncreaseResearchScanKeep(scanKeep: ScanKeep): EventBaseModel {
-		return EventDesigner.createGeneric('increaseResearchScanKeep', {value:{scanKeep:scanKeep}})
+		return EventDesigner.createGeneric('increaseResearchScanKeep', {scanKeep:scanKeep})
 	}
 	createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock, cardSelectionQuantity:number=1): EventBaseModel {
 		return EventDesigner.createCardSelectorRessource(ressource, {cardSelector:{selectionQuantity:cardSelectionQuantity}})
@@ -610,6 +610,6 @@ export class ProjectCardPlayedEffectService {
 		return EventDesigner.createTargetCard('deactivateTrigger', triggerId)
 	}
 	createEventScanKeep(scanKeep: ScanKeep): EventBaseModel {
-		return EventDesigner.createDeckQueryEvent('scanKeepQuery', {value:{scanKeep:scanKeep}})
+		return EventDesigner.createDeckQueryEvent('scanKeepQuery', {scanKeep:scanKeep})
 	}
 }

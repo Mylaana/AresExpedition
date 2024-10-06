@@ -1,57 +1,56 @@
 import { Injectable } from "@angular/core";
 import { DrawEvent, EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, PlayableCardZone } from "../../models/core-game/event.model";
 import { EventCardSelectorPlayZoneSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
-import { AdvancedRessourceStock, CardSelector, EventValue } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ButtonDesigner } from "./button-designer.service";
-import { ProjectCardModel } from "../../models/cards/project-card.model";
-import { MinMaxEqualType } from "../../types/global.type";
-import { ProjectFilter } from "../../interfaces/global.interface";
-import { CardState } from "../../models/cards/card-cost.model";
 
-interface CardSelectorOptions {
-    selectFrom?: ProjectCardModel[];
-    selectedList?: ProjectCardModel[];
-    selectionQuantity?: number;
-    selectionQuantityTreshold?: MinMaxEqualType;
-    filter?: ProjectFilter;
-    cardInitialState?: CardState;
-	stateFromParent?: CardState;
-}
+type CardSelectorOptions = Partial<CardSelector>
 
-interface CreateEventOptions {
+interface CreateEventOptionsSelector {
     cardSelector?: CardSelectorOptions
-
     title?: string
-    value?: EventValue
+    waiterId?:number
+}
+interface CreateEventOptionsTargetCard {
+    advancedRessource?: AdvancedRessourceStock
+}
+interface CreateEventOptionsGeneric {
+    increaseParameter?: GlobalParameterValue
+    baseRessource?: RessourceStock | RessourceStock[]
+    scanKeep?: ScanKeep
     cardId?: number
+    drawEventResult?:number[]
+    waiterId?:number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number
-    waiterId?:number
-    drawResult?:number[]
+}
+interface CreateEventOptionsDeckQuery {
+    drawDiscard?: Partial<DrawDiscard>
+    scanKeep?: Partial<ScanKeep>,
 }
 
 @Injectable({
     providedIn: 'root'
 })
 export class EventDesigner{
-    private static generateCardSelector(args?: CreateEventOptions): CardSelector {
+    private static generateCardSelector(args?: CardSelectorOptions): CardSelector {
         let selector: CardSelector
 
         selector ={
-            selectFrom: args?.cardSelector?.selectFrom? args.cardSelector.selectFrom:[],
-            selectedList:  args?.cardSelector?.selectedList? args.cardSelector.selectedList:[],
-            selectionQuantity: args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0,
-            selectionQuantityTreshold: args?.cardSelector?.selectionQuantityTreshold? args.cardSelector.selectionQuantityTreshold:'equal',
-            cardInitialState: args?.cardSelector?.cardInitialState? args.cardSelector.cardInitialState:undefined,
-            filter: args?.cardSelector?.filter? args.cardSelector.filter:undefined,
-            stateFromParent: args?.cardSelector?.filter? args.cardSelector.stateFromParent:undefined
+            selectFrom: args?.selectFrom? args.selectFrom:[],
+            selectedList:  args?.selectedList? args.selectedList:[],
+            selectionQuantity: args?.selectionQuantity? args.selectionQuantity:0,
+            selectionQuantityTreshold: args?.selectionQuantityTreshold? args.selectionQuantityTreshold:'equal',
+            cardInitialState: args?.cardInitialState? args.cardInitialState:undefined,
+            filter: args?.filter? args.filter:undefined,
+            stateFromParent: args?.filter? args.stateFromParent:undefined
         }
 
         return selector
     }
-    public static createCardSelector(subType:EventCardSelectorSubType, args?: CreateEventOptions): EventCardSelector {
+    public static createCardSelector(subType:EventCardSelectorSubType, args?: CreateEventOptionsSelector): EventCardSelector {
         let event = new EventCardSelector
-        event.cardSelector = this.generateCardSelector(args)
+        event.cardSelector = this.generateCardSelector(args?.cardSelector)
         event.subType = subType
 
         switch(subType){
@@ -87,14 +86,14 @@ export class EventDesigner{
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
         return event
     }
-    public static createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: CreateEventOptions): EventCardSelectorRessource {
+    public static createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: CreateEventOptionsSelector): EventCardSelectorRessource {
         let event = new EventCardSelectorRessource
-        event.cardSelector = this.generateCardSelector(args)
+        event.cardSelector = this.generateCardSelector(args?.cardSelector)
 
         event.subType = 'addRessourceToSelectedCard'
-        event.value = {advancedRessource:{name:ressource.name, valueStock:ressource.valueStock}}
-        event.title = args?.title? args.title: `Select a card to add ${event.value.advancedRessource?.valueStock} ${event.value.advancedRessource?.name}(s).`
-        event.cardSelector.filter =  {type:'stockable', value:event.value.advancedRessource?.name}
+        event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
+        event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`
+        event.cardSelector.filter =  {type:'stockable', value:event.advancedRessource?.name}
         event.cardSelector.cardInitialState
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 
@@ -131,8 +130,7 @@ export class EventDesigner{
         }
         return event
     }
-
-    public static createTargetCard(subType:EventTargetCardSubType, targetCardId:number ,args?: CreateEventOptions): EventTargetCard {
+    public static createTargetCard(subType:EventTargetCardSubType, targetCardId:number ,args?: CreateEventOptionsTargetCard): EventTargetCard {
         let event = new EventTargetCard
 
         event.targetCardId = targetCardId
@@ -140,7 +138,7 @@ export class EventDesigner{
 
         switch(subType){
             case('addRessourceToCardId'):{
-                event.value = {advancedRessource: args?.value?.advancedRessource}
+                event.advancedRessource = args?.advancedRessource
                 break
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
@@ -148,13 +146,13 @@ export class EventDesigner{
         event.button = ButtonDesigner.createEventMainButton(event.subType)
         return event
     }
-    public static createGeneric(subType:EventGenericSubType, args?: CreateEventOptions): EventGeneric {
+    public static createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGeneric): EventGeneric {
         let event = new EventGeneric
 
         event.subType = subType
         switch(subType){
             case('increaseGlobalParameter'):{
-                event.value.increaseParameter = args?.value?.increaseParameter
+                event.increaseParameter = args?.increaseParameter
                 break
             }
             case('upgradePhaseCards'):{
@@ -163,12 +161,12 @@ export class EventDesigner{
                 break
             }
             case('addRessourceToPlayer'):{
-                event.value.baseRessource = args?.value?.baseRessource
+                event.baseRessource = args?.baseRessource
                 break
             }
 
             case('increaseResearchScanKeep'):{
-                event.value.scanKeep = args?.value?.scanKeep
+                event.increaseResearchScanKeep = args?.scanKeep
                 break
             }
             case('planificationPhase'):{
@@ -176,7 +174,7 @@ export class EventDesigner{
                 break
             }
             case('buildCard'):{
-                event.value = {cardBuildId:args?.cardId}
+                event.cardIdToBuild = args?.cardId
                 break
             }
             case('productionPhase'):{
@@ -187,7 +185,8 @@ export class EventDesigner{
             case('drawResult'):{
                 //event.value = {waiterId:1} = args?.waiterId? args.waiterId:-1
                 //event.value .drawResultList = args?.drawResult
-                event.value = {drawResultList: args?.drawResult, waiterId:args?.waiterId}
+                event.drawResultList = args?.drawEventResult
+                event.waiterId = args?.waiterId
                 break
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
@@ -195,25 +194,25 @@ export class EventDesigner{
         event.button = ButtonDesigner.createEventMainButton(event.subType)
         return event
     }
-    public static createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptions ) : EventDeckQuery {
+    public static createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptionsDeckQuery ) : EventDeckQuery {
         let event = new EventDeckQuery
         
         event.subType = subType
         switch(subType){
             case('scanKeepQuery'):{
-                event.value = {scanKeep:args?.value?.scanKeep}
+                event.scanKeep = args?.scanKeep
                 break
             }
             case('drawQuery'):{
                 console.log('DRAW QUERY :', args, event)
-                event.value = {drawDiscard:args?.value?.drawDiscard}
+                event.drawDiscard = args?.drawDiscard
                 break
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         return event
     }
-    public static createWaiter(subType:EventWaiterSubType, waiterId: number, args?: CreateEventOptions ) : EventWaiter {
+    public static createWaiter(subType:EventWaiterSubType, waiterId: number) : EventWaiter {
         let event = new EventWaiter
         
         event.subType = subType

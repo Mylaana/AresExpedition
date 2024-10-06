@@ -3,7 +3,6 @@ import { AdvancedRessourceType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
-import { Inject } from "@angular/core"
 
 type playedProject = {
     playedIdList: number[],

@@ -8,14 +8,13 @@ import { PhaseResearchComponent } from '../../phases/phase-research/phase-resear
 import { NonSelectablePhase } from '../../../types/global.type';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { RessourceState } from '../../../interfaces/global.interface';
-import { DrawModel } from '../../../models/core-game/draw.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
 import { ChildButton, EventPlayZoneButton, EventSecondaryButton } from '../../../models/core-game/button.model';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
-import { DrawEvent, EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
+import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { EventDesigner } from '../../../services/core-game/event-designer.service';
 import { EventButtonComponent } from '../../tools/event-button/event-button.component';
@@ -134,7 +133,7 @@ export class GameEventComponent {
 			if(i===5){
 			this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent(
 				'drawQuery',
-				{value:{drawDiscard:{draw:newClientRessource[i].valueProd,discard:0}}}
+				{drawDiscard:{draw:newClientRessource[i].valueProd,discard:0}}
 			))
 			continue
 			}
@@ -147,7 +146,7 @@ export class GameEventComponent {
 	}
 
 	applyResearchPhase(clientState: PlayerStateModel): void{
-		this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('researchPhaseQuery',{value:{scanKeep:{scan:clientState.research.scan + 2,keep:clientState.research.keep}}}))
+		this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('researchPhaseQuery',{scanKeep:{scan:clientState.research.scan + 2,keep:clientState.research.keep}}))
 	}
 	/*
 	addDrawQueue(playerId: number, cardNumber: number): void {
@@ -157,7 +156,7 @@ export class GameEventComponent {
 		draw.drawRule = 'draw'
 		this.gameStateService.addDrawQueue(draw)
 	}
-		*/
+	*/
 
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
 		let newEvent = EventDesigner.createGeneric(
@@ -189,5 +188,4 @@ export class GameEventComponent {
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public eventCardBuilderButtonClicked(button: EventPlayZoneButton){this.eventHandler.playZoneButtonClicked(button)}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
-
 }

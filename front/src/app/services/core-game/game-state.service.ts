@@ -238,7 +238,7 @@ export class GameState{
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{value:{drawDiscard:{draw:handSizeStart,discard:0}}}))
+            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart,discard:0}}))
         }
 
         newPlayer.terraformingRating = 5;

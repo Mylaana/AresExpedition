@@ -87,6 +87,7 @@ export interface ProjectFilter {
     value?: AdvancedRessourceType | AdvancedRessourceType[]
 }
 
+/*
 export interface EventValue {
     advancedRessource?: AdvancedRessourceStock,
     baseRessource?: RessourceStock | RessourceStock[],
@@ -96,7 +97,7 @@ export interface EventValue {
     cardBuildId?: number
     waiterId?: number
     drawResultList?:number[]
-}
+}*/
 
 export interface DrawDiscard {
     draw: number,

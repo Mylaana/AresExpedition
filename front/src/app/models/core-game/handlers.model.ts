@@ -84,6 +84,7 @@ export class EventHandler {
 
 		this.applyAutoFinalize()
 		console.log('switched to event: ',this.currentEvent)
+		console.log('remaining unresolved: ', this.waiterResolved)
         return 
     }
 	private applyAutoFinalize(): void {
@@ -161,7 +162,7 @@ export class EventHandler {
 				event.cardSelector.selectFrom = 
 						this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
 				if(event.cardSelector.selectFrom.length===0){
-					console.log('no cards found to add:', event.value)
+					console.log('no cards found to add:', event.advancedRessource)
 					event.finalized = true
 				}
 				break
@@ -192,7 +193,7 @@ export class EventHandler {
 				break
 			}
 			case('buildCard'):{
-				let cardId = event.value.cardBuildId
+				let cardId = event.cardIdToBuild
 				if(cardId===undefined){break}
 				let card = this.projectCardInfoService.getCardById(cardId)
 				if(card===undefined){break}
@@ -201,9 +202,9 @@ export class EventHandler {
 			}
 			case('drawResult'):{
 				event.finalized = true
-				if(event.value.drawResultList===undefined){console.log('EXIT: ', event);break}
-				this.gameStateService.addCardToPlayerHand(this.clientPlayerId,event.value.drawResultList)
-				this.waiterResolved.push(event.id)
+				if(event.drawResultList===undefined){console.log('EXIT: ', event);break}
+				this.gameStateService.addCardToPlayerHand(this.clientPlayerId,event.drawResultList)
+				this.waiterResolved.push(event.waiterId as number)
 				break
 			}
 			default:{console.log('Non mapped event in handler.resolveEventGeneric: ', this.currentEvent)}
@@ -215,17 +216,20 @@ export class EventHandler {
 		switch(event.subType){
 			case('drawQuery'):{
 				resolveType = 'drawResult'
-				event.value.waiterId = event.id
+				event.waiterId = event.id
 				break
 			}
 			default:{console.log('Non mapped event in handler.resolveEventDeckQuery: ', this.currentEvent)}
 		}
 
-		if(event.value.drawDiscard===undefined || event.value.waiterId===undefined || resolveType===undefined){return}
+		if(event.drawDiscard===undefined || event.waiterId===undefined || resolveType===undefined){return}
 
 		//adding a deck waiter event until drawEvent resolution
 		this.gameStateService.addEventQueue(EventDesigner.createWaiter('deckWaiter', event.id), true)
-		this.gameStateService.addDrawQueue(DrawEventDesigner.createDrawEvent(resolveType, event.value.drawDiscard.draw,event.id))
+		let drawNumber = event.drawDiscard?.draw
+		if(drawNumber!=undefined && drawNumber>0){
+			this.gameStateService.addDrawQueue(DrawEventDesigner.createDrawEvent(resolveType, drawNumber,event.id))
+		}
 		this.gameStateService.cleanAndNextEventQueue()
 	}
 	private resolveEventWaiter(event: EventWaiter): void {
@@ -249,14 +253,12 @@ export class EventHandler {
 	}
 	private resolveWaiters(eventQueue: EventBaseModel[]){
 		let newWaiters: number[] = []
-		console.log('resolve Waiter: ',this.waiterResolved, eventQueue)
 		for(let waiterId of this.waiterResolved){
 			if(this.resolveWaiterId(waiterId, eventQueue)===false){
 				newWaiters.push(waiterId)
 			}
 		}
 		this.waiterResolved = newWaiters
-		console.log('resolved Waiter: ',this.waiterResolved)
 	}
 	private resolveWaiterId(waiterId: number, eventQueue: EventBaseModel[]): boolean {
 		for(let event of eventQueue){
@@ -491,7 +493,7 @@ export class DrawEventHandler {
 				resultEvent = EventDesigner.createGeneric(
 					'drawResult',
 					{
-						drawResult:drawEvent.drawResultCardList,
+						drawEventResult:drawEvent.drawResultCardList,
 						waiterId:drawEvent.waiterId
 					}
 				)
@@ -526,8 +528,6 @@ export class DrawEventHandler {
 				)
 			}
 		}
-		console.log('result event: ',resultEvent)
-		console.log('resolved drawEvent: ', drawEvent)
 		if(resultEvent===undefined){return}
 		this.gameStateService.addEventQueue(resultEvent,true)
 	}
