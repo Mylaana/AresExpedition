@@ -1,4 +1,4 @@
-import { Component, OnInit , AfterViewInit} from '@angular/core';
+import { Component, OnInit , AfterViewInit, ViewChild} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SelfInfoComponent } from './components/player-info/self-info/self-info.component';
@@ -39,6 +39,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   playerIdList: number[] = this.gameStateService.playerCount.getValue()
   clientPlayerId!: number;
   loading: boolean = false
+  @ViewChild('hand') handProjectList!: ProjectCardListComponent
 
   constructor(
     private gameStateService: GameState,
@@ -64,6 +65,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     let cardState = state[this.clientPlayerId].cards
     this.playerHand = this.cardInfoService.getProjectCardList(cardState.hand)
     this.playerPlayed = cardState.getProjectPlayedList()
+    this.handProjectList.updatePlayedCardList(this.playerPlayed)
   }
   updatePlayerList(playerIdList: number[]){
     this.playerIdList = playerIdList

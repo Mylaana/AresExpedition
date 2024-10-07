@@ -1,13 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, DoCheck, ViewChild, ViewChildren, QueryList} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, DoCheck, ViewChildren, QueryList} from '@angular/core';
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
 import { EventBaseModel, EventCardSelector, EventCardSelectorPlayZone } from '../../../../models/core-game/event.model';
-import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { deepCopy } from '../../../../functions/global.functions';
-import test from 'node:test';
 
 @Component({
   selector: 'app-project-card-list',
@@ -23,19 +21,17 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	@Input() eventId?: number;
 	@Input() playZoneId!: number; //this indicates whitch playZone this component should read
 	@Input() cardList!: ProjectCardModel[] //takes display priority
+	playedCardList!: ProjectCardModel[] //takes display priority
 	@Output() updateSelectedCardList: EventEmitter<ProjectCardModel[]> = new EventEmitter<ProjectCardModel[]>()
 	@Input() cardListId!: string
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<ProjectCardComponent>
 	
-	_eventId!: number | undefined
+	private _cardList!: ProjectCardModel[] | undefined
+	private _eventId!: number | undefined
 	cardSelector!: CardSelector
 	displayedCards!: ProjectCardModel[] | undefined;
-	selectedCardList: ProjectCardModel[] = [];
-	loaded: boolean = false
-
-	testState!: CardState | undefined
-
-	constructor(private cardInfoService: ProjectCardInfoService){}
+	private selectedCardList: ProjectCardModel[] = [];
+	private loaded: boolean = false
 
 	ngOnInit(){
 		this.updateCardList()
@@ -50,7 +46,6 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 			selectionQuantityTreshold: 'equal'
 		}
 	}
-
 	ngOnChanges(changes: SimpleChanges) {
 		if(this.loaded===false){return}
 		if (changes['event'] && changes['event'].currentValue) {
@@ -65,10 +60,13 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		if (changes['cardList'] && changes['cardList'].currentValue) {
 			this.updateCardList()
 		}
+		if (changes['playedCardList'] && changes['playedCardList'].currentValue) {
+			this.updateCardList()
+		}
 	}
 	ngDoCheck(): void {
 		if(this.loaded===false){return}
-		if(this.event?.hasSelector()){this.checkUpdateSelector(this.event as EventCardSelector)}
+		if(this.event?.hasSelector()){this.checkUpdateSelector(this.event as EventCardSelector)}	
 		if(this._eventId!=this.eventId){
 			this.resetCardList()
 			this.updateCardList()
@@ -102,10 +100,18 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		}
 		this.updateSelectedCardList.emit(this.selectedCardList)
 	}
-	getSelectorFromEvent(event: EventCardSelector): void {
+	setSelectorFromPlayedCardList(): void {
+		this.cardSelector = {
+			selectFrom: [],
+			selectedList: this.playedCardList,
+			selectionQuantity: 0,
+			selectionQuantityTreshold: 'equal',
+		}
+	}
+	setSelectorFromEvent(event: EventCardSelector): void {
 		this.cardSelector = event.cardSelector
 	}
-	getSelectorFromPlayZone(event: EventCardSelectorPlayZone): void {
+	setSelectorFromPlayZone(event: EventCardSelectorPlayZone): void {
 		//will root the cards to selected id list, not to selectFrom
 		let card = event.playCardZone[this.playZoneId].selectedCard
 		if(card===undefined){
@@ -116,7 +122,8 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 			this.cardSelector.selectionQuantity = 1
 		}
 	}
-	getSelectorFromCardList(): void {
+	setSelectorFromCardList(): void {
+		this._cardList = this.cardList
 		this.cardSelector = {
 			selectFrom: this.cardList,
 			selectedList: [],
@@ -124,33 +131,43 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 			selectionQuantityTreshold: 'equal',
 		}
 	}
-	getSelectorRouter(): void {
+	setSelector(): void {
 		this.resetSelector()
 		//will set up project list variables by priority order
+		if(this.playedCardList){
+			this.setSelectorFromPlayedCardList()
+			return
+		}
 		if(this.cardList){
-			this.getSelectorFromCardList()
+			this.setSelectorFromCardList()
 			return
 		}
 		if(this.playZoneId!=undefined && this.event?.hasCardBuilder()===true){
-			this.getSelectorFromPlayZone(this.event as EventCardSelectorPlayZone)
+			this.setSelectorFromPlayZone(this.event as EventCardSelectorPlayZone)
 			return
 		}
 		if(this.event?.hasSelector()){
 			this.resetCardList()
-			this.getSelectorFromEvent(this.event as EventCardSelector)
+			this.setSelectorFromEvent(this.event as EventCardSelector)
 			return
 		}
 	}
-	updateCardList(): void {
-		this.getSelectorRouter()
-
+	setDisplay(): void {
+		if(this.playedCardList!=undefined){
+			this.displayedCards = this.getDisplayFromPlayed()
+			return
+		}
 		if(this.playZoneId!=undefined){
 			this.displayedCards = this.getDisplayFromSelected()
-		} else {
-			this.displayedCards = this.getDisplayFromSelectable()
-		}
+			return
+		} 
+		this.displayedCards = this.getDisplayFromSelectable()
+	}
+	updateCardList(): void {
+		this.setSelector()
+		this.setDisplay()
 		
-		if(this.displayedCards.length===0){this.displayedCards=undefined}
+		if(this.displayedCards!=undefined && this.displayedCards.length===0){this.displayedCards=undefined}
 		if(this.cardSelector.cardInitialState===undefined){this.cardSelector.cardInitialState={selected:false, selectable:false}}
 	}
 	getDisplayFromSelectable(): ProjectCardModel[] {
@@ -162,8 +179,15 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	getDisplayFromSelected(): ProjectCardModel[] {
 		return this.cardSelector.selectedList
 	}
+	getDisplayFromPlayed(): ProjectCardModel[] {
+		return this.playedCardList
+	}
 	resetCardList(): void {
 		this.selectedCardList = []
+	}
+	updatePlayedCardList(cardList: ProjectCardModel[]): void {
+		this.playedCardList = cardList
+		this.updateCardList()
 	}
 }
 

@@ -46,6 +46,6 @@ export class CardBuilderComponent implements OnInit, OnChanges, DoCheck{
     this.gameEventPlayZoneButtonClicked.emit(button)
   }
   public updateSelectedCardList(cardList: ProjectCardModel[]): void {
-    console.log('card list updated: ', cardList)
+    //console.log('card list updated: ', cardList)
   }
 }
