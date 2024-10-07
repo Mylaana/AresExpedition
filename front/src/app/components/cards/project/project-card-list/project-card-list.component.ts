@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, DoCheck} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, DoCheck, ViewChild, ViewChildren, QueryList} from '@angular/core';
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
@@ -25,6 +25,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	@Input() cardList!: ProjectCardModel[] //takes display priority
 	@Output() updateSelectedCardList: EventEmitter<ProjectCardModel[]> = new EventEmitter<ProjectCardModel[]>()
 	@Input() cardListId!: string
+	@ViewChildren('projectCardComponent') projectCards!: QueryList<ProjectCardComponent>
 	
 	_eventId!: number | undefined
 	cardSelector!: CardSelector
@@ -92,17 +93,11 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		return result
 	}
 
-	public cardStateChange(cardState: {card: ProjectCardModel, state:CardState}): void {
-
-		if(cardState.state.selected===true){
-			this.selectedCardList.push(cardState.card)
-		} else {
-			//remove card from selected card list
-			for(let i=0; i<this.selectedCardList.length; i++){
-				if(this.selectedCardList[i]===cardState.card){
-					this.selectedCardList.splice(i, 1)
-					break
-				}
+	public cardStateChange(cardChange: {card: ProjectCardModel, state:CardState}): void {
+		this.resetCardList()
+		for(let card of this.projectCards){
+			if(card.state?.selected!=undefined && card.state.selected===true){
+				this.selectedCardList.push(card.projectCard)
 			}
 		}
 		this.updateSelectedCardList.emit(this.selectedCardList)

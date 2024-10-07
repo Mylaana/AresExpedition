@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, DoCheck, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { deepCopy } from '../../../../functions/global.functions';

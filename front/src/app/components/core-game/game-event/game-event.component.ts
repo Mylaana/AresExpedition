@@ -178,7 +178,6 @@ export class GameEventComponent {
 	}
 
 	public updateSelectedCardList(cardList: ProjectCardModel[]){
-		console.log('game event push received: ', cardList)
 		this.eventHandler.updateSelectedCardList(cardList)
 	}
 

@@ -23,7 +23,6 @@ export class EventHandler {
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
 		if(eventQueue.length===0){return undefined}
-		console.log(eventQueue)
 		//if(!this.initialized){this.initialized=true; return this.initializeFirstEvent(eventQueue)}
 		
 		if(eventQueue[0].finalized===true){
@@ -67,13 +66,9 @@ export class EventHandler {
 		this.eventCounter += 1
 		return this.eventCounter
 	} 
-	private initializeFirstEvent(eventQueue: EventBaseModel[]): EventBaseModel {
-		this.currentEvent = eventQueue[0]
-		this.currentEvent.id = this.setEventId()
-		return this.currentEvent
-	}
     private switchEvent(eventQueue: EventBaseModel[], event: EventBaseModel): void {
 		if(eventQueue[0]===event){return}
+		if(eventQueue[0]===this.currentEvent){return}
 		
 		//switching current event to top of the pile
 		this.currentEvent = eventQueue[0]
@@ -83,8 +78,6 @@ export class EventHandler {
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
 
 		this.applyAutoFinalize()
-		console.log('switched to event: ',this.currentEvent)
-		console.log('remaining unresolved: ', this.waiterResolved)
         return 
     }
 	private applyAutoFinalize(): void {
@@ -104,14 +97,17 @@ export class EventHandler {
 		//check per subType special rules:
 		switch(event.subType){
 			case('selectCardForcedSell'):{
+				console.log('resolving event: ','EventCardSelector ', event.subType)
                 let playerCards = this.gameStateService.getClientPlayerState().cards
                 if(playerCards.hand.length <= playerCards.maximum){
                     event.finalized = true
                     break
                 }
+				event.cardSelector.selectionQuantity = playerCards.hand.length - playerCards.maximum
 				event.cardSelector.selectFrom = this.gameStateService.getClientPlayerStateHandProject()
 				event.activateSelection()
 				event.cardSelector.stateFromParent = {selectable:true, ignoreCost:true}
+				event.title = `Too many cards in hand, please select ${event.cardSelector.selectionQuantity} cards to sell or more.`
 				break
 			}
 			case('discardCards'):case('selectCardOptionalSell'):{
@@ -254,17 +250,18 @@ export class EventHandler {
 	private resolveWaiters(eventQueue: EventBaseModel[]){
 		let newWaiters: number[] = []
 		for(let waiterId of this.waiterResolved){
-			if(this.resolveWaiterId(waiterId, eventQueue)===false){
-				newWaiters.push(waiterId)
-			}
+			let waiterIsResolved = this.resolveWaiterId(waiterId, eventQueue)
+			if(waiterIsResolved===false){newWaiters.push(waiterId)}
 		}
 		this.waiterResolved = newWaiters
 	}
 	private resolveWaiterId(waiterId: number, eventQueue: EventBaseModel[]): boolean {
 		for(let event of eventQueue){
 			if(event.type!=='waiter'){continue}
+
 			let waiterEvent = event as EventWaiter
 			if(waiterId!==waiterEvent.waiterId){continue}
+
 			event.finalized=true
 			return true
 		}
@@ -478,7 +475,7 @@ export class DrawEventHandler {
 	){}
 
 	handleQueueUpdate(drawQueue: DrawEvent[]): void {
-		if(drawQueue.length===0 || drawQueue[0].served===false){
+		if(drawQueue.length===0 || drawQueue[0].served===false || drawQueue[0].finalized===true){
 			return
 		}
 		let event = drawQueue[0]

@@ -1,5 +1,5 @@
 <div class="wrapper-main">
     <div class="wrapper-list">
-        <app-project-card *ngFor="let card of displayedCards" [stateFromParent]="cardSelector.stateFromParent" [projectCard]="card" [initialState]="cardSelector.cardInitialState" (cardStateChange)="cardStateChange($event)"></app-project-card>
+        <app-project-card #projectCardComponent *ngFor="let card of displayedCards" [stateFromParent]="cardSelector.stateFromParent" [projectCard]="card" [initialState]="cardSelector.cardInitialState" (cardStateChange)="cardStateChange($event)"></app-project-card>
     </div>
 </div>

@@ -37,6 +37,7 @@ export class ProjectCardPlayedEffectService {
 	playCard(card: ProjectCardModel, playerState: PlayerStateModel): PlayerStateModel {
 		this.clientPlayerState = playerState
 		this.clientPlayerState.playCard(card)
+		console.log('card played: ',card)
 
 		switch(card.cardCode){
 			//Decomposing Fungus

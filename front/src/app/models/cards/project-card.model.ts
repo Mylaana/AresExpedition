@@ -144,7 +144,7 @@ export class ProjectCardState {
 
         if(card.cardSummaryType!='trigger'){return}
         this.triggers.playTrigger(card.id)
-		
+		console.log('played project list: ',this.projects.playedProjectList)
     }
     getPlayedTriggersId(): number[] {
         return this.triggers.getPlayedTriggers()

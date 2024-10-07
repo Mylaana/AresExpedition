@@ -62,6 +62,7 @@ export class EventDesigner{
             }
             case('selectCardForcedSell'):{
                 event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
+                event.cardSelector.selectionQuantityTreshold = 'min'
                 break
             }
             case('selectCardOptionalSell'):{
@@ -204,7 +205,6 @@ export class EventDesigner{
                 break
             }
             case('drawQuery'):{
-                console.log('DRAW QUERY :', args, event)
                 event.drawDiscard = args?.drawDiscard
                 break
             }
