@@ -3,6 +3,7 @@ import { ProjectCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
 import { AdvancedRessourceType } from "../../types/global.type";
+import { deepCopy } from "../../functions/global.functions";
 
 const language = 'en'
 
@@ -33,9 +34,9 @@ export class ProjectCardInfoService {
     }
 
     getProjectCardList(cardIdList: number[]): ProjectCardModel[] {
-        var resultProjectCardList: ProjectCardModel[] = [];
+        let resultProjectCardList: ProjectCardModel[] = [];
         cardIdList.forEach(element => {
-            let card = this.getCardById(element)
+            let card = this.getCardById(deepCopy(element))
             if(card!=undefined){
                 resultProjectCardList.push(card)
             }

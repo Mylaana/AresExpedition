@@ -1,20 +1,17 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { GlobalParameterName, RGB } from "../../types/global.type";
-import { AdvancedRessourceStock, CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock } from "../../interfaces/global.interface";
+import { RGB } from "../../types/global.type";
+import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock } from "../../interfaces/global.interface";
 import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
-import { DrawModel } from "../../models/core-game/draw.model";
 import { PhaseCardType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
 import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
-import { deepCopy } from "../../functions/global.functions";
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
-import { trigger } from "@angular/animations";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { DrawEventDesigner, EventDesigner } from "./event-designer.service";
+import { EventDesigner } from "./event-designer.service";
 
 interface SelectedPhase {
     "development": boolean,
@@ -33,7 +30,7 @@ interface PhaseOrder {
 }
 
 const phaseCount: number = 5;
-const handSizeStart: number = 8;
+const handSizeStart: number = 0;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
@@ -232,13 +229,13 @@ export class GameState{
         newPlayer.cards.maximum = handSizeMaximum
 
         newPlayer.research = {
-            keep: 0,
-            scan: 0,
+            keep: 1,
+            scan: 2,
         }
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart,discard:0}}))
+            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}))
         }
 
         newPlayer.terraformingRating = 5;
@@ -618,11 +615,13 @@ export class GameState{
 		playerState.phaseCard.phaseGroup[phaseIndex] = phaseCardGroup
 		this.updatePlayerState(playerId, playerState)
 	}
+    /*
 	addPhaseCardUpgradeNumber(playerId:number, upgradeNumber: number):void{
 		let playerState = this.getPlayerStateFromId(playerId)
 		playerState.phaseCardUpgradeCount =+ upgradeNumber
 		this.updatePlayerState(playerId, playerState)
 	}
+    /*
 	removePhaseCardUpgradeNumber(playerId:number, upgradeNumber: number = 1, removeAll: boolean = false):void{
 		let playerState = this.getPlayerStateFromId(playerId)
 
@@ -633,6 +632,7 @@ export class GameState{
 		}
 		this.updatePlayerState(playerId, playerState)
 	}
+        */
 	sellCardsFromClientHand(quantity: number){
 		let playerState = this.getClientPlayerState()
 		playerState.ressource[0].valueStock += quantity * (cardSellCost + playerState.sellCardValueMod)

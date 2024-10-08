@@ -80,6 +80,8 @@ export class EventDesigner{
                 event.title = `Select ${event.cardSelector.selectionQuantity} cards to draw`
                 event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
                 event.cardSelector.selectionQuantityTreshold = 'equal'
+                event.refreshSelectorOnSwitch = false
+                event.waiterId = args?.waiterId
                 break
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
@@ -159,13 +161,14 @@ export class EventDesigner{
             case('upgradePhaseCards'):{
                 event.title = 'Select a phase card to upgrade'
                 event.autoFinalize = false
+                event.phaseCardUpgradeList = args?.phaseCardUpgradeList
+                event.phaseCardUpgradeQuantity = args?.phaseCardUpgradeNumber
                 break
             }
             case('addRessourceToPlayer'):{
                 event.baseRessource = args?.baseRessource
                 break
             }
-
             case('increaseResearchScanKeep'):{
                 event.increaseResearchScanKeep = args?.scanKeep
                 break
@@ -206,6 +209,10 @@ export class EventDesigner{
             }
             case('drawQuery'):{
                 event.drawDiscard = args?.drawDiscard
+                break
+            }
+            case('researchPhaseQuery'):{
+                event.scanKeep = args?.scanKeep
                 break
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
@@ -255,6 +262,14 @@ export class DrawEventDesigner {
         event.drawCardNumber= drawCardNumber,
         event.resolveEventSubType = resolveType
         event.waiterId = waiterId
+        return event
+    }
+    public static createScanKeepEvent(resolveType:EventUnionSubTypes, scanKeep:ScanKeep ,waiterId:number): DrawEvent {
+        let event = new DrawEvent
+        event.drawCardNumber = scanKeep.scan
+        event.resolveEventSubType = resolveType
+        event.waiterId = waiterId
+        event.keepCardNumber = scanKeep.keep
         return event
     }
 }

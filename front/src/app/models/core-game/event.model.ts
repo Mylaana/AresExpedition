@@ -42,6 +42,7 @@ export abstract class EventBaseModel {
     id!: number
     button?: EventMainButton
     readonly title?: string
+    waiterId?: number
 
     hasSelector(): boolean {return false}
     hasCardBuilder(): boolean {return false}
@@ -51,6 +52,7 @@ export abstract class EventBaseModel {
 export abstract class EventBaseCardSelector extends EventBaseModel {
     override title: string = 'no title provided'
     override locksEventpile!: boolean
+    refreshSelectorOnSwitch: boolean = true
     cardSelector: CardSelector = {
         selectFrom: [],
         selectedList: [],
@@ -275,7 +277,8 @@ export class EventGeneric extends EventBaseModel {
     baseRessource?:RessourceStock | RessourceStock[]
     cardIdToBuild?: number
     drawResultList?: number[]
-    waiterId?: number
+    phaseCardUpgradeList?: number[]
+    phaseCardUpgradeQuantity?: number
 }
 
 export class EventDeckQuery extends EventBaseModel {
@@ -283,7 +286,7 @@ export class EventDeckQuery extends EventBaseModel {
     override locksEventpile!: boolean
     override subType!: EventDeckQuerySubType;
     override autoFinalize: boolean = true
-    waiterId!:number
+    override waiterId!:number
     scanKeep?: Partial<ScanKeep>
     drawDiscard?: Partial<DrawDiscard>
 }
@@ -293,7 +296,7 @@ export class EventWaiter extends EventBaseModel {
     override locksEventpile: boolean = true
     override subType!: EventWaiterSubType;
     override autoFinalize: boolean = true
-    waiterId!: number
+    override waiterId!: number
 }
 
 export class DrawEvent {

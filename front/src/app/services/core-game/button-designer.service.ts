@@ -15,7 +15,7 @@ export class ButtonDesigner{
             case('planificationPhase'):{button.caption='Select Phase';break}
             case('createEventOptionalSell'):{button.caption='Sell cards';button.startEnabled=true;break}
             case('cancelEventOptionalSell'):{button.caption='Cancel';button.startEnabled=true;break}
-            case('upgradePhaseCards'):{button.caption='End upgrades';break}
+            case('upgradePhaseCards'):{button.caption='End upgrades';button.startEnabled=true;break}
 
             default:{button.caption='default validation';button.startEnabled=true;break}
         }

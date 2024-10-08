@@ -167,7 +167,7 @@ export class GameEventComponent {
 			}
 		)
 		this.gameStateService.addEventQueue(newEvent, true)
-		this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
+		//this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
 	}
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {
 		this.drawHandler.handleQueueUpdate(drawQueue)
