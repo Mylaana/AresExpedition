@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
 import { GameState } from '../../../services/core-game/game-state.service';
-import { SelectablePhase } from '../../../types/global.type';
+import { ButtonNames, SelectablePhase } from '../../../types/global.type';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../tools/button/button.component';
-import { ChildButton } from '../../../interfaces/global.interface';
+import { ChildButton } from '../../../models/core-game/button.model';
 
 @Component({
   selector: 'app-phase-planification',
@@ -38,8 +38,8 @@ export class PhasePlanificationComponent {
   createPhaseCard(buttonName: SelectablePhase, enabled: boolean): void {
 
     let newButton: ChildButton =  {
+      name:buttonName as ButtonNames,
       id: this.buttonList.length,
-      name: buttonName,
       enabled: enabled,
       startEnabled: enabled,
       imageUrl: `/assets/other/phase_${buttonName}.png`
@@ -49,7 +49,6 @@ export class PhasePlanificationComponent {
   }
   public childButtonClicked(button: ChildButton ){
     if(button.name===undefined){return}
-
     this.currentPhaseSelected = button.name
     this.gameStateService.playerSelectPhase(this.clientPlayerId, button.name as keyof SelectablePhase)
     this.phaseSelected.emit()

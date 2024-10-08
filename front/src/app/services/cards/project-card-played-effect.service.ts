@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { AdvancedRessourceType, GlobalParameterName, RessourceType } from "../../types/global.type";
+import { GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
-import { EventModel } from "../../models/core-game/event.model";
-import { GlobalParameter, RessourceStock, RessourceState, CardRessourceStock, GlobalParameterValue, ScanKeep } from "../../interfaces/global.interface";
+import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
+import { RessourceStock, GlobalParameterValue, ScanKeep } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
 import { GlobalTagInfoService } from "../global/global-tag-info.service";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
-import { state } from "@angular/animations";
+import { EventDesigner } from "../core-game/event-designer.service";
 
 
 @Injectable({
@@ -258,12 +258,12 @@ export class ProjectCardPlayedEffectService {
 	 
 	* Events should be filled to the list according to their order of execution.
 	 */
-	getPlayedCardEvent(card: ProjectCardModel): EventModel[] | undefined{
-		let result: EventModel[] = []
+	getPlayedCardEvent(card: ProjectCardModel): EventBaseModel[] | undefined{
+		let result: EventBaseModel[] = []
 		switch(card.cardCode){
 			//Interns
 			case('36'):{
-				result.push(this.createEventIncreaseResearchScan(2))
+				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:2}))
 				break
 			}
 			//Artificial Lake
@@ -429,9 +429,9 @@ export class ProjectCardPlayedEffectService {
 
 		return costMod
 	}
-	getEventTriggerByPlayedCard(playedCard: ProjectCardModel, triggerIdList: number[], state: PlayerStateModel): EventModel[] | undefined{
+	getEventTriggerByPlayedCard(playedCard: ProjectCardModel, triggerIdList: number[], state: PlayerStateModel): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
-		let events: EventModel[] = []
+		let events: EventBaseModel[] = []
 
 		for(let triggerId of triggerIdList){
 			let newEvent = this.generateEventTriggerByPlayedCard(triggerId, playedCard, state)
@@ -441,8 +441,8 @@ export class ProjectCardPlayedEffectService {
 		}
 		return events
 	}
-	generateEventTriggerByPlayedCard(triggerId: number, playedCard: ProjectCardModel, state: PlayerStateModel): EventModel[] | undefined {
-		let result: EventModel[] = []
+	generateEventTriggerByPlayedCard(triggerId: number, playedCard: ProjectCardModel, state: PlayerStateModel): EventBaseModel[] | undefined {
+		let result: EventBaseModel[] = []
 
 		switch(triggerId){
 
@@ -453,9 +453,9 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	getTriggerByTagGained(playedCard: ProjectCardModel, triggerIdList: number[]): EventModel[] | undefined{
+	getTriggerByTagGained(playedCard: ProjectCardModel, triggerIdList: number[]): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
-		let events: EventModel[] = []
+		let events: EventBaseModel[] = []
 
 		for(let triggerId of triggerIdList){
 			let newEvent = this.generateEventTriggerByTagGained(triggerId, playedCard)
@@ -465,8 +465,8 @@ export class ProjectCardPlayedEffectService {
 		}
 		return events
 	}
-	generateEventTriggerByTagGained(triggerId: number, playedCard: ProjectCardModel): EventModel[] | undefined {
-		let result: EventModel[] = []
+	generateEventTriggerByTagGained(triggerId: number, playedCard: ProjectCardModel): EventBaseModel[] | undefined {
+		let result: EventBaseModel[] = []
 		let playedCardTags = playedCard.tagsId
 		let cardPlayedIsTheTrigger = triggerId===playedCard.id
 
@@ -511,9 +511,9 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	getEventTriggerByRessourceAddedToCard(targetCard: ProjectCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventModel[] | undefined{
+	getEventTriggerByRessourceAddedToCard(targetCard: ProjectCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
-		let events: EventModel[] = []
+		let events: EventBaseModel[] = []
 
 		for(let triggerId of triggerIdList){
 			let newEvent = this.generateEventTriggerByRessourceAddedToCard(triggerId, targetCard, ressource)
@@ -524,8 +524,8 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	generateEventTriggerByRessourceAddedToCard(triggerId: number, targetCard: ProjectCardModel, ressource: AdvancedRessourceStock): EventModel[] | undefined {
-		let result: EventModel[] = []
+	generateEventTriggerByRessourceAddedToCard(triggerId: number, targetCard: ProjectCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
+		let result: EventBaseModel[] = []
 
 		switch(triggerId){
 			//Bacterial Aggregate
@@ -535,7 +535,7 @@ export class ProjectCardPlayedEffectService {
 					result.push(this.createEventDeactivateTrigger(triggerId))
 					break
 				}
-				result.push(this.createEventIncreaseResearchScan(ressource.valueStock))
+				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:ressource.valueStock}))
 				break
 			}
 			default:{
@@ -545,9 +545,9 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	getEventTriggerByGlobalParameterIncrease(triggerIdList: number[], parameter: GlobalParameterValue): EventModel[] | undefined{
+	getEventTriggerByGlobalParameterIncrease(triggerIdList: number[], parameter: GlobalParameterValue): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
-		let events: EventModel[] = []
+		let events: EventBaseModel[] = []
 
 		for(let triggerId of triggerIdList){
 			let newEvent = this.generateEventTriggerByGlobalParameterIncrease(triggerId, parameter)
@@ -558,8 +558,8 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	generateEventTriggerByGlobalParameterIncrease(triggerId: number, parameter: GlobalParameterValue): EventModel[] | undefined {
-		let result: EventModel[] = []
+	generateEventTriggerByGlobalParameterIncrease(triggerId: number, parameter: GlobalParameterValue): EventBaseModel[] | undefined {
+		let result: EventBaseModel[] = []
 
 		switch(triggerId){
 			//Physiscs Complex
@@ -581,184 +581,35 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	createEventDraw(drawNumber: number): EventModel {
-		let newEvent = new EventModel
-		newEvent.type = 'drawCards'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 0,
-			selectionQuantityTreshold: 'equal',
-			title: 'Draw cards',
-			selectedIdList: [],
-		}
-		newEvent.value = drawNumber
-		
-		return newEvent
+	createEventDraw(drawNumber: number): EventBaseModel {
+		return EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 	}
-	createEventDiscard(discardNumber: number): EventModel {
-		let newEvent = new EventModel
-		newEvent.type = 'discardCards'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: discardNumber,
-			selectionQuantityTreshold: 'equal',
-			title: `Select ${discardNumber} card(s) to discard.`,
-			selectedIdList: [],
-			cardInitialState: {selectable: true, ignoreCost: true},
-		}	
-		newEvent.value = discardNumber
-		
-		return newEvent
+	createEventDiscard(discardNumber: number): EventCardSelector {
+		return EventDesigner.createCardSelector("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
 	}
-	/**
-	 * 
-	 * @param phaseCardList 
-	 * @returns newEvent
-	 * 
-	 * undefined phaseCardList will be treated as all phase cards being upgradable
-	 */
-	createEventUpgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventModel {
-		let newEvent = new EventModel
-		newEvent.type = 'upgradePhase'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: phaseCardUpgradeCount,
-			selectionQuantityTreshold: 'equal',
-			title: 'Select a phase card to upgrade',
-			selectedIdList: [],
-		}
-		if(phaseCardList){
-			newEvent.value = phaseCardList
-		}
-		
-		return newEvent
+	createEventUpgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
+		return EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
-	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, steps:number): EventModel {
-		let newEvent = new EventModel
-		let parameter: GlobalParameter
-
-		newEvent.type = 'increaseGlobalParameter'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 0,
-			selectionQuantityTreshold: 'equal',
-			title: 'Increase Global parameter',
-			selectedIdList: [],
-		}
-		parameter = {
-			name: parameterName,
-			addEndOfPhase: steps,
-			value: 0
-		}
-		newEvent.value = parameter
-
+	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, steps:number): EventBaseModel {
 		this.addTrToPlayer(steps)
-
-		return newEvent
+		return EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter:{name:parameterName,steps: steps}})
 	}
-	createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventModel {
-		let newEvent = new EventModel
-
-		newEvent.type = 'ressourceGain'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 0,
-			selectionQuantityTreshold: 'equal',
-			title: 'Add ressource to player',
-			selectedIdList: [],
-		}
-		newEvent.value = gain
-
-		return newEvent
+	createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventBaseModel {
+		return EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:gain})
 	}
-	createEventAddRessourceToCardId(gain: AdvancedRessourceStock | AdvancedRessourceStock[], cardId: number): EventModel {
-		let newEvent = new EventModel
-		let newGain: AdvancedRessourceStock[] = []
-
-		newEvent.type = 'cardRessourceGain'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 0,
-			selectionQuantityTreshold: 'equal',
-			title: 'Add ressource to card',
-			selectedIdList: [],
-		}		
-
-		if(Array.isArray(gain)){
-			newGain = gain
-		} else {
-			newGain = []
-			newGain.push(gain)
-		}
-
-		newEvent.value = {cardId: cardId,stock: newGain}
-
-		return newEvent
+	createEventAddRessourceToCardId(gain: AdvancedRessourceStock, cardId: number): EventBaseModel {
+		return EventDesigner.createTargetCard('addRessourceToCardId', cardId, {advancedRessource:gain})
 	}
-	createEventIncreaseResearchScan(scan: number): EventModel {
-		let newEvent = new EventModel
-
-		newEvent.type = 'increaseResearchScanValue'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 0,
-			selectionQuantityTreshold: 'equal',
-			title: 'Increase Research scan',
-			selectedIdList: [],
-		}		
-
-		newEvent.value = scan
-
-		return newEvent
+	createEventIncreaseResearchScanKeep(scanKeep: ScanKeep): EventBaseModel {
+		return EventDesigner.createGeneric('increaseResearchScanKeep', {scanKeep:scanKeep})
 	}
-	createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock): EventModel {
-		let newEvent = new EventModel
-
-		newEvent.type = 'addRessourceToSelectedCard'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 1,
-			selectionQuantityTreshold: 'equal',
-			title: `Select a card to add ${ressource.valueStock} ${ressource.name}(s).`,
-			selectedIdList: [],
-			cardInitialState: {selectable:true, ignoreCost:true},
-			phaseFilter: {type:'stockable', value:ressource.name}
-		}		
-
-		newEvent.value = ressource
-
-		return newEvent
+	createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock, cardSelectionQuantity:number=1): EventBaseModel {
+		return EventDesigner.createCardSelectorRessource(ressource, {cardSelector:{selectionQuantity:cardSelectionQuantity}})
 	}
-	createEventDeactivateTrigger(triggerId: number): EventModel {
-		let newEvent = new EventModel
-
-		newEvent.type = 'deactivateTrigger'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 0,
-			selectionQuantityTreshold: 'equal',
-			title: 'Deactivate Trigger',
-			selectedIdList: [],
-		}
-
-		newEvent.value = triggerId
-
-		return newEvent
+	createEventDeactivateTrigger(triggerId: number): EventBaseModel {
+		return EventDesigner.createTargetCard('deactivateTrigger', triggerId)
 	}
-	createEventScanKeep(scanKeep: ScanKeep): EventModel {
-		let newEvent = new EventModel
-
-		newEvent.type = 'scanKeepQuery'
-		newEvent.cardSelector = {
-			selectFrom: [],
-			selectionQuantity: 0,
-			selectionQuantityTreshold: 'equal',
-			title: `Select ${scanKeep.keep} cards to draw.`,
-			selectedIdList: [],
-		}
-
-		newEvent.value = scanKeep
-
-		return newEvent
+	createEventScanKeep(scanKeep: ScanKeep): EventBaseModel {
+		return EventDesigner.createDeckQueryEvent('scanKeepQuery', {scanKeep:scanKeep})
 	}
 }

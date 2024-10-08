@@ -2,6 +2,7 @@ import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
+import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
 
 type playedProject = {
     playedIdList: number[],
@@ -135,13 +136,14 @@ export class ProjectCardState {
     triggers = new TriggerState
     maximum: number = 0
 
+    constructor(private cardInfo: ProjectCardInfoService){}
+
     playCard(card: ProjectCardModel): void {
         this.projects.playedIdList.push(card.id)
         this.projects.playedProjectList.push(card)
-
+        
         if(card.cardSummaryType!='trigger'){return}
         this.triggers.playTrigger(card.id)
-		
     }
     getPlayedTriggersId(): number[] {
         return this.triggers.getPlayedTriggers()
@@ -199,6 +201,12 @@ export class ProjectCardState {
         let result = this.getPlayedProjectCardFromId(cardId)?.getStockValue(ressourceName)
         if(!result){return 0}
         return result
+    }
+    getHandId(): number[] {
+        return this.hand
+    }
+    getHandProject(): ProjectCardModel[] {
+        return this.cardInfo.getProjectCardList(this.hand)
     }
 }
 

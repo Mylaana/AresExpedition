@@ -2,7 +2,6 @@ import { AdvancedRessourceType, GlobalParameterColor, SelectablePhase, TagType }
 import { PhaseCardType } from "../types/phase-card.type";
 import { ProjectCardModel } from "../models/cards/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
-import { ButtonNames } from "../types/global.type";
 import { GlobalParameterName } from "../types/global.type";
 import { CardState } from "../models/cards/card-cost.model";
 import { RessourceType } from "../types/global.type";
@@ -49,35 +48,15 @@ export interface CardOptions {
 	activable?:boolean;
 }
 
-export interface ChildButton {
-    id: number
-    enabled: boolean
-    startEnabled: boolean
-
-    caption?: string
-    value?: any
-    name?: ButtonNames | SelectablePhase
-    imageUrl?: string
-}
-
 export interface CardSelector {
-    title: string;
     selectFrom: ProjectCardModel[];
-    selectedIdList: number[];
+    selectedList: ProjectCardModel[];
     selectionQuantity: number;
     selectionQuantityTreshold: MinMaxEqualType;
-    phaseFilter?: ProjectFilter;
+
+    filter?: ProjectFilter;
     cardInitialState?: CardState;
 	stateFromParent?: CardState;
-    playCardActive?: number;
-}
-
-export interface PlayableCardZone {
-	cardList: ProjectCardModel[],
-	selectionButtonId?: number,
-	cardInitialState?: CardState,
-	phaseFilter?: ProjectFilter,
-    currentButton?: ChildButton
 }
 
 export interface GlobalParameter {
@@ -106,4 +85,27 @@ export interface ScanKeep {
 export interface ProjectFilter {
     type: ProjectFilterType,
     value?: AdvancedRessourceType | AdvancedRessourceType[]
+}
+
+/*
+export interface EventValue {
+    advancedRessource?: AdvancedRessourceStock,
+    baseRessource?: RessourceStock | RessourceStock[],
+    increaseParameter?: GlobalParameterValue,
+    scanKeep?: ScanKeep,
+    drawDiscard?: DrawDiscard
+    cardBuildId?: number
+    waiterId?: number
+    drawResultList?:number[]
+}*/
+
+export interface DrawDiscard {
+    draw: number,
+    discard: number
+}
+
+export interface MinMaxEqualTreshold {
+    tresholdValue: number,
+    value: number,
+    treshold: MinMaxEqualType
 }

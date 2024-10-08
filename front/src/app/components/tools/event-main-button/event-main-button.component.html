@@ -1,0 +1,7 @@
+<div class="wrapper-button">
+    <div [ngClass]="{'element-disabled': button.enabled===false}">
+        <button [disabled]="button.enabled===false" (click)="onClick()"  >
+            <p>{{button.caption}}</p>
+        </button>
+    </div>
+</div>

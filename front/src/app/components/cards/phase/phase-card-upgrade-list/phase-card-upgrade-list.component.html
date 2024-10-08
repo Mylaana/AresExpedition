@@ -1,6 +1,6 @@
 <div class="wrapper-main">
 	<div class="wrapper-phase-card-zone ares-background">
-		<app-phase-card *ngFor="let phaseCardIndex of phaseCardLevelList"
+		<app-phase-card #phaseCards *ngFor="let phaseCardIndex of phaseCardLevelList"
 		[phaseIndex]="phaseIndex" [phaseCardLevel]="phaseCardIndex"
 		[stateFromParent]="phaseCardState[phaseCardIndex]"
 		[initialState]="cardInitialState"

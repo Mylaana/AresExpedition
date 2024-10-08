@@ -5,22 +5,17 @@ export type SelectablePhase = undefined | "development" | "construction" | "acti
 export type NonSelectablePhase = "planification" | "development" | "construction" | "action" | "production" | "research"
 export type StandardState = 'default' | 'disabled'
 export type MinMaxEqualType = 'min' | 'max' | 'equal'
-export type EventType = 
-'endOfPhase' | 'optionalSell' | 'forcedSell' | 'selectCard' | 'selectCardToBuild' | 'selectCardToActivate' 
-| 'production' | 'planification' | 'upgradePhase' | 'research' | 'drawCards' | 'discardCards' 
-| 'increaseGlobalParameter' | 'ressourceGain' | 'cardRessourceGain' | 'increaseResearchScanValue' | 'increaseResearchKeepValue'
-| 'deactivateTrigger' | 'addRessourceToSelectedCard'
-| 'scanKeepQuery' | 'scanKeepResult'
 export type ButtonNames =
 'defaultValidate' 
 | 'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'
 | 'sellCardsEndPhase' | 'callOptionalSellCards' | 'validateOptionalSellCards'
-| 'selectFirstCard' | 'cancelFirstCard' | 'buildFirstCard'
-| 'selectSecondCard' | 'cancelSecondCard' | 'buildSecondCard'
 | 'selectAlternative'
 | 'upgradePhase'
 | 'drawCards' | 'discardCards' | 'scanKeep'
 | 'addRessourceToSelectedCard'
+
+export type EventSecondaryButtonNames = 'sellOptionalCard'
+export type EventPlayZoneButtonNames =  'selectCard' | 'cancelCard' | 'buildCard' | 'alternative'
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'

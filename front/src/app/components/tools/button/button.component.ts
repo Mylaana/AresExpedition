@@ -1,6 +1,6 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChildButton } from '../../../interfaces/global.interface';
+import { ChildButton, EventMainButton } from '../../../models/core-game/button.model';
 
 @Component({
   selector: 'app-button',

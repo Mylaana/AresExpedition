@@ -3,6 +3,7 @@ import { ProjectCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
 import { AdvancedRessourceType } from "../../types/global.type";
+import { deepCopy } from "../../functions/global.functions";
 
 const language = 'en'
 
@@ -33,20 +34,26 @@ export class ProjectCardInfoService {
     }
 
     getProjectCardList(cardIdList: number[]): ProjectCardModel[] {
-        var resultProjectCardList: ProjectCardModel[] = [];
+        let resultProjectCardList: ProjectCardModel[] = [];
         cardIdList.forEach(element => {
-            let card = this.getCardById(element)
+            let card = this.getCardById(deepCopy(element))
             if(card!=undefined){
                 resultProjectCardList.push(card)
             }
         });
         return resultProjectCardList;
     }
-
-    getCardNumber(){
+    getProjectCardIdListFromModel(cards: ProjectCardModel[]): number[] {
+        let idList: number[] = []
+        for(let card of cards){
+            idList.push(card.id)
+        }
+        return idList
+    }
+    private getCardNumber(){
         return this.projectCardInfo.length
     }
-    loadJson(): ProjectCardModel[] {
+    private loadJson(): ProjectCardModel[] {
 
         this.projectCardInfo = []
         let cardList: ProjectCardModel[] = []
@@ -81,14 +88,14 @@ export class ProjectCardInfoService {
         }
         return cardList
     }
-    convertTagList(inputList: any[]): number[] {
+    private convertTagList(inputList: any[]): number[] {
         let tags = []
         for(let tag of inputList){
             tags.push(Number(tag))
         }
         return tags
     }
-    convertStockable(inputList: string[]): AdvancedRessourceType[] {
+    private convertStockable(inputList: string[]): AdvancedRessourceType[] {
         let result: AdvancedRessourceType[] = []
         for(let input of inputList){
             let ressource = stockableMap.get(input)
@@ -97,7 +104,7 @@ export class ProjectCardInfoService {
         }
         return result
     }
-    convertSummaryType(input: string): SummaryType {
+    private convertSummaryType(input: string): SummaryType {
         switch(input){
             case('action'):{
                 return 'action'
@@ -116,7 +123,7 @@ export class ProjectCardInfoService {
             }
         }
     }
-    convertCardType(input: string): CardType {
+    private convertCardType(input: string): CardType {
         switch(input){
             case('redProject'):{
                 return 'redProject'
@@ -132,7 +139,7 @@ export class ProjectCardInfoService {
             }
         }
     }
-    convertPrerequisiteTresholdType(input: string): PrerequisiteTresholdType {
+    private convertPrerequisiteTresholdType(input: string): PrerequisiteTresholdType {
         switch(input){
             case('min'):{
                 return 'min'
@@ -145,7 +152,7 @@ export class ProjectCardInfoService {
             }
         }
     }
-    convertPrerequisiteType(input: string): PrerequisiteType {
+    private convertPrerequisiteType(input: string): PrerequisiteType {
         switch(input){
             case('tag'):{
                 return 'tag'

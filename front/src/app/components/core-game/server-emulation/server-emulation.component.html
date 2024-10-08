@@ -15,15 +15,14 @@
     </div>
     <p>drawQueue :</p>
     <div *ngFor="let queue of currentDrawQueue">
-        <p>{{queue.playerId}} [{{queue.cardList}}] {{queue.isFinalized}}</p>
+        <p>{{queue.id}} [{{queue.drawResultCardList}}] {{queue.finalized}}</p>
     </div>
     <div>
         <p>cards in deck:</p>
         <p>{{cardsDeck.length}}</p>
     </div>
 	<p>eventQueue :</p>
-    <div *ngFor="let queue of currentEventQueue">
-        <p>{{queue.type}} {{queue.isFinalized}}</p>
-		<p *ngIf="queue.cardSelector">initial state selected: {{queue.cardSelector.cardInitialState && queue.cardSelector.cardInitialState && queue.cardSelector.cardInitialState.selected!=undefined? queue.cardSelector.cardInitialState.selected:''}} button:{{queue.button?.id}}</p>
+    <div *ngFor="let event of currentEventQueue">
+        <p>[id]:{{event.id}}  [type]:{{event.type}}  [subtype]:{{event.subType}}  [finalized]:{{event.finalized}}  [autoFinalize]:{{event.autoFinalize}}</p>
     </div>
 </div>
