@@ -8,6 +8,7 @@ Backend: Java (to be confirmed)
 Cards data parser: Python
 
 ### Architecture
+# In Game Design
 ## Cards design
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/cards%20design.png)
 
