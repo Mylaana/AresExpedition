@@ -97,8 +97,11 @@ export class EventDesigner{
         event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
         event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`
         event.cardSelector.filter =  {type:'stockable', value:event.advancedRessource?.name}
-        event.cardSelector.cardInitialState
+        event.cardSelector.cardInitialState = {selectable: true, ignoreCost:true}
+        event.cardSelector.selectionQuantityTreshold = 'equal'
+        event.cardSelector.selectionQuantity = 1
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+        event.refreshSelectorOnSwitch = false
 
         return event
     }
@@ -142,6 +145,9 @@ export class EventDesigner{
         switch(subType){
             case('addRessourceToCardId'):{
                 event.advancedRessource = args?.advancedRessource
+                break
+            }
+            case('deactivateTrigger'):{
                 break
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}

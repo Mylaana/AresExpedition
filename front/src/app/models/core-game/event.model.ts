@@ -172,7 +172,9 @@ export class PlayableCardZone {
                 this.buildCard()
                 break
             }
-
+            case('alternative'):{
+                console.log('alternative clicked')
+            }
         }
 
         if(button.name==='selectCard'){return}

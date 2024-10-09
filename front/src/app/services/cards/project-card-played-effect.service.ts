@@ -531,9 +531,8 @@ export class ProjectCardPlayedEffectService {
 			//Bacterial Aggregate
 			case(222):{
 				if(ressource.name!!='microbe'||ressource.valueStock<1){break}
-				if(targetCard.getStockValue('microbe')>5){
+				if(targetCard.getStockValue('microbe')>=5){
 					result.push(this.createEventDeactivateTrigger(triggerId))
-					break
 				}
 				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:ressource.valueStock}))
 				break

@@ -301,6 +301,7 @@ class TriggerState {
             //Bacterial Aggregate
             case(222):{
                 this.activeOnRessourceAddedToCard = this.activeOnRessourceAddedToCard.filter((e, i) => e !== cardId)
+                this.activeOnGainedTag = this.activeOnGainedTag.filter((e, i) => e !== cardId)
                 break
             }
         }
