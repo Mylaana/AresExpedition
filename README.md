@@ -1,4 +1,13 @@
-# AresExpedition - Opensource private project
+# AresExpedition - Opensource private project  
+This project is NOT related to Asmodee or Fryxgames and is designed for personnal and non commercial use only.
+
+## Architecture and Concepts
+### Technologies used :
+Frontend: Angular 17
+Backend: Java (to be confirmed)
+Cards data parser: Python
+
+### Architecture
 ## Cards design
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/cards%20design.png)
 
@@ -21,8 +30,8 @@ Global parameter increase applied at EOT
 Lakes feature
 
 ## Clean Code
-Comments (pending)
-Tests ?
+Comments: 
+Write automated tests
 
 ## Server
 Chose a technology (Python Django / Java Spring)
