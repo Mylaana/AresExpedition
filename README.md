@@ -4,9 +4,7 @@
 
 # WIP : 
 ## Refactoring :
-Event & Draw Handlers should be transferred to dedicated classes and completely refactored   (ongoing)
-Full Event handleing system refactoring (ongoing)
-Played Effect service should be refactored (ongoing)
+Add GameEventComponent's optional sell button & Lockpile control
 
 ## New features :
 ### Phase cards
