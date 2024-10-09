@@ -62,7 +62,7 @@ export class ButtonDesigner{
                             case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
                             case(1):{button.name='cancelCard';button.caption='Cancel <X>';break}
                             case(2):{button.name='buildCard';button.caption='Build';break}
-                            case(3):{button.name='alternative';button.caption='Alternative';break}
+                            case(3):{button.name='alternative';button.caption='Alternative';button.startEnabled=true;break}
                         }
                     }
                     button.parentPlayZoneId=args.zoneId

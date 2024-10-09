@@ -2,7 +2,7 @@ import { AdvancedRessourceStock, CardRessourceStock, ScanKeep } from "../../inte
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
 import { DrawEventDesigner, EventDesigner } from "../../services/core-game/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
-import { EventUnionSubTypes } from "../../types/event.type";
+import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventUnionSubTypes } from "../../types/event.type";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { EventPlayZoneButton } from "./button.model";
 import { DrawEvent, EventBaseModel, EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter } from "./event.model";
@@ -92,10 +92,11 @@ export class EventHandler {
 
         //reset currentEvent parameters
 		event.deactivateSelection()
+		let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
 		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientPlayerStateHandProject()}
 
 		//check per subType special rules:
-		switch(event.subType){
+		switch(subType){
 			case('selectCardForcedSell'):{
 				console.log('resolving event: ','EventCardSelector ', event.subType)
                 let playerCards = this.gameStateService.getClientPlayerState().cards
@@ -113,6 +114,11 @@ export class EventHandler {
 				event.activateSelection()
 				event.cardSelector.stateFromParent = {selectable:true, ignoreCost:true}
 				break
+			}
+			case('addRessourceToSelectedCard'):{
+				event.activateSelection()
+				event.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
+				console.log(event)
 			}
 		}
     }
@@ -151,6 +157,10 @@ export class EventHandler {
 				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
 				break
 			}
+			case('scanKeepResult'):{
+				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
+				break
+			}
 			default:{console.log('Non mapped event in handler.resolveEventCardSelector: ', this.currentEvent)}
         }
 		if(event.subType!='actionPhase'){event.activateSelection()}
@@ -159,9 +169,9 @@ export class EventHandler {
 		console.log('resolving event: ','EventCardSelectorRessource ', event.subType)
 		switch(event.subType){
 			case('addRessourceToSelectedCard'):{
+				console.log(event)
                 event.activateSelection()
-				event.cardSelector.selectFrom = 
-						this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
+				//event.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
 				if(event.cardSelector.selectFrom.length===0){
 					console.log('no cards found to add:', event.advancedRessource)
 					event.finalized = true
@@ -236,6 +246,10 @@ export class EventHandler {
 			case('researchPhaseQuery'):{
 				resolveType = 'researchPhaseResult'
 				event.scanKeep = this.gameStateService.getClientPlayerResearchMods()
+				break
+			}
+			case('scanKeepQuery'):{
+				resolveType = 'scanKeepResult'
 				break
 			}
 			default:{console.log('Non mapped event in handler.resolveEventDeckQuery: ', this.currentEvent)}
@@ -314,108 +328,7 @@ export class EventHandler {
 		return false
 	}
 }
-/**
 
-
-			case('addRessourceToSelectedCard'):{
-				this.currentEvent.selectionActive = true
-				this.currentEvent.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(
-					this.currentEvent.cardSelector.phaseFilter)
-				if(this.currentEvent.cardSelector.selectFrom.length===0){
-					console.log('no cards found to add:', this.currentEvent.value)
-					this.currentEvent.isFinalized = true
-				}
-				break
-			}
-			case('scanKeepQuery'):{
-				this.currentEvent.isFinalized = true
-				let scanKeep: ScanKeep = this.currentEvent.value
-				let draw = new DrawModel;
-				draw.playerId = this.clientPlayerId
-				draw.cardNumber = scanKeep.scan
-				draw.drawRule = 'scanKeep'
-				draw.keepCardNumber = scanKeep.keep
-				this.gameStateService.addDrawQueue(draw)
-				console.log('scanKeepQuery: ',draw)
-				break
-			}
-			case('scanKeepResult'):{
-				this.currentEvent.selectionActive = true
-				console.log('scanKeepResult!')
-			}
-		}
- */
-/**
-			case('validateResearch'):{
-				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
-				//reset research phase
-				this.buttons[button.id].enabled = false
-				this.currentEvent.finalized = true
-				this.gameStateService.cleanAndNextEventQueue()
-				break
-			}
-			case('validateProduction'):
-			{
-				this.currentEvent.finalized = true
-				this.gameStateService.cleanAndNextEventQueue()
-				break
-			}
-			case('selectAlternative'):{
-				this.updateButtonState('selectSecondCard', false)
-				this.updateButtonState('buildSecondCard', false)
-				this.updateButtonState('cancelSecondCard', false)
-				this.updateButtonState('selectAlternative', false)
-				console.log(clickedButtonName)
-				break
-			}
-			case('callOptionalSellCards'):{
-				let newEvent = new EventBaseModel
-				newEvent.type = 'optionalSell'
-				newEvent.cardSelector = {
-					selectFrom: this.cardInfoService.getProjectCardList(this.gameStateService.getClientPlayerStateHand()),
-					selectionQuantity: 0,
-					selectionQuantityTreshold: 'min',
-					cardInitialState: {selectable:true, ignoreCost: true},
-					title: `Sell any card number :`,
-					selectedIdList: [],
-				}
-				newEvent.button = this.buttons[this.getButtonIdFromName('validateOptionalSellCards')]
-				this.gameStateService.addEventQueue(newEvent, true)
-				break
-			}
-			case('upgradePhase'):{
-				this.currentEvent.finalized = true
-				this.gameStateService.removePhaseCardUpgradeNumber(this.clientPlayerId, 0 , true)
-				this.gameStateService.cleanAndNextEventQueue()
-				break
-			}
-			case('addRessourceToSelectedCard'):{
-				let stockList: AdvancedRessourceStock[] = []
-				if(!Array.isArray(this.currentEvent.value)){
-					stockList.push(this.currentEvent.value)
-				} else {
-					stockList = this.currentEvent.value
-				}
-				let cardStock: CardRessourceStock = {
-					cardId: this.currentEvent.cardSelector.selectedIdList[0],
-					stock: stockList
-				}
-				this.gameStateService.addRessourceToClientPlayerCard(cardStock)
-				this.currentEvent.finalized = true
-				this.currentEvent.cardSelector.stateFromParent = {selected:false, selectable:false, activable:false, ignoreCost:false, playable:false, upgradable:false, upgraded:false}
-				this.gameStateService.cleanAndNextEventQueue()
-				break
-			}
-			case('scanKeep'):{
-				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.currentEvent.cardSelector.selectedIdList)
-				this.buttons[button.id].enabled = false
-				this.currentEvent.finalized = true
-				this.gameStateService.cleanAndNextEventQueue()
-				break
-			}
-		}
-	}
- */
 @Injectable()
 export class DrawEventHandler {
 	constructor(
