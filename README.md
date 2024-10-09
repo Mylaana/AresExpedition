@@ -30,7 +30,7 @@ Global parameter increase applied at EOT
 Lakes feature
 
 ## Clean Code
-Comments: 
+Comments & naming: do some check, comments should be added only if function name is not obvious enough   
 Write automated tests
 
 ## Server
