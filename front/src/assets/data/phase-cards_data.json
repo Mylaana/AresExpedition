@@ -131,7 +131,7 @@
     },
     {
         "phaseId": 3,
-        "cardLevel": 0,
+        "cardLevel": 1,
         "type": "production_7mc",
         "baseDescription": {
             "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
@@ -144,7 +144,7 @@
     },
     {
         "phaseId": 3,
-        "cardLevel": 0,
+        "cardLevel": 2,
         "type": "production_1mc_activate_card",
         "baseDescription": {
             "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",

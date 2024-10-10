@@ -7,7 +7,7 @@ import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { PhaseCardType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
-import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
+import { PhaseCardHolderModel, PhaseCardGroupModel, PhaseCardModel } from "../../models/cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
@@ -262,7 +262,7 @@ export class GameState{
         this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
 
 		//adds phase cards info to model
-		newPlayer.phaseCard = this.phaseCardService.getNewPhaseHolderModel(phaseNumber, phaseCardNumberPerPhase)
+		newPlayer.phaseCards = this.phaseCardService.getNewPhaseHolderModel(phaseNumber, phaseCardNumberPerPhase)
     };
 
     setPlayerIdList(playerIdList: number[]):void{
@@ -485,6 +485,10 @@ export class GameState{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
 
+    getClientPlayerSelectedPhaseCards(): PhaseCardModel[] {
+        return this.getClientPlayerState().phaseCards.getSelectedPhaseCards()
+    }
+
     getClientPlayerStateHand(): number[] {
         return this.getPlayerStateHand(this.clientPlayerId)
     }
@@ -605,14 +609,14 @@ export class GameState{
     }
 
 	getPlayerPhaseCardHolder(playerId: number): PhaseCardHolderModel {
-		return this.groupPlayerState.getValue()[playerId].phaseCard
+		return this.groupPlayerState.getValue()[playerId].phaseCards
 	}
 	getPlayerPhaseCardGroup(playerId: number, phaseIndex: number): PhaseCardGroupModel {
-		return this.groupPlayerState.getValue()[playerId].phaseCard.phaseGroup[phaseIndex]
+		return this.groupPlayerState.getValue()[playerId].phaseCards.phaseGroups[phaseIndex]
 	}
 	setPlayerUpgradedPhaseCardFromPhaseCardGroup(playerId: number, phaseIndex: number, phaseCardGroup: PhaseCardGroupModel): void {
 		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.phaseCard.phaseGroup[phaseIndex] = phaseCardGroup
+		playerState.phaseCards.phaseGroups[phaseIndex] = phaseCardGroup
 		this.updatePlayerState(playerId, playerState)
 	}
     /*

@@ -37,6 +37,15 @@ export class PhaseCardInfoService {
 		console.log(`ERROR: phase card not found: phaseIndex=${phaseIndex} & cardLevel=${cardLevel}`)
 		return new PhaseCardModel
 	}
+	getPhaseCardFromPhaseIndex(phaseIndex: number): PhaseCardModel[]{
+		let phaseCards: PhaseCardModel[] = []
+		for(let card of this.phaseCards){
+			if(card.phaseId===phaseIndex){
+				phaseCards.push(card)
+			}
+		}
+		return phaseCards
+	}
 	getNewPhaseGroup(phaseIndex: number, phaseCardNumberPerPhase: number): PhaseCardGroupModel {
 		let phaseGroup = new PhaseCardGroupModel
 
@@ -51,7 +60,7 @@ export class PhaseCardInfoService {
 
 		//create phaseGroups
 		for(let i=0; i<phaseNumber; i++){
-			newHolder.phaseGroup.push(this.getNewPhaseGroup(i, phaseCardNumberPerPhase))
+			newHolder.phaseGroups.push(this.getNewPhaseGroup(i, phaseCardNumberPerPhase))
 		}
 		return newHolder
 	}

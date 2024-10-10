@@ -4,6 +4,7 @@
 		[phaseIndex]="phaseIndex" [phaseCardLevel]="phaseCardIndex"
 		[stateFromParent]="phaseCardState[phaseCardIndex]"
 		[initialState]="cardInitialState"
+		[phaseCard]="phaseCardModels[phaseCardIndex]"
 		(cardStateChange)="cardStateChange($event)"></app-phase-card>
 	</div>
 </div>

@@ -25,7 +25,7 @@ export class PlayerStateModel {
     tag!: TagState[];
     cards!: ProjectCardState
     research!: ScanKeep
-	phaseCard = new PhaseCardHolderModel
+	phaseCards = new PhaseCardHolderModel
 	phaseCardUpgradeCount: number = 0
 	sellCardValueMod: number = 0
 	globalParameter = new GlobalParameterModel

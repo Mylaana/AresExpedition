@@ -14,6 +14,7 @@ Cards data parser: Python
 # WIP : 
 ## Refactoring :
 Add GameEventComponent's optional sell button & Lockpile control
+text with image component
 
 ## New features :
 ### Phase cards

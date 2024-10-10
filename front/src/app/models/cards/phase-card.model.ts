@@ -2,13 +2,20 @@ import { CardState } from "./card-cost.model";
 import { PhaseCardType } from "../../types/phase-card.type";
 
 export class PhaseCardHolderModel {
-	phaseGroup: PhaseCardGroupModel[] = [];
+	phaseGroups: PhaseCardGroupModel[] = [];
 
 	setPhaseCardUpgraded(phaseIndex: number, phaseCardLevel: number): void {
-		this.phaseGroup[phaseIndex].setPhaseCardUpgraded(phaseCardLevel)
+		this.phaseGroups[phaseIndex].setPhaseCardUpgraded(phaseCardLevel)
 	}
 	setPhaseCardSelection(phaseIndex: number, phaseCardLevel: number, selected: boolean): void {
-		this.phaseGroup[phaseIndex].setPhaseCardSelection(phaseCardLevel, selected)
+		this.phaseGroups[phaseIndex].setPhaseCardSelection(phaseCardLevel, selected)
+	}
+	getSelectedPhaseCards(): PhaseCardModel[] {
+		let phaseCards: PhaseCardModel[] = []
+		for(let group of this.phaseGroups){
+			phaseCards.push(group.getSelectedPhaseCard())
+		}
+		return phaseCards
 	}
 }
 
@@ -16,10 +23,17 @@ export class PhaseCardGroupModel {
 	phaseIndex!: number;
 	phaseCards: PhaseCardModel[] = [];
 
+	getSelectedPhaseCard(): PhaseCardModel {
+		for(let card of this.phaseCards){
+			if(card.phaseCardSelected===true){
+				return card
+			}
+		}
+		return new PhaseCardModel
+	}
 	setPhaseCardUpgraded(phaseCardLevel: number): void {
 		this.phaseCards[phaseCardLevel].setPhaseCardUpgraded()
 	}
-
 	//only one phase card can be selected
 	setPhaseCardSelection(phaseCardLevel: number, selected: boolean): void {
 		for(let card of this.phaseCards){
