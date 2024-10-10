@@ -1,0 +1,197 @@
+[
+    {
+        "phaseId": 0,
+        "cardLevel": 0,
+        "type": "development_base",
+        "baseDescription": {
+            "en": "Each player may play 1 green project card.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Reduce de cost of the card you play this phase by 3MC.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 0,
+        "cardLevel": 1,
+        "type": "development_6mc",
+        "baseDescription": {
+            "en": "Each player may play 1 green project card.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Reduce de cost of the card you play this phase by 6MC.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 0,
+        "cardLevel": 2,
+        "type": "development_second_card",
+        "baseDescription": {
+            "en": "Each player may play 1 green project card.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "You can play an additional green project card this phase.$skipline$Reduce de cost of the first card you play this phase by 3MC.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 1,
+        "cardLevel": 0,
+        "type": "construction_base",
+        "baseDescription": {
+            "en": "Each player may play 1 blue card OR 1 red project card.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Draw a card.$skipline$OR$skipline$Play an additional blue card OR red card this phase.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 1,
+        "cardLevel": 1,
+        "type": "construction_6mc",
+        "baseDescription": {
+            "en": "Each player may play 1 blue card OR 1 red project card.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Play an additional blue card OR red card this phase.$skipline$OR$skipline$Gain 6MC.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 1,
+        "cardLevel": 2,
+        "type": "construction_third_card",
+        "baseDescription": {
+            "en": "Each player may play 1 blue card OR 1 red project card.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Play an additional blue card OR red card this phase.$skipline$AND$skipline$Draw a card.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 2,
+        "cardLevel": 0,
+        "type": "action_base",
+        "baseDescription": {
+            "en": "Each player activates any ACTION effect and STANDARD actions.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "You may activate one ACTION an additional time.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 2,
+        "cardLevel": 1,
+        "type": "action_scan_cards",
+        "baseDescription": {
+            "en": "Each player activates any ACTION effect and STANDARD actions.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "You may repeat one of your ACTION effects once.$skipline$Reveal the top 3 cards of the deck. Place a blue or red card revealed this way into your hand, discard the rest.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 2,
+        "cardLevel": 2,
+        "type": "action_repeat_two",
+        "baseDescription": {
+            "en": "Each player activates any ACTION effect and STANDARD actions.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "You may repeat two of your ACTION effects once.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 3,
+        "cardLevel": 0,
+        "type": "production_base",
+        "baseDescription": {
+            "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Gain 4MC",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 3,
+        "cardLevel": 0,
+        "type": "production_7mc",
+        "baseDescription": {
+            "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Gain 7MC.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 3,
+        "cardLevel": 0,
+        "type": "production_1mc_activate_card",
+        "baseDescription": {
+            "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Gain 1MC.$skipline$Activate the production effect of one of your green cards an additional time this phase.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 4,
+        "cardLevel": 0,
+        "type": "research_base",
+        "baseDescription": {
+            "en": "Each player draw 2 cards and keep 1.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Draw an additional 3 cards and keep an additional 1.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 4,
+        "cardLevel": 1,
+        "type": "research_scan6_keep1",
+        "baseDescription": {
+            "en": "Each player draw 2 cards and keep 1.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Draw an additional 6 cards and keep an additional 1.",
+            "fr": "abc"
+        }
+    },
+    {
+        "phaseId": 4,
+        "cardLevel": 2,
+        "type": "research_scan2_keep2",
+        "baseDescription": {
+            "en": "Each player draw 2 cards and keep 1.",
+            "fr": "abc"
+        },
+        "bonusDescription": {
+            "en": "Draw an additional 2 cards and keep an additional 2.",
+            "fr": "abc"
+        }
+    }
+]

@@ -23,7 +23,7 @@ export class PhaseCardGroupModel {
 	//only one phase card can be selected
 	setPhaseCardSelection(phaseCardLevel: number, selected: boolean): void {
 		for(let card of this.phaseCards){
-			if(card.phaseCardLevel===phaseCardLevel){
+			if(card.cardLevel===phaseCardLevel){
 				card.setPhaseCardSelection(selected)
 			} else {
 				card.setPhaseCardSelection(false)
@@ -41,10 +41,14 @@ export class PhaseCardGroupModel {
 }
 
 export class PhaseCardModel {
-	phaseCardLevel!: number;
+	phaseId!:number;
+	cardLevel!: number;
 	phaseType!: PhaseCardType;
 	phaseCardUpgraded!: boolean;
 	phaseCardSelected!: boolean;
+
+	baseDescription!: string;
+	bonusDescription!: string;
 
 
 	setPhaseCardUpgraded(): void {
