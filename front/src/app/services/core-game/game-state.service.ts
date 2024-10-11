@@ -229,8 +229,8 @@ export class GameState{
         newPlayer.cards.maximum = handSizeMaximum
 
         newPlayer.research = {
-            keep: 1,
-            scan: 2,
+            keep: 0,
+            scan: 0,
         }
 
         //fill player's hand

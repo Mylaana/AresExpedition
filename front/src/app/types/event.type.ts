@@ -5,7 +5,7 @@ export type EventCardSelectorSubType = 'selectCardOptionalSell' | 'selectCardFor
 export type EventCardSelectorRessourceSubType = 'addRessourceToSelectedCard'
 export type EventCardSelectorPlayZoneSubType = 'developmentPhase' | 'constructionPhase'
 export type EventGenericSubType = 
-'endOfPhase' | 'productionPhase' | 'planificationPhase' | 'upgradePhaseCards'
+'endOfPhase' | 'productionPhase' | 'researchPhase'| 'planificationPhase' | 'upgradePhaseCards'
 | 'increaseGlobalParameter' | 'addRessourceToPlayer' | 'increaseResearchScanKeep' | 'buildCard' | 'drawResult'
 export type EventTargetCardSubType = 'addRessourceToCardId' | 'deactivateTrigger' 
 export type EventDeckQuerySubType = 'drawQuery' | 'scanKeepQuery' | 'researchPhaseQuery'

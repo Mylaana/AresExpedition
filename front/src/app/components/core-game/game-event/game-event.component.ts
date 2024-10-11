@@ -103,53 +103,13 @@ export class GameEventComponent {
 			case('development'):{events.push(EventDesigner.createCardSelectorPlayZone('developmentPhase'));break}
 			case('construction'):{events.push(EventDesigner.createCardSelectorPlayZone('constructionPhase'));break}
 			case('action'):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
-			case('production'):{this.applyProductionPhase(this.gameStateService.getClientPlayerState());break}
-			case('research'):{
-				let clientState = this.gameStateService.getClientPlayerState()
-				this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('researchPhaseQuery',{scanKeep:{scan:clientState.research.scan + 2,keep:clientState.research.keep}}))
-				break
-			}
+			case('production'):{this.gameStateService.addEventQueue(EventDesigner.createGeneric('productionPhase'));break}
+			case('research'):{this.gameStateService.addEventQueue(EventDesigner.createGeneric('researchPhase'));break}
 			
 		}
 		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))
 		events.push(EventDesigner.createGeneric('endOfPhase'))
 		this.gameStateService.addEventQueue(events)
-	}
-
-	/**
-	 * adds client player's production to stocks
-	 */
-	applyProductionPhase(clientState: PlayerStateModel): void{
-		let newEvent = EventDesigner.createGeneric('productionPhase')
-		this.gameStateService.addEventQueue(newEvent)
-		return
-		let newClientRessource: RessourceState[] = []
-
-		newClientRessource = clientState.ressource
-
-		for(let i=0; i<newClientRessource.length; i++){
-			if(i===3 || i===4){
-			continue
-			}
-			//megacredit prod
-			if(i===0){
-			newClientRessource[i].valueStock = newClientRessource[i].valueStock + newClientRessource[i].valueProd + clientState.terraformingRating
-			continue
-			}
-			//cards prod
-			if(i===5){
-			this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent(
-				'drawQuery',
-				{drawDiscard:{draw:newClientRessource[i].valueProd,discard:0}}
-			))
-			continue
-			}
-			//other prod
-			newClientRessource[i].valueStock = newClientRessource[i].valueStock + newClientRessource[i].valueProd
-		}
-
-		this.gameStateService.updateClientPlayerState(clientState)
-		this.gameStateService.addEventQueue(newEvent)
 	}
 
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {

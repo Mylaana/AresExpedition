@@ -191,6 +191,7 @@ export class EventDesigner{
                 event.autoFinalize = false
                 break
             }
+            case('researchPhase'):{break}
             case('endOfPhase'):{break}
             case('drawResult'):{
                 //event.value = {waiterId:1} = args?.waiterId? args.waiterId:-1
