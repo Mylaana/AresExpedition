@@ -43,7 +43,6 @@ export class PhaseCardUpgradeSelectorComponent {
 
 	}
 	updateChildrenUpgradeRemaining(): void {
-		//console.log('checks: ',this._currentEvent===undefined , this._currentEvent.phaseCardUpgradeQuantity===undefined , this.phaseUpgradeList===undefined)
 		if(this._currentEvent===undefined || this._currentEvent.phaseCardUpgradeQuantity===undefined || this.phaseUpgradeList===undefined){return}
 		for(let list of this.phaseUpgradeList){
 			list.setUpdateRemaining(this._currentEvent.phaseCardUpgradeQuantity>0)
@@ -52,7 +51,6 @@ export class PhaseCardUpgradeSelectorComponent {
 	initialize(): void {
 		this.phaseList =  this._currentEvent.phaseCardUpgradeList?this._currentEvent.phaseCardUpgradeList:[0,1,2,3,4]
 		this.upgradeNumber = this._currentEvent.phaseCardUpgradeQuantity?this._currentEvent.phaseCardUpgradeQuantity:0
-		console.log(this._currentEvent)
 	}
 	upgradeNumberUpdate(state: PlayerStateModel[]):void{
 		if(state[this.clientPlayerId].phaseCardUpgradeCount!=this.upgradeNumber){

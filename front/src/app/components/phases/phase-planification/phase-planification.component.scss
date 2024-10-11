@@ -1,5 +1,5 @@
-$card-height: 300px;
-$card-width: calc($card-height * 63 / 88);
+$card-width: 350px;
+$card-height: calc($card-width / 2);
 
 $colors: (
   "construction": red,
@@ -45,9 +45,6 @@ $colors: (
 
     $horizontal-padding: .0;
 
-    padding-bottom: calc($card-height * .015);
-    padding-right: calc($card-width * $horizontal-padding);
-    padding-left: calc($card-width * $horizontal-padding);
     border: black solid 2px;
     border-radius: calc($card-height * .05);
 
@@ -56,10 +53,16 @@ $colors: (
     align-items: center;
 }
 .wrapper-phase-selected{
+    $horizontal-padding: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 80%;
+    padding-left: $horizontal-padding;
+    padding-right: $horizontal-padding;
+    height: 100%;
     width: 100%;
+}
+app-text-with-image{
+    width: 100%;    
 }

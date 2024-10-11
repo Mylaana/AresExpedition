@@ -1,4 +1,4 @@
-import { AdvancedRessourceStock, CardRessourceStock, ScanKeep } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardRessourceStock, RessourceState, ScanKeep } from "../../interfaces/global.interface";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
 import { DrawEventDesigner, EventDesigner } from "../../services/core-game/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
@@ -76,6 +76,7 @@ export class EventHandler {
 
         //call selector related switchEvents
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
+		this.switchEventOther(this.currentEvent)
 
 		this.applyAutoFinalize()
         return 
@@ -122,6 +123,40 @@ export class EventHandler {
 			}
 		}
     }
+	private switchEventOther(event: EventBaseModel): void {
+		let subType = event.subType as EventUnionSubTypes
+		if(subType!='productionPhase'){return}
+
+		let clientState = this.gameStateService.getClientPlayerState()
+		let newClientRessource: RessourceState[] = []
+
+		newClientRessource = clientState.ressource
+
+		for(let i=0; i<newClientRessource.length; i++){
+			switch(i){
+				//MC production
+				case(0):{
+					newClientRessource[i].valueStock = newClientRessource[i].valueStock + newClientRessource[i].valueProd + clientState.terraformingRating
+					break
+				}
+				//heat and plant producition
+				case(1):case(2):{
+					newClientRessource[i].valueStock = newClientRessource[i].valueStock + newClientRessource[i].valueProd
+					break
+				}
+				//Cards production
+				case(5):{
+					this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent(
+						'drawQuery',
+						{drawDiscard:{draw:newClientRessource[i].valueProd,discard:0}}
+					))
+					break
+				}
+			}
+		}
+
+		this.gameStateService.updateClientPlayerState(clientState)
+	}
     private resolveEventEffect(){
         switch(this.currentEvent.type){
             case('cardSelector'):{this.resolveEventCardSelector(this.currentEvent as EventCardSelector); break}
@@ -229,7 +264,9 @@ export class EventHandler {
 				}
 				break
 			}
-			case('productionPhase'):case('planificationPhase'):{break}
+			case('productionPhase'):{break}
+			case('planificationPhase'):{break}
+			case('upgradePhaseCards'):{break}
 			//case('addRessourceToPlayer')
 			default:{console.log('Non mapped event in handler.resolveEventGeneric: ', this.currentEvent)}
 		}

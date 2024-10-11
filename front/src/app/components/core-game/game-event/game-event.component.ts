@@ -23,7 +23,7 @@ import { EventSecondaryButtonComponent } from '../../tools/event-secondary-butto
 import { CardBuilderComponent } from '../card-builder/card-builder.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 
-//this component will serve as game event view, displaying phase selection, phase actions, cards to play/select etc
+//this component is the main controller, and view
 
 @Component({
   selector: 'app-game-event',
@@ -104,7 +104,12 @@ export class GameEventComponent {
 			case('construction'):{events.push(EventDesigner.createCardSelectorPlayZone('constructionPhase'));break}
 			case('action'):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
 			case('production'):{this.applyProductionPhase(this.gameStateService.getClientPlayerState());break}
-			case('research'):{this.applyResearchPhase(this.gameStateService.getClientPlayerState());break}
+			case('research'):{
+				let clientState = this.gameStateService.getClientPlayerState()
+				this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('researchPhaseQuery',{scanKeep:{scan:clientState.research.scan + 2,keep:clientState.research.keep}}))
+				break
+			}
+			
 		}
 		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))
 		events.push(EventDesigner.createGeneric('endOfPhase'))
@@ -116,6 +121,8 @@ export class GameEventComponent {
 	 */
 	applyProductionPhase(clientState: PlayerStateModel): void{
 		let newEvent = EventDesigner.createGeneric('productionPhase')
+		this.gameStateService.addEventQueue(newEvent)
+		return
 		let newClientRessource: RessourceState[] = []
 
 		newClientRessource = clientState.ressource
@@ -145,19 +152,6 @@ export class GameEventComponent {
 		this.gameStateService.addEventQueue(newEvent)
 	}
 
-	applyResearchPhase(clientState: PlayerStateModel): void{
-		this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('researchPhaseQuery',{scanKeep:{scan:clientState.research.scan + 2,keep:clientState.research.keep}}))
-	}
-	/*
-	addDrawQueue(playerId: number, cardNumber: number): void {
-		let draw = new DrawModel;
-		draw.playerId = playerId
-		draw.cardNumber = cardNumber
-		draw.drawRule = 'draw'
-		this.gameStateService.addDrawQueue(draw)
-	}
-	*/
-
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
 		let newEvent = EventDesigner.createGeneric(
 			'upgradePhaseCards',
@@ -169,6 +163,7 @@ export class GameEventComponent {
 		this.gameStateService.addEventQueue(newEvent, true)
 		//this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
 	}
+	
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {
 		this.drawHandler.handleQueueUpdate(drawQueue)
 	}
