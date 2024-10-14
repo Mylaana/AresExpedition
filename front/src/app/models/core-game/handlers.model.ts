@@ -257,7 +257,6 @@ export class EventHandler {
 			}
 			case('researchPhaseQuery'):{
 				resolveType = 'researchPhaseResult'
-				event.scanKeep = this.gameStateService.getClientPlayerResearchMods()
 				break
 			}
 			case('scanKeepQuery'):{
@@ -483,10 +482,6 @@ class PhaseResolveHandler {
 			scan: baseScanKeep.scan + modScanKeep.scan + bonusScanKeep.scan,
 			keep: baseScanKeep.keep + modScanKeep.keep + bonusScanKeep.keep,
 		}
-		console.log('base: ',baseScanKeep,' mod: ', modScanKeep,' bonus: ', bonusScanKeep,' total: ', totalScanKeep, EventDesigner.createDeckQueryEvent(
-			'researchPhaseQuery',
-			{scanKeep:totalScanKeep}
-		))
 		this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent(
 			'researchPhaseQuery',
 			{scanKeep:totalScanKeep}

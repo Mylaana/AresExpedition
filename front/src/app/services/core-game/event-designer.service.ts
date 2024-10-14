@@ -224,6 +224,7 @@ export class EventDesigner{
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
+        console.log(event)
         return event
     }
     public static createWaiter(subType:EventWaiterSubType, waiterId: number) : EventWaiter {
