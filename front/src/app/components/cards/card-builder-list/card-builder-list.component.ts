@@ -1,9 +1,8 @@
-import { Component, DoCheck, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
 import { CardBuilderComponent } from '../card-builder/card-builder.component';
 import { CommonModule } from '@angular/common';
 import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { EventCardBuilderButton } from '../../../models/core-game/button.model';
-import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-card-builder-list',
@@ -24,7 +23,6 @@ export class CardBuilderListComponent implements OnInit{
   currentEvent!: EventCardBuilder
   ngOnInit(): void {
     this.updateEvent()
-    console.log(this.event)
   }
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['eventId'] && changes['eventId'].currentValue){
@@ -38,7 +36,7 @@ export class CardBuilderListComponent implements OnInit{
     this.currentEvent = this.event as EventCardBuilder
   }
   public cardBuilderListButtonClicked(button:EventCardBuilderButton): void {
-    console.log('list received: ', button)
     this.currentEvent.CardBuilderIdHavingFocus = button.parentCardBuilderId
+    this.eventCardBuilderListButtonClicked.emit(button)
   }
 }

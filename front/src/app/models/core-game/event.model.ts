@@ -205,9 +205,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.setSelectedCardToBuild(selection[0])
     }
     private setSelectedCardToBuild(card: ProjectCardModel): void {
-        console.log('set selected: ', this.CardBuilder)
         if(this.CardBuilderIdHavingFocus===undefined){return}
-        console.log('set selected: ', this.CardBuilder)
         let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
         activeZone.addCardSelected(card)
         this.removeCardFromSelector(card)
@@ -225,15 +223,11 @@ export class EventCardBuilder extends EventBaseCardSelector {
 
     }
     getCardToBuildId(): number | undefined {
-        console.log('get card to build: ', this.CardBuilder)
         if(this.CardBuilderIdHavingFocus===undefined){return}
-        console.log('get card to build: ', this.CardBuilder)
         return this.CardBuilder[this.CardBuilderIdHavingFocus].selectedCard?.id
     }
     CardBuilderButtonClicked(button: EventCardBuilderButton): void {
-        console.log('button clicked: ', this.CardBuilder)
         if(this.CardBuilderIdHavingFocus===undefined){return}
-        console.log('button clicked: ', this.CardBuilder)
         this.setSelectionOnButtonClick(button)
         let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
 
