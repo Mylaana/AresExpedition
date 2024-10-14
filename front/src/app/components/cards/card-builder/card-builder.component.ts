@@ -1,0 +1,38 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { EventBaseModel, EventCardBuilder, CardBuilderZone } from '../../../models/core-game/event.model';
+import { ProjectCardListComponent } from '../project/project-card-list/project-card-list.component';
+import { EventCardBuilderButton } from '../../../models/core-game/button.model';
+import { EventCardBuilderButtonComponent } from '../../tools/event-play-zone-button/event-play-zone-button.component';
+import { ProjectCardModel } from '../../../models/cards/project-card.model';
+import { CardBuilderOptionType } from '../../../types/global.type';
+
+@Component({
+  selector: 'app-card-builder',
+  standalone: true,
+  imports: [
+    CommonModule,
+    EventCardBuilderButtonComponent,
+    ProjectCardListComponent
+  ],
+  templateUrl: './card-builder.component.html',
+  styleUrl: './card-builder.component.scss'
+})
+export class CardBuilderComponent {
+  @Input() cardBuilder!: CardBuilderZone
+  @Input() option!: CardBuilderOptionType
+  @Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
+
+  @Input() event!: EventBaseModel
+  @Input() eventId!: number
+  currentEvent!: EventCardBuilder
+  
+  public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
+    //this.currentEvent.CardBuilderIdHavingFocus = button.parentCardBuilderId
+    this.cardBuilderListButtonClicked.emit(button)
+
+  }
+  public updateSelectedCardList(cardList: ProjectCardModel[]): void {
+    //console.log('card list updated: ', cardList)
+  }
+}

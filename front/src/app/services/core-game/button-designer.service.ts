@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventPlayZoneButton, EventSecondaryButton } from "../../models/core-game/button.model";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, EventSecondaryButton } from "../../models/core-game/button.model";
+import { CardBuilderOptionType } from "../../types/global.type";
+
 
 @Injectable({
     providedIn: 'root'
@@ -41,35 +43,22 @@ export class ButtonDesigner{
         button.enabled = button.startEnabled
         return button
     }
-    public static createEventSecondaryButton(eventSubType:EventUnionSubTypes, args: {zoneId?: number}): EventPlayZoneButton[] {
-        let buttons: EventPlayZoneButton[] = []
-        switch(eventSubType){
-            case('developmentPhase'):case('constructionPhase'):{
-                if(args===undefined || args.zoneId===undefined){break}
-                let buttonCount: number
-                if(args.zoneId===0){buttonCount = 3}else{buttonCount = 4}
+    public static createEventCardBuilderButton(zoneId:number, option?: CardBuilderOptionType): EventCardBuilderButton[] {
+        let buttons: EventCardBuilderButton[] = []
+        let buttonCount: number
+        if(option!='alternative'){buttonCount = 3}else{buttonCount = 4}
 
-                for(let i=0; i<buttonCount; i++){
-                    let button = new EventPlayZoneButton
-                    if(args.zoneId===0){
-                        switch(i){
-                            case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
-                            case(1):{button.name='cancelCard';button.caption='Cancel <X>';break}
-                            case(2):{button.name='buildCard';button.caption='Build';break}
-                        }
-                    } else {
-                        switch(i){
-                            case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
-                            case(1):{button.name='cancelCard';button.caption='Cancel <X>';break}
-                            case(2):{button.name='buildCard';button.caption='Build';break}
-                            case(3):{button.name='alternative';button.caption='Alternative';button.startEnabled=true;break}
-                        }
-                    }
-                    button.parentPlayZoneId=args.zoneId
-                    button.enabled = button.startEnabled
-                    buttons.push(button)
+        for(let i=0; i<buttonCount; i++){
+            let button = new EventCardBuilderButton
+                switch(i){
+                    case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
+                    case(1):{button.name='cancelCard';button.caption='Cancel <X>';break}
+                    case(2):{button.name='buildCard';button.caption='Build';break}
+                    case(3):{button.name='alternative';button.caption='Alternative';button.startEnabled=true;break}
                 }
-            }
+            button.parentCardBuilderId=zoneId
+            button.enabled = button.startEnabled
+            buttons.push(button)        
         }
         return buttons
     }

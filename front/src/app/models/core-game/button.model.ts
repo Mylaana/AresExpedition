@@ -1,7 +1,7 @@
 import { getValueVsTreshold } from "../../functions/global.functions"
 import { MinMaxEqualTreshold } from "../../interfaces/global.interface"
 import { EventUnionSubTypes } from "../../types/event.type"
-import { ButtonNames, EventPlayZoneButtonNames, EventSecondaryButtonNames } from "../../types/global.type"
+import { ButtonNames, EventCardBuilderButtonNames, EventSecondaryButtonNames } from "../../types/global.type"
 
 export class ChildButton {
     id!: number
@@ -41,7 +41,7 @@ export class EventSecondaryButton extends EventButtonBase {
     imageUrl?: string
     name!: EventSecondaryButtonNames
 }
-export class EventPlayZoneButton extends EventButtonBase {
-    name!: EventPlayZoneButtonNames
-    parentPlayZoneId!: number
+export class EventCardBuilderButton extends EventButtonBase {
+    name!: EventCardBuilderButtonNames
+    parentCardBuilderId!: number
 }

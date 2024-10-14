@@ -6,12 +6,10 @@ import { PhaseActionComponent } from '../../phases/phase-action/phase-action.com
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
 import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
 import { NonSelectablePhase } from '../../../types/global.type';
-import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { RessourceState } from '../../../interfaces/global.interface';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
-import { ChildButton, EventPlayZoneButton, EventSecondaryButton } from '../../../models/core-game/button.model';
+import { ChildButton, EventCardBuilderButton, EventSecondaryButton } from '../../../models/core-game/button.model';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
@@ -20,8 +18,8 @@ import { EventDesigner } from '../../../services/core-game/event-designer.servic
 import { EventButtonComponent } from '../../tools/event-button/event-button.component';
 import { EventMainButtonComponent } from "../../tools/event-main-button/event-main-button.component";
 import { EventSecondaryButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
-import { CardBuilderComponent } from '../card-builder/card-builder.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
+import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
 
 //this component is the main controller, and view
 
@@ -41,7 +39,7 @@ import { ProjectCardModel } from '../../../models/cards/project-card.model';
     EventButtonComponent,
     EventMainButtonComponent,
 	EventSecondaryButtonComponent,
-	CardBuilderComponent
+	CardBuilderListComponent
 ],
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.scss',
@@ -100,8 +98,8 @@ export class GameEventComponent {
 		let events: EventBaseModel[] = []
 		switch(phase){
 			case('planification'):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
-			case('development'):{events.push(EventDesigner.createCardSelectorPlayZone('developmentPhase'));break}
-			case('construction'):{events.push(EventDesigner.createCardSelectorPlayZone('constructionPhase'));break}
+			case('development'):{events.push(EventDesigner.createGeneric('developmentPhase'));break}
+			case('construction'):{events.push(EventDesigner.createGeneric('constructionPhase'));break}
 			case('action'):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
 			case('production'):{this.gameStateService.addEventQueue(EventDesigner.createGeneric('productionPhase'));break}
 			case('research'):{this.gameStateService.addEventQueue(EventDesigner.createGeneric('researchPhase'));break}
@@ -140,6 +138,6 @@ export class GameEventComponent {
 		console.log('game event child button push clicked received')
 	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
-	public eventCardBuilderButtonClicked(button: EventPlayZoneButton){this.eventHandler.playZoneButtonClicked(button)}
+	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){this.eventHandler.CardBuilderButtonClicked(button)}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
 }

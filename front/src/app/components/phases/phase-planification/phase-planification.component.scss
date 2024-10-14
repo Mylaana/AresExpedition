@@ -1,4 +1,4 @@
-$card-width: 350px;
+$card-width: 400px;
 $card-height: calc($card-width / 2);
 
 $colors: (
@@ -65,4 +65,8 @@ $colors: (
 }
 app-text-with-image{
     width: 100%;    
+}
+.wrapper-title-and-text{
+    width: 100%;
+    height: 40%;
 }

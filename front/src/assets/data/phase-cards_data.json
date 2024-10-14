@@ -67,7 +67,7 @@
     {
         "phaseId": 1,
         "cardLevel": 2,
-        "type": "construction_third_card",
+        "type": "construction_draw_card",
         "baseDescription": {
             "en": "Each player may play 1 blue card OR 1 red project card.",
             "fr": "abc"

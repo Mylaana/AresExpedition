@@ -1,7 +1,7 @@
-import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardSelectorPlayZoneSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
+import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
-import { EventMainButton, EventMainButtonSelector, EventPlayZoneButton, EventSecondaryButton } from "./button.model";
-import { EventPlayZoneButtonNames } from "../../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, EventSecondaryButton } from "./button.model";
+import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
 import { CardState } from "../cards/card-cost.model";
 import { ProjectCardModel } from "../cards/project-card.model";
 
@@ -109,15 +109,17 @@ export class EventCardSelectorRessource extends EventBaseCardSelector {
     advancedRessource?: AdvancedRessourceStock
 }
 
-export class PlayableCardZone {
+export class CardBuilderZone {
 	selectedCard!: ProjectCardModel | undefined
 	cardInitialState?: CardState
-    buttons: EventPlayZoneButton[] = []
+    buttons: EventCardBuilderButton[] = []
+    builderId!: number
+    option!: CardBuilderOptionType
 
-    addButtons(buttons: EventPlayZoneButton[]): void {
+    addButtons(buttons: EventCardBuilderButton[]): void {
         this.buttons = buttons
     }
-    getButtonFromName(name: EventPlayZoneButtonNames): EventPlayZoneButton | undefined {
+    getButtonFromName(name: EventCardBuilderButtonNames): EventCardBuilderButton | undefined {
         for(let button of this.buttons){
             if(button.name===name){
                 return button
@@ -125,12 +127,12 @@ export class PlayableCardZone {
         }
         return
     }
-    updateButtonEnabled(name: EventPlayZoneButtonNames, enabled: boolean): void {
+    updateButtonEnabled(name: EventCardBuilderButtonNames, enabled: boolean): void {
         let button = this.getButtonFromName(name)
         if(!button){return}
         button.enabled = enabled
     }
-    updateButtonGroupState(buttonName: EventPlayZoneButtonNames): void {
+    updateButtonGroupState(buttonName: EventCardBuilderButtonNames): void {
         switch(buttonName){
             case('selectCard'):{
                 this.updateButtonEnabled('selectCard', false)
@@ -162,7 +164,7 @@ export class PlayableCardZone {
             }
         }
     }
-    resolvePlayZoneButtonClicked(button:EventPlayZoneButton){
+    resolveCardBuilderButtonClicked(button:EventCardBuilderButton){
         switch(button.name){
             case('cancelCard'):{
                 this.selectedCard = undefined
@@ -191,18 +193,22 @@ export class PlayableCardZone {
     }
 }
 
-export class EventCardSelectorPlayZone extends EventBaseCardSelector {
-    override readonly type: EventType = 'cardSelectorPlayZone'
-    override subType!: EventCardSelectorPlayZoneSubType;
-    playCardZone: PlayableCardZone [] = []
-    playCardZoneIdHavingFocus?: number
+export class EventCardBuilder extends EventBaseCardSelector {
+    override readonly type: EventType = 'cardSelectorCardBuilder'
+    override subType!: EventCardBuilderSubType;
+    CardBuilder: CardBuilderZone [] = []
+    CardBuilderIdHavingFocus?: number
+    buildDiscountValue!: number
+    buildDiscountUsed!: boolean
     override hasCardBuilder(): boolean {return true}
     override updateCardSelection(selection: ProjectCardModel[]): void {
         this.setSelectedCardToBuild(selection[0])
     }
     private setSelectedCardToBuild(card: ProjectCardModel): void {
-        if(this.playCardZoneIdHavingFocus===undefined){return}
-        let activeZone = this.playCardZone[this.playCardZoneIdHavingFocus]
+        console.log('set selected: ', this.CardBuilder)
+        if(this.CardBuilderIdHavingFocus===undefined){return}
+        console.log('set selected: ', this.CardBuilder)
+        let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
         activeZone.addCardSelected(card)
         this.removeCardFromSelector(card)
         this.deactivateSelection()
@@ -219,13 +225,17 @@ export class EventCardSelectorPlayZone extends EventBaseCardSelector {
 
     }
     getCardToBuildId(): number | undefined {
-        if(this.playCardZoneIdHavingFocus===undefined){return}
-        return this.playCardZone[this.playCardZoneIdHavingFocus].selectedCard?.id
+        console.log('get card to build: ', this.CardBuilder)
+        if(this.CardBuilderIdHavingFocus===undefined){return}
+        console.log('get card to build: ', this.CardBuilder)
+        return this.CardBuilder[this.CardBuilderIdHavingFocus].selectedCard?.id
     }
-    playZoneButtonClicked(button: EventPlayZoneButton): void {
-        if(this.playCardZoneIdHavingFocus===undefined){return}
+    CardBuilderButtonClicked(button: EventCardBuilderButton): void {
+        console.log('button clicked: ', this.CardBuilder)
+        if(this.CardBuilderIdHavingFocus===undefined){return}
+        console.log('button clicked: ', this.CardBuilder)
         this.setSelectionOnButtonClick(button)
-        let activeZone = this.playCardZone[this.playCardZoneIdHavingFocus]
+        let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
 
         switch(button.name){
             case('selectCard'):{
@@ -241,13 +251,13 @@ export class EventCardSelectorPlayZone extends EventBaseCardSelector {
             }
         }
 
-        activeZone.resolvePlayZoneButtonClicked(button)
+        activeZone.resolveCardBuilderButtonClicked(button)
         
         if(button.name==='selectCard'){return}
         activeZone.updateButtonGroupState(button.name)
         this.cardSelector.stateFromParent = {selectable:false, playable:false}
     }
-    private setSelectionOnButtonClick(button: EventPlayZoneButton): void {
+    private setSelectionOnButtonClick(button: EventCardBuilderButton): void {
         switch(button.name){
             case('selectCard'):{
                 this.activateSelection()

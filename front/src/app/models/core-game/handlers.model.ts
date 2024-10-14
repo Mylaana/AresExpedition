@@ -5,10 +5,11 @@ import { DrawEventDesigner, EventDesigner } from "../../services/core-game/event
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventUnionSubTypes } from "../../types/event.type";
 import { SelectablePhase } from "../../types/global.type";
+import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
 import { ProjectCardModel } from "../cards/project-card.model";
-import { EventPlayZoneButton } from "./button.model";
-import { DrawEvent, EventBaseModel, EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter } from "./event.model";
+import { EventCardBuilderButton } from "./button.model";
+import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter } from "./event.model";
 import { Injectable, OnInit } from "@angular/core";
 
 
@@ -43,9 +44,9 @@ export class EventHandler {
 	updateEventMainButton(enabled: boolean): void {
 		this.currentEvent.button?.updateEnabled(enabled)
 	}
-	playZoneButtonClicked(button: EventPlayZoneButton): void {
-		let event = this.currentEvent as EventCardSelectorPlayZone
-		event.playZoneButtonClicked(button)
+	CardBuilderButtonClicked(button: EventCardBuilderButton): void {
+		let event = this.currentEvent as EventCardBuilder
+		event.CardBuilderButtonClicked(button)
 		switch(button.name){
 			case('buildCard'):{
 				let cardId = event.getCardToBuildId()
@@ -128,6 +129,8 @@ export class EventHandler {
     }
 	private switchEventOther(event: EventBaseModel): void {
 		let subType = event.subType as EventUnionSubTypes
+		if(subType==='developmentPhase'){this.phaseHandler.resolveDevelopment()}
+		if(subType==='constructionPhase'){this.phaseHandler.resolveConstruction()}
 		if(subType==='productionPhase'){this.phaseHandler.resolveProduction()}
 		if(subType==='researchPhase'){this.phaseHandler.resolveResearch()}
 	}
@@ -135,7 +138,7 @@ export class EventHandler {
         switch(this.currentEvent.type){
             case('cardSelector'):{this.finishEventCardSelector(this.currentEvent as EventCardSelector); break}
             case('cardSelectorRessource'):{this.finishEventCardSelectorRessource(this.currentEvent as EventCardSelectorRessource); break}
-			case('cardSelectorPlayZone'):{this.finishEventCardSelectorPlayZone(this.currentEvent as EventCardSelectorPlayZone); break}
+			case('cardSelectorCardBuilder'):{this.finishEventCardBuilder(this.currentEvent as EventCardBuilder); break}
 			case('generic'):{this.finishEventGeneric(this.currentEvent as EventGeneric); break}
 			case('deck'):{this.finishEventDeckQuery(this.currentEvent as EventDeckQuery); break}
 			case('targetCard'):{this.finishEventTargetCards(this.currentEvent as EventTargetCard); break}
@@ -190,14 +193,14 @@ export class EventHandler {
 			default:{console.log('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
 		}
     }
-	private finishEventCardSelectorPlayZone(event: EventCardSelectorPlayZone): void {
-		console.log('resolving event: ','EventCardSelectorPlayZone ', event.subType)
+	private finishEventCardBuilder(event: EventCardBuilder): void {
+		console.log('resolving event: ','EventCardBuilder ', event.subType)
 		switch(event.subType){
-			case('developmentPhase'):case('constructionPhase'):{
+			case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):{
 				event.finalized = true
 				break
 			}
-			default:{console.log('Non mapped event in handler.finishEventCardSelectorPlayZone: ', this.currentEvent)}
+			default:{console.log('Non mapped event in handler.finishEventCardBuilder: ', this.currentEvent)}
 		}
 	}
 	private finishEventGeneric(event: EventGeneric): void {
@@ -238,6 +241,8 @@ export class EventHandler {
 				}
 				break
 			}
+			case('developmentPhase'):{break}
+			case('constructionPhase'):{break}
 			case('productionPhase'):{break}
 			case('researchPhase'):{break}
 			case('planificationPhase'):{break}
@@ -419,6 +424,22 @@ class PhaseResolveHandler {
 	private shouldReceivePhaseCardSelectionBonus(phaseResolved: SelectablePhase): boolean {
 		return this.gameStateService.getPlayerSelectedPhase(this.clientPlayerId)===phaseResolved
 	}
+	resolveDevelopment(): void {
+		this.refreshCurrentUpgradedPhaseCard()
+		let builderType: BuilderType = this.currentUpgradedPhaseCards[0].phaseType as BuilderType
+		if(!this.shouldReceivePhaseCardSelectionBonus('development')){
+			builderType = 'developmentAbilityOnly'
+		}
+		this.gameStateService.addEventQueue(EventDesigner.createCardBuilder('developmentPhaseBuilder',builderType))
+	}
+	resolveConstruction(): void {
+		this.refreshCurrentUpgradedPhaseCard()
+		let builderType: BuilderType = this.currentUpgradedPhaseCards[1].phaseType as BuilderType
+		if(!this.shouldReceivePhaseCardSelectionBonus('construction')){
+			builderType = 'constructionAbilityOnly'
+		}
+		this.gameStateService.addEventQueue(EventDesigner.createCardBuilder('constructionPhaseBuilder',builderType))
+	}
 	resolveProduction(): void {
 		this.refreshCurrentUpgradedPhaseCard()
 		
@@ -492,9 +513,9 @@ class PhaseResolveHandler {
 		if(!this.shouldReceivePhaseCardSelectionBonus('research')){return {scan:0, keep:0}}
 
 		let bonus: ScanKeep = {scan:0, keep:0}
-		let productionPhaseCard = this.currentUpgradedPhaseCards[4]
+		let researchPhaseCard = this.currentUpgradedPhaseCards[4]
 
-		switch(productionPhaseCard.phaseType){
+		switch(researchPhaseCard.phaseType){
 			case('research_base'):{bonus={scan:3, keep:1};break}
 			case('research_scan6_keep1'):{bonus={scan:6, keep:1};break}
 			case('research_scan2_keep2'):{bonus={scan:2, keep:2};break}

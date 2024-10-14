@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
-import { EventBaseModel, EventCardSelector, EventCardSelectorPlayZone } from '../../../../models/core-game/event.model';
+import { EventBaseModel, EventCardSelector, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { deepCopy } from '../../../../functions/global.functions';
 
 @Component({
@@ -54,7 +54,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		if (changes['eventId'] && changes['eventId'].currentValue) {
 			this.updateCardList()
 		}
-		if (changes['playCardZone'] && changes['playCardZone'].currentValue) {
+		if (changes['CardBuilder'] && changes['CardBuilder'].currentValue) {
 			this.updateCardList()
 		}
 		if (changes['cardList'] && changes['cardList'].currentValue) {
@@ -111,9 +111,9 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	setSelectorFromEvent(event: EventCardSelector): void {
 		this.cardSelector = event.cardSelector
 	}
-	setSelectorFromPlayZone(event: EventCardSelectorPlayZone): void {
+	setSelectorFromPlayZone(event: EventCardBuilder): void {
 		//will root the cards to selected id list, not to selectFrom
-		let card = event.playCardZone[this.playZoneId].selectedCard
+		let card = event.CardBuilder[this.playZoneId].selectedCard
 		if(card===undefined){
 			this.cardSelector.selectedList
 			this.cardSelector.selectionQuantity = 0
@@ -143,7 +143,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 			return
 		}
 		if(this.playZoneId!=undefined && this.event?.hasCardBuilder()===true){
-			this.setSelectorFromPlayZone(this.event as EventCardSelectorPlayZone)
+			this.setSelectorFromPlayZone(this.event as EventCardBuilder)
 			return
 		}
 		if(this.event?.hasSelector()){
