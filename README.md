@@ -45,3 +45,4 @@ Cloud option selection
 ## Bug fix
 Cost check not working (MC can go in negative)  
 Add ressource to card event triggering even if no target
+Bacterial aggregate can go over 5 triggers (Eg: if it is at 4 before adding viruses and go for a +2, it adds 2 to scan then deactivate)

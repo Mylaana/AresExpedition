@@ -197,13 +197,11 @@ export class EventHandler {
 		console.log('resolving event: ','EventCardSelectorRessource ', event.subType)
 		switch(event.subType){
 			case('addRessourceToSelectedCard'):{
-				console.log(event)
-                event.activateSelection()
-				//event.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
-				if(event.cardSelector.selectFrom.length===0){
-					console.log('no cards found to add:', event.advancedRessource)
-					event.finalized = true
-				}
+				event.finalized = true
+				let stock: AdvancedRessourceStock[] = event.advancedRessource?[event.advancedRessource]:[]
+				if(stock.length===0){break}
+
+				this.gameStateService.addRessourceToClientPlayerCard({cardId: event.cardSelector.selectedList[0].id,stock: stock})
 				break
 			}
 			default:{console.log('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
