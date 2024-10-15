@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { DrawEvent, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, CardBuilderZone } from "../../models/core-game/event.model";
-import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
+import { DrawEvent, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, CardBuilderZone, EventPhase } from "../../models/core-game/event.model";
+import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ButtonDesigner } from "./button-designer.service";
 import { BuilderType} from "../../types/phase-card.type";
@@ -150,12 +150,12 @@ export class EventDesigner{
             }
             case('construction_base'):{
                 event.CardBuilder.push(this.generateCardBuilderZone(0))
-                event.CardBuilder.push(this.generateCardBuilderZone(1,'alternative'))
+                event.CardBuilder.push(this.generateCardBuilderZone(1,'drawCard'))
                 break
             }
 			case('construction_6mc'):{
                 event.CardBuilder.push(this.generateCardBuilderZone(0))
-                event.CardBuilder.push(this.generateCardBuilderZone(1,'alternative'))
+                event.CardBuilder.push(this.generateCardBuilderZone(1,'gain6MC'))
                 break
             }
 			case('construction_draw_card'):{
@@ -181,7 +181,6 @@ export class EventDesigner{
 
         event.buildDiscountValue = buildDiscountValue
         event.buildDiscountUsed = false
-        console.log('event builder: ', builderType, ' ', event)
 
         return event
     }
@@ -236,17 +235,8 @@ export class EventDesigner{
                 event.cardIdToBuild = args?.cardId
                 break
             }
-            case('productionPhase'):{
-                event.autoFinalize = false
-                break
-            }
-            case('developmentPhase'):{break}
-            case('constructionPhase'):{break}
-            case('researchPhase'):{break}
             case('endOfPhase'):{break}
             case('drawResult'):{
-                //event.value = {waiterId:1} = args?.waiterId? args.waiterId:-1
-                //event.value .drawResultList = args?.drawResult
                 event.drawResultList = args?.drawEventResult
                 event.waiterId = args?.waiterId
                 break
@@ -290,6 +280,23 @@ export class EventDesigner{
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
+        return event
+    }
+    public static createPhase(subType:EventPhaseSubType): EventPhase {
+        let event = new EventPhase
+
+        event.subType = subType
+        switch(subType){
+            case('productionPhase'):{
+                event.autoFinalize = false
+                break
+            }
+            case('developmentPhase'):{break}
+            case('constructionPhase'):{break}
+            case('researchPhase'):{break}
+            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',subType)}
+        }
+        event.button = ButtonDesigner.createEventMainButton(event.subType)
         return event
     }
 }

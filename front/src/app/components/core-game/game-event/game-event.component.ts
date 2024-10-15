@@ -98,16 +98,16 @@ export class GameEventComponent {
 		let events: EventBaseModel[] = []
 		switch(phase){
 			case('planification'):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
-			case('development'):{events.push(EventDesigner.createGeneric('developmentPhase'));break}
-			case('construction'):{events.push(EventDesigner.createGeneric('constructionPhase'));break}
+			case('development'):{events.push(EventDesigner.createPhase('developmentPhase'));break}
+			case('construction'):{events.push(EventDesigner.createPhase('constructionPhase'));break}
 			case('action'):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
-			case('production'):{this.gameStateService.addEventQueue(EventDesigner.createGeneric('productionPhase'));break}
-			case('research'):{this.gameStateService.addEventQueue(EventDesigner.createGeneric('researchPhase'));break}
+			case('production'):{events.push(EventDesigner.createPhase('productionPhase'));break}
+			case('research'):{events.push(EventDesigner.createPhase('researchPhase'));break}
 			
 		}
 		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))
 		events.push(EventDesigner.createGeneric('endOfPhase'))
-		this.gameStateService.addEventQueue(events)
+		this.gameStateService.addEventQueue(events,'last')
 	}
 
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
@@ -118,7 +118,7 @@ export class GameEventComponent {
 				phaseCardUpgradeList: phaseIndexToUpgrade
 			}
 		)
-		this.gameStateService.addEventQueue(newEvent, true)
+		this.gameStateService.addEventQueue(newEvent, 'first')
 		//this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
 	}
 	
@@ -138,6 +138,6 @@ export class GameEventComponent {
 		console.log('game event child button push clicked received')
 	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
-	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){this.eventHandler.CardBuilderButtonClicked(button)}
+	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){this.eventHandler.cardBuilderButtonClicked(button)}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
 }

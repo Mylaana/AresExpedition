@@ -19,7 +19,6 @@ export abstract class ButtonBase {
     startEnabled: boolean = false
     caption?: string
     clicked(): any {}
-
 }
 
 export abstract class EventButtonBase extends ButtonBase {
@@ -33,6 +32,7 @@ export class EventMainButton extends EventButtonBase {}
 
 export class EventMainButtonSelector extends EventMainButton {
     updateEnabledTreshold(args: MinMaxEqualTreshold): void {
+        console.log('before getValue')
         this.enabled = getValueVsTreshold(args)
     }
 }

@@ -15,7 +15,7 @@
                 <app-event-play-zone-button [button]="cardBuilder.buttons[2]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
         </div>
-        <ng-container *ngIf="cardBuilder.option==='alternative'">
+        <ng-container *ngIf="cardBuilder.option!=undefined">
             <h1>Or</h1>
             <div class="wrapper-alternative">
                 <app-event-play-zone-button [button]="cardBuilder.buttons[3]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>

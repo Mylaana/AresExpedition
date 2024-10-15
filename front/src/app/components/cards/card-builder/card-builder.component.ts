@@ -28,11 +28,6 @@ export class CardBuilderComponent {
   currentEvent!: EventCardBuilder
   
   public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
-    //this.currentEvent.CardBuilderIdHavingFocus = button.parentCardBuilderId
     this.cardBuilderListButtonClicked.emit(button)
-
-  }
-  public updateSelectedCardList(cardList: ProjectCardModel[]): void {
-    //console.log('card list updated: ', cardList)
   }
 }

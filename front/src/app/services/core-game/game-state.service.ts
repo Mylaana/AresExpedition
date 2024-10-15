@@ -12,6 +12,7 @@ import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-c
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { EventDesigner } from "./event-designer.service";
+import { deepCopy } from "../../functions/global.functions";
 
 interface SelectedPhase {
     "development": boolean,
@@ -28,6 +29,9 @@ interface PhaseOrder {
     "4": NonSelectablePhase,
     "5": NonSelectablePhase,
 }
+
+type EventPileAddRule = 'first' | 'second' | 'last'
+
 
 const phaseCount: number = 5;
 const handSizeStart: number = 0;
@@ -235,7 +239,7 @@ export class GameState{
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}))
+            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first')
         }
 
         newPlayer.terraformingRating = 5;
@@ -574,7 +578,7 @@ export class GameState{
         this.drawQueue.next(newDrawQueue)
     }
 
-    addEventQueue(events: EventBaseModel | EventBaseModel[], addOnTop?: boolean): void {
+    addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
         let newQueue: EventBaseModel[] = []
         let addEvents: EventBaseModel[] = []
 
@@ -584,14 +588,25 @@ export class GameState{
             addEvents = events
         }
         
-        if(addOnTop===true){
-            newQueue = newQueue.concat(addEvents, this.eventQueue.getValue())
-        } else {
-            newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
+        switch(addRule){
+            case('last'):{
+                newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
+                break
+            }
+            case('first'):{
+                newQueue = newQueue.concat(addEvents, this.eventQueue.getValue())
+                break
+            }
+            case('second'):{
+                let oldQueue = this.eventQueue.getValue()
+                let firstEvent = oldQueue.shift()
+                newQueue = newQueue.concat(firstEvent?[firstEvent]:[], addEvents, oldQueue)
+            }
         }
+
         this.eventQueue.next(newQueue)
     }
-
+    
     /**
      * gets nothing
      * returns nothing
@@ -673,7 +688,7 @@ export class GameState{
         if(events.length===0){return}
 
         events.reverse()
-        this.addEventQueue(events, true)
+        this.addEventQueue(events, 'first')
 	}
     setClientPlayerTriggerAsInactive(triggerId: number): void {
         let newState: PlayerStateModel = this.getClientPlayerState()
@@ -698,7 +713,7 @@ export class GameState{
         if(!events){return}
 
 
-        this.addEventQueue(events, true)
+        this.addEventQueue(events, 'first')
 
     }
     addRessourceToClientPlayer(ressources: RessourceStock[]): void {
@@ -731,7 +746,7 @@ export class GameState{
                 ressource
             )
             if(!events){continue}
-            this.addEventQueue(events, true)
+            this.addEventQueue(events, 'first')
         }
     }
     addClientPlayerResearchScanValue(scan: number): void {

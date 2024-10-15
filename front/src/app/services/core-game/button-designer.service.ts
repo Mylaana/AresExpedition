@@ -1,52 +1,68 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, EventSecondaryButton } from "../../models/core-game/button.model";
-import { CardBuilderOptionType } from "../../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, EventButtonBase } from "../../models/core-game/button.model";
+import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class ButtonDesigner{
-    public static createEventMainButton(eventSubType: EventUnionSubTypes): EventMainButton {
-        let button = new EventMainButton
-        button.eventSubType = eventSubType
+    private static getStartEnabled(eventSubType: EventUnionSubTypes) : boolean {
+        let startEnabled: boolean
 
         switch(eventSubType){
-            case('default'):{button.caption='default validation button';button.startEnabled=true;break}
-            case('planificationPhase'):{button.caption='Select Phase';break}
-            case('createEventOptionalSell'):{button.caption='Sell cards';button.startEnabled=true;break}
-            case('cancelEventOptionalSell'):{button.caption='Cancel';button.startEnabled=true;break}
-            case('upgradePhaseCards'):{button.caption='End upgrades';button.startEnabled=true;break}
-
-            default:{button.caption='default validation';button.startEnabled=true;break}
+            case('default'):{startEnabled=true;break}
+            case('createEventOptionalSell'):{startEnabled=true;break}
+            case('cancelEventOptionalSell'):{startEnabled=true;break}
+            case('upgradePhaseCards'):{startEnabled=true;break}
+            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{startEnabled=true;break}
+            case('actionPhase'):{startEnabled=true;break}
+            case('selectCardOptionalSell'):{startEnabled=true;break}
+            default:{startEnabled=false;break}
         }
-        
+        return startEnabled
+    }
+    private static getCaption(eventSubType: EventUnionSubTypes): string {
+        let caption: string
+
+        switch(eventSubType){
+            case('default'):{caption='default validation button';break}
+            case('planificationPhase'):{caption='Select Phase';break}
+            case('createEventOptionalSell'):{caption='Sell cards';break}
+            case('cancelEventOptionalSell'):{caption='Cancel';break}
+            case('upgradePhaseCards'):{caption='End upgrades';break}
+            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='End phase';break}
+            case('addRessourceToSelectedCard'):{caption='Add ressources';break}
+            case('actionPhase'):{caption='End phase';break}
+            case('researchPhaseResult'):{caption='Research';break}
+            case('selectCardForcedSell'):{caption='Sell selection';break}
+            case('selectCardOptionalSell'):{caption='Sell selection';break}
+            case('discardCards'):{caption='Discard selection';break}
+            case('scanKeepResult'):{caption='Add selection to hand';break}
+            default:{caption='default validation';break}
+        }
+        return caption
+    }
+    public static createEventMainButton(eventSubType: EventUnionSubTypes): EventMainButton {
+        let button = new EventMainButton
+        button.startEnabled = this.getStartEnabled(eventSubType)
         button.enabled = button.startEnabled
+        button.caption = this.getCaption(eventSubType)
+        button.eventSubType = eventSubType
         return button
     }
     public static createEventSelectorMainButton(eventSubType: EventUnionSubTypes): EventMainButtonSelector {
         let button = new EventMainButtonSelector
-        button.eventSubType = eventSubType
-
-        switch(eventSubType){
-            case('addRessourceToSelectedCard'):{button.caption='Add ressources';break}
-            case('developmentPhase'):case('constructionPhase'):case('actionPhase'):case('productionPhase'):{button.caption='End phase';button.startEnabled=true;break}
-            case('researchPhaseResult'):{button.caption='Research';button.startEnabled=true;break}
-            case('selectCardForcedSell'):{button.caption='Sell selection';break}
-            case('selectCardOptionalSell'):{button.caption='Sell selection';button.startEnabled=true;break}
-            case('discardCards'):{button.caption='Discard selection';break}
-            case('scanKeepResult'):{button.caption='Add selection to hand';break}
-            default:{button.caption='default validation';button.startEnabled=true;break}
-        }
-
+        button.startEnabled = this.getStartEnabled(eventSubType)
         button.enabled = button.startEnabled
+        button.caption = this.getCaption(eventSubType)
+        button.eventSubType = eventSubType
         return button
     }
     public static createEventCardBuilderButton(zoneId:number, option?: CardBuilderOptionType): EventCardBuilderButton[] {
         let buttons: EventCardBuilderButton[] = []
-        let buttonCount: number
-        if(option!='alternative'){buttonCount = 3}else{buttonCount = 4}
+        let buttonCount: number = 3
 
         for(let i=0; i<buttonCount; i++){
             let button = new EventCardBuilderButton
@@ -54,12 +70,26 @@ export class ButtonDesigner{
                     case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
                     case(1):{button.name='cancelCard';button.caption='Cancel <X>';break}
                     case(2):{button.name='buildCard';button.caption='Build';break}
-                    case(3):{button.name='alternative';button.caption='Alternative';button.startEnabled=true;break}
                 }
             button.parentCardBuilderId=zoneId
             button.enabled = button.startEnabled
             buttons.push(button)        
         }
+
+        if(option===undefined){return buttons}
+        let button = new EventCardBuilderButton
+
+        button.parentCardBuilderId=zoneId
+        button.enabled = button.startEnabled
+        switch(option){
+            case('gain6MC'):{button.caption = 'Gain 6 MC';break}
+            case('drawCard'):{button.caption = 'Draw a card';break}
+        }
+        button.startEnabled=true
+        button.name = option as EventCardBuilderButtonNames
+        button.enabled = button.startEnabled
+        buttons.push(button)
+
         return buttons
     }
 }

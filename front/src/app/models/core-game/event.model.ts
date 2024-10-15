@@ -1,10 +1,9 @@
-import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
+import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, EventSecondaryButton } from "./button.model";
 import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
 import { CardState } from "../cards/card-cost.model";
 import { ProjectCardModel } from "../cards/project-card.model";
-
 
 interface CreateEventOptionsSelector {
     cardSelector?: Partial<CardSelector>
@@ -28,7 +27,6 @@ interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
     scanKeep?: Partial<ScanKeep>,
 }
-
 
 /**
  * isFinalized should become true when object should go to garbage
@@ -138,28 +136,32 @@ export class CardBuilderZone {
                 this.updateButtonEnabled('selectCard', false)
                 this.updateButtonEnabled('buildCard', true)
                 this.updateButtonEnabled('cancelCard', true)
-                this.updateButtonEnabled('alternative', false)
+                this.updateButtonEnabled('drawCard', false)
+                this.updateButtonEnabled('gain6MC', false)
                 break
             }
             case('cancelCard'):{
                 this.updateButtonEnabled('selectCard', true)
                 this.updateButtonEnabled('buildCard', false)
                 this.updateButtonEnabled('cancelCard', false)
-                this.updateButtonEnabled('alternative', true)
+                this.updateButtonEnabled('drawCard', true)
+                this.updateButtonEnabled('gain6MC', true)
                 break
             }
             case('buildCard'):{
                 this.updateButtonEnabled('selectCard', false)
                 this.updateButtonEnabled('buildCard', false)
                 this.updateButtonEnabled('cancelCard', false)
-                this.updateButtonEnabled('alternative', false)
+                this.updateButtonEnabled('drawCard', false)
+                this.updateButtonEnabled('gain6MC', false)
                 break
             }
-            case('alternative'):{
+            case('drawCard'):case('gain6MC'):{
                 this.updateButtonEnabled('selectCard', false)
                 this.updateButtonEnabled('buildCard', false)
                 this.updateButtonEnabled('cancelCard', false)
-                this.updateButtonEnabled('alternative', false)
+                this.updateButtonEnabled('drawCard', false)
+                this.updateButtonEnabled('gain6MC', false)
                 break
             }
         }
@@ -174,8 +176,12 @@ export class CardBuilderZone {
                 this.buildCard()
                 break
             }
-            case('alternative'):{
-                console.log('alternative clicked')
+            case('drawCard'):{
+                console.log('Draw a card')
+                break
+            }
+            case('gain6MC'):{
+                console.log(button.name)
             }
         }
 
@@ -226,7 +232,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
         if(this.CardBuilderIdHavingFocus===undefined){return}
         return this.CardBuilder[this.CardBuilderIdHavingFocus].selectedCard?.id
     }
-    CardBuilderButtonClicked(button: EventCardBuilderButton): void {
+    cardBuilderButtonClicked(button: EventCardBuilderButton): void {
         if(this.CardBuilderIdHavingFocus===undefined){return}
         this.setSelectionOnButtonClick(button)
         let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
@@ -315,4 +321,18 @@ export class DrawEvent {
     finalized: boolean = false
     served: boolean = false
     waiterId!: number
+}
+
+export class EventPhase extends EventBaseModel {
+    override readonly type: EventType = 'phase'
+    override subType!: EventPhaseSubType
+    override autoFinalize: boolean = true
+    override title!: string
+    increaseParameter?: GlobalParameterValue
+    increaseResearchScanKeep?: Partial<ScanKeep>
+    baseRessource?:RessourceStock | RessourceStock[]
+    cardIdToBuild?: number
+    drawResultList?: number[]
+    phaseCardUpgradeList?: number[]
+    phaseCardUpgradeQuantity?: number
 }
