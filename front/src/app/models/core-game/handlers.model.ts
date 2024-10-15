@@ -69,6 +69,7 @@ export class EventHandler {
 	}
 	updateSelectedCardList(selection: ProjectCardModel[]): void {
 		let event = this.currentEvent as EventCardSelector
+		console.log('update selecion: ',selection)
 		event.updateCardSelection(selection)
 	}
 	private checkFinalized(): void {
@@ -129,9 +130,10 @@ export class EventHandler {
 				break
 			}
 			case('addRessourceToSelectedCard'):{
+				let selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
+				if(selectFrom.length===0){event.finalized=true;break}
 				event.activateSelection()
-				event.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
-				console.log(event)
+				event.cardSelector.selectFrom = selectFrom
 			}
 		}
     }

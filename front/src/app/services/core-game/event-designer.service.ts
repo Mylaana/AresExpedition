@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DrawEvent, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, CardBuilderZone, EventPhase } from "../../models/core-game/event.model";
+import { DrawEvent, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, CardBuilder, EventPhase } from "../../models/core-game/event.model";
 import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ButtonDesigner } from "./button-designer.service";
@@ -107,11 +107,11 @@ export class EventDesigner{
 
         return event
     }
-    private static generateCardBuilderZone(builderId:number, option?:CardBuilderOptionType): CardBuilderZone {
-        let builder = new CardBuilderZone
+    private static generateCardBuilder(builderId:number, option?:CardBuilderOptionType): CardBuilder {
+        let builder = new CardBuilder
         builder.addButtons(ButtonDesigner.createEventCardBuilderButton(builderId, option))
-        builder.builderId = builderId
-        option?builder.option=option:null
+        builder.setId(builderId)
+        option?builder.setOption(option):null
         return builder
     }
     public static createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType): EventCardBuilder {
@@ -125,41 +125,41 @@ export class EventDesigner{
 		let buildDiscountValue = 0
 		switch(builderType){
             case('developmentAbilityOnly'):{
-                event.CardBuilder.push(this.generateCardBuilderZone(0))
+                event.CardBuilder.push(this.generateCardBuilder(0))
                 break
             }
 			case('development_base'):{
                 buildDiscountValue = 3
-                event.CardBuilder.push(this.generateCardBuilderZone(0))
+                event.CardBuilder.push(this.generateCardBuilder(0))
                 break
             }
 			case('development_6mc'):{
                 buildDiscountValue = 6
-                event.CardBuilder.push(this.generateCardBuilderZone(0))
+                event.CardBuilder.push(this.generateCardBuilder(0))
                 break
             }
 			case('development_second_card'):{
                 buildDiscountValue = 3
-                for(let i=0; i<=1; i++){event.CardBuilder.push(this.generateCardBuilderZone(i))}
+                for(let i=0; i<=1; i++){event.CardBuilder.push(this.generateCardBuilder(i))}
                 break
             }
 
             case('constructionAbilityOnly'):{
-                event.CardBuilder.push(this.generateCardBuilderZone(0))
+                event.CardBuilder.push(this.generateCardBuilder(0))
                 break
             }
             case('construction_base'):{
-                event.CardBuilder.push(this.generateCardBuilderZone(0))
-                event.CardBuilder.push(this.generateCardBuilderZone(1,'drawCard'))
+                event.CardBuilder.push(this.generateCardBuilder(0))
+                event.CardBuilder.push(this.generateCardBuilder(1,'drawCard'))
                 break
             }
 			case('construction_6mc'):{
-                event.CardBuilder.push(this.generateCardBuilderZone(0))
-                event.CardBuilder.push(this.generateCardBuilderZone(1,'gain6MC'))
+                event.CardBuilder.push(this.generateCardBuilder(0))
+                event.CardBuilder.push(this.generateCardBuilder(1,'gain6MC'))
                 break
             }
 			case('construction_draw_card'):{
-                for(let i=0; i<=1; i++){event.CardBuilder.push(this.generateCardBuilderZone(i))}
+                for(let i=0; i<=1; i++){event.CardBuilder.push(this.generateCardBuilder(i))}
                 break
             }
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}

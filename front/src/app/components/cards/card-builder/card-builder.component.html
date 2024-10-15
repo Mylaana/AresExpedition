@@ -2,23 +2,23 @@
 <div class="wrapper-play-card">
     <div class="play-card-one ares-background ares-border">
         <div class="play-card-zone ares-card">
-            <app-project-card-list *ngIf="cardBuilder.selectedCard!=undefined" class="play-card-zone-list" [cardListId]="'card builder zone 1'" [cardList]="[cardBuilder.selectedCard]"></app-project-card-list>
+            <app-project-card-list *ngIf="cardBuilder.getSelectedCard()!=undefined" class="play-card-zone-list" [cardListId]="'card builder zone 1'" [cardList]="[cardBuilder.getSelectedCard()]"></app-project-card-list>
         </div>
         <div class="wrapper-buttons">
             <div class="wrapper-select-button">
-                <app-event-play-zone-button [button]="cardBuilder.buttons[0]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
+                <app-event-play-zone-button [button]="cardBuilder.getButtons()[0]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
             <div class="wrapper-build-button">
-                <app-event-play-zone-button [button]="cardBuilder.buttons[1]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
+                <app-event-play-zone-button [button]="cardBuilder.getButtons()[1]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
             <div class="wrapper-cancel-button">
-                <app-event-play-zone-button [button]="cardBuilder.buttons[2]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
+                <app-event-play-zone-button [button]="cardBuilder.getButtons()[2]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
         </div>
-        <ng-container *ngIf="cardBuilder.option!=undefined">
+        <ng-container *ngIf="cardBuilder.getOption()!=undefined">
             <h1>Or</h1>
             <div class="wrapper-alternative">
-                <app-event-play-zone-button [button]="cardBuilder.buttons[3]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
+                <app-event-play-zone-button [button]="cardBuilder.getButtons()[3]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
         </ng-container>
     </div>

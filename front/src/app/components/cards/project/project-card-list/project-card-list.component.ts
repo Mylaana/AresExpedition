@@ -113,7 +113,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	}
 	setSelectorFromPlayZone(event: EventCardBuilder): void {
 		//will root the cards to selected id list, not to selectFrom
-		let card = event.CardBuilder[this.playZoneId].selectedCard
+		let card = event.CardBuilder[this.playZoneId].getSelectedCard()
 		if(card===undefined){
 			this.cardSelector.selectedList
 			this.cardSelector.selectionQuantity = 0

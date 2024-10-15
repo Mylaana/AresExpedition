@@ -41,3 +41,7 @@ Create the server
 ## Deployment
 CI/CD Pipeline
 Cloud option selection
+
+## Bug fix
+Cost check not working (MC can go in negative)  
+Add ressource to card event triggering even if no target
