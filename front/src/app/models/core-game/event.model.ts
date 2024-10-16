@@ -192,7 +192,6 @@ export class CardBuilder {
         this.updateButtonGroupState(button.name)
     }
     setCardSelected(card: ProjectCardModel): void {
-        console.log(card)
         this.selectedCard = card
         this.updateButtonGroupState('selectCard')
     }
