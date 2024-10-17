@@ -26,6 +26,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   currentDrawQueue: DrawEvent[] = []
   cardsDeck: number[] = [];
   cardsDiscarded: number[] = [];
+  phaseList: SelectablePhase[] = ["development","construction","action","production","research"]
+  authorizedBotPhaseSelection: SelectablePhase[] = ["development","construction","action","production","research"]
 
   constructor(private gameStateService: GameState,
     private cardInfoService: ProjectCardInfoService,
@@ -55,10 +57,12 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	this.gameStateService.currentEventQueue.subscribe(
 		event => this.currentEventQueue = event
 	  )
-    //return
-    //force draw card list for debug purpose
 
-    let cardDrawList: number[] = [263, 36, 222,  81, 123, 123, 123, 123]
+        //return
+    //force draw card list for debug purpose
+    let cardDrawList: number[] = [263, 36, 222,  81, 123, 204, 141]
+    //force phase selection pool
+    this.authorizedBotPhaseSelection = ['development']
 
     this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
   }
@@ -78,8 +82,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     for(let index of this.gameStateService.playerCount.getValue()){
       if(index===this.gameStateService.clientPlayerId){continue}
       if(this.currentPhase==="planification"){
-        let phaseList = ["development","construction","action","production","research"]
-        let randomPhase = phaseList[Math.floor(Math.random() * 5)]
+        let phaseList = this.authorizedBotPhaseSelection
+        let randomPhase = phaseList[Math.floor(Math.random() * this.authorizedBotPhaseSelection.length)]
         this.gameStateService.playerSelectPhase(index, randomPhase as keyof SelectablePhase)
       }
 
@@ -93,8 +97,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     //sends phase update to service's behaviorSubject
     this.gameStateService.updatePhase(newPhase)
 
-    let phaseList = ["development","construction","action","production","research"]
-    let randomPhase = phaseList[Math.floor(Math.random() * 5)]
+    let phaseList = this.phaseList
+    let randomPhase = phaseList[Math.floor(Math.random() * phaseList.length)]
     this.gameStateService.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
     this.gameStateService.setPlayerReady(true, 1)
   }

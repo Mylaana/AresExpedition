@@ -102,7 +102,7 @@ export class GameState{
                 "valueMod": 0,
                 "valueProd": 0,
 				"valueBaseProd": 0,
-                "valueStock": 50,
+                "valueStock": 52,
                 "hasStock": true,
                 "imageUrlId": 9,
             },

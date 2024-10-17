@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
@@ -12,7 +12,7 @@ import { PlayerReadyComponent } from '../../player-info/player-ready/player-read
 import { ChildButton, EventCardBuilderButton, EventSecondaryButton } from '../../../models/core-game/button.model';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
-import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
+import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { EventDesigner } from '../../../services/core-game/event-designer.service';
 import { EventButtonComponent } from '../../tools/event-button/event-button.component';
@@ -75,6 +75,8 @@ export class GameEventComponent {
 	]
 	selectionActive: boolean = false
 
+	@ViewChild('cardListSelector') cardListSelector!: ProjectCardListComponent
+
 	private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
 
@@ -122,22 +124,18 @@ export class GameEventComponent {
 		//this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
 	}
 	
-	handleDrawQueueNext(drawQueue: DrawEvent[]): void {
-		this.drawHandler.handleQueueUpdate(drawQueue)
-	}
+	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 
-	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
-		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
-	}
+	handleEventQueueNext(eventQueue: EventBaseModel[]): void {this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)}
 
-	public updateSelectedCardList(cardList: ProjectCardModel[]){
-		this.eventHandler.updateSelectedCardList(cardList)
-	}
-
-	public childButtonClicked(button: ChildButton ){
-		console.log('game event child button push clicked received')
-	}
+	public updateSelectedCardList(cardList: ProjectCardModel[]){this.eventHandler.updateSelectedCardList(cardList)}
+	public childButtonClicked(button: ChildButton ){console.log('game event child button push clicked received')}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
-	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){this.eventHandler.cardBuilderButtonClicked(button)}
+	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){
+		this.eventHandler.cardBuilderButtonClicked(button)
+		if(button.name==='buildCard'){
+			this.cardListSelector.updateDiscount(this.currentEvent as EventCardBuilder)
+		}
+	}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
 }

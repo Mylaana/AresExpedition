@@ -26,6 +26,7 @@ import { PlayerStateModel } from '../../../../models/player-info/player-state.mo
 })
 export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
+	@Input() buildDiscount!: number
 	clientPlayerId!: number
 	ressourceState: RessourceState[] = []
 	projectCardState!: ProjectCardState
@@ -92,7 +93,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		this.updateCardState(playerState.cards)
 		this.checkPlayable()
 	}
-	updateRessourceState(ressourceState: RessourceState[]):void{
+	updateRessourceState(ressourceState: RessourceState[]): void {
 		if(this.ressourceState===ressourceState){return}
 		this.ressourceState = deepCopy(ressourceState)
 	}
@@ -101,17 +102,20 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		this.projectCardState=cardState
 		this.updateCost()
 	}
-	updateCost():void{
+	public updateCost(): void {
+		/*
 		if(this.state.playable!=true){
 			this.projectCard.cost=this.projectCard.costInitial
 			return
-		}
+		}*/
 		this.projectCard.cost = this.cardCost.updateCost({
 			tagList: this.projectCard.tagsId,
 			steelState: this.ressourceState[3],
 			titaniumState: this.ressourceState[4],
-			playedTriggersList: this.projectCardState.getTriggerCostMod()
+			playedTriggersList: this.projectCardState.getTriggerCostMod(),
+			buildDiscount: this.buildDiscount
 		})
+		this.checkPlayable()
 	}
 
 	checkPlayable(): void {

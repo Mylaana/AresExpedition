@@ -5,32 +5,6 @@ import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/
 import { CardState } from "../cards/card-cost.model";
 import { ProjectCardModel } from "../cards/project-card.model";
 
-interface CreateEventOptionsSelector {
-    cardSelector?: Partial<CardSelector>
-    title?: string
-    waiterId?:number
-}
-interface CreateEventOptionsTargetCard {
-    advancedRessource?: AdvancedRessourceStock
-}
-interface CreateEventOptionsGeneric {
-    increaseParameter?: GlobalParameterValue
-    baseRessource?: RessourceStock | RessourceStock[]
-    scanKeep?: ScanKeep
-    cardId?: number
-    drawEventResult?:number[]
-    waiterId?:number
-    phaseCardUpgradeList?: number[]
-    phaseCardUpgradeNumber?: number
-}
-interface CreateEventOptionsDeckQuery {
-    drawDiscard?: Partial<DrawDiscard>
-    scanKeep?: Partial<ScanKeep>,
-}
-
-/**
- * isFinalized should become true when object should go to garbage
- */
 export abstract class EventBaseModel {
     readonly type!: EventType
     readonly subType!: any
@@ -222,6 +196,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
         activeZone.setCardSelected(card)
         this.removeCardFromSelector(card)
         this.deactivateSelection()
+        this.cardSelector.stateFromParent = {selectable: false}
         //activeZone.updateButtonGroupState('selectCard')
     }
     private removeCardFromSelector(card: ProjectCardModel): void {
@@ -246,7 +221,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
         switch(button.name){
             case('selectCard'):{
                 this.activateSelection()
-                this.cardSelector.stateFromParent = {selectable:true, playable:true}
+                this.cardSelector.stateFromParent = {selectable:true}
                 break
             }
             case('cancelCard'):{
@@ -254,6 +229,10 @@ export class EventCardBuilder extends EventBaseCardSelector {
                 if(card===undefined){break}
                 this.cardSelector.selectFrom.push(card)
                 break
+            }
+            case('buildCard'):{
+                this.buildDiscountUsed = true
+                this.buildDiscountValue = 0
             }
         }
 
