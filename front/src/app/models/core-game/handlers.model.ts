@@ -1,21 +1,25 @@
-import { AdvancedRessourceStock, CardRessourceStock, ScanKeep } from "../../interfaces/global.interface";
+import { Injectable } from "@angular/core";
+import { deepCopy } from "../../functions/global.functions";
+import { AdvancedRessourceStock, CardRessourceStock, RessourceState, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
 import { DrawEventDesigner, EventDesigner } from "../../services/core-game/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
-import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventUnionSubTypes } from "../../types/event.type";
+import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
+import { SelectablePhase } from "../../types/global.type";
+import { BuilderType } from "../../types/phase-card.type";
+import { PhaseCardModel } from "../cards/phase-card.model";
 import { ProjectCardModel } from "../cards/project-card.model";
-import { EventPlayZoneButton } from "./button.model";
-import { DrawEvent, EventBaseModel, EventCardSelector, EventCardSelectorPlayZone, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter } from "./event.model";
-import { Injectable } from "@angular/core";
-
+import { EventCardBuilderButton } from "./button.model";
+import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase } from "./event.model";
 
 @Injectable()
 export class EventHandler {
-	private initialized!: boolean
     private eventCounter: number = 0
 	private currentEvent!: EventBaseModel
+	private currentEventId!: number
 	private clientPlayerId = this.gameStateService.clientPlayerId
 	private waiterResolved: number[] = []
+	private readonly phaseHandler = new PhaseResolveHandler(this.gameStateService)
 
     constructor(
 		private gameStateService: GameState,
@@ -24,31 +28,41 @@ export class EventHandler {
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
 		if(eventQueue.length===0){return undefined}
-		
+		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && deepCopy(eventQueue[0].id)===deepCopy(this.currentEventId)){
+			return this.currentEvent
+		}
 		if(eventQueue[0].finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()
-			return
+			return this.currentEvent
 		}
+
 		this.switchEvent(eventQueue, this.currentEvent)
 		if(this.waiterResolved.length!=0){this.resolveWaiters(eventQueue)}
 		this.checkFinalized()
 		return this.currentEvent
 	}
 	eventMainButtonClicked(): void {
-		this.resolveEventEffect()
+		this.finishEventEffect()
 	}
 	updateEventMainButton(enabled: boolean): void {
 		this.currentEvent.button?.updateEnabled(enabled)
 	}
-	playZoneButtonClicked(button: EventPlayZoneButton): void {
-		let event = this.currentEvent as EventCardSelectorPlayZone
-		event.playZoneButtonClicked(button)
+	cardBuilderButtonClicked(button: EventCardBuilderButton): void {
+		let event = this.currentEvent as EventCardBuilder
+		event.cardBuilderButtonClicked(button)
 		switch(button.name){
 			case('buildCard'):{
 				let cardId = event.getCardToBuildId()
 				if(cardId===undefined){return}
-				let buildEvent = EventDesigner.createGeneric('buildCard', {cardId:cardId})
-				this.gameStateService.addEventQueue(buildEvent, true)
+				this.gameStateService.addEventQueue(EventDesigner.createGeneric('buildCard', {cardId:cardId}), 'first')
+				break
+			}
+			case('drawCard'):{
+				this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}), 'first')
+				break
+			}
+			case('gain6MC'):{
+				this.gameStateService.addEventQueue(EventDesigner.createGeneric('addRessourceToPlayer',{baseRessource:{name:"megacredit",valueStock:6}}), 'first')
 				break
 			}
 		}
@@ -67,15 +81,14 @@ export class EventHandler {
 		return this.eventCounter
 	} 
     private switchEvent(eventQueue: EventBaseModel[], event: EventBaseModel): void {
-		if(eventQueue[0]===event){return}
-		if(eventQueue[0]===this.currentEvent){return}
-		
 		//switching current event to top of the pile
 		this.currentEvent = eventQueue[0]
 		if(!this.currentEvent.id){this.currentEvent.id = this.setEventId()}
+		this.currentEventId = this.currentEvent.id	
 
         //call selector related switchEvents
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
+		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent)}
 
 		this.applyAutoFinalize()
         return 
@@ -84,7 +97,7 @@ export class EventHandler {
 		if(this.currentEvent.autoFinalize!=true){return}
 
 		this.currentEvent.finalized = true
-		this.resolveEventEffect()
+		this.finishEventEffect()
 	}
     private switchEventCardSelector(event: EventCardSelector): void {
         //remove stateFromParent before switching event
@@ -116,27 +129,41 @@ export class EventHandler {
 				break
 			}
 			case('addRessourceToSelectedCard'):{
+				let selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
+				if(selectFrom.length===0){event.finalized=true;break}
 				event.activateSelection()
-				event.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
-				console.log(event)
+				event.cardSelector.selectFrom = selectFrom
 			}
 		}
     }
-    private resolveEventEffect(){
+	private switchEventPhase(event: EventBaseModel): void {
+		let subType = event.subType as EventPhaseSubType
+
+		if(event.autoFinalize===true){event.finalized=true}
+		switch(subType){
+			case('developmentPhase'):{this.phaseHandler.resolveDevelopment();break}
+			case('constructionPhase'):{this.phaseHandler.resolveConstruction();break}
+			case('productionPhase'):{this.phaseHandler.resolveProduction();break}
+			case('researchPhase'):{this.phaseHandler.resolveResearch();break}
+			default:{return}
+		}
+	}
+    private finishEventEffect(){
         switch(this.currentEvent.type){
-            case('cardSelector'):{this.resolveEventCardSelector(this.currentEvent as EventCardSelector); break}
-            case('cardSelectorRessource'):{this.resolveEventCardSelectorRessource(this.currentEvent as EventCardSelectorRessource); break}
-			case('cardSelectorPlayZone'):{this.resolveEventCardSelectorPlayZone(this.currentEvent as EventCardSelectorPlayZone); break}
-			case('generic'):{this.resolveEventGeneric(this.currentEvent as EventGeneric); break}
-			case('deck'):{this.resolveEventDeckQuery(this.currentEvent as EventDeckQuery); break}
-			case('targetCard'):{this.resolveEventTargetCards(this.currentEvent as EventTargetCard); break}
-			case('waiter'):{this.resolveEventWaiter(this.currentEvent as EventWaiter);break}
-			default:{console.log('Non mapped event in handler.resolveEventEffect: ', this.currentEvent)}
+            case('cardSelector'):{this.finishEventCardSelector(this.currentEvent as EventCardSelector); break}
+            case('cardSelectorRessource'):{this.finishEventCardSelectorRessource(this.currentEvent as EventCardSelectorRessource); break}
+			case('cardSelectorCardBuilder'):{this.finishEventCardBuilder(this.currentEvent as EventCardBuilder); break}
+			case('generic'):{this.finishEventGeneric(this.currentEvent as EventGeneric); break}
+			case('deck'):{this.finishEventDeckQuery(this.currentEvent as EventDeckQuery); break}
+			case('targetCard'):{this.finishEventTargetCards(this.currentEvent as EventTargetCard); break}
+			case('waiter'):{this.finishEventWaiter(this.currentEvent as EventWaiter);break}
+			case('phase'):{this.finishEventPhase(this.currentEvent as EventPhase); break}
+			default:{console.log('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
         }
 		if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
 		this.checkFinalized()
     }
-    private resolveEventCardSelector(event: EventCardSelector): void {
+    private finishEventCardSelector(event: EventCardSelector): void {
 		console.log('resolving event: ','EventCardSelector ', event.subType)
 
 		event.finalized = true
@@ -161,37 +188,35 @@ export class EventHandler {
 				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
 				break
 			}
-			default:{console.log('Non mapped event in handler.resolveEventCardSelector: ', this.currentEvent)}
+			default:{console.log('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
         }
 		if(event.subType!='actionPhase'){event.activateSelection()}
     }
-    private resolveEventCardSelectorRessource(event: EventCardSelectorRessource): void {
+    private finishEventCardSelectorRessource(event: EventCardSelectorRessource): void {
 		console.log('resolving event: ','EventCardSelectorRessource ', event.subType)
 		switch(event.subType){
 			case('addRessourceToSelectedCard'):{
-				console.log(event)
-                event.activateSelection()
-				//event.cardSelector.selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
-				if(event.cardSelector.selectFrom.length===0){
-					console.log('no cards found to add:', event.advancedRessource)
-					event.finalized = true
-				}
+				event.finalized = true
+				let stock: AdvancedRessourceStock[] = event.advancedRessource?[event.advancedRessource]:[]
+				if(stock.length===0){break}
+
+				this.gameStateService.addRessourceToClientPlayerCard({cardId: event.cardSelector.selectedList[0].id,stock: stock})
 				break
 			}
-			default:{console.log('Non mapped event in handler.resolveEventCardSelectorRessource: ', this.currentEvent)}
+			default:{console.log('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
 		}
     }
-	private resolveEventCardSelectorPlayZone(event: EventCardSelectorPlayZone): void {
-		console.log('resolving event: ','EventCardSelectorPlayZone ', event.subType)
+	private finishEventCardBuilder(event: EventCardBuilder): void {
+		console.log('resolving event: ','EventCardBuilder ', event.subType)
 		switch(event.subType){
-			case('developmentPhase'):case('constructionPhase'):{
+			case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):{
 				event.finalized = true
 				break
 			}
-			default:{console.log('Non mapped event in handler.resolveEventCardSelectorPlayZone: ', this.currentEvent)}
+			default:{console.log('Non mapped event in handler.finishEventCardBuilder: ', this.currentEvent)}
 		}
 	}
-	private resolveEventGeneric(event: EventGeneric): void {
+	private finishEventGeneric(event: EventGeneric): void {
 		console.log('resolving event: ','EventGeneric ', event.subType)
 
 		if(event.subType!='buildCard'){event.finalized = true}
@@ -229,12 +254,25 @@ export class EventHandler {
 				}
 				break
 			}
-			case('productionPhase'):case('planificationPhase'):{break}
-			//case('addRessourceToPlayer')
-			default:{console.log('Non mapped event in handler.resolveEventGeneric: ', this.currentEvent)}
+			case('addRessourceToPlayer'):{
+				if(event.baseRessource===undefined){break}
+				let baseRessources: RessourceStock[] = []
+				
+				if(Array.isArray(event.baseRessource)){
+					baseRessources = event.baseRessource
+				} else {
+					baseRessources.push(event.baseRessource)
+				}
+
+				this.gameStateService.addRessourceToClientPlayer(baseRessources)
+				break
+			}
+			case('planificationPhase'):{break}
+			case('upgradePhaseCards'):{break}
+			default:{console.log('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}
-	private resolveEventDeckQuery(event: EventDeckQuery): void {
+	private finishEventDeckQuery(event: EventDeckQuery): void {
 		console.log('resolving event: ','EventDeckQuery ', event.subType)
 		let resolveType!: EventUnionSubTypes
 		event.waiterId = event.id
@@ -245,21 +283,20 @@ export class EventHandler {
 			}
 			case('researchPhaseQuery'):{
 				resolveType = 'researchPhaseResult'
-				event.scanKeep = this.gameStateService.getClientPlayerResearchMods()
 				break
 			}
 			case('scanKeepQuery'):{
 				resolveType = 'scanKeepResult'
 				break
 			}
-			default:{console.log('Non mapped event in handler.resolveEventDeckQuery: ', this.currentEvent)}
+			default:{console.log('Non mapped event in handler.finishEventDeckQuery: ', this.currentEvent)}
 		}
 
 		if((event.drawDiscard===undefined && event.scanKeep===undefined) || event.waiterId===undefined || resolveType===undefined){return}
 
 		//adding a deck waiter event until drawEvent resolution if deck event will draw something
 		if((event.drawDiscard?.draw?event.drawDiscard.draw:0)>0 || (event.scanKeep?.scan!=undefined && event.scanKeep.scan>0)){
-			this.gameStateService.addEventQueue(EventDesigner.createWaiter('deckWaiter', event.id), true)
+			this.gameStateService.addEventQueue(EventDesigner.createWaiter('deckWaiter', event.id), 'second')
 		}
 	
 		let drawNumber = event.drawDiscard?.draw
@@ -272,7 +309,7 @@ export class EventHandler {
 		}
 		this.gameStateService.cleanAndNextEventQueue()
 	}
-	private resolveEventWaiter(event: EventWaiter): void {
+	private finishEventWaiter(event: EventWaiter): void {
 		console.log('resolving event: ','EventWaiter ', event.subType)
 		switch(event.subType){
 			case('deckWaiter'):{
@@ -281,7 +318,7 @@ export class EventHandler {
 			default:{console.log('Non mapped event in handler.EventWaiter: ', this.currentEvent)}
 		}
 	}
-	private resolveEventTargetCards(event: EventTargetCard): void {
+	private finishEventTargetCards(event: EventTargetCard): void {
 		console.log('resolving event: ','EventTargetCard ', event.subType)
 
 		switch(event.subType){
@@ -304,7 +341,19 @@ export class EventHandler {
 				this.gameStateService.setClientPlayerTriggerAsInactive(event.targetCardId)
 				break
 			}
-			default:{console.log('Non mapped event in handler.resolveEventTargetCards: ', this.currentEvent)}
+			default:{console.log('Non mapped event in handler.finishEventTargetCards: ', this.currentEvent)}
+		}
+	}
+	private finishEventPhase(event: EventPhase): void {
+		console.log('resolving event: ','finishEventPhase ', event.subType)
+
+		switch(event.subType){
+			case('developmentPhase'):case('constructionPhase'):case('researchPhase'):{break}
+			case('productionPhase'):{
+				event.finalized=true
+				break
+			}
+			default:{console.log('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}
 		}
 	}
 	private resolveWaiters(eventQueue: EventBaseModel[]){
@@ -389,6 +438,125 @@ export class DrawEventHandler {
 			}
 		}
 		if(resultEvent===undefined){return}
-		this.gameStateService.addEventQueue(resultEvent,true)
+		this.gameStateService.addEventQueue(resultEvent,'second')
+	}
+}
+
+class PhaseResolveHandler {
+	private currentUpgradedPhaseCards!: PhaseCardModel[]
+	constructor(private gameStateService: GameState){}
+	private clientPlayerId: number = this.gameStateService.clientPlayerId
+
+	private getCurrentUpgradedPhaseCard(): PhaseCardModel[] {
+		return this.gameStateService.getClientPlayerSelectedPhaseCards()
+	}
+	private refreshCurrentUpgradedPhaseCard(): void {
+		this.currentUpgradedPhaseCards = this.getCurrentUpgradedPhaseCard()
+	}
+	private shouldReceivePhaseCardSelectionBonus(phaseResolved: SelectablePhase): boolean {
+		return this.gameStateService.getPlayerSelectedPhase(this.clientPlayerId)===phaseResolved
+	}
+	resolveDevelopment(): void {
+		this.refreshCurrentUpgradedPhaseCard()
+		let builderType: BuilderType = this.currentUpgradedPhaseCards[0].phaseType as BuilderType
+		if(!this.shouldReceivePhaseCardSelectionBonus('development')){
+			builderType = 'developmentAbilityOnly'
+		}
+		this.gameStateService.addEventQueue(EventDesigner.createCardBuilder('developmentPhaseBuilder',builderType),'second')
+	}
+	resolveConstruction(): void {
+		this.refreshCurrentUpgradedPhaseCard()
+		let builderType: BuilderType = this.currentUpgradedPhaseCards[1].phaseType as BuilderType
+		if(!this.shouldReceivePhaseCardSelectionBonus('construction')){
+			builderType = 'constructionAbilityOnly'
+		}
+		this.gameStateService.addEventQueue(EventDesigner.createCardBuilder('constructionPhaseBuilder',builderType),'second')
+
+		if(builderType==='construction_draw_card'){
+			this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}),'second')
+		}
+	}
+	resolveProduction(): void {
+		this.refreshCurrentUpgradedPhaseCard()
+		
+		let clientState = this.gameStateService.getClientPlayerState()
+		let newClientRessource: RessourceState[] = []
+
+		newClientRessource = clientState.ressource
+
+		for(let i=0; i<newClientRessource.length; i++){
+			switch(i){
+				//MC production
+				case(0):{
+					newClientRessource[i].valueStock = 
+						newClientRessource[i].valueStock
+						+ newClientRessource[i].valueProd 
+						+ clientState.terraformingRating 
+						+ this.getProductionPhaseCardSelectionBonus()
+					break
+				}
+				//heat and plant producition
+				case(1):case(2):{
+					newClientRessource[i].valueStock = 
+						newClientRessource[i].valueStock 
+						+ newClientRessource[i].valueProd
+					break
+				}
+				//Cards production
+				case(5):{
+					if(newClientRessource[i].valueProd===0){break}
+					this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent(
+						'drawQuery',
+						{drawDiscard:{draw:newClientRessource[i].valueProd,discard:0}}
+					),'first')
+					break
+				}
+			}
+		}
+
+		this.gameStateService.updateClientPlayerState(clientState)
+	}
+	private getProductionPhaseCardSelectionBonus(): number {
+		if(!this.shouldReceivePhaseCardSelectionBonus('production')){return 0}
+
+		let bonus: number = 0
+		let productionPhaseCard = this.currentUpgradedPhaseCards[3]
+
+		switch(productionPhaseCard.phaseType){
+			case('production_base'):{bonus=4;break}
+			case('production_7mc'):{bonus=7;break}
+			case('production_1mc_activate_card'):{bonus=1;break}
+		}
+
+		return bonus
+	}
+	resolveResearch(): void {
+		this.refreshCurrentUpgradedPhaseCard()
+		let baseScanKeep: ScanKeep = {scan:2,keep:1}
+		let clientState = this.gameStateService.getClientPlayerState()
+		let modScanKeep: ScanKeep = clientState.research
+		let bonusScanKeep: ScanKeep = this.getResearchPhaseCardSelectionBonus()
+		let totalScanKeep = {
+			scan: baseScanKeep.scan + modScanKeep.scan + bonusScanKeep.scan,
+			keep: baseScanKeep.keep + modScanKeep.keep + bonusScanKeep.keep,
+		}
+		this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent(
+			'researchPhaseQuery',
+			{scanKeep:totalScanKeep}
+		),'first')
+
+	}
+	private getResearchPhaseCardSelectionBonus(): ScanKeep {
+		if(!this.shouldReceivePhaseCardSelectionBonus('research')){return {scan:0, keep:0}}
+
+		let bonus: ScanKeep = {scan:0, keep:0}
+		let researchPhaseCard = this.currentUpgradedPhaseCards[4]
+
+		switch(researchPhaseCard.phaseType){
+			case('research_base'):{bonus={scan:3, keep:1};break}
+			case('research_scan6_keep1'):{bonus={scan:6, keep:1};break}
+			case('research_scan2_keep2'):{bonus={scan:2, keep:2};break}
+		}
+		return bonus
 	}
 }

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ChildButton, EventButtonBase, EventSecondaryButton } from '../../../models/core-game/button.model';
-import { ButtonComponent } from '../button/button.component';
+import { EventButtonBase, EventSecondaryButton } from '../../../models/core-game/button.model';
 
 @Component({
   selector: 'app-event-secondary-button',

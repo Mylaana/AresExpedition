@@ -11,14 +11,15 @@
         <div class="wrapper-event-top">
             <h2 *ngIf="currentEvent!=undefined && currentEvent.title!=undefined">{{currentEvent.title}}</h2>
 			<div class="wrapper-event-top-main">
-                <app-card-builder *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent" (gameEventPlayZoneButtonClicked)="eventCardBuilderButtonClicked($event)"></app-card-builder>
+                <app-card-builder-list *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
+                <!--<app-card-builder-list *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent" (gameEventPlayZoneButtonClicked)="eventCardBuilderButtonClicked($event)"></app-card-builder-list>-->
 			</div>
             <app-phase-planification *ngIf="currentPhase==='planification' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
             <app-phase-production *ngIf="currentPhase==='production' && currentEvent.subType==='productionPhase'"></app-phase-production>
         </div>
         <div class="wrapper-event-bottom">
             <div *ngIf="currentEvent.hasSelector()===true" class="wrapper-card-selector ares-background">
-                <app-project-card-list [cardListId]="'game event list'" [event]="currentEvent" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
+                <app-project-card-list #cardListSelector [cardListId]="'game event list'" [event]="currentEvent" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>
 			<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [event]="currentEvent"></app-phase-card-upgrade-selector>
         </div>

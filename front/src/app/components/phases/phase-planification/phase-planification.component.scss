@@ -1,3 +1,6 @@
+$card-width: 400px;
+$card-height: calc($card-width / 2);
+
 $colors: (
   "construction": red,
   "action": blue,
@@ -30,4 +33,40 @@ $colors: (
     align-items: center;
     width: 20%;
     aspect-ratio: 1;
+}
+.wrapper-selected-phase-card{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.wrapper-phase-card-description{
+    height: $card-height;
+    width: $card-width;
+
+    $horizontal-padding: .0;
+
+    border: black solid 2px;
+    border-radius: calc($card-height * .05);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper-phase-selected{
+    $horizontal-padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: $horizontal-padding;
+    padding-right: $horizontal-padding;
+    height: 100%;
+    width: 100%;
+}
+app-text-with-image{
+    width: 100%;    
+}
+.wrapper-title-and-text{
+    width: 100%;
+    height: 40%;
 }

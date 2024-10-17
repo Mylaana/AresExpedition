@@ -7,11 +7,12 @@ import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
 import { PhaseCardType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
-import { PhaseCardHolderModel, PhaseCardGroupModel } from "../../models/cards/phase-card.model";
+import { PhaseCardHolderModel, PhaseCardGroupModel, PhaseCardModel } from "../../models/cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { EventDesigner } from "./event-designer.service";
+import { deepCopy } from "../../functions/global.functions";
 
 interface SelectedPhase {
     "development": boolean,
@@ -28,6 +29,9 @@ interface PhaseOrder {
     "4": NonSelectablePhase,
     "5": NonSelectablePhase,
 }
+
+type EventPileAddRule = 'first' | 'second' | 'last'
+
 
 const phaseCount: number = 5;
 const handSizeStart: number = 0;
@@ -98,7 +102,7 @@ export class GameState{
                 "valueMod": 0,
                 "valueProd": 0,
 				"valueBaseProd": 0,
-                "valueStock": 50,
+                "valueStock": 52,
                 "hasStock": true,
                 "imageUrlId": 9,
             },
@@ -229,13 +233,13 @@ export class GameState{
         newPlayer.cards.maximum = handSizeMaximum
 
         newPlayer.research = {
-            keep: 1,
-            scan: 2,
+            keep: 0,
+            scan: 0,
         }
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}))
+            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first')
         }
 
         newPlayer.terraformingRating = 5;
@@ -262,7 +266,7 @@ export class GameState{
         this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
 
 		//adds phase cards info to model
-		newPlayer.phaseCard = this.phaseCardService.getNewPhaseHolderModel(phaseNumber, phaseCardNumberPerPhase)
+		newPlayer.phaseCards = this.phaseCardService.getNewPhaseHolderModel(phaseNumber, phaseCardNumberPerPhase)
     };
 
     setPlayerIdList(playerIdList: number[]):void{
@@ -485,6 +489,10 @@ export class GameState{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
 
+    getClientPlayerSelectedPhaseCards(): PhaseCardModel[] {
+        return this.getClientPlayerState().phaseCards.getSelectedPhaseCards()
+    }
+
     getClientPlayerStateHand(): number[] {
         return this.getPlayerStateHand(this.clientPlayerId)
     }
@@ -570,7 +578,7 @@ export class GameState{
         this.drawQueue.next(newDrawQueue)
     }
 
-    addEventQueue(events: EventBaseModel | EventBaseModel[], addOnTop?: boolean): void {
+    addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
         let newQueue: EventBaseModel[] = []
         let addEvents: EventBaseModel[] = []
 
@@ -580,14 +588,25 @@ export class GameState{
             addEvents = events
         }
         
-        if(addOnTop===true){
-            newQueue = newQueue.concat(addEvents, this.eventQueue.getValue())
-        } else {
-            newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
+        switch(addRule){
+            case('last'):{
+                newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
+                break
+            }
+            case('first'):{
+                newQueue = newQueue.concat(addEvents, this.eventQueue.getValue())
+                break
+            }
+            case('second'):{
+                let oldQueue = this.eventQueue.getValue()
+                let firstEvent = oldQueue.shift()
+                newQueue = newQueue.concat(firstEvent?[firstEvent]:[], addEvents, oldQueue)
+            }
         }
+
         this.eventQueue.next(newQueue)
     }
-
+    
     /**
      * gets nothing
      * returns nothing
@@ -605,14 +624,14 @@ export class GameState{
     }
 
 	getPlayerPhaseCardHolder(playerId: number): PhaseCardHolderModel {
-		return this.groupPlayerState.getValue()[playerId].phaseCard
+		return this.groupPlayerState.getValue()[playerId].phaseCards
 	}
 	getPlayerPhaseCardGroup(playerId: number, phaseIndex: number): PhaseCardGroupModel {
-		return this.groupPlayerState.getValue()[playerId].phaseCard.phaseGroup[phaseIndex]
+		return this.groupPlayerState.getValue()[playerId].phaseCards.phaseGroups[phaseIndex]
 	}
 	setPlayerUpgradedPhaseCardFromPhaseCardGroup(playerId: number, phaseIndex: number, phaseCardGroup: PhaseCardGroupModel): void {
 		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.phaseCard.phaseGroup[phaseIndex] = phaseCardGroup
+		playerState.phaseCards.phaseGroups[phaseIndex] = phaseCardGroup
 		this.updatePlayerState(playerId, playerState)
 	}
     /*
@@ -669,7 +688,7 @@ export class GameState{
         if(events.length===0){return}
 
         events.reverse()
-        this.addEventQueue(events, true)
+        this.addEventQueue(events, 'first')
 	}
     setClientPlayerTriggerAsInactive(triggerId: number): void {
         let newState: PlayerStateModel = this.getClientPlayerState()
@@ -694,7 +713,7 @@ export class GameState{
         if(!events){return}
 
 
-        this.addEventQueue(events, true)
+        this.addEventQueue(events, 'first')
 
     }
     addRessourceToClientPlayer(ressources: RessourceStock[]): void {
@@ -727,7 +746,7 @@ export class GameState{
                 ressource
             )
             if(!events){continue}
-            this.addEventQueue(events, true)
+            this.addEventQueue(events, 'first')
         }
     }
     addClientPlayerResearchScanValue(scan: number): void {

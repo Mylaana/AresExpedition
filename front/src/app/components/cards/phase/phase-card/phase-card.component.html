@@ -1,10 +1,9 @@
 <div class="wrapper-main">
 	<div class="wrapper-selection-border" [ngClass]="state.selected===true? 'element-selected-bracket':'element-not-selected'">
 		<div class="wrapper-phase-card ares-card" [ngClass]="['phase' + phaseIndex, state.selectable ? 'element-selectable': '', state.selected===true? 'selected':'']">
-			<p>global text</p>
-			<p>owner text</p>
-			<p>upgraded: {{state.upgraded}}</p>
-			<p>selected: {{state.selected}}</p>
+			<p>{{phaseCard.baseDescription}}</p>
+			<p>{{phaseCard.bonusDescription}}</p>
+			<p>upgraded:{{state.upgraded}} selected:{{state.selected}}</p>
 		</div>
 	</div>
 	<div *ngIf="state.upgraded!=true && initialState?.upgradable==true" class="wrapper-button">

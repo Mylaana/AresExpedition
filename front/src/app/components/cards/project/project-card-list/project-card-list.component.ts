@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
-import { EventBaseModel, EventCardSelector, EventCardSelectorPlayZone } from '../../../../models/core-game/event.model';
+import { EventBaseModel, EventCardSelector, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { deepCopy } from '../../../../functions/global.functions';
 
 @Component({
@@ -21,11 +21,13 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	@Input() eventId?: number;
 	@Input() playZoneId!: number; //this indicates whitch playZone this component should read
 	@Input() cardList!: ProjectCardModel[] //takes display priority
+
 	playedCardList!: ProjectCardModel[] //takes display priority
 	@Output() updateSelectedCardList: EventEmitter<ProjectCardModel[]> = new EventEmitter<ProjectCardModel[]>()
 	@Input() cardListId!: string
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<ProjectCardComponent>
 	
+	_buildDiscount!: number
 	private _cardList!: ProjectCardModel[] | undefined
 	private _eventId!: number | undefined
 	cardSelector!: CardSelector
@@ -54,7 +56,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		if (changes['eventId'] && changes['eventId'].currentValue) {
 			this.updateCardList()
 		}
-		if (changes['playCardZone'] && changes['playCardZone'].currentValue) {
+		if (changes['CardBuilder'] && changes['CardBuilder'].currentValue) {
 			this.updateCardList()
 		}
 		if (changes['cardList'] && changes['cardList'].currentValue) {
@@ -73,7 +75,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 			this.updateSelectedCardList.emit(this.selectedCardList)
 		}
 	}
-	checkUpdateSelector(event: EventCardSelector){
+	checkUpdateSelector(event: EventCardSelector): void {
 		if(deepCopy(event.cardSelector)!=deepCopy(this.cardSelector)){
 			this.updateCardList()
 		}
@@ -111,9 +113,9 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	setSelectorFromEvent(event: EventCardSelector): void {
 		this.cardSelector = event.cardSelector
 	}
-	setSelectorFromPlayZone(event: EventCardSelectorPlayZone): void {
+	setSelectorFromPlayZone(event: EventCardBuilder): void {
 		//will root the cards to selected id list, not to selectFrom
-		let card = event.playCardZone[this.playZoneId].selectedCard
+		let card = event.CardBuilder[this.playZoneId].getSelectedCard()
 		if(card===undefined){
 			this.cardSelector.selectedList
 			this.cardSelector.selectionQuantity = 0
@@ -143,7 +145,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 			return
 		}
 		if(this.playZoneId!=undefined && this.event?.hasCardBuilder()===true){
-			this.setSelectorFromPlayZone(this.event as EventCardSelectorPlayZone)
+			this.setSelectorFromPlayZone(this.event as EventCardBuilder)
 			return
 		}
 		if(this.event?.hasSelector()){
@@ -153,6 +155,8 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		}
 	}
 	setDisplay(): void {
+		if(this.event?.hasCardBuilder()){this.setDiscount(this.event as EventCardBuilder)}
+
 		if(this.playedCardList!=undefined){
 			this.displayedCards = this.getDisplayFromPlayed()
 			return
@@ -162,6 +166,23 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 			return
 		} 
 		this.displayedCards = this.getDisplayFromSelectable()
+	}
+	setDiscount(event: EventCardBuilder): void {
+		if(!this.loaded){return}
+		this._buildDiscount = event.buildDiscountValue
+		
+		this.childrenUpdateCost()
+	}
+	public updateDiscount(event: EventCardBuilder): void {
+		this.setDiscount(event)
+
+	}
+	childrenUpdateCost(): void {
+		if(this.projectCards===undefined){return}
+
+		for(let card of this.projectCards){
+			card.updateCost()
+		}
 	}
 	updateCardList(): void {
 		this.setSelector()

@@ -1,9 +1,31 @@
-<h2>Select a phase card:</h2>
-<div class="wrapper-phase-card">
-    <div class="wrapper-button" [ngClass]="button.name===currentPhaseSelected? 'element-selected-bracket':'element-not-selected'" *ngFor="let button of buttonList">
-        <app-button class="phase-card" [button]="button" (childButtonClicked)="childButtonClicked($event)">
-            <img class="phase-image" src="/assets/other/phase_{{button.name}}.png" alt="">
-            <p>{{button.name}}</p>
-        </app-button>
+<div class="wrapper-main">
+    <h2>Select a phase card:</h2>
+    <div class="wrapper-phase-card">
+        <div class="wrapper-button" [ngClass]="button.name===currentPhaseSelected? 'element-selected-bracket':'element-not-selected'" *ngFor="let button of buttonList">
+            <app-button class="phase-card" [button]="button" (childButtonClicked)="childButtonClicked($event)">
+                <img class="phase-image" src="/assets/other/phase_{{button.name}}.png" alt="">
+                <p>{{button.name}}</p>
+            </app-button>
+        </div>
+    </div>
+    <div class="wrapper-selected-phase-card">
+        <div class="wrapper-phase-card-description ares-background">
+            <ng-container *ngFor="let phaseCard of selectedPhaseCards">
+                <div *ngIf="currentPhaseCard===phaseCard" class="wrapper-phase-selected">
+                    <div class="wrapper-title-and-text">
+                        <h4>Ability:</h4>
+                        <app-text-with-image [rawText]="phaseCard.baseDescription"></app-text-with-image>
+                    </div>
+                    <div class="wrapper-title-and-text">
+                        <h4>Bonus:</h4>
+                        <app-text-with-image [rawText]="phaseCard.bonusDescription"></app-text-with-image>
+                    </div>
+                </div>
+            </ng-container>
+            <div *ngIf="currentPhaseCard===undefined" class="wrapper-phase-not-selected">
+                <h2>Select a phase</h2>
+            </div>
+        </div>
+
     </div>
 </div>

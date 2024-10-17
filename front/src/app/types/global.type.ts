@@ -15,7 +15,7 @@ export type ButtonNames =
 | 'addRessourceToSelectedCard'
 
 export type EventSecondaryButtonNames = 'sellOptionalCard'
-export type EventPlayZoneButtonNames =  'selectCard' | 'cancelCard' | 'buildCard' | 'alternative'
+export type EventCardBuilderButtonNames =  'selectCard' | 'cancelCard' | 'buildCard' | CardBuilderOptionType
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
@@ -28,3 +28,4 @@ export type TagInfo = {
     textTagName: string;
 };
 export type DrawRule = 'draw' | 'research' | 'scanKeep'
+export type CardBuilderOptionType = 'gain6MC' | 'drawCard'

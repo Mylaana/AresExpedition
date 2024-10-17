@@ -9,6 +9,11 @@ type playedProject = {
     playedProjectList: ProjectCardModel[]
 }
 
+type TriggerLimit = {
+    value: number,
+    limit: number
+}
+
 export class ProjectCardModel {
     id!: number;
     cardCode!: string;
@@ -34,6 +39,7 @@ export class ProjectCardModel {
     prerequisiteTagId?: number;
 	stock?: AdvancedRessourceStock[];
     stockable?: AdvancedRessourceType[]
+    triggerLimit!: TriggerLimit
 
     //not loaded from data
 
@@ -43,6 +49,9 @@ export class ProjectCardModel {
     //delete
     description?: string;
 
+    getCardTriggerLimit(): TriggerLimit | undefined{
+        return this.triggerLimit
+    }
     addRessourceToStock(ressource: AdvancedRessourceStock): void {
         if(this.checkStockable(ressource.name)===false){return}
         if(this.checkStockExists(ressource.name)===false){
@@ -141,9 +150,20 @@ export class ProjectCardState {
     playCard(card: ProjectCardModel): void {
         this.projects.playedIdList.push(card.id)
         this.projects.playedProjectList.push(card)
+        this.initialSetUp(card)
         
         if(card.cardSummaryType!='trigger'){return}
         this.triggers.playTrigger(card.id)
+    }
+    private initialSetUp(card: ProjectCardModel): void {
+        switch(card.id){
+            //Bacterial Aggregate
+            case(222):{
+                card.triggerLimit = {limit:5, value:0}
+                break
+            }
+        }
+
     }
     getPlayedTriggersId(): number[] {
         return this.triggers.getPlayedTriggers()
@@ -252,17 +272,16 @@ class TriggerState {
         this.addTriggerOnParameter(cardId)
         this.addTriggerOnPlayedCard(cardId)
         this.addTriggerOnGainedTag(cardId)
+        this.addTriggerToCostMod(cardId)
     }
-    addTriggerOnRessource(cardId: number): void {
+    private addTriggerOnRessource(cardId: number): void {
         switch(cardId){
             case(222):{break} //Bacterial Aggregate
             default:{return}
         }
         this.activeOnRessourceAddedToCard.push(cardId)
     }
-
-    
-    addTriggerOnParameter(cardId: number): void {
+    private addTriggerOnParameter(cardId: number): void {
         switch(cardId){
             case(46):{break} //Physics Complex
             case(279):{break} //Pets
@@ -270,13 +289,13 @@ class TriggerState {
         }
         this.activeOnParameterIncrease.push(cardId)
     }
-    addTriggerOnPlayedCard(cardId: number): void {
+    private addTriggerOnPlayedCard(cardId: number): void {
         switch(cardId){
             default:{return}
         }
         this.activeOnPlayedCard.push(cardId)
     }
-    addTriggerOnGainedTag(cardId: number): void {
+    private addTriggerOnGainedTag(cardId: number): void {
         switch(cardId){
             case(25):{break} //Energy Subsidies
             case(37):{break} //Interplanetary Conference
@@ -286,7 +305,7 @@ class TriggerState {
         }
         this.activeOnGainedTag.push(cardId)
     }
-    addCostModTrigger(cardId: number): void {
+    private addTriggerToCostMod(cardId: number): void {
         switch(cardId){
             case(25):{break} //Energy Subsidies
             case(37):{break} //Interplanetary Conference

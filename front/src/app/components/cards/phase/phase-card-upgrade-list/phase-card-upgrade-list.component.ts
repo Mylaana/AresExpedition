@@ -4,8 +4,9 @@ import { PhaseCardComponent } from '../phase-card/phase-card.component';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
-import { PhaseCardGroupModel } from '../../../../models/cards/phase-card.model';
+import { PhaseCardGroupModel, PhaseCardModel } from '../../../../models/cards/phase-card.model';
 import { deepCopy } from '../../../../functions/global.functions';
+import { PhaseCardInfoService } from '../../../../services/cards/phase-card-info.service';
 
 
 @Component({
@@ -25,16 +26,21 @@ export class PhaseCardUpgradeListComponent implements OnChanges{
 	@Output() cardUpgraded: EventEmitter<{phaseIndex: number, phaseCardLevel: number}> = new EventEmitter<{phaseIndex: number, phaseCardLevel: number}>()
 
 	private _upgradeRemaining!: boolean
-	loaded: boolean = false
 
 	phaseCardLevelList!: number[];
 	phaseCardState: CardState[] = [];
 	@ViewChildren('phaseCards') phaseCards!: QueryList<PhaseCardComponent>
+	phaseCardModels:PhaseCardModel[] = []
 
 	clientPlayerId!:number;
 	clientPlayerPhaseCardGroupState!: PhaseCardGroupModel;
 
-	constructor(private gameStateService: GameState){}
+	loaded: boolean = false
+
+	constructor(
+		private gameStateService: GameState,
+		private phaseCardInfoService: PhaseCardInfoService
+	){}
 
 	ngOnInit(): void {
 		this.clientPlayerId = this.gameStateService.clientPlayerId
@@ -44,6 +50,9 @@ export class PhaseCardUpgradeListComponent implements OnChanges{
 		this.gameStateService.groupPlayerState.subscribe(
 			state => this.updateState(state)
 		)
+
+		this.phaseCardModels = this.phaseCardInfoService.getPhaseCardFromPhaseIndex(this.phaseIndex)
+
 
 		this.loaded = true
 	}
@@ -82,8 +91,8 @@ export class PhaseCardUpgradeListComponent implements OnChanges{
 		this.setState()
 	}
 	updateState(state: PlayerStateModel[]): void{
-		if(this.phaseCardState.length!=0 && deepCopy(state[this.clientPlayerId].phaseCard.phaseGroup[this.phaseIndex]) == deepCopy(this.clientPlayerPhaseCardGroupState)){return}
-		this.clientPlayerPhaseCardGroupState = state[this.clientPlayerId].phaseCard.phaseGroup[this.phaseIndex]
+		if(this.phaseCardState.length!=0 && deepCopy(state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]) == deepCopy(this.clientPlayerPhaseCardGroupState)){return}
+		this.clientPlayerPhaseCardGroupState = state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]
 		this.phaseCardState = this.clientPlayerPhaseCardGroupState.getPhaseCardStateList()
 	}
 }

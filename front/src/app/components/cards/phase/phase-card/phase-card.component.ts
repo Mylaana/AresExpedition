@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter, input} from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { deepCopy } from '../../../../functions/global.functions';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
+import { PhaseCardModel } from '../../../../models/cards/phase-card.model';
 
 
 type updateType = 'select' | 'upgradeAndSelect'
@@ -17,6 +18,7 @@ type updateType = 'select' | 'upgradeAndSelect'
 export class PhaseCardComponent extends BaseCardComponent {
 	@Input() phaseCardLevel: number = 0;
 	@Input() phaseIndex!: number;
+	@Input() phaseCard!: PhaseCardModel;
 
 	override ngOnInit():void {
 		super.ngOnInit()

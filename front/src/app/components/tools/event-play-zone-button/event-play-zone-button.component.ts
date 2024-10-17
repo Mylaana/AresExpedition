@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { EventPlayZoneButton } from '../../../models/core-game/button.model';
+import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 
 @Component({
   selector: 'app-event-play-zone-button',
@@ -9,11 +9,11 @@ import { EventPlayZoneButton } from '../../../models/core-game/button.model';
   templateUrl: './event-play-zone-button.component.html',
   styleUrl: './event-play-zone-button.component.scss'
 })
-export class EventPlayZoneButtonComponent {
-  @Output() eventPlayZoneButtonClicked: EventEmitter<EventPlayZoneButton> = new EventEmitter<EventPlayZoneButton>()
-  @Input() button!: EventPlayZoneButton;
+export class EventCardBuilderButtonComponent {
+  @Output() eventCardBuilderButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
+  @Input() button!: EventCardBuilderButton;
   
   onClick(){
-    this.eventPlayZoneButtonClicked.emit(this.button)
+    this.eventCardBuilderButtonClicked.emit(this.button)
   }
 }
