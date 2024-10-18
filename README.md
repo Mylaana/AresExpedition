@@ -1,16 +1,33 @@
 # AresExpedition - Opensource private project  
 This project is NOT related to Asmodee or Fryxgames and is designed for personnal and non commercial use only.
 
-## Architecture and Concepts
-### Technologies used :
+# In Game Design
+## Cards design
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/cards%20design.png)
+
+# Architecture and Concepts
+## Technologies used :
 Frontend: Angular 17
 Backend: Java (to be confirmed)
 Cards data parser: Python
 
-### Architecture
-# In Game Design
-## Cards design
-![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/cards%20design.png)
+## Testing
+Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%
+
+## Architecture & Design pattern
+- MVC: game-event-component and its handlers being the 'main' controller, game-state-service being the main model  
+- Event Driven Architecture: The whole front uses RJXS system and a custom pile duo to resolve most game events.  
+
+## CI/CD
+### CI
+- GitHub Actions  
+- Feature branches will be merged in Development-QA branch
+- Development-QA will trigger automated tests
+- If tests are successfull, create a PR and automerge to main branch
+
+### CD
+- Triggerred when new code is merged on main branch
+- Tech used TBD
 
 # WIP : 
 ## Refactoring :
@@ -36,11 +53,18 @@ Lakes feature
 
 ## Clean Code
 Comments & naming: do some check, comments should be added only if function name is not obvious enough   
-Write automated tests
 
-## Server
-Chose a technology (Python Django / Java Spring)
-Create the server
+## CI
+Frontend automated testing: Ongoing  
+Backend automated testing: no backend yet  
+Github Actions Build & test
+
+## CD
+Nothing done yet  
+Tech TBD  
+
+## Backend
+Java, websocket?
 
 ## Deployment
 CI/CD Pipeline

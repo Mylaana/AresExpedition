@@ -110,7 +110,7 @@ export class EventDesigner{
     private static generateCardBuilder(builderId:number, option?:CardBuilderOptionType): CardBuilder {
         let builder = new CardBuilder
         builder.addButtons(ButtonDesigner.createEventCardBuilderButton(builderId, option))
-        builder.setId(builderId)
+        //builder.setId(builderId)
         option?builder.setOption(option):null
         return builder
     }
