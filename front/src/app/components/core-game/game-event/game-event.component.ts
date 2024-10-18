@@ -14,7 +14,7 @@ import { ButtonComponent } from '../../tools/button/button.component';
 import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
 import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
-import { EventDesigner } from '../../../services/core-game/event-designer.service';
+import { EventDesigner } from '../../../services/designers/event-designer.service';
 import { EventButtonComponent } from '../../tools/event-button/event-button.component';
 import { EventMainButtonComponent } from "../../tools/event-main-button/event-main-button.component";
 import { EventSecondaryButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';

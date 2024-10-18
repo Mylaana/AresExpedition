@@ -191,9 +191,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
             }
         }
     }
-    private cancelSelectedCard(): void {
-
-    }
     getCardToBuildId(): number | undefined {
         if(this.CardBuilderIdHavingFocus===undefined){return}
         return this.CardBuilder[this.CardBuilderIdHavingFocus].getSelectedCard()?.id

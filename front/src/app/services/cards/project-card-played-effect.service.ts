@@ -8,7 +8,7 @@ import { RessourceStock, GlobalParameterValue, ScanKeep } from "../../interfaces
 import { CostMod } from "../../types/project-card.type";
 import { GlobalTagInfoService } from "../global/global-tag-info.service";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
-import { EventDesigner } from "../core-game/event-designer.service";
+import { EventDesigner } from "../designers/event-designer.service";
 
 
 @Injectable({
