@@ -7,7 +7,7 @@ import { CardBuilder, EventBaseCardSelector, EventBaseModel, EventCardBuilder } 
 
 class testEventBaseModel extends EventBaseModel{}
 class testEventBaseCardSelector extends EventBaseCardSelector{}
-describe('Event models', () => {
+describe('Models - Event', () => {
     describe('EventBaseModel', () => {
         describe('UNIT TEST', () => {
             let event: testEventBaseModel

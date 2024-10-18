@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { DrawEvent, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, CardBuilder, EventPhase } from "../../models/core-game/event.model";
-import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type";
+import { EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, CardBuilder, EventPhase } from "../../models/core-game/event.model";
+import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventWaiterSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ButtonDesigner } from "./button-designer.service";
 import { BuilderType} from "../../types/phase-card.type";
@@ -297,26 +297,6 @@ export class EventDesigner{
             default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',subType)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
-        return event
-    }
-}
-@Injectable({
-    providedIn: 'root'
-})
-export class DrawEventDesigner {
-    public static createDrawEvent(resolveType:EventUnionSubTypes, drawCardNumber:number, waiterId:number): DrawEvent {
-        let event = new DrawEvent
-        event.drawCardNumber= drawCardNumber,
-        event.resolveEventSubType = resolveType
-        event.waiterId = waiterId
-        return event
-    }
-    public static createScanKeepEvent(resolveType:EventUnionSubTypes, scanKeep:ScanKeep ,waiterId:number): DrawEvent {
-        let event = new DrawEvent
-        event.drawCardNumber = scanKeep.scan
-        event.resolveEventSubType = resolveType
-        event.waiterId = waiterId
-        event.keepCardNumber = scanKeep.keep
         return event
     }
 }
