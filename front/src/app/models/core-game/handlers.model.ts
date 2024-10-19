@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { deepCopy } from "../../functions/global.functions";
 import { AdvancedRessourceStock, CardRessourceStock, RessourceState, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
-import { DrawEventDesigner, EventDesigner } from "../../services/designers/event-designer.service";
+import { EventDesigner } from "../../services/designers/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
 import { SelectablePhase } from "../../types/global.type";
@@ -11,6 +11,7 @@ import { PhaseCardModel } from "../cards/phase-card.model";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
 import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase } from "./event.model";
+import { DrawEventDesigner } from "../../services/designers/draw-event-designer.service";
 
 @Injectable()
 export class EventHandler {
