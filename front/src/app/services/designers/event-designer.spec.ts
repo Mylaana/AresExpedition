@@ -5,7 +5,7 @@ import { EventCardBuilderSubType, EventUnionSubTypes } from "../../types/event.t
 import { CardBuilderOptionType } from "../../types/global.type"
 import { ButtonDesigner } from "./button-designer.service"
 import { EventDesigner } from "./event-designer.service"
-
+import { BuilderType } from "../../types/phase-card.type"
 
 type CardSelectorOptions = Partial<CardSelector>
 
@@ -84,7 +84,7 @@ describe('Service - Designers - Event', () => {
             expectedWaiterId = 5
         })
         describe('UNIT TEST', () => {
-            it('should create a discardEvent selector', () => {
+            it('should create a discardEvent selector Event', () => {
                 expectedSubType = 'discardCards'
                 expectedEvent.subType = expectedSubType
                 const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
@@ -111,7 +111,7 @@ describe('Service - Designers - Event', () => {
                 expect(expectedEvent).toEqual(resultEvent)
                 expect(spy).toHaveBeenCalled()
             })
-            it('should create a selectCardForcedSell selector', () => {
+            it('should create a selectCardForcedSell selector Event', () => {
                 expectedSubType = 'selectCardForcedSell'
                 expectedEvent.subType = expectedSubType
                 const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
@@ -123,7 +123,7 @@ describe('Service - Designers - Event', () => {
                 expect(expectedEvent).toEqual(resultEvent)
                 expect(spy).toHaveBeenCalled()
             })
-            it('should create a selectCardOptionalSell selector', () => {
+            it('should create a selectCardOptionalSell selector Event', () => {
                 expectedSubType = 'selectCardOptionalSell'
                 expectedEvent.subType = expectedSubType
                 const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
@@ -134,7 +134,7 @@ describe('Service - Designers - Event', () => {
                 expect(expectedEvent).toEqual(resultEvent)
                 expect(spy).toHaveBeenCalled()
             })
-            it('should create a actionPhase selector', () => {
+            it('should create a actionPhase selector Event', () => {
                 expectedSubType = 'actionPhase'
                 expectedEvent.subType = expectedSubType
                 const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
@@ -147,7 +147,7 @@ describe('Service - Designers - Event', () => {
                 expect(expectedEvent).toEqual(resultEvent)
                 expect(spy).toHaveBeenCalled()
             })
-            it('should create a researchPhaseResult selector', () => {
+            it('should create a researchPhaseResult selector Event', () => {
                 expectedSubType = 'researchPhaseResult'
                 expectedEvent.subType = expectedSubType
                 const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
@@ -190,7 +190,7 @@ describe('Service - Designers - Event', () => {
             expectedRessource = {name:'microbe', valueStock: 5}
         })
         describe('UNIT TEST', () => {
-            it('should create a addRessourceToSelectedCard selector', () => {
+            it('should create a addRessourceToSelectedCard selector Event', () => {
                 expectedSubType = 'addRessourceToSelectedCard'
                 expectedEvent.subType = expectedSubType
                 const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
@@ -208,7 +208,6 @@ describe('Service - Designers - Event', () => {
             })
         })
     })
-    /*
     describe('createCardBuilder Event', () => {
         let expectedSelector: CardSelector
         let expectedBuilder: CardBuilder
@@ -216,28 +215,119 @@ describe('Service - Designers - Event', () => {
         let expectedSubType: EventCardBuilderSubType
 
         beforeEach(() => {
+            expectedSelector = {
+                selectFrom: [],
+                selectedList: [],
+                selectionQuantity: 0,
+                selectionQuantityTreshold: 'equal',
+                cardInitialState: undefined,
+                filter: undefined,
+                stateFromParent: undefined
+            }
+
             expectedEvent = new EventCardBuilder
             expectedEvent.button = undefined
             expectedEvent.cardSelector = expectedSelector
         })
         describe('UNIT TEST', () => {
-            it('should create every CardBuilder selector', () => {
-                expectedSubType = 'addRessourceToSelectedCard'
+            it('should create every development card builder Event', () => {
+                let expectedBuilderType: BuilderType[] = ['developmentAbilityOnly', 'development_6mc', 'development_base', 'development_second_card']
+                
+                expectedSubType = 'developmentPhaseBuilder'
                 expectedEvent.subType = expectedSubType
-                const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.advancedRessource = expectedRessource
-                expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
-                expectedEvent.title = `Select a card to add ${expectedRessource.valueStock} ${expectedRessource.name}(s).`
-                expectedEvent.cardSelector.filter = {type:"stockable", value:expectedRessource.name}
-                expectedEvent.cardSelector.selectionQuantity = 1
+                expectedEvent.cardSelector = expectedSelector
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
+                const cardBuilderSpy = spyOn<any>(EventDesigner, 'generateCardBuilder')
+                expectedEvent.cardSelector.cardInitialState = {selectable: false, playable: true}
                 expectedEvent.refreshSelectorOnSwitch = false
+                expectedEvent.buildDiscountUsed = false
 
-                let resultEvent = EventDesigner.createCardSelectorRessource(expectedRessource)
+                expectedEvent.title = 'Play Green cards :'
+                expectedEvent.refreshSelectorOnSwitch = true
+                expectedEvent.button = undefined
+                expectedEvent.cardSelector.filter = {type:'development'}
+                expectedEvent.CardBuilder.push(expectedBuilder)
 
-                expect(expectedEvent).toEqual(resultEvent)
-                expect(spy).toHaveBeenCalled()
+
+                for(let builderType of expectedBuilderType){
+                    switch(builderType){
+                        case('developmentAbilityOnly'):{
+                            expectedEvent.buildDiscountValue = 0
+                            break
+                        }
+                        case('development_base'):{
+                            expectedEvent.buildDiscountValue = 3
+                            break
+                        }
+                        case('development_6mc'):{
+                            expectedEvent.buildDiscountValue = 6
+                            break
+                        }
+                        case('development_second_card'):{
+                            expectedEvent.buildDiscountValue = 3
+                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            break
+                        }
+                    }
+                    
+                    let resultEvent = EventDesigner.createCardBuilder(expectedSubType, builderType)
+
+                    expect(expectedEvent).toEqual(resultEvent)
+                    expect(buttonSpy).toHaveBeenCalled()
+                    expect(cardBuilderSpy).toHaveBeenCalled()
+                }
+            })
+            it('should create every construction card builder Event', () => {
+                let expectedBuilderType: BuilderType[] = ['constructionAbilityOnly', 'construction_6mc', 'construction_base', 'construction_draw_card']
+                
+                expectedSubType = 'constructionPhaseBuilder'
+                expectedEvent.subType = expectedSubType
+                expectedEvent.cardSelector = expectedSelector
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
+                const cardBuilderSpy = spyOn<any>(EventDesigner, 'generateCardBuilder')
+                expectedEvent.cardSelector.cardInitialState = {selectable: false, playable: true}
+                expectedEvent.refreshSelectorOnSwitch = false
+                expectedEvent.buildDiscountUsed = false
+                expectedEvent.title = 'Play Blue/Red cards :'
+                expectedEvent.refreshSelectorOnSwitch = true
+                expectedEvent.button = undefined
+                expectedEvent.cardSelector.filter = {type:'construction'}
+                expectedEvent.CardBuilder.push(expectedBuilder)
+                expectedEvent.buildDiscountValue = 0
+
+
+                for(let builderType of expectedBuilderType){
+                    switch(builderType){
+                        case('constructionAbilityOnly'):{
+                            break
+                        }
+                        case('construction_6mc'):{
+                            expectedEvent.CardBuilder = []
+                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            break
+                        }
+                        case('construction_base'):{
+                            expectedEvent.CardBuilder = []
+                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            break
+                        }
+                        case('construction_draw_card'):{
+                            expectedEvent.CardBuilder = []
+                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            break
+                        }
+                    }
+                    
+                    let resultEvent = EventDesigner.createCardBuilder(expectedSubType, builderType)
+
+                    expect(expectedEvent).toEqual(resultEvent)
+                    expect(buttonSpy).toHaveBeenCalled()
+                    expect(cardBuilderSpy).toHaveBeenCalled()
+                }
             })
         })
     })
-        */
 })
