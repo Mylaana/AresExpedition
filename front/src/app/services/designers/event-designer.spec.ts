@@ -1,7 +1,7 @@
-import { AdvancedRessourceStock, CardSelector } from "../../interfaces/global.interface"
+import { AdvancedRessourceStock, CardSelector, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface"
 import { EventCardBuilderButton, EventSecondaryButton } from "../../models/core-game/button.model"
-import { CardBuilder, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventTargetCard } from "../../models/core-game/event.model"
-import { EventCardBuilderSubType, EventTargetCardSubType, EventUnionSubTypes } from "../../types/event.type"
+import { CardBuilder, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventGeneric, EventTargetCard } from "../../models/core-game/event.model"
+import { EventCardBuilderSubType, EventGenericSubType, EventTargetCardSubType, EventUnionSubTypes } from "../../types/event.type"
 import { CardBuilderOptionType } from "../../types/global.type"
 import { ButtonDesigner } from "./button-designer.service"
 import { EventDesigner } from "./event-designer.service"
@@ -19,6 +19,16 @@ interface CreateEventOptionsTargetCard {
     advancedRessource?: AdvancedRessourceStock
 }
 
+interface CreateEventOptionsGeneric {
+    increaseParameter?: GlobalParameterValue
+    baseRessource?: RessourceStock | RessourceStock[]
+    scanKeep?: ScanKeep
+    cardId?: number
+    drawEventResult?:number[]
+    waiterId?:number
+    phaseCardUpgradeList?: number[]
+    phaseCardUpgradeNumber?: number
+}
 describe('Service - Designers - Event', () => {
     describe('generateCardSelector', () => {
         describe('UNIT TEST', () => {
@@ -368,6 +378,82 @@ describe('Service - Designers - Event', () => {
 
                 expect(event).toEqual(expectedEvent)
                 expect(buttonSpy).toHaveBeenCalled()
+            })
+        })
+    })
+    describe('createGeneric Event', () => {
+        let expectedEvent: EventGeneric
+        let expectedSubType: EventGenericSubType
+        let expectedArgs: CreateEventOptionsGeneric
+
+        beforeAll(() => {
+            const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
+        })
+        describe('UNIT TEST', () => {
+            it('should create every Generic Event', () => {
+                let genericSubTypeList: EventGenericSubType[] = ['addRessourceToPlayer','buildCard','drawResult','endOfPhase','increaseGlobalParameter','increaseResearchScanKeep','planificationPhase','upgradePhaseCards']
+                
+                for(let genericSubType of genericSubTypeList){
+                    expectedSubType = genericSubType
+                    expectedEvent = new EventGeneric
+                    expectedEvent.button = undefined
+                    expectedEvent.subType = expectedSubType
+
+                    switch(genericSubType){
+                        case('addRessourceToPlayer'):{
+                            let expectedRessource: RessourceStock = {name:'heat', valueStock:7}
+                            expectedEvent.baseRessource = expectedRessource
+                            expectedArgs = {baseRessource:expectedRessource}
+                            break
+                        }
+                        case('buildCard'):{
+                            let expectedCardId: number = 250
+                            expectedEvent.cardIdToBuild = expectedCardId
+                            expectedArgs = {cardId:expectedCardId}
+                            break
+                        }
+                        case('endOfPhase'):{
+                            break
+                        }
+                        case('drawResult'):{
+                            let expectedDrawResult: number[] = [5, 227, 3]
+                            let expectedWaiterId = 7
+                            expectedArgs = {drawEventResult:expectedDrawResult, waiterId:expectedWaiterId}
+                            break
+                        }
+                        case('increaseGlobalParameter'):{
+                            let expectedParameterIncrease: GlobalParameterValue = {name:'infrastructure', steps: 5}
+                            expectedEvent.increaseParameter = expectedParameterIncrease
+                            expectedArgs = {increaseParameter:expectedParameterIncrease}
+                            break
+                        }
+                        case('increaseResearchScanKeep'):{
+                            let expectedScanKeep: ScanKeep = {keep:0, scan:3}
+                            expectedEvent.increaseResearchScanKeep = expectedScanKeep
+                            expectedArgs = {scanKeep:expectedScanKeep}
+                            break
+                        }
+                        case('planificationPhase'):{
+                            expectedEvent.autoFinalize = false
+                            break
+                        }
+                        case('upgradePhaseCards'):{
+                            let expectedList = [0,3]
+                            let expectedQuantity = 2
+                            expectedEvent.title = 'Select a phase card to upgrade'
+                            expectedEvent.autoFinalize = false
+                            expectedEvent.phaseCardUpgradeList = expectedList
+                            expectedEvent.phaseCardUpgradeQuantity = expectedQuantity
+                            expectedArgs = {phaseCardUpgradeList:expectedList, phaseCardUpgradeNumber:expectedQuantity}
+                            break
+                        }
+                        default:{
+                            continue
+                        }
+                    }
+
+                    let event = EventDesigner.createGeneric(genericSubType, expectedArgs?expectedArgs:undefined)
+                }
             })
         })
     })
