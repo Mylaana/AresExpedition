@@ -1,7 +1,7 @@
 import { AdvancedRessourceStock, CardSelector } from "../../interfaces/global.interface"
 import { EventCardBuilderButton, EventSecondaryButton } from "../../models/core-game/button.model"
-import { CardBuilder, EventCardBuilder, EventCardSelector, EventCardSelectorRessource } from "../../models/core-game/event.model"
-import { EventCardBuilderSubType, EventUnionSubTypes } from "../../types/event.type"
+import { CardBuilder, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventTargetCard } from "../../models/core-game/event.model"
+import { EventCardBuilderSubType, EventTargetCardSubType, EventUnionSubTypes } from "../../types/event.type"
 import { CardBuilderOptionType } from "../../types/global.type"
 import { ButtonDesigner } from "./button-designer.service"
 import { EventDesigner } from "./event-designer.service"
@@ -13,6 +13,10 @@ interface CreateEventOptionsSelector {
     cardSelector?: CardSelectorOptions
     title?: string
     waiterId?:number
+}
+
+interface CreateEventOptionsTargetCard {
+    advancedRessource?: AdvancedRessourceStock
 }
 
 describe('Service - Designers - Event', () => {
@@ -327,6 +331,43 @@ describe('Service - Designers - Event', () => {
                     expect(buttonSpy).toHaveBeenCalled()
                     expect(cardBuilderSpy).toHaveBeenCalled()
                 }
+            })
+        })
+    })
+    describe('createTargetCard Event', () => {
+        let expectedEvent: EventTargetCard
+        let expectedSubType: EventTargetCardSubType
+        let expectedCardId: number
+
+        beforeEach(() => {
+            expectedEvent = new EventTargetCard
+            expectedEvent.button = undefined
+            expectedCardId = 253
+        })
+        describe('UNIT TEST', () => {
+            it('should create a addRessourceToCardId target Event', () => {
+                let expectedRessource: AdvancedRessourceStock = {name:'animal', valueStock:4}
+                expectedEvent.advancedRessource = expectedRessource
+                expectedSubType = 'addRessourceToCardId'
+                expectedEvent.subType = expectedSubType
+                expectedEvent.targetCardId = expectedCardId
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventMainButton')
+
+                let event = EventDesigner.createTargetCard(expectedSubType, expectedCardId, {advancedRessource:expectedRessource})
+
+                expect(event).toEqual(expectedEvent)
+                expect(buttonSpy).toHaveBeenCalled()
+            })
+            it('should create a deactivateTrigger target Event', () => {
+                expectedSubType = 'deactivateTrigger'
+                expectedEvent.subType = expectedSubType
+                expectedEvent.targetCardId = expectedCardId
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventMainButton')
+
+                let event = EventDesigner.createTargetCard(expectedSubType, expectedCardId)
+
+                expect(event).toEqual(expectedEvent)
+                expect(buttonSpy).toHaveBeenCalled()
             })
         })
     })
