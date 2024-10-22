@@ -12,7 +12,6 @@ import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-c
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { EventDesigner } from "../designers/event-designer.service";
-import { deepCopy } from "../../functions/global.functions";
 
 interface SelectedPhase {
     "development": boolean,

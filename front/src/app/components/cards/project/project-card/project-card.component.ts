@@ -6,10 +6,10 @@ import { TextWithImageComponent } from '../../../tools/text-with-image/text-with
 import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
 import { CardCost } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
-import { deepCopy } from '../../../../functions/global.functions';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { RessourceState } from '../../../../interfaces/global.interface';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
+import { Utils } from '../../../../utils/utils';
 
 
 @Component({
@@ -95,10 +95,10 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	}
 	updateRessourceState(ressourceState: RessourceState[]): void {
 		if(this.ressourceState===ressourceState){return}
-		this.ressourceState = deepCopy(ressourceState)
+		this.ressourceState = Utils.deepCopy(ressourceState)
 	}
 	updateCardState(cardState: ProjectCardState): void {
-		if(!this.projectCardState===undefined &&  deepCopy(this.projectCardState)===deepCopy(cardState)){return}
+		if(!this.projectCardState===undefined &&  Utils.deepCopy(this.projectCardState)===Utils.deepCopy(cardState)){return}
 		this.projectCardState=cardState
 		this.updateCost()
 	}

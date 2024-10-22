@@ -1,4 +1,4 @@
-import { getValueVsTreshold } from "../../functions/global.functions"
+import { Utils } from "../../utils/utils"
 import { MinMaxEqualTreshold } from "../../interfaces/global.interface"
 import { EventUnionSubTypes } from "../../types/event.type"
 import { ButtonNames, EventCardBuilderButtonNames, EventSecondaryButtonNames } from "../../types/global.type"
@@ -33,7 +33,7 @@ export class EventMainButton extends EventButtonBase {}
 export class EventMainButtonSelector extends EventMainButton {
     updateEnabledTreshold(args: MinMaxEqualTreshold): void {
         console.log('before getValue')
-        this.enabled = getValueVsTreshold(args)
+        this.enabled = Utils.getValueVsTreshold(args)
     }
 }
 

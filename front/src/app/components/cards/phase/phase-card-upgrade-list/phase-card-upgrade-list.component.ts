@@ -5,8 +5,8 @@ import { CardState } from '../../../../models/cards/card-cost.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { PhaseCardGroupModel, PhaseCardModel } from '../../../../models/cards/phase-card.model';
-import { deepCopy } from '../../../../functions/global.functions';
 import { PhaseCardInfoService } from '../../../../services/cards/phase-card-info.service';
+import { Utils } from '../../../../utils/utils';
 
 
 @Component({
@@ -91,7 +91,7 @@ export class PhaseCardUpgradeListComponent implements OnChanges{
 		this.setState()
 	}
 	updateState(state: PlayerStateModel[]): void{
-		if(this.phaseCardState.length!=0 && deepCopy(state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]) == deepCopy(this.clientPlayerPhaseCardGroupState)){return}
+		if(this.phaseCardState.length!=0 && Utils.deepCopy(state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]) == Utils.deepCopy(this.clientPlayerPhaseCardGroupState)){return}
 		this.clientPlayerPhaseCardGroupState = state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]
 		this.phaseCardState = this.clientPlayerPhaseCardGroupState.getPhaseCardStateList()
 	}

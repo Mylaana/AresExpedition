@@ -5,7 +5,7 @@ import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
 import { EventBaseModel, EventCardSelector, EventCardBuilder } from '../../../../models/core-game/event.model';
-import { deepCopy } from '../../../../functions/global.functions';
+import { Utils } from '../../../../utils/utils';
 
 @Component({
   selector: 'app-project-card-list',
@@ -76,7 +76,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		}
 	}
 	checkUpdateSelector(event: EventCardSelector): void {
-		if(deepCopy(event.cardSelector)!=deepCopy(this.cardSelector)){
+		if(Utils.deepCopy(event.cardSelector)!=Utils.deepCopy(this.cardSelector)){
 			this.updateCardList()
 		}
 	}

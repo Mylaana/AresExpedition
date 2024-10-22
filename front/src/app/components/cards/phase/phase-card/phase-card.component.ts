@@ -1,9 +1,9 @@
 import { Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardState } from '../../../../models/cards/card-cost.model';
-import { deepCopy } from '../../../../functions/global.functions';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { PhaseCardModel } from '../../../../models/cards/phase-card.model';
+import { Utils } from '../../../../utils/utils';
 
 
 type updateType = 'select' | 'upgradeAndSelect'
@@ -26,7 +26,7 @@ export class PhaseCardComponent extends BaseCardComponent {
 	}
 
 	updateState(updateType: updateType){
-		let newState: CardState = deepCopy(this.state)
+		let newState: CardState = Utils.deepCopy(this.state)
 		if(updateType==='upgradeAndSelect'){
 			newState.upgraded = true
 		}

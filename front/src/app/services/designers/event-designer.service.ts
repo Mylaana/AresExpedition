@@ -5,6 +5,7 @@ import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue
 import { ButtonDesigner } from "./button-designer.service";
 import { BuilderType} from "../../types/phase-card.type";
 import { CardBuilderOptionType } from "../../types/global.type";
+import { Utils } from "../../utils/utils";
 
 type CardSelectorOptions = Partial<CardSelector>
 
@@ -86,9 +87,10 @@ export class EventDesigner{
                 event.waiterId = args?.waiterId
                 break
             }
-            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+            default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+
         return event
     }
     public static createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: CreateEventOptionsSelector): EventCardSelectorRessource {
@@ -162,7 +164,7 @@ export class EventDesigner{
                 for(let i=0; i<=1; i++){event.CardBuilder.push(this.generateCardBuilder(i))}
                 break
             }
-            default:{console.log('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}
+            default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}
 		}
 
         switch(subType){
@@ -176,7 +178,7 @@ export class EventDesigner{
                 event.cardSelector.filter = {type:'construction'}
                 break
             }
-            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+            default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
 
         event.buildDiscountValue = buildDiscountValue
@@ -198,7 +200,7 @@ export class EventDesigner{
             case('deactivateTrigger'):{
                 break
             }
-            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+            default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
         return event
@@ -241,7 +243,7 @@ export class EventDesigner{
                 event.waiterId = args?.waiterId
                 break
             }
-            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
+            default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
         return event
@@ -263,7 +265,7 @@ export class EventDesigner{
                 event.scanKeep = args?.scanKeep
                 break
             }
-            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+            default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         return event
     }
@@ -278,7 +280,7 @@ export class EventDesigner{
                 event.waiterId = waiterId
                 break
             }
-            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+            default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         return event
     }
@@ -294,7 +296,7 @@ export class EventDesigner{
             case('developmentPhase'):{break}
             case('constructionPhase'):{break}
             case('researchPhase'):{break}
-            default:{console.log('EVENT DESIGNER ERROR: Unmapped event creation: ',subType)}
+            default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
         return event

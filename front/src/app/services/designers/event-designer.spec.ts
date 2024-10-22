@@ -1,11 +1,14 @@
-import { AdvancedRessourceStock, CardSelector, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface"
-import { EventCardBuilderButton, EventSecondaryButton } from "../../models/core-game/button.model"
-import { CardBuilder, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventGeneric, EventTargetCard } from "../../models/core-game/event.model"
-import { EventCardBuilderSubType, EventGenericSubType, EventTargetCardSubType, EventUnionSubTypes } from "../../types/event.type"
+import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface"
+import { EventCardBuilderButton } from "../../models/core-game/button.model"
+import { CardBuilder, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventPhase, EventTargetCard, EventWaiter } from "../../models/core-game/event.model"
+import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type"
 import { CardBuilderOptionType } from "../../types/global.type"
 import { ButtonDesigner } from "./button-designer.service"
 import { EventDesigner } from "./event-designer.service"
 import { BuilderType } from "../../types/phase-card.type"
+import { ProjectCardModel } from "../../models/cards/project-card.model"
+import { Utils } from "../../utils/utils"
+
 
 type CardSelectorOptions = Partial<CardSelector>
 
@@ -33,7 +36,7 @@ describe('Service - Designers - Event', () => {
     describe('generateCardSelector', () => {
         describe('UNIT TEST', () => {
             it('should return default empty selector', () => {
-                let emptySelector: CardSelector = {
+                let expectedSelector: CardSelector = {
                     selectFrom: [],
                     selectedList: [],
                     selectionQuantity: 0,
@@ -45,7 +48,24 @@ describe('Service - Designers - Event', () => {
 
                 let selector = EventDesigner['generateCardSelector']()
                 
-                expect(selector).toEqual(emptySelector)
+                expect(selector).toEqual(expectedSelector)
+            })
+            it('should return selector', () => {
+                let card = new ProjectCardModel
+                card.id = 3
+                let expectedSelector: CardSelector = {
+                    selectFrom: [card],
+                    selectedList: [card],
+                    selectionQuantity: 3,
+                    selectionQuantityTreshold: 'min',
+                    cardInitialState: {activable:true, selectable:true},
+                    filter: {type:'action'},
+                    stateFromParent: {selected:false}
+                }
+
+                let selector = EventDesigner['generateCardSelector'](expectedSelector)
+                
+                expect(selector).toEqual(expectedSelector)
             })
         })
     })
@@ -176,6 +196,15 @@ describe('Service - Designers - Event', () => {
 
                 expect(expectedEvent).toEqual(resultEvent)
                 expect(spy).toHaveBeenCalled()
+            })
+            it('should log an error message and return a default Event', () => {
+                const logTextSpy = spyOn(Utils, 'logText')
+                expectedSubType = 'fake' as EventCardSelectorSubType
+
+                let event = EventDesigner.createCardSelector(expectedSubType)
+
+                expect(event).toBeDefined()
+                expect(logTextSpy).toHaveBeenCalled()
             })
         })
     })
@@ -342,6 +371,20 @@ describe('Service - Designers - Event', () => {
                     expect(cardBuilderSpy).toHaveBeenCalled()
                 }
             })
+            it('should log an error message and return a default Event', () => {
+                const logTextSpy = spyOn(Utils, 'logText')
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
+
+                expectedSubType = 'fake' as EventCardBuilderSubType
+                let builderType = 'fake' as BuilderType
+                expectedEvent.subType = expectedSubType
+
+                let event = EventDesigner.createCardBuilder(expectedSubType, builderType)
+
+                expect(event).not.toBeUndefined()
+                expect(buttonSpy).toHaveBeenCalled()
+                expect(logTextSpy).toHaveBeenCalled()
+            })
         })
     })
     describe('createTargetCard Event', () => {
@@ -379,6 +422,17 @@ describe('Service - Designers - Event', () => {
                 expect(event).toEqual(expectedEvent)
                 expect(buttonSpy).toHaveBeenCalled()
             })
+            it('should log an error message and return a default Event', () => {
+                const logTextSpy = spyOn(Utils, 'logText')
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventMainButton')
+                expectedSubType = 'fake' as EventTargetCardSubType
+
+                let event = EventDesigner.createTargetCard(expectedSubType, expectedCardId)
+
+                expect(event).toBeDefined()
+                expect(buttonSpy).toHaveBeenCalled()
+                expect(logTextSpy).toHaveBeenCalled()
+            })
         })
     })
     describe('createGeneric Event', () => {
@@ -387,7 +441,7 @@ describe('Service - Designers - Event', () => {
         let expectedArgs: CreateEventOptionsGeneric
 
         beforeAll(() => {
-            const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
+            const buttonSpy = spyOn(ButtonDesigner, 'createEventMainButton')
         })
         describe('UNIT TEST', () => {
             it('should create every Generic Event', () => {
@@ -418,6 +472,8 @@ describe('Service - Designers - Event', () => {
                         case('drawResult'):{
                             let expectedDrawResult: number[] = [5, 227, 3]
                             let expectedWaiterId = 7
+                            expectedEvent.drawResultList = expectedDrawResult
+                            expectedEvent.waiterId = expectedWaiterId
                             expectedArgs = {drawEventResult:expectedDrawResult, waiterId:expectedWaiterId}
                             break
                         }
@@ -453,7 +509,144 @@ describe('Service - Designers - Event', () => {
                     }
 
                     let event = EventDesigner.createGeneric(genericSubType, expectedArgs?expectedArgs:undefined)
+
+                    expect(event).toEqual(expectedEvent)
                 }
+            })
+            it('should log an error message and return a default Event', () => {
+                const logTextSpy = spyOn(Utils, 'logText')
+                expectedSubType = 'fake' as EventGenericSubType
+
+                let event = EventDesigner.createGeneric(expectedSubType)
+
+                expect(event).toBeDefined()
+                expect(logTextSpy).toHaveBeenCalled()
+            })
+        })
+    })
+    describe('createDeckQuery Event', () => {
+        let expectedEvent: EventDeckQuery
+        let expectedSubType: EventDeckQuerySubType
+        let expectedScanKeep: ScanKeep
+        let expectedDrawDiscard: DrawDiscard
+
+        beforeEach(() => {
+            expectedEvent = new EventDeckQuery
+            expectedScanKeep = {scan: 7, keep:2}
+            expectedDrawDiscard = {discard: 1, draw: 4}
+        })
+        describe('UNIT TEST', () => {
+            it('should create a scanKeepQuery target Event', () => {
+                expectedSubType = 'scanKeepQuery'
+                expectedEvent.subType = expectedSubType
+                expectedEvent.scanKeep = expectedScanKeep
+
+                let event = EventDesigner.createDeckQueryEvent(expectedSubType, {scanKeep:expectedScanKeep})
+
+                expect(event).toEqual(expectedEvent)
+            })
+            it('should create a drawQuery target Event', () => {
+                expectedSubType = 'drawQuery'
+                expectedEvent.subType = expectedSubType
+                expectedEvent.drawDiscard = expectedDrawDiscard
+
+                let event = EventDesigner.createDeckQueryEvent(expectedSubType, {drawDiscard:expectedDrawDiscard})
+
+                expect(event).toEqual(expectedEvent)
+            })
+            it('should create a researchPhaseQuery target Event', () => {
+                expectedSubType = 'researchPhaseQuery'
+                expectedEvent.subType = expectedSubType
+                expectedEvent.scanKeep = expectedScanKeep
+
+                let event = EventDesigner.createDeckQueryEvent(expectedSubType, {scanKeep:expectedScanKeep})
+
+                expect(event).toEqual(expectedEvent)
+            })
+            it('should log an error message and return a default Event', () => {
+                const logTextSpy = spyOn(Utils, 'logText')
+                expectedSubType = 'fake' as EventDeckQuerySubType
+
+                let event = EventDesigner.createDeckQueryEvent(expectedSubType)
+
+                expect(event).toBeDefined()
+                expect(logTextSpy).toHaveBeenCalled()
+            })
+        })
+    })
+    describe('createWaiter Event', () => {
+        let expectedEvent: EventWaiter
+        let expectedSubType: EventWaiterSubType
+        let expectedWaiterId: number
+
+        beforeEach(() => {
+            expectedEvent = new EventWaiter
+            expectedWaiterId = 3
+        })
+        describe('UNIT TEST', () => {
+            it('should create a deckWaiter Event', () => {
+                expectedSubType = 'deckWaiter'
+                expectedEvent.subType = expectedSubType
+                expectedEvent.waiterId = expectedWaiterId
+                expectedEvent.autoFinalize = false
+
+                let event = EventDesigner.createWaiter(expectedSubType, expectedWaiterId)
+
+                expect(event).toEqual(expectedEvent)
+            })
+            it('should log an error message and return a default Event', () => {
+                const logTextSpy = spyOn(Utils, 'logText')
+
+                expectedSubType = 'fake' as EventWaiterSubType
+
+                let event = EventDesigner.createWaiter(expectedSubType, expectedWaiterId)
+
+                expect(event).toBeDefined()
+                expect(logTextSpy).toHaveBeenCalled()
+            })
+        })
+    })
+    describe('createPhase Event', () => {
+        let expectedEvent: EventPhase
+        let expectedSubType: EventPhaseSubType
+
+        describe('UNIT TEST', () => {
+            it('should create every Event', () => {
+                let expectedSubTypeList: EventPhaseSubType[] = ['constructionPhase', 'developmentPhase', 'productionPhase', 'researchPhase']
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventMainButton')
+                const logTextSpy = spyOn(Utils, 'logText')
+
+                for(expectedSubType of expectedSubTypeList){
+                    expectedEvent = new EventPhase
+                    expectedEvent.subType = expectedSubType
+                    expectedEvent.button = undefined
+
+                    switch(expectedSubType){
+                        case('productionPhase'):{
+                            expectedEvent.autoFinalize = false
+                            break
+                        }
+                        case('constructionPhase'):case('developmentPhase'):case('researchPhase'):{
+                            break
+                        }
+                    }
+
+                    let event = EventDesigner.createPhase(expectedSubType)
+
+                    expect(event).toEqual(expectedEvent)
+                    expect(buttonSpy).toHaveBeenCalled()
+                }
+            })
+            it('should log an error message and return a default Event', () => {
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventMainButton')
+                const logTextSpy = spyOn(Utils, 'logText')
+                expectedSubType = 'fake' as EventPhaseSubType
+
+                let event = EventDesigner.createPhase(expectedSubType)
+
+                expect(event).toBeDefined()
+                expect(buttonSpy).toHaveBeenCalled()
+                expect(logTextSpy).toHaveBeenCalled()
             })
         })
     })
