@@ -17,4 +17,4 @@ jobs:
       working-directory:
         front
       run: |
-        ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadlessCI
+        ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
