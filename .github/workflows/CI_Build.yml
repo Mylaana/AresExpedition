@@ -11,10 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v1
+      - name: Install NPM
+        run:  npm install
+      - name: Update Npm
+        run:  npm update
+      - name: Typescript compiler
+        uses: iCrawl/action-tsc@v1
+      - name: NpM angular CLI 
+        uses: npm install angular-cli
+      - name: Build
+        run:  npm build
 
-    - name: Test with jasmine & karma
-      working-directory:
-        front
-      run: |
-        ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
+      - name: Test with jasmine & karma
+        working-directory:
+          front
+        run: |
+          ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
