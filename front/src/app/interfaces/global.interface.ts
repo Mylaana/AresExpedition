@@ -1,4 +1,4 @@
-import { AdvancedRessourceType, GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type";
+import { AdvancedRessourceType, GameItemType, GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type";
 import { PhaseCardType } from "../types/phase-card.type";
 import { ProjectCardModel } from "../models/cards/project-card.model";
 import { MinMaxEqualType } from "../types/global.type";
@@ -87,18 +87,6 @@ export interface ProjectFilter {
     value?: AdvancedRessourceType | AdvancedRessourceType[]
 }
 
-/*
-export interface EventValue {
-    advancedRessource?: AdvancedRessourceStock,
-    baseRessource?: RessourceStock | RessourceStock[],
-    increaseParameter?: GlobalParameterValue,
-    scanKeep?: ScanKeep,
-    drawDiscard?: DrawDiscard
-    cardBuildId?: number
-    waiterId?: number
-    drawResultList?:number[]
-}*/
-
 export interface DrawDiscard {
     draw: number,
     discard: number
@@ -109,3 +97,9 @@ export interface MinMaxEqualTreshold {
     value: number,
     treshold: MinMaxEqualType
 }
+export interface GameItem {
+    id: number,
+    description: GameItemType,
+    imageUrl: string,
+    name: string
+};

@@ -2,9 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalParameter } from '../../../interfaces/global.interface';
 import { GameState } from '../../../services/core-game/game-state.service';
-import { GlobalItemInfoService } from '../../../services/global/global-other-info.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { group } from 'console';
+import { GlobalInfo } from '../../../services/global/global-info.service';
 
 @Component({
   selector: 'app-navigation',
@@ -20,8 +19,7 @@ export class NavigationComponent implements OnInit{
   clientPlayerId!: number
 
   constructor(
-    private gameStateService: GameState,
-    private globalItemInfoService : GlobalItemInfoService){}
+    private gameStateService: GameState){}
 
   ngOnInit(): void {
     this.clientPlayerId = this.gameStateService.clientPlayerId
@@ -40,7 +38,7 @@ export class NavigationComponent implements OnInit{
             name: 'oxygen',
             value: 0,
             color: 'purple',
-            imageUrl: this.globalItemInfoService.getItemUrlFromTextItemName('$other_oxygen$'),
+            imageUrl: GlobalInfo.getUrlFromName('$other_oxygen$'),
             addEndOfPhase: 0
           }
           break
@@ -50,7 +48,7 @@ export class NavigationComponent implements OnInit{
             name: 'temperature',
             value: 0,
             color: 'purple',
-            imageUrl: this.globalItemInfoService.getItemUrlFromTextItemName('$other_temperature$'),
+            imageUrl: GlobalInfo.getUrlFromName('$other_temperature$'),
             addEndOfPhase: 0
           }
           break
@@ -59,7 +57,7 @@ export class NavigationComponent implements OnInit{
           parameter = {
             name: 'ocean',
             value: 0,
-            imageUrl: this.globalItemInfoService.getItemUrlFromTextItemName('$other_ocean$'),
+            imageUrl: GlobalInfo.getUrlFromName('$other_ocean$'),
             addEndOfPhase: 0
           }
           break
@@ -69,7 +67,7 @@ export class NavigationComponent implements OnInit{
             name: 'infrastructure',
             value: 0,
             color: 'purple',
-            imageUrl: this.globalItemInfoService.getItemUrlFromTextItemName('$other_infrastructure$'),
+            imageUrl: GlobalInfo.getUrlFromName('$other_infrastructure$'),
             addEndOfPhase: 0
           }
           break

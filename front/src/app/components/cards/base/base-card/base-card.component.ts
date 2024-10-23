@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, DoCheck, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardState } from '../../../../models/cards/card-cost.model';
-import { deepCopy } from '../../../../functions/global.functions';
+import { Utils } from '../../../../utils/utils';
 
 @Component({
   selector: 'app-base-card',
@@ -66,11 +66,11 @@ export abstract class BaseCardComponent implements OnInit, OnChanges, DoCheck {
 	changeStateFromParent():void{
 		if(!this.state || !this.stateFromParent){return}
 
-		if(this.stateFromParent.activable!=undefined){this.state.activable=deepCopy(this.stateFromParent.activable)}
-		if(this.stateFromParent.playable!=undefined){this.state.playable=deepCopy(this.stateFromParent.playable)}
-		if(this.stateFromParent.selectable!=undefined){this.state.selectable=deepCopy(this.stateFromParent.selectable)}
-		if(this.stateFromParent.selected!=undefined){this.state.selected=deepCopy(this.stateFromParent.selected)}
-		if(this.stateFromParent.upgradable!=undefined){this.state.upgradable=deepCopy(this.stateFromParent.upgradable)}
-		if(this.stateFromParent.upgraded!=undefined){this.state.upgraded=deepCopy(this.stateFromParent.upgraded)}	
+		if(this.stateFromParent.activable!=undefined){this.state.activable=Utils.jsonCopy(this.stateFromParent.activable)}
+		if(this.stateFromParent.playable!=undefined){this.state.playable=Utils.jsonCopy(this.stateFromParent.playable)}
+		if(this.stateFromParent.selectable!=undefined){this.state.selectable=Utils.jsonCopy(this.stateFromParent.selectable)}
+		if(this.stateFromParent.selected!=undefined){this.state.selected=Utils.jsonCopy(this.stateFromParent.selected)}
+		if(this.stateFromParent.upgradable!=undefined){this.state.upgradable=Utils.jsonCopy(this.stateFromParent.upgradable)}
+		if(this.stateFromParent.upgraded!=undefined){this.state.upgraded=Utils.jsonCopy(this.stateFromParent.upgraded)}	
 	}
 }

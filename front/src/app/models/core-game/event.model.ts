@@ -81,7 +81,7 @@ export class CardBuilder {
 	private selectedCard!: ProjectCardModel | undefined
 	private cardInitialState?: CardState
     private buttons: EventCardBuilderButton[] = []
-    private builderId!: number
+    //private Id!: number
     private option!: CardBuilderOptionType
     private cardIsBuilt: boolean = false
 
@@ -99,7 +99,7 @@ export class CardBuilder {
     }
     setOption(option: CardBuilderOptionType): void {this.option = option}
     getOption(): CardBuilderOptionType {return this.option}
-    setId(id: number): void {this.builderId = id}
+    //setId(id: number): void {this.Id = id}
     private updateButtonEnabled(name: EventCardBuilderButtonNames, enabled: boolean): void {
         let button = this.getButtonFromName(name)
         if(!button){return}
@@ -144,39 +144,24 @@ export class CardBuilder {
     resolveCardBuilderButtonClicked(button:EventCardBuilderButton){
         switch(button.name){
             case('cancelCard'):{
-                this.selectedCard = undefined
+                this.removeSelectedCard()
                 break
             }
             case('buildCard'):{
-                this.buildCard()
+                this.setCardIsBuilt()
                 break
-            }
-            case('drawCard'):{
-                console.log('Draw a card')
-                break
-            }
-            case('gain6MC'):{
-                console.log(button.name)
-                break
-            }
-            case('selectCard'):{
-                return
             }
         }
         this.updateButtonGroupState(button.name)
     }
-    setCardSelected(card: ProjectCardModel): void {
+    setSelectedCard(card: ProjectCardModel): void {
         this.selectedCard = card
         this.updateButtonGroupState('selectCard')
     }
     getSelectedCard(): ProjectCardModel {return this.selectedCard as ProjectCardModel}
-    removeCardSelected(): void {
-        this.selectedCard = undefined
-    }
-    buildCard(): void {
-        this.cardIsBuilt=true
-        //this.gameStateService.addEventQueue(EventDesigner.createGeneric('buildCard', {cardId:this.selectedCardId}))
-    }
+    removeSelectedCard(): void {this.selectedCard = undefined}
+    setCardIsBuilt(): void {this.cardIsBuilt=true}
+    getCardIsBuilt(): boolean {return this.cardIsBuilt}
 }
 
 export class EventCardBuilder extends EventBaseCardSelector {
@@ -193,7 +178,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
     private setSelectedCardToBuild(card: ProjectCardModel): void {
         if(this.CardBuilderIdHavingFocus===undefined){return}
         let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
-        activeZone.setCardSelected(card)
+        activeZone.setSelectedCard(card)
         this.removeCardFromSelector(card)
         this.deactivateSelection()
         this.cardSelector.stateFromParent = {selectable: false}
@@ -205,9 +190,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
                 this.cardSelector.selectFrom.splice(i, 1)
             }
         }
-    }
-    private cancelSelectedCard(): void {
-
     }
     getCardToBuildId(): number | undefined {
         if(this.CardBuilderIdHavingFocus===undefined){return}

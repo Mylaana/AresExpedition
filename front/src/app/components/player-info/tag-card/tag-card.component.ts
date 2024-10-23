@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GlobalTagInfoService } from '../../../services/global/global-tag-info.service';
 import { TagState } from '../../../interfaces/global.interface';
+import { GlobalInfo } from '../../../services/global/global-info.service';
 
 
 @Component({
@@ -15,9 +15,7 @@ export class TagCardComponent implements OnInit{
   @Input() tagState!: TagState;
   imageUrl!: string;
 
-  constructor(private globalTagService: GlobalTagInfoService){}
-
   ngOnInit(): void {
-    this.imageUrl = this.globalTagService.getTagUrlFromID(this.tagState.idImageUrl)
+    this.imageUrl = GlobalInfo.getUrlFromID(this.tagState.idImageUrl)
 }
 }

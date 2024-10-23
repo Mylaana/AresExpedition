@@ -11,8 +11,8 @@ import { PhaseCardHolderModel, PhaseCardGroupModel, PhaseCardModel } from "../..
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { EventDesigner } from "./event-designer.service";
-import { deepCopy } from "../../functions/global.functions";
+import { EventDesigner } from "../designers/event-designer.service";
+import { GlobalInfo } from "../global/global-info.service";
 
 interface SelectedPhase {
     "development": boolean,
@@ -104,7 +104,7 @@ export class GameState{
 				"valueBaseProd": 0,
                 "valueStock": 52,
                 "hasStock": true,
-                "imageUrlId": 9,
+                "imageUrlId": GlobalInfo.getIdFromType('megacredit'),
             },
             {
                 "id":1,
@@ -114,7 +114,7 @@ export class GameState{
 				"valueBaseProd": 0,
                 "valueStock": 0,
                 "hasStock": true,
-                "imageUrlId": 7,
+                "imageUrlId": GlobalInfo.getIdFromType('heat'),
             },
             {
                 "id":2,
@@ -124,7 +124,7 @@ export class GameState{
 				"valueBaseProd": 0,
                 "valueStock": 0,
                 "hasStock": true,
-                "imageUrlId": 4,
+                "imageUrlId": GlobalInfo.getIdFromType('plant'),
             },
             {
                 "id":3,
@@ -134,7 +134,7 @@ export class GameState{
 				"valueBaseProd": 0,
                 "valueStock": 0,
                 "hasStock": false,
-                "imageUrlId": 0,
+                "imageUrlId": GlobalInfo.getIdFromType('steel'),
             },
             {
                 "id":4,
@@ -144,7 +144,7 @@ export class GameState{
 				"valueBaseProd": 0,
                 "valueStock": 0,
                 "hasStock": false,
-                "imageUrlId": 1,
+                "imageUrlId": GlobalInfo.getIdFromType('titanium'),
             },
             {
                 "id":5,
@@ -154,7 +154,7 @@ export class GameState{
 				"valueBaseProd": 0,
                 "valueStock": 0,
                 "hasStock": false,
-                "imageUrlId": 8,
+                "imageUrlId": GlobalInfo.getIdFromType('card'),
             },
         ];
         newPlayer.tag = [

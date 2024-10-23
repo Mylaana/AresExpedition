@@ -21,11 +21,6 @@ export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
 export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event' | 'wild'
-export type TagInfo = {
-    id: number;
-    description: TagType;
-    imageUrl: string;
-    textTagName: string;
-};
+export type GameItemType = TagType | RessourceType
 export type DrawRule = 'draw' | 'research' | 'scanKeep'
 export type CardBuilderOptionType = 'gain6MC' | 'drawCard'

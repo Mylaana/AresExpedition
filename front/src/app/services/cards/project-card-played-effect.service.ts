@@ -6,9 +6,9 @@ import { ProjectCardScalingProductionsService } from "./project-card-scaling-pro
 import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
 import { RessourceStock, GlobalParameterValue, ScanKeep } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
-import { GlobalTagInfoService } from "../global/global-tag-info.service";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
-import { EventDesigner } from "../core-game/event-designer.service";
+import { EventDesigner } from "../designers/event-designer.service";
+import { GlobalInfo } from "../global/global-info.service";
 
 
 @Injectable({
@@ -19,8 +19,7 @@ export class ProjectCardPlayedEffectService {
 	clientPlayerState!: PlayerStateModel
 
 	constructor(
-		private scalingProductionService: ProjectCardScalingProductionsService,
-		private tagInfoService: GlobalTagInfoService
+		private scalingProductionService: ProjectCardScalingProductionsService
 	){}
 	addRessourceToCard(card: ProjectCardModel, ressource: AdvancedRessourceStock): void {
 		card.addRessourceToStock(ressource)
@@ -415,14 +414,14 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Energy Subsidies
 			case(25):{
-				if(mod.tagList.includes(this.tagInfoService.getTagIdFromType('power'))!=true){break}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('power'))!=true){break}
 				costMod += 4
 				break
 			}
 			//Interplanetary Conference
 			case(37):{
-				if(mod.tagList.includes(this.tagInfoService.getTagIdFromType('earth'))===true){costMod += 3}
-				if(mod.tagList.includes(this.tagInfoService.getTagIdFromType('jovian'))===true){costMod += 3}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('earth'))===true){costMod += 3}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('jovian'))===true){costMod += 3}
 				break
 			}
 		}
@@ -473,7 +472,7 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Energy Subsidies
 			case(25):{
-				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('power'))!=true){break}
+				if(playedCardTags.includes(GlobalInfo.getIdFromType('power'))!=true){break}
 				result.push(this.createEventDraw(1))
 				break
 			}
@@ -482,15 +481,15 @@ export class ProjectCardPlayedEffectService {
 				//self triggering excluded
 				if(cardPlayedIsTheTrigger===true){break}
 				if(
-					playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true
-					&& playedCardTags.includes(this.tagInfoService.getTagIdFromType('jovian'))!=true
+					playedCardTags.includes(GlobalInfo.getIdFromType('earth'))!=true
+					&& playedCardTags.includes(GlobalInfo.getIdFromType('jovian'))!=true
 				){break}
 				result.push(this.createEventDraw(1))
 				break
 			}
 			//Optimal Aerobraking
 			case(45):{
-				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('event'))!=true){break}
+				if(playedCardTags.includes(GlobalInfo.getIdFromType('event'))!=true){break}
 				result.push(
 					this.createEventAddRessource([
 					{name: 'plant', valueStock: 2},
@@ -500,7 +499,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Bacterial Aggregate
 			case(222):{
-				if(playedCardTags.includes(this.tagInfoService.getTagIdFromType('earth'))!=true){break}
+				if(playedCardTags.includes(GlobalInfo.getIdFromType('earth'))!=true){break}
 				result.push(this.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
 				break
 			}

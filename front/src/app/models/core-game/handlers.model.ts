@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { deepCopy } from "../../functions/global.functions";
 import { AdvancedRessourceStock, CardRessourceStock, RessourceState, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
-import { DrawEventDesigner, EventDesigner } from "../../services/core-game/event-designer.service";
+import { EventDesigner } from "../../services/designers/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
 import { SelectablePhase } from "../../types/global.type";
@@ -11,6 +10,8 @@ import { PhaseCardModel } from "../cards/phase-card.model";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
 import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase } from "./event.model";
+import { DrawEventDesigner } from "../../services/designers/draw-event-designer.service";
+import { Utils } from "../../utils/utils";
 
 @Injectable()
 export class EventHandler {
@@ -28,7 +29,7 @@ export class EventHandler {
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
 		if(eventQueue.length===0){return undefined}
-		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && deepCopy(eventQueue[0].id)===deepCopy(this.currentEventId)){
+		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && Utils.jsonCopy(eventQueue[0].id)===Utils.jsonCopy(this.currentEventId)){
 			return this.currentEvent
 		}
 		if(eventQueue[0].finalized===true){

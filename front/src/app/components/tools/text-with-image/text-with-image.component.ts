@@ -1,7 +1,5 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { GlobalTagInfoService } from '../../../services/global/global-tag-info.service';
-import { GlobalRessourceInfoService } from '../../../services/global/global-ressource-info.service';
-import { GlobalItemInfoService } from '../../../services/global/global-other-info.service';
+import { GlobalInfo } from '../../../services/global/global-info.service';
 
 type HtmlTag = 'p' | 'img'| 'div'
 
@@ -17,12 +15,6 @@ export class TextWithImageComponent implements OnInit{
   @Input() rawText!: string;
   textWithImages!: string;
 
-  constructor(
-    private tagImageService: GlobalTagInfoService,
-    private ressourceImageService: GlobalRessourceInfoService,
-    private otherImageService: GlobalItemInfoService
-  ) {}
-
   ngOnInit() {
     this.textWithImages = this.replaceImageTags(this.rawText);
   }
@@ -31,19 +23,19 @@ export class TextWithImageComponent implements OnInit{
     var splittedText = text.split("$")
     splittedText.forEach((value, index) => {
       if(value.split("_")[0]==="tag"){
-        splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, this.tagImageService.getTagUrlFromTextTagName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
+        splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, GlobalInfo.getUrlFromName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
       }else if(value.split("_")[0]==="ressource"){
         let splittedValue = value.split("_")
         if (splittedValue[1] != 'megacreditvoid') {
-          splittedText[index] = this.htmlTag('img', {inputValue:value.replace(value, this.ressourceImageService.getRessourceUrlFromTextRessourceName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
+          splittedText[index] = this.htmlTag('img', {inputValue:value.replace(value, GlobalInfo.getUrlFromName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
         } else {
           value = 'ressource_megacreditvoid'
-          var theImage = this.htmlTag('img',{inputValue:value.replace(value, this.ressourceImageService.getRessourceUrlFromTextRessourceName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
+          var theImage = this.htmlTag('img',{inputValue:value.replace(value, GlobalInfo.getUrlFromName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
           var theText = this.htmlTag('p', {inputValue:splittedValue[2], inputClass:"megacredit-text"})
           splittedText[index] = this.htmlTag('div',{inputClass:"wrapper-megacredit",inputValue: theImage + theText})
         }
       }else if(value.split("_")[0]==="other"){
-        splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, this.otherImageService.getItemUrlFromTextItemName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
+        splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, GlobalInfo.getUrlFromName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
       }else if(value==='skipline'){
         splittedText[index] = `<br>`
       }else if(value!=''){
