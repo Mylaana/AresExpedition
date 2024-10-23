@@ -65,7 +65,8 @@ Nothing done yet
 Tech TBD  
 
 ## Backend
-Java, websocket?
+Server: Java websocket   
+API: Java Springboot  
 
 ## Deployment
 CI/CD Pipeline
