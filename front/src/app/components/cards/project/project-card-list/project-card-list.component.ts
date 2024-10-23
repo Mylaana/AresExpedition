@@ -76,7 +76,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		}
 	}
 	checkUpdateSelector(event: EventCardSelector): void {
-		if(Utils.deepCopy(event.cardSelector)!=Utils.deepCopy(this.cardSelector)){
+		if(Utils.jsonCopy(event.cardSelector)!=Utils.jsonCopy(this.cardSelector)){
 			this.updateCardList()
 		}
 	}

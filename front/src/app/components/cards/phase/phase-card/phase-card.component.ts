@@ -26,7 +26,7 @@ export class PhaseCardComponent extends BaseCardComponent {
 	}
 
 	updateState(updateType: updateType){
-		let newState: CardState = Utils.deepCopy(this.state)
+		let newState: CardState = Utils.jsonCopy(this.state)
 		if(updateType==='upgradeAndSelect'){
 			newState.upgraded = true
 		}

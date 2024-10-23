@@ -91,7 +91,7 @@ export class PhaseCardUpgradeListComponent implements OnChanges{
 		this.setState()
 	}
 	updateState(state: PlayerStateModel[]): void{
-		if(this.phaseCardState.length!=0 && Utils.deepCopy(state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]) == Utils.deepCopy(this.clientPlayerPhaseCardGroupState)){return}
+		if(this.phaseCardState.length!=0 && Utils.jsonCopy(state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]) == Utils.jsonCopy(this.clientPlayerPhaseCardGroupState)){return}
 		this.clientPlayerPhaseCardGroupState = state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]
 		this.phaseCardState = this.clientPlayerPhaseCardGroupState.getPhaseCardStateList()
 	}

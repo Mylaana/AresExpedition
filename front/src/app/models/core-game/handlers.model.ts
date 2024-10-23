@@ -29,7 +29,7 @@ export class EventHandler {
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
 		if(eventQueue.length===0){return undefined}
-		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && Utils.deepCopy(eventQueue[0].id)===Utils.deepCopy(this.currentEventId)){
+		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && Utils.jsonCopy(eventQueue[0].id)===Utils.jsonCopy(this.currentEventId)){
 			return this.currentEvent
 		}
 		if(eventQueue[0].finalized===true){

@@ -95,10 +95,10 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	}
 	updateRessourceState(ressourceState: RessourceState[]): void {
 		if(this.ressourceState===ressourceState){return}
-		this.ressourceState = Utils.deepCopy(ressourceState)
+		this.ressourceState = Utils.jsonCopy(ressourceState)
 	}
 	updateCardState(cardState: ProjectCardState): void {
-		if(!this.projectCardState===undefined &&  Utils.deepCopy(this.projectCardState)===Utils.deepCopy(cardState)){return}
+		if(!this.projectCardState===undefined &&  Utils.jsonCopy(this.projectCardState)===Utils.jsonCopy(cardState)){return}
 		this.projectCardState=cardState
 		this.updateCost()
 	}

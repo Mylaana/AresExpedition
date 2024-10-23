@@ -5,6 +5,7 @@ import { ProjectCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
 import { CardBuilder, EventBaseCardSelector, EventBaseModel, EventCardBuilder } from "./event.model";
 
+
 class testEventBaseModel extends EventBaseModel{}
 class testEventBaseCardSelector extends EventBaseCardSelector{}
 describe('Models - Event', () => {
@@ -180,6 +181,7 @@ describe('Models - Event', () => {
             })
         })
     })
+
     describe('EventCardBuilder', () => {
         describe('UNIT TEST', () => {
             let event: EventCardBuilder

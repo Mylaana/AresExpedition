@@ -66,11 +66,11 @@ export abstract class BaseCardComponent implements OnInit, OnChanges, DoCheck {
 	changeStateFromParent():void{
 		if(!this.state || !this.stateFromParent){return}
 
-		if(this.stateFromParent.activable!=undefined){this.state.activable=Utils.deepCopy(this.stateFromParent.activable)}
-		if(this.stateFromParent.playable!=undefined){this.state.playable=Utils.deepCopy(this.stateFromParent.playable)}
-		if(this.stateFromParent.selectable!=undefined){this.state.selectable=Utils.deepCopy(this.stateFromParent.selectable)}
-		if(this.stateFromParent.selected!=undefined){this.state.selected=Utils.deepCopy(this.stateFromParent.selected)}
-		if(this.stateFromParent.upgradable!=undefined){this.state.upgradable=Utils.deepCopy(this.stateFromParent.upgradable)}
-		if(this.stateFromParent.upgraded!=undefined){this.state.upgraded=Utils.deepCopy(this.stateFromParent.upgraded)}	
+		if(this.stateFromParent.activable!=undefined){this.state.activable=Utils.jsonCopy(this.stateFromParent.activable)}
+		if(this.stateFromParent.playable!=undefined){this.state.playable=Utils.jsonCopy(this.stateFromParent.playable)}
+		if(this.stateFromParent.selectable!=undefined){this.state.selectable=Utils.jsonCopy(this.stateFromParent.selectable)}
+		if(this.stateFromParent.selected!=undefined){this.state.selected=Utils.jsonCopy(this.stateFromParent.selected)}
+		if(this.stateFromParent.upgradable!=undefined){this.state.upgradable=Utils.jsonCopy(this.stateFromParent.upgradable)}
+		if(this.stateFromParent.upgraded!=undefined){this.state.upgraded=Utils.jsonCopy(this.stateFromParent.upgraded)}	
 	}
 }

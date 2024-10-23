@@ -91,6 +91,7 @@ describe('Service - Designers - Event', () => {
                 let builder = EventDesigner['generateCardBuilder'](0, expectedOption)
                 
                 expect(expectedCardBuilder).toEqual(builder)
+                expect(spy).toHaveBeenCalled()
             })
         })
     })
@@ -118,10 +119,11 @@ describe('Service - Designers - Event', () => {
             expectedWaiterId = 5
         })
         describe('UNIT TEST', () => {
+
             it('should create a discardEvent selector Event', () => {
                 expectedSubType = 'discardCards'
                 expectedEvent.subType = expectedSubType
-                const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
                 expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
                 expectedEvent.locksEventpile = true
@@ -129,13 +131,14 @@ describe('Service - Designers - Event', () => {
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
 
                 expect(expectedEvent).toEqual(resultEvent)
-                expect(spy).toHaveBeenCalled()
+                expect(buttonSpy).toHaveBeenCalled()
             })
+
             it('should create a discardEvent selector with initialState option', () => {
                 expectedSubType = 'discardCards'
                 expectedEvent.subType = expectedSubType
                 expectedArgs = {cardSelector:{cardInitialState:{ignoreCost:true}}}
-                const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
                 expectedEvent.cardSelector.cardInitialState = expectedArgs.cardSelector?.cardInitialState
                 expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
                 expectedEvent.locksEventpile = true
@@ -143,35 +146,35 @@ describe('Service - Designers - Event', () => {
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType, expectedArgs)
 
                 expect(expectedEvent).toEqual(resultEvent)
-                expect(spy).toHaveBeenCalled()
+                expect(buttonSpy).toHaveBeenCalled()
             })
             it('should create a selectCardForcedSell selector Event', () => {
                 expectedSubType = 'selectCardForcedSell'
                 expectedEvent.subType = expectedSubType
-                const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
                 expectedEvent.cardSelector.selectionQuantityTreshold = 'min'
 
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
 
                 expect(expectedEvent).toEqual(resultEvent)
-                expect(spy).toHaveBeenCalled()
+                expect(buttonSpy).toHaveBeenCalled()
             })
             it('should create a selectCardOptionalSell selector Event', () => {
                 expectedSubType = 'selectCardOptionalSell'
                 expectedEvent.subType = expectedSubType
-                const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
 
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
 
                 expect(expectedEvent).toEqual(resultEvent)
-                expect(spy).toHaveBeenCalled()
+                expect(buttonSpy).toHaveBeenCalled()
             })
             it('should create a actionPhase selector Event', () => {
                 expectedSubType = 'actionPhase'
                 expectedEvent.subType = expectedSubType
-                const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
                 expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, playable: false, ignoreCost:true}
                 expectedEvent.title = 'Activate cards :'
                 expectedEvent.cardSelector.filter = {type:"action"}
@@ -179,12 +182,12 @@ describe('Service - Designers - Event', () => {
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
 
                 expect(expectedEvent).toEqual(resultEvent)
-                expect(spy).toHaveBeenCalled()
+                expect(buttonSpy).toHaveBeenCalled()
             })
             it('should create a researchPhaseResult selector Event', () => {
                 expectedSubType = 'researchPhaseResult'
                 expectedEvent.subType = expectedSubType
-                const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
                 expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} cards to draw`
                 expectedEvent.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
                 expectedEvent.cardSelector.selectionQuantityTreshold = 'equal'
@@ -195,9 +198,11 @@ describe('Service - Designers - Event', () => {
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType, expectedArgs)
 
                 expect(expectedEvent).toEqual(resultEvent)
-                expect(spy).toHaveBeenCalled()
+                expect(buttonSpy).toHaveBeenCalled()
             })
+            
             it('should log an error message and return a default Event', () => {
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')        
                 const logTextSpy = spyOn(Utils, 'logText')
                 expectedSubType = 'fake' as EventCardSelectorSubType
 
@@ -205,6 +210,7 @@ describe('Service - Designers - Event', () => {
 
                 expect(event).toBeDefined()
                 expect(logTextSpy).toHaveBeenCalled()
+                expect(buttonSpy).toHaveBeenCalled()
             })
         })
     })
