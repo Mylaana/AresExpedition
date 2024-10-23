@@ -1,0 +1,21 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: CI build
+
+on:
+  push:
+    branches-ignore: "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Test with jasmine & karma
+      working-directory:
+        front
+      run: |
+        test:ci: "ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadlessCI"
