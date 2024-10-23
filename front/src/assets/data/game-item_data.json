@@ -1,0 +1,200 @@
+[
+    {
+        "id": 0,
+        "description": "building",
+        "imageUrl": "assets/tag/building.png",
+        "name": "$tag_building$"
+    },
+    {
+        "id": 1,
+        "description": "space",
+        "imageUrl": "assets/tag/space.png",
+        "name": "$tag_space$"
+    },
+    {
+        "id": 2,
+        "description": "science",
+        "imageUrl": "assets/tag/science.png",
+        "name": "$tag_science$"
+    },
+    {
+        "id": 3,
+        "description": "power",
+        "imageUrl": "assets/tag/power.png",
+        "name": "$tag_power$"
+    },
+    {
+        "id": 4,
+        "description": "earth",
+        "imageUrl": "assets/tag/earth.png",
+        "name": "$tag_earth$"
+    },
+    {
+        "id": 5,
+        "description": "jovian",
+        "imageUrl": "assets/tag/jovian.png",
+        "name": "$tag_jovian$"
+    },
+    {
+        "id": 6,
+        "description": "plant",
+        "imageUrl": "assets/tag/plant.png",
+        "name": "$tag_plant$"
+    },
+    {
+        "id": 7,
+        "description": "animal",
+        "imageUrl": "assets/tag/animal.png",
+        "name": "$tag_animal$"
+    },
+    {
+        "id": 8,
+        "description": "microbe",
+        "imageUrl": "assets/tag/microbe.png",
+        "name": "$tag_microbe$"
+    },
+    {
+        "id": 9,
+        "description": "event",
+        "imageUrl": "assets/tag/event.png",
+        "name": "$tag_event$"
+    },
+    {
+        "id": 100,
+        "description": "redarrow",
+        "imageUrl": "assets/other/arrow.png",
+        "name": "$other_redarrow$"
+    },
+    {
+        "id": 101,
+        "description": "arrow",
+        "imageUrl": "assets/other/arrow.png",
+        "name": "$other_arrow$"
+    },
+    {
+        "id": 102,
+        "description": "card",
+        "imageUrl": "assets/other/card.png",
+        "name": "$other_card$"
+    },
+    {
+        "id": 103,
+        "description": "tr",
+        "imageUrl": "assets/other/tr.png",
+        "name": "$other_tr$"
+    },
+    {
+        "id": 104,
+        "description": "ocean",
+        "imageUrl": "assets/other/ocean.png",
+        "name": "$other_ocean$"
+    },
+    {
+        "id": 105,
+        "description": "oxygen",
+        "imageUrl": "assets/other/oxygen.png",
+        "name": "$other_oxygen$"
+    },
+    {
+        "id": 106,
+        "description": "forest",
+        "imageUrl": "assets/other/forest.png",
+        "name": "$other_forest$"
+    },
+    {
+        "id": 107,
+        "description": "temperature",
+        "imageUrl": "assets/other/temperature.png",
+        "name": "$other_temperature$"
+    },
+    {
+        "id": 108,
+        "description": "infrastructure",
+        "imageUrl": "assets/other/infrastructure.png",
+        "name": "$other_infrastructure$"
+    },
+    {
+        "id": 109,
+        "description": "objective",
+        "imageUrl": "assets/other/objective.png",
+        "name": "$other_objective$"
+    },
+    {
+        "id": 110,
+        "description": "research symbol",
+        "imageUrl": "assets/other/research_symbol.png",
+        "name": "$other_researchsymbol$"
+    },
+    {
+        "id": 111,
+        "description": "research card",
+        "imageUrl": "assets/other/research_card.png",
+        "name": "$other_researchcard$"
+    },
+    {
+        "id": 1000,
+        "description": "steel",
+        "imageUrl": "assets/ressource/steel.png",
+        "name": "$ressource_steel$"
+    },
+    {
+        "id": 1001,
+        "description": "titanium",
+        "imageUrl": "assets/ressource/titanium.png",
+        "name": "$ressource_titanium$"
+    },
+    {
+        "id": 1002,
+        "description": "science",
+        "imageUrl": "assets/ressource/science.png",
+        "name": "$ressource_science$"
+    },
+    {
+        "id": 1003,
+        "description": "power",
+        "imageUrl": "assets/ressource/power.png",
+        "name": "$ressource_power$"
+    },
+    {
+        "id": 1004,
+        "description": "plant",
+        "imageUrl": "assets/ressource/plant.png",
+        "name": "$ressource_plant$"
+    },
+    {
+        "id": 1005,
+        "description": "animal",
+        "imageUrl": "assets/ressource/animal.png",
+        "name": "$ressource_animal$"
+    },
+    {
+        "id": 1006,
+        "description": "microbe",
+        "imageUrl": "assets/ressource/microbe.png",
+        "name": "$ressource_microbe$"
+    },
+    {
+        "id": 1007,
+        "description": "heat",
+        "imageUrl": "assets/ressource/heat.png",
+        "name": "$ressource_heat$"
+    },
+    {
+        "id": 1008,
+        "description": "card",
+        "imageUrl": "assets/ressource/card.png",
+        "name": "$ressource_card$"
+    },
+    {
+        "id": 1009,
+        "description": "megacredit",
+        "imageUrl": "assets/ressource/megacredit.png",
+        "name": "$ressource_megacredit$"
+    },
+    {
+        "id": 1009,
+        "description": "megacreditvoid",
+        "imageUrl": "assets/ressource/megacreditvoid.png",
+        "name": "$ressource_megacreditvoid$"
+    }
+]

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RessourceState } from '../../../interfaces/global.interface';
-import { GlobalRessourceInfoService } from '../../../services/global/global-ressource-info.service';
+import { GlobalInfo } from '../../../services/global/global-info.service';
 
 @Component({
   selector: 'app-ressource-card',
@@ -19,9 +19,8 @@ export class RessourceCardComponent implements OnInit {
 
   imageUrl!: string;
 
-  constructor(private globalRessourceService: GlobalRessourceInfoService){}
 
   ngOnInit(): void {
-    this.imageUrl = this.globalRessourceService.getRessourceUrlFromID(this.ressourceState.imageUrlId)
+    this.imageUrl = GlobalInfo.getUrlFromID(this.ressourceState.imageUrlId)
   }
 }

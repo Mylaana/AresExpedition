@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel, ProjectCardState } from '../../../../models/cards/project-card.model';
-import { GlobalTagInfoService } from '../../../../services/global/global-tag-info.service';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
 import { CardCost } from '../../../../models/cards/card-cost.model';
@@ -10,6 +9,7 @@ import { GameState } from '../../../../services/core-game/game-state.service';
 import { RessourceState } from '../../../../interfaces/global.interface';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { Utils } from '../../../../utils/utils';
+import { GlobalInfo } from '../../../../services/global/global-info.service';
 
 
 @Component({
@@ -35,7 +35,6 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	readonly tagNumber = 3;
 
 	constructor(
-		private globalTagInfoService: GlobalTagInfoService,
 		private gameStateService: GameState,
 	){
 		super();
@@ -50,7 +49,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
 		// fills tagUrl
 		for(let i = 0; i < this.projectCard.tagsId.length; i++) {
-			this.projectCard.tagsUrl.push(this.globalTagInfoService.getTagUrlFromID(this.projectCard.tagsId[i]))
+			this.projectCard.tagsUrl.push(GlobalInfo.getUrlFromID(this.projectCard.tagsId[i]))
 		}
 
 		// subscribe to gameState
