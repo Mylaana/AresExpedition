@@ -36,8 +36,7 @@ jobs:
         - name: Test with jasmine & karma
           working-directory:
             front
-          run: |
-            ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
+          run: npm run test:ci
         # {6}
         
         - name: Build
