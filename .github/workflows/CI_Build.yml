@@ -8,9 +8,11 @@ on:
     branches-ignore: "main"
 
 jobs:
-  build:
-
+  build-and-test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
 
     strategy:
       matrix:
