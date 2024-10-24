@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: front
+        working-directory: /front
 
     strategy:
       matrix:
@@ -26,14 +26,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: /front/package-lock.json
+        cache-dependency-path: '**/package-lock.json'
     - run: npm ci
-      working-directory: front
+      working-directory: /front
 
     - name: Run tests
-      working-directory: front
+      working-directory: /front
       run: npm run test:ci
     
     - name: Run build
       run: npm run build --if-present
-      working-directory: front
+      working-directory: /front
