@@ -25,6 +25,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+      working-directory: front
 
     - name: Run tests
       working-directory: front
@@ -32,3 +33,4 @@ jobs:
     
     - name: Run build
       run: npm run build --if-present
+      working-directory: front
