@@ -24,7 +24,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: packacge-lock.json
+        cache-dependency-path: /front/package-lock.json
     - run: npm ci
       working-directory: front
 
