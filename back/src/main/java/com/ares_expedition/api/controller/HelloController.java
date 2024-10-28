@@ -1,4 +1,4 @@
-package com.ares_expedition.backend.controller;
+package com.ares_expedition.api.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

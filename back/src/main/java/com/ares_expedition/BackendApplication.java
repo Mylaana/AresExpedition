@@ -1,4 +1,4 @@
-package com.ares_expedition.backend;
+package com.ares_expedition;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
