@@ -5,6 +5,7 @@ import { PlayerReadyPannelComponent } from '../../player-info/player-ready-panne
 import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
+import { Task, WebsocketService } from '../../../services/websocket/websocket.service';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -31,6 +32,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 
   constructor(private gameStateService: GameState,
     private cardInfoService: ProjectCardInfoService,
+    private websocket: WebsocketService
   ){}
 
 
@@ -65,6 +67,10 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.authorizedBotPhaseSelection = ['development']
 
     this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
+
+    this.websocket.listen(task => {
+      console.log(task)
+    });
   }
 
   ngAfterViewInit(): void {
@@ -153,5 +159,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   loadingFinished(loading: boolean):void{
     if(loading===true){return}
     this.botReady()
+  }
+  sendHello(): void {
+    this.websocket.send({name:'angular websocket'})
   }
 }
