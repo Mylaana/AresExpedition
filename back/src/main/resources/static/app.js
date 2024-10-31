@@ -1,11 +1,11 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8080/gs-guide-websocket'
+    brokerURL: 'ws://localhost:8080/ws'
 });
 
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
-    stompClient.subscribe('/topic/greetings', (greeting) => {
+    stompClient.subscribe('/topic/drawresult', (greeting) => {
         showGreeting(JSON.parse(greeting.body).content);
     });
 };

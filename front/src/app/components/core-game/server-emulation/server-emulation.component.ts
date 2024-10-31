@@ -56,8 +56,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.gameStateService.currentLoadingState.subscribe(
       loading => this.loadingFinished(loading)
     )
-	this.gameStateService.currentEventQueue.subscribe(
-		event => this.currentEventQueue = event
+	  this.gameStateService.currentEventQueue.subscribe( 
+		  event => this.currentEventQueue = event
 	  )
 
         //return
@@ -160,7 +160,10 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     if(loading===true){return}
     this.botReady()
   }
+  sendDrawNumber(): void {
+    this.websocket.send({drawNumber:2})
+  }
   sendHello(): void {
-    this.websocket.send({name:'angular websocket'})
+    this.websocket.sendHello({name:"Angular websocket"})
   }
 }
