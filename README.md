@@ -8,9 +8,9 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 # Architecture and Concepts
 ## Technologies used :
 Frontend: Angular 17  
-Server: Java websocket   
-API: Java Springboot  
-Cards data parser: Python  
+Backend: Java Spring (websocket STOMP)
+API: Java Spring  
+Script: Python  
 
 ## Testing
 Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%
