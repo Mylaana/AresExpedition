@@ -5,7 +5,7 @@ import { PlayerReadyPannelComponent } from '../../player-info/player-ready-panne
 import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
-import { Task, WebsocketService } from '../../../services/websocket/websocket.service';
+import { Message, WebsocketService } from '../../../services/websocket/websocket.service';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -161,9 +161,11 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.botReady()
   }
   sendDrawNumber(): void {
-    this.websocket.send({drawNumber:2})
-  }
-  sendHello(): void {
-    this.websocket.sendHello({name:"Angular websocket"})
+    this.websocket.send(
+      {
+        contentType: Message.draw,
+        content:{"key":"value", "otherKey":"otherValue"}
+      }
+    )
   }
 }

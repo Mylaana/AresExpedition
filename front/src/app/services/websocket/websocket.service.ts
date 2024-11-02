@@ -11,6 +11,21 @@ export interface DrawQuery {
     drawNumber: number
 }
 
+export enum Message {
+    draw = 'DRAW',
+    other = 'OTHER'
+}
+interface PlayerMessage {
+    gameId?: number,
+    clientId?: number
+    contentType: Message,
+    content: any
+}
+
+const gameId = 1
+const clientId = 0
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,22 +40,18 @@ export class WebsocketService implements OnDestroy {
         this.connection.connect({}, () => {});
     }
 
-    public send(draw: DrawQuery): void {
+    public send(message: PlayerMessage): void {
         if (this.connection && this.connection.connected) {
-            this.connection.send('/app/draw', {}, JSON.stringify(draw));
-        }
-    }
-    public sendHello(task: Task): void {
-        if (this.connection && this.connection.connected) {
-            this.connection.send('/app/hello', {}, JSON.stringify(task));
+            message.clientId = clientId
+            message.gameId = gameId
+            this.connection.send('/app/player', {}, JSON.stringify(message));
         }
     }
 
     public listen(fun: ListenerCallBack): void {
         if (this.connection) {
             this.connection.connect({}, () => {
-                this.subscription = this.connection!.subscribe('/topic/drawresult', message => fun(JSON.parse(message.body)));
-                this.subscriptionGreetigns = this.connection!.subscribe('/topic/greetings', message => fun(JSON.parse(message.body)));
+                this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => fun(JSON.parse(message.body)));
             });
             
         }
