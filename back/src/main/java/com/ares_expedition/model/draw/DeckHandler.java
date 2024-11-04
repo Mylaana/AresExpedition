@@ -1,4 +1,4 @@
-package com.ares_expedition.stomp_websocket.draw;
+package com.ares_expedition.model.draw;
 
 import java.util.ArrayList;
 import java.util.List;

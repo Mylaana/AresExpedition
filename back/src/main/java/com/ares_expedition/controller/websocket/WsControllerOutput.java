@@ -1,8 +1,10 @@
-package com.ares_expedition.stomp_websocket;
+package com.ares_expedition.controller.websocket;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+
+import com.ares_expedition.dto.websocket.PlayerMessageAnswer;
 
 @Controller
 public class WsControllerOutput {

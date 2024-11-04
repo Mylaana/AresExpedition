@@ -1,4 +1,4 @@
-package com.ares_expedition.stomp_websocket.draw;
+package com.ares_expedition.model.draw;
 
 public class DrawQuery {
     Integer drawNumber;

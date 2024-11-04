@@ -1,4 +1,4 @@
-package com.ares_expedition.stomp_websocket;
+package com.ares_expedition.dto.websocket;
 
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 

@@ -1,9 +1,10 @@
-package com.ares_expedition.stomp_websocket;
+package com.ares_expedition.controller.websocket;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
-
 import com.ares_expedition.enums.websocket.ContentResultEnum;
+
+import com.ares_expedition.dto.websocket.*;
 
 @Controller
 public class WsControllerInput {
