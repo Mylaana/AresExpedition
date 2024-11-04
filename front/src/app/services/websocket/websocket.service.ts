@@ -12,7 +12,7 @@ export interface DrawQuery {
 }
 
 export enum Message {
-    draw = 'DRAW',
+    drawQuery = 'DRAW_QUERY',
     other = 'OTHER'
 }
 interface PlayerMessage {

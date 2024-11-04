@@ -3,8 +3,6 @@ package com.ares_expedition.stomp_websocket.draw;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ares_expedition.database.*;
-
 public class DeckHandler {
     public DeckHandler() {}
     public static List<Integer> drawCards(Integer drawNumber) {

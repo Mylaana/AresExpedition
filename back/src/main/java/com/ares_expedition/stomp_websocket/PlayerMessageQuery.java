@@ -1,16 +1,16 @@
 package com.ares_expedition.stomp_websocket;
 
-import com.ares_expedition.enums.PlayerMessageQueryEnum;
+import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
 
 public class PlayerMessageQuery {
     private Integer gameId;
     private Integer clientId;
-    private PlayerMessageQueryEnum contentType;
+    private ContentQueryEnum contentType;
     private Object content;
 
     PlayerMessageQuery(){}
-    PlayerMessageQuery(Integer gameId, Integer clientId, PlayerMessageQueryEnum contentType, Object content){
+    PlayerMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, Object content){
         this.gameId = gameId;
         this.clientId = clientId;
         this.contentType = contentType;
@@ -22,7 +22,7 @@ public class PlayerMessageQuery {
     public Integer getClientId(){
         return this.clientId;
     }
-    public PlayerMessageQueryEnum getContentType(){
+    public ContentQueryEnum getContentEnum(){
         return this.contentType;
     }
     public Object getContent(){
