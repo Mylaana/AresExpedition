@@ -24,9 +24,9 @@ public class QueryMessageFactory {
         Map<?, ?> contentMap = (Map<?, ?>) content;
         Object drawNumber = contentMap.get("draw");
 
-        if(!(drawNumber instanceof Integer)){return result;}
+        if(!(drawNumber instanceof Integer) || drawNumber == null){return result;}
         result.setDrawNumber((Integer) drawNumber);
-        
+
         return result;
     }
 }
