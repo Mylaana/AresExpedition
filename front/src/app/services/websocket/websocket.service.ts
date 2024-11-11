@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import SockJS from 'sockjs-client';
+import { WebsocketQueryDesigner } from '../designers/websocket-query-designer.service';
 
 export type ListenerCallBack = (message: Task) => void;
 export interface Task {
@@ -11,6 +12,21 @@ export interface DrawQuery {
     drawNumber: number
 }
 
+export enum Message {
+    drawQuery = 'DRAW_QUERY',
+    other = 'OTHER'
+}
+interface PlayerMessage {
+    gameId?: number,
+    clientId?: number
+    contentEnum: Message,
+    content: any
+}
+
+const gameId = 1
+const clientId = 0
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,29 +34,26 @@ export class WebsocketService implements OnDestroy {
     private connection: CompatClient | undefined = undefined;
     private subscription: StompSubscription | undefined;
     private subscriptionGreetigns: StompSubscription | undefined;
+    private reconnectDelay = 5000
 
     constructor() {
         // Utilisation de SockJS pour la connexion WebSocket
         this.connection = Stomp.over(() => new SockJS('http://localhost:8080/ws'));
         this.connection.connect({}, () => {});
+        this.connection.reconnectDelay = this.reconnectDelay
     }
 
-    public send(draw: DrawQuery): void {
+    public sendDraw(drawNumber: number): void {
         if (this.connection && this.connection.connected) {
-            this.connection.send('/app/draw', {}, JSON.stringify(draw));
-        }
-    }
-    public sendHello(task: Task): void {
-        if (this.connection && this.connection.connected) {
-            this.connection.send('/app/hello', {}, JSON.stringify(task));
+            let message = WebsocketQueryDesigner.createDrawQuery(drawNumber)
+            this.connection.send('/app/player', {}, JSON.stringify(message));
         }
     }
 
     public listen(fun: ListenerCallBack): void {
         if (this.connection) {
             this.connection.connect({}, () => {
-                this.subscription = this.connection!.subscribe('/topic/drawresult', message => fun(JSON.parse(message.body)));
-                this.subscriptionGreetigns = this.connection!.subscribe('/topic/greetings', message => fun(JSON.parse(message.body)));
+                this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => fun(JSON.parse(message.body)));
             });
             
         }

@@ -1,4 +1,4 @@
-package com.ares_expedition.stomp_websocket;
+package com.ares_expedition.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

@@ -1,4 +1,4 @@
-    package com.ares_expedition.database;
+    package com.ares_expedition.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileNotFoundException;

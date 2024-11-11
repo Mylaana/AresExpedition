@@ -1,4 +1,4 @@
-package com.ares_expedition.database;
+package com.ares_expedition.repository;
 
 import java.util.List;
 
