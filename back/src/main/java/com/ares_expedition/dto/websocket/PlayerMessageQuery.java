@@ -3,17 +3,17 @@ package com.ares_expedition.dto.websocket;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
 
-public class PlayerMessageQuery {
-    private Integer gameId;
-    private Integer clientId;
-    private ContentQueryEnum contentType;
-    private Object content;
+public class PlayerMessageQuery<T>{
+    protected Integer gameId;
+    protected Integer clientId;
+    protected ContentQueryEnum contentEnum;
+    protected T content;
 
-    PlayerMessageQuery(){}
-    PlayerMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, Object content){
+    public PlayerMessageQuery(){}
+    public PlayerMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
         this.gameId = gameId;
         this.clientId = clientId;
-        this.contentType = contentType;
+        this.contentEnum = contentType;
         this.content = content;
     }
     public Integer getGameId(){
@@ -23,9 +23,21 @@ public class PlayerMessageQuery {
         return this.clientId;
     }
     public ContentQueryEnum getContentEnum(){
-        return this.contentType;
+        return this.contentEnum;
     }
-    public Object getContent(){
+    public T getContent(){
         return this.content;
+    }
+    public void setGameId(Integer gameId){
+        this.gameId = gameId;
+    }
+    public void setClientId(Integer clientId){
+        this.clientId = clientId;
+    }
+    public void setContentEnum(ContentQueryEnum queryEnum){
+        this.contentEnum = queryEnum;
+    }
+    public void setContent(T content){
+        this.content = content;
     }
 }

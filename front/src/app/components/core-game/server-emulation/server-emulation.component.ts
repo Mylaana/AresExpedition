@@ -161,11 +161,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.botReady()
   }
   sendDrawNumber(): void {
-    this.websocket.send(
-      {
-        contentType: Message.drawQuery,
-        content:{"key":"value", "otherKey":"otherValue"}
-      }
-    )
+    this.websocket.sendDraw(2)
   }
 }

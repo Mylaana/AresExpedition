@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import SockJS from 'sockjs-client';
+import { WebsocketQueryDesigner } from '../designers/websocket-query-designer.service';
 
 export type ListenerCallBack = (message: Task) => void;
 export interface Task {
@@ -18,7 +19,7 @@ export enum Message {
 interface PlayerMessage {
     gameId?: number,
     clientId?: number
-    contentType: Message,
+    contentEnum: Message,
     content: any
 }
 
@@ -33,17 +34,18 @@ export class WebsocketService implements OnDestroy {
     private connection: CompatClient | undefined = undefined;
     private subscription: StompSubscription | undefined;
     private subscriptionGreetigns: StompSubscription | undefined;
+    private reconnectDelay = 5000
 
     constructor() {
         // Utilisation de SockJS pour la connexion WebSocket
         this.connection = Stomp.over(() => new SockJS('http://localhost:8080/ws'));
         this.connection.connect({}, () => {});
+        this.connection.reconnectDelay = this.reconnectDelay
     }
 
-    public send(message: PlayerMessage): void {
+    public sendDraw(drawNumber: number): void {
         if (this.connection && this.connection.connected) {
-            message.clientId = clientId
-            message.gameId = gameId
+            let message = WebsocketQueryDesigner.createDrawQuery(drawNumber)
             this.connection.send('/app/player', {}, JSON.stringify(message));
         }
     }

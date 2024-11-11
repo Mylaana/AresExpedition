@@ -14,7 +14,7 @@ public class WsControllerInput {
     }
 
     @MessageMapping("/player")
-    public void resolvePlayerQuery(PlayerMessageQuery message) throws Exception {
+    public <T> void resolvePlayerQuery(PlayerMessageQuery<T> message) throws Exception {
         inputRouter.routeInput(message);
     }
 }

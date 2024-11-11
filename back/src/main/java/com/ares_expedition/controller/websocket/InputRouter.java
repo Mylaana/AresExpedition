@@ -1,20 +1,24 @@
 package com.ares_expedition.controller.websocket;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.dto.websocket.PlayerMessageQuery;
-import com.ares_expedition.model.draw.DrawQuery;
+import com.ares_expedition.dto.websocket.serialized_message.DrawMessageQuery;
+import com.ares_expedition.services.QueryMessageFactory;
 
 @Service
 public class InputRouter {
-    @Autowired
-    InputRouter(){}
+    private final WsControllerOutput wsOutput;
 
-    public void routeInput(PlayerMessageQuery message){
+    public InputRouter(WsControllerOutput wsOutput){
+        this.wsOutput = wsOutput;
+    }
+
+    public <T> void routeInput(PlayerMessageQuery<T> message){
         switch (message.getContentEnum()) {
             case DRAW_QUERY:
-                DrawQuery query = (DrawQuery) message.getContent();
+                DrawMessageQuery query = QueryMessageFactory.createDrawMessageQuery(message);
+                wsOutput.sendPushToPlayer(query.getGameId(), query.getClientId(), query.getContent());
                 break;
             
             case PLAYER_READY:
