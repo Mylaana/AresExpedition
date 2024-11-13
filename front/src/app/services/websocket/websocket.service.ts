@@ -16,12 +16,6 @@ export enum Message {
     drawQuery = 'DRAW_QUERY',
     other = 'OTHER'
 }
-interface PlayerMessage {
-    gameId?: number,
-    clientId?: number
-    contentEnum: Message,
-    content: any
-}
 
 const gameId = 1
 const clientId = 0
@@ -33,11 +27,10 @@ const clientId = 0
 export class WebsocketService implements OnDestroy {
     private connection: CompatClient | undefined = undefined;
     private subscription: StompSubscription | undefined;
-    private subscriptionGreetigns: StompSubscription | undefined;
+    private subscriptionGroup: StompSubscription | undefined;
     private reconnectDelay = 5000
 
     constructor() {
-        // Utilisation de SockJS pour la connexion WebSocket
         this.connection = Stomp.over(() => new SockJS('http://localhost:8080/ws'));
         this.connection.connect({}, () => {});
         this.connection.reconnectDelay = this.reconnectDelay
@@ -51,18 +44,35 @@ export class WebsocketService implements OnDestroy {
     }
 
     public listen(fun: ListenerCallBack): void {
-        if (this.connection) {
-            this.connection.connect({}, () => {
-                this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => fun(JSON.parse(message.body)));
+        if (this.connection && this.connection.connected) {
+            this.subscription = this.connection.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
+                fun(JSON.parse(message.body));
             });
-            
+            this.subscriptionGroup = this.connection.subscribe(`/topic/group/${gameId}`, message => {
+                fun(JSON.parse(message.body));
+            });
+        } else {
+            this.connection?.connect({}, () => {
+                this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
+                    fun(JSON.parse(message.body));
+                });
+                this.subscriptionGroup = this.connection!.subscribe(`/topic/group/${gameId}`, message => {
+                    fun(JSON.parse(message.body));
+                });
+            });
         }
     }
-
     ngOnDestroy(): void {
         if (this.subscription) {
             this.subscription.unsubscribe();
-            this.subscriptionGreetigns?.unsubscribe();
+        }
+        if (this.subscriptionGroup) {
+            this.subscriptionGroup.unsubscribe();
+        }
+        if (this.connection) {
+            this.connection.disconnect(() => {
+                console.log('Déconnexion du WebSocket');
+            });
         }
     }
 }

@@ -56,13 +56,13 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.gameStateService.currentLoadingState.subscribe(
       loading => this.loadingFinished(loading)
     )
-	  this.gameStateService.currentEventQueue.subscribe( 
-		  event => this.currentEventQueue = event
-	  )
+    this.gameStateService.currentEventQueue.subscribe( 
+      event => this.currentEventQueue = event
+    )
 
         //return
     //force draw card list for debug purpose
-    let cardDrawList: number[] = [263, 36, 222,  81, 123, 204, 141]
+    let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141]
     //force phase selection pool
     this.authorizedBotPhaseSelection = ['development']
 

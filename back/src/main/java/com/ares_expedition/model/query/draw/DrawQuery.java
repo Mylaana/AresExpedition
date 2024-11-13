@@ -1,8 +1,10 @@
-package com.ares_expedition.model.draw;
+package com.ares_expedition.model.query.draw;
 
 import java.util.Map;
 
-public class DrawQuery {
+import com.ares_expedition.model.query.GenericQuery;
+
+public class DrawQuery extends GenericQuery{
     Integer drawNumber;
 
     public DrawQuery(){
@@ -11,12 +13,10 @@ public class DrawQuery {
     public DrawQuery(Integer drawNumber){
         this.drawNumber = drawNumber;
     }
-   
-    /*
-    public <K,V> DrawQuery(Map<K, V> drawNumber){
-      this.drawNumber = drawNumber.get("");
-    }
-      */
+    
+    public DrawQuery(Map<String, Object> data) {
+        this.drawNumber = (Integer) data.get("draw");
+  }
 
     public Integer getDrawNumber() {
       return drawNumber;

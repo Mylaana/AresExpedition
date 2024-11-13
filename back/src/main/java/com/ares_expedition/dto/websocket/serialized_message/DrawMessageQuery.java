@@ -2,7 +2,7 @@ package com.ares_expedition.dto.websocket.serialized_message;
 
 import com.ares_expedition.dto.websocket.PlayerMessageQuery;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
-import com.ares_expedition.model.draw.DrawQuery;
+import com.ares_expedition.model.query.draw.DrawQuery;
 
 public class DrawMessageQuery extends PlayerMessageQuery<DrawQuery> {
     protected DrawQuery content;
