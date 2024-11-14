@@ -5,9 +5,11 @@ import java.util.function.Consumer;
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.controller.game.GameController;
+import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
 import com.ares_expedition.dto.websocket.serialized_message.query.DrawMessageQuery;
 import com.ares_expedition.dto.websocket.serialized_message.query.PlayerMessageQuery;
 import com.ares_expedition.dto.websocket.serialized_message.query.PlayerReadyMessageQuery;
+import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.query.GenericQuery;
 import com.ares_expedition.model.query.draw.DrawQuery;
 import com.ares_expedition.model.query.player.PlayerReadyQuery;
@@ -30,7 +32,7 @@ public class InputRouter {
                     message, DrawQuery.class,
                     DrawMessageQuery.class, this::handleDrawQuery);
                 break;
-            case PLAYER_READY:
+            case READY_QUERY:
                 handleQuery(
                     message, PlayerReadyQuery.class,
                     PlayerReadyMessageQuery.class, this::handlePlayerReadyQuery);
@@ -59,6 +61,8 @@ public class InputRouter {
     }
 
     private void handlePlayerReadyQuery(PlayerReadyMessageQuery query) {
-        gameController.setPlayerReady(query.getGameId(), query.getPlayerId(), query.getContent().getPlayerReady());
+        Integer gameId = query.getGameId();
+        gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getPlayerReady());
+        wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.PLAYER_READY_RESULT, gameController.getGroupPlayerReady(gameId)));
     }
 }

@@ -8,9 +8,9 @@ public class PlayerReadyMessageQuery extends PlayerMessageQuery<PlayerReadyQuery
 
     public PlayerReadyMessageQuery(){};
 
-    public PlayerReadyMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, PlayerReadyQuery content){
+    public PlayerReadyMessageQuery(Integer gameId, Integer playerId, ContentQueryEnum contentType, PlayerReadyQuery content){
         this.gameId = gameId;
-        this.playerId = clientId;
+        this.playerId = playerId;
         this.contentEnum = contentType;
         this.content = content;
     }

@@ -1,46 +1,47 @@
 package com.ares_expedition.controller.game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.controller.websocket.WsControllerOutput;
 import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
-import com.ares_expedition.enums.websocket.ContentResultEnum;
-import com.ares_expedition.model.query.player.GroupPlayerReadyQuery;
 import com.ares_expedition.repository.Game;
 import com.ares_expedition.repository.JsonGameReader;
 
 @Service
 public class GameController {
     private final WsControllerOutput wsOutput;
-    List<Game> gameHolder;
+    private Map<Integer, Game> gameHolder;
 
     GameController(WsControllerOutput wsOutput){
         this.wsOutput = wsOutput;
         this.loadGames();
     }
     private void loadGames(){
-        this.gameHolder = new ArrayList<>();
-        Game newGame = JsonGameReader.getGame(1);
+        this.gameHolder = new HashMap<>();
+        Integer gameId = 1;
+        Game newGame = JsonGameReader.getGame(gameId);
         newGame.shuffleDeck();
-        this.gameHolder.add(newGame);
+        this.gameHolder.put(gameId, newGame);
+    }
+    public Game getGameFromId(Integer gameId){
+        return this.gameHolder.get(gameId);
     }
     public List<Integer> drawCards(Integer gameId, Integer drawNumber){
-        List<Integer> cards = this.gameHolder.get(0).drawCards(drawNumber);
+        List<Integer> cards = getGameFromId(gameId).drawCards(drawNumber);
         if(cards.size() < drawNumber){
-            wsOutput.sendPushToGroup(gameId, new PlayerMessageAnswer("not enough cards in deck"));
+            wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, "not enough cards in deck"));
         }
         return cards;
     }
     public void setPlayerReady(Integer gameId, Integer playerId, Boolean ready){
-        wsOutput.sendPushToGroup(gameId, new PlayerMessageAnswer(ContentResultEnum.PLAYER_READY, "player " + playerId + " ready: " + ready));
+        getGameFromId(gameId).setPlayerReady(playerId, ready);
     }
-    public GroupPlayerReadyQuery getPlayerReady(Integer gameId){
-        GroupPlayerReadyQuery ready = new GroupPlayerReadyQuery();
-
-        //...
-
-        return ready;
+    public Map<Integer, Boolean> getGroupPlayerReady(Integer gameId){
+        return getGameFromId(gameId).getGroupPlayerReady();
     }
 }

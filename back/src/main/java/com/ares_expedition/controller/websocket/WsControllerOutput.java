@@ -17,7 +17,7 @@ public class WsControllerOutput {
         messagingTemplate.convertAndSend(String.format("/topic/player/%d/%d", gameId, playerId), message);
     }
 
-    public void sendPushToGroup(Integer gameId, PlayerMessageAnswer message){
-        messagingTemplate.convertAndSend(String.format("/topic/group/%d", gameId), message);
+    public void sendPushToGroup(PlayerMessageAnswer message){
+        messagingTemplate.convertAndSend(String.format("/topic/group/%d", message.getGameId()), message);
     }
 }

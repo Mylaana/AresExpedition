@@ -2,6 +2,7 @@ package com.ares_expedition.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Collections;
 
 public class Game {
@@ -9,6 +10,7 @@ public class Game {
     private List<Integer> deck;
     private List<Integer> discard;
     private List<Integer> groupPlayerId;
+    private Map<Integer, Boolean> groupPlayerReady;
 
     public Game() {
     }
@@ -52,6 +54,14 @@ public class Game {
         this.groupPlayerId = groupPlayerId;
     }
 
+    public Map<Integer, Boolean> getGroupPlayerReady(){
+        return this.groupPlayerReady;
+    }
+
+    public void setGroupPlayerReady(Map<Integer, Boolean> groupReady){
+        this.groupPlayerReady = groupReady;
+    }
+    
     public List<Integer> drawCards(Integer drawNumber){
         ArrayList<Integer> result = new ArrayList<Integer>();
 
@@ -71,6 +81,7 @@ public class Game {
         addDiscardToDeck();
         
     }
+    
     private void addDiscardToDeck(){
         Collections.shuffle(this.discard);
         this.deck.addAll(this.discard);
@@ -80,6 +91,11 @@ public class Game {
     public void shuffleDeck(){
         Collections.shuffle(this.deck);
     }
+
+    public void setPlayerReady(Integer playerId, Boolean ready){
+        this.groupPlayerReady.replace(playerId, ready);
+    }
+
     @Override
     public String toString() {
         return "Game{gameId=" + gameId + ", deck=" + deck + "}";
