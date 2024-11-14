@@ -3,7 +3,7 @@ package com.ares_expedition.controller.websocket;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
-import com.ares_expedition.dto.websocket.*;
+import com.ares_expedition.dto.websocket.serialized_message.query.PlayerMessageQuery;
 
 @Controller
 public class WsControllerInput {

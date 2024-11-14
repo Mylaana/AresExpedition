@@ -47,7 +47,7 @@ public class Game {
     public List<Integer> getGroupPlayerId(){
         return this.groupPlayerId;
     }
-    
+
     public void setGroupPlayerId(List<Integer> groupPlayerId){
         this.groupPlayerId = groupPlayerId;
     }

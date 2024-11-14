@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.controller.websocket.WsControllerOutput;
-import com.ares_expedition.dto.websocket.PlayerMessageAnswer;
+import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
+import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.query.player.GroupPlayerReadyQuery;
 import com.ares_expedition.repository.Game;
 import com.ares_expedition.repository.JsonGameReader;
@@ -32,8 +33,8 @@ public class GameController {
         }
         return cards;
     }
-    public void setPlayerReady(Integer gameId, Integer playerId){
-
+    public void setPlayerReady(Integer gameId, Integer playerId, Boolean ready){
+        wsOutput.sendPushToGroup(gameId, new PlayerMessageAnswer(ContentResultEnum.PLAYER_READY, "player " + playerId + " ready: " + ready));
     }
     public GroupPlayerReadyQuery getPlayerReady(Integer gameId){
         GroupPlayerReadyQuery ready = new GroupPlayerReadyQuery();

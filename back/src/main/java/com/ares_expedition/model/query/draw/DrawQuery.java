@@ -16,7 +16,7 @@ public class DrawQuery extends GenericQuery{
     
     public DrawQuery(Map<String, Object> data) {
         this.drawNumber = (Integer) data.get("draw");
-  }
+    }
 
     public Integer getDrawNumber() {
       return drawNumber;

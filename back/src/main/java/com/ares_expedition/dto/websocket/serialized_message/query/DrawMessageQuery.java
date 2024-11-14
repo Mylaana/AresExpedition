@@ -1,6 +1,5 @@
-package com.ares_expedition.dto.websocket.serialized_message;
+package com.ares_expedition.dto.websocket.serialized_message.query;
 
-import com.ares_expedition.dto.websocket.PlayerMessageQuery;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 import com.ares_expedition.model.query.draw.DrawQuery;
 
@@ -11,7 +10,7 @@ public class DrawMessageQuery extends PlayerMessageQuery<DrawQuery> {
 
     public DrawMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, DrawQuery content){
         this.gameId = gameId;
-        this.clientId = clientId;
+        this.playerId = clientId;
         this.contentEnum = contentType;
         this.content = content;
     }

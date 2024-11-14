@@ -3,7 +3,7 @@ package com.ares_expedition.controller.websocket;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import com.ares_expedition.dto.websocket.PlayerMessageAnswer;
+import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
 
 @Controller
 public class WsControllerOutput {

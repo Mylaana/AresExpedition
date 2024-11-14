@@ -3,7 +3,7 @@ package com.ares_expedition.services;
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
-import com.ares_expedition.dto.websocket.PlayerMessageQuery;
+import com.ares_expedition.dto.websocket.serialized_message.query.PlayerMessageQuery;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 import com.ares_expedition.model.query.GenericQuery;
 
@@ -19,7 +19,7 @@ public class QueryMessageFactory {
                     Integer.class, Integer.class, ContentQueryEnum.class, contentType);
             return constructor.newInstance(
                     baseMessage.getGameId(),
-                    baseMessage.getClientId(),
+                    baseMessage.getPlayerId(),
                     baseMessage.getContentEnum(),
                     content);
         } catch (Exception e) {

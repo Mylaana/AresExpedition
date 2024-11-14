@@ -1,4 +1,4 @@
-package com.ares_expedition.dto.websocket;
+package com.ares_expedition.dto.websocket.serialized_message.answer;
 
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 

@@ -5,9 +5,9 @@ import java.util.function.Consumer;
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.controller.game.GameController;
-import com.ares_expedition.dto.websocket.PlayerMessageQuery;
-import com.ares_expedition.dto.websocket.serialized_message.DrawMessageQuery;
-import com.ares_expedition.dto.websocket.serialized_message.PlayerReadyMessageQuery;
+import com.ares_expedition.dto.websocket.serialized_message.query.DrawMessageQuery;
+import com.ares_expedition.dto.websocket.serialized_message.query.PlayerMessageQuery;
+import com.ares_expedition.dto.websocket.serialized_message.query.PlayerReadyMessageQuery;
 import com.ares_expedition.model.query.GenericQuery;
 import com.ares_expedition.model.query.draw.DrawQuery;
 import com.ares_expedition.model.query.player.PlayerReadyQuery;
@@ -55,10 +55,10 @@ public class InputRouter {
         if (drawNumber == 0) {
             return;
         }
-        wsOutput.sendPushToPlayer(query.getGameId(), query.getClientId(), this.gameController.drawCards(query.getGameId(), drawNumber));
+        wsOutput.sendPushToPlayer(query.getGameId(), query.getPlayerId(), this.gameController.drawCards(query.getGameId(), drawNumber));
     }
 
     private void handlePlayerReadyQuery(PlayerReadyMessageQuery query) {
-        // Logique pour gérer PlayerReady
+        gameController.setPlayerReady(query.getGameId(), query.getPlayerId(), query.getContent().getPlayerReady());
     }
 }

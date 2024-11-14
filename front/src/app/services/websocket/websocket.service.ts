@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import SockJS from 'sockjs-client';
-import { WebsocketQueryDesigner } from '../designers/websocket-query-designer.service';
+import { WebsocketQueryMessageFactory } from '../designers/websocket-query-factory.service';
 
 export type ListenerCallBack = (message: Task) => void;
 export interface Task {
@@ -37,28 +37,38 @@ export class WebsocketService implements OnDestroy {
     }
 
     public sendDraw(drawNumber: number): void {
-        if (this.connection && this.connection.connected) {
-            let message = WebsocketQueryDesigner.createDrawQuery(drawNumber)
-            this.connection.send('/app/player', {}, JSON.stringify(message));
-        }
+        this.sendMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber))
     }
 
+    public sendReady(ready: boolean): void {
+        this.sendMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
+    }
+
+    private sendMessage(message: any){
+        if (this.connection && this.connection.connected) {
+            this.connection.send('/app/player', {}, JSON.stringify(message));
+            console.log("sending", message)
+        }
+    }
+    
     public listen(fun: ListenerCallBack): void {
         if (this.connection && this.connection.connected) {
-            this.subscription = this.connection.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
-                fun(JSON.parse(message.body));
-            });
             this.subscriptionGroup = this.connection.subscribe(`/topic/group/${gameId}`, message => {
                 fun(JSON.parse(message.body));
             });
+            this.subscription = this.connection.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
+                fun(JSON.parse(message.body));
+            });
+
         } else {
             this.connection?.connect({}, () => {
-                this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
-                    fun(JSON.parse(message.body));
-                });
                 this.subscriptionGroup = this.connection!.subscribe(`/topic/group/${gameId}`, message => {
                     fun(JSON.parse(message.body));
                 });
+                this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
+                    fun(JSON.parse(message.body));
+                });
+
             });
         }
     }
