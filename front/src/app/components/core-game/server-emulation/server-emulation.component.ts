@@ -6,6 +6,7 @@ import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
 import { WebsocketService } from '../../../services/websocket/websocket.service';
+import { MessageContentEnum } from '../../../enum/websocket.enum';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -14,7 +15,6 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
   standalone: true,
   imports: [
     CommonModule,
-    PlayerReadyPannelComponent
   ],
   templateUrl: './server-emulation.component.html',
   styleUrl: './server-emulation.component.scss'
@@ -67,10 +67,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.authorizedBotPhaseSelection = ['development']
 
     this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
-
-    this.websocket.listen(task => {
-      console.log(task)
-    });
   }
 
   ngAfterViewInit(): void {
@@ -168,5 +164,14 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   }
   sendNotReady(): void {
     this.websocket.sendReady(false)
+  }
+  sendBotsReady(): void {
+    for(let index of this.gameStateService.playerCount.getValue()){
+      if(index===this.gameStateService.clientPlayerId){continue}
+      this.botIdReady(index)
+    }
+  }
+  botIdReady(id: number){
+    this.websocket.sendDebugMessage({gameId:1,playerId:id,contentEnum:MessageContentEnum.ready,content:{ready:true}})
   }
 }

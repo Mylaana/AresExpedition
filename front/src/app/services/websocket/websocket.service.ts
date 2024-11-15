@@ -3,18 +3,12 @@ import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import SockJS from 'sockjs-client';
 import { WebsocketQueryMessageFactory } from '../designers/websocket-query-factory.service';
+import { MessageContentEnum, SubscriptionEnum } from '../../enum/websocket.enum';
+import { WsInputMessage } from '../../interfaces/websocket.interface';
 
-export type ListenerCallBack = (message: Task) => void;
+type ListenerCallBack = (message: Task) => void;
 export interface Task {
     name: string;
-}
-export interface DrawQuery {
-    drawNumber: number
-}
-
-export enum Message {
-    drawQuery = 'DRAW_QUERY',
-    other = 'OTHER'
 }
 
 const gameId = 1
@@ -50,27 +44,46 @@ export class WebsocketService implements OnDestroy {
             console.log("sending", message)
         }
     }
+
+    public sendDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentEnum, content:any}){
+        let message = {
+            gameId: param.gameId?? gameId,
+            playerId: param.playerId?? clientId,
+            contentEnum: param.contentEnum,
+            content: param.content
+        }
+        console.log('debug message: ',message)
+        this.sendMessage(message)
+    }
     
     public listen(fun: ListenerCallBack): void {
         if (this.connection && this.connection.connected) {
             this.subscriptionGroup = this.connection.subscribe(`/topic/group/${gameId}`, message => {
-                fun(JSON.parse(message.body));
+                fun(this.addSubscriptionType(message.body, SubscriptionEnum.group));
             });
             this.subscription = this.connection.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
-                fun(JSON.parse(message.body));
+                fun(this.addSubscriptionType(message.body, SubscriptionEnum.player));
             });
 
         } else {
             this.connection?.connect({}, () => {
                 this.subscriptionGroup = this.connection!.subscribe(`/topic/group/${gameId}`, message => {
-                    fun(JSON.parse(message.body));
+                    fun(this.addSubscriptionType(message.body, SubscriptionEnum.group));
                 });
                 this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
-                    fun(JSON.parse(message.body));
+                    fun(this.addSubscriptionType(message.body, SubscriptionEnum.player));
                 });
 
             });
         }
+    }
+
+    private addSubscriptionType(messageBody: any, subscription: SubscriptionEnum): any {
+        let result: WsInputMessage = {
+            subscription:subscription,
+            message: JSON.parse(messageBody)
+        }
+        return result
     }
     ngOnDestroy(): void {
         if (this.subscription) {
