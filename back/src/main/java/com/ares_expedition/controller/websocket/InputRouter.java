@@ -57,7 +57,7 @@ public class InputRouter {
         if (drawNumber == 0) {
             return;
         }
-        wsOutput.sendPushToPlayer(query.getGameId(), query.getPlayerId(), this.gameController.drawCards(query.getGameId(), drawNumber));
+        wsOutput.sendPushToPlayer(new PlayerMessageAnswer(query.getGameId(), ContentResultEnum.DRAW_RESULT, this.gameController.drawCards(query.getGameId(), drawNumber)), query.getPlayerId());
     }
 
     private void handlePlayerReadyQuery(PlayerReadyMessageQuery query) {

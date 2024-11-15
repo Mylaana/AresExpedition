@@ -13,8 +13,8 @@ public class WsControllerOutput {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public void sendPushToPlayer(Integer gameId, Integer playerId, Object message){
-        messagingTemplate.convertAndSend(String.format("/topic/player/%d/%d", gameId, playerId), message);
+    public void sendPushToPlayer(PlayerMessageAnswer message, Integer playerId){
+        messagingTemplate.convertAndSend(String.format("/topic/player/%d/%d", message.getGameId(), playerId), message);
     }
 
     public void sendPushToGroup(PlayerMessageAnswer message){
