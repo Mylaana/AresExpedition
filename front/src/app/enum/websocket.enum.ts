@@ -7,6 +7,7 @@ export enum PlayerMessageContentResultEnum {
     draw = 'DRAW_RESULT',
 }
 export enum GroupMessageContentResultEnum {
+    ready = 'READY_RESULT',
     debug = 'DEBUG'
 }
 export enum SubscriptionEnum {

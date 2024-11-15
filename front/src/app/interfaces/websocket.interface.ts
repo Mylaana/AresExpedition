@@ -31,3 +31,7 @@ export interface WsDrawResult {
     cardIdList: number[]
     eventId: number
 }
+export interface WsGroupReady {
+    playerId: number
+    ready: boolean
+}

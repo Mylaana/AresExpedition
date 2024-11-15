@@ -13,7 +13,7 @@ import { ProjectCardPlayedEffectService } from "../cards/project-card-played-eff
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { EventDesigner } from "../designers/event-designer.service";
 import { GlobalInfo } from "../global/global-info.service";
-import { WsDrawResult } from "../../interfaces/websocket.interface";
+import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
 
 interface SelectedPhase {
     "development": boolean,
@@ -35,7 +35,7 @@ type EventPileAddRule = 'first' | 'second' | 'last'
 
 
 const phaseCount: number = 5;
-const handSizeStart: number = 1;
+const handSizeStart: number = 5;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
@@ -240,7 +240,7 @@ export class GameState{
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            setTimeout(task => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 1000)
+            setTimeout(task => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
             
         }
 
@@ -285,7 +285,7 @@ export class GameState{
     updatePhase(newPhase: NonSelectablePhase): void {
         if(newPhase === this.phase.getValue())
             return
-        this.setPlayerReady(false)
+        this.setClientPlayerReady(false)
         this.phase.next(newPhase)
     };
 
@@ -296,59 +296,37 @@ export class GameState{
 
      * if no id specified, will set all players to not {playerReady}
      * */
-    setPlayerReady(playerReady: boolean, playerId?: number){
-        let ready = this.groupPlayerReady.getValue()
-        let loopStart: number;
-        let loopFinish: number;
-
-        if(playerId != undefined){
-            loopStart = playerId
-            loopFinish = playerId
-        } else {
-            loopStart = 0
-            loopFinish = this.playerCount.getValue().length - 1
-        }
-        for(let i=loopStart; i<=loopFinish; i++){
-            ready[i].isReady = playerReady
-        }
-        this.groupPlayerReady.next(ready)
-
-        if(this.getPlayerReady()===true){
-            this.GoToNextPhaseIfPlayerReady()
-            return
-        }
+    setClientPlayerReady(ready: boolean){
+        this.setPlayerReady(this.clientPlayerId, ready)
     };
+    private setPlayerReady(playerId: number, ready: boolean){
+        let groupReady = this.groupPlayerReady.getValue()
 
-    /**
-     * @arg playerId
-     * @returns @type {boolean} if the player is ready or not
-
-     * if no id specified, will return if all players are ready or not
-     * */
-    getPlayerReady(playerId?: number): boolean {
-        let ready = this.groupPlayerReady.getValue()
-        let loopStart: number;
-        let loopFinish: number;
-
-        if(playerId != undefined){
-            loopStart = playerId
-            loopFinish = playerId
-        } else {
-            loopStart = 0
-            loopFinish = this.playerCount.getValue().length - 1
-        }
-        for(let i=loopStart; i<=loopFinish; i++){
-            if(ready[i].isReady === false){
-                return false
+        for(let player of groupReady){
+            if(player.id===playerId){
+                player.isReady = ready
+                break
             }
         }
-        return true
-    };
+        this.groupPlayerReady.next(groupReady)
+    }
+
+    getPlayerReady(playerId?: number): boolean {
+        let groupReady = this.groupPlayerReady.getValue()
+
+        for(let player of groupReady){
+            if(player.id===playerId){
+                return player.isReady
+            }
+            
+        }
+        return false
+    }
 
     GoToNextPhaseIfPlayerReady(){
         let newPhase = this.goToNextPhase(this.phase.getValue())
         this.updatePhase(newPhase)
-    };
+    }
 
     /**
      * @param currentPhase as NonSelectablePhase
@@ -377,7 +355,7 @@ export class GameState{
 
     updateGroupPlayerState(newState: PlayerStateModel[]): void{
         this.groupPlayerState.next(newState)
-    };
+    }
 
     getPlayerStateFromId(playerId: number): PlayerStateModel{
         return this.groupPlayerState.getValue()[playerId]
@@ -636,24 +614,6 @@ export class GameState{
 		playerState.phaseCards.phaseGroups[phaseIndex] = phaseCardGroup
 		this.updatePlayerState(playerId, playerState)
 	}
-    /*
-	addPhaseCardUpgradeNumber(playerId:number, upgradeNumber: number):void{
-		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.phaseCardUpgradeCount =+ upgradeNumber
-		this.updatePlayerState(playerId, playerState)
-	}
-    /*
-	removePhaseCardUpgradeNumber(playerId:number, upgradeNumber: number = 1, removeAll: boolean = false):void{
-		let playerState = this.getPlayerStateFromId(playerId)
-
-		if(removeAll===true){
-			playerState.phaseCardUpgradeCount = 0
-		} else {
-			playerState.phaseCardUpgradeCount -= upgradeNumber
-		}
-		this.updatePlayerState(playerId, playerState)
-	}
-        */
 	sellCardsFromClientHand(quantity: number){
 		let playerState = this.getClientPlayerState()
 		playerState.ressource[0].valueStock += quantity * (cardSellCost + playerState.sellCardValueMod)
@@ -778,6 +738,11 @@ export class GameState{
 
         if(eventFound===false){
             console.log('event not found', wsDrawResult, drawQueue, this.eventQueue.getValue())
+        }
+    }
+    handleWsGroupReady(wsGroupReady: WsGroupReady[]): void {
+        for(let wsReady of wsGroupReady){
+            this.setPlayerReady(wsReady.playerId, wsReady.ready)
         }
     }
 }

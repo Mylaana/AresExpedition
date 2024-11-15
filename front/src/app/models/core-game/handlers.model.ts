@@ -225,7 +225,7 @@ export class EventHandler {
 
 		switch(event.subType){
 			case('endOfPhase'):{
-				this.gameStateService.setPlayerReady(true, this.clientPlayerId)
+				this.gameStateService.setClientPlayerReady(true)
 				break
 			}
 			case('buildCard'):{

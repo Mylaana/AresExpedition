@@ -76,22 +76,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     if(this.gameStateService.loading.getValue()===true){return}
     this.currentPhase = phase
 
-    this.botReady()
-  }
-
-  botReady(){
-    for(let index of this.gameStateService.playerCount.getValue()){
-      if(index===this.gameStateService.clientPlayerId){continue}
-      if(this.currentPhase==="planification"){
-        let phaseList = this.authorizedBotPhaseSelection
-        let randomPhase = phaseList[Math.floor(Math.random() * this.authorizedBotPhaseSelection.length)]
-        this.gameStateService.playerSelectPhase(index, randomPhase as keyof SelectablePhase)
-      }
-
-      //random timeout before bot becomes rdy
-      let randomInt = Math.floor(Math.random() * 3) * 1000
-      setTimeout(() => {this.gameStateService.setPlayerReady(true, index)}, randomInt)
-    }
   }
 
   updatePhase(newPhase:Phase): void {
@@ -101,7 +85,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     let phaseList = this.phaseList
     let randomPhase = phaseList[Math.floor(Math.random() * phaseList.length)]
     this.gameStateService.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
-    this.gameStateService.setPlayerReady(true, 1)
+    //this.gameStateService.setClientPlayerReady(true, 1)
   }
 
   printPlayersState(): void {
@@ -154,7 +138,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   }
   loadingFinished(loading: boolean):void{
     if(loading===true){return}
-    this.botReady()
   }
   sendDrawNumber(): void {
     this.websocket.sendDraw(2, -1)
