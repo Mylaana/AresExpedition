@@ -3,7 +3,7 @@ import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import SockJS from 'sockjs-client';
 import { WebsocketQueryMessageFactory } from '../designers/websocket-query-factory.service';
-import { MessageContentEnum, SubscriptionEnum } from '../../enum/websocket.enum';
+import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
 import { WsInputMessage } from '../../interfaces/websocket.interface';
 
 type ListenerCallBack = (message: Task) => void;
@@ -45,7 +45,7 @@ export class WebsocketService implements OnDestroy {
         }
     }
 
-    public sendDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentEnum, content:any}){
+    public sendDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentQueryEnum, content:any}){
         let message = {
             gameId: param.gameId?? gameId,
             playerId: param.playerId?? clientId,

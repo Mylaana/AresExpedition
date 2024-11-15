@@ -1,12 +1,11 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
-import { PlayerReadyPannelComponent } from '../../player-info/player-ready-pannel/player-ready-pannel.component';
 import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
 import { WebsocketService } from '../../../services/websocket/websocket.service';
-import { MessageContentEnum } from '../../../enum/websocket.enum';
+import { MessageContentQueryEnum } from '../../../enum/websocket.enum';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -172,6 +171,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     }
   }
   botIdReady(id: number){
-    this.websocket.sendDebugMessage({gameId:1,playerId:id,contentEnum:MessageContentEnum.ready,content:{ready:true}})
+    this.websocket.sendDebugMessage({gameId:1,playerId:id,contentEnum:MessageContentQueryEnum.ready,content:{ready:true}})
   }
 }
