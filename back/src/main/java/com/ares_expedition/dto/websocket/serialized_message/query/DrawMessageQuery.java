@@ -26,4 +26,8 @@ public class DrawMessageQuery extends PlayerMessageQuery<DrawQuery> {
     public Integer getDrawNumber(){
         return this.content.getDrawNumber();
     }
+
+    public Integer getEventId(){
+        return content.getEventId();
+    }
 }

@@ -59,7 +59,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
       event => this.currentEventQueue = event
     )
 
-        //return
+    return
     //force draw card list for debug purpose
     let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141]
     //force phase selection pool
@@ -115,6 +115,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
    * @returns
    */
   handleDrawQueueRequest(drawQueue: DrawEvent[]):void{
+    return
     this.currentDrawQueue = drawQueue
 
     if(drawQueue.length===0){
@@ -133,7 +134,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     currentDrawEvent.drawResultCardList = this.drawCardFromDeck(currentDrawEvent.drawCardNumber)
     this.gameStateService.cleanAndNextDrawQueue()
   }
-
+  
   drawCardFromDeck(drawNumber?: number): number[]{
     var resultList: number[] = [];
 
@@ -156,7 +157,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.botReady()
   }
   sendDrawNumber(): void {
-    this.websocket.sendDraw(2)
+    this.websocket.sendDraw(2, -1)
   }
   sendReady(): void {
     this.websocket.sendReady(true)
@@ -172,5 +173,11 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   }
   botIdReady(id: number){
     this.websocket.sendDebugMessage({gameId:1,playerId:id,contentEnum:MessageContentQueryEnum.ready,content:{ready:true}})
+  }
+  printEventQueue(): void {
+    console.log(this.gameStateService.eventQueue.getValue())
+  }
+  printDrawQueue(): void {
+    console.log(this.gameStateService.drawQueue.getValue())
   }
 }

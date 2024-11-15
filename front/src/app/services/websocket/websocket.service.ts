@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import SockJS from 'sockjs-client';
-import { WebsocketQueryMessageFactory } from '../designers/websocket-query-factory.service';
+import { WebsocketQueryMessageFactory } from '../designers/websocket-message-factory.service';
 import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
 import { WsInputMessage } from '../../interfaces/websocket.interface';
 import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID } from '../../global/global-const';
@@ -27,8 +27,8 @@ export class WebsocketService implements OnDestroy {
         this.connection.reconnectDelay = this.reconnectDelay
     }
 
-    public sendDraw(drawNumber: number): void {
-        this.sendMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber))
+    public sendDraw(drawNumber: number, eventId: number): void {
+        this.sendMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
     }
 
     public sendReady(ready: boolean): void {

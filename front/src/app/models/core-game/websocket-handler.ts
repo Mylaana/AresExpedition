@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsInputMessage } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsInputMessage } from "../../interfaces/websocket.interface";
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../../enum/websocket.enum";
-import { WebsocketResultMessageFactory } from "../../services/designers/websocket-query-factory.service";
+import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
+import { GameState } from "../../services/core-game/game-state.service";
 
 @Injectable()
 export class WebsocketHandler {
+    constructor(private gameStateService: GameState){}
+
     handleMessage(message: WsInputMessage){
         switch(message.subscription){
             case(SubscriptionEnum.player):{
@@ -22,6 +25,7 @@ export class WebsocketHandler {
 
         switch(message.contentEnum){
             case(PlayerMessageContentResultEnum.draw):{
+                this.handlePlayerMessageDrawResult(message.content)
                 break
             }
         }
@@ -33,5 +37,8 @@ export class WebsocketHandler {
             }
         }
         console.log('group', message)
+    }
+    private handlePlayerMessageDrawResult(wsDrawResult: WsDrawResult): void {
+        this.gameStateService.handleWsDrawResult(wsDrawResult)
     }
 }

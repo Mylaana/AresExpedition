@@ -12,6 +12,7 @@ import com.ares_expedition.dto.websocket.serialized_message.query.PlayerReadyMes
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.query.GenericQuery;
 import com.ares_expedition.model.query.draw.DrawQuery;
+import com.ares_expedition.model.query.draw.DrawResult;
 import com.ares_expedition.model.query.player.PlayerReadyQuery;
 import com.ares_expedition.services.QueryMessageFactory;
 
@@ -57,7 +58,14 @@ public class InputRouter {
         if (drawNumber == 0) {
             return;
         }
-        wsOutput.sendPushToPlayer(new PlayerMessageAnswer(query.getGameId(), ContentResultEnum.DRAW_RESULT, this.gameController.drawCards(query.getGameId(), drawNumber)), query.getPlayerId());
+        wsOutput.sendPushToPlayer(
+            new PlayerMessageAnswer(
+                    query.getGameId(),
+                    ContentResultEnum.DRAW_RESULT,
+                    new DrawResult(this.gameController.drawCards(query.getGameId(), drawNumber), query.getEventId()) 
+                ),
+            query.getPlayerId()
+        );
     }
 
     private void handlePlayerReadyQuery(PlayerReadyMessageQuery query) {

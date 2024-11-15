@@ -287,6 +287,7 @@ export class DrawEvent {
     drawResultCardList: number[] = []
     finalized: boolean = false
     served: boolean = false
+    queried: boolean = false
     waiterId!: number
 }
 

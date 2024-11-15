@@ -1,7 +1,7 @@
 {
     "gameId" : 1,
-    "deck": [5, 7, 3],
-    "discard": [0, 1, 2],
+    "deck": [4, 9, 20, 25, 29, 36, 37, 42],
+    "discard": [],
     "groupPlayerId": [0,1,2,3],
     "groupPlayerReady": {
         "0": false,

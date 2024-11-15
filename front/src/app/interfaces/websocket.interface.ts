@@ -18,3 +18,16 @@ export interface PlayerMessageResult extends MessageResult {
 export interface GroupMessageResult extends MessageResult {
     contentEnum: GroupMessageContentResultEnum,
 }
+
+export interface WsDrawQuery {
+    draw: number
+    eventId: number
+}
+export interface WsReadyQuery {
+    ready: boolean
+}
+
+export interface WsDrawResult {
+    cardIdList: number[]
+    eventId: number
+}

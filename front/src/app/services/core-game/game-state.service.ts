@@ -13,6 +13,7 @@ import { ProjectCardPlayedEffectService } from "../cards/project-card-played-eff
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { EventDesigner } from "../designers/event-designer.service";
 import { GlobalInfo } from "../global/global-info.service";
+import { WsDrawResult } from "../../interfaces/websocket.interface";
 
 interface SelectedPhase {
     "development": boolean,
@@ -34,7 +35,7 @@ type EventPileAddRule = 'first' | 'second' | 'last'
 
 
 const phaseCount: number = 5;
-const handSizeStart: number = 0;
+const handSizeStart: number = 1;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
@@ -239,7 +240,8 @@ export class GameState{
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first')
+            setTimeout(task => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 1000)
+            
         }
 
         newPlayer.terraformingRating = 5;
@@ -761,5 +763,21 @@ export class GameState{
     }
     getClientPlayerResearchMods(): ScanKeep {
         return this.getClientPlayerState().research
+    }
+    handleWsDrawResult(wsDrawResult: WsDrawResult): void {
+        let eventFound: boolean = false
+        let drawQueue = this.drawQueue.getValue()
+        for(let event of drawQueue){
+            if(event.waiterId!=wsDrawResult.eventId){continue}
+            event.served = true
+            event.drawResultCardList = wsDrawResult.cardIdList
+            eventFound = true
+            this.cleanAndNextDrawQueue()
+            break
+        }
+
+        if(eventFound===false){
+            console.log('event not found', wsDrawResult, drawQueue, this.eventQueue.getValue())
+        }
     }
 }

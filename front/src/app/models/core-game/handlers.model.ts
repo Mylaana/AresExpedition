@@ -12,6 +12,7 @@ import { EventCardBuilderButton } from "./button.model";
 import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase } from "./event.model";
 import { DrawEventDesigner } from "../../services/designers/draw-event-designer.service";
 import { Utils } from "../../utils/utils";
+import { WebsocketService } from "../../services/websocket/websocket.service";
 
 @Injectable()
 export class EventHandler {
@@ -30,7 +31,7 @@ export class EventHandler {
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
 		if(eventQueue.length===0){return undefined}
 		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && Utils.jsonCopy(eventQueue[0].id)===Utils.jsonCopy(this.currentEventId)){
-			return this.currentEvent
+				return this.currentEvent
 		}
 		if(eventQueue[0].finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()
@@ -383,16 +384,24 @@ export class EventHandler {
 export class DrawEventHandler {
 	constructor(
 		private gameStateService:GameState,
-		private projectCardInfoService: ProjectCardInfoService
+		private projectCardInfoService: ProjectCardInfoService,
+		private websocketService: WebsocketService
 	){}
 	handleQueueUpdate(drawQueue: DrawEvent[]): void {
-		if(drawQueue.length===0 || drawQueue[0].served===false || drawQueue[0].finalized===true){
-			return
+		if(drawQueue.length===0){return}
+		if(drawQueue[0].finalized===true){return}
+		if(drawQueue[0].queried===false){
+			this.sendWsDrawQuery(drawQueue[0])
 		}
+		if(drawQueue[0].served===false){return}
 		let event = drawQueue[0]
 		this.resolveDrawEvent(event)
 		event.finalized = true
 		this.gameStateService.cleanAndNextDrawQueue()
+	}
+	private sendWsDrawQuery(event: DrawEvent){
+		event.queried = true
+		this.websocketService.sendDraw(event.drawCardNumber, event.waiterId)
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
@@ -439,7 +448,7 @@ export class DrawEventHandler {
 			}
 		}
 		if(resultEvent===undefined){return}
-		this.gameStateService.addEventQueue(resultEvent,'second')
+		this.gameStateService.addEventQueue(resultEvent,'first')
 	}
 }
 

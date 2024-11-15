@@ -1,18 +1,12 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, WsReadyQuery } from "../../interfaces/websocket.interface";
 
 interface PlayerMessage {
     gameId: number,
     playerId: number
     contentEnum: MessageContentQueryEnum,
     content: any
-}
-interface DrawQuery {
-    draw: number
-}
-interface ReadyQuery {
-    ready: boolean
 }
 
 const clientId = 0
@@ -32,12 +26,12 @@ export class WebsocketQueryMessageFactory{
 
         return message
     }
-    public static createDrawQuery(drawNumber: number): PlayerMessage {
-        let query: DrawQuery = {draw:drawNumber}
+    public static createDrawQuery(drawNumber: number, eventId: number): PlayerMessage {
+        let query: WsDrawQuery = {draw:drawNumber, eventId: eventId}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
     public static createReadyQuery(ready: boolean): PlayerMessage {
-        let query: ReadyQuery = {ready: ready}
+        let query: WsReadyQuery = {ready: ready}
         return this.generatePlayerMessage(MessageContentQueryEnum.ready, query)
     }
 }
