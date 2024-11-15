@@ -5,15 +5,12 @@ import SockJS from 'sockjs-client';
 import { WebsocketQueryMessageFactory } from '../designers/websocket-query-factory.service';
 import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
 import { WsInputMessage } from '../../interfaces/websocket.interface';
+import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID } from '../../global/global-const';
 
 type ListenerCallBack = (message: Task) => void;
 export interface Task {
     name: string;
 }
-
-const gameId = 1
-const clientId = 0
-
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +44,8 @@ export class WebsocketService implements OnDestroy {
 
     public sendDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentQueryEnum, content:any}){
         let message = {
-            gameId: param.gameId?? gameId,
-            playerId: param.playerId?? clientId,
+            gameId: param.gameId?? GLOBAL_GAME_ID,
+            playerId: param.playerId?? GLOBAL_CLIENT_ID,
             contentEnum: param.contentEnum,
             content: param.content
         }
@@ -58,19 +55,19 @@ export class WebsocketService implements OnDestroy {
     
     public listen(fun: ListenerCallBack): void {
         if (this.connection && this.connection.connected) {
-            this.subscriptionGroup = this.connection.subscribe(`/topic/group/${gameId}`, message => {
+            this.subscriptionGroup = this.connection.subscribe(`/topic/group/${GLOBAL_GAME_ID}`, message => {
                 fun(this.addSubscriptionType(message.body, SubscriptionEnum.group));
             });
-            this.subscription = this.connection.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
+            this.subscription = this.connection.subscribe(`/topic/player/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`, message => {
                 fun(this.addSubscriptionType(message.body, SubscriptionEnum.player));
             });
 
         } else {
             this.connection?.connect({}, () => {
-                this.subscriptionGroup = this.connection!.subscribe(`/topic/group/${gameId}`, message => {
+                this.subscriptionGroup = this.connection!.subscribe(`/topic/group/${GLOBAL_GAME_ID}`, message => {
                     fun(this.addSubscriptionType(message.body, SubscriptionEnum.group));
                 });
-                this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => {
+                this.subscription = this.connection!.subscribe(`/topic/player/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`, message => {
                     fun(this.addSubscriptionType(message.body, SubscriptionEnum.player));
                 });
 

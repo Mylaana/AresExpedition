@@ -3,10 +3,12 @@ export enum MessageContentQueryEnum {
     ready = 'READY_QUERY',
     other = 'OTHER'
 }
-export enum MessageContentResultEnum {
+export enum PlayerMessageContentResultEnum {
     draw = 'DRAW_RESULT',
 }
-
+export enum GroupMessageContentResultEnum {
+    debug = 'DEBUG'
+}
 export enum SubscriptionEnum {
     player = 'PLAYER',
     group = 'GROUP'

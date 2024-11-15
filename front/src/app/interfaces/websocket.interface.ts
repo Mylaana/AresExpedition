@@ -1,9 +1,5 @@
-import { MessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
+import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
 
-/*
-export interface DrawQuery {
-    drawNumber: number
-}*/
 export interface WsInputMessage {
     subscription: SubscriptionEnum,
     message: any
@@ -11,11 +7,14 @@ export interface WsInputMessage {
 
 export interface MessageResult {
     gameId: number,
-    contentEnum: MessageContentResultEnum,
+    contentEnum: any,
     content: any
 }
 
 export interface PlayerMessageResult extends MessageResult {
     playerId: number
+    contentEnum: PlayerMessageContentResultEnum,
 }
-export interface GroupMessageResult extends MessageResult {}
+export interface GroupMessageResult extends MessageResult {
+    contentEnum: GroupMessageContentResultEnum,
+}

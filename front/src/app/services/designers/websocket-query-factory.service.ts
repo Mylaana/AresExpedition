@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { MessageContentQueryEnum } from "../../enum/websocket.enum";
+import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { GroupMessageResult, MessageResult, PlayerMessageResult } from "../../interfaces/websocket.interface";
 
 interface PlayerMessage {
@@ -55,7 +55,7 @@ export class WebsocketResultMessageFactory{
         let result : PlayerMessageResult = {
             gameId: messageResult.gameId,
             playerId: message['playerId'],
-            contentEnum: messageResult.contentEnum,
+            contentEnum: messageResult.contentEnum as PlayerMessageContentResultEnum,
             content: messageResult.content
         }
         return result
