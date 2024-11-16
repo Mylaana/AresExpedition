@@ -1,7 +1,7 @@
 export enum MessageContentQueryEnum {
     drawQuery = 'DRAW_QUERY',
     ready = 'READY_QUERY',
-    other = 'OTHER'
+    gameState = 'GAME_STATE'
 }
 export enum PlayerMessageContentResultEnum {
     draw = 'DRAW_RESULT',

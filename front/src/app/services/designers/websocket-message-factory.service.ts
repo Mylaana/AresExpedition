@@ -16,7 +16,7 @@ const gameId = 1
     providedIn: 'root'
 })
 export class WebsocketQueryMessageFactory{
-    private static generatePlayerMessage(contentEnum: MessageContentQueryEnum, content: any): PlayerMessage {
+    private static generatePlayerMessage(contentEnum: MessageContentQueryEnum, content?: any): PlayerMessage {
         let message: PlayerMessage = {
             gameId: gameId,
             playerId: clientId,
@@ -33,6 +33,9 @@ export class WebsocketQueryMessageFactory{
     public static createReadyQuery(ready: boolean): PlayerMessage {
         let query: WsReadyQuery = {ready: ready}
         return this.generatePlayerMessage(MessageContentQueryEnum.ready, query)
+    }
+    public static createGameStateQuery(): PlayerMessage {
+        return this.generatePlayerMessage(MessageContentQueryEnum.gameState)
     }
 }
 export class WebsocketResultMessageFactory{

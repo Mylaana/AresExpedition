@@ -19,19 +19,21 @@ export interface GroupMessageResult extends MessageResult {
     contentEnum: GroupMessageContentResultEnum,
 }
 
-export interface WsDrawQuery {
+export interface WsQuery {}
+export interface WsDrawQuery extends WsQuery {
     draw: number
     eventId: number
 }
-export interface WsReadyQuery {
+export interface WsReadyQuery extends WsQuery {
     ready: boolean
 }
 
-export interface WsDrawResult {
-    cardIdList: number[]
-    eventId: number
-}
-export interface WsGroupReady {
+export interface WsResult {}
+export interface WsGroupReady extends WsResult {
     playerId: number
     ready: boolean
+}
+export interface WsDrawResult extends WsResult {
+    cardIdList: number[]
+    eventId: number
 }

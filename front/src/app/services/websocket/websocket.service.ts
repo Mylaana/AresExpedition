@@ -26,32 +26,6 @@ export class WebsocketService implements OnDestroy {
         this.connection.connect({}, () => {});
         this.connection.reconnectDelay = this.reconnectDelay
     }
-
-    public sendDraw(drawNumber: number, eventId: number): void {
-        this.sendMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
-    }
-
-    public sendReady(ready: boolean): void {
-        this.sendMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
-    }
-
-    private sendMessage(message: any){
-        if (this.connection && this.connection.connected) {
-            this.connection.send('/app/player', {}, JSON.stringify(message));
-            console.log("sending", message)
-        }
-    }
-
-    public sendDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentQueryEnum, content:any}){
-        let message = {
-            gameId: param.gameId?? GLOBAL_GAME_ID,
-            playerId: param.playerId?? GLOBAL_CLIENT_ID,
-            contentEnum: param.contentEnum,
-            content: param.content
-        }
-        console.log('debug message: ',message)
-        this.sendMessage(message)
-    }
     
     public listen(fun: ListenerCallBack): void {
         if (this.connection && this.connection.connected) {
@@ -71,6 +45,7 @@ export class WebsocketService implements OnDestroy {
                     fun(this.addSubscriptionType(message.body, SubscriptionEnum.player));
                 });
 
+                this.sendGameStateQuery()
             });
         }
     }
@@ -82,6 +57,37 @@ export class WebsocketService implements OnDestroy {
         }
         return result
     }
+
+    public sendDraw(drawNumber: number, eventId: number): void {
+        this.sendMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
+    }
+
+    public sendReady(ready: boolean): void {
+        this.sendMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
+    }
+
+    public sendGameStateQuery(): void {
+        this.sendMessage(WebsocketQueryMessageFactory.createGameStateQuery())
+    }
+
+    private sendMessage(message: any){
+        if (this.connection && this.connection.connected) {
+            this.connection.send('/app/player', {}, JSON.stringify(message));
+            console.log("sending", message)
+        }
+    }
+
+    public sendDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentQueryEnum, content:any}){
+        let message = {
+            gameId: param.gameId?? GLOBAL_GAME_ID,
+            playerId: param.playerId?? GLOBAL_CLIENT_ID,
+            contentEnum: param.contentEnum,
+            content: param.content
+        }
+        console.log('debug message: ',message)
+        this.sendMessage(message)
+    }
+
     ngOnDestroy(): void {
         if (this.subscription) {
             this.subscription.unsubscribe();
