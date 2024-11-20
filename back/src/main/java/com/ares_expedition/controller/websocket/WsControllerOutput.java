@@ -3,7 +3,7 @@ package com.ares_expedition.controller.websocket;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import com.ares_expedition.dto.websocket.PlayerMessageAnswer;
+import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
 
 @Controller
 public class WsControllerOutput {
@@ -13,11 +13,11 @@ public class WsControllerOutput {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public void sendPushToPlayer(Integer gameId, Integer playerId, Object message){
-        messagingTemplate.convertAndSend(String.format("/topic/player/%d/%d", gameId, playerId), message);
+    public void sendPushToPlayer(PlayerMessageAnswer message, Integer playerId){
+        messagingTemplate.convertAndSend(String.format("/topic/player/%d/%d", message.getGameId(), playerId), message);
     }
 
-    public void sendPushToGroup(Integer gameId, PlayerMessageAnswer message){
-        messagingTemplate.convertAndSend(String.format("/topic/group/%d", gameId), message);
+    public void sendPushToGroup(PlayerMessageAnswer message){
+        messagingTemplate.convertAndSend(String.format("/topic/group/%d", message.getGameId()), message);
     }
 }

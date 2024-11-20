@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
-import { PlayerReadyPannelComponent } from '../../player-info/player-ready-pannel/player-ready-pannel.component';
 import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
-import { Message, WebsocketService } from '../../../services/websocket/websocket.service';
+import { WebsocketService } from '../../../services/websocket/websocket.service';
+import { MessageContentQueryEnum } from '../../../enum/websocket.enum';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -14,7 +14,6 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
   standalone: true,
   imports: [
     CommonModule,
-    PlayerReadyPannelComponent
   ],
   templateUrl: './server-emulation.component.html',
   styleUrl: './server-emulation.component.scss'
@@ -56,21 +55,17 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     this.gameStateService.currentLoadingState.subscribe(
       loading => this.loadingFinished(loading)
     )
-	  this.gameStateService.currentEventQueue.subscribe( 
-		  event => this.currentEventQueue = event
-	  )
+    this.gameStateService.currentEventQueue.subscribe( 
+      event => this.currentEventQueue = event
+    )
 
-        //return
+    return
     //force draw card list for debug purpose
-    let cardDrawList: number[] = [263, 36, 222,  81, 123, 204, 141]
+    let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141]
     //force phase selection pool
     this.authorizedBotPhaseSelection = ['development']
 
     this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
-
-    this.websocket.listen(task => {
-      console.log(task)
-    });
   }
 
   ngAfterViewInit(): void {
@@ -81,22 +76,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     if(this.gameStateService.loading.getValue()===true){return}
     this.currentPhase = phase
 
-    this.botReady()
-  }
-
-  botReady(){
-    for(let index of this.gameStateService.playerCount.getValue()){
-      if(index===this.gameStateService.clientPlayerId){continue}
-      if(this.currentPhase==="planification"){
-        let phaseList = this.authorizedBotPhaseSelection
-        let randomPhase = phaseList[Math.floor(Math.random() * this.authorizedBotPhaseSelection.length)]
-        this.gameStateService.playerSelectPhase(index, randomPhase as keyof SelectablePhase)
-      }
-
-      //random timeout before bot becomes rdy
-      let randomInt = Math.floor(Math.random() * 3) * 1000
-      setTimeout(() => {this.gameStateService.setPlayerReady(true, index)}, randomInt)
-    }
   }
 
   updatePhase(newPhase:Phase): void {
@@ -106,7 +85,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     let phaseList = this.phaseList
     let randomPhase = phaseList[Math.floor(Math.random() * phaseList.length)]
     this.gameStateService.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
-    this.gameStateService.setPlayerReady(true, 1)
+    //this.gameStateService.setClientPlayerReady(true, 1)
   }
 
   printPlayersState(): void {
@@ -120,6 +99,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
    * @returns
    */
   handleDrawQueueRequest(drawQueue: DrawEvent[]):void{
+    return
     this.currentDrawQueue = drawQueue
 
     if(drawQueue.length===0){
@@ -138,7 +118,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     currentDrawEvent.drawResultCardList = this.drawCardFromDeck(currentDrawEvent.drawCardNumber)
     this.gameStateService.cleanAndNextDrawQueue()
   }
-
+  
   drawCardFromDeck(drawNumber?: number): number[]{
     var resultList: number[] = [];
 
@@ -158,9 +138,29 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   }
   loadingFinished(loading: boolean):void{
     if(loading===true){return}
-    this.botReady()
   }
   sendDrawNumber(): void {
-    this.websocket.sendDraw(2)
+    this.websocket.sendDraw(2, -1)
+  }
+  sendReady(): void {
+    this.websocket.sendReady(true)
+  }
+  sendNotReady(): void {
+    this.websocket.sendReady(false)
+  }
+  sendBotsReady(): void {
+    for(let index of this.gameStateService.playerCount.getValue()){
+      if(index===this.gameStateService.clientPlayerId){continue}
+      this.botIdReady(index)
+    }
+  }
+  botIdReady(id: number){
+    this.websocket.sendDebugMessage({gameId:1,playerId:id,contentEnum:MessageContentQueryEnum.ready,content:{ready:true}})
+  }
+  printEventQueue(): void {
+    console.log(this.gameStateService.eventQueue.getValue())
+  }
+  printDrawQueue(): void {
+    console.log(this.gameStateService.drawQueue.getValue())
   }
 }

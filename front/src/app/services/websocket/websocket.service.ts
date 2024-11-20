@@ -2,30 +2,15 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import SockJS from 'sockjs-client';
-import { WebsocketQueryDesigner } from '../designers/websocket-query-designer.service';
+import { WebsocketQueryMessageFactory } from '../designers/websocket-message-factory.service';
+import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
+import { WsInputMessage } from '../../interfaces/websocket.interface';
+import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID } from '../../global/global-const';
 
-export type ListenerCallBack = (message: Task) => void;
+type ListenerCallBack = (message: Task) => void;
 export interface Task {
     name: string;
 }
-export interface DrawQuery {
-    drawNumber: number
-}
-
-export enum Message {
-    drawQuery = 'DRAW_QUERY',
-    other = 'OTHER'
-}
-interface PlayerMessage {
-    gameId?: number,
-    clientId?: number
-    contentEnum: Message,
-    content: any
-}
-
-const gameId = 1
-const clientId = 0
-
 
 @Injectable({
   providedIn: 'root'
@@ -33,36 +18,87 @@ const clientId = 0
 export class WebsocketService implements OnDestroy {
     private connection: CompatClient | undefined = undefined;
     private subscription: StompSubscription | undefined;
-    private subscriptionGreetigns: StompSubscription | undefined;
+    private subscriptionGroup: StompSubscription | undefined;
     private reconnectDelay = 5000
 
     constructor() {
-        // Utilisation de SockJS pour la connexion WebSocket
         this.connection = Stomp.over(() => new SockJS('http://localhost:8080/ws'));
         this.connection.connect({}, () => {});
         this.connection.reconnectDelay = this.reconnectDelay
     }
-
-    public sendDraw(drawNumber: number): void {
+    
+    public listen(fun: ListenerCallBack): void {
         if (this.connection && this.connection.connected) {
-            let message = WebsocketQueryDesigner.createDrawQuery(drawNumber)
-            this.connection.send('/app/player', {}, JSON.stringify(message));
+            this.subscriptionGroup = this.connection.subscribe(`/topic/group/${GLOBAL_GAME_ID}`, message => {
+                fun(this.addSubscriptionType(message.body, SubscriptionEnum.group));
+            });
+            this.subscription = this.connection.subscribe(`/topic/player/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`, message => {
+                fun(this.addSubscriptionType(message.body, SubscriptionEnum.player));
+            });
+
+        } else {
+            this.connection?.connect({}, () => {
+                this.subscriptionGroup = this.connection!.subscribe(`/topic/group/${GLOBAL_GAME_ID}`, message => {
+                    fun(this.addSubscriptionType(message.body, SubscriptionEnum.group));
+                });
+                this.subscription = this.connection!.subscribe(`/topic/player/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`, message => {
+                    fun(this.addSubscriptionType(message.body, SubscriptionEnum.player));
+                });
+
+                this.sendGameStateQuery()
+            });
         }
     }
 
-    public listen(fun: ListenerCallBack): void {
-        if (this.connection) {
-            this.connection.connect({}, () => {
-                this.subscription = this.connection!.subscribe(`/topic/player/${gameId}/${clientId}`, message => fun(JSON.parse(message.body)));
-            });
-            
+    private addSubscriptionType(messageBody: any, subscription: SubscriptionEnum): any {
+        let result: WsInputMessage = {
+            subscription:subscription,
+            message: JSON.parse(messageBody)
         }
+        return result
+    }
+
+    public sendDraw(drawNumber: number, eventId: number): void {
+        this.sendMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
+    }
+
+    public sendReady(ready: boolean): void {
+        this.sendMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
+    }
+
+    public sendGameStateQuery(): void {
+        this.sendMessage(WebsocketQueryMessageFactory.createGameStateQuery())
+    }
+
+    private sendMessage(message: any){
+        if (this.connection && this.connection.connected) {
+            this.connection.send('/app/player', {}, JSON.stringify(message));
+            console.log("sending", message)
+        }
+    }
+
+    public sendDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentQueryEnum, content:any}){
+        let message = {
+            gameId: param.gameId?? GLOBAL_GAME_ID,
+            playerId: param.playerId?? GLOBAL_CLIENT_ID,
+            contentEnum: param.contentEnum,
+            content: param.content
+        }
+        console.log('debug message: ',message)
+        this.sendMessage(message)
     }
 
     ngOnDestroy(): void {
         if (this.subscription) {
             this.subscription.unsubscribe();
-            this.subscriptionGreetigns?.unsubscribe();
+        }
+        if (this.subscriptionGroup) {
+            this.subscriptionGroup.unsubscribe();
+        }
+        if (this.connection) {
+            this.connection.disconnect(() => {
+                console.log('Déconnexion du WebSocket');
+            });
         }
     }
 }

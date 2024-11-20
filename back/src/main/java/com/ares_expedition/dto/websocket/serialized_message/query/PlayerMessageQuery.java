@@ -1,26 +1,26 @@
-package com.ares_expedition.dto.websocket;
+package com.ares_expedition.dto.websocket.serialized_message.query;
 
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
 
 public class PlayerMessageQuery<T>{
     protected Integer gameId;
-    protected Integer clientId;
+    protected Integer playerId;
     protected ContentQueryEnum contentEnum;
     protected T content;
 
     public PlayerMessageQuery(){}
     public PlayerMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
         this.gameId = gameId;
-        this.clientId = clientId;
+        this.playerId = clientId;
         this.contentEnum = contentType;
         this.content = content;
     }
     public Integer getGameId(){
         return this.gameId;
     }
-    public Integer getClientId(){
-        return this.clientId;
+    public Integer getPlayerId(){
+        return this.playerId;
     }
     public ContentQueryEnum getContentEnum(){
         return this.contentEnum;
@@ -31,8 +31,8 @@ public class PlayerMessageQuery<T>{
     public void setGameId(Integer gameId){
         this.gameId = gameId;
     }
-    public void setClientId(Integer clientId){
-        this.clientId = clientId;
+    public void setPlayerId(Integer clientId){
+        this.playerId = clientId;
     }
     public void setContentEnum(ContentQueryEnum queryEnum){
         this.contentEnum = queryEnum;

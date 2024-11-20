@@ -8,11 +8,16 @@
         <button (click)="updatePhase('action')" class="phase-action phase-selection-button clickable">Action</button>
         <button (click)="updatePhase('production')" class="phase-production phase-selection-button clickable">Production</button>
         <button (click)="updatePhase('research')" class="phase-research phase-selection-button clickable">Research</button>
+        <button (click)="printEventQueue()" class="phase-research phase-selection-button clickable">Print eventqueue</button>
+        <button (click)="printDrawQueue()" class="phase-research phase-selection-button clickable">Print drawQueu</button>
+        <button (click)="sendDrawNumber()" class="phase-research phase-selection-button clickable">DrawNumber</button>
+        <button (click)="sendReady()" class="phase-research phase-selection-button clickable">Ready</button>
+        <button (click)="sendNotReady()" class="phase-research phase-selection-button clickable">Not Ready</button>
+        <button (click)="sendBotsReady()" class="phase-research phase-selection-button clickable">Bots ready</button>
     </div>
-    <button (click)="sendDrawNumber()" class="phase-research phase-selection-button clickable">DrawNumber</button>
+    
     <div class="wrapper-game-state">
         <button (click)="printPlayersState()">players state</button>
-        <button (click)="botReady()">bot ready</button>
     </div>
     <p>drawQueue :</p>
     <div *ngFor="let queue of currentDrawQueue">

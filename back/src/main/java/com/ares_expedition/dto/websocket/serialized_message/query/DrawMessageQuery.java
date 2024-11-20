@@ -1,8 +1,7 @@
-package com.ares_expedition.dto.websocket.serialized_message;
+package com.ares_expedition.dto.websocket.serialized_message.query;
 
-import com.ares_expedition.dto.websocket.PlayerMessageQuery;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
-import com.ares_expedition.model.draw.DrawQuery;
+import com.ares_expedition.model.query.draw.DrawQuery;
 
 public class DrawMessageQuery extends PlayerMessageQuery<DrawQuery> {
     protected DrawQuery content;
@@ -11,7 +10,7 @@ public class DrawMessageQuery extends PlayerMessageQuery<DrawQuery> {
 
     public DrawMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, DrawQuery content){
         this.gameId = gameId;
-        this.clientId = clientId;
+        this.playerId = clientId;
         this.contentEnum = contentType;
         this.content = content;
     }
@@ -26,5 +25,9 @@ public class DrawMessageQuery extends PlayerMessageQuery<DrawQuery> {
 
     public Integer getDrawNumber(){
         return this.content.getDrawNumber();
+    }
+
+    public Integer getEventId(){
+        return content.getEventId();
     }
 }

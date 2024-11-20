@@ -2,24 +2,22 @@ import { Component, inject, ViewChild, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
-import { PhaseActionComponent } from '../../phases/phase-action/phase-action.component';
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
-import { PhaseResearchComponent } from '../../phases/phase-research/phase-research.component';
 import { NonSelectablePhase } from '../../../types/global.type';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
-import { PlayerReadyComponent } from '../../player-info/player-ready/player-ready.component';
 import { ChildButton, EventCardBuilderButton, EventSecondaryButton } from '../../../models/core-game/button.model';
-import { ButtonComponent } from '../../tools/button/button.component';
 import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
 import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { EventDesigner } from '../../../services/designers/event-designer.service';
-import { EventButtonComponent } from '../../tools/event-button/event-button.component';
 import { EventMainButtonComponent } from "../../tools/event-main-button/event-main-button.component";
 import { EventSecondaryButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
+import { WebsocketService } from '../../../services/websocket/websocket.service';
+import { WebsocketHandler } from '../../../models/core-game/websocket-handler';
+import { WsInputMessage } from '../../../interfaces/websocket.interface';
 
 //this component is the main controller, and view
 
@@ -29,14 +27,9 @@ import { CardBuilderListComponent } from '../../cards/card-builder-list/card-bui
   imports: [
     CommonModule,
     PhasePlanificationComponent,
-    PhaseActionComponent,
     PhaseProductionComponent,
-    PhaseResearchComponent,
     ProjectCardListComponent,
-    PlayerReadyComponent,
-    ButtonComponent,
     PhaseCardUpgradeSelectorComponent,
-    EventButtonComponent,
     EventMainButtonComponent,
 	EventSecondaryButtonComponent,
 	CardBuilderListComponent
@@ -45,13 +38,14 @@ import { CardBuilderListComponent } from '../../cards/card-builder-list/card-bui
   styleUrl: './game-event.component.scss',
   providers: [
 	EventHandler,
-	DrawEventHandler
+	DrawEventHandler,
+	WebsocketHandler
 ]
 })
 export class GameEventComponent {
 	constructor(
 		private gameStateService: GameState,
-		private cardInfoService: ProjectCardInfoService
+		private webSocketService: WebsocketService
 	){}
 
 	delete: EventBaseModel[] = []
@@ -79,6 +73,7 @@ export class GameEventComponent {
 
 	private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
+	private readonly wsHandler = inject(WebsocketHandler)
 
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
@@ -92,6 +87,9 @@ export class GameEventComponent {
 		)
 		this.gameStateService.currentEventQueue.subscribe(
 			eventQueue => this.handleEventQueueNext(eventQueue)
+		)
+		this.webSocketService.listen(
+			message => this.handleMessage(message)
 		)
 	}
 
@@ -138,4 +136,7 @@ export class GameEventComponent {
 		}
 	}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
+	private handleMessage(message: any){
+		this.wsHandler.handleMessage(message as WsInputMessage)
+	}
 }
