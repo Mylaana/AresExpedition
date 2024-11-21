@@ -7,8 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:ci": "ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadless",
-    "serve:ssr:front": "node dist/front/server/server.mjs"
+    "test:ci": "ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
@@ -21,12 +20,10 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/platform-server": "^17.3.0",
     "@angular/router": "^17.3.0",
-    "@angular/ssr": "^17.3.7",
-    "@stomp/stompjs": "^7.0.0",
+    "@stomp/rx-stomp": "^2.0.0",
     "express": "^4.18.2",
     "front": "file:",
     "rxjs": "~7.8.0",
-    "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
@@ -37,7 +34,6 @@
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
-    "@types/sockjs-client": "^1.5.4",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

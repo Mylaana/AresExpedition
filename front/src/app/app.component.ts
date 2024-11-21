@@ -13,6 +13,10 @@ import { ProjectCardInfoService } from './services/cards/project-card-info.servi
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { PlayerPannelComponent } from './components/player-info/player-pannel/player-pannel.component';
 import { PlayerStateModel } from './models/player-info/player-state.model';
+import { RxStompService } from './services/websocket/rx-stomp.service';
+import { rxStompServiceFactory } from './services/websocket/rx-stomp-service-factory';
+import { MessagesComponent } from './messages/messages.component';
+
 
 @Component({
   selector: 'app-root',
@@ -27,10 +31,12 @@ import { PlayerStateModel } from './models/player-info/player-state.model';
     PlayerSelectedPhasePannelComponent,
     ProjectCardListComponent,
     NavigationComponent,
-    PlayerPannelComponent
+    PlayerPannelComponent,
+    MessagesComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'AresExpedition';

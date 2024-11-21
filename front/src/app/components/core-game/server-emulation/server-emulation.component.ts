@@ -4,8 +4,13 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
-import { WebsocketService } from '../../../services/websocket/websocket.service';
 import { MessageContentQueryEnum } from '../../../enum/websocket.enum';
+import { Subscription } from 'rxjs';
+import { RxStompService } from '../../../services/websocket/rx-stomp.service';
+import { WsInputMessage } from '../../../interfaces/websocket.interface';
+import { WebsocketQueryMessageFactory } from '../../../services/designers/websocket-message-factory.service';
+import { Message } from '@stomp/stompjs';
+import { rxStompServiceFactory } from '../../../services/websocket/rx-stomp-service-factory';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -16,7 +21,13 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
     CommonModule,
   ],
   templateUrl: './server-emulation.component.html',
-  styleUrl: './server-emulation.component.scss'
+  styleUrl: './server-emulation.component.scss',
+  providers: [
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+    },
+  ],
 })
 export class ServerEmulationComponent implements OnInit, AfterViewInit {
   debug: boolean = true;
@@ -29,9 +40,14 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
   phaseList: SelectablePhase[] = ["development","construction","action","production","research"]
   authorizedBotPhaseSelection: SelectablePhase[] = ["development","construction","action","production","research"]
 
+  //@ts-ignore
+  private groupSubscription: Subscription;
+  //@ts-ignore
+  private playerSubscription: Subscription;
+
   constructor(private gameStateService: GameState,
     private cardInfoService: ProjectCardInfoService,
-    private websocket: WebsocketService
+    private rxStompService: RxStompService
   ){}
 
 
@@ -50,7 +66,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
       groupPlayerState => this.currentGroupPlayerState = groupPlayerState
     )
     this.gameStateService.currentDrawQueue.subscribe(
-      drawQueue => this.handleDrawQueueRequest(drawQueue)
+      //drawQueue => this.handleDrawQueueRequest(drawQueue)
     )
     this.gameStateService.currentLoadingState.subscribe(
       loading => this.loadingFinished(loading)
@@ -59,6 +75,24 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
       event => this.currentEventQueue = event
     )
 
+
+    this.groupSubscription = this.rxStompService
+    .watch('/topic/group/1')
+    .subscribe((message: Message) => {
+      console.log(message.body)
+    });
+    this.playerSubscription = this.rxStompService
+    .watch('/topic/player')
+    .subscribe((message: Message) => {
+      console.log(message.body)
+    });
+    /*
+    this.rxStompService.connected$.subscribe((connected) => {
+      console.log('WebSocket connected: ', connected);
+    });
+    const rxStomp = rxStompServiceFactory();
+    console.log('Is connected? ', rxStomp.active);
+    */
     return
     //force draw card list for debug purpose
     let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141]
@@ -93,13 +127,9 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     console.log(this.gameStateService.groupPlayerReady.getValue())
   }
 
-  /**
-   * provides cards from deck, updates all objects in queue with a list of cards requested
-   * @param drawQueue
-   * @returns
-   */
+/*
   handleDrawQueueRequest(drawQueue: DrawEvent[]):void{
-    return
+
     this.currentDrawQueue = drawQueue
 
     if(drawQueue.length===0){
@@ -118,7 +148,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     currentDrawEvent.drawResultCardList = this.drawCardFromDeck(currentDrawEvent.drawCardNumber)
     this.gameStateService.cleanAndNextDrawQueue()
   }
-  
+  */
   drawCardFromDeck(drawNumber?: number): number[]{
     var resultList: number[] = [];
 
@@ -140,13 +170,22 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     if(loading===true){return}
   }
   sendDrawNumber(): void {
-    this.websocket.sendDraw(2, -1)
+    //this.websocket.sendDraw(2, -1)
   }
   sendReady(): void {
-    this.websocket.sendReady(true)
+    //this.websocket.sendReady(true)
+    let message = JSON.stringify(WebsocketQueryMessageFactory.createReadyQuery(true))
+    this.rxStompService.publish({ destination: '/app/player', body: message });
   }
   sendNotReady(): void {
-    this.websocket.sendReady(false)
+    let message = JSON.stringify(WebsocketQueryMessageFactory.createReadyQuery(false))
+    this.rxStompService.publish({ destination: '/app/player', body: message });
+    //this.websocket.sendReady(false)
+  }
+  sendtest(): void {
+    let message = JSON.stringify("test")
+    this.rxStompService.publish({ destination: '/app/test', body: message });
+    //this.websocket.sendReady(false)
   }
   sendBotsReady(): void {
     for(let index of this.gameStateService.playerCount.getValue()){
@@ -155,7 +194,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
     }
   }
   botIdReady(id: number){
-    this.websocket.sendDebugMessage({gameId:1,playerId:id,contentEnum:MessageContentQueryEnum.ready,content:{ready:true}})
+    //this.websocket.sendDebugMessage({gameId:1,playerId:id,contentEnum:MessageContentQueryEnum.ready,content:{ready:true}})
   }
   printEventQueue(): void {
     console.log(this.gameStateService.eventQueue.getValue())

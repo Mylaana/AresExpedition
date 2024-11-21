@@ -15,7 +15,6 @@ import { EventMainButtonComponent } from "../../tools/event-main-button/event-ma
 import { EventSecondaryButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
-import { WebsocketService } from '../../../services/websocket/websocket.service';
 import { WebsocketHandler } from '../../../models/core-game/websocket-handler';
 import { WsInputMessage } from '../../../interfaces/websocket.interface';
 
@@ -45,7 +44,7 @@ import { WsInputMessage } from '../../../interfaces/websocket.interface';
 export class GameEventComponent {
 	constructor(
 		private gameStateService: GameState,
-		private webSocketService: WebsocketService
+		//private webSocketService: WebsocketService
 	){}
 
 	delete: EventBaseModel[] = []
@@ -87,9 +86,6 @@ export class GameEventComponent {
 		)
 		this.gameStateService.currentEventQueue.subscribe(
 			eventQueue => this.handleEventQueueNext(eventQueue)
-		)
-		this.webSocketService.listen(
-			message => this.handleMessage(message)
 		)
 	}
 

@@ -9,9 +9,7 @@
   },
   "files": [
     "src/main.ts",
-    "src/main.server.ts",
     "src/polyfills.ts",
-    "server.ts"
   ],
   "include": [
     "src/**/*.d.ts"

@@ -26,6 +26,10 @@ public class InputRouter {
         this.gameController = gameController;
     }
 
+    public void routeTest(Object message) {
+        wsOutput.sendPushToGroup(new PlayerMessageAnswer(1, "received message: " + message));
+    }
+
     public <T> void routeInput(PlayerMessageQuery<T> message) {
         switch (message.getContentEnum()) {
             case DRAW_QUERY:
