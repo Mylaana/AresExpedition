@@ -96,6 +96,12 @@ public class Game {
         this.groupPlayerReady.replace(playerId, ready);
     }
 
+    public void setAllPlayersNotReady(){
+        for(Integer playerId: this.groupPlayerId){
+            this.setPlayerReady(playerId, false);
+        }
+    }
+
     @Override
     public String toString() {
         return "Game{gameId=" + gameId + ", deck=" + deck + "}";

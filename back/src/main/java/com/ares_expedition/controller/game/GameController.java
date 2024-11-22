@@ -1,6 +1,5 @@
 package com.ares_expedition.controller.game;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,5 +42,19 @@ public class GameController {
     }
     public Map<Integer, Boolean> getGroupPlayerReady(Integer gameId){
         return getGameFromId(gameId).getGroupPlayerReady();
+    }
+    public Boolean getAllPlayersReady(Integer gameId){
+        Boolean allPlayersReady = true;
+        Map<Integer, Boolean> readyMap = getGroupPlayerReady(gameId);
+        for(Map.Entry<Integer, Boolean> entry : readyMap.entrySet()){
+            if(!entry.getValue()){
+                allPlayersReady = false;
+                break;
+            }
+        };
+        return allPlayersReady;
+    }
+    public void setAllPlayersNotReady(Integer gameId){
+        getGameFromId(gameId).setAllPlayersNotReady();
     }
 }

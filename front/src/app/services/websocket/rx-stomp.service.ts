@@ -4,6 +4,7 @@ import { WebsocketQueryMessageFactory } from '../designers/websocket-message-fac
 import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID, GLOBAL_WS_APP_PLAYER } from '../../global/global-const';
 import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
 import { WsInputMessage } from '../../interfaces/websocket.interface';
+import { myRxStompConfig } from './rx-stomp.config';
 
 
 @Injectable({
@@ -12,6 +13,8 @@ import { WsInputMessage } from '../../interfaces/websocket.interface';
 export class RxStompService extends RxStomp {
 	constructor() {
 		super();
+        this.configure(myRxStompConfig)
+        this.activate()
 	}
     
 	private publishMessage(message: any){
@@ -30,7 +33,8 @@ export class RxStompService extends RxStomp {
         this.publishMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
     }
 
-    public publishReady(ready: boolean): void {
+    public publishClientPlayerReady(ready: boolean): void {
+        console.log('CALLED ready: ', ready, 'connected: ', this.connected())
         this.publishMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
     }
 

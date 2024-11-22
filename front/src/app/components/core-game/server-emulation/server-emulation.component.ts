@@ -123,8 +123,11 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	}
 	sendReady(): void {
 		//this.websocket.sendReady(true)
+		/*
 		let message = JSON.stringify(WebsocketQueryMessageFactory.createReadyQuery(true))
 		this.rxStompService.publish({ destination: '/app/player', body: message });
+		*/
+		this.rxStompService.publishClientPlayerReady(true)
 	}
 	sendNotReady(): void {
 		let message = JSON.stringify(WebsocketQueryMessageFactory.createReadyQuery(false))

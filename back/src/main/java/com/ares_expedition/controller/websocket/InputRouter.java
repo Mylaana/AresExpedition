@@ -75,6 +75,14 @@ public class InputRouter {
     private void handlePlayerReadyQuery(PlayerReadyMessageQuery query) {
         Integer gameId = query.getGameId();
         gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getPlayerReady());
+
+        if(!gameController.getAllPlayersReady(gameId)){
+            wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.READY_RESULT, gameController.getGroupPlayerReady(gameId)));
+            return;
+        }
+
+        gameController.setAllPlayersNotReady(gameId);
         wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.READY_RESULT, gameController.getGroupPlayerReady(gameId)));
+        wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.NEXT_PHASE, "next phase name"));
     }
 }

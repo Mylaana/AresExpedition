@@ -14,6 +14,11 @@ public class PlayerMessageAnswer {
         this.contentEnum = ContentResultEnum.DEBUG;
         this.content = content;
     }
+    public PlayerMessageAnswer(Integer gameId, ContentResultEnum contentType){
+        this.gameId = gameId;
+        this.content = null;
+        this.contentEnum = contentType;
+    }
     public PlayerMessageAnswer(Integer gameId, ContentResultEnum contentType, Object content){
         this.gameId = gameId;
         this.content = content;

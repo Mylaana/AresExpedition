@@ -8,6 +8,7 @@ export enum PlayerMessageContentResultEnum {
 }
 export enum GroupMessageContentResultEnum {
     ready = 'READY_RESULT',
+    nextPhase = 'NEXT_PHASE',
     debug = 'DEBUG'
 }
 export enum SubscriptionEnum {

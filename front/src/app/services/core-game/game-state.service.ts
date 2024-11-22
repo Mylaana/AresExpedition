@@ -14,6 +14,7 @@ import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { EventDesigner } from "../designers/event-designer.service";
 import { GlobalInfo } from "../global/global-info.service";
 import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
+import { RxStompService } from "../websocket/rx-stomp.service";
 
 interface SelectedPhase {
     "development": boolean,
@@ -88,6 +89,7 @@ export class GameState{
         private projectCardService: ProjectCardInfoService,
 		private phaseCardService: PhaseCardInfoService,
 		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
+        private rxStompService: RxStompService
 	){}
 
     addPlayer(playerName: string, playerColor: RGB): void {
@@ -297,7 +299,9 @@ export class GameState{
      * if no id specified, will set all players to not {playerReady}
      * */
     setClientPlayerReady(ready: boolean){
+        console.log('clientplayerReady called')
         this.setPlayerReady(this.clientPlayerId, ready)
+        this.rxStompService.publishClientPlayerReady(true)
     };
     private setPlayerReady(playerId: number, ready: boolean){
         let groupReady = this.groupPlayerReady.getValue()
