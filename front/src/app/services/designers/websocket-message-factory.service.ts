@@ -40,10 +40,11 @@ export class WebsocketQueryMessageFactory{
 }
 export class WebsocketResultMessageFactory{
     private static createMessageResult(message: any): MessageResult {
+        let parsedMessage = JSON.parse(message)
         let result : MessageResult = {
-            gameId: message['gameId'],
-            contentEnum: message['contentEnum'],
-            content: message['content']
+            gameId: parsedMessage['gameId'],
+            contentEnum: parsedMessage['contentEnum'],
+            content: parsedMessage['content']
         }
         return result
     }

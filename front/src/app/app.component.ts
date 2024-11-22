@@ -15,7 +15,6 @@ import { PlayerPannelComponent } from './components/player-info/player-pannel/pl
 import { PlayerStateModel } from './models/player-info/player-state.model';
 import { RxStompService } from './services/websocket/rx-stomp.service';
 import { rxStompServiceFactory } from './services/websocket/rx-stomp-service-factory';
-import { MessagesComponent } from './messages/messages.component';
 
 
 @Component({
@@ -31,11 +30,16 @@ import { MessagesComponent } from './messages/messages.component';
     PlayerSelectedPhasePannelComponent,
     ProjectCardListComponent,
     NavigationComponent,
-    PlayerPannelComponent,
-    MessagesComponent
+    PlayerPannelComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  providers: [
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+    },
+  ],
 
 })
 export class AppComponent implements OnInit, AfterViewInit {

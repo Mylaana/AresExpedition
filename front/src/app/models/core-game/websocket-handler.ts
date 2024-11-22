@@ -20,17 +20,19 @@ export class WebsocketHandler {
             }
         }
     }
-    private handlePlayerMessage(message: PlayerMessageResult){
-        console.log('player', message)
-
+    public handlePlayerMessage(message: PlayerMessageResult){
         switch(message.contentEnum){
             case(PlayerMessageContentResultEnum.draw):{
                 this.handlePlayerMessageDrawResult(message.content)
                 break
             }
+            default:{
+                console.log('UNHANDLED PLAYER MESSAGE RECEIVED: ', message)
+            }
         }
     }
-    private handleGroupMessage(message: GroupMessageResult){
+    public handleGroupMessage(message: GroupMessageResult){
+        console.log('resoslving ws message: ', message.contentEnum)
         switch(message.contentEnum){
             case(GroupMessageContentResultEnum.debug):{
                 console.log('GROUP DEBUG:', message)
@@ -38,6 +40,10 @@ export class WebsocketHandler {
             }
             case(GroupMessageContentResultEnum.ready):{
                 this.handleGroupMessageReadyResult(message.content)
+                break
+            }
+            default:{
+                console.log('UNHANDLED GROUP MESSAGE RECEIVED: ', message)
             }
         }
     }

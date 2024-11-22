@@ -35,7 +35,7 @@ type EventPileAddRule = 'first' | 'second' | 'last'
 
 
 const phaseCount: number = 5;
-const handSizeStart: number = 5;
+const handSizeStart: number = 8;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
@@ -240,7 +240,7 @@ export class GameState{
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            //setTimeout(task => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
+            setTimeout(() => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
             
         }
 

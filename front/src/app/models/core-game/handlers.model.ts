@@ -12,6 +12,7 @@ import { EventCardBuilderButton } from "./button.model";
 import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase } from "./event.model";
 import { DrawEventDesigner } from "../../services/designers/draw-event-designer.service";
 import { Utils } from "../../utils/utils";
+import { RxStompService } from "../../services/websocket/rx-stomp.service";
 
 @Injectable()
 export class EventHandler {
@@ -24,7 +25,7 @@ export class EventHandler {
 
     constructor(
 		private gameStateService: GameState,
-		private projectCardInfoService: ProjectCardInfoService
+		private projectCardInfoService: ProjectCardInfoService,
 	){}
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
@@ -384,6 +385,7 @@ export class DrawEventHandler {
 	constructor(
 		private gameStateService:GameState,
 		private projectCardInfoService: ProjectCardInfoService,
+		private rxStompService: RxStompService
 	){}
 	handleQueueUpdate(drawQueue: DrawEvent[]): void {
 		if(drawQueue.length===0){return}
@@ -399,7 +401,7 @@ export class DrawEventHandler {
 	}
 	private sendWsDrawQuery(event: DrawEvent){
 		event.queried = true
-		//this.websocketService.sendDraw(event.drawCardNumber, event.waiterId)
+		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId)
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
