@@ -1,7 +1,7 @@
 export enum MessageContentQueryEnum {
     drawQuery = 'DRAW_QUERY',
     ready = 'READY_QUERY',
-    gameState = 'GAME_STATE'
+    gameState = 'GAME_STATE_QUERY'
 }
 export enum PlayerMessageContentResultEnum {
     draw = 'DRAW_RESULT',
@@ -9,7 +9,9 @@ export enum PlayerMessageContentResultEnum {
 export enum GroupMessageContentResultEnum {
     ready = 'READY_RESULT',
     nextPhase = 'NEXT_PHASE',
-    debug = 'DEBUG'
+    
+    debug = 'DEBUG',
+    serverSideUnhandled = 'SERVER_SIDE_UNHANDLED'
 }
 export enum SubscriptionEnum {
     player = 'PLAYER',

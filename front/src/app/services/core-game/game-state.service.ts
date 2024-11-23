@@ -242,7 +242,7 @@ export class GameState{
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            setTimeout(() => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
+            //setTimeout(() => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
             
         }
 
@@ -299,9 +299,8 @@ export class GameState{
      * if no id specified, will set all players to not {playerReady}
      * */
     setClientPlayerReady(ready: boolean){
-        console.log('clientplayerReady called')
         this.setPlayerReady(this.clientPlayerId, ready)
-        this.rxStompService.publishClientPlayerReady(true)
+        this.rxStompService.publishClientPlayerReady(ready)
     };
     private setPlayerReady(playerId: number, ready: boolean){
         let groupReady = this.groupPlayerReady.getValue()

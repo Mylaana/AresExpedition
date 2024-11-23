@@ -14,9 +14,17 @@ export class RxStompService extends RxStomp {
 	constructor() {
 		super();
         this.configure(myRxStompConfig)
+        this.connected$.subscribe(() => {
+            this.onClientConnected()
+        })
+        
         this.activate()
 	}
     
+    private onClientConnected(){
+        this.publishGameStateQuery()
+    }
+
 	private publishMessage(message: any){
 		this.publish({ destination: GLOBAL_WS_APP_PLAYER, body: JSON.stringify(message)});
     }
@@ -34,7 +42,6 @@ export class RxStompService extends RxStomp {
     }
 
     public publishClientPlayerReady(ready: boolean): void {
-        console.log('CALLED ready: ', ready, 'connected: ', this.connected())
         this.publishMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
     }
 

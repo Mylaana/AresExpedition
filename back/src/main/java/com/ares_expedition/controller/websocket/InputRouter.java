@@ -1,5 +1,7 @@
 package com.ares_expedition.controller.websocket;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import org.springframework.stereotype.Service;
@@ -9,11 +11,13 @@ import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessage
 import com.ares_expedition.dto.websocket.serialized_message.query.DrawMessageQuery;
 import com.ares_expedition.dto.websocket.serialized_message.query.PlayerMessageQuery;
 import com.ares_expedition.dto.websocket.serialized_message.query.PlayerReadyMessageQuery;
+import com.ares_expedition.dto.websocket.serialized_message.query.UnHandledMessageQuery;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
+import com.ares_expedition.model.answer.DrawResult;
 import com.ares_expedition.model.query.GenericQuery;
 import com.ares_expedition.model.query.draw.DrawQuery;
-import com.ares_expedition.model.query.draw.DrawResult;
 import com.ares_expedition.model.query.player.PlayerReadyQuery;
+import com.ares_expedition.model.query.player.UnHandledQuery;
 import com.ares_expedition.services.QueryMessageFactory;
 
 @Service
@@ -43,6 +47,9 @@ public class InputRouter {
                     PlayerReadyMessageQuery.class, this::handlePlayerReadyQuery);
                 break;
             default:
+                handleQuery(
+                    message, UnHandledQuery.class,
+                    UnHandledMessageQuery.class, this::handleNotRoutedMessage);
                 break;
         }
     }
@@ -55,6 +62,14 @@ public class InputRouter {
         
         M query = QueryMessageFactory.createMessageQuery(message, contentType, messageQueryType);
         handler.accept(query);
+    }
+
+    private void handleNotRoutedMessage(UnHandledMessageQuery query){
+        Map<String, Object> result = new HashMap<>();
+        result.put("contentEnum", query.getContentEnum());
+        result.put("content", query.getContent());
+
+        wsOutput.sendPushToGroup(new PlayerMessageAnswer(query.getGameId(), ContentResultEnum.SERVER_SIDE_UNHANDLED, result));
     }
 
     private void handleDrawQuery(DrawMessageQuery query) {
@@ -82,7 +97,7 @@ public class InputRouter {
         }
 
         gameController.setAllPlayersNotReady(gameId);
-        wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.READY_RESULT, gameController.getGroupPlayerReady(gameId)));
-        wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.NEXT_PHASE, "next phase name"));
+        //wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.READY_RESULT, gameController.getGroupPlayerReady(gameId)));
+        wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.NEXT_PHASE, gameController.getGameState(gameId)));
     }
 }

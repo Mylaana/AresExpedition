@@ -12,7 +12,7 @@ public class QueryMessageFactory {
             PlayerMessageQuery<?> baseMessage,
             Class<C> contentType,
             Class<M> messageQueryType) {
-        
+
         C content = (C) toQueryType(baseMessage.getContent(), contentType);
         try {
             Constructor<M> constructor = messageQueryType.getConstructor(

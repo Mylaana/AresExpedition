@@ -32,7 +32,7 @@ export class WebsocketHandler {
         }
     }
     public handleGroupMessage(message: GroupMessageResult){
-        console.log('resoslving ws message: ', message.contentEnum)
+        console.log('resolving ws message: ', message.contentEnum)
         switch(message.contentEnum){
             case(GroupMessageContentResultEnum.debug):{
                 console.log('GROUP DEBUG:', message)
@@ -42,6 +42,15 @@ export class WebsocketHandler {
                 this.handleGroupMessageReadyResult(message.content)
                 break
             }
+            case(GroupMessageContentResultEnum.nextPhase):{
+                console.log('NEXT PHASE FULL GAME STATE: ', message)
+                break
+            }
+            case(GroupMessageContentResultEnum.serverSideUnhandled):{
+                console.log('SERVER SIDE UNHANDLED MESSAGE RECEIVED: ',message.content)
+                break
+            }
+
             default:{
                 console.log('UNHANDLED GROUP MESSAGE RECEIVED: ', message)
             }

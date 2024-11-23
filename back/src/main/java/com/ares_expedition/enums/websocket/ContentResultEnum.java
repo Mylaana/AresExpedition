@@ -7,5 +7,7 @@ public enum ContentResultEnum {
     //Group
     READY_RESULT,
     NEXT_PHASE,
+
+    SERVER_SIDE_UNHANDLED,
     DEBUG
 }
