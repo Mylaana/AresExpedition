@@ -7,8 +7,9 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.controller.websocket.WsControllerOutput;
-import com.ares_expedition.dto.websocket.serialized_message.answer.GameStateMessage;
+
 import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
+import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
 import com.ares_expedition.repository.Game;
 import com.ares_expedition.repository.JsonGameReader;
 
@@ -58,7 +59,7 @@ public class GameController {
     public void setAllPlayersNotReady(Integer gameId){
         getGameFromId(gameId).setAllPlayersNotReady();
     }
-    public GameStateMessage getGameState(Integer gameId){
+    public GameStateContent getGameState(Integer gameId){
         return getGameFromId(gameId).getGameState();
     }
 }

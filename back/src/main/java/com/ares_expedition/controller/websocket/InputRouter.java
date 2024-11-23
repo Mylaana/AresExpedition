@@ -14,6 +14,7 @@ import com.ares_expedition.dto.websocket.serialized_message.query.PlayerReadyMes
 import com.ares_expedition.dto.websocket.serialized_message.query.UnHandledMessageQuery;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
+import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.query.GenericQuery;
 import com.ares_expedition.model.query.draw.DrawQuery;
 import com.ares_expedition.model.query.player.PlayerReadyQuery;
@@ -78,13 +79,9 @@ public class InputRouter {
             return;
         }
         wsOutput.sendPushToPlayer(
-            new PlayerMessageAnswer(
-                    query.getGameId(),
-                    ContentResultEnum.DRAW_RESULT,
-                    new DrawResult(this.gameController.drawCards(query.getGameId(), drawNumber), query.getEventId()) 
-                ),
+            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(this.gameController.drawCards(query.getGameId(), drawNumber), query.getEventId())),
             query.getPlayerId()
-        );
+            );
     }
 
     private void handlePlayerReadyQuery(PlayerReadyMessageQuery query) {
@@ -92,12 +89,11 @@ public class InputRouter {
         gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getPlayerReady());
 
         if(!gameController.getAllPlayersReady(gameId)){
-            wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.READY_RESULT, gameController.getGroupPlayerReady(gameId)));
+            wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
             return;
         }
 
         gameController.setAllPlayersNotReady(gameId);
-        //wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.READY_RESULT, gameController.getGroupPlayerReady(gameId)));
-        wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, ContentResultEnum.NEXT_PHASE, gameController.getGameState(gameId)));
+        wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, gameController.getGameState(gameId)));
     }
 }

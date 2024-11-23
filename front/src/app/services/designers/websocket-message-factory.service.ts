@@ -23,7 +23,6 @@ export class WebsocketQueryMessageFactory{
             content: content??{undefined:undefined},
             contentEnum: contentEnum
         }
-
         return message
     }
     public static createDrawQuery(drawNumber: number, eventId: number): PlayerMessage {
@@ -38,6 +37,8 @@ export class WebsocketQueryMessageFactory{
         return this.generatePlayerMessage(MessageContentQueryEnum.gameState)
     }
 }
+
+
 export class WebsocketResultMessageFactory{
     private static createMessageResult(message: any): MessageResult {
         let parsedMessage = JSON.parse(message)

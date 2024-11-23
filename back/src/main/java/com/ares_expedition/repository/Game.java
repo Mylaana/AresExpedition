@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.dto.websocket.serialized_message.answer.GameStateMessage;
+import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
 
 import java.util.Collections;
 
@@ -105,8 +105,8 @@ public class Game {
         }
     }
 
-    public GameStateMessage getGameState(){
-        GameStateMessage gameState = new GameStateMessage();
+    public GameStateContent getGameState(){
+        GameStateContent gameState = new GameStateContent();
 
 
         return gameState;

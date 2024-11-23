@@ -1,12 +1,12 @@
-package com.ares_expedition.dto.websocket.serialized_message.answer;
+package com.ares_expedition.dto.websocket.serialized_message.answer.content;
 
 import com.ares_expedition.enums.game.PhaseEnum;
 
-public class GameStateMessage {
+public class GameStateContent {
     private Integer gameId;
     private PhaseEnum currentPhase;
 
-    public GameStateMessage(){
+    public GameStateContent(){
         this.gameId = 1;
         this.currentPhase = PhaseEnum.PLANIFICATION;
     }
