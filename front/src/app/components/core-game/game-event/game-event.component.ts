@@ -21,6 +21,7 @@ import { RxStompService } from '../../../services/websocket/rx-stomp.service';
 import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../../global/global-const';
 import { Message } from '@stomp/stompjs';
 import { WebsocketResultMessageFactory } from '../../../services/designers/websocket-message-factory.service';
+import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 
 //this component is the main controller, and view
 
@@ -58,7 +59,7 @@ export class GameEventComponent {
 	currentEventId: number = -1
 	eventCounter: number = -1
 
-	currentPhase: NonSelectablePhase = "planification";
+	currentPhase: NonSelectablePhaseEnum = NonSelectablePhaseEnum.planification;
 	currentButtonSelectorId!: number;
 	sellCardsButton!: EventSecondaryButton;
 
@@ -108,16 +109,17 @@ export class GameEventComponent {
 		});
 	}
 
-	updatePhase(phase:NonSelectablePhase):void{
+	updatePhase(phase:NonSelectablePhaseEnum):void{
 		this.currentPhase = phase
 		let events: EventBaseModel[] = []
 		switch(phase){
-			case('planification'):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
-			case('development'):{events.push(EventDesigner.createPhase('developmentPhase'));break}
-			case('construction'):{events.push(EventDesigner.createPhase('constructionPhase'));break}
-			case('action'):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
-			case('production'):{events.push(EventDesigner.createPhase('productionPhase'));break}
-			case('research'):{events.push(EventDesigner.createPhase('researchPhase'));break}
+			case(NonSelectablePhaseEnum.undefined):{return}
+			case(NonSelectablePhaseEnum.planification):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
+			case(NonSelectablePhaseEnum.development):{events.push(EventDesigner.createPhase('developmentPhase'));break}
+			case(NonSelectablePhaseEnum.construction):{events.push(EventDesigner.createPhase('constructionPhase'));break}
+			case(NonSelectablePhaseEnum.action):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
+			case(NonSelectablePhaseEnum.production):{events.push(EventDesigner.createPhase('productionPhase'));break}
+			case(NonSelectablePhaseEnum.research):{events.push(EventDesigner.createPhase('researchPhase'));break}
 			
 		}
 		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))

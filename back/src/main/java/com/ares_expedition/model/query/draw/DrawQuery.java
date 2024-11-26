@@ -2,9 +2,9 @@ package com.ares_expedition.model.query.draw;
 
 import java.util.Map;
 
-import com.ares_expedition.model.query.GenericQuery;
+import com.ares_expedition.model.query.BaseQuery;
 
-public class DrawQuery extends GenericQuery{
+public class DrawQuery extends BaseQuery{
     Integer drawNumber;
     Integer eventId;
 

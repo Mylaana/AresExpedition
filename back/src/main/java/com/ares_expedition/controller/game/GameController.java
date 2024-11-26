@@ -1,6 +1,7 @@
 package com.ares_expedition.controller.game;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import com.ares_expedition.controller.websocket.WsControllerOutput;
 
 import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
 import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
+import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.repository.Game;
 import com.ares_expedition.repository.JsonGameReader;
 
@@ -18,7 +20,7 @@ public class GameController {
     private final WsControllerOutput wsOutput;
     private Map<Integer, Game> gameHolder;
 
-    GameController(WsControllerOutput wsOutput){
+    public GameController(WsControllerOutput wsOutput){
         this.wsOutput = wsOutput;
         this.loadGames();
     }
@@ -61,5 +63,14 @@ public class GameController {
     }
     public GameStateContent getGameState(Integer gameId){
         return getGameFromId(gameId).getGameState();
+    }
+    public void nextPhaseSelected(Integer gameId){
+        getGameFromId(gameId).nextPhaseSelected();
+    }
+    public void addPhaseSelected(Integer gameId, PhaseEnum phase){
+        getGameFromId(gameId).addPhaseSelected(phase);
+    }
+    public LinkedHashSet<PhaseEnum> getPhaseSelected(Integer gameId){
+        return getGameFromId(gameId).getPhaseSelected();
     }
 }

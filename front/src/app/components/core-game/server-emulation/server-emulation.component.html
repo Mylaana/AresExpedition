@@ -2,12 +2,6 @@
     <h1>Server emulation - phase selection</h1>
     <h2>Actual phase: {{ currentPhase }}</h2>
     <div class="wrapper-phase-changer">
-        <button (click)="updatePhase('planification')" class="phase-planification phase-selection-button clickable">Planification</button>
-        <button (click)="updatePhase('development')" class="phase-development phase-selection-button clickable">Development</button>
-        <button (click)="updatePhase('construction')" class="phase-construction phase-selection-button clickable">Construction</button>
-        <button (click)="updatePhase('action')" class="phase-action phase-selection-button clickable">Action</button>
-        <button (click)="updatePhase('production')" class="phase-production phase-selection-button clickable">Production</button>
-        <button (click)="updatePhase('research')" class="phase-research phase-selection-button clickable">Research</button>
         <button (click)="printEventQueue()" class="phase-research phase-selection-button clickable">Print eventqueue</button>
         <button (click)="printDrawQueue()" class="phase-research phase-selection-button clickable">Print drawQueu</button>
         <button (click)="sendDrawNumber()" class="phase-research phase-selection-button clickable">DrawNumber</button>
@@ -31,5 +25,8 @@
 	<p>eventQueue :</p>
     <div *ngFor="let event of currentEventQueue">
         <p>[id]:{{event.id}}  [type]:{{event.type}}  [subtype]:{{event.subType}}  [finalized]:{{event.finalized}}  [autoFinalize]:{{event.autoFinalize}}</p>
+    </div>
+    <div *ngFor="let ready of currentGroupReady">
+        <p>{{ready.id}}: {{ready.isReady}}</p>
     </div>
 </div>

@@ -10,6 +10,8 @@ import { RxStompService } from '../../../services/websocket/rx-stomp.service';
 import { WebsocketQueryMessageFactory } from '../../../services/designers/websocket-message-factory.service';
 import { Message } from '@stomp/stompjs';
 import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../../global/global-const';
+import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
+import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -28,10 +30,11 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	currentEventQueue: EventBaseModel[] = [];
 	currentPhase: string = "planification";
 	currentDrawQueue: DrawEvent[] = []
+	currentGroupReady: PlayerReadyModel[] = []
 	cardsDeck: number[] = [];
 	cardsDiscarded: number[] = [];
-	phaseList: SelectablePhase[] = ["development","construction","action","production","research"]
-	authorizedBotPhaseSelection: SelectablePhase[] = ["development","construction","action","production","research"]
+	phaseList: SelectablePhaseEnum[] = [SelectablePhaseEnum.development,SelectablePhaseEnum.construction,SelectablePhaseEnum.action,SelectablePhaseEnum.production,SelectablePhaseEnum.research]
+	authorizedBotPhaseSelection: SelectablePhaseEnum[] = [SelectablePhaseEnum.development,SelectablePhaseEnum.construction,SelectablePhaseEnum.action,SelectablePhaseEnum.production,SelectablePhaseEnum.research]
 
 	//@ts-ignore
 	private groupSubscription: Subscription;
@@ -67,25 +70,15 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		this.gameStateService.currentEventQueue.subscribe( 
 			event => this.currentEventQueue = event
 		)
+		this.gameStateService.currentGroupPlayerReady.subscribe(
+			ready => this.currentGroupReady = ready
+		)
 
-		/*
-		this.groupSubscription = this.rxStompService
-		.watch(GLOBAL_WS_GROUP)
-		.subscribe((message: Message) => {
-			console.log(message.body)
-		});
-		this.playerSubscription = this.rxStompService
-		.watch(GLOBAL_WS_PLAYER)
-		.subscribe((message: Message) => {
-			console.log(message.body)
-		});
-		*/
 
 		return
 		//force draw card list for debug purpose
 		let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141]
 		//force phase selection pool
-		this.authorizedBotPhaseSelection = ['development']
 
 		this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
 	}
@@ -94,20 +87,22 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		this.gameStateService.setPlayerIdList([0,1,2,3])
 	}
 
-	phaseChanged(phase: Phase){
+	phaseChanged(phase: NonSelectablePhaseEnum){
 		if(this.gameStateService.loading.getValue()===true){return}
 		this.currentPhase = phase
+		
+		if(this.currentPhase===NonSelectablePhaseEnum.planification){
+			this.planificationPhaseBotSelection()
+		}
 
+		//bots autoready
+		this.sendBotsReady()
 	}
+	planificationPhaseBotSelection(){
+		for(let index of this.gameStateService.playerCount.getValue()){
+			if(index===this.gameStateService.clientPlayerId){continue}
 
-	updatePhase(newPhase:Phase): void {
-		//sends phase update to service's behaviorSubject
-		this.gameStateService.updatePhase(newPhase)
-
-		let phaseList = this.phaseList
-		let randomPhase = phaseList[Math.floor(Math.random() * phaseList.length)]
-		this.gameStateService.playerSelectPhase(1, randomPhase as keyof SelectablePhase)
-		//this.gameStateService.setClientPlayerReady(true, 1)
+		}
 	}
 
 	printPlayersState(): void {
@@ -127,7 +122,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		let message = JSON.stringify(WebsocketQueryMessageFactory.createReadyQuery(true))
 		this.rxStompService.publish({ destination: '/app/player', body: message });
 		*/
-		this.rxStompService.publishClientPlayerReady(true)
+		this.rxStompService.publishClientPlayerReady(true, 'server simulation')
 	}
 	sendNotReady(): void {
 		let message = JSON.stringify(WebsocketQueryMessageFactory.createReadyQuery(false))

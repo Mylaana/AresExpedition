@@ -5,6 +5,7 @@ import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID, GLOBAL_WS_APP_PLAYER } from '../../gl
 import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
 import { WsInputMessage } from '../../interfaces/websocket.interface';
 import { myRxStompConfig } from './rx-stomp.config';
+import { SelectablePhaseEnum } from '../../enum/phase.enum';
 
 
 @Injectable({
@@ -26,27 +27,25 @@ export class RxStompService extends RxStomp {
     }
 
 	private publishMessage(message: any){
-		this.publish({ destination: GLOBAL_WS_APP_PLAYER, body: JSON.stringify(message)});
-    }
-
-    private addSubscriptionType(messageBody: any, subscription: SubscriptionEnum): any {
-        let result: WsInputMessage = {
-            subscription:subscription,
-            message: JSON.parse(messageBody)
-        }
-        return result
+        console.log(`%cPUBLISHED: ${message.contentEnum}`, 'color:red')
+		this.publish({destination: GLOBAL_WS_APP_PLAYER, body: JSON.stringify(message)});
     }
 
     public publishDraw(drawNumber: number, eventId: number): void {
         this.publishMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
     }
 
-    public publishClientPlayerReady(ready: boolean): void {
+    public publishClientPlayerReady(ready: boolean, origin: String): void {
+        console.log('sent ready:', origin)
         this.publishMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
     }
 
     public publishGameStateQuery(): void {
         this.publishMessage(WebsocketQueryMessageFactory.createGameStateQuery())
+    }
+
+    public publishSelectedPhase(phase: SelectablePhaseEnum): void {
+        this.publishMessage(WebsocketQueryMessageFactory.createPhaseSelectedQuery(phase))
     }
 
     public publishDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentQueryEnum, content:any}){

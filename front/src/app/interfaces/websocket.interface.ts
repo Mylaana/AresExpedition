@@ -1,3 +1,4 @@
+import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
 
 export interface WsInputMessage {
@@ -27,6 +28,9 @@ export interface WsDrawQuery extends WsQuery {
 export interface WsReadyQuery extends WsQuery {
     ready: boolean
 }
+export interface WsSelectedPhaseQuery extends WsQuery {
+    phase: SelectablePhaseEnum
+}
 
 export interface WsResult {}
 export interface WsGroupReady extends WsResult {
@@ -36,4 +40,7 @@ export interface WsGroupReady extends WsResult {
 export interface WsDrawResult extends WsResult {
     cardIdList: number[]
     eventId: number
+}
+export interface WsGameState extends WsResult {
+    currentPhase: NonSelectablePhaseEnum
 }

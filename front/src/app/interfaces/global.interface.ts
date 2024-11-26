@@ -6,6 +6,7 @@ import { GlobalParameterName } from "../types/global.type";
 import { CardState } from "../models/cards/card-cost.model";
 import { RessourceType } from "../types/global.type";
 import { ProjectFilterType } from "../types/project-card.type";
+import { SelectablePhaseEnum } from "../enum/phase.enum";
 
 export interface RessourceState {
     "id": number,
@@ -35,9 +36,9 @@ export interface TagState {
 
 export interface PlayerPhase {
     playerId: number;
-    currentSelectedPhase: SelectablePhase;
+    currentSelectedPhase: SelectablePhaseEnum;
     currentPhaseType: PhaseCardType;
-    previousSelectedPhase: SelectablePhase;
+    previousSelectedPhase: SelectablePhaseEnum;
 }
 
 export interface CardOptions {

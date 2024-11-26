@@ -25,6 +25,7 @@ export const myRxStompConfig: RxStompConfig = {
   // It can be quite verbose, not recommended in production
   // Skip this key to stop logging to console
   debug: (msg: string): void => {
-    console.log(new Date().toLocaleTimeString(), msg);
+    //console.log(new Date().toLocaleTimeString(), msg);
+    //console.log(msg);
   },
 };
