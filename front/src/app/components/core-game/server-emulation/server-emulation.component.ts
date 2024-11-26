@@ -131,10 +131,13 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	}
 	sendtest(): void {
 		let message = JSON.stringify("test")
-		this.rxStompService.publish({ destination: '/app/test', body: message });
+		this.rxStompService.publish({ destination: '/app/debug', body: message });
 		//this.websocket.sendReady(false)
 	}
 	sendBotsReady(): void {
+		this.rxStompService.publish({ destination: '/app/debug', body: "SET_BOTS_READY" });
+
+		return
 		for(let index of this.gameStateService.playerCount.getValue()){
 			if(index===this.gameStateService.clientPlayerId){continue}
 			this.botIdReady(index)

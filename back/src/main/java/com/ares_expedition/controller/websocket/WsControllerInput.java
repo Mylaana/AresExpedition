@@ -18,8 +18,8 @@ public class WsControllerInput {
         inputRouter.routeInput(message);
     }
 
-    @MessageMapping("/test")
+    @MessageMapping("/debug")
     public <T> void resolveTest(Object message) throws Exception {
-        inputRouter.routeTest(message);
+        inputRouter.routeDebug(message);
     }
 }

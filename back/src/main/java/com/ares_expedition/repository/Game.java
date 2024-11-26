@@ -1,15 +1,10 @@
 package com.ares_expedition.repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
 import com.ares_expedition.enums.game.PhaseEnum;
-
-import java.util.Collections;
-import java.util.LinkedHashSet;
 
 public class Game {
     private Integer gameId;
@@ -122,6 +117,18 @@ public class Game {
     }
     public void addPhaseSelected(PhaseEnum phase){
         this.selectedPhase.add(phase);
+        sortPhaseSelected();
+    }
+    private void sortPhaseSelected(){
+        Comparator<PhaseEnum> customComparator = Comparator.comparingInt(PhaseEnum::getPriority);
+
+        List<PhaseEnum> sortedList = selectedPhase.stream()
+                .sorted(customComparator)
+                .collect(Collectors.toList());
+        
+        // Vide le LinkedHashSet et réinsère les éléments dans l'ordre trié
+        selectedPhase.clear();
+        selectedPhase.addAll(sortedList);
     }
     public LinkedHashSet<PhaseEnum>getPhaseSelected(){
         return this.selectedPhase;

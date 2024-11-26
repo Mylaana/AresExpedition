@@ -37,7 +37,6 @@ export class WebsocketHandler {
         }
     }
     public handleGroupMessage(message: GroupMessageResult){
-        console.log('resolving ws message: ', message.contentEnum)
         switch(message.contentEnum){
             case(GroupMessageContentResultEnum.debug):{
                 console.log('GROUP DEBUG:', message)
@@ -45,7 +44,6 @@ export class WebsocketHandler {
             }
             case(GroupMessageContentResultEnum.ready):{
                 this.handleGroupMessageReadyResult(message.content)
-                console.log('ready serve status: ', message.content)
                 break
             }
             case(GroupMessageContentResultEnum.nextPhase):{

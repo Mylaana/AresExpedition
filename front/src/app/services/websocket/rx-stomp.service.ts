@@ -27,7 +27,7 @@ export class RxStompService extends RxStomp {
     }
 
 	private publishMessage(message: any){
-        console.log(`%cPUBLISHED: ${message.contentEnum}`, 'color:red')
+        console.log(`%cPUBLISHED: ${message.contentEnum}: `, 'color:red', message.content)
 		this.publish({destination: GLOBAL_WS_APP_PLAYER, body: JSON.stringify(message)});
     }
 

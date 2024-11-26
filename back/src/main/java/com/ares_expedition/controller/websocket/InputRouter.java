@@ -35,11 +35,15 @@ public class InputRouter {
         this.wsOutput = wsOutput;
         this.gameController = gameController;
     }
-
-    public void routeTest(Object message) {
+    public void routeDebug(Object message) {
+        if(message=="SET_BOTS_READY"){
+            gameController.setPlayerReady(1, 1, true);
+            gameController.setPlayerReady(1, 2, true);
+            gameController.setPlayerReady(1, 3, true);
+            return;
+        }
         wsOutput.sendPushToGroup(new PlayerMessageAnswer(1, "received message: " + message));
     }
-
     public <T> void routeInput(PlayerMessageQuery<T> message) {
         switch (message.getContentEnum()) {
             case DRAW_QUERY:
@@ -69,7 +73,6 @@ public class InputRouter {
                 break;
         }
     }
-
     private <C extends BaseQuery, M extends PlayerMessageQuery<C>> void handleQuery(
             PlayerMessageQuery<?> message,
             Class<C> contentType,
@@ -79,7 +82,6 @@ public class InputRouter {
         M query = QueryMessageFactory.createMessageQuery(message, contentType, messageQueryType);
         handler.accept(query);
     }
-
     private void handleNotRoutedMessage(UnHandledMessageQuery query){
         Map<String, Object> result = new HashMap<>();
         result.put("contentEnum", query.getContentEnum());
