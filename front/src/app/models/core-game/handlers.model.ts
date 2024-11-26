@@ -12,7 +12,8 @@ import { EventCardBuilderButton } from "./button.model";
 import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase } from "./event.model";
 import { DrawEventDesigner } from "../../services/designers/draw-event-designer.service";
 import { Utils } from "../../utils/utils";
-import { WebsocketService } from "../../services/websocket/websocket.service";
+import { RxStompService } from "../../services/websocket/rx-stomp.service";
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
 
 @Injectable()
 export class EventHandler {
@@ -25,7 +26,7 @@ export class EventHandler {
 
     constructor(
 		private gameStateService: GameState,
-		private projectCardInfoService: ProjectCardInfoService
+		private projectCardInfoService: ProjectCardInfoService,
 	){}
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
@@ -225,7 +226,7 @@ export class EventHandler {
 
 		switch(event.subType){
 			case('endOfPhase'):{
-				this.gameStateService.setClientPlayerReady(true)
+				this.gameStateService.setClientPlayerReady(true,'finishEventGeneric')
 				break
 			}
 			case('buildCard'):{
@@ -269,7 +270,10 @@ export class EventHandler {
 				this.gameStateService.addRessourceToClientPlayer(baseRessources)
 				break
 			}
-			case('planificationPhase'):{break}
+			case('planificationPhase'):{
+				this.gameStateService.clientPlayerValidateSelectedPhase()
+				break
+			}
 			case('upgradePhaseCards'):{break}
 			default:{console.log('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
@@ -385,7 +389,7 @@ export class DrawEventHandler {
 	constructor(
 		private gameStateService:GameState,
 		private projectCardInfoService: ProjectCardInfoService,
-		private websocketService: WebsocketService
+		private rxStompService: RxStompService
 	){}
 	handleQueueUpdate(drawQueue: DrawEvent[]): void {
 		if(drawQueue.length===0){return}
@@ -401,7 +405,7 @@ export class DrawEventHandler {
 	}
 	private sendWsDrawQuery(event: DrawEvent){
 		event.queried = true
-		this.websocketService.sendDraw(event.drawCardNumber, event.waiterId)
+		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId)
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
@@ -463,13 +467,13 @@ class PhaseResolveHandler {
 	private refreshCurrentUpgradedPhaseCard(): void {
 		this.currentUpgradedPhaseCards = this.getCurrentUpgradedPhaseCard()
 	}
-	private shouldReceivePhaseCardSelectionBonus(phaseResolved: SelectablePhase): boolean {
-		return this.gameStateService.getPlayerSelectedPhase(this.clientPlayerId)===phaseResolved
+	private shouldReceivePhaseCardSelectionBonus(phaseResolved: SelectablePhaseEnum): boolean {
+		return this.gameStateService.getPlayerCurrentSelectedPhase(this.clientPlayerId)===phaseResolved
 	}
 	resolveDevelopment(): void {
 		this.refreshCurrentUpgradedPhaseCard()
 		let builderType: BuilderType = this.currentUpgradedPhaseCards[0].phaseType as BuilderType
-		if(!this.shouldReceivePhaseCardSelectionBonus('development')){
+		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.development)){
 			builderType = 'developmentAbilityOnly'
 		}
 		this.gameStateService.addEventQueue(EventDesigner.createCardBuilder('developmentPhaseBuilder',builderType),'second')
@@ -477,7 +481,7 @@ class PhaseResolveHandler {
 	resolveConstruction(): void {
 		this.refreshCurrentUpgradedPhaseCard()
 		let builderType: BuilderType = this.currentUpgradedPhaseCards[1].phaseType as BuilderType
-		if(!this.shouldReceivePhaseCardSelectionBonus('construction')){
+		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.construction)){
 			builderType = 'constructionAbilityOnly'
 		}
 		this.gameStateService.addEventQueue(EventDesigner.createCardBuilder('constructionPhaseBuilder',builderType),'second')
@@ -527,7 +531,7 @@ class PhaseResolveHandler {
 		this.gameStateService.updateClientPlayerState(clientState)
 	}
 	private getProductionPhaseCardSelectionBonus(): number {
-		if(!this.shouldReceivePhaseCardSelectionBonus('production')){return 0}
+		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return 0}
 
 		let bonus: number = 0
 		let productionPhaseCard = this.currentUpgradedPhaseCards[3]
@@ -557,7 +561,7 @@ class PhaseResolveHandler {
 
 	}
 	private getResearchPhaseCardSelectionBonus(): ScanKeep {
-		if(!this.shouldReceivePhaseCardSelectionBonus('research')){return {scan:0, keep:0}}
+		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.research)){return {scan:0, keep:0}}
 
 		let bonus: ScanKeep = {scan:0, keep:0}
 		let researchPhaseCard = this.currentUpgradedPhaseCards[4]

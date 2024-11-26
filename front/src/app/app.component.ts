@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { SelfInfoComponent } from './components/player-info/self-info/self-info.component';
 import { ServerEmulationComponent } from './components/core-game/server-emulation/server-emulation.component';
 import { GameEventComponent } from './components/core-game/game-event/game-event.component';
-import { PlayerReadyPannelComponent } from './components/player-info/player-ready-pannel/player-ready-pannel.component';
-import { PlayerSelectedPhasePannelComponent } from './components/player-info/player-selected-phase-pannel/player-selected-phase-pannel.component';
 import { ProjectCardListComponent } from './components/cards/project/project-card-list/project-card-list.component';
 import { GameState } from './services/core-game/game-state.service';
 import { ProjectCardModel } from './models/cards/project-card.model';
@@ -13,6 +11,7 @@ import { ProjectCardInfoService } from './services/cards/project-card-info.servi
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { PlayerPannelComponent } from './components/player-info/player-pannel/player-pannel.component';
 import { PlayerStateModel } from './models/player-info/player-state.model';
+
 
 @Component({
   selector: 'app-root',
@@ -23,14 +22,12 @@ import { PlayerStateModel } from './models/player-info/player-state.model';
     SelfInfoComponent,
     ServerEmulationComponent,
     GameEventComponent,
-    PlayerReadyPannelComponent,
-    PlayerSelectedPhasePannelComponent,
     ProjectCardListComponent,
     NavigationComponent,
     PlayerPannelComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'AresExpedition';
@@ -43,7 +40,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(
     private gameStateService: GameState,
-    private cardInfoService: ProjectCardInfoService
+    private cardInfoService: ProjectCardInfoService,
   ){}
 
   ngOnInit(): void {

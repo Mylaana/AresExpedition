@@ -15,9 +15,13 @@ import { EventMainButtonComponent } from "../../tools/event-main-button/event-ma
 import { EventSecondaryButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
-import { WebsocketService } from '../../../services/websocket/websocket.service';
 import { WebsocketHandler } from '../../../models/core-game/websocket-handler';
-import { WsInputMessage } from '../../../interfaces/websocket.interface';
+import { GroupMessageResult, PlayerMessageResult, WsInputMessage } from '../../../interfaces/websocket.interface';
+import { RxStompService } from '../../../services/websocket/rx-stomp.service';
+import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../../global/global-const';
+import { Message } from '@stomp/stompjs';
+import { WebsocketResultMessageFactory } from '../../../services/designers/websocket-message-factory.service';
+import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 
 //this component is the main controller, and view
 
@@ -45,7 +49,7 @@ import { WsInputMessage } from '../../../interfaces/websocket.interface';
 export class GameEventComponent {
 	constructor(
 		private gameStateService: GameState,
-		private webSocketService: WebsocketService
+		private rxStompService: RxStompService
 	){}
 
 	delete: EventBaseModel[] = []
@@ -55,7 +59,7 @@ export class GameEventComponent {
 	currentEventId: number = -1
 	eventCounter: number = -1
 
-	currentPhase: NonSelectablePhase = "planification";
+	currentPhase: NonSelectablePhaseEnum = NonSelectablePhaseEnum.planification;
 	currentButtonSelectorId!: number;
 	sellCardsButton!: EventSecondaryButton;
 
@@ -75,6 +79,11 @@ export class GameEventComponent {
 	private readonly drawHandler = inject(DrawEventHandler)
 	private readonly wsHandler = inject(WebsocketHandler)
 
+	//@ts-ignore
+	private groupSubscription: Subscription;
+	//@ts-ignore
+	private playerSubscription: Subscription;
+
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
 		this.clientPlayerId = this.gameStateService.clientPlayerId
@@ -88,21 +97,29 @@ export class GameEventComponent {
 		this.gameStateService.currentEventQueue.subscribe(
 			eventQueue => this.handleEventQueueNext(eventQueue)
 		)
-		this.webSocketService.listen(
-			message => this.handleMessage(message)
-		)
+		this.groupSubscription = this.rxStompService
+		.watch(GLOBAL_WS_GROUP)
+		.subscribe((message: Message) => {
+		  this.handleGroupMessage(message.body)
+		});
+		this.playerSubscription = this.rxStompService
+		.watch(GLOBAL_WS_PLAYER)
+		.subscribe((message: Message) => {
+		  this.handlePlayerMessage(message.body)
+		});
 	}
 
-	updatePhase(phase:NonSelectablePhase):void{
+	updatePhase(phase:NonSelectablePhaseEnum):void{
 		this.currentPhase = phase
 		let events: EventBaseModel[] = []
 		switch(phase){
-			case('planification'):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
-			case('development'):{events.push(EventDesigner.createPhase('developmentPhase'));break}
-			case('construction'):{events.push(EventDesigner.createPhase('constructionPhase'));break}
-			case('action'):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
-			case('production'):{events.push(EventDesigner.createPhase('productionPhase'));break}
-			case('research'):{events.push(EventDesigner.createPhase('researchPhase'));break}
+			case(NonSelectablePhaseEnum.undefined):{return}
+			case(NonSelectablePhaseEnum.planification):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
+			case(NonSelectablePhaseEnum.development):{events.push(EventDesigner.createPhase('developmentPhase'));break}
+			case(NonSelectablePhaseEnum.construction):{events.push(EventDesigner.createPhase('constructionPhase'));break}
+			case(NonSelectablePhaseEnum.action):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
+			case(NonSelectablePhaseEnum.production):{events.push(EventDesigner.createPhase('productionPhase'));break}
+			case(NonSelectablePhaseEnum.research):{events.push(EventDesigner.createPhase('researchPhase'));break}
 			
 		}
 		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))
@@ -136,7 +153,10 @@ export class GameEventComponent {
 		}
 	}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
-	private handleMessage(message: any){
-		this.wsHandler.handleMessage(message as WsInputMessage)
+	private handleGroupMessage(message: any){
+		this.wsHandler.handleGroupMessage(WebsocketResultMessageFactory.createGroupMessageResult(message))
+	}
+	private handlePlayerMessage(message: any){
+		this.wsHandler.handlePlayerMessage(WebsocketResultMessageFactory.createPlayerMessageResult(message))
 	}
 }

@@ -8,5 +8,7 @@
         "1": false,
         "2": false,
         "3": false
-    }
+    },
+    "currentPhase": "PLANIFICATION",
+    "selectedPhase": ["DEVELOPMENT", "PRODUCTION"]
 }

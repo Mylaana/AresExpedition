@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, WsReadyQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
 
 interface PlayerMessage {
     gameId: number,
@@ -20,10 +21,9 @@ export class WebsocketQueryMessageFactory{
         let message: PlayerMessage = {
             gameId: gameId,
             playerId: clientId,
-            content: content,
+            content: content??{undefined:undefined},
             contentEnum: contentEnum
         }
-
         return message
     }
     public static createDrawQuery(drawNumber: number, eventId: number): PlayerMessage {
@@ -35,15 +35,22 @@ export class WebsocketQueryMessageFactory{
         return this.generatePlayerMessage(MessageContentQueryEnum.ready, query)
     }
     public static createGameStateQuery(): PlayerMessage {
-        return this.generatePlayerMessage(MessageContentQueryEnum.gameState)
+        return this.generatePlayerMessage(MessageContentQueryEnum.playerGameState)
+    }
+    public static createPhaseSelectedQuery(phase: SelectablePhaseEnum): PlayerMessage {
+        let query: WsSelectedPhaseQuery = {phase: phase}
+        return this.generatePlayerMessage(MessageContentQueryEnum.selectedPhase, query)
     }
 }
+
+
 export class WebsocketResultMessageFactory{
     private static createMessageResult(message: any): MessageResult {
+        let parsedMessage = JSON.parse(message)
         let result : MessageResult = {
-            gameId: message['gameId'],
-            contentEnum: message['contentEnum'],
-            content: message['content']
+            gameId: parsedMessage['gameId'],
+            contentEnum: parsedMessage['contentEnum'],
+            content: parsedMessage['content']
         }
         return result
     }

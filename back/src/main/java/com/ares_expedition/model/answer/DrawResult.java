@@ -1,4 +1,4 @@
-package com.ares_expedition.model.query.draw;
+package com.ares_expedition.model.answer;
 import java.util.*;
 
 public class DrawResult {

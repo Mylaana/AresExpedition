@@ -17,4 +17,9 @@ public class WsControllerInput {
     public <T> void resolvePlayerQuery(PlayerMessageQuery<T> message) throws Exception {
         inputRouter.routeInput(message);
     }
+
+    @MessageMapping("/debug")
+    public <T> void resolveTest(Object message) throws Exception {
+        inputRouter.routeDebug(message);
+    }
 }

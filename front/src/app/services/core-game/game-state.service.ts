@@ -14,8 +14,12 @@ import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { EventDesigner } from "../designers/event-designer.service";
 import { GlobalInfo } from "../global/global-info.service";
 import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
+import { RxStompService } from "../websocket/rx-stomp.service";
+import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
+import { GLOBAL_CLIENT_ID } from "../../global/global-const";
 
 interface SelectedPhase {
+    "undefined": boolean,
     "development": boolean,
     "construction": boolean,
     "action": boolean,
@@ -35,7 +39,7 @@ type EventPileAddRule = 'first' | 'second' | 'last'
 
 
 const phaseCount: number = 5;
-const handSizeStart: number = 5;
+const handSizeStart: number = 8;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
@@ -47,13 +51,13 @@ const cardSellCost: number = 3;
 export class GameState{
     loading = new BehaviorSubject<boolean>(true);
 
-    clientPlayerId = 0; //should be changed to reflect the client's player's id
+    clientPlayerId = GLOBAL_CLIENT_ID; //should be changed to reflect the client's player's id
     playerCount = new BehaviorSubject<number[]>([]);
 
     groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
     groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
-    phase = new BehaviorSubject<NonSelectablePhase>("planification")
+    phase = new BehaviorSubject<NonSelectablePhaseEnum>(NonSelectablePhaseEnum.undefined)
     drawQueue = new BehaviorSubject<DrawEvent[]>([])
     eventQueue = new BehaviorSubject<EventBaseModel[]>([])
 
@@ -77,6 +81,7 @@ export class GameState{
         "5":"research"
     }
     selectedPhase: SelectedPhase = {
+        "undefined": false,
         "development": false,
         "construction": false,
         "action": false,
@@ -88,6 +93,7 @@ export class GameState{
         private projectCardService: ProjectCardInfoService,
 		private phaseCardService: PhaseCardInfoService,
 		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
+        private rxStompService: RxStompService
 	){}
 
     addPlayer(playerName: string, playerColor: RGB): void {
@@ -240,7 +246,7 @@ export class GameState{
 
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
-            setTimeout(task => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
+            //setTimeout(() => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
             
         }
 
@@ -261,9 +267,9 @@ export class GameState{
         let newPlayerPhase: PlayerPhase;
         newPlayerPhase = {
             "playerId": newPlayer.id,
-            "currentSelectedPhase": undefined,
+            "currentSelectedPhase": SelectablePhaseEnum.undefined,
             "currentPhaseType": undefined,
-            "previousSelectedPhase": undefined
+            "previousSelectedPhase": SelectablePhaseEnum.undefined
         }
         this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
 
@@ -282,11 +288,9 @@ export class GameState{
      *
      * sets all players to not be ready
      */
-    updatePhase(newPhase: NonSelectablePhase): void {
-        if(newPhase === this.phase.getValue())
-            return
-        this.setClientPlayerReady(false)
+    public setCurrentPhase(newPhase: NonSelectablePhaseEnum): void {
         this.phase.next(newPhase)
+        this.setClientPlayerReady(false, 'setCurrentPhase')
     };
 
     /**
@@ -296,8 +300,9 @@ export class GameState{
 
      * if no id specified, will set all players to not {playerReady}
      * */
-    setClientPlayerReady(ready: boolean){
+    setClientPlayerReady(ready: boolean, origin: String){
         this.setPlayerReady(this.clientPlayerId, ready)
+        this.rxStompService.publishClientPlayerReady(ready, `game state ${ready} ${origin}`)
     };
     private setPlayerReady(playerId: number, ready: boolean){
         let groupReady = this.groupPlayerReady.getValue()
@@ -323,10 +328,12 @@ export class GameState{
         return false
     }
 
+    /*
     GoToNextPhaseIfPlayerReady(){
         let newPhase = this.goToNextPhase(this.phase.getValue())
         this.updatePhase(newPhase)
     }
+        */
 
     /**
      * @param currentPhase as NonSelectablePhase
@@ -397,7 +404,7 @@ export class GameState{
      *
      * updates the global selectedPhase
      */
-    playerSelectPhase(playerId:number, phase:SelectablePhase):void{
+    playerSelectPhase(playerId:number, phase:SelectablePhaseEnum):void{
         if(phase===undefined){
             return
         }
@@ -409,16 +416,19 @@ export class GameState{
             }
         }
         //global selectedPhase
-        this.selectedPhase[phase]=true
-    }
+        //this.selectedPhase[phase]=true
 
+    }
+    clientPlayerValidateSelectedPhase(): void {
+        this.rxStompService.publishSelectedPhase(this.getClientPlayerCurrentSelectedPhase())
+    }
     /**
      *
      * @param playerId
      * @param currentPhase
      * @returns undefined if the player didnt select the current phase or the phase card type they selected if equal to current phase
      */
-    getPlayerSelectedPhaseCardType(playerId:number, currentPhase: SelectablePhase): PhaseCardType | undefined {
+    getPlayerSelectedPhaseCardType(playerId:number, currentPhase: SelectablePhaseEnum): PhaseCardType | undefined {
         let selectedPhase = this.getPlayerPhase(playerId)
         if(selectedPhase===undefined){return undefined}
         if(selectedPhase.currentSelectedPhase != currentPhase){
@@ -427,18 +437,21 @@ export class GameState{
         return selectedPhase.currentPhaseType
     }
 
+    getClientPlayerCurrentSelectedPhase(): SelectablePhaseEnum {
+        return this.getPlayerCurrentSelectedPhase(this.clientPlayerId)
+    }
     /**
      *
      * @param playerId
      * @returns the player's current selected phase
      */
-    getPlayerSelectedPhase(playerId: number): SelectablePhase | undefined {
+    getPlayerCurrentSelectedPhase(playerId: number): SelectablePhaseEnum {
         for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){
             if(playerSelcted.playerId === playerId){
                 return playerSelcted.currentSelectedPhase
             }
         }
-        return undefined
+        return SelectablePhaseEnum.undefined
     }
 
     /**
@@ -461,7 +474,7 @@ export class GameState{
     resetPhaseSelection(){
         for(let i=0; i<this.groupPlayerSelectedPhase.getValue().length; i++){
             this.groupPlayerSelectedPhase.getValue()[i].previousSelectedPhase = this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase
-            this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase = undefined
+            this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase = SelectablePhaseEnum.undefined
         }
     }
 

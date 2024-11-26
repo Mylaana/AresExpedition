@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGroupReady, WsInputMessage } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsInputMessage } from "../../interfaces/websocket.interface";
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
+import { NonSelectablePhaseEnum } from "../../enum/phase.enum";
 
 @Injectable()
 export class WebsocketHandler {
@@ -20,17 +21,22 @@ export class WebsocketHandler {
             }
         }
     }
-    private handlePlayerMessage(message: PlayerMessageResult){
-        console.log('player', message)
-
+    public handlePlayerMessage(message: PlayerMessageResult){
         switch(message.contentEnum){
             case(PlayerMessageContentResultEnum.draw):{
                 this.handlePlayerMessageDrawResult(message.content)
                 break
             }
+            case(PlayerMessageContentResultEnum.gameState):{
+                this.handlePlayerMessageGameState(message.content)
+                break
+            }
+            default:{
+                console.log('UNHANDLED PLAYER MESSAGE RECEIVED: ', message)
+            }
         }
     }
-    private handleGroupMessage(message: GroupMessageResult){
+    public handleGroupMessage(message: GroupMessageResult){
         switch(message.contentEnum){
             case(GroupMessageContentResultEnum.debug):{
                 console.log('GROUP DEBUG:', message)
@@ -38,11 +44,30 @@ export class WebsocketHandler {
             }
             case(GroupMessageContentResultEnum.ready):{
                 this.handleGroupMessageReadyResult(message.content)
+                break
+            }
+            case(GroupMessageContentResultEnum.nextPhase):{
+                //console.log('NEXT PHASE FULL GAME STATE: ', message)
+                this.handlePlayerMessageGameState(message.content)
+                break
+            }
+            case(GroupMessageContentResultEnum.serverSideUnhandled):{
+                console.log('SERVER SIDE UNHANDLED MESSAGE RECEIVED: ',message.content)
+                break
+            }
+
+            default:{
+                console.log('UNHANDLED GROUP MESSAGE RECEIVED: ', message)
             }
         }
     }
     private handlePlayerMessageDrawResult(content: WsDrawResult): void {
         this.gameStateService.handleWsDrawResult(content)
+    }
+    private handlePlayerMessageGameState(content: WsGameState): void {
+        console.log('RECEIVED GAME STATE ON PLAYER CHANNEL:', content)
+        this.gameStateService.setCurrentPhase(content.currentPhase)
+        
     }
     private handleGroupMessageReadyResult(content: Map<number, boolean>): void {
         let groupReady: WsGroupReady[] = []

@@ -2,9 +2,9 @@ package com.ares_expedition.model.query.player;
 
 import java.util.Map;
 
-import com.ares_expedition.model.query.GenericQuery;
+import com.ares_expedition.model.query.BaseQuery;
 
-public class PlayerReadyQuery extends GenericQuery{
+public class PlayerReadyQuery extends BaseQuery{
     Boolean ready;
 
     public PlayerReadyQuery(){

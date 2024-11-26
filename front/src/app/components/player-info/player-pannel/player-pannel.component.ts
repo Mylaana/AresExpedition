@@ -7,6 +7,7 @@ import { GlobalPannelComponent } from '../global-pannel/global-pannel.component'
 import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
 import { PlayerPhase } from '../../../interfaces/global.interface';
 import { NonSelectablePhase } from '../../../types/global.type';
+import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 
 @Component({
   selector: 'app-player-pannel',
@@ -26,7 +27,7 @@ export class PlayerPannelComponent implements OnInit{
   playerIsReady!: boolean;
   playerName!: string;
   playerPhase!: PlayerPhase;
-  currentPhase!: NonSelectablePhase;
+  currentPhase!: NonSelectablePhaseEnum;
   
   constructor(private gameStateService: GameState){}
 
