@@ -11,12 +11,12 @@ import { PhaseCardHolderModel, PhaseCardGroupModel, PhaseCardModel } from "../..
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { EventDesigner } from "../designers/event-designer.service";
 import { GlobalInfo } from "../global/global-info.service";
 import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { GLOBAL_CLIENT_ID } from "../../global/global-const";
+import { EventDesigner } from "../designers/event-designer.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -290,7 +290,7 @@ export class GameState{
      */
     public setCurrentPhase(newPhase: NonSelectablePhaseEnum): void {
         this.phase.next(newPhase)
-        this.setClientPlayerReady(false, 'setCurrentPhase')
+        this.setClientPlayerReady(false)
     };
 
     /**
@@ -300,9 +300,10 @@ export class GameState{
 
      * if no id specified, will set all players to not {playerReady}
      * */
-    setClientPlayerReady(ready: boolean, origin: String){
+    setClientPlayerReady(ready: boolean, pushReadyToServer?: boolean){
         this.setPlayerReady(this.clientPlayerId, ready)
-        this.rxStompService.publishClientPlayerReady(ready, `game state ${ready} ${origin}`)
+        if(pushReadyToServer!=true){return}
+        this.rxStompService.publishClientPlayerReady(ready)
     };
     private setPlayerReady(playerId: number, ready: boolean){
         let groupReady = this.groupPlayerReady.getValue()

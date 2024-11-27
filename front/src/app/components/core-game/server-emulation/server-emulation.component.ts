@@ -96,7 +96,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		}
 
 		//bots autoready
-		this.sendBotsReady()
+		//this.sendBotsReady()
 	}
 	planificationPhaseBotSelection(){
 		for(let index of this.gameStateService.playerCount.getValue()){
@@ -122,7 +122,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		let message = JSON.stringify(WebsocketQueryMessageFactory.createReadyQuery(true))
 		this.rxStompService.publish({ destination: '/app/player', body: message });
 		*/
-		this.rxStompService.publishClientPlayerReady(true, 'server simulation')
+		this.rxStompService.publishClientPlayerReady(true)
 	}
 	sendNotReady(): void {
 		let message = JSON.stringify(WebsocketQueryMessageFactory.createReadyQuery(false))
@@ -131,7 +131,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	}
 	sendtest(): void {
 		let message = JSON.stringify("test")
-		this.rxStompService.publish({ destination: '/app/debug', body: message });
+		this.rxStompService.publish({ destination: '/app/debug', body: message});
 		//this.websocket.sendReady(false)
 	}
 	sendBotsReady(): void {

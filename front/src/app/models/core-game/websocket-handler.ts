@@ -3,7 +3,6 @@ import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsG
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
-import { NonSelectablePhaseEnum } from "../../enum/phase.enum";
 
 @Injectable()
 export class WebsocketHandler {
@@ -28,7 +27,7 @@ export class WebsocketHandler {
                 break
             }
             case(PlayerMessageContentResultEnum.gameState):{
-                this.handlePlayerMessageGameState(message.content)
+                this.handleMessageGameState(message.content, 'player')
                 break
             }
             default:{
@@ -47,8 +46,7 @@ export class WebsocketHandler {
                 break
             }
             case(GroupMessageContentResultEnum.nextPhase):{
-                //console.log('NEXT PHASE FULL GAME STATE: ', message)
-                this.handlePlayerMessageGameState(message.content)
+                this.handleMessageGameState(message.content, 'group')
                 break
             }
             case(GroupMessageContentResultEnum.serverSideUnhandled):{
@@ -64,8 +62,8 @@ export class WebsocketHandler {
     private handlePlayerMessageDrawResult(content: WsDrawResult): void {
         this.gameStateService.handleWsDrawResult(content)
     }
-    private handlePlayerMessageGameState(content: WsGameState): void {
-        console.log('RECEIVED GAME STATE ON PLAYER CHANNEL:', content)
+    private handleMessageGameState(content: WsGameState, origin: String): void {
+        console.log(`RECEIVED GAME STATE ON ${origin.toUpperCase()} CHANNEL:`, content)
         this.gameStateService.setCurrentPhase(content.currentPhase)
         
     }

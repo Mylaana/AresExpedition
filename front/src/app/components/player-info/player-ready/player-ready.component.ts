@@ -12,6 +12,6 @@ export class PlayerReadyComponent {
   constructor(private gameState: GameState){};
   
   ready(isReady:boolean){
-    this.gameState.setClientPlayerReady(isReady,'readyComponent')
+    this.gameState.setClientPlayerReady(isReady)
   };
 }

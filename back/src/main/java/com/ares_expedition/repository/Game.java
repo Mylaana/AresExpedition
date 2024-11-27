@@ -96,8 +96,9 @@ public class Game {
         }
     }
     public GameStateContent getGameState(){
-        GameStateContent gameState = new GameStateContent(currentPhase);
-
+        GameStateContent gameState = new GameStateContent();
+        gameState.setCurrentPhase(currentPhase);
+        gameState.setGroupReady(groupPlayerReady);
 
         return gameState;
     }

@@ -34,8 +34,7 @@ export class RxStompService extends RxStomp {
         this.publishMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
     }
 
-    public publishClientPlayerReady(ready: boolean, origin: String): void {
-        console.log('sent ready:', origin)
+    public publishClientPlayerReady(ready: boolean): void {
         this.publishMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
     }
 

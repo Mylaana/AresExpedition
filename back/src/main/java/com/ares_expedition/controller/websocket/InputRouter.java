@@ -85,8 +85,17 @@ public class InputRouter {
             gameController.setPlayerReady(1, 1, true);
             gameController.setPlayerReady(1, 2, true);
             gameController.setPlayerReady(1, 3, true);
-            Integer gameId = 1;
+            Integer gameId = query.getGameId();
             wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
+            
+            if(!gameController.getAllPlayersReady(gameId)){
+                wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
+                return;
+            }
+    
+            gameController.setAllPlayersNotReady(gameId);
+            gameController.nextPhaseSelected(gameId);
+            wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, gameController.getGameState(gameId)));
             return;
         }
         
