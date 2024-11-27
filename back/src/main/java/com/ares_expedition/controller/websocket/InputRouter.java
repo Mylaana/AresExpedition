@@ -35,14 +35,10 @@ public class InputRouter {
         this.wsOutput = wsOutput;
         this.gameController = gameController;
     }
-    public void routeDebug(Object message) {
-        if(message=="SET_BOTS_READY"){
-            gameController.setPlayerReady(1, 1, true);
-            gameController.setPlayerReady(1, 2, true);
-            gameController.setPlayerReady(1, 3, true);
-            return;
-        }
-        wsOutput.sendPushToGroup(new PlayerMessageAnswer(1, "received message: " + message));
+    public <T> void routeDebug(PlayerMessageQuery<T> message) {
+        handleQuery(
+                    message, GenericQuery.class,
+                    GenericMessageQuery.class, this::handleDEBUGMessage);
     }
     public <T> void routeInput(PlayerMessageQuery<T> message) {
         switch (message.getContentEnum()) {
@@ -82,6 +78,21 @@ public class InputRouter {
         M query = QueryMessageFactory.createMessageQuery(message, contentType, messageQueryType);
         handler.accept(query);
     }
+    
+    private void handleDEBUGMessage(GenericMessageQuery query){
+        Object queryContent = query.getContent().getContent().toString();
+        if(queryContent.toString().equals("SET_BOTS_READY")){
+            gameController.setPlayerReady(1, 1, true);
+            gameController.setPlayerReady(1, 2, true);
+            gameController.setPlayerReady(1, 3, true);
+            Integer gameId = 1;
+            wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
+            return;
+        }
+        
+
+    }
+    
     private void handleNotRoutedMessage(UnHandledMessageQuery query){
         Map<String, Object> result = new HashMap<>();
         result.put("contentEnum", query.getContentEnum());

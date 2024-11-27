@@ -3,7 +3,6 @@ import { RxStomp } from '@stomp/rx-stomp';
 import { WebsocketQueryMessageFactory } from '../designers/websocket-message-factory.service';
 import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID, GLOBAL_WS_APP_PLAYER } from '../../global/global-const';
 import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
-import { WsInputMessage } from '../../interfaces/websocket.interface';
 import { myRxStompConfig } from './rx-stomp.config';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
 
@@ -48,14 +47,13 @@ export class RxStompService extends RxStomp {
         this.publishMessage(WebsocketQueryMessageFactory.createPhaseSelectedQuery(phase))
     }
 
-    public publishDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentQueryEnum, content:any}){
+    public publishDebugMessage(param:{gameId?:number, playerId?:number, contentEnum?:MessageContentQueryEnum, content:any}){
         let message = {
             gameId: param.gameId?? GLOBAL_GAME_ID,
             playerId: param.playerId?? GLOBAL_CLIENT_ID,
-            contentEnum: param.contentEnum,
-            content: param.content
+            contentEnum: param.contentEnum?? MessageContentQueryEnum.debug,
+            content: {debug:param.content}
         }
-        console.log('debug message: ',message)
-        this.publishMessage(message)
+        this.publish({destination: "/app/debug", body: JSON.stringify(message)});
     }
 }

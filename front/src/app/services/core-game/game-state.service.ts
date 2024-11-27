@@ -758,4 +758,7 @@ export class GameState{
             this.setPlayerReady(wsReady.playerId, wsReady.ready)
         }
     }
+    public clearEventQueue(){
+		this.eventQueue.next([])
+	}
 }

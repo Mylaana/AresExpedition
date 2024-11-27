@@ -2,7 +2,9 @@ export enum MessageContentQueryEnum {
     drawQuery = 'DRAW_QUERY',
     ready = 'READY_QUERY',
     playerGameState = 'PLAYER_GAME_STATE_QUERY',
-    selectedPhase = 'SELECTED_PHASE_QUERY'
+    selectedPhase = 'SELECTED_PHASE_QUERY',
+
+    debug = 'DEBUG'
 }
 export enum PlayerMessageContentResultEnum {
     draw = 'DRAW_RESULT',

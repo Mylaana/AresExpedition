@@ -114,7 +114,10 @@ export class GameEventComponent {
 		let events: EventBaseModel[] = []
 		switch(phase){
 			case(NonSelectablePhaseEnum.undefined):{return}
-			case(NonSelectablePhaseEnum.planification):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
+			case(NonSelectablePhaseEnum.planification):{
+				this.gameStateService.clearEventQueue()
+				events.push(EventDesigner.createGeneric('planificationPhase'))
+				break}
 			case(NonSelectablePhaseEnum.development):{events.push(EventDesigner.createPhase('developmentPhase'));break}
 			case(NonSelectablePhaseEnum.construction):{events.push(EventDesigner.createPhase('constructionPhase'));break}
 			case(NonSelectablePhaseEnum.action):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
