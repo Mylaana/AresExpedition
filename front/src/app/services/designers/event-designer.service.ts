@@ -243,6 +243,10 @@ export class EventDesigner{
                 event.waiterId = args?.waiterId
                 break
             }
+            case('waitingGroupReady'):{
+                event.autoFinalize = false
+                break
+            }
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)

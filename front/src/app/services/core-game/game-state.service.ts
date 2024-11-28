@@ -755,11 +755,35 @@ export class GameState{
         }
     }
     handleWsGroupReady(wsGroupReady: WsGroupReady[]): void {
+        let clientReady: boolean = false
         for(let wsReady of wsGroupReady){
             this.setPlayerReady(wsReady.playerId, wsReady.ready)
+            if(wsReady.playerId===this.clientPlayerId){clientReady=wsReady.ready}
+        }
+        
+        switch(clientReady){
+            case(false):{
+                this.finalizeEventWaitingGroupReady()
+                return
+            }
+            case(true):{
+                this.clearEventQueue()
+                this.addEventQueue(EventDesigner.createGeneric("waitingGroupReady"),"first")
+                return
+            }
         }
     }
     public clearEventQueue(){
 		this.eventQueue.next([])
 	}
+    public finalizeEventWaitingGroupReady(){
+        if(this.eventQueue.getValue().length===0){return}
+        
+        for(let event of this.eventQueue.getValue()){
+            if(event.subType==='waitingGroupReady'){
+                event.finalized = true
+            }
+        }
+        this.cleanAndNextEventQueue()
+    }
 }

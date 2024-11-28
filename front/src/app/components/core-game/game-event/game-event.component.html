@@ -16,6 +16,7 @@
 			</div>
             <app-phase-planification *ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
             <app-phase-production *ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"></app-phase-production>
+            <div *ngIf="currentEvent.subType==='waitingGroupReady'" class="ares-background"><h1>[Waiting for other players to be ready]</h1></div>
         </div>
         <div class="wrapper-event-bottom">
             <div *ngIf="currentEvent.hasSelector()===true" class="wrapper-card-selector ares-background">

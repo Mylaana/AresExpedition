@@ -43,4 +43,5 @@ export interface WsDrawResult extends WsResult {
 }
 export interface WsGameState extends WsResult {
     currentPhase: NonSelectablePhaseEnum
+    groupReady: Map<number, boolean>
 }

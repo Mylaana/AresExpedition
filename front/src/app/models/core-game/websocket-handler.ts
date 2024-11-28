@@ -64,7 +64,9 @@ export class WebsocketHandler {
     }
     private handleMessageGameState(content: WsGameState, origin: String): void {
         console.log(`RECEIVED GAME STATE ON ${origin.toUpperCase()} CHANNEL:`, content)
+        this.gameStateService.clearEventQueue()
         this.gameStateService.setCurrentPhase(content.currentPhase)
+        this.handleGroupMessageReadyResult(content.groupReady)
         
     }
     private handleGroupMessageReadyResult(content: Map<number, boolean>): void {
