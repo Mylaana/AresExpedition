@@ -3,6 +3,7 @@ export enum MessageContentQueryEnum {
     ready = 'READY_QUERY',
     playerGameState = 'PLAYER_GAME_STATE_QUERY',
     selectedPhase = 'SELECTED_PHASE_QUERY',
+    endOfPhase = 'PLAYER_STATE_QUERY',
 
     debug = 'DEBUG'
 }

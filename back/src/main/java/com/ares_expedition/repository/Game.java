@@ -99,6 +99,7 @@ public class Game {
         GameStateContent gameState = new GameStateContent();
         gameState.setCurrentPhase(currentPhase);
         gameState.setGroupReady(groupPlayerReady);
+        gameState.setSelectedPhase(selectedPhase);
 
         return gameState;
     }
@@ -109,12 +110,32 @@ public class Game {
         this.currentPhase = phase;
     }
     public void nextPhaseSelected(){
+        LinkedHashSet<PhaseEnum> tempSelectedPhase = new LinkedHashSet<>(this.selectedPhase);
+
+        for(PhaseEnum phase: this.selectedPhase){
+            if(phase.equals(this.currentPhase)){
+                tempSelectedPhase.removeFirst();
+                break;
+            }
+            tempSelectedPhase.removeFirst();
+        }
+
+        if(tempSelectedPhase.size()!=0){
+            this.currentPhase = tempSelectedPhase.getFirst();
+            return;
+        }
+        this.selectedPhase.clear();
+        this.selectedPhase.add(PhaseEnum.PLANIFICATION);
+        this.currentPhase = this.selectedPhase.getFirst();
+
+        /*
         this.selectedPhase.remove(this.currentPhase);
         if(selectedPhase.size()==0){
             this.selectedPhase.add(PhaseEnum.PLANIFICATION);
             this.selectedPhase.add(PhaseEnum.ACTION);
         }
         this.currentPhase = this.selectedPhase.getFirst();
+        */
     }
     public void addPhaseSelected(PhaseEnum phase){
         this.selectedPhase.add(phase);

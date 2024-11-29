@@ -3,10 +3,16 @@ import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsG
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
+import { EventDesigner } from "../../services/designers/event-designer.service";
 
 @Injectable()
 export class WebsocketHandler {
+    clientPlayerId = this.gameStateService.clientPlayerId
+    
     constructor(private gameStateService: GameState){}
+    
+
+    
 
     handleMessage(message: WsInputMessage){
         switch(message.subscription){
@@ -70,12 +76,26 @@ export class WebsocketHandler {
         
     }
     private handleGroupMessageReadyResult(content: Map<number, boolean>): void {
-        let groupReady: WsGroupReady[] = []
+        //converting content to WsGroupReady format
+        let wsGroupReady: WsGroupReady[] = []
         const entries = Object.entries(content);
-
         entries.forEach(([key, value]) => {
-            groupReady.push({playerId: +key, ready:value});
+            wsGroupReady.push({playerId: +key, ready:value});
         });
-        this.gameStateService.handleWsGroupReady(groupReady)
+
+        //setting ready
+        this.gameStateService.setGroupReady(wsGroupReady)
+        
+        switch(this.gameStateService.getClientPlayerReady()){
+            case(false):{
+                this.gameStateService.finalizeEventWaitingGroupReady()
+                return
+            }
+            case(true):{
+                this.gameStateService.clearEventQueue()
+                this.gameStateService.addEventQueue(EventDesigner.createGeneric("waitingGroupReady"),"first")
+                return
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
+import { PlayerStateModel } from "../models/player-info/player-state.model"
 
 export interface WsInputMessage {
     subscription: SubscriptionEnum,
@@ -43,5 +44,7 @@ export interface WsDrawResult extends WsResult {
 }
 export interface WsGameState extends WsResult {
     currentPhase: NonSelectablePhaseEnum
+    selectedPhases: SelectablePhaseEnum[]
     groupReady: Map<number, boolean>
+    publicPlayerState: any
 }

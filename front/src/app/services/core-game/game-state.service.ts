@@ -281,31 +281,18 @@ export class GameState{
         this.playerCount.next(playerIdList)
     }
 
-    /**
-     *
-     * @param newPhase
-     * gets the new phase to set
-     *
-     * sets all players to not be ready
-     */
     public setCurrentPhase(newPhase: NonSelectablePhaseEnum): void {
         this.phase.next(newPhase)
         this.setClientPlayerReady(false)
     };
 
-    /**
-     * @param playerId
-     * @returns
-     * set player with id to be ready or not according to {playerReady}
-
-     * if no id specified, will set all players to not {playerReady}
-     * */
-    setClientPlayerReady(ready: boolean, pushReadyToServer?: boolean){
+    public setClientPlayerReady(ready: boolean, pushReadyToServer?: boolean){
         this.setPlayerReady(this.clientPlayerId, ready)
         if(pushReadyToServer!=true){return}
         this.rxStompService.publishClientPlayerReady(ready)
     };
-    private setPlayerReady(playerId: number, ready: boolean){
+
+    public setPlayerReady(playerId: number, ready: boolean){
         let groupReady = this.groupPlayerReady.getValue()
 
         for(let player of groupReady){
@@ -317,6 +304,9 @@ export class GameState{
         this.groupPlayerReady.next(groupReady)
     }
 
+    getClientPlayerReady(): boolean {
+        return this.getPlayerReady(this.clientPlayerId)
+    }
     getPlayerReady(playerId?: number): boolean {
         let groupReady = this.groupPlayerReady.getValue()
 
@@ -754,23 +744,9 @@ export class GameState{
             console.log('event not found', wsDrawResult, drawQueue, this.eventQueue.getValue())
         }
     }
-    handleWsGroupReady(wsGroupReady: WsGroupReady[]): void {
-        let clientReady: boolean = false
-        for(let wsReady of wsGroupReady){
-            this.setPlayerReady(wsReady.playerId, wsReady.ready)
-            if(wsReady.playerId===this.clientPlayerId){clientReady=wsReady.ready}
-        }
-        
-        switch(clientReady){
-            case(false):{
-                this.finalizeEventWaitingGroupReady()
-                return
-            }
-            case(true):{
-                this.clearEventQueue()
-                this.addEventQueue(EventDesigner.createGeneric("waitingGroupReady"),"first")
-                return
-            }
+    public setGroupReady(wsGroupReady: WsGroupReady[]): void {
+        for(let ready of wsGroupReady){
+            this.setPlayerReady(ready.playerId,ready.ready)
         }
     }
     public clearEventQueue(){
