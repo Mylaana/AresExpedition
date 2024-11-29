@@ -1,9 +1,9 @@
 export enum MessageContentQueryEnum {
     drawQuery = 'DRAW_QUERY',
     ready = 'READY_QUERY',
-    playerGameState = 'PLAYER_GAME_STATE_QUERY',
+    playerGameStateQuery = 'PLAYER_GAME_STATE_QUERY',
     selectedPhase = 'SELECTED_PHASE_QUERY',
-    endOfPhase = 'PLAYER_STATE_QUERY',
+    playerStatePush = 'PLAYER_STATE_PUSH',
 
     debug = 'DEBUG'
 }

@@ -96,7 +96,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		}
 
 		//bots autoready
-		//this.sendBotsReady()
+		this.sendBotsReady()
 	}
 	planificationPhaseBotSelection(){
 		for(let index of this.gameStateService.playerCount.getValue()){

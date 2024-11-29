@@ -286,10 +286,8 @@ export class GameState{
         this.setClientPlayerReady(false)
     };
 
-    public setClientPlayerReady(ready: boolean, pushReadyToServer?: boolean){
+    public setClientPlayerReady(ready: boolean){
         this.setPlayerReady(this.clientPlayerId, ready)
-        if(pushReadyToServer!=true){return}
-        this.rxStompService.publishClientPlayerReady(ready)
     };
 
     public setPlayerReady(playerId: number, ready: boolean){

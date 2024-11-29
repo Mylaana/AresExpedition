@@ -1,6 +1,6 @@
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
-import { PlayerStateModel } from "../models/player-info/player-state.model"
+import { PlayerStateModel_PublicDTO, PlayerStateModel_SecretDTO } from "./model.interface"
 
 export interface WsInputMessage {
     subscription: SubscriptionEnum,
@@ -31,6 +31,10 @@ export interface WsReadyQuery extends WsQuery {
 }
 export interface WsSelectedPhaseQuery extends WsQuery {
     phase: SelectablePhaseEnum
+}
+export interface WsPlayerState extends WsQuery {
+    secretState: PlayerStateModel_SecretDTO
+    publicState: PlayerStateModel_PublicDTO
 }
 
 export interface WsResult {}

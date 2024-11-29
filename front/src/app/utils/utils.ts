@@ -1,4 +1,6 @@
+import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GLOBAL_CLIENT_ID } from "../global/global-const"
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
+
 export class Utils {
 	public static jsonCopy(item: any): any{
 		return JSON.parse(JSON.stringify(item))
@@ -26,5 +28,20 @@ export class Utils {
 	}
 	public static logText(...text: any ): void {
 		console.log(text)
+	}
+	public static logEventResolution(...text: any): void {
+		if(!DEBUG_LOG_EVENT_RESOLUTION){return}
+		this.logText(text)
+	}
+	public static logError(...text: any): void{
+		console.log(text)
+	}
+	public static logPublishMessage(prefix: any, content: any): void {
+		if(!DEBUG_LOG_WS_PUBLISH){return}
+		console.log(`%cPUBLISHED: ${prefix}: `, 'color:red', content)
+	}
+	public static logReceivedMessage(prefix: any, content: any): void {
+		if(!DEBUG_LOG_WS_RECEIVED){return}
+		console.log(`%cRECEIVED: ${prefix}: `, 'color:green', content)
 	}
 }

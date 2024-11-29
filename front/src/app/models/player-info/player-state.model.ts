@@ -4,6 +4,7 @@ import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
 import { RessourceType } from "../../types/global.type";
 import { GlobalParameterModel } from "../core-game/global-parameter.model";
+import { PlayerStateModel_FullDTO, PlayerStateModel_PublicDTO, PlayerStateModel_SecretDTO } from "../../interfaces/model.interface";
 
 const ressourceIndex = new  Map<RessourceType, number>(
 	[
@@ -89,6 +90,48 @@ export class PlayerStateModel {
 	}
 	addGlobalParameterStep(parameter: GlobalParameterValue): void {
 		this.globalParameter.addStepToParameterEOP(parameter)
+	}
+	public toFullDTO(): PlayerStateModel_FullDTO {
+		return {
+			id: this.id,
+			name: this.name,
+			color: this.color,
+			ressource: this.ressource,
+			terraformingRating: this.terraformingRating,
+			vp: this.vp,
+			tag: this.tag,
+			research: this.research,
+			phaseCards: this.phaseCards,
+			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
+			sellCardValueMod: this.sellCardValueMod,
+			milestoneCount: this.milestoneCount,
+
+			cards: this.cards,
+			globalParameter: this.globalParameter
+
+		}
+	}
+	public toSecretDTO(): PlayerStateModel_SecretDTO {
+		return {
+			cards: this.cards,
+			globalParameter: this.globalParameter
+		}
+	}
+	public toPublicDTO(): PlayerStateModel_PublicDTO {
+		return {
+			id: this.id,
+			name: this.name,
+			color: this.color,
+			ressource: this.ressource,
+			terraformingRating: this.terraformingRating,
+			vp: this.vp,
+			tag: this.tag,
+			research: this.research,
+			phaseCards: this.phaseCards,
+			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
+			sellCardValueMod: this.sellCardValueMod,
+			milestoneCount: this.milestoneCount
+		}
 	}
 }
 

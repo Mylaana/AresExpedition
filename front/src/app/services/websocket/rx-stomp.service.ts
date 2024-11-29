@@ -5,6 +5,8 @@ import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID, GLOBAL_WS_APP_PLAYER } from '../../gl
 import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
 import { myRxStompConfig } from './rx-stomp.config';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
+import { PlayerStateModel } from '../../models/player-info/player-state.model';
+import { Utils } from '../../utils/utils';
 
 
 @Injectable({
@@ -25,8 +27,18 @@ export class RxStompService extends RxStomp {
         this.publishGameStateQuery()
     }
 
+    public publishDebugMessage(param:{gameId?:number, playerId?:number, contentEnum?:MessageContentQueryEnum, content:any}){
+        let message = {
+            gameId: param.gameId?? GLOBAL_GAME_ID,
+            playerId: param.playerId?? GLOBAL_CLIENT_ID,
+            contentEnum: param.contentEnum?? MessageContentQueryEnum.debug,
+            content: {debug:param.content}
+        }
+        this.publish({destination: "/app/debug", body: JSON.stringify(message)});
+    }
+
 	private publishMessage(message: any){
-        console.log(`%cPUBLISHED: ${message.contentEnum}: `, 'color:red', message.content)
+        Utils.logPublishMessage(message.contentEnum, message.content)
 		this.publish({destination: GLOBAL_WS_APP_PLAYER, body: JSON.stringify(message)});
     }
 
@@ -46,13 +58,7 @@ export class RxStompService extends RxStomp {
         this.publishMessage(WebsocketQueryMessageFactory.createPhaseSelectedQuery(phase))
     }
 
-    public publishDebugMessage(param:{gameId?:number, playerId?:number, contentEnum?:MessageContentQueryEnum, content:any}){
-        let message = {
-            gameId: param.gameId?? GLOBAL_GAME_ID,
-            playerId: param.playerId?? GLOBAL_CLIENT_ID,
-            contentEnum: param.contentEnum?? MessageContentQueryEnum.debug,
-            content: {debug:param.content}
-        }
-        this.publish({destination: "/app/debug", body: JSON.stringify(message)});
+    public publishPlayerState(state: PlayerStateModel): void {
+        this.publishMessage(WebsocketQueryMessageFactory.createClientPlayerStatePush(state))
     }
 }

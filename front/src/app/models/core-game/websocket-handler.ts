@@ -4,15 +4,13 @@ import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, Subscrip
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
+import { Utils } from "../../utils/utils";
 
 @Injectable()
 export class WebsocketHandler {
     clientPlayerId = this.gameStateService.clientPlayerId
     
     constructor(private gameStateService: GameState){}
-    
-
-    
 
     handleMessage(message: WsInputMessage){
         switch(message.subscription){
@@ -27,6 +25,7 @@ export class WebsocketHandler {
         }
     }
     public handlePlayerMessage(message: PlayerMessageResult){
+        Utils.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
         switch(message.contentEnum){
             case(PlayerMessageContentResultEnum.draw):{
                 this.handlePlayerMessageDrawResult(message.content)
@@ -42,9 +41,9 @@ export class WebsocketHandler {
         }
     }
     public handleGroupMessage(message: GroupMessageResult){
+        Utils.logReceivedMessage(`[${message.contentEnum}] ON [GROUP CHANNEL]`, message.content)
         switch(message.contentEnum){
             case(GroupMessageContentResultEnum.debug):{
-                console.log('GROUP DEBUG:', message)
                 break
             }
             case(GroupMessageContentResultEnum.ready):{
@@ -69,7 +68,6 @@ export class WebsocketHandler {
         this.gameStateService.handleWsDrawResult(content)
     }
     private handleMessageGameState(content: WsGameState, origin: String): void {
-        console.log(`RECEIVED GAME STATE ON ${origin.toUpperCase()} CHANNEL:`, content)
         this.gameStateService.clearEventQueue()
         this.gameStateService.setCurrentPhase(content.currentPhase)
         this.handleGroupMessageReadyResult(content.groupReady)

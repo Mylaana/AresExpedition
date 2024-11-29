@@ -27,6 +27,7 @@ export class EventHandler {
     constructor(
 		private gameStateService: GameState,
 		private projectCardInfoService: ProjectCardInfoService,
+		private rxStompService: RxStompService
 	){}
 
 	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
@@ -114,7 +115,7 @@ export class EventHandler {
 		//check per subType special rules:
 		switch(subType){
 			case('selectCardForcedSell'):{
-				console.log('resolving event: ','EventCardSelector ', event.subType)
+				Utils.logEventResolution('resolving event: ','EventCardSelector ', event.subType)
                 let playerCards = this.gameStateService.getClientPlayerState().cards
                 if(playerCards.hand.length <= playerCards.maximum){
                     event.finalized = true
@@ -161,13 +162,13 @@ export class EventHandler {
 			case('targetCard'):{this.finishEventTargetCards(this.currentEvent as EventTargetCard); break}
 			case('waiter'):{this.finishEventWaiter(this.currentEvent as EventWaiter);break}
 			case('phase'):{this.finishEventPhase(this.currentEvent as EventPhase); break}
-			default:{console.log('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
         }
 		if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
 		this.checkFinalized()
     }
     private finishEventCardSelector(event: EventCardSelector): void {
-		console.log('resolving event: ','EventCardSelector ', event.subType)
+		Utils.logEventResolution('resolving event: ','EventCardSelector ', event.subType)
 
 		event.finalized = true
 
@@ -191,12 +192,12 @@ export class EventHandler {
 				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
 				break
 			}
-			default:{console.log('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
         }
 		if(event.subType!='actionPhase'){event.activateSelection()}
     }
     private finishEventCardSelectorRessource(event: EventCardSelectorRessource): void {
-		console.log('resolving event: ','EventCardSelectorRessource ', event.subType)
+		Utils.logEventResolution('resolving event: ','EventCardSelectorRessource ', event.subType)
 		switch(event.subType){
 			case('addRessourceToSelectedCard'):{
 				event.finalized = true
@@ -206,27 +207,29 @@ export class EventHandler {
 				this.gameStateService.addRessourceToClientPlayerCard({cardId: event.cardSelector.selectedList[0].id,stock: stock})
 				break
 			}
-			default:{console.log('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
 		}
     }
 	private finishEventCardBuilder(event: EventCardBuilder): void {
-		console.log('resolving event: ','EventCardBuilder ', event.subType)
+		Utils.logEventResolution('resolving event: ','EventCardBuilder ', event.subType)
 		switch(event.subType){
 			case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):{
 				event.finalized = true
 				break
 			}
-			default:{console.log('Non mapped event in handler.finishEventCardBuilder: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.finishEventCardBuilder: ', this.currentEvent)}
 		}
 	}
 	private finishEventGeneric(event: EventGeneric): void {
-		console.log('resolving event: ','EventGeneric ', event.subType)
+		Utils.logEventResolution('resolving event: ','EventGeneric ', event.subType)
 
 		if(event.subType!='buildCard'){event.finalized = true}
 
 		switch(event.subType){
 			case('endOfPhase'):{
-				this.gameStateService.setClientPlayerReady(true, true)
+				this.gameStateService.setClientPlayerReady(true)
+				this.rxStompService.publishClientPlayerReady(true)
+				this.rxStompService.publishPlayerState(this.gameStateService.getClientPlayerState())
 				break
 			}
 			case('buildCard'):{
@@ -275,11 +278,11 @@ export class EventHandler {
 				break
 			}
 			case('upgradePhaseCards'):{break}
-			default:{console.log('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}
 	private finishEventDeckQuery(event: EventDeckQuery): void {
-		console.log('resolving event: ','EventDeckQuery ', event.subType)
+		Utils.logEventResolution('resolving event: ','EventDeckQuery ', event.subType)
 		let resolveType!: EventUnionSubTypes
 		event.waiterId = event.id
 		switch(event.subType){
@@ -295,7 +298,7 @@ export class EventHandler {
 				resolveType = 'scanKeepResult'
 				break
 			}
-			default:{console.log('Non mapped event in handler.finishEventDeckQuery: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.finishEventDeckQuery: ', this.currentEvent)}
 		}
 
 		if((event.drawDiscard===undefined && event.scanKeep===undefined) || event.waiterId===undefined || resolveType===undefined){return}
@@ -316,20 +319,20 @@ export class EventHandler {
 		this.gameStateService.cleanAndNextEventQueue()
 	}
 	private finishEventWaiter(event: EventWaiter): void {
-		console.log('resolving event: ','EventWaiter ', event.subType)
+		Utils.logEventResolution('resolving event: ','EventWaiter ', event.subType)
 		switch(event.subType){
 			case('deckWaiter'):{
 				return
 			}
-			default:{console.log('Non mapped event in handler.EventWaiter: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.EventWaiter: ', this.currentEvent)}
 		}
 	}
 	private finishEventTargetCards(event: EventTargetCard): void {
-		console.log('resolving event: ','EventTargetCard ', event.subType)
+		Utils.logEventResolution('resolving event: ','EventTargetCard ', event.subType)
 
 		switch(event.subType){
 			case('addRessourceToCardId'):{
-				if(event.advancedRessource===undefined){console.log('event tried to add ressource, but variable was empty: ',event); break}
+				if(event.advancedRessource===undefined){Utils.logError('event tried to add ressource, but variable was empty: ',event); break}
 				let ressourceStock: AdvancedRessourceStock[] = []
 				if(Array.isArray(event.advancedRessource)===true){
 					ressourceStock = event.advancedRessource
@@ -347,11 +350,11 @@ export class EventHandler {
 				this.gameStateService.setClientPlayerTriggerAsInactive(event.targetCardId)
 				break
 			}
-			default:{console.log('Non mapped event in handler.finishEventTargetCards: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.finishEventTargetCards: ', this.currentEvent)}
 		}
 	}
 	private finishEventPhase(event: EventPhase): void {
-		console.log('resolving event: ','finishEventPhase ', event.subType)
+		Utils.logEventResolution('resolving event: ','finishEventPhase ', event.subType)
 
 		switch(event.subType){
 			case('developmentPhase'):case('constructionPhase'):case('researchPhase'):{break}
@@ -359,7 +362,7 @@ export class EventHandler {
 				event.finalized=true
 				break
 			}
-			default:{console.log('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}
+			default:{Utils.logError('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}
 		}
 	}
 	private resolveWaiters(eventQueue: EventBaseModel[]){
@@ -409,7 +412,7 @@ export class DrawEventHandler {
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
-		console.log('resolving deck event: ',drawEvent.resolveEventSubType)
+		Utils.logEventResolution('resolving deck event: ',drawEvent.resolveEventSubType)
 		switch(drawEvent.resolveEventSubType){
 			case('drawResult'):{
 				resultEvent = EventDesigner.createGeneric(
