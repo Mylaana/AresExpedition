@@ -11,7 +11,7 @@ public class GenericQuery extends BaseQuery{
     }
     
     public GenericQuery(Map<String, Object> data) {
-        this.content = data.get("any");
+        this.content = data.get("debug");
     }
 
     public Object getContent(){

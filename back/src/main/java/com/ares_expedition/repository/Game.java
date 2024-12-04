@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.game.PlayerState;
+import com.ares_expedition.model.query.player.PlayerStateDTO;
 
 public class Game {
     private Integer gameId;
@@ -14,6 +16,7 @@ public class Game {
     private Map<Integer, Boolean> groupPlayerReady;
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
+    private Map<Integer, PlayerState> groupPlayerState = new HashMap<>();
 
     public Game() {
     }
@@ -22,8 +25,7 @@ public class Game {
         this.deck = deck;
         this.discard = discard;
         this.groupPlayerId = groupPlayerId;
-        this.currentPhase = currentPhase;
-        
+        this.currentPhase = currentPhase;        
     }
     public Integer getGameId() {
         return this.gameId;
@@ -96,8 +98,11 @@ public class Game {
         }
     }
     public GameStateContent getGameState(){
-        GameStateContent gameState = new GameStateContent(currentPhase);
-
+        GameStateContent gameState = new GameStateContent();
+        gameState.setCurrentPhase(currentPhase);
+        gameState.setGroupReady(groupPlayerReady);
+        gameState.setSelectedPhase(selectedPhase);
+        gameState.setGroupPlayerStatePublic(this.groupPlayerState);
 
         return gameState;
     }
@@ -108,11 +113,22 @@ public class Game {
         this.currentPhase = phase;
     }
     public void nextPhaseSelected(){
-        this.selectedPhase.remove(this.currentPhase);
-        if(selectedPhase.size()==0){
-            this.selectedPhase.add(PhaseEnum.PLANIFICATION);
-            this.selectedPhase.add(PhaseEnum.ACTION);
+        LinkedHashSet<PhaseEnum> tempSelectedPhase = new LinkedHashSet<>(this.selectedPhase);
+
+        for(PhaseEnum phase: this.selectedPhase){
+            if(phase.equals(this.currentPhase)){
+                tempSelectedPhase.removeFirst();
+                break;
+            }
+            tempSelectedPhase.removeFirst();
         }
+
+        if(tempSelectedPhase.size()!=0){
+            this.currentPhase = tempSelectedPhase.getFirst();
+            return;
+        }
+        this.selectedPhase.clear();
+        this.selectedPhase.add(PhaseEnum.PLANIFICATION);
         this.currentPhase = this.selectedPhase.getFirst();
     }
     public void addPhaseSelected(PhaseEnum phase){
@@ -133,6 +149,11 @@ public class Game {
     public LinkedHashSet<PhaseEnum>getPhaseSelected(){
         return this.selectedPhase;
     }
+    public void setPlayerState(Integer playerId, PlayerState state){
+        this.groupPlayerState.put(playerId, state);
+    }
+
+
     @Override
     public String toString() {
         return "Game{gameId=" + gameId + ", deck=" + deck + "}";

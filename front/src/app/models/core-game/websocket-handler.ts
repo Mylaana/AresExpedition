@@ -3,10 +3,13 @@ import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsG
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
-import { NonSelectablePhaseEnum } from "../../enum/phase.enum";
+import { EventDesigner } from "../../services/designers/event-designer.service";
+import { Utils } from "../../utils/utils";
 
 @Injectable()
 export class WebsocketHandler {
+    clientPlayerId = this.gameStateService.clientPlayerId
+
     constructor(private gameStateService: GameState){}
 
     handleMessage(message: WsInputMessage){
@@ -22,13 +25,14 @@ export class WebsocketHandler {
         }
     }
     public handlePlayerMessage(message: PlayerMessageResult){
+        Utils.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
         switch(message.contentEnum){
             case(PlayerMessageContentResultEnum.draw):{
                 this.handlePlayerMessageDrawResult(message.content)
                 break
             }
             case(PlayerMessageContentResultEnum.gameState):{
-                this.handlePlayerMessageGameState(message.content)
+                this.handleMessageGameState(message.content, 'player')
                 break
             }
             default:{
@@ -37,9 +41,9 @@ export class WebsocketHandler {
         }
     }
     public handleGroupMessage(message: GroupMessageResult){
+        Utils.logReceivedMessage(`[${message.contentEnum}] ON [GROUP CHANNEL]`, message.content)
         switch(message.contentEnum){
             case(GroupMessageContentResultEnum.debug):{
-                console.log('GROUP DEBUG:', message)
                 break
             }
             case(GroupMessageContentResultEnum.ready):{
@@ -47,8 +51,7 @@ export class WebsocketHandler {
                 break
             }
             case(GroupMessageContentResultEnum.nextPhase):{
-                //console.log('NEXT PHASE FULL GAME STATE: ', message)
-                this.handlePlayerMessageGameState(message.content)
+                this.handleMessageGameState(message.content, 'group')
                 break
             }
             case(GroupMessageContentResultEnum.serverSideUnhandled):{
@@ -64,18 +67,33 @@ export class WebsocketHandler {
     private handlePlayerMessageDrawResult(content: WsDrawResult): void {
         this.gameStateService.handleWsDrawResult(content)
     }
-    private handlePlayerMessageGameState(content: WsGameState): void {
-        console.log('RECEIVED GAME STATE ON PLAYER CHANNEL:', content)
+    private handleMessageGameState(content: WsGameState, origin: String): void {
+        this.gameStateService.clearEventQueue()
         this.gameStateService.setCurrentPhase(content.currentPhase)
-        
+        this.handleGroupMessageReadyResult(content.groupReady)
+
     }
     private handleGroupMessageReadyResult(content: Map<number, boolean>): void {
-        let groupReady: WsGroupReady[] = []
+        //converting content to WsGroupReady format
+        let wsGroupReady: WsGroupReady[] = []
         const entries = Object.entries(content);
-
         entries.forEach(([key, value]) => {
-            groupReady.push({playerId: +key, ready:value});
+            wsGroupReady.push({playerId: +key, ready:value});
         });
-        this.gameStateService.handleWsGroupReady(groupReady)
+
+        //setting ready
+        this.gameStateService.setGroupReady(wsGroupReady)
+
+        switch(this.gameStateService.getClientPlayerReady()){
+            case(false):{
+                this.gameStateService.finalizeEventWaitingGroupReady()
+                return
+            }
+            case(true):{
+                this.gameStateService.clearEventQueue()
+                this.gameStateService.addEventQueue(EventDesigner.createGeneric("waitingGroupReady"),"first")
+                return
+            }
+        }
     }
 }

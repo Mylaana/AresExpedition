@@ -10,5 +10,5 @@
         "3": false
     },
     "currentPhase": "PLANIFICATION",
-    "selectedPhase": ["DEVELOPMENT", "PRODUCTION"]
+    "selectedPhase": ["PLANIFICATION", "DEVELOPMENT", "PRODUCTION"]
 }

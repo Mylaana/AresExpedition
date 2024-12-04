@@ -4,6 +4,7 @@ import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
 import { RessourceType } from "../../types/global.type";
 import { GlobalParameterModel } from "../core-game/global-parameter.model";
+import { PlayerStateModelFullDTO, PlayerStateModelPublicDTO, PlayerStateModelSecretDTO } from "../../interfaces/dto/player-state-dto.interface";
 
 const ressourceIndex = new  Map<RessourceType, number>(
 	[
@@ -15,7 +16,7 @@ const ressourceIndex = new  Map<RessourceType, number>(
 		['card', 5],
 	]
 )
-export class PlayerStateModel {
+export class PlayerStateModel implements PlayerStateModelFullDTO {
     id!: number;
     name!: string;
     color!: RGB;
@@ -89,6 +90,47 @@ export class PlayerStateModel {
 	}
 	addGlobalParameterStep(parameter: GlobalParameterValue): void {
 		this.globalParameter.addStepToParameterEOP(parameter)
+	}
+	public toFullDTO(): PlayerStateModelFullDTO {
+		return {
+			id: this.id,
+			name: this.name,
+			color: this.color,
+			ressource: this.ressource,
+			terraformingRating: this.terraformingRating,
+			vp: this.vp,
+			tag: this.tag,
+			research: this.research,
+			phaseCards: undefined, //this.phaseCards,
+			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
+			sellCardValueMod: this.sellCardValueMod,
+			milestoneCount: this.milestoneCount,
+
+			cards: undefined, //this.cards,
+			globalParameter: this.globalParameter
+		}
+	}
+	public toSecretDTO(): PlayerStateModelSecretDTO {
+		return {
+			cards: undefined,
+			globalParameter: this.globalParameter
+		}
+	}
+	public toPublicDTO(): PlayerStateModelPublicDTO {
+		return {
+			id: this.id,
+			name: this.name,
+			color: this.color,
+			ressource: this.ressource,
+			terraformingRating: this.terraformingRating,
+			vp: this.vp,
+			tag: this.tag,
+			research: this.research,
+			phaseCards: undefined, //to change
+			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
+			sellCardValueMod: this.sellCardValueMod,
+			milestoneCount: this.milestoneCount
+		}
 	}
 }
 

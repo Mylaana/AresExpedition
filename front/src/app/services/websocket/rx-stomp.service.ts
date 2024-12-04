@@ -3,9 +3,10 @@ import { RxStomp } from '@stomp/rx-stomp';
 import { WebsocketQueryMessageFactory } from '../designers/websocket-message-factory.service';
 import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID, GLOBAL_WS_APP_PLAYER } from '../../global/global-const';
 import { MessageContentQueryEnum, SubscriptionEnum } from '../../enum/websocket.enum';
-import { WsInputMessage } from '../../interfaces/websocket.interface';
 import { myRxStompConfig } from './rx-stomp.config';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
+import { PlayerStateModel } from '../../models/player-info/player-state.model';
+import { Utils } from '../../utils/utils';
 
 
 @Injectable({
@@ -18,16 +19,27 @@ export class RxStompService extends RxStomp {
         this.connected$.subscribe(() => {
             this.onClientConnected()
         })
-        
+
         this.activate()
 	}
-    
+
     private onClientConnected(){
+		console.log('%cCLIENT RECONNECTED', 'color:blue')
         this.publishGameStateQuery()
     }
 
+    public publishDebugMessage(param:{gameId?:number, playerId?:number, contentEnum?:MessageContentQueryEnum, content:any}){
+        let message = {
+            gameId: param.gameId?? GLOBAL_GAME_ID,
+            playerId: param.playerId?? GLOBAL_CLIENT_ID,
+            contentEnum: param.contentEnum?? MessageContentQueryEnum.debug,
+            content: {debug:param.content}
+        }
+        this.publish({destination: "/app/debug", body: JSON.stringify(message)});
+    }
+
 	private publishMessage(message: any){
-        console.log(`%cPUBLISHED: ${message.contentEnum}: `, 'color:red', message.content)
+        Utils.logPublishMessage(`${message.contentEnum} (${message.content.length})`, message.content)
 		this.publish({destination: GLOBAL_WS_APP_PLAYER, body: JSON.stringify(message)});
     }
 
@@ -35,8 +47,7 @@ export class RxStompService extends RxStomp {
         this.publishMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
     }
 
-    public publishClientPlayerReady(ready: boolean, origin: String): void {
-        console.log('sent ready:', origin)
+    public publishClientPlayerReady(ready: boolean): void {
         this.publishMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
     }
 
@@ -48,14 +59,7 @@ export class RxStompService extends RxStomp {
         this.publishMessage(WebsocketQueryMessageFactory.createPhaseSelectedQuery(phase))
     }
 
-    public publishDebugMessage(param:{gameId?:number, playerId?:number, contentEnum:MessageContentQueryEnum, content:any}){
-        let message = {
-            gameId: param.gameId?? GLOBAL_GAME_ID,
-            playerId: param.playerId?? GLOBAL_CLIENT_ID,
-            contentEnum: param.contentEnum,
-            content: param.content
-        }
-        console.log('debug message: ',message)
-        this.publishMessage(message)
+    public publishPlayerState(state: PlayerStateModel): void {
+        this.publishMessage(WebsocketQueryMessageFactory.createClientPlayerStatePush(state))
     }
 }

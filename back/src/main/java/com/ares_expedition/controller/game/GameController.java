@@ -12,6 +12,7 @@ import com.ares_expedition.controller.websocket.WsControllerOutput;
 import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
 import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.game.PlayerState;
 import com.ares_expedition.repository.Game;
 import com.ares_expedition.repository.JsonGameReader;
 
@@ -72,5 +73,8 @@ public class GameController {
     }
     public LinkedHashSet<PhaseEnum> getPhaseSelected(Integer gameId){
         return getGameFromId(gameId).getPhaseSelected();
+    }
+    public void setPlayerState(Integer gameId, Integer playerId, PlayerState state){
+        getGameFromId(gameId).setPlayerState(playerId, state);
     }
 }

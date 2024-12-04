@@ -13,10 +13,10 @@
     <div class="pannel-card ares-card">
         <div class="pannel-image">
             <ng-container *ngIf="currentPhase=='PLANIFICATION' && playerPhase.previousSelectedPhase">
-                <img class="phase-image heavy-greyed-filter" src="/assets/other/phase_{{playerPhase.previousSelectedPhase}}.png" alt="">
+                <img class="phase-image heavy-greyed-filter" src="/assets/other/phase_{{playerPhase.previousSelectedPhase.toLowerCase()}}.png" alt="">
             </ng-container>
             <ng-container *ngIf="currentPhase!='PLANIFICATION' && playerPhase.currentSelectedPhase">
-                <img class="phase-image" src="/assets/other/phase_{{playerPhase.currentSelectedPhase}}.png" alt="">
+                <img class="phase-image" src="/assets/other/phase_{{playerPhase.currentSelectedPhase.toLowerCase()}}.png" alt="">
             </ng-container>
         </div>
     </div>

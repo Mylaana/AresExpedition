@@ -3,6 +3,7 @@ import { AdvancedRessourceType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
+import { ProjectCardDTO } from "../../interfaces/dto/project-card-dto.interface"
 
 type playedProject = {
     playedIdList: number[],
@@ -40,6 +41,7 @@ export class ProjectCardModel {
 	stock?: AdvancedRessourceStock[];
     stockable?: AdvancedRessourceType[]
     triggerLimit!: TriggerLimit
+	activated!: number
 
     //not loaded from data
 
@@ -72,7 +74,7 @@ export class ProjectCardModel {
     }
     checkStockExists(ressource:AdvancedRessourceType): boolean {
         if(!this.stock){return false}
-        
+
         for(let s of this.stock){
             if(s.name===ressource){
                 return true
@@ -135,6 +137,12 @@ export class ProjectCardModel {
         }
         return false
     }
+	toDTO(): ProjectCardDTO {
+		return {
+			i: this.id,
+			s: this.stock??[]
+		}
+	}
 }
 export class ProjectCardState {
     hand: number[] = []
@@ -151,7 +159,7 @@ export class ProjectCardState {
         this.projects.playedIdList.push(card.id)
         this.projects.playedProjectList.push(card)
         this.initialSetUp(card)
-        
+
         if(card.cardSummaryType!='trigger'){return}
         this.triggers.playTrigger(card.id)
     }
@@ -194,7 +202,7 @@ export class ProjectCardState {
     }
     getProjectPlayedList(filter?: ProjectFilter): ProjectCardModel[] {
         if(!filter){return this.projects.playedProjectList}
-        
+
         let projectList:ProjectCardModel[] = []
 
         for(let card of this.projects.playedProjectList){
