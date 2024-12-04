@@ -4,12 +4,13 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.game.PlayerState;
 
 public class GameStateContent {
     private PhaseEnum currentPhase;
     private Map<Integer, Boolean> groupReady;
     private LinkedHashSet<PhaseEnum> selectedPhase;
-    private Map<Integer, Object> groupPlayerStatePublic;
+    private Map<Integer, PlayerState> groupPlayerState;
 
     public GameStateContent(){
     }
@@ -31,16 +32,16 @@ public class GameStateContent {
     public void setSelectedPhase(LinkedHashSet<PhaseEnum> phases){
         this.selectedPhase = phases;
     }
-    public Map<Integer, Object> getGroupPlayerStatePublic(){
-        return this.groupPlayerStatePublic;
+    public Map<Integer, PlayerState> getGroupPlayerStatePublic(){
+        return this.groupPlayerState;
     }
-    public void setGroupPlayerStatePublic(Map<Integer, Object> groupState){
-        this.groupPlayerStatePublic = groupState;
+    public void setGroupPlayerStatePublic(Map<Integer, PlayerState> groupState){
+        this.groupPlayerState = groupState;
     }
-    public Map<Integer, Object> getPlayerStatePublic(Integer playerId){
-        return this.groupPlayerStatePublic;
+    public PlayerState getPlayerStatePublic(Integer playerId){
+        return this.groupPlayerState.get(playerId);
     }
-    public void setPlayerStatePublic(Integer playerId, Object state){
-        this.groupPlayerStatePublic.put(playerId, state);
+    public void setPlayerState(Integer playerId, PlayerState state){
+        this.groupPlayerState.put(playerId, state);
     }
 }

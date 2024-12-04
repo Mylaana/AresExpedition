@@ -13,16 +13,19 @@ import com.ares_expedition.dto.websocket.serialized_message.query.GenericMessage
 import com.ares_expedition.dto.websocket.serialized_message.query.PhaseSelectedMessageQuery;
 import com.ares_expedition.dto.websocket.serialized_message.query.PlayerMessageQuery;
 import com.ares_expedition.dto.websocket.serialized_message.query.PlayerReadyMessageQuery;
+import com.ares_expedition.dto.websocket.serialized_message.query.PlayerStateMessagePush;
 import com.ares_expedition.dto.websocket.serialized_message.query.UnHandledMessageQuery;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
 import com.ares_expedition.model.factory.MessageOutputFactory;
+import com.ares_expedition.model.game.PlayerState;
 import com.ares_expedition.model.query.BaseQuery;
 import com.ares_expedition.model.query.draw.DrawQuery;
 import com.ares_expedition.model.query.player.GenericQuery;
 import com.ares_expedition.model.query.player.PhaseSelectedQuery;
 import com.ares_expedition.model.query.player.PlayerReadyQuery;
+import com.ares_expedition.model.query.player.PlayerStateDTO;
 import com.ares_expedition.model.query.player.UnHandledQuery;
 import com.ares_expedition.services.QueryMessageFactory;
 
@@ -56,11 +59,16 @@ public class InputRouter {
                 handleQuery(
                     message, GenericQuery.class,
                     GenericMessageQuery.class, this::handleGameStateQuery);
-                    break;
+                break;
             case SELECTED_PHASE_QUERY:
                 handleQuery(    
                     message, PhaseSelectedQuery.class,
                     PhaseSelectedMessageQuery.class, this::handlePhaseSelectedQuery);
+                break;
+            case PLAYER_STATE_PUSH:
+                    handleQuery(    
+                    message, PlayerStateDTO.class,
+                    PlayerStateMessagePush.class, this::handlePlayerStatePushMessage);
                 break;
             default:
                 handleQuery(
@@ -98,8 +106,6 @@ public class InputRouter {
             wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, gameController.getGameState(gameId)));
             return;
         }
-        
-
     }
     
     private void handleNotRoutedMessage(UnHandledMessageQuery query){
@@ -109,6 +115,7 @@ public class InputRouter {
 
         wsOutput.sendPushToGroup(new PlayerMessageAnswer(query.getGameId(), ContentResultEnum.SERVER_SIDE_UNHANDLED, result));
     }
+
     private void handleDrawQuery(DrawMessageQuery query){
         Integer drawNumber = query.getDrawNumber();
         if (drawNumber == 0) {
@@ -119,6 +126,7 @@ public class InputRouter {
             query.getPlayerId()
             );
     }
+
     private void handlePlayerReadyQuery(PlayerReadyMessageQuery query) {
         Integer gameId = query.getGameId();
         gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getPlayerReady());
@@ -132,14 +140,24 @@ public class InputRouter {
         gameController.nextPhaseSelected(gameId);
         wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, gameController.getGameState(gameId)));
     }
+
     private void handleGameStateQuery(GenericMessageQuery query){
         Integer gameId = query.getGameId();
         wsOutput.sendPushToPlayer(MessageOutputFactory.createGameStateMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());
     }
+    
     private void handlePhaseSelectedQuery(PhaseSelectedMessageQuery query){
         Integer gameId = query.getGameId();
         PhaseEnum phase = query.getContent().getContent();
         gameController.addPhaseSelected(gameId, phase);
         wsOutput.sendPushToGroup(MessageOutputFactory.createDEBUGMessage(gameId, gameController.getPhaseSelected(gameId)));
+    }
+
+    private void handlePlayerStatePushMessage(PlayerStateMessagePush query){
+        gameController.setPlayerState(
+            query.getGameId(),
+            query.getPlayerId(),
+            PlayerState.toModel(query.getContent())
+            );
     }
 }

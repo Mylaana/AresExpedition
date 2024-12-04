@@ -3,6 +3,7 @@ import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../e
 import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
+import { PlayerStateModelFullDTO } from "../../interfaces/dto/player-state-dto.interface";
 
 interface PlayerMessage {
     gameId: number,
@@ -43,7 +44,7 @@ export class WebsocketQueryMessageFactory{
         return this.generatePlayerMessage(MessageContentQueryEnum.selectedPhase, query)
     }
     public static createClientPlayerStatePush(state: PlayerStateModel): PlayerMessage {
-        let query: WsPlayerState = {secretState: state.toSecretDTO(), publicState: state.toPublicDTO()}
+        let query: PlayerStateModelFullDTO = state.toFullDTO() //{secretState: state.toSecretDTO(), publicState: state.toPublicDTO()}
         return this.generatePlayerMessage(MessageContentQueryEnum.playerStatePush, query)
     }
 }

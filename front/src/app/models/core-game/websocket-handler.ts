@@ -9,7 +9,7 @@ import { Utils } from "../../utils/utils";
 @Injectable()
 export class WebsocketHandler {
     clientPlayerId = this.gameStateService.clientPlayerId
-    
+
     constructor(private gameStateService: GameState){}
 
     handleMessage(message: WsInputMessage){
@@ -71,7 +71,7 @@ export class WebsocketHandler {
         this.gameStateService.clearEventQueue()
         this.gameStateService.setCurrentPhase(content.currentPhase)
         this.handleGroupMessageReadyResult(content.groupReady)
-        
+
     }
     private handleGroupMessageReadyResult(content: Map<number, boolean>): void {
         //converting content to WsGroupReady format
@@ -83,7 +83,7 @@ export class WebsocketHandler {
 
         //setting ready
         this.gameStateService.setGroupReady(wsGroupReady)
-        
+
         switch(this.gameStateService.getClientPlayerReady()){
             case(false):{
                 this.gameStateService.finalizeEventWaitingGroupReady()

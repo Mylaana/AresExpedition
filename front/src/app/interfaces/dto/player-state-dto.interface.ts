@@ -1,8 +1,8 @@
-import { ProjectCardState } from "../models/cards/project-card.model";
-import { RGB } from "../types/global.type";
-import { RessourceState, ScanKeep, TagState } from "./global.interface";
+import { ProjectCardState } from "../../models/cards/project-card.model";
+import { RGB } from "../../types/global.type";
+import { RessourceState, ScanKeep, TagState } from "../global.interface";
 
-export interface PlayerStateModel_FullDTO {
+export interface PlayerStateModelFullDTO {
     id: number;
     name: string;
     color: RGB;
@@ -10,7 +10,7 @@ export interface PlayerStateModel_FullDTO {
     terraformingRating: number;
     vp: number;
     tag: TagState[];
-    cards: ProjectCardState
+    cards?: ProjectCardState
     research: ScanKeep
 	phaseCards: any// = new PhaseCardHolderModel
 	phaseCardUpgradeCount: number
@@ -18,7 +18,7 @@ export interface PlayerStateModel_FullDTO {
 	globalParameter: any // = new GlobalParameterModel
 	milestoneCount: number
 }
-export interface PlayerStateModel_PublicDTO {
+export interface PlayerStateModelPublicDTO {
     id: number;
     name: string;
     color: RGB;
@@ -32,7 +32,8 @@ export interface PlayerStateModel_PublicDTO {
 	sellCardValueMod: number
 	milestoneCount: number
 }
-export interface PlayerStateModel_SecretDTO {
-    cards: ProjectCardState
+export interface PlayerStateModelSecretDTO {
+    cards: any
 	globalParameter: any
 }
+

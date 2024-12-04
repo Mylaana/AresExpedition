@@ -19,11 +19,12 @@ export class RxStompService extends RxStomp {
         this.connected$.subscribe(() => {
             this.onClientConnected()
         })
-        
+
         this.activate()
 	}
-    
+
     private onClientConnected(){
+		console.log('%cCLIENT RECONNECTED', 'color:blue')
         this.publishGameStateQuery()
     }
 
@@ -38,7 +39,7 @@ export class RxStompService extends RxStomp {
     }
 
 	private publishMessage(message: any){
-        Utils.logPublishMessage(message.contentEnum, message.content)
+        Utils.logPublishMessage(`${message.contentEnum} (${message.content.length})`, message.content)
 		this.publish({destination: GLOBAL_WS_APP_PLAYER, body: JSON.stringify(message)});
     }
 

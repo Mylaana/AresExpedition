@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.game.PlayerState;
+import com.ares_expedition.model.query.player.PlayerStateDTO;
 
 public class Game {
     private Integer gameId;
@@ -14,6 +16,7 @@ public class Game {
     private Map<Integer, Boolean> groupPlayerReady;
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
+    private Map<Integer, PlayerState> groupPlayerState = new HashMap<>();
 
     public Game() {
     }
@@ -22,8 +25,7 @@ public class Game {
         this.deck = deck;
         this.discard = discard;
         this.groupPlayerId = groupPlayerId;
-        this.currentPhase = currentPhase;
-        
+        this.currentPhase = currentPhase;        
     }
     public Integer getGameId() {
         return this.gameId;
@@ -100,6 +102,7 @@ public class Game {
         gameState.setCurrentPhase(currentPhase);
         gameState.setGroupReady(groupPlayerReady);
         gameState.setSelectedPhase(selectedPhase);
+        gameState.setGroupPlayerStatePublic(this.groupPlayerState);
 
         return gameState;
     }
@@ -127,15 +130,6 @@ public class Game {
         this.selectedPhase.clear();
         this.selectedPhase.add(PhaseEnum.PLANIFICATION);
         this.currentPhase = this.selectedPhase.getFirst();
-
-        /*
-        this.selectedPhase.remove(this.currentPhase);
-        if(selectedPhase.size()==0){
-            this.selectedPhase.add(PhaseEnum.PLANIFICATION);
-            this.selectedPhase.add(PhaseEnum.ACTION);
-        }
-        this.currentPhase = this.selectedPhase.getFirst();
-        */
     }
     public void addPhaseSelected(PhaseEnum phase){
         this.selectedPhase.add(phase);
@@ -155,6 +149,11 @@ public class Game {
     public LinkedHashSet<PhaseEnum>getPhaseSelected(){
         return this.selectedPhase;
     }
+    public void setPlayerState(Integer playerId, PlayerState state){
+        this.groupPlayerState.put(playerId, state);
+    }
+
+
     @Override
     public String toString() {
         return "Game{gameId=" + gameId + ", deck=" + deck + "}";

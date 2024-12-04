@@ -83,19 +83,19 @@ export class EventHandler {
 	private setEventId(): number {
 		this.eventCounter += 1
 		return this.eventCounter
-	} 
+	}
     private switchEvent(eventQueue: EventBaseModel[], event: EventBaseModel): void {
 		//switching current event to top of the pile
 		this.currentEvent = eventQueue[0]
 		if(!this.currentEvent.id){this.currentEvent.id = this.setEventId()}
-		this.currentEventId = this.currentEvent.id	
+		this.currentEventId = this.currentEvent.id
 
         //call selector related switchEvents
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
 		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent)}
 
 		this.applyAutoFinalize()
-        return 
+        return
     }
 	private applyAutoFinalize(): void {
 		if(this.currentEvent.autoFinalize!=true){return}
@@ -176,7 +176,7 @@ export class EventHandler {
 			case('selectCardForcedSell'):case('selectCardOptionalSell'):case('discardCards'):{
 				event.finalized = true
 				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, event.cardSelector.selectedList)
-				
+
 				if(event.subType==='discardCards'){break}
 				this.gameStateService.sellCardsFromClientHand(event.cardSelector.selectedList.length)
 				break
@@ -263,7 +263,7 @@ export class EventHandler {
 			case('addRessourceToPlayer'):{
 				if(event.baseRessource===undefined){break}
 				let baseRessources: RessourceStock[] = []
-				
+
 				if(Array.isArray(event.baseRessource)){
 					baseRessources = event.baseRessource
 				} else {
@@ -307,7 +307,7 @@ export class EventHandler {
 		if((event.drawDiscard?.draw?event.drawDiscard.draw:0)>0 || (event.scanKeep?.scan!=undefined && event.scanKeep.scan>0)){
 			this.gameStateService.addEventQueue(EventDesigner.createWaiter('deckWaiter', event.id), 'second')
 		}
-	
+
 		let drawNumber = event.drawDiscard?.draw
 		if(drawNumber!=undefined && drawNumber>0){
 			this.gameStateService.addDrawQueue(DrawEventDesigner.createDrawEvent(resolveType, drawNumber,event.id))
@@ -495,7 +495,7 @@ class PhaseResolveHandler {
 	}
 	resolveProduction(): void {
 		this.refreshCurrentUpgradedPhaseCard()
-		
+
 		let clientState = this.gameStateService.getClientPlayerState()
 		let newClientRessource: RessourceState[] = []
 
@@ -505,17 +505,17 @@ class PhaseResolveHandler {
 			switch(i){
 				//MC production
 				case(0):{
-					newClientRessource[i].valueStock = 
+					newClientRessource[i].valueStock =
 						newClientRessource[i].valueStock
-						+ newClientRessource[i].valueProd 
-						+ clientState.terraformingRating 
+						+ newClientRessource[i].valueProd
+						+ clientState.terraformingRating
 						+ this.getProductionPhaseCardSelectionBonus()
 					break
 				}
 				//heat and plant producition
 				case(1):case(2):{
-					newClientRessource[i].valueStock = 
-						newClientRessource[i].valueStock 
+					newClientRessource[i].valueStock =
+						newClientRessource[i].valueStock
 						+ newClientRessource[i].valueProd
 					break
 				}
