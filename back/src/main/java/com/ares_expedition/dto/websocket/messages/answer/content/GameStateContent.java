@@ -1,4 +1,4 @@
-package com.ares_expedition.dto.websocket.serialized_message.answer.content;
+package com.ares_expedition.dto.websocket.messages.answer.content;
 
 import java.util.LinkedHashSet;
 import java.util.Map;

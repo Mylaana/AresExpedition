@@ -3,7 +3,7 @@ package com.ares_expedition.repository;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
+import com.ares_expedition.dto.websocket.messages.answer.content.GameStateContent;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.game.PlayerState;
 

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.model.query.player.PlayerStateDTO;
+import com.ares_expedition.dto.websocket.content.player.PlayerStateContentDTO;
 
 public class PlayerState {
     private Integer id;
@@ -26,7 +26,7 @@ public class PlayerState {
     public PlayerState(){
     }
     
-    public static PlayerState toModel(PlayerStateDTO statePush){
+    public static PlayerState toModel(PlayerStateContentDTO statePush){
         PlayerState state = new PlayerState();
 
         state.setId(statePush.getId());

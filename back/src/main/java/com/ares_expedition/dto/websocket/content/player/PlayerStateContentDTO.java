@@ -1,13 +1,13 @@
-package com.ares_expedition.model.query.player;
+package com.ares_expedition.dto.websocket.content.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.model.query.BaseQuery;
+import com.ares_expedition.dto.websocket.content.BaseContentDTO;
 
-public class PlayerStateDTO extends BaseQuery {
+public class PlayerStateContentDTO extends BaseContentDTO {
 	private Integer id;
 	private String name;
 	private String color;
@@ -23,7 +23,7 @@ public class PlayerStateDTO extends BaseQuery {
 	private Map<String, Object> globalParameter = new HashMap<>();
 	private Integer milestoneCount;
 
-	public PlayerStateDTO(){
+	public PlayerStateContentDTO(){
 	}
 	
 	public Integer getId(){

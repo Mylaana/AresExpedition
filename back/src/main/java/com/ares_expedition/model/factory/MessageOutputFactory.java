@@ -2,9 +2,9 @@ package com.ares_expedition.model.factory;
 
 import java.util.Map;
 
-import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
-import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
-import com.ares_expedition.dto.websocket.serialized_message.answer.content.PlayerStateContent;
+import com.ares_expedition.dto.websocket.messages.answer.PlayerMessageAnswer;
+import com.ares_expedition.dto.websocket.messages.answer.content.GameStateContent;
+import com.ares_expedition.dto.websocket.messages.answer.content.PlayerStateContent;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
 

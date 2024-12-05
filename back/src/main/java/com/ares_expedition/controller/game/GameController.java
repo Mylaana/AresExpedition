@@ -8,9 +8,8 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.controller.websocket.WsControllerOutput;
-
-import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
-import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
+import com.ares_expedition.dto.websocket.messages.answer.PlayerMessageAnswer;
+import com.ares_expedition.dto.websocket.messages.answer.content.GameStateContent;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.game.PlayerState;
 import com.ares_expedition.repository.Game;

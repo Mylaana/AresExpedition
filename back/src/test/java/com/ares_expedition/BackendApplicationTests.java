@@ -7,12 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.ares_expedition.dto.websocket.serialized_message.query.PlayerMessageQuery;
+import com.ares_expedition.dto.websocket.messages.input.BaseMessageDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.model.query.player.GenericQuery;
-import com.ares_expedition.model.query.player.PhaseSelectedQuery;
-import com.ares_expedition.model.query.player.PlayerReadyQuery;
-import com.ares_expedition.model.query.player.PlayerStateDTO;
+import com.ares_expedition.dto.websocket.content.player.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,7 +34,7 @@ class BackendApplicationTests {
 		}
 		""";
 
-		PlayerMessageQuery<PlayerReadyQuery> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageDTO<PlayerReadyContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		assertTrue(query.getContent().getReady());
@@ -55,7 +52,7 @@ class BackendApplicationTests {
 		}
 		""";
 
-		PlayerMessageQuery<PhaseSelectedQuery> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageDTO<PhaseSelectedContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		assertEquals(query.getContent().getPhase(), PhaseEnum.CONSTRUCTION);
@@ -73,7 +70,7 @@ class BackendApplicationTests {
 		}
 		""";
 
-		PlayerMessageQuery<GenericQuery> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageDTO<GenericContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		assertEquals(query.getContent().getContent(), "SET_BOTS_READY");
@@ -263,7 +260,7 @@ class BackendApplicationTests {
 			}
 		""";
 
-		PlayerMessageQuery<PlayerStateDTO> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageDTO<PlayerStateContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		//assert(query.getContent().getContent(), "SET_BOTS_READY");

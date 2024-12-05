@@ -1,12 +1,12 @@
-package com.ares_expedition.model.query.player;
+package com.ares_expedition.dto.websocket.content.player;
 
+import com.ares_expedition.dto.websocket.content.BaseContentDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.model.query.BaseQuery;
 
-public class PhaseSelectedQuery extends BaseQuery {
+public class PhaseSelectedContentDTO extends BaseContentDTO {
     PhaseEnum phase;
     
-    public PhaseSelectedQuery(){
+    public PhaseSelectedContentDTO(){
     }
     
     public PhaseEnum getPhase() {

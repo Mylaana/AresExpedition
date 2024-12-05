@@ -1,10 +1,10 @@
-package com.ares_expedition.model.query.draw;
+package com.ares_expedition.dto.websocket.content.draw;
 
 import java.util.Map;
 
-import com.ares_expedition.model.query.BaseQuery;
+import com.ares_expedition.dto.websocket.content.BaseContentDTO;
 
-public class DrawQuery extends BaseQuery{
+public class DrawQuery extends BaseContentDTO{
     Integer drawNumber;
     Integer eventId;
 

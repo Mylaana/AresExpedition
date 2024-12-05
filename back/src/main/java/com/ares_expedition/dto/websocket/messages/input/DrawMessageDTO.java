@@ -1,14 +1,14 @@
-package com.ares_expedition.dto.websocket.serialized_message.query;
+package com.ares_expedition.dto.websocket.messages.input;
 
+import com.ares_expedition.dto.websocket.content.draw.DrawQuery;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
-import com.ares_expedition.model.query.draw.DrawQuery;
 
-public class DrawMessageQuery extends PlayerMessageQuery<DrawQuery> {
+public class DrawMessageDTO extends BaseMessageDTO<DrawQuery> {
     protected DrawQuery content;
 
-    public DrawMessageQuery(){};
+    public DrawMessageDTO(){};
 
-    public DrawMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, DrawQuery content){
+    public DrawMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, DrawQuery content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;

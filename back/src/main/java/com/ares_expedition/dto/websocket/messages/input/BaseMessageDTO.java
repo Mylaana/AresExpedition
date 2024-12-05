@@ -1,14 +1,11 @@
-package com.ares_expedition.dto.websocket.serialized_message.query;
+package com.ares_expedition.dto.websocket.messages.input;
 
+import com.ares_expedition.dto.websocket.content.player.*;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
-import com.ares_expedition.model.query.player.GenericQuery;
-import com.ares_expedition.model.query.player.PhaseSelectedQuery;
-import com.ares_expedition.model.query.player.PlayerReadyQuery;
-import com.ares_expedition.model.query.player.PlayerStateDTO;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-public class PlayerMessageQuery<T>{
+public class BaseMessageDTO<T>{
     protected Integer gameId;
     protected Integer playerId;
     protected ContentQueryEnum contentEnum;
@@ -19,17 +16,17 @@ public class PlayerMessageQuery<T>{
         property = "contentEnum" // Propriété externe utilisée pour déterminer le type
     )
     @JsonSubTypes({
-    @JsonSubTypes.Type(value = PlayerStateDTO.class, name = "PLAYER_STATE_PUSH"),
-    @JsonSubTypes.Type(value = PlayerReadyQuery.class, name = "READY_QUERY"),
-    @JsonSubTypes.Type(value = PhaseSelectedQuery.class, name = "SELECTED_PHASE_QUERY"),
-    @JsonSubTypes.Type(value = GenericQuery.class, name = "PLAYER_GAME_STATE_QUERY"),
-    @JsonSubTypes.Type(value = GenericQuery.class, name = "DEBUG"),
+    @JsonSubTypes.Type(value = PlayerStateContentDTO.class, name = "PLAYER_STATE_PUSH"),
+    @JsonSubTypes.Type(value = PlayerReadyContentDTO.class, name = "READY_QUERY"),
+    @JsonSubTypes.Type(value = PhaseSelectedContentDTO.class, name = "SELECTED_PHASE_QUERY"),
+    @JsonSubTypes.Type(value = GenericContentDTO.class, name = "PLAYER_GAME_STATE_QUERY"),
+    @JsonSubTypes.Type(value = GenericContentDTO.class, name = "DEBUG"),
         // Ajoute d'autres types ici en fonction de ContentQueryEnum
     })
     protected T content;
 
-    public PlayerMessageQuery(){}
-    public PlayerMessageQuery(Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
+    public BaseMessageDTO(){}
+    public BaseMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;
