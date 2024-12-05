@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.game.PlayerState;
-import com.ares_expedition.model.query.player.PlayerStateDTO;
 
 public class Game {
     private Integer gameId;

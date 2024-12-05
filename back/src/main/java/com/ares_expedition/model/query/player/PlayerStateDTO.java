@@ -1,6 +1,8 @@
 package com.ares_expedition.model.query.player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.model.query.BaseQuery;
@@ -9,10 +11,10 @@ public class PlayerStateDTO extends BaseQuery {
 	private Integer id;
 	private String name;
 	private String color;
-	private Map<String, Object> ressource = new HashMap<>();
+	private List<Map<String, Object>> ressource = new ArrayList<>();
 	private Integer terraformingRating;
 	private Integer vp;
-	private Map<String, Object> tag = new HashMap<>();
+	private List<Map<String, Object>> tag = new ArrayList<>();
 	private Map<String, Object> cards = new HashMap<>();
 	private Map<String, Object> research = new HashMap<>();
 	private Map<String, Object> phaseCards = new HashMap<>();; 
@@ -24,24 +26,6 @@ public class PlayerStateDTO extends BaseQuery {
 	public PlayerStateDTO(){
 	}
 	
-	@SuppressWarnings("unchecked")
-	public PlayerStateDTO(Map<String, Object> data) {
-		this.id = (Integer) data.get("id");
-		this.name = (String) data.get("name");
-		this.color = (String) data.get("color");
-		//this.ressource = (Map<String, Object>) data.get("ressource");
-		this.terraformingRating = (Integer) data.get("terraformingRating");
-		this.vp = (Integer) data.get("vp");
-		//this.tag = (Map<String, Object>) data.get("tag");
-		//this.cards = (Map<String, Object>) data.get("cards");
-		//this.research = (Map<String, Object>) data.get("research");
-		//this.phaseCards = (Map<String, Object>) data.get("phaseCards");
-		this.phaseCardUpgradeCount = (Integer) data.get("phaseCardUpgradeCount");
-		this.sellCardValueMod = (Integer) data.get("sellCardValueMod");
-		//this.globalParameter = (Map<String, Object>) data.get("globalParameter");
-		this.milestoneCount = (Integer) data.get("milestoneCount");
-	}
-
 	public Integer getId(){
 		return this.id;
 	}
@@ -66,12 +50,12 @@ public class PlayerStateDTO extends BaseQuery {
 		this.color = color;
 	}
 
-	public Map<String, Object> getRessources(){
+	public List<Map<String, Object>> getRessource(){
 		return this.ressource;
 	}
 
-	public void setRessources(Map<String, Object> ressources) {
-		this.ressource = ressources;
+	public void setRessource(List<Map<String, Object>> ressource) {
+		this.ressource = ressource;
 	}
 	
 	public Integer getTerraformingRating(){
@@ -90,11 +74,11 @@ public class PlayerStateDTO extends BaseQuery {
         this.vp = vp;
     }
 	
-	public Map<String, Object> getTag(){
+	public List<Map<String, Object>> getTag(){
 		return this.tag;
 	}
 
-	public void setTag(Map<String, Object> tag) {
+	public void setTag(List<Map<String, Object>> tag) {
         this.tag = tag;
     }
 	

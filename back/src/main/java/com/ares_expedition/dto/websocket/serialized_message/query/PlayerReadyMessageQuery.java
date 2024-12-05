@@ -23,11 +23,11 @@ public class PlayerReadyMessageQuery extends PlayerMessageQuery<PlayerReadyQuery
         this.content = content;
     }
 
-    public Boolean getPlayerReady(Integer playerId){
-        return this.content.getPlayerReady();
+    public Boolean getPlayerReady(){
+        return this.content.getReady();
     }
 
-    public void setPlayerReady(Integer playerId){
-
+    public void setPlayerReady(Boolean ready){
+        this.content.setReady(ready);
     }
 }

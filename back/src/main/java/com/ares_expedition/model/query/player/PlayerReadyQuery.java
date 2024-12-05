@@ -1,11 +1,9 @@
 package com.ares_expedition.model.query.player;
 
-import java.util.Map;
-
 import com.ares_expedition.model.query.BaseQuery;
 
 public class PlayerReadyQuery extends BaseQuery{
-    Boolean ready;
+    Boolean ready = false;
 
     public PlayerReadyQuery(){
     }
@@ -13,15 +11,12 @@ public class PlayerReadyQuery extends BaseQuery{
     public PlayerReadyQuery(Boolean ready){
         this.ready = ready;
     }
-    public PlayerReadyQuery(Map<String, Object> data) {
-        this.ready = (Boolean) data.get("ready");
-    }
 
-    public Boolean getPlayerReady(){
+    public Boolean getReady(){
         return this.ready;
     }
 
-    public void setPlayerReady(Boolean ready){
+    public void setReady(Boolean ready){
         this.ready = ready;
     }
 }

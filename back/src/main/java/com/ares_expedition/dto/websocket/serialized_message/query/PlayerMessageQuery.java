@@ -1,12 +1,31 @@
 package com.ares_expedition.dto.websocket.serialized_message.query;
 
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
-
+import com.ares_expedition.model.query.player.GenericQuery;
+import com.ares_expedition.model.query.player.PhaseSelectedQuery;
+import com.ares_expedition.model.query.player.PlayerReadyQuery;
+import com.ares_expedition.model.query.player.PlayerStateDTO;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public class PlayerMessageQuery<T>{
     protected Integer gameId;
     protected Integer playerId;
     protected ContentQueryEnum contentEnum;
+
+    @JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXTERNAL_PROPERTY, // Utiliser une propriété externe pour le type
+        property = "contentEnum" // Propriété externe utilisée pour déterminer le type
+    )
+    @JsonSubTypes({
+    @JsonSubTypes.Type(value = PlayerStateDTO.class, name = "PLAYER_STATE_PUSH"),
+    @JsonSubTypes.Type(value = PlayerReadyQuery.class, name = "READY_QUERY"),
+    @JsonSubTypes.Type(value = PhaseSelectedQuery.class, name = "SELECTED_PHASE_QUERY"),
+    @JsonSubTypes.Type(value = GenericQuery.class, name = "PLAYER_GAME_STATE_QUERY"),
+    @JsonSubTypes.Type(value = GenericQuery.class, name = "DEBUG"),
+        // Ajoute d'autres types ici en fonction de ContentQueryEnum
+    })
     protected T content;
 
     public PlayerMessageQuery(){}

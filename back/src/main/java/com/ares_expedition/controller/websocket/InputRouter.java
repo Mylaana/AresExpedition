@@ -129,7 +129,7 @@ public class InputRouter {
 
     private void handlePlayerReadyQuery(PlayerReadyMessageQuery query) {
         Integer gameId = query.getGameId();
-        gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getPlayerReady());
+        gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getReady());
 
         if(!gameController.getAllPlayersReady(gameId)){
             wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
@@ -148,7 +148,7 @@ public class InputRouter {
     
     private void handlePhaseSelectedQuery(PhaseSelectedMessageQuery query){
         Integer gameId = query.getGameId();
-        PhaseEnum phase = query.getContent().getContent();
+        PhaseEnum phase = query.getContent().getPhase();
         gameController.addPhaseSelected(gameId, phase);
         wsOutput.sendPushToGroup(MessageOutputFactory.createDEBUGMessage(gameId, gameController.getPhaseSelected(gameId)));
     }

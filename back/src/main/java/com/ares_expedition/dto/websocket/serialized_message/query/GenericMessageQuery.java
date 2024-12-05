@@ -3,6 +3,7 @@ package com.ares_expedition.dto.websocket.serialized_message.query;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 import com.ares_expedition.model.query.player.GenericQuery;
 
+
 public class GenericMessageQuery extends PlayerMessageQuery<GenericQuery> {
     GenericQuery content;
 

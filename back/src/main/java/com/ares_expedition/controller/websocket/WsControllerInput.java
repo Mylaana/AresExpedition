@@ -13,8 +13,13 @@ public class WsControllerInput {
         this.inputRouter = inputRouter;
     }
 
+    /*
     @MessageMapping("/player")
     public <T> void resolvePlayerQuery(PlayerMessageQuery<T> message) throws Exception {
+        inputRouter.routeInput(message);
+    }*/
+    @MessageMapping("/player")
+    public void resolvePlayerQuery(PlayerMessageQuery<?> message) throws Exception {
         inputRouter.routeInput(message);
     }
 
