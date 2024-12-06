@@ -1,10 +1,10 @@
 package com.ares_expedition.dto.websocket.messages.input;
 
-import com.ares_expedition.dto.websocket.content.player.GenericContentDTO;
+import com.ares_expedition.dto.websocket.content.input.GenericContentDTO;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
 
-public class GenericMessageDTO extends BaseMessageDTO<GenericContentDTO> {
+public class GenericMessageDTO extends BaseMessageInputDTO<GenericContentDTO> {
     GenericContentDTO content;
 
     public GenericMessageDTO(){

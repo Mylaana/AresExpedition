@@ -7,11 +7,15 @@ import java.util.function.Consumer;
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.controller.game.GameController;
-import com.ares_expedition.dto.websocket.content.BaseContentDTO;
-import com.ares_expedition.dto.websocket.content.draw.DrawQuery;
-import com.ares_expedition.dto.websocket.content.player.*;
-import com.ares_expedition.dto.websocket.messages.answer.PlayerMessageAnswer;
+import com.ares_expedition.dto.websocket.content.input.BaseContentDTO;
+import com.ares_expedition.dto.websocket.content.input.DrawContentDTO;
+import com.ares_expedition.dto.websocket.content.input.GenericContentDTO;
+import com.ares_expedition.dto.websocket.content.input.PhaseSelectedContentDTO;
+import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
+import com.ares_expedition.dto.websocket.content.input.PlayerStateContentDTO;
+import com.ares_expedition.dto.websocket.content.input.UnHandledContentDTO;
 import com.ares_expedition.dto.websocket.messages.input.*;
+import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
@@ -28,16 +32,16 @@ public class InputRouter {
         this.wsOutput = wsOutput;
         this.gameController = gameController;
     }
-    public <T> void routeDebug(BaseMessageDTO<T> message) {
+    public <T> void routeDebug(BaseMessageInputDTO<T> message) {
         handleQuery(
                     message, GenericContentDTO.class,
                     GenericMessageDTO.class, this::handleDEBUGMessage);
     }
-    public <T> void routeInput(BaseMessageDTO<T> message) {
+    public <T> void routeInput(BaseMessageInputDTO<T> message) {
         switch (message.getContentEnum()) {
             case DRAW_QUERY:
                 handleQuery(
-                    message, DrawQuery.class,
+                    message, DrawContentDTO.class,
                     DrawMessageDTO.class, this::handleDrawQuery);
                 break;
             case READY_QUERY:
@@ -67,8 +71,8 @@ public class InputRouter {
                 break;
         }
     }
-    private <C extends BaseContentDTO, M extends BaseMessageDTO<C>> void handleQuery(
-            BaseMessageDTO<?> message,
+    private <C extends BaseContentDTO, M extends BaseMessageInputDTO<C>> void handleQuery(
+            BaseMessageInputDTO<?> message,
             Class<C> contentType,
             Class<M> messageQueryType,
             Consumer<M> handler) {
@@ -103,7 +107,7 @@ public class InputRouter {
         result.put("contentEnum", query.getContentEnum());
         result.put("content", query.getContent());
 
-        wsOutput.sendPushToGroup(new PlayerMessageAnswer(query.getGameId(), ContentResultEnum.SERVER_SIDE_UNHANDLED, result));
+        wsOutput.sendPushToGroup(new BaseMessageOutputDTO(query.getGameId(), ContentResultEnum.SERVER_SIDE_UNHANDLED, result));
     }
 
     private void handleDrawQuery(DrawMessageDTO query){

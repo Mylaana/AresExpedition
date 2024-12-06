@@ -1,9 +1,9 @@
 package com.ares_expedition.dto.websocket.messages.input;
 
-import com.ares_expedition.dto.websocket.content.player.PlayerReadyContentDTO;
+import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
-public class PlayerReadyMessageDTO extends BaseMessageDTO<PlayerReadyContentDTO> {
+public class PlayerReadyMessageDTO extends BaseMessageInputDTO<PlayerReadyContentDTO> {
     protected PlayerReadyContentDTO content;
 
     public PlayerReadyMessageDTO(){};

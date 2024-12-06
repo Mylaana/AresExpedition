@@ -2,14 +2,14 @@ package com.ares_expedition.services;
 
 import java.lang.reflect.Constructor;
 
-import com.ares_expedition.dto.websocket.content.BaseContentDTO;
-import com.ares_expedition.dto.websocket.messages.input.BaseMessageDTO;
+import com.ares_expedition.dto.websocket.content.input.BaseContentDTO;
+import com.ares_expedition.dto.websocket.messages.input.BaseMessageInputDTO;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class QueryMessageFactory {
-    public static <C extends BaseContentDTO, M extends BaseMessageDTO<C>> M createMessageQuery(
-            BaseMessageDTO<?> baseMessage,
+    public static <C extends BaseContentDTO, M extends BaseMessageInputDTO<C>> M createMessageQuery(
+            BaseMessageInputDTO<?> baseMessage,
             Class<C> contentType,
             Class<M> messageQueryType) {
 

@@ -1,11 +1,10 @@
 package com.ares_expedition.dto.websocket.messages.input;
 
-import com.ares_expedition.dto.websocket.content.player.UnHandledContentDTO;
+import com.ares_expedition.dto.websocket.content.input.UnHandledContentDTO;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
-public class UnHandledMessageDTO extends BaseMessageDTO<UnHandledContentDTO> {
-    protected UnHandledConte
-    ntDTO content;
+public class UnHandledMessageDTO extends BaseMessageInputDTO<UnHandledContentDTO> {
+    protected UnHandledContentDTO content;
 
     public UnHandledMessageDTO(){};
 

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.dto.websocket.content.player.PlayerStateContentDTO;
+import com.ares_expedition.dto.websocket.content.input.PlayerStateContentDTO;
 
 public class PlayerState {
     private Integer id;

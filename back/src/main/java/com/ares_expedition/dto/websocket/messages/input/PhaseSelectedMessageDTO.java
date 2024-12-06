@@ -1,10 +1,10 @@
 package com.ares_expedition.dto.websocket.messages.input;
 
-import com.ares_expedition.dto.websocket.content.player.PhaseSelectedContentDTO;
+import com.ares_expedition.dto.websocket.content.input.PhaseSelectedContentDTO;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
 
-public class PhaseSelectedMessageDTO extends BaseMessageDTO<PhaseSelectedContentDTO> {
+public class PhaseSelectedMessageDTO extends BaseMessageInputDTO<PhaseSelectedContentDTO> {
     protected PhaseSelectedContentDTO content;
 
     public PhaseSelectedMessageDTO(){};

@@ -1,6 +1,4 @@
-package com.ares_expedition.dto.websocket.content.player;
-
-import com.ares_expedition.dto.websocket.content.BaseContentDTO;
+package com.ares_expedition.dto.websocket.content.input;
 
 public class GenericContentDTO extends BaseContentDTO{
     Object content;

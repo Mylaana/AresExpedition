@@ -1,8 +1,6 @@
-package com.ares_expedition.dto.websocket.content.player;
+package com.ares_expedition.dto.websocket.content.input;
 
 import java.util.Map;
-
-import com.ares_expedition.dto.websocket.content.BaseContentDTO;
 
 public class UnHandledContentDTO extends BaseContentDTO {
     Object content;

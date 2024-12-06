@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.ares_expedition.dto.websocket.messages.input.BaseMessageDTO;
+import com.ares_expedition.dto.websocket.messages.input.BaseMessageInputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.dto.websocket.content.player.*;
+import com.ares_expedition.dto.websocket.content.input.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -34,7 +34,7 @@ class BackendApplicationTests {
 		}
 		""";
 
-		BaseMessageDTO<PlayerReadyContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageInputDTO<PlayerReadyContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		assertTrue(query.getContent().getReady());
@@ -52,7 +52,7 @@ class BackendApplicationTests {
 		}
 		""";
 
-		BaseMessageDTO<PhaseSelectedContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageInputDTO<PhaseSelectedContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		assertEquals(query.getContent().getPhase(), PhaseEnum.CONSTRUCTION);
@@ -70,7 +70,7 @@ class BackendApplicationTests {
 		}
 		""";
 
-		BaseMessageDTO<GenericContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageInputDTO<GenericContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		assertEquals(query.getContent().getContent(), "SET_BOTS_READY");
@@ -260,7 +260,7 @@ class BackendApplicationTests {
 			}
 		""";
 
-		BaseMessageDTO<PlayerStateContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageInputDTO<PlayerStateContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		//assert(query.getContent().getContent(), "SET_BOTS_READY");

@@ -1,25 +1,25 @@
 package com.ares_expedition.dto.websocket.messages.input;
 
-import com.ares_expedition.dto.websocket.content.draw.DrawQuery;
+import com.ares_expedition.dto.websocket.content.input.DrawContentDTO;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
-public class DrawMessageDTO extends BaseMessageDTO<DrawQuery> {
-    protected DrawQuery content;
+public class DrawMessageDTO extends BaseMessageInputDTO<DrawContentDTO> {
+    protected DrawContentDTO content;
 
     public DrawMessageDTO(){};
 
-    public DrawMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, DrawQuery content){
+    public DrawMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, DrawContentDTO content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;
         this.content = content;
     }
 
-    public DrawQuery getContent(){
+    public DrawContentDTO getContent(){
         return this.content;
     }
 
-    public void setContent(DrawQuery content){
+    public void setContent(DrawContentDTO content){
         this.content = content;
     }
 

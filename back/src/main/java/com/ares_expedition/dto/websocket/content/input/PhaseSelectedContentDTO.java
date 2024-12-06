@@ -1,6 +1,5 @@
-package com.ares_expedition.dto.websocket.content.player;
+package com.ares_expedition.dto.websocket.content.input;
 
-import com.ares_expedition.dto.websocket.content.BaseContentDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 
 public class PhaseSelectedContentDTO extends BaseContentDTO {

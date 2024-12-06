@@ -1,11 +1,11 @@
 package com.ares_expedition.dto.websocket.messages.input;
 
-import com.ares_expedition.dto.websocket.content.player.*;
+import com.ares_expedition.dto.websocket.content.input.*;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-public class BaseMessageDTO<T>{
+public class BaseMessageInputDTO<T>{
     protected Integer gameId;
     protected Integer playerId;
     protected ContentQueryEnum contentEnum;
@@ -25,8 +25,8 @@ public class BaseMessageDTO<T>{
     })
     protected T content;
 
-    public BaseMessageDTO(){}
-    public BaseMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
+    public BaseMessageInputDTO(){}
+    public BaseMessageInputDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;

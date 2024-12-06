@@ -1,11 +1,9 @@
-package com.ares_expedition.dto.websocket.content.player;
+package com.ares_expedition.dto.websocket.content.input;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.ares_expedition.dto.websocket.content.BaseContentDTO;
 
 public class PlayerStateContentDTO extends BaseContentDTO {
 	private Integer id;
