@@ -9,7 +9,7 @@ import com.ares_expedition.model.game.PlayerState;
 
 public class Game {
     private Integer gameId;
-    private List<Integer> deck;
+    private List<Integer> deck = new ArrayList<>();
     private List<Integer> discard;
     private List<Integer> groupPlayerId;
     private Map<Integer, Boolean> groupPlayerReady;
@@ -86,6 +86,9 @@ public class Game {
         this.discard.clear();
     }
     public void shuffleDeck(){
+        if (this.deck == null) {  // Exemple de validation
+            throw new IllegalStateException("Deck must be initialized before shuffling.");
+        }
         Collections.shuffle(this.deck);
     }
     public void setPlayerReady(Integer playerId, Boolean ready){

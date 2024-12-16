@@ -223,37 +223,86 @@ class BackendApplicationTests {
 					"valueMod": 0
 				}
 				],
+				"cards": {
+					"toBeFilled": 0
+				}
 				"research": {
-				"keep": 0,
-				"scan": 0
+					"keep": 0,
+					"scan": 0
 				},
+				"phaseCards": {
+					"toBeFilled": 0
+				}
 				"phaseCardUpgradeCount": 0,
 				"sellCardValueMod": 0,
 				"milestoneCount": 3,
 				"globalParameter": {
-				"globalParameterIndex": {},
-				"parameters": [
-					{
-					"name": "infrastructure",
-					"value": 0,
-					"addEndOfPhase": 0
-					},
-					{
-					"name": "ocean",
-					"value": 0,
-					"addEndOfPhase": 0
-					},
-					{
-					"name": "oxygen",
-					"value": 0,
-					"addEndOfPhase": 0
-					},
-					{
-					"name": "temperature",
-					"value": 0,
-					"addEndOfPhase": 0
-					}
-				]
+					"globalParameterIndex": {},
+					"parameters": [
+						{
+						"name": "infrastructure",
+						"value": 0,
+						"addEndOfPhase": 0
+						},
+						{
+						"name": "ocean",
+						"value": 0,
+						"addEndOfPhase": 0
+						},
+						{
+						"name": "oxygen",
+						"value": 0,
+						"addEndOfPhase": 0
+						},
+						{
+						"name": "temperature",
+						"value": 0,
+						"addEndOfPhase": 0
+						}
+					]
+				}
+			},
+			"contentEnum": "PLAYER_STATE_PUSH"
+			}
+		""";
+
+		BaseMessageInputDTO<PlayerStateContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
+
+		assertNotNull(query.getContent());
+		//assert(query.getContent().getContent(), "SET_BOTS_READY");
+	}
+	@Test
+	void testDeserializationPlayerStatePushShort() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+
+		String json = """
+		{
+			"gameId": 1,
+			"playerId": 0,
+			"content": {
+				"id": 0,
+				"name": "joueur 1",
+				"color": "rgb(0, 0, 255)",
+				"ressource": [],
+				"terraformingRating": 5,
+				"vp": 5,
+				"tag": [],
+				"cards": {
+					"toBeFilled": 0
+				}
+				"research": {
+					"keep": 0,
+					"scan": 0
+				},
+				"phaseCards": {
+					"toBeFilled": 0
+				}
+				"phaseCardUpgradeCount": 0,
+				"sellCardValueMod": 0,
+				"milestoneCount": 3,
+				"globalParameter": {
+					"globalParameterIndex": {},
+					"parameters": []
 				}
 			},
 			"contentEnum": "PLAYER_STATE_PUSH"

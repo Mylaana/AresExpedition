@@ -12,10 +12,10 @@ public class PlayerStateContentDTO extends BaseContentDTO {
 	private List<Map<String, Object>> ressource = new ArrayList<>();
 	private Integer terraformingRating;
 	private Integer vp;
-	private List<Map<String, Object>> tag = new ArrayList<>();
-	private Map<String, Object> cards = new HashMap<>();
-	private Map<String, Object> research = new HashMap<>();
-	private Map<String, Object> phaseCards = new HashMap<>();; 
+    private List<Map<String, Object>> tag = new ArrayList<>();
+    private Map<String, Object> cards = new HashMap<>();
+    private Map<String, Object> research = new HashMap<>();
+	private Map<String, Object> phaseCards = new HashMap<>();
 	private Integer phaseCardUpgradeCount;
 	private Integer sellCardValueMod;
 	private Map<String, Object> globalParameter = new HashMap<>();
