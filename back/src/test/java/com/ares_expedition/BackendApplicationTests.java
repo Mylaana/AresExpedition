@@ -225,14 +225,14 @@ class BackendApplicationTests {
 				],
 				"cards": {
 					"toBeFilled": 0
-				}
+				},
 				"research": {
 					"keep": 0,
 					"scan": 0
 				},
 				"phaseCards": {
 					"toBeFilled": 0
-				}
+				},
 				"phaseCardUpgradeCount": 0,
 				"sellCardValueMod": 0,
 				"milestoneCount": 3,
@@ -289,14 +289,14 @@ class BackendApplicationTests {
 				"tag": [],
 				"cards": {
 					"toBeFilled": 0
-				}
+				},
 				"research": {
 					"keep": 0,
 					"scan": 0
 				},
 				"phaseCards": {
 					"toBeFilled": 0
-				}
+				},
 				"phaseCardUpgradeCount": 0,
 				"sellCardValueMod": 0,
 				"milestoneCount": 3,
