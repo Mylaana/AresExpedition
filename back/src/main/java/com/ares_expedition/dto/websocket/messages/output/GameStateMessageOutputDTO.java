@@ -1,4 +1,4 @@
-package com.ares_expedition.dto.websocket.serialized_message.answer.content;
+package com.ares_expedition.dto.websocket.messages.output;
 
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -6,13 +6,13 @@ import java.util.Map;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.game.PlayerState;
 
-public class GameStateContent {
+public class GameStateMessageOutputDTO {
     private PhaseEnum currentPhase;
     private Map<Integer, Boolean> groupReady;
     private LinkedHashSet<PhaseEnum> selectedPhase;
     private Map<Integer, PlayerState> groupPlayerState;
 
-    public GameStateContent(){
+    public GameStateMessageOutputDTO(){
     }
     public PhaseEnum getCurrentPhase(){
         return this.currentPhase;

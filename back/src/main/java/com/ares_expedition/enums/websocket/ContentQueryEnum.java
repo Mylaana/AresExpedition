@@ -5,7 +5,6 @@ public enum ContentQueryEnum {
     READY_QUERY,
     PLAYER_GAME_STATE_QUERY,
     SELECTED_PHASE_QUERY,
-    PLAYER_STATE_QUERY,
     PLAYER_STATE_PUSH,
 
 

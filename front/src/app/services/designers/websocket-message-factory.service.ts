@@ -23,7 +23,7 @@ export class WebsocketQueryMessageFactory{
         let message: PlayerMessage = {
             gameId: gameId,
             playerId: clientId,
-            content: content??{undefined:undefined},
+            content: content??{content:contentEnum},
             contentEnum: contentEnum
         }
         return message

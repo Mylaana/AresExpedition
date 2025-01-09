@@ -10,5 +10,184 @@
         "3": false
     },
     "currentPhase": "PLANIFICATION",
-    "selectedPhase": ["PLANIFICATION", "DEVELOPMENT", "PRODUCTION"]
+    "selectedPhase": ["PLANIFICATION"],
+    "groupPlayerState": {
+        "1": {
+                "id": 0,
+                "name": "joueur 1",
+                "color": "rgb(0, 0, 255)",
+                "ressource": [
+                    {
+                        "id": 0,
+                        "name": "megacredit",
+                        "valueMod": 0,
+                        "valueProd": 0,
+                        "valueBaseProd": 0,
+                        "valueStock": 52,
+                        "hasStock": true,
+                        "imageUrlId": 1009
+                    },
+                    {
+                        "id": 1,
+                        "name": "heat",
+                        "valueMod": 0,
+                        "valueProd": 0,
+                        "valueBaseProd": 0,
+                        "valueStock": 0,
+                        "hasStock": true,
+                        "imageUrlId": 1007
+                    },
+                    {
+                        "id": 2,
+                        "name": "plant",
+                        "valueMod": 0,
+                        "valueProd": 0,
+                        "valueBaseProd": 0,
+                        "valueStock": 0,
+                        "hasStock": true,
+                        "imageUrlId": 6
+                    },
+                    {
+                        "id": 3,
+                        "name": "steel",
+                        "valueMod": 2,
+                        "valueProd": 0,
+                        "valueBaseProd": 0,
+                        "valueStock": 0,
+                        "hasStock": false,
+                        "imageUrlId": 1000
+                    },
+                    {
+                        "id": 4,
+                        "name": "titanium",
+                        "valueMod": 3,
+                        "valueProd": 0,
+                        "valueBaseProd": 0,
+                        "valueStock": 0,
+                        "hasStock": false,
+                        "imageUrlId": 1001
+                    },
+                    {
+                        "id": 5,
+                        "name": "card",
+                        "valueMod": 0,
+                        "valueProd": 0,
+                        "valueBaseProd": 0,
+                        "valueStock": 0,
+                        "hasStock": false,
+                        "imageUrlId": 102
+                    }
+                ],
+                "terraformingRating": 5,
+                "vp": 5,
+                "tag": [
+                    {
+                        "id": 0,
+                        "name": "building",
+                        "idImageUrl": 0,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 1,
+                        "name": "space",
+                        "idImageUrl": 1,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 2,
+                        "name": "science",
+                        "idImageUrl": 2,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 3,
+                        "name": "power",
+                        "idImageUrl": 3,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 4,
+                        "name": "earth",
+                        "idImageUrl": 4,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 5,
+                        "name": "jovian",
+                        "idImageUrl": 5,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 6,
+                        "name": "plant",
+                        "idImageUrl": 6,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 7,
+                        "name": "animal",
+                        "idImageUrl": 7,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 8,
+                        "name": "microbe",
+                        "idImageUrl": 8,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    },
+                    {
+                        "id": 9,
+                        "name": "event",
+                        "idImageUrl": 9,
+                        "valueCount": 0,
+                        "valueMod": 0
+                    }
+                ],
+                "cards": {
+                    "toBeFilled": 0
+                },
+                "research": {
+                    "keep": 0,
+                    "scan": 0
+                },
+                "phaseCards": {
+                    "toBeFilled": 0
+                },
+                "phaseCardUpgradeCount": 0,
+                "sellCardValueMod": 0,
+                "milestoneCount": 3,
+                "globalParameter": {
+                    "infrastructure": {
+                        "name": "infrastructure",
+                        "value": 0,
+                        "addEndOfPhase": 0
+                    },
+                    "ocean": {
+                        "name": "ocean",
+                        "value": 0,
+                        "addEndOfPhase": 0
+                    },
+                    "oxygen": {
+                        "name": "oxygen",
+                        "value": 0,
+                        "addEndOfPhase": 0
+                    },
+                    "temperature": {
+                        "name": "temperature",
+                        "value": 0,
+                        "addEndOfPhase": 0
+                    }
+                }
+            }
+        
+    }
 }

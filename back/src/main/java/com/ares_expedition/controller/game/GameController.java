@@ -8,9 +8,8 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.ares_expedition.controller.websocket.WsControllerOutput;
-
-import com.ares_expedition.dto.websocket.serialized_message.answer.PlayerMessageAnswer;
-import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
+import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
+import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.game.PlayerState;
 import com.ares_expedition.repository.Game;
@@ -19,14 +18,13 @@ import com.ares_expedition.repository.JsonGameReader;
 @Service
 public class GameController {
     private final WsControllerOutput wsOutput;
-    private Map<Integer, Game> gameHolder;
+    private Map<Integer, Game> gameHolder = new HashMap<>();
 
     public GameController(WsControllerOutput wsOutput){
         this.wsOutput = wsOutput;
         this.loadGames();
     }
     private void loadGames(){
-        this.gameHolder = new HashMap<>();
         Integer gameId = 1;
         Game newGame = JsonGameReader.getGame(gameId);
         newGame.shuffleDeck();
@@ -38,7 +36,7 @@ public class GameController {
     public List<Integer> drawCards(Integer gameId, Integer drawNumber){
         List<Integer> cards = getGameFromId(gameId).drawCards(drawNumber);
         if(cards.size() < drawNumber){
-            wsOutput.sendPushToGroup(new PlayerMessageAnswer(gameId, "not enough cards in deck"));
+            wsOutput.sendPushToGroup(new BaseMessageOutputDTO(gameId, "not enough cards in deck"));
         }
         return cards;
     }
@@ -62,7 +60,7 @@ public class GameController {
     public void setAllPlayersNotReady(Integer gameId){
         getGameFromId(gameId).setAllPlayersNotReady();
     }
-    public GameStateContent getGameState(Integer gameId){
+    public GameStateMessageOutputDTO getGameState(Integer gameId){
         return getGameFromId(gameId).getGameState();
     }
     public void nextPhaseSelected(Integer gameId){

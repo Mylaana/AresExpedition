@@ -3,19 +3,21 @@ package com.ares_expedition.repository;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.ares_expedition.dto.websocket.serialized_message.answer.content.GameStateContent;
+import com.ares_expedition.dto.deserializer.IntegerKeyDeserializer;
+import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.game.PlayerState;
-import com.ares_expedition.model.query.player.PlayerStateDTO;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class Game {
     private Integer gameId;
-    private List<Integer> deck;
-    private List<Integer> discard;
-    private List<Integer> groupPlayerId;
-    private Map<Integer, Boolean> groupPlayerReady;
+    private List<Integer> deck = new ArrayList<>();
+    private List<Integer> discard = new ArrayList<>();
+    private List<Integer> groupPlayerId = new ArrayList<>();
+    private Map<Integer, Boolean> groupPlayerReady = new HashMap<>();
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
+    @JsonDeserialize(keyUsing = IntegerKeyDeserializer.class)
     private Map<Integer, PlayerState> groupPlayerState = new HashMap<>();
 
     public Game() {
@@ -87,6 +89,9 @@ public class Game {
         this.discard.clear();
     }
     public void shuffleDeck(){
+        if (this.deck == null) {  // Exemple de validation
+            throw new IllegalStateException("Deck must be initialized before shuffling.");
+        }
         Collections.shuffle(this.deck);
     }
     public void setPlayerReady(Integer playerId, Boolean ready){
@@ -97,8 +102,8 @@ public class Game {
             this.setPlayerReady(playerId, false);
         }
     }
-    public GameStateContent getGameState(){
-        GameStateContent gameState = new GameStateContent();
+    public GameStateMessageOutputDTO getGameState(){
+        GameStateMessageOutputDTO gameState = new GameStateMessageOutputDTO();
         gameState.setCurrentPhase(currentPhase);
         gameState.setGroupReady(groupPlayerReady);
         gameState.setSelectedPhase(selectedPhase);

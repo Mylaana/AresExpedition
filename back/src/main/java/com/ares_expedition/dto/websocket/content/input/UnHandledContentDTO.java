@@ -1,20 +1,18 @@
-package com.ares_expedition.model.query.player;
+package com.ares_expedition.dto.websocket.content.input;
 
 import java.util.Map;
 
-import com.ares_expedition.model.query.BaseQuery;
-
-public class UnHandledQuery extends BaseQuery {
+public class UnHandledContentDTO extends BaseContentDTO {
     Object content;
     
-    public UnHandledQuery(){
+    public UnHandledContentDTO(){
     }
 
-    public UnHandledQuery(Object content){
+    public UnHandledContentDTO(Object content){
         this.content = content;
     }
 
-    public UnHandledQuery(Map<String, Object> content){
+    public UnHandledContentDTO(Map<String, Object> content){
         this.content = content;
     }
     

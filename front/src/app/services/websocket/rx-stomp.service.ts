@@ -29,11 +29,12 @@ export class RxStompService extends RxStomp {
     }
 
     public publishDebugMessage(param:{gameId?:number, playerId?:number, contentEnum?:MessageContentQueryEnum, content:any}){
-        let message = {
+        Utils.logError(`PUBLISHED DEBUG: ${param.contentEnum} `, param.content)
+		let message = {
             gameId: param.gameId?? GLOBAL_GAME_ID,
             playerId: param.playerId?? GLOBAL_CLIENT_ID,
             contentEnum: param.contentEnum?? MessageContentQueryEnum.debug,
-            content: {debug:param.content}
+            content: {content:param.content}
         }
         this.publish({destination: "/app/debug", body: JSON.stringify(message)});
     }

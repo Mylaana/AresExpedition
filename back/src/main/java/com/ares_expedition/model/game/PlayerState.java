@@ -1,21 +1,23 @@
 package com.ares_expedition.model.game;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.model.query.player.PlayerStateDTO;
+import com.ares_expedition.dto.websocket.content.input.PlayerStateContentDTO;
 
 public class PlayerState {
     private Integer id;
     private String name;
     private String color;
-    private Map<String, Object> ressource = new HashMap<>();
+    private List<Map<String, Object>> ressource = new ArrayList<>();
     private Integer terraformingRating;
     private Integer vp;
-    private Map<String, Object> tag = new HashMap<>();
+    private List<Map<String, Object>> tag = new ArrayList<>();
     private Map<String, Object> cards = new HashMap<>();
     private Map<String, Object> research = new HashMap<>();
-	private Map<String, Object> phaseCards; 
+	private Map<String, Object> phaseCards = new HashMap<>();
 	private Integer phaseCardUpgradeCount;
 	private Integer sellCardValueMod;
 	private Map<String, Object> globalParameter = new HashMap<>();
@@ -24,13 +26,13 @@ public class PlayerState {
     public PlayerState(){
     }
     
-    public static PlayerState toModel(PlayerStateDTO statePush){
+    public static PlayerState toModel(PlayerStateContentDTO statePush){
         PlayerState state = new PlayerState();
 
         state.setId(statePush.getId());
         state.setName(statePush.getName());
         state.setColor(statePush.getColor());
-        state.setRessources(statePush.getRessources());
+        state.setRessource(statePush.getRessource());
         state.setTerraformingRating(statePush.getTerraformingRating());
         state.setVp(statePush.getVp());
         state.setTag(statePush.getTag());
@@ -68,11 +70,11 @@ public class PlayerState {
         this.color = color;
     }
 
-    public Map<String, Object> getRessources() {
+    public List<Map<String, Object>> getRessource() {
         return ressource;
     }
 
-    public void setRessources(Map<String, Object> ressource) {
+    public void setRessource(List<Map<String, Object>> ressource) {
         this.ressource = ressource;
     }
 
@@ -92,11 +94,11 @@ public class PlayerState {
         this.vp = vp;
     }
 
-    public Map<String, Object> getTag() {
+    public List<Map<String, Object>> getTag() {
         return tag;
     }
 
-    public void setTag(Map<String, Object> tag) {
+    public void setTag(List<Map<String, Object>> tag) {
         this.tag = tag;
     }
 
