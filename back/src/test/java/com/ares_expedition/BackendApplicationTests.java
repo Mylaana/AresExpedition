@@ -1,14 +1,24 @@
 package com.ares_expedition;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ares_expedition.dto.websocket.messages.input.BaseMessageInputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.game.PlayerState;
+import com.ares_expedition.repository.Game;
+import com.ares_expedition.repository.JsonGameReader;
 import com.ares_expedition.dto.websocket.content.input.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -271,47 +281,43 @@ class BackendApplicationTests {
 		assertNotNull(query.getContent());
 		//assert(query.getContent().getContent(), "SET_BOTS_READY");
 	}
+
 	@Test
-	void testDeserializationPlayerStatePushShort() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
+	void testDeserializationPlayerState() throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+		InputStream inputStream = JsonGameReader.class.getClassLoader().getResourceAsStream("test/playerState.json");
+		PlayerState testPlayerState = objectMapper.readValue(inputStream, PlayerState.class);
 
-		String json = """
-		{
-			"gameId": 1,
-			"playerId": 0,
-			"content": {
-				"id": 0,
-				"name": "joueur 1",
-				"color": "rgb(0, 0, 255)",
-				"ressource": [],
-				"terraformingRating": 5,
-				"vp": 5,
-				"tag": [],
-				"cards": {
-					"toBeFilled": 0
-				},
-				"research": {
-					"keep": 0,
-					"scan": 0
-				},
-				"phaseCards": {
-					"toBeFilled": 0
-				},
-				"phaseCardUpgradeCount": 0,
-				"sellCardValueMod": 0,
-				"milestoneCount": 3,
-				"globalParameter": {
-					"globalParameterIndex": {},
-					"parameters": []
-				}
-			},
-			"contentEnum": "PLAYER_STATE_PUSH"
-			}
-		""";
-
-		BaseMessageInputDTO<PlayerStateContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
-
-		assertNotNull(query.getContent());
-		//assert(query.getContent().getContent(), "SET_BOTS_READY");
+		assertNotNull(testPlayerState);
+		assertEquals(0, testPlayerState.getId());
+		assertEquals("joueur 1", testPlayerState.getName());
+		assertEquals("rgb(0, 0, 255)", testPlayerState.getColor());
+		assertNotEquals(0, testPlayerState.getRessource().size());
+		assertNotEquals(0, testPlayerState.getTerraformingRating());
+		assertNotEquals(0, testPlayerState.getVp());
+		assertNotEquals(0, testPlayerState.getTag().size());
+		assertNotNull(testPlayerState.getCards());
+		assertNotNull(testPlayerState.getResearch());
+		assertNotNull(testPlayerState.getPhaseCards());
+		assertEquals(0, testPlayerState.getPhaseCardUpgradeCount());
+		assertEquals(0, testPlayerState.getSellCardValueMod());
+		assertEquals(3, testPlayerState.getMilestoneCount());
+		assertNotNull(testPlayerState.getGlobalParameter());
+	}
+	@Test
+	void testLoadingGameFromJson() throws Exception {
+		Game game = JsonGameReader.getGame(1);
+		System.out.println("Loaded game: " + game);
+		//System.out.println("Score: " + game.getGroupPlayerState().get(1).getContent().getScore());
+		
+		assertNotNull(game);
+		assertNotNull(game.getGameId());
+		assertNotEquals(0, game.getDeck().size());
+		assertNotNull(game.getDiscard());
+		assertEquals(0, game.getDiscard().size());
+		assertNotEquals(0, game.getGroupPlayerId().size());
+		assertNotEquals(0, game.getGroupPlayerReady().size());
+		assertNotNull(game.getCurrentPhase());
+		assertNotNull(game.getSelectedPhase());
 	}
 }

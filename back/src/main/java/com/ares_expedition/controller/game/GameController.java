@@ -18,14 +18,13 @@ import com.ares_expedition.repository.JsonGameReader;
 @Service
 public class GameController {
     private final WsControllerOutput wsOutput;
-    private Map<Integer, Game> gameHolder;
+    private Map<Integer, Game> gameHolder = new HashMap<>();
 
     public GameController(WsControllerOutput wsOutput){
         this.wsOutput = wsOutput;
         this.loadGames();
     }
     private void loadGames(){
-        this.gameHolder = new HashMap<>();
         Integer gameId = 1;
         Game newGame = JsonGameReader.getGame(gameId);
         newGame.shuffleDeck();
