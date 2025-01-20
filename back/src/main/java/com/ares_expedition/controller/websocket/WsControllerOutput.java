@@ -14,10 +14,12 @@ public class WsControllerOutput {
     }
 
     public void sendPushToPlayer(BaseMessageOutputDTO message, Integer playerId){
+        System.out.println("\u001B[35m Sending message on player channel: " + message.getContentEnum() +" with player id: " + playerId + "\u001B[0m");
         messagingTemplate.convertAndSend(String.format("/topic/player/%d/%d", message.getGameId(), playerId), message);
     }
 
     public void sendPushToGroup(BaseMessageOutputDTO message){
+        System.out.println("\u001B[35m Sending message on group channel: " + message.getContentEnum() + "\u001B[0m");
         messagingTemplate.convertAndSend(String.format("/topic/group/%d", message.getGameId()), message);
     }
 }

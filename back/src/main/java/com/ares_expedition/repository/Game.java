@@ -147,7 +147,7 @@ public class Game {
                 .sorted(customComparator)
                 .collect(Collectors.toList());
         
-        // Vide le LinkedHashSet et réinsère les éléments dans l'ordre trié
+        // Empties the linkedHashSet and insert back the sorted elements in it
         selectedPhase.clear();
         selectedPhase.addAll(sortedList);
     }

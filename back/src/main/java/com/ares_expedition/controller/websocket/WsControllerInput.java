@@ -20,11 +20,13 @@ public class WsControllerInput {
     }*/
     @MessageMapping("/player")
     public void resolvePlayerQuery(BaseMessageInputDTO<?> message) throws Exception {
+        System.out.println("\u001B[32m Received message: " + message.getContentEnum() + "\u001B[0m");
         inputRouter.routeInput(message);
     }
 
     @MessageMapping("/debug")
     public <T> void resolveTest(BaseMessageInputDTO<T> message) throws Exception {
+        System.out.println("\u001B[33m Received debug message message: " + message.getContentEnum() + "\u001B[0m");
         inputRouter.routeDebug(message);
     }
 }
