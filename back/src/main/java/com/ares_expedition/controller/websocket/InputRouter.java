@@ -83,18 +83,21 @@ public class InputRouter {
     
     private void handleDEBUGMessage(GenericMessageDTO query){
         Object queryContent = query.getContent().getContent().toString();
+        System.out.println("\u001B[33m HANDLEING DEBUG MESSAGE for gameId: " + query.getGameId() + " with queryContent: " + queryContent.toString() + "\u001B[0m");
         if(queryContent.toString().equals("SET_BOTS_READY")){
             gameController.setPlayerReady(1, 1, true);
             gameController.setPlayerReady(1, 2, true);
             gameController.setPlayerReady(1, 3, true);
             Integer gameId = query.getGameId();
-            wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
+            //wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
             
             if(!gameController.getAllPlayersReady(gameId)){
+                System.out.println("\u001B[32m DEBUG NOT ALL READY, STOPPING" +  "\u001B[0m");
                 wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
                 return;
             }
     
+            System.out.println("\u001B[32m DEBUG GOING THROUGH" +  "\u001B[0m");
             gameController.setAllPlayersNotReady(gameId);
             gameController.nextPhaseSelected(gameId);
             wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, gameController.getGameState(gameId)));
@@ -122,25 +125,31 @@ public class InputRouter {
     }
 
     private void handlePlayerReadyQuery(PlayerReadyMessageDTO query) {
+        System.out.println("\u001B[32m HANDLEING PlayerReadyQuery for gameId: " + query.getGameId() + "\u001B[0m");
         Integer gameId = query.getGameId();
         gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getReady());
 
+        //wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
         if(!gameController.getAllPlayersReady(gameId)){
+            System.out.println("\u001B[32m NOT ALL READY, STOPPING" +  "\u001B[0m");
             wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
             return;
         }
 
+        System.out.println("\u001B[32m GOING THROUGH" +  "\u001B[0m");
         gameController.setAllPlayersNotReady(gameId);
         gameController.nextPhaseSelected(gameId);
         wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, gameController.getGameState(gameId)));
     }
 
     private void handleGameStateQuery(GenericMessageDTO query){
+        System.out.println("\u001B[32m HANDLEING Game state query for gameId: " + query.getGameId() + "\u001B[0m");
         Integer gameId = query.getGameId();
         wsOutput.sendPushToPlayer(MessageOutputFactory.createGameStateMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());
     }
     
     private void handlePhaseSelectedQuery(PhaseSelectedMessageDTO query){
+        System.out.println("\u001B[32m HANDLEING phase selected for gameId: " + query.getGameId() + "\u001B[0m");
         Integer gameId = query.getGameId();
         PhaseEnum phase = query.getContent().getPhase();
         gameController.addPhaseSelected(gameId, phase);
@@ -148,6 +157,7 @@ public class InputRouter {
     }
 
     private void handlePlayerStatePushMessage(PlayerStateMessageDTO query){
+        System.out.println("\u001B[32m HANDLEING player state push for gameId: " + query.getGameId() + "\u001B[0m");
         gameController.setPlayerState(
             query.getGameId(),
             query.getPlayerId(),

@@ -228,8 +228,10 @@ export class EventHandler {
 		switch(event.subType){
 			case('endOfPhase'):{
 				this.gameStateService.setClientPlayerReady(true)
-				this.rxStompService.publishClientPlayerReady(true)
-				this.rxStompService.publishPlayerState(this.gameStateService.getClientPlayerState())
+				setTimeout(() => this.rxStompService.publishClientPlayerReady(true), 1000)
+				setTimeout(() => this.rxStompService.publishPlayerState(this.gameStateService.getClientPlayerState()), 2000)
+				//this.rxStompService.publishClientPlayerReady(true)
+				//this.rxStompService.publishPlayerState(this.gameStateService.getClientPlayerState())
 				break
 			}
 			case('buildCard'):{

@@ -67,7 +67,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		this.gameStateService.currentLoadingState.subscribe(
 			loading => this.loadingFinished(loading)
 		)
-		this.gameStateService.currentEventQueue.subscribe( 
+		this.gameStateService.currentEventQueue.subscribe(
 			event => this.currentEventQueue = event
 		)
 		this.gameStateService.currentGroupPlayerReady.subscribe(
@@ -90,12 +90,13 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	phaseChanged(phase: NonSelectablePhaseEnum){
 		if(this.gameStateService.loading.getValue()===true){return}
 		this.currentPhase = phase
-		
+
 		if(this.currentPhase===NonSelectablePhaseEnum.planification){
 			this.planificationPhaseBotSelection()
 		}
 
 		//bots autoready
+		//setTimeout(() => {this.sendBotsReady()}, 10000);
 		this.sendBotsReady()
 	}
 	planificationPhaseBotSelection(){
