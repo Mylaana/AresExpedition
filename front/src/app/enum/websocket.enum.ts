@@ -9,12 +9,14 @@ export enum MessageContentQueryEnum {
 }
 export enum PlayerMessageContentResultEnum {
     draw = 'DRAW_RESULT',
-    gameState = 'GAME_STATE'
+    gameState = 'GAME_STATE',
+
+	acknowledge = 'ACKNOWLEDGE'
 }
 export enum GroupMessageContentResultEnum {
     ready = 'READY_RESULT',
     nextPhase = 'NEXT_PHASE',
-    
+
     debug = 'DEBUG',
     serverSideUnhandled = 'SERVER_SIDE_UNHANDLED'
 }

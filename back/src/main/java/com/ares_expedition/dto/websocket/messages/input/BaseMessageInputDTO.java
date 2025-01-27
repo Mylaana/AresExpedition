@@ -6,14 +6,15 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public class BaseMessageInputDTO<T>{
+    protected String uuid;
     protected Integer gameId;
     protected Integer playerId;
     protected ContentQueryEnum contentEnum;
 
     @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXTERNAL_PROPERTY, // Utiliser une propriété externe pour le type
-        property = "contentEnum" // Propriété externe utilisée pour déterminer le type
+        include = JsonTypeInfo.As.EXTERNAL_PROPERTY, //Use external property to determine type
+        property = "contentEnum" //the external property used to determine type
     )
     @JsonSubTypes({
     @JsonSubTypes.Type(value = PlayerStateContentDTO.class, name = "PLAYER_STATE_PUSH"),
@@ -26,11 +27,15 @@ public class BaseMessageInputDTO<T>{
     protected T content;
 
     public BaseMessageInputDTO(){}
-    public BaseMessageInputDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
+    public BaseMessageInputDTO(String uuid, Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
+        this.uuid = uuid;
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;
         this.content = content;
+    }
+    public String getUuid(){
+        return this.uuid;
     }
     public Integer getGameId(){
         return this.gameId;
@@ -43,6 +48,9 @@ public class BaseMessageInputDTO<T>{
     }
     public T getContent(){
         return this.content;
+    }
+    public void setUuid(String uuid){
+        this.uuid = uuid;
     }
     public void setGameId(Integer gameId){
         this.gameId = gameId;

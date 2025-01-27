@@ -4,13 +4,8 @@ import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, Ws
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { PlayerStateModelFullDTO } from "../../interfaces/dto/player-state-dto.interface";
-
-interface PlayerMessage {
-    gameId: number,
-    playerId: number
-    contentEnum: MessageContentQueryEnum,
-    content: any
-}
+import { PlayerMessage } from "../../interfaces/websocket.interface";
+import { v4 as uuidv4 } from 'uuid'
 
 const clientId = 0
 const gameId = 1
@@ -21,6 +16,7 @@ const gameId = 1
 export class WebsocketQueryMessageFactory{
     private static generatePlayerMessage(contentEnum: MessageContentQueryEnum, content?: any): PlayerMessage {
         let message: PlayerMessage = {
+			uuid: uuidv4(),
             gameId: gameId,
             playerId: clientId,
             content: content??{content:contentEnum},
@@ -54,6 +50,7 @@ export class WebsocketResultMessageFactory{
     private static createMessageResult(message: any): MessageResult {
         let parsedMessage = JSON.parse(message)
         let result : MessageResult = {
+			uuid: parsedMessage['uuid'],
             gameId: parsedMessage['gameId'],
             contentEnum: parsedMessage['contentEnum'],
             content: parsedMessage['content']
@@ -63,6 +60,7 @@ export class WebsocketResultMessageFactory{
     public static createPlayerMessageResult(message: any): PlayerMessageResult {
         let messageResult = this.createMessageResult(message)
         let result : PlayerMessageResult = {
+			uuid: messageResult.uuid,
             gameId: messageResult.gameId,
             playerId: message['playerId'],
             contentEnum: messageResult.contentEnum as PlayerMessageContentResultEnum,

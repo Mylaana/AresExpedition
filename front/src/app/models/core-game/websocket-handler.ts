@@ -12,6 +12,7 @@ export class WebsocketHandler {
 
     constructor(private gameStateService: GameState){}
 
+	/*
     handleMessage(message: WsInputMessage){
         switch(message.subscription){
             case(SubscriptionEnum.player):{
@@ -24,6 +25,7 @@ export class WebsocketHandler {
             }
         }
     }
+	*/
     public handlePlayerMessage(message: PlayerMessageResult){
         Utils.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
         switch(message.contentEnum){

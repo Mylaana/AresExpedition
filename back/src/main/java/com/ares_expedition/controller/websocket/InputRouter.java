@@ -15,6 +15,7 @@ import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
 import com.ares_expedition.dto.websocket.content.input.PlayerStateContentDTO;
 import com.ares_expedition.dto.websocket.content.input.UnHandledContentDTO;
 import com.ares_expedition.dto.websocket.messages.input.*;
+import com.ares_expedition.dto.websocket.messages.output.AckMessageOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
@@ -70,6 +71,7 @@ public class InputRouter {
                     UnHandledMessageDTO.class, this::handleNotRoutedMessage);
                 break;
         }
+        wsOutput.sendAckToPlayer(MessageOutputFactory.createAck(message.getGameId(), message.getUuid()), message.getPlayerId());
     }
     private <C extends BaseContentDTO, M extends BaseMessageInputDTO<C>> void handleQuery(
             BaseMessageInputDTO<?> message,
@@ -128,18 +130,6 @@ public class InputRouter {
         System.out.println("\u001B[32m HANDLEING PlayerReadyQuery for gameId: " + query.getGameId() + "\u001B[0m");
         Integer gameId = query.getGameId();
         gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getReady());
-
-        //wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
-        if(!gameController.getAllPlayersReady(gameId)){
-            System.out.println("\u001B[32m NOT ALL READY, STOPPING" +  "\u001B[0m");
-            wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
-            return;
-        }
-
-        System.out.println("\u001B[32m GOING THROUGH" +  "\u001B[0m");
-        gameController.setAllPlayersNotReady(gameId);
-        gameController.nextPhaseSelected(gameId);
-        wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, gameController.getGameState(gameId)));
     }
 
     private void handleGameStateQuery(GenericMessageDTO query){
@@ -153,6 +143,7 @@ public class InputRouter {
         Integer gameId = query.getGameId();
         PhaseEnum phase = query.getContent().getPhase();
         gameController.addPhaseSelected(gameId, phase);
+        //gameController.setPlayerReady(gameId, query.getPlayerId(), true);
         wsOutput.sendPushToGroup(MessageOutputFactory.createDEBUGMessage(gameId, gameController.getPhaseSelected(gameId)));
     }
 

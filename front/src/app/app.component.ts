@@ -1,5 +1,4 @@
 import { Component, OnInit , AfterViewInit, ViewChild} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SelfInfoComponent } from './components/player-info/self-info/self-info.component';
 import { ServerEmulationComponent } from './components/core-game/server-emulation/server-emulation.component';
@@ -17,7 +16,6 @@ import { PlayerStateModel } from './models/player-info/player-state.model';
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     CommonModule,
     SelfInfoComponent,
     ServerEmulationComponent,
