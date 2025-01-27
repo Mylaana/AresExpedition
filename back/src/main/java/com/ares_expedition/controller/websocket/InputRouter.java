@@ -15,7 +15,6 @@ import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
 import com.ares_expedition.dto.websocket.content.input.PlayerStateContentDTO;
 import com.ares_expedition.dto.websocket.content.input.UnHandledContentDTO;
 import com.ares_expedition.dto.websocket.messages.input.*;
-import com.ares_expedition.dto.websocket.messages.output.AckMessageOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
@@ -91,13 +90,8 @@ public class InputRouter {
             gameController.setPlayerReady(1, 2, true);
             gameController.setPlayerReady(1, 3, true);
             Integer gameId = query.getGameId();
-            //wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
             
-            if(!gameController.getAllPlayersReady(gameId)){
-                System.out.println("\u001B[32m DEBUG NOT ALL READY, STOPPING" +  "\u001B[0m");
-                wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
-                return;
-            }
+            if(!gameController.getAllPlayersReady(gameId)){return;}
     
             System.out.println("\u001B[32m DEBUG GOING THROUGH" +  "\u001B[0m");
             gameController.setAllPlayersNotReady(gameId);
@@ -143,7 +137,6 @@ public class InputRouter {
         Integer gameId = query.getGameId();
         PhaseEnum phase = query.getContent().getPhase();
         gameController.addPhaseSelected(gameId, phase);
-        //gameController.setPlayerReady(gameId, query.getPlayerId(), true);
         wsOutput.sendPushToGroup(MessageOutputFactory.createDEBUGMessage(gameId, gameController.getPhaseSelected(gameId)));
     }
 

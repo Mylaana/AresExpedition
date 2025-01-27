@@ -47,12 +47,10 @@ public class GameController {
 
         //check if all players are ready and act
         if(!game.getAllPlayersReady()){
-            System.out.println("\u001B[32m NOT ALL READY, STOPPING" +  "\u001B[0m");
             wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, game.getGroupPlayerReady()));
             return;
         }
 
-        System.out.println("\u001B[32m GOING THROUGH" +  "\u001B[0m");
         game.setAllPlayersNotReady();
         game.nextPhaseSelected();
         wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, game.getGameState()));
