@@ -1,5 +1,6 @@
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
-import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
+import { GroupMessageContentResultEnum, MessageContentQueryEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
+import { myUUID } from "../types/global.type"
 import { PlayerStateModelPublicDTO, PlayerStateModelSecretDTO } from "./dto/player-state-dto.interface"
 
 export interface WsInputMessage {
@@ -8,9 +9,17 @@ export interface WsInputMessage {
 }
 
 export interface MessageResult {
+	uuid: myUUID,
     gameId: number,
     contentEnum: any,
     content: any
+}
+export interface PlayerMessage {
+	uuid: myUUID
+	gameId: number
+	playerId: number
+	contentEnum: MessageContentQueryEnum
+	content: any
 }
 
 export interface PlayerMessageResult extends MessageResult {

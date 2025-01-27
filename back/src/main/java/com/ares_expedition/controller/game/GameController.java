@@ -11,6 +11,7 @@ import com.ares_expedition.controller.websocket.WsControllerOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.game.PlayerState;
 import com.ares_expedition.repository.Game;
 import com.ares_expedition.repository.JsonGameReader;
@@ -41,21 +42,24 @@ public class GameController {
         return cards;
     }
     public void setPlayerReady(Integer gameId, Integer playerId, Boolean ready){
-        getGameFromId(gameId).setPlayerReady(playerId, ready);
+        Game game = getGameFromId(gameId);
+        game.setPlayerReady(playerId, ready);
+
+        //check if all players are ready and act
+        if(!game.getAllPlayersReady()){
+            wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, game.getGroupPlayerReady()));
+            return;
+        }
+
+        game.setAllPlayersNotReady();
+        game.nextPhaseSelected();
+        wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, game.getGameState()));
     }
     public Map<Integer, Boolean> getGroupPlayerReady(Integer gameId){
         return getGameFromId(gameId).getGroupPlayerReady();
     }
     public Boolean getAllPlayersReady(Integer gameId){
-        Boolean allPlayersReady = true;
-        Map<Integer, Boolean> readyMap = getGroupPlayerReady(gameId);
-        for(Map.Entry<Integer, Boolean> entry : readyMap.entrySet()){
-            if(!entry.getValue()){
-                allPlayersReady = false;
-                break;
-            }
-        };
-        return allPlayersReady;
+        return  getGameFromId(gameId).getAllPlayersReady();
     }
     public void setAllPlayersNotReady(Integer gameId){
         getGameFromId(gameId).setAllPlayersNotReady();
@@ -73,6 +77,8 @@ public class GameController {
         return getGameFromId(gameId).getPhaseSelected();
     }
     public void setPlayerState(Integer gameId, Integer playerId, PlayerState state){
-        getGameFromId(gameId).setPlayerState(playerId, state);
+        Game game = getGameFromId(gameId);
+        game.setPlayerState(playerId, state);
+        this.setPlayerReady(gameId, playerId, true);
     }
 }

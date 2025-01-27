@@ -10,6 +10,8 @@ public enum ContentResultEnum {
     NEXT_PHASE,
     GAME_STATE,
 
+    //Other
     SERVER_SIDE_UNHANDLED,
-    DEBUG
+    DEBUG,
+    ACKNOWLEDGE
 }

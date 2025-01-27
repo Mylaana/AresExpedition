@@ -56,6 +56,14 @@ public class Game {
     public Map<Integer, Boolean> getGroupPlayerReady(){
         return this.groupPlayerReady;
     }
+    public boolean getAllPlayersReady(){
+        for(Map.Entry<Integer, Boolean> entry : groupPlayerReady.entrySet()){
+            if(!entry.getValue()){
+                return false;
+            }
+        };
+        return true;
+    }
     public void setGroupPlayerReady(Map<Integer, Boolean> groupReady){
         this.groupPlayerReady = groupReady;
     }

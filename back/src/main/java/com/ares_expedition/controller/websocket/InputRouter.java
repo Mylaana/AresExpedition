@@ -70,6 +70,7 @@ public class InputRouter {
                     UnHandledMessageDTO.class, this::handleNotRoutedMessage);
                 break;
         }
+        wsOutput.sendAckToPlayer(MessageOutputFactory.createAck(message.getGameId(), message.getUuid()), message.getPlayerId());
     }
     private <C extends BaseContentDTO, M extends BaseMessageInputDTO<C>> void handleQuery(
             BaseMessageInputDTO<?> message,
@@ -89,13 +90,8 @@ public class InputRouter {
             gameController.setPlayerReady(1, 2, true);
             gameController.setPlayerReady(1, 3, true);
             Integer gameId = query.getGameId();
-            //wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
             
-            if(!gameController.getAllPlayersReady(gameId)){
-                System.out.println("\u001B[32m DEBUG NOT ALL READY, STOPPING" +  "\u001B[0m");
-                wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
-                return;
-            }
+            if(!gameController.getAllPlayersReady(gameId)){return;}
     
             System.out.println("\u001B[32m DEBUG GOING THROUGH" +  "\u001B[0m");
             gameController.setAllPlayersNotReady(gameId);
@@ -128,18 +124,6 @@ public class InputRouter {
         System.out.println("\u001B[32m HANDLEING PlayerReadyQuery for gameId: " + query.getGameId() + "\u001B[0m");
         Integer gameId = query.getGameId();
         gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getReady());
-
-        //wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
-        if(!gameController.getAllPlayersReady(gameId)){
-            System.out.println("\u001B[32m NOT ALL READY, STOPPING" +  "\u001B[0m");
-            wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, gameController.getGroupPlayerReady(gameId)));
-            return;
-        }
-
-        System.out.println("\u001B[32m GOING THROUGH" +  "\u001B[0m");
-        gameController.setAllPlayersNotReady(gameId);
-        gameController.nextPhaseSelected(gameId);
-        wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, gameController.getGameState(gameId)));
     }
 
     private void handleGameStateQuery(GenericMessageDTO query){

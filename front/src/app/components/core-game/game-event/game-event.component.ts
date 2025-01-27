@@ -22,6 +22,7 @@ import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../../global/global-const'
 import { Message } from '@stomp/stompjs';
 import { WebsocketResultMessageFactory } from '../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
+import { PlayerMessageContentResultEnum } from '../../../enum/websocket.enum';
 
 //this component is the main controller, and view
 
@@ -123,7 +124,7 @@ export class GameEventComponent {
 			case(NonSelectablePhaseEnum.action):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
 			case(NonSelectablePhaseEnum.production):{events.push(EventDesigner.createPhase('productionPhase'));break}
 			case(NonSelectablePhaseEnum.research):{events.push(EventDesigner.createPhase('researchPhase'));break}
-			
+
 		}
 		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))
 		events.push(EventDesigner.createGeneric('endOfPhase'))
@@ -141,7 +142,7 @@ export class GameEventComponent {
 		this.gameStateService.addEventQueue(newEvent, 'first')
 		//this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
 	}
-	
+
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)}
@@ -160,6 +161,12 @@ export class GameEventComponent {
 		this.wsHandler.handleGroupMessage(WebsocketResultMessageFactory.createGroupMessageResult(message))
 	}
 	private handlePlayerMessage(message: any){
-		this.wsHandler.handlePlayerMessage(WebsocketResultMessageFactory.createPlayerMessageResult(message))
+		let parsedMessage: PlayerMessageResult = WebsocketResultMessageFactory.createPlayerMessageResult(message)
+
+		if(parsedMessage.contentEnum === PlayerMessageContentResultEnum.acknowledge){
+			this.rxStompService.handleAck({ackUuid: parsedMessage.uuid})
+			return
+		}
+		this.wsHandler.handlePlayerMessage(parsedMessage)
 	}
 }

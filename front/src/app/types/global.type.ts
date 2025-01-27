@@ -6,7 +6,7 @@ export type NonSelectablePhase = "planification" | "development" | "construction
 export type StandardState = 'default' | 'disabled'
 export type MinMaxEqualType = 'min' | 'max' | 'equal'
 export type ButtonNames =
-'defaultValidate' 
+'defaultValidate'
 | 'validatePlanification' | 'validateResearch' | 'validateDevelopment' | 'validateConstruction'| 'validateAction' | 'validateProduction'
 | 'sellCardsEndPhase' | 'callOptionalSellCards' | 'validateOptionalSellCards'
 | 'selectAlternative'
@@ -24,3 +24,4 @@ export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jo
 export type GameItemType = TagType | RessourceType
 export type DrawRule = 'draw' | 'research' | 'scanKeep'
 export type CardBuilderOptionType = 'gain6MC' | 'drawCard'
+export type myUUID = string
