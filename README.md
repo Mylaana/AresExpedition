@@ -7,42 +7,43 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 
 # Architecture and Concepts
 ## Technologies used :
-Frontend: Angular 17  
-Backend: Java Spring (websocket STOMP)
-API: Java Spring  
-Script: Python  
+Frontend: Angular 17
+Backend: Java 23
+API: Java Spring Boot, websocket STOMP
+Misc: script in Python  
 
 ## Testing
 Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%
+Backend: Junit  
 
 ## Architecture & Design pattern
 - MVC: game-event-component and its handlers being the 'main' controller, game-state-service being the main model  
-- Event Driven Architecture: The whole front uses RJXS system and a custom pile duo to resolve most game events.  
+- Event Driven Architecture: RXJS and a custom event pile for frontend.  
+- STOMP over Websocket: connection between clients and server for fast two-ways communication.
 
 ## CI/CD
 ### CI
 - GitHub Actions  
-- Feature branches will be merged in Development-QA branch
-- Development-QA will trigger automated tests
-- If tests are successfull, create a PR and automerge to main branch
+- Automated test on branch push
+- If tests are successfull, create a PR and automerge to main branch (to be added).
 
-### CD
+### CD (to be added)
 - Triggerred when new code is merged on main branch
 - Tech used TBD
 
 # WIP : 
 ## Refactoring :
 gameEventComponent: add back optional sell button & Lockpile control
-text with image component: cleanup the code
+text with image component: refactoring
 project card list component : split the component into multiple ones (selector/hand/played)  
 test needs: empty components from the app logic and transfer it into services/classes 
-global: cleaning of code  (renaming, etc.)
+global: removing obvious comments
 
 ## New features :
 ### Phase cards
 Phase 3  
-Phase card project full effect (owner and general)  
-Phase card upgraded effects
+Phase 1 & 2 bug: build button can be clicked without card selected
+Phase 5/draw feature bug: no cards sent by server
 
 ### Cards
 Discard Event should "lock" the Sell card button while being resolved  
@@ -51,9 +52,6 @@ Prerequisites for playing project cards feature
 ## Misc
 Global parameter increase applied at EOT  
 Lakes feature
-
-## Clean Code
-Comments & naming: do some check, comments should be added only if function name is not obvious enough   
 
 ## CI
 Frontend automated testing: Ongoing  
@@ -65,7 +63,6 @@ Nothing done yet
 Tech TBD  
 
 ## Backend
-Server: Java websocket   
 API: Java Springboot  
 
 ## Deployment
