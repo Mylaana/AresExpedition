@@ -1,7 +1,5 @@
 package com.ares_expedition.dto.websocket.content.input;
 
-import java.util.Map;
-
 public class DrawContentDTO extends BaseContentDTO{
     Integer drawNumber;
     Integer eventId;
@@ -12,11 +10,6 @@ public class DrawContentDTO extends BaseContentDTO{
     public DrawContentDTO(Integer drawNumber, Integer eventId){
       this.drawNumber = drawNumber;
       this.eventId = eventId;
-    }
-    
-    public DrawContentDTO(Map<String, Object> data) {
-      this.drawNumber = (Integer) data.get("draw");
-      this.eventId = (Integer) data.get("eventId");
     }
 
     public Integer getDrawNumber() {

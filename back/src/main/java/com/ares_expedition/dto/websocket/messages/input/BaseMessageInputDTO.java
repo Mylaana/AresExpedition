@@ -21,8 +21,10 @@ public class BaseMessageInputDTO<T>{
     @JsonSubTypes.Type(value = PlayerReadyContentDTO.class, name = "READY_QUERY"),
     @JsonSubTypes.Type(value = PhaseSelectedContentDTO.class, name = "SELECTED_PHASE_QUERY"),
     @JsonSubTypes.Type(value = GenericContentDTO.class, name = "PLAYER_GAME_STATE_QUERY"),
+    @JsonSubTypes.Type(value = DrawContentDTO.class, name = "DRAW_QUERY"),
     @JsonSubTypes.Type(value = GenericContentDTO.class, name = "DEBUG"),
-        // Ajoute d'autres types ici en fonction de ContentQueryEnum
+    // Add other types here
+
     })
     protected T content;
 

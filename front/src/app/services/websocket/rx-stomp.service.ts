@@ -63,7 +63,6 @@ export class RxStompService extends RxStomp {
 
         this.publish({ destination, body })
 		if(destination===GLOBAL_WS_APP_DEBUG){
-			console.log('treating debug')
 			this.isProcessingQueue = false
 			this.messageQueue.shift()
 			this.processQueue()
@@ -83,7 +82,6 @@ export class RxStompService extends RxStomp {
 		const headMessage = this.messageQueue[0]
 
 		if (headMessage.uuid != ack.ackUuid) {return}
-		console.log('ack received and treated message:', headMessage)
 		this.messageQueue.shift()
 		this.isProcessingQueue = false
 		this.processQueue()
