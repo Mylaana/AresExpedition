@@ -42,8 +42,7 @@ global: removing obvious comments
 ## New features :
 ### Phase cards
 Phase 3  
-Phase 1 & 2 bug: build button can be clicked without card selected
-Phase 5/draw feature bug: no cards sent by server
+Phase 1 & 2 bug: build button can be clicked without card selected   
 
 ### Cards
 Discard Event should "lock" the Sell card button while being resolved  
