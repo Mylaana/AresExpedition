@@ -1,7 +1,5 @@
 package com.ares_expedition.dto.websocket.content.input;
 
-import java.util.Map;
-
 public class DrawContentDTO extends BaseContentDTO{
     Integer drawNumber;
     Integer eventId;

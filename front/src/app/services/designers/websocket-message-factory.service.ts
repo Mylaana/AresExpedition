@@ -19,13 +19,13 @@ export class WebsocketQueryMessageFactory{
 			uuid: uuidv4(),
             gameId: gameId,
             playerId: clientId,
-            content: content??{content:contentEnum},
-            contentEnum: contentEnum
+			contentEnum: contentEnum,
+            content: content??{content:contentEnum}
         }
         return message
     }
     public static createDrawQuery(drawNumber: number, eventId: number): PlayerMessage {
-        let query: WsDrawQuery = {draw:drawNumber, eventId: eventId}
+        let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
     public static createReadyQuery(ready: boolean): PlayerMessage {

@@ -32,7 +32,7 @@ export interface GroupMessageResult extends MessageResult {
 
 export interface WsQuery {}
 export interface WsDrawQuery extends WsQuery {
-    draw: number
+    drawNumber: number
     eventId: number
 }
 export interface WsReadyQuery extends WsQuery {
