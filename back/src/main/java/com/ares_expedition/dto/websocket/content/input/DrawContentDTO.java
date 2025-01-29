@@ -13,11 +13,6 @@ public class DrawContentDTO extends BaseContentDTO{
       this.drawNumber = drawNumber;
       this.eventId = eventId;
     }
-    
-    public DrawContentDTO(Map<String, Object> data) {
-      this.drawNumber = (Integer) data.get("draw");
-      this.eventId = (Integer) data.get("eventId");
-    }
 
     public Integer getDrawNumber() {
       return drawNumber;
