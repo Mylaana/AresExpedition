@@ -8,17 +8,20 @@
             <div class="wrapper-select-button">
                 <app-event-play-zone-button [button]="cardBuilder.getButtons()[0]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
-            <div class="wrapper-build-button">
+			<div class="wrapper-cancel-button">
                 <app-event-play-zone-button [button]="cardBuilder.getButtons()[1]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
-            <div class="wrapper-cancel-button">
+            <div class="wrapper-build-button">
                 <app-event-play-zone-button [button]="cardBuilder.getButtons()[2]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
+            </div>
+            <div class="wrapper-discard-button">
+                <app-event-play-zone-button [button]="cardBuilder.getButtons()[3]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
         </div>
         <ng-container *ngIf="cardBuilder.getOption()!=undefined">
             <h1>Or</h1>
             <div class="wrapper-alternative">
-                <app-event-play-zone-button [button]="cardBuilder.getButtons()[3]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
+                <app-event-play-zone-button [button]="cardBuilder.getButtons()[4]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
             </div>
         </ng-container>
     </div>

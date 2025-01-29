@@ -5,6 +5,9 @@ import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/
 import { CardState } from "../cards/card-cost.model";
 import { ProjectCardModel } from "../cards/project-card.model";
 
+
+type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
+
 export abstract class EventBaseModel {
     readonly type!: EventType
     readonly subType!: any
@@ -45,19 +48,9 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
     override hasSelector(): boolean {
         return true
     }
-    /**
-     * 
-     * @param stateFromParent 
-     * default state from parent {selectable:true}
-     */
     activateSelection(stateFromParent?:CardState): void {
         this.selectionActive = true
     }
-        /**
-     * 
-     * @param stateFromParent 
-     * default state from parent {selectable:true}
-     */
     deactivateSelection(stateFromParent?:CardState): void {
         this.selectionActive = false
     }
@@ -83,7 +76,7 @@ export class CardBuilder {
     private buttons: EventCardBuilderButton[] = []
     //private Id!: number
     private option!: CardBuilderOptionType
-    private cardIsBuilt: boolean = false
+    private builderIsLocked: boolean = false
 
     addButtons(buttons: EventCardBuilderButton[]): void {
         this.buttons = buttons
@@ -99,56 +92,97 @@ export class CardBuilder {
     }
     setOption(option: CardBuilderOptionType): void {this.option = option}
     getOption(): CardBuilderOptionType {return this.option}
-    //setId(id: number): void {this.Id = id}
     private updateButtonEnabled(name: EventCardBuilderButtonNames, enabled: boolean): void {
         let button = this.getButtonFromName(name)
         if(!button){return}
         button.enabled = enabled
     }
-    private updateButtonGroupState(buttonName: EventCardBuilderButtonNames): void {
+    private updateButtonGroupState(buttonName: ButtonGroupUpdateType): void {
         switch(buttonName){
             case('selectCard'):{
                 this.updateButtonEnabled('selectCard', false)
-                this.updateButtonEnabled('buildCard', true)
-                this.updateButtonEnabled('cancelCard', true)
+				this.updateButtonEnabled('cancelSelectCard', true)
+                this.updateButtonEnabled('buildCard', false)
+                this.updateButtonEnabled('discardSelectedCard', false)
                 this.updateButtonEnabled('drawCard', false)
                 this.updateButtonEnabled('gain6MC', false)
                 break
             }
-            case('cancelCard'):{
+			case('cancelSelectCard'):{
                 this.updateButtonEnabled('selectCard', true)
+				this.updateButtonEnabled('cancelSelectCard', false)
                 this.updateButtonEnabled('buildCard', false)
-                this.updateButtonEnabled('cancelCard', false)
+                this.updateButtonEnabled('discardSelectedCard', false)
                 this.updateButtonEnabled('drawCard', true)
                 this.updateButtonEnabled('gain6MC', true)
                 break
             }
             case('buildCard'):{
                 this.updateButtonEnabled('selectCard', false)
+				this.updateButtonEnabled('cancelSelectCard', false)
                 this.updateButtonEnabled('buildCard', false)
-                this.updateButtonEnabled('cancelCard', false)
+                this.updateButtonEnabled('discardSelectedCard', false)
                 this.updateButtonEnabled('drawCard', false)
                 this.updateButtonEnabled('gain6MC', false)
+                break
+            }
+			case('discardSelectedCard'):{
+                this.updateButtonEnabled('selectCard', true)
+				this.updateButtonEnabled('cancelSelectCard', false)
+                this.updateButtonEnabled('buildCard', false)
+                this.updateButtonEnabled('discardSelectedCard', false)
+                this.updateButtonEnabled('drawCard', true)
+                this.updateButtonEnabled('gain6MC', true)
                 break
             }
             case('drawCard'):case('gain6MC'):{
                 this.updateButtonEnabled('selectCard', false)
+				this.updateButtonEnabled('cancelSelectCard', false)
                 this.updateButtonEnabled('buildCard', false)
-                this.updateButtonEnabled('cancelCard', false)
+                this.updateButtonEnabled('discardSelectedCard', false)
                 this.updateButtonEnabled('drawCard', false)
                 this.updateButtonEnabled('gain6MC', false)
                 break
             }
+			case('selectionCardSelected'):{
+				this.updateButtonEnabled('selectCard', false)
+				this.updateButtonEnabled('cancelSelectCard', false)
+				this.updateButtonEnabled('buildCard', true)
+				this.updateButtonEnabled('discardSelectedCard', true)
+				this.updateButtonEnabled('drawCard', false)
+                this.updateButtonEnabled('gain6MC', false)
+				break
+			}
+			case('selectionCardDiscarded'):{
+				this.updateButtonEnabled('selectCard', true)
+				this.updateButtonEnabled('cancelSelectCard', false)
+				this.updateButtonEnabled('buildCard', false)
+				this.updateButtonEnabled('discardSelectedCard', false)
+				this.updateButtonEnabled('drawCard', true)
+                this.updateButtonEnabled('gain6MC', true)
+				break
+			}
+			case('resetState'):{
+				if(this.builderIsLocked){break}
+				this.resetButtons()
+				break
+			}
         }
     }
+	public resetButtons(){
+		if(this.builderIsLocked){return}
+		for(let button of this.buttons){
+			button.resetStartEnabled()
+		}
+	}
     resolveCardBuilderButtonClicked(button:EventCardBuilderButton){
         switch(button.name){
-            case('cancelCard'):{
+            case('discardSelectedCard'):{
                 this.removeSelectedCard()
                 break
             }
-            case('buildCard'):{
-                this.setCardIsBuilt()
+            case('buildCard'):case('drawCard'):case('gain6MC'):{
+                this.setbuilderIsLocked()
                 break
             }
         }
@@ -156,12 +190,15 @@ export class CardBuilder {
     }
     setSelectedCard(card: ProjectCardModel): void {
         this.selectedCard = card
-        this.updateButtonGroupState('selectCard')
+        this.updateButtonGroupState('selectionCardSelected')
     }
     getSelectedCard(): ProjectCardModel {return this.selectedCard as ProjectCardModel}
-    removeSelectedCard(): void {this.selectedCard = undefined}
-    setCardIsBuilt(): void {this.cardIsBuilt=true}
-    getCardIsBuilt(): boolean {return this.cardIsBuilt}
+    removeSelectedCard(): void {
+		this.selectedCard = undefined
+        this.updateButtonGroupState('cancelSelectCard')
+	}
+    setbuilderIsLocked(): void {this.builderIsLocked=true}
+    getbuilderIsLocked(): boolean {return this.builderIsLocked}
 }
 
 export class EventCardBuilder extends EventBaseCardSelector {
@@ -197,33 +234,46 @@ export class EventCardBuilder extends EventBaseCardSelector {
     }
     cardBuilderButtonClicked(button: EventCardBuilderButton): void {
         if(this.CardBuilderIdHavingFocus===undefined){return}
+		//reset state before changing focus
+		this.resetNonFocusedBuildersState()
+
         this.setSelectionOnButtonClick(button)
         let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
 
         switch(button.name){
             case('selectCard'):{
-                this.activateSelection()
                 this.cardSelector.stateFromParent = {selectable:true}
                 break
             }
-            case('cancelCard'):{
+            case('cancelSelectCard'):{
+				this.cardSelector.stateFromParent = {selectable:false}
+				break
+            }
+            case('buildCard'):{
+                this.buildDiscountUsed = true
+                this.buildDiscountValue = 0
+				break
+            }
+			case('discardSelectedCard'):{
                 let card = activeZone.getSelectedCard()
                 if(card===undefined){break}
                 this.cardSelector.selectFrom.push(card)
                 break
             }
-            case('buildCard'):{
-                this.buildDiscountUsed = true
-                this.buildDiscountValue = 0
-            }
         }
 
         activeZone.resolveCardBuilderButtonClicked(button)
-        
+
         if(button.name==='selectCard'){return}
-        //activeZone.updateButtonGroupState(button.name)
         this.cardSelector.stateFromParent = {selectable:false, playable:false}
     }
+	private resetNonFocusedBuildersState(){
+		//if(!this.CardBuilderIdHavingFocus){return}
+		for(let i=0; i<this.CardBuilder.length; i++){
+			if(i===this.CardBuilderIdHavingFocus){continue}
+			this.CardBuilder[i].resetButtons()
+		}
+	}
     private setSelectionOnButtonClick(button: EventCardBuilderButton): void {
         switch(button.name){
             case('selectCard'):{

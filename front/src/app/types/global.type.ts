@@ -15,7 +15,7 @@ export type ButtonNames =
 | 'addRessourceToSelectedCard'
 
 export type EventSecondaryButtonNames = 'sellOptionalCard'
-export type EventCardBuilderButtonNames =  'selectCard' | 'cancelCard' | 'buildCard' | CardBuilderOptionType
+export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | CardBuilderOptionType
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'

@@ -26,7 +26,7 @@ $alternative-width: 200px;
 	align-items: center;
     width: $alternative-width;
 }
-.wrapper-select-button, .wrapper-cancel-button, .wrapper-build-button{
+.wrapper-select-button, .wrapper-cancel-button, .wrapper-build-button, .wrapper-discard-button{
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -35,7 +35,7 @@ $alternative-width: 200px;
     margin: 0;
     height: 70px;
 }
-.button-select-card, .button-cancel-card, .button-build-card{
+.button-select-card, .button-cancel-card, .button-build-card, .button-discard-card{
 	z-index: 1;
 }
 .play-card-zone{
