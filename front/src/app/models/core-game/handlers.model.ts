@@ -73,8 +73,11 @@ export class EventHandler {
 	}
 	public updateSelectedCardList(selection: ProjectCardModel[]): void {
 		let event = this.currentEvent as EventCardSelector
-		console.log('updated selection:', selection)
 		event.updateCardSelection(selection)
+	}
+	public cancelSellCardsOptional(): void {
+		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
+		this.finishEventEffect()
 	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){

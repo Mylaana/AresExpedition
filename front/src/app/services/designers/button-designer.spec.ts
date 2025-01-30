@@ -10,12 +10,9 @@ describe('Service - Designers - Button', () => {
             it('should return true for listed cases', () => {
                 let expectedSubTypeList: EventUnionSubTypes[] = [
                     'default',
-                    'createEventOptionalSell',
-                    'cancelEventOptionalSell',
                     'upgradePhaseCards',
                     'developmentPhaseBuilder',
                     'actionPhase',
-                    'selectCardOptionalSell',
                 ]
                 for(expectedSubType of expectedSubTypeList){
                     let startEnabled = ButtonDesigner['getStartEnabled'](expectedSubType)
@@ -39,8 +36,6 @@ describe('Service - Designers - Button', () => {
                 let expectedSubTypeList: EventUnionSubTypes[] = [
                     'default',
                     'planificationPhase',
-                    'createEventOptionalSell',
-                    'cancelEventOptionalSell',
                     'upgradePhaseCards',
                     'developmentPhaseBuilder',
                     'addRessourceToSelectedCard',

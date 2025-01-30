@@ -33,11 +33,11 @@ Backend: Junit
 
 # WIP : 
 ## Refactoring :
-gameEventComponent: add back optional sell button & Lockpile control
-text with image component: refactoring
+gameEventComponent: add Lockpile control   
+text with image component: refactoring   
 project card list component : split the component into multiple ones (selector/hand/played)  
-test needs: empty components from the app logic and transfer it into services/classes 
-global: removing obvious comments
+test needs: empty components from the app logic and transfer it into services/classes   
+global: removing obvious comments   
 
 ## New features :
 ### Phase cards

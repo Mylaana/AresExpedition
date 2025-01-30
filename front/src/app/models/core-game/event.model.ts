@@ -1,6 +1,6 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, EventSecondaryButton } from "./button.model";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton } from "./button.model";
 import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
 import { CardState } from "../cards/card-cost.model";
 import { ProjectCardModel } from "../cards/project-card.model";

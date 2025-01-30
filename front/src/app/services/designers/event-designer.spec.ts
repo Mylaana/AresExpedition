@@ -47,7 +47,7 @@ describe('Service - Designers - Event', () => {
                 }
 
                 let selector = EventDesigner['generateCardSelector']()
-                
+
                 expect(selector).toEqual(expectedSelector)
             })
             it('should return selector', () => {
@@ -64,7 +64,7 @@ describe('Service - Designers - Event', () => {
                 }
 
                 let selector = EventDesigner['generateCardSelector'](expectedSelector)
-                
+
                 expect(selector).toEqual(expectedSelector)
             })
         })
@@ -76,7 +76,7 @@ describe('Service - Designers - Event', () => {
                 let expectedBuilderSubType: EventCardBuilderSubType = 'constructionPhaseBuilder'
                 const spy = spyOn(ButtonDesigner, 'createEventCardBuilderButton').and.returnValue([])
                 expectedCardBuilder.addButtons([] as EventCardBuilderButton[])
-                
+
                 let builder = EventDesigner['generateCardBuilder'](0)
 
                 expect(expectedCardBuilder).toEqual(builder)
@@ -87,9 +87,9 @@ describe('Service - Designers - Event', () => {
                 const spy = spyOn(ButtonDesigner, 'createEventCardBuilderButton').and.returnValue([])
                 expectedCardBuilder.addButtons([] as EventCardBuilderButton[])
                 expectedCardBuilder['option'] = expectedOption
-                
+
                 let builder = EventDesigner['generateCardBuilder'](0, expectedOption)
-                
+
                 expect(expectedCardBuilder).toEqual(builder)
                 expect(spy).toHaveBeenCalled()
             })
@@ -123,7 +123,7 @@ describe('Service - Designers - Event', () => {
             it('should create a discardEvent selector Event', () => {
                 expectedSubType = 'discardCards'
                 expectedEvent.subType = expectedSubType
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
                 expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
                 expectedEvent.locksEventpile = true
@@ -138,7 +138,7 @@ describe('Service - Designers - Event', () => {
                 expectedSubType = 'discardCards'
                 expectedEvent.subType = expectedSubType
                 expectedArgs = {cardSelector:{cardInitialState:{ignoreCost:true}}}
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = expectedArgs.cardSelector?.cardInitialState
                 expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
                 expectedEvent.locksEventpile = true
@@ -151,7 +151,7 @@ describe('Service - Designers - Event', () => {
             it('should create a selectCardForcedSell selector Event', () => {
                 expectedSubType = 'selectCardForcedSell'
                 expectedEvent.subType = expectedSubType
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
                 expectedEvent.cardSelector.selectionQuantityTreshold = 'min'
 
@@ -163,7 +163,10 @@ describe('Service - Designers - Event', () => {
             it('should create a selectCardOptionalSell selector Event', () => {
                 expectedSubType = 'selectCardOptionalSell'
                 expectedEvent.subType = expectedSubType
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+				expectedSelector.selectionQuantity = 1
+				expectedSelector.selectionQuantityTreshold = 'min'
+
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
 
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
@@ -174,7 +177,7 @@ describe('Service - Designers - Event', () => {
             it('should create a actionPhase selector Event', () => {
                 expectedSubType = 'actionPhase'
                 expectedEvent.subType = expectedSubType
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, playable: false, ignoreCost:true}
                 expectedEvent.title = 'Activate cards :'
                 expectedEvent.cardSelector.filter = {type:"action"}
@@ -187,7 +190,7 @@ describe('Service - Designers - Event', () => {
             it('should create a researchPhaseResult selector Event', () => {
                 expectedSubType = 'researchPhaseResult'
                 expectedEvent.subType = expectedSubType
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')                
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} cards to draw`
                 expectedEvent.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
                 expectedEvent.cardSelector.selectionQuantityTreshold = 'equal'
@@ -200,9 +203,9 @@ describe('Service - Designers - Event', () => {
                 expect(expectedEvent).toEqual(resultEvent)
                 expect(buttonSpy).toHaveBeenCalled()
             })
-            
+
             it('should log an error message and return a default Event', () => {
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')        
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 const logTextSpy = spyOn(Utils, 'logText')
                 expectedSubType = 'fake' as EventCardSelectorSubType
 
@@ -281,7 +284,7 @@ describe('Service - Designers - Event', () => {
         describe('UNIT TEST', () => {
             it('should create every development card builder Event', () => {
                 let expectedBuilderType: BuilderType[] = ['developmentAbilityOnly', 'development_6mc', 'development_base', 'development_second_card']
-                
+
                 expectedSubType = 'developmentPhaseBuilder'
                 expectedEvent.subType = expectedSubType
                 expectedEvent.cardSelector = expectedSelector
@@ -318,7 +321,7 @@ describe('Service - Designers - Event', () => {
                             break
                         }
                     }
-                    
+
                     let resultEvent = EventDesigner.createCardBuilder(expectedSubType, builderType)
 
                     expect(expectedEvent).toEqual(resultEvent)
@@ -328,7 +331,7 @@ describe('Service - Designers - Event', () => {
             })
             it('should create every construction card builder Event', () => {
                 let expectedBuilderType: BuilderType[] = ['constructionAbilityOnly', 'construction_6mc', 'construction_base', 'construction_draw_card']
-                
+
                 expectedSubType = 'constructionPhaseBuilder'
                 expectedEvent.subType = expectedSubType
                 expectedEvent.cardSelector = expectedSelector
@@ -369,7 +372,7 @@ describe('Service - Designers - Event', () => {
                             break
                         }
                     }
-                    
+
                     let resultEvent = EventDesigner.createCardBuilder(expectedSubType, builderType)
 
                     expect(expectedEvent).toEqual(resultEvent)
@@ -452,7 +455,7 @@ describe('Service - Designers - Event', () => {
         describe('UNIT TEST', () => {
             it('should create every Generic Event', () => {
                 let genericSubTypeList: EventGenericSubType[] = ['addRessourceToPlayer','buildCard','drawResult','endOfPhase','increaseGlobalParameter','increaseResearchScanKeep','planificationPhase','upgradePhaseCards']
-                
+
                 for(let genericSubType of genericSubTypeList){
                     expectedSubType = genericSubType
                     expectedEvent = new EventGeneric

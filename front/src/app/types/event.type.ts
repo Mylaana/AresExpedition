@@ -7,9 +7,9 @@ export type EventCardBuilderSubType = 'developmentPhaseBuilder' | 'constructionP
 export type EventGenericSubType =  'endOfPhase' | 'planificationPhase' | 'upgradePhaseCards'
 | 'increaseGlobalParameter' | 'addRessourceToPlayer' | 'increaseResearchScanKeep' | 'buildCard' | 'drawResult'
 | 'waitingGroupReady'
-export type EventTargetCardSubType = 'addRessourceToCardId' | 'deactivateTrigger' 
+export type EventTargetCardSubType = 'addRessourceToCardId' | 'deactivateTrigger'
 export type EventDeckQuerySubType = 'drawQuery' | 'scanKeepQuery' | 'researchPhaseQuery'
-export type EventTechnical = 'default' | 'createEventOptionalSell' | 'cancelEventOptionalSell'
+export type EventTechnical = 'default'
 export type EventWaiterSubType = 'deckWaiter'
 export type EventPhaseSubType = 'developmentPhase' | 'constructionPhase' | 'productionPhase' | 'researchPhase'
 

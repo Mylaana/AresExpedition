@@ -1,7 +1,7 @@
 import { Utils } from "../../utils/utils"
 import { MinMaxEqualTreshold } from "../../interfaces/global.interface"
 import { EventUnionSubTypes } from "../../types/event.type"
-import { ButtonNames, EventCardBuilderButtonNames, EventSecondaryButtonNames } from "../../types/global.type"
+import { ButtonNames, EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type"
 
 export class ChildButton {
     id!: number
@@ -22,29 +22,29 @@ export abstract class ButtonBase {
 	resetStartEnabled(){
 		this.enabled = this.startEnabled
 	}
+	updateEnabled(enabled: boolean){
+        this.enabled = enabled
+    }
 }
 
 export abstract class EventButtonBase extends ButtonBase {
     eventSubType!: EventUnionSubTypes
-    updateEnabled(enabled: boolean){
-        this.enabled = enabled
-    }
 }
 
 export class EventMainButton extends EventButtonBase {}
 
 export class EventMainButtonSelector extends EventMainButton {
     updateEnabledTreshold(args: MinMaxEqualTreshold): void {
-        console.log('before getValue')
         this.enabled = Utils.getValueVsTreshold(args)
     }
 }
 
-export class EventSecondaryButton extends EventButtonBase {
-    imageUrl?: string
-    name!: EventSecondaryButtonNames
-}
 export class EventCardBuilderButton extends EventButtonBase {
     name!: EventCardBuilderButtonNames
     parentCardBuilderId!: number
+}
+
+export class NonEventButton extends ButtonBase {
+    imageUrl?: string
+    name!: NonEventButtonNames
 }

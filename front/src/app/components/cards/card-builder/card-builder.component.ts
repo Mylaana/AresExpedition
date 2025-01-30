@@ -7,26 +7,26 @@ import { EventCardBuilderButtonComponent } from '../../tools/event-play-zone-but
 import { CardBuilderOptionType } from '../../../types/global.type';
 
 @Component({
-  selector: 'app-card-builder',
-  standalone: true,
-  imports: [
-    CommonModule,
-    EventCardBuilderButtonComponent,
-    ProjectCardListComponent
-  ],
-  templateUrl: './card-builder.component.html',
-  styleUrl: './card-builder.component.scss'
+	selector: 'app-card-builder',
+	standalone: true,
+	imports: [
+		CommonModule,
+		EventCardBuilderButtonComponent,
+		ProjectCardListComponent
+	],
+	templateUrl: './card-builder.component.html',
+	styleUrl: './card-builder.component.scss'
 })
 export class CardBuilderComponent {
-  @Input() cardBuilder!: CardBuilder
-  @Input() option!: CardBuilderOptionType
-  @Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
+	@Input() cardBuilder!: CardBuilder
+	@Input() option!: CardBuilderOptionType
+	@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
 
-  @Input() event!: EventBaseModel
-  @Input() eventId!: number
-  currentEvent!: EventCardBuilder
-  
-  public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
-    this.cardBuilderListButtonClicked.emit(button)
-  }
+	@Input() event!: EventBaseModel
+	@Input() eventId!: number
+	currentEvent!: EventCardBuilder
+
+	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
+		this.cardBuilderListButtonClicked.emit(button)
+	}
 }

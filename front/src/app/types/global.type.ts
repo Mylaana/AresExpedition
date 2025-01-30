@@ -14,7 +14,7 @@ export type ButtonNames =
 | 'drawCards' | 'discardCards' | 'scanKeep'
 | 'addRessourceToSelectedCard'
 
-export type EventSecondaryButtonNames = 'sellOptionalCard'
+export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | CardBuilderOptionType
 export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
