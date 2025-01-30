@@ -30,7 +30,7 @@ export class EventHandler {
 		private rxStompService: RxStompService
 	){}
 
-	handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
+	public handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
 		if(eventQueue.length===0){return undefined}
 		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && Utils.jsonCopy(eventQueue[0].id)===Utils.jsonCopy(this.currentEventId)){
 				return this.currentEvent
@@ -45,13 +45,13 @@ export class EventHandler {
 		this.checkFinalized()
 		return this.currentEvent
 	}
-	eventMainButtonClicked(): void {
+	public eventMainButtonClicked(): void {
 		this.finishEventEffect()
 	}
-	updateEventMainButton(enabled: boolean): void {
+	public updateEventMainButton(enabled: boolean): void {
 		this.currentEvent.button?.updateEnabled(enabled)
 	}
-	cardBuilderButtonClicked(button: EventCardBuilderButton): void {
+	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
 		let event = this.currentEvent as EventCardBuilder
 		event.cardBuilderButtonClicked(button)
 		switch(button.name){
@@ -71,8 +71,9 @@ export class EventHandler {
 			}
 		}
 	}
-	updateSelectedCardList(selection: ProjectCardModel[]): void {
+	public updateSelectedCardList(selection: ProjectCardModel[]): void {
 		let event = this.currentEvent as EventCardSelector
+		console.log('updated selection:', selection)
 		event.updateCardSelection(selection)
 	}
 	private checkFinalized(): void {

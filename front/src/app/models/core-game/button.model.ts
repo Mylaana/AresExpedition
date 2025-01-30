@@ -19,6 +19,9 @@ export abstract class ButtonBase {
     startEnabled: boolean = false
     caption?: string
     clicked(): any {}
+	resetStartEnabled(){
+		this.enabled = this.startEnabled
+	}
 }
 
 export abstract class EventButtonBase extends ButtonBase {

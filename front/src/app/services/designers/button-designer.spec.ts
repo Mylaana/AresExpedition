@@ -22,7 +22,7 @@ describe('Service - Designers - Button', () => {
 
                     expect(startEnabled).toBeTrue()
                 }
-                
+
             })
             it('should return false for other cases', () => {
                 let startEnabled = ButtonDesigner['getStartEnabled']('fake' as EventUnionSubTypes)
@@ -56,7 +56,7 @@ describe('Service - Designers - Button', () => {
 
                     expect(caption).not.toEqual('default validation')
                     expect(caption).toBeDefined()
-                }               
+                }
             })
             it('should return default caption for other cases', () => {
                 expectedSubType = 'fake' as EventUnionSubTypes
@@ -104,7 +104,7 @@ describe('Service - Designers - Button', () => {
                 let button = ButtonDesigner.createEventMainButton(expectedSubType)
 
                 expect(button).toEqual(expectedButton)
-                
+
             })
         })
     })
@@ -155,33 +155,36 @@ describe('Service - Designers - Button', () => {
 
             beforeEach(() => {
                 expectedZoneId = 1
-                buttonNames = ['selectCard','cancelCard','buildCard','gain6MC','drawCard']
+                buttonNames = ['selectCard','cancelSelectCard','buildCard', 'discardSelectedCard', 'gain6MC','drawCard']
             })
 
             it('should return a card builder event button list', () => {
                 let buttons = ButtonDesigner.createEventCardBuilderButton(expectedZoneId)
+				let expectedButtonsNumber: number = 4
 
-                expect(buttons.length).toEqual(3)
-                for(let i=0; i<3; i++){
-                    expect(buttons[i].name).toEqual(buttonNames[i])    
+                expect(buttons.length).toEqual(expectedButtonsNumber)
+                for(let i=0; i<expectedButtonsNumber-1; i++){
+                    expect(buttons[i].name).toEqual(buttonNames[i])
                 }
             })
             it('should return a card builder event button list with gain6MC option', () => {
                 let buttons = ButtonDesigner.createEventCardBuilderButton(expectedZoneId, 'gain6MC')
+				let expectedButtonsNumber: number = 5
 
-                expect(buttons.length).toEqual(4)
-                for(let i=0; i<4; i++){
-                    expect(buttons[i].name).toEqual(buttonNames[i])    
+                expect(buttons.length).toEqual(expectedButtonsNumber)
+                for(let i=0; i<expectedButtonsNumber-1; i++){
+                    expect(buttons[i].name).toEqual(buttonNames[i])
                 }
             })
             it('should return a card builder event button list with drawCard option', () => {
                 let buttons = ButtonDesigner.createEventCardBuilderButton(expectedZoneId, 'drawCard')
+				let expectedButtonsNumber: number = 5
 
-                expect(buttons.length).toEqual(4)
-                for(let i=0; i<3; i++){
-                    expect(buttons[i].name).toEqual(buttonNames[i])    
+                expect(buttons.length).toEqual(expectedButtonsNumber)
+                for(let i=0; i<expectedButtonsNumber-1; i++){
+                    expect(buttons[i].name).toEqual(buttonNames[i])
                 }
-                expect(buttons[3].name).toEqual(buttonNames[4])
+                expect(buttons[4].name).toEqual(buttonNames[5])
             })
         })
 

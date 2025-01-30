@@ -12,7 +12,7 @@ describe('Models - Event', () => {
     describe('EventBaseModel', () => {
         describe('UNIT TEST', () => {
             let event: testEventBaseModel
-        
+
             beforeAll(() => {
                 event = new testEventBaseModel
             })
@@ -75,7 +75,7 @@ describe('Models - Event', () => {
     describe('CardBuilder', () => {
         describe('UNIT TEST', () =>{
             let builder: CardBuilder
-        
+
             beforeEach(() => {
                 builder = new CardBuilder
             })
@@ -104,19 +104,19 @@ describe('Models - Event', () => {
                 builder.removeSelectedCard()
                 expect(builder.getSelectedCard()).toBeUndefined()
             })
-            it('should evaluate getCardIsBuilt returning false', () => {
-                expect(builder.getCardIsBuilt()).toEqual(false)
+            it('should evaluate getbuilderIsLocked returning false', () => {
+                expect(builder.getbuilderIsLocked()).toEqual(false)
             })
             it('should evaluate setCardBuilt returning false', () => {
-                builder.setCardIsBuilt()
-                expect(builder.getCardIsBuilt()).toEqual(true)
+                builder.setbuilderIsLocked()
+                expect(builder.getbuilderIsLocked()).toEqual(true)
             })
         })
         describe('INTEGRATION TEST', () => {
             let builder: CardBuilder
             let cardInfoService: ProjectCardInfoService
             let buttonList: EventCardBuilderButton[]
-        
+
             beforeAll(() => {
                 cardInfoService = new ProjectCardInfoService
             })
@@ -144,40 +144,42 @@ describe('Models - Event', () => {
             it('should evaluate getButtonFromName to return undefined', () => {
                 expect(builder.getButtonFromName('non existing buttonName value' as EventCardBuilderButtonNames)).toEqual(undefined)
             })
+
             it('should evaluate resolveCardBuilderButtonClicked with select sent', () => {
                 expect(builder.getButtonFromName('selectCard')?.enabled).toBeTrue()
                 expect(builder.getButtonFromName('buildCard')?.enabled).toBeFalse()
-                expect(builder.getButtonFromName('cancelCard')?.enabled).toBeFalse()
-        
+                expect(builder.getButtonFromName("discardSelectedCard")?.enabled).toBeFalse()
+
                 let button = builder.getButtonFromName('selectCard') as EventCardBuilderButton
                 builder.resolveCardBuilderButtonClicked(button)
                 expect(builder.getButtonFromName('selectCard')?.enabled).toBeFalse()
-                expect(builder.getButtonFromName('buildCard')?.enabled).toBeTrue()
-                expect(builder.getButtonFromName('cancelCard')?.enabled).toBeTrue()
+				expect(builder.getButtonFromName('cancelSelectCard')?.enabled).toBeTrue()
+                expect(builder.getButtonFromName('buildCard')?.enabled).toBeFalse()
+                expect(builder.getButtonFromName('discardSelectedCard')?.enabled).toBeFalse()
             })
-            it('should evaluate resolveCardBuilderButtonClicked with cancel sent', () => {
+            it('should evaluate resolveCardBuilderButtonClicked with discard sent', () => {
                 let card = new ProjectCardModel
                 builder.setSelectedCard(card)
                 expect(builder.getSelectedCard()).toEqual(card)
-        
-                let button = builder.getButtonFromName('cancelCard') as EventCardBuilderButton
+
+                let button = builder.getButtonFromName('discardSelectedCard') as EventCardBuilderButton
                 builder.resolveCardBuilderButtonClicked(button)
                 expect(builder.getButtonFromName('selectCard')?.enabled).toBeTrue()
                 expect(builder.getButtonFromName('buildCard')?.enabled).toBeFalse()
-                expect(builder.getButtonFromName('cancelCard')?.enabled).toBeFalse()
-        
+                expect(builder.getButtonFromName('discardSelectedCard')?.enabled).toBeFalse()
+
                 expect(builder.getSelectedCard()).toBeUndefined()
             })
             it('should evaluate resolveCardBuilderButtonClicked with build sent', () => {
-                expect(builder.getCardIsBuilt()).toBeFalse()
-        
+                expect(builder.getbuilderIsLocked()).toBeFalse()
+
                 let button = builder.getButtonFromName('buildCard') as EventCardBuilderButton
                 builder.resolveCardBuilderButtonClicked(button)
                 expect(builder.getButtonFromName('selectCard')?.enabled).toBeFalse()
                 expect(builder.getButtonFromName('buildCard')?.enabled).toBeFalse()
-                expect(builder.getButtonFromName('cancelCard')?.enabled).toBeFalse()
-        
-                expect(builder.getCardIsBuilt()).toBeTrue()
+                expect(builder.getButtonFromName('discardSelectedCard')?.enabled).toBeFalse()
+
+                expect(builder.getbuilderIsLocked()).toBeTrue()
             })
         })
     })
@@ -187,7 +189,7 @@ describe('Models - Event', () => {
             let event: EventCardBuilder
             let cardInfoService: ProjectCardInfoService
             let buttonList: EventCardBuilderButton[]
-        
+
             beforeAll(() => {
                 cardInfoService = new ProjectCardInfoService
             })

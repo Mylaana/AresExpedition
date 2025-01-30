@@ -62,18 +62,19 @@ export class ButtonDesigner{
     }
     public static createEventCardBuilderButton(zoneId:number, option?: CardBuilderOptionType): EventCardBuilderButton[] {
         let buttons: EventCardBuilderButton[] = []
-        let buttonCount: number = 3
+        let buttonCount: number = 4
 
         for(let i=0; i<buttonCount; i++){
             let button = new EventCardBuilderButton
                 switch(i){
                     case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
-                    case(1):{button.name='cancelCard';button.caption='Cancel <X>';break}
+                    case(1):{button.name='cancelSelectCard';button.caption='Deactivate selection';break}
                     case(2):{button.name='buildCard';button.caption='Build';break}
+					case(3):{button.name='discardSelectedCard';button.caption='Discard selection <X>';break}
                 }
             button.parentCardBuilderId=zoneId
             button.enabled = button.startEnabled
-            buttons.push(button)        
+            buttons.push(button)
         }
 
         if(option===undefined){return buttons}
