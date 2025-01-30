@@ -70,6 +70,8 @@ export class EventDesigner{
             }
             case('selectCardOptionalSell'):{
                 event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
+				event.cardSelector.selectionQuantityTreshold = 'min'
+				event.cardSelector.selectionQuantity = 1
                 break
             }
             case('actionPhase'):{
@@ -123,7 +125,7 @@ export class EventDesigner{
         event.subType = subType
         event.CardBuilder = []
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
-        
+
 		let buildDiscountValue = 0
 		switch(builderType){
             case('developmentAbilityOnly'):{
@@ -254,7 +256,7 @@ export class EventDesigner{
     }
     public static createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptionsDeckQuery ) : EventDeckQuery {
         let event = new EventDeckQuery
-        
+
         event.subType = subType
         switch(subType){
             case('scanKeepQuery'):{
@@ -275,7 +277,7 @@ export class EventDesigner{
     }
     public static createWaiter(subType:EventWaiterSubType, waiterId: number) : EventWaiter {
         let event = new EventWaiter
-        
+
         event.subType = subType
         switch(subType){
             case('deckWaiter'):{

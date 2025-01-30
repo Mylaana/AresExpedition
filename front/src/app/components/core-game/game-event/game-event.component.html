@@ -4,7 +4,10 @@
             <app-event-main-button *ngIf="currentEvent.button" [button]="currentEvent.button" (eventMainButtonClicked)="eventMainButtonClicked()"></app-event-main-button>
         </div>
         <div class="wrapper-sell-button">
-            <app-event-secondary-button *ngIf="sellCardsButton" [button]="sellCardsButton"></app-event-secondary-button>
+            <app-event-secondary-button *ngIf="sellCardsButton" [button]="sellCardsButton" (nonEventButtonClicked)="nonEventButtonClicked(sellCardsButton)"></app-event-secondary-button>
+        </div>
+		<div class="wrapper-sell-cancel-button">
+            <app-event-secondary-button *ngIf="sellCardsCancelButton" [button]="sellCardsCancelButton" (nonEventButtonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-event-secondary-button>
         </div>
     </div>
     <div class="wrapper-event-main">

@@ -1,28 +1,28 @@
-import { Component, inject, ViewChild, viewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
 import { NonSelectablePhase } from '../../../types/global.type';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
-import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
-import { ChildButton, EventCardBuilderButton, EventSecondaryButton } from '../../../models/core-game/button.model';
+import { ButtonBase, ChildButton, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
 import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { EventDesigner } from '../../../services/designers/event-designer.service';
 import { EventMainButtonComponent } from "../../tools/event-main-button/event-main-button.component";
-import { EventSecondaryButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
+import { NonEventButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
 import { WebsocketHandler } from '../../../models/core-game/websocket-handler';
-import { GroupMessageResult, PlayerMessageResult, WsInputMessage } from '../../../interfaces/websocket.interface';
+import { PlayerMessageResult } from '../../../interfaces/websocket.interface';
 import { RxStompService } from '../../../services/websocket/rx-stomp.service';
 import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../../global/global-const';
 import { Message } from '@stomp/stompjs';
 import { WebsocketResultMessageFactory } from '../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { PlayerMessageContentResultEnum } from '../../../enum/websocket.enum';
+import { ButtonDesigner } from '../../../services/designers/button-designer.service';
 
 //this component is the main controller, and view
 
@@ -36,7 +36,7 @@ import { PlayerMessageContentResultEnum } from '../../../enum/websocket.enum';
     ProjectCardListComponent,
     PhaseCardUpgradeSelectorComponent,
     EventMainButtonComponent,
-	EventSecondaryButtonComponent,
+	NonEventButtonComponent,
 	CardBuilderListComponent
 ],
   templateUrl: './game-event.component.html',
@@ -62,7 +62,10 @@ export class GameEventComponent {
 
 	currentPhase: NonSelectablePhaseEnum = NonSelectablePhaseEnum.planification;
 	currentButtonSelectorId!: number;
-	sellCardsButton!: EventSecondaryButton;
+
+	//Non event buttons
+	sellCardsButton!: NonEventButton;
+	sellCardsCancelButton!: NonEventButton;
 
 	phaseList: NonSelectablePhase[] = [
 		'planification',
@@ -108,6 +111,9 @@ export class GameEventComponent {
 		.subscribe((message: Message) => {
 		  this.handlePlayerMessage(message.body)
 		});
+
+		this.sellCardsButton = ButtonDesigner.createNonEventButton('sellOptionalCard')
+		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
 	}
 
 	updatePhase(phase:NonSelectablePhaseEnum):void{
@@ -145,10 +151,30 @@ export class GameEventComponent {
 
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 
-	handleEventQueueNext(eventQueue: EventBaseModel[]): void {this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)}
+	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
+		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
+		this.resetSellButtonsState()
+	}
 
+	private resetSellButtonsState(): void {
+		this.sellCardsButton.resetStartEnabled()
+		this.sellCardsCancelButton.resetStartEnabled()
+	}
 	public updateSelectedCardList(cardList: ProjectCardModel[]){this.eventHandler.updateSelectedCardList(cardList)}
-	public childButtonClicked(button: ChildButton ){console.log('game event child button push clicked received')}
+	public nonEventButtonClicked(button: NonEventButton){
+		console.log('non event click:', button)
+		switch(button.name){
+			case('sellOptionalCard'):{
+				this.gameStateService.addEventQueue(EventDesigner.createCardSelector('selectCardOptionalSell'), 'first')
+				this.sellCardsButton.updateEnabled(false)
+				this.sellCardsCancelButton.updateEnabled(true)
+				break
+			}
+			case('sellOptionalCardCancel'):{
+				this.eventHandler.cancelSellCardsOptional()
+			}
+		}
+	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){
 		this.eventHandler.cardBuilderButtonClicked(button)

@@ -1,36 +1,39 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, EventButtonBase } from "../../models/core-game/button.model";
-import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton } from "../../models/core-game/button.model";
+import { CardBuilderOptionType, EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type";
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class ButtonDesigner{
-    private static getStartEnabled(eventSubType: EventUnionSubTypes) : boolean {
+    private static getStartEnabled(buttonRule: EventUnionSubTypes | NonEventButtonNames) : boolean {
         let startEnabled: boolean
 
-        switch(eventSubType){
+        switch(buttonRule){
+			//events related rules
             case('default'):{startEnabled=true;break}
-            case('createEventOptionalSell'):{startEnabled=true;break}
-            case('cancelEventOptionalSell'):{startEnabled=true;break}
             case('upgradePhaseCards'):{startEnabled=true;break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{startEnabled=true;break}
             case('actionPhase'):{startEnabled=true;break}
-            case('selectCardOptionalSell'):{startEnabled=true;break}
+            case('selectCardOptionalSell'):{startEnabled=false;break}
+
+			//button name related rules
+			case('sellOptionalCard'):{startEnabled=true;break}
+			case('sellOptionalCardCancel'):{startEnabled=false;break}
+
             default:{startEnabled=false;break}
         }
         return startEnabled
     }
-    private static getCaption(eventSubType: EventUnionSubTypes): string {
+    private static getCaption(buttonRule: EventUnionSubTypes | NonEventButtonNames): string {
         let caption: string
 
-        switch(eventSubType){
+        switch(buttonRule){
+			//events related rules
             case('default'):{caption='default validation button';break}
             case('planificationPhase'):{caption='Select Phase';break}
-            case('createEventOptionalSell'):{caption='Sell cards';break}
-            case('cancelEventOptionalSell'):{caption='Cancel';break}
             case('upgradePhaseCards'):{caption='End upgrades';break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='End phase';break}
             case('addRessourceToSelectedCard'):{caption='Add ressources';break}
@@ -40,6 +43,11 @@ export class ButtonDesigner{
             case('selectCardOptionalSell'):{caption='Sell selection';break}
             case('discardCards'):{caption='Discard selection';break}
             case('scanKeepResult'):{caption='Add selection to hand';break}
+
+			//button name related rules
+			case('sellOptionalCard'):{caption='Sell cards from hand';break}
+			case('sellOptionalCardCancel'):{caption='Cancel selling cards';break}
+
             default:{caption='default validation';break}
         }
         return caption
@@ -93,4 +101,13 @@ export class ButtonDesigner{
 
         return buttons
     }
+	public static createNonEventButton(name: NonEventButtonNames){
+		let button = new NonEventButton
+		button.name = name
+        button.startEnabled = this.getStartEnabled(name)
+        button.enabled = button.startEnabled
+        button.caption = this.getCaption(name)
+
+        return button
+	}
 }
