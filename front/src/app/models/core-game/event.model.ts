@@ -200,6 +200,11 @@ export class CardBuilder {
 	}
     setbuilderIsLocked(): void {this.builderIsLocked=true}
     getbuilderIsLocked(): boolean {return this.builderIsLocked}
+	resetBuilder(): void {
+		if(this.builderIsLocked){return}
+		this.resetButtons()
+		this.selectedCard = undefined
+	}
 }
 
 export class EventCardBuilder extends EventBaseCardSelector {
@@ -291,7 +296,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
 	override onSwitch(): void {
 		//reset cardBuilder's selection onSwitch
 		for(let builder of this.cardBuilder){
-			builder.removeSelectedCard()
+			builder.resetBuilder()
 		}
 	}
 }
