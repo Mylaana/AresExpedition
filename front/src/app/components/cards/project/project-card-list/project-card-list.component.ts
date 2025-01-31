@@ -26,7 +26,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	@Output() updateSelectedCardList: EventEmitter<ProjectCardModel[]> = new EventEmitter<ProjectCardModel[]>()
 	@Input() cardListId!: string
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<ProjectCardComponent>
-	
+
 	_buildDiscount!: number
 	private _cardList!: ProjectCardModel[] | undefined
 	private _eventId!: number | undefined
@@ -68,7 +68,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	}
 	ngDoCheck(): void {
 		if(this.loaded===false){return}
-		if(this.event?.hasSelector()){this.checkUpdateSelector(this.event as EventCardSelector)}	
+		if(this.event?.hasSelector()){this.checkUpdateSelector(this.event as EventCardSelector)}
 		if(this._eventId!=this.eventId){
 			this.resetCardList()
 			this.updateCardList()
@@ -115,7 +115,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	}
 	setSelectorFromPlayZone(event: EventCardBuilder): void {
 		//will root the cards to selected id list, not to selectFrom
-		let card = event.CardBuilder[this.playZoneId].getSelectedCard()
+		let card = event.cardBuilder[this.playZoneId].getSelectedCard()
 		if(card===undefined){
 			this.cardSelector.selectedList
 			this.cardSelector.selectionQuantity = 0
@@ -164,13 +164,13 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		if(this.playZoneId!=undefined){
 			this.displayedCards = this.getDisplayFromSelected()
 			return
-		} 
+		}
 		this.displayedCards = this.getDisplayFromSelectable()
 	}
 	setDiscount(event: EventCardBuilder): void {
 		if(!this.loaded){return}
 		this._buildDiscount = event.buildDiscountValue
-		
+
 		this.childrenUpdateCost()
 	}
 	public updateDiscount(event: EventCardBuilder): void {
@@ -187,7 +187,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	updateCardList(): void {
 		this.setSelector()
 		this.setDisplay()
-		
+
 		if(this.displayedCards!=undefined && this.displayedCards.length===0){this.displayedCards=undefined}
 		if(this.cardSelector.cardInitialState===undefined){this.cardSelector.cardInitialState={selected:false, selectable:false}}
 	}

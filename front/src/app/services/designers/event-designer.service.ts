@@ -123,47 +123,47 @@ export class EventDesigner{
         event.cardSelector = this.generateCardSelector()
         event.cardSelector.cardInitialState = {selectable: false, playable: true}
         event.subType = subType
-        event.CardBuilder = []
+        event.cardBuilder = []
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 
 		let buildDiscountValue = 0
 		switch(builderType){
             case('developmentAbilityOnly'):{
-                event.CardBuilder.push(this.generateCardBuilder(0))
+                event.cardBuilder.push(this.generateCardBuilder(0))
                 break
             }
 			case('development_base'):{
                 buildDiscountValue = 3
-                event.CardBuilder.push(this.generateCardBuilder(0))
+                event.cardBuilder.push(this.generateCardBuilder(0))
                 break
             }
 			case('development_6mc'):{
                 buildDiscountValue = 6
-                event.CardBuilder.push(this.generateCardBuilder(0))
+                event.cardBuilder.push(this.generateCardBuilder(0))
                 break
             }
 			case('development_second_card'):{
                 buildDiscountValue = 3
-                for(let i=0; i<=1; i++){event.CardBuilder.push(this.generateCardBuilder(i))}
+                for(let i=0; i<=1; i++){event.cardBuilder.push(this.generateCardBuilder(i))}
                 break
             }
 
             case('constructionAbilityOnly'):{
-                event.CardBuilder.push(this.generateCardBuilder(0))
+                event.cardBuilder.push(this.generateCardBuilder(0))
                 break
             }
             case('construction_base'):{
-                event.CardBuilder.push(this.generateCardBuilder(0))
-                event.CardBuilder.push(this.generateCardBuilder(1,'drawCard'))
+                event.cardBuilder.push(this.generateCardBuilder(0))
+                event.cardBuilder.push(this.generateCardBuilder(1,'drawCard'))
                 break
             }
 			case('construction_6mc'):{
-                event.CardBuilder.push(this.generateCardBuilder(0))
-                event.CardBuilder.push(this.generateCardBuilder(1,'gain6MC'))
+                event.cardBuilder.push(this.generateCardBuilder(0))
+                event.cardBuilder.push(this.generateCardBuilder(1,'gain6MC'))
                 break
             }
 			case('construction_draw_card'):{
-                for(let i=0; i<=1; i++){event.CardBuilder.push(this.generateCardBuilder(i))}
+                for(let i=0; i<=1; i++){event.cardBuilder.push(this.generateCardBuilder(i))}
                 break
             }
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}

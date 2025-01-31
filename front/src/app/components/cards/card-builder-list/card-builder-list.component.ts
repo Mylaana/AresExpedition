@@ -30,13 +30,13 @@ export class CardBuilderListComponent implements OnInit{
     }
   }
   ngDoCheck(): void {
-    
+
   }
   updateEvent(): void {
     this.currentEvent = this.event as EventCardBuilder
   }
   public cardBuilderListButtonClicked(button:EventCardBuilderButton): void {
-    this.currentEvent.CardBuilderIdHavingFocus = button.parentCardBuilderId
+    this.currentEvent.cardBuilderIdHavingFocus = button.parentCardBuilderId
     this.eventCardBuilderListButtonClicked.emit(button)
   }
 }

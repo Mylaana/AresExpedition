@@ -204,8 +204,8 @@ export class CardBuilder {
 export class EventCardBuilder extends EventBaseCardSelector {
     override readonly type: EventType = 'cardSelectorCardBuilder'
     override subType!: EventCardBuilderSubType;
-    CardBuilder: CardBuilder [] = []
-    CardBuilderIdHavingFocus?: number
+    cardBuilder: CardBuilder [] = []
+    cardBuilderIdHavingFocus?: number
     buildDiscountValue!: number
     buildDiscountUsed!: boolean
     override hasCardBuilder(): boolean {return true}
@@ -213,8 +213,8 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.setSelectedCardToBuild(selection[0])
     }
     private setSelectedCardToBuild(card: ProjectCardModel): void {
-        if(this.CardBuilderIdHavingFocus===undefined){return}
-        let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
+        if(this.cardBuilderIdHavingFocus===undefined){return}
+        let activeZone = this.cardBuilder[this.cardBuilderIdHavingFocus]
         activeZone.setSelectedCard(card)
         this.removeCardFromSelector(card)
         this.deactivateSelection()
@@ -229,16 +229,16 @@ export class EventCardBuilder extends EventBaseCardSelector {
         }
     }
     getCardToBuildId(): number | undefined {
-        if(this.CardBuilderIdHavingFocus===undefined){return}
-        return this.CardBuilder[this.CardBuilderIdHavingFocus].getSelectedCard()?.id
+        if(this.cardBuilderIdHavingFocus===undefined){return}
+        return this.cardBuilder[this.cardBuilderIdHavingFocus].getSelectedCard()?.id
     }
     cardBuilderButtonClicked(button: EventCardBuilderButton): void {
-        if(this.CardBuilderIdHavingFocus===undefined){return}
+        if(this.cardBuilderIdHavingFocus===undefined){return}
 		//reset state before changing focus
 		this.resetNonFocusedBuildersState()
 
         this.setSelectionOnButtonClick(button)
-        let activeZone = this.CardBuilder[this.CardBuilderIdHavingFocus]
+        let activeZone = this.cardBuilder[this.cardBuilderIdHavingFocus]
 
         switch(button.name){
             case('selectCard'):{
@@ -268,10 +268,10 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.cardSelector.stateFromParent = {selectable:false, playable:false}
     }
 	private resetNonFocusedBuildersState(){
-		//if(!this.CardBuilderIdHavingFocus){return}
-		for(let i=0; i<this.CardBuilder.length; i++){
-			if(i===this.CardBuilderIdHavingFocus){continue}
-			this.CardBuilder[i].resetButtons()
+		//if(!this.cardBuilderIdHavingFocus){return}
+		for(let i=0; i<this.cardBuilder.length; i++){
+			if(i===this.cardBuilderIdHavingFocus){continue}
+			this.cardBuilder[i].resetButtons()
 		}
 	}
     private setSelectionOnButtonClick(button: EventCardBuilderButton): void {

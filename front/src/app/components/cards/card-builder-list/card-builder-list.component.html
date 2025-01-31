@@ -1,4 +1,4 @@
 <p>discount: {{currentEvent.buildDiscountValue}}</p>
 <div class="wrapper-main">
-    <app-card-builder *ngFor="let builder of currentEvent.CardBuilder" [cardBuilder]="builder" (cardBuilderListButtonClicked)="cardBuilderListButtonClicked($event)"></app-card-builder>
+    <app-card-builder *ngFor="let builder of currentEvent.cardBuilder" [cardBuilder]="builder" (cardBuilderListButtonClicked)="cardBuilderListButtonClicked($event)"></app-card-builder>
 </div>
