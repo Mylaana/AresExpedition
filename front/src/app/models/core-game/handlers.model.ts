@@ -94,6 +94,8 @@ export class EventHandler {
 		if(!this.currentEvent.id){this.currentEvent.id = this.setEventId()}
 		this.currentEventId = this.currentEvent.id
 
+		this.currentEvent.onSwitch()
+
         //call selector related switchEvents
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
 		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent)}
