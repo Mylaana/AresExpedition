@@ -22,6 +22,7 @@ export abstract class EventBaseModel {
     hasSelector(): boolean {return false}
     hasCardBuilder(): boolean {return false}
     getSelectionActive(): boolean {return false}
+	onSwitch(): void {}
 }
 
 export abstract class EventBaseCardSelector extends EventBaseModel {
@@ -286,6 +287,13 @@ export class EventCardBuilder extends EventBaseCardSelector {
             }
         }
     }
+
+	override onSwitch(): void {
+		//reset cardBuilder's selection onSwitch
+		for(let builder of this.cardBuilder){
+			builder.removeSelectedCard()
+		}
+	}
 }
 
 export class EventTargetCard extends EventBaseModel {
