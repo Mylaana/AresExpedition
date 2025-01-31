@@ -6,14 +6,23 @@ import { RxStompService } from "../websocket/rx-stomp.service"
 import { GameState } from "./game-state.service"
 
 describe('Services - Core game - Game state', () => {
-    let projectCardService = new ProjectCardInfoService
-    let phaseCardService = new PhaseCardInfoService
-    let scalingProdService = new ProjectCardScalingProductionsService
-    let playedCardService = new ProjectCardPlayedEffectService(scalingProdService)
-    let rxStompService = new RxStompService
-    let gameState = new GameState(projectCardService, phaseCardService, playedCardService, rxStompService)
-
     describe('UNIT TEST', () => {
+		let projectCardService: ProjectCardInfoService
+		let phaseCardService: PhaseCardInfoService
+		let scalingProdService: ProjectCardScalingProductionsService
+		let playedCardService: ProjectCardPlayedEffectService
+		let rxStompService: RxStompService
+		let gameState: GameState
+
+		beforeAll(() => {
+			projectCardService = new ProjectCardInfoService
+			phaseCardService = new PhaseCardInfoService
+			scalingProdService = new ProjectCardScalingProductionsService
+			playedCardService = new ProjectCardPlayedEffectService(scalingProdService)
+			rxStompService = new RxStompService
+			gameState = new GameState(projectCardService, phaseCardService, playedCardService, rxStompService)
+
+		})
         it('should evaluate getClientPlayerState', () => {
             let state = gameState.getClientPlayerState()
             const spy = spyOn(GameState.prototype, 'getPlayerStateFromId')

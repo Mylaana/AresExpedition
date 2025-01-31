@@ -280,6 +280,7 @@ describe('Service - Designers - Event', () => {
             expectedEvent = new EventCardBuilder
             expectedEvent.button = undefined
             expectedEvent.cardSelector = expectedSelector
+			expectedBuilder = new CardBuilder
         })
         describe('UNIT TEST', () => {
             it('should create every development card builder Event', () => {
@@ -289,7 +290,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.subType = expectedSubType
                 expectedEvent.cardSelector = expectedSelector
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                const cardBuilderSpy = spyOn<any>(EventDesigner, 'generateCardBuilder')
+                const cardBuilderSpy = spyOn<any>(EventDesigner, 'generateCardBuilder').and.returnValue(new CardBuilder)
                 expectedEvent.cardSelector.cardInitialState = {selectable: false, playable: true}
                 expectedEvent.refreshSelectorOnSwitch = false
                 expectedEvent.buildDiscountUsed = false
@@ -298,7 +299,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.refreshSelectorOnSwitch = true
                 expectedEvent.button = undefined
                 expectedEvent.cardSelector.filter = {type:'development'}
-                expectedEvent.CardBuilder.push(expectedBuilder)
+                expectedEvent.cardBuilder.push(expectedBuilder)
 
 
                 for(let builderType of expectedBuilderType){
@@ -317,7 +318,7 @@ describe('Service - Designers - Event', () => {
                         }
                         case('development_second_card'):{
                             expectedEvent.buildDiscountValue = 3
-                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            expectedEvent.cardBuilder.push(expectedBuilder)
                             break
                         }
                     }
@@ -336,7 +337,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.subType = expectedSubType
                 expectedEvent.cardSelector = expectedSelector
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                const cardBuilderSpy = spyOn<any>(EventDesigner, 'generateCardBuilder')
+                const cardBuilderSpy = spyOn<any>(EventDesigner, 'generateCardBuilder').and.returnValue(new CardBuilder)
                 expectedEvent.cardSelector.cardInitialState = {selectable: false, playable: true}
                 expectedEvent.refreshSelectorOnSwitch = false
                 expectedEvent.buildDiscountUsed = false
@@ -344,7 +345,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.refreshSelectorOnSwitch = true
                 expectedEvent.button = undefined
                 expectedEvent.cardSelector.filter = {type:'construction'}
-                expectedEvent.CardBuilder.push(expectedBuilder)
+                expectedEvent.cardBuilder.push(expectedBuilder)
                 expectedEvent.buildDiscountValue = 0
 
 
@@ -354,21 +355,21 @@ describe('Service - Designers - Event', () => {
                             break
                         }
                         case('construction_6mc'):{
-                            expectedEvent.CardBuilder = []
-                            expectedEvent.CardBuilder.push(expectedBuilder)
-                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            expectedEvent.cardBuilder = []
+                            expectedEvent.cardBuilder.push(expectedBuilder)
+                            expectedEvent.cardBuilder.push(expectedBuilder)
                             break
                         }
                         case('construction_base'):{
-                            expectedEvent.CardBuilder = []
-                            expectedEvent.CardBuilder.push(expectedBuilder)
-                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            expectedEvent.cardBuilder = []
+                            expectedEvent.cardBuilder.push(expectedBuilder)
+                            expectedEvent.cardBuilder.push(expectedBuilder)
                             break
                         }
                         case('construction_draw_card'):{
-                            expectedEvent.CardBuilder = []
-                            expectedEvent.CardBuilder.push(expectedBuilder)
-                            expectedEvent.CardBuilder.push(expectedBuilder)
+                            expectedEvent.cardBuilder = []
+                            expectedEvent.cardBuilder.push(expectedBuilder)
+                            expectedEvent.cardBuilder.push(expectedBuilder)
                             break
                         }
                     }
