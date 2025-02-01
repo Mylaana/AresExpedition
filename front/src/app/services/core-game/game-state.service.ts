@@ -247,18 +247,15 @@ export class GameState{
         //fill player's hand
         if(newPlayer.id===this.clientPlayerId){
             //setTimeout(() => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
-            
-        }
 
-        newPlayer.terraformingRating = 5;
-        newPlayer.vp = newPlayer.terraformingRating
+        }
 
         //adds newplayer's state to  groupPlayerState
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
 
         //creates and add player to groupPlayerReady
         let newPlayerReady = new PlayerReadyModel;
-        newPlayerReady.id = newPlayer.id
+        newPlayerReady.id = newPlayer.infoState.getId()
         newPlayerReady.name = playerName;
         newPlayerReady.isReady = false
         this.groupPlayerReady.next(this.groupPlayerReady.getValue().concat(newPlayerReady))
@@ -266,7 +263,7 @@ export class GameState{
         //creates and add player to groupPlayerSelectedPhase
         let newPlayerPhase: PlayerPhase;
         newPlayerPhase = {
-            "playerId": newPlayer.id,
+            "playerId": newPlayer.infoState.getId(),
             "currentSelectedPhase": SelectablePhaseEnum.undefined,
             "currentPhaseType": undefined,
             "previousSelectedPhase": SelectablePhaseEnum.undefined
@@ -312,7 +309,7 @@ export class GameState{
             if(player.id===playerId){
                 return player.isReady
             }
-            
+
         }
         return false
     }
@@ -478,7 +475,7 @@ export class GameState{
     getClientPlayerStateHand(): number[] {
         return this.getPlayerStateHand(this.clientPlayerId)
     }
-    
+
     getClientPlayerStateHandProject(): ProjectCardModel[] {
         return this.getClientPlayerState().cards.getHandProject()
     }
@@ -498,7 +495,7 @@ export class GameState{
     getClientPlayerPlayedCardsProject(): ProjectCardModel [] {
         return this.getPlayerPlayedCardsProject(this.clientPlayerId)
     }
-    
+
     getPlayerPlayedCardsProject(playerId: number): ProjectCardModel[] {
         return this.getPlayerStateFromId(playerId).cards.getProjectPlayedList()
     }
@@ -569,7 +566,7 @@ export class GameState{
         } else {
             addEvents = events
         }
-        
+
         switch(addRule){
             case('last'):{
                 newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
@@ -588,7 +585,7 @@ export class GameState{
 
         this.eventQueue.next(newQueue)
     }
-    
+
     /**
      * gets nothing
      * returns nothing
@@ -645,7 +642,7 @@ export class GameState{
                 events = events.concat(eventsOnTagGained)
             }
         }
-       
+
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)
         }
@@ -657,7 +654,7 @@ export class GameState{
     setClientPlayerTriggerAsInactive(triggerId: number): void {
         let newState: PlayerStateModel = this.getClientPlayerState()
         newState.cards.setTriggerAsInactive(triggerId)
-    
+
         this.updateClientPlayerState(newState)
     }
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
@@ -700,7 +697,7 @@ export class GameState{
         for(let ressource of cardStock.stock){
             let card = newState.cards.getPlayedProjectCardFromId(cardStock.cardId)
             if(!card){continue}
-            
+
             let triggers = newState.cards.getTriggersOnRessourceAddedToCardId()
             if(triggers.length===0){break}
 
@@ -752,7 +749,7 @@ export class GameState{
 	}
     public finalizeEventWaitingGroupReady(){
         if(this.eventQueue.getValue().length===0){return}
-        
+
         for(let event of this.eventQueue.getValue()){
             if(event.subType==='waitingGroupReady'){
                 event.finalized = true

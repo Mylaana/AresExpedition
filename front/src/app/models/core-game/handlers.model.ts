@@ -516,7 +516,7 @@ class PhaseResolveHandler {
 					newClientRessource[i].valueStock =
 						newClientRessource[i].valueStock
 						+ newClientRessource[i].valueProd
-						+ clientState.terraformingRating
+						+ clientState.scoreState.getTR()
 						+ this.getProductionPhaseCardSelectionBonus()
 					break
 				}

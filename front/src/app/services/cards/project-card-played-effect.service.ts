@@ -31,7 +31,7 @@ export class ProjectCardPlayedEffectService {
 		this.clientPlayerState.addProduction(ressource, quantity)
 	}
 	addTrToPlayer(quantity:number):void{
-		this.clientPlayerState.terraformingRating += quantity
+		this.clientPlayerState.scoreState.addTR(quantity)
 	}
 	playCard(card: ProjectCardModel, playerState: PlayerStateModel): PlayerStateModel {
 		this.clientPlayerState = playerState
@@ -205,7 +205,7 @@ export class ProjectCardPlayedEffectService {
 			//Award Winning Reflector Material
 			case('D35'):{
 				this.addProductionToPlayer('heat',3)
-				if(this.clientPlayerState.milestoneCount>0){
+				if(this.clientPlayerState.scoreState.getMilestoneCompletedNumber()>0){
 					this.addRessourceToPlayer('heat', 4)
 				}
 				break
@@ -233,7 +233,7 @@ export class ProjectCardPlayedEffectService {
 			//Tourism
 			case('P30'):{
 				this.addProductionToPlayer('megacredit',2)
-				this.addTrToPlayer(this.clientPlayerState.milestoneCount)
+				this.addTrToPlayer(this.clientPlayerState.scoreState.getMilestoneCompletedNumber())
 				break
 			}
 		}
@@ -251,10 +251,10 @@ export class ProjectCardPlayedEffectService {
 		return this.clientPlayerState
 	}
 	/**
-	 * 
-	 * @param card 
+	 *
+	 * @param card
 	 * @returns Event List
-	 
+
 	* Events should be filled to the list according to their order of execution.
 	 */
 	getPlayedCardEvent(card: ProjectCardModel): EventBaseModel[] | undefined{
@@ -392,14 +392,14 @@ export class ProjectCardPlayedEffectService {
 		}
 		return result
 	}
-	
+
 	getCostModFromTriggers(mod: CostMod): number {
 		if(!mod || !mod.playedTriggersList){return 0}
 		let newMod: number = 0
 		let tags: number[] = []
-		
+
 		if(mod.tagList!=undefined){
-			tags = mod.tagList.filter((e, i) => e !== -1); 
+			tags = mod.tagList.filter((e, i) => e !== -1);
 		}
 		for(let triggerId of mod.playedTriggersList){
 			newMod += this.calculateCostModFromTrigger(triggerId, mod)
@@ -541,7 +541,7 @@ export class ProjectCardPlayedEffectService {
 
 				let addValue = Math.min(ressource.valueStock, limit?.limit - limit.value)
 				if(addValue<=0){break}
-				
+
 				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:addValue}))
 				targetCard.triggerLimit.value += addValue
 				break

@@ -1,10 +1,11 @@
 import { RessourceState, TagState, ScanKeep, GlobalParameterValue } from "../../interfaces/global.interface";
-import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
 import { RessourceType } from "../../types/global.type";
 import { GlobalParameterModel } from "../core-game/global-parameter.model";
 import { PlayerStateModelFullDTO, PlayerStateModelPublicDTO, PlayerStateModelSecretDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { PlayerScoreStateModel } from "./player-state-score.model";
+import { PlayerInfoStateModel } from "./player-state-info.model";
 
 const ressourceIndex = new  Map<RessourceType, number>(
 	[
@@ -17,12 +18,7 @@ const ressourceIndex = new  Map<RessourceType, number>(
 	]
 )
 export class PlayerStateModel implements PlayerStateModelFullDTO {
-    id!: number;
-    name!: string;
-    color!: RGB;
     ressource!: RessourceState[];
-    terraformingRating!: number;
-    vp!: number;
     tag!: TagState[];
     cards!: ProjectCardState
     research!: ScanKeep
@@ -30,10 +26,9 @@ export class PlayerStateModel implements PlayerStateModelFullDTO {
 	phaseCardUpgradeCount: number = 0
 	sellCardValueMod: number = 0
 	globalParameter = new GlobalParameterModel
-	milestoneCount: number = 3
 
-	//private readonly scalingProd = inject(ProjectCardScalingProductionsService);
-	//constructor(private scalingProductionService: ProjectCardScalingProductionsService){}
+	infoState = new PlayerInfoStateModel
+	scoreState = new PlayerScoreStateModel
 
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){
@@ -93,21 +88,18 @@ export class PlayerStateModel implements PlayerStateModelFullDTO {
 	}
 	public toFullDTO(): PlayerStateModelFullDTO {
 		return {
-			id: this.id,
-			name: this.name,
-			color: this.color,
 			ressource: this.ressource,
-			terraformingRating: this.terraformingRating,
-			vp: this.vp,
 			tag: this.tag,
 			research: this.research,
 			phaseCards: undefined, //this.phaseCards,
 			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
 			sellCardValueMod: this.sellCardValueMod,
-			milestoneCount: this.milestoneCount,
 
 			cards: undefined, //this.cards,
-			globalParameter: this.globalParameter
+			globalParameter: this.globalParameter,
+
+			scoreState: this.scoreState,
+			infoState: this.infoState
 		}
 	}
 	public toSecretDTO(): PlayerStateModelSecretDTO {
@@ -118,18 +110,15 @@ export class PlayerStateModel implements PlayerStateModelFullDTO {
 	}
 	public toPublicDTO(): PlayerStateModelPublicDTO {
 		return {
-			id: this.id,
-			name: this.name,
-			color: this.color,
 			ressource: this.ressource,
-			terraformingRating: this.terraformingRating,
-			vp: this.vp,
 			tag: this.tag,
 			research: this.research,
 			phaseCards: undefined, //to change
 			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
 			sellCardValueMod: this.sellCardValueMod,
-			milestoneCount: this.milestoneCount
+
+			infoState: this.infoState,
+			scoreState: this.scoreState,
 		}
 	}
 }
