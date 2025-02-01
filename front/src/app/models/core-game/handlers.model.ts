@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AdvancedRessourceStock, CardRessourceStock, RessourceState, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardRessourceStock, RessourceInfo, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
@@ -505,9 +505,9 @@ class PhaseResolveHandler {
 		this.refreshCurrentUpgradedPhaseCard()
 
 		let clientState = this.gameStateService.getClientPlayerState()
-		let newClientRessource: RessourceState[] = []
+		let newClientRessource: RessourceInfo[] = []
 
-		newClientRessource = clientState.ressource
+		newClientRessource = clientState.getRessources()
 
 		for(let i=0; i<newClientRessource.length; i++){
 			switch(i){

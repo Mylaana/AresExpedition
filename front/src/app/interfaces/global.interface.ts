@@ -8,15 +8,15 @@ import { RessourceType } from "../types/global.type";
 import { ProjectFilterType } from "../types/project-card.type";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
 
-export interface RessourceState {
-    "id": number,
-    "name": RessourceType,
-    "valueMod": number,
-    "valueProd": number,
-	"valueBaseProd": number,
-    "valueStock": number,
-    "hasStock": boolean,
-    "imageUrlId": number,
+export interface RessourceInfo {
+    id: number,
+    name: RessourceType,
+    valueMod: number,
+    valueProd: number,
+	valueBaseProd: number,
+    valueStock: number,
+    hasStock: boolean,
+    imageUrlId: number,
 }
 export interface RessourceStock {
     "name": RessourceType,
@@ -26,12 +26,12 @@ export interface AdvancedRessourceStock {
     "name": AdvancedRessourceType,
     'valueStock': number
 }
-export interface TagState {
-    "id": number,
-    "name": TagType,
-    "idImageUrl": number;
-    "valueMod": number;
-    "valueCount": number;
+export interface TagInfo {
+    id: number,
+    name: TagType,
+    idImageUrl: number;
+    valueMod: number;
+    valueCount: number;
 }
 
 export interface PlayerPhase {

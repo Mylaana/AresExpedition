@@ -1,4 +1,4 @@
-import { RessourceState, TagState, ScanKeep, GlobalParameterValue } from "../../interfaces/global.interface";
+import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo } from "../../interfaces/global.interface";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
 import { RessourceType, RGB } from "../../types/global.type";
@@ -6,20 +6,10 @@ import { GlobalParameterModel } from "../core-game/global-parameter.model";
 import { PlayerStateModelFullDTO, PlayerStateModelPublicDTO, PlayerStateModelSecretDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
+import { PlayerTagStateModel } from "./player-state-tag.model";
+import { PlayerRessourceStateModel } from "./player-state-ressource.model";
 
-const ressourceIndex = new  Map<RessourceType, number>(
-	[
-		['megacredit', 0],
-		['heat', 1],
-		['plant', 2],
-		['steel', 3],
-		['titanium', 4],
-		['card', 5],
-	]
-)
 export class PlayerStateModel {
-    ressource!: RessourceState[];
-    tag!: TagState[];
     cards!: ProjectCardState
     research!: ScanKeep
 	phaseCards = new PhaseCardHolderModel
@@ -29,6 +19,8 @@ export class PlayerStateModel {
 
 	private infoState = new PlayerInfoStateModel
 	private scoreState = new PlayerScoreStateModel
+	private tagState = new PlayerTagStateModel
+	private ressourceState = new PlayerRessourceStateModel
 
 	//infostate
 	getId(): number {return this.infoState.getId()}
@@ -46,22 +38,19 @@ export class PlayerStateModel {
 	getTR(): number {return this.scoreState.getVP()}
 	addTR(vp: number){this.scoreState.addVP(vp)}
 
-    getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
-        for(let i=0; i<this.ressource.length; i++){
-            if(this.ressource[i].id === ressourceId){
-                return this.ressource[i]
-            }
-        }
-        return
-    }
-    getRessourceStateFromName(ressourceName: string): RessourceState | undefined{
-        for(let i=0; i<this.ressource.length; i++){
-            if(this.ressource[i].name === ressourceName){
-                return this.ressource[i]
-            }
-        }
-        return
-    }
+	//tagState
+	getTags(): TagInfo[] {return this.tagState.getTags()}
+	addPlayedCardTags(card: ProjectCardModel): void {this.tagState.addPlayedCardTags(card)}
+
+	//ressourceState
+	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}
+	getRessourceInfoFromId(id: number): RessourceInfo | undefined {return this.ressourceState.getRessourceInfoFromId(id)}
+	getRessourceInfoFromType(type: RessourceType): RessourceInfo | undefined {return this.ressourceState.getRessourceStateFromType(type)}
+	addRessource(type: RessourceType, quantity: number): void {this.ressourceState.addRessource(type, quantity)}
+	addProduction(type: RessourceType, quantity: number): void {this.ressourceState.addProduction(type, quantity)}
+	setScalingProduction(type: RessourceType, quantity: number): void {this.ressourceState.setScalingProduction(type, quantity)}
+
+	//to refactor
 	playCard(card:ProjectCardModel):void{
 		this.cards.playCard(card)
 		this.removeCardsFromHand([card.id])
@@ -79,33 +68,12 @@ export class PlayerStateModel {
 	payCardCost(card: ProjectCardModel):void{
 		this.addRessource('megacredit', -card.cost)
 	}
-	addProduction(ressource: RessourceType, quantity: number){
-		this.ressource[Number(ressourceIndex.get(ressource))].valueBaseProd += quantity
-	}
-	addRessource(ressource: RessourceType, quantity: number){
-		this.ressource[Number(ressourceIndex.get(ressource))].valueStock += quantity
-	}
-	addPlayedCardTags(card: ProjectCardModel):void{
-		for(let tagId of card.tagsId){
-			this.addTag(tagId)
-		}
-	}
-	addTag(tagId:number):void{
-		if(tagId===-1){return}
-		this.tag[tagId].valueCount += 1
-	}
-	/**update productions with flat + scaling values*/
-	updateProductions(ressource: RessourceType, scalingProduction:number):void{
-		this.ressource[Number(ressourceIndex.get(ressource))].valueProd =
-			this.ressource[Number(ressourceIndex.get(ressource))].valueBaseProd + scalingProduction
-	}
+
 	addGlobalParameterStep(parameter: GlobalParameterValue): void {
 		this.globalParameter.addStepToParameterEOP(parameter)
 	}
 	public toFullDTO(): PlayerStateModelFullDTO {
 		return {
-			ressource: this.ressource,
-			tag: this.tag,
 			research: this.research,
 			phaseCards: undefined, //this.phaseCards,
 			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
@@ -115,7 +83,9 @@ export class PlayerStateModel {
 			globalParameter: this.globalParameter,
 
 			scoreState: this.scoreState,
-			infoState: this.infoState
+			infoState: this.infoState,
+			tagState: this.tagState,
+			ressourceState: this.ressourceState
 		}
 	}
 	public toSecretDTO(): PlayerStateModelSecretDTO {
@@ -126,8 +96,6 @@ export class PlayerStateModel {
 	}
 	public toPublicDTO(): PlayerStateModelPublicDTO {
 		return {
-			ressource: this.ressource,
-			tag: this.tag,
 			research: this.research,
 			phaseCards: undefined, //to change
 			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
@@ -135,6 +103,8 @@ export class PlayerStateModel {
 
 			infoState: this.infoState,
 			scoreState: this.scoreState,
+			tagState: this.tagState,
+			ressourceState: this.ressourceState
 		}
 	}
 }

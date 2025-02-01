@@ -4,7 +4,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
-import { RessourceStock, GlobalParameterValue, ScanKeep } from "../../interfaces/global.interface";
+import { RessourceStock, GlobalParameterValue, ScanKeep, RessourceInfo } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
 import { EventDesigner } from "../designers/event-designer.service";
@@ -238,14 +238,15 @@ export class ProjectCardPlayedEffectService {
 			}
 		}
 
-		for(let i=0 ;i<this.clientPlayerState.ressource.length; i++){
+		let playerRessources: RessourceInfo[] = this.clientPlayerState.getRessources()
+		for(let i=0 ;i<playerRessources.length; i++){
 			let scalingProd =
 				this.scalingProductionService.getScalingProduction(
-					this.clientPlayerState.ressource[i].name,
+					playerRessources[i].name,
 					this.clientPlayerState.cards.getProjectIdList(),
-					this.clientPlayerState.tag
+					this.clientPlayerState.getTags()
 				)
-			this.clientPlayerState.updateProductions(this.clientPlayerState.ressource[i].name, scalingProd)
+			this.clientPlayerState.setScalingProduction(playerRessources[i].name, scalingProd)
 		}
 
 		return this.clientPlayerState

@@ -1,12 +1,11 @@
 import { ProjectCardState } from "../../models/cards/project-card.model";
 import { PlayerInfoStateModel } from "../../models/player-info/player-state-info.model";
+import { PlayerRessourceStateModel } from "../../models/player-info/player-state-ressource.model";
 import { PlayerScoreStateModel } from "../../models/player-info/player-state-score.model";
-import { RGB } from "../../types/global.type";
-import { RessourceState, ScanKeep, TagState } from "../global.interface";
+import { PlayerTagStateModel } from "../../models/player-info/player-state-tag.model";
+import { ScanKeep } from "../global.interface";
 
 export interface PlayerStateModelFullDTO {
-    ressource: RessourceState[];
-    tag: TagState[];
     cards?: ProjectCardState
     research: ScanKeep
 	phaseCards: any// = new PhaseCardHolderModel
@@ -16,10 +15,10 @@ export interface PlayerStateModelFullDTO {
 
 	infoState: PlayerInfoStateModel
 	scoreState: PlayerScoreStateModel
+	tagState: PlayerTagStateModel
+	ressourceState: PlayerRessourceStateModel
 }
 export interface PlayerStateModelPublicDTO {
-    ressource: RessourceState[];
-    tag: TagState[];
     research: ScanKeep
 	phaseCards: any// = new PhaseCardHolderModel
 	phaseCardUpgradeCount: number
@@ -27,6 +26,8 @@ export interface PlayerStateModelPublicDTO {
 
 	infoState: PlayerInfoStateModel
 	scoreState: PlayerScoreStateModel
+	tagState: PlayerTagStateModel
+	ressourceState: PlayerRessourceStateModel
 }
 export interface PlayerStateModelSecretDTO {
     cards: any

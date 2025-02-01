@@ -43,7 +43,7 @@ const handSizeStart: number = 8;
 const handSizeMaximum: number = 10;
 const phaseNumber: number = 5;
 const phaseCardNumberPerPhase: number = 3;
-const cardSellCost: number = 3;
+const cardSellValue: number = 3;
 
 @Injectable({
     providedIn: 'root'
@@ -102,140 +102,6 @@ export class GameState{
         newPlayer.setId(this.groupPlayerState.getValue().length)
         newPlayer.setName(playerName)
         newPlayer.setColor(playerColor)
-        newPlayer.ressource = [
-            {
-                "id":0,
-                "name": "megacredit",
-                "valueMod": 0,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 52,
-                "hasStock": true,
-                "imageUrlId": GlobalInfo.getIdFromType('megacredit'),
-            },
-            {
-                "id":1,
-                "name": "heat",
-                "valueMod": 0,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": true,
-                "imageUrlId": GlobalInfo.getIdFromType('heat'),
-            },
-            {
-                "id":2,
-                "name": "plant",
-                "valueMod": 0,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": true,
-                "imageUrlId": GlobalInfo.getIdFromType('plant'),
-            },
-            {
-                "id":3,
-                "name": "steel",
-                "valueMod": 2,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": false,
-                "imageUrlId": GlobalInfo.getIdFromType('steel'),
-            },
-            {
-                "id":4,
-                "name": "titanium",
-                "valueMod": 3,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": false,
-                "imageUrlId": GlobalInfo.getIdFromType('titanium'),
-            },
-            {
-                "id":5,
-                "name": "card",
-                "valueMod": 0,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": false,
-                "imageUrlId": GlobalInfo.getIdFromType('card'),
-            },
-        ];
-        newPlayer.tag = [
-            {
-                "id": 0,
-                "name": "building",
-                "idImageUrl": 0,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 1,
-                "name": "space",
-                "idImageUrl": 1,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 2,
-                "name": "science",
-                "idImageUrl": 2,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 3,
-                "name": "power",
-                "idImageUrl": 3,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 4,
-                "name": "earth",
-                "idImageUrl": 4,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 5,
-                "name": "jovian",
-                "idImageUrl": 5,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 6,
-                "name": "plant",
-                "idImageUrl": 6,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 7,
-                "name": "animal",
-                "idImageUrl": 7,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 8,
-                "name": "microbe",
-                "idImageUrl": 8,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 9,
-                "name": "event",
-                "idImageUrl": 9,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-        ];
         newPlayer.cards = new ProjectCardState(this.projectCardService)
         newPlayer.cards.maximum = handSizeMaximum
 
@@ -615,7 +481,7 @@ export class GameState{
 	}
 	sellCardsFromClientHand(quantity: number){
 		let playerState = this.getClientPlayerState()
-		playerState.ressource[0].valueStock += quantity * (cardSellCost + playerState.sellCardValueMod)
+		playerState.addRessource('megacredit', quantity * (cardSellValue + playerState.sellCardValueMod))
 		this.updateClientPlayerState(playerState)
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
@@ -659,7 +525,7 @@ export class GameState{
     }
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
 		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.ressource[0].valueStock -= quantity
+		playerState.addRessource("megacredit", -quantity)
 		this.updatePlayerState(playerId, playerState)
 	}
     addGlobalParameterStepsEOPtoPlayerId(playerId:number, parameter:GlobalParameterValue): void {

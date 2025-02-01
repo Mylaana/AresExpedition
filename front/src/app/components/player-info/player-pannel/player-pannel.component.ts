@@ -4,9 +4,7 @@ import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { GlobalPannelComponent } from '../global-pannel/global-pannel.component';
-import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
 import { PlayerPhase } from '../../../interfaces/global.interface';
-import { NonSelectablePhase } from '../../../types/global.type';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RessourceState } from '../../../interfaces/global.interface';
+import { RessourceInfo } from '../../../interfaces/global.interface';
 import { GlobalInfo } from '../../../services/global/global-info.service';
 
 @Component({
@@ -15,12 +15,12 @@ import { GlobalInfo } from '../../../services/global/global-info.service';
 export class RessourceCardComponent implements OnInit {
   //@Input() ressourceCard!: RessourceCardModel;
   @Input() playerId!: number;
-  @Input() ressourceState!: RessourceState;
+  @Input() ressource!: RessourceInfo;
 
   imageUrl!: string;
 
 
   ngOnInit(): void {
-    this.imageUrl = GlobalInfo.getUrlFromID(this.ressourceState.imageUrlId)
+    this.imageUrl = GlobalInfo.getUrlFromID(this.ressource.imageUrlId)
   }
 }

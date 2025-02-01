@@ -6,7 +6,7 @@ import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/la
 import { CardCost } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
-import { RessourceState } from '../../../../interfaces/global.interface';
+import { RessourceInfo } from '../../../../interfaces/global.interface';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { Utils } from '../../../../utils/utils';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
@@ -28,7 +28,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
 	@Input() buildDiscount!: number
 	clientPlayerId!: number
-	ressourceState: RessourceState[] = []
+	ressourceState: RessourceInfo[] = []
 	projectCardState!: ProjectCardState
 	private readonly cardCost = inject(CardCost);
 
@@ -88,11 +88,11 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	updatePlayerState(state: PlayerStateModel[]): void {
 		if(state[this.clientPlayerId]===undefined){return}
 		let playerState = state[this.clientPlayerId]
-		this.updateRessourceState(playerState.ressource)
+		this.updateRessourceState(playerState.getRessources())
 		this.updateCardState(playerState.cards)
 		this.checkPlayable()
 	}
-	updateRessourceState(ressourceState: RessourceState[]): void {
+	updateRessourceState(ressourceState: RessourceInfo[]): void {
 		if(this.ressourceState===ressourceState){return}
 		this.ressourceState = Utils.jsonCopy(ressourceState)
 	}

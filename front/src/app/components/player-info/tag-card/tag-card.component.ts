@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TagState } from '../../../interfaces/global.interface';
+import { TagInfo } from '../../../interfaces/global.interface';
 import { GlobalInfo } from '../../../services/global/global-info.service';
 
 
@@ -12,7 +12,7 @@ import { GlobalInfo } from '../../../services/global/global-info.service';
   styleUrl: './tag-card.component.scss'
 })
 export class TagCardComponent implements OnInit{
-  @Input() tagState!: TagState;
+  @Input() tagState!: TagInfo;
   imageUrl!: string;
 
   ngOnInit(): void {

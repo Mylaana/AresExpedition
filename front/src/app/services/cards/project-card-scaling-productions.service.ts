@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { RessourceType } from "../../types/global.type";
-import { TagState } from "../../interfaces/global.interface";
+import { TagInfo } from "../../interfaces/global.interface";
 import { TagType } from "../../types/global.type";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProjectCardScalingProductionsService {
-	getScalingProduction(ressource: RessourceType, playedCardList: number[], tagState:TagState[]): number{
+	getScalingProduction(ressource: RessourceType, playedCardList: number[], tagState:TagInfo[]): number{
 		let scalingProductions = 0
 		switch(ressource){
 			case('megacredit'):{
@@ -37,7 +37,7 @@ export class ProjectCardScalingProductionsService {
 		}
 		return scalingProductions
 	}
-	getCardScalingProduction(cardId:number, tagState:TagState[]):number{
+	getCardScalingProduction(cardId:number, tagState:TagInfo[]):number{
 		let scalingProduction: number = 0
 		switch(cardId){
 			//Cartel
@@ -64,7 +64,7 @@ export class ProjectCardScalingProductionsService {
 
 		return scalingProduction
 	}
-	getPlayedTagNumber(tagType: TagType, tagState:TagState[]):number{
+	getPlayedTagNumber(tagType: TagType, tagState:TagInfo[]):number{
 		let tagNumber: number = 0
 		for(let tags of tagState){
 			if(tags.name===tagType){
