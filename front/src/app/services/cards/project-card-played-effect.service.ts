@@ -31,7 +31,7 @@ export class ProjectCardPlayedEffectService {
 		this.clientPlayerState.addProduction(ressource, quantity)
 	}
 	addTrToPlayer(quantity:number):void{
-		this.clientPlayerState.scoreState.addTR(quantity)
+		this.clientPlayerState.addTR(quantity)
 	}
 	playCard(card: ProjectCardModel, playerState: PlayerStateModel): PlayerStateModel {
 		this.clientPlayerState = playerState
@@ -205,7 +205,7 @@ export class ProjectCardPlayedEffectService {
 			//Award Winning Reflector Material
 			case('D35'):{
 				this.addProductionToPlayer('heat',3)
-				if(this.clientPlayerState.scoreState.getMilestoneCompletedNumber()>0){
+				if(this.clientPlayerState.getMilestoneCompleted()>0){
 					this.addRessourceToPlayer('heat', 4)
 				}
 				break
@@ -233,7 +233,7 @@ export class ProjectCardPlayedEffectService {
 			//Tourism
 			case('P30'):{
 				this.addProductionToPlayer('megacredit',2)
-				this.addTrToPlayer(this.clientPlayerState.scoreState.getMilestoneCompletedNumber())
+				this.addTrToPlayer(this.clientPlayerState.getMilestoneCompleted())
 				break
 			}
 		}

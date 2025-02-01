@@ -1,7 +1,7 @@
 import { RessourceState, TagState, ScanKeep, GlobalParameterValue } from "../../interfaces/global.interface";
 import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
-import { RessourceType } from "../../types/global.type";
+import { RessourceType, RGB } from "../../types/global.type";
 import { GlobalParameterModel } from "../core-game/global-parameter.model";
 import { PlayerStateModelFullDTO, PlayerStateModelPublicDTO, PlayerStateModelSecretDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
@@ -17,7 +17,7 @@ const ressourceIndex = new  Map<RessourceType, number>(
 		['card', 5],
 	]
 )
-export class PlayerStateModel implements PlayerStateModelFullDTO {
+export class PlayerStateModel {
     ressource!: RessourceState[];
     tag!: TagState[];
     cards!: ProjectCardState
@@ -27,8 +27,24 @@ export class PlayerStateModel implements PlayerStateModelFullDTO {
 	sellCardValueMod: number = 0
 	globalParameter = new GlobalParameterModel
 
-	infoState = new PlayerInfoStateModel
-	scoreState = new PlayerScoreStateModel
+	private infoState = new PlayerInfoStateModel
+	private scoreState = new PlayerScoreStateModel
+
+	//infostate
+	getId(): number {return this.infoState.getId()}
+	setId(id: number){this.infoState.setId(id)}
+	getName(): string {return this.infoState.getName()}
+	setName(name: string){this.infoState.setName(name)}
+	getColor(): RGB {return this.infoState.getColor()}
+	setColor(color: RGB){this.infoState.setColor(color)}
+
+	//scoreState
+	getMilestoneCompleted(): number {return this.scoreState.getMilestoneCompletedNumber()}
+	addMilestoneCompleted(){this.scoreState.addMilestoneCompleted()}
+	getVP(): number {return this.scoreState.getVP()}
+	addVP(vp: number){this.scoreState.addVP(vp)}
+	getTR(): number {return this.scoreState.getVP()}
+	addTR(vp: number){this.scoreState.addVP(vp)}
 
     getRessourceStateFromId(ressourceId: number): RessourceState | undefined{
         for(let i=0; i<this.ressource.length; i++){

@@ -99,9 +99,9 @@ export class GameState{
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
         let newPlayer = new PlayerStateModel;
-        newPlayer.id = this.groupPlayerState.getValue().length;
-        newPlayer.name = playerName;
-        newPlayer.color = playerColor;
+        newPlayer.setId(this.groupPlayerState.getValue().length)
+        newPlayer.setName(playerName)
+        newPlayer.setColor(playerColor)
         newPlayer.ressource = [
             {
                 "id":0,
@@ -245,7 +245,7 @@ export class GameState{
         }
 
         //fill player's hand
-        if(newPlayer.id===this.clientPlayerId){
+        if(newPlayer.getId()===this.clientPlayerId){
             //setTimeout(() => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
 
         }
@@ -255,7 +255,7 @@ export class GameState{
 
         //creates and add player to groupPlayerReady
         let newPlayerReady = new PlayerReadyModel;
-        newPlayerReady.id = newPlayer.infoState.getId()
+        newPlayerReady.id = newPlayer.getId()
         newPlayerReady.name = playerName;
         newPlayerReady.isReady = false
         this.groupPlayerReady.next(this.groupPlayerReady.getValue().concat(newPlayerReady))
@@ -263,7 +263,7 @@ export class GameState{
         //creates and add player to groupPlayerSelectedPhase
         let newPlayerPhase: PlayerPhase;
         newPlayerPhase = {
-            "playerId": newPlayer.infoState.getId(),
+            "playerId": newPlayer.getId(),
             "currentSelectedPhase": SelectablePhaseEnum.undefined,
             "currentPhaseType": undefined,
             "previousSelectedPhase": SelectablePhaseEnum.undefined
