@@ -4,7 +4,7 @@ import { PhaseCardGroupType, PhaseCardType, PhaseCardUpgradeType } from "../../t
 export class PhaseCardGroupModel {
 	phaseIndex!: number;
 	phaseGroupType!: PhaseCardGroupType
-	phaseCards!: PhaseCardModel[]
+	phaseCards: PhaseCardModel[] = []
 
 	getUpgradedPhaseCard(): PhaseCardModel {
 		for(let card of this.phaseCards){

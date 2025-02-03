@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import { Component, Input, QueryList, ViewChildren} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
