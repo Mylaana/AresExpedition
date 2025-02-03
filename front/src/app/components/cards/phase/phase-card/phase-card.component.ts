@@ -6,7 +6,7 @@ import { PhaseCardModel } from '../../../../models/cards/phase-card.model';
 import { Utils } from '../../../../utils/utils';
 
 
-type updateType = 'select' | 'upgradeAndSelect'
+type updateType = 'upgrade'
 
 @Component({
   selector: 'app-phase-card',
@@ -27,15 +27,7 @@ export class PhaseCardComponent extends BaseCardComponent {
 
 	updateState(updateType: updateType){
 		let newState: CardState = Utils.jsonCopy(this.state)
-		if(updateType==='upgradeAndSelect'){
-			newState.upgraded = true
-		}
-		newState.selected = true
-
-		if(updateType==='upgradeAndSelect'){
-			this.cardStateChange.emit({cardId:this.phaseCardLevel, state: newState, stateUpdateType: 'upgrade'})
-		} else {
-			this.cardStateChange.emit({cardId:this.phaseCardLevel, state: newState, stateUpdateType: 'select'})
-		}
+		newState.upgraded = true
+		this.cardStateChange.emit({cardId:this.phaseCardLevel, state: newState, stateUpdateType: 'upgrade'})
 	}
 }

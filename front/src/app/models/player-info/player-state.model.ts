@@ -1,5 +1,4 @@
 import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo } from "../../interfaces/global.interface";
-import { PhaseCardHolderModel } from "../cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../cards/project-card.model";
 import { RessourceType, RGB } from "../../types/global.type";
 import { GlobalParameterModel } from "../core-game/global-parameter.model";
@@ -8,12 +7,16 @@ import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
 import { PlayerTagStateModel } from "./player-state-tag.model";
 import { PlayerRessourceStateModel } from "./player-state-ressource.model";
+import { PlayerPhaseCardState } from "./player-state-phase-card.model";
+import { PhaseCardGroupType, PhaseCardUpgradeType } from "../../types/phase-card.type";
+import { PhaseCardInfoService } from "../../services/cards/phase-card-info.service";
+import { Injector } from "@angular/core";
+import { PhaseCardModel } from "../cards/phase-card.model";
 
 export class PlayerStateModel {
     cards!: ProjectCardState
     research!: ScanKeep
-	phaseCards = new PhaseCardHolderModel
-	phaseCardUpgradeCount: number = 0
+
 	sellCardValueMod: number = 0
 	globalParameter = new GlobalParameterModel
 
@@ -21,6 +24,13 @@ export class PlayerStateModel {
 	private scoreState = new PlayerScoreStateModel
 	private tagState = new PlayerTagStateModel
 	private ressourceState = new PlayerRessourceStateModel
+	private phaseCardState: PlayerPhaseCardState
+
+	constructor(private injector: Injector) {
+		const phaseService = this.injector.get(PhaseCardInfoService);
+		this.phaseCardState = new PlayerPhaseCardState(phaseService);
+	  }
+
 
 	//infostate
 	getId(): number {return this.infoState.getId()}
@@ -50,6 +60,13 @@ export class PlayerStateModel {
 	addProduction(type: RessourceType, quantity: number): void {this.ressourceState.addProduction(type, quantity)}
 	setScalingProduction(type: RessourceType, quantity: number): void {this.ressourceState.setScalingProduction(type, quantity)}
 
+	//phaseCardState
+	getPhaseCardUpgradedCount(): number {return this.phaseCardState.getPhaseCardUpgradedCount()}
+	addPhaseCardUpgradeCount(): void {this.phaseCardState.addPhaseCardUpgradeCount()}
+	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {this.phaseCardState.setPhaseCardUpgraded(upgrade)}
+	getPhaseSelected(): PhaseCardGroupType | undefined {return this.phaseCardState.getSelectedPhase()}
+	getUpgradedPhaseCards(): PhaseCardModel[] {return this.phaseCardState.getUpgradedPhaseCards()}
+
 	//to refactor
 	playCard(card:ProjectCardModel):void{
 		this.cards.playCard(card)
@@ -75,8 +92,6 @@ export class PlayerStateModel {
 	public toFullDTO(): PlayerStateModelFullDTO {
 		return {
 			research: this.research,
-			phaseCards: undefined, //this.phaseCards,
-			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
 			sellCardValueMod: this.sellCardValueMod,
 
 			cards: undefined, //this.cards,
@@ -85,7 +100,8 @@ export class PlayerStateModel {
 			scoreState: this.scoreState,
 			infoState: this.infoState,
 			tagState: this.tagState,
-			ressourceState: this.ressourceState
+			ressourceState: this.ressourceState,
+			phaseCardState: this.phaseCardState
 		}
 	}
 	public toSecretDTO(): PlayerStateModelSecretDTO {
@@ -97,14 +113,13 @@ export class PlayerStateModel {
 	public toPublicDTO(): PlayerStateModelPublicDTO {
 		return {
 			research: this.research,
-			phaseCards: undefined, //to change
-			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
 			sellCardValueMod: this.sellCardValueMod,
 
 			infoState: this.infoState,
 			scoreState: this.scoreState,
 			tagState: this.tagState,
-			ressourceState: this.ressourceState
+			ressourceState: this.ressourceState,
+			phaseCardState: this.phaseCardState
 		}
 	}
 }

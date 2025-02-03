@@ -1,47 +1,23 @@
 import { CardState } from "./card-cost.model";
-import { PhaseCardType } from "../../types/phase-card.type";
-
-export class PhaseCardHolderModel {
-	phaseGroups: PhaseCardGroupModel[] = [];
-
-	setPhaseCardUpgraded(phaseIndex: number, phaseCardLevel: number): void {
-		this.phaseGroups[phaseIndex].setPhaseCardUpgraded(phaseCardLevel)
-	}
-	setPhaseCardSelection(phaseIndex: number, phaseCardLevel: number, selected: boolean): void {
-		this.phaseGroups[phaseIndex].setPhaseCardSelection(phaseCardLevel, selected)
-	}
-	getSelectedPhaseCards(): PhaseCardModel[] {
-		let phaseCards: PhaseCardModel[] = []
-		for(let group of this.phaseGroups){
-			phaseCards.push(group.getSelectedPhaseCard())
-		}
-		return phaseCards
-	}
-}
+import { PhaseCardGroupType, PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 
 export class PhaseCardGroupModel {
 	phaseIndex!: number;
-	phaseCards: PhaseCardModel[] = [];
+	phaseGroupType!: PhaseCardGroupType
+	phaseCards!: PhaseCardModel[]
 
-	getSelectedPhaseCard(): PhaseCardModel {
+	getUpgradedPhaseCard(): PhaseCardModel {
 		for(let card of this.phaseCards){
-			if(card.phaseCardSelected===true){
+			if(card.phaseCardUpgraded===true){
 				return card
 			}
 		}
 		return new PhaseCardModel
 	}
-	setPhaseCardUpgraded(phaseCardLevel: number): void {
-		this.phaseCards[phaseCardLevel].setPhaseCardUpgraded()
-	}
-	//only one phase card can be selected
-	setPhaseCardSelection(phaseCardLevel: number, selected: boolean): void {
+	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
 		for(let card of this.phaseCards){
-			if(card.cardLevel===phaseCardLevel){
-				card.setPhaseCardSelection(selected)
-			} else {
-				card.setPhaseCardSelection(false)
-			}
+			if(card.phaseType==upgrade)
+				card.setPhaseCardUpgraded()
 		}
 	}
 
@@ -55,14 +31,15 @@ export class PhaseCardGroupModel {
 }
 
 export class PhaseCardModel {
-	phaseId!:number;
-	cardLevel!: number;
-	phaseType!: PhaseCardType;
-	phaseCardUpgraded!: boolean;
-	phaseCardSelected!: boolean;
+	phaseId!:number
+	cardLevel!: number
+	phaseGroupType!: PhaseCardGroupType
+	phaseType!: PhaseCardType
+	phaseCardUpgraded!: boolean
+	phaseCardSelected!: boolean
 
-	baseDescription!: string;
-	bonusDescription!: string;
+	baseDescription!: string
+	bonusDescription!: string
 
 
 	setPhaseCardUpgraded(): void {

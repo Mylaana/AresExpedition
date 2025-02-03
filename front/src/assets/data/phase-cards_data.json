@@ -2,46 +2,50 @@
     {
         "phaseId": 0,
         "cardLevel": 0,
-        "type": "development_base",
+		"phaseGroupType": "development",
+        "phaseType": "development_base",
         "baseDescription": {
             "en": "Each player may play 1 green project card.",
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "Reduce de cost of the card you play this phase by 3MC.",
+            "en": "Reducede cost of the card you play this phase by 3MC.",
             "fr": "abc"
         }
     },
     {
         "phaseId": 0,
         "cardLevel": 1,
-        "type": "development_6mc",
+		"phaseGroupType": "development",
+        "phaseType": "development_6mc",
         "baseDescription": {
             "en": "Each player may play 1 green project card.",
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "Reduce de cost of the card you play this phase by 6MC.",
+            "en": "Reduced cost of the card you play this phase by 6MC.",
             "fr": "abc"
         }
     },
     {
         "phaseId": 0,
         "cardLevel": 2,
-        "type": "development_second_card",
+		"phaseGroupType": "development",
+        "phaseType": "development_second_card",
         "baseDescription": {
             "en": "Each player may play 1 green project card.",
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "You can play an additional green project card this phase.$skipline$Reduce de cost of the first card you play this phase by 3MC.",
+            "en": "You can play an additional green project card this phase.$skipline$Reduced cost of the first card you play this phase by 3MC.",
             "fr": "abc"
         }
     },
     {
         "phaseId": 1,
         "cardLevel": 0,
-        "type": "construction_base",
+		"phaseGroupType": "construction",
+        "phaseType": "construction_base",
         "baseDescription": {
             "en": "Each player may play 1 blue card OR 1 red project card.",
             "fr": "abc"
@@ -54,7 +58,8 @@
     {
         "phaseId": 1,
         "cardLevel": 1,
-        "type": "construction_6mc",
+		"phaseGroupType": "construction",
+        "phaseType": "construction_6mc",
         "baseDescription": {
             "en": "Each player may play 1 blue card OR 1 red project card.",
             "fr": "abc"
@@ -67,7 +72,8 @@
     {
         "phaseId": 1,
         "cardLevel": 2,
-        "type": "construction_draw_card",
+		"phaseGroupType": "construction",
+        "phaseType": "construction_draw_card",
         "baseDescription": {
             "en": "Each player may play 1 blue card OR 1 red project card.",
             "fr": "abc"
@@ -80,7 +86,8 @@
     {
         "phaseId": 2,
         "cardLevel": 0,
-        "type": "action_base",
+		"phaseGroupType": "action",
+        "phaseType": "action_base",
         "baseDescription": {
             "en": "Each player activates any ACTION effect and STANDARD actions.",
             "fr": "abc"
@@ -93,7 +100,8 @@
     {
         "phaseId": 2,
         "cardLevel": 1,
-        "type": "action_scan_cards",
+		"phaseGroupType": "action",
+        "phaseType": "action_scan_cards",
         "baseDescription": {
             "en": "Each player activates any ACTION effect and STANDARD actions.",
             "fr": "abc"
@@ -106,7 +114,8 @@
     {
         "phaseId": 2,
         "cardLevel": 2,
-        "type": "action_repeat_two",
+		"phaseGroupType": "action",
+        "phaseType": "action_repeat_two",
         "baseDescription": {
             "en": "Each player activates any ACTION effect and STANDARD actions.",
             "fr": "abc"
@@ -119,7 +128,8 @@
     {
         "phaseId": 3,
         "cardLevel": 0,
-        "type": "production_base",
+		"phaseGroupType": "production",
+        "phaseType": "production_base",
         "baseDescription": {
             "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
             "fr": "abc"
@@ -132,7 +142,8 @@
     {
         "phaseId": 3,
         "cardLevel": 1,
-        "type": "production_7mc",
+		"phaseGroupType": "production",
+        "phaseType": "production_7mc",
         "baseDescription": {
             "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
             "fr": "abc"
@@ -145,7 +156,8 @@
     {
         "phaseId": 3,
         "cardLevel": 2,
-        "type": "production_1mc_activate_card",
+		"phaseGroupType": "production",
+        "phaseType": "production_1mc_activate_card",
         "baseDescription": {
             "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
             "fr": "abc"
@@ -158,7 +170,8 @@
     {
         "phaseId": 4,
         "cardLevel": 0,
-        "type": "research_base",
+		"phaseGroupType": "research",
+        "phaseType": "research_base",
         "baseDescription": {
             "en": "Each player draw 2 cards and keep 1.",
             "fr": "abc"
@@ -171,7 +184,8 @@
     {
         "phaseId": 4,
         "cardLevel": 1,
-        "type": "research_scan6_keep1",
+		"phaseGroupType": "research",
+        "phaseType": "research_scan6_keep1",
         "baseDescription": {
             "en": "Each player draw 2 cards and keep 1.",
             "fr": "abc"
@@ -184,7 +198,8 @@
     {
         "phaseId": 4,
         "cardLevel": 2,
-        "type": "research_scan2_keep2",
+		"phaseGroupType": "research",
+        "phaseType": "research_scan2_keep2",
         "baseDescription": {
             "en": "Each player draw 2 cards and keep 1.",
             "fr": "abc"

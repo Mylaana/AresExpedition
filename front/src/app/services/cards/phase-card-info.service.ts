@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { PhaseCardType } from "../../types/phase-card.type";
-import { PhaseCardGroupModel, PhaseCardModel, PhaseCardHolderModel } from "../../models/cards/phase-card.model";
+import { PhaseCardGroupType, PhaseCardType } from "../../types/phase-card.type";
+import { PhaseCardGroupModel, PhaseCardModel } from "../../models/cards/phase-card.model";
 import jsonData from '../../../assets/data/phase-cards_data.json'
 
 const language = 'en'
@@ -18,7 +18,8 @@ export class PhaseCardInfoService {
 
 			newPhaseCard.phaseId = cardData.phaseId
 			newPhaseCard.cardLevel = cardData.cardLevel
-			newPhaseCard.phaseType = cardData.type as PhaseCardType
+			newPhaseCard.phaseGroupType = cardData.phaseGroupType as PhaseCardGroupType
+			newPhaseCard.phaseType = cardData.phaseType as PhaseCardType
 			newPhaseCard.baseDescription = cardData.baseDescription[language]
 			newPhaseCard.bonusDescription = cardData.bonusDescription[language]
 			newPhaseCard.phaseCardSelected = cardData.cardLevel===0 //first card starts as true
@@ -28,7 +29,7 @@ export class PhaseCardInfoService {
 		}
 		return phaseCards
 	}
-	getPhaseCardFromIds(phaseIndex: number, cardLevel: number): PhaseCardModel{
+	getPhaseCardFromIds(phaseIndex: number, cardLevel: number): PhaseCardModel {
 		for(let card of this.phaseCards){
 			if(card.phaseId===phaseIndex && card.cardLevel===cardLevel){
 				return card
@@ -37,7 +38,7 @@ export class PhaseCardInfoService {
 		console.log(`ERROR: phase card not found: phaseIndex=${phaseIndex} & cardLevel=${cardLevel}`)
 		return new PhaseCardModel
 	}
-	getPhaseCardFromPhaseIndex(phaseIndex: number): PhaseCardModel[]{
+	getPhaseCardFromPhaseIndex(phaseIndex: number): PhaseCardModel[] {
 		let phaseCards: PhaseCardModel[] = []
 		for(let card of this.phaseCards){
 			if(card.phaseId===phaseIndex){
@@ -46,22 +47,19 @@ export class PhaseCardInfoService {
 		}
 		return phaseCards
 	}
-	getNewPhaseGroup(phaseIndex: number, phaseCardNumberPerPhase: number): PhaseCardGroupModel {
+	getNewPhaseGroup(phaseGroupType: PhaseCardGroupType): PhaseCardGroupModel {
 		let phaseGroup = new PhaseCardGroupModel
 
-		for(let i=0; i<phaseCardNumberPerPhase; i++){
-			phaseGroup.phaseCards.push(this.getPhaseCardFromIds(phaseIndex, i))
+		//cards
+		for(let card of this.phaseCards){
+			if(card.phaseGroupType===phaseGroupType){
+				phaseGroup.phaseCards.push(card)
+			}
 		}
+
+		phaseGroup.phaseIndex = phaseGroup.phaseCards[0].phaseId
+		phaseGroup.phaseGroupType = phaseGroupType
 
 		return phaseGroup
-	}
-	getNewPhaseHolderModel(phaseNumber:number, phaseCardNumberPerPhase: number): PhaseCardHolderModel {
-		let newHolder = new PhaseCardHolderModel
-
-		//create phaseGroups
-		for(let i=0; i<phaseNumber; i++){
-			newHolder.phaseGroups.push(this.getNewPhaseGroup(i, phaseCardNumberPerPhase))
-		}
-		return newHolder
 	}
 }

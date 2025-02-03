@@ -1,22 +1,20 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { RGB } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock } from "../../interfaces/global.interface";
-import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
-import { PhaseCardType } from "../../types/phase-card.type";
+import { NonSelectablePhase } from "../../types/global.type";
+import { PhaseCardGroupType, PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
-import { PhaseCardHolderModel, PhaseCardGroupModel, PhaseCardModel } from "../../models/cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { GlobalInfo } from "../global/global-info.service";
 import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { GLOBAL_CLIENT_ID } from "../../global/global-const";
-import { EventDesigner } from "../designers/event-designer.service";
+import { PhaseCardModel } from "../../models/cards/phase-card.model";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -93,12 +91,13 @@ export class GameState{
         private projectCardService: ProjectCardInfoService,
 		private phaseCardService: PhaseCardInfoService,
 		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
-        private rxStompService: RxStompService
+        private rxStompService: RxStompService,
+		private injector: Injector
 	){}
 
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
-        let newPlayer = new PlayerStateModel;
+        let newPlayer = new PlayerStateModel(this.injector);
         newPlayer.setId(this.groupPlayerState.getValue().length)
         newPlayer.setName(playerName)
         newPlayer.setColor(playerColor)
@@ -135,9 +134,6 @@ export class GameState{
             "previousSelectedPhase": SelectablePhaseEnum.undefined
         }
         this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
-
-		//adds phase cards info to model
-		newPlayer.phaseCards = this.phaseCardService.getNewPhaseHolderModel(phaseNumber, phaseCardNumberPerPhase)
     };
 
     setPlayerIdList(playerIdList: number[]):void{
@@ -334,9 +330,14 @@ export class GameState{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
 
-    getClientPlayerSelectedPhaseCards(): PhaseCardModel[] {
-        return this.getClientPlayerState().phaseCards.getSelectedPhaseCards()
+	getClientPhaseSelected(): PhaseCardGroupType | undefined {
+		return this.getClientPlayerState().getPhaseSelected()
+	}
+
+    getClientPlayerUpgradedPhaseCards(): PhaseCardModel[] {
+        return this.getClientPlayerState().getUpgradedPhaseCards()
     }
+
 
     getClientPlayerStateHand(): number[] {
         return this.getPlayerStateHand(this.clientPlayerId)
@@ -467,17 +468,18 @@ export class GameState{
         }
         this.eventQueue.next(newEventQueue)
     }
-
+	/*
 	getPlayerPhaseCardHolder(playerId: number): PhaseCardHolderModel {
 		return this.groupPlayerState.getValue()[playerId].phaseCards
 	}
 	getPlayerPhaseCardGroup(playerId: number, phaseIndex: number): PhaseCardGroupModel {
 		return this.groupPlayerState.getValue()[playerId].phaseCards.phaseGroups[phaseIndex]
 	}
-	setPlayerUpgradedPhaseCardFromPhaseCardGroup(playerId: number, phaseIndex: number, phaseCardGroup: PhaseCardGroupModel): void {
-		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.phaseCards.phaseGroups[phaseIndex] = phaseCardGroup
-		this.updatePlayerState(playerId, playerState)
+	*/
+	setClientPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
+		let state = this.getClientPlayerState()
+		state.setPhaseCardUpgraded(upgrade)
+		this.updateClientPlayerState(state)
 	}
 	sellCardsFromClientHand(quantity: number){
 		let playerState = this.getClientPlayerState()

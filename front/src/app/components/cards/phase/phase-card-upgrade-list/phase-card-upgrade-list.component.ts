@@ -7,6 +7,7 @@ import { PlayerStateModel } from '../../../../models/player-info/player-state.mo
 import { PhaseCardGroupModel, PhaseCardModel } from '../../../../models/cards/phase-card.model';
 import { PhaseCardInfoService } from '../../../../services/cards/phase-card-info.service';
 import { Utils } from '../../../../utils/utils';
+import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class PhaseCardUpgradeListComponent implements OnChanges{
 	@Input() phaseIndex!: number;
 	cardInitialState: CardState = {selectable:false, upgradable:true}
 	@Input() upgradeRemaining!: boolean
-	@Output() cardUpgraded: EventEmitter<{phaseIndex: number, phaseCardLevel: number}> = new EventEmitter<{phaseIndex: number, phaseCardLevel: number}>()
+	@Output() cardUpgraded: EventEmitter<any> = new EventEmitter<any>()
 
 	private _upgradeRemaining!: boolean
 
@@ -77,22 +78,20 @@ export class PhaseCardUpgradeListComponent implements OnChanges{
 		}
 	}
 
-	public cardStateChange(card: {cardId: number, state:CardState, stateUpdateType:string}): void {
+	public cardStateChange(card: PhaseCardModel): void {
 		let newPhaseCardState : PhaseCardGroupModel = this.clientPlayerPhaseCardGroupState
 
-		newPhaseCardState.setPhaseCardUpgraded(card.cardId)
-		newPhaseCardState.setPhaseCardSelection(card.cardId, true)
+		newPhaseCardState.setPhaseCardUpgraded(card.phaseType as PhaseCardUpgradeType)
+		this.cardUpgraded.emit()
 
-		if(card.stateUpdateType==='upgrade'){
-			this.cardUpgraded.emit({phaseIndex: this.phaseIndex, phaseCardLevel: card.cardId})
-		}
-
-		this.gameStateService.setPlayerUpgradedPhaseCardFromPhaseCardGroup(this.clientPlayerId, this.phaseIndex, newPhaseCardState)
+		this.gameStateService.setClientPhaseCardUpgraded(card.phaseType as PhaseCardUpgradeType)
 		this.setState()
 	}
 	updateState(state: PlayerStateModel[]): void{
+		/*
 		if(this.phaseCardState.length!=0 && Utils.jsonCopy(state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]) == Utils.jsonCopy(this.clientPlayerPhaseCardGroupState)){return}
 		this.clientPlayerPhaseCardGroupState = state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]
 		this.phaseCardState = this.clientPlayerPhaseCardGroupState.getPhaseCardStateList()
+		*/
 	}
 }

@@ -227,7 +227,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Innovative Technologies Award
 			case('P26'):{
-				this.addTrToPlayer(this.clientPlayerState.phaseCardUpgradeCount)
+				this.addTrToPlayer(this.clientPlayerState.getPhaseCardUpgradedCount())
 				break
 			}
 			//Tourism

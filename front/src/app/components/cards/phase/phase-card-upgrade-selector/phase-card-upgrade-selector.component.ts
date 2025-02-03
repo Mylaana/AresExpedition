@@ -2,7 +2,6 @@ import { Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
-import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { PhaseCardUpgradeListComponent } from '../phase-card-upgrade-list/phase-card-upgrade-list.component';
 import { EventBaseModel, EventGeneric } from '../../../../models/core-game/event.model';
 
@@ -18,7 +17,7 @@ import { EventBaseModel, EventGeneric } from '../../../../models/core-game/event
 })
 export class PhaseCardUpgradeSelectorComponent {
 	@Input() event!: EventBaseModel
-	phaseList!: number[] 
+	phaseList!: number[]
 	cardInitialState: CardState = {selectable: false, upgradable: true};
 	clientPlayerId!: number
 	upgradeNumber: number = 0
@@ -34,10 +33,10 @@ export class PhaseCardUpgradeSelectorComponent {
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.updateChildrenUpgradeRemaining()
 	}
-	public cardUpgraded(phaseCard: {phaseIndex: number, phaseCardLevel: number}): void {
+	public cardUpgraded(): void {
 		//this.gameStateService.removePhaseCardUpgradeNumber(this.clientPlayerId)
 		if(this._currentEvent.phaseCardUpgradeQuantity===undefined){return}
-		
+
 		this._currentEvent.phaseCardUpgradeQuantity -= 1
 		this.updateChildrenUpgradeRemaining()
 
@@ -52,6 +51,7 @@ export class PhaseCardUpgradeSelectorComponent {
 		this.phaseList =  this._currentEvent.phaseCardUpgradeList?this._currentEvent.phaseCardUpgradeList:[0,1,2,3,4]
 		this.upgradeNumber = this._currentEvent.phaseCardUpgradeQuantity?this._currentEvent.phaseCardUpgradeQuantity:0
 	}
+	/*
 	upgradeNumberUpdate(state: PlayerStateModel[]):void{
 		if(state[this.clientPlayerId].phaseCardUpgradeCount!=this.upgradeNumber){
 			this.upgradeNumber = state[this.clientPlayerId].phaseCardUpgradeCount
@@ -62,4 +62,5 @@ export class PhaseCardUpgradeSelectorComponent {
 			this.cardInitialState.upgradable = false
 		}
 	}
+		*/
 }

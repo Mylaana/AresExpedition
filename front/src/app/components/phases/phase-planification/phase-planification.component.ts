@@ -58,7 +58,7 @@ export class PhasePlanificationComponent {
     this.buttonList.push(newButton)
   }
   setPhaseCards(): void {
-    this.selectedPhaseCards = this.gameStateService.getClientPlayerSelectedPhaseCards()
+    this.selectedPhaseCards = this.gameStateService.getClientPlayerUpgradedPhaseCards()
   }
   setCurrentPhaseCard(): void {
     for(let index of phaseIndexMap.keys()){
@@ -73,9 +73,9 @@ export class PhasePlanificationComponent {
   public childButtonClicked(button: ChildButton ){
     if(button.name===undefined){return}
     this.currentPhaseSelected = button.name
-    
+
     this.gameStateService.playerSelectPhase(this.clientPlayerId, button.value as SelectablePhaseEnum)
-    
+
     this.currentPhaseCard = undefined
     this.setCurrentPhaseCard()
     this.phaseSelected.emit()

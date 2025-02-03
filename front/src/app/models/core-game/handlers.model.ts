@@ -473,7 +473,7 @@ class PhaseResolveHandler {
 	private clientPlayerId: number = this.gameStateService.clientPlayerId
 
 	private getCurrentUpgradedPhaseCard(): PhaseCardModel[] {
-		return this.gameStateService.getClientPlayerSelectedPhaseCards()
+		return this.gameStateService.getClientPlayerUpgradedPhaseCards()
 	}
 	private refreshCurrentUpgradedPhaseCard(): void {
 		this.currentUpgradedPhaseCards = this.getCurrentUpgradedPhaseCard()

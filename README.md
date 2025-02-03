@@ -43,7 +43,7 @@ websocket: add partial player state push system
 ## New features :
 ### Phase cards
 Phase 3  
-Phase 1 & 2 bug: build button can be clicked without card selected   
+Phase cards upgrade: a phase card type can only be upgraded once   
 
 ### Cards
 Discard Event should "lock" the Sell card button while being resolved  
