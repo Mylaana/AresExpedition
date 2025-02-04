@@ -26,6 +26,8 @@ const PhaseGroupToPhaseCards: Map<SelectablePhaseEnum, PhaseCardType[]> = new Ma
 	]
 )
 
+type phaseName = 'development' | 'construction' | 'action' | 'production' | 'research'
+
 export class Utils {
 	public static jsonCopy(item: any): any{
 		return JSON.parse(JSON.stringify(item))
@@ -75,5 +77,22 @@ export class Utils {
 	}
 	public static getPhaseCardsListFromPhaseGroupType(groupType: SelectablePhaseEnum): PhaseCardType[] {
 		return PhaseGroupToPhaseCards.get(groupType)??[]
+	}
+	/**
+	* Can use 'development' | 'construction' | 'action' | 'production' | 'research'
+	*
+	* Any other value returns SelectablePhaseEnum.undefined
+	*
+	* Input converted to lowercase before comparison
+	*/
+	public static toSelectablePhase(name: string): SelectablePhaseEnum {
+		switch(name.toLowerCase()){
+			case("development"):{return SelectablePhaseEnum.development}
+			case("construction"):{return SelectablePhaseEnum.construction}
+			case("action"):{return SelectablePhaseEnum.action}
+			case("production"):{return SelectablePhaseEnum.production}
+			case("research"):{return SelectablePhaseEnum.research}
+			default:{return SelectablePhaseEnum.undefined}
+		}
 	}
 }

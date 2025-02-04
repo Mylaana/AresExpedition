@@ -3,6 +3,7 @@ import { PhaseCardType } from "../../types/phase-card.type";
 import { PhaseCardGroupModel, PhaseCardModel } from "../../models/cards/phase-card.model";
 import jsonData from '../../../assets/data/phase-cards_data.json'
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { Utils } from "../../utils/utils";
 
 const language = 'en'
 
@@ -19,7 +20,7 @@ export class PhaseCardInfoService {
 
 			newPhaseCard.phaseId = cardData.phaseId
 			newPhaseCard.cardLevel = cardData.cardLevel
-			newPhaseCard.phaseGroup = this.convertPhaseGroupType(cardData.phaseGroupType)
+			newPhaseCard.phaseGroup = Utils.toSelectablePhase(cardData.phaseGroupType)
 			newPhaseCard.phaseType = cardData.phaseType as PhaseCardType
 			newPhaseCard.baseDescription = cardData.baseDescription[language]
 			newPhaseCard.bonusDescription = cardData.bonusDescription[language]
@@ -28,16 +29,6 @@ export class PhaseCardInfoService {
 			phaseCards.push(newPhaseCard)
 		}
 		return phaseCards
-	}
-	private convertPhaseGroupType(groupType: string): SelectablePhaseEnum {
-		switch(groupType){
-			case("development"):{return SelectablePhaseEnum.development}
-			case("construction"):{return SelectablePhaseEnum.construction}
-			case("action"):{return SelectablePhaseEnum.action}
-			case("production"):{return SelectablePhaseEnum.production}
-			case("research"):{return SelectablePhaseEnum.research}
-			default:{return SelectablePhaseEnum.undefined}
-		}
 	}
 	getPhaseCardFromIds(phaseIndex: number, cardLevel: number): PhaseCardModel {
 		for(let card of this.phaseCards){
