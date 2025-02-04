@@ -1,9 +1,10 @@
 import { CardState } from "./card-cost.model";
-import { PhaseCardGroupType, PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
+import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
 
 export class PhaseCardGroupModel {
 	phaseIndex!: number;
-	phaseGroupType!: PhaseCardGroupType
+	phaseGroup!: SelectablePhaseEnum
 	phaseCards: PhaseCardModel[] = []
 	private phaseIsUpgraded: boolean = false
 
@@ -35,7 +36,7 @@ export class PhaseCardGroupModel {
 export class PhaseCardModel {
 	phaseId!:number
 	cardLevel!: number
-	phaseGroupType!: PhaseCardGroupType
+	phaseGroup!: SelectablePhaseEnum
 	phaseType!: PhaseCardType
 	phaseCardUpgraded!: boolean
 

@@ -8,10 +8,11 @@ import { PlayerInfoStateModel } from "./player-state-info.model";
 import { PlayerTagStateModel } from "./player-state-tag.model";
 import { PlayerRessourceStateModel } from "./player-state-ressource.model";
 import { PlayerPhaseCardState } from "./player-state-phase-card.model";
-import { PhaseCardGroupType, PhaseCardUpgradeType } from "../../types/phase-card.type";
+import { PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { PhaseCardInfoService } from "../../services/cards/phase-card-info.service";
 import { Injector } from "@angular/core";
 import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model";
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
 
 export class PlayerStateModel {
     cards!: ProjectCardState
@@ -64,7 +65,8 @@ export class PlayerStateModel {
 	getPhaseCardUpgradedCount(): number {return this.phaseCardState.getPhaseCardUpgradedCount()}
 	addPhaseCardUpgradeCount(): void {this.phaseCardState.addPhaseCardUpgradeCount()}
 	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {this.phaseCardState.setPhaseCardUpgraded(upgrade)}
-	getPhaseSelected(): PhaseCardGroupType | undefined {return this.phaseCardState.getSelectedPhase()}
+	getPhaseSelected(): SelectablePhaseEnum | undefined {return this.phaseCardState.getPhaseSelected()}
+	setPhaseSelected(selection: SelectablePhaseEnum): void {this.phaseCardState.setPhaseSelected(selection)}
 	getUpgradedPhaseCards(): PhaseCardModel[] {return this.phaseCardState.getUpgradedPhaseCards()}
 	getPhaseGroups(): PhaseCardGroupModel[] {return this.phaseCardState.getPhaseGroups()}
 

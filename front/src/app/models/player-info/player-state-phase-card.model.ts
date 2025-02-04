@@ -1,19 +1,20 @@
-import { GAME_PHASE_GROUP_LIST } from "../../global/global-const";
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { GAME_SELECTABLE_PHASE_LIST } from "../../global/global-const";
 import { PhaseCardInfoService } from "../../services/cards/phase-card-info.service";
-import { PhaseCardGroupType, PhaseCardUpgradeType } from "../../types/phase-card.type";
+import { PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model"
 
 export class PlayerPhaseCardState {
 	private phaseGroups: PhaseCardGroupModel[] = this.initializePhaseGroups();
 	private phaseCardUpgradeCount: number = 0
-	private selectedPhase: PhaseCardGroupType | undefined
+	private selectedPhase: SelectablePhaseEnum = SelectablePhaseEnum.undefined
 
 	constructor(private phaseService: PhaseCardInfoService){}
 
 	private initializePhaseGroups(): PhaseCardGroupModel[] {
 		let groups: PhaseCardGroupModel[] = []
-		for(let groupName of GAME_PHASE_GROUP_LIST){
+		for(let groupName of GAME_SELECTABLE_PHASE_LIST){
 			groups.push(this.phaseService.getNewPhaseGroup(groupName))
 		}
 		return groups
@@ -21,7 +22,8 @@ export class PlayerPhaseCardState {
 
 	getPhaseCardUpgradedCount(): number { return this.phaseCardUpgradeCount }
 	addPhaseCardUpgradeCount(): void { this.phaseCardUpgradeCount++ }
-	getSelectedPhase(): PhaseCardGroupType | undefined { return this.selectedPhase }
+	getPhaseSelected(): SelectablePhaseEnum { return this.selectedPhase }
+	setPhaseSelected(selection: SelectablePhaseEnum): void {this.selectedPhase = selection}
 	getUpgradedPhaseCards(): PhaseCardModel[] {
 		let cards: PhaseCardModel[] = []
 		for(let group of this.phaseGroups){
@@ -32,11 +34,11 @@ export class PlayerPhaseCardState {
 	getPhaseGroups(): PhaseCardGroupModel[]{ return this.phaseGroups}
 
 	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
-		let phase:PhaseCardGroupType | undefined = Utils.getPhaseGroupFromPhaseUpgrade(upgrade)
+		let phase: SelectablePhaseEnum = Utils.getSelectablePhaseFromPhaseUpgrade(upgrade)
 		if(!phase){return}
 
 		for(let g of this.phaseGroups){
-			if(g.phaseGroupType===phase){
+			if(g.phaseGroup===phase){
 				g.setPhaseCardUpgraded(upgrade)
 				return
 			}

@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { PhaseCardGroupType, PhaseCardType } from "../../types/phase-card.type";
+import { PhaseCardType } from "../../types/phase-card.type";
 import { PhaseCardGroupModel, PhaseCardModel } from "../../models/cards/phase-card.model";
 import jsonData from '../../../assets/data/phase-cards_data.json'
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
 
 const language = 'en'
 
@@ -18,7 +19,7 @@ export class PhaseCardInfoService {
 
 			newPhaseCard.phaseId = cardData.phaseId
 			newPhaseCard.cardLevel = cardData.cardLevel
-			newPhaseCard.phaseGroupType = cardData.phaseGroupType as PhaseCardGroupType
+			newPhaseCard.phaseGroup = this.convertPhaseGroupType(cardData.phaseGroupType)
 			newPhaseCard.phaseType = cardData.phaseType as PhaseCardType
 			newPhaseCard.baseDescription = cardData.baseDescription[language]
 			newPhaseCard.bonusDescription = cardData.bonusDescription[language]
@@ -27,6 +28,16 @@ export class PhaseCardInfoService {
 			phaseCards.push(newPhaseCard)
 		}
 		return phaseCards
+	}
+	private convertPhaseGroupType(groupType: string): SelectablePhaseEnum {
+		switch(groupType){
+			case("development"):{return SelectablePhaseEnum.development}
+			case("construction"):{return SelectablePhaseEnum.construction}
+			case("action"):{return SelectablePhaseEnum.action}
+			case("production"):{return SelectablePhaseEnum.production}
+			case("research"):{return SelectablePhaseEnum.research}
+			default:{return SelectablePhaseEnum.undefined}
+		}
 	}
 	getPhaseCardFromIds(phaseIndex: number, cardLevel: number): PhaseCardModel {
 		for(let card of this.phaseCards){
@@ -46,19 +57,18 @@ export class PhaseCardInfoService {
 		}
 		return phaseCards
 	}
-	getNewPhaseGroup(phaseGroupType: PhaseCardGroupType): PhaseCardGroupModel {
+	getNewPhaseGroup(phaseGroupType: SelectablePhaseEnum): PhaseCardGroupModel {
 		let phaseGroup = new PhaseCardGroupModel
 
 		//cards
 		for(let card of this.phaseCards){
-			if(card.phaseGroupType===phaseGroupType){
-				console.log(card)
+			if(card.phaseGroup===phaseGroupType){
 				phaseGroup.phaseCards.push(card)
 			}
 		}
 
 		phaseGroup.phaseIndex = phaseGroup.phaseCards[0].phaseId
-		phaseGroup.phaseGroupType = phaseGroupType
+		phaseGroup.phaseGroup = phaseGroupType
 
 		return phaseGroup
 	}

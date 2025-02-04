@@ -4,7 +4,7 @@ import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/pla
 import { RGB } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
-import { PhaseCardGroupType, PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
+import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
@@ -111,12 +111,6 @@ export class GameState{
         newPlayer.research = {
             keep: 0,
             scan: 0,
-        }
-
-        //fill player's hand
-        if(newPlayer.getId()===this.clientPlayerId){
-            //setTimeout(() => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
-
         }
 
         //adds newplayer's state to  groupPlayerState
@@ -335,7 +329,7 @@ export class GameState{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
 
-	getClientPhaseSelected(): PhaseCardGroupType | undefined {
+	getClientPhaseSelected(): SelectablePhaseEnum | undefined {
 		return this.getClientPlayerState().getPhaseSelected()
 	}
 

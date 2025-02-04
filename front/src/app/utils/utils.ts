@@ -1,27 +1,28 @@
+import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST, GLOBAL_CLIENT_ID } from "../global/global-const"
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
-import { PhaseCardGroupType, PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
+import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
 
-const PhaseUpgrade: Map<PhaseCardUpgradeType, PhaseCardGroupType> = new Map<PhaseCardUpgradeType, PhaseCardGroupType>([
-	['development_6mc', 'development'],
-	['development_second_card', 'development'],
-	['construction_6mc', 'construction'],
-	['construction_draw_card', 'construction'],
-	['action_repeat_two', 'action'],
-	['action_scan_cards', 'action'],
-	['production_1mc_activate_card', 'production'],
-	['production_7mc', 'production'],
-	['research_scan2_keep2', 'research'],
-	['research_scan6_keep1', 'research']
+const PhaseUpgrade: Map<PhaseCardUpgradeType, SelectablePhaseEnum> = new Map<PhaseCardUpgradeType, SelectablePhaseEnum>([
+	['development_6mc', SelectablePhaseEnum.development],
+	['development_second_card', SelectablePhaseEnum.development],
+	['construction_6mc', SelectablePhaseEnum.construction],
+	['construction_draw_card', SelectablePhaseEnum.construction],
+	['action_repeat_two', SelectablePhaseEnum.action],
+	['action_scan_cards', SelectablePhaseEnum.action],
+	['production_1mc_activate_card', SelectablePhaseEnum.production],
+	['production_7mc', SelectablePhaseEnum.production],
+	['research_scan2_keep2', SelectablePhaseEnum.research],
+	['research_scan6_keep1', SelectablePhaseEnum.research]
 ])
 
-const PhaseGroupToPhaseCards: Map<PhaseCardGroupType, PhaseCardType[]> = new Map<PhaseCardGroupType, PhaseCardType[]>(
+const PhaseGroupToPhaseCards: Map<SelectablePhaseEnum, PhaseCardType[]> = new Map<SelectablePhaseEnum, PhaseCardType[]>(
 	[
-		['development', GAME_PHASE_DEVELOPMENT_CARDS_LIST],
-		['construction', GAME_PHASE_CONSTRUCTION_CARDS_LIST],
-		['action', GAME_PHASE_ACTION_CARDS_LIST],
-		['production', GAME_PHASE_PRODUCTION_CARDS_LIST],
-		['research', GAME_PHASE_RESEARCH_CARDS_LIST]
+		[SelectablePhaseEnum.development, GAME_PHASE_DEVELOPMENT_CARDS_LIST],
+		[SelectablePhaseEnum.construction, GAME_PHASE_CONSTRUCTION_CARDS_LIST],
+		[SelectablePhaseEnum.action, GAME_PHASE_ACTION_CARDS_LIST],
+		[SelectablePhaseEnum.production, GAME_PHASE_PRODUCTION_CARDS_LIST],
+		[SelectablePhaseEnum.research, GAME_PHASE_RESEARCH_CARDS_LIST]
 	]
 )
 
@@ -68,10 +69,11 @@ export class Utils {
 		if(!DEBUG_LOG_WS_RECEIVED){return}
 		console.log(`%cRECEIVED: ${prefix}: `, 'color:green', content)
 	}
-	public static getPhaseGroupFromPhaseUpgrade(upgrade: PhaseCardUpgradeType): PhaseCardGroupType | undefined {
-		return PhaseUpgrade.get(upgrade)
+	public static getSelectablePhaseFromPhaseUpgrade(upgrade: PhaseCardUpgradeType): SelectablePhaseEnum {
+
+		return PhaseUpgrade.get(upgrade)??SelectablePhaseEnum.undefined
 	}
-	public static getPhaseCardsListFromPhaseGroupType(groupType: PhaseCardGroupType): PhaseCardType[] | undefined {
-		return PhaseGroupToPhaseCards.get(groupType)
+	public static getPhaseCardsListFromPhaseGroupType(groupType: SelectablePhaseEnum): PhaseCardType[] {
+		return PhaseGroupToPhaseCards.get(groupType)??[]
 	}
 }
