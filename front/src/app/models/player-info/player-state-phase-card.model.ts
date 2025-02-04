@@ -29,6 +29,7 @@ export class PlayerPhaseCardState {
 		}
 		return cards
 	}
+	getPhaseGroups(): PhaseCardGroupModel[]{ return this.phaseGroups}
 
 	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
 		let phase:PhaseCardGroupType | undefined = Utils.getPhaseGroupFromPhaseUpgrade(upgrade)
@@ -41,18 +42,4 @@ export class PlayerPhaseCardState {
 			}
 		}
 	}
-
-	/*
-	setPhaseCardSelection(phaseIndex: number, phaseCardLevel: number, selected: boolean): void {
-		this.phaseGroups[phaseIndex].setPhaseCardSelection(phaseCardLevel, selected)
-	}*/
-	/*
-	getSelectedPhaseCards(): PhaseCardModel[] {
-		let phaseCards: PhaseCardModel[] = []
-		for(let group of this.phaseGroups){
-			phaseCards.push(group.getSelectedPhaseCard())
-		}
-		return phaseCards
-	}
-	*/
 }

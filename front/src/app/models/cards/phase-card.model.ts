@@ -5,6 +5,7 @@ export class PhaseCardGroupModel {
 	phaseIndex!: number;
 	phaseGroupType!: PhaseCardGroupType
 	phaseCards: PhaseCardModel[] = []
+	private phaseIsUpgraded: boolean = false
 
 	getUpgradedPhaseCard(): PhaseCardModel {
 		for(let card of this.phaseCards){
@@ -15,12 +16,12 @@ export class PhaseCardGroupModel {
 		return new PhaseCardModel
 	}
 	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
+		if(this.phaseIsUpgraded){return}
 		for(let card of this.phaseCards){
-			if(card.phaseType==upgrade)
-				card.setPhaseCardUpgraded()
+			card.setPhaseCardUpgraded(card.phaseType==upgrade)
 		}
+		this.phaseIsUpgraded = true
 	}
-
 	getPhaseCardStateList(): CardState[] {
 		let stateList: CardState[] = []
 		for(let card of this.phaseCards){
@@ -28,6 +29,7 @@ export class PhaseCardGroupModel {
 		}
 		return stateList
 	}
+	getPhaseIsUpgraded(): boolean {return this.phaseIsUpgraded}
 }
 
 export class PhaseCardModel {
@@ -36,23 +38,17 @@ export class PhaseCardModel {
 	phaseGroupType!: PhaseCardGroupType
 	phaseType!: PhaseCardType
 	phaseCardUpgraded!: boolean
-	phaseCardSelected!: boolean
 
 	baseDescription!: string
 	bonusDescription!: string
 
 
-	setPhaseCardUpgraded(): void {
-		this.phaseCardUpgraded = true
-	}
-
-	setPhaseCardSelection(selected: boolean): void {
-		this.phaseCardSelected = selected
+	setPhaseCardUpgraded(upgraded: boolean): void {
+		this.phaseCardUpgraded = upgraded
 	}
 
 	getPhaseCardState(): CardState {
 		let state: CardState = {}
-		state.selected = this.phaseCardSelected
 		state.upgraded = this.phaseCardUpgraded
 		return state
 	}

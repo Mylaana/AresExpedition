@@ -11,7 +11,7 @@ import { PlayerPhaseCardState } from "./player-state-phase-card.model";
 import { PhaseCardGroupType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { PhaseCardInfoService } from "../../services/cards/phase-card-info.service";
 import { Injector } from "@angular/core";
-import { PhaseCardModel } from "../cards/phase-card.model";
+import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model";
 
 export class PlayerStateModel {
     cards!: ProjectCardState
@@ -66,6 +66,7 @@ export class PlayerStateModel {
 	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {this.phaseCardState.setPhaseCardUpgraded(upgrade)}
 	getPhaseSelected(): PhaseCardGroupType | undefined {return this.phaseCardState.getSelectedPhase()}
 	getUpgradedPhaseCards(): PhaseCardModel[] {return this.phaseCardState.getUpgradedPhaseCards()}
+	getPhaseGroups(): PhaseCardGroupModel[] {return this.phaseCardState.getPhaseGroups()}
 
 	//to refactor
 	playCard(card:ProjectCardModel):void{

@@ -37,10 +37,7 @@ type EventPileAddRule = 'first' | 'second' | 'last'
 
 
 const phaseCount: number = 5;
-const handSizeStart: number = 8;
 const handSizeMaximum: number = 10;
-const phaseNumber: number = 5;
-const phaseCardNumberPerPhase: number = 3;
 const cardSellValue: number = 3;
 
 @Injectable({
@@ -58,6 +55,7 @@ export class GameState{
     phase = new BehaviorSubject<NonSelectablePhaseEnum>(NonSelectablePhaseEnum.undefined)
     drawQueue = new BehaviorSubject<DrawEvent[]>([])
     eventQueue = new BehaviorSubject<EventBaseModel[]>([])
+	clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(new PlayerStateModel(this.injector))
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
@@ -67,6 +65,8 @@ export class GameState{
     currentEventQueue = this.eventQueue.asObservable()
     currentPlayerCount = this.playerCount.asObservable()
     currentLoadingState = this.loading.asObservable()
+
+	currentClientState = this.clientState.asObservable();
 
     phaseIndex: number = 0;
 
@@ -94,6 +94,10 @@ export class GameState{
         private rxStompService: RxStompService,
 		private injector: Injector
 	){}
+
+	private updateClientState(){
+		this.clientState.next(this.groupPlayerState.getValue()[this.clientPlayerId])
+	}
 
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
@@ -210,6 +214,7 @@ export class GameState{
 
     updateGroupPlayerState(newState: PlayerStateModel[]): void{
         this.groupPlayerState.next(newState)
+		this.updateClientState()
     }
 
     getPlayerStateFromId(playerId: number): PlayerStateModel{

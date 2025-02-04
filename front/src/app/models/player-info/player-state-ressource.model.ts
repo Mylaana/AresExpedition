@@ -27,7 +27,7 @@ export class PlayerRessourceStateModel {
 				valueProd: 0,
 				valueBaseProd: 0,
 				valueStock: 0,
-				hasStock: (i===3 || i===4),
+				hasStock: (i!=3 && i!=4),
 				imageUrlId: GlobalInfo.getIdFromType(GAME_RESSOURCE_LIST[i])
 			}
 			result.push(ressource)

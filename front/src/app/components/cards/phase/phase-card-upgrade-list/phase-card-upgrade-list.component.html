@@ -5,6 +5,8 @@
 		[stateFromParent]="phaseCardState[phaseCardIndex]"
 		[initialState]="cardInitialState"
 		[phaseCard]="phaseCardModels[phaseCardIndex]"
-		(cardStateChange)="cardStateChange($event)"></app-phase-card>
+		[stateFromParent]="stateFromParent"
+		(phaseCardUpgraded)="phaseCardUpgraded($event)"></app-phase-card>
 	</div>
 </div>
+<p>state: {{this.cardInitialState | json}}</p>
