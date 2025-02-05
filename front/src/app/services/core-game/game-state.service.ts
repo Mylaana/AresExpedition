@@ -108,11 +108,6 @@ export class GameState{
         newPlayer.cards = new ProjectCardState(this.projectCardService)
         newPlayer.cards.maximum = handSizeMaximum
 
-        newPlayer.research = {
-            keep: 0,
-            scan: 0,
-        }
-
         //adds newplayer's state to  groupPlayerState
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
 
@@ -482,7 +477,7 @@ export class GameState{
 	}
 	sellCardsFromClientHand(quantity: number){
 		let playerState = this.getClientPlayerState()
-		playerState.addRessource('megacredit', quantity * (cardSellValue + playerState.sellCardValueMod))
+		playerState.addRessource('megacredit', quantity * (cardSellValue + playerState.getSellCardValueMod()))
 		this.updateClientPlayerState(playerState)
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
@@ -579,16 +574,16 @@ export class GameState{
     }
     addClientPlayerResearchScanValue(scan: number): void {
         let newState = this.getClientPlayerState()
-        newState.research.scan += scan
+        newState.addResearchValue({scan:scan})
         this.updateClientPlayerState(newState)
     }
     addClientPlayerResearchKeepValue(keep: number): void {
         let newState = this.getClientPlayerState()
-        newState.research.keep += keep
+        newState.addResearchValue({keep:keep})
         this.updateClientPlayerState(newState)
     }
     getClientPlayerResearchMods(): ScanKeep {
-        return this.getClientPlayerState().research
+        return this.getClientPlayerState().getResearch()
     }
     handleWsDrawResult(wsDrawResult: WsDrawResult): void {
         let eventFound: boolean = false

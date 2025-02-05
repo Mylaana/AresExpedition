@@ -339,7 +339,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Biofoundries
 			case('D22'):{
-				result.push(this.createEventUpgradePhaseCard(2))
+				result.push(this.createEventUpgradePhaseCard(1))
 				break
 			}
 			//Industrial Complex

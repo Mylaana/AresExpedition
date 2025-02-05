@@ -45,5 +45,10 @@ export class PhaseCardUpgradeSelectorComponent {
 	public cardUpgraded(): void {
 		if(this._currentEvent.phaseCardUpgradeQuantity===undefined){return}
 		this._currentEvent.phaseCardUpgradeQuantity -= 1
+		if(this._currentEvent.phaseCardUpgradeQuantity>0){return}
+		for(let list of this.phaseUpgradeList){
+			list.setUpgradeFinished()
+		}
+		console.log(this._currentEvent.phaseCardUpgradeQuantity)
 	}
 }

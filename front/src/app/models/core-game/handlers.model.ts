@@ -559,7 +559,7 @@ class PhaseResolveHandler {
 		this.refreshCurrentUpgradedPhaseCard()
 		let baseScanKeep: ScanKeep = {scan:2,keep:1}
 		let clientState = this.gameStateService.getClientPlayerState()
-		let modScanKeep: ScanKeep = clientState.research
+		let modScanKeep: ScanKeep = clientState.getResearch()
 		let bonusScanKeep: ScanKeep = this.getResearchPhaseCardSelectionBonus()
 		let totalScanKeep = {
 			scan: baseScanKeep.scan + modScanKeep.scan + bonusScanKeep.scan,

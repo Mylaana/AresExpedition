@@ -21,6 +21,7 @@ import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
 export class PhaseCardUpgradeListComponent {
 	@Input() phaseIndex!: number;
 	@Input() phaseGroup!: PhaseCardGroupModel
+	@Input() upgradeFinished: boolean = false
 	cardInitialState!: CardState
 	stateFromParent!: CardState
 	@Output() cardUpgraded: EventEmitter<any> = new EventEmitter<any>()
@@ -46,7 +47,7 @@ export class PhaseCardUpgradeListComponent {
 		this.phaseCardModels = this.phaseGroup.phaseCards
 
 		this.loaded = true
-		this.cardInitialState = {upgradable: this.phaseGroup.getPhaseIsUpgraded()===false}
+		this.cardInitialState = {upgradable: this.canUpgrade()}
 		this.setState()
 	}
 	refreshPhaseGroup(): void {
@@ -54,9 +55,19 @@ export class PhaseCardUpgradeListComponent {
 			card.refreshState()
 		}
 	}
+	setUpgradeFinished(): void {
+		this.upgradeFinished = true
+		this.stateFromParent = {upgradable: this.canUpgrade()}
+		console.log(this.phaseIndex, )
+	}
+	canUpgrade(): boolean {
+		if(this.upgradeFinished){return false}
+		if(this.phaseGroup.getPhaseIsUpgraded()){return false}
+		return true
+	}
 	private setState(): void {
 		if(this.loaded===false){return}
-		this.stateFromParent = {upgradable: this.phaseGroup.getPhaseIsUpgraded()===false}
+		this.stateFromParent = {upgradable: this.canUpgrade()}
 	}
 	public phaseCardUpgraded(upgradeType: PhaseCardUpgradeType): void {
 		this.cardUpgraded.emit()

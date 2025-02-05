@@ -13,12 +13,10 @@ import { PhaseCardInfoService } from "../../services/cards/phase-card-info.servi
 import { Injector } from "@angular/core";
 import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { PlayerOtherStateModel } from "./player-state-other.model";
 
 export class PlayerStateModel {
     cards!: ProjectCardState
-    research!: ScanKeep
-
-	sellCardValueMod: number = 0
 	globalParameter = new GlobalParameterModel
 
 	private infoState = new PlayerInfoStateModel
@@ -26,6 +24,7 @@ export class PlayerStateModel {
 	private tagState = new PlayerTagStateModel
 	private ressourceState = new PlayerRessourceStateModel
 	private phaseCardState: PlayerPhaseCardState
+	private otherState = new PlayerOtherStateModel
 
 	constructor(private injector: Injector) {
 		const phaseService = this.injector.get(PhaseCardInfoService);
@@ -70,6 +69,15 @@ export class PlayerStateModel {
 	getUpgradedPhaseCards(): PhaseCardModel[] {return this.phaseCardState.getUpgradedPhaseCards()}
 	getPhaseGroups(): PhaseCardGroupModel[] {return this.phaseCardState.getPhaseGroups()}
 
+	//otherState
+	getResearch(): ScanKeep {return this.otherState.getResearch()}
+	setResearch(research: ScanKeep): void {this.otherState.setResearch(research)}
+	addResearchValue(research: Partial<ScanKeep>): void {this.otherState.addResearchValue(research)}
+	getResearchScan(): number {return this.otherState.getResearchScan()}
+	getResearchKeep(): number {return this.otherState.getResearchKeep()}
+	getSellCardValueMod(): number {return this.otherState.getSellCardValueMod()}
+	addSellCardValueMod(value: number): void {this.otherState.addSellCardValueMod(value)}
+
 	//to refactor
 	playCard(card:ProjectCardModel):void{
 		this.cards.playCard(card)
@@ -94,9 +102,6 @@ export class PlayerStateModel {
 	}
 	public toFullDTO(): PlayerStateModelFullDTO {
 		return {
-			research: this.research,
-			sellCardValueMod: this.sellCardValueMod,
-
 			cards: undefined, //this.cards,
 			globalParameter: this.globalParameter,
 
@@ -104,7 +109,8 @@ export class PlayerStateModel {
 			infoState: this.infoState,
 			tagState: this.tagState,
 			ressourceState: this.ressourceState,
-			phaseCardState: this.phaseCardState
+			phaseCardState: this.phaseCardState,
+			otherState: this.otherState
 		}
 	}
 	public toSecretDTO(): PlayerStateModelSecretDTO {
@@ -115,14 +121,12 @@ export class PlayerStateModel {
 	}
 	public toPublicDTO(): PlayerStateModelPublicDTO {
 		return {
-			research: this.research,
-			sellCardValueMod: this.sellCardValueMod,
-
 			infoState: this.infoState,
 			scoreState: this.scoreState,
 			tagState: this.tagState,
 			ressourceState: this.ressourceState,
-			phaseCardState: this.phaseCardState
+			phaseCardState: this.phaseCardState,
+			otherState: this.otherState
 		}
 	}
 }
