@@ -1,12 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange, SimpleChanges, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhaseCardComponent } from '../phase-card/phase-card.component';
 import { CardState } from '../../../../models/cards/card-cost.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
-import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { PhaseCardGroupModel, PhaseCardModel } from '../../../../models/cards/phase-card.model';
 import { PhaseCardInfoService } from '../../../../services/cards/phase-card-info.service';
-import { Utils } from '../../../../utils/utils';
+import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
 
 
 @Component({
@@ -19,13 +18,13 @@ import { Utils } from '../../../../utils/utils';
   templateUrl: './phase-card-upgrade-list.component.html',
   styleUrl: './phase-card-upgrade-list.component.scss'
 })
-export class PhaseCardUpgradeListComponent implements OnChanges{
+export class PhaseCardUpgradeListComponent {
 	@Input() phaseIndex!: number;
-	cardInitialState: CardState = {selectable:false, upgradable:true}
-	@Input() upgradeRemaining!: boolean
-	@Output() cardUpgraded: EventEmitter<{phaseIndex: number, phaseCardLevel: number}> = new EventEmitter<{phaseIndex: number, phaseCardLevel: number}>()
-
-	private _upgradeRemaining!: boolean
+	@Input() phaseGroup!: PhaseCardGroupModel
+	@Input() upgradeFinished: boolean = false
+	cardInitialState!: CardState
+	stateFromParent!: CardState
+	@Output() cardUpgraded: EventEmitter<any> = new EventEmitter<any>()
 
 	phaseCardLevelList!: number[];
 	phaseCardState: CardState[] = [];
@@ -45,54 +44,35 @@ export class PhaseCardUpgradeListComponent implements OnChanges{
 	ngOnInit(): void {
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.phaseCardLevelList = [0, 1, 2]
-		this.setUpdateRemaining(this.upgradeRemaining)
-
-		this.gameStateService.groupPlayerState.subscribe(
-			state => this.updateState(state)
-		)
-
-		this.phaseCardModels = this.phaseCardInfoService.getPhaseCardFromPhaseIndex(this.phaseIndex)
-
+		this.phaseCardModels = this.phaseGroup.phaseCards
 
 		this.loaded = true
-	}
-
-	ngOnChanges(changes: SimpleChanges): void {
-		if(changes['upgradeRemaining'] && changes['upgradeRemaining'].currentValue){
-			this.setState()
-		}
-	}
-
-	setUpdateRemaining(upgradeRemaining:boolean): void {
-		this._upgradeRemaining = upgradeRemaining
+		this.cardInitialState = {upgradable: this.canUpgrade()}
 		this.setState()
 	}
-
+	refreshPhaseGroup(): void {
+		for(let card of this.phaseCards){
+			card.refreshState()
+		}
+	}
+	setUpgradeFinished(): void {
+		this.upgradeFinished = true
+		this.stateFromParent = {upgradable: this.canUpgrade()}
+		console.log(this.phaseIndex, )
+	}
+	canUpgrade(): boolean {
+		if(this.upgradeFinished){return false}
+		if(this.phaseGroup.getPhaseIsUpgraded()){return false}
+		return true
+	}
 	private setState(): void {
 		if(this.loaded===false){return}
-		if(this._upgradeRemaining){
-			this.cardInitialState = {selectable:false, upgradable:true}
-		} else {
-			this.cardInitialState = {selectable:true, upgradable:false}
-		}
+		this.stateFromParent = {upgradable: this.canUpgrade()}
 	}
+	public phaseCardUpgraded(upgradeType: PhaseCardUpgradeType): void {
+		this.cardUpgraded.emit()
 
-	public cardStateChange(card: {cardId: number, state:CardState, stateUpdateType:string}): void {
-		let newPhaseCardState : PhaseCardGroupModel = this.clientPlayerPhaseCardGroupState
-
-		newPhaseCardState.setPhaseCardUpgraded(card.cardId)
-		newPhaseCardState.setPhaseCardSelection(card.cardId, true)
-
-		if(card.stateUpdateType==='upgrade'){
-			this.cardUpgraded.emit({phaseIndex: this.phaseIndex, phaseCardLevel: card.cardId})
-		}
-
-		this.gameStateService.setPlayerUpgradedPhaseCardFromPhaseCardGroup(this.clientPlayerId, this.phaseIndex, newPhaseCardState)
+		this.gameStateService.setClientPhaseCardUpgraded(upgradeType)
 		this.setState()
-	}
-	updateState(state: PlayerStateModel[]): void{
-		if(this.phaseCardState.length!=0 && Utils.jsonCopy(state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]) == Utils.jsonCopy(this.clientPlayerPhaseCardGroupState)){return}
-		this.clientPlayerPhaseCardGroupState = state[this.clientPlayerId].phaseCards.phaseGroups[this.phaseIndex]
-		this.phaseCardState = this.clientPlayerPhaseCardGroupState.getPhaseCardStateList()
 	}
 }

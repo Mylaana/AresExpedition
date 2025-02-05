@@ -4,7 +4,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterName, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
-import { RessourceStock, GlobalParameterValue, ScanKeep } from "../../interfaces/global.interface";
+import { RessourceStock, GlobalParameterValue, ScanKeep, RessourceInfo } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
 import { EventDesigner } from "../designers/event-designer.service";
@@ -31,7 +31,7 @@ export class ProjectCardPlayedEffectService {
 		this.clientPlayerState.addProduction(ressource, quantity)
 	}
 	addTrToPlayer(quantity:number):void{
-		this.clientPlayerState.terraformingRating += quantity
+		this.clientPlayerState.addTR(quantity)
 	}
 	playCard(card: ProjectCardModel, playerState: PlayerStateModel): PlayerStateModel {
 		this.clientPlayerState = playerState
@@ -205,7 +205,7 @@ export class ProjectCardPlayedEffectService {
 			//Award Winning Reflector Material
 			case('D35'):{
 				this.addProductionToPlayer('heat',3)
-				if(this.clientPlayerState.milestoneCount>0){
+				if(this.clientPlayerState.getMilestoneCompleted()>0){
 					this.addRessourceToPlayer('heat', 4)
 				}
 				break
@@ -227,34 +227,35 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Innovative Technologies Award
 			case('P26'):{
-				this.addTrToPlayer(this.clientPlayerState.phaseCardUpgradeCount)
+				this.addTrToPlayer(this.clientPlayerState.getPhaseCardUpgradedCount())
 				break
 			}
 			//Tourism
 			case('P30'):{
 				this.addProductionToPlayer('megacredit',2)
-				this.addTrToPlayer(this.clientPlayerState.milestoneCount)
+				this.addTrToPlayer(this.clientPlayerState.getMilestoneCompleted())
 				break
 			}
 		}
 
-		for(let i=0 ;i<this.clientPlayerState.ressource.length; i++){
+		let playerRessources: RessourceInfo[] = this.clientPlayerState.getRessources()
+		for(let i=0 ;i<playerRessources.length; i++){
 			let scalingProd =
 				this.scalingProductionService.getScalingProduction(
-					this.clientPlayerState.ressource[i].name,
+					playerRessources[i].name,
 					this.clientPlayerState.cards.getProjectIdList(),
-					this.clientPlayerState.tag
+					this.clientPlayerState.getTags()
 				)
-			this.clientPlayerState.updateProductions(this.clientPlayerState.ressource[i].name, scalingProd)
+			this.clientPlayerState.setScalingProduction(playerRessources[i].name, scalingProd)
 		}
 
 		return this.clientPlayerState
 	}
 	/**
-	 * 
-	 * @param card 
+	 *
+	 * @param card
 	 * @returns Event List
-	 
+
 	* Events should be filled to the list according to their order of execution.
 	 */
 	getPlayedCardEvent(card: ProjectCardModel): EventBaseModel[] | undefined{
@@ -392,14 +393,14 @@ export class ProjectCardPlayedEffectService {
 		}
 		return result
 	}
-	
+
 	getCostModFromTriggers(mod: CostMod): number {
 		if(!mod || !mod.playedTriggersList){return 0}
 		let newMod: number = 0
 		let tags: number[] = []
-		
+
 		if(mod.tagList!=undefined){
-			tags = mod.tagList.filter((e, i) => e !== -1); 
+			tags = mod.tagList.filter((e, i) => e !== -1);
 		}
 		for(let triggerId of mod.playedTriggersList){
 			newMod += this.calculateCostModFromTrigger(triggerId, mod)
@@ -541,7 +542,7 @@ export class ProjectCardPlayedEffectService {
 
 				let addValue = Math.min(ressource.valueStock, limit?.limit - limit.value)
 				if(addValue<=0){break}
-				
+
 				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:addValue}))
 				targetCard.triggerLimit.value += addValue
 				break

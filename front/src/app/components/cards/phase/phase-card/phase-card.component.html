@@ -3,14 +3,11 @@
 		<div class="wrapper-phase-card ares-card" [ngClass]="['phase' + phaseIndex, state.selectable ? 'element-selectable': '', state.selected===true? 'selected':'']">
 			<p>{{phaseCard.baseDescription}}</p>
 			<p>{{phaseCard.bonusDescription}}</p>
-			<p>upgraded:{{state.upgraded}} selected:{{state.selected}}</p>
+			<p>upgraded:{{state.upgraded}} upgradable:{{state.upgradable}}</p>
 		</div>
 	</div>
-	<div *ngIf="state.upgraded!=true && initialState?.upgradable==true" class="wrapper-button">
-		<button  (click)="updateState('upgradeAndSelect')" class="validation-button element-clickable">Upgrade</button>
-	</div>
-	<div *ngIf="state.upgraded==true && state.selected!=true && initialState?.selectable==true" class="wrapper-button">
-		<button  (click)="updateState('select')" class="validation-button element-clickable">Select</button>
+	<div *ngIf="state.upgraded!=true && state?.upgradable==true" class="wrapper-button">
+		<button  (click)="upgrade()" class="validation-button element-clickable">Upgrade</button>
 	</div>
 </div>
 

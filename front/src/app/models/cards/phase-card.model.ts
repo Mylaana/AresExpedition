@@ -1,50 +1,28 @@
 import { CardState } from "./card-cost.model";
-import { PhaseCardType } from "../../types/phase-card.type";
-
-export class PhaseCardHolderModel {
-	phaseGroups: PhaseCardGroupModel[] = [];
-
-	setPhaseCardUpgraded(phaseIndex: number, phaseCardLevel: number): void {
-		this.phaseGroups[phaseIndex].setPhaseCardUpgraded(phaseCardLevel)
-	}
-	setPhaseCardSelection(phaseIndex: number, phaseCardLevel: number, selected: boolean): void {
-		this.phaseGroups[phaseIndex].setPhaseCardSelection(phaseCardLevel, selected)
-	}
-	getSelectedPhaseCards(): PhaseCardModel[] {
-		let phaseCards: PhaseCardModel[] = []
-		for(let group of this.phaseGroups){
-			phaseCards.push(group.getSelectedPhaseCard())
-		}
-		return phaseCards
-	}
-}
+import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
 
 export class PhaseCardGroupModel {
 	phaseIndex!: number;
-	phaseCards: PhaseCardModel[] = [];
+	phaseGroup!: SelectablePhaseEnum
+	phaseCards: PhaseCardModel[] = []
+	private phaseIsUpgraded: boolean = false
 
-	getSelectedPhaseCard(): PhaseCardModel {
+	getUpgradedPhaseCard(): PhaseCardModel {
 		for(let card of this.phaseCards){
-			if(card.phaseCardSelected===true){
+			if(card.phaseCardUpgraded===true){
 				return card
 			}
 		}
 		return new PhaseCardModel
 	}
-	setPhaseCardUpgraded(phaseCardLevel: number): void {
-		this.phaseCards[phaseCardLevel].setPhaseCardUpgraded()
-	}
-	//only one phase card can be selected
-	setPhaseCardSelection(phaseCardLevel: number, selected: boolean): void {
+	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
+		if(this.phaseIsUpgraded){return}
 		for(let card of this.phaseCards){
-			if(card.cardLevel===phaseCardLevel){
-				card.setPhaseCardSelection(selected)
-			} else {
-				card.setPhaseCardSelection(false)
-			}
+			card.setPhaseCardUpgraded(card.phaseType==upgrade)
 		}
+		this.phaseIsUpgraded = true
 	}
-
 	getPhaseCardStateList(): CardState[] {
 		let stateList: CardState[] = []
 		for(let card of this.phaseCards){
@@ -52,30 +30,26 @@ export class PhaseCardGroupModel {
 		}
 		return stateList
 	}
+	getPhaseIsUpgraded(): boolean {return this.phaseIsUpgraded}
 }
 
 export class PhaseCardModel {
-	phaseId!:number;
-	cardLevel!: number;
-	phaseType!: PhaseCardType;
-	phaseCardUpgraded!: boolean;
-	phaseCardSelected!: boolean;
+	phaseId!:number
+	cardLevel!: number
+	phaseGroup!: SelectablePhaseEnum
+	phaseType!: PhaseCardType
+	phaseCardUpgraded!: boolean
 
-	baseDescription!: string;
-	bonusDescription!: string;
+	baseDescription!: string
+	bonusDescription!: string
 
 
-	setPhaseCardUpgraded(): void {
-		this.phaseCardUpgraded = true
-	}
-
-	setPhaseCardSelection(selected: boolean): void {
-		this.phaseCardSelected = selected
+	setPhaseCardUpgraded(upgraded: boolean): void {
+		this.phaseCardUpgraded = upgraded
 	}
 
 	getPhaseCardState(): CardState {
 		let state: CardState = {}
-		state.selected = this.phaseCardSelected
 		state.upgraded = this.phaseCardUpgraded
 		return state
 	}

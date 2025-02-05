@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AdvancedRessourceStock, CardRessourceStock, RessourceState, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardRessourceStock, RessourceInfo, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
@@ -473,7 +473,7 @@ class PhaseResolveHandler {
 	private clientPlayerId: number = this.gameStateService.clientPlayerId
 
 	private getCurrentUpgradedPhaseCard(): PhaseCardModel[] {
-		return this.gameStateService.getClientPlayerSelectedPhaseCards()
+		return this.gameStateService.getClientPlayerUpgradedPhaseCards()
 	}
 	private refreshCurrentUpgradedPhaseCard(): void {
 		this.currentUpgradedPhaseCards = this.getCurrentUpgradedPhaseCard()
@@ -505,9 +505,9 @@ class PhaseResolveHandler {
 		this.refreshCurrentUpgradedPhaseCard()
 
 		let clientState = this.gameStateService.getClientPlayerState()
-		let newClientRessource: RessourceState[] = []
+		let newClientRessource: RessourceInfo[] = []
 
-		newClientRessource = clientState.ressource
+		newClientRessource = clientState.getRessources()
 
 		for(let i=0; i<newClientRessource.length; i++){
 			switch(i){
@@ -516,7 +516,7 @@ class PhaseResolveHandler {
 					newClientRessource[i].valueStock =
 						newClientRessource[i].valueStock
 						+ newClientRessource[i].valueProd
-						+ clientState.terraformingRating
+						+ clientState.getTR()
 						+ this.getProductionPhaseCardSelectionBonus()
 					break
 				}
@@ -559,7 +559,7 @@ class PhaseResolveHandler {
 		this.refreshCurrentUpgradedPhaseCard()
 		let baseScanKeep: ScanKeep = {scan:2,keep:1}
 		let clientState = this.gameStateService.getClientPlayerState()
-		let modScanKeep: ScanKeep = clientState.research
+		let modScanKeep: ScanKeep = clientState.getResearch()
 		let bonusScanKeep: ScanKeep = this.getResearchPhaseCardSelectionBonus()
 		let totalScanKeep = {
 			scan: baseScanKeep.scan + modScanKeep.scan + bonusScanKeep.scan,

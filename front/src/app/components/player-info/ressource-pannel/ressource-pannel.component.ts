@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RessourceCardComponent } from '../ressource-card/ressource-card.component';
-import { RessourceState } from '../../../interfaces/global.interface';
+import { RessourceInfo } from '../../../interfaces/global.interface';
 
 @Component({
   selector: 'app-ressource-pannel',
@@ -15,7 +15,7 @@ import { RessourceState } from '../../../interfaces/global.interface';
 })
 export class RessourcePannelComponent {
   @Input() playerId!: number;
-  @Input() ressourceState!: RessourceState[];
+  @Input() ressource!: RessourceInfo[];
 
   ngOnInit(): void {
 

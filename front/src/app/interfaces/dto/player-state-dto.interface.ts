@@ -1,36 +1,29 @@
 import { ProjectCardState } from "../../models/cards/project-card.model";
-import { RGB } from "../../types/global.type";
-import { RessourceState, ScanKeep, TagState } from "../global.interface";
+import { PlayerInfoStateModel } from "../../models/player-info/player-state-info.model";
+import { PlayerOtherStateModel } from "../../models/player-info/player-state-other.model";
+import { PlayerPhaseCardState } from "../../models/player-info/player-state-phase-card.model";
+import { PlayerRessourceStateModel } from "../../models/player-info/player-state-ressource.model";
+import { PlayerScoreStateModel } from "../../models/player-info/player-state-score.model";
+import { PlayerTagStateModel } from "../../models/player-info/player-state-tag.model";
 
 export interface PlayerStateModelFullDTO {
-    id: number;
-    name: string;
-    color: RGB;
-    ressource: RessourceState[];
-    terraformingRating: number;
-    vp: number;
-    tag: TagState[];
     cards?: ProjectCardState
-    research: ScanKeep
-	phaseCards: any// = new PhaseCardHolderModel
-	phaseCardUpgradeCount: number
-	sellCardValueMod: number
 	globalParameter: any // = new GlobalParameterModel
-	milestoneCount: number
+
+	infoState: PlayerInfoStateModel
+	scoreState: PlayerScoreStateModel
+	tagState: PlayerTagStateModel
+	ressourceState: PlayerRessourceStateModel
+	phaseCardState: PlayerPhaseCardState
+	otherState: PlayerOtherStateModel
 }
 export interface PlayerStateModelPublicDTO {
-    id: number;
-    name: string;
-    color: RGB;
-    ressource: RessourceState[];
-    terraformingRating: number;
-    vp: number;
-    tag: TagState[];
-    research: ScanKeep
-	phaseCards: any// = new PhaseCardHolderModel
-	phaseCardUpgradeCount: number
-	sellCardValueMod: number
-	milestoneCount: number
+	infoState: PlayerInfoStateModel
+	scoreState: PlayerScoreStateModel
+	tagState: PlayerTagStateModel
+	ressourceState: PlayerRessourceStateModel
+	phaseCardState: PlayerPhaseCardState
+	otherState: PlayerOtherStateModel
 }
 export interface PlayerStateModelSecretDTO {
     cards: any

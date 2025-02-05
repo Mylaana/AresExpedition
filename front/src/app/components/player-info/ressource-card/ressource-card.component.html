@@ -1,21 +1,21 @@
 <div class="ressource-card ares-card">
     <div class="wrapper-ressource box-one">
         <div class="box-ressource-icon">
-            <img [ngClass]="{'img-card': ressourceState.name=='card'}" [src]="imageUrl" [alt]="ressourceState.name">
+            <img [ngClass]="{'img-card': ressource.name=='card'}" [src]="imageUrl" [alt]="ressource.name">
         </div>
-        <div *ngIf="ressourceState.valueMod" class="box-ressource-mod">
+        <div *ngIf="ressource.valueMod" class="box-ressource-mod">
             <div class="box-ressource-mod-icon center">
                 <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
             </div>
             <div class="box-ressource-mod-value">
-                <p class="text-cost-mod center">{{ ressourceState.valueMod }}</p>
+                <p class="text-cost-mod center">{{ ressource.valueMod }}</p>
             </div>
         </div>
     </div>
-    <div [ngClass]="[ressourceState.hasStock ? 'box-two' : 'box-two--extended',  ressourceState.name==='steel' || ressourceState.name==='titanium' ? 'background-production-grey' : 'background-production', ressourceState.name === 'card' ? 'background-production-blue' : '']">
-        <p class="center">{{ ressourceState.valueProd }}</p>
+    <div [ngClass]="[ressource.hasStock ? 'box-two' : 'box-two--extended',  ressource.name==='steel' || ressource.name==='titanium' ? 'background-production-grey' : 'background-production', ressource.name === 'card' ? 'background-production-blue' : '']">
+        <p class="center">{{ ressource.valueProd }}</p>
     </div>
-    <div *ngIf="ressourceState.hasStock" class="box-three">
-        <p class="center"> {{ ressourceState.valueStock }}</p>
+    <div *ngIf="ressource.hasStock" class="box-three">
+        <p class="center"> {{ ressource.valueStock }}</p>
     </div>
 </div>

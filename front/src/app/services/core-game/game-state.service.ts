@@ -1,22 +1,20 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { RGB } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock } from "../../interfaces/global.interface";
-import { NonSelectablePhase, SelectablePhase } from "../../types/global.type";
-import { PhaseCardType } from "../../types/phase-card.type";
+import { NonSelectablePhase } from "../../types/global.type";
+import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PhaseCardInfoService } from "../cards/phase-card-info.service";
-import { PhaseCardHolderModel, PhaseCardGroupModel, PhaseCardModel } from "../../models/cards/phase-card.model";
 import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { GlobalInfo } from "../global/global-info.service";
 import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { GLOBAL_CLIENT_ID } from "../../global/global-const";
-import { EventDesigner } from "../designers/event-designer.service";
+import { PhaseCardModel } from "../../models/cards/phase-card.model";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -39,11 +37,8 @@ type EventPileAddRule = 'first' | 'second' | 'last'
 
 
 const phaseCount: number = 5;
-const handSizeStart: number = 8;
 const handSizeMaximum: number = 10;
-const phaseNumber: number = 5;
-const phaseCardNumberPerPhase: number = 3;
-const cardSellCost: number = 3;
+const cardSellValue: number = 3;
 
 @Injectable({
     providedIn: 'root'
@@ -60,6 +55,7 @@ export class GameState{
     phase = new BehaviorSubject<NonSelectablePhaseEnum>(NonSelectablePhaseEnum.undefined)
     drawQueue = new BehaviorSubject<DrawEvent[]>([])
     eventQueue = new BehaviorSubject<EventBaseModel[]>([])
+	clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(new PlayerStateModel(this.injector))
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
@@ -69,6 +65,8 @@ export class GameState{
     currentEventQueue = this.eventQueue.asObservable()
     currentPlayerCount = this.playerCount.asObservable()
     currentLoadingState = this.loading.asObservable()
+
+	currentClientState = this.clientState.asObservable();
 
     phaseIndex: number = 0;
 
@@ -93,172 +91,29 @@ export class GameState{
         private projectCardService: ProjectCardInfoService,
 		private phaseCardService: PhaseCardInfoService,
 		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
-        private rxStompService: RxStompService
+        private rxStompService: RxStompService,
+		private injector: Injector
 	){}
+
+	private updateClientState(){
+		this.clientState.next(this.groupPlayerState.getValue()[this.clientPlayerId])
+	}
 
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
-        let newPlayer = new PlayerStateModel;
-        newPlayer.id = this.groupPlayerState.getValue().length;
-        newPlayer.name = playerName;
-        newPlayer.color = playerColor;
-        newPlayer.ressource = [
-            {
-                "id":0,
-                "name": "megacredit",
-                "valueMod": 0,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 52,
-                "hasStock": true,
-                "imageUrlId": GlobalInfo.getIdFromType('megacredit'),
-            },
-            {
-                "id":1,
-                "name": "heat",
-                "valueMod": 0,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": true,
-                "imageUrlId": GlobalInfo.getIdFromType('heat'),
-            },
-            {
-                "id":2,
-                "name": "plant",
-                "valueMod": 0,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": true,
-                "imageUrlId": GlobalInfo.getIdFromType('plant'),
-            },
-            {
-                "id":3,
-                "name": "steel",
-                "valueMod": 2,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": false,
-                "imageUrlId": GlobalInfo.getIdFromType('steel'),
-            },
-            {
-                "id":4,
-                "name": "titanium",
-                "valueMod": 3,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": false,
-                "imageUrlId": GlobalInfo.getIdFromType('titanium'),
-            },
-            {
-                "id":5,
-                "name": "card",
-                "valueMod": 0,
-                "valueProd": 0,
-				"valueBaseProd": 0,
-                "valueStock": 0,
-                "hasStock": false,
-                "imageUrlId": GlobalInfo.getIdFromType('card'),
-            },
-        ];
-        newPlayer.tag = [
-            {
-                "id": 0,
-                "name": "building",
-                "idImageUrl": 0,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 1,
-                "name": "space",
-                "idImageUrl": 1,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 2,
-                "name": "science",
-                "idImageUrl": 2,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 3,
-                "name": "power",
-                "idImageUrl": 3,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 4,
-                "name": "earth",
-                "idImageUrl": 4,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 5,
-                "name": "jovian",
-                "idImageUrl": 5,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 6,
-                "name": "plant",
-                "idImageUrl": 6,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 7,
-                "name": "animal",
-                "idImageUrl": 7,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 8,
-                "name": "microbe",
-                "idImageUrl": 8,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-            {
-                "id": 9,
-                "name": "event",
-                "idImageUrl": 9,
-                "valueCount": 0,
-                "valueMod": 0,
-            },
-        ];
+        let newPlayer = new PlayerStateModel(this.injector);
+        newPlayer.setId(this.groupPlayerState.getValue().length)
+        newPlayer.setName(playerName)
+        newPlayer.setColor(playerColor)
         newPlayer.cards = new ProjectCardState(this.projectCardService)
         newPlayer.cards.maximum = handSizeMaximum
-
-        newPlayer.research = {
-            keep: 0,
-            scan: 0,
-        }
-
-        //fill player's hand
-        if(newPlayer.id===this.clientPlayerId){
-            //setTimeout(() => this.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:handSizeStart}}), 'first'), 2000)
-            
-        }
-
-        newPlayer.terraformingRating = 5;
-        newPlayer.vp = newPlayer.terraformingRating
 
         //adds newplayer's state to  groupPlayerState
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
 
         //creates and add player to groupPlayerReady
         let newPlayerReady = new PlayerReadyModel;
-        newPlayerReady.id = newPlayer.id
+        newPlayerReady.id = newPlayer.getId()
         newPlayerReady.name = playerName;
         newPlayerReady.isReady = false
         this.groupPlayerReady.next(this.groupPlayerReady.getValue().concat(newPlayerReady))
@@ -266,15 +121,12 @@ export class GameState{
         //creates and add player to groupPlayerSelectedPhase
         let newPlayerPhase: PlayerPhase;
         newPlayerPhase = {
-            "playerId": newPlayer.id,
+            "playerId": newPlayer.getId(),
             "currentSelectedPhase": SelectablePhaseEnum.undefined,
             "currentPhaseType": undefined,
             "previousSelectedPhase": SelectablePhaseEnum.undefined
         }
         this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
-
-		//adds phase cards info to model
-		newPlayer.phaseCards = this.phaseCardService.getNewPhaseHolderModel(phaseNumber, phaseCardNumberPerPhase)
     };
 
     setPlayerIdList(playerIdList: number[]):void{
@@ -312,7 +164,7 @@ export class GameState{
             if(player.id===playerId){
                 return player.isReady
             }
-            
+
         }
         return false
     }
@@ -351,6 +203,7 @@ export class GameState{
 
     updateGroupPlayerState(newState: PlayerStateModel[]): void{
         this.groupPlayerState.next(newState)
+		this.updateClientState()
     }
 
     getPlayerStateFromId(playerId: number): PlayerStateModel{
@@ -471,14 +324,19 @@ export class GameState{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
 
-    getClientPlayerSelectedPhaseCards(): PhaseCardModel[] {
-        return this.getClientPlayerState().phaseCards.getSelectedPhaseCards()
+	getClientPhaseSelected(): SelectablePhaseEnum | undefined {
+		return this.getClientPlayerState().getPhaseSelected()
+	}
+
+    getClientPlayerUpgradedPhaseCards(): PhaseCardModel[] {
+        return this.getClientPlayerState().getUpgradedPhaseCards()
     }
+
 
     getClientPlayerStateHand(): number[] {
         return this.getPlayerStateHand(this.clientPlayerId)
     }
-    
+
     getClientPlayerStateHandProject(): ProjectCardModel[] {
         return this.getClientPlayerState().cards.getHandProject()
     }
@@ -498,7 +356,7 @@ export class GameState{
     getClientPlayerPlayedCardsProject(): ProjectCardModel [] {
         return this.getPlayerPlayedCardsProject(this.clientPlayerId)
     }
-    
+
     getPlayerPlayedCardsProject(playerId: number): ProjectCardModel[] {
         return this.getPlayerStateFromId(playerId).cards.getProjectPlayedList()
     }
@@ -569,7 +427,7 @@ export class GameState{
         } else {
             addEvents = events
         }
-        
+
         switch(addRule){
             case('last'):{
                 newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
@@ -588,7 +446,7 @@ export class GameState{
 
         this.eventQueue.next(newQueue)
     }
-    
+
     /**
      * gets nothing
      * returns nothing
@@ -604,21 +462,22 @@ export class GameState{
         }
         this.eventQueue.next(newEventQueue)
     }
-
+	/*
 	getPlayerPhaseCardHolder(playerId: number): PhaseCardHolderModel {
 		return this.groupPlayerState.getValue()[playerId].phaseCards
 	}
 	getPlayerPhaseCardGroup(playerId: number, phaseIndex: number): PhaseCardGroupModel {
 		return this.groupPlayerState.getValue()[playerId].phaseCards.phaseGroups[phaseIndex]
 	}
-	setPlayerUpgradedPhaseCardFromPhaseCardGroup(playerId: number, phaseIndex: number, phaseCardGroup: PhaseCardGroupModel): void {
-		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.phaseCards.phaseGroups[phaseIndex] = phaseCardGroup
-		this.updatePlayerState(playerId, playerState)
+	*/
+	setClientPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
+		let state = this.getClientPlayerState()
+		state.setPhaseCardUpgraded(upgrade)
+		this.updateClientPlayerState(state)
 	}
 	sellCardsFromClientHand(quantity: number){
 		let playerState = this.getClientPlayerState()
-		playerState.ressource[0].valueStock += quantity * (cardSellCost + playerState.sellCardValueMod)
+		playerState.addRessource('megacredit', quantity * (cardSellValue + playerState.getSellCardValueMod()))
 		this.updateClientPlayerState(playerState)
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
@@ -645,7 +504,7 @@ export class GameState{
                 events = events.concat(eventsOnTagGained)
             }
         }
-       
+
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)
         }
@@ -657,12 +516,12 @@ export class GameState{
     setClientPlayerTriggerAsInactive(triggerId: number): void {
         let newState: PlayerStateModel = this.getClientPlayerState()
         newState.cards.setTriggerAsInactive(triggerId)
-    
+
         this.updateClientPlayerState(newState)
     }
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
 		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.ressource[0].valueStock -= quantity
+		playerState.addRessource("megacredit", -quantity)
 		this.updatePlayerState(playerId, playerState)
 	}
     addGlobalParameterStepsEOPtoPlayerId(playerId:number, parameter:GlobalParameterValue): void {
@@ -700,7 +559,7 @@ export class GameState{
         for(let ressource of cardStock.stock){
             let card = newState.cards.getPlayedProjectCardFromId(cardStock.cardId)
             if(!card){continue}
-            
+
             let triggers = newState.cards.getTriggersOnRessourceAddedToCardId()
             if(triggers.length===0){break}
 
@@ -715,16 +574,16 @@ export class GameState{
     }
     addClientPlayerResearchScanValue(scan: number): void {
         let newState = this.getClientPlayerState()
-        newState.research.scan += scan
+        newState.addResearchValue({scan:scan})
         this.updateClientPlayerState(newState)
     }
     addClientPlayerResearchKeepValue(keep: number): void {
         let newState = this.getClientPlayerState()
-        newState.research.keep += keep
+        newState.addResearchValue({keep:keep})
         this.updateClientPlayerState(newState)
     }
     getClientPlayerResearchMods(): ScanKeep {
-        return this.getClientPlayerState().research
+        return this.getClientPlayerState().getResearch()
     }
     handleWsDrawResult(wsDrawResult: WsDrawResult): void {
         let eventFound: boolean = false
@@ -752,7 +611,7 @@ export class GameState{
 	}
     public finalizeEventWaitingGroupReady(){
         if(this.eventQueue.getValue().length===0){return}
-        
+
         for(let event of this.eventQueue.getValue()){
             if(event.subType==='waitingGroupReady'){
                 event.finalized = true

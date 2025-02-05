@@ -75,11 +75,11 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		)
 
 
-		return
-		//force draw card list for debug purpose
-		let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141]
-		//force phase selection pool
 
+		//force draw card list for debug purpose
+		//let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141, 253]
+		let cardDrawList: number[] = [253, 253]
+		this.gameStateService.addRessourceToClientPlayer([{name:"megacredit", valueStock:50}])
 		this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
 	}
 

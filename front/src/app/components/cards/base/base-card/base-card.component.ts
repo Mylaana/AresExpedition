@@ -51,7 +51,6 @@ export abstract class BaseCardComponent implements OnInit, OnChanges, DoCheck {
 
 	resetCardState(): void {
 		if(!this.state){return}
-
 		if(this.initialState?.activable){this.state.activable=this.initialState.activable}else{this.state.activable=false}
 		if(this.initialState?.playable){this.state.playable=this.initialState.playable}else{this.state.playable=false}
 		if(this.initialState?.ignoreCost){this.state.ignoreCost=this.initialState.ignoreCost}else{this.state.ignoreCost=false}
@@ -71,6 +70,6 @@ export abstract class BaseCardComponent implements OnInit, OnChanges, DoCheck {
 		if(this.stateFromParent.selectable!=undefined){this.state.selectable=Utils.jsonCopy(this.stateFromParent.selectable)}
 		if(this.stateFromParent.selected!=undefined){this.state.selected=Utils.jsonCopy(this.stateFromParent.selected)}
 		if(this.stateFromParent.upgradable!=undefined){this.state.upgradable=Utils.jsonCopy(this.stateFromParent.upgradable)}
-		if(this.stateFromParent.upgraded!=undefined){this.state.upgraded=Utils.jsonCopy(this.stateFromParent.upgraded)}	
+		if(this.stateFromParent.upgraded!=undefined){this.state.upgraded=Utils.jsonCopy(this.stateFromParent.upgraded)}
 	}
 }

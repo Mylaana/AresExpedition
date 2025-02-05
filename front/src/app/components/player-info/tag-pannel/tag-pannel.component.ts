@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagCardComponent } from '../tag-card/tag-card.component';
-import { TagState } from '../../../interfaces/global.interface';
+import { TagInfo } from '../../../interfaces/global.interface';
 
 @Component({
   selector: 'app-tag-pannel',
@@ -15,8 +15,8 @@ import { TagState } from '../../../interfaces/global.interface';
 })
 export class TagPannelComponent {
   @Input() playerId!: number;
-  @Input() tagState!: TagState[];
-  
+  @Input() tagState!: TagInfo[];
+
   ngOnInit(): void {
 
   }
