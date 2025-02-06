@@ -15,7 +15,7 @@ import { GlobalInfo } from '../../../services/global/global-info.service';
 export class NavigationComponent implements OnInit{
   globalParameters: GlobalParameter[] = [];
   currentGroupPlayerState!: {};
-  currentPhase: string = "planification"; 
+  currentPhase: string = "planification";
   clientPlayerId!: number
 
   constructor(
@@ -81,6 +81,6 @@ export class NavigationComponent implements OnInit{
   updateState(state:PlayerStateModel[]): void {
     if(state[this.clientPlayerId]===undefined){return}
     if(this.currentGroupPlayerState===state){return}
-    this.globalParameters = state[this.clientPlayerId].globalParameter.parameters
+    this.globalParameters = state[this.clientPlayerId].getGlobalParameters()
   }
 }

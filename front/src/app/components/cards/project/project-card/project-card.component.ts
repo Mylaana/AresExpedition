@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProjectCardModel, ProjectCardState } from '../../../../models/cards/project-card.model';
+import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
 import { CardCost } from '../../../../models/cards/card-cost.model';
@@ -27,9 +27,10 @@ import { GlobalInfo } from '../../../../services/global/global-info.service';
 export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
 	@Input() buildDiscount!: number
-	clientPlayerId!: number
-	ressourceState: RessourceInfo[] = []
-	projectCardState!: ProjectCardState
+	//clientPlayerId!: number
+	//ressourceState: RessourceInfo[] = []
+	//projectCardState!: ProjectCardState
+	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
 
 	readonly tagNumber = 3;
@@ -43,7 +44,6 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	override ngOnInit() {
 		super.ngOnInit()
 		this.projectCard.tagsUrl = []
-		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.cardCost.initialize(this.projectCard.costInitial)
 
 		this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
@@ -53,19 +53,19 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		}
 
 		// subscribe to gameState
-		this.gameStateService.currentGroupPlayerState.subscribe(
-			state => this.updatePlayerState(state)
+		this.gameStateService.currentClientState.subscribe(
+			state => this.updateClientState(state)
 		)
 		this.checkPlayable()
 	}
 	override resetCardState(): void {
 		super.resetCardState()
-		if(this.ressourceState.length===0){return}
+		if(this.megacreditAvailable===0){return}
 		this.updateCost()
 		this.checkPlayable()
 	}
 
-	fillTagId(tagsId:number[]): number[] {
+	private fillTagId(tagsId:number[]): number[] {
 		// ensures having 3 tags id in tagId
 		// gets number array
 		// returns number array
@@ -81,44 +81,25 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		this.state.selected = this.state.selected===false
 		this.cardStateChange.emit({card:this.projectCard, state: this.state})
 	}
-
-	play(): void {
-		console.log('Played: ', this.projectCard.title)
+	private updateClientState(state: PlayerStateModel): void {
+		if(state===undefined){return}
+		this.megacreditAvailable = state.getRessourceInfoFromType('megacredit')?.valueStock??0
+		this.updateCost(state)
 	}
-	updatePlayerState(state: PlayerStateModel[]): void {
-		if(state[this.clientPlayerId]===undefined){return}
-		let playerState = state[this.clientPlayerId]
-		this.updateRessourceState(playerState.getRessources())
-		this.updateCardState(playerState.cards)
-		this.checkPlayable()
-	}
-	updateRessourceState(ressourceState: RessourceInfo[]): void {
-		if(this.ressourceState===ressourceState){return}
-		this.ressourceState = Utils.jsonCopy(ressourceState)
-	}
-	updateCardState(cardState: ProjectCardState): void {
-		if(!this.projectCardState===undefined &&  Utils.jsonCopy(this.projectCardState)===Utils.jsonCopy(cardState)){return}
-		this.projectCardState=cardState
-		this.updateCost()
-	}
-	public updateCost(): void {
-		/*
-		if(this.state.playable!=true){
-			this.projectCard.cost=this.projectCard.costInitial
-			return
-		}*/
+	public updateCost(state?: PlayerStateModel): void {
+		if(!state){this.projectCard.cost = 0; return}
 		this.projectCard.cost = this.cardCost.updateCost({
 			tagList: this.projectCard.tagsId,
-			steelState: this.ressourceState[3],
-			titaniumState: this.ressourceState[4],
-			playedTriggersList: this.projectCardState.getTriggerCostMod(),
+			steelState: state.getRessourceInfoFromType('steel'),
+			titaniumState: state.getRessourceInfoFromType('titanium'),
+			playedTriggersList: state.getTriggerCostMod(),
 			buildDiscount: this.buildDiscount
 		})
 		this.checkPlayable()
 	}
 
 	checkPlayable(): void {
-		this.state.playable = this.ressourceState[0].valueStock >= this.projectCard.cost
+		this.state.playable = this.megacreditAvailable >= this.projectCard.cost
 	}
 
 	activate(activationCount: number): void {

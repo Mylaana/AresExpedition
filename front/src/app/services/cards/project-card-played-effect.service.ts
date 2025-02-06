@@ -243,7 +243,7 @@ export class ProjectCardPlayedEffectService {
 			let scalingProd =
 				this.scalingProductionService.getScalingProduction(
 					playerRessources[i].name,
-					this.clientPlayerState.cards.getProjectIdList(),
+					this.clientPlayerState.getProjectPlayedIdList(),
 					this.clientPlayerState.getTags()
 				)
 			this.clientPlayerState.setScalingProduction(playerRessources[i].name, scalingProd)

@@ -18,12 +18,12 @@ export class PhaseProductionComponent implements OnInit{
   ngOnInit(): void {
     this.gameStateService.currentGroupPlayerState.subscribe(
       groupPlayerState => this.updateState(groupPlayerState)
-      
+
     )
   }
 
   updateState(state: PlayerStateModel[]): void {
     this.currentGroupPlayerState = state
-    this.clientPlayerState = this.gameStateService.getClientPlayerState()
+    this.clientPlayerState = this.gameStateService.getClientState()
   }
 }

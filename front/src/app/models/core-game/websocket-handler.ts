@@ -86,7 +86,7 @@ export class WebsocketHandler {
         //setting ready
         this.gameStateService.setGroupReady(wsGroupReady)
 
-        switch(this.gameStateService.getClientPlayerReady()){
+        switch(this.gameStateService.getClientReady()){
             case(false):{
                 this.gameStateService.finalizeEventWaitingGroupReady()
                 return

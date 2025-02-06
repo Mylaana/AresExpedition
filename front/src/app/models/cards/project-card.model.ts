@@ -1,19 +1,8 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType } from "../../types/global.type"
-import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType} from "../../types/project-card.type"
+import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
-import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
 import { ProjectCardDTO } from "../../interfaces/dto/project-card-dto.interface"
-
-type playedProject = {
-    playedIdList: number[],
-    playedProjectList: ProjectCardModel[]
-}
-
-type TriggerLimit = {
-    value: number,
-    limit: number
-}
 
 export class ProjectCardModel {
     id!: number;
@@ -144,104 +133,11 @@ export class ProjectCardModel {
 		}
 	}
 }
-export class ProjectCardState {
-    hand: number[] = []
-    projects: playedProject = {
-        playedIdList: [],
-        playedProjectList: []
-    }
-    triggers = new TriggerState
-    maximum: number = 0
-
-    constructor(private cardInfo: ProjectCardInfoService){}
-
-    playCard(card: ProjectCardModel): void {
-        this.projects.playedIdList.push(card.id)
-        this.projects.playedProjectList.push(card)
-        this.initialSetUp(card)
-
-        if(card.cardSummaryType!='trigger'){return}
-        this.triggers.playTrigger(card.id)
-    }
-    private initialSetUp(card: ProjectCardModel): void {
-        switch(card.id){
-            //Bacterial Aggregate
-            case(222):{
-                card.triggerLimit = {limit:5, value:0}
-                break
-            }
-        }
-
-    }
-    getPlayedTriggersId(): number[] {
-        return this.triggers.getPlayedTriggers()
-    }
-    getActivePlayedTriggersId(): number[] {
-        return this.triggers.getActivePlayedTriggers()
-    }
-    getTriggersOnRessourceAddedToCardId(): number[] {
-        return this.triggers.getOnRessourceAddedToCard()
-    }
-    getTriggersOnParameterIncreaseId(): number[] {
-        return this.triggers.getOnParameterIncrease()
-    }
-    getTriggersOnPlayedCard(): number[] {
-        return this.triggers.getOnPlayedCard()
-    }
-    getTriggersOnGainedTag(): number[] {
-        return this.triggers.getOnGainedTag()
-    }
-    getTriggerCostMod(): number[] {
-        return this.triggers.getCostMod()
-    }
-    setTriggerAsInactive(triggerId: number): void {
-        this.triggers.setTriggerInactive(triggerId)
-    }
-    getProjectIdList(): number[] {
-        return this.projects.playedIdList
-    }
-    getProjectPlayedList(filter?: ProjectFilter): ProjectCardModel[] {
-        if(!filter){return this.projects.playedProjectList}
-
-        let projectList:ProjectCardModel[] = []
-
-        for(let card of this.projects.playedProjectList){
-            if(card.isFilterOk(filter)===true){
-                projectList.push(card)
-            }
-        }
-        return projectList
-    }
-    getPlayedProjectCardFromId(cardId: number): ProjectCardModel | undefined {
-        for(let card of this.projects.playedProjectList){
-            if(card.id===cardId){
-                return card
-            }
-        }
-        return
-    }
-    addRessourceToCard(cardId: number, ressource: AdvancedRessourceStock ): void {
-        let card = this.getPlayedProjectCardFromId(cardId)
-        if(!card){return}
-        card.addRessourceToStock(ressource)
-    }
-    getCardStockValue(cardId:number, ressourceName: AdvancedRessourceType): number {
-        let result = this.getPlayedProjectCardFromId(cardId)?.getStockValue(ressourceName)
-        if(!result){return 0}
-        return result
-    }
-    getHandId(): number[] {
-        return this.hand
-    }
-    getHandProject(): ProjectCardModel[] {
-        return this.cardInfo.getProjectCardList(this.hand)
-    }
-}
 
 /**
  * This Class handles Blue project card with trigger effects
  */
-class TriggerState {
+export class TriggerState {
     playedCardsId: number[] = []
     activeCardsId: number[] = []
     activeOnRessourceAddedToCard: number[] = []

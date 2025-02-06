@@ -57,9 +57,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   updateHandOnStateChange(state: PlayerStateModel[]): void {
-    let cardState = state[this.clientPlayerId].cards
-    this.playerHand = this.cardInfoService.getProjectCardList(cardState.hand)
-    this.playerPlayed = cardState.getProjectPlayedList()
+    let clientState = this.gameStateService.getClientState()
+    this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
+    this.playerPlayed = clientState.getProjectPlayedModelList()
     this.handProjectList.updatePlayedCardList(this.playerPlayed)
   }
   updatePlayerList(playerIdList: number[]){

@@ -22,3 +22,4 @@ export const GAME_PHASE_ACTION_CARDS_LIST: ActionPhaseType[] = ['action_base', '
 export const GAME_PHASE_PRODUCTION_CARDS_LIST: ProductionPhaseType[] = ['production_base', 'production_7mc', 'production_1mc_activate_card']
 export const GAME_PHASE_RESEARCH_CARDS_LIST: ResearchPhaseType[] = ['research_base', 'research_scan6_keep1', 'research_scan2_keep2']
 export const GAME_SELECTABLE_PHASE_LIST: SelectablePhaseEnum[] = [SelectablePhaseEnum.development, SelectablePhaseEnum.construction, SelectablePhaseEnum.action, SelectablePhaseEnum.production, SelectablePhaseEnum.research]
+export const GAME_HAND_MAXIMUM_SIZE = 10

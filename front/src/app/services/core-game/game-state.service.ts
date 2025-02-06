@@ -2,12 +2,11 @@ import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { RGB } from "../../types/global.type";
-import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock } from "../../interfaces/global.interface";
+import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
-import { PhaseCardInfoService } from "../cards/phase-card-info.service";
-import { ProjectCardModel, ProjectCardState } from "../../models/cards/project-card.model";
+import { ProjectCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
@@ -89,15 +88,10 @@ export class GameState{
 
 	constructor(
         private projectCardService: ProjectCardInfoService,
-		private phaseCardService: PhaseCardInfoService,
 		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
         private rxStompService: RxStompService,
 		private injector: Injector
 	){}
-
-	private updateClientState(){
-		this.clientState.next(this.groupPlayerState.getValue()[this.clientPlayerId])
-	}
 
     addPlayer(playerName: string, playerColor: RGB): void {
         //creates and add player to groupPlayerState
@@ -105,8 +99,6 @@ export class GameState{
         newPlayer.setId(this.groupPlayerState.getValue().length)
         newPlayer.setName(playerName)
         newPlayer.setColor(playerColor)
-        newPlayer.cards = new ProjectCardState(this.projectCardService)
-        newPlayer.cards.maximum = handSizeMaximum
 
         //adds newplayer's state to  groupPlayerState
         this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
@@ -135,10 +127,10 @@ export class GameState{
 
     public setCurrentPhase(newPhase: NonSelectablePhaseEnum): void {
         this.phase.next(newPhase)
-        this.setClientPlayerReady(false)
+        this.setClientReady(false)
     };
 
-    public setClientPlayerReady(ready: boolean){
+    public setClientReady(ready: boolean){
         this.setPlayerReady(this.clientPlayerId, ready)
     };
 
@@ -154,7 +146,7 @@ export class GameState{
         this.groupPlayerReady.next(groupReady)
     }
 
-    getClientPlayerReady(): boolean {
+    getClientReady(): boolean {
         return this.getPlayerReady(this.clientPlayerId)
     }
     getPlayerReady(playerId?: number): boolean {
@@ -203,14 +195,14 @@ export class GameState{
 
     updateGroupPlayerState(newState: PlayerStateModel[]): void{
         this.groupPlayerState.next(newState)
-		this.updateClientState()
+		//this.clientState.next(newState[this.clientPlayerId])
     }
 
     getPlayerStateFromId(playerId: number): PlayerStateModel{
         return this.groupPlayerState.getValue()[playerId]
     }
 
-    getClientPlayerState(): PlayerStateModel{
+    getClientState(): PlayerStateModel{
         return this.getPlayerStateFromId(this.clientPlayerId)
     }
 
@@ -221,8 +213,9 @@ export class GameState{
         this.updateGroupPlayerState(this.groupPlayerState.getValue())
     }
 
-    updateClientPlayerState(clientState: PlayerStateModel): void{
+    updateClientState(clientState: PlayerStateModel): void{
         this.updatePlayerState(this.clientPlayerId, clientState)
+		this.clientState.next(clientState)
     }
 
     accessPhaseOrder(key: string | number): NonSelectablePhase{
@@ -262,7 +255,7 @@ export class GameState{
 
     }
     clientPlayerValidateSelectedPhase(): void {
-        this.rxStompService.publishSelectedPhase(this.getClientPlayerCurrentSelectedPhase())
+        this.rxStompService.publishSelectedPhase(this.getClientCurrentSelectedPhase())
     }
     /**
      *
@@ -279,7 +272,7 @@ export class GameState{
         return selectedPhase.currentPhaseType
     }
 
-    getClientPlayerCurrentSelectedPhase(): SelectablePhaseEnum {
+    getClientCurrentSelectedPhase(): SelectablePhaseEnum {
         return this.getPlayerCurrentSelectedPhase(this.clientPlayerId)
     }
     /**
@@ -325,64 +318,36 @@ export class GameState{
     }
 
 	getClientPhaseSelected(): SelectablePhaseEnum | undefined {
-		return this.getClientPlayerState().getPhaseSelected()
+		return this.getClientState().getPhaseSelected()
 	}
 
-    getClientPlayerUpgradedPhaseCards(): PhaseCardModel[] {
-        return this.getClientPlayerState().getUpgradedPhaseCards()
+    getClientUpgradedPhaseCards(): PhaseCardModel[] {
+        return this.getClientState().getUpgradedPhaseCards()
     }
 
-
-    getClientPlayerStateHand(): number[] {
-        return this.getPlayerStateHand(this.clientPlayerId)
+    getClientHandIdList(): number[] {
+        return this.getClientState().getProjectHandIdList()
     }
 
-    getClientPlayerStateHandProject(): ProjectCardModel[] {
-        return this.getClientPlayerState().cards.getHandProject()
+    getClientHandModelList(): ProjectCardModel[] {
+        return this.projectCardService.getProjectCardList(this.getClientState().getProjectHandIdList())
     }
 
-    getPlayerStateHand(playerId: number): number[] {
-        return this.getPlayerStateFromId(playerId).cards.hand
+    getClientProjectPlayedIdList(): number[] {return this.getPlayerProjectPlayedIdList(this.clientPlayerId)}
+	getPlayerProjectPlayedIdList(playerId: number): number[] {return this.getPlayerStateFromId(playerId).getProjectPlayedIdList()}
+    getClientProjectPlayedModelList(filter?: ProjectFilter): ProjectCardModel [] {return this.getPlayerProjectPlayedModelList(this.clientPlayerId, filter)}
+    getPlayerProjectPlayedModelList(playerId: number, filter?: ProjectFilter): ProjectCardModel[] {return this.getPlayerStateFromId(playerId).getProjectPlayedModelList(filter)}
+
+    addCardsToClientHand(cardsToAdd: number | number[]):void{
+        let clientState = this.getClientState()
+        clientState.addCardsToHand(cardsToAdd)
+		this.updateClientState(clientState)
     }
 
-    getClientPlayerPlayedCardsId(): number[] {
-        return this.getPlayerPlayedCardsId(this.clientPlayerId)
-    }
-
-    getPlayerPlayedCardsId(playerId: number): number[] {
-        return this.getPlayerStateFromId(playerId).cards.getProjectIdList()
-    }
-
-    getClientPlayerPlayedCardsProject(): ProjectCardModel [] {
-        return this.getPlayerPlayedCardsProject(this.clientPlayerId)
-    }
-
-    getPlayerPlayedCardsProject(playerId: number): ProjectCardModel[] {
-        return this.getPlayerStateFromId(playerId).cards.getProjectPlayedList()
-    }
-
-    updateClientPlayerStateHand(cardList: number[]): void {
-        let clientState = this.getClientPlayerState()
-        clientState.cards.hand = clientState.cards.hand.concat(cardList)
-        this.updateClientPlayerState(clientState)
-    }
-
-    updatePlayerStateHand(playerId: number, newCardList: number[]): void {
-        let playerState = this.getPlayerStateFromId(playerId)
-        playerState.cards.hand = newCardList
-        this.updatePlayerState(playerId, playerState)
-    }
-
-    addCardToPlayerHand(playerId: number, cardsToAdd: number[]):void{
-        let playerStateHand = this.getPlayerStateHand(playerId)
-        this.updatePlayerStateHand(playerId,  playerStateHand.concat(cardsToAdd))
-    }
-
-    removeCardFromPlayerHand(playerId: number, cardsToRemove: ProjectCardModel[]):void{
-        let playerStateHand = this.getPlayerStateHand(playerId)
-        let cardsIdToRemove = this.projectCardService.getProjectCardIdListFromModel(cardsToRemove)
-        playerStateHand = playerStateHand.filter( ( el ) => !cardsIdToRemove.includes( el ));
-        this.updatePlayerStateHand(playerId, playerStateHand)
+    removeCardsFromClientHand(cardsToRemove: number | number[]):void{
+		let clientState = this.getClientState()
+        clientState.removeCardsFromHand(cardsToRemove)
+		this.updateClientState(clientState)
     }
 
     addDrawQueue(drawEvent: DrawEvent):void{
@@ -402,11 +367,6 @@ export class GameState{
         this.drawQueue.next(newDrawQueue)
     }
 
-    /**
-     * gets nothing
-     * returns nothing
-     * emits a next signal for drawQueue.next()
-     */
     cleanAndNextDrawQueue(): void{
         let newDrawQueue: DrawEvent[] = [];
         //clean draw queue
@@ -471,25 +431,25 @@ export class GameState{
 	}
 	*/
 	setClientPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
-		let state = this.getClientPlayerState()
+		let state = this.getClientState()
 		state.setPhaseCardUpgraded(upgrade)
-		this.updateClientPlayerState(state)
+		this.updateClientState(state)
 	}
 	sellCardsFromClientHand(quantity: number){
-		let playerState = this.getClientPlayerState()
+		let playerState = this.getClientState()
 		playerState.addRessource('megacredit', quantity * (cardSellValue + playerState.getSellCardValueMod()))
-		this.updateClientPlayerState(playerState)
+		this.updateClientState(playerState)
 	}
 	playCardFromClientHand(card: ProjectCardModel):void{
         let events: EventBaseModel[] = []
-		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientPlayerState())
+		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientState())
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
 
-        this.updateClientPlayerState(newState)
+        this.updateClientState(newState)
 
 
         //check for triggers and add them to queue
-        let onPlayedTriggers = newState.cards.getTriggersOnPlayedCard()
+        let onPlayedTriggers = newState.getTriggersIdOnPlayedCard()
         if(onPlayedTriggers.length!=0){
             let eventsOnPlayed = this.projectCardPlayed.getEventTriggerByPlayedCard(card, onPlayedTriggers, newState)
             if(eventsOnPlayed!=undefined){
@@ -497,7 +457,7 @@ export class GameState{
             }
         }
 
-        let onTagGainedTriggers = newState.cards.getTriggersOnGainedTag()
+        let onTagGainedTriggers = newState.getTriggersIdOnGainedTag()
         if(onTagGainedTriggers.length!=0){
             let eventsOnTagGained = this.projectCardPlayed.getTriggerByTagGained(card, onTagGainedTriggers)
             if(eventsOnTagGained!=undefined){
@@ -513,11 +473,11 @@ export class GameState{
         events.reverse()
         this.addEventQueue(events, 'first')
 	}
-    setClientPlayerTriggerAsInactive(triggerId: number): void {
-        let newState: PlayerStateModel = this.getClientPlayerState()
-        newState.cards.setTriggerAsInactive(triggerId)
+    setClientTriggerAsInactive(triggerId: number): void {
+        let newState: PlayerStateModel = this.getClientState()
+        newState.setTriggerInactive(triggerId)
 
-        this.updateClientPlayerState(newState)
+        this.updateClientState(newState)
     }
 	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
 		let playerState = this.getPlayerStateFromId(playerId)
@@ -526,10 +486,10 @@ export class GameState{
 	}
     addGlobalParameterStepsEOPtoPlayerId(playerId:number, parameter:GlobalParameterValue): void {
         let newState = this.getPlayerStateFromId(playerId)
-		newState.globalParameter.addStepToParameterEOP(parameter)
+		newState.addGlobalParameterStepEOP(parameter)
 		this.updatePlayerState(playerId, newState)
 
-        let triggers = newState.cards.getTriggersOnParameterIncreaseId()
+        let triggers = newState.getTriggersIdOnParameterIncrease()
         if(triggers.length===0){return}
 
         let events = this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)
@@ -539,28 +499,28 @@ export class GameState{
         this.addEventQueue(events, 'first')
 
     }
-    addRessourceToClientPlayer(ressources: RessourceStock[]): void {
-        let playerState = this.getClientPlayerState()
+    addRessourceToClient(ressources: RessourceStock[]): void {
+        let playerState = this.getClientState()
 
         for(let ressource of ressources){
             playerState.addRessource(ressource.name, ressource.valueStock)
         }
-        this.updateClientPlayerState(playerState)
+        this.updateClientState(playerState)
     }
-    addRessourceToClientPlayerCard(cardStock: CardRessourceStock): void {
-        let newState = this.getClientPlayerState()
+    addRessourceToClientCard(cardStock: CardRessourceStock): void {
+        let newState = this.getClientState()
 
         for(let stock of cardStock.stock){
-            newState.cards.addRessourceToCard(cardStock.cardId, stock)
+            newState.addRessourceToCard(cardStock.cardId, stock)
         }
 
-        this.updateClientPlayerState(newState)
+        this.updateClientState(newState)
 
         for(let ressource of cardStock.stock){
-            let card = newState.cards.getPlayedProjectCardFromId(cardStock.cardId)
+            let card = newState.getProjectPlayedModelFromId(cardStock.cardId)
             if(!card){continue}
 
-            let triggers = newState.cards.getTriggersOnRessourceAddedToCardId()
+            let triggers = newState.getTriggersIdOnRessourceAddedToCard()
             if(triggers.length===0){break}
 
             let events = this.projectCardPlayed.getEventTriggerByRessourceAddedToCard(
@@ -572,18 +532,18 @@ export class GameState{
             this.addEventQueue(events, 'first')
         }
     }
-    addClientPlayerResearchScanValue(scan: number): void {
-        let newState = this.getClientPlayerState()
+    addClientResearchScanValue(scan: number): void {
+        let newState = this.getClientState()
         newState.addResearchValue({scan:scan})
-        this.updateClientPlayerState(newState)
+        this.updateClientState(newState)
     }
-    addClientPlayerResearchKeepValue(keep: number): void {
-        let newState = this.getClientPlayerState()
+    addClientResearchKeepValue(keep: number): void {
+        let newState = this.getClientState()
         newState.addResearchValue({keep:keep})
-        this.updateClientPlayerState(newState)
+        this.updateClientState(newState)
     }
-    getClientPlayerResearchMods(): ScanKeep {
-        return this.getClientPlayerState().getResearch()
+    getClientResearchMods(): ScanKeep {
+        return this.getClientState().getResearch()
     }
     handleWsDrawResult(wsDrawResult: WsDrawResult): void {
         let eventFound: boolean = false

@@ -10,8 +10,8 @@ import { GameState } from '../../../services/core-game/game-state.service';
 })
 export class PlayerReadyComponent {
   constructor(private gameState: GameState){};
-  
+
   ready(isReady:boolean){
-    this.gameState.setClientPlayerReady(isReady)
+    this.gameState.setClientReady(isReady)
   };
 }
