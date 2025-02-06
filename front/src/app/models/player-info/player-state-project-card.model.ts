@@ -29,7 +29,7 @@ export class PlayerProjectCardState {
         if(card.cardSummaryType!='trigger'){return}
         this.triggers.playTrigger(card.id)
     }
-	addCardsToHand(cards: number | number[]){this.hand.concat(this.hand, Utils.toNumberArray(cards))}
+	addCardsToHand(cards: number | number[]){this.hand = this.hand.concat(this.hand, Utils.toNumberArray(cards))}
 	removeCardsFromHand(cards: number | number[]):void{
 		let cardList = Utils.toNumberArray(cards)
 		for(let card of cardList){
