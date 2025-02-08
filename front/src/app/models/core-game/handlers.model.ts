@@ -116,30 +116,32 @@ export class EventHandler {
         //reset currentEvent parameters
 		event.deactivateSelection()
 		let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
-		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientPlayerStateHandProject()}
+		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList()}
 
 		//check per subType special rules:
 		switch(subType){
 			case('selectCardForcedSell'):{
 				Utils.logEventResolution('resolving event: ','EventCardSelector ', event.subType)
-                let playerCards = this.gameStateService.getClientPlayerState().cards
-                if(playerCards.hand.length <= playerCards.maximum){
+                let clientState = this.gameStateService.getClientState()
+				let currentSize = clientState.getHandCurrentSize()
+				let maximumSize = clientState.getHandMaximumSize()
+                if(currentSize <= maximumSize){
                     event.finalized = true
                     break
                 }
-				event.cardSelector.selectionQuantity = playerCards.hand.length - playerCards.maximum
+				event.cardSelector.selectionQuantity = currentSize - maximumSize
 				event.activateSelection()
-				event.cardSelector.stateFromParent = {selectable:true, ignoreCost:true}
+				event.cardSelector.stateFromParent =  Utils.toFullCardState({selectable:true, ignoreCost:true})
 				event.title = `Too many cards in hand, please select ${event.cardSelector.selectionQuantity} cards to sell or more.`
 				break
 			}
 			case('discardCards'):case('selectCardOptionalSell'):{
 				event.activateSelection()
-				event.cardSelector.stateFromParent = {selectable:true, ignoreCost:true}
+				event.cardSelector.stateFromParent =  Utils.toFullCardState({selectable:true, ignoreCost:true})
 				break
 			}
 			case('addRessourceToSelectedCard'):{
-				let selectFrom = this.gameStateService.getClientPlayerState().cards.getProjectPlayedList(event.cardSelector.filter)
+				let selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.cardSelector.filter)
 				if(selectFrom.length===0){event.finalized=true;break}
 				event.activateSelection()
 				event.cardSelector.selectFrom = selectFrom
@@ -181,7 +183,7 @@ export class EventHandler {
         switch(event.subType){
 			case('selectCardForcedSell'):case('selectCardOptionalSell'):case('discardCards'):{
 				event.finalized = true
-				this.gameStateService.removeCardFromPlayerHand(this.clientPlayerId, event.cardSelector.selectedList)
+				this.gameStateService.removeCardsFromClientHand(Utils.toCardsIdList(event.cardSelector.selectedList))
 
 				if(event.subType==='discardCards'){break}
 				this.gameStateService.sellCardsFromClientHand(event.cardSelector.selectedList.length)
@@ -191,11 +193,11 @@ export class EventHandler {
 				break
 			}
 			case('researchPhaseResult'):{
-				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
+				this.gameStateService.addCardsToClientHand(this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
 				break
 			}
 			case('scanKeepResult'):{
-				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
+				this.gameStateService.addCardsToClientHand(this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
@@ -210,7 +212,7 @@ export class EventHandler {
 				let stock: AdvancedRessourceStock[] = event.advancedRessource?[event.advancedRessource]:[]
 				if(stock.length===0){break}
 
-				this.gameStateService.addRessourceToClientPlayerCard({cardId: event.cardSelector.selectedList[0].id,stock: stock})
+				this.gameStateService.addRessourceToClientCard({cardId: event.cardSelector.selectedList[0].id,stock: stock})
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
@@ -233,9 +235,9 @@ export class EventHandler {
 
 		switch(event.subType){
 			case('endOfPhase'):{
-				this.gameStateService.setClientPlayerReady(true)
-				this.rxStompService.publishPlayerState(this.gameStateService.getClientPlayerState())
-				//this.rxStompService.publishClientPlayerReady(true)
+				this.gameStateService.setClientReady(true)
+				this.rxStompService.publishPlayerState(this.gameStateService.getClientState())
+				//this.rxStompService.publishClientReady(true)
 				break
 			}
 			case('buildCard'):{
@@ -248,7 +250,7 @@ export class EventHandler {
 			}
 			case('drawResult'):{
 				if(event.drawResultList===undefined){break}
-				this.gameStateService.addCardToPlayerHand(this.clientPlayerId, event.drawResultList)
+				this.gameStateService.addCardsToClientHand(event.drawResultList)
 				break
 			}
 			case('increaseGlobalParameter'):{
@@ -259,10 +261,10 @@ export class EventHandler {
 			case('increaseResearchScanKeep'):{
 				if(!event.increaseResearchScanKeep){break}
 				if(event.increaseResearchScanKeep.scan!=undefined && event.increaseResearchScanKeep.scan>0){
-					this.gameStateService.addClientPlayerResearchScanValue(event.increaseResearchScanKeep.scan)
+					this.gameStateService.addClientResearchScanValue(event.increaseResearchScanKeep.scan)
 				}
 				if(event.increaseResearchScanKeep.keep!=undefined && event.increaseResearchScanKeep.keep>0){
-					this.gameStateService.addClientPlayerResearchKeepValue(event.increaseResearchScanKeep.keep)
+					this.gameStateService.addClientResearchKeepValue(event.increaseResearchScanKeep.keep)
 				}
 				break
 			}
@@ -276,7 +278,7 @@ export class EventHandler {
 					baseRessources.push(event.baseRessource)
 				}
 
-				this.gameStateService.addRessourceToClientPlayer(baseRessources)
+				this.gameStateService.addRessourceToClient(baseRessources)
 				break
 			}
 			case('planificationPhase'):{
@@ -349,11 +351,11 @@ export class EventHandler {
 					cardId:event.targetCardId,
 					stock:ressourceStock
 				}
-				this.gameStateService.addRessourceToClientPlayerCard(cardStock)
+				this.gameStateService.addRessourceToClientCard(cardStock)
 				break
 			}
 			case('deactivateTrigger'):{
-				this.gameStateService.setClientPlayerTriggerAsInactive(event.targetCardId)
+				this.gameStateService.setClientTriggerAsInactive(event.targetCardId)
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventTargetCards: ', this.currentEvent)}
@@ -473,7 +475,7 @@ class PhaseResolveHandler {
 	private clientPlayerId: number = this.gameStateService.clientPlayerId
 
 	private getCurrentUpgradedPhaseCard(): PhaseCardModel[] {
-		return this.gameStateService.getClientPlayerUpgradedPhaseCards()
+		return this.gameStateService.getClientUpgradedPhaseCards()
 	}
 	private refreshCurrentUpgradedPhaseCard(): void {
 		this.currentUpgradedPhaseCards = this.getCurrentUpgradedPhaseCard()
@@ -504,7 +506,7 @@ class PhaseResolveHandler {
 	resolveProduction(): void {
 		this.refreshCurrentUpgradedPhaseCard()
 
-		let clientState = this.gameStateService.getClientPlayerState()
+		let clientState = this.gameStateService.getClientState()
 		let newClientRessource: RessourceInfo[] = []
 
 		newClientRessource = clientState.getRessources()
@@ -539,7 +541,7 @@ class PhaseResolveHandler {
 			}
 		}
 
-		this.gameStateService.updateClientPlayerState(clientState)
+		this.gameStateService.updateClientState(clientState)
 	}
 	private getProductionPhaseCardSelectionBonus(): number {
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return 0}
@@ -558,7 +560,7 @@ class PhaseResolveHandler {
 	resolveResearch(): void {
 		this.refreshCurrentUpgradedPhaseCard()
 		let baseScanKeep: ScanKeep = {scan:2,keep:1}
-		let clientState = this.gameStateService.getClientPlayerState()
+		let clientState = this.gameStateService.getClientState()
 		let modScanKeep: ScanKeep = clientState.getResearch()
 		let bonusScanKeep: ScanKeep = this.getResearchPhaseCardSelectionBonus()
 		let totalScanKeep = {

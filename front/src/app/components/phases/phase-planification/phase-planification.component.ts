@@ -58,7 +58,7 @@ export class PhasePlanificationComponent {
     this.buttonList.push(newButton)
   }
   setPhaseCards(): void {
-    this.selectedPhaseCards = this.gameStateService.getClientPlayerUpgradedPhaseCards()
+    this.selectedPhaseCards = this.gameStateService.getClientUpgradedPhaseCards()
   }
   setCurrentPhaseCard(): void {
     for(let index of phaseIndexMap.keys()){

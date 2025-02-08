@@ -1,5 +1,5 @@
-<div class="wrapper-selection-border" [ngClass]="[state.selected===true? 'element-selected':'element-not-selected', (state.playable===false && state.selectable===true && state.ignoreCost!=true)? 'unplayable':'']">
-    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, ((state.selectable===true && state.playable===true) || (state.selectable===true && !state.playable) || state.ignoreCost)? 'element-selectable': '', state.selected!=true? 'selected':'']">
+<div class="wrapper-selection-border" [ngClass]="[state.isSelected()===true? 'element-selected':'element-not-selected', (state.isBuildable()===false && state.isSelectable()===true && state.isIgnoreCost()!=true)? 'unplayable':'']">
+    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, ((state.isSelectable()===true && state.isBuildable()===true) || (state.isSelectable()===true && !state.isBuildable()) || state.isIgnoreCost())? 'element-selectable': '', state.isSelected()!=true? 'selected':'']">
         <div class="wrapper-card-grid">
             <div class="grid-box-cost">
                 <div class="wrapper-cost">
@@ -108,12 +108,13 @@
     </button>
 </div>
 
-<div *ngIf="state?.activable===true" class="wrapper-activation">
+<div *ngIf="state.isActivable()===true" class="wrapper-activation">
     <button  (click)="activate(1)" class="validation-button">Activate</button>
     <button  (click)="activate(2)" class="validation-button">Activate again</button>
 </div>
 <p>{{projectCard.id}} {{projectCard.cardCode}}</p>
 <p>{{projectCard.stock | json}}</p>
 <p>{{projectCard.stockable | json}}</p>
-<p>selectable: {{state.selectable}}</p>
-<p>playable: {{state.playable}}</p>
+<p>selectable: {{state.getCurrentState() | json}}</p>
+<p>initial state: {{initialState | json}}</p>
+<p>parent state: {{stateFromParent | json}}</p>

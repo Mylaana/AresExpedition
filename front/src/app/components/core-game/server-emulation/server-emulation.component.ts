@@ -1,15 +1,12 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
-import { SelectablePhase } from '../../../types/global.type';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
 import { MessageContentQueryEnum } from '../../../enum/websocket.enum';
 import { Subscription } from 'rxjs';
 import { RxStompService } from '../../../services/websocket/rx-stomp.service';
 import { WebsocketQueryMessageFactory } from '../../../services/designers/websocket-message-factory.service';
-import { Message } from '@stomp/stompjs';
-import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../../global/global-const';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
 
@@ -79,8 +76,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		//force draw card list for debug purpose
 		//let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141, 253]
 		let cardDrawList: number[] = [253, 253]
-		this.gameStateService.addRessourceToClientPlayer([{name:"megacredit", valueStock:50}])
-		this.gameStateService.addCardToPlayerHand(this.gameStateService.clientPlayerId, cardDrawList)
+		this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:50}])
+		this.gameStateService.addCardsToClientHand(cardDrawList)
 	}
 
 	ngAfterViewInit(): void {

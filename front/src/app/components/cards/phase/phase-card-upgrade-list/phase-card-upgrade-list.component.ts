@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhaseCardComponent } from '../phase-card/phase-card.component';
-import { CardState } from '../../../../models/cards/card-cost.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PhaseCardGroupModel, PhaseCardModel } from '../../../../models/cards/phase-card.model';
-import { PhaseCardInfoService } from '../../../../services/cards/phase-card-info.service';
 import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
+import { CardStateModel } from '../../../../models/cards/card-state.model';
+import { CardState } from '../../../../interfaces/card.interface';
+import { Utils } from '../../../../utils/utils';
 
 
 @Component({
@@ -38,7 +39,6 @@ export class PhaseCardUpgradeListComponent {
 
 	constructor(
 		private gameStateService: GameState,
-		private phaseCardInfoService: PhaseCardInfoService
 	){}
 
 	ngOnInit(): void {
@@ -47,7 +47,7 @@ export class PhaseCardUpgradeListComponent {
 		this.phaseCardModels = this.phaseGroup.phaseCards
 
 		this.loaded = true
-		this.cardInitialState = {upgradable: this.canUpgrade()}
+		this.cardInitialState = Utils.toFullCardState({upgradable: this.canUpgrade()})
 		this.setState()
 	}
 	refreshPhaseGroup(): void {
@@ -57,7 +57,7 @@ export class PhaseCardUpgradeListComponent {
 	}
 	setUpgradeFinished(): void {
 		this.upgradeFinished = true
-		this.stateFromParent = {upgradable: this.canUpgrade()}
+		this.stateFromParent = Utils.toFullCardState({upgradable: this.canUpgrade()})
 		console.log(this.phaseIndex, )
 	}
 	canUpgrade(): boolean {
@@ -67,7 +67,7 @@ export class PhaseCardUpgradeListComponent {
 	}
 	private setState(): void {
 		if(this.loaded===false){return}
-		this.stateFromParent = {upgradable: this.canUpgrade()}
+		this.stateFromParent = Utils.toFullCardState({upgradable: this.canUpgrade()})
 	}
 	public phaseCardUpgraded(upgradeType: PhaseCardUpgradeType): void {
 		this.cardUpgraded.emit()

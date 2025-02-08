@@ -1,13 +1,13 @@
-import { ProjectCardState } from "../../models/cards/project-card.model";
 import { PlayerInfoStateModel } from "../../models/player-info/player-state-info.model";
 import { PlayerOtherStateModel } from "../../models/player-info/player-state-other.model";
 import { PlayerPhaseCardState } from "../../models/player-info/player-state-phase-card.model";
+import { PlayerProjectCardState } from "../../models/player-info/player-state-project-card.model";
 import { PlayerRessourceStateModel } from "../../models/player-info/player-state-ressource.model";
 import { PlayerScoreStateModel } from "../../models/player-info/player-state-score.model";
 import { PlayerTagStateModel } from "../../models/player-info/player-state-tag.model";
 
 export interface PlayerStateModelFullDTO {
-    cards?: ProjectCardState
+    cards?: PlayerProjectCardState
 	globalParameter: any // = new GlobalParameterModel
 
 	infoState: PlayerInfoStateModel

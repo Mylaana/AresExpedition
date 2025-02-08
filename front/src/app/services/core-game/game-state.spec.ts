@@ -31,21 +31,19 @@ describe('Services - Core game - Game state', () => {
 			injector = TestBed.inject(Injector)
 
 			projectCardService = injector.get(ProjectCardInfoService)
-			phaseCardService = injector.get(PhaseCardInfoService)
 			scalingProdService = injector.get(ProjectCardScalingProductionsService)
 			playedCardService = new ProjectCardPlayedEffectService(scalingProdService)
 			rxStompService = injector.get(RxStompService)
 
 			gameState = new GameState(
 				projectCardService,
-				phaseCardService,
 				playedCardService,
 				rxStompService,
 				injector
 			  )
 		})
         it('should evaluate getClientPlayerState', () => {
-            let state = gameState.getClientPlayerState()
+            let state = gameState.getClientState()
             const spy = spyOn(GameState.prototype, 'getPlayerStateFromId')
             expect(state).toBeUndefined()
             expect(spy).toHaveBeenCalled

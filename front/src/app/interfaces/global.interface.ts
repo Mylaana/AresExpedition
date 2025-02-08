@@ -1,12 +1,12 @@
-import { AdvancedRessourceType, GameItemType, GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type";
-import { PhaseCardType } from "../types/phase-card.type";
-import { ProjectCardModel } from "../models/cards/project-card.model";
-import { MinMaxEqualType } from "../types/global.type";
-import { GlobalParameterName } from "../types/global.type";
-import { CardState } from "../models/cards/card-cost.model";
-import { RessourceType } from "../types/global.type";
-import { ProjectFilterType } from "../types/project-card.type";
-import { SelectablePhaseEnum } from "../enum/phase.enum";
+import { AdvancedRessourceType, GameItemType, GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type"
+import { PhaseCardType } from "../types/phase-card.type"
+import { ProjectCardModel } from "../models/cards/project-card.model"
+import { MinMaxEqualType } from "../types/global.type"
+import { GlobalParameterName } from "../types/global.type"
+import { RessourceType } from "../types/global.type"
+import { ProjectFilterType } from "../types/project-card.type"
+import { SelectablePhaseEnum } from "../enum/phase.enum"
+import { CardState } from "./card.interface"
 
 export interface RessourceInfo {
     id: number,
@@ -29,35 +29,35 @@ export interface AdvancedRessourceStock {
 export interface TagInfo {
     id: number,
     name: TagType,
-    idImageUrl: number;
-    valueMod: number;
-    valueCount: number;
+    idImageUrl: number
+    valueMod: number
+    valueCount: number
 }
 
 export interface PlayerPhase {
-    playerId: number;
-    currentSelectedPhase: SelectablePhaseEnum;
-    currentPhaseType: PhaseCardType;
-    previousSelectedPhase: SelectablePhaseEnum;
+    playerId: number
+    currentSelectedPhase: SelectablePhaseEnum
+    currentPhaseType: PhaseCardType
+    previousSelectedPhase: SelectablePhaseEnum
 }
 
 export interface CardOptions {
-	initialState?: CardState;
-    selectable?: boolean;
-    playable?: boolean;
-	upgradable?: boolean;
-	activable?:boolean;
+	initialState?: CardState
+    selectable?: boolean
+    playable?: boolean
+	upgradable?: boolean
+	activable?:boolean
 }
 
 export interface CardSelector {
-    selectFrom: ProjectCardModel[];
-    selectedList: ProjectCardModel[];
-    selectionQuantity: number;
-    selectionQuantityTreshold: MinMaxEqualType;
+    selectFrom: ProjectCardModel[]
+    selectedList: ProjectCardModel[]
+    selectionQuantity: number
+    selectionQuantityTreshold: MinMaxEqualType
 
-    filter?: ProjectFilter;
-    cardInitialState?: CardState;
-	stateFromParent?: CardState;
+    filter?: ProjectFilter
+    cardInitialState?: Partial<CardState>
+	stateFromParent?: Partial<CardState>
 }
 
 export interface GlobalParameter {
@@ -103,4 +103,4 @@ export interface GameItem {
     description: GameItemType,
     imageUrl: string,
     name: string
-};
+}

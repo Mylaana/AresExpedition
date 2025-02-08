@@ -1,6 +1,6 @@
-import { CardState } from "./card-cost.model";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { CardState } from "../../interfaces/card.interface";
 
 export class PhaseCardGroupModel {
 	phaseIndex!: number;
@@ -49,8 +49,16 @@ export class PhaseCardModel {
 	}
 
 	getPhaseCardState(): CardState {
-		let state: CardState = {}
-		state.upgraded = this.phaseCardUpgraded
+		let state: CardState
+		state = {
+			selectable: false,
+			selected: false,
+			upgradable: false,
+			upgraded: this.phaseCardUpgraded,
+			buildable: false,
+			activable: false,
+			ignoreCost: false
+		}
 		return state
 	}
 }

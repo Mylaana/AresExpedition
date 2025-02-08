@@ -2,10 +2,10 @@ import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChange
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
-import { CardState } from '../../../../models/cards/card-cost.model';
 import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
 import { EventBaseModel, EventCardSelector, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
+import { CardState } from '../../../../interfaces/card.interface';
 
 @Component({
   selector: 'app-project-card-list',
@@ -96,7 +96,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	public cardStateChange(cardChange: {card: ProjectCardModel, state:CardState}): void {
 		this.resetCardList()
 		for(let card of this.projectCards){
-			if(card.state?.selected!=undefined && card.state.selected===true){
+			if(card.state.isSelected()===true){
 				this.selectedCardList.push(card.projectCard)
 			}
 		}
@@ -189,7 +189,9 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		this.setDisplay()
 
 		if(this.displayedCards!=undefined && this.displayedCards.length===0){this.displayedCards=undefined}
-		if(this.cardSelector.cardInitialState===undefined){this.cardSelector.cardInitialState={selected:false, selectable:false}}
+		if(this.cardSelector.cardInitialState===undefined){
+			this.cardSelector.cardInitialState= Utils.toFullCardState({selected:false, selectable:false})
+		}
 	}
 	getDisplayFromSelectable(): ProjectCardModel[] {
 		return this.filterCards(

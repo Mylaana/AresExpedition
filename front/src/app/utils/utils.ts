@@ -1,6 +1,8 @@
 import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST, GLOBAL_CLIENT_ID } from "../global/global-const"
+import { CardState } from "../interfaces/card.interface"
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
+import { ProjectCardModel } from "../models/cards/project-card.model"
 import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
 
 const PhaseUpgrade: Map<PhaseCardUpgradeType, SelectablePhaseEnum> = new Map<PhaseCardUpgradeType, SelectablePhaseEnum>([
@@ -94,5 +96,27 @@ export class Utils {
 			case("research"):{return SelectablePhaseEnum.research}
 			default:{return SelectablePhaseEnum.undefined}
 		}
+	}
+	public static toNumberArray(value: number | number[]): number[] {
+		if(Array.isArray(value)){return value}
+		return [value]
+	}
+	public static toCardsIdList(modelList: ProjectCardModel[]): number[]{
+		let list: number[] = []
+		for(let card of modelList){
+			list.push(card.id)
+		}
+		return list
+	}
+	public static toFullCardState(partialState: Partial<CardState>): CardState {
+		return Object.assign({
+			selectable: false,
+			selected: false,
+			upgradable: false,
+			upgraded: false,
+			buildable: false,
+			activable: false,
+			ignoreCost: false
+		}, partialState);
 	}
 }

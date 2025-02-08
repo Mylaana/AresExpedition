@@ -76,7 +76,7 @@ export class EventDesigner{
             }
             case('actionPhase'):{
                 event.cardSelector.filter = {type: 'action'}
-                event.cardSelector.cardInitialState = {activable: true, selectable: false, playable: false, ignoreCost:true}
+                event.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
                 event.title = 'Activate cards :'
                 break
             }
@@ -121,7 +121,7 @@ export class EventDesigner{
     public static createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType): EventCardBuilder {
         let event = new EventCardBuilder
         event.cardSelector = this.generateCardSelector()
-        event.cardSelector.cardInitialState = {selectable: false, playable: true}
+        event.cardSelector.cardInitialState = {selectable: false, buildable: true}
         event.subType = subType
         event.cardBuilder = []
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
