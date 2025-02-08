@@ -178,7 +178,7 @@ describe('Service - Designers - Event', () => {
                 expectedSubType = 'actionPhase'
                 expectedEvent.subType = expectedSubType
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, playable: false, ignoreCost:true}
+                expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
                 expectedEvent.title = 'Activate cards :'
                 expectedEvent.cardSelector.filter = {type:"action"}
 
@@ -291,7 +291,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.cardSelector = expectedSelector
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 const cardBuilderSpy = spyOn<any>(EventDesigner, 'generateCardBuilder').and.returnValue(new CardBuilder)
-                expectedEvent.cardSelector.cardInitialState = {selectable: false, playable: true}
+                expectedEvent.cardSelector.cardInitialState = {selectable: false, buildable: true}
                 expectedEvent.refreshSelectorOnSwitch = false
                 expectedEvent.buildDiscountUsed = false
 
@@ -338,7 +338,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.cardSelector = expectedSelector
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 const cardBuilderSpy = spyOn<any>(EventDesigner, 'generateCardBuilder').and.returnValue(new CardBuilder)
-                expectedEvent.cardSelector.cardInitialState = {selectable: false, playable: true}
+                expectedEvent.cardSelector.cardInitialState = {selectable: false, buildable: true}
                 expectedEvent.refreshSelectorOnSwitch = false
                 expectedEvent.buildDiscountUsed = false
                 expectedEvent.title = 'Play Blue/Red cards :'
