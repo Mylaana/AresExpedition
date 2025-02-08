@@ -6,9 +6,7 @@ import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/la
 import { CardCost } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
-import { RessourceInfo } from '../../../../interfaces/global.interface';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
-import { Utils } from '../../../../utils/utils';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
 
 
@@ -58,8 +56,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		)
 		this.checkPlayable()
 	}
-	override resetCardState(): void {
-		super.resetCardState()
+	resetCardState(): void {
 		if(this.megacreditAvailable===0){return}
 		this.updateCost()
 		this.checkPlayable()
@@ -76,9 +73,9 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		return newTagsId
 	}
 	cardClick(){
-		if(this.state.selectable!=true){return}
-		if(this.state.playable===false && this.state.ignoreCost!=true){return}
-		this.state.selected = this.state.selected===false
+		if(this.state.isSelectable()!=true){return}
+		if(this.state.isBuildable()===false && this.state.isIgnoreCost()!=true){return}
+		this.state.setSelected(this.state.isSelected()===false)
 		this.cardStateChange.emit({card:this.projectCard, state: this.state})
 	}
 	private updateClientState(state: PlayerStateModel): void {
@@ -99,7 +96,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	}
 
 	checkPlayable(): void {
-		this.state.playable = this.megacreditAvailable >= this.projectCard.cost
+		this.state.setBuildable(this.megacreditAvailable >= this.projectCard.cost)
 	}
 
 	activate(activationCount: number): void {

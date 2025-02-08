@@ -91,16 +91,12 @@ export class GameEventComponent {
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
 		this.clientPlayerId = this.gameStateService.clientPlayerId
+		this.sellCardsButton = ButtonDesigner.createNonEventButton('sellOptionalCard')
+		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
 
-		this.gameStateService.currentPhase.subscribe(
-			phase => this.updatePhase(phase)
-		)
-		this.gameStateService.currentDrawQueue.subscribe(
-			drawQueue => this.handleDrawQueueNext(drawQueue)
-		)
-		this.gameStateService.currentEventQueue.subscribe(
-			eventQueue => this.handleEventQueueNext(eventQueue)
-		)
+		this.gameStateService.currentPhase.subscribe(phase => this.updatePhase(phase))
+		this.gameStateService.currentDrawQueue.subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
+		this.gameStateService.currentEventQueue.subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.groupSubscription = this.rxStompService
 		.watch(GLOBAL_WS_GROUP)
 		.subscribe((message: Message) => {
@@ -112,8 +108,7 @@ export class GameEventComponent {
 		  this.handlePlayerMessage(message.body)
 		});
 
-		this.sellCardsButton = ButtonDesigner.createNonEventButton('sellOptionalCard')
-		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
+
 	}
 
 	updatePhase(phase:NonSelectablePhaseEnum):void{
@@ -162,7 +157,6 @@ export class GameEventComponent {
 	}
 	public updateSelectedCardList(cardList: ProjectCardModel[]){this.eventHandler.updateSelectedCardList(cardList)}
 	public nonEventButtonClicked(button: NonEventButton){
-		console.log('non event click:', button)
 		switch(button.name){
 			case('sellOptionalCard'):{
 				this.gameStateService.addEventQueue(EventDesigner.createCardSelector('selectCardOptionalSell'), 'first')

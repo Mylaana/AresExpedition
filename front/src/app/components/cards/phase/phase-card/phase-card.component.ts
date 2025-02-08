@@ -1,11 +1,11 @@
 import { Component, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardState } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { PhaseCardModel } from '../../../../models/cards/phase-card.model';
 import { Utils } from '../../../../utils/utils';
 import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
 import { EventEmitter } from '@angular/core';
+import { CardState } from '../../../../interfaces/card.interface';
 
 
 type updateType = 'upgrade'
@@ -39,6 +39,6 @@ export class PhaseCardComponent extends BaseCardComponent {
 		this.setState()
 	}
 	private setState(): void {
-		this.state.upgraded = this.phaseCard.phaseCardUpgraded
+		this.state.setUpgraded(this.phaseCard.phaseCardUpgraded)
 	}
 }

@@ -97,13 +97,13 @@ export class PlayerStateModel {
 
 	addCardsToHand(cards: number | number[]) {this.projectCardState.addCardsToHand(cards)}
 	removeCardsFromHand(cardIdList: number | number[]): void {this.projectCardState.removeCardsFromHand(cardIdList)}
-	getProjectHandIdList(): number[] {return this.projectCardState.getProjectHandIdList()}
+	getProjectHandIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectHandIdList(filter)}
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
 
 	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)}
 	getProjectPlayedModelFromId(cardId:number): ProjectCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}
-	getProjectPlayedIdList(): number[] {return this.projectCardState.getProjectPlayedIdList()}
+	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): ProjectCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
 
 

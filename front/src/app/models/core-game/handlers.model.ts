@@ -116,7 +116,7 @@ export class EventHandler {
         //reset currentEvent parameters
 		event.deactivateSelection()
 		let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
-		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientProjectPlayedModelList()}
+		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList()}
 
 		//check per subType special rules:
 		switch(subType){
@@ -131,13 +131,13 @@ export class EventHandler {
                 }
 				event.cardSelector.selectionQuantity = currentSize - maximumSize
 				event.activateSelection()
-				event.cardSelector.stateFromParent = {selectable:true, ignoreCost:true}
+				event.cardSelector.stateFromParent =  Utils.toFullCardState({selectable:true, ignoreCost:true})
 				event.title = `Too many cards in hand, please select ${event.cardSelector.selectionQuantity} cards to sell or more.`
 				break
 			}
 			case('discardCards'):case('selectCardOptionalSell'):{
 				event.activateSelection()
-				event.cardSelector.stateFromParent = {selectable:true, ignoreCost:true}
+				event.cardSelector.stateFromParent =  Utils.toFullCardState({selectable:true, ignoreCost:true})
 				break
 			}
 			case('addRessourceToSelectedCard'):{

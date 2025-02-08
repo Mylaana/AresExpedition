@@ -2,8 +2,8 @@ import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardS
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton } from "./button.model";
 import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
-import { CardState } from "../cards/card-cost.model";
 import { ProjectCardModel } from "../cards/project-card.model";
+import { CardState } from "../../interfaces/card.interface";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -248,11 +248,11 @@ export class EventCardBuilder extends EventBaseCardSelector {
 
         switch(button.name){
             case('selectCard'):{
-                this.cardSelector.stateFromParent = {selectable:true}
+                this.cardSelector.stateFromParent = {selectable:true, buildable:true}
                 break
             }
             case('cancelSelectCard'):{
-				this.cardSelector.stateFromParent = {selectable:false}
+				this.cardSelector.stateFromParent = {selectable:false, buildable:false}
 				break
             }
             case('buildCard'):{
@@ -271,10 +271,9 @@ export class EventCardBuilder extends EventBaseCardSelector {
         activeZone.resolveCardBuilderButtonClicked(button)
 
         if(button.name==='selectCard'){return}
-        this.cardSelector.stateFromParent = {selectable:false, playable:false}
+        this.cardSelector.stateFromParent = {selectable:false, buildable:false}
     }
 	private resetNonFocusedBuildersState(){
-		//if(!this.cardBuilderIdHavingFocus){return}
 		for(let i=0; i<this.cardBuilder.length; i++){
 			if(i===this.cardBuilderIdHavingFocus){continue}
 			this.cardBuilder[i].resetButtons()

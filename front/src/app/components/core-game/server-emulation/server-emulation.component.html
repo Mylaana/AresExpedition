@@ -10,18 +10,11 @@
         <button (click)="sendBotsReady()" class="phase-research phase-selection-button clickable">Bots ready</button>
         <button (click)="sendtest()" class="phase-research phase-selection-button clickable">test</button>
     </div>
-    
+
     <div class="wrapper-game-state">
         <button (click)="printPlayersState()">players state</button>
     </div>
-    <p>drawQueue :</p>
-    <div *ngFor="let queue of currentDrawQueue">
-        <p>{{queue.id}} [{{queue.drawResultCardList}}] {{queue.finalized}}</p>
-    </div>
-    <div>
-        <p>cards in deck:</p>
-        <p>{{cardsDeck.length}}</p>
-    </div>
+	<p>{{currentEventQueue[0] | json}}</p>
 	<p>eventQueue :</p>
     <div *ngFor="let event of currentEventQueue">
         <p>[id]:{{event.id}}  [type]:{{event.type}}  [subtype]:{{event.subType}}  [finalized]:{{event.finalized}}  [autoFinalize]:{{event.autoFinalize}}</p>

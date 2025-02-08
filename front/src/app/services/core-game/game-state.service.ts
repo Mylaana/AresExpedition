@@ -317,21 +317,10 @@ export class GameState{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
 
-	getClientPhaseSelected(): SelectablePhaseEnum | undefined {
-		return this.getClientState().getPhaseSelected()
-	}
-
-    getClientUpgradedPhaseCards(): PhaseCardModel[] {
-        return this.getClientState().getUpgradedPhaseCards()
-    }
-
-    getClientHandIdList(): number[] {
-        return this.getClientState().getProjectHandIdList()
-    }
-
-    getClientHandModelList(): ProjectCardModel[] {
-        return this.projectCardService.getProjectCardList(this.getClientState().getProjectHandIdList())
-    }
+	getClientPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPhaseSelected()}
+    getClientUpgradedPhaseCards(): PhaseCardModel[] {return this.getClientState().getUpgradedPhaseCards()}
+    getClientHandIdList(): number[] {return this.getClientState().getProjectHandIdList()}
+    getClientHandModelList(): ProjectCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList())}
 
     getClientProjectPlayedIdList(): number[] {return this.getPlayerProjectPlayedIdList(this.clientPlayerId)}
 	getPlayerProjectPlayedIdList(playerId: number): number[] {return this.getPlayerStateFromId(playerId).getProjectPlayedIdList()}
