@@ -54,7 +54,7 @@ export class GameState{
     phase = new BehaviorSubject<NonSelectablePhaseEnum>(NonSelectablePhaseEnum.undefined)
     drawQueue = new BehaviorSubject<DrawEvent[]>([])
     eventQueue = new BehaviorSubject<EventBaseModel[]>([])
-	clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(new PlayerStateModel(this.injector))
+	clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
@@ -94,6 +94,8 @@ export class GameState{
 	){}
 
     addPlayer(playerName: string, playerColor: RGB): void {
+
+		/*
         //creates and add player to groupPlayerState
         let newPlayer = new PlayerStateModel(this.injector);
         newPlayer.setId(this.groupPlayerState.getValue().length)
@@ -119,6 +121,7 @@ export class GameState{
             "previousSelectedPhase": SelectablePhaseEnum.undefined
         }
         this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
+		*/
     };
 
     setPlayerIdList(playerIdList: number[]):void{

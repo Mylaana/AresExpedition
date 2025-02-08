@@ -1,4 +1,6 @@
+import { Injector } from "@angular/core"
 import { GAME_HAND_MAXIMUM_SIZE } from "../../global/global-const"
+import { PlayerProjectCardStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
 import { ProjectCardInitializeService } from "../../services/cards/project-card-initialize.service"
@@ -7,7 +9,7 @@ import { PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { ProjectCardModel, TriggerState } from "../cards/project-card.model"
 
-export class PlayerProjectCardState {
+export class PlayerProjectCardStateModel {
     private hand: number[] = []
     private projects: PlayedProject = {
         playedIdList: [],
@@ -16,10 +18,17 @@ export class PlayerProjectCardState {
     private triggers = new TriggerState
 	private handMaximumSize = GAME_HAND_MAXIMUM_SIZE
 
-    constructor(
-		private cardInfoService: ProjectCardInfoService,
-		private cardInitializeService: ProjectCardInitializeService
-	){}
+	private cardInfoService: ProjectCardInfoService
+	private cardInitializeService: ProjectCardInitializeService
+
+    constructor(private injector: Injector, data: PlayerProjectCardStateDTO,
+	){
+		this.cardInfoService = this.injector.get(ProjectCardInfoService)
+		this.cardInitializeService = this.injector.get(ProjectCardInitializeService)
+
+		this.hand = data.hand,
+		this.projects
+	}
 
     playCard(card: ProjectCardModel): void {
         this.projects.playedIdList.push(card.id)
@@ -90,5 +99,31 @@ export class PlayerProjectCardState {
 			idList.push(project.id)
 		}
 		return idList
+	}
+
+	toJson(): PlayerProjectCardStateDTO {
+		return {
+			hand: this.hand,
+			projects: this.projects,
+			triggers: this.triggers,
+			handMaximumSize: this.handMaximumSize
+		}
+	}
+	static fromJson(data: PlayerProjectCardStateDTO, injector: Injector): PlayerProjectCardStateModel {
+		if (!data.hand || !data.projects || !data.triggers || !data.handMaximumSize){
+			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
+		}
+		return new PlayerProjectCardStateModel(injector, data)
+	}
+	static empty(injector: Injector): PlayerProjectCardStateModel {
+		return new PlayerProjectCardStateModel(
+			injector,
+			{
+				hand: [],
+				handMaximumSize: 0,
+				projects: {playedIdList: [], playedProjectList: []},
+				triggers: new TriggerState
+			}
+		)
 	}
 }

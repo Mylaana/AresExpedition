@@ -1,4 +1,4 @@
-import { Component, OnInit , AfterViewInit, ViewChild} from '@angular/core';
+import { Component, OnInit , AfterViewInit, ViewChild, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelfInfoComponent } from './components/player-info/self-info/self-info.component';
 import { ServerEmulationComponent } from './components/core-game/server-emulation/server-emulation.component';
@@ -10,71 +10,110 @@ import { ProjectCardInfoService } from './services/cards/project-card-info.servi
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { PlayerPannelComponent } from './components/player-info/player-pannel/player-pannel.component';
 import { PlayerStateModel } from './models/player-info/player-state.model';
-
+import { WebsocketHandler } from './models/core-game/websocket-handler';
+import { RxStompService } from './services/websocket/rx-stomp.service';
+import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from './global/global-const';
+import { Message } from '@stomp/stompjs';
+import { PlayerMessageResult } from './interfaces/websocket.interface';
+import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
+import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    SelfInfoComponent,
-    ServerEmulationComponent,
-    GameEventComponent,
-    ProjectCardListComponent,
-    NavigationComponent,
-    PlayerPannelComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+	selector: 'app-root',
+	standalone: true,
+	imports: [
+		CommonModule,
+		SelfInfoComponent,
+		ServerEmulationComponent,
+		GameEventComponent,
+		ProjectCardListComponent,
+		NavigationComponent,
+		PlayerPannelComponent
+	],
+	templateUrl: './app.component.html',
+	styleUrl: './app.component.scss',
+	providers: [
+		WebsocketHandler
+	]
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  title = 'AresExpedition';
-  playerHand: ProjectCardModel[] = [];
-  playerPlayed: ProjectCardModel[] = [];
-  playerIdList: number[] = this.gameStateService.playerCount.getValue()
-  clientPlayerId!: number;
-  loading: boolean = false
-  @ViewChild('hand') handProjectList!: ProjectCardListComponent
+	title = 'AresExpedition';
+	playerHand: ProjectCardModel[] = [];
+	playerPlayed: ProjectCardModel[] = [];
+	playerIdList: number[] = this.gameStateService.playerCount.getValue()
+	clientPlayerId!: number;
+	loading: boolean = true
+	@ViewChild('hand') handProjectList!: ProjectCardListComponent
 
-  constructor(
-    private gameStateService: GameState,
-    private cardInfoService: ProjectCardInfoService,
-  ){}
+	private readonly wsHandler = inject(WebsocketHandler)
+	//@ts-ignore
+	private groupSubscription: Subscription;
+	//@ts-ignore
+	private playerSubscription: Subscription;
 
-  ngOnInit(): void {
-    this.clientPlayerId = this.gameStateService.clientPlayerId
+	constructor(
+		private gameStateService: GameState,
+		private cardInfoService: ProjectCardInfoService,
+		private rxStompService: RxStompService
+	){}
 
-    this.gameStateService.currentLoadingState.subscribe(
-      loading => this.loadingFinished(loading)
-    )
-  }
+	ngOnInit(): void {
+		this.clientPlayerId = this.gameStateService.clientPlayerId
 
-  ngAfterViewInit(): void{
-  //sets loading to true after view init
-    setTimeout(() => {
-      this.gameStateService.loading.next(false);
-    }, 0)
-  }
+		this.gameStateService.currentLoadingState.subscribe(
+			loading => this.loadingFinished(loading)
+		)
+		this.groupSubscription = this.rxStompService
+		.watch(GLOBAL_WS_GROUP)
+		.subscribe((message: Message) => {
+			this.handleGroupMessage(message.body)
+		});
+		this.playerSubscription = this.rxStompService
+		.watch(GLOBAL_WS_PLAYER)
+		.subscribe((message: Message) => {
+			this.handlePlayerMessage(message.body)
+		});
+	}
 
-  updateHandOnStateChange(state: PlayerStateModel[]): void {
-    let clientState = this.gameStateService.getClientState()
-    this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
-    this.playerPlayed = clientState.getProjectPlayedModelList()
-    this.handProjectList.updatePlayedCardList(this.playerPlayed)
-  }
-  updatePlayerList(playerIdList: number[]){
-    this.playerIdList = playerIdList
-  }
+	ngAfterViewInit(): void{
+	//sets loading to true after view init
+		return
+		setTimeout(() => {
+			this.gameStateService.loading.next(false);
+		}, 0)
+	}
 
-  loadingFinished(loading: boolean):void{
-    if(loading===true){return}
+	updateHandOnStateChange(state: PlayerStateModel[]): void {
+		let clientState = this.gameStateService.getClientState()
+		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
+		this.playerPlayed = clientState.getProjectPlayedModelList()
+		this.handProjectList.updatePlayedCardList(this.playerPlayed)
+	}
+	updatePlayerList(playerIdList: number[]){
+		this.playerIdList = playerIdList
+	}
 
-    this.loading = loading
-    this.gameStateService.currentPlayerCount.subscribe(
-      playerCount => this.updatePlayerList(playerCount)
-    )
-    this.gameStateService.currentGroupPlayerState.subscribe(
-      state => this.updateHandOnStateChange(state)
-    )
-  }
+	loadingFinished(loading: boolean):void{
+		if(loading===true){return}
+
+		this.loading = loading
+		this.gameStateService.currentPlayerCount.subscribe(
+			playerCount => this.updatePlayerList(playerCount)
+		)
+		this.gameStateService.currentGroupPlayerState.subscribe(
+			state => this.updateHandOnStateChange(state)
+		)
+	}
+	private handleGroupMessage(message: any){
+		this.wsHandler.handleGroupMessage(WebsocketResultMessageFactory.createGroupMessageResult(message))
+	}
+	private handlePlayerMessage(message: any){
+		let parsedMessage: PlayerMessageResult = WebsocketResultMessageFactory.createPlayerMessageResult(message)
+
+		if(parsedMessage.contentEnum === PlayerMessageContentResultEnum.acknowledge){
+			this.rxStompService.handleAck({ackUuid: parsedMessage.uuid})
+			return
+		}
+		this.wsHandler.handlePlayerMessage(parsedMessage)
+	}
 }

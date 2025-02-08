@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, WsGroupReady, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { PlayerStateModelFullDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerMessage } from "../../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid'
 
@@ -40,7 +40,7 @@ export class WebsocketQueryMessageFactory{
         return this.generatePlayerMessage(MessageContentQueryEnum.selectedPhase, query)
     }
     public static createClientPlayerStatePush(state: PlayerStateModel): PlayerMessage {
-        let query: PlayerStateModelFullDTO = state.toFullDTO() //{secretState: state.toSecretDTO(), publicState: state.toPublicDTO()}
+        let query: PlayerStateDTO = state.toJson() //{secretState: state.toSecretDTO(), publicState: state.toPublicDTO()}
         return this.generatePlayerMessage(MessageContentQueryEnum.playerStatePush, query)
     }
 }
@@ -68,7 +68,17 @@ export class WebsocketResultMessageFactory{
         }
         return result
     }
-    public static createGroupMessageResult(message: any): GroupMessageResult {
+    public static createGroupMessageResult(message: PlayerStateDTO[]): GroupMessageResult {
         return this.createMessageResult(message) as GroupMessageResult
     }
+	public static inputToGroupReady(content: Map<number, boolean>): WsGroupReady[] {
+		//converting content to WsGroupReady format
+		let result: WsGroupReady[] = []
+		const entries = Object.entries(content);
+		entries.forEach(([key, value]) => {
+			result.push({playerId: +key, ready:value});
+		});
+		return result
+	}
+	//public static inputToGroupState(message: )
 }

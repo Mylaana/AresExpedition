@@ -1,12 +1,12 @@
 import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.interface";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { RessourceType, RGB } from "../../types/global.type";
-import { PlayerStateModelFullDTO, PlayerStateModelPublicDTO, PlayerStateModelSecretDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
 import { PlayerTagStateModel } from "./player-state-tag.model";
 import { PlayerRessourceStateModel } from "./player-state-ressource.model";
-import { PlayerPhaseCardState } from "./player-state-phase-card.model";
+import { PlayerPhaseCardStateModel } from "./player-state-phase-card.model";
 import { PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { PhaseCardInfoService } from "../../services/cards/phase-card-info.service";
 import { Injector } from "@angular/core";
@@ -14,26 +14,45 @@ import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerOtherStateModel } from "./player-state-other.model";
 import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter.model";
-import { PlayerProjectCardState } from "./player-state-project-card.model";
+import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
 import { ProjectCardInitializeService } from "../../services/cards/project-card-initialize.service";
 
 export class PlayerStateModel {
-	private projectCardState: PlayerProjectCardState
-	private infoState = new PlayerInfoStateModel
-	private scoreState = new PlayerScoreStateModel
-	private tagState = new PlayerTagStateModel
-	private ressourceState = new PlayerRessourceStateModel
-	private phaseCardState: PlayerPhaseCardState
-	private globalParameterState = new PlayerGlobalParameterStateModel
-	private otherState = new PlayerOtherStateModel
+	private infoState: PlayerInfoStateModel
+	private scoreState: PlayerScoreStateModel
+	private tagState: PlayerTagStateModel
+	private ressourceState: PlayerRessourceStateModel
+	private projectCardState: PlayerProjectCardStateModel
+	private phaseCardState: PlayerPhaseCardStateModel
+	private globalParameterState: PlayerGlobalParameterStateModel
+	private otherState: PlayerOtherStateModel
 
-	constructor(private injector: Injector) {
-		const phaseService = this.injector.get(PhaseCardInfoService)
-		const projectInfoService = this.injector.get(ProjectCardInfoService)
-		const projectInitializeService = this.injector.get(ProjectCardInitializeService)
-		this.phaseCardState = new PlayerPhaseCardState(phaseService)
-		this.projectCardState = new PlayerProjectCardState(projectInfoService, projectInitializeService)
+	constructor(private injector: Injector, dto?: PlayerStateDTO) {
+		this.infoState = dto
+			?new PlayerInfoStateModel(dto.infoState)
+			:PlayerInfoStateModel.empty()
+		this.scoreState = dto
+			?new PlayerScoreStateModel(dto.scoreState)
+			:PlayerScoreStateModel.empty()
+		this.tagState = dto
+			?new PlayerTagStateModel(dto.tagState)
+			:PlayerTagStateModel.empty()
+		this.ressourceState = dto
+			?new PlayerRessourceStateModel(dto.ressourceState)
+			:PlayerRessourceStateModel.empty()
+		this.projectCardState = dto
+			?new PlayerProjectCardStateModel(injector, dto.projectCardState)
+			:PlayerProjectCardStateModel.empty(injector)
+		this.phaseCardState = dto
+			?new PlayerPhaseCardStateModel(injector, dto.phaseCardState)
+			:PlayerPhaseCardStateModel.empty(injector)
+		this.globalParameterState = dto
+			?new PlayerGlobalParameterStateModel(dto.globalParameterState)
+			:PlayerGlobalParameterStateModel.empty()
+		this.otherState = dto
+			?new PlayerOtherStateModel(dto.otherState)
+			:PlayerOtherStateModel.empty()
 	  }
 
 
@@ -119,36 +138,36 @@ export class PlayerStateModel {
 		this.addRessource('megacredit', -card.cost)
 	}
 
-
-	public toFullDTO(): PlayerStateModelFullDTO {
+	public toJson(): PlayerStateDTO {
 		return {
-			cards: undefined, //this.cards,
-
-			scoreState: this.scoreState,
-			infoState: this.infoState,
-			tagState: this.tagState,
-			ressourceState: this.ressourceState,
-			phaseCardState: this.phaseCardState,
-			globalParameter: this.globalParameterState,
-			otherState: this.otherState
+			infoState: this.infoState.toJson(),
+			scoreState: this.scoreState.toJson(),
+			tagState: this.tagState.toJson(),
+			ressourceState: this.ressourceState.toJson(),
+			projectCardState: this.projectCardState.toJson(),
+			phaseCardState: this.phaseCardState.toJson(),
+			globalParameterState: this.globalParameterState.toJson(),
+			otherState: this.otherState.toJson()
 		}
 	}
-	public toSecretDTO(): PlayerStateModelSecretDTO {
-		return {
-			cards: undefined,
-			globalParameter: this.globalParameterState,
+	public static fromJson(data: Partial<PlayerStateDTO>, injector: Injector): PlayerStateModel {
+		if(
+			!data.infoState
+			|| !data.scoreState
+			|| !data.tagState
+			|| !data.ressourceState
+			|| !data.projectCardState
+			|| !data.phaseCardState
+			|| !data.globalParameterState
+			|| !data.otherState
+		){
+			throw new Error("Invalid PlayerStateDTO: Missing required fields")
 		}
+		return new PlayerStateModel(injector, data as PlayerStateDTO)
 	}
-	public toPublicDTO(): PlayerStateModelPublicDTO {
-		return {
-			infoState: this.infoState,
-			scoreState: this.scoreState,
-			tagState: this.tagState,
-			ressourceState: this.ressourceState,
-			phaseCardState: this.phaseCardState,
-			otherState: this.otherState
-		}
-	}
+	static empty(injector: Injector): PlayerStateModel {
+		return new PlayerStateModel(injector);
+	  }
 }
 
 

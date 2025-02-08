@@ -14,12 +14,8 @@
     <div class="wrapper-game-state">
         <button (click)="printPlayersState()">players state</button>
     </div>
-	<p>{{currentEventQueue[0] | json}}</p>
 	<p>eventQueue :</p>
     <div *ngFor="let event of currentEventQueue">
         <p>[id]:{{event.id}}  [type]:{{event.type}}  [subtype]:{{event.subType}}  [finalized]:{{event.finalized}}  [autoFinalize]:{{event.autoFinalize}}</p>
-    </div>
-    <div *ngFor="let ready of currentGroupReady">
-        <p>{{ready.id}}: {{ready.isReady}}</p>
     </div>
 </div>

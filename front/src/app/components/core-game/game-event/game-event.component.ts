@@ -18,7 +18,7 @@ import { WebsocketHandler } from '../../../models/core-game/websocket-handler';
 import { PlayerMessageResult } from '../../../interfaces/websocket.interface';
 import { RxStompService } from '../../../services/websocket/rx-stomp.service';
 import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../../global/global-const';
-import { Message } from '@stomp/stompjs';
+
 import { WebsocketResultMessageFactory } from '../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { PlayerMessageContentResultEnum } from '../../../enum/websocket.enum';
@@ -43,14 +43,12 @@ import { ButtonDesigner } from '../../../services/designers/button-designer.serv
   styleUrl: './game-event.component.scss',
   providers: [
 	EventHandler,
-	DrawEventHandler,
-	WebsocketHandler
+	DrawEventHandler
 ]
 })
 export class GameEventComponent {
 	constructor(
 		private gameStateService: GameState,
-		private rxStompService: RxStompService
 	){}
 
 	delete: EventBaseModel[] = []
@@ -81,12 +79,6 @@ export class GameEventComponent {
 
 	private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
-	private readonly wsHandler = inject(WebsocketHandler)
-
-	//@ts-ignore
-	private groupSubscription: Subscription;
-	//@ts-ignore
-	private playerSubscription: Subscription;
 
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
@@ -97,16 +89,7 @@ export class GameEventComponent {
 		this.gameStateService.currentPhase.subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
-		this.groupSubscription = this.rxStompService
-		.watch(GLOBAL_WS_GROUP)
-		.subscribe((message: Message) => {
-		  this.handleGroupMessage(message.body)
-		});
-		this.playerSubscription = this.rxStompService
-		.watch(GLOBAL_WS_PLAYER)
-		.subscribe((message: Message) => {
-		  this.handlePlayerMessage(message.body)
-		});
+
 
 
 	}
@@ -177,16 +160,4 @@ export class GameEventComponent {
 		}
 	}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
-	private handleGroupMessage(message: any){
-		this.wsHandler.handleGroupMessage(WebsocketResultMessageFactory.createGroupMessageResult(message))
-	}
-	private handlePlayerMessage(message: any){
-		let parsedMessage: PlayerMessageResult = WebsocketResultMessageFactory.createPlayerMessageResult(message)
-
-		if(parsedMessage.contentEnum === PlayerMessageContentResultEnum.acknowledge){
-			this.rxStompService.handleAck({ackUuid: parsedMessage.uuid})
-			return
-		}
-		this.wsHandler.handlePlayerMessage(parsedMessage)
-	}
 }
