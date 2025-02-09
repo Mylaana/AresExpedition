@@ -1,16 +1,14 @@
 package com.ares_expedition.dto.websocket.content.input;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.dto.websocket.content.player_state.PlayerInfoStateDTO;
+import com.ares_expedition.dto.websocket.content.player_state.PlayerRessourceStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerScoreStateDTO;
+import com.ares_expedition.dto.websocket.content.player_state.PlayerTagStateDTO;
 
 public class PlayerStateContentDTO extends BaseContentDTO {
-	private List<Map<String, Object>> ressource = new ArrayList<>();
-    private List<Map<String, Object>> tag = new ArrayList<>();
     private Map<String, Object> cards = new HashMap<>();
     private Map<String, Object> research = new HashMap<>();
 	private Map<String, Object> phaseCards = new HashMap<>();
@@ -20,16 +18,18 @@ public class PlayerStateContentDTO extends BaseContentDTO {
 
 	private PlayerInfoStateDTO infoState;
 	private PlayerScoreStateDTO scoreState;
+	private PlayerTagStateDTO tagState;
+	private PlayerRessourceStateDTO ressourceState;
 
 	public PlayerStateContentDTO(){
 	}
 	
-	public PlayerInfoStateDTO getStateInfo() {
+	public PlayerInfoStateDTO getInfoState() {
 		return infoState;
 	}
 
-	public void setStateInfo(PlayerInfoStateDTO dto) {
-		this.infoState = dto;
+	public void setInfoState(PlayerInfoStateDTO infoState) {
+		this.infoState = infoState;
 	}
 
 	public PlayerScoreStateDTO getScoreState() {
@@ -39,23 +39,23 @@ public class PlayerStateContentDTO extends BaseContentDTO {
 	public void setScoreState(PlayerScoreStateDTO dto) {
 		this.scoreState = dto;
 	}
-	
-	public List<Map<String, Object>> getRessource(){
-		return this.ressource;
+
+	public PlayerTagStateDTO getTagState() {
+		return tagState;
 	}
 
-	public void setRessource(List<Map<String, Object>> ressource) {
-		this.ressource = ressource;
-	}
-	
-	public List<Map<String, Object>> getTag(){
-		return this.tag;
+	public void setTagState(PlayerTagStateDTO tagState) {
+		this.tagState = tagState;
 	}
 
-	public void setTag(List<Map<String, Object>> tag) {
-        this.tag = tag;
-    }
-	
+	public PlayerRessourceStateDTO getRessourceState() {
+		return ressourceState;
+	}
+
+	public void setRessourceState(PlayerRessourceStateDTO resssourceState) {
+		this.ressourceState = resssourceState;
+	}
+
 	public Map<String, Object> getCards(){
 		return this.cards;
 	}

@@ -9,8 +9,6 @@ import com.ares_expedition.dto.websocket.content.input.PlayerStateContentDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 
 public class PlayerState {
-    private List<Map<String, Object>> ressource = new ArrayList<>();
-    private List<Map<String, Object>> tag = new ArrayList<>();
     private Map<String, Object> cards = new HashMap<>();
     private Map<String, Object> research = new HashMap<>();
 	private Map<String, Object> phaseCards = new HashMap<>();
@@ -20,6 +18,8 @@ public class PlayerState {
 
     private PlayerInfoState infoState = new PlayerInfoState();
     private PlayerScoreState scoreState = new PlayerScoreState();
+    private PlayerTagState tagState = new PlayerTagState();
+    private PlayerRessourceState ressourceState = new PlayerRessourceState();
 
     public PlayerState(){
     }
@@ -74,21 +74,24 @@ public class PlayerState {
         this.scoreState.setMilestoneCount(milestoneCount);
     }
 
+    //ressourceState
     public List<Map<String, Object>> getRessource() {
-        return ressource;}
+        return this.ressourceState.getRessource();}
 
     public void setRessource(List<Map<String, Object>> ressource) {
-        this.ressource = ressource;
+        this.ressourceState.setRessource(ressource);;
     }
 
+    //tagState
     public List<Map<String, Object>> getTag() {
-        return tag;
+        return this.tagState.getTag();
     }
 
     public void setTag(List<Map<String, Object>> tag) {
-        this.tag = tag;
+        this.tagState.setTag(tag);
     }
 
+    //
     public Map<String, Object> getCards() {
         return cards;
     }
@@ -152,11 +155,25 @@ public class PlayerState {
         this.scoreState = scoreState;
     }
 
+    public PlayerTagState getTagState() {
+        return tagState;
+    }
+
+    public void setTagState(PlayerTagState tagState) {
+        this.tagState = tagState;
+    }
+
+    public PlayerRessourceState getRessourceState() {
+        return ressourceState;
+    }
+
+    public void setRessourceState(PlayerRessourceState resssourceState) {
+        this.ressourceState = resssourceState;
+    }
+    
     public static PlayerState fromJson(PlayerStateContentDTO statePush){
         PlayerState state = new PlayerState();
-        
-        state.setRessource(statePush.getRessource());
-        state.setTag(statePush.getTag());
+    
         state.setCards(statePush.getCards());
         state.setResearch(statePush.getResearch());
         state.setPhaseCards(statePush.getPhaseCards());
@@ -164,8 +181,10 @@ public class PlayerState {
         state.setSellCardValueMod(statePush.getSellCardValueMod());
         state.setGlobalParameter(statePush.getGlobalParameter());
 
-        state.setInfoState(PlayerInfoState.fromJson(statePush.getStateInfo()));
+        state.setInfoState(PlayerInfoState.fromJson(statePush.getInfoState()));
         state.setScoreState(PlayerScoreState.fromJson(statePush.getScoreState()));
+        state.setTagState(PlayerTagState.fromJson(statePush.getTagState()));
+        state.setRessourceState(PlayerRessourceState.fromJson(statePush.getRessourceState()));
     
         return state;
     }
