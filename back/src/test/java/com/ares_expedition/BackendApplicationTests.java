@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ares_expedition.dto.websocket.messages.input.BaseMessageInputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.model.game.PlayerState;
+import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.repository.Game;
 import com.ares_expedition.repository.JsonGameReader;
 import com.ares_expedition.dto.websocket.content.input.*;

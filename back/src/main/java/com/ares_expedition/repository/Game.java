@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import com.ares_expedition.dto.deserializer.IntegerKeyDeserializer;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.model.game.PlayerState;
+import com.ares_expedition.model.player_state.PlayerState;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class Game {

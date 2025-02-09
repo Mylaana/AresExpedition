@@ -1,16 +1,18 @@
 package com.ares_expedition.dto.websocket.messages.output;
 
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
+import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.model.game.PlayerState;
+import com.ares_expedition.model.player_state.PlayerState;
 
 public class GameStateMessageOutputDTO {
     private PhaseEnum currentPhase;
     private Map<Integer, Boolean> groupReady;
     private LinkedHashSet<PhaseEnum> selectedPhase;
-    private Map<Integer, PlayerState> groupPlayerState;
+    private Map<Integer, PlayerStateDTO> groupPlayerState;
 
     public GameStateMessageOutputDTO(){
     }
@@ -32,16 +34,21 @@ public class GameStateMessageOutputDTO {
     public void setSelectedPhase(LinkedHashSet<PhaseEnum> phases){
         this.selectedPhase = phases;
     }
-    public Map<Integer, PlayerState> getGroupPlayerStatePublic(){
+    public Map<Integer, PlayerStateDTO> getGroupPlayerStatePublic(){
         return this.groupPlayerState;
     }
     public void setGroupPlayerStatePublic(Map<Integer, PlayerState> groupState){
-        this.groupPlayerState = groupState;
+        Map<Integer, PlayerStateDTO> groupDTO = new HashMap<>();
+        for(var state : groupState.entrySet()){
+            groupDTO.put(state.getKey(), state.getValue().toJson());
+        }
+        
+        this.groupPlayerState = groupDTO;
     }
-    public PlayerState getPlayerStatePublic(Integer playerId){
+    public PlayerStateDTO getPlayerStatePublic(Integer playerId){
         return this.groupPlayerState.get(playerId);
     }
-    public void setPlayerState(Integer playerId, PlayerState state){
+    public void setPlayerState(Integer playerId, PlayerStateDTO state){
         this.groupPlayerState.put(playerId, state);
     }
 }

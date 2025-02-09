@@ -5,13 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ares_expedition.dto.websocket.content.player_state.PlayerInfoStateDTO;
+import com.ares_expedition.dto.websocket.content.player_state.PlayerScoreStateDTO;
+
 public class PlayerStateContentDTO extends BaseContentDTO {
-	private Integer id;
-	private String name;
-	private String color;
 	private List<Map<String, Object>> ressource = new ArrayList<>();
-	private Integer terraformingRating;
-	private Integer vp;
     private List<Map<String, Object>> tag = new ArrayList<>();
     private Map<String, Object> cards = new HashMap<>();
     private Map<String, Object> research = new HashMap<>();
@@ -19,35 +17,29 @@ public class PlayerStateContentDTO extends BaseContentDTO {
 	private Integer phaseCardUpgradeCount;
 	private Integer sellCardValueMod;
 	private Map<String, Object> globalParameter = new HashMap<>();
-	private Integer milestoneCount;
+
+	private PlayerInfoStateDTO infoState;
+	private PlayerScoreStateDTO scoreState;
 
 	public PlayerStateContentDTO(){
 	}
 	
-	public Integer getId(){
-		return this.id;
+	public PlayerInfoStateDTO getStateInfo() {
+		return infoState;
+	}
+
+	public void setStateInfo(PlayerInfoStateDTO dto) {
+		this.infoState = dto;
+	}
+
+	public PlayerScoreStateDTO getScoreState() {
+		return scoreState;
+	}
+
+	public void setScoreState(PlayerScoreStateDTO dto) {
+		this.scoreState = dto;
 	}
 	
-	public void setId(Integer id){
-		this.id = id;
-	}
-
-	public String getName(){
-		return this.name;
-	}
-
-	public void setName(String name){
-		this.name = name;
-	}
-
-	public String getColor(){
-		return this.color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
 	public List<Map<String, Object>> getRessource(){
 		return this.ressource;
 	}
@@ -55,22 +47,6 @@ public class PlayerStateContentDTO extends BaseContentDTO {
 	public void setRessource(List<Map<String, Object>> ressource) {
 		this.ressource = ressource;
 	}
-	
-	public Integer getTerraformingRating(){
-		return this.terraformingRating;
-	}
-
-	public void setTerraformingRating(Integer terraformingRating) {
-        this.terraformingRating = terraformingRating;
-    }
-
-	public Integer getVp(){
-		return this.vp;
-	}
-
-	public void setVp(Integer vp) {
-        this.vp = vp;
-    }
 	
 	public List<Map<String, Object>> getTag(){
 		return this.tag;
@@ -126,13 +102,5 @@ public class PlayerStateContentDTO extends BaseContentDTO {
     
 	public void setGlobalParameter(Map<String, Object> globalParameter) {
         this.globalParameter = globalParameter;
-    }
-	
-	public Integer getMilestoneCount(){
-		return this.milestoneCount;
-	}
-    
-	public void setMilestoneCount(Integer milestoneCount) {
-        this.milestoneCount = milestoneCount;
     }
 }

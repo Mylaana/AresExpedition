@@ -13,9 +13,11 @@
     "selectedPhase": ["PLANIFICATION"],
     "groupPlayerState": {
         "0": {
-                "id": 0,
-                "name": "joueur 1",
-                "color": "rgb(0, 0, 255)",
+                "infoState": {
+                    "id": 0,
+                    "name": "joueur 1",
+                    "color": "rgb(0, 0, 255)"
+                },
                 "ressource": [
                     {
                         "id": 0,
@@ -189,9 +191,11 @@
                 }
             },
         "1": {
-            "id": 1,
-            "name": "joueur 2",
-            "color": "rgb(0, 0, 255)",
+            "infoState": {
+                "id": 1,
+                "name": "joueur 2",
+                "color": "rgb(0, 0, 255)"
+            },
             "ressource": [
                 {
                     "id": 0,
@@ -365,9 +369,11 @@
             }
         },
         "2": {
-            "id": 2,
-            "name": "joueur 3",
-            "color": "rgb(0, 0, 255)",
+            "infoState": {
+                "id": 2,
+                "name": "joueur 3",
+                "color": "rgb(0, 0, 255)"
+            },
             "ressource": [
                 {
                     "id": 0,
@@ -541,9 +547,11 @@
             }
         },
         "3": {
-            "id": 3,
-            "name": "joueur 4",
-            "color": "rgb(0, 0, 255)",
+            "infoState": {
+                "id": 3,
+                "name": "joueur 4",
+                "color": "rgb(0, 0, 255)"
+            },
             "ressource": [
                 {
                     "id": 0,

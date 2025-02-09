@@ -8,15 +8,13 @@ import { PlayerTagStateModel } from "./player-state-tag.model";
 import { PlayerRessourceStateModel } from "./player-state-ressource.model";
 import { PlayerPhaseCardStateModel } from "./player-state-phase-card.model";
 import { PhaseCardUpgradeType } from "../../types/phase-card.type";
-import { PhaseCardInfoService } from "../../services/cards/phase-card-info.service";
 import { Injector } from "@angular/core";
 import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerOtherStateModel } from "./player-state-other.model";
 import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter.model";
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
-import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
-import { ProjectCardInitializeService } from "../../services/cards/project-card-initialize.service";
+
 
 export class PlayerStateModel {
 	private infoState: PlayerInfoStateModel

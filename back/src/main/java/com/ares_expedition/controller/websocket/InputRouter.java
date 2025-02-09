@@ -20,7 +20,7 @@ import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
 import com.ares_expedition.model.factory.MessageOutputFactory;
-import com.ares_expedition.model.game.PlayerState;
+import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.services.QueryMessageFactory;
 
 @Service
@@ -145,7 +145,7 @@ public class InputRouter {
         gameController.setPlayerState(
             query.getGameId(),
             query.getPlayerId(),
-            PlayerState.toModel(query.getContent())
+            PlayerState.fromJson(query.getContent())
             );
     }
 }
