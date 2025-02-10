@@ -1,6 +1,7 @@
+
 package com.ares_expedition.model.player_state;
 
-import com.ares_expedition.dto.websocket.content.player_state.PlayerScoreStateDTO;
+import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerScoreStateDTO;
 
 public class PlayerScoreState {
     private Integer vp;

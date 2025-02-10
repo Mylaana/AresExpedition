@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.dto.websocket.content.player_state.PlayerTagStateDTO;
+import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerTagStateDTO;
 
 public class PlayerTagState {
-    private List<Map<String, Object>> tag = new ArrayList<>();
+    private List<Map<String, Object>> tags = new ArrayList<>();
 
     PlayerTagState() {
     }
     PlayerTagState(PlayerTagStateDTO dto) {
-        this.tag = dto.getTag();
+        this.tags = dto.getTags();
     }
-    public List<Map<String, Object>> getTag() {
-        return tag;
+    public List<Map<String, Object>> getTags() {
+        return tags;
     }
 
-    public void setTag(List<Map<String, Object>> tag) {
-        this.tag = tag;
+    public void setTags(List<Map<String, Object>> tags) {
+        this.tags = tags;
     }
 
     public static PlayerTagState fromJson(PlayerTagStateDTO dto) {

@@ -1,30 +1,43 @@
 package com.ares_expedition.model.player_state;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.dto.websocket.content.input.PlayerStateContentDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 
 public class PlayerState {
-    private Map<String, Object> cards = new HashMap<>();
-    private Map<String, Object> research = new HashMap<>();
-	private Map<String, Object> phaseCards = new HashMap<>();
-	private Integer phaseCardUpgradeCount;
-	private Integer sellCardValueMod;
-	private Map<String, Object> globalParameter = new HashMap<>();
-
     private PlayerInfoState infoState = new PlayerInfoState();
     private PlayerScoreState scoreState = new PlayerScoreState();
     private PlayerTagState tagState = new PlayerTagState();
     private PlayerRessourceState ressourceState = new PlayerRessourceState();
+    private PlayerProjectCardState projectCardState = new PlayerProjectCardState();
+    private PlayerPhaseCardState phaseCardState = new PlayerPhaseCardState();
+    private PlayerGlobalParameterState globalParameterState = new PlayerGlobalParameterState();
+    private PlayerOtherState otherState = new PlayerOtherState();
 
     public PlayerState(){
     }
     
-    //InfoState
+    public PlayerState(PlayerStateDTO dto) {
+        this.infoState = PlayerInfoState.fromJson(dto.getInfoState());
+        this.scoreState = PlayerScoreState.fromJson(dto.getScoreState());
+        this.tagState = PlayerTagState.fromJson(dto.getTagState());
+        this.ressourceState = PlayerRessourceState.fromJson(dto.getRessourceState());
+        this.projectCardState = PlayerProjectCardState.fromJson(dto.getProjectCardState());
+        this.phaseCardState = PlayerPhaseCardState.fromJson(dto.getPhaseCardState());
+        this.globalParameterState = PlayerGlobalParameterState.fromJson(dto.getGlobalParameterState());
+        this.otherState = PlayerOtherState.fromJson(dto.getOtherState());
+    }
+
+    //=============================================================
+    //Info
+    public PlayerInfoState getInfoState() {
+        return this.infoState;
+    }
+    public void setInfoState(PlayerInfoState state) {
+        this.infoState = state;
+    }
+
     public Integer getId() {
         return this.infoState.getId();
     }
@@ -49,7 +62,17 @@ public class PlayerState {
         this.infoState.setColor(color);
     }
 
-    //ScoreState
+
+    //=============================================================
+    //Score
+    public PlayerScoreState getScoreState() {
+        return scoreState;
+    }
+
+    public void setScoreState(PlayerScoreState scoreState) {
+        this.scoreState = scoreState;
+    }
+
     public Integer getTerraformingRating() {
         return scoreState.getTerraformingRating();
     }
@@ -74,87 +97,9 @@ public class PlayerState {
         this.scoreState.setMilestoneCount(milestoneCount);
     }
 
-    //ressourceState
-    public List<Map<String, Object>> getRessource() {
-        return this.ressourceState.getRessource();}
 
-    public void setRessource(List<Map<String, Object>> ressource) {
-        this.ressourceState.setRessource(ressource);;
-    }
-
-    //tagState
-    public List<Map<String, Object>> getTag() {
-        return this.tagState.getTag();
-    }
-
-    public void setTag(List<Map<String, Object>> tag) {
-        this.tagState.setTag(tag);
-    }
-
-    //
-    public Map<String, Object> getCards() {
-        return cards;
-    }
-
-    public void setCards(Map<String, Object> cards) {
-        this.cards = cards;
-    }
-
-    public Map<String, Object> getResearch() {
-        return research;
-    }
-
-    public void setResearch(Map<String, Object> research) {
-        this.research = research;
-    }
-
-    public Map<String, Object> getPhaseCards() {
-        return phaseCards;
-    }
-
-    public void setPhaseCards(Map<String, Object> phaseCards) {
-        this.phaseCards = phaseCards;
-    }
-
-    public Integer getPhaseCardUpgradeCount() {
-        return phaseCardUpgradeCount;
-    }
-
-    public void setPhaseCardUpgradeCount(Integer phaseCardUpgradeCount) {
-        this.phaseCardUpgradeCount = phaseCardUpgradeCount;
-    }
-
-    public Integer getSellCardValueMod() {
-        return sellCardValueMod;
-    }
-
-    public void setSellCardValueMod(Integer sellCardValueMod) {
-        this.sellCardValueMod = sellCardValueMod;
-    }
-
-    public Map<String, Object> getGlobalParameter() {
-        return globalParameter;
-    }
-
-    public void setGlobalParameter(Map<String, Object> globalParameter) {
-        this.globalParameter = globalParameter;
-    }
-
-    public PlayerInfoState getInfoState() {
-        return this.infoState;
-    }
-    public void setInfoState(PlayerInfoState state) {
-        this.infoState = state;
-    }
-
-    public PlayerScoreState getScoreState() {
-        return scoreState;
-    }
-
-    public void setScoreState(PlayerScoreState scoreState) {
-        this.scoreState = scoreState;
-    }
-
+    //=============================================================
+    //Tags
     public PlayerTagState getTagState() {
         return tagState;
     }
@@ -163,6 +108,17 @@ public class PlayerState {
         this.tagState = tagState;
     }
 
+    public List<Map<String, Object>> getTags() {
+        return this.tagState.getTags();
+    }
+
+    public void setTags(List<Map<String, Object>> tags) {
+        this.tagState.setTags(tags);
+    }
+
+
+    //=============================================================
+    //Ressources
     public PlayerRessourceState getRessourceState() {
         return ressourceState;
     }
@@ -170,23 +126,133 @@ public class PlayerState {
     public void setRessourceState(PlayerRessourceState resssourceState) {
         this.ressourceState = resssourceState;
     }
+
+    public List<Map<String, Object>> getRessource() {
+        return this.ressourceState.getRessources();
+    }
+
+    public void setRessource(List<Map<String, Object>> ressource) {
+        this.ressourceState.setRessources(ressource);;
+    }
+
+
+    //=============================================================
+    //Project Cards
+    public PlayerProjectCardState getProjectCardState() {
+        return projectCardState;
+    }
+
+    public void setProjectCardState(PlayerProjectCardState projectCardState) {
+        this.projectCardState = projectCardState;
+    }
     
-    public static PlayerState fromJson(PlayerStateContentDTO statePush){
+    public Map<String, Object> getCards() {
+        return this.projectCardState.getProjectCards();
+    }
+
+    public void setCards(Map<String, Object> cards) {
+        this.projectCardState.setProjectCards(cards);
+    }
+
+
+    //=============================================================
+    //Phase Cards
+    public PlayerPhaseCardState getPhaseCardState() {
+        return phaseCardState;
+    }
+
+    public void setPhaseCardState(PlayerPhaseCardState phaseCardState) {
+        this.phaseCardState = phaseCardState;
+    }
+
+
+    public Map<String, Object> getPhaseCards() {
+        return this.phaseCardState.getPhaseCards();
+    }
+
+    public void setPhaseCards(Map<String, Object> phaseCards) {
+        this.phaseCardState.setPhaseCards(phaseCards);
+    }
+
+    /*
+    public Integer getPhaseCardUpgradeCount() {
+        return this.phaseCardState;
+    }
+    
+    public void setPhaseCardUpgradeCount(Integer phaseCardUpgradeCount) {
+        this.phaseCardUpgradeCount = phaseCardUpgradeCount;
+    }
+    */
+    
+
+    //=============================================================
+    //Global parameters
+    public PlayerGlobalParameterState getGlobalParameterState() {
+        return globalParameterState;
+    }
+
+    public void setGlobalParameterState(PlayerGlobalParameterState globalParameterState) {
+        this.globalParameterState = globalParameterState;
+    }
+
+    
+    public Map<String, Object> getGlobalParameter() {
+        return globalParameterState.getGlobalParameters();
+    }
+
+    public void setGlobalParameter(Map<String, Object> globalParameter) {
+        this.globalParameterState.setGlobalParameters(globalParameter);(globalParameter);
+    }
+
+    //=============================================================
+    //Other
+    public PlayerOtherState getOtherState() {
+        return otherState;
+    }
+
+    public void setOtherState(PlayerOtherState otherState) {
+        this.otherState = otherState;
+    }
+
+
+    public Integer getSellCardValueMod() {
+        return this.otherState.getSellCardValueMod();
+    }
+
+    public void setSellCardValueMod(Integer sellCardValueMod) {
+        this.otherState.setSellCardValueMod(sellCardValueMod);
+    }
+
+    public Map<String, Object> getResearch() {
+        return this.otherState.getResearch();
+    }
+
+    public void setResearch(Map<String, Object> research) {
+        this.otherState.setResearch(research);
+    }
+
+    /*
+    public static PlayerState fromJson(PlayerStateDTO statePush){
         PlayerState state = new PlayerState();
-    
+        /*
         state.setCards(statePush.getCards());
         state.setResearch(statePush.getResearch());
         state.setPhaseCards(statePush.getPhaseCards());
         state.setPhaseCardUpgradeCount(statePush.getPhaseCardUpgradeCount());
         state.setSellCardValueMod(statePush.getSellCardValueMod());
         state.setGlobalParameter(statePush.getGlobalParameter());
-
+        
         state.setInfoState(PlayerInfoState.fromJson(statePush.getInfoState()));
         state.setScoreState(PlayerScoreState.fromJson(statePush.getScoreState()));
         state.setTagState(PlayerTagState.fromJson(statePush.getTagState()));
         state.setRessourceState(PlayerRessourceState.fromJson(statePush.getRessourceState()));
+        state.setProjectCardState(PlayerProjectCardState.fromJson(statePush.getProjectCardState()));
     
         return state;
+    }
+    */
+    public static PlayerState fromJson(PlayerStateDTO dto) {
+        return new PlayerState(dto);
     }
     public PlayerStateDTO toJson() {
         return new PlayerStateDTO(this);

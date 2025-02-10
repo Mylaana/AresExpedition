@@ -12,8 +12,8 @@ import com.ares_expedition.dto.websocket.content.input.DrawContentDTO;
 import com.ares_expedition.dto.websocket.content.input.GenericContentDTO;
 import com.ares_expedition.dto.websocket.content.input.PhaseSelectedContentDTO;
 import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
-import com.ares_expedition.dto.websocket.content.input.PlayerStateContentDTO;
 import com.ares_expedition.dto.websocket.content.input.UnHandledContentDTO;
+import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.messages.input.*;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
@@ -61,7 +61,7 @@ public class InputRouter {
                 break;
             case PLAYER_STATE_PUSH:
                     handleQuery(    
-                    message, PlayerStateContentDTO.class,
+                    message, PlayerStateDTO.class,
                     PlayerStateMessageDTO.class, this::handlePlayerStatePushMessage);
                 break;
             default:
