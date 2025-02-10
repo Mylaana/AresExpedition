@@ -201,7 +201,7 @@ public class PlayerState {
     }
 
     public void setGlobalParameter(Map<String, Object> globalParameter) {
-        this.globalParameterState.setGlobalParameters(globalParameter);(globalParameter);
+        this.globalParameterState.setGlobalParameters(globalParameter);
     }
 
     //=============================================================
