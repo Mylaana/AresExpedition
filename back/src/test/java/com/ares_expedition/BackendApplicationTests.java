@@ -1,25 +1,24 @@
 package com.ares_expedition;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.ares_expedition.dto.websocket.content.input.GenericContentDTO;
+import com.ares_expedition.dto.websocket.content.input.PhaseSelectedContentDTO;
+import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
+import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.messages.input.BaseMessageInputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.model.game.PlayerState;
+import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.repository.Game;
 import com.ares_expedition.repository.JsonGameReader;
-import com.ares_expedition.dto.websocket.content.input.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -276,7 +275,7 @@ class BackendApplicationTests {
 			}
 		""";
 
-		BaseMessageInputDTO<PlayerStateContentDTO> query = mapper.readValue(json, new TypeReference<>() {});
+		BaseMessageInputDTO<PlayerStateDTO> query = mapper.readValue(json, new TypeReference<>() {});
 
 		assertNotNull(query.getContent());
 		//assert(query.getContent().getContent(), "SET_BOTS_READY");
@@ -295,11 +294,10 @@ class BackendApplicationTests {
 		assertNotEquals(0, testPlayerState.getRessource().size());
 		assertNotEquals(0, testPlayerState.getTerraformingRating());
 		assertNotEquals(0, testPlayerState.getVp());
-		assertNotEquals(0, testPlayerState.getTag().size());
+		assertNotEquals(0, testPlayerState.getTags().size());
 		assertNotNull(testPlayerState.getCards());
 		assertNotNull(testPlayerState.getResearch());
 		assertNotNull(testPlayerState.getPhaseCards());
-		assertEquals(0, testPlayerState.getPhaseCardUpgradeCount());
 		assertEquals(0, testPlayerState.getSellCardValueMod());
 		assertEquals(3, testPlayerState.getMilestoneCount());
 		assertNotNull(testPlayerState.getGlobalParameter());

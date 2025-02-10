@@ -4,7 +4,6 @@ import { ProjectCardInfoService } from "../../services/cards/project-card-info.s
 import { EventDesigner } from "../../services/designers/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
-import { SelectablePhase } from "../../types/global.type";
 import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
 import { ProjectCardModel } from "../cards/project-card.model";

@@ -1,7 +1,8 @@
 <div class="background">
     <img src="/assets/other/background.jpg" alt="">
 </div>
-<div class="wrapper-app">
+<h1 *ngIf="loading===true">GAME NOT LOADED YET</h1>
+<div *ngIf="loading===false" class="wrapper-app">
     <div class="wrapper-navigation">
         <app-navigation></app-navigation>
     </div>

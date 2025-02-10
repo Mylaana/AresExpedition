@@ -1,6 +1,7 @@
 package com.ares_expedition.dto.websocket.messages.input;
 
 import com.ares_expedition.dto.websocket.content.input.*;
+import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -17,7 +18,7 @@ public class BaseMessageInputDTO<T>{
         property = "contentEnum" //the external property used to determine type
     )
     @JsonSubTypes({
-    @JsonSubTypes.Type(value = PlayerStateContentDTO.class, name = "PLAYER_STATE_PUSH"),
+    @JsonSubTypes.Type(value = PlayerStateDTO.class, name = "PLAYER_STATE_PUSH"),
     @JsonSubTypes.Type(value = PlayerReadyContentDTO.class, name = "READY_QUERY"),
     @JsonSubTypes.Type(value = PhaseSelectedContentDTO.class, name = "SELECTED_PHASE_QUERY"),
     @JsonSubTypes.Type(value = GenericContentDTO.class, name = "PLAYER_GAME_STATE_QUERY"),

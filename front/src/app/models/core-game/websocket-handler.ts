@@ -72,19 +72,12 @@ export class WebsocketHandler {
     private handleMessageGameState(content: WsGameState, origin: String): void {
         this.gameStateService.clearEventQueue()
         this.gameStateService.setCurrentPhase(content.currentPhase)
-        this.handleGroupMessageReadyResult(content.groupReady)
-
+        this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
+		//this.handleGroupMessageGameState(WebsocketResultMessageFactory.createGroupMessageResult(content.publicPlayerState))
     }
-    private handleGroupMessageReadyResult(content: Map<number, boolean>): void {
-        //converting content to WsGroupReady format
-        let wsGroupReady: WsGroupReady[] = []
-        const entries = Object.entries(content);
-        entries.forEach(([key, value]) => {
-            wsGroupReady.push({playerId: +key, ready:value});
-        });
-
+    private handleGroupMessageReadyResult(groupReady: WsGroupReady[]): void {
         //setting ready
-        this.gameStateService.setGroupReady(wsGroupReady)
+        this.gameStateService.setGroupReady(groupReady)
 
         switch(this.gameStateService.getClientReady()){
             case(false):{
@@ -98,4 +91,7 @@ export class WebsocketHandler {
             }
         }
     }
+	private handleGroupMessageGameState(): void {
+
+	}
 }

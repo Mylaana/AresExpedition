@@ -1,4 +1,5 @@
 import { GAME_RESSOURCE_LIST } from "../../global/global-const";
+import { PlayerRessourceStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { RessourceInfo } from "../../interfaces/global.interface";
 import { GlobalInfo } from "../../services/global/global-info.service";
 import { RessourceType } from "../../types/global.type";
@@ -16,6 +17,10 @@ const ressourceIndex = new  Map<RessourceType, number>(
 
 export class PlayerRessourceStateModel {
     private ressources: RessourceInfo[] = this.initializeRessources()
+
+	constructor(data: PlayerRessourceStateDTO){
+		this.ressources = data.ressource
+	}
 
 	private initializeRessources(): RessourceInfo[] {
 		let result: RessourceInfo[] = []
@@ -64,5 +69,23 @@ export class PlayerRessourceStateModel {
 		/*update productions with base + scaling values*/
 		this.ressources[Number(ressourceIndex.get(ressource))].valueProd =
 			this.ressources[Number(ressourceIndex.get(ressource))].valueBaseProd + scalingProduction
+	}
+	toJson(): PlayerRessourceStateDTO {
+		return {
+			ressource: this.ressources
+		}
+	}
+	static fromJson(data: PlayerRessourceStateDTO): PlayerRessourceStateModel {
+		if (!data.ressource){
+			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
+		}
+		return new PlayerRessourceStateModel(data)
+	}
+	static empty(): PlayerRessourceStateModel {
+		return new PlayerRessourceStateModel(
+			{
+				ressource: []
+			}
+		)
 	}
 }

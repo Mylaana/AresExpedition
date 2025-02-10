@@ -1,16 +1,25 @@
+import { Injector } from "@angular/core";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { GAME_SELECTABLE_PHASE_LIST } from "../../global/global-const";
 import { PhaseCardInfoService } from "../../services/cards/phase-card-info.service";
 import { PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model"
+import { PlayerPhaseCardStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 
-export class PlayerPhaseCardState {
-	private phaseGroups: PhaseCardGroupModel[] = this.initializePhaseGroups();
-	private phaseCardUpgradeCount: number = 0
-	private selectedPhase: SelectablePhaseEnum = SelectablePhaseEnum.undefined
+export class PlayerPhaseCardStateModel {
+	private phaseGroups!: PhaseCardGroupModel[] //this.initializePhaseGroups();
+	private phaseCardUpgradeCount!: number
+	private selectedPhase!: SelectablePhaseEnum
 
-	constructor(private phaseService: PhaseCardInfoService){}
+	private phaseService: PhaseCardInfoService
+
+	constructor(private injector: Injector, dto: PlayerPhaseCardStateDTO){
+		this.phaseService = this.injector.get(PhaseCardInfoService)
+		//this.phaseGroups = this.initializePhaseGroups()
+		//this.selectedPhase = SelectablePhaseEnum.undefined
+
+	}
 
 	private initializePhaseGroups(): PhaseCardGroupModel[] {
 		let groups: PhaseCardGroupModel[] = []
@@ -43,5 +52,29 @@ export class PlayerPhaseCardState {
 				return
 			}
 		}
+	}
+
+	toJson(): PlayerPhaseCardStateDTO {
+		return {
+			phaseGroups: this.phaseGroups,
+			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
+			selectedPhase: this.selectedPhase
+		}
+	}
+	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseCardStateModel {
+		if (!data.phaseGroups || !data.phaseCardUpgradeCount || !data.selectedPhase){
+			throw new Error("Invalid PlayerPhaseCardStateDTO: Missing required fields")
+		}
+		return new PlayerPhaseCardStateModel(injector, data)
+	}
+	static empty(injector: Injector): PlayerPhaseCardStateModel {
+		return new PlayerPhaseCardStateModel(
+			injector,
+			{
+				phaseGroups: [],
+				phaseCardUpgradeCount: 0,
+				selectedPhase: SelectablePhaseEnum.undefined
+			}
+		)
 	}
 }
