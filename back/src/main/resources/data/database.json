@@ -162,36 +162,49 @@
                 ]
             },
             "projectCardState": {
-                "projectCards": {
-                    "toBeFilled": 0
-                }
+                "hand": [1,2,3],
+                "playedProjectIdList": [22, 7, 33],
+                "playedProjectCardStocks": {
+                    "22": {"microbe": 2, "animal": 12},
+                    "7" : {"science": 3}
+                },
+                "triggers": {
+                    "playedCardsId": [],
+                    "activeCardsId": [],
+                    "activeOnRessourceAddedToCard": [],
+                    "activeOnParameterIncrease": [],
+                    "activeOnPlayedCard": [],
+                    "activeOnGainedTag": [],
+                    "activeCostModTrigger": []
+                },
+                "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseCards": {
-                    "toBeFilled": 0
-                }
+                "phaseGroups": [
+                    {
+                        "phaseIndex": 0,
+                        "phaseGroup": "enum",
+                        "phaseCards": []
+                    }
+                ],
+                "phaseCardUpgradedCount": 2,
+                "selectedPhase": "DEVELOPMENT"
             },
             "globalParameterState": {
                 "globalParameters": {
-
-                
                     "infrastructure": {
-                        "name": "infrastructure",
                         "value": 0,
                         "addEndOfPhase": 0
                     },
                     "ocean": {
-                        "name": "ocean",
                         "value": 0,
                         "addEndOfPhase": 0
                     },
                     "oxygen": {
-                        "name": "oxygen",
                         "value": 0,
                         "addEndOfPhase": 0
                     },
                     "temperature": {
-                        "name": "temperature",
                         "value": 0,
                         "addEndOfPhase": 0
                     }
@@ -200,10 +213,9 @@
             "otherState": {
                 "research": {
                     "keep": 0,
-                    "scan": 0
+                    "scan": 4
                 },
-                "phaseCardUpgradeCount": 0,
-                "sellCardValueMod": 0
+                "sellCardValueMod": 1
             }
         }
     }

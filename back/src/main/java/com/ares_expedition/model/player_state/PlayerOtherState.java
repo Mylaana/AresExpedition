@@ -7,13 +7,14 @@ import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerOth
 
 public class PlayerOtherState {
     private Map<String, Object> research = new HashMap<>();
-	private Integer phaseCardUpgradeCount;
 	private Integer sellCardValueMod;
 
     PlayerOtherState() {
     }
 
     PlayerOtherState(PlayerOtherStateDTO dto) {
+        this.research = dto.getResearch();
+        this.sellCardValueMod = dto.getSellCardValueMod();
     }
 
     public Map<String, Object> getResearch() {
@@ -22,14 +23,6 @@ public class PlayerOtherState {
 
     public void setResearch(Map<String, Object> research) {
         this.research = research;
-    }
-
-    public Integer getPhaseCardUpgradeCount() {
-        return phaseCardUpgradeCount;
-    }
-
-    public void setPhaseCardUpgradeCount(Integer phaseCardUpgradeCount) {
-        this.phaseCardUpgradeCount = phaseCardUpgradeCount;
     }
 
     public Integer getSellCardValueMod() {

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
+import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
+import com.ares_expedition.enums.game.PhaseEnum;
 
 public class PlayerState {
     private PlayerInfoState infoState = new PlayerInfoState();
@@ -145,15 +147,46 @@ public class PlayerState {
     public void setProjectCardState(PlayerProjectCardState projectCardState) {
         this.projectCardState = projectCardState;
     }
-    
-    public Map<String, Object> getCards() {
-        return this.projectCardState.getProjectCards();
+
+    public List<Integer> getHand() {
+        return projectCardState.getHand();
     }
 
-    public void setCards(Map<String, Object> cards) {
-        this.projectCardState.setProjectCards(cards);
+    public void setHand(List<Integer> hand) {
+        this.projectCardState.setHand(hand);
     }
 
+    public List<Integer> getPlayedProjectIdList() {
+        return projectCardState.getPlayedProjectIdList();
+    }
+
+    public void setPlayedProjectIdList(List<Integer> playedProjectIdList) {
+        this.projectCardState.setPlayedProjectIdList(playedProjectIdList);
+    }
+
+    public Map<Integer, Object> getPlayedProjectCardStocks() {
+        return this.projectCardState.getPlayedProjectCardStocks();
+    }
+
+    public void setProjectCardStocks(Map<Integer, Object> projectCardStocks) {
+        this.projectCardState.setPlayedProjectCardStocks(projectCardStocks);
+    }
+
+    public Map<String, Object> getTriggers() {
+        return this.projectCardState.getTriggers();
+    }
+
+    public void setTriggers(Map<String, Object> triggers) {
+        this.projectCardState.setTriggers(triggers);
+    }
+
+    public Integer getHandMaximumSize() {
+        return this.projectCardState.getHandMaximumSize();
+    }
+
+    public void setHandMaximumSize(Integer handMaximumSize) {
+        this.projectCardState.setHandMaximumSize(handMaximumSize);
+    }
 
     //=============================================================
     //Phase Cards
@@ -165,25 +198,33 @@ public class PlayerState {
         this.phaseCardState = phaseCardState;
     }
 
-
-    public Map<String, Object> getPhaseCards() {
-        return this.phaseCardState.getPhaseCards();
+        public List<Map<String, Object>> getPhaseGroups() {
+        return this.phaseCardState.getPhaseGroups();
     }
 
-    public void setPhaseCards(Map<String, Object> phaseCards) {
-        this.phaseCardState.setPhaseCards(phaseCards);
+    public void setPhaseGroups(List<Map<String, Object>> phaseGroups) {
+        this.phaseCardState.setPhaseGroups(phaseGroups);
     }
 
-    /*
-    public Integer getPhaseCardUpgradeCount() {
-        return this.phaseCardState;
+    public Number getPhaseCardUpgradedCount() {
+        return this.phaseCardState.getPhaseCardUpgradedCount();
     }
-    
-    public void setPhaseCardUpgradeCount(Integer phaseCardUpgradeCount) {
-        this.phaseCardUpgradeCount = phaseCardUpgradeCount;
+
+    public void setPhaseCardUpgradedCount(Number phaseCardUpgradedCount) {
+        this.phaseCardState.setPhaseCardUpgradedCount(phaseCardUpgradedCount);
     }
-    */
-    
+
+    public PhaseEnum getSelectedPhase() {
+        return this.phaseCardState.getSelectedPhase();
+    }
+
+    public void setSelectedPhase(PhaseEnum selectedPhase) {
+        this.phaseCardState.setSelectedPhase(selectedPhase);
+    }
+
+    public static PlayerPhaseCardState fromJson(PlayerPhaseCardStateDTO dto) {
+        return new PlayerPhaseCardState(dto);
+    }    
 
     //=============================================================
     //Global parameters
