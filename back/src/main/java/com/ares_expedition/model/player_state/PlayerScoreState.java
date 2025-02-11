@@ -5,7 +5,7 @@ import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerSco
 
 public class PlayerScoreState {
     private Integer vp;
-	private Integer milestoneCount;
+    private Integer milestoneCount;
     private Integer terraformingRating;
 
     PlayerScoreState() {

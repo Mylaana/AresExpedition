@@ -5,9 +5,9 @@ export class PlayerOtherStateModel {
 	sellCardValueMod: number = 0
 	research: ScanKeep = {scan:0, keep:0}
 
-	constructor(data: PlayerOtherStateDTO){
-		this.sellCardValueMod = data.sellCardValueMod
-		this.research = data.research
+	constructor(dto: PlayerOtherStateDTO){
+		this.sellCardValueMod = dto.scvm
+		this.research = dto.r
 	}
 
 	//research
@@ -26,12 +26,12 @@ export class PlayerOtherStateModel {
 
 	toJson(): PlayerOtherStateDTO {
 		return {
-			sellCardValueMod: this.sellCardValueMod,
-			research: this.research
+			scvm: this.sellCardValueMod,
+			r: this.research
 		}
 	}
 	static fromJson(data: PlayerOtherStateDTO): PlayerOtherStateModel {
-		if (!data.sellCardValueMod || !data.research){
+		if (!data.scvm || !data.r){
 			throw new Error("Invalid PlayerOtherStateDTO: Missing required fields")
 		}
 		return new PlayerOtherStateModel(data)
@@ -39,8 +39,8 @@ export class PlayerOtherStateModel {
 	static empty(): PlayerOtherStateModel {
 		return new PlayerOtherStateModel(
 			{
-				sellCardValueMod: 0,
-				research: {scan:0, keep:0}
+				scvm: 0,
+				r: {scan:0, keep:0}
 			}
 		)
 	}

@@ -14,6 +14,7 @@ import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { GLOBAL_CLIENT_ID } from "../../global/global-const";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
+import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -571,4 +572,17 @@ export class GameState{
         }
         this.cleanAndNextEventQueue()
     }
+	public startGame(){
+	}
+	public setGameLoaded(){
+		this.loading.next(false)
+	}
+	public setGroupStateFromJson(dto: PlayerStateDTO[]){
+		let groupPlayerState: PlayerStateModel[] = []
+		for(let playerStateDTO of dto){
+			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
+		}
+		this.updateGroupPlayerState(groupPlayerState)
+		console.log('loaded:',this.groupPlayerState.getValue())
+	}
 }

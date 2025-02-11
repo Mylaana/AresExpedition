@@ -6,12 +6,18 @@ import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.model.player_state.PlayerProjectCardState;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerProjectCardStateDTO {
+    @JsonProperty("h")
     private List<Integer> hand = new ArrayList<>();
+    @JsonProperty("ppil")
     private List<Integer> playedProjectIdList = new ArrayList<>();
+    @JsonProperty("ppcs")
     private Map<Integer, Object> playedProjectCardStocks = new HashMap<Integer, Object>();
+    @JsonProperty("t")
     private Map<String, Object> triggers = new HashMap<String, Object>();
+    @JsonProperty("hms")
     private Integer handMaximumSize;
 
     PlayerProjectCardStateDTO() {

@@ -19,9 +19,11 @@ public class Game {
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
     @JsonDeserialize(keyUsing = IntegerKeyDeserializer.class)
     private Map<Integer, PlayerState> groupPlayerState = new HashMap<>();
+    private Boolean gameStarted;
 
     public Game() {
     }
+    
     public Game(Integer gameId, List<Integer> deck, List<Integer> discard, List<Integer> groupPlayerId, PhaseEnum currentPhase) {
         this.gameId = gameId;
         this.deck = deck;
@@ -29,33 +31,43 @@ public class Game {
         this.groupPlayerId = groupPlayerId;
         this.currentPhase = currentPhase;        
     }
+
     public Integer getGameId() {
         return this.gameId;
     }
+
     public void setGameId(Integer gameId) {
         this.gameId = gameId;
     }
+
     public List<Integer> getDeck() {
         return this.deck;
     }
+
     public void setDeck(List<Integer> deck) {
         this.deck = deck;
     }
+
     public List<Integer> getDiscard() {
         return this.discard;
     }
+
     public void setDiscard(List<Integer> discard) {
         this.discard = discard;
     }
+
     public List<Integer> getGroupPlayerId(){
         return this.groupPlayerId;
     }
+
     public void setGroupPlayerId(List<Integer> groupPlayerId){
         this.groupPlayerId = groupPlayerId;
     }
+
     public Map<Integer, Boolean> getGroupPlayerReady(){
         return this.groupPlayerReady;
     }
+
     public boolean getAllPlayersReady(){
         for(Map.Entry<Integer, Boolean> entry : groupPlayerReady.entrySet()){
             if(!entry.getValue()){
@@ -64,15 +76,19 @@ public class Game {
         };
         return true;
     }
+
     public void setGroupPlayerReady(Map<Integer, Boolean> groupReady){
         this.groupPlayerReady = groupReady;
     }
+
     public LinkedHashSet<PhaseEnum> getSelectedPhase(){
         return this.selectedPhase;
     }
+
     public void setSelectedPhase(LinkedHashSet<PhaseEnum> selectedPhase){
         this.selectedPhase = selectedPhase;
     }
+
     public List<Integer> drawCards(Integer drawNumber){
         ArrayList<Integer> result = new ArrayList<Integer>();
 
@@ -86,30 +102,36 @@ public class Game {
 
         return result;
     }
+
     private void checkDeckSize(Integer drawNumber){
         if(drawNumber<=this.deck.size()){return;}
         addDiscardToDeck();
         
     }
+
     private void addDiscardToDeck(){
         Collections.shuffle(this.discard);
         this.deck.addAll(this.discard);
         this.discard.clear();
     }
+
     public void shuffleDeck(){
         if (this.deck == null) {  // Exemple de validation
             throw new IllegalStateException("Deck must be initialized before shuffling.");
         }
         Collections.shuffle(this.deck);
     }
+
     public void setPlayerReady(Integer playerId, Boolean ready){
         this.groupPlayerReady.replace(playerId, ready);
     }
+
     public void setAllPlayersNotReady(){
         for(Integer playerId: this.groupPlayerId){
             this.setPlayerReady(playerId, false);
         }
     }
+
     public GameStateMessageOutputDTO getGameState(){
         GameStateMessageOutputDTO gameState = new GameStateMessageOutputDTO();
         gameState.setCurrentPhase(currentPhase);
@@ -119,12 +141,15 @@ public class Game {
 
         return gameState;
     }
+
     public PhaseEnum getCurrentPhase(){
         return this.currentPhase;
     }
+
     public void setCurrentPhase(PhaseEnum phase){
         this.currentPhase = phase;
     }
+
     public void nextPhaseSelected(){
         LinkedHashSet<PhaseEnum> tempSelectedPhase = new LinkedHashSet<>(this.selectedPhase);
 
@@ -144,10 +169,12 @@ public class Game {
         this.selectedPhase.add(PhaseEnum.PLANIFICATION);
         this.currentPhase = this.selectedPhase.getFirst();
     }
+
     public void addPhaseSelected(PhaseEnum phase){
         this.selectedPhase.add(phase);
         sortPhaseSelected();
     }
+
     private void sortPhaseSelected(){
         Comparator<PhaseEnum> customComparator = Comparator.comparingInt(PhaseEnum::getPriority);
 
@@ -159,16 +186,20 @@ public class Game {
         selectedPhase.clear();
         selectedPhase.addAll(sortedList);
     }
+    
     public LinkedHashSet<PhaseEnum>getPhaseSelected(){
         return this.selectedPhase;
     }
+
     public void setPlayerState(Integer playerId, PlayerState state){
         this.groupPlayerState.put(playerId, state);
     }
 
+    public Boolean getGameStarted() {
+        return gameStarted;
+    }
 
-    @Override
-    public String toString() {
-        return "Game{gameId=" + gameId + ", deck=" + deck + "}";
+    public void setGameStarted(Boolean gameStarted) {
+        this.gameStarted = gameStarted;
     }
 }

@@ -1,10 +1,14 @@
 package com.ares_expedition.dto.websocket.content.player_state.subclass;
 
 import com.ares_expedition.model.player_state.PlayerScoreState;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerScoreStateDTO {
+    @JsonProperty("v")
     private Integer vp;
-	private Integer milestoneCount;
+	@JsonProperty("mc")
+    private Integer milestoneCount;
+    @JsonProperty("tr")
     private Integer terraformingRating;
 
     PlayerScoreStateDTO() {

@@ -2,7 +2,6 @@
     "gameId" : 1,
     "deck": [4, 9, 20, 25, 29, 36, 37, 42],
     "discard": [],
-    "gameStarted": true,
     "groupPlayerId": [0,1,2,3],
     "groupPlayerReady": {
         "0": false,
@@ -30,70 +29,70 @@
                         "id": 0,
                         "name": "building",
                         "idImageUrl": 0,
-                        "valueCount": 10,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 1,
                         "name": "space",
                         "idImageUrl": 1,
-                        "valueCount": 9,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 2,
                         "name": "science",
                         "idImageUrl": 2,
-                        "valueCount": 8,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 3,
                         "name": "power",
                         "idImageUrl": 3,
-                        "valueCount": 7,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 4,
                         "name": "earth",
                         "idImageUrl": 4,
-                        "valueCount": 6,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 5,
                         "name": "jovian",
                         "idImageUrl": 5,
-                        "valueCount": 5,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 6,
                         "name": "plant",
                         "idImageUrl": 6,
-                        "valueCount": 4,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 7,
                         "name": "animal",
                         "idImageUrl": 7,
-                        "valueCount": 3,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 8,
                         "name": "microbe",
                         "idImageUrl": 8,
-                        "valueCount": 2,
+                        "valueCount": 0,
                         "valueMod": 0
                     },
                     {
                         "id": 9,
                         "name": "event",
                         "idImageUrl": 9,
-                        "valueCount": 1,
+                        "valueCount": 0,
                         "valueMod": 0
                     }
                 ]
@@ -192,28 +191,24 @@
                 "selectedPhase": "DEVELOPMENT"
             },
             "globalParameterState": {
-                "globalParameters": [
-                    {
-                        "name": "infrastructure",
+                "globalParameters": {
+                    "infrastructure": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "ocean",
-                        "value": 3,
+                    "ocean": {
+                        "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "oxygen",
+                    "oxygen": {
                         "value": 0,
-                        "addEndOfPhase": 7
+                        "addEndOfPhase": 0
                     },
-                    {
-                        "name": "temperature",
+                    "temperature": {
                         "value": 0,
                         "addEndOfPhase": 0
                     }
-                ]
+                }
             },
             "otherState": {
                 "research": {
@@ -402,28 +397,24 @@
                 "selectedPhase": "DEVELOPMENT"
             },
             "globalParameterState": {
-                "globalParameters": [
-                    {
-                        "name": "infrastructure",
+                "globalParameters": {
+                    "infrastructure": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "ocean",
+                    "ocean": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "oxygen",
+                    "oxygen": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "temperature",
+                    "temperature": {
                         "value": 0,
                         "addEndOfPhase": 0
                     }
-                ]
+                }
             },
             "otherState": {
                 "research": {
@@ -612,28 +603,24 @@
                 "selectedPhase": "DEVELOPMENT"
             },
             "globalParameterState": {
-                "globalParameters": [
-                    {
-                        "name": "infrastructure",
+                "globalParameters": {
+                    "infrastructure": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "ocean",
+                    "ocean": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "oxygen",
+                    "oxygen": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "temperature",
+                    "temperature": {
                         "value": 0,
                         "addEndOfPhase": 0
                     }
-                ]
+                }
             },
             "otherState": {
                 "research": {
@@ -822,28 +809,24 @@
                 "selectedPhase": "DEVELOPMENT"
             },
             "globalParameterState": {
-                "globalParameters": [
-                    {
-                        "name": "infrastructure",
+                "globalParameters": {
+                    "infrastructure": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "ocean",
+                    "ocean": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "oxygen",
+                    "oxygen": {
                         "value": 0,
                         "addEndOfPhase": 0
                     },
-                    {
-                        "name": "temperature",
+                    "temperature": {
                         "value": 0,
                         "addEndOfPhase": 0
                     }
-                ]
+                }
             },
             "otherState": {
                 "research": {

@@ -19,7 +19,7 @@ export class PlayerRessourceStateModel {
     private ressources: RessourceInfo[] = this.initializeRessources()
 
 	constructor(data: PlayerRessourceStateDTO){
-		this.ressources = data.ressource
+		this.ressources = data.r
 	}
 
 	private initializeRessources(): RessourceInfo[] {
@@ -72,11 +72,11 @@ export class PlayerRessourceStateModel {
 	}
 	toJson(): PlayerRessourceStateDTO {
 		return {
-			ressource: this.ressources
+			r: this.ressources
 		}
 	}
 	static fromJson(data: PlayerRessourceStateDTO): PlayerRessourceStateModel {
-		if (!data.ressource){
+		if (!data.r){
 			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
 		}
 		return new PlayerRessourceStateModel(data)
@@ -84,7 +84,7 @@ export class PlayerRessourceStateModel {
 	static empty(): PlayerRessourceStateModel {
 		return new PlayerRessourceStateModel(
 			{
-				ressource: []
+				r: []
 			}
 		)
 	}

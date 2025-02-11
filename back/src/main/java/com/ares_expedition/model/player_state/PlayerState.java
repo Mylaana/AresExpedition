@@ -237,11 +237,11 @@ public class PlayerState {
     }
 
     
-    public Map<String, Object> getGlobalParameter() {
+    public List<Map<String, Object>> getGlobalParameter() {
         return globalParameterState.getGlobalParameters();
     }
 
-    public void setGlobalParameter(Map<String, Object> globalParameter) {
+    public void setGlobalParameter(List<Map<String, Object>> globalParameter) {
         this.globalParameterState.setGlobalParameters(globalParameter);
     }
 

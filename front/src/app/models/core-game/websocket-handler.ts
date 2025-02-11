@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsInputMessage } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WSGroupState, WsInputMessage } from "../../interfaces/websocket.interface";
 import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
 import { Utils } from "../../utils/utils";
+import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 
 @Injectable()
 export class WebsocketHandler {
@@ -37,6 +38,10 @@ export class WebsocketHandler {
                 this.handleMessageGameState(message.content, 'player')
                 break
             }
+			case(PlayerMessageContentResultEnum.startGame):{
+				this.gameStateService.startGame()
+				break
+			}
             default:{
                 console.log('UNHANDLED PLAYER MESSAGE RECEIVED: ', message)
             }
@@ -73,7 +78,7 @@ export class WebsocketHandler {
         this.gameStateService.clearEventQueue()
         this.gameStateService.setCurrentPhase(content.currentPhase)
         this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
-		//this.handleGroupMessageGameState(WebsocketResultMessageFactory.createGroupMessageResult(content.publicPlayerState))
+		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
     }
     private handleGroupMessageReadyResult(groupReady: WsGroupReady[]): void {
         //setting ready
@@ -91,7 +96,9 @@ export class WebsocketHandler {
             }
         }
     }
-	private handleGroupMessageGameState(): void {
-
+	private handleGroupMessageGameState(groupState: PlayerStateDTO[]): void {
+		console.log('received:', groupState)
+		this.gameStateService.setGroupStateFromJson(groupState)
+		this.gameStateService.setGameLoaded()
 	}
 }

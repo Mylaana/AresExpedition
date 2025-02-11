@@ -6,9 +6,9 @@ export class PlayerScoreStateModel {
 	private terraformingRating: number = 0
 
 	constructor(data: PlayerScoreStateDTO){
-		this.milestoneCount = data.milestoneCount
-		this.vp = data.vp
-		this.terraformingRating = data.terraformingRating
+		this.milestoneCount = data.mc
+		this.vp = data.v
+		this.terraformingRating = data.tr
 	}
 
 	addMilestoneCompleted(milestone: number = 1): void {
@@ -23,13 +23,13 @@ export class PlayerScoreStateModel {
 
 	toJson(): PlayerScoreStateDTO {
 		return {
-			milestoneCount: this.milestoneCount,
-			vp: this.vp,
-			terraformingRating: this.terraformingRating
+			mc: this.milestoneCount,
+			v: this.vp,
+			tr: this.terraformingRating
 		}
 	}
 	static fromJson(data: PlayerScoreStateDTO): PlayerScoreStateModel {
-		if (!data.milestoneCount || !data.vp || !data.terraformingRating){
+		if (!data.mc || !data.v || !data.tr){
 			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
 		}
 		return new PlayerScoreStateModel(data)
@@ -37,9 +37,9 @@ export class PlayerScoreStateModel {
 	static empty(): PlayerScoreStateModel {
 		return new PlayerScoreStateModel(
 			{
-				milestoneCount: 0,
-				terraformingRating: 0,
-				vp:0
+				mc: 0,
+				tr: 0,
+				v:0
 			}
 		)
 	}

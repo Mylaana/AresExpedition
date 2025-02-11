@@ -6,10 +6,14 @@ import java.util.Map;
 
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.PlayerPhaseCardState;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerPhaseCardStateDTO {
+    @JsonProperty("pg")
     private List<Map<String, Object>> phaseGroups = new ArrayList<Map<String, Object>>();
+    @JsonProperty("pcuc")
     private Number phaseCardUpgradedCount;
+    @JsonProperty("sp")
     private PhaseEnum selectedPhase;
 
     PlayerPhaseCardStateDTO() {

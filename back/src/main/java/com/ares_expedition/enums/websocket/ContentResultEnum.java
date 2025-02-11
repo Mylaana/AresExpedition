@@ -13,5 +13,6 @@ public enum ContentResultEnum {
     //Other
     SERVER_SIDE_UNHANDLED,
     DEBUG,
-    ACKNOWLEDGE
+    ACKNOWLEDGE,
+    START_GAME
 }

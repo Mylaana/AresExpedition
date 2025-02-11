@@ -24,6 +24,7 @@ public class BaseMessageInputDTO<T>{
     @JsonSubTypes.Type(value = GenericContentDTO.class, name = "PLAYER_GAME_STATE_QUERY"),
     @JsonSubTypes.Type(value = DrawContentDTO.class, name = "DRAW_QUERY"),
     @JsonSubTypes.Type(value = GenericContentDTO.class, name = "DEBUG"),
+    @JsonSubTypes.Type(value = GenericContentDTO.class, name = "PLAYER_CONNECT"),
     // Add other types here
 
     })

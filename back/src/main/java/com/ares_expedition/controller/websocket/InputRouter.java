@@ -64,6 +64,11 @@ public class InputRouter {
                     message, PlayerStateDTO.class,
                     PlayerStateMessageDTO.class, this::handlePlayerStatePushMessage);
                 break;
+            case PLAYER_CONNECT:
+                handleQuery(    
+                    message, GenericContentDTO.class,
+                    GenericMessageDTO.class, this::handlePlayerConnection);
+                break;
             default:
                 handleQuery(
                     message, UnHandledContentDTO.class,
@@ -147,5 +152,17 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent())
             );
+    }
+    
+    private void handlePlayerConnection(GenericMessageDTO query) {
+        System.out.println("\u001B[32m HANDLEING player connection query for gameId: " + query.getGameId() + "\u001B[0m");
+        Integer gameId = query.getGameId();
+        Boolean gameStarted = gameController.getGameStarted(gameId);
+        if (gameStarted) {
+            wsOutput.sendPushToPlayer(MessageOutputFactory.createGameStateMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());    
+        } else {
+            wsOutput.sendPushToPlayer(MessageOutputFactory.createStartGameMessage(gameId, ""), query.getPlayerId());
+        }
+        
     }
 }

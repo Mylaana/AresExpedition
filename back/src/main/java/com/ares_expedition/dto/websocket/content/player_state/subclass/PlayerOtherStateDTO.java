@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ares_expedition.model.player_state.PlayerOtherState;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerOtherStateDTO {
+    @JsonProperty("r")
     private Map<String, Object> research = new HashMap<>();
+    @JsonProperty("scvm")
 	private Integer sellCardValueMod;
 
     PlayerOtherStateDTO() {

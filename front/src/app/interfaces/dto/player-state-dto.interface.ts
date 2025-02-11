@@ -1,9 +1,9 @@
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardGroupModel } from "../../models/cards/phase-card.model";
 import { TriggerState } from "../../models/cards/project-card.model";
-import { RGB } from "../../types/global.type";
+import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PlayedProject } from "../../types/project-card.type";
-import { GlobalParameter, RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
+import { RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
 
 export interface PlayerStateDTO {
 	infoState: PlayerInfoStateDTO
@@ -16,36 +16,41 @@ export interface PlayerStateDTO {
 	otherState: PlayerOtherStateDTO
 }
 export interface PlayerInfoStateDTO {
-	id: number,
-	name: string,
-	color: RGB
+	i: number, //id
+	n: string, //name
+	c: RGB //color
 }
 export interface PlayerScoreStateDTO {
-	milestoneCount: number,
-	vp: number,
-	terraformingRating: number
+	mc: number,
+	v: number,
+	tr: number
 }
 export interface PlayerTagStateDTO {
-	tags: TagInfo[]
+	t: TagInfo[]
 }
 export interface PlayerRessourceStateDTO {
-	ressource: RessourceInfo[]
+	r: RessourceInfo[]
 }
 export interface PlayerProjectCardStateDTO {
-	hand: number[],
-	projects: PlayedProject
-	triggers: TriggerState
-	handMaximumSize: number
+	h: number[],
+	p: PlayedProject
+	t: TriggerState
+	hms: number
 }
 export interface PlayerPhaseCardStateDTO {
-	phaseGroups : PhaseCardGroupModel[]
-	phaseCardUpgradeCount: number
-	selectedPhase: SelectablePhaseEnum
+	pg : PhaseCardGroupModel[]
+	pcuc: number
+	sp: SelectablePhaseEnum
 }
 export interface PlayerGlobalParameterStateDTO {
-	parameters: GlobalParameter[]
+	gp: GlobalParameterDTO[]
 }
 export interface PlayerOtherStateDTO {
-	sellCardValueMod: number,
-	research: ScanKeep
+	scvm: number,
+	r: ScanKeep
+}
+export interface GlobalParameterDTO {
+	name: GlobalParameterName
+	value?: number //value
+	addEndOfPhase?: number //addEndOfPhase
 }

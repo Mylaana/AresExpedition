@@ -1,22 +1,23 @@
 package com.ares_expedition.model.player_state;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerGlobalParameterStateDTO;
 
 public class PlayerGlobalParameterState {
-    private Map<String, Object> globalParameters = new HashMap<>();
+    private List<Map<String, Object>> globalParameters = new ArrayList<Map<String, Object>>();
 
     PlayerGlobalParameterState() {
     }
     PlayerGlobalParameterState(PlayerGlobalParameterStateDTO dto) {
         this.globalParameters = dto.getGlobalParameters();
     }
-    public Map<String, Object> getGlobalParameters() {
+    public List<Map<String, Object>> getGlobalParameters() {
         return globalParameters;
     }
-    public void setGlobalParameters(Map<String, Object> globalParameters) {
+    public void setGlobalParameters(List<Map<String, Object>> globalParameters) {
         this.globalParameters = globalParameters;
     }
 

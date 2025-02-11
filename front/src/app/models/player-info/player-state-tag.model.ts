@@ -7,7 +7,7 @@ export class PlayerTagStateModel {
     private tags: TagInfo[] = this.initializeTags()
 
 	constructor(data: PlayerTagStateDTO){
-		this.tags = data.tags
+		this.tags = data.t
 	}
 
 	private initializeTags(): TagInfo[]{
@@ -37,11 +37,11 @@ export class PlayerTagStateModel {
 	getTags(): TagInfo[] {return this.tags}
 	toJson(): PlayerTagStateDTO {
 		return {
-			tags: this.tags
+			t: this.tags
 		}
 	}
 	static fromJson(data: PlayerTagStateDTO): PlayerTagStateModel {
-		if (!data.tags){
+		if (!data.t){
 			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
 		}
 		return new PlayerTagStateModel(data)
@@ -49,7 +49,7 @@ export class PlayerTagStateModel {
 	static empty(): PlayerTagStateModel {
 		return new PlayerTagStateModel(
 			{
-				tags: []
+				t: []
 			}
 		)
 	}

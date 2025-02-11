@@ -26,6 +26,6 @@ public class WsControllerOutput {
 	
 	public void sendAckToPlayer(AckMessageOutput message, Integer playerId){
         System.out.println("\u001B[35m Sending Acknowledge on player channel: " + message.getContentEnum() +" with player id: " + playerId + " uuid:" + message.getUuid() + "\u001B[0m");
-        messagingTemplate.convertAndSend(String.format("/topic/player/%d/%d", message.getGameId(), playerId), message);
+        messagingTemplate.convertAndSend(String.format("/topic/ack/%d/%d", message.getGameId(), playerId), message);
     }
 }

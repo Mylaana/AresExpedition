@@ -18,7 +18,9 @@ export class PlayerPhaseCardStateModel {
 		this.phaseService = this.injector.get(PhaseCardInfoService)
 		//this.phaseGroups = this.initializePhaseGroups()
 		//this.selectedPhase = SelectablePhaseEnum.undefined
-
+		this.phaseGroups = dto.pg
+		this.phaseCardUpgradeCount = dto.pcuc
+		this.selectedPhase = dto.sp
 	}
 
 	private initializePhaseGroups(): PhaseCardGroupModel[] {
@@ -56,13 +58,13 @@ export class PlayerPhaseCardStateModel {
 
 	toJson(): PlayerPhaseCardStateDTO {
 		return {
-			phaseGroups: this.phaseGroups,
-			phaseCardUpgradeCount: this.phaseCardUpgradeCount,
-			selectedPhase: this.selectedPhase
+			pg: this.phaseGroups,
+			pcuc: this.phaseCardUpgradeCount,
+			sp: this.selectedPhase
 		}
 	}
 	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseCardStateModel {
-		if (!data.phaseGroups || !data.phaseCardUpgradeCount || !data.selectedPhase){
+		if (!data.pg || !data.pcuc || !data.sp){
 			throw new Error("Invalid PlayerPhaseCardStateDTO: Missing required fields")
 		}
 		return new PlayerPhaseCardStateModel(injector, data)
@@ -71,9 +73,9 @@ export class PlayerPhaseCardStateModel {
 		return new PlayerPhaseCardStateModel(
 			injector,
 			{
-				phaseGroups: [],
-				phaseCardUpgradeCount: 0,
-				selectedPhase: SelectablePhaseEnum.undefined
+				pg: [],
+				pcuc: 0,
+				sp: SelectablePhaseEnum.undefined
 			}
 		)
 	}

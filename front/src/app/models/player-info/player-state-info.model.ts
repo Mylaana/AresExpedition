@@ -7,9 +7,9 @@ export class PlayerInfoStateModel{
 	private color!: RGB;
 
 	constructor(data: PlayerInfoStateDTO){
-		this.id = data.id
-		this.name = data.name
-		this.color = data.color
+		this.id = data.i
+		this.name = data.n
+		this.color = data.c
 	}
 
 	setId(id: number): void {this.id = id}
@@ -21,13 +21,13 @@ export class PlayerInfoStateModel{
 
 	toJson(): PlayerInfoStateDTO {
 		return {
-			id: this.id,
-			name: this.name,
-			color: this.color
+			i: this.id,
+			n: this.name,
+			c: this.color
 		}
 	}
 	static fromJson(data: PlayerInfoStateDTO): PlayerInfoStateModel {
-		if (!data.id || !data.name || !data.color){
+		if (!data.i || !data.n || !data.c){
 			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
 		}
 		return new PlayerInfoStateModel(data)
@@ -35,9 +35,9 @@ export class PlayerInfoStateModel{
 	static empty(): PlayerInfoStateModel {
 		return new PlayerInfoStateModel(
 			{
-				id:0,
-				color: "rgb(0, 0, 0)",
-				name:"Player 0"
+				i:0,
+				c:"rgb(0, 0, 0)",
+				n:"Player 0"
 		})
 	}
 }
