@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WSGroupState, WsInputMessage } from "../../interfaces/websocket.interface";
-import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../../enum/websocket.enum";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady } from "../../interfaces/websocket.interface";
+import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
@@ -97,7 +97,6 @@ export class WebsocketHandler {
         }
     }
 	private handleGroupMessageGameState(groupState: PlayerStateDTO[]): void {
-		console.log('received:', groupState)
 		this.gameStateService.setGroupStateFromJson(groupState)
 		this.gameStateService.setGameLoaded()
 	}

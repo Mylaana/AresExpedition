@@ -33,7 +33,8 @@ export interface PlayerRessourceStateDTO {
 }
 export interface PlayerProjectCardStateDTO {
 	h: number[],
-	p: PlayedProject
+	ppil: number[]
+	ppcs: any
 	t: TriggerState
 	hms: number
 }

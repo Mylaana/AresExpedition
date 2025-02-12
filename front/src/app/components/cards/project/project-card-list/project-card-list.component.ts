@@ -208,8 +208,10 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	resetCardList(): void {
 		this.selectedCardList = []
 	}
-	updatePlayedCardList(cardList: ProjectCardModel[]): void {
-		this.playedCardList = cardList
+	updatePlayedCardList(cardList: ProjectCardModel[] | undefined): void {
+		console.log('update played card list called', cardList)
+		return
+		//this.playedCardList = cardList
 		this.updateCardList()
 	}
 }

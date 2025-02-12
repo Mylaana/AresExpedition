@@ -17,6 +17,7 @@ import { Message } from '@stomp/stompjs';
 import { PlayerMessageResult } from './interfaces/websocket.interface';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
 import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
+import { Utils } from './utils/utils';
 
 @Component({
 	selector: 'app-root',
@@ -36,11 +37,11 @@ import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
 		WebsocketHandler
 	]
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
 	title = 'AresExpedition';
 	playerHand: ProjectCardModel[] = [];
 	playerPlayed: ProjectCardModel[] = [];
-	playerIdList: number[] = this.gameStateService.playerCount.getValue()
+	playerIdList: number[] = [] //this.gameStateService.playerCount.getValue()
 	clientPlayerId!: number;
 	loading: boolean = true
 	@ViewChild('hand') handProjectList!: ProjectCardListComponent
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.gameStateService.currentLoadingState.subscribe(
 			loading => this.loadingFinished(loading)
 		)
+
 		this.groupSubscription = this.rxStompService
 		.watch(GLOBAL_WS_GROUP)
 		.subscribe((message: Message) => {
@@ -75,19 +77,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	ngAfterViewInit(): void{
-	//sets loading to true after view init
-		return
-		setTimeout(() => {
-			this.gameStateService.loading.next(false);
-		}, 0)
-	}
-
 	updateHandOnStateChange(state: PlayerStateModel[]): void {
 		let clientState = this.gameStateService.getClientState()
 		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
 		this.playerPlayed = clientState.getProjectPlayedModelList()
-		this.handProjectList.updatePlayedCardList(this.playerPlayed)
+
+		if(!this.handProjectList){return}
+		this.handProjectList.updatePlayedCardList(clientState.getProjectPlayedModelList())
 	}
 	updatePlayerList(playerIdList: number[]){
 		this.playerIdList = playerIdList
@@ -100,6 +96,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.gameStateService.currentPlayerCount.subscribe(
 			playerCount => this.updatePlayerList(playerCount)
 		)
+
 		this.gameStateService.currentGroupPlayerState.subscribe(
 			state => this.updateHandOnStateChange(state)
 		)

@@ -572,17 +572,28 @@ export class GameState{
         }
         this.cleanAndNextEventQueue()
     }
+
 	public startGame(){
 	}
+
 	public setGameLoaded(){
 		this.loading.next(false)
 	}
 	public setGroupStateFromJson(dto: PlayerStateDTO[]){
 		let groupPlayerState: PlayerStateModel[] = []
+		let playerIdList: number[] = []
 		for(let playerStateDTO of dto){
+			//add playerId to list
+			playerIdList.push(playerStateDTO.infoState.i)
+
+			//add playerstate
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
 		}
+		this.setPlayerIdList(playerIdList)
 		this.updateGroupPlayerState(groupPlayerState)
-		console.log('loaded:',this.groupPlayerState.getValue())
+	}
+
+	public getPlayerCount(): number {
+		return this.groupPlayerState.getValue().length
 	}
 }

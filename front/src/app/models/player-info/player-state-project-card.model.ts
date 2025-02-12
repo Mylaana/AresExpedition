@@ -30,6 +30,10 @@ export class PlayerProjectCardStateModel {
 		//this.projects = dto.p
 		this.triggers = dto.t
 		this.handMaximumSize = dto.hms
+		this.projects = {
+			playedIdList: dto.ppil,
+			playedProjectList: this.cardInfoService.getProjectCardList(dto.ppil)
+		}
 	}
 
     playCard(card: ProjectCardModel): void {
@@ -106,14 +110,15 @@ export class PlayerProjectCardStateModel {
 	toJson(): PlayerProjectCardStateDTO {
 		return {
 			h: this.hand,
-			p: this.projects,
+			ppil: this.projects.playedIdList,
+			ppcs: null,
 			t: this.triggers,
 			hms: this.handMaximumSize
 		}
 	}
 	static fromJson(data: PlayerProjectCardStateDTO, injector: Injector): PlayerProjectCardStateModel {
-		if (!data.h || !data.p || !data.t || !data.hms){
-			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
+		if (!data.h || !data.ppil || data.ppcs|| !data.t || !data.hms){
+			throw new Error("Invalid PlayerProjectCardStateDTO: Missing required fields")
 		}
 		return new PlayerProjectCardStateModel(injector, data)
 	}
@@ -123,7 +128,8 @@ export class PlayerProjectCardStateModel {
 			{
 				h: [],
 				hms: 0,
-				p: {playedIdList: [], playedProjectList: []},
+				ppil: [],
+				ppcs: [],
 				t: new TriggerState
 			}
 		)
