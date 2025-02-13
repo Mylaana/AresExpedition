@@ -30,6 +30,10 @@ public class MessageOutputFactory {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.GAME_STATE, content);
     }
 
+    public static BaseMessageOutputDTO createConnectMessage(Integer gameId, GameStateMessageOutputDTO content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.PLAYER_CONNECT, content);
+    }
+
     public static BaseMessageOutputDTO createPlayerStateMessage(Integer gameId, PlayerStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.PLAYER_STATE, content);
     }

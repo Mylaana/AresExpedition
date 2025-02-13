@@ -159,7 +159,7 @@ public class InputRouter {
         Integer gameId = query.getGameId();
         Boolean gameStarted = gameController.getGameStarted(gameId);
         if (gameStarted) {
-            wsOutput.sendPushToPlayer(MessageOutputFactory.createGameStateMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());    
+            wsOutput.sendPushToPlayer(MessageOutputFactory.createConnectMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());    
         } else {
             wsOutput.sendPushToPlayer(MessageOutputFactory.createStartGameMessage(gameId, ""), query.getPlayerId());
         }

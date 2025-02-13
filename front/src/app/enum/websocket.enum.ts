@@ -12,6 +12,7 @@ export enum PlayerMessageContentResultEnum {
     draw = 'DRAW_RESULT',
     gameState = 'GAME_STATE',
 	startGame = 'START_GAME',
+	playerConnect = 'PLAYER_CONNECT',
 
 	acknowledge = 'ACKNOWLEDGE'
 }

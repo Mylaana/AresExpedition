@@ -42,6 +42,10 @@ export class WebsocketHandler {
 				this.gameStateService.startGame()
 				break
 			}
+			case(PlayerMessageContentResultEnum.playerConnect):{
+				this.handleMessageConnection(message.content)
+				break
+			}
             default:{
                 console.log('UNHANDLED PLAYER MESSAGE RECEIVED: ', message)
             }
@@ -71,15 +75,21 @@ export class WebsocketHandler {
             }
         }
     }
+	//Player messages
     private handlePlayerMessageDrawResult(content: WsDrawResult): void {
         this.gameStateService.handleWsDrawResult(content)
     }
-    private handleMessageGameState(content: WsGameState, origin: String): void {
+    private handleMessageGameState(content: WsGameState, origin?: String): void {
         this.gameStateService.clearEventQueue()
         this.gameStateService.setCurrentPhase(content.currentPhase)
         this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
     }
+	private handleMessageConnection(content: WsGameState): void {
+		this.handleMessageGameState(content)
+	}
+
+	//Group messages
     private handleGroupMessageReadyResult(groupReady: WsGroupReady[]): void {
         //setting ready
         this.gameStateService.setGroupReady(groupReady)
