@@ -44,7 +44,6 @@ export interface WsSelectedPhaseQuery extends WsQuery {
 export interface WsPlayerState extends WsQuery {
     state: PlayerStateDTO
 }
-
 export interface WsResult {}
 export interface WsGroupReady extends WsResult {
     playerId: number
@@ -58,5 +57,13 @@ export interface WsGameState extends WsResult {
     currentPhase: NonSelectablePhaseEnum
     selectedPhases: SelectablePhaseEnum[]
     groupReady: Map<number, boolean>
-    publicPlayerState: Map<string, any>
+    groupPlayerStatePublic: Map<string, any>
+}
+export interface WSGroupState extends WsResult {
+	groupState: PlayerStateDTO[]
+}
+export interface WsAck {
+	gameId: number
+	contentEnum: PlayerMessageContentResultEnum
+	uuid: myUUID
 }

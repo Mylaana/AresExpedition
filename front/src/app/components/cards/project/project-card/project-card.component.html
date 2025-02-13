@@ -115,6 +115,6 @@
 <p>{{projectCard.id}} {{projectCard.cardCode}}</p>
 <p>{{projectCard.stock | json}}</p>
 <p>{{projectCard.stockable | json}}</p>
-<p>selectable: {{state.getCurrentState() | json}}</p>
-<p>initial state: {{initialState | json}}</p>
-<p>parent state: {{stateFromParent | json}}</p>
+<p>current: {{state.getCurrentState().buildable| json}}</p>
+<p>initial: {{initialState?.buildable | json}}</p>
+<p>parent: {{stateFromParent?.buildable | json}}</p>

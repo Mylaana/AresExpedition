@@ -4,12 +4,15 @@ export enum MessageContentQueryEnum {
     playerGameStateQuery = 'PLAYER_GAME_STATE_QUERY',
     selectedPhase = 'SELECTED_PHASE_QUERY',
     playerStatePush = 'PLAYER_STATE_PUSH',
+	playerConnect = 'PLAYER_CONNECT',
 
     debug = 'DEBUG'
 }
 export enum PlayerMessageContentResultEnum {
     draw = 'DRAW_RESULT',
     gameState = 'GAME_STATE',
+	startGame = 'START_GAME',
+	playerConnect = 'PLAYER_CONNECT',
 
 	acknowledge = 'ACKNOWLEDGE'
 }

@@ -25,15 +25,18 @@ public class GameController {
         this.wsOutput = wsOutput;
         this.loadGames();
     }
+    
     private void loadGames(){
         Integer gameId = 1;
         Game newGame = JsonGameReader.getGame(gameId);
         newGame.shuffleDeck();
         this.gameHolder.put(gameId, newGame);
     }
+
     public Game getGameFromId(Integer gameId){
         return this.gameHolder.get(gameId);
     }
+
     public List<Integer> drawCards(Integer gameId, Integer drawNumber){
         List<Integer> cards = getGameFromId(gameId).drawCards(drawNumber);
         if(cards.size() < drawNumber){
@@ -41,6 +44,7 @@ public class GameController {
         }
         return cards;
     }
+
     public void setPlayerReady(Integer gameId, Integer playerId, Boolean ready){
         Game game = getGameFromId(gameId);
         game.setPlayerReady(playerId, ready);
@@ -55,30 +59,46 @@ public class GameController {
         game.nextPhaseSelected();
         wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, game.getGameState()));
     }
+
     public Map<Integer, Boolean> getGroupPlayerReady(Integer gameId){
         return getGameFromId(gameId).getGroupPlayerReady();
     }
+
     public Boolean getAllPlayersReady(Integer gameId){
         return  getGameFromId(gameId).getAllPlayersReady();
     }
+
     public void setAllPlayersNotReady(Integer gameId){
         getGameFromId(gameId).setAllPlayersNotReady();
     }
+
     public GameStateMessageOutputDTO getGameState(Integer gameId){
         return getGameFromId(gameId).getGameState();
     }
+
     public void nextPhaseSelected(Integer gameId){
         getGameFromId(gameId).nextPhaseSelected();
     }
+
     public void addPhaseSelected(Integer gameId, PhaseEnum phase){
         getGameFromId(gameId).addPhaseSelected(phase);
     }
+
     public LinkedHashSet<PhaseEnum> getPhaseSelected(Integer gameId){
         return getGameFromId(gameId).getPhaseSelected();
     }
+
     public void setPlayerState(Integer gameId, Integer playerId, PlayerState state){
         Game game = getGameFromId(gameId);
         game.setPlayerState(playerId, state);
         this.setPlayerReady(gameId, playerId, true);
+    }
+
+    public Boolean getGameStarted(Integer gameId) {
+        return getGameFromId(gameId).getGameStarted();
+    }
+
+    public void setGameStarted(Integer gameId, Boolean gameStarted) {
+        getGameFromId(gameId).setGameStarted(gameStarted);
     }
 }

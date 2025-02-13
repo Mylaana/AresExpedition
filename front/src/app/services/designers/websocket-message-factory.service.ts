@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, WsGroupReady, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
@@ -43,6 +43,9 @@ export class WebsocketQueryMessageFactory{
         let query: PlayerStateDTO = state.toJson() //{secretState: state.toSecretDTO(), publicState: state.toPublicDTO()}
         return this.generatePlayerMessage(MessageContentQueryEnum.playerStatePush, query)
     }
+	public static createConnectionQuery(): PlayerMessage {
+		return this.generatePlayerMessage(MessageContentQueryEnum.playerConnect)
+	}
 }
 
 
@@ -80,5 +83,21 @@ export class WebsocketResultMessageFactory{
 		});
 		return result
 	}
-	//public static inputToGroupState(message: )
+	public static inputToGroupStateDTO(content: Map<string, any>): PlayerStateDTO[] {
+		let result: PlayerStateDTO[] = []
+		const entries = Object.entries(content);
+		entries.forEach(([key, value]) => {
+			result.push(value);
+		});
+		return result
+	}
+	public static createAckMessage(message: any): WsAck {
+		let parsedMessage = JSON.parse(message)
+        let result : WsAck = {
+			uuid: parsedMessage['uuid'],
+            gameId: parsedMessage['gameId'],
+            contentEnum: parsedMessage['contentEnum'],
+        }
+        return result
+	}
 }

@@ -1,6 +1,7 @@
 import { PlayerGlobalParameterStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GlobalParameter, GlobalParameterValue } from "../../interfaces/global.interface";
 import { GlobalParameterName } from "../../types/global.type";
+import { Utils } from "../../utils/utils";
 
 const globalParameterIndex = new Map<GlobalParameterName, number>(
 	[
@@ -19,8 +20,18 @@ private parameters: GlobalParameter[] = [
 		{name: 'temperature',value: 0,addEndOfPhase: 0}
 	]
 
-	constructor(data: PlayerGlobalParameterStateDTO){
-		this.parameters = data.parameters
+	constructor(dto: PlayerGlobalParameterStateDTO){
+		let parameters: GlobalParameter[] = []
+		for(let dtoParameter of dto.gp){
+			let param: GlobalParameter = {
+				name: dtoParameter.name,
+				value: dtoParameter.value??0,
+				addEndOfPhase: dtoParameter.addEndOfPhase??0
+			}
+			parameters.push(Utils.jsonCopy(param))
+		}
+
+		this.parameters = parameters
 	}
 
 	getGlobalParameters(): GlobalParameter[] {return this.parameters}
@@ -43,19 +54,19 @@ private parameters: GlobalParameter[] = [
 	}
 	toJson(): PlayerGlobalParameterStateDTO {
 		return {
-			parameters: this.parameters
+			gp: [] //this.parameters
 		}
 	}
-	static fromJson(data: PlayerGlobalParameterStateDTO): PlayerGlobalParameterStateModel {
-		if (!data.parameters){
+	static fromJson(dto: PlayerGlobalParameterStateDTO): PlayerGlobalParameterStateModel {
+		if (!dto.gp){
 			throw new Error("Invalid PlayerGlobalParameterStateDTO: Missing required fields")
 		}
-		return new PlayerGlobalParameterStateModel(data)
+		return new PlayerGlobalParameterStateModel(dto)
 	}
 	static empty(): PlayerGlobalParameterStateModel {
 		return new PlayerGlobalParameterStateModel(
 			{
-				parameters: []
+				gp: []
 			}
 		)
 	}

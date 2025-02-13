@@ -10,25 +10,39 @@ import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
 
 public class MessageOutputFactory {
-    public static BaseMessageOutputDTO createDEBUGMessage(Integer gameId, Object content){
+    public static BaseMessageOutputDTO createDEBUGMessage(Integer gameId, Object content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.DEBUG, content);
     }
-    public static BaseMessageOutputDTO createPlayerReadyMessage(Integer gameId, Map<Integer, Boolean> content){
+
+    public static BaseMessageOutputDTO createPlayerReadyMessage(Integer gameId, Map<Integer, Boolean> content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.READY_RESULT, content);
     }
-    public static BaseMessageOutputDTO createNextPhaseMessage(Integer gameId, GameStateMessageOutputDTO content){
+
+    public static BaseMessageOutputDTO createNextPhaseMessage(Integer gameId, GameStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.NEXT_PHASE, content);
     }
-    public static BaseMessageOutputDTO createDrawResultMessage(Integer gameId, DrawResult content){
+
+    public static BaseMessageOutputDTO createDrawResultMessage(Integer gameId, DrawResult content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.DRAW_RESULT, content);
     }
-    public static BaseMessageOutputDTO createGameStateMessage(Integer gameId, GameStateMessageOutputDTO content){
+
+    public static BaseMessageOutputDTO createGameStateMessage(Integer gameId, GameStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.GAME_STATE, content);
     }
-    public static BaseMessageOutputDTO createPlayerStateMessage(Integer gameId, PlayerStateMessageOutputDTO content){
+
+    public static BaseMessageOutputDTO createConnectMessage(Integer gameId, GameStateMessageOutputDTO content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.PLAYER_CONNECT, content);
+    }
+
+    public static BaseMessageOutputDTO createPlayerStateMessage(Integer gameId, PlayerStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.PLAYER_STATE, content);
     }
+
     public static AckMessageOutput createAck(Integer gameId, String uuid){
         return new AckMessageOutput(gameId, uuid);
+    }
+
+    public static BaseMessageOutputDTO createStartGameMessage(Integer gameId, Object content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.START_GAME, content);
     }
 }

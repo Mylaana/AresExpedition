@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.model.player_state.PlayerTagState;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerTagStateDTO {
+    @JsonProperty("t")
     private List<Map<String, Object>> tags = new ArrayList<>();
 
     PlayerTagStateDTO() {

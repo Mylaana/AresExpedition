@@ -4,6 +4,7 @@ public enum ContentResultEnum {
     //Player
     DRAW_RESULT,
     PLAYER_STATE,
+    PLAYER_CONNECT,
     
     //Group
     READY_RESULT,
@@ -13,5 +14,6 @@ public enum ContentResultEnum {
     //Other
     SERVER_SIDE_UNHANDLED,
     DEBUG,
-    ACKNOWLEDGE
+    ACKNOWLEDGE,
+    START_GAME
 }

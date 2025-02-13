@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.model.player_state.PlayerRessourceState;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerRessourceStateDTO {
+    @JsonProperty("r")
     private List<Map<String, Object>> ressources = new ArrayList<>();
 
     PlayerRessourceStateDTO() {

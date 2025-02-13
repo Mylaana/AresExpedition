@@ -43,7 +43,7 @@ export class RxStompService extends RxStomp {
         console.log('%cCLIENT RECONNECTED', 'color:blue')
 		this.isProcessingQueue = false
 		this.messageQueue = []
-        this.publishGameStateQuery()
+        this.publishConnectionQuery()
     }
 
     private enqueueMessage(message: PlayerMessage, destination: string=GLOBAL_WS_APP_PLAYER) {
@@ -51,6 +51,7 @@ export class RxStompService extends RxStomp {
 
 		this.messageQueue.push({body: JSON.stringify(message), destination, uuid: message.uuid})
         this.processQueue()
+		console.log(this.messageQueue, this.isProcessingQueue)
     }
 
     private processQueue() {
@@ -112,6 +113,10 @@ export class RxStompService extends RxStomp {
     public publishGameStateQuery(): void {
         this.enqueueMessage(WebsocketQueryMessageFactory.createGameStateQuery(), GLOBAL_WS_APP_PLAYER)
     }
+
+	private publishConnectionQuery(): void {
+		this.enqueueMessage(WebsocketQueryMessageFactory.createConnectionQuery(), GLOBAL_WS_APP_PLAYER)
+	}
 
     public publishSelectedPhase(phase: SelectablePhaseEnum): void {
         this.enqueueMessage(WebsocketQueryMessageFactory.createPhaseSelectedQuery(phase), GLOBAL_WS_APP_PLAYER)

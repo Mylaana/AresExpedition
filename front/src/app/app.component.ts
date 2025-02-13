@@ -12,11 +12,12 @@ import { PlayerPannelComponent } from './components/player-info/player-pannel/pl
 import { PlayerStateModel } from './models/player-info/player-state.model';
 import { WebsocketHandler } from './models/core-game/websocket-handler';
 import { RxStompService } from './services/websocket/rx-stomp.service';
-import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from './global/global-const';
+import { GLOBAL_WS_ACKNOWLEDGE, GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from './global/global-const';
 import { Message } from '@stomp/stompjs';
 import { PlayerMessageResult } from './interfaces/websocket.interface';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
 import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
+import { Utils } from './utils/utils';
 
 @Component({
 	selector: 'app-root',
@@ -36,11 +37,11 @@ import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
 		WebsocketHandler
 	]
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
 	title = 'AresExpedition';
 	playerHand: ProjectCardModel[] = [];
 	playerPlayed: ProjectCardModel[] = [];
-	playerIdList: number[] = this.gameStateService.playerCount.getValue()
+	playerIdList: number[] = [] //this.gameStateService.playerCount.getValue()
 	clientPlayerId!: number;
 	loading: boolean = true
 	@ViewChild('hand') handProjectList!: ProjectCardListComponent
@@ -50,6 +51,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 	private groupSubscription: Subscription;
 	//@ts-ignore
 	private playerSubscription: Subscription;
+	//@ts-ignore
+	private acknowledgeSubscription: Subscription;
 
 	constructor(
 		private gameStateService: GameState,
@@ -63,6 +66,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.gameStateService.currentLoadingState.subscribe(
 			loading => this.loadingFinished(loading)
 		)
+
 		this.groupSubscription = this.rxStompService
 		.watch(GLOBAL_WS_GROUP)
 		.subscribe((message: Message) => {
@@ -73,21 +77,20 @@ export class AppComponent implements OnInit, AfterViewInit {
 		.subscribe((message: Message) => {
 			this.handlePlayerMessage(message.body)
 		});
-	}
-
-	ngAfterViewInit(): void{
-	//sets loading to true after view init
-		return
-		setTimeout(() => {
-			this.gameStateService.loading.next(false);
-		}, 0)
+		this.acknowledgeSubscription = this.rxStompService
+		.watch(GLOBAL_WS_ACKNOWLEDGE)
+		.subscribe((message: Message) => {
+			this.handleAcknowledgeMessage(message.body)
+		});
 	}
 
 	updateHandOnStateChange(state: PlayerStateModel[]): void {
 		let clientState = this.gameStateService.getClientState()
 		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
 		this.playerPlayed = clientState.getProjectPlayedModelList()
-		this.handProjectList.updatePlayedCardList(this.playerPlayed)
+
+		if(!this.handProjectList){return}
+		this.handProjectList.updatePlayedCardList(clientState.getProjectPlayedModelList())
 	}
 	updatePlayerList(playerIdList: number[]){
 		this.playerIdList = playerIdList
@@ -100,6 +103,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.gameStateService.currentPlayerCount.subscribe(
 			playerCount => this.updatePlayerList(playerCount)
 		)
+
 		this.gameStateService.currentGroupPlayerState.subscribe(
 			state => this.updateHandOnStateChange(state)
 		)
@@ -115,5 +119,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 			return
 		}
 		this.wsHandler.handlePlayerMessage(parsedMessage)
+	}
+	private handleAcknowledgeMessage(message: any){
+		console.log('ack received:', WebsocketResultMessageFactory.createAckMessage(message))
+		this.rxStompService.handleAck({ackUuid:WebsocketResultMessageFactory.createAckMessage(message).uuid})
 	}
 }

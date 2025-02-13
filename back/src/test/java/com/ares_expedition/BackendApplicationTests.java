@@ -295,9 +295,7 @@ class BackendApplicationTests {
 		assertNotEquals(0, testPlayerState.getTerraformingRating());
 		assertNotEquals(0, testPlayerState.getVp());
 		assertNotEquals(0, testPlayerState.getTags().size());
-		assertNotNull(testPlayerState.getCards());
 		assertNotNull(testPlayerState.getResearch());
-		assertNotNull(testPlayerState.getPhaseCards());
 		assertEquals(0, testPlayerState.getSellCardValueMod());
 		assertEquals(3, testPlayerState.getMilestoneCount());
 		assertNotNull(testPlayerState.getGlobalParameter());

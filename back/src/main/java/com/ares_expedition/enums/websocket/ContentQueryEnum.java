@@ -6,6 +6,7 @@ public enum ContentQueryEnum {
     PLAYER_GAME_STATE_QUERY,
     SELECTED_PHASE_QUERY,
     PLAYER_STATE_PUSH,
+    PLAYER_CONNECT,
 
 
     DEBUG
