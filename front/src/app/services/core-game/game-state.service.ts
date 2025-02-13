@@ -96,33 +96,6 @@ export class GameState{
 
     addPlayer(playerName: string, playerColor: RGB): void {
 
-		/*
-        //creates and add player to groupPlayerState
-        let newPlayer = new PlayerStateModel(this.injector);
-        newPlayer.setId(this.groupPlayerState.getValue().length)
-        newPlayer.setName(playerName)
-        newPlayer.setColor(playerColor)
-
-        //adds newplayer's state to  groupPlayerState
-        this.groupPlayerState.next(this.groupPlayerState.getValue().concat([newPlayer]));
-
-        //creates and add player to groupPlayerReady
-        let newPlayerReady = new PlayerReadyModel;
-        newPlayerReady.id = newPlayer.getId()
-        newPlayerReady.name = playerName;
-        newPlayerReady.isReady = false
-        this.groupPlayerReady.next(this.groupPlayerReady.getValue().concat(newPlayerReady))
-
-        //creates and add player to groupPlayerSelectedPhase
-        let newPlayerPhase: PlayerPhase;
-        newPlayerPhase = {
-            "playerId": newPlayer.getId(),
-            "currentSelectedPhase": SelectablePhaseEnum.undefined,
-            "currentPhaseType": undefined,
-            "previousSelectedPhase": SelectablePhaseEnum.undefined
-        }
-        this.updateGroupPlayerSelectedPhase(this.groupPlayerSelectedPhase.getValue().concat([newPlayerPhase]))
-		*/
     };
 
     setPlayerIdList(playerIdList: number[]):void{
@@ -555,6 +528,7 @@ export class GameState{
         }
     }
     public setGroupReady(wsGroupReady: WsGroupReady[]): void {
+		console.log('set group ready:',wsGroupReady)
         for(let ready of wsGroupReady){
             this.setPlayerReady(ready.playerId,ready.ready)
         }
@@ -591,6 +565,35 @@ export class GameState{
 		}
 		this.setPlayerIdList(playerIdList)
 		this.updateGroupPlayerState(groupPlayerState)
+
+		//creates and add player to groupPlayerSelectedPhase
+		let result: PlayerPhase[] = []
+		for(let i=0; i<4; i++){
+			let newPlayerPhase: PlayerPhase;
+			newPlayerPhase = {
+				"playerId": i,
+				"currentSelectedPhase": SelectablePhaseEnum.undefined,
+				"currentPhaseType": undefined,
+				"previousSelectedPhase": SelectablePhaseEnum.undefined
+			}
+			result.push(newPlayerPhase)
+		}
+
+        //creates and add player to groupPlayerReady
+		let groupReady: PlayerReadyModel[] = []
+		for(let i=0; i<4; i++){
+			let playerReady = new PlayerReadyModel;
+			playerReady.id = i
+			playerReady.isReady = false
+
+			groupReady.push(playerReady)
+		}
+        this.groupPlayerReady.next(groupReady)
+
+		this.updateGroupPlayerSelectedPhase(result)
+		console.log(this.groupPlayerSelectedPhase.getValue())
+		console.log('loaded: ', this.groupPlayerState.getValue())
+		console.log('group ready:', this.groupPlayerReady.getValue())
 	}
 
 	public getPlayerCount(): number {

@@ -62,3 +62,8 @@ export interface WsGameState extends WsResult {
 export interface WSGroupState extends WsResult {
 	groupState: PlayerStateDTO[]
 }
+export interface WsAck {
+	gameId: number
+	contentEnum: PlayerMessageContentResultEnum
+	uuid: myUUID
+}

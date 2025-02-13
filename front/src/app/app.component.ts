@@ -12,7 +12,7 @@ import { PlayerPannelComponent } from './components/player-info/player-pannel/pl
 import { PlayerStateModel } from './models/player-info/player-state.model';
 import { WebsocketHandler } from './models/core-game/websocket-handler';
 import { RxStompService } from './services/websocket/rx-stomp.service';
-import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from './global/global-const';
+import { GLOBAL_WS_ACKNOWLEDGE, GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from './global/global-const';
 import { Message } from '@stomp/stompjs';
 import { PlayerMessageResult } from './interfaces/websocket.interface';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
@@ -51,6 +51,8 @@ export class AppComponent implements OnInit {
 	private groupSubscription: Subscription;
 	//@ts-ignore
 	private playerSubscription: Subscription;
+	//@ts-ignore
+	private acknowledgeSubscription: Subscription;
 
 	constructor(
 		private gameStateService: GameState,
@@ -74,6 +76,11 @@ export class AppComponent implements OnInit {
 		.watch(GLOBAL_WS_PLAYER)
 		.subscribe((message: Message) => {
 			this.handlePlayerMessage(message.body)
+		});
+		this.acknowledgeSubscription = this.rxStompService
+		.watch(GLOBAL_WS_ACKNOWLEDGE)
+		.subscribe((message: Message) => {
+			this.handleAcknowledgeMessage(message.body)
 		});
 	}
 
@@ -112,5 +119,9 @@ export class AppComponent implements OnInit {
 			return
 		}
 		this.wsHandler.handlePlayerMessage(parsedMessage)
+	}
+	private handleAcknowledgeMessage(message: any){
+		console.log('ack received:', WebsocketResultMessageFactory.createAckMessage(message))
+		this.rxStompService.handleAck({ackUuid:WebsocketResultMessageFactory.createAckMessage(message).uuid})
 	}
 }

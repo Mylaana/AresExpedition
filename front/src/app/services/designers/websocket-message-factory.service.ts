@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsDrawQuery, WsGroupReady, WSGroupState, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
@@ -90,5 +90,14 @@ export class WebsocketResultMessageFactory{
 			result.push(value);
 		});
 		return result
+	}
+	public static createAckMessage(message: any): WsAck {
+		let parsedMessage = JSON.parse(message)
+        let result : WsAck = {
+			uuid: parsedMessage['uuid'],
+            gameId: parsedMessage['gameId'],
+            contentEnum: parsedMessage['contentEnum'],
+        }
+        return result
 	}
 }

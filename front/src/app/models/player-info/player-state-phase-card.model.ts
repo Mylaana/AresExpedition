@@ -16,9 +16,9 @@ export class PlayerPhaseCardStateModel {
 
 	constructor(private injector: Injector, dto: PlayerPhaseCardStateDTO){
 		this.phaseService = this.injector.get(PhaseCardInfoService)
-		//this.phaseGroups = this.initializePhaseGroups()
-		//this.selectedPhase = SelectablePhaseEnum.undefined
-		this.phaseGroups = dto.pg
+		this.phaseGroups = this.initializePhaseGroups()
+		this.selectedPhase = SelectablePhaseEnum.undefined
+		//this.phaseGroups = dto.pg
 		this.phaseCardUpgradeCount = dto.pcuc
 		this.selectedPhase = dto.sp
 	}

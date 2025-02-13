@@ -54,7 +54,7 @@ export class WebsocketHandler {
                 break
             }
             case(GroupMessageContentResultEnum.ready):{
-                this.handleGroupMessageReadyResult(message.content)
+                this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(message.content))
                 break
             }
             case(GroupMessageContentResultEnum.nextPhase):{
