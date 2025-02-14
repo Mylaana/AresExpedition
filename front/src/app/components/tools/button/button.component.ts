@@ -1,19 +1,43 @@
-import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChildButton, EventMainButton } from '../../../models/core-game/button.model';
+import { ButtonBase, ImageButton } from '../../../models/core-game/button.model';
+import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
 
 @Component({
-  selector: 'app-button',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+	selector: 'app-button',
+	standalone: true,
+	imports: [
+		CommonModule,
+		TextWithImageComponent
+	],
+	templateUrl: './button.component.html',
+	styleUrl: './button.component.scss'
 })
-export class ButtonComponent {
-  @Output() childButtonClicked: EventEmitter<ChildButton> = new EventEmitter<ChildButton>()
-  @Input() button!: ChildButton;
+export class ButtonComponent implements OnChanges {
+	@Output() buttonClicked: EventEmitter<ButtonBase> = new EventEmitter<ButtonBase>()
+	@Input() button!: ButtonBase;
+	_imageUrl!: string
+	_caption!: string
 
-  onClick(){
-    this.childButtonClicked.emit(this.button)
-  }
+	ngOnChanges(changes: SimpleChanges): void {
+		if(changes['button'] && changes['button'].currentValue){
+			this._caption =  this.button.caption??''
+			switch(this.button.type){
+				case('Image'):{
+					this.handleImageButtonChange()
+					break
+				}
+			}
+			console.log(this.button)
+		}
+	}
+	onClick(button: ButtonBase){
+		this.buttonClicked.emit(button)
+		console.log('clicked:',button)
+	}
+
+	private handleImageButtonChange(){
+		let imageButton = this.button as ImageButton
+		this._imageUrl = imageButton.imageUrl
+	}
 }

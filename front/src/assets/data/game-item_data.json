@@ -131,6 +131,18 @@
         "imageUrl": "assets/other/research_card.png",
         "name": "$other_researchcard$"
     },
+	{
+        "id": 112,
+        "description": "validate",
+        "imageUrl": "assets/other/ready.png",
+        "name": "$other_validate$"
+    },
+	{
+        "id": 113,
+        "description": "cancel",
+        "imageUrl": "assets/other/cancel.png",
+        "name": "$other_cancel$"
+    },
     {
         "id": 1000,
         "description": "steel",

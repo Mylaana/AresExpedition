@@ -1,13 +1,13 @@
 <div class="wrapper-game-event" *ngIf="currentEvent">
     <div class="wrapper-commands ares-background ares-border">
-        <div class="wrapper-validate-button">
-            <app-event-main-button *ngIf="currentEvent.button" [button]="currentEvent.button" (eventMainButtonClicked)="eventMainButtonClicked()"></app-event-main-button>
+        <div *ngIf="currentEvent.button" class="wrapper-event-button wrapper-validate-button">
+            <app-event-main-button  [button]="currentEvent.button" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
         </div>
-        <div class="wrapper-sell-button">
-            <app-event-secondary-button *ngIf="sellCardsButton" [button]="sellCardsButton" (nonEventButtonClicked)="nonEventButtonClicked(sellCardsButton)"></app-event-secondary-button>
+        <div *ngIf="sellCardsButton.enabled" class="wrapper-event-button wrapper-sell-button">
+            <app-non-event-button  [button]="sellCardsButton" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
         </div>
-		<div class="wrapper-sell-cancel-button">
-            <app-event-secondary-button *ngIf="sellCardsCancelButton" [button]="sellCardsCancelButton" (nonEventButtonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-event-secondary-button>
+		<div *ngIf="sellCardsCancelButton.enabled" class="wrapper-event-button wrapper-sell-cancel-button">
+            <app-non-event-button  [button]="sellCardsCancelButton" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
         </div>
     </div>
     <div class="wrapper-event-main">
@@ -15,7 +15,6 @@
             <h2 *ngIf="currentEvent!=undefined && currentEvent.title!=undefined">{{currentEvent.title}}</h2>
 			<div class="wrapper-event-top-main">
                 <app-card-builder-list *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
-                <!--<app-card-builder-list *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent" (gameEventPlayZoneButtonClicked)="eventCardBuilderButtonClicked($event)"></app-card-builder-list>-->
 			</div>
             <app-phase-planification *ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
             <app-phase-production *ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"></app-phase-production>

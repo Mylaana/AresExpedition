@@ -45,7 +45,7 @@ export class ButtonDesigner{
             case('scanKeepResult'):{caption='Add selection to hand';break}
 
 			//button name related rules
-			case('sellOptionalCard'):{caption='Sell cards from hand';break}
+			case('sellOptionalCard'):{caption='$ressource_card$ $other_arrow$ $ressource_megacredit$';break}
 			case('sellOptionalCardCancel'):{caption='Cancel selling cards';break}
 
             default:{caption='default validation';break}
@@ -76,9 +76,9 @@ export class ButtonDesigner{
             let button = new EventCardBuilderButton
                 switch(i){
                     case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
-                    case(1):{button.name='cancelSelectCard';button.caption='Deactivate selection';break}
-                    case(2):{button.name='buildCard';button.caption='Build';break}
-					case(3):{button.name='discardSelectedCard';button.caption='Discard selection <X>';break}
+                    case(1):{button.name='cancelSelectCard';button.caption='$other_cancel$';break}
+                    case(2):{button.name='buildCard';button.caption='$other_validate$';break}
+					case(3):{button.name='discardSelectedCard';button.caption='$other_cancel$';break}
                 }
             button.parentCardBuilderId=zoneId
             button.enabled = button.startEnabled
@@ -91,8 +91,8 @@ export class ButtonDesigner{
         button.parentCardBuilderId=zoneId
         button.enabled = button.startEnabled
         switch(option){
-            case('gain6MC'):{button.caption = 'Gain 6 MC';break}
-            case('drawCard'):{button.caption = 'Draw a card';break}
+            case('gain6MC'):{button.caption = '+ $ressource_megacreditvoid_6$';break}
+            case('drawCard'):{button.caption = '+ $ressource_card$';break}
         }
         button.startEnabled=true
         button.name = option as EventCardBuilderButtonNames

@@ -3,25 +3,19 @@ import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
-import { NonSelectablePhase } from '../../../types/global.type';
+import { ButtonNames, NonSelectablePhase } from '../../../types/global.type';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
-import { EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
+import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
 import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { EventDesigner } from '../../../services/designers/event-designer.service';
-import { EventMainButtonComponent } from "../../tools/event-main-button/event-main-button.component";
-import { NonEventButtonComponent } from '../../tools/event-secondary-button/event-secondary-button.component';
+import { EventMainButtonComponent } from "../../tools/button/event-main-button.component";
+import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
-import { WebsocketHandler } from '../../../models/core-game/websocket-handler';
-import { PlayerMessageResult } from '../../../interfaces/websocket.interface';
-import { RxStompService } from '../../../services/websocket/rx-stomp.service';
-import { GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../../global/global-const';
 
-import { WebsocketResultMessageFactory } from '../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
-import { PlayerMessageContentResultEnum } from '../../../enum/websocket.enum';
 import { ButtonDesigner } from '../../../services/designers/button-designer.service';
 
 //this component is the main controller, and view
@@ -36,8 +30,8 @@ import { ButtonDesigner } from '../../../services/designers/button-designer.serv
     ProjectCardListComponent,
     PhaseCardUpgradeSelectorComponent,
     EventMainButtonComponent,
-	NonEventButtonComponent,
-	CardBuilderListComponent
+	CardBuilderListComponent,
+	NonEventButtonComponent
 ],
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.scss',
@@ -89,9 +83,6 @@ export class GameEventComponent {
 		this.gameStateService.currentPhase.subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
-
-
-
 	}
 
 	updatePhase(phase:NonSelectablePhaseEnum):void{
@@ -137,6 +128,9 @@ export class GameEventComponent {
 	private resetSellButtonsState(): void {
 		this.sellCardsButton.resetStartEnabled()
 		this.sellCardsCancelButton.resetStartEnabled()
+	}
+	public buttonClicked(button: ButtonBase) {
+		console.log('game event button clicked:', button)
 	}
 	public updateSelectedCardList(cardList: ProjectCardModel[]){this.eventHandler.updateSelectedCardList(cardList)}
 	public nonEventButtonClicked(button: NonEventButton){

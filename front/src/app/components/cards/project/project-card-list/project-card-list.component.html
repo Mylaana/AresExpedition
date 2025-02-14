@@ -1,9 +1,8 @@
-<p>discount: {{_buildDiscount}}</p>
 <div class="wrapper-main">
     <div class="wrapper-list">
-        <app-project-card #projectCardComponent *ngFor="let card of displayedCards" 
-            [stateFromParent]="cardSelector.stateFromParent" 
-            [projectCard]="card" 
+        <app-project-card #projectCardComponent *ngFor="let card of displayedCards"
+            [stateFromParent]="cardSelector.stateFromParent"
+            [projectCard]="card"
             [initialState]="cardSelector.cardInitialState"
             [buildDiscount]="_buildDiscount"
             (cardStateChange)="cardStateChange($event)"></app-project-card>

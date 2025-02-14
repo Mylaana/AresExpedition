@@ -1,8 +1,19 @@
-<div class="wrapper-button">
+
+<button *ngIf="!_imageUrl" class="main" [disabled]="button.enabled===false" [ngClass]="{'element-disabled': button.enabled===false}" (click)="onClick(button)">
+	<div class="wrapper-button">
+		<div *ngIf="button.enabled===true" class="gradiant-mask">
+			<div class="button-shape button-gradiant-background"></div>
+		</div>
+		<div class="button-shape button-main"><app-text-with-image [rawText]="_caption"></app-text-with-image></div>
+		<div class="button-shape button-background"></div>
+	</div>
+</button>
+<div *ngIf="_imageUrl" class="wrapper-button">
     <div [ngClass]="{'element-disabled': button.enabled===false}">
-        <button [disabled]="button.enabled===false" [ngClass]="[button.imageUrl ? 'image-button':'validation-button', button.enabled===true ? 'element-clickable':'']" (click)="onClick()"  >
+        <button [disabled]="button.enabled===false" [ngClass]="[_imageUrl ? 'image-button':'validation-button', button.enabled===true ? 'element-clickable':'']" (click)="onClick(button)"  >
             <p>{{button.caption}}</p>
-            <img *ngIf="button.imageUrl" [src]="button.imageUrl" alt="">
+            <img *ngIf="_imageUrl" [src]="_imageUrl" alt="">
         </button>
     </div>
 </div>
+
