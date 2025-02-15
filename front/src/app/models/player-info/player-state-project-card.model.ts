@@ -41,9 +41,7 @@ export class PlayerProjectCardStateModel {
         this.projects.playedProjectList.push(card)
 		this.cardInitializeService.initialize(card)
 
-		console.log('card:', card)
         if(card.cardSummaryType!='trigger'){return}
-		console.log(this.triggers)
         this.triggers.playTrigger(card.id)
     }
 	addCardsToHand(cards: number | number[]){this.hand = this.hand.concat(Utils.toNumberArray(cards))}

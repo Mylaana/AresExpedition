@@ -528,7 +528,6 @@ export class GameState{
         }
     }
     public setGroupReady(wsGroupReady: WsGroupReady[]): void {
-		console.log('set group ready:',wsGroupReady)
         for(let ready of wsGroupReady){
             this.setPlayerReady(ready.playerId,ready.ready)
         }
@@ -591,9 +590,7 @@ export class GameState{
         this.groupPlayerReady.next(groupReady)
 
 		this.updateGroupPlayerSelectedPhase(result)
-		console.log(this.groupPlayerSelectedPhase.getValue())
-		console.log('loaded: ', this.groupPlayerState.getValue())
-		console.log('group ready:', this.groupPlayerReady.getValue())
+		console.log('state loaded: ', this.groupPlayerState.getValue())
 	}
 
 	public getPlayerCount(): number {
