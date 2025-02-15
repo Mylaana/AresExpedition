@@ -6,11 +6,11 @@ export interface ProjectCardDTO {
 }
 
 export interface TriggerStateDTO {
-	pci: number[]
-    aci: number[]
-    aoratc: number[]
-    aopi: number[]
-    aopc: number[]
-    aogt: number[]
-    acmt: number[]
+	pci: number[] //playedCardsId
+    aci: number[] //activeCardsId
+    aoratc: number[] //activeOnRessourceAddedToCard
+    aopi: number[] //activeOnParameterIncrease
+    aopc: number[] //activeOnPlayedCard
+    aogt: number[] //activeOnGainedTag
+    acmt: number[] //activeCostModTrigger
 }

@@ -242,7 +242,6 @@ export class TriggerState {
     }
 	public static fromJson(data: TriggerStateDTO): TriggerState {
 		if (!data.aci || !data.acmt || !data.aogt|| !data.aopc || !data.aopi || !data.aoratc || !data.pci){
-			console.log(data)
 			throw new Error("Invalid TriggerStateDTO: Missing required fields")
 		}
 		return new TriggerState(data)
