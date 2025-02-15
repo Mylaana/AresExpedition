@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.model.player_state.PlayerGlobalParameterState;
+import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerGlobalParameterStateDTO {

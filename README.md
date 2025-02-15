@@ -40,6 +40,7 @@ test needs: empty components from the app logic and transfer it into services/cl
 global: removing obvious comments   
 websocket: finish the game state saving system
 project-card-info-service (and some other?): switch to static
+TriggerState: switch out trigger id checks from model to a service
 
 ## New features :
 ### Phase cards

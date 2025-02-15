@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.model.player_state.PlayerRessourceState;
+import com.ares_expedition.model.player_state.subclass.PlayerRessourceState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerRessourceStateDTO {

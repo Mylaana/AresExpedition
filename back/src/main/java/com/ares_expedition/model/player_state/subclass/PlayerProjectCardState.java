@@ -1,27 +1,30 @@
-package com.ares_expedition.model.player_state;
+package com.ares_expedition.model.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.scheduling.Trigger;
+
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerProjectCardStateDTO;
+import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
 
 public class PlayerProjectCardState {
     private List<Integer> hand = new ArrayList<>();
     private List<Integer> playedProjectIdList = new ArrayList<>();
     private Map<Integer, Object> playedProjectCardStocks = new HashMap<Integer, Object>();
-    private Map<String, Object> triggers = new HashMap<String, Object>();
+    private TriggerState triggers = new TriggerState();
     private Integer handMaximumSize;
 
-    PlayerProjectCardState() {
+    public PlayerProjectCardState() {
     }
 
     public PlayerProjectCardState(PlayerProjectCardStateDTO dto) {
         this.hand = dto.getHand();
         this.playedProjectIdList = dto.getPlayedProjectIdList();
         this.playedProjectCardStocks = dto.getPlayedProjectCardStocks();
-        this.triggers = dto.getTriggers();
+        this.triggers = TriggerState.fromJson(dto.getTriggers());
         this.handMaximumSize = dto.getHandMaximumSize();
     }
 
@@ -49,11 +52,11 @@ public class PlayerProjectCardState {
         this.playedProjectCardStocks = projectCardStocks;
     }
 
-    public Map<String, Object> getTriggers() {
+    public TriggerState getTriggers() {
         return triggers;
     }
 
-    public void setTriggers(Map<String, Object> triggers) {
+    public void setTriggers(TriggerState triggers) {
         this.triggers = triggers;
     }
 

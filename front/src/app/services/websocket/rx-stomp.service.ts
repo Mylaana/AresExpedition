@@ -51,7 +51,6 @@ export class RxStompService extends RxStomp {
 
 		this.messageQueue.push({body: JSON.stringify(message), destination, uuid: message.uuid})
         this.processQueue()
-		console.log(this.messageQueue, this.isProcessingQueue)
     }
 
     private processQueue() {

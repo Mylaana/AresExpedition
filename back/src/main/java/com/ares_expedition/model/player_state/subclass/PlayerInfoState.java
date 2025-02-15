@@ -1,4 +1,4 @@
-package com.ares_expedition.model.player_state;
+package com.ares_expedition.model.player_state.subclass;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerInfoStateDTO;
 
@@ -7,7 +7,7 @@ public class PlayerInfoState {
     private String name;
     private String color;
 
-    PlayerInfoState(){
+    public PlayerInfoState(){
     }
     PlayerInfoState(PlayerInfoStateDTO dto) {
         this.id = dto.getId();

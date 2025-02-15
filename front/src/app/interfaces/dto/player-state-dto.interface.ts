@@ -4,6 +4,7 @@ import { TriggerState } from "../../models/cards/project-card.model";
 import { GlobalParameterName, RGB } from "../../types/global.type";
 import { PlayedProject } from "../../types/project-card.type";
 import { RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
+import { TriggerStateDTO } from "./project-card-dto.interface";
 
 export interface PlayerStateDTO {
 	infoState: PlayerInfoStateDTO
@@ -35,7 +36,7 @@ export interface PlayerProjectCardStateDTO {
 	h: number[],
 	ppil: number[]
 	ppcs: any
-	t: TriggerState
+	t: TriggerStateDTO
 	hms: number
 }
 export interface PlayerPhaseCardStateDTO {

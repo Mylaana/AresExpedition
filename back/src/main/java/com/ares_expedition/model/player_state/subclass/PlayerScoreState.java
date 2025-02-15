@@ -1,5 +1,5 @@
 
-package com.ares_expedition.model.player_state;
+package com.ares_expedition.model.player_state.subclass;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerScoreStateDTO;
 
@@ -8,7 +8,7 @@ public class PlayerScoreState {
     private Integer milestoneCount;
     private Integer terraformingRating;
 
-    PlayerScoreState() {
+    public PlayerScoreState() {
     }
     PlayerScoreState(PlayerScoreStateDTO dto) {
         this.vp = dto.getVp();

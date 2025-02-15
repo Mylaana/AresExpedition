@@ -28,12 +28,12 @@ export class PlayerProjectCardStateModel {
 
 		this.hand = dto.h,
 		//this.projects = dto.p
-		this.triggers = dto.t
 		this.handMaximumSize = dto.hms
 		this.projects = {
 			playedIdList: dto.ppil,
 			playedProjectList: this.cardInfoService.getProjectCardList(dto.ppil)
 		}
+		this.triggers = TriggerState.fromJson(dto.t)
 	}
 
     playCard(card: ProjectCardModel): void {
@@ -112,7 +112,7 @@ export class PlayerProjectCardStateModel {
 			h: this.hand,
 			ppil: this.projects.playedIdList,
 			ppcs: null,
-			t: this.triggers,
+			t: this.triggers.toJson(),
 			hms: this.handMaximumSize
 		}
 	}
@@ -130,7 +130,7 @@ export class PlayerProjectCardStateModel {
 				hms: 0,
 				ppil: [],
 				ppcs: [],
-				t: new TriggerState
+				t: {aci: [], acmt: [], aogt: [], aopc: [], aopi: [], aoratc: [], pci: []}
 			}
 		)
 	}

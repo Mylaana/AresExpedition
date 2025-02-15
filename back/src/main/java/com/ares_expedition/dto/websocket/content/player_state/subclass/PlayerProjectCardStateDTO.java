@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.model.player_state.PlayerProjectCardState;
+import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.TriggerStateDTO;
+import com.ares_expedition.model.player_state.subclass.PlayerProjectCardState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerProjectCardStateDTO {
@@ -16,7 +17,7 @@ public class PlayerProjectCardStateDTO {
     @JsonProperty("ppcs")
     private Map<Integer, Object> playedProjectCardStocks = new HashMap<Integer, Object>();
     @JsonProperty("t")
-    private Map<String, Object> triggers = new HashMap<String, Object>();
+    private TriggerStateDTO triggers = new TriggerStateDTO();
     @JsonProperty("hms")
     private Integer handMaximumSize;
 
@@ -27,7 +28,7 @@ public class PlayerProjectCardStateDTO {
         this.hand = state.getHand();
         this.playedProjectIdList = state.getPlayedProjectIdList();
         this.playedProjectCardStocks = state.getPlayedProjectCardStocks();
-        this.triggers = state.getTriggers();
+        this.triggers = state.getTriggers().toJson();
         this.handMaximumSize = state.getHandMaximumSize();
     }
 
@@ -55,11 +56,11 @@ public class PlayerProjectCardStateDTO {
         this.playedProjectCardStocks = projectCardStocks;
     }
 
-    public Map<String, Object> getTriggers() {
+    public TriggerStateDTO getTriggers() {
         return this.triggers;
     }
 
-    public void setTriggers(Map<String, Object> triggers) {
+    public void setTriggers(TriggerStateDTO triggers) {
         this.triggers = triggers;
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.ares_expedition.model.player_state.PlayerTagState;
+import com.ares_expedition.model.player_state.subclass.PlayerTagState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerTagStateDTO {

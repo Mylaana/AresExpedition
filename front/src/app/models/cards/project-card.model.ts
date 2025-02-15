@@ -2,7 +2,7 @@ import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
-import { ProjectCardDTO } from "../../interfaces/dto/project-card-dto.interface"
+import { ProjectCardDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
 
 export class ProjectCardModel {
     id!: number;
@@ -146,6 +146,17 @@ export class TriggerState {
     activeOnGainedTag: number[] = []
     activeCostModTrigger: number[] = []
 
+	constructor(dto?: TriggerStateDTO){
+		if(!dto){return}
+		this.playedCardsId = dto.pci
+		this.activeCardsId = dto.aci
+		this.activeOnRessourceAddedToCard = dto.aoratc
+		this.activeOnParameterIncrease = dto.aopi
+		this.activeOnPlayedCard = dto.aopc
+		this.activeOnGainedTag = dto.aogt
+		this.activeCostModTrigger = dto.acmt
+	}
+
     getPlayedTriggers(): number[] {
         return this.playedCardsId
     }
@@ -229,4 +240,21 @@ export class TriggerState {
             }
         }
     }
+	public static fromJson(data: TriggerStateDTO): TriggerState {
+		if (!data.aci || !data.acmt || !data.aogt|| !data.aopc || !data.aopi || !data.aoratc || !data.pci){
+			throw new Error("Invalid TriggerStateDTO: Missing required fields")
+		}
+		return new TriggerState(data)
+	}
+	public toJson(): TriggerStateDTO {
+		return {
+			aci: this.activeCardsId,
+			acmt: this.activeCostModTrigger,
+			aogt: this.activeOnGainedTag,
+			aopc: this.activeOnPlayedCard,
+			aopi: this.activeOnParameterIncrease,
+			aoratc: this.activeOnRessourceAddedToCard,
+			pci: this.playedCardsId
+		}
+	}
 }

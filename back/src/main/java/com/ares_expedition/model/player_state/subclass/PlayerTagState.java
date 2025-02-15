@@ -1,4 +1,4 @@
-package com.ares_expedition.model.player_state;
+package com.ares_expedition.model.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerTag
 public class PlayerTagState {
     private List<Map<String, Object>> tags = new ArrayList<>();
 
-    PlayerTagState() {
+    public PlayerTagState() {
     }
     PlayerTagState(PlayerTagStateDTO dto) {
         this.tags = dto.getTags();

@@ -1,4 +1,4 @@
-package com.ares_expedition.model.player_state;
+package com.ares_expedition.model.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerGlo
 public class PlayerGlobalParameterState {
     private List<Map<String, Object>> globalParameters = new ArrayList<Map<String, Object>>();
 
-    PlayerGlobalParameterState() {
+    public PlayerGlobalParameterState() {
     }
     PlayerGlobalParameterState(PlayerGlobalParameterStateDTO dto) {
         this.globalParameters = dto.getGlobalParameters();

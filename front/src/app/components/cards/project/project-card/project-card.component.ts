@@ -84,7 +84,10 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		this.updateCost(state)
 	}
 	public updateCost(state?: PlayerStateModel): void {
-		if(!state){this.projectCard.cost = 0; return}
+		if(!state){
+			this.projectCard.cost = this.projectCard.costInitial
+			return
+		}
 		this.projectCard.cost = this.cardCost.updateCost({
 			tagList: this.projectCard.tagsId,
 			steelState: state.getRessourceInfoFromType('steel'),
