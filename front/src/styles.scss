@@ -1,39 +1,7 @@
-$ares-red: rgb(237, 53, 49);
-$ares-blue: rgb(39, 177, 229);
-$ares-green: rgb(42, 180, 92);
-$ares-purple: rgb(98, 70, 156);
-:root{
-	--test-card-height: 300px;
-}
-
-$card-height: 300px;
-$card-width: calc($card-height * 63 / 88);
+@import 'variables';
 
 $fade-transition-time: .2s;
 
-$colors: (
-  "red": $ares-red,
-  "blue": $ares-blue,
-  "green": $ares-green,
-  "purple": $ares-purple
-);
-$dark-colors: (
-    "red": darken($ares-red, 15%),
-    "blue": rgb(17, 114, 186),
-    "green": rgb(0, 113, 58),
-    "purple": darken($ares-purple, 15%)
-);
-$light-colors: (
-    "red": lighten($ares-red, 5%),
-    "blue": lighten($ares-blue, 5%),
-    "green": lighten($ares-green, 5%),
-    "purple": rgb(244, 172, 205)
-);
-$card-back-colors: (
-    "red": rgba(130, 30, 30, 1),
-    "blue": rgba(50, 100, 150, 1),
-    "green": rgba(10, 90, 40, 1)
-);
 * {
     padding:0;
     margin:0;
@@ -67,7 +35,7 @@ p {
 
     background: rgb(31, 31, 31);
     font-size: larger;
-    color: $ares-blue;
+    color: var(--color-ares-blue);
     background: linear-gradient(rgb(31, 31, 31),rgb(31, 31, 31)) padding-box,
                 linear-gradient(135deg, rgb(17, 114, 186), rgb(0, 113, 58)) border-box;
     border-radius: 50em;
@@ -120,22 +88,22 @@ p {
         filter: grayscale(0%);
         background: rgba($color: #000000, $alpha: .5);
         outline-offset: 5px;
-        outline: $ares-blue solid 3px;
+        outline: var(--color-ares-blue) solid 3px;
     }
 }
 .element-selected-bracket{
-    $border-color-one: rgba($ares-blue, .8);
+    $border-color-one: rgba(var(--color-ares-blue), .8);
     $border-color-none: transparent;
     border: 4px solid;
     border-image: linear-gradient(to right, $border-color-one 25%, $border-color-none 25%, $border-color-none 75%, $border-color-one 75%) 5;
 }
 .element-selected{
-    $border-color-one: rgba($ares-blue, .8);
+    $border-color-one: rgba(var(--color-ares-blue), .8);
     $border-color-none: transparent;
-    outline: 4px solid $ares-blue;
+    outline: 4px solid var(--color-ares-blue);
     outline-offset: 0px;
     border: 4px solid transparent;
-    filter: drop-shadow(0 0 0.75rem $ares-blue);
+    filter: drop-shadow(0 0 0.75rem var(--color-ares-blue));
 }
 .element-not-selected{
     border: transparent solid 4px;
@@ -158,7 +126,7 @@ p {
   transition: visibility 0s $fade-transition-time, opacity $fade-transition-time linear;
 }
 .background-production{
-    $color-one: $ares-red;
+    $color-one: var(--color-ares-red);
     $color-two: rgb(253, 157, 67);
     $step1: 2%;
     $step2: 4%;
@@ -179,7 +147,7 @@ p {
 }
 .background-production-blue{
     $color-one: rgb(66, 66, 66);
-    $color-two: $ares-blue;
+    $color-two: var(--color-ares-blue);
     $step1: 2%;
     $step2: 4%;
     $step3: 6%;

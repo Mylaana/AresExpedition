@@ -1,27 +1,25 @@
-$card-height: 300px;
-$card-width: calc($card-height * 63 / 88);
-$builder-padding: $card-height *.04;
+$builder-padding: calc(var(--card-height) * .04);
 $alternative-width: 200px;
 .wrapper-card-builder{
     display: flex;
 	flex-direction: column;
-	width: calc($card-width);
+	width: calc(var(--card-width));
 	padding: $builder-padding;
 }
 .selected-card-zone{
 	position: relative;
-    width: $card-width;
-    height: $card-height;
+    width: var(--card-width);
+    height: var(--card-height);
 
-	border-radius: calc($card-height * .05);
+	border-radius: calc(var(--card-height) * .05);
 	background-color: gray;
 }
 .wrapper-buttons{
 	display: flex;
 	justify-content: center;
 	align-items: end;
-	height: calc(($card-height * .15) - $builder-padding);
-	width: $card-width;
+	height: calc((var(--card-height) * .15) - $builder-padding);
+	width: var(--card-width);
 	margin-top: $builder-padding;
 }
 .wrapper-select-button, .wrapper-build-button, .wrapper-alternative{
