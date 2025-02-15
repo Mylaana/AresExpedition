@@ -1,28 +1,24 @@
 
-<div class="wrapper-play-card">
-    <div class="play-card-one ares-background ares-border">
-        <div class="play-card-zone ares-card">
-            <app-project-card-list *ngIf="cardBuilder.getSelectedCard()!=undefined" class="play-card-zone-list" [cardListId]="'card builder zone 1'" [cardList]="[cardBuilder.getSelectedCard()]"></app-project-card-list>
+<div class="wrapper-card-builder ares-background ares-border">
+        <div class="selected-card-zone">
+            <app-project-card-list *ngIf="cardBuilder.getSelectedCard()!=undefined" class="play-card-zone-list" [cardList]="[cardBuilder.getSelectedCard()]"></app-project-card-list>
         </div>
         <div class="wrapper-buttons">
-            <div class="wrapper-select-button">
-                <app-event-play-zone-button [button]="cardBuilder.getButtons()[0]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
-            </div>
-			<div class="wrapper-cancel-button">
-                <app-event-play-zone-button [button]="cardBuilder.getButtons()[1]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
-            </div>
-            <div class="wrapper-build-button">
-                <app-event-play-zone-button [button]="cardBuilder.getButtons()[2]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
-            </div>
-            <div class="wrapper-discard-button">
-                <app-event-play-zone-button [button]="cardBuilder.getButtons()[3]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
+            <div *ngIf="cardBuilder.getButtons()[0].enabled || cardBuilder.getButtons()[1].enabled" class="wrapper-select-button">
+				<app-event-card-builder-button [button]="cardBuilder.getButtons()[0]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
+				<app-event-card-builder-button [button]="cardBuilder.getButtons()[1]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
+			</div>
+            <div *ngIf="cardBuilder.getButtons()[2].enabled || cardBuilder.getButtons()[3].enabled" class="wrapper-build-button">
+				<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
+				<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
             </div>
         </div>
         <ng-container *ngIf="cardBuilder.getOption()!=undefined">
-            <h1>Or</h1>
-            <div class="wrapper-alternative">
-                <app-event-play-zone-button [button]="cardBuilder.getButtons()[4]" (eventCardBuilderButtonClicked)="cardBuilderButtonClicked($event)"></app-event-play-zone-button>
+			<div class="wrapper-buttons">
+            	<div class="wrapper-alternative">
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
+				</div>
             </div>
         </ng-container>
-    </div>
+
 </div>

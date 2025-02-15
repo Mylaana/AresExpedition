@@ -13,6 +13,7 @@ export type ButtonNames =
 | 'upgradePhase'
 | 'drawCards' | 'discardCards' | 'scanKeep'
 | 'addRessourceToSelectedCard'
+export type ButtonType = 'Image' | 'EventMain' | 'other'
 
 export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | CardBuilderOptionType

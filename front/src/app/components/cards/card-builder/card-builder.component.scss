@@ -1,39 +1,35 @@
-$card-height: 310px;
+$card-height: 300px;
 $card-width: calc($card-height * 63 / 88);
+$builder-padding: $card-height *.04;
 $alternative-width: 200px;
-.wrapper-play-card{
+.wrapper-card-builder{
     display: flex;
-    justify-content: space-between;
-	width: calc($card-width * 2 + $alternative-width + 15%);
-	padding: 20px;
+	flex-direction: column;
+	width: calc($card-width);
+	padding: $builder-padding;
 }
-.play-card-zone{
+.selected-card-zone{
+	position: relative;
     width: $card-width;
     height: $card-height;
+
+	border-radius: calc($card-height * .05);
+	background-color: gray;
 }
-.play-card-one, .play-card-two{
-	padding: 10px;
-}
-.play-card-two{
-    display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: calc($card-width + $alternative-width + 10% );
-}
-.wrapper-alternative{
-    display: flex;
+.wrapper-buttons{
+	display: flex;
 	justify-content: center;
-	align-items: center;
-    width: $alternative-width;
+	align-items: end;
+	height: calc(($card-height * .15) - $builder-padding);
+	width: $card-width;
+	margin-top: $builder-padding;
 }
-.wrapper-select-button, .wrapper-cancel-button, .wrapper-build-button, .wrapper-discard-button{
+.wrapper-select-button, .wrapper-build-button, .wrapper-alternative{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height: 100%;
 	width: 100%;
-    padding: 0px;
-    margin: 0;
-    height: 70px;
 }
 .button-select-card, .button-cancel-card, .button-build-card, .button-discard-card{
 	z-index: 1;
@@ -49,4 +45,13 @@ $alternative-width: 200px;
     position: absolute;
     top: 0;
     left: 0;
+}
+app-event-card-builder-button{
+	width: 100%;
+	height: 100%;
+}
+app-project-card-list{
+	position: relative;
+	width: 100%;
+	height: 100%;
 }

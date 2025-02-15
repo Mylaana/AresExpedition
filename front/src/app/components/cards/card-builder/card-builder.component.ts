@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EventBaseModel, EventCardBuilder, CardBuilder } from '../../../models/core-game/event.model';
 import { ProjectCardListComponent } from '../project/project-card-list/project-card-list.component';
 import { EventCardBuilderButton } from '../../../models/core-game/button.model';
-import { EventCardBuilderButtonComponent } from '../../tools/event-play-zone-button/event-play-zone-button.component';
+import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
 import { CardBuilderOptionType } from '../../../types/global.type';
 
 @Component({
