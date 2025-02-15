@@ -6,6 +6,15 @@ import java.util.Map;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
+import com.ares_expedition.model.player_state.subclass.PlayerInfoState;
+import com.ares_expedition.model.player_state.subclass.PlayerOtherState;
+import com.ares_expedition.model.player_state.subclass.PlayerPhaseCardState;
+import com.ares_expedition.model.player_state.subclass.PlayerProjectCardState;
+import com.ares_expedition.model.player_state.subclass.PlayerRessourceState;
+import com.ares_expedition.model.player_state.subclass.PlayerScoreState;
+import com.ares_expedition.model.player_state.subclass.PlayerTagState;
+import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
 
 public class PlayerState {
     private PlayerInfoState infoState = new PlayerInfoState();
@@ -172,11 +181,11 @@ public class PlayerState {
         this.projectCardState.setPlayedProjectCardStocks(projectCardStocks);
     }
 
-    public Map<String, Object> getTriggers() {
+    public TriggerState getTriggers() {
         return this.projectCardState.getTriggers();
     }
 
-    public void setTriggers(Map<String, Object> triggers) {
+    public void setTriggers(TriggerState triggers) {
         this.projectCardState.setTriggers(triggers);
     }
 
@@ -198,7 +207,7 @@ public class PlayerState {
         this.phaseCardState = phaseCardState;
     }
 
-        public List<Map<String, Object>> getPhaseGroups() {
+    public List<Map<String, Object>> getPhaseGroups() {
         return this.phaseCardState.getPhaseGroups();
     }
 

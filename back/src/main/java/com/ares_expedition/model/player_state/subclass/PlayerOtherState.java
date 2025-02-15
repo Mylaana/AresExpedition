@@ -1,4 +1,4 @@
-package com.ares_expedition.model.player_state;
+package com.ares_expedition.model.player_state.subclass;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ public class PlayerOtherState {
     private Map<String, Object> research = new HashMap<>();
 	private Integer sellCardValueMod;
 
-    PlayerOtherState() {
+    public PlayerOtherState() {
     }
 
     PlayerOtherState(PlayerOtherStateDTO dto) {

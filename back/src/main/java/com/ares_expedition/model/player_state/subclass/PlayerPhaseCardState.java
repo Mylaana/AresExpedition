@@ -1,4 +1,4 @@
-package com.ares_expedition.model.player_state;
+package com.ares_expedition.model.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,10 @@ public class PlayerPhaseCardState {
     private Number phaseCardUpgradedCount;
     private PhaseEnum selectedPhase;
 
-    PlayerPhaseCardState() {
+    public PlayerPhaseCardState() {
     }
 
-    PlayerPhaseCardState(PlayerPhaseCardStateDTO dto) {
+    public PlayerPhaseCardState(PlayerPhaseCardStateDTO dto) {
         this.phaseGroups = dto.getPhaseGroups();
         this.phaseCardUpgradedCount = dto.getPhaseCardUpgradedCount();
         this.selectedPhase = dto.getSelectedPhase();

@@ -3,7 +3,7 @@ package com.ares_expedition.dto.websocket.content.player_state.subclass;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ares_expedition.model.player_state.PlayerOtherState;
+import com.ares_expedition.model.player_state.subclass.PlayerOtherState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerOtherStateDTO {

@@ -1,5 +1,5 @@
 
-package com.ares_expedition.model.player_state;
+package com.ares_expedition.model.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerRes
 public class PlayerRessourceState {
     private List<Map<String, Object>> ressources = new ArrayList<>();
 
-    PlayerRessourceState() {
+    public PlayerRessourceState() {
     }
 
     public PlayerRessourceState(PlayerRessourceStateDTO dto) {

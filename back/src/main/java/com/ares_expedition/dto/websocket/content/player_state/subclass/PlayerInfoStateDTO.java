@@ -1,6 +1,6 @@
 package com.ares_expedition.dto.websocket.content.player_state.subclass;
 
-import com.ares_expedition.model.player_state.PlayerInfoState;
+import com.ares_expedition.model.player_state.subclass.PlayerInfoState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerInfoStateDTO {

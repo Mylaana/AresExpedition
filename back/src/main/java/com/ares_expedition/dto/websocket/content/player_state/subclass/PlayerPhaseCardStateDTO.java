@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.model.player_state.PlayerPhaseCardState;
+import com.ares_expedition.model.player_state.subclass.PlayerPhaseCardState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerPhaseCardStateDTO {
