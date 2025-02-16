@@ -233,6 +233,7 @@ export class EventDesigner{
             }
             case('planificationPhase'):{
                 event.autoFinalize = false
+				event.title = 'Select a phase card:'
                 break
             }
             case('buildCard'):{
