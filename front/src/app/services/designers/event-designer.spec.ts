@@ -501,6 +501,7 @@ describe('Service - Designers - Event', () => {
                         }
                         case('planificationPhase'):{
                             expectedEvent.autoFinalize = false
+							expectedEvent.title = 'Select a phase card:'
                             break
                         }
                         case('upgradePhaseCards'):{

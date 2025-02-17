@@ -34,6 +34,7 @@ export class CardBuilderListComponent implements OnInit{
   }
   updateEvent(): void {
     this.currentEvent = this.event as EventCardBuilder
+	console.log('event:', this.event)
   }
   public cardBuilderListButtonClicked(button:EventCardBuilderButton): void {
     this.currentEvent.cardBuilderIdHavingFocus = button.parentCardBuilderId

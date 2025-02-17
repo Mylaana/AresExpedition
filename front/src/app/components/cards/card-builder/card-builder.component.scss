@@ -1,18 +1,51 @@
 $builder-padding: calc(var(--card-height) * .04);
 $alternative-width: 200px;
 .wrapper-card-builder{
+	position: relative;
     display: flex;
 	flex-direction: column;
 	width: calc(var(--card-width));
 	padding: $builder-padding;
+	box-shadow: 0px 0px 10px 0px #000000;
+}
+.filter-type-development{
+	background: linear-gradient(130deg,var(--color-ares-green-light3) 0%, var(--color-ares-green) 35%, var(--color-ares-green-dark4) 80%);
+}
+.filter-type-construction{
+	background: linear-gradient(130deg, var(--color-ares-blue-dark0) 40%, var(--color-ares-red-dark) 60%);
 }
 .selected-card-zone{
+	$color-one: rgba(0, 0, 0, 1);
+	$color-two: rgba(0, 0, 0, 0);
+	top: 0;
+	left: 0;
+	z-index: 0;
 	position: relative;
     width: var(--card-width);
     height: var(--card-height);
 
 	border-radius: calc(var(--card-height) * .05);
-	background-color: gray;
+	overflow: hidden;
+	box-shadow: inset 0 0 calc(var(--card-height) * .06) calc(var(--card-height) * .02) rgb(0, 0, 0);
+
+	&:before{
+        $color-one: rgba(0, 0, 0, 1);
+        $color-two: rgba(0, 0, 0, 0);
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+        linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, $color-one 30%, $color-two 30%, $color-two 70%, $color-one 70%, $color-one 100%),
+        linear-gradient(135deg, $color-one 0%, $color-one 30%, $color-two 30%, $color-two 70%, $color-one 70%, $color-one 100%),
+        linear-gradient(225deg, $color-one 0%, $color-one 30%, $color-two 30%, $color-two 70%, $color-one 70%, $color-one 100%),
+        linear-gradient(315deg, $color-one 0%, $color-one 30%, $color-two 30%, $color-two 70%, $color-one 70%, $color-one 100%);
+        background-size: 3px 3px;
+        background-repeat: repeat;
+        transform: rotate(0deg);
+	}
 }
 .wrapper-buttons{
 	display: flex;
@@ -32,18 +65,6 @@ $alternative-width: 200px;
 .button-select-card, .button-cancel-card, .button-build-card, .button-discard-card{
 	z-index: 1;
 }
-.play-card-zone{
-    position: relative;
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.play-card-zone-list{
-    z-index: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
 app-event-card-builder-button{
 	width: 100%;
 	height: 100%;
@@ -52,4 +73,24 @@ app-project-card-list{
 	position: relative;
 	width: 100%;
 	height: 100%;
+}
+.wrapper-main{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	align-items: center;
+
+	position: relative;
+}
+.wrapper-top-decoration{
+	$height-coeff: .07;
+	$height-offset: calc(var(--card-height) *.01);
+	$shape-width: calc(var(--card-width) * .8);
+	$shape-height: calc(var(--card-height) * $height-coeff);
+
+	position: relative;
+	top: calc($shape-height * .2);
+	left: 0;
+    height: $shape-height;
+    width: 80%;
 }
