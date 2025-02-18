@@ -12,7 +12,10 @@
     </div>
     <div class="wrapper-event-main">
         <div class="wrapper-event-top">
-            <h2 *ngIf="currentEvent!=undefined && currentEvent.title!=undefined">{{currentEvent.title}}</h2>
+			<div class="wrapper-title ares-background ares-border">
+				<h1>{{currentPhase}} PHASE</h1>
+				<h2 *ngIf="currentEvent.title!=undefined">{{currentEvent.title}}</h2>
+			</div>
 			<div class="wrapper-event-top-main">
                 <app-card-builder-list *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
 			</div>
