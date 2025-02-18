@@ -27,6 +27,7 @@ $button-shape-side-width: 15%;
 	$color3: rgba(0, 0, 0, .5);
 	-webkit-mask-image: linear-gradient(to bottom, $color1 0%,   $color2 100%);
 	mask-image: linear-gradient(to bottom, $color1 0%,   $color2 100%);
+
 	&:hover{
 		-webkit-mask-image: linear-gradient(to bottom, $color2 0%,   $color1 100%);
 		mask-image: linear-gradient(to bottom, $color2 0%,   $color1 100%);

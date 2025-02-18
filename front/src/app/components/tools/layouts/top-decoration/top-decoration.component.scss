@@ -1,15 +1,3 @@
-.right-shape{
-	$shape-width: calc(var(--card-width) * .1);
-	$shape-height: calc(var(--card-height) * .2);
-	position: absolute;
-	top: 0;
-	left: calc(($shape-width * -1) );
-    height: $shape-height;
-    width: $shape-width;
-    background-color: gray;
-    clip-path: polygon(0% 40%, 45% 30%, 45% 10%, 90% 0%, 100% 0%, 100% 100%, 90% 100%, 45% 90%, 45% 70%, 0% 60%);
-    margin: 0 auto;
-}
 .flt-svg {
     visibility: hidden;
     position: absolute;
@@ -33,42 +21,8 @@
 	z-index: 10;
 	top: 0;
 	left: 0;
-
     background-color: white;
-
     margin: 0 auto;
-}
-.background-mask{
-	$color1: white;
-	$color2: rgba(0,0,0,0);
-
-	position: absolute;
-	z-index: 1;
-	top: -50%;
-	width: 100%;
-	height: 150%;
-
-    -webkit-mask-image: radial-gradient(ellipse 80% 50% at center, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 80%);
-    mask-image: radial-gradient(ellipse 80% 50% at center, rgba(0, 0, 0, 0.3) 10%, rgba(0, 0, 0, 0) 80%);
-
-}
-.background-elipse{
-	position: absolute;
-	z-index: 0;
-	box-shadow: 0 0 10px 0px rgb(0, 0, 0);
-}
-.background-elipse-top{
-	top: 5%;
-	width: 33%;
-	height: 60%;
-	border-radius: 50%;
-}
-.background-elipse-bottom{
-	width: 95%;
-	height: 100%;
-	top: 40%;
-	border-top-left-radius: 40%;
-	border-top-right-radius: 40%;
 }
 .main{
 	position: relative;
@@ -78,4 +32,26 @@
 	align-items: center;
 	height: 100%;
 	width: 100%;
+}
+
+.main::before, .main::after {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	box-shadow: 0 0 10px 0px rgb(0, 0, 0);
+}
+
+.main::before {
+	top: 5%;
+	width: 33%;
+	height: 60%;
+	border-radius: 50%;
+}
+
+.main::after {
+	width: 95%;
+	height: 100%;
+	top: 40%;
+	border-top-left-radius: 40%;
+	border-top-right-radius: 40%;
 }
