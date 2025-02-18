@@ -1,12 +1,21 @@
-$builder-padding: calc(var(--card-height) * .04);
+$builder-padding: calc(var(--card-height) * .06);
+$selected-card-zone-coeff: 1.05;
 $alternative-width: 200px;
 .wrapper-card-builder{
 	position: relative;
     display: flex;
 	flex-direction: column;
-	width: calc(var(--card-width));
+	width: calc(var(--card-width) * $selected-card-zone-coeff);
 	padding: $builder-padding;
-	box-shadow: 0px 0px 10px 0px #000000;
+}
+.wrapper-buton-zone{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	width: 100%;
+	margin-top: $builder-padding;
 }
 .filter-type-development{
 	background: linear-gradient(130deg,var(--color-ares-green-light3) 0%, var(--color-ares-green) 35%, var(--color-ares-green-dark4) 80%);
@@ -17,16 +26,22 @@ $alternative-width: 200px;
 .selected-card-zone{
 	$color-one: rgba(0, 0, 0, 1);
 	$color-two: rgba(0, 0, 0, 0);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	top: 0;
 	left: 0;
 	z-index: 0;
 	position: relative;
-    width: var(--card-width);
-    height: var(--card-height);
+    width: calc(var(--card-width) * $selected-card-zone-coeff);
+    height: calc(var(--card-height) * $selected-card-zone-coeff);
 
 	border-radius: calc(var(--card-height) * .05);
 	overflow: hidden;
-	box-shadow: inset 0 0 calc(var(--card-height) * .06) calc(var(--card-height) * .02) rgb(0, 0, 0);
+	//box-shadow: inset 0 0 calc(var(--card-height) * .06) calc(var(--card-height) * .02) rgb(0, 0, 0);
+	box-shadow: inset 0 0 20px 10px rgb(0, 0, 0);
 
 	&:before{
         $color-one: rgba(0, 0, 0, 1);
@@ -51,9 +66,8 @@ $alternative-width: 200px;
 	display: flex;
 	justify-content: center;
 	align-items: end;
-	height: calc((var(--card-height) * .15) - $builder-padding);
+	height: calc((var(--card-height) * .1));
 	width: var(--card-width);
-	margin-top: $builder-padding;
 }
 .wrapper-select-button, .wrapper-build-button, .wrapper-alternative{
 	display: flex;
@@ -71,8 +85,9 @@ app-event-card-builder-button{
 }
 app-project-card-list{
 	position: relative;
-	width: 100%;
-	height: 100%;
+	z-index: 10;
+	width: var(--card-width);
+	height: var(--card-height);
 }
 .wrapper-main{
 	display: flex;
@@ -81,6 +96,7 @@ app-project-card-list{
 	align-items: center;
 
 	position: relative;
+	margin-top: 200px;
 }
 .wrapper-top-decoration{
 	$height-coeff: .07;
@@ -93,4 +109,25 @@ app-project-card-list{
 	left: 0;
     height: $shape-height;
     width: 80%;
+}
+.inner-decoration--side{
+	$border-thickness: 2px;
+	position: absolute;
+	width: calc(100% - $builder-padding);
+	height: calc(var(--card-height) * $selected-card-zone-coeff + $builder-padding);
+	border-left: solid $border-thickness;
+	border-right: solid $border-thickness;
+	border-image: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--color-ares-orange) 5%, var(--color-ares-orange) 95%,  rgba(255,255,255,0)) 1;
+	top: calc($builder-padding / 2);
+	left: calc($builder-padding / 2 - $border-thickness);
+}
+.inner-decoration--separator{
+	$border-thickness: 2px;
+	z-index: 10;
+	width: calc(100%);
+	margin-top: calc($builder-padding / 2);
+	margin-bottom: calc($builder-padding / 2);
+
+	border-top: solid $border-thickness;
+	border-image: linear-gradient(to right, rgba(255,255,255,0) 0%, var(--color-ares-orange) 5%, var(--color-ares-orange) 95%,  rgba(255,255,255,0)) 1;
 }

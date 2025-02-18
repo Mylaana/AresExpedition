@@ -55,7 +55,7 @@ $button-shape-side-width: 15%;
 	width: calc(100% - 2px);
 	height: calc(100% - 2px);
 
-	background-color: rgb(255, 129, 25);
+	background-color: var(--color-ares-orange);
 	& app-text-with-image{
 		width: calc(100% - $button-shape-side-width);
 		color: white;
@@ -65,7 +65,7 @@ $button-shape-side-width: 15%;
 	z-index: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgb(144, 65, 0);
+	background-color:  var(--color-ares-orange-dark);
 }
 .button-shape{
 	position: absolute;
