@@ -10,19 +10,19 @@
 		<div class="wrapper-buton-zone">
 			<div class="wrapper-buttons">
 				<div *ngIf="cardBuilder.getButtons()[0].enabled || cardBuilder.getButtons()[1].enabled" class="wrapper-select-button">
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[0]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[1]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[0]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[1]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
 				</div>
 				<div *ngIf="cardBuilder.getButtons()[2].enabled || cardBuilder.getButtons()[3].enabled" class="wrapper-build-button">
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
 				</div>
 			</div>
 			<ng-container *ngIf="cardBuilder.getOption()!=undefined">
 				<div class="inner-decoration--separator"></div>
 				<div class="wrapper-buttons">
 					<div class="wrapper-alternative">
-						<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
+						<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
 					</div>
 				</div>
 			</ng-container>
