@@ -9,7 +9,7 @@ import { ButtonComponent } from './button.component';
 	standalone: true,
 	imports: [
 		CommonModule,
-		TextWithImageComponent
+		TextWithImageComponent,
 	],
 	templateUrl: './button.component.html',
 	styleUrl: './button.component.scss'
