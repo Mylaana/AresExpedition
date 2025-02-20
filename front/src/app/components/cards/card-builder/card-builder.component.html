@@ -20,9 +20,12 @@
 			</div>
 			<ng-container *ngIf="cardBuilder.getOption()!=undefined">
 				<div class="inner-decoration--separator"></div>
-				<div class="wrapper-buttons">
-					<div class="wrapper-alternative">
-						<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
+				<div class="wrapper-alternative">
+					<div class="wrapper-alternative-inner">
+						<h2>Or</h2>
+						<div class="wrapper-buttons">
+							<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
+						</div>
 					</div>
 				</div>
 			</ng-container>

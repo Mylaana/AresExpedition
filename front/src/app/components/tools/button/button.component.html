@@ -1,5 +1,5 @@
 
-<button *ngIf="!_imageUrl" class="main" [disabled]="button.enabled===false" [ngClass]="[button.enabled===false ? 'element-disabled':'', shape?'button-shape--'+shape:'']" (click)="onClick(button)">
+<button *ngIf="!_imageUrl" class="main" [disabled]="button.enabled===false" [ngClass]="[button.enabled===false ? 'element-disabled':'',shape?'button-shape--'+shape:'']" (click)="onClick(button)">
 	<div class="wrapper-button">
 		<div *ngIf="button.enabled===true" [ngClass]="[ 'button-shape--'+shape, 'gradiant-mask--'+shape]">
 			<div [ngClass]="['button-gradiant-background--'+shape, 'button-shape--'+shape]"></div>

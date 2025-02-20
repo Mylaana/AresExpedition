@@ -1,5 +1,5 @@
 <div class="wrapper-game-event" *ngIf="currentEvent">
-    <div class="wrapper-commands ares-background ares-border">
+    <div class="wrapper-commands">
         <div *ngIf="currentEvent.button" class="wrapper-event-button wrapper-validate-button">
             <app-event-main-button  [button]="currentEvent.button" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
         </div>

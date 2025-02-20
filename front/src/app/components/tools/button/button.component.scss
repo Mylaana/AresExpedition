@@ -1,6 +1,6 @@
 $shape-name: ('hex', 'small', 'large');
 $shape-width: (
-	'hex': 23%,
+	'hex': 25%,
 	'small': 15%,
 	'large': 10%
 );
@@ -9,12 +9,15 @@ $shape-width: (
 	position: relative;
 	border: 0;
 	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .wrapper-button {
 	position: relative;
 	display: flex;
 	height: 100%;
+	width: 100%;
 	top: 0;
 	left: 0;
 }
@@ -71,6 +74,7 @@ $shape-width: (
 			left: 1px;
 			top: 1px;
 			height: calc(100% - 2px);
+			width: calc(100% - 2px);
 			position: absolute;
 
 			background-color: var(--color-ares-orange);
@@ -84,11 +88,11 @@ $shape-width: (
 }
 
 .button-background {
-	position: absolute;
-	left: 0;
-	top: 0;
 	@each $name in $shape-name {
 		&--#{$name} {
+			position: relative;
+			left: 0;
+			top: 0;
 			z-index: 0;
 			background-color: var(--color-ares-orange-dark);
 		}
@@ -102,7 +106,7 @@ $shape-width: (
 
 .button-shape{
 	&--hex{
-		aspect-ratio: 1 / 1;
+		aspect-ratio: 1.15 / 1;
 	}
 	&--small{
 		aspect-ratio: 3.5 / 1;
@@ -112,6 +116,8 @@ $shape-width: (
 	}
 	@each $name, $width in $shape-width {
 		&--#{$name} {
+			max-width: 100%;
+			max-height: 100%;
 			-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 			clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 		}
