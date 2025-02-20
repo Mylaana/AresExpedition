@@ -1,13 +1,13 @@
 <div class="wrapper-game-event" *ngIf="currentEvent">
-    <div class="wrapper-commands ares-background ares-border">
+    <div class="wrapper-commands">
         <div *ngIf="currentEvent.button" class="wrapper-event-button wrapper-validate-button">
-            <app-event-main-button  [button]="currentEvent.button" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
+            <app-event-main-button  [button]="currentEvent.button" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
         </div>
         <div *ngIf="sellCardsButton.enabled" class="wrapper-event-button wrapper-sell-button">
-            <app-non-event-button  [button]="sellCardsButton" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
+            <app-non-event-button  [button]="sellCardsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
         </div>
 		<div *ngIf="sellCardsCancelButton.enabled" class="wrapper-event-button wrapper-sell-cancel-button">
-            <app-non-event-button  [button]="sellCardsCancelButton" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
+            <app-non-event-button  [button]="sellCardsCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
         </div>
     </div>
     <div class="wrapper-event-main">

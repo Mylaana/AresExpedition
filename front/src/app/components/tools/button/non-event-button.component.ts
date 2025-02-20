@@ -9,7 +9,7 @@ import { TextWithImageComponent } from '../text-with-image/text-with-image.compo
 	standalone: true,
 	imports: [
 		CommonModule,
-		TextWithImageComponent
+		TextWithImageComponent,
 	],
 	templateUrl: './button.component.html',
 	styleUrl: './button.component.scss'

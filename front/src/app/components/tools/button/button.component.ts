@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ButtonBase, ImageButton } from '../../../models/core-game/button.model';
 import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
 
+type shape = 'hex' | 'hex_floating'| 'small' | 'large'
+
 @Component({
 	selector: 'app-button',
 	standalone: true,
 	imports: [
 		CommonModule,
-		TextWithImageComponent
+		TextWithImageComponent,
 	],
 	templateUrl: './button.component.html',
 	styleUrl: './button.component.scss'
@@ -16,8 +18,10 @@ import { TextWithImageComponent } from '../text-with-image/text-with-image.compo
 export class ButtonComponent implements OnChanges {
 	@Output() buttonClicked: EventEmitter<ButtonBase> = new EventEmitter<ButtonBase>()
 	@Input() button!: ButtonBase;
+	@Input() shape: shape = 'hex'
 	_imageUrl!: string
 	_caption!: string
+	_isHovered: boolean = false
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if(changes['button'] && changes['button'].currentValue){

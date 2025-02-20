@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LayoutHexagonsComponent } from '../layout-hexagons/layout-hexagons.component';
 
 @Component({
