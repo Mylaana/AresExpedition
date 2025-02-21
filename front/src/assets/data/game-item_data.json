@@ -133,15 +133,39 @@
     },
 	{
         "id": 112,
-        "description": "validate",
-        "imageUrl": "assets/other/ready.png",
-        "name": "$other_validate$"
+        "description": "validate_circle",
+        "imageUrl": "assets/other/validate_circle.png",
+        "name": "$other_validate_circle$"
     },
 	{
         "id": 113,
         "description": "cancel",
         "imageUrl": "assets/other/cancel.png",
         "name": "$other_cancel$"
+    },
+	{
+        "id": 114,
+        "description": "rollback",
+        "imageUrl": "assets/other/rollback.png",
+        "name": "$other_rollback$"
+    },
+	{
+        "id": 115,
+        "description": "phase_planification",
+        "imageUrl": "assets/other/phase_planification.png",
+        "name": "$other_planification$"
+    },
+	{
+        "id": 116,
+        "description": "sell_card",
+        "imageUrl": "assets/other/sell_card.png",
+        "name": "$other_sell_card$"
+    },
+	{
+        "id": 117,
+        "description": "validate",
+        "imageUrl": "assets/other/validate.png",
+        "name": "$other_validate$"
     },
     {
         "id": 1000,

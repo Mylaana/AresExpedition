@@ -17,7 +17,7 @@ import { Message } from '@stomp/stompjs';
 import { PlayerMessageResult } from './interfaces/websocket.interface';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
 import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
-import { Utils } from './utils/utils';
+import { HorizontalSeparatorComponent } from './components/tools/layouts/horizontal-separator/horizontal-separator.component';
 
 @Component({
 	selector: 'app-root',
@@ -29,7 +29,8 @@ import { Utils } from './utils/utils';
 		GameEventComponent,
 		ProjectCardListComponent,
 		NavigationComponent,
-		PlayerPannelComponent
+		PlayerPannelComponent,
+		HorizontalSeparatorComponent
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',

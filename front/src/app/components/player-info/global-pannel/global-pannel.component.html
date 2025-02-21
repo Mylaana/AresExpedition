@@ -1,8 +1,8 @@
-<div class="wrapper-pannel">
+<div class="wrapper-pannel ares-card">
     <div class="wrapper-player-name">
         <p>{{playerState.getName()}}</p>
     </div>
-    <div class="pannel-card ares-card">
+    <div class="pannel-card">
         <div class="pannel-text" *ngIf="playerIsReady">
             <img src="/assets/other/ready.png" alt="">
         </div>
@@ -10,7 +10,7 @@
             <img class="hourglass" src="/assets/other/hourglass.png" alt="">
         </div>
     </div>
-    <div class="pannel-card ares-card">
+    <div class="pannel-card">
         <div class="pannel-image">
 			<!--
             <ng-container *ngIf="currentPhase=='PLANIFICATION' && playerPhase.previousSelectedPhase!=undefined">
@@ -22,7 +22,7 @@
 			-->
         </div>
     </div>
-    <div class="pannel-card ares-card">
+    <div class="pannel-card">
         <div class="card-icon">
             <div class="vp-icon">
                 <p>VP</p>
@@ -32,7 +32,7 @@
             <p>{{playerState.getVP()}}</p>
         </div>
     </div>
-    <div class="pannel-card ares-card">
+    <div class="pannel-card">
         <div class="card-icon">
             <img src="/assets/other/tr.png" alt="">
         </div>
@@ -40,7 +40,7 @@
             <p>{{playerState.getTR()}}</p>
         </div>
     </div>
-    <div class="pannel-card ares-card">
+    <div class="pannel-card">
         <div class="card-icon">
             <img src="/assets/other/card.png" alt="">
         </div>

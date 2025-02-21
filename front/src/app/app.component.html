@@ -7,7 +7,7 @@
         <app-navigation></app-navigation>
     </div>
     <div class="wrapper-main">
-        <div class="wrapper-top-pannel">
+        <div class="wrapper-top-pannel ares-background">
             <app-self-info></app-self-info>
             <div *ngFor="let id of playerIdList" class="wrapper-other-player">
                 <app-player-pannel *ngIf="id!=clientPlayerId" [playerId]="id"></app-player-pannel>
@@ -16,12 +16,14 @@
         <div class="wrapper-other">
             <app-server-emulation></app-server-emulation>
             <app-game-event></app-game-event>
+			<app-horizontal-separator></app-horizontal-separator>
             <div class="wrapper-hand">
                 <h1>Cards in hand:</h1>
-                <app-project-card-list [cardList]="playerHand" class="ares-background"></app-project-card-list>
+                <app-project-card-list [cardList]="playerHand"></app-project-card-list>
             </div>
+			<app-horizontal-separator></app-horizontal-separator>
             <h1>Cards Played:</h1>
-            <app-project-card-list #hand [cardList]="playerPlayed" [cardListId]="'app'" class="ares-background"></app-project-card-list>
+            <app-project-card-list #hand [cardList]="playerPlayed" [cardListId]="'app'"></app-project-card-list>
         </div>
     </div>
 </div>

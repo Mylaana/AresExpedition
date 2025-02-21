@@ -58,6 +58,7 @@ export class GameEventComponent {
 	//Non event buttons
 	sellCardsButton!: NonEventButton;
 	sellCardsCancelButton!: NonEventButton;
+	rollbackButton!: NonEventButton;
 
 	phaseList: NonSelectablePhase[] = [
 		'planification',
@@ -79,6 +80,7 @@ export class GameEventComponent {
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.sellCardsButton = ButtonDesigner.createNonEventButton('sellOptionalCard')
 		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
+		this.rollbackButton = ButtonDesigner.createNonEventButton('rollBack')
 
 		this.gameStateService.currentPhase.subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))

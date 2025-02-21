@@ -32,10 +32,12 @@ $disabled-border: darken(gray, 10%);
 		font-weight: bold;
 	}
 	&.enabled::ng-deep app-text-with-image p {
-		color: rgb(0, 0, 0);
+		font-weight: 550;
+		font-size: 100%;
 	}
 	&.disabled::ng-deep app-text-with-image p {
 		color: rgb(61, 61, 61);
+		font-size: 100%;
 	}
 }
 

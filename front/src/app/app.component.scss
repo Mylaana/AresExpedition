@@ -16,7 +16,6 @@
 }
 .wrapper-main{
     flex-grow: 1;
-
     margin-left: 3.2vw;
     display: flex;
     align-items: left;
@@ -30,7 +29,7 @@
     align-items: center;
 }
 .wrapper-top-pannel{
-    $player-pannel-width: 70vw;
+    $player-pannel-width: 65%;
 
     z-index: 10;
     display: flex;
@@ -70,4 +69,11 @@ app-game-event{
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+app-horizontal-separator{
+	width: 80%;
+	height: 5px;
+	margin-top: 2%;
+	margin-bottom: 2%;
 }

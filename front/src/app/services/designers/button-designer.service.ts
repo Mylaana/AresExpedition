@@ -22,6 +22,7 @@ export class ButtonDesigner{
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
 			case('sellOptionalCardCancel'):{startEnabled=false;break}
+			case('rollBack'):{startEnabled=true;break}
 
             default:{startEnabled=false;break}
         }
@@ -33,11 +34,11 @@ export class ButtonDesigner{
         switch(buttonRule){
 			//events related rules
             case('default'):{caption='default validation button';break}
-            case('planificationPhase'):{caption='Select Phase';break}
+            case('planificationPhase'):{caption='$other_planification$';break}
             case('upgradePhaseCards'):{caption='End upgrades';break}
-            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='End phase';break}
+            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='$other_validate$';break}
             case('addRessourceToSelectedCard'):{caption='Add ressources';break}
-            case('actionPhase'):{caption='End phase';break}
+            case('actionPhase'):{caption='$other_validate$';break}
             case('researchPhaseResult'):{caption='Research';break}
             case('selectCardForcedSell'):{caption='Sell selection';break}
             case('selectCardOptionalSell'):{caption='Sell selection';break}
@@ -45,8 +46,9 @@ export class ButtonDesigner{
             case('scanKeepResult'):{caption='Add selection to hand';break}
 
 			//button name related rules
-			case('sellOptionalCard'):{caption='$ressource_card$ $other_arrow$ $ressource_megacredit$';break}
+			case('sellOptionalCard'):{caption='$other_sell_card$';break}
 			case('sellOptionalCardCancel'):{caption='Cancel selling cards';break}
+			case('rollBack'):{caption='$other_rollback$';break}
 
             default:{caption='default validation';break}
         }
@@ -92,7 +94,7 @@ export class ButtonDesigner{
         button.enabled = button.startEnabled
         switch(option){
             case('gain6MC'):{button.caption = '+ $ressource_megacreditvoid_6$';break}
-            case('drawCard'):{button.caption = '+ $ressource_card$';break}
+            case('drawCard'):{button.caption = '$ressource_card$';break}
         }
         button.startEnabled=true
         button.name = option as EventCardBuilderButtonNames

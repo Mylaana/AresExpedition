@@ -67,14 +67,23 @@ p {
     background: #fff;
 }
 .ares-card{
-    background: rgba(grey, .3);
+    background: rgba(rgb(0, 0, 0), .05);
     border-radius: 5px;
+	box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, .2);
     & p {
-        color: white;
+        color: black;
     }
 }
 .ares-border{
     border: 2px solid rgba(lightblue, .2);
+}
+.ares-cardlist{
+	$side-gradient-size: 30%;
+	$side-void-size: 5%;
+	$middle-alpha: 0.2;
+	$background-color: white;
+
+	background: linear-gradient(to right, rgba($background-color, 0) $side-void-size,  rgba($background-color, $middle-alpha) $side-gradient-size, rgba($background-color, $middle-alpha) calc(100% - $side-gradient-size), rgba($background-color, 0) calc(100% - $side-void-size));
 }
 .element-clickable{
     &:hover{
@@ -126,9 +135,9 @@ p {
   opacity: 0;
   transition: visibility 0s $fade-transition-time, opacity $fade-transition-time linear;
 }
-.background-production{
-    $color-one: var(--color-ares-red);
-    $color-two: rgb(253, 157, 67);
+.background-production--red{
+    $color-one:  rgb(237, 53, 49); //doesnt work with variable
+    $color-two: rgb(255, 129, 25);
     $step1: 2%;
     $step2: 4%;
     $step3: 6%;
@@ -136,7 +145,7 @@ p {
     background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
-.background-production-grey{
+.background-production--grey{
     $color-one: rgb(66, 66, 66);
     $color-two: rgb(184, 184, 184);
     $step1: 0%;
@@ -146,9 +155,9 @@ p {
     background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
-.background-production-blue{
+.background-production--blue{
     $color-one: rgb(66, 66, 66);
-    $color-two: var(--color-ares-blue);
+    $color-two: rgb(39, 177, 229);
     $step1: 2%;
     $step2: 4%;
     $step3: 6%;
@@ -164,4 +173,8 @@ p {
 }
 .light-greyed-filter{
     filter: grayscale(30%);
+}
+app-horizontal-separator{
+	width: 100%;
+	height: 100%;
 }

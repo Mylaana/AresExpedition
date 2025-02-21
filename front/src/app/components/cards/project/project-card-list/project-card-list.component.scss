@@ -2,9 +2,23 @@
     display: flex;
     justify-content: center;
     width: 100%;
+	height: 100%;
 }
 .wrapper-list{
+	position: relative;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+	height: 100%;
+}
+.list-background{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.list-mask{
+    //-webkit-mask-image: radial-gradient(circle, rgb(255, 255, 255) 20%, rgba(0, 0, 0, 0.8) 80%);
+    //mask-image: linear-gradient(to bottom, rgb(255, 255, 255, 0) 20%, rgba(0, 0, 0, 0.8) 80%);
 }

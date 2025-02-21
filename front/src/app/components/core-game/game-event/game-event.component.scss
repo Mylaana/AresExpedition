@@ -1,5 +1,5 @@
 $ares-blue: rgb(39, 177, 229);
-$command-pannel-height: 8vh;
+$command-pannel-height: 10vh;
 $command-pannel-padding: 15px;
 $command-pannel-width: 15%;
 $navigation-bar-width: 3vw;
@@ -30,8 +30,11 @@ $card-width: calc($card-height * 63 / 88);
     background: linear-gradient(to left, $ares-blue, rgba(255, 255, 255, 0))
 }
 .wrapper-event-button{
-    width: 50%;
+    //width: 50%;
 	height: 100%;
+	&--smaller{
+		height: 70%;
+	}
 }
 .wrapper-game-event{
     position: relative;
@@ -75,8 +78,7 @@ $card-width: calc($card-height * 63 / 88);
 
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    align-items: top;
 }
 .wrapper-title{
 	display: flex;

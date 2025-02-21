@@ -1,8 +1,8 @@
 .wrapper-player-pannel {
     display: flex;
     align-items: center;
-    height: 45px;
-    gap: 5px;
+    height: 30px;
+    gap: 1.5%;
     padding: 2px;
     margin: 1px;
     width: 100%;
@@ -11,11 +11,15 @@ app-global-pannel, app-ressource-pannel, app-tag-pannel{
     height: 100%;
     width: auto;
 }
-.wrapper-tag-pannel, .wrapper-ressource-pannel{
+.wrapper-tag-pannel {
     height: 100%;
-    width: auto;
+    width: 28%;
+}
+.wrapper-ressource-pannel{
+	height: 100%;
 }
 .wrapper-global-pannel, app-global-pannel{
     height: 100%;
-    flex-grow: 1;
+	width: auto;
+	flex-grow: 1;
 }
