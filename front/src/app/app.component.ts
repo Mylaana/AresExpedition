@@ -18,6 +18,9 @@ import { PlayerMessageResult } from './interfaces/websocket.interface';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
 import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
 import { HorizontalSeparatorComponent } from './components/tools/layouts/horizontal-separator/horizontal-separator.component';
+import { NonEventButton } from './models/core-game/button.model';
+import { ButtonDesigner } from './services/designers/button-designer.service';
+import { NonEventButtonComponent } from './components/tools/button/non-event-button.component';
 
 @Component({
 	selector: 'app-root',
@@ -30,7 +33,8 @@ import { HorizontalSeparatorComponent } from './components/tools/layouts/horizon
 		ProjectCardListComponent,
 		NavigationComponent,
 		PlayerPannelComponent,
-		HorizontalSeparatorComponent
+		HorizontalSeparatorComponent,
+		NonEventButtonComponent
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
@@ -46,6 +50,8 @@ export class AppComponent implements OnInit {
 	clientPlayerId!: number;
 	loading: boolean = true
 	@ViewChild('hand') handProjectList!: ProjectCardListComponent
+
+	settingsButton!: NonEventButton;
 
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
@@ -63,6 +69,8 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.clientPlayerId = this.gameStateService.clientPlayerId
+		this.settingsButton = ButtonDesigner.createNonEventButton('settings')
+		console.log(this.settingsButton)
 
 		this.gameStateService.currentLoadingState.subscribe(
 			loading => this.loadingFinished(loading)

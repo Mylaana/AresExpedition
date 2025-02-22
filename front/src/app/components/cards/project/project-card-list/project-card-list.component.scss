@@ -1,24 +1,36 @@
+$list-margin-coeff: 1.08;
 .wrapper-main{
-    display: flex;
-    justify-content: center;
     width: 100%;
-	height: 100%;
+	height: calc(var(--card-height) * $list-margin-coeff);
 }
 .wrapper-list{
 	position: relative;
     display: flex;
+	align-items: center;
     flex-wrap: wrap;
     width: 100%;
 	height: 100%;
 }
 .list-background{
 	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 100%;
 }
 .list-mask{
-    //-webkit-mask-image: radial-gradient(circle, rgb(255, 255, 255) 20%, rgba(0, 0, 0, 0.8) 80%);
-    //mask-image: linear-gradient(to bottom, rgb(255, 255, 255, 0) 20%, rgba(0, 0, 0, 0.8) 80%);
+	$fade-size: 5%; //calc(100% / $list-margin-coeff);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+    -webkit-mask-image: radial-gradient(circle, rgb(255, 255, 255) 20%, rgba(0, 0, 0, 0.8) 80%);
+    mask-image: linear-gradient(to bottom,rgb(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) $fade-size, rgba(0, 0, 0, 1) calc(100% - $fade-size), rgba(0, 0, 0, 0) 100%);
+}
+.wrapper-cards{
+	$margin: 5%;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	height: auto;
+	width: calc(100% - $margin * 2);
+	margin-left: 5%;
+	gap: 1%;
 }

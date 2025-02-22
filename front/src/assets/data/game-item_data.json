@@ -167,6 +167,12 @@
         "imageUrl": "assets/other/validate.png",
         "name": "$other_validate$"
     },
+	{
+        "id": 118,
+        "description": "settings",
+        "imageUrl": "assets/other/settings.png",
+        "name": "$other_settings$"
+    },
     {
         "id": 1000,
         "description": "steel",

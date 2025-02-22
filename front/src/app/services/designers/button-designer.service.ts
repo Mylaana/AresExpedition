@@ -23,6 +23,7 @@ export class ButtonDesigner{
 			case('sellOptionalCard'):{startEnabled=true;break}
 			case('sellOptionalCardCancel'):{startEnabled=false;break}
 			case('rollBack'):{startEnabled=true;break}
+			case('settings'):{startEnabled=true;break}
 
             default:{startEnabled=false;break}
         }
@@ -34,7 +35,7 @@ export class ButtonDesigner{
         switch(buttonRule){
 			//events related rules
             case('default'):{caption='default validation button';break}
-            case('planificationPhase'):{caption='$other_planification$';break}
+            case('planificationPhase'):{caption='$other_validate$';break}
             case('upgradePhaseCards'):{caption='End upgrades';break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='$other_validate$';break}
             case('addRessourceToSelectedCard'):{caption='Add ressources';break}
@@ -49,8 +50,9 @@ export class ButtonDesigner{
 			case('sellOptionalCard'):{caption='$other_sell_card$';break}
 			case('sellOptionalCardCancel'):{caption='Cancel selling cards';break}
 			case('rollBack'):{caption='$other_rollback$';break}
+			case('settings'):{caption='$other_settings$';break}
 
-            default:{caption='default validation';break}
+            default:{caption='';break}
         }
         return caption
     }

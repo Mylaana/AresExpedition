@@ -61,10 +61,7 @@ p {
     }
 }
 .ares-background{
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-	box-shadow: 0px 0px 10px 0px #000000;
-    background: #fff;
+	background-image: linear-gradient(165deg, white 20%, rgb(173, 173, 173) 60%, rgb(173, 173, 173) 65%,  white 95%);
 }
 .ares-card{
     background: rgba(rgb(0, 0, 0), .05);
@@ -75,15 +72,27 @@ p {
     }
 }
 .ares-border{
-    border: 2px solid rgba(lightblue, .2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 10px 0px #000000;
 }
 .ares-cardlist{
 	$side-gradient-size: 30%;
 	$side-void-size: 5%;
-	$middle-alpha: 0.2;
+	$middle-alpha: .2;
 	$background-color: white;
-
 	background: linear-gradient(to right, rgba($background-color, 0) $side-void-size,  rgba($background-color, $middle-alpha) $side-gradient-size, rgba($background-color, $middle-alpha) calc(100% - $side-gradient-size), rgba($background-color, 0) calc(100% - $side-void-size));
+
+	&--development{
+		$background-color: rgb(42, 180, 92);
+		background: linear-gradient(to right, rgba($background-color, 0) $side-void-size,  rgba($background-color, $middle-alpha) $side-gradient-size, rgba($background-color, $middle-alpha) calc(100% - $side-gradient-size), rgba($background-color, 0) calc(100% - $side-void-size));
+	}
+	&--construction{
+		$middle-alpha: .25;
+		$background-color: rgb(39, 177, 229);
+		$background-color2: rgb(237, 53, 49);
+		background: linear-gradient(to right, rgba($background-color, 0) $side-void-size,  rgba($background-color, $middle-alpha) $side-gradient-size, rgba($background-color2, $middle-alpha) calc(100% - $side-gradient-size), rgba($background-color, 0) calc(100% - $side-void-size));
+	}
 }
 .element-clickable{
     &:hover{

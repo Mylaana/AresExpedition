@@ -3,9 +3,11 @@
 </div>
 <h1 *ngIf="loading===true">GAME NOT LOADED YET</h1>
 <div *ngIf="loading===false" class="wrapper-app">
+	<!--
     <div class="wrapper-navigation">
         <app-navigation></app-navigation>
     </div>
+	-->
     <div class="wrapper-main">
         <div class="wrapper-top-pannel ares-background">
             <app-self-info></app-self-info>
@@ -14,6 +16,10 @@
             </div>
         </div>
         <div class="wrapper-other">
+			<div class="wrapper-settings">
+				<app-non-event-button [button]="settingsButton" [shape]="'hex_floating'" ></app-non-event-button>
+			</div>
+
             <app-server-emulation></app-server-emulation>
             <app-game-event></app-game-event>
 			<app-horizontal-separator></app-horizontal-separator>

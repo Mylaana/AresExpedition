@@ -6,6 +6,7 @@ import { CardSelector, ProjectFilter } from '../../../../interfaces/global.inter
 import { EventBaseModel, EventCardSelector, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
 import { CardState } from '../../../../interfaces/card.interface';
+import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 
 @Component({
   selector: 'app-project-card-list',
@@ -21,6 +22,7 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	@Input() eventId?: number;
 	@Input() playZoneId!: number; //this indicates whitch playZone this component should read
 	@Input() cardList!: ProjectCardModel[] //takes display priority
+	@Input() currentPhase!: NonSelectablePhaseEnum
 
 	playedCardList!: ProjectCardModel[] //takes display priority
 	@Output() updateSelectedCardList: EventEmitter<ProjectCardModel[]> = new EventEmitter<ProjectCardModel[]>()
