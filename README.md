@@ -42,6 +42,12 @@ websocket: finish the game state saving system
 project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service
 
+## /!\BUG/!\ :
+Card builder: when first card selected but not yet build, selecting a card in other builder resets first button states but keeps card in.   
+Builder locked should still show buttons
+Optional card seller: when card is selected but event is exited by cancelling cards are still sold
+
+
 ## New features :
 ### Phase cards
 Phase 3  

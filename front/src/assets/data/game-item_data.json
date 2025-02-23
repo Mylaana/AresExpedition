@@ -173,6 +173,12 @@
         "imageUrl": "assets/other/settings.png",
         "name": "$other_settings$"
     },
+	{
+        "id": 119,
+        "description": "development",
+        "imageUrl": "assets/other/phase_development.png",
+        "name": "$other_phase_development$"
+    },
     {
         "id": 1000,
         "description": "steel",

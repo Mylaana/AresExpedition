@@ -41,14 +41,14 @@ export class ButtonDesigner{
             case('addRessourceToSelectedCard'):{caption='Add ressources';break}
             case('actionPhase'):{caption='$other_validate$';break}
             case('researchPhaseResult'):{caption='Research';break}
-            case('selectCardForcedSell'):{caption='Sell selection';break}
-            case('selectCardOptionalSell'):{caption='Sell selection';break}
-            case('discardCards'):{caption='Discard selection';break}
+            case('selectCardForcedSell'):{caption='$other_validate$';break}
+            case('selectCardOptionalSell'):{caption='$other_validate$';break}
+            case('discardCards'):{caption='$other_validate$';break}
             case('scanKeepResult'):{caption='Add selection to hand';break}
 
 			//button name related rules
 			case('sellOptionalCard'):{caption='$other_sell_card$';break}
-			case('sellOptionalCardCancel'):{caption='Cancel selling cards';break}
+			case('sellOptionalCardCancel'):{caption='$other_cancel$';break}
 			case('rollBack'):{caption='$other_rollback$';break}
 			case('settings'):{caption='$other_settings$';break}
 

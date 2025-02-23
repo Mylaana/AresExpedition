@@ -14,9 +14,9 @@
         </div>
     </div>
     <div class="wrapper-event-main">
-        <div class="wrapper-event-top">
-			<div class="wrapper-title ares-background ares-border">
-				<h1>{{currentPhase}} PHASE</h1>
+		<div class="wrapper-event-top">
+			<div class="wrapper-event-description ares-background ares-border">
+				<h1>{{currentPhase}} <br> PHASE</h1>
 				<h2 *ngIf="currentEvent.title!=undefined">{{currentEvent.title}}</h2>
 			</div>
 			<div class="wrapper-event-top-main">
@@ -26,7 +26,7 @@
             <app-phase-production *ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"></app-phase-production>
             <div *ngIf="currentEvent.subType==='waitingGroupReady'" class="ares-background"><h1>[Waiting for other players to be ready]</h1></div>
         </div>
-        <div class="wrapper-event-bottom">
+        <div class="wrapper-selectors">
             <div *ngIf="currentEvent.hasSelector()===true" class="wrapper-card-selector">
                 <app-project-card-list #cardListSelector [currentPhase]="currentPhase" [cardListId]="'game event list'" [event]="currentEvent" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
             </div>

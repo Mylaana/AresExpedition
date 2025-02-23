@@ -1,8 +1,11 @@
 $ares-blue: rgb(39, 177, 229);
 $command-pannel-height: 10vh;
-$command-pannel-padding: 15px;
-$command-pannel-width: 15%;
-$navigation-bar-width: 3vw;
+$command-pannel-padding: 10px;
+$command-pannel-left-margin: 2%;
+$command-pannel-width: 14%;
+$description-pannel-margin-top: 2%;
+$description-pannel-margin-left: 2%;
+$navigation-bar-width: 0px;
 $card-height: 310px;
 $card-width: calc($card-height * 63 / 88);
 
@@ -12,22 +15,22 @@ $card-width: calc($card-height * 63 / 88);
 .wrapper-selection-active{
     z-index: -1;
     position: fixed;
-    width: 95.9vw;
+    width: 100%;
     height: 100vh;
     top: 0;
-    left: 3vw;
+    left: 0;
     display: flex;
     justify-content: space-between;
 }
 .selection-active-left{
     height: 100%;
-    width: 2vw;
-    background: linear-gradient(to right, $ares-blue, rgba(255, 255, 255, 0))
+    width: 2%;
+    background: linear-gradient(to right, var(--color-ares-blue), rgba(255, 255, 255, 0))
 }
 .selection-active-right{
     height: 100%;
-    width: 2vw;
-    background: linear-gradient(to left, $ares-blue, rgba(255, 255, 255, 0))
+    width:2%;
+    background: linear-gradient(to left, var(--color-ares-blue), rgba(255, 255, 255, 0))
 }
 .wrapper-event-button{
     //width: 50%;
@@ -50,10 +53,10 @@ $card-width: calc($card-height * 63 / 88);
 }
 .wrapper-event-top{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+	margin-top: $command-pannel-height;
 
-    width: calc(100% - ($navigation-bar-width + $command-pannel-width *2));
-    margin-left: calc($navigation-bar-width + $command-pannel-width);
     min-height: calc($command-pannel-height + $command-pannel-padding *2);
 }
 .wrapper-event-top-main{
@@ -61,30 +64,43 @@ $card-width: calc($card-height * 63 / 88);
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	flex-grow: 1;
 }
-.wrapper-event-bottom{
+.wrapper-selectors{
     display: flex;
 }
 .wrapper-commands {
     z-index: 10;
     position: sticky;
-    left: 0;
-    top: 8vh;
+    left: $command-pannel-left-margin;
+    top: 35px;
     max-height: 100%;
     height: $command-pannel-height;
     width: $command-pannel-width;
     padding: $command-pannel-padding;
+	padding-right: 0;
 
     display: flex;
     flex-direction: row;
     align-items: top;
+	justify-content: space-between;
 }
-.wrapper-title{
+.wrapper-event-description{
+	position: sticky;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: $command-pannel-height;
+	height: 300px;
+	width: 18%;
+	top: 12%;
+	margin-left: $description-pannel-margin-left;
+	margin-right: 0;
+	margin-top: $description-pannel-margin-top;
+
+	h1{
+		display: inline-block;
+		text-align: center;
+	}
 }
 app-phase-card-upgrade-selector{
 	width: 100%;

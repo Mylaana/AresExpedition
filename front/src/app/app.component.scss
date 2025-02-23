@@ -1,4 +1,5 @@
 $buttons-margin: 2%;
+$player-pannel-width: 65%;
 .wrapper-app{
     position: relative;
     top: 0;
@@ -12,16 +13,22 @@ $buttons-margin: 2%;
     top: 0;
     left: 0;
     display: block;
-    width: 3vw;
+    width: 0;
     height: 100%;
 }
 .wrapper-main{
     flex-grow: 1;
-    margin-left: 3.2vw;
+    margin-left: 0;
     display: flex;
     align-items: left;
     flex-direction: column;
     top: 0;
+	padding-bottom: calc(var(--card-height) * 1.2);
+}
+.wrapper-top{
+	display: flex;
+	justify-content: center;
+	align-items: top;
 }
 .wrapper-other{
     z-index: 1;
@@ -29,17 +36,15 @@ $buttons-margin: 2%;
     flex-direction: column;
     align-items: center;
 }
-.wrapper-top-pannel{
-    $player-pannel-width: 65%;
-
+.wrapper-player-pannel{
     z-index: 10;
     display: flex;
-    justify-content: space-between;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     width: $player-pannel-width;
-    left: 5vw;
-    margin-top: 7.5vh;
+    left: 0;
+    padding-top: 35px;
     app-self-info{
         width: $player-pannel-width;
     }
@@ -47,6 +52,7 @@ $buttons-margin: 2%;
 .wrapper-other-player{
     display: flex;
     flex-direction: column;
+	width: 100%;
 }
 .background{
     position: fixed;
@@ -66,10 +72,23 @@ app-game-event{
     width: 100%;
 }
 .wrapper-hand{
-    width: 95%;
+	z-index: 100;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: top;
+	top: calc(100% - var(--card-height) - 30px);
+	width: 90%;
+	background: white;
+	border: red solid 1px;
+}
+.wrapper-played{
+    width: 100%;
+	padding-left: 10%;
+	padding-right: 10%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
 }
 
 app-horizontal-separator{
@@ -78,7 +97,6 @@ app-horizontal-separator{
 	margin-top: 2%;
 	margin-bottom: 2%;
 }
-
 .wrapper-settings{
 	z-index: 100;
 	$height: 6%;
@@ -87,5 +105,34 @@ app-horizontal-separator{
 	left: 0;
 	height: $height;
 	aspect-ratio: 1;
-	transform: translate( 50%, -50%);
+	transform: translate( 30%, -30%);
+}
+.wrapper-game-progression{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 100%;
+	& > img {
+		max-width: 100%;
+		max-height: 140px;
+	}
+	width: calc((100% - $player-pannel-width) / 2);
+	& > h1 {
+		display: inline-block;
+		text-align: center;
+	}
+}
+.wrapper-awards{
+	position: sticky;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	top: 0;
+	width: calc((100% - $player-pannel-width) / 2);
+
+	& > h1 {
+		display: inline-block;
+		text-align: center;
+	}
 }

@@ -9,12 +9,23 @@
     </div>
 	-->
     <div class="wrapper-main">
-        <div class="wrapper-top-pannel ares-background">
-            <app-self-info></app-self-info>
-            <div *ngFor="let id of playerIdList" class="wrapper-other-player">
-                <app-player-pannel *ngIf="id!=clientPlayerId" [playerId]="id"></app-player-pannel>
-            </div>
-        </div>
+		<div class="wrapper-top">
+			<div class="wrapper-game-progression">
+				<img src="/assets/other/mars_planet.png" alt="awards here">
+				<h1 class="ares-background ares ares-border">global parameters here</h1>
+			</div>
+			<div class="wrapper-player-pannel ares-background ares-border">
+				<app-self-info class="ares-background ares-border"></app-self-info>
+				<div class="wrapper-other-player">
+					<ng-container  *ngFor="let id of playerIdList">
+						<app-player-pannel *ngIf="id!=clientPlayerId" [playerId]="id"></app-player-pannel>
+					</ng-container>
+				</div>
+			</div>
+			<div class="wrapper-awards ares-background ares ares-border">
+				<h1 >awards here</h1>
+			</div>
+		</div>
         <div class="wrapper-other">
 			<div class="wrapper-settings">
 				<app-non-event-button [button]="settingsButton" [shape]="'hex_floating'" ></app-non-event-button>
@@ -22,14 +33,14 @@
 
             <app-server-emulation></app-server-emulation>
             <app-game-event></app-game-event>
-			<app-horizontal-separator></app-horizontal-separator>
             <div class="wrapper-hand">
-                <h1>Cards in hand:</h1>
-                <app-project-card-list [cardList]="playerHand"></app-project-card-list>
+                <app-project-card-list [background]="false" [listType]="'hand'" [cardList]="playerHand"></app-project-card-list>
             </div>
 			<app-horizontal-separator></app-horizontal-separator>
-            <h1>Cards Played:</h1>
-            <app-project-card-list #hand [cardList]="playerPlayed" [cardListId]="'app'"></app-project-card-list>
+			<h1 class="ares-background ares-border">Cards Played:</h1>
+			<div class="wrapper-played">
+				<app-project-card-list #hand [cardList]="playerPlayed" [cardListId]="'app'"></app-project-card-list>
+			</div>
         </div>
     </div>
 </div>
