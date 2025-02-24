@@ -75,12 +75,18 @@ app-game-event{
 	z-index: 100;
 	position: fixed;
 	display: flex;
-	justify-content: center;
+	justify-content: left;
 	align-items: top;
-	top: calc(100% - var(--card-height) - 30px);
+	top: calc(100% - var(--card-height) - 20px);
+	width: auto;
 	width: 90%;
-	background: white;
-	border: red solid 1px;
+	padding-left: 5px;
+	padding-right: 5px;
+	background: rgba(192, 192, 192, 0.8);
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border: solid 2px rgba(255, 129, 25, .8);
+	box-shadow: 0 0 10px 5px rgba(rgb(255, 129, 25), .4);
 }
 .wrapper-played{
     width: 100%;
