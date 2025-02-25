@@ -8,7 +8,7 @@ import { Utils } from '../../../../utils/utils';
 import { CardState } from '../../../../interfaces/card.interface';
 import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
 
-type ListType = 'hand' | 'standard' | 'selector'
+type ListType = 'hand' | 'played' | 'selector'
 
 @Component({
   selector: 'app-project-card-list',
@@ -26,7 +26,8 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	@Input() cardList!: ProjectCardModel[] //takes display priority
 	@Input() currentPhase!: NonSelectablePhaseEnum
 	@Input() background?: boolean = true
-	@Input() listType?: ListType = 'standard'
+	@Input() listType?: ListType = 'played'
+	@Input() hovered!: boolean
 
 	playedCardList!: ProjectCardModel[] //takes display priority
 	@Output() updateSelectedCardList: EventEmitter<ProjectCardModel[]> = new EventEmitter<ProjectCardModel[]>()

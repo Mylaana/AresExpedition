@@ -53,6 +53,8 @@ export class AppComponent implements OnInit {
 
 	settingsButton!: NonEventButton;
 
+	_handIsHovered: boolean = false
+
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
 	private groupSubscription: Subscription;

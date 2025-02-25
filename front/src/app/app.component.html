@@ -33,8 +33,14 @@
 
             <app-server-emulation></app-server-emulation>
             <app-game-event></app-game-event>
-            <div class="wrapper-hand">
-                <app-project-card-list [background]="false" [listType]="'hand'" [cardList]="playerHand"></app-project-card-list>
+            <div class="wrapper-hand"
+				[class.hovered]="_handIsHovered"
+				(mouseenter)="_handIsHovered = true"
+				(mouseleave)="_handIsHovered = false">
+				<div class="hand-mask"
+					[class.masked]="_handIsHovered===false">
+					<app-project-card-list [hovered]="_handIsHovered" [background]="false" [listType]="'hand'" [cardList]="playerHand"></app-project-card-list>
+				</div>
             </div>
 			<app-horizontal-separator></app-horizontal-separator>
 			<h1 class="ares-background ares-border">Cards Played:</h1>

@@ -25,12 +25,28 @@ $list-margin-coeff: 1.08;
     mask-image: linear-gradient(to bottom,rgb(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) $fade-size, rgba(0, 0, 0, 1) calc(100% - $fade-size), rgba(0, 0, 0, 0) 100%);
 }
 .wrapper-cards{
-	$margin: 5%;
 	display: flex;
 	justify-content: center;
 	position: relative;
 	height: auto;
-	width: calc(100% - $margin * 2);
-	margin-left: 5%;
-	gap: 1%;
+	gap: calc(var(--card-width) * .03);
+	$margin: 0%;
+	&.played{
+		$margin: 5%;
+		width: calc(100% - $margin * 2);
+		margin-left: $margin;
+	}
+
+	&.hand{
+		$padding: calc(var(--card-height) * .02);
+		padding: $padding;
+		//padding-bottom: 0;
+		background: rgba(0, 0, 0, 0.6);
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		border: solid 2px rgba(255, 129, 25, .8);
+		&.hovered{
+			box-shadow: 0 0 10px 5px rgba(rgb(255, 129, 25), .6);
+		}
+	}
 }
