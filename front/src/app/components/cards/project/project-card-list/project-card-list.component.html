@@ -1,11 +1,11 @@
 <div class="wrapper-main">
 	<div class="wrapper-list">
 		<div class="list-mask">
-			<div [ngClass]="[currentPhase? 'ares-cardlist--' + (currentPhase | lowercase):'ares-cardlist', background ? 'list-background':'']"></div>
+			<div [class]="'background--'+background"></div>
 		</div>
 		<div class="wrapper-cards"
-		[ngClass]="listType"
-		[class.hovered]="hovered">
+			[ngClass]="listType"
+			[class.hovered]="hovered">
 			<app-project-card #projectCardComponent *ngFor="let card of displayedCards"
 				[stateFromParent]="cardSelector.stateFromParent"
 				[projectCard]="card"

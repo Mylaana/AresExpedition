@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
-import { ButtonNames, NonSelectablePhase } from '../../../types/global.type';
+import { NonSelectablePhase } from '../../../types/global.type';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
@@ -14,9 +14,9 @@ import { EventMainButtonComponent } from "../../tools/button/event-main-button.c
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
-
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ButtonDesigner } from '../../../services/designers/button-designer.service';
+import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 
 //this component is the main controller, and view
 
@@ -31,7 +31,8 @@ import { ButtonDesigner } from '../../../services/designers/button-designer.serv
     PhaseCardUpgradeSelectorComponent,
     EventMainButtonComponent,
 	CardBuilderListComponent,
-	NonEventButtonComponent
+	NonEventButtonComponent,
+	TextWithImageComponent
 ],
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.scss',
@@ -60,13 +61,13 @@ export class GameEventComponent {
 	sellCardsCancelButton!: NonEventButton;
 	rollbackButton!: NonEventButton;
 
-	phaseList: NonSelectablePhase[] = [
-		'planification',
-		'development',
-		'construction',
-		'action',
-		'production',
-		'research'
+	phaseList: NonSelectablePhaseEnum[] = [
+		NonSelectablePhaseEnum.planification,
+		NonSelectablePhaseEnum.development,
+		NonSelectablePhaseEnum.construction,
+		NonSelectablePhaseEnum.action,
+		NonSelectablePhaseEnum.production,
+		NonSelectablePhaseEnum.research
 	]
 	selectionActive: boolean = false
 

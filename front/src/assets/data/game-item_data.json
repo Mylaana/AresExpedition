@@ -175,9 +175,39 @@
     },
 	{
         "id": 119,
+        "description": "next",
+        "imageUrl": "assets/other/next.png",
+        "name": "$other_next$"
+    },
+	{
+        "id": 120,
         "description": "development",
         "imageUrl": "assets/other/phase_development.png",
         "name": "$other_phase_development$"
+    },
+	{
+        "id": 121,
+        "description": "construction",
+        "imageUrl": "assets/other/phase_construction.png",
+        "name": "$other_phase_construction$"
+    },
+	{
+        "id": 122,
+        "description": "action",
+        "imageUrl": "assets/other/phase_action.png",
+        "name": "$other_phase_action$"
+    },
+	{
+        "id": 123,
+        "description": "production",
+        "imageUrl": "assets/other/phase_production.png",
+        "name": "$other_phase_production$"
+    },
+	{
+        "id": 124,
+        "description": "research",
+        "imageUrl": "assets/other/phase_research.png",
+        "name": "$other_phase_research$"
     },
     {
         "id": 1000,

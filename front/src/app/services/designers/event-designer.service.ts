@@ -176,7 +176,7 @@ export class EventDesigner{
                 break
             }
             case('constructionPhaseBuilder'):{
-                event.title = 'Play Blue/Red cards :'
+                event.title = 'Play Blue or Red cards :'
                 event.cardSelector.filter = {type:'construction'}
                 break
             }

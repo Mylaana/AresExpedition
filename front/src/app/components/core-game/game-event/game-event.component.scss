@@ -1,7 +1,7 @@
 $ares-blue: rgb(39, 177, 229);
-$command-pannel-height: 10vh;
-$command-pannel-padding: 10px;
-$command-pannel-left-margin: 2%;
+$command-pannel-height: 100px;
+$command-pannel-padding: 30px;
+$command-pannel-left-margin: 0%;
 $command-pannel-width: 14%;
 $description-pannel-margin-top: 2%;
 $description-pannel-margin-left: 2%;
@@ -11,6 +11,7 @@ $card-width: calc($card-height * 63 / 88);
 
 .wrapper-card-selector{
     width: 100%;
+	height: auto;
 }
 .wrapper-selection-active{
     z-index: -1;
@@ -33,47 +34,69 @@ $card-width: calc($card-height * 63 / 88);
     background: linear-gradient(to left, var(--color-ares-blue), rgba(255, 255, 255, 0))
 }
 .wrapper-event-button{
-    //width: 50%;
 	height: 100%;
 	&--smaller{
 		height: 70%;
 	}
+}
+.wrapper-top{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    top: calc(-1 * ($command-pannel-height + $command-pannel-padding * 2));
+	height: calc(($command-pannel-height + $command-pannel-padding * 2));
 }
 .wrapper-game-event{
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
+	height: auto;
 }
 .wrapper-event-main{
     position: relative;
-    top:  calc(-1 * ($command-pannel-height + $command-pannel-padding * 2));
+    top: calc(-1 * ($command-pannel-height + $command-pannel-padding * 2) * 2);
     width: 100%;
-    margin-bottom: calc(-1 * ($command-pannel-height + $command-pannel-padding *2));
+    margin-bottom: calc(-1 * ($command-pannel-height + $command-pannel-padding * 4));
 }
 .wrapper-event-top{
     display: flex;
     flex-direction: row;
     width: 100%;
-	margin-top: $command-pannel-height;
-
+	margin-top: calc(($command-pannel-height + $command-pannel-padding * 2));
     min-height: calc($command-pannel-height + $command-pannel-padding *2);
 }
 .wrapper-event-top-main{
+	$padding: 0%;
+
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
-	flex-grow: 1;
+	align-items: start;
+	width: auto;
+	height: auto;
+	padding-left: $padding;
+	padding-right: $padding;
+	padding-top: calc($padding / 2);
+	flex-grow: 10;
+}
+app-card-builder-list{
+	position: sticky;
+	top: 5%;
+	width: 100%;
+	margin-left: 10%;
 }
 .wrapper-selectors{
     display: flex;
+	height: auto;
+	flex-grow: 1;
 }
 .wrapper-commands {
     z-index: 10;
     position: sticky;
     left: $command-pannel-left-margin;
-    top: 35px;
+    top: calc(-1 * $command-pannel-padding / 2);
     max-height: 100%;
     height: $command-pannel-height;
     width: $command-pannel-width;
@@ -86,22 +109,47 @@ $card-width: calc($card-height * 63 / 88);
 	justify-content: space-between;
 }
 .wrapper-event-description{
-	position: sticky;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 300px;
-	width: 18%;
-	top: 12%;
-	margin-left: $description-pannel-margin-left;
-	margin-right: 0;
-	margin-top: $description-pannel-margin-top;
-
-	h1{
-		display: inline-block;
-		text-align: center;
-	}
+	justify-content: center;
 }
 app-phase-card-upgrade-selector{
 	width: 100%;
 }
+.wrapper-round{
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: auto;
+	width: 3%;
+	top: 34%;
+	border-left: 0;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.wrapper-phase{
+	filter: grayscale(70%);
+
+	& ::ng-deep app-text-with-image img{
+		width: 100%;
+	}
+	margin: 10%;
+
+	&.current{
+		filter: grayscale(0);
+		box-shadow: 0 0 10px 5px var(--color-ares-orange);
+	}
+}
+.wrapper-next{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 25%;
+	& ::ng-deep app-text-with-image img{
+		width: 100%;
+		aspect-ratio: 1;
+	}
+}
+

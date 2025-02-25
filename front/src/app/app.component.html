@@ -1,6 +1,4 @@
-<div class="background">
-    <img src="/assets/other/background.jpg" alt="">
-</div>
+<div class="background-image"></div>
 <h1 *ngIf="loading===true">GAME NOT LOADED YET</h1>
 <div *ngIf="loading===false" class="wrapper-app">
 	<!--
@@ -30,23 +28,26 @@
 			<div class="wrapper-settings">
 				<app-non-event-button [button]="settingsButton" [shape]="'hex_floating'" ></app-non-event-button>
 			</div>
-
             <app-server-emulation></app-server-emulation>
             <app-game-event></app-game-event>
-            <div class="wrapper-hand"
-				[class.hovered]="_handIsHovered"
-				(mouseenter)="_handIsHovered = true"
-				(mouseleave)="_handIsHovered = false">
-				<div class="hand-mask"
-					[class.masked]="_handIsHovered===false">
-					<app-project-card-list [hovered]="_handIsHovered" [background]="false" [listType]="'hand'" [cardList]="playerHand"></app-project-card-list>
-				</div>
-            </div>
-			<app-horizontal-separator></app-horizontal-separator>
-			<h1 class="ares-background ares-border">Cards Played:</h1>
+			<div class="horizontal-separator">
+				<app-horizontal-separator></app-horizontal-separator>
+			</div>
+			<div class="ares-title">
+				<h1>Cards Played:</h1>
+			</div>
 			<div class="wrapper-played">
-				<app-project-card-list #hand [cardList]="playerPlayed" [cardListId]="'app'"></app-project-card-list>
+				<app-project-card-list #hand [cardList]="playerPlayed" [listType]="'played'" [cardListId]="'app'"></app-project-card-list>
 			</div>
         </div>
     </div>
+	<div class="wrapper-hand"
+		[class.hovered]="_handIsHovered"
+		(mouseenter)="_handIsHovered = true"
+		(mouseleave)="_handIsHovered = false">
+		<div class="hand-mask"
+			[class.masked]="_handIsHovered===false">
+			<app-project-card-list [hovered]="_handIsHovered" [background]="false" [listType]="'hand'" [cardList]="playerHand"></app-project-card-list>
+		</div>
+	</div>
 </div>
