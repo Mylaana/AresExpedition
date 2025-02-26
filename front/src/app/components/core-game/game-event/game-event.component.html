@@ -1,5 +1,5 @@
 <div class="wrapper-game-event" *ngIf="currentEvent">
-	<div class="wrapper-commands">
+	<div id="command-pannel">
 		<div *ngIf="currentEvent.button" class="wrapper-event-button wrapper-validate-button">
 			<app-event-main-button  [button]="currentEvent.button" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
 		</div>
@@ -13,7 +13,7 @@
 			<app-non-event-button  [button]="rollbackButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(rollbackButton)"></app-non-event-button>
 		</div>
 	</div>
-	<div class="wrapper-top">
+	<div class="wrapper-title">
 		<div *ngIf="currentEvent.title!=undefined" class="wrapper-event-description ares-title">
 			<h1 *ngIf="currentEvent.title!=undefined">{{currentEvent.title}}</h1>
 		</div>

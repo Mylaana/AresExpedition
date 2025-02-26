@@ -33,7 +33,6 @@ $list-margin-coeff: 1.08;
 	&.played{
 		$margin: 5%;
 		width: calc(100% - $margin * 2);
-		margin-left: $margin;
 	}
 	&.hand{
 		$padding: calc(var(--card-height) * .02);

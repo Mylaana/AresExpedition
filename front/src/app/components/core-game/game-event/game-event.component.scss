@@ -9,6 +9,26 @@ $navigation-bar-width: 0px;
 $card-height: 310px;
 $card-width: calc($card-height * 63 / 88);
 
+:host{
+	--command-pannel-height: $command-pannel-height + $command-pannel-padding * 2;
+}
+#command-pannel {
+    z-index: 10;
+    position: sticky;
+    left: $command-pannel-left-margin;
+    top: calc(-1 * $command-pannel-padding / 2);
+    max-height: 100%;
+    height: $command-pannel-height;
+    width: $command-pannel-width;
+    padding: $command-pannel-padding;
+	padding-right: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+	justify-content: space-between;
+	border: red solid 1px;
+}
 .wrapper-card-selector{
     width: 100%;
 	height: auto;
@@ -39,13 +59,14 @@ $card-width: calc($card-height * 63 / 88);
 		height: 70%;
 	}
 }
-.wrapper-top{
+.wrapper-title{
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    top: calc(-1 * ($command-pannel-height + $command-pannel-padding * 2));
+    top: calc(-1 * var(--command-pannel-height));
 	height: calc(($command-pannel-height + $command-pannel-padding * 2));
+	border: green solid 1px;
 }
 .wrapper-game-event{
     position: relative;
@@ -53,12 +74,14 @@ $card-width: calc($card-height * 63 / 88);
     flex-direction: column;
     width: 100%;
 	height: auto;
+	border: blue solid 1px;
 }
 .wrapper-event-main{
     position: relative;
-    top: calc(-1 * ($command-pannel-height + $command-pannel-padding * 2) * 2);
+    margin-top: calc(-1 * var(--command-pannel-height) * 2); //calc(-1 * ($command-pannel-height + $command-pannel-padding * 2) * 2);
     width: 100%;
-    margin-bottom: calc(-1 * ($command-pannel-height + $command-pannel-padding * 4));
+    //margin-bottom: calc(-1 * ($command-pannel-height + $command-pannel-padding * 4));
+	border: red solid 1px;
 }
 .wrapper-event-top{
     display: flex;
@@ -74,12 +97,11 @@ $card-width: calc($card-height * 63 / 88);
 	flex-direction: row;
 	justify-content: center;
 	align-items: start;
-	width: auto;
+	width: 40%;
 	height: auto;
 	padding-left: $padding;
 	padding-right: $padding;
 	padding-top: calc($padding / 2);
-	flex-grow: 10;
 }
 app-card-builder-list{
 	position: sticky;
@@ -91,22 +113,6 @@ app-card-builder-list{
     display: flex;
 	height: auto;
 	flex-grow: 1;
-}
-.wrapper-commands {
-    z-index: 10;
-    position: sticky;
-    left: $command-pannel-left-margin;
-    top: calc(-1 * $command-pannel-padding / 2);
-    max-height: 100%;
-    height: $command-pannel-height;
-    width: $command-pannel-width;
-    padding: $command-pannel-padding;
-	padding-right: 0;
-
-    display: flex;
-    flex-direction: row;
-    align-items: top;
-	justify-content: space-between;
 }
 .wrapper-event-description{
 	display: flex;

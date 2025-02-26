@@ -1,21 +1,21 @@
-import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
+import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
+import { ProjectCardModel } from '../../../models/cards/project-card.model';
+import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
+import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
+import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
 import { GameState } from '../../../services/core-game/game-state.service';
+import { ButtonDesigner } from '../../../services/designers/button-designer.service';
+import { EventDesigner } from '../../../services/designers/event-designer.service';
+import { NonSelectablePhase } from '../../../types/global.type';
+import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
+import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
+import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
 import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
-import { NonSelectablePhase } from '../../../types/global.type';
-import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
-import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
-import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
-import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
-import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
-import { EventDesigner } from '../../../services/designers/event-designer.service';
 import { EventMainButtonComponent } from "../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
-import { ProjectCardModel } from '../../../models/cards/project-card.model';
-import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
-import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
-import { ButtonDesigner } from '../../../services/designers/button-designer.service';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 
 //this component is the main controller, and view
@@ -43,6 +43,7 @@ import { TextWithImageComponent } from '../../tools/text-with-image/text-with-im
 })
 export class GameEventComponent {
 	constructor(
+		private elRef: ElementRef, private renderer: Renderer2,
 		private gameStateService: GameState,
 	){}
 
@@ -86,6 +87,16 @@ export class GameEventComponent {
 		this.gameStateService.currentPhase.subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
+	}
+	ngAfterViewInit(): void {
+		const commandPannel = this.elRef.nativeElement.querySelector('#command-pannel');
+		if (commandPannel) {
+			console.log('height:', commandPannel.offsetHeight)
+		  	const commandPannelHeight = commandPannel.offsetHeight;
+		  	this.renderer.setStyle(this.elRef.nativeElement, '--command-pannel-height', `${commandPannelHeight}px`)
+			this.elRef.nativeElement.offsetHeight; // Force un reflow
+
+		}
 	}
 
 	updatePhase(phase:NonSelectablePhaseEnum):void{

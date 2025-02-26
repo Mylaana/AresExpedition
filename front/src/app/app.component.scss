@@ -1,6 +1,22 @@
 $buttons-margin: 2%;
 $player-pannel-width: 65%;
+
+:root {
+	--navbar-height: 1000px; /* Valeur par défaut */
+}
+
+nav{
+	z-index: 1000;
+	position: fixed;
+	display: flex;
+	justify-content: space-around;
+	align-items: start;
+	width: 100%;
+	top: 0;
+}
+
 .wrapper-app{
+	padding-top: var(--navbar-height);
     position: relative;
     top: 0;
     left: 0;
@@ -25,11 +41,6 @@ $player-pannel-width: 65%;
     flex-direction: column;
     top: 0;
 }
-.wrapper-top{
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
 .wrapper-other{
     z-index: 1;
     display: flex;
@@ -44,7 +55,6 @@ $player-pannel-width: 65%;
     flex-direction: column;
     width: $player-pannel-width;
     left: 0;
-    padding-top: 35px;
     app-self-info{
         width: $player-pannel-width;
     }
@@ -66,7 +76,7 @@ $player-pannel-width: 65%;
 }
 app-self-info{
     z-index: 10;
-    position: fixed;
+    //position: fixed;
     top: 0;
 }
 app-game-event{
@@ -101,8 +111,6 @@ app-project-card-list{
 }
 .wrapper-played{
     width: 100%;
-	padding-left: 10%;
-	padding-right: 10%;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -123,9 +131,10 @@ app-project-card-list{
 	left: 0;
 	height: $height;
 	aspect-ratio: 1;
-	transform: translate( 30%, -30%);
+	transform: translate(30%, -30%);
 }
 .wrapper-game-progression{
+	//position: fixed;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -145,10 +154,9 @@ app-project-card-list{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 95%;
+	height: 100%;
 	top: 0;
 	width: calc((95% - $player-pannel-width) / 2);
-
 	& > h1 {
 		display: inline-block;
 		text-align: center;

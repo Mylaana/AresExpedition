@@ -1,4 +1,4 @@
-import { Component, OnInit , AfterViewInit, ViewChild, inject} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelfInfoComponent } from './components/player-info/self-info/self-info.component';
 import { ServerEmulationComponent } from './components/core-game/server-emulation/server-emulation.component';
@@ -7,7 +7,6 @@ import { ProjectCardListComponent } from './components/cards/project/project-car
 import { GameState } from './services/core-game/game-state.service';
 import { ProjectCardModel } from './models/cards/project-card.model';
 import { ProjectCardInfoService } from './services/cards/project-card-info.service';
-import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { PlayerPannelComponent } from './components/player-info/player-pannel/player-pannel.component';
 import { PlayerStateModel } from './models/player-info/player-state.model';
 import { WebsocketHandler } from './models/core-game/websocket-handler';
@@ -31,7 +30,6 @@ import { NonEventButtonComponent } from './components/tools/button/non-event-but
 		ServerEmulationComponent,
 		GameEventComponent,
 		ProjectCardListComponent,
-		NavigationComponent,
 		PlayerPannelComponent,
 		HorizontalSeparatorComponent,
 		NonEventButtonComponent
@@ -50,6 +48,8 @@ export class AppComponent implements OnInit {
 	clientPlayerId!: number;
 	loading: boolean = true
 	@ViewChild('hand') handProjectList!: ProjectCardListComponent
+	isScrolled = false;
+	navbarHeight = 0;
 
 	settingsButton!: NonEventButton;
 
@@ -64,6 +64,7 @@ export class AppComponent implements OnInit {
 	private acknowledgeSubscription: Subscription;
 
 	constructor(
+		private elRef: ElementRef,
 		private gameStateService: GameState,
 		private cardInfoService: ProjectCardInfoService,
 		private rxStompService: RxStompService
@@ -95,6 +96,17 @@ export class AppComponent implements OnInit {
 		});
 	}
 
+	@HostListener('window:scroll', [])
+	onScroll() {
+	  this.isScrolled = window.scrollY > 0;
+	}
+	updateNavBar(): void {
+		const navbar = this.elRef.nativeElement.querySelector('#navbar');
+		if (navbar) {
+		  this.navbarHeight = navbar.offsetHeight;
+		  document.documentElement.style.setProperty('--navbar-height', `${this.navbarHeight}px`);
+		}
+	}
 	updateHandOnStateChange(state: PlayerStateModel[]): void {
 		let clientState = this.gameStateService.getClientState()
 		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
@@ -118,6 +130,7 @@ export class AppComponent implements OnInit {
 		this.gameStateService.currentGroupPlayerState.subscribe(
 			state => this.updateHandOnStateChange(state)
 		)
+		this.updateNavBar()
 	}
 	private handleGroupMessage(message: any){
 		this.wsHandler.handleGroupMessage(WebsocketResultMessageFactory.createGroupMessageResult(message))
