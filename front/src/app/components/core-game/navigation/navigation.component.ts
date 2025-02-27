@@ -1,86 +1,73 @@
-import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GlobalParameter } from '../../../interfaces/global.interface';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GameState } from '../../../services/core-game/game-state.service';
-import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GlobalInfo } from '../../../services/global/global-info.service';
+import { PlayerPannelComponent } from '../../player-info/player-pannel/player-pannel.component';
+import { expandCollapseVertical } from '../../animations/animations';
+import { AnimationEvent } from '@angular/animations';
 
 @Component({
-  selector: 'app-navigation',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss'
+	selector: 'app-navigation',
+	standalone: true,
+	imports: [
+		CommonModule,
+		PlayerPannelComponent
+	],
+	templateUrl: './navigation.component.html',
+	styleUrl: './navigation.component.scss',
+	animations: [expandCollapseVertical]
 })
-export class NavigationComponent implements OnInit{
-  globalParameters: GlobalParameter[] = [];
-  currentGroupPlayerState!: {};
-  currentPhase: string = "planification";
-  clientPlayerId!: number
+export class NavigationComponent implements OnInit, OnChanges, AfterViewInit{
+	@Input() isScrolled: boolean = false
+	@Input() clientPlayerId!: number
+	_playerIdList: number[] = []
+	_playerPannelIsHovered: boolean = false
 
-  constructor(
-    private gameStateService: GameState){}
+	constructor(
+				private elRef: ElementRef,
+				private gameStateService: GameState
+			){}
 
-  ngOnInit(): void {
-    this.clientPlayerId = this.gameStateService.clientPlayerId
-    this.gameStateService.currentGroupPlayerState.subscribe(
-      groupPlayerState => this.updateState(groupPlayerState)
-    )
-    this.gameStateService.currentPhase.subscribe(
-      phase => this.currentPhase = phase
-    )
-    return
-    let parameter!: GlobalParameter
-    for(let i=0; i<4; i++){
-      switch(i){
-        case(0):{
-          parameter = {
-            name: 'oxygen',
-            value: 0,
-            color: 'purple',
-            imageUrl: GlobalInfo.getUrlFromName('$other_oxygen$'),
-            addEndOfPhase: 0
-          }
-          break
-        }
-        case(1):{
-          parameter = {
-            name: 'temperature',
-            value: 0,
-            color: 'purple',
-            imageUrl: GlobalInfo.getUrlFromName('$other_temperature$'),
-            addEndOfPhase: 0
-          }
-          break
-        }
-        case(2):{
-          parameter = {
-            name: 'ocean',
-            value: 0,
-            imageUrl: GlobalInfo.getUrlFromName('$other_ocean$'),
-            addEndOfPhase: 0
-          }
-          break
-        }
-        case(3):{
-          parameter = {
-            name: 'infrastructure',
-            value: 0,
-            color: 'purple',
-            imageUrl: GlobalInfo.getUrlFromName('$other_infrastructure$'),
-            addEndOfPhase: 0
-          }
-          break
-        }
-      }
-      this.globalParameters.push(parameter)
-    }
+	ngOnInit(): void {
+		this.gameStateService.currentPlayerCount.subscribe(
+			playerCount => this.updatePlayerList(playerCount)
+		)
+	}
 
+	ngOnChanges(changes: SimpleChanges): void {
+		return
+		if (changes['isScrolled'] && changes['isScrolled'].currentValue) {
+			setTimeout(() => {
+				this.updateNavHeight();
+			  }, 1100)
+			}
+	}
+	ngAfterViewInit(): void {
+		const navbar = this.elRef.nativeElement.querySelector('animated')
+		console.log('afterviewinit', navbar)
+		if (navbar) {
+			navbar.addEventListener('transitionend', () => {
+				console.log('animation end')
+			  	this.updateNavHeight()
+			});
 
-  }
-  updateState(state:PlayerStateModel[]): void {
-    if(state[this.clientPlayerId]===undefined){return}
-    if(this.currentGroupPlayerState===state){return}
-    this.globalParameters = state[this.clientPlayerId].getGlobalParameters()
-  }
+			this.updateNavHeight();
+		}
+
+	}
+	onAnimationDone(event: AnimationEvent) {
+		this.updateNavHeight();
+	  }
+
+	updateNavHeight(): void {
+		const navbar = this.elRef.nativeElement.querySelector('#nav')
+		if (navbar && navbar.offsetHeight) {
+		  const navbarHeight = navbar.offsetHeight;
+		  document.documentElement.style.setProperty('--navbar-height', `${navbarHeight}px`);
+		  console.log('nav height:', navbarHeight)
+		}
+	}
+	updatePlayerList(playerIdList: number[]){
+		this._playerIdList = playerIdList
+		this.updateNavHeight()
+	}
 }

@@ -1,22 +1,23 @@
 $buttons-margin: 2%;
-$player-pannel-width: 65%;
 
 :root {
-	--navbar-height: 1000px; /* Valeur par défaut */
+	--navbar-height: 0px; /* Valeur par défaut */
 }
-
-nav{
+#navbar{
 	z-index: 1000;
 	position: fixed;
 	display: flex;
-	justify-content: space-around;
-	align-items: start;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
 	top: 0;
 }
-
+app-navigation {
+	width: 100%;
+	height: 100%;
+}
 .wrapper-app{
-	padding-top: var(--navbar-height);
+	margin-top: var(--navbar-height);
     position: relative;
     top: 0;
     left: 0;
@@ -24,14 +25,6 @@ nav{
     flex-direction: row;
     width: 100%;
 	padding-bottom: calc(var(--card-height) * 1.1);
-}
-.wrapper-navigation{
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 0;
-    height: 100%;
 }
 .wrapper-main{
     flex-grow: 1;
@@ -46,23 +39,6 @@ nav{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.wrapper-player-pannel{
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: $player-pannel-width;
-    left: 0;
-    app-self-info{
-        width: $player-pannel-width;
-    }
-}
-.wrapper-other-player{
-    display: flex;
-    flex-direction: column;
-	width: 100%;
 }
 .background-image{
 	position: fixed;  /* Reste fixe, même en scrollant */
@@ -116,7 +92,6 @@ app-project-card-list{
     justify-content: left;
 	margin-top: 2%;
 }
-
 .horizontal-separator{
 	width: 100%;
 	height: 30px;
@@ -133,32 +108,16 @@ app-project-card-list{
 	aspect-ratio: 1;
 	transform: translate(30%, -30%);
 }
-.wrapper-game-progression{
-	//position: fixed;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	height: 100%;
-	& > img {
-		max-width: 100%;
-		max-height: 140px;
-	}
-	width: calc((95% - $player-pannel-width) / 2);
-	& > h1 {
-		display: inline-block;
-		text-align: center;
-	}
-}
-.wrapper-awards{
-	position: sticky;
+.wrapper-loading{
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
-	top: 0;
-	width: calc((95% - $player-pannel-width) / 2);
-	& > h1 {
-		display: inline-block;
-		text-align: center;
+	width: 100vw;
+	height: 100vh;
+
+	h1{
+		color: white;
+		padding: 20px;
 	}
 }

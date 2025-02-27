@@ -16,7 +16,7 @@ $card-width: calc($card-height * 63 / 88);
     z-index: 10;
     position: sticky;
     left: $command-pannel-left-margin;
-    top: calc(-1 * $command-pannel-padding / 2);
+    top: calc(var(--navbar-height));
     max-height: 100%;
     height: $command-pannel-height;
     width: $command-pannel-width;
@@ -27,6 +27,7 @@ $card-width: calc($card-height * 63 / 88);
     flex-direction: row;
     align-items: top;
 	justify-content: space-between;
+	border: red solid 1px;
 }
 .wrapper-card-selector{
     width: 100%;
@@ -77,6 +78,7 @@ $card-width: calc($card-height * 63 / 88);
     position: relative;
     margin-top: calc(-1 * var(--command-pannel-height) * 2);
     width: 100%;
+	min-height: 500px;
 }
 .wrapper-event-top{
     display: flex;
@@ -153,4 +155,3 @@ app-phase-card-upgrade-selector{
 		aspect-ratio: 1;
 	}
 }
-

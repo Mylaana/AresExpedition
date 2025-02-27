@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
@@ -8,7 +8,6 @@ import { DrawEventHandler, EventHandler } from '../../../models/core-game/handle
 import { GameState } from '../../../services/core-game/game-state.service';
 import { ButtonDesigner } from '../../../services/designers/button-designer.service';
 import { EventDesigner } from '../../../services/designers/event-designer.service';
-import { NonSelectablePhase } from '../../../types/global.type';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
 import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
@@ -17,6 +16,7 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { EventMainButtonComponent } from "../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
+import { expandCollapseVertical, enterFromLeft } from '../../animations/animations';
 
 //this component is the main controller, and view
 
@@ -34,12 +34,13 @@ import { TextWithImageComponent } from '../../tools/text-with-image/text-with-im
 	NonEventButtonComponent,
 	TextWithImageComponent
 ],
-  templateUrl: './game-event.component.html',
-  styleUrl: './game-event.component.scss',
-  providers: [
-	EventHandler,
-	DrawEventHandler
-]
+	templateUrl: './game-event.component.html',
+	styleUrl: './game-event.component.scss',
+	animations: [expandCollapseVertical, enterFromLeft],
+	providers: [
+		EventHandler,
+		DrawEventHandler
+	]
 })
 export class GameEventComponent {
 	constructor(
@@ -94,8 +95,6 @@ export class GameEventComponent {
 			console.log('height:', commandPannel.offsetHeight)
 			const commandPannelHeight = commandPannel.offsetHeight;
 			this.elRef.nativeElement.style.setProperty('--command-pannel-height', `${commandPannelHeight}px`);
-
-
 		}
 	}
 

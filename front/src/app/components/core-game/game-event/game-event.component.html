@@ -18,7 +18,7 @@
 			<h1 *ngIf="currentEvent.title!=undefined">{{currentEvent.title}}</h1>
 		</div>
 	</div>
-	<div class="wrapper-round ares-background ares-border"
+	<div @enterFromLeft class="wrapper-round ares-background ares-border"
 		*ngIf="currentPhase!='PLANIFICATION'">
 		<ng-container *ngFor="let phase of phaseList">
 			<ng-container *ngIf="phase!='PLANIFICATION'">

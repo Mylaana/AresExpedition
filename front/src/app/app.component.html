@@ -1,22 +1,11 @@
 <div class="background-image"></div>
-<h1 *ngIf="loading===true">GAME NOT LOADED YET</h1>
-<nav id="navbar">
-	<div class="wrapper-game-progression">
-		<img src="/assets/other/mars_planet.png" alt="awards here">
-		<h1 class="ares-background ares ares-border">global parameters here</h1>
-	</div>
-	<div class="wrapper-player-pannel ares-background ares-border">
-		<div *ngIf="!isScrolled" class="wrapper-other-player">
-			<ng-container  *ngFor="let id of playerIdList">
-				<app-player-pannel [playerId]="id"></app-player-pannel>
-			</ng-container>
-		</div>
-	</div>
-	<div class="wrapper-awards ares-background ares ares-border">
-		<h1 >awards here</h1>
-	</div>
+<div *ngIf="loaded===false" class="wrapper-loading">
+	<h1 class="ares-title">GAME NOT LOADED YET</h1>
+</div>
+<nav *ngIf="loaded" id="navbar">
+	<app-navigation  [clientPlayerId]="clientPlayerId" [isScrolled]="isScrolled"></app-navigation>
 </nav>
-<div *ngIf="loading===false" class="wrapper-app">
+<div @expandCollapseVertical *ngIf="loaded" class="wrapper-app">
     <div class="wrapper-main">
         <div class="wrapper-other">
 			<div class="wrapper-settings">

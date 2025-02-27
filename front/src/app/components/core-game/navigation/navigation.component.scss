@@ -1,59 +1,61 @@
-nav{
-    z-index: 10;
-    top: 0;
-    left: 0;
+$player-pannel-width: 65%;
+
+:root {
+	--navbar-height: 0px; /* Valeur par défaut */
+}
+
+#nav{
     height: 100%;
     width: 100%;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
+	border: green solid 1px;
 }
-.top-pannel{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 50%;
-    max-height: 500px;
-    width: 100%;
+.wrapper-player-pannel{
+	width: $player-pannel-width;
 }
-.global-parameter-card{
-    position: relative;
+.app-player-pannel{
+    z-index: 10;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
-    border-radius: 5px;
-    max-height: 18%;
     width: 100%;
     left: 0;
-    & img{
-        max-width: 80%;
-        max-height: 50%;
-    }
 }
-.wrapper-parameter-text{
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
+img{
+
+	//max-width: 100%;
+	//max-height: 50%;
 }
-.parameter-text{
-    font-size: 15px;
-    display: inline-block;
+.wrapper-game-progression{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 50%;
+	border: red solid 1px;
+	& > * {
+		height: 100%;
+	}
+	width: calc((95% - $player-pannel-width) / 2);
+	& > h1 {
+		display: inline-block;
+		text-align: center;
+	}
 }
-.parameter-text-add{
-    font-size: 10px;
-    color: darkgreen;   
-}
-p{
-    font-size:10px;
-}
-.wrapper-phase{
-    inline-size: 100%;
-    overflow-wrap: break-word;
-    & p {
-        font-size: 15px;
-    }
+.wrapper-awards{
+	position: sticky;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	top: 0;
+	width: calc((95% - $player-pannel-width) / 2);
+	& > h1 {
+		display: inline-block;
+		text-align: center;
+	}
 }

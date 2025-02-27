@@ -1,41 +1,42 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelfInfoComponent } from './components/player-info/self-info/self-info.component';
-import { ServerEmulationComponent } from './components/core-game/server-emulation/server-emulation.component';
-import { GameEventComponent } from './components/core-game/game-event/game-event.component';
-import { ProjectCardListComponent } from './components/cards/project/project-card-list/project-card-list.component';
-import { GameState } from './services/core-game/game-state.service';
-import { ProjectCardModel } from './models/cards/project-card.model';
-import { ProjectCardInfoService } from './services/cards/project-card-info.service';
-import { PlayerPannelComponent } from './components/player-info/player-pannel/player-pannel.component';
-import { PlayerStateModel } from './models/player-info/player-state.model';
-import { WebsocketHandler } from './models/core-game/websocket-handler';
-import { RxStompService } from './services/websocket/rx-stomp.service';
-import { GLOBAL_WS_ACKNOWLEDGE, GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from './global/global-const';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { Message } from '@stomp/stompjs';
-import { PlayerMessageResult } from './interfaces/websocket.interface';
-import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
-import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
-import { HorizontalSeparatorComponent } from './components/tools/layouts/horizontal-separator/horizontal-separator.component';
-import { NonEventButton } from './models/core-game/button.model';
-import { ButtonDesigner } from './services/designers/button-designer.service';
+import { ProjectCardListComponent } from './components/cards/project/project-card-list/project-card-list.component';
+import { GameEventComponent } from './components/core-game/game-event/game-event.component';
+import { ServerEmulationComponent } from './components/core-game/server-emulation/server-emulation.component';
 import { NonEventButtonComponent } from './components/tools/button/non-event-button.component';
+import { HorizontalSeparatorComponent } from './components/tools/layouts/horizontal-separator/horizontal-separator.component';
+import { PlayerMessageContentResultEnum } from './enum/websocket.enum';
+import { GLOBAL_WS_ACKNOWLEDGE, GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from './global/global-const';
+import { PlayerMessageResult } from './interfaces/websocket.interface';
+import { ProjectCardModel } from './models/cards/project-card.model';
+import { NonEventButton } from './models/core-game/button.model';
+import { WebsocketHandler } from './models/core-game/websocket-handler';
+import { PlayerStateModel } from './models/player-info/player-state.model';
+import { ProjectCardInfoService } from './services/cards/project-card-info.service';
+import { GameState } from './services/core-game/game-state.service';
+import { ButtonDesigner } from './services/designers/button-designer.service';
+import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
+import { RxStompService } from './services/websocket/rx-stomp.service';
+import { expandCollapseVertical } from './components/animations/animations';
+import { AfterViewInit } from '@angular/core';
+import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 
 @Component({
 	selector: 'app-root',
 	standalone: true,
 	imports: [
 		CommonModule,
-		SelfInfoComponent,
 		ServerEmulationComponent,
 		GameEventComponent,
 		ProjectCardListComponent,
-		PlayerPannelComponent,
+		NavigationComponent,
 		HorizontalSeparatorComponent,
 		NonEventButtonComponent
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
+	animations: [expandCollapseVertical],
 	providers: [
 		WebsocketHandler
 	]
@@ -46,14 +47,15 @@ export class AppComponent implements OnInit {
 	playerPlayed: ProjectCardModel[] = [];
 	playerIdList: number[] = [] //this.gameStateService.playerCount.getValue()
 	clientPlayerId!: number;
-	loading: boolean = true
+	loaded: boolean = false
 	@ViewChild('hand') handProjectList!: ProjectCardListComponent
 	isScrolled = false;
-	navbarHeight = 0;
+	//navbarHeight = 0;
 
 	settingsButton!: NonEventButton;
 
 	_handIsHovered: boolean = false
+	_playerPannelIsHovered: boolean = false
 
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
@@ -98,14 +100,10 @@ export class AppComponent implements OnInit {
 
 	@HostListener('window:scroll', [])
 	onScroll() {
-	  this.isScrolled = window.scrollY > 0;
-	}
-	updateNavBar(): void {
-		const navbar = this.elRef.nativeElement.querySelector('#navbar');
-		if (navbar) {
-		  this.navbarHeight = navbar.offsetHeight;
-		  document.documentElement.style.setProperty('--navbar-height', `${this.navbarHeight}px`);
-		}
+		let scrollChanged = window.scrollY > 0;
+		if(window.scrollY === (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight) {console.log('max scroll')}
+		if(scrollChanged === this.isScrolled){return}
+	  	this.isScrolled = window.scrollY > 0;
 	}
 	updateHandOnStateChange(state: PlayerStateModel[]): void {
 		let clientState = this.gameStateService.getClientState()
@@ -122,7 +120,7 @@ export class AppComponent implements OnInit {
 	loadingFinished(loading: boolean):void{
 		if(loading===true){return}
 
-		this.loading = loading
+		this.loaded = loading===false
 		this.gameStateService.currentPlayerCount.subscribe(
 			playerCount => this.updatePlayerList(playerCount)
 		)
@@ -130,7 +128,6 @@ export class AppComponent implements OnInit {
 		this.gameStateService.currentGroupPlayerState.subscribe(
 			state => this.updateHandOnStateChange(state)
 		)
-		this.updateNavBar()
 	}
 	private handleGroupMessage(message: any){
 		this.wsHandler.handleGroupMessage(WebsocketResultMessageFactory.createGroupMessageResult(message))

@@ -1,17 +1,24 @@
-<nav class="ares-background ares-border">
-    <div class="top-pannel">
-        <div *ngFor="let param of globalParameters" class="global-parameter-card ares-card">
-            <img [src]="param.imageUrl" [alt]="param.name">
-            <div class="wrapper-parameter-text">
-                <p class="parameter-text">{{param.value}}</p>
-                <p class="parameter-text-add"> (+{{param.addEndOfPhase}})</p>
-            </div>
-        </div>
-        <div class="wrapper-phase">
-            <p>{{ currentPhase }}</p>
-        </div>
-    </div>
-    <div class="bottom-pannel">
-        <p>settings</p>
-    </div>
+<nav id="nav"
+	@expandCollapseVertical
+	(@expandCollapseVertical.done)="updateNavHeight()">
+	<div class="wrapper-game-progression">
+		<img src="/assets/other/mars_planet.png" alt="awards here">
+		<h1 class="ares-background ares ares-border">global parameters here</h1>
+	</div>
+	<div class="wrapper-player-pannel ares-background ares-border"
+		@expandCollapseVertical
+		(mouseenter)="_playerPannelIsHovered=true"
+		(mouseleave)="_playerPannelIsHovered=false">
+		<ng-container *ngFor="let id of _playerIdList">
+			<app-player-pannel
+			class="animated"
+			[@expandCollapseVertical]
+			(@expandCollapseVertical.done)="updateNavHeight()"
+			*ngIf="_playerPannelIsHovered || !isScrolled || id===clientPlayerId" [playerId]="id"></app-player-pannel>
+		</ng-container>
+	</div>
+	<div class="wrapper-awards ares-background ares ares-border">
+		<h1 >awards here</h1>
+	</div>
+
 </nav>
