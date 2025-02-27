@@ -1,8 +1,4 @@
 $ares-blue: rgb(39, 177, 229);
-$command-pannel-height: 100px;
-$command-pannel-padding: 30px;
-$command-pannel-left-margin: 0%;
-$command-pannel-width: 14%;
 $description-pannel-margin-top: 2%;
 $description-pannel-margin-left: 2%;
 $navigation-bar-width: 0px;
@@ -10,9 +6,13 @@ $card-height: 310px;
 $card-width: calc($card-height * 63 / 88);
 
 :host{
-	--command-pannel-height: $command-pannel-height + $command-pannel-padding * 2;
+	--command-pannel-height: 0px;//$command-pannel-height + $command-pannel-padding * 2;
 }
 #command-pannel {
+	$command-pannel-height: 100px;
+	$command-pannel-padding: 30px;
+	$command-pannel-left-margin: 0%;
+	$command-pannel-width: 15%;
     z-index: 10;
     position: sticky;
     left: $command-pannel-left-margin;
@@ -27,7 +27,6 @@ $card-width: calc($card-height * 63 / 88);
     flex-direction: row;
     align-items: top;
 	justify-content: space-between;
-	border: red solid 1px;
 }
 .wrapper-card-selector{
     width: 100%;
@@ -65,8 +64,7 @@ $card-width: calc($card-height * 63 / 88);
 	justify-content: center;
 	align-items: center;
     top: calc(-1 * var(--command-pannel-height));
-	height: calc(($command-pannel-height + $command-pannel-padding * 2));
-	border: green solid 1px;
+	height: var(--command-pannel-height);
 }
 .wrapper-game-event{
     position: relative;
@@ -74,21 +72,18 @@ $card-width: calc($card-height * 63 / 88);
     flex-direction: column;
     width: 100%;
 	height: auto;
-	border: blue solid 1px;
 }
 .wrapper-event-main{
     position: relative;
-    margin-top: calc(-1 * var(--command-pannel-height) * 2); //calc(-1 * ($command-pannel-height + $command-pannel-padding * 2) * 2);
+    margin-top: calc(-1 * var(--command-pannel-height) * 2);
     width: 100%;
-    //margin-bottom: calc(-1 * ($command-pannel-height + $command-pannel-padding * 4));
-	border: red solid 1px;
 }
 .wrapper-event-top{
     display: flex;
     flex-direction: row;
     width: 100%;
-	margin-top: calc(($command-pannel-height + $command-pannel-padding * 2));
-    min-height: calc($command-pannel-height + $command-pannel-padding *2);
+	margin-top: var(--command-pannel-height);
+    min-height: var(--command-pannel-height);
 }
 .wrapper-event-top-main{
 	$padding: 0%;

@@ -92,9 +92,9 @@ export class GameEventComponent {
 		const commandPannel = this.elRef.nativeElement.querySelector('#command-pannel');
 		if (commandPannel) {
 			console.log('height:', commandPannel.offsetHeight)
-		  	const commandPannelHeight = commandPannel.offsetHeight;
-		  	this.renderer.setStyle(this.elRef.nativeElement, '--command-pannel-height', `${commandPannelHeight}px`)
-			this.elRef.nativeElement.offsetHeight; // Force un reflow
+			const commandPannelHeight = commandPannel.offsetHeight;
+			this.elRef.nativeElement.style.setProperty('--command-pannel-height', `${commandPannelHeight}px`);
+
 
 		}
 	}
