@@ -40,7 +40,7 @@ $round-width: 3%;
 	overflow: hidden;
 }
 .wrapper-phase{
-	filter: grayscale(70%);
+	filter: grayscale(80%);
 
 	& ::ng-deep app-text-with-image img{
 		width: 100%;
@@ -49,7 +49,8 @@ $round-width: 3%;
 
 	&.current{
 		filter: grayscale(0);
-		box-shadow: 0 0 5px 5px var(--color-ares-orange);
+		border-radius: 5px;
+		box-shadow: 0 0 5px 3px var(--color-ares-orange);
 	}
 	& ::ng-deep app-text-with-image{
 		* {
