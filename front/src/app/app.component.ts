@@ -21,6 +21,7 @@ import { RxStompService } from './services/websocket/rx-stomp.service';
 import { expandCollapseVertical } from './components/animations/animations';
 import { AfterViewInit } from '@angular/core';
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
+import { SettingsComponent } from './components/core-game/settings/settings.component';
 
 @Component({
 	selector: 'app-root',
@@ -32,7 +33,8 @@ import { NavigationComponent } from './components/core-game/navigation/navigatio
 		ProjectCardListComponent,
 		NavigationComponent,
 		HorizontalSeparatorComponent,
-		NonEventButtonComponent
+		NonEventButtonComponent,
+		SettingsComponent
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
@@ -49,13 +51,14 @@ export class AppComponent implements OnInit {
 	clientPlayerId!: number;
 	loaded: boolean = false
 	@ViewChild('hand') handProjectList!: ProjectCardListComponent
-	isScrolled = false;
-	//navbarHeight = 0;
+	isScrolled = false
+
 
 	settingsButton!: NonEventButton;
 
 	_handIsHovered: boolean = false
 	_playerPannelIsHovered: boolean = false
+	_settings: boolean = false
 
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
@@ -144,5 +147,16 @@ export class AppComponent implements OnInit {
 	private handleAcknowledgeMessage(message: any){
 		console.log('ack received:', WebsocketResultMessageFactory.createAckMessage(message))
 		this.rxStompService.handleAck({ackUuid:WebsocketResultMessageFactory.createAckMessage(message).uuid})
+	}
+	public nonEventButtonClicked(button: NonEventButton){
+		switch(button.name){
+			case('settings'):{
+				this._settings = this._settings === false
+			}
+		}
+	}
+	public closeSettings(){
+		console.log('close settings received')
+		this._settings = false
 	}
 }

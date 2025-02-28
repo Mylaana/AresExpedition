@@ -51,6 +51,7 @@ $round-width: 3%;
 		filter: grayscale(0);
 		border-radius: 5px;
 		box-shadow: 0 0 5px 3px var(--color-ares-orange);
+		background: var(--color-ares-orange);
 	}
 	& ::ng-deep app-text-with-image{
 		* {

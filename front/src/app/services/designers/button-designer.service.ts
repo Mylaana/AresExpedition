@@ -25,6 +25,8 @@ export class ButtonDesigner{
 			case('rollBack'):{startEnabled=true;break}
 			case('settings'):{startEnabled=true;break}
 
+			case('closeSettings'):{startEnabled=true;break}
+
             default:{startEnabled=false;break}
         }
         return startEnabled
@@ -51,6 +53,8 @@ export class ButtonDesigner{
 			case('sellOptionalCardCancel'):{caption='$other_cancel$';break}
 			case('rollBack'):{caption='$other_rollback$';break}
 			case('settings'):{caption='$other_settings$';break}
+
+			case('closeSettings'):{caption='$other_cancel$';break}
 
             default:{caption='';break}
         }

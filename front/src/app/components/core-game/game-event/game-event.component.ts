@@ -47,7 +47,6 @@ export class GameEventComponent {
 		private elRef: ElementRef, private renderer: Renderer2,
 		private gameStateService: GameState,
 	){}
-
 	delete: EventBaseModel[] = []
 
 	clientPlayerId!:number

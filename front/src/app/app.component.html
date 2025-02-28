@@ -5,11 +5,14 @@
 <nav *ngIf="loaded" id="navbar">
 	<app-navigation  [clientPlayerId]="clientPlayerId" [isScrolled]="isScrolled"></app-navigation>
 </nav>
+<div @expandCollapseVertical *ngIf="_settings" id="settings">
+	<app-settings (closeSettings)="closeSettings()"></app-settings>
+</div>
 <div @expandCollapseVertical *ngIf="loaded" class="wrapper-app">
     <div class="wrapper-main">
         <div class="wrapper-other">
 			<div class="wrapper-settings">
-				<app-non-event-button [button]="settingsButton" [shape]="'hex_floating'" ></app-non-event-button>
+				<app-non-event-button [button]="settingsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(settingsButton)"></app-non-event-button>
 			</div>
             <app-server-emulation></app-server-emulation>
             <app-game-event></app-game-event>
