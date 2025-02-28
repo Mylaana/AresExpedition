@@ -1,14 +1,14 @@
 <nav id="nav"
 	@expandCollapseVertical
-	(@expandCollapseVertical.done)="updateNavHeight()">
+	(@expandCollapseVertical.done)="updateNavHeight()"
+	(mouseenter)="_playerPannelIsHovered=true"
+	(mouseleave)="_playerPannelIsHovered=false">
 	<div class="wrapper-game-progression">
 		<img src="/assets/other/mars_planet.png" alt="awards here">
 		<h1 class="ares-background ares ares-border">global parameters here</h1>
 	</div>
 	<div class="wrapper-player-pannel ares-background ares-border"
-		@expandCollapseVertical
-		(mouseenter)="_playerPannelIsHovered=true"
-		(mouseleave)="_playerPannelIsHovered=false">
+		@expandCollapseVertical>
 		<ng-container *ngFor="let id of _playerIdList">
 			<app-player-pannel
 			class="animated"
@@ -18,7 +18,7 @@
 		</ng-container>
 	</div>
 	<div class="wrapper-awards ares-background ares ares-border">
-		<h1 >awards here</h1>
+		<h1>awards here</h1>
 	</div>
 
 </nav>

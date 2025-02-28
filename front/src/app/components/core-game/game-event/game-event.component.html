@@ -18,7 +18,7 @@
 			<h1 *ngIf="currentEvent.title!=undefined">{{currentEvent.title}}</h1>
 		</div>
 	</div>
-	<div @enterFromLeft class="wrapper-round ares-background ares-border"
+	<div @enterFromLeft id="round-pannel" class="ares-background ares-border"
 		*ngIf="currentPhase!='PLANIFICATION'">
 		<ng-container *ngFor="let phase of phaseList">
 			<ng-container *ngIf="phase!='PLANIFICATION'">
@@ -35,7 +35,7 @@
 	</div>
     <div class="wrapper-event-main">
 		<div class="wrapper-event-top">
-			<div *ngIf="currentEvent.hasCardBuilder()===true" class="wrapper-event-top-main">
+			<div *ngIf="currentEvent.hasCardBuilder()===true" class="wrapper-builder">
                 <app-card-builder-list [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
 			</div>
             <app-phase-planification *ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>

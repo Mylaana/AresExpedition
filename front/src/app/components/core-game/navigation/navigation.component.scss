@@ -1,4 +1,4 @@
-$player-pannel-width: 65%;
+$player-pannel-width: 60%;
 
 :root {
 	--navbar-height: 0px; /* Valeur par défaut */
@@ -12,7 +12,6 @@ $player-pannel-width: 65%;
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
-	border: green solid 1px;
 }
 .wrapper-player-pannel{
 	width: $player-pannel-width;
@@ -27,19 +26,16 @@ $player-pannel-width: 65%;
     left: 0;
 }
 img{
-
-	//max-width: 100%;
-	//max-height: 50%;
+	height: 50%;
+	aspect-ratio: 1;
+	max-width: 100%;
+	max-height: 100%;
 }
 .wrapper-game-progression{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	height: 50%;
-	border: red solid 1px;
-	& > * {
-		height: 100%;
-	}
+	height: 100%;
 	width: calc((95% - $player-pannel-width) / 2);
 	& > h1 {
 		display: inline-block;

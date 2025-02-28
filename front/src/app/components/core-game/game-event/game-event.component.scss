@@ -1,37 +1,87 @@
-$ares-blue: rgb(39, 177, 229);
 $description-pannel-margin-top: 2%;
 $description-pannel-margin-left: 2%;
-$navigation-bar-width: 0px;
-$card-height: 310px;
-$card-width: calc($card-height * 63 / 88);
+$round-width: 3%;
 
 :host{
-	--command-pannel-height: 0px;//$command-pannel-height + $command-pannel-padding * 2;
+	--command-pannel-height: 0px;
 }
 #command-pannel {
 	$command-pannel-height: 100px;
-	$command-pannel-padding: 30px;
-	$command-pannel-left-margin: 0%;
+	$command-pannel-padding: 1%;
 	$command-pannel-width: 15%;
     z-index: 10;
     position: sticky;
-    left: $command-pannel-left-margin;
+    left: 0%; //$round-width;
     top: calc(var(--navbar-height));
     max-height: 100%;
     height: $command-pannel-height;
-    width: $command-pannel-width;
+    width: calc($command-pannel-width + $command-pannel-padding * 2);
     padding: $command-pannel-padding;
 	padding-right: 0;
 
     display: flex;
     flex-direction: row;
     align-items: top;
-	justify-content: space-between;
-	border: red solid 1px;
+	justify-content: center;
+	gap: 4%;
+}
+#round-pannel{
+	z-index: 1000;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: auto;
+	width: $round-width;
+	top: 34%;
+	border-left: 0;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	overflow: hidden;
+}
+.wrapper-phase{
+	filter: grayscale(70%);
+
+	& ::ng-deep app-text-with-image img{
+		width: 100%;
+	}
+	margin: 10%;
+
+	&.current{
+		filter: grayscale(0);
+		box-shadow: 0 0 5px 5px var(--color-ares-orange);
+	}
+	& ::ng-deep app-text-with-image{
+		* {
+			display: block;
+		}
+		img{
+			width: 100%;
+			aspect-ratio: 1;
+		}
+	}
+}
+.wrapper-next{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 25%;
+	aspect-ratio: 1;
+
+	& ::ng-deep app-text-with-image{
+		* {
+			display: block;
+		}
+		img{
+			width: 100%;
+			aspect-ratio: 1;
+		}
+	}
+
 }
 .wrapper-card-selector{
     width: 100%;
-	height: auto;
+	height: fit-content;
 }
 .wrapper-selection-active{
     z-index: -1;
@@ -78,16 +128,22 @@ $card-width: calc($card-height * 63 / 88);
     position: relative;
     margin-top: calc(-1 * var(--command-pannel-height) * 2);
     width: 100%;
-	min-height: 500px;
+	min-height: fit-content;
+	padding-top: 1%;
+	padding-bottom: 100px;
 }
 .wrapper-event-top{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: calc(100% - $round-width);
+	height: auto;
+	margin-left: $round-width;
 	margin-top: var(--command-pannel-height);
     min-height: var(--command-pannel-height);
 }
-.wrapper-event-top-main{
+.wrapper-builder{
+	position: sticky;
+	top: calc(var(--navbar-height));
 	$padding: 0%;
 
 	display: flex;
@@ -95,20 +151,19 @@ $card-width: calc($card-height * 63 / 88);
 	justify-content: center;
 	align-items: start;
 	width: 40%;
-	height: auto;
+	height: fit-content;
+
 	padding-left: $padding;
 	padding-right: $padding;
-	padding-top: calc($padding / 2);
+	padding-top: calc($padding / 2)
 }
 app-card-builder-list{
-	position: sticky;
-	top: 5%;
+	height: fit-content;
 	width: 100%;
-	margin-left: 10%;
 }
 .wrapper-selectors{
     display: flex;
-	height: auto;
+	height: fit-content;
 	flex-grow: 1;
 }
 .wrapper-event-description{
@@ -119,39 +174,4 @@ app-card-builder-list{
 }
 app-phase-card-upgrade-selector{
 	width: 100%;
-}
-.wrapper-round{
-	position: fixed;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: auto;
-	width: 3%;
-	top: 34%;
-	border-left: 0;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-}
-.wrapper-phase{
-	filter: grayscale(70%);
-
-	& ::ng-deep app-text-with-image img{
-		width: 100%;
-	}
-	margin: 10%;
-
-	&.current{
-		filter: grayscale(0);
-		box-shadow: 0 0 10px 5px var(--color-ares-orange);
-	}
-}
-.wrapper-next{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 25%;
-	& ::ng-deep app-text-with-image img{
-		width: 100%;
-		aspect-ratio: 1;
-	}
 }
