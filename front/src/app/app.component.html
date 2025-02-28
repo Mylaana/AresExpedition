@@ -6,7 +6,9 @@
 	<app-navigation  [clientPlayerId]="clientPlayerId" [isScrolled]="isScrolled"></app-navigation>
 </nav>
 <div @expandCollapseVertical *ngIf="_settings" id="settings">
-	<app-settings (closeSettings)="closeSettings()"></app-settings>
+	<app-settings
+		(closeSettings)="closeSettings()">
+	</app-settings>
 </div>
 <div @expandCollapseVertical *ngIf="loaded" class="wrapper-app">
     <div class="wrapper-main">
