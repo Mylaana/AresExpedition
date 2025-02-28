@@ -32,7 +32,6 @@ export class ButtonComponent implements OnChanges {
 					break
 				}
 			}
-			console.log(this.button)
 		}
 	}
 	onClick(button: ButtonBase){

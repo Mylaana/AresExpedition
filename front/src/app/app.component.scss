@@ -1,23 +1,44 @@
+$buttons-margin: 2%;
+
+:root {
+	--navbar-height: 0px;
+}
+#navbar{
+	z-index: 100;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 15%;
+	top: 0;
+}
+app-navigation {
+	width: 100%;
+	height: 100%;
+}
+#settings{
+	z-index: 1000;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	backdrop-filter: blur(10px) grayscale(20%);
+}
 .wrapper-app{
+	margin-top: var(--navbar-height);
     position: relative;
     top: 0;
     left: 0;
     display: flex;
     flex-direction: row;
     width: 100%;
-}
-.wrapper-navigation{
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 3vw;
-    height: 100%;
+	padding-bottom: calc(var(--card-height) * 1.1);
 }
 .wrapper-main{
     flex-grow: 1;
-
-    margin-left: 3.2vw;
+    margin-left: 0;
     display: flex;
     align-items: left;
     flex-direction: column;
@@ -29,45 +50,84 @@
     flex-direction: column;
     align-items: center;
 }
-.wrapper-top-pannel{
-    $player-pannel-width: 70vw;
-
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: left;
-    flex-direction: column;
-    width: $player-pannel-width;
-    left: 5vw;
-    margin-top: 7.5vh;
-    app-self-info{
-        width: $player-pannel-width;
-    }
-}
-.wrapper-other-player{
-    display: flex;
-    flex-direction: column;
-}
-.background{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1000;
-    width: 100%;
-    height: 100%;
-    mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));
+.background-image{
+	position: fixed;  /* Reste fixe, même en scrollant */
+	top: 0;
+	left: 0;
+	width: 100vw;  /* 100% de la largeur de la fenêtre */
+	height: 100vh; /* 100% de la hauteur de la fenêtre */
+	background: url('/assets/other/background.jpg') no-repeat center center;
+	background-size: cover; /* Remplit l'écran sans déformation */
+	mask-image: linear-gradient(to bottom, rgba(white, .8), rgba(white, 1));
 }
 app-self-info{
     z-index: 10;
-    position: fixed;
+    //position: fixed;
     top: 0;
 }
 app-game-event{
     width: 100%;
+	//min-height: 85%;
 }
 .wrapper-hand{
-    width: 95%;
+	$transition-delay: .2s;
+	z-index: 100;
+	position: fixed;
+	display: flex;
+	justify-content: left;
+	align-items: top;
+
+	max-width: 90%;
+
+	left: 5%;
+	top: calc(100% - (var(--card-height) * .23));
+	transition: top $transition-delay ease;
+	&.hovered {
+		top: calc(100% - (var(--card-height) * 1.05));
+		transition: top $transition-delay ease;
+	}
+	.hand-mask.masked{
+		$opacity: .8;
+		mask-image: linear-gradient(rgba(white, $opacity), rgba(white, $opacity));
+	}
+}
+app-project-card-list{
+	width: 100%;
+	height: 100%;
+}
+.wrapper-played{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
+	margin-top: 2%;
+}
+.horizontal-separator{
+	width: 100%;
+	height: 30px;
+	margin-top: 3%;
+	margin-bottom: 3%;
+}
+.wrapper-settings{
+	z-index: 100000000;
+	position: fixed;
+	$height: 6%;
+	top: 100% - $height;
+	left: 0;
+	height: $height;
+	aspect-ratio: 1;
+	transform: translate(30%, -30%);
+}
+.wrapper-loading{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+
+	h1{
+		color: white;
+		padding: 20px;
+	}
 }

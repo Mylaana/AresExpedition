@@ -1,10 +1,17 @@
 <div class="wrapper-main">
-    <div class="wrapper-list">
-        <app-project-card #projectCardComponent *ngFor="let card of displayedCards"
-            [stateFromParent]="cardSelector.stateFromParent"
-            [projectCard]="card"
-            [initialState]="cardSelector.cardInitialState"
-            [buildDiscount]="_buildDiscount"
-            (cardStateChange)="cardStateChange($event)"></app-project-card>
-    </div>
+	<div class="wrapper-list">
+		<div class="list-mask">
+			<div [class]="'background--'+background"></div>
+		</div>
+		<div class="wrapper-cards"
+			[ngClass]="listType"
+			[class.hovered]="hovered">
+			<app-project-card #projectCardComponent *ngFor="let card of displayedCards"
+				[stateFromParent]="cardSelector.stateFromParent"
+				[projectCard]="card"
+				[initialState]="cardSelector.cardInitialState"
+				[buildDiscount]="_buildDiscount"
+				(cardStateChange)="cardStateChange($event)"></app-project-card>
+		</div>
+	</div>
 </div>

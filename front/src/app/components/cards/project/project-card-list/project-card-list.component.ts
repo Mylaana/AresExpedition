@@ -6,6 +6,9 @@ import { CardSelector, ProjectFilter } from '../../../../interfaces/global.inter
 import { EventBaseModel, EventCardSelector, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
 import { CardState } from '../../../../interfaces/card.interface';
+import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
+
+type ListType = 'hand' | 'played' | 'selector' | 'builderSelector' | 'none'
 
 @Component({
   selector: 'app-project-card-list',
@@ -21,6 +24,10 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 	@Input() eventId?: number;
 	@Input() playZoneId!: number; //this indicates whitch playZone this component should read
 	@Input() cardList!: ProjectCardModel[] //takes display priority
+	@Input() currentPhase!: NonSelectablePhaseEnum
+	@Input() background?: any = ''
+	@Input() listType?: ListType = 'none'
+	@Input() hovered!: boolean
 
 	playedCardList!: ProjectCardModel[] //takes display priority
 	@Output() updateSelectedCardList: EventEmitter<ProjectCardModel[]> = new EventEmitter<ProjectCardModel[]>()
@@ -39,6 +46,18 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		this.updateCardList()
 		this._eventId = this.eventId
 		this.loaded = true
+		this.setBackground()
+	}
+	setBackground(): void{
+		switch(this.listType){
+			case('builderSelector'):{
+				this.background = (this.currentPhase).toLowerCase()
+				break
+			}
+			default:{
+				this.background = this.listType
+			}
+		}
 	}
 	resetSelector(): void {
 		this.cardSelector = {
@@ -64,6 +83,9 @@ export class ProjectCardListComponent implements OnChanges, DoCheck{
 		}
 		if (changes['playedCardList'] && changes['playedCardList'].currentValue) {
 			this.updateCardList()
+		}
+		if (changes['listType'] && changes['listType'].currentValue) {
+			this.setBackground()
 		}
 	}
 	ngDoCheck(): void {

@@ -61,20 +61,39 @@ p {
     }
 }
 .ares-background{
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-	box-shadow: 0px 0px 10px 0px #000000;
-    background: #fff;
+	background: rgba(white, .75);
+	//background-image: linear-gradient(165deg, white 20%, rgb(173, 173, 173) 60%, rgb(173, 173, 173) 65%,  white 95%);
 }
 .ares-card{
-    background: rgba(grey, .3);
+    background: rgba(rgb(0, 0, 0), .05);
     border-radius: 5px;
+	box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, .2);
     & p {
-        color: white;
+        color: black;
     }
 }
 .ares-border{
-    border: 2px solid rgba(lightblue, .2);
+    border-radius: 5px;
+	border: rgba(255, 255, 255, 0.498) solid 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 10px 0px #ffffff;
+}
+.ares-title{
+	$background-alpha: .4;
+	border: rgba(255, 255, 255, 0.7) solid 1px;
+	border-left: 0;
+	border-right: 0;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0) 2%, rgb(255, 255, 255, $background-alpha) 20%, rgb(255, 255, 255, $background-alpha) 80%,  rgba(255, 255, 255, 0) 98%);
+
+	h1{
+		$horizontal-padding: 100px;
+		display: inline-block;
+		text-align: center;
+		padding: 10px;
+		padding-left: $horizontal-padding;
+		padding-right: $horizontal-padding;
+		text-wrap: nowrap;
+	}
 }
 .element-clickable{
     &:hover{
@@ -126,9 +145,9 @@ p {
   opacity: 0;
   transition: visibility 0s $fade-transition-time, opacity $fade-transition-time linear;
 }
-.background-production{
-    $color-one: var(--color-ares-red);
-    $color-two: rgb(253, 157, 67);
+.background-production--red{
+    $color-one:  rgb(237, 53, 49); //doesnt work with variable
+    $color-two: rgb(255, 129, 25);
     $step1: 2%;
     $step2: 4%;
     $step3: 6%;
@@ -136,7 +155,7 @@ p {
     background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
-.background-production-grey{
+.background-production--grey{
     $color-one: rgb(66, 66, 66);
     $color-two: rgb(184, 184, 184);
     $step1: 0%;
@@ -146,9 +165,9 @@ p {
     background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
-.background-production-blue{
+.background-production--blue{
     $color-one: rgb(66, 66, 66);
-    $color-two: var(--color-ares-blue);
+    $color-two: rgb(39, 177, 229);
     $step1: 2%;
     $step2: 4%;
     $step3: 6%;
@@ -164,4 +183,8 @@ p {
 }
 .light-greyed-filter{
     filter: grayscale(30%);
+}
+app-horizontal-separator{
+	width: 100%;
+	height: 100%;
 }

@@ -1,19 +1,26 @@
+<div class="wrapper-button">
+	<button *ngIf="!_imageUrl" class="main" [disabled]="button.enabled===false"
+		[class.hovered]="_isHovered"
+		[ngClass]="[button.enabled? 'enabled':'disabled',shape?'button-shape--'+shape:'']"
+		(mouseenter)="_isHovered = true"
+		(mouseleave)="_isHovered = false"
+		(click)="onClick(button)">
 
-<button *ngIf="!_imageUrl" class="main" [disabled]="button.enabled===false"
-	[class.hovered]="_isHovered"
-	[ngClass]="[button.enabled? 'enabled':'disabled',shape?'button-shape--'+shape:'']"
-	(mouseenter)="_isHovered = true"
-	(mouseleave)="_isHovered = false"
-	(click)="onClick(button)">
-	<div class="wrapper-button">
-		<div *ngIf="button.enabled===true && shape!='hex_floating'" [ngClass]="['button-shape--'+shape, 'gradiant-mask--'+shape]">
-			<div [ngClass]="['button-gradiant-background--'+shape, 'button-shape--'+shape]"></div>
+		<div class="wrapper-elements">
+			<div *ngIf="button.enabled===true && shape!='hex_floating'" [ngClass]="['button-shape--'+shape, 'gradiant-mask--'+shape]">
+				<div [ngClass]="['button-gradiant-background--'+shape, 'button-shape--'+shape]"></div>
+			</div>
+			<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, button.enabled? 'enabled':'disabled']"><app-text-with-image [rawText]="_caption"></app-text-with-image></div>
+			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, button.enabled? 'enabled':'disabled']" [class.hovered]="_isHovered"></div>
+			<div class="button-border" [ngClass]="[button.enabled? 'enabled':'disabled']" [class.hovered]="_isHovered" *ngIf="shape==='hex_floating'"></div>
 		</div>
-		<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, button.enabled? 'enabled':'disabled']"><app-text-with-image [rawText]="_caption"></app-text-with-image></div>
-		<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, button.enabled? 'enabled':'disabled']" [class.hovered]="_isHovered"></div>
-		<div class="button-border" [ngClass]="[button.enabled? 'enabled':'disabled']" [class.hovered]="_isHovered" *ngIf="shape==='hex_floating'"></div>
+	</button>
+	<div *ngIf="shape==='hex_floating'" class="shadow"
+		[class.hovered]="_isHovered"
+		[ngClass]="[button.enabled? 'enabled':'disabled']">
 	</div>
-</button>
+</div>
+
 <div *ngIf="_imageUrl" class="wrapper-button">
     <div [ngClass]="{'element-disabled': button.enabled===false}">
         <button [disabled]="button.enabled===false" [ngClass]="[_imageUrl ? 'image-button':'validation-button', button.enabled===true ? 'element-clickable':'']" (click)="onClick(button)"  >

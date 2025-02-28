@@ -1,37 +1,61 @@
 <div class="wrapper-game-event" *ngIf="currentEvent">
-    <div class="wrapper-commands">
-        <div *ngIf="currentEvent.button" class="wrapper-event-button wrapper-validate-button">
-            <app-event-main-button  [button]="currentEvent.button" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
-        </div>
-        <div *ngIf="sellCardsButton.enabled" class="wrapper-event-button wrapper-sell-button">
-            <app-non-event-button  [button]="sellCardsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
-        </div>
-		<div *ngIf="sellCardsCancelButton.enabled" class="wrapper-event-button wrapper-sell-cancel-button">
-            <app-non-event-button  [button]="sellCardsCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
-        </div>
-    </div>
+	<div id="command-pannel">
+		<div *ngIf="currentEvent.button" class="wrapper-event-button wrapper-validate-button">
+			<app-event-main-button  [button]="currentEvent.button" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
+		</div>
+		<div *ngIf="sellCardsButton.enabled" class="wrapper-event-button--smaller wrapper-sell-button">
+			<app-non-event-button  [button]="sellCardsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
+		</div>
+		<div *ngIf="sellCardsCancelButton.enabled" class="wrapper-event-button--smaller">
+			<app-non-event-button  [button]="sellCardsCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
+		</div>
+		<div *ngIf="rollbackButton.enabled" class="wrapper-event-button--smaller">
+			<app-non-event-button  [button]="rollbackButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(rollbackButton)"></app-non-event-button>
+		</div>
+	</div>
+	<div class="wrapper-title">
+		<div *ngIf="currentEvent.title!=undefined" class="wrapper-event-description ares-title">
+			<h1 *ngIf="currentEvent.title!=undefined">{{currentEvent.title}}</h1>
+		</div>
+	</div>
+	<div @enterFromLeft id="round-pannel" class="ares-background ares-border"
+		*ngIf="currentPhase!='PLANIFICATION'">
+		<ng-container *ngFor="let phase of phaseList">
+			<ng-container *ngIf="phase!='PLANIFICATION'">
+				<div class="wrapper-phase"
+					[class.current]="currentPhase===phase">
+					<app-text-with-image [rawText]="'$other_phase_'+ (phase | lowercase) +'$'"></app-text-with-image>
+				</div>
+				<div class="wrapper-next"
+					*ngIf="phase!='RESEARCH'">
+					<app-text-with-image [rawText]="'$other_next$'"></app-text-with-image>
+				</div>
+			</ng-container>
+		</ng-container>
+	</div>
     <div class="wrapper-event-main">
-        <div class="wrapper-event-top">
-			<div class="wrapper-title ares-background ares-border">
-				<h1>{{currentPhase}} PHASE</h1>
-				<h2 *ngIf="currentEvent.title!=undefined">{{currentEvent.title}}</h2>
-			</div>
-			<div class="wrapper-event-top-main">
-                <app-card-builder-list *ngIf="currentEvent.hasCardBuilder()===true" [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
+		<div class="wrapper-event-top">
+			<div *ngIf="currentEvent.hasCardBuilder()===true" class="wrapper-builder">
+                <app-card-builder-list [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
 			</div>
             <app-phase-planification *ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
             <app-phase-production *ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"></app-phase-production>
             <div *ngIf="currentEvent.subType==='waitingGroupReady'" class="ares-background"><h1>[Waiting for other players to be ready]</h1></div>
-        </div>
-        <div class="wrapper-event-bottom">
-            <div *ngIf="currentEvent.hasSelector()===true" class="wrapper-card-selector ares-background">
-                <app-project-card-list #cardListSelector [cardListId]="'game event list'" [event]="currentEvent" (updateSelectedCardList)="updateSelectedCardList($event)"></app-project-card-list>
-            </div>
-			<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [event]="currentEvent"></app-phase-card-upgrade-selector>
-        </div>
+			<div class="wrapper-selectors">
+				<div *ngIf="currentEvent.hasSelector()===true" class="wrapper-card-selector">
+					<app-project-card-list #cardListSelector
+						[currentPhase]="currentPhase"
+						[cardListId]="'game event list'"
+						[event]="currentEvent"
+						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
+						(updateSelectedCardList)="updateSelectedCardList($event)">
+					</app-project-card-list>
+				</div>
+				<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [event]="currentEvent"></app-phase-card-upgrade-selector>
+			</div>
+		</div>
     </div>
 </div>
-
 <div class="wrapper-selection-active" [ngClass]="currentEvent?.getSelectionActive()===true?  'element-fade-in':'element-fade-out'">
     <div class="selection-active-left"></div>
     <div class="selection-active-right"></div>

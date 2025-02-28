@@ -1,9 +1,12 @@
-<div class="ressource-card ares-card">
-    <div class="wrapper-ressource box-one">
+<div class="main ares-card">
+    <div class="wrapper-ressource--stock">
         <div class="box-ressource-icon">
             <img [ngClass]="{'img-card': ressource.name=='card'}" [src]="imageUrl" [alt]="ressource.name">
         </div>
-        <div *ngIf="ressource.valueMod" class="box-ressource-mod">
+		<div *ngIf="ressource.hasStock" class="box-stock">
+			<p class="center"> {{ ressource.valueStock }}</p>
+		</div>
+        <div *ngIf="ressource.valueMod" class="wrapper-ressource-mod">
             <div class="box-ressource-mod-icon center">
                 <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
             </div>
@@ -12,10 +15,10 @@
             </div>
         </div>
     </div>
-    <div [ngClass]="[ressource.hasStock ? 'box-two' : 'box-two--extended',  ressource.name==='steel' || ressource.name==='titanium' ? 'background-production-grey' : 'background-production', ressource.name === 'card' ? 'background-production-blue' : '']">
-        <p class="center">{{ ressource.valueProd }}</p>
-    </div>
-    <div *ngIf="ressource.hasStock" class="box-three">
-        <p class="center"> {{ ressource.valueStock }}</p>
-    </div>
+	<div class="wrapper-ressource--production">
+		<div class="box-production" [ngClass]="['background-production--'+_production]">
+			<p class="center">{{ ressource.valueProd }}</p>
+		</div>
+	</div>
+
 </div>

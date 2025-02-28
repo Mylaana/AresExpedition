@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RessourceInfo } from '../../../interfaces/global.interface';
 import { GlobalInfo } from '../../../services/global/global-info.service';
 
+type Production = 'grey' | 'red' | 'blue'
+
 @Component({
   selector: 'app-ressource-card',
   standalone: true,
@@ -16,11 +18,25 @@ export class RessourceCardComponent implements OnInit {
   //@Input() ressourceCard!: RessourceCardModel;
   @Input() playerId!: number;
   @Input() ressource!: RessourceInfo;
+  _production!: Production
 
   imageUrl!: string;
 
 
   ngOnInit(): void {
     this.imageUrl = GlobalInfo.getUrlFromID(this.ressource.imageUrlId)
+	switch(this.ressource.name){
+		case('card'):{
+			this._production = 'blue'
+			break
+		}
+		case('steel'):case('titanium'):{
+			this._production = 'grey'
+			break
+		}
+		default:{
+			this._production = 'red'
+		}
+	}
   }
 }

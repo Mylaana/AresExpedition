@@ -9,21 +9,30 @@ $shape-width: (
 $disabled-color: gray;
 $disabled-border: darken(gray, 10%);
 
+.wrapper-button{
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
 .main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: relative;
 	border: 0;
 	height: 100%;
-	max-width: 100%;
-	max-height: 100%;
+
 	background: transparent;
 
 	&.hovered.enabled{
 		cursor: pointer;
 	}
 	&.disabled, .hovered.disabled{
-		filter: grayscale(100%);
+		filter: grayscale(40%);
 		& > *{
-			filter: grayscale(100%);
+			filter: grayscale(50%);
 		}
 	}
 	&::ng-deep app-text-with-image .text-tag {
@@ -32,14 +41,16 @@ $disabled-border: darken(gray, 10%);
 		font-weight: bold;
 	}
 	&.enabled::ng-deep app-text-with-image p {
-		color: rgb(0, 0, 0);
+		font-weight: 550;
+		font-size: 100%;
 	}
 	&.disabled::ng-deep app-text-with-image p {
 		color: rgb(61, 61, 61);
+		font-size: 100%;
 	}
 }
 
-.wrapper-button {
+.wrapper-elements {
 	position: relative;
 	display: flex;
 	height: 100%;
@@ -63,16 +74,16 @@ $disabled-border: darken(gray, 10%);
 			$color2: rgba(0, 0, 0, 0);
 			$color3: rgba(0, 0, 0, .5);
 			-webkit-mask-image: linear-gradient(to bottom, $color1 0%, $color2 100%);
-			mask-image: linear-gradient(to bottom, $color1 30%, $color2 70%);
+			mask-image: linear-gradient(to top, $color1 30%, $color2 70%);
 
 			&:hover {
 				-webkit-mask-image: linear-gradient(to bottom, $color2 0%, $color1 100%);
-				mask-image: linear-gradient(to bottom, $color2 0%, $color1 100%);
+				mask-image: linear-gradient(to top, $color2 0%, $color1 100%);
 			}
 
 			&:active {
 				-webkit-mask-image: linear-gradient(to bottom, $color3 0%, $color3 100%);
-				mask-image: linear-gradient(to bottom, $color3 0%, $color3 100%);
+				mask-image: linear-gradient(to top, $color3 0%, $color3 100%);
 			}
 		}
 	}
@@ -128,7 +139,7 @@ $disabled-border: darken(gray, 10%);
 		}
 	}
 	&--hex_floating{
-		background: rgba(255, 255, 255, .2);
+		background: rgba(181, 128, 108, .8);
 
 		&.enabled::before {
 			content: '';
@@ -168,8 +179,8 @@ $disabled-border: darken(gray, 10%);
 	}
 	@each $name, $width in $shape-width {
 		&--#{$name} {
-			max-width: 100%;
-			max-height: 100%;
+			//max-width: 100%;
+			//max-height: 100%;
 			-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 			clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 		}
@@ -192,7 +203,8 @@ $disabled-border: darken(gray, 10%);
 		content: '';
 		position: absolute;
 		inset: 0;
-		background-image: linear-gradient(135deg, rgb(128, 128, 128) 30%, rgb(69, 69, 69) 60%, rgb(208, 208, 208) 85%);
+		//background-image: linear-gradient(135deg, rgb(128, 128, 128) 30%, rgb(69, 69, 69) 60%, rgb(208, 208, 208) 85%);
+		background-image: linear-gradient(135deg, rgb(215, 215, 215) 30%, rgb(147, 147, 147) 60%, rgb(234, 234, 234) 90%);
 		opacity: 1;
 		transition: opacity $transition-delay ease;
 		z-index: -1;
@@ -215,5 +227,19 @@ $disabled-border: darken(gray, 10%);
 
 	&.enabled.hovered::after {
 		opacity: 1;
+	}
+}
+.shadow{
+	z-index: -1;
+	position: absolute;
+	height: 100%;
+	aspect-ratio: 1;
+	background: transparent;
+	border-radius: 50%;
+	&.hovered.enabled{
+		box-shadow: 0px 0px 15px 10px rgba($color: #ff7700, $alpha: .3);
+	}
+	&.enabled{
+		box-shadow: 0px 0px 15px 10px rgba($color: #c4c4c4, $alpha: .2);
 	}
 }

@@ -1,21 +1,25 @@
 .wrapper-player-pannel {
     display: flex;
     align-items: center;
-    height: 45px;
-    gap: 5px;
-    padding: 2px;
-    margin: 1px;
+    height: 30px;
+    justify-content: space-around;
+    padding-right: 1%;
+    margin: 2px;
     width: 100%;
 }
 app-global-pannel, app-ressource-pannel, app-tag-pannel{
     height: 100%;
-    width: auto;
+    width: 25%;
 }
-.wrapper-tag-pannel, .wrapper-ressource-pannel{
+.wrapper-tag-pannel {
     height: 100%;
-    width: auto;
+    width: 22%;
+}
+.wrapper-ressource-pannel{
+	height: 100%;
 }
 .wrapper-global-pannel, app-global-pannel{
     height: 100%;
-    flex-grow: 1;
+    width: auto;
+	flex-grow: .85;
 }
