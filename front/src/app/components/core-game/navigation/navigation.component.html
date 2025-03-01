@@ -4,8 +4,12 @@
 	<div class="wrapper-global-parameter"
 		(mouseenter)="_playerPannelIsHovered=true"
 		(mouseleave)="_playerPannelIsHovered=false">
-		<img src="/assets/other/mars_planet.png" alt="awards here">
-		<app-global-parameter-pannel></app-global-parameter-pannel>
+		<div class="wrapper-global-ocean">
+			<img src="/assets/other/mars_planet.png" alt="awards here">
+		</div>
+		<div class="wrapper-global-other">
+			<app-global-parameter-pannel></app-global-parameter-pannel>
+		</div>
 	</div>
 	<div class="wrapper-player-pannel ares-background ares-border"
 		(mouseenter)="_playerPannelIsHovered=true"

@@ -18,6 +18,7 @@ export class GlobalParameterCardComponent implements OnInit {
 	_maxStep: number = 0
 	_currentStep: number = 7
 	_progressionList!: number[]
+
 	ngOnInit(): void {
 		switch(this.parameter){
 			case('ocean'):{

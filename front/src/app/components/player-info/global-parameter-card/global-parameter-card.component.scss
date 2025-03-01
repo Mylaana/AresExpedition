@@ -1,62 +1,48 @@
 :host{
-	height: 100%;
+	max-height: 100%;
 	width: 100%;
 }
 .main{
 	display: flex;
 	width: 100%;
 	height: 100%;
-
-	//border: blue solid 1px;
 }
 .wrapper-icon{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	//max-height: 100%;
 	height: 100%;
-	width: 100%;
-	//aspect-ratio: 1;
+
+	aspect-ratio: 1;
 	object-fit: contain;
-	border: solid red 1px;
+	border: solid white 1px;
 	border-radius: 10%;
-
-	& ::ng-deep app-text-with-image img{
-		width: 100%;
+	&::ng-deep img{
 		height: 100%;
-		max-width: 100%;
-		max-height: 100%;
+		aspect-ratio: 1;
+		object-fit: contain
 	}
-	& ::ng-deep app-text-with-image{
-		* {
-			display: block;
-			object-fit: contain
-		}
-		img{
-			width: 100%;
-			aspect-ratio: 1;
-			object-fit: contain
-		}
-	}
-
+}
+app-text-with-image{
+	height: 80%;
+	aspect-ratio: 1;
 }
 .wrapper-progression-bar{
 	position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 2%;
+	gap: 3px;
 	padding: 1%;
-	padding-left: 3%;
-	padding-right: 2%;
+	padding-left: 2%;
+	padding-right: 1%;
 
-	top: 5%;
+	top: 10%;
 	height: 50%;
 	flex-grow: 1;
 	border-left: 0;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
-	//background-color: white;
 }
 .wrapper-bubble{
 	border-radius: 25%;
@@ -64,9 +50,8 @@
 	height: 90%;
 	flex-grow: 1;
 	&.current{
-		//border: blue solid 2px;
 		$color: black;
 		outline: $color 1px solid;
-		outline-offset: 2px;
+		outline-offset: 1px;
 	}
 }

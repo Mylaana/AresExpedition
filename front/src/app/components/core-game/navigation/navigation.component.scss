@@ -1,7 +1,7 @@
 $player-pannel-width: 60%;
 
 :root {
-	--navbar-height: 0px; /* Valeur par défaut */
+	--navbar-height: 0px;
 }
 
 #nav{
@@ -26,29 +26,34 @@ $player-pannel-width: 60%;
     width: 100%;
     left: 0;
 }
-img{
-	height: 70%;
-	aspect-ratio: 1;
-	max-width: 100%;
-	max-height: 100%;
-}
 .wrapper-global-parameter{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	flex-direction: row;
 	height: 100%;
 	width: calc((100% - $player-pannel-width) / 2 - 10px);
-	//flex-grow: 1;
-	//border: red solid 1px;
+	gap: 1%;
 	& > h1 {
 		display: inline-block;
 		text-align: center;
 	}
-
-	app-global-parameter-pannel{
+}
+.wrapper-global-ocean{
+	height: 100%;
+	img{
 		height: 100%;
-		flex-grow: 1;
+		aspect-ratio: 1;
 	}
+}
+.wrapper-global-other{
+	height: 100%;
+	width: 0%;
+	flex-grow: 1;
+}
+app-global-parameter-pannel{
+	height: 100%;
+	width: 100%;
 }
 .wrapper-awards{
 	position: sticky;
