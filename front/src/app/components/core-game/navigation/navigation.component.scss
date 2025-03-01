@@ -12,6 +12,7 @@ $player-pannel-width: 60%;
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
+
 }
 .wrapper-player-pannel{
 	width: $player-pannel-width;
@@ -26,20 +27,27 @@ $player-pannel-width: 60%;
     left: 0;
 }
 img{
-	height: 50%;
+	height: 70%;
 	aspect-ratio: 1;
 	max-width: 100%;
 	max-height: 100%;
 }
-.wrapper-game-progression{
+.wrapper-global-parameter{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	height: 100%;
-	width: calc((95% - $player-pannel-width) / 2);
+	width: calc((100% - $player-pannel-width) / 2 - 10px);
+	//flex-grow: 1;
+	//border: red solid 1px;
 	& > h1 {
 		display: inline-block;
 		text-align: center;
+	}
+
+	app-global-parameter-pannel{
+		height: 100%;
+		flex-grow: 1;
 	}
 }
 .wrapper-awards{
@@ -49,7 +57,7 @@ img{
 	align-items: center;
 	height: 100%;
 	top: 0;
-	width: calc((95% - $player-pannel-width) / 2);
+	width: calc((100% - $player-pannel-width) / 2 - 10px);
 	& > h1 {
 		display: inline-block;
 		text-align: center;

@@ -4,19 +4,21 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerPannelComponent } from '../../player-info/player-pannel/player-pannel.component';
 import { expandCollapseVertical } from '../../animations/animations';
 import { AnimationEvent } from '@angular/animations';
+import { GlobalParameterPannelComponent } from '../../player-info/global-parameter-pannel/global-parameter-pannel.component';
 
 @Component({
 	selector: 'app-navigation',
 	standalone: true,
 	imports: [
 		CommonModule,
-		PlayerPannelComponent
+		PlayerPannelComponent,
+		GlobalParameterPannelComponent
 	],
 	templateUrl: './navigation.component.html',
 	styleUrl: './navigation.component.scss',
 	animations: [expandCollapseVertical]
 })
-export class NavigationComponent implements OnInit, OnChanges, AfterViewInit{
+export class NavigationComponent implements OnInit, AfterViewInit{
 	@Input() isScrolled: boolean = false
 	@Input() clientPlayerId!: number
 	_playerIdList: number[] = []
@@ -33,20 +35,11 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit{
 		)
 	}
 
-	ngOnChanges(changes: SimpleChanges): void {
-		return
-		if (changes['isScrolled'] && changes['isScrolled'].currentValue) {
-			setTimeout(() => {
-				this.updateNavHeight();
-			  }, 1100)
-			}
-	}
 	ngAfterViewInit(): void {
 		const navbar = this.elRef.nativeElement.querySelector('animated')
 		console.log('afterviewinit', navbar)
 		if (navbar) {
 			navbar.addEventListener('transitionend', () => {
-				console.log('animation end')
 			  	this.updateNavHeight()
 			});
 
@@ -63,7 +56,6 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit{
 		if (navbar && navbar.offsetHeight) {
 		  const navbarHeight = navbar.offsetHeight;
 		  document.documentElement.style.setProperty('--navbar-height', `${navbarHeight}px`);
-		  console.log('nav height:', navbarHeight)
 		}
 	}
 	updatePlayerList(playerIdList: number[]){

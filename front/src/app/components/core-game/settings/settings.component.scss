@@ -11,14 +11,25 @@ $main-padding: 5px;
 	left: 0;
 }
 
-.main{
-	position: absolute;
+.inner-window{
+	position: relative;
 	z-index: 1000;
+
+	display: flex;
+	//justify-content: center;
+
 	width: 50%;
 	height: 50%;
 	padding: $main-padding;
 }
+.main{
+	display: flex;
+	justify-content: center;
 
+	width: 100%;
+	height: 100%;
+
+}
 .button-close{
 	$width: 5%;
 	position: absolute;
@@ -26,7 +37,6 @@ $main-padding: 5px;
 	width: $width;
 	aspect-ratio: 1;
 }
-
 .background{
 	z-index: 999;
 	position: absolute;
@@ -34,4 +44,17 @@ $main-padding: 5px;
 	height: 100%;
 	top: 0;
 	left: 0;
+}
+.wrapper-title{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: relative;
+	width: 40%;
+	height: fit-content;
+	border-color: var(--color-ares-orange);
+	h1{
+		color: var(--color-ares-orange);
+	}
 }

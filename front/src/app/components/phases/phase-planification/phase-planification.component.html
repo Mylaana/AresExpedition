@@ -1,7 +1,8 @@
 <div class="wrapper-main">
     <div class="wrapper-phase-card">
-        <div *ngFor="let button of buttonList" class="wrapper-button" [ngClass]="button.name===currentPhaseSelected? 'element-selected-bracket':'element-not-selected'">
-            <app-button class="phase-card" [button]="button" (buttonClicked)="ImageButtonClicked(button)">
+        <div *ngFor="let button of buttonList" class="wrapper-button"
+			[class.selected]="button.name===currentPhaseSelected">
+            <app-button class="phase-card" [button]="button" (buttonClicked)="buttonClicked(button)">
                 <img class="phase-image" src="/assets/other/phase_{{button.name}}.png" alt="">
                 <p>{{button.name}}</p>
             </app-button>

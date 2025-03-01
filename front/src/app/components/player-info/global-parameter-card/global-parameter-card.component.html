@@ -1,0 +1,10 @@
+<div class="main">
+	<div class="wrapper-icon ares-background">
+		<app-text-with-image [rawText]="'$other_'+parameter+'$'"></app-text-with-image>
+	</div>
+	<div class="wrapper-progression-bar ares-border ares-background">
+		<div *ngFor="let bubble of _progressionList" class="wrapper-bubble"
+			[class.current]="bubble===_progressionList[_currentStep]">
+		</div>
+	</div>
+</div>

@@ -19,7 +19,6 @@ import { ButtonDesigner } from './services/designers/button-designer.service';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
 import { RxStompService } from './services/websocket/rx-stomp.service';
 import { expandCollapseVertical } from './components/animations/animations';
-import { AfterViewInit } from '@angular/core';
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { SettingsComponent } from './components/core-game/settings/settings.component';
 
@@ -58,6 +57,7 @@ export class AppComponent implements OnInit {
 	_playerPannelIsHovered: boolean = false
 	_settings: boolean = false
 	_lastScrollY: number = 0
+	_connected: boolean = false
 
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
@@ -98,6 +98,10 @@ export class AppComponent implements OnInit {
 		.subscribe((message: Message) => {
 			this.handleAcknowledgeMessage(message.body)
 		});
+
+		this.rxStompService.connectionState$.subscribe(() => {
+			this._connected = this.rxStompService.connectionState$.getValue() === 1
+		})
 	}
 
 	updateHandOnStateChange(state: PlayerStateModel[]): void {
