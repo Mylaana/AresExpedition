@@ -5,6 +5,7 @@ import { PlayerPannelComponent } from '../../player-info/player-pannel/player-pa
 import { expandCollapseVertical } from '../../animations/animations';
 import { AnimationEvent } from '@angular/animations';
 import { GlobalParameterPannelComponent } from '../../player-info/global-parameter-pannel/global-parameter-pannel.component';
+import { OceanCardComponent } from '../../player-info/ocean-card/ocean-card.component';
 
 @Component({
 	selector: 'app-navigation',
@@ -12,7 +13,8 @@ import { GlobalParameterPannelComponent } from '../../player-info/global-paramet
 	imports: [
 		CommonModule,
 		PlayerPannelComponent,
-		GlobalParameterPannelComponent
+		GlobalParameterPannelComponent,
+		OceanCardComponent
 	],
 	templateUrl: './navigation.component.html',
 	styleUrl: './navigation.component.scss',

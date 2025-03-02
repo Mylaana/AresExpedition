@@ -1,3 +1,4 @@
+@use "sass:math";
 :host{
 	max-height: 100%;
 	width: 100%;
@@ -91,10 +92,10 @@ app-text-with-image{
 	height: 100%;
 
 	&.temperature{
-		width: calc(floor(100% / 20) );
+		width: floor(math.div(100%, 20));
 	}
 	&.oxygen, &.infrastructure{
-		width: calc(floor(100% / 15) );
+		width: floor(math.div(100%, 15));
 	}
 	&.current{
 		border: black 1px solid;
