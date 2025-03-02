@@ -42,7 +42,6 @@
             <app-phase-production *ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"></app-phase-production>
             <div *ngIf="currentEvent.subType==='waitingGroupReady'" class="ares-background"><h1>[Waiting for other players to be ready]</h1></div>
 			<div class="wrapper-selectors" *ngIf="currentEvent.hasCardsToSelectFrom()">
-				<p>{{currentEvent.hasCardsToSelectFrom()}}</p>
 				<div class="wrapper-card-selector" >
 					<app-project-card-list #cardListSelector
 						[currentPhase]="currentPhase"
