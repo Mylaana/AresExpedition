@@ -8,6 +8,9 @@ $colors: (
   "research": yellow,
   "production": orange,
 );
+.wrapper-main{
+	width: 100%;
+}
 .wrapper-phase-card{
     display: flex;
     justify-content: center;

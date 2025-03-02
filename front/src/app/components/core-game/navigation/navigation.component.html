@@ -1,9 +1,7 @@
 <nav id="nav"
 	@expandCollapseVertical
 	(@expandCollapseVertical.done)="updateNavHeight()">
-	<div class="wrapper-global-parameter"
-		(mouseenter)="_playerPannelIsHovered=true"
-		(mouseleave)="_playerPannelIsHovered=false">
+	<div class="wrapper-global-parameter">
 		<div class="wrapper-global-ocean">
 			<img src="/assets/other/mars_planet.png" alt="awards here">
 		</div>
@@ -23,10 +21,7 @@
 			*ngIf="_playerPannelIsHovered || !isScrolled || id===clientPlayerId" [playerId]="id"></app-player-pannel>
 		</ng-container>
 	</div>
-	<div class="wrapper-awards ares-background ares ares-border"
-		(mouseenter)="_playerPannelIsHovered=true"
-		(mouseleave)="_playerPannelIsHovered=false">
+	<div class="wrapper-awards ares-background ares ares-border">
 		<h1>awards here</h1>
 	</div>
-
 </nav>

@@ -12,10 +12,10 @@ $player-pannel-width: 60%;
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
-
 }
 .wrapper-player-pannel{
 	width: $player-pannel-width;
+	pointer-events: all;
 }
 .app-player-pannel{
     z-index: 10;
@@ -38,6 +38,7 @@ $player-pannel-width: 60%;
 		display: inline-block;
 		text-align: center;
 	}
+	pointer-events: all;
 }
 .wrapper-global-ocean{
 	height: 100%;
@@ -67,4 +68,5 @@ app-global-parameter-pannel{
 		display: inline-block;
 		text-align: center;
 	}
+	pointer-events: all;
 }

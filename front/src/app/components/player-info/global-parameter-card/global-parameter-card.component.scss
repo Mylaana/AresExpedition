@@ -8,6 +8,8 @@
 	height: 100%;
 }
 .wrapper-icon{
+	position: relative;
+	z-index: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -32,10 +34,11 @@ app-text-with-image{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 3px;
+	justify-content: space-between;
+	//gap: 3px;
 	padding: 1%;
 	padding-left: 2%;
-	padding-right: 1%;
+	padding-right: 2%;
 
 	top: 10%;
 	height: 50%;
@@ -43,15 +46,47 @@ app-text-with-image{
 	border-left: 0;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
+
+	&.purple{
+		box-shadow: 0px 0px 10px 0px purple;
+	}
+	&.red{
+		box-shadow: 0px 0px 10px 0px red;
+	}
+	&.yellow{
+		box-shadow: 0px 0px 10px 0px yellow;
+	}
+	&.white{
+		box-shadow: 0px 0px 10px 0px white;
+	}
 }
 .wrapper-bubble{
+	position: relative;
 	border-radius: 25%;
-	background-color: red;
 	height: 90%;
-	flex-grow: 1;
+
+	&.temperature{
+		width: 6px;
+	}
+	&.oxygen, &.infrastructure{
+		width: floor(75% / 15);
+	}
 	&.current{
-		$color: black;
+		$color: black; //var(--color-ares-green-light);
 		outline: $color 1px solid;
-		outline-offset: 1px;
+		outline-offset: 2px;
+
+	}
+	&.purple{
+		background-color: purple;
+	}
+	&.red{
+		background-color: red;
+	}
+	&.yellow{
+		background-color: yellow;
+	}
+	&.white{
+		background-color: white;
 	}
 }

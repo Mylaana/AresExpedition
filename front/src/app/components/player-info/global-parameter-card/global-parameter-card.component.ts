@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
-import { GlobalParameterName } from '../../../types/global.type';
+import { GlobalParameterColor, GlobalParameterName } from '../../../types/global.type';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class GlobalParameterCardComponent implements OnInit {
 	@Input() parameter!: GlobalParameterName
 	_maxStep: number = 0
-	_currentStep: number = 7
+	_currentStep: number = 0
 	_progressionList!: number[]
 
 	ngOnInit(): void {
@@ -27,7 +27,7 @@ export class GlobalParameterCardComponent implements OnInit {
 				break
 			}
 			case('oxygen'):{
-				this._progressionList = [.01, .02, .03, .04, .05, .06, .07, .08, .09, .1, .11, .12, .13, .14]
+				this._progressionList = [0, .01, .02, .03, .04, .05, .06, .07, .08, .09, .1, .11, .12, .13, .14]
 				this._maxStep = this._progressionList.length
 				break
 			}
@@ -41,5 +41,37 @@ export class GlobalParameterCardComponent implements OnInit {
 				this._maxStep = this._progressionList.length
 			}
 		}
+	}
+	getStepColor(stepCount: number): GlobalParameterColor {
+		switch(this.parameter){
+			case('oxygen'):{
+				switch(true){
+					case(stepCount <= .02):{return 'purple'}
+					case(stepCount <= .06):{return 'red'}
+					case(stepCount <= .11):{return 'yellow'}
+					default:{return 'white'}
+				}
+			}
+			case('infrastructure'):{
+				switch(true){
+					case(stepCount <= .14):{return 'purple'}
+					case(stepCount <= .49):{return 'red'}
+					case(stepCount <= .77):{return 'yellow'}
+					default:{return 'white'}
+				}
+			}
+			case('temperature'):{
+				switch(true){
+					case(stepCount <= -20):{return 'purple'}
+					case(stepCount <= -10):{return 'red'}
+					case(stepCount <= 0):{return 'yellow'}
+					default:{return 'white'}
+				}
+			}
+			default:{return 'purple'}
+		}
+	}
+	getCurrentStepColor(): GlobalParameterColor {
+		return this.getStepColor(this._progressionList[this._currentStep])
 	}
 }

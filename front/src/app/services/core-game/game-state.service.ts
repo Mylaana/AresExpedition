@@ -296,8 +296,8 @@ export class GameState{
 
 	getClientPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPhaseSelected()}
     getClientUpgradedPhaseCards(): PhaseCardModel[] {return this.getClientState().getUpgradedPhaseCards()}
-    getClientHandIdList(): number[] {return this.getClientState().getProjectHandIdList()}
-    getClientHandModelList(): ProjectCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList())}
+    getClientHandIdList(filter?: ProjectFilter): number[] {return this.getClientState().getProjectHandIdList(filter)}
+    getClientHandModelList(filter?: ProjectFilter): ProjectCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList(filter))}
 
     getClientProjectPlayedIdList(): number[] {return this.getPlayerProjectPlayedIdList(this.clientPlayerId)}
 	getPlayerProjectPlayedIdList(playerId: number): number[] {return this.getPlayerStateFromId(playerId).getProjectPlayedIdList()}
