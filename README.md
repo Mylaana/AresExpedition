@@ -2,10 +2,10 @@
 This project is NOT related to Asmodee or Fryxgames and is designed for personnal and non commercial use only.
 
 # In Game Design
-## Interface
-![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen.png)
-## Cards design
-![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/cards%20design.png)
+## Planification Phase
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_planification.png)
+## Construction Phase
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_construction.png)
 
 # Architecture and Concepts
 ## Technologies used :
