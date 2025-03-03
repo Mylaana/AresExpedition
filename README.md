@@ -3,9 +3,9 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 
 # In Game Design
 ## Planification Phase
-![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_planification.png)
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_planification_2.png)
 ## Construction Phase
-![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_construction.png)
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_construction_2.png)
 
 # Architecture and Concepts
 ## Technologies used :
