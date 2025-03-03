@@ -1,7 +1,8 @@
-$player-pannel-width: 60%;
+$player-pannel-width: 55%;
+$nav-gap: 1.5%;
 
 :root {
-	--navbar-height: 0px; /* Valeur par défaut */
+	--navbar-height: 0px;
 }
 
 #nav{
@@ -15,6 +16,7 @@ $player-pannel-width: 60%;
 }
 .wrapper-player-pannel{
 	width: $player-pannel-width;
+	pointer-events: all;
 }
 .app-player-pannel{
     z-index: 10;
@@ -25,22 +27,24 @@ $player-pannel-width: 60%;
     width: 100%;
     left: 0;
 }
-img{
-	height: 50%;
-	aspect-ratio: 1;
-	max-width: 100%;
-	max-height: 100%;
-}
-.wrapper-game-progression{
+.wrapper-global-parameter{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	flex-direction: row;
 	height: 100%;
-	width: calc((95% - $player-pannel-width) / 2);
+	width: calc((100% - $player-pannel-width) / 2 - $nav-gap);
+	//flex-grow: .5;
+	gap: 1%;
 	& > h1 {
 		display: inline-block;
 		text-align: center;
 	}
+	pointer-events: all;
+}
+app-global-parameter-pannel{
+	height: 100%;
+	width: 100%;
 }
 .wrapper-awards{
 	position: sticky;
@@ -49,9 +53,11 @@ img{
 	align-items: center;
 	height: 100%;
 	top: 0;
-	width: calc((95% - $player-pannel-width) / 2);
+	width: calc((100% - $player-pannel-width) / 2 - $nav-gap);
+	//flex-grow: 1;
 	& > h1 {
 		display: inline-block;
 		text-align: center;
 	}
+	pointer-events: all;
 }

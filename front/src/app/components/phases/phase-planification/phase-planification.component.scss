@@ -8,10 +8,13 @@ $colors: (
   "research": yellow,
   "production": orange,
 );
+.wrapper-main{
+	width: 100%;
+}
 .wrapper-phase-card{
     display: flex;
     justify-content: center;
-    gap: 1vw;
+    gap: 3%;
     width: 100%;
     height: auto;
 }
@@ -21,23 +24,34 @@ $colors: (
     align-items: center;
 
     background-color: transparent;
-    max-width: 90%;
+    max-width: 100%;
 }
 .phase-image{
     max-height: 100%;
     max-width: 100%;
 }
 .wrapper-button{
+	$colorOutline: white;//var(--color-ares-orange);
+	$colorShadow: white;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 10%;
     aspect-ratio: 1;
+	box-shadow: 0 0 15px 5px $colorShadow;
+	border-radius: 15px;
+
+	&.selected{
+		box-shadow: 0 0 50px 20px $colorShadow;
+		background-color: $colorShadow;
+		outline-offset: 20px;
+		outline: $colorOutline 1px solid;
+	}
 }
 .wrapper-selected-phase-card{
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 5%;
 }
 .wrapper-phase-card-description{
     height: $card-height;

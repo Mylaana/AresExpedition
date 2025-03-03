@@ -1,0 +1,15 @@
+<div class="main">
+	<div class="background">
+		<img src="/assets/other/mars_planet.png" alt="mars background">
+	</div>
+	<div class="ocean-grid">
+		<div *ngFor="let id of _progressionList" class="ocean" [ngClass]="'--'+id">
+			<div class="shape"
+				[ngClass]="id<=_currentStep?'flipped':'empty'">
+			</div>
+			<div *ngIf="id<=_currentStep" class="shadow"></div>
+		</div>
+	</div>
+	<div class="foreground"><div>
+	</div>
+

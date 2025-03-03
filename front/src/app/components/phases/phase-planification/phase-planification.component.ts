@@ -45,7 +45,7 @@ export class PhasePlanificationComponent {
 			this.createPhaseButtons(phase, playerPhase.previousSelectedPhase!=phase)
 		}
 		this.setPhaseCards()
-		console.log('buttonlist:',this.buttonList)
+		console.log('playerphase: ', playerPhase)
 	}
 	createPhaseButtons(buttonPhase: SelectablePhaseEnum, enabled: boolean): void {
 		let newButton = new ImageButton
@@ -69,7 +69,8 @@ export class PhasePlanificationComponent {
 
 		this.currentPhaseCard = undefined
 	}
-	public ImageButtonClicked(button: ImageButton){
+	public buttonClicked(button: ImageButton){
+		console.log('planif button clicked:', button)
 		if(button.name===undefined){return}
 		this.currentPhaseSelected = button.name
 

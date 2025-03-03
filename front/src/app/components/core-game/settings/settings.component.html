@@ -1,3 +1,11 @@
-<div class="main ares-background ares-border">
+<div class="background"
+	(click)="closeSettingsPannel()">
+</div>
+<div class="inner-window ares-background ares-border">
+	<div class="main">
+		<div class="wrapper-title ares-title">
+			<h1>SETTINGS</h1>
+		</div>
+	</div>
 	<app-non-event-button class="button-close" [button]="closeButton" [shape]="'hex'" (buttonClicked)="closeSettingsPannel()"></app-non-event-button>
 </div>

@@ -6,9 +6,9 @@ $round-width: 3%;
 	--command-pannel-height: 0px;
 }
 #command-pannel {
+	$command-pannel-width: 15%;
 	$command-pannel-height: 100px;
 	$command-pannel-padding: 1%;
-	$command-pannel-width: 15%;
     z-index: 10;
     position: sticky;
     left: 0%; //$round-width;
@@ -137,11 +137,13 @@ $round-width: 3%;
 .wrapper-event-top{
     display: flex;
     flex-direction: row;
-    width: calc(100% - $round-width);
+	justify-content: center;
+	align-items: center;
+    width: calc(100% - var(--settings-button-size));
 	height: auto;
-	margin-left: $round-width;
+	margin-left: calc(var(--settings-button-size) / 2);
+	margin-right: calc(var(--settings-button-size) / 2);
 	margin-top: var(--command-pannel-height);
-    min-height: var(--command-pannel-height);
 }
 .wrapper-builder{
 	position: sticky;

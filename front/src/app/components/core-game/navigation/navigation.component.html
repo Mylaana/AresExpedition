@@ -1,11 +1,8 @@
 <nav id="nav"
 	@expandCollapseVertical
 	(@expandCollapseVertical.done)="updateNavHeight()">
-	<div class="wrapper-game-progression"
-		(mouseenter)="_playerPannelIsHovered=true"
-		(mouseleave)="_playerPannelIsHovered=false">
-		<img src="/assets/other/mars_planet.png" alt="awards here">
-		<h1 class="ares-background ares ares-border">global parameters here</h1>
+	<div class="wrapper-global-parameter">
+		<app-global-parameter-pannel></app-global-parameter-pannel>
 	</div>
 	<div class="wrapper-player-pannel ares-background ares-border"
 		(mouseenter)="_playerPannelIsHovered=true"
@@ -19,10 +16,7 @@
 			*ngIf="_playerPannelIsHovered || !isScrolled || id===clientPlayerId" [playerId]="id"></app-player-pannel>
 		</ng-container>
 	</div>
-	<div class="wrapper-awards ares-background ares ares-border"
-		(mouseenter)="_playerPannelIsHovered=true"
-		(mouseleave)="_playerPannelIsHovered=false">
+	<div class="wrapper-awards ares-background ares ares-border">
 		<h1>awards here</h1>
 	</div>
-
 </nav>

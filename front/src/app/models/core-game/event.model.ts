@@ -20,6 +20,7 @@ export abstract class EventBaseModel {
     waiterId?: number
 
     hasSelector(): boolean {return false}
+	hasCardsToSelectFrom(): boolean {return false}
     hasCardBuilder(): boolean {return false}
     getSelectionActive(): boolean {return false}
 	onSwitch(): void {}
@@ -49,6 +50,9 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
     override hasSelector(): boolean {
         return true
     }
+	override hasCardsToSelectFrom(): boolean {
+		return this.cardSelector.selectFrom.length > 0
+	}
     activateSelection(stateFromParent?:CardState): void {
         this.selectionActive = true
     }

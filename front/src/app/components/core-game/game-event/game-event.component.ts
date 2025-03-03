@@ -91,7 +91,6 @@ export class GameEventComponent {
 	ngAfterViewInit(): void {
 		const commandPannel = this.elRef.nativeElement.querySelector('#command-pannel');
 		if (commandPannel) {
-			console.log('height:', commandPannel.offsetHeight)
 			const commandPannelHeight = commandPannel.offsetHeight;
 			this.elRef.nativeElement.style.setProperty('--command-pannel-height', `${commandPannelHeight}px`);
 		}

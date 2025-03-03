@@ -19,7 +19,6 @@ import { ButtonDesigner } from './services/designers/button-designer.service';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
 import { RxStompService } from './services/websocket/rx-stomp.service';
 import { expandCollapseVertical } from './components/animations/animations';
-import { AfterViewInit } from '@angular/core';
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { SettingsComponent } from './components/core-game/settings/settings.component';
 
@@ -52,13 +51,13 @@ export class AppComponent implements OnInit {
 	loaded: boolean = false
 	@ViewChild('hand') handProjectList!: ProjectCardListComponent
 	isScrolled = false
-
-
 	settingsButton!: NonEventButton;
 
 	_handIsHovered: boolean = false
 	_playerPannelIsHovered: boolean = false
 	_settings: boolean = false
+	_lastScrollY: number = 0
+	_connected: boolean = false
 
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
@@ -99,15 +98,12 @@ export class AppComponent implements OnInit {
 		.subscribe((message: Message) => {
 			this.handleAcknowledgeMessage(message.body)
 		});
+
+		this.rxStompService.connectionState$.subscribe(() => {
+			this._connected = this.rxStompService.connectionState$.getValue() === 1
+		})
 	}
 
-	@HostListener('window:scroll', [])
-	onScroll() {
-		let scrollChanged = window.scrollY > 0;
-		if(window.scrollY === (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight) {console.log('max scroll')}
-		if(scrollChanged === this.isScrolled){return}
-	  	this.isScrolled = window.scrollY > 0;
-	}
 	updateHandOnStateChange(state: PlayerStateModel[]): void {
 		let clientState = this.gameStateService.getClientState()
 		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
@@ -151,12 +147,30 @@ export class AppComponent implements OnInit {
 	public nonEventButtonClicked(button: NonEventButton){
 		switch(button.name){
 			case('settings'):{
-				this._settings = this._settings === false
+				this.openSettings()
 			}
 		}
 	}
+	public openSettings(){
+		this._settings = true
+		document.body.style.overflow = 'hidden'
+	}
 	public closeSettings(){
-		console.log('close settings received')
 		this._settings = false
+		document.body.style.overflow = ''
+	}
+
+	@HostListener('window:keydown', ['$event'])
+	handleKeyDown(event: KeyboardEvent) {
+	  	if (event.key === 'Escape') {
+			if(this._settings){this.closeSettings(); return}
+	  	}
+	}
+	@HostListener('window:scroll', [])
+	onScroll() {
+		let scrollChanged = window.scrollY > 0;
+		if(window.scrollY === (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight) {console.log('max scroll')}
+		if(scrollChanged === this.isScrolled){return}
+	  	this.isScrolled = window.scrollY > 0;
 	}
 }

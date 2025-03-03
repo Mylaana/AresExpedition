@@ -24,6 +24,7 @@ interface QueueMessage {
 export class RxStompService extends RxStomp {
     private messageQueue: QueueMessage[] = []
     private isProcessingQueue = false
+	private connectionState: boolean = false
 
     constructor() {
         super()
@@ -31,6 +32,10 @@ export class RxStompService extends RxStomp {
         this.connected$.subscribe(() => {
             this.onClientConnected()
         })
+		this.connectionState$.subscribe(() => {
+			let state = this.connectionState$.getValue()
+			this.connectionState = state===1
+		})
 
 		this.watch(GLOBAL_WS_ACKNOWLEDGE).subscribe((message) => {
 			this.handleAck(JSON.parse(message.body))

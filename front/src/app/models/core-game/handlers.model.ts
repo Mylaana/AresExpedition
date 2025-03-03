@@ -115,7 +115,7 @@ export class EventHandler {
         //reset currentEvent parameters
 		event.deactivateSelection()
 		let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
-		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList()}
+		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList(event.cardSelector.filter)}
 
 		//check per subType special rules:
 		switch(subType){
