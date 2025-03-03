@@ -1,3 +1,4 @@
+
 .main{
 	position: relative;
 	display: flex;
@@ -35,73 +36,82 @@
 	height: 75%;
 }
 .ocean{
-	$width: 25%;
-	$border-thickness: 2px;
-	$inner-offset: calc($border-thickness / 2);
-
 	display: flex;
 	align-items: center;
 
 	width: 100%;
 	height: 100%;
-
-	.shape{
-		width: 95%;
-		height: 95%;
-		background-color: white;
-		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
+}
+.shape{
+	width: 95%;
+	height: 95%;
+	&.empty{
+		$width: 25%;
+		$border-thickness: 2px;
+		$inner-offset: calc($border-thickness / 2);
+		background: var(--color-ares-blue-dark3);
+		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
 		clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
 	}
+	&.flipped{
+		$width: 25%;
+		$border-thickness: 2px;
+		$inner-offset: calc($border-thickness / 2);
+		background: radial-gradient(var(--color-ares-blue-dark3) 30%, var(--color-ares-blue-dark0));
+		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
+		clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
+	}
 }
-.--0{
+
+.--1{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 3;
 	grid-row-end: 5;
 }
-.--1{
+.--2{
 	grid-column-start: 3;
 	grid-column-end: 6;
 	grid-row-start: 2;
 	grid-row-end: 4;
 }
-.--2{
+.--3{
 	grid-column-start: 5;
 	grid-column-end: 8;
 	grid-row-start: 1;
 	grid-row-end: 3;
 }
-.--3{
+.--4{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 5;
 	grid-row-end: 7;
 }
-.--4{
+.--5{
 	grid-column-start: 3;
 	grid-column-end: 6;
 	grid-row-start: 4;
 	grid-row-end: 6;
 }
-.--5{
+.--6{
 	grid-column-start: 5;
 	grid-column-end: 8;
 	grid-row-start: 3;
 	grid-row-end: 5;
 }
-.--6{
+.--7{
 	grid-column-start: 3;
 	grid-column-end: 6;
 	grid-row-start: 6;
 	grid-row-end: 8;
 }
-.--7{
+.--8{
 	grid-column-start: 5;
 	grid-column-end: 8;
 	grid-row-start: 5;
 	grid-row-end: 7;
 }
-.--8{
+.--9{
 	grid-column-start: 7;
 	grid-column-end: 10;
 	grid-row-start: 4;

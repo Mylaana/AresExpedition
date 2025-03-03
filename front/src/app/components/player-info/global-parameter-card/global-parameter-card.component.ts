@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class GlobalParameterCardComponent implements OnInit {
 	@Input() parameter!: GlobalParameterName
-	_maxStep: number = 0
+	_maxStep!: number
 	_currentStep: number = 5
 	_progressionList!: number[]
 

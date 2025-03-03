@@ -9,5 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './ocean-card.component.scss'
 })
 export class OceanCardComponent {
-
+	_maxStep = 9
+	_currentStep: number = 5
+	_progressionList = [1,2,3,4,5,6,7,8,9]
 }

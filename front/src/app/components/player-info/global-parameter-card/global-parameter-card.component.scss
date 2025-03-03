@@ -79,10 +79,6 @@ app-text-with-image{
 	&.white{
 		background-color: white;
 	}
-	&.current {
-		//border: black solid 1px;
-		//box-shadow: 0 0 3px 0px black;
-	}
 }
 .wrapper-bubble{
 	display: flex;
@@ -101,16 +97,7 @@ app-text-with-image{
 		border: black 1px solid;
 		padding: 1px;
 		border-radius: 25%;
-		//box-shadow: 0 0 5px 0px black;
 		padding-left: 1px;
 		padding-right: 1px;
-		/*
-		& > .bubble{
-			border-radius: 0;
-			width: 100%;
-			height: 100%;
-		}
-			*/
-		//border-style: solid none solid none;
 	}
 }
