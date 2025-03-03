@@ -68,14 +68,15 @@
     & p{
         font-size: 15px;
         font-weight: bold;
-        color: black;      
+        color: black;
     }
 }
 .wrapper-player-name{
     display: flex;
     align-items: center;
     flex-grow: 1;
-    background-color: rgba(red, .3);
+    background-color: var(--color-ares-red);
+	border-radius: 5px;
     height: 100%;
     padding-left: 3%;
 }

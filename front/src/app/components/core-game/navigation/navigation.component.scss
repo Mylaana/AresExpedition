@@ -1,4 +1,5 @@
-$player-pannel-width: 60%;
+$player-pannel-width: 55%;
+$nav-gap: 1.5%;
 
 :root {
 	--navbar-height: 0px;
@@ -32,7 +33,8 @@ $player-pannel-width: 60%;
 	align-items: center;
 	flex-direction: row;
 	height: 100%;
-	width: calc((100% - $player-pannel-width) / 2 - 10px);
+	width: calc((100% - $player-pannel-width) / 2 - $nav-gap);
+	//flex-grow: .5;
 	gap: 1%;
 	& > h1 {
 		display: inline-block;
@@ -51,7 +53,8 @@ app-global-parameter-pannel{
 	align-items: center;
 	height: 100%;
 	top: 0;
-	width: calc((100% - $player-pannel-width) / 2 - 10px);
+	width: calc((100% - $player-pannel-width) / 2 - $nav-gap);
+	//flex-grow: 1;
 	& > h1 {
 		display: inline-block;
 		text-align: center;

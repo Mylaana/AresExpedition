@@ -10,6 +10,6 @@ import { CommonModule } from '@angular/common';
 })
 export class OceanCardComponent {
 	_maxStep = 9
-	_currentStep: number = 5
+	_currentStep: number = 2
 	_progressionList = [1,2,3,4,5,6,7,8,9]
 }
