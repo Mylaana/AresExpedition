@@ -109,8 +109,10 @@ export class AppComponent implements OnInit {
 		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
 		this.playerPlayed = clientState.getProjectPlayedModelList()
 
+		/*
 		if(!this.handProjectList){return}
 		this.handProjectList.updatePlayedCardList(clientState.getProjectPlayedModelList())
+		*/
 	}
 	updatePlayerList(playerIdList: number[]){
 		this.playerIdList = playerIdList

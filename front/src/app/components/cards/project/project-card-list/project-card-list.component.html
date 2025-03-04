@@ -1,4 +1,5 @@
 <div class="wrapper-main">
+	<p>list type : {{listType}}</p>
 	<div class="wrapper-list">
 		<div class="list-mask">
 			<div [class]="'background--'+background"></div>
@@ -6,10 +7,10 @@
 		<div class="wrapper-cards"
 			[ngClass]="listType"
 			[class.hovered]="hovered">
-			<app-project-card #projectCardComponent *ngFor="let card of displayedCards"
-				[stateFromParent]="cardSelector.stateFromParent"
+			<app-project-card #projectCardComponent *ngFor="let card of _displayedCards"
+				[stateFromParent]="_cardSelector.stateFromParent"
 				[projectCard]="card"
-				[initialState]="cardSelector.cardInitialState"
+				[initialState]="_cardSelector.cardInitialState"
 				[buildDiscount]="_buildDiscount"
 				(cardStateChange)="cardStateChange($event)"></app-project-card>
 		</div>

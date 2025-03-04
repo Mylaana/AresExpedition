@@ -15,3 +15,5 @@ export type TriggerLimit = {
     value: number,
     limit: number
 }
+
+export type ProjectListType = 'none' | 'hand' | 'played' | 'selector' | 'builderSelector' | 'builderSelectedZone' | 'playedSelector'

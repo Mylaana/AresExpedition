@@ -40,7 +40,7 @@ text with image component: refactoring
 project card list component : split the component into multiple ones (selector/hand/played)  
 test needs: empty components from the app logic and transfer it into services/classes   
 global: removing obvious comments   
-websocket: finish the game state saving system
+websocket: finish the game state saving system   
 project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service
 

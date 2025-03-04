@@ -220,11 +220,13 @@ export class EventCardBuilder extends EventBaseCardSelector {
     buildDiscountUsed!: boolean
     override hasCardBuilder(): boolean {return true}
     override updateCardSelection(selection: ProjectCardModel[]): void {
+		console.log('update card selection in event builder')
         this.setSelectedCardToBuild(selection[0])
     }
     private setSelectedCardToBuild(card: ProjectCardModel): void {
-        if(this.cardBuilderIdHavingFocus===undefined){return}
+		if(this.cardBuilderIdHavingFocus===undefined){return}
         let activeZone = this.cardBuilder[this.cardBuilderIdHavingFocus]
+        console.log('focus ID:', this.cardBuilderIdHavingFocus, card)
         activeZone.setSelectedCard(card)
         this.removeCardFromSelector(card)
         this.deactivateSelection()

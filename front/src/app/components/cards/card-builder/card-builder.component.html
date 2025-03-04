@@ -2,7 +2,14 @@
 	<div class="wrapper-card-builder ares-background ares-border">
 		<div class="inner-decoration--side"></div>
 		<div class="selected-card-zone" [ngClass]="'filter-type-'+projectFilterType">
-			<app-project-card-list *ngIf="cardBuilder.getSelectedCard()!=undefined" class="play-card-zone-list" [cardList]="[cardBuilder.getSelectedCard()]"></app-project-card-list>
+			<app-project-card-list
+				*ngIf="cardBuilder.getSelectedCard()!=undefined"
+				class="play-card-zone-list"
+				[cardList]="[cardBuilder.getSelectedCard()]"
+				[listType]="'builderSelectedZone'"
+				[event]="event"
+				[selectedDiscount]="discount">
+			</app-project-card-list>
 		</div>
 		<div class="wrapper-buton-zone">
 			<div class="wrapper-buttons">

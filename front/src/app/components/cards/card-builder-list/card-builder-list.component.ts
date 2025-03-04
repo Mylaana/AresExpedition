@@ -18,7 +18,6 @@ export class CardBuilderListComponent implements OnInit{
   @Input() event!: EventBaseModel
   @Input() eventId!: number
   @Output() eventCardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
-  //@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
 
   currentEvent!: EventCardBuilder
   ngOnInit(): void {
@@ -34,7 +33,6 @@ export class CardBuilderListComponent implements OnInit{
   }
   updateEvent(): void {
     this.currentEvent = this.event as EventCardBuilder
-	console.log('event:', this.event)
   }
   public cardBuilderListButtonClicked(button:EventCardBuilderButton): void {
     this.currentEvent.cardBuilderIdHavingFocus = button.parentCardBuilderId

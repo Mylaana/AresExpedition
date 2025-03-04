@@ -17,6 +17,7 @@ import { EventMainButtonComponent } from "../../tools/button/event-main-button.c
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { expandCollapseVertical, enterFromLeft } from '../../animations/animations';
+import { ProjectListType } from '../../../types/project-card.type';
 
 //this component is the main controller, and view
 
@@ -143,7 +144,9 @@ export class GameEventComponent {
 	public buttonClicked(button: ButtonBase) {
 		console.log('game event button clicked:', button)
 	}
-	public updateSelectedCardList(cardList: ProjectCardModel[]){this.eventHandler.updateSelectedCardList(cardList)}
+	public updateSelectedCardList(input: {selected: ProjectCardModel[], listType: ProjectListType}){
+		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+	}
 	public nonEventButtonClicked(button: NonEventButton){
 		switch(button.name){
 			case('sellOptionalCard'):{

@@ -24,7 +24,7 @@ import { GlobalInfo } from '../../../../services/global/global-info.service';
 })
 export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
-	@Input() buildDiscount!: number
+	@Input() buildDiscount: number = 0
 	//clientPlayerId!: number
 	//ressourceState: RessourceInfo[] = []
 	//projectCardState!: ProjectCardState

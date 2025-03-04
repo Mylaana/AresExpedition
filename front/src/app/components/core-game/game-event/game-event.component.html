@@ -45,11 +45,11 @@
 				<div class="wrapper-card-selector" >
 					<app-project-card-list #cardListSelector
 						[currentPhase]="currentPhase"
-						[cardListId]="'game event list'"
 						[event]="currentEvent"
 						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
 						(updateSelectedCardList)="updateSelectedCardList($event)">
 					</app-project-card-list>
+					<!--[cardListId]="'game event list'"-->
 				</div>
 				<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [event]="currentEvent"></app-phase-card-upgrade-selector>
 			</div>

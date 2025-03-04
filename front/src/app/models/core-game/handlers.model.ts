@@ -13,6 +13,7 @@ import { DrawEventDesigner } from "../../services/designers/draw-event-designer.
 import { Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { ProjectListType } from "../../types/project-card.type";
 
 @Injectable()
 export class EventHandler {
@@ -70,9 +71,23 @@ export class EventHandler {
 			}
 		}
 	}
-	public updateSelectedCardList(selection: ProjectCardModel[]): void {
-		let event = this.currentEvent as EventCardSelector
-		event.updateCardSelection(selection)
+	public updateSelectedCardList(selected: ProjectCardModel[], listType: ProjectListType): void {
+		console.log('list selection update, type: ', listType)
+		switch(listType){
+			case('selector'):{
+				console.log('selected cards update:', selected)
+				let event = this.currentEvent as EventCardSelector
+				event.updateCardSelection(selected)
+				break
+			}
+			case('builderSelector'):{
+				let event = this.currentEvent as EventCardBuilder
+				event.updateCardSelection(selected)
+				break
+			}
+			default:{
+			}
+		}
 	}
 	public cancelSellCardsOptional(): void {
 		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
