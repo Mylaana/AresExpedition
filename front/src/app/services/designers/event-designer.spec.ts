@@ -162,6 +162,7 @@ describe('Service - Designers - Event', () => {
             })
             it('should create a selectCardOptionalSell selector Event', () => {
                 expectedSubType = 'selectCardOptionalSell'
+				expectedEvent.title = 'Select any number of cards to sell'
                 expectedEvent.subType = expectedSubType
 				expectedSelector.selectionQuantity = 1
 				expectedSelector.selectionQuantityTreshold = 'min'
@@ -179,7 +180,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.subType = expectedSubType
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
-                expectedEvent.title = 'Activate cards :'
+                expectedEvent.title = 'Activate cards'
                 expectedEvent.cardSelector.filter = {type:"action"}
 
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
@@ -341,7 +342,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.cardSelector.cardInitialState = {selectable: false, buildable: true}
                 expectedEvent.refreshSelectorOnSwitch = false
                 expectedEvent.buildDiscountUsed = false
-                expectedEvent.title = 'Play Blue or Red cards:'
+                expectedEvent.title = 'Play Blue or Red cards'
                 expectedEvent.refreshSelectorOnSwitch = true
                 expectedEvent.button = undefined
                 expectedEvent.cardSelector.filter = {type:'construction'}
