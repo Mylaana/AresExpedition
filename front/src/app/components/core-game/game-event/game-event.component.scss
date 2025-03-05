@@ -138,7 +138,7 @@ $round-width: 3%;
     display: flex;
     flex-direction: row;
 	justify-content: center;
-	align-items: center;
+	align-items: top;
     width: calc(100% - var(--settings-button-size));
 	height: auto;
 	margin-left: calc(var(--settings-button-size) / 2);
@@ -147,7 +147,7 @@ $round-width: 3%;
 }
 .wrapper-builder{
 	position: sticky;
-	top: calc(var(--navbar-height));
+	top: calc(var(--navbar-height) + var(--command-pannel-height));
 	$padding: 0%;
 
 	display: flex;

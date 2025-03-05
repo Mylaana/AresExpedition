@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventBaseModel, EventCardBuilder, CardBuilder } from '../../../models/core-game/event.model';
 import { ProjectCardListComponent } from '../project/project-card-list/project-card-list.component';
@@ -18,7 +18,7 @@ import { ProjectFilterType } from '../../../types/project-card.type';
 	templateUrl: './card-builder.component.html',
 	styleUrl: './card-builder.component.scss'
 })
-export class CardBuilderComponent implements OnInit{
+export class CardBuilderComponent{
 	@Input() cardBuilder!: CardBuilder
 	@Input() option!: CardBuilderOptionType
 	@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
@@ -31,8 +31,5 @@ export class CardBuilderComponent implements OnInit{
 
 	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
 		this.cardBuilderListButtonClicked.emit(button)
-	}
-	ngOnInit(): void {
-		//console.log('the builder:',this.cardBuilder, 'option:', this.option,'event:', this.event, "filter:", this.projectFilterType)
 	}
 }

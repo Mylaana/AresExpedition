@@ -11,7 +11,8 @@
 				[selectedDiscount]="discount">
 			</app-project-card-list>
 		</div>
-		<div class="wrapper-buton-zone">
+		<div class="wrapper-buton-zone"
+			*ngIf="!cardBuilder.getbuilderIsLocked()">
 			<div class="wrapper-buttons">
 				<div *ngIf="cardBuilder.getButtons()[0].enabled || cardBuilder.getButtons()[1].enabled" class="wrapper-select-button">
 					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].enabled" [button]="cardBuilder.getButtons()[0]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>

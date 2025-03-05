@@ -9,19 +9,19 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 
 # Architecture and Concepts
 ## Technologies used :
-Frontend: Angular 17
-Backend: Java 23
-API: Java Spring Boot, websocket STOMP
-Misc: script in Python  
+Frontend: Angular 17   
+Backend: Java 23   
+API: Java Spring Boot, websocket STOMP   
+Misc: script in Python   
 
 ## Testing
-Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%
-Backend: Junit  
+Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%   
+Backend: Junit   
 
 ## Architecture & Design pattern
-- MVC: game-event-component and its handlers being the 'main' controller, game-state-service being the main model  
-- Event Driven Architecture: RXJS and a custom event pile for frontend.  
-- STOMP over Websocket: connection between clients and server for fast two-ways communication.
+- MVC: game-event-component and its handlers being the 'main' controller, game-state-service being the main model   
+- Event Driven Architecture: RXJS and a custom event pile for frontend.   
+- STOMP over Websocket: connection between clients and server for fast two-ways communication.   
 
 ## CI/CD
 ### CI
@@ -35,18 +35,17 @@ Backend: Junit
 
 # WIP : 
 ## Refactoring :
-gameEventComponent: add Lockpile control   
 text with image component: refactoring   
 test needs: empty components from the app logic and transfer it into services/classes   
 global: removing obvious comments   
-websocket: finish the game state saving system   
 project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service
 
 ## /!\BUG/!\ :
 Card builder: when first card selected but not yet build, selecting a card in other builder resets first button states but keeps card in.   
-Builder locked should still show buttons   
 Expression had changed error when discount applied to builder card   
+Game is locked after researching cards   
+Phase card description not working after phase selected in planification phase   
 
 
 ## New features :
@@ -59,6 +58,8 @@ Discard Event should "lock" the Sell card button while being resolved
 Prerequisites for playing project cards feature
 
 ## Misc
+gameEventComponent: add Lockpile control   
+websocket: finish the game state saving system   
 Global parameter increase applied at EOT  
 Lakes feature
 
