@@ -79,7 +79,6 @@ export class CardBuilder {
 	private selectedCard!: ProjectCardModel | undefined
 	private cardInitialState?: CardState
     private buttons: EventCardBuilderButton[] = []
-    //private Id!: number
     private option!: CardBuilderOptionType
     private builderIsLocked: boolean = false
 
@@ -231,7 +230,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.removeCardFromSelector(card)
         this.deactivateSelection()
         this.cardSelector.stateFromParent = {selectable: false}
-        //activeZone.updateButtonGroupState('selectCard')
     }
     private removeCardFromSelector(card: ProjectCardModel): void {
         for(let i=0; i<this.cardSelector.selectFrom.length; i++){
@@ -267,9 +265,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
 				break
             }
 			case('discardSelectedCard'):{
-                let card = activeZone.getSelectedCard()
-                if(card===undefined){break}
-                this.cardSelector.selectFrom.push(card)
+				this.discardBuilderSelectedCard(this.cardBuilderIdHavingFocus)
                 break
             }
         }
@@ -279,10 +275,19 @@ export class EventCardBuilder extends EventBaseCardSelector {
         if(button.name==='selectCard'){return}
         this.cardSelector.stateFromParent = {selectable:false, buildable:false}
     }
+	private discardBuilderSelectedCard(builderId: number){
+		let targetBuilder = this.cardBuilder[builderId]
+		let card = targetBuilder.getSelectedCard()
+		if(card===undefined){return}
+		this.cardSelector.selectFrom.push(card)
+	}
 	private resetNonFocusedBuildersState(){
 		for(let i=0; i<this.cardBuilder.length; i++){
 			if(i===this.cardBuilderIdHavingFocus){continue}
-			this.cardBuilder[i].resetButtons()
+			//this.cardBuilder[i].resetButtons()
+			this.discardBuilderSelectedCard(i)
+			this.cardBuilder[i].resetBuilder()
+			break
 		}
 	}
     private setSelectionOnButtonClick(button: EventCardBuilderButton): void {

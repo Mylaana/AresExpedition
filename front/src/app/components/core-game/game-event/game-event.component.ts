@@ -163,8 +163,11 @@ export class GameEventComponent {
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){
 		this.eventHandler.cardBuilderButtonClicked(button)
-		if(button.name==='buildCard'){
-			this.cardListSelector.updateDiscount(this.currentEvent as EventCardBuilder)
+		switch(button.name){
+			case('buildCard'):{
+				this.cardListSelector.updateDiscount(this.currentEvent as EventCardBuilder)
+				break
+			}
 		}
 	}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}

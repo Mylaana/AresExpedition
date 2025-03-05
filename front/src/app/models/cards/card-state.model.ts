@@ -35,7 +35,9 @@ export class CardStateModel {
 	resetStateToInitial(): void {this.currentState = Utils.jsonCopy(this.initialState)}
 
 	getCurrentState(): CardState {return this.currentState}
-	setCurrentState(state: Partial<CardState>): void {this.currentState = Utils.toFullCardState(state)}
+	setCurrentState(state: Partial<CardState>): void {
+		this.currentState = Utils.toFullCardState(state)
+	}
 	getInitialState(): CardState {return this.initialState}
 	setInitialState(state: Partial<CardState>): void {
 		this.initialState = Utils.toFullCardState(state)

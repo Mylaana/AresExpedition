@@ -1,129 +1,136 @@
-<div class="wrapper-selection-border"
-	[class.selected]="state.isSelected()"
-	[ngClass]="(state.isBuildable()===false && state.isSelectable()===true && state.isIgnoreCost()!=true)? 'disabled':''">
-    <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, ((state.isSelectable()===true && state.isBuildable()===true) || (state.isSelectable()===true && !state.isBuildable()) || state.isIgnoreCost())? 'element-selectable': '', state.isSelected()!=true? 'selected':'']">
-        <div class="wrapper-card-grid">
-            <div class="grid-box-cost">
-                <div class="wrapper-cost">
-                    <div class="wrapper-cost-image">
-                        <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
-                    </div>
-                    <div class="wrapper-cost-value">
-                    </div>
-                </div>
-                <div *ngIf="projectCard.cost!=projectCard.costInitial" class="wrapper-cost cost-mod">
-                    <div class="wrapper-cost-image">
-                        <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
-                    </div>
-                    <div class="wrapper-cost-value">
-                        <p>{{projectCard.cost}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-box-title">
-                <p>{{projectCard.title}}</p>
-            </div>
-            <div class="grid-box-main">
-                <div *ngIf="projectCard.prerequisiteText" class="wrapper-prerequisite">
-                    <div class="prerequisite-summary-Text" [ngClass]="projectCard.prerequisiteTresholdType">
-                        <app-text-with-image *ngIf="projectCard.prerequisiteSummaryText" [rawText]="projectCard.prerequisiteSummaryText"></app-text-with-image>
-                    </div>
-                    <div class="prerequisite-text shadowed-text">
-                        <app-text-with-image *ngIf="projectCard.prerequisiteText" [rawText]="projectCard.prerequisiteText"></app-text-with-image>
-                    </div>
-                </div>
-                <div class="wrapper-played-vp">
-                    <div *ngIf="projectCard.playedText" class="wrapper-played ">
-                        <div class="played-icon">
-                            <img src="/assets/other/played.png" alt="played image">
-                        </div>
-                        <div  class="wrapper-played-text shadowed-text">
-                            <app-text-with-image [rawText]="projectCard.playedText"></app-text-with-image>
-                        </div>
-                    </div>
+<div class="wrapper-main">
+	<img class='selected-sell-image' *ngIf="state.isSelected() && parentListType==='selector'" src="/assets/other/cancel.png" alt="">
+	<div class="wrapper-selection-border"
+		[class.selected]="state.isSelected()"
+		[class]="parentListType"
+		[ngClass]="(state.isBuildable()===false && state.isSelectable()===true && state.isIgnoreCost()!=true)? 'disabled':''">
+		<button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, ((state.isSelectable()===true && state.isBuildable()===true) || (state.isSelectable()===true && !state.isBuildable()) || state.isIgnoreCost())? 'element-selectable': '', state.isSelected()!=true? 'selected':'']">
+			<div class="wrapper-card-grid">
+				<div class="grid-box-cost">
+					<div class="wrapper-cost">
+						<div class="wrapper-cost-image">
+							<img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
+						</div>
+						<div class="wrapper-cost-value">
+						</div>
+					</div>
+					<div *ngIf="projectCard.cost!=projectCard.costInitial" class="wrapper-cost cost-mod">
+						<div class="wrapper-cost-image">
+							<img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
+						</div>
+						<div class="wrapper-cost-value">
+							<p>{{projectCard.cost}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="grid-box-title">
+					<p>{{projectCard.title}}</p>
+				</div>
+				<div class="grid-box-main">
+					<div *ngIf="projectCard.prerequisiteText" class="wrapper-prerequisite">
+						<div class="prerequisite-summary-Text" [ngClass]="projectCard.prerequisiteTresholdType">
+							<app-text-with-image *ngIf="projectCard.prerequisiteSummaryText" [rawText]="projectCard.prerequisiteSummaryText"></app-text-with-image>
+						</div>
+						<div class="prerequisite-text shadowed-text">
+							<app-text-with-image *ngIf="projectCard.prerequisiteText" [rawText]="projectCard.prerequisiteText"></app-text-with-image>
+						</div>
+					</div>
+					<div class="wrapper-played-vp">
+						<div *ngIf="projectCard.playedText" class="wrapper-played ">
+							<div class="played-icon">
+								<img src="/assets/other/played.png" alt="played image">
+							</div>
+							<div  class="wrapper-played-text shadowed-text">
+								<app-text-with-image [rawText]="projectCard.playedText"></app-text-with-image>
+							</div>
+						</div>
 
-                    <div *ngIf="projectCard.vpNumber && !projectCard.playedText"><span></span></div>
-                    <div *ngIf="projectCard.vpNumber" class="wrapper-vp">
-                        <div *ngIf="projectCard.vpText" class="grid-box-vp-text shadowed-text">
-                            <app-text-with-image [rawText]="projectCard.vpText"></app-text-with-image>
-                        </div>
-                        <div class="grid-box-vp-icon">
-                            <div class="wrapper-vp-icon">
-                                <div class="vp-icon">
-                                    <p>{{projectCard.vpNumber}}</p>
-                                </div>
-                                <div class="wrapper-vp-background">
-                                    <div class="layout-vp-left"></div>
-                                    <div class="layout-vp-right"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="projectCard.cardSummaryType" class="grid-box-effect">
-                <div class="wrapper-effect-summary-border">
-                    <div class="effect-summary-top-shape"></div>
-                    <div class="effect-summary-bottom-shape"></div>
-                    <div class="wrapper-effect-summary">
-                        <div class="effect-summary-foreground-radial-white" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
-                        <div class="effect-summary-background-radial-grid" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
-                        <div class="effect-summary-background"
-                            [ngClass]="{'effect-summary-background-production': projectCard.cardSummaryType==='production',
-                                        'effect-summary-background-action': projectCard.cardSummaryType==='action',
-                                        'effect-summary-background-grey-production':projectCard.cardSummaryType==='greyProduction',
-                                        'effect-summary-background-trigger':projectCard.cardSummaryType==='trigger'}">
-                        </div>
-                        <div class="effect-summary-text">
-                            <app-text-with-image *ngIf="projectCard.effectSummaryText" [rawText]="projectCard.effectSummaryText"></app-text-with-image>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-box-effect-text">
-                <div *ngIf="projectCard.effectText" class="shadowed-text">
-                    <app-text-with-image class="white-text" [rawText]="projectCard.effectText"></app-text-with-image>
-                </div>
+						<div *ngIf="projectCard.vpNumber && !projectCard.playedText"><span></span></div>
+						<div *ngIf="projectCard.vpNumber" class="wrapper-vp">
+							<div *ngIf="projectCard.vpText" class="grid-box-vp-text shadowed-text">
+								<app-text-with-image [rawText]="projectCard.vpText"></app-text-with-image>
+							</div>
+							<div class="grid-box-vp-icon">
+								<div class="wrapper-vp-icon">
+									<div class="vp-icon">
+										<p>{{projectCard.vpNumber}}</p>
+									</div>
+									<div class="wrapper-vp-background">
+										<div class="layout-vp-left"></div>
+										<div class="layout-vp-right"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div *ngIf="projectCard.cardSummaryType" class="grid-box-effect">
+					<div class="wrapper-effect-summary-border">
+						<div class="effect-summary-top-shape"></div>
+						<div class="effect-summary-bottom-shape"></div>
+						<div class="wrapper-effect-summary">
+							<div class="effect-summary-foreground-radial-white" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
+							<div class="effect-summary-background-radial-grid" [ngClass]="projectCard.cardSummaryType" *ngIf="projectCard.cardSummaryType==='action' || projectCard.cardSummaryType==='trigger'"></div>
+							<div class="effect-summary-background"
+								[ngClass]="{'effect-summary-background-production': projectCard.cardSummaryType==='production',
+											'effect-summary-background-action': projectCard.cardSummaryType==='action',
+											'effect-summary-background-grey-production':projectCard.cardSummaryType==='greyProduction',
+											'effect-summary-background-trigger':projectCard.cardSummaryType==='trigger'}">
+							</div>
+							<div class="effect-summary-text">
+								<app-text-with-image *ngIf="projectCard.effectSummaryText" [rawText]="projectCard.effectSummaryText"></app-text-with-image>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="grid-box-effect-text">
+					<div *ngIf="projectCard.effectText" class="shadowed-text">
+						<app-text-with-image class="white-text" [rawText]="projectCard.effectText"></app-text-with-image>
+					</div>
 
-            </div>
-            <div class="grid-box-tag">
-                <div class="wrapper-tag-zone">
-                    <div *ngFor="let tag of projectCard.tagsUrl" class="wrapper-tag">
-                        <div class="tag-zone-mask">
-                            <div class="tag-zone" [ngClass]="projectCard.cardType"></div>
-                        </div>
-                        <div class="tag-icon" [ngClass]="projectCard.cardType">
-                            <img *ngIf="tag" [src]="tag" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="wrapper-left-layout">
-            <div class="left-layout" [ngClass]="projectCard.cardType"></div>
-            <div class="top-left-layout" [ngClass]="projectCard.cardType"></div>
-        </div>
-        <div class="wrapper-background-layout">
-            <app-layout-card-background-hexagons></app-layout-card-background-hexagons>
-        </div>
-    </button>
+				</div>
+				<div class="grid-box-tag">
+					<div class="wrapper-tag-zone">
+						<div *ngFor="let tag of projectCard.tagsUrl" class="wrapper-tag">
+							<div class="tag-zone-mask">
+								<div class="tag-zone" [ngClass]="projectCard.cardType"></div>
+							</div>
+							<div class="tag-icon" [ngClass]="projectCard.cardType">
+								<img *ngIf="tag" [src]="tag" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="wrapper-left-layout">
+				<div class="left-layout" [ngClass]="projectCard.cardType"></div>
+				<div class="top-left-layout" [ngClass]="projectCard.cardType"></div>
+			</div>
+			<div class="wrapper-background-layout">
+				<app-layout-card-background-hexagons></app-layout-card-background-hexagons>
+			</div>
+		</button>
+	</div>
 </div>
 
 <div *ngIf="state.isActivable()===true" class="wrapper-activation">
     <button  (click)="activate(1)" class="validation-button">Activate</button>
     <button  (click)="activate(2)" class="validation-button">Activate again</button>
 </div>
+
 <!--
 <p>{{projectCard.id}} {{projectCard.cardCode}}</p>
 <p>{{projectCard.stock | json}}</p>
 <p>{{projectCard.stockable | json}}</p>
 <p>current: {{state.getCurrentState().buildable| json}}</p>
-<p>initial: {{initialState?.buildable | json}}</p>
-<p>parent: {{stateFromParent?.buildable | json}}</p>
-<p>{{state.isSelected()}}</p>
-<p>{{state.isSelectable()}}</p>
+<p>selected: {{state.isSelected()}}</p>
+<p>selectable: {{state.isSelectable()}}</p>
+<p>buildable: {{state.isBuildable()}}</p>
+<p>ignorecost: {{state.isIgnoreCost()}}</p>
 <p>initial selectable: {{initialState?.selectable| json}}</p>
 <p>initial ignore cost: {{initialState?.ignoreCost| json}}</p>
+<p>initial buildable: {{initialState?.buildable | json}}</p>
 <p>parent selectable: {{stateFromParent?.selectable | json}}</p>
 <p>parent ignore cost: {{stateFromParent?.ignoreCost | json}}</p>
+<p>parent buildable: {{stateFromParent?.buildable | json}}</p>
 -->

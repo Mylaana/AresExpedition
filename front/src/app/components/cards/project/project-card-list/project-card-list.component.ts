@@ -23,7 +23,7 @@ const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builder
 export class ProjectCardListComponent implements OnChanges{
 	@Input() event?: EventBaseModel;
 	@Input() eventId?: number;
-	@Input() cardList!: ProjectCardModel[] //takes display priority
+	@Input() cardList!: ProjectCardModel[]
 	@Input() listType: ProjectListType = 'none'
 	@Input() selectedDiscount: number = 0
 
@@ -48,7 +48,10 @@ export class ProjectCardListComponent implements OnChanges{
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['event'] && changes['event'].currentValue) {this.updateCardList(); return}
 		if (changes['eventId'] && changes['eventId'].currentValue) {this.updateCardList(); return}
-		if (changes['cardList'] && changes['cardList'].currentValue) {this.updateCardList(); return}
+		if (changes['cardList'] && changes['cardList'].currentValue) {
+			this.updateCardList()
+			return
+		}
 	}
 	private setBackground(): void{
 		switch(this.listType){
@@ -98,7 +101,6 @@ export class ProjectCardListComponent implements OnChanges{
 			}
 			case('selector'):case('playedSelector'):{
 				this._displayedCards = this._cardSelector.selectFrom
-				console.log('list event:', this.event)
 				break
 			}
 			default:{
@@ -128,5 +130,6 @@ export class ProjectCardListComponent implements OnChanges{
 	private resetSelectedCardList(): void {
 		this._selectedCardList = []
 	}
+
 }
 

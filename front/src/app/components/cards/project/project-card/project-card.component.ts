@@ -8,6 +8,7 @@ import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
+import { ProjectListType } from '../../../../types/project-card.type';
 
 
 @Component({
@@ -25,6 +26,7 @@ import { GlobalInfo } from '../../../../services/global/global-info.service';
 export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
 	@Input() buildDiscount: number = 0
+	@Input() parentListType: ProjectListType = 'none'
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
 	readonly tagNumber = 3;
@@ -69,12 +71,9 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		return newTagsId
 	}
 	cardClick(){
-		console.log('card clicked:', this.state)
 		if(this.state.isSelectable()!=true){return}
 		if(this.state.isBuildable()===false && this.state.isIgnoreCost()!=true){return}
-		console.log('new selected: ',this.state.isSelected()===false);
 		this.state.setSelected(this.state.isSelected()===false)
-		console.log('card clicked:', this.state.isSelected())
 		this.cardStateChange.emit({card:this.projectCard, state: this.state})
 	}
 	private updateClientState(state: PlayerStateModel): void {

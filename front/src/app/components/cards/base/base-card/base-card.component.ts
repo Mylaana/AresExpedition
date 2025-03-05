@@ -38,11 +38,6 @@ export abstract class BaseCardComponent implements OnInit, OnChanges{
 			this.changeStateFromParent()
 		}
 	}
-	/*
-	ngDoCheck(): void {
-		if(this.initialState!=undefined){this.state.resetStateToInitial()}
-		if(this.stateFromParent!=undefined){this.changeStateFromParent()}
-	}*/
 	changeStateFromParent():void{
 		if(!this.stateFromParent){return}
 		this.state.setCurrentState(this.stateFromParent)

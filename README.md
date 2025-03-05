@@ -42,10 +42,11 @@ project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service
 
 ## /!\BUG/!\ :
-Card builder: when first card selected but not yet build, selecting a card in other builder resets first button states but keeps card in.   
 Expression had changed error when discount applied to builder card   
 Game is locked after researching cards   
 Phase card description not working after phase selected in planification phase   
+Project card initial cost disapeared
+Retractable hand not scaling height when hand.size > 7 (therefore hiding cards)
 
 
 ## New features :

@@ -36,6 +36,11 @@ button {
     width: 100%;
     padding: calc($text-size / 8);
 }
+.wrapper-main{
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
 .wrapper-card{
     z-index: 0;
     position: relative;
@@ -56,7 +61,8 @@ button {
     }
 }
 .wrapper-selection-border{
-    z-index: -1;
+	position: relative;
+    z-index: 0;
     $selection-offset: 0px;
     border-radius: calc((var(--card-height) + $selection-offset)* .05);
     height: calc(var(--card-height) + $selection-offset);
@@ -67,10 +73,10 @@ button {
 
 	border: 0;
 
-	&.selected{
-		outline: red solid 2px;
-		outline-offset: 5px;
+	&.selected.selector{
+		filter: grayscale(100%);
 	}
+
 }
 .wrapper-card-grid{
     z-index: 1;
@@ -795,4 +801,15 @@ button {
 }
 .disabled{
 	filter: grayscale(100%);
+}
+.selected-sell-image{
+	z-index: 10;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	opacity: 70%;
+
 }
