@@ -98,12 +98,12 @@ $round-width: 3%;
 .selection-active-left{
     height: 100%;
     width: 2%;
-    background: linear-gradient(to right, var(--color-ares-blue), rgba(255, 255, 255, 0))
+    background: linear-gradient(to right, white, rgba(255, 255, 255, 0))
 }
 .selection-active-right{
     height: 100%;
     width:2%;
-    background: linear-gradient(to left, var(--color-ares-blue), rgba(255, 255, 255, 0))
+    background: linear-gradient(to left, white, rgba(255, 255, 255, 0))
 }
 .wrapper-event-button{
 	height: 100%;
