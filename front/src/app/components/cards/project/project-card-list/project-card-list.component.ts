@@ -9,6 +9,8 @@ import { Utils } from '../../../../utils/utils';
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { ProjectListType } from '../../../../types/project-card.type';
 
+const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
+
 @Component({
   selector: 'app-project-card-list',
   standalone: true,
@@ -39,6 +41,7 @@ export class ProjectCardListComponent implements OnChanges{
 	private _selectedCardList: ProjectCardModel[] = [];
 
 	ngOnInit(){
+		this.resetSelector()
 		this.updateCardList()
 		this.setBackground()
 	}
@@ -58,11 +61,13 @@ export class ProjectCardListComponent implements OnChanges{
 			selectFrom: [],
 			selectedList: [],
 			selectionQuantity: 0,
-			selectionQuantityTreshold: 'equal'
+			selectionQuantityTreshold: 'equal',
+			cardInitialState: Utils.toFullCardState({selected:false, selectable:false}),
+			stateFromParent : Utils.toFullCardState({selected:false, selectable:false})
 		}
 	}
 	public cardStateChange(cardChange: {card: ProjectCardModel, state:CardState}): void {
-		this.resetCardList()
+		this.resetSelectedCardList()
 		for(let card of this.projectCards){
 			if(card.state.isSelected()===true){
 				this._selectedCardList.push(card.projectCard)
@@ -72,18 +77,14 @@ export class ProjectCardListComponent implements OnChanges{
 	}
 	private setSelector(): void {
 		this.resetSelector()
-
-		switch(this.listType){
-			case('selector'):case('playedSelector'):case('builderSelector'):{
-				this.setSelectorFromEvent(this.event as EventCardSelector)
-			}
+		if(selectorTypes.includes(this.listType)){
+			this.setSelectorFromEvent(this.event as EventCardSelector)
 		}
 	}
 	private setSelectorFromEvent(event: EventCardSelector): void {
 		this._cardSelector = event.cardSelector
 	}
 	private setDisplay(): void {
-		//console.log('set display:', this.listType, this.cardList, this._cardSelector??undefined, this.event)
 		switch(this.listType){
 			case('builderSelector'):{
 				this.applyDiscount(this.event as EventCardBuilder)
@@ -93,10 +94,11 @@ export class ProjectCardListComponent implements OnChanges{
 			case('builderSelectedZone'):{
 				this.applyDiscount()
 				this._displayedCards = this.cardList
-				return
+				break
 			}
 			case('selector'):case('playedSelector'):{
 				this._displayedCards = this._cardSelector.selectFrom
+				console.log('cardlist selector:',this._cardSelector,'cardlist:',this.cardList,'cardlist event:',this.event)
 				break
 			}
 			default:{
@@ -105,14 +107,11 @@ export class ProjectCardListComponent implements OnChanges{
 		}
 	}
 	private applyDiscount(event?: EventCardBuilder): void {
-		console.log('update discount called:', this.listType)
 		this._buildDiscount = event?.buildDiscountValue??0 + this.selectedDiscount??0
-
 		this.childrenUpdateCost()
 	}
 	private childrenUpdateCost(): void {
 		if(this.projectCards===undefined){return}
-
 		for(let card of this.projectCards){
 			card.updateCost()
 		}
@@ -121,15 +120,12 @@ export class ProjectCardListComponent implements OnChanges{
 		this.applyDiscount(event)
 	}
 	private updateCardList(): void {
-		if(['selector', 'playedSelector', 'buildSelector'].indexOf(this.listType)){this.setSelector()}
+		if(selectorTypes.includes(this.listType)){this.setSelector()}
 		this.setDisplay()
 
 		if(this._displayedCards!=undefined && this._displayedCards.length===0){this._displayedCards=undefined}
-		if(this._cardSelector.cardInitialState===undefined){
-			this._cardSelector.cardInitialState= Utils.toFullCardState({selected:false, selectable:false})
-		}
 	}
-	private resetCardList(): void {
+	private resetSelectedCardList(): void {
 		this._selectedCardList = []
 	}
 }

@@ -91,7 +91,7 @@ export class EventHandler {
 	}
 	public cancelSellCardsOptional(): void {
 		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
-		this.finishEventEffect()
+		this.cancelCurrentEvent()
 	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
@@ -388,6 +388,10 @@ export class EventHandler {
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}
 		}
+	}
+	private cancelCurrentEvent(): void {
+		this.currentEvent.finalized = true
+		this.checkFinalized()
 	}
 	private resolveWaiters(eventQueue: EventBaseModel[]){
 		let newWaiters: number[] = []
