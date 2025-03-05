@@ -42,7 +42,7 @@ export class ButtonDesigner{
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='$other_validate$';break}
             case('addRessourceToSelectedCard'):{caption='Add ressources';break}
             case('actionPhase'):{caption='$other_validate$';break}
-            case('researchPhaseResult'):{caption='Research';break}
+            case('researchPhaseResult'):{caption='$other_validate$';break}
             case('selectCardForcedSell'):{caption='$other_validate$';break}
             case('selectCardOptionalSell'):{caption='$other_validate$';break}
             case('discardCards'):{caption='$other_validate$';break}

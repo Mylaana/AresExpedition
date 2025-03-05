@@ -25,12 +25,8 @@ import { GlobalInfo } from '../../../../services/global/global-info.service';
 export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
 	@Input() buildDiscount: number = 0
-	//clientPlayerId!: number
-	//ressourceState: RessourceInfo[] = []
-	//projectCardState!: ProjectCardState
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
-
 	readonly tagNumber = 3;
 
 	constructor(
@@ -73,9 +69,12 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		return newTagsId
 	}
 	cardClick(){
+		console.log('card clicked:', this.state)
 		if(this.state.isSelectable()!=true){return}
 		if(this.state.isBuildable()===false && this.state.isIgnoreCost()!=true){return}
+		console.log('new selected: ',this.state.isSelected()===false);
 		this.state.setSelected(this.state.isSelected()===false)
+		console.log('card clicked:', this.state.isSelected())
 		this.cardStateChange.emit({card:this.projectCard, state: this.state})
 	}
 	private updateClientState(state: PlayerStateModel): void {

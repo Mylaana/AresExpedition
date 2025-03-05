@@ -10,23 +10,39 @@ import { CardState } from '../../../../interfaces/card.interface';
   templateUrl: './base-card.component.html',
   styleUrl: './base-card.component.scss'
 })
-export abstract class BaseCardComponent implements OnInit, OnChanges, DoCheck {
+export abstract class BaseCardComponent implements OnInit, OnChanges{
 	@Input() initialState?: Partial<CardState>
 	@Input() stateFromParent?: Partial<CardState>
 	state = new CardStateModel
 	@Output() cardStateChange: EventEmitter<any> = new EventEmitter<any>()
 
-	ngOnInit(): void {}
+	private _loaded: boolean = false
+
+	ngOnInit(): void {
+		if(this.initialState){
+			this.state.setInitialState(this.initialState)
+			this.state.resetStateToInitial()
+		}
+		if(this.stateFromParent){
+			this.state.setCurrentState(this.stateFromParent)
+			this.changeStateFromParent()
+		}
+		this._loaded = true
+	}
 	ngOnChanges(changes: SimpleChanges) {
+		if(!this._loaded){return}
 		if (changes['initialState'] && changes['initialState'].currentValue) {
 			this.state.resetStateToInitial()
 		}
+		if (changes['stateFromParent'] && changes['stateFromParent'].currentValue) {
+			this.changeStateFromParent()
+		}
 	}
+	/*
 	ngDoCheck(): void {
 		if(this.initialState!=undefined){this.state.resetStateToInitial()}
 		if(this.stateFromParent!=undefined){this.changeStateFromParent()}
-	}
-
+	}*/
 	changeStateFromParent():void{
 		if(!this.stateFromParent){return}
 		this.state.setCurrentState(this.stateFromParent)

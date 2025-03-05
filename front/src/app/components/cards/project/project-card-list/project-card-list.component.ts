@@ -98,7 +98,7 @@ export class ProjectCardListComponent implements OnChanges{
 			}
 			case('selector'):case('playedSelector'):{
 				this._displayedCards = this._cardSelector.selectFrom
-				console.log('cardlist selector:',this._cardSelector,'cardlist:',this.cardList,'cardlist event:',this.event)
+				console.log('list event:', this.event)
 				break
 			}
 			default:{

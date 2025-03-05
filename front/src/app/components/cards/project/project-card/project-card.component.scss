@@ -66,6 +66,11 @@ button {
     align-items: center;
 
 	border: 0;
+
+	&.selected{
+		outline: red solid 2px;
+		outline-offset: 5px;
+	}
 }
 .wrapper-card-grid{
     z-index: 1;
@@ -788,6 +793,6 @@ button {
     display: flex;
     flex-direction: column;
 }
-.unplayable{
+.disabled{
 	filter: grayscale(100%);
 }

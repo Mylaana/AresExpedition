@@ -1,4 +1,6 @@
-<div class="wrapper-selection-border" [ngClass]="[state.isSelected()===true? 'element-selected':'element-not-selected', (state.isBuildable()===false && state.isSelectable()===true && state.isIgnoreCost()!=true)? 'unplayable':'']">
+<div class="wrapper-selection-border"
+	[class.selected]="state.isSelected()"
+	[ngClass]="(state.isBuildable()===false && state.isSelectable()===true && state.isIgnoreCost()!=true)? 'disabled':''">
     <button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, ((state.isSelectable()===true && state.isBuildable()===true) || (state.isSelectable()===true && !state.isBuildable()) || state.isIgnoreCost())? 'element-selectable': '', state.isSelected()!=true? 'selected':'']">
         <div class="wrapper-card-grid">
             <div class="grid-box-cost">
@@ -118,4 +120,10 @@
 <p>current: {{state.getCurrentState().buildable| json}}</p>
 <p>initial: {{initialState?.buildable | json}}</p>
 <p>parent: {{stateFromParent?.buildable | json}}</p>
+<p>{{state.isSelected()}}</p>
+<p>{{state.isSelectable()}}</p>
+<p>initial selectable: {{initialState?.selectable| json}}</p>
+<p>initial ignore cost: {{initialState?.ignoreCost| json}}</p>
+<p>parent selectable: {{stateFromParent?.selectable | json}}</p>
+<p>parent ignore cost: {{stateFromParent?.ignoreCost | json}}</p>
 -->

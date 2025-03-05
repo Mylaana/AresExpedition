@@ -72,10 +72,8 @@ export class EventHandler {
 		}
 	}
 	public updateSelectedCardList(selected: ProjectCardModel[], listType: ProjectListType): void {
-		console.log('list selection update, type: ', listType)
 		switch(listType){
 			case('selector'):{
-				console.log('selected cards update:', selected)
 				let event = this.currentEvent as EventCardSelector
 				event.updateCardSelection(selected)
 				break
