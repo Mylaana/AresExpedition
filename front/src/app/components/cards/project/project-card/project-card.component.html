@@ -1,10 +1,18 @@
-<div class="wrapper-main">
+<div class="wrapper-main"
+	[class.hovered]="_hovered"
+	[class.selectable]="state.isSelectable()===true"
+	(mouseenter)="_hovered=true"
+	(mouseleave)="_hovered=false">
 	<img class='selected-sell-image' *ngIf="state.isSelected() && parentListType==='selector'" src="/assets/other/cancel.png" alt="">
 	<div class="wrapper-selection-border"
-		[class.selected]="state.isSelected()"
 		[class]="parentListType"
-		[ngClass]="(state.isBuildable()===false && state.isSelectable()===true && state.isIgnoreCost()!=true)? 'disabled':''">
-		<button (click)="cardClick()" class="wrapper-card" [ngClass]="[projectCard.cardType, ((state.isSelectable()===true && state.isBuildable()===true) || (state.isSelectable()===true && !state.isBuildable()) || state.isIgnoreCost())? 'element-selectable': '', state.isSelected()!=true? 'selected':'']">
+		[class.selected]="state.isSelected()"
+		[class.selectable]="state.isSelectable()===true"
+		[class.hovered]="_hovered===true"
+		[class.disabled]="(state.isBuildable()===false && state.isIgnoreCost()!=false && state.isSelectable()===false)">
+		<button (click)="cardClick()" class="wrapper-card" [class]="projectCard.cardType"
+			[class.hovered]="_hovered"
+			[class.selectable]="state.isSelectable()===true">
 			<div class="wrapper-card-grid">
 				<div class="grid-box-cost">
 					<div class="wrapper-cost">
@@ -135,4 +143,6 @@
 <p>parent selectable: {{stateFromParent?.selectable | json}}</p>
 <p>parent ignore cost: {{stateFromParent?.ignoreCost | json}}</p>
 <p>parent buildable: {{stateFromParent?.buildable | json}}</p>
+
+[ngClass]="[((state.isSelectable()===true && state.isBuildable()===true) || (state.isSelectable()===true && !state.isBuildable()) || state.isIgnoreCost())? 'element-selectable': '', state.isSelected()!=true? 'selected':'']"
 -->

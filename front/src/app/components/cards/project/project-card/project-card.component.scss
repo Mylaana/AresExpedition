@@ -29,6 +29,9 @@ img {
 }
 button {
     background: transparent;
+	&.hovered.selectable{
+		cursor: pointer;
+	}
 }
 .shadowed-text{
     background: rgba(0, 0, 0, .5);
@@ -37,9 +40,13 @@ button {
     padding: calc($text-size / 8);
 }
 .wrapper-main{
+	z-index: 0;
 	position: relative;
 	height: 100%;
 	width: 100%;
+	&.hovered.selectable{
+		z-index: 10;
+	}
 }
 .wrapper-card{
     z-index: 0;
@@ -62,7 +69,7 @@ button {
 }
 .wrapper-selection-border{
 	position: relative;
-    z-index: 0;
+    //z-index: 0;
     $selection-offset: 0px;
     border-radius: calc((var(--card-height) + $selection-offset)* .05);
     height: calc(var(--card-height) + $selection-offset);
@@ -73,11 +80,23 @@ button {
 
 	border: 0;
 
+	&.selectable{
+		filter: grayscale(40%);
+		&.hovered{
+			//z-index: 1000;
+			filter: grayscale(0%);
+			background: rgba($color: #000000, $alpha: .5);
+			outline-offset: 5px;
+			outline: white solid 2px;
+			box-shadow: 0 0 10px 10px white;
+			cursor: pointer;
+		}
+	}
 	&.selected.selector{
 		filter: grayscale(100%);
-	}
-	&:hover{
-		z-index: 1000;
+		&.hovered{
+			//z-index: 1001;
+		}
 	}
 }
 .wrapper-card-grid{
@@ -813,5 +832,4 @@ button {
 	left: 0;
 	pointer-events: none;
 	opacity: 70%;
-
 }

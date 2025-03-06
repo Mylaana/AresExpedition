@@ -31,6 +31,8 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	private readonly cardCost = inject(CardCost);
 	readonly tagNumber = 3;
 
+	_hovered: boolean = false
+
 	constructor(
 		private gameStateService: GameState,
 	){

@@ -40,6 +40,5 @@ export abstract class BaseCardComponent implements OnInit, OnChanges{
 	changeStateFromParent():void{
 		if(!this.stateFromParent){return}
 		this.state.setCurrentState(this.stateFromParent)
-		console.log('state from parent called', this.state)
 	}
 }

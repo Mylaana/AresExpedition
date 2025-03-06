@@ -45,7 +45,9 @@ $alternative-width: 200px;
 	border: black solid $selected-card-zone-border-size;
 	overflow: hidden;
 	box-shadow: inset 0 0 calc(var(--card-height) * .07) calc(var(--card-height) * .05) rgb(0, 0, 0);
-
+	&.locked{
+		filter: grayscale(70%);
+	}
 	&:before{
         $color-one: rgba(0, 0, 0, 1);
         $color-two: rgba(0, 0, 0, 0);
