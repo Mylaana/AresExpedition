@@ -43,8 +43,7 @@ TriggerState: switch out trigger id checks from model to a service
 
 ## /!\BUG/!\ :
 Game is locked after researching cards   
-Retractable hand not scaling height when hand.size > 7 (therefore hiding cards)
-
+Planification Validation should only work if phase button selected
 
 ## New features :
 ### Phase cards

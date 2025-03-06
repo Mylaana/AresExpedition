@@ -1,21 +1,21 @@
 <div class="background-image"></div>
-<div *ngIf="_connected===false" class="wrapper-loading" @fadeInFadeOut>
+<div *ngIf="_connected===false" class="wrapper-loading" @fadeIn>
 	<h1 class="ares-title">CONNECTION LOST</h1>
 </div>
-<div *ngIf="loaded===false && _connected" class="wrapper-loading" @fadeInFadeOut>
+<div *ngIf="loaded===false && _connected" class="wrapper-loading" @fadeIn>
 	<h1 class="ares-title">LOADING</h1>
 </div>
-<div class="background-image nav-background" *ngIf="loaded && _connected"></div>
+<div class="background-image nav-background" *ngIf="loaded && _connected" @fadeIn></div>
 <nav *ngIf="loaded && _connected" id="navbar" [class.settings-openned]="_settings">
 	<app-navigation  [clientPlayerId]="clientPlayerId" [isScrolled]="isScrolled"></app-navigation>
 </nav>
-<div @fadeIn *ngIf="_settings" id="settings">
+<div id="settings" *ngIf="_settings" @fadeIn>
 	<app-settings
 		(closeSettings)="closeSettings()">
 	</app-settings>
 </div>
 <div>
-<div @expandCollapseVertical *ngIf="loaded && _connected" class="wrapper-app"
+<div @fadeIn *ngIf="loaded && _connected" class="wrapper-app"
 	[class.settings-openned]="_settings">
     <div class="wrapper-main">
         <div class="wrapper-other">
@@ -36,10 +36,10 @@
 			</div>
         </div>
     </div>
-	<div class="wrapper-hand" *ngIf="playerHand.length>0"
+	<div id="wrapper-hand" *ngIf="playerHand.length>0"
 		[class.hovered]="_handIsHovered"
-		(mouseenter)="_handIsHovered = true"
-		(mouseleave)="_handIsHovered = false">
+		(mouseenter)="updateHandHeight(true)"
+		(mouseleave)="updateHandHeight(false)">
 		<div class="hand-mask"
 			[class.masked]="_handIsHovered===false">
 			<app-project-card-list [hovered]="_handIsHovered" [background]="false" [listType]="'hand'" [cardList]="playerHand"></app-project-card-list>

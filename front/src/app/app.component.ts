@@ -161,7 +161,14 @@ export class AppComponent implements OnInit {
 		this._settings = false
 		document.body.style.overflow = ''
 	}
-
+	updateHandHeight(hovered: boolean): void {
+		this._handIsHovered = hovered
+		const hand = this.elRef.nativeElement.querySelector('#wrapper-hand')
+		if (hand && hand.offsetHeight) {
+		  const handHeight = hand.offsetHeight;
+		  document.documentElement.style.setProperty('--hand-height', `${handHeight}px`);
+		}
+	}
 	@HostListener('window:keydown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {
 	  	if (event.key === 'Escape') {
