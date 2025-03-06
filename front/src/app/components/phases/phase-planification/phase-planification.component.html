@@ -1,4 +1,5 @@
-<div class="wrapper-main">
+<div class="wrapper-main"
+	[class.phase-selected]="currentPhaseSelected">
     <div class="wrapper-phase-card">
         <div *ngFor="let button of buttonList" class="wrapper-button"
 			[class.selected]="button.name===currentPhaseSelected">
@@ -8,23 +9,23 @@
             </app-button>
         </div>
     </div>
-    <div class="wrapper-selected-phase-card">
-        <div class="wrapper-phase-card-description ares-background ares-border">
+    <div class="wrapper-selected-phase-card"
+		*ngIf="currentPhaseSelected">
+        <div class="wrapper-phase-card-description ares-background ares-border"
+		@expandCollapseVertical>
             <ng-container *ngFor="let phaseCard of selectedPhaseCards">
-                <div *ngIf="currentPhaseCard===phaseCard" class="wrapper-phase-selected">
+                <div *ngIf="currentPhaseSelected === phaseCard.phaseGroup.toLocaleLowerCase()"
+					class="wrapper-phase-selected">
                     <div class="wrapper-title-and-text">
-                        <h4>Ability:</h4>
+                        <h4>Ability</h4>
                         <app-text-with-image [rawText]="phaseCard.baseDescription"></app-text-with-image>
                     </div>
                     <div class="wrapper-title-and-text">
-                        <h4>Bonus:</h4>
+                        <h4>Bonus</h4>
                         <app-text-with-image [rawText]="phaseCard.bonusDescription"></app-text-with-image>
                     </div>
                 </div>
             </ng-container>
-            <div *ngIf="currentPhaseCard===undefined" class="wrapper-phase-not-selected">
-                <h2>Select a phase</h2>
-            </div>
         </div>
     </div>
 </div>

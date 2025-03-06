@@ -97,7 +97,6 @@ p {
 .element-clickable{
     &:hover{
         filter: brightness(80%);
-		outline: white solid 2px;
         cursor: pointer;
     }
 }

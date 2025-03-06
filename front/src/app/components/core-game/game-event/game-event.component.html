@@ -38,8 +38,10 @@
 			<div *ngIf="currentEvent.hasCardBuilder()===true" class="wrapper-builder">
                 <app-card-builder-list [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
 			</div>
-            <app-phase-planification *ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
-            <app-phase-production *ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"></app-phase-production>
+			<div class="wrapper-other-event" *ngIf="currentPhase==='PLANIFICATION' || currentPhase==='PRODUCTION'">
+				<app-phase-planification *ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
+				<app-phase-production *ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"></app-phase-production>
+			</div>
             <div *ngIf="currentEvent.subType==='waitingGroupReady'" class="ares-background"><h1>[Waiting for other players to be ready]</h1></div>
 			<div class="wrapper-selectors" *ngIf="currentEvent.hasCardsToSelectFrom()">
 				<div class="wrapper-card-selector" >
