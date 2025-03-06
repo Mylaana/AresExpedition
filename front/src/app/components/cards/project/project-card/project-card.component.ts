@@ -53,6 +53,8 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 			state => this.updateClientState(state)
 		)
 		this.checkPlayable()
+
+		this._loaded = true
 	}
 	resetCardState(): void {
 		if(this.megacreditAvailable===0){return}

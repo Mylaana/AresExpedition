@@ -76,7 +76,9 @@ button {
 	&.selected.selector{
 		filter: grayscale(100%);
 	}
-
+	&:hover{
+		z-index: 1000;
+	}
 }
 .wrapper-card-grid{
     z-index: 1;

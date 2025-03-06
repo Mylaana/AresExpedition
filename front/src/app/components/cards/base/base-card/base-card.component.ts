@@ -16,7 +16,7 @@ export abstract class BaseCardComponent implements OnInit, OnChanges{
 	state = new CardStateModel
 	@Output() cardStateChange: EventEmitter<any> = new EventEmitter<any>()
 
-	private _loaded: boolean = false
+	protected _loaded: boolean = false
 
 	ngOnInit(): void {
 		if(this.initialState){
@@ -27,7 +27,6 @@ export abstract class BaseCardComponent implements OnInit, OnChanges{
 			this.state.setCurrentState(this.stateFromParent)
 			this.changeStateFromParent()
 		}
-		this._loaded = true
 	}
 	ngOnChanges(changes: SimpleChanges) {
 		if(!this._loaded){return}
@@ -41,5 +40,6 @@ export abstract class BaseCardComponent implements OnInit, OnChanges{
 	changeStateFromParent():void{
 		if(!this.stateFromParent){return}
 		this.state.setCurrentState(this.stateFromParent)
+		console.log('state from parent called', this.state)
 	}
 }

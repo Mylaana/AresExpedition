@@ -163,8 +163,8 @@
                 ]
             },
             "projectCardState": {
-                "hand": [20,25, 108, 229, 62],
-                "playedProjectIdList": [4, 9, 20],
+                "hand": [108],
+                "playedProjectIdList": [],
                 "playedProjectCardStocks": {
                     "22": {"microbe": 2, "animal": 12},
                     "7" : {"science": 3}

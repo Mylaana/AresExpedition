@@ -34,7 +34,7 @@ export class ProjectCardModel {
 
     //not loaded from data
 
-    costMod?: number;
+    //costMod?: number;
     tagsUrl?: string[];
 
     //delete

@@ -42,10 +42,8 @@ project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service
 
 ## /!\BUG/!\ :
-Expression had changed error when discount applied to builder card   
 Game is locked after researching cards   
 Phase card description not working after phase selected in planification phase   
-Project card initial cost disapeared
 Retractable hand not scaling height when hand.size > 7 (therefore hiding cards)
 
 
@@ -57,12 +55,15 @@ Phase cards upgrade: a phase card type can only be upgraded once
 ### Cards
 Discard Event should "lock" the Sell card button while being resolved  
 Prerequisites for playing project cards feature
+Add back mod cost calculation in hand (removed cause of Expression had changed error), error was due to card showing in hand and cost mod calculated in builder selector with cost modified
 
 ## Misc
 gameEventComponent: add Lockpile control   
 websocket: finish the game state saving system   
 Global parameter increase applied at EOT  
 Lakes feature
+Add Angular animations
+Add settings options
 
 ## CI
 Frontend automated testing: Ongoing  

@@ -15,7 +15,7 @@
 							<p>{{projectCard.costInitial}}</p>
 						</div>
 					</div>
-					<div *ngIf="projectCard.cost!=projectCard.costInitial" class="wrapper-cost cost-mod">
+					<div *ngIf="parentListType!='hand' && projectCard.cost!=projectCard.costInitial" class="wrapper-cost cost-mod">
 						<div class="wrapper-cost-image">
 							<img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
 						</div>
@@ -123,6 +123,7 @@
 <p>{{projectCard.id}} {{projectCard.cardCode}}</p>
 <p>{{projectCard.stock | json}}</p>
 <p>{{projectCard.stockable | json}}</p>
+<p>cost {{projectCard.cost}}</p>
 <p>current: {{state.getCurrentState().buildable| json}}</p>
 <p>selected: {{state.isSelected()}}</p>
 <p>selectable: {{state.isSelectable()}}</p>
