@@ -149,6 +149,10 @@ $round-width: 3%;
 	margin-right: calc(var(--settings-button-size) / 2);
 	margin-top: var(--command-pannel-height);
 	min-height: var(--event-min-height);
+
+	&.center{
+		align-items: center;
+	}
 }
 .wrapper-builder{
 	position: sticky;
@@ -172,9 +176,18 @@ app-card-builder-list{
 }
 .wrapper-selectors{
     display: flex;
-	height: fit-content;
+	//height: fit-content;
 	flex-grow: 1;
+	&.centered{
+		align-items: center;
+		justify-content: center;
+	}
 }
+/*
+.wrapper-selectors.centered{
+	align-items: center;
+	justify-content: center;
+}*/
 .wrapper-event-description{
 	display: flex;
 	flex-direction: column;

@@ -35,15 +35,30 @@
 	</div>
     <div class="wrapper-event-main">
 		<div class="wrapper-event-top">
-			<div *ngIf="currentEvent.hasCardBuilder()===true" class="wrapper-builder">
+			<div class="wrapper-builder"
+				*ngIf="currentEvent.hasCardBuilder()===true"
+				@fadeInFadeOut>
                 <app-card-builder-list [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
 			</div>
-			<div class="wrapper-other-event" *ngIf="currentPhase==='PLANIFICATION' || currentPhase==='PRODUCTION'">
-				<app-phase-planification *ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'" [clientPlayerId]="clientPlayerId" (phaseSelected)="phaseSelected()"></app-phase-planification>
-				<app-phase-production *ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"></app-phase-production>
+			<div class="wrapper-other-event" *ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase'">
+				<app-phase-planification
+					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
+					@fadeInFadeOut
+					[clientPlayerId]="clientPlayerId"
+					(phaseSelected)="phaseSelected()"></app-phase-planification>
+				<app-phase-production
+					*ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"
+					@fadeInFadeOut></app-phase-production>
 			</div>
-            <div *ngIf="currentEvent.subType==='waitingGroupReady'" class="ares-background"><h1>[Waiting for other players to be ready]</h1></div>
-			<div class="wrapper-selectors" *ngIf="currentEvent.hasCardsToSelectFrom()">
+            <div class="ares-background"
+				*ngIf="currentEvent.subType==='waitingGroupReady'"
+				@fadeInFadeOut>
+				<h1>[Waiting for other players to be ready]</h1>
+			</div>
+			<div class="wrapper-selectors"
+				*ngIf="currentEvent.hasCardsToSelectFrom()"
+				[class.centered]="currentEvent.hasCardBuilder() === false"
+				@fadeInFadeOut>
 				<div class="wrapper-card-selector" >
 					<app-project-card-list #cardListSelector
 						[currentPhase]="currentPhase"
@@ -51,7 +66,6 @@
 						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
 						(updateSelectedCardList)="updateSelectedCardList($event)">
 					</app-project-card-list>
-
 				</div>
 				<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [event]="currentEvent"></app-phase-card-upgrade-selector>
 			</div>
