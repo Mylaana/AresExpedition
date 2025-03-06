@@ -128,7 +128,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -338,7 +338,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -548,7 +548,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -758,7 +758,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
