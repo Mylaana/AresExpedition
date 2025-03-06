@@ -7,7 +7,7 @@ import { PhaseCardModel } from '../../../models/cards/phase-card.model';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ButtonNames } from '../../../types/global.type';
-import { expandCollapseVertical } from '../../animations/animations';
+import { expandCollapseVertical, fadeIn } from '../../animations/animations';
 
 const phaseList: SelectablePhaseEnum[] = [SelectablePhaseEnum.development, SelectablePhaseEnum.construction, SelectablePhaseEnum.action, SelectablePhaseEnum.production, SelectablePhaseEnum.research]
 const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
@@ -28,7 +28,7 @@ const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
 	],
 	templateUrl: './phase-planification.component.html',
 	styleUrl: './phase-planification.component.scss',
-	animations: [expandCollapseVertical]
+	animations: [expandCollapseVertical, fadeIn]
 })
 export class PhasePlanificationComponent {
 	@Input() clientPlayerId!: number;

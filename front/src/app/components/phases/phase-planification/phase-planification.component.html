@@ -12,9 +12,9 @@
     <div class="wrapper-selected-phase-card"
 		*ngIf="currentPhaseSelected">
         <div class="wrapper-phase-card-description ares-background ares-border"
-		@expandCollapseVertical>
+			@expandCollapseVertical>
             <ng-container *ngFor="let phaseCard of selectedPhaseCards">
-                <div *ngIf="currentPhaseSelected === phaseCard.phaseGroup.toLocaleLowerCase()"
+                <div @fadeIn *ngIf="currentPhaseSelected === phaseCard.phaseGroup.toLocaleLowerCase()"
 					class="wrapper-phase-selected">
                     <div class="wrapper-title-and-text">
                         <h4>Ability</h4>

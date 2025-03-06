@@ -16,7 +16,7 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { EventMainButtonComponent } from "../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
-import { expandCollapseVertical, enterFromLeft, fadeInFadeOut, enterFromRight } from '../../animations/animations';
+import { expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight } from '../../animations/animations';
 import { ProjectListType } from '../../../types/project-card.type';
 
 //this component is the main controller, and view
@@ -37,7 +37,7 @@ import { ProjectListType } from '../../../types/project-card.type';
 ],
 	templateUrl: './game-event.component.html',
 	styleUrl: './game-event.component.scss',
-	animations: [expandCollapseVertical, enterFromLeft, fadeInFadeOut, enterFromRight],
+	animations: [expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight],
 	providers: [
 		EventHandler,
 		DrawEventHandler

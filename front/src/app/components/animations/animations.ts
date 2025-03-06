@@ -36,7 +36,7 @@ export const enterFromRight = trigger('enterFromRight',[
 		animate('500ms ease-in', style({ left: '100%', opacity: 1 }))
 		])
 ])
-export const fadeInFadeOut = trigger('fadeInFadeOut',[
+export const fadeIn = trigger('fadeIn',[
 	transition(':enter', [
 		style({ opacity: 0 }),
 		animate('300ms ease-out', style({ opacity: 1 }))

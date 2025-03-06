@@ -7,7 +7,7 @@
 	<div class="wrapper-player-pannel ares-background ares-border"
 		(mouseenter)="_playerPannelIsHovered=true"
 		(mouseleave)="_playerPannelIsHovered=false"
-		@expandCollapseVertical>
+		@fadeInFadeOut>
 		<ng-container *ngFor="let id of _playerIdList">
 			<app-player-pannel
 			class="animated"

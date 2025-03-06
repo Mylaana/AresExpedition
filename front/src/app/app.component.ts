@@ -18,7 +18,7 @@ import { GameState } from './services/core-game/game-state.service';
 import { ButtonDesigner } from './services/designers/button-designer.service';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
 import { RxStompService } from './services/websocket/rx-stomp.service';
-import { expandCollapseVertical } from './components/animations/animations';
+import { expandCollapseVertical, fadeIn } from './components/animations/animations';
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { SettingsComponent } from './components/core-game/settings/settings.component';
 
@@ -37,7 +37,7 @@ import { SettingsComponent } from './components/core-game/settings/settings.comp
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
-	animations: [expandCollapseVertical],
+	animations: [expandCollapseVertical, fadeIn],
 	providers: [
 		WebsocketHandler
 	]
