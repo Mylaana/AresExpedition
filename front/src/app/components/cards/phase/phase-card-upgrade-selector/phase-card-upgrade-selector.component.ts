@@ -30,7 +30,7 @@ export class PhaseCardUpgradeSelectorComponent {
 		this._currentEvent = this.event as EventGeneric
 		this.phaseList =  this._currentEvent.phaseCardUpgradeList??[0,1,2,3,4]
 		this.upgradeNumber = this._currentEvent.phaseCardUpgradeQuantity??0
-		this.gameStateService.clientState.subscribe(
+		this.gameStateService.currentClientState.subscribe(
 			state => this.stateUpdated(state)
 		)
 	}

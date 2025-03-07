@@ -37,7 +37,6 @@ export class NavigationComponent implements OnInit, AfterViewInit{
 
 	ngAfterViewInit(): void {
 		const navbar = this.elRef.nativeElement.querySelector('animated')
-		console.log('afterviewinit', navbar)
 		if (navbar) {
 			navbar.addEventListener('transitionend', () => {
 			  	this.updateNavHeight()

@@ -72,7 +72,9 @@
 		</div>
     </div>
 </div>
-<div class="wrapper-selection-active" [ngClass]="currentEvent?.getSelectionActive()===true?  'element-fade-in':'element-fade-out'">
+<div class="wrapper-selection-active"
+	*ngIf="currentEvent?.getSelectionActive()===true"
+	[ngClass]="currentEvent?.getSelectionActive()===true?  'element-fade-in':'element-fade-out'">
     <div class="selection-active-left"></div>
     <div class="selection-active-right"></div>
 </div>

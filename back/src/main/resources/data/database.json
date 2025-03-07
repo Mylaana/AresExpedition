@@ -218,7 +218,7 @@
             "otherState": {
                 "research": {
                     "keep": 0,
-                    "scan": 4
+                    "scan": 0
                 },
                 "sellCardValueMod": 1
             }

@@ -76,12 +76,10 @@ app-navigation {
 }
 app-self-info{
     z-index: 10;
-    //position: fixed;
     top: 0;
 }
 app-game-event{
     width: 100%;
-	//min-height: 85%;
 }
 #wrapper-hand{
 	$transition-delay: .2s;
@@ -98,7 +96,7 @@ app-game-event{
 	top: calc(100% - (var(--card-height) * .23));
 	transition: top $transition-delay ease;
 	&.hovered {
-		top: calc(100% - var(--hand-height)); //calc(100% - (var(--card-height) * 1.05));
+		top: calc(100% - var(--hand-height));
 		transition: top $transition-delay ease;
 	}
 	.hand-mask.masked{

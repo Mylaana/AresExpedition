@@ -77,7 +77,6 @@ export class AppComponent implements OnInit {
 	ngOnInit(): void {
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.settingsButton = ButtonDesigner.createNonEventButton('settings')
-		console.log(this.settingsButton)
 
 		this.gameStateService.currentLoadingState.subscribe(
 			loading => this.loadingFinished(loading)
@@ -143,7 +142,7 @@ export class AppComponent implements OnInit {
 		this.wsHandler.handlePlayerMessage(parsedMessage)
 	}
 	private handleAcknowledgeMessage(message: any){
-		console.log('ack received:', WebsocketResultMessageFactory.createAckMessage(message))
+
 		this.rxStompService.handleAck({ackUuid:WebsocketResultMessageFactory.createAckMessage(message).uuid})
 	}
 	public nonEventButtonClicked(button: NonEventButton){

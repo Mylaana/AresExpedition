@@ -71,7 +71,6 @@ export class PhasePlanificationComponent {
 		this.currentPhaseCard = undefined
 	}
 	public buttonClicked(button: ImageButton){
-		console.log('planif button clicked:', button)
 		if(button.name===undefined){return}
 		this.currentPhaseSelected = button.name as SelectablePhaseEnum
 

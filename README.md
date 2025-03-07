@@ -42,8 +42,8 @@ project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service
 
 ## /!\BUG/!\ :
-Game is locked after researching cards   
-Planification Validation should only work if phase button selected
+Planification Validation should only work if phase button selected   
+Research card selection using sell selection visuals   
 
 ## New features :
 ### Phase cards

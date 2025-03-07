@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
+import { Component, DoCheck, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
@@ -18,6 +18,8 @@ import { NonEventButtonComponent } from '../../tools/button/non-event-button.com
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight } from '../../animations/animations';
 import { ProjectListType } from '../../../types/project-card.type';
+import { Utils } from '../../../utils/utils';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 //this component is the main controller, and view
 
@@ -77,6 +79,7 @@ export class GameEventComponent {
 
 	private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
+	private destroy$ = new Subject<void>()
 
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
@@ -85,9 +88,13 @@ export class GameEventComponent {
 		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
 		this.rollbackButton = ButtonDesigner.createNonEventButton('rollBack')
 
-		this.gameStateService.currentPhase.subscribe(phase => this.updatePhase(phase))
-		this.gameStateService.currentDrawQueue.subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
-		this.gameStateService.currentEventQueue.subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
+		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
+		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
+		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 	ngAfterViewInit(): void {
 		const commandPannel = this.elRef.nativeElement.querySelector('#command-pannel');
@@ -96,7 +103,6 @@ export class GameEventComponent {
 			this.elRef.nativeElement.style.setProperty('--command-pannel-height', `${commandPannelHeight}px`);
 		}
 	}
-
 	updatePhase(phase:NonSelectablePhaseEnum):void{
 		this.currentPhase = phase
 		let events: EventBaseModel[] = []

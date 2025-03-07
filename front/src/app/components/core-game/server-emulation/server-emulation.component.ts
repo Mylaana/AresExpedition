@@ -4,7 +4,7 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
 import { MessageContentQueryEnum } from '../../../enum/websocket.enum';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { RxStompService } from '../../../services/websocket/rx-stomp.service';
 import { WebsocketQueryMessageFactory } from '../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
@@ -22,7 +22,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
 	styleUrl: './server-emulation.component.scss',
 })
 export class ServerEmulationComponent implements OnInit, AfterViewInit {
-	debug: boolean = false;
+	debug: boolean = true;
 	currentGroupPlayerState!: {};
 	currentEventQueue: EventBaseModel[] = [];
 	currentPhase: string = "planification";
@@ -105,7 +105,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 
 	printPlayersState(): void {
 		console.log(this.currentGroupPlayerState)
-		console.log(this.gameStateService.groupPlayerReady.getValue())
+		this.gameStateService.currentGroupPlayerReady.pipe(take(1)).subscribe(value => {console.log(value);});
 	}
 
 	loadingFinished(loading: boolean):void{
@@ -148,9 +148,9 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		this.rxStompService.publish({ destination: '/app/player', body: JSON.stringify(message) });
 	}
 	printEventQueue(): void {
-		console.log(this.gameStateService.eventQueue.getValue())
+		this.gameStateService.currentEventQueue.pipe(take(1)).subscribe(value => {console.log(value);});
 	}
 	printDrawQueue(): void {
-		console.log(this.gameStateService.drawQueue.getValue())
+		this.gameStateService.currentDrawQueue.pipe(take(1)).subscribe(value => {console.log(value);});
 	}
 }
