@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
+import { Component, DoCheck, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
@@ -16,7 +16,10 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { EventMainButtonComponent } from "../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
-import { expandCollapseVertical, enterFromLeft } from '../../animations/animations';
+import { expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight } from '../../animations/animations';
+import { ProjectListType } from '../../../types/project-card.type';
+import { Utils } from '../../../utils/utils';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 //this component is the main controller, and view
 
@@ -36,7 +39,7 @@ import { expandCollapseVertical, enterFromLeft } from '../../animations/animatio
 ],
 	templateUrl: './game-event.component.html',
 	styleUrl: './game-event.component.scss',
-	animations: [expandCollapseVertical, enterFromLeft],
+	animations: [expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight],
 	providers: [
 		EventHandler,
 		DrawEventHandler
@@ -76,6 +79,7 @@ export class GameEventComponent {
 
 	private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
+	private destroy$ = new Subject<void>()
 
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
@@ -84,9 +88,13 @@ export class GameEventComponent {
 		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
 		this.rollbackButton = ButtonDesigner.createNonEventButton('rollBack')
 
-		this.gameStateService.currentPhase.subscribe(phase => this.updatePhase(phase))
-		this.gameStateService.currentDrawQueue.subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
-		this.gameStateService.currentEventQueue.subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
+		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
+		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
+		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 	ngAfterViewInit(): void {
 		const commandPannel = this.elRef.nativeElement.querySelector('#command-pannel');
@@ -95,7 +103,6 @@ export class GameEventComponent {
 			this.elRef.nativeElement.style.setProperty('--command-pannel-height', `${commandPannelHeight}px`);
 		}
 	}
-
 	updatePhase(phase:NonSelectablePhaseEnum):void{
 		this.currentPhase = phase
 		let events: EventBaseModel[] = []
@@ -143,7 +150,9 @@ export class GameEventComponent {
 	public buttonClicked(button: ButtonBase) {
 		console.log('game event button clicked:', button)
 	}
-	public updateSelectedCardList(cardList: ProjectCardModel[]){this.eventHandler.updateSelectedCardList(cardList)}
+	public updateSelectedCardList(input: {selected: ProjectCardModel[], listType: ProjectListType}){
+		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+	}
 	public nonEventButtonClicked(button: NonEventButton){
 		switch(button.name){
 			case('sellOptionalCard'):{
@@ -160,8 +169,11 @@ export class GameEventComponent {
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){
 		this.eventHandler.cardBuilderButtonClicked(button)
-		if(button.name==='buildCard'){
-			this.cardListSelector.updateDiscount(this.currentEvent as EventCardBuilder)
+		switch(button.name){
+			case('buildCard'):{
+				this.cardListSelector.updateDiscount(this.currentEvent as EventCardBuilder)
+				break
+			}
 		}
 	}
 	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}

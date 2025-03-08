@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerPannelComponent } from '../../player-info/player-pannel/player-pannel.component';
-import { expandCollapseVertical } from '../../animations/animations';
+import { expandCollapseVertical, fadeIn } from '../../animations/animations';
 import { AnimationEvent } from '@angular/animations';
 import { GlobalParameterPannelComponent } from '../../player-info/global-parameter-pannel/global-parameter-pannel.component';
 
@@ -16,7 +16,7 @@ import { GlobalParameterPannelComponent } from '../../player-info/global-paramet
 	],
 	templateUrl: './navigation.component.html',
 	styleUrl: './navigation.component.scss',
-	animations: [expandCollapseVertical]
+	animations: [expandCollapseVertical, fadeIn]
 })
 export class NavigationComponent implements OnInit, AfterViewInit{
 	@Input() isScrolled: boolean = false
@@ -37,7 +37,6 @@ export class NavigationComponent implements OnInit, AfterViewInit{
 
 	ngAfterViewInit(): void {
 		const navbar = this.elRef.nativeElement.querySelector('animated')
-		console.log('afterviewinit', navbar)
 		if (navbar) {
 			navbar.addEventListener('transitionend', () => {
 			  	this.updateNavHeight()

@@ -6,11 +6,12 @@
 		<div class="wrapper-cards"
 			[ngClass]="listType"
 			[class.hovered]="hovered">
-			<app-project-card #projectCardComponent *ngFor="let card of displayedCards"
-				[stateFromParent]="cardSelector.stateFromParent"
+			<app-project-card #projectCardComponent *ngFor="let card of _displayedCards"
+				[stateFromParent]="_cardSelector.stateFromParent"
 				[projectCard]="card"
-				[initialState]="cardSelector.cardInitialState"
+				[initialState]="_cardSelector.cardInitialState"
 				[buildDiscount]="_buildDiscount"
+				[parentListType]="listType"
 				(cardStateChange)="cardStateChange($event)"></app-project-card>
 		</div>
 	</div>

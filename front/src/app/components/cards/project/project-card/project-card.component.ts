@@ -8,6 +8,7 @@ import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
+import { ProjectListType } from '../../../../types/project-card.type';
 
 
 @Component({
@@ -24,14 +25,13 @@ import { GlobalInfo } from '../../../../services/global/global-info.service';
 })
 export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Input() projectCard!: ProjectCardModel;
-	@Input() buildDiscount!: number
-	//clientPlayerId!: number
-	//ressourceState: RessourceInfo[] = []
-	//projectCardState!: ProjectCardState
+	@Input() buildDiscount: number = 0
+	@Input() parentListType: ProjectListType = 'none'
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
-
 	readonly tagNumber = 3;
+
+	_hovered: boolean = false
 
 	constructor(
 		private gameStateService: GameState,
@@ -55,6 +55,8 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 			state => this.updateClientState(state)
 		)
 		this.checkPlayable()
+
+		this._loaded = true
 	}
 	resetCardState(): void {
 		if(this.megacreditAvailable===0){return}

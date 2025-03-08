@@ -72,12 +72,13 @@ export class EventDesigner{
                 event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
 				event.cardSelector.selectionQuantityTreshold = 'min'
 				event.cardSelector.selectionQuantity = 1
+				event.title = 'Select any number of cards to sell'
                 break
             }
             case('actionPhase'):{
                 event.cardSelector.filter = {type: 'action'}
                 event.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
-                event.title = 'Activate cards :'
+                event.title = 'Activate cards'
                 break
             }
             case('researchPhaseResult'):
@@ -176,7 +177,7 @@ export class EventDesigner{
                 break
             }
             case('constructionPhaseBuilder'):{
-                event.title = 'Play Blue or Red cards:'
+                event.title = 'Play Blue or Red cards'
                 event.cardSelector.filter = {type:'construction'}
                 break
             }

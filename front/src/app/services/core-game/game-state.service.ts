@@ -15,6 +15,7 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.en
 import { GLOBAL_CLIENT_ID } from "../../global/global-const";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { Utils } from "../../utils/utils";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -49,13 +50,13 @@ export class GameState{
     clientPlayerId = GLOBAL_CLIENT_ID; //should be changed to reflect the client's player's id
     playerCount = new BehaviorSubject<number[]>([]);
 
-    groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
-    groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
-    groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
-    phase = new BehaviorSubject<NonSelectablePhaseEnum>(NonSelectablePhaseEnum.undefined)
-    drawQueue = new BehaviorSubject<DrawEvent[]>([])
-    eventQueue = new BehaviorSubject<EventBaseModel[]>([])
-	clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
+    private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
+    private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
+    private groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
+    private phase = new BehaviorSubject<NonSelectablePhaseEnum>(NonSelectablePhaseEnum.undefined)
+    private drawQueue = new BehaviorSubject<DrawEvent[]>([])
+    private eventQueue = new BehaviorSubject<EventBaseModel[]>([])
+	private clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
@@ -595,5 +596,8 @@ export class GameState{
 
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
+	}
+	public reset(): void {
+		this.setCurrentPhase(NonSelectablePhaseEnum.undefined)
 	}
 }

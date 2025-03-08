@@ -80,9 +80,10 @@ export class WebsocketHandler {
         this.gameStateService.handleWsDrawResult(content)
     }
     private handleMessageGameState(content: WsGameState, origin?: String): void {
+		this.gameStateService.reset()
         this.gameStateService.clearEventQueue()
-        this.gameStateService.setCurrentPhase(content.currentPhase)
-        this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
+		this.gameStateService.setCurrentPhase(content.currentPhase)
+		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
     }
 	private handleMessageConnection(content: WsGameState): void {

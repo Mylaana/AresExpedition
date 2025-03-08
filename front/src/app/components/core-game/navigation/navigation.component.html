@@ -1,5 +1,5 @@
 <nav id="nav"
-	@expandCollapseVertical
+	@fadeIn
 	(@expandCollapseVertical.done)="updateNavHeight()">
 	<div class="wrapper-global-parameter">
 		<app-global-parameter-pannel></app-global-parameter-pannel>
@@ -7,7 +7,7 @@
 	<div class="wrapper-player-pannel ares-background ares-border"
 		(mouseenter)="_playerPannelIsHovered=true"
 		(mouseleave)="_playerPannelIsHovered=false"
-		@expandCollapseVertical>
+		@fadeIn>
 		<ng-container *ngFor="let id of _playerIdList">
 			<app-player-pannel
 			class="animated"

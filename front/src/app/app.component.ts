@@ -18,7 +18,7 @@ import { GameState } from './services/core-game/game-state.service';
 import { ButtonDesigner } from './services/designers/button-designer.service';
 import { WebsocketResultMessageFactory } from './services/designers/websocket-message-factory.service';
 import { RxStompService } from './services/websocket/rx-stomp.service';
-import { expandCollapseVertical } from './components/animations/animations';
+import { expandCollapseVertical, fadeIn } from './components/animations/animations';
 import { NavigationComponent } from './components/core-game/navigation/navigation.component';
 import { SettingsComponent } from './components/core-game/settings/settings.component';
 
@@ -37,7 +37,7 @@ import { SettingsComponent } from './components/core-game/settings/settings.comp
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
-	animations: [expandCollapseVertical],
+	animations: [expandCollapseVertical, fadeIn],
 	providers: [
 		WebsocketHandler
 	]
@@ -77,7 +77,6 @@ export class AppComponent implements OnInit {
 	ngOnInit(): void {
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.settingsButton = ButtonDesigner.createNonEventButton('settings')
-		console.log(this.settingsButton)
 
 		this.gameStateService.currentLoadingState.subscribe(
 			loading => this.loadingFinished(loading)
@@ -109,8 +108,10 @@ export class AppComponent implements OnInit {
 		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
 		this.playerPlayed = clientState.getProjectPlayedModelList()
 
+		/*
 		if(!this.handProjectList){return}
 		this.handProjectList.updatePlayedCardList(clientState.getProjectPlayedModelList())
+		*/
 	}
 	updatePlayerList(playerIdList: number[]){
 		this.playerIdList = playerIdList
@@ -141,7 +142,7 @@ export class AppComponent implements OnInit {
 		this.wsHandler.handlePlayerMessage(parsedMessage)
 	}
 	private handleAcknowledgeMessage(message: any){
-		console.log('ack received:', WebsocketResultMessageFactory.createAckMessage(message))
+
 		this.rxStompService.handleAck({ackUuid:WebsocketResultMessageFactory.createAckMessage(message).uuid})
 	}
 	public nonEventButtonClicked(button: NonEventButton){
@@ -159,7 +160,14 @@ export class AppComponent implements OnInit {
 		this._settings = false
 		document.body.style.overflow = ''
 	}
-
+	updateHandHeight(hovered: boolean): void {
+		this._handIsHovered = hovered
+		const hand = this.elRef.nativeElement.querySelector('#wrapper-hand')
+		if (hand && hand.offsetHeight) {
+		  const handHeight = hand.offsetHeight;
+		  document.documentElement.style.setProperty('--hand-height', `${handHeight}px`);
+		}
+	}
 	@HostListener('window:keydown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {
 	  	if (event.key === 'Escape') {

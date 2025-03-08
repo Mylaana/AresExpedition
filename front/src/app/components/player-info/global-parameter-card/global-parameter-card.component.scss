@@ -1,4 +1,12 @@
 @use "sass:math";
+@use "sass:map";
+
+$colors: (
+	"purple": purple,
+	"red": red,
+	"yellow": yellow,
+	"white": white
+);
 :host{
 	max-height: 100%;
 	width: 100%;
@@ -49,16 +57,16 @@ app-text-with-image{
 	border-bottom-left-radius: 0;
 
 	&.purple{
-		box-shadow: 0px 0px 7px 3px purple;
+		box-shadow: 0px 0px 7px 3px map.get($colors, 'purple');
 	}
 	&.red{
-		box-shadow: 0px 0px 10px 0px red;
+		box-shadow: 0px 0px 10px 0px map.get($colors, 'red');
 	}
 	&.yellow{
-		box-shadow: 0px 0px 10px 0px yellow;
+		box-shadow: 0px 0px 10px 0px map.get($colors, 'yellow');
 	}
 	&.white{
-		box-shadow: 0px 0px 10px 0px white;
+		box-shadow: 0px 0px 10px 0px map.get($colors, 'white');
 	}
 }
 .bubble{
@@ -67,18 +75,15 @@ app-text-with-image{
 	height: calc(100% - 2px);
 	width: calc(100% - 2px);
 
-	&.purple{
-		background-color: purple;
+	@each $name, $value in $colors{
+		&.#{$name}{
+			background-color: $value;
+			&.current{
+				box-shadow: 0px 0px 5px 0px $value;
+			}
+		}
 	}
-	&.red{
-		background-color: red;
-	}
-	&.yellow{
-		background-color: yellow;
-	}
-	&.white{
-		background-color: white;
-	}
+
 }
 .wrapper-bubble{
 	display: flex;

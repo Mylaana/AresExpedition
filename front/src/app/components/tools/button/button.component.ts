@@ -36,7 +36,6 @@ export class ButtonComponent implements OnChanges {
 	}
 	onClick(button: ButtonBase){
 		this.buttonClicked.emit(button)
-		console.log('clicked:',button)
 	}
 
 	private handleImageButtonChange(){

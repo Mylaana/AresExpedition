@@ -13,6 +13,7 @@ import { DrawEventDesigner } from "../../services/designers/draw-event-designer.
 import { Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { ProjectListType } from "../../types/project-card.type";
 
 @Injectable()
 export class EventHandler {
@@ -70,13 +71,25 @@ export class EventHandler {
 			}
 		}
 	}
-	public updateSelectedCardList(selection: ProjectCardModel[]): void {
-		let event = this.currentEvent as EventCardSelector
-		event.updateCardSelection(selection)
+	public updateSelectedCardList(selected: ProjectCardModel[], listType: ProjectListType): void {
+		switch(listType){
+			case('selector'):{
+				let event = this.currentEvent as EventCardSelector
+				event.updateCardSelection(selected)
+				break
+			}
+			case('builderSelector'):{
+				let event = this.currentEvent as EventCardBuilder
+				event.updateCardSelection(selected)
+				break
+			}
+			default:{
+			}
+		}
 	}
 	public cancelSellCardsOptional(): void {
 		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
-		this.finishEventEffect()
+		this.cancelCurrentEvent()
 	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
@@ -373,6 +386,10 @@ export class EventHandler {
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}
 		}
+	}
+	private cancelCurrentEvent(): void {
+		this.currentEvent.finalized = true
+		this.checkFinalized()
 	}
 	private resolveWaiters(eventQueue: EventBaseModel[]){
 		let newWaiters: number[] = []

@@ -9,19 +9,19 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 
 # Architecture and Concepts
 ## Technologies used :
-Frontend: Angular 17
-Backend: Java 23
-API: Java Spring Boot, websocket STOMP
-Misc: script in Python  
+Frontend: Angular 17   
+Backend: Java 23   
+API: Java Spring Boot, websocket STOMP   
+Misc: script in Python   
 
 ## Testing
-Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%
-Backend: Junit  
+Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%   
+Backend: Junit   
 
 ## Architecture & Design pattern
-- MVC: game-event-component and its handlers being the 'main' controller, game-state-service being the main model  
-- Event Driven Architecture: RXJS and a custom event pile for frontend.  
-- STOMP over Websocket: connection between clients and server for fast two-ways communication.
+- MVC: game-event-component and its handlers being the 'main' controller, game-state-service being the main model   
+- Event Driven Architecture: RXJS and a custom event pile for frontend.   
+- STOMP over Websocket: connection between clients and server for fast two-ways communication.   
 
 ## CI/CD
 ### CI
@@ -35,20 +35,15 @@ Backend: Junit
 
 # WIP : 
 ## Refactoring :
-gameEventComponent: add Lockpile control   
 text with image component: refactoring   
-project card list component : split the component into multiple ones (selector/hand/played)  
 test needs: empty components from the app logic and transfer it into services/classes   
 global: removing obvious comments   
-websocket: finish the game state saving system
 project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service
 
 ## /!\BUG/!\ :
-Card builder: when first card selected but not yet build, selecting a card in other builder resets first button states but keeps card in.   
-Builder locked should still show buttons
-Optional card seller: when card is selected but event is exited by cancelling cards are still sold
-
+Planification Validation should only work if phase button selected   
+Research card selection using sell selection visuals   
 
 ## New features :
 ### Phase cards
@@ -58,10 +53,15 @@ Phase cards upgrade: a phase card type can only be upgraded once
 ### Cards
 Discard Event should "lock" the Sell card button while being resolved  
 Prerequisites for playing project cards feature
+Add back mod cost calculation in hand (removed cause of Expression had changed error), error was due to card showing in hand and cost mod calculated in builder selector with cost modified
 
 ## Misc
+gameEventComponent: add Lockpile control   
+websocket: finish the game state saving system   
 Global parameter increase applied at EOT  
 Lakes feature
+Add Angular animations
+Add settings options
 
 ## CI
 Frontend automated testing: Ongoing  

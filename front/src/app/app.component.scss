@@ -76,38 +76,40 @@ app-navigation {
 }
 app-self-info{
     z-index: 10;
-    //position: fixed;
     top: 0;
 }
 app-game-event{
     width: 100%;
-	//min-height: 85%;
 }
-.wrapper-hand{
+#wrapper-hand{
 	$transition-delay: .2s;
 	z-index: 100;
 	position: fixed;
 	display: flex;
+	flex-direction: row;
 	justify-content: left;
 	align-items: top;
 
-	max-width: 90%;
+	max-width: 94%;
 
 	left: 5%;
 	top: calc(100% - (var(--card-height) * .23));
 	transition: top $transition-delay ease;
 	&.hovered {
-		top: calc(100% - (var(--card-height) * 1.05));
+		top: calc(100% - var(--hand-height));
 		transition: top $transition-delay ease;
 	}
 	.hand-mask.masked{
 		$opacity: .8;
 		mask-image: linear-gradient(rgba(white, $opacity), rgba(white, $opacity));
+		flex-grow: 1;
+		display: flex;
+		max-width: 100%;
 	}
 }
 app-project-card-list{
-	width: 100%;
 	height: 100%;
+	width: 100%;
 }
 .wrapper-played{
     width: 100%;

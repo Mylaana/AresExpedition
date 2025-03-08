@@ -29,12 +29,24 @@ img {
 }
 button {
     background: transparent;
+	&.hovered.selectable{
+		cursor: pointer;
+	}
 }
 .shadowed-text{
     background: rgba(0, 0, 0, .5);
     border-radius: 5px;
     width: 100%;
     padding: calc($text-size / 8);
+}
+.wrapper-main{
+	z-index: 0;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	&.hovered.selectable{
+		z-index: 10;
+	}
 }
 .wrapper-card{
     z-index: 0;
@@ -56,7 +68,8 @@ button {
     }
 }
 .wrapper-selection-border{
-    z-index: -1;
+	position: relative;
+    //z-index: 0;
     $selection-offset: 0px;
     border-radius: calc((var(--card-height) + $selection-offset)* .05);
     height: calc(var(--card-height) + $selection-offset);
@@ -66,6 +79,25 @@ button {
     align-items: center;
 
 	border: 0;
+
+	&.selectable{
+		filter: grayscale(40%);
+		&.hovered{
+			//z-index: 1000;
+			filter: grayscale(0%);
+			background: rgba($color: #000000, $alpha: .5);
+			outline-offset: 5px;
+			outline: white solid 2px;
+			box-shadow: 0 0 10px 10px white;
+			cursor: pointer;
+		}
+	}
+	&.selected.selector{
+		filter: grayscale(100%);
+		&.hovered{
+			//z-index: 1001;
+		}
+	}
 }
 .wrapper-card-grid{
     z-index: 1;
@@ -788,6 +820,16 @@ button {
     display: flex;
     flex-direction: column;
 }
-.unplayable{
+.disabled{
 	filter: grayscale(100%);
+}
+.selected-sell-image{
+	z-index: 10;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	opacity: 70%;
 }

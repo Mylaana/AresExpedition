@@ -4,6 +4,7 @@ $round-width: 3%;
 
 :host{
 	--command-pannel-height: 0px;
+	--event-min-height: 55vh;
 }
 #command-pannel {
 	$command-pannel-width: 15%;
@@ -98,12 +99,12 @@ $round-width: 3%;
 .selection-active-left{
     height: 100%;
     width: 2%;
-    background: linear-gradient(to right, var(--color-ares-blue), rgba(255, 255, 255, 0))
+    background: linear-gradient(to right, white, rgba(255, 255, 255, 0))
 }
 .selection-active-right{
     height: 100%;
     width:2%;
-    background: linear-gradient(to left, var(--color-ares-blue), rgba(255, 255, 255, 0))
+    background: linear-gradient(to left, white, rgba(255, 255, 255, 0))
 }
 .wrapper-event-button{
 	height: 100%;
@@ -127,27 +128,35 @@ $round-width: 3%;
 	height: auto;
 }
 .wrapper-event-main{
+	display: flex;
+	flex-direction: column;
     position: relative;
     margin-top: calc(-1 * var(--command-pannel-height) * 2);
     width: 100%;
-	min-height: fit-content;
+	height: fit-content;
 	padding-top: 1%;
-	padding-bottom: 100px;
+	min-height: var(--event-min-height);
 }
 .wrapper-event-top{
+	position: relative;
     display: flex;
     flex-direction: row;
 	justify-content: center;
-	align-items: center;
+	align-items: top;
     width: calc(100% - var(--settings-button-size));
-	height: auto;
+	height: fit-content;
 	margin-left: calc(var(--settings-button-size) / 2);
 	margin-right: calc(var(--settings-button-size) / 2);
 	margin-top: var(--command-pannel-height);
+	min-height: var(--event-min-height);
+
+	&.center{
+		align-items: center;
+	}
 }
 .wrapper-builder{
 	position: sticky;
-	top: calc(var(--navbar-height));
+	top: calc(var(--navbar-height) + var(--command-pannel-height));
 	$padding: 0%;
 
 	display: flex;
@@ -167,9 +176,18 @@ app-card-builder-list{
 }
 .wrapper-selectors{
     display: flex;
-	height: fit-content;
+	//height: fit-content;
 	flex-grow: 1;
+	&.centered{
+		align-items: center;
+		justify-content: center;
+	}
 }
+/*
+.wrapper-selectors.centered{
+	align-items: center;
+	justify-content: center;
+}*/
 .wrapper-event-description{
 	display: flex;
 	flex-direction: column;
@@ -178,4 +196,7 @@ app-card-builder-list{
 }
 app-phase-card-upgrade-selector{
 	width: 100%;
+}
+.wrapper-other-event{
+	flex-grow: 1;
 }

@@ -128,7 +128,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -163,7 +163,7 @@
                 ]
             },
             "projectCardState": {
-                "hand": [20,25],
+                "hand": [20,25, 108, 229, 62,20,25, 108, 229, 62],
                 "playedProjectIdList": [4, 9, 20],
                 "playedProjectCardStocks": {
                     "22": {"microbe": 2, "animal": 12},
@@ -218,7 +218,7 @@
             "otherState": {
                 "research": {
                     "keep": 0,
-                    "scan": 4
+                    "scan": 0
                 },
                 "sellCardValueMod": 1
             }
@@ -338,7 +338,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -548,7 +548,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -758,7 +758,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,

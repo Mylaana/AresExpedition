@@ -1,10 +1,20 @@
 <div class="wrapper-main">
 	<div class="wrapper-card-builder ares-background ares-border">
 		<div class="inner-decoration--side"></div>
-		<div class="selected-card-zone" [ngClass]="'filter-type-'+projectFilterType">
-			<app-project-card-list *ngIf="cardBuilder.getSelectedCard()!=undefined" class="play-card-zone-list" [cardList]="[cardBuilder.getSelectedCard()]"></app-project-card-list>
+		<div class="selected-card-zone"
+			[ngClass]="'filter-type-'+projectFilterType"
+			[class.locked]="cardBuilder.getbuilderIsLocked()">
+			<app-project-card-list
+				*ngIf="cardBuilder.getSelectedCard()!=undefined"
+				class="play-card-zone-list"
+				[cardList]="[cardBuilder.getSelectedCard()]"
+				[listType]="'builderSelectedZone'"
+				[event]="event"
+				[selectedDiscount]="discount">
+			</app-project-card-list>
 		</div>
-		<div class="wrapper-buton-zone">
+		<div class="wrapper-buton-zone"
+			*ngIf="!cardBuilder.getbuilderIsLocked()">
 			<div class="wrapper-buttons">
 				<div *ngIf="cardBuilder.getButtons()[0].enabled || cardBuilder.getButtons()[1].enabled" class="wrapper-select-button">
 					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].enabled" [button]="cardBuilder.getButtons()[0]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
