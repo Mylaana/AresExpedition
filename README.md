@@ -34,6 +34,11 @@ Backend: Junit
 - Tech used TBD
 
 # WIP : 
+## /!\BUG/!\ :
+Planification Validation should only work if phase button selected   
+Research card selection using sell selection visuals   
+Add unsubscriptions to subjects in every component.   
+
 ## Refactoring :
 text with image component: refactoring   
 test needs: empty components from the app logic and transfer it into services/classes   
@@ -41,11 +46,7 @@ global: removing obvious comments
 project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service
 
-## /!\BUG/!\ :
-Planification Validation should only work if phase button selected   
-Research card selection using sell selection visuals   
-
-## New features :
+## v1 planned features :
 ### Phase cards
 Phase 3  
 Phase cards upgrade: a phase card type can only be upgraded once   
