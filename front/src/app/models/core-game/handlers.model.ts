@@ -91,6 +91,11 @@ export class EventHandler {
 		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
 		this.cancelCurrentEvent()
 	}
+	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}): void {
+		let event = this.currentEvent as EventCardSelector
+		if(input.twice){event.cardSelector.selectionQuantity -= 1}
+		console.log('project activated:', input.card)
+	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()

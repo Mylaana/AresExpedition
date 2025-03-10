@@ -33,11 +33,13 @@ export class ProjectCardListComponent implements OnChanges{
 	@Input() hovered!: boolean
 
 	@Output() updateSelectedCardList: EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}> = new EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}>()
+	@Output() projectActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<ProjectCardComponent>
 
 	_buildDiscount: number = 0
 	_cardSelector!: CardSelector
 	_displayedCards!: ProjectCardModel[] | undefined;
+	_activateTwiceCount: number = 0
 	private _selectedCardList: ProjectCardModel[] = [];
 
 	ngOnInit(){
@@ -83,6 +85,8 @@ export class ProjectCardListComponent implements OnChanges{
 		if(selectorTypes.includes(this.listType)){
 			this.setSelectorFromEvent(this.event as EventCardSelector)
 		}
+
+		this._activateTwiceCount = this._cardSelector.selectionQuantity
 	}
 	private setSelectorFromEvent(event: EventCardSelector): void {
 		this._cardSelector = event.cardSelector
@@ -131,5 +135,9 @@ export class ProjectCardListComponent implements OnChanges{
 		this._selectedCardList = []
 	}
 
+	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}): void {
+		this.projectActivated.emit(input)
+		this.setSelector()
+	}
 }
 

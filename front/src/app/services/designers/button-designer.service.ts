@@ -25,6 +25,11 @@ export class ButtonDesigner{
 			case('rollBack'):{startEnabled=true;break}
 			case('settings'):{startEnabled=true;break}
 
+			//cards
+			case('activateProjectOnce'):{startEnabled=true; break}
+			case('activateProjectTwice'):{startEnabled=false; break}
+
+			//global
 			case('closeSettings'):{startEnabled=true;break}
 
             default:{startEnabled=false;break}
@@ -54,6 +59,11 @@ export class ButtonDesigner{
 			case('rollBack'):{caption='$other_rollback$';break}
 			case('settings'):{caption='$other_settings$';break}
 
+			//cards
+			case('activateProjectOnce'):{caption='$other_validate$'; break}
+			case('activateProjectTwice'):{caption='$other_double_validate$'; break}
+
+			//global
 			case('closeSettings'):{caption='$other_cancel$';break}
 
             default:{caption='';break}

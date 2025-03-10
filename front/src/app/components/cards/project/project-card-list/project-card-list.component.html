@@ -12,7 +12,9 @@
 				[initialState]="_cardSelector.cardInitialState"
 				[buildDiscount]="_buildDiscount"
 				[parentListType]="listType"
-				(cardStateChange)="cardStateChange($event)"></app-project-card>
+				[activableTwice]="_activateTwiceCount>0"
+				(cardStateChange)="cardStateChange($event)"
+				(cardActivated)="onProjectActivated($event)"></app-project-card>
 		</div>
 	</div>
 </div>

@@ -64,7 +64,8 @@
 						[currentPhase]="currentPhase"
 						[event]="currentEvent"
 						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
-						(updateSelectedCardList)="updateSelectedCardList($event)">
+						(updateSelectedCardList)="updateSelectedCardList($event)"
+						(projectActivated)="onProjectActivated($event)">
 					</app-project-card-list>
 				</div>
 				<app-phase-card-upgrade-selector *ngIf="currentEvent.subType==='upgradePhaseCards'" [event]="currentEvent"></app-phase-card-upgrade-selector>

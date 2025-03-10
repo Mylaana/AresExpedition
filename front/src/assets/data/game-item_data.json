@@ -215,6 +215,12 @@
         "imageUrl": "assets/other/cancel_circle.png",
         "name": "$other_cancel_circle$"
     },
+	{
+        "id": 126,
+        "description": "double validate",
+        "imageUrl": "assets/other/double_validate.png",
+        "name": "$other_double_validate$"
+    },
     {
         "id": 1000,
         "description": "steel",

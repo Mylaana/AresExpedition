@@ -1,10 +1,13 @@
+@use "sass:map";
 $transition-delay : 0.15s;
-$shape-name: ('hex', 'small', 'large', 'hex_floating');
+$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right');
 $shape-width: (
 	'hex': 25%,
 	'hex_floating': 25%,
 	'small': 15%,
-	'large': 10%
+	'large': 10%,
+	'left': 21%,
+	'right': 35%
 );
 $disabled-color: gray;
 $disabled-border: darken(gray, 10%);
@@ -123,6 +126,28 @@ $disabled-border: darken(gray, 10%);
 			background-color: $disabled-color;
 		}
 	}
+	&--left{
+		width: calc(100% - 1px);
+		background-color: var(--color-ares-blue-light2);
+		&::ng-deep > *{
+			margin-left: 15%;
+		}
+		&.disabled{
+			//background-color: white;
+			filter: grayscale(100%);
+		}
+	}
+	&--right{
+		width: calc(100% - 1px);
+		background-color: var(--color-ares-blue-dark);
+		left: 0;
+		&::ng-deep > *{
+			margin-right: 20%;
+		}
+		&.disabled{
+			filter: grayscale(100%);
+		}
+	}
 	&--hex_floating.enabled{
 		background: transparent;
 	}
@@ -179,11 +204,22 @@ $disabled-border: darken(gray, 10%);
 	}
 	@each $name, $width in $shape-width {
 		&--#{$name} {
-			//max-width: 100%;
-			//max-height: 100%;
 			-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 			clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 		}
+	}
+
+	&--left{
+		$width: map.get($shape-width, $key:'left' );
+		aspect-ratio: 2.5 / 1;
+		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, calc(100% - #{$width}) 100%, #{$width} 100%);
+		clip-path: polygon(0% 50%, #{$width} 0%, 100% 0%, 100% 100%, #{$width} 100%);
+	}
+	&--right{
+		$width: map.get($shape-width, $key:'right' );
+		aspect-ratio: 1.5 / 1;
+		-webkit-clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
+		clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
 	}
 }
 .button-border {
@@ -195,7 +231,6 @@ $disabled-border: darken(gray, 10%);
 	left: 0;
 	width: 100%;
 	height: 100%;
-	//background-color: black;
 	-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 	clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
 
@@ -203,7 +238,6 @@ $disabled-border: darken(gray, 10%);
 		content: '';
 		position: absolute;
 		inset: 0;
-		//background-image: linear-gradient(135deg, rgb(128, 128, 128) 30%, rgb(69, 69, 69) 60%, rgb(208, 208, 208) 85%);
 		background-image: linear-gradient(135deg, rgb(215, 215, 215) 30%, rgb(147, 147, 147) 60%, rgb(234, 234, 234) 90%);
 		opacity: 1;
 		transition: opacity $transition-delay ease;
@@ -220,7 +254,6 @@ $disabled-border: darken(gray, 10%);
 		z-index: -1;
 	}
 
-	// L'effet de hover ne s'applique que si le bouton est enabled
 	&.enabled.hovered::before {
 		opacity: 0;
 	}

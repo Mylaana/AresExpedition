@@ -44,7 +44,8 @@ text with image component: refactoring
 test needs: empty components from the app logic and transfer it into services/classes   
 global: removing obvious comments   
 project-card-info-service (and some other?): switch to static
-TriggerState: switch out trigger id checks from model to a service
+TriggerState: switch out trigger id checks from model to a service   
+ProjectCardComposant major refactoring
 
 ## v1 planned features :
 ### Phase cards
@@ -60,7 +61,7 @@ Add back mod cost calculation in hand (removed cause of Expression had changed e
 gameEventComponent: add Lockpile control   
 websocket: finish the game state saving system   
 Global parameter increase applied at EOT  
-Lakes feature
+Add Ocean last bonus description
 Add Angular animations
 Add settings options
 

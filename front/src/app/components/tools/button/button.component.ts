@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonBase, ImageButton } from '../../../models/core-game/button.model';
 import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
 
-type shape = 'hex' | 'hex_floating'| 'small' | 'large'
+type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right'
 
 @Component({
 	selector: 'app-button',
