@@ -14,6 +14,7 @@ import { Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ProjectListType } from "../../types/project-card.type";
+import { ProjectCardActivatedEffectService } from "../../services/cards/project-card-activated-effect.service";
 
 @Injectable()
 export class EventHandler {
@@ -94,7 +95,9 @@ export class EventHandler {
 	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}): void {
 		let event = this.currentEvent as EventCardSelector
 		if(input.twice){event.cardSelector.selectionQuantity -= 1}
-		console.log('project activated:', input.card)
+		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card)
+		if(!addEvents){return}
+		this.gameStateService.addEventQueue(addEvents,'first')
 	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
@@ -162,6 +165,11 @@ export class EventHandler {
 				if(selectFrom.length===0){event.finalized=true;break}
 				event.activateSelection()
 				event.cardSelector.selectFrom = selectFrom
+				break
+			}
+			case('actionPhase'):{
+				event.cardSelector.selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.cardSelector.filter)
+				break
 			}
 		}
     }

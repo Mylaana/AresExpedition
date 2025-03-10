@@ -149,7 +149,9 @@ $round-width: 3%;
 	margin-right: calc(var(--settings-button-size) / 2);
 	margin-top: var(--command-pannel-height);
 	min-height: var(--event-min-height);
-
+	&.flex-column{
+		flex-direction: column;
+	}
 	&.center{
 		align-items: center;
 	}
@@ -198,5 +200,15 @@ app-phase-card-upgrade-selector{
 	width: 100%;
 }
 .wrapper-other-event{
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+app-phase-action{
+	width: 100%;
+	//min-height: 7vh;
+	display: flex;
+	justify-content: center;
 	flex-grow: 1;
 }

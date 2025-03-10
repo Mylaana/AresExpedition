@@ -8,7 +8,7 @@
 		(click)="onClick(button)">
 
 		<div class="wrapper-elements">
-			<div *ngIf="shape!='hex_floating' && button.enabled===true"
+			<div *ngIf="_style==='plain' && button.enabled===true"
 				[ngClass]="['button-shape--'+shape, 'gradiant-mask--'+shape]">
 				<div [ngClass]="['button-gradiant-background--'+shape, 'button-shape--'+shape]"></div>
 			</div>
@@ -18,14 +18,13 @@
 			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, button.enabled? 'enabled':'disabled']"
 				[class.hovered]="_isHovered">
 			</div>
-			<div class="button-border"
-				*ngIf="shape==='hex_floating'"
-				[ngClass]="[button.enabled? 'enabled':'disabled']"
+			<div *ngIf="_style==='transparent'"
+				[ngClass]="[button.enabled? 'enabled':'disabled', 'button-border--' + shape]"
 				[class.hovered]="_isHovered" >
 			</div>
 		</div>
 	</button>
-	<div *ngIf="shape==='hex_floating'" class="shadow"
+	<div *ngIf="_style==='transparent'" class="shadow"
 		[class.hovered]="_isHovered"
 		[ngClass]="[button.enabled? 'enabled':'disabled']">
 	</div>

@@ -79,8 +79,9 @@ export class EventDesigner{
                 event.cardSelector.filter = {type: 'action'}
                 event.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
                 event.title = 'Activate cards'
-				event.cardSelector.selectionQuantity = 2
+				event.cardSelector.selectionQuantity = 1
 				event.cardSelector.selectionQuantityTreshold = 'max'
+				event.refreshSelectorOnSwitch = true
                 break
             }
             case('researchPhaseResult'):

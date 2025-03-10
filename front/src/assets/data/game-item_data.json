@@ -221,6 +221,18 @@
         "imageUrl": "assets/other/double_validate.png",
         "name": "$other_double_validate$"
     },
+	{
+        "id": 127,
+        "description": "double activate",
+        "imageUrl": "assets/other/double_activate.png",
+        "name": "$other_double_activate$"
+    },
+	{
+        "id": 128,
+        "description": "activate",
+        "imageUrl": "assets/other/activate.png",
+        "name": "$other_activate$"
+    },
     {
         "id": 1000,
         "description": "steel",
@@ -282,7 +294,7 @@
         "name": "$ressource_megacredit$"
     },
     {
-        "id": 1009,
+        "id": 1010,
         "description": "megacreditvoid",
         "imageUrl": "assets/ressource/megacreditvoid.png",
         "name": "$ressource_megacreditvoid$"

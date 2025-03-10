@@ -49,7 +49,9 @@ ProjectCardComposant major refactoring
 
 ## v1 planned features :
 ### Phase cards
-Phase 3  
+Phase 3: trigger service  
+Phase 3: dedicated event type listing activations per card   
+Phase 3: Add ressource spending buttons to terraform
 Phase cards upgrade: a phase card type can only be upgraded once   
 
 ### Cards
@@ -64,6 +66,12 @@ Global parameter increase applied at EOT
 Add Ocean last bonus description
 Add Angular animations
 Add settings options
+Add main buttons help popup
+Add victory check
+
+## Interface
+Possibly change style to go full transparency for pop-ups + background floating hexes for text
+Add floating hexes in the main window   
 
 ## CI
 Frontend automated testing: Ongoing  

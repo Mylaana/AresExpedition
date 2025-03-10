@@ -1,13 +1,15 @@
 @use "sass:map";
 $transition-delay : 0.15s;
-$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right');
+$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right', 'action');
+$border-shape-name: ('hex_floating', 'action');
 $shape-width: (
 	'hex': 25%,
 	'hex_floating': 25%,
 	'small': 15%,
 	'large': 10%,
 	'left': 21%,
-	'right': 35%
+	'right': 35%,
+	'action': 15%
 );
 $disabled-color: gray;
 $disabled-border: darken(gray, 10%);
@@ -133,8 +135,7 @@ $disabled-border: darken(gray, 10%);
 			margin-left: 15%;
 		}
 		&.disabled{
-			//background-color: white;
-			filter: grayscale(100%);
+			filter: grayscale(50%);
 		}
 	}
 	&--right{
@@ -145,10 +146,10 @@ $disabled-border: darken(gray, 10%);
 			margin-right: 20%;
 		}
 		&.disabled{
-			filter: grayscale(100%);
+			filter: grayscale(50%);
 		}
 	}
-	&--hex_floating.enabled{
+	&--hex_floating.enabled, &--action.enabled{
 		background: transparent;
 	}
 }
@@ -163,7 +164,7 @@ $disabled-border: darken(gray, 10%);
 			background-color: var(--color-ares-orange-dark);
 		}
 	}
-	&--hex_floating{
+	&--hex_floating, &--action{
 		background: rgba(181, 128, 108, .8);
 
 		&.enabled::before {
@@ -190,6 +191,9 @@ $disabled-border: darken(gray, 10%);
 			opacity: 1;
 		}
 	}
+	&--left, &--right{
+		background: var(--color-ares-blue);
+	}
 }
 
 .button-shape{
@@ -201,6 +205,9 @@ $disabled-border: darken(gray, 10%);
 	}
 	&--large{
 		aspect-ratio: 5 / 1;
+	}
+	&--action{
+		aspect-ratio: 2 / 1;
 	}
 	@each $name, $width in $shape-width {
 		&--#{$name} {
@@ -223,50 +230,61 @@ $disabled-border: darken(gray, 10%);
 	}
 }
 .button-border {
-	$width: 25%;
 	$border-thickness: 3px;
 	$inner-offset: calc($border-thickness / 2);
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
-	clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
-
-	&.enabled::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background-image: linear-gradient(135deg, rgb(215, 215, 215) 30%, rgb(147, 147, 147) 60%, rgb(234, 234, 234) 90%);
-		opacity: 1;
-		transition: opacity $transition-delay ease;
-		z-index: -1;
+	&--hex_floating{
+		$width: map.get($shape-width, 'hex_floating');
+		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
+		clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
 	}
-
-	&.enabled::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background-image: linear-gradient(to right, var(--color-ares-orange) 0%, var(--color-ares-orange) 100%);
-		opacity: 0;
-		transition: opacity $transition-delay ease;
-		z-index: -1;
+	&--action{
+		$width: map.get($shape-width, 'action');
+		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
+		clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
 	}
+	@each $name in $border-shape-name{
+		&--#{$name}{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
 
-	&.enabled.hovered::before {
-		opacity: 0;
-	}
+			&.enabled::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background-image: linear-gradient(135deg, rgb(215, 215, 215) 30%, rgb(147, 147, 147) 60%, rgb(234, 234, 234) 90%);
+				opacity: 1;
+				transition: opacity $transition-delay ease;
+				z-index: -1;
+			}
 
-	&.enabled.hovered::after {
-		opacity: 1;
+			&.enabled::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background-image: linear-gradient(to right, var(--color-ares-orange) 0%, var(--color-ares-orange) 100%);
+				opacity: 0;
+				transition: opacity $transition-delay ease;
+				z-index: -1;
+			}
+
+			&.enabled.hovered::before {
+				opacity: 0;
+			}
+
+			&.enabled.hovered::after {
+				opacity: 1;
+			}
+		}
 	}
 }
 .shadow{
 	z-index: -1;
 	position: absolute;
 	height: 100%;
-	aspect-ratio: 1;
+	width: 90%;
 	background: transparent;
 	border-radius: 50%;
 	&.hovered.enabled{
