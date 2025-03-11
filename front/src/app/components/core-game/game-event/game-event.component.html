@@ -51,7 +51,9 @@
 					*ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"
 					@fadeIn></app-phase-production>
 				<app-phase-action
-					*ngIf="currentPhase==='ACTION' && currentEvent.subType==='actionPhase'">
+					*ngIf="currentPhase==='ACTION' && currentEvent.subType==='actionPhase'"
+					[event]="this.currentEvent"
+					(actionPhaseButtonUpdate)="onActionPhaseStateUpdate()">
 				</app-phase-action>
 			</div>
             <div class="ares-background"

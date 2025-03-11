@@ -169,7 +169,9 @@ export class GameEventComponent {
 	}
 	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}){
 		this.eventHandler.onProjectActivated(input)
-
+	}
+	public onActionPhaseStateUpdate(): void {
+		this.eventHandler.updateActionPhaseMainButtonState()
 	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){

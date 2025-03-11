@@ -68,6 +68,7 @@ Add Angular animations
 Add settings options
 Add main buttons help popup
 Add victory check
+Add Forest points
 
 ## Interface
 Possibly change style to go full transparency for pop-ups + background floating hexes for text

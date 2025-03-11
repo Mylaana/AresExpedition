@@ -331,6 +331,7 @@ export class EventGeneric extends EventBaseModel {
     drawResultList?: number[]
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeQuantity?: number
+	addForestPoint?: number
 }
 
 export class EventDeckQuery extends EventBaseModel {

@@ -26,6 +26,7 @@ interface CreateEventOptionsGeneric {
     waiterId?:number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number
+	addForestPoint?: number
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -254,6 +255,10 @@ export class EventDesigner{
                 event.autoFinalize = false
                 break
             }
+			case('addForestPoint'):{
+				event.addForestPoint = args?.addForestPoint
+				break
+			}
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
