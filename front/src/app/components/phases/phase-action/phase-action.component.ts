@@ -129,6 +129,5 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 
 	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}){
 		this.projectActivated.emit(input)
-		console.log(input)
 	}
 }

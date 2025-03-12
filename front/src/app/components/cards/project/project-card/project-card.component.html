@@ -123,15 +123,25 @@
 		</button>
 	</div>
 </div>
+<p>{{projectCard.stock | json}}</p>
 
-<div *ngIf="state.isActivable()===true" class="wrapper-activation ares-background ares-border">
-	<div class="wrapper-button">
+<div class="wrapper-activation ares-background ares-border"
+	*ngIf="state.isActivable()===true"
+	[class.maximum-activation]="_maximumActivation"
+	@expandCollapseVertical>
+	<div class="wrapper-button"
+		*ngIf="_maximumActivation===false">
 		<app-non-event-button id="activate-once" [button]="_activateOnce" [shape]="'left'" (buttonClicked)="onActivate()"></app-non-event-button>
 		<app-non-event-button id="activate-twice" [button]="_activateTwice" [shape]="'right'" (buttonClicked)="onActivate()"></app-non-event-button>
 	</div>
 </div>
 
+
 <!--
+<p>{{_maximumActivation}}</p>
+<p>{{activableTwice}}</p>
+<p>{{projectCard.activated}}</p>
+
 <p>{{projectCard.id}} {{projectCard.cardCode}}</p>
 <p>{{projectCard.stock | json}}</p>
 <p>{{projectCard.stockable | json}}</p>

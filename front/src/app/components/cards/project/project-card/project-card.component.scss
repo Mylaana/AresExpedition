@@ -845,6 +845,10 @@ button {
 	border-top: 0;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+	&.maximum-activation{
+		height: calc(var(--card-height) * .04);
+		margin-bottom: calc(var(--card-height) * .14);
+	}
 }
 .wrapper-button{
 	display: flex;

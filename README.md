@@ -49,9 +49,6 @@ ProjectCardComposant major refactoring
 
 ## v1 planned features :
 ### Phase cards
-Phase 3: trigger service  
-Phase 3: dedicated event type listing activations per card   
-Phase 3: Add ressource spending buttons to terraform
 Phase cards upgrade: a phase card type can only be upgraded once   
 
 ### Cards
@@ -69,6 +66,8 @@ Add settings options
 Add main buttons help popup
 Add victory check
 Add Forest points
+Ares-background style to empty with faded hexes
+Add Event removing any ressource in list on played card
 
 ## Interface
 Possibly change style to go full transparency for pop-ups + background floating hexes for text

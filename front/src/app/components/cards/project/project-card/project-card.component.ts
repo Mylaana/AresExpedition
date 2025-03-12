@@ -10,8 +10,9 @@ import { PlayerStateModel } from '../../../../models/player-info/player-state.mo
 import { GlobalInfo } from '../../../../services/global/global-info.service';
 import { ProjectListType } from '../../../../types/project-card.type';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
-import { NonEventButton } from '../../../../models/core-game/button.model';
 import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
+import { expandCollapseVertical } from '../../../animations/animations';
 
 
 @Component({
@@ -26,6 +27,7 @@ import { ButtonDesigner } from '../../../../services/designers/button-designer.s
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss',
   providers: [CardCost],
+  animations: [expandCollapseVertical]
 })
 export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	@Output() cardActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
@@ -40,7 +42,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	_hovered: boolean = false
 	_activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce')
 	_activateTwice = ButtonDesigner.createNonEventButton('activateProjectTwice')
-	_activated: number = 0
+	//_activated: number = 0
 	_maximumActivation: boolean = false
 
 	constructor(
@@ -65,7 +67,11 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 			state => this.updateClientState(state)
 		)
 		this.checkPlayable()
+		this.checkMaximumActivation()
 
+		if(this.state.isActivable()){
+			this.updateActivationButtonsState()
+		}
 		this._loaded = true
 	}
 	resetCardState(): void {
@@ -113,12 +119,19 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		this.state.setBuildable(this.megacreditAvailable >= this.projectCard.cost)
 	}
 	public onActivate(): void {
-		this._activated += 1
-		this.cardActivated.emit({card: this.projectCard, twice: this._activated>1})
+		this.projectCard.activated += 1
 
-		this._activateOnce.updateEnabled(this._activated<1)
-		this._activateTwice.updateEnabled(this._activated===1 && this.activableTwice)
+		this.updateActivationButtonsState()
+		this.checkMaximumActivation()
 
-		this._maximumActivation = (this._activated>1 && this.activableTwice) || (this._activated>=1 && !this.activableTwice)
+		this.cardActivated.emit({card: this.projectCard, twice: this.projectCard.activated>1})
+	}
+	private updateActivationButtonsState(): void {
+		let payable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getPlayerStateFromId(this.gameStateService.clientPlayerId))
+		this._activateOnce.updateEnabled(this.projectCard.activated<1 && payable)
+		this._activateTwice.updateEnabled(this.projectCard.activated===1 && this.activableTwice && payable)
+	}
+	private checkMaximumActivation(): void {
+		this._maximumActivation = (this.projectCard.activated>1) || (this.projectCard.activated>=1 && this.activableTwice === false)
 	}
 }

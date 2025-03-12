@@ -234,6 +234,11 @@ export class EventHandler {
 				break
 			}
 			case('actionPhase'):{
+				//reset activation counts
+				for(let card of event.cardSelector.selectFrom){
+					card.activated = 0
+				}
+
 				break
 			}
 			case('researchPhaseResult'):{
