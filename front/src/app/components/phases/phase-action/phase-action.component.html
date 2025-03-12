@@ -1,9 +1,12 @@
 <div class="wrapper-main">
-	<app-non-event-button [button]="_convertForest" [shape]="'action'" (buttonClicked)="onClick(_convertForest)"></app-non-event-button>
-	<app-non-event-button [button]="_buyForest" [shape]="'action'" (buttonClicked)="onClick(_buyForest)"></app-non-event-button>
-	<app-non-event-button [button]="_convertTemperature" [shape]="'action'" (buttonClicked)="onClick(_convertTemperature)"></app-non-event-button>
-	<app-non-event-button [button]="_buyTemperature" [shape]="'action'" (buttonClicked)="onClick(_buyTemperature)"></app-non-event-button>
-	<app-non-event-button [button]="_convertInfrastructure" [shape]="'action'" (buttonClicked)="onClick(_convertInfrastructure)"></app-non-event-button>
-	<app-non-event-button [button]="_buyInfrastructure" [shape]="'action'" (buttonClicked)="onClick(_buyInfrastructure)"></app-non-event-button>
-	<app-non-event-button [button]="_buyOcean" [shape]="'action'" (buttonClicked)="onClick(_buyOcean)"></app-non-event-button>
+	<div class="wrapper-buttons">
+		<app-non-event-button [button]="_convertForest" [shape]="'action'" (buttonClicked)="onClick(_convertForest)"></app-non-event-button>
+		<app-non-event-button [button]="_buyForest" [shape]="'action'" (buttonClicked)="onClick(_buyForest)"></app-non-event-button>
+		<app-non-event-button [button]="_convertTemperature" [shape]="'action'" (buttonClicked)="onClick(_convertTemperature)"></app-non-event-button>
+		<app-non-event-button [button]="_buyTemperature" [shape]="'action'" (buttonClicked)="onClick(_buyTemperature)"></app-non-event-button>
+		<app-non-event-button [button]="_convertInfrastructure" [shape]="'action'" (buttonClicked)="onClick(_convertInfrastructure)"></app-non-event-button>
+		<app-non-event-button [button]="_buyInfrastructure" [shape]="'action'" (buttonClicked)="onClick(_buyInfrastructure)"></app-non-event-button>
+		<app-non-event-button [button]="_buyOcean" [shape]="'action'" (buttonClicked)="onClick(_buyOcean)"></app-non-event-button>
+	</div>
+	<app-project-card-list [event]="event" [listType]="'selector'" (projectActivated)="onProjectActivated($event)"></app-project-card-list>
 </div>

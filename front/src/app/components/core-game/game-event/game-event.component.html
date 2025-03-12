@@ -53,7 +53,8 @@
 				<app-phase-action
 					*ngIf="currentPhase==='ACTION' && currentEvent.subType==='actionPhase'"
 					[event]="this.currentEvent"
-					(actionPhaseButtonUpdate)="onActionPhaseStateUpdate()">
+					(actionPhaseButtonUpdate)="onActionPhaseStateUpdate()"
+					(projectActivated)="onProjectActivated($event)">
 				</app-phase-action>
 			</div>
             <div class="ares-background"
@@ -62,7 +63,7 @@
 				<h1>[Waiting for other players to be ready]</h1>
 			</div>
 			<div class="wrapper-selectors"
-				*ngIf="currentEvent.hasCardsToSelectFrom()"
+				*ngIf="currentEvent.hasCardsToSelectFrom() && currentEvent.subType!='actionPhase'"
 				[class.centered]="currentEvent.hasCardBuilder() === false"
 				@fadeIn>
 				<div class="wrapper-card-selector" >

@@ -5,6 +5,7 @@ import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.
 import { RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
 import { EventDesigner } from "../designers/event-designer.service";
+import { PlayerStateModel } from "../../models/player-info/player-state.model";
 
 
 @Injectable({
@@ -33,6 +34,12 @@ export class ProjectCardActivatedEffectService {
 		}
 		return result
 	}
+
+	static isActivationCostPayable(cardId: number, clientState: PlayerStateModel): boolean {
+
+		return false
+	}
+
 	private static createEventDraw(drawNumber: number): EventBaseModel {
 		return EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 	}

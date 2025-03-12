@@ -40,7 +40,7 @@ export class ProjectCardListComponent implements OnChanges{
 	_cardSelector!: CardSelector
 	_displayedCards!: ProjectCardModel[] | undefined;
 	_activateTwiceCount: number = 0
-	private _selectedCardList: ProjectCardModel[] = [];
+	private selectedCardList: ProjectCardModel[] = [];
 
 	ngOnInit(){
 		this.resetSelector()
@@ -75,10 +75,10 @@ export class ProjectCardListComponent implements OnChanges{
 		this.resetSelectedCardList()
 		for(let card of this.projectCards){
 			if(card.state.isSelected()===true){
-				this._selectedCardList.push(card.projectCard)
+				this.selectedCardList.push(card.projectCard)
 			}
 		}
-		this.updateSelectedCardList.emit({selected:this._selectedCardList, listType: this.listType})
+		this.updateSelectedCardList.emit({selected:this.selectedCardList, listType: this.listType})
 	}
 	private setSelector(): void {
 		this.resetSelector()
@@ -132,7 +132,7 @@ export class ProjectCardListComponent implements OnChanges{
 		if(this._displayedCards!=undefined && this._displayedCards.length===0){this._displayedCards=undefined}
 	}
 	private resetSelectedCardList(): void {
-		this._selectedCardList = []
+		this.selectedCardList = []
 	}
 
 	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}): void {

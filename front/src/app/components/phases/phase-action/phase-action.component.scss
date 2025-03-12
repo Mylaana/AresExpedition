@@ -1,9 +1,18 @@
 .wrapper-main{
 	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	border: red solid 1px;
+}
+.wrapper-buttons{
+	display: flex;
 	justify-content: space-between;
 	width: 65%;
-	min-height: 7vh;
-	padding-bottom: 3.5%;
+	height: 70px;
+	border: blue solid 1px;
+	margin-bottom: 3%;
 }
 :host::ng-deep app-text-with-image .wrapper-megacredit{
 	width: 20%;

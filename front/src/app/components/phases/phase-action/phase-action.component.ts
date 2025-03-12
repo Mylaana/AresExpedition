@@ -7,12 +7,15 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
 import { EventDesigner } from '../../../services/designers/event-designer.service';
+import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
+import { ProjectCardModel } from '../../../models/cards/project-card.model';
 
 @Component({
   selector: 'app-phase-action',
   standalone: true,
   imports: [
-	NonEventButtonComponent
+	NonEventButtonComponent,
+	ProjectCardListComponent
 ],
   templateUrl: './phase-action.component.html',
   styleUrl: './phase-action.component.scss'
@@ -20,6 +23,7 @@ import { EventDesigner } from '../../../services/designers/event-designer.servic
 export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	@Input() event!: EventBaseModel
 	@Output() actionPhaseButtonUpdate: EventEmitter<boolean> = new EventEmitter<boolean>()
+	@Output() projectActivated = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
 	_convertForest: NonEventButton = ButtonDesigner.createNonEventButton('convertForest')
 	_buyForest: NonEventButton = ButtonDesigner.createNonEventButton('buyForest')
 	_convertTemperature: NonEventButton = ButtonDesigner.createNonEventButton('convertTemperature')
@@ -121,5 +125,10 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 			}
 		}
 		this.gameStateService.addEventQueue(newEvents, 'first')
+	}
+
+	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}){
+		this.projectActivated.emit(input)
+		console.log(input)
 	}
 }
