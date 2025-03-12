@@ -6,12 +6,12 @@
 	<img class='selected-sell-image' *ngIf="state.isSelected() && parentListSubType==='sell'" src="/assets/other/cancel.png" alt="">
 	<img class='selected-sell-image' *ngIf="state.isSelected() && parentListSubType==='research'" src="/assets/other/research_eye.png" alt="">
 	<div class="wrapper-selection-border"
-		[class]="parentListType"
+		[class]="parentListSubType"
 		[class.selected]="state.isSelected()"
 		[class.selectable]="state.isSelectable()===true"
 		[class.hovered]="_hovered===true"
 		[class.disabled]="
-			(state.isBuildable()===false && state.isIgnoreCost()!=false && state.isSelectable()===false && state.isActivable()===false)
+			(state.isBuildable()===false && state.isIgnoreCost()!=false && state.isSelectable()===false && state.isActivable()===false && parentListSubType!='research')
 			|| (state.isActivable()===true && _maximumActivation)">
 		<button (click)="cardClick()" class="wrapper-card" [class]="projectCard.cardType"
 			[class.hovered]="_hovered"
@@ -136,7 +136,6 @@
 		<app-non-event-button id="activate-twice" [button]="_activateTwice" [shape]="'right'" (buttonClicked)="onActivate()"></app-non-event-button>
 	</div>
 </div>
-
 
 <!--
 <p>{{_maximumActivation}}</p>

@@ -92,6 +92,7 @@ export class ProjectCardListComponent implements OnChanges{
 		this.resetSelector()
 		if(selectorTypes.includes(this.listType)){
 			this.setSelectorFromEvent(this.event as EventCardSelector)
+			this.setListSubType(this.event as EventCardSelector)
 		}
 
 		this._activateTwiceCount = this._cardSelector.selectionQuantity
@@ -136,6 +137,7 @@ export class ProjectCardListComponent implements OnChanges{
 	private updateCardList(): void {
 		if(selectorTypes.includes(this.listType)){this.setSelector()}
 		this.setDisplay()
+
 
 		if(this._displayedCards!=undefined && this._displayedCards.length===0){this._displayedCards=undefined}
 	}
