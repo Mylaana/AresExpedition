@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { PlayerPhase } from '../../../interfaces/global.interface';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
@@ -8,6 +8,7 @@ import { GlobalPannelComponent } from '../global-pannel/global-pannel.component'
 import { RessourcePannelComponent } from '../ressource-pannel/ressource-pannel.component';
 import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
 import { expandCollapseVertical } from '../../animations/animations';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
 	selector: 'app-player-pannel',
@@ -22,7 +23,7 @@ import { expandCollapseVertical } from '../../animations/animations';
 	styleUrl: './player-pannel.component.scss',
 	animations: [expandCollapseVertical],
 })
-export class PlayerPannelComponent implements OnInit{
+export class PlayerPannelComponent implements OnInit, OnDestroy{
 	@Input() playerId!: number;
 
 	playerState!: PlayerStateModel;
@@ -31,22 +32,20 @@ export class PlayerPannelComponent implements OnInit{
 	playerPhase!: PlayerPhase;
 	currentPhase!: NonSelectablePhaseEnum;
 
+	private destroy$ = new Subject<void>()
+
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(){
-		this.gameStateService.currentGroupPlayerState.subscribe(
-			playersState => this.updatePlayerState()
-		)
-		this.gameStateService.currentGroupPlayerReady.subscribe(
-			playersReady => this.updatePlayerReady()
-		)
-		this.gameStateService.currentGroupPlayerSelectedPhase.subscribe(
-			playerPhase => this.updatePlayerPhase(playerPhase)
-		)
-		this.gameStateService.currentPhase.subscribe(
-			phase => this.currentPhase = phase
-		)
+		this.gameStateService.currentGroupPlayerState.pipe(takeUntil(this.destroy$)).subscribe(playersState => this.updatePlayerState())
+		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe(playersReady => this.updatePlayerReady())
+		this.gameStateService.currentGroupPlayerSelectedPhase.pipe(takeUntil(this.destroy$)).subscribe(playerPhase => this.updatePlayerPhase(playerPhase))
+		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.currentPhase = phase)
 		this.updatePlayerState()
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 	updatePlayerState(): void {
 		var checkPlayerState = this.gameStateService.getPlayerStateFromId(this.playerId)

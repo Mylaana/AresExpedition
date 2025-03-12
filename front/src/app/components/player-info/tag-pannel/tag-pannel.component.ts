@@ -4,20 +4,20 @@ import { TagCardComponent } from '../tag-card/tag-card.component';
 import { TagInfo } from '../../../interfaces/global.interface';
 
 @Component({
-  selector: 'app-tag-pannel',
-  standalone: true,
-  imports: [
-    CommonModule,
-    TagCardComponent
-  ],
-  templateUrl: './tag-pannel.component.html',
-  styleUrl: './tag-pannel.component.scss'
+	selector: 'app-tag-pannel',
+	standalone: true,
+	imports: [
+		CommonModule,
+		TagCardComponent
+	],
+	templateUrl: './tag-pannel.component.html',
+	styleUrl: './tag-pannel.component.scss'
 })
 export class TagPannelComponent {
-  @Input() playerId!: number;
-  @Input() tagState!: TagInfo[];
+	@Input() playerId!: number;
+	@Input() tagState!: TagInfo[];
 
-  ngOnInit(): void {
+	ngOnInit(): void {
 
-  }
+	}
 }

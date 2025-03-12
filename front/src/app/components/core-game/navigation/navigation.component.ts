@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerPannelComponent } from '../../player-info/player-pannel/player-pannel.component';
 import { expandCollapseVertical, fadeIn } from '../../animations/animations';
 import { AnimationEvent } from '@angular/animations';
 import { GlobalParameterPannelComponent } from '../../player-info/global-parameter-pannel/global-parameter-pannel.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
 	selector: 'app-navigation',
@@ -18,11 +19,13 @@ import { GlobalParameterPannelComponent } from '../../player-info/global-paramet
 	styleUrl: './navigation.component.scss',
 	animations: [expandCollapseVertical, fadeIn]
 })
-export class NavigationComponent implements OnInit, AfterViewInit{
+export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 	@Input() isScrolled: boolean = false
 	@Input() clientPlayerId!: number
 	_playerIdList: number[] = []
 	_playerPannelIsHovered: boolean = false
+
+	private destroy$ = new Subject<void>()
 
 	constructor(
 				private elRef: ElementRef,
@@ -30,9 +33,11 @@ export class NavigationComponent implements OnInit, AfterViewInit{
 			){}
 
 	ngOnInit(): void {
-		this.gameStateService.currentPlayerCount.subscribe(
-			playerCount => this.updatePlayerList(playerCount)
-		)
+		this.gameStateService.currentPlayerCount.pipe(takeUntil(this.destroy$)).subscribe(playerCount => this.updatePlayerList(playerCount))
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 
 	ngAfterViewInit(): void {
