@@ -1,5 +1,6 @@
 <div class="wrapper-button">
-	<button *ngIf="!_imageUrl" class="main" [disabled]="button.enabled===false"
+	<button *ngIf="!_imageUrl" class="main"
+		[disabled]="button.enabled===false"
 		[class.hovered]="_isHovered"
 		[ngClass]="[button.enabled? 'enabled':'disabled',shape?'button-shape--'+shape:'']"
 		(mouseenter)="_isHovered = true"
@@ -7,15 +8,23 @@
 		(click)="onClick(button)">
 
 		<div class="wrapper-elements">
-			<div *ngIf="button.enabled===true && shape!='hex_floating'" [ngClass]="['button-shape--'+shape, 'gradiant-mask--'+shape]">
+			<div *ngIf="_style==='plain' && button.enabled===true"
+				[ngClass]="['button-shape--'+shape, 'gradiant-mask--'+shape]">
 				<div [ngClass]="['button-gradiant-background--'+shape, 'button-shape--'+shape]"></div>
 			</div>
-			<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, button.enabled? 'enabled':'disabled']"><app-text-with-image [rawText]="_caption"></app-text-with-image></div>
-			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, button.enabled? 'enabled':'disabled']" [class.hovered]="_isHovered"></div>
-			<div class="button-border" [ngClass]="[button.enabled? 'enabled':'disabled']" [class.hovered]="_isHovered" *ngIf="shape==='hex_floating'"></div>
+			<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, button.enabled? 'enabled':'disabled']">
+				<app-text-with-image [rawText]="_caption"></app-text-with-image>
+			</div>
+			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, button.enabled? 'enabled':'disabled']"
+				[class.hovered]="_isHovered">
+			</div>
+			<div *ngIf="_style==='transparent'"
+				[ngClass]="[button.enabled? 'enabled':'disabled', 'button-border--' + shape]"
+				[class.hovered]="_isHovered" >
+			</div>
 		</div>
 	</button>
-	<div *ngIf="shape==='hex_floating'" class="shadow"
+	<div *ngIf="_style==='transparent'" class="shadow"
 		[class.hovered]="_isHovered"
 		[ngClass]="[button.enabled? 'enabled':'disabled']">
 	</div>

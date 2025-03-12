@@ -1,4 +1,18 @@
-.wrapper-action-phase{
-    width: 100%;
-    background: blue;
+.wrapper-main{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
 }
+.wrapper-buttons{
+	display: flex;
+	justify-content: space-between;
+	width: 65%;
+	height: 70px;
+	margin-bottom: 3%;
+}
+:host::ng-deep app-text-with-image .wrapper-megacredit{
+	width: 20%;
+}
+

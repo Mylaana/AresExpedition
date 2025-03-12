@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
@@ -9,6 +9,10 @@ import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
 import { ProjectListType } from '../../../../types/project-card.type';
+import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
+import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
+import { expandCollapseVertical } from '../../../animations/animations';
 
 
 @Component({
@@ -18,20 +22,28 @@ import { ProjectListType } from '../../../../types/project-card.type';
     CommonModule,
     TextWithImageComponent,
     LayoutCardBackgroundHexagonsComponent,
+	NonEventButtonComponent
   ],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss',
   providers: [CardCost],
+  animations: [expandCollapseVertical]
 })
 export class ProjectCardComponent extends BaseCardComponent implements OnInit {
+	@Output() cardActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
 	@Input() projectCard!: ProjectCardModel;
 	@Input() buildDiscount: number = 0
 	@Input() parentListType: ProjectListType = 'none'
+	@Input() activableTwice: boolean = false
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
 	readonly tagNumber = 3;
 
 	_hovered: boolean = false
+	_activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce')
+	_activateTwice = ButtonDesigner.createNonEventButton('activateProjectTwice')
+	//_activated: number = 0
+	_maximumActivation: boolean = false
 
 	constructor(
 		private gameStateService: GameState,
@@ -55,7 +67,11 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 			state => this.updateClientState(state)
 		)
 		this.checkPlayable()
+		this.checkMaximumActivation()
 
+		if(this.state.isActivable()){
+			this.updateActivationButtonsState()
+		}
 		this._loaded = true
 	}
 	resetCardState(): void {
@@ -99,12 +115,23 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		})
 		this.checkPlayable()
 	}
-
 	checkPlayable(): void {
 		this.state.setBuildable(this.megacreditAvailable >= this.projectCard.cost)
 	}
+	public onActivate(): void {
+		this.projectCard.activated += 1
 
-	activate(activationCount: number): void {
-		console.log('Activated: ', this.projectCard.title)
+		this.updateActivationButtonsState()
+		this.checkMaximumActivation()
+
+		this.cardActivated.emit({card: this.projectCard, twice: this.projectCard.activated>1})
+	}
+	private updateActivationButtonsState(): void {
+		let payable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getPlayerStateFromId(this.gameStateService.clientPlayerId))
+		this._activateOnce.updateEnabled(this.projectCard.activated<1 && payable)
+		this._activateTwice.updateEnabled(this.projectCard.activated===1 && this.activableTwice && payable)
+	}
+	private checkMaximumActivation(): void {
+		this._maximumActivation = (this.projectCard.activated>1) || (this.projectCard.activated>=1 && this.activableTwice === false)
 	}
 }

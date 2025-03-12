@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, DoCheck, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
@@ -18,8 +18,8 @@ import { NonEventButtonComponent } from '../../tools/button/non-event-button.com
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight } from '../../animations/animations';
 import { ProjectListType } from '../../../types/project-card.type';
-import { Utils } from '../../../utils/utils';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { PhaseActionComponent } from "../../phases/phase-action/phase-action.component";
 
 //this component is the main controller, and view
 
@@ -33,9 +33,10 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
     ProjectCardListComponent,
     PhaseCardUpgradeSelectorComponent,
     EventMainButtonComponent,
-	CardBuilderListComponent,
-	NonEventButtonComponent,
-	TextWithImageComponent
+    CardBuilderListComponent,
+    NonEventButtonComponent,
+    TextWithImageComponent,
+    PhaseActionComponent
 ],
 	templateUrl: './game-event.component.html',
 	styleUrl: './game-event.component.scss',
@@ -165,6 +166,12 @@ export class GameEventComponent {
 				this.eventHandler.cancelSellCardsOptional()
 			}
 		}
+	}
+	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}){
+		this.eventHandler.onProjectActivated(input)
+	}
+	public onActionPhaseStateUpdate(): void {
+		this.eventHandler.updateActionPhaseMainButtonState()
 	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){

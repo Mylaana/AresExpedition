@@ -30,7 +30,7 @@ export class ProjectCardModel {
 	stock?: AdvancedRessourceStock[];
     stockable?: AdvancedRessourceType[]
     triggerLimit!: TriggerLimit
-	activated!: number
+	activated: number = 0
 
     //not loaded from data
 

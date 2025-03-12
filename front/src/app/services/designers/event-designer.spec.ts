@@ -176,6 +176,16 @@ describe('Service - Designers - Event', () => {
                 expect(buttonSpy).toHaveBeenCalled()
             })
             it('should create a actionPhase selector Event', () => {
+				expectedSelector = {
+					selectFrom: [],
+					selectedList: [],
+					selectionQuantity: 1,
+					selectionQuantityTreshold: 'max',
+					cardInitialState: undefined,
+					filter: undefined,
+					stateFromParent: undefined
+				}
+				expectedEvent.cardSelector = expectedSelector
                 expectedSubType = 'actionPhase'
                 expectedEvent.subType = expectedSubType
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')

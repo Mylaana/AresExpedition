@@ -25,6 +25,19 @@ export class ButtonDesigner{
 			case('rollBack'):{startEnabled=true;break}
 			case('settings'):{startEnabled=true;break}
 
+			case('buyForest'):{startEnabled=true;break}
+			case('convertForest'):{startEnabled=true;break}
+			case('buyTemperature'):{startEnabled=true;break}
+			case('convertTemperature'):{startEnabled=true;break}
+			case('buyInfrastructure'):{startEnabled=true;break}
+			case('convertInfrastructure'):{startEnabled=true;break}
+			case('buyOcean'):{startEnabled=true;break}
+
+			//cards
+			case('activateProjectOnce'):{startEnabled=true; break}
+			case('activateProjectTwice'):{startEnabled=false; break}
+
+			//global
 			case('closeSettings'):{startEnabled=true;break}
 
             default:{startEnabled=false;break}
@@ -54,6 +67,20 @@ export class ButtonDesigner{
 			case('rollBack'):{caption='$other_rollback$';break}
 			case('settings'):{caption='$other_settings$';break}
 
+			case('convertForest'):{caption='8$ressource_plant$ $other_arrow$ $other_forest$';break}
+			case('buyForest'):{caption='$ressource_megacreditvoid_16$ $other_arrow$ $other_forest$';break}
+			case('buyTemperature'):{caption='$ressource_megacreditvoid_14$ $other_arrow$$other_temperature$';break}
+			case('convertTemperature'):{caption='$ressource_heat$ $other_arrow$ $other_temperature$';break}
+			case('convertInfrastructure'):{caption='5$ressource_heat$ + 3$ressource_plant$ $skipline$$other_arrow$ $skipline$ $other_infrastructure$ + $other_card$';break}
+			case('buyInfrastructure'):{caption='$ressource_megacreditvoid_15$ $other_arrow$ $skipline$ $other_infrastructure$ + $other_card$';break}
+			case('buyOcean'):{caption='$ressource_megacreditvoid_16$ $other_arrow$ $other_ocean$';break}
+
+
+			//cards
+			case('activateProjectOnce'):{caption='$other_activate$'; break}
+			case('activateProjectTwice'):{caption='$other_double_activate$'; break}
+
+			//global
 			case('closeSettings'):{caption='$other_cancel$';break}
 
             default:{caption='';break}

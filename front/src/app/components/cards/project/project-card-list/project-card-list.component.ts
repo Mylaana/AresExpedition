@@ -33,12 +33,14 @@ export class ProjectCardListComponent implements OnChanges{
 	@Input() hovered!: boolean
 
 	@Output() updateSelectedCardList: EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}> = new EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}>()
+	@Output() projectActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<ProjectCardComponent>
 
 	_buildDiscount: number = 0
 	_cardSelector!: CardSelector
 	_displayedCards!: ProjectCardModel[] | undefined;
-	private _selectedCardList: ProjectCardModel[] = [];
+	_activateTwiceCount: number = 0
+	private selectedCardList: ProjectCardModel[] = [];
 
 	ngOnInit(){
 		this.resetSelector()
@@ -73,16 +75,18 @@ export class ProjectCardListComponent implements OnChanges{
 		this.resetSelectedCardList()
 		for(let card of this.projectCards){
 			if(card.state.isSelected()===true){
-				this._selectedCardList.push(card.projectCard)
+				this.selectedCardList.push(card.projectCard)
 			}
 		}
-		this.updateSelectedCardList.emit({selected:this._selectedCardList, listType: this.listType})
+		this.updateSelectedCardList.emit({selected:this.selectedCardList, listType: this.listType})
 	}
 	private setSelector(): void {
 		this.resetSelector()
 		if(selectorTypes.includes(this.listType)){
 			this.setSelectorFromEvent(this.event as EventCardSelector)
 		}
+
+		this._activateTwiceCount = this._cardSelector.selectionQuantity
 	}
 	private setSelectorFromEvent(event: EventCardSelector): void {
 		this._cardSelector = event.cardSelector
@@ -128,8 +132,12 @@ export class ProjectCardListComponent implements OnChanges{
 		if(this._displayedCards!=undefined && this._displayedCards.length===0){this._displayedCards=undefined}
 	}
 	private resetSelectedCardList(): void {
-		this._selectedCardList = []
+		this.selectedCardList = []
 	}
 
+	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}): void {
+		this.projectActivated.emit(input)
+		this.setSelector()
+	}
 }
 

@@ -116,7 +116,7 @@
                         "valueMod": 0,
                         "valueProd": 0,
                         "valueBaseProd": 0,
-                        "valueStock": 0,
+                        "valueStock": 16,
                         "hasStock": true,
                         "imageUrlId": 1007
                     },
@@ -126,7 +126,7 @@
                         "valueMod": 0,
                         "valueProd": 0,
                         "valueBaseProd": 0,
-                        "valueStock": 0,
+                        "valueStock": 11,
                         "hasStock": true,
                         "imageUrlId": 1004
                     },
@@ -163,7 +163,7 @@
                 ]
             },
             "projectCardState": {
-                "hand": [20,25, 108, 229, 62,20,25, 108, 229, 62],
+                "hand": [20,25, 108, 229, 62, 222],
                 "playedProjectIdList": [4, 9, 20],
                 "playedProjectCardStocks": {
                     "22": {"microbe": 2, "animal": 12},

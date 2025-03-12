@@ -14,6 +14,7 @@ import { Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ProjectListType } from "../../types/project-card.type";
+import { ProjectCardActivatedEffectService } from "../../services/cards/project-card-activated-effect.service";
 
 @Injectable()
 export class EventHandler {
@@ -91,6 +92,23 @@ export class EventHandler {
 		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
 		this.cancelCurrentEvent()
 	}
+	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}): void {
+		let event = this.currentEvent as EventCardSelector
+		if(input.twice){event.cardSelector.selectionQuantity -= 1}
+		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card)
+		if(!addEvents){return}
+		this.gameStateService.addEventQueue(addEvents,'first')
+	}
+	public updateActionPhaseMainButtonState(enabled?: boolean): void {
+
+		let state = this.gameStateService.getClientState()
+		let plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
+		let heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
+		enabled = (heatStock>=8  || plantStock>=8 || (heatStock>=5  && plantStock>=3)) === false
+
+		this.currentEvent.button?.updateEnabled(enabled)
+		console.log(this.currentEvent.button)
+	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()
@@ -157,6 +175,20 @@ export class EventHandler {
 				if(selectFrom.length===0){event.finalized=true;break}
 				event.activateSelection()
 				event.cardSelector.selectFrom = selectFrom
+				break
+			}
+			case('actionPhase'):{
+				let state = this.gameStateService.getClientState()
+				let plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
+				let heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
+				let finishPhaseButtonEnabled = (heatStock>=8  || plantStock>=8 || (heatStock>=5  && plantStock>=3)) === false
+
+				event.cardSelector.selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.cardSelector.filter)
+				if(event.button){
+					event.button.startEnabled = finishPhaseButtonEnabled
+					event.button.resetStartEnabled()
+				}
+				break
 			}
 		}
     }
@@ -202,6 +234,11 @@ export class EventHandler {
 				break
 			}
 			case('actionPhase'):{
+				//reset activation counts
+				for(let card of event.cardSelector.selectFrom){
+					card.activated = 0
+				}
+
 				break
 			}
 			case('researchPhaseResult'):{
