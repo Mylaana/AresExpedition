@@ -7,7 +7,7 @@ import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { EventBaseModel, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
 import { ProjectCardComponent } from '../project-card/project-card.component';
-import { ProjectListType } from '../../../../types/project-card.type';
+import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
 
@@ -25,6 +25,7 @@ export class ProjectCardListComponent implements OnChanges{
 	@Input() eventId?: number;
 	@Input() cardList!: ProjectCardModel[]
 	@Input() listType: ProjectListType = 'none'
+	@Input() listSubType: ProjectListSubType = 'none'
 	@Input() selectedDiscount: number = 0
 
 	//display related inputs
@@ -46,6 +47,7 @@ export class ProjectCardListComponent implements OnChanges{
 		this.resetSelector()
 		this.updateCardList()
 		this.setBackground()
+		if(this.event){this.setListSubType(this.event as EventCardSelector)}
 	}
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['event'] && changes['event'].currentValue) {this.updateCardList(); return}
@@ -59,6 +61,12 @@ export class ProjectCardListComponent implements OnChanges{
 		switch(this.listType){
 			case('builderSelector'):{this.background = (this.currentPhase).toLowerCase(); break}
 			default:{this.background = this.listType}
+		}
+	}
+	private setListSubType(event: EventCardSelector): void {
+		switch(event.subType){
+			case('selectCardForcedSell'):case('selectCardOptionalSell'):{this.listSubType = 'sell'; break}
+			case('researchPhaseResult'):{this.listSubType = 'research'; break}
 		}
 	}
 	private resetSelector(): void {

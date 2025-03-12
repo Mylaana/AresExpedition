@@ -17,3 +17,4 @@ export type TriggerLimit = {
 }
 
 export type ProjectListType = 'none' | 'hand' | 'played' | 'selector' | 'builderSelector' | 'builderSelectedZone' | 'playedSelector'
+export type ProjectListSubType = 'none' |'sell' | 'research'

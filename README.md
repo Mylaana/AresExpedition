@@ -36,8 +36,6 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 Planification Validation should only work if phase button selected   
-Research card selection using sell selection visuals   
-Add unsubscriptions to subjects in every component.   
 
 ## Refactoring :
 text with image component: refactoring   

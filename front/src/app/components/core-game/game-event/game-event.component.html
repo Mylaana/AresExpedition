@@ -73,6 +73,7 @@
 						[currentPhase]="currentPhase"
 						[event]="currentEvent"
 						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
+
 						(updateSelectedCardList)="updateSelectedCardList($event)"
 						(projectActivated)="onProjectActivated($event)">
 					</app-project-card-list>
@@ -89,3 +90,8 @@
     <div class="selection-active-right"></div>
 </div>
 
+<!--
+						[listSubType]="
+							(currentEvent.subType==='selectCardOptionalSell' || currentEvent.subType==='selectCardForcedSell')?'sell':
+							()"
+							-->
