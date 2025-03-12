@@ -126,9 +126,12 @@ export class EventHandler {
 
 		this.currentEvent.onSwitch()
 
-        //call selector related switchEvents
+        //call general switchEvents cases
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
 		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent)}
+
+		//specific cases
+		if(this.currentEvent.subType==='planificationPhase' && this.currentEvent.button){this.currentEvent.button.resetStartEnabled()}
 
 		this.applyAutoFinalize()
         return
@@ -331,6 +334,7 @@ export class EventHandler {
 				break
 			}
 			case('planificationPhase'):{
+				this.gameStateService.playerSelectPhase(this.clientPlayerId, event.selectedPhase?.toUpperCase() as SelectablePhaseEnum)
 				this.gameStateService.clientPlayerValidateSelectedPhase()
 				break
 			}

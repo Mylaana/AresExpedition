@@ -12,7 +12,7 @@ $round-width: 3%;
 	$command-pannel-padding: 1%;
     z-index: 10;
     position: sticky;
-    left: 0%; //$round-width;
+    left: 0%;
     top: calc(var(--navbar-height));
     max-height: 100%;
     height: $command-pannel-height;

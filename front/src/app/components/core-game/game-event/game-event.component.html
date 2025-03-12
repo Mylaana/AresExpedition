@@ -48,7 +48,8 @@
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
 					@fadeIn
 					[clientPlayerId]="clientPlayerId"
-					(phaseSelected)="phaseSelected()"></app-phase-planification>
+					[event]="currentEvent"
+					(phaseSelected)="onPhaseSelected()"></app-phase-planification>
 				<app-phase-production
 					*ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"
 					@fadeIn></app-phase-production>

@@ -8,6 +8,7 @@ import { TextWithImageComponent } from '../../tools/text-with-image/text-with-im
 import { SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ButtonNames } from '../../../types/global.type';
 import { expandCollapseVertical, fadeIn } from '../../animations/animations';
+import { EventBaseModel, EventGeneric } from '../../../models/core-game/event.model';
 
 const phaseList: SelectablePhaseEnum[] = [SelectablePhaseEnum.development, SelectablePhaseEnum.construction, SelectablePhaseEnum.action, SelectablePhaseEnum.production, SelectablePhaseEnum.research]
 const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
@@ -31,6 +32,7 @@ const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
 	animations: [expandCollapseVertical, fadeIn]
 })
 export class PhasePlanificationComponent {
+	@Input() event!: EventBaseModel
 	@Input() clientPlayerId!: number;
 	@Output() phaseSelected: EventEmitter<any> = new EventEmitter<any>()
 	buttonList: ImageButton [] = []
@@ -72,12 +74,17 @@ export class PhasePlanificationComponent {
 	}
 	public buttonClicked(button: ImageButton){
 		if(button.name===undefined){return}
-		this.currentPhaseSelected = button.name as SelectablePhaseEnum
+		this.setSelectedPhase(this.event as EventGeneric, button.name as SelectablePhaseEnum)
 
-		this.gameStateService.playerSelectPhase(this.clientPlayerId, button.value as SelectablePhaseEnum)
+		//this.gameStateService.playerSelectPhase(this.clientPlayerId, button.value as SelectablePhaseEnum)
 
 		this.currentPhaseCard = undefined
 		this.setCurrentPhaseCard()
-		this.phaseSelected.emit()
+		//this.phaseSelected.emit()
+	}
+	public setSelectedPhase(event: EventGeneric, phase: SelectablePhaseEnum): void {
+		this.currentPhaseSelected = phase
+		event.selectedPhase = phase
+		event.button?.updateEnabled(true)
 	}
 }

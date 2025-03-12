@@ -35,7 +35,7 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Planification Validation should only work if phase button selected   
+
 
 ## Refactoring :
 text with image component: refactoring   
