@@ -12,7 +12,7 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 Frontend: Angular 17   
 Backend: Java 23   
 API: Java Spring Boot, websocket STOMP   
-Misc: script in Python   
+CSV card data parser: Python   
 
 ## Testing
 Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%   
