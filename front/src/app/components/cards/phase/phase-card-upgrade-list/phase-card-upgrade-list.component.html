@@ -1,12 +1,16 @@
+<p>upgraded: {{phaseGroup.phaseIsUpgraded}}</p>
+<p>finished: {{upgradeFinished}}</p>
 <div class="wrapper-main">
 	<div class="wrapper-phase-card-zone ares-background">
-		<app-phase-card #phaseCards *ngFor="let phaseCardIndex of phaseCardLevelList"
-		[phaseIndex]="phaseIndex" [phaseCardLevel]="phaseCardIndex"
-		[stateFromParent]="phaseCardState[phaseCardIndex]"
-		[initialState]="cardInitialState"
-		[phaseCard]="phaseCardModels[phaseCardIndex]"
-		[stateFromParent]="stateFromParent"
-		(phaseCardUpgraded)="phaseCardUpgraded($event)"></app-phase-card>
+		<app-phase-card #phaseCards *ngFor="let card of phaseGroup.phaseCards"
+			[phaseIndex]="phaseGroup.phaseIndex"
+			[phaseCardLevel]="card.cardLevel"
+			[stateFromParent]="phaseCardState[card.cardLevel]"
+			[initialState]="cardInitialState"
+			[phaseCard]="phaseCardModels[card.cardLevel]"
+			[stateFromParent]="stateFromParent"
+			[phaseGroupUpgraded]="phaseGroup.phaseIsUpgraded || upgradeFinished"
+			(phaseCardUpgraded)="phaseCardUpgraded($event)"></app-phase-card>
 	</div>
 </div>
 <p>state: {{this.cardInitialState | json}}</p>

@@ -163,7 +163,7 @@
                 ]
             },
             "projectCardState": {
-                "hand": [20,25, 108, 229, 62, 222],
+                "hand": [20,25, 108, 229, 62, 222, 253, 253],
                 "playedProjectIdList": [4, 9, 20],
                 "playedProjectCardStocks": {
                     "22": {"microbe": 2, "animal": 12},
@@ -181,15 +181,29 @@
                 "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseGroups": [
+                "phaseCards": [
                     {
                         "phaseIndex": 0,
-                        "phaseGroup": "enum",
-                        "phaseCards": []
+                        "cardLevel": 1
+                    },
+                    {
+                        "phaseIndex": 1,
+                        "cardLevel": 2
+                    },
+                    {
+                        "phaseIndex": 2,
+                        "cardLevel": 0
+                    },
+                    {
+                        "phaseIndex": 3,
+                        "cardLevel": 0
+                    },
+                    {
+                        "phaseIndex": 4,
+                        "cardLevel": 0
                     }
                 ],
-                "phaseCardUpgradedCount": 2,
-                "selectedPhase": "DEVELOPMENT"
+                "selectedPhase": "UNDEFINED"
             },
             "globalParameterState": {
                 "globalParameters": [
@@ -391,15 +405,13 @@
                 "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseGroups": [
+                "phaseCards": [
                     {
                         "phaseIndex": 0,
-                        "phaseGroup": "enum",
-                        "phaseCards": []
+                        "cardLevel": 0
                     }
                 ],
-                "phaseCardUpgradedCount": 2,
-                "selectedPhase": "DEVELOPMENT"
+                "selectedPhase": "CONSTRUCTION"
             },
             "globalParameterState": {
                 "globalParameters": [
@@ -601,15 +613,13 @@
                 "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseGroups": [
+                "phaseCards": [
                     {
                         "phaseIndex": 0,
-                        "phaseGroup": "enum",
-                        "phaseCards": []
+                        "cardLevel": 0
                     }
                 ],
-                "phaseCardUpgradedCount": 2,
-                "selectedPhase": "DEVELOPMENT"
+                "selectedPhase": "CONSTRUCTION"
             },
             "globalParameterState": {
                 "globalParameters": [
@@ -811,15 +821,13 @@
                 "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseGroups": [
+                "phaseCards": [
                     {
                         "phaseIndex": 0,
-                        "phaseGroup": "enum",
-                        "phaseCards": []
+                        "cardLevel": 0
                     }
                 ],
-                "phaseCardUpgradedCount": 2,
-                "selectedPhase": "DEVELOPMENT"
+                "selectedPhase": "CONSTRUCTION"
             },
             "globalParameterState": {
                 "globalParameters": [

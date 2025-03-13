@@ -2,39 +2,25 @@ package com.ares_expedition.model.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
+import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.PhaseCardDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
 
 public class PlayerPhaseCardState {
-    private List<Map<String, Object>> phaseGroups = new ArrayList<Map<String, Object>>();
-    private Number phaseCardUpgradedCount;
+    private List<PhaseCard> phaseCards = new ArrayList<PhaseCard>();
     private PhaseEnum selectedPhase;
 
     public PlayerPhaseCardState() {
     }
 
     public PlayerPhaseCardState(PlayerPhaseCardStateDTO dto) {
-        this.phaseGroups = dto.getPhaseGroups();
-        this.phaseCardUpgradedCount = dto.getPhaseCardUpgradedCount();
+        for (PhaseCardDTO card : dto.getPhaseCards()) {
+            this.phaseCards.add(PhaseCard.fromJson(card));
+        }
         this.selectedPhase = dto.getSelectedPhase();
-    }
-
-    public List<Map<String, Object>> getPhaseGroups() {
-        return phaseGroups;
-    }
-
-    public void setPhaseGroups(List<Map<String, Object>> phaseGroups) {
-        this.phaseGroups = phaseGroups;
-    }
-
-    public Number getPhaseCardUpgradedCount() {
-        return phaseCardUpgradedCount;
-    }
-
-    public void setPhaseCardUpgradedCount(Number phaseCardUpgradedCount) {
-        this.phaseCardUpgradedCount = phaseCardUpgradedCount;
     }
 
     public PhaseEnum getSelectedPhase() {
@@ -43,6 +29,14 @@ public class PlayerPhaseCardState {
 
     public void setSelectedPhase(PhaseEnum selectedPhase) {
         this.selectedPhase = selectedPhase;
+    }
+    
+    public List<PhaseCard> getPhaseCards() {
+        return phaseCards;
+    }
+    
+    public void setPhaseCards(List<PhaseCard> phaseCards) {
+        this.phaseCards = phaseCards;
     }
 
     public static PlayerPhaseCardState fromJson(PlayerPhaseCardStateDTO dto) {

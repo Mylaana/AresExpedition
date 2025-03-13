@@ -20,9 +20,9 @@ import { Subject, takeUntil } from 'rxjs';
 export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 	@Input() event!: EventBaseModel
 	phaseGroups!: PhaseCardGroupModel[]
-	upgradeNumber: number = 0
+	_upgradeNumber: number = 0
 	phaseList!: number[]
-	private _currentEvent!: EventGeneric
+	private currentEvent!: EventGeneric
 	@ViewChildren('phaseUpgradeList') phaseUpgradeList!: QueryList<PhaseCardUpgradeListComponent>
 
 	private destroy$ = new Subject<void>()
@@ -30,18 +30,18 @@ export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit():void{
-		this._currentEvent = this.event as EventGeneric
-		this.phaseList =  this._currentEvent.phaseCardUpgradeList??[0,1,2,3,4]
-		this.upgradeNumber = this._currentEvent.phaseCardUpgradeQuantity??0
+		this.currentEvent = this.event as EventGeneric
+		this.phaseList =  this.currentEvent.phaseCardUpgradeList??[0,1,2,3,4]
+		this._upgradeNumber = this.currentEvent.phaseCardUpgradeQuantity??0
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(
-			state => this.stateUpdated(state)
+			state => this.onStateUpdate(state)
 		)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
-	stateUpdated(clientState: PlayerStateModel){
+	onStateUpdate(clientState: PlayerStateModel){
 		this.phaseGroups = clientState.getPhaseGroups()
 		console.log(this.phaseGroups)
 		if(this.phaseUpgradeList===undefined){return}
@@ -50,12 +50,12 @@ export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 		}
 	}
 	public cardUpgraded(): void {
-		if(this._currentEvent.phaseCardUpgradeQuantity===undefined){return}
-		this._currentEvent.phaseCardUpgradeQuantity -= 1
-		if(this._currentEvent.phaseCardUpgradeQuantity>0){return}
+		if(this.currentEvent.phaseCardUpgradeQuantity===undefined){return}
+		this.currentEvent.phaseCardUpgradeQuantity -= 1
+		if(this.currentEvent.phaseCardUpgradeQuantity>0){return}
 		for(let list of this.phaseUpgradeList){
 			list.setUpgradeFinished()
 		}
-		console.log(this._currentEvent.phaseCardUpgradeQuantity)
+		console.log(this.currentEvent.phaseCardUpgradeQuantity)
 	}
 }

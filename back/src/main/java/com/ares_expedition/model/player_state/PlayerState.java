@@ -14,6 +14,7 @@ import com.ares_expedition.model.player_state.subclass.PlayerProjectCardState;
 import com.ares_expedition.model.player_state.subclass.PlayerRessourceState;
 import com.ares_expedition.model.player_state.subclass.PlayerScoreState;
 import com.ares_expedition.model.player_state.subclass.PlayerTagState;
+import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
 import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
 
 public class PlayerState {
@@ -207,20 +208,12 @@ public class PlayerState {
         this.phaseCardState = phaseCardState;
     }
 
-    public List<Map<String, Object>> getPhaseGroups() {
-        return this.phaseCardState.getPhaseGroups();
+    public List<PhaseCard> getPhaseCards() {
+        return this.phaseCardState.getPhaseCards();
     }
 
-    public void setPhaseGroups(List<Map<String, Object>> phaseGroups) {
-        this.phaseCardState.setPhaseGroups(phaseGroups);
-    }
-
-    public Number getPhaseCardUpgradedCount() {
-        return this.phaseCardState.getPhaseCardUpgradedCount();
-    }
-
-    public void setPhaseCardUpgradedCount(Number phaseCardUpgradedCount) {
-        this.phaseCardState.setPhaseCardUpgradedCount(phaseCardUpgradedCount);
+    public void setPhaseCards(List<PhaseCard> phaseCards) {
+        this.phaseCardState.setPhaseCards(phaseCards);
     }
 
     public PhaseEnum getSelectedPhase() {

@@ -21,12 +21,14 @@ export class PhaseCardComponent extends BaseCardComponent {
 	@Input() phaseCardLevel: number = 0;
 	@Input() phaseIndex!: number;
 	@Input() phaseCard!: PhaseCardModel;
+	@Input() phaseGroupUpgraded: boolean = false
 	@Output() phaseCardUpgraded: EventEmitter<PhaseCardUpgradeType> = new EventEmitter<PhaseCardUpgradeType>()
 
 	override ngOnInit():void {
 		super.ngOnInit()
 		if(this.phaseIndex===undefined){this.phaseIndex=0}
 		this.setState()
+		console.log(this.phaseCard)
 	}
 
 	upgrade(){
