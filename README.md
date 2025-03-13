@@ -35,7 +35,7 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-
+red production visual effect appearing blank
 
 ## Refactoring :
 text with image component: refactoring   
