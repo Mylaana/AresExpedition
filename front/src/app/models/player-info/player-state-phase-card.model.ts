@@ -5,30 +5,26 @@ import { PhaseCardInfoService } from "../../services/cards/phase-card-info.servi
 import { PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model"
-import { PlayerPhaseCardStateDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { PhaseCardDTO, PlayerPhaseCardStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 
 export class PlayerPhaseCardStateModel {
-	private phaseGroups!: PhaseCardGroupModel[] //this.initializePhaseGroups();
-	private phaseCardUpgradeCount!: number
+	private phaseGroups!: PhaseCardGroupModel[]
+	private phaseCardUpgradeCount: number = 0
 	private selectedPhase!: SelectablePhaseEnum
 
 	private phaseService: PhaseCardInfoService
 
-	constructor(private injector: Injector, dto: PlayerPhaseCardStateDTO){
+	constructor(private injector: Injector, dto: PlayerPhaseCardStateDTO, instantiateEmpty: boolean = false){
 		this.phaseService = this.injector.get(PhaseCardInfoService)
-		this.phaseGroups = this.initializePhaseGroups()
-		this.selectedPhase = SelectablePhaseEnum.undefined
-		//this.phaseGroups = dto.pg
-		this.phaseCardUpgradeCount = dto.pcuc
-		this.selectedPhase = dto.sp
-	}
 
-	private initializePhaseGroups(): PhaseCardGroupModel[] {
-		let groups: PhaseCardGroupModel[] = []
-		for(let groupName of GAME_SELECTABLE_PHASE_LIST){
-			groups.push(this.phaseService.getNewPhaseGroup(groupName))
+		if(instantiateEmpty){
+			this.phaseGroups = []
+			this.selectedPhase = SelectablePhaseEnum.undefined
+			return
 		}
-		return groups
+
+		this.selectedPhase = dto.sp
+		this.phaseGroups = this.phaseGroupFromJson(dto.pc)
 	}
 
 	getPhaseCardUpgradedCount(): number { return this.phaseCardUpgradeCount }
@@ -58,25 +54,60 @@ export class PlayerPhaseCardStateModel {
 
 	toJson(): PlayerPhaseCardStateDTO {
 		return {
-			pg: this.phaseGroups,
-			pcuc: this.phaseCardUpgradeCount,
+			pc: this.phaseGroupToJson(this.phaseGroups),
 			sp: this.selectedPhase
 		}
 	}
 	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseCardStateModel {
-		if (!data.pg || !data.pcuc || !data.sp){
+		if (!data.pc || !data.sp){
 			throw new Error("Invalid PlayerPhaseCardStateDTO: Missing required fields")
 		}
 		return new PlayerPhaseCardStateModel(injector, data)
 	}
+
+	private phaseGroupToJson(phaseGroups: PhaseCardGroupModel[]): PhaseCardDTO[] {
+		//converts only upgraded cards
+		let phaseCards: PhaseCardDTO[] = []
+
+		for(let group of phaseGroups){
+			for(let card of group.phaseCards){
+				if(card.phaseCardUpgraded){
+					phaseCards.push({cl: card.cardLevel, pi: card.phaseId})
+					break
+				}
+			}
+		}
+
+		return phaseCards
+	}
+
+	private phaseGroupFromJson(phaseCards: PhaseCardDTO[]): PhaseCardGroupModel[] {
+		let groups: PhaseCardGroupModel[] = []
+		for(let groupName of GAME_SELECTABLE_PHASE_LIST){
+			groups.push(this.phaseService.getNewPhaseGroup(groupName))
+		}
+
+
+		//load upgraded from dto
+		for(let card of phaseCards) {
+			groups[card.pi].phaseCards[card.cl].setPhaseCardUpgraded(true)
+			if(card.cl!=0){
+				groups[card.pi].phaseIsUpgraded = true
+				this.phaseCardUpgradeCount += 1
+			}
+		}
+
+		return groups
+	}
+
 	static empty(injector: Injector): PlayerPhaseCardStateModel {
 		return new PlayerPhaseCardStateModel(
 			injector,
 			{
-				pg: [],
-				pcuc: 0,
+				pc: [],
 				sp: SelectablePhaseEnum.undefined
-			}
+			},
+			true
 		)
 	}
 }

@@ -183,5 +183,5 @@ export class GameEventComponent {
 			}
 		}
 	}
-	public phaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
+	public onPhaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
 }

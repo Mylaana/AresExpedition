@@ -12,7 +12,7 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 Frontend: Angular 17   
 Backend: Java 23   
 API: Java Spring Boot, websocket STOMP   
-Misc: script in Python   
+CSV card data parser: Python   
 
 ## Testing
 Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%   
@@ -35,9 +35,7 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Planification Validation should only work if phase button selected   
-Research card selection using sell selection visuals   
-Add unsubscriptions to subjects in every component.   
+red production visual effect appearing blank
 
 ## Refactoring :
 text with image component: refactoring   

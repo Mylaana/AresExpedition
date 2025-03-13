@@ -6,7 +6,9 @@ public enum PhaseEnum {
     CONSTRUCTION(2),
     ACTION(3),
     PRODUCTION(4),
-    RESEARCH(5);
+    RESEARCH(5),
+    UNDEFINED(6);
+
 
     private final int priority;
 

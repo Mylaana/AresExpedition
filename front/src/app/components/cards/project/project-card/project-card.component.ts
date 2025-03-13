@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, inject, EventEmitter, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
@@ -8,11 +8,12 @@ import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
-import { ProjectListType } from '../../../../types/project-card.type';
+import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
 import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
 import { expandCollapseVertical } from '../../../animations/animations';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -29,11 +30,12 @@ import { expandCollapseVertical } from '../../../animations/animations';
   providers: [CardCost],
   animations: [expandCollapseVertical]
 })
-export class ProjectCardComponent extends BaseCardComponent implements OnInit {
+export class ProjectCardComponent extends BaseCardComponent implements OnInit, OnDestroy {
 	@Output() cardActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
 	@Input() projectCard!: ProjectCardModel;
 	@Input() buildDiscount: number = 0
 	@Input() parentListType: ProjectListType = 'none'
+	@Input() parentListSubType: ProjectListSubType = 'none'
 	@Input() activableTwice: boolean = false
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
@@ -44,6 +46,8 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 	_activateTwice = ButtonDesigner.createNonEventButton('activateProjectTwice')
 	//_activated: number = 0
 	_maximumActivation: boolean = false
+
+	private destroy$ = new Subject<void>()
 
 	constructor(
 		private gameStateService: GameState,
@@ -63,9 +67,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 		}
 
 		// subscribe to gameState
-		this.gameStateService.currentClientState.subscribe(
-			state => this.updateClientState(state)
-		)
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
 		this.checkPlayable()
 		this.checkMaximumActivation()
 
@@ -73,6 +75,10 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit {
 			this.updateActivationButtonsState()
 		}
 		this._loaded = true
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 	resetCardState(): void {
 		if(this.megacreditAvailable===0){return}

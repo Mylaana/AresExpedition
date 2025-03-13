@@ -92,10 +92,12 @@ button {
 			cursor: pointer;
 		}
 	}
-	&.selected.selector{
-		filter: grayscale(100%);
-		&.hovered{
-			//z-index: 1001;
+	&.selected{
+		&.sell{
+			filter: grayscale(100%);
+		}
+		&.research{
+			filter:grayscale(0)
 		}
 	}
 }

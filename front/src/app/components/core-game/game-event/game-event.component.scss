@@ -12,7 +12,7 @@ $round-width: 3%;
 	$command-pannel-padding: 1%;
     z-index: 10;
     position: sticky;
-    left: 0%; //$round-width;
+    left: 0%;
     top: calc(var(--navbar-height));
     max-height: 100%;
     height: $command-pannel-height;
@@ -185,11 +185,6 @@ app-card-builder-list{
 		justify-content: center;
 	}
 }
-/*
-.wrapper-selectors.centered{
-	align-items: center;
-	justify-content: center;
-}*/
 .wrapper-event-description{
 	display: flex;
 	flex-direction: column;
@@ -201,13 +196,10 @@ app-phase-card-upgrade-selector{
 }
 .wrapper-other-event{
 	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
 }
 
 app-phase-action{
 	width: 100%;
-	//min-height: 7vh;
 	display: flex;
 	justify-content: center;
 	flex-grow: 1;

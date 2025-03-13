@@ -24,7 +24,7 @@ export class PhaseCardInfoService {
 			newPhaseCard.phaseType = cardData.phaseType as PhaseCardType
 			newPhaseCard.baseDescription = cardData.baseDescription[language]
 			newPhaseCard.bonusDescription = cardData.bonusDescription[language]
-			newPhaseCard.phaseCardUpgraded = cardData.cardLevel===0 //first card starts as true
+			newPhaseCard.phaseCardUpgraded = false
 
 			phaseCards.push(newPhaseCard)
 		}
@@ -54,7 +54,15 @@ export class PhaseCardInfoService {
 		//cards
 		for(let card of this.phaseCards){
 			if(card.phaseGroup===phaseGroupType){
-				phaseGroup.phaseCards.push(card)
+				let newCard = new PhaseCardModel
+				newCard.phaseId = card.phaseId
+				newCard.cardLevel = card.cardLevel
+				newCard.phaseGroup = card.phaseGroup
+				newCard.phaseType = card.phaseType
+				newCard.baseDescription = card.baseDescription
+				newCard.bonusDescription = card.bonusDescription
+				newCard.phaseCardUpgraded = Utils.jsonCopy(card.phaseCardUpgraded)
+				phaseGroup.phaseCards.push(newCard)
 			}
 		}
 

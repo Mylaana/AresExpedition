@@ -2,17 +2,16 @@ package com.ares_expedition.dto.websocket.content.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.PhaseCardDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.subclass.PlayerPhaseCardState;
+import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerPhaseCardStateDTO {
-    @JsonProperty("pg")
-    private List<Map<String, Object>> phaseGroups = new ArrayList<Map<String, Object>>();
-    @JsonProperty("pcuc")
-    private Number phaseCardUpgradedCount;
+    @JsonProperty("pc")
+    private List<PhaseCardDTO> phaseCards = new ArrayList<PhaseCardDTO>();
     @JsonProperty("sp")
     private PhaseEnum selectedPhase;
 
@@ -20,25 +19,18 @@ public class PlayerPhaseCardStateDTO {
     }
 
     public PlayerPhaseCardStateDTO(PlayerPhaseCardState state) {
-        this.phaseGroups = state.getPhaseGroups();
-        this.phaseCardUpgradedCount = state.getPhaseCardUpgradedCount();
+        for (PhaseCard card : state.getPhaseCards()) {
+            this.phaseCards.add(card.toJson());
+        }
         this.selectedPhase = state.getSelectedPhase();
     }
 
-    public List<Map<String, Object>> getPhaseGroups() {
-        return phaseGroups;
+    public List<PhaseCardDTO> getPhaseCards() {
+        return phaseCards;
     }
 
-    public void setPhaseGroups(List<Map<String, Object>> phaseGroups) {
-        this.phaseGroups = phaseGroups;
-    }
-
-    public Number getPhaseCardUpgradedCount() {
-        return phaseCardUpgradedCount;
-    }
-
-    public void setPhaseCardUpgradedCount(Number phaseCardUpgradedCount) {
-        this.phaseCardUpgradedCount = phaseCardUpgradedCount;
+    public void setphaseCards(List<PhaseCardDTO> phaseCards) {
+        this.phaseCards = phaseCards;
     }
 
     public PhaseEnum getSelectedPhase() {
@@ -47,9 +39,5 @@ public class PlayerPhaseCardStateDTO {
 
     public void setSelectedPhase(PhaseEnum selectedPhase) {
         this.selectedPhase = selectedPhase;
-    }
-
-    
-
-    
+    }    
 }

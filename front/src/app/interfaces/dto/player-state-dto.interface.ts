@@ -40,8 +40,7 @@ export interface PlayerProjectCardStateDTO {
 	hms: number
 }
 export interface PlayerPhaseCardStateDTO {
-	pg : PhaseCardGroupModel[]
-	pcuc: number
+	pc : PhaseCardDTO[]
 	sp: SelectablePhaseEnum
 }
 export interface PlayerGlobalParameterStateDTO {
@@ -55,4 +54,10 @@ export interface GlobalParameterDTO {
 	name: GlobalParameterName
 	value?: number //value
 	addEndOfPhase?: number //addEndOfPhase
+}
+
+
+export interface PhaseCardDTO {
+	pi: number
+	cl: number
 }

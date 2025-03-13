@@ -20,7 +20,6 @@ import { Utils } from '../../../../utils/utils';
   styleUrl: './phase-card-upgrade-list.component.scss'
 })
 export class PhaseCardUpgradeListComponent {
-	@Input() phaseIndex!: number;
 	@Input() phaseGroup!: PhaseCardGroupModel
 	@Input() upgradeFinished: boolean = false
 	cardInitialState!: CardState
@@ -58,7 +57,7 @@ export class PhaseCardUpgradeListComponent {
 	setUpgradeFinished(): void {
 		this.upgradeFinished = true
 		this.stateFromParent = Utils.toFullCardState({upgradable: this.canUpgrade()})
-		console.log(this.phaseIndex, )
+		console.log(this.phaseGroup.phaseIndex, )
 	}
 	canUpgrade(): boolean {
 		if(this.upgradeFinished){return false}

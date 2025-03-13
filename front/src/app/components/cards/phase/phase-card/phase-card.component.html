@@ -6,7 +6,7 @@
 			<p>upgraded:{{state.isUpgraded()}} upgradable:{{state.isUpgradable()}}</p>
 		</div>
 	</div>
-	<div *ngIf="state.isUpgraded()!=true && state?.isUpgradable()==true" class="wrapper-button">
+	<div *ngIf="state.isUpgraded()!=true && state?.isUpgradable()==true && phaseGroupUpgraded===false" class="wrapper-button">
 		<button  (click)="upgrade()" class="validation-button element-clickable">Upgrade</button>
 	</div>
 </div>

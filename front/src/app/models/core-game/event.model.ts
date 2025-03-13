@@ -1,9 +1,10 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton } from "./button.model";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
 import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
 import { ProjectCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -219,13 +220,11 @@ export class EventCardBuilder extends EventBaseCardSelector {
     buildDiscountUsed!: boolean
     override hasCardBuilder(): boolean {return true}
     override updateCardSelection(selection: ProjectCardModel[]): void {
-		console.log('update card selection in event builder')
         this.setSelectedCardToBuild(selection[0])
     }
     private setSelectedCardToBuild(card: ProjectCardModel): void {
 		if(this.cardBuilderIdHavingFocus===undefined){return}
         let activeZone = this.cardBuilder[this.cardBuilderIdHavingFocus]
-        console.log('focus ID:', this.cardBuilderIdHavingFocus, card)
         activeZone.setSelectedCard(card)
         this.removeCardFromSelector(card)
         this.deactivateSelection()
@@ -332,6 +331,7 @@ export class EventGeneric extends EventBaseModel {
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeQuantity?: number
 	addForestPoint?: number
+	selectedPhase?: SelectablePhaseEnum
 }
 
 export class EventDeckQuery extends EventBaseModel {

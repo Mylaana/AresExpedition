@@ -18,6 +18,7 @@ export class ButtonDesigner{
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{startEnabled=true;break}
             case('actionPhase'):{startEnabled=true;break}
             case('selectCardOptionalSell'):{startEnabled=false;break}
+			case('planificationPhase'):{startEnabled=false;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}

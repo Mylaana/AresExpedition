@@ -6,7 +6,7 @@ export class PhaseCardGroupModel {
 	phaseIndex!: number;
 	phaseGroup!: SelectablePhaseEnum
 	phaseCards: PhaseCardModel[] = []
-	private phaseIsUpgraded: boolean = false
+	phaseIsUpgraded: boolean = false
 
 	getUpgradedPhaseCard(): PhaseCardModel {
 		for(let card of this.phaseCards){

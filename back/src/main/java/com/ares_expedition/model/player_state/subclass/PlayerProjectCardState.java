@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.scheduling.Trigger;
-
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerProjectCardStateDTO;
 import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
 
