@@ -9,7 +9,7 @@
 <nav *ngIf="loaded && _connected" id="navbar" [class.settings-openned]="_settings">
 	<app-navigation  [clientPlayerId]="clientPlayerId" [isScrolled]="isScrolled"></app-navigation>
 </nav>
-<div id="settings" *ngIf="_settings" @fadeIn>
+<div id="settings" *ngIf="_settings" @fadeInFadeOut>
 	<app-settings
 		(closeSettings)="closeSettings()">
 	</app-settings>

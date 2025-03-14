@@ -79,8 +79,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		//let cardDrawList: number[] = [253]
 		//this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:50}])
 		//this.gameStateService.addCardsToClientHand(cardDrawList)
-		let cardList = this.gameStateService.getClientHandModelList()
-		this.gameStateService.playCardFromClientHand(cardList[6])
+		//let cardList = this.gameStateService.getClientHandModelList()
+		//this.gameStateService.playCardFromClientHand(cardList[6])
 
 		//EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
