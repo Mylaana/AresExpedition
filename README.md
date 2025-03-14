@@ -6,6 +6,8 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_planification_2.png)
 ## Construction Phase
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_construction_2.png)
+## Upgrading a Phase card
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_phase_upgrade.png)
 
 # Architecture and Concepts
 ## Technologies used :
