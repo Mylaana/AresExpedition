@@ -9,6 +9,7 @@ import { SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ButtonNames } from '../../../types/global.type';
 import { expandCollapseVertical, fadeIn } from '../../animations/animations';
 import { EventBaseModel, EventGeneric } from '../../../models/core-game/event.model';
+import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 
 const phaseList: SelectablePhaseEnum[] = [SelectablePhaseEnum.development, SelectablePhaseEnum.construction, SelectablePhaseEnum.action, SelectablePhaseEnum.production, SelectablePhaseEnum.research]
 const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
@@ -25,7 +26,8 @@ const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
 	imports: [
 		CommonModule,
 		ButtonComponent,
-		TextWithImageComponent
+		TextWithImageComponent,
+		HexedBackgroundComponent
 	],
 	templateUrl: './phase-planification.component.html',
 	styleUrl: './phase-planification.component.scss',

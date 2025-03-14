@@ -62,14 +62,15 @@ $colors: (
     //margin-top: 5%;
 }
 .wrapper-phase-card-description{
-    height: $card-height;
-    width: $card-width;
-
-    $horizontal-padding: .0;
-
+	position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    height: $card-height;
+    width: $card-width;
+	border: rgba(255, 255, 255, 0.75) solid 1px;
+	border-radius: 15px;
 }
 .wrapper-phase-selected{
     $horizontal-padding: 5%;
@@ -79,13 +80,18 @@ $colors: (
     justify-content: space-around;
     padding-left: $horizontal-padding;
     padding-right: $horizontal-padding;
-    height: 100%;
+    height: 90%;
     width: 100%;
 }
 app-text-with-image{
     width: 100%;
 }
 .wrapper-title-and-text{
-    width: 100%;
-    height: 40%;
+    width: 90%;
+    min-height: 30%;
+}
+h4{
+	//text-align: center;
+	margin-bottom: 5px;
+	margin-left: 10px;
 }

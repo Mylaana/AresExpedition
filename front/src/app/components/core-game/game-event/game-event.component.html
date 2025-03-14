@@ -36,6 +36,9 @@
     <div class="wrapper-event-main">
 		<div class="wrapper-event-top"
 			[class.flex-column]="currentEvent.subType==='actionPhase'">
+			<app-hexed-background  *ngIf="currentEvent?.getSelectionActive()"
+				 @fadeInFadeOut [column]="35" [row]="9">
+				</app-hexed-background>
 			<div class="wrapper-builder"
 				*ngIf="currentEvent.hasCardBuilder()===true"
 				@fadeIn>
@@ -89,7 +92,10 @@
 </div>
 <div class="wrapper-selection-active"
 	*ngIf="currentEvent?.getSelectionActive()===true"
+	@fadeInFadeOut
 	[ngClass]="currentEvent?.getSelectionActive()===true?  'element-fade-in':'element-fade-out'">
-    <div class="selection-active-left"></div>
+    <div class="selection-active-left">
+
+	</div>
     <div class="selection-active-right"></div>
 </div>

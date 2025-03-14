@@ -35,7 +35,9 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-red production visual effect appearing blank
+red production visual effect appearing blank   
+bind global parameter pannel to state values   
+Sell event uses active phase's background for list   
 
 ## Refactoring :
 text with image component: refactoring   
