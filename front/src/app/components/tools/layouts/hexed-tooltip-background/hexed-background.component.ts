@@ -9,8 +9,8 @@ import { CommonModule } from '@angular/common';
 	styleUrl: './hexed-background.component.scss'
 })
 export class HexedBackgroundComponent implements OnInit {
-	@Input() row: number = 7;  // Nombre d'hexagones en hauteur
-	@Input() column: number = 15; // Nombre d'hexagones en largeur
+	@Input() row: number = 1;  // Nombre d'hexagones en hauteur
+	@Input() column: number = 1; // Nombre d'hexagones en largeur
 	@Input() background: boolean = false
 
 	_rowArray: number[] = [];

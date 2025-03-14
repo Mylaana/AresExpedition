@@ -6,14 +6,21 @@ import { Utils } from '../../../../utils/utils';
 import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
 import { EventEmitter } from '@angular/core';
 import { CardState } from '../../../../interfaces/card.interface';
-
-
-type updateType = 'upgrade'
+import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
+import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
+import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { NonEventButton } from '../../../../models/core-game/button.model';
 
 @Component({
   selector: 'app-phase-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+	CommonModule,
+	HexedBackgroundComponent,
+	TextWithImageComponent,
+	NonEventButtonComponent
+],
   templateUrl: './phase-card.component.html',
   styleUrl: './phase-card.component.scss'
 })
@@ -23,6 +30,8 @@ export class PhaseCardComponent extends BaseCardComponent {
 	@Input() phaseCard!: PhaseCardModel;
 	@Input() phaseGroupUpgraded: boolean = false
 	@Output() phaseCardUpgraded: EventEmitter<PhaseCardUpgradeType> = new EventEmitter<PhaseCardUpgradeType>()
+
+	_upgradeButton: NonEventButton = ButtonDesigner.createNonEventButton('upgradePhase')
 
 	override ngOnInit():void {
 		super.ngOnInit()

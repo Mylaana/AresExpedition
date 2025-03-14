@@ -1,49 +1,103 @@
-$card-height: 310px;
-$card-width: calc($card-height * 63 / 88);
 .wrapper-main{
-	width: $card-width;
-	padding: 10px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: fit-content;
+	height: fit-content;
+	padding: 0%;
+	filter: grayscale(85%);
+	&.upgraded{
+		filter: grayscale(0%);
+	}
 }
 .wrapper-phase-card{
+	z-index: 1;
+	position: relative;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	flex-direction: column;
 
-	width: $card-width;
-	height: $card-height;
-	border: black solid 1px;
-	border-radius: 5px;
+	width: var(--card-width);
+	height: var(--card-height);
+	border-radius: 15px;
+	padding: 5;
+	border: black solid 2px;
+	overflow: hidden;
 }
-.wrapper-button{
-	margin-top: 4vh;
+.background-color{
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.wrapper-description{
+	z-index: 1;
+	position: relative;
+	height: fit-content;
+	width: 85%;
+	padding: 5px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	&::ng-deep p {
+		text-align: center;
+		display: block;
+	}
+}
+h5{
+	padding-bottom: 3px;
+}
+
+app-hexed-background{
+	z-index: 0;
 }
 .phase0{
-	border: green solid 2px;
+	$side-gradient-size: 0%;
+	$side-void-size: 0%;
+	$middle-alpha: 1;
+	background: linear-gradient(130deg,var(--color-ares-green-light3) 0%, var(--color-ares-green) 35%, var(--color-ares-green-dark5) 80%);
 }
 .phase1{
-	$border-color-one: blue;
-	$border-color-two: red;
-	border: red solid 2px;
-	border-image: linear-gradient(to right, $border-color-one, $border-color-two) 10;
+	$side-void-size: 0%;
+	$middle-alpha: 1;
+	$side-gradient-size: 0%;
+	background: linear-gradient(90deg, var(--color-ares-blue-dark2) 0%, var(--color-ares-red-dark2) 100%);
 }
 .phase2{
-	border: blue solid 2px;
+	background: linear-gradient(130deg,var(--color-ares-blue-light2) 0%, var(--color-ares-blue) 35%, var(--color-ares-blue-dark5) 80%);
 }
 .phase3{
-	border: orange solid 2px;
+	background: linear-gradient(130deg,var(--color-ares-orange-light2) 0%, var(--color-ares-orange) 35%, var(--color-ares-orange-dark5) 80%);
 }
 .phase4{
-	border: yellow solid 2px;
+	background: linear-gradient(130deg,var(--color-ares-yellow-light2) 0%, var(--color-ares-yellow) 35%, var(--color-ares-yellow-dark5) 80%);
 }
-.wrapper-selection-border{
-	z-index: -1;
-
-    $selection-offset: 20px;
-    border-radius: calc(($card-height + $selection-offset)* .05);
-    height: calc($card-height + $selection-offset);
-    width: calc($card-width + $selection-offset);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.wrapper-upgrade{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 85%;
+	border-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	height: calc(var(--card-height) * .18);
+	&.upgraded{
+		height: calc(var(--card-height) * .04);
+		margin-bottom: calc(var(--card-height) * .14);
+	}
+}
+.wrapper-button{
+	position: relative;
+	height: 70%;
+	width: 80%;
+}
+app-non-event-button{
+	height: 50%;
 }

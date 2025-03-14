@@ -3,7 +3,8 @@ $colors: (
   "blue": rgb(39, 177, 229),
   "green": rgb(42, 180, 92),
   "purple": rgb(98, 70, 156),
-  "orange":  rgb(255, 129, 25)
+  "orange":  rgb(255, 129, 25),
+  "yellow": yellow
 );
 
 $card-back-colors: (
@@ -27,6 +28,7 @@ $card-back-colors: (
 	--color-ares-#{$name}-dark2: #{darken($color, 19%)};
 	--color-ares-#{$name}-dark3: #{darken($color, 21%)};
 	--color-ares-#{$name}-dark4: #{darken($color, 30%)};
+	--color-ares-#{$name}-dark5: #{darken($color, 45%)};
   }
 
   @each $name, $color in $card-back-colors {

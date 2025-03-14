@@ -68,6 +68,7 @@ Add victory check
 Add Forest points
 Ares-background style to empty with faded hexes
 Add Event removing any ressource in list on played card
+Add onClick visual effect for buttons
 
 ## Interface
 Possibly change style to go full transparency for pop-ups + background floating hexes for text

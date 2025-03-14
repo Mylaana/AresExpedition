@@ -9,6 +9,7 @@ import { RxStompService } from '../../../services/websocket/rx-stomp.service';
 import { WebsocketQueryMessageFactory } from '../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
+import { EventDesigner } from '../../../services/designers/event-designer.service';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -75,9 +76,13 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 
 		//force draw card list for debug purpose
 		//let cardDrawList: number[] = [263, 36, 222, 81, 123, 204, 141, 253]
-		let cardDrawList: number[] = [253]
+		//let cardDrawList: number[] = [253]
 		//this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:50}])
 		//this.gameStateService.addCardsToClientHand(cardDrawList)
+		let cardList = this.gameStateService.getClientHandModelList()
+		this.gameStateService.playCardFromClientHand(cardList[6])
+
+		//EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
 
 	ngAfterViewInit(): void {
