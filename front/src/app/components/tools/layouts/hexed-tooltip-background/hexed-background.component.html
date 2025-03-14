@@ -1,0 +1,13 @@
+<div class="grid-mask-horizontal">
+	<div class="grid-mask-vertical">
+		<div id="grid"
+			[class.background]="background">
+			<ng-container *ngFor="let c of _columnArray">
+				<ng-container *ngFor="let r of _rowArray">
+					<div class="hex" [ngClass]="['c' + c, 'r' + r, c%2!=0?'odd':'even']">
+					</div>
+				</ng-container>
+			</ng-container>
+		</div>
+	</div>
+</div>

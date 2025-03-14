@@ -16,10 +16,11 @@ import { PhaseProductionComponent } from '../../phases/phase-production/phase-pr
 import { EventMainButtonComponent } from "../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
-import { expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight } from '../../animations/animations';
+import { expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight, fadeInFadeOut } from '../../animations/animations';
 import { ProjectListType } from '../../../types/project-card.type';
 import { Subject, takeUntil } from 'rxjs';
 import { PhaseActionComponent } from "../../phases/phase-action/phase-action.component";
+import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 
 //this component is the main controller, and view
 
@@ -36,11 +37,12 @@ import { PhaseActionComponent } from "../../phases/phase-action/phase-action.com
     CardBuilderListComponent,
     NonEventButtonComponent,
     TextWithImageComponent,
-    PhaseActionComponent
+    PhaseActionComponent,
+	HexedBackgroundComponent
 ],
 	templateUrl: './game-event.component.html',
 	styleUrl: './game-event.component.scss',
-	animations: [expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight],
+	animations: [expandCollapseVertical, enterFromLeft, fadeIn, fadeInFadeOut],
 	providers: [
 		EventHandler,
 		DrawEventHandler

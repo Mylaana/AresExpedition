@@ -97,14 +97,21 @@ $round-width: 3%;
     justify-content: space-between;
 }
 .selection-active-left{
+	position: relative;
     height: 100%;
     width: 2%;
     background: linear-gradient(to right, white, rgba(255, 255, 255, 0))
+
 }
 .selection-active-right{
+	position: relative;
     height: 100%;
     width:2%;
     background: linear-gradient(to left, white, rgba(255, 255, 255, 0))
+
+}
+app-hexed-tooltip-background{
+	width: 100%;
 }
 .wrapper-event-button{
 	height: 100%;

@@ -6,6 +6,8 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_planification_2.png)
 ## Construction Phase
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_construction_2.png)
+## Upgrading a Phase card
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_phase_upgrade.png)
 
 # Architecture and Concepts
 ## Technologies used :
@@ -35,7 +37,9 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-red production visual effect appearing blank
+red production visual effect appearing blank   
+bind global parameter pannel to state values   
+Sell event uses active phase's background for list   
 
 ## Refactoring :
 text with image component: refactoring   
@@ -66,6 +70,7 @@ Add victory check
 Add Forest points
 Ares-background style to empty with faded hexes
 Add Event removing any ressource in list on played card
+Add onClick visual effect for buttons
 
 ## Interface
 Possibly change style to go full transparency for pop-ups + background floating hexes for text

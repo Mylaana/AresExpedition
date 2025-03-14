@@ -11,8 +11,8 @@
     </div>
     <div class="wrapper-selected-phase-card"
 		*ngIf="currentPhaseSelected">
-        <div class="wrapper-phase-card-description ares-background ares-border"
-			@expandCollapseVertical>
+        <div class="wrapper-phase-card-description"
+			@fadeIn>
             <ng-container *ngFor="let phaseCard of selectedPhaseCards">
                 <div @fadeIn *ngIf="currentPhaseSelected === phaseCard.phaseGroup.toLocaleLowerCase()"
 					class="wrapper-phase-selected">
@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </ng-container>
+			<app-hexed-background [column]="13" [row]="5" [background]="true"></app-hexed-background>
         </div>
     </div>
 </div>

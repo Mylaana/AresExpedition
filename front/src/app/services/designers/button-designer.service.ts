@@ -37,6 +37,7 @@ export class ButtonDesigner{
 			//cards
 			case('activateProjectOnce'):{startEnabled=true; break}
 			case('activateProjectTwice'):{startEnabled=false; break}
+			case('upgradePhase'):{startEnabled=true;break}
 
 			//global
 			case('closeSettings'):{startEnabled=true;break}
@@ -52,7 +53,7 @@ export class ButtonDesigner{
 			//events related rules
             case('default'):{caption='default validation button';break}
             case('planificationPhase'):{caption='$other_validate$';break}
-            case('upgradePhaseCards'):{caption='End upgrades';break}
+            case('upgradePhaseCards'):{caption='$other_validate$';break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='$other_validate$';break}
             case('addRessourceToSelectedCard'):{caption='Add ressources';break}
             case('actionPhase'):{caption='$other_validate$';break}
@@ -80,6 +81,7 @@ export class ButtonDesigner{
 			//cards
 			case('activateProjectOnce'):{caption='$other_activate$'; break}
 			case('activateProjectTwice'):{caption='$other_double_activate$'; break}
+			case('upgradePhase'):{caption='Upgrade';break}
 
 			//global
 			case('closeSettings'):{caption='$other_cancel$';break}

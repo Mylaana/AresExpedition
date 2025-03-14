@@ -19,8 +19,8 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 	@Input() event!: EventBaseModel
-	phaseGroups!: PhaseCardGroupModel[]
-	_upgradeNumber: number = 0
+	_phaseGroups!: PhaseCardGroupModel[]
+	_remainingUpgrade: number = 0
 	phaseList!: number[]
 	private currentEvent!: EventGeneric
 	@ViewChildren('phaseUpgradeList') phaseUpgradeList!: QueryList<PhaseCardUpgradeListComponent>
@@ -32,7 +32,7 @@ export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 	ngOnInit():void{
 		this.currentEvent = this.event as EventGeneric
 		this.phaseList =  this.currentEvent.phaseCardUpgradeList??[0,1,2,3,4]
-		this._upgradeNumber = this.currentEvent.phaseCardUpgradeQuantity??0
+		this._remainingUpgrade = this.currentEvent.phaseCardUpgradeQuantity??0
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(
 			state => this.onStateUpdate(state)
 		)
@@ -42,8 +42,7 @@ export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 		this.destroy$.complete()
 	}
 	onStateUpdate(clientState: PlayerStateModel){
-		this.phaseGroups = clientState.getPhaseGroups()
-		console.log(this.phaseGroups)
+		this._phaseGroups = clientState.getPhaseGroups()
 		if(this.phaseUpgradeList===undefined){return}
 		for(let list of this.phaseUpgradeList){
 			list.refreshPhaseGroup()
@@ -56,6 +55,5 @@ export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 		for(let list of this.phaseUpgradeList){
 			list.setUpgradeFinished()
 		}
-		console.log(this.currentEvent.phaseCardUpgradeQuantity)
 	}
 }

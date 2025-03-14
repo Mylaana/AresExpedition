@@ -1,13 +1,7 @@
-<p>phase upgrade selector</p>
-<h1 *ngIf="_upgradeNumber>0">Upgrade up to {{_upgradeNumber}} phase card</h1>
-<h1 *ngIf="_upgradeNumber===0">Change upgraded phase card selection</h1>
-
-<p>{{_upgradeNumber}}</p>
 <div *ngFor="let phaseIndex of phaseList" class="wrapper-phase-upgrade-selection">
-	<p>Phase {{phaseIndex}}</p>
 	<app-phase-card-upgrade-list #phaseUpgradeList
-		[phaseGroup]="phaseGroups[phaseIndex]"
-		[upgradeFinished]="_upgradeNumber<=0"
+		[phaseGroup]="_phaseGroups[phaseIndex]"
+		[upgradeFinished]="_remainingUpgrade<=0"
 		(cardUpgraded)="cardUpgraded()">
 	</app-phase-card-upgrade-list>
 </div>
