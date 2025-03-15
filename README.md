@@ -13,8 +13,9 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 ## Technologies used :
 Frontend: Angular 17   
 Backend: Java 23   
-API: Java Spring Boot, websocket STOMP   
-CSV card data parser: Python   
+API Websocket: Java Spring Boot + STOMP   
+API REST: Java Spring Boot   
+Script CSV parser: Python   
 
 ## Testing
 Frontend: Automated tests (unit & integration): Jasmine, Karma, Istanbul. Target code coverage > 80%   
@@ -40,6 +41,7 @@ Backend: Junit
 red production visual effect appearing blank   
 bind global parameter pannel to state values   
 Sell event uses active phase's background for list   
+Selected Phase list pannel showing all phases   
 
 ## Refactoring :
 text with image component: refactoring   
@@ -49,7 +51,7 @@ project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service   
 ProjectCardComposant major refactoring
 
-## v1 planned features :
+## Planned for v1 :
 ### Phase cards
 Phase cards upgrade: a phase card type can only be upgraded once   
 
@@ -58,35 +60,39 @@ Discard Event should "lock" the Sell card button while being resolved
 Prerequisites for playing project cards feature
 Add back mod cost calculation in hand (removed cause of Expression had changed error), error was due to card showing in hand and cost mod calculated in builder selector with cost modified
 
-## Misc
+### Misc
 gameEventComponent: add Lockpile control   
 websocket: finish the game state saving system   
 Global parameter increase applied at EOT  
-Add Ocean last bonus description
-Add Angular animations
+Add Ocean backend mechanic
 Add settings options
-Add main buttons help popup
 Add victory check
 Add Forest points
 Add Event removing any ressource in list on played card
 
-## Interface
+### Interface
+Add Ocean last bonus description
+Add main buttons help popup
+Add Angular animations
 Possibly change style to go full transparency for pop-ups + background floating hexes for text   
 Add floating hexes in the main window   
 Add onClick visual effect for buttons   
+Add phase upgrade count and logo in player pannel
+Add popup-like window for non-production phase gains
+Add log
 
-## CI
+### CI
 Frontend automated testing: Ongoing  
 Backend automated testing: no backend yet  
 Github Actions Build & test
 
-## CD
+### CD
 Nothing done yet  
 Tech TBD  
 
-## Backend
+### Backend
 API: Java Springboot  
 
-## Deployment
+### Deployment
 CI/CD Pipeline
 Cloud option selection
