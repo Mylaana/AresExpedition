@@ -209,13 +209,13 @@
                 "globalParameters": [
                     {
                         "name": "infrastructure",
-                        "value": 0,
+                        "value": 2,
                         "addEndOfPhase": 0
                     },
                     {
                         "name": "ocean",
                         "value": 3,
-                        "addEndOfPhase": 0
+                        "addEndOfPhase": 2
                     },
                     {
                         "name": "oxygen",
@@ -224,7 +224,7 @@
                     },
                     {
                         "name": "temperature",
-                        "value": 0,
+                        "value": 5,
                         "addEndOfPhase": 0
                     }
                 ]

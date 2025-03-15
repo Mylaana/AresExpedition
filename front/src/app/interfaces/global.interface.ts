@@ -64,8 +64,6 @@ export interface GlobalParameter {
     name: GlobalParameterName,
     value: number,
     addEndOfPhase: number,
-    color?: GlobalParameterColor
-    imageUrl?: string,
 }
 
 export interface GlobalParameterValue {

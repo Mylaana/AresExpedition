@@ -1,7 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { GlobalParameterColor, GlobalParameterName } from '../../../types/global.type';
 import { CommonModule } from '@angular/common';
+import { Subject, takeUntil } from 'rxjs';
+import { GameState } from '../../../services/core-game/game-state.service';
+import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 
 @Component({
 	selector: 'app-global-parameter-card',
@@ -15,8 +18,9 @@ import { CommonModule } from '@angular/common';
 })
 export class GlobalParameterCardComponent implements OnInit {
 	@Input() parameter!: GlobalParameterName
+	@Input() currentStep = 0
+	@Input() addEop = 0
 	_maxStep!: number
-	_currentStep: number = 5
 	_progressionList!: number[]
 
 	ngOnInit(): void {
@@ -72,6 +76,6 @@ export class GlobalParameterCardComponent implements OnInit {
 		}
 	}
 	getCurrentStepColor(): GlobalParameterColor {
-		return this.getStepColor(this._progressionList[this._currentStep])
+		return this.getStepColor(this._progressionList[this.currentStep])
 	}
 }
