@@ -41,6 +41,7 @@ Backend: Junit
 red production visual effect appearing blank   
 Sell event uses active phase's background for list   
 Selected Phase list pannel showing all phases   
+Action phase upgrade not working   
 
 ## Refactoring :
 text with image component: refactoring   

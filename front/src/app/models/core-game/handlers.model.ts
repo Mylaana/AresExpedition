@@ -307,7 +307,7 @@ export class EventHandler {
 			}
 			case('increaseGlobalParameter'):{
 				if(!event.increaseParameter){break}
-				this.gameStateService.addGlobalParameterStepsEOPtoPlayerId(this.clientPlayerId, event.increaseParameter)
+				this.gameStateService.addGlobalParameterStepsEOPtoClient(event.increaseParameter)
 				break
 			}
 			case('increaseResearchScanKeep'):{

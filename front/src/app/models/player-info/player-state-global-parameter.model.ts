@@ -3,14 +3,6 @@ import { GlobalParameter, GlobalParameterValue } from "../../interfaces/global.i
 import { GlobalParameterName } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 
-const globalParameterIndex = new Map<GlobalParameterName, number>(
-	[
-		['infrastructure', 0],
-		['ocean', 1],
-		['oxygen', 2],
-		['temperature', 3],
-	]
-)
 
 export class PlayerGlobalParameterStateModel {
 private parameters: GlobalParameter[] = [
@@ -54,7 +46,7 @@ private parameters: GlobalParameter[] = [
 	}
 	toJson(): PlayerGlobalParameterStateDTO {
 		return {
-			gp: [] //this.parameters
+			gp: this.parameters
 		}
 	}
 	static fromJson(dto: PlayerGlobalParameterStateDTO): PlayerGlobalParameterStateModel {
