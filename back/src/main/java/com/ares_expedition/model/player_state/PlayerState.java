@@ -14,6 +14,7 @@ import com.ares_expedition.model.player_state.subclass.PlayerProjectCardState;
 import com.ares_expedition.model.player_state.subclass.PlayerRessourceState;
 import com.ares_expedition.model.player_state.subclass.PlayerScoreState;
 import com.ares_expedition.model.player_state.subclass.PlayerTagState;
+import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
 import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
 
@@ -239,11 +240,11 @@ public class PlayerState {
     }
 
     
-    public List<Map<String, Object>> getGlobalParameter() {
+    public List<GlobalParameter> getGlobalParameter() {
         return globalParameterState.getGlobalParameters();
     }
 
-    public void setGlobalParameter(List<Map<String, Object>> globalParameter) {
+    public void setGlobalParameter(List<GlobalParameter> globalParameter) {
         this.globalParameterState.setGlobalParameters(globalParameter);
     }
 
@@ -274,26 +275,6 @@ public class PlayerState {
         this.otherState.setResearch(research);
     }
 
-    /*
-    public static PlayerState fromJson(PlayerStateDTO statePush){
-        PlayerState state = new PlayerState();
-        /*
-        state.setCards(statePush.getCards());
-        state.setResearch(statePush.getResearch());
-        state.setPhaseCards(statePush.getPhaseCards());
-        state.setPhaseCardUpgradeCount(statePush.getPhaseCardUpgradeCount());
-        state.setSellCardValueMod(statePush.getSellCardValueMod());
-        state.setGlobalParameter(statePush.getGlobalParameter());
-        
-        state.setInfoState(PlayerInfoState.fromJson(statePush.getInfoState()));
-        state.setScoreState(PlayerScoreState.fromJson(statePush.getScoreState()));
-        state.setTagState(PlayerTagState.fromJson(statePush.getTagState()));
-        state.setRessourceState(PlayerRessourceState.fromJson(statePush.getRessourceState()));
-        state.setProjectCardState(PlayerProjectCardState.fromJson(statePush.getProjectCardState()));
-    
-        return state;
-    }
-    */
     public static PlayerState fromJson(PlayerStateDTO dto) {
         return new PlayerState(dto);
     }

@@ -1,6 +1,6 @@
 <div class="main">
 	<div class="wrapper-icon ares-background">
-		<app-text-with-image [rawText]="'$other_'+parameter+'$'"></app-text-with-image>
+		<app-text-with-image [rawText]="'$other_'+parameter.toLocaleLowerCase()"></app-text-with-image>
 	</div>
 	<div class="wrapper-progression-bar ares-border ares-background"
 		[ngClass]="getCurrentStepColor()">

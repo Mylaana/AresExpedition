@@ -1,24 +1,24 @@
-import { PlayerGlobalParameterStateDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterDTO, PlayerGlobalParameterStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GlobalParameter, GlobalParameterValue } from "../../interfaces/global.interface";
-import { GlobalParameterName } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 
 
 export class PlayerGlobalParameterStateModel {
 private parameters: GlobalParameter[] = [
-		{name: 'infrastructure',value: 0, addEndOfPhase: 0},
-		{name: 'ocean',value: 0,addEndOfPhase: 0},
-		{name: 'oxygen',value: 0,addEndOfPhase: 0},
-		{name: 'temperature',value: 0,addEndOfPhase: 0}
+		{name: GlobalParameterNameEnum.infrastructure,step: 0, addEndOfPhase: 0},
+		{name: GlobalParameterNameEnum.ocean,step: 0,addEndOfPhase: 0},
+		{name: GlobalParameterNameEnum.oxygen,step: 0,addEndOfPhase: 0},
+		{name: GlobalParameterNameEnum.temperature,step: 0,addEndOfPhase: 0}
 	]
 
 	constructor(dto: PlayerGlobalParameterStateDTO){
 		let parameters: GlobalParameter[] = []
 		for(let dtoParameter of dto.gp){
 			let param: GlobalParameter = {
-				name: dtoParameter.name,
-				value: dtoParameter.value??0,
-				addEndOfPhase: dtoParameter.addEndOfPhase??0
+				name: dtoParameter.n,
+				step: dtoParameter.s,
+				addEndOfPhase: dtoParameter.ae
 			}
 			parameters.push(Utils.jsonCopy(param))
 		}
@@ -27,7 +27,7 @@ private parameters: GlobalParameter[] = [
 	}
 
 	getGlobalParameters(): GlobalParameter[] {return this.parameters}
-	getGlobalParameterIndex(parameter: GlobalParameterName): number | undefined {
+	getGlobalParameterIndex(parameter: GlobalParameterNameEnum): number | undefined {
 		for(let i=0; i<this.parameters.length; i++){
 			if(this.parameters[i].name===parameter){return i}
 		}
@@ -45,9 +45,17 @@ private parameters: GlobalParameter[] = [
 		this.parameters[parameterIndex].addEndOfPhase += parameter.steps
 	}
 	toJson(): PlayerGlobalParameterStateDTO {
-		return {
-			gp: this.parameters
+		let parameters: GlobalParameterDTO[] = []
+		for(let state of this.parameters){
+			parameters.push(this.parameterToJson(state))
 		}
+		return {
+			gp: parameters
+		}
+	}
+
+	private parameterToJson(parameter: GlobalParameter): GlobalParameterDTO {
+		return {n:parameter.name, s:parameter.step, ae:parameter.addEndOfPhase}
 	}
 	static fromJson(dto: PlayerGlobalParameterStateDTO): PlayerGlobalParameterStateModel {
 		if (!dto.gp){

@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 
 import com.ares_expedition.dto.deserializer.IntegerKeyDeserializer;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.PlayerState;
+import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class Game {
@@ -20,6 +22,7 @@ public class Game {
     @JsonDeserialize(keyUsing = IntegerKeyDeserializer.class)
     private Map<Integer, PlayerState> groupPlayerState = new HashMap<>();
     private Boolean gameStarted;
+    private List<GlobalParameter> globalParameters = new ArrayList<>();
 
     public Game() {
     }
@@ -201,5 +204,27 @@ public class Game {
 
     public void setGameStarted(Boolean gameStarted) {
         this.gameStarted = gameStarted;
+    }
+
+    public void applyGlobalParameterIncreaseEop() {
+        //add all addEndOfPhase to current game parameter step
+        for (PlayerState state : this.groupPlayerState.values()) {
+            List<GlobalParameter> params = state.getGlobalParameter();
+            for(GlobalParameter p: params){
+                if(p.getAddEop()==0){continue;}
+                this.increaseParameter(p.getName(), p.getAddEop());
+            }
+        }
+
+        //update all playerstate parameter with updated game parameter
+        
+    }
+    private void increaseParameter(GlobalParameterNameEnum parameter, Integer addEop) {
+        for(GlobalParameter p: this.globalParameters) {
+            if(p.getName()==parameter){
+                p.increaseStep(addEop);
+                return;
+            }
+        }
     }
 }

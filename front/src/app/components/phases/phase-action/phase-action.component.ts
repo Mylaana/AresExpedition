@@ -9,6 +9,7 @@ import { EventBaseModel, EventCardSelector } from '../../../models/core-game/eve
 import { EventDesigner } from '../../../services/designers/event-designer.service';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { ProjectCardModel } from '../../../models/cards/project-card.model';
+import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 
 @Component({
   selector: 'app-phase-action',
@@ -87,40 +88,40 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 			case('convertForest'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'plant', valueStock: -8}}))
 				newEvents.push(EventDesigner.createGeneric('addForestPoint', {addForestPoint: 1}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:'oxygen', steps:1}}))
+				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.oxygen, steps:1}}))
 				break
 			}
 			case('buyForest'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
 				newEvents.push(EventDesigner.createGeneric('addForestPoint', {addForestPoint: 1}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:'oxygen', steps:1}}))
+				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.oxygen, steps:1}}))
 				break
 			}
 			case('convertTemperature'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'heat', valueStock: -8}}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:'temperature', steps:1}}))
+				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.temperature, steps:1}}))
 				break
 			}
 			case('buyTemperature'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -14}}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:'temperature', steps:1}}))
+				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.temperature, steps:1}}))
 				break
 			}
 			case('convertInfrastructure'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: [{name:'heat', valueStock: -5}, {name:'plant', valueStock: -3}]}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:'infrastructure', steps:1}}))
+				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.infrastructure, steps:1}}))
 				newEvents.push(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}}))
 				break
 			}
 			case('buyInfrastructure'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -15}}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:'infrastructure', steps:1}}))
+				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.infrastructure, steps:1}}))
 				newEvents.push(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}}))
 				break
 			}
 			case('buyOcean'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:'ocean', steps:1}}))
+				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.ocean, steps:1}}))
 				break
 			}
 		}

@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
-import { GlobalParameterName } from "../../types/global.type";
 import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
 import { ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
 import { EventDesigner } from "../designers/event-designer.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
+import { GlobalParameterNameEnum } from "../../enum/global.enum";
 
 
 @Injectable({
@@ -99,7 +99,7 @@ export class ProjectCardActivatedEffectService {
 	private static createEventUpgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
 		return EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
-	private static createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, steps:number): EventBaseModel {
+	private static createEventIncreaseGlobalParameter(parameterName: GlobalParameterNameEnum, steps:number): EventBaseModel {
 		//this.addTrToPlayer(steps)
 		return EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter:{name:parameterName,steps: steps}})
 	}

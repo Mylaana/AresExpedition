@@ -49,7 +49,8 @@ test needs: empty components from the app logic and transfer it into services/cl
 global: removing obvious comments   
 project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service   
-ProjectCardComposant major refactoring
+ProjectCardComposant major refactoring   
+Optimize data volume exchanged   
 
 ## Planned for v1 :
 ### Phase cards

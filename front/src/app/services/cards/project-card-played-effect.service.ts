@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ProjectCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { GlobalParameterName, RessourceType } from "../../types/global.type";
+import { RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
 import { RessourceStock, GlobalParameterValue, ScanKeep, RessourceInfo } from "../../interfaces/global.interface";
@@ -9,6 +9,7 @@ import { CostMod } from "../../types/project-card.type";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
 import { EventDesigner } from "../designers/event-designer.service";
 import { GlobalInfo } from "../global/global-info.service";
+import { GlobalParameterNameEnum } from "../../enum/global.enum";
 
 
 @Injectable({
@@ -268,24 +269,24 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Artificial Lake
 			case('66'):{
-				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
 			//Convoy from Europa
 			case('74'):{
 				result.push(this.createEventDraw(1))
-				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
 			//Giant Ice Asteroid
 			case('77'):{
-				result.push(this.createEventIncreaseGlobalParameter("temperature",2))
-				result.push(this.createEventIncreaseGlobalParameter("ocean",2))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,2))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,2))
 				break
 			}
 			//Deimos Down
 			case('76'):{
-				result.push(this.createEventIncreaseGlobalParameter("temperature",3))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,3))
 				break
 			}
 			//Imported Nitrogen
@@ -301,13 +302,13 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Permafrost Extraction
 			case('92'):{
-				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
 			//Phobos Falls
 			case('93'):{
-				result.push(this.createEventIncreaseGlobalParameter("temperature",1))
-				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				result.push(this.createEventDraw(2))
 				break
 			}
@@ -329,12 +330,12 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Soil Warming
 			case('184'):{
-				result.push(this.createEventIncreaseGlobalParameter("temperature",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,1))
 				break
 			}
 			//Trapped Heat
 			case('197'):{
-				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
 			//Biofoundries
@@ -359,32 +360,32 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Architecture Blueprints
 			case('F09'):{
-				result.push(this.createEventIncreaseGlobalParameter("infrastructure",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,1))
 				result.push(this.createEventDraw(2))
 				result.push(this.createEventDiscard(1))
 				break
 			}
 			//Bedrock Wellbore
 			case('F10'):{
-				result.push(this.createEventIncreaseGlobalParameter("ocean",1))
-				result.push(this.createEventIncreaseGlobalParameter("infrastructure",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,1))
 				break
 			}
 			//CHP Combustion Turbines
 			case('F12'):{
-				result.push(this.createEventIncreaseGlobalParameter("infrastructure",1))
-				result.push(this.createEventIncreaseGlobalParameter("oxygen",1))
-				result.push(this.createEventIncreaseGlobalParameter("temperature",1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.oxygen,1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,1))
 				break
 			}
 			//Grain Silos
 			case('F14'):{
-				result.push(this.createEventIncreaseGlobalParameter("infrastructure",2))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,2))
 				break
 			}
 			//Low-Atmosphere Planes
 			case('F17'):{
-				result.push(this.createEventIncreaseGlobalParameter("infrastructure",3))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,3))
 				break
 			}
 			default:{
@@ -573,13 +574,13 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Physiscs Complex
 			case(46):{
-				if(parameter.name!='temperature'){break}
+				if(parameter.name!=GlobalParameterNameEnum.infrastructure){break}
 				result.push(this.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}
 			//Pets
 			case(279):{
-				if(parameter.name!='infrastructure'){break}
+				if(parameter.name!=GlobalParameterNameEnum.infrastructure){break}
 				result.push(this.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}
@@ -599,7 +600,7 @@ export class ProjectCardPlayedEffectService {
 	createEventUpgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
 		return EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
-	createEventIncreaseGlobalParameter(parameterName: GlobalParameterName, steps:number): EventBaseModel {
+	createEventIncreaseGlobalParameter(parameterName: GlobalParameterNameEnum, steps:number): EventBaseModel {
 		this.addTrToPlayer(steps)
 		return EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter:{name:parameterName,steps: steps}})
 	}

@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { OceanCardComponent } from '../ocean-card/ocean-card.component';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
-import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { PlayerGlobalParameterStateModel } from '../../../models/player-info/player-state-global-parameter.model';
 import { GlobalParameter } from '../../../interfaces/global.interface';
+import { Utils } from '../../../utils/utils';
+import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 
 @Component({
 	selector: 'app-global-parameter-pannel',
@@ -24,10 +25,10 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	_parameterState!: PlayerGlobalParameterStateModel
 	private destroy$ = new Subject<void>()
 
-	_oceanState: GlobalParameter = {name:"ocean", value: 0, addEndOfPhase: 0}
-	_infrastructureState: GlobalParameter = {name:"infrastructure", value: 0, addEndOfPhase: 0}
-	_temperatureState: GlobalParameter = {name:"temperature", value: 0, addEndOfPhase: 0}
-	_oxygenState: GlobalParameter = {name:"oxygen", value: 0, addEndOfPhase: 0}
+	_oceanState: GlobalParameter = {name:GlobalParameterNameEnum.ocean, step: 0, addEndOfPhase: 0}
+	_infrastructureState: GlobalParameter = {name:GlobalParameterNameEnum.infrastructure, step: 0, addEndOfPhase: 0}
+	_temperatureState: GlobalParameter = {name:GlobalParameterNameEnum.temperature, step: 0, addEndOfPhase: 0}
+	_oxygenState: GlobalParameter = {name:GlobalParameterNameEnum.oxygen, step: 0, addEndOfPhase: 0}
 
 	constructor(private gameStateService: GameState){}
 	ngOnInit(): void {
@@ -42,11 +43,12 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 		let globalState = this.gameStateService.getClientState().getGlobalParameters()
 		console.log('global pannel state update:', globalState)
 		for(let state of globalState){
+			console.log(Utils.jsonCopy(state))
 			switch(state.name){
-				case('ocean'):{this._oceanState = state; break}
-				case('infrastructure'):{this._infrastructureState = state; break}
-				case('oxygen'):{this._oxygenState= state; break}
-				case('temperature'):{this._temperatureState = state; break}
+				case(GlobalParameterNameEnum.ocean):{this._oceanState = Utils.jsonCopy(state); break}
+				case(GlobalParameterNameEnum.infrastructure):{this._infrastructureState = Utils.jsonCopy(state); break}
+				case(GlobalParameterNameEnum.oxygen):{this._oxygenState= Utils.jsonCopy(state); break}
+				case(GlobalParameterNameEnum.temperature):{this._temperatureState = Utils.jsonCopy(state); break}
 			}
 		}
 	}
