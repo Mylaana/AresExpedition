@@ -8,6 +8,7 @@ import { EventDesigner } from "./event-designer.service"
 import { BuilderType } from "../../types/phase-card.type"
 import { ProjectCardModel } from "../../models/cards/project-card.model"
 import { Utils } from "../../utils/utils"
+import { GlobalParameterNameEnum } from "../../enum/global.enum"
 
 
 type CardSelectorOptions = Partial<CardSelector>
@@ -499,7 +500,7 @@ describe('Service - Designers - Event', () => {
                             break
                         }
                         case('increaseGlobalParameter'):{
-                            let expectedParameterIncrease: GlobalParameterValue = {name:'infrastructure', steps: 5}
+                            let expectedParameterIncrease: GlobalParameterValue = {name:GlobalParameterNameEnum.infrastructure, steps: 5}
                             expectedEvent.increaseParameter = expectedParameterIncrease
                             expectedArgs = {increaseParameter:expectedParameterIncrease}
                             break
