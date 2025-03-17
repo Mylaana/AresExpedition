@@ -22,7 +22,6 @@ export class GlobalParameterCardComponent implements OnInit {
 	_progressionList!: number[]
 
 	ngOnInit(): void {
-		console.log(this.parameter, this.currentStep)
 		switch(this.parameter){
 			case(GlobalParameterNameEnum.ocean):{
 				this._progressionList = [1, 2, 3, 4, 5, 6, 7, 8, 9]

@@ -7,11 +7,10 @@ import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 public class GlobalParameter {
     GlobalParameterNameEnum name;
     Integer step = 0;
-    Integer maxStep;
+    Integer maxStep = 0;
     Integer addEop = 0;
 
     GlobalParameter(){
-
     }
     public GlobalParameter(GlobalParameterDTO dto){
         this.name = dto.getName();
@@ -24,6 +23,7 @@ public class GlobalParameter {
     }
     public void setName(GlobalParameterNameEnum name) {
         this.name = name;
+        this.setMaxStep(this.name);
     }
     public Integer getStep() {
         return step;
@@ -42,19 +42,19 @@ public class GlobalParameter {
     }
     public void setMaxStep(GlobalParameterNameEnum name) {
         switch (name) {
-            case INFRASTRUCTURE:
+            case GlobalParameterNameEnum.INFRASTRUCTURE:
                 this.maxStep = GlobalConstants.GLOBAL_PARAMETER_INFRASTRUCTURE_MAXSTEP;
                 break;
 
-            case OXYGEN:
+            case GlobalParameterNameEnum.OXYGEN:
                 this.maxStep = GlobalConstants.GLOBAL_PARAMETER_OXYGEN_MAXSTEP;
                 break;
 
-            case TEMPERATURE:
+            case GlobalParameterNameEnum.TEMPERATURE:
                 this.maxStep =  GlobalConstants.GLOBAL_PARAMETER_TEMPERATURE_MAXSTEP;
                 break;
 
-            case OCEAN:
+            case GlobalParameterNameEnum.OCEAN:
                 this.maxStep =  GlobalConstants.GLOBAL_PARAMETER_OCEAN_MAXSTEP;
                 break;
 

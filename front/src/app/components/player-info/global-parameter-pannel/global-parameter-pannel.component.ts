@@ -41,7 +41,6 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	}
 	onStateUpdate(): void {
 		let globalState = this.gameStateService.getClientState().getGlobalParameters()
-		console.log('global pannel state update:', globalState)
 		for(let state of globalState){
 			console.log(Utils.jsonCopy(state))
 			switch(state.name){

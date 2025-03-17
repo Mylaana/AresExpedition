@@ -12,6 +12,28 @@
     },
     "currentPhase": "PLANIFICATION",
     "selectedPhase": ["PLANIFICATION"],
+    "globalParameters": [
+        {
+            "name": "INFRASTRUCTURE",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "TEMPERATURE",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "OXYGEN",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "OCEAN",
+            "step": 0,
+            "addEop": 0
+        }
+    ],
     "groupPlayerState": {
         "0": {
             "infoState": {
@@ -209,22 +231,22 @@
                 "globalParameters": [
                     {
                         "name": "INFRASTRUCTURE",
-                        "step": 2,
+                        "step": 0,
                         "addEop": 0
                     },
                     {
                         "name": "OCEAN",
-                        "step": 3,
-                        "addEop": 2
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
                         "name": "OXYGEN",
                         "step": 0,
-                        "addEop": 7
+                        "addEop": 0
                     },
                     {
                         "name": "TEMPERATURE",
-                        "step": 5,
+                        "step": 0,
                         "addEop": 0
                     }
                 ]
@@ -417,12 +439,12 @@
                 "globalParameters": [
                     {
                         "name": "INFRASTRUCTURE",
-                        "step": 2,
+                        "step": 0,
                         "addEop": 0
                     },
                     {
                         "name": "OCEAN",
-                        "step": 3,
+                        "step": 0,
                         "addEop": 0
                     },
                     {
@@ -432,7 +454,7 @@
                     },
                     {
                         "name": "TEMPERATURE",
-                        "step": 5,
+                        "step": 0,
                         "addEop": 0
                     }
                 ]
@@ -625,12 +647,12 @@
                 "globalParameters": [
                     {
                         "name": "INFRASTRUCTURE",
-                        "step": 2,
+                        "step": 0,
                         "addEop": 0
                     },
                     {
                         "name": "OCEAN",
-                        "step": 3,
+                        "step": 0,
                         "addEop": 0
                     },
                     {
@@ -640,7 +662,7 @@
                     },
                     {
                         "name": "TEMPERATURE",
-                        "step": 5,
+                        "step": 0,
                         "addEop": 0
                     }
                 ]
@@ -833,12 +855,12 @@
                 "globalParameters": [
                     {
                         "name": "INFRASTRUCTURE",
-                        "step": 2,
+                        "step": 0,
                         "addEop": 0
                     },
                     {
                         "name": "OCEAN",
-                        "step": 3,
+                        "step": 0,
                         "addEop": 0
                     },
                     {
@@ -848,7 +870,7 @@
                     },
                     {
                         "name": "TEMPERATURE",
-                        "step": 5,
+                        "step": 0,
                         "addEop": 0
                     }
                 ]

@@ -64,7 +64,6 @@ Add back mod cost calculation in hand (removed cause of Expression had changed e
 ### Misc
 gameEventComponent: add Lockpile control   
 websocket: finish the game state saving system   
-Global parameter increase applied at EOT  
 Add Ocean backend mechanic
 Add settings options
 Add victory check

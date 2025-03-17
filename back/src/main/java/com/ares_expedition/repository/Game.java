@@ -27,14 +27,18 @@ public class Game {
     public Game() {
     }
     
-    public Game(Integer gameId, List<Integer> deck, List<Integer> discard, List<Integer> groupPlayerId, PhaseEnum currentPhase) {
-        this.gameId = gameId;
-        this.deck = deck;
-        this.discard = discard;
-        this.groupPlayerId = groupPlayerId;
-        this.currentPhase = currentPhase;        
+    
+    public Game(
+        Integer gameId, List<Integer> deck, List<Integer> discard, List<Integer> groupPlayerId,
+        PhaseEnum currentPhase, List<GlobalParameter> parameters) {
+            this.gameId = gameId;
+            this.deck = deck;
+            this.discard = discard;
+            this.groupPlayerId = groupPlayerId;
+            this.currentPhase = currentPhase;
+            this.globalParameters = parameters;
     }
-
+        
     public Integer getGameId() {
         return this.gameId;
     }
@@ -207,17 +211,18 @@ public class Game {
     }
 
     public void applyGlobalParameterIncreaseEop() {
-        //add all addEndOfPhase to current game parameter step
+        //add all addEndOfPhase to current game parameter steps
         for (PlayerState state : this.groupPlayerState.values()) {
-            List<GlobalParameter> params = state.getGlobalParameter();
-            for(GlobalParameter p: params){
+            for(GlobalParameter p: state.getGlobalParameter()){
                 if(p.getAddEop()==0){continue;}
                 this.increaseParameter(p.getName(), p.getAddEop());
             }
         }
 
-        //update all playerstate parameter with updated game parameter
-        
+        //Copy game parameter into player's parameters
+        for (PlayerState state : this.groupPlayerState.values()) {
+            state.setGlobalParameter(this.globalParameters);
+        }
     }
     private void increaseParameter(GlobalParameterNameEnum parameter, Integer addEop) {
         for(GlobalParameter p: this.globalParameters) {
@@ -226,5 +231,12 @@ public class Game {
                 return;
             }
         }
+    }
+    public List<GlobalParameter> getGlobalParameters() {
+        return globalParameters;
+    }
+
+    public void setGlobalParameters(List<GlobalParameter> globalParameters) {
+        this.globalParameters = globalParameters;
     }
 }
