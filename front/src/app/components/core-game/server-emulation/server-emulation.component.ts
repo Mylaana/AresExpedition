@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
 import { MessageContentQueryEnum } from '../../../enum/websocket.enum';
-import { Subscription, take } from 'rxjs';
+import { Subject, Subscription, take, takeUntil } from 'rxjs';
 import { RxStompService } from '../../../services/websocket/rx-stomp.service';
 import { WebsocketQueryMessageFactory } from '../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
@@ -22,7 +22,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
 	templateUrl: './server-emulation.component.html',
 	styleUrl: './server-emulation.component.scss',
 })
-export class ServerEmulationComponent implements OnInit, AfterViewInit {
+export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestroy {
 	debug: boolean = false;
 	currentGroupPlayerState!: {};
 	currentEventQueue: EventBaseModel[] = [];
@@ -39,6 +39,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 	//@ts-ignore
 	private playerSubscription: Subscription;
 
+	private destroy$ = new Subject<void>()
+
 	constructor(private gameStateService: GameState,
 		private cardInfoService: ProjectCardInfoService,
 		private rxStompService: RxStompService
@@ -53,22 +55,22 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 		this.gameStateService.addPlayer("joueur 3", "rgb(0, 255, 0)")
 		this.gameStateService.addPlayer("joueur 4", "rgb(255, 255, 255)")
 
-		this.gameStateService.currentPhase.subscribe(
+		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(
 			phase => this.phaseChanged(phase)
 		)
-		this.gameStateService.currentGroupPlayerState.subscribe(
+		this.gameStateService.currentGroupPlayerState.pipe(takeUntil(this.destroy$)).subscribe(
 			groupPlayerState => this.currentGroupPlayerState = groupPlayerState
 		)
-		this.gameStateService.currentDrawQueue.subscribe(
+		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(
 			//drawQueue => this.handleDrawQueueRequest(drawQueue)
 		)
-		this.gameStateService.currentLoadingState.subscribe(
+		this.gameStateService.currentLoadingState.pipe(takeUntil(this.destroy$)).subscribe(
 			loading => this.loadingFinished(loading)
 		)
-		this.gameStateService.currentEventQueue.subscribe(
+		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(
 			event => this.currentEventQueue = event
 		)
-		this.gameStateService.currentGroupPlayerReady.subscribe(
+		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe(
 			ready => this.currentGroupReady = ready
 		)
 
@@ -84,7 +86,10 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit {
 
 		//EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
-
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
+	}
 	ngAfterViewInit(): void {
 		this.gameStateService.setPlayerIdList([0,1,2,3])
 	}

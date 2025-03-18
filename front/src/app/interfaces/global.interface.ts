@@ -2,11 +2,11 @@ import { AdvancedRessourceType, GameItemType, GlobalParameterColor, SelectablePh
 import { PhaseCardType } from "../types/phase-card.type"
 import { ProjectCardModel } from "../models/cards/project-card.model"
 import { MinMaxEqualType } from "../types/global.type"
-import { GlobalParameterName } from "../types/global.type"
 import { RessourceType } from "../types/global.type"
 import { ProjectFilterType } from "../types/project-card.type"
 import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { CardState } from "./card.interface"
+import { GlobalParameterNameEnum } from "../enum/global.enum"
 
 export interface RessourceInfo {
     id: number,
@@ -61,15 +61,13 @@ export interface CardSelector {
 }
 
 export interface GlobalParameter {
-    name: GlobalParameterName,
-    value: number,
+    name: GlobalParameterNameEnum,
+    step: number,
     addEndOfPhase: number,
-    color?: GlobalParameterColor
-    imageUrl?: string,
 }
 
 export interface GlobalParameterValue {
-    name: GlobalParameterName,
+    name: GlobalParameterNameEnum,
     steps: number
 }
 

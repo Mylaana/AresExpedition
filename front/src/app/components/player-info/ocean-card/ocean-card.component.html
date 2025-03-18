@@ -5,11 +5,12 @@
 	<div class="ocean-grid">
 		<div *ngFor="let id of _progressionList" class="ocean" [ngClass]="'--'+id">
 			<div class="shape"
-				[ngClass]="id<=_currentStep?'flipped':'empty'">
+				[ngClass]="id<=currentStep?'flipped':
+					id<=currentStep+addEop?'add-eop':'empty'">
 			</div>
-			<div *ngIf="id<=_currentStep" class="shadow"></div>
+			<div *ngIf="id<=currentStep+addEop" class="shadow"></div>
 		</div>
 	</div>
 	<div class="foreground"><div>
-	</div>
+</div>
 

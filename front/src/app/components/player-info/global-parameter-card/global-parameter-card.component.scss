@@ -105,4 +105,11 @@ app-text-with-image{
 		padding-left: 1px;
 		padding-right: 1px;
 	}
+	&.add-eop{
+		border: var(--color-ares-green-dark0) 2px solid;
+		padding: 1px;
+		border-radius: 25%;
+		padding-left: 1px;
+		padding-right: 1px;
+	}
 }

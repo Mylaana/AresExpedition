@@ -1,8 +1,6 @@
+import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { PhaseCardGroupModel } from "../../models/cards/phase-card.model";
-import { TriggerState } from "../../models/cards/project-card.model";
-import { GlobalParameterName, RGB } from "../../types/global.type";
-import { PlayedProject } from "../../types/project-card.type";
+import { RGB } from "../../types/global.type";
 import { RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
 import { TriggerStateDTO } from "./project-card-dto.interface";
 
@@ -51,9 +49,9 @@ export interface PlayerOtherStateDTO {
 	r: ScanKeep
 }
 export interface GlobalParameterDTO {
-	name: GlobalParameterName
-	value?: number //value
-	addEndOfPhase?: number //addEndOfPhase
+	n: GlobalParameterNameEnum
+	s: number //step
+	ae: number //addEndOfPhase
 }
 
 

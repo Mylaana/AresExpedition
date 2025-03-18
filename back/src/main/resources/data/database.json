@@ -12,6 +12,28 @@
     },
     "currentPhase": "PLANIFICATION",
     "selectedPhase": ["PLANIFICATION"],
+    "globalParameters": [
+        {
+            "name": "INFRASTRUCTURE",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "TEMPERATURE",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "OXYGEN",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "OCEAN",
+            "step": 0,
+            "addEop": 0
+        }
+    ],
     "groupPlayerState": {
         "0": {
             "infoState": {
@@ -163,7 +185,7 @@
                 ]
             },
             "projectCardState": {
-                "hand": [20,25, 108, 229, 62, 222, 253, 253],
+                "hand": [20,25, 108, 229, 62, 222, 253, 77],
                 "playedProjectIdList": [4, 9, 20],
                 "playedProjectCardStocks": {
                     "22": {"microbe": 2, "animal": 12},
@@ -208,24 +230,24 @@
             "globalParameterState": {
                 "globalParameters": [
                     {
-                        "name": "infrastructure",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "INFRASTRUCTURE",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "ocean",
-                        "value": 3,
-                        "addEndOfPhase": 0
+                        "name": "OCEAN",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "oxygen",
-                        "value": 0,
-                        "addEndOfPhase": 7
+                        "name": "OXYGEN",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "temperature",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "TEMPERATURE",
+                        "step": 0,
+                        "addEop": 0
                     }
                 ]
             },
@@ -416,24 +438,24 @@
             "globalParameterState": {
                 "globalParameters": [
                     {
-                        "name": "infrastructure",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "INFRASTRUCTURE",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "ocean",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "OCEAN",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "oxygen",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "OXYGEN",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "temperature",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "TEMPERATURE",
+                        "step": 0,
+                        "addEop": 0
                     }
                 ]
             },
@@ -624,24 +646,24 @@
             "globalParameterState": {
                 "globalParameters": [
                     {
-                        "name": "infrastructure",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "INFRASTRUCTURE",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "ocean",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "OCEAN",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "oxygen",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "OXYGEN",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "temperature",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "TEMPERATURE",
+                        "step": 0,
+                        "addEop": 0
                     }
                 ]
             },
@@ -832,24 +854,24 @@
             "globalParameterState": {
                 "globalParameters": [
                     {
-                        "name": "infrastructure",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "INFRASTRUCTURE",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "ocean",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "OCEAN",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "oxygen",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "OXYGEN",
+                        "step": 0,
+                        "addEop": 0
                     },
                     {
-                        "name": "temperature",
-                        "value": 0,
-                        "addEndOfPhase": 0
+                        "name": "TEMPERATURE",
+                        "step": 0,
+                        "addEop": 0
                     }
                 ]
             },

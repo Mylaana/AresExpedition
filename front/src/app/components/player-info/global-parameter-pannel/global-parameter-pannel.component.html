@@ -1,16 +1,16 @@
 <div class="main">
 	<div class="wrapper-ocean">
-		<app-ocean-card></app-ocean-card>
+		<app-ocean-card [addEop]="_oceanState.addEndOfPhase" [currentStep]="_oceanState.step"></app-ocean-card>
 	</div>
 	<div class="wrapper-other">
 		<div class="wrapper-parameter-card">
-			<app-global-parameter-card [parameter]="'temperature'"></app-global-parameter-card>
+			<app-global-parameter-card [parameter]="_temperatureState.name" [addEop]="_temperatureState.addEndOfPhase" [currentStep]="_temperatureState.step"></app-global-parameter-card>
 		</div>
 		<div class="wrapper-parameter-card">
-			<app-global-parameter-card [parameter]="'oxygen'"></app-global-parameter-card>
+			<app-global-parameter-card [parameter]="_oxygenState.name" [addEop]="_oxygenState.addEndOfPhase" [currentStep]="_oxygenState.step"></app-global-parameter-card>
 		</div>
 		<div class="wrapper-parameter-card">
-			<app-global-parameter-card [parameter]="'infrastructure'"></app-global-parameter-card>
+			<app-global-parameter-card [parameter]="_infrastructureState.name" [addEop]="_infrastructureState.addEndOfPhase" [currentStep]="_infrastructureState.step"></app-global-parameter-card>
 		</div>
 	</div>
 </div>

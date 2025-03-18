@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 
 import com.ares_expedition.dto.deserializer.IntegerKeyDeserializer;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.PlayerState;
+import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class Game {
@@ -20,18 +22,23 @@ public class Game {
     @JsonDeserialize(keyUsing = IntegerKeyDeserializer.class)
     private Map<Integer, PlayerState> groupPlayerState = new HashMap<>();
     private Boolean gameStarted;
+    private List<GlobalParameter> globalParameters = new ArrayList<>();
 
     public Game() {
     }
     
-    public Game(Integer gameId, List<Integer> deck, List<Integer> discard, List<Integer> groupPlayerId, PhaseEnum currentPhase) {
-        this.gameId = gameId;
-        this.deck = deck;
-        this.discard = discard;
-        this.groupPlayerId = groupPlayerId;
-        this.currentPhase = currentPhase;        
+    
+    public Game(
+        Integer gameId, List<Integer> deck, List<Integer> discard, List<Integer> groupPlayerId,
+        PhaseEnum currentPhase, List<GlobalParameter> parameters) {
+            this.gameId = gameId;
+            this.deck = deck;
+            this.discard = discard;
+            this.groupPlayerId = groupPlayerId;
+            this.currentPhase = currentPhase;
+            this.globalParameters = parameters;
     }
-
+        
     public Integer getGameId() {
         return this.gameId;
     }
@@ -201,5 +208,35 @@ public class Game {
 
     public void setGameStarted(Boolean gameStarted) {
         this.gameStarted = gameStarted;
+    }
+
+    public void applyGlobalParameterIncreaseEop() {
+        //add all addEndOfPhase to current game parameter steps
+        for (PlayerState state : this.groupPlayerState.values()) {
+            for(GlobalParameter p: state.getGlobalParameter()){
+                if(p.getAddEop()==0){continue;}
+                this.increaseParameter(p.getName(), p.getAddEop());
+            }
+        }
+
+        //Copy game parameter into player's parameters
+        for (PlayerState state : this.groupPlayerState.values()) {
+            state.setGlobalParameter(this.globalParameters);
+        }
+    }
+    private void increaseParameter(GlobalParameterNameEnum parameter, Integer addEop) {
+        for(GlobalParameter p: this.globalParameters) {
+            if(p.getName()==parameter){
+                p.increaseStep(addEop);
+                return;
+            }
+        }
+    }
+    public List<GlobalParameter> getGlobalParameters() {
+        return globalParameters;
+    }
+
+    public void setGlobalParameters(List<GlobalParameter> globalParameters) {
+        this.globalParameters = globalParameters;
     }
 }

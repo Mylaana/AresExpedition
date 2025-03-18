@@ -451,12 +451,12 @@ export class GameState{
 		playerState.addRessource("megacredit", -quantity)
 		this.updatePlayerState(playerId, playerState)
 	}
-    addGlobalParameterStepsEOPtoPlayerId(playerId:number, parameter:GlobalParameterValue): void {
-        let newState = this.getPlayerStateFromId(playerId)
-		newState.addGlobalParameterStepEOP(parameter)
-		this.updatePlayerState(playerId, newState)
+    addGlobalParameterStepsEOPtoClient(parameter:GlobalParameterValue): void {
+        let state = this.getPlayerStateFromId(this.clientPlayerId)
+		state.addGlobalParameterStepEOP(parameter)
+		this.updateClientState(state)
 
-        let triggers = newState.getTriggersIdOnParameterIncrease()
+        let triggers = state.getTriggersIdOnParameterIncrease()
         if(triggers.length===0){return}
 
         let events = this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)

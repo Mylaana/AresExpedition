@@ -54,10 +54,14 @@ public class GameController {
             wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, game.getGroupPlayerReady()));
             return;
         }
-
+        this.goToNextPhase(game);
+    }
+    
+    public void goToNextPhase(Game game){
         game.setAllPlayersNotReady();
         game.nextPhaseSelected();
-        wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(gameId, game.getGameState()));
+        game.applyGlobalParameterIncreaseEop();
+        wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
     }
 
     public Map<Integer, Boolean> getGroupPlayerReady(Integer gameId){

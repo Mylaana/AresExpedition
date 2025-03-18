@@ -19,7 +19,6 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure'
 | 'upgradePhase'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | CardBuilderOptionType
-export type GlobalParameterName = 'oxygen' | 'temperature' | 'ocean' | 'infrastructure'
 export type GlobalParameterColor = 'purple' | 'red' | 'yellow' | 'white'
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'

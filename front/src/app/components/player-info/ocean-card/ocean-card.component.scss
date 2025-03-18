@@ -65,6 +65,14 @@
 		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 		clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
 	}
+	&.add-eop{
+		$width: 25%;
+		$border-thickness: 2px;
+		$inner-offset: calc($border-thickness / 2);
+		background: radial-gradient(var(--color-ares-green-dark) 30%, var(--color-ares-blue-dark0));
+		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
+		clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%);
+	}
 }
 .shadow{
 	z-index: 0;

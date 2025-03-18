@@ -39,9 +39,9 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 red production visual effect appearing blank   
-bind global parameter pannel to state values   
 Sell event uses active phase's background for list   
 Selected Phase list pannel showing all phases   
+Action phase upgrade not working   
 
 ## Refactoring :
 text with image component: refactoring   
@@ -49,7 +49,8 @@ test needs: empty components from the app logic and transfer it into services/cl
 global: removing obvious comments   
 project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service   
-ProjectCardComposant major refactoring
+ProjectCardComposant major refactoring   
+Optimize data volume exchanged   
 
 ## Planned for v1 :
 ### Phase cards
@@ -63,7 +64,6 @@ Add back mod cost calculation in hand (removed cause of Expression had changed e
 ### Misc
 gameEventComponent: add Lockpile control   
 websocket: finish the game state saving system   
-Global parameter increase applied at EOT  
 Add Ocean backend mechanic
 Add settings options
 Add victory check
