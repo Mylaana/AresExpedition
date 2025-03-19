@@ -7,7 +7,7 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { GlobalPannelComponent } from '../global-pannel/global-pannel.component';
 import { RessourcePannelComponent } from '../ressource-pannel/ressource-pannel.component';
 import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
-import { expandCollapseVertical } from '../../animations/animations';
+import { expandCollapseVertical } from '../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

@@ -7,7 +7,7 @@ import { PhaseCardModel } from '../../../models/cards/phase-card.model';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ButtonNames } from '../../../types/global.type';
-import { expandCollapseVertical, fadeIn } from '../../animations/animations';
+import { expandCollapseVertical, fadeIn } from '../../../animations/animations';
 import { EventBaseModel, EventGeneric } from '../../../models/core-game/event.model';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 

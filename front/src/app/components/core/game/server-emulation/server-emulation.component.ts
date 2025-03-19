@@ -1,15 +1,15 @@
 import { Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../services/core-game/game-state.service';
-import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
-import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
-import { MessageContentQueryEnum } from '../../../enum/websocket.enum';
+import { GameState } from '../../../../services/core-game/game-state.service';
+import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
+import { DrawEvent, EventBaseModel } from '../../../../models/core-game/event.model';
+import { MessageContentQueryEnum } from '../../../../enum/websocket.enum';
 import { Subject, Subscription, take, takeUntil } from 'rxjs';
-import { RxStompService } from '../../../services/websocket/rx-stomp.service';
-import { WebsocketQueryMessageFactory } from '../../../services/designers/websocket-message-factory.service';
-import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
-import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
-import { EventDesigner } from '../../../services/designers/event-designer.service';
+import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
+import { WebsocketQueryMessageFactory } from '../../../../services/designers/websocket-message-factory.service';
+import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
+import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
+import { EventDesigner } from '../../../../services/designers/event-designer.service';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 

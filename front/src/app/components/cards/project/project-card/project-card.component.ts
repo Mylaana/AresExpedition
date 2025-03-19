@@ -12,7 +12,7 @@ import { ProjectListSubType, ProjectListType } from '../../../../types/project-c
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
 import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
-import { expandCollapseVertical } from '../../../animations/animations';
+import { expandCollapseVertical } from '../../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
 
 

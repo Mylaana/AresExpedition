@@ -1,26 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
-import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
-import { ProjectCardModel } from '../../../models/cards/project-card.model';
-import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
-import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
-import { DrawEventHandler, EventHandler } from '../../../models/core-game/handlers.model';
-import { GameState } from '../../../services/core-game/game-state.service';
-import { ButtonDesigner } from '../../../services/designers/button-designer.service';
-import { EventDesigner } from '../../../services/designers/event-designer.service';
-import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
-import { PhaseCardUpgradeSelectorComponent } from '../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
-import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
-import { PhasePlanificationComponent } from '../../phases/phase-planification/phase-planification.component';
-import { PhaseProductionComponent } from '../../phases/phase-production/phase-production.component';
-import { EventMainButtonComponent } from "../../tools/button/event-main-button.component";
-import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
-import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
-import { expandCollapseVertical, enterFromLeft, fadeIn, enterFromRight, fadeInFadeOut } from '../../animations/animations';
-import { ProjectListType } from '../../../types/project-card.type';
 import { Subject, takeUntil } from 'rxjs';
-import { PhaseActionComponent } from "../../phases/phase-action/phase-action.component";
-import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
+import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
+import { ProjectCardModel } from '../../../../models/cards/project-card.model';
+import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
+import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../../models/core-game/event.model';
+import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
+import { GameState } from '../../../../services/core-game/game-state.service';
+import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { EventDesigner } from '../../../../services/designers/event-designer.service';
+import { ProjectListType } from '../../../../types/project-card.type';
+import { CardBuilderListComponent } from '../../../cards/card-builder-list/card-builder-list.component';
+import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
+import { ProjectCardListComponent } from '../../../cards/project/project-card-list/project-card-list.component';
+import { PhaseActionComponent } from "../../../phases/phase-action/phase-action.component";
+import { PhasePlanificationComponent } from '../../../phases/phase-planification/phase-planification.component';
+import { PhaseProductionComponent } from '../../../phases/phase-production/phase-production.component';
+import { EventMainButtonComponent } from "../../../tools/button/event-main-button.component";
+import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
+import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 
 //this component is the main controller, and view
 

@@ -1,17 +1,17 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
-import { NonEventButton } from '../../../models/core-game/button.model';
-import { ButtonDesigner } from '../../../services/designers/button-designer.service';
-import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
+import { NonEventButton } from '../../../../models/core-game/button.model';
+import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 
 
 @Component({
 	selector: 'app-settings',
 	standalone: true,
 	imports: [
-		NonEventButtonComponent,
-		HexedBackgroundComponent
-	],
+    NonEventButtonComponent,
+    HexedBackgroundComponent,
+],
 	templateUrl: './settings.component.html',
 	styleUrl: './settings.component.scss'
 })
