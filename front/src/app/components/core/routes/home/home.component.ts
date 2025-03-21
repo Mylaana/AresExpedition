@@ -4,7 +4,7 @@ import { NonEventButton } from '../../../../models/core-game/button.model';
 import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
-import { fadeInFadeOut } from '../../../../animations/animations';
+import { fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 
 
 @Component({
@@ -16,12 +16,13 @@ import { fadeInFadeOut } from '../../../../animations/animations';
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  animations: [fadeInFadeOut]
+  animations: [fadeIn]
 })
 export class HomeComponent {
 
 	_newGameButton: NonEventButton = ButtonDesigner.createNonEventButton('routeNewGame')
 	_cardOverviewButton: NonEventButton = ButtonDesigner.createNonEventButton('routeCardOverview')
+	_buyGame: NonEventButton = ButtonDesigner.createNonEventButton('routeBuy')
 
 	constructor(private router: Router){}
 
@@ -34,6 +35,10 @@ export class HomeComponent {
 			}
 			case('routeCardOverview'):{
 				this.router.navigate(['card-overview'])
+				break
+			}
+			case('routeBuy'):{
+				window.location.href = 'https://fryxgames.se/'
 			}
 		}
 	}

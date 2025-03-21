@@ -4,40 +4,49 @@
 	align-items: center;
 	height: 100%;
 	width: 100%;
-
 }
 .main{
 	position: relative;
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	flex-direction: column;
 	z-index: 1;
 	width: 100%;
-	height: 80%;
+	height: 100%;
 }
-.menu{
+.wrapper-menu{
 	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	height: 70%;
-	width: 30%;
-}
-.wrapper-button{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	height: 50%;
-	width: 80%;
+	width: 30%;
+}
+
+.menu{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 60%;
+	width: 75%;
 	gap: 10%;
-	padding-top: 2%;
-	padding-bottom: 2%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+.wrapper-button{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	flex-grow: 1;
+	width: 100%;
 }
 app-non-event-button{
-	height: 32%;
+	display: flex;
+	width: fit-content;
+	flex-grow: 1;
 	&::ng-deep button {
 		font-size: 150%;
 	}
@@ -52,12 +61,22 @@ app-hexed-background{
 
 p{
 	color: white;
+	text-align: right;
+	font-size: 1.1em;
+	text-decoration: underline;
 }
 h1{
 	padding: .5%;
 	padding-left: 20%;
 	padding-right: 20%;
-	font-size: 300%;
+	font-size: 200%;
 	color: white;
 	text-align: center;
+	margin-top: 3%;
+}
+.wrapper-disclaimer{
+	width: 100%;
+	height: fit-content;
+	margin-bottom: 1%;
+	margin-right: 2%;
 }

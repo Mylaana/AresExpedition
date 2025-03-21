@@ -45,6 +45,7 @@ export class ButtonDesigner{
 			//router
 			case('routeNewGame'):{startEnabled=true; break}
 			case('routeCardOverview'):{startEnabled=true; break}
+			case('routeBuy'):{startEnabled=true; break}
 
             default:{startEnabled=false;break}
         }
@@ -92,6 +93,7 @@ export class ButtonDesigner{
 			//router
 			case('routeNewGame'):{caption='NEW GAME'; break}
 			case('routeCardOverview'):{caption='CARD OVERVIEW'; break}
+			case('routeBuy'):{caption='BUY ARES EXPEDITION'; break}
 
             default:{caption='';break}
         }
