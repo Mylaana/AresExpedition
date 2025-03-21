@@ -1,0 +1,11 @@
+<div class="main" @fadeInFadeOut>
+	<h1 class="ares-title">TERRAFORMING MARS <br>ARES EXPEDITION</h1>
+	<div class="menu">
+		<div class="wrapper-button ares-border ares-background">
+			<app-non-event-button [button]="_newGameButton" [shape]="'large'" (buttonClicked)="onClick(_newGameButton)"></app-non-event-button>
+			<app-non-event-button [button]="_cardOverviewButton"  [shape]="'large'" (buttonClicked)="onClick(_cardOverviewButton)"></app-non-event-button>
+		</div>
+		<app-hexed-background [column]="20" [row]="15"></app-hexed-background>
+	</div>
+	<p>This app is not related to Asmodee, fryxgame or steam.</p>
+</div>

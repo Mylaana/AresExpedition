@@ -42,6 +42,10 @@ export class ButtonDesigner{
 			//global
 			case('closeSettings'):{startEnabled=true;break}
 
+			//router
+			case('routeNewGame'):{startEnabled=true; break}
+			case('routeCardOverview'):{startEnabled=true; break}
+
             default:{startEnabled=false;break}
         }
         return startEnabled
@@ -77,7 +81,6 @@ export class ButtonDesigner{
 			case('buyInfrastructure'):{caption='$ressource_megacreditvoid_15$ $other_arrow$ $skipline$ $other_infrastructure$ + $other_card$';break}
 			case('buyOcean'):{caption='$ressource_megacreditvoid_16$ $other_arrow$ $other_ocean$';break}
 
-
 			//cards
 			case('activateProjectOnce'):{caption='$other_activate$'; break}
 			case('activateProjectTwice'):{caption='$other_double_activate$'; break}
@@ -85,6 +88,10 @@ export class ButtonDesigner{
 
 			//global
 			case('closeSettings'):{caption='$other_cancel$';break}
+
+			//router
+			case('routeNewGame'):{caption='NEW GAME'; break}
+			case('routeCardOverview'):{caption='CARD OVERVIEW'; break}
 
             default:{caption='';break}
         }
