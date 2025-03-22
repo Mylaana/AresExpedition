@@ -1,0 +1,9 @@
+<div class="wrapper-main" @fadeIn>
+	<h1 class="ares-title">NEW GAME</h1>
+	<div class="wrapper-game-options">
+	</div>
+	<div class="wrapper-button">
+		<app-non-event-button [button]="_createGame" [shape]="'large'" (buttonClicked)="createGame()"></app-non-event-button>
+	</div>
+	<app-hexed-background [column]="45" [row]="17"></app-hexed-background>
+</div>

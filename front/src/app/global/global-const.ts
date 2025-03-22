@@ -9,6 +9,13 @@ export const GLOBAL_WS_GROUP = `/topic/group/${GLOBAL_GAME_ID}`
 export const GLOBAL_WS_ACKNOWLEDGE = `/topic/ack/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`
 export const GLOBAL_WS_APP_PLAYER = '/app/player'
 export const GLOBAL_WS_APP_DEBUG = '/app/debug'
+export const GLOBAL_API_NEWGAME = '/api/create-game'
+
+export const ROUTE_NEWGAMELINKS = 'new-game-links'
+export const ROUTE_CREATEGAME = 'create-game'
+export const ROUTE_CARD_OVERVIEW = 'card-overview'
+
+export const EXTERNAL_LINK_FRYXGAMES = 'https://fryxgames.se/'
 
 export const DEBUG_LOG_EVENT_RESOLUTION = false
 export const DEBUG_LOG_WS_PUBLISH = true

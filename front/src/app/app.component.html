@@ -1,2 +1,8 @@
 <div class="background-image"></div>
 <router-outlet></router-outlet>
+<app-non-event-button
+	@fadeInFadeOut
+	*ngIf="displayHomeButton()"
+	[button]="_home" [shape]="'hex_floating'"
+	(buttonClicked)="onClick(_home)">
+</app-non-event-button>
