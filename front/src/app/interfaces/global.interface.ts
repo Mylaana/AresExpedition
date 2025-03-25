@@ -1,4 +1,4 @@
-import { AdvancedRessourceType, GameItemType, GlobalParameterColor, SelectablePhase, TagType } from "../types/global.type"
+import { AdvancedRessourceType, GameItemType, GlobalParameterColor, PlayerColor, RGB, SelectablePhase, TagType } from "../types/global.type"
 import { PhaseCardType } from "../types/phase-card.type"
 import { ProjectCardModel } from "../models/cards/project-card.model"
 import { MinMaxEqualType } from "../types/global.type"
@@ -101,4 +101,9 @@ export interface GameItem {
     description: GameItemType,
     imageUrl: string,
     name: string
+}
+export interface CreatePlayer {
+	index: number,
+	name: string,
+	color: PlayerColor,
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton } from "../../models/core-game/button.model";
-import { CardBuilderOptionType, EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton } from "../../models/core-game/button.model";
+import { CardBuilderOptionType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../../types/global.type";
 
 
 @Injectable({
@@ -48,6 +48,9 @@ export class ButtonDesigner{
 			case('routeBuy'):{startEnabled=true; break}
 			case('routeHome'):{startEnabled=true; break}
 			case('routeCreateNewGameValidation'):{startEnabled=true; break}
+
+			//create game
+			case('createGamePlayerNumber'):{startEnabled=true; break}
 
             default:{startEnabled=false;break}
         }
@@ -98,6 +101,9 @@ export class ButtonDesigner{
 			case('routeBuy'):{caption='BUY ARES EXPEDITION'; break}
 			case('routeHome'):{caption='$other_home$'; break}
 			case('routeCreateNewGameValidation'):{caption='CREATE GAME'; break}
+
+			//create game
+			case('createGamePlayerNumber'):{caption='123456'; break}
 
             default:{caption='';break}
         }
@@ -152,7 +158,7 @@ export class ButtonDesigner{
 
         return buttons
     }
-	public static createNonEventButton(name: NonEventButtonNames){
+	public static createNonEventButton(name: NonEventButtonNames): NonEventButton {
 		let button = new NonEventButton
 		button.name = name
         button.startEnabled = this.getStartEnabled(name)
@@ -160,5 +166,10 @@ export class ButtonDesigner{
         button.caption = this.getCaption(name)
 
         return button
+	}
+	public static createColorButton(color: PlayerColor): ColorButton {
+		let button = new ColorButton
+		button.color = color
+		return button
 	}
 }

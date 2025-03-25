@@ -22,17 +22,75 @@ h1{
 	padding-left: 20%;
 	padding-right: 20%;
 	font-size: 200%;
-	color: white;
 	text-align: center;
+	width: 10%;
 }
 .wrapper-game-options{
 	position: relative;
-	width: 100%;
+	display: flex;
+	align-items: center;
+	width: 90%;
 	height: 100%;
+	gap: .5%;
+
 }
 .wrapper-button{
 	height: 100px;
 	&::ng-deep button {
 		font-size: 150%;
 	}
+}
+.wrapper-menu{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 50%;
+	height: 100%;
+	padding: 1%;
+}
+.wrapper-player-creation-menu{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+.wrapper-other-options{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 50%;
+	height: 100%;
+}
+.horizontal-separator{
+	width: 5px;
+	height: 100%;
+	background-color: var(--color-ares-orange);
+}
+.wrapper-number-selection{
+	display: flex;
+	flex-direction: column;
+	height: 20%;
+}
+.wrapper-player-creation-pannel{
+	height: 100px;
+}
+p{
+	font-weight: bold;
+	text-decoration: underline;
+	padding: 10px;
+}
+.wrapper-error{
+	&--hidden{
+		opacity: 0;
+	}
+	&.visible{
+		opacity:1
+	}
+	& > p {
+		color: red;
+		text-decoration: none;
+	}
+	margin-bottom: 5px;
 }

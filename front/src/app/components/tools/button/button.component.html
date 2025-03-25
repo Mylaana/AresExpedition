@@ -1,5 +1,5 @@
-<div class="wrapper-button">
-	<button *ngIf="!_imageUrl" class="main"
+<div *ngIf="button.type==='eventMain' || button.type==='nonEvent'" class="wrapper-button">
+	<button class="main"
 		[disabled]="button.enabled===false"
 		[class.hovered]="_isHovered"
 		[ngClass]="[button.enabled? 'enabled':'disabled',shape?'button-shape--'+shape:'']"
@@ -12,29 +12,35 @@
 				[ngClass]="['button-shape--'+shape, 'gradiant-mask--'+shape]">
 				<div [ngClass]="['button-gradiant-background--'+shape, 'button-shape--'+shape]"></div>
 			</div>
-			<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, button.enabled? 'enabled':'disabled']">
+			<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, button.enabled? 'enabled':'disabled']"
+				[class.hovered]="_isHovered">
 				<app-text-with-image [rawText]="_caption"></app-text-with-image>
 			</div>
 			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, button.enabled? 'enabled':'disabled']"
 				[class.hovered]="_isHovered">
 			</div>
-			<div *ngIf="_style==='transparent'"
+			<div *ngIf="_style==='floating'"
 				[ngClass]="[button.enabled? 'enabled':'disabled', 'button-border--' + shape]"
 				[class.hovered]="_isHovered" >
 			</div>
 		</div>
 	</button>
-	<div *ngIf="_style==='transparent'" class="shadow"
+	<div *ngIf="_style==='floating'" class="shadow"
 		[class.hovered]="_isHovered"
 		[ngClass]="[button.enabled? 'enabled':'disabled']">
 	</div>
 </div>
-
-<div *ngIf="_imageUrl" class="wrapper-button">
+<div *ngIf="button.type==='image'" class="wrapper-button">
     <div [ngClass]="{'element-disabled': button.enabled===false}">
         <button [disabled]="button.enabled===false" [ngClass]="[_imageUrl ? 'image-button':'validation-button', button.enabled===true ? 'element-clickable':'']" (click)="onClick(button)"  >
             <p>{{button.caption}}</p>
             <img *ngIf="_imageUrl" [src]="_imageUrl" alt="">
         </button>
     </div>
+</div>
+<div *ngIf="button.type==='color'" class="wrapper-button">
+	<button [ngClass]="'color-button--'+_color" (click)="onClick(button)"
+	[class.hovered]="_isHovered"
+	(mouseenter)="_isHovered = true"
+	(mouseleave)="_isHovered = false"></button>
 </div>

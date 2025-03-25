@@ -1,46 +1,73 @@
 import { Component } from '@angular/core';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
-import { fadeIn } from '../../../../animations/animations';
+import { fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { Router } from '@angular/router';
 import { ApiService } from '../../../../services/api/api.service';
 import { ROUTE_NEWGAMELINKS } from '../../../../global/global-const';
 import { NonEventButton } from '../../../../models/core-game/button.model';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { PlayerCreationPannelComponent } from '../../../create-game/player-creation-pannel/player-creation-pannel.component';
+import { PlayerNumberComponent } from '../../../create-game/player-number/player-number.component';
+import { CreatePlayer } from '../../../../interfaces/global.interface';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-new-game',
   standalone: true,
   imports: [
+	CommonModule,
 	HexedBackgroundComponent,
-	NonEventButtonComponent
+	NonEventButtonComponent,
+	PlayerCreationPannelComponent,
+	PlayerNumberComponent
 ],
   templateUrl: './create-game.component.html',
   styleUrl: './create-game.component.scss',
-  animations: [fadeIn]
+  animations: [fadeIn, fadeInFadeOut]
 })
 export class CreateGameComponent {
-	message: string | null = null;
+	private playerList: CreatePlayer[] = []
 	_createGame: NonEventButton = ButtonDesigner.createNonEventButton('routeCreateNewGameValidation')
+	_playerNumber: number = 1
+	_errorMessage: string | null = null
+
 	constructor(
 		private apiService: ApiService,
 		private router: Router,
 	) {}
 
-	createGame() {
-	const gameConfig = { gameMode: 'standard', maxPlayers: 4 };
+	displayError(message: string){
+		this._errorMessage = message
+		setTimeout(() => {
+			this._errorMessage = null
+		}, 3000);
+	}
 
-	this.apiService.createGame(gameConfig).subscribe({
-		next: (response) => {
-			this.message = response.message;
-			this.router.navigate([ROUTE_NEWGAMELINKS]);
-		},
-		error: (error) => {
-			console.error('Error during game creation', error);
-			this.message = 'Error during game creation.';
+	createGame() {
+		if(this._playerNumber != this.playerList.length){
+			this.displayError('Each player must have a valid name and a color selected.')
+			return
 		}
-	});
+		const gameConfig = { gameMode: 'standard', maxPlayers:  this.playerList.length};
+
+		this.apiService.createGame(gameConfig).subscribe({
+			next: (response) => {
+				console.log('game creation response:', response)
+				this._errorMessage = response.message;
+				this.router.navigate([ROUTE_NEWGAMELINKS]);
+			},
+			error: (error) => {
+				this._errorMessage = 'Error during game creation.' + error;
+			}
+		});
+	}
+	onPlayerNumberSelected(playerNumber: number): void {
+		this._playerNumber = playerNumber
+	}
+	onPlayerListUpdate(playerList: CreatePlayer[]): void {
+		this.playerList = playerList
 	}
 }
 

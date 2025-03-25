@@ -1,8 +1,35 @@
 <div class="wrapper-main" @fadeIn>
 	<h1 class="ares-title">NEW GAME</h1>
 	<div class="wrapper-game-options">
+		<div class="wrapper-menu ares-border ares-background">
+			<h1 class="ares-title--orange">Players</h1>
+			<div class="wrapper-player-creation-menu">
+				<div class="wrapper-number-selection">
+					<p>Players number:</p>
+					<app-player-number (playerNumberSelected)="onPlayerNumberSelected($event)"></app-player-number>
+				</div>
+				<div class="wrapper-player-creation-pannel">
+					<app-player-creation-pannel [playerNumber]="_playerNumber" (updatePlayerList)="onPlayerListUpdate($event)"></app-player-creation-pannel>
+				</div>
+			</div>
+		</div>
+		<span class="horizontal-separator"></span>
+		<div class="wrapper-menu ares-border ares-background">
+			<h1 class="ares-title--orange">Options</h1>
+		</div>
 	</div>
+
 	<div class="wrapper-button">
+		<div class="wrapper-error ares-border ares-background"
+			*ngIf="_errorMessage"
+			@fadeIn
+			[class.visible]="_errorMessage">
+			<p>{{_errorMessage}}</p>
+		</div>
+		<div class="wrapper-error--hidden ares-border ares-background"
+		*ngIf="!_errorMessage">
+		<p>empty</p>
+	</div>
 		<app-non-event-button [button]="_createGame" [shape]="'large'" (buttonClicked)="createGame()"></app-non-event-button>
 	</div>
 	<app-hexed-background [column]="45" [row]="17"></app-hexed-background>
