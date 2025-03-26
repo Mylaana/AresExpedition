@@ -1,13 +1,15 @@
 package com.ares_expedition.services;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
+import com.ares_expedition.dto.api.NewGameInfoDTO;
 
 @Service
 public class NewGameService {
-    public String createGame(NewGameConfigDTO gameConfig) {
-        // Simule la création de la partie (plus tard, on pourra sauvegarder en base)
-        return "Game created with mode: " + gameConfig.getGameMode() + 
-               ", max players: " + gameConfig.getMaxPlayers();
+    public NewGameInfoDTO createGame(NewGameConfigDTO gameConfig) {
+        //should call game creation service
+        List<String> links = List.of("abc", "def");
+        return new NewGameInfoDTO(links);
     }
 }

@@ -1,25 +1,17 @@
 package com.ares_expedition.dto.api;
 
+import java.util.Map;
+
 public class NewGameConfigDTO {
 
-    private int maxPlayers;
+    private Map<String, String> players;
     private String gameMode;
 
-    // Constructeurs
     public NewGameConfigDTO() {}
 
-    public NewGameConfigDTO(int maxPlayers, String gameMode) {
-        this.maxPlayers = maxPlayers;
+    public NewGameConfigDTO(Map<String, String> players, String gameMode) {
+        this.players = players;
         this.gameMode = gameMode;
-    }
-
-    // Getters et setters
-    public int getMaxPlayers() {
-        return maxPlayers;
-    }
-
-    public void setMaxPlayers(int maxPlayers) {
-        this.maxPlayers = maxPlayers;
     }
 
     public String getGameMode() {
@@ -29,4 +21,14 @@ public class NewGameConfigDTO {
     public void setGameMode(String gameMode) {
         this.gameMode = gameMode;
     }
+
+    public Map<String, String> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Map<String, String> players) {
+        this.players = players;
+    }
+
+    
 }

@@ -18,19 +18,22 @@
 			<h1 class="ares-title--orange">Options</h1>
 		</div>
 	</div>
-
-	<div class="wrapper-button">
-		<div class="wrapper-error ares-border ares-background"
+	<div class="wrapper-error">
+		<div class="wrapper-error--visible ares-border ares-background"
 			*ngIf="_errorMessage"
 			@fadeIn
 			[class.visible]="_errorMessage">
 			<p>{{_errorMessage}}</p>
 		</div>
 		<div class="wrapper-error--hidden ares-border ares-background"
-		*ngIf="!_errorMessage">
-		<p>empty</p>
+			*ngIf="!_errorMessage">
+			<p>empty</p>
+		</div>
 	</div>
-		<app-non-event-button [button]="_createGame" [shape]="'large'" (buttonClicked)="createGame()"></app-non-event-button>
+	<div class="wrapper-button">
+		<app-non-event-button [button]="_createGame"
+			[shape]="'large'"
+			(buttonClicked)="createGame()"></app-non-event-button>
 	</div>
 	<app-hexed-background [column]="45" [row]="17"></app-hexed-background>
 </div>

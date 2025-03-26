@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { Router } from '@angular/router';
@@ -28,9 +28,10 @@ import { CommonModule } from '@angular/common';
   animations: [fadeIn, fadeInFadeOut]
 })
 export class CreateGameComponent {
+	@Output() gameCreated = new EventEmitter<any>()
 	private playerList: CreatePlayer[] = []
 	_createGame: NonEventButton = ButtonDesigner.createNonEventButton('routeCreateNewGameValidation')
-	_playerNumber: number = 1
+	_playerNumber: number = 2
 	_errorMessage: string | null = null
 
 	constructor(
@@ -54,12 +55,21 @@ export class CreateGameComponent {
 
 		this.apiService.createGame(gameConfig).subscribe({
 			next: (response) => {
-				console.log('game creation response:', response)
-				this._errorMessage = response.message;
-				this.router.navigate([ROUTE_NEWGAMELINKS]);
+				this.router.navigate([ROUTE_NEWGAMELINKS], {
+					queryParams: {
+						links: JSON.stringify(response.message.links),
+						options: JSON.stringify(response.message.options)??null
+					}
+				});
 			},
 			error: (error) => {
-				this._errorMessage = 'Error during game creation.' + error;
+				if(error['status']===500){
+					this.displayError('Cannot create game, server is offline')
+					return
+				}
+
+				this.displayError('Error during game creation, see console for full error.')
+				console.error(error)
 			}
 		});
 	}

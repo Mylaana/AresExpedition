@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ares_expedition.dto.api.NewGameConfigDTO;
+import com.ares_expedition.dto.api.NewGameInfoDTO;
 import com.ares_expedition.services.NewGameService;
 
 @RestController
@@ -23,10 +24,11 @@ public class ApiController {
     }
 
     @PostMapping("/create-game")
-    public ResponseEntity<Map<String, String>> createGame(@RequestBody NewGameConfigDTO gameConfig) {
-        String message = newGameService.createGame(gameConfig);
-        Map<String, String> response = new HashMap<>();
-        response.put("message", message);
+    public ResponseEntity<Map<String, Object>> createGame(@RequestBody NewGameConfigDTO gameConfig) {
+        System.out.println("new game request" + gameConfig.toString());
+        NewGameInfoDTO newGameInfo = newGameService.createGame(gameConfig);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", newGameInfo);
         return ResponseEntity.ok(response);
     }
 }
