@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ValidatedCreatePlayer } from '../../../../interfaces/global.interface';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { ApiPlayer } from '../../../../interfaces/websocket.interface';
+import { myUUID } from '../../../../types/global.type';
 
 @Component({
   selector: 'app-new-game-links',
@@ -15,9 +16,9 @@ import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-b
   styleUrl: './new-game-links.component.scss'
 })
 export class NewGameLinksComponent {
-	players: ValidatedCreatePlayer[] = [];
+	players: ApiPlayer[] = [];
 	options: any
-	gameId: any
+	gameId!: myUUID
 	readonly rootUrl = window.location.origin;
 
 	constructor(private route: ActivatedRoute) {

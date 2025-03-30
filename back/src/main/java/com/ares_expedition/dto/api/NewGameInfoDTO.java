@@ -11,9 +11,6 @@ public class NewGameInfoDTO {
 
     NewGameInfoDTO(){
     }
-    public NewGameInfoDTO(List<CreatePlayerDTO> players){
-        this.players = players;
-    }
     public NewGameInfoDTO(String gameId, List<CreatePlayerDTO> players, Map<String, Object> options) {
         this.players = players;
         this.options = options;
@@ -37,5 +34,4 @@ public class NewGameInfoDTO {
     public void setPlayers(List<CreatePlayerDTO> players) {
         this.players = players;
     }
-    
 }

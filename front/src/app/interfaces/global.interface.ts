@@ -107,8 +107,3 @@ export interface CreatePlayer {
 	name: string,
 	color: PlayerColor,
 }
-export interface ValidatedCreatePlayer {
-	id: string,
-	name: string,
-	color: PlayerColor
-}

@@ -3,7 +3,9 @@ import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED
 import { CardState } from "../interfaces/card.interface"
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
 import { ProjectCardModel } from "../models/cards/project-card.model"
+import { myUUID } from "../types/global.type"
 import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
+import { v4 as uuidv4 } from 'uuid'
 
 const PhaseUpgrade: Map<PhaseCardUpgradeType, SelectablePhaseEnum> = new Map<PhaseCardUpgradeType, SelectablePhaseEnum>([
 	['development_6mc', SelectablePhaseEnum.development],
@@ -118,5 +120,8 @@ export class Utils {
 			activable: false,
 			ignoreCost: false
 		}, partialState);
+	}
+	public static newUUID(): myUUID {
+		return uuidv4()
 	}
 }

@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 public class NewGameConfigDTO {
-
+    private String gameId;
     private List<CreatePlayerDTO> players;
     private Map<String, Object> options;
 
     public NewGameConfigDTO() {}
 
-    public NewGameConfigDTO(List<CreatePlayerDTO> players, Map<String, Object> gameMode) {
+    public NewGameConfigDTO(String gameId, List<CreatePlayerDTO> players, Map<String, Object> gameMode) {
+        this.gameId = gameId;
         this.players = players;
         this.options = gameMode;
     }
@@ -31,5 +32,11 @@ public class NewGameConfigDTO {
         this.options = options;
     }
 
-    
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
 }

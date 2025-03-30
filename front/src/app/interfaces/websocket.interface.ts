@@ -1,6 +1,6 @@
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
 import { GroupMessageContentResultEnum, MessageContentQueryEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
-import { myUUID } from "../types/global.type"
+import { myUUID, PlayerColor } from "../types/global.type"
 import { PlayerStateDTO } from "./dto/player-state-dto.interface"
 
 export interface WsInputMessage {
@@ -66,4 +66,14 @@ export interface WsAck {
 	gameId: number
 	contentEnum: PlayerMessageContentResultEnum
 	uuid: myUUID
+}
+export interface ApiMessage {
+	gameId: myUUID
+	players: ApiPlayer[],
+	options?: any
+}
+export interface ApiPlayer {
+	id: myUUID,
+	name: string,
+	color: PlayerColor
 }

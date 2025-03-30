@@ -9,6 +9,6 @@ import com.ares_expedition.dto.api.NewGameInfoDTO;
 public class NewGameService {
     public NewGameInfoDTO createGame(NewGameConfigDTO gameConfig) {
         //should call game creation service
-        return new NewGameInfoDTO("1", gameConfig.getPlayers(), gameConfig.getOptions());
+        return new NewGameInfoDTO(gameConfig.getGameId(), gameConfig.getPlayers(), gameConfig.getOptions());
     }
 }
