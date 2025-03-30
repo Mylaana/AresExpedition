@@ -1,22 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ValidatedCreatePlayer } from '../../../../interfaces/global.interface';
+import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 
 @Component({
   selector: 'app-new-game-links',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+	CommonModule,
+	HexedBackgroundComponent
+],
   templateUrl: './new-game-links.component.html',
   styleUrl: './new-game-links.component.scss'
 })
 export class NewGameLinksComponent {
-	links: any[] = [];
+	players: ValidatedCreatePlayer[] = [];
 	options: any
+	gameId: any
+	readonly rootUrl = window.location.origin;
+
 	constructor(private route: ActivatedRoute) {
 		this.route.queryParams.subscribe(params => {
-		  this.links = params['links'] ? JSON.parse(params['links']) : [];
-		  this.options = params['options'] ? JSON.parse(params['options']) : [];
-		  console.log('loaded:',this.links, this.options)
+			this.players = params['players'] ? JSON.parse(params['players']) : [];
+			this.options = params['options'] ? JSON.parse(params['options']) : [];
+			this.gameId = params['gameId'] ? JSON.parse(params['gameId']) : [];
+			const rootUrl = window.location.origin;
 		});
-	  }
+	}
 }

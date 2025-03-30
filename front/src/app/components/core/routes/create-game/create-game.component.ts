@@ -11,7 +11,14 @@ import { PlayerCreationPannelComponent } from '../../../create-game/player-creat
 import { PlayerNumberComponent } from '../../../create-game/player-number/player-number.component';
 import { CreatePlayer } from '../../../../interfaces/global.interface';
 import { CommonModule } from '@angular/common';
+import { myUUID, RGB } from '../../../../types/global.type';
+import { v4 as uuidv4 } from 'uuid'
 
+interface PostPlayer {
+	id: myUUID,
+	name: string,
+	color: string
+}
 
 @Component({
   selector: 'app-new-game',
@@ -51,13 +58,16 @@ export class CreateGameComponent {
 			this.displayError('Each player must have a valid name and a color selected.')
 			return
 		}
-		const gameConfig = { gameMode: 'standard', maxPlayers:  this.playerList.length};
-
+		const postPlayerList: PostPlayer[] = this.createPostPlayerList()
+		//const gameConfig = {players:  JSON.stringify(postPlayerList)};
+		const gameConfig = {options: {gameMode: 'standard'}, players:  postPlayerList};
 		this.apiService.createGame(gameConfig).subscribe({
 			next: (response) => {
+				console.log('response:', response)
 				this.router.navigate([ROUTE_NEWGAMELINKS], {
 					queryParams: {
-						links: JSON.stringify(response.message.links),
+						gameId: JSON.stringify(response.message.gameId),
+						players: JSON.stringify(response.message.players),
 						options: JSON.stringify(response.message.options)??null
 					}
 				});
@@ -79,5 +89,19 @@ export class CreateGameComponent {
 	onPlayerListUpdate(playerList: CreatePlayer[]): void {
 		this.playerList = playerList
 	}
+
+	createPostPlayerList(): PostPlayer[] {
+		let list: PostPlayer[] = []
+		for(let player of this.playerList){
+			let postPlayer: PostPlayer = {
+				id: uuidv4(),
+				name: player.name,
+				color: player.color??''
+			}
+			list.push(postPlayer)
+		}
+		return list
+	}
+
 }
 

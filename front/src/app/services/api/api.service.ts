@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GLOBAL_API_NEWGAME } from '../../global/global-const';
+import { ValidatedCreatePlayer } from '../../interfaces/global.interface';
 
 interface ApiResponseMessage {
-	links: string[],
-	options?: string[]
+	gameId: string
+	players: ValidatedCreatePlayer[],
+	options?: any
 }
 
 @Injectable({

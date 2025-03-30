@@ -1,4 +1,4 @@
-$color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
+$player-color: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 .wrapper-main{
 	display: flex;
 	align-items: center;
@@ -27,7 +27,7 @@ input{
 	}
 }
 .border{
-	@each $color in $color-buttons{
+	@each $color in $player-color{
 		&--#{$color}{
 			border-color: var(--color-ares-#{$color});
 		}

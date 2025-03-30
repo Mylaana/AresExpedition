@@ -1,33 +1,34 @@
 package com.ares_expedition.dto.api;
 
+import java.util.List;
 import java.util.Map;
 
 public class NewGameConfigDTO {
 
-    private Map<String, String> players;
-    private String gameMode;
+    private List<CreatePlayerDTO> players;
+    private Map<String, Object> options;
 
     public NewGameConfigDTO() {}
 
-    public NewGameConfigDTO(Map<String, String> players, String gameMode) {
+    public NewGameConfigDTO(List<CreatePlayerDTO> players, Map<String, Object> gameMode) {
         this.players = players;
-        this.gameMode = gameMode;
+        this.options = gameMode;
     }
 
-    public String getGameMode() {
-        return gameMode;
-    }
-
-    public void setGameMode(String gameMode) {
-        this.gameMode = gameMode;
-    }
-
-    public Map<String, String> getPlayers() {
+    public List<CreatePlayerDTO> getPlayers() {
         return players;
     }
 
-    public void setPlayers(Map<String, String> players) {
+    public void setPlayers(List<CreatePlayerDTO> players) {
         this.players = players;
+    }
+
+    public Map<String, Object> getOptions() {
+        return options;
+    }
+
+    public void setOptions(Map<String, Object> options) {
+        this.options = options;
     }
 
     

@@ -1,8 +1,19 @@
 <div class="wrapper-main">
 	<h1 class="ares-title">READY FOR LAUNCH</h1>
-	<div class="wrapper-links">
-		<ng-container *ngFor="let link of links">
-			<a href="1/0">{{link}}</a>
-		</ng-container>
+	<div class="wrapper-menu ares-background ares-border">
+		<div class="wrapper-links">
+			<h2>Players launch sites:</h2>
+			<ng-container *ngFor="let player of players">
+				<div [ngClass]="'wrapper-player--'+player.color">
+					<p>{{player.name}}:</p>
+					<a href="game/{{gameId}}/{{player.id}}">{{rootUrl}}/game/{{gameId}}/{{player.id}}</a>
+				</div>
+			</ng-container>
+		</div>
+		<div class="wrapper-options">
+			<h2>Game options:</h2>
+			<p>{{options | json}}</p>
+		</div>
 	</div>
+	<app-hexed-background [column]="45" [row]="17"></app-hexed-background>
 </div>

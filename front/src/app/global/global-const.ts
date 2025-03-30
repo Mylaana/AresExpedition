@@ -14,6 +14,7 @@ export const GLOBAL_API_NEWGAME = '/api/create-game'
 export const ROUTE_NEWGAMELINKS = 'new-game-links'
 export const ROUTE_CREATEGAME = 'create-game'
 export const ROUTE_CARD_OVERVIEW = 'card-overview'
+export const ROUTE_GAME = 'game/:gameId/:playerId'
 
 export const EXTERNAL_LINK_FRYXGAMES = 'https://fryxgames.se/'
 

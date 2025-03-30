@@ -20,6 +20,8 @@ import { ProjectCardInfoService } from '../../../../services/cards/project-card-
 import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
 import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { fadeIn } from '../../../../animations/animations';
 
 @Component({
   selector: 'app-game-main',
@@ -35,7 +37,8 @@ import { CommonModule } from '@angular/common';
 		GameEventComponent
   ],
   templateUrl: './game-main.component.html',
-  styleUrl: './game-main.component.scss'
+  styleUrl: './game-main.component.scss',
+  animations: [fadeIn]
 })
 export class GameMainComponent implements OnInit{
 	playerHand: ProjectCardModel[] = [];
@@ -65,9 +68,14 @@ export class GameMainComponent implements OnInit{
 		private elRef: ElementRef,
 		private gameStateService: GameState,
 		private cardInfoService: ProjectCardInfoService,
-		private rxStompService: RxStompService
-	){}
+		private rxStompService: RxStompService,
+		private route: ActivatedRoute
 
+	){
+		this.route.paramMap.subscribe(params => {
+			console.log('My session is', params.get('gameId'), params.get('playerId'))
+		});
+	}
 	ngOnInit(): void {
 		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.settingsButton = ButtonDesigner.createNonEventButton('settings')

@@ -25,7 +25,7 @@ public class ApiController {
 
     @PostMapping("/create-game")
     public ResponseEntity<Map<String, Object>> createGame(@RequestBody NewGameConfigDTO gameConfig) {
-        System.out.println("new game request" + gameConfig.toString());
+        //System.out.println("new game request" + gameConfig.toString());
         NewGameInfoDTO newGameInfo = newGameService.createGame(gameConfig);
         Map<String, Object> response = new HashMap<>();
         response.put("message", newGameInfo);
