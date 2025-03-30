@@ -302,7 +302,7 @@ class BackendApplicationTests {
 	}
 	@Test
 	void testLoadingGameFromJson() throws Exception {
-		Game game = JsonGameReader.getGame(1);
+		Game game = JsonGameReader.getGame("1");
 		System.out.println("Loaded game: " + game);
 		//System.out.println("Score: " + game.getGroupPlayerState().get(1).getContent().getScore());
 		

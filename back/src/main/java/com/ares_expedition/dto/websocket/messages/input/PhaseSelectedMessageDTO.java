@@ -9,7 +9,7 @@ public class PhaseSelectedMessageDTO extends BaseMessageInputDTO<PhaseSelectedCo
 
     public PhaseSelectedMessageDTO(){};
 
-    public PhaseSelectedMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, PhaseSelectedContentDTO content){
+    public PhaseSelectedMessageDTO(String gameId, String clientId, ContentQueryEnum contentType, PhaseSelectedContentDTO content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;

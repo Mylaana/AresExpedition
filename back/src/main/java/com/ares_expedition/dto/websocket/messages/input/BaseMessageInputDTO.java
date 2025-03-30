@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public class BaseMessageInputDTO<T>{
     protected String uuid;
-    protected Integer gameId;
-    protected Integer playerId;
+    protected String gameId;
+    protected String playerId;
     protected ContentQueryEnum contentEnum;
 
     @JsonTypeInfo(
@@ -31,7 +31,7 @@ public class BaseMessageInputDTO<T>{
     protected T content;
 
     public BaseMessageInputDTO(){}
-    public BaseMessageInputDTO(String uuid, Integer gameId, Integer clientId, ContentQueryEnum contentType, T content){
+    public BaseMessageInputDTO(String uuid, String gameId, String clientId, ContentQueryEnum contentType, T content){
         this.uuid = uuid;
         this.gameId = gameId;
         this.playerId = clientId;
@@ -41,10 +41,10 @@ public class BaseMessageInputDTO<T>{
     public String getUuid(){
         return this.uuid;
     }
-    public Integer getGameId(){
+    public String getGameId(){
         return this.gameId;
     }
-    public Integer getPlayerId(){
+    public String getPlayerId(){
         return this.playerId;
     }
     public ContentQueryEnum getContentEnum(){
@@ -56,10 +56,10 @@ public class BaseMessageInputDTO<T>{
     public void setUuid(String uuid){
         this.uuid = uuid;
     }
-    public void setGameId(Integer gameId){
+    public void setGameId(String gameId){
         this.gameId = gameId;
     }
-    public void setPlayerId(Integer clientId){
+    public void setPlayerId(String clientId){
         this.playerId = clientId;
     }
     public void setContentEnum(ContentQueryEnum queryEnum){

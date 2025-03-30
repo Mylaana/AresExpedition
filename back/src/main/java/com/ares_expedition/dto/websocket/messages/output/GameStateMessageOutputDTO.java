@@ -10,9 +10,9 @@ import com.ares_expedition.model.player_state.PlayerState;
 
 public class GameStateMessageOutputDTO {
     private PhaseEnum currentPhase;
-    private Map<Integer, Boolean> groupReady;
+    private Map<String, Boolean> groupReady;
     private LinkedHashSet<PhaseEnum> selectedPhase;
-    private Map<Integer, PlayerStateDTO> groupPlayerState;
+    private Map<String, PlayerStateDTO> groupPlayerState;
 
     public GameStateMessageOutputDTO(){
     }
@@ -22,10 +22,10 @@ public class GameStateMessageOutputDTO {
     public void setCurrentPhase(PhaseEnum currentPhase){
         this.currentPhase = currentPhase;
     }
-    public Map<Integer, Boolean> getGroupReady(){
+    public Map<String, Boolean> getGroupReady(){
         return this.groupReady;
     }
-    public void setGroupReady(Map<Integer, Boolean> ready){
+    public void setGroupReady(Map<String, Boolean> ready){
         this.groupReady = ready;
     }
     public LinkedHashSet<PhaseEnum> getSelectedPhase(){
@@ -34,21 +34,21 @@ public class GameStateMessageOutputDTO {
     public void setSelectedPhase(LinkedHashSet<PhaseEnum> phases){
         this.selectedPhase = phases;
     }
-    public Map<Integer, PlayerStateDTO> getGroupPlayerStatePublic(){
+    public Map<String, PlayerStateDTO> getGroupPlayerStatePublic(){
         return this.groupPlayerState;
     }
-    public void setGroupPlayerStatePublic(Map<Integer, PlayerState> groupState){
-        Map<Integer, PlayerStateDTO> groupDTO = new HashMap<>();
+    public void setGroupPlayerStatePublic(Map<String, PlayerState> groupState){
+        Map<String, PlayerStateDTO> groupDTO = new HashMap<>();
         for(var state : groupState.entrySet()){
             groupDTO.put(state.getKey(), state.getValue().toJson());
         }
         
         this.groupPlayerState = groupDTO;
     }
-    public PlayerStateDTO getPlayerStatePublic(Integer playerId){
+    public PlayerStateDTO getPlayerStatePublic(String playerId){
         return this.groupPlayerState.get(playerId);
     }
-    public void setPlayerState(Integer playerId, PlayerStateDTO state){
+    public void setPlayerState(String playerId, PlayerStateDTO state){
         this.groupPlayerState.put(playerId, state);
     }
 }

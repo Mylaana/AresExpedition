@@ -10,7 +10,7 @@ public class GenericMessageDTO extends BaseMessageInputDTO<GenericContentDTO> {
     public GenericMessageDTO(){
     }
 
-    public GenericMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, GenericContentDTO content){
+    public GenericMessageDTO(String gameId, String clientId, ContentQueryEnum contentType, GenericContentDTO content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;

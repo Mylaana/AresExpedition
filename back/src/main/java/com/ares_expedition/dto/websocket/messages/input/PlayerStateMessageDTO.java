@@ -8,7 +8,7 @@ public class PlayerStateMessageDTO extends BaseMessageInputDTO<PlayerStateDTO> {
 
     public PlayerStateMessageDTO(){};
 
-    public PlayerStateMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, PlayerStateDTO content){
+    public PlayerStateMessageDTO(String gameId, String clientId, ContentQueryEnum contentType, PlayerStateDTO content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;

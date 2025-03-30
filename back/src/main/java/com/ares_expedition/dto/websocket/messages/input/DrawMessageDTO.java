@@ -8,7 +8,7 @@ public class DrawMessageDTO extends BaseMessageInputDTO<DrawContentDTO> {
 
     public DrawMessageDTO(){};
 
-    public DrawMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, DrawContentDTO content){
+    public DrawMessageDTO(String gameId, String clientId, ContentQueryEnum contentType, DrawContentDTO content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;

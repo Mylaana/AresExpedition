@@ -51,11 +51,11 @@ public class PlayerState {
         this.infoState = state;
     }
 
-    public Integer getId() {
+    public String getId() {
         return this.infoState.getId();
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.infoState.setId(id);
     }
 

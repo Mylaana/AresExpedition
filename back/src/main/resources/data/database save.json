@@ -1,8 +1,9 @@
 {
-    "gameId" : 1,
+    "gameId" : "1",
     "deck": [4, 9, 20, 25, 29, 36, 37, 42],
     "discard": [],
-    "groupPlayerId": [0,1,2,3],
+    "gameStarted": true,
+    "groupPlayerId": ["0","1","2","3"],
     "groupPlayerReady": {
         "0": false,
         "1": false,
@@ -11,6 +12,28 @@
     },
     "currentPhase": "PLANIFICATION",
     "selectedPhase": ["PLANIFICATION"],
+    "globalParameters": [
+        {
+            "name": "INFRASTRUCTURE",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "TEMPERATURE",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "OXYGEN",
+            "step": 0,
+            "addEop": 0
+        },
+        {
+            "name": "OCEAN",
+            "step": 0,
+            "addEop": 0
+        }
+    ],
     "groupPlayerState": {
         "0": {
             "infoState": {
@@ -29,70 +52,70 @@
                         "id": 0,
                         "name": "building",
                         "idImageUrl": 0,
-                        "valueCount": 0,
+                        "valueCount": 10,
                         "valueMod": 0
                     },
                     {
                         "id": 1,
                         "name": "space",
                         "idImageUrl": 1,
-                        "valueCount": 0,
+                        "valueCount": 9,
                         "valueMod": 0
                     },
                     {
                         "id": 2,
                         "name": "science",
                         "idImageUrl": 2,
-                        "valueCount": 0,
+                        "valueCount": 8,
                         "valueMod": 0
                     },
                     {
                         "id": 3,
                         "name": "power",
                         "idImageUrl": 3,
-                        "valueCount": 0,
+                        "valueCount": 7,
                         "valueMod": 0
                     },
                     {
                         "id": 4,
                         "name": "earth",
                         "idImageUrl": 4,
-                        "valueCount": 0,
+                        "valueCount": 6,
                         "valueMod": 0
                     },
                     {
                         "id": 5,
                         "name": "jovian",
                         "idImageUrl": 5,
-                        "valueCount": 0,
+                        "valueCount": 5,
                         "valueMod": 0
                     },
                     {
                         "id": 6,
                         "name": "plant",
                         "idImageUrl": 6,
-                        "valueCount": 0,
+                        "valueCount": 4,
                         "valueMod": 0
                     },
                     {
                         "id": 7,
                         "name": "animal",
                         "idImageUrl": 7,
-                        "valueCount": 0,
+                        "valueCount": 3,
                         "valueMod": 0
                     },
                     {
                         "id": 8,
                         "name": "microbe",
                         "idImageUrl": 8,
-                        "valueCount": 0,
+                        "valueCount": 2,
                         "valueMod": 0
                     },
                     {
                         "id": 9,
                         "name": "event",
                         "idImageUrl": 9,
-                        "valueCount": 0,
+                        "valueCount": 1,
                         "valueMod": 0
                     }
                 ]
@@ -115,7 +138,7 @@
                         "valueMod": 0,
                         "valueProd": 0,
                         "valueBaseProd": 0,
-                        "valueStock": 0,
+                        "valueStock": 16,
                         "hasStock": true,
                         "imageUrlId": 1007
                     },
@@ -125,9 +148,9 @@
                         "valueMod": 0,
                         "valueProd": 0,
                         "valueBaseProd": 0,
-                        "valueStock": 0,
+                        "valueStock": 11,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -162,8 +185,8 @@
                 ]
             },
             "projectCardState": {
-                "hand": [1,2,3],
-                "playedProjectIdList": [22, 7, 33],
+                "hand": [20,25, 108, 229, 62, 222, 253, 77],
+                "playedProjectIdList": [4, 9, 20],
                 "playedProjectCardStocks": {
                     "22": {"microbe": 2, "animal": 12},
                     "7" : {"science": 3}
@@ -180,40 +203,58 @@
                 "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseGroups": [
+                "phaseCards": [
                     {
                         "phaseIndex": 0,
-                        "phaseGroup": "enum",
-                        "phaseCards": []
+                        "cardLevel": 1
+                    },
+                    {
+                        "phaseIndex": 1,
+                        "cardLevel": 0
+                    },
+                    {
+                        "phaseIndex": 2,
+                        "cardLevel": 0
+                    },
+                    {
+                        "phaseIndex": 3,
+                        "cardLevel": 0
+                    },
+                    {
+                        "phaseIndex": 4,
+                        "cardLevel": 0
                     }
                 ],
-                "phaseCardUpgradedCount": 2,
-                "selectedPhase": "DEVELOPMENT"
+                "selectedPhase": "UNDEFINED"
             },
             "globalParameterState": {
-                "globalParameters": {
-                    "infrastructure": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                "globalParameters": [
+                    {
+                        "name": "INFRASTRUCTURE",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "ocean": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "OCEAN",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "oxygen": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "OXYGEN",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "temperature": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "TEMPERATURE",
+                        "step": 0,
+                        "addEop": 0
                     }
-                }
+                ]
             },
             "otherState": {
                 "research": {
                     "keep": 0,
-                    "scan": 4
+                    "scan": 0
                 },
                 "sellCardValueMod": 1
             }
@@ -333,7 +374,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -386,35 +427,37 @@
                 "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseGroups": [
+                "phaseCards": [
                     {
                         "phaseIndex": 0,
-                        "phaseGroup": "enum",
-                        "phaseCards": []
+                        "cardLevel": 0
                     }
                 ],
-                "phaseCardUpgradedCount": 2,
-                "selectedPhase": "DEVELOPMENT"
+                "selectedPhase": "CONSTRUCTION"
             },
             "globalParameterState": {
-                "globalParameters": {
-                    "infrastructure": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                "globalParameters": [
+                    {
+                        "name": "INFRASTRUCTURE",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "ocean": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "OCEAN",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "oxygen": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "OXYGEN",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "temperature": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "TEMPERATURE",
+                        "step": 0,
+                        "addEop": 0
                     }
-                }
+                ]
             },
             "otherState": {
                 "research": {
@@ -539,7 +582,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -592,35 +635,37 @@
                 "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseGroups": [
+                "phaseCards": [
                     {
                         "phaseIndex": 0,
-                        "phaseGroup": "enum",
-                        "phaseCards": []
+                        "cardLevel": 0
                     }
                 ],
-                "phaseCardUpgradedCount": 2,
-                "selectedPhase": "DEVELOPMENT"
+                "selectedPhase": "CONSTRUCTION"
             },
             "globalParameterState": {
-                "globalParameters": {
-                    "infrastructure": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                "globalParameters": [
+                    {
+                        "name": "INFRASTRUCTURE",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "ocean": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "OCEAN",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "oxygen": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "OXYGEN",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "temperature": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "TEMPERATURE",
+                        "step": 0,
+                        "addEop": 0
                     }
-                }
+                ]
             },
             "otherState": {
                 "research": {
@@ -745,7 +790,7 @@
                         "valueBaseProd": 0,
                         "valueStock": 0,
                         "hasStock": true,
-                        "imageUrlId": 6
+                        "imageUrlId": 1004
                     },
                     {
                         "id": 3,
@@ -798,35 +843,37 @@
                 "handMaximumSize": 10
             },
             "phaseCardState": {
-                "phaseGroups": [
+                "phaseCards": [
                     {
                         "phaseIndex": 0,
-                        "phaseGroup": "enum",
-                        "phaseCards": []
+                        "cardLevel": 0
                     }
                 ],
-                "phaseCardUpgradedCount": 2,
-                "selectedPhase": "DEVELOPMENT"
+                "selectedPhase": "CONSTRUCTION"
             },
             "globalParameterState": {
-                "globalParameters": {
-                    "infrastructure": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                "globalParameters": [
+                    {
+                        "name": "INFRASTRUCTURE",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "ocean": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "OCEAN",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "oxygen": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "OXYGEN",
+                        "step": 0,
+                        "addEop": 0
                     },
-                    "temperature": {
-                        "value": 0,
-                        "addEndOfPhase": 0
+                    {
+                        "name": "TEMPERATURE",
+                        "step": 0,
+                        "addEop": 0
                     }
-                }
+                ]
             },
             "otherState": {
                 "research": {

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class JsonGameReader {
-    public static Game getGame(Integer gameId){
+    public static Game getGame(String gameId){
         ObjectMapper objectMapper = new ObjectMapper();
         
         try {

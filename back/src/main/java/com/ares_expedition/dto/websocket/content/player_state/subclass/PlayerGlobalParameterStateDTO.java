@@ -2,7 +2,6 @@ package com.ares_expedition.dto.websocket.content.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.GlobalParameterDTO;
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;

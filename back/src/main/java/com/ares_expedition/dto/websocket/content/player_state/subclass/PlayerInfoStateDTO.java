@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerInfoStateDTO {
     @JsonProperty("i")
-    private Integer id;
+    private String id;
     @JsonProperty("n")
     private String name;
     @JsonProperty("c")
@@ -20,10 +20,10 @@ public class PlayerInfoStateDTO {
         this.color = state.getColor();
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getName() {

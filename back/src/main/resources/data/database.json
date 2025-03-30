@@ -1,9 +1,9 @@
 {
-    "gameId" : 1,
+    "gameId" : "1",
     "deck": [4, 9, 20, 25, 29, 36, 37, 42],
     "discard": [],
     "gameStarted": true,
-    "groupPlayerId": [0,1,2,3],
+    "groupPlayerId": ["0","1","2","3"],
     "groupPlayerReady": {
         "0": false,
         "1": false,
@@ -37,7 +37,7 @@
     "groupPlayerState": {
         "0": {
             "infoState": {
-                "id": 0,
+                "id": "0",
                 "name": "joueur 1",
                 "color": "rgb(0, 0, 255)"
             },
@@ -261,7 +261,7 @@
         },
         "1": {
             "infoState": {
-                "id": 1,
+                "id": "1",
                 "name": "joueur 2",
                 "color": "rgb(0, 0, 255)"
             },
@@ -469,7 +469,7 @@
         },
         "2": {
             "infoState": {
-                "id": 2,
+                "id": "2",
                 "name": "joueur 3",
                 "color": "rgb(0, 0, 255)"
             },
@@ -677,7 +677,7 @@
         },
         "3": {
             "infoState": {
-                "id": 3,
+                "id": "3",
                 "name": "joueur 4",
                 "color": "rgb(0, 0, 255)"
             },

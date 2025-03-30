@@ -8,7 +8,7 @@ public class UnHandledMessageDTO extends BaseMessageInputDTO<UnHandledContentDTO
 
     public UnHandledMessageDTO(){};
 
-    public UnHandledMessageDTO(Integer gameId, Integer clientId, ContentQueryEnum contentType, UnHandledContentDTO content){
+    public UnHandledMessageDTO(String gameId, String clientId, ContentQueryEnum contentType, UnHandledContentDTO content){
         this.gameId = gameId;
         this.playerId = clientId;
         this.contentEnum = contentType;
