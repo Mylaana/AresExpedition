@@ -6,6 +6,7 @@ import { ProjectCardPlayedEffectService } from "../cards/project-card-played-eff
 import { ProjectCardScalingProductionsService } from "../cards/project-card-scaling-productions.service"
 import { RxStompService } from "../websocket/rx-stomp.service"
 import { GameState } from "./game-state.service"
+import { GameParamService } from './game-param.service'
 
 describe('Services - Core game - Game state', () => {
     describe('UNIT TEST', () => {
@@ -16,6 +17,7 @@ describe('Services - Core game - Game state', () => {
 		let playedCardService: ProjectCardPlayedEffectService
 		let rxStompService: RxStompService
 		let gameState: GameState
+		let gameParam: GameParamService
 
 		beforeAll(() => {
 			TestBed.configureTestingModule({
@@ -34,19 +36,19 @@ describe('Services - Core game - Game state', () => {
 			scalingProdService = injector.get(ProjectCardScalingProductionsService)
 			playedCardService = new ProjectCardPlayedEffectService(scalingProdService)
 			rxStompService = injector.get(RxStompService)
+			gameParam = injector.get(GameParamService)
 
 			gameState = new GameState(
 				projectCardService,
 				playedCardService,
 				rxStompService,
+				gameParam,
 				injector
-			  )
+			)
 		})
-        it('should evaluate getClientPlayerState', () => {
+        it('should evaluate getClientState', () => {
             let state = gameState.getClientState()
-            const spy = spyOn(GameState.prototype, 'getPlayerStateFromId')
-            expect(state).toBeUndefined()
-            expect(spy).toHaveBeenCalled
+            expect(state).toBeDefined()
         })
     })
 })
