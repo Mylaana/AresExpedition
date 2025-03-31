@@ -147,7 +147,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		//this.websocket.sendReady(false)
 	}
 	sendBotsReady(): void {
-		this.rxStompService.publishDebugMessage({content:'SET_BOTS_READY'})
+		//this.rxStompService.publishDebugMessage({content:'SET_BOTS_READY'})
 		//this.rxStompService.publish({ destination: '/app/debug', body: JSON.stringify("SET_BOTS_READY") });
 
 		return

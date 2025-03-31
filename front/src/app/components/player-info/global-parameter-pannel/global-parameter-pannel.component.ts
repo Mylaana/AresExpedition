@@ -33,7 +33,6 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	constructor(private gameStateService: GameState){}
 	ngOnInit(): void {
 		this.gameStateService.currentGroupPlayerState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onStateUpdate())
-
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -42,7 +41,6 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	onStateUpdate(): void {
 		let globalState = this.gameStateService.getClientState().getGlobalParameters()
 		for(let state of globalState){
-			console.log(Utils.jsonCopy(state))
 			switch(state.name){
 				case(GlobalParameterNameEnum.ocean):{this._oceanState = Utils.jsonCopy(state); break}
 				case(GlobalParameterNameEnum.infrastructure):{this._infrastructureState = Utils.jsonCopy(state); break}

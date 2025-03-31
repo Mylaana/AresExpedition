@@ -21,8 +21,6 @@ import { EventMainButtonComponent } from "../../../tools/button/event-main-butto
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
-import { myUUID } from '../../../../types/global.type';
-import { GameParamService } from '../../../../services/core-game/game-param.service';
 
 //this component is the main controller, and view
 
