@@ -186,11 +186,8 @@
             },
             "projectCardState": {
                 "hand": [20,25, 108, 229, 62, 222, 253, 77],
-                "playedProjectIdList": [4, 9, 20],
-                "playedProjectCardStocks": {
-                    "22": {"microbe": 2, "animal": 12},
-                    "7" : {"science": 3}
-                },
+                "playedProjectIdList": [4, 9],
+                "playedProjectCardStocks": {},
                 "triggers": {
                     "playedCardsId": [],
                     "activeCardsId": [],
@@ -409,11 +406,10 @@
                 ]
             },
             "projectCardState": {
-                "hand": [1,2,3],
-                "playedProjectIdList": [22, 7, 33],
+                "hand": [4,9],
+                "playedProjectIdList": [20],
                 "playedProjectCardStocks": {
-                    "22": {"microbe": 2, "animal": 12},
-                    "7" : {"science": 3}
+                    "20": {"microbe": 2}
                 },
                 "triggers": {
                     "playedCardsId": [],

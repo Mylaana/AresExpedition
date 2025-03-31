@@ -1,8 +1,8 @@
 import { PlayerInfoStateDTO } from "../../interfaces/dto/player-state-dto.interface";
-import { RGB } from "../../types/global.type";
+import { myUUID, RGB } from "../../types/global.type";
 
 export class PlayerInfoStateModel{
-	private id!: number;
+	private id!: myUUID;
 	private name!: string;
 	private color!: RGB;
 
@@ -12,8 +12,8 @@ export class PlayerInfoStateModel{
 		this.color = data.c
 	}
 
-	setId(id: number): void {this.id = id}
-	getId(): number {return this.id}
+	setId(id: myUUID): void {this.id = id}
+	getId(): myUUID {return this.id}
 	setName(name: string): void {this.name = name}
 	getName(): string {return this.name}
 	setColor(color: RGB): void {this.color = color}
@@ -35,7 +35,7 @@ export class PlayerInfoStateModel{
 	static empty(): PlayerInfoStateModel {
 		return new PlayerInfoStateModel(
 			{
-				i:0,
+				i:"0",
 				c:"rgb(0, 0, 0)",
 				n:"Player 0"
 		})

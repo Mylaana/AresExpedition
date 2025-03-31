@@ -43,8 +43,8 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(): void {
-		this.gameStateService.currentGroupPlayerState.pipe(takeUntil(this.destroy$)).subscribe(
-			state => {this.onStateUpdate(state[this.gameStateService.clientPlayerId])})
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(
+			state => {this.onStateUpdate(state)})
 		this._actionEvent = this.event as EventCardSelector
 		this.updateButtonState()
 	}

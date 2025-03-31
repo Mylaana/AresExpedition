@@ -6,7 +6,7 @@ import { ImageButton } from '../../../models/core-game/button.model';
 import { PhaseCardModel } from '../../../models/cards/phase-card.model';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { SelectablePhaseEnum } from '../../../enum/phase.enum';
-import { ButtonNames } from '../../../types/global.type';
+import { ButtonNames, myUUID } from '../../../types/global.type';
 import { expandCollapseVertical, fadeIn } from '../../../animations/animations';
 import { EventBaseModel, EventGeneric } from '../../../models/core-game/event.model';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
@@ -35,7 +35,6 @@ const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
 })
 export class PhasePlanificationComponent {
 	@Input() event!: EventBaseModel
-	@Input() clientPlayerId!: number;
 	@Output() phaseSelected: EventEmitter<any> = new EventEmitter<any>()
 	buttonList: ImageButton [] = []
 	currentPhaseSelected!: SelectablePhaseEnum;
@@ -45,11 +44,13 @@ export class PhasePlanificationComponent {
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(){
-		let playerPhase = this.gameStateService.getPlayerPhase(this.clientPlayerId)
+		let playerPhase = this.gameStateService.getClientPhaseSelected()
 		if(playerPhase===undefined){return}
+		/*
 		for(let phase of phaseList){
 			this.createPhaseButtons(phase, playerPhase.previousSelectedPhase!=phase)
 		}
+			*/
 		this.setPhaseCards()
 	}
 	createPhaseButtons(buttonPhase: SelectablePhaseEnum, enabled: boolean): void {

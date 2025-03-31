@@ -6,19 +6,15 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerMessage } from "../../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid'
-
-const clientId = 0
-const gameId = 1
+import { myUUID } from "../../types/global.type";
 
 @Injectable({
     providedIn: 'root'
 })
 export class WebsocketQueryMessageFactory{
-    private static generatePlayerMessage(contentEnum: MessageContentQueryEnum, content?: any): PlayerMessage {
+    private static generatePlayerMessage(contentEnum: MessageContentQueryEnum, content?: any,): PlayerMessage {
         let message: PlayerMessage = {
 			uuid: uuidv4(),
-            gameId: gameId,
-            playerId: clientId,
 			contentEnum: contentEnum,
             content: content??{content:contentEnum}
         }
@@ -74,12 +70,12 @@ export class WebsocketResultMessageFactory{
     public static createGroupMessageResult(message: PlayerStateDTO[]): GroupMessageResult {
         return this.createMessageResult(message) as GroupMessageResult
     }
-	public static inputToGroupReady(content: Map<number, boolean>): WsGroupReady[] {
+	public static inputToGroupReady(content: Map<myUUID, boolean>): WsGroupReady[] {
 		//converting content to WsGroupReady format
 		let result: WsGroupReady[] = []
 		const entries = Object.entries(content);
 		entries.forEach(([key, value]) => {
-			result.push({playerId: +key, ready:value});
+			result.push({playerId: key, ready:value});
 		});
 		return result
 	}

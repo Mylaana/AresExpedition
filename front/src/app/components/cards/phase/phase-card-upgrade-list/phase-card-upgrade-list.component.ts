@@ -7,6 +7,8 @@ import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
 import { CardStateModel } from '../../../../models/cards/card-state.model';
 import { CardState } from '../../../../interfaces/card.interface';
 import { Utils } from '../../../../utils/utils';
+import { myUUID } from '../../../../types/global.type';
+import { GameParamService } from '../../../../services/core-game/game-param.service';
 
 
 @Component({
@@ -31,7 +33,6 @@ export class PhaseCardUpgradeListComponent {
 	@ViewChildren('phaseCards') phaseCards!: QueryList<PhaseCardComponent>
 	phaseCardModels:PhaseCardModel[] = []
 
-	clientPlayerId!:number;
 	clientPlayerPhaseCardGroupState!: PhaseCardGroupModel;
 
 	loaded: boolean = false
@@ -41,7 +42,6 @@ export class PhaseCardUpgradeListComponent {
 	){}
 
 	ngOnInit(): void {
-		this.clientPlayerId = this.gameStateService.clientPlayerId
 		this.phaseCardLevelList = [0, 1, 2]
 		this.phaseCardModels = this.phaseGroup.phaseCards
 

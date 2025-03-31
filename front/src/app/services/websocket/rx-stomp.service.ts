@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RxStomp } from '@stomp/rx-stomp';
 import { WebsocketQueryMessageFactory } from '../designers/websocket-message-factory.service';
-import { GLOBAL_CLIENT_ID, GLOBAL_GAME_ID, GLOBAL_WS_APP_PLAYER, GLOBAL_WS_ACKNOWLEDGE, GLOBAL_WS_APP_DEBUG } from '../../global/global-const';
+import { GLOBAL_WS_APP_PLAYER, GLOBAL_WS_ACKNOWLEDGE, GLOBAL_WS_APP_DEBUG } from '../../global/global-const';
 import { MessageContentQueryEnum } from '../../enum/websocket.enum';
 import { myRxStompConfig } from './rx-stomp.config';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
@@ -10,6 +10,8 @@ import { Utils } from '../../utils/utils';
 import { PlayerMessage } from '../../interfaces/websocket.interface';
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from '../../types/global.type';
+import { GameState } from '../core-game/game-state.service';
+import { GameParamService } from '../core-game/game-param.service';
 
 
 interface QueueMessage {
@@ -26,8 +28,16 @@ export class RxStompService extends RxStomp {
     private isProcessingQueue = false
 	private connectionState: boolean = false
 
-    constructor() {
+	private gameId: myUUID = ''
+	private clientId: myUUID = ''
+
+    constructor(
+		private gameParam: GameParamService
+	) {
         super()
+		this.gameParam.currentGameId.subscribe((id) => (this.gameId = id??''))
+		this.gameParam.currentClientId.subscribe((id) => (this.clientId = id??''))
+
         this.configure(myRxStompConfig)
         this.connected$.subscribe(() => {
             this.onClientConnected()
@@ -37,10 +47,11 @@ export class RxStompService extends RxStomp {
 			this.connectionState = state===1
 		})
 
-		this.watch(GLOBAL_WS_ACKNOWLEDGE).subscribe((message) => {
+		/*
+		this.watch(GLOBAL_WS_ACKNOWLEDGE + this.clientId).subscribe((message) => {
 			this.handleAck(JSON.parse(message.body))
-		  })
-
+		})
+		*/
         this.activate()
     }
 
@@ -52,7 +63,9 @@ export class RxStompService extends RxStomp {
     }
 
     private enqueueMessage(message: PlayerMessage, destination: string=GLOBAL_WS_APP_PLAYER) {
-        Utils.logPublishMessage(`${message.contentEnum}`, message.content)
+		Utils.logPublishMessage(`${message.contentEnum}`, message.content)
+		message.playerId = this.clientId
+		message.gameId = this.gameId
 
 		this.messageQueue.push({body: JSON.stringify(message), destination, uuid: message.uuid})
         this.processQueue()
@@ -92,12 +105,10 @@ export class RxStompService extends RxStomp {
 		this.processQueue()
 	  }
 
-    public publishDebugMessage(args: { gameId?: number; playerId?: number; contentEnum?: MessageContentQueryEnum; content: any }) {
+    public publishDebugMessage(args: { gameId?: myUUID; playerId?: myUUID; contentEnum?: MessageContentQueryEnum; content: any }) {
         Utils.logError(`PUBLISHED DEBUG: ${args.contentEnum} `, args.content)
         const message : PlayerMessage = {
 			uuid: uuidv4(),
-            gameId: args.gameId ?? GLOBAL_GAME_ID,
-            playerId: args.playerId ?? GLOBAL_CLIENT_ID,
             contentEnum: args.contentEnum ?? MessageContentQueryEnum.debug,
             content: { content: args.content },
         }
@@ -106,27 +117,27 @@ export class RxStompService extends RxStomp {
     }
 
     public publishDraw(drawNumber: number, eventId: number): void {
-        this.enqueueMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId), GLOBAL_WS_APP_PLAYER)
+        this.enqueueMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
     }
 
     public publishClientPlayerReady(ready: boolean): void {
 		console.log('enqueue client rdy', ready)
-        this.enqueueMessage(WebsocketQueryMessageFactory.createReadyQuery(ready), GLOBAL_WS_APP_PLAYER)
+        this.enqueueMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
     }
 
     public publishGameStateQuery(): void {
-        this.enqueueMessage(WebsocketQueryMessageFactory.createGameStateQuery(), GLOBAL_WS_APP_PLAYER)
+        this.enqueueMessage(WebsocketQueryMessageFactory.createGameStateQuery())
     }
 
 	private publishConnectionQuery(): void {
-		this.enqueueMessage(WebsocketQueryMessageFactory.createConnectionQuery(), GLOBAL_WS_APP_PLAYER)
+		this.enqueueMessage(WebsocketQueryMessageFactory.createConnectionQuery())
 	}
 
     public publishSelectedPhase(phase: SelectablePhaseEnum): void {
-        this.enqueueMessage(WebsocketQueryMessageFactory.createPhaseSelectedQuery(phase), GLOBAL_WS_APP_PLAYER)
+        this.enqueueMessage(WebsocketQueryMessageFactory.createPhaseSelectedQuery(phase))
     }
 
     public publishPlayerState(state: PlayerStateModel): void {
-        this.enqueueMessage(WebsocketQueryMessageFactory.createClientPlayerStatePush(state), GLOBAL_WS_APP_PLAYER)
+        this.enqueueMessage(WebsocketQueryMessageFactory.createClientPlayerStatePush(state))
     }
 }

@@ -10,20 +10,20 @@ export interface WsInputMessage {
 
 export interface MessageResult {
 	uuid: myUUID,
-    gameId: number,
+    gameId: myUUID,
     contentEnum: any,
     content: any
 }
 export interface PlayerMessage {
 	uuid: myUUID
-	gameId: number
-	playerId: number
+	gameId?: myUUID
+	playerId?: myUUID
 	contentEnum: MessageContentQueryEnum
 	content: any
 }
 
 export interface PlayerMessageResult extends MessageResult {
-    playerId: number
+    playerId: myUUID
     contentEnum: PlayerMessageContentResultEnum,
 }
 export interface GroupMessageResult extends MessageResult {
@@ -46,7 +46,7 @@ export interface WsPlayerState extends WsQuery {
 }
 export interface WsResult {}
 export interface WsGroupReady extends WsResult {
-    playerId: number
+    playerId: myUUID
     ready: boolean
 }
 export interface WsDrawResult extends WsResult {
@@ -56,14 +56,14 @@ export interface WsDrawResult extends WsResult {
 export interface WsGameState extends WsResult {
     currentPhase: NonSelectablePhaseEnum
     selectedPhases: SelectablePhaseEnum[]
-    groupReady: Map<number, boolean>
+    groupReady: Map<myUUID, boolean>
     groupPlayerStatePublic: Map<string, any>
 }
 export interface WSGroupState extends WsResult {
 	groupState: PlayerStateDTO[]
 }
 export interface WsAck {
-	gameId: number
+	gameId: myUUID
 	contentEnum: PlayerMessageContentResultEnum
 	uuid: myUUID
 }

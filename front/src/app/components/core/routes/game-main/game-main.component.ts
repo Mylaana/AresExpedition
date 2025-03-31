@@ -22,6 +22,8 @@ import { ButtonDesigner } from '../../../../services/designers/button-designer.s
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { fadeIn } from '../../../../animations/animations';
+import { myUUID } from '../../../../types/global.type';
+import { GameParamService } from '../../../../services/core-game/game-param.service';
 
 @Component({
   selector: 'app-game-main',
@@ -43,8 +45,9 @@ import { fadeIn } from '../../../../animations/animations';
 export class GameMainComponent implements OnInit{
 	playerHand: ProjectCardModel[] = [];
 	playerPlayed: ProjectCardModel[] = [];
-	playerIdList: number[] = [] //this.gameStateService.playerCount.getValue()
-	clientPlayerId!: number;
+	playerIdList: myUUID[] = []
+	clientId!: myUUID
+	gameId!: myUUID
 	loaded: boolean = false
 	@ViewChild('hand') handProjectList!: ProjectCardListComponent
 	isScrolled = false
@@ -69,42 +72,51 @@ export class GameMainComponent implements OnInit{
 		private gameStateService: GameState,
 		private cardInfoService: ProjectCardInfoService,
 		private rxStompService: RxStompService,
-		private route: ActivatedRoute
-
-	){
-		this.route.paramMap.subscribe(params => {
-			console.log('My session is', params.get('gameId'), params.get('playerId'))
-		});
-	}
+		private route: ActivatedRoute,
+		private gameParam: GameParamService
+	){}
 	ngOnInit(): void {
-		this.clientPlayerId = this.gameStateService.clientPlayerId
+		this.gameParam.currentGameId.subscribe((id) => {
+			if(id){
+				this.gameId = id
+				this.subscribeWsIfValidSessionIds()
+			}
+		})
+		this.gameParam.currentClientId.subscribe((id) => {
+			if(id){
+				this.clientId = id
+				this.subscribeWsIfValidSessionIds()
+			}
+		})
 		this.settingsButton = ButtonDesigner.createNonEventButton('settings')
 
 		this.gameStateService.currentLoadingState.subscribe(
 			loading => this.loadingFinished(loading)
 		)
 
-		this.groupSubscription = this.rxStompService
-		.watch(GLOBAL_WS_GROUP)
-		.subscribe((message: Message) => {
-			this.handleGroupMessage(message.body)
-		});
-		this.playerSubscription = this.rxStompService
-		.watch(GLOBAL_WS_PLAYER)
-		.subscribe((message: Message) => {
-			this.handlePlayerMessage(message.body)
-		});
-		this.acknowledgeSubscription = this.rxStompService
-		.watch(GLOBAL_WS_ACKNOWLEDGE)
-		.subscribe((message: Message) => {
-			this.handleAcknowledgeMessage(message.body)
-		});
-
 		this.rxStompService.connectionState$.subscribe(() => {
 			this._connected = this.rxStompService.connectionState$.getValue() === 1
 		})
 	}
+	subscribeWsIfValidSessionIds(): void {
+		if(!this.gameId || !this.clientId){return}
 
+		this.groupSubscription = this.rxStompService
+		.watch(GLOBAL_WS_GROUP + this.gameId)
+		.subscribe((message: Message) => {
+			this.handleGroupMessage(message.body)
+		});
+		this.playerSubscription = this.rxStompService
+		.watch(GLOBAL_WS_PLAYER + this.gameId + "/" + this.clientId)
+		.subscribe((message: Message) => {
+			this.handlePlayerMessage(message.body)
+		});
+		this.acknowledgeSubscription = this.rxStompService
+		.watch(GLOBAL_WS_ACKNOWLEDGE + this.gameId + "/" + this.clientId)
+		.subscribe((message: Message) => {
+			this.handleAcknowledgeMessage(message.body)
+		});
+	}
 	updateHandOnStateChange(state: PlayerStateModel[]): void {
 		let clientState = this.gameStateService.getClientState()
 		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
@@ -115,7 +127,7 @@ export class GameMainComponent implements OnInit{
 		this.handProjectList.updatePlayedCardList(clientState.getProjectPlayedModelList())
 		*/
 	}
-	updatePlayerList(playerIdList: number[]){
+	updatePlayerList(playerIdList: myUUID[]){
 		this.playerIdList = playerIdList
 	}
 

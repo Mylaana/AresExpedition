@@ -15,20 +15,22 @@ import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ProjectListType } from "../../types/project-card.type";
 import { ProjectCardActivatedEffectService } from "../../services/cards/project-card-activated-effect.service";
+import { myUUID } from "../../types/global.type";
+import { GameParamService } from "../../services/core-game/game-param.service";
 
 @Injectable()
 export class EventHandler {
     private eventCounter: number = 0
 	private currentEvent!: EventBaseModel
 	private currentEventId!: number
-	private clientPlayerId = this.gameStateService.clientPlayerId
 	private waiterResolved: number[] = []
-	private readonly phaseHandler = new PhaseResolveHandler(this.gameStateService)
+	private readonly phaseHandler = new PhaseResolveHandler(this.gameStateService, this.gameParam)
 
     constructor(
 		private gameStateService: GameState,
 		private projectCardInfoService: ProjectCardInfoService,
-		private rxStompService: RxStompService
+		private rxStompService: RxStompService,
+		private gameParam: GameParamService
 	){}
 
 	public handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
@@ -334,7 +336,7 @@ export class EventHandler {
 				break
 			}
 			case('planificationPhase'):{
-				this.gameStateService.playerSelectPhase(this.clientPlayerId, event.selectedPhase?.toUpperCase() as SelectablePhaseEnum)
+				this.gameStateService.clientSelectPhase(event.selectedPhase?.toUpperCase() as SelectablePhaseEnum)
 				this.gameStateService.clientPlayerValidateSelectedPhase()
 				break
 			}
@@ -528,8 +530,14 @@ export class DrawEventHandler {
 
 class PhaseResolveHandler {
 	private currentUpgradedPhaseCards!: PhaseCardModel[]
-	constructor(private gameStateService: GameState){}
-	private clientPlayerId: number = this.gameStateService.clientPlayerId
+	private clientPlayerId: myUUID = ''
+
+	constructor(
+		private gameStateService: GameState,
+		private gameParam: GameParamService
+	){
+
+	}
 
 	private getCurrentUpgradedPhaseCard(): PhaseCardModel[] {
 		return this.gameStateService.getClientUpgradedPhaseCards()

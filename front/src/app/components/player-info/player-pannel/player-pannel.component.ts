@@ -9,6 +9,7 @@ import { RessourcePannelComponent } from '../ressource-pannel/ressource-pannel.c
 import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
 import { expandCollapseVertical } from '../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
+import { myUUID } from '../../../types/global.type';
 
 @Component({
 	selector: 'app-player-pannel',
@@ -24,7 +25,7 @@ import { Subject, takeUntil } from 'rxjs';
 	animations: [expandCollapseVertical],
 })
 export class PlayerPannelComponent implements OnInit, OnDestroy{
-	@Input() playerId!: number;
+	@Input() playerId!: myUUID;
 
 	playerState!: PlayerStateModel;
 	playerIsReady!: boolean;

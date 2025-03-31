@@ -2,11 +2,11 @@ import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { RessourceType, TagType } from "../types/global.type"
 import { ActionPhaseType, ConstructionPhaseType, DevelopmentPhaseType, ProductionPhaseType, ResearchPhaseType } from "../types/phase-card.type"
 
-export const GLOBAL_GAME_ID = 1
-export const GLOBAL_CLIENT_ID = 0
-export const GLOBAL_WS_PLAYER = `/topic/player/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`
-export const GLOBAL_WS_GROUP = `/topic/group/${GLOBAL_GAME_ID}`
-export const GLOBAL_WS_ACKNOWLEDGE = `/topic/ack/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`
+//export const GLOBAL_GAME_ID = "1"
+//export const GLOBAL_CLIENT_ID = "0"
+export const GLOBAL_WS_PLAYER = '/topic/player/'
+export const GLOBAL_WS_GROUP = '/topic/group/'
+export const GLOBAL_WS_ACKNOWLEDGE = '/topic/ack/'
 export const GLOBAL_WS_APP_PLAYER = '/app/player'
 export const GLOBAL_WS_APP_DEBUG = '/app/debug'
 export const GLOBAL_API_NEWGAME = '/api/create-game'

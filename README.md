@@ -93,7 +93,7 @@ Nothing done yet
 Tech TBD  
 
 ### Backend
-API: Java Springboot  
+Add requests validation
 
 ### Deployment
 CI/CD Pipeline

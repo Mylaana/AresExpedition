@@ -1,4 +1,4 @@
-import { AdvancedRessourceType, GameItemType, GlobalParameterColor, PlayerColor, RGB, SelectablePhase, TagType } from "../types/global.type"
+import { AdvancedRessourceType, GameItemType, GlobalParameterColor, myUUID, PlayerColor, RGB, SelectablePhase, TagType } from "../types/global.type"
 import { PhaseCardType } from "../types/phase-card.type"
 import { ProjectCardModel } from "../models/cards/project-card.model"
 import { MinMaxEqualType } from "../types/global.type"
@@ -35,7 +35,7 @@ export interface TagInfo {
 }
 
 export interface PlayerPhase {
-    playerId: number
+    playerId: myUUID
     currentSelectedPhase: SelectablePhaseEnum
     currentPhaseType: PhaseCardType
     previousSelectedPhase: SelectablePhaseEnum

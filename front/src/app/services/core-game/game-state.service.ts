@@ -1,7 +1,7 @@
 import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { RGB } from "../../types/global.type";
+import { myUUID, RGB } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
@@ -12,10 +12,9 @@ import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
-import { GLOBAL_CLIENT_ID } from "../../global/global-const";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
-import { Utils } from "../../utils/utils";
+import { GameParamService } from "./game-param.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -38,7 +37,6 @@ type EventPileAddRule = 'first' | 'second' | 'last'
 
 
 const phaseCount: number = 5;
-const handSizeMaximum: number = 10;
 const cardSellValue: number = 3;
 
 @Injectable({
@@ -47,8 +45,8 @@ const cardSellValue: number = 3;
 export class GameState{
     loading = new BehaviorSubject<boolean>(true);
 
-    clientPlayerId = GLOBAL_CLIENT_ID; //should be changed to reflect the client's player's id
-    playerCount = new BehaviorSubject<number[]>([]);
+    private clientId!: myUUID
+    playerCount = new BehaviorSubject<myUUID[]>([]);
 
     private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
@@ -92,14 +90,17 @@ export class GameState{
         private projectCardService: ProjectCardInfoService,
 		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
         private rxStompService: RxStompService,
+		private gameParam: GameParamService,
 		private injector: Injector
-	){}
+	){
+		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
+	}
 
     addPlayer(playerName: string, playerColor: RGB): void {
 
     };
 
-    setPlayerIdList(playerIdList: number[]):void{
+    setPlayerIdList(playerIdList: myUUID[]):void{
         this.playerCount.next(playerIdList)
     }
 
@@ -109,10 +110,10 @@ export class GameState{
     };
 
     public setClientReady(ready: boolean){
-        this.setPlayerReady(this.clientPlayerId, ready)
+        this.setPlayerReady(this.clientId, ready)
     };
 
-    public setPlayerReady(playerId: number, ready: boolean){
+    public setPlayerReady(playerId: string, ready: boolean){
         let groupReady = this.groupPlayerReady.getValue()
 
         for(let player of groupReady){
@@ -125,9 +126,9 @@ export class GameState{
     }
 
     getClientReady(): boolean {
-        return this.getPlayerReady(this.clientPlayerId)
+        return this.getPlayerReady(this.clientId)
     }
-    getPlayerReady(playerId?: number): boolean {
+    getPlayerReady(playerId?: myUUID): boolean {
         let groupReady = this.groupPlayerReady.getValue()
 
         for(let player of groupReady){
@@ -176,23 +177,27 @@ export class GameState{
 		//this.clientState.next(newState[this.clientPlayerId])
     }
 
-    getPlayerStateFromId(playerId: number): PlayerStateModel{
-        return this.groupPlayerState.getValue()[playerId]
+    getPlayerStateFromId(playerId: myUUID): PlayerStateModel | undefined{
+		for(let state of this.groupPlayerState.getValue()){
+			if(state.getId()===playerId){return state}
+		}
+        return undefined
     }
 
     getClientState(): PlayerStateModel{
-        return this.getPlayerStateFromId(this.clientPlayerId)
+        return this.clientState.getValue()
     }
 
-
-    updatePlayerState(playerId:number, playerState: PlayerStateModel): void{
+	/*
+    updatePlayerState(playerId:myUUID, playerState: PlayerStateModel): void{
         this.groupPlayerState.getValue()[playerId] = playerState
         //calls the groupState update to next subscriptions
         this.updateGroupPlayerState(this.groupPlayerState.getValue())
     }
+	*/
 
     updateClientState(clientState: PlayerStateModel): void{
-        this.updatePlayerState(this.clientPlayerId, clientState)
+        //this.updatePlayerState(this.clientPlayerId, clientState)
 		this.clientState.next(clientState)
     }
 
@@ -208,29 +213,13 @@ export class GameState{
         this.selectedPhase[phaseName as keyof SelectedPhase] = false
     }
 
-    /**
-     *
-     * @param playerId
-     * @param phase
-     * @returns
-     * sets up the phase selection for player
-     *
-     * updates the global selectedPhase
-     */
-    playerSelectPhase(playerId:number, phase:SelectablePhaseEnum):void{
-        if(phase===undefined){
+    clientSelectPhase(phase:SelectablePhaseEnum):void{
+        if(phase===SelectablePhaseEnum.undefined){
             return
         }
-        //player phase selection
-        for(let i=0; i<this.groupPlayerSelectedPhase.getValue().length; i++){
-            if(i===playerId){
-                this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase = phase
-                break
-            }
-        }
-        //global selectedPhase
-        //this.selectedPhase[phase]=true
-
+		let state = this.getClientState()
+		state.setPhaseSelected(phase)
+		this.updateClientState(state)
     }
     clientPlayerValidateSelectedPhase(): void {
         this.rxStompService.publishSelectedPhase(this.getClientCurrentSelectedPhase())
@@ -241,7 +230,7 @@ export class GameState{
      * @param currentPhase
      * @returns undefined if the player didnt select the current phase or the phase card type they selected if equal to current phase
      */
-    getPlayerSelectedPhaseCardType(playerId:number, currentPhase: SelectablePhaseEnum): PhaseCardType | undefined {
+    getPlayerSelectedPhaseCardType(playerId:myUUID, currentPhase: SelectablePhaseEnum): PhaseCardType | undefined {
         let selectedPhase = this.getPlayerPhase(playerId)
         if(selectedPhase===undefined){return undefined}
         if(selectedPhase.currentSelectedPhase != currentPhase){
@@ -251,14 +240,14 @@ export class GameState{
     }
 
     getClientCurrentSelectedPhase(): SelectablePhaseEnum {
-        return this.getPlayerCurrentSelectedPhase(this.clientPlayerId)
+        return this.getClientState().getPhaseSelected()
     }
     /**
      *
      * @param playerId
      * @returns the player's current selected phase
      */
-    getPlayerCurrentSelectedPhase(playerId: number): SelectablePhaseEnum {
+    getPlayerCurrentSelectedPhase(playerId: myUUID): SelectablePhaseEnum {
         for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){
             if(playerSelcted.playerId === playerId){
                 return playerSelcted.currentSelectedPhase
@@ -272,7 +261,7 @@ export class GameState{
      * @param playerId
      * @returns the player's PlayerPhase interface
      */
-    getPlayerPhase(playerId: number): PlayerPhase | undefined {
+    getPlayerPhase(playerId: myUUID): PlayerPhase | undefined {
         for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){
             if(playerSelcted.playerId === playerId){
                 return playerSelcted
@@ -300,10 +289,10 @@ export class GameState{
     getClientHandIdList(filter?: ProjectFilter): number[] {return this.getClientState().getProjectHandIdList(filter)}
     getClientHandModelList(filter?: ProjectFilter): ProjectCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList(filter))}
 
-    getClientProjectPlayedIdList(): number[] {return this.getPlayerProjectPlayedIdList(this.clientPlayerId)}
-	getPlayerProjectPlayedIdList(playerId: number): number[] {return this.getPlayerStateFromId(playerId).getProjectPlayedIdList()}
-    getClientProjectPlayedModelList(filter?: ProjectFilter): ProjectCardModel [] {return this.getPlayerProjectPlayedModelList(this.clientPlayerId, filter)}
-    getPlayerProjectPlayedModelList(playerId: number, filter?: ProjectFilter): ProjectCardModel[] {return this.getPlayerStateFromId(playerId).getProjectPlayedModelList(filter)}
+    getClientProjectPlayedIdList(): number[] {return this.getPlayerProjectPlayedIdList(this.clientId)}
+	getPlayerProjectPlayedIdList(playerId: myUUID): number[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedIdList()??[]}
+    getClientProjectPlayedModelList(filter?: ProjectFilter): ProjectCardModel [] {return this.getPlayerProjectPlayedModelList(this.clientId, filter)}
+    getPlayerProjectPlayedModelList(playerId: myUUID, filter?: ProjectFilter): ProjectCardModel[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedModelList(filter)??[]}
 
     addCardsToClientHand(cardsToAdd: number | number[]):void{
         let clientState = this.getClientState()
@@ -446,13 +435,13 @@ export class GameState{
 
         this.updateClientState(newState)
     }
-	removeMegaCreditsFromPlayer(playerId:number, quantity:number):void {
-		let playerState = this.getPlayerStateFromId(playerId)
-		playerState.addRessource("megacredit", -quantity)
-		this.updatePlayerState(playerId, playerState)
+	removeMegaCreditsFromClient(quantity:number):void {
+		let state = this.getClientState()
+		state.addRessource("megacredit", -quantity)
+		this.updateClientState(state)
 	}
     addGlobalParameterStepsEOPtoClient(parameter:GlobalParameterValue): void {
-        let state = this.getPlayerStateFromId(this.clientPlayerId)
+		let state = this.getClientState()
 		state.addGlobalParameterStepEOP(parameter)
 		this.updateClientState(state)
 
@@ -555,7 +544,7 @@ export class GameState{
 	}
 	public setGroupStateFromJson(dto: PlayerStateDTO[]){
 		let groupPlayerState: PlayerStateModel[] = []
-		let playerIdList: number[] = []
+		let playerIdList: myUUID[] = []
 		for(let playerStateDTO of dto){
 			//add playerId to list
 			playerIdList.push(playerStateDTO.infoState.i)
@@ -568,6 +557,7 @@ export class GameState{
 
 		//creates and add player to groupPlayerSelectedPhase
 		let result: PlayerPhase[] = []
+		/*
 		for(let i=0; i<4; i++){
 			let newPlayerPhase: PlayerPhase;
 			newPlayerPhase = {
@@ -578,9 +568,11 @@ export class GameState{
 			}
 			result.push(newPlayerPhase)
 		}
+		*/
 
         //creates and add player to groupPlayerReady
 		let groupReady: PlayerReadyModel[] = []
+		/*
 		for(let i=0; i<4; i++){
 			let playerReady = new PlayerReadyModel;
 			playerReady.id = i
@@ -588,12 +580,20 @@ export class GameState{
 
 			groupReady.push(playerReady)
 		}
+		*/
         this.groupPlayerReady.next(groupReady)
 
 		this.updateGroupPlayerSelectedPhase(result)
 		console.log('state loaded: ', this.groupPlayerState.getValue())
-	}
 
+		for(let state of this.groupPlayerState.getValue()){
+			if(state.getId()===this.clientId){
+				this.updateClientState(state)
+			}
+		}
+
+		console.log('client loaded:', this.clientId, this.clientState.getValue())
+	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
 	}
