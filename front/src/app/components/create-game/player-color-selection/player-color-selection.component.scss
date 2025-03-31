@@ -1,0 +1,15 @@
+.wrapper-main{
+	display: flex;
+	height: fit-content;
+	width: fit-content;
+	margin-right: 10px;
+	padding: 10px;
+	pointer-events: none;
+	background-color: rgba(255, 255, 255, 0.35);
+	border-radius: 5px;
+}
+.wrapper-button{
+	width: 40px;
+	height: 20px;
+	pointer-events: none;
+}

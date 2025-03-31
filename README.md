@@ -42,6 +42,8 @@ red production visual effect appearing blank
 Sell event uses active phase's background for list   
 Selected Phase list pannel showing all phases   
 Action phase upgrade not working   
+Production phase screen not working   
+Player ready status display not working   
 
 ## Refactoring :
 text with image component: refactoring   
@@ -53,8 +55,8 @@ ProjectCardComposant major refactoring
 Optimize data volume exchanged   
 
 ## Planned for v1 :
-### Phase cards
-Phase cards upgrade: a phase card type can only be upgraded once   
+### Backend
+New game creating new DB entry
 
 ### Cards
 Discard Event should "lock" the Sell card button while being resolved  
@@ -73,8 +75,6 @@ Add Event removing any ressource in list on played card
 ### Interface
 Add Ocean last bonus description
 Add main buttons help popup
-Add Angular animations
-Possibly change style to go full transparency for pop-ups + background floating hexes for text   
 Add floating hexes in the main window   
 Add onClick visual effect for buttons   
 Add phase upgrade count and logo in player pannel
@@ -91,7 +91,7 @@ Nothing done yet
 Tech TBD  
 
 ### Backend
-API: Java Springboot  
+Add requests validation
 
 ### Deployment
 CI/CD Pipeline

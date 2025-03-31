@@ -1,6 +1,6 @@
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { RGB } from "../../types/global.type";
+import { myUUID, RGB } from "../../types/global.type";
 import { RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
 import { TriggerStateDTO } from "./project-card-dto.interface";
 
@@ -15,7 +15,7 @@ export interface PlayerStateDTO {
 	otherState: PlayerOtherStateDTO
 }
 export interface PlayerInfoStateDTO {
-	i: number, //id
+	i: myUUID, //id
 	n: string, //name
 	c: RGB //color
 }

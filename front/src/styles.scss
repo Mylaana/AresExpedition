@@ -14,7 +14,7 @@ body {
 div {
     border: red 0px solid;
 }
-.center{
+.center {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,10 +79,18 @@ p {
 }
 .ares-title{
 	$background-alpha: .4;
-	border: rgba(255, 255, 255, 0.7) solid 1px;
-	border-left: 0;
-	border-right: 0;
-	background: linear-gradient(to right, rgba(255, 255, 255, 0) 2%, rgb(255, 255, 255, $background-alpha) 20%, rgb(255, 255, 255, $background-alpha) 80%,  rgba(255, 255, 255, 0) 98%);
+	$types: ('','--orange');
+
+	color: white;
+
+	@each $type in $types {
+		&#{$type}{
+			border: rgba(255, 255, 255, 0.7) solid 1px;
+			border-left: 0;
+			border-right: 0;
+			background: linear-gradient(to right, rgba(255, 255, 255, 0) 2%, rgb(255, 255, 255, $background-alpha) 20%, rgb(255, 255, 255, $background-alpha) 80%,  rgba(255, 255, 255, 0) 98%);
+		}
+	}
 
 	h1{
 		$horizontal-padding: 100px;
@@ -92,6 +100,11 @@ p {
 		padding-left: $horizontal-padding;
 		padding-right: $horizontal-padding;
 		text-wrap: nowrap;
+	}
+	&--orange{
+		border-color: rgb(255, 129, 25);
+		background: linear-gradient(to right, rgba(255, 255, 255, 0) 2%, rgba(rgb(255, 129, 25), $background-alpha) 20%, rgb(rgb(255, 129, 25), $background-alpha) 80%,  rgba(255, 255, 255, 0) 98%);
+		color: black;
 	}
 }
 .element-clickable{

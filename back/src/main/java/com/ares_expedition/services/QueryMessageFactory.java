@@ -16,7 +16,7 @@ public class QueryMessageFactory {
         C content = (C) toQueryType(baseMessage.getContent(), contentType);
         try {
             Constructor<M> constructor = messageQueryType.getConstructor(
-                    Integer.class, Integer.class, ContentQueryEnum.class, contentType);
+                    String.class, String.class, ContentQueryEnum.class, contentType);
             return constructor.newInstance(
                     baseMessage.getGameId(),
                     baseMessage.getPlayerId(),

@@ -1,0 +1,10 @@
+<div class="wrapper-main"
+	[ngClass]="'border--'+ _playerData.color">
+	<div class="wrapper-name">
+		<input type="text"
+			[(ngModel)]="_playerData.name"
+			placeholder="{{getNamePlaceholder()}}"
+			(ngModelChange)="onFieldUpdate()">
+	</div>
+	<app-player-color-selection (colorPicked)="onColorPicked($event)"></app-player-color-selection>
+</div>

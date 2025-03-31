@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { GameState } from '../../../services/core-game/game-state.service';
-import { PlayerPannelComponent } from '../../player-info/player-pannel/player-pannel.component';
-import { expandCollapseVertical, fadeIn } from '../../animations/animations';
+import { GameState } from '../../../../services/core-game/game-state.service';
+import { PlayerPannelComponent } from '../../../player-info/player-pannel/player-pannel.component';
+import { expandCollapseVertical, fadeIn } from '../../../../animations/animations';
 import { AnimationEvent } from '@angular/animations';
-import { GlobalParameterPannelComponent } from '../../player-info/global-parameter-pannel/global-parameter-pannel.component';
+import { GlobalParameterPannelComponent } from '../../../player-info/global-parameter-pannel/global-parameter-pannel.component';
 import { Subject, takeUntil } from 'rxjs';
+import { myUUID } from '../../../../types/global.type';
 
 @Component({
 	selector: 'app-navigation',
@@ -21,8 +22,8 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 	@Input() isScrolled: boolean = false
-	@Input() clientPlayerId!: number
-	_playerIdList: number[] = []
+	@Input() clientPlayerId!: myUUID
+	_playerIdList: myUUID[] = []
 	_playerPannelIsHovered: boolean = false
 
 	private destroy$ = new Subject<void>()
@@ -62,7 +63,7 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 		  document.documentElement.style.setProperty('--navbar-height', `${navbarHeight}px`);
 		}
 	}
-	updatePlayerList(playerIdList: number[]){
+	updatePlayerList(playerIdList: myUUID[]){
 		this._playerIdList = playerIdList
 		this.updateNavHeight()
 	}

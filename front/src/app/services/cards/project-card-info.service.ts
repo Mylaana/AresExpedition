@@ -33,6 +33,9 @@ export class ProjectCardInfoService {
         return cardList
     }
 
+	getAllProjectCard(): ProjectCardModel[]{
+		return this.projectCardInfo
+	}
     getProjectCardList(cardIdList: number[]): ProjectCardModel[] {
         let resultProjectCardList: ProjectCardModel[] = [];
         cardIdList.forEach(element => {

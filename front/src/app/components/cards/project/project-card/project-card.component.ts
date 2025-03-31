@@ -12,7 +12,7 @@ import { ProjectListSubType, ProjectListType } from '../../../../types/project-c
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
 import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
-import { expandCollapseVertical } from '../../../animations/animations';
+import { expandCollapseVertical } from '../../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
 
 
@@ -133,7 +133,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit, O
 		this.cardActivated.emit({card: this.projectCard, twice: this.projectCard.activated>1})
 	}
 	private updateActivationButtonsState(): void {
-		let payable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getPlayerStateFromId(this.gameStateService.clientPlayerId))
+		let payable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getClientState())
 		this._activateOnce.updateEnabled(this.projectCard.activated<1 && payable)
 		this._activateTwice.updateEnabled(this.projectCard.activated===1 && this.activableTwice && payable)
 	}

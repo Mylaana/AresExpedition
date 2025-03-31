@@ -14,18 +14,18 @@ public class WsControllerOutput {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public void sendPushToPlayer(BaseMessageOutputDTO message, Integer playerId){
+    public void sendPushToPlayer(BaseMessageOutputDTO message, String playerId){
         System.out.println("\u001B[35m Sending message on player channel: " + message.getContentEnum() +" with player id: " + playerId + "\u001B[0m");
-        messagingTemplate.convertAndSend(String.format("/topic/player/%d/%d", message.getGameId(), playerId), message);
+        messagingTemplate.convertAndSend(String.format("/topic/player/%s/%s", message.getGameId(), playerId), message);
     }
 
     public void sendPushToGroup(BaseMessageOutputDTO message){
         System.out.println("\u001B[35m Sending message on group channel: " + message.getContentEnum() + "\u001B[0m");
-        messagingTemplate.convertAndSend(String.format("/topic/group/%d", message.getGameId()), message);
+        messagingTemplate.convertAndSend(String.format("/topic/group/%s", message.getGameId()), message);
     }
 	
-	public void sendAckToPlayer(AckMessageOutput message, Integer playerId){
+	public void sendAckToPlayer(AckMessageOutput message, String playerId){
         System.out.println("\u001B[35m Sending Acknowledge on player channel: " + message.getContentEnum() +" with player id: " + playerId + " uuid:" + message.getUuid() + "\u001B[0m");
-        messagingTemplate.convertAndSend(String.format("/topic/ack/%d/%d", message.getGameId(), playerId), message);
+        messagingTemplate.convertAndSend(String.format("/topic/ack/%s/%s", message.getGameId(), playerId), message);
     }
 }

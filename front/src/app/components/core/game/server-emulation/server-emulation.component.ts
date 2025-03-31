@@ -1,15 +1,17 @@
 import { Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../services/core-game/game-state.service';
-import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
-import { DrawEvent, EventBaseModel } from '../../../models/core-game/event.model';
-import { MessageContentQueryEnum } from '../../../enum/websocket.enum';
+import { GameState } from '../../../../services/core-game/game-state.service';
+import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
+import { DrawEvent, EventBaseModel } from '../../../../models/core-game/event.model';
+import { MessageContentQueryEnum } from '../../../../enum/websocket.enum';
 import { Subject, Subscription, take, takeUntil } from 'rxjs';
-import { RxStompService } from '../../../services/websocket/rx-stomp.service';
-import { WebsocketQueryMessageFactory } from '../../../services/designers/websocket-message-factory.service';
-import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
-import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
-import { EventDesigner } from '../../../services/designers/event-designer.service';
+import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
+import { WebsocketQueryMessageFactory } from '../../../../services/designers/websocket-message-factory.service';
+import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
+import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
+import { EventDesigner } from '../../../../services/designers/event-designer.service';
+import { GameParamService } from '../../../../services/core-game/game-param.service';
+import { myUUID } from '../../../../types/global.type';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -33,6 +35,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	cardsDiscarded: number[] = [];
 	phaseList: SelectablePhaseEnum[] = [SelectablePhaseEnum.development,SelectablePhaseEnum.construction,SelectablePhaseEnum.action,SelectablePhaseEnum.production,SelectablePhaseEnum.research]
 	authorizedBotPhaseSelection: SelectablePhaseEnum[] = [SelectablePhaseEnum.development,SelectablePhaseEnum.construction,SelectablePhaseEnum.action,SelectablePhaseEnum.production,SelectablePhaseEnum.research]
+
+	clientId: myUUID = ''
 
 	//@ts-ignore
 	private groupSubscription: Subscription;
@@ -91,7 +95,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		this.destroy$.complete()
 	}
 	ngAfterViewInit(): void {
-		this.gameStateService.setPlayerIdList([0,1,2,3])
+		//this.gameStateService.setPlayerIdList([0,1,2,3])
 	}
 
 	phaseChanged(phase: NonSelectablePhaseEnum){
@@ -108,7 +112,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	planificationPhaseBotSelection(){
 		for(let index of this.gameStateService.playerCount.getValue()){
-			if(index===this.gameStateService.clientPlayerId){continue}
+			if(index===this.clientId){continue}
 
 		}
 	}
@@ -143,14 +147,10 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		//this.websocket.sendReady(false)
 	}
 	sendBotsReady(): void {
-		this.rxStompService.publishDebugMessage({content:'SET_BOTS_READY'})
+		//this.rxStompService.publishDebugMessage({content:'SET_BOTS_READY'})
 		//this.rxStompService.publish({ destination: '/app/debug', body: JSON.stringify("SET_BOTS_READY") });
 
 		return
-		for(let index of this.gameStateService.playerCount.getValue()){
-			if(index===this.gameStateService.clientPlayerId){continue}
-			this.botIdReady(index)
-		}
 	}
 	botIdReady(id: number){
 		//this.websocket.sendDebugMessage({gameId:1,playerId:id,contentEnum:MessageContentQueryEnum.ready,content:{ready:true}})

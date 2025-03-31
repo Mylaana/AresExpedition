@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton } from "../../models/core-game/button.model";
-import { CardBuilderOptionType, EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton } from "../../models/core-game/button.model";
+import { CardBuilderOptionType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../../types/global.type";
 
 
 @Injectable({
@@ -42,6 +42,16 @@ export class ButtonDesigner{
 			//global
 			case('closeSettings'):{startEnabled=true;break}
 
+			//router
+			case('routeCreateGame'):{startEnabled=true; break}
+			case('routeCardOverview'):{startEnabled=true; break}
+			case('routeBuy'):{startEnabled=true; break}
+			case('routeHome'):{startEnabled=true; break}
+			case('routeCreateNewGameValidation'):{startEnabled=true; break}
+
+			//create game
+			case('createGamePlayerNumber'):{startEnabled=true; break}
+
             default:{startEnabled=false;break}
         }
         return startEnabled
@@ -77,7 +87,6 @@ export class ButtonDesigner{
 			case('buyInfrastructure'):{caption='$ressource_megacreditvoid_15$ $other_arrow$ $skipline$ $other_infrastructure$ + $other_card$';break}
 			case('buyOcean'):{caption='$ressource_megacreditvoid_16$ $other_arrow$ $other_ocean$';break}
 
-
 			//cards
 			case('activateProjectOnce'):{caption='$other_activate$'; break}
 			case('activateProjectTwice'):{caption='$other_double_activate$'; break}
@@ -85,6 +94,16 @@ export class ButtonDesigner{
 
 			//global
 			case('closeSettings'):{caption='$other_cancel$';break}
+
+			//router
+			case('routeCreateGame'):{caption='NEW GAME'; break}
+			case('routeCardOverview'):{caption='CARD OVERVIEW'; break}
+			case('routeBuy'):{caption='BUY ARES EXPEDITION'; break}
+			case('routeHome'):{caption='$other_home$'; break}
+			case('routeCreateNewGameValidation'):{caption='CREATE GAME'; break}
+
+			//create game
+			case('createGamePlayerNumber'):{caption='123456'; break}
 
             default:{caption='';break}
         }
@@ -139,7 +158,7 @@ export class ButtonDesigner{
 
         return buttons
     }
-	public static createNonEventButton(name: NonEventButtonNames){
+	public static createNonEventButton(name: NonEventButtonNames): NonEventButton {
 		let button = new NonEventButton
 		button.name = name
         button.startEnabled = this.getStartEnabled(name)
@@ -147,5 +166,10 @@ export class ButtonDesigner{
         button.caption = this.getCaption(name)
 
         return button
+	}
+	public static createColorButton(color: PlayerColor): ColorButton {
+		let button = new ColorButton
+		button.color = color
+		return button
 	}
 }

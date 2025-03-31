@@ -3,6 +3,7 @@ package com.ares_expedition.repository;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.deserializer.IntegerKeyDeserializer;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
@@ -12,24 +13,27 @@ import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class Game {
-    private Integer gameId;
+    private String gameId;
     private List<Integer> deck = new ArrayList<>();
     private List<Integer> discard = new ArrayList<>();
-    private List<Integer> groupPlayerId = new ArrayList<>();
-    private Map<Integer, Boolean> groupPlayerReady = new HashMap<>();
+    private List<String> groupPlayerId = new ArrayList<>();
+    private Map<String, Boolean> groupPlayerReady = new HashMap<>();
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
-    @JsonDeserialize(keyUsing = IntegerKeyDeserializer.class)
-    private Map<Integer, PlayerState> groupPlayerState = new HashMap<>();
+    //@JsonDeserialize(keyUsing = IntegerKeyDeserializer.class)
+    private Map<String, PlayerState> groupPlayerState = new HashMap<>();
     private Boolean gameStarted;
     private List<GlobalParameter> globalParameters = new ArrayList<>();
 
     public Game() {
     }
     
-    
+    Game(NewGameConfigDTO gameConfig){
+
+    }
+
     public Game(
-        Integer gameId, List<Integer> deck, List<Integer> discard, List<Integer> groupPlayerId,
+        String gameId, List<Integer> deck, List<Integer> discard, List<String> groupPlayerId,
         PhaseEnum currentPhase, List<GlobalParameter> parameters) {
             this.gameId = gameId;
             this.deck = deck;
@@ -39,11 +43,11 @@ public class Game {
             this.globalParameters = parameters;
     }
         
-    public Integer getGameId() {
+    public String getGameId() {
         return this.gameId;
     }
 
-    public void setGameId(Integer gameId) {
+    public void setGameId(String gameId) {
         this.gameId = gameId;
     }
 
@@ -63,20 +67,20 @@ public class Game {
         this.discard = discard;
     }
 
-    public List<Integer> getGroupPlayerId(){
+    public List<String> getGroupPlayerId(){
         return this.groupPlayerId;
     }
 
-    public void setGroupPlayerId(List<Integer> groupPlayerId){
+    public void setGroupPlayerId(List<String> groupPlayerId){
         this.groupPlayerId = groupPlayerId;
     }
 
-    public Map<Integer, Boolean> getGroupPlayerReady(){
+    public Map<String, Boolean> getGroupPlayerReady(){
         return this.groupPlayerReady;
     }
 
     public boolean getAllPlayersReady(){
-        for(Map.Entry<Integer, Boolean> entry : groupPlayerReady.entrySet()){
+        for(Map.Entry<String, Boolean> entry : groupPlayerReady.entrySet()){
             if(!entry.getValue()){
                 return false;
             }
@@ -84,7 +88,7 @@ public class Game {
         return true;
     }
 
-    public void setGroupPlayerReady(Map<Integer, Boolean> groupReady){
+    public void setGroupPlayerReady(Map<String, Boolean> groupReady){
         this.groupPlayerReady = groupReady;
     }
 
@@ -129,12 +133,12 @@ public class Game {
         Collections.shuffle(this.deck);
     }
 
-    public void setPlayerReady(Integer playerId, Boolean ready){
+    public void setPlayerReady(String playerId, Boolean ready){
         this.groupPlayerReady.replace(playerId, ready);
     }
 
     public void setAllPlayersNotReady(){
-        for(Integer playerId: this.groupPlayerId){
+        for(String playerId: this.groupPlayerId){
             this.setPlayerReady(playerId, false);
         }
     }
@@ -198,7 +202,7 @@ public class Game {
         return this.selectedPhase;
     }
 
-    public void setPlayerState(Integer playerId, PlayerState state){
+    public void setPlayerState(String playerId, PlayerState state){
         this.groupPlayerState.put(playerId, state);
     }
 
@@ -238,5 +242,17 @@ public class Game {
 
     public void setGlobalParameters(List<GlobalParameter> globalParameters) {
         this.globalParameters = globalParameters;
+    }
+
+    public static Game createGame(NewGameConfigDTO gameConfig) {
+        return new Game(gameConfig);
+    }
+
+    public Map<String, PlayerState> getGroupPlayerState() {
+        return groupPlayerState;
+    }
+
+    public void setGroupPlayerState(Map<String, PlayerState> groupPlayerState) {
+        this.groupPlayerState = groupPlayerState;
     }
 }

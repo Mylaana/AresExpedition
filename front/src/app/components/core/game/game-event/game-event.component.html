@@ -50,7 +50,6 @@
 				<app-phase-planification
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
 					@fadeIn
-					[clientPlayerId]="clientPlayerId"
 					[event]="currentEvent"
 					(phaseSelected)="onPhaseSelected()"></app-phase-planification>
 				<app-phase-production

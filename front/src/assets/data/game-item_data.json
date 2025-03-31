@@ -233,6 +233,12 @@
         "imageUrl": "assets/other/activate.png",
         "name": "$other_activate$"
     },
+	{
+        "id": 129,
+        "description": "home",
+        "imageUrl": "assets/other/home.png",
+        "name": "$other_home$"
+    },
     {
         "id": 1000,
         "description": "steel",

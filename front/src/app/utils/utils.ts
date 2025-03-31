@@ -1,9 +1,11 @@
 import { SelectablePhaseEnum } from "../enum/phase.enum"
-import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST, GLOBAL_CLIENT_ID } from "../global/global-const"
+import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST } from "../global/global-const"
 import { CardState } from "../interfaces/card.interface"
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
 import { ProjectCardModel } from "../models/cards/project-card.model"
+import { myUUID } from "../types/global.type"
 import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
+import { v4 as uuidv4 } from 'uuid'
 
 const PhaseUpgrade: Map<PhaseCardUpgradeType, SelectablePhaseEnum> = new Map<PhaseCardUpgradeType, SelectablePhaseEnum>([
 	['development_6mc', SelectablePhaseEnum.development],
@@ -118,5 +120,8 @@ export class Utils {
 			activable: false,
 			ignoreCost: false
 		}, partialState);
+	}
+	public static newUUID(): myUUID {
+		return uuidv4()
 	}
 }

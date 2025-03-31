@@ -8,7 +8,7 @@ public class PlayerReadyMessageDTO extends BaseMessageInputDTO<PlayerReadyConten
 
     public PlayerReadyMessageDTO(){};
 
-    public PlayerReadyMessageDTO(Integer gameId, Integer playerId, ContentQueryEnum contentType, PlayerReadyContentDTO content){
+    public PlayerReadyMessageDTO(String gameId, String playerId, ContentQueryEnum contentType, PlayerReadyContentDTO content){
         this.gameId = gameId;
         this.playerId = playerId;
         this.contentEnum = contentType;

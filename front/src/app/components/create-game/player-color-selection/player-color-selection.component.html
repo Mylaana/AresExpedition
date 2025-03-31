@@ -1,0 +1,7 @@
+<div class="wrapper-main">
+	<ng-container *ngFor="let button of _buttonList">
+		<div class="wrapper-button">
+			<app-button [button]="button" (buttonClicked)="onButtonClicked(button)"></app-button>
+		</div>
+	</ng-container>
+</div>

@@ -6,10 +6,12 @@ import { GameState } from "../../services/core-game/game-state.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
 import { Utils } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { GameParamService } from "../../services/core-game/game-param.service";
+import { myUUID } from "../../types/global.type";
 
 @Injectable()
 export class WebsocketHandler {
-    clientPlayerId = this.gameStateService.clientPlayerId
+    clientPlayerId: myUUID = ''
 
     constructor(private gameStateService: GameState){}
 

@@ -1,0 +1,8 @@
+<div class="wrapper-main">
+	<ng-container *ngFor="let card of _playerIndexList">
+		<app-player-creation-card
+			@expandCollapseVertical
+			[playerIndex]="card"
+			(playerData)="onPlayerDataValidated($event)"></app-player-creation-card>
+	</ng-container>
+</div>

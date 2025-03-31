@@ -2,13 +2,21 @@ import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { RessourceType, TagType } from "../types/global.type"
 import { ActionPhaseType, ConstructionPhaseType, DevelopmentPhaseType, ProductionPhaseType, ResearchPhaseType } from "../types/phase-card.type"
 
-export const GLOBAL_GAME_ID = 1
-export const GLOBAL_CLIENT_ID = 0
-export const GLOBAL_WS_PLAYER = `/topic/player/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`
-export const GLOBAL_WS_GROUP = `/topic/group/${GLOBAL_GAME_ID}`
-export const GLOBAL_WS_ACKNOWLEDGE = `/topic/ack/${GLOBAL_GAME_ID}/${GLOBAL_CLIENT_ID}`
+//export const GLOBAL_GAME_ID = "1"
+//export const GLOBAL_CLIENT_ID = "0"
+export const GLOBAL_WS_PLAYER = '/topic/player/'
+export const GLOBAL_WS_GROUP = '/topic/group/'
+export const GLOBAL_WS_ACKNOWLEDGE = '/topic/ack/'
 export const GLOBAL_WS_APP_PLAYER = '/app/player'
 export const GLOBAL_WS_APP_DEBUG = '/app/debug'
+export const GLOBAL_API_NEWGAME = '/api/create-game'
+
+export const ROUTE_NEWGAMELINKS = 'new-game-links'
+export const ROUTE_CREATEGAME = 'create-game'
+export const ROUTE_CARD_OVERVIEW = 'card-overview'
+export const ROUTE_GAME = 'game/:gameId/:playerId'
+
+export const EXTERNAL_LINK_FRYXGAMES = 'https://fryxgames.se/'
 
 export const DEBUG_LOG_EVENT_RESOLUTION = false
 export const DEBUG_LOG_WS_PUBLISH = true
@@ -23,3 +31,4 @@ export const GAME_PHASE_PRODUCTION_CARDS_LIST: ProductionPhaseType[] = ['product
 export const GAME_PHASE_RESEARCH_CARDS_LIST: ResearchPhaseType[] = ['research_base', 'research_scan6_keep1', 'research_scan2_keep2']
 export const GAME_SELECTABLE_PHASE_LIST: SelectablePhaseEnum[] = [SelectablePhaseEnum.development, SelectablePhaseEnum.construction, SelectablePhaseEnum.action, SelectablePhaseEnum.production, SelectablePhaseEnum.research]
 export const GAME_HAND_MAXIMUM_SIZE = 10
+export const GAME_MAXIMUM_PLAYER_NUMBER = 6

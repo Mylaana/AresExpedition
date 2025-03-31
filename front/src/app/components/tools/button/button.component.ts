@@ -1,10 +1,11 @@
 import { Component, Output, Input, EventEmitter, OnChanges, SimpleChanges, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonBase, ImageButton } from '../../../models/core-game/button.model';
+import { ButtonBase, ColorButton, ImageButton } from '../../../models/core-game/button.model';
 import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
+import { PlayerColor } from '../../../types/global.type';
 
-type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right' | 'action'
-type style = 'plain' | 'transparent'
+type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right' | 'action' | 'selection_rounded_square'
+type style = 'plain' | 'floating'  | 'transparent'
 
 @Component({
 	selector: 'app-button',
@@ -20,20 +21,30 @@ export class ButtonComponent implements OnChanges {
 	@Output() buttonClicked: EventEmitter<ButtonBase> = new EventEmitter<ButtonBase>()
 	@Input() button!: ButtonBase;
 	@Input() shape: shape = 'hex'
+	@Input() selected!: boolean;
 	_imageUrl!: string
 	_caption!: string
 	_isHovered: boolean = false
 	_style: style ='plain'
+	_color: PlayerColor
 
 	ngOnInit(): void {
-		this._style = ['hex_floating','action'].includes(this.shape)?'transparent':'plain'
+		switch(this.shape){
+			case('hex_floating'):case('action'):{this._style='floating'; break}
+			case('selection_rounded_square'):{this._style='transparent'; break}
+			default:{this._style='plain'}
+		}
 	}
 	ngOnChanges(changes: SimpleChanges): void {
 		if(changes['button'] && changes['button'].currentValue){
 			this._caption =  this.button.caption??''
 			switch(this.button.type){
-				case('Image'):{
+				case('image'):{
 					this.handleImageButtonChange()
+					break
+				}
+				case('color'):{
+					this.handleColorButtonChange()
 					break
 				}
 			}
@@ -46,5 +57,9 @@ export class ButtonComponent implements OnChanges {
 	private handleImageButtonChange(){
 		let imageButton = this.button as ImageButton
 		this._imageUrl = imageButton.imageUrl
+	}
+	private handleColorButtonChange(){
+		let ColorButton = this.button as ColorButton
+		this._color = ColorButton.color
 	}
 }

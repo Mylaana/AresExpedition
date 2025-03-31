@@ -21,6 +21,7 @@ import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
 import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.player_state.PlayerState;
+import com.ares_expedition.repository.Game;
 import com.ares_expedition.services.QueryMessageFactory;
 
 @Service
@@ -91,10 +92,10 @@ public class InputRouter {
         Object queryContent = query.getContent().getContent().toString();
         System.out.println("\u001B[33m HANDLEING DEBUG MESSAGE for gameId: " + query.getGameId() + " with queryContent: " + queryContent.toString() + "\u001B[0m");
         if(queryContent.toString().equals("SET_BOTS_READY")){
-            gameController.setPlayerReady(1, 1, true);
-            gameController.setPlayerReady(1, 2, true);
-            gameController.setPlayerReady(1, 3, true);
-            Integer gameId = query.getGameId();
+            gameController.setPlayerReady("1", "1", true);
+            gameController.setPlayerReady("1", "2", true);
+            gameController.setPlayerReady("1", "3", true);
+            String gameId = query.getGameId();
             
             if(!gameController.getAllPlayersReady(gameId)){return;}
     
@@ -127,19 +128,19 @@ public class InputRouter {
 
     private void handlePlayerReadyQuery(PlayerReadyMessageDTO query) {
         System.out.println("\u001B[32m HANDLEING PlayerReadyQuery for gameId: " + query.getGameId() + "\u001B[0m");
-        Integer gameId = query.getGameId();
+        String gameId = query.getGameId();
         gameController.setPlayerReady(gameId, query.getPlayerId(), query.getContent().getReady());
     }
 
     private void handleGameStateQuery(GenericMessageDTO query){
         System.out.println("\u001B[32m HANDLEING Game state query for gameId: " + query.getGameId() + "\u001B[0m");
-        Integer gameId = query.getGameId();
+        String gameId = query.getGameId();
         wsOutput.sendPushToPlayer(MessageOutputFactory.createGameStateMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());
     }
     
     private void handlePhaseSelectedQuery(PhaseSelectedMessageDTO query){
         System.out.println("\u001B[32m HANDLEING phase selected for gameId: " + query.getGameId() + "\u001B[0m");
-        Integer gameId = query.getGameId();
+        String gameId = query.getGameId();
         PhaseEnum phase = query.getContent().getPhase();
         gameController.addPhaseSelected(gameId, phase);
         wsOutput.sendPushToGroup(MessageOutputFactory.createDEBUGMessage(gameId, gameController.getPhaseSelected(gameId)));
@@ -156,7 +157,8 @@ public class InputRouter {
     
     private void handlePlayerConnection(GenericMessageDTO query) {
         System.out.println("\u001B[32m HANDLEING player connection query for gameId: " + query.getGameId() + "\u001B[0m");
-        Integer gameId = query.getGameId();
+        String gameId = query.getGameId();
+        Game game = gameController.getGameFromId(gameId);
         Boolean gameStarted = gameController.getGameStarted(gameId);
         if (gameStarted) {
             wsOutput.sendPushToPlayer(MessageOutputFactory.createConnectMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());    

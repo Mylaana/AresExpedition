@@ -1,6 +1,6 @@
 import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.interface";
 import { ProjectCardModel } from "../cards/project-card.model";
-import { RessourceType, RGB } from "../../types/global.type";
+import { myUUID, RessourceType, RGB } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
@@ -55,8 +55,8 @@ export class PlayerStateModel {
 
 
 	//infostate
-	getId(): number {return this.infoState.getId()}
-	setId(id: number){this.infoState.setId(id)}
+	getId(): myUUID {return this.infoState.getId()}
+	setId(id: myUUID){this.infoState.setId(id)}
 	getName(): string {return this.infoState.getName()}
 	setName(name: string){this.infoState.setName(name)}
 	getColor(): RGB {return this.infoState.getColor()}
@@ -86,7 +86,7 @@ export class PlayerStateModel {
 	getPhaseCardUpgradedCount(): number {return this.phaseCardState.getPhaseCardUpgradedCount()}
 	addPhaseCardUpgradeCount(): void {this.phaseCardState.addPhaseCardUpgradeCount()}
 	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {this.phaseCardState.setPhaseCardUpgraded(upgrade)}
-	getPhaseSelected(): SelectablePhaseEnum | undefined {return this.phaseCardState.getPhaseSelected()}
+	getPhaseSelected(): SelectablePhaseEnum {return this.phaseCardState.getPhaseSelected()}
 	setPhaseSelected(selection: SelectablePhaseEnum): void {this.phaseCardState.setPhaseSelected(selection)}
 	getUpgradedPhaseCards(): PhaseCardModel[] {return this.phaseCardState.getUpgradedPhaseCards()}
 	getPhaseGroups(): PhaseCardGroupModel[] {return this.phaseCardState.getPhaseGroups()}
@@ -170,7 +170,7 @@ export class PlayerStateModel {
 
 
 export class PlayerReadyModel {
-    id!: number;
+    id!: myUUID;
     name!:string;
     isReady: boolean = false;
 }

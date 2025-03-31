@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RessourceCardComponent } from '../ressource-card/ressource-card.component';
 import { RessourceInfo } from '../../../interfaces/global.interface';
+import { myUUID } from '../../../types/global.type';
 
 @Component({
   selector: 'app-ressource-pannel',
@@ -14,7 +15,7 @@ import { RessourceInfo } from '../../../interfaces/global.interface';
   styleUrl: './ressource-pannel.component.scss'
 })
 export class RessourcePannelComponent {
-  @Input() playerId!: number;
+  @Input() playerId!: myUUID;
   @Input() ressource!: RessourceInfo[];
 
   ngOnInit(): void {

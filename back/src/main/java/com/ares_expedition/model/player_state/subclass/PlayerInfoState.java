@@ -3,7 +3,7 @@ package com.ares_expedition.model.player_state.subclass;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerInfoStateDTO;
 
 public class PlayerInfoState {
-    private Integer id;
+    private String id;
     private String name;
     private String color;
 
@@ -15,11 +15,11 @@ public class PlayerInfoState {
         this.color = dto.getColor();
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
