@@ -1,16 +1,16 @@
-package com.ares_expedition.repository;
+package com.ares_expedition.model.core;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.ares_expedition.dto.api.CreatePlayerDTO;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
-import com.ares_expedition.dto.deserializer.IntegerKeyDeserializer;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.ares_expedition.repository.core.GameData;
 
 public class Game {
     private String gameId;
@@ -20,7 +20,6 @@ public class Game {
     private Map<String, Boolean> groupPlayerReady = new HashMap<>();
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
-    //@JsonDeserialize(keyUsing = IntegerKeyDeserializer.class)
     private Map<String, PlayerState> groupPlayerState = new HashMap<>();
     private Boolean gameStarted;
     private List<GlobalParameter> globalParameters = new ArrayList<>();
@@ -29,7 +28,21 @@ public class Game {
     }
     
     Game(NewGameConfigDTO gameConfig){
+        this.gameId = gameConfig.getGameId();
+        this.deck = List.of(4, 9, 18); // add deck construction function
+        this.currentPhase = PhaseEnum.PLANIFICATION;
+        this.selectedPhase.add(currentPhase);
+        this.groupPlayerState = PlayerState.createGamePlayerStates(gameConfig);
+        this.gameStarted = true;
+        this.globalParameters = GlobalParameter.createGameGlobalParameters();
 
+        for(CreatePlayerDTO playerConfig: gameConfig.getPlayers()){
+            //groupPlayerId
+            groupPlayerId.add(playerConfig.getId());
+
+            //groupPlayerReady
+            groupPlayerReady.put(playerConfig.getId(), false);
+        }
     }
 
     public Game(
@@ -254,5 +267,18 @@ public class Game {
 
     public void setGroupPlayerState(Map<String, PlayerState> groupPlayerState) {
         this.groupPlayerState = groupPlayerState;
+    }
+
+    public GameData toData(){
+        return new GameData(this);
+    }
+
+    public static Map<String, GameData> toDataMap(Map<String, Game> gameMap){
+        Map<String, GameData> dataMap = new HashMap<>();
+        for(Map.Entry<String, Game> entry: gameMap.entrySet()){
+            dataMap.put(entry.getKey(), entry.getValue().toData());
+        }
+
+        return dataMap;
     }
 }

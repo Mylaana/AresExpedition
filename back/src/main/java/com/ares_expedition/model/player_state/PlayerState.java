@@ -1,8 +1,11 @@
 package com.ares_expedition.model.player_state;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ares_expedition.dto.api.CreatePlayerDTO;
+import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
@@ -17,6 +20,7 @@ import com.ares_expedition.model.player_state.subclass.PlayerTagState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
 import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
+import com.ares_expedition.repository.player_state.PlayerStateData;
 
 public class PlayerState {
     private PlayerInfoState infoState = new PlayerInfoState();
@@ -28,9 +32,15 @@ public class PlayerState {
     private PlayerGlobalParameterState globalParameterState = new PlayerGlobalParameterState();
     private PlayerOtherState otherState = new PlayerOtherState();
 
-    public PlayerState(){
+    PlayerState(){
     }
     
+    public PlayerState(CreatePlayerDTO playerConfig){
+        this.infoState.setId(playerConfig.getId());
+        this.infoState.setName(playerConfig.getName());
+        this.infoState.setColor(playerConfig.getColor());
+    }
+
     public PlayerState(PlayerStateDTO dto) {
         this.infoState = PlayerInfoState.fromJson(dto.getInfoState());
         this.scoreState = PlayerScoreState.fromJson(dto.getScoreState());
@@ -280,5 +290,32 @@ public class PlayerState {
     }
     public PlayerStateDTO toJson() {
         return new PlayerStateDTO(this);
+    }
+
+    public static Map<String, PlayerState> createGamePlayerStates(NewGameConfigDTO gameConfig){
+        Map<String, PlayerState> playerStates = new HashMap<>();
+
+        for(CreatePlayerDTO player: gameConfig.getPlayers()){
+            playerStates.put(player.getId(), new PlayerState(player));
+        }
+
+        return playerStates;
+    }
+
+    public PlayerStateData toData(){
+        return new PlayerStateData(this);
+    }
+
+    public static Map<String, PlayerStateData> ToDataMap(Map<String, PlayerState> stateMap){
+        Map<String, PlayerStateData> dataMap = new HashMap<>();
+        for(Map.Entry<String, PlayerState> entry: stateMap.entrySet()){
+            PlayerStateData data = PlayerState.toData(entry.getValue());
+            dataMap.put(entry.getKey(), data);
+        }
+        return dataMap;
+    }
+
+    public static PlayerStateData toData(PlayerState state){
+        return new PlayerStateData(state);
     }
 }
