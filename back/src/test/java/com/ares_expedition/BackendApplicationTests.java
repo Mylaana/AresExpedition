@@ -16,9 +16,9 @@ import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.messages.input.BaseMessageInputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.player_state.PlayerState;
-import com.ares_expedition.repository.Game;
-import com.ares_expedition.repository.JsonGameReader;
+import com.ares_expedition.repository.JsonGameDataHandler;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -284,7 +284,7 @@ class BackendApplicationTests {
 	@Test
 	void testDeserializationPlayerState() throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper();
-		InputStream inputStream = JsonGameReader.class.getClassLoader().getResourceAsStream("test/playerState.json");
+		InputStream inputStream = JsonGameDataHandler.class.getClassLoader().getResourceAsStream("test/playerState.json");
 		PlayerState testPlayerState = objectMapper.readValue(inputStream, PlayerState.class);
 
 		assertNotNull(testPlayerState);
@@ -302,7 +302,7 @@ class BackendApplicationTests {
 	}
 	@Test
 	void testLoadingGameFromJson() throws Exception {
-		Game game = JsonGameReader.getGame("1");
+		Game game = JsonGameDataHandler.getGame("1");
 		System.out.println("Loaded game: " + game);
 		//System.out.println("Score: " + game.getGroupPlayerState().get(1).getContent().getScore());
 		

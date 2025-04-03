@@ -11,10 +11,10 @@ import com.ares_expedition.controller.websocket.WsControllerOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.player_state.PlayerState;
-import com.ares_expedition.repository.Game;
-import com.ares_expedition.repository.JsonGameReader;
+import com.ares_expedition.repository.JsonGameDataHandler;
 
 @Service
 public class GameController {
@@ -27,13 +27,15 @@ public class GameController {
     }
     
     private void loadGames(){
-        String gameId = "1";
-        Game newGame = JsonGameReader.getGame(gameId);
-        newGame.shuffleDeck();
-        this.gameHolder.put(gameId, newGame);
+        this.gameHolder = JsonGameDataHandler.getAllGames();
+    }
+
+    public void loadGame(String gameId){
+        this.gameHolder.put(gameId, JsonGameDataHandler.getGame(gameId));
     }
 
     public Game getGameFromId(String gameId){
+        System.out.print(gameHolder);
         return this.gameHolder.get(gameId);
     }
 

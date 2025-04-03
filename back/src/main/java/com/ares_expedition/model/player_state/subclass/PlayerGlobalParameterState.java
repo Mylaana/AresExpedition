@@ -6,6 +6,7 @@ import java.util.List;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerGlobalParameterStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.GlobalParameterDTO;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
+import com.ares_expedition.repository.player_state.subclass.PlayerGlobalParameterStateData;
 
 public class PlayerGlobalParameterState {
     private List<GlobalParameter> globalParameters = new ArrayList<GlobalParameter>();
@@ -29,5 +30,9 @@ public class PlayerGlobalParameterState {
     }
     public PlayerGlobalParameterStateDTO toJson() {
         return new PlayerGlobalParameterStateDTO(this);
+    }
+
+    public static PlayerGlobalParameterStateData toData(PlayerGlobalParameterState state){
+        return new PlayerGlobalParameterStateData(state);
     }
 }

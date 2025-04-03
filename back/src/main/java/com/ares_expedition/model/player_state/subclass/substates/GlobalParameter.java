@@ -1,8 +1,12 @@
 package com.ares_expedition.model.player_state.subclass.substates;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.GlobalParameterDTO;
 import com.ares_expedition.enums.game.GlobalConstants;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
+import com.ares_expedition.repository.core.GlobalParameterData;
 
 public class GlobalParameter {
     GlobalParameterNameEnum name;
@@ -11,6 +15,12 @@ public class GlobalParameter {
     Integer addEop = 0;
 
     GlobalParameter(){
+    }
+    GlobalParameter(GlobalParameterNameEnum name){
+        this.name = name;
+        this.step = 0;
+        this.addEop = 0;
+        this.setMaxStep(name);
     }
     public GlobalParameter(GlobalParameterDTO dto){
         this.name = dto.getName();
@@ -73,5 +83,28 @@ public class GlobalParameter {
     }
     public static GlobalParameter fromJson(GlobalParameterDTO dto) {
         return new GlobalParameter(dto);
+    }
+
+    public static List<GlobalParameter> createGameGlobalParameters(){
+        List<GlobalParameter> parameters = new ArrayList<>();
+
+        parameters.add(new GlobalParameter(GlobalParameterNameEnum.OCEAN));
+        parameters.add(new GlobalParameter(GlobalParameterNameEnum.INFRASTRUCTURE));
+        parameters.add(new GlobalParameter(GlobalParameterNameEnum.TEMPERATURE));
+        parameters.add(new GlobalParameter(GlobalParameterNameEnum.OXYGEN));
+
+        return parameters;
+    }
+
+    public static GlobalParameterData toData(GlobalParameter param){
+        return new GlobalParameterData(param);
+    }
+
+    public static List<GlobalParameterData> toDataList(List<GlobalParameter> parameters){
+        List<GlobalParameterData> dataList = new ArrayList<>();
+        for(GlobalParameter parameter: parameters){
+            dataList.add(GlobalParameter.toData(parameter));
+        }
+        return dataList;
     }
 }

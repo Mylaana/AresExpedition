@@ -19,9 +19,9 @@ import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
+import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.player_state.PlayerState;
-import com.ares_expedition.repository.Game;
 import com.ares_expedition.services.QueryMessageFactory;
 
 @Service
@@ -156,7 +156,7 @@ public class InputRouter {
     }
     
     private void handlePlayerConnection(GenericMessageDTO query) {
-        System.out.println("\u001B[32m HANDLEING player connection query for gameId: " + query.getGameId() + "\u001B[0m");
+        System.out.println("\u001B[32m HANDLEING player connection query for gameId: " + query.getGameId() + " with playerId:" + query.getPlayerId() +"\u001B[0m");
         String gameId = query.getGameId();
         Game game = gameController.getGameFromId(gameId);
         Boolean gameStarted = gameController.getGameStarted(gameId);
