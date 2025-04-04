@@ -58,6 +58,11 @@ export class PlayerPhaseCardStateModel {
 			sp: this.selectedPhase
 		}
 	}
+	newGame(): void {
+		for(let groupName of GAME_SELECTABLE_PHASE_LIST){
+			this.phaseGroups.push(this.phaseService.getNewPhaseGroup(groupName))
+		}
+	}
 	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseCardStateModel {
 		if (!data.pc || !data.sp){
 			throw new Error("Invalid PlayerPhaseCardStateDTO: Missing required fields")

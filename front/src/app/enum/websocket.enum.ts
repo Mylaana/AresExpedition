@@ -27,3 +27,8 @@ export enum SubscriptionEnum {
     player = 'PLAYER',
     group = 'GROUP'
 }
+export enum GameStatusEnum {
+	newGame = "NEW_GAME",
+	selectCorporation = "SELECT_CORPORATION",
+    started = "STARTED"
+}

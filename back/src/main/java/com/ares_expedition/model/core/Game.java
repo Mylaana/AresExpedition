@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.ares_expedition.dto.api.CreatePlayerDTO;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.PlayerState;
@@ -21,7 +22,7 @@ public class Game {
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
     private Map<String, PlayerState> groupPlayerState = new HashMap<>();
-    private Boolean gameStarted;
+    private GameStatusEnum gameStatus;
     private List<GlobalParameter> globalParameters = new ArrayList<>();
 
     public Game() {
@@ -33,7 +34,7 @@ public class Game {
         this.currentPhase = PhaseEnum.PLANIFICATION;
         this.selectedPhase.add(currentPhase);
         this.groupPlayerState = PlayerState.createGamePlayerStates(gameConfig);
-        this.gameStarted = true;
+        this.gameStatus = GameStatusEnum.NEW_GAME;
         this.globalParameters = GlobalParameter.createGameGlobalParameters();
 
         for(CreatePlayerDTO playerConfig: gameConfig.getPlayers()){
@@ -162,6 +163,7 @@ public class Game {
         gameState.setGroupReady(groupPlayerReady);
         gameState.setSelectedPhase(selectedPhase);
         gameState.setGroupPlayerStatePublic(this.groupPlayerState);
+        gameState.setGameStatus(gameStatus);
 
         return gameState;
     }
@@ -219,12 +221,12 @@ public class Game {
         this.groupPlayerState.put(playerId, state);
     }
 
-    public Boolean getGameStarted() {
-        return gameStarted;
+    public GameStatusEnum getgameStatus() {
+        return gameStatus;
     }
 
-    public void setGameStarted(Boolean gameStarted) {
-        this.gameStarted = gameStarted;
+    public void setgameStatus(GameStatusEnum gameStatus) {
+        this.gameStatus = gameStatus;
     }
 
     public void applyGlobalParameterIncreaseEop() {

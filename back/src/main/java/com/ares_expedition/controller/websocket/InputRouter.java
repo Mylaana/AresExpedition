@@ -16,6 +16,7 @@ import com.ares_expedition.dto.websocket.content.input.UnHandledContentDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.messages.input.*;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
+import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
@@ -158,13 +159,13 @@ public class InputRouter {
     private void handlePlayerConnection(GenericMessageDTO query) {
         System.out.println("\u001B[32m HANDLEING player connection query for gameId: " + query.getGameId() + " with playerId:" + query.getPlayerId() +"\u001B[0m");
         String gameId = query.getGameId();
-        Game game = gameController.getGameFromId(gameId);
-        Boolean gameStarted = gameController.getGameStarted(gameId);
-        if (gameStarted) {
-            wsOutput.sendPushToPlayer(MessageOutputFactory.createConnectMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());    
+        //GameStatusEnum gameStarted = gameController.getGameStatus(gameId);
+        wsOutput.sendPushToPlayer(MessageOutputFactory.createConnectMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());    
+        /*
+        if (gameStarted == GameStatusEnum.STARTED) {
         } else {
             wsOutput.sendPushToPlayer(MessageOutputFactory.createStartGameMessage(gameId, ""), query.getPlayerId());
         }
-        
+             */
     }
 }

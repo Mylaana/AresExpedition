@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
+import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.player_state.PlayerState;
@@ -22,7 +23,7 @@ public class GameData {
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
     private Map<String, PlayerStateData> groupPlayerState = new HashMap<>();
-    private Boolean gameStarted;
+    private GameStatusEnum gameStatus;
     private List<GlobalParameterData> globalParameters = new ArrayList<>();
 
     GameData() {
@@ -37,7 +38,7 @@ public class GameData {
         this.currentPhase = game.getCurrentPhase();
         this.selectedPhase = game.getSelectedPhase();
         this.groupPlayerState = PlayerState.ToDataMap(game.getGroupPlayerState());
-        this.gameStarted = game.getGameStarted();
+        this.gameStatus = game.getgameStatus();
         this.globalParameters = GlobalParameter.toDataList(game.getGlobalParameters());
     }
 
@@ -105,12 +106,12 @@ public class GameData {
         this.groupPlayerState = groupPlayerState;
     }
 
-    public Boolean getGameStarted() {
-        return gameStarted;
+    public GameStatusEnum getgameStatus() {
+        return gameStatus;
     }
 
-    public void setGameStarted(Boolean gameStarted) {
-        this.gameStarted = gameStarted;
+    public void setgameStatus(GameStatusEnum gameStatus) {
+        this.gameStatus = gameStatus;
     }
 
     public List<GlobalParameterData> getGlobalParameters() {

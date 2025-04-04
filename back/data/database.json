@@ -388,7 +388,7 @@
         }
       }
     },
-    "gameStarted" : true,
+    "gameStatus" : "STARTED",
     "globalParameters" : [ {
       "name" : "INFRASTRUCTURE",
       "step" : 0,
@@ -403,6 +403,126 @@
       "addEop" : 0
     }, {
       "name" : "OCEAN",
+      "step" : 0,
+      "addEop" : 0
+    } ]
+  },
+  "7902d847-9e49-4aff-9f6e-cefa487b9a1f" : {
+    "gameId" : "7902d847-9e49-4aff-9f6e-cefa487b9a1f",
+    "deck" : [ 4, 9, 18 ],
+    "discard" : [ ],
+    "groupPlayerId" : [ "15915d04-8e03-487e-bc76-c502f35b79ca", "7d179866-43ed-47aa-9f4b-2e54209e705d" ],
+    "groupPlayerReady" : {
+      "15915d04-8e03-487e-bc76-c502f35b79ca" : false,
+      "7d179866-43ed-47aa-9f4b-2e54209e705d" : false
+    },
+    "currentPhase" : "PLANIFICATION",
+    "selectedPhase" : [ "PLANIFICATION" ],
+    "groupPlayerState" : {
+      "15915d04-8e03-487e-bc76-c502f35b79ca" : {
+        "infoState" : {
+          "id" : "15915d04-8e03-487e-bc76-c502f35b79ca",
+          "name" : "Alex",
+          "color" : "blue"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : null
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      },
+      "7d179866-43ed-47aa-9f4b-2e54209e705d" : {
+        "infoState" : {
+          "id" : "7d179866-43ed-47aa-9f4b-2e54209e705d",
+          "name" : "Doudou",
+          "color" : "green"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : null
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      }
+    },
+    "gameStatus" : "NEW_GAME",
+    "globalParameters" : [ {
+      "name" : "OCEAN",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "INFRASTRUCTURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "TEMPERATURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "OXYGEN",
       "step" : 0,
       "addEop" : 0
     } ]
@@ -481,7 +601,7 @@
           "ressources" : [ ]
         },
         "projectCardState" : {
-          "hand" : [ ],
+          "hand" : [ 4 ],
           "playedProjectIdList" : [ ],
           "playedProjectCardStocks" : { },
           "triggers" : {
@@ -508,7 +628,7 @@
         }
       }
     },
-    "gameStarted" : true,
+    "gameStatus" : "NEW_GAME",
     "globalParameters" : [ {
       "name" : "OCEAN",
       "step" : 0,

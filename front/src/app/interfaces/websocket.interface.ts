@@ -1,5 +1,5 @@
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
-import { GroupMessageContentResultEnum, MessageContentQueryEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
+import { GameStatusEnum, GroupMessageContentResultEnum, MessageContentQueryEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
 import { myUUID, PlayerColor } from "../types/global.type"
 import { PlayerStateDTO } from "./dto/player-state-dto.interface"
 
@@ -58,6 +58,7 @@ export interface WsGameState extends WsResult {
     selectedPhases: SelectablePhaseEnum[]
     groupReady: Map<myUUID, boolean>
     groupPlayerStatePublic: Map<string, any>
+	gameStatus: GameStatusEnum
 }
 export interface WSGroupState extends WsResult {
 	groupState: PlayerStateDTO[]

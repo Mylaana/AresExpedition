@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ares_expedition.controller.websocket.WsControllerOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.factory.MessageOutputFactory;
@@ -100,11 +101,11 @@ public class GameController {
         this.setPlayerReady(gameId, playerId, true);
     }
 
-    public Boolean getGameStarted(String gameId) {
-        return getGameFromId(gameId).getGameStarted();
+    public GameStatusEnum getGameStatus(String gameId) {
+        return getGameFromId(gameId).getgameStatus();
     }
 
-    public void setGameStarted(String gameId, Boolean gameStarted) {
-        getGameFromId(gameId).setGameStarted(gameStarted);
+    public void setGameStatus(String gameId, GameStatusEnum status) {
+        getGameFromId(gameId).setgameStatus(status);
     }
 }

@@ -116,6 +116,9 @@ export class PlayerProjectCardStateModel {
 			hms: this.handMaximumSize
 		}
 	}
+	newGame(dto: PlayerProjectCardStateDTO): void {
+		this.hand = dto.h
+	}
 	static fromJson(data: PlayerProjectCardStateDTO, injector: Injector): PlayerProjectCardStateModel {
 		if (!data.h || !data.ppil || data.ppcs|| !data.t || !data.hms){
 			throw new Error("Invalid PlayerProjectCardStateDTO: Missing required fields")

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady } from "../../interfaces/websocket.interface";
-import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
+import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
@@ -8,6 +8,7 @@ import { Utils } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { myUUID } from "../../types/global.type";
+import { PlayerStateModel } from "../player-info/player-state.model";
 
 @Injectable()
 export class WebsocketHandler {
@@ -89,7 +90,17 @@ export class WebsocketHandler {
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
     }
 	private handleMessageConnection(content: WsGameState): void {
-		this.handleMessageGameState(content)
+		switch(content.gameStatus){
+			case(GameStatusEnum.started):{
+				this.handleMessageGameState(content)
+				break
+			}
+			case(GameStatusEnum.newGame):{
+				this.gameStateService.newGame(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+				//this.gameStateService.setGameLoaded()
+				break
+			}
+		}
 	}
 
 	//Group messages

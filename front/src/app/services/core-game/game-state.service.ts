@@ -600,4 +600,29 @@ export class GameState{
 	public reset(): void {
 		this.setCurrentPhase(NonSelectablePhaseEnum.undefined)
 	}
+
+	public newGame(groupDto: PlayerStateDTO[]): void {
+		let clientState = this.getClientState()
+		for(let dto of groupDto){
+			if(dto.infoState.i===this.clientId){
+				clientState.newGame(dto)
+				this.updateClientState(clientState)
+			}
+		}
+		this.rxStompService.publishPlayerState(clientState)
+		console.log('newGame state loaded:', clientState)
+	}
+
+	private dtoToPlayerState(dto: PlayerStateDTO): PlayerStateModel {
+		return PlayerStateModel.fromJson(dto, this.injector)
+	}
+	private dtoToGroupPlayerState(groupDto: PlayerStateDTO[]): PlayerStateModel[] {
+		let groupState: PlayerStateModel[] = []
+
+		for(let dto of groupDto){
+			groupState.push(PlayerStateModel.fromJson(dto, this.injector))
+		}
+
+		return groupState
+	}
 }
