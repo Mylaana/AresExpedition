@@ -94,6 +94,14 @@ export class EventDesigner{
                 event.waiterId = args?.waiterId
                 break
             }
+			case('selectStartingHand'):{
+				event.title = 'Discard any card number to draw that many new cards.'
+                event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
+                event.cardSelector.selectionQuantityTreshold = 'min'
+				event.cardSelector.selectionQuantity = 0
+                event.refreshSelectorOnSwitch = true
+				break
+			}
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)

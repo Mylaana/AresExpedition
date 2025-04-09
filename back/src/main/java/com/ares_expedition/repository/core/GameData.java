@@ -25,6 +25,7 @@ public class GameData {
     private Map<String, PlayerStateData> groupPlayerState = new HashMap<>();
     private GameStatusEnum gameStatus;
     private List<GlobalParameterData> globalParameters = new ArrayList<>();
+    private List<Integer> deckCorporations = new ArrayList<>();
 
     GameData() {
     }
@@ -38,8 +39,9 @@ public class GameData {
         this.currentPhase = game.getCurrentPhase();
         this.selectedPhase = game.getSelectedPhase();
         this.groupPlayerState = PlayerState.ToDataMap(game.getGroupPlayerState());
-        this.gameStatus = game.getgameStatus();
+        this.gameStatus = game.getGameStatus();
         this.globalParameters = GlobalParameter.toDataList(game.getGlobalParameters());
+        this.deckCorporations = game.getDeckCorporations();
     }
 
     public String getGameId() {
@@ -106,11 +108,11 @@ public class GameData {
         this.groupPlayerState = groupPlayerState;
     }
 
-    public GameStatusEnum getgameStatus() {
+    public GameStatusEnum getGameStatus() {
         return gameStatus;
     }
 
-    public void setgameStatus(GameStatusEnum gameStatus) {
+    public void setGameStatus(GameStatusEnum gameStatus) {
         this.gameStatus = gameStatus;
     }
 
@@ -120,5 +122,13 @@ public class GameData {
 
     public void setGlobalParameters(List<GlobalParameterData> globalParameters) {
         this.globalParameters = globalParameters;
+    }
+
+    public List<Integer> getDeckCorporations() {
+        return deckCorporations;
+    }
+
+    public void setDeckCorporations(List<Integer> deckCorporations) {
+        this.deckCorporations = deckCorporations;
     }   
 }

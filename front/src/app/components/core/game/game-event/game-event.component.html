@@ -80,7 +80,7 @@
 						[currentPhase]="currentPhase"
 						[event]="currentEvent"
 						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
-
+						[listSubType]="currentEvent.subType==='selectStartingHand'?'startSelection':'none'"
 						(updateSelectedCardList)="updateSelectedCardList($event)"
 						(projectActivated)="onProjectActivated($event)">
 					</app-project-card-list>

@@ -28,13 +28,13 @@ Backend: Junit
 
 ## CI/CD
 ### CI
-- GitHub Actions  
-- Automated test on branch push
-- If tests are successfull, create a PR and automerge to main branch (to be added).
+- GitHub Actions   
+- Automated test on branch push   
+- If tests are successfull, create a PR and automerge to main branch (to be added).   
 
 ### CD (to be added)
-- Triggerred when new code is merged on main branch
-- Tech used TBD
+- Triggerred when new code is merged on main branch   
+- Tech used TBD   
 
 # WIP : 
 ## /!\BUG/!\ :

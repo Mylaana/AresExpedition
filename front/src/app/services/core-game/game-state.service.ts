@@ -15,6 +15,7 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.en
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
+import { EventDesigner } from "../designers/event-designer.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -298,14 +299,26 @@ export class GameState{
         let clientState = this.getClientState()
         clientState.addCardsToHand(cardsToAdd)
 		this.updateClientState(clientState)
+		console.log('added cards to hand', clientState)
     }
 
-    removeCardsFromClientHand(cardsToRemove: number | number[]):void{
+    removeCardsFromClientHandById(cardsToRemove: number | number[]):void{
 		let clientState = this.getClientState()
         clientState.removeCardsFromHand(cardsToRemove)
 		this.updateClientState(clientState)
     }
+    removeCardsFromClientHandByModel(cardsToRemove: ProjectCardModel | ProjectCardModel[]):void{
+		let removeListId: number[] = []
+		if(!Array.isArray(cardsToRemove)){
+			this.removeCardsFromClientHandById(cardsToRemove.id)
+			return
+		}
 
+		for(let removeCard of cardsToRemove){
+			removeListId.push(removeCard.id)
+		}
+		this.removeCardsFromClientHandById(removeListId)
+    }
     addDrawQueue(drawEvent: DrawEvent):void{
         this.drawQueue.next(this.drawQueue.getValue().concat([drawEvent]));
     }
@@ -535,10 +548,6 @@ export class GameState{
         }
         this.cleanAndNextEventQueue()
     }
-
-	public startGame(){
-	}
-
 	public setGameLoaded(){
 		this.loading.next(false)
 	}
@@ -612,7 +621,9 @@ export class GameState{
 		this.rxStompService.publishPlayerState(clientState)
 		console.log('newGame state loaded:', clientState)
 	}
-
+	public selectStartingHand(): void {
+		this.addEventQueue(EventDesigner.createCardSelector('selectStartingHand'), 'first')
+	}
 	private dtoToPlayerState(dto: PlayerStateDTO): PlayerStateModel {
 		return PlayerStateModel.fromJson(dto, this.injector)
 	}

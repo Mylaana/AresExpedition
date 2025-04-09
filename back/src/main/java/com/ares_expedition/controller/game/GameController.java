@@ -57,7 +57,7 @@ public class GameController {
             wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, game.getGroupPlayerReady()));
             return;
         }
-        this.goToNextPhase(game);
+        this.onAllPlayersReady(game);
     }
     
     public void goToNextPhase(Game game){
@@ -102,10 +102,37 @@ public class GameController {
     }
 
     public GameStatusEnum getGameStatus(String gameId) {
-        return getGameFromId(gameId).getgameStatus();
+        return getGameFromId(gameId).getGameStatus();
     }
 
     public void setGameStatus(String gameId, GameStatusEnum status) {
-        getGameFromId(gameId).setgameStatus(status);
+        getGameFromId(gameId).setGameStatus(status);
+    }
+
+    public void onAllPlayersReady(Game game) {
+        switch (game.getGameStatus()) {
+            case NEW_GAME:
+                game.setStartingHand();
+                game.setStartingHandCorporations();
+                game.setGameStatus(GameStatusEnum.SELECT_STARTING_HAND);
+                wsOutput.sendPushToGroup(MessageOutputFactory.createSelectStartingHandMessage(game.getGameId(), game.getGameState()));
+                break;
+
+            case SELECT_STARTING_HAND:
+                game.setGameStatus(GameStatusEnum.SELECT_CORPORATION);
+                wsOutput.sendPushToGroup(MessageOutputFactory.createSelectCorporationMessage(game.getGameId(), game.getGameState()));
+                break;
+
+            case SELECT_CORPORATION:
+                this.goToNextPhase(game);
+                break;
+
+            case STARTED:
+                this.goToNextPhase(game);
+                break;
+
+            default:
+                break;
+        }
     }
 }

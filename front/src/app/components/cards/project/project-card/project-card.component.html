@@ -3,8 +3,11 @@
 	[class.selectable]="state.isSelectable()===true"
 	(mouseenter)="_hovered=true"
 	(mouseleave)="_hovered=false">
-	<img class='selected-sell-image' *ngIf="state.isSelected() && parentListSubType==='sell'" src="/assets/other/cancel.png" alt="">
-	<img class='selected-sell-image' *ngIf="state.isSelected() && parentListSubType==='research'" src="/assets/other/research_eye.png" alt="">
+	<div *ngIf="state.isSelected() && parentListSubType!='none'" [ngClass]="'selected-sell-image'">
+		<img *ngIf="parentListSubType==='sell'" [class]="parentListSubType" src="/assets/other/cancel.png" alt="">
+		<img *ngIf="parentListSubType==='research'" [class]="parentListSubType" src="/assets/other/research_eye.png" alt="">
+		<img *ngIf="parentListSubType==='startSelection'" [class]="parentListSubType" src="/assets/other/circular.png" alt="">
+	</div>
 	<div class="wrapper-selection-border"
 		[class]="parentListSubType"
 		[class.selected]="state.isSelected()"

@@ -1,7 +1,7 @@
 export type EventType = 'cardSelector' | 'cardSelectorRessource' | 'cardSelectorCardBuilder' | 'generic' | 'deck' | 'targetCard' | 'waiter' | 'phase'
 
 export type EventCardSelectorSubType = 'selectCardOptionalSell' | 'selectCardForcedSell' | 'actionPhase'
-| 'discardCards' | 'scanKeepResult' | 'researchPhaseResult'
+| 'discardCards' | 'scanKeepResult' | 'researchPhaseResult' | 'selectStartingHand'
 export type EventCardSelectorRessourceSubType = 'addRessourceToSelectedCard'
 export type EventCardBuilderSubType = 'developmentPhaseBuilder' | 'constructionPhaseBuilder'
 export type EventGenericSubType =  'endOfPhase' | 'planificationPhase' | 'upgradePhaseCards'

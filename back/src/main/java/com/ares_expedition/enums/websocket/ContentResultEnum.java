@@ -15,5 +15,6 @@ public enum ContentResultEnum {
     SERVER_SIDE_UNHANDLED,
     DEBUG,
     ACKNOWLEDGE,
-    START_GAME
+    SELECT_STARTING_HAND,
+    SELECT_CORPORATION
 }

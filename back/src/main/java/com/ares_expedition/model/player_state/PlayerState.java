@@ -177,6 +177,14 @@ public class PlayerState {
         this.projectCardState.setHand(hand);
     }
 
+    public List<Integer> getHandCorporations() {
+        return projectCardState.getHandCorporations();
+    }
+
+    public void setHandCorporations(List<Integer> handCorporations) {
+        this.projectCardState.setHandCorporations(handCorporations);
+    }
+
     public List<Integer> getPlayedProjectIdList() {
         return projectCardState.getPlayedProjectIdList();
     }

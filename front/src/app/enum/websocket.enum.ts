@@ -19,6 +19,8 @@ export enum PlayerMessageContentResultEnum {
 export enum GroupMessageContentResultEnum {
     ready = 'READY_RESULT',
     nextPhase = 'NEXT_PHASE',
+	selectStartingHand = 'SELECT_STARTING_HAND',
+	selectCorporation = 'SELECT_CORPORATION',
 
     debug = 'DEBUG',
     serverSideUnhandled = 'SERVER_SIDE_UNHANDLED'
@@ -29,6 +31,7 @@ export enum SubscriptionEnum {
 }
 export enum GameStatusEnum {
 	newGame = "NEW_GAME",
-	selectCorporation = "SELECT_CORPORATION",
+	selectStartingHand = 'SELECT_STARTING_HAND',
+	selectCorporation = 'SELECT_CORPORATION',
     started = "STARTED"
 }
