@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import com.ares_expedition.dto.api.CreatePlayerDTO;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.GameStatusEnum;
+import com.ares_expedition.enums.game.GlobalConstants;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.PlayerState;
@@ -14,27 +16,32 @@ import com.ares_expedition.repository.core.GameData;
 
 public class Game {
     private String gameId;
-    private List<Integer> deck = new ArrayList<>();
+    private List<Integer> deck = new ArrayList<>(Arrays.asList(4,9,18,20,25,29,36,37,42,45,46,49,54,58));
     private List<Integer> discard = new ArrayList<>();
     private List<String> groupPlayerId = new ArrayList<>();
     private Map<String, Boolean> groupPlayerReady = new HashMap<>();
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
     private Map<String, PlayerState> groupPlayerState = new HashMap<>();
-    private Boolean gameStarted;
+    private GameStatusEnum gameStatus;
     private List<GlobalParameter> globalParameters = new ArrayList<>();
+    private List<Integer> deckCorporations = new ArrayList<>();
 
     public Game() {
     }
     
     Game(NewGameConfigDTO gameConfig){
         this.gameId = gameConfig.getGameId();
-        this.deck = List.of(4, 9, 18); // add deck construction function
+        this.shuffleDeck(this.deck);
         this.currentPhase = PhaseEnum.PLANIFICATION;
         this.selectedPhase.add(currentPhase);
         this.groupPlayerState = PlayerState.createGamePlayerStates(gameConfig);
-        this.gameStarted = true;
+        this.gameStatus = GameStatusEnum.NEW_GAME;
         this.globalParameters = GlobalParameter.createGameGlobalParameters();
+        this.deckCorporations.add(1000);
+        this.deckCorporations.add(1001);
+        this.deckCorporations.add(1002);
+        this.shuffleDeck(this.deckCorporations);
 
         for(CreatePlayerDTO playerConfig: gameConfig.getPlayers()){
             //groupPlayerId
@@ -139,12 +146,21 @@ public class Game {
         this.discard.clear();
     }
 
-    public void shuffleDeck(){
-        if (this.deck == null) {  // Exemple de validation
+    public List<Integer> drawCorporations(Integer corpNumber) {
+        List<Integer> result = new ArrayList<>();
+        result.addAll(deckCorporations.subList(0, Math.min(corpNumber, deckCorporations.size())));
+        deckCorporations.subList(0, Math.min(corpNumber, deckCorporations.size())).clear();
+
+        return result;
+    }
+
+    public void shuffleDeck(List<Integer> deck){
+        if (this.deck == null) {
             throw new IllegalStateException("Deck must be initialized before shuffling.");
         }
-        Collections.shuffle(this.deck);
+        Collections.shuffle(deck);
     }
+
 
     public void setPlayerReady(String playerId, Boolean ready){
         this.groupPlayerReady.replace(playerId, ready);
@@ -162,6 +178,7 @@ public class Game {
         gameState.setGroupReady(groupPlayerReady);
         gameState.setSelectedPhase(selectedPhase);
         gameState.setGroupPlayerStatePublic(this.groupPlayerState);
+        gameState.setGameStatus(gameStatus);
 
         return gameState;
     }
@@ -219,12 +236,20 @@ public class Game {
         this.groupPlayerState.put(playerId, state);
     }
 
-    public Boolean getGameStarted() {
-        return gameStarted;
+    public GameStatusEnum getGameStatus() {
+        return gameStatus;
     }
 
-    public void setGameStarted(Boolean gameStarted) {
-        this.gameStarted = gameStarted;
+    public void setGameStatus(GameStatusEnum gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+    
+    public List<Integer> getDeckCorporations() {
+        return deckCorporations;
+    }
+
+    public void setDeckCorporations(List<Integer> deckCorporations) {
+        this.deckCorporations = deckCorporations;
     }
 
     public void applyGlobalParameterIncreaseEop() {
@@ -267,6 +292,18 @@ public class Game {
 
     public void setGroupPlayerState(Map<String, PlayerState> groupPlayerState) {
         this.groupPlayerState = groupPlayerState;
+    }
+
+    public void setStartingHand() {
+        for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
+            entry.getValue().setHand(drawCards(GlobalConstants.STARTING_HAND_SIZE));
+        }
+    }
+
+    public void setStartingHandCorporations() {
+        for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
+            entry.getValue().setHandCorporations(drawCorporations(1));
+        }
     }
 
     public GameData toData(){

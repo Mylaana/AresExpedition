@@ -26,6 +26,11 @@ export class PlayerInfoStateModel{
 			c: this.color
 		}
 	}
+	newGame(dto: PlayerInfoStateDTO) {
+		this.id = dto.i
+		this.color = dto.c
+		this.name = dto.n
+	}
 	static fromJson(data: PlayerInfoStateDTO): PlayerInfoStateModel {
 		if (!data.i || !data.n || !data.c){
 			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")

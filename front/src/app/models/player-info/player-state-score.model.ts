@@ -28,6 +28,11 @@ export class PlayerScoreStateModel {
 			tr: this.terraformingRating
 		}
 	}
+
+	newGame(): void {
+		this.addTR(5)
+		this.addVP(5)
+	}
 	static fromJson(data: PlayerScoreStateDTO): PlayerScoreStateModel {
 		if (!data.mc || !data.v || !data.tr){
 			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")

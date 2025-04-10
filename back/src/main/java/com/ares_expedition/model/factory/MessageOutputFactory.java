@@ -37,7 +37,15 @@ public class MessageOutputFactory {
         return new AckMessageOutput(gameId, uuid);
     }
 
+    /*
     public static BaseMessageOutputDTO createStartGameMessage(String gameId, Object content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.START_GAME, content);
+    }
+         */
+    public static BaseMessageOutputDTO createSelectStartingHandMessage(String gameId,  GameStateMessageOutputDTO content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.SELECT_STARTING_HAND, content);
+    }
+    public static BaseMessageOutputDTO createSelectCorporationMessage(String gameId,  GameStateMessageOutputDTO content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.SELECT_CORPORATION, content);
     }
 }

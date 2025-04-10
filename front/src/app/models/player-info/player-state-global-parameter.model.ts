@@ -5,12 +5,7 @@ import { Utils } from "../../utils/utils";
 
 
 export class PlayerGlobalParameterStateModel {
-private parameters: GlobalParameter[] = [
-		{name: GlobalParameterNameEnum.infrastructure,step: 0, addEndOfPhase: 0},
-		{name: GlobalParameterNameEnum.ocean,step: 0,addEndOfPhase: 0},
-		{name: GlobalParameterNameEnum.oxygen,step: 0,addEndOfPhase: 0},
-		{name: GlobalParameterNameEnum.temperature,step: 0,addEndOfPhase: 0}
-	]
+private parameters: GlobalParameter[] = []
 
 	constructor(dto: PlayerGlobalParameterStateDTO){
 		let parameters: GlobalParameter[] = []
@@ -53,7 +48,14 @@ private parameters: GlobalParameter[] = [
 			gp: parameters
 		}
 	}
-
+	newGame(): void {
+		this.parameters = [
+			{name: GlobalParameterNameEnum.infrastructure,step: 0, addEndOfPhase: 0},
+			{name: GlobalParameterNameEnum.ocean,step: 0,addEndOfPhase: 0},
+			{name: GlobalParameterNameEnum.oxygen,step: 0,addEndOfPhase: 0},
+			{name: GlobalParameterNameEnum.temperature,step: 0,addEndOfPhase: 0}
+		]
+	}
 	private parameterToJson(parameter: GlobalParameter): GlobalParameterDTO {
 		return {n:parameter.name, s:parameter.step, ae:parameter.addEndOfPhase}
 	}

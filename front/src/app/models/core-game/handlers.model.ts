@@ -232,7 +232,7 @@ export class EventHandler {
         switch(event.subType){
 			case('selectCardForcedSell'):case('selectCardOptionalSell'):case('discardCards'):{
 				event.finalized = true
-				this.gameStateService.removeCardsFromClientHand(Utils.toCardsIdList(event.cardSelector.selectedList))
+				this.gameStateService.removeCardsFromClientHandById(Utils.toCardsIdList(event.cardSelector.selectedList))
 
 				if(event.subType==='discardCards'){break}
 				this.gameStateService.sellCardsFromClientHand(event.cardSelector.selectedList.length)
@@ -252,6 +252,14 @@ export class EventHandler {
 			}
 			case('scanKeepResult'):{
 				this.gameStateService.addCardsToClientHand(this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
+				break
+			}
+			case('selectStartingHand'):{
+				let drawNumber = event.cardSelector.selectedList.length
+				event.finalized = true
+				this.gameStateService.removeCardsFromClientHandByModel(event.cardSelector.selectedList)
+				this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
+				this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber}}), 'first')
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}

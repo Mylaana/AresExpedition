@@ -44,6 +44,7 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
 })
 export class GameMainComponent implements OnInit{
 	playerHand: ProjectCardModel[] = [];
+	playerHandCorporation: number[] = [];
 	playerPlayed: ProjectCardModel[] = [];
 	playerIdList: myUUID[] = []
 	clientId!: myUUID
@@ -117,10 +118,10 @@ export class GameMainComponent implements OnInit{
 			this.handleAcknowledgeMessage(message.body)
 		});
 	}
-	updateHandOnStateChange(state: PlayerStateModel[]): void {
-		let clientState = this.gameStateService.getClientState()
-		this.playerHand = this.cardInfoService.getProjectCardList(clientState.getProjectHandIdList())
-		this.playerPlayed = clientState.getProjectPlayedModelList()
+	updateHandOnStateChange(state: PlayerStateModel): void {
+		this.playerHand = this.cardInfoService.getProjectCardList(state.getProjectHandIdList())
+		this.playerPlayed = state.getProjectPlayedModelList()
+		this.playerHandCorporation = state.getCorporationHandIdList()
 
 		/*
 		if(!this.handProjectList){return}
@@ -139,7 +140,7 @@ export class GameMainComponent implements OnInit{
 			playerCount => this.updatePlayerList(playerCount)
 		)
 
-		this.gameStateService.currentGroupPlayerState.subscribe(
+		this.gameStateService.currentClientState.subscribe(
 			state => this.updateHandOnStateChange(state)
 		)
 	}

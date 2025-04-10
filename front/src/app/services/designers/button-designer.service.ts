@@ -19,6 +19,8 @@ export class ButtonDesigner{
             case('actionPhase'):{startEnabled=true;break}
             case('selectCardOptionalSell'):{startEnabled=false;break}
 			case('planificationPhase'):{startEnabled=false;break}
+			case('selectStartingHand'):{startEnabled=true;break}
+			case('selectCorporation'):{startEnabled=false;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
@@ -72,6 +74,8 @@ export class ButtonDesigner{
             case('selectCardOptionalSell'):{caption='$other_validate$';break}
             case('discardCards'):{caption='$other_validate$';break}
             case('scanKeepResult'):{caption='Add selection to hand';break}
+			case('selectStartingHand'):{caption='$other_validate$';break}
+			case('selectCorporation'):{caption='$other_validate$';break}
 
 			//button name related rules
 			case('sellOptionalCard'):{caption='$other_sell_card$';break}

@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
+import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.player_state.PlayerState;
@@ -22,8 +23,9 @@ public class GameData {
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
     private Map<String, PlayerStateData> groupPlayerState = new HashMap<>();
-    private Boolean gameStarted;
+    private GameStatusEnum gameStatus;
     private List<GlobalParameterData> globalParameters = new ArrayList<>();
+    private List<Integer> deckCorporations = new ArrayList<>();
 
     GameData() {
     }
@@ -37,8 +39,9 @@ public class GameData {
         this.currentPhase = game.getCurrentPhase();
         this.selectedPhase = game.getSelectedPhase();
         this.groupPlayerState = PlayerState.ToDataMap(game.getGroupPlayerState());
-        this.gameStarted = game.getGameStarted();
+        this.gameStatus = game.getGameStatus();
         this.globalParameters = GlobalParameter.toDataList(game.getGlobalParameters());
+        this.deckCorporations = game.getDeckCorporations();
     }
 
     public String getGameId() {
@@ -105,12 +108,12 @@ public class GameData {
         this.groupPlayerState = groupPlayerState;
     }
 
-    public Boolean getGameStarted() {
-        return gameStarted;
+    public GameStatusEnum getGameStatus() {
+        return gameStatus;
     }
 
-    public void setGameStarted(Boolean gameStarted) {
-        this.gameStarted = gameStarted;
+    public void setGameStatus(GameStatusEnum gameStatus) {
+        this.gameStatus = gameStatus;
     }
 
     public List<GlobalParameterData> getGlobalParameters() {
@@ -119,5 +122,13 @@ public class GameData {
 
     public void setGlobalParameters(List<GlobalParameterData> globalParameters) {
         this.globalParameters = globalParameters;
+    }
+
+    public List<Integer> getDeckCorporations() {
+        return deckCorporations;
+    }
+
+    public void setDeckCorporations(List<Integer> deckCorporations) {
+        this.deckCorporations = deckCorporations;
     }   
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ares_expedition.controller.websocket.WsControllerOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.factory.MessageOutputFactory;
@@ -56,7 +57,7 @@ public class GameController {
             wsOutput.sendPushToGroup(MessageOutputFactory.createPlayerReadyMessage(gameId, game.getGroupPlayerReady()));
             return;
         }
-        this.goToNextPhase(game);
+        this.onAllPlayersReady(game);
     }
     
     public void goToNextPhase(Game game){
@@ -100,11 +101,40 @@ public class GameController {
         this.setPlayerReady(gameId, playerId, true);
     }
 
-    public Boolean getGameStarted(String gameId) {
-        return getGameFromId(gameId).getGameStarted();
+    public GameStatusEnum getGameStatus(String gameId) {
+        return getGameFromId(gameId).getGameStatus();
     }
 
-    public void setGameStarted(String gameId, Boolean gameStarted) {
-        getGameFromId(gameId).setGameStarted(gameStarted);
+    public void setGameStatus(String gameId, GameStatusEnum status) {
+        getGameFromId(gameId).setGameStatus(status);
+    }
+
+    public void onAllPlayersReady(Game game) {
+        switch (game.getGameStatus()) {
+            case NEW_GAME:
+                game.setAllPlayersNotReady();
+                game.setStartingHand();
+                game.setStartingHandCorporations();
+                game.setGameStatus(GameStatusEnum.SELECT_STARTING_HAND);
+                wsOutput.sendPushToGroup(MessageOutputFactory.createSelectStartingHandMessage(game.getGameId(), game.getGameState()));
+                break;
+
+            case SELECT_STARTING_HAND:
+                game.setAllPlayersNotReady();
+                game.setGameStatus(GameStatusEnum.SELECT_CORPORATION);
+                wsOutput.sendPushToGroup(MessageOutputFactory.createSelectCorporationMessage(game.getGameId(), game.getGameState()));
+                break;
+
+            case SELECT_CORPORATION:
+                this.goToNextPhase(game);
+                break;
+
+            case STARTED:
+                this.goToNextPhase(game);
+                break;
+
+            default:
+                break;
+        }
     }
 }

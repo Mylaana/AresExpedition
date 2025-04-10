@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PlayerProjectCardStateDTO {
     @JsonProperty("h")
     private List<Integer> hand = new ArrayList<>();
+    @JsonProperty("hc")
+    private List<Integer> handCorporations = new ArrayList<>();
     @JsonProperty("ppil")
     private List<Integer> playedProjectIdList = new ArrayList<>();
     @JsonProperty("ppcs")
@@ -26,6 +28,7 @@ public class PlayerProjectCardStateDTO {
 
     public PlayerProjectCardStateDTO(PlayerProjectCardState state) {
         this.hand = state.getHand();
+        this.handCorporations = state.getHandCorporations();
         this.playedProjectIdList = state.getPlayedProjectIdList();
         this.playedProjectCardStocks = state.getPlayedProjectCardStocks();
         this.triggers = state.getTriggers().toJson();
@@ -70,5 +73,13 @@ public class PlayerProjectCardStateDTO {
 
     public void setHandMaximumSize(Integer handMaximumSize) {
         this.handMaximumSize = handMaximumSize;
+    }
+
+    public List<Integer> getHandCorporations() {
+        return handCorporations;
+    }
+
+    public void setHandCorporations(List<Integer> handCorporations) {
+        this.handCorporations = handCorporations;
     }
 }

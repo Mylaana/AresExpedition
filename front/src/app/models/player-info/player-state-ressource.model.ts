@@ -16,7 +16,7 @@ const ressourceIndex = new  Map<RessourceType, number>(
 )
 
 export class PlayerRessourceStateModel {
-    private ressources: RessourceInfo[] = this.initializeRessources()
+    private ressources: RessourceInfo[] = [] //this.initializeRessources()
 
 	constructor(data: PlayerRessourceStateDTO){
 		this.ressources = data.r
@@ -74,6 +74,9 @@ export class PlayerRessourceStateModel {
 		return {
 			r: this.ressources
 		}
+	}
+	newGame(): void {
+		this.ressources = this.initializeRessources()
 	}
 	static fromJson(data: PlayerRessourceStateDTO): PlayerRessourceStateModel {
 		if (!data.r){

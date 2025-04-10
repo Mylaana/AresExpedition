@@ -30,6 +30,9 @@ export class PlayerOtherStateModel {
 			r: this.research
 		}
 	}
+	newGame(): void {
+
+	}
 	static fromJson(data: PlayerOtherStateDTO): PlayerOtherStateModel {
 		if (!data.scvm || !data.r){
 			throw new Error("Invalid PlayerOtherStateDTO: Missing required fields")

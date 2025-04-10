@@ -4,7 +4,7 @@ import { GAME_TAG_LIST } from "../../global/global-const";
 import { PlayerTagStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 
 export class PlayerTagStateModel {
-    private tags: TagInfo[] = this.initializeTags()
+    private tags: TagInfo[] = [] //this.initializeTags()
 
 	constructor(data: PlayerTagStateDTO){
 		this.tags = data.t
@@ -39,6 +39,9 @@ export class PlayerTagStateModel {
 		return {
 			t: this.tags
 		}
+	}
+	newGame(): void {
+		this.tags = this.initializeTags()
 	}
 	static fromJson(data: PlayerTagStateDTO): PlayerTagStateModel {
 		if (!data.t){

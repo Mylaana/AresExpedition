@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
 import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady } from "../../interfaces/websocket.interface";
-import { GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
+import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
 import { Utils } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
-import { GameParamService } from "../../services/core-game/game-param.service";
 import { myUUID } from "../../types/global.type";
 
 @Injectable()
@@ -37,13 +36,9 @@ export class WebsocketHandler {
                 break
             }
             case(PlayerMessageContentResultEnum.gameState):{
-                this.handleMessageGameState(message.content, 'player')
+                this.handleMessageStartedGameClientGameState(message.content)
                 break
             }
-			case(PlayerMessageContentResultEnum.startGame):{
-				this.gameStateService.startGame()
-				break
-			}
 			case(PlayerMessageContentResultEnum.playerConnect):{
 				this.handleMessageConnection(message.content)
 				break
@@ -64,14 +59,21 @@ export class WebsocketHandler {
                 break
             }
             case(GroupMessageContentResultEnum.nextPhase):{
-                this.handleMessageGameState(message.content, 'group')
+                this.handleMessageStartedGameGroupGameState(message.content)
                 break
             }
             case(GroupMessageContentResultEnum.serverSideUnhandled):{
                 console.log('SERVER SIDE UNHANDLED MESSAGE RECEIVED: ',message.content)
                 break
             }
-
+			case(GroupMessageContentResultEnum.selectStartingHand):{
+				this.handleMessageSelectStartingHand(message.content)
+				break
+			}
+			case(GroupMessageContentResultEnum.selectCorporation):{
+				this.handleMessageSelectCorporation(message.content)
+				break
+			}
             default:{
                 console.log('UNHANDLED GROUP MESSAGE RECEIVED: ', message)
             }
@@ -81,15 +83,46 @@ export class WebsocketHandler {
     private handlePlayerMessageDrawResult(content: WsDrawResult): void {
         this.gameStateService.handleWsDrawResult(content)
     }
-    private handleMessageGameState(content: WsGameState, origin?: String): void {
+
+	//these two functions will need to be different cause of private datas in it or not
+    private handleMessageStartedGameGroupGameState(content: WsGameState): void {
 		this.gameStateService.reset()
         this.gameStateService.clearEventQueue()
 		this.gameStateService.setCurrentPhase(content.currentPhase)
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+		this.gameStateService.selectStartingHand()
     }
+	private handleMessageStartedGameClientGameState(content: WsGameState): void {
+		this.gameStateService.reset()
+        this.gameStateService.clearEventQueue()
+		this.gameStateService.setCurrentPhase(content.currentPhase)
+		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
+		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+		this.gameStateService.selectStartingHand()
+	}
+
+
 	private handleMessageConnection(content: WsGameState): void {
-		this.handleMessageGameState(content)
+		if(content.gameStatus===GameStatusEnum.newGame){
+			this.gameStateService.newGame(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+			return
+		}
+
+		switch(content.gameStatus){
+			case(GameStatusEnum.selectCorporation):{
+				this.handleMessageSelectCorporation(content)
+				break
+			}
+			case(GameStatusEnum.selectStartingHand):{
+				this.handleMessageSelectStartingHand(content)
+				break
+			}
+			case(GameStatusEnum.started):{
+				this.handleMessageStartedGameClientGameState(content)
+				break
+			}
+		}
 	}
 
 	//Group messages
@@ -112,5 +145,21 @@ export class WebsocketHandler {
 	private handleGroupMessageGameState(groupState: PlayerStateDTO[]): void {
 		this.gameStateService.setGroupStateFromJson(groupState)
 		this.gameStateService.setGameLoaded()
+	}
+	private handleMessageSelectStartingHand(content: WsGameState){
+		console.log('WS SELECT STARTING HAND')
+		this.gameStateService.reset()
+		this.gameStateService.clearEventQueue()
+		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
+		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+		this.gameStateService.selectStartingHand()
+	}
+	private handleMessageSelectCorporation(content: WsGameState){
+		console.log('WS SELECT CORP')
+		this.gameStateService.reset()
+		this.gameStateService.clearEventQueue()
+		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
+		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+		this.gameStateService.selectCorporation()
 	}
 }

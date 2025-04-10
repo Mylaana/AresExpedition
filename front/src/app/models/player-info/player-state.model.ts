@@ -117,6 +117,7 @@ export class PlayerStateModel {
 	getProjectHandIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectHandIdList(filter)}
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
+	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
 
 	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)}
 	getProjectPlayedModelFromId(cardId:number): ProjectCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}
@@ -165,7 +166,17 @@ export class PlayerStateModel {
 	}
 	static empty(injector: Injector): PlayerStateModel {
 		return new PlayerStateModel(injector);
-	  }
+	}
+	public newGame(dto: PlayerStateDTO): void {
+		this.infoState.newGame(dto.infoState)
+		this.scoreState.newGame()
+		this.tagState.newGame()
+		this.ressourceState.newGame()
+		this.projectCardState.newGame(dto.projectCardState)
+		this.phaseCardState.newGame()
+		this.globalParameterState.newGame()
+		this.otherState.newGame()
+	}
 }
 
 

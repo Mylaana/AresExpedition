@@ -38,14 +38,16 @@
 			[class.flex-column]="currentEvent.subType==='actionPhase'">
 			<app-hexed-background  *ngIf="currentEvent?.getSelectionActive()"
 				 @fadeIn [column]="80" [row]="20">
-				</app-hexed-background>
+			</app-hexed-background>
 			<div class="wrapper-builder"
 				*ngIf="currentEvent.hasCardBuilder()===true"
 				@fadeIn>
                 <app-card-builder-list [event]="currentEvent" [eventId]="currentEvent.id" (eventCardBuilderListButtonClicked)="eventCardBuilderListButtonClicked($event)"></app-card-builder-list>
 			</div>
 			<div class="wrapper-other-event"
-				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase' || currentEvent.subType==='actionPhase' || currentEvent.subType==='upgradePhaseCards'"
+				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase'
+				|| currentEvent.subType==='actionPhase' || currentEvent.subType==='upgradePhaseCards'
+				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'"
 				@fadeIn>
 				<app-phase-planification
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
@@ -65,6 +67,10 @@
 					*ngIf="currentEvent.subType==='upgradePhaseCards'"
 					[event]="currentEvent">
 				</app-phase-card-upgrade-selector>
+				<app-initial-draft
+					[event]="currentEvent"
+					(updateSelectedCardList)="updateSelectedCardList($event)">
+				</app-initial-draft>
 			</div>
             <div class="ares-background"
 				*ngIf="currentEvent.subType==='waitingGroupReady'"
@@ -72,7 +78,7 @@
 				<h1>[Waiting for other players to be ready]</h1>
 			</div>
 			<div class="wrapper-selectors"
-				*ngIf="currentEvent.hasCardsToSelectFrom() && currentEvent.subType!='actionPhase'"
+				*ngIf="currentEvent.hasCardsToSelectFrom() && currentEvent.subType!='actionPhase' && currentEvent.subType!='selectStartingHand'"
 				[class.centered]="currentEvent.hasCardBuilder() === false"
 				@fadeIn>
 				<div class="wrapper-card-selector" >
@@ -80,7 +86,7 @@
 						[currentPhase]="currentPhase"
 						[event]="currentEvent"
 						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
-
+						[listSubType]="currentEvent.subType==='selectStartingHand'?'startSelection':'none'"
 						(updateSelectedCardList)="updateSelectedCardList($event)"
 						(projectActivated)="onProjectActivated($event)">
 					</app-project-card-list>

@@ -28,13 +28,13 @@ Backend: Junit
 
 ## CI/CD
 ### CI
-- GitHub Actions  
-- Automated test on branch push
-- If tests are successfull, create a PR and automerge to main branch (to be added).
+- GitHub Actions   
+- Automated test on branch push   
+- If tests are successfull, create a PR and automerge to main branch (to be added).   
 
 ### CD (to be added)
-- Triggerred when new code is merged on main branch
-- Tech used TBD
+- Triggerred when new code is merged on main branch   
+- Tech used TBD   
 
 # WIP : 
 ## /!\BUG/!\ :
@@ -75,7 +75,6 @@ Add Event removing any ressource in list on played card
 ### Interface
 Add Ocean last bonus description
 Add main buttons help popup
-Add floating hexes in the main window   
 Add onClick visual effect for buttons   
 Add phase upgrade count and logo in player pannel
 Add popup-like window for non-production phase gains
