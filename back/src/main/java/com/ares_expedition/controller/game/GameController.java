@@ -112,6 +112,7 @@ public class GameController {
     public void onAllPlayersReady(Game game) {
         switch (game.getGameStatus()) {
             case NEW_GAME:
+                game.setAllPlayersNotReady();
                 game.setStartingHand();
                 game.setStartingHandCorporations();
                 game.setGameStatus(GameStatusEnum.SELECT_STARTING_HAND);
@@ -119,6 +120,7 @@ public class GameController {
                 break;
 
             case SELECT_STARTING_HAND:
+                game.setAllPlayersNotReady();
                 game.setGameStatus(GameStatusEnum.SELECT_CORPORATION);
                 wsOutput.sendPushToGroup(MessageOutputFactory.createSelectCorporationMessage(game.getGameId(), game.getGameState()));
                 break;

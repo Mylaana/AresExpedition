@@ -160,5 +160,6 @@ export class WebsocketHandler {
 		this.gameStateService.clearEventQueue()
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+		this.gameStateService.selectCorporation()
 	}
 }

@@ -102,6 +102,14 @@ export class EventDesigner{
                 event.refreshSelectorOnSwitch = true
 				break
 			}
+			case('selectCorporation'):{
+				event.title = 'Select your Corporation'
+                event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
+                event.cardSelector.selectionQuantityTreshold = 'equal'
+				event.cardSelector.selectionQuantity = 1
+				event.refreshSelectorOnSwitch = false
+				break
+			}
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
         }
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)

@@ -21,6 +21,7 @@ import { EventMainButtonComponent } from "../../../tools/button/event-main-butto
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
+import { InitialDraftComponent } from '../../../game-initialization/initial-draft/initial-draft.component';
 
 //this component is the main controller, and view
 
@@ -38,7 +39,8 @@ import { TextWithImageComponent } from '../../../tools/text-with-image/text-with
     NonEventButtonComponent,
     TextWithImageComponent,
     PhaseActionComponent,
-	HexedBackgroundComponent
+	HexedBackgroundComponent,
+	InitialDraftComponent
 ],
 	templateUrl: './game-event.component.html',
 	styleUrl: './game-event.component.scss',

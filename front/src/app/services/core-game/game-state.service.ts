@@ -389,6 +389,10 @@ export class GameState{
                 newEventQueue.push(ticket)
             }
         }
+
+		if(this.eventQueue.getValue().length===0){
+			newEventQueue.push(EventDesigner.createGeneric('waitingGroupReady'))
+		}
         this.eventQueue.next(newEventQueue)
     }
 	/*
@@ -623,6 +627,9 @@ export class GameState{
 	}
 	public selectStartingHand(): void {
 		this.addEventQueue(EventDesigner.createCardSelector('selectStartingHand'), 'first')
+	}
+	public selectCorporation(): void {
+		this.addEventQueue(EventDesigner.createCardSelector('selectCorporation'), 'first')
 	}
 	private dtoToPlayerState(dto: PlayerStateDTO): PlayerStateModel {
 		return PlayerStateModel.fromJson(dto, this.injector)

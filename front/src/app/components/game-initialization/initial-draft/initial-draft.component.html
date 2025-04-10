@@ -1,0 +1,21 @@
+<div class="wrapper-main">
+	<ng-container
+		*ngIf="event.subType==='selectStartingHand'">
+		<app-project-card-list
+			[event]="event"
+			[eventId]="event.id"
+			[listType]="'selector'"
+			[listSubType]="'startSelection'"
+			(updateSelectedCardList)="onUpdateSelectedCardList($event)">
+		</app-project-card-list>
+
+		<div class="ares-title">
+			<h1>Corporation selection:</h1>
+		</div>
+		<p>corporation list [{{_playerHandCorporation}}]</p>
+	</ng-container>
+	<ng-container
+		*ngIf="event.subType==='selectCorporation'">
+
+	</ng-container>
+</div>

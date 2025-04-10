@@ -11,6 +11,7 @@ import { ProjectCardModel, TriggerState } from "../cards/project-card.model"
 
 export class PlayerProjectCardStateModel {
     private hand: number[] = []
+	private handCorporation: number[] = []
     private projects: PlayedProject = {
         playedIdList: [],
         playedProjectList: []
@@ -27,6 +28,7 @@ export class PlayerProjectCardStateModel {
 		this.cardInitializeService = this.injector.get(ProjectCardInitializeService)
 
 		this.hand = dto.h,
+		this.handCorporation = dto.hc,
 		//this.projects = dto.p
 		this.handMaximumSize = dto.hms
 		this.projects = {
@@ -85,6 +87,7 @@ export class PlayerProjectCardStateModel {
         return result
     }
     getProjectHandIdList(filter?: ProjectFilter): number[] {return this.filterCardIdList(this.hand, filter)}
+	getCorporationHandIdList(): number[] {return this.handCorporation}
 
 	private filterCardModelList(cards: ProjectCardModel[],  filter: ProjectFilter | undefined): ProjectCardModel[] {
         if(!filter){return cards}
@@ -110,6 +113,7 @@ export class PlayerProjectCardStateModel {
 	toJson(): PlayerProjectCardStateDTO {
 		return {
 			h: this.hand,
+			hc: this.handCorporation,
 			ppil: this.projects.playedIdList,
 			ppcs: null,
 			t: this.triggers.toJson(),
@@ -130,6 +134,7 @@ export class PlayerProjectCardStateModel {
 			injector,
 			{
 				h: [],
+				hc: [],
 				hms: 0,
 				ppil: [],
 				ppcs: [],

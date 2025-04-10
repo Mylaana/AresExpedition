@@ -258,6 +258,7 @@ export class EventHandler {
 				let drawNumber = event.cardSelector.selectedList.length
 				event.finalized = true
 				this.gameStateService.removeCardsFromClientHandByModel(event.cardSelector.selectedList)
+				this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
 				this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber}}), 'first')
 				break
 			}
