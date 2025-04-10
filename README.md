@@ -75,7 +75,6 @@ Add Event removing any ressource in list on played card
 ### Interface
 Add Ocean last bonus description
 Add main buttons help popup
-Add floating hexes in the main window   
 Add onClick visual effect for buttons   
 Add phase upgrade count and logo in player pannel
 Add popup-like window for non-production phase gains
