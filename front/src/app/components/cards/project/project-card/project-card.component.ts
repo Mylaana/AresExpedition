@@ -14,6 +14,12 @@ import { ButtonDesigner } from '../../../../services/designers/button-designer.s
 import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
 import { expandCollapseVertical } from '../../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
+import { CardActivationComponent } from '../card-blocks/card-activation/card-activation.component';
+import { CardCostComponent } from '../card-blocks/card-cost/card-cost.component';
+import { CardEffectComponent } from '../card-blocks/card-effect/card-effect.component';
+import { CardHighlightComponent } from '../card-blocks/card-highlight/card-highlight.component';
+import { CardTagsComponent } from '../card-blocks/card-tags/card-tags.component';
+import { CardVpComponent } from '../card-blocks/card-vp/card-vp.component';
 
 
 @Component({
@@ -23,7 +29,13 @@ import { Subject, takeUntil } from 'rxjs';
     CommonModule,
     TextWithImageComponent,
     LayoutCardBackgroundHexagonsComponent,
-	NonEventButtonComponent
+	NonEventButtonComponent,
+	CardActivationComponent,
+	CardCostComponent,
+	CardEffectComponent,
+	CardHighlightComponent,
+	CardTagsComponent,
+	CardVpComponent
   ],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss',
