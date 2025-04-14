@@ -189,11 +189,11 @@ app-card-background{
 app-non-event-button{
 	height: 100%;
 }
-app-card-effect, app-card-prerequisite, app-card-played{
+app-card-effect, app-card-prerequisite, app-card-played-info{
 	width: auto;
 	padding-right: $element-padding-right;
 }
-app-card-tags-background{
+app-card-tags-zone{
 	position: absolute;
 	top: 0;
 	left: 0;

@@ -1,9 +1,6 @@
-.wrapper-prerequisite{
+$size: calc(var(--card-width) * .13);
+:host{
     display: flex;
-    justify-content: space-between;
-    gap: 2%;
-    position: relative;
-
     width: 100%;
 
     font-size: small;
@@ -11,31 +8,35 @@
         font-size: small;
     }
 }
-.prerequisite-summary-Text{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 20%;
-    width: auto;
-    height: 100%;
-
-    border: grey 2px solid;
-    background: rgba($color: grey, $alpha: .6);
-    border-radius: 25%;
-    &.min{
-        border: gold 2px solid;
-    }
-    &.max{
-        border: orangered 2px solid;
-    }
+div{
+	border: grey solid 1px;
 }
-.prerequisite-text{
+.min{
+	border: yellow 1px solid;
+}
+.max{
+	border: orangered 1px solid;
+}
+.wrapper-prerequisite-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+	border-top-left-radius: 0;
+}
+.wrapper-prerequisite-summary{
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding-left: 5%;
-    flex-grow: 1;
-    height: 100%;
+    width: $size;
+    min-height: $size;
+	height: fit-content;
+
+    background: rgba(grey, .6);
+    border-radius: 5px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: 0;
+	margin-bottom: 5px;
 }

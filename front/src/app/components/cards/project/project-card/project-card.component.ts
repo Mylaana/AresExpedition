@@ -19,10 +19,10 @@ import { CardEffectComponent } from '../card-blocks/card-effect/card-effect.comp
 import { CardHighlightComponent } from '../card-blocks/card-highlight/card-highlight.component';
 import { CardTagsComponent } from '../card-blocks/card-tags/card-tags.component';
 import { CardVpComponent } from '../card-blocks/card-vp/card-vp.component';
-import { CardPlayedComponent } from '../card-blocks/card-played/card-played.component';
+import { CardPlayedInfoComponent } from '../card-blocks/card-played/card-played-info.component';
 import { CardPrerequisiteComponent } from '../card-blocks/card-prerequisite/card-prerequisite.component';
 import { CardStockComponent } from '../card-blocks/card-stock/card-stock.component';
-import { CardTagsBackgroundComponent } from '../card-blocks/card-tags-background/card-tags-background.component';
+import { CardTagsZoneComponent } from '../card-blocks/card-tags-background/card-tags-zone.component';
 
 
 @Component({
@@ -38,10 +38,10 @@ import { CardTagsBackgroundComponent } from '../card-blocks/card-tags-background
 	CardHighlightComponent,
 	CardTagsComponent,
 	CardVpComponent,
-	CardPlayedComponent,
+	CardPlayedInfoComponent,
 	CardPrerequisiteComponent,
 	CardStockComponent,
-	CardTagsBackgroundComponent
+	CardTagsZoneComponent
   ],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss',
@@ -157,5 +157,15 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit, O
 	}
 	private checkMaximumActivation(): void {
 		this._maximumActivation = (this.projectCard.activated>1) || (this.projectCard.activated>=1 && this.activableTwice === false)
+	}
+
+	public isDisabled(): boolean{
+		if (this.state.isBuildable()===false && this.state.isIgnoreCost()!=false && this.state.isSelectable()===false && this.state.isActivable()===false && this.parentListSubType!='research'){
+			return true
+		}
+		if(this.state.isActivable()===true && this._maximumActivation){
+			return true
+		}
+		return false
 	}
 }

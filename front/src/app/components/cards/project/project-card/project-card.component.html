@@ -1,26 +1,24 @@
 <div class="wrapper-main"
 	[class.hovered]="_hovered"
-	[class.selectable]="state.isSelectable()===true"
+	[class.selectable]="state.isSelectable()"
 	(mouseenter)="_hovered=true"
 	(mouseleave)="_hovered=false">
 	<app-card-highlight *ngIf="state.isSelected() && parentListSubType!='none'" [highlightStyle]="parentListSubType"></app-card-highlight>
 	<div class="wrapper-selection-border"
 		[class]="parentListSubType"
 		[class.selected]="state.isSelected()"
-		[class.selectable]="state.isSelectable()===true"
-		[class.hovered]="_hovered===true"
-		[class.disabled]="
-			(state.isBuildable()===false && state.isIgnoreCost()!=false && state.isSelectable()===false && state.isActivable()===false && parentListSubType!='research')
-			|| (state.isActivable()===true && _maximumActivation)">
+		[class.selectable]="state.isSelectable()"
+		[class.hovered]="_hovered"
+		[class.disabled]="isDisabled()">
 		<button class="wrapper-card"
 			[class]="projectCard.cardType"
 			[class.hovered]="_hovered"
-			[class.selectable]="state.isSelectable()===true"
+			[class.selectable]="state.isSelectable()"
 			(click)="cardClick()">
 			<div class="wrapper-card-element-left">
 				<app-card-cost [cardType]="projectCard.cardType" [cardLocation]="parentListType" [costInitial]="projectCard.costInitial" [cost]="projectCard.cost"></app-card-cost>
 				<app-card-tags [cardType]="projectCard.cardType" [tagsUrl]="projectCard.tagsUrl"></app-card-tags>
-				<app-card-tags-background [cardType]="projectCard.cardType"></app-card-tags-background>
+				<app-card-tags-zone [cardType]="projectCard.cardType"></app-card-tags-zone>
 			</div>
 			<div class="wrapper-card-element-main">
 				<div class="wrapper-title">
@@ -32,10 +30,10 @@
 					[prerequisiteSummary]="projectCard.prerequisiteSummaryText"
 					[prerequisiteText]="projectCard.prerequisiteText">
 				</app-card-prerequisite>
-				<app-card-played
+				<app-card-played-info
 					*ngIf="projectCard.playedText"
 					[playedText]="projectCard.playedText">
-				</app-card-played>
+				</app-card-played-info>
 				<app-card-stock
 					*ngIf="projectCard.stockable?.length!=0"
 					[cardStock]="projectCard.stock">
@@ -62,7 +60,7 @@
 </div>
 
 <div class="wrapper-activation ares-background ares-border"
-	*ngIf="state.isActivable()===true"
+	*ngIf="state.isActivable()"
 	[class.maximum-activation]="_maximumActivation"
 	@expandCollapseVertical>
 	<div class="wrapper-button"

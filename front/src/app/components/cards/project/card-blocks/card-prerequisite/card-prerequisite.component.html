@@ -1,8 +1,6 @@
-<div class="wrapper-prerequisite">
-	<div class="prerequisite-summary-Text" [ngClass]="prerequisiteTresholdType">
-		<app-text-with-image *ngIf="prerequisiteSummary" [rawText]="prerequisiteSummary"></app-text-with-image>
-	</div>
-	<div class="prerequisite-text shadowed-text">
-		<app-text-with-image *ngIf="prerequisiteText" [rawText]="prerequisiteText"></app-text-with-image>
-	</div>
+<div [ngClass]="['wrapper-prerequisite-summary', prerequisiteTresholdType??'']">
+	<app-text-with-image *ngIf="prerequisiteSummary" [rawText]="prerequisiteSummary"></app-text-with-image>
+</div>
+<div [ngClass]="['wrapper-prerequisite-text shadowed-text', prerequisiteTresholdType??'']">
+	<app-text-with-image *ngIf="prerequisiteText" [rawText]="prerequisiteText"></app-text-with-image>
 </div>

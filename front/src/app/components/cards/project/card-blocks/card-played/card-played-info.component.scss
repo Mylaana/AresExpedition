@@ -1,0 +1,35 @@
+$size: calc(var(--card-width) * .13);
+:host{
+    display: flex;
+    flex-direction: row;
+}
+.wrapper-played-icon{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	height: $size;
+	aspect-ratio: 1;
+
+    border: 1px gold solid;
+    border-radius: 5px;
+	border-right: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+    background: rgba(0, 0, 0, .5);
+	margin-bottom: 5px;
+	background: rgba(darken(gold, 30%), .3);
+    & img{
+        height: calc($size * .8);
+		aspect-ratio: 1;
+    }
+}
+.wrapper-played-text{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border: 1px gold solid;
+	border-top-left-radius: 0;
+	flex: 1;
+}

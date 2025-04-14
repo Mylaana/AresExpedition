@@ -17,6 +17,13 @@
     justify-content: center;
     align-items: center;
 	min-height: calc(var(--card-height) *.15);
+	border: lightgrey solid 1px;
+	&.action{
+		border: var(--color-ares-blue-light2) solid 1px;
+	}
+	&.trigger{
+		border: var(--color-ares-purple-light2) solid 1px;
+	}
 }
 .wrapper-effect-summary-border{
     position: relative;
@@ -175,15 +182,20 @@
         0 $bottom-inside-height);
 }
 .effect-summary-background{
-    z-index: 2;
-    position: relative;
-    width: 100%;
-    height: 100%;
+	@each $type in ('production', 'greyproduction'){
+		&--#{$type}{
+			z-index: 2;
+			position: relative;
+			width: 100%;
+			height: 100%;
 
-    background: rgba(100,100,100,.5);
+			background: rgba(100,100,100,.5);
+		}
+	};
 }
-.effect-summary-background-production{
-    $color-one: var(--color-ares-red);
+.effect-summary-background--production{
+
+    $color-one: rgb(237, 53, 49);
     $color-two: rgb(253, 157, 67);
     $step1: 2%;
     $step2: 4%;
@@ -192,7 +204,7 @@
     background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
-.effect-summary-background-grey-production{
+.effect-summary-background--greyproduction{
     $color-one: rgb(66, 66, 66);
     $color-two: rgb(184, 184, 184);
     $step1: 0%;
