@@ -1,1 +1,9 @@
-<p>card-activation works!</p>
+<div class="wrapper-activation ares-background ares-border"
+	[class.maximum-activation]="maximumCardActivation"
+	@expandCollapseVertical>
+	<div class="wrapper-button"
+		*ngIf="maximumCardActivation===false">
+		<app-non-event-button id="activate-once" [button]="_activateOnce" [shape]="'left'" (buttonClicked)="onActivation(_activateOnce)"></app-non-event-button>
+		<app-non-event-button id="activate-twice" [button]="_activateTwice" [shape]="'right'" (buttonClicked)="onActivation(_activateTwice)"></app-non-event-button>
+	</div>
+</div>

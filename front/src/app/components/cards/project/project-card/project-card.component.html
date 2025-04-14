@@ -57,17 +57,11 @@
 			<app-card-background [cardType]="projectCard.cardType"></app-card-background>
 		</button>
 	</div>
-</div>
-
-<div class="wrapper-activation ares-background ares-border"
-	*ngIf="state.isActivable()"
-	[class.maximum-activation]="_maximumActivation"
-	@expandCollapseVertical>
-	<div class="wrapper-button"
-		*ngIf="_maximumActivation===false">
-		<app-non-event-button id="activate-once" [button]="_activateOnce" [shape]="'left'" (buttonClicked)="onActivate()"></app-non-event-button>
-		<app-non-event-button id="activate-twice" [button]="_activateTwice" [shape]="'right'" (buttonClicked)="onActivate()"></app-non-event-button>
-	</div>
+	<app-card-activation
+		*ngIf="state.isActivable()"
+		[maximumCardActivation]="_maximumActivation"
+		[buttonIndexEnabled]="_buttonIndexEnabled"
+		(activated)="onActivation($event)"></app-card-activation>
 </div>
 
 <!--

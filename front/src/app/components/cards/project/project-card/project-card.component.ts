@@ -31,7 +31,6 @@ import { CardTagsZoneComponent } from '../card-blocks/card-tags-background/card-
   imports: [
     CommonModule,
     CardBackgroundComponent,
-	NonEventButtonComponent,
 	CardActivationComponent,
 	CardCostComponent,
 	CardEffectComponent,
@@ -60,10 +59,8 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit, O
 	readonly tagNumber = 3;
 
 	_hovered: boolean = false
-	_activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce')
-	_activateTwice = ButtonDesigner.createNonEventButton('activateProjectTwice')
-	//_activated: number = 0
 	_maximumActivation: boolean = false
+	_buttonIndexEnabled: number = 0
 
 	private destroy$ = new Subject<void>()
 
@@ -142,7 +139,7 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit, O
 	checkPlayable(): void {
 		this.state.setBuildable(this.megacreditAvailable >= this.projectCard.cost)
 	}
-	public onActivate(): void {
+	public onActivation(twice: boolean): void {
 		this.projectCard.activated += 1
 
 		this.updateActivationButtonsState()
@@ -151,9 +148,10 @@ export class ProjectCardComponent extends BaseCardComponent implements OnInit, O
 		this.cardActivated.emit({card: this.projectCard, twice: this.projectCard.activated>1})
 	}
 	private updateActivationButtonsState(): void {
-		let payable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getClientState())
-		this._activateOnce.updateEnabled(this.projectCard.activated<1 && payable)
-		this._activateTwice.updateEnabled(this.projectCard.activated===1 && this.activableTwice && payable)
+		if(!ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getClientState())){
+			this._buttonIndexEnabled = 0
+		}
+
 	}
 	private checkMaximumActivation(): void {
 		this._maximumActivation = (this.projectCard.activated>1) || (this.projectCard.activated>=1 && this.activableTwice === false)
