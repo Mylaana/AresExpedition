@@ -92,26 +92,27 @@ button {
 	}
 }
 .wrapper-title{
-    width: auto;
-	min-height: calc(var(--card-height) * .15);
-
+    width: 90%;
+	min-height: calc(var(--card-height) * .17);
 	display: flex;
     justify-content: center;
     align-items: center;
     > p {
+		text-size-adjust: 50%;
+		text-wrap: wrap;
         color: white;
         font-weight: bold;
         font-size: calc(var(--card-width) / 13);
         font-style: italic;
         text-align: center;
 
-        $text-shadow-colour: var(--color-ares-red);
+        $text-shadow-colour: black;//var(--color-ares-red);
         $text-shadow-size: .35px;
         text-shadow:
-			$text-shadow-size*-1 $text-shadow-size*-1 0 var(--color-ares-red),
-			$text-shadow-size $text-shadow-size*-1 0 var(--color-ares-red),
-			$text-shadow-size*-1  $text-shadow-size 0 var(--color-ares-red),
-			$text-shadow-size  $text-shadow-size 0 var(--color-ares-red);
+			$text-shadow-size*-1 $text-shadow-size*-1 0 $text-shadow-colour,
+			$text-shadow-size $text-shadow-size*-1 0 $text-shadow-colour,
+			$text-shadow-size*-1  $text-shadow-size 0 $text-shadow-colour,
+			$text-shadow-size  $text-shadow-size 0 $text-shadow-colour;
     }
 }
 .wrapper-card-element-main{

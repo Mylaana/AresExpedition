@@ -8,6 +8,8 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_construction_2.png)
 ## Upgrading a Phase card
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_phase_upgrade.png)
+## Cards design (almost pure CSS)
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_cards.png)
 
 # Architecture and Concepts
 ## Technologies used :
@@ -38,7 +40,6 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-red production visual effect appearing blank   
 Sell event uses active phase's background for list   
 Selected Phase list pannel showing all phases   
 Action phase upgrade not working   
@@ -51,7 +52,6 @@ test needs: empty components from the app logic and transfer it into services/cl
 global: removing obvious comments   
 project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service   
-ProjectCardComposant major refactoring   
 Optimize data volume exchanged   
 
 ## Planned for v1 :
