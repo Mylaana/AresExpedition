@@ -1,0 +1,288 @@
+@import '../../../../../../variables.scss';
+:host{
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	width: 100%;
+}
+.wrapper-effect-summary{
+	display: flex;
+	align-items: end;
+	height: 100%;
+}
+.wrapper-effect-text{
+    height: fit-content;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	min-height: calc(var(--card-height) *.15);
+}
+.wrapper-effect-summary-border{
+    position: relative;
+	height: calc(var(--card-effect-height));
+	aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+
+    $top-left-angle: 15%;
+    $top-right-angle: 93%;
+    $bottom-right-angle: 90%;
+    $right-inside-width: 4%;
+    $right-inside-height: 33%;
+    $right-inside-angle: 33%;
+    $right-offset: 0%;
+    $top-offset-height: 3%;
+    $top-inside-width: 37%;
+    $top-offset-angle: 3%;
+    clip-path: polygon(calc($top-left-angle ) $top-offset-height,
+        $top-inside-width $top-offset-height,
+        calc($top-inside-width + $top-offset-angle) 0%,
+        calc(100% - $top-inside-width - $top-offset-angle) 0%,
+        calc(100% - $top-inside-width) $top-offset-height,
+        $top-right-angle $top-offset-height,
+        calc(100% - $right-offset) calc(100% - $top-right-angle + $top-offset-height),
+        calc(100% - $right-offset) $right-inside-height,
+        calc(100% - $right-inside-width - $right-offset) calc($right-inside-width + $right-inside-angle),
+        calc(100% - $right-inside-width - $right-offset) calc(100% - $right-inside-width - $right-inside-angle),
+        calc(100% - $right-offset) calc(100% - $right-inside-height),
+        calc(100% - $right-offset) $bottom-right-angle,
+        calc($bottom-right-angle - $right-offset) calc(100% - $top-offset-height),
+        calc(100% - $top-inside-width) calc(100% - $top-offset-height),
+        calc(100% - $top-inside-width - $top-offset-angle) 100%,
+        calc($top-inside-width + $top-offset-angle) 100%,
+        calc($top-inside-width) calc(100% - $top-offset-height),
+        0 calc(100% - $top-offset-height), 0 calc($top-left-angle + $top-offset-height));
+}
+.wrapper-inner{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    $top-left-angle: 15%;
+    $top-right-angle: 100%;
+    $bottom-right-angle: 90%;
+    $right-inside-width: 4%;
+    $right-inside-height: 33%;
+    $right-inside-angle: 33%;
+    $right-offset: 1%;
+    $top-offset-height: 12%;
+    $border-top-offset-height: 3%;
+    $inside-margin: calc($top-offset-height + $border-top-offset-height);
+    $top-inside-width: 37%;
+    $top-offset-angle: 3%;
+    $bottom-height: 89%;
+    clip-path: polygon(calc($top-left-angle ) $top-offset-height,
+        $top-inside-width $top-offset-height,
+        calc($top-inside-width + $top-offset-angle) $inside-margin,
+        calc(100% - $top-inside-width - $top-offset-angle) $inside-margin,
+        calc(100% - $top-inside-width) $top-offset-height,
+        $top-right-angle $top-offset-height,
+        calc(100% - $right-offset) calc(100% - $top-right-angle + $top-offset-height),
+        calc(100% - $right-offset) $right-inside-height,
+        calc(100% - $right-inside-width - $right-offset) calc($right-inside-width + $right-inside-angle),
+        calc(100% - $right-inside-width - $right-offset) calc(100% - $right-inside-width - $right-inside-angle),
+        calc(100% - $right-offset) calc(100% - $right-inside-height),
+        calc(100% - $right-offset) $bottom-height,
+        calc(100% - $top-inside-width) $bottom-height,
+        calc(100% - $top-inside-width - $top-offset-angle) calc($bottom-height - $border-top-offset-height),
+        calc($top-inside-width + $top-offset-angle) calc($bottom-height - $border-top-offset-height),
+        calc($top-inside-width) calc($bottom-height),
+        0 $bottom-height,
+        0 calc($top-left-angle + $top-offset-height));
+}
+.effect-summary-top-shape{
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    $back-color: rgb(80, 80, 80);
+    background: linear-gradient(90deg, rgba($back-color,1) 0%, rgba($back-color, .4) 35%, rgba($back-color,.5) 60%, rgba($back-color,1) 100%);
+
+    $top-left-angle: 15%;
+    $top-right-angle: 93%;
+    $bottom-right-angle: 90%;
+    $bottom-height: 11%;
+    $inside-margin: 1%;
+    $right-width: calc(100% - $inside-margin );
+    $right-inside-width: 4%;
+    $right-inside-height: 33%;
+    $right-inside-angle: 33%;
+    $top-offset-height: 4%;
+    $top-inside-width: 37%;
+    $top-offset-angle: 3%;
+    $bottom-offset-height: calc($bottom-height + $top-offset-height - $inside-margin);
+    clip-path: polygon(calc($top-left-angle ) $top-offset-height,
+    $top-inside-width $top-offset-height,
+    calc($top-inside-width + $top-offset-angle) $inside-margin,
+    calc(100% - $top-inside-width - $top-offset-angle) $inside-margin,
+    calc(100% - $top-inside-width) $top-offset-height,
+    $top-right-angle $top-offset-height,
+    $right-width calc(100% - $top-right-angle + $top-offset-height),
+    calc(100% - $top-inside-width) $bottom-height,
+    calc(100% - $top-inside-width - $top-offset-angle) $bottom-offset-height,
+    calc($top-inside-width + $top-offset-angle) $bottom-offset-height,
+    $top-inside-width  $bottom-height, $top-left-angle calc($top-left-angle - $top-offset-height),
+    0 calc($top-left-angle + $bottom-height),
+    0 calc($top-left-angle + $top-offset-height));
+}
+.effect-summary-bottom-shape{
+    position: absolute;
+    z-index: 5;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    $back-color: rgb(80, 80, 80);
+    background: linear-gradient(90deg, rgba($back-color,1) 0%, rgba($back-color, .4) 35%, rgba($back-color,.5) 60%, rgba($back-color,1) 100%);
+
+    $bottom-right-angle: 90%;
+    $inside-margin: 1%;
+    $right-inside-width: 4%;
+    $right-inside-height: 33%;
+    $right-inside-angle: 33%;
+    $right-width: calc(100% - $inside-margin);
+    $top-offset-height: 89%;
+    $top-height: calc($top-offset-height + $inside-margin);
+    $top-inside-width: 37%;
+    $top-offset-angle: 3%;
+    $top-inside-top: calc($top-height - 3%);
+    $bottom-offset-height: 3%;
+    $bottom-inside-height: calc(100% - $inside-margin - $bottom-offset-height);
+    $bottom-height: calc(100% - $inside-margin);
+    clip-path: polygon(0 $top-height,
+        $top-inside-width $top-height,
+        calc($top-inside-width + $top-offset-angle) $top-inside-top,
+        calc(100% - $top-inside-width - $top-offset-angle) $top-inside-top,
+        calc(100% - $top-inside-width) $top-height,
+        $right-width $top-height,
+        $bottom-right-angle $bottom-inside-height,
+        calc(100% - $top-inside-width) $bottom-inside-height,
+        calc(100% - $top-inside-width - $top-offset-angle) $bottom-height,
+        calc($top-inside-width + $top-offset-angle) $bottom-height,
+        $top-inside-width  $bottom-inside-height,
+        0 $bottom-inside-height);
+}
+.effect-summary-background{
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(100,100,100,.5);
+}
+.effect-summary-background-production{
+    $color-one: var(--color-ares-red);
+    $color-two: rgb(253, 157, 67);
+    $step1: 2%;
+    $step2: 4%;
+    $step3: 6%;
+    background: repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+}
+.effect-summary-background-grey-production{
+    $color-one: rgb(66, 66, 66);
+    $color-two: rgb(184, 184, 184);
+    $step1: 0%;
+    $step2: 4%;
+    $step3: 6%;
+    background: repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+    background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+}
+.effect-summary-background-radial-grid{
+    z-index: 1;
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    @each $color-name, $color-value in $map-colors-dark {
+        &.#{$color-name}Project {
+            background: $color-value;
+        }
+    }
+    &:after{
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: -250%;
+        width: 500px;
+        height: 500px;
+    }
+    &.action{
+        background-color: map-get($map-colors-dark, "blue");
+        &:after {
+            $background-dots: map-get($map-colors-light, "blue");
+            background:
+            linear-gradient(45deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
+            linear-gradient(135deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
+            linear-gradient(225deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
+            linear-gradient(315deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%);
+            background-size: 3px 3px; // Taille du dégradé
+            background-repeat: repeat; // Répétition du dégradé
+            pointer-events: none; // Assure que le pseudo-élément ne soit pas cliquable
+            transform: rotate(45deg);
+        }
+    }
+    &.trigger{
+        background-color: map-get($map-colors-dark, "purple");
+        &:after{
+            $background-dots: map-get($map-colors-light, "purple");
+            background:
+            linear-gradient(45deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
+            linear-gradient(135deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
+            linear-gradient(225deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
+            linear-gradient(315deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%);
+            background-size: 3px 3px; // Taille du dégradé
+            background-repeat: repeat; // Répétition du dégradé
+            pointer-events: none; // Assure que le pseudo-élément ne soit pas cliquable
+            transform: rotate(45deg);
+        }
+    }
+}
+.effect-summary-background-action{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    $back-color: map-get($map-colors-dark, "blue");
+    background: linear-gradient(0deg, rgba($back-color,.5) 0%, $back-color 45%, $back-color 65%, rgba($back-color,.5) 100%);
+}
+.effect-summary-background-trigger{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    $back-color: map-get($map-colors-dark, "purple");
+    background: linear-gradient(0deg, rgba($back-color,.5) 0%, $back-color 45%, $back-color 65%, rgba($back-color,.5) 100%);
+}
+.effect-summary-foreground-radial-white{
+    z-index: 3;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse 200% 80%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%,  rgba(255,255,255, .7) 55%, rgba(255,255,255,1) 100%);
+}
+.effect-summary-text{
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

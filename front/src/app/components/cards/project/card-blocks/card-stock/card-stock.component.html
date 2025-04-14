@@ -1,0 +1,6 @@
+<div class="wrapper-main">
+	<div class="wrapper-stock" *ngFor="let stock of cardStock">
+		<img [src]="'/assets/ressource/' + stock.name + '.png'" alt="">
+		<p>: {{stock.valueStock}}</p>
+	</div>
+</div>

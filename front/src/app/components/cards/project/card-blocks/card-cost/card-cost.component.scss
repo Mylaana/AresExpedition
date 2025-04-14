@@ -1,0 +1,142 @@
+@import "./../../../../../../variables";
+:host{
+	z-index: 10;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+.wrapper-main{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1px;
+	height: fit-content;
+	width: fit-content;
+	padding: 6px;
+	padding-top: 15px;
+	border-radius: 10px;
+	overflow: hidden;
+
+	&.red{
+		border: 2px solid var(--color-ares-red);
+	}
+	&.blue{
+		border: 2px solid var(--color-ares-blue);
+	}
+	&.green{
+		border: 2px solid var(--color-ares-green);
+	}
+}
+.background{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+
+    @each $color-name, $color-value in $map-colors-dark {
+        &.#{$color-name} {
+            background-color: $color-value;
+        }
+    }
+
+    &:before{
+        $color-one: rgba(0, 0, 0, 1);
+        $color-two: rgba(0, 0, 0, 0);
+		$size: 20%;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+			linear-gradient(45deg, $color-one 0%, $color-one calc($size), $color-two calc($size), $color-two calc(100% - $size), $color-one calc(100% - $size), $color-one 100%),
+			linear-gradient(135deg, $color-one 0%, $color-one calc($size), $color-two calc($size), $color-two calc(100% - $size), $color-one calc(100% - $size), $color-one 100%);
+        background-size: 4px 4px;
+        background-repeat: repeat;
+        transform: rotate(0deg);
+    }
+	&:after{
+		content: "";
+		background: linear-gradient(to right, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, 0.1) 100%);
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+.wrapper-cost{
+	z-index: 11;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	& p {
+        color: black;
+        font-weight: bold;
+    }
+	&.current-cost{
+		width: calc(var(--card-width) * .12);
+		height: calc(var(--card-width) * .12);
+		& p {
+			font-size: 15px;
+		}
+	}
+    &.not-current-cost{
+		width: calc(var(--card-width) * .08);
+		height: calc(var(--card-width) * .08);
+        filter: grayscale(20%);
+        opacity: 80%;
+        & p {
+			font-size: 10px;
+        }
+    }
+}
+.wrapper-cost-image {
+    z-index: 2;
+	width: 100%;
+	height: 100%;
+
+    & img{
+        width: 100%;
+        aspect-ratio: 1;
+    }
+}
+.wrapper-cost-value {
+    z-index: 3;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top-left-layout{
+    z-index: 10;
+    position: absolute;
+
+    top: 0;
+	left: 0;
+    height: 100%;
+    width: 120%;
+
+    -webkit-clip-path: polygon(100% 0, 95% 9%, 90% 9%, 90% 14%, 84% 14%, 84% 38%, 69% 50%, 25% 50%, 0% 33%, 0 0);
+    clip-path: polygon(0 0, 100% 0, 95% 9%, 90% 9%, 90% 14%, 84% 14%, 84% 38%,
+		72% 50%, 72% 28%, 61% 15%, 61% 12%, 60% 11%,
+		23% 11%, 22% 12%, 22% 15%, 11% 28%, 11% 50%, 0% 40%);
+
+    border-top: 0;
+    border-left: 0;
+
+    @each $color-name, $color-value in $map-colors {
+        &.#{$color-name} {
+            background: $color-value;
+        }
+    }
+}

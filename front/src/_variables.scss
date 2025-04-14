@@ -11,13 +11,16 @@ $colors: (
 $card-back-colors: (
   "red": rgba(130, 30, 30, 1),
   "blue": rgba(50, 100, 150, 1),
-  "green": rgba(10, 90, 40, 1)
+  "green": rgba(10, 90, 40, 1),
+  "corporation": rgb(119, 144, 169),
 );
 
 :root {
   --card-height: 300px;
+  --card-effect-height: calc(var(--card-height) * .26);
   --card-width: calc(var(--card-height) * 63 / 88);
   --settings-button-size: 9%;
+  --text-size: 11px;
 
   @each $name, $color in $colors {
     --color-ares-#{$name}: #{$color};

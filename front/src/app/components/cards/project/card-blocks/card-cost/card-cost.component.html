@@ -1,1 +1,21 @@
-<p>card-cost works!</p>
+<div [ngClass]="['top-left-layout', _color]"></div>
+<div [ngClass]="['wrapper-main', _color]">
+	<span [ngClass]="['background', _color]"></span>
+	<div [ngClass]="['wrapper-cost', isCostMod()?'not-current-cost':'current-cost']">
+		<div [ngClass]="['wrapper-cost-image', ]">
+			<img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
+		</div>
+		<div class="wrapper-cost-value">
+			<p>{{costInitial}}</p>
+		</div>
+	</div>
+	<div *ngIf="isCostMod()"
+		[ngClass]="['wrapper-cost', isCostMod()?'current-cost':'not-current-cost']">
+		<div class="wrapper-cost-image">
+			<img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
+		</div>
+		<div class="wrapper-cost-value">
+			<p>{{cost}}</p>
+		</div>
+	</div>
+</div>

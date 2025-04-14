@@ -6,6 +6,7 @@ import { ProjectCardModel } from "../models/cards/project-card.model"
 import { myUUID } from "../types/global.type"
 import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
 import { v4 as uuidv4 } from 'uuid'
+import { CardType, CardTypeColor } from "../types/project-card.type"
 
 const PhaseUpgrade: Map<PhaseCardUpgradeType, SelectablePhaseEnum> = new Map<PhaseCardUpgradeType, SelectablePhaseEnum>([
 	['development_6mc', SelectablePhaseEnum.development],
@@ -123,5 +124,14 @@ export class Utils {
 	}
 	public static newUUID(): myUUID {
 		return uuidv4()
+	}
+	public static toCardTypeColor(cardType: CardType): CardTypeColor {
+		switch(cardType){
+			case('blueProject'):{return 'blue'}
+			case('redProject'):{return 'red'}
+			case('greenProject'):{return 'green'}
+			case('corporation'):{return 'white'}
+		}
+		return undefined
 	}
 }

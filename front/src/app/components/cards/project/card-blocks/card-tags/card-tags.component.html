@@ -1,1 +1,8 @@
-<p>card-tags works!</p>
+	<div *ngFor="let tag of tagsUrl" class="wrapper-tag">
+		<div class="tag-zone-mask">
+			<div [ngClass]="['tag-zone', _color]"></div>
+		</div>
+		<div [ngClass]="['tag-circle-background', _color]">
+			<img *ngIf="tag" [src]="tag" alt="">
+		</div>
+	</div>

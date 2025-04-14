@@ -1,0 +1,34 @@
+:host{
+	display: flex;
+	justify-content: right;
+}
+.wrapper-main{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 5px;
+	width: auto;
+	height: 25px;
+	border: white solid 1px;
+	border-radius: 5px;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+	border-right: 0;
+	background: rgba(255, 255, 255, 0.7);
+	box-shadow: 0 0 3px 0 white;
+}
+p{
+	color: black;
+	font-size: 14px;
+}
+.wrapper-stock{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2px;
+	height: 80%;
+	min-width: 45px;
+}
+img{
+	height: 100%;
+}

@@ -1,0 +1,13 @@
+.wrapper-played{
+    display: flex;
+    flex-direction: row;
+}
+.played-icon{
+    height: calc(var(--card-height) * .06);
+    border: 1px gold solid;
+    border-radius: 25%;
+    background: rgba(0, 0, 0, .5);
+    & img{
+        height: 100%;
+    }
+}

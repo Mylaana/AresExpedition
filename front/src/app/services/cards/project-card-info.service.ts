@@ -86,6 +86,9 @@ export class ProjectCardInfoService {
             card.prerequisiteText = jsonCard.prerequisiteText[language]
             card.prerequisiteSummaryText = jsonCard.prerequisiteSummaryText[language]
             card.stockable = this.convertStockable(jsonCard.stockable)
+			for(let stock of card.stockable){
+				card.setInitialStock(stock)
+			}
 
             cardList.push(card)
         }

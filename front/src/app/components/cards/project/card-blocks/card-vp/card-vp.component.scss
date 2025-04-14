@@ -1,0 +1,86 @@
+:host{
+    width: 100%;
+
+	height: fit-content;
+    display: flex;
+	align-items: end;
+	flex-direction: row;
+}
+.wrapper-main{
+	width: 100%;
+	display: flex;
+	justify-content: right;
+}
+.wrapper-vp-text{
+	flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: right;
+
+	margin-right: 5px;
+	border: white solid 1px;
+}
+.wrapper-vp-icon{
+	position: relative;
+	height: calc(var(--card-height) * .14);
+	padding-right: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.vp-icon{
+    z-index: 1;
+    position: relative;
+
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(61, 61, 61);
+
+    outline: rgb(216, 216, 216) 1px solid;
+    outline-offset: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 70%;
+    aspect-ratio: 1;
+
+
+    background: linear-gradient(0deg, rgb(26, 17, 9) 0%, rgba(143,92,63,1) 35%, rgba(255,239,213,1) 100%);
+    & p{
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+.wrapper-vp-background{
+    z-index: 0;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding-left: 12%;
+}
+.layout-vp-right{
+    width: 60%;
+}
+.layout-vp-left{
+    width: 10%;
+}
+.layout-vp-right, .layout-vp-left{
+    z-index: 0;
+    position: relative;
+    top: 0px;
+    height: 90%;
+    border: transparent 0px solid;
+    outline: white 1px solid;
+    outline-offset: 2px;
+    background-color: rgba($color: grey, $alpha: .7);
+}

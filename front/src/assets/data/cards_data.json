@@ -376,7 +376,7 @@
         "tagsId": [
             4
         ],
-        "effectSummaryType": "",
+        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",

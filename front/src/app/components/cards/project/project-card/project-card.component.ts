@@ -1,8 +1,7 @@
 import { Component, Input, OnInit, Output, inject, EventEmitter, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
-import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
-import { LayoutCardBackgroundHexagonsComponent } from '../../../tools/layouts/layout-card-background-hexagons/layout-card-background-hexagons.component';
+import { CardBackgroundComponent } from '../card-blocks/card-background/card-background.component';
 import { CardCost } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
@@ -20,6 +19,10 @@ import { CardEffectComponent } from '../card-blocks/card-effect/card-effect.comp
 import { CardHighlightComponent } from '../card-blocks/card-highlight/card-highlight.component';
 import { CardTagsComponent } from '../card-blocks/card-tags/card-tags.component';
 import { CardVpComponent } from '../card-blocks/card-vp/card-vp.component';
+import { CardPlayedComponent } from '../card-blocks/card-played/card-played.component';
+import { CardPrerequisiteComponent } from '../card-blocks/card-prerequisite/card-prerequisite.component';
+import { CardStockComponent } from '../card-blocks/card-stock/card-stock.component';
+import { CardTagsBackgroundComponent } from '../card-blocks/card-tags-background/card-tags-background.component';
 
 
 @Component({
@@ -27,15 +30,18 @@ import { CardVpComponent } from '../card-blocks/card-vp/card-vp.component';
   standalone: true,
   imports: [
     CommonModule,
-    TextWithImageComponent,
-    LayoutCardBackgroundHexagonsComponent,
+    CardBackgroundComponent,
 	NonEventButtonComponent,
 	CardActivationComponent,
 	CardCostComponent,
 	CardEffectComponent,
 	CardHighlightComponent,
 	CardTagsComponent,
-	CardVpComponent
+	CardVpComponent,
+	CardPlayedComponent,
+	CardPrerequisiteComponent,
+	CardStockComponent,
+	CardTagsBackgroundComponent
   ],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss',

@@ -1,1 +1,22 @@
-<p>card-effect works!</p>
+<div *ngIf="effectSummaryType" class="wrapper-effect-summary">
+	<div class="wrapper-effect-summary-border">
+		<div class="effect-summary-top-shape"></div>
+		<div class="effect-summary-bottom-shape"></div>
+		<div class="wrapper-inner">
+			<div class="effect-summary-foreground-radial-white" [ngClass]="effectSummaryType" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
+			<div class="effect-summary-background-radial-grid" [ngClass]="effectSummaryType" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
+			<div class="effect-summary-background"
+				[ngClass]="{'effect-summary-background-production': effectSummaryType==='production',
+							'effect-summary-background-action': effectSummaryType==='action',
+							'effect-summary-background-grey-production':effectSummaryType==='greyProduction',
+							'effect-summary-background-trigger':effectSummaryType==='trigger'}">
+			</div>
+			<div class="effect-summary-text">
+				<app-text-with-image *ngIf="effectSummaryText" [rawText]="effectSummaryText"></app-text-with-image>
+			</div>
+		</div>
+	</div>
+</div>
+<div *ngIf="effectText" class="wrapper-effect-text shadowed-text" >
+	<app-text-with-image [rawText]="effectText"></app-text-with-image>
+</div>
