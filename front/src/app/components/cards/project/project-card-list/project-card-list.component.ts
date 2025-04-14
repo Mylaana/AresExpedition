@@ -6,7 +6,7 @@ import { CardSelector } from '../../../../interfaces/global.interface';
 import { ProjectCardModel } from '../../../../models/cards/project-card.model';
 import { EventBaseModel, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
-import { ProjectCardComponent } from '../project-card/project-card.component';
+import { PlayableCardComponent } from '../project-card/playable-card.component';
 import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
@@ -16,7 +16,7 @@ const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builder
   standalone: true,
   imports: [
     CommonModule,
-    ProjectCardComponent],
+    PlayableCardComponent],
   templateUrl: './project-card-list.component.html',
   styleUrl: './project-card-list.component.scss'
 })
@@ -35,7 +35,7 @@ export class ProjectCardListComponent implements OnChanges{
 
 	@Output() updateSelectedCardList: EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}> = new EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}>()
 	@Output() projectActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
-	@ViewChildren('projectCardComponent') projectCards!: QueryList<ProjectCardComponent>
+	@ViewChildren('projectCardComponent') projectCards!: QueryList<PlayableCardComponent>
 
 	_buildDiscount: number = 0
 	_cardSelector!: CardSelector

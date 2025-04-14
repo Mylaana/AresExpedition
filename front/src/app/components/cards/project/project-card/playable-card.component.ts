@@ -8,8 +8,6 @@ import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
 import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
-import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
-import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
 import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
 import { expandCollapseVertical } from '../../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
@@ -26,7 +24,7 @@ import { CardTagsZoneComponent } from '../card-blocks/card-tags-background/card-
 
 
 @Component({
-  selector: 'app-project-card',
+  selector: 'app-playable-card',
   standalone: true,
   imports: [
     CommonModule,
@@ -42,12 +40,12 @@ import { CardTagsZoneComponent } from '../card-blocks/card-tags-background/card-
 	CardStockComponent,
 	CardTagsZoneComponent
   ],
-  templateUrl: './project-card.component.html',
-  styleUrl: './project-card.component.scss',
+  templateUrl: './playable-card.component.html',
+  styleUrl: './playable-card.component.scss',
   providers: [CardCost],
   animations: [expandCollapseVertical]
 })
-export class ProjectCardComponent extends BaseCardComponent implements OnInit, OnDestroy {
+export class PlayableCardComponent extends BaseCardComponent implements OnInit, OnDestroy {
 	@Output() cardActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
 	@Input() projectCard!: ProjectCardModel;
 	@Input() buildDiscount: number = 0
