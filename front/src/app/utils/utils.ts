@@ -2,7 +2,7 @@ import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST } from "../global/global-const"
 import { CardState } from "../interfaces/card.interface"
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
-import { ProjectCardModel } from "../models/cards/project-card.model"
+import { PlayableCardModel } from "../models/cards/project-card.model"
 import { myUUID } from "../types/global.type"
 import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
 import { v4 as uuidv4 } from 'uuid'
@@ -104,7 +104,7 @@ export class Utils {
 		if(Array.isArray(value)){return value}
 		return [value]
 	}
-	public static toCardsIdList(modelList: ProjectCardModel[]): number[]{
+	public static toCardsIdList(modelList: PlayableCardModel[]): number[]{
 		let list: number[] = []
 		for(let card of modelList){
 			list.push(card.id)
@@ -130,8 +130,12 @@ export class Utils {
 			case('blueProject'):{return 'blue'}
 			case('redProject'):{return 'red'}
 			case('greenProject'):{return 'green'}
-			case('corporation'):{return 'white'}
+			case('corporation'):{return 'corporation'}
 		}
 		return undefined
+	}
+	public static toArray(input: any | any[]): any[] {
+		if(Array.isArray(input)){return input}
+		return [input]
 	}
 }

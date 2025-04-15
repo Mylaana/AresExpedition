@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectCardListComponent } from '../../../cards/project/project-card-list/project-card-list.component';
-import { ProjectCardModel } from '../../../../models/cards/project-card.model';
+import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { fadeIn } from '../../../../animations/animations';
 
@@ -13,7 +13,7 @@ import { fadeIn } from '../../../../animations/animations';
   animations: [fadeIn]
 })
 export class CardOverviewComponent implements OnInit{
-	_cardList: ProjectCardModel[] = []
+	_cardList: PlayableCardModel[] = []
 
 	constructor(private cardInfoService: ProjectCardInfoService){}
 	ngOnInit(): void {

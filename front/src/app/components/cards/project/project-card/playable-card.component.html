@@ -16,13 +16,17 @@
 			[class.selectable]="state.isSelectable()"
 			(click)="cardClick()">
 			<div class="wrapper-card-element-left">
-				<app-card-cost [cardType]="projectCard.cardType" [cardLocation]="parentListType" [costInitial]="projectCard.costInitial" [cost]="projectCard.cost"></app-card-cost>
+				<app-card-cost *ngIf="projectCard.cardType!='corporation'" [cardType]="projectCard.cardType" [cardLocation]="parentListType" [costInitial]="projectCard.costInitial" [cost]="projectCard.cost"></app-card-cost>
 				<app-card-tags [cardType]="projectCard.cardType" [tagsUrl]="projectCard.tagsUrl"></app-card-tags>
-				<app-card-tags-zone [cardType]="projectCard.cardType"></app-card-tags-zone>
+				<app-card-tags-zone *ngIf="projectCard.cardType!='corporation'"  [cardType]="projectCard.cardType"></app-card-tags-zone>
 			</div>
 			<div class="wrapper-card-element-main">
-				<div class="wrapper-title">
-					<p>{{projectCard.title}}</p>
+				<div class="wrapper-card-element-top">
+					<app-card-title [title]="projectCard.title" [cardType]="projectCard.cardType"></app-card-title>
+					<app-card-starting-megacredits
+						*ngIf="projectCard.cardType==='corporation'"
+						[startingMegacredits]="projectCard.startingMegacredits??0">
+					</app-card-starting-megacredits>
 				</div>
 				<app-card-prerequisite
 					*ngIf="projectCard.prerequisiteText"
@@ -61,8 +65,11 @@
 		*ngIf="state.isActivable()"
 		[maximumCardActivation]="_maximumActivation"
 		[buttonIndexEnabled]="_buttonIndexEnabled"
-		(activated)="onActivation($event)"></app-card-activation>
+		(activated)="onActivation($event)">
+	</app-card-activation>
 </div>
+
+
 
 <!--
 <p>{{_maximumActivation}}</p>

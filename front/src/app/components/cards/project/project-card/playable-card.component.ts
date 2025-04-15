@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, inject, EventEmitter, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProjectCardModel } from '../../../../models/cards/project-card.model';
+import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { CardBackgroundComponent } from '../card-blocks/card-background/card-background.component';
 import { CardCost } from '../../../../models/cards/card-cost.model';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
@@ -21,6 +21,9 @@ import { CardPlayedInfoComponent } from '../card-blocks/card-played/card-played-
 import { CardPrerequisiteComponent } from '../card-blocks/card-prerequisite/card-prerequisite.component';
 import { CardStockComponent } from '../card-blocks/card-stock/card-stock.component';
 import { CardTagsZoneComponent } from '../card-blocks/card-tags-background/card-tags-zone.component';
+import { CardTitleComponent } from '../card-blocks/card-title/card-title.component';
+import { CardStartingMegacreditsComponent } from '../card-blocks/card-starting-megacredits/card-starting-megacredits.component';
+import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 
 
 @Component({
@@ -38,7 +41,9 @@ import { CardTagsZoneComponent } from '../card-blocks/card-tags-background/card-
 	CardPlayedInfoComponent,
 	CardPrerequisiteComponent,
 	CardStockComponent,
-	CardTagsZoneComponent
+	CardTagsZoneComponent,
+	CardTitleComponent,
+	CardStartingMegacreditsComponent
   ],
   templateUrl: './playable-card.component.html',
   styleUrl: './playable-card.component.scss',
@@ -46,15 +51,14 @@ import { CardTagsZoneComponent } from '../card-blocks/card-tags-background/card-
   animations: [expandCollapseVertical]
 })
 export class PlayableCardComponent extends BaseCardComponent implements OnInit, OnDestroy {
-	@Output() cardActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
-	@Input() projectCard!: ProjectCardModel;
+	@Output() cardActivated: EventEmitter<{card: PlayableCardModel, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, twice: boolean}>()
+	@Input() projectCard!: PlayableCardModel;
 	@Input() buildDiscount: number = 0
 	@Input() parentListType: ProjectListType = 'none'
 	@Input() parentListSubType: ProjectListSubType = 'none'
 	@Input() activableTwice: boolean = false
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
-	readonly tagNumber = 3;
 
 	_hovered: boolean = false
 	_maximumActivation: boolean = false
@@ -98,13 +102,22 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.updateCost()
 		this.checkPlayable()
 	}
-
 	private fillTagId(tagsId:number[]): number[] {
 		// ensures having 3 tags id in tagId
-		// gets number array
-		// returns number array
-		var newTagsId = this.projectCard.tagsId.slice();
-		for (let i = this.projectCard.tagsId.length; i < this.tagNumber; i++) {
+		let newTagsId = this.projectCard.tagsId.slice();
+
+		let targetTagsNumber
+		switch(this.projectCard.cardType){
+			case('corporation'):{
+				targetTagsNumber = 1
+				break
+			}
+			default:{
+				targetTagsNumber = GAME_CARD_DEFAULT_TAG_NUMBER
+			}
+		}
+
+		for (let i = this.projectCard.tagsId.length; i < targetTagsNumber; i++) {
 		newTagsId.push(-1)
 		}
 		return newTagsId

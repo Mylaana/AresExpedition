@@ -1,12 +1,12 @@
 import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { myUUID, RGB } from "../../types/global.type";
+import { myUUID, PlayableCardType, RGB } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
-import { ProjectCardModel} from "../../models/cards/project-card.model";
+import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
@@ -16,6 +16,7 @@ import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
 import { EventDesigner } from "../designers/event-designer.service";
+import { Utils } from "../../utils/utils";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -288,12 +289,14 @@ export class GameState{
 	getClientPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPhaseSelected()}
     getClientUpgradedPhaseCards(): PhaseCardModel[] {return this.getClientState().getUpgradedPhaseCards()}
     getClientHandIdList(filter?: ProjectFilter): number[] {return this.getClientState().getProjectHandIdList(filter)}
-    getClientHandModelList(filter?: ProjectFilter): ProjectCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList(filter))}
+    getClientHandModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList(filter))}
+	getClientHandCorporationIdList(filter?: ProjectFilter): number[] {return this.getClientState().getCorporationHandIdList()}
+	getClientHandCorporationModelList(): PlayableCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandCorporationIdList())}
 
     getClientProjectPlayedIdList(): number[] {return this.getPlayerProjectPlayedIdList(this.clientId)}
 	getPlayerProjectPlayedIdList(playerId: myUUID): number[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedIdList()??[]}
-    getClientProjectPlayedModelList(filter?: ProjectFilter): ProjectCardModel [] {return this.getPlayerProjectPlayedModelList(this.clientId, filter)}
-    getPlayerProjectPlayedModelList(playerId: myUUID, filter?: ProjectFilter): ProjectCardModel[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedModelList(filter)??[]}
+    getClientProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel [] {return this.getPlayerProjectPlayedModelList(this.clientId, filter)}
+    getPlayerProjectPlayedModelList(playerId: myUUID, filter?: ProjectFilter): PlayableCardModel[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedModelList(filter)??[]}
 
     addCardsToClientHand(cardsToAdd: number | number[]):void{
         let clientState = this.getClientState()
@@ -302,22 +305,23 @@ export class GameState{
 		console.log('added cards to hand', clientState)
     }
 
-    removeCardsFromClientHandById(cardsToRemove: number | number[]):void{
+    removeCardsFromClientHandById(cardsToRemove: number | number[], cardType: PlayableCardType):void{
 		let clientState = this.getClientState()
-        clientState.removeCardsFromHand(cardsToRemove)
+        clientState.removeCardsFromHand(cardsToRemove, cardType)
+		console.log('remove cards:',clientState)
 		this.updateClientState(clientState)
     }
-    removeCardsFromClientHandByModel(cardsToRemove: ProjectCardModel | ProjectCardModel[]):void{
+    removeCardsFromClientHandByModel(cardsToRemove: PlayableCardModel | PlayableCardModel[], cardType: PlayableCardType):void{
 		let removeListId: number[] = []
 		if(!Array.isArray(cardsToRemove)){
-			this.removeCardsFromClientHandById(cardsToRemove.id)
+			this.removeCardsFromClientHandById(cardsToRemove.id, cardType)
 			return
 		}
 
 		for(let removeCard of cardsToRemove){
 			removeListId.push(removeCard.id)
 		}
-		this.removeCardsFromClientHandById(removeListId)
+		this.removeCardsFromClientHandById(removeListId, cardType)
     }
     addDrawQueue(drawEvent: DrawEvent):void{
         this.drawQueue.next(this.drawQueue.getValue().concat([drawEvent]));
@@ -413,9 +417,9 @@ export class GameState{
 		playerState.addRessource('megacredit', quantity * (cardSellValue + playerState.getSellCardValueMod()))
 		this.updateClientState(playerState)
 	}
-	playCardFromClientHand(card: ProjectCardModel):void{
+	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{
         let events: EventBaseModel[] = []
-		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientState())
+		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientState(), cardType)
 		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
 
         this.updateClientState(newState)
@@ -629,7 +633,11 @@ export class GameState{
 		this.addEventQueue(EventDesigner.createCardSelector('selectStartingHand'), 'first')
 	}
 	public selectCorporation(): void {
-		this.addEventQueue(EventDesigner.createCardSelector('selectCorporation'), 'first')
+		this.addEventQueue(EventDesigner.createCardSelector('selectCorporation', {cardSelector: {selectFrom: this.getClientHandCorporationModelList()}}), 'first')
+	}
+	public playCorporation(corporation: PlayableCardModel): void {
+		this.playCardFromClientHand(corporation, 'corporation')
+		console.log(this.getClientState())
 	}
 	private dtoToPlayerState(dto: PlayerStateDTO): PlayerStateModel {
 		return PlayerStateModel.fromJson(dto, this.injector)

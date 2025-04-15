@@ -8,7 +8,7 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
 import { EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
 import { EventDesigner } from '../../../services/designers/event-designer.service';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
-import { ProjectCardModel } from '../../../models/cards/project-card.model';
+import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 
 @Component({
@@ -24,7 +24,7 @@ import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	@Input() event!: EventBaseModel
 	@Output() actionPhaseButtonUpdate: EventEmitter<boolean> = new EventEmitter<boolean>()
-	@Output() projectActivated = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
+	@Output() projectActivated = new EventEmitter<{card: PlayableCardModel, twice: boolean}>()
 	_convertForest: NonEventButton = ButtonDesigner.createNonEventButton('convertForest')
 	_buyForest: NonEventButton = ButtonDesigner.createNonEventButton('buyForest')
 	_convertTemperature: NonEventButton = ButtonDesigner.createNonEventButton('convertTemperature')
@@ -128,7 +128,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this.gameStateService.addEventQueue(newEvents, 'first')
 	}
 
-	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}){
+	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}){
 		this.projectActivated.emit(input)
 	}
 }

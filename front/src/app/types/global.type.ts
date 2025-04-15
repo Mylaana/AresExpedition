@@ -30,3 +30,4 @@ export type DrawRule = 'draw' | 'research' | 'scanKeep'
 export type CardBuilderOptionType = 'gain6MC' | 'drawCard'
 export type myUUID = string
 export type PlayerColor = undefined | 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'white'
+export type PlayableCardType = 'project' | 'corporation'

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ProjectCardModel } from "../../models/cards/project-card.model";
+import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
 import { ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { AdvancedRessourceStock } from "../../interfaces/global.interface";
@@ -20,7 +20,7 @@ export class ProjectCardActivatedEffectService {
 
 	* Events should be filled to the list according to their order of execution.
 	 */
-	static getActivateCardEvent(card: ProjectCardModel): EventBaseModel[] | undefined{
+	static getActivateCardEvent(card: PlayableCardModel): EventBaseModel[] | undefined{
 		let result: EventBaseModel[] = []
 		switch(card.cardCode){
 			//AI Central
@@ -47,7 +47,7 @@ export class ProjectCardActivatedEffectService {
 		return result
 	}
 
-	static isActivationCostPayable(card: ProjectCardModel, clientState: PlayerStateModel): boolean {
+	static isActivationCostPayable(card: PlayableCardModel, clientState: PlayerStateModel): boolean {
 		switch(card.cardCode){
 			//AI Central
 			case('4'):{break}

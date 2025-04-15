@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ProjectCardModel } from "../../models/cards/project-card.model";
+import { PlayableCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
 import { AdvancedRessourceType } from "../../types/global.type";
@@ -19,9 +19,9 @@ const stockableMap = new Map<string, AdvancedRessourceType>(
     providedIn: 'root'
 })
 export class ProjectCardInfoService {
-    projectCardInfo: ProjectCardModel[] = this.loadJson()
+    projectCardInfo: PlayableCardModel[] = this.loadJson()
 
-    getCardById(cardId:number): ProjectCardModel | undefined {
+    getCardById(cardId:number): PlayableCardModel | undefined {
         return this.projectCardInfo.find(x => x.id === cardId)
     }
 
@@ -33,11 +33,11 @@ export class ProjectCardInfoService {
         return cardList
     }
 
-	getAllProjectCard(): ProjectCardModel[]{
+	getAllProjectCard(): PlayableCardModel[]{
 		return this.projectCardInfo
 	}
-    getProjectCardList(cardIdList: number[]): ProjectCardModel[] {
-        let resultProjectCardList: ProjectCardModel[] = [];
+    getProjectCardList(cardIdList: number[]): PlayableCardModel[] {
+        let resultProjectCardList: PlayableCardModel[] = [];
         cardIdList.forEach(element => {
             let card = this.getCardById(Utils.jsonCopy(element))
             if(card!=undefined){
@@ -46,7 +46,7 @@ export class ProjectCardInfoService {
         });
         return resultProjectCardList;
     }
-    getProjectCardIdListFromModel(cards: ProjectCardModel[]): number[] {
+    getProjectCardIdListFromModel(cards: PlayableCardModel[]): number[] {
         let idList: number[] = []
         for(let card of cards){
             idList.push(card.id)
@@ -56,13 +56,13 @@ export class ProjectCardInfoService {
     private getCardNumber(){
         return this.projectCardInfo.length
     }
-    private loadJson(): ProjectCardModel[] {
+    private loadJson(): PlayableCardModel[] {
 
         this.projectCardInfo = []
-        let cardList: ProjectCardModel[] = []
+        let cardList: PlayableCardModel[] = []
 
         for(let jsonCard of jsonData){
-            let card = new ProjectCardModel
+            let card = new PlayableCardModel
 
             card.id = jsonCard.id
             card.cardCode = jsonCard.card_code
@@ -86,11 +86,13 @@ export class ProjectCardInfoService {
             card.prerequisiteText = jsonCard.prerequisiteText[language]
             card.prerequisiteSummaryText = jsonCard.prerequisiteSummaryText[language]
             card.stockable = this.convertStockable(jsonCard.stockable)
+			card.startingMegacredits = jsonCard.startingMegacredits
 			for(let stock of card.stockable){
 				card.setInitialStock(stock)
 			}
 
             cardList.push(card)
+			console.log(card)
         }
         return cardList
     }
@@ -139,6 +141,9 @@ export class ProjectCardInfoService {
             }
             case('blueProject'):{
                 return 'blueProject'
+            }
+			case('corporation'):{
+                return 'corporation'
             }
             default:{
                 return undefined

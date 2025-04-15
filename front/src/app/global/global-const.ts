@@ -32,3 +32,4 @@ export const GAME_PHASE_RESEARCH_CARDS_LIST: ResearchPhaseType[] = ['research_ba
 export const GAME_SELECTABLE_PHASE_LIST: SelectablePhaseEnum[] = [SelectablePhaseEnum.development, SelectablePhaseEnum.construction, SelectablePhaseEnum.action, SelectablePhaseEnum.production, SelectablePhaseEnum.research]
 export const GAME_HAND_MAXIMUM_SIZE = 10
 export const GAME_MAXIMUM_PLAYER_NUMBER = 6
+export const GAME_CARD_DEFAULT_TAG_NUMBER = 3

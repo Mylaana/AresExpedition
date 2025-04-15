@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { ProjectCardModel } from "../../models/cards/project-card.model";
+import { PlayableCardModel } from "../../models/cards/project-card.model";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ProjectCardInitializeService {
-	initialize(card: ProjectCardModel): void {
+	initialize(card: PlayableCardModel): void {
 		switch(card.id){
 			//Bacterial Aggregate
 			case(222):{

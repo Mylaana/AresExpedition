@@ -3,7 +3,7 @@ import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/co
 import { Subject, takeUntil } from 'rxjs';
 import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
-import { ProjectCardModel } from '../../../../models/cards/project-card.model';
+import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
 import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
@@ -153,7 +153,7 @@ export class GameEventComponent {
 	public buttonClicked(button: ButtonBase) {
 		console.log('game event button clicked:', button)
 	}
-	public updateSelectedCardList(input: {selected: ProjectCardModel[], listType: ProjectListType}){
+	public updateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){
 		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
@@ -169,7 +169,7 @@ export class GameEventComponent {
 			}
 		}
 	}
-	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}){
+	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}){
 		this.eventHandler.onProjectActivated(input)
 	}
 	public onActionPhaseStateUpdate(): void {

@@ -6,7 +6,7 @@ import { GameState } from "../../services/core-game/game-state.service";
 import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
 import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
-import { ProjectCardModel } from "../cards/project-card.model";
+import { PlayableCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
 import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase } from "./event.model";
 import { DrawEventDesigner } from "../../services/designers/draw-event-designer.service";
@@ -74,7 +74,7 @@ export class EventHandler {
 			}
 		}
 	}
-	public updateSelectedCardList(selected: ProjectCardModel[], listType: ProjectListType): void {
+	public updateSelectedCardList(selected: PlayableCardModel[], listType: ProjectListType): void {
 		switch(listType){
 			case('selector'):{
 				let event = this.currentEvent as EventCardSelector
@@ -94,7 +94,7 @@ export class EventHandler {
 		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
 		this.cancelCurrentEvent()
 	}
-	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}): void {
+	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}): void {
 		let event = this.currentEvent as EventCardSelector
 		if(input.twice){event.cardSelector.selectionQuantity -= 1}
 		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card)
@@ -232,7 +232,7 @@ export class EventHandler {
         switch(event.subType){
 			case('selectCardForcedSell'):case('selectCardOptionalSell'):case('discardCards'):{
 				event.finalized = true
-				this.gameStateService.removeCardsFromClientHandById(Utils.toCardsIdList(event.cardSelector.selectedList))
+				this.gameStateService.removeCardsFromClientHandById(Utils.toCardsIdList(event.cardSelector.selectedList), 'project')
 
 				if(event.subType==='discardCards'){break}
 				this.gameStateService.sellCardsFromClientHand(event.cardSelector.selectedList.length)
@@ -257,9 +257,14 @@ export class EventHandler {
 			case('selectStartingHand'):{
 				let drawNumber = event.cardSelector.selectedList.length
 				event.finalized = true
-				this.gameStateService.removeCardsFromClientHandByModel(event.cardSelector.selectedList)
+				this.gameStateService.removeCardsFromClientHandByModel(event.cardSelector.selectedList, 'project')
 				this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
 				this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber}}), 'first')
+				break
+			}
+			case('selectCorporation'):{
+				event.finalized = true
+				this.gameStateService.playCorporation(event.cardSelector.selectedList[0])
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
@@ -307,7 +312,7 @@ export class EventHandler {
 				if(cardId===undefined){break}
 				let card = this.projectCardInfoService.getCardById(cardId)
 				if(card===undefined){break}
-				this.gameStateService.playCardFromClientHand(card)
+				this.gameStateService.playCardFromClientHand(card, 'project')
 				break
 			}
 			case('drawResult'):{

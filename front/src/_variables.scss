@@ -5,14 +5,15 @@ $colors: (
   "purple": rgb(98, 70, 156),
   "orange":  rgb(255, 129, 25),
   "yellow": yellow,
-  "white": white
+  "white": white,
+  "corporation": rgb(215, 224, 231),
 );
 
 $card-back-colors: (
   "red": rgba(130, 30, 30, 1),
   "blue": rgba(50, 100, 150, 1),
   "green": rgba(10, 90, 40, 1),
-  "corporation": rgb(119, 144, 169),
+  "corporation": rgb(210, 224, 235),
 );
 
 :root {
@@ -26,13 +27,15 @@ $card-back-colors: (
     --color-ares-#{$name}: #{$color};
     --color-ares-#{$name}-light: #{lighten($color, 5%)};
 	--color-ares-#{$name}-light2: #{lighten($color, 25%)};
-	--color-ares-#{$name}-light3: #{lighten($color, 40%)};
+	--color-ares-#{$name}-light3: #{lighten($color, 35%)};
+	--color-ares-#{$name}-light4: #{lighten($color, 40%)};
     --color-ares-#{$name}-dark0: #{darken($color, 7%)};
 	--color-ares-#{$name}-dark: #{darken($color, 15%)};
 	--color-ares-#{$name}-dark2: #{darken($color, 19%)};
 	--color-ares-#{$name}-dark3: #{darken($color, 21%)};
 	--color-ares-#{$name}-dark4: #{darken($color, 33%)};
 	--color-ares-#{$name}-dark5: #{darken($color, 45%)};
+	--color-ares-#{$name}-dark6: #{darken($color, 55%)};
   }
 
   @each $name, $color in $card-back-colors {

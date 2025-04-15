@@ -1,6 +1,6 @@
 import { AdvancedRessourceType, GameItemType, GlobalParameterColor, myUUID, PlayerColor, RGB, SelectablePhase, TagType } from "../types/global.type"
 import { PhaseCardType } from "../types/phase-card.type"
-import { ProjectCardModel } from "../models/cards/project-card.model"
+import { PlayableCardModel } from "../models/cards/project-card.model"
 import { MinMaxEqualType } from "../types/global.type"
 import { RessourceType } from "../types/global.type"
 import { ProjectFilterType } from "../types/project-card.type"
@@ -50,8 +50,8 @@ export interface CardOptions {
 }
 
 export interface CardSelector {
-    selectFrom: ProjectCardModel[]
-    selectedList: ProjectCardModel[]
+    selectFrom: PlayableCardModel[]
+    selectedList: PlayableCardModel[]
     selectionQuantity: number
     selectionQuantityTreshold: MinMaxEqualType
 

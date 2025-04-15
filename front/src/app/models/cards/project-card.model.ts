@@ -4,7 +4,7 @@ import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, Trigg
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
 
-export class ProjectCardModel {
+export class PlayableCardModel {
     id!: number;
     cardCode!: string;
     origin!: string;
@@ -31,6 +31,7 @@ export class ProjectCardModel {
     stockable?: AdvancedRessourceType[]
     triggerLimit!: TriggerLimit
 	activated: number = 0
+	startingMegacredits?: number
 
     //not loaded from data
 
