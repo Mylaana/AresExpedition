@@ -6,7 +6,7 @@ import { CardBuilderOptionType } from "../../types/global.type"
 import { ButtonDesigner } from "./button-designer.service"
 import { EventDesigner } from "./event-designer.service"
 import { BuilderType } from "../../types/phase-card.type"
-import { ProjectCardModel } from "../../models/cards/project-card.model"
+import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { Utils } from "../../utils/utils"
 import { GlobalParameterNameEnum } from "../../enum/global.enum"
 
@@ -52,7 +52,7 @@ describe('Service - Designers - Event', () => {
                 expect(selector).toEqual(expectedSelector)
             })
             it('should return selector', () => {
-                let card = new ProjectCardModel
+                let card = new PlayableCardModel
                 card.id = 3
                 let expectedSelector: CardSelector = {
                     selectFrom: [card],

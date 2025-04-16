@@ -1,7 +1,7 @@
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
 import { ButtonDesigner } from "../../services/designers/button-designer.service";
 import { EventCardBuilderButtonNames } from "../../types/global.type";
-import { ProjectCardModel } from "../cards/project-card.model";
+import { PlayableCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
 import { CardBuilder, EventBaseCardSelector, EventBaseModel, EventCardBuilder } from "./event.model";
 
@@ -93,12 +93,12 @@ describe('Models - Event', () => {
                 expect(builder.getSelectedCard()).toBeUndefined()
             })
             it('should evaluate setCardSelected', () => {
-                let card = new ProjectCardModel
+                let card = new PlayableCardModel
                 builder.setSelectedCard(card)
                 expect(builder.getSelectedCard()).toEqual(card)
             })
             it('should evaluate removeSelectedCard', () => {
-                let card = new ProjectCardModel
+                let card = new PlayableCardModel
                 builder.setSelectedCard(card)
                 expect(builder.getSelectedCard()).toEqual(card)
                 builder.removeSelectedCard()
@@ -158,7 +158,7 @@ describe('Models - Event', () => {
                 expect(builder.getButtonFromName('discardSelectedCard')?.enabled).toBeFalse()
             })
             it('should evaluate resolveCardBuilderButtonClicked with discard sent', () => {
-                let card = new ProjectCardModel
+                let card = new PlayableCardModel
                 builder.setSelectedCard(card)
                 expect(builder.getSelectedCard()).toEqual(card)
 
