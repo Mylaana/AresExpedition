@@ -1,19 +1,17 @@
-$hex-color: white;
 .hex {
     z-index: 1;
     position: relative;
     top: 0;
     left: 0;
-    
+
     width: 100%;
     aspect-ratio: 1;
-    background: $hex-color;
     opacity: 100%;
 
     $offset-height: 25%;
     $offset-width: 7%;
     $thickness: 1.5%;
-    clip-path: 
+    clip-path:
         polygon(50% 0,
         calc(100% - $offset-width) $offset-height,
         calc(100% - $offset-width) calc(100% - $offset-height),
@@ -29,4 +27,11 @@ $hex-color: white;
         calc(100% - $offset-width - $thickness) calc($offset-height + $thickness),
         calc(50%) calc($thickness),
         );
+
+	&.white{
+		background: white;
+	}
+	&.blue{
+		background: var(--color-ares-blue-dark4);
+	}
 }
