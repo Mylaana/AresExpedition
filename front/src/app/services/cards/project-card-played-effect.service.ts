@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { ProjectCardModel } from "../../models/cards/project-card.model";
+import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { RessourceType } from "../../types/global.type";
+import { PlayableCardType, RessourceType } from "../../types/global.type";
 import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
 import { RessourceStock, GlobalParameterValue, ScanKeep, RessourceInfo } from "../../interfaces/global.interface";
@@ -22,7 +22,7 @@ export class ProjectCardPlayedEffectService {
 	constructor(
 		private scalingProductionService: ProjectCardScalingProductionsService
 	){}
-	addRessourceToCard(card: ProjectCardModel, ressource: AdvancedRessourceStock): void {
+	addRessourceToCard(card: PlayableCardModel, ressource: AdvancedRessourceStock): void {
 		card.addRessourceToStock(ressource)
 	}
 	addRessourceToPlayer(ressource: RessourceType, quantity:number):void{
@@ -34,9 +34,9 @@ export class ProjectCardPlayedEffectService {
 	addTrToPlayer(quantity:number):void{
 		this.clientPlayerState.addTR(quantity)
 	}
-	playCard(card: ProjectCardModel, playerState: PlayerStateModel): PlayerStateModel {
+	playCard(card: PlayableCardModel, playerState: PlayerStateModel, cardType: PlayableCardType): PlayerStateModel {
 		this.clientPlayerState = playerState
-		this.clientPlayerState.playCard(card)
+		this.clientPlayerState.playCard(card, cardType)
 
 		switch(card.cardCode){
 			//Decomposing Fungus
@@ -259,7 +259,7 @@ export class ProjectCardPlayedEffectService {
 
 	* Events should be filled to the list according to their order of execution.
 	 */
-	getPlayedCardEvent(card: ProjectCardModel): EventBaseModel[] | undefined{
+	getPlayedCardEvent(card: PlayableCardModel): EventBaseModel[] | undefined{
 		let result: EventBaseModel[] = []
 		switch(card.cardCode){
 			//Interns
@@ -430,7 +430,7 @@ export class ProjectCardPlayedEffectService {
 
 		return costMod
 	}
-	getEventTriggerByPlayedCard(playedCard: ProjectCardModel, triggerIdList: number[], state: PlayerStateModel): EventBaseModel[] | undefined{
+	getEventTriggerByPlayedCard(playedCard: PlayableCardModel, triggerIdList: number[], state: PlayerStateModel): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -442,7 +442,7 @@ export class ProjectCardPlayedEffectService {
 		}
 		return events
 	}
-	generateEventTriggerByPlayedCard(triggerId: number, playedCard: ProjectCardModel, state: PlayerStateModel): EventBaseModel[] | undefined {
+	generateEventTriggerByPlayedCard(triggerId: number, playedCard: PlayableCardModel, state: PlayerStateModel): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){
@@ -454,7 +454,7 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	getTriggerByTagGained(playedCard: ProjectCardModel, triggerIdList: number[]): EventBaseModel[] | undefined{
+	getTriggerByTagGained(playedCard: PlayableCardModel, triggerIdList: number[]): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -466,7 +466,7 @@ export class ProjectCardPlayedEffectService {
 		}
 		return events
 	}
-	generateEventTriggerByTagGained(triggerId: number, playedCard: ProjectCardModel): EventBaseModel[] | undefined {
+	generateEventTriggerByTagGained(triggerId: number, playedCard: PlayableCardModel): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 		let playedCardTags = playedCard.tagsId
 		let cardPlayedIsTheTrigger = triggerId===playedCard.id
@@ -512,7 +512,7 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	getEventTriggerByRessourceAddedToCard(targetCard: ProjectCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventBaseModel[] | undefined{
+	getEventTriggerByRessourceAddedToCard(targetCard: PlayableCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -525,7 +525,7 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	generateEventTriggerByRessourceAddedToCard(triggerId: number, targetCard: ProjectCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
+	generateEventTriggerByRessourceAddedToCard(triggerId: number, targetCard: PlayableCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){

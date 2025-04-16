@@ -376,7 +376,7 @@
         "tagsId": [
             4
         ],
-        "effectSummaryType": "",
+        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3524,6 +3524,144 @@
         },
         "prerequisiteSummaryText": {
             "en": "$other_infrastructure$",
+            "fr": ""
+        },
+        "stockable": []
+    },
+	{
+        "id": 1000,
+        "card_code": "1000",
+        "origin": "base",
+        "cost": 0,
+		"startingMegacredits": 24,
+        "tagsId": [ 5
+        ],
+        "effectSummaryType": "trigger",
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Saturn Systems",
+            "fr": "Saturn Systems"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$tag_jovian$: +1 $other_tr$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "Effect: Each time you play a $tag_jovian$, excluding this, gain 1 TR",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Add second effect",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": []
+    },
+	{
+        "id": 1001,
+        "card_code": "1001",
+        "origin": "base",
+        "cost": 0,
+		"startingMegacredits": 45,
+        "tagsId": [ 3
+        ],
+        "effectSummaryType": "trigger",
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Thorgate",
+            "fr": "Thorgate"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$tag_power$: $ressource_megacreditvoid_-3$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "Effect: When you play a $tag_power$, you pay 3 MC less for it.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Add second effect",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": []
+    },
+	{
+        "id": 1002,
+        "card_code": "1002",
+        "origin": "base",
+        "cost": 0,
+		"startingMegacredits": 51,
+        "tagsId": [ 4
+        ],
+        "effectSummaryType": "trigger",
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Teractor",
+            "fr": "Teractor"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryText": {
+            "en": "$tag_earth$: $ressource_megacreditvoid_-3$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "Effect: When you play a $tag_earth$, you pay 3 MC less for it.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
             "fr": ""
         },
         "stockable": []

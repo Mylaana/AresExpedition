@@ -1,6 +1,6 @@
 import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.interface";
-import { ProjectCardModel } from "../cards/project-card.model";
-import { myUUID, RessourceType, RGB } from "../../types/global.type";
+import { PlayableCardModel } from "../cards/project-card.model";
+import { myUUID, PlayableCardType, RessourceType, RGB } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
@@ -72,7 +72,7 @@ export class PlayerStateModel {
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}
-	addPlayedCardTags(card: ProjectCardModel): void {this.tagState.addPlayedCardTags(card)}
+	addPlayedCardTags(card: PlayableCardModel): void {this.tagState.addPlayedCardTags(card)}
 
 	//ressourceState
 	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}
@@ -113,27 +113,27 @@ export class PlayerStateModel {
 	getTriggerCostMod(): number[] {return this.projectCardState.getTriggerCostMod()}
 
 	addCardsToHand(cards: number | number[]) {this.projectCardState.addCardsToHand(cards)}
-	removeCardsFromHand(cardIdList: number | number[]): void {this.projectCardState.removeCardsFromHand(cardIdList)}
+	removeCardsFromHand(cardIdList: number | number[], cardType: PlayableCardType): void {this.projectCardState.removeCardsFromHand(cardIdList, cardType)}
 	getProjectHandIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectHandIdList(filter)}
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
 	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
 
 	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)}
-	getProjectPlayedModelFromId(cardId:number): ProjectCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}
+	getProjectPlayedModelFromId(cardId:number): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}
 	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
-	getProjectPlayedModelList(filter?: ProjectFilter): ProjectCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
+	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
 
 
 	//to refactor
-	playCard(card:ProjectCardModel):void{
+	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
 		this.projectCardState.playCard(card)
-		this.removeCardsFromHand([card.id])
+		this.removeCardsFromHand([card.id], cardType)
 		this.payCardCost(card)
 		this.addPlayedCardTags(card)
 	}
 
-	private payCardCost(card: ProjectCardModel):void{
+	private payCardCost(card: PlayableCardModel):void{
 		this.addRessource('megacredit', -card.cost)
 	}
 

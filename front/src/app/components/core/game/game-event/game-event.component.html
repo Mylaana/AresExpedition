@@ -78,7 +78,7 @@
 				<h1>[Waiting for other players to be ready]</h1>
 			</div>
 			<div class="wrapper-selectors"
-				*ngIf="currentEvent.hasCardsToSelectFrom() && currentEvent.subType!='actionPhase' && currentEvent.subType!='selectStartingHand'"
+				*ngIf="currentEvent.hasCardsToSelectFrom() && currentEvent.subType!='actionPhase' && currentEvent.subType!='selectStartingHand' && currentEvent.subType!='selectCorporation'"
 				[class.centered]="currentEvent.hasCardBuilder() === false"
 				@fadeIn>
 				<div class="wrapper-card-selector" >

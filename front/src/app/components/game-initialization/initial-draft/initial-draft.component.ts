@@ -3,7 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { CommonModule } from '@angular/common';
-import { ProjectCardModel } from '../../../models/cards/project-card.model';
+import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
 import { EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
 import { ProjectListType } from '../../../types/project-card.type';
@@ -19,17 +19,17 @@ import { ProjectListType } from '../../../types/project-card.type';
 })
 export class InitialDraftComponent implements OnInit, OnDestroy{
 	@Input() event!: EventBaseModel
-	@Output() updateSelectedCardList: EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}>
-		= new EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}>()
-	_playerHandCorporation: any = []
-	_selectionList: ProjectCardModel[] =[]
+	@Output() updateSelectedCardList: EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>
+		= new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
+	_playerHandCorporation: PlayableCardModel[] = []
+	_selectionList: PlayableCardModel[] =[]
 	private destroy$ = new Subject<void>()
 
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(): void {
 		//this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
-		this._playerHandCorporation = this.gameStateService.getClientState().getCorporationHandIdList()
+		this._playerHandCorporation = this.gameStateService.getClientHandCorporationModelList()
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()

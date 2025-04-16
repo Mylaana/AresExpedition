@@ -12,10 +12,14 @@
 		<div class="ares-title">
 			<h1>Corporation selection:</h1>
 		</div>
-		<p>corporation list [{{_playerHandCorporation}}]</p>
 	</ng-container>
 	<ng-container
 		*ngIf="event.subType==='selectCorporation'">
-		<p>corporation list [{{_playerHandCorporation}}]</p>
+		<app-project-card-list #cardListSelector
+			[event]="event"
+			[listType]="'selector'"
+			[listSubType]="event.subType==='selectStartingHand'?'startSelection':'none'"
+			(updateSelectedCardList)="onUpdateSelectedCardList($event)">
+	</app-project-card-list>
 	</ng-container>
 </div>

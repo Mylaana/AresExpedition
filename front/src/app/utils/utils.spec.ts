@@ -1,5 +1,5 @@
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
-import { ProjectCardModel } from "../models/cards/project-card.model"
+import { PlayableCardModel } from "../models/cards/project-card.model"
 import { Utils } from "./utils"
 
 describe('Functions', () => {
@@ -10,7 +10,7 @@ describe('Functions', () => {
             expect(result).toEqual(testValue)
         })
         it('should return a jsonified copy of object', () => {
-            let testObject = new ProjectCardModel
+            let testObject = new PlayableCardModel
             let result = Utils.jsonCopy(testObject)
             expect(result).not.toEqual(testObject)
         })

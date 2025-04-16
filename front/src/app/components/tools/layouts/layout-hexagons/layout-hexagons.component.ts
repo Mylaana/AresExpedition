@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-layout-hexagons',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './layout-hexagons.component.html',
   styleUrl: './layout-hexagons.component.scss'
 })
 export class LayoutHexagonsComponent {
-
+	@Input() color: 'white' | 'blue' = 'white'
 }

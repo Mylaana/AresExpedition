@@ -3,10 +3,10 @@ import { Component, EventEmitter, Input, OnChanges, Output, QueryList, SimpleCha
 import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { CardState } from '../../../../interfaces/card.interface';
 import { CardSelector } from '../../../../interfaces/global.interface';
-import { ProjectCardModel } from '../../../../models/cards/project-card.model';
+import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { EventBaseModel, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
-import { ProjectCardComponent } from '../project-card/project-card.component';
+import { PlayableCardComponent } from '../project-card/playable-card.component';
 import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
@@ -16,14 +16,14 @@ const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builder
   standalone: true,
   imports: [
     CommonModule,
-    ProjectCardComponent],
+    PlayableCardComponent],
   templateUrl: './project-card-list.component.html',
   styleUrl: './project-card-list.component.scss'
 })
 export class ProjectCardListComponent implements OnChanges{
 	@Input() event?: EventBaseModel;
 	@Input() eventId?: number;
-	@Input() cardList!: ProjectCardModel[]
+	@Input() cardList!: PlayableCardModel[]
 	@Input() listType: ProjectListType = 'none'
 	@Input() listSubType: ProjectListSubType = 'none'
 	@Input() selectedDiscount: number = 0
@@ -33,15 +33,15 @@ export class ProjectCardListComponent implements OnChanges{
 	@Input() background?: any = ''
 	@Input() hovered!: boolean
 
-	@Output() updateSelectedCardList: EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}> = new EventEmitter<{selected: ProjectCardModel[], listType: ProjectListType}>()
-	@Output() projectActivated: EventEmitter<{card: ProjectCardModel, twice: boolean}> = new EventEmitter<{card: ProjectCardModel, twice: boolean}>()
-	@ViewChildren('projectCardComponent') projectCards!: QueryList<ProjectCardComponent>
+	@Output() updateSelectedCardList: EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}> = new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
+	@Output() projectActivated: EventEmitter<{card: PlayableCardModel, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, twice: boolean}>()
+	@ViewChildren('projectCardComponent') projectCards!: QueryList<PlayableCardComponent>
 
 	_buildDiscount: number = 0
 	_cardSelector!: CardSelector
-	_displayedCards!: ProjectCardModel[] | undefined;
+	_displayedCards!: PlayableCardModel[] | undefined;
 	_activateTwiceCount: number = 0
-	private selectedCardList: ProjectCardModel[] = [];
+	private selectedCardList: PlayableCardModel[] = [];
 
 	ngOnInit(){
 		this.resetSelector()
@@ -79,7 +79,7 @@ export class ProjectCardListComponent implements OnChanges{
 			stateFromParent : Utils.toFullCardState({selected:false, selectable:false})
 		}
 	}
-	public cardStateChange(cardChange: {card: ProjectCardModel, state:CardState}): void {
+	public cardStateChange(cardChange: {card: PlayableCardModel, state:CardState}): void {
 		this.resetSelectedCardList()
 		for(let card of this.projectCards){
 			if(card.state.isSelected()===true){
@@ -145,7 +145,7 @@ export class ProjectCardListComponent implements OnChanges{
 		this.selectedCardList = []
 	}
 
-	public onProjectActivated(input: {card: ProjectCardModel, twice: boolean}): void {
+	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}): void {
 		this.projectActivated.emit(input)
 		this.setSelector()
 	}

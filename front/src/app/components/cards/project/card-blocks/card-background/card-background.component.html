@@ -1,0 +1,7 @@
+<div [ngClass]="'background--'+_color"></div>
+<ng-container *ngFor="let index of [1,2,3,4,5,6,7,8,9,10,11]">
+	<app-layout-hexagons  [ngClass]="['hex', 'hex'+index]" [color]="cardType==='corporation'?'blue':'white'"></app-layout-hexagons>
+</ng-container>
+<ng-container *ngFor="let index of [1,2]">
+	<app-layout-hexagons  [ngClass]="['hex-small', 'hex-small'+index]" [color]="cardType==='corporation'?'blue':'white'"></app-layout-hexagons>
+</ng-container>

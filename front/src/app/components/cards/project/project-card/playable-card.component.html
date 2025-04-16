@@ -1,0 +1,96 @@
+<div class="wrapper-main"
+	[class.hovered]="_hovered"
+	[class.selectable]="state.isSelectable()"
+	(mouseenter)="_hovered=true"
+	(mouseleave)="_hovered=false">
+	<app-card-highlight *ngIf="state.isSelected() && parentListSubType!='none'" [highlightStyle]="parentListSubType"></app-card-highlight>
+	<div class="wrapper-selection-border"
+		[class]="parentListSubType"
+		[class.selected]="state.isSelected()"
+		[class.selectable]="state.isSelectable()"
+		[class.hovered]="_hovered"
+		[class.disabled]="isDisabled()">
+		<button class="wrapper-card"
+			[class]="projectCard.cardType"
+			[class.hovered]="_hovered"
+			[class.selectable]="state.isSelectable()"
+			(click)="cardClick()">
+			<div class="wrapper-card-element-left">
+				<app-card-cost *ngIf="projectCard.cardType!='corporation'" [cardType]="projectCard.cardType" [cardLocation]="parentListType" [costInitial]="projectCard.costInitial" [cost]="projectCard.cost"></app-card-cost>
+				<app-card-tags [cardType]="projectCard.cardType" [tagsUrl]="projectCard.tagsUrl"></app-card-tags>
+				<app-card-tags-zone *ngIf="projectCard.cardType!='corporation'"  [cardType]="projectCard.cardType"></app-card-tags-zone>
+			</div>
+			<div class="wrapper-card-element-main">
+				<div class="wrapper-card-element-top">
+					<app-card-title [title]="projectCard.title" [cardType]="projectCard.cardType"></app-card-title>
+					<app-card-starting-megacredits
+						*ngIf="projectCard.cardType==='corporation'"
+						[startingMegacredits]="projectCard.startingMegacredits??0">
+					</app-card-starting-megacredits>
+				</div>
+				<app-card-prerequisite
+					*ngIf="projectCard.prerequisiteText"
+					[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
+					[prerequisiteSummary]="projectCard.prerequisiteSummaryText"
+					[prerequisiteText]="projectCard.prerequisiteText">
+				</app-card-prerequisite>
+				<app-card-played-info
+					*ngIf="projectCard.playedText"
+					[playedText]="projectCard.playedText">
+				</app-card-played-info>
+				<app-card-stock
+					*ngIf="projectCard.stockable?.length!=0"
+					[cardStock]="projectCard.stock">
+				</app-card-stock>
+				<app-card-vp
+					*ngIf="projectCard.vpNumber"
+					[vpNumber]="projectCard.vpNumber"
+					[vpDescription]="projectCard.vpText">
+				</app-card-vp>
+			</div>
+			<app-card-effect
+				*ngIf="projectCard.effectText"
+				[effectText]="projectCard.effectText"
+				[effectSummaryText]="projectCard.effectSummaryText"
+				[effectSummaryType]="projectCard.cardSummaryType">
+			</app-card-effect>
+			<div class="wrapper-left-layout">
+				<div class="left-layout" [ngClass]="projectCard.cardType"></div>
+				<div class="top-left-layout" [ngClass]="projectCard.cardType"></div>
+			</div>
+			<app-card-background [cardType]="projectCard.cardType"></app-card-background>
+		</button>
+	</div>
+	<app-card-activation
+		*ngIf="state.isActivable()"
+		[maximumCardActivation]="_maximumActivation"
+		[buttonIndexEnabled]="_buttonIndexEnabled"
+		(activated)="onActivation($event)">
+	</app-card-activation>
+</div>
+
+
+
+<!--
+<p>{{_maximumActivation}}</p>
+<p>{{activableTwice}}</p>
+<p>{{projectCard.activated}}</p>
+
+<p>{{projectCard.id}} {{projectCard.cardCode}}</p>
+<p>{{projectCard.stock | json}}</p>
+<p>{{projectCard.stockable | json}}</p>
+<p>cost {{projectCard.cost}}</p>
+<p>current: {{state.getCurrentState().buildable| json}}</p>
+<p>selected: {{state.isSelected()}}</p>
+<p>selectable: {{state.isSelectable()}}</p>
+<p>buildable: {{state.isBuildable()}}</p>
+<p>ignorecost: {{state.isIgnoreCost()}}</p>
+<p>initial selectable: {{initialState?.selectable| json}}</p>
+<p>initial ignore cost: {{initialState?.ignoreCost| json}}</p>
+<p>initial buildable: {{initialState?.buildable | json}}</p>
+<p>parent selectable: {{stateFromParent?.selectable | json}}</p>
+<p>parent ignore cost: {{stateFromParent?.ignoreCost | json}}</p>
+<p>parent buildable: {{stateFromParent?.buildable | json}}</p>
+
+[ngClass]="[((state.isSelectable()===true && state.isBuildable()===true) || (state.isSelectable()===true && !state.isBuildable()) || state.isIgnoreCost())? 'element-selectable': '', state.isSelected()!=true? 'selected':'']"
+-->

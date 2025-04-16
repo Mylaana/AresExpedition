@@ -1,0 +1,34 @@
+:host{
+	width: 100%;
+	height: 100%;
+	//border: red solid 1px;
+}
+.wrapper-activation{
+	$wrapper-width: 90%;
+	display: flex;
+    justify-content: center;
+	align-items: center;
+	height: calc(var(--card-height) * .18);
+	width: $wrapper-width;
+	margin-left: calc((100% - $wrapper-width) / 2 - 2px);
+	margin-top: -5px;
+	padding-top: calc(1% + 2px);
+	padding-bottom: 0;
+	border-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	&.maximum-activation{
+		height: calc(var(--card-height) * .04);
+		margin-bottom: calc(var(--card-height) * .14);
+	}
+}
+.wrapper-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 70%;
+	width: 80%;
+}
+app-non-event-button{
+	height: 100%;
+}

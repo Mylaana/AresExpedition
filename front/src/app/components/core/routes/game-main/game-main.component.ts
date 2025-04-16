@@ -14,7 +14,7 @@ import { NavigationComponent } from '../../game/navigation/navigation.component'
 import { ServerEmulationComponent } from '../../game/server-emulation/server-emulation.component';
 import { SettingsComponent } from '../../game/settings/settings.component';
 import { WebsocketHandler } from '../../../../models/core-game/websocket-handler';
-import { ProjectCardModel } from '../../../../models/cards/project-card.model';
+import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
@@ -43,9 +43,9 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
   animations: [fadeIn]
 })
 export class GameMainComponent implements OnInit{
-	playerHand: ProjectCardModel[] = [];
+	playerHand: PlayableCardModel[] = [];
 	playerHandCorporation: number[] = [];
-	playerPlayed: ProjectCardModel[] = [];
+	playerPlayed: PlayableCardModel[] = [];
 	playerIdList: myUUID[] = []
 	clientId!: myUUID
 	gameId!: myUUID

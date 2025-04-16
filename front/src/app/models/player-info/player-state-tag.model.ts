@@ -1,5 +1,5 @@
 import { TagInfo } from "../../interfaces/global.interface";
-import { ProjectCardModel } from "../cards/project-card.model";
+import { PlayableCardModel } from "../cards/project-card.model";
 import { GAME_TAG_LIST } from "../../global/global-const";
 import { PlayerTagStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 
@@ -29,7 +29,7 @@ export class PlayerTagStateModel {
 		if(tagId===-1){return}
 		this.tags[tagId].valueCount += 1
 	}
-	addPlayedCardTags(card: ProjectCardModel): void {
+	addPlayedCardTags(card: PlayableCardModel): void {
 		for(let tagId of card.tagsId){
 			this.addTag(tagId)
 		}

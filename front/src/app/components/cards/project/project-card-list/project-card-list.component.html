@@ -6,7 +6,7 @@
 		<div class="wrapper-cards"
 			[ngClass]="listType"
 			[class.hovered]="hovered">
-			<app-project-card #projectCardComponent *ngFor="let card of _displayedCards"
+			<app-playable-card #projectCardComponent *ngFor="let card of _displayedCards"
 				[stateFromParent]="_cardSelector.stateFromParent"
 				[projectCard]="card"
 				[initialState]="_cardSelector.cardInitialState"
@@ -15,7 +15,7 @@
 				[parentListSubType]="listSubType"
 				[activableTwice]="_activateTwiceCount>0"
 				(cardStateChange)="cardStateChange($event)"
-				(cardActivated)="onProjectActivated($event)"></app-project-card>
+				(cardActivated)="onProjectActivated($event)"></app-playable-card>
 		</div>
 	</div>
 </div>

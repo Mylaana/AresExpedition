@@ -1,0 +1,42 @@
+$size: calc(var(--card-width) * .13);
+:host{
+    display: flex;
+    width: 100%;
+
+    font-size: small;
+    & p {
+        font-size: small;
+    }
+}
+div{
+	border: grey solid 1px;
+}
+.min{
+	border: yellow 1px solid;
+}
+.max{
+	border: orangered 1px solid;
+}
+.wrapper-prerequisite-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+	border-top-left-radius: 0;
+}
+.wrapper-prerequisite-summary{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: $size;
+    min-height: $size;
+	height: fit-content;
+
+    background: rgba(grey, .6);
+    border-radius: 5px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: 0;
+	margin-bottom: 5px;
+}
