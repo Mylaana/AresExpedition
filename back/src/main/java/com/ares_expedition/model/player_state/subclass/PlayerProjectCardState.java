@@ -14,7 +14,7 @@ public class PlayerProjectCardState {
     private List<Integer> playedProjectIdList = new ArrayList<>();
     private Map<Integer, Object> playedProjectCardStocks = new HashMap<Integer, Object>();
     private TriggerState triggers = new TriggerState();
-    private Integer handMaximumSize;
+    private Integer handMaximumSize = 10;
 
     public PlayerProjectCardState() {
     }

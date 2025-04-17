@@ -126,6 +126,7 @@ public class GameController {
                 break;
 
             case SELECT_CORPORATION:
+            game.setGameStatus(GameStatusEnum.STARTED);
                 this.goToNextPhase(game);
                 break;
 
