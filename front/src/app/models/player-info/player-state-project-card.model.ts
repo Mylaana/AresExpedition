@@ -17,7 +17,7 @@ export class PlayerProjectCardStateModel {
         playedProjectList: []
     }
     private triggers = new TriggerState
-	private handMaximumSize = GAME_HAND_MAXIMUM_SIZE
+	private handMaximumSize
 
 	private cardInfoService: ProjectCardInfoService
 	private cardInitializeService: ProjectCardInitializeService
@@ -29,7 +29,6 @@ export class PlayerProjectCardStateModel {
 
 		this.hand = dto.h,
 		this.handCorporation = dto.hc,
-		//this.projects = dto.p
 		this.handMaximumSize = dto.hms
 		this.projects = {
 			playedIdList: dto.ppil,
@@ -148,7 +147,7 @@ export class PlayerProjectCardStateModel {
 			{
 				h: [],
 				hc: [],
-				hms: 0,
+				hms: GAME_HAND_MAXIMUM_SIZE,
 				ppil: [],
 				ppcs: [],
 				t: {aci: [], acmt: [], aogt: [], aopc: [], aopi: [], aoratc: [], pci: []}

@@ -9,7 +9,8 @@
 		[class.selected]="state.isSelected()"
 		[class.selectable]="state.isSelectable()"
 		[class.hovered]="_hovered"
-		[class.disabled]="isDisabled()">
+		[class.disabled]="isDisabled()"
+		[class.greyed-when-selected]="isGreyedWhenSelected()">
 		<button class="wrapper-card"
 			[class]="projectCard.cardType"
 			[class.hovered]="_hovered"

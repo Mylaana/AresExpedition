@@ -68,6 +68,7 @@
 					[event]="currentEvent">
 				</app-phase-card-upgrade-selector>
 				<app-initial-draft
+					*ngIf="currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'"
 					[event]="currentEvent"
 					(updateSelectedCardList)="updateSelectedCardList($event)">
 				</app-initial-draft>
@@ -82,14 +83,14 @@
 				[class.centered]="currentEvent.hasCardBuilder() === false"
 				@fadeIn>
 				<div class="wrapper-card-selector" >
-					<app-project-card-list #cardListSelector
+					<app-playable-card-list #cardListSelector
 						[currentPhase]="currentPhase"
 						[event]="currentEvent"
 						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
-						[listSubType]="currentEvent.subType==='selectStartingHand'?'startSelection':'none'"
+						[listSubType]="'none'"
 						(updateSelectedCardList)="updateSelectedCardList($event)"
 						(projectActivated)="onProjectActivated($event)">
-					</app-project-card-list>
+					</app-playable-card-list>
 				</div>
 			</div>
 		</div>

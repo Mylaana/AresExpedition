@@ -7,7 +7,7 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
 import { EventDesigner } from '../../../services/designers/event-designer.service';
-import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
+import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 
@@ -16,7 +16,7 @@ import { GlobalParameterNameEnum } from '../../../enum/global.enum';
   standalone: true,
   imports: [
 	NonEventButtonComponent,
-	ProjectCardListComponent
+	PlayableCardListComponent
 ],
   templateUrl: './phase-action.component.html',
   styleUrl: './phase-action.component.scss'

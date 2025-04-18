@@ -79,11 +79,8 @@ button {
 		}
 	}
 	&.selected{
-		&.sell, &.startSelection{
+		&.greyed-when-selected{
 			filter: grayscale(100%);
-		}
-		&.research{
-			filter:grayscale(0)
 		}
 	}
 }

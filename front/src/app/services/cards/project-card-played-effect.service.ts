@@ -38,6 +38,11 @@ export class ProjectCardPlayedEffectService {
 		this.clientPlayerState = playerState
 		this.clientPlayerState.playCard(card, cardType)
 
+		//add starting megacredits
+		if(card.startingMegacredits){
+			this.addRessourceToPlayer('megacredit', card.startingMegacredits)
+		}
+
 		switch(card.cardCode){
 			//Decomposing Fungus
 			case('20'):{

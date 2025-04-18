@@ -6,7 +6,7 @@ import { PlayerMessageResult } from '../../../../interfaces/websocket.interface'
 import { NonEventButton } from '../../../../models/core-game/button.model';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { WebsocketResultMessageFactory } from '../../../../services/designers/websocket-message-factory.service';
-import { ProjectCardListComponent } from '../../../cards/project/project-card-list/project-card-list.component';
+import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { HorizontalSeparatorComponent } from '../../../tools/layouts/horizontal-separator/horizontal-separator.component';
 import { GameEventComponent } from '../../game/game-event/game-event.component';
@@ -31,7 +31,7 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
   imports: [
 		CommonModule,
 		ServerEmulationComponent,
-		ProjectCardListComponent,
+		PlayableCardListComponent,
 		NavigationComponent	,
 		HorizontalSeparatorComponent,
 		NonEventButtonComponent,
@@ -50,7 +50,7 @@ export class GameMainComponent implements OnInit{
 	clientId!: myUUID
 	gameId!: myUUID
 	loaded: boolean = false
-	@ViewChild('hand') handProjectList!: ProjectCardListComponent
+	@ViewChild('hand') handProjectList!: PlayableCardListComponent
 	isScrolled = false
 	settingsButton!: NonEventButton;
 
@@ -122,11 +122,6 @@ export class GameMainComponent implements OnInit{
 		this.playerHand = this.cardInfoService.getProjectCardList(state.getProjectHandIdList())
 		this.playerPlayed = state.getProjectPlayedModelList()
 		this.playerHandCorporation = state.getCorporationHandIdList()
-
-		/*
-		if(!this.handProjectList){return}
-		this.handProjectList.updatePlayedCardList(clientState.getProjectPlayedModelList())
-		*/
 	}
 	updatePlayerList(playerIdList: myUUID[]){
 		this.playerIdList = playerIdList

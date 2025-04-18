@@ -92,7 +92,6 @@ export class ProjectCardInfoService {
 			}
 
             cardList.push(card)
-			console.log(card)
         }
         return cardList
     }

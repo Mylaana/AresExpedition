@@ -6,21 +6,21 @@ import { CardSelector } from '../../../../interfaces/global.interface';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { EventBaseModel, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
-import { PlayableCardComponent } from '../project-card/playable-card.component';
+import { PlayableCardComponent } from '../playable-card/playable-card.component';
 import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
 
 @Component({
-  selector: 'app-project-card-list',
+  selector: 'app-playable-card-list',
   standalone: true,
   imports: [
     CommonModule,
     PlayableCardComponent],
-  templateUrl: './project-card-list.component.html',
-  styleUrl: './project-card-list.component.scss'
+  templateUrl: './playable-card-list.component.html',
+  styleUrl: './playable-card-list.component.scss'
 })
-export class ProjectCardListComponent implements OnChanges{
+export class PlayableCardListComponent implements OnChanges{
 	@Input() event?: EventBaseModel;
 	@Input() eventId?: number;
 	@Input() cardList!: PlayableCardModel[]

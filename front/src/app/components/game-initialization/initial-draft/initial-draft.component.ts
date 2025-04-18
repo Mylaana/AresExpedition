@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { CommonModule } from '@angular/common';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
-import { ProjectCardListComponent } from '../../cards/project/project-card-list/project-card-list.component';
-import { EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
+import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
+import { EventBaseModel } from '../../../models/core-game/event.model';
 import { ProjectListType } from '../../../types/project-card.type';
 
 @Component({
@@ -13,7 +13,7 @@ import { ProjectListType } from '../../../types/project-card.type';
   standalone: true,
   imports: [
 	CommonModule,
-	ProjectCardListComponent],
+	PlayableCardListComponent],
   templateUrl: './initial-draft.component.html',
   styleUrl: './initial-draft.component.scss'
 })

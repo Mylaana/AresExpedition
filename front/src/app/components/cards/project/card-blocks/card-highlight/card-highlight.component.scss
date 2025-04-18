@@ -20,10 +20,15 @@
 		height: 100%;
 		opacity: 70%;
 	}
-
-	& > .startSelection {
+	& > .recycleStartingProject{
 		height: auto;
 		width: 90%;
+		aspect-ratio: 1;
+		opacity: 85%;
+	}
+	& > .selectCorporation{
+		width: 70%;
+		height: auto;
 		aspect-ratio: 1;
 		opacity: 85%;
 	}

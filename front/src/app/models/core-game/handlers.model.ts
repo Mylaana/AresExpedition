@@ -160,6 +160,7 @@ export class EventHandler {
                 let clientState = this.gameStateService.getClientState()
 				let currentSize = clientState.getHandCurrentSize()
 				let maximumSize = clientState.getHandMaximumSize()
+				console.log(currentSize, maximumSize)
                 if(currentSize <= maximumSize){
                     event.finalized = true
                     break
@@ -243,7 +244,6 @@ export class EventHandler {
 				for(let card of event.cardSelector.selectFrom){
 					card.activated = 0
 				}
-
 				break
 			}
 			case('researchPhaseResult'):{
@@ -265,6 +265,7 @@ export class EventHandler {
 			case('selectCorporation'):{
 				event.finalized = true
 				this.gameStateService.playCorporation(event.cardSelector.selectedList[0])
+				this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}

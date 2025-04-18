@@ -29,7 +29,7 @@
 				<h1>Cards Played:</h1>
 			</div>
 			<div class="wrapper-played">
-				<app-project-card-list #hand [cardList]="playerPlayed" [listType]="'played'"></app-project-card-list>
+				<app-playable-card-list #hand [cardList]="playerPlayed" [listType]="'played'"></app-playable-card-list>
 			</div>
         </div>
     </div>
@@ -40,7 +40,7 @@
 		(mouseleave)="updateHandHeight(false)">
 		<div class="hand-mask"
 			[class.masked]="_handIsHovered===false">
-			<app-project-card-list [hovered]="_handIsHovered" [background]="false" [listType]="'hand'" [cardList]="playerHand"></app-project-card-list>
+			<app-playable-card-list [hovered]="_handIsHovered" [background]="false" [listType]="'hand'" [cardList]="playerHand"></app-playable-card-list>
 		</div>
 	</div>
 </div>
