@@ -4,14 +4,14 @@
 		<div class="selected-card-zone"
 			[ngClass]="'filter-type-'+projectFilterType"
 			[class.locked]="cardBuilder.getbuilderIsLocked()">
-			<app-project-card-list
+			<app-playable-card-list
 				*ngIf="cardBuilder.getSelectedCard()!=undefined"
 				class="play-card-zone-list"
 				[cardList]="[cardBuilder.getSelectedCard()]"
 				[listType]="'builderSelectedZone'"
 				[event]="event"
 				[selectedDiscount]="discount">
-			</app-project-card-list>
+			</app-playable-card-list>
 		</div>
 		<div class="wrapper-buton-zone"
 			*ngIf="!cardBuilder.getbuilderIsLocked()">

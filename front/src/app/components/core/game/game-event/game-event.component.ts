@@ -13,7 +13,7 @@ import { EventDesigner } from '../../../../services/designers/event-designer.ser
 import { ProjectListType } from '../../../../types/project-card.type';
 import { CardBuilderListComponent } from '../../../cards/card-builder-list/card-builder-list.component';
 import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
-import { ProjectCardListComponent } from '../../../cards/project/project-card-list/project-card-list.component';
+import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { PhaseActionComponent } from "../../../phases/phase-action/phase-action.component";
 import { PhasePlanificationComponent } from '../../../phases/phase-planification/phase-planification.component';
 import { PhaseProductionComponent } from '../../../phases/phase-production/phase-production.component';
@@ -32,7 +32,7 @@ import { InitialDraftComponent } from '../../../game-initialization/initial-draf
     CommonModule,
     PhasePlanificationComponent,
     PhaseProductionComponent,
-    ProjectCardListComponent,
+    PlayableCardListComponent,
     PhaseCardUpgradeSelectorComponent,
     EventMainButtonComponent,
     CardBuilderListComponent,
@@ -79,7 +79,7 @@ export class GameEventComponent {
 	]
 	selectionActive: boolean = false
 
-	@ViewChild('cardListSelector') cardListSelector!: ProjectCardListComponent
+	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
 	private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)

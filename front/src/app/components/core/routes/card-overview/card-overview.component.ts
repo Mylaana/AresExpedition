@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectCardListComponent } from '../../../cards/project/project-card-list/project-card-list.component';
+import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { fadeIn } from '../../../../animations/animations';
@@ -7,7 +7,7 @@ import { fadeIn } from '../../../../animations/animations';
 @Component({
   selector: 'app-card-overview',
   standalone: true,
-  imports: [ProjectCardListComponent],
+  imports: [PlayableCardListComponent],
   templateUrl: './card-overview.component.html',
   styleUrl: './card-overview.component.scss',
   animations: [fadeIn]

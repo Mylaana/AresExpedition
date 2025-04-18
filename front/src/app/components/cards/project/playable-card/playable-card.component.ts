@@ -25,7 +25,6 @@ import { CardTitleComponent } from '../card-blocks/card-title/card-title.compone
 import { CardStartingMegacreditsComponent } from '../card-blocks/card-starting-megacredits/card-starting-megacredits.component';
 import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 
-
 @Component({
   selector: 'app-playable-card',
   standalone: true,
@@ -176,5 +175,9 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 			return true
 		}
 		return false
+	}
+	public isGreyedWhenSelected(): boolean {
+		if(this.parentListSubType==='none'){return false}
+		return true
 	}
 }

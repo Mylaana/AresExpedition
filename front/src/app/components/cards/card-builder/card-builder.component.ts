@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventBaseModel, EventCardBuilder, CardBuilder } from '../../../models/core-game/event.model';
-import { ProjectCardListComponent } from '../project/project-card-list/project-card-list.component';
+import { PlayableCardListComponent } from '../project/playable-card-list/playable-card-list.component';
 import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
 import { CardBuilderOptionType } from '../../../types/global.type';
@@ -13,7 +13,7 @@ import { ProjectFilterType } from '../../../types/project-card.type';
 	imports: [
 		CommonModule,
 		EventCardBuilderButtonComponent,
-		ProjectCardListComponent,
+		PlayableCardListComponent,
 	],
 	templateUrl: './card-builder.component.html',
 	styleUrl: './card-builder.component.scss'
