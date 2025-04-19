@@ -137,6 +137,7 @@ export class PlayableCardListComponent implements OnChanges{
 	private updateCardList(): void {
 		if(selectorTypes.includes(this.listType)){this.setSelector()}
 		this.setDisplay()
+		this.setBackground()
 
 
 		if(this._displayedCards!=undefined && this._displayedCards.length===0){this._displayedCards=undefined}

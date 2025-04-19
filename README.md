@@ -40,12 +40,11 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Sell event uses active phase's background for list   
 Action phase upgrade not working   
 Production phase screen not working   
-Player ready status display not working   
 Global parameters not synchronized on phase change in backend   
 Frontend data not being reset when game rollbacks to initial draft (edge case)   
+Main buttons are NOT disabled when "locked"   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
