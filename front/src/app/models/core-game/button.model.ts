@@ -6,6 +6,7 @@ import { ButtonType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerCol
 export abstract class ButtonBase {
     enabled: boolean = false
     startEnabled: boolean = false
+	displayed: boolean = true
     caption?: string
 	type!: ButtonType
     clicked(): any {}

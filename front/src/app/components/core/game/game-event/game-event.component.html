@@ -3,13 +3,13 @@
 		<div *ngIf="currentEvent.button" class="wrapper-event-button wrapper-validate-button">
 			<app-event-main-button  [button]="currentEvent.button" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
 		</div>
-		<div *ngIf="sellCardsButton.enabled" class="wrapper-event-button--smaller wrapper-sell-button">
+		<div *ngIf="sellCardsButton.displayed" class="wrapper-event-button--smaller wrapper-sell-button">
 			<app-non-event-button  [button]="sellCardsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
 		</div>
-		<div *ngIf="sellCardsCancelButton.enabled" class="wrapper-event-button--smaller">
+		<div *ngIf="sellCardsCancelButton.displayed" class="wrapper-event-button--smaller">
 			<app-non-event-button  [button]="sellCardsCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
 		</div>
-		<div *ngIf="rollbackButton.enabled" class="wrapper-event-button--smaller">
+		<div *ngIf="rollbackButton.displayed" class="wrapper-event-button--smaller">
 			<app-non-event-button  [button]="rollbackButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(rollbackButton)"></app-non-event-button>
 		</div>
 	</div>

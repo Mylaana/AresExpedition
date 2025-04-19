@@ -144,12 +144,46 @@ export class GameEventComponent {
 
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
-		this.resetSellButtonsState()
+		if(!this.currentEvent){return}
+		this.updateMainButtonsEnabled(this.currentEvent)
+		this.updateSellButtonsDisplay(this.currentEvent)
 	}
 
-	private resetSellButtonsState(): void {
-		this.sellCardsButton.resetStartEnabled()
-		this.sellCardsCancelButton.resetStartEnabled()
+	private updateMainButtonsEnabled(event: EventBaseModel): void {
+		switch(event.lockSellButton){
+			case(true):{
+				this.sellCardsButton.enabled = false
+				break
+			}
+			case(false):{
+				this.sellCardsButton.resetStartEnabled()
+				this.sellCardsCancelButton.resetStartEnabled()
+				break
+			}
+		}
+		switch(event.lockRollbackButton){
+			case(true):{
+				this.rollbackButton.enabled = false
+				break
+			}
+			case(false):{
+				this.rollbackButton.resetStartEnabled()
+				break
+			}
+		}
+	}
+	private updateSellButtonsDisplay(event: EventBaseModel){
+		switch(event.subType){
+			case('selectCardOptionalSell'):{
+				this.sellCardsCancelButton.displayed = true
+				this.sellCardsButton.displayed = false
+				break
+			}
+			default:{
+				this.sellCardsCancelButton.displayed = false
+				this.sellCardsButton.displayed = true
+			}
+		}
 	}
 	public buttonClicked(button: ButtonBase) {
 		console.log('game event button clicked:', button)
