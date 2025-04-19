@@ -9,8 +9,6 @@ import { RxStompService } from '../../../../services/websocket/rx-stomp.service'
 import { WebsocketQueryMessageFactory } from '../../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
-import { EventDesigner } from '../../../../services/designers/event-designer.service';
-import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { myUUID } from '../../../../types/global.type';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
@@ -50,7 +48,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		private rxStompService: RxStompService
 	){}
 
-
 	ngOnInit(){
 		this.cardsDeck = this.cardInfoService.getProjectCardIdList()
 
@@ -75,9 +72,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 			event => this.currentEventQueue = event
 		)
 		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe(
-			ready => this.currentGroupReady = ready
+			ready => this.onGroupReadyUpdate(ready)
 		)
-
 
 
 		//force draw card list for debug purpose
@@ -161,5 +157,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	printDrawQueue(): void {
 		this.gameStateService.currentDrawQueue.pipe(take(1)).subscribe(value => {console.log(value);});
+	}
+	onGroupReadyUpdate(groupReady: PlayerReadyModel[]): void {
+		this.currentGroupReady = groupReady
 	}
 }

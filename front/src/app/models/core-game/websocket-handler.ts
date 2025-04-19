@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsReadyQuery } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
@@ -101,12 +101,16 @@ export class WebsocketHandler {
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 	}
 
-
 	private handleMessageConnection(content: WsGameState): void {
 		if(content.gameStatus===GameStatusEnum.newGame){
 			this.gameStateService.newGame(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 			return
 		}
+
+		this.gameStateService.initializeGroupReady(
+			WebsocketResultMessageFactory.inputToGroupReady(content.groupReady),
+			WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+
 
 		switch(content.gameStatus){
 			case(GameStatusEnum.selectCorporation):{
@@ -122,21 +126,24 @@ export class WebsocketHandler {
 				break
 			}
 		}
+		if(this.gameStateService.getClientReady()){
+			this.gameStateService.addEventQueue(EventDesigner.createGeneric('waitingGroupReady'),'first')
+		}
 	}
 
 	//Group messages
     private handleGroupMessageReadyResult(groupReady: WsGroupReady[]): void {
         //setting ready
         this.gameStateService.setGroupReady(groupReady)
-
         switch(this.gameStateService.getClientReady()){
-            case(false):{
-                this.gameStateService.finalizeEventWaitingGroupReady()
+			case(false):{
+                //this.gameStateService.finalizeEventWaitingGroupReady()
                 return
             }
             case(true):{
-                this.gameStateService.clearEventQueue()
-                this.gameStateService.addEventQueue(EventDesigner.createGeneric("waitingGroupReady"),"first")
+				console.log('client ready:')
+                //this.gameStateService.clearEventQueue()
+                //this.gameStateService.addEventQueue(EventDesigner.createGeneric("waitingGroupReady"),"first")
                 return
             }
         }
@@ -151,7 +158,7 @@ export class WebsocketHandler {
 		this.gameStateService.clearEventQueue()
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
-		this.gameStateService.selectStartingHand()
+		this.gameStateService.setSelectStartingHandEvents()
 	}
 	private handleMessageSelectCorporation(content: WsGameState){
 		console.log('WS SELECT CORP')
@@ -159,6 +166,6 @@ export class WebsocketHandler {
 		this.gameStateService.clearEventQueue()
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
-		this.gameStateService.selectCorporation()
+		this.gameStateService.setSelectCorporationEvents()
 	}
 }

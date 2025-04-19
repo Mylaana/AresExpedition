@@ -109,7 +109,6 @@ export class EventHandler {
 		enabled = (heatStock>=8  || plantStock>=8 || (heatStock>=5  && plantStock>=3)) === false
 
 		this.currentEvent.button?.updateEnabled(enabled)
-		console.log(this.currentEvent.button)
 	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
@@ -160,7 +159,6 @@ export class EventHandler {
                 let clientState = this.gameStateService.getClientState()
 				let currentSize = clientState.getHandCurrentSize()
 				let maximumSize = clientState.getHandMaximumSize()
-				console.log(currentSize, maximumSize)
                 if(currentSize <= maximumSize){
                     event.finalized = true
                     break
@@ -258,14 +256,14 @@ export class EventHandler {
 				let drawNumber = event.cardSelector.selectedList.length
 				event.finalized = true
 				this.gameStateService.removeCardsFromClientHandByModel(event.cardSelector.selectedList, 'project')
-				this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
+				//this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
 				this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber}}), 'first')
 				break
 			}
 			case('selectCorporation'):{
 				event.finalized = true
 				this.gameStateService.playCorporation(event.cardSelector.selectedList[0])
-				this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
+				//this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
@@ -305,7 +303,6 @@ export class EventHandler {
 			case('endOfPhase'):{
 				this.gameStateService.setClientReady(true)
 				this.rxStompService.publishPlayerState(this.gameStateService.getClientState())
-				//this.rxStompService.publishClientReady(true)
 				break
 			}
 			case('buildCard'):{
@@ -355,6 +352,7 @@ export class EventHandler {
 				break
 			}
 			case('upgradePhaseCards'):{break}
+			case('waitingGroupReady'):{break}
 			default:{Utils.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}
@@ -431,7 +429,7 @@ export class EventHandler {
 		}
 	}
 	private finishEventPhase(event: EventPhase): void {
-		Utils.logEventResolution('resolving event: ','finishEventPhase ', event.subType)
+		Utils.logEventResolution('resolving event: ','finishEventPhase', event.subType)
 
 		switch(event.subType){
 			case('developmentPhase'):case('constructionPhase'):case('researchPhase'):{
