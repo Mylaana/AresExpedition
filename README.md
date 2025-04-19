@@ -45,12 +45,15 @@ Selected Phase list pannel showing all phases
 Action phase upgrade not working   
 Production phase screen not working   
 Player ready status display not working   
+Global parameters not synchronized on phase change in backend   
+Frontend data not being reset when game rollbacks to initial draft (edge case)   
 
 ## Refactoring :
+Websocket: remove the global channel and switch to multiple sendings on private ones   
 text with image component: refactoring   
-test needs: empty components from the app logic and transfer it into services/classes   
+test needs: empty components from the app logic and transfer it into services/classes    
 global: removing obvious comments   
-project-card-info-service (and some other?): switch to static
+project-card-info-service (and some other?): switch to static   
 TriggerState: switch out trigger id checks from model to a service   
 Optimize data volume exchanged   
 
