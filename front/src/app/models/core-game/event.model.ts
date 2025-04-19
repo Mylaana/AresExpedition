@@ -20,6 +20,7 @@ export abstract class EventBaseModel {
     waiterId?: number
 	lockSellButton: boolean = false
 	lockRollbackButton: boolean = false
+	lockValidateButton: boolean = false
 
     hasSelector(): boolean {return false}
 	hasCardsToSelectFrom(): boolean {return false}

@@ -145,32 +145,16 @@ export class GameEventComponent {
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
 		if(!this.currentEvent){return}
-		this.updateMainButtonsEnabled(this.currentEvent)
+		this.resetMainButtonState(this.currentEvent)
 		this.updateSellButtonsDisplay(this.currentEvent)
 	}
-
-	private updateMainButtonsEnabled(event: EventBaseModel): void {
-		switch(event.lockSellButton){
-			case(true):{
-				this.sellCardsButton.enabled = false
-				break
-			}
-			case(false):{
-				this.sellCardsButton.resetStartEnabled()
-				this.sellCardsCancelButton.resetStartEnabled()
-				break
-			}
-		}
-		switch(event.lockRollbackButton){
-			case(true):{
-				this.rollbackButton.enabled = false
-				break
-			}
-			case(false):{
-				this.rollbackButton.resetStartEnabled()
-				break
-			}
-		}
+	private resetMainButtonState(event: EventBaseModel): void {
+		this.sellCardsButton.resetStartEnabled()
+		this.sellCardsButton.locked = event.lockSellButton
+		this.sellCardsCancelButton.resetStartEnabled()
+		this.sellCardsCancelButton.locked = event.lockSellButton
+		this.rollbackButton.resetStartEnabled()
+		this.rollbackButton.locked = event.lockRollbackButton
 	}
 	private updateSellButtonsDisplay(event: EventBaseModel){
 		switch(event.subType){
@@ -220,5 +204,5 @@ export class GameEventComponent {
 			}
 		}
 	}
-	public onPhaseSelected(): void {this.eventHandler.updateEventMainButton(true)}
+	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
 }

@@ -127,7 +127,8 @@ describe('Service - Designers - Event', () => {
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
                 expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
-                expectedEvent.locksEventpile = true
+				expectedEvent.lockRollbackButton = true
+				expectedEvent.lockSellButton = true
 
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
 
@@ -142,7 +143,8 @@ describe('Service - Designers - Event', () => {
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = expectedArgs.cardSelector?.cardInitialState
                 expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
-                expectedEvent.locksEventpile = true
+                expectedEvent.lockRollbackButton = true
+				expectedEvent.lockSellButton = true
 
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType, expectedArgs)
 
@@ -155,6 +157,8 @@ describe('Service - Designers - Event', () => {
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
                 expectedEvent.cardSelector.selectionQuantityTreshold = 'min'
+				expectedEvent.lockRollbackButton = true
+				expectedEvent.lockSellButton = true
 
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
 
@@ -612,6 +616,9 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.subType = expectedSubType
                 expectedEvent.waiterId = expectedWaiterId
                 expectedEvent.autoFinalize = false
+				expectedEvent.lockRollbackButton = true
+				expectedEvent.lockSellButton = true
+				expectedEvent.lockValidateButton = true
 
                 let event = EventDesigner.createWaiter(expectedSubType, expectedWaiterId)
 
