@@ -61,12 +61,15 @@ export class EventDesigner{
             case('discardCards'):{
                 event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0} card(s) to discard.`
                 event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
-                event.locksEventpile = true
+				event.lockSellButton = true
+				event.lockRollbackButton = true
                 break
             }
             case('selectCardForcedSell'):{
                 event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
                 event.cardSelector.selectionQuantityTreshold = 'min'
+				event.lockSellButton = true
+				event.lockRollbackButton = true
                 break
             }
             case('selectCardOptionalSell'):{
@@ -269,6 +272,8 @@ export class EventDesigner{
             }
             case('waitingGroupReady'):{
                 event.autoFinalize = false
+				event.lockRollbackButton = true
+				event.lockSellButton = true
                 break
             }
 			case('addForestPoint'):{
@@ -308,8 +313,10 @@ export class EventDesigner{
         switch(subType){
             case('deckWaiter'):{
                 event.autoFinalize = false
-                event.locksEventpile = true
                 event.waiterId = waiterId
+				event.lockSellButton = true
+				event.lockRollbackButton = true
+				event.lockValidateButton = true
                 break
             }
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}

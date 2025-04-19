@@ -12,13 +12,15 @@ type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelecte
 export abstract class EventBaseModel {
     readonly type!: EventType
     readonly subType!: any
-    readonly locksEventpile: boolean = false
     finalized: boolean = false
     autoFinalize: boolean = false
     id!: number
     button?: EventMainButton
     readonly title?: string
     waiterId?: number
+	lockSellButton: boolean = false
+	lockRollbackButton: boolean = false
+	lockValidateButton: boolean = false
 
     hasSelector(): boolean {return false}
 	hasCardsToSelectFrom(): boolean {return false}
@@ -29,7 +31,6 @@ export abstract class EventBaseModel {
 
 export abstract class EventBaseCardSelector extends EventBaseModel {
     override title: string = 'no title provided'
-    override locksEventpile!: boolean
     override button?: EventMainButtonSelector
     refreshSelectorOnSwitch: boolean = true
     cardSelector: CardSelector = {
@@ -336,7 +337,6 @@ export class EventGeneric extends EventBaseModel {
 
 export class EventDeckQuery extends EventBaseModel {
     override readonly type: EventType = 'deck'
-    override locksEventpile!: boolean
     override subType!: EventDeckQuerySubType;
     override autoFinalize: boolean = true
     override waiterId!:number
@@ -346,7 +346,6 @@ export class EventDeckQuery extends EventBaseModel {
 
 export class EventWaiter extends EventBaseModel {
     override readonly type: EventType = 'waiter'
-    override locksEventpile: boolean = true
     override subType!: EventWaiterSubType;
     override autoFinalize: boolean = true
     override waiterId!: number

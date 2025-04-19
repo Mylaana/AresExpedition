@@ -51,8 +51,9 @@ export class EventHandler {
 	public eventMainButtonClicked(): void {
 		this.finishEventEffect()
 	}
-	public updateEventMainButton(enabled: boolean): void {
+	public updateValidateButton(enabled: boolean): void {
 		this.currentEvent.button?.updateEnabled(enabled)
+		this.currentEvent.button?.locked?this.currentEvent.lockValidateButton:false
 	}
 	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
 		let event = this.currentEvent as EventCardBuilder

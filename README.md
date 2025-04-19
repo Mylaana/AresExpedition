@@ -59,12 +59,10 @@ Optimize data volume exchanged
 New game creating new DB entry
 
 ### Cards
-Discard Event should "lock" the Sell card button while being resolved  
 Prerequisites for playing project cards feature
 Add back mod cost calculation in hand (removed cause of Expression had changed error), error was due to card showing in hand and cost mod calculated in builder selector with cost modified
 
 ### Misc
-gameEventComponent: add Lockpile control   
 websocket: finish the game state saving system   
 Add Ocean backend mechanic
 Add settings options

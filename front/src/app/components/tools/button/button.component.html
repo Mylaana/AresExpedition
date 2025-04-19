@@ -1,8 +1,7 @@
 <div *ngIf="button.type==='eventMain' || button.type==='nonEvent'" class="wrapper-button">
 	<button class="main"
-		[disabled]="button.enabled===false"
 		[class.hovered]="_isHovered"
-		[ngClass]="[button.enabled? 'enabled':'disabled',shape?'button-shape--'+shape:'']"
+		[ngClass]="[button.enabled && !button.locked? 'enabled':'disabled',shape?'button-shape--'+shape:'']"
 		(mouseenter)="_isHovered = true"
 		(mouseleave)="_isHovered = false"
 		(click)="onClick(button)">
