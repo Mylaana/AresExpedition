@@ -1,0 +1,28 @@
+:host{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+.wrapper-main{
+	width: fit-content;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 30px;
+}
+.wrapper-player{
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	height: auto;
+}
+img{
+	height: 35px;
+	aspect-ratio: 1;
+}
+h1{
+	font-size: 30px;
+}

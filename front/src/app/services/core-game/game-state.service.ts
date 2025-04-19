@@ -9,7 +9,7 @@ import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { WsDrawResult, WsGroupReady } from "../../interfaces/websocket.interface";
+import { WsDrawResult, WsGroupReady, WSGroupState } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
@@ -394,9 +394,6 @@ export class GameState{
             }
         }
 
-		if(this.eventQueue.getValue().length===0){
-			newEventQueue.push(EventDesigner.createGeneric('waitingGroupReady'))
-		}
         this.eventQueue.next(newEventQueue)
     }
 	/*
@@ -539,8 +536,8 @@ export class GameState{
         }
     }
     public setGroupReady(wsGroupReady: WsGroupReady[]): void {
-        for(let ready of wsGroupReady){
-            this.setPlayerReady(ready.playerId,ready.ready)
+		for(let ready of wsGroupReady){
+			this.setPlayerReady(ready.playerId,ready.ready)
         }
     }
     public clearEventQueue(){
@@ -574,31 +571,6 @@ export class GameState{
 
 		//creates and add player to groupPlayerSelectedPhase
 		let result: PlayerPhase[] = []
-		/*
-		for(let i=0; i<4; i++){
-			let newPlayerPhase: PlayerPhase;
-			newPlayerPhase = {
-				"playerId": i,
-				"currentSelectedPhase": SelectablePhaseEnum.undefined,
-				"currentPhaseType": undefined,
-				"previousSelectedPhase": SelectablePhaseEnum.undefined
-			}
-			result.push(newPlayerPhase)
-		}
-		*/
-
-        //creates and add player to groupPlayerReady
-		let groupReady: PlayerReadyModel[] = []
-		/*
-		for(let i=0; i<4; i++){
-			let playerReady = new PlayerReadyModel;
-			playerReady.id = i
-			playerReady.isReady = false
-
-			groupReady.push(playerReady)
-		}
-		*/
-        this.groupPlayerReady.next(groupReady)
 
 		this.updateGroupPlayerSelectedPhase(result)
 		console.log('state loaded: ', this.groupPlayerState.getValue())
@@ -608,8 +580,6 @@ export class GameState{
 				this.updateClientState(state)
 			}
 		}
-
-		console.log('client loaded:', this.clientId, this.clientState.getValue())
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
@@ -629,11 +599,19 @@ export class GameState{
 		this.rxStompService.publishPlayerState(clientState)
 		console.log('newGame state loaded:', clientState)
 	}
-	public selectStartingHand(): void {
-		this.addEventQueue(EventDesigner.createCardSelector('selectStartingHand'), 'first')
+	public setSelectStartingHandEvents(): void {
+		let events: EventBaseModel[] = []
+		events.push(EventDesigner.createCardSelector('selectStartingHand'))
+		events.push(EventDesigner.createGeneric('endOfPhase'))
+		events.push(EventDesigner.createGeneric('waitingGroupReady'))
+		this.addEventQueue(events,'first')
 	}
-	public selectCorporation(): void {
-		this.addEventQueue(EventDesigner.createCardSelector('selectCorporation', {cardSelector: {selectFrom: this.getClientHandCorporationModelList()}}), 'first')
+	public setSelectCorporationEvents(): void {
+		let events: EventBaseModel[] = []
+		events.push(EventDesigner.createCardSelector('selectCorporation', {cardSelector: {selectFrom: this.getClientHandCorporationModelList()}}))
+		events.push(EventDesigner.createGeneric('endOfPhase'))
+		events.push(EventDesigner.createGeneric('waitingGroupReady'))
+		this.addEventQueue(events,'first')
 	}
 	public playCorporation(corporation: PlayableCardModel): void {
 		this.playCardFromClientHand(corporation, 'corporation')
@@ -650,5 +628,22 @@ export class GameState{
 		}
 
 		return groupState
+	}
+	public initializeGroupReady(wsGroupReady: WsGroupReady[], wsGroupState: PlayerStateDTO[]): void {
+		let groupReady: PlayerReadyModel[] = []
+		for(let state of wsGroupState){
+			let playerReady = new PlayerReadyModel
+			playerReady.id = state.infoState.i
+			playerReady.name = state.infoState.n
+
+			for(let ready of wsGroupReady){
+				if(ready.playerId===playerReady.id){
+					playerReady.isReady = ready.ready
+					break
+				}
+			}
+			groupReady.push(playerReady)
+		}
+		this.groupPlayerReady.next(groupReady)
 	}
 }

@@ -47,7 +47,8 @@
 			<div class="wrapper-other-event"
 				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase'
 				|| currentEvent.subType==='actionPhase' || currentEvent.subType==='upgradePhaseCards'
-				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'"
+				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'
+				|| currentEvent.subType==='waitingGroupReady'"
 				@fadeIn>
 				<app-phase-planification
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
@@ -72,11 +73,10 @@
 					[event]="currentEvent"
 					(updateSelectedCardList)="updateSelectedCardList($event)">
 				</app-initial-draft>
-			</div>
-            <div class="ares-background"
-				*ngIf="currentEvent.subType==='waitingGroupReady'"
-				@fadeIn>
-				<h1>[Waiting for other players to be ready]</h1>
+				<app-waiting-ready
+					*ngIf="currentEvent.subType==='waitingGroupReady'"
+					[event]="currentEvent">
+				</app-waiting-ready>
 			</div>
 			<div class="wrapper-selectors"
 				*ngIf="currentEvent.hasCardsToSelectFrom() && currentEvent.subType!='actionPhase' && currentEvent.subType!='selectStartingHand' && currentEvent.subType!='selectCorporation'"

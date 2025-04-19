@@ -22,6 +22,7 @@ import { NonEventButtonComponent } from '../../../tools/button/non-event-button.
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { InitialDraftComponent } from '../../../game-initialization/initial-draft/initial-draft.component';
+import { WaitingReadyComponent } from '../../waiting-ready/waiting-ready.component';
 
 //this component is the main controller, and view
 
@@ -40,7 +41,8 @@ import { InitialDraftComponent } from '../../../game-initialization/initial-draf
     TextWithImageComponent,
     PhaseActionComponent,
 	HexedBackgroundComponent,
-	InitialDraftComponent
+	InitialDraftComponent,
+	WaitingReadyComponent
 ],
 	templateUrl: './game-event.component.html',
 	styleUrl: './game-event.component.scss',
@@ -108,13 +110,11 @@ export class GameEventComponent {
 	}
 	updatePhase(phase:NonSelectablePhaseEnum):void{
 		this.currentPhase = phase
+		if(this.gameStateService.getClientReady()){return}
 		let events: EventBaseModel[] = []
 		switch(phase){
 			case(NonSelectablePhaseEnum.undefined):{return}
-			case(NonSelectablePhaseEnum.planification):{
-				this.gameStateService.clearEventQueue()
-				events.push(EventDesigner.createGeneric('planificationPhase'))
-				break}
+			case(NonSelectablePhaseEnum.planification):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
 			case(NonSelectablePhaseEnum.development):{events.push(EventDesigner.createPhase('developmentPhase'));break}
 			case(NonSelectablePhaseEnum.construction):{events.push(EventDesigner.createPhase('constructionPhase'));break}
 			case(NonSelectablePhaseEnum.action):{events.push(EventDesigner.createCardSelector('actionPhase'));break}
@@ -124,6 +124,7 @@ export class GameEventComponent {
 		}
 		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))
 		events.push(EventDesigner.createGeneric('endOfPhase'))
+		events.push(EventDesigner.createGeneric('waitingGroupReady'))
 		this.gameStateService.addEventQueue(events,'last')
 	}
 

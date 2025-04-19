@@ -1,0 +1,12 @@
+<div class="wrapper-main ares-background ares-border" @fadeIn>
+	<div class="wrapper-player"
+		*ngFor="let playerReady of _groupPlayerReady">
+		<h1>{{playerReady.name}}</h1>
+		<ng-container *ngIf="playerReady.isReady">
+			<img src="/assets/other/validate.png" alt="">
+		</ng-container>
+		<ng-container *ngIf="!playerReady.isReady">
+			<img src="/assets/other/hourglass.png" alt="">
+		</ng-container>
+	</div>
+</div>
