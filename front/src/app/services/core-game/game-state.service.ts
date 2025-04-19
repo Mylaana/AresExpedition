@@ -558,15 +558,10 @@ export class GameState{
 	}
 	public setGroupStateFromJson(dto: PlayerStateDTO[]){
 		let groupPlayerState: PlayerStateModel[] = []
-		let playerIdList: myUUID[] = []
 		for(let playerStateDTO of dto){
-			//add playerId to list
-			playerIdList.push(playerStateDTO.infoState.i)
-
 			//add playerstate
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
 		}
-		this.setPlayerIdList(playerIdList)
 		this.updateGroupPlayerState(groupPlayerState)
 
 		//creates and add player to groupPlayerSelectedPhase
