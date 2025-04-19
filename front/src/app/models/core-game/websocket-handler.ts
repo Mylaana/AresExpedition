@@ -7,6 +7,7 @@ import { EventDesigner } from "../../services/designers/event-designer.service";
 import { Utils } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";
+import { SelectablePhaseEnum } from "../../enum/phase.enum";
 
 @Injectable()
 export class WebsocketHandler {
@@ -14,20 +15,6 @@ export class WebsocketHandler {
 
     constructor(private gameStateService: GameState){}
 
-	/*
-    handleMessage(message: WsInputMessage){
-        switch(message.subscription){
-            case(SubscriptionEnum.player):{
-                this.handlePlayerMessage(WebsocketResultMessageFactory.createPlayerMessageResult(message.message))
-                break
-            }
-            case(SubscriptionEnum.group):{
-                this.handleGroupMessage(WebsocketResultMessageFactory.createGroupMessageResult(message.message))
-                break
-            }
-        }
-    }
-	*/
     public handlePlayerMessage(message: PlayerMessageResult){
         Utils.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
         switch(message.contentEnum){
@@ -92,6 +79,7 @@ export class WebsocketHandler {
 		this.gameStateService.setCurrentPhase(content.currentPhase)
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+		this.gameStateService.setSelectedPhaseList(content.selectedPhase)
     }
 	private handleMessageStartedGameClientGameState(content: WsGameState): void {
 		this.gameStateService.reset()
@@ -99,6 +87,8 @@ export class WebsocketHandler {
 		this.gameStateService.setCurrentPhase(content.currentPhase)
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+		this.gameStateService.setSelectedPhaseList(content.selectedPhase)
+		console.log(content.selectedPhase)
 	}
 
 	private handleMessageConnection(content: WsGameState): void {
@@ -135,18 +125,6 @@ export class WebsocketHandler {
     private handleGroupMessageReadyResult(groupReady: WsGroupReady[]): void {
         //setting ready
         this.gameStateService.setGroupReady(groupReady)
-        switch(this.gameStateService.getClientReady()){
-			case(false):{
-                //this.gameStateService.finalizeEventWaitingGroupReady()
-                return
-            }
-            case(true):{
-				console.log('client ready:')
-                //this.gameStateService.clearEventQueue()
-                //this.gameStateService.addEventQueue(EventDesigner.createGeneric("waitingGroupReady"),"first")
-                return
-            }
-        }
     }
 	private handleGroupMessageGameState(groupState: PlayerStateDTO[]): void {
 		this.gameStateService.setGroupStateFromJson(groupState)
@@ -167,5 +145,8 @@ export class WebsocketHandler {
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setSelectCorporationEvents()
+	}
+	private handleGroupMessageSelectedPhaseList(content: SelectablePhaseEnum[]){
+
 	}
 }

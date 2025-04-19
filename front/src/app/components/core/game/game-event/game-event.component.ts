@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
-import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
+import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
 import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../../models/core-game/event.model';
@@ -81,6 +81,8 @@ export class GameEventComponent {
 	]
 	selectionActive: boolean = false
 
+	_selectedPhaseList: SelectablePhaseEnum[] = []
+
 	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
 	private readonly eventHandler = inject(EventHandler)
@@ -96,6 +98,7 @@ export class GameEventComponent {
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
+		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()

@@ -20,14 +20,14 @@
 	</div>
 	<div @enterFromLeft id="round-pannel" class="ares-background ares-border"
 		*ngIf="currentPhase!='PLANIFICATION'">
-		<ng-container *ngFor="let phase of phaseList">
-			<ng-container *ngIf="phase!='PLANIFICATION'">
+		<ng-container *ngFor="let phase of _selectedPhaseList">
+			<ng-container>
 				<div class="wrapper-phase"
-					[class.current]="currentPhase===phase">
+					[class.current]="currentPhase.toString()===phase.toString()">
 					<app-text-with-image [rawText]="'$other_phase_'+ (phase | lowercase) +'$'"></app-text-with-image>
 				</div>
 				<div class="wrapper-next"
-					*ngIf="phase!='RESEARCH'">
+					*ngIf="phase!=_selectedPhaseList[_selectedPhaseList.length-1]">
 					<app-text-with-image [rawText]="'$other_next$'"></app-text-with-image>
 				</div>
 			</ng-container>

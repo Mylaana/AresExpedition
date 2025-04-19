@@ -83,7 +83,7 @@ export class WebsocketResultMessageFactory{
 		let result: PlayerStateDTO[] = []
 		const entries = Object.entries(content);
 		entries.forEach(([key, value]) => {
-			result.push(value);
+			result.push(value)
 		});
 		return result
 	}

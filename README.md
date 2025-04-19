@@ -41,7 +41,6 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 Sell event uses active phase's background for list   
-Selected Phase list pannel showing all phases   
 Action phase upgrade not working   
 Production phase screen not working   
 Player ready status display not working   
