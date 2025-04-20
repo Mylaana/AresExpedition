@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<div @enterFromLeft id="round-pannel" class="ares-background ares-border"
-		*ngIf="currentPhase!='PLANIFICATION'">
+		*ngIf="currentPhase!='PLANIFICATION' && _selectedPhaseList.length!=0">
 		<ng-container *ngFor="let phase of _selectedPhaseList">
 			<ng-container>
 				<div class="wrapper-phase"

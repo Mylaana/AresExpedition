@@ -24,7 +24,7 @@ export class ButtonComponent implements OnChanges {
 	@Input() selected!: boolean;
 	_imageUrl!: string
 	_caption!: string
-	_isHovered: boolean = false
+	private hovered: boolean = false
 	_style: style ='plain'
 	_color: PlayerColor
 
@@ -53,7 +53,17 @@ export class ButtonComponent implements OnChanges {
 	onClick(button: ButtonBase){
 		this.buttonClicked.emit(button)
 	}
-
+	isHovered(): boolean {
+		if(this.button.locked){return false}
+		return this.hovered
+	}
+	setHovered(hovered: boolean){
+		this.hovered = hovered
+	}
+	isEnabled(): boolean {
+		if(this.button.locked){return false}
+		return this.button.enabled
+	}
 	private handleImageButtonChange(){
 		let imageButton = this.button as ImageButton
 		this._imageUrl = imageButton.imageUrl

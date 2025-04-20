@@ -148,16 +148,23 @@ export class GameEventComponent {
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
 		if(!this.currentEvent){return}
+		this.resetValidateButtonState(this.currentEvent)
 		this.resetMainButtonState(this.currentEvent)
 		this.updateSellButtonsDisplay(this.currentEvent)
 	}
 	private resetMainButtonState(event: EventBaseModel): void {
+
 		this.sellCardsButton.resetStartEnabled()
 		this.sellCardsButton.locked = event.lockSellButton
 		this.sellCardsCancelButton.resetStartEnabled()
 		this.sellCardsCancelButton.locked = event.lockSellButton
 		this.rollbackButton.resetStartEnabled()
 		this.rollbackButton.locked = event.lockRollbackButton
+	}
+	private resetValidateButtonState(event: EventBaseModel): void {
+		if(!event.button){return}
+		event.button.resetStartEnabled()
+		event.button.locked = event.lockValidateButton
 	}
 	private updateSellButtonsDisplay(event: EventBaseModel){
 		switch(event.subType){

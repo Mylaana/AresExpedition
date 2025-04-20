@@ -274,6 +274,7 @@ export class EventDesigner{
                 event.autoFinalize = false
 				event.lockRollbackButton = true
 				event.lockSellButton = true
+				event.lockValidateButton = true
                 break
             }
 			case('addForestPoint'):{

@@ -1,9 +1,13 @@
 <div *ngIf="button.type==='eventMain' || button.type==='nonEvent'" class="wrapper-button">
 	<button class="main"
-		[class.hovered]="_isHovered"
-		[ngClass]="[button.enabled && !button.locked? 'enabled':'disabled',shape?'button-shape--'+shape:'']"
-		(mouseenter)="_isHovered = true"
-		(mouseleave)="_isHovered = false"
+		[disabled]="!isEnabled()"
+		[class.hovered]="isHovered()"
+		[ngClass]="[
+			button.enabled && !button.locked? 'enabled':'disabled',
+			shape?'button-shape--'+shape:''
+			]"
+		(mouseenter)="setHovered(true)"
+		(mouseleave)="setHovered(false)"
 		(click)="onClick(button)">
 
 		<div class="wrapper-elements">
@@ -11,22 +15,22 @@
 				[ngClass]="['button-shape--'+shape, 'gradiant-mask--'+shape]">
 				<div [ngClass]="['button-gradiant-background--'+shape, 'button-shape--'+shape]"></div>
 			</div>
-			<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, button.enabled? 'enabled':'disabled']"
-				[class.hovered]="_isHovered">
+			<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, isEnabled()? 'enabled':'disabled']"
+				[class.hovered]="isHovered()">
 				<app-text-with-image [rawText]="_caption"></app-text-with-image>
 			</div>
-			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, button.enabled? 'enabled':'disabled']"
-				[class.hovered]="_isHovered">
+			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, isEnabled()? 'enabled':'disabled']"
+				[class.hovered]="isHovered()">
 			</div>
 			<div *ngIf="_style==='floating'"
-				[ngClass]="[button.enabled? 'enabled':'disabled', 'button-border--' + shape]"
-				[class.hovered]="_isHovered" >
+				[ngClass]="[isEnabled()? 'enabled':'disabled', 'button-border--' + shape]"
+				[class.hovered]="isHovered()" >
 			</div>
 		</div>
 	</button>
 	<div *ngIf="_style==='floating'" class="shadow"
-		[class.hovered]="_isHovered"
-		[ngClass]="[button.enabled? 'enabled':'disabled']">
+		[class.hovered]="isHovered()"
+		[ngClass]="[isEnabled()? 'enabled':'disabled']">
 	</div>
 </div>
 <div *ngIf="button.type==='image'" class="wrapper-button">
@@ -39,7 +43,8 @@
 </div>
 <div *ngIf="button.type==='color'" class="wrapper-button">
 	<button [ngClass]="'color-button--'+_color" (click)="onClick(button)"
-	[class.hovered]="_isHovered"
-	(mouseenter)="_isHovered = true"
-	(mouseleave)="_isHovered = false"></button>
+		[class.hovered]="isHovered()"
+		(mouseenter)="setHovered(true)"
+		(mouseleave)="setHovered(false)">
+	</button>
 </div>
