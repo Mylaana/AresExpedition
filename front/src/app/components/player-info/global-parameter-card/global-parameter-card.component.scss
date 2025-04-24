@@ -93,10 +93,10 @@ app-text-with-image{
 	height: 100%;
 
 	&.temperature{
-		width: floor(math.div(100%, 20));
+		width: math.floor(math.div(100%, 20));
 	}
 	&.oxygen, &.infrastructure{
-		width: floor(math.div(100%, 15));
+		width: math.floor(math.div(100%, 15));
 	}
 	&.current{
 		border: black 1px solid;

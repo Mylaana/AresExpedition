@@ -12,17 +12,16 @@ import { Subject, takeUntil } from 'rxjs';
 import { myUUID } from '../../../types/global.type';
 
 @Component({
-	selector: 'app-player-pannel',
-	standalone: true,
-	imports: [
-		CommonModule,
-		RessourcePannelComponent,
-		TagPannelComponent,
-		GlobalPannelComponent
-	],
-	templateUrl: './player-pannel.component.html',
-	styleUrl: './player-pannel.component.scss',
-	animations: [expandCollapseVertical],
+    selector: 'app-player-pannel',
+    imports: [
+        CommonModule,
+        RessourcePannelComponent,
+        TagPannelComponent,
+        GlobalPannelComponent
+    ],
+    templateUrl: './player-pannel.component.html',
+    styleUrl: './player-pannel.component.scss',
+    animations: [expandCollapseVertical]
 })
 export class PlayerPannelComponent implements OnInit, OnDestroy{
 	@Input() playerId!: myUUID;

@@ -8,14 +8,13 @@ import { PlayerStateModel } from '../../../../models/player-info/player-state.mo
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-phase-card-upgrade-selector',
-  standalone: true,
-  imports: [
-	CommonModule,
-	PhaseCardUpgradeListComponent
-],
-  templateUrl: './phase-card-upgrade-selector.component.html',
-  styleUrl: './phase-card-upgrade-selector.component.scss'
+    selector: 'app-phase-card-upgrade-selector',
+    imports: [
+        CommonModule,
+        PhaseCardUpgradeListComponent
+    ],
+    templateUrl: './phase-card-upgrade-selector.component.html',
+    styleUrl: './phase-card-upgrade-selector.component.scss'
 })
 export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 	@Input() event!: EventBaseModel

@@ -1,4 +1,5 @@
-@use "sass:map";
+@use 'sass:map';
+@use 'sass:color';
 $transition-delay : 0.15s;
 $shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right', 'action', 'selection_rounded_square');
 $border-shape-name: ('hex_floating', 'action');
@@ -13,7 +14,7 @@ $shape-width: (
 	'selection_rounded_square': 0
 );
 $disabled-color: gray;
-$disabled-border: darken(gray, 10%);
+$disabled-border: color.scale(gray, $lightness: -15%);
 $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 
 .wrapper-button{

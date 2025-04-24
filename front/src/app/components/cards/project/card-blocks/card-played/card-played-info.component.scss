@@ -1,3 +1,4 @@
+@use 'sass:color';
 $size: calc(var(--card-width) * .13);
 :host{
     display: flex;
@@ -18,7 +19,7 @@ $size: calc(var(--card-width) * .13);
 	border-bottom-right-radius: 0;
     background: rgba(0, 0, 0, .5);
 	margin-bottom: 5px;
-	background: rgba(darken(gold, 30%), .3);
+	background: rgba(color.scale(gold, $lightness: -50%), .3);
     & img{
         height: calc($size * .8);
 		aspect-ratio: 1;

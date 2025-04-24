@@ -10,15 +10,14 @@ import { Utils } from '../../../utils/utils';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 
 @Component({
-	selector: 'app-global-parameter-pannel',
-	standalone: true,
-	imports: [
-		CommonModule,
-		GlobalParameterCardComponent,
-		OceanCardComponent
-	],
-	templateUrl: './global-parameter-pannel.component.html',
-	styleUrl: './global-parameter-pannel.component.scss'
+    selector: 'app-global-parameter-pannel',
+    imports: [
+        CommonModule,
+        GlobalParameterCardComponent,
+        OceanCardComponent
+    ],
+    templateUrl: './global-parameter-pannel.component.html',
+    styleUrl: './global-parameter-pannel.component.scss'
 })
 export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	_dummyId = [0, 1, 2, 3]

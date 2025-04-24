@@ -14,13 +14,12 @@ import { myUUID } from '../../../../types/global.type';
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
 @Component({
-	selector: 'app-server-emulation',
-	standalone: true,
-	imports: [
-		CommonModule,
-	],
-	templateUrl: './server-emulation.component.html',
-	styleUrl: './server-emulation.component.scss',
+    selector: 'app-server-emulation',
+    imports: [
+        CommonModule,
+    ],
+    templateUrl: './server-emulation.component.html',
+    styleUrl: './server-emulation.component.scss'
 })
 export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestroy {
 	debug: boolean = false;

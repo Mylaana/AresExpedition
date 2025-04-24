@@ -27,30 +27,29 @@ import { WaitingReadyComponent } from '../../waiting-ready/waiting-ready.compone
 //this component is the main controller, and view
 
 @Component({
-  selector: 'app-game-event',
-  standalone: true,
-  imports: [
-    CommonModule,
-    PhasePlanificationComponent,
-    PhaseProductionComponent,
-    PlayableCardListComponent,
-    PhaseCardUpgradeSelectorComponent,
-    EventMainButtonComponent,
-    CardBuilderListComponent,
-    NonEventButtonComponent,
-    TextWithImageComponent,
-    PhaseActionComponent,
-	HexedBackgroundComponent,
-	InitialDraftComponent,
-	WaitingReadyComponent
-],
-	templateUrl: './game-event.component.html',
-	styleUrl: './game-event.component.scss',
-	animations: [expandCollapseVertical, enterFromLeft, fadeIn, fadeInFadeOut],
-	providers: [
-		EventHandler,
-		DrawEventHandler
-	]
+    selector: 'app-game-event',
+    imports: [
+        CommonModule,
+        PhasePlanificationComponent,
+        PhaseProductionComponent,
+        PlayableCardListComponent,
+        PhaseCardUpgradeSelectorComponent,
+        EventMainButtonComponent,
+        CardBuilderListComponent,
+        NonEventButtonComponent,
+        TextWithImageComponent,
+        PhaseActionComponent,
+        HexedBackgroundComponent,
+        InitialDraftComponent,
+        WaitingReadyComponent
+    ],
+    templateUrl: './game-event.component.html',
+    styleUrl: './game-event.component.scss',
+    animations: [expandCollapseVertical, enterFromLeft, fadeIn, fadeInFadeOut],
+    providers: [
+        EventHandler,
+        DrawEventHandler
+    ]
 })
 export class GameEventComponent {
 	constructor(

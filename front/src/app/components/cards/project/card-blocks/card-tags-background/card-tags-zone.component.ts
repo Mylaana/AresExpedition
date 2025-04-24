@@ -4,11 +4,10 @@ import { CardType, CardTypeColor } from '../../../../../types/project-card.type'
 import { Utils } from '../../../../../utils/utils';
 
 @Component({
-  selector: 'app-card-tags-zone',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './card-tags-zone.component.html',
-  styleUrl: './card-tags-zone.component.scss'
+    selector: 'app-card-tags-zone',
+    imports: [CommonModule],
+    templateUrl: './card-tags-zone.component.html',
+    styleUrl: './card-tags-zone.component.scss'
 })
 export class CardTagsZoneComponent implements OnInit{
 	@Input() cardType!: CardType;

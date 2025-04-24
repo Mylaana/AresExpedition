@@ -5,12 +5,11 @@ import { ProjectCardInfoService } from '../../../../services/cards/project-card-
 import { fadeIn } from '../../../../animations/animations';
 
 @Component({
-  selector: 'app-card-overview',
-  standalone: true,
-  imports: [PlayableCardListComponent],
-  templateUrl: './card-overview.component.html',
-  styleUrl: './card-overview.component.scss',
-  animations: [fadeIn]
+    selector: 'app-card-overview',
+    imports: [PlayableCardListComponent],
+    templateUrl: './card-overview.component.html',
+    styleUrl: './card-overview.component.scss',
+    animations: [fadeIn]
 })
 export class CardOverviewComponent implements OnInit{
 	_cardList: PlayableCardModel[] = []

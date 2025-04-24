@@ -4,11 +4,10 @@ import { CardStateModel } from '../../../../models/cards/card-state.model';
 import { CardState } from '../../../../interfaces/card.interface';
 
 @Component({
-  selector: 'app-base-card',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './base-card.component.html',
-  styleUrl: './base-card.component.scss'
+    selector: 'app-base-card',
+    imports: [CommonModule],
+    templateUrl: './base-card.component.html',
+    styleUrl: './base-card.component.scss'
 })
 export abstract class BaseCardComponent implements OnInit, OnChanges{
 	@Input() initialState?: Partial<CardState>

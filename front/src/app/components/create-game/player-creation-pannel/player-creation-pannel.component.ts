@@ -5,15 +5,14 @@ import { expandCollapseVertical } from '../../../animations/animations';
 import { CreatePlayer } from '../../../interfaces/global.interface';
 
 @Component({
-  selector: 'app-player-creation-pannel',
-  standalone: true,
-  imports: [
-	CommonModule,
-	PlayerCreationCardComponent
-  ],
-  templateUrl: './player-creation-pannel.component.html',
-  styleUrl: './player-creation-pannel.component.scss',
-  animations: [expandCollapseVertical]
+    selector: 'app-player-creation-pannel',
+    imports: [
+        CommonModule,
+        PlayerCreationCardComponent
+    ],
+    templateUrl: './player-creation-pannel.component.html',
+    styleUrl: './player-creation-pannel.component.scss',
+    animations: [expandCollapseVertical]
 })
 export class PlayerCreationPannelComponent implements OnInit, OnChanges{
 	@Input() playerNumber: number = 1;

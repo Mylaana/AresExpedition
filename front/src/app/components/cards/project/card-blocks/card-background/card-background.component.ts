@@ -5,14 +5,13 @@ import { CardType, CardTypeColor } from '../../../../../types/project-card.type'
 import { Utils } from '../../../../../utils/utils';
 
 @Component({
-  selector: 'app-card-background',
-  standalone: true,
-  imports: [
-	CommonModule,
-    LayoutHexagonsComponent
-  ],
-  templateUrl: './card-background.component.html',
-  styleUrl: './card-background.component.scss'
+    selector: 'app-card-background',
+    imports: [
+        CommonModule,
+        LayoutHexagonsComponent
+    ],
+    templateUrl: './card-background.component.html',
+    styleUrl: './card-background.component.scss'
 })
 export class CardBackgroundComponent implements OnInit{
 	@Input() cardType!: CardType

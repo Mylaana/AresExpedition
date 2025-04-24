@@ -7,14 +7,13 @@ import { PlayerReadyModel } from '../../../models/player-info/player-state.model
 import { fadeIn } from '../../../animations/animations';
 
 @Component({
-  selector: 'app-waiting-ready',
-  standalone: true,
-  imports: [
-	CommonModule
-],
-  templateUrl: './waiting-ready.component.html',
-  styleUrl: './waiting-ready.component.scss',
-  animations: [fadeIn]
+    selector: 'app-waiting-ready',
+    imports: [
+        CommonModule
+    ],
+    templateUrl: './waiting-ready.component.html',
+    styleUrl: './waiting-ready.component.scss',
+    animations: [fadeIn]
 })
 export class WaitingReadyComponent implements OnInit{
 	@Input() event!: EventBaseModel

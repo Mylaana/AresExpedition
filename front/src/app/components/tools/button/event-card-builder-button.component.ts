@@ -5,14 +5,13 @@ import { ButtonComponent } from './button.component';
 import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
 
 @Component({
-  selector: 'app-event-card-builder-button',
-  standalone: true,
-  imports: [
-	CommonModule,
-	TextWithImageComponent
-],
-  templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+    selector: 'app-event-card-builder-button',
+    imports: [
+        CommonModule,
+        TextWithImageComponent
+    ],
+    templateUrl: './button.component.html',
+    styleUrl: './button.component.scss'
 })
 export class EventCardBuilderButtonComponent extends ButtonComponent{
   @Output() eventCardBuilderButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()

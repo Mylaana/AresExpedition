@@ -8,15 +8,14 @@ import { CardBuilderOptionType } from '../../../types/global.type';
 import { ProjectFilterType } from '../../../types/project-card.type';
 
 @Component({
-	selector: 'app-card-builder',
-	standalone: true,
-	imports: [
-		CommonModule,
-		EventCardBuilderButtonComponent,
-		PlayableCardListComponent,
-	],
-	templateUrl: './card-builder.component.html',
-	styleUrl: './card-builder.component.scss'
+    selector: 'app-card-builder',
+    imports: [
+        CommonModule,
+        EventCardBuilderButtonComponent,
+        PlayableCardListComponent,
+    ],
+    templateUrl: './card-builder.component.html',
+    styleUrl: './card-builder.component.scss'
 })
 export class CardBuilderComponent{
 	@Input() cardBuilder!: CardBuilder

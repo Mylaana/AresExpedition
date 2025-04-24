@@ -1,0 +1,30 @@
+.ares-title {
+    $background-alpha: .4;
+    $types: ('','--orange');
+  
+    color: white;
+  
+    @each $type in $types {
+      &#{$type} {
+        border: rgba(255, 255, 255, 0.7) solid 1px;
+        border-left: 0;
+        border-right: 0;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0) 2%, rgba(255, 255, 255, $background-alpha) 20%, rgba(255, 255, 255, $background-alpha) 80%, rgba(255, 255, 255, 0) 98%);
+      }
+    }
+  
+    h1 {
+      $horizontal-padding: 100px;
+      display: inline-block;
+      text-align: center;
+      padding: 10px $horizontal-padding;
+      text-wrap: nowrap;
+    }
+  
+    &--orange {
+      border-color: rgb(255, 129, 25);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 2%, rgba(255, 129, 25, $background-alpha) 20%, rgba(255, 129, 25, $background-alpha) 80%, rgba(255, 255, 255, 0) 98%);
+      color: black;
+    }
+  }
+  

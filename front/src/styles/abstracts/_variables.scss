@@ -1,0 +1,9 @@
+$fade-transition-time: .2s;
+
+:root {
+  --card-height: 300px;
+  --card-effect-height: calc(var(--card-height) * .26);
+  --card-width: calc(var(--card-height) * 63 / 88);
+  --settings-button-size: 9%;
+  --text-size: 11px;
+}

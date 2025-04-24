@@ -1,0 +1,51 @@
+@use 'sass:color';
+@use 'sass:map';
+
+$colors: (
+  "red": rgb(237, 53, 49),
+  "blue": rgb(39, 177, 229),
+  "green": rgb(42, 180, 92),
+  "purple": rgb(98, 70, 156),
+  "orange": rgb(255, 129, 25),
+  "yellow": yellow,
+  "white": white,
+  "corporation": rgb(215, 224, 231)
+);
+
+$card-back-colors: (
+  "red": rgba(130, 30, 30, 1),
+  "blue": rgba(50, 100, 150, 1),
+  "green": rgba(10, 90, 40, 1),
+  "corporation": rgb(210, 224, 235)
+);
+
+:root {
+  @each $name, $color in $colors {
+    --color-ares-#{$name}: #{$color};
+    --color-ares-#{$name}-light: #{color.scale($color, $lightness: 11%)};
+    --color-ares-#{$name}-light2: #{color.scale($color, $lightness: 57%)};
+    --color-ares-#{$name}-light3: #{color.scale($color, $lightness: 80%)};
+    --color-ares-#{$name}-light4: #{color.scale($color, $lightness: 91%)};
+    --color-ares-#{$name}-dark0: #{color.scale($color, $lightness: -12%)};
+    --color-ares-#{$name}-dark: #{color.scale($color, $lightness: -27%)};
+    --color-ares-#{$name}-dark2: #{color.scale($color, $lightness: -34%)};
+    --color-ares-#{$name}-dark3: #{color.scale($color, $lightness: -38%)};
+    --color-ares-#{$name}-dark4: #{color.scale($color, $lightness: -59%)};
+    --color-ares-#{$name}-dark5: #{color.scale($color, $lightness: -80%)};
+    --color-ares-#{$name}-dark6: #{color.scale($color, $lightness: -98%)};
+  }
+
+  @each $name, $color in $card-back-colors {
+    --color-card-back-#{$name}: #{$color};
+  }
+}
+
+$map-colors: ();
+$map-colors-light: ();
+$map-colors-dark: ();
+
+@each $name, $color in $colors {
+  $map-colors: map.merge($map-colors, ($name: var(--color-ares-#{$name})));
+  $map-colors-light: map.merge($map-colors-light, ($name: var(--color-ares-#{$name}-light)));
+  $map-colors-dark: map.merge($map-colors-dark, ($name: var(--color-ares-#{$name}-dark)));
+}

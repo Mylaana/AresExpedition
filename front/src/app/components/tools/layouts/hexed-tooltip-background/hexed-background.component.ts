@@ -2,11 +2,10 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-	selector: 'app-hexed-background',
-	standalone: true,
-	imports: [CommonModule],
-	templateUrl: './hexed-background.component.html',
-	styleUrl: './hexed-background.component.scss'
+    selector: 'app-hexed-background',
+    imports: [CommonModule],
+    templateUrl: './hexed-background.component.html',
+    styleUrl: './hexed-background.component.scss'
 })
 export class HexedBackgroundComponent implements OnInit {
 	@Input() row: number = 1;  // Nombre d'hexagones en hauteur

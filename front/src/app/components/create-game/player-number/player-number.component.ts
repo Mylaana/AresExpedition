@@ -6,14 +6,13 @@ import { ButtonDesigner } from '../../../services/designers/button-designer.serv
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-player-number',
-  standalone: true,
-  imports: [
-	CommonModule,
-	NonEventButtonComponent
-],
-  templateUrl: './player-number.component.html',
-  styleUrl: './player-number.component.scss'
+    selector: 'app-player-number',
+    imports: [
+        CommonModule,
+        NonEventButtonComponent
+    ],
+    templateUrl: './player-number.component.html',
+    styleUrl: './player-number.component.scss'
 })
 export class PlayerNumberComponent implements OnInit{
 	@Output() playerNumberSelected = new EventEmitter<number>()

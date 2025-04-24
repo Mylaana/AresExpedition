@@ -4,14 +4,13 @@ import { TextWithImageComponent } from '../../../../tools/text-with-image/text-w
 import { SummaryType } from '../../../../../types/project-card.type';
 
 @Component({
-  selector: 'app-card-effect',
-  standalone: true,
-  imports: [
-	CommonModule,
-	TextWithImageComponent
-  ],
-  templateUrl: './card-effect.component.html',
-  styleUrl: './card-effect.component.scss'
+    selector: 'app-card-effect',
+    imports: [
+        CommonModule,
+        TextWithImageComponent
+    ],
+    templateUrl: './card-effect.component.html',
+    styleUrl: './card-effect.component.scss'
 })
 export class CardEffectComponent {
 	@Input() effectSummaryType!: SummaryType

@@ -8,14 +8,13 @@ type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right' | 'act
 type style = 'plain' | 'floating'  | 'transparent'
 
 @Component({
-	selector: 'app-button',
-	standalone: true,
-	imports: [
-		CommonModule,
-		TextWithImageComponent,
-	],
-	templateUrl: './button.component.html',
-	styleUrl: './button.component.scss'
+    selector: 'app-button',
+    imports: [
+        CommonModule,
+        TextWithImageComponent,
+    ],
+    templateUrl: './button.component.html',
+    styleUrl: './button.component.scss'
 })
 export class ButtonComponent implements OnChanges {
 	@Output() buttonClicked: EventEmitter<ButtonBase> = new EventEmitter<ButtonBase>()
