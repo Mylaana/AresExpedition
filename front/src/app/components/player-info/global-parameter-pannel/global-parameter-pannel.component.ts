@@ -10,15 +10,14 @@ import { Utils } from '../../../utils/utils';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 
 @Component({
-	selector: 'app-global-parameter-pannel',
-	standalone: true,
-	imports: [
-		CommonModule,
-		GlobalParameterCardComponent,
-		OceanCardComponent
-	],
-	templateUrl: './global-parameter-pannel.component.html',
-	styleUrl: './global-parameter-pannel.component.scss'
+    selector: 'app-global-parameter-pannel',
+    imports: [
+        CommonModule,
+        GlobalParameterCardComponent,
+        OceanCardComponent
+    ],
+    templateUrl: './global-parameter-pannel.component.html',
+    styleUrl: './global-parameter-pannel.component.scss'
 })
 export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	_dummyId = [0, 1, 2, 3]
@@ -32,15 +31,14 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 
 	constructor(private gameStateService: GameState){}
 	ngOnInit(): void {
-		this.gameStateService.currentGroupPlayerState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onStateUpdate())
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onStateUpdate(state.getGlobalParameters()))
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
-	onStateUpdate(): void {
-		let globalState = this.gameStateService.getClientState().getGlobalParameters()
-		for(let state of globalState){
+	onStateUpdate(parameters: GlobalParameter[]): void {
+		for(let state of parameters){
 			switch(state.name){
 				case(GlobalParameterNameEnum.ocean):{this._oceanState = Utils.jsonCopy(state); break}
 				case(GlobalParameterNameEnum.infrastructure):{this._infrastructureState = Utils.jsonCopy(state); break}

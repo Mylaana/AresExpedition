@@ -55,7 +55,7 @@ export interface WsDrawResult extends WsResult {
 }
 export interface WsGameState extends WsResult {
     currentPhase: NonSelectablePhaseEnum
-    selectedPhases: SelectablePhaseEnum[]
+    selectedPhase: SelectablePhaseEnum[]
     groupReady: Map<myUUID, boolean>
     groupPlayerStatePublic: Map<string, any>
 	gameStatus: GameStatusEnum

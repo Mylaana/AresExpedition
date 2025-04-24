@@ -26,28 +26,27 @@ import { CardStartingMegacreditsComponent } from '../card-blocks/card-starting-m
 import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 
 @Component({
-  selector: 'app-playable-card',
-  standalone: true,
-  imports: [
-    CommonModule,
-    CardBackgroundComponent,
-	CardActivationComponent,
-	CardCostComponent,
-	CardEffectComponent,
-	CardHighlightComponent,
-	CardTagsComponent,
-	CardVpComponent,
-	CardPlayedInfoComponent,
-	CardPrerequisiteComponent,
-	CardStockComponent,
-	CardTagsZoneComponent,
-	CardTitleComponent,
-	CardStartingMegacreditsComponent
-  ],
-  templateUrl: './playable-card.component.html',
-  styleUrl: './playable-card.component.scss',
-  providers: [CardCost],
-  animations: [expandCollapseVertical]
+    selector: 'app-playable-card',
+    imports: [
+        CommonModule,
+        CardBackgroundComponent,
+        CardActivationComponent,
+        CardCostComponent,
+        CardEffectComponent,
+        CardHighlightComponent,
+        CardTagsComponent,
+        CardVpComponent,
+        CardPlayedInfoComponent,
+        CardPrerequisiteComponent,
+        CardStockComponent,
+        CardTagsZoneComponent,
+        CardTitleComponent,
+        CardStartingMegacreditsComponent
+    ],
+    templateUrl: './playable-card.component.html',
+    styleUrl: './playable-card.component.scss',
+    providers: [CardCost],
+    animations: [expandCollapseVertical]
 })
 export class PlayableCardComponent extends BaseCardComponent implements OnInit, OnDestroy {
 	@Output() cardActivated: EventEmitter<{card: PlayableCardModel, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, twice: boolean}>()

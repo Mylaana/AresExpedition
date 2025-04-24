@@ -6,15 +6,14 @@ import { NonEventButton } from '../../../../../models/core-game/button.model';
 import { expandCollapseVertical } from '../../../../../animations/animations';
 
 @Component({
-  selector: 'app-card-activation',
-  standalone: true,
-  imports: [
-	CommonModule,
-	NonEventButtonComponent
-],
-  templateUrl: './card-activation.component.html',
-  styleUrl: './card-activation.component.scss',
-  animations: [expandCollapseVertical]
+    selector: 'app-card-activation',
+    imports: [
+        CommonModule,
+        NonEventButtonComponent
+    ],
+    templateUrl: './card-activation.component.html',
+    styleUrl: './card-activation.component.scss',
+    animations: [expandCollapseVertical]
 })
 export class CardActivationComponent implements OnInit{
 	@Input() maximumCardActivation!: boolean

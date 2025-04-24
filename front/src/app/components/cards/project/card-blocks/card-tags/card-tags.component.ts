@@ -4,13 +4,12 @@ import { CardType, CardTypeColor } from '../../../../../types/project-card.type'
 import { Utils } from '../../../../../utils/utils';
 
 @Component({
-  selector: 'app-card-tags',
-  standalone: true,
-  imports: [
-	CommonModule,
-  ],
-  templateUrl: './card-tags.component.html',
-  styleUrl: './card-tags.component.scss'
+    selector: 'app-card-tags',
+    imports: [
+        CommonModule,
+    ],
+    templateUrl: './card-tags.component.html',
+    styleUrl: './card-tags.component.scss'
 })
 export class CardTagsComponent {
 	@Input() tagsUrl?: string[]

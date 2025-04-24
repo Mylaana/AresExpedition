@@ -12,14 +12,13 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
 
 
 @Component({
-  selector: 'app-phase-card-upgrade-list',
-  standalone: true,
-  imports: [
-	CommonModule,
-	PhaseCardComponent
-],
-  templateUrl: './phase-card-upgrade-list.component.html',
-  styleUrl: './phase-card-upgrade-list.component.scss'
+    selector: 'app-phase-card-upgrade-list',
+    imports: [
+        CommonModule,
+        PhaseCardComponent
+    ],
+    templateUrl: './phase-card-upgrade-list.component.html',
+    styleUrl: './phase-card-upgrade-list.component.scss'
 })
 export class PhaseCardUpgradeListComponent {
 	@Input() phaseGroup!: PhaseCardGroupModel

@@ -5,14 +5,13 @@ import { CommonModule } from '@angular/common';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 
 @Component({
-	selector: 'app-global-parameter-card',
-	standalone: true,
-	imports: [
-		CommonModule,
-		TextWithImageComponent
-	],
-	templateUrl: './global-parameter-card.component.html',
-	styleUrl: './global-parameter-card.component.scss'
+    selector: 'app-global-parameter-card',
+    imports: [
+        CommonModule,
+        TextWithImageComponent
+    ],
+    templateUrl: './global-parameter-card.component.html',
+    styleUrl: './global-parameter-card.component.scss'
 })
 export class GlobalParameterCardComponent implements OnInit {
 	@Input() parameter!: GlobalParameterNameEnum

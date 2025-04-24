@@ -5,14 +5,13 @@ import { RessourceInfo } from '../../../interfaces/global.interface';
 import { myUUID } from '../../../types/global.type';
 
 @Component({
-  selector: 'app-ressource-pannel',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RessourceCardComponent
-  ],
-  templateUrl: './ressource-pannel.component.html',
-  styleUrl: './ressource-pannel.component.scss'
+    selector: 'app-ressource-pannel',
+    imports: [
+        CommonModule,
+        RessourceCardComponent
+    ],
+    templateUrl: './ressource-pannel.component.html',
+    styleUrl: './ressource-pannel.component.scss'
 })
 export class RessourcePannelComponent {
   @Input() playerId!: myUUID;

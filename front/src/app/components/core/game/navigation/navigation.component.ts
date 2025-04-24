@@ -9,16 +9,15 @@ import { Subject, takeUntil } from 'rxjs';
 import { myUUID } from '../../../../types/global.type';
 
 @Component({
-	selector: 'app-navigation',
-	standalone: true,
-	imports: [
-		CommonModule,
-		PlayerPannelComponent,
-		GlobalParameterPannelComponent
-	],
-	templateUrl: './navigation.component.html',
-	styleUrl: './navigation.component.scss',
-	animations: [expandCollapseVertical, fadeIn]
+    selector: 'app-navigation',
+    imports: [
+        CommonModule,
+        PlayerPannelComponent,
+        GlobalParameterPannelComponent
+    ],
+    templateUrl: './navigation.component.html',
+    styleUrl: './navigation.component.scss',
+    animations: [expandCollapseVertical, fadeIn]
 })
 export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 	@Input() isScrolled: boolean = false

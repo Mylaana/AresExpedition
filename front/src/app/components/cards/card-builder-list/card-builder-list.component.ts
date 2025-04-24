@@ -5,14 +5,13 @@ import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/even
 import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 
 @Component({
-  selector: 'app-card-builder-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    CardBuilderComponent
-  ],
-  templateUrl: './card-builder-list.component.html',
-  styleUrl: './card-builder-list.component.scss'
+    selector: 'app-card-builder-list',
+    imports: [
+        CommonModule,
+        CardBuilderComponent
+    ],
+    templateUrl: './card-builder-list.component.html',
+    styleUrl: './card-builder-list.component.scss'
 })
 export class CardBuilderListComponent implements OnInit{
   @Input() event!: EventBaseModel

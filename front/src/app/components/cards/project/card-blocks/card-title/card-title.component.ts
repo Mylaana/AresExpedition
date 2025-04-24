@@ -4,11 +4,10 @@ import { Utils } from '../../../../../utils/utils';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-card-title',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './card-title.component.html',
-  styleUrl: './card-title.component.scss'
+    selector: 'app-card-title',
+    imports: [CommonModule],
+    templateUrl: './card-title.component.html',
+    styleUrl: './card-title.component.scss'
 })
 export class CardTitleComponent{
 	@Input() title!: string

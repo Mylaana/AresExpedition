@@ -1,11 +1,11 @@
-@import '../../../../../../variables';
+@use '../../../../../../styles/abstracts/colors' as colors;
 :host{
 	position: relative;
 	width: 100%;
 	height: 100%;
 }
 .background {
-	@each $color-name, $color-value in $card-back-colors {
+	@each $color-name, $color-value in colors.$card-back-colors {
 		&--#{$color-name} {
 			width: 100%;
 			height: 100%;

@@ -6,14 +6,13 @@ import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-b
 
 
 @Component({
-	selector: 'app-settings',
-	standalone: true,
-	imports: [
-    NonEventButtonComponent,
-    HexedBackgroundComponent,
-],
-	templateUrl: './settings.component.html',
-	styleUrl: './settings.component.scss'
+    selector: 'app-settings',
+    imports: [
+        NonEventButtonComponent,
+        HexedBackgroundComponent,
+    ],
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
 	@Output() closeSettings: EventEmitter<any> = new EventEmitter<any>()

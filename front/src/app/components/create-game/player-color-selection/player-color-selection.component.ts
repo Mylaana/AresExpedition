@@ -8,14 +8,13 @@ import { CommonModule } from '@angular/common';
 const colorList: PlayerColor[] = ['blue', 'green', 'orange','purple','red','white','yellow']
 
 @Component({
-  selector: 'app-player-color-selection',
-  standalone: true,
-  imports: [
-	CommonModule,
-	ButtonComponent
-],
-  templateUrl: './player-color-selection.component.html',
-  styleUrl: './player-color-selection.component.scss'
+    selector: 'app-player-color-selection',
+    imports: [
+        CommonModule,
+        ButtonComponent
+    ],
+    templateUrl: './player-color-selection.component.html',
+    styleUrl: './player-color-selection.component.scss'
 })
 export class PlayerColorSelectionComponent implements OnInit{
 	@Output() colorPicked = new EventEmitter<PlayerColor>()

@@ -36,17 +36,14 @@ Backend: Junit
 
 ### CD (to be added)
 - Triggerred when new code is merged on main branch   
-- Tech used TBD   
+- TBD (pbly AWS LightSail)   
 
 # WIP : 
 ## /!\BUG/!\ :
-Sell event uses active phase's background for list   
-Selected Phase list pannel showing all phases   
 Action phase upgrade not working   
 Production phase screen not working   
-Player ready status display not working   
-Global parameters not synchronized on phase change in backend   
 Frontend data not being reset when game rollbacks to initial draft (edge case)   
+Game not being saved on backend   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

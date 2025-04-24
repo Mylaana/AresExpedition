@@ -4,11 +4,10 @@ import { CardType, CardTypeColor, ProjectListType } from '../../../../../types/p
 import { Utils } from '../../../../../utils/utils';
 
 @Component({
-  selector: 'app-card-cost',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './card-cost.component.html',
-  styleUrl: './card-cost.component.scss'
+    selector: 'app-card-cost',
+    imports: [CommonModule],
+    templateUrl: './card-cost.component.html',
+    styleUrl: './card-cost.component.scss'
 })
 export class CardCostComponent implements OnInit {
 	@Input() cost: number = 0

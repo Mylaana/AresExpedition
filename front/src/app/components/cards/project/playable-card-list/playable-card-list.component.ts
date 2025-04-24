@@ -12,13 +12,13 @@ import { ProjectListSubType, ProjectListType } from '../../../../types/project-c
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
 
 @Component({
-  selector: 'app-playable-card-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    PlayableCardComponent],
-  templateUrl: './playable-card-list.component.html',
-  styleUrl: './playable-card-list.component.scss'
+    selector: 'app-playable-card-list',
+    imports: [
+        CommonModule,
+        PlayableCardComponent
+    ],
+    templateUrl: './playable-card-list.component.html',
+    styleUrl: './playable-card-list.component.scss'
 })
 export class PlayableCardListComponent implements OnChanges{
 	@Input() event?: EventBaseModel;
@@ -137,6 +137,7 @@ export class PlayableCardListComponent implements OnChanges{
 	private updateCardList(): void {
 		if(selectorTypes.includes(this.listType)){this.setSelector()}
 		this.setDisplay()
+		this.setBackground()
 
 
 		if(this._displayedCards!=undefined && this._displayedCards.length===0){this._displayedCards=undefined}

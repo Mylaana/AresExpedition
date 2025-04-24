@@ -6,11 +6,10 @@ import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { myUUID } from '../../../types/global.type';
 
 @Component({
-  selector: 'app-global-pannel',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './global-pannel.component.html',
-  styleUrl: './global-pannel.component.scss'
+    selector: 'app-global-pannel',
+    imports: [CommonModule],
+    templateUrl: './global-pannel.component.html',
+    styleUrl: './global-pannel.component.scss'
 })
 export class GlobalPannelComponent{
   @Input() playerId!: myUUID;

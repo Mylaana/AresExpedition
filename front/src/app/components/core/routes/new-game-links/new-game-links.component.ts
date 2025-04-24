@@ -6,14 +6,13 @@ import { ApiPlayer } from '../../../../interfaces/websocket.interface';
 import { myUUID } from '../../../../types/global.type';
 
 @Component({
-  selector: 'app-new-game-links',
-  standalone: true,
-  imports: [
-	CommonModule,
-	HexedBackgroundComponent
-],
-  templateUrl: './new-game-links.component.html',
-  styleUrl: './new-game-links.component.scss'
+    selector: 'app-new-game-links',
+    imports: [
+        CommonModule,
+        HexedBackgroundComponent
+    ],
+    templateUrl: './new-game-links.component.html',
+    styleUrl: './new-game-links.component.scss'
 })
 export class NewGameLinksComponent {
 	players: ApiPlayer[] = [];

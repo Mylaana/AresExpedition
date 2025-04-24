@@ -14,13 +14,12 @@ import { myUUID } from '../../../../types/global.type';
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
 @Component({
-	selector: 'app-server-emulation',
-	standalone: true,
-	imports: [
-		CommonModule,
-	],
-	templateUrl: './server-emulation.component.html',
-	styleUrl: './server-emulation.component.scss',
+    selector: 'app-server-emulation',
+    imports: [
+        CommonModule,
+    ],
+    templateUrl: './server-emulation.component.html',
+    styleUrl: './server-emulation.component.scss'
 })
 export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestroy {
 	debug: boolean = false;
@@ -77,9 +76,9 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 
 
 		//force draw card list for debug purpose
-		//let cardDrawList: number[] = [4, 222, 198, 279]
+		let cardDrawList: number[] = [184]
 		//this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:50}])
-		//this.gameStateService.addCardsToClientHand(cardDrawList)
+		this.gameStateService.addCardsToClientHand(cardDrawList)
 		//let cardList = this.gameStateService.getClientHandModelList()
 		//this.gameStateService.playCardFromClientHand(cardList[6])
 

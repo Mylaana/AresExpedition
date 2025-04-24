@@ -57,6 +57,7 @@ export class GameState{
     private drawQueue = new BehaviorSubject<DrawEvent[]>([])
     private eventQueue = new BehaviorSubject<EventBaseModel[]>([])
 	private clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
+	private selectedPhaseList = new BehaviorSubject<SelectablePhaseEnum[]>([])
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
@@ -66,6 +67,7 @@ export class GameState{
     currentEventQueue = this.eventQueue.asObservable()
     currentPlayerCount = this.playerCount.asObservable()
     currentLoadingState = this.loading.asObservable()
+	currentSelectedPhaseList = this.selectedPhaseList.asObservable()
 
 	currentClientState = this.clientState.asObservable();
 
@@ -558,10 +560,15 @@ export class GameState{
 	}
 	public setGroupStateFromJson(dto: PlayerStateDTO[]){
 		let groupPlayerState: PlayerStateModel[] = []
+		let playerIdList: myUUID[] = []
 		for(let playerStateDTO of dto){
+			//add playerId to list
+			playerIdList.push(playerStateDTO.infoState.i)
+
 			//add playerstate
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
 		}
+		this.setPlayerIdList(playerIdList)
 		this.updateGroupPlayerState(groupPlayerState)
 
 		//creates and add player to groupPlayerSelectedPhase
@@ -640,5 +647,14 @@ export class GameState{
 			groupReady.push(playerReady)
 		}
 		this.groupPlayerReady.next(groupReady)
+	}
+	public setSelectedPhaseList(selectedPhaseList: SelectablePhaseEnum[]){
+		let list: SelectablePhaseEnum[] = []
+		for(let selected of selectedPhaseList){
+			if(selected.toString()!='PLANIFICATION'){
+				list.push(selected)
+			}
+		}
+		this.selectedPhaseList.next(list)
 	}
 }

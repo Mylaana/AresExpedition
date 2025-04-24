@@ -7,24 +7,22 @@ import { ButtonDesigner } from './services/designers/button-designer.service';
 import { NonEventButtonComponent } from './components/tools/button/non-event-button.component';
 import { NonEventButton } from './models/core-game/button.model';
 import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 import { ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_NEWGAMELINKS } from './global/global-const';
 
 @Component({
-	selector: 'app-root',
-	standalone: true,
-	imports: [
-		CommonModule,
-		RouterOutlet,
-		NonEventButtonComponent,
-		HttpClientModule
-],
-	templateUrl: './app.component.html',
-	styleUrl: './app.component.scss',
-	animations: [expandCollapseVertical, fadeIn, fadeInFadeOut],
-	providers: [
-		WebsocketHandler
-	]
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        NonEventButtonComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    animations: [expandCollapseVertical, fadeIn, fadeInFadeOut],
+    providers: [
+        WebsocketHandler
+    ]
 })
 export class AppComponent {
 	title = 'AresExpedition';

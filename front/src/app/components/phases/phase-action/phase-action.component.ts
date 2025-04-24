@@ -12,14 +12,13 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 
 @Component({
-  selector: 'app-phase-action',
-  standalone: true,
-  imports: [
-	NonEventButtonComponent,
-	PlayableCardListComponent
-],
-  templateUrl: './phase-action.component.html',
-  styleUrl: './phase-action.component.scss'
+    selector: 'app-phase-action',
+    imports: [
+        NonEventButtonComponent,
+        PlayableCardListComponent
+    ],
+    templateUrl: './phase-action.component.html',
+    styleUrl: './phase-action.component.scss'
 })
 export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	@Input() event!: EventBaseModel

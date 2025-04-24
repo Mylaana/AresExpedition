@@ -9,13 +9,13 @@ import { EventBaseModel } from '../../../models/core-game/event.model';
 import { ProjectListType } from '../../../types/project-card.type';
 
 @Component({
-  selector: 'app-initial-draft',
-  standalone: true,
-  imports: [
-	CommonModule,
-	PlayableCardListComponent],
-  templateUrl: './initial-draft.component.html',
-  styleUrl: './initial-draft.component.scss'
+    selector: 'app-initial-draft',
+    imports: [
+        CommonModule,
+        PlayableCardListComponent
+    ],
+    templateUrl: './initial-draft.component.html',
+    styleUrl: './initial-draft.component.scss'
 })
 export class InitialDraftComponent implements OnInit, OnDestroy{
 	@Input() event!: EventBaseModel

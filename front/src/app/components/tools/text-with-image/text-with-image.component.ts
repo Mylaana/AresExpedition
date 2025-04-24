@@ -4,12 +4,10 @@ import { GlobalInfo } from '../../../services/global/global-info.service';
 type HtmlTag = 'p' | 'img'| 'div'
 
 @Component({
-	selector: 'app-text-with-image',
-	standalone: true,
-	imports: [],
-	templateUrl: './text-with-image.component.html',
-	styleUrl: './text-with-image.component.scss',
-
+    selector: 'app-text-with-image',
+    imports: [],
+    templateUrl: './text-with-image.component.html',
+    styleUrl: './text-with-image.component.scss'
 })
 export class TextWithImageComponent implements OnInit{
 	@Input() rawText!: string;

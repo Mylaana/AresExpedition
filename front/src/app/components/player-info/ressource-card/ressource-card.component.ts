@@ -6,13 +6,12 @@ import { GlobalInfo } from '../../../services/global/global-info.service';
 type Production = 'grey' | 'red' | 'blue'
 
 @Component({
-	selector: 'app-ressource-card',
-	standalone: true,
-	imports: [
-		CommonModule
-	],
-	templateUrl: './ressource-card.component.html',
-	styleUrl: './ressource-card.component.scss'
+    selector: 'app-ressource-card',
+    imports: [
+        CommonModule
+    ],
+    templateUrl: './ressource-card.component.html',
+    styleUrl: './ressource-card.component.scss'
 })
 export class RessourceCardComponent implements OnInit {
 	//@Input() ressourceCard!: RessourceCardModel;

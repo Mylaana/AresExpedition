@@ -133,7 +133,9 @@ export class EventHandler {
 		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent)}
 
 		//specific cases
-		if(this.currentEvent.subType==='planificationPhase' && this.currentEvent.button){this.currentEvent.button.resetStartEnabled()}
+		if(this.currentEvent.subType==='planificationPhase' && this.currentEvent.button){
+			this.currentEvent.button.resetStartEnabled()
+		}
 
 		this.applyAutoFinalize()
         return

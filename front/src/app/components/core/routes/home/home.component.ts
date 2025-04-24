@@ -9,15 +9,14 @@ import { EXTERNAL_LINK_FRYXGAMES, ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME } from '
 
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-	NonEventButtonComponent,
-	HexedBackgroundComponent
-],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
-  animations: [fadeIn]
+    selector: 'app-home',
+    imports: [
+        NonEventButtonComponent,
+        HexedBackgroundComponent
+    ],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss',
+    animations: [fadeIn]
 })
 export class HomeComponent {
 

@@ -13,16 +13,15 @@ import { ButtonDesigner } from '../../../../services/designers/button-designer.s
 import { NonEventButton } from '../../../../models/core-game/button.model';
 
 @Component({
-  selector: 'app-phase-card',
-  standalone: true,
-  imports: [
-	CommonModule,
-	HexedBackgroundComponent,
-	TextWithImageComponent,
-	NonEventButtonComponent
-],
-  templateUrl: './phase-card.component.html',
-  styleUrl: './phase-card.component.scss'
+    selector: 'app-phase-card',
+    imports: [
+        CommonModule,
+        HexedBackgroundComponent,
+        TextWithImageComponent,
+        NonEventButtonComponent
+    ],
+    templateUrl: './phase-card.component.html',
+    styleUrl: './phase-card.component.scss'
 })
 export class PhaseCardComponent extends BaseCardComponent {
 	@Input() phaseCardLevel: number = 0;

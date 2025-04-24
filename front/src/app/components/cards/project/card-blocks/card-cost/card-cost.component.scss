@@ -1,4 +1,4 @@
-@import "./../../../../../../variables";
+@use '../../../../../../styles/abstracts/colors' as colors;
 :host{
 	z-index: 10;
 	position: relative;
@@ -37,7 +37,7 @@
 	top: 0;
 	left: 0;
 
-    @each $color-name, $color-value in $map-colors-dark {
+    @each $color-name, $color-value in colors.$map-colors-dark {
         &.#{$color-name} {
             background-color: $color-value;
         }
@@ -154,7 +154,7 @@
     border-top: 0;
     border-left: 0;
 
-    @each $color-name, $color-value in $map-colors {
+    @each $color-name, $color-value in colors.$map-colors {
         &.#{$color-name} {
             background: $color-value;
         }

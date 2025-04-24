@@ -1,4 +1,4 @@
-@import '../../../../../../variables.scss';
+@use '../../../../../../styles/abstracts/colors' as colors;
 :host{
 	position: relative;
 
@@ -74,7 +74,7 @@
     }
 }
 .background-border{
-	@each $name, $value in $colors{
+	@each $name, $value in colors.$colors{
 		&--#{$name}{
 			background-color: $value;
 			z-index: -2;

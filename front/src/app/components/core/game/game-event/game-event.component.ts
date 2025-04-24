@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
-import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
+import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
 import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../../models/core-game/event.model';
@@ -27,30 +27,29 @@ import { WaitingReadyComponent } from '../../waiting-ready/waiting-ready.compone
 //this component is the main controller, and view
 
 @Component({
-  selector: 'app-game-event',
-  standalone: true,
-  imports: [
-    CommonModule,
-    PhasePlanificationComponent,
-    PhaseProductionComponent,
-    PlayableCardListComponent,
-    PhaseCardUpgradeSelectorComponent,
-    EventMainButtonComponent,
-    CardBuilderListComponent,
-    NonEventButtonComponent,
-    TextWithImageComponent,
-    PhaseActionComponent,
-	HexedBackgroundComponent,
-	InitialDraftComponent,
-	WaitingReadyComponent
-],
-	templateUrl: './game-event.component.html',
-	styleUrl: './game-event.component.scss',
-	animations: [expandCollapseVertical, enterFromLeft, fadeIn, fadeInFadeOut],
-	providers: [
-		EventHandler,
-		DrawEventHandler
-	]
+    selector: 'app-game-event',
+    imports: [
+        CommonModule,
+        PhasePlanificationComponent,
+        PhaseProductionComponent,
+        PlayableCardListComponent,
+        PhaseCardUpgradeSelectorComponent,
+        EventMainButtonComponent,
+        CardBuilderListComponent,
+        NonEventButtonComponent,
+        TextWithImageComponent,
+        PhaseActionComponent,
+        HexedBackgroundComponent,
+        InitialDraftComponent,
+        WaitingReadyComponent
+    ],
+    templateUrl: './game-event.component.html',
+    styleUrl: './game-event.component.scss',
+    animations: [expandCollapseVertical, enterFromLeft, fadeIn, fadeInFadeOut],
+    providers: [
+        EventHandler,
+        DrawEventHandler
+    ]
 })
 export class GameEventComponent {
 	constructor(
@@ -81,6 +80,8 @@ export class GameEventComponent {
 	]
 	selectionActive: boolean = false
 
+	_selectedPhaseList: SelectablePhaseEnum[] = []
+
 	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
 	private readonly eventHandler = inject(EventHandler)
@@ -96,6 +97,7 @@ export class GameEventComponent {
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
+		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -145,16 +147,23 @@ export class GameEventComponent {
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
 		if(!this.currentEvent){return}
+		this.resetValidateButtonState(this.currentEvent)
 		this.resetMainButtonState(this.currentEvent)
 		this.updateSellButtonsDisplay(this.currentEvent)
 	}
 	private resetMainButtonState(event: EventBaseModel): void {
+
 		this.sellCardsButton.resetStartEnabled()
 		this.sellCardsButton.locked = event.lockSellButton
 		this.sellCardsCancelButton.resetStartEnabled()
 		this.sellCardsCancelButton.locked = event.lockSellButton
 		this.rollbackButton.resetStartEnabled()
 		this.rollbackButton.locked = event.lockRollbackButton
+	}
+	private resetValidateButtonState(event: EventBaseModel): void {
+		if(!event.button){return}
+		event.button.resetStartEnabled()
+		event.button.locked = event.lockValidateButton
 	}
 	private updateSellButtonsDisplay(event: EventBaseModel){
 		switch(event.subType){

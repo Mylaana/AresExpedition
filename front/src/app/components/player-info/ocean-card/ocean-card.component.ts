@@ -2,11 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-ocean-card',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './ocean-card.component.html',
-  styleUrl: './ocean-card.component.scss'
+    selector: 'app-ocean-card',
+    imports: [CommonModule],
+    templateUrl: './ocean-card.component.html',
+    styleUrl: './ocean-card.component.scss'
 })
 export class OceanCardComponent {
 	@Input() currentStep = 0

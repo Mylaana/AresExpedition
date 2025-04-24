@@ -9,8 +9,12 @@
 			(updateSelectedCardList)="onUpdateSelectedCardList($event)">
 		</app-playable-card-list>
 		<div class="ares-title">
-			<h1>Corporation selection:</h1>
+			<h1>Then select corporation</h1>
 		</div>
+		<app-playable-card-list
+			[cardList]="_playerHandCorporation"
+			(updateSelectedCardList)="onUpdateSelectedCardList($event)">
+		</app-playable-card-list>
 	</ng-container>
 	<ng-container
 		*ngIf="event.subType==='selectCorporation'">

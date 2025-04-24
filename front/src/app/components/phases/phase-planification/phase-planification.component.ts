@@ -21,17 +21,16 @@ const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
 ])
 
 @Component({
-	selector: 'app-phase-planification',
-	standalone: true,
-	imports: [
-		CommonModule,
-		ButtonComponent,
-		TextWithImageComponent,
-		HexedBackgroundComponent
-	],
-	templateUrl: './phase-planification.component.html',
-	styleUrl: './phase-planification.component.scss',
-	animations: [expandCollapseVertical, fadeIn]
+    selector: 'app-phase-planification',
+    imports: [
+        CommonModule,
+        ButtonComponent,
+        TextWithImageComponent,
+        HexedBackgroundComponent
+    ],
+    templateUrl: './phase-planification.component.html',
+    styleUrl: './phase-planification.component.scss',
+    animations: [expandCollapseVertical, fadeIn]
 })
 export class PhasePlanificationComponent {
 	@Input() event!: EventBaseModel

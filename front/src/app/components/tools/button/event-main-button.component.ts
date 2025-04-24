@@ -5,14 +5,13 @@ import { TextWithImageComponent } from '../text-with-image/text-with-image.compo
 import { ButtonComponent } from './button.component';
 
 @Component({
-	selector: 'app-event-main-button',
-	standalone: true,
-	imports: [
-		CommonModule,
-		TextWithImageComponent,
-	],
-	templateUrl: './button.component.html',
-	styleUrl: './button.component.scss'
+    selector: 'app-event-main-button',
+    imports: [
+        CommonModule,
+        TextWithImageComponent,
+    ],
+    templateUrl: './button.component.html',
+    styleUrl: './button.component.scss'
 })
 export class EventMainButtonComponent extends ButtonComponent {
 	@Output() eventMainButtonClicked: EventEmitter<EventMainButton> = new EventEmitter<EventMainButton>()

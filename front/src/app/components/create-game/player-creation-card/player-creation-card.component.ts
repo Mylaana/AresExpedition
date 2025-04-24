@@ -6,15 +6,14 @@ import { PlayerColorSelectionComponent } from '../player-color-selection/player-
 import { PlayerColor } from '../../../types/global.type';
 
 @Component({
-  selector: 'app-player-creation-card',
-  standalone: true,
-  imports: [
-	CommonModule,
-	FormsModule,
-	PlayerColorSelectionComponent
-],
-  templateUrl: './player-creation-card.component.html',
-  styleUrl: './player-creation-card.component.scss'
+    selector: 'app-player-creation-card',
+    imports: [
+        CommonModule,
+        FormsModule,
+        PlayerColorSelectionComponent
+    ],
+    templateUrl: './player-creation-card.component.html',
+    styleUrl: './player-creation-card.component.scss'
 })
 export class PlayerCreationCardComponent {
 	@Input() playerIndex!: number

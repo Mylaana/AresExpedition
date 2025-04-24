@@ -4,11 +4,10 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-	selector: 'app-phase-production',
-	standalone: true,
-	imports: [],
-	templateUrl: './phase-production.component.html',
-	styleUrl: './phase-production.component.scss'
+    selector: 'app-phase-production',
+    imports: [],
+    templateUrl: './phase-production.component.html',
+    styleUrl: './phase-production.component.scss'
 })
 export class PhaseProductionComponent implements OnInit, OnDestroy{
 	constructor(private gameStateService: GameState){}

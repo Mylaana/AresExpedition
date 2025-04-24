@@ -26,21 +26,20 @@ import { myUUID } from '../../../../types/global.type';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 
 @Component({
-  selector: 'app-game-main',
-  standalone: true,
-  imports: [
-		CommonModule,
-		ServerEmulationComponent,
-		PlayableCardListComponent,
-		NavigationComponent	,
-		HorizontalSeparatorComponent,
-		NonEventButtonComponent,
-		SettingsComponent,
-		GameEventComponent
-  ],
-  templateUrl: './game-main.component.html',
-  styleUrl: './game-main.component.scss',
-  animations: [fadeIn]
+    selector: 'app-game-main',
+    imports: [
+        CommonModule,
+        ServerEmulationComponent,
+        PlayableCardListComponent,
+        NavigationComponent,
+        HorizontalSeparatorComponent,
+        NonEventButtonComponent,
+        SettingsComponent,
+        GameEventComponent
+    ],
+    templateUrl: './game-main.component.html',
+    styleUrl: './game-main.component.scss',
+    animations: [fadeIn]
 })
 export class GameMainComponent implements OnInit{
 	playerHand: PlayableCardModel[] = [];

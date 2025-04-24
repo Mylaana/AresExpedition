@@ -1,4 +1,5 @@
-@import '../../../../../../variables.scss';
+@use '../../../../../../styles/abstracts/colors' as colors;
+@use 'sass:map';
 :host{
 	display: flex;
 	align-items: center;
@@ -223,7 +224,7 @@
     height: 100%;
     width: 100%;
 
-    @each $color-name, $color-value in $map-colors-dark {
+    @each $color-name, $color-value in colors.$map-colors-dark {
         &.#{$color-name}Project {
             background: $color-value;
         }
@@ -237,9 +238,9 @@
         height: 500px;
     }
     &.action{
-        background-color: map-get($map-colors-dark, "blue");
+        background-color: map.get(colors.$map-colors-dark, "blue");
         &:after {
-            $background-dots: map-get($map-colors-light, "blue");
+            $background-dots: map.get(colors.$map-colors-light, "blue");
             background:
             linear-gradient(45deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
             linear-gradient(135deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
@@ -252,9 +253,9 @@
         }
     }
     &.trigger{
-        background-color: map-get($map-colors-dark, "purple");
+        background-color: map.get(colors.$map-colors-dark, "purple");
         &:after{
-            $background-dots: map-get($map-colors-light, "purple");
+            $background-dots: map.get(colors.$map-colors-light, "purple");
             background:
             linear-gradient(45deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
             linear-gradient(135deg, $background-dots 0%, $background-dots 30%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, $background-dots 70%, $background-dots 100%),
@@ -271,14 +272,14 @@
     z-index: 1;
     position: absolute;
     top: 0;
-    $back-color: map-get($map-colors-dark, "blue");
+    $back-color: map.get(colors.$map-colors-dark, "blue");
     background: linear-gradient(0deg, rgba($back-color,.5) 0%, $back-color 45%, $back-color 65%, rgba($back-color,.5) 100%);
 }
 .effect-summary-background-trigger{
     z-index: 1;
     position: absolute;
     top: 0;
-    $back-color: map-get($map-colors-dark, "purple");
+    $back-color: map.get(colors.$map-colors-dark, "purple");
     background: linear-gradient(0deg, rgba($back-color,.5) 0%, $back-color 45%, $back-color 65%, rgba($back-color,.5) 100%);
 }
 .effect-summary-foreground-radial-white{

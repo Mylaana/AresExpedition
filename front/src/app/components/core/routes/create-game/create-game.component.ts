@@ -15,18 +15,17 @@ import { ApiMessage, ApiPlayer } from '../../../../interfaces/websocket.interfac
 import { Utils } from '../../../../utils/utils';
 
 @Component({
-  selector: 'app-new-game',
-  standalone: true,
-  imports: [
-	CommonModule,
-	HexedBackgroundComponent,
-	NonEventButtonComponent,
-	PlayerCreationPannelComponent,
-	PlayerNumberComponent
-],
-  templateUrl: './create-game.component.html',
-  styleUrl: './create-game.component.scss',
-  animations: [fadeIn, fadeInFadeOut]
+    selector: 'app-new-game',
+    imports: [
+        CommonModule,
+        HexedBackgroundComponent,
+        NonEventButtonComponent,
+        PlayerCreationPannelComponent,
+        PlayerNumberComponent
+    ],
+    templateUrl: './create-game.component.html',
+    styleUrl: './create-game.component.scss',
+    animations: [fadeIn, fadeInFadeOut]
 })
 export class CreateGameComponent {
 	@Output() gameCreated = new EventEmitter<any>()
