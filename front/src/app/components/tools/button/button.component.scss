@@ -109,6 +109,7 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 .button-main {
 	@each $name, $width in $shape-width {
 		&--#{$name} {
+			position: relative;
 			display: flex;
 			justify-content: center;
 			align-items: center;
