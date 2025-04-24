@@ -7,7 +7,7 @@ import { ButtonDesigner } from './services/designers/button-designer.service';
 import { NonEventButtonComponent } from './components/tools/button/non-event-button.component';
 import { NonEventButton } from './models/core-game/button.model';
 import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 import { ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_NEWGAMELINKS } from './global/global-const';
 
 @Component({
@@ -17,7 +17,11 @@ import { ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_NEWGAMELINKS } from './glo
 		CommonModule,
 		RouterOutlet,
 		NonEventButtonComponent,
-		HttpClientModule
+		
+// TODO: `HttpClientModule` should not be imported into a component directly.
+// Please refactor the code to add `provideHttpClient()` call to the provider list in the
+// application bootstrap logic and remove the `HttpClientModule` import from this component.
+HttpClientModule
 ],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
