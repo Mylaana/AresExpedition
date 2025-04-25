@@ -1,14 +1,7 @@
 <div class="wrapper-pannel ares-card">
-    <div class="wrapper-player-name">
+    <div class="wrapper-player-name"
+        [ngClass]="[playerState.getColor()]">
         <p>{{playerState.getName()}}</p>
-    </div>
-    <div class="pannel-card">
-        <div class="pannel-text" *ngIf="playerIsReady">
-            <img src="/assets/other/ready.png" alt="">
-        </div>
-        <div class="pannel-text" *ngIf="playerIsReady===false">
-            <img class="hourglass" src="/assets/other/hourglass.png" alt="">
-        </div>
     </div>
     <div class="pannel-card">
         <div class="pannel-image">

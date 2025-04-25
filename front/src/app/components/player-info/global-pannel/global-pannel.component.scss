@@ -1,3 +1,4 @@
+@use '../../../../styles/abstracts/colors' as colors;
 .wrapper-pannel{
     display: flex;
     justify-content: space-between;
@@ -75,11 +76,20 @@
     display: flex;
     align-items: center;
     flex-grow: 1;
-    background-color: var(--color-ares-red);
-	border-radius: 5px;
     height: 100%;
     padding-left: 3%;
+    @each $name, $value in colors.$colors {
+        &.#{$name}{
+            border: $value solid 0px;
+            border-left-width: 30px;
+            background-color: rgba($value, .2);
+        }
+    }
+    p{
+        color: white;
+    }
 }
 .hourglass{
     height: 75%;
 }
+
