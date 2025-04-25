@@ -568,6 +568,83 @@
     } ],
     "deckCorporations" : [ 1000, 1001, 1002 ]
   },
+  "3c9933d2-78a8-4ce4-a0e4-74a92f4c3e6a" : {
+    "gameId" : "3c9933d2-78a8-4ce4-a0e4-74a92f4c3e6a",
+    "deck" : [ 25, 9, 37, 36, 58, 29, 45, 18, 49, 20, 4, 46, 54, 42 ],
+    "discard" : [ ],
+    "groupPlayerId" : [ "314d67bc-b05e-4d88-9e1d-05dd7579718d" ],
+    "groupPlayerReady" : {
+      "314d67bc-b05e-4d88-9e1d-05dd7579718d" : false
+    },
+    "currentPhase" : "PLANIFICATION",
+    "selectedPhase" : [ "PLANIFICATION" ],
+    "groupPlayerState" : {
+      "314d67bc-b05e-4d88-9e1d-05dd7579718d" : {
+        "infoState" : {
+          "id" : "314d67bc-b05e-4d88-9e1d-05dd7579718d",
+          "name" : "a",
+          "color" : "blue"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      }
+    },
+    "gameStatus" : "NEW_GAME",
+    "globalParameters" : [ {
+      "name" : "OCEAN",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "INFRASTRUCTURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "TEMPERATURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "OXYGEN",
+      "step" : 0,
+      "addEop" : 0
+    } ],
+    "deckCorporations" : [ 1001, 1000, 1002 ]
+  },
   "4c973404-5354-448a-b22a-3c0ec5f4f826" : {
     "gameId" : "4c973404-5354-448a-b22a-3c0ec5f4f826",
     "deck" : [ 58, 9, 49, 29, 46, 42, 36, 54, 4, 20, 18, 37, 25, 45 ],
@@ -1224,6 +1301,313 @@
       "addEop" : 0
     } ],
     "deckCorporations" : [ 1001, 1002, 1000 ]
+  },
+  "2aa25af4-3640-4e47-b30a-74c6d6dd481b" : {
+    "gameId" : "2aa25af4-3640-4e47-b30a-74c6d6dd481b",
+    "deck" : [ 54, 49, 37, 36, 25, 46, 18, 4, 29, 42, 20, 45, 9, 58 ],
+    "discard" : [ ],
+    "groupPlayerId" : [ "f3818331-e12e-4dbc-9926-0238dae95dfd", "fa85851b-df06-413c-a5c3-3ac137e78011", "d6eeb119-90ef-4e35-a0dc-4565288ce889", "830dba80-1188-4332-91b5-9c64c9482aab", "91c9aefa-2d24-4f7b-a4a2-3e63617b0166", "f9822ec3-c0e6-4156-9355-9cb460a493e2" ],
+    "groupPlayerReady" : {
+      "f9822ec3-c0e6-4156-9355-9cb460a493e2" : false,
+      "d6eeb119-90ef-4e35-a0dc-4565288ce889" : false,
+      "fa85851b-df06-413c-a5c3-3ac137e78011" : false,
+      "91c9aefa-2d24-4f7b-a4a2-3e63617b0166" : false,
+      "f3818331-e12e-4dbc-9926-0238dae95dfd" : false,
+      "830dba80-1188-4332-91b5-9c64c9482aab" : false
+    },
+    "currentPhase" : "PLANIFICATION",
+    "selectedPhase" : [ "PLANIFICATION" ],
+    "groupPlayerState" : {
+      "f9822ec3-c0e6-4156-9355-9cb460a493e2" : {
+        "infoState" : {
+          "id" : "f9822ec3-c0e6-4156-9355-9cb460a493e2",
+          "name" : "f",
+          "color" : "white"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      },
+      "d6eeb119-90ef-4e35-a0dc-4565288ce889" : {
+        "infoState" : {
+          "id" : "d6eeb119-90ef-4e35-a0dc-4565288ce889",
+          "name" : "c",
+          "color" : "orange"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      },
+      "fa85851b-df06-413c-a5c3-3ac137e78011" : {
+        "infoState" : {
+          "id" : "fa85851b-df06-413c-a5c3-3ac137e78011",
+          "name" : "b",
+          "color" : "green"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      },
+      "91c9aefa-2d24-4f7b-a4a2-3e63617b0166" : {
+        "infoState" : {
+          "id" : "91c9aefa-2d24-4f7b-a4a2-3e63617b0166",
+          "name" : "e",
+          "color" : "red"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      },
+      "f3818331-e12e-4dbc-9926-0238dae95dfd" : {
+        "infoState" : {
+          "id" : "f3818331-e12e-4dbc-9926-0238dae95dfd",
+          "name" : "a",
+          "color" : "blue"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      },
+      "830dba80-1188-4332-91b5-9c64c9482aab" : {
+        "infoState" : {
+          "id" : "830dba80-1188-4332-91b5-9c64c9482aab",
+          "name" : "d",
+          "color" : "purple"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      }
+    },
+    "gameStatus" : "NEW_GAME",
+    "globalParameters" : [ {
+      "name" : "OCEAN",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "INFRASTRUCTURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "TEMPERATURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "OXYGEN",
+      "step" : 0,
+      "addEop" : 0
+    } ],
+    "deckCorporations" : [ 1002, 1001, 1000 ]
   },
   "affde48c-6631-497a-87f9-31c5f818eb40" : {
     "gameId" : "affde48c-6631-497a-87f9-31c5f818eb40",

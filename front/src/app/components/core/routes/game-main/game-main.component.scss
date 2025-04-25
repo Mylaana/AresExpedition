@@ -11,7 +11,7 @@ $scrollbar-width: 15px;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	height: 15%;
+	height: 100px;
 	top: 0;
 	&.settings-openned{
 		width: calc(100% - $scrollbar-width);

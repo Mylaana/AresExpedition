@@ -13,7 +13,7 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 
 # Architecture and Concepts
 ## Technologies used :
-Frontend: Angular 17   
+Frontend: Angular 19   
 Backend: Java 23   
 API Websocket: Java Spring Boot + STOMP   
 API REST: Java Spring Boot   
