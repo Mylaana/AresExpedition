@@ -1,11 +1,3 @@
-<div class="wrapper-player-pannel">
-    <div class="wrapper-global-pannel">
-        <app-global-pannel [playerId]="playerId" [playerState]="playerState" [playerIsReady]="playerIsReady" [playerPhase]="playerPhase" [currentPhase]="currentPhase"> </app-global-pannel>
-    </div>
-    <div class="wrapper-ressource-pannel">
-        <app-ressource-pannel [playerId]="playerId" [ressource]="playerState.getRessources()"></app-ressource-pannel>
-    </div>
-    <div class="wrapper-tag-pannel">
-        <app-tag-pannel [playerId]="playerId" [tagState]="playerState.getTags()"></app-tag-pannel>
-    </div>
-</div>
+<app-global-pannel [playerId]="playerId" [playerState]="playerState" [playerIsReady]="playerIsReady" [playerPhase]="playerPhase" [currentPhase]="currentPhase"> </app-global-pannel>
+<app-ressource-pannel [playerId]="playerId" [ressource]="playerState.getRessources()"></app-ressource-pannel>
+<app-tag-pannel [playerId]="playerId" [tagState]="playerState.getTags()"></app-tag-pannel>

@@ -14,7 +14,8 @@
 				class="animated"
 				[@expandCollapseVertical]
 				(@expandCollapseVertical.done)="updateNavHeight()"
-				*ngIf="_playerPannelIsHovered || id===clientPlayerId" [playerId]="id"></app-player-pannel>
+				*ngIf="_playerPannelIsHovered || id===clientPlayerId" [playerId]="id">
+			</app-player-pannel>
 		</ng-container>
 	</div>
 	<span class="wrapper-awards"></span>

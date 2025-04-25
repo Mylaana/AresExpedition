@@ -561,20 +561,26 @@ export class GameState{
 	public setGroupStateFromJson(dto: PlayerStateDTO[]){
 		let groupPlayerState: PlayerStateModel[] = []
 		let playerIdList: myUUID[] = []
+        let playerPhaseList: PlayerPhase[] = []
 		for(let playerStateDTO of dto){
 			//add playerId to list
 			playerIdList.push(playerStateDTO.infoState.i)
 
 			//add playerstate
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
+
+            //add selected player phase
+            playerPhaseList.push({
+                currentSelectedPhase: playerStateDTO.phaseCardState.sp,
+                currentPhaseType: "actionAbilityOnly",
+                playerId: playerStateDTO.infoState.i,
+                previousSelectedPhase: SelectablePhaseEnum.undefined
+            })
 		}
 		this.setPlayerIdList(playerIdList)
 		this.updateGroupPlayerState(groupPlayerState)
 
-		//creates and add player to groupPlayerSelectedPhase
-		let result: PlayerPhase[] = []
-
-		this.updateGroupPlayerSelectedPhase(result)
+		this.updateGroupPlayerSelectedPhase(playerPhaseList)
 		console.log('state loaded: ', this.groupPlayerState.getValue())
 
 		for(let state of this.groupPlayerState.getValue()){

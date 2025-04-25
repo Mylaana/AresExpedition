@@ -31,10 +31,10 @@ export class GlobalInfo {
         }
         return result
     }
-    public static getIdFromType(type: GameItemType): number {
+    public static getIdFromType(type: GameItemType, itemType: 'ressource' | 'tag'): number {
         let tagId: number = -1
         for(let item of this.gameItems){
-            if(item.description===type){return item.id}
+            if(item.name==='$' + itemType + '_' + type + '$'){return item.id}
         }
         return tagId
     }

@@ -421,14 +421,14 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Energy Subsidies
 			case(25):{
-				if(mod.tagList.includes(GlobalInfo.getIdFromType('power'))!=true){break}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('power','tag'))!=true){break}
 				costMod += 4
 				break
 			}
 			//Interplanetary Conference
 			case(37):{
-				if(mod.tagList.includes(GlobalInfo.getIdFromType('earth'))===true){costMod += 3}
-				if(mod.tagList.includes(GlobalInfo.getIdFromType('jovian'))===true){costMod += 3}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===true){costMod += 3}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===true){costMod += 3}
 				break
 			}
 		}
@@ -479,7 +479,7 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Energy Subsidies
 			case(25):{
-				if(playedCardTags.includes(GlobalInfo.getIdFromType('power'))!=true){break}
+				if(playedCardTags.includes(GlobalInfo.getIdFromType('power','tag'))!=true){break}
 				result.push(this.createEventDraw(1))
 				break
 			}
@@ -488,15 +488,15 @@ export class ProjectCardPlayedEffectService {
 				//self triggering excluded
 				if(cardPlayedIsTheTrigger===true){break}
 				if(
-					playedCardTags.includes(GlobalInfo.getIdFromType('earth'))!=true
-					&& playedCardTags.includes(GlobalInfo.getIdFromType('jovian'))!=true
+					playedCardTags.includes(GlobalInfo.getIdFromType('earth','tag'))!=true
+					&& playedCardTags.includes(GlobalInfo.getIdFromType('jovian','tag'))!=true
 				){break}
 				result.push(this.createEventDraw(1))
 				break
 			}
 			//Optimal Aerobraking
 			case(45):{
-				if(playedCardTags.includes(GlobalInfo.getIdFromType('event'))!=true){break}
+				if(playedCardTags.includes(GlobalInfo.getIdFromType('event','tag'))!=true){break}
 				result.push(
 					this.createEventAddRessource([
 					{name: 'plant', valueStock: 2},
@@ -506,7 +506,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Bacterial Aggregate
 			case(222):{
-				if(playedCardTags.includes(GlobalInfo.getIdFromType('earth'))!=true){break}
+				if(playedCardTags.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
 				result.push(this.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
 				break
 			}
