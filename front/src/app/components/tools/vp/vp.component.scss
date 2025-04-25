@@ -1,0 +1,32 @@
+:host{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper-main{
+    height: calc(100% - 6px);
+    aspect-ratio: 1;
+
+    border: rgb(61, 61, 61) solid 2px;
+
+    outline: rgb(216, 216, 216) 1px solid;
+    outline-offset: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(0deg, rgb(26, 17, 9) 0%, rgba(143,92,63,1) 35%, rgba(255,239,213,1) 100%);
+    & p{
+        font-size: 100%;
+        color: white;
+    }
+    &.round{
+        border-radius: 50%;
+    }
+    &.square{
+        border-radius: 5px;
+    }
+}

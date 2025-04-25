@@ -16,14 +16,8 @@
         </div>
     </div>
     <div class="pannel-card">
-        <div class="card-icon">
-            <div class="vp-icon">
-                <p>VP</p>
-            </div>
-        </div>
-        <div class="pannel-text">
-            <p>{{playerState.getVP()}}</p>
-        </div>
+        <app-vp [vpNumber]="playerState.getVP().toString()" [shape]="'square'">
+        </app-vp>
     </div>
     <div class="pannel-card">
         <div class="card-icon">

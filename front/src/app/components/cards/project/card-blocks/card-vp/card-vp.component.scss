@@ -30,31 +30,10 @@
     align-items: center;
     justify-content: left;
 }
-.vp-icon{
-    z-index: 1;
+app-vp{
     position: relative;
-
-    border-radius: 50%;
-    border-width: 2px;
-    border-style: solid;
-    border-color: rgb(61, 61, 61);
-
-    outline: rgb(216, 216, 216) 1px solid;
-    outline-offset: 0px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 70%;
-    aspect-ratio: 1;
-
-
-    background: linear-gradient(0deg, rgb(26, 17, 9) 0%, rgba(143,92,63,1) 35%, rgba(255,239,213,1) 100%);
-    & p{
-        font-size: 20px;
-        font-weight: bold;
-    }
+    z-index: 1;
+    height: 90%;
 }
 .wrapper-vp-background{
     z-index: 0;
