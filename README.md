@@ -44,7 +44,6 @@ Action phase upgrade not working
 Production phase screen not working   
 Frontend data not being reset when game rollbacks to initial draft (edge case)   
 Game not being saved on backend   
-Previous Phase selected not saved in backend and not showing in player pannel   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
