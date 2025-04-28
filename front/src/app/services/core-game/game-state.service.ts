@@ -291,6 +291,7 @@ export class GameState{
     }
 
 	getClientPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPhaseSelected()}
+	getClientPreviousPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPreviousPhaseSelected()}
     getClientUpgradedPhaseCards(): PhaseCardModel[] {return this.getClientState().getUpgradedPhaseCards()}
     getClientHandIdList(filter?: ProjectFilter): number[] {return this.getClientState().getProjectHandIdList(filter)}
     getClientHandModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList(filter))}
