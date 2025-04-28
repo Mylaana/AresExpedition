@@ -42,8 +42,7 @@ Backend: Junit
 ## /!\BUG/!\ :
 Action phase upgrade not working   
 Production phase screen not working   
-Frontend data not being reset when game rollbacks to initial draft (edge case)   
-Game not being saved on backend   
+Builders/phase locked status not being saved after drawing cards   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -71,7 +70,7 @@ Add Forest points
 Add Event removing any ressource in list on played card
 
 ### Interface
-Add Ocean last bonus description
+Add Ocean bonus description
 Add main buttons help popup
 Add onClick visual effect for buttons   
 Add phase upgrade count and logo in player pannel
