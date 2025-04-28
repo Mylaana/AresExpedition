@@ -16,7 +16,6 @@ import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
 import { EventDesigner } from "../designers/event-designer.service";
-import { Utils } from "../../utils/utils";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -37,8 +36,6 @@ interface PhaseOrder {
 
 type EventPileAddRule = 'first' | 'second' | 'last'
 
-
-const phaseCount: number = 5;
 const cardSellValue: number = 3;
 
 @Injectable({
@@ -157,9 +154,11 @@ export class GameState{
      *
      * triggers all phase change and cleaning related stuff
      */
+	/*
     goToNextPhase(currentPhase:NonSelectablePhase):NonSelectablePhase{
         let nextPhase: NonSelectablePhase;
         let startCounting: number = Math.max(this.phaseIndex + 1, 1) //start looping at phase index +1 or 1
+		console.log('GO TO NEXT PHASE')
 
         for(let i=startCounting; i<=phaseCount; i++){
             if(this.accessSelectedPhase(this.accessPhaseOrder(i))===true){
@@ -175,6 +174,7 @@ export class GameState{
         this.resetPhaseSelection()
         return this.phaseOrder["0"]
     }
+		*/
 
     updateGroupPlayerState(newState: PlayerStateModel[]): void{
         this.groupPlayerState.next(newState)
@@ -277,13 +277,15 @@ export class GameState{
     /**
      * clears up current phase selection for players and adds previous selected phase
      */
+	/*
     resetPhaseSelection(){
+		console.log('RESET PHASE SELECTION')
         for(let i=0; i<this.groupPlayerSelectedPhase.getValue().length; i++){
             this.groupPlayerSelectedPhase.getValue()[i].previousSelectedPhase = this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase
             this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase = SelectablePhaseEnum.undefined
         }
     }
-
+*/
     updateGroupPlayerSelectedPhase(newGroupPlayerSelectedPhase: PlayerPhase[]):void{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
@@ -561,26 +563,17 @@ export class GameState{
 	public setGroupStateFromJson(dto: PlayerStateDTO[]){
 		let groupPlayerState: PlayerStateModel[] = []
 		let playerIdList: myUUID[] = []
-        let playerPhaseList: PlayerPhase[] = []
 		for(let playerStateDTO of dto){
 			//add playerId to list
 			playerIdList.push(playerStateDTO.infoState.i)
 
 			//add playerstate
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
-
-            //add selected player phase
-            playerPhaseList.push({
-                currentSelectedPhase: playerStateDTO.phaseCardState.sp,
-                currentPhaseType: "actionAbilityOnly",
-                playerId: playerStateDTO.infoState.i,
-                previousSelectedPhase: SelectablePhaseEnum.undefined
-            })
 		}
 		this.setPlayerIdList(playerIdList)
 		this.updateGroupPlayerState(groupPlayerState)
 
-		this.updateGroupPlayerSelectedPhase(playerPhaseList)
+		this.updateGroupPlayerSelectedPhase(PlayerStateModel.toPlayerPhaseGroup(dto))
 		console.log('state loaded: ', this.groupPlayerState.getValue())
 
 		for(let state of this.groupPlayerState.getValue()){

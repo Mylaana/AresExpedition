@@ -1,4 +1,4 @@
-import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.interface";
+import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter, PlayerPhase } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { myUUID, PlayableCardType, RessourceType, RGB } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
@@ -176,6 +176,18 @@ export class PlayerStateModel {
 		this.phaseCardState.newGame()
 		this.globalParameterState.newGame()
 		this.otherState.newGame()
+	}
+	public static toPlayerPhaseGroup(groupDto: PlayerStateDTO[]){
+		let playerPhaseList: PlayerPhase[] = []
+		for(let dto of groupDto){
+			playerPhaseList.push({
+				currentSelectedPhase: dto.phaseCardState.sp,
+				currentPhaseType: "actionAbilityOnly",
+				playerId: dto.infoState.i,
+				previousSelectedPhase: dto.phaseCardState.psp
+			})
+		}
+		return playerPhaseList
 	}
 }
 
