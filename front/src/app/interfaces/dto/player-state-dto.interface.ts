@@ -41,6 +41,7 @@ export interface PlayerProjectCardStateDTO {
 export interface PlayerPhaseCardStateDTO {
 	pc : PhaseCardDTO[]
 	sp: SelectablePhaseEnum
+	psp: SelectablePhaseEnum
 }
 export interface PlayerGlobalParameterStateDTO {
 	gp: GlobalParameterDTO[]

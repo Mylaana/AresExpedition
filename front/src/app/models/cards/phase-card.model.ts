@@ -8,11 +8,10 @@ export class PhaseCardGroupModel {
 	phaseCards: PhaseCardModel[] = []
 	phaseIsUpgraded: boolean = false
 
-	getUpgradedPhaseCard(): PhaseCardModel {
+	getPhaseCard(onlyUpgraded: boolean = false): PhaseCardModel {
 		for(let card of this.phaseCards){
-			if(card.phaseCardUpgraded===true){
-				return card
-			}
+			if(onlyUpgraded===false){return card}
+			if(card.phaseCardUpgraded===true){return card}
 		}
 		return new PhaseCardModel
 	}

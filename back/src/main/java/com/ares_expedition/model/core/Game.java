@@ -206,9 +206,16 @@ public class Game {
             this.currentPhase = tempSelectedPhase.getFirst();
             return;
         }
+        this.newRound();
+    }
+
+    private void newRound(){
         this.selectedPhase.clear();
         this.selectedPhase.add(PhaseEnum.PLANIFICATION);
         this.currentPhase = this.selectedPhase.getFirst();
+        for(Map.Entry<String, PlayerState> entry:  this.groupPlayerState.entrySet()){
+            entry.getValue().getPhaseCardState().newRound();
+        }
     }
 
     public void addPhaseSelected(PhaseEnum phase){

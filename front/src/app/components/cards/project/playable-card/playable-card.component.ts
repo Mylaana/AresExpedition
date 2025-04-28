@@ -60,7 +60,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 
 	_hovered: boolean = false
 	_maximumActivation: boolean = false
-	_buttonIndexEnabled: number = 0
+	_activationCostPayable: boolean = false
 
 	private destroy$ = new Subject<void>()
 
@@ -83,11 +83,11 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 
 		// subscribe to gameState
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
-		this.checkPlayable()
+		this.setBuildable()
 		this.checkMaximumActivation()
 
 		if(this.state.isActivable()){
-			this.updateActivationButtonsState()
+			this.setActivationPayable()
 		}
 		this._loaded = true
 	}
@@ -98,7 +98,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	resetCardState(): void {
 		if(this.megacreditAvailable===0){return}
 		this.updateCost()
-		this.checkPlayable()
+		this.setBuildable()
 	}
 	private fillTagId(tagsId:number[]): number[] {
 		// ensures having 3 tags id in tagId
@@ -143,24 +143,21 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 			playedTriggersList: state.getTriggerCostMod(),
 			buildDiscount: this.buildDiscount
 		})
-		this.checkPlayable()
+		this.setBuildable()
 	}
-	checkPlayable(): void {
+	setBuildable(): void {
 		this.state.setBuildable(this.megacreditAvailable >= this.projectCard.cost)
 	}
 	public onActivation(twice: boolean): void {
 		this.projectCard.activated += 1
 
-		this.updateActivationButtonsState()
+		this.setActivationPayable()
 		this.checkMaximumActivation()
 
 		this.cardActivated.emit({card: this.projectCard, twice: this.projectCard.activated>1})
 	}
-	private updateActivationButtonsState(): void {
-		if(!ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getClientState())){
-			this._buttonIndexEnabled = 0
-		}
-
+	private setActivationPayable(): void {
+		this._activationCostPayable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getClientState())
 	}
 	private checkMaximumActivation(): void {
 		this._maximumActivation = (this.projectCard.activated>1) || (this.projectCard.activated>=1 && this.activableTwice === false)

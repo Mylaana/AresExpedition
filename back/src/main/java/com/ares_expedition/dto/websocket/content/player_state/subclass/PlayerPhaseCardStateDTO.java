@@ -14,6 +14,8 @@ public class PlayerPhaseCardStateDTO {
     private List<PhaseCardDTO> phaseCards = new ArrayList<PhaseCardDTO>();
     @JsonProperty("sp")
     private PhaseEnum selectedPhase;
+    @JsonProperty("psp")
+    private PhaseEnum previousSelectedPhase;
 
     PlayerPhaseCardStateDTO() {
     }
@@ -23,6 +25,7 @@ public class PlayerPhaseCardStateDTO {
             this.phaseCards.add(card.toJson());
         }
         this.selectedPhase = state.getSelectedPhase();
+        this.previousSelectedPhase = state.getPreviousSelectedPhase();
     }
 
     public List<PhaseCardDTO> getPhaseCards() {
@@ -39,5 +42,15 @@ public class PlayerPhaseCardStateDTO {
 
     public void setSelectedPhase(PhaseEnum selectedPhase) {
         this.selectedPhase = selectedPhase;
+    }
+
+    public PhaseEnum getPreviousSelectedPhase() {
+        return previousSelectedPhase;
+    }
+
+    public void setPreviousSelectedPhase(PhaseEnum previousSelectedPhase) {
+        this.previousSelectedPhase = previousSelectedPhase;
     }    
+
+    
 }

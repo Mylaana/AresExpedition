@@ -137,5 +137,6 @@ public class GameController {
             default:
                 break;
         }
+        JsonGameDataHandler.saveGame(game);
     }
 }

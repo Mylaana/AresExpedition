@@ -12,6 +12,7 @@ import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
 public class PlayerPhaseCardState {
     private List<PhaseCard> phaseCards = new ArrayList<PhaseCard>();
     private PhaseEnum selectedPhase;
+    private PhaseEnum previousSelectedPhase;
 
     public PlayerPhaseCardState() {
     }
@@ -21,6 +22,7 @@ public class PlayerPhaseCardState {
             this.phaseCards.add(PhaseCard.fromJson(card));
         }
         this.selectedPhase = dto.getSelectedPhase();
+        this.previousSelectedPhase = dto.getPreviousSelectedPhase();
     }
 
     public PhaseEnum getSelectedPhase() {
@@ -45,5 +47,18 @@ public class PlayerPhaseCardState {
 
     public PlayerPhaseCardStateDTO toJson() {
         return new PlayerPhaseCardStateDTO(this);
+    }
+
+    public PhaseEnum getPreviousSelectedPhase() {
+        return previousSelectedPhase;
+    }
+
+    public void setPreviousSelectedPhase(PhaseEnum previousSelectedPhase) {
+        this.previousSelectedPhase = previousSelectedPhase;
+    }
+    
+    public void newRound() {
+        this.previousSelectedPhase = this.selectedPhase;
+        this.selectedPhase = PhaseEnum.UNDEFINED;
     }
 }

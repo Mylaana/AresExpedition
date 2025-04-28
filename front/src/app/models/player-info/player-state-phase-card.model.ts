@@ -11,6 +11,7 @@ export class PlayerPhaseCardStateModel {
 	private phaseGroups!: PhaseCardGroupModel[]
 	private phaseCardUpgradeCount: number = 0
 	private selectedPhase!: SelectablePhaseEnum
+	private previousSelectedPhase!: SelectablePhaseEnum
 
 	private phaseService: PhaseCardInfoService
 
@@ -20,21 +21,25 @@ export class PlayerPhaseCardStateModel {
 		if(instantiateEmpty){
 			this.phaseGroups = []
 			this.selectedPhase = SelectablePhaseEnum.undefined
+			this.previousSelectedPhase = SelectablePhaseEnum.undefined
 			return
 		}
 
 		this.selectedPhase = dto.sp
+		this.previousSelectedPhase = dto.psp
 		this.phaseGroups = this.phaseGroupFromJson(dto.pc)
 	}
 
-	getPhaseCardUpgradedCount(): number { return this.phaseCardUpgradeCount }
-	addPhaseCardUpgradeCount(): void { this.phaseCardUpgradeCount++ }
-	getPhaseSelected(): SelectablePhaseEnum { return this.selectedPhase }
+	getPhaseCardUpgradedCount(): number { return this.phaseCardUpgradeCount}
+	addPhaseCardUpgradeCount(): void { this.phaseCardUpgradeCount++}
+	getPhaseSelected(): SelectablePhaseEnum { return this.selectedPhase}
 	setPhaseSelected(selection: SelectablePhaseEnum): void {this.selectedPhase = selection}
-	getUpgradedPhaseCards(): PhaseCardModel[] {
+	getPreviousPhaseSelected(): SelectablePhaseEnum { return this.previousSelectedPhase}
+	setPreviousPhaseSelected(selection: SelectablePhaseEnum): void {console.trace('set PREVIOUS phase selected',selection); this.previousSelectedPhase = selection}
+	getPhaseCards(onlyUpgraded: boolean = false):  PhaseCardModel[] {
 		let cards: PhaseCardModel[] = []
 		for(let group of this.phaseGroups){
-			cards.push(group.getUpgradedPhaseCard())
+			cards.push(group.getPhaseCard(onlyUpgraded))
 		}
 		return cards
 	}
@@ -55,7 +60,8 @@ export class PlayerPhaseCardStateModel {
 	toJson(): PlayerPhaseCardStateDTO {
 		return {
 			pc: this.phaseGroupToJson(this.phaseGroups),
-			sp: this.selectedPhase
+			sp: this.selectedPhase,
+			psp: this.previousSelectedPhase
 		}
 	}
 	newGame(): void {
@@ -64,7 +70,7 @@ export class PlayerPhaseCardStateModel {
 		}
 	}
 	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseCardStateModel {
-		if (!data.pc || !data.sp){
+		if (!data.pc || !data.sp || !data.psp){
 			throw new Error("Invalid PlayerPhaseCardStateDTO: Missing required fields")
 		}
 		return new PlayerPhaseCardStateModel(injector, data)
@@ -110,7 +116,8 @@ export class PlayerPhaseCardStateModel {
 			injector,
 			{
 				pc: [],
-				sp: SelectablePhaseEnum.undefined
+				sp: SelectablePhaseEnum.undefined,
+				psp: SelectablePhaseEnum.undefined
 			},
 			true
 		)

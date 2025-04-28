@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonDesigner } from '../../../../../services/designers/button-designer.service';
 import { NonEventButton } from '../../../../../models/core-game/button.model';
 import { expandCollapseVertical } from '../../../../../animations/animations';
+import { PlayableCardModel } from '../../../../../models/cards/project-card.model';
 
 @Component({
     selector: 'app-card-activation',
@@ -18,6 +19,8 @@ import { expandCollapseVertical } from '../../../../../animations/animations';
 export class CardActivationComponent implements OnInit{
 	@Input() maximumCardActivation!: boolean
 	@Input() buttonIndexEnabled: number = 0
+	@Input() activationCostPayable: boolean = false
+	@Input() projectCard!: PlayableCardModel
 	@Output() activated = new EventEmitter<boolean>()
 	_activateOnce!: NonEventButton
 	_activateTwice!: NonEventButton
@@ -27,16 +30,13 @@ export class CardActivationComponent implements OnInit{
 		this._activateTwice = ButtonDesigner.createNonEventButton('activateProjectTwice')
 		this.updateButtonStatus()
 	}
-	ngOnChanges(changes: SimpleChanges) {
-		if (changes['buttonIndexEnabled'] && changes['buttonIndexEnabled'].currentValue) {
-			this.updateButtonStatus()
-		}
-	}
 	onActivation(button: NonEventButton): void {
+		this.projectCard.activated += 1
+		this.updateButtonStatus()
 		this.activated.emit(button===this._activateTwice)
 	}
 	private updateButtonStatus(): void {
-		this._activateOnce.updateEnabled(this.buttonIndexEnabled===1)
-		this._activateTwice.updateEnabled(this.buttonIndexEnabled===2)
+		this._activateOnce.updateEnabled(this.projectCard.activated<1 && this.activationCostPayable)
+		this._activateTwice.updateEnabled(this.projectCard.activated===1 && this.activationCostPayable)
 	}
 }

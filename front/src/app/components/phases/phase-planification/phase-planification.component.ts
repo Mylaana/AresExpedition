@@ -44,11 +44,12 @@ export class PhasePlanificationComponent {
 
 	ngOnInit(){
 		let playerPhase = this.gameStateService.getClientPhaseSelected()
-		if(playerPhase===undefined){return}
-		for(let phase of phaseList){
-			this.createPhaseButtons(phase, true)
-		}
 		this.setPhaseCards()
+		if(playerPhase===undefined){return}
+		let previousSelectedPhase = this.gameStateService.getClientPreviousPhaseSelected()
+		for(let phase of phaseList){
+			this.createPhaseButtons(phase, previousSelectedPhase!=phase)
+		}
 	}
 	createPhaseButtons(buttonPhase: SelectablePhaseEnum, enabled: boolean): void {
 		let newButton = new ImageButton
@@ -60,7 +61,7 @@ export class PhasePlanificationComponent {
 		this.buttonList.push(newButton)
 	}
 	setPhaseCards(): void {
-		this.selectedPhaseCards = this.gameStateService.getClientUpgradedPhaseCards()
+		this.selectedPhaseCards = this.gameStateService.getClientPhaseCards()
 	}
 	setCurrentPhaseCard(): void {
 		for(let index of phaseIndexMap.keys()){
@@ -76,11 +77,8 @@ export class PhasePlanificationComponent {
 		if(button.name===undefined){return}
 		this.setSelectedPhase(this.event as EventGeneric, button.name as SelectablePhaseEnum)
 
-		//this.gameStateService.playerSelectPhase(this.clientPlayerId, button.value as SelectablePhaseEnum)
-
 		this.currentPhaseCard = undefined
 		this.setCurrentPhaseCard()
-		//this.phaseSelected.emit()
 	}
 	public setSelectedPhase(event: EventGeneric, phase: SelectablePhaseEnum): void {
 		this.currentPhaseSelected = phase

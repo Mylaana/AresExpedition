@@ -64,12 +64,12 @@
 	</div>
 	<app-card-activation
 		*ngIf="state.isActivable()"
+		[projectCard]="projectCard"
 		[maximumCardActivation]="_maximumActivation"
-		[buttonIndexEnabled]="_buttonIndexEnabled"
+		[activationCostPayable]="_activationCostPayable"
 		(activated)="onActivation($event)">
 	</app-card-activation>
 </div>
-
 
 
 <!--
