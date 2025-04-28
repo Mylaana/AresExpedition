@@ -12,7 +12,8 @@
             </div>
         </div>
     </div>
-    <div class="wrapper-tag-text">
+    <div class="wrapper-tag-text"
+    *ngIf="tagState.valueCount">
         <p class="center">{{tagState.valueCount}}</p>
     </div>
 </div>

@@ -33,7 +33,7 @@ export class PlayerRessourceStateModel {
 				valueBaseProd: 0,
 				valueStock: 0,
 				hasStock: (i!=3 && i!=4),
-				imageUrlId: GlobalInfo.getIdFromType(GAME_RESSOURCE_LIST[i])
+				imageUrlId: GlobalInfo.getIdFromType(GAME_RESSOURCE_LIST[i], 'ressource')
 			}
 			result.push(ressource)
 		}

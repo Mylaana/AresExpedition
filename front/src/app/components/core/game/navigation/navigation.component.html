@@ -2,18 +2,20 @@
 	@fadeIn
 	(@expandCollapseVertical.done)="updateNavHeight()">
 	<div class="wrapper-global-parameter">
-		<app-global-parameter-pannel></app-global-parameter-pannel>
+		<app-global-parameter-pannel class="ares-navigation-pannel"></app-global-parameter-pannel>
 	</div>
-	<div class="wrapper-player-pannel ares-background ares-border"
+	<div class="wrapper-player-pannel ares-navigation-pannel"
+		[class.hovered]="_playerPannelIsHovered"
 		(mouseenter)="_playerPannelIsHovered=true"
 		(mouseleave)="_playerPannelIsHovered=false"
 		@fadeIn>
 		<ng-container *ngFor="let id of _playerIdList">
 			<app-player-pannel
-			class="animated"
-			[@expandCollapseVertical]
-			(@expandCollapseVertical.done)="updateNavHeight()"
-			*ngIf="_playerPannelIsHovered || !isScrolled || id===clientPlayerId" [playerId]="id"></app-player-pannel>
+				class="animated"
+				[@expandCollapseVertical]
+				(@expandCollapseVertical.done)="updateNavHeight()"
+				*ngIf="_playerPannelIsHovered || id===clientPlayerId" [playerId]="id">
+			</app-player-pannel>
 		</ng-container>
 	</div>
 	<span class="wrapper-awards"></span>

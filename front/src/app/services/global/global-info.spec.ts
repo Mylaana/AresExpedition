@@ -6,11 +6,13 @@ describe('Service - Global Info', () => {
         let expectedUrl: string
         let expectedId: number
         let expectedType: GameItemType
+		let expectedCategory: 'tag' | 'ressource'
 
         beforeAll(() => {
             expectedUrl = 'assets/tag/power.png'
             expectedId = 3
             expectedType = 'power'
+			expectedCategory = 'tag'
         })
         it('should evaluate getUrlFromID returning existing value', () => {
             let url =  GlobalInfo.getUrlFromID(expectedId)
@@ -33,12 +35,12 @@ describe('Service - Global Info', () => {
             expect(url).toEqual('')
         })
         it('should evaluate getIdFromType returning existing value', () => {
-            let id =  GlobalInfo.getIdFromType(expectedType)
+            let id =  GlobalInfo.getIdFromType(expectedType, expectedCategory)
 
             expect(id).toEqual(expectedId)
         })
         it('should evaluate getIdFromType returning -1', () => {
-            let id =  GlobalInfo.getIdFromType('' as GameItemType)
+            let id =  GlobalInfo.getIdFromType('' as GameItemType, expectedCategory)
 
             expect(id).toEqual(-1)
         })

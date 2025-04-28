@@ -1,24 +1,21 @@
-<div class="main ares-card">
-    <div class="wrapper-ressource--stock">
-        <div class="box-ressource-icon">
-            <img [ngClass]="{'img-card': ressource.name=='card'}" [src]="imageUrl" [alt]="ressource.name">
+<div class="wrapper-ressource--stock">
+    <div class="box-ressource-icon">
+        <img [ngClass]="{'img-card': ressource.name=='card'}" [src]="imageUrl" [alt]="ressource.name">
+    </div>
+    <div *ngIf="ressource.hasStock" class="box-stock">
+        <p> {{ ressource.valueStock }}</p>
+    </div>
+    <div *ngIf="ressource.valueMod" class="wrapper-ressource-mod">
+        <div class="box-ressource-mod-icon center">
+            <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
         </div>
-		<div *ngIf="ressource.hasStock" class="box-stock">
-			<p class="center"> {{ ressource.valueStock }}</p>
-		</div>
-        <div *ngIf="ressource.valueMod" class="wrapper-ressource-mod">
-            <div class="box-ressource-mod-icon center">
-                <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
-            </div>
-            <div class="box-ressource-mod-value">
-                <p class="text-cost-mod center">{{ ressource.valueMod }}</p>
-            </div>
+        <div class="box-ressource-mod-value">
+            <p class="text-cost-mod center">{{ ressource.valueMod }}</p>
         </div>
     </div>
-	<div class="wrapper-ressource--production">
-		<div class="box-production" [ngClass]="['background-production--'+_production]">
-			<p class="center">{{ ressource.valueProd }}</p>
-		</div>
-	</div>
-
+</div>
+<div class="wrapper-ressource--production">
+    <div class="box-production" [ngClass]="['background-production--'+_production]">
+        <p>{{ ressource.valueProd }}</p>
+    </div>
 </div>

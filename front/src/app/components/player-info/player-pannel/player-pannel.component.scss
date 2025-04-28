@@ -1,25 +1,13 @@
-.wrapper-player-pannel {
+:host {
     display: flex;
     align-items: center;
-    height: 30px;
-    justify-content: space-around;
-    padding-right: 1%;
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin: 2px;
     width: 100%;
 }
 app-global-pannel, app-ressource-pannel, app-tag-pannel{
     height: 100%;
-    width: 25%;
-}
-.wrapper-tag-pannel {
-    height: 100%;
-    width: 25%;
-}
-.wrapper-ressource-pannel{
-	height: 100%;
-}
-.wrapper-global-pannel, app-global-pannel{
-    height: 100%;
-    width: auto;
-	flex-grow: .85;
+    width: fit-content;
+    height: 30px;
 }

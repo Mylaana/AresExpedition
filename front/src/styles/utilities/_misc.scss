@@ -1,71 +1,76 @@
 @use 'sass:list';
 $fade-transition-time: .2s;
 .element-clickable {
-    &:hover {
-      filter: brightness(80%);
-      cursor: pointer;
-    }
-  }
-  
-  .element-disabled {
-    filter: grayscale(100%);
-  }
-  
-  .full-greyed-filter {
-    filter: grayscale(100%);
-  }
-  
-  .heavy-greyed-filter {
-    filter: grayscale(85%);
-  }
-  
-  .light-greyed-filter {
-    filter: grayscale(30%);
-  }
-  
-  .element-fade-in {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity $fade-transition-time linear;
-  }
-  
-  .element-fade-out {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s $fade-transition-time, opacity $fade-transition-time linear;
-  }
-  
-  @keyframes fadeInOpacity {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-  
-  .ares-background {
-    background: rgba(white, .7);
-  }
-  
-  .shadowed-text {
-    background: rgba(0, 0, 0, .5);
-    border-radius: 5px;
-    width: 100%;
-    padding: 3px;
-  }
-  
-  // Backgrounds production
-  @each $name, $values in (
-    red: (rgb(237, 53, 49), rgb(255, 129, 25)),
-    grey: (rgb(66, 66, 66), rgb(184, 184, 184)),
-    blue: (rgb(66, 66, 66), rgb(39, 177, 229))
-  ) {
-    $color-one: list.nth($values, 1);
-    $color-two: list.nth($values, 2);
-    .#{'background-production--' + $name} {
-      $step1: 2%;
-      $step2: 4%;
-      $step3: 6%;
-      background: repeating-linear-gradient(135deg, $color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
-      background: -webkit-repeating-linear-gradient(135deg, $color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
-      background: -moz-repeating-linear-gradient(135deg, $color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
-    }
-  }
-  
+		&:hover {
+			filter: brightness(80%);
+			cursor: pointer;
+		}
+	}
+	
+	.element-disabled {
+		filter: grayscale(100%);
+	}
+	
+	.full-greyed-filter {
+		filter: grayscale(100%);
+	}
+	
+	.heavy-greyed-filter {
+		filter: grayscale(85%);
+	}
+	
+	.light-greyed-filter {
+		filter: grayscale(30%);
+	}
+	
+	.element-fade-in {
+		visibility: visible;
+		opacity: 1;
+		transition: opacity $fade-transition-time linear;
+	}
+	
+	.element-fade-out {
+		visibility: hidden;
+		opacity: 0;
+		transition: visibility 0s $fade-transition-time, opacity $fade-transition-time linear;
+	}
+	
+	@keyframes fadeInOpacity {
+		0% { opacity: 0; }
+		100% { opacity: 1; }
+	}
+	
+	.ares-background {
+		background: rgba(white, .7);
+	}
+	.ares-navigation-pannel{
+		border: solid 1px rgba(255, 129, 25, .8);
+		border-top: 0;
+		box-shadow: 0 0 5px 0px rgba(rgb(255, 129, 25), .6);
+		border-radius: 5px;
+	}
+	.shadowed-text {
+		background: rgba(0, 0, 0, .5);
+		border-radius: 5px;
+		width: 100%;
+		padding: 3px;
+	}
+	
+	// Backgrounds production
+	@each $name, $values in (
+		red: (rgb(237, 53, 49), rgb(255, 129, 25)),
+		grey: (rgb(66, 66, 66), rgb(184, 184, 184)),
+		blue: (rgb(66, 66, 66), rgb(39, 177, 229))
+	) {
+		$color-one: list.nth($values, 1);
+		$color-two: list.nth($values, 2);
+		.#{'background-production--' + $name} {
+			$step1: 2%;
+			$step2: 4%;
+			$step3: 6%;
+			background: repeating-linear-gradient(135deg, $color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+			background: -webkit-repeating-linear-gradient(135deg, $color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+			background: -moz-repeating-linear-gradient(135deg, $color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+		}
+	}
+	

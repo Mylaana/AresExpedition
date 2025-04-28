@@ -16,7 +16,21 @@ $nav-gap: 1.5%;
 }
 .wrapper-player-pannel{
 	width: $player-pannel-width;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	//gap: 1px;
+
 	pointer-events: all;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	padding: 5px;
+	background: linear-gradient(to top, rgba(black, .1) 20%, rgba(0, 0, 0, 0.3) 100%);
+	&.hovered{
+		background: rgba(0, 0, 0, 0.6);
+		box-shadow: 0 0 10px 5px rgba(rgb(255, 129, 25), .6);
+	}
 }
 .app-player-pannel{
     z-index: 10;

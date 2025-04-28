@@ -1,10 +1,14 @@
-.main{
+:host{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 3px;
+	gap: 5px;
 	width: 100%;
 	height: 100%;
+	background: linear-gradient(to top left, rgba(black, .0) 20%, rgba(0, 0, 0, 0.6) 100%);
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: 0;
 }
 .wrapper-parameter-card{
 	display: flex;
@@ -20,7 +24,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: start;
-	gap: 5%;
+	gap: 5px;
 	height: 100%;
 	width: 0%;
 	flex-grow: 1;

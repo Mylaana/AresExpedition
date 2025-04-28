@@ -62,6 +62,7 @@ export class PlayerPannelComponent implements OnInit, OnDestroy{
 		this.playerIsReady = this.gameStateService.getPlayerReady(this.playerId)
 	}
 	updatePlayerPhase(playerPhase: PlayerPhase[]): void {
+		console.log('player phase:', playerPhase)
 		for(let phase of playerPhase){
 			if(phase.playerId===this.playerId){
 				this.playerPhase = phase

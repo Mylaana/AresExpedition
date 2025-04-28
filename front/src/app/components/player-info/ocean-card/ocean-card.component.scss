@@ -1,5 +1,5 @@
 
-.main{
+:host{
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -9,8 +9,8 @@
 }
 .background{
 	position: absolute;
-	height: 100%;
-	width: 100%;
+	height: 90%;
+	aspect-ratio: 1;
 	img {
 		height: 100%;
 		aspect-ratio: 1;
@@ -19,8 +19,8 @@
 .foreground{
 	z-index: 1;
 	position: absolute;
-	width: 100%;
-	height: 100%;
+	height: 90%;
+	aspect-ratio: 1;
 	border-radius: 50%;
 	background-image: linear-gradient(35deg, rgba(0,0,0, .4) 30%, transparent 40%, transparent 60%, rgba(255,255,255, .5) 80%);
 }
@@ -30,10 +30,10 @@
 	grid-template-columns: .5fr 1fr .5fr 1fr .5fr 1fr .5fr 1fr .5fr;
 	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
-	top: -3%;
+	top: 0%;
 	left: 3%;
-	width: 75%;
-	height: 75%;
+	width: 95%;
+	height: 95%;
 }
 .ocean{
 	position: relative;
@@ -51,7 +51,7 @@
 	height: 95%;
 	&.empty{
 		$width: 25%;
-		$border-thickness: 2px;
+		$border-thickness: 3px;
 		$inner-offset: calc($border-thickness / 2);
 		background: var(--color-ares-blue-dark3);
 		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);

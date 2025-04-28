@@ -13,7 +13,7 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 
 # Architecture and Concepts
 ## Technologies used :
-Frontend: Angular 17   
+Frontend: Angular 19   
 Backend: Java 23   
 API Websocket: Java Spring Boot + STOMP   
 API REST: Java Spring Boot   
@@ -44,6 +44,7 @@ Action phase upgrade not working
 Production phase screen not working   
 Frontend data not being reset when game rollbacks to initial draft (edge case)   
 Game not being saved on backend   
+Previous Phase selected not saved in backend and not showing in player pannel   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
