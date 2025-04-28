@@ -16,10 +16,16 @@ $nav-gap: 1.5%;
 }
 .wrapper-player-pannel{
 	width: $player-pannel-width;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	//gap: 1px;
+
 	pointer-events: all;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-	padding: 3px;
+	padding: 5px;
 	background: linear-gradient(to top, rgba(black, .1) 20%, rgba(0, 0, 0, 0.3) 100%);
 	&.hovered{
 		background: rgba(0, 0, 0, 0.6);

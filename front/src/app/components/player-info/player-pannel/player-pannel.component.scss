@@ -1,12 +1,13 @@
 :host {
     display: flex;
     align-items: center;
-    height: 30px;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin: 2px;
     width: 100%;
 }
 app-global-pannel, app-ressource-pannel, app-tag-pannel{
     height: 100%;
     width: fit-content;
+    height: 30px;
 }
