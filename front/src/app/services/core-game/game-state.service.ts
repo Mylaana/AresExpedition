@@ -252,6 +252,7 @@ export class GameState{
      * @returns the player's current selected phase
      */
     getPlayerCurrentSelectedPhase(playerId: myUUID): SelectablePhaseEnum {
+		console.log(this.groupPlayerSelectedPhase.getValue(), playerId)
         for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){
             if(playerSelcted.playerId === playerId){
                 return playerSelcted.currentSelectedPhase

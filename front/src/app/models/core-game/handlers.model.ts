@@ -554,14 +554,14 @@ class PhaseResolveHandler {
 
 	}
 
-	private getCurrentUpgradedPhaseCard(): PhaseCardModel[] {
-		return this.gameStateService.getClientPhaseCards(true)
+	private getPhaseCards(): PhaseCardModel[] {
+		return this.gameStateService.getClientPhaseCards()
 	}
 	private refreshCurrentUpgradedPhaseCard(): void {
-		this.currentUpgradedPhaseCards = this.getCurrentUpgradedPhaseCard()
+		this.currentUpgradedPhaseCards = this.getPhaseCards()
 	}
 	private shouldReceivePhaseCardSelectionBonus(phaseResolved: SelectablePhaseEnum): boolean {
-		return this.gameStateService.getPlayerCurrentSelectedPhase(this.clientPlayerId)===phaseResolved
+		return this.gameStateService.getClientCurrentSelectedPhase()===phaseResolved
 	}
 	resolveDevelopment(): void {
 		this.refreshCurrentUpgradedPhaseCard()
