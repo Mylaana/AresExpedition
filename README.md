@@ -43,6 +43,7 @@ Backend: Junit
 Action phase upgrade not working   
 Production phase screen not working   
 Builders/phase locked status not being saved after drawing cards   
+Cards cant be activated twice (when drawing) due to current event status not being saved   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -52,10 +53,11 @@ global: removing obvious comments
 project-card-info-service (and some other?): switch to static   
 TriggerState: switch out trigger id checks from model to a service   
 Optimize data volume exchanged   
+Refactor playable cards component should be storing clientstate and not repeatedly check for state   
 
 ## Planned for v1 :
 ### Backend
-New game creating new DB entry
+Add current phase data saving system (exemple: how many and which cards already activated, production applied or not etc.)   
 
 ### Cards
 Prerequisites for playing project cards feature
