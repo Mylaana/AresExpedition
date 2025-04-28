@@ -89,7 +89,7 @@ export class PlayerStateModel {
 	getPhaseSelected(): SelectablePhaseEnum {return this.phaseCardState.getPhaseSelected()}
 	getPreviousPhaseSelected(): SelectablePhaseEnum {return this.phaseCardState.getPreviousPhaseSelected()}
 	setPhaseSelected(selection: SelectablePhaseEnum): void {this.phaseCardState.setPhaseSelected(selection)}
-	getUpgradedPhaseCards(): PhaseCardModel[] {return this.phaseCardState.getUpgradedPhaseCards()}
+	getPhaseCards(onlyUpgraded: boolean = false): PhaseCardModel[] {return this.phaseCardState.getPhaseCards(onlyUpgraded)}
 	getPhaseGroups(): PhaseCardGroupModel[] {return this.phaseCardState.getPhaseGroups()}
 
 	//globalParameterState

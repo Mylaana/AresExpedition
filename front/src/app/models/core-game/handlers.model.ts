@@ -555,7 +555,7 @@ class PhaseResolveHandler {
 	}
 
 	private getCurrentUpgradedPhaseCard(): PhaseCardModel[] {
-		return this.gameStateService.getClientUpgradedPhaseCards()
+		return this.gameStateService.getClientPhaseCards(true)
 	}
 	private refreshCurrentUpgradedPhaseCard(): void {
 		this.currentUpgradedPhaseCards = this.getCurrentUpgradedPhaseCard()

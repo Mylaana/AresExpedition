@@ -14,8 +14,8 @@
         <div class="wrapper-phase-card-description"
 			@fadeIn>
             <ng-container *ngFor="let phaseCard of selectedPhaseCards">
-                <div @fadeIn *ngIf="currentPhaseSelected === (phaseCard.phaseGroup??''.toLowerCase())"
-					class="wrapper-phase-selected">
+				<div @fadeIn *ngIf="currentPhaseSelected === (phaseCard.phaseGroup.toLowerCase())"
+				class="wrapper-phase-selected">
                     <div class="wrapper-title-and-text">
                         <h4>Ability</h4>
                         <app-text-with-image [rawText]="phaseCard.baseDescription"></app-text-with-image>

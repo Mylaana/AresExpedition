@@ -3645,5 +3645,83 @@
       "addEop" : 0
     } ],
     "deckCorporations" : [ 1002, 1001, 1000 ]
+  },
+  "862d5599-8f29-4351-adf2-24074eece652" : {
+    "gameId" : "862d5599-8f29-4351-adf2-24074eece652",
+    "deck" : [ 54, 46, 20, 45, 4, 49, 18, 29, 37, 25, 36, 42, 9, 58 ],
+    "discard" : [ ],
+    "groupPlayerId" : [ "564431af-36b2-4b8b-b0bc-e769f700afda" ],
+    "groupPlayerReady" : {
+      "564431af-36b2-4b8b-b0bc-e769f700afda" : false
+    },
+    "currentPhase" : "PLANIFICATION",
+    "selectedPhase" : [ "PLANIFICATION" ],
+    "groupPlayerState" : {
+      "564431af-36b2-4b8b-b0bc-e769f700afda" : {
+        "infoState" : {
+          "id" : "564431af-36b2-4b8b-b0bc-e769f700afda",
+          "name" : "a",
+          "color" : "blue"
+        },
+        "scoreState" : {
+          "vp" : null,
+          "milestoneCount" : null,
+          "terraformingRating" : null
+        },
+        "tagState" : {
+          "tags" : [ ]
+        },
+        "ressourceState" : {
+          "ressources" : [ ]
+        },
+        "projectCardState" : {
+          "hand" : [ ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ ],
+          "playedProjectCardStocks" : { },
+          "triggers" : {
+            "playedCardsId" : null,
+            "activeCardsId" : null,
+            "activeOnRessourceAddedToCard" : null,
+            "activeOnParameterIncrease" : null,
+            "activeOnPlayedCard" : null,
+            "activeOnGainedTag" : null,
+            "activeCostModTrigger" : null
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : null,
+          "previousSelectedPhase" : null
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ ]
+        },
+        "otherState" : {
+          "research" : { },
+          "sellCardValueMod" : null
+        }
+      }
+    },
+    "gameStatus" : "NEW_GAME",
+    "globalParameters" : [ {
+      "name" : "OCEAN",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "INFRASTRUCTURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "TEMPERATURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "OXYGEN",
+      "step" : 0,
+      "addEop" : 0
+    } ],
+    "deckCorporations" : [ 1001, 1000, 1002 ]
   }
 }
