@@ -36,7 +36,6 @@ import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/
         PlayableCardListComponent,
         PhaseCardUpgradeSelectorComponent,
         EventMainButtonComponent,
-        CardBuilderListComponent,
         NonEventButtonComponent,
         TextWithImageComponent,
         PhaseActionComponent,
@@ -183,7 +182,7 @@ export class GameEventComponent {
 	public buttonClicked(button: ButtonBase) {
 		console.log('game event button clicked:', button)
 	}
-	public updateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){
+	public onUpdateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){
 		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
@@ -206,7 +205,7 @@ export class GameEventComponent {
 		this.eventHandler.updateActionPhaseMainButtonState()
 	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
-	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){
+	public onCardBuilderButtonClicked(button: EventCardBuilderButton){
 		this.eventHandler.cardBuilderButtonClicked(button)
 		switch(button.name){
 			case('buildCard'):{

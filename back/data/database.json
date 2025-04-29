@@ -1,14 +1,14 @@
 {
   "ff3a2891-a9e0-419c-bec3-9ebcc1e0a363" : {
     "gameId" : "ff3a2891-a9e0-419c-bec3-9ebcc1e0a363",
-    "deck" : [ 36, 37, 58, 4, 54, 42, 45, 46 ],
+    "deck" : [ ],
     "discard" : [ ],
     "groupPlayerId" : [ "513cfada-65dd-47b7-b3a7-9aab0b5785e5" ],
     "groupPlayerReady" : {
       "513cfada-65dd-47b7-b3a7-9aab0b5785e5" : false
     },
-    "currentPhase" : "CONSTRUCTION",
-    "selectedPhase" : [ "PLANIFICATION", "CONSTRUCTION" ],
+    "currentPhase" : "DEVELOPMENT",
+    "selectedPhase" : [ "PLANIFICATION", "DEVELOPMENT" ],
     "groupPlayerState" : {
       "513cfada-65dd-47b7-b3a7-9aab0b5785e5" : {
         "infoState" : {
@@ -17,7 +17,7 @@
           "color" : "blue"
         },
         "scoreState" : {
-          "vp" : 5,
+          "vp" : 7,
           "milestoneCount" : 0,
           "terraformingRating" : 5
         },
@@ -50,7 +50,7 @@
             "id" : 4,
             "name" : "earth",
             "idImageUrl" : 4,
-            "valueCount" : 0,
+            "valueCount" : 1,
             "valueMod" : 0
           }, {
             "id" : 5,
@@ -62,7 +62,7 @@
             "id" : 6,
             "name" : "plant",
             "idImageUrl" : 6,
-            "valueCount" : 0,
+            "valueCount" : 1,
             "valueMod" : 0
           }, {
             "id" : 7,
@@ -74,13 +74,13 @@
             "id" : 8,
             "name" : "microbe",
             "idImageUrl" : 8,
-            "valueCount" : 0,
+            "valueCount" : 1,
             "valueMod" : 0
           }, {
             "id" : 9,
             "name" : "event",
             "idImageUrl" : 9,
-            "valueCount" : 0,
+            "valueCount" : 2,
             "valueMod" : 0
           } ]
         },
@@ -91,7 +91,7 @@
             "valueMod" : 0,
             "valueProd" : 0,
             "valueBaseProd" : 0,
-            "valueStock" : 45,
+            "valueStock" : 107,
             "hasStock" : true,
             "imageUrlId" : 1009
           }, {
@@ -107,8 +107,8 @@
             "id" : 2,
             "name" : "plant",
             "valueMod" : 0,
-            "valueProd" : 0,
-            "valueBaseProd" : 0,
+            "valueProd" : 2,
+            "valueBaseProd" : 2,
             "valueStock" : 0,
             "hasStock" : true,
             "imageUrlId" : 1004
@@ -142,25 +142,25 @@
           } ]
         },
         "projectCardState" : {
-          "hand" : [ 20, 184, 229, 281, 184, 229, 281, 29, 18 ],
+          "hand" : [ 4, 184, 229, 281, 222, 184, 229, 281, 222 ],
           "handCorporations" : [ ],
-          "playedProjectIdList" : [ 1001 ],
+          "playedProjectIdList" : [ 1001, 229, 222, 281, 184 ],
           "playedProjectCardStocks" : null,
           "triggers" : {
-            "playedCardsId" : [ 1001 ],
-            "activeCardsId" : [ 1001 ],
-            "activeOnRessourceAddedToCard" : [ ],
+            "playedCardsId" : [ 1001, 222 ],
+            "activeCardsId" : [ 1001, 222 ],
+            "activeOnRessourceAddedToCard" : [ 222 ],
             "activeOnParameterIncrease" : [ ],
             "activeOnPlayedCard" : [ ],
-            "activeOnGainedTag" : [ ],
+            "activeOnGainedTag" : [ 222 ],
             "activeCostModTrigger" : [ ]
           },
           "handMaximumSize" : 10
         },
         "phaseCardState" : {
           "phaseCards" : [ ],
-          "selectedPhase" : "CONSTRUCTION",
-          "previousSelectedPhase" : "RESEARCH"
+          "selectedPhase" : "DEVELOPMENT",
+          "previousSelectedPhase" : "CONSTRUCTION"
         },
         "globalParameterState" : {
           "globalParameters" : [ {
@@ -169,11 +169,11 @@
             "addEop" : 0
           }, {
             "name" : "INFRASTRUCTURE",
-            "step" : 0,
+            "step" : 1,
             "addEop" : 0
           }, {
             "name" : "TEMPERATURE",
-            "step" : 0,
+            "step" : 1,
             "addEop" : 0
           }, {
             "name" : "OXYGEN",
@@ -183,7 +183,7 @@
         },
         "otherState" : {
           "research" : {
-            "scan" : 0,
+            "scan" : 1,
             "keep" : 0
           },
           "sellCardValueMod" : 0
@@ -197,11 +197,11 @@
       "addEop" : 0
     }, {
       "name" : "INFRASTRUCTURE",
-      "step" : 0,
+      "step" : 1,
       "addEop" : 0
     }, {
       "name" : "TEMPERATURE",
-      "step" : 0,
+      "step" : 1,
       "addEop" : 0
     }, {
       "name" : "OXYGEN",

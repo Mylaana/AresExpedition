@@ -41,7 +41,8 @@ $fade-transition-time: .2s;
 }
 
 .ares-background {
-	background: rgba(white, .7);
+	background: rgba(white, .85);
+	//background: linear-gradient(130deg, rgba(255, 255, 255, .85) 50%,  var(--color-ares-orange-light2) 60%,  var(--color-ares-orange-light2) 80%, rgba(255, 255, 255, .85) 90%);
 }
 .ares-navigation-pannel{
 	border: solid 1px rgba(255, 129, 25, .8);

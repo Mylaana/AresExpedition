@@ -4,7 +4,6 @@ $description-pannel-margin-left: 2%;
 :host{
 	--command-pannel-height: 0px;
 	--event-min-height: 55vh;
-	border: red solid 1px;
 }
 #command-pannel {
 	$command-pannel-padding: 1%;
@@ -147,7 +146,6 @@ app-hexed-tooltip-background{
 	height: fit-content;
 	padding-top: 1%;
 	min-height: var(--event-min-height);
-	border: green solid 2px;
 }
 .wrapper-event-top{
 	position: relative;
@@ -160,7 +158,6 @@ app-hexed-tooltip-background{
 	margin-left: calc(var(--settings-button-size) / 2);
 	margin-top: var(--command-pannel-height);
 	min-height: var(--event-min-height);
-	border: blue solid 2px;
 	&.flex-column{
 		flex-direction: column;
 	}
@@ -179,7 +176,6 @@ app-card-builder-list{
 }
 .wrapper-selectors{
     display: flex;
-	//height: fit-content;
 	flex-grow: 1;
 	&.centered{
 		align-items: center;
@@ -197,7 +193,6 @@ app-phase-card-upgrade-selector{
 }
 .wrapper-other-event{
 	flex-grow: 1;
-	border: red solid 1px;
 }
 
 app-phase-action{

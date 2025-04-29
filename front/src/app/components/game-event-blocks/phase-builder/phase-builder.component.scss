@@ -10,7 +10,7 @@ app-card-builder-list{
 	top: calc(var(--navbar-height) + var(--command-pannel-height));
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
 	min-width: fit-content;
 	max-width: calc(var(--card-width)* 3);
 	flex: .5;
@@ -18,4 +18,5 @@ app-card-builder-list{
 }
 app-playable-card-list{
 	flex: 1;
+	min-height: fit-content;
 }
