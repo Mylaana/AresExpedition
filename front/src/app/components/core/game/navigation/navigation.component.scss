@@ -1,4 +1,3 @@
-$player-pannel-width: 55%;
 $nav-gap: 1.5%;
 
 :root {
@@ -15,12 +14,10 @@ $nav-gap: 1.5%;
     align-items: start;
 }
 .wrapper-player-pannel{
-	width: $player-pannel-width;
-
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
-	justify-content: space-between;
-	//gap: 1px;
+	align-items: center;
+	justify-content: center;
 
 	pointer-events: all;
 	border-top-left-radius: 0;
@@ -32,33 +29,19 @@ $nav-gap: 1.5%;
 		box-shadow: 0 0 10px 5px rgba(rgb(255, 129, 25), .6);
 	}
 }
-.app-player-pannel{
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    left: 0;
-}
-.wrapper-global-parameter{
+app-global-parameter-pannel{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	flex-direction: row;
 	height: 100%;
-	width: calc((100% - $player-pannel-width) / 2 - $nav-gap);
-	//flex-grow: .5;
+	width: 400px;
 	gap: 1%;
 	& > h1 {
 		display: inline-block;
 		text-align: center;
 	}
 	pointer-events: all;
-}
-app-global-parameter-pannel{
-	height: 100%;
-	width: 100%;
 }
 .wrapper-awards{
 	position: sticky;
@@ -67,8 +50,8 @@ app-global-parameter-pannel{
 	align-items: center;
 	height: 100%;
 	top: 0;
-	width: calc((100% - $player-pannel-width) / 2 - $nav-gap);
-	//flex-grow: 1;
+	flex-grow: 1;
+
 	& > h1 {
 		display: inline-block;
 		text-align: center;
