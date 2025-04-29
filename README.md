@@ -50,6 +50,7 @@ Action phase upgrade not working
 Production phase screen not working   
 Builders/phase locked status not being saved after drawing cards   
 Cards cant be activated twice (when drawing) due to current event status not being saved   
+Discarded/sold cards dont go in server discard pile   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
