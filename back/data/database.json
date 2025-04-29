@@ -1084,7 +1084,7 @@
             "valueMod" : 0,
             "valueProd" : 0,
             "valueBaseProd" : 0,
-            "valueStock" : 24,
+            "valueStock" : 45,
             "hasStock" : true,
             "imageUrlId" : 1009
           }, {
@@ -1135,7 +1135,7 @@
           } ]
         },
         "projectCardState" : {
-          "hand" : [ 58, 184, 222, 18, 54 ],
+          "hand" : [ 54, 222, 184, 229, 281, 222, 184, 229, 281, 222 ],
           "handCorporations" : [ ],
           "playedProjectIdList" : [ 1000 ],
           "playedProjectCardStocks" : null,
@@ -1153,7 +1153,7 @@
         "phaseCardState" : {
           "phaseCards" : [ ],
           "selectedPhase" : "CONSTRUCTION",
-          "previousSelectedPhase" : "UNDEFINED"
+          "previousSelectedPhase" : "DEVELOPMENT"
         },
         "globalParameterState" : {
           "globalParameters" : [ {

@@ -1,5 +1,16 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subject, takeUntil } from 'rxjs';
+import { fromEvent, debounceTime } from 'rxjs';
+
+type HexSize = 'small' | 'medium' | 'large'
+const ratioWidthToHeight: number = .88
+
+const hexWidth = new Map<HexSize, number>([
+	["small", 22],
+	["medium", 35],
+	["large", 50],
+])
 
 @Component({
     selector: 'app-hexed-background',
@@ -7,24 +18,53 @@ import { CommonModule } from '@angular/common';
     templateUrl: './hexed-background.component.html',
     styleUrl: './hexed-background.component.scss'
 })
-export class HexedBackgroundComponent implements OnInit {
-	@Input() row: number = 1;  // Nombre d'hexagones en hauteur
-	@Input() column: number = 1; // Nombre d'hexagones en largeur
+export class HexedBackgroundComponent implements OnInit, OnDestroy {
+	@Input() row: number = 1; //forced number of rows
+	@Input() column: number = 1; //forced number of columns
 	@Input() background: boolean = false
+	@Input() autoFillHexSize!: HexSize
 
+	_rowNumber!: number
+	_columnNumber!: number
 	_rowArray: number[] = [];
 	_columnArray: number[] = [];
 
-	constructor(private elRef: ElementRef) {}
+	private destroy$ = new Subject<void>()
+
+	constructor(private elRef: ElementRef) {
+		fromEvent(window, 'resize').pipe(takeUntil(this.destroy$), debounceTime(10)).subscribe(() => {this.refreshHexNumbers(); console.log('resized')});
+	}
 
 	ngOnInit(): void {
+		this.refreshHexNumbers()
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
+	}
+	getHexWidth(width: HexSize): number {
+		let result = hexWidth.get(width)
+		return result??1
+	}
+	refreshHexNumbers(){
+		if(!this.autoFillHexSize){
+			this._columnNumber = this.column
+			this._rowNumber = this.row
+		} else {
+			let width = this.getHexWidth(this.autoFillHexSize)
+			this._columnNumber = Math.floor(this.elRef.nativeElement.offsetWidth / width)
+			this._rowNumber = Math.floor(this.elRef.nativeElement.offsetHeight / width * ratioWidthToHeight)
+		}
+
+
+
 		const ne = this.elRef.nativeElement;
 
-		const realColumns = 1 * this.column;
-		const realRows = 2 * this.row;
+		const realColumns = 1 * this._columnNumber;
+		const realRows = 2 * this._rowNumber;
 
-		this._columnArray = Array.from({ length: this.column }, (_, i) => i);
-		this._rowArray = Array.from({ length: this.row }, (_, i) => i);
+		this._columnArray = Array.from({ length: this._columnNumber }, (_, i) => i);
+		this._rowArray = Array.from({ length: this._rowNumber }, (_, i) => i);
 		const carr = this._columnArray.map((v) => `'${v}':${v}`).join(',');
 
 		ne.style.setProperty('--row', `${realRows}`);
@@ -65,7 +105,6 @@ export class HexedBackgroundComponent implements OnInit {
 		});
 
 		const styleSheet = document.createElement('style');
-		//styleSheet.type = 'text/css';
 		styleSheet.innerText = styles;
 		document.head.appendChild(styleSheet);
 	}

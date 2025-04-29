@@ -61,7 +61,6 @@ project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
-Create dedicated App card builder   
 App-hexed-background switch to fully automatic hex numbers with just desired hex size input   
 
 ## Planned for v1 :

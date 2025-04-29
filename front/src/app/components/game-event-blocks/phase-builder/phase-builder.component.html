@@ -9,5 +9,6 @@
 	(updateSelectedCardList)="onUpdateSelectedCardList($event)">
 </app-playable-card-list>
 <app-hexed-background  *ngIf="event.getSelectionActive()"
-	@fadeIn [column]="80" [row]="20">
+	@fadeIn
+	[autoFillHexSize]="'large'">
 </app-hexed-background>
