@@ -1,5 +1,5 @@
-.wrapper-main{
+:host{
     display: flex;
-	justify-content: space-around;
-	width: 100%;
+	width: auto;
+	gap: 2px;
 }

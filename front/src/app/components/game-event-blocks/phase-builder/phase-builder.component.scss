@@ -1,0 +1,21 @@
+:host{
+	width: 100%;
+	height: fit-content;
+
+	display: flex;
+	gap: 20px;
+}
+app-card-builder-list{
+	position: sticky;
+	top: calc(var(--navbar-height) + var(--command-pannel-height));
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	min-width: fit-content;
+	max-width: calc(var(--card-width)* 3);
+	flex: .5;
+	height: fit-content;
+}
+app-playable-card-list{
+	flex: 1;
+}

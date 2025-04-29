@@ -4,6 +4,7 @@ $description-pannel-margin-left: 2%;
 :host{
 	--command-pannel-height: 0px;
 	--event-min-height: 55vh;
+	border: red solid 1px;
 }
 #command-pannel {
 	$command-pannel-padding: 1%;
@@ -146,6 +147,7 @@ app-hexed-tooltip-background{
 	height: fit-content;
 	padding-top: 1%;
 	min-height: var(--event-min-height);
+	border: green solid 2px;
 }
 .wrapper-event-top{
 	position: relative;
@@ -153,34 +155,23 @@ app-hexed-tooltip-background{
     flex-direction: row;
 	justify-content: center;
 	align-items: top;
-    width: calc(100% - var(--settings-button-size));
+	flex: 1;
 	height: fit-content;
 	margin-left: calc(var(--settings-button-size) / 2);
-	margin-right: calc(var(--settings-button-size) / 2);
 	margin-top: var(--command-pannel-height);
 	min-height: var(--event-min-height);
+	border: blue solid 2px;
 	&.flex-column{
 		flex-direction: column;
 	}
 	&.center{
 		align-items: center;
 	}
-}
-.wrapper-builder{
-	position: sticky;
-	top: calc(var(--navbar-height) + var(--command-pannel-height));
-	$padding: 0%;
 
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: start;
-	width: 40%;
-	height: fit-content;
-
-	padding-left: $padding;
-	padding-right: $padding;
-	padding-top: calc($padding / 2)
+	margin-right: calc(var(--settings-button-size) / 2);
+	@media (max-width: 1919px) {
+		margin-right: 20px;
+	}
 }
 app-card-builder-list{
 	height: fit-content;
