@@ -18,6 +18,11 @@
 	padding: 6px;
 	padding-top: 15px;
 	border-radius: 10px;
+	@media (max-width: 1919px) {
+		padding: 3px;
+		padding-top: 6px;
+		border-radius: 10px;
+	}
 	overflow: hidden;
 
 	&.red{
@@ -106,6 +111,9 @@
 		height: calc(var(--card-width) * .12);
 		& p {
 			font-size: 15px;
+			@media (max-width: 1919px) {
+				font-size: 13px;
+			}
 		}
 	}
     &.not-current-cost{
@@ -114,7 +122,10 @@
         filter: grayscale(20%);
         opacity: 80%;
         & p {
-			font-size: 10px;
+			font-size: 11px;
+			@media (max-width: 1919px) {
+				font-size: 9px;
+			}
         }
     }
 }

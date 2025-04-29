@@ -1,21 +1,18 @@
-<div class="wrapper-main">
-	<div class="wrapper-list">
-		<div class="list-mask">
-			<div [class]="'background--'+background"></div>
-		</div>
-		<div class="wrapper-cards"
-			[ngClass]="listType"
-			[class.hovered]="hovered">
-			<app-playable-card #projectCardComponent *ngFor="let card of _displayedCards"
-				[stateFromParent]="_cardSelector.stateFromParent"
-				[projectCard]="card"
-				[initialState]="_cardSelector.cardInitialState"
-				[buildDiscount]="_buildDiscount"
-				[parentListType]="listType"
-				[parentListSubType]="listSubType"
-				[activableTwice]="_activateTwiceCount>0"
-				(cardStateChange)="cardStateChange($event)"
-				(cardActivated)="onProjectActivated($event)"></app-playable-card>
-		</div>
+<div class="wrapper-list">
+	<div class="list-mask">
+		<div [class]="'background--'+background"></div>
+	</div>
+	<div class="wrapper-cards"
+		[ngClass]="listType">
+		<app-playable-card #projectCardComponent *ngFor="let card of _displayedCards"
+			[stateFromParent]="_cardSelector.stateFromParent"
+			[projectCard]="card"
+			[initialState]="_cardSelector.cardInitialState"
+			[buildDiscount]="_buildDiscount"
+			[parentListType]="listType"
+			[parentListSubType]="listSubType"
+			[activableTwice]="_activateTwiceCount>0"
+			(cardStateChange)="cardStateChange($event)"
+			(cardActivated)="onProjectActivated($event)"></app-playable-card>
 	</div>
 </div>

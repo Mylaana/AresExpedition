@@ -22,7 +22,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
     styleUrl: './server-emulation.component.scss'
 })
 export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestroy {
-	debug: boolean = true;
+	debug: boolean = false;
 	currentGroupPlayerState!: {};
 	currentEventQueue: EventBaseModel[] = [];
 	currentPhase: string = "planification";
@@ -76,7 +76,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 
 
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [184, 229, 281]
+		let cardDrawList: number[] = [184, 229, 281, 222]
 		//this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:50}])
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		//let cardList = this.gameStateService.getClientHandModelList()

@@ -1,30 +1,31 @@
 $description-pannel-margin-top: 2%;
 $description-pannel-margin-left: 2%;
-$round-width: 3%;
 
 :host{
 	--command-pannel-height: 0px;
 	--event-min-height: 55vh;
 }
 #command-pannel {
-	$command-pannel-width: 15%;
-	$command-pannel-height: 100px;
 	$command-pannel-padding: 1%;
+	$command-pannel-width: 240px;
+	width: calc($command-pannel-width + $command-pannel-padding * 2);
+	@media (max-width: 1919px) {
+		$command-pannel-width: 160px;
+		width: calc($command-pannel-width + $command-pannel-padding * 2);
+	}
     z-index: 10;
     position: sticky;
     left: 0%;
     top: calc(var(--navbar-height));
     max-height: 100%;
-    height: $command-pannel-height;
-    width: calc($command-pannel-width + $command-pannel-padding * 2);
+    aspect-ratio: 3;
     padding: $command-pannel-padding;
 	padding-right: 0;
 
     display: flex;
     flex-direction: row;
     align-items: top;
-	justify-content: center;
-	gap: 4%;
+	justify-content: space-between;
 }
 #round-pannel{
 	z-index: 1000;
@@ -33,7 +34,10 @@ $round-width: 3%;
 	flex-direction: column;
 	align-items: center;
 	height: auto;
-	width: $round-width;
+	width: 60px;
+	@media (max-width: 1919px) {
+		width: 40px;
+	}
 	top: 34%;
 	border-left: 0;
 	border-top-left-radius: 0;
@@ -202,6 +206,7 @@ app-phase-card-upgrade-selector{
 }
 .wrapper-other-event{
 	flex-grow: 1;
+	border: red solid 1px;
 }
 
 app-phase-action{

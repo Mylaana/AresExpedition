@@ -1,3 +1,4 @@
+@use "../../../../../styles/abstracts/variables" as vars;
 $buttons-margin: 2%;
 $scrollbar-width: 15px;
 
@@ -80,27 +81,36 @@ app-game-event{
 	flex-direction: row;
 	justify-content: left;
 	align-items: top;
-
-	max-width: 94%;
+	width: fit-content;
 
 	left: 5%;
 	top: calc(100% - (var(--card-height) * .23));
 	transition: top $transition-delay ease;
-	&.hovered {
+
+	$padding: calc(var(--card-height) * .01);
+	padding: $padding;
+	background: rgba(0, 0, 0, 0.6);
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border: solid 2px rgba(255, 129, 25, .8);
+	border-bottom: 0;
+	&.hovered{
+		box-shadow: 0 0 10px 5px rgba(rgb(255, 129, 25), .6);
 		top: calc(100% - var(--hand-height));
 		transition: top $transition-delay ease;
 	}
-	.hand-mask.masked{
-		$opacity: .8;
-		mask-image: linear-gradient(rgba(white, $opacity), rgba(white, $opacity));
-		flex-grow: 1;
-		display: flex;
-		max-width: 100%;
+	.hand-mask{
+			flex-grow: 1;
+			display: flex;
+		&.masked{
+			$opacity: .8;
+			mask-image: linear-gradient(rgba(white, $opacity), rgba(white, $opacity));
+		}
 	}
-}
-app-project-card-list{
-	height: 100%;
-	width: 100%;
+	app-playable-card-list{
+		max-width: calc((8 + 0.07) * var(--card-width) + 6px);
+		height: 100%;
+	}
 }
 .wrapper-played{
     width: 100%;

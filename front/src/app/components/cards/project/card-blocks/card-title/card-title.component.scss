@@ -12,9 +12,12 @@
 p{
 	text-wrap: wrap;
 	font-weight: bold;
-	font-size: calc(var(--card-width) / 13);
 	font-style: italic;
 	text-align: center;
+	font-size: calc(var(--card-width) / 15);
+	@media (max-width: 1919px) {
+		font-size: calc(var(--card-width) / 16);
+	}
 }
 .white {
 	text-size-adjust: 50%;

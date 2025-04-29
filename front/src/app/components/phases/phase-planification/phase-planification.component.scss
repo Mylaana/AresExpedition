@@ -39,15 +39,22 @@ $colors: (
     max-width: 100%;
 }
 .wrapper-button{
-	$colorOutline: white;//var(--color-ares-orange);
-	$colorShadow: white;
-    display: flex;
+	$size: 150px;
+	width: $size;
+	@media (max-width: 1919px) {
+		$size: 100px;
+		width: $size;
+	}
+	display: flex;
     justify-content: center;
     align-items: center;
-    width: 10%;
-    aspect-ratio: 1;
-	box-shadow: 0 0 15px 5px $colorShadow;
-	border-radius: 15px;
+
+	aspect-ratio: 1;
+
+	$colorOutline: white;//var(--color-ares-orange);
+	$colorShadow: white;
+	box-shadow: 0 0 calc($size * .1) 5px $colorShadow;
+	border-radius: calc($size * .1);
 
 	&.selected{
 		box-shadow: 0 0 50px 20px $colorShadow;

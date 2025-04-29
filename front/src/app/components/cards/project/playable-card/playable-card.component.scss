@@ -1,4 +1,3 @@
-$element-padding-right: 5px;
 $card-bottom-padding: calc(var(--card-height) * .015);
 :host ::ng-deep p  {
     color: white;
@@ -86,13 +85,11 @@ button {
 .wrapper-card-element-main{
 	display: flex;
     flex-direction: column;
-	gap: 7px;
 
-	margin-left: 25%;
-	width: 75%;
+	width: 100%;
 	flex: 1;
 	max-height: calc(var(--card-height) - var(--card-effect-height));
-    padding-right: $element-padding-right;
+	padding-right: var(--card-element-padding);
 }
 .wrapper-card-element-left{
 	position: absolute;
@@ -105,6 +102,13 @@ button {
 
 	height: calc(var(--card-height) - var(--card-effect-height) - 10px);
 }
+.wrapper-card-element-center{
+	display: flex;
+	flex-direction: column;
+	margin-left: 23%;
+	width: 77%;
+	flex: 1;
+}
 .wrapper-left-layout{
     top: 0;
     position: absolute;
@@ -115,6 +119,7 @@ button {
 }
 .wrapper-card-element-top{
 	display: flex;
+	margin-left: 25%;
 }
 app-card-vp{
 	width: 100%;
@@ -134,7 +139,7 @@ app-card-background{
 }
 app-card-effect, app-card-prerequisite, app-card-played-info{
 	width: auto;
-	padding-right: $element-padding-right;
+	padding-right: var(--card-text-right-padding);
 }
 app-card-tags-zone{
 	position: absolute;

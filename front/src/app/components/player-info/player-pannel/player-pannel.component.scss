@@ -1,13 +1,24 @@
 :host {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+	align-items: center;
+
     margin: 2px;
     width: 100%;
+	gap: 5px 20px;
+	@media (min-width: 1920px) {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	@media (max-width: 1919px) {
+		flex-direction: column;
+	}
 }
 app-global-pannel, app-ressource-pannel, app-tag-pannel{
     height: 100%;
     width: fit-content;
-    height: 30px;
+	$pannel-height: 30px;
+	@media (max-width: 1919px) {
+		$pannel-height: 25px;
+	}
+    height: $pannel-height;
 }

@@ -17,7 +17,13 @@
 			[class.selectable]="state.isSelectable()"
 			(click)="cardClick()">
 			<div class="wrapper-card-element-left">
-				<app-card-cost *ngIf="projectCard.cardType!='corporation'" [cardType]="projectCard.cardType" [cardLocation]="parentListType" [costInitial]="projectCard.costInitial" [cost]="projectCard.cost"></app-card-cost>
+				<app-card-cost
+					*ngIf="projectCard.cardType!='corporation'"
+					[cardType]="projectCard.cardType"
+					[cardLocation]="parentListType"
+					[costInitial]="projectCard.costInitial"
+					[cost]="projectCard.cost">
+				</app-card-cost>
 				<app-card-tags [cardType]="projectCard.cardType" [tagsUrl]="projectCard.tagsUrl"></app-card-tags>
 				<app-card-tags-zone *ngIf="projectCard.cardType!='corporation'"  [cardType]="projectCard.cardType"></app-card-tags-zone>
 			</div>
@@ -29,25 +35,27 @@
 						[startingMegacredits]="projectCard.startingMegacredits??0">
 					</app-card-starting-megacredits>
 				</div>
-				<app-card-prerequisite
-					*ngIf="projectCard.prerequisiteText"
-					[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
-					[prerequisiteSummary]="projectCard.prerequisiteSummaryText"
-					[prerequisiteText]="projectCard.prerequisiteText">
-				</app-card-prerequisite>
-				<app-card-played-info
-					*ngIf="projectCard.playedText"
-					[playedText]="projectCard.playedText">
-				</app-card-played-info>
-				<app-card-stock
-					*ngIf="projectCard.stockable?.length!=0"
-					[cardStock]="projectCard.stock">
-				</app-card-stock>
-				<app-card-vp
-					*ngIf="projectCard.vpNumber"
-					[vpNumber]="projectCard.vpNumber"
-					[vpDescription]="projectCard.vpText">
-				</app-card-vp>
+				<div class="wrapper-card-element-center">
+					<app-card-prerequisite
+						*ngIf="projectCard.prerequisiteText"
+						[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
+						[prerequisiteSummary]="projectCard.prerequisiteSummaryText"
+						[prerequisiteText]="projectCard.prerequisiteText">
+					</app-card-prerequisite>
+					<app-card-played-info
+						*ngIf="projectCard.playedText"
+						[playedText]="projectCard.playedText">
+					</app-card-played-info>
+					<app-card-stock
+						*ngIf="projectCard.stockable?.length!=0"
+						[cardStock]="projectCard.stock">
+					</app-card-stock>
+					<app-card-vp
+						*ngIf="projectCard.vpNumber"
+						[vpNumber]="projectCard.vpNumber"
+						[vpDescription]="projectCard.vpText">
+					</app-card-vp>
+				</div>
 			</div>
 			<app-card-effect
 				*ngIf="projectCard.effectText"
