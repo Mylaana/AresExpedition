@@ -17,7 +17,13 @@
 			[class.selectable]="state.isSelectable()"
 			(click)="cardClick()">
 			<div class="wrapper-card-element-left">
-				<app-card-cost *ngIf="projectCard.cardType!='corporation'" [cardType]="projectCard.cardType" [cardLocation]="parentListType" [costInitial]="projectCard.costInitial" [cost]="projectCard.cost"></app-card-cost>
+				<app-card-cost
+					*ngIf="projectCard.cardType!='corporation'"
+					[cardType]="projectCard.cardType"
+					[cardLocation]="parentListType"
+					[costInitial]="projectCard.costInitial"
+					[cost]="projectCard.cost">
+				</app-card-cost>
 				<app-card-tags [cardType]="projectCard.cardType" [tagsUrl]="projectCard.tagsUrl"></app-card-tags>
 				<app-card-tags-zone *ngIf="projectCard.cardType!='corporation'"  [cardType]="projectCard.cardType"></app-card-tags-zone>
 			</div>

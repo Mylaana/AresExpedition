@@ -16,8 +16,13 @@
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 	min-height: calc(var(--card-height) *.15);
+	@media (max-width: 1919px) {
+		overflow: scroll;
+		scrollbar-width: none;
+		max-height: calc(var(--card-height) * .48);
+	}
 	border: lightgrey solid 1px;
 	&.action{
 		border: var(--color-ares-blue-light2) solid 1px;
