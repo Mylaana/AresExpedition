@@ -16,12 +16,16 @@
 
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
+	flex-direction: column;
 	min-height: calc(var(--card-height) *.15);
 	@media (max-width: 1919px) {
 		overflow: scroll;
 		scrollbar-width: none;
 		max-height: calc(var(--card-height) * .48);
+		justify-content: left;
+		align-items: center;
+		flex-direction: column;
 	}
 	border: lightgrey solid 1px;
 	&.action{
@@ -44,6 +48,9 @@
 		border-right: 0;
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
+	}
+	span{
+		flex: 1;
 	}
 }
 .wrapper-effect-summary-border{

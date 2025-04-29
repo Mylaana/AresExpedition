@@ -16,9 +16,8 @@
 app-global-pannel, app-ressource-pannel, app-tag-pannel{
     height: 100%;
     width: fit-content;
-	$pannel-height: 30px;
+	height: 30px;
 	@media (max-width: 1919px) {
-		$pannel-height: 25px;
+		height: 25px;
 	}
-    height: $pannel-height;
 }
