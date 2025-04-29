@@ -1,4 +1,9 @@
 :root {
+	--card-height: calc(var(--card-width) * 88 / 63);
+	--card-effect-height: calc(var(--card-height) * .26);
+	--settings-button-size: 9%;
+
+
 	--card-width: 214px;
 	--text-size: 11px;
 	--card-element-padding: 5px;
@@ -9,8 +14,4 @@
 		--card-element-padding: 1px;
 		--card-text-right-padding: 0px;
 	}
-	--card-height: calc(var(--card-width) * 88 / 63);
-	--card-effect-height: calc(var(--card-height) * .26);
-
-	--settings-button-size: 9%;
 }

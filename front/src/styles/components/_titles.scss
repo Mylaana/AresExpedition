@@ -16,16 +16,15 @@
     h1 {
 		display: inline-block;
 		text-align: center;
-		$horizontal-padding: 100px;
+		padding: 10px 100px;
 
 		text-wrap: nowrap;
 
 		@media (max-width: 1919px) {
 			font-size: 20px;
 			font-weight: unset;
-			$horizontal-padding: 70px;
+			padding: 10px 70px;
 		}
-		padding: 10px $horizontal-padding;
     }
 
 	&--orange {
