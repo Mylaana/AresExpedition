@@ -2,12 +2,18 @@
 This project is NOT related to Asmodee or Fryxgames and is designed for personnal and non commercial use only.
 
 # In Game Design
+## Home Page
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_lobby.png)
 ## Planification Phase
-![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_planification_2.png)
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_planification.png)
+## Development Phase
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_development.png)
 ## Construction Phase
-![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_construction_2.png)
-## Upgrading a Phase card
-![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_phase_upgrade.png)
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_construction.png)
+## Research Phase
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_research.png)
+## Starting Hand Selection
+![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_starting_hand.png)
 ## Cards design (almost pure CSS)
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_cards.png)
 
@@ -54,6 +60,8 @@ project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
+Create dedicated App card builder   
+App-hexed-background switch to fully automatic hex numbers with just desired hex size input   
 
 ## Planned for v1 :
 ### Backend
