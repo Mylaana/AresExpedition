@@ -153,10 +153,9 @@ app-hexed-tooltip-background{
     flex-direction: row;
 	justify-content: center;
 	align-items: top;
-    width: calc(100% - var(--settings-button-size));
+	flex: 1;
 	height: fit-content;
 	margin-left: calc(var(--settings-button-size) / 2);
-	margin-right: calc(var(--settings-button-size) / 2);
 	margin-top: var(--command-pannel-height);
 	min-height: var(--event-min-height);
 	&.flex-column{
@@ -165,22 +164,11 @@ app-hexed-tooltip-background{
 	&.center{
 		align-items: center;
 	}
-}
-.wrapper-builder{
-	position: sticky;
-	top: calc(var(--navbar-height) + var(--command-pannel-height));
-	$padding: 0%;
 
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: start;
-	width: 40%;
-	height: fit-content;
-
-	padding-left: $padding;
-	padding-right: $padding;
-	padding-top: calc($padding / 2)
+	margin-right: calc(var(--settings-button-size) / 2);
+	@media (max-width: 1919px) {
+		margin-right: 20px;
+	}
 }
 app-card-builder-list{
 	height: fit-content;
@@ -188,7 +176,6 @@ app-card-builder-list{
 }
 .wrapper-selectors{
     display: flex;
-	//height: fit-content;
 	flex-grow: 1;
 	&.centered{
 		align-items: center;
@@ -206,7 +193,6 @@ app-phase-card-upgrade-selector{
 }
 .wrapper-other-event{
 	flex-grow: 1;
-	border: red solid 1px;
 }
 
 app-phase-action{

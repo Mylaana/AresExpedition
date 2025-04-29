@@ -16,7 +16,7 @@ import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 export class CardBuilderListComponent implements OnInit{
   @Input() event!: EventBaseModel
   @Input() eventId!: number
-  @Output() eventCardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
+  @Output() cardBuilderButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
 
   currentEvent!: EventCardBuilder
   ngOnInit(): void {
@@ -33,8 +33,8 @@ export class CardBuilderListComponent implements OnInit{
   updateEvent(): void {
     this.currentEvent = this.event as EventCardBuilder
   }
-  public cardBuilderListButtonClicked(button:EventCardBuilderButton): void {
+  public onCardBuilderButtonClicked(button:EventCardBuilderButton): void {
     this.currentEvent.cardBuilderIdHavingFocus = button.parentCardBuilderId
-    this.eventCardBuilderListButtonClicked.emit(button)
+    this.cardBuilderButtonClicked.emit(button)
   }
 }

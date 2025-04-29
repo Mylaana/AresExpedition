@@ -1,0 +1,13 @@
+<app-card-builder-list
+	[event]="event"
+	(cardBuilderButtonClicked)="onEventCardBuilderListButtonClicked($event)">
+</app-card-builder-list>
+<app-playable-card-list
+	[event]="event"
+	[listType]="'builderSelector'"
+	[currentPhase]="currentPhase"
+	(updateSelectedCardList)="onUpdateSelectedCardList($event)">
+</app-playable-card-list>
+<app-hexed-background  *ngIf="event.getSelectionActive()"
+	@fadeIn [column]="80" [row]="20">
+</app-hexed-background>

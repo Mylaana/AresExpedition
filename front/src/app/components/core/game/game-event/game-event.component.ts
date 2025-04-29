@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
@@ -14,15 +14,16 @@ import { ProjectListType } from '../../../../types/project-card.type';
 import { CardBuilderListComponent } from '../../../cards/card-builder-list/card-builder-list.component';
 import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
-import { PhaseActionComponent } from "../../../phases/phase-action/phase-action.component";
-import { PhasePlanificationComponent } from '../../../phases/phase-planification/phase-planification.component';
-import { PhaseProductionComponent } from '../../../phases/phase-production/phase-production.component';
 import { EventMainButtonComponent } from "../../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { InitialDraftComponent } from '../../../game-initialization/initial-draft/initial-draft.component';
 import { WaitingReadyComponent } from '../../waiting-ready/waiting-ready.component';
+import { PhasePlanificationComponent } from '../../../game-event-blocks/phase-planification/phase-planification.component';
+import { PhaseProductionComponent } from '../../../game-event-blocks/phase-production/phase-production.component';
+import { PhaseActionComponent } from '../../../game-event-blocks/phase-action/phase-action.component';
+import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/phase-builder.component';
 
 //this component is the main controller, and view
 
@@ -35,13 +36,13 @@ import { WaitingReadyComponent } from '../../waiting-ready/waiting-ready.compone
         PlayableCardListComponent,
         PhaseCardUpgradeSelectorComponent,
         EventMainButtonComponent,
-        CardBuilderListComponent,
         NonEventButtonComponent,
         TextWithImageComponent,
         PhaseActionComponent,
         HexedBackgroundComponent,
         InitialDraftComponent,
-        WaitingReadyComponent
+        WaitingReadyComponent,
+		PhaseBuilderComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',
@@ -181,7 +182,7 @@ export class GameEventComponent {
 	public buttonClicked(button: ButtonBase) {
 		console.log('game event button clicked:', button)
 	}
-	public updateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){
+	public onUpdateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){
 		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
@@ -204,7 +205,7 @@ export class GameEventComponent {
 		this.eventHandler.updateActionPhaseMainButtonState()
 	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
-	public eventCardBuilderListButtonClicked(button: EventCardBuilderButton){
+	public onCardBuilderButtonClicked(button: EventCardBuilderButton){
 		this.eventHandler.cardBuilderButtonClicked(button)
 		switch(button.name){
 			case('buildCard'):{

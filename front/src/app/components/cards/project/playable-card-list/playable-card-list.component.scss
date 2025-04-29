@@ -41,7 +41,6 @@
 		flex-direction: row;
 	}
 	&.builderSelector{
-		max-width: calc(var(--card-width) * 5);
 		height: auto;
 		justify-content: center;
 		align-items: center;
@@ -55,7 +54,7 @@
 	$list:('played', 'selector', 'development', 'construction');
 	$side-gradient-size: 30%;
 	$side-void-size: 5%;
-	$middle-alpha: .2;
+	$middle-alpha: .3;
 	@each $name in $list{
 		&--#{$name}{
 			position: absolute;
@@ -70,14 +69,14 @@
 	}
 	&--development{
 		$side-void-size: 0%;
-		$middle-alpha: .5;
+		$middle-alpha: .3;
 		$background-color: rgb(42, 180, 92);
 		background: linear-gradient(to right, rgba($background-color, 0) $side-void-size,  rgba($background-color, $middle-alpha) $side-gradient-size, rgba($background-color, $middle-alpha) calc(100% - $side-gradient-size), rgba($background-color, 0) calc(100% - $side-void-size));
 	}
 	&--construction{
 		width: 100%;
 		$side-void-size: 0%;
-		$middle-alpha: .5;
+		$middle-alpha: .4;
 		$background-color: rgb(39, 177, 229);
 		$background-color2: rgb(237, 53, 49);
 		background: linear-gradient(to right, rgba($background-color, 0) $side-void-size,  rgba($background-color, $middle-alpha) $side-gradient-size, rgba($background-color2, $middle-alpha) calc(100% - $side-gradient-size), rgba($background-color, 0) calc(100% - $side-void-size));

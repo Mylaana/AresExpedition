@@ -59,7 +59,7 @@ export class PlayableCardListComponent implements OnChanges{
 	}
 	private setBackground(): void{
 		switch(this.listType){
-			case('builderSelector'):{this.background = (this.currentPhase).toLowerCase(); break}
+			case('builderSelector'):{this.background = (this.currentPhase??'').toLowerCase(); break}
 			default:{this.background = this.listType}
 		}
 	}
