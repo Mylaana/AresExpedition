@@ -1,5 +1,4 @@
-$list-margin-coeff: 1.08;
-.wrapper-main{
+:host{
     width: 100%;
 	height: auto;
 }
@@ -13,7 +12,7 @@ $list-margin-coeff: 1.08;
 	height: 100%;
 }
 .list-mask{
-	$fade-size: 5%; //calc(100% / $list-margin-coeff);
+	$fade-size: 5%;
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -26,25 +25,13 @@ $list-margin-coeff: 1.08;
 	justify-content: center;
 	position: relative;
 	height: auto;
-	gap: calc(var(--card-width) * .03);
+	gap: calc(var(--card-height) * .01);
 	width: 100%;
 	$margin: 0%;
 
 	&.played{
 		$margin: 5%;
 		width: calc(100% - $margin * 2);
-	}
-	&.hand{
-		$padding: calc(var(--card-height) * .02);
-		padding: $padding;
-		background: rgba(0, 0, 0, 0.6);
-		border-top-left-radius: 20px;
-		border-top-right-radius: 20px;
-		border: solid 2px rgba(255, 129, 25, .8);
-		border-bottom: 0;
-		&.hovered{
-			box-shadow: 0 0 10px 5px rgba(rgb(255, 129, 25), .6);
-		}
 	}
 	&.selector{
 		width: 100%;
@@ -59,6 +46,9 @@ $list-margin-coeff: 1.08;
 		justify-content: center;
 		align-items: center;
 		flex-direction: row;
+	}
+	&.hand{
+		justify-content: left;
 	}
 }
 .background{

@@ -29,25 +29,27 @@
 						[startingMegacredits]="projectCard.startingMegacredits??0">
 					</app-card-starting-megacredits>
 				</div>
-				<app-card-prerequisite
-					*ngIf="projectCard.prerequisiteText"
-					[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
-					[prerequisiteSummary]="projectCard.prerequisiteSummaryText"
-					[prerequisiteText]="projectCard.prerequisiteText">
-				</app-card-prerequisite>
-				<app-card-played-info
-					*ngIf="projectCard.playedText"
-					[playedText]="projectCard.playedText">
-				</app-card-played-info>
-				<app-card-stock
-					*ngIf="projectCard.stockable?.length!=0"
-					[cardStock]="projectCard.stock">
-				</app-card-stock>
-				<app-card-vp
-					*ngIf="projectCard.vpNumber"
-					[vpNumber]="projectCard.vpNumber"
-					[vpDescription]="projectCard.vpText">
-				</app-card-vp>
+				<div class="wrapper-card-element-center">
+					<app-card-prerequisite
+						*ngIf="projectCard.prerequisiteText"
+						[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
+						[prerequisiteSummary]="projectCard.prerequisiteSummaryText"
+						[prerequisiteText]="projectCard.prerequisiteText">
+					</app-card-prerequisite>
+					<app-card-played-info
+						*ngIf="projectCard.playedText"
+						[playedText]="projectCard.playedText">
+					</app-card-played-info>
+					<app-card-stock
+						*ngIf="projectCard.stockable?.length!=0"
+						[cardStock]="projectCard.stock">
+					</app-card-stock>
+					<app-card-vp
+						*ngIf="projectCard.vpNumber"
+						[vpNumber]="projectCard.vpNumber"
+						[vpDescription]="projectCard.vpText">
+					</app-card-vp>
+				</div>
 			</div>
 			<app-card-effect
 				*ngIf="projectCard.effectText"

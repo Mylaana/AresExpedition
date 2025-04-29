@@ -3,7 +3,7 @@
 :host{
 	display: flex;
 	align-items: center;
-	gap: 5px;
+	gap: var(--card-element-padding);
 	width: 100%;
 }
 .wrapper-effect-summary{
@@ -21,9 +21,24 @@
 	border: lightgrey solid 1px;
 	&.action{
 		border: var(--color-ares-blue-light2) solid 1px;
+		@media (max-width: 1919px) {
+			border-right: 0;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
 	}
 	&.trigger{
 		border: var(--color-ares-purple-light2) solid 1px;
+		@media (max-width: 1919px) {
+			border-right: 0;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+	}
+	@media (max-width: 1919px) {
+		border-right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 }
 .wrapper-effect-summary-border{

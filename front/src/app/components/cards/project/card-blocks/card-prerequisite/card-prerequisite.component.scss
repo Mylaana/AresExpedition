@@ -23,6 +23,11 @@ div{
     justify-content: center;
     flex: 1;
 	border-top-left-radius: 0;
+	@media (max-width: 1919px) {
+		border-right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
 }
 .wrapper-prerequisite-summary{
     display: flex;

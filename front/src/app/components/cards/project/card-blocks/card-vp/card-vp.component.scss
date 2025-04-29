@@ -10,6 +10,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: right;
+	//gap: var(--card-element-padding);
 }
 .wrapper-vp-text{
 	flex: 1;
@@ -18,7 +19,7 @@
     align-items: center;
     justify-content: right;
 
-	margin-right: 5px;
+	margin-right: var(--card-element-padding);
 	border: white solid 1px;
 }
 .wrapper-vp-icon{
@@ -30,11 +31,6 @@
     align-items: center;
     justify-content: left;
 }
-app-vp{
-    position: relative;
-    z-index: 1;
-    height: 90%;
-}
 .wrapper-vp-background{
     z-index: 0;
     position: absolute;
@@ -45,21 +41,31 @@ app-vp{
     width: 100%;
     height: 100%;
 
-    padding-left: 12%;
+    padding-left: 3px;
 }
 .layout-vp-right{
-    width: 60%;
+    width: 65%;
 }
 .layout-vp-left{
-    width: 10%;
+    width: 20%;
 }
 .layout-vp-right, .layout-vp-left{
     z-index: 0;
     position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
     top: 0px;
-    height: 90%;
-    border: transparent 0px solid;
-    outline: white 1px solid;
-    outline-offset: 2px;
-    background-color: rgba($color: grey, $alpha: .7);
+    height: calc(100%);
+    border: white 1px solid;
+}
+.inner-background{
+	width: calc(100% - 4px);
+	height: calc(100% - 4px);
+	background-color: rgba(255, 255, 255, 0.7);
+}
+app-vp{
+    position: relative;
+    z-index: 1;
+    height: 85%;
 }

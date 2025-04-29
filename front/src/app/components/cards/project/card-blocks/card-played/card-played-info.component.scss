@@ -33,4 +33,9 @@ $size: calc(var(--card-width) * .13);
 	border: 1px gold solid;
 	border-top-left-radius: 0;
 	flex: 1;
+	@media (max-width: 1919px) {
+		border-right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
 }
