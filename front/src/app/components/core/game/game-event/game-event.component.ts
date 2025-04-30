@@ -39,7 +39,6 @@ import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/
         NonEventButtonComponent,
         TextWithImageComponent,
         PhaseActionComponent,
-        HexedBackgroundComponent,
         InitialDraftComponent,
         WaitingReadyComponent,
 		PhaseBuilderComponent
