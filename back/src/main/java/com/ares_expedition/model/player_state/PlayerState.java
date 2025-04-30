@@ -9,6 +9,7 @@ import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.player_state.subclass.PlayerEventState;
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
 import com.ares_expedition.model.player_state.subclass.PlayerInfoState;
 import com.ares_expedition.model.player_state.subclass.PlayerOtherState;
@@ -30,6 +31,7 @@ public class PlayerState {
     private PlayerProjectCardState projectCardState = new PlayerProjectCardState();
     private PlayerPhaseCardState phaseCardState = new PlayerPhaseCardState();
     private PlayerGlobalParameterState globalParameterState = new PlayerGlobalParameterState();
+    private PlayerEventState eventState = new PlayerEventState();
     private PlayerOtherState otherState = new PlayerOtherState();
 
     PlayerState(){
@@ -49,6 +51,7 @@ public class PlayerState {
         this.projectCardState = PlayerProjectCardState.fromJson(dto.getProjectCardState());
         this.phaseCardState = PlayerPhaseCardState.fromJson(dto.getPhaseCardState());
         this.globalParameterState = PlayerGlobalParameterState.fromJson(dto.getGlobalParameterState());
+        this.eventState = PlayerEventState.fromJson(dto.getEventState());
         this.otherState = PlayerOtherState.fromJson(dto.getOtherState());
     }
 
@@ -264,6 +267,16 @@ public class PlayerState {
 
     public void setGlobalParameter(List<GlobalParameter> globalParameter) {
         this.globalParameterState.setGlobalParameters(globalParameter);
+    }
+
+    //=============================================================
+    //Events
+    public PlayerEventState getEventState() {
+        return eventState;
+    }
+
+    public void setEventState(PlayerEventState eventState) {
+        this.eventState = eventState;
     }
 
     //=============================================================

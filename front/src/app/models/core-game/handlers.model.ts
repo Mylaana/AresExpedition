@@ -492,7 +492,7 @@ export class DrawEventHandler {
 	}
 	private sendWsDrawQuery(event: DrawEvent){
 		event.queried = true
-		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId)
+		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO())
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel

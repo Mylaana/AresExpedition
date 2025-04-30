@@ -16,6 +16,7 @@ import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
 import { EventDesigner } from "../designers/event-designer.service";
+import { EventDTO } from "../../interfaces/dto/event-dto.interface";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -46,6 +47,7 @@ export class GameState{
 
     private clientId!: myUUID
     playerCount = new BehaviorSubject<myUUID[]>([]);
+	private eventQueueSavedState: EventDTO[] = []
 
     private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
@@ -191,7 +193,9 @@ export class GameState{
     getClientState(): PlayerStateModel{
         return this.clientState.getValue()
     }
-
+	getClientStateDTO(): PlayerStateDTO {
+		return this.getClientState().toJson(this.eventQueue.getValue())
+	}
 	/*
     updatePlayerState(playerId:myUUID, playerState: PlayerStateModel): void{
         this.groupPlayerState.getValue()[playerId] = playerState
@@ -308,7 +312,6 @@ export class GameState{
         let clientState = this.getClientState()
         clientState.addCardsToHand(cardsToAdd)
 		this.updateClientState(clientState)
-		console.log('added cards to hand', clientState)
     }
 
     removeCardsFromClientHandById(cardsToRemove: number | number[], cardType: PlayableCardType):void{
@@ -382,7 +385,9 @@ export class GameState{
                 newQueue = newQueue.concat(firstEvent?[firstEvent]:[], addEvents, oldQueue)
             }
         }
-
+		if(this.eventQueueSavedState.length>0){
+			this.loadEventQueueSavedState(newQueue)
+		}
         this.eventQueue.next(newQueue)
     }
 
@@ -570,6 +575,10 @@ export class GameState{
 			playerIdList.push(playerStateDTO.infoState.i)
 
 			//add playerstate
+			if(playerStateDTO.infoState.i===this.clientId){
+				this.eventQueueSavedState = playerStateDTO.eventState?.e??[]
+				playerStateDTO.eventState.e = []
+			}
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
 		}
 		this.setPlayerIdList(playerIdList)
@@ -583,6 +592,7 @@ export class GameState{
 				this.updateClientState(state)
 			}
 		}
+		console.log('client state loaded: ', this.clientState.getValue())
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
@@ -657,5 +667,16 @@ export class GameState{
 			}
 		}
 		this.selectedPhaseList.next(list)
+	}
+	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
+		for(let event of eventQueue){
+			for(let state of this.eventQueueSavedState){
+				if(event.subType===state.est){
+					event.fromJson(state)
+					this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==state)
+					break
+				}
+			}
+		}
 	}
 }

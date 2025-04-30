@@ -121,6 +121,11 @@ public class InputRouter {
         if (drawNumber == 0) {
             return;
         }
+        gameController.setPlayerState(
+            query.getGameId(),
+            query.getPlayerId(),
+            PlayerState.fromJson(query.getContent().getPlayerState())
+            );
         wsOutput.sendPushToPlayer(
             MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(this.gameController.drawCards(query.getGameId(), drawNumber), query.getEventId())),
             query.getPlayerId()
@@ -152,7 +157,8 @@ public class InputRouter {
         gameController.setPlayerState(
             query.getGameId(),
             query.getPlayerId(),
-            PlayerState.fromJson(query.getContent())
+            PlayerState.fromJson(query.getContent()),
+            true
             );
     }
     

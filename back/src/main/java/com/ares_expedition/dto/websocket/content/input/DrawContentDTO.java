@@ -1,8 +1,11 @@
 package com.ares_expedition.dto.websocket.content.input;
 
+import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
+
 public class DrawContentDTO extends BaseContentDTO{
     Integer drawNumber;
     Integer eventId;
+    PlayerStateDTO playerState;
 
     public DrawContentDTO(){
     }
@@ -26,6 +29,14 @@ public class DrawContentDTO extends BaseContentDTO{
   
     public void setEventId(Integer eventId) {
       this.eventId = eventId;
+    }
+
+    public PlayerStateDTO getPlayerState() {
+      return playerState;
+    }
+
+    public void setPlayerState(PlayerStateDTO playerState) {
+      this.playerState = playerState;
     }
 }
 

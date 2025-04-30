@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RxStomp } from '@stomp/rx-stomp';
 import { WebsocketQueryMessageFactory } from '../designers/websocket-message-factory.service';
-import { GLOBAL_WS_APP_PLAYER, GLOBAL_WS_ACKNOWLEDGE, GLOBAL_WS_APP_DEBUG } from '../../global/global-const';
+import { GLOBAL_WS_APP_PLAYER, GLOBAL_WS_APP_DEBUG } from '../../global/global-const';
 import { MessageContentQueryEnum } from '../../enum/websocket.enum';
 import { myRxStompConfig } from './rx-stomp.config';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
@@ -10,8 +10,8 @@ import { Utils } from '../../utils/utils';
 import { PlayerMessage } from '../../interfaces/websocket.interface';
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from '../../types/global.type';
-import { GameState } from '../core-game/game-state.service';
 import { GameParamService } from '../core-game/game-param.service';
+import { PlayerStateDTO } from '../../interfaces/dto/player-state-dto.interface';
 
 
 interface QueueMessage {
@@ -116,8 +116,8 @@ export class RxStompService extends RxStomp {
 		//this.publish({destination:GLOBAL_WS_APP_DEBUG, body:JSON.stringify(message)})
     }
 
-    public publishDraw(drawNumber: number, eventId: number): void {
-        this.enqueueMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId))
+    public publishDraw(drawNumber: number, eventId: number, playerDTO: PlayerStateDTO): void {
+        this.enqueueMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId, playerDTO))
     }
 
     public publishClientPlayerReady(ready: boolean): void {

@@ -88,7 +88,6 @@ export class WebsocketHandler {
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setSelectedPhaseList(content.selectedPhase)
-		console.log(content.selectedPhase)
 	}
 
 	private handleMessageConnection(content: WsGameState): void {

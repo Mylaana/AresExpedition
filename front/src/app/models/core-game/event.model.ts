@@ -5,6 +5,7 @@ import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { EventDTO } from "../../interfaces/dto/event-dto.interface";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -27,6 +28,8 @@ export abstract class EventBaseModel {
     hasCardBuilder(): boolean {return false}
     getSelectionActive(): boolean {return false}
 	onSwitch(): void {}
+	toJson(): EventDTO | undefined {return undefined}
+	fromJson(dto: EventDTO){return}
 }
 
 export abstract class EventBaseCardSelector extends EventBaseModel {
@@ -203,7 +206,7 @@ export class CardBuilder {
 		this.selectedCard = undefined
         this.updateButtonGroupState('cancelSelectCard')
 	}
-    setbuilderIsLocked(): void {this.builderIsLocked=true}
+    setbuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
     getbuilderIsLocked(): boolean {return this.builderIsLocked}
 	resetBuilder(): void {
 		if(this.builderIsLocked){return}
@@ -307,6 +310,25 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		//reset cardBuilder's selection onSwitch
 		for(let builder of this.cardBuilder){
 			builder.resetBuilder()
+		}
+	}
+	override toJson(): EventDTO | undefined {
+		let dto: EventDTO = {
+			est: this.subType,
+			bl: []
+		}
+		for(let builder of this.cardBuilder){
+			dto.bl?.push(builder.getbuilderIsLocked())
+		}
+		return dto
+	}
+	override fromJson(dto: EventDTO): void {
+		if(dto.bl){
+			let index: number = 0
+			for(let locked of dto.bl){
+				this.cardBuilder[index].setbuilderIsLocked(locked)
+				index ++
+			}
 		}
 	}
 }
