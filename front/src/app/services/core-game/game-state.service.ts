@@ -359,7 +359,10 @@ export class GameState{
         }
         this.drawQueue.next(newDrawQueue)
     }
-
+	/**
+	 *
+	 * adding one or multiple events in queue at the specified [addrule] position, if multiple events added this way, the received order is preserved.	 *
+	 */
     addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
         let newQueue: EventBaseModel[] = []
         let addEvents: EventBaseModel[] = []
@@ -454,8 +457,6 @@ export class GameState{
             events = events.concat(playedCardEvents)
         }
         if(events.length===0){return}
-
-        events.reverse()
         this.addEventQueue(events, 'first')
 	}
     setClientTriggerAsInactive(triggerId: number): void {
@@ -592,6 +593,8 @@ export class GameState{
 				this.updateClientState(state)
 			}
 		}
+		//create events from eventqueue saved state
+		this.createEventFromEventQueueSavedState()
 		console.log('client state loaded: ', this.clientState.getValue())
 		console.log('eventstate loaded:', this.eventQueueSavedState)
 	}
@@ -671,6 +674,8 @@ export class GameState{
 	}
 	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
 		let playerState: PlayerStateModel = this.getClientState()
+
+		//modify clientState
 		for(let event of eventQueue){
 			for(let eventState of this.eventQueueSavedState){
 				if(event.subType===eventState.est){
@@ -688,5 +693,17 @@ export class GameState{
 			}
 
 		}
+	}
+	private createEventFromEventQueueSavedState(): void {
+		let newEvents: EventBaseModel[] = []
+		for(let eventState of this.eventQueueSavedState){
+			if(eventState.ced){
+				newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
+				this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
+			}
+		}
+		if(newEvents.length===0){return}
+		this.addEventQueue(newEvents, 'first')
+		console.log('eventqueue:',this.eventQueue.getValue())
 	}
 }

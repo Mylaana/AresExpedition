@@ -7,8 +7,8 @@
     "groupPlayerReady" : {
       "738cbd53-a124-480d-a1d6-1269f764daed" : false
     },
-    "currentPhase" : "ACTION",
-    "selectedPhase" : [ "PLANIFICATION", "ACTION" ],
+    "currentPhase" : "CONSTRUCTION",
+    "selectedPhase" : [ "PLANIFICATION", "CONSTRUCTION" ],
     "groupPlayerState" : {
       "738cbd53-a124-480d-a1d6-1269f764daed" : {
         "infoState" : {
@@ -17,7 +17,7 @@
           "color" : "blue"
         },
         "scoreState" : {
-          "vp" : 6,
+          "vp" : 9,
           "milestoneCount" : 0,
           "terraformingRating" : 5
         },
@@ -80,7 +80,7 @@
             "id" : 9,
             "name" : "event",
             "idImageUrl" : 9,
-            "valueCount" : 0,
+            "valueCount" : 3,
             "valueMod" : 0
           } ]
         },
@@ -91,7 +91,7 @@
             "valueMod" : 0,
             "valueProd" : 0,
             "valueBaseProd" : 0,
-            "valueStock" : 195,
+            "valueStock" : 189,
             "hasStock" : true,
             "imageUrlId" : 1009
           }, {
@@ -142,9 +142,9 @@
           } ]
         },
         "projectCardState" : {
-          "hand" : [ 229, 281, 229, 281, 222, 184, 229, 281, 222 ],
+          "hand" : [ 229, 229, 281, 229, 281, 184, 229, 281, 222 ],
           "handCorporations" : [ ],
-          "playedProjectIdList" : [ 1000, 4, 9, 29, 184 ],
+          "playedProjectIdList" : [ 1000, 4, 9, 29, 184, 281, 281, 281 ],
           "playedProjectCardStocks" : null,
           "triggers" : {
             "playedCardsId" : [ 1000 ],
@@ -159,7 +159,7 @@
         },
         "phaseCardState" : {
           "phaseCards" : [ ],
-          "selectedPhase" : "ACTION",
+          "selectedPhase" : "CONSTRUCTION",
           "previousSelectedPhase" : "DEVELOPMENT"
         },
         "globalParameterState" : {
@@ -169,8 +169,8 @@
             "addEop" : 0
           }, {
             "name" : "INFRASTRUCTURE",
-            "step" : 0,
-            "addEop" : 0
+            "step" : 1,
+            "addEop" : 1
           }, {
             "name" : "TEMPERATURE",
             "step" : 1,
@@ -183,10 +183,11 @@
         },
         "eventState" : {
           "events" : [ {
-            "est" : "actionPhaseActivator",
-            "al" : {
-              "4" : 1
-            }
+            "est" : "discardCards",
+            "ced" : 1
+          }, {
+            "est" : "constructionPhaseBuilder",
+            "bl" : [ true, false ]
           } ]
         },
         "otherState" : {
@@ -205,7 +206,7 @@
       "addEop" : 0
     }, {
       "name" : "INFRASTRUCTURE",
-      "step" : 0,
+      "step" : 1,
       "addEop" : 0
     }, {
       "name" : "TEMPERATURE",

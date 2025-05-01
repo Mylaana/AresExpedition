@@ -73,6 +73,18 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
 export class EventCardSelector extends EventBaseCardSelector{
     override readonly type: EventType = 'cardSelector'
     override subType!: EventCardSelectorSubType
+	override toJson(): EventDTO | undefined {
+		switch(this.subType){
+			case('discardCards'):{
+				return {
+					est: this.subType,
+					ced: this.cardSelector.selectionQuantity
+				}
+				break
+			}
+			default:{return undefined}
+		}
+	}
 }
 
 export class EventCardSelectorRessource extends EventBaseCardSelector {
