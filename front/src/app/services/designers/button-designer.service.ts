@@ -16,7 +16,7 @@ export class ButtonDesigner{
             case('default'):{startEnabled=true;break}
             case('upgradePhaseCards'):{startEnabled=true;break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{startEnabled=true;break}
-            case('actionPhase'):{startEnabled=true;break}
+            case('actionPhaseActivator'):{startEnabled=true;break}
             case('selectCardOptionalSell'):{startEnabled=false;break}
 			case('planificationPhase'):{startEnabled=false;break}
 			case('selectStartingHand'):{startEnabled=true;break}
@@ -68,7 +68,6 @@ export class ButtonDesigner{
             case('upgradePhaseCards'):{caption='$other_validate$';break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='$other_validate$';break}
             case('addRessourceToSelectedCard'):{caption='Add ressources';break}
-            case('actionPhase'):{caption='$other_validate$';break}
             case('researchPhaseResult'):{caption='$other_validate$';break}
             case('selectCardForcedSell'):{caption='$other_validate$';break}
             case('selectCardOptionalSell'):{caption='$other_validate$';break}
@@ -76,6 +75,7 @@ export class ButtonDesigner{
             case('scanKeepResult'):{caption='Add selection to hand';break}
 			case('selectStartingHand'):{caption='$other_validate$';break}
 			case('selectCorporation'):{caption='$other_validate$';break}
+			case('actionPhaseActivator'):{caption='$other_validate$';break}
 
 			//button name related rules
 			case('sellOptionalCard'):{caption='$other_sell_card$';break}

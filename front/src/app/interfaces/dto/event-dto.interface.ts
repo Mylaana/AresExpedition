@@ -8,4 +8,5 @@ import { EventUnionSubTypes } from "../../types/event.type"
 export interface EventDTO {
 	est: EventUnionSubTypes //event subtype
 	bl?: boolean[] //builder locked list
+	al?: {[key: string]: number} //activation log
 }

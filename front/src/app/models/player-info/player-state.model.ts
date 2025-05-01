@@ -136,6 +136,8 @@ export class PlayerStateModel {
 		this.addPlayedCardTags(card)
 	}
 
+	loadEventStateActivator(dto: EventDTO): void {this.projectCardState.loadEventStateActivator(dto)}
+
 	private payCardCost(card: PlayableCardModel):void{
 		this.addRessource('megacredit', -card.cost)
 	}

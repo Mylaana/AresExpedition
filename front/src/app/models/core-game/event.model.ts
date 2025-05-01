@@ -1,4 +1,4 @@
-import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType } from "../../types/event.type";
+import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
 import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
@@ -26,6 +26,7 @@ export abstract class EventBaseModel {
     hasSelector(): boolean {return false}
 	hasCardsToSelectFrom(): boolean {return false}
     hasCardBuilder(): boolean {return false}
+	hasCardActivator(): boolean {return false}
     getSelectionActive(): boolean {return false}
 	onSwitch(): void {}
 	toJson(): EventDTO | undefined {return undefined}
@@ -78,6 +79,25 @@ export class EventCardSelectorRessource extends EventBaseCardSelector {
     override readonly type: EventType = 'cardSelectorRessource'
     override subType!: EventCardSelectorRessourceSubType;
     advancedRessource?: AdvancedRessourceStock
+}
+
+export class EventCardActivator extends EventBaseCardSelector {
+    override readonly type: EventType = 'cardActivator'
+	override subType!: EventCardActivatorSubType
+    activationLog: {[key: string]: number } = {}
+	doubleActivationMaxNumber!: number
+	doubleActivationCount: number = 0
+	override hasCardActivator(): boolean {return true}
+	override toJson(): EventDTO | undefined {
+		let dto: EventDTO = {
+			est: this.subType,
+			al: this.activationLog
+		}
+		return dto
+	}
+	override fromJson(dto: EventDTO): void {
+		this.activationLog = dto.al??{}
+	}
 }
 
 export class CardBuilder {

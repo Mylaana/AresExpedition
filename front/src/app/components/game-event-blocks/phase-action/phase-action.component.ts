@@ -5,7 +5,7 @@ import { ButtonDesigner } from '../../../services/designers/button-designer.serv
 import { Subject, takeUntil } from 'rxjs';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { EventBaseModel, EventCardSelector } from '../../../models/core-game/event.model';
+import { EventBaseModel, EventCardActivator } from '../../../models/core-game/event.model';
 import { EventDesigner } from '../../../services/designers/event-designer.service';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
@@ -35,7 +35,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	private _mcStock: number = 0
 	private _plantStock: number = 0
 	private _heatStock: number = 0
-	private _actionEvent!: EventCardSelector
+	private _actionEvent!: EventCardActivator
 	private _loaded = false
 	private destroy$ = new Subject<void>()
 
@@ -44,7 +44,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(
 			state => {this.onStateUpdate(state)})
-		this._actionEvent = this.event as EventCardSelector
+		this._actionEvent = this.event as EventCardActivator
 		this.updateButtonState()
 	}
 	ngAfterViewInit(): void {

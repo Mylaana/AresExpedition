@@ -593,6 +593,7 @@ export class GameState{
 			}
 		}
 		console.log('client state loaded: ', this.clientState.getValue())
+		console.log('eventstate loaded:', this.eventQueueSavedState)
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
@@ -669,14 +670,23 @@ export class GameState{
 		this.selectedPhaseList.next(list)
 	}
 	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
+		let playerState: PlayerStateModel = this.getClientState()
 		for(let event of eventQueue){
-			for(let state of this.eventQueueSavedState){
-				if(event.subType===state.est){
-					event.fromJson(state)
-					this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==state)
+			for(let eventState of this.eventQueueSavedState){
+				if(event.subType===eventState.est){
+					switch(event.type){
+						case('cardActivator'):{
+							playerState.loadEventStateActivator(eventState)
+							break
+						}
+					}
+
+					event.fromJson(eventState)
+					this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
 					break
 				}
 			}
+
 		}
 	}
 }

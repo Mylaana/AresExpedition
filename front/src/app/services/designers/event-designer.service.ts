@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, CardBuilder, EventPhase } from "../../models/core-game/event.model";
-import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventWaiterSubType } from "../../types/event.type";
+import { EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, CardBuilder, EventPhase, EventCardActivator } from "../../models/core-game/event.model";
+import { EventCardActivatorSubType, EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventWaiterSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ButtonDesigner } from "./button-designer.service";
 import { BuilderType} from "../../types/phase-card.type";
@@ -79,15 +79,6 @@ export class EventDesigner{
 				event.title = 'Select any number of cards to sell'
                 break
             }
-            case('actionPhase'):{
-                event.cardSelector.filter = {type: 'action'}
-                event.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
-                event.title = 'Activate cards'
-				event.cardSelector.selectionQuantity = 1
-				event.cardSelector.selectionQuantityTreshold = 'max'
-				event.refreshSelectorOnSwitch = true
-                break
-            }
             case('researchPhaseResult'):
             case('scanKeepResult'):{
                 event.title = `Select ${event.cardSelector.selectionQuantity} cards to draw`
@@ -132,6 +123,17 @@ export class EventDesigner{
         event.cardSelector.selectionQuantity = 1
         event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
         event.refreshSelectorOnSwitch = false
+
+        return event
+    }
+	public static createCardActivator(subType: EventCardActivatorSubType, args?: CreateEventOptionsSelector): EventCardActivator {
+        let event = new EventCardActivator
+        event.cardSelector = this.generateCardSelector(args?.cardSelector)
+        event.subType = subType
+		event.cardSelector.filter = {type: 'action'}
+		event.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
+		event.title = 'Activate cards'
+		event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 
         return event
     }
@@ -333,6 +335,7 @@ export class EventDesigner{
                 event.autoFinalize = false
                 break
             }
+			case('actionPhase'):{break}
             case('developmentPhase'):{break}
             case('constructionPhase'):{break}
             case('researchPhase'):{break}

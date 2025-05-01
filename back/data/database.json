@@ -1,4 +1,223 @@
 {
+  "40f338af-a20c-40d6-84f5-a49b2f3f5981" : {
+    "gameId" : "40f338af-a20c-40d6-84f5-a49b2f3f5981",
+    "deck" : [ ],
+    "discard" : [ ],
+    "groupPlayerId" : [ "738cbd53-a124-480d-a1d6-1269f764daed" ],
+    "groupPlayerReady" : {
+      "738cbd53-a124-480d-a1d6-1269f764daed" : false
+    },
+    "currentPhase" : "ACTION",
+    "selectedPhase" : [ "PLANIFICATION", "ACTION" ],
+    "groupPlayerState" : {
+      "738cbd53-a124-480d-a1d6-1269f764daed" : {
+        "infoState" : {
+          "id" : "738cbd53-a124-480d-a1d6-1269f764daed",
+          "name" : "a",
+          "color" : "blue"
+        },
+        "scoreState" : {
+          "vp" : 6,
+          "milestoneCount" : 0,
+          "terraformingRating" : 5
+        },
+        "tagState" : {
+          "tags" : [ {
+            "id" : 0,
+            "name" : "building",
+            "idImageUrl" : 0,
+            "valueCount" : 1,
+            "valueMod" : 0
+          }, {
+            "id" : 1,
+            "name" : "space",
+            "idImageUrl" : 1,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 2,
+            "name" : "science",
+            "idImageUrl" : 2,
+            "valueCount" : 1,
+            "valueMod" : 0
+          }, {
+            "id" : 3,
+            "name" : "power",
+            "idImageUrl" : 3,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 4,
+            "name" : "earth",
+            "idImageUrl" : 4,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 5,
+            "name" : "jovian",
+            "idImageUrl" : 5,
+            "valueCount" : 1,
+            "valueMod" : 0
+          }, {
+            "id" : 6,
+            "name" : "plant",
+            "idImageUrl" : 6,
+            "valueCount" : 2,
+            "valueMod" : 0
+          }, {
+            "id" : 7,
+            "name" : "animal",
+            "idImageUrl" : 7,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 8,
+            "name" : "microbe",
+            "idImageUrl" : 8,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 9,
+            "name" : "event",
+            "idImageUrl" : 9,
+            "valueCount" : 0,
+            "valueMod" : 0
+          } ]
+        },
+        "ressourceState" : {
+          "ressources" : [ {
+            "id" : 0,
+            "name" : "megacredit",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 195,
+            "hasStock" : true,
+            "imageUrlId" : 1009
+          }, {
+            "id" : 1,
+            "name" : "heat",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : true,
+            "imageUrlId" : 1007
+          }, {
+            "id" : 2,
+            "name" : "plant",
+            "valueMod" : 0,
+            "valueProd" : 2,
+            "valueBaseProd" : 2,
+            "valueStock" : 0,
+            "hasStock" : true,
+            "imageUrlId" : 1004
+          }, {
+            "id" : 3,
+            "name" : "steel",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : false,
+            "imageUrlId" : 1000
+          }, {
+            "id" : 4,
+            "name" : "titanium",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : false,
+            "imageUrlId" : 1001
+          }, {
+            "id" : 5,
+            "name" : "card",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : true,
+            "imageUrlId" : 1008
+          } ]
+        },
+        "projectCardState" : {
+          "hand" : [ 229, 281, 229, 281, 222, 184, 229, 281, 222 ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ 1000, 4, 9, 29, 184 ],
+          "playedProjectCardStocks" : null,
+          "triggers" : {
+            "playedCardsId" : [ 1000 ],
+            "activeCardsId" : [ 1000 ],
+            "activeOnRessourceAddedToCard" : [ ],
+            "activeOnParameterIncrease" : [ ],
+            "activeOnPlayedCard" : [ ],
+            "activeOnGainedTag" : [ ],
+            "activeCostModTrigger" : [ ]
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : "ACTION",
+          "previousSelectedPhase" : "DEVELOPMENT"
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ {
+            "name" : "OCEAN",
+            "step" : 0,
+            "addEop" : 0
+          }, {
+            "name" : "INFRASTRUCTURE",
+            "step" : 0,
+            "addEop" : 0
+          }, {
+            "name" : "TEMPERATURE",
+            "step" : 1,
+            "addEop" : 0
+          }, {
+            "name" : "OXYGEN",
+            "step" : 0,
+            "addEop" : 0
+          } ]
+        },
+        "eventState" : {
+          "events" : [ {
+            "est" : "actionPhaseActivator",
+            "al" : {
+              "4" : 1
+            }
+          } ]
+        },
+        "otherState" : {
+          "research" : {
+            "scan" : 0,
+            "keep" : 0
+          },
+          "sellCardValueMod" : 0
+        }
+      }
+    },
+    "gameStatus" : "STARTED",
+    "globalParameters" : [ {
+      "name" : "OCEAN",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "INFRASTRUCTURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "TEMPERATURE",
+      "step" : 1,
+      "addEop" : 0
+    }, {
+      "name" : "OXYGEN",
+      "step" : 0,
+      "addEop" : 0
+    } ],
+    "deckCorporations" : [ 1001, 1002 ]
+  },
   "8ef6761c-a0e4-4113-a038-ac36402c8395" : {
     "gameId" : "8ef6761c-a0e4-4113-a038-ac36402c8395",
     "deck" : [ ],
@@ -7,8 +226,8 @@
     "groupPlayerReady" : {
       "afca0c32-fae3-4e65-8912-d95e2fe7f3a2" : false
     },
-    "currentPhase" : "PLANIFICATION",
-    "selectedPhase" : [ "PLANIFICATION" ],
+    "currentPhase" : "RESEARCH",
+    "selectedPhase" : [ "PLANIFICATION", "RESEARCH" ],
     "groupPlayerState" : {
       "afca0c32-fae3-4e65-8912-d95e2fe7f3a2" : {
         "infoState" : {
@@ -91,7 +310,7 @@
             "valueMod" : 0,
             "valueProd" : 0,
             "valueBaseProd" : 0,
-            "valueStock" : 81,
+            "valueStock" : 90,
             "hasStock" : true,
             "imageUrlId" : 1009
           }, {
@@ -108,7 +327,7 @@
             "name" : "plant",
             "valueMod" : 0,
             "valueProd" : 0,
-            "valueBaseProd" : 0,
+            "valueBaseProd" : 7,
             "valueStock" : 0,
             "hasStock" : true,
             "imageUrlId" : 1004
@@ -142,7 +361,7 @@
           } ]
         },
         "projectCardState" : {
-          "hand" : [ 37, 184, 229, 281, 222, 45, 42 ],
+          "hand" : [ 37, 184, 45, 42, 184, 229, 281, 222, 184, 229, 281, 222 ],
           "handCorporations" : [ ],
           "playedProjectIdList" : [ 1002, 281, 4 ],
           "playedProjectCardStocks" : null,
@@ -159,8 +378,8 @@
         },
         "phaseCardState" : {
           "phaseCards" : [ ],
-          "selectedPhase" : "UNDEFINED",
-          "previousSelectedPhase" : "ACTION"
+          "selectedPhase" : "RESEARCH",
+          "previousSelectedPhase" : "CONSTRUCTION"
         },
         "globalParameterState" : {
           "globalParameters" : [ {
@@ -212,5 +431,219 @@
       "addEop" : 0
     } ],
     "deckCorporations" : [ 1000, 1001 ]
+  },
+  "847402b6-d4ac-413a-85d6-f5fe1832f824" : {
+    "gameId" : "847402b6-d4ac-413a-85d6-f5fe1832f824",
+    "deck" : [ ],
+    "discard" : [ ],
+    "groupPlayerId" : [ "3dda8c8f-23cd-4774-b614-4d1e4a91a7a2" ],
+    "groupPlayerReady" : {
+      "3dda8c8f-23cd-4774-b614-4d1e4a91a7a2" : false
+    },
+    "currentPhase" : "ACTION",
+    "selectedPhase" : [ "PLANIFICATION", "ACTION" ],
+    "groupPlayerState" : {
+      "3dda8c8f-23cd-4774-b614-4d1e4a91a7a2" : {
+        "infoState" : {
+          "id" : "3dda8c8f-23cd-4774-b614-4d1e4a91a7a2",
+          "name" : "a",
+          "color" : "blue"
+        },
+        "scoreState" : {
+          "vp" : 5,
+          "milestoneCount" : 0,
+          "terraformingRating" : 5
+        },
+        "tagState" : {
+          "tags" : [ {
+            "id" : 0,
+            "name" : "building",
+            "idImageUrl" : 0,
+            "valueCount" : 1,
+            "valueMod" : 0
+          }, {
+            "id" : 1,
+            "name" : "space",
+            "idImageUrl" : 1,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 2,
+            "name" : "science",
+            "idImageUrl" : 2,
+            "valueCount" : 1,
+            "valueMod" : 0
+          }, {
+            "id" : 3,
+            "name" : "power",
+            "idImageUrl" : 3,
+            "valueCount" : 1,
+            "valueMod" : 0
+          }, {
+            "id" : 4,
+            "name" : "earth",
+            "idImageUrl" : 4,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 5,
+            "name" : "jovian",
+            "idImageUrl" : 5,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 6,
+            "name" : "plant",
+            "idImageUrl" : 6,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 7,
+            "name" : "animal",
+            "idImageUrl" : 7,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 8,
+            "name" : "microbe",
+            "idImageUrl" : 8,
+            "valueCount" : 0,
+            "valueMod" : 0
+          }, {
+            "id" : 9,
+            "name" : "event",
+            "idImageUrl" : 9,
+            "valueCount" : 0,
+            "valueMod" : 0
+          } ]
+        },
+        "ressourceState" : {
+          "ressources" : [ {
+            "id" : 0,
+            "name" : "megacredit",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 23,
+            "hasStock" : true,
+            "imageUrlId" : 1009
+          }, {
+            "id" : 1,
+            "name" : "heat",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : true,
+            "imageUrlId" : 1007
+          }, {
+            "id" : 2,
+            "name" : "plant",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : true,
+            "imageUrlId" : 1004
+          }, {
+            "id" : 3,
+            "name" : "steel",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : false,
+            "imageUrlId" : 1000
+          }, {
+            "id" : 4,
+            "name" : "titanium",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : false,
+            "imageUrlId" : 1001
+          }, {
+            "id" : 5,
+            "name" : "card",
+            "valueMod" : 0,
+            "valueProd" : 0,
+            "valueBaseProd" : 0,
+            "valueStock" : 0,
+            "hasStock" : true,
+            "imageUrlId" : 1008
+          } ]
+        },
+        "projectCardState" : {
+          "hand" : [ 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222, 184, 229, 281, 222 ],
+          "handCorporations" : [ ],
+          "playedProjectIdList" : [ 1001, 4 ],
+          "playedProjectCardStocks" : null,
+          "triggers" : {
+            "playedCardsId" : [ 1001 ],
+            "activeCardsId" : [ 1001 ],
+            "activeOnRessourceAddedToCard" : [ ],
+            "activeOnParameterIncrease" : [ ],
+            "activeOnPlayedCard" : [ ],
+            "activeOnGainedTag" : [ ],
+            "activeCostModTrigger" : [ ]
+          },
+          "handMaximumSize" : 10
+        },
+        "phaseCardState" : {
+          "phaseCards" : [ ],
+          "selectedPhase" : "ACTION",
+          "previousSelectedPhase" : "CONSTRUCTION"
+        },
+        "globalParameterState" : {
+          "globalParameters" : [ {
+            "name" : "OCEAN",
+            "step" : 0,
+            "addEop" : 0
+          }, {
+            "name" : "INFRASTRUCTURE",
+            "step" : 0,
+            "addEop" : 0
+          }, {
+            "name" : "TEMPERATURE",
+            "step" : 0,
+            "addEop" : 0
+          }, {
+            "name" : "OXYGEN",
+            "step" : 0,
+            "addEop" : 0
+          } ]
+        },
+        "eventState" : {
+          "events" : [ ]
+        },
+        "otherState" : {
+          "research" : {
+            "scan" : 0,
+            "keep" : 0
+          },
+          "sellCardValueMod" : 0
+        }
+      }
+    },
+    "gameStatus" : "STARTED",
+    "globalParameters" : [ {
+      "name" : "OCEAN",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "INFRASTRUCTURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "TEMPERATURE",
+      "step" : 0,
+      "addEop" : 0
+    }, {
+      "name" : "OXYGEN",
+      "step" : 0,
+      "addEop" : 0
+    } ],
+    "deckCorporations" : [ 1002, 1000 ]
   }
 }

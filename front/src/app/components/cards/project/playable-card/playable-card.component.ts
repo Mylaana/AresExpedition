@@ -84,7 +84,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		// subscribe to gameState
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
 		this.setBuildable()
-		this.checkMaximumActivation()
+		this.setMaximumActivation()
 
 		if(this.state.isActivable()){
 			this.setActivationPayable()
@@ -149,18 +149,16 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.state.setBuildable(this.megacreditAvailable >= this.projectCard.cost)
 	}
 	public onActivation(twice: boolean): void {
-		this.projectCard.activated += 1
-
 		this.setActivationPayable()
-		this.checkMaximumActivation()
+		this.setMaximumActivation()
 
-		this.cardActivated.emit({card: this.projectCard, twice: this.projectCard.activated>1})
+		this.cardActivated.emit({card: this.projectCard, twice: twice})
 	}
 	private setActivationPayable(): void {
 		this._activationCostPayable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getClientState())
 	}
-	private checkMaximumActivation(): void {
-		this._maximumActivation = (this.projectCard.activated>1) || (this.projectCard.activated>=1 && this.activableTwice === false)
+	private setMaximumActivation(): void {
+		this._maximumActivation = (this.projectCard.activated>=2) || (this.projectCard.activated>=1 && this.activableTwice === false)
 	}
 
 	public isDisabled(): boolean{

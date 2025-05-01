@@ -4,7 +4,7 @@ import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { CardState } from '../../../../interfaces/card.interface';
 import { CardSelector } from '../../../../interfaces/global.interface';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
-import { EventBaseModel, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
+import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
 import { PlayableCardComponent } from '../playable-card/playable-card.component';
 import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
@@ -40,7 +40,7 @@ export class PlayableCardListComponent implements OnChanges{
 	_buildDiscount: number = 0
 	_cardSelector!: CardSelector
 	_displayedCards!: PlayableCardModel[] | undefined;
-	_activateTwiceCount: number = 0
+	_activateTwiceRemaining: number = 0
 	private selectedCardList: PlayableCardModel[] = [];
 
 	ngOnInit(){
@@ -48,6 +48,9 @@ export class PlayableCardListComponent implements OnChanges{
 		this.updateCardList()
 		this.setBackground()
 		if(this.event){this.setListSubType(this.event as EventCardSelector)}
+		if(this.event?.hasCardActivator()){
+			this.setActivationCount(this.event as EventCardActivator)
+		}
 	}
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['event'] && changes['event'].currentValue) {this.updateCardList(); return}
@@ -94,8 +97,12 @@ export class PlayableCardListComponent implements OnChanges{
 			this.setSelectorFromEvent(this.event as EventCardSelector)
 			this.setListSubType(this.event as EventCardSelector)
 		}
-
-		this._activateTwiceCount = this._cardSelector.selectionQuantity
+		if(this.event?.hasCardActivator()){
+			this.setActivationCount(this.event as EventCardActivator)
+		}
+	}
+	private setActivationCount(event: EventCardActivator): void {
+		this._activateTwiceRemaining = event.doubleActivationMaxNumber - event.doubleActivationCount
 	}
 	private setSelectorFromEvent(event: EventCardSelector): void {
 		this._cardSelector = event.cardSelector
