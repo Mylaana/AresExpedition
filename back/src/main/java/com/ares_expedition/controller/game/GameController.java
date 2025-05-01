@@ -98,7 +98,14 @@ public class GameController {
     public void setPlayerState(String gameId, String playerId, PlayerState state){
         Game game = getGameFromId(gameId);
         game.setPlayerState(playerId, state);
-        this.setPlayerReady(gameId, playerId, true);
+        JsonGameDataHandler.saveGame(game);
+    }
+
+    public void setPlayerState(String gameId, String playerId, PlayerState state, Boolean setPlayerReady){
+        Game game = getGameFromId(gameId);
+        game.setPlayerState(playerId, state);
+        this.setPlayerReady(game.getGameId(), playerId, setPlayerReady);
+        JsonGameDataHandler.saveGame(game);
     }
 
     public GameStatusEnum getGameStatus(String gameId) {

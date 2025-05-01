@@ -1,6 +1,6 @@
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface"
 import { EventCardBuilderButton } from "../../models/core-game/button.model"
-import { CardBuilder, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventPhase, EventTargetCard, EventWaiter } from "../../models/core-game/event.model"
+import { CardBuilder, EventCardActivator, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventPhase, EventTargetCard, EventWaiter } from "../../models/core-game/event.model"
 import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type"
 import { CardBuilderOptionType } from "../../types/global.type"
 import { ButtonDesigner } from "./button-designer.service"
@@ -174,29 +174,6 @@ describe('Service - Designers - Event', () => {
 
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
-
-                let resultEvent = EventDesigner.createCardSelector(expectedSubType)
-
-                expect(expectedEvent).toEqual(resultEvent)
-                expect(buttonSpy).toHaveBeenCalled()
-            })
-            it('should create a actionPhase selector Event', () => {
-				expectedSelector = {
-					selectFrom: [],
-					selectedList: [],
-					selectionQuantity: 1,
-					selectionQuantityTreshold: 'max',
-					cardInitialState: undefined,
-					filter: undefined,
-					stateFromParent: undefined
-				}
-				expectedEvent.cardSelector = expectedSelector
-                expectedSubType = 'actionPhase'
-                expectedEvent.subType = expectedSubType
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
-                expectedEvent.title = 'Activate cards'
-                expectedEvent.cardSelector.filter = {type:"action"}
 
                 let resultEvent = EventDesigner.createCardSelector(expectedSubType)
 
@@ -412,6 +389,56 @@ describe('Service - Designers - Event', () => {
                 expect(logTextSpy).toHaveBeenCalled()
             })
         })
+		describe('createCardSelector Event', () => {
+			let expectedSelector: CardSelector
+			let expectedArgs: CreateEventOptionsSelector
+			let expectedEvent: EventCardActivator
+			let expectedSubType: EventUnionSubTypes
+			let expectedWaiterId: number
+
+			beforeEach(() => {
+				expectedSelector = {
+					selectFrom: [],
+					selectedList: [],
+					selectionQuantity: 0,
+					selectionQuantityTreshold: 'equal',
+					cardInitialState: undefined,
+					filter: undefined,
+					stateFromParent: undefined
+				}
+
+				expectedEvent = new EventCardActivator
+				expectedEvent.button = undefined
+				expectedEvent.cardSelector = expectedSelector
+				expectedWaiterId = 5
+			})
+			describe('UNIT TEST', () => {
+				it('should create a actionPhase activator Event', () => {
+					expectedSelector = {
+						selectFrom: [],
+						selectedList: [],
+						selectionQuantity: 0,
+						selectionQuantityTreshold: 'equal',
+						cardInitialState: undefined,
+						filter: undefined,
+						stateFromParent: undefined
+					}
+					expectedEvent.doubleActivationCount = 0
+					expectedEvent.cardSelector = expectedSelector
+					expectedSubType = 'actionPhaseActivator'
+					expectedEvent.subType = 'actionPhaseActivator'
+					const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
+					expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
+					expectedEvent.title = 'Activate cards'
+					expectedEvent.cardSelector.filter = {type:"action"}
+
+					let resultEvent = EventDesigner.createCardActivator(expectedSubType)
+
+					expect(expectedEvent).toEqual(resultEvent)
+					expect(buttonSpy).toHaveBeenCalled()
+				})
+			})
+		})
     })
     describe('createTargetCard Event', () => {
         let expectedEvent: EventTargetCard

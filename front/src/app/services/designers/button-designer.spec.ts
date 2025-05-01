@@ -12,7 +12,7 @@ describe('Service - Designers - Button', () => {
                     'default',
                     'upgradePhaseCards',
                     'developmentPhaseBuilder',
-                    'actionPhase',
+                    'actionPhaseActivator',
                 ]
                 for(expectedSubType of expectedSubTypeList){
                     let startEnabled = ButtonDesigner['getStartEnabled'](expectedSubType)

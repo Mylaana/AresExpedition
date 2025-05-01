@@ -3,12 +3,12 @@ import { AdvancedRessourceStock, CardRessourceStock, RessourceInfo, RessourceSto
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
 import { EventDesigner } from "../../services/designers/event-designer.service";
 import { GameState } from "../../services/core-game/game-state.service";
-import { EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
+import { EventCardActivatorSubType, EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
 import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
-import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase } from "./event.model";
+import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase, EventCardActivator } from "./event.model";
 import { DrawEventDesigner } from "../../services/designers/draw-event-designer.service";
 import { Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
@@ -96,14 +96,14 @@ export class EventHandler {
 		this.cancelCurrentEvent()
 	}
 	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}): void {
-		let event = this.currentEvent as EventCardSelector
-		if(input.twice){event.cardSelector.selectionQuantity -= 1}
+		let event = this.currentEvent as EventCardActivator
+		event.activationLog[input.card.id.toString()] = input.card.activated
+		if(input.twice){event.doubleActivationCount += 1}
 		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card)
 		if(!addEvents){return}
 		this.gameStateService.addEventQueue(addEvents,'first')
 	}
 	public updateActionPhaseMainButtonState(enabled?: boolean): void {
-
 		let state = this.gameStateService.getClientState()
 		let plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 		let heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
@@ -131,6 +131,7 @@ export class EventHandler {
         //call general switchEvents cases
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
 		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent)}
+		if(this.currentEvent.type==='cardActivator'){this.switchEventCardActivator(this.currentEvent as EventCardActivator)}
 
 		//specific cases
 		if(this.currentEvent.subType==='planificationPhase' && this.currentEvent.button){
@@ -184,7 +185,16 @@ export class EventHandler {
 				event.cardSelector.selectFrom = selectFrom
 				break
 			}
-			case('actionPhase'):{
+		}
+    }
+	private switchEventCardActivator(event: EventCardActivator){
+
+		let subType = event.subType as EventCardActivatorSubType
+		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList(event.cardSelector.filter)}
+
+		//check per subType special rules:
+		switch(subType){
+			case('actionPhaseActivator'):{
 				let state = this.gameStateService.getClientState()
 				let plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 				let heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
@@ -198,7 +208,9 @@ export class EventHandler {
 				break
 			}
 		}
-    }
+	}
+
+
 	private switchEventPhase(event: EventBaseModel): void {
 		let subType = event.subType as EventPhaseSubType
 
@@ -206,6 +218,7 @@ export class EventHandler {
 		switch(subType){
 			case('developmentPhase'):{this.phaseHandler.resolveDevelopment();break}
 			case('constructionPhase'):{this.phaseHandler.resolveConstruction();break}
+			case('actionPhase'):{this.phaseHandler.resolveAction(); break}
 			case('productionPhase'):{this.phaseHandler.resolveProduction();break}
 			case('researchPhase'):{this.phaseHandler.resolveResearch();break}
 			default:{return}
@@ -221,6 +234,7 @@ export class EventHandler {
 			case('targetCard'):{this.finishEventTargetCards(this.currentEvent as EventTargetCard); break}
 			case('waiter'):{this.finishEventWaiter(this.currentEvent as EventWaiter);break}
 			case('phase'):{this.finishEventPhase(this.currentEvent as EventPhase); break}
+			case('cardActivator'):{this.finishEventCardActivator(this.currentEvent as EventCardActivator); break}
 			default:{Utils.logError('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
         }
 		if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
@@ -238,13 +252,6 @@ export class EventHandler {
 
 				if(event.subType==='discardCards'){break}
 				this.gameStateService.sellCardsFromClientHand(event.cardSelector.selectedList.length)
-				break
-			}
-			case('actionPhase'):{
-				//reset activation counts
-				for(let card of event.cardSelector.selectFrom){
-					card.activated = 0
-				}
 				break
 			}
 			case('researchPhaseResult'):{
@@ -271,7 +278,7 @@ export class EventHandler {
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
         }
-		if(event.subType!='actionPhase'){event.activateSelection()}
+		event.activateSelection()
     }
     private finishEventCardSelectorRessource(event: EventCardSelectorRessource): void {
 		Utils.logEventResolution('resolving event: ','EventCardSelectorRessource ', event.subType)
@@ -285,6 +292,20 @@ export class EventHandler {
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
+		}
+    }
+	private finishEventCardActivator(event: EventCardActivator): void {
+		Utils.logEventResolution('resolving event: ','EventCardActivator ', event.subType)
+		event.finalized = true
+
+		switch(event.subType){
+			case('actionPhaseActivator'):{
+				for(let card of event.cardSelector.selectFrom){
+					card.activated = 0
+				}
+				break
+			}
+			default:{Utils.logError('Non mapped event in handler.finishEventCardActivator: ', this.currentEvent)}
 		}
     }
 	private finishEventCardBuilder(event: EventCardBuilder): void {
@@ -492,7 +513,7 @@ export class DrawEventHandler {
 	}
 	private sendWsDrawQuery(event: DrawEvent){
 		event.queried = true
-		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId)
+		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO())
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
@@ -665,5 +686,34 @@ class PhaseResolveHandler {
 			case('research_scan2_keep2'):{bonus={scan:2, keep:2};break}
 		}
 		return bonus
+	}
+	resolveAction(): void {
+		let activatorEvent = EventDesigner.createCardActivator('actionPhaseActivator')
+		this.refreshCurrentUpgradedPhaseCard()
+		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.action)){
+			this.gameStateService.addEventQueue(activatorEvent,'first')
+			return
+		}
+
+		let events: EventBaseModel[] = []
+		let actionPhaseCard = this.currentUpgradedPhaseCards[2]
+		switch(actionPhaseCard.phaseType){
+			case('action_base'):{
+				activatorEvent.doubleActivationMaxNumber = 1
+				events.push(activatorEvent)
+				break
+			}
+			case('action_scan_cards'):{
+				activatorEvent.doubleActivationMaxNumber = 1
+				events.push(activatorEvent)
+				break
+			}
+			case('action_repeat_two'):{
+				activatorEvent.doubleActivationMaxNumber = 2
+				events.push(activatorEvent)
+				break
+			}
+		}
+		this.gameStateService.addEventQueue(events,'first')
 	}
 }

@@ -1,6 +1,7 @@
 package com.ares_expedition.dto.websocket.content.player_state;
 
 import com.ares_expedition.dto.websocket.content.input.BaseContentDTO;
+import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerEventStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerGlobalParameterStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerInfoStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerOtherStateDTO;
@@ -19,6 +20,7 @@ public class PlayerStateDTO extends BaseContentDTO {
     PlayerProjectCardStateDTO projectCardState;
     PlayerPhaseCardStateDTO phaseCardState;
     PlayerGlobalParameterStateDTO globalParameterState;
+    PlayerEventStateDTO eventState;
     PlayerOtherStateDTO otherState;
 
     PlayerStateDTO(){
@@ -32,6 +34,7 @@ public class PlayerStateDTO extends BaseContentDTO {
         this.projectCardState = state.getProjectCardState().toJson();
         this.phaseCardState = state.getPhaseCardState().toJson();
         this.globalParameterState = state.getGlobalParameterState().toJson();
+        this.eventState = state.getEventState().toJson();
         this.otherState = state.getOtherState().toJson();
     }
 
@@ -97,5 +100,13 @@ public class PlayerStateDTO extends BaseContentDTO {
 
     public void setOtherState(PlayerOtherStateDTO otherState) {
         this.otherState = otherState;
+    }
+
+    public PlayerEventStateDTO getEventState() {
+        return eventState;
+    }
+
+    public void setEventState(PlayerEventStateDTO eventState) {
+        this.eventState = eventState;
     }
 }

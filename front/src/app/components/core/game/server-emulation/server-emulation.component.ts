@@ -22,7 +22,7 @@ type Phase = "planification" | "development" | "construction" | "action" | "prod
     styleUrl: './server-emulation.component.scss'
 })
 export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestroy {
-	debug: boolean = false;
+	debug: boolean = true;
 	currentGroupPlayerState!: {};
 	currentEventQueue: EventBaseModel[] = [];
 	currentPhase: string = "planification";
@@ -49,11 +49,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 
 	ngOnInit(){
 		this.cardsDeck = this.cardInfoService.getProjectCardIdList()
-
-		this.gameStateService.addPlayer("joueur 1", "rgb(0, 0, 255)")
-		this.gameStateService.addPlayer("joueur 2", "rgb(255, 0, 0)")
-		this.gameStateService.addPlayer("joueur 3", "rgb(0, 255, 0)")
-		this.gameStateService.addPlayer("joueur 4", "rgb(255, 255, 255)")
 
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(
 			phase => this.phaseChanged(phase)
@@ -120,7 +115,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		if(loading===true){return}
 	}
 	sendDrawNumber(): void {
-		this.rxStompService.publishDraw(2, -1)
+		this.rxStompService.publishDraw(2, -1, this.gameStateService.getClientStateDTO())
 	}
 	sendReady(): void {
 		//this.websocket.sendReady(true)

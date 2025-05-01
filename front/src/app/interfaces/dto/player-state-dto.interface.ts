@@ -2,6 +2,7 @@ import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { myUUID, RGB } from "../../types/global.type";
 import { RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
+import { EventDTO } from "./event-dto.interface";
 import { TriggerStateDTO } from "./project-card-dto.interface";
 
 export interface PlayerStateDTO {
@@ -12,6 +13,7 @@ export interface PlayerStateDTO {
 	projectCardState: PlayerProjectCardStateDTO
 	phaseCardState: PlayerPhaseCardStateDTO
 	globalParameterState: PlayerGlobalParameterStateDTO
+	eventState: PlayerEventStateDTO
 	otherState: PlayerOtherStateDTO
 }
 export interface PlayerInfoStateDTO {
@@ -55,7 +57,9 @@ export interface GlobalParameterDTO {
 	s: number //step
 	ae: number //addEndOfPhase
 }
-
+export interface PlayerEventStateDTO {
+	e: EventDTO[]
+}
 
 export interface PhaseCardDTO {
 	pi: number

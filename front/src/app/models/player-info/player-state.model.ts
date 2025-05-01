@@ -14,6 +14,9 @@ import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerOtherStateModel } from "./player-state-other.model";
 import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter.model";
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
+import { PlayerEventStateModel } from "./player-state-event";
+import { EventBaseModel } from "../core-game/event.model";
+import { EventDTO } from "../../interfaces/dto/event-dto.interface";
 
 
 export class PlayerStateModel {
@@ -24,33 +27,31 @@ export class PlayerStateModel {
 	private projectCardState: PlayerProjectCardStateModel
 	private phaseCardState: PlayerPhaseCardStateModel
 	private globalParameterState: PlayerGlobalParameterStateModel
+	private eventState: PlayerEventStateModel
 	private otherState: PlayerOtherStateModel
 
 	constructor(private injector: Injector, dto?: PlayerStateDTO) {
-		this.infoState = dto
-			?new PlayerInfoStateModel(dto.infoState)
-			:PlayerInfoStateModel.empty()
-		this.scoreState = dto
-			?new PlayerScoreStateModel(dto.scoreState)
-			:PlayerScoreStateModel.empty()
-		this.tagState = dto
-			?new PlayerTagStateModel(dto.tagState)
-			:PlayerTagStateModel.empty()
-		this.ressourceState = dto
-			?new PlayerRessourceStateModel(dto.ressourceState)
-			:PlayerRessourceStateModel.empty()
-		this.projectCardState = dto
-			?new PlayerProjectCardStateModel(injector, dto.projectCardState)
-			:PlayerProjectCardStateModel.empty(injector)
-		this.phaseCardState = dto
-			?new PlayerPhaseCardStateModel(injector, dto.phaseCardState)
-			:PlayerPhaseCardStateModel.empty(injector)
-		this.globalParameterState = dto
-			?new PlayerGlobalParameterStateModel(dto.globalParameterState)
-			:PlayerGlobalParameterStateModel.empty()
-		this.otherState = dto
-			?new PlayerOtherStateModel(dto.otherState)
-			:PlayerOtherStateModel.empty()
+		if(dto){
+			this.infoState = new PlayerInfoStateModel(dto.infoState)
+			this.scoreState = new PlayerScoreStateModel(dto.scoreState)
+			this.tagState = new PlayerTagStateModel(dto.tagState)
+			this.ressourceState = new PlayerRessourceStateModel(dto.ressourceState)
+			this.projectCardState = new PlayerProjectCardStateModel(injector, dto.projectCardState)
+			this.phaseCardState = new PlayerPhaseCardStateModel(injector, dto.phaseCardState)
+			this.globalParameterState = new PlayerGlobalParameterStateModel(dto.globalParameterState)
+			this.eventState = new PlayerEventStateModel(dto.eventState)
+			this.otherState = new PlayerOtherStateModel(dto.otherState)
+		} else {
+			this.infoState = PlayerInfoStateModel.empty()
+			this.scoreState = PlayerScoreStateModel.empty()
+			this.tagState = PlayerTagStateModel.empty()
+			this.ressourceState = PlayerRessourceStateModel.empty()
+			this.projectCardState = PlayerProjectCardStateModel.empty(injector)
+			this.phaseCardState = PlayerPhaseCardStateModel.empty(injector)
+			this.globalParameterState = PlayerGlobalParameterStateModel.empty()
+			this.eventState = PlayerEventStateModel.empty()
+			this.otherState = PlayerOtherStateModel.empty()
+		}
 	  }
 
 
@@ -125,6 +126,7 @@ export class PlayerStateModel {
 	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
 
+	getEventQueueState(): EventDTO[] {return this.eventState.eventQueueState}
 
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
@@ -134,11 +136,13 @@ export class PlayerStateModel {
 		this.addPlayedCardTags(card)
 	}
 
+	loadEventStateActivator(dto: EventDTO): void {this.projectCardState.loadEventStateActivator(dto)}
+
 	private payCardCost(card: PlayableCardModel):void{
 		this.addRessource('megacredit', -card.cost)
 	}
 
-	public toJson(): PlayerStateDTO {
+	public toJson(eventQueue?: EventBaseModel[]): PlayerStateDTO {
 		return {
 			infoState: this.infoState.toJson(),
 			scoreState: this.scoreState.toJson(),
@@ -147,6 +151,7 @@ export class PlayerStateModel {
 			projectCardState: this.projectCardState.toJson(),
 			phaseCardState: this.phaseCardState.toJson(),
 			globalParameterState: this.globalParameterState.toJson(),
+			eventState: this.eventState.toJson(eventQueue),
 			otherState: this.otherState.toJson()
 		}
 	}
@@ -159,6 +164,7 @@ export class PlayerStateModel {
 			|| !data.projectCardState
 			|| !data.phaseCardState
 			|| !data.globalParameterState
+			|| !data.eventState
 			|| !data.otherState
 		){
 			throw new Error("Invalid PlayerStateDTO: Missing required fields")

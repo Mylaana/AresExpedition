@@ -16,6 +16,7 @@ import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
 import { EventDesigner } from "../designers/event-designer.service";
+import { EventDTO } from "../../interfaces/dto/event-dto.interface";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -46,6 +47,7 @@ export class GameState{
 
     private clientId!: myUUID
     playerCount = new BehaviorSubject<myUUID[]>([]);
+	private eventQueueSavedState: EventDTO[] = []
 
     private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
@@ -191,7 +193,9 @@ export class GameState{
     getClientState(): PlayerStateModel{
         return this.clientState.getValue()
     }
-
+	getClientStateDTO(): PlayerStateDTO {
+		return this.getClientState().toJson(this.eventQueue.getValue())
+	}
 	/*
     updatePlayerState(playerId:myUUID, playerState: PlayerStateModel): void{
         this.groupPlayerState.getValue()[playerId] = playerState
@@ -308,7 +312,6 @@ export class GameState{
         let clientState = this.getClientState()
         clientState.addCardsToHand(cardsToAdd)
 		this.updateClientState(clientState)
-		console.log('added cards to hand', clientState)
     }
 
     removeCardsFromClientHandById(cardsToRemove: number | number[], cardType: PlayableCardType):void{
@@ -356,7 +359,10 @@ export class GameState{
         }
         this.drawQueue.next(newDrawQueue)
     }
-
+	/**
+	 *
+	 * adding one or multiple events in queue at the specified [addrule] position, if multiple events added this way, the received order is preserved.	 *
+	 */
     addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
         let newQueue: EventBaseModel[] = []
         let addEvents: EventBaseModel[] = []
@@ -382,7 +388,9 @@ export class GameState{
                 newQueue = newQueue.concat(firstEvent?[firstEvent]:[], addEvents, oldQueue)
             }
         }
-
+		if(this.eventQueueSavedState.length>0){
+			this.loadEventQueueSavedState(newQueue)
+		}
         this.eventQueue.next(newQueue)
     }
 
@@ -449,8 +457,6 @@ export class GameState{
             events = events.concat(playedCardEvents)
         }
         if(events.length===0){return}
-
-        events.reverse()
         this.addEventQueue(events, 'first')
 	}
     setClientTriggerAsInactive(triggerId: number): void {
@@ -570,6 +576,10 @@ export class GameState{
 			playerIdList.push(playerStateDTO.infoState.i)
 
 			//add playerstate
+			if(playerStateDTO.infoState.i===this.clientId){
+				this.eventQueueSavedState = playerStateDTO.eventState?.e??[]
+				playerStateDTO.eventState.e = []
+			}
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
 		}
 		this.setPlayerIdList(playerIdList)
@@ -583,6 +593,10 @@ export class GameState{
 				this.updateClientState(state)
 			}
 		}
+		//create events from eventqueue saved state
+		this.createEventFromEventQueueSavedState()
+		console.log('client state loaded: ', this.clientState.getValue())
+		console.log('eventstate loaded:', this.eventQueueSavedState)
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
@@ -657,5 +671,39 @@ export class GameState{
 			}
 		}
 		this.selectedPhaseList.next(list)
+	}
+	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
+		let playerState: PlayerStateModel = this.getClientState()
+
+		//modify clientState
+		for(let event of eventQueue){
+			for(let eventState of this.eventQueueSavedState){
+				if(event.subType===eventState.est){
+					switch(event.type){
+						case('cardActivator'):{
+							playerState.loadEventStateActivator(eventState)
+							break
+						}
+					}
+
+					event.fromJson(eventState)
+					this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
+					break
+				}
+			}
+
+		}
+	}
+	private createEventFromEventQueueSavedState(): void {
+		let newEvents: EventBaseModel[] = []
+		for(let eventState of this.eventQueueSavedState){
+			if(eventState.ced){
+				newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
+				this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
+			}
+		}
+		if(newEvents.length===0){return}
+		this.addEventQueue(newEvents, 'first')
+		console.log('eventqueue:',this.eventQueue.getValue())
 	}
 }

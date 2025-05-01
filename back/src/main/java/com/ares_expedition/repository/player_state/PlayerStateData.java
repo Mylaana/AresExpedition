@@ -1,6 +1,7 @@
 package com.ares_expedition.repository.player_state;
 
 import com.ares_expedition.model.player_state.PlayerState;
+import com.ares_expedition.model.player_state.subclass.PlayerEventState;
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
 import com.ares_expedition.model.player_state.subclass.PlayerInfoState;
 import com.ares_expedition.model.player_state.subclass.PlayerOtherState;
@@ -19,6 +20,7 @@ public class PlayerStateData {
     private PlayerProjectCardState projectCardState = new PlayerProjectCardState();
     private PlayerPhaseCardState phaseCardState = new PlayerPhaseCardState();
     private PlayerGlobalParameterStateData globalParameterState = new PlayerGlobalParameterStateData();
+    private PlayerEventState eventState = new PlayerEventState();
     private PlayerOtherState otherState = new PlayerOtherState();
 
     PlayerStateData(){
@@ -31,6 +33,7 @@ public class PlayerStateData {
         this.projectCardState = state.getProjectCardState();
         this.phaseCardState = state.getPhaseCardState();
         this.globalParameterState = PlayerGlobalParameterState.toData(state.getGlobalParameterState());
+        this.eventState = state.getEventState();
         this.otherState = state.getOtherState();
     }
     public PlayerInfoState getInfoState() {
@@ -74,6 +77,12 @@ public class PlayerStateData {
     }
     public void setGlobalParameterState(PlayerGlobalParameterStateData globalParameterState) {
         this.globalParameterState = globalParameterState;
+    }
+    public PlayerEventState getEventState() {
+        return eventState;
+    }
+    public void setEventState(PlayerEventState eventState) {
+        this.eventState = eventState;
     }
     public PlayerOtherState getOtherState() {
         return otherState;

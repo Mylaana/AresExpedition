@@ -34,6 +34,7 @@ export interface WsQuery {}
 export interface WsDrawQuery extends WsQuery {
     drawNumber: number
     eventId: number
+	playerState: PlayerStateDTO
 }
 export interface WsReadyQuery extends WsQuery {
     ready: boolean

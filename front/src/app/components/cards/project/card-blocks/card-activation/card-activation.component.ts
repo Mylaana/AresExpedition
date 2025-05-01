@@ -18,7 +18,6 @@ import { PlayableCardModel } from '../../../../../models/cards/project-card.mode
 })
 export class CardActivationComponent implements OnInit{
 	@Input() maximumCardActivation!: boolean
-	@Input() buttonIndexEnabled: number = 0
 	@Input() activationCostPayable: boolean = false
 	@Input() projectCard!: PlayableCardModel
 	@Output() activated = new EventEmitter<boolean>()

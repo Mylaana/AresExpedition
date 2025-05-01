@@ -1,10 +1,11 @@
-import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType } from "../../types/event.type";
+import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
 import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { EventDTO } from "../../interfaces/dto/event-dto.interface";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -25,8 +26,11 @@ export abstract class EventBaseModel {
     hasSelector(): boolean {return false}
 	hasCardsToSelectFrom(): boolean {return false}
     hasCardBuilder(): boolean {return false}
+	hasCardActivator(): boolean {return false}
     getSelectionActive(): boolean {return false}
 	onSwitch(): void {}
+	toJson(): EventDTO | undefined {return undefined}
+	fromJson(dto: EventDTO){return}
 }
 
 export abstract class EventBaseCardSelector extends EventBaseModel {
@@ -69,12 +73,43 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
 export class EventCardSelector extends EventBaseCardSelector{
     override readonly type: EventType = 'cardSelector'
     override subType!: EventCardSelectorSubType
+	override toJson(): EventDTO | undefined {
+		switch(this.subType){
+			case('discardCards'):{
+				return {
+					est: this.subType,
+					ced: this.cardSelector.selectionQuantity
+				}
+				break
+			}
+			default:{return undefined}
+		}
+	}
 }
 
 export class EventCardSelectorRessource extends EventBaseCardSelector {
     override readonly type: EventType = 'cardSelectorRessource'
     override subType!: EventCardSelectorRessourceSubType;
     advancedRessource?: AdvancedRessourceStock
+}
+
+export class EventCardActivator extends EventBaseCardSelector {
+    override readonly type: EventType = 'cardActivator'
+	override subType!: EventCardActivatorSubType
+    activationLog: {[key: string]: number } = {}
+	doubleActivationMaxNumber!: number
+	doubleActivationCount: number = 0
+	override hasCardActivator(): boolean {return true}
+	override toJson(): EventDTO | undefined {
+		let dto: EventDTO = {
+			est: this.subType,
+			al: this.activationLog
+		}
+		return dto
+	}
+	override fromJson(dto: EventDTO): void {
+		this.activationLog = dto.al??{}
+	}
 }
 
 export class CardBuilder {
@@ -203,7 +238,7 @@ export class CardBuilder {
 		this.selectedCard = undefined
         this.updateButtonGroupState('cancelSelectCard')
 	}
-    setbuilderIsLocked(): void {this.builderIsLocked=true}
+    setbuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
     getbuilderIsLocked(): boolean {return this.builderIsLocked}
 	resetBuilder(): void {
 		if(this.builderIsLocked){return}
@@ -307,6 +342,25 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		//reset cardBuilder's selection onSwitch
 		for(let builder of this.cardBuilder){
 			builder.resetBuilder()
+		}
+	}
+	override toJson(): EventDTO | undefined {
+		let dto: EventDTO = {
+			est: this.subType,
+			bl: []
+		}
+		for(let builder of this.cardBuilder){
+			dto.bl?.push(builder.getbuilderIsLocked())
+		}
+		return dto
+	}
+	override fromJson(dto: EventDTO): void {
+		if(dto.bl){
+			let index: number = 0
+			for(let locked of dto.bl){
+				this.cardBuilder[index].setbuilderIsLocked(locked)
+				index ++
+			}
 		}
 	}
 }
