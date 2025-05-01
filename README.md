@@ -46,10 +46,7 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Action phase upgrade not working   
 Production phase screen not working   
-Builders/phase locked status not being saved after drawing cards   
-Cards cant be activated twice (when drawing) due to current event status not being saved   
 Discarded/sold cards dont go in server discard pile   
 
 ## Refactoring :
@@ -65,7 +62,6 @@ App-hexed-background switch to fully automatic hex numbers with just desired hex
 
 ## Planned for v1 :
 ### Backend
-Add current phase data saving system (exemple: how many and which cards already activated, production applied or not etc.)   
 
 ### Cards
 Prerequisites for playing project cards feature
