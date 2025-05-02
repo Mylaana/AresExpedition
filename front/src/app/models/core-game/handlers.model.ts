@@ -255,11 +255,17 @@ export class EventHandler {
 				break
 			}
 			case('researchPhaseResult'):{
-				this.gameStateService.addCardsToClientHand(this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
+				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
+					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
+					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+				)
 				break
 			}
 			case('scanKeepResult'):{
-				this.gameStateService.addCardsToClientHand(this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList))
+				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
+					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
+					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+				)
 				break
 			}
 			case('selectStartingHand'):{

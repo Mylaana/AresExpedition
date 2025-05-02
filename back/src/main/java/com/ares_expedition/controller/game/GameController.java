@@ -64,6 +64,7 @@ public class GameController {
         game.setAllPlayersNotReady();
         game.nextPhaseSelected();
         game.applyGlobalParameterIncreaseEop();
+        game.fillDiscardPileFromPlayerDiscard();
         wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
     }
 

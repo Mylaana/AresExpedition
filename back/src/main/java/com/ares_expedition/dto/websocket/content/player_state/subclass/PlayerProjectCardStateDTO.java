@@ -14,6 +14,8 @@ public class PlayerProjectCardStateDTO {
     private List<Integer> hand = new ArrayList<>();
     @JsonProperty("hc")
     private List<Integer> handCorporations = new ArrayList<>();
+    @JsonProperty("hd")
+    private List<Integer> handDiscard = new ArrayList<>();
     @JsonProperty("ppil")
     private List<Integer> playedProjectIdList = new ArrayList<>();
     @JsonProperty("ppcs")
@@ -29,6 +31,7 @@ public class PlayerProjectCardStateDTO {
     public PlayerProjectCardStateDTO(PlayerProjectCardState state) {
         this.hand = state.getHand();
         this.handCorporations = state.getHandCorporations();
+        this.handDiscard = state.getHandDiscard();
         this.playedProjectIdList = state.getPlayedProjectIdList();
         this.playedProjectCardStocks = state.getPlayedProjectCardStocks();
         this.triggers = state.getTriggers().toJson();
@@ -81,5 +84,13 @@ public class PlayerProjectCardStateDTO {
 
     public void setHandCorporations(List<Integer> handCorporations) {
         this.handCorporations = handCorporations;
+    }
+
+    public List<Integer> getHandDiscard() {
+        return handDiscard;
+    }
+
+    public void setHandDiscard(List<Integer> handDiscard) {
+        this.handDiscard = handDiscard;
     }
 }
