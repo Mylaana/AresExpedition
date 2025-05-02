@@ -70,6 +70,8 @@ export class PlayerStateModel {
 	addVP(vp: number){this.scoreState.addVP(vp)}
 	getTR(): number {return this.scoreState.getVP()}
 	addTR(vp: number){this.scoreState.addVP(vp)}
+	addForest(forest: number): void {this.scoreState.addForest(forest)}
+	getForest(): number {return this.scoreState.getForest()}
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}

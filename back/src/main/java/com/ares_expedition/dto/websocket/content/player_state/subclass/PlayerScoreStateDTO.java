@@ -10,6 +10,8 @@ public class PlayerScoreStateDTO {
     private Integer milestoneCount;
     @JsonProperty("tr")
     private Integer terraformingRating;
+    @JsonProperty("f")
+    private Integer forest;
 
     PlayerScoreStateDTO() {
     }
@@ -18,6 +20,7 @@ public class PlayerScoreStateDTO {
         this.vp = state.getVp();
         this.milestoneCount = state.getMilestoneCount();
         this.terraformingRating = state.getTerraformingRating();
+        this.forest = state.getForest();
     }
 
     public Integer getVp() {
@@ -37,5 +40,11 @@ public class PlayerScoreStateDTO {
     }
     public void setTerraformingRating(Integer terraformingRating) {
         this.terraformingRating = terraformingRating;
+    }
+    public Integer getForest() {
+        return forest;
+    }
+    public void setForest(Integer forest) {
+        this.forest = forest;
     }
 }
