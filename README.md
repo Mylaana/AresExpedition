@@ -47,6 +47,7 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 Production phase screen not working   
+Base Phase card should not be upgradable   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

@@ -15,7 +15,7 @@
     width: fit-content;
     &.tr, &.forest, &.phase-upgraded{
         min-width: 50px;
-        border: rgb(255, 129, 25) solid 1px;
+        border: rgba(rgb(255, 129, 25), .5) solid 1px;
         border-radius: 5px;
     }
 }
@@ -59,9 +59,10 @@ p{
     display: flex;
     align-items: center;
     height: 100%;
-    aspect-ratio: 7;
+    aspect-ratio: 5;
     padding-left: 5px;
-    @each $name, $value in colors.$colors {
+    overflow: hidden;
+	@each $name, $value in colors.$colors {
         &.#{$name}{
             border: $value solid 1px;
             border-radius: 2px;
@@ -69,7 +70,7 @@ p{
             background-color: rgba($value, .2);
         }
     }
-    p{
-        color: white;
+    & > p{
+		font-size: 90%;
     }
 }
