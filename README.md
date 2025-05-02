@@ -47,7 +47,6 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 Production phase screen not working   
-Discarded/sold cards dont go in server discard pile   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -58,30 +57,28 @@ project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
-App-hexed-background switch to fully automatic hex numbers with just desired hex size input   
 
 ## Planned for v1 :
 ### Backend
 
 ### Cards
 Prerequisites for playing project cards feature
-Add back mod cost calculation in hand (removed cause of Expression had changed error), error was due to card showing in hand and cost mod calculated in builder selector with cost modified
+Add back mod cost calculation in hand (removed cause of Expression had changed error), error was due to card showing in hand and cost mod calculated in builder selector with cost modified, this will need to switch projectCardInfoService to returning new cards instances   
 
 ### Misc
-websocket: finish the game state saving system   
 Add Ocean backend mechanic
-Add settings options
-Add victory check
-Add Forest points
-Add Event removing any ressource in list on played card
+Add settings options   
+Add victory check   
+Add Forest points   
+Add Event removing any ressource in list on played card   
 
 ### Interface
-Add Ocean bonus description
-Add main buttons help popup
+Add Ocean bonus description   
+Add main buttons help popup   
 Add onClick visual effect for buttons   
 Add phase upgrade count and logo in player pannel
-Add popup-like window for non-production phase gains
-Add log
+Add popup-like window for non-production phase gains   
+Add log   
 
 ### CI
 Frontend automated testing: Ongoing  
