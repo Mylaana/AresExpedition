@@ -11,6 +11,7 @@ import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
 public class PlayerProjectCardState {
     private List<Integer> hand = new ArrayList<>();
     private List<Integer> handCorporations = new ArrayList<>();
+    private List<Integer> handDiscard = new ArrayList<>();
     private List<Integer> playedProjectIdList = new ArrayList<>();
     private Map<Integer, Object> playedProjectCardStocks = new HashMap<Integer, Object>();
     private TriggerState triggers = new TriggerState();
@@ -22,6 +23,7 @@ public class PlayerProjectCardState {
     public PlayerProjectCardState(PlayerProjectCardStateDTO dto) {
         this.hand = dto.getHand();
         this.handCorporations = dto.getHandCorporations();
+        this.handDiscard = dto.getHandDiscard();
         this.playedProjectIdList = dto.getPlayedProjectIdList();
         this.playedProjectCardStocks = dto.getPlayedProjectCardStocks();
         this.triggers = TriggerState.fromJson(dto.getTriggers());
@@ -83,4 +85,13 @@ public class PlayerProjectCardState {
     public void setHandCorporations(List<Integer> handCorporations) {
         this.handCorporations = handCorporations;
     }
+
+    public List<Integer> getHandDiscard() {
+        return handDiscard;
+    }
+
+    public void setHandDiscard(List<Integer> handDiscard) {
+        this.handDiscard = handDiscard;
+    }
+    
 }

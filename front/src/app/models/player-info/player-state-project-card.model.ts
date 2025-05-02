@@ -13,6 +13,7 @@ import { EventDTO } from "../../interfaces/dto/event-dto.interface"
 export class PlayerProjectCardStateModel {
     private hand: number[] = []
 	private handCorporation: number[] = []
+	private handDiscard: number[] = []
     private projects: PlayedProject = {
         playedIdList: [],
         playedProjectList: []
@@ -47,6 +48,7 @@ export class PlayerProjectCardStateModel {
         this.triggers.playTrigger(card.id)
     }
 	addCardsToHand(cards: number | number[]){this.hand = this.hand.concat(Utils.toNumberArray(cards))}
+	addCardsToDiscard(cards: number | number[]){this.handDiscard = this.handDiscard.concat(Utils.toNumberArray(cards))}
 	removeCardsFromHand(cards: number | number[], cardType: PlayableCardType):void{
 		let cardList = Utils.toNumberArray(cards)
 		for(let card of cardList){
@@ -54,7 +56,7 @@ export class PlayerProjectCardStateModel {
 				case('project'):{
 					let index = this.hand.indexOf(Number(card), 0);
 					if (index > -1) {
-						this.hand.splice(index, 1);
+						this.addCardsToDiscard(this.hand.splice(index, 1)[0])
 					}
 					break
 				}
@@ -141,6 +143,7 @@ export class PlayerProjectCardStateModel {
 		return {
 			h: this.hand,
 			hc: this.handCorporation,
+			hd: this.handDiscard,
 			ppil: this.projects.playedIdList,
 			ppcs: null,
 			t: this.triggers.toJson(),
@@ -151,7 +154,7 @@ export class PlayerProjectCardStateModel {
 		this.hand = dto.h
 	}
 	static fromJson(data: PlayerProjectCardStateDTO, injector: Injector): PlayerProjectCardStateModel {
-		if (!data.h || !data.ppil || data.ppcs|| !data.t || !data.hms){
+		if (!data.h || !data.ppil || data.ppcs|| !data.t || !data.hms || !data.hd){
 			throw new Error("Invalid PlayerProjectCardStateDTO: Missing required fields")
 		}
 		return new PlayerProjectCardStateModel(injector, data)
@@ -162,6 +165,7 @@ export class PlayerProjectCardStateModel {
 			{
 				h: [],
 				hc: [],
+				hd: [],
 				hms: GAME_HAND_MAXIMUM_SIZE,
 				ppil: [],
 				ppcs: [],

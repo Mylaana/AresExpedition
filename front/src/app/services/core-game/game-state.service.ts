@@ -17,6 +17,7 @@ import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { GameParamService } from "./game-param.service";
 import { EventDesigner } from "../designers/event-designer.service";
 import { EventDTO } from "../../interfaces/dto/event-dto.interface";
+import { Utils } from "../../utils/utils";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -313,11 +314,18 @@ export class GameState{
         clientState.addCardsToHand(cardsToAdd)
 		this.updateClientState(clientState)
     }
-
+	addCardsToClientDiscard(cardsToAdd: number | number[]):void{
+		let clientState = this.getClientState()
+        clientState.addCardsToDiscard(cardsToAdd)
+		this.updateClientState(clientState)
+	}
+	addCardsSelectedFromListAndDiscardTheRest(cardsToKeep: number | number[], cardList: number[]){
+		this.addCardsToClientHand(cardsToKeep)
+		this.addCardsToClientDiscard(cardList.filter(toDiscard => !Utils.toArray(cardsToKeep).includes(toDiscard)))
+	}
     removeCardsFromClientHandById(cardsToRemove: number | number[], cardType: PlayableCardType):void{
 		let clientState = this.getClientState()
         clientState.removeCardsFromHand(cardsToRemove, cardType)
-		console.log('remove cards:',clientState)
 		this.updateClientState(clientState)
     }
     removeCardsFromClientHandByModel(cardsToRemove: PlayableCardModel | PlayableCardModel[], cardType: PlayableCardType):void{

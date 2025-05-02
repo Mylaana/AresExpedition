@@ -120,6 +120,7 @@ export class PlayerStateModel {
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
 	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
+	addCardsToDiscard(cards: number | number[]) {this.projectCardState.addCardsToDiscard(cards)}
 
 	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)}
 	getProjectPlayedModelFromId(cardId:number): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}

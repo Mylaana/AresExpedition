@@ -312,6 +312,13 @@ public class Game {
             entry.getValue().setHandCorporations(drawCorporations(1));
         }
     }
+    public void fillDiscardPileFromPlayerDiscard() {
+        for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
+            List<Integer> playerDiscard = entry.getValue().getProjectCardState().getHandDiscard();
+            this.discard.addAll(playerDiscard);
+            playerDiscard.clear();
+        }
+    }
 
     public GameData toData(){
         return new GameData(this);
