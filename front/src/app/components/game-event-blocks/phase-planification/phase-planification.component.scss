@@ -41,10 +41,6 @@ $colors: (
 .wrapper-button{
 	$size: 150px;
 	width: $size;
-	@media (max-width: 1919px) {
-		$size: 100px;
-		width: $size;
-	}
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -61,6 +57,10 @@ $colors: (
 		background-color: $colorShadow;
 		outline-offset: 20px;
 		outline: $colorOutline 1px solid;
+	}
+	@media (max-width: 1919px) {
+		$size: 100px;
+		width: $size;
 	}
 }
 .wrapper-selected-phase-card{

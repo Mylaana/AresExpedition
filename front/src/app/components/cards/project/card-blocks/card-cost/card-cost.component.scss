@@ -18,13 +18,12 @@
 	padding: 6px;
 	padding-top: 15px;
 	border-radius: 10px;
+	overflow: hidden;
 	@media (max-width: 1919px) {
 		padding: 3px;
 		padding-top: 6px;
 		border-radius: 10px;
 	}
-	overflow: hidden;
-
 	&.red{
 		border: 2px solid var(--color-ares-red);
 	}
