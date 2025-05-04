@@ -1,4 +1,5 @@
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GAME_GLOBAL_PARAMETER_INFRASTRUCTURE_MAX_STEP, GAME_GLOBAL_PARAMETER_OCEAN_MAX_STEP, GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP, GAME_GLOBAL_PARAMETER_TEMPERATURE_MAX_STEP } from "../../global/global-const";
 import { GlobalParameterDTO, PlayerGlobalParameterStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GlobalParameter, GlobalParameterValue } from "../../interfaces/global.interface";
 import { Utils } from "../../utils/utils";
@@ -38,6 +39,28 @@ private parameters: GlobalParameter[] = []
 			return
 		}
 		this.parameters[parameterIndex].addEndOfPhase += parameter.steps
+	}
+	getGlobalParameterMaxedOut(parameterName: GlobalParameterNameEnum): boolean {
+		for(let param of this.parameters){
+			if(param.name===parameterName){
+				switch(param.name){
+					case(GlobalParameterNameEnum.infrastructure):{
+						return param.step>=GAME_GLOBAL_PARAMETER_INFRASTRUCTURE_MAX_STEP
+					}
+					case(GlobalParameterNameEnum.temperature):{
+						return param.step>=GAME_GLOBAL_PARAMETER_TEMPERATURE_MAX_STEP
+					}
+					case(GlobalParameterNameEnum.oxygen):{
+						return param.step>=GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP
+					}
+					case(GlobalParameterNameEnum.ocean):{
+						return param.step>=GAME_GLOBAL_PARAMETER_OCEAN_MAX_STEP
+					}
+				}
+
+			}
+		}
+		return false
 	}
 	toJson(): PlayerGlobalParameterStateDTO {
 		let parameters: GlobalParameterDTO[] = []
