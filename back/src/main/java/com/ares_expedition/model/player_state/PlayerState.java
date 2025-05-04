@@ -107,6 +107,14 @@ public class PlayerState {
         this.scoreState.setTerraformingRating(terraformingRating);
     }
 
+    public Integer getForest() {
+        return this.scoreState.getForest();
+    }
+
+    public void setForest(Integer forest) {
+        this.scoreState.setForest(forest);
+    }
+
     public Integer getVp() {
         return this.scoreState.getVp();
     }

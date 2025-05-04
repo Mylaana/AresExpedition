@@ -7,6 +7,7 @@ public class PlayerScoreState {
     private Integer vp;
     private Integer milestoneCount;
     private Integer terraformingRating;
+    private Integer forest;
 
     public PlayerScoreState() {
     }
@@ -14,6 +15,7 @@ public class PlayerScoreState {
         this.vp = dto.getVp();
         this.milestoneCount = dto.getMilestoneCount();
         this.terraformingRating = dto.getTerraformingRating();
+        this.forest = dto.getForest();
     }
 
     public Integer getVp() {
@@ -40,11 +42,19 @@ public class PlayerScoreState {
         this.terraformingRating = terraformingRating;
     }
 
+    public Integer getForest() {
+        return forest;
+    }
+
+    public void setForest(Integer forest) {
+        this.forest = forest;
+    }
+
     public static PlayerScoreState fromJson(PlayerScoreStateDTO dto) {
         return new PlayerScoreState(dto);
     }
 
     public PlayerScoreStateDTO toJson() {
         return new PlayerScoreStateDTO(this);
-    }
+    }    
 }

@@ -33,3 +33,4 @@ export const GAME_SELECTABLE_PHASE_LIST: SelectablePhaseEnum[] = [SelectablePhas
 export const GAME_HAND_MAXIMUM_SIZE = 10
 export const GAME_MAXIMUM_PLAYER_NUMBER = 6
 export const GAME_CARD_DEFAULT_TAG_NUMBER = 3
+export const GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP = 15

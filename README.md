@@ -47,6 +47,7 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 Production phase screen not working   
+Base Phase card should not be upgradable   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -69,14 +70,12 @@ Add back mod cost calculation in hand (removed cause of Expression had changed e
 Add Ocean backend mechanic
 Add settings options   
 Add victory check   
-Add Forest points   
 Add Event removing any ressource in list on played card   
 
 ### Interface
 Add Ocean bonus description   
 Add main buttons help popup   
 Add onClick visual effect for buttons   
-Add phase upgrade count and logo in player pannel   
 Add popup-like window for non-production phase gains   
 Add log   
 
