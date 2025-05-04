@@ -606,7 +606,6 @@ export class ProjectCardPlayedEffectService {
 		return EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
 	createEventIncreaseGlobalParameter(parameterName: GlobalParameterNameEnum, steps:number): EventBaseModel {
-		this.addTrToPlayer(steps)
 		return EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter:{name:parameterName,steps: steps}})
 	}
 	createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventBaseModel {

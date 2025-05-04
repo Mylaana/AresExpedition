@@ -17,6 +17,7 @@ import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
 import { EventDTO } from "../../interfaces/dto/event-dto.interface";
+import { GlobalParameterNameEnum } from "../../enum/global.enum";
 
 
 export class PlayerStateModel {
@@ -98,6 +99,14 @@ export class PlayerStateModel {
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {this.globalParameterState.addGlobalParameterStepEOP(parameter)}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
+	getGlobalParameterFromName(parameterName: GlobalParameterNameEnum): GlobalParameter | undefined {
+		for(let param of this.getGlobalParameters()){
+			if(param.name===parameterName){
+				return param
+			}
+		}
+		return
+	}
 
 	//otherState
 	getResearch(): ScanKeep {return this.otherState.getResearch()}
