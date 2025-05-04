@@ -1393,13 +1393,13 @@
   "6cd893d0-30f8-407c-9651-609117a5e23a" : {
     "gameId" : "6cd893d0-30f8-407c-9651-609117a5e23a",
     "deck" : [ 46, 25, 9, 18, 4, 42, 49, 58, 45, 20, 36, 37, 54 ],
-    "discard" : [ ],
+    "discard" : [ 284, 29, 184, 222, 253, 184, 222, 253, 184, 229, 222, 253, 284 ],
     "groupPlayerId" : [ "eea057d4-9b97-47ca-b9f4-2161e9c6ee50" ],
     "groupPlayerReady" : {
       "eea057d4-9b97-47ca-b9f4-2161e9c6ee50" : false
     },
-    "currentPhase" : "CONSTRUCTION",
-    "selectedPhase" : [ "PLANIFICATION", "CONSTRUCTION" ],
+    "currentPhase" : "PLANIFICATION",
+    "selectedPhase" : [ "PLANIFICATION" ],
     "groupPlayerState" : {
       "eea057d4-9b97-47ca-b9f4-2161e9c6ee50" : {
         "infoState" : {
@@ -1408,10 +1408,10 @@
           "color" : "blue"
         },
         "scoreState" : {
-          "vp" : 5,
+          "vp" : 8,
           "milestoneCount" : 0,
           "terraformingRating" : 5,
-          "forest" : 0
+          "forest" : 1
         },
         "tagState" : {
           "tags" : [ {
@@ -1424,7 +1424,7 @@
             "id" : 1,
             "name" : "space",
             "idImageUrl" : 1,
-            "valueCount" : 0,
+            "valueCount" : 2,
             "valueMod" : 0
           }, {
             "id" : 2,
@@ -1436,7 +1436,7 @@
             "id" : 3,
             "name" : "power",
             "idImageUrl" : 3,
-            "valueCount" : 0,
+            "valueCount" : 2,
             "valueMod" : 0
           }, {
             "id" : 4,
@@ -1472,7 +1472,7 @@
             "id" : 9,
             "name" : "event",
             "idImageUrl" : 9,
-            "valueCount" : 0,
+            "valueCount" : 2,
             "valueMod" : 0
           } ]
         },
@@ -1483,7 +1483,7 @@
             "valueMod" : 0,
             "valueProd" : 0,
             "valueBaseProd" : 0,
-            "valueStock" : 24,
+            "valueStock" : -3,
             "hasStock" : true,
             "imageUrlId" : 1009
           }, {
@@ -1534,10 +1534,10 @@
           } ]
         },
         "projectCardState" : {
-          "hand" : [ 29, 184, 229, 281, 222, 230, 253, 284 ],
+          "hand" : [ 281, 230, 229, 281, 230, 229, 281, 230, 284 ],
           "handCorporations" : [ ],
           "handDiscard" : [ ],
-          "playedProjectIdList" : [ 1000 ],
+          "playedProjectIdList" : [ 1000, 284, 284 ],
           "playedProjectCardStocks" : null,
           "triggers" : {
             "playedCardsId" : [ 1000 ],
@@ -1552,8 +1552,8 @@
         },
         "phaseCardState" : {
           "phaseCards" : [ ],
-          "selectedPhase" : "CONSTRUCTION",
-          "previousSelectedPhase" : "UNDEFINED"
+          "selectedPhase" : "UNDEFINED",
+          "previousSelectedPhase" : "CONSTRUCTION"
         },
         "globalParameterState" : {
           "globalParameters" : [ {
@@ -1562,15 +1562,15 @@
             "addEop" : 0
           }, {
             "name" : "INFRASTRUCTURE",
-            "step" : 0,
+            "step" : 2,
             "addEop" : 0
           }, {
             "name" : "TEMPERATURE",
-            "step" : 0,
+            "step" : 2,
             "addEop" : 0
           }, {
             "name" : "OXYGEN",
-            "step" : 0,
+            "step" : 2,
             "addEop" : 0
           } ]
         },
@@ -1593,15 +1593,15 @@
       "addEop" : 0
     }, {
       "name" : "INFRASTRUCTURE",
-      "step" : 0,
+      "step" : 2,
       "addEop" : 0
     }, {
       "name" : "TEMPERATURE",
-      "step" : 0,
+      "step" : 2,
       "addEop" : 0
     }, {
       "name" : "OXYGEN",
-      "step" : 0,
+      "step" : 2,
       "addEop" : 0
     } ],
     "deckCorporations" : [ 1001, 1002 ]

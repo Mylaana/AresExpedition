@@ -484,10 +484,12 @@ export class GameState{
 		let state = this.getClientState()
 		state.addGlobalParameterStepEOP(parameter)
 
-		//adds forest point if oxygen not already maxed out
-		if(parameter.name===GlobalParameterNameEnum.oxygen){
-			let oxygen = state.getGlobalParameterFromName(GlobalParameterNameEnum.oxygen)
-			if(oxygen && (!(oxygen.step??0 < GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP))){
+		//add TR if not maxed out
+		if(!state.getGlobalParameterMaxedOut(parameter.name)){
+			state.addTR(parameter.steps)
+
+			//adds forest point if oxygen not already maxed out
+			if(parameter.name===GlobalParameterNameEnum.oxygen){
 				state.addForest(parameter.steps)
 			}
 		}
