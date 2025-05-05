@@ -5,6 +5,7 @@ export enum MessageContentQueryEnum {
     selectedPhase = 'SELECTED_PHASE_QUERY',
     playerStatePush = 'PLAYER_STATE_PUSH',
 	playerConnect = 'PLAYER_CONNECT',
+	oceanQuery = 'OCEAN_QUERY',
 
     debug = 'DEBUG'
 }

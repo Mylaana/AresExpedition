@@ -7,6 +7,7 @@ public enum ContentQueryEnum {
     SELECTED_PHASE_QUERY,
     PLAYER_STATE_PUSH,
     PLAYER_CONNECT,
+    OCEAN_QUERY,
 
 
     DEBUG

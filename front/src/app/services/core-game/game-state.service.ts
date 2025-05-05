@@ -375,13 +375,7 @@ export class GameState{
 	 */
     addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
         let newQueue: EventBaseModel[] = []
-        let addEvents: EventBaseModel[] = []
-
-        if(!Array.isArray(events)){
-            addEvents.push(events)
-        } else {
-            addEvents = events
-        }
+        let addEvents: EventBaseModel[] = Utils.toArray(events)
 
         switch(addRule){
             case('last'):{
@@ -482,27 +476,35 @@ export class GameState{
 	}
     addGlobalParameterStepsEOPtoClient(parameter:GlobalParameterValue): void {
 		let state = this.getClientState()
+		let newEvents: EventBaseModel[] = []
+
+		let triggers = state.getTriggersIdOnParameterIncrease()
+        if(triggers.length>0){
+			newEvents = newEvents.concat(this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
+		}
 		state.addGlobalParameterStepEOP(parameter)
 
 		//add TR if not maxed out
 		if(!state.getGlobalParameterMaxedOut(parameter.name)){
 			state.addTR(parameter.steps)
 
-			//adds forest point if oxygen not already maxed out
-			if(parameter.name===GlobalParameterNameEnum.oxygen){
-				state.addForest(parameter.steps)
+			switch(parameter.name){
+				//adds forest point if oxygen not already maxed out
+				case(GlobalParameterNameEnum.oxygen):{
+					state.addForest(parameter.steps)
+					break
+				}
+				//query server for ocean bonus
+				case(GlobalParameterNameEnum.ocean):{
+					newEvents.push(EventDesigner.createGeneric('oceanQuery', {oceanQueryNumber: parameter.steps}))
+					break
+				}
 			}
 		}
 		this.updateClientState(state)
 
-        let triggers = state.getTriggersIdOnParameterIncrease()
-        if(triggers.length===0){return}
-
-        let events = this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)
-        if(!events){return}
-
-
-        this.addEventQueue(events, 'first')
+        if(newEvents.length===0){return}
+        this.addEventQueue(newEvents, 'first')
 
     }
     addRessourceToClient(ressources: RessourceStock[]): void {
@@ -652,7 +654,6 @@ export class GameState{
 	}
 	public playCorporation(corporation: PlayableCardModel): void {
 		this.playCardFromClientHand(corporation, 'corporation')
-		console.log(this.getClientState())
 	}
 	private dtoToPlayerState(dto: PlayerStateDTO): PlayerStateModel {
 		return PlayerStateModel.fromJson(dto, this.injector)

@@ -387,6 +387,7 @@ export class EventGeneric extends EventBaseModel {
     phaseCardUpgradeQuantity?: number
 	addForestPoint?: number
 	selectedPhase?: SelectablePhaseEnum
+	gainOceanNumber?: number
 }
 
 export class EventDeckQuery extends EventBaseModel {

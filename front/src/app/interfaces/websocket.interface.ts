@@ -45,6 +45,10 @@ export interface WsSelectedPhaseQuery extends WsQuery {
 export interface WsPlayerState extends WsQuery {
     state: PlayerStateDTO
 }
+export interface WsOceanQuery extends WsQuery {
+    oceanNumber: number
+	playerState: PlayerStateDTO
+}
 export interface WsResult {}
 export interface WsGroupReady extends WsResult {
     playerId: myUUID

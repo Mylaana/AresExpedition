@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsOceanQuery, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
@@ -22,7 +22,6 @@ export class WebsocketQueryMessageFactory{
     }
     public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO): PlayerMessage {
         let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto}
-		console.log('query:',query)
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
     public static createReadyQuery(ready: boolean): PlayerMessage {
@@ -42,6 +41,10 @@ export class WebsocketQueryMessageFactory{
     }
 	public static createConnectionQuery(): PlayerMessage {
 		return this.generatePlayerMessage(MessageContentQueryEnum.playerConnect)
+	}
+	public static createOceanQuery(oceanNumber: number, dto: PlayerStateDTO): PlayerMessage {
+		let query: WsOceanQuery = {oceanNumber:oceanNumber, playerState: dto}
+		return this.generatePlayerMessage(MessageContentQueryEnum.oceanQuery, query)
 	}
 }
 

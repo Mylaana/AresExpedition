@@ -26,6 +26,7 @@ public class Game {
     private GameStatusEnum gameStatus;
     private List<GlobalParameter> globalParameters = new ArrayList<>();
     private List<Integer> deckCorporations = new ArrayList<>();
+    private List<Ocean> oceans = new ArrayList<>();
 
     public Game() {
     }
@@ -50,6 +51,12 @@ public class Game {
             //groupPlayerReady
             groupPlayerReady.put(playerConfig.getId(), false);
         }
+
+        //add oceans
+        for(Integer i=0; i<9; i++){
+            oceans.add(new Ocean(i));
+        }
+        Collections.shuffle(oceans);
     }
 
     public Game(
@@ -318,6 +325,32 @@ public class Game {
             this.discard.addAll(playerDiscard);
             playerDiscard.clear();
         }
+    }
+
+    public List<Ocean> getOceans() {
+        return oceans;
+    }
+
+    public void setOceans(List<Ocean> oceans) {
+        this.oceans = oceans;
+    }
+
+    public List<Ocean> flipOceans(Integer oceanNumber) {
+        List<Ocean> oceans = new ArrayList<>();
+        for(Integer i=0; i<oceanNumber; i++){
+            oceans.add(getOceanToFlip());
+        }
+        return oceans;
+    }
+
+    private Ocean getOceanToFlip() {
+        for(Ocean ocean: oceans){
+            if(!ocean.getFlipped()){
+                ocean.setFlipped(true);
+                return ocean;
+            }
+        }
+        return oceans.getLast();
     }
 
     public GameData toData(){

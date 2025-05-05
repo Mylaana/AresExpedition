@@ -48,6 +48,7 @@ Backend: Junit
 ## /!\BUG/!\ :
 Production phase screen not working   
 Base Phase card should not be upgradable   
+Add Forest point event has no finishEvent method in handler   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

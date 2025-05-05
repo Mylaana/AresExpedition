@@ -5,6 +5,7 @@ public enum ContentResultEnum {
     DRAW_RESULT,
     PLAYER_STATE,
     PLAYER_CONNECT,
+    OCEAN_RESULT,
     
     //Group
     READY_RESULT,

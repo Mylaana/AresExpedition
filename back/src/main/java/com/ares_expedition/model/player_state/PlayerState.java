@@ -287,6 +287,10 @@ public class PlayerState {
         this.eventState = eventState;
     }
 
+    public void addEvent(Object event) {
+        this.eventState.addEvent(event);
+    }
+
     //=============================================================
     //Other
     public PlayerOtherState getOtherState() {

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerEventStateDTO;
+import com.ares_expedition.model.player_state.subclass.substates.EventState;
 
 public class PlayerEventState {
-    List<Object> events = new ArrayList<>();
+    List<EventState> events = new ArrayList<>();
 
     public PlayerEventState(){
     }
@@ -14,12 +15,16 @@ public class PlayerEventState {
         this.events = dto.getEvents();
     }
 
-    public List<Object> getEvents() {
+    public List<EventState> getEvents() {
         return events;
     }
 
-    public void setEvents(List<Object> events) {
+    public void setEvents(List<EventState> events) {
         this.events = events;
+    }
+
+    public void addEvent(EventState event) {
+        this.events.add(event);
     }
 
     public PlayerEventStateDTO toJson() {

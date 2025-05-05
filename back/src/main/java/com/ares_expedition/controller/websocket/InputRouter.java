@@ -10,17 +10,16 @@ import com.ares_expedition.controller.game.GameController;
 import com.ares_expedition.dto.websocket.content.input.BaseContentDTO;
 import com.ares_expedition.dto.websocket.content.input.DrawContentDTO;
 import com.ares_expedition.dto.websocket.content.input.GenericContentDTO;
+import com.ares_expedition.dto.websocket.content.input.OceanContentDTO;
 import com.ares_expedition.dto.websocket.content.input.PhaseSelectedContentDTO;
 import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
 import com.ares_expedition.dto.websocket.content.input.UnHandledContentDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.messages.input.*;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
-import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
-import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.services.QueryMessageFactory;
@@ -70,6 +69,10 @@ public class InputRouter {
                 handleQuery(    
                     message, GenericContentDTO.class,
                     GenericMessageDTO.class, this::handlePlayerConnection);
+                break;
+            case OCEAN_QUERY:
+                handleQuery(message, OceanContentDTO.class, 
+                OceanMessageDTO.class, this::handleOceanQuery);
                 break;
             default:
                 handleQuery(
@@ -173,5 +176,15 @@ public class InputRouter {
             wsOutput.sendPushToPlayer(MessageOutputFactory.createStartGameMessage(gameId, ""), query.getPlayerId());
         }
              */
+    }
+
+    private void handleOceanQuery(OceanMessageDTO query) {
+         System.out.println("\u001B[32m HANDLEING ocean query for gameId: " + query.getGameId() + "\u001B[0m");
+         gameController.flipOceans(
+            query.getGameId(),
+            query.getPlayerId(),
+            query.getOceanNumber(),
+            PlayerState.fromJson(query.getContent().getPlayerState())
+            );
     }
 }

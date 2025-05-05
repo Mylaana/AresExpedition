@@ -13,6 +13,7 @@ import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputD
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.core.Game;
+import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.repository.JsonGameDataHandler;
@@ -146,5 +147,14 @@ public class GameController {
                 break;
         }
         JsonGameDataHandler.saveGame(game);
+    }
+
+    public void flipOceans(String gameId, String playerId, Integer oceanNumber, PlayerState playerState){
+        Game game = getGameFromId(gameId);
+        List<Ocean> oceans = game.flipOceans(oceanNumber);
+        playerState.addEvent(oceans);
+        game.setPlayerState(playerId, playerState);
+        JsonGameDataHandler.saveGame(game);
+        wsOutput.sendPushToPlayer(MessageOutputFactory.createOceanFlippedMessage(gameId, oceans), playerId);
     }
 }

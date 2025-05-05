@@ -37,6 +37,9 @@ public class MessageOutputFactory {
         return new AckMessageOutput(gameId, uuid);
     }
 
+    public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, Object oceans){
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.OCEAN_RESULT, oceans);
+    }
     /*
     public static BaseMessageOutputDTO createStartGameMessage(String gameId, Object content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.START_GAME, content);
