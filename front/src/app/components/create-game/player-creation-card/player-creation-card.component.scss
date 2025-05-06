@@ -1,4 +1,8 @@
 $player-color: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
+:host{
+	display: flex;
+	justify-content: center;
+}
 .wrapper-main{
 	display: flex;
 	align-items: center;

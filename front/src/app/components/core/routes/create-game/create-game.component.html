@@ -8,9 +8,7 @@
 					<p>Players number:</p>
 					<app-player-number (playerNumberSelected)="onPlayerNumberSelected($event)"></app-player-number>
 				</div>
-				<div class="wrapper-player-creation-pannel">
-					<app-player-creation-pannel [playerNumber]="_playerNumber" (updatePlayerList)="onPlayerListUpdate($event)"></app-player-creation-pannel>
-				</div>
+				<app-player-creation-pannel [playerNumber]="_playerNumber" (updatePlayerList)="onPlayerListUpdate($event)"></app-player-creation-pannel>
 			</div>
 		</div>
 		<span class="horizontal-separator"></span>
