@@ -22,7 +22,10 @@
 	justify-content: center;
 	flex-direction: column;
 	height: 50%;
-	width: 30%;
+	aspect-ratio: 1.2;
+	@media (max-width:1919px) {
+		height: 70%;
+	}
 }
 
 .menu{

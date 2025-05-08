@@ -1,7 +1,5 @@
-<div class="wrapper-main">
-	<ng-container *ngFor="let button of _buttonList">
-		<div class="wrapper-button">
-			<app-non-event-button [button]="button" [shape]="'selection_rounded_square'" (buttonClicked)="onPlayerNumberSelection(button)"></app-non-event-button>
-		</div>
-	</ng-container>
-</div>
+<ng-container *ngFor="let button of _buttonList">
+	<div class="wrapper-button">
+		<app-non-event-button [button]="button" [shape]="'selection_rounded_square'" (buttonClicked)="onPlayerNumberSelection(button)"></app-non-event-button>
+	</div>
+</ng-container>
