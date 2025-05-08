@@ -1,29 +1,53 @@
 package com.ares_expedition.model.player_state.subclass.substates;
 
 import java.util.HashMap;
-import java.util.Map;
-
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.EventStateDTO;
-import com.ares_expedition.enums.game.EventEnum;
+import com.ares_expedition.enums.game.EventStateOperation;
+import com.ares_expedition.enums.game.EventStateTypeEnum;
 import com.ares_expedition.model.core.Ocean;
 
 public class EventState {
-    Map<EventEnum, Object> event = new HashMap<>();
+    EventStateOperation operation;
+    EventStateTypeEnum type;
+    Object value = new HashMap<>();
     
     EventState(){
     }
     
-    public EventState(Ocean oceans){
-        this.event.put(EventEnum.CREATE_EVENT, '');
-        this.event.put(EventEnum.VALUE, oceans.getBonuses());
+    public EventState(EventStateDTO dto){
+        this.operation = dto.getOperation();
+        this.type = dto.getType();
+        this.value = dto.getValue();
     }
 
-    public Map<EventEnum, Object> getEvent() {
-        return event;
+    public EventState(Ocean ocean){
+        this.operation = EventStateOperation.CREATE_EVENT;
+        this.type = EventStateTypeEnum.OCEAN_FLIPPED;
+        this.value = ocean.getBonuses();
     }
 
-    public void setEvent(Map<EventEnum, Object> event) {
-        this.event = event;
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
+    public EventStateTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(EventStateTypeEnum type) {
+        this.type = type;
+    }
+
+    public EventStateOperation getOperation() {
+        return operation;
+    }
+
+    public void setOperationType(EventStateOperation operation) {
+        this.operation = operation;
     }
 
     public EventStateDTO toJson() {

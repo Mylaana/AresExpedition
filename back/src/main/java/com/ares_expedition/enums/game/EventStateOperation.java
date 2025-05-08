@@ -1,7 +1,6 @@
 package com.ares_expedition.enums.game;
 
-public enum EventEnum {
-    EVENT_SUBTYPE,
+public enum EventStateOperation {
     CREATE_EVENT,
-    VALUE
+    LOAD_EVENT
 }

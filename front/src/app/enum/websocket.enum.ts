@@ -14,6 +14,7 @@ export enum PlayerMessageContentResultEnum {
     gameState = 'GAME_STATE',
 	startGame = 'START_GAME',
 	playerConnect = 'PLAYER_CONNECT',
+	oceanResult = 'OCEAN_RESULT',
 
 	acknowledge = 'ACKNOWLEDGE'
 }

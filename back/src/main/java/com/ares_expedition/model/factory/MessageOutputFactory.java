@@ -1,12 +1,16 @@
 package com.ares_expedition.model.factory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.dto.websocket.messages.output.AckMessageOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.RessourceEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
+import com.ares_expedition.model.core.Ocean;
 
 public class MessageOutputFactory {
     public static BaseMessageOutputDTO createDEBUGMessage(String gameId, Object content) {
@@ -37,8 +41,12 @@ public class MessageOutputFactory {
         return new AckMessageOutput(gameId, uuid);
     }
 
-    public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, Object oceans){
-        return new BaseMessageOutputDTO(gameId, ContentResultEnum.OCEAN_RESULT, oceans);
+    public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, List<Ocean> oceans){
+        List<Map<RessourceEnum, Integer>> bonuses = new ArrayList<>();
+        for(Ocean ocean: oceans){
+            bonuses.add(ocean.getBonuses());
+        }
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.OCEAN_RESULT, bonuses);
     }
     /*
     public static BaseMessageOutputDTO createStartGameMessage(String gameId, Object content) {

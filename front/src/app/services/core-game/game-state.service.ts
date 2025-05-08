@@ -16,10 +16,11 @@ import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
 import { EventDesigner } from "../designers/event-designer.service";
-import { EventDTO } from "../../interfaces/dto/event-dto.interface";
+import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP } from "../../global/global-const";
+import { EventStateTypeEnum } from "../../enum/eventstate.enum";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -50,7 +51,7 @@ export class GameState{
 
     private clientId!: myUUID
     playerCount = new BehaviorSubject<myUUID[]>([]);
-	private eventQueueSavedState: EventDTO[] = []
+	private eventQueueSavedState: EventStateDTO[] = []
 
     private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
@@ -699,6 +700,7 @@ export class GameState{
 		//modify clientState
 		for(let event of eventQueue){
 			for(let eventState of this.eventQueueSavedState){
+				/*
 				if(event.subType===eventState.est){
 					switch(event.type){
 						case('cardActivator'):{
@@ -711,6 +713,7 @@ export class GameState{
 					this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
 					break
 				}
+					*/
 			}
 
 		}
@@ -718,8 +721,8 @@ export class GameState{
 	private createEventFromEventQueueSavedState(): void {
 		let newEvents: EventBaseModel[] = []
 		for(let eventState of this.eventQueueSavedState){
-			if(eventState.ced){
-				newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
+			if(eventState.t === EventStateTypeEnum.discard){
+				//newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
 				this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
 			}
 		}

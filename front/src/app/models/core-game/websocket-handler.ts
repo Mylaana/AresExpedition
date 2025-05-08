@@ -30,6 +30,10 @@ export class WebsocketHandler {
 				this.handleMessageConnection(message.content)
 				break
 			}
+			case(PlayerMessageContentResultEnum.oceanResult):{
+
+				break
+			}
             default:{
                 console.log('UNHANDLED PLAYER MESSAGE RECEIVED: ', message)
             }

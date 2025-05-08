@@ -152,7 +152,7 @@ public class GameController {
     public void flipOceans(String gameId, String playerId, Integer oceanNumber, PlayerState playerState){
         Game game = getGameFromId(gameId);
         List<Ocean> oceans = game.flipOceans(oceanNumber);
-        playerState.addEvent(oceans);
+        playerState.addEventOceans(oceans);
         game.setPlayerState(playerId, playerState);
         JsonGameDataHandler.saveGame(game);
         wsOutput.sendPushToPlayer(MessageOutputFactory.createOceanFlippedMessage(gameId, oceans), playerId);

@@ -8,7 +8,7 @@ import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type
 import { PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
-import { EventDTO } from "../../interfaces/dto/event-dto.interface"
+import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface"
 
 export class PlayerProjectCardStateModel {
     private hand: number[] = []
@@ -125,10 +125,12 @@ export class PlayerProjectCardStateModel {
 		return idList
 	}
 
-	loadEventStateActivator(dto: EventDTO){
+	loadEventStateActivator(dto: EventStateDTO){
+		/*
 		Object.entries(dto.al??{}).forEach(([key, value]) => {
 			this.loadCardActivationCount(key, value)
 		})
+			*/
 	}
 	private loadCardActivationCount(cardId: string, activationCount: number){
 		for(let card of this.projects.playedProjectList){

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerEventStateDTO;
+import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.EventStateDTO;
+import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.subclass.substates.EventState;
 
 public class PlayerEventState {
@@ -11,8 +13,12 @@ public class PlayerEventState {
 
     public PlayerEventState(){
     }
-    public PlayerEventState(PlayerEventStateDTO dto){
-        this.events = dto.getEvents();
+
+    public PlayerEventState(PlayerEventStateDTO playerStateDTO){
+        //this.events = dto.getEvents();
+        for(EventStateDTO dto: playerStateDTO.getEvents()){
+            this.events.add(new EventState(dto));
+        }
     }
 
     public List<EventState> getEvents() {
@@ -25,6 +31,12 @@ public class PlayerEventState {
 
     public void addEvent(EventState event) {
         this.events.add(event);
+    }
+
+    public void addEventOceans(List<Ocean> oceans) {
+        for(Ocean ocean: oceans){
+            this.events.add(new EventState(ocean));
+        }
     }
 
     public PlayerEventStateDTO toJson() {
