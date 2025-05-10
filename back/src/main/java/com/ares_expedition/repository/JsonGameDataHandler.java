@@ -13,11 +13,14 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JsonGameDataHandler {
-    private static final String FILE_PATH = "back/data/database.json";
+    private static final String DATABASE_PATH = "back/data/database.json";
+    private static final String CARDS_DATA_PATH = "front/src/assets/data/cards_data.json";
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static Game getGame(String gameId){
@@ -42,10 +45,10 @@ public class JsonGameDataHandler {
     }
 
     private static Map<String, Game> readGames(){
-        File file = Paths.get(FILE_PATH).toFile();
+        File file = Paths.get(DATABASE_PATH).toFile();
         //System.out.println("\u001B[32m \u001B[0m");
         if(!file.exists()){
-            System.err.println("\\u001B[32m File not found: " + new File("back/").getAbsolutePath());
+            System.err.println("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath());
             return new HashMap<>();
         }
 
@@ -59,11 +62,37 @@ public class JsonGameDataHandler {
     }
 
     private static void writeGames(Map<String, GameData> games){
-        try (Writer writer = new FileWriter(Paths.get(FILE_PATH).toFile())) {
+        try (Writer writer = new FileWriter(Paths.get(DATABASE_PATH).toFile())) {
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, games);
         } catch (IOException error) {
             error.printStackTrace();
         }
+    }
+
+    public static List<Integer> getCardsIdList(){
+        File file = Paths.get(CARDS_DATA_PATH).toFile();
+        List<Integer> idList = new ArrayList<>();
+        if(!file.exists()){
+            System.err.println("\\u001B[32m File not found: " + new File(CARDS_DATA_PATH).getAbsolutePath());
+            return idList;
+        }
+
+        List<Map<String, Object>> cards = new ArrayList<>();
+        try (Reader reader = new FileReader(file)) {
+            cards = objectMapper.readValue(reader, new TypeReference<List<Map<String, Object>>>(){});
+        } catch (IOException error) {
+            error.printStackTrace();
+            return idList;
+        }
+
+        for(Map<String, Object> card: cards) {
+            Object id = card.get("id");
+            if(!(card.get("cardType").equals("corporation")) && id instanceof Integer){
+                idList.add(Integer.parseInt(id.toString()));
+            }
+        }
+
+        return idList;
     }
 }
