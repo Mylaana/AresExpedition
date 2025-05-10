@@ -12,11 +12,12 @@ import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
+import com.ares_expedition.repository.JsonGameDataHandler;
 import com.ares_expedition.repository.core.GameData;
 
 public class Game {
     private String gameId;
-    private List<Integer> deck = new ArrayList<>(Arrays.asList(4,9,18,20,25,29,36,37,42,45,46,49,54,58));
+    private List<Integer> deck = new ArrayList<>();
     private List<Integer> discard = new ArrayList<>();
     private List<String> groupPlayerId = new ArrayList<>();
     private Map<String, Boolean> groupPlayerReady = new HashMap<>();
@@ -32,6 +33,7 @@ public class Game {
     
     Game(NewGameConfigDTO gameConfig){
         this.gameId = gameConfig.getGameId();
+        this.deck = JsonGameDataHandler.getCardsIdList();
         this.shuffleDeck(this.deck);
         this.currentPhase = PhaseEnum.PLANIFICATION;
         this.selectedPhase.add(currentPhase);
