@@ -1,7 +1,7 @@
-import { EventStateOperationEnum, EventStateTypeEnum } from "../../enum/eventstate.enum"
+import { EventStateOriginEnum, EventStateTypeEnum } from "../../enum/eventstate.enum"
 
 export interface EventStateDTO {
-	o: EventStateOperationEnum
+	o: EventStateOriginEnum
 	t: EventStateTypeEnum
 	v: any
 	/*

@@ -2,12 +2,12 @@ package com.ares_expedition.model.player_state.subclass.substates;
 
 import java.util.HashMap;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.EventStateDTO;
-import com.ares_expedition.enums.game.EventStateOperation;
+import com.ares_expedition.enums.game.EventStateOrigin;
 import com.ares_expedition.enums.game.EventStateTypeEnum;
 import com.ares_expedition.model.core.Ocean;
 
 public class EventState {
-    EventStateOperation operation;
+    EventStateOrigin origin;
     EventStateTypeEnum type;
     Object value = new HashMap<>();
     
@@ -15,13 +15,13 @@ public class EventState {
     }
     
     public EventState(EventStateDTO dto){
-        this.operation = dto.getOperation();
+        this.origin = dto.getOrigin();
         this.type = dto.getType();
         this.value = dto.getValue();
     }
 
     public EventState(Ocean ocean){
-        this.operation = EventStateOperation.CREATE_EVENT;
+        this.origin = EventStateOrigin.SERVER;
         this.type = EventStateTypeEnum.OCEAN_FLIPPED;
         this.value = ocean.getBonuses();
     }
@@ -42,12 +42,12 @@ public class EventState {
         this.type = type;
     }
 
-    public EventStateOperation getOperation() {
-        return operation;
+    public EventStateOrigin getOrigin() {
+        return origin;
     }
 
-    public void setOperationType(EventStateOperation operation) {
-        this.operation = operation;
+    public void setOrigin(EventStateOrigin origin) {
+        this.origin = origin;
     }
 
     public EventStateDTO toJson() {

@@ -21,6 +21,7 @@ import { Utils } from "../../utils/utils";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP } from "../../global/global-const";
 import { EventStateTypeEnum } from "../../enum/eventstate.enum";
+import { EventStateFactory } from "../designers/event-state-factory.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -395,6 +396,8 @@ export class GameState{
         }
 		if(this.eventQueueSavedState.length>0){
 			this.loadEventQueueSavedState(newQueue)
+			newQueue = newQueue.concat(EventStateFactory.createEventsFromJson(this.eventQueueSavedState))
+			console.log('resulting eventStateQueue after load: ', this.eventQueueSavedState)
 		}
         this.eventQueue.next(newQueue)
     }
@@ -415,14 +418,6 @@ export class GameState{
 
         this.eventQueue.next(newEventQueue)
     }
-	/*
-	getPlayerPhaseCardHolder(playerId: number): PhaseCardHolderModel {
-		return this.groupPlayerState.getValue()[playerId].phaseCards
-	}
-	getPlayerPhaseCardGroup(playerId: number, phaseIndex: number): PhaseCardGroupModel {
-		return this.groupPlayerState.getValue()[playerId].phaseCards.phaseGroups[phaseIndex]
-	}
-	*/
 	setClientPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
 		let state = this.getClientState()
 		state.setPhaseCardUpgraded(upgrade)
@@ -697,11 +692,10 @@ export class GameState{
 	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
 		let playerState: PlayerStateModel = this.getClientState()
 
-		//modify clientState
 		for(let event of eventQueue){
 			for(let eventState of this.eventQueueSavedState){
-				/*
-				if(event.subType===eventState.est){
+				if(EventStateFactory.shouldLoadEventFromThisSavedState(event, eventState)){
+					//specific cases
 					switch(event.type){
 						case('cardActivator'):{
 							playerState.loadEventStateActivator(eventState)
@@ -709,13 +703,12 @@ export class GameState{
 						}
 					}
 
+					//generic cases applied from event function
 					event.fromJson(eventState)
 					this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
 					break
 				}
-					*/
 			}
-
 		}
 	}
 	private createEventFromEventQueueSavedState(): void {

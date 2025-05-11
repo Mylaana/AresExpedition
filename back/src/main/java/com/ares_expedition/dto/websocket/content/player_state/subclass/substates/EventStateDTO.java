@@ -1,14 +1,14 @@
 package com.ares_expedition.dto.websocket.content.player_state.subclass.substates;
 
 import java.util.HashMap;
-import com.ares_expedition.enums.game.EventStateOperation;
+import com.ares_expedition.enums.game.EventStateOrigin;
 import com.ares_expedition.enums.game.EventStateTypeEnum;
 import com.ares_expedition.model.player_state.subclass.substates.EventState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EventStateDTO {
     @JsonProperty("o")
-    EventStateOperation operation;
+    EventStateOrigin origin;
     @JsonProperty("t")
     EventStateTypeEnum type;
     @JsonProperty("v")
@@ -18,7 +18,7 @@ public class EventStateDTO {
     }
     
     public EventStateDTO(EventState state){
-        this.operation = state.getOperation();
+        this.origin = state.getOrigin();
         this.type = state.getType();
         this.value = state.getValue();
     }
@@ -39,11 +39,11 @@ public class EventStateDTO {
         this.type = type;
     }
 
-    public EventStateOperation getOperation() {
-        return operation;
+    public EventStateOrigin getOrigin() {
+        return origin;
     }
 
-    public void setOperation(EventStateOperation operation) {
-        this.operation = operation;
+    public void setOrigin(EventStateOrigin operation) {
+        this.origin = operation;
     }    
 }

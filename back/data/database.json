@@ -1,23 +1,23 @@
 {
-  "e37a6e20-c722-48aa-9653-e3dba69b28bd" : {
-    "gameId" : "e37a6e20-c722-48aa-9653-e3dba69b28bd",
-    "deck" : [ 37, 45, 49, 18, 46, 20, 54, 25, 29, 4, 9, 36, 58 ],
+  "7e8bb739-525f-4ba6-8e36-c77fca75c7e3" : {
+    "gameId" : "7e8bb739-525f-4ba6-8e36-c77fca75c7e3",
+    "deck" : [ 49, 46, 54, 36, 25, 42, 58, 18, 45, 37, 29, 20, 9 ],
     "discard" : [ ],
-    "groupPlayerId" : [ "0e5f5d0b-07c3-458f-8b65-32e91df8fe18" ],
+    "groupPlayerId" : [ "b9ae1710-da56-41c5-bee8-446c7e271e87" ],
     "groupPlayerReady" : {
-      "0e5f5d0b-07c3-458f-8b65-32e91df8fe18" : false
+      "b9ae1710-da56-41c5-bee8-446c7e271e87" : false
     },
     "currentPhase" : "DEVELOPMENT",
     "selectedPhase" : [ "PLANIFICATION", "DEVELOPMENT" ],
     "groupPlayerState" : {
-      "0e5f5d0b-07c3-458f-8b65-32e91df8fe18" : {
+      "b9ae1710-da56-41c5-bee8-446c7e271e87" : {
         "infoState" : {
-          "id" : "0e5f5d0b-07c3-458f-8b65-32e91df8fe18",
+          "id" : "b9ae1710-da56-41c5-bee8-446c7e271e87",
           "name" : "a",
           "color" : "blue"
         },
         "scoreState" : {
-          "vp" : 10,
+          "vp" : 6,
           "milestoneCount" : 0,
           "terraformingRating" : 5,
           "forest" : 0
@@ -45,7 +45,7 @@
             "id" : 3,
             "name" : "power",
             "idImageUrl" : 3,
-            "valueCount" : 0,
+            "valueCount" : 1,
             "valueMod" : 0
           }, {
             "id" : 4,
@@ -57,7 +57,7 @@
             "id" : 5,
             "name" : "jovian",
             "idImageUrl" : 5,
-            "valueCount" : 1,
+            "valueCount" : 0,
             "valueMod" : 0
           }, {
             "id" : 6,
@@ -92,15 +92,15 @@
             "valueMod" : 0,
             "valueProd" : 0,
             "valueBaseProd" : 0,
-            "valueStock" : -61,
+            "valueStock" : 28,
             "hasStock" : true,
             "imageUrlId" : 1009
           }, {
             "id" : 1,
             "name" : "heat",
             "valueMod" : 0,
-            "valueProd" : 10,
-            "valueBaseProd" : 10,
+            "valueProd" : 2,
+            "valueBaseProd" : 2,
             "valueStock" : 0,
             "hasStock" : true,
             "imageUrlId" : 1007
@@ -143,14 +143,14 @@
           } ]
         },
         "projectCardState" : {
-          "hand" : [ 42, 197 ],
+          "hand" : [ 4, 197 ],
           "handCorporations" : [ ],
           "handDiscard" : [ 197 ],
-          "playedProjectIdList" : [ 1000, 197, 197, 197, 197, 197 ],
+          "playedProjectIdList" : [ 1001, 197 ],
           "playedProjectCardStocks" : null,
           "triggers" : {
-            "playedCardsId" : [ 1000 ],
-            "activeCardsId" : [ 1000 ],
+            "playedCardsId" : [ 1001 ],
+            "activeCardsId" : [ 1001 ],
             "activeOnRessourceAddedToCard" : [ ],
             "activeOnParameterIncrease" : [ ],
             "activeOnPlayedCard" : [ ],
@@ -168,7 +168,7 @@
           "globalParameters" : [ {
             "name" : "OCEAN",
             "step" : 0,
-            "addEop" : 5
+            "addEop" : 1
           }, {
             "name" : "INFRASTRUCTURE",
             "step" : 0,
@@ -185,15 +185,15 @@
         },
         "eventState" : {
           "events" : [ {
-            "operation" : "LOAD_EVENT",
+            "origin" : "CLIENT",
             "type" : "PHASE_BUILDER_DEVELOPMENT_LOCKED",
             "value" : [ true ]
           }, {
-            "operation" : "CREATE_EVENT",
+            "origin" : "SERVER",
             "type" : "OCEAN_FLIPPED",
             "value" : {
-              "MEGACREDIT" : 2,
-              "PLANT" : 1
+              "CARD" : 1,
+              "MEGACREDIT" : 1
             }
           } ]
         },
@@ -224,30 +224,15 @@
       "step" : 0,
       "addEop" : 0
     } ],
-    "deckCorporations" : [ 1002, 1001 ],
+    "deckCorporations" : [ 1000, 1002 ],
     "oceans" : [ {
-      "flipped" : true,
-      "bonuses" : {
-        "CARD" : 1
-      }
-    }, {
-      "flipped" : true,
-      "bonuses" : {
-        "PLANT" : 2
-      }
-    }, {
-      "flipped" : true,
-      "bonuses" : {
-        "PLANT" : 2
-      }
-    }, {
       "flipped" : true,
       "bonuses" : {
         "CARD" : 1,
         "MEGACREDIT" : 1
       }
     }, {
-      "flipped" : true,
+      "flipped" : false,
       "bonuses" : {
         "MEGACREDIT" : 2,
         "PLANT" : 1
@@ -255,13 +240,22 @@
     }, {
       "flipped" : false,
       "bonuses" : {
+        "MEGACREDIT" : 4
+      }
+    }, {
+      "flipped" : false,
+      "bonuses" : {
+        "PLANT" : 2
+      }
+    }, {
+      "flipped" : false,
+      "bonuses" : {
         "CARD" : 1
       }
     }, {
       "flipped" : false,
       "bonuses" : {
-        "CARD" : 1,
-        "PLANT" : 1
+        "PLANT" : 2
       }
     }, {
       "flipped" : false,
@@ -272,7 +266,13 @@
     }, {
       "flipped" : false,
       "bonuses" : {
-        "MEGACREDIT" : 4
+        "CARD" : 1
+      }
+    }, {
+      "flipped" : false,
+      "bonuses" : {
+        "CARD" : 1,
+        "PLANT" : 1
       }
     } ]
   }

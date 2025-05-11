@@ -8,7 +8,7 @@ export enum EventStateTypeEnum {
 	undefined = 'UNDEFINED'
 }
 
-export enum EventStateOperationEnum {
-	createEvent = 'CREATE_EVENT',
-	loadEvent = 'LOAD_EVENT'
+export enum EventStateOriginEnum {
+	client = 'CLIENT',
+	server = 'SERVER'
 }
