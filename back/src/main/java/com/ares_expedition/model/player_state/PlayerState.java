@@ -297,6 +297,10 @@ public class PlayerState {
         this.eventState.addEventOceans(oceans);
     }
 
+    public void addEventDrawCards(List<Integer> cards){
+        this.eventState.addEventDrawCards(cards);
+    }
+
     //=============================================================
     //Other
     public PlayerOtherState getOtherState() {

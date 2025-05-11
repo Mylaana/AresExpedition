@@ -1,6 +1,8 @@
 package com.ares_expedition.model.player_state.subclass.substates;
 
 import java.util.HashMap;
+import java.util.List;
+
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.EventStateDTO;
 import com.ares_expedition.enums.game.EventStateOrigin;
 import com.ares_expedition.enums.game.EventStateTypeEnum;
@@ -14,6 +16,11 @@ public class EventState {
     EventState(){
     }
     
+    public EventState(EventStateTypeEnum type, Object value){
+        this.origin = EventStateOrigin.SERVER;
+        this.type = type;
+        this.value = value;
+    }
     public EventState(EventStateDTO dto){
         this.origin = dto.getOrigin();
         this.type = dto.getType();
@@ -24,6 +31,10 @@ public class EventState {
         this.origin = EventStateOrigin.SERVER;
         this.type = EventStateTypeEnum.OCEAN_FLIPPED;
         this.value = ocean.getBonuses();
+    }
+
+    public static EventState addEventDrawCards(List<Integer> cards) {
+        return new EventState(EventStateTypeEnum.DRAW_CARDS, cards);
     }
 
     public Object getValue() {

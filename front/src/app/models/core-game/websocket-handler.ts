@@ -31,7 +31,7 @@ export class WebsocketHandler {
 				break
 			}
 			case(PlayerMessageContentResultEnum.oceanResult):{
-
+				this.handleMessageOceanResult(message.content)
 				break
 			}
             default:{
@@ -151,5 +151,8 @@ export class WebsocketHandler {
 	}
 	private handleGroupMessageSelectedPhaseList(content: SelectablePhaseEnum[]){
 
+	}
+	private handleMessageOceanResult(content: any){
+		console.log('UNHANDLED OCEAN RESULT:', content)
 	}
 }

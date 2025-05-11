@@ -10,6 +10,7 @@ import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.GlobalConstants;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.enums.game.RessourceEnum;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.repository.core.GameData;
@@ -353,6 +354,16 @@ public class Game {
         return oceans.getLast();
     }
 
+    public List<Integer> drawFlippedOceanCards(String playerId, List<Ocean> flippedOceans) {
+        List<Integer> drawFromFlipped = new ArrayList<>();
+        for(Ocean ocean: flippedOceans){
+            Integer cardsToDraw = ocean.getBonuses().get(RessourceEnum.CARD);
+            if(cardsToDraw != null){
+               drawFromFlipped.addAll(this.drawCards(cardsToDraw));
+            }
+        }
+        return drawFromFlipped;
+    }
     public GameData toData(){
         return new GameData(this);
     }

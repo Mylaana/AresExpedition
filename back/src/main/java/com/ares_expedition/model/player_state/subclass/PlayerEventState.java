@@ -39,6 +39,10 @@ public class PlayerEventState {
         }
     }
 
+    public void addEventDrawCards(List<Integer> cards) {
+        this.events.add(EventState.addEventDrawCards(cards));
+    }
+
     public PlayerEventStateDTO toJson() {
         return new PlayerEventStateDTO(this);
     }

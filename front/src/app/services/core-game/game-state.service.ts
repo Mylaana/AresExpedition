@@ -396,8 +396,7 @@ export class GameState{
         }
 		if(this.eventQueueSavedState.length>0){
 			this.loadEventQueueSavedState(newQueue)
-			newQueue = newQueue.concat(EventStateFactory.createEventsFromJson(this.eventQueueSavedState))
-			console.log('resulting eventStateQueue after load: ', this.eventQueueSavedState)
+			newQueue = EventStateFactory.createEventsFromJson(this.eventQueueSavedState).concat(newQueue)
 		}
         this.eventQueue.next(newQueue)
     }

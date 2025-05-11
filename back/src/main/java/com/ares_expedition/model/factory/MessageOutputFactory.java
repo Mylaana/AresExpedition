@@ -1,6 +1,7 @@
 package com.ares_expedition.model.factory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,12 +42,17 @@ public class MessageOutputFactory {
         return new AckMessageOutput(gameId, uuid);
     }
 
-    public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, List<Ocean> oceans){
+    public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, List<Ocean> oceans, List<Integer> cardsToDraw){
         List<Map<RessourceEnum, Integer>> bonuses = new ArrayList<>();
+        Map<String, Object> content = new HashMap<>();
         for(Ocean ocean: oceans){
             bonuses.add(ocean.getBonuses());
         }
-        return new BaseMessageOutputDTO(gameId, ContentResultEnum.OCEAN_RESULT, bonuses);
+        content.put("BONUSES", bonuses);
+        if(cardsToDraw.size()>0){
+            content.put("DRAW", cardsToDraw);
+        }
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.OCEAN_RESULT, content);
     }
     /*
     public static BaseMessageOutputDTO createStartGameMessage(String gameId, Object content) {

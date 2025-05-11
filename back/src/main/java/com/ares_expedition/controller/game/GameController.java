@@ -153,8 +153,12 @@ public class GameController {
         Game game = getGameFromId(gameId);
         List<Ocean> oceans = game.flipOceans(oceanNumber);
         playerState.addEventOceans(oceans);
+        List<Integer> cardsToDraw = game.drawFlippedOceanCards(playerId, oceans);
+        if(cardsToDraw.size()>0){
+            playerState.addEventDrawCards(cardsToDraw); 
+        }
         game.setPlayerState(playerId, playerState);
         JsonGameDataHandler.saveGame(game);
-        wsOutput.sendPushToPlayer(MessageOutputFactory.createOceanFlippedMessage(gameId, oceans), playerId);
+        wsOutput.sendPushToPlayer(MessageOutputFactory.createOceanFlippedMessage(gameId, oceans, cardsToDraw), playerId);
     }
 }

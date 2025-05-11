@@ -63,22 +63,33 @@ export class EventStateFactory{
 	public static shouldLoadEventFromThisSavedState(event: EventBaseModel, eventState: EventStateDTO) : boolean {
 		return EventSubTypeToStateMap.get(event.subType) === eventState.t
 	}
-	public static createEventsFromJson(eventState: EventStateDTO[]): EventBaseModel[] {
+	public static createEventsFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
 		let newEvents: EventBaseModel[] = []
-		console.log('creating events :)', eventState)
-		for(let event of eventState){
-			switch(event.t){
+		let treated: boolean
+		for (let i = eventStateList.length - 1; i >= 0; i--) {
+			let state = eventStateList[i]
+			treated = true
+			switch (state.t){
 				case(EventStateTypeEnum.oceanFlipped):{
-					console.log(event)
-					for(let ressource of event.v){
-						console.log(ressource)
-						switch(ressource){
-							case('CARD'):{;break}
-							//case('MEGACREDIT'):{newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:{name:'megacredit', }})); break}
-						}
+					if (state.v['MEGACREDIT']) {
+						newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', { baseRessource: { name: 'megacredit', valueStock: state.v['MEGACREDIT'] ?? 0 } }))
 					}
+					if (state.v['PLANT']) {
+						newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', { baseRessource: { name: 'plant', valueStock: state.v['PLANT'] ?? 0 } })) // probablement une erreur dans ton code initial (tu remets MEGACREDIT au lieu de PLANT)
+					}
+					//CARDS is treated separatly
+					eventStateList.splice(i, 1)
+					break
 				}
+				case(EventStateTypeEnum.drawCards):{
+					//newEvents.push(EventDesigner.createDeckQueryEvent('drawQuery', { drawDiscard: { draw: state.v['CARD'] } }))
+					console.log('draw cards : ')
+					newEvents.push(EventDesigner.createGeneric('drawResult', {drawEventResult:state.v}))
+					break
+				}
+				default:{treated = false}
 			}
+			if(treated){eventStateList.splice(i, 1)}
 		}
 		return newEvents
 	}
