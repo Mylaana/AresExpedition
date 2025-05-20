@@ -14,7 +14,7 @@ type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelecte
 
 export abstract class EventBaseModel {
     readonly type!: EventType
-    readonly subType!: any
+    readonly subType!: EventUnionSubTypes
     finalized: boolean = false
     autoFinalize: boolean = false
     id!: number

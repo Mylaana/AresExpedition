@@ -46,7 +46,7 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Action phase clicked not loaded   
+:)
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

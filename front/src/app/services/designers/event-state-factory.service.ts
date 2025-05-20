@@ -61,7 +61,8 @@ export class EventStateFactory{
 		}
 	}
 	public static shouldLoadEventFromThisSavedState(event: EventBaseModel, eventState: EventStateDTO) : boolean {
-		return EventSubTypeToStateMap.get(event.subType) === eventState.t
+		if(event.subType==='actionPhaseActivator' && eventState.t===EventStateTypeEnum.cardActivator){return true}
+		return false
 	}
 	public static createEventsFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
 		let newEvents: EventBaseModel[] = []

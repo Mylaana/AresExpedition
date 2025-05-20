@@ -279,7 +279,7 @@
   "e9f91df0-8a93-478c-9346-bffa06986713" : {
     "gameId" : "e9f91df0-8a93-478c-9346-bffa06986713",
     "deck" : [ 286, 20, 184, 229, 278, 108, 42, 129, 213, 271, 182, 223, 198, 141, 217, 74, 282, 263, 18, 49, 224, 292, 280, 45, 202, 69, 145, 233, 62, 163, 123, 54, 4, 214, 92, 268, 46, 279, 204, 180, 25, 281, 175, 135, 289, 201, 77, 93, 190, 9, 232, 36, 65, 81, 222, 83, 266, 58, 284, 253, 66, 277, 29, 144, 37, 155, 76, 96, 71, 183, 181 ],
-    "discard" : [ 197 ],
+    "discard" : [ 197, 230, 253, 4, 197, 197, 253, 4, 171, 4 ],
     "groupPlayerId" : [ "6d230ebf-e848-41a2-b753-e03ac425ae98" ],
     "groupPlayerReady" : {
       "6d230ebf-e848-41a2-b753-e03ac425ae98" : false
@@ -304,7 +304,7 @@
             "id" : 0,
             "name" : "building",
             "idImageUrl" : 0,
-            "valueCount" : 0,
+            "valueCount" : 1,
             "valueMod" : 0
           }, {
             "id" : 1,
@@ -316,7 +316,7 @@
             "id" : 2,
             "name" : "science",
             "idImageUrl" : 2,
-            "valueCount" : 0,
+            "valueCount" : 1,
             "valueMod" : 0
           }, {
             "id" : 3,
@@ -369,7 +369,7 @@
             "valueMod" : 0,
             "valueProd" : 0,
             "valueBaseProd" : 0,
-            "valueStock" : 12,
+            "valueStock" : -8,
             "hasStock" : true,
             "imageUrlId" : 1009
           }, {
@@ -387,7 +387,7 @@
             "valueMod" : 0,
             "valueProd" : 0,
             "valueBaseProd" : 0,
-            "valueStock" : 1,
+            "valueStock" : 2,
             "hasStock" : true,
             "imageUrlId" : 1004
           }, {
@@ -420,10 +420,10 @@
           } ]
         },
         "projectCardState" : {
-          "hand" : [ 260 ],
+          "hand" : [ 260, 161, 197, 253 ],
           "handCorporations" : [ ],
-          "handDiscard" : [ 230, 253, 4, 197, 197, 253, 4, 171 ],
-          "playedProjectIdList" : [ 1002, 197 ],
+          "handDiscard" : [ ],
+          "playedProjectIdList" : [ 1002, 197, 4 ],
           "playedProjectCardStocks" : null,
           "triggers" : {
             "playedCardsId" : [ 1002 ],
@@ -439,17 +439,17 @@
         "phaseCardState" : {
           "phaseCards" : [ ],
           "selectedPhase" : "ACTION",
-          "previousSelectedPhase" : "PRODUCTION"
+          "previousSelectedPhase" : "CONSTRUCTION"
         },
         "globalParameterState" : {
           "globalParameters" : [ {
             "name" : "OCEAN",
-            "step" : 2,
-            "addEop" : 1
+            "step" : 3,
+            "addEop" : 0
           }, {
             "name" : "INFRASTRUCTURE",
-            "step" : 0,
-            "addEop" : 1
+            "step" : 1,
+            "addEop" : 0
           }, {
             "name" : "TEMPERATURE",
             "step" : 0,
@@ -464,19 +464,9 @@
           "events" : [ {
             "origin" : "CLIENT",
             "type" : "CARD_ACTIVATOR",
-            "value" : { }
-          }, {
-            "origin" : "SERVER",
-            "type" : "OCEAN_FLIPPED",
             "value" : {
-              "CARD" : 1,
-              "PLANT" : 1,
-              "MEGACREDIT" : 2
+              "4" : 1
             }
-          }, {
-            "origin" : "SERVER",
-            "type" : "DRAW_CARDS",
-            "value" : [ 161 ]
           } ]
         },
         "otherState" : {
@@ -491,11 +481,11 @@
     "gameStatus" : "STARTED",
     "globalParameters" : [ {
       "name" : "OCEAN",
-      "step" : 2,
+      "step" : 3,
       "addEop" : 0
     }, {
       "name" : "INFRASTRUCTURE",
-      "step" : 0,
+      "step" : 1,
       "addEop" : 0
     }, {
       "name" : "TEMPERATURE",

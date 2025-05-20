@@ -126,11 +126,20 @@ export class PlayerProjectCardStateModel {
 	}
 
 	loadEventStateActivator(dto: EventStateDTO){
-		/*
-		Object.entries(dto.al??{}).forEach(([key, value]) => {
-			this.loadCardActivationCount(key, value)
-		})
-			*/
+		const raw = dto.v;
+
+		if (!raw || typeof raw !== 'object') {
+			console.warn('Invalid event state format:', raw);
+			return;
+		}
+
+		for (const [key, value] of Object.entries(raw)) {
+			if (typeof key === 'string' && typeof value === 'number') {
+				this.loadCardActivationCount(key, value);
+			} else {
+				console.warn(`Invalid entry in event state activator:`, key, value);
+			}
+		}
 	}
 	private loadCardActivationCount(cardId: string, activationCount: number){
 		for(let card of this.projects.playedProjectList){
@@ -140,7 +149,6 @@ export class PlayerProjectCardStateModel {
 			}
 		}
 	}
-
 	toJson(): PlayerProjectCardStateDTO {
 		return {
 			h: this.hand,
