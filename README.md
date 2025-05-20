@@ -46,7 +46,8 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-ExpressionChangedAfterItHasBeenCheckedError & ERROR TypeError: Cannot read properties of undefined (reading 'updateDiscount') in builder   
+development builder: ExpressionChangedAfterItHasBeenCheckedError
+any builder :ERROR TypeError: Cannot read properties of undefined (reading 'updateDiscount')
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
