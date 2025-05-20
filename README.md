@@ -46,7 +46,6 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Production phase screen not working   
 Base Phase card should not be upgradable   
 Add Forest point event has no finishEvent method in handler   
 
@@ -74,6 +73,9 @@ Add Event removing any ressource in list on played card
 ### Interface
 Add Ocean bonus description, display what is the current ocean clearly    
 Use consistent colors for current/Aep Global parameter / Ocean step   
+Design production phase screen, add cards drew display   
+Improve shadowing on top/bottom sides oceans   
+Create switch button   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
@@ -90,6 +92,13 @@ Add log
 Add main buttons help popup   
 Add onClick visual effect for buttons   
 Add popup-like window for non-production phase gains   
+
+### Responsiveness
+Game creation menu
+Previous phase selected resizing   
+Hand size   
+hand border radius   
+Command buttons / setting button position   
 
 ### Misc
 Add settings options   
