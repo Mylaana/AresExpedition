@@ -480,7 +480,7 @@ export class GameState{
 		state.addGlobalParameterStepEOP(parameter)
 
 		//add TR if not maxed out
-		if(!state.getGlobalParameterMaxedOut(parameter.name)){
+		if(!state.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){
 			state.addTR(parameter.steps)
 
 			switch(parameter.name){
@@ -744,7 +744,15 @@ export class GameState{
 		}
 	}
 
-	isClient(playerId: myUUID): boolean {
+	public isClient(playerId: myUUID): boolean {
 		return playerId===this.clientId
+	}
+	public addForestPoint(forestNumber: number){
+		let state = this.getClientState()
+		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen)){return}
+		state.addForest(forestNumber)
+		state.addGlobalParameterStepEOP({name:GlobalParameterNameEnum.oxygen, steps:forestNumber})
+		state.addTR(forestNumber)
+		this.updateClientState(state)
 	}
 }

@@ -108,7 +108,7 @@ export class PlayerStateModel {
 		}
 		return
 	}
-	getGlobalParameterMaxedOut(parameterName: GlobalParameterNameEnum): boolean {return this.globalParameterState.getGlobalParameterMaxedOut(parameterName)}
+	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {return this.globalParameterState.isGlobalParameterMaxedOutAtPhaseBeginning(parameterName)}
 
 	//otherState
 	getResearch(): ScanKeep {return this.otherState.getResearch()}

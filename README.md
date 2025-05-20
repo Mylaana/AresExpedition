@@ -47,6 +47,10 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 Add Forest point event has no finishEvent method in handler   
+Action phase clicked not loaded   
+Action phase standard action disapeared !   
+AEP parameter can exceed max steps   
+
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

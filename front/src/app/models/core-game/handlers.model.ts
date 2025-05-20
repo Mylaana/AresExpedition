@@ -388,6 +388,12 @@ export class EventHandler {
 			}
 			case('upgradePhaseCards'):{break}
 			case('waitingGroupReady'):{break}
+			case('addForestPoint'):{
+				if(event.addForestPoint){
+					this.gameStateService.addForestPoint(event.addForestPoint)
+				}
+				break
+			}
 			default:{Utils.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}
