@@ -16,8 +16,8 @@ import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
-import { EventDTO } from "../../interfaces/dto/event-dto.interface";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 
 
 export class PlayerStateModel {
@@ -139,7 +139,7 @@ export class PlayerStateModel {
 	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
 
-	getEventQueueState(): EventDTO[] {return this.eventState.eventQueueState}
+	getEventQueueState(): EventStateDTO[] {return this.eventState.eventQueueState}
 
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
@@ -149,7 +149,7 @@ export class PlayerStateModel {
 		this.addPlayedCardTags(card)
 	}
 
-	loadEventStateActivator(dto: EventDTO): void {this.projectCardState.loadEventStateActivator(dto)}
+	loadEventStateActivator(dto: EventStateDTO): void {this.projectCardState.loadEventStateActivator(dto)}
 
 	private payCardCost(card: PlayableCardModel):void{
 		this.addRessource('megacredit', -card.cost)

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsReadyQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanQuery, WsOceanResult, WsReadyQuery } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
@@ -28,6 +28,10 @@ export class WebsocketHandler {
             }
 			case(PlayerMessageContentResultEnum.playerConnect):{
 				this.handleMessageConnection(message.content)
+				break
+			}
+			case(PlayerMessageContentResultEnum.oceanResult):{
+				this.handleMessageOceanResult(WebsocketResultMessageFactory.inputToOceanResult(message.content))
 				break
 			}
             default:{
@@ -147,5 +151,8 @@ export class WebsocketHandler {
 	}
 	private handleGroupMessageSelectedPhaseList(content: SelectablePhaseEnum[]){
 
+	}
+	private handleMessageOceanResult(content: WsOceanResult){
+		this.gameStateService.addOceanBonus(content)
 	}
 }

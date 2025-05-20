@@ -5,7 +5,7 @@ export type EventCardSelectorSubType = 'selectCardOptionalSell' | 'selectCardFor
 export type EventCardActivatorSubType = 'actionPhaseActivator'
 export type EventCardSelectorRessourceSubType = 'addRessourceToSelectedCard'
 export type EventCardBuilderSubType = 'developmentPhaseBuilder' | 'constructionPhaseBuilder'
-export type EventGenericSubType =  'endOfPhase' | 'planificationPhase' | 'upgradePhaseCards'
+export type EventGenericSubType =  'endOfPhase' | 'planificationPhase' | 'upgradePhaseCards' | 'oceanQuery'
 | 'increaseGlobalParameter' | 'addRessourceToPlayer' | 'increaseResearchScanKeep' | 'buildCard' | 'drawResult'
 | 'waitingGroupReady' | 'addForestPoint'
 export type EventTargetCardSubType = 'addRessourceToCardId' | 'deactivateTrigger'

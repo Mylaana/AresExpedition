@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsOceanQuery, WsOceanResult, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerMessage } from "../../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from "../../types/global.type";
+import { OceanBonusEnum } from "../../enum/global.enum";
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,6 @@ export class WebsocketQueryMessageFactory{
     }
     public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO): PlayerMessage {
         let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto}
-		console.log('query:',query)
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
     public static createReadyQuery(ready: boolean): PlayerMessage {
@@ -42,6 +42,10 @@ export class WebsocketQueryMessageFactory{
     }
 	public static createConnectionQuery(): PlayerMessage {
 		return this.generatePlayerMessage(MessageContentQueryEnum.playerConnect)
+	}
+	public static createOceanQuery(oceanNumber: number, dto: PlayerStateDTO): PlayerMessage {
+		let query: WsOceanQuery = {oceanNumber:oceanNumber, playerState: dto}
+		return this.generatePlayerMessage(MessageContentQueryEnum.oceanQuery, query)
 	}
 }
 
@@ -94,6 +98,18 @@ export class WebsocketResultMessageFactory{
 			uuid: parsedMessage['uuid'],
             gameId: parsedMessage['gameId'],
             contentEnum: parsedMessage['contentEnum'],
+        }
+        return result
+	}
+	public static inputToOceanResult(content: any): WsOceanResult {
+		let bonuses: Map<OceanBonusEnum, number> = new Map()
+		const entries = Object.entries(content['b']??[])
+		entries.forEach(([key, value]) => {
+			bonuses.set(key as OceanBonusEnum, value as number);
+		});
+        let result : WsOceanResult = {
+            bonuses: bonuses,
+            draw: content['d']??[],
         }
         return result
 	}

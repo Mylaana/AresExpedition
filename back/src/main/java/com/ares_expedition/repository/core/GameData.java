@@ -9,6 +9,7 @@ import java.util.Map;
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.core.Game;
+import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.repository.player_state.PlayerStateData;
@@ -26,6 +27,7 @@ public class GameData {
     private GameStatusEnum gameStatus;
     private List<GlobalParameterData> globalParameters = new ArrayList<>();
     private List<Integer> deckCorporations = new ArrayList<>();
+    private List<Ocean> oceans = new ArrayList<>();
 
     GameData() {
     }
@@ -42,6 +44,7 @@ public class GameData {
         this.gameStatus = game.getGameStatus();
         this.globalParameters = GlobalParameter.toDataList(game.getGlobalParameters());
         this.deckCorporations = game.getDeckCorporations();
+        this.oceans = game.getOceans();
     }
 
     public String getGameId() {
@@ -130,5 +133,13 @@ public class GameData {
 
     public void setDeckCorporations(List<Integer> deckCorporations) {
         this.deckCorporations = deckCorporations;
+    }
+
+    public List<Ocean> getOceans() {
+        return oceans;
+    }
+
+    public void setOceans(List<Ocean> oceans) {
+        this.oceans = oceans;
     }   
 }

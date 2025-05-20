@@ -48,6 +48,7 @@ Backend: Junit
 ## /!\BUG/!\ :
 Production phase screen not working   
 Base Phase card should not be upgradable   
+Add Forest point event has no finishEvent method in handler   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -58,6 +59,7 @@ project-card-info-service (and some other?): switch to static
 TriggerState: switch out trigger id checks from model to a service   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
+Create dedicated serverside model for oceanFlip Result   
 
 ## Planned for v1 :
 ### Backend

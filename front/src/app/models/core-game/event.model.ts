@@ -5,7 +5,9 @@ import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { EventDTO } from "../../interfaces/dto/event-dto.interface";
+import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
+import { EventStateOriginEnum } from "../../enum/eventstate.enum";
+import { EventStateFactory } from "../../services/designers/event-state-factory.service";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -29,8 +31,10 @@ export abstract class EventBaseModel {
 	hasCardActivator(): boolean {return false}
     getSelectionActive(): boolean {return false}
 	onSwitch(): void {}
-	toJson(): EventDTO | undefined {return undefined}
-	fromJson(dto: EventDTO){return}
+	toJson(eventStateOperation: EventStateOriginEnum = EventStateOriginEnum.client): EventStateDTO | undefined{
+		return EventStateFactory.toJson(this, eventStateOperation)
+	}
+	fromJson(dto: EventStateDTO){return}
 }
 
 export abstract class EventBaseCardSelector extends EventBaseModel {
@@ -73,18 +77,6 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
 export class EventCardSelector extends EventBaseCardSelector{
     override readonly type: EventType = 'cardSelector'
     override subType!: EventCardSelectorSubType
-	override toJson(): EventDTO | undefined {
-		switch(this.subType){
-			case('discardCards'):{
-				return {
-					est: this.subType,
-					ced: this.cardSelector.selectionQuantity
-				}
-				break
-			}
-			default:{return undefined}
-		}
-	}
 }
 
 export class EventCardSelectorRessource extends EventBaseCardSelector {
@@ -100,15 +92,8 @@ export class EventCardActivator extends EventBaseCardSelector {
 	doubleActivationMaxNumber!: number
 	doubleActivationCount: number = 0
 	override hasCardActivator(): boolean {return true}
-	override toJson(): EventDTO | undefined {
-		let dto: EventDTO = {
-			est: this.subType,
-			al: this.activationLog
-		}
-		return dto
-	}
-	override fromJson(dto: EventDTO): void {
-		this.activationLog = dto.al??{}
+	override fromJson(dto: EventStateDTO): void {
+		this.activationLog = dto.v??{}
 	}
 }
 
@@ -344,20 +329,10 @@ export class EventCardBuilder extends EventBaseCardSelector {
 			builder.resetBuilder()
 		}
 	}
-	override toJson(): EventDTO | undefined {
-		let dto: EventDTO = {
-			est: this.subType,
-			bl: []
-		}
-		for(let builder of this.cardBuilder){
-			dto.bl?.push(builder.getbuilderIsLocked())
-		}
-		return dto
-	}
-	override fromJson(dto: EventDTO): void {
-		if(dto.bl){
+	override fromJson(dto: EventStateDTO): void {
+		if(dto.v){
 			let index: number = 0
-			for(let locked of dto.bl){
+			for(let locked of dto.v){
 				this.cardBuilder[index].setbuilderIsLocked(locked)
 				index ++
 			}
@@ -387,6 +362,7 @@ export class EventGeneric extends EventBaseModel {
     phaseCardUpgradeQuantity?: number
 	addForestPoint?: number
 	selectedPhase?: SelectablePhaseEnum
+	gainOceanNumber?: number
 }
 
 export class EventDeckQuery extends EventBaseModel {

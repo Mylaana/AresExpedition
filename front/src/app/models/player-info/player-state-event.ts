@@ -1,9 +1,9 @@
-import { EventDTO } from "../../interfaces/dto/event-dto.interface";
+import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { PlayerEventStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { EventBaseModel } from "../core-game/event.model";
 
 export class PlayerEventStateModel {
-	eventQueueState: EventDTO[] = []
+	eventQueueState: EventStateDTO[] = []
 	constructor(dto: PlayerEventStateDTO){
 		this.eventQueueState = dto.e
 	}
@@ -16,7 +16,7 @@ export class PlayerEventStateModel {
 	}
 	toJson(eventQueue?: EventBaseModel[]): PlayerEventStateDTO {
 		if(!eventQueue){return {e:[]}}
-		let events: EventDTO[] = this.convertEventQueue(eventQueue)
+		let events: EventStateDTO[] = this.convertEventQueue(eventQueue)
 		return {e: events}
 	}
 	static empty(): PlayerEventStateModel {
@@ -24,8 +24,8 @@ export class PlayerEventStateModel {
 			e:[]
 		})
 	}
-	private convertEventQueue(eventQueue: EventBaseModel[]): EventDTO[] {
-		let result: EventDTO[] = []
+	private convertEventQueue(eventQueue: EventBaseModel[]): EventStateDTO[] {
+		let result: EventStateDTO[] = []
 		for(let event of eventQueue){
 			let dto = event.toJson()
 			if(dto){

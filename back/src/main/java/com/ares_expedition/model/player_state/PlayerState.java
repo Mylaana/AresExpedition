@@ -9,6 +9,7 @@ import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.subclass.PlayerEventState;
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
 import com.ares_expedition.model.player_state.subclass.PlayerInfoState;
@@ -18,6 +19,7 @@ import com.ares_expedition.model.player_state.subclass.PlayerProjectCardState;
 import com.ares_expedition.model.player_state.subclass.PlayerRessourceState;
 import com.ares_expedition.model.player_state.subclass.PlayerScoreState;
 import com.ares_expedition.model.player_state.subclass.PlayerTagState;
+import com.ares_expedition.model.player_state.subclass.substates.EventState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
 import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
@@ -285,6 +287,18 @@ public class PlayerState {
 
     public void setEventState(PlayerEventState eventState) {
         this.eventState = eventState;
+    }
+
+    public void addEvent(EventState event) {
+        this.eventState.addEvent(event);
+    }
+
+    public void addEventOceans(List<Ocean> oceans) {
+        this.eventState.addEventOceans(oceans);
+    }
+
+    public void addEventDrawCards(List<Integer> cards){
+        this.eventState.addEventDrawCards(cards);
     }
 
     //=============================================================

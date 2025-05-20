@@ -381,6 +381,11 @@ export class EventHandler {
 				this.gameStateService.clientPlayerValidateSelectedPhase()
 				break
 			}
+			case('oceanQuery'):{
+				if(!event.gainOceanNumber){break}
+				this.rxStompService.publishOceanQuery(event.gainOceanNumber, this.gameStateService.getClientStateDTO())
+				break
+			}
 			case('upgradePhaseCards'):{break}
 			case('waitingGroupReady'):{break}
 			default:{Utils.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}

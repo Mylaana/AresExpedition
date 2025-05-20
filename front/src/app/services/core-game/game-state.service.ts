@@ -9,17 +9,19 @@ import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { WsDrawResult, WsGroupReady, WSGroupState } from "../../interfaces/websocket.interface";
+import { WsDrawResult, WsGroupReady, WSGroupState, WsOceanResult } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
 import { EventDesigner } from "../designers/event-designer.service";
-import { EventDTO } from "../../interfaces/dto/event-dto.interface";
+import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { Utils } from "../../utils/utils";
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterNameEnum, OceanBonusEnum } from "../../enum/global.enum";
 import { GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP } from "../../global/global-const";
+import { EventStateTypeEnum } from "../../enum/eventstate.enum";
+import { EventStateFactory } from "../designers/event-state-factory.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -50,7 +52,7 @@ export class GameState{
 
     private clientId!: myUUID
     playerCount = new BehaviorSubject<myUUID[]>([]);
-	private eventQueueSavedState: EventDTO[] = []
+	private eventQueueSavedState: EventStateDTO[] = []
 
     private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
@@ -375,13 +377,7 @@ export class GameState{
 	 */
     addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
         let newQueue: EventBaseModel[] = []
-        let addEvents: EventBaseModel[] = []
-
-        if(!Array.isArray(events)){
-            addEvents.push(events)
-        } else {
-            addEvents = events
-        }
+        let addEvents: EventBaseModel[] = Utils.toArray(events)
 
         switch(addRule){
             case('last'):{
@@ -400,6 +396,7 @@ export class GameState{
         }
 		if(this.eventQueueSavedState.length>0){
 			this.loadEventQueueSavedState(newQueue)
+			newQueue = EventStateFactory.createEventsFromJson(this.eventQueueSavedState).concat(newQueue)
 		}
         this.eventQueue.next(newQueue)
     }
@@ -420,14 +417,6 @@ export class GameState{
 
         this.eventQueue.next(newEventQueue)
     }
-	/*
-	getPlayerPhaseCardHolder(playerId: number): PhaseCardHolderModel {
-		return this.groupPlayerState.getValue()[playerId].phaseCards
-	}
-	getPlayerPhaseCardGroup(playerId: number, phaseIndex: number): PhaseCardGroupModel {
-		return this.groupPlayerState.getValue()[playerId].phaseCards.phaseGroups[phaseIndex]
-	}
-	*/
 	setClientPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
 		let state = this.getClientState()
 		state.setPhaseCardUpgraded(upgrade)
@@ -482,27 +471,35 @@ export class GameState{
 	}
     addGlobalParameterStepsEOPtoClient(parameter:GlobalParameterValue): void {
 		let state = this.getClientState()
+		let newEvents: EventBaseModel[] = []
+
+		let triggers = state.getTriggersIdOnParameterIncrease()
+        if(triggers.length>0){
+			newEvents = newEvents.concat(this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
+		}
 		state.addGlobalParameterStepEOP(parameter)
 
 		//add TR if not maxed out
 		if(!state.getGlobalParameterMaxedOut(parameter.name)){
 			state.addTR(parameter.steps)
 
-			//adds forest point if oxygen not already maxed out
-			if(parameter.name===GlobalParameterNameEnum.oxygen){
-				state.addForest(parameter.steps)
+			switch(parameter.name){
+				//adds forest point if oxygen not already maxed out
+				case(GlobalParameterNameEnum.oxygen):{
+					state.addForest(parameter.steps)
+					break
+				}
+				//query server for ocean bonus
+				case(GlobalParameterNameEnum.ocean):{
+					newEvents.push(EventDesigner.createGeneric('oceanQuery', {oceanQueryNumber: parameter.steps}))
+					break
+				}
 			}
 		}
 		this.updateClientState(state)
 
-        let triggers = state.getTriggersIdOnParameterIncrease()
-        if(triggers.length===0){return}
-
-        let events = this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)
-        if(!events){return}
-
-
-        this.addEventQueue(events, 'first')
+        if(newEvents.length===0){return}
+        this.addEventQueue(newEvents, 'first')
 
     }
     addRessourceToClient(ressources: RessourceStock[]): void {
@@ -616,7 +613,7 @@ export class GameState{
 		//create events from eventqueue saved state
 		this.createEventFromEventQueueSavedState()
 		console.log('client state loaded: ', this.clientState.getValue())
-		console.log('eventstate loaded:', this.eventQueueSavedState)
+		console.log('eventstate loaded:', Utils.jsonCopy(this.eventQueueSavedState))
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
@@ -652,7 +649,6 @@ export class GameState{
 	}
 	public playCorporation(corporation: PlayableCardModel): void {
 		this.playCardFromClientHand(corporation, 'corporation')
-		console.log(this.getClientState())
 	}
 	private dtoToPlayerState(dto: PlayerStateDTO): PlayerStateModel {
 		return PlayerStateModel.fromJson(dto, this.injector)
@@ -695,10 +691,10 @@ export class GameState{
 	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
 		let playerState: PlayerStateModel = this.getClientState()
 
-		//modify clientState
 		for(let event of eventQueue){
 			for(let eventState of this.eventQueueSavedState){
-				if(event.subType===eventState.est){
+				if(EventStateFactory.shouldLoadEventFromThisSavedState(event, eventState)){
+					//specific cases
 					switch(event.type){
 						case('cardActivator'):{
 							playerState.loadEventStateActivator(eventState)
@@ -706,24 +702,45 @@ export class GameState{
 						}
 					}
 
+					//generic cases applied from event function
 					event.fromJson(eventState)
 					this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
 					break
 				}
 			}
-
 		}
 	}
 	private createEventFromEventQueueSavedState(): void {
 		let newEvents: EventBaseModel[] = []
 		for(let eventState of this.eventQueueSavedState){
-			if(eventState.ced){
-				newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
+			if(eventState.t === EventStateTypeEnum.discard){
+				//newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
 				this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
 			}
 		}
 		if(newEvents.length===0){return}
 		this.addEventQueue(newEvents, 'first')
 		console.log('eventqueue:',this.eventQueue.getValue())
+	}
+	public addOceanBonus(oceanBonus: WsOceanResult){
+		let ressources: RessourceStock[] = []
+		let newEvents: EventBaseModel[] = []
+		for(let [key, value] of oceanBonus.bonuses){
+			if(value===0){continue}
+			switch(key){
+				case OceanBonusEnum.megacredit:
+					ressources.push({name: "megacredit", valueStock: value??0})
+					break
+				case OceanBonusEnum.plant:
+					ressources.push({name: "plant", valueStock: value??0})
+					break
+			}
+		}
+		if(ressources.length>0){newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:ressources}))}
+		if(oceanBonus.draw.length>0){this.addCardsToClientHand(oceanBonus.draw)}
+
+		if(newEvents.length>0){
+			this.addEventQueue(newEvents,'first')
+		}
 	}
 }

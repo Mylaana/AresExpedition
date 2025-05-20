@@ -27,6 +27,7 @@ interface CreateEventOptionsGeneric {
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number
 	addForestPoint?: number
+	oceanQueryNumber?: number
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -281,6 +282,10 @@ export class EventDesigner{
             }
 			case('addForestPoint'):{
 				event.addForestPoint = args?.addForestPoint
+				break
+			}
+			case('oceanQuery'):{
+				event.gainOceanNumber = args?.oceanQueryNumber
 				break
 			}
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}

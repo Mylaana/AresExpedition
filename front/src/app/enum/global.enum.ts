@@ -4,3 +4,8 @@ export enum GlobalParameterNameEnum {
 	temperature = 'TEMPERATURE',
 	oxygen = 'OXYGEN'
 }
+export enum OceanBonusEnum {
+	megacredit = 'MEGACREDIT',
+	card = 'CARD',
+	plant = 'PLANT'
+}
