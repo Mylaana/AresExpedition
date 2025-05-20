@@ -88,7 +88,7 @@ app-hexed-background{
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	height: calc(var(--card-height) * .18);
-	&.upgraded{
+	&.upgradable{
 		height: calc(var(--card-height) * .04);
 		margin-bottom: calc(var(--card-height) * .14);
 	}

@@ -1,5 +1,5 @@
 <div class="wrapper-main"
-	[class.upgraded]="phaseGroupUpgraded===false || state.isUpgraded()===true">
+	[class.upgraded]="isCurrentUpgrade()">
 	<div class="wrapper-phase-card">
 		<div class="wrapper-description ares-background ares-border">
 			<h5>Ability</h5>
@@ -16,11 +16,10 @@
 	</div>
 
 	<div class="wrapper-upgrade ares-border ares-background"
-		[class.upgraded]="phaseGroupUpgraded===true || state.isUpgraded()===true">
+		[class.upgradable]="isUpgradeable()===false">
 		<div class="wrapper-button"
-			*ngIf="state.isUpgraded()!=true && state?.isUpgradable()==true && phaseGroupUpgraded===false">
+			*ngIf="isUpgradeable()">
 			<app-non-event-button [shape]="'small'" [button]="_upgradeButton" (buttonClicked)="upgrade()"></app-non-event-button>
 		</div>
 	</div>
 </div>
-

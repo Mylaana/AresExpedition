@@ -46,7 +46,6 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Base Phase card should not be upgradable   
 Add Forest point event has no finishEvent method in handler   
 
 ## Refactoring :
