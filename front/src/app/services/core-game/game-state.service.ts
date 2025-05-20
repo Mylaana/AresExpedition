@@ -743,4 +743,8 @@ export class GameState{
 			this.addEventQueue(newEvents,'first')
 		}
 	}
+
+	isClient(playerId: myUUID): boolean {
+		return playerId===this.clientId
+	}
 }

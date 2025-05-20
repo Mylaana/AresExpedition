@@ -80,6 +80,7 @@ export class PlayerStateModel {
 
 	//ressourceState
 	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}
+	setRessources(ressources: RessourceInfo[]){this.ressourceState.setRessources(ressources)}
 	getRessourceInfoFromId(id: number): RessourceInfo | undefined {return this.ressourceState.getRessourceInfoFromId(id)}
 	getRessourceInfoFromType(type: RessourceType): RessourceInfo | undefined {return this.ressourceState.getRessourceStateFromType(type)}
 	addRessource(type: RessourceType, quantity: number): void {this.ressourceState.addRessource(type, quantity)}
