@@ -61,38 +61,35 @@ Optimize data volume exchanged
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
 Create dedicated serverside model for oceanFlip Result   
 
-## Planned for v1 :
-### Backend
+## Must have for v1 :
 
 ### Cards
 Prerequisites for playing project cards feature
 Add back mod cost calculation in hand (removed cause of Expression had changed error), error was due to card showing in hand and cost mod calculated in builder selector with cost modified, this will need to switch projectCardInfoService to returning new cards instances   
 
 ### Misc
-Add Ocean backend mechanic
-Add settings options   
 Add victory check   
 Add Event removing any ressource in list on played card   
 
 ### Interface
-Add Ocean bonus description   
+Add Ocean bonus description, display what is the current ocean clearly    
+Use consistent colors for current/Aep Global parameter / Ocean step   
+
+### CI/CD
+Frontend automated testing: Ongoing   
+Backend automated testing: no backend yet   
+Deploy on AWS Lightsail   
+
+### Security
+Add backend REST requests content validation   
+
+## Nice to have for v1
+### Interface
+Add Display property for current event, so the screen does not flash when resolving technical events   
+Add log   
 Add main buttons help popup   
 Add onClick visual effect for buttons   
 Add popup-like window for non-production phase gains   
-Add log   
 
-### CI
-Frontend automated testing: Ongoing  
-Backend automated testing: no backend yet  
-Github Actions Build & test
-
-### CD
-Nothing done yet  
-Tech TBD  
-
-### Backend
-Add requests validation
-
-### Deployment
-CI/CD Pipeline
-Cloud option selection
+### Misc
+Add settings options   
