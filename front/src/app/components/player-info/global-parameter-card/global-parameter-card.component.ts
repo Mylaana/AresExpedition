@@ -75,7 +75,73 @@ export class GlobalParameterCardComponent implements OnInit {
 	getCurrentStepColor(): GlobalParameterColor {
 		return this.getStepColor(this._progressionList[this.currentStep])
 	}
+	isCurrentStep(bubble: number): boolean {
+		return bubble===this._progressionList[this.currentStep]
+	}
 	isCurrentAddEOP(bubble: number): boolean {
 		return this.addEop>0 && bubble===this._progressionList[Math.min(this.currentStep+this.addEop, this._maxStep-1)]
+	}
+	isFirstOfColor(bubble: number): boolean {
+		switch(this.parameter){
+			case(GlobalParameterNameEnum.oxygen):{
+				switch(bubble){
+					case(0):{return true}
+					case(0.03):{return true}
+					case(0.07):{return true}
+					case(0.12):{return true}
+					default:{return false}
+				}
+			}
+			case(GlobalParameterNameEnum.infrastructure):{
+				switch(bubble){
+					case(0):{return true}
+					case(.27):{return true}
+					case(.56):{return true}
+					case(.85):{return true}
+					default:{return false}
+				}
+			}
+			case(GlobalParameterNameEnum.temperature):{
+				switch(bubble){
+					case(-18):{return true}
+					case(-8):{return true}
+					case(2):{return true}
+					default:{return false}
+				}
+			}
+			default:{return false}
+		}
+	}
+	isLastOfColor(bubble: number): boolean {
+		switch(this.parameter){
+			case(GlobalParameterNameEnum.oxygen):{
+				switch(bubble){
+					case(0.02):{return true}
+					case(0.06):{return true}
+					case(0.11):{return true}
+					case(0.14):{return true}
+					default:{return false}
+				}
+			}
+			case(GlobalParameterNameEnum.infrastructure):{
+				switch(bubble){
+					case(.14):{return true}
+					case(.49):{return true}
+					case(.77):{return true}
+					case(1):{return true}
+					default:{return false}
+				}
+			}
+			case(GlobalParameterNameEnum.temperature):{
+				switch(bubble){
+					case(-20):{return true}
+					case(-10):{return true}
+					case(0):{return true}
+					case(8):{return true}
+					default:{return false}
+				}
+			}
+			default:{return false}
+		}
 	}
 }

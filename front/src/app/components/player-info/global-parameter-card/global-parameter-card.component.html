@@ -8,10 +8,10 @@
 		[ngClass]="getStepColor(bubble)"
 		[class]="parameter">
 		<div class="bubble"
-			[class.current]="bubble===_progressionList[currentStep]"
+			[class.current]="isCurrentStep(bubble)"
 			[class.add-eop]="isCurrentAddEOP(bubble)"
-			[class.first]="currentStep===0"
-			[class.last]="bubble===_progressionList[_progressionList.length-1]"
+			[class.first]="isFirstOfColor(bubble)"
+			[class.last]="isLastOfColor(bubble)"
 			[ngClass]="getStepColor(bubble)"
 			[class]="parameter">
 		</div>

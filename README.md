@@ -71,9 +71,7 @@ Add Event removing any ressource in list on played card
 
 ### Interface
 Add Ocean bonus description, display what is the current ocean clearly    
-Use consistent colors for current/Aep Global parameter / Ocean step   
 Design production phase screen, add cards drew display   
-Improve shadowing on top/bottom sides oceans   
 Create switch button   
 
 ### CI/CD
