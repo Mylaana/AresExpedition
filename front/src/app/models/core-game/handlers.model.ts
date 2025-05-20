@@ -388,6 +388,12 @@ export class EventHandler {
 			}
 			case('upgradePhaseCards'):{break}
 			case('waitingGroupReady'):{break}
+			case('addForestPoint'):{
+				if(event.addForestPoint){
+					this.gameStateService.addForestPoint(event.addForestPoint)
+				}
+				break
+			}
 			default:{Utils.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}
@@ -632,6 +638,8 @@ class PhaseResolveHandler {
 						+ newClientRessource[i].valueProd
 						+ clientState.getTR()
 						+ this.getProductionPhaseCardSelectionBonus()
+
+						clientState.setRessources(newClientRessource)
 					break
 				}
 				//heat and plant producition
@@ -639,6 +647,8 @@ class PhaseResolveHandler {
 					newClientRessource[i].valueStock =
 						newClientRessource[i].valueStock
 						+ newClientRessource[i].valueProd
+
+					clientState.setRessources(newClientRessource)
 					break
 				}
 				//Cards production
@@ -652,6 +662,7 @@ class PhaseResolveHandler {
 				}
 			}
 		}
+		console.log('prod :',clientState, newClientRessource)
 
 		this.gameStateService.updateClientState(clientState)
 	}

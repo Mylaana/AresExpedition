@@ -36,7 +36,6 @@ export class PhaseCardComponent extends BaseCardComponent {
 		super.ngOnInit()
 		if(this.phaseIndex===undefined){this.phaseIndex=0}
 		this.setState()
-		console.log(this.phaseCard)
 	}
 
 	upgrade(){
@@ -49,6 +48,27 @@ export class PhaseCardComponent extends BaseCardComponent {
 		this.setState()
 	}
 	private setState(): void {
-		this.state.setUpgraded(this.phaseCard.phaseCardUpgraded)
+		this.state.setUpgraded(this.phaseCard.phaseCardUpgraded || (this.phaseCardLevel===0 && this.phaseGroupUpgraded))
+	}
+	isUpgradeable(): boolean {
+		switch(this.phaseCardLevel){
+			case(0):{
+				return false
+			}
+			default:{
+				return this.state.isUpgraded()!=true && this.state?.isUpgradable()==true && this.phaseGroupUpgraded===false
+			}
+		}
+
+	}
+	isCurrentUpgrade(): boolean {
+		switch(this.phaseCardLevel){
+			case(0):{
+				return this.phaseGroupUpgraded===false
+			}
+			default:{
+				return this.phaseGroupUpgraded===false || this.state.isUpgraded()
+			}
+		}
 	}
 }

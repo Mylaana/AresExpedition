@@ -40,7 +40,7 @@ private parameters: GlobalParameter[] = []
 		}
 		this.parameters[parameterIndex].addEndOfPhase += parameter.steps
 	}
-	getGlobalParameterMaxedOut(parameterName: GlobalParameterNameEnum): boolean {
+	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {
 		for(let param of this.parameters){
 			if(param.name===parameterName){
 				switch(param.name){

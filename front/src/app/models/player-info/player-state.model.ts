@@ -80,6 +80,7 @@ export class PlayerStateModel {
 
 	//ressourceState
 	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}
+	setRessources(ressources: RessourceInfo[]){this.ressourceState.setRessources(ressources)}
 	getRessourceInfoFromId(id: number): RessourceInfo | undefined {return this.ressourceState.getRessourceInfoFromId(id)}
 	getRessourceInfoFromType(type: RessourceType): RessourceInfo | undefined {return this.ressourceState.getRessourceStateFromType(type)}
 	addRessource(type: RessourceType, quantity: number): void {this.ressourceState.addRessource(type, quantity)}
@@ -107,7 +108,7 @@ export class PlayerStateModel {
 		}
 		return
 	}
-	getGlobalParameterMaxedOut(parameterName: GlobalParameterNameEnum): boolean {return this.globalParameterState.getGlobalParameterMaxedOut(parameterName)}
+	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {return this.globalParameterState.isGlobalParameterMaxedOutAtPhaseBeginning(parameterName)}
 
 	//otherState
 	getResearch(): ScanKeep {return this.otherState.getResearch()}

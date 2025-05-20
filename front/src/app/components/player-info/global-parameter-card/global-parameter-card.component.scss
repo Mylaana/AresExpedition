@@ -72,11 +72,9 @@ app-text-with-image{
 	}
 	&.current{
 		background: var(--color-ares-green-light);
-		//border-color: var(--color-ares-orange);
-		//box-shadow: 0px 0px 5px 0px $value;
 	}
 	&.add-eop{
-		background: var(--color-ares-blue-light);
+		background-color: rgba(255, 255, 255, 0.9);
 	}
 }
 .wrapper-bubble{

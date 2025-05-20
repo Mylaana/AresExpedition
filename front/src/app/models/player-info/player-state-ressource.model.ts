@@ -43,6 +43,9 @@ export class PlayerRessourceStateModel {
 	getRessources(): RessourceInfo[] {
 		return this.ressources
 	}
+	setRessources(ressources: RessourceInfo[]){
+		this.ressources = ressources
+	}
 	getRessourceInfoFromId(ressourceId: number): RessourceInfo | undefined {
         for(let i=0; i<this.ressources.length; i++){
             if(this.ressources[i].id === ressourceId){
