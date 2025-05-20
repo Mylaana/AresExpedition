@@ -513,12 +513,6 @@ describe('Service - Designers - Event', () => {
                             expectedArgs = {baseRessource:expectedRessource}
                             break
                         }
-                        case('buildCard'):{
-                            let expectedCardId: number = 250
-                            expectedEvent.cardIdToBuild = expectedCardId
-                            expectedArgs = {cardId:expectedCardId}
-                            break
-                        }
                         case('endOfPhase'):{
                             break
                         }
