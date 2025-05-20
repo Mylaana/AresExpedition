@@ -1,20 +1,19 @@
-	<div class="wrapper-icon">
-		<app-text-with-image [rawText]="'$other_'+parameter.toLocaleLowerCase()"></app-text-with-image>
-	</div>
-	<div class="wrapper-progression-bar"
-		[ngClass]="getCurrentStepColor()">
-		<div *ngFor="let bubble of _progressionList" class="wrapper-bubble"
+<div class="wrapper-icon">
+	<app-text-with-image [rawText]="'$other_'+parameter.toLocaleLowerCase()"></app-text-with-image>
+</div>
+<div class="wrapper-progression-bar"
+	[ngClass]="getCurrentStepColor()">
+	<div *ngFor="let bubble of _progressionList" class="wrapper-bubble"
+		[class.current]="bubble===_progressionList[currentStep]"
+		[ngClass]="getStepColor(bubble)"
+		[class]="parameter">
+		<div class="bubble"
 			[class.current]="bubble===_progressionList[currentStep]"
+			[class.add-eop]="isCurrentAddEOP(bubble)"
+			[class.first]="currentStep===0"
+			[class.last]="bubble===_progressionList[_progressionList.length-1]"
 			[ngClass]="getStepColor(bubble)"
 			[class]="parameter">
-			<div class="bubble"
-				[class.current]="bubble===_progressionList[currentStep]"
-				[class.add-eop]="bubble===_progressionList[currentStep+addEop] && addEop>0"
-				[class.first]="currentStep===0"
-				[class.last]="bubble===_progressionList[_progressionList.length-1]"
-				[ngClass]="getStepColor(bubble)"
-				[class]="parameter">
-			</div>
 		</div>
 	</div>
-
+</div>

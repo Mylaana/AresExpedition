@@ -75,4 +75,7 @@ export class GlobalParameterCardComponent implements OnInit {
 	getCurrentStepColor(): GlobalParameterColor {
 		return this.getStepColor(this._progressionList[this.currentStep])
 	}
+	isCurrentAddEOP(bubble: number): boolean {
+		return this.addEop>0 && bubble===this._progressionList[Math.min(this.currentStep+this.addEop, this._maxStep-1)]
+	}
 }
