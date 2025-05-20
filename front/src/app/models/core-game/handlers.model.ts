@@ -256,15 +256,15 @@ export class EventHandler {
 			}
 			case('researchPhaseResult'):{
 				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
-					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
 				)
 				break
 			}
 			case('scanKeepResult'):{
 				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
-					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
 				)
 				break
 			}

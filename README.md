@@ -60,10 +60,8 @@ Refactor playable cards component should be storing clientstate and not repeated
 Create dedicated serverside model for oceanFlip Result   
 
 ## Must have for v1 :
-
 ### Cards
 Prerequisites for playing project cards feature
-Add back mod cost calculation in hand (removed cause of Expression had changed error), error was due to card showing in hand and cost mod calculated in builder selector with cost modified, this will need to switch projectCardInfoService to returning new cards instances   
 
 ### Misc
 Add victory check   

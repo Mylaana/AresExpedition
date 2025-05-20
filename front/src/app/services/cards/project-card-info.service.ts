@@ -4,6 +4,7 @@ import jsonData from '../../../assets/data/cards_data.json'
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
 import { AdvancedRessourceType } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
+import { PlayableCardInterface } from "../../interfaces/card.interface";
 
 const language = 'en'
 
@@ -19,10 +20,12 @@ const stockableMap = new Map<string, AdvancedRessourceType>(
     providedIn: 'root'
 })
 export class ProjectCardInfoService {
-    projectCardInfo: PlayableCardModel[] = this.loadJson()
+	private projectCardInfo: PlayableCardInterface[] = this.loadJson()
 
-    getCardById(cardId:number): PlayableCardModel | undefined {
-        return this.projectCardInfo.find(x => x.id === cardId)
+	getCardById(cardId:number): PlayableCardModel | undefined {
+		let card = this.projectCardInfo.find(x => x.id === cardId)
+		if(!card){return}
+        return PlayableCardModel.fromInterface(card)
     }
 
     getProjectCardIdList(): number[] {
@@ -34,7 +37,14 @@ export class ProjectCardInfoService {
     }
 
 	getAllProjectCard(): PlayableCardModel[]{
-		return this.projectCardInfo
+		let result: PlayableCardModel[] = []
+		for(let card of this.projectCardInfo){
+			let cardModel = PlayableCardModel.fromInterface(card)
+			if(cardModel){
+				result.push(cardModel)
+			}
+		}
+		return result
 	}
     getProjectCardList(cardIdList: number[]): PlayableCardModel[] {
         let resultProjectCardList: PlayableCardModel[] = [];
@@ -46,52 +56,51 @@ export class ProjectCardInfoService {
         });
         return resultProjectCardList;
     }
-    getProjectCardIdListFromModel(cards: PlayableCardModel[]): number[] {
+    public static getProjectCardIdListFromModel(cards: PlayableCardModel[]): number[] {
         let idList: number[] = []
         for(let card of cards){
             idList.push(card.id)
         }
         return idList
     }
-    private getCardNumber(){
-        return this.projectCardInfo.length
-    }
-    private loadJson(): PlayableCardModel[] {
+    private loadJson(): PlayableCardInterface[] {
 
         this.projectCardInfo = []
         let cardList: PlayableCardModel[] = []
 
         for(let jsonCard of jsonData){
-            let card = new PlayableCardModel
+            let card: PlayableCardInterface = {
+				id: jsonCard.id,
+				cardCode: jsonCard.card_code,
+				origin: jsonCard.origin,
+				costInitial: jsonCard.cost,
+				tagsId: this.convertTagList(jsonCard.tagsId),
+				cardSummaryType: this.convertSummaryType(jsonCard.effectSummaryType),
+				cardType: this.convertCardType(jsonCard.cardType),
+				vpNumber: jsonCard.vpNumber,
+				prerequisiteTresholdType: this.convertPrerequisiteTresholdType(jsonCard.prerequisiteTresholdType),
+				prerequisiteType: this.convertPrerequisiteType(jsonCard.prerequisiteType),
+				prerequisiteTresholdValue: Number(jsonCard.prerequisiteTresholdValue),
+				phaseUp: jsonCard.phaseUp,
+				phaseDown: jsonCard.phaseDown,
 
-            card.id = jsonCard.id
-            card.cardCode = jsonCard.card_code
-            card.origin = jsonCard.origin
-            card.costInitial = jsonCard.cost
-            card.tagsId = this.convertTagList(jsonCard.tagsId)
-            card.cardSummaryType = this.convertSummaryType(jsonCard.effectSummaryType)
-            card.cardType = this.convertCardType(jsonCard.cardType)
-            card.vpNumber = jsonCard.vpNumber
-            card.prerequisiteTresholdType = this.convertPrerequisiteTresholdType(jsonCard.prerequisiteTresholdType)
-            card.prerequisiteType = this.convertPrerequisiteType(jsonCard.prerequisiteType)
-            card.prerequisiteTresholdValue = Number(jsonCard.prerequisiteTresholdValue)
-            card.phaseUp = jsonCard.phaseUp
-            card.phaseDown = jsonCard.phaseDown
-
-            card.title = jsonCard.title[language]
-            card.vpText = jsonCard.vpText[language]
-            card.effectSummaryText = jsonCard.effectSummaryText[language]
-            card.effectText = jsonCard.effectText[language]
-            card.playedText = jsonCard.playedText[language]
-            card.prerequisiteText = jsonCard.prerequisiteText[language]
-            card.prerequisiteSummaryText = jsonCard.prerequisiteSummaryText[language]
-            card.stockable = this.convertStockable(jsonCard.stockable)
-			card.startingMegacredits = jsonCard.startingMegacredits
-			for(let stock of card.stockable){
-				card.setInitialStock(stock)
+				title: jsonCard.title[language],
+				vpText: jsonCard.vpText[language],
+				effectSummaryText: jsonCard.effectSummaryText[language],
+				effectText: jsonCard.effectText[language],
+				playedText: jsonCard.playedText[language],
+				prerequisiteText: jsonCard.prerequisiteText[language],
+				prerequisiteSummaryText: jsonCard.prerequisiteSummaryText[language],
+				stockable: this.convertStockable(jsonCard.stockable),
+				startingMegacredits: jsonCard.startingMegacredits,
 			}
-
-            cardList.push(card)
+			let cardModel = PlayableCardModel.fromInterface(card)
+			if(card.stockable){
+				for(let stock of card.stockable){
+					cardModel.setInitialStock(stock)
+				}
+			}
+            cardList.push(cardModel)
         }
         return cardList
     }
