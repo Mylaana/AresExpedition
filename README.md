@@ -71,7 +71,7 @@ Add Event removing any ressource in list on played card
 
 ### Interface
 Add Ocean bonus description, display what is the current ocean clearly    
-Design production phase screen, add cards drew display   
+Design production phase screen   
 Create switch button   
 
 ### CI/CD
@@ -89,6 +89,8 @@ Add log
 Add main buttons help popup   
 Add onClick visual effect for buttons   
 Add popup-like window for non-production phase gains   
+Action phase: Switch buttons to vertical on the left
+Production phase: add cards drew display   
 
 ### Responsiveness
 Game creation menu
