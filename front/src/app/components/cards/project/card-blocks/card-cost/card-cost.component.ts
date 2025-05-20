@@ -20,6 +20,6 @@ export class CardCostComponent implements OnInit {
 		this._color = Utils.toCardTypeColor(this.cardType)
 	}
 	isCostMod(): boolean {
-		return this.cost!=this.costInitial //&& this.cardLocation !='hand'
+		return this.cost!=this.costInitial && this.cardLocation !='played'
 	}
 }

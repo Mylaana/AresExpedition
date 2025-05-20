@@ -6,6 +6,7 @@ import { ButtonDesigner } from "./button-designer.service";
 import { BuilderType} from "../../types/phase-card.type";
 import { CardBuilderOptionType } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
+import { PlayableCardModel } from "../../models/cards/project-card.model";
 
 type CardSelectorOptions = Partial<CardSelector>
 
@@ -21,7 +22,7 @@ interface CreateEventOptionsGeneric {
     increaseParameter?: GlobalParameterValue
     baseRessource?: RessourceStock | RessourceStock[]
     scanKeep?: ScanKeep
-    cardId?: number
+    card?: PlayableCardModel
     drawEventResult?:number[]
     waiterId?:number
     phaseCardUpgradeList?: number[]
@@ -264,7 +265,7 @@ export class EventDesigner{
                 break
             }
             case('buildCard'):{
-                event.cardIdToBuild = args?.cardId
+                event.cardIdToBuild = args?.card
                 break
             }
             case('endOfPhase'):{break}
