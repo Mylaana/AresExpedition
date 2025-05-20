@@ -258,9 +258,9 @@ export class EventCardBuilder extends EventBaseCardSelector {
             }
         }
     }
-    getCardToBuildId(): number | undefined {
+    getCardToBuildId(): PlayableCardModel | undefined {
         if(this.cardBuilderIdHavingFocus===undefined){return}
-        return this.cardBuilder[this.cardBuilderIdHavingFocus].getSelectedCard()?.id
+        return this.cardBuilder[this.cardBuilderIdHavingFocus].getSelectedCard()
     }
     cardBuilderButtonClicked(button: EventCardBuilderButton): void {
         if(this.cardBuilderIdHavingFocus===undefined){return}
@@ -356,7 +356,7 @@ export class EventGeneric extends EventBaseModel {
     increaseParameter?: GlobalParameterValue
     increaseResearchScanKeep?: Partial<ScanKeep>
     baseRessource?:RessourceStock | RessourceStock[]
-    cardIdToBuild?: number
+    cardIdToBuild?: PlayableCardModel
     drawResultList?: number[]
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeQuantity?: number

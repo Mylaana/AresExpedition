@@ -60,9 +60,9 @@ export class EventHandler {
 		event.cardBuilderButtonClicked(button)
 		switch(button.name){
 			case('buildCard'):{
-				let cardId = event.getCardToBuildId()
-				if(cardId===undefined){return}
-				this.gameStateService.addEventQueue(EventDesigner.createGeneric('buildCard', {cardId:cardId}), 'first')
+				let card = event.getCardToBuildId()
+				if(card===undefined){return}
+				this.gameStateService.addEventQueue(EventDesigner.createGeneric('buildCard', {card:card}), 'first')
 				break
 			}
 			case('drawCard'):{
@@ -256,15 +256,15 @@ export class EventHandler {
 			}
 			case('researchPhaseResult'):{
 				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
-					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
 				)
 				break
 			}
 			case('scanKeepResult'):{
 				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
-					this.projectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
 				)
 				break
 			}
@@ -336,9 +336,7 @@ export class EventHandler {
 				break
 			}
 			case('buildCard'):{
-				let cardId = event.cardIdToBuild
-				if(cardId===undefined){break}
-				let card = this.projectCardInfoService.getCardById(cardId)
+				let card = event.cardIdToBuild
 				if(card===undefined){break}
 				this.gameStateService.playCardFromClientHand(card, 'project')
 				break

@@ -3,13 +3,15 @@ import { AdvancedRessourceType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
+import { PlayableCardInterface } from "../../interfaces/card.interface"
+import { Utils } from "../../utils/utils"
 
-export class PlayableCardModel {
+export class PlayableCardModel{
     id!: number;
     cardCode!: string;
     origin!: string;
     costInitial!: number;
-	cost!: number;
+	cost: number = this.costInitial
     tagsId!: number[];
     cardSummaryType?: SummaryType;
     cardType!: CardType;
@@ -132,6 +134,9 @@ export class PlayableCardModel {
 			i: this.id,
 			s: this.stock??[]
 		}
+	}
+	public static fromInterface(input: PlayableCardInterface): PlayableCardModel {
+		return Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))
 	}
 }
 

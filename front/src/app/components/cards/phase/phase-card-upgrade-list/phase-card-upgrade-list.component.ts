@@ -56,7 +56,6 @@ export class PhaseCardUpgradeListComponent {
 	setUpgradeFinished(): void {
 		this.upgradeFinished = true
 		this.stateFromParent = Utils.toFullCardState({upgradable: this.canUpgrade()})
-		console.log(this.phaseGroup.phaseIndex, )
 	}
 	canUpgrade(): boolean {
 		if(this.upgradeFinished){return false}

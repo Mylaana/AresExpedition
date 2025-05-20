@@ -9,7 +9,7 @@ import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { WsDrawResult, WsGroupReady, WSGroupState, WsOceanResult } from "../../interfaces/websocket.interface";
+import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
@@ -19,7 +19,6 @@ import { EventDesigner } from "../designers/event-designer.service";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterNameEnum, OceanBonusEnum } from "../../enum/global.enum";
-import { GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP } from "../../global/global-const";
 import { EventStateTypeEnum } from "../../enum/eventstate.enum";
 import { EventStateFactory } from "../designers/event-state-factory.service";
 
@@ -430,10 +429,10 @@ export class GameState{
 	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{
         let events: EventBaseModel[] = []
 		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientState(), cardType)
-		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
-
         this.updateClientState(newState)
+		console.log('played',Utils.jsonCopy(card))
 
+		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
 
         //check for triggers and add them to queue
         let onPlayedTriggers = newState.getTriggersIdOnPlayedCard()
