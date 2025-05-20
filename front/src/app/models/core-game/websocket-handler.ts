@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsReadyQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanQuery, WsOceanResult, WsReadyQuery } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
@@ -31,7 +31,7 @@ export class WebsocketHandler {
 				break
 			}
 			case(PlayerMessageContentResultEnum.oceanResult):{
-				this.handleMessageOceanResult(message.content)
+				this.handleMessageOceanResult(WebsocketResultMessageFactory.inputToOceanResult(message.content))
 				break
 			}
             default:{
@@ -152,7 +152,7 @@ export class WebsocketHandler {
 	private handleGroupMessageSelectedPhaseList(content: SelectablePhaseEnum[]){
 
 	}
-	private handleMessageOceanResult(content: any){
-		console.log('UNHANDLED OCEAN RESULT:', content)
+	private handleMessageOceanResult(content: WsOceanResult){
+		this.gameStateService.addOceanBonus(content)
 	}
 }

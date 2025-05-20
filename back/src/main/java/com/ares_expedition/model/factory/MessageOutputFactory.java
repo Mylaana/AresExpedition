@@ -43,14 +43,32 @@ public class MessageOutputFactory {
     }
 
     public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, List<Ocean> oceans, List<Integer> cardsToDraw){
-        List<Map<RessourceEnum, Integer>> bonuses = new ArrayList<>();
+        Map<RessourceEnum, Integer> bonuses = new HashMap<>();
         Map<String, Object> content = new HashMap<>();
+        Integer megacredits = 0;
+        Integer plants = 0;
+        Integer cards = 0;
+
         for(Ocean ocean: oceans){
-            bonuses.add(ocean.getBonuses());
+            Map<RessourceEnum, Integer> oceanBonus = ocean.getBonuses();
+            if(oceanBonus.get(RessourceEnum.MEGACREDIT)!=null){
+                megacredits += oceanBonus.get(RessourceEnum.MEGACREDIT);
+                bonuses.put(RessourceEnum.MEGACREDIT, megacredits);
+            }
+            if(oceanBonus.get(RessourceEnum.PLANT)!=null){
+                plants += oceanBonus.get(RessourceEnum.PLANT);
+                bonuses.put(RessourceEnum.PLANT, plants);
+            }
+            if(oceanBonus.get(RessourceEnum.CARD)!=null){
+                cards += oceanBonus.get(RessourceEnum.CARD);
+                bonuses.put(RessourceEnum.CARD, cards);
+            }
+            
+            //bonuses.add(ocean.getBonuses());
         }
-        content.put("BONUSES", bonuses);
+        content.put("b", bonuses);
         if(cardsToDraw.size()>0){
-            content.put("DRAW", cardsToDraw);
+            content.put("d", cardsToDraw);
         }
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.OCEAN_RESULT, content);
     }
@@ -58,7 +76,7 @@ public class MessageOutputFactory {
     public static BaseMessageOutputDTO createStartGameMessage(String gameId, Object content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.START_GAME, content);
     }
-         */
+    */
     public static BaseMessageOutputDTO createSelectStartingHandMessage(String gameId,  GameStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.SELECT_STARTING_HAND, content);
     }

@@ -15,13 +15,16 @@ public class Ocean {
         switch (initializeIndex) {
             case 0:
                 this.bonuses.put(RessourceEnum.PLANT, 2);
+                this.bonuses.put(RessourceEnum.CARD, 1); // remove
                 break;
             case 1:
                 this.bonuses.put(RessourceEnum.MEGACREDIT, 4);
+                this.bonuses.put(RessourceEnum.CARD, 1); // remove
                 break;
             case 2:
                 this.bonuses.put(RessourceEnum.PLANT, 1);
                 this.bonuses.put(RessourceEnum.MEGACREDIT, 2);
+                this.bonuses.put(RessourceEnum.CARD, 1); // remove
                 break;
             case 3:
                 this.bonuses.put(RessourceEnum.CARD, 1);
@@ -40,9 +43,11 @@ public class Ocean {
             case 7:
                 this.bonuses.put(RessourceEnum.PLANT, 1);
                 this.bonuses.put(RessourceEnum.MEGACREDIT, 1);
+                this.bonuses.put(RessourceEnum.CARD, 1); // remove
                 break;
             case 8:
                 this.bonuses.put(RessourceEnum.PLANT, 2);
+                this.bonuses.put(RessourceEnum.CARD, 1); // remove
                 break;
             default:
                 break;

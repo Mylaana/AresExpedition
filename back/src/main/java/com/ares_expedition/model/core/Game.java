@@ -356,6 +356,7 @@ public class Game {
 
     public List<Integer> drawFlippedOceanCards(String playerId, List<Ocean> flippedOceans) {
         List<Integer> drawFromFlipped = new ArrayList<>();
+
         for(Ocean ocean: flippedOceans){
             Integer cardsToDraw = ocean.getBonuses().get(RessourceEnum.CARD);
             if(cardsToDraw != null){

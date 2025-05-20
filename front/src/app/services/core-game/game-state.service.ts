@@ -9,7 +9,7 @@ import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { WsDrawResult, WsGroupReady, WSGroupState } from "../../interfaces/websocket.interface";
+import { WsDrawResult, WsGroupReady, WSGroupState, WsOceanResult } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
@@ -18,7 +18,7 @@ import { GameParamService } from "./game-param.service";
 import { EventDesigner } from "../designers/event-designer.service";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { Utils } from "../../utils/utils";
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterNameEnum, OceanBonusEnum } from "../../enum/global.enum";
 import { GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP } from "../../global/global-const";
 import { EventStateTypeEnum } from "../../enum/eventstate.enum";
 import { EventStateFactory } from "../designers/event-state-factory.service";
@@ -613,7 +613,7 @@ export class GameState{
 		//create events from eventqueue saved state
 		this.createEventFromEventQueueSavedState()
 		console.log('client state loaded: ', this.clientState.getValue())
-		console.log('eventstate loaded:', this.eventQueueSavedState)
+		console.log('eventstate loaded:', Utils.jsonCopy(this.eventQueueSavedState))
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
@@ -721,5 +721,26 @@ export class GameState{
 		if(newEvents.length===0){return}
 		this.addEventQueue(newEvents, 'first')
 		console.log('eventqueue:',this.eventQueue.getValue())
+	}
+	public addOceanBonus(oceanBonus: WsOceanResult){
+		let ressources: RessourceStock[] = []
+		let newEvents: EventBaseModel[] = []
+		for(let [key, value] of oceanBonus.bonuses){
+			if(value===0){continue}
+			switch(key){
+				case OceanBonusEnum.megacredit:
+					ressources.push({name: "megacredit", valueStock: value??0})
+					break
+				case OceanBonusEnum.plant:
+					ressources.push({name: "plant", valueStock: value??0})
+					break
+			}
+		}
+		if(ressources.length>0){newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:ressources}))}
+		if(oceanBonus.draw.length>0){this.addCardsToClientHand(oceanBonus.draw)}
+
+		if(newEvents.length>0){
+			this.addEventQueue(newEvents,'first')
+		}
 	}
 }
