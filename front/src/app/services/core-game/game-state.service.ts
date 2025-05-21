@@ -394,8 +394,10 @@ export class GameState{
             }
         }
 		if(this.eventQueueSavedState.length>0){
+			//load data in existing events
 			this.loadEventQueueSavedState(newQueue)
-			newQueue = EventStateFactory.createEventsFromJson(this.eventQueueSavedState).concat(newQueue)
+			//create new events
+			newQueue = EventStateFactory.createEventsFromJson(this.eventQueueSavedState, this.getClientState()).concat(newQueue)
 		}
         this.eventQueue.next(newQueue)
     }
@@ -610,7 +612,7 @@ export class GameState{
 			}
 		}
 		//create events from eventqueue saved state
-		this.createEventFromEventQueueSavedState()
+		//this.createEventFromEventQueueSavedState()
 		console.log('client state loaded: ', this.clientState.getValue())
 		console.log('eventstate loaded:', Utils.jsonCopy(this.eventQueueSavedState))
 	}
@@ -709,11 +711,12 @@ export class GameState{
 			}
 		}
 	}
+	/*
 	private createEventFromEventQueueSavedState(): void {
 		let newEvents: EventBaseModel[] = []
 		for(let eventState of this.eventQueueSavedState){
 			if(eventState.t === EventStateTypeEnum.discard){
-				//newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
+				newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
 				this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
 			}
 		}
@@ -721,9 +724,12 @@ export class GameState{
 		this.addEventQueue(newEvents, 'first')
 		console.log('eventqueue:',this.eventQueue.getValue())
 	}
+		*/
 	public addOceanBonus(oceanBonus: WsOceanResult){
 		let ressources: RessourceStock[] = []
 		let newEvents: EventBaseModel[] = []
+		let clientState = this.getClientState()
+		/*
 		for(let [key, value] of oceanBonus.bonuses){
 			if(value===0){continue}
 			switch(key){
@@ -734,13 +740,18 @@ export class GameState{
 					ressources.push({name: "plant", valueStock: value??0})
 					break
 			}
-		}
+		}*/
 		if(ressources.length>0){newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:ressources}))}
 		if(oceanBonus.draw.length>0){this.addCardsToClientHand(oceanBonus.draw)}
 
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents,'first')
 		}
+		for(let bonus of oceanBonus.bonuses){
+			clientState.addOceanFlippedBonus(bonus)
+		}
+		this.updateClientState(clientState)
+		console.log(clientState)
 	}
 
 	public isClient(playerId: myUUID): boolean {

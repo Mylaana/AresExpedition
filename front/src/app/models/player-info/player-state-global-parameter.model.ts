@@ -1,12 +1,13 @@
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { GAME_GLOBAL_PARAMETER_INFRASTRUCTURE_MAX_STEP, GAME_GLOBAL_PARAMETER_OCEAN_MAX_STEP, GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP, GAME_GLOBAL_PARAMETER_TEMPERATURE_MAX_STEP } from "../../global/global-const";
 import { GlobalParameterDTO, PlayerGlobalParameterStateDTO } from "../../interfaces/dto/player-state-dto.interface";
-import { GlobalParameter, GlobalParameterValue } from "../../interfaces/global.interface";
+import { GlobalParameter, GlobalParameterValue, OceanBonus } from "../../interfaces/global.interface";
 import { Utils } from "../../utils/utils";
 
 
 export class PlayerGlobalParameterStateModel {
-private parameters: GlobalParameter[] = []
+	private parameters: GlobalParameter[] = []
+	private oceanFlippedBonus: OceanBonus[] = []
 
 	constructor(dto: PlayerGlobalParameterStateDTO){
 		let parameters: GlobalParameter[] = []
@@ -18,8 +19,8 @@ private parameters: GlobalParameter[] = []
 			}
 			parameters.push(Utils.jsonCopy(param))
 		}
-
 		this.parameters = parameters
+		this.oceanFlippedBonus = dto.ofb
 	}
 
 	getGlobalParameters(): GlobalParameter[] {return this.parameters}
@@ -39,6 +40,12 @@ private parameters: GlobalParameter[] = []
 			return
 		}
 		this.parameters[parameterIndex].addEndOfPhase += parameter.steps
+	}
+	addOceanFlippedBonus(bonus: OceanBonus){
+		this.oceanFlippedBonus.push(bonus)
+	}
+	getOceanFlippedBonus(): OceanBonus[] {
+		return this.oceanFlippedBonus
 	}
 	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {
 		for(let param of this.parameters){
@@ -68,7 +75,8 @@ private parameters: GlobalParameter[] = []
 			parameters.push(this.parameterToJson(state))
 		}
 		return {
-			gp: parameters
+			gp: parameters,
+			ofb: this.oceanFlippedBonus
 		}
 	}
 	newGame(): void {
@@ -91,7 +99,8 @@ private parameters: GlobalParameter[] = []
 	static empty(): PlayerGlobalParameterStateModel {
 		return new PlayerGlobalParameterStateModel(
 			{
-				gp: []
+				gp: [],
+				ofb: []
 			}
 		)
 	}

@@ -10,24 +10,38 @@ import com.ares_expedition.repository.player_state.subclass.PlayerGlobalParamete
 
 public class PlayerGlobalParameterState {
     private List<GlobalParameter> globalParameters = new ArrayList<GlobalParameter>();
+    private List<Object> oceanFlippedBonus = new ArrayList<>();
 
     public PlayerGlobalParameterState() {
     }
+
     PlayerGlobalParameterState(PlayerGlobalParameterStateDTO dto) {
         for (GlobalParameterDTO param : dto.getGlobalParameters()) {
             this.globalParameters.add(GlobalParameter.fromJson(param));
         }
+        this.oceanFlippedBonus = dto.getOceanFlippedBonus();
     }
+
     public List<GlobalParameter> getGlobalParameters() {
         return globalParameters;
     }
+
     public void setGlobalParameters(List<GlobalParameter> globalParameters) {
         this.globalParameters = globalParameters;
+    }
+
+    public List<Object> getOceanFlippedBonus() {
+        return oceanFlippedBonus;
+    }
+
+    public void setOceanFlippedBonus(List<Object> oceanFlippedBonus) {
+        this.oceanFlippedBonus = oceanFlippedBonus;
     }
 
     public static PlayerGlobalParameterState fromJson(PlayerGlobalParameterStateDTO dto) {
         return new PlayerGlobalParameterState(dto);
     }
+    
     public PlayerGlobalParameterStateDTO toJson() {
         return new PlayerGlobalParameterStateDTO(this);
     }

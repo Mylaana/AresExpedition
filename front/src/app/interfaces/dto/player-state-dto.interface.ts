@@ -49,6 +49,7 @@ export interface PlayerPhaseCardStateDTO {
 }
 export interface PlayerGlobalParameterStateDTO {
 	gp: GlobalParameterDTO[]
+	ofb: any[]
 }
 export interface PlayerOtherStateDTO {
 	scvm: number,

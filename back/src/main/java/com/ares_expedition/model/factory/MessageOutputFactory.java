@@ -43,28 +43,10 @@ public class MessageOutputFactory {
     }
 
     public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, List<Ocean> oceans, List<Integer> cardsToDraw){
-        Map<RessourceEnum, Integer> bonuses = new HashMap<>();
+        List<Map<RessourceEnum, Integer>> bonuses = new ArrayList<>();
         Map<String, Object> content = new HashMap<>();
-        Integer megacredits = 0;
-        Integer plants = 0;
-        Integer cards = 0;
-
         for(Ocean ocean: oceans){
-            Map<RessourceEnum, Integer> oceanBonus = ocean.getBonuses();
-            if(oceanBonus.get(RessourceEnum.MEGACREDIT)!=null){
-                megacredits += oceanBonus.get(RessourceEnum.MEGACREDIT);
-                bonuses.put(RessourceEnum.MEGACREDIT, megacredits);
-            }
-            if(oceanBonus.get(RessourceEnum.PLANT)!=null){
-                plants += oceanBonus.get(RessourceEnum.PLANT);
-                bonuses.put(RessourceEnum.PLANT, plants);
-            }
-            if(oceanBonus.get(RessourceEnum.CARD)!=null){
-                cards += oceanBonus.get(RessourceEnum.CARD);
-                bonuses.put(RessourceEnum.CARD, cards);
-            }
-            
-            //bonuses.add(ocean.getBonuses());
+            bonuses.add(ocean.getBonuses());
         }
         content.put("b", bonuses);
         if(cardsToDraw.size()>0){

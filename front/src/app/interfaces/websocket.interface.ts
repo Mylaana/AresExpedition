@@ -3,6 +3,7 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
 import { GameStatusEnum, GroupMessageContentResultEnum, MessageContentQueryEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
 import { myUUID, PlayerColor } from "../types/global.type"
 import { PlayerStateDTO } from "./dto/player-state-dto.interface"
+import { OceanBonus } from "./global.interface"
 
 export interface WsInputMessage {
     subscription: SubscriptionEnum,
@@ -60,7 +61,7 @@ export interface WsDrawResult extends WsResult {
     eventId: number
 }
 export interface WsOceanResult extends WsResult {
-	bonuses: Map<OceanBonusEnum, number>
+	bonuses: OceanBonus[]
 	draw: number[]
 }
 export interface WsGameState extends WsResult {
