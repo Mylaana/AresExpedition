@@ -3,6 +3,11 @@
 </div>
 <div class="ocean-grid">
 	<div *ngFor="let id of _progressionList" class="ocean" [ngClass]="'--'+id">
+		<div *ngIf="oceanFlippedBonus[id-1]" class="wrapper-bonus">
+			<app-text-with-image *ngFor="let text of toCardText(oceanFlippedBonus[id-1])" [rawText]="text"></app-text-with-image>
+			<app-text-with-image *ngFor="let text of toMegacreditText(oceanFlippedBonus[id-1])" [rawText]="text"></app-text-with-image>
+			<app-text-with-image *ngFor="let text of toPlantText(oceanFlippedBonus[id-1])" [rawText]="text"></app-text-with-image>
+		</div>
 		<div class="shape"
 			[ngClass]="id<=currentStep?'flipped':
 				id<=currentStep+addEop?'add-eop':'empty'">
