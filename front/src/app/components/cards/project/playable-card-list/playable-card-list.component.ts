@@ -135,6 +135,7 @@ export class PlayableCardListComponent implements OnChanges{
 	private childrenUpdateCost(): void {
 		if(this.projectCards===undefined){return}
 		for(let card of this.projectCards){
+			card.buildDiscount = this._buildDiscount
 			card.updateCost()
 		}
 	}

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
-import { EventBaseModel } from '../../../models/core-game/event.model';
+import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { fadeIn } from '../../../animations/animations';
@@ -24,9 +24,11 @@ export class PhaseBuilderComponent {
 	@Input() currentPhase!: NonSelectablePhaseEnum
 	@Output() cardBuilderButtonClicked = new EventEmitter<any>()
 	@Output() updateSelectedCardList = new EventEmitter<any>()
+	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
 	public onEventCardBuilderListButtonClicked(output: any){
 		this.cardBuilderButtonClicked.emit(output)
+		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
 	}
 	public onUpdateSelectedCardList(output: any){
 		this.updateSelectedCardList.emit(output)

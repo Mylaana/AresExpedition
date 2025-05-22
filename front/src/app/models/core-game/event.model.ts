@@ -363,6 +363,7 @@ export class EventGeneric extends EventBaseModel {
 	addForestPoint?: number
 	selectedPhase?: SelectablePhaseEnum
 	gainOceanNumber?: number
+	production?: RessourceStock | RessourceStock[]
 }
 
 export class EventDeckQuery extends EventBaseModel {
@@ -372,6 +373,7 @@ export class EventDeckQuery extends EventBaseModel {
     override waiterId!:number
     scanKeep?: Partial<ScanKeep>
     drawDiscard?: Partial<DrawDiscard>
+	isCardProduction?: boolean
 }
 
 export class EventWaiter extends EventBaseModel {
@@ -392,6 +394,7 @@ export class DrawEvent {
     served: boolean = false
     queried: boolean = false
     waiterId!: number
+	isCardProduction: boolean = false
 }
 
 export class EventPhase extends EventBaseModel {

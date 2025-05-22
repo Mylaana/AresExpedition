@@ -5,6 +5,7 @@ import { EventStateOriginEnum, EventStateTypeEnum } from "../../enum/eventstate.
 import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from "../../models/core-game/event.model";
 import { EventDesigner } from "./event-designer.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
+import { OceanBonus } from "../../interfaces/global.interface";
 
 const EventSubTypeToStateMap = new Map<EventUnionSubTypes, EventStateTypeEnum>([
 	['developmentPhaseBuilder', EventStateTypeEnum.builderDevelopemntLocked],
@@ -62,8 +63,13 @@ export class EventStateFactory{
 		}
 	}
 	public static shouldLoadEventFromThisSavedState(event: EventBaseModel, eventState: EventStateDTO) : boolean {
-		if(event.subType==='actionPhaseActivator' && eventState.t===EventStateTypeEnum.cardActivator){return true}
-		return false
+		switch(true){
+			case(event.subType==='actionPhaseActivator' && eventState.t===EventStateTypeEnum.cardActivator):{break}
+			case(event.subType==='developmentPhaseBuilder'  && eventState.t===EventStateTypeEnum.builderDevelopemntLocked):{break}
+			case(event.subType==='constructionPhaseBuilder'  && eventState.t===EventStateTypeEnum.builderConstructionLocked):{break}
+			default:{return false}
+		}
+		return true
 	}
 	public static createEventsFromJson(eventStateList: EventStateDTO[], clientState: PlayerStateModel): EventBaseModel[] {
 		let newEvents: EventBaseModel[] = []
@@ -73,12 +79,24 @@ export class EventStateFactory{
 			treated = true
 			switch (state.t){
 				case(EventStateTypeEnum.oceanFlipped):{
+					let oceanBonus: OceanBonus = {
+						megacredit: 0,
+						plant: 0,
+						card: 0
+					}
 					if (state.v['MEGACREDIT']) {
 						newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', { baseRessource: { name: 'megacredit', valueStock: state.v['MEGACREDIT'] ?? 0 } }))
+						oceanBonus.megacredit = state.v['MEGACREDIT']??0
 					}
 					if (state.v['PLANT']) {
 						newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', { baseRessource: { name: 'plant', valueStock: state.v['PLANT'] ?? 0 } })) // probablement une erreur dans ton code initial (tu remets MEGACREDIT au lieu de PLANT)
+						oceanBonus.plant = state.v['PLANT']??0
 					}
+					if (state.v['CARD']) {
+						oceanBonus.card = state.v['CARD']??0
+					}
+
+					clientState.addOceanFlippedBonus(oceanBonus)
 
 					//CARDS is treated separatly
 					eventStateList.splice(i, 1)

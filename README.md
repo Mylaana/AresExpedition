@@ -18,7 +18,7 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_cards.png)
 
 # Architecture and Concepts
-## Technologies used :
+## Stack :
 Frontend: Angular 19   
 Backend: Java 23   
 API Websocket: Java Spring Boot + STOMP   
@@ -46,10 +46,9 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-development builder: ExpressionChangedAfterItHasBeenCheckedError
-any builder :ERROR TypeError: Cannot read properties of undefined (reading 'updateDiscount')
-Ocean bonus disapearing when refreshing after ocean built but before phase ended   
-Ocean bonus not being applied   
+Expression has changed Error after ocean bonus applied on reload   
+Escape keyboard not exiting card builder selection   
+Card draw on production can be rerolled by refreshing   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -105,3 +104,4 @@ Command buttons / setting button position
 
 ### Misc
 Add settings options   
+Add game modes   

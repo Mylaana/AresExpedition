@@ -695,6 +695,7 @@ export class GameState{
 		for(let event of eventQueue){
 			for(let eventState of this.eventQueueSavedState){
 				if(EventStateFactory.shouldLoadEventFromThisSavedState(event, eventState)){
+					console.log('loading eventState:',eventState, event)
 					//specific cases
 					switch(event.type){
 						case('cardActivator'):{
@@ -711,36 +712,20 @@ export class GameState{
 			}
 		}
 	}
-	/*
-	private createEventFromEventQueueSavedState(): void {
-		let newEvents: EventBaseModel[] = []
-		for(let eventState of this.eventQueueSavedState){
-			if(eventState.t === EventStateTypeEnum.discard){
-				newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: eventState.ced}}))
-				this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
-			}
-		}
-		if(newEvents.length===0){return}
-		this.addEventQueue(newEvents, 'first')
-		console.log('eventqueue:',this.eventQueue.getValue())
-	}
-		*/
+
 	public addOceanBonus(oceanBonus: WsOceanResult){
 		let ressources: RessourceStock[] = []
+		let megacredit: number = 0
+		let plant: number = 0
 		let newEvents: EventBaseModel[] = []
 		let clientState = this.getClientState()
-		/*
-		for(let [key, value] of oceanBonus.bonuses){
-			if(value===0){continue}
-			switch(key){
-				case OceanBonusEnum.megacredit:
-					ressources.push({name: "megacredit", valueStock: value??0})
-					break
-				case OceanBonusEnum.plant:
-					ressources.push({name: "plant", valueStock: value??0})
-					break
-			}
-		}*/
+
+		for(let bonus of oceanBonus.bonuses){
+			megacredit += bonus.megacredit
+			plant += bonus.plant
+		}
+		if(megacredit>0){ressources.push({name: 'megacredit', valueStock: megacredit})}
+		if(plant>0){ressources.push({name: 'plant', valueStock: plant})}
 		if(ressources.length>0){newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:ressources}))}
 		if(oceanBonus.draw.length>0){this.addCardsToClientHand(oceanBonus.draw)}
 

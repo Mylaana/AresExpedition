@@ -7,11 +7,12 @@ import { ScanKeep } from "../../interfaces/global.interface";
     providedIn: 'root'
 })
 export class DrawEventDesigner {
-    public static createDrawEvent(resolveType:EventUnionSubTypes, drawCardNumber:number, waiterId:number): DrawEvent {
+    public static createDrawEvent(resolveType:EventUnionSubTypes, drawCardNumber:number, waiterId:number, isCardProduction:boolean = false): DrawEvent {
         let event = new DrawEvent
         event.drawCardNumber= drawCardNumber,
         event.resolveEventSubType = resolveType
         event.waiterId = waiterId
+		event.isCardProduction = isCardProduction
         return event
     }
     public static createScanKeepEvent(resolveType:EventUnionSubTypes, scanKeep:ScanKeep ,waiterId:number): DrawEvent {

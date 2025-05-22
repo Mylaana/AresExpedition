@@ -337,7 +337,7 @@ export class EventHandler {
 			}
 			case('buildCard'):{
 				let card = event.cardIdToBuild
-				if(card===undefined){break}
+				if(!card){break}
 				this.gameStateService.playCardFromClientHand(card, 'project')
 				break
 			}
@@ -424,7 +424,7 @@ export class EventHandler {
 
 		let drawNumber = event.drawDiscard?.draw
 		if(drawNumber!=undefined && drawNumber>0){
-			this.gameStateService.addDrawQueue(DrawEventDesigner.createDrawEvent(resolveType, drawNumber,event.id))
+			this.gameStateService.addDrawQueue(DrawEventDesigner.createDrawEvent(resolveType, drawNumber,event.id, event.isCardProduction))
 		}
 		if(event.scanKeep!==undefined){
 			let scanKeep: ScanKeep = {scan:event.scanKeep?.scan?event.scanKeep?.scan:0, keep:event.scanKeep?.keep?event.scanKeep?.keep:0}
@@ -528,7 +528,7 @@ export class DrawEventHandler {
 	}
 	private sendWsDrawQuery(event: DrawEvent){
 		event.queried = true
-		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO())
+		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction)
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
@@ -591,7 +591,7 @@ class PhaseResolveHandler {
 	}
 
 	private getPhaseCards(): PhaseCardModel[] {
-		return this.gameStateService.getClientPhaseCards()
+		return this.gameStateService.getClientPhaseCards(true)
 	}
 	private refreshCurrentUpgradedPhaseCard(): void {
 		this.currentUpgradedPhaseCards = this.getPhaseCards()
@@ -623,46 +623,41 @@ class PhaseResolveHandler {
 		this.refreshCurrentUpgradedPhaseCard()
 
 		let clientState = this.gameStateService.getClientState()
-		let newClientRessource: RessourceInfo[] = []
+		let production: RessourceStock[] = []
+		let newEvents: EventBaseModel[] = []
+		let currentClientRessources: RessourceInfo[] = clientState.getRessources()
 
-		newClientRessource = clientState.getRessources()
-
-		for(let i=0; i<newClientRessource.length; i++){
-			switch(i){
-				//MC production
-				case(0):{
-					newClientRessource[i].valueStock =
-						newClientRessource[i].valueStock
-						+ newClientRessource[i].valueProd
+		for(let i=0; i<currentClientRessources.length; i++){
+			let ressourceGain: number = 0
+			let ressource = currentClientRessources[i]
+			switch(ressource.name){
+				case('megacredit'):{
+						ressourceGain= ressource.valueProd
 						+ clientState.getTR()
 						+ this.getProductionPhaseCardSelectionBonus()
-
-						clientState.setRessources(newClientRessource)
 					break
 				}
-				//heat and plant producition
-				case(1):case(2):{
-					newClientRessource[i].valueStock =
-						newClientRessource[i].valueStock
-						+ newClientRessource[i].valueProd
-
-					clientState.setRessources(newClientRessource)
+				case('plant'):case('heat'):{
+					ressourceGain = ressource.valueProd
 					break
 				}
-				//Cards production
-				case(5):{
-					if(newClientRessource[i].valueProd===0){break}
-					this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent(
-						'drawQuery',
-						{drawDiscard:{draw:newClientRessource[i].valueProd,discard:0}}
-					),'first')
+				case('card'):{
+					ressourceGain = ressource.valueProd
+					if(ressourceGain>0){
+						newEvents.push(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:ressourceGain, discard:0}, isCardProduction: true}))
+					}
 					break
 				}
 			}
+			if(ressourceGain>0){
+				production.push({name:ressource.name, valueStock:ressourceGain})
+			}
 		}
-		console.log('prod :',clientState, newClientRessource)
-
-		this.gameStateService.updateClientState(clientState)
+		if(production.length>0){
+			newEvents.push(EventDesigner.createGeneric('applyProduction', {production: production}))
+			console.log('generating event prod :', newEvents)
+			this.gameStateService.addEventQueue(newEvents, 'first')
+		}
 	}
 	private getProductionPhaseCardSelectionBonus(): number {
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return 0}

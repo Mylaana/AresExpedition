@@ -41,11 +41,13 @@ export class PlayerProjectCardStateModel {
 
     playCard(card: PlayableCardModel): void {
         this.projects.playedIdList.push(card.id)
-        this.projects.playedProjectList.push(card)
-		this.cardInitializeService.initialize(card)
+		let cardCopy = this.cardInfoService.getCardById(card.id)
+		if(!cardCopy){return}
+        this.projects.playedProjectList.push(cardCopy)
+		this.cardInitializeService.initialize(cardCopy)
 
-        if(card.cardSummaryType!='trigger'){return}
-        this.triggers.playTrigger(card.id)
+        if(cardCopy.cardSummaryType!='trigger'){return}
+        this.triggers.playTrigger(cardCopy.id)
     }
 	addCardsToHand(cards: number | number[]){this.hand = this.hand.concat(Utils.toNumberArray(cards))}
 	addCardsToDiscard(cards: number | number[]){this.handDiscard = this.handDiscard.concat(Utils.toNumberArray(cards))}

@@ -176,7 +176,7 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('steel',1)
 				break
 			}
-			//Undersees Vents
+			//Underseas Vents
 			case('202'):{
 				this.addProductionToPlayer('card',1)
 				this.addProductionToPlayer('heat',4)
@@ -372,7 +372,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Bedrock Wellbore
 			case('F10'):{
-				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,2))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,1))
 				break
 			}
