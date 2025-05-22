@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,17 +20,21 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonGameDataHandler {
-    private static final String DATABASE_PATH = "back/data/database.json";
+    private static final String DATABASE_NAME = "database.json";
+    private static final String DATABASE_DIRECTORY = "back/data/";
+    private static final String DATABASE_PATH = DATABASE_DIRECTORY + DATABASE_NAME;
     private static final String CARDS_DATA_PATH = "front/src/assets/data/cards_data.json";
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static Game getGame(String gameId){
+        checkDatabaseExistOrCreateIt();
         System.out.println("\u001B[31m GET GAME \u001B[0m");
         Map<String, Game> games = readGames();
         return games.getOrDefault(gameId, new Game());
     }
 
     public static Map<String, Game> getAllGames() {
+        checkDatabaseExistOrCreateIt();
         System.out.println("\u001B[31m GET ALL GAMES \u001B[0m");
         Map<String, Game> games = readGames();
         System.out.println("games loaded");
@@ -37,7 +42,9 @@ public class JsonGameDataHandler {
     }
 
     public static void saveGame(Game saveGame) {
+        checkDatabaseExistOrCreateIt();
         System.out.println("\u001B[31m SAVE GAME \u001B[0m");
+
         Map<String, Game> games = readGames();
         Map<String, GameData> gamesDTO = Game.toDataMap(games);
         gamesDTO.put(saveGame.getGameId(), saveGame.toData());
@@ -94,5 +101,19 @@ public class JsonGameDataHandler {
         }
 
         return idList;
+    }
+    private static void checkDatabaseExistOrCreateIt(){
+        File f = new File(DATABASE_PATH);
+        
+        if(!f.isFile()){
+            ObjectMapper mapper = new ObjectMapper();
+            try {  
+                Files.createDirectories(Paths.get(DATABASE_DIRECTORY));
+                mapper.writeValue(new File(DATABASE_PATH), new Object());
+
+            } catch (IOException e) {  
+                e.printStackTrace();  
+            } 
+        }
     }
 }

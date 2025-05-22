@@ -18,7 +18,7 @@ This project is NOT related to Asmodee or Fryxgames and is designed for personna
 ![image](https://github.com/Mylaana/AresExpedition/blob/main/ressources/images/fullscreen_cards.png)
 
 # Architecture and Concepts
-## Technologies used :
+## Stack :
 Frontend: Angular 19   
 Backend: Java 23   
 API Websocket: Java Spring Boot + STOMP   
@@ -105,3 +105,4 @@ Command buttons / setting button position
 
 ### Misc
 Add settings options   
+Add game modes   
