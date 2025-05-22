@@ -172,7 +172,9 @@ export class EventDesigner{
             }
 			case('development_second_card'):{
                 buildDiscountValue = 3
-                for(let i=0; i<=1; i++){event.cardBuilder.push(this.generateCardBuilder(i))}
+                for(let i=0; i<=1; i++){
+					event.cardBuilder.push(this.generateCardBuilder(i))
+				}
                 break
             }
 
@@ -213,7 +215,7 @@ export class EventDesigner{
 
         event.buildDiscountValue = buildDiscountValue
         event.buildDiscountUsed = false
-
+		console.log(builderType, event)
         return event
     }
     public static createTargetCard(subType:EventTargetCardSubType, targetCardId:number ,args?: CreateEventOptionsTargetCard): EventTargetCard {

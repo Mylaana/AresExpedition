@@ -208,7 +208,8 @@ export class GameEventComponent {
 		this.eventHandler.cardBuilderButtonClicked(button)
 		switch(button.name){
 			case('buildCard'):{
-				this.cardListSelector.updateDiscount(this.currentEvent as EventCardBuilder)
+				console.log(button)
+				//this.cardListSelector.updateDiscount(this.currentEvent as EventCardBuilder)
 				break
 			}
 		}

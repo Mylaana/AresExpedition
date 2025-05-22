@@ -591,7 +591,7 @@ class PhaseResolveHandler {
 	}
 
 	private getPhaseCards(): PhaseCardModel[] {
-		return this.gameStateService.getClientPhaseCards()
+		return this.gameStateService.getClientPhaseCards(true)
 	}
 	private refreshCurrentUpgradedPhaseCard(): void {
 		this.currentUpgradedPhaseCards = this.getPhaseCards()
@@ -602,6 +602,7 @@ class PhaseResolveHandler {
 	resolveDevelopment(): void {
 		this.refreshCurrentUpgradedPhaseCard()
 		let builderType: BuilderType = this.currentUpgradedPhaseCards[0].phaseType as BuilderType
+		console.log(builderType, this.currentUpgradedPhaseCards)
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.development)){
 			builderType = 'developmentAbilityOnly'
 		}

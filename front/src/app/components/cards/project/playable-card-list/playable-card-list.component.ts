@@ -139,6 +139,7 @@ export class PlayableCardListComponent implements OnChanges{
 		}
 	}
 	public updateDiscount(event: EventCardBuilder): void {
+		console.log('updating discount')
 		this.applyDiscount(event)
 	}
 	private updateCardList(): void {
