@@ -597,8 +597,9 @@ describe('Service - Designers - Event', () => {
                 expectedSubType = 'drawQuery'
                 expectedEvent.subType = expectedSubType
                 expectedEvent.drawDiscard = expectedDrawDiscard
+				expectedEvent.isCardProduction = false
 
-                let event = EventDesigner.createDeckQueryEvent(expectedSubType, {drawDiscard:expectedDrawDiscard})
+                let event = EventDesigner.createDeckQueryEvent(expectedSubType, {drawDiscard:expectedDrawDiscard, isCardProduction: false})
 
                 expect(event).toEqual(expectedEvent)
             })
@@ -673,11 +674,7 @@ describe('Service - Designers - Event', () => {
                     expectedEvent.button = undefined
 
                     switch(expectedSubType){
-                        case('productionPhase'):{
-                            expectedEvent.autoFinalize = false
-                            break
-                        }
-                        case('constructionPhase'):case('developmentPhase'):case('researchPhase'):{
+                        case('constructionPhase'):case('developmentPhase'):case('researchPhase'):case('productionPhase'):{
                             break
                         }
                     }
