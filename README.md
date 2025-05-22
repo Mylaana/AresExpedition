@@ -46,8 +46,8 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Ocean bonus not being applied on oceanFlip regular message   
 Production phase: infinite loop (when player has card production ?)   
+Expression has changed Error after ocean bonus applied on reload   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

@@ -372,7 +372,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Bedrock Wellbore
 			case('F10'):{
-				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,2))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,1))
 				break
 			}

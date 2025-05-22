@@ -715,9 +715,17 @@ export class GameState{
 
 	public addOceanBonus(oceanBonus: WsOceanResult){
 		let ressources: RessourceStock[] = []
+		let megacredit: number = 0
+		let plant: number = 0
 		let newEvents: EventBaseModel[] = []
 		let clientState = this.getClientState()
 
+		for(let bonus of oceanBonus.bonuses){
+			megacredit += bonus.megacredit
+			plant += bonus.plant
+		}
+		if(megacredit>0){ressources.push({name: 'megacredit', valueStock: megacredit})}
+		if(plant>0){ressources.push({name: 'plant', valueStock: plant})}
 		if(ressources.length>0){newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:ressources}))}
 		if(oceanBonus.draw.length>0){this.addCardsToClientHand(oceanBonus.draw)}
 
