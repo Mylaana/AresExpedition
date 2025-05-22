@@ -37,7 +37,7 @@
 		<div class="wrapper-event-top"
 			[class.flex-column]="currentEvent.subType==='actionPhase'">
 			<div class="wrapper-other-event"
-				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase'
+				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='applyProduction'
 				|| currentEvent.subType==='actionPhaseActivator' || currentEvent.subType==='upgradePhaseCards'
 				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'
 				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder()"
@@ -48,7 +48,7 @@
 					[event]="currentEvent"
 					(phaseSelected)="onPhaseSelected()"></app-phase-planification>
 				<app-phase-production
-					*ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"
+					*ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='applyProduction'"
 					@fadeIn></app-phase-production>
 				<app-phase-action
 					*ngIf="currentPhase==='ACTION' && currentEvent.subType==='actionPhaseActivator'"

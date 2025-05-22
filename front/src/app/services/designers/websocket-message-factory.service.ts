@@ -22,8 +22,8 @@ export class WebsocketQueryMessageFactory{
         }
         return message
     }
-    public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO): PlayerMessage {
-        let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto}
+    public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO, isCardProduction: boolean = false): PlayerMessage {
+        let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto, isCardProduction: isCardProduction}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
     public static createReadyQuery(ready: boolean): PlayerMessage {

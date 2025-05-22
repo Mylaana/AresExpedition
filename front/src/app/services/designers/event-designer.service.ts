@@ -29,10 +29,12 @@ interface CreateEventOptionsGeneric {
     phaseCardUpgradeNumber?: number
 	addForestPoint?: number
 	oceanQueryNumber?: number
+	production?: RessourceStock | RessourceStock[]
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
     scanKeep?: Partial<ScanKeep>,
+	isCardProduction?: boolean
 }
 
 @Injectable({
@@ -291,6 +293,11 @@ export class EventDesigner{
 				event.gainOceanNumber = args?.oceanQueryNumber
 				break
 			}
+			case('applyProduction'):{
+				event.production = args?.production
+				event.autoFinalize = false
+				break
+			}
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
@@ -307,6 +314,7 @@ export class EventDesigner{
             }
             case('drawQuery'):{
                 event.drawDiscard = args?.drawDiscard
+				event.isCardProduction = args?.isCardProduction
                 break
             }
             case('researchPhaseQuery'):{
@@ -339,10 +347,7 @@ export class EventDesigner{
 
         event.subType = subType
         switch(subType){
-            case('productionPhase'):{
-                event.autoFinalize = false
-                break
-            }
+            case('productionPhase'):{break}
 			case('actionPhase'):{break}
             case('developmentPhase'):{break}
             case('constructionPhase'):{break}

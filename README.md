@@ -46,8 +46,9 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Production phase: infinite loop (when player has card production ?)   
 Expression has changed Error after ocean bonus applied on reload   
+Escape keyboard not exiting card builder selection   
+Card draw on production can be rerolled by refreshing   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

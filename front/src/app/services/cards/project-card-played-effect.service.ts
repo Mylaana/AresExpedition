@@ -176,7 +176,7 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('steel',1)
 				break
 			}
-			//Undersees Vents
+			//Underseas Vents
 			case('202'):{
 				this.addProductionToPlayer('card',1)
 				this.addProductionToPlayer('heat',4)
