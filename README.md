@@ -46,10 +46,9 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-development builder: ExpressionChangedAfterItHasBeenCheckedError
-any builder :ERROR TypeError: Cannot read properties of undefined (reading 'updateDiscount')   
 Ocean bonus disapearing when refreshing after ocean built but before phase ended   
 Ocean bonus not being applied   
+Production phase: infinite loop (when player has card production ?)   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

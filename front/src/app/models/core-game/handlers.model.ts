@@ -337,7 +337,7 @@ export class EventHandler {
 			}
 			case('buildCard'):{
 				let card = event.cardIdToBuild
-				if(card===undefined){break}
+				if(!card){break}
 				this.gameStateService.playCardFromClientHand(card, 'project')
 				break
 			}
