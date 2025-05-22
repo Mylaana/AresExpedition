@@ -12,6 +12,7 @@ export class PhaseCardGroupModel {
 		for(let card of this.phaseCards){
 			if(onlyUpgraded===false){return card}
 			if(card.phaseCardUpgraded===true){return card}
+			if(!this.phaseIsUpgraded){return card}
 		}
 		return new PhaseCardModel
 	}

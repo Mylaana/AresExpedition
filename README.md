@@ -47,7 +47,7 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 development builder: ExpressionChangedAfterItHasBeenCheckedError
-any builder :ERROR TypeError: Cannot read properties of undefined (reading 'updateDiscount')
+any builder :ERROR TypeError: Cannot read properties of undefined (reading 'updateDiscount')   
 Ocean bonus disapearing when refreshing after ocean built but before phase ended   
 Ocean bonus not being applied   
 

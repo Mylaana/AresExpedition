@@ -57,6 +57,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	@Input() activableTwice: boolean = false
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
+	private clientState!: PlayerStateModel
 
 	_hovered: boolean = false
 	_maximumActivation: boolean = false
@@ -128,19 +129,20 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 	private updateClientState(state: PlayerStateModel): void {
 		if(state===undefined){return}
+		this.clientState = state
 		this.megacreditAvailable = state.getRessourceInfoFromType('megacredit')?.valueStock??0
-		this.updateCost(state)
+		this.updateCost()
 	}
-	public updateCost(state?: PlayerStateModel): void {
-		if(!state){
+	public updateCost(): void {
+		if(['hand', 'played'].includes(this.parentListType)){
 			this.projectCard.cost = this.projectCard.costInitial
 			return
 		}
 		this.projectCard.cost = this.cardCost.updateCost({
 			tagList: this.projectCard.tagsId,
-			steelState: state.getRessourceInfoFromType('steel'),
-			titaniumState: state.getRessourceInfoFromType('titanium'),
-			playedTriggersList: state.getTriggerCostMod(),
+			steelState: this.clientState.getRessourceInfoFromType('steel'),
+			titaniumState: this.clientState.getRessourceInfoFromType('titanium'),
+			playedTriggersList: this.clientState.getTriggerCostMod(),
 			buildDiscount: this.buildDiscount
 		})
 		this.setBuildable()
