@@ -1,4 +1,4 @@
-import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter, PlayerPhase } from "../../interfaces/global.interface";
+import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter, PlayerPhase, OceanBonus } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { myUUID, PlayableCardType, RessourceType, RGB } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
@@ -109,6 +109,8 @@ export class PlayerStateModel {
 		return
 	}
 	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {return this.globalParameterState.isGlobalParameterMaxedOutAtPhaseBeginning(parameterName)}
+	addOceanFlippedBonus(bonus: OceanBonus){this.globalParameterState.addOceanFlippedBonus(bonus)}
+	getOceanFlippedBonus(): OceanBonus[] {return this.globalParameterState.getOceanFlippedBonus()}
 
 	//otherState
 	getResearch(): ScanKeep {return this.otherState.getResearch()}

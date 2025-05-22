@@ -107,3 +107,8 @@ export interface CreatePlayer {
 	name: string,
 	color: PlayerColor,
 }
+export interface OceanBonus {
+	megacredit: number
+	plant: number
+	card: number
+}

@@ -5,9 +5,10 @@ import { OceanCardComponent } from '../ocean-card/ocean-card.component';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerGlobalParameterStateModel } from '../../../models/player-info/player-state-global-parameter.model';
-import { GlobalParameter } from '../../../interfaces/global.interface';
+import { GlobalParameter, OceanBonus } from '../../../interfaces/global.interface';
 import { Utils } from '../../../utils/utils';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
+import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 
 @Component({
     selector: 'app-global-parameter-pannel',
@@ -29,16 +30,18 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	_temperatureState: GlobalParameter = {name:GlobalParameterNameEnum.temperature, step: 0, addEndOfPhase: 0}
 	_oxygenState: GlobalParameter = {name:GlobalParameterNameEnum.oxygen, step: 0, addEndOfPhase: 0}
 
+	_oceanFlippedBonus: OceanBonus[] = []
+
 	constructor(private gameStateService: GameState){}
 	ngOnInit(): void {
-		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onStateUpdate(state.getGlobalParameters()))
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onStateUpdate(state))
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
-	onStateUpdate(parameters: GlobalParameter[]): void {
-		for(let state of parameters){
+	onStateUpdate(clientState: PlayerStateModel): void {
+		for(let state of clientState.getGlobalParameters()){
 			switch(state.name){
 				case(GlobalParameterNameEnum.ocean):{this._oceanState = Utils.jsonCopy(state); break}
 				case(GlobalParameterNameEnum.infrastructure):{this._infrastructureState = Utils.jsonCopy(state); break}
@@ -46,5 +49,6 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 				case(GlobalParameterNameEnum.temperature):{this._temperatureState = Utils.jsonCopy(state); break}
 			}
 		}
+		this._oceanFlippedBonus = clientState.getOceanFlippedBonus()
 	}
 }

@@ -48,6 +48,8 @@ Backend: Junit
 ## /!\BUG/!\ :
 development builder: ExpressionChangedAfterItHasBeenCheckedError
 any builder :ERROR TypeError: Cannot read properties of undefined (reading 'updateDiscount')
+Ocean bonus disapearing when refreshing after ocean built but before phase ended   
+Ocean bonus not being applied   
 
 ## Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -62,14 +64,17 @@ Create dedicated serverside model for oceanFlip Result
 
 ## Must have for v1 :
 ### Cards
-Prerequisites for playing project cards feature
+Prerequisites for playing project cards feature   
+Implement all cards   
+Implement all corps   
+Add Hybrid production zone   
+Add Multiple production zones (for corps)   
 
 ### Misc
 Add victory check   
 Add Event removing any ressource in list on played card   
 
 ### Interface
-Add Ocean bonus description, display what is the current ocean clearly    
 Design production phase screen   
 Create switch button   
 

@@ -4,6 +4,7 @@ import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from "../../models/core-game/event.model";
 import { EventDesigner } from "./event-designer.service";
+import { PlayerStateModel } from "../../models/player-info/player-state.model";
 
 const EventSubTypeToStateMap = new Map<EventUnionSubTypes, EventStateTypeEnum>([
 	['developmentPhaseBuilder', EventStateTypeEnum.builderDevelopemntLocked],
@@ -64,7 +65,7 @@ export class EventStateFactory{
 		if(event.subType==='actionPhaseActivator' && eventState.t===EventStateTypeEnum.cardActivator){return true}
 		return false
 	}
-	public static createEventsFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
+	public static createEventsFromJson(eventStateList: EventStateDTO[], clientState: PlayerStateModel): EventBaseModel[] {
 		let newEvents: EventBaseModel[] = []
 		let treated: boolean
 		for (let i = eventStateList.length - 1; i >= 0; i--) {
@@ -78,6 +79,7 @@ export class EventStateFactory{
 					if (state.v['PLANT']) {
 						newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', { baseRessource: { name: 'plant', valueStock: state.v['PLANT'] ?? 0 } })) // probablement une erreur dans ton code initial (tu remets MEGACREDIT au lieu de PLANT)
 					}
+
 					//CARDS is treated separatly
 					eventStateList.splice(i, 1)
 					break

@@ -8,6 +8,7 @@ import { PlayerMessage } from "../../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from "../../types/global.type";
 import { OceanBonusEnum } from "../../enum/global.enum";
+import { OceanBonus } from "../../interfaces/global.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -102,15 +103,16 @@ export class WebsocketResultMessageFactory{
         return result
 	}
 	public static inputToOceanResult(content: any): WsOceanResult {
-		let bonuses: Map<OceanBonusEnum, number> = new Map()
-		const entries = Object.entries(content['b']??[])
-		entries.forEach(([key, value]) => {
-			bonuses.set(key as OceanBonusEnum, value as number);
-		});
-        let result : WsOceanResult = {
-            bonuses: bonuses,
+		const entries: Record<OceanBonusEnum, number>[] = content['b']??[]
+		const oceanBonuses: OceanBonus[] = entries.map(e => ({
+			megacredit: e[OceanBonusEnum.megacredit]??0,
+			plant: e[OceanBonusEnum.plant]??0,
+			card: e[OceanBonusEnum.card]??0,
+		}));
+
+        return {
+            bonuses: oceanBonuses,
             draw: content['d']??[],
         }
-        return result
 	}
 }
