@@ -9,6 +9,7 @@ import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.enums.game.RessourceEnum;
 import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.subclass.PlayerEventState;
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
@@ -21,6 +22,7 @@ import com.ares_expedition.model.player_state.subclass.PlayerScoreState;
 import com.ares_expedition.model.player_state.subclass.PlayerTagState;
 import com.ares_expedition.model.player_state.subclass.substates.EventState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
+import com.ares_expedition.model.player_state.subclass.substates.OceanFlippedBonus;
 import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
 import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
 import com.ares_expedition.repository.player_state.PlayerStateData;
@@ -277,6 +279,10 @@ public class PlayerState {
 
     public void setGlobalParameter(List<GlobalParameter> globalParameter) {
         this.globalParameterState.setGlobalParameters(globalParameter);
+    }
+
+    public void setOceanFlippedBonus(OceanFlippedBonus oceanBonuses){
+        this.globalParameterState.setOceanFlippedBonus(oceanBonuses);
     }
 
     //=============================================================

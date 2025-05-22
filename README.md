@@ -70,7 +70,6 @@ Add victory check
 Add Event removing any ressource in list on played card   
 
 ### Interface
-Add Ocean bonus description, display what is the current ocean clearly    
 Design production phase screen   
 Create switch button   
 

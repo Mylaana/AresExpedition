@@ -13,6 +13,7 @@ import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.game.RessourceEnum;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
+import com.ares_expedition.model.player_state.subclass.substates.OceanFlippedBonus;
 import com.ares_expedition.repository.JsonGameDataHandler;
 import com.ares_expedition.repository.core.GameData;
 
@@ -279,10 +280,13 @@ public class Game {
         }
 
         //Copy game parameter into player's parameters
+        OceanFlippedBonus oceanBonuses = this.getOceanFlippedBonus(this.getOceans());
         for (PlayerState state : this.groupPlayerState.values()) {
             state.setGlobalParameter(this.globalParameters);
+            state.setOceanFlippedBonus(oceanBonuses);
         }
     }
+    
     private void increaseParameter(GlobalParameterNameEnum parameter, Integer addEop) {
         for(GlobalParameter p: this.globalParameters) {
             if(p.getName()==parameter){
@@ -291,6 +295,7 @@ public class Game {
             }
         }
     }
+
     public List<GlobalParameter> getGlobalParameters() {
         return globalParameters;
     }
@@ -322,6 +327,7 @@ public class Game {
             entry.getValue().setHandCorporations(drawCorporations(1));
         }
     }
+
     public void fillDiscardPileFromPlayerDiscard() {
         for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
             List<Integer> playerDiscard = entry.getValue().getProjectCardState().getHandDiscard();
@@ -367,6 +373,16 @@ public class Game {
         }
         return drawFromFlipped;
     }
+    public OceanFlippedBonus getOceanFlippedBonus(List<Ocean> oceans){
+        OceanFlippedBonus bonuses = new OceanFlippedBonus();
+        for(Ocean ocean: oceans){
+            if(ocean.getFlipped()){
+                bonuses.addFlippedBonus(ocean.getBonuses());
+            }
+        }
+        return bonuses;
+    }
+
     public GameData toData(){
         return new GameData(this);
     }

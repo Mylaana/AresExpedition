@@ -1,17 +1,16 @@
 package com.ares_expedition.repository.player_state.subclass;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
+import com.ares_expedition.model.player_state.subclass.substates.OceanFlippedBonus;
 import com.ares_expedition.repository.core.GlobalParameterData;
 
 public class PlayerGlobalParameterStateData {
     private List<GlobalParameterData> globalParameters = new ArrayList<GlobalParameterData>();
-    private List<Object> oceanFlippedBonus = new ArrayList<>();
+    private OceanFlippedBonus oceanFlippedBonus;
 
     public PlayerGlobalParameterStateData(){
     }
@@ -25,10 +24,10 @@ public class PlayerGlobalParameterStateData {
     public void setGlobalParameters(List<GlobalParameterData> globalParameters) {
         this.globalParameters = globalParameters;
     }
-    public List<Object> getOceanFlippedBonus() {
+    public OceanFlippedBonus getOceanFlippedBonus() {
         return oceanFlippedBonus;
     }
-    public void setOceanFlippedBonus(List<Object> oceanFlippedBonus) {
+    public void setOceanFlippedBonus(OceanFlippedBonus oceanFlippedBonus) {
         this.oceanFlippedBonus = oceanFlippedBonus;
     }
 }

@@ -2,6 +2,7 @@ package com.ares_expedition.dto.websocket.content.player_state.subclass;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.GlobalParameterDTO;
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
@@ -12,7 +13,7 @@ public class PlayerGlobalParameterStateDTO {
     @JsonProperty("gp")
     private List<GlobalParameterDTO> globalParameters = new ArrayList<GlobalParameterDTO>();
     @JsonProperty("ofb")
-    private List<Object> oceanFlippedBonus = new ArrayList<>();
+    private List<Map<String, Integer>> oceanFlippedBonus;
 
     PlayerGlobalParameterStateDTO() {
     }  
@@ -21,7 +22,7 @@ public class PlayerGlobalParameterStateDTO {
         for (GlobalParameter param : state.getGlobalParameters()) {
             this.globalParameters.add(param.toJson());
         }
-        this.oceanFlippedBonus = state.getOceanFlippedBonus();
+        this.oceanFlippedBonus = state.getOceanFlippedBonus().toJson();
     }
 
     public List<GlobalParameterDTO> getGlobalParameters() {
@@ -32,11 +33,11 @@ public class PlayerGlobalParameterStateDTO {
         this.globalParameters = globalParameter;
     }
 
-    public List<Object> getOceanFlippedBonus() {
+    public List<Map<String, Integer>> getOceanFlippedBonus() {
         return oceanFlippedBonus;
     }
 
-    public void setOceanFlippedBonus(List<Object> oceanFlippedBonus) {
+    public void setOceanFlippedBonus(List<Map<String, Integer>> oceanFlippedBonus) {
         this.oceanFlippedBonus = oceanFlippedBonus;
     }
 }
