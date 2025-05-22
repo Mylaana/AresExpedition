@@ -134,7 +134,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.updateCost()
 	}
 	public updateCost(): void {
-		if(['hand', 'played'].includes(this.parentListType)){
+		if(['played'].includes(this.parentListType)){
 			this.projectCard.cost = this.projectCard.costInitial
 			return
 		}
