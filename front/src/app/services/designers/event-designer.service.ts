@@ -215,7 +215,7 @@ export class EventDesigner{
 
         event.buildDiscountValue = buildDiscountValue
         event.buildDiscountUsed = false
-		console.log(builderType, event)
+
         return event
     }
     public static createTargetCard(subType:EventTargetCardSubType, targetCardId:number ,args?: CreateEventOptionsTargetCard): EventTargetCard {
