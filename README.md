@@ -46,8 +46,7 @@ Backend: Junit
 
 # WIP : 
 ## /!\BUG/!\ :
-Ocean bonus disapearing when refreshing after ocean built but before phase ended   
-Ocean bonus not being applied   
+Ocean bonus not being applied on oceanFlip regular message   
 Production phase: infinite loop (when player has card production ?)   
 
 ## Refactoring :
