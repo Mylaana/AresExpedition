@@ -5,10 +5,8 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2,
-            0
+            2
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -24,6 +22,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$ 2 $other_card$",
             "fr": "$other_arrow$ 2 $other_card$"
@@ -31,6 +30,15 @@
         "effectText": {
             "en": "Action: Draw 2 cards.",
             "fr": "Action: Piochez 2 cartes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -44,7 +52,8 @@
             "en": "5 $tag_science$",
             "fr": "5 $tag_science$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 9,
@@ -52,7 +61,6 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -68,6 +76,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_plant$ $other_arrow$ $other_card$",
             "fr": "$ressource_plant$ $other_arrow$ $other_card$"
@@ -75,6 +84,15 @@
         "effectText": {
             "en": "Action: Spend 1 plant to draw 1 card.",
             "fr": "Action: D\u00e9pensez 1 plante pour piocher 1 carte."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -88,7 +106,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 18,
@@ -100,7 +119,6 @@
             8,
             7
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "*",
         "prerequisiteTresholdType": "",
@@ -116,6 +134,7 @@
             "en": "*=1 victory point for every 2 forest tiles you have.",
             "fr": "*= 1 PV par groupe de 2 PVs For\u00eat en votre possession."
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$ $ressource_microbe$ *$skipline$Ou$skipline$$other_arrow$ $ressource_animal$ *",
             "fr": "$other_arrow$ $ressource_microbe$ *$skipline$Ou$skipline$$other_arrow$ $ressource_animal$ *"
@@ -123,6 +142,15 @@
         "effectText": {
             "en": "Action: Add a microbe to another card or add an animal to another card.",
             "fr": "Action: Ajoutez un microbe sur une autre* carte ou ajoutez un animal sur une autre* carte."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -136,7 +164,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 20,
@@ -146,7 +175,6 @@
         "tagsId": [
             8
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -162,6 +190,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "-$ressource_animal$/$ressource_microbe$$skipline$$other_arrow$ 3 $ressource_plant$",
             "fr": "-$ressource_animal$/$ressource_microbe$$skipline$$other_arrow$ 3 $ressource_plant$"
@@ -169,6 +198,15 @@
         "effectText": {
             "en": "Action: Remove 1 animal or 1 microbe from one of your cards to gain 3 plants.",
             "fr": "Action: Retirez 1 animal ou 1 microbe de l'une de vos cartes pour gagner 3 plantes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Place 2 microbes on this card.",
@@ -182,7 +220,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 25,
@@ -192,7 +231,6 @@
         "tagsId": [
             1
         ],
-        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -208,6 +246,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_power$ : $ressource_megacreditvoid_-4$ + $other_card$",
             "fr": "$tag_power$ : $ressource_megacreditvoid_-4$ + $other_card$"
@@ -215,6 +254,15 @@
         "effectText": {
             "en": "Effect: When you play a $tag_power$, you pay 4 MC less for it and draw a card.",
             "fr": "Effet: Lorsque vous jouez un $tag_power$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC et vous piochez une carte"
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -228,7 +276,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 29,
@@ -238,7 +287,6 @@
         "tagsId": [
             6
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -254,6 +302,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_card$ $other_arrow$ 3 $ressource_plant$",
             "fr": "$other_card$ $other_arrow$ 3 $ressource_plant$"
@@ -261,6 +310,15 @@
         "effectText": {
             "en": "Action: Discard a card from your hand to gain 3 plants.",
             "fr": "Action: D\u00e9faussez une carte de votre main pour gagner 3 plantes"
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Gain 3 plants.",
@@ -274,7 +332,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 36,
@@ -284,7 +343,6 @@
         "tagsId": [
             2
         ],
-        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -300,6 +358,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$",
             "fr": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$"
@@ -307,6 +366,15 @@
         "effectText": {
             "en": "Effect: When you draw cards during the research phase, draw 2 additional cards.",
             "fr": "Effet: Lorsque vous piochez des cartes pendant la phase de recherche, piochez deux cartes suppl\u00e9mentaires."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -320,7 +388,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 37,
@@ -330,7 +399,6 @@
         "tagsId": [
             4
         ],
-        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -346,6 +414,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_earth$ / $tag_jovian$ :$skipline$$ressource_megacreditvoid_-3$ + $other_card$",
             "fr": "$tag_earth$ / $tag_jovian$ :$skipline$$ressource_megacreditvoid_-3$ + $other_card$"
@@ -353,6 +422,15 @@
         "effectText": {
             "en": "Effect : When you play an $tag_earth$ or $tag_jovian$, excluding this one, you pay 3 MC less and draw a card.",
             "fr": "Effet : Lorsque vous jouez un $tag_earth$ ou $tag_jovian$, celui-ci exclu, le co\u00fbt est r\u00e9duit de 3 MC et vous piochez une carte."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -366,7 +444,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 42,
@@ -376,7 +455,6 @@
         "tagsId": [
             4
         ],
-        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -392,6 +470,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_event$ : $ressource_megacreditvoid_-5$",
             "fr": "$tag_event$ : $ressource_megacreditvoid_-5$"
@@ -399,6 +478,15 @@
         "effectText": {
             "en": "Effect: When you play an $tag_event$, you pay 5 MC less for it.",
             "fr": "Effet: Lorsque vous jouez $tag_event$, le co\u00fbt associ\u00e9 est r\u00e9duit de 5 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -412,7 +500,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 45,
@@ -422,7 +511,6 @@
         "tagsId": [
             1
         ],
-        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -438,6 +526,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_event$ :$skipline$2 $ressource_heat$ 2 $ressource_plant$",
             "fr": "$tag_event$ :$skipline$2 $ressource_heat$ 2 $ressource_plant$"
@@ -445,6 +534,15 @@
         "effectText": {
             "en": "Effect: When you play an $tag_event$, you gain 2 heat and 2 plants.",
             "fr": "Effet: Lorsque vous jouez un $tag_event$, vous gagnez 2 chaleurs et 2 plantes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -458,7 +556,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 46,
@@ -466,10 +565,8 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2,
-            0
+            2
         ],
-        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "*",
         "prerequisiteTresholdType": "",
@@ -485,6 +582,7 @@
             "en": "*=1 VP for every 2 $tag_science$ resources on this card.",
             "fr": "* = 1 VP par groupe de 2 ressources $ressource_science$ sur cette carte."
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_temperature$ : $ressource_science$",
             "fr": "$other_temperature$ : $ressource_science$"
@@ -492,6 +590,15 @@
         "effectText": {
             "en": "Effect: When you raise the temperature, add a $ressource_science$ to this card.",
             "fr": "Effet:Lorsque vous augmentez la temp\u00e9rature, ajoutez 1 $ressource_science$ sur cette carte."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -505,7 +612,10 @@
             "en": "4 $tag_science$",
             "fr": "4 $tag_science$"
         },
-        "stockable": []
+        "stockable": [
+            "science"
+        ],
+        "startingMegacredits": 0
     },
     {
         "id": 49,
@@ -513,7 +623,6 @@
         "origin": "base",
         "cost": 4,
         "tagsId": [],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -529,6 +638,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "1-3 $other_card$$other_arrow$1-3$other_card$",
             "fr": "1-3 $other_card$$other_arrow$1-3$other_card$"
@@ -536,6 +646,15 @@
         "effectText": {
             "en": "ACTION: Discard up to 3 cards from your hand. Draw that number of cards.",
             "fr": "Action: D\u00e9faussez jusqu'\u00e0 trois cartes de votre main. Piochez un m\u00eame nombre de cartes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -549,7 +668,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 54,
@@ -560,7 +680,6 @@
             1,
             6
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -576,6 +695,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_15$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-2$ / $ressource_titanium$",
             "fr": "$ressource_megacreditvoid_15$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-2$ / $ressource_titanium$"
@@ -583,6 +703,15 @@
         "effectText": {
             "en": "Action: Spend 15 MC to gain a forest tile and increase oxygen by 1 step. Reduce the cost by 2 MC per Titanium you have.",
             "fr": "Action: D\u00e9pensez 15 MC pour gagner 1 PV For\u00eat et augmenter de l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC par titane en votre possession."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -596,7 +725,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 58,
@@ -606,7 +736,6 @@
         "tagsId": [
             8
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "*",
         "prerequisiteTresholdType": "",
@@ -622,6 +751,7 @@
             "en": "* = 1 VP for every 3 microbes on this card.",
             "fr": "* = 1 PV par groupe de 3 microbes sur cette carte."
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_microbe$",
             "fr": "$other_arrow$$skipline$$ressource_microbe$"
@@ -629,6 +759,15 @@
         "effectText": {
             "en": "Action: Add 1 microbe to this card.",
             "fr": "Action: Ajoutez 1 microbe sur cette carte."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -642,7 +781,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 62,
@@ -652,7 +792,6 @@
         "tagsId": [
             1
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -668,6 +807,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_12$ $other_arrow$ $other_ocean$$skipline$$ressource_megacreditvoid_-1$ / $tag_power$",
             "fr": "$ressource_megacreditvoid_12$ $other_arrow$ $other_ocean$$skipline$$ressource_megacreditvoid_-1$ / $tag_power$"
@@ -675,6 +815,15 @@
         "effectText": {
             "en": "Action: Spend 12 MC to flip an ocean tile. Reduce its cost by 1 MC for each $tag_power$ you have.",
             "fr": "Action: D\u00e9pensez 12 MC pour r\u00e9v\u00e9ler une tuile Oc\u00e9an. Ce co\u00fbt est r\u00e9duit de 1 MC par $tag_power$ en votre possession."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -688,7 +837,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 65,
@@ -700,7 +850,6 @@
             7,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "3",
         "prerequisiteTresholdType": "",
@@ -716,11 +865,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -736,7 +895,8 @@
             "en": "$tag_animal$ $tag_microbe$ $tag_plant$",
             "fr": "$tag_animal$ $tag_microbe$ $tag_plant$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 66,
@@ -746,7 +906,6 @@
         "tagsId": [
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -762,11 +921,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -782,7 +951,8 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 69,
@@ -793,7 +963,6 @@
             4,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "-2",
         "prerequisiteTresholdType": "",
@@ -809,11 +978,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -829,7 +1008,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 71,
@@ -839,7 +1019,6 @@
         "tagsId": [
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -855,11 +1034,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -875,7 +1064,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 74,
@@ -886,7 +1076,6 @@
             1,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -902,11 +1091,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -922,7 +1121,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 76,
@@ -933,7 +1133,6 @@
             1,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -949,11 +1148,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -969,7 +1178,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 77,
@@ -980,7 +1190,6 @@
             1,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -996,11 +1205,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -1016,7 +1235,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 81,
@@ -1028,7 +1248,6 @@
             4,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1044,11 +1263,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -1064,7 +1293,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 83,
@@ -1075,7 +1305,6 @@
             2,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1091,11 +1320,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -1111,7 +1350,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 92,
@@ -1121,7 +1361,6 @@
         "tagsId": [
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1137,11 +1376,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -1157,7 +1406,8 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 93,
@@ -1168,7 +1418,6 @@
             1,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -1184,11 +1433,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -1204,7 +1463,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 96,
@@ -1216,7 +1476,6 @@
             2,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1232,11 +1491,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -1252,7 +1521,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 108,
@@ -1262,7 +1532,6 @@
         "tagsId": [
             8
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1278,6 +1547,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
             "fr": "$ressource_plant$"
@@ -1285,6 +1555,15 @@
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
             "fr": "Lors de la phase de production, cette carte produit 1 plante."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1298,7 +1577,8 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 123,
@@ -1308,7 +1588,6 @@
         "tagsId": [
             4
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1324,6 +1603,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$/$tag_earth$",
             "fr": "$ressource_megacreditvoid_1$/$tag_earth$"
@@ -1331,6 +1611,15 @@
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_earth$ en votre possession, y compris celui-ci."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1344,7 +1633,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 129,
@@ -1352,7 +1642,6 @@
         "origin": "base",
         "cost": 2,
         "tagsId": [],
-        "effectSummaryType": "greyProduction",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1368,6 +1657,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$",
             "fr": "$ressource_steel$"
@@ -1375,6 +1665,15 @@
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1388,7 +1687,8 @@
             "en": "max 3 $other_ocean$",
             "fr": "max 3 $other_ocean$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 135,
@@ -1398,7 +1698,6 @@
         "tagsId": [
             0
         ],
-        "effectSummaryType": "mixedProduction",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1414,13 +1713,23 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$$skipline$$ressource_titaniuim$",
-            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_titaniuim$"
+            "en": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$",
+            "fr": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC.$skipline$When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC.$skipline$Lorsque vous jouez un $tag_space$, le co\u00fbt associ\u00e9 est r\u00e9duit de 3 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1434,7 +1743,8 @@
             "en": "-3 $ressource_heat$",
             "fr": "-3 $ressource_heat$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 141,
@@ -1445,7 +1755,6 @@
             1,
             3
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1461,6 +1770,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "3 $ressource_heat$",
             "fr": "3 $ressource_heat$"
@@ -1468,6 +1778,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 3 heat.",
             "fr": "Lors de la phase de production, cette carte produit 3 chaleurs."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1481,7 +1800,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 144,
@@ -1489,7 +1809,6 @@
         "origin": "base",
         "cost": 3,
         "tagsId": [],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1505,6 +1824,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_steel$",
             "fr": "$ressource_steel$"
@@ -1512,6 +1832,15 @@
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1525,7 +1854,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 145,
@@ -1535,7 +1865,6 @@
         "tagsId": [
             6
         ],
-        "effectSummaryType": "",
         "cardType": "greenProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -1551,6 +1880,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
             "fr": "$ressource_plant$"
@@ -1558,6 +1888,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 1 plant.",
             "fr": "Lors de la phase de production, cette carte produit 1 plante."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Gain 1 plant.",
@@ -1571,7 +1910,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 155,
@@ -1581,7 +1921,6 @@
         "tagsId": [
             6
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1597,6 +1936,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
             "fr": "$ressource_plant$"
@@ -1604,6 +1944,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 1 plant.",
             "fr": "Lors de la phase de production, cette carte produit 1 plante."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1617,7 +1966,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 161,
@@ -1628,7 +1978,6 @@
             1,
             5
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "2",
         "prerequisiteTresholdType": "",
@@ -1644,6 +1993,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$ $ressource_plant$$skipline$$ressource_heat$ $ressource_heat$",
             "fr": "$ressource_plant$ $ressource_plant$$skipline$$ressource_heat$ $ressource_heat$"
@@ -1651,6 +2001,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 2 plant et 2 heat.",
             "fr": "Lors de la phase de production, cette carte produit 2 plantes et 2 chaleurs."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1664,7 +2023,8 @@
             "en": "$other_oxygen$",
             "fr": "$other_oxygen$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 163,
@@ -1675,7 +2035,6 @@
             0,
             3
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1691,6 +2050,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "3 $ressource_heat$",
             "fr": "3 $ressource_heat$"
@@ -1698,6 +2058,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 3 heat.",
             "fr": "Lors de la phase de production, cette carte produit 3 chaleurs."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Draw 2 cards. Then, discard a card.",
@@ -1711,7 +2080,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 171,
@@ -1721,7 +2091,6 @@
         "tagsId": [
             6
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1737,6 +2106,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$ $ressource_plant$",
             "fr": "$ressource_plant$ $ressource_plant$"
@@ -1744,6 +2114,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 2 plant.",
             "fr": "Lors de la phase de production, cette carte produit 2 plantes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1757,7 +2136,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 175,
@@ -1768,7 +2148,6 @@
             0,
             3
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1784,6 +2163,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$",
             "fr": "$ressource_heat$"
@@ -1791,6 +2171,15 @@
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
             "fr": "Durant la phase de production, cette carte produit 1 chaleur."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1804,7 +2193,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 180,
@@ -1814,7 +2204,6 @@
         "tagsId": [
             1
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1830,6 +2219,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$/$tag_space$",
             "fr": "$ressource_heat$/$tag_space$"
@@ -1837,6 +2227,15 @@
         "effectText": {
             "en": "During the production phase, this card produces 1 heat for each $tag_space$ you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 chaleur par $tag_space$ en votre possession, y compris celui-ci."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1850,7 +2249,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 181,
@@ -1860,7 +2260,6 @@
         "tagsId": [
             1
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1876,6 +2275,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$ / $tag_space$",
             "fr": "$ressource_megacreditvoid_1$ / $tag_space$"
@@ -1883,6 +2283,15 @@
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_space$ you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_space$ en votre possession, y compris celui-ci."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1896,7 +2305,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 182,
@@ -1906,7 +2316,6 @@
         "tagsId": [
             0
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "-1",
         "prerequisiteTresholdType": "",
@@ -1922,6 +2331,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$ $ressource_plant$",
             "fr": "$ressource_plant$ $ressource_plant$"
@@ -1929,6 +2339,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 2 plant.",
             "fr": "Lors de la phase de production, cette carte produit 2 plantes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -1942,7 +2361,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 183,
@@ -1953,7 +2373,6 @@
             0,
             3
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -1969,6 +2388,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "5 $ressource_heat$",
             "fr": "5 $ressource_heat$"
@@ -1976,6 +2396,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 5 heat.",
             "fr": "Lors de la phase de production, cette carte produit 5 chaleurs."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Draw 2 cards.",
@@ -1989,7 +2418,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 184,
@@ -1999,7 +2429,6 @@
         "tagsId": [
             6
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2015,6 +2444,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$ $ressource_plant$",
             "fr": "$ressource_plant$ $ressource_plant$"
@@ -2022,6 +2452,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 2 plant.",
             "fr": "Lors de la phase de production, cette carte produit 2 plantes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Increase the temperature 1 step.",
@@ -2035,7 +2474,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 190,
@@ -2045,7 +2485,6 @@
         "tagsId": [
             4
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2061,6 +2500,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$",
             "fr": "$ressource_megacreditvoid_2$"
@@ -2068,6 +2508,15 @@
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
             "fr": "Lors de la phase de production, cette carte produit 2 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2081,7 +2530,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 197,
@@ -2089,7 +2539,6 @@
         "origin": "base",
         "cost": 20,
         "tagsId": [],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2105,6 +2554,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "2 $ressource_heat$",
             "fr": "2 $ressource_heat$"
@@ -2112,6 +2562,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 2 heat.",
             "fr": "Lors de la phase de production, cette carte produit 2 chaleurs."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Flip an ocean tile.",
@@ -2125,7 +2584,8 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 198,
@@ -2135,7 +2595,6 @@
         "tagsId": [
             6
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2151,6 +2610,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "3 $ressource_plant$",
             "fr": "3 $ressource_plant$"
@@ -2158,6 +2618,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 3 plant.",
             "fr": "Lors de la phase de production, cette carte produit 3 plantes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Gain 1 plant.",
@@ -2171,7 +2640,8 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 201,
@@ -2181,7 +2651,6 @@
         "tagsId": [
             0
         ],
-        "effectSummaryType": "mixedProduction",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2197,13 +2666,23 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$$skipline$$ressource_steel$",
-            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_steel$"
+            "en": "$ressource_megacreditvoid_1$$mix$$ressource_steel$",
+            "fr": "$ressource_megacreditvoid_1$$mix$$ressource_steel$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC. When you play a BUILDING, you pay 2 MC less for it.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC.$skipline$Lorsque vous jouez un $other_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2217,7 +2696,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 202,
@@ -2228,7 +2708,6 @@
             0,
             3
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2244,6 +2723,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$other_card$$skipline$4$ressource_heat$",
             "fr": "$other_card$$skipline$4$ressource_heat$"
@@ -2251,6 +2731,15 @@
         "effectText": {
             "en": "During the production phase, this card produces 4 heat.",
             "fr": "Lors de la phase de production, vous piochez 1 carte et cette carte produit 4 chaleurs."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2264,7 +2753,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 204,
@@ -2276,7 +2766,6 @@
             1,
             5
         ],
-        "effectSummaryType": "greyProduction",
         "cardType": "greenProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2292,6 +2781,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$",
             "fr": "$ressource_titanium$"
@@ -2299,6 +2789,15 @@
         "effectText": {
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2312,7 +2811,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 213,
@@ -2322,7 +2822,6 @@
         "tagsId": [
             2
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2338,6 +2837,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$other_card$ / 3 $tag_science$",
             "fr": "$other_card$ / 3 $tag_science$"
@@ -2345,6 +2845,15 @@
         "effectText": {
             "en": "During the production phase, draw a card for every 3 $tag_science$ you have, including this.",
             "fr": "Lors de la phase de production, piochez 1 carte par groupe de 3 $tag_science$ en votre possession, y compris celui-ci."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2358,7 +2867,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 214,
@@ -2369,7 +2879,6 @@
             0,
             3
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2385,6 +2894,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_card$ $other_arrow$ $ressource_megacreditvoid_6$",
             "fr": "$other_card$ $other_arrow$ $ressource_megacreditvoid_6$"
@@ -2392,6 +2902,15 @@
         "effectText": {
             "en": "Action: Discard a card in hand to gain 6 MC.",
             "fr": "Action: D\u00e9faussez une carte de votre main pour gagner 6 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Draw 2 cards.",
@@ -2405,7 +2924,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 217,
@@ -2415,7 +2935,6 @@
         "tagsId": [
             2
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2431,6 +2950,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_oxygen$$skipline$$ressource_megacreditvoid_-5$ if 4 $tag_event$",
             "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_oxygen$ $skipline$ $ressource_megacreditvoid_-5$ si 4 $tag_event$"
@@ -2438,6 +2958,15 @@
         "effectText": {
             "en": "Action : Spend 10 MC to raise the oxygen 1 step. Reduce this by 5 MC if you have 4 or more $tag_event$.",
             "fr": "Action : D\u00e9pensez 10 MC pour augmenter le niveau d'oxyg\u00e8ne de 1. Ce co\u00fbt est r\u00e9duit de 5MC si vous avez 4 $tag_event$ ou plus en jeu."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2451,7 +2980,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 222,
@@ -2462,7 +2992,6 @@
             8,
             4
         ],
-        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2478,6 +3007,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_earth$ : $ressource_microbe$$skipline$$other_researchsymbol$ :$other_researchcard$/$ressource_microbe$",
             "fr": "$tag_earth$ : $ressource_microbe$$skipline$$other_researchsymbol$ :$other_researchcard$/$ressource_microbe$"
@@ -2485,6 +3015,15 @@
         "effectText": {
             "en": "Effect: When you play a $tag_earth$, including this, add a microbe to this card (5 max).$skipline$Effect: When you draw cards during the research phase, draw an additional card for each $ressource_microbe$ on this card.",
             "fr": "Effet: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$Effet: Lorsque vous piochez des cartes pendant la phase de recherche, piochez une carte suppl\u00e9mentaire pour chaque $ressource_microbe$ sur cette carte."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2500,7 +3039,8 @@
         },
         "stockable": [
             "microbe"
-        ]
+        ],
+        "startingMegacredits": 0
     },
     {
         "id": 223,
@@ -2510,7 +3050,6 @@
         "tagsId": [
             0
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2526,6 +3065,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$ $other_card$$skipline$+ $other_card$ / $other_objective$",
             "fr": "$other_arrow$ $other_card$$skipline$+ $other_card$ / $other_objective$"
@@ -2533,6 +3073,15 @@
         "effectText": {
             "en": "Action: Draw a card. Draw 1 additional card for each Objective you have.",
             "fr": "Action: Piochez 1 carte. Piochez 1 carte suppl\u00e9mentaire pour chaque Objectif en votre possession."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2546,7 +3095,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 224,
@@ -2556,7 +3106,6 @@
         "tagsId": [
             6
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "1",
         "prerequisiteTresholdType": "",
@@ -2572,6 +3121,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $otherobjective$",
             "fr": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $otherobjective$"
@@ -2579,6 +3129,15 @@
         "effectText": {
             "en": "Action: Spend 14 MC to take 1 Forest VP and raise the oxygen 1 step. Reduce its cost by 4 MC for each Objective you have.",
             "fr": "Action: D\u00e9pensez 14 MC pour gagner un PV For\u00eat et augmenter l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 4 MC pour chaque Objectif en votre possession."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2592,7 +3151,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 229,
@@ -2602,7 +3162,6 @@
         "tagsId": [
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2618,11 +3177,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -2638,7 +3207,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 230,
@@ -2648,7 +3218,6 @@
         "tagsId": [
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2664,11 +3233,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -2684,7 +3263,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 232,
@@ -2694,7 +3274,6 @@
         "tagsId": [
             3
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2710,6 +3289,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "4 $ressource_heat$",
             "fr": "4 $ressource_heat$"
@@ -2717,6 +3297,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 4 heat.",
             "fr": "Lors de la phase de production, cette carte produit 4 chaleurs."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2730,7 +3319,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 233,
@@ -2740,7 +3330,6 @@
         "tagsId": [
             4
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2756,6 +3345,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$",
             "fr": "$ressource_megacreditvoid_2$"
@@ -2763,6 +3353,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 2 MC.",
             "fr": "Lors de la phase de production, cette carte produit 2 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Increase your $other_tr$ by 1 level for each Objective you have.",
@@ -2776,7 +3375,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 253,
@@ -2787,7 +3387,6 @@
             0,
             6
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2803,6 +3402,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$ $ressource_plant$",
             "fr": "$ressource_plant$ $ressource_plant$"
@@ -2810,6 +3410,15 @@
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
             "fr": "Lors de la Phase de production, cette carte produit 2 plantes."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
@@ -2823,7 +3432,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 260,
@@ -2833,7 +3443,6 @@
         "tagsId": [
             0
         ],
-        "effectSummaryType": "mixedProduction",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2849,13 +3458,23 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "2 $other_card$$skipline$$ressource_steel$",
-            "fr": "2 $other_card$$skipline$$ressource_steel$"
+            "en": "2 $other_card$$mix$$ressource_steel$",
+            "fr": "2 $other_card$$mix$$ressource_steel$"
         },
         "effectText": {
             "en": "During the production phase, draw 2 cards.$skipline$When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": "Lors de la phase de production, piochez 2 cartes.$skipline$Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -2869,7 +3488,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 263,
@@ -2880,7 +3500,6 @@
             0,
             3
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2896,6 +3515,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "4 $ressource_heat$",
             "fr": "4 $ressource_heat$"
@@ -2903,6 +3523,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 4 heat.",
             "fr": "Lors de la phase de production, cette carte produit 4 chaleurs."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
@@ -2916,7 +3545,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 266,
@@ -2927,7 +3557,6 @@
             0,
             3
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2943,6 +3572,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "3 $ressource_heat$",
             "fr": "3 $ressource_heat$"
@@ -2951,8 +3581,17 @@
             "en": "During the production phase, this card produce 3 heat.",
             "fr": "Lors de la phase de production, cette carte produit 3 chaleurs."
         },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
         "playedText": {
-            "en": "If you have a goal, gain 4 heats.",
+            "en": "If you have a milestone, gain 4 heats.",
             "fr": "Si vous avez un objectif, gagnez 4 chaleurs."
         },
         "prerequisiteText": {
@@ -2963,7 +3602,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 268,
@@ -2973,7 +3613,6 @@
         "tagsId": [
             0
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -2989,6 +3628,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$",
             "fr": "$ressource_heat$"
@@ -2996,6 +3636,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 1 heat.",
             "fr": "Lors de la phase de production, cette carte produit 1 chaleur."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Upgrade your Phase card I.",
@@ -3009,7 +3658,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 271,
@@ -3020,7 +3670,6 @@
             0,
             6
         ],
-        "effectSummaryType": "production",
         "cardType": "greenProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3036,6 +3685,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
             "fr": "$ressource_plant$"
@@ -3043,6 +3693,15 @@
         "effectText": {
             "en": "During the production phase, this card produce 1 plant.",
             "fr": "Lors de la phase de production, cette carte produit 1 plante."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "Upgrade your Phase card IV.",
@@ -3056,7 +3715,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 277,
@@ -3068,7 +3728,6 @@
             1,
             4
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3084,6 +3743,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ Si 4 $tag_science$",
             "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ Si 4 $tag_science$"
@@ -3091,6 +3751,15 @@
         "effectText": {
             "en": "Action: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 5 MC if you have 4 $tag_science$ or more.",
             "fr": "Action: D\u00e9pensez 10 MC pour augmentr l'infrastructure de 1 niveau. Ce Co\u00fbt est r\u00e9duit de 5 MC si vous avez 4 $tag_science$ ou plus."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -3104,7 +3773,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 278,
@@ -3114,7 +3784,6 @@
         "tagsId": [
             0
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3130,6 +3799,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$ $other_card$$skipline$If $other_infrastructure$ + $other_card$",
             "fr": "$other_arrow$ $other_card$$skipline$If $other_infrastructure$ + $other_card$"
@@ -3137,6 +3807,15 @@
         "effectText": {
             "en": "Action: Draw a card.$skipline$If the infrastructure was at the yellow level or higher at the beginning of this phase, draw 1 additional card.",
             "fr": "Action: Piochez 1 carte.$skipline$Si l'infrastructure \u00e9tait au niveau jaune ou sup\u00e9rieur au d\u00e9but de cette phase, piochez 1 carte suppl\u00e9mentaire."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -3150,7 +3829,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 279,
@@ -3160,7 +3840,6 @@
         "tagsId": [
             7
         ],
-        "effectSummaryType": "trigger",
         "cardType": "blueProject",
         "vpNumber": "*",
         "prerequisiteTresholdType": "",
@@ -3176,6 +3855,7 @@
             "en": "* = 1 VP for every 2 animals resources on this card.",
             "fr": "* = 1 PV par groupe de 2 animaux sur cette carte."
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_infrastructure$ : $ressource_animal$",
             "fr": "$other_infrastructure$ : $ressource_animal$"
@@ -3183,6 +3863,15 @@
         "effectText": {
             "en": "Effect: When you increase the infrastructure, add 1 animal to this card.",
             "fr": "Effet: Lorsque vous augmentez l'infrastructure, ajoutez 1 animal sur cette carte."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -3198,7 +3887,8 @@
         },
         "stockable": [
             "animal"
-        ]
+        ],
+        "startingMegacredits": 0
     },
     {
         "id": 280,
@@ -3209,7 +3899,6 @@
             0,
             3
         ],
-        "effectSummaryType": "action",
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3225,6 +3914,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-2$ / $tag_plant$",
             "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-2$ / $tag_plant$"
@@ -3232,6 +3922,15 @@
         "effectText": {
             "en": "Action: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 2 MC for each $tag_plant$ you have.",
             "fr": "Action: D\u00e9pensez 10 MC pour augmenter l'infrastructure de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC pour chaque $tag_plant$ en votre possession."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
         },
         "playedText": {
             "en": "",
@@ -3245,7 +3944,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 281,
@@ -3255,7 +3955,6 @@
         "tagsId": [
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3271,11 +3970,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -3291,7 +4000,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 282,
@@ -3301,7 +4011,6 @@
         "tagsId": [
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3317,11 +4026,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -3337,7 +4056,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 284,
@@ -3349,7 +4069,6 @@
             3,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3365,11 +4084,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -3385,7 +4114,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 286,
@@ -3397,7 +4127,6 @@
             6,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3413,11 +4142,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -3433,7 +4172,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 289,
@@ -3444,7 +4184,6 @@
             2,
             9
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "-1",
         "prerequisiteTresholdType": "",
@@ -3460,11 +4199,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -3480,7 +4229,8 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
     {
         "id": 292,
@@ -3490,7 +4240,6 @@
         "tagsId": [
             6
         ],
-        "effectSummaryType": "",
         "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3506,11 +4255,21 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "",
             "fr": ""
         },
         "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "",
             "fr": ""
         },
@@ -3526,17 +4285,17 @@
             "en": "$other_infrastructure$",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 0
     },
-	{
+    {
         "id": 1000,
         "card_code": "1000",
-        "origin": "base",
-        "cost": 0,
-		"startingMegacredits": 24,
-        "tagsId": [ 5
+        "origin": "Base",
+        "cost": 12,
+        "tagsId": [
+            5
         ],
-        "effectSummaryType": "trigger",
         "cardType": "corporation",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3552,17 +4311,27 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "greyProduction",
         "effectSummaryText": {
-            "en": "$tag_jovian$: +1 $other_tr$",
-            "fr": ""
+            "en": "$ressource_titanium$",
+            "fr": "$ressource_titanium$"
         },
         "effectText": {
+            "en": "When you play a $tag_space$, you pay 3 MC less for it.",
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$tag_jovian$: +1 $other_tr$",
+            "fr": "$tag_jovian$: +1 $other_tr$"
+        },
+        "effectText2": {
             "en": "Effect: Each time you play a $tag_jovian$, excluding this, gain 1 TR",
-            "fr": ""
+            "fr": "Effet: Lorsque vous jouez un badge $tag_jovian$, except\u00e9 celui-ci, vous gagnez 1 NT."
         },
         "playedText": {
-            "en": "Add second effect",
-            "fr": ""
+            "en": "You start with 24MC.",
+            "fr": "Vous commencez avec 24MC."
         },
         "prerequisiteText": {
             "en": "",
@@ -3572,17 +4341,17 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 24
     },
-	{
+    {
         "id": 1001,
         "card_code": "1001",
-        "origin": "base",
-        "cost": 0,
-		"startingMegacredits": 45,
-        "tagsId": [ 3
+        "origin": "Base",
+        "cost": 12,
+        "tagsId": [
+            5
         ],
-        "effectSummaryType": "trigger",
         "cardType": "corporation",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3598,17 +4367,27 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$tag_power$: $ressource_megacreditvoid_-3$",
-            "fr": ""
+            "en": "$ressource_heat$",
+            "fr": "$ressource_heat$"
         },
         "effectText": {
-            "en": "Effect: When you play a $tag_power$, you pay 3 MC less for it.",
-            "fr": ""
+            "en": "Increase yout heat production by 1.",
+            "fr": "Augmentez votre production de chaleur de 1."
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$tag_power$ :$ressource_megacreditvoid_-3$",
+            "fr": "$tag_power$ :$ressource_megacreditvoid_-3$"
+        },
+        "effectText2": {
+            "en": "Effect : When you play an $tag_power$, you pay 3 MC less.",
+            "fr": "Effet : Lorsque vous jouez un $tag_power$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
         "playedText": {
-            "en": "Add second effect",
-            "fr": ""
+            "en": "You start with 45MC.",
+            "fr": "Vous commencez avec 45MC."
         },
         "prerequisiteText": {
             "en": "",
@@ -3618,17 +4397,17 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 45
     },
-	{
+    {
         "id": 1002,
         "card_code": "1002",
-        "origin": "base",
-        "cost": 0,
-		"startingMegacredits": 51,
-        "tagsId": [ 4
+        "origin": "Base",
+        "cost": 12,
+        "tagsId": [
+            4
         ],
-        "effectSummaryType": "trigger",
         "cardType": "corporation",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -3644,17 +4423,27 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_earth$: $ressource_megacreditvoid_-3$",
-            "fr": ""
+            "en": "$tag_earth$ :$ressource_megacreditvoid_-3$",
+            "fr": "$tag_earth$ :$ressource_megacreditvoid_-3$"
         },
         "effectText": {
-            "en": "Effect: When you play a $tag_earth$, you pay 3 MC less for it.",
+            "en": "Effect : When you play an $tag_earth$, you pay 3 MC less.",
+            "fr": "Effet : Lorsque vous jouez un $tag_earth$, le co\u00fbt est r\u00e9duit de 3 MC."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
             "fr": ""
         },
         "playedText": {
-            "en": "",
-            "fr": ""
+            "en": "You start with 51MC.",
+            "fr": "Vous commencez avec 51MC."
         },
         "prerequisiteText": {
             "en": "",
@@ -3664,6 +4453,7 @@
             "en": "",
             "fr": ""
         },
-        "stockable": []
+        "stockable": [],
+        "startingMegacredits": 51
     }
 ]

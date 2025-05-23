@@ -1,7 +1,7 @@
 import { RessourceInfo } from "../interfaces/global.interface"
 import { PlayableCardModel } from "../models/cards/project-card.model"
 
-export type SummaryType = 'action' | 'trigger' | 'production' | 'greyProduction' | undefined
+export type SummaryType = 'action' | 'trigger' | 'production' | 'greyProduction' | 'mixedProduction' | undefined
 export type CardType = 'redProject' | 'greenProject' | 'blueProject' | undefined | 'corporation'
 export type CardTypeColor = 'red' | 'green' | 'blue' | 'corporation' | undefined
 export type PrerequisiteType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | 'heat' | 'tr' | undefined

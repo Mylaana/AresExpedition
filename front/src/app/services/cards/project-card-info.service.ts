@@ -4,7 +4,7 @@ import jsonData from '../../../assets/data/cards_data.json'
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
 import { AdvancedRessourceType } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
-import { PlayableCardInterface } from "../../interfaces/card.interface";
+import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface";
 
 const language = 'en'
 
@@ -75,7 +75,6 @@ export class ProjectCardInfoService {
 				origin: jsonCard.origin,
 				costInitial: jsonCard.cost,
 				tagsId: this.convertTagList(jsonCard.tagsId),
-				cardSummaryType: this.convertSummaryType(jsonCard.effectSummaryType),
 				cardType: this.convertCardType(jsonCard.cardType),
 				vpNumber: jsonCard.vpNumber,
 				prerequisiteTresholdType: this.convertPrerequisiteTresholdType(jsonCard.prerequisiteTresholdType),
@@ -86,8 +85,12 @@ export class ProjectCardInfoService {
 
 				title: jsonCard.title[language],
 				vpText: jsonCard.vpText[language],
+				/*
+				cardSummaryType: this.convertSummaryType(jsonCard.effectSummaryType),
 				effectSummaryText: jsonCard.effectSummaryText[language],
 				effectText: jsonCard.effectText[language],
+				*/
+				effects: this.loadEffects(jsonCard),// this.loadEffects(jsonCard.effects),
 				playedText: jsonCard.playedText[language],
 				prerequisiteText: jsonCard.prerequisiteText[language],
 				prerequisiteSummaryText: jsonCard.prerequisiteSummaryText[language],
@@ -133,6 +136,9 @@ export class ProjectCardInfoService {
             }
             case('greyProduction'):{
                 return 'greyProduction'
+            }
+			case('mixedProduction'):{
+                return 'mixedProduction'
             }
             default:{
                 return undefined
@@ -196,4 +202,19 @@ export class ProjectCardInfoService {
             }
         }
     }
+	private loadEffects(input: any){
+		let effects: PlayableCardEffect[] = []
+
+		effects.push({
+			effectText: input['effectText'][language],
+			effectSummaryText: input['effectSummaryText'][language],
+			effectSummaryType: this.convertSummaryType(input['effectSummaryType'])
+		})
+		effects.push({
+			effectText: input['effectText2'][language],
+			effectSummaryText: input['effectSummaryText2'][language],
+			effectSummaryType: this.convertSummaryType(input['effectSummaryType2'])
+		})
+		return effects
+	}
 }
