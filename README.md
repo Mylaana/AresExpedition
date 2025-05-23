@@ -50,16 +50,6 @@ Expression has changed Error after ocean bonus applied on reload
 Escape keyboard not exiting card builder selection   
 Card draw on production can be rerolled by refreshing   
 
-## Refactoring :
-Websocket: remove the global channel and switch to multiple sendings on private ones   
-text with image component: refactoring   
-test needs: empty components from the app logic and transfer it into services/classes    
-global: removing obvious comments   
-project-card-info-service (and some other?): switch to static   
-TriggerState: switch out trigger id checks from model to a service   
-Optimize data volume exchanged   
-Refactor playable cards component should be storing clientstate and not repeatedly check for state   
-
 ## Must have for v1 :
 ### Cards
 Prerequisites for playing project cards feature   
@@ -83,6 +73,16 @@ Deploy on AWS Lightsail
 Add backend REST requests content validation   
 
 ## Nice to have for v1
+## Refactoring :
+Websocket: remove the global channel and switch to multiple sendings on private ones   
+text with image component: refactoring   
+test needs: empty components from the app logic and transfer it into services/classes    
+global: removing obvious comments   
+project-card-info-service (and some other?): switch to static   
+TriggerState: switch out trigger id checks from model to a service   
+Optimize data volume exchanged   
+Refactor playable cards component should be storing clientstate and not repeatedly check for state   
+
 ### Interface
 Add Display property for current event, so the screen does not flash when resolving technical events   
 Add log   
