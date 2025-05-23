@@ -73,12 +73,12 @@
 				[effectSummaryType]="projectCard.cardSummaryType">
 			</app-card-effect>
 			-->
-			<div class="wrapper-left-layout">
-				<div class="left-layout" [ngClass]="projectCard.cardType"></div>
-				<div class="top-left-layout" [ngClass]="projectCard.cardType"></div>
-			</div>
-			<app-card-background [cardType]="projectCard.cardType"></app-card-background>
 		</button>
+		<div class="wrapper-left-layout">
+			<div class="left-layout" [ngClass]="projectCard.cardType"></div>
+			<div class="top-left-layout" [ngClass]="projectCard.cardType"></div>
+		</div>
+		<app-card-background [cardType]="projectCard.cardType"></app-card-background>
 	</div>
 	<app-card-activation
 		*ngIf="state.isActivable()"

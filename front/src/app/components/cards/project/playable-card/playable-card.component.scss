@@ -32,6 +32,8 @@ button {
 	position: relative;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
+	border-radius: calc(var(--card-height) * .05);
 	&.hovered.selectable{
 		z-index: 10;
 	}
@@ -47,11 +49,11 @@ button {
     height: var(--card-height);
     width: var(--card-width);
 
-    overflow: hidden;
-
     padding-bottom: $card-bottom-padding;
-    border: black solid 2px;
+	overflow: hidden;
+	border: black solid 2px;
     border-radius: calc(var(--card-height) * .05);
+
 }
 .wrapper-selection-border{
 	position: relative;
@@ -132,8 +134,8 @@ app-card-cost{
 app-card-background{
     z-index: -1;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
 	height: 100%;
 	width: 100%;
 }
