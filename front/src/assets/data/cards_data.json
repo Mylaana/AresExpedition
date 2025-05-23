@@ -1715,8 +1715,8 @@
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$$skipline$$ressource_titaniuim$",
-            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_titaniuim$"
+            "en": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$",
+            "fr": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC.$skipline$When you play a $tag_space$, you pay 3 MC less for it.",
@@ -1880,7 +1880,7 @@
             "en": "",
             "fr": ""
         },
-        "effectSummaryType": "",
+        "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
             "fr": "$ressource_plant$"
@@ -2668,8 +2668,8 @@
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$$skipline$$ressource_steel$",
-            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_steel$"
+            "en": "$ressource_megacreditvoid_1$$mix$$ressource_steel$",
+            "fr": "$ressource_megacreditvoid_1$$mix$$ressource_steel$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC. When you play a BUILDING, you pay 2 MC less for it.",
@@ -3460,8 +3460,8 @@
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "2 $other_card$$skipline$$ressource_steel$",
-            "fr": "2 $other_card$$skipline$$ressource_steel$"
+            "en": "2 $other_card$$mix$$ressource_steel$",
+            "fr": "2 $other_card$$mix$$ressource_steel$"
         },
         "effectText": {
             "en": "During the production phase, draw 2 cards.$skipline$When you play a $tag_building$, you pay 2 MC less for it.",

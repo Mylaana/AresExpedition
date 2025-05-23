@@ -6,8 +6,10 @@
 			<div [ngClass]="['effect-summary-foreground-radial-white', effectSummaryType]" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
 			<div [ngClass]="['effect-summary-background-radial-grid', effectSummaryType]" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
 			<div [ngClass]="'effect-summary-background--' + effectSummaryType | lowercase"></div>
-			<div class="effect-summary-text">
-				<app-text-with-image *ngIf="effectSummaryText" [rawText]="effectSummaryText"></app-text-with-image>
+			<div class="wrapper-effect-summary-text">
+				<div class="summary-text" *ngFor="let t of _summaryText">
+					<app-text-with-image [rawText]="t"></app-text-with-image>
+				</div>
 			</div>
 		</div>
 	</div>

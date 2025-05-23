@@ -65,8 +65,6 @@ Refactor playable cards component should be storing clientstate and not repeated
 Prerequisites for playing project cards feature   
 Implement all cards   
 Implement all corps   
-Add Hybrid production zone   
-Add Multiple production zones (for corps)   
 
 ### Misc
 Add victory check   
@@ -94,6 +92,8 @@ Add popup-like window for non-production phase gains
 Action phase: Switch buttons to vertical on the left
 Production phase: add cards drew display   
 Card Builder: show already built card on refresh   
+Add proper Hybrid production zone looks   
+Rework effect summary zone (refacto + looks)   
 
 ### Responsiveness
 Game creation menu

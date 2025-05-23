@@ -210,7 +210,7 @@
         0 $bottom-inside-height);
 }
 .effect-summary-background{
-	@each $type in ('production', 'greyproduction'){
+	@each $type in ('production', 'greyproduction', 'mixedproduction'){
 		&--#{$type}{
 			z-index: 2;
 			position: relative;
@@ -241,6 +241,15 @@
     background: repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
     background: -webkit-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
+}
+.effect-summary-background--mixedproduction{
+
+    $color-one: rgb(253, 157, 67);
+    $color-two: rgb(125, 125, 125);
+    $step1: 2%;
+    $step2: 4%;
+    $step3: 6%;
+    background: linear-gradient(to bottom, $color-one 48%, rgb(193, 193, 193) 48%, rgb(193, 193, 193) 52%, $color-two 52%);
 }
 .effect-summary-background-radial-grid{
     z-index: 1;
@@ -316,7 +325,7 @@
     height: 100%;
     background: radial-gradient(ellipse 200% 80%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%,  rgba(255,255,255, .7) 55%, rgba(255,255,255,1) 100%);
 }
-.effect-summary-text{
+.wrapper-effect-summary-text{
     z-index: 3;
     position: absolute;
     top: 0;
@@ -325,4 +334,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+	flex-direction: column;
+	gap: 10%;
 }

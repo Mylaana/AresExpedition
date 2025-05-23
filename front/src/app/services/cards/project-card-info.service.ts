@@ -137,6 +137,9 @@ export class ProjectCardInfoService {
             case('greyProduction'):{
                 return 'greyProduction'
             }
+			case('mixedProduction'):{
+                return 'mixedProduction'
+            }
             default:{
                 return undefined
             }
@@ -212,7 +215,6 @@ export class ProjectCardInfoService {
 			effectSummaryText: input['effectSummaryText2'][language],
 			effectSummaryType: this.convertSummaryType(input['effectSummaryType2'])
 		})
-		console.log(effects)
 		return effects
 	}
 }
