@@ -12,6 +12,11 @@ export interface CardState{
 	ignoreCost: boolean
 }
 
+export interface PlayableCardEffect {
+	effectSummaryText: string
+	effectText: string
+	effectSummaryType: SummaryType
+}
 
 export interface PlayableCardInterface {
 	id: number
@@ -19,7 +24,6 @@ export interface PlayableCardInterface {
 	origin: string
 	costInitial: number
 	tagsId: number[]
-	cardSummaryType?: SummaryType
 	cardType: CardType
 	vpNumber?: string
 	prerequisiteTresholdType?: PrerequisiteTresholdType
@@ -31,6 +35,8 @@ export interface PlayableCardInterface {
 	vpText?: string
 	effectSummaryText?: string
 	effectText?: string
+	cardSummaryType?: SummaryType
+	effects: PlayableCardEffect[]
 	playedText?: string
 	prerequisiteText?: string
 	prerequisiteSummaryText?: string

@@ -2,6 +2,7 @@ import csv
 import os
 import json
 import copy
+import traceback
 
 
 parser_columns_map = [
@@ -14,9 +15,9 @@ parser_columns_map = [
     {'column_name': 'cost', 'column_id': -1 , 'output_field_name': 'cost', 'split_per_language': False},
     {'column_name': 'card_Type', 'column_id': -1 , 'output_field_name': 'cardType', 'split_per_language': False},
     {'column_name': 'tagsId', 'column_id': -1 , 'output_field_name': 'tagsId', 'split_per_language': False},
-    {'column_name': 'effectSummaryType', 'column_id': -1 , 'output_field_name': 'effectSummaryType', 'split_per_language': False},
     {'column_name': 'vpNumber', 'column_id': -1 , 'output_field_name': 'vpNumber', 'split_per_language': False},
-    {'column_name': 'effectSummaryType', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
+    {'column_name': 'effectSummaryType', 'column_id': -1 , 'output_field_name': 'effectSummaryType', 'split_per_language': False},
+    {'column_name': 'effectSummaryType2', 'column_id': -1 , 'output_field_name': 'effectSummaryType2', 'split_per_language': False},
     {'column_name': 'prerequisiteType', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'prerequisiteTresholdType', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'prerequisiteTag', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
@@ -24,6 +25,8 @@ parser_columns_map = [
     {'column_name': 'prerequisiteTresholdStep', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'prerequisiteTresholdValue', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'stockableRessource', 'column_id': -1 , 'output_field_name': 'stockable', 'split_per_language': False},
+    {'column_name': 'startingMegacredits', 'column_id': -1 , 'output_field_name': 'startingMegacredits', 'split_per_language': False},
+
     {'column_name': 'title_en', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
     {'column_name': 'title_fr', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
     {'column_name': 'vpText_en', 'column_id': -1 , 'output_field_name': 'vpText', 'split_per_language': True},
@@ -32,6 +35,10 @@ parser_columns_map = [
     {'column_name': 'effectSummaryText_fr', 'column_id': -1 , 'output_field_name': 'effectSummaryText', 'split_per_language': True},
     {'column_name': 'effectText_en', 'column_id': -1 , 'output_field_name': 'effectText', 'split_per_language': True},
     {'column_name': 'effectText_fr', 'column_id': -1 , 'output_field_name': 'effectText', 'split_per_language': True},
+    {'column_name': 'effectSummaryText2_en', 'column_id': -1 , 'output_field_name': 'effectSummaryText2', 'split_per_language': True},
+    {'column_name': 'effectSummaryText2_fr', 'column_id': -1 , 'output_field_name': 'effectSummaryText2', 'split_per_language': True},
+    {'column_name': 'effectText2_en', 'column_id': -1 , 'output_field_name': 'effectText2', 'split_per_language': True},
+    {'column_name': 'effectText2_fr', 'column_id': -1 , 'output_field_name': 'effectText2', 'split_per_language': True},
     {'column_name': 'playedText_en', 'column_id': -1 , 'output_field_name': 'playedText', 'split_per_language': True},
     {'column_name': 'playedText_fr', 'column_id': -1 , 'output_field_name': 'playedText', 'split_per_language': True},
     {'column_name': 'prerequisiteText_en', 'column_id': -1 , 'output_field_name': 'prerequisiteText', 'split_per_language': True},
@@ -46,7 +53,6 @@ PARSER_CARD_INFO_MODEL = {
     "origin": "",
     "cost": 0,
     "tagsId": [],
-    "effectSummaryType": "",
     "cardType": "",
     "vpNumber": "",
     "prerequisiteTresholdType": "",
@@ -56,12 +62,17 @@ PARSER_CARD_INFO_MODEL = {
     "phaseDown": "",
     "title": {},
     "vpText": {},
+    "effectSummaryType": "",
     "effectSummaryText": {},
     "effectText": {},
+    "effectSummaryType2": "",
+    "effectSummaryText2": {},
+    "effectText2": {},
     "playedText": {},
     "prerequisiteText": {},
     "prerequisiteSummaryText": {},
-    "stockable": []
+    "stockable": [],
+    "startingMegacredits": 0
 }
 
 
@@ -112,7 +123,8 @@ def parse_row(csv_row: str):
                         case _:
                             parsed_value[index] = parsed_value[index]
             case "<class 'int'>":
-                parsed_row[map['output_field_name']] = int(parsed_value)
+                if parsed_value!='':
+                    parsed_row[map['output_field_name']] = int(parsed_value)
             case _:
                 parsed_row[map['output_field_name']] = parsed_value
 
@@ -127,8 +139,8 @@ def main():
     output_name = 'cards_data.json'
 
     parsed = []
-    with open(file=input_path + input_name + ".csv", mode="r", encoding="utf-8") as csvfile:
-        reader = csv.reader(csvfile)
+    with open(file=input_path + input_name + ".csv", mode="r") as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')
         skipped_header = False
         for row in reader:
             if not skipped_header:
@@ -147,4 +159,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception:
+        traceback.print_exc()
+        print('File must be a csv separated with ";"')
+    

@@ -3,7 +3,7 @@ import { AdvancedRessourceType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
-import { PlayableCardInterface } from "../../interfaces/card.interface"
+import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
 import { Utils } from "../../utils/utils"
 
 export class PlayableCardModel{
@@ -23,6 +23,7 @@ export class PlayableCardModel{
     phaseDown?: string;
     title!: string;
     vpText?: string;
+	effects: PlayableCardEffect[] = []
     effectSummaryText?: string;
     effectText?: string;
     playedText?: string;
