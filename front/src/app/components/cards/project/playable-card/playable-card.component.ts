@@ -24,6 +24,7 @@ import { CardTagsZoneComponent } from '../card-blocks/card-tags-background/card-
 import { CardTitleComponent } from '../card-blocks/card-title/card-title.component';
 import { CardStartingMegacreditsComponent } from '../card-blocks/card-starting-megacredits/card-starting-megacredits.component';
 import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
+import { CardStatusComponent } from '../card-blocks/card-status/card-status.component';
 
 @Component({
     selector: 'app-playable-card',
@@ -41,7 +42,8 @@ import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
         CardStockComponent,
         CardTagsZoneComponent,
         CardTitleComponent,
-        CardStartingMegacreditsComponent
+        CardStartingMegacreditsComponent,
+		CardStatusComponent
     ],
     templateUrl: './playable-card.component.html',
     styleUrl: './playable-card.component.scss',

@@ -26,6 +26,7 @@ parser_columns_map = [
     {'column_name': 'prerequisiteTresholdValue', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'stockableRessource', 'column_id': -1 , 'output_field_name': 'stockable', 'split_per_language': False},
     {'column_name': 'startingMegacredits', 'column_id': -1 , 'output_field_name': 'startingMegacredits', 'split_per_language': False},
+    {'column_name': 'status', 'column_id': -1 , 'output_field_name': 'status', 'split_per_language': False},
 
     {'column_name': 'title_en', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
     {'column_name': 'title_fr', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
@@ -72,7 +73,8 @@ PARSER_CARD_INFO_MODEL = {
     "prerequisiteText": {},
     "prerequisiteSummaryText": {},
     "stockable": [],
-    "startingMegacredits": 0
+    "startingMegacredits": 0,
+    "status": ""
 }
 
 

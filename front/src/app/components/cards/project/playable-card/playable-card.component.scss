@@ -44,16 +44,14 @@ button {
 
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 0px;
 
     height: var(--card-height);
     width: var(--card-width);
 
-    padding-bottom: $card-bottom-padding;
 	overflow: hidden;
 	border: black solid 2px;
     border-radius: calc(var(--card-height) * .05);
-
 }
 .wrapper-selection-border{
 	position: relative;
@@ -122,6 +120,13 @@ button {
 .wrapper-card-element-top{
 	display: flex;
 	margin-left: 25%;
+}
+.wrapper-card-element-bottom{
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: end;
 }
 app-card-vp{
 	width: 100%;

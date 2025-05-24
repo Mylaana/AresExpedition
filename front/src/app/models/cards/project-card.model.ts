@@ -35,6 +35,7 @@ export class PlayableCardModel{
     triggerLimit!: TriggerLimit
 	activated: number = 0
 	startingMegacredits?: number
+	status!: string
 
     //not loaded from data
 
