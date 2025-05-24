@@ -126,6 +126,8 @@ button {
 	flex-direction: column;
 	justify-content: end;
 	align-items: end;
+	height: auto;
+	flex: .3;
 	&.grow{
 		flex: 1;
 	}
