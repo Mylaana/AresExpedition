@@ -1,0 +1,31 @@
+:host{
+	width: 100%;
+	display: flex;
+	justify-content: end;
+	gap: 5px;
+	min-height: 10px;
+	@media (max-width:1919px) {
+		min-height: 8px;
+	}
+}
+.main{
+	display: flex;
+	gap: 5px;
+	width: fit-content;
+	margin-right: 7px;
+	@media (min-width:1919px) {
+		padding-left: 5px;
+		padding-right: 5px;
+		border-radius: 5px;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		background-color: rgba(255, 255, 255, 0.7);
+	}
+}
+p{
+	color: black;
+	font-size: 8px;
+	@media (max-width:1919px) {
+			font-size: 6.5px;
+	}
+}

@@ -106,3 +106,9 @@ Command buttons / setting button position
 ### Misc
 Add settings options   
 Add game modes   
+
+## Game Options
+initial mulligan is an andvanced game mode option, not base   
+merger   
+fanmade cards   
+some projects cards should only be accessible when 5+ players   

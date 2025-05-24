@@ -57,22 +57,17 @@
 					</app-card-vp>
 				</div>
 			</div>
-			<ng-container *ngFor="let effect of projectCard.effects">
-				<app-card-effect
-					*ngIf="effect"
-					[effectText]="effect.effectText"
-					[effectSummaryText]="effect.effectSummaryText"
-					[effectSummaryType]="effect.effectSummaryType">
-				</app-card-effect>
-			</ng-container>
-			<!--
-			<app-card-effect
-				*ngIf="projectCard.effectText"
-				[effectText]="projectCard.effectText"
-				[effectSummaryText]="projectCard.effectSummaryText"
-				[effectSummaryType]="projectCard.cardSummaryType">
-			</app-card-effect>
-			-->
+			<div [ngClass]="['wrapper-card-element-bottom', !projectCard.vpNumber?'grow':'']">
+				<ng-container *ngFor="let effect of projectCard.effects">
+					<app-card-effect
+						*ngIf="effect"
+						[effectText]="effect.effectText"
+						[effectSummaryText]="effect.effectSummaryText"
+						[effectSummaryType]="effect.effectSummaryType">
+					</app-card-effect>
+				</ng-container>
+				<app-card-status [cardCode]="projectCard.cardCode" [cardStatus]="projectCard.status"  [hovered]="_hovered"></app-card-status>
+			</div>
 		</button>
 		<div class="wrapper-left-layout">
 			<div class="left-layout" [ngClass]="projectCard.cardType"></div>

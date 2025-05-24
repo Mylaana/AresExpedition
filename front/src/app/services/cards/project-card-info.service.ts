@@ -85,17 +85,13 @@ export class ProjectCardInfoService {
 
 				title: jsonCard.title[language],
 				vpText: jsonCard.vpText[language],
-				/*
-				cardSummaryType: this.convertSummaryType(jsonCard.effectSummaryType),
-				effectSummaryText: jsonCard.effectSummaryText[language],
-				effectText: jsonCard.effectText[language],
-				*/
 				effects: this.loadEffects(jsonCard),// this.loadEffects(jsonCard.effects),
 				playedText: jsonCard.playedText[language],
 				prerequisiteText: jsonCard.prerequisiteText[language],
 				prerequisiteSummaryText: jsonCard.prerequisiteSummaryText[language],
 				stockable: this.convertStockable(jsonCard.stockable),
 				startingMegacredits: jsonCard.startingMegacredits,
+				status: jsonCard.status
 			}
 			let cardModel = PlayableCardModel.fromInterface(card)
 			if(card.stockable){
@@ -210,11 +206,13 @@ export class ProjectCardInfoService {
 			effectSummaryText: input['effectSummaryText'][language],
 			effectSummaryType: this.convertSummaryType(input['effectSummaryType'])
 		})
-		effects.push({
-			effectText: input['effectText2'][language],
-			effectSummaryText: input['effectSummaryText2'][language],
-			effectSummaryType: this.convertSummaryType(input['effectSummaryType2'])
-		})
+		if(input['effectSummaryType2']){
+			effects.push({
+				effectText: input['effectText2'][language],
+				effectSummaryText: input['effectSummaryText2'][language],
+				effectSummaryType: this.convertSummaryType(input['effectSummaryType2'])
+			})
+		}
 		return effects
 	}
 }

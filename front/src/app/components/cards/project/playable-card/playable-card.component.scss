@@ -44,16 +44,14 @@ button {
 
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 0px;
 
     height: var(--card-height);
     width: var(--card-width);
 
-    padding-bottom: $card-bottom-padding;
 	overflow: hidden;
 	border: black solid 2px;
     border-radius: calc(var(--card-height) * .05);
-
 }
 .wrapper-selection-border{
 	position: relative;
@@ -123,6 +121,15 @@ button {
 	display: flex;
 	margin-left: 25%;
 }
+.wrapper-card-element-bottom{
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: end;
+	&.grow{
+		flex: 1;
+	}
+}
 app-card-vp{
 	width: 100%;
 	flex: 1;
@@ -139,8 +146,12 @@ app-card-background{
 	height: 100%;
 	width: 100%;
 }
-app-card-effect, app-card-prerequisite, app-card-played-info{
+app-card-prerequisite, app-card-played-info{
 	width: auto;
+	padding-right: var(--card-text-right-padding);
+}
+app-card-effect{
+	width: 100%;
 	padding-right: var(--card-text-right-padding);
 }
 app-card-tags-zone{

@@ -54,7 +54,8 @@
             "fr": "5 $tag_science$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 9,
@@ -108,7 +109,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 18,
@@ -166,7 +168,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 20,
@@ -222,7 +225,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 25,
@@ -278,7 +282,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 29,
@@ -334,7 +339,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 36,
@@ -390,7 +396,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 37,
@@ -446,7 +453,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 42,
@@ -502,7 +510,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 45,
@@ -558,7 +567,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 46,
@@ -617,7 +627,8 @@
         "stockable": [
             "science"
         ],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 49,
@@ -671,7 +682,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 54,
@@ -728,7 +740,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 58,
@@ -784,7 +797,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 62,
@@ -840,7 +854,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 65,
@@ -898,7 +913,8 @@
             "fr": "$tag_animal$ $tag_microbe$ $tag_plant$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "blocked"
     },
     {
         "id": 66,
@@ -954,7 +970,8 @@
             "fr": "$other_temperature$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 69,
@@ -1011,7 +1028,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 71,
@@ -1067,7 +1085,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "blocked"
     },
     {
         "id": 74,
@@ -1124,7 +1143,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 76,
@@ -1181,7 +1201,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 77,
@@ -1238,7 +1259,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 81,
@@ -1296,7 +1318,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 83,
@@ -1353,7 +1376,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 92,
@@ -1409,7 +1433,8 @@
             "fr": "$other_temperature$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 93,
@@ -1466,7 +1491,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 96,
@@ -1524,7 +1550,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 108,
@@ -1580,7 +1607,8 @@
             "fr": "$other_temperature$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 123,
@@ -1636,7 +1664,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 129,
@@ -1690,7 +1719,8 @@
             "fr": "max 3 $other_ocean$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 135,
@@ -1746,7 +1776,8 @@
             "fr": "-3 $ressource_heat$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 141,
@@ -1803,7 +1834,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 144,
@@ -1857,7 +1889,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 145,
@@ -1913,7 +1946,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 155,
@@ -1969,7 +2003,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 161,
@@ -2026,7 +2061,8 @@
             "fr": "$other_oxygen$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 163,
@@ -2083,7 +2119,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 171,
@@ -2139,7 +2176,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 175,
@@ -2196,7 +2234,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 180,
@@ -2252,7 +2291,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 181,
@@ -2308,7 +2348,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 182,
@@ -2364,7 +2405,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 183,
@@ -2421,7 +2463,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 184,
@@ -2477,7 +2520,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 190,
@@ -2533,7 +2577,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 197,
@@ -2587,7 +2632,8 @@
             "fr": "$other_temperature$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 198,
@@ -2643,7 +2689,8 @@
             "fr": "$other_temperature$"
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 201,
@@ -2699,7 +2746,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 202,
@@ -2756,7 +2804,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 204,
@@ -2814,7 +2863,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 213,
@@ -2870,7 +2920,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 214,
@@ -2927,7 +2978,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "filled"
     },
     {
         "id": 217,
@@ -2983,7 +3035,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "filled"
     },
     {
         "id": 222,
@@ -3042,7 +3095,8 @@
         "stockable": [
             "microbe"
         ],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 223,
@@ -3098,7 +3152,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "blocked"
     },
     {
         "id": 224,
@@ -3154,7 +3209,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "blocked"
     },
     {
         "id": 229,
@@ -3210,7 +3266,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 230,
@@ -3266,7 +3323,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "filled"
     },
     {
         "id": 232,
@@ -3322,7 +3380,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 233,
@@ -3378,7 +3437,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 253,
@@ -3435,7 +3495,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 260,
@@ -3491,7 +3552,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 263,
@@ -3548,7 +3610,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 266,
@@ -3605,7 +3668,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 268,
@@ -3661,7 +3725,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 271,
@@ -3718,7 +3783,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 277,
@@ -3776,7 +3842,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "blocked"
     },
     {
         "id": 278,
@@ -3832,7 +3899,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "blocked"
     },
     {
         "id": 279,
@@ -3890,7 +3958,8 @@
         "stockable": [
             "animal"
         ],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 280,
@@ -3947,7 +4016,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "filled"
     },
     {
         "id": 281,
@@ -4003,7 +4073,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 282,
@@ -4059,7 +4130,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 284,
@@ -4117,7 +4189,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 286,
@@ -4175,7 +4248,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 289,
@@ -4232,7 +4306,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "implemented"
     },
     {
         "id": 292,
@@ -4288,7 +4363,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 0
+        "startingMegacredits": 0,
+        "status": "filled"
     },
     {
         "id": 1000,
@@ -4344,7 +4420,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 24
+        "startingMegacredits": 24,
+        "status": "filled"
     },
     {
         "id": 1001,
@@ -4400,7 +4477,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 45
+        "startingMegacredits": 45,
+        "status": "filled"
     },
     {
         "id": 1002,
@@ -4456,7 +4534,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 51
+        "startingMegacredits": 51,
+        "status": "filled"
     },
     {
         "id": 1003,
@@ -4513,6 +4592,7 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 28
+        "startingMegacredits": 28,
+        "status": "filled"
     }
 ]
