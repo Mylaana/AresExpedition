@@ -49,6 +49,7 @@ Backend: Junit
 Expression has changed Error after ocean bonus applied on reload   
 Escape keyboard not exiting card builder selection   
 Card draw on production can be rerolled by refreshing   
+Websocket connection error while not in the game   
 
 ## Must have for v1 :
 ### Cards

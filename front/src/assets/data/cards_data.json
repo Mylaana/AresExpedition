@@ -5,7 +5,8 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -565,7 +566,8 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -4455,5 +4457,62 @@
         },
         "stockable": [],
         "startingMegacredits": 51
+    },
+    {
+        "id": 1003,
+        "card_code": "1003",
+        "origin": "FanMade",
+        "cost": 12,
+        "tagsId": [
+            4,
+            1
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Point Luna",
+            "fr": "Point Luna"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_titanium$",
+            "fr": "$ressource_titanium$"
+        },
+        "effectText": {
+            "en": "When you play a $tag_space$, you pay 3 MC less for it.",
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$tag_earth$: +$ressource_card$",
+            "fr": "$tag_earth$: +$ressource_card$"
+        },
+        "effectText2": {
+            "en": "Effect: Each time you play a $tag_earth$, draw a card",
+            "fr": "Effet: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
+        },
+        "playedText": {
+            "en": "You start with 28MC.",
+            "fr": "Vous commencez avec 28MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 28
     }
 ]
