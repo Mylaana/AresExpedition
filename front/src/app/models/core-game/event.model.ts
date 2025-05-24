@@ -291,11 +291,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
         }
 
         activeZone.resolveCardBuilderButtonClicked(button)
-
-		/*
-        if(button.name==='selectCard'){return}
-        this.cardSelector.stateFromParent = {selectable:false, buildable:false}
-		*/
     }
 	private discardBuilderSelectedCard(builderId: number){
 		let targetBuilder = this.cardBuilder[builderId]
