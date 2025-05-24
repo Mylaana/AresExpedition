@@ -146,8 +146,12 @@ app-card-background{
 	height: 100%;
 	width: 100%;
 }
-app-card-effect, app-card-prerequisite, app-card-played-info{
+app-card-prerequisite, app-card-played-info{
 	width: auto;
+	padding-right: var(--card-text-right-padding);
+}
+app-card-effect{
+	width: 100%;
 	padding-right: var(--card-text-right-padding);
 }
 app-card-tags-zone{
