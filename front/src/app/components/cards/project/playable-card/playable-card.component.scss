@@ -122,11 +122,13 @@ button {
 	margin-left: 25%;
 }
 .wrapper-card-element-bottom{
-	flex: 1;
 	display: flex;
 	flex-direction: column;
 	justify-content: end;
 	align-items: end;
+	&.grow{
+		flex: 1;
+	}
 }
 app-card-vp{
 	width: 100%;

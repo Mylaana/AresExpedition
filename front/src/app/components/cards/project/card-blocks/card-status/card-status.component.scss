@@ -3,6 +3,10 @@
 	display: flex;
 	justify-content: end;
 	gap: 5px;
+	min-height: 10px;
+	@media (max-width:1919px) {
+		min-height: 8px;
+	}
 }
 .main{
 	display: flex;
@@ -19,9 +23,9 @@
 	}
 }
 p{
-	font-size: 65%;
 	color: black;
+	font-size: 8px;
 	@media (max-width:1919px) {
-		font-size: 50%;
+			font-size: 6.5px;
 	}
 }
