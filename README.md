@@ -52,6 +52,10 @@ Card draw on production can be rerolled by refreshing
 Websocket connection error while not in the game   
 
 ## Must have for v1 :
+### Refactoring
+root services: switch to static if possible   
+TriggerState: switch out trigger id checks from model to a service   
+
 ### Cards
 Prerequisites for playing project cards feature   
 Implement all cards   
@@ -79,8 +83,6 @@ Websocket: remove the global channel and switch to multiple sendings on private 
 text with image component: refactoring   
 test needs: empty components from the app logic and transfer it into services/classes    
 global: removing obvious comments   
-project-card-info-service (and some other?): switch to static   
-TriggerState: switch out trigger id checks from model to a service   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
 
