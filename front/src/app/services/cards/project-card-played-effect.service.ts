@@ -591,7 +591,7 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Physiscs Complex
 			case(46):{
-				if(parameter.name!=GlobalParameterNameEnum.infrastructure){break}
+				if(parameter.name!=GlobalParameterNameEnum.temperature){break}
 				result.push(this.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}

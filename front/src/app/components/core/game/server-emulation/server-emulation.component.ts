@@ -211,7 +211,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		let ressources = state.getRessources()
 		for(let ressource of ressources){
 			if(ressource.id!=index){continue}
-			console.log(ressource, index)
 			switch(index){
 				case(0):{
 					ressource.valueStock+=10

@@ -48,7 +48,6 @@ export class PlayerProjectCardStateModel {
 
         if(!cardCopy.hasTrigger()){return}
         this.triggers.playTrigger(cardCopy.id)
-		console.log(cardCopy.hasTrigger(), Utils.jsonCopy(this.triggers))
     }
 	addCardsToHand(cards: number | number[]){this.hand = this.hand.concat(Utils.toNumberArray(cards))}
 	addCardsToDiscard(cards: number | number[]){this.handDiscard = this.handDiscard.concat(Utils.toNumberArray(cards))}

@@ -107,7 +107,6 @@ export class PlayerStateModel {
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {
 		this.globalParameterState.addGlobalParameterStepEOP(parameter)
-		this.setScalingVp()
 	}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
 	getGlobalParameterFromName(parameterName: GlobalParameterNameEnum): GlobalParameter | undefined {
@@ -147,7 +146,10 @@ export class PlayerStateModel {
 	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
 	addCardsToDiscard(cards: number | number[]) {this.projectCardState.addCardsToDiscard(cards)}
 
-	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)}
+	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {
+		this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)
+		this.setScalingVp()
+	}
 	getProjectPlayedModelFromId(cardId:number): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}
 	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}

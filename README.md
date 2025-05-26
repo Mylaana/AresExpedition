@@ -50,7 +50,6 @@ No visual effect for discarding cards
 Builder: Disabled card appear buildable (visually only) when card selection active   
 Increasing global parameter doesnt triggers events on cards   
 ... same for everything else ?   
-Scaling VP not calculated   
 Ressource on cards not being saved serverside   
 
 
