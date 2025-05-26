@@ -47,6 +47,7 @@ Backend: Junit
 # WIP : 
 ## /!\BUG/!\ :
 Expression has changed Error after ocean bonus applied on reload   
+Expression has changed Error after production applied   
 Escape keyboard not exiting card builder selection   
 Websocket connection error while not in the game   
 Project card: layers superposition creating visual bug on edges   
