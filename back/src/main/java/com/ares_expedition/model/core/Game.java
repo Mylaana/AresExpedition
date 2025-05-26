@@ -383,6 +383,17 @@ public class Game {
         return bonuses;
     }
 
+    public void applyDrawProduction() {
+        for(Map.Entry<String, PlayerState> entry: this.groupPlayerState.entrySet()){
+            PlayerState state = entry.getValue();
+            Integer productionCards = state.getCardsProduction();
+            if(productionCards>0){
+                List<Integer> cardList = drawCards(productionCards);
+                state.getEventState().addEventProductionCards(cardList);
+            }
+        }
+    }
+
     public GameData toData(){
         return new GameData(this);
     }

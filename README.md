@@ -48,9 +48,8 @@ Backend: Junit
 ## /!\BUG/!\ :
 Expression has changed Error after ocean bonus applied on reload   
 Escape keyboard not exiting card builder selection   
-Card draw on production can be rerolled by refreshing   
 Websocket connection error while not in the game   
-Project card: Bottom edges visual bug   
+Project card: layers superposition creating visual bug on edges   
 CardStatus popup not always getting its font color and size properly   
 
 ## Must have for v1 :

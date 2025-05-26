@@ -49,7 +49,9 @@
 					(phaseSelected)="onPhaseSelected()"></app-phase-planification>
 				<app-phase-production
 					*ngIf="currentPhase==='PRODUCTION' && currentEvent.subType==='productionPhase'"
-					@fadeIn></app-phase-production>
+					@fadeIn
+					[event]="currentEvent">
+				</app-phase-production>
 				<app-phase-action
 					*ngIf="currentPhase==='ACTION' && currentEvent.subType==='actionPhaseActivator'"
 					[event]="this.currentEvent"

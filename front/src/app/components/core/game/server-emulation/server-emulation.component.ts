@@ -150,8 +150,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	addRessources(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [4,213]
-		//this.gameStateService.addCardsToClientHand(cardDrawList)
+		let cardDrawList: number[] = [260]
+		this.gameStateService.addCardsToClientHand(cardDrawList)
 
 		this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:200}])
 		//let cardList = this.gameStateService.getClientHandModelList()

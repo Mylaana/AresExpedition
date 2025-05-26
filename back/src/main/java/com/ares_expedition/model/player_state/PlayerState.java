@@ -173,6 +173,10 @@ public class PlayerState {
         this.ressourceState.setRessources(ressource);;
     }
 
+    public Integer getCardsProduction(){
+        return this.ressourceState.getCardsProduction();
+    }
+
 
     //=============================================================
     //Project Cards

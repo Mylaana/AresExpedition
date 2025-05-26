@@ -400,6 +400,7 @@ export class EventPhase extends EventBaseModel {
     override autoFinalize: boolean = true
     override title!: string
 	productionApplied?: boolean
+	productionCardList?: PlayableCardModel[]
     increaseParameter?: GlobalParameterValue
     increaseResearchScanKeep?: Partial<ScanKeep>
     baseRessource?:RessourceStock | RessourceStock[]

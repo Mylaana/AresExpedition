@@ -5,7 +5,7 @@ import { myUUID, PlayableCardType, RGB } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
-import { DrawEvent, EventBaseModel } from "../../models/core-game/event.model";
+import { DrawEvent, EventBaseModel, EventPhase } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
@@ -697,10 +697,18 @@ export class GameState{
 				if(EventStateFactory.shouldLoadEventFromThisSavedState(event, eventState)){
 					console.log('loading eventState:',eventState, event)
 					//specific cases
-					switch(event.type){
-						case('cardActivator'):{
+					switch(true){
+						case(event.type==='cardActivator'):{
 							playerState.loadEventStateActivator(eventState)
 							break
+						}
+						case(event.subType==='productionPhase'):{
+							let productionEvent = event as EventPhase
+							let cardList = this.projectCardService.getProjectCardList(eventState.v)
+							productionEvent.productionCardList = cardList
+							if(eventState.v){
+								this.addCardsToClientHand(eventState.v)
+							}
 						}
 					}
 
