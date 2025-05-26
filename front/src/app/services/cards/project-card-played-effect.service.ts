@@ -421,14 +421,20 @@ export class ProjectCardPlayedEffectService {
 		switch(triggerId){
 			//Energy Subsidies
 			case(25):{
-				if(mod.tagList.includes(GlobalInfo.getIdFromType('power','tag'))!=true){break}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('power','tag'))===false){break}
 				costMod += 4
 				break
 			}
 			//Interplanetary Conference
 			case(37):{
-				if(mod.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===true){costMod += 3}
-				if(mod.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===true){costMod += 3}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))){costMod += 3}
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))){costMod += 3}
+				break
+			}
+			//Media Group
+			case(42):{
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('event','tag'))){costMod += 5}
+				console.log(GlobalInfo.getIdFromType('event','tag'), mod.tagList)
 				break
 			}
 		}
@@ -487,11 +493,17 @@ export class ProjectCardPlayedEffectService {
 			case(37):{
 				//self triggering excluded
 				if(cardPlayedIsTheTrigger===true){break}
-				if(
-					playedCardTags.includes(GlobalInfo.getIdFromType('earth','tag'))!=true
+				if(playedCardTags.includes(GlobalInfo.getIdFromType('earth','tag'))!=true
 					&& playedCardTags.includes(GlobalInfo.getIdFromType('jovian','tag'))!=true
 				){break}
-				result.push(this.createEventDraw(1))
+				//triggers for each tag in the played card
+				let draw = 0
+				for(let tag of playedCardTags){
+					if(tag === GlobalInfo.getIdFromType('earth','tag') || tag === GlobalInfo.getIdFromType('jovian','tag')){
+						draw += 1
+					}
+				}
+				result.push(this.createEventDraw(draw))
 				break
 			}
 			//Optimal Aerobraking

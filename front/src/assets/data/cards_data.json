@@ -1616,7 +1616,8 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            4
+            4,
+			5
         ],
         "cardType": "greenProject",
         "vpNumber": "",
