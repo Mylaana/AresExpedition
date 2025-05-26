@@ -5,10 +5,14 @@ import { Subject, takeUntil } from 'rxjs';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { EventBaseModel, EventPhase } from '../../../models/core-game/event.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-phase-production',
-    imports: [PlayableCardListComponent],
+    imports: [
+		CommonModule,
+		PlayableCardListComponent
+	],
     templateUrl: './phase-production.component.html',
     styleUrl: './phase-production.component.scss'
 })
