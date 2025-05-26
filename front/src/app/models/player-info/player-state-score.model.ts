@@ -3,6 +3,7 @@ import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.inter
 export class PlayerScoreStateModel {
 	private milestoneCount: number = 0
 	private vp: number = 0
+	private scalingVp: number = 0
 	private terraformingRating: number = 0
 	private forest: number = 0
 
@@ -18,7 +19,8 @@ export class PlayerScoreStateModel {
 	}
 	getMilestoneCompletedNumber(): number {return this.milestoneCount}
 	addVP(points: number): void {this.vp += points}
-	getVP(): number {return this.vp}
+	getVP(): number {return this.vp + this.scalingVp}
+	setScalingVP(scalingVp: number){this.scalingVp = scalingVp}
 	addTR(tr: number): void {this.terraformingRating += tr}
 	getTR(): number {return this.terraformingRating}
 	addForest(forest: number): void {this.forest += forest}
