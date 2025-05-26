@@ -155,8 +155,10 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [284,25]
+		let cardDrawList: number[] = [29,36]
 		this.gameStateService.addCardsToClientHand(cardDrawList)
+		this.gameStateService.updateClientState(this.gameStateService.getClientState())
+		this.gameStateService.cleanAndNextEventQueue()
 	}
 	resetTag(): void {
 		let state = this.gameStateService.getClientState()

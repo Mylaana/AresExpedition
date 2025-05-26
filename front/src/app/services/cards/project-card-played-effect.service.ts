@@ -51,7 +51,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Farming Co-ops
 			case('29'):{
-				//this.clientPlayerState.addRessource('plant', 3)
+				this.clientPlayerState.addRessource('plant', 3)
 				break
 			}
 			//Physics Complex
