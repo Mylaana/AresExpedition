@@ -17,6 +17,10 @@ export class ProjectCardPrerequisiteEffectService {
 			case('4'):{
 				return this.isTagNumberOk('science', 5, clientState, 'min')
 			}
+			//Physics Complex
+			case('46'):{
+				return this.isTagNumberOk('science', 4, clientState, 'min')
+			}
 			default:{
 				return true
 			}

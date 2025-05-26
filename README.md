@@ -47,6 +47,10 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ :
 No visual effect for discarding cards   
+Increasing global parameter doesnt triggers events on cards   
+... same for everything else ?   
+Scaling VP not calculated   
+Ressource on cards not being saved serverside   
 
 ## Must have for v1 :
 ### Refactoring
@@ -111,6 +115,7 @@ Previous phase selected resizing
 Hand size   
 hand border radius   
 Command buttons / setting button position   
+project card: reduce stock size on small card version   
 
 ### Misc
 Add settings options   
