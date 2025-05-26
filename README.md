@@ -46,25 +46,25 @@ Backend: Junit
 
 # WIP : 
 ## /!\Critical BUG/!\ :
-
+No visual effect for discarding cards   
 
 ## Must have for v1 :
 ### Refactoring
 root services: switch to static if possible   
 TriggerState: switch out trigger id checks from model to a service   
+Rework Buildable system in playableCardComponent   
 
 ### Cards
-Prerequisites for playing project cards feature   
 Implement all cards   
 Implement all corps   
+Add Event removing any ressource in list on played card   
+Add Event adding any ressource in list on played card   
 
 ### Misc
 Add victory check   
-Add Event removing any ressource in list on played card   
 
 ### Interface
 Design production phase screen   
-Create switch button   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
@@ -82,6 +82,7 @@ Escape keyboard not exiting card builder selection
 Websocket connection error while not in the game   
 Project card: layers superposition creating visual bug on edges   
 CardStatus popup not always getting its font color and size properly   
+Builder: after building first card when switching in and out of sell menu, selecting a card on second builder adds the first card built to the selection list   
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -102,6 +103,7 @@ Production phase: add cards drew display
 Card Builder: show already built card on refresh   
 Add proper Hybrid production zone looks   
 Rework effect summary zone (refacto + looks)   
+Create switch button   
 
 ### Responsiveness
 Game creation menu

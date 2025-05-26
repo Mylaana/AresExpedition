@@ -134,6 +134,9 @@ export class PlayableCardModel{
 		}
 		return false
 	}
+	hasTrigger(): boolean {
+		return this.hasSummaryType('trigger')
+	}
 	toDTO(): ProjectCardDTO {
 		return {
 			i: this.id,

@@ -25,11 +25,11 @@ export class ProjectCardPrerequisiteEffectService {
 	private static isRessourcesNumberOk(ressource: RessourceStock, clientState: PlayerStateModel, treshold: MinMaxEqualTreshold): boolean {
 		return false
 	}
-	private static isTagNumberOk(tagType: TagType, tagNumber: number, clientState: PlayerStateModel, treshold: MinMaxEqualType): boolean {
+	private static isTagNumberOk(tagType: TagType, requiredTagNumber: number, clientState: PlayerStateModel, treshold: MinMaxEqualType): boolean {
 		let tags = clientState.getTags()
 		for(let tag of tags){
 			if(tag.name!=tagType){continue}
-			return Utils.getValueVsTreshold({treshold: treshold, tresholdValue: tag.valueCount, value: tagNumber})
+			return Utils.getValueVsTreshold({treshold: treshold, tresholdValue: requiredTagNumber, value: tag.valueCount})
 		}
 		return false
 	}

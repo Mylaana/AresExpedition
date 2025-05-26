@@ -54,3 +54,7 @@ export interface PlayableCardInterface {
 	//delete
 	description?: string
 }
+export interface CardBuildable {
+	costOk: boolean
+	prerequisiteOk: boolean
+}

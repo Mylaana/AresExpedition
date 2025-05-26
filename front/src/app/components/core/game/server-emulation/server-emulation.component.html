@@ -10,10 +10,22 @@
         <button (click)="sendBotsReady()" class="phase-research phase-selection-button clickable">Bots ready</button>
         <button (click)="sendtest()" class="phase-research phase-selection-button clickable">test</button>
     </div>
-
     <div class="wrapper-game-state">
         <button (click)="printPlayersState()">players state</button>
 		<button (click)="addRessources()">add ressources</button>
+		<button (click)="drawCards()">draw cards</button>
+    </div>
+	<div class="wrapper-tag-state">
+		<button (click)="resetTag()">resetTag</button>
+		<ng-container *ngFor="let id of [0,1,2,3,4,5,6,7,8,9,10]">
+			<button (click)="addTag(id)">+{{getTagName(id)}}</button>
+		</ng-container>
+    </div>
+	<div class="wrapper-ressource-state">
+		<button (click)="resetRessource()">resetRessource</button>
+		<ng-container *ngFor="let id of [0,1,2,3,4]">
+			<button (click)="addRessource(id)">+{{getRessourceName(id)}}</button>
+		</ng-container>
     </div>
 	<p>eventQueue :</p>
     <div *ngFor="let event of currentEventQueue">
