@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './card-status.component.scss'
 })
 export class CardStatusComponent {
+	@Input() cardId!: number
 	@Input() cardCode!: string
 	@Input() cardStatus!: string
 	@Input() hovered: boolean = false
