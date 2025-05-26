@@ -674,9 +674,13 @@ describe('Service - Designers - Event', () => {
                     expectedEvent.button = undefined
 
                     switch(expectedSubType){
-                        case('constructionPhase'):case('developmentPhase'):case('researchPhase'):case('productionPhase'):{
+                        case('constructionPhase'):case('developmentPhase'):case('researchPhase'):{
                             break
                         }
+						case('productionPhase'):{
+							expectedEvent.autoFinalize = false
+							expectedEvent.productionApplied = false
+						}
                     }
 
                     let event = EventDesigner.createPhase(expectedSubType)
