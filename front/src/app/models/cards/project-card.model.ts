@@ -106,10 +106,7 @@ export class PlayableCardModel{
                 break
             }
             case('action'):{
-                if(this.cardSummaryType==='action'){
-                    return true
-                }
-                break
+				return this.hasSummaryType('action')
             }
             case('stockable'):{
                 //converts filterValue into stockable name list
@@ -131,6 +128,12 @@ export class PlayableCardModel{
         }
         return false
     }
+	private hasSummaryType(summaryType: SummaryType): boolean {
+		for(let effect of this.effects){
+			if(effect.effectSummaryType===summaryType){return true}
+		}
+		return false
+	}
 	toDTO(): ProjectCardDTO {
 		return {
 			i: this.id,

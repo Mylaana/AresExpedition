@@ -37,6 +37,10 @@ public class EventState {
         return new EventState(EventStateTypeEnum.DRAW_CARDS, cards);
     }
 
+    public static EventState addEventProductionCards(List<Integer> cards) {
+        return new EventState(EventStateTypeEnum.PRODUCTION_CARDS, cards);
+    }
+
     public Object getValue() {
         return value;
     }

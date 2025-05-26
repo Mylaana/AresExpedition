@@ -6,3 +6,5 @@
         <li>{{clientPlayerState.getRessourceInfoFromId(5)?.valueProd!}} cards</li>
     </ul>
 </div>
+<h1 *ngIf="_productionCardList.length>0">New cards:</h1>
+<app-playable-card-list [cardList]="_productionCardList"></app-playable-card-list>

@@ -70,13 +70,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		)
 
 
-		//force draw card list for debug purpose
-		let cardDrawList: number[] = [4,213]
-		this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:200}])
-		this.gameStateService.addCardsToClientHand(cardDrawList)
-		//let cardList = this.gameStateService.getClientHandModelList()
-		//this.gameStateService.playCardFromClientHand(cardList[6])
-
 		//EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
 	ngOnDestroy(): void {
@@ -154,5 +147,14 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	onGroupReadyUpdate(groupReady: PlayerReadyModel[]): void {
 		this.currentGroupReady = groupReady
+	}
+	addRessources(): void {
+		//force draw card list for debug purpose
+		let cardDrawList: number[] = [260]
+		this.gameStateService.addCardsToClientHand(cardDrawList)
+
+		this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:200}])
+		//let cardList = this.gameStateService.getClientHandModelList()
+		//this.gameStateService.playCardFromClientHand(cardList[6])
 	}
 }

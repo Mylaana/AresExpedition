@@ -66,6 +66,9 @@ public class GameController {
         game.nextPhaseSelected();
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
+        if(game.getCurrentPhase()==PhaseEnum.PRODUCTION){
+            game.applyDrawProduction();
+        }
         wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
     }
 

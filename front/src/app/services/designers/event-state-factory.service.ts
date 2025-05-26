@@ -67,6 +67,7 @@ export class EventStateFactory{
 			case(event.subType==='actionPhaseActivator' && eventState.t===EventStateTypeEnum.cardActivator):{break}
 			case(event.subType==='developmentPhaseBuilder'  && eventState.t===EventStateTypeEnum.builderDevelopemntLocked):{break}
 			case(event.subType==='constructionPhaseBuilder'  && eventState.t===EventStateTypeEnum.builderConstructionLocked):{break}
+			case(event.subType==='productionPhase' && eventState.t===EventStateTypeEnum.productionCards):{break}
 			default:{return false}
 		}
 		return true

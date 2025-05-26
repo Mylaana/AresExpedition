@@ -15,7 +15,7 @@ export class ButtonDesigner{
 			//events related rules
             case('default'):{startEnabled=true;break}
             case('upgradePhaseCards'):{startEnabled=true;break}
-            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('applyProduction'):{startEnabled=true;break}
+            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{startEnabled=true;break}
             case('actionPhaseActivator'):{startEnabled=true;break}
             case('selectCardOptionalSell'):{startEnabled=false;break}
 			case('planificationPhase'):{startEnabled=false;break}
@@ -66,7 +66,7 @@ export class ButtonDesigner{
             case('default'):{caption='default validation button';break}
             case('planificationPhase'):{caption='$other_validate$';break}
             case('upgradePhaseCards'):{caption='$other_validate$';break}
-            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('applyProduction'):{caption='$other_validate$';break}
+            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='$other_validate$';break}
             case('addRessourceToSelectedCard'):{caption='Add ressources';break}
             case('researchPhaseResult'):{caption='$other_validate$';break}
             case('selectCardForcedSell'):{caption='$other_validate$';break}

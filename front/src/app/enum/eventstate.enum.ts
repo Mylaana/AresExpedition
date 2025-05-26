@@ -5,6 +5,7 @@ export enum EventStateTypeEnum {
     builderConstructionLocked = 'PHASE_BUILDER_CONSTRUCTION_LOCKED',
 	cardActivator = 'CARD_ACTIVATOR',
 	drawCards = 'DRAW_CARDS',
+	productionCards = 'PRODUCTION_CARDS',
 
 	undefined = 'UNDEFINED'
 }
