@@ -55,7 +55,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 9,
@@ -110,7 +110,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 18,
@@ -169,7 +169,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 20,
@@ -226,7 +226,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 25,
@@ -283,7 +283,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 29,
@@ -340,7 +340,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 36,
@@ -397,7 +397,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 37,
@@ -454,7 +454,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 42,
@@ -511,7 +511,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 45,
@@ -568,7 +568,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 46,
@@ -628,7 +628,7 @@
             "science"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 49,
@@ -683,7 +683,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 54,
@@ -741,7 +741,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 58,
@@ -798,7 +798,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 62,
@@ -855,7 +855,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 65,
@@ -971,7 +971,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 69,
@@ -1029,7 +1029,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 71,
@@ -1144,7 +1144,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 76,
@@ -1202,7 +1202,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 77,
@@ -1260,7 +1260,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 81,
@@ -1319,7 +1319,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 83,
@@ -1377,7 +1377,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 92,
@@ -1434,7 +1434,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 93,
@@ -1492,7 +1492,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 96,
@@ -1551,7 +1551,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 108,
@@ -1608,7 +1608,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 123,
@@ -1665,7 +1665,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 129,
@@ -1720,7 +1720,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 135,
@@ -1777,7 +1777,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 141,
@@ -1835,7 +1835,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 144,
@@ -1890,7 +1890,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 145,
@@ -1947,7 +1947,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 155,
@@ -2004,7 +2004,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 161,
@@ -2062,7 +2062,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 163,
@@ -2120,7 +2120,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 171,
@@ -2177,7 +2177,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 175,
@@ -2235,7 +2235,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 180,
@@ -2292,7 +2292,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 181,
@@ -2349,7 +2349,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 182,
@@ -2406,7 +2406,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 183,
@@ -2464,7 +2464,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 184,
@@ -2521,7 +2521,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 190,
@@ -2578,7 +2578,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 197,
@@ -2633,7 +2633,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 198,
@@ -2690,7 +2690,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 201,
@@ -2747,7 +2747,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 202,
@@ -2805,7 +2805,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 204,
@@ -2864,7 +2864,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 213,
@@ -2921,7 +2921,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 214,
@@ -3096,7 +3096,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 223,
@@ -3267,7 +3267,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 230,
@@ -3381,7 +3381,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 233,
@@ -3438,7 +3438,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 253,
@@ -3496,7 +3496,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 260,
@@ -3553,7 +3553,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 263,
@@ -3611,7 +3611,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 266,
@@ -3669,7 +3669,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 268,
@@ -3726,7 +3726,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 271,
@@ -3784,7 +3784,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 277,
@@ -3959,7 +3959,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 280,
@@ -4074,7 +4074,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 282,
@@ -4131,7 +4131,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 284,
@@ -4190,7 +4190,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 286,
@@ -4249,7 +4249,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 289,
@@ -4307,7 +4307,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "filled"
     },
     {
         "id": 292,

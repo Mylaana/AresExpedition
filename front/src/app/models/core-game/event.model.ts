@@ -272,11 +272,11 @@ export class EventCardBuilder extends EventBaseCardSelector {
 
         switch(button.name){
             case('selectCard'):{
-                this.cardSelector.stateFromParent = {selectable:true, buildable:true}
+                this.cardSelector.stateFromParent = {selectable:true}
                 break
             }
             case('cancelSelectCard'):{
-				this.cardSelector.stateFromParent = {selectable:false, buildable:false}
+				this.cardSelector.stateFromParent = {selectable:false}
 				break
             }
             case('buildCard'):{
@@ -291,9 +291,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
         }
 
         activeZone.resolveCardBuilderButtonClicked(button)
-
-        if(button.name==='selectCard'){return}
-        this.cardSelector.stateFromParent = {selectable:false, buildable:false}
     }
 	private discardBuilderSelectedCard(builderId: number){
 		let targetBuilder = this.cardBuilder[builderId]

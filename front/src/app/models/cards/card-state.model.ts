@@ -36,7 +36,10 @@ export class CardStateModel {
 
 	getCurrentState(): CardState {return this.currentState}
 	setCurrentState(state: Partial<CardState>): void {
+		//buildable doesnt get overriden
+		let buildable = this.isBuildable()
 		this.currentState = Utils.toFullCardState(state)
+		this.setBuildable(buildable)
 	}
 	getInitialState(): CardState {return this.initialState}
 	setInitialState(state: Partial<CardState>): void {

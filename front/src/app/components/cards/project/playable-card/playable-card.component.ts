@@ -25,6 +25,7 @@ import { CardTitleComponent } from '../card-blocks/card-title/card-title.compone
 import { CardStartingMegacreditsComponent } from '../card-blocks/card-starting-megacredits/card-starting-megacredits.component';
 import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 import { CardStatusComponent } from '../card-blocks/card-status/card-status.component';
+import { ProjectCardPrerequisiteEffectService } from '../../../../services/cards/project-card-prerequisite-effect.service';
 
 @Component({
     selector: 'app-playable-card',
@@ -134,6 +135,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.clientState = state
 		this.megacreditAvailable = state.getRessourceInfoFromType('megacredit')?.valueStock??0
 		this.updateCost()
+		this.setBuildable()
 	}
 	public updateCost(): void {
 		if(['played'].includes(this.parentListType)){
@@ -149,8 +151,10 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		})
 		this.setBuildable()
 	}
-	setBuildable(): void {
-		this.state.setBuildable(this.megacreditAvailable >= this.projectCard.cost)
+	public setBuildable(): void {
+		if(this.megacreditAvailable < this.projectCard.cost){this.state.setBuildable(false); return}
+		console.log('setbuildable called', this.projectCard.title, this.state.isBuildable(), "cost:",this.megacreditAvailable < this.projectCard.cost)
+		if(false===ProjectCardPrerequisiteEffectService.isPrerequisiteOk(this.projectCard, this.clientState)){this.state.setBuildable(false); return}
 	}
 	public onActivation(twice: boolean): void {
 		this.setActivationPayable()
@@ -166,10 +170,13 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 
 	public isDisabled(): boolean{
-		if (this.state.isBuildable()===false && this.state.isIgnoreCost()!=false && this.state.isSelectable()===false && this.state.isActivable()===false && this.parentListSubType!='research'){
+		if (this.state.isBuildable()===false && this.state.isIgnoreCost()!=false && this.state.isActivable()===false && this.parentListSubType!='research'){
 			return true
 		}
 		if(this.state.isActivable()===true && this._maximumActivation){
+			return true
+		}
+		if(this.state.isBuildable()===false && this.parentListType==='builderSelector'){
 			return true
 		}
 		return false
