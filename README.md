@@ -45,13 +45,8 @@ Backend: Junit
 - TBD (pbly AWS LightSail)   
 
 # WIP : 
-## /!\BUG/!\ :
-Expression has changed Error after ocean bonus applied on reload   
-Expression has changed Error after production applied   
-Escape keyboard not exiting card builder selection   
-Websocket connection error while not in the game   
-Project card: layers superposition creating visual bug on edges   
-CardStatus popup not always getting its font color and size properly   
+## /!\Critical BUG/!\ :
+
 
 ## Must have for v1 :
 ### Refactoring
@@ -80,7 +75,15 @@ Deploy on AWS Lightsail
 Add backend REST requests content validation   
 
 ## Nice to have for v1
-## Refactoring :
+### Non-Critical Bug :
+Expression has changed Error after ocean bonus applied on reload   
+Expression has changed Error after production applied   
+Escape keyboard not exiting card builder selection   
+Websocket connection error while not in the game   
+Project card: layers superposition creating visual bug on edges   
+CardStatus popup not always getting its font color and size properly   
+
+### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
 text with image component: refactoring   
 test needs: empty components from the app logic and transfer it into services/classes    
