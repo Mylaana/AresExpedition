@@ -53,7 +53,6 @@ Websocket connection error while not in the game
 Project card: Bottom edges visual bug   
 Production phase doing 0 (possibly when no base production?)   
 CardStatus popup not always getting its font color and size properly   
-CardActivator: Playedcard not being displayed
 
 ## Must have for v1 :
 ### Refactoring

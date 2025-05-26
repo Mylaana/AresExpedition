@@ -153,7 +153,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 	public setBuildable(): void {
 		if(this.megacreditAvailable < this.projectCard.cost){this.state.setBuildable(false); return}
-		console.log('setbuildable called', this.projectCard.title, this.state.isBuildable(), "cost:",this.megacreditAvailable < this.projectCard.cost)
 		if(false===ProjectCardPrerequisiteEffectService.isPrerequisiteOk(this.projectCard, this.clientState)){this.state.setBuildable(false); return}
 	}
 	public onActivation(twice: boolean): void {
