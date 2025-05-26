@@ -26,6 +26,7 @@ import { CardStartingMegacreditsComponent } from '../card-blocks/card-starting-m
 import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 import { CardStatusComponent } from '../card-blocks/card-status/card-status.component';
 import { ProjectCardPrerequisiteEffectService } from '../../../../services/cards/project-card-prerequisite-effect.service';
+import { CardBuildable } from '../../../../interfaces/card.interface';
 
 @Component({
     selector: 'app-playable-card',
@@ -65,6 +66,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	_hovered: boolean = false
 	_maximumActivation: boolean = false
 	_activationCostPayable: boolean = false
+	_buildableCheckList!: CardBuildable
 
 	private destroy$ = new Subject<void>()
 
@@ -152,8 +154,20 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.setBuildable()
 	}
 	public setBuildable(): void {
-		if(this.megacreditAvailable < this.projectCard.cost){this.state.setBuildable(false); return}
-		if(false===ProjectCardPrerequisiteEffectService.isPrerequisiteOk(this.projectCard, this.clientState)){this.state.setBuildable(false); return}
+		this.setBuildableCheckList()
+		this.state.setBuildable(this.isBuildable())
+	}
+	private setBuildableCheckList() {
+		this._buildableCheckList = {
+			costOk: this.megacreditAvailable >= this.projectCard.cost,
+			prerequisiteOk: ProjectCardPrerequisiteEffectService.isPrerequisiteOk(this.projectCard, this.clientState)
+		}
+	}
+	private isBuildable(): boolean {
+		if(!this._buildableCheckList.costOk){return false}
+		if(!this._buildableCheckList.prerequisiteOk){return false}
+
+		return true
 	}
 	public onActivation(twice: boolean): void {
 		this.setActivationPayable()

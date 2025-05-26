@@ -149,12 +149,86 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		this.currentGroupReady = groupReady
 	}
 	addRessources(): void {
-		//force draw card list for debug purpose
-		let cardDrawList: number[] = [260]
-		this.gameStateService.addCardsToClientHand(cardDrawList)
-
 		this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:200}])
 		//let cardList = this.gameStateService.getClientHandModelList()
 		//this.gameStateService.playCardFromClientHand(cardList[6])
+	}
+	drawCards(): void {
+		//force draw card list for debug purpose
+		let cardDrawList: number[] = [45, 46, 49, 284]
+		this.gameStateService.addCardsToClientHand(cardDrawList)
+		this.gameStateService.updateClientState(this.gameStateService.getClientState())
+		this.gameStateService.cleanAndNextEventQueue()
+	}
+	resetTag(): void {
+		let state = this.gameStateService.getClientState()
+		let tags = state.getTags()
+		for(let tag of tags){
+			tag.valueCount=0
+			if(tag.name==='science'){
+			}
+		}
+		this.gameStateService.updateClientState(state)
+	}
+	getTagName(index: number): string {
+		for(let tag of this.gameStateService.getClientState().getTags()){
+			if(tag.id===index){
+				return tag.name
+			}
+		}
+		return ''
+	}
+	addTag(index: number) {
+		let state = this.gameStateService.getClientState()
+		let tags = state.getTags()
+		for(let tag of tags){
+			if(tag.id===index){
+				tag.valueCount+=1
+				return
+			}
+		}
+		this.gameStateService.updateClientState(state)
+	}
+	resetRessource(): void {
+		let state = this.gameStateService.getClientState()
+		let ressources = state.getRessources()
+		for(let ressource of ressources){
+			ressource.valueStock=0
+			ressource.valueProd=0
+		}
+		this.gameStateService.updateClientState(state)
+	}
+	getRessourceName(index: number): string {
+		for(let ressource of this.gameStateService.getClientState().getRessources()){
+			if(ressource.id===index){
+				return ressource.name
+			}
+		}
+		return ''
+	}
+	addRessource(index: number) {
+		let state = this.gameStateService.getClientState()
+		let ressources = state.getRessources()
+		for(let ressource of ressources){
+			if(ressource.id!=index){continue}
+			console.log(ressource, index)
+			switch(index){
+				case(0):{
+					ressource.valueStock+=10
+					this.gameStateService.updateClientState(state)
+					return
+				}
+				case(1):case(2):{
+					ressource.valueStock+=5
+					this.gameStateService.updateClientState(state)
+					return
+				}
+				case(3):case(4):{
+					ressource.valueProd+=1
+					this.gameStateService.updateClientState(state)
+					return
+				}
+			}
+		}
 	}
 }

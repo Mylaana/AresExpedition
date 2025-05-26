@@ -134,6 +134,9 @@ export class PlayableCardModel{
 		}
 		return false
 	}
+	hasTrigger(): boolean {
+		return this.hasSummaryType('trigger')
+	}
 	toDTO(): ProjectCardDTO {
 		return {
 			i: this.id,
@@ -235,6 +238,7 @@ export class TriggerState {
         switch(cardId){
             case(25):{break} //Energy Subsidies
             case(37):{break} //Interplanetary Conference
+			case(42):{break} //Media Group
             default:{return}
         }
         this.activeCostModTrigger.push(cardId)

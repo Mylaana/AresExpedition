@@ -40,6 +40,12 @@ export class ProjectCardActivatedEffectService {
 				result.push(this.createEventAddRessource({name: "plant", valueStock: 3}))
 				break
 			}
+			//Farming Co-ops
+			case('29'):{
+				result.push(this.createEventDiscard(1))
+				result.push(this.createEventAddRessource({name: "plant", valueStock: 3}))
+				break
+			}
 			default:{
 				return undefined
 			}
@@ -60,6 +66,11 @@ export class ProjectCardActivatedEffectService {
 			case('20'):{
 				return false
 				if(!this.checkCardsWithRessourcesStock(clientState, [{name:'animal', valueStock:1}, {name:'microbe', valueStock:1}], 'any')){return false}
+				break
+			}
+			//Farming Co-ops
+			case('29'):{
+				if(!this.checkPlayerHasCardsInHand(clientState, 1)){return false}
 				break
 			}
 			default:{
@@ -89,6 +100,10 @@ export class ProjectCardActivatedEffectService {
 			case('all'):{return hasStock === ressources.length}
 			case('any'):{return hasStock >= 1}
 		}
+	}
+	private static checkPlayerHasCardsInHand(state: PlayerStateModel, cardsInHandNumber: number): boolean {
+		console.log(state.getHandCurrentSize())
+		return state.getHandCurrentSize()>=1
 	}
 	private static createEventDraw(drawNumber: number): EventBaseModel {
 		return EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
