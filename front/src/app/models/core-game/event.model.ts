@@ -399,6 +399,7 @@ export class EventPhase extends EventBaseModel {
     override subType!: EventPhaseSubType
     override autoFinalize: boolean = true
     override title!: string
+	productionApplied?: boolean
     increaseParameter?: GlobalParameterValue
     increaseResearchScanKeep?: Partial<ScanKeep>
     baseRessource?:RessourceStock | RessourceStock[]

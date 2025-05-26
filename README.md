@@ -51,7 +51,6 @@ Escape keyboard not exiting card builder selection
 Card draw on production can be rerolled by refreshing   
 Websocket connection error while not in the game   
 Project card: Bottom edges visual bug   
-Production phase doing 0 (possibly when no base production?)   
 CardStatus popup not always getting its font color and size properly   
 
 ## Must have for v1 :

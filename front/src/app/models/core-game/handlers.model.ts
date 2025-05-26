@@ -130,7 +130,7 @@ export class EventHandler {
 
         //call general switchEvents cases
 		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
-		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent)}
+		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent as EventPhase)}
 		if(this.currentEvent.type==='cardActivator'){this.switchEventCardActivator(this.currentEvent as EventCardActivator)}
 
 		//specific cases
@@ -211,15 +211,19 @@ export class EventHandler {
 	}
 
 
-	private switchEventPhase(event: EventBaseModel): void {
+	private switchEventPhase(event: EventPhase): void {
 		let subType = event.subType as EventPhaseSubType
-
 		if(event.autoFinalize===true){event.finalized=true}
 		switch(subType){
 			case('developmentPhase'):{this.phaseHandler.resolveDevelopment();break}
 			case('constructionPhase'):{this.phaseHandler.resolveConstruction();break}
 			case('actionPhase'):{this.phaseHandler.resolveAction(); break}
-			case('productionPhase'):{this.phaseHandler.resolveProduction();break}
+			case('productionPhase'):{
+				if(event.productionApplied){return}
+				event.productionApplied = true // prevents infinite loops
+				this.phaseHandler.resolveProduction();
+				break
+			}
 			case('researchPhase'):{this.phaseHandler.resolveResearch();break}
 			default:{return}
 		}
@@ -641,6 +645,8 @@ class PhaseResolveHandler {
 					ressourceGain = ressource.valueProd
 					break
 				}
+				//cards draw will be sent by server as an eventstate
+				/*
 				case('card'):{
 					ressourceGain = ressource.valueProd
 					if(ressourceGain>0){
@@ -648,14 +654,15 @@ class PhaseResolveHandler {
 					}
 					break
 				}
+				*/
 			}
 			if(ressourceGain>0){
 				production.push({name:ressource.name, valueStock:ressourceGain})
 			}
 		}
 		if(production.length>0){
-			newEvents.push(EventDesigner.createGeneric('applyProduction', {production: production}))
-			console.log('generating event prod :', newEvents)
+			//newEvents.push(EventDesigner.createGeneric('applyProduction', {production: production}))
+			newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: production}))
 			this.gameStateService.addEventQueue(newEvents, 'first')
 		}
 	}

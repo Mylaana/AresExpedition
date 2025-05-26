@@ -293,11 +293,6 @@ export class EventDesigner{
 				event.gainOceanNumber = args?.oceanQueryNumber
 				break
 			}
-			case('applyProduction'):{
-				event.production = args?.production
-				event.autoFinalize = false
-				break
-			}
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
         }
         event.button = ButtonDesigner.createEventMainButton(event.subType)
@@ -347,7 +342,11 @@ export class EventDesigner{
 
         event.subType = subType
         switch(subType){
-            case('productionPhase'):{break}
+            case('productionPhase'):{
+				event.autoFinalize = false
+				event.productionApplied = false
+				break
+			}
 			case('actionPhase'):{break}
             case('developmentPhase'):{break}
             case('constructionPhase'):{break}
