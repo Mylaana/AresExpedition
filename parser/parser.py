@@ -77,6 +77,8 @@ PARSER_CARD_INFO_MODEL = {
     "status": ""
 }
 
+AUTHORIZED_STATUS = ['implemented', 'validated', 'bugged', 'filled']
+
 
 def map_csv_columns(csv_header: str):
     for column_index in range(len(csv_header)):
@@ -97,6 +99,9 @@ def parse_row(csv_row: str):
     for map in parser_columns_map:
         parsed_row = PARSER_CARD_INFO_MODEL
         if map['output_field_name'] == '':
+            continue
+
+        if csv_row[0] not in AUTHORIZED_STATUS:
             continue
 
         if map['split_per_language'] is True:
