@@ -71,11 +71,11 @@
         "imageUrl": "assets/other/arrow.png",
         "name": "$other_arrow$"
     },
-    {
+	{
         "id": 102,
-        "description": "card",
-        "imageUrl": "assets/other/card.png",
-        "name": "$other_card$"
+        "description": "omnicard",
+        "imageUrl": "assets/other/omnicard.png",
+        "name": "$other_omnicard$"
     },
     {
         "id": 103,
@@ -159,7 +159,7 @@
         "id": 116,
         "description": "sell_card",
         "imageUrl": "assets/other/sell_card.png",
-        "name": "$other_sell_card$"
+        "name": "$other_sellcard$"
     },
 	{
         "id": 117,
@@ -238,6 +238,72 @@
         "description": "home",
         "imageUrl": "assets/other/home.png",
         "name": "$other_home$"
+    },
+	{
+        "id": 130,
+        "description": "discard",
+        "imageUrl": "assets/other/discard.png",
+        "name": "$other_discard$"
+    },
+	{
+        "id": 131,
+        "description": "greencard",
+        "imageUrl": "assets/other/greencard.png",
+        "name": "$other_greencard$"
+    },
+	{
+        "id": 132,
+        "description": "bluecard",
+        "imageUrl": "assets/other/bluecard.png",
+        "name": "$other_bluecard$"
+    },
+	{
+        "id": 133,
+        "description": "redcard",
+        "imageUrl": "assets/other/redcard.png",
+        "name": "$other_redcard$"
+    },
+	{
+        "id": 134,
+        "description": "purplesquare",
+        "imageUrl": "assets/other/purplesquare.png",
+        "name": "$other_purplesquare$"
+    },
+	{
+        "id": 135,
+        "description": "redsquare",
+        "imageUrl": "assets/other/redsquare.png",
+        "name": "$other_redsquare$"
+    },
+	{
+        "id": 136,
+        "description": "yellowsquare",
+        "imageUrl": "assets/other/yellowsquare.png",
+        "name": "$other_yellowsquare$"
+    },
+	{
+        "id": 137,
+        "description": "whitesquare",
+        "imageUrl": "assets/other/whitesquare.png",
+        "name": "$other_whitesquare$"
+    },
+	{
+        "id": 138,
+        "description": "arrowtop",
+        "imageUrl": "assets/other/arrowtop.png",
+        "name": "$other_arrowtop$"
+    },
+	{
+        "id": 139,
+        "description": "arrowbottom",
+        "imageUrl": "assets/other/arrowbottom.png",
+        "name": "$other_arrowbottom$"
+    },
+	{
+        "id": 140,
+        "description": "standard",
+        "imageUrl": "assets/other/standard.png",
+        "name": "$other_standard$"
     },
     {
         "id": 1000,

@@ -102,7 +102,7 @@ def parse_row(csv_row: str):
             continue
 
         if csv_row[0] not in AUTHORIZED_STATUS:
-            continue
+            return
 
         if map['split_per_language'] is True:
             language = map['column_name'].split('_')[1]
@@ -157,7 +157,9 @@ def main():
             if row[0] == '':
                 continue
 
-            parsed.append(copy.deepcopy(parse_row(row)))
+            result = parse_row(row)
+            if result:
+                parsed.append(copy.deepcopy(result))
 
     with open(os.path.join(output_path, output_name), 'w') as f:
         json.dump(parsed, f, indent=4)
