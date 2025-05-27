@@ -4,6 +4,12 @@ export enum GlobalParameterNameEnum {
 	temperature = 'TEMPERATURE',
 	oxygen = 'OXYGEN'
 }
+export enum GlobalParameterColorEnum {
+	purple = 'PURPLE',
+	red = 'RED',
+	yellow = 'YELLOW',
+	white = 'WHITE'
+}
 export enum OceanBonusEnum {
 	megacredit = 'MEGACREDIT',
 	card = 'CARD',

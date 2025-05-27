@@ -4,6 +4,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { MinMaxEqualTreshold, RessourceStock } from "../../interfaces/global.interface";
 import { MinMaxEqualType, TagType } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
+import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 
 
 @Injectable({
@@ -21,6 +22,14 @@ export class ProjectCardPrerequisiteEffectService {
 			case('46'):{
 				return this.isTagNumberOk('science', 4, clientState, 'min')
 			}
+			//Aerated Magma
+			case('105'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//Airborne Radiation
+			case('106'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
+			}
 			default:{
 				return true
 			}
@@ -36,5 +45,33 @@ export class ProjectCardPrerequisiteEffectService {
 			return Utils.getValueVsTreshold({treshold: treshold, tresholdValue: requiredTagNumber, value: tag.valueCount})
 		}
 		return false
+	}
+	private static isGlobalParameterOk(parameter: GlobalParameterNameEnum, color: GlobalParameterColorEnum, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
+		const colorList: GlobalParameterColorEnum[] = [GlobalParameterColorEnum.purple, GlobalParameterColorEnum.red, GlobalParameterColorEnum.yellow, GlobalParameterColorEnum.white]
+		let currentColor = clientState.getGlobalParameterColorAtPhaseBegining(parameter)
+		if(treshold==="equal"){
+			return color===currentColor
+		}
+		let authorizedColor: GlobalParameterColorEnum[] = []
+		let addToList: boolean
+		switch(treshold){
+			case('min'):{
+				//starts false then goes true
+				addToList = false
+				break
+			}
+			case('max'):{
+				//starts true then goes false
+				addToList = true
+				break
+			}
+		}
+		for(let c of colorList){
+			if(color===c){addToList=addToList===false}
+			if(addToList){
+				authorizedColor.push(c)
+			}
+		}
+		return authorizedColor.includes(currentColor)
 	}
 }

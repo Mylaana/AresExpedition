@@ -16,7 +16,7 @@ import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 
@@ -119,6 +119,7 @@ export class PlayerStateModel {
 		return
 	}
 	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {return this.globalParameterState.isGlobalParameterMaxedOutAtPhaseBeginning(parameterName)}
+	getGlobalParameterColorAtPhaseBegining(parameterName: GlobalParameterNameEnum): GlobalParameterColorEnum {return this.globalParameterState.getGlobalParameterColorAtPhaseBegining(parameterName)}
 	addOceanFlippedBonus(bonus: OceanBonus){this.globalParameterState.addOceanFlippedBonus(bonus)}
 	getOceanFlippedBonus(): OceanBonus[] {return this.globalParameterState.getOceanFlippedBonus()}
 
@@ -163,6 +164,9 @@ export class PlayerStateModel {
 		this.removeCardsFromHand([card.id], cardType)
 		this.payCardCost(card)
 		this.addPlayedCardTags(card)
+		if(parseInt(card.vpNumber??'')>0){
+			this.addVP(parseInt(card.vpNumber??''))
+		}
 		this.setScalingVp()
 	}
 
