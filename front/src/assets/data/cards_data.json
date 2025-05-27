@@ -24,7 +24,7 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$other_temperature$$other_oxygen$$other_infrastructure$:$skipline$+/- 1color level",
+            "en": "$other_temperature$$other_oxygen$$other_infrastructure$:$skipline$$other_purplesquare$$other_redsquare$$other_yellowsquare$$other_whitesquare$$skipline$$other_arrowtop$$other_arrowbottom$",
             "fr": ""
         },
         "effectText": {
@@ -2588,6 +2588,66 @@
         "stockable": [],
         "startingMegacredits": 0,
         "status": "implemented"
+    },
+    {
+        "id": 46,
+        "card_code": "46",
+        "origin": "base",
+        "cost": 5,
+        "tagsId": [
+            2,
+            0
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "*",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "I-III",
+        "phaseDown": "",
+        "title": {
+            "en": "Physics Complex",
+            "fr": "Complexe Physique"
+        },
+        "vpText": {
+            "en": "*=1 VP for every 2 $tag_science$ resources on this card.",
+            "fr": "* = 1 VP par groupe de 2 ressources $ressource_science$ sur cette carte."
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_temperature$ : $ressource_science$",
+            "fr": "$other_temperature$ : $ressource_science$"
+        },
+        "effectText": {
+            "en": "Effect: When you raise the temperature, add a $ressource_science$ to this card.",
+            "fr": "Effet:Lorsque vous augmentez la temp\u00e9rature, ajoutez 1 $ressource_science$ sur cette carte."
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Requires 4 $tag_science$.",
+            "fr": "Requiert 4 $tag_science$."
+        },
+        "prerequisiteSummaryText": {
+            "en": "4 $tag_science$",
+            "fr": "4 $tag_science$"
+        },
+        "stockable": [
+            "science"
+        ],
+        "startingMegacredits": 0,
+        "status": "blocked"
     },
     {
         "id": 47,
@@ -6021,8 +6081,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_heat$",
-            "fr": ""
+            "en": "$ressource_heat$ $ressource_heat$",
+            "fr": "$ressource_heat$ $ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -6594,8 +6654,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "5$ressource_heat$",
-            "fr": ""
+            "en": "$ressource_heat$ $ressource_heat$ $ressource_heat$$skipline$$ressource_heat$ $ressource_heat$",
+            "fr": "$ressource_heat$ $ressource_heat$ $ressource_heat$$skipline$$ressource_heat$ $ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 5 heat.",
@@ -6996,8 +7056,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "3$ressource_heat$",
-            "fr": ""
+            "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 heat.",
@@ -7682,8 +7742,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_heat$",
-            "fr": ""
+            "en": "$ressource_heat$ $ressource_heat$",
+            "fr": "$ressource_heat$ $ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -7914,8 +7974,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_heat$",
-            "fr": ""
+            "en": "$ressource_heat$ $ressource_heat$",
+            "fr": "$ressource_heat$ $ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -8087,8 +8147,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_heat$",
-            "fr": "2$ressource_heat$"
+            "en": "$ressource_heat$ $ressource_heat$",
+            "fr": "$ressource_heat$ $ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -8315,8 +8375,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_heat$",
-            "fr": ""
+            "en": "$ressource_heat$ $ressource_heat$",
+            "fr": "$ressource_heat$ $ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -11630,8 +11690,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "3$ressource_heat$",
-            "fr": "3$ressource_heat$"
+            "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 heat.",

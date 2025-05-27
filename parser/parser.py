@@ -77,7 +77,7 @@ PARSER_CARD_INFO_MODEL = {
     "status": ""
 }
 
-AUTHORIZED_STATUS = ['implemented', 'validated', 'bugged', 'filled']
+AUTHORIZED_STATUS = ['implemented', 'validated', 'bugged', 'filled', 'blocked']
 
 
 def map_csv_columns(csv_header: str):
