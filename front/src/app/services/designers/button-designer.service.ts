@@ -78,7 +78,7 @@ export class ButtonDesigner{
 			case('actionPhaseActivator'):{caption='$other_validate$';break}
 
 			//button name related rules
-			case('sellOptionalCard'):{caption='$other_sell_card$';break}
+			case('sellOptionalCard'):{caption='$other_sellcard$';break}
 			case('sellOptionalCardCancel'):{caption='$other_cancel$';break}
 			case('rollBack'):{caption='$other_rollback$';break}
 			case('settings'):{caption='$other_settings$';break}

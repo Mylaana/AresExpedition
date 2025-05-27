@@ -1,8 +1,8 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType } from "../../types/global.type"
-import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit} from "../../types/project-card.type"
+import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, PlayedCardStock} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
-import { ProjectCardDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
+import { PlayedCardDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
 import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
 import { Utils } from "../../utils/utils"
 
@@ -137,14 +137,14 @@ export class PlayableCardModel{
 	hasTrigger(): boolean {
 		return this.hasSummaryType('trigger')
 	}
-	toDTO(): ProjectCardDTO {
-		return {
-			i: this.id,
-			s: this.stock??[]
-		}
+	toDTO(): PlayedCardStock {
+		return {[this.id]: this.stock??[]}
 	}
 	public static fromInterface(input: PlayableCardInterface): PlayableCardModel {
 		return Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))
+	}
+	loadStockFromJson(stock: AdvancedRessourceStock[]){
+		this.stock = stock
 	}
 }
 

@@ -94,6 +94,7 @@ test needs: empty components from the app logic and transfer it into services/cl
 global: removing obvious comments   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
+Refactor VP system   
 
 ### Interface
 Add Display property for current event, so the screen does not flash when resolving technical events   
@@ -115,6 +116,7 @@ Hand size
 hand border radius   
 Command buttons / setting button position   
 project card: reduce stock size on small card version   
+Effect zone: need an autoshrink calculation   
 
 ### Misc
 Add settings options   

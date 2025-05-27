@@ -46,6 +46,7 @@ export class PlayerStateModel {
 			this.globalParameterState = new PlayerGlobalParameterStateModel(dto.globalParameterState)
 			this.eventState = new PlayerEventStateModel(dto.eventState)
 			this.otherState = new PlayerOtherStateModel(dto.otherState)
+			this.setScalingVp()
 		} else {
 			this.infoState = PlayerInfoStateModel.empty()
 			this.scoreState = PlayerScoreStateModel.empty()

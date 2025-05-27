@@ -5,10 +5,11 @@ import { AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.i
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
 import { ProjectCardInitializeService } from "../../services/cards/project-card-initialize.service"
 import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type"
-import { PlayedProject } from "../../types/project-card.type"
+import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface"
+import { PlayedCardDTO } from "../../interfaces/dto/project-card-dto.interface"
 
 export class PlayerProjectCardStateModel {
     private hand: number[] = []
@@ -32,10 +33,14 @@ export class PlayerProjectCardStateModel {
 		this.hand = dto.h,
 		this.handCorporation = dto.hc,
 		this.handMaximumSize = dto.hms
+
+		this.loadPlayedCardsFromJson(dto.cp)
+		/*let playedIdList = this.cardPlayedIdListFromJson(dto.cp)
 		this.projects = {
-			playedIdList: dto.ppil,
-			playedProjectList: this.cardInfoService.getProjectCardList(dto.ppil)
+			playedIdList: playedIdList,
+			playedProjectList: this.cardInfoService.getProjectCardList(playedIdList)
 		}
+		this.setCardStockFromJson(dto.cp)*/
 		this.triggers = TriggerState.fromJson(dto.t)
 	}
 
@@ -156,20 +161,59 @@ export class PlayerProjectCardStateModel {
 			h: this.hand,
 			hc: this.handCorporation,
 			hd: this.handDiscard,
-			ppil: this.projects.playedIdList,
-			ppcs: null,
+			cp: this.projectCardPlayedStockToJson(),
 			t: this.triggers.toJson(),
 			hms: this.handMaximumSize
 		}
+	}
+	private projectCardPlayedStockToJson(): PlayedCardStock[] {
+		let result: PlayedCardStock[] = []
+		for(let card of this.getProjectPlayedModelList()){
+			result.push(card.toDTO())
+		}
+
+		return result
 	}
 	newGame(dto: PlayerProjectCardStateDTO): void {
 		this.hand = dto.h
 	}
 	static fromJson(data: PlayerProjectCardStateDTO, injector: Injector): PlayerProjectCardStateModel {
-		if (!data.h || !data.ppil || data.ppcs|| !data.t || !data.hms || !data.hd){
+		if (!data.h|| data.cp|| !data.t || !data.hms || !data.hd){
 			throw new Error("Invalid PlayerProjectCardStateDTO: Missing required fields")
 		}
 		return new PlayerProjectCardStateModel(injector, data)
+	}
+	private cardPlayedIdListFromJson(dto: PlayedCardStock[]): number[] {
+		if(!dto){return []}
+		let list: number[] = []
+		for (const stockMap of dto) {
+			for (const key in stockMap) {
+				const numericKey = parseInt(key)
+				const value = stockMap[numericKey]
+				list.push(numericKey)
+			}
+		}
+		return list
+	}
+	private loadPlayedCardsFromJson(dto: PlayedCardStock[]) {
+		if(!dto){return}
+		let playedIdList: number[] = []
+		let playedModelList: PlayableCardModel[] = []
+		for (const stockMap of dto) {
+			for (const key in stockMap) {
+				const numericKey = parseInt(key)
+				const value = stockMap[numericKey]
+				playedIdList.push(numericKey)
+				let card = this.cardInfoService.getCardById(numericKey)
+				if(!card){continue}
+				card.loadStockFromJson(value)
+				playedModelList.push(card)
+			}
+		}
+		this.projects = {
+			playedIdList: playedIdList,
+			playedProjectList: playedModelList
+		}
 	}
 	static empty(injector: Injector): PlayerProjectCardStateModel {
 		return new PlayerProjectCardStateModel(
@@ -179,8 +223,7 @@ export class PlayerProjectCardStateModel {
 				hc: [],
 				hd: [],
 				hms: GAME_HAND_MAXIMUM_SIZE,
-				ppil: [],
-				ppcs: [],
+				cp: [],
 				t: {aci: [], acmt: [], aogt: [], aopc: [], aopi: [], aoratc: [], pci: []}
 			}
 		)

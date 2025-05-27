@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerGlobalParameterStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.GlobalParameterDTO;
-import com.ares_expedition.enums.game.RessourceEnum;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.model.player_state.subclass.substates.OceanFlippedBonus;
 import com.ares_expedition.repository.player_state.subclass.PlayerGlobalParameterStateData;
