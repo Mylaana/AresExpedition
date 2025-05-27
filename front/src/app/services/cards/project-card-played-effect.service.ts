@@ -126,6 +126,11 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('titanium',2)
 				break
 			}
+			//Asteroid Mining Consortium
+			case('111'):{
+				this.addProductionToPlayer('titanium',1)
+				break
+			}
 			//Dust Quarry
 			case('129'):{
 				this.addProductionToPlayer('steel',1)
