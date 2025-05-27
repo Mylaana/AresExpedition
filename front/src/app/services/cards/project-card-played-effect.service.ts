@@ -115,6 +115,17 @@ export class ProjectCardPlayedEffectService {
 				this.addProductionToPlayer('plant',1)
 				break
 			}
+			//Artificial Photosynthesis
+			case('109'):{
+				this.addProductionToPlayer('plant',1)
+				this.addProductionToPlayer('heat',1)
+				break
+			}
+			//Asteroid Mining
+			case('110'):{
+				this.addProductionToPlayer('titanium',2)
+				break
+			}
 			//Dust Quarry
 			case('129'):{
 				this.addProductionToPlayer('steel',1)
