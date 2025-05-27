@@ -34,6 +34,9 @@ export class ProjectCardPlayedEffectService {
 	addTrToPlayer(quantity:number):void{
 		this.clientPlayerState.addTR(quantity)
 	}
+	addVp(quantity: number): void {
+		this.clientPlayerState.addVP(quantity)
+	}
 	playCard(card: PlayableCardModel, playerState: PlayerStateModel, cardType: PlayableCardType): PlayerStateModel {
 		this.clientPlayerState = playerState
 		this.clientPlayerState.playCard(card, cardType)
@@ -78,6 +81,33 @@ export class ProjectCardPlayedEffectService {
 			case('81'):{
 				this.addRessourceToPlayer("plant", 4)
 				this.addTrToPlayer(1)
+				break
+			}
+			//Acquired Company
+			case('103'):{
+				this.addProductionToPlayer('card',1)
+				break
+			}
+			//Adaptated Lichen
+			case('104'):{
+				this.addProductionToPlayer('plant',1)
+				break
+			}
+			//Aerated Magma
+			case('105'):{
+				this.addProductionToPlayer('card',1)
+				this.addProductionToPlayer('heat',2)
+				//this.addVp(1)
+				break
+			}
+			//Airborne Radiation
+			case('106'):{
+				this.addProductionToPlayer('heat',2)
+				break
+			}
+			//Acquired Company
+			case('103'):{
+				this.addProductionToPlayer('card',1)
 				break
 			}
 			//Archaebacteria
@@ -320,6 +350,11 @@ export class ProjectCardPlayedEffectService {
 			//Research
 			case('96'):{
 				result.push(this.createEventDraw(2))
+				break
+			}
+			//Airborne Radiation
+			case('106'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1))
 				break
 			}
 			//Microprocessor

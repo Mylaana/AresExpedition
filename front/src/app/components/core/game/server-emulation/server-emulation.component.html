@@ -27,6 +27,11 @@
 			<button (click)="addRessource(id)">+{{getRessourceName(id)}}</button>
 		</ng-container>
     </div>
+	<div class="wrapper-parameter-state">
+		<ng-container *ngFor="let id of [0,1,2,3]">
+			<button (click)="addParameter(id)">+{{getParameterName(id)}}</button>
+		</ng-container>
+    </div>
 	<p>eventQueue :</p>
     <div *ngFor="let event of currentEventQueue">
         <p>[id]:{{event.id}}  [type]:{{event.type}}  [subtype]:{{event.subType}}  [finalized]:{{event.finalized}}  [autoFinalize]:{{event.autoFinalize}}</p>

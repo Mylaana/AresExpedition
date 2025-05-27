@@ -10,6 +10,7 @@ import { WebsocketQueryMessageFactory } from '../../../../services/designers/web
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { myUUID } from '../../../../types/global.type';
+import { GlobalParameterNameEnum } from '../../../../enum/global.enum';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -155,7 +156,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [46, 284]
+		let cardDrawList: number[] = [103,104,105,106,107,108,110]
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
 		this.gameStateService.cleanAndNextEventQueue()
@@ -229,5 +230,19 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 				}
 			}
 		}
+	}
+	getParameterName(index: number): GlobalParameterNameEnum{
+		switch(index){
+			case(0):{return GlobalParameterNameEnum.ocean}
+			case(1):{return GlobalParameterNameEnum.temperature}
+			case(2):{return GlobalParameterNameEnum.oxygen}
+			case(3):{return GlobalParameterNameEnum.infrastructure}
+		}
+		return GlobalParameterNameEnum.ocean
+	}
+	addParameter(index: number) {
+		let state = this.gameStateService.getClientState()
+		state.addGlobalParameterStepEOP({name:this.getParameterName(index), steps:1})
+		this.gameStateService.updateClientState(state)
 	}
 }
