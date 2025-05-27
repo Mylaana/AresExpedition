@@ -119,7 +119,8 @@ export class PlayerStateModel {
 		return
 	}
 	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {return this.globalParameterState.isGlobalParameterMaxedOutAtPhaseBeginning(parameterName)}
-	getGlobalParameterColorAtPhaseBegining(parameterName: GlobalParameterNameEnum): GlobalParameterColorEnum {return this.globalParameterState.getGlobalParameterColorAtPhaseBegining(parameterName)}
+	getGlobalParameterColorAtPhaseBeginning(parameterName: GlobalParameterNameEnum): GlobalParameterColorEnum {return this.globalParameterState.getGlobalParameterColorAtPhaseBegining(parameterName)}
+	getOceanFlippedNumberAtPhaseBeginning(): number {return this.globalParameterState.getOceanFlippedNumberAtPhaseBeginning()}
 	addOceanFlippedBonus(bonus: OceanBonus){this.globalParameterState.addOceanFlippedBonus(bonus)}
 	getOceanFlippedBonus(): OceanBonus[] {return this.globalParameterState.getOceanFlippedBonus()}
 

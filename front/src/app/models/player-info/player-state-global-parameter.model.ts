@@ -77,6 +77,14 @@ export class PlayerGlobalParameterStateModel {
 		}
 		return GlobalParameterColorEnum.purple
 	}
+	getOceanFlippedNumberAtPhaseBeginning(): number {
+		for(let param of this.parameters){
+			if(param.name===GlobalParameterNameEnum.ocean){
+				return param.step
+			}
+		}
+		return 0
+	}
 	toJson(): PlayerGlobalParameterStateDTO {
 		let parameters: GlobalParameterDTO[] = []
 		for(let state of this.parameters){

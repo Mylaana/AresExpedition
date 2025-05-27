@@ -106,8 +106,8 @@ export class ProjectCardPlayedEffectService {
 				break
 			}
 			//Acquired Company
-			case('103'):{
-				this.addProductionToPlayer('card',1)
+			case('107'):{
+				this.addProductionToPlayer('plant',2)
 				break
 			}
 			//Archaebacteria

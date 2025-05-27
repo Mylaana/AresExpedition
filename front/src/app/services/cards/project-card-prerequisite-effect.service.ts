@@ -30,6 +30,15 @@ export class ProjectCardPrerequisiteEffectService {
 			case('106'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
 			}
+			//Algae
+			case('107'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//Archaebacteria
+			case('108'):{
+				console.log('archaebacteria')
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', clientState)
+			}
 			default:{
 				return true
 			}
@@ -48,7 +57,7 @@ export class ProjectCardPrerequisiteEffectService {
 	}
 	private static isGlobalParameterOk(parameter: GlobalParameterNameEnum, color: GlobalParameterColorEnum, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
 		const colorList: GlobalParameterColorEnum[] = [GlobalParameterColorEnum.purple, GlobalParameterColorEnum.red, GlobalParameterColorEnum.yellow, GlobalParameterColorEnum.white]
-		let currentColor = clientState.getGlobalParameterColorAtPhaseBegining(parameter)
+		let currentColor = clientState.getGlobalParameterColorAtPhaseBeginning(parameter)
 		if(treshold==="equal"){
 			return color===currentColor
 		}
@@ -67,11 +76,17 @@ export class ProjectCardPrerequisiteEffectService {
 			}
 		}
 		for(let c of colorList){
-			if(color===c){addToList=addToList===false}
+			if(color===c&&treshold==='min'){addToList=addToList===false}
 			if(addToList){
 				authorizedColor.push(c)
 			}
+			if(color===c&&treshold==='max'){addToList=addToList===false}
 		}
+		console.log(authorizedColor)
 		return authorizedColor.includes(currentColor)
+	}
+	private static isOceanOk(oceanFlippedNumber: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
+		let currentOcean = clientState.getOceanFlippedNumberAtPhaseBeginning()
+		return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:oceanFlippedNumber, value:currentOcean})
 	}
 }
