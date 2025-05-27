@@ -1,10 +1,9 @@
 import { AdvancedRessourceStock } from "../global.interface"
 
-export interface ProjectCardDTO {
+export interface PlayedCardDTO {
 	i: number //id
-	s: AdvancedRessourceStock[] //stock
+	s?: AdvancedRessourceStock[] //stock
 }
-
 export interface TriggerStateDTO {
 	pci: number[] //playedCardsId
     aci: number[] //activeCardsId

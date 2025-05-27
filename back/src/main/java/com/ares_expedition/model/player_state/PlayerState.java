@@ -9,7 +9,6 @@ import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
-import com.ares_expedition.enums.game.RessourceEnum;
 import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.subclass.PlayerEventState;
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
@@ -204,20 +203,12 @@ public class PlayerState {
         this.projectCardState.setHandCorporations(handCorporations);
     }
 
-    public List<Integer> getPlayedProjectIdList() {
-        return projectCardState.getPlayedProjectIdList();
+    public List<Map<Integer,Object>> getCardPlayed() {
+        return projectCardState.getCardPlayed();
     }
 
-    public void setPlayedProjectIdList(List<Integer> playedProjectIdList) {
-        this.projectCardState.setPlayedProjectIdList(playedProjectIdList);
-    }
-
-    public Map<Integer, Object> getPlayedProjectCardStocks() {
-        return this.projectCardState.getPlayedProjectCardStocks();
-    }
-
-    public void setProjectCardStocks(Map<Integer, Object> projectCardStocks) {
-        this.projectCardState.setPlayedProjectCardStocks(projectCardStocks);
+    public void setCardPlayed(List<Map<Integer,Object>> playedProjectIdList) {
+        this.projectCardState.setCardPlayed(playedProjectIdList);
     }
 
     public TriggerState getTriggers() {

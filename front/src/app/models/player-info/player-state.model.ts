@@ -18,6 +18,7 @@ import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
+import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 
 
 export class PlayerStateModel {
@@ -31,7 +32,10 @@ export class PlayerStateModel {
 	private eventState: PlayerEventStateModel
 	private otherState: PlayerOtherStateModel
 
-	constructor(private injector: Injector, dto?: PlayerStateDTO) {
+	constructor(
+		private injector: Injector,
+		dto?: PlayerStateDTO
+	) {
 		if(dto){
 			this.infoState = new PlayerInfoStateModel(dto.infoState)
 			this.scoreState = new PlayerScoreStateModel(dto.scoreState)
@@ -42,6 +46,7 @@ export class PlayerStateModel {
 			this.globalParameterState = new PlayerGlobalParameterStateModel(dto.globalParameterState)
 			this.eventState = new PlayerEventStateModel(dto.eventState)
 			this.otherState = new PlayerOtherStateModel(dto.otherState)
+			this.setScalingVp()
 		} else {
 			this.infoState = PlayerInfoStateModel.empty()
 			this.scoreState = PlayerScoreStateModel.empty()
@@ -69,6 +74,9 @@ export class PlayerStateModel {
 	addMilestoneCompleted(){this.scoreState.addMilestoneCompleted()}
 	getVP(): number {return this.scoreState.getVP()}
 	addVP(vp: number){this.scoreState.addVP(vp)}
+	setScalingVp(){
+		this.scoreState.setScalingVP(ProjectCardScalingVPService.getScalingVP(this.getProjectPlayedModelList()))
+	}
 	getTR(): number {return this.scoreState.getVP()}
 	addTR(vp: number){this.scoreState.addVP(vp)}
 	addForest(forest: number): void {this.scoreState.addForest(forest)}
@@ -98,7 +106,9 @@ export class PlayerStateModel {
 	getPhaseGroups(): PhaseCardGroupModel[] {return this.phaseCardState.getPhaseGroups()}
 
 	//globalParameterState
-	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {this.globalParameterState.addGlobalParameterStepEOP(parameter)}
+	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {
+		this.globalParameterState.addGlobalParameterStepEOP(parameter)
+	}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
 	getGlobalParameterFromName(parameterName: GlobalParameterNameEnum): GlobalParameter | undefined {
 		for(let param of this.getGlobalParameters()){
@@ -137,7 +147,10 @@ export class PlayerStateModel {
 	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
 	addCardsToDiscard(cards: number | number[]) {this.projectCardState.addCardsToDiscard(cards)}
 
-	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)}
+	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {
+		this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)
+		this.setScalingVp()
+	}
 	getProjectPlayedModelFromId(cardId:number): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}
 	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
@@ -150,6 +163,7 @@ export class PlayerStateModel {
 		this.removeCardsFromHand([card.id], cardType)
 		this.payCardCost(card)
 		this.addPlayedCardTags(card)
+		this.setScalingVp()
 	}
 
 	loadEventStateActivator(dto: EventStateDTO): void {this.projectCardState.loadEventStateActivator(dto)}

@@ -1,9 +1,10 @@
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { myUUID, RGB } from "../../types/global.type";
-import { RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
+import { PlayedCardStock } from "../../types/project-card.type";
+import { AdvancedRessourceStock, RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
 import { EventStateDTO } from "./event-state-dto.interface";
-import { TriggerStateDTO } from "./project-card-dto.interface";
+import { PlayedCardDTO, TriggerStateDTO } from "./project-card-dto.interface";
 
 export interface PlayerStateDTO {
 	infoState: PlayerInfoStateDTO
@@ -37,8 +38,7 @@ export interface PlayerProjectCardStateDTO {
 	h: number[],
 	hc: number[],
 	hd: number[],
-	ppil: number[]
-	ppcs: any
+	cp: PlayedCardStock[]
 	t: TriggerStateDTO
 	hms: number
 }

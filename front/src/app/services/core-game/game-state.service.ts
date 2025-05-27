@@ -474,12 +474,7 @@ export class GameState{
 		let state = this.getClientState()
 		let newEvents: EventBaseModel[] = []
 
-		let triggers = state.getTriggersIdOnParameterIncrease()
-        if(triggers.length>0){
-			newEvents = newEvents.concat(this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
-		}
 		state.addGlobalParameterStepEOP(parameter)
-
 		//add TR if not maxed out
 		if(!state.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){
 			state.addTR(parameter.steps)
@@ -499,6 +494,10 @@ export class GameState{
 		}
 		this.updateClientState(state)
 
+		let triggers = state.getTriggersIdOnParameterIncrease()
+        if(triggers.length>0){
+			newEvents = newEvents.concat(this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
+		}
         if(newEvents.length===0){return}
         this.addEventQueue(newEvents, 'first')
 
