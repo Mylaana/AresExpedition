@@ -47,9 +47,10 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ :
 No visual effect for discarding cards   
+No visual effect for adding a ressource to card   
 Builder: Disabled card appear buildable (visually only) when card selection active   
-Ressource on cards not being saved serverside   
 Adding forest point via event doesnt add VP   
+DRAW QUERY/RESULT are not 'saved' in eventstate, resulting in card disapearing if client refresh after draw   
 
 
 ## Must have for v1 :

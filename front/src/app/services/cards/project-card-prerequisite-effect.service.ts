@@ -108,7 +108,7 @@ export class ProjectCardPrerequisiteEffectService {
 			}
 			//Low-Atmo Shields
 			case('157'):{
-				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
 			}
 			//Lunar Beam
 			case('158'):{
@@ -117,6 +117,10 @@ export class ProjectCardPrerequisiteEffectService {
 			//Mass Converter
 			case('159'):{
 				return this.isTagNumberOk('science', 4, 'min', clientState)
+			}
+			//Methane from Titan
+			case('161'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
 			}
 			default:{
 				return true

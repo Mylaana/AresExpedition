@@ -27,6 +27,10 @@ export class ProjectCardScalingProductionsService {
 				if(playedCardList.includes(160)){
 					scalingProductions += this.getCardScalingProduction(160, tagState)
 				}
+				//Miranda Resort
+				if(playedCardList.includes(165)){
+					scalingProductions += this.getCardScalingProduction(165, tagState)
+				}
 				break
 			}
 			case('heat'):{
@@ -82,6 +86,11 @@ export class ProjectCardScalingProductionsService {
 			//Medical Lab
 			case(160):{
 				scalingProduction = this.getPlayedTagNumber('building', tagState)
+				break
+			}
+			//Miranda Resort
+			case(165):{
+				scalingProduction = this.getPlayedTagNumber('earth', tagState)
 				break
 			}
 			//Satellite Farms

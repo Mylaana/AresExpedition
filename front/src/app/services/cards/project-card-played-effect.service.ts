@@ -426,11 +426,24 @@ export class ProjectCardPlayedEffectService {
 				]))
 				break
 			}
+			//Micromills
+			case('162'):{
+				result.push(this.createEventAddProduction([
+					{name:'heat', valueStock:1},
+					{name:'steel', valueStock:1}
+				]))
+				break
+			}
 			//Microprocessor
 			case('163'):{
-				result.push(this.createEventDiscard(1))
-				result.push(this.createEventDraw(2))
 				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
+				result.push(this.createEventDraw(2))
+				result.push(this.createEventDiscard(1))
+				break
+			}
+			//Mine
+			case('164'):{
+				result.push(this.createEventAddProduction({name:'steel', valueStock:2}))
 				break
 			}
 			//Nitrophilic Moss
