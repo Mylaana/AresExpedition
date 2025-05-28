@@ -102,6 +102,10 @@ export class ProjectCardPrerequisiteEffectService {
 			case('143'):{
 				return this.isOceanOk(2, 'min', clientState)
 			}
+			//Kelp Farming
+			case('154'):{
+				return this.isOceanOk(6, 'min', clientState)
+			}
 			default:{
 				return true
 			}

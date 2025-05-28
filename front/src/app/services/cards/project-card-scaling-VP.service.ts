@@ -8,17 +8,22 @@ import { PlayableCardModel } from "../../models/cards/project-card.model";
     providedIn: 'root'
 })
 export class ProjectCardScalingVPService {
-	public static getScalingVP(playedCards: PlayableCardModel[]): number{
-		let result: number = 0
+	public static getScalingVP(playedCards: PlayableCardModel[], clientState: PlayerStateModel): number{
+		let totalScalingVp: number = 0
 		for(let card of playedCards){
 			switch(card.cardCode){
 				//Physics Complex
 				case("46"):{
-					result += Math.floor(card.getStockValue('science') / 2)
+					totalScalingVp += Math.floor(card.getStockValue('science') / 2)
+					break
+				}
+				//Io Mining Industry
+				case("153"):{
+					totalScalingVp += clientState.getTagsOfType('jovian')
 					break
 				}
 			}
 		}
-		return result
+		return totalScalingVp
 	}
 }

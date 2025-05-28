@@ -1,6 +1,6 @@
 import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter, PlayerPhase, OceanBonus, RessourceStock } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
-import { myUUID, PlayableCardType, RessourceType, RGB } from "../../types/global.type";
+import { myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
@@ -74,24 +74,27 @@ export class PlayerStateModel {
 	//scoreState
 	getMilestoneCompleted(): number {return this.scoreState.getMilestoneCompletedNumber()}
 	addMilestoneCompleted(){this.scoreState.addMilestoneCompleted()}
-	getVP(): number {return this.scoreState.getVP()}
-	addVP(vp: number){this.scoreState.addVP(vp)}
+	getBaseVP(): number {return this.scoreState.getBaseVP()}
+	getTotalVP(): number {return this.scoreState.getTotalVP()}
+	addVP(vp: number){this.scoreState.addBaseVP(vp)}
 	setScalingVp(){
-		this.scoreState.setScalingVP(ProjectCardScalingVPService.getScalingVP(this.getProjectPlayedModelList()))
+		this.scoreState.setScalingVP(ProjectCardScalingVPService.getScalingVP(this.getProjectPlayedModelList(), this))
 	}
-	getTR(): number {return this.scoreState.getVP()}
-	addTR(vp: number){this.scoreState.addVP(vp)}
+	getTR(): number {return this.scoreState.getTR()}
+	addTR(tr: number){this.scoreState.addTR(tr)}
 	addForest(forest: number): void {this.scoreState.addForest(forest)}
 	getForest(): number {return this.scoreState.getForest()}
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}
+	getTagsOfType(tagType: TagType): number {return this.tagState.getTagsOfType(tagType)}
 	addTagsFromPlayedCard(card: PlayableCardModel): void {
 		this.tagState.addPlayedCardTags(card)
 	}
 	addTagFromOtherSource(tagId: number, quantity: number){
 		this.tagState.addTag(tagId, quantity)
 		this.setScalingProduction()
+		this.setScalingVp()
 	}
 
 	//ressourceState

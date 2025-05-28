@@ -32,6 +32,13 @@ export class ProjectCardScalingProductionsService {
 				}
 				break
 			}
+			case('plant'):{
+				//Insects
+				if(playedCardList.includes(152)){
+					scalingProductions += this.getCardScalingProduction(152, tagState)
+				}
+				break
+			}
 			case('card'):{
 				//Laboratories
 				if(playedCardList.includes(213)){
@@ -52,6 +59,11 @@ export class ProjectCardScalingProductionsService {
 			//Cartel
 			case(123):{
 				scalingProduction = this.getPlayedTagNumber('earth', tagState)
+				break
+			}
+			//Insects
+			case(152):{
+				scalingProduction = this.getPlayedTagNumber('plant', tagState)
 				break
 			}
 			//Satellite Farms

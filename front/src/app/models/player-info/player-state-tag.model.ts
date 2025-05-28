@@ -2,6 +2,7 @@ import { TagInfo } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { GAME_TAG_LIST } from "../../global/global-const";
 import { PlayerTagStateDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { TagType } from "../../types/global.type";
 
 export class PlayerTagStateModel {
     private tags: TagInfo[] = [] //this.initializeTags()
@@ -35,6 +36,12 @@ export class PlayerTagStateModel {
 		}
 	}
 	getTags(): TagInfo[] {return this.tags}
+	getTagsOfType(tagType: TagType): number {
+		for(let tag of this.tags){
+			if(tag.name===tagType){return tag.valueCount}
+		}
+		return 0
+	}
 	toJson(): PlayerTagStateDTO {
 		return {
 			t: this.tags

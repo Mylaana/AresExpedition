@@ -95,7 +95,6 @@ test needs: empty components from the app logic and transfer it into services/cl
 global: removing obvious comments   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
-Refactor VP system   
 Refactor Ressource system (scaling, base etc.)   
 Refactor Tag System   
 

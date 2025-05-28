@@ -194,12 +194,6 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddRessource({name:'heat', valueStock:-4}))
 				break
 			}
-			//Building Industries
-			case('120'):{
-				result.push(this.createEventAddProduction({name:'steel', valueStock:2}))
-				result.push(this.createEventAddRessource({name:'heat', valueStock:-4}))
-				break
-			}
 			//Bushes
 			case('121'):{
 				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
@@ -370,6 +364,31 @@ export class ProjectCardPlayedEffectService {
 					{name:'megacredit', valueStock:1},
 					{name:'plant', valueStock:2}
 				]))
+				break
+			}
+			//Industrial Microbes
+			case('151'):{
+				result.push(this.createEventAddProduction([
+					{name:'heat', valueStock:1},
+					{name:'steel', valueStock:1}
+				]))
+				break
+			}
+			//Io Mining Industry
+			case('153'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:2},
+					{name:'titanium', valueStock:2}
+				]))
+				break
+			}
+			//Kelp Farming
+			case('154'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:2},
+					{name:'plant', valueStock:3}
+				]))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:2}))
 				break
 			}
 			//Lichen
