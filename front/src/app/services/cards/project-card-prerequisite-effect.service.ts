@@ -147,6 +147,26 @@ export class ProjectCardPrerequisiteEffectService {
 			case('179'):{
 				return this.isOceanOk(2, 'min', clientState)
 			}
+			//Strip Mine
+			case('191'):{
+				return this.isTrOk(1, 'min', clientState)
+			}
+			//Trapped Heat
+			case('197'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//Trees
+			case('198'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
+			//Tropical Forest
+			case('199'):{
+				return this.isRessourcesNumberOk('heat', 5, 'min', clientState)
+			}
+			//Tundra Farming
+			case('200'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
 			default:{
 				return true
 			}

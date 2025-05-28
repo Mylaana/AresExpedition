@@ -509,18 +509,18 @@ export class ProjectCardPlayedEffectService {
 				]))
 				break
 			}
-			//
+			//Protected Valley
 			case('177'):{
 				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
 				result.push(this.createEventAddForestAndOxygen(1))
 				break
 			}
-			//
+			//Quantum Extractor
 			case('178'):{
 				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
 				break
 			}
-			//
+			//Rad Suits
 			case('179'):{
 				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
 				break
@@ -538,8 +538,35 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Soil Warming
 			case('184'):{
-				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,1))
 				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,1))
+				break
+			}
+			//Solar Power
+			case('185'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
+				break
+			}
+			//Solar Trapping
+			case('186'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
+				result.push(this.createEventAddRessource({name:'heat', valueStock:3}))
+				result.push(this.createEventDraw(1))
+				break
+			}
+			//Soletta
+			case('187'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:5}))
+				break
+			}
+			//Space Heaters
+			case('188'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:2}))
+				break
+			}
+			//Space Station
+			case('189'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
 				break
 			}
 			//Sponsor
@@ -547,15 +574,63 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
 				break
 			}
+			//Strip Mine
+			case('191'):{
+				result.push(this.createEventAddProduction([
+					{name:'steel', valueStock:2},
+					{name:'titanium', valueStock:1}
+				]))
+				result.push(this.createEventAddTR(-1))
+				break
+			}
+			//Surface Mines
+			case('192'):{
+				result.push(this.createEventAddProduction([
+					{name:'steel', valueStock:1},
+					{name:'titanium', valueStock:1}
+				]))
+				break
+			}
+			//Tectonic Stress Power
+			case('193'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
+				break
+			}
+			//Titanium Mine
+			case('194'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
+				break
+			}
+			//Trading Post
+			case('196'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:2}))
+				break
+			}
 			//Trapped Heat
 			case('197'):{
-				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				result.push(this.createEventAddProduction({name:'heat', valueStock:2}))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
 			//Trees
 			case('198'):{
 				result.push(this.createEventAddProduction({name:'plant', valueStock:3}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:1}))
+				break
+			}
+			//Tropical Forest
+			case('199'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:4}))
+				result.push(this.createEventAddRessource({name:'heat', valueStock:-5}))
+				break
+			}
+			//Tundra Farming
+			case('200'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:2},
+					{name:'plant', valueStock:1}
+				]))
 				result.push(this.createEventAddRessource({name:'plant', valueStock:1}))
 				break
 			}
@@ -629,8 +704,8 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Bedrock Wellbore
 			case('F10'):{
-				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
 			//CHP Combustion Turbines
