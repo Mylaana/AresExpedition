@@ -54,6 +54,34 @@ export class ProjectCardPrerequisiteEffectService {
 			case('121'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
 			}
+			//Designed Microorganisms
+			case('127'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'max', clientState)
+			}
+			//Dust Quarry
+			case('129'):{
+				return this.isOceanOk(3, 'max', clientState)
+			}
+			//Energy Storage
+			case('131'):{
+				return this.isTrOk(7, 'min', clientState)
+			}
+			//Eos Chasma National Park
+			case('132'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//Farming
+			case('133'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', clientState)
+			}
+			//Food factory
+			case('134'):{
+				return this.isRessourcesNumberOk('plant', 2, 'min', clientState)
+			}
+			//Fuel factory
+			case('135'):{
+				return this.isRessourcesNumberOk('heat', 3, 'min', clientState)
+			}
 			default:{
 				return true
 			}
@@ -104,5 +132,8 @@ export class ProjectCardPrerequisiteEffectService {
 	private static isOceanOk(oceanFlippedNumber: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
 		let currentOcean = clientState.getOceanFlippedNumberAtPhaseBeginning()
 		return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:oceanFlippedNumber, value:currentOcean})
+	}
+	private static isTrOk(tr: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
+		return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:tr, value: clientState.getTR()})
 	}
 }

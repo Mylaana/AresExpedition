@@ -221,9 +221,86 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddProduction({name:'megacredit', valueStock:4}))
 				break
 			}
+			//Deep Well Heating
+			case('126'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature, 1))
+				break
+			}
+			//Designed Microorganisms
+			case('127'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
+				break
+			}
+			//Diversified Interests
+			case('128'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				result.push(this.createEventAddRessource([
+					{name:'plant', valueStock:3},
+					{name:'heat', valueStock:3}
+				]))
+				break
+			}
 			//Dust Quarry
 			case('129'):{
 				result.push(this.createEventAddProduction({name:'steel', valueStock:1}))
+				break
+			}
+			//Economic Growth
+			case('130'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
+				break
+			}
+			//Energy Storage
+			case('131'):{
+				result.push(this.createEventAddProduction({name:'card', valueStock:2}))
+				break
+			}
+			//Eos Chasma National Park
+			case('132'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:3}))
+				result.push(this.createEventAddRessourceToSelectedCard({name:'animal', valueStock:1}))
+				break
+			}
+			//Farming
+			case('133'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:2},
+					{name:'plant', valueStock:2}
+				]))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:2}))
+				break
+			}
+			//Food Factory
+			case('134'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:4}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:-2}))
+				break
+			}
+			//
+			case('130'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
+				break
+			}
+			//
+			case('130'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
+				break
+			}
+			//
+			case('130'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
+				break
+			}
+			//
+			case('130'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
+				break
+			}
+			//
+			case('130'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
 				break
 			}
 			//Fuel factory
