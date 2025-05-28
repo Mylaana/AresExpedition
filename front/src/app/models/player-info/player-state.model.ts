@@ -19,6 +19,7 @@ import { EventBaseModel } from "../core-game/event.model";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
+import { ProjectCardScalingProductionsService } from "../../services/cards/project-card-scaling-productions.service";
 
 
 export class PlayerStateModel {
@@ -84,7 +85,13 @@ export class PlayerStateModel {
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}
-	addPlayedCardTags(card: PlayableCardModel): void {this.tagState.addPlayedCardTags(card)}
+	addTagsFromPlayedCard(card: PlayableCardModel): void {
+		this.tagState.addPlayedCardTags(card)
+	}
+	addTagFromOtherSource(tagId: number, quantity: number){
+		this.tagState.addTag(tagId, quantity)
+		this.setScalingProduction()
+	}
 
 	//ressourceState
 	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}
@@ -93,7 +100,18 @@ export class PlayerStateModel {
 	getRessourceInfoFromType(type: RessourceType): RessourceInfo | undefined {return this.ressourceState.getRessourceStateFromType(type)}
 	addRessource(type: RessourceType, quantity: number): void {this.ressourceState.addRessource(type, quantity)}
 	addProduction(type: RessourceType, quantity: number): void {this.ressourceState.addProduction(type, quantity)}
-	setScalingProduction(type: RessourceType, quantity: number): void {this.ressourceState.setScalingProduction(type, quantity)}
+	setScalingProduction(): void {
+		let ressources: RessourceInfo[] = this.getRessources()
+		for(let i=0 ;i<ressources.length; i++){
+			let scalingProd =
+				ProjectCardScalingProductionsService.getScalingProduction(
+					ressources[i].name,
+					this.getProjectPlayedIdList(),
+					this.getTags()
+				)
+			this.ressourceState.setScalingProduction(ressources[i].name, scalingProd)
+		}
+	}
 
 	//phaseCardState
 	getPhaseCardUpgradedCount(): number {return this.phaseCardState.getPhaseCardUpgradedCount()}
@@ -164,11 +182,12 @@ export class PlayerStateModel {
 		this.projectCardState.playCard(card)
 		this.removeCardsFromHand([card.id], cardType)
 		this.payCardCost(card)
-		this.addPlayedCardTags(card)
+		this.addTagsFromPlayedCard(card)
 		if(parseInt(card.vpNumber??'')>0){
 			this.addVP(parseInt(card.vpNumber??''))
 		}
 		this.setScalingVp()
+		this.setScalingProduction()
 	}
 
 	loadEventStateActivator(dto: EventStateDTO): void {this.projectCardState.loadEventStateActivator(dto)}

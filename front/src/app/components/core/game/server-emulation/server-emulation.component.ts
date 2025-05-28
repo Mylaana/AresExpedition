@@ -181,13 +181,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	addTag(index: number) {
 		let state = this.gameStateService.getClientState()
-		let tags = state.getTags()
-		for(let tag of tags){
-			if(tag.id===index){
-				tag.valueCount+=1
-				return
-			}
-		}
+		let tags = state.addTagFromOtherSource(index, 1)
 		this.gameStateService.updateClientState(state)
 	}
 	resetRessource(): void {

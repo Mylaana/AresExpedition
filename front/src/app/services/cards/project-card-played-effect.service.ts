@@ -19,9 +19,6 @@ export class ProjectCardPlayedEffectService {
 	playedCardList: number [] = []
 	clientPlayerState!: PlayerStateModel
 
-	constructor(
-		private scalingProductionService: ProjectCardScalingProductionsService
-	){}
 	addRessourceToCard(card: PlayableCardModel, ressource: AdvancedRessourceStock): void {
 		card.addRessourceToStock(ressource)
 	}
@@ -33,9 +30,6 @@ export class ProjectCardPlayedEffectService {
 	}
 	addTrToPlayer(quantity:number):void{
 		this.clientPlayerState.addTR(quantity)
-	}
-	addVp(quantity: number): void {
-		this.clientPlayerState.addVP(quantity)
 	}
 	playCard(card: PlayableCardModel, playerState: PlayerStateModel, cardType: PlayableCardType): PlayerStateModel {
 		this.clientPlayerState = playerState
@@ -97,7 +91,6 @@ export class ProjectCardPlayedEffectService {
 			case('105'):{
 				this.addProductionToPlayer('card',1)
 				this.addProductionToPlayer('heat',2)
-				//this.addVp(1)
 				break
 			}
 			//Airborne Radiation
@@ -129,6 +122,13 @@ export class ProjectCardPlayedEffectService {
 			//Asteroid Mining Consortium
 			case('111'):{
 				this.addProductionToPlayer('titanium',1)
+				break
+			}
+			//Astrofarm
+			case('112'):{
+				console.log('astrofarm')
+				this.addProductionToPlayer('plant',1)
+				this.addProductionToPlayer('heat',3)
 				break
 			}
 			//Dust Quarry
@@ -289,18 +289,6 @@ export class ProjectCardPlayedEffectService {
 				break
 			}
 		}
-
-		let playerRessources: RessourceInfo[] = this.clientPlayerState.getRessources()
-		for(let i=0 ;i<playerRessources.length; i++){
-			let scalingProd =
-				this.scalingProductionService.getScalingProduction(
-					playerRessources[i].name,
-					this.clientPlayerState.getProjectPlayedIdList(),
-					this.clientPlayerState.getTags()
-				)
-			this.clientPlayerState.setScalingProduction(playerRessources[i].name, scalingProd)
-		}
-
 		return this.clientPlayerState
 	}
 	/**
@@ -371,6 +359,11 @@ export class ProjectCardPlayedEffectService {
 			//Airborne Radiation
 			case('106'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1))
+				break
+			}
+			//Astrofarm
+			case('112'):{
+				result.push(this.createEventAddRessourceToSelectedCard({name:'microbe', valueStock:2}))
 				break
 			}
 			//Microprocessor
@@ -485,7 +478,6 @@ export class ProjectCardPlayedEffectService {
 			//Media Group
 			case(42):{
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('event','tag'))){costMod += 5}
-				console.log(GlobalInfo.getIdFromType('event','tag'), mod.tagList)
 				break
 			}
 		}

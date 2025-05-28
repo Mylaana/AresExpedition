@@ -7,7 +7,7 @@ import { TagType } from "../../types/global.type";
     providedIn: 'root'
 })
 export class ProjectCardScalingProductionsService {
-	getScalingProduction(ressource: RessourceType, playedCardList: number[], tagState:TagInfo[]): number{
+	public static getScalingProduction(ressource: RessourceType, playedCardList: number[], tagState:TagInfo[]): number{
 		let scalingProductions = 0
 		switch(ressource){
 			case('megacredit'):{
@@ -22,6 +22,10 @@ export class ProjectCardScalingProductionsService {
 				break
 			}
 			case('heat'):{
+				//Atospheric Insulators
+				if(playedCardList.includes(113)){
+					scalingProductions += this.getCardScalingProduction(113, tagState)
+				}
 				//Satellite Farms
 				if(playedCardList.includes(180)){
 					scalingProductions += this.getCardScalingProduction(180, tagState)
@@ -37,9 +41,14 @@ export class ProjectCardScalingProductionsService {
 		}
 		return scalingProductions
 	}
-	getCardScalingProduction(cardId:number, tagState:TagInfo[]):number{
+	public static getCardScalingProduction(cardId:number, tagState:TagInfo[]):number{
 		let scalingProduction: number = 0
 		switch(cardId){
+			//Cartel
+			case(113):{
+				scalingProduction = this.getPlayedTagNumber('earth', tagState)
+				break
+			}
 			//Cartel
 			case(123):{
 				scalingProduction = this.getPlayedTagNumber('earth', tagState)
@@ -64,7 +73,7 @@ export class ProjectCardScalingProductionsService {
 
 		return scalingProduction
 	}
-	getPlayedTagNumber(tagType: TagType, tagState:TagInfo[]):number{
+	public static getPlayedTagNumber(tagType: TagType, tagState:TagInfo[]):number{
 		let tagNumber: number = 0
 		for(let tags of tagState){
 			if(tags.name===tagType){

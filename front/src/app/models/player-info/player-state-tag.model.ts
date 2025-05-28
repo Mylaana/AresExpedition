@@ -25,13 +25,13 @@ export class PlayerTagStateModel {
 		return result
 	}
 
-	addTag(tagId:number):void{
+	addTag(tagId:number, quantity: number):void{
 		if(tagId===-1){return}
-		this.tags[tagId].valueCount += 1
+		this.tags[tagId].valueCount += quantity
 	}
 	addPlayedCardTags(card: PlayableCardModel): void {
 		for(let tagId of card.tagsId){
-			this.addTag(tagId)
+			this.addTag(tagId, 1)
 		}
 	}
 	getTags(): TagInfo[] {return this.tags}
