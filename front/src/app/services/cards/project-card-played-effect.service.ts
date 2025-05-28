@@ -176,6 +176,22 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventDraw(2))
 				break
 			}
+			//Subterranean Reservoir
+			case('98'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
+				break
+			}
+			//Technology Demonstration
+			case('99'):{
+				result.push(this.createEventDraw(2))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
+				break
+			}
+			//Terraforming Ganymede
+			case('100'):{
+				result.push(this.createEventAddTR(clientstate.getTagsOfType('jovian')))
+				break
+			}
 			//Acquired Company
 			case('103'):{
 				result.push(this.createEventAddProduction({name:'card', valueStock:1}))
