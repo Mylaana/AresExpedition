@@ -1,4 +1,4 @@
-import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter, PlayerPhase, OceanBonus } from "../../interfaces/global.interface";
+import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter, PlayerPhase, OceanBonus, RessourceStock } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { myUUID, PlayableCardType, RessourceType, RGB } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
@@ -20,6 +20,7 @@ import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/gl
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { ProjectCardScalingProductionsService } from "../../services/cards/project-card-scaling-productions.service";
+import { Utils } from "../../utils/utils";
 
 
 export class PlayerStateModel {
@@ -99,7 +100,13 @@ export class PlayerStateModel {
 	getRessourceInfoFromId(id: number): RessourceInfo | undefined {return this.ressourceState.getRessourceInfoFromId(id)}
 	getRessourceInfoFromType(type: RessourceType): RessourceInfo | undefined {return this.ressourceState.getRessourceStateFromType(type)}
 	addRessource(type: RessourceType, quantity: number): void {this.ressourceState.addRessource(type, quantity)}
-	addProduction(type: RessourceType, quantity: number): void {this.ressourceState.addProduction(type, quantity)}
+	addProduction(ressources: RessourceStock | RessourceStock[]): void {
+		let production: RessourceStock[] = Utils.toArray(ressources)
+		for(let p of production){
+			this.ressourceState.addProduction(p.name, p.valueStock)
+		}
+		this.setScalingProduction()
+	}
 	setScalingProduction(): void {
 		let ressources: RessourceInfo[] = this.getRessources()
 		for(let i=0 ;i<ressources.length; i++){

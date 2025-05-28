@@ -396,6 +396,11 @@ export class EventHandler {
 				}
 				break
 			}
+			case('addProduction'):{
+				if(!event.baseRessource){break}
+				this.gameStateService.addProductionToClient(event.baseRessource)
+				break
+			}
 			default:{Utils.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}

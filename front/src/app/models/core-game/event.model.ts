@@ -361,6 +361,7 @@ export class EventGeneric extends EventBaseModel {
 	selectedPhase?: SelectablePhaseEnum
 	gainOceanNumber?: number
 	production?: RessourceStock | RessourceStock[]
+	increaseTr?: number
 }
 
 export class EventDeckQuery extends EventBaseModel {

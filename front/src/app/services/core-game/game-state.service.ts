@@ -430,22 +430,19 @@ export class GameState{
 	}
 	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{
         let events: EventBaseModel[] = []
-		let newState: PlayerStateModel = this.projectCardPlayed.playCard(card, this.getClientState(), cardType)
-        this.updateClientState(newState)
-		console.log('played',Utils.jsonCopy(card))
-
-		let playedCardEvents = this.projectCardPlayed.getPlayedCardEvent(card)
+		let state = this.getClientState()
+		let playedCardEvents = ProjectCardPlayedEffectService.getPlayedCardEvent(card.cardCode, state)
 
         //check for triggers and add them to queue
-        let onPlayedTriggers = newState.getTriggersIdOnPlayedCard()
+        let onPlayedTriggers = state.getTriggersIdOnPlayedCard()
         if(onPlayedTriggers.length!=0){
-            let eventsOnPlayed = this.projectCardPlayed.getEventTriggerByPlayedCard(card, onPlayedTriggers, newState)
+            let eventsOnPlayed = this.projectCardPlayed.getEventTriggerByPlayedCard(card, onPlayedTriggers, state)
             if(eventsOnPlayed!=undefined){
                 events = events.concat(eventsOnPlayed)
             }
         }
 
-        let onTagGainedTriggers = newState.getTriggersIdOnGainedTag()
+        let onTagGainedTriggers = state.getTriggersIdOnGainedTag()
         if(onTagGainedTriggers.length!=0){
             let eventsOnTagGained = this.projectCardPlayed.getTriggerByTagGained(card, onTagGainedTriggers)
             if(eventsOnTagGained!=undefined){
@@ -755,6 +752,11 @@ export class GameState{
 		state.addForest(forestNumber)
 		state.addGlobalParameterStepEOP({name:GlobalParameterNameEnum.oxygen, steps:forestNumber})
 		state.addTR(forestNumber)
+		this.updateClientState(state)
+	}
+	public addProductionToClient(ressources: RessourceStock | RessourceStock[]){
+		let state = this.getClientState()
+		state.addProduction(ressources)
 		this.updateClientState(state)
 	}
 }

@@ -30,6 +30,7 @@ interface CreateEventOptionsGeneric {
 	addForestPoint?: number
 	oceanQueryNumber?: number
 	production?: RessourceStock | RessourceStock[]
+	increaseTr?: number
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -259,6 +260,10 @@ export class EventDesigner{
                 event.baseRessource = args?.baseRessource
                 break
             }
+			case('addProduction'):{
+                event.baseRessource = args?.baseRessource
+                break
+            }
             case('increaseResearchScanKeep'):{
                 event.increaseResearchScanKeep = args?.scanKeep
                 break
@@ -291,6 +296,10 @@ export class EventDesigner{
 			}
 			case('oceanQuery'):{
 				event.gainOceanNumber = args?.oceanQueryNumber
+				break
+			}
+			case('addTr'):{
+				event.increaseTr = args?.increaseTr
 				break
 			}
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}

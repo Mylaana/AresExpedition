@@ -16,6 +16,7 @@ import { GlobalParameterNameEnum } from "../../enum/global.enum";
     providedIn: 'root'
 })
 export class ProjectCardPlayedEffectService {
+	/*
 	playedCardList: number [] = []
 	clientPlayerState!: PlayerStateModel
 
@@ -26,12 +27,12 @@ export class ProjectCardPlayedEffectService {
 		this.clientPlayerState.addRessource(ressource, quantity)
 	}
 	addProductionToPlayer(ressource: RessourceType, quantity:number):void{
-		this.clientPlayerState.addProduction(ressource, quantity)
+		//this.clientPlayerState.addProduction(ressource, quantity)
 	}
 	addTrToPlayer(quantity:number):void{
 		this.clientPlayerState.addTR(quantity)
 	}
-	playCard(card: PlayableCardModel, playerState: PlayerStateModel, cardType: PlayableCardType): PlayerStateModel {
+	private playCard(card: PlayableCardModel, playerState: PlayerStateModel, cardType: PlayableCardType): PlayerStateModel {
 		this.clientPlayerState = playerState
 		this.clientPlayerState.playCard(card, cardType)
 
@@ -39,258 +40,8 @@ export class ProjectCardPlayedEffectService {
 		if(card.startingMegacredits){
 			this.addRessourceToPlayer('megacredit', card.startingMegacredits)
 		}
-
-		switch(card.cardCode){
-			//Decomposing Fungus
-			case('20'):{
-				this.addRessourceToCard(card, {name: 'microbe',valueStock: 2})
-				break
-			}
-			//Farming Co-ops
-			case('29'):{
-				this.clientPlayerState.addRessource('plant', 3)
-				break
-			}
-			//Physics Complex
-			case('46'):{
-				//this.setCardStockableRessource(card,'science')
-				break
-			}
-			//Tardigrades
-			case('58'):{
-				//this.setCardStockableRessource(card, 'microbe')
-				break
-			}
-			//Bribed Commitee
-			case('69'):{
-				this.addTrToPlayer(2)
-				break
-			}
-			//Deimos Down
-			case('76'):{
-				this.addRessourceToPlayer("megacredit", 7)
-				break
-			}
-			//Imported Nitrogen
-			case('81'):{
-				this.addRessourceToPlayer("plant", 4)
-				this.addTrToPlayer(1)
-				break
-			}
-			//Acquired Company
-			case('103'):{
-				this.addProductionToPlayer('card',1)
-				break
-			}
-			//Adaptated Lichen
-			case('104'):{
-				this.addProductionToPlayer('plant',1)
-				break
-			}
-			//Aerated Magma
-			case('105'):{
-				this.addProductionToPlayer('card',1)
-				this.addProductionToPlayer('heat',2)
-				break
-			}
-			//Airborne Radiation
-			case('106'):{
-				this.addProductionToPlayer('heat',2)
-				break
-			}
-			//Acquired Company
-			case('107'):{
-				this.addProductionToPlayer('plant',2)
-				break
-			}
-			//Archaebacteria
-			case('108'):{
-				this.addProductionToPlayer('plant',1)
-				break
-			}
-			//Artificial Photosynthesis
-			case('109'):{
-				this.addProductionToPlayer('plant',1)
-				this.addProductionToPlayer('heat',1)
-				break
-			}
-			//Asteroid Mining
-			case('110'):{
-				this.addProductionToPlayer('titanium',2)
-				break
-			}
-			//Asteroid Mining Consortium
-			case('111'):{
-				this.addProductionToPlayer('titanium',1)
-				break
-			}
-			//Astrofarm
-			case('112'):{
-				console.log('astrofarm')
-				this.addProductionToPlayer('plant',1)
-				this.addProductionToPlayer('heat',3)
-				break
-			}
-			//Dust Quarry
-			case('129'):{
-				this.addProductionToPlayer('steel',1)
-				break
-			}
-			//Fuel factory
-			case('135'):{
-				this.addProductionToPlayer('megacredit', 1)
-				this.addProductionToPlayer('titanium', 1)
-				this.addRessourceToPlayer('heat', -3)
-				break
-			}
-			//Giant Space Mirror
-			case('141'):{
-				this.addProductionToPlayer('heat',3)
-				break
-			}
-			//Great Escarpment Consortium
-			case('144'):{
-				this.addProductionToPlayer('steel',1)
-				break
-			}
-			//Heater
-			case('145'):{
-				this.addProductionToPlayer('plant',1)
-				this.addRessourceToPlayer('plant',1)
-				break
-			}
-			//Lichen
-			case('155'):{
-				this.addProductionToPlayer('plant',1)
-				break
-			}
-			//Methane from Titan
-			case('161'):{
-				this.addProductionToPlayer('plant',2)
-				this.addProductionToPlayer('heat',2)
-				break
-			}
-			//Microprocessor
-			case('163'):{
-				this.addProductionToPlayer('heat',3)
-				break
-			}
-			//Nitrophilic Moss
-			case('171'):{
-				this.addProductionToPlayer('plant',2)
-				break
-			}
-			//Power plant
-			case('175'):{
-				this.addProductionToPlayer('heat',1)
-				break
-			}
-			//Slash and Burn Agriculture
-			case('182'):{
-				this.addProductionToPlayer('plant',2)
-				break
-			}
-			//Smelting
-			case('183'):{
-				this.addProductionToPlayer('heat',5)
-				break
-			}
-			//Soil Warming
-			case('184'):{
-				this.addProductionToPlayer('plant',2)
-				break
-			}
-			//Sponsor
-			case('190'):{
-				this.addProductionToPlayer('megacredit',2)
-				break
-			}
-			//Trapped Heat
-			case('197'):{
-				this.addProductionToPlayer('heat',2)
-				break
-			}
-			//Trees
-			case('198'):{
-				this.addProductionToPlayer('plant',3)
-				this.addRessourceToPlayer('plant',1)
-				break
-			}
-			//Underground City
-			case('201'):{
-				this.addProductionToPlayer('megacredit',1)
-				this.addProductionToPlayer('steel',1)
-				break
-			}
-			//Underseas Vents
-			case('202'):{
-				this.addProductionToPlayer('card',1)
-				this.addProductionToPlayer('heat',4)
-				break
-			}
-			//Vesta Shipyard
-			case('204'):{
-				this.addProductionToPlayer('titanium',1)
-				break
-			}
-			//Glacial Evaporation
-			case('P29'):{
-				this.addProductionToPlayer('heat',4)
-				break
-			}
-			//Biofoundries
-			case('D22'):{
-				this.addProductionToPlayer('plant',2)
-				break
-			}
-			//Hematite Mining
-			case('D29'):{
-				this.addProductionToPlayer('card',2)
-				this.addProductionToPlayer('steel',1)
-				break
-			}
-			//Industrial Complex
-			case('D32'):{
-				this.addProductionToPlayer('heat',4)
-				break
-			}
-			//Award Winning Reflector Material
-			case('D35'):{
-				this.addProductionToPlayer('heat',3)
-				if(this.clientPlayerState.getMilestoneCompleted()>0){
-					this.addRessourceToPlayer('heat', 4)
-				}
-				break
-			}
-			//Perfluorocarbon Production
-			case('D37'):{
-				this.addProductionToPlayer('heat',1)
-				break
-			}
-			//Biological Factories
-			case('D40'):{
-				this.addProductionToPlayer('plant',1)
-				break
-			}
-			//Grain Silos
-			case('F14'):{
-				this.addRessourceToPlayer('plant',4)
-				break
-			}
-			//Innovative Technologies Award
-			case('P26'):{
-				this.addTrToPlayer(this.clientPlayerState.getPhaseCardUpgradedCount())
-				break
-			}
-			//Tourism
-			case('P30'):{
-				this.addProductionToPlayer('megacredit',2)
-				this.addTrToPlayer(this.clientPlayerState.getMilestoneCompleted())
-				break
-			}
-		}
-		return this.clientPlayerState
 	}
+		*/
 	/**
 	 *
 	 * @param card
@@ -298,9 +49,19 @@ export class ProjectCardPlayedEffectService {
 
 	* Events should be filled to the list according to their order of execution.
 	 */
-	getPlayedCardEvent(card: PlayableCardModel): EventBaseModel[] | undefined{
+	public static getPlayedCardEvent(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 		let result: EventBaseModel[] = []
-		switch(card.cardCode){
+		switch(cardCode){
+			//Decomposing Fungus
+			case('20'):{
+				ProjectCardPlayedEffectService.createEventAddRessourceToSelectedCard({name: 'microbe',valueStock: 2})
+				break
+			}
+			//Farming Co-ops
+			case('29'):{
+				result.push(this.createEventAddRessource({name: 'plant',valueStock: 3}))
+				break
+			}
 			//Interns
 			case('36'):{
 				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:2}))
@@ -311,10 +72,21 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
+			//Bribed Commitee
+			case('69'):{
+				result.push(this.createEventAddTR(2))
+				break
+			}
 			//Convoy from Europa
 			case('74'):{
 				result.push(this.createEventDraw(1))
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
+				break
+			}
+			//Deimos Down
+			case('76'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,3))
+				result.push(this.createEventAddRessource({name: 'megacredit',valueStock: 7}))
 				break
 			}
 			//Giant Ice Asteroid
@@ -323,15 +95,12 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,2))
 				break
 			}
-			//Deimos Down
-			case('76'):{
-				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,3))
-				break
-			}
 			//Imported Nitrogen
 			case('81'):{
 				result.push(this.createEventAddRessourceToSelectedCard({name:'animal', valueStock:2}))
 				result.push(this.createEventAddRessourceToSelectedCard({name:'microbe', valueStock:3}))
+				result.push(this.createEventAddRessource({name: 'plant',valueStock: 4}))
+				result.push(this.createEventAddTR(1))
 				break
 			}
 			//Invention Contest
@@ -356,55 +125,220 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventDraw(2))
 				break
 			}
+			//Acquired Company
+			case('103'):{
+				result.push(this.createEventAddProduction({name:'card', valueStock:1}))
+				break
+			}
+			//Adaptated Lichen
+			case('104'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				break
+			}
+			//Aerated Magma
+			case('105'):{
+				result.push(this.createEventAddProduction([
+					{name:'card', valueStock:1},
+					{name:'heat', valueStock:2}
+				]))
+				break
+			}
 			//Airborne Radiation
 			case('106'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:2}))
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1))
+				break
+			}
+			//Acquired Company
+			case('107'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
+				break
+			}
+			//Archaebacteria
+			case('108'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				break
+			}
+			//Artificial Photosynthesis
+			case('109'):{
+				result.push(this.createEventAddProduction([
+					{name:'plant', valueStock:1},
+					{name:'heat', valueStock:1}
+				]))
+				break
+			}
+			//Asteroid Mining
+			case('110'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:2}))
+				break
+			}
+			//Asteroid Mining Consortium
+			case('111'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
 				break
 			}
 			//Astrofarm
 			case('112'):{
 				result.push(this.createEventAddRessourceToSelectedCard({name:'microbe', valueStock:2}))
+				result.push(this.createEventAddProduction([
+					{name:'plant', valueStock:1},
+					{name:'heat', valueStock:3}
+				]))
+				break
+			}
+			//Dust Quarry
+			case('129'):{
+				result.push(this.createEventAddProduction({name:'steel', valueStock:1}))
+				break
+			}
+			//Fuel factory
+			case('135'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:1},
+					{name:'titanium', valueStock:1}
+				]))
+				result.push(this.createEventAddRessource({name:'heat', valueStock:-3}))
+				break
+			}
+			//Giant Space Mirror
+			case('141'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
+				break
+			}
+			//Great Escarpment Consortium
+			case('144'):{
+				result.push(this.createEventAddProduction({name:'steel', valueStock:1}))
+				break
+			}
+			//Heater
+			case('145'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:1}))
+				break
+			}
+			//Lichen
+			case('155'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				break
+			}
+			//Methane from Titan
+			case('161'):{
+				result.push(this.createEventAddProduction([
+					{name:'plant', valueStock:2},
+					{name:'heat', valueStock:2}
+				]))
 				break
 			}
 			//Microprocessor
 			case('163'):{
 				result.push(this.createEventDiscard(1))
 				result.push(this.createEventDraw(2))
+				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
+				break
+			}
+			//Nitrophilic Moss
+			case('171'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
+				break
+			}
+			//Power plant
+			case('175'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
+				break
+			}
+			//Slash and Burn Agriculture
+			case('182'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
 				break
 			}
 			//Smelting
 			case('183'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:5}))
 				result.push(this.createEventDraw(2))
 				break
 			}
 			//Soil Warming
 			case('184'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,1))
+				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
+				break
+			}
+			//Sponsor
+			case('190'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
 				break
 			}
 			//Trapped Heat
 			case('197'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
+				result.push(this.createEventAddProduction({name:'heat', valueStock:2}))
+				break
+			}
+			//Trees
+			case('198'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:3}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:1}))
+				break
+			}
+			//Underground City
+			case('201'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:1},
+					{name:'steel', valueStock:1}
+				]))
+				break
+			}
+			//Underseas Vents
+			case('202'):{
+				result.push(this.createEventAddProduction([
+					{name:'card', valueStock:1},
+					{name:'heat', valueStock:4}
+				]))
+				break
+			}
+			//Vesta Shipyard
+			case('204'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
 				break
 			}
 			//Biofoundries
 			case('D22'):{
 				result.push(this.createEventUpgradePhaseCard(1))
+				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
+				break
+			}
+			//Hematite Mining
+			case('D29'):{
+				result.push(this.createEventAddProduction([
+					{name:'card', valueStock:2},
+					{name:'steel', valueStock:1}
+				]))
 				break
 			}
 			//Industrial Complex
 			case('D32'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:4}))
 				result.push(this.createEventUpgradePhaseCard(1))
+				break
+			}
+			//Award Winning Reflector Material
+			case('D35'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
+				if(clientstate.getMilestoneCompleted()>0){
+					result.push(this.createEventAddRessource({name:'heat', valueStock:4}))
+				}
 				break
 			}
 			//Perfluorocarbon Production
 			case('D37'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
 				result.push(this.createEventUpgradePhaseCard(1, [0]))
 				break
 			}
 			//Biological Factories
 			case('D40'):{
 				result.push(this.createEventUpgradePhaseCard(1, [3]))
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
 				break
 			}
 			//Architecture Blueprints
@@ -430,11 +364,28 @@ export class ProjectCardPlayedEffectService {
 			//Grain Silos
 			case('F14'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,2))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:4}))
 				break
 			}
 			//Low-Atmosphere Planes
 			case('F17'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,3))
+				break
+			}
+			//Innovative Technologies Award
+			case('P26'):{
+				result.push(this.createEventAddTR(clientstate.getPhaseCardUpgradedCount()))
+				break
+			}
+			//Glacial Evaporation
+			case('P29'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:4}))
+				break
+			}
+			//Tourism
+			case('P30'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
+				result.push(this.createEventAddTR(clientstate.getMilestoneCompleted()))
 				break
 			}
 			default:{
@@ -529,7 +480,7 @@ export class ProjectCardPlayedEffectService {
 			//Energy Subsidies
 			case(25):{
 				if(playedCardTags.includes(GlobalInfo.getIdFromType('power','tag'))!=true){break}
-				result.push(this.createEventDraw(1))
+				result.push(ProjectCardPlayedEffectService.createEventDraw(1))
 				break
 			}
 			//Interplanetary Conference
@@ -546,14 +497,14 @@ export class ProjectCardPlayedEffectService {
 						draw += 1
 					}
 				}
-				result.push(this.createEventDraw(draw))
+				result.push(ProjectCardPlayedEffectService.createEventDraw(draw))
 				break
 			}
 			//Optimal Aerobraking
 			case(45):{
 				if(playedCardTags.includes(GlobalInfo.getIdFromType('event','tag'))!=true){break}
 				result.push(
-					this.createEventAddRessource([
+					ProjectCardPlayedEffectService.createEventAddRessource([
 					{name: 'plant', valueStock: 2},
 					{name: 'heat', valueStock: 2}])
 				)
@@ -562,7 +513,7 @@ export class ProjectCardPlayedEffectService {
 			//Bacterial Aggregate
 			case(222):{
 				if(playedCardTags.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
-				result.push(this.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
 				break
 			}
 			default:{
@@ -595,7 +546,7 @@ export class ProjectCardPlayedEffectService {
 
 				let stock = targetCard.getStockValue('microbe')
 				if(stock>=5){
-					result.push(this.createEventDeactivateTrigger(triggerId))
+					result.push(ProjectCardPlayedEffectService.createEventDeactivateTrigger(triggerId))
 				}
 
 				let limit = targetCard.getCardTriggerLimit()
@@ -604,7 +555,7 @@ export class ProjectCardPlayedEffectService {
 				let addValue = Math.min(ressource.valueStock, limit?.limit - limit.value)
 				if(addValue<=0){break}
 
-				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:addValue}))
+				result.push(ProjectCardPlayedEffectService.createEventIncreaseResearchScanKeep({keep:0, scan:addValue}))
 				targetCard.triggerLimit.value += addValue
 				break
 			}
@@ -635,13 +586,13 @@ export class ProjectCardPlayedEffectService {
 			//Physiscs Complex
 			case(46):{
 				if(parameter.name!=GlobalParameterNameEnum.temperature){break}
-				result.push(this.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}
 			//Pets
 			case(279):{
 				if(parameter.name!=GlobalParameterNameEnum.infrastructure){break}
-				result.push(this.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}
 			default:{
@@ -651,34 +602,40 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	createEventDraw(drawNumber: number): EventBaseModel {
+	private static createEventDraw(drawNumber: number): EventBaseModel {
 		return EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 	}
-	createEventDiscard(discardNumber: number): EventCardSelector {
+	private static createEventDiscard(discardNumber: number): EventCardSelector {
 		return EventDesigner.createCardSelector("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
 	}
-	createEventUpgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
+	private static createEventUpgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
 		return EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
 	}
-	createEventIncreaseGlobalParameter(parameterName: GlobalParameterNameEnum, steps:number): EventBaseModel {
+	private static createEventIncreaseGlobalParameter(parameterName: GlobalParameterNameEnum, steps:number): EventBaseModel {
 		return EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter:{name:parameterName,steps: steps}})
 	}
-	createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventBaseModel {
+	private static createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventBaseModel {
 		return EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:gain})
 	}
-	createEventAddRessourceToCardId(gain: AdvancedRessourceStock, cardId: number): EventBaseModel {
+	private static createEventAddRessourceToCardId(gain: AdvancedRessourceStock, cardId: number): EventBaseModel {
 		return EventDesigner.createTargetCard('addRessourceToCardId', cardId, {advancedRessource:gain})
 	}
-	createEventIncreaseResearchScanKeep(scanKeep: ScanKeep): EventBaseModel {
+	private static createEventIncreaseResearchScanKeep(scanKeep: ScanKeep): EventBaseModel {
 		return EventDesigner.createGeneric('increaseResearchScanKeep', {scanKeep:scanKeep})
 	}
-	createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock, cardSelectionQuantity:number=1): EventBaseModel {
+	private static createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock, cardSelectionQuantity:number=1): EventBaseModel {
 		return EventDesigner.createCardSelectorRessource(ressource, {cardSelector:{selectionQuantity:cardSelectionQuantity}})
 	}
-	createEventDeactivateTrigger(triggerId: number): EventBaseModel {
+	private static createEventDeactivateTrigger(triggerId: number): EventBaseModel {
 		return EventDesigner.createTargetCard('deactivateTrigger', triggerId)
 	}
-	createEventScanKeep(scanKeep: ScanKeep): EventBaseModel {
+	private static createEventScanKeep(scanKeep: ScanKeep): EventBaseModel {
 		return EventDesigner.createDeckQueryEvent('scanKeepQuery', {scanKeep:scanKeep})
+	}
+	private static createEventAddProduction(gain: RessourceStock | RessourceStock[]): EventBaseModel {
+		return EventDesigner.createGeneric('addProduction', {baseRessource:gain})
+	}
+	private static createEventAddTR(quantity: number): EventBaseModel {
+		return EventDesigner.createGeneric('addTr', {increaseTr: quantity})
 	}
 }
