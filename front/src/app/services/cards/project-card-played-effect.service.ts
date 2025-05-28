@@ -340,6 +340,38 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddRessource({name:'plant', valueStock:1}))
 				break
 			}
+			//Immigration Shuttles
+			case('146'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
+				break
+			}
+			//Import of Advanced GHG
+			case('147'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:2}))
+				break
+			}
+			//Imported GHG
+			case('148'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
+				result.push(this.createEventAddRessource({name:'heat', valueStock:5}))
+				break
+			}
+			//Industrial Center
+			case('149'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:3},
+					{name:'steel', valueStock:1}
+				]))
+				break
+			}
+			//Industrial Farming
+			case('150'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:1},
+					{name:'plant', valueStock:2}
+				]))
+				break
+			}
 			//Lichen
 			case('155'):{
 				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
