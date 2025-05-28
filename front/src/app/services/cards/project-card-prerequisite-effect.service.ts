@@ -94,6 +94,14 @@ export class ProjectCardPrerequisiteEffectService {
 			case('139'):{
 				return this.isTagNumberOk('science', 3, 'min', clientState)
 			}
+			//Grass
+			case('142'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//Great Dam
+			case('143'):{
+				return this.isOceanOk(2, 'min', clientState)
+			}
 			default:{
 				return true
 			}

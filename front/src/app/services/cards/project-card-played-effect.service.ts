@@ -318,6 +318,17 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
 				break
 			}
+			//Grass
+			case('142'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:3}))
+				break
+			}
+			//Great Dam
+			case('143'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:2}))
+				break
+			}
 			//Great Escarpment Consortium
 			case('144'):{
 				result.push(this.createEventAddProduction({name:'steel', valueStock:1}))
