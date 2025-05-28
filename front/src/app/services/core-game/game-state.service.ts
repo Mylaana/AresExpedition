@@ -760,4 +760,9 @@ export class GameState{
 		state.addProduction(ressources)
 		this.updateClientState(state)
 	}
+	public addTr(quantity: number){
+		let state = this.getClientState()
+		state.addTR(quantity)
+		this.updateClientState(state)
+	}
 }

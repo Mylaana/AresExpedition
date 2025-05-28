@@ -401,6 +401,11 @@ export class EventHandler {
 				this.gameStateService.addProductionToClient(event.baseRessource)
 				break
 			}
+			case('addTr'):{
+				if(!event.increaseTr){break}
+				this.gameStateService.addTr(event.increaseTr)
+				break
+			}
 			default:{Utils.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}

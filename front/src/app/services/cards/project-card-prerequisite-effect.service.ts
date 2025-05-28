@@ -82,6 +82,18 @@ export class ProjectCardPrerequisiteEffectService {
 			case('135'):{
 				return this.isRessourcesNumberOk('heat', 3, 'min', clientState)
 			}
+			//Fuel Generators
+			case('136'):{
+				return this.isTrOk(1, 'min', clientState)
+			}
+			//Fusion Power
+			case('137'):{
+				return this.isTagNumberOk('power', 2, 'min', clientState)
+			}
+			//Gene Repair
+			case('139'):{
+				return this.isTagNumberOk('science', 3, 'min', clientState)
+			}
 			default:{
 				return true
 			}

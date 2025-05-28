@@ -278,31 +278,6 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddRessource({name:'plant', valueStock:-2}))
 				break
 			}
-			//
-			case('130'):{
-				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
-				break
-			}
-			//
-			case('130'):{
-				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
-				break
-			}
-			//
-			case('130'):{
-				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
-				break
-			}
-			//
-			case('130'):{
-				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
-				break
-			}
-			//
-			case('130'):{
-				result.push(this.createEventAddProduction({name:'megacredit', valueStock:3}))
-				break
-			}
 			//Fuel factory
 			case('135'):{
 				result.push(this.createEventAddProduction([
@@ -310,6 +285,32 @@ export class ProjectCardPlayedEffectService {
 					{name:'titanium', valueStock:1}
 				]))
 				result.push(this.createEventAddRessource({name:'heat', valueStock:-3}))
+				break
+			}
+			//Fuel Generators
+			case('136'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:2}))
+				result.push(this.createEventAddTR(-1))
+				break
+			}
+			//Fusion Power
+			case('137'):{
+				result.push(this.createEventAddProduction({name:'card', valueStock:1}))
+				break
+			}
+			//Ganymede Shipyard
+			case('138'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:2}))
+				break
+			}
+			//Gene Repair
+			case('139'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
+				break
+			}
+			//Geothermal Power
+			case('140'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:2}))
 				break
 			}
 			//Giant Space Mirror
