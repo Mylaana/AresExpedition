@@ -40,6 +40,38 @@ export class ProjectCardPrerequisiteEffectService {
 			case('68'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', clientState)
 			}
+			//Colonizer Training Camp
+			case('72'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'max', clientState)
+			}
+			//Crater
+			case('75'):{
+				return this.isTagNumberOk('event', 3, 'min', clientState)
+			}
+			//Ice Cap Melting
+			case('79'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', clientState)
+			}
+			//Interstellar Colony Ship
+			case('82'):{
+				return this.isTagNumberOk('science', 4, 'min', clientState)
+			}
+			//Investment Loan
+			case('84'):{
+				return this.isTrOk(1, 'min', clientState)
+			}
+			//Lake Marineris
+			case('86'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
+			//Mangrove
+			case('90'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
+			//Permafrost Extraction
+			case('92'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', clientState)
+			}
 			//Aerated Magma
 			case('105'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)

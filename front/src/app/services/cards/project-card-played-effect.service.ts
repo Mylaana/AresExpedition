@@ -62,9 +62,20 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventDiscard(2))
 				break
 			}
+			//Comet
+			case('73'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
+				break
+			}
 			//Convoy from Europa
 			case('74'):{
 				result.push(this.createEventDraw(1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
+				break
+			}
+			//Crater
+			case('75'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
@@ -80,6 +91,16 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,2))
 				break
 			}
+			//Ice Asteroid
+			case('78'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,2))
+				break
+			}
+			//Ice Cap Melting
+			case('79'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
+				break
+			}
 			//Imported Nitrogen
 			case('81'):{
 				result.push(this.createEventAddRessourceToSelectedCard({name:'animal', valueStock:2}))
@@ -91,6 +112,41 @@ export class ProjectCardPlayedEffectService {
 			//Invention Contest
 			case('83'):{
 				result.push(this.createEventScanKeep({scan:3, keep:1}))
+				break
+			}
+			//Investment Loan
+			case('84'):{
+				result.push(this.createEventAddRessource({name:'megacredit', valueStock:10}))
+				result.push(this.createEventAddTR(-1))
+				break
+			}
+			//Lagrange Observatory
+			case('85'):{
+				result.push(this.createEventDraw(1))
+				break
+			}
+			//Lake Marineris
+			case('86'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,2))
+				break
+			}
+			//Lava Flows
+			case('88'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,2))
+				break
+			}
+			//Mangrove
+			case('90'):{
+				result.push(this.createEventAddForestAndOxygen(1))
+				break
+			}
+			//Nitrogen-Rich Asteroid
+			case('91'):{
+				result.push(this.createEventAddTR(2))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.temperature,1))
+				let plants = 2
+				if(clientstate.getTagsOfType('plant')>=3){plants+=4}
+				result.push(this.createEventAddRessource({name:'plant', valueStock:plants}))
 				break
 			}
 			//Permafrost Extraction
