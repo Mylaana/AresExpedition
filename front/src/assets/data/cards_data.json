@@ -9851,7 +9851,7 @@
             0
         ],
         "cardType": "greenProject",
-        "vpNumber": "",
+        "vpNumber": "-1",
         "prerequisiteTresholdType": "",
         "prerequisiteType": "",
         "prerequisiteTresholdValue": 0,

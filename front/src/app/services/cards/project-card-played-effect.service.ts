@@ -482,6 +482,20 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
 				break
 			}
+			//Noctis Farming
+			case('172'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:2}))
+				break
+			}
+			//Nuclear Plants
+			case('173'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:1},
+					{name:'heat', valueStock:3}
+				]))
+				break
+			}
 			//Power plant
 			case('175'):{
 				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
