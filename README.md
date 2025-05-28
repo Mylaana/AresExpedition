@@ -95,6 +95,8 @@ global: removing obvious comments
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
 Refactor VP system   
+Refactor Ressource system (scaling, base etc.)   
+Refactor Tag System   
 
 ### Interface
 Add Display property for current event, so the screen does not flash when resolving technical events   

@@ -32,11 +32,10 @@ export class ProjectCardPrerequisiteEffectService {
 			}
 			//Algae
 			case('107'):{
-				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
+				return this.isOceanOk(5, 'min', clientState)
 			}
 			//Archaebacteria
 			case('108'):{
-				console.log('archaebacteria')
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', clientState)
 			}
 			default:{

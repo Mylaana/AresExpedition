@@ -431,6 +431,7 @@ export class GameState{
 	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{
         let events: EventBaseModel[] = []
 		let state = this.getClientState()
+		state.playCard(card, cardType)
 		let playedCardEvents = ProjectCardPlayedEffectService.getPlayedCardEvent(card.cardCode, state)
 
         //check for triggers and add them to queue

@@ -16,32 +16,6 @@ import { GlobalParameterNameEnum } from "../../enum/global.enum";
     providedIn: 'root'
 })
 export class ProjectCardPlayedEffectService {
-	/*
-	playedCardList: number [] = []
-	clientPlayerState!: PlayerStateModel
-
-	addRessourceToCard(card: PlayableCardModel, ressource: AdvancedRessourceStock): void {
-		card.addRessourceToStock(ressource)
-	}
-	addRessourceToPlayer(ressource: RessourceType, quantity:number):void{
-		this.clientPlayerState.addRessource(ressource, quantity)
-	}
-	addProductionToPlayer(ressource: RessourceType, quantity:number):void{
-		//this.clientPlayerState.addProduction(ressource, quantity)
-	}
-	addTrToPlayer(quantity:number):void{
-		this.clientPlayerState.addTR(quantity)
-	}
-	private playCard(card: PlayableCardModel, playerState: PlayerStateModel, cardType: PlayableCardType): PlayerStateModel {
-		this.clientPlayerState = playerState
-		this.clientPlayerState.playCard(card, cardType)
-
-		//add starting megacredits
-		if(card.startingMegacredits){
-			this.addRessourceToPlayer('megacredit', card.startingMegacredits)
-		}
-	}
-		*/
 	/**
 	 *
 	 * @param card
