@@ -655,6 +655,11 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
 				break
 			}
+			//Wave Power
+			case('205'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
+				break
+			}
 			//Biofoundries
 			case('D22'):{
 				result.push(this.createEventUpgradePhaseCard(1))
@@ -691,8 +696,8 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Biological Factories
 			case('D40'):{
-				result.push(this.createEventUpgradePhaseCard(1, [3]))
 				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				result.push(this.createEventUpgradePhaseCard(1, [3]))
 				break
 			}
 			//Architecture Blueprints
@@ -724,6 +729,26 @@ export class ProjectCardPlayedEffectService {
 			//Low-Atmosphere Planes
 			case('F17'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,3))
+				break
+			}
+			//Commercial Imports
+			case('P02'):{
+				result.push(this.createEventAddProduction([
+					{name:'card', valueStock:1},
+					{name:'heat', valueStock:2}
+					,{name:'plant', valueStock:2}
+				]))
+				break
+			}
+			//Processed Metals
+			case('P07'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:2}))
+				result.push(this.createEventDraw(clientstate.getTagsOfType('power')))
+				break
+			}
+			//Processed Metals
+			case('P08'):{
+				result.push(this.createEventAddProduction({name:'steel', valueStock:2}))
 				break
 			}
 			//Innovative Technologies Award

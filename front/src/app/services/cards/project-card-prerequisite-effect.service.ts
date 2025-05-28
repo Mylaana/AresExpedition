@@ -167,6 +167,18 @@ export class ProjectCardPrerequisiteEffectService {
 			case('200'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
 			}
+			//Wave Power
+			case('203'):{
+				return this.isOceanOk(3, 'min', clientState)
+			}
+			//Worms
+			case('207'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//Zeppelins
+			case('208'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
 			default:{
 				return true
 			}

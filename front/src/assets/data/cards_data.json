@@ -5939,7 +5939,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 104,
@@ -5997,7 +5997,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 105,
@@ -6054,7 +6054,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 106,
@@ -6111,7 +6111,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 107,
@@ -6138,7 +6138,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_plant$",
+            "en": "$ressource_plant$$ressource_plant$",
             "fr": "2$ressource_plant$"
         },
         "effectText": {
@@ -6168,7 +6168,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 108,
@@ -6225,7 +6225,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 109,
@@ -6282,7 +6282,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 110,
@@ -6340,7 +6340,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 111,
@@ -6395,7 +6395,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 112,
@@ -6422,7 +6422,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_plant$$skipline$3$ressource_heat$",
+            "en": "$ressource_plant$$skipline$$ressource_heat$$ressource_heat$$ressource_heat$",
             "fr": ""
         },
         "effectText": {
@@ -6452,7 +6452,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 113,
@@ -6464,7 +6464,7 @@
             4
         ],
         "cardType": "greenProject",
-        "vpNumber": "*",
+        "vpNumber": "",
         "prerequisiteTresholdType": "",
         "prerequisiteType": "",
         "prerequisiteTresholdValue": 0,
@@ -6510,7 +6510,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 114,
@@ -6567,7 +6567,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 116,
@@ -6626,7 +6626,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 117,
@@ -6684,7 +6684,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 118,
@@ -6742,7 +6742,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 119,
@@ -6799,7 +6799,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 120,
@@ -6856,7 +6856,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 121,
@@ -6913,7 +6913,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 122,
@@ -6972,7 +6972,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 123,
@@ -7029,7 +7029,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 124,
@@ -7086,7 +7086,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 125,
@@ -7143,7 +7143,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 126,
@@ -7201,7 +7201,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 127,
@@ -7229,7 +7229,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_plant$",
+            "en": "$ressource_plant$$ressource_plant$",
             "fr": ""
         },
         "effectText": {
@@ -7259,7 +7259,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 128,
@@ -7316,7 +7316,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 129,
@@ -7371,7 +7371,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 130,
@@ -7428,7 +7428,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 131,
@@ -7455,7 +7455,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_card$",
+            "en": "$ressource_card$$ressource_card$",
             "fr": ""
         },
         "effectText": {
@@ -7485,7 +7485,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 132,
@@ -7543,7 +7543,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 133,
@@ -7570,7 +7570,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$$skipline$$2$ressource_plant$",
+            "en": "$ressource_megacreditvoid_2$$skipline$$$ressource_plant$$ressource_plant$",
             "fr": ""
         },
         "effectText": {
@@ -7600,7 +7600,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 134,
@@ -7657,7 +7657,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 135,
@@ -7684,7 +7684,7 @@
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$$ressource_titanium$",
+            "en": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$",
             "fr": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$$ressource_titanium$"
         },
         "effectText": {
@@ -7714,7 +7714,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 136,
@@ -7767,12 +7767,12 @@
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "-2$other_tr$",
+            "en": "-$other_tr$",
             "fr": ""
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 137,
@@ -7831,7 +7831,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 138,
@@ -7889,7 +7889,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 139,
@@ -7946,7 +7946,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 140,
@@ -8004,7 +8004,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 141,
@@ -8062,7 +8062,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 142,
@@ -8119,7 +8119,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 143,
@@ -8177,7 +8177,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 144,
@@ -8232,7 +8232,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 145,
@@ -8289,7 +8289,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 146,
@@ -8347,7 +8347,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 147,
@@ -8405,7 +8405,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 148,
@@ -8462,7 +8462,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 149,
@@ -8519,7 +8519,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 150,
@@ -8546,7 +8546,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$$skipline$$2$ressource_plant$",
+            "en": "$ressource_megacreditvoid_1$$skipline$$ressource_plant$$ressource_plant$",
             "fr": ""
         },
         "effectText": {
@@ -8576,7 +8576,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 151,
@@ -8634,7 +8634,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 152,
@@ -8691,7 +8691,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 153,
@@ -8750,7 +8750,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 154,
@@ -8805,7 +8805,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 155,
@@ -8862,7 +8862,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 156,
@@ -8890,7 +8890,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacredit$/$tag_science$",
+            "en": "$ressource_megacredit$ / $tag_science$",
             "fr": ""
         },
         "effectText": {
@@ -8920,7 +8920,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 157,
@@ -8977,7 +8977,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 158,
@@ -9035,7 +9035,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 159,
@@ -9064,7 +9064,7 @@
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "$ressource_heat$$mix$$ressource_titanium$",
+            "en": "$ressource_heat$$ressource_heat$$ressource_heat$$mix$$ressource_titanium$",
             "fr": ""
         },
         "effectText": {
@@ -9094,7 +9094,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 160,
@@ -9121,7 +9121,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacredit$/$tag_building$",
+            "en": "$ressource_megacredit$ / $tag_building$",
             "fr": ""
         },
         "effectText": {
@@ -9151,7 +9151,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 161,
@@ -9209,7 +9209,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 162,
@@ -9266,7 +9266,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 163,
@@ -9324,7 +9324,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 164,
@@ -9381,7 +9381,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 165,
@@ -9440,7 +9440,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 166,
@@ -9467,7 +9467,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "4$ressource_heat$",
+            "en": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
             "fr": ""
         },
         "effectText": {
@@ -9497,7 +9497,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 167,
@@ -9522,7 +9522,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "2$ressource_plant$",
+            "en": "$ressource_plant$$ressource_plant$",
             "fr": ""
         },
         "effectText": {
@@ -9552,7 +9552,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 168,
@@ -9609,7 +9609,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 169,
@@ -9667,7 +9667,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 170,
@@ -9725,7 +9725,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 171,
@@ -9752,7 +9752,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_plant$ $ressource_plant$",
+            "en": "$ressource_plant$$ressource_plant$",
             "fr": "$ressource_plant$ $ressource_plant$"
         },
         "effectText": {
@@ -9782,7 +9782,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 172,
@@ -9840,7 +9840,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 173,
@@ -9897,7 +9897,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 174,
@@ -9925,7 +9925,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacredit$/$tag_power$",
+            "en": "$ressource_megacredit$ / $tag_power$",
             "fr": ""
         },
         "effectText": {
@@ -9955,7 +9955,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 175,
@@ -10013,7 +10013,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 176,
@@ -10070,7 +10070,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 177,
@@ -10128,7 +10128,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 178,
@@ -10187,7 +10187,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 179,
@@ -10242,7 +10242,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 180,
@@ -10299,7 +10299,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 181,
@@ -10356,7 +10356,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 182,
@@ -10413,7 +10413,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 183,
@@ -10471,7 +10471,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 184,
@@ -10498,7 +10498,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_plant$ $ressource_plant$",
+            "en": "$ressource_plant$$ressource_plant$",
             "fr": "$ressource_plant$ $ressource_plant$"
         },
         "effectText": {
@@ -10528,7 +10528,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 185,
@@ -10586,7 +10586,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 186,
@@ -10643,7 +10643,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 187,
@@ -10700,7 +10700,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 188,
@@ -10757,7 +10757,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 189,
@@ -10814,7 +10814,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 190,
@@ -10871,7 +10871,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 191,
@@ -10928,7 +10928,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 192,
@@ -10985,7 +10985,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 193,
@@ -11043,7 +11043,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 194,
@@ -11100,7 +11100,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 195,
@@ -11155,7 +11155,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 196,
@@ -11210,7 +11210,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 197,
@@ -11265,7 +11265,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 198,
@@ -11292,7 +11292,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "3 $ressource_plant$",
+            "en": "$ressource_plant$$ressource_plant$$ressource_plant$",
             "fr": "3 $ressource_plant$"
         },
         "effectText": {
@@ -11322,7 +11322,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 199,
@@ -11377,7 +11377,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 200,
@@ -11404,7 +11404,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$$skipline$1$ressource_plant$",
+            "en": "$ressource_megacreditvoid_2$$skipline$$ressource_plant$",
             "fr": ""
         },
         "effectText": {
@@ -11434,7 +11434,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 201,
@@ -11491,7 +11491,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 202,
@@ -11549,7 +11549,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 203,
@@ -11604,7 +11604,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 204,
@@ -11663,7 +11663,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 205,
@@ -11720,7 +11720,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 206,
@@ -11778,7 +11778,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 207,
@@ -11835,7 +11835,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 208,
@@ -11890,7 +11890,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 209,
@@ -11975,7 +11975,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_card$$skipline$2$ressource_heat$2$ressource_plant$",
+            "en": "$ressource_card$$skipline$$ressource_heat$$ressource_heat$$skipline$$ressource_plant$$ressource_plant$",
             "fr": ""
         },
         "effectText": {
@@ -12005,7 +12005,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 211,
@@ -12062,7 +12062,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 212,
@@ -12178,7 +12178,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 214,
@@ -12294,7 +12294,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 216,
@@ -12352,7 +12352,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 217,
@@ -12726,7 +12726,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "4 $ressource_heat$",
+            "en": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
             "fr": "4 $ressource_heat$"
         },
         "effectText": {
@@ -12756,7 +12756,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 233,
@@ -12813,65 +12813,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
-    },
-    {
-        "id": 253,
-        "card_code": "D22",
-        "origin": "discovery",
-        "cost": 27,
-        "tagsId": [
-            0,
-            6
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "IV",
-        "phaseDown": "",
-        "title": {
-            "en": "Biofoundries",
-            "fr": "Biofonderies"
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_plant$ $ressource_plant$",
-            "fr": "$ressource_plant$ $ressource_plant$"
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 1 plant.",
-            "fr": "Lors de la Phase de production, cette carte produit 2 plantes."
-        },
-        "effectSummaryType2": "",
-        "effectSummaryText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Upgrade a Phase card.",
-            "fr": "Am\u00e9liorer une carte Phase."
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [],
-        "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 260,
@@ -12898,7 +12840,7 @@
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "2 $ressource_card$$mix$$ressource_steel$",
+            "en": "$ressource_card$$ressource_card$$mix$$ressource_steel$",
             "fr": "2 $ressource_card$$mix$$ressource_steel$"
         },
         "effectText": {
@@ -12928,7 +12870,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 263,
@@ -12956,7 +12898,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "4 $ressource_heat$",
+            "en": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
             "fr": "4 $ressource_heat$"
         },
         "effectText": {
@@ -12986,7 +12928,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 266,
@@ -13014,7 +12956,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "3 $ressource_heat$",
+            "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
             "fr": "3 $ressource_heat$"
         },
         "effectText": {
@@ -13044,7 +12986,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 268,
@@ -13101,7 +13043,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 271,
@@ -13159,7 +13101,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 275,

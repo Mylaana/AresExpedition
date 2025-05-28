@@ -15,10 +15,7 @@ export class ProjectCardScalingProductionsService {
 				if(playedCardList.includes(123)){
 					scalingProductions += this.getCardScalingProduction(123, tagState)
 				}
-				//Satellites
-				if(playedCardList.includes(181)){
-					scalingProductions += this.getCardScalingProduction(181, tagState)
-				}
+
 				//Lightning Harvest
 				if(playedCardList.includes(156)){
 					scalingProductions += this.getCardScalingProduction(156, tagState)
@@ -35,6 +32,14 @@ export class ProjectCardScalingProductionsService {
 				if(playedCardList.includes(174)){
 					scalingProductions += this.getCardScalingProduction(174, tagState)
 				}
+				//Satellites
+				if(playedCardList.includes(181)){
+					scalingProductions += this.getCardScalingProduction(181, tagState)
+				}
+				//Venture Capitalism
+				if(playedCardList.includes(203)){
+					scalingProductions += this.getCardScalingProduction(203, tagState)
+				}
 				break
 			}
 			case('heat'):{
@@ -46,12 +51,24 @@ export class ProjectCardScalingProductionsService {
 				if(playedCardList.includes(180)){
 					scalingProductions += this.getCardScalingProduction(180, tagState)
 				}
+				//Windmills
+				if(playedCardList.includes(206)){
+					scalingProductions += this.getCardScalingProduction(206, tagState)
+				}
 				break
 			}
 			case('plant'):{
 				//Insects
 				if(playedCardList.includes(152)){
 					scalingProductions += this.getCardScalingProduction(152, tagState)
+				}
+				//Worms
+				if(playedCardList.includes(207)){
+					scalingProductions += this.getCardScalingProduction(207, tagState)
+				}
+				//Diverse Habitats
+				if(playedCardList.includes(211)){
+					scalingProductions += this.getCardScalingProduction(211, tagState)
 				}
 				break
 			}
@@ -112,9 +129,36 @@ export class ProjectCardScalingProductionsService {
 				scalingProduction = this.getPlayedTagNumber('space', tagState)
 				break
 			}
+			//Venture Capitalism
+			case(203):{
+				scalingProduction = this.getPlayedTagNumber('event', tagState)
+				break
+			}
 			//Laboratories
 			case(213):{
 				scalingProduction = Math.floor(this.getPlayedTagNumber('science', tagState) / 3)
+				break
+			}
+			//Windmills
+			case(206):{
+				scalingProduction = this.getPlayedTagNumber('power', tagState)
+				break
+			}
+			//Worms
+			case(207):{
+				scalingProduction = this.getPlayedTagNumber('microbe', tagState)
+				break
+			}
+			/*
+			//Zeppelins
+			case(213):{
+				//scalingProduction = this.getPlayedTagNumber('science', tagState)
+				break
+			}*/
+			//Diverse Habitats
+			case(211):{
+				scalingProduction = this.getPlayedTagNumber('animal', tagState)
+				scalingProduction += this.getPlayedTagNumber('plant', tagState)
 				break
 			}
 		}
