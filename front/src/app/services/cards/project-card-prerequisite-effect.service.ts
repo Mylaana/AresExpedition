@@ -122,6 +122,19 @@ export class ProjectCardPrerequisiteEffectService {
 			case('161'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
 			}
+			//Monocultures
+			case('167'):{
+				return this.isTrOk(1, 'min', clientState)
+			}
+			//Moss
+			case('168'):{
+				if(this.isOceanOk(3, 'min', clientState)===false){return false}
+				return this.isRessourcesNumberOk('plant', 1, 'min', clientState)
+			}
+			//Natural Preserve
+			case('169'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
+			}
 			default:{
 				return true
 			}

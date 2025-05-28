@@ -446,6 +446,37 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddProduction({name:'steel', valueStock:2}))
 				break
 			}
+			//Mohole Area
+			case('166'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:4}))
+				break
+			}
+			//Monocultures
+			case('167'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
+				result.push(this.createEventAddTR(-1))
+				break
+			}
+			//Moss
+			case('168'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:-1}))
+				break
+			}
+			//Natural Preserve
+			case('169'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
+				break
+			}
+			//New Portfolios
+			case('170'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:1},
+					{name:'plant', valueStock:1},
+					{name:'heat', valueStock:1}
+				]))
+				break
+			}
 			//Nitrophilic Moss
 			case('171'):{
 				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
