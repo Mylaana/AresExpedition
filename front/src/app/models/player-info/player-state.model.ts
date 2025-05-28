@@ -193,7 +193,7 @@ export class PlayerStateModel {
 		this.removeCardsFromHand([card.id], cardType)
 		this.payCardCost(card)
 		this.addTagsFromPlayedCard(card)
-		if(parseInt(card.vpNumber??'')!=0){
+		if(Number(card.vpNumber??'')!=0 && !isNaN(Number(card.vpNumber??''))){
 			this.addVP(parseInt(card.vpNumber??''))
 		}
 		this.setScalingVp()

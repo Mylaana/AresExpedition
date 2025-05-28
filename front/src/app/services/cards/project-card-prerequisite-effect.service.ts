@@ -135,6 +135,18 @@ export class ProjectCardPrerequisiteEffectService {
 			case('169'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
 			}
+			//Noctis Farming
+			case('172'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//Quantum Extractor
+			case('178'):{
+				return this.isTagNumberOk('science', 3, 'min', clientState)
+			}
+			//Rad Suits
+			case('179'):{
+				return this.isOceanOk(2, 'min', clientState)
+			}
 			default:{
 				return true
 			}

@@ -501,6 +501,30 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
 				break
 			}
+			//Power Supply Consortium
+			case('176'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:2},
+					{name:'heat', valueStock:1}
+				]))
+				break
+			}
+			//
+			case('177'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
+				result.push(this.createEventAddForestAndOxygen(1))
+				break
+			}
+			//
+			case('178'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
+				break
+			}
+			//
+			case('179'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:2}))
+				break
+			}
 			//Slash and Burn Agriculture
 			case('182'):{
 				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
