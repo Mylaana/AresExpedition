@@ -72,6 +72,10 @@ export class ProjectCardPrerequisiteEffectService {
 			case('92'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', clientState)
 			}
+			//Plantation
+			case('94'):{
+				return this.isTagNumberOk('science', 4, 'min', clientState)
+			}
 			//Aerated Magma
 			case('105'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)

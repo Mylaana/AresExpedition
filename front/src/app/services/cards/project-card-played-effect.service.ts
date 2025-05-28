@@ -161,6 +161,16 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventDraw(2))
 				break
 			}
+			//Plantation
+			case('94'):{
+				result.push(this.createEventAddForestAndOxygen(2))
+				break
+			}
+			//Release of Inert Gases
+			case('95'):{
+				result.push(this.createEventAddTR(2))
+				break
+			}
 			//Research
 			case('96'):{
 				result.push(this.createEventDraw(2))
