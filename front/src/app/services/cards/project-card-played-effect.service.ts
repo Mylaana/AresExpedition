@@ -396,6 +396,28 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddProduction({name:'plant', valueStock:1}))
 				break
 			}
+			//Low-Atmo Shields
+			case('157'):{
+				result.push(this.createEventAddProduction([
+					{name:'megacredit', valueStock:1},
+					{name:'heat', valueStock:2}
+				]))
+				break
+			}
+			//Lunar Beam
+			case('158'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:4}))
+				result.push(this.createEventAddTR(-1))
+				break
+			}
+			//Mass Converter
+			case('159'):{
+				result.push(this.createEventAddProduction([
+					{name:'heat', valueStock:3},
+					{name:'titanium', valueStock:1}
+				]))
+				break
+			}
 			//Methane from Titan
 			case('161'):{
 				result.push(this.createEventAddProduction([

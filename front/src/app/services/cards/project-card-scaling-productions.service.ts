@@ -19,6 +19,14 @@ export class ProjectCardScalingProductionsService {
 				if(playedCardList.includes(181)){
 					scalingProductions += this.getCardScalingProduction(181, tagState)
 				}
+				//Lightning Harvest
+				if(playedCardList.includes(156)){
+					scalingProductions += this.getCardScalingProduction(156, tagState)
+				}
+				//Medical lab
+				if(playedCardList.includes(160)){
+					scalingProductions += this.getCardScalingProduction(160, tagState)
+				}
 				break
 			}
 			case('heat'):{
@@ -64,6 +72,16 @@ export class ProjectCardScalingProductionsService {
 			//Insects
 			case(152):{
 				scalingProduction = this.getPlayedTagNumber('plant', tagState)
+				break
+			}
+			//Lightning Harvest
+			case(156):{
+				scalingProduction = this.getPlayedTagNumber('science', tagState)
+				break
+			}
+			//Medical Lab
+			case(160):{
+				scalingProduction = this.getPlayedTagNumber('building', tagState)
 				break
 			}
 			//Satellite Farms
