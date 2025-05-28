@@ -46,9 +46,20 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
+			//Atmosphere Filtering
+			case('67'):{
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.oxygen,1))
+				break
+			}
 			//Bribed Commitee
 			case('69'):{
 				result.push(this.createEventAddTR(2))
+				break
+			}
+			//Business Contact
+			case('70'):{
+				result.push(this.createEventDraw(4))
+				result.push(this.createEventDiscard(2))
 				break
 			}
 			//Convoy from Europa

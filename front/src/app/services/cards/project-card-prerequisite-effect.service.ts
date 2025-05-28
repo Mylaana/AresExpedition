@@ -22,6 +22,24 @@ export class ProjectCardPrerequisiteEffectService {
 			case('46'):{
 				return this.isTagNumberOk('science', 4, 'min', clientState)
 			}
+			//Advanced Ecosystems
+			case('65'):{
+				return this.isTagNumberOk('animal', 1, 'min', clientState)
+					&& this.isTagNumberOk('plant', 1, 'min', clientState)
+					&& this.isTagNumberOk('microbe', 1, 'min', clientState)
+			}
+			//Artificial Lake
+			case('66'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
+			//Atmosphere filtering
+			case('67'):{
+				return this.isTagNumberOk('science', 2, 'min', clientState)
+			}
+			//Breathing Filters
+			case('68'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
 			//Aerated Magma
 			case('105'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
