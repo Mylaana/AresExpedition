@@ -290,7 +290,7 @@ export class EventDesigner{
 				event.lockValidateButton = true
                 break
             }
-			case('addForestPoint'):{
+			case('addForestPointAndOxygen'):{
 				event.addForestPoint = args?.addForestPoint
 				break
 			}

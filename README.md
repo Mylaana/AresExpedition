@@ -49,6 +49,7 @@ Backend: Junit
 No visual effect for discarding cards   
 Builder: Disabled card appear buildable (visually only) when card selection active   
 Ressource on cards not being saved serverside   
+Adding forest point via event doesnt add VP   
 
 
 ## Must have for v1 :

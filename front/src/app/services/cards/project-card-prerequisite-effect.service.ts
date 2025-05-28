@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { MinMaxEqualTreshold, RessourceStock } from "../../interfaces/global.interface";
-import { MinMaxEqualType, TagType } from "../../types/global.type";
+import { MinMaxEqualType, RessourceType, TagType } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 
@@ -16,11 +16,11 @@ export class ProjectCardPrerequisiteEffectService {
 		switch(card.cardCode){
 			//AI Central
 			case('4'):{
-				return this.isTagNumberOk('science', 5, clientState, 'min')
+				return this.isTagNumberOk('science', 5, 'min', clientState)
 			}
 			//Physics Complex
 			case('46'):{
-				return this.isTagNumberOk('science', 4, clientState, 'min')
+				return this.isTagNumberOk('science', 4, 'min', clientState)
 			}
 			//Aerated Magma
 			case('105'):{
@@ -38,15 +38,33 @@ export class ProjectCardPrerequisiteEffectService {
 			case('108'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', clientState)
 			}
+			//Beam from a Thorium Asteroid
+			case('116'):{
+				return this.isTagNumberOk('jovian', 1, 'min', clientState)
+			}
+			//Biomass Combustors
+			case('117'):{
+				return this.isRessourcesNumberOk('plant', 2, 'min', clientState)
+			}
+			//Building Industries
+			case('120'):{
+				return this.isRessourcesNumberOk('heat', 4, 'min', clientState)
+			}
+			//Bushes
+			case('121'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
 			default:{
 				return true
 			}
 		}
 	}
-	private static isRessourcesNumberOk(ressource: RessourceStock, clientState: PlayerStateModel, treshold: MinMaxEqualTreshold): boolean {
-		return false
+	private static isRessourcesNumberOk(ressource: RessourceType, quantity: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
+		let check = clientState.getRessourceInfoFromType(ressource)
+		if(!check){return false}
+		return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:2, value:check.valueStock})
 	}
-	private static isTagNumberOk(tagType: TagType, requiredTagNumber: number, clientState: PlayerStateModel, treshold: MinMaxEqualType): boolean {
+	private static isTagNumberOk(tagType: TagType, requiredTagNumber: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
 		let tags = clientState.getTags()
 		for(let tag of tags){
 			if(tag.name!=tagType){continue}
@@ -81,7 +99,6 @@ export class ProjectCardPrerequisiteEffectService {
 			}
 			if(color===c&&treshold==='max'){addToList=addToList===false}
 		}
-		console.log(authorizedColor)
 		return authorizedColor.includes(currentColor)
 	}
 	private static isOceanOk(oceanFlippedNumber: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {

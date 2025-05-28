@@ -390,7 +390,7 @@ export class EventHandler {
 			}
 			case('upgradePhaseCards'):{break}
 			case('waitingGroupReady'):{break}
-			case('addForestPoint'):{
+			case('addForestPointAndOxygen'):{
 				if(event.addForestPoint){
 					this.gameStateService.addForestPoint(event.addForestPoint)
 				}

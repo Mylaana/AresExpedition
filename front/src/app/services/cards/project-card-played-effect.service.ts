@@ -160,6 +160,67 @@ export class ProjectCardPlayedEffectService {
 				]))
 				break
 			}
+			//Beam from a Thorium Asteroid
+			case('116'):{
+				result.push(this.createEventAddProduction([
+					{name:'plant', valueStock:1},
+					{name:'heat', valueStock:3}
+				]))
+				break
+			}
+			//Biomass Combustors
+			case('117'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:5}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:-2}))
+				break
+			}
+			//BioThermal Power
+			case('118'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
+				result.push(this.createEventAddForestAndOxygen(1))
+				break
+			}
+			//Blueprints
+			case('119'):{
+				result.push(this.createEventAddProduction([
+					{name:'card', valueStock:1},
+					{name:'heat', valueStock:1}
+				]))
+				break
+			}
+			//Building Industries
+			case('120'):{
+				result.push(this.createEventAddProduction({name:'steel', valueStock:2}))
+				result.push(this.createEventAddRessource({name:'heat', valueStock:-4}))
+				break
+			}
+			//Building Industries
+			case('120'):{
+				result.push(this.createEventAddProduction({name:'steel', valueStock:2}))
+				result.push(this.createEventAddRessource({name:'heat', valueStock:-4}))
+				break
+			}
+			//Bushes
+			case('121'):{
+				result.push(this.createEventAddProduction({name:'plant', valueStock:2}))
+				result.push(this.createEventAddRessource({name:'plant', valueStock:2}))
+				break
+			}
+			//Callisto Penal Mines
+			case('122'):{
+				result.push(this.createEventAddProduction({name:'card', valueStock:1}))
+				break
+			}
+			//Coal Imports
+			case('124'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:3}))
+				break
+			}
+			//Commercial Districts
+			case('125'):{
+				result.push(this.createEventAddProduction({name:'megacredit', valueStock:4}))
+				break
+			}
 			//Dust Quarry
 			case('129'):{
 				result.push(this.createEventAddProduction({name:'steel', valueStock:1}))
@@ -611,5 +672,8 @@ export class ProjectCardPlayedEffectService {
 	}
 	private static createEventAddTR(quantity: number): EventBaseModel {
 		return EventDesigner.createGeneric('addTr', {increaseTr: quantity})
+	}
+	private static createEventAddForestAndOxygen(quantity: number): EventBaseModel {
+		return EventDesigner.createGeneric('addForestPointAndOxygen', {addForestPoint:quantity})
 	}
 }
