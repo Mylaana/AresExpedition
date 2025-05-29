@@ -151,12 +151,10 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	addRessources(): void {
 		this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:200}])
-		//let cardList = this.gameStateService.getClientHandModelList()
-		//this.gameStateService.playCardFromClientHand(cardList[6])
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [53,58, 2,191]
+		let cardDrawList: number[] = [53,58, 6]
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
 		this.gameStateService.cleanAndNextEventQueue()

@@ -925,7 +925,7 @@ export class ProjectCardPlayedEffectService {
 
 		return costMod
 	}
-	getEventTriggerByPlayedCard(playedCard: PlayableCardModel, triggerIdList: number[], state: PlayerStateModel): EventBaseModel[] | undefined{
+	public static getEventTriggerByPlayedCard(playedCard: PlayableCardModel, triggerIdList: number[], state: PlayerStateModel): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -937,11 +937,17 @@ export class ProjectCardPlayedEffectService {
 		}
 		return events
 	}
-	generateEventTriggerByPlayedCard(triggerId: number, playedCard: PlayableCardModel, state: PlayerStateModel): EventBaseModel[] | undefined {
+	public static generateEventTriggerByPlayedCard(triggerId: number, playedCard: PlayableCardModel, state: PlayerStateModel): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){
-
+			case(6):{
+				result.push(this.createEventAddRessource([
+					{name: 'plant', valueStock: 2},
+					{name: 'heat', valueStock: 2},
+				]))
+				break
+			}
 			default:{
 				return
 			}

@@ -18,6 +18,10 @@ export class ProjectCardPrerequisiteEffectService {
 			case('4'):{
 				return this.isTagNumberOk('science', 5, 'min', clientState)
 			}
+			//Antigravity Technology
+			case('6'):{
+				return this.isTagNumberOk('science', 5, 'min', clientState)
+			}
 			//Physics Complex
 			case('46'):{
 				return this.isTagNumberOk('science', 4, 'min', clientState)

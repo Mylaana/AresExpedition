@@ -220,6 +220,7 @@ export class TriggerState {
     }
     private addTriggerOnPlayedCard(cardId: number): void {
         switch(cardId){
+			case(6):{break} //Antigravity Technology
             default:{return}
         }
         this.activeOnPlayedCard.push(cardId)

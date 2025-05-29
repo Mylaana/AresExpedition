@@ -437,7 +437,7 @@ export class GameState{
         //check for triggers and add them to queue
         let onPlayedTriggers = state.getTriggersIdOnPlayedCard()
         if(onPlayedTriggers.length!=0){
-            let eventsOnPlayed = this.projectCardPlayed.getEventTriggerByPlayedCard(card, onPlayedTriggers, state)
+            let eventsOnPlayed = ProjectCardPlayedEffectService.getEventTriggerByPlayedCard(card, onPlayedTriggers, state)
             if(eventsOnPlayed!=undefined){
                 events = events.concat(eventsOnPlayed)
             }
