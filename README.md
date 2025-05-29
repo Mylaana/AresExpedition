@@ -63,10 +63,14 @@ TriggerState: switch out trigger id checks from model to a service
 Rework Buildable system in playableCardComponent   
 
 ### Cards
-Implement all cards   
-Implement all corps   
-Add Event removing any ressource in list on played card   
-Add Event adding any ressource in list on played card   
+Implement missing cards & corps   
+Create Event type :   
+    - removing any ressource in list on played card   
+    - adding any ressource in list on played card   
+    - new builder event   
+Create trigger hooks :
+    - on card activation   
+    
 
 ### Misc
 Add victory check   

@@ -213,7 +213,8 @@ export class TriggerState {
     private addTriggerOnParameter(cardId: number): void {
         switch(cardId){
             case(46):{break} //Physics Complex
-            case(279):{break} //Pets
+            case(8):{break} //Arctic Algae
+			case(279):{break} //Pets
             default:{return}
         }
         this.activeOnParameterIncrease.push(cardId)

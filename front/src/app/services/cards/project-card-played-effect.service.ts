@@ -955,7 +955,7 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	getTriggerByTagGained(playedCard: PlayableCardModel, triggerIdList: number[]): EventBaseModel[] | undefined{
+	public static getTriggerByTagGained(playedCard: PlayableCardModel, triggerIdList: number[]): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -967,7 +967,7 @@ export class ProjectCardPlayedEffectService {
 		}
 		return events
 	}
-	generateEventTriggerByTagGained(triggerId: number, playedCard: PlayableCardModel): EventBaseModel[] | undefined {
+	public static generateEventTriggerByTagGained(triggerId: number, playedCard: PlayableCardModel): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 		let playedCardTags = playedCard.tagsId
 		let cardPlayedIsTheTrigger = triggerId===playedCard.id
@@ -1019,7 +1019,7 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	getEventTriggerByRessourceAddedToCard(targetCard: PlayableCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventBaseModel[] | undefined{
+	public static getEventTriggerByRessourceAddedToCard(targetCard: PlayableCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -1032,7 +1032,7 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	generateEventTriggerByRessourceAddedToCard(triggerId: number, targetCard: PlayableCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
+	public static generateEventTriggerByRessourceAddedToCard(triggerId: number, targetCard: PlayableCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){
@@ -1062,7 +1062,7 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	getEventTriggerByGlobalParameterIncrease(triggerIdList: number[], parameter: GlobalParameterValue): EventBaseModel[] | undefined{
+	public static getEventTriggerByGlobalParameterIncrease(triggerIdList: number[], parameter: GlobalParameterValue): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -1075,10 +1075,16 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	generateEventTriggerByGlobalParameterIncrease(triggerId: number, parameter: GlobalParameterValue): EventBaseModel[] | undefined {
+	public static generateEventTriggerByGlobalParameterIncrease(triggerId: number, parameter: GlobalParameterValue): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){
+			//Arctic Algae
+			case(8):{
+				if(parameter.name!=GlobalParameterNameEnum.ocean){break}
+				result.push(ProjectCardPlayedEffectService.createEventAddRessource({name:'plant', valueStock:4}))
+				break
+			}
 			//Physiscs Complex
 			case(46):{
 				if(parameter.name!=GlobalParameterNameEnum.temperature){break}

@@ -445,7 +445,7 @@ export class GameState{
 
         let onTagGainedTriggers = state.getTriggersIdOnGainedTag()
         if(onTagGainedTriggers.length!=0){
-            let eventsOnTagGained = this.projectCardPlayed.getTriggerByTagGained(card, onTagGainedTriggers)
+            let eventsOnTagGained = ProjectCardPlayedEffectService.getTriggerByTagGained(card, onTagGainedTriggers)
             if(eventsOnTagGained!=undefined){
                 events = events.concat(eventsOnTagGained)
             }
@@ -494,7 +494,7 @@ export class GameState{
 
 		let triggers = state.getTriggersIdOnParameterIncrease()
         if(triggers.length>0){
-			newEvents = newEvents.concat(this.projectCardPlayed.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
+			newEvents = newEvents.concat(ProjectCardPlayedEffectService.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
 		}
         if(newEvents.length===0){return}
         this.addEventQueue(newEvents, 'first')
@@ -524,7 +524,7 @@ export class GameState{
             let triggers = newState.getTriggersIdOnRessourceAddedToCard()
             if(triggers.length===0){break}
 
-            let events = this.projectCardPlayed.getEventTriggerByRessourceAddedToCard(
+            let events = ProjectCardPlayedEffectService.getEventTriggerByRessourceAddedToCard(
                 card,
                 triggers,
                 ressource

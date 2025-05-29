@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { MinMaxEqualTreshold, RessourceStock } from "../../interfaces/global.interface";
 import { MinMaxEqualType, RessourceType, TagType } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
@@ -21,6 +20,10 @@ export class ProjectCardPrerequisiteEffectService {
 			//Antigravity Technology
 			case('6'):{
 				return this.isTagNumberOk('science', 5, 'min', clientState)
+			}
+			//Arctic Algae
+			case('8'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
 			}
 			//Physics Complex
 			case('46'):{
