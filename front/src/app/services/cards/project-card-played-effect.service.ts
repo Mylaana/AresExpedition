@@ -24,6 +24,13 @@ export class ProjectCardPlayedEffectService {
 	public static getPlayedCardEvent(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 		let result: EventBaseModel[] = []
 		switch(cardCode){
+			//Advanced Alloys
+			case('2'):{
+				clientstate.increaseProductionModValue('steel')
+				clientstate.increaseProductionModValue('titanium')
+				console.log(clientstate)
+				break
+			}
 			//Decomposing Fungus
 			case('20'):{
 				ProjectCardPlayedEffectService.createEventAddRessourceToSelectedCard({name: 'microbe',valueStock: 2})

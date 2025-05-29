@@ -122,6 +122,7 @@ export class PlayerStateModel {
 			this.ressourceState.setScalingProduction(ressources[i].name, scalingProd)
 		}
 	}
+	increaseProductionModValue(ressourceType: Extract<RessourceType, 'steel' | 'titanium'>) {this.ressourceState.increaseProductionModValue(ressourceType)}
 
 	//phaseCardState
 	getPhaseCardUpgradedCount(): number {return this.phaseCardState.getPhaseCardUpgradedCount()}
