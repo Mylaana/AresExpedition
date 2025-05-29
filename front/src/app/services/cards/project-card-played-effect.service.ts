@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { PlayableCardType, RessourceType } from "../../types/global.type";
-import { ProjectCardScalingProductionsService } from "./project-card-scaling-productions.service";
 import { EventBaseModel, EventCardSelector } from "../../models/core-game/event.model";
 import { RessourceStock, GlobalParameterValue, ScanKeep, RessourceInfo } from "../../interfaces/global.interface";
 import { CostMod } from "../../types/project-card.type";
@@ -190,6 +188,13 @@ export class ProjectCardPlayedEffectService {
 			//Terraforming Ganymede
 			case('100'):{
 				result.push(this.createEventAddTR(clientstate.getTagsOfType('jovian')))
+				break
+			}
+			//Towing a Comet
+			case('101'):{
+				result.push(this.createEventAddRessource({name:'plant', valueStock:2}))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.oxygen,1))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
 				break
 			}
 			//Acquired Company
@@ -822,6 +827,12 @@ export class ProjectCardPlayedEffectService {
 			//Low-Atmosphere Planes
 			case('F17'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.infrastructure,3))
+				break
+			}
+			//Urban Forestry
+			case('F20'):{
+				result.push(this.createEventAddForestAndOxygen(1))
+				result.push(this.createEventAddRessource({name:'megacredit', valueStock:5}))
 				break
 			}
 			//Commercial Imports

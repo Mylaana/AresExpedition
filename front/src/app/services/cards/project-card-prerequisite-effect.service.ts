@@ -233,6 +233,10 @@ export class ProjectCardPrerequisiteEffectService {
 			case('208'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
 			}
+			//Urban Forestry
+			case('F20'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
 			default:{
 				return true
 			}
