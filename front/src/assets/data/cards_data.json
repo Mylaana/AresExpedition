@@ -168,7 +168,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 4,
@@ -217,12 +217,12 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "Requires 5 $tag_science$.",
-            "fr": "Requiert 5 $tag_science$."
+            "en": "Requiert 5 $tag_science$.",
+            "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "5 $tag_science$",
-            "fr": "5 $tag_science$"
+            "en": "5$tag_science$",
+            "fr": ""
         },
         "stockable": [],
         "startingMegacredits": 0,
@@ -399,7 +399,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 8,
@@ -625,7 +625,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 12,
@@ -673,11 +673,11 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
+            "en": "Requires white Oxygen level.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "$other_oxygen$",
             "fr": ""
         },
         "stockable": [
@@ -787,11 +787,11 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
+            "en": "Requires a yellow or warmer Temperature level.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "$other_temperature$",
             "fr": ""
         },
         "stockable": [],
@@ -1026,7 +1026,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 19,
@@ -1144,7 +1144,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 21,
@@ -1199,7 +1199,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 22,
@@ -1538,16 +1538,16 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
+            "en": "Requires a purple Temperature level.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "$other_temperature$",
             "fr": ""
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 28,
@@ -1769,18 +1769,18 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
+            "en": "Requires red or higher Oxygen level.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "$other_oxygen$",
             "fr": ""
         },
         "stockable": [
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 32,
@@ -1829,11 +1829,11 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
+            "en": "Requires a yellow or warmer Temperature level.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "$other_temperature$",
             "fr": ""
         },
         "stockable": [],
@@ -2473,7 +2473,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 44,
@@ -2866,18 +2866,18 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
-            "fr": ""
+            "en": "Requires a red or warmer Temperature level.",
+            "fr": "$other_temperature$"
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "$other_temperature$",
             "fr": ""
         },
         "stockable": [
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 51,
@@ -3269,11 +3269,11 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
-            "fr": ""
+            "en": "Requires a red or warmer Temperature level.",
+            "fr": "$other_temperature$"
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "$other_temperature$",
             "fr": ""
         },
         "stockable": [],
@@ -12411,7 +12411,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 218,
@@ -12527,7 +12527,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 222,

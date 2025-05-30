@@ -10,6 +10,11 @@ export class ProjectCardScalingVPService {
 		let totalScalingVp: number = 0
 		for(let card of clientState.getProjectPlayedModelList()){
 			switch(card.cardCode){
+				//Birds
+				case("12"):{
+					totalScalingVp += card.getStockValue('animal')
+					break
+				}
 				//Fish
 				case("30"):{
 					totalScalingVp += card.getStockValue('animal')

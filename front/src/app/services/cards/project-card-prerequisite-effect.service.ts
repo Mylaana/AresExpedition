@@ -25,6 +25,10 @@ export class ProjectCardPrerequisiteEffectService {
 			case('8'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
 			}
+			//Birds
+			case('12'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.white, 'min', clientState)
+			}
 			//Fish
 			case('30'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)

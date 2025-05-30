@@ -34,6 +34,11 @@ export class ProjectCardActivatedEffectService {
 				result.push(this.createEventDraw(1))
 				break
 			}
+			//Birds
+			case('12'):{
+				result.push(this.createEventAddRessourceToCardId({name: "animal", valueStock: 1}, card.cardCode))
+				break
+			}
 			//Decomposing Fungus
 			case('20'):{
 				//add new event type removing any ressource on card
@@ -62,6 +67,8 @@ export class ProjectCardActivatedEffectService {
 				if(!this.checkPlayerHasBaseRessourceStock(clientState, {name: 'plant', valueStock: 1})){return false}
 				break
 			}
+			//Birds
+			case('12'):{break}
 			//Decomposing Fungus
 			case('20'):{
 				return false
