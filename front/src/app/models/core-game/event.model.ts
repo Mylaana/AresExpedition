@@ -340,7 +340,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
 export class EventTargetCard extends EventBaseModel {
     override readonly type: EventType = 'targetCard'
     override subType!: EventTargetCardSubType;
-    targetCardId!: number
+    targetCardId!: string
     override autoFinalize: boolean = true
     advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock[]
 }

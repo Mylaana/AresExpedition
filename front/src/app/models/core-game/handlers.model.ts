@@ -298,7 +298,7 @@ export class EventHandler {
 				let stock: AdvancedRessourceStock[] = event.advancedRessource?[event.advancedRessource]:[]
 				if(stock.length===0){break}
 
-				this.gameStateService.addRessourceToClientCard({cardId: event.cardSelector.selectedList[0].id,stock: stock})
+				this.gameStateService.addRessourceToClientCard({cardCode: event.cardSelector.selectedList[0].cardCode,stock: stock})
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
@@ -468,7 +468,7 @@ export class EventHandler {
 					ressourceStock.push(event.advancedRessource)
 				}
 				let cardStock: CardRessourceStock = {
-					cardId:event.targetCardId,
+					cardCode:event.targetCardId,
 					stock:ressourceStock
 				}
 				this.gameStateService.addRessourceToClientCard(cardStock)

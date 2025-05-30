@@ -457,9 +457,9 @@ export class GameState{
         if(events.length===0){return}
         this.addEventQueue(events, 'first')
 	}
-    setClientTriggerAsInactive(triggerId: number): void {
+    setClientTriggerAsInactive(trigger: string): void {
         let newState: PlayerStateModel = this.getClientState()
-        newState.setTriggerInactive(triggerId)
+        newState.setTriggerInactive(trigger)
 
         this.updateClientState(newState)
     }
@@ -512,13 +512,13 @@ export class GameState{
         let newState = this.getClientState()
 
         for(let stock of cardStock.stock){
-            newState.addRessourceToCard(cardStock.cardId, stock)
+            newState.addRessourceToCard(cardStock.cardCode, stock)
         }
 
         this.updateClientState(newState)
 
         for(let ressource of cardStock.stock){
-            let card = newState.getProjectPlayedModelFromId(cardStock.cardId)
+            let card = newState.getProjectPlayedModelFromId(cardStock.cardCode)
             if(!card){continue}
 
             let triggers = newState.getTriggersIdOnRessourceAddedToCard()

@@ -7,7 +7,7 @@ export type CardType = 'redProject' | 'greenProject' | 'blueProject' | undefined
 export type CardTypeColor = 'red' | 'green' | 'blue' | 'corporation' | undefined
 export type PrerequisiteType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | 'heat' | 'tr' | undefined
 export type PrerequisiteTresholdType = 'min' | 'max' | undefined
-export type CostMod = {tagList?:number[], steelState?: RessourceInfo, titaniumState?: RessourceInfo, playedTriggersList?: number[], buildDiscount?: number}
+export type CostMod = {tagList?:number[], steelState?: RessourceInfo, titaniumState?: RessourceInfo, playedTriggersList?: string[], buildDiscount?: number}
 export type ProjectFilterType = undefined | "development" | "construction" | "action" | 'stockable'
 export type PlayedProject = {
     playedIdList: number[],

@@ -163,26 +163,26 @@ export class PlayerStateModel {
 	addSellCardValueMod(value: number): void {this.otherState.addSellCardValueMod(value)}
 
 	//cardState
-	setTriggerInactive(triggerId: number): void {this.projectCardState.setTriggerInactive(triggerId)}
-	getTriggersIdOnPlayedCard(): number[] {return this.projectCardState.getTriggersIdOnPlayedCard()}
-	getTriggersIdOnParameterIncrease(): number[] {return this.projectCardState.getTriggersIdOnParameterIncrease()}
-	getTriggersIdOnRessourceAddedToCard(): number[] {return this.projectCardState.getTriggersIdOnRessourceAddedToCard()}
-	getTriggersIdOnGainedTag(){return this.projectCardState.getTriggersIdOnGainedTag()}
-	getTriggerCostMod(): number[] {return this.projectCardState.getTriggerCostMod()}
+	setTriggerInactive(trigger: string): void {this.projectCardState.setTriggerInactive(trigger)}
+	getTriggersIdOnPlayedCard(): string[] {return this.projectCardState.getTriggersIdOnPlayedCard()}
+	getTriggersIdOnParameterIncrease(): string[] {return this.projectCardState.getTriggersIdOnParameterIncrease()}
+	getTriggersIdOnRessourceAddedToCard(): string[] {return this.projectCardState.getTriggersIdOnRessourceAddedToCard()}
+	getTriggersIdOnGainedTag(): string[] {return this.projectCardState.getTriggersIdOnGainedTag()}
+	getTriggerCostMod(): string[] {return this.projectCardState.getTriggerCostMod()}
 
 	addCardsToHand(cards: number | number[]) {this.projectCardState.addCardsToHand(cards)}
-	removeCardsFromHand(cardIdList: number | number[], cardType: PlayableCardType): void {this.projectCardState.removeCardsFromHand(cardIdList, cardType)}
+	removeCardsFromHand(cardCodeList: number | number[], cardType: PlayableCardType): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType)}
 	getProjectHandIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectHandIdList(filter)}
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
 	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
 	addCardsToDiscard(cards: number | number[]) {this.projectCardState.addCardsToDiscard(cards)}
 
-	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {
-		this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)
+	addRessourceToCard(cardCode: string, advancedRessourceStock: AdvancedRessourceStock): void {
+		this.projectCardState.addRessourceToCard(cardCode,advancedRessourceStock)
 		this.setScalingVp()
 	}
-	getProjectPlayedModelFromId(cardId:number): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}
+	getProjectPlayedModelFromId(cardCode:string): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromCode(cardCode)}
 	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
 

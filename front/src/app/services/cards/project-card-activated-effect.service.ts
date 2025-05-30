@@ -121,8 +121,8 @@ export class ProjectCardActivatedEffectService {
 	private static createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventBaseModel {
 		return EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:gain})
 	}
-	private static createEventAddRessourceToCardId(gain: AdvancedRessourceStock, cardId: number): EventBaseModel {
-		return EventDesigner.createTargetCard('addRessourceToCardId', cardId, {advancedRessource:gain})
+	private static createEventAddRessourceToCardId(gain: AdvancedRessourceStock, cardCode: string): EventBaseModel {
+		return EventDesigner.createTargetCard('addRessourceToCardId', cardCode, {advancedRessource:gain})
 	}
 	private static createEventIncreaseResearchScanKeep(scanKeep: ScanKeep): EventBaseModel {
 		return EventDesigner.createGeneric('increaseResearchScanKeep', {scanKeep:scanKeep})
@@ -130,8 +130,8 @@ export class ProjectCardActivatedEffectService {
 	private static createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock, cardSelectionQuantity:number=1): EventBaseModel {
 		return EventDesigner.createCardSelectorRessource(ressource, {cardSelector:{selectionQuantity:cardSelectionQuantity}})
 	}
-	private static createEventDeactivateTrigger(triggerId: number): EventBaseModel {
-		return EventDesigner.createTargetCard('deactivateTrigger', triggerId)
+	private static createEventDeactivateTrigger(trigger: string): EventBaseModel {
+		return EventDesigner.createTargetCard('deactivateTrigger', trigger)
 	}
 	private static createEventScanKeep(scanKeep: ScanKeep): EventBaseModel {
 		return EventDesigner.createDeckQueryEvent('scanKeepQuery', {scanKeep:scanKeep})

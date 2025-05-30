@@ -72,7 +72,7 @@ export interface GlobalParameterValue {
 }
 
 export interface CardRessourceStock {
-    cardId: number,
+    cardCode: string,
     stock: AdvancedRessourceStock[]
 }
 

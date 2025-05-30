@@ -903,30 +903,30 @@ export class ProjectCardPlayedEffectService {
 
 		return newMod
 	}
-	calculateCostModFromTrigger(triggerId: number, mod:CostMod): number {
+	calculateCostModFromTrigger(trigger: string, mod:CostMod): number {
 		if(!mod || !mod.tagList){return 0}
 		let costMod: number = 0
 
-		switch(triggerId){
+		switch(trigger){
 			//Earth Catapult
-			case(23):{
+			case('23'):{
 				costMod += 2
 				break
 			}
 			//Energy Subsidies
-			case(25):{
+			case('25'):{
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('power','tag'))===false){break}
 				costMod += 4
 				break
 			}
 			//Interplanetary Conference
-			case(37):{
+			case('37'):{
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))){costMod += 3}
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))){costMod += 3}
 				break
 			}
 			//Media Group
-			case(42):{
+			case('42'):{
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('event','tag'))){costMod += 5}
 				break
 			}
@@ -934,7 +934,7 @@ export class ProjectCardPlayedEffectService {
 
 		return costMod
 	}
-	public static getEventTriggerByPlayedCard(playedCard: PlayableCardModel, triggerIdList: number[], state: PlayerStateModel): EventBaseModel[] | undefined{
+	public static getEventTriggerByPlayedCard(playedCard: PlayableCardModel, triggerIdList: string[], state: PlayerStateModel): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -946,11 +946,11 @@ export class ProjectCardPlayedEffectService {
 		}
 		return events
 	}
-	public static generateEventTriggerByPlayedCard(triggerId: number, playedCard: PlayableCardModel, state: PlayerStateModel): EventBaseModel[] | undefined {
+	public static generateEventTriggerByPlayedCard(triggerId: string, playedCard: PlayableCardModel, state: PlayerStateModel): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){
-			case(6):{
+			case('6'):{
 				result.push(this.createEventAddRessource([
 					{name: 'plant', valueStock: 2},
 					{name: 'heat', valueStock: 2},
@@ -964,53 +964,64 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	public static getTriggerByPlayedCard(playedCard: PlayableCardModel, triggerIdList: number[]): EventBaseModel[] | undefined{
+	public static getTriggerByPlayedCard(playedCard: PlayableCardModel, triggerIdList: string[]): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
 		for(let triggerId of triggerIdList){
-			let newEvent = this.generateEventTriggerByTagGained(triggerId, playedCard.tagsId, triggerId===playedCard.id)
+			let newEvent = this.generateEventTriggerByTagGained(triggerId, playedCard.tagsId, triggerId===playedCard.cardCode)
 			if(newEvent){
 				events = events.concat(newEvent)
 			}
 		}
 		return events
 	}
-	public static getTriggerByTagGained(tagList: number[], triggerIdList: number[]): EventBaseModel[] | undefined{
-		if(triggerIdList.length===0){return}
+	public static getTriggerByTagGained(tagList: number[], triggers: string[]): EventBaseModel[] | undefined{
+		if(triggers.length===0){return}
 		let events: EventBaseModel[] = []
 
-		for(let triggerId of triggerIdList){
-			let newEvent = this.generateEventTriggerByTagGained(triggerId, tagList, false)
+		for(let trigger of triggers){
+			let newEvent = this.generateEventTriggerByTagGained(trigger, tagList, false)
 			if(newEvent){
 				events = events.concat(newEvent)
 			}
 		}
 		return events
 	}
-	public static generateEventTriggerByTagGained(triggerId: number, tagsIdList: number[], triggeringSelf: boolean = false): EventBaseModel[] | undefined {
+	public static generateEventTriggerByTagGained(trigger: string, tagsIdList: number[], triggeringSelf: boolean = false): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 		console.log('tag gained')
-		switch(triggerId){
+		switch(trigger){
 			//Decomposers
-			case(19):{
+			case('19'):{
 				let triggerred: number = 0
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('plant','tag'))){triggerred+=1}
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('animal','tag'))){triggerred+=1}
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('microbe','tag'))){triggerred+=1}
 				for(let i=0; i<triggerred; i++){
-					result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock:1}, 19))
+					result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+				}
+				break
+			}
+			//Ecological Zone
+			case('23'):{
+				let triggerred: number = 0
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('plant','tag'))){triggerred+=1}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('animal','tag'))){triggerred+=1}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('microbe','tag'))){triggerred+=1}
+				for(let i=0; i<triggerred; i++){
+					result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock:1}, trigger))
 				}
 				break
 			}
 			//Energy Subsidies
-			case(25):{
+			case('25'):{
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('power','tag'))!=true){break}
 				result.push(ProjectCardPlayedEffectService.createEventDraw(1))
 				break
 			}
 			//Interplanetary Conference
-			case(37):{
+			case('37'):{
 				//self triggering excluded
 				if(triggeringSelf===true){break}
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true
@@ -1027,7 +1038,7 @@ export class ProjectCardPlayedEffectService {
 				break
 			}
 			//Optimal Aerobraking
-			case(45):{
+			case('45'):{
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('event','tag'))!=true){break}
 				result.push(
 					ProjectCardPlayedEffectService.createEventAddRessource([
@@ -1037,9 +1048,9 @@ export class ProjectCardPlayedEffectService {
 				break
 			}
 			//Bacterial Aggregate
-			case(222):{
+			case('222'):{
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
-				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock: 1}, trigger))
 				break
 			}
 			default:{
@@ -1049,7 +1060,7 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	public static getEventTriggerByRessourceAddedToCard(targetCard: PlayableCardModel, triggerIdList: number[], ressource: AdvancedRessourceStock): EventBaseModel[] | undefined{
+	public static getEventTriggerByRessourceAddedToCard(targetCard: PlayableCardModel, triggerIdList: string[], ressource: AdvancedRessourceStock): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -1062,12 +1073,12 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	public static generateEventTriggerByRessourceAddedToCard(triggerId: number, targetCard: PlayableCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
+	public static generateEventTriggerByRessourceAddedToCard(triggerId: string, targetCard: PlayableCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){
 			//Bacterial Aggregate
-			case(222):{
+			case('222'):{
 				if(ressource.name!!='microbe'||ressource.valueStock<1){break}
 
 				let stock = targetCard.getStockValue('microbe')
@@ -1092,7 +1103,7 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	public static getEventTriggerByGlobalParameterIncrease(triggerIdList: number[], parameter: GlobalParameterValue): EventBaseModel[] | undefined{
+	public static getEventTriggerByGlobalParameterIncrease(triggerIdList: string[], parameter: GlobalParameterValue): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
@@ -1105,24 +1116,24 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	public static generateEventTriggerByGlobalParameterIncrease(triggerId: number, parameter: GlobalParameterValue): EventBaseModel[] | undefined {
+	public static generateEventTriggerByGlobalParameterIncrease(triggerId: string, parameter: GlobalParameterValue): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){
 			//Arctic Algae
-			case(8):{
+			case('8'):{
 				if(parameter.name!=GlobalParameterNameEnum.ocean){break}
 				result.push(ProjectCardPlayedEffectService.createEventAddRessource({name:'plant', valueStock:4}))
 				break
 			}
 			//Physiscs Complex
-			case(46):{
+			case('46'):{
 				if(parameter.name!=GlobalParameterNameEnum.temperature){break}
 				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
 			}
 			//Pets
-			case(279):{
+			case('279'):{
 				if(parameter.name!=GlobalParameterNameEnum.infrastructure){break}
 				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
 				break
@@ -1149,7 +1160,7 @@ export class ProjectCardPlayedEffectService {
 	private static createEventAddRessource(gain: RessourceStock | RessourceStock[]): EventBaseModel {
 		return EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:gain})
 	}
-	private static createEventAddRessourceToCardId(gain: AdvancedRessourceStock, cardId: number): EventBaseModel {
+	private static createEventAddRessourceToCardId(gain: AdvancedRessourceStock, cardId: string): EventBaseModel {
 		return EventDesigner.createTargetCard('addRessourceToCardId', cardId, {advancedRessource:gain})
 	}
 	private static createEventIncreaseResearchScanKeep(scanKeep: ScanKeep): EventBaseModel {
@@ -1158,7 +1169,7 @@ export class ProjectCardPlayedEffectService {
 	private static createEventAddRessourceToSelectedCard(ressource: AdvancedRessourceStock, cardSelectionQuantity:number=1): EventBaseModel {
 		return EventDesigner.createCardSelectorRessource(ressource, {cardSelector:{selectionQuantity:cardSelectionQuantity}})
 	}
-	private static createEventDeactivateTrigger(triggerId: number): EventBaseModel {
+	private static createEventDeactivateTrigger(triggerId: string): EventBaseModel {
 		return EventDesigner.createTargetCard('deactivateTrigger', triggerId)
 	}
 	private static createEventScanKeep(scanKeep: ScanKeep): EventBaseModel {

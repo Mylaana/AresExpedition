@@ -152,18 +152,18 @@ export class PlayableCardModel{
  * This Class handles Blue project card with trigger effects
  */
 export class TriggerState {
-    playedCardsId: number[] = []
-    activeCardsId: number[] = []
-    activeOnRessourceAddedToCard: number[] = []
-    activeOnParameterIncrease: number[] = []
-    activeOnPlayedCard: number[] = []
-    activeOnGainedTag: number[] = []
-    activeCostModTrigger: number[] = []
+    playedCards: string[] = []
+    activeCards: string[] = []
+    activeOnRessourceAddedToCard: string[] = []
+    activeOnParameterIncrease: string[] = []
+    activeOnPlayedCard: string[] = []
+    activeOnGainedTag: string[] = []
+    activeCostModTrigger: string[] = []
 
 	constructor(dto?: TriggerStateDTO){
 		if(!dto){return}
-		this.playedCardsId = dto.pci
-		this.activeCardsId = dto.aci
+		this.playedCards = dto.pci
+		this.activeCards = dto.aci
 		this.activeOnRessourceAddedToCard = dto.aoratc
 		this.activeOnParameterIncrease = dto.aopi
 		this.activeOnPlayedCard = dto.aopc
@@ -171,90 +171,91 @@ export class TriggerState {
 		this.activeCostModTrigger = dto.acmt
 	}
 
-    getPlayedTriggers(): number[] {
-        return this.playedCardsId
+    getPlayedTriggers(): string[] {
+        return this.playedCards
     }
-    getActivePlayedTriggers(): number[] {
-        return this.activeCardsId
+    getActivePlayedTriggers(): string[] {
+        return this.activeCards
     }
-    getOnRessourceAddedToCard(): number[] {
+    getOnRessourceAddedToCard(): string[] {
         return this.activeOnRessourceAddedToCard
     }
-    getOnParameterIncrease(): number[] {
+    getOnParameterIncrease(): string[] {
         return this.activeOnParameterIncrease
     }
-    getOnPlayedCard(): number[] {
+    getOnPlayedCard(): string[] {
         return this.activeOnPlayedCard
     }
-    getOnGainedTag(): number [] {
+    getOnGainedTag(): string[] {
         return this.activeOnGainedTag
     }
-    getCostMod(): number [] {
+    getCostMod(): string[] {
         return this.activeCostModTrigger
     }
-    playTrigger(cardId: number): void {
-        this.playedCardsId.push(cardId)
-        this.activeCardsId.push(cardId)
+    playTrigger(cardCode: string): void {
+        this.playedCards.push(cardCode)
+        this.activeCards.push(cardCode)
 
         //adds played trigger to relevant lists
-        this.addTriggerOnRessource(cardId)
-        this.addTriggerOnParameter(cardId)
-        this.addTriggerOnPlayedCard(cardId)
-        this.addTriggerOnGainedTag(cardId)
-        this.addTriggerToCostMod(cardId)
+        this.addTriggerOnRessource(cardCode)
+        this.addTriggerOnParameter(cardCode)
+        this.addTriggerOnPlayedCard(cardCode)
+        this.addTriggerOnGainedTag(cardCode)
+        this.addTriggerToCostMod(cardCode)
     }
-    private addTriggerOnRessource(cardId: number): void {
-        switch(cardId){
-            case(222):{break} //Bacterial Aggregate
+    private addTriggerOnRessource(cardCode: string): void {
+        switch(cardCode){
+            case('222'):{break} //Bacterial Aggregate
             default:{return}
         }
-        this.activeOnRessourceAddedToCard.push(cardId)
+        this.activeOnRessourceAddedToCard.push(cardCode)
     }
-    private addTriggerOnParameter(cardId: number): void {
-        switch(cardId){
-            case(46):{break} //Physics Complex
-            case(8):{break} //Arctic Algae
-			case(279):{break} //Pets
+    private addTriggerOnParameter(cardCode: string): void {
+        switch(cardCode){
+            case('46'):{break} //Physics Complex
+            case('8'):{break} //Arctic Algae
+			case('279'):{break} //Pets
             default:{return}
         }
-        this.activeOnParameterIncrease.push(cardId)
+        this.activeOnParameterIncrease.push(cardCode)
     }
-    private addTriggerOnPlayedCard(cardId: number): void {
-        switch(cardId){
-			case(6):{break} //Antigravity Technology
+    private addTriggerOnPlayedCard(cardCode: string): void {
+        switch(cardCode){
+			case('6'):{break} //Antigravity Technology
             default:{return}
         }
-        this.activeOnPlayedCard.push(cardId)
+        this.activeOnPlayedCard.push(cardCode)
     }
-    private addTriggerOnGainedTag(cardId: number): void {
-        switch(cardId){
-			case(19):{break} //Decomposers
-            case(25):{break} //Energy Subsidies
-            case(37):{break} //Interplanetary Conference
-            case(45):{break} //Optimal aerobreaking
-            case(222):{break} //Bacterial Aggregate
+    private addTriggerOnGainedTag(cardCode: string): void {
+        switch(cardCode){
+			case('19'):{break} //Decomposers
+			case('24'):{break} //Ecological Zone
+            case('25'):{break} //Energy Subsidies
+            case('37'):{break} //Interplanetary Conference
+            case('45'):{break} //Optimal aerobreaking
+            case('222'):{break} //Bacterial Aggregate
             default:{return}
         }
-        this.activeOnGainedTag.push(cardId)
+        this.activeOnGainedTag.push(cardCode)
     }
-    private addTriggerToCostMod(cardId: number): void {
-        switch(cardId){
-			case(23):{break}
-            case(25):{break} //Energy Subsidies
-            case(37):{break} //Interplanetary Conference
-			case(42):{break} //Media Group
+    private addTriggerToCostMod(cardCode: string): void {
+        switch(cardCode){
+			case('23'):{break}
+            case('25'):{break} //Energy Subsidies
+            case('37'):{break} //Interplanetary Conference
+			case('42'):{break} //Media Group
             default:{return}
         }
-        this.activeCostModTrigger.push(cardId)
+        this.activeCostModTrigger.push(cardCode)
     }
-    setTriggerInactive(cardId: number): void {
-        this.activeCardsId = this.activeCardsId.filter((e, i) => e !== cardId)
+    setTriggerInactive(cardCode: string): void {
+        this.activeCards = this.activeCards.filter((e, i) => e !== cardCode)
 
-        switch(cardId){
+        switch(cardCode){
             //Bacterial Aggregate
-            case(222):{
-                this.activeOnRessourceAddedToCard = this.activeOnRessourceAddedToCard.filter((e, i) => e !== cardId)
-                this.activeOnGainedTag = this.activeOnGainedTag.filter((e, i) => e !== cardId)
+            case('222'):{
+                this.activeOnRessourceAddedToCard = this.activeOnRessourceAddedToCard.filter((e, i) => e !== cardCode)
+                this.activeOnGainedTag = this.activeOnGainedTag.filter((e, i) => e !== cardCode)
                 break
             }
         }
@@ -267,13 +268,13 @@ export class TriggerState {
 	}
 	public toJson(): TriggerStateDTO {
 		return {
-			aci: this.activeCardsId,
+			aci: this.activeCards,
 			acmt: this.activeCostModTrigger,
 			aogt: this.activeOnGainedTag,
 			aopc: this.activeOnPlayedCard,
 			aopi: this.activeOnParameterIncrease,
 			aoratc: this.activeOnRessourceAddedToCard,
-			pci: this.playedCardsId
+			pci: this.playedCards
 		}
 	}
 }
