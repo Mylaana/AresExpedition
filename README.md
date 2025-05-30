@@ -73,6 +73,8 @@ Create Event type :
     - "action portal" type event casting subsequent events   
 Create trigger hooks :
     - on card activation   
+Need prerequisite offset mechanic   
+Standard tech reduction mechanic   
 
 ### Misc
 Add victory check   

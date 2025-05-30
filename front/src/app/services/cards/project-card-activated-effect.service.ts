@@ -102,7 +102,6 @@ export class ProjectCardActivatedEffectService {
 		}
 	}
 	private static checkPlayerHasCardsInHand(state: PlayerStateModel, cardsInHandNumber: number): boolean {
-		console.log(state.getHandCurrentSize())
 		return state.getHandCurrentSize()>=1
 	}
 	private static createEventDraw(drawNumber: number): EventBaseModel {

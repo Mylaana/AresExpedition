@@ -493,7 +493,7 @@ export class GameState{
 		this.updateClientState(state)
 
 		let triggers = state.getTriggersIdOnParameterIncrease()
-		console.log('parameter increase', triggers)
+		console.log(triggers)
 		if(triggers.length>0){
 			newEvents = newEvents.concat(ProjectCardPlayedEffectService.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
 		}
@@ -767,7 +767,6 @@ export class GameState{
 		this.updateClientState(state)
 	}
 	public addTagFromOtherSourceToClient(type: TagType){
-		console.log('')
 		let state = this.getClientState()
 		let tagId = Utils.toTagId(type)
 		state.addTagFromOtherSource(tagId, 1)

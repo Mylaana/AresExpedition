@@ -45,6 +45,16 @@ export class ProjectCardScalingVPService {
 					totalScalingVp += clientState.getTagsOfType('jovian')
 					break
 				}
+				//Pets
+				case("F07"):{
+					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
+					break
+				}
+				//Filter Feeders
+				case("P04"):{
+					totalScalingVp += Math.floor(card.getStockValue('animal') / 3)
+					break
+				}
 			}
 		}
 		return totalScalingVp

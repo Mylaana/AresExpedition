@@ -35,6 +35,7 @@ export class ProjectCardPrerequisiteEffectService {
 			}
 			//Livestock
 			case('39'):{
+				return true
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', clientState)
 			}
 			//Physics Complex
@@ -255,6 +256,10 @@ export class ProjectCardPrerequisiteEffectService {
 			//Urban Forestry
 			case('F20'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
+			//Filter Feeders
+			case('P04'):{
+				return this.isOceanOk(2, 'min', clientState)
 			}
 			default:{
 				return true

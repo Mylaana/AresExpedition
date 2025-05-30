@@ -205,7 +205,8 @@ export class TriggerState {
     }
     private addTriggerOnRessource(cardCode: string): void {
         switch(cardCode){
-            case('222'):{break} //Bacterial Aggregate
+            case('P19'):{break} //Bacterial Aggregate
+			case('P04'):{break} //Filter Feeders
             default:{return}
         }
         this.activeOnRessourceAddedToCard.push(cardCode)
@@ -217,7 +218,7 @@ export class TriggerState {
 			case('33'):{break} //Herbivore
 			case('39'):{break} //Herbivore
             case('46'):{break} //Physics Complex
-			case('279'):{break} //Pets
+			case('F07'):{break} //Pets
             default:{return}
         }
         this.activeOnParameterIncrease.push(cardCode)
@@ -235,18 +236,21 @@ export class TriggerState {
 			case('24'):{break} //Ecological Zone
             case('25'):{break} //Energy Subsidies
             case('37'):{break} //Interplanetary Conference
+			case('44'):{break} //Olympus Conference
             case('45'):{break} //Optimal aerobreaking
-            case('222'):{break} //Bacterial Aggregate
+			case('48'):{break} //Recycled Detritus
+            case('P19'):{break} //Bacterial Aggregate
             default:{return}
         }
         this.activeOnGainedTag.push(cardCode)
     }
     private addTriggerToCostMod(cardCode: string): void {
         switch(cardCode){
-			case('23'):{break}
+			case('23'):{break} //Earth Catapult
             case('25'):{break} //Energy Subsidies
             case('37'):{break} //Interplanetary Conference
 			case('42'):{break} //Media Group
+			case('51'):{break} //Research Outpost
             default:{return}
         }
         this.activeCostModTrigger.push(cardCode)
@@ -256,7 +260,7 @@ export class TriggerState {
 
         switch(cardCode){
             //Bacterial Aggregate
-            case('222'):{
+            case('P19'):{
                 this.activeOnRessourceAddedToCard = this.activeOnRessourceAddedToCard.filter((e, i) => e !== cardCode)
                 this.activeOnGainedTag = this.activeOnGainedTag.filter((e, i) => e !== cardCode)
                 break

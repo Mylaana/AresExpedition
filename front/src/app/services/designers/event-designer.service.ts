@@ -221,7 +221,7 @@ export class EventDesigner{
 
         return event
     }
-    public static createTargetCard(subType:EventTargetCardSubType, targetCardId:string ,args?: CreateEventOptionsTargetCard): EventTargetCard {
+    public static createTargetCard(subType:EventTargetCardSubType, targetCardId:string, args?: CreateEventOptionsTargetCard): EventTargetCard {
         let event = new EventTargetCard
 
         event.targetCardId = targetCardId

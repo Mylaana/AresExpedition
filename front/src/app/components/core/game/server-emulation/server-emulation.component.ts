@@ -154,7 +154,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [39]
+		let cardDrawList: number[] = [279]
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
 		this.gameStateService.cleanAndNextEventQueue()
@@ -231,8 +231,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		return GlobalParameterNameEnum.ocean
 	}
 	addParameter(index: number) {
-		let state = this.gameStateService.getClientState()
-		state.addGlobalParameterStepEOP({name:this.getParameterName(index), steps:1})
-		this.gameStateService.updateClientState(state)
+		this.gameStateService.addGlobalParameterStepsEOPtoClient({name:this.getParameterName(index), steps:1})
 	}
 }

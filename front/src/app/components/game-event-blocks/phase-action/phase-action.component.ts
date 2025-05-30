@@ -46,7 +46,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 			state => {this.onStateUpdate(state)})
 		this._actionEvent = this.event as EventCardActivator
 		this.updateButtonState()
-		console.log(this._convertForest)
 	}
 	ngAfterViewInit(): void {
 		if(this.event.button){this.updateEndPhaseButton(this.event.button as EventMainButton)}

@@ -60,6 +60,11 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:2}))
 				break
 			}
+			//United Planetary Alliance
+			case('60'):{
+				result.push(this.createEventIncreaseResearchScanKeep({keep:1, scan:1}))
+				break
+			}
 			//Artificial Lake
 			case('66'):{
 				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.ocean,1))
@@ -940,6 +945,11 @@ export class ProjectCardPlayedEffectService {
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('event','tag'))){costMod += 5}
 				break
 			}
+			//Research Outpost
+			case('51'):{
+				costMod += 1
+				break
+			}
 		}
 
 		return costMod
@@ -1001,7 +1011,6 @@ export class ProjectCardPlayedEffectService {
 	}
 	public static generateEventTriggerByTagGained(trigger: string, tagsIdList: number[], triggeringSelf: boolean = false): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
-		console.log('tag gained')
 		switch(trigger){
 			//Decomposers
 			case('19'):{
@@ -1047,6 +1056,12 @@ export class ProjectCardPlayedEffectService {
 				result.push(ProjectCardPlayedEffectService.createEventDraw(draw))
 				break
 			}
+			//Olympus Conference
+			case('44'):{
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('science','tag'))!=true){break}
+				result.push(ProjectCardPlayedEffectService.createEventDraw(1))
+				break
+			}
 			//Optimal Aerobraking
 			case('45'):{
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('event','tag'))!=true){break}
@@ -1057,8 +1072,14 @@ export class ProjectCardPlayedEffectService {
 				)
 				break
 			}
+			//Recycled Detritus
+			case('48'):{
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('event','tag'))!=true){break}
+				result.push(ProjectCardPlayedEffectService.createEventDraw(2))
+				break
+			}
 			//Bacterial Aggregate
-			case('222'):{
+			case('P19'):{
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
 				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock: 1}, trigger))
 				break
@@ -1083,17 +1104,23 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	public static generateEventTriggerByRessourceAddedToCard(triggerId: string, targetCard: PlayableCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
+	public static generateEventTriggerByRessourceAddedToCard(trigger: string, targetCard: PlayableCardModel, ressource: AdvancedRessourceStock): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 
-		switch(triggerId){
+		switch(trigger){
+			//Filter Feeders
+			case('P04'):{
+				if(ressource.name!='microbe'){break}
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"animal", valueStock:1}, trigger))
+				break
+			}
 			//Bacterial Aggregate
-			case('222'):{
+			case('P19'):{
 				if(ressource.name!!='microbe'||ressource.valueStock<1){break}
 
 				let stock = targetCard.getStockValue('microbe')
 				if(stock>=5){
-					result.push(ProjectCardPlayedEffectService.createEventDeactivateTrigger(triggerId))
+					result.push(ProjectCardPlayedEffectService.createEventDeactivateTrigger(trigger))
 				}
 
 				let limit = targetCard.getCardTriggerLimit()
@@ -1128,7 +1155,7 @@ export class ProjectCardPlayedEffectService {
 
 	public static generateEventTriggerByGlobalParameterIncrease(trigger: string, parameter: GlobalParameterValue): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
-		console.log(trigger,parameter)
+		console.log('global increase trigger')
 		switch(trigger){
 			//Arctic Algae
 			case('8'):{
@@ -1161,9 +1188,10 @@ export class ProjectCardPlayedEffectService {
 				break
 			}
 			//Pets
-			case('279'):{
+			case('F07'):{
+				console.log('pets')
 				if(parameter.name!=GlobalParameterNameEnum.infrastructure){break}
-				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, trigger))
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"animal", valueStock:parameter.steps}, trigger))
 				break
 			}
 			default:{

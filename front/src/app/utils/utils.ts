@@ -163,7 +163,7 @@ export class Utils {
 		return GlobalParameterColorEnum.purple
 	}
 	public static toTagId(tagType: TagType): number {
-		for(let i=0; i<GAME_TAG_LIST.length-1; i++){
+		for(let i=0; i<GAME_TAG_LIST.length; i++){
 			if(GAME_TAG_LIST[i]===tagType){
 				return i
 			}
