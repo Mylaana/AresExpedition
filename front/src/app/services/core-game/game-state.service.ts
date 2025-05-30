@@ -103,10 +103,6 @@ export class GameState{
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
 	}
 
-    addPlayer(playerName: string, playerColor: RGB): void {
-
-    };
-
     setPlayerIdList(playerIdList: myUUID[]):void{
         this.playerCount.next(playerIdList)
     }

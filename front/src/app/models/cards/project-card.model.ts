@@ -254,6 +254,8 @@ export class TriggerState {
             case('37'):{break} //Interplanetary Conference
 			case('42'):{break} //Media Group
 			case('51'):{break} //Research Outpost
+
+			case('C9'):{break} //Teractor
             default:{return}
         }
         this.activeCostModTrigger.push(cardCode)

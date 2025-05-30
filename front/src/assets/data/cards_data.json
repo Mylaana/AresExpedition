@@ -176,8 +176,7 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -1207,8 +1206,7 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "",
@@ -1440,8 +1438,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "",
@@ -2250,8 +2247,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -2597,8 +2593,7 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -2885,8 +2880,7 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "",
@@ -9619,8 +9613,7 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "greenProject",
         "vpNumber": "",
@@ -13630,7 +13623,7 @@
         "id": 1008,
         "card_code": "C8",
         "origin": "Base",
-        "cost": 12,
+        "cost": 0,
         "tagsId": [
             5
         ],
@@ -13687,7 +13680,7 @@
         "id": 1011,
         "card_code": "C11",
         "origin": "Base",
-        "cost": 12,
+        "cost": 0,
         "tagsId": [
             5
         ],
@@ -13744,7 +13737,7 @@
         "id": 1009,
         "card_code": "C9",
         "origin": "Base",
-        "cost": 12,
+        "cost": 0,
         "tagsId": [
             4
         ],
@@ -13801,7 +13794,7 @@
         "id": 10001,
         "card_code": "CF1",
         "origin": "FanMade",
-        "cost": 12,
+        "cost": 0,
         "tagsId": [
             4,
             1

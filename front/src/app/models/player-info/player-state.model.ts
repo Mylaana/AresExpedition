@@ -197,6 +197,9 @@ export class PlayerStateModel {
 		if(Number(card.vpNumber??'')!=0 && !isNaN(Number(card.vpNumber??''))){
 			this.addVP(parseInt(card.vpNumber??''))
 		}
+		if(cardType==='corporation'){
+			this.addRessource('megacredit', card.startingMegacredits??0)
+		}
 		this.setScalingVp()
 		this.setScalingProduction()
 	}
