@@ -95,9 +95,9 @@ public class JsonGameDataHandler {
 
         for(Map<String, Object> card: cards) {
             Object id = card.get("id");
-            if(!(card.get("cardType").equals("corporation")) && id instanceof Integer){
-                idList.add(Integer.parseInt(id.toString()));
-            }
+            if((card.get("cardType").equals("corporation")) && id instanceof Integer){continue;}
+            if((card.get("status").equals("blocked") && id instanceof Integer)){continue;}
+            idList.add(Integer.parseInt(id.toString()));
         }
 
         return idList;
