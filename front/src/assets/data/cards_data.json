@@ -54,7 +54,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 2,
@@ -342,7 +342,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 7,
@@ -456,7 +456,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 9,
@@ -568,7 +568,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 11,
@@ -967,7 +967,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 18,
@@ -1085,7 +1085,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 20,
@@ -1315,7 +1315,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 24,
@@ -1375,7 +1375,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 25,
@@ -1490,7 +1490,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 27,
@@ -1720,7 +1720,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 31,
@@ -1897,7 +1897,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 34,
@@ -2012,7 +2012,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 36,
@@ -2242,7 +2242,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 40,
@@ -2300,7 +2300,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 41,
@@ -2532,7 +2532,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 45,
@@ -2762,7 +2762,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 49,
@@ -2935,7 +2935,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 52,
@@ -2990,7 +2990,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 53,
@@ -3049,7 +3049,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 54,
@@ -3164,7 +3164,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 56,
@@ -3452,7 +3452,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 61,
@@ -3510,7 +3510,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 62,
@@ -12075,7 +12075,7 @@
             7
         ],
         "cardType": "blueProject",
-        "vpNumber": "",
+        "vpNumber": "*",
         "prerequisiteTresholdType": "",
         "prerequisiteType": "",
         "prerequisiteTresholdValue": 0,
@@ -12123,7 +12123,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 213,
@@ -12587,7 +12587,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 229,
@@ -13219,7 +13219,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 280,
