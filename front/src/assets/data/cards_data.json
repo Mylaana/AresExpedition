@@ -684,7 +684,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 13,
@@ -741,7 +741,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 14,
@@ -796,7 +796,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 15,
@@ -853,7 +853,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 16,
@@ -910,7 +910,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 17,
@@ -1227,7 +1227,7 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_heat$$ressource_heat$: $ressource_card$",
+            "en": "$other_arrow$$skipline$-$ressource_heat$$ressource_heat$: $ressource_card$",
             "fr": ""
         },
         "effectText": {
@@ -1257,7 +1257,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 23,
@@ -1604,7 +1604,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 29,
@@ -1838,7 +1838,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 33,
@@ -1954,7 +1954,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 35,
@@ -2183,7 +2183,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 39,
@@ -2357,7 +2357,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 42,
@@ -2707,7 +2707,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 48,
@@ -2817,7 +2817,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 50,
@@ -3107,7 +3107,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 55,
@@ -3221,7 +3221,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 57,
@@ -3278,7 +3278,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 58,
@@ -3337,7 +3337,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 59,
@@ -3394,7 +3394,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 60,
@@ -3567,7 +3567,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 63,
@@ -3625,7 +3625,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 64,
@@ -3682,7 +3682,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 65,
@@ -12238,7 +12238,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 215,
@@ -13277,7 +13277,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 281,
@@ -13627,8 +13627,8 @@
         "status": "implemented"
     },
     {
-        "id": 1000,
-        "card_code": "1000",
+        "id": 1008,
+        "card_code": "C8",
         "origin": "Base",
         "cost": 12,
         "tagsId": [
@@ -13684,8 +13684,8 @@
         "status": "filled"
     },
     {
-        "id": 1001,
-        "card_code": "1001",
+        "id": 1011,
+        "card_code": "C11",
         "origin": "Base",
         "cost": 12,
         "tagsId": [
@@ -13741,8 +13741,8 @@
         "status": "filled"
     },
     {
-        "id": 1002,
-        "card_code": "1002",
+        "id": 1009,
+        "card_code": "C9",
         "origin": "Base",
         "cost": 12,
         "tagsId": [
@@ -13798,8 +13798,8 @@
         "status": "filled"
     },
     {
-        "id": 1003,
-        "card_code": "1003",
+        "id": 10001,
+        "card_code": "CF1",
         "origin": "FanMade",
         "cost": 12,
         "tagsId": [

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.ares_expedition.dto.api.CreatePlayerDTO;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.CardTypeEnum;
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.GlobalConstants;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
@@ -36,16 +37,14 @@ public class Game {
     
     Game(NewGameConfigDTO gameConfig){
         this.gameId = gameConfig.getGameId();
-        this.deck = JsonGameDataHandler.getCardsIdList();
+        this.deck = JsonGameDataHandler.getCardsIdList(CardTypeEnum.PROJECT);
         this.shuffleDeck(this.deck);
         this.currentPhase = PhaseEnum.PLANIFICATION;
         this.selectedPhase.add(currentPhase);
         this.groupPlayerState = PlayerState.createGamePlayerStates(gameConfig);
         this.gameStatus = GameStatusEnum.NEW_GAME;
         this.globalParameters = GlobalParameter.createGameGlobalParameters();
-        this.deckCorporations.add(1000);
-        this.deckCorporations.add(1001);
-        this.deckCorporations.add(1002);
+        this.deckCorporations = JsonGameDataHandler.getCardsIdList(CardTypeEnum.CORPORATION);
         this.shuffleDeck(this.deckCorporations);
 
         for(CreatePlayerDTO playerConfig: gameConfig.getPlayers()){
