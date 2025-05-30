@@ -49,6 +49,10 @@ export class ProjectCardPrerequisiteEffectService {
 			case('46'):{
 				return this.isTagNumberOk('science', 4, 'min', clientState)
 			}
+			//Symbiotic Fungus
+			case('57'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
 			//Advanced Ecosystems
 			case('65'):{
 				return this.isTagNumberOk('animal', 1, 'min', clientState)

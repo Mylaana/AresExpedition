@@ -125,6 +125,9 @@ export class PlayableCardModel{
                 }
                 break
             }
+			case('blueProject'):{
+				return this.cardType === 'blueProject'
+			}
         }
         return false
     }

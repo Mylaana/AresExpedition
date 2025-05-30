@@ -45,6 +45,16 @@ export class ProjectCardScalingVPService {
 					totalScalingVp += Math.floor(card.getStockValue('science') / 2)
 					break
 				}
+				//Tardigrades
+				case("58"):{
+					totalScalingVp += Math.floor(card.getStockValue('microbe') / 3)
+					break
+				}
+				//Think Tank
+				case("59"):{
+					totalScalingVp += Math.floor(clientState.getProjectPlayedIdList({type:'blueProject'}).length / 3)
+					break
+				}
 				//Io Mining Industry
 				case("153"):{
 					totalScalingVp += clientState.getTagsOfType('jovian')
@@ -53,11 +63,6 @@ export class ProjectCardScalingVPService {
 				//Pets
 				case("F07"):{
 					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
-					break
-				}
-				//Filter Feeders
-				case("P04"):{
-					totalScalingVp += Math.floor(card.getStockValue('animal') / 3)
 					break
 				}
 			}

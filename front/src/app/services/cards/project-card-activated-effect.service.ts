@@ -110,6 +110,30 @@ export class ProjectCardActivatedEffectService {
 				result.push(this.createEventDraw(1))
 				break
 			}
+			//Steelworks
+			case('56'):{
+				result.push(this.createEventAddRessource([
+					{name: "heat", valueStock: -6},
+					{name: "megacredit", valueStock: 2}
+				]))
+				result.push(this.createEventIncreaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1))
+				break
+			}
+			//Symbiotic Fungus
+			case('57'):{
+				result.push(this.createEventAddRessourceToSelectedCard({name:'microbe', valueStock:1}))
+				break
+			}
+			//Tardigrades
+			case('58'):{
+				result.push(this.createEventAddRessourceToCardId({name:'microbe', valueStock:1}, card.cardCode))
+				break
+			}
+			//Think Tank
+			case('59'):{
+				result.push(this.createEventDraw(1))
+				break
+			}
 			default:{
 				return undefined
 			}
@@ -171,6 +195,20 @@ export class ProjectCardActivatedEffectService {
 			//Matter Manufacturing
 			case('41'):{
 				if(!this.checkPlayerHasBaseRessourceStock(clientState, {name: 'megacredit', valueStock: 1})){return false}
+				break
+			}
+			//Steelworks
+			case('56'):{
+				if(!this.checkPlayerHasBaseRessourceStock(clientState, {name: 'heat', valueStock: 6})){return false}
+				break
+			}
+			//Symbiotic Fungus
+			case('57'):{break}
+			//Tardigrades
+			case('58'):{break}
+			//Steelworks
+			case('59'):{
+				if(!this.checkPlayerHasBaseRessourceStock(clientState, {name: 'megacredit', valueStock: 2})){return false}
 				break
 			}
 			default:{

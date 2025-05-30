@@ -73,14 +73,14 @@ Create Event type :
     - removing any ressource in list on played card   
     - adding any ressource in list on played card   
     - new builder event   
-    - discard type watching discarded card datas (mars univ)   
+    - discard type/Quantity watching discarded card datas (mars univ/49)   
     - "action portal" type event casting subsequent events   
 Create trigger hooks :
     - on card activation   
 Activation:
     - Multiple activation options   
     - Scaling activation cost   
-    - Droplist on activation (card 32)   
+    - Droplist/Custom value selection on activation (card 32/47)   
 Other:
     - Need prerequisite offset mechanic   
     - Standard tech reduction mechanic   
