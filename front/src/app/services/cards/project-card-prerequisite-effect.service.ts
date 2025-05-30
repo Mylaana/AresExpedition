@@ -35,7 +35,6 @@ export class ProjectCardPrerequisiteEffectService {
 			}
 			//Livestock
 			case('39'):{
-				return true
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', clientState)
 			}
 			//Physics Complex
