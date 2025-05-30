@@ -870,6 +870,11 @@ export class ProjectCardPlayedEffectService {
 				]))
 				break
 			}
+			//Matter Generator
+			case('P06'):{
+				result.push(this.createEventDraw(2))
+				break
+			}
 			//Processed Metals
 			case('P07'):{
 				result.push(this.createEventAddProduction({name:'titanium', valueStock:2}))

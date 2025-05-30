@@ -134,6 +134,12 @@ export class ProjectCardActivatedEffectService {
 				result.push(this.createEventDraw(1))
 				break
 			}
+			//Matter Generator
+			case('P06'):{
+				result.push(this.createEventDiscard(1))
+				result.push(this.createEventAddRessource({name:'megacredit', valueStock:6}))
+				break
+			}
 			default:{
 				return undefined
 			}
@@ -209,6 +215,11 @@ export class ProjectCardActivatedEffectService {
 			//Steelworks
 			case('59'):{
 				if(!this.checkPlayerHasBaseRessourceStock(clientState, {name: 'megacredit', valueStock: 2})){return false}
+				break
+			}
+			//Matter Generator
+			case('P06'):{
+				if(!this.checkPlayerHasCardsInHand(clientState, 1)){return false}
 				break
 			}
 			default:{
