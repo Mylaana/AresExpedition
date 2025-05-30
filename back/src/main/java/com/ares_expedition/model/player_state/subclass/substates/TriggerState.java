@@ -4,13 +4,13 @@ import java.util.List;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.TriggerStateDTO;
 
 public class TriggerState {
-    List<Number> playedCardsId;
-    List<Number> activeCardsId;
-    List<Number> activeOnRessourceAddedToCard;
-    List<Number> activeOnParameterIncrease;
-    List<Number> activeOnPlayedCard;
-    List<Number> activeOnGainedTag;
-    List<Number> activeCostModTrigger;
+    List<String> playedCardsId;
+    List<String> activeCardsId;
+    List<String> activeOnRessourceAddedToCard;
+    List<String> activeOnParameterIncrease;
+    List<String> activeOnPlayedCard;
+    List<String> activeOnGainedTag;
+    List<String> activeCostModTrigger;
 
     public TriggerState(){
     }
@@ -25,46 +25,46 @@ public class TriggerState {
         this.activeCostModTrigger = dto.getActiveCostModTrigger();
     }
 
-    public List<Number> getPlayedCardsId() {
+    public List<String> getPlayedCardsId() {
         return playedCardsId;
     }
-    public void setPlayedCardsId(List<Number> playedCardsId) {
+    public void setPlayedCardsId(List<String> playedCardsId) {
         this.playedCardsId = playedCardsId;
     }
-    public List<Number> getActiveCardsId() {
+    public List<String> getActiveCardsId() {
         return activeCardsId;
     }
-    public void setActiveCardsId(List<Number> activeCardsId) {
+    public void setActiveCardsId(List<String> activeCardsId) {
         this.activeCardsId = activeCardsId;
     }
-    public List<Number> getActiveOnRessourceAddedToCard() {
+    public List<String> getActiveOnRessourceAddedToCard() {
         return activeOnRessourceAddedToCard;
     }
-    public void setActiveOnRessourceAddedToCard(List<Number> activeOnRessourceAddedToCard) {
+    public void setActiveOnRessourceAddedToCard(List<String> activeOnRessourceAddedToCard) {
         this.activeOnRessourceAddedToCard = activeOnRessourceAddedToCard;
     }
-    public List<Number> getActiveOnParameterIncrease() {
+    public List<String> getActiveOnParameterIncrease() {
         return activeOnParameterIncrease;
     }
-    public void setActiveOnParameterIncrease(List<Number> activeOnParameterIncrease) {
+    public void setActiveOnParameterIncrease(List<String> activeOnParameterIncrease) {
         this.activeOnParameterIncrease = activeOnParameterIncrease;
     }
-    public List<Number> getActiveOnPlayedCard() {
+    public List<String> getActiveOnPlayedCard() {
         return activeOnPlayedCard;
     }
-    public void setActiveOnPlayedCard(List<Number> activeOnPlayedCard) {
+    public void setActiveOnPlayedCard(List<String> activeOnPlayedCard) {
         this.activeOnPlayedCard = activeOnPlayedCard;
     }
-    public List<Number> getActiveOnGainedTag() {
+    public List<String> getActiveOnGainedTag() {
         return activeOnGainedTag;
     }
-    public void setActiveOnGainedTag(List<Number> activeOnGainedTag) {
+    public void setActiveOnGainedTag(List<String> activeOnGainedTag) {
         this.activeOnGainedTag = activeOnGainedTag;
     }
-    public List<Number> getActiveCostModTrigger() {
+    public List<String> getActiveCostModTrigger() {
         return activeCostModTrigger;
     }
-    public void setActiveCostModTrigger(List<Number> activeCostModTrigger) {
+    public void setActiveCostModTrigger(List<String> activeCostModTrigger) {
         this.activeCostModTrigger = activeCostModTrigger;
     }
 
