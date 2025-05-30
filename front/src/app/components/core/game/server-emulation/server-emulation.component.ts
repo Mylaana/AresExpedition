@@ -154,7 +154,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [12]
+		let cardDrawList: number[] = [41]
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
 		this.gameStateService.cleanAndNextEventQueue()
@@ -204,13 +204,15 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 			if(ressource.id!=index){continue}
 			switch(index){
 				case(0):{
-					ressource.valueStock+=10
-					this.gameStateService.updateClientState(state)
+					this.gameStateService.addRessourceToClient([{name:'megacredit', valueStock:10}])
 					return
 				}
-				case(1):case(2):{
-					ressource.valueStock+=5
-					this.gameStateService.updateClientState(state)
+				case(1):{
+					this.gameStateService.addRessourceToClient([{name:'heat', valueStock:5}])
+					break
+				}
+				case(2):{
+					this.gameStateService.addRessourceToClient([{name:'plant', valueStock:5}])
 					return
 				}
 				case(3):case(4):{

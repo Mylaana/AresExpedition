@@ -55,6 +55,7 @@ Events related to card played not savec in eventstate (see a card with oceanflip
 Hand discard getting all cards during scan/keep (even the selected ones)   
 Adding oxygen via event increases forests! (Towing a comet)   
 Adding Forest via actionPhase doesnt trigger oxygen based triggers (ex: cardCode 33)   
+Card Activation cost check not being refreshed on clientstate refresh !   
 
 
 ## Must have for v1 :
@@ -62,6 +63,9 @@ Adding Forest via actionPhase doesnt trigger oxygen based triggers (ex: cardCode
 root services: switch to static if possible   
 TriggerState: switch out trigger id checks from model to a service   
 Rework Buildable system in playableCardComponent   
+Merge services :
+    - play Prerequisite & activated cost check   
+    - played effect & activated effect (+triggers?)   
 
 ### Cards
 Implement missing cards & corps   
@@ -76,10 +80,13 @@ Create trigger hooks :
 Activation:
     - Multiple activation options   
     - Scaling activation cost   
+    - Droplist on activation (card 32)   
 Other:
     - Need prerequisite offset mechanic   
     - Standard tech reduction mechanic   
     - Conditionnal scan/keep (based on tag)   
+    - Conditionnal scan result (card 13)   
+    - Droplist
 
 
 ### Misc

@@ -99,7 +99,7 @@ export class EventHandler {
 		let event = this.currentEvent as EventCardActivator
 		event.activationLog[input.card.id.toString()] = input.card.activated
 		if(input.twice){event.doubleActivationCount += 1}
-		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card)
+		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card, this.gameStateService.getClientState())
 		if(!addEvents){return}
 		this.gameStateService.addEventQueue(addEvents,'first')
 	}

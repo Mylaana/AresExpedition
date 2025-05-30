@@ -29,6 +29,10 @@ export class ProjectCardPrerequisiteEffectService {
 			case('12'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.white, 'min', clientState)
 			}
+			//Caretaker Contract
+			case('14'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
 			//Fish
 			case('30'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
@@ -272,7 +276,7 @@ export class ProjectCardPrerequisiteEffectService {
 	private static isRessourcesNumberOk(ressource: RessourceType, quantity: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
 		let check = clientState.getRessourceInfoFromType(ressource)
 		if(!check){return false}
-		return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:2, value:check.valueStock})
+		return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:quantity, value:check.valueStock})
 	}
 	private static isTagNumberOk(tagType: TagType, requiredTagNumber: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
 		let tags = clientState.getTags()
