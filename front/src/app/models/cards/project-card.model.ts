@@ -228,6 +228,7 @@ export class TriggerState {
     }
     private addTriggerOnGainedTag(cardId: number): void {
         switch(cardId){
+			case(19):{break} //Decomposers
             case(25):{break} //Energy Subsidies
             case(37):{break} //Interplanetary Conference
             case(45):{break} //Optimal aerobreaking
@@ -238,6 +239,7 @@ export class TriggerState {
     }
     private addTriggerToCostMod(cardId: number): void {
         switch(cardId){
+			case(23):{break}
             case(25):{break} //Energy Subsidies
             case(37):{break} //Interplanetary Conference
 			case(42):{break} //Media Group

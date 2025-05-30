@@ -28,7 +28,11 @@ export class ProjectCardPlayedEffectService {
 			case('2'):{
 				clientstate.increaseProductionModValue('steel')
 				clientstate.increaseProductionModValue('titanium')
-				console.log(clientstate)
+				break
+			}
+			//Composting Factory
+			case('17'):{
+				clientstate.addSellCardValueMod(1)
 				break
 			}
 			//Decomposing Fungus
@@ -904,6 +908,11 @@ export class ProjectCardPlayedEffectService {
 		let costMod: number = 0
 
 		switch(triggerId){
+			//Earth Catapult
+			case(23):{
+				costMod += 2
+				break
+			}
 			//Energy Subsidies
 			case(25):{
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('power','tag'))===false){break}
@@ -955,40 +964,61 @@ export class ProjectCardPlayedEffectService {
 
 		return result
 	}
-	public static getTriggerByTagGained(playedCard: PlayableCardModel, triggerIdList: number[]): EventBaseModel[] | undefined{
+	public static getTriggerByPlayedCard(playedCard: PlayableCardModel, triggerIdList: number[]): EventBaseModel[] | undefined{
 		if(triggerIdList.length===0){return}
 		let events: EventBaseModel[] = []
 
 		for(let triggerId of triggerIdList){
-			let newEvent = this.generateEventTriggerByTagGained(triggerId, playedCard)
+			let newEvent = this.generateEventTriggerByTagGained(triggerId, playedCard.tagsId, triggerId===playedCard.id)
 			if(newEvent){
 				events = events.concat(newEvent)
 			}
 		}
 		return events
 	}
-	public static generateEventTriggerByTagGained(triggerId: number, playedCard: PlayableCardModel): EventBaseModel[] | undefined {
-		let result: EventBaseModel[] = []
-		let playedCardTags = playedCard.tagsId
-		let cardPlayedIsTheTrigger = triggerId===playedCard.id
+	public static getTriggerByTagGained(tagList: number[], triggerIdList: number[]): EventBaseModel[] | undefined{
+		if(triggerIdList.length===0){return}
+		let events: EventBaseModel[] = []
 
+		for(let triggerId of triggerIdList){
+			let newEvent = this.generateEventTriggerByTagGained(triggerId, tagList, false)
+			if(newEvent){
+				events = events.concat(newEvent)
+			}
+		}
+		return events
+	}
+	public static generateEventTriggerByTagGained(triggerId: number, tagsIdList: number[], triggeringSelf: boolean = false): EventBaseModel[] | undefined {
+		let result: EventBaseModel[] = []
+		console.log('tag gained')
 		switch(triggerId){
+			//Decomposers
+			case(19):{
+				let triggerred: number = 0
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('plant','tag'))){triggerred+=1}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('animal','tag'))){triggerred+=1}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('microbe','tag'))){triggerred+=1}
+				for(let i=0; i<triggerred; i++){
+					result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock:1}, 19))
+				}
+				break
+			}
 			//Energy Subsidies
 			case(25):{
-				if(playedCardTags.includes(GlobalInfo.getIdFromType('power','tag'))!=true){break}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('power','tag'))!=true){break}
 				result.push(ProjectCardPlayedEffectService.createEventDraw(1))
 				break
 			}
 			//Interplanetary Conference
 			case(37):{
 				//self triggering excluded
-				if(cardPlayedIsTheTrigger===true){break}
-				if(playedCardTags.includes(GlobalInfo.getIdFromType('earth','tag'))!=true
-					&& playedCardTags.includes(GlobalInfo.getIdFromType('jovian','tag'))!=true
+				if(triggeringSelf===true){break}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true
+					&& tagsIdList.includes(GlobalInfo.getIdFromType('jovian','tag'))!=true
 				){break}
 				//triggers for each tag in the played card
 				let draw = 0
-				for(let tag of playedCardTags){
+				for(let tag of tagsIdList){
 					if(tag === GlobalInfo.getIdFromType('earth','tag') || tag === GlobalInfo.getIdFromType('jovian','tag')){
 						draw += 1
 					}
@@ -998,7 +1028,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Optimal Aerobraking
 			case(45):{
-				if(playedCardTags.includes(GlobalInfo.getIdFromType('event','tag'))!=true){break}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('event','tag'))!=true){break}
 				result.push(
 					ProjectCardPlayedEffectService.createEventAddRessource([
 					{name: 'plant', valueStock: 2},
@@ -1008,7 +1038,7 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Bacterial Aggregate
 			case(222):{
-				if(playedCardTags.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
 				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock: 1},triggerId))
 				break
 			}

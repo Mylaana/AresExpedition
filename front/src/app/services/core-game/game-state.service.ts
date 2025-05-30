@@ -1,7 +1,7 @@
 import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { myUUID, PlayableCardType, RGB } from "../../types/global.type";
+import { myUUID, PlayableCardType, RGB, TagType } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
@@ -445,7 +445,7 @@ export class GameState{
 
         let onTagGainedTriggers = state.getTriggersIdOnGainedTag()
         if(onTagGainedTriggers.length!=0){
-            let eventsOnTagGained = ProjectCardPlayedEffectService.getTriggerByTagGained(card, onTagGainedTriggers)
+            let eventsOnTagGained = ProjectCardPlayedEffectService.getTriggerByTagGained(card.tagsId, onTagGainedTriggers)
             if(eventsOnTagGained!=undefined){
                 events = events.concat(eventsOnTagGained)
             }
@@ -764,5 +764,18 @@ export class GameState{
 		let state = this.getClientState()
 		state.addTR(quantity)
 		this.updateClientState(state)
+	}
+	public addTagFromOtherSourceToClient(type: TagType){
+		console.log('')
+		let state = this.getClientState()
+		let tagId = Utils.toTagId(type)
+		state.addTagFromOtherSource(tagId, 1)
+		this.updateClientState(state)
+
+		if(state.getTriggersIdOnGainedTag().length>0){
+			let newEvents = ProjectCardPlayedEffectService.getTriggerByTagGained([tagId], state.getTriggersIdOnGainedTag())
+			if(!newEvents){return}
+			this.addEventQueue(newEvents,'first')
+		}
 	}
 }

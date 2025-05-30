@@ -70,7 +70,7 @@ Create Event type :
     - new builder event   
 Create trigger hooks :
     - on card activation   
-    
+Add "action portal" type event casting subsequent events
 
 ### Misc
 Add victory check   

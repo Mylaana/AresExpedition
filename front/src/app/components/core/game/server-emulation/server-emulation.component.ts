@@ -9,7 +9,7 @@ import { RxStompService } from '../../../../services/websocket/rx-stomp.service'
 import { WebsocketQueryMessageFactory } from '../../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
-import { myUUID } from '../../../../types/global.type';
+import { myUUID, TagType } from '../../../../types/global.type';
 import { GlobalParameterNameEnum } from '../../../../enum/global.enum';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
@@ -154,7 +154,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [8]
+		let cardDrawList: number[] = [23]
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
 		this.gameStateService.cleanAndNextEventQueue()
@@ -178,9 +178,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		return ''
 	}
 	addTag(index: number) {
-		let state = this.gameStateService.getClientState()
-		let tags = state.addTagFromOtherSource(index, 1)
-		this.gameStateService.updateClientState(state)
+		this.gameStateService.addTagFromOtherSourceToClient(this.getTagName(index) as TagType)
 	}
 	resetRessource(): void {
 		let state = this.gameStateService.getClientState()
