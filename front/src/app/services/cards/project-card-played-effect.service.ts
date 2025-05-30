@@ -950,6 +950,7 @@ export class ProjectCardPlayedEffectService {
 		let result: EventBaseModel[] = []
 
 		switch(triggerId){
+			//Antigravity Technology
 			case('6'):{
 				result.push(this.createEventAddRessource([
 					{name: 'plant', valueStock: 2},
@@ -1004,13 +1005,12 @@ export class ProjectCardPlayedEffectService {
 				break
 			}
 			//Ecological Zone
-			case('23'):{
+			case('24'):{
 				let triggerred: number = 0
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('plant','tag'))){triggerred+=1}
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('animal','tag'))){triggerred+=1}
-				if(tagsIdList.includes(GlobalInfo.getIdFromType('microbe','tag'))){triggerred+=1}
 				for(let i=0; i<triggerred; i++){
-					result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+					result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'animal', valueStock:1}, trigger))
 				}
 				break
 			}
