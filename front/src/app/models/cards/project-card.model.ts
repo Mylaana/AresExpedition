@@ -212,8 +212,11 @@ export class TriggerState {
     }
     private addTriggerOnParameter(cardCode: string): void {
         switch(cardCode){
+			case('8'):{break} //Arctic Algae
+			case('30'):{break} //Fish
+			case('33'):{break} //Herbivore
+			case('39'):{break} //Herbivore
             case('46'):{break} //Physics Complex
-            case('8'):{break} //Arctic Algae
 			case('279'):{break} //Pets
             default:{return}
         }

@@ -25,6 +25,18 @@ export class ProjectCardPrerequisiteEffectService {
 			case('8'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
 			}
+			//Fish
+			case('30'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//Herbivores
+			case('33'):{
+				return this.isOceanOk(5, 'min', clientState)
+			}
+			//Livestock
+			case('39'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', clientState)
+			}
 			//Physics Complex
 			case('46'):{
 				return this.isTagNumberOk('science', 4, 'min', clientState)
@@ -262,7 +274,7 @@ export class ProjectCardPrerequisiteEffectService {
 		}
 		return false
 	}
-	private static isGlobalParameterOk(parameter: GlobalParameterNameEnum, color: GlobalParameterColorEnum, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
+	private static isGlobalParameterOk(parameter: Extract<GlobalParameterNameEnum, GlobalParameterNameEnum.infrastructure | GlobalParameterNameEnum.oxygen | GlobalParameterNameEnum.temperature>, color: GlobalParameterColorEnum, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
 		const colorList: GlobalParameterColorEnum[] = [GlobalParameterColorEnum.purple, GlobalParameterColorEnum.red, GlobalParameterColorEnum.yellow, GlobalParameterColorEnum.white]
 		let currentColor = clientState.getGlobalParameterColorAtPhaseBeginning(parameter)
 		if(treshold==="equal"){

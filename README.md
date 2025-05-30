@@ -54,6 +54,7 @@ DRAW QUERY/RESULT are not 'saved' in eventstate, resulting in card disapearing i
 Events related to card played not savec in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Hand discard getting all cards during scan/keep (even the selected ones)   
 Adding oxygen via event increases forests! (Towing a comet)   
+Adding Forest via actionPhase doesnt trigger oxygen based triggers (ex: cardCode 33)   
 
 
 ## Must have for v1 :
@@ -68,9 +69,10 @@ Create Event type :
     - removing any ressource in list on played card   
     - adding any ressource in list on played card   
     - new builder event   
+    - discard type watching discarded card datas (mars univ)   
+    - "action portal" type event casting subsequent events   
 Create trigger hooks :
     - on card activation   
-Add "action portal" type event casting subsequent events
 
 ### Misc
 Add victory check   

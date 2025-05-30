@@ -2238,7 +2238,9 @@
             "en": "$other_oxygen$",
             "fr": ""
         },
-        "stockable": [],
+        "stockable": [
+            "animal"
+        ],
         "startingMegacredits": 0,
         "status": "filled"
     },

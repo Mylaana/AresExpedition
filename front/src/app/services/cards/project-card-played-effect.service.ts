@@ -40,9 +40,19 @@ export class ProjectCardPlayedEffectService {
 				ProjectCardPlayedEffectService.createEventAddRessourceToSelectedCard({name: 'microbe',valueStock: 2})
 				break
 			}
+			//Extended Ressourcess
+			case('26'):{
+				result.push(ProjectCardPlayedEffectService.createEventIncreaseResearchScanKeep({keep:1, scan:0}))
+				break
+			}
 			//Farming Co-ops
 			case('29'):{
 				result.push(this.createEventAddRessource({name: 'plant',valueStock: 3}))
+				break
+			}
+			//Interplanetary Relations
+			case('35'):{
+				result.push(this.createEventIncreaseResearchScanKeep({keep:1, scan:1}))
 				break
 			}
 			//Interns
@@ -1116,26 +1126,44 @@ export class ProjectCardPlayedEffectService {
 		return events
 	}
 
-	public static generateEventTriggerByGlobalParameterIncrease(triggerId: string, parameter: GlobalParameterValue): EventBaseModel[] | undefined {
+	public static generateEventTriggerByGlobalParameterIncrease(trigger: string, parameter: GlobalParameterValue): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
-
-		switch(triggerId){
+		console.log(trigger,parameter)
+		switch(trigger){
 			//Arctic Algae
 			case('8'):{
 				if(parameter.name!=GlobalParameterNameEnum.ocean){break}
 				result.push(ProjectCardPlayedEffectService.createEventAddRessource({name:'plant', valueStock:4}))
 				break
 			}
+			//Fish
+			case('30'):{
+				if(parameter.name!=GlobalParameterNameEnum.ocean){break}
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"animal", valueStock:parameter.steps}, trigger))
+				break
+			}
+			//Herbivores
+			case('33'):{
+				if(parameter.name===GlobalParameterNameEnum.infrastructure){break} // triggers on all but infrastructure
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"animal", valueStock:parameter.steps}, trigger))
+				break
+			}
+			//Livestock
+			case('39'):{
+				if(parameter.name!=GlobalParameterNameEnum.temperature){break}
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"animal", valueStock:parameter.steps}, trigger))
+				break
+			}
 			//Physiscs Complex
 			case('46'):{
 				if(parameter.name!=GlobalParameterNameEnum.temperature){break}
-				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, trigger))
 				break
 			}
 			//Pets
 			case('279'):{
 				if(parameter.name!=GlobalParameterNameEnum.infrastructure){break}
-				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, triggerId))
+				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"science", valueStock:parameter.steps}, trigger))
 				break
 			}
 			default:{

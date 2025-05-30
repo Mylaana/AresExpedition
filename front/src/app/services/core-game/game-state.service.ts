@@ -493,7 +493,8 @@ export class GameState{
 		this.updateClientState(state)
 
 		let triggers = state.getTriggersIdOnParameterIncrease()
-        if(triggers.length>0){
+		console.log('parameter increase', triggers)
+		if(triggers.length>0){
 			newEvents = newEvents.concat(ProjectCardPlayedEffectService.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
 		}
         if(newEvents.length===0){return}

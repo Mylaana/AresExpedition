@@ -78,7 +78,7 @@ export class PlayerStateModel {
 	getTotalVP(): number {return this.scoreState.getTotalVP()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}
 	setScalingVp(){
-		this.scoreState.setScalingVP(ProjectCardScalingVPService.getScalingVP(this.getProjectPlayedModelList(), this))
+		this.scoreState.setScalingVP(ProjectCardScalingVPService.getScalingVP(this))
 	}
 	getTR(): number {return this.scoreState.getTR()}
 	addTR(tr: number){this.scoreState.addTR(tr)}
