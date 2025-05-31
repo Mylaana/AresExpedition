@@ -13679,7 +13679,7 @@
         },
         "stockable": [],
         "startingMegacredits": 48,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 1002,
@@ -13736,7 +13736,7 @@
         },
         "stockable": [],
         "startingMegacredits": 27,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1003,
@@ -13793,7 +13793,7 @@
         },
         "stockable": [],
         "startingMegacredits": 28,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1004,
@@ -13850,7 +13850,7 @@
         },
         "stockable": [],
         "startingMegacredits": 46,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 1005,
@@ -13907,7 +13907,7 @@
         },
         "stockable": [],
         "startingMegacredits": 33,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1006,
@@ -13965,7 +13965,7 @@
         },
         "stockable": [],
         "startingMegacredits": 27,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1007,
@@ -14022,7 +14022,7 @@
         },
         "stockable": [],
         "startingMegacredits": 20,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 1008,
@@ -14191,7 +14191,7 @@
         },
         "stockable": [],
         "startingMegacredits": 40,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 1011,
@@ -14303,7 +14303,7 @@
         },
         "stockable": [],
         "startingMegacredits": 35,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1013,
@@ -14331,7 +14331,7 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_animal$ / $tag_plant$:$skipline$+1$ressource_animal$",
+            "en": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$",
             "fr": ""
         },
         "effectText": {
@@ -14363,7 +14363,7 @@
             "animal"
         ],
         "startingMegacredits": 43,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 1014,
@@ -14420,7 +14420,7 @@
         },
         "stockable": [],
         "startingMegacredits": 50,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1015,
@@ -14477,7 +14477,7 @@
         },
         "stockable": [],
         "startingMegacredits": 40,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1016,
@@ -14534,7 +14534,7 @@
         },
         "stockable": [],
         "startingMegacredits": 36,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1017,
@@ -14591,7 +14591,7 @@
         },
         "stockable": [],
         "startingMegacredits": 48,
-        "status": "filled"
+        "status": "blocked"
     },
     {
         "id": 1018,
@@ -14633,7 +14633,7 @@
             "fr": ""
         },
         "playedText": {
-            "en": "You start with 43MC.$skipline$At the start of the game, +5$ressource_card$ -4$ressource_card$",
+            "en": "You start with 43MC.$skipline$At the start of the game, + $ressource_card$$ressource_card$$ressource_card$$ressource_card$$ressource_card$$skipline$- $ressource_card$$ressource_card$$ressource_card$$ressource_card$",
             "fr": "Vous commencez avec 43MC."
         },
         "prerequisiteText": {
@@ -14646,7 +14646,7 @@
         },
         "stockable": [],
         "startingMegacredits": 43,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 10001,

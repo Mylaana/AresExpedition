@@ -222,6 +222,8 @@ export class TriggerState {
 			case('39'):{break} //Herbivore
             case('46'):{break} //Physics Complex
 			case('F07'):{break} //Pets
+
+			case('CP06'):{break} //Zetasel
             default:{return}
         }
         this.activeOnParameterIncrease.push(cardCode)
@@ -245,6 +247,7 @@ export class TriggerState {
             case('P19'):{break} //Bacterial Aggregate
 
 			case('C8'):{break} //Saturn Systems
+			case('CP01'):{break} //Arklight
 			case('CF1'):{break} //Point Luna
             default:{return}
         }
@@ -258,6 +261,8 @@ export class TriggerState {
 			case('42'):{break} //Media Group
 			case('51'):{break} //Research Outpost
 
+			case('C1'):{break} //CreditCor
+			case('C4'):{break} //Interplanetary Cinematics
 			case('C9'):{break} //Teractor
 			case('C11'):{break} //Thorgate
             default:{return}

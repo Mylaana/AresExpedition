@@ -94,6 +94,8 @@ Add victory check
 
 ### Interface
 Design production phase screen   
+Add scan/keep modifier display   
+Always display steel/titanium cost mod   
 
 ### CI/CD
 Frontend automated testing: Ongoing   

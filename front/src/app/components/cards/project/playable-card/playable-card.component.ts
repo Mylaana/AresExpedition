@@ -80,7 +80,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	override ngOnInit() {
 		super.ngOnInit()
 		this.projectCard.tagsUrl = []
-		this.cardCost.initialize(this.projectCard.costInitial)
+		this.cardCost.initialize(this.projectCard.costInitial, this.projectCard)
 
 		this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
 		// fills tagUrl

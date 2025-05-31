@@ -902,15 +902,36 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddTR(clientstate.getMilestoneCompleted()))
 				break
 			}
-
+			//Interplanetary Cinematics
+			case('C4'):{
+				result.push(this.createEventAddProduction({name:'steel', valueStock:1}))
+				break
+			}
+			//Phobolog
+			case('C7'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
+				clientstate.increaseProductionModValue('titanium')
+				break
+			}
 			//Saturn Systems
 			case('C8'):{
 				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
 				break
 			}
+			//Tharsis Republic
+			case('C10'):{
+				result.push(this.createEventIncreaseResearchScanKeep({keep:1, scan:1}))
+				break
+			}
 			//Thorgate
 			case('C11'):{
 				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
+				break
+			}
+			//Zetasel
+			case('CP06'):{
+				result.push(this.createEventDraw(5))
+				result.push(this.createEventDiscard(4))
 				break
 			}
 			//Point Luna
@@ -925,7 +946,7 @@ export class ProjectCardPlayedEffectService {
 		return result
 	}
 
-	getCostModFromTriggers(mod: CostMod): number {
+	getCostModFromTriggers(mod: CostMod, card?: PlayableCardModel): number {
 		if(!mod || !mod.playedTriggersList){return 0}
 		let newMod: number = 0
 		let tags: number[] = []
@@ -934,12 +955,12 @@ export class ProjectCardPlayedEffectService {
 			tags = mod.tagList.filter((e, i) => e !== -1);
 		}
 		for(let triggerId of mod.playedTriggersList){
-			newMod += this.calculateCostModFromTrigger(triggerId, mod)
+			newMod += this.calculateCostModFromTrigger(triggerId, mod, card)
 		}
 
 		return newMod
 	}
-	calculateCostModFromTrigger(trigger: string, mod:CostMod): number {
+	calculateCostModFromTrigger(trigger: string, mod:CostMod, card?: PlayableCardModel): number {
 		if(!mod || !mod.tagList){return 0}
 		let costMod: number = 0
 
@@ -971,12 +992,24 @@ export class ProjectCardPlayedEffectService {
 				costMod += 1
 				break
 			}
+			//CreditCor
+			case('C1'):{
+				console.log('creditcor', card)
+				if(!card){break}
+				if(card.costInitial>=20){costMod += 4}
+				break
+			}
+			//Interplanetary Cinematics
+			case('C4'):{
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('event','tag'))){costMod += 2}
+				break
+			}
 			//Teractor
 			case('C9'):{
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))){costMod += 3}
 				break
 			}
-			//Teractor
+			//Thorgate
 			case('C11'):{
 				if(mod.tagList.includes(GlobalInfo.getIdFromType('power','tag'))){costMod += 3}
 				break
@@ -1122,6 +1155,16 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddTR(1))
 				break
 			}
+			//Arklight
+			case('CP01'):{
+				let triggerred: number = 0
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('plant','tag'))){triggerred+=1}
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('animal','tag'))){triggerred+=1}
+				for(let i=0; i<triggerred; i++){
+					result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'animal', valueStock:1}, trigger))
+				}
+				break
+			}
 			//Point Luna
 			case('CF1'):{
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
@@ -1155,7 +1198,7 @@ export class ProjectCardPlayedEffectService {
 			//Filter Feeders
 			case('P04'):{
 				if(ressource.name!='microbe'){break}
-				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"animal", valueStock:1}, trigger))
+				result.push(this.createEventAddRessourceToCardId({name:"animal", valueStock:1}, trigger))
 				break
 			}
 			//Bacterial Aggregate
@@ -1164,7 +1207,7 @@ export class ProjectCardPlayedEffectService {
 
 				let stock = targetCard.getStockValue('microbe')
 				if(stock>=5){
-					result.push(ProjectCardPlayedEffectService.createEventDeactivateTrigger(trigger))
+					result.push(this.createEventDeactivateTrigger(trigger))
 				}
 
 				let limit = targetCard.getCardTriggerLimit()
@@ -1173,7 +1216,7 @@ export class ProjectCardPlayedEffectService {
 				let addValue = Math.min(ressource.valueStock, limit?.limit - limit.value)
 				if(addValue<=0){break}
 
-				result.push(ProjectCardPlayedEffectService.createEventIncreaseResearchScanKeep({keep:0, scan:addValue}))
+				result.push(this.createEventIncreaseResearchScanKeep({keep:0, scan:addValue}))
 				targetCard.triggerLimit.value += addValue
 				break
 			}
@@ -1233,9 +1276,17 @@ export class ProjectCardPlayedEffectService {
 			}
 			//Pets
 			case('F07'):{
-				console.log('pets')
 				if(parameter.name!=GlobalParameterNameEnum.infrastructure){break}
 				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:"animal", valueStock:parameter.steps}, trigger))
+				break
+			}
+			//Zetasel
+			case('CP06'):{
+				if(parameter.name!=GlobalParameterNameEnum.ocean){break}
+				result.push(this.createEventAddRessource([
+					{name:'megacredit', valueStock:2},
+					{name:'plant', valueStock:2}
+				]))
 				break
 			}
 			default:{
