@@ -104,9 +104,11 @@ export class EventStateFactory{
 					break
 				}
 				case(EventStateTypeEnum.drawCards):{
-					//newEvents.push(EventDesigner.createDeckQueryEvent('drawQuery', { drawDiscard: { draw: state.v['CARD'] } }))
-					console.log('draw cards : ')
 					newEvents.push(EventDesigner.createGeneric('drawResult', {drawEventResult:state.v}))
+					break
+				}
+				case(EventStateTypeEnum.discard):{
+					newEvents.push(EventDesigner.createCardSelector('discardCards', {cardSelector:{selectionQuantity: state.v}}))
 					break
 				}
 				default:{treated = false}

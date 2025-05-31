@@ -47,7 +47,6 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
-Discard card event can be dodged by refreshing client page   
 
 ## Must have for v1 :
 ### Refactoring
