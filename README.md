@@ -46,8 +46,8 @@ Backend: Junit
 
 # WIP : 
 ## /!\Critical BUG/!\ :
-DRAW QUERY/RESULT are not 'saved' in eventstate, resulting in card disapearing if client refresh after draw   
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
+Discard card event can be dodged by refreshing client page   
 
 ## Must have for v1 :
 ### Refactoring
@@ -149,3 +149,4 @@ initial mulligan is an andvanced game mode option, not base
 merger   
 fanmade cards   
 some projects cards should only be accessible when 5+ players   
+switch infrastructure completion to be optionnal   

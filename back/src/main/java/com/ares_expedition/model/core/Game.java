@@ -393,6 +393,10 @@ public class Game {
         }
     }
 
+    public void addEventDrawCardsToPlayer(String playerId, List<Integer> cards){
+        this.groupPlayerState.get(playerId).addEventDrawCards(cards);
+    }
+
     public GameData toData(){
         return new GameData(this);
     }

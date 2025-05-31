@@ -1,6 +1,7 @@
 package com.ares_expedition.controller.websocket;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -129,8 +130,9 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
+        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId());
         wsOutput.sendPushToPlayer(
-            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(this.gameController.drawCards(query.getGameId(), drawNumber), query.getEventId())),
+            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId())),
             query.getPlayerId()
             );
     }

@@ -41,11 +41,12 @@ public class GameController {
         return this.gameHolder.get(gameId);
     }
 
-    public List<Integer> drawCards(String gameId, Integer drawNumber){
+    public List<Integer> drawCards(String gameId, Integer drawNumber, String playerId){
         List<Integer> cards = getGameFromId(gameId).drawCards(drawNumber);
         if(cards.size() < drawNumber){
             wsOutput.sendPushToGroup(new BaseMessageOutputDTO(gameId, "not enough cards in deck"));
         }
+        this.getGameFromId(gameId).addEventDrawCardsToPlayer(playerId, cards);
         return cards;
     }
 
