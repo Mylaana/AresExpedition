@@ -489,7 +489,6 @@ export class GameState{
 		this.updateClientState(state)
 
 		let triggers = state.getTriggersIdOnParameterIncrease()
-		console.log(triggers)
 		if(triggers.length>0){
 			newEvents = newEvents.concat(ProjectCardPlayedEffectService.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
 		}
@@ -738,7 +737,6 @@ export class GameState{
 			clientState.addOceanFlippedBonus(bonus)
 		}
 		this.updateClientState(clientState)
-		console.log(clientState)
 	}
 
 	public isClient(playerId: myUUID): boolean {

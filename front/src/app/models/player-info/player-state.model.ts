@@ -171,7 +171,7 @@ export class PlayerStateModel {
 	getTriggerCostMod(): string[] {return this.projectCardState.getTriggerCostMod()}
 
 	addCardsToHand(cards: number | number[]) {this.projectCardState.addCardsToHand(cards)}
-	removeCardsFromHand(cardCodeList: number | number[], cardType: PlayableCardType): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType)}
+	removeCardsFromHand(cardCodeList: number | number[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType, addRemovedCardsToDiscard)}
 	getProjectHandIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectHandIdList(filter)}
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
@@ -191,7 +191,7 @@ export class PlayerStateModel {
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
 		this.projectCardState.playCard(card)
-		this.removeCardsFromHand([card.id], cardType)
+		this.removeCardsFromHand([card.id], cardType, false)
 		this.payCardCost(card)
 		this.addTagsFromPlayedCard(card)
 		if(Number(card.vpNumber??'')!=0 && !isNaN(Number(card.vpNumber??''))){
