@@ -742,13 +742,12 @@ export class GameState{
 	public isClient(playerId: myUUID): boolean {
 		return playerId===this.clientId
 	}
-	public addForestPoint(forestNumber: number){
+	public addForestPointAndOxygen(forestNumber: number){
 		let state = this.getClientState()
-		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen)){return}
 		state.addForest(forestNumber)
-		state.addGlobalParameterStepEOP({name:GlobalParameterNameEnum.oxygen, steps:forestNumber})
-		state.addTR(forestNumber)
 		this.updateClientState(state)
+		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen)){return}
+		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.oxygen, steps:1})
 	}
 	public addProductionToClient(ressources: RessourceStock | RessourceStock[]){
 		let state = this.getClientState()

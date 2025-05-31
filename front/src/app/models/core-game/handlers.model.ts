@@ -390,7 +390,7 @@ export class EventHandler {
 			case('waitingGroupReady'):{break}
 			case('addForestPointAndOxygen'):{
 				if(event.addForestPoint){
-					this.gameStateService.addForestPoint(event.addForestPoint)
+					this.gameStateService.addForestPointAndOxygen(event.addForestPoint)
 				}
 				break
 			}
