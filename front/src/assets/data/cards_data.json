@@ -176,7 +176,8 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -1206,7 +1207,8 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "",
@@ -1438,7 +1440,8 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "",
@@ -2247,7 +2250,8 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -2593,7 +2597,8 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -2880,7 +2885,8 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "",
@@ -9613,7 +9619,8 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "greenProject",
         "vpNumber": "",
@@ -13620,6 +13627,404 @@
         "status": "implemented"
     },
     {
+        "id": 1001,
+        "card_code": "C1",
+        "origin": "Base",
+        "cost": 0,
+        "tagsId": [],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "CreditCor",
+            "fr": "CreditCor"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": ">=$ressource_megacreditvoid_20$: $ressource_megacreditvoid_-4$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a card that costs 20 MC or more, you pay 4 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 48MC.",
+            "fr": "Vous commencez avec 48MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 48,
+        "status": "implemented"
+    },
+    {
+        "id": 1002,
+        "card_code": "C2",
+        "origin": "Base",
+        "cost": 0,
+        "tagsId": [
+            6
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Ecoline",
+            "fr": "Ecoline"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_plant$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "Increase yout plant production by 1.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "\"8$ressource_plant$$other_arrow$$other_forest$\":$skipline$-$ressource_plant$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "EFFECT: When you spend plants to gain a forest tile and increase oxygen, you spend one less plant.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 27MC.",
+            "fr": "Vous commencez avec 27MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 27,
+        "status": "blocked"
+    },
+    {
+        "id": 1003,
+        "card_code": "C3",
+        "origin": "Base",
+        "cost": 0,
+        "tagsId": [
+            1
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Helion",
+            "fr": "Helion"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "Increase yout heat production by 3.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "X$ressource_heat$ = $ressource_megacreditvoid_X$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "EFFECT: You can use the heat as MC. You cannot use MC as heat.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 28MC.",
+            "fr": "Vous commencez avec 28MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 28,
+        "status": "blocked"
+    },
+    {
+        "id": 1004,
+        "card_code": "C4",
+        "origin": "Base",
+        "cost": 0,
+        "tagsId": [
+            0
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Interplanetary Cinematics",
+            "fr": "Interplanetary Cinematics"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_steel$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "When you play a $tag_building$, you pay 2 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$tag_event$: $ressource_megacreditvoid_-2$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "EFFECT: When you play a EVENT, you pay 2 MC less for it.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 46MC.",
+            "fr": "Vous commencez avec 46MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 46,
+        "status": "implemented"
+    },
+    {
+        "id": 1005,
+        "card_code": "C5",
+        "origin": "Base",
+        "cost": 0,
+        "tagsId": [
+            2
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Inventrix",
+            "fr": "Inventrix"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_temperature$$other_oxygen$$other_infrastructure$:$skipline$$other_purplesquare$$other_redsquare$$other_yellowsquare$$other_whitesquare$$skipline$$other_arrowtop$$other_arrowbottom$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a card with requirements, you can consider oxygen or temperature or infrastructure a higher or lower color. This cannot be combined with other effects.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 33MC.$skipline$Draw $ressource_card$$ressource_card$$ressource_card$",
+            "fr": "Vous commencez avec 33MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 33,
+        "status": "blocked"
+    },
+    {
+        "id": 1006,
+        "card_code": "C6",
+        "origin": "Base",
+        "cost": 0,
+        "tagsId": [
+            0,
+            0
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Mining Guild",
+            "fr": "Mining Guild"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_steel$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "When you play a $tag_building$, you pay 2 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$ressource_steel$:$skipline$$other_tr$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "EFFECT: Each time you play BUILDING, excluding this, gain 1 terraforming point.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 27MC.",
+            "fr": "Vous commencez avec 27MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 27,
+        "status": "blocked"
+    },
+    {
+        "id": 1007,
+        "card_code": "C7",
+        "origin": "Base",
+        "cost": 0,
+        "tagsId": [
+            1
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "PhoboLog",
+            "fr": "PhoboLog"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_titanium$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "When you play a $tag_space$, you pay 3 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$ressource_titanium$:$skipline$$tag_space$$ressource_megacreditvoid_-1$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional MC.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 20MC.",
+            "fr": "Vous commencez avec 20MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 20,
+        "status": "implemented"
+    },
+    {
         "id": 1008,
         "card_code": "C8",
         "origin": "Base",
@@ -13674,64 +14079,7 @@
         },
         "stockable": [],
         "startingMegacredits": 24,
-        "status": "filled"
-    },
-    {
-        "id": 1011,
-        "card_code": "C11",
-        "origin": "Base",
-        "cost": 0,
-        "tagsId": [
-            3
-        ],
-        "cardType": "corporation",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "",
-        "phaseDown": "",
-        "title": {
-            "en": "Thorgate",
-            "fr": "Thorgate"
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_heat$",
-            "fr": "$ressource_heat$"
-        },
-        "effectText": {
-            "en": "Increase yout heat production by 1.",
-            "fr": "Augmentez votre production de chaleur de 1."
-        },
-        "effectSummaryType2": "trigger",
-        "effectSummaryText2": {
-            "en": "$tag_power$ :$ressource_megacreditvoid_-3$",
-            "fr": "$tag_power$ :$ressource_megacreditvoid_-3$"
-        },
-        "effectText2": {
-            "en": "Effect : When you play an $tag_power$, you pay 3 MC less.",
-            "fr": "Effet : Lorsque vous jouez un $tag_power$, le co\u00fbt est r\u00e9duit de 3 MC."
-        },
-        "playedText": {
-            "en": "You start with 45MC.",
-            "fr": "Vous commencez avec 45MC."
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [],
-        "startingMegacredits": 45,
-        "status": "filled"
+        "status": "implemented"
     },
     {
         "id": 1009,
@@ -13788,7 +14136,517 @@
         },
         "stockable": [],
         "startingMegacredits": 51,
-        "status": "filled"
+        "status": "implemented"
+    },
+    {
+        "id": 1010,
+        "card_code": "C10",
+        "origin": "",
+        "cost": 0,
+        "tagsId": [],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Tharsis Republic",
+            "fr": "Tharsis Republic"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_researchsymbol$: +$other_researchcard$+$ressource_card$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you draw cards during the research phase, draw an additional card and keep an additional card.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 40MC.",
+            "fr": "Vous commencez avec 40MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 40,
+        "status": "implemented"
+    },
+    {
+        "id": 1011,
+        "card_code": "C11",
+        "origin": "Base",
+        "cost": 0,
+        "tagsId": [
+            3
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "ThorGate",
+            "fr": "ThorGate"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_heat$",
+            "fr": "$ressource_heat$"
+        },
+        "effectText": {
+            "en": "Increase yout heat production by 1.",
+            "fr": "Augmentez votre production de chaleur de 1."
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$tag_power$ :$ressource_megacreditvoid_-3$",
+            "fr": "$tag_power$ :$ressource_megacreditvoid_-3$"
+        },
+        "effectText2": {
+            "en": "Effect : When you play an $tag_power$, you pay 3 MC less.",
+            "fr": "Effet : Lorsque vous jouez un $tag_power$, le co\u00fbt est r\u00e9duit de 3 MC."
+        },
+        "playedText": {
+            "en": "You start with 45MC.",
+            "fr": "Vous commencez avec 45MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 45,
+        "status": "implemented"
+    },
+    {
+        "id": 1012,
+        "card_code": "C12",
+        "origin": "Promo",
+        "cost": 0,
+        "tagsId": [],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "United Nations Mars Initiative",
+            "fr": "United Nations Mars Initiative"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_tr$:$skipline$$ressource_megacreditvoid_6$: $other_tr$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: The first time your terraforming score is increased in each phase, you can pay 6 MC to increase your terraforming score by 1 step.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 35MC.",
+            "fr": "Vous commencez avec 35MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 35,
+        "status": "blocked"
+    },
+    {
+        "id": 1013,
+        "card_code": "CP01",
+        "origin": "Promo",
+        "cost": 0,
+        "tagsId": [
+            6,
+            7
+        ],
+        "cardType": "corporation",
+        "vpNumber": "*",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "ArkLight",
+            "fr": "ArkLight"
+        },
+        "vpText": {
+            "en": "\"*=1 victory point for every 2 animals on this card.\"",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play an ANIMAL or PLANT, including these, add an animal to this card.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 43MC.",
+            "fr": "Vous commencez avec 43MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [
+            "animal"
+        ],
+        "startingMegacredits": 43,
+        "status": "implemented"
+    },
+    {
+        "id": 1014,
+        "card_code": "CP02",
+        "origin": "Promo",
+        "cost": 0,
+        "tagsId": [
+            1
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Celestior",
+            "fr": "Celestior"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$3$other_researchcard$$tag_event$:$skipline$$ressource_card$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "ACTION: Reveal the top 3 cards of the deck. Place a card with an EVENT revealed this way into your hand.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 50MC.",
+            "fr": "Vous commencez avec 50MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 50,
+        "status": "blocked"
+    },
+    {
+        "id": 1015,
+        "card_code": "CP03",
+        "origin": "Promo",
+        "cost": 0,
+        "tagsId": [
+            0
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "DevTechs",
+            "fr": "DevTechs"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_greencard$: $ressource_megacreditvoid_-2$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a green card, you pay 2 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 40MC.$skipline$At the start of the game, reveal the top 5 cards of the deck. Place a green card that was revealed this way into your hand. Discard the rest.",
+            "fr": "Vous commencez avec 40MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 40,
+        "status": "blocked"
+    },
+    {
+        "id": 1016,
+        "card_code": "CP04",
+        "origin": "Promo",
+        "cost": 0,
+        "tagsId": [
+            2
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Launch Star Incorporated",
+            "fr": "Launch Star Incorporated"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_bluecard$: $ressource_megacreditvoid_-3$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a blue card, you pay 3 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 36MC.$skipline$At the start of the game, reveal cards from the deck until you reveal a blue card. Place it into your hand. Discard the rest.",
+            "fr": "Vous commencez avec 36MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 36,
+        "status": "blocked"
+    },
+    {
+        "id": 1017,
+        "card_code": "CP05",
+        "origin": "Promo",
+        "cost": 0,
+        "tagsId": [
+            4
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Mai-Ni Productions",
+            "fr": "Mai-Ni Productions"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_greencard$: +$ressource_card$-$ressource_card$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a green card, draw a card and then discard a card.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 48MC.$skipline$At the start of the game, play a card from your hand that costs 12MC or less without paying the cost. The requirements of this card must be fullfilled.",
+            "fr": "Vous commencez avec 48MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 48,
+        "status": "blocked"
+    },
+    {
+        "id": 1018,
+        "card_code": "CP06",
+        "origin": "Promo",
+        "cost": 0,
+        "tagsId": [],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Zetasel",
+            "fr": "Zetasel"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_ocean$:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you flip an ocean tile, gain 2 MC and 2 plants.",
+            "fr": ""
+        },
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 43MC.$skipline$At the start of the game, + $ressource_card$$ressource_card$$ressource_card$$ressource_card$$ressource_card$$skipline$- $ressource_card$$ressource_card$$ressource_card$$ressource_card$",
+            "fr": "Vous commencez avec 43MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 43,
+        "status": "implemented"
     },
     {
         "id": 10001,
@@ -13833,8 +14691,8 @@
             "fr": "Effet: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
         },
         "playedText": {
-            "en": "You start with 28MC.",
-            "fr": "Vous commencez avec 28MC."
+            "en": "You start with 25MC.",
+            "fr": "Vous commencez avec 25MC."
         },
         "prerequisiteText": {
             "en": "",
@@ -13845,7 +14703,7 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 28,
-        "status": "filled"
+        "startingMegacredits": 25,
+        "status": "implemented"
     }
 ]

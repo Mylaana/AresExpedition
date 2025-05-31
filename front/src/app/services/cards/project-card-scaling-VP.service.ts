@@ -65,6 +65,11 @@ export class ProjectCardScalingVPService {
 					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
 					break
 				}
+				//Pets
+				case("CP01"):{
+					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
+					break
+				}
 			}
 		}
 		return totalScalingVp

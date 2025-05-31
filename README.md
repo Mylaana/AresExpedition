@@ -46,8 +46,6 @@ Backend: Junit
 
 # WIP : 
 ## /!\Critical BUG/!\ :
-No visual effect for discarding cards   
-No visual effect for adding a ressource to card   
 Builder: Disabled card appear buildable (visually only) when card selection active   
 Adding forest point via event doesnt add VP   
 DRAW QUERY/RESULT are not 'saved' in eventstate, resulting in card disapearing if client refresh after draw   
@@ -77,16 +75,16 @@ Create Event type :
     - "action portal" type event casting subsequent events   
 Create trigger hooks :
     - on card activation   
-Activation:
+Activation:   
     - Multiple activation options   
     - Scaling activation cost   
     - Droplist/Custom value selection on activation (card 32/47)   
-Other:
+Other:   
     - Need prerequisite offset mechanic   
     - Standard tech reduction mechanic   
     - Conditionnal scan/keep (based on tag)   
     - Conditionnal scan result (card 13)   
-    - Droplist
+    - Droplist   
 
 
 ### Misc
@@ -94,6 +92,10 @@ Add victory check
 
 ### Interface
 Design production phase screen   
+Add scan/keep modifier display   
+Always display steel/titanium cost mod   
+Add visual effect for discarding cards   
+Add visual effect for adding a ressource to card   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
