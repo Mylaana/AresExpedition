@@ -474,11 +474,6 @@ export class GameState{
 			state.addTR(parameter.steps)
 
 			switch(parameter.name){
-				//adds forest point if oxygen not already maxed out
-				case(GlobalParameterNameEnum.oxygen):{
-					state.addForest(parameter.steps)
-					break
-				}
 				//query server for ocean bonus
 				case(GlobalParameterNameEnum.ocean):{
 					newEvents.push(EventDesigner.createGeneric('oceanQuery', {oceanQueryNumber: parameter.steps}))

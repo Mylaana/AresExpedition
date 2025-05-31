@@ -48,7 +48,6 @@ Backend: Junit
 ## /!\Critical BUG/!\ :
 DRAW QUERY/RESULT are not 'saved' in eventstate, resulting in card disapearing if client refresh after draw   
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
-Adding oxygen via event increases forests! (Towing a comet)   
 Card Activation cost check not being refreshed on clientstate refresh !   
 Hand corporation not purged after choice   
 
