@@ -92,10 +92,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
 		this.setBuildable()
 		this.setMaximumActivation()
-
-		if(this.state.isActivable()){
-			this.setActivationPayable()
-		}
 		this._loaded = true
 	}
 	ngOnDestroy(): void {
@@ -139,8 +135,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.updateCost()
 	}
 	public updateCost(): void {
-		if(['played'].includes(this.parentListType)){
-			this.projectCard.cost = this.projectCard.costInitial
+		if(!['hand', 'builderSelector'].includes(this.parentListType)){
 			return
 		}
 		this.megacreditAvailable = this.clientState.getRessourceInfoFromType('megacredit')?.valueStock??0
@@ -170,19 +165,17 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		return true
 	}
 	public onActivation(twice: boolean): void {
-		this.setActivationPayable()
 		this.setMaximumActivation()
 
 		this.cardActivated.emit({card: this.projectCard, twice: twice})
 	}
-	private setActivationPayable(): void {
-		this._activationCostPayable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getClientState())
-	}
+
 	private setMaximumActivation(): void {
 		this._maximumActivation = (this.projectCard.activated>=2) || (this.projectCard.activated>=1 && this.activableTwice === false)
 	}
 
 	public isDisabled(): boolean{
+		if(this.state.isIgnoreCost()){return false}
 		if (this.state.isBuildable()===false && this.state.isIgnoreCost()!=false && this.state.isActivable()===false && this.parentListSubType!='research'){
 			return true
 		}

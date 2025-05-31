@@ -11,7 +11,7 @@ export class PlayableCardModel{
     cardCode!: string;
     origin!: string;
     costInitial!: number;
-	cost: number = this.costInitial
+	cost!: number;
     tagsId!: number[];
     cardSummaryType?: SummaryType;
     cardType!: CardType;
@@ -144,7 +144,9 @@ export class PlayableCardModel{
 		return {[this.id]: this.stock??[]}
 	}
 	public static fromInterface(input: PlayableCardInterface): PlayableCardModel {
-		return Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))
+		let newCard: PlayableCardModel = Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))
+		newCard.cost = newCard.costInitial
+		return newCard
 	}
 	loadStockFromJson(stock: AdvancedRessourceStock[]){
 		this.stock = stock

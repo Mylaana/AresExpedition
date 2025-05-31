@@ -276,14 +276,12 @@ export class EventHandler {
 				let drawNumber = event.cardSelector.selectedList.length
 				event.finalized = true
 				this.gameStateService.removeCardsFromClientHandByModel(event.cardSelector.selectedList, 'project')
-				//this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
 				this.gameStateService.addEventQueue(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber}}), 'first')
 				break
 			}
 			case('selectCorporation'):{
 				event.finalized = true
 				this.gameStateService.playCorporation(event.cardSelector.selectedList[0])
-				//this.gameStateService.addEventQueue(EventDesigner.createGeneric('endOfPhase'),'last')
 				break
 			}
 			default:{Utils.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
@@ -392,7 +390,7 @@ export class EventHandler {
 			case('waitingGroupReady'):{break}
 			case('addForestPointAndOxygen'):{
 				if(event.addForestPoint){
-					this.gameStateService.addForestPoint(event.addForestPoint)
+					this.gameStateService.addForestPointAndOxygen(event.addForestPoint)
 				}
 				break
 			}

@@ -26,7 +26,6 @@ export class CardCost {
 	updateCostMod(mod?: CostMod): number{
 		if(!mod){return 0}
 		let newMod: number = 0
-		console.log(this.projectCard)
 		if(mod.steelState && mod.tagList?.includes(0)){newMod += mod.steelState.valueProd * (mod.steelState.valueMod + GAME_RESSOURCE_STEEL_BASE_REDUCTION)}
 		if(mod.titaniumState && mod.tagList?.includes(1)){newMod += mod.titaniumState.valueProd * (mod.titaniumState.valueMod + GAME_RESSOURCE_TITANIUM_BASE_REDUCTION)}
 		if(mod.playedTriggersList){newMod += this.projectCardPlayed.getCostModFromTriggers(mod, this.projectCard)}

@@ -35,12 +35,6 @@ export class PlayerProjectCardStateModel {
 		this.handMaximumSize = dto.hms
 
 		this.loadPlayedCardsFromJson(dto.cp)
-		/*let playedIdList = this.cardPlayedIdListFromJson(dto.cp)
-		this.projects = {
-			playedIdList: playedIdList,
-			playedProjectList: this.cardInfoService.getProjectCardList(playedIdList)
-		}
-		this.setCardStockFromJson(dto.cp)*/
 		this.triggers = TriggerState.fromJson(dto.t)
 	}
 
@@ -56,13 +50,13 @@ export class PlayerProjectCardStateModel {
     }
 	addCardsToHand(cards: number | number[]){this.hand = this.hand.concat(Utils.toNumberArray(cards))}
 	addCardsToDiscard(cards: number | number[]){this.handDiscard = this.handDiscard.concat(Utils.toNumberArray(cards))}
-	removeCardsFromHand(cards: number | number[], cardType: PlayableCardType):void{
+	removeCardsFromHand(cards: number | number[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true):void{
 		let cardList = Utils.toNumberArray(cards)
 		for(let card of cardList){
 			switch(cardType){
 				case('project'):{
 					let index = this.hand.indexOf(Number(card), 0);
-					if (index > -1) {
+					if (index > -1 && addRemovedCardsToDiscard) {
 						this.addCardsToDiscard(this.hand.splice(index, 1)[0])
 					}
 					break
@@ -70,7 +64,7 @@ export class PlayerProjectCardStateModel {
 				case('corporation'):{
 					let index = this.handCorporation.indexOf(Number(card), 0);
 					if (index > -1) {
-						this.handCorporation.splice(index, 1)
+						this.handCorporation = []
 					}
 					break
 				}

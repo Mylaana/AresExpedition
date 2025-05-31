@@ -4,6 +4,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { MinMaxEqualType, RessourceType, TagType } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
+import { DEBUG_IGNORE_PREREQUISITES } from "../../global/global-const";
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/gl
 export class ProjectCardPrerequisiteEffectService {
 	constructor(){}
 	static isPrerequisiteOk(card: PlayableCardModel, clientState: PlayerStateModel): boolean {
+		if(DEBUG_IGNORE_PREREQUISITES){return true}
 		switch(card.cardCode){
 			//AI Central
 			case('4'):{

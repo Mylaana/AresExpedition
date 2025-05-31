@@ -74,12 +74,18 @@ button {
 			outline: white solid 2px;
 			box-shadow: 0 0 10px 10px white;
 			cursor: pointer;
+			&.disabled{
+				filter: grayscale(100%);
+			}
 		}
 	}
 	&.selected{
 		&.greyed-when-selected{
 			filter: grayscale(100%);
 		}
+	}
+	&.disabled{
+		filter: grayscale(100%);
 	}
 }
 .wrapper-card-element-main{

@@ -472,13 +472,7 @@ export class GameState{
 		//add TR if not maxed out
 		if(!state.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){
 			state.addTR(parameter.steps)
-
 			switch(parameter.name){
-				//adds forest point if oxygen not already maxed out
-				case(GlobalParameterNameEnum.oxygen):{
-					state.addForest(parameter.steps)
-					break
-				}
 				//query server for ocean bonus
 				case(GlobalParameterNameEnum.ocean):{
 					newEvents.push(EventDesigner.createGeneric('oceanQuery', {oceanQueryNumber: parameter.steps}))
@@ -489,7 +483,6 @@ export class GameState{
 		this.updateClientState(state)
 
 		let triggers = state.getTriggersIdOnParameterIncrease()
-		console.log(triggers)
 		if(triggers.length>0){
 			newEvents = newEvents.concat(ProjectCardPlayedEffectService.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
 		}
@@ -738,19 +731,17 @@ export class GameState{
 			clientState.addOceanFlippedBonus(bonus)
 		}
 		this.updateClientState(clientState)
-		console.log(clientState)
 	}
 
 	public isClient(playerId: myUUID): boolean {
 		return playerId===this.clientId
 	}
-	public addForestPoint(forestNumber: number){
+	public addForestPointAndOxygen(forestNumber: number){
 		let state = this.getClientState()
-		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen)){return}
 		state.addForest(forestNumber)
-		state.addGlobalParameterStepEOP({name:GlobalParameterNameEnum.oxygen, steps:forestNumber})
-		state.addTR(forestNumber)
 		this.updateClientState(state)
+		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen)){return}
+		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.oxygen, steps:1})
 	}
 	public addProductionToClient(ressources: RessourceStock | RessourceStock[]){
 		let state = this.getClientState()
