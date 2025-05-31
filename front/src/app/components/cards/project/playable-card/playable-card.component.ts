@@ -139,8 +139,8 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.updateCost()
 	}
 	public updateCost(): void {
-		if(['played'].includes(this.parentListType)){
-			this.projectCard.cost = this.projectCard.costInitial
+		if(!['hand', 'builderSelector'].includes(this.parentListType)){
+			//this.projectCard.cost = this.projectCard.costInitial
 			return
 		}
 		this.megacreditAvailable = this.clientState.getRessourceInfoFromType('megacredit')?.valueStock??0
