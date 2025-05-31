@@ -73,12 +73,12 @@
 		</div>
 		<app-card-background [cardType]="projectCard.cardType"></app-card-background>
 	</div>
-	<app-card-activation
+	<app-card-activation-list
 		*ngIf="state.isActivable()"
 		[projectCard]="projectCard"
 		[maximumCardActivation]="_maximumActivation"
 		(activated)="onActivation($event)">
-	</app-card-activation>
+	</app-card-activation-list>
 </div>
 <!--
 <p>{{_maximumActivation}}</p>

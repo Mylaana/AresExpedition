@@ -10,7 +10,7 @@ import { DrawEventHandler, EventHandler } from '../../../../models/core-game/han
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
 import { EventDesigner } from '../../../../services/designers/event-designer.service';
-import { ProjectListType } from '../../../../types/project-card.type';
+import { ActivationOption, ProjectListType } from '../../../../types/project-card.type';
 import { CardBuilderListComponent } from '../../../cards/card-builder-list/card-builder-list.component';
 import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
@@ -197,7 +197,7 @@ export class GameEventComponent {
 			}
 		}
 	}
-	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}){
+	public onProjectActivated(input: {card: PlayableCardModel, option: ActivationOption, twice: boolean}){
 		this.eventHandler.onProjectActivated(input)
 	}
 	public onActionPhaseStateUpdate(): void {

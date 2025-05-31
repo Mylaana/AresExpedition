@@ -1,0 +1,8 @@
+<ng-container *ngFor="let option of activationOptions">
+	<app-card-activation
+		[maximumCardActivation]="maximumCardActivation"
+		[projectCard]="projectCard"
+		[actionIndex]="option"
+		(activated)="onActivation($event)">
+	</app-card-activation>
+</ng-container>

@@ -68,7 +68,6 @@ Create Event type :
 Create trigger hooks :
     - on card activation   
 Activation:   
-    - Multiple activation options   
     - Scaling activation cost   
     - Droplist/Custom value selection on activation (card 32/47)   
 Other:   

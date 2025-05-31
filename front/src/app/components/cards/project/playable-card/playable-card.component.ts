@@ -7,7 +7,7 @@ import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
-import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
+import { ActivationOption, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
 import { expandCollapseVertical } from '../../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
@@ -28,13 +28,14 @@ import { CardStatusComponent } from '../card-blocks/card-status/card-status.comp
 import { ProjectCardPrerequisiteEffectService } from '../../../../services/cards/project-card-prerequisite-effect.service';
 import { CardBuildable } from '../../../../interfaces/card.interface';
 import { Utils } from '../../../../utils/utils';
+import { CardActivationListComponent } from '../card-blocks/card-activation-list/card-activation-list.component';
 
 @Component({
     selector: 'app-playable-card',
     imports: [
         CommonModule,
         CardBackgroundComponent,
-        CardActivationComponent,
+        CardActivationListComponent,
         CardCostComponent,
         CardEffectComponent,
         CardHighlightComponent,
@@ -54,7 +55,7 @@ import { Utils } from '../../../../utils/utils';
     animations: [expandCollapseVertical]
 })
 export class PlayableCardComponent extends BaseCardComponent implements OnInit, OnDestroy {
-	@Output() cardActivated: EventEmitter<{card: PlayableCardModel, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, twice: boolean}>()
+	@Output() cardActivated: EventEmitter<{card: PlayableCardModel, option: ActivationOption, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, option: ActivationOption, twice: boolean}>()
 	@Input() projectCard!: PlayableCardModel;
 	@Input() buildDiscount: number = 0
 	@Input() parentListType: ProjectListType = 'none'
@@ -164,12 +165,10 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 
 		return true
 	}
-	public onActivation(twice: boolean): void {
+	public onActivation(activation: {option: ActivationOption, twice: boolean}): void {
 		this.setMaximumActivation()
-
-		this.cardActivated.emit({card: this.projectCard, twice: twice})
+		this.cardActivated.emit({card: this.projectCard, option: activation.option, twice: activation.twice})
 	}
-
 	private setMaximumActivation(): void {
 		this._maximumActivation = (this.projectCard.activated>=2) || (this.projectCard.activated>=1 && this.activableTwice === false)
 	}

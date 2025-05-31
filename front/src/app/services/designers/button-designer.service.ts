@@ -162,12 +162,12 @@ export class ButtonDesigner{
 
         return buttons
     }
-	public static createNonEventButton(name: NonEventButtonNames): NonEventButton {
+	public static createNonEventButton(name: NonEventButtonNames, caption?:string): NonEventButton {
 		let button = new NonEventButton
 		button.name = name
         button.startEnabled = this.getStartEnabled(name)
         button.enabled = button.startEnabled
-        button.caption = this.getCaption(name)
+        button.caption = caption??this.getCaption(name)
 
         return button
 	}

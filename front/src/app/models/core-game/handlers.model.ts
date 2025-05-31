@@ -13,7 +13,7 @@ import { DrawEventDesigner } from "../../services/designers/draw-event-designer.
 import { Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { ProjectListType } from "../../types/project-card.type";
+import { ActivationOption, ProjectListType } from "../../types/project-card.type";
 import { ProjectCardActivatedEffectService } from "../../services/cards/project-card-activated-effect.service";
 import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
@@ -95,11 +95,11 @@ export class EventHandler {
 		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
 		this.cancelCurrentEvent()
 	}
-	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}): void {
+	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}): void {
 		let event = this.currentEvent as EventCardActivator
 		event.activationLog[input.card.id.toString()] = input.card.activated
 		if(input.twice){event.doubleActivationCount += 1}
-		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card, this.gameStateService.getClientState())
+		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card, this.gameStateService.getClientState(), input.option)
 		if(!addEvents){return}
 		this.gameStateService.addEventQueue(addEvents,'first')
 	}
