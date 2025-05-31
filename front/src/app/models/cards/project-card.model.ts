@@ -243,6 +243,9 @@ export class TriggerState {
             case('45'):{break} //Optimal aerobreaking
 			case('48'):{break} //Recycled Detritus
             case('P19'):{break} //Bacterial Aggregate
+
+			case('C8'):{break} //Saturn Systems
+			case('CF1'):{break} //Point Luna
             default:{return}
         }
         this.activeOnGainedTag.push(cardCode)
@@ -256,6 +259,7 @@ export class TriggerState {
 			case('51'):{break} //Research Outpost
 
 			case('C9'):{break} //Teractor
+			case('C11'):{break} //Thorgate
             default:{return}
         }
         this.activeCostModTrigger.push(cardCode)

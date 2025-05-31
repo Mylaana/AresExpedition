@@ -902,6 +902,22 @@ export class ProjectCardPlayedEffectService {
 				result.push(this.createEventAddTR(clientstate.getMilestoneCompleted()))
 				break
 			}
+
+			//Saturn Systems
+			case('C8'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
+				break
+			}
+			//Thorgate
+			case('C11'):{
+				result.push(this.createEventAddProduction({name:'heat', valueStock:1}))
+				break
+			}
+			//Point Luna
+			case('CF1'):{
+				result.push(this.createEventAddProduction({name:'titanium', valueStock:1}))
+				break
+			}
 			default:{
 				return undefined
 			}
@@ -955,6 +971,16 @@ export class ProjectCardPlayedEffectService {
 				costMod += 1
 				break
 			}
+			//Teractor
+			case('C9'):{
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))){costMod += 3}
+				break
+			}
+			//Teractor
+			case('C11'):{
+				if(mod.tagList.includes(GlobalInfo.getIdFromType('power','tag'))){costMod += 3}
+				break
+			}
 		}
 
 		return costMod
@@ -1002,19 +1028,19 @@ export class ProjectCardPlayedEffectService {
 		}
 		return events
 	}
-	public static getTriggerByTagGained(tagList: number[], triggers: string[]): EventBaseModel[] | undefined{
+	public static getTriggerByTagGained(tagList: number[], triggers: string[], isTriggeringSelf: boolean): EventBaseModel[] | undefined{
 		if(triggers.length===0){return}
 		let events: EventBaseModel[] = []
 
 		for(let trigger of triggers){
-			let newEvent = this.generateEventTriggerByTagGained(trigger, tagList, false)
+			let newEvent = this.generateEventTriggerByTagGained(trigger, tagList, isTriggeringSelf)
 			if(newEvent){
 				events = events.concat(newEvent)
 			}
 		}
 		return events
 	}
-	public static generateEventTriggerByTagGained(trigger: string, tagsIdList: number[], triggeringSelf: boolean = false): EventBaseModel[] | undefined {
+	public static generateEventTriggerByTagGained(trigger: string, tagsIdList: number[], isTriggeringSelf: boolean): EventBaseModel[] | undefined {
 		let result: EventBaseModel[] = []
 		switch(trigger){
 			//Decomposers
@@ -1047,7 +1073,7 @@ export class ProjectCardPlayedEffectService {
 			//Interplanetary Conference
 			case('37'):{
 				//self triggering excluded
-				if(triggeringSelf===true){break}
+				if(isTriggeringSelf===true){break}
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true
 					&& tagsIdList.includes(GlobalInfo.getIdFromType('jovian','tag'))!=true
 				){break}
@@ -1087,6 +1113,19 @@ export class ProjectCardPlayedEffectService {
 			case('P19'):{
 				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
 				result.push(ProjectCardPlayedEffectService.createEventAddRessourceToCardId({name:'microbe', valueStock: 1}, trigger))
+				break
+			}
+			//Saturn Systems
+			case('C8'):{
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('jovian','tag'))!=true){break}
+				if(isTriggeringSelf){break}
+				result.push(this.createEventAddTR(1))
+				break
+			}
+			//Point Luna
+			case('CF1'):{
+				if(tagsIdList.includes(GlobalInfo.getIdFromType('earth','tag'))!=true){break}
+				result.push(this.createEventDraw(1))
 				break
 			}
 			default:{
