@@ -21,6 +21,5 @@ export class CardEffectComponent implements OnInit{
 	ngOnInit(): void {
 		this._summaryText = this.effectSummaryText?.split('$mix$')??[this.effectSummaryText??'']
 		if(this._summaryText.length<2){return}
-		console.log(this.effectSummaryType)
 	}
 }

@@ -27,9 +27,6 @@ export class CardBuilderListComponent implements OnInit{
       this.updateEvent()
     }
   }
-  ngDoCheck(): void {
-
-  }
   updateEvent(): void {
     this.currentEvent = this.event as EventCardBuilder
   }

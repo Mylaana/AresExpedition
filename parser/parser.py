@@ -98,6 +98,7 @@ def parse_row(csv_row: str):
     """
     for map in parser_columns_map:
         parsed_row = PARSER_CARD_INFO_MODEL
+        parsed_value = ''
         if map['output_field_name'] == '':
             continue
 
@@ -130,8 +131,11 @@ def parse_row(csv_row: str):
                         case _:
                             parsed_value[index] = parsed_value[index]
             case "<class 'int'>":
-                if parsed_value!='':
-                    parsed_row[map['output_field_name']] = int(parsed_value)
+                if not parsed_value:
+                    parsed_value = 0
+                if parsed_value == '':
+                    parsed_value = 0
+                parsed_row[map['output_field_name']] = int(parsed_value)
             case _:
                 parsed_row[map['output_field_name']] = parsed_value
 

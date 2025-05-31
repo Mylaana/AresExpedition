@@ -52,7 +52,7 @@ export class PlayerProjectCardStateModel {
 		this.cardInitializeService.initialize(cardCopy)
 
         if(!cardCopy.hasTrigger()){return}
-        this.triggers.playTrigger(cardCopy.id)
+        this.triggers.playTrigger(cardCopy.cardCode)
     }
 	addCardsToHand(cards: number | number[]){this.hand = this.hand.concat(Utils.toNumberArray(cards))}
 	addCardsToDiscard(cards: number | number[]){this.handDiscard = this.handDiscard.concat(Utils.toNumberArray(cards))}
@@ -80,31 +80,31 @@ export class PlayerProjectCardStateModel {
 	}
 	getHandCurrentSize(): number {return this.hand.length}
 	getHandMaximumSize(): number {return this.handMaximumSize}
-    getPlayedTriggersId(): number[] {return this.triggers.getPlayedTriggers()}
-    getActivePlayedTriggersId(): number[] {return this.triggers.getActivePlayedTriggers()}
-    getTriggersIdOnRessourceAddedToCard(): number[] {return this.triggers.getOnRessourceAddedToCard()}
-    getTriggersIdOnParameterIncrease(): number[] {return this.triggers.getOnParameterIncrease()}
-    getTriggersIdOnPlayedCard(): number[] {return this.triggers.getOnPlayedCard()}
-    getTriggersIdOnGainedTag(): number[] {return this.triggers.getOnGainedTag()}
-    getTriggerCostMod(): number[] {return this.triggers.getCostMod()}
-    setTriggerInactive(triggerId: number): void {this.triggers.setTriggerInactive(triggerId)}
+    getPlayedTriggersId(): string[] {return this.triggers.getPlayedTriggers()}
+    getActivePlayedTriggersId(): string[] {return this.triggers.getActivePlayedTriggers()}
+    getTriggersIdOnRessourceAddedToCard(): string[] {return this.triggers.getOnRessourceAddedToCard()}
+    getTriggersIdOnParameterIncrease(): string[] {return this.triggers.getOnParameterIncrease()}
+    getTriggersIdOnPlayedCard(): string[] {return this.triggers.getOnPlayedCard()}
+    getTriggersIdOnGainedTag(): string[] {return this.triggers.getOnGainedTag()}
+    getTriggerCostMod(): string[] {return this.triggers.getCostMod()}
+    setTriggerInactive(triggerId: string): void {this.triggers.setTriggerInactive(triggerId)}
     getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.filterCardIdList(this.projects.playedIdList, filter)}
     getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.filterCardModelList(this.projects.playedProjectList, filter)}
-    getProjectPlayedModelFromId(cardId: number): PlayableCardModel | undefined {
+    getProjectPlayedModelFromCode(cardCode: string): PlayableCardModel | undefined {
         for(let card of this.projects.playedProjectList){
-            if(card.id===cardId){
+            if(card.cardCode===cardCode){
                 return card
             }
         }
         return
     }
-    addRessourceToCard(cardId: number, ressource: AdvancedRessourceStock ): void {
-        let card = this.getProjectPlayedModelFromId(cardId)
+    addRessourceToCard(cardCode: string, ressource: AdvancedRessourceStock ): void {
+        let card = this.getProjectPlayedModelFromCode(cardCode)
         if(!card){return}
         card.addRessourceToStock(ressource)
     }
-    getCardStockValue(cardId:number, ressourceName: AdvancedRessourceType): number {
-        let result = this.getProjectPlayedModelFromId(cardId)?.getStockValue(ressourceName)
+    getCardStockValue(cardCode:string, ressourceName: AdvancedRessourceType): number {
+        let result = this.getProjectPlayedModelFromCode(cardCode)?.getStockValue(ressourceName)
         if(!result){return 0}
         return result
     }

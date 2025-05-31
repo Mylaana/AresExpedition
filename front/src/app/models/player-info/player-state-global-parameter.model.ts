@@ -1,4 +1,4 @@
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 import { GAME_GLOBAL_PARAMETER_INFRASTRUCTURE_MAX_STEP, GAME_GLOBAL_PARAMETER_OCEAN_MAX_STEP, GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP, GAME_GLOBAL_PARAMETER_TEMPERATURE_MAX_STEP } from "../../global/global-const";
 import { GlobalParameterDTO, PlayerGlobalParameterStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GlobalParameter, GlobalParameterValue, OceanBonus } from "../../interfaces/global.interface";
@@ -68,6 +68,22 @@ export class PlayerGlobalParameterStateModel {
 			}
 		}
 		return false
+	}
+	getGlobalParameterColorAtPhaseBegining(parameterName: GlobalParameterNameEnum): GlobalParameterColorEnum {
+		for(let param of this.parameters){
+			if(param.name===parameterName){
+				return Utils.toGlobalParameterColor(param.name, param.step)
+			}
+		}
+		return GlobalParameterColorEnum.purple
+	}
+	getOceanFlippedNumberAtPhaseBeginning(): number {
+		for(let param of this.parameters){
+			if(param.name===GlobalParameterNameEnum.ocean){
+				return param.step
+			}
+		}
+		return 0
 	}
 	toJson(): PlayerGlobalParameterStateDTO {
 		let parameters: GlobalParameterDTO[] = []

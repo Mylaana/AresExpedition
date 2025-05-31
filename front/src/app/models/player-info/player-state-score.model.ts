@@ -18,8 +18,11 @@ export class PlayerScoreStateModel {
 		this.milestoneCount += milestone
 	}
 	getMilestoneCompletedNumber(): number {return this.milestoneCount}
-	addVP(points: number): void {this.vp += points}
-	getVP(): number {return this.vp + this.scalingVp}
+	addBaseVP(points: number): void {this.vp += points}
+	getBaseVP(): number {return this.vp }
+	getTotalVP(): number {
+		return this.vp + this.scalingVp + this.terraformingRating + this.forest
+	}
 	setScalingVP(scalingVp: number){this.scalingVp = scalingVp}
 	addTR(tr: number): void {this.terraformingRating += tr}
 	getTR(): number {return this.terraformingRating}
@@ -37,7 +40,6 @@ export class PlayerScoreStateModel {
 
 	newGame(): void {
 		this.addTR(5)
-		this.addVP(5)
 	}
 	static fromJson(data: PlayerScoreStateDTO): PlayerScoreStateModel {
 		if (!data.mc || !data.v || !data.tr || !data.f){

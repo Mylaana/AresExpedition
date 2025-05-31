@@ -46,7 +46,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 			state => {this.onStateUpdate(state)})
 		this._actionEvent = this.event as EventCardActivator
 		this.updateButtonState()
-		console.log(this._convertForest)
 	}
 	ngAfterViewInit(): void {
 		if(this.event.button){this.updateEndPhaseButton(this.event.button as EventMainButton)}
@@ -87,12 +86,12 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		switch(button.name){
 			case('convertForest'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'plant', valueStock: -8}}))
-				newEvents.push(EventDesigner.createGeneric('addForestPoint', {addForestPoint: 1}))
+				newEvents.push(EventDesigner.createGeneric('addForestPointAndOxygen', {addForestPoint: 1}))
 				break
 			}
 			case('buyForest'):{
 				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
-				newEvents.push(EventDesigner.createGeneric('addForestPoint', {addForestPoint: 1}))
+				newEvents.push(EventDesigner.createGeneric('addForestPointAndOxygen', {addForestPoint: 1}))
 				break
 			}
 			case('convertTemperature'):{

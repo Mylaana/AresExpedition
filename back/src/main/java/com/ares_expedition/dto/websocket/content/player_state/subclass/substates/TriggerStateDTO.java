@@ -6,19 +6,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TriggerStateDTO {
     @JsonProperty("pci")
-    List<Number> playedCardsId;
+    List<String> playedCardsId;
     @JsonProperty("aci")
-    List<Number> activeCardsId;
+    List<String> activeCardsId;
     @JsonProperty("aoratc")
-    List<Number> activeOnRessourceAddedToCard;
+    List<String> activeOnRessourceAddedToCard;
     @JsonProperty("aopi")
-    List<Number> activeOnParameterIncrease;
+    List<String> activeOnParameterIncrease;
     @JsonProperty("aopc")
-    List<Number> activeOnPlayedCard;
+    List<String> activeOnPlayedCard;
     @JsonProperty("aogt")
-    List<Number> activeOnGainedTag;
+    List<String> activeOnGainedTag;
     @JsonProperty("acmt")
-    List<Number> activeCostModTrigger;
+    List<String> activeCostModTrigger;
 
     public TriggerStateDTO(){
     }
@@ -33,46 +33,46 @@ public class TriggerStateDTO {
         this.activeCostModTrigger = state.getActiveCostModTrigger();
     }
 
-    public List<Number> getPlayedCardsId() {
+    public List<String> getPlayedCardsId() {
         return playedCardsId;
     }
-    public void setPlayedCardsId(List<Number> playedCardsId) {
+    public void setPlayedCardsId(List<String> playedCardsId) {
         this.playedCardsId = playedCardsId;
     }
-    public List<Number> getActiveCardsId() {
+    public List<String> getActiveCardsId() {
         return activeCardsId;
     }
-    public void setActiveCardsId(List<Number> activeCardsId) {
+    public void setActiveCardsId(List<String> activeCardsId) {
         this.activeCardsId = activeCardsId;
     }
-    public List<Number> getActiveOnRessourceAddedToCard() {
+    public List<String> getActiveOnRessourceAddedToCard() {
         return activeOnRessourceAddedToCard;
     }
-    public void setActiveOnRessourceAddedToCard(List<Number> activeOnRessourceAddedToCard) {
+    public void setActiveOnRessourceAddedToCard(List<String> activeOnRessourceAddedToCard) {
         this.activeOnRessourceAddedToCard = activeOnRessourceAddedToCard;
     }
-    public List<Number> getActiveOnParameterIncrease() {
+    public List<String> getActiveOnParameterIncrease() {
         return activeOnParameterIncrease;
     }
-    public void setActiveOnParameterIncrease(List<Number> activeOnParameterIncrease) {
+    public void setActiveOnParameterIncrease(List<String> activeOnParameterIncrease) {
         this.activeOnParameterIncrease = activeOnParameterIncrease;
     }
-    public List<Number> getActiveOnPlayedCard() {
+    public List<String> getActiveOnPlayedCard() {
         return activeOnPlayedCard;
     }
-    public void setActiveOnPlayedCard(List<Number> activeOnPlayedCard) {
+    public void setActiveOnPlayedCard(List<String> activeOnPlayedCard) {
         this.activeOnPlayedCard = activeOnPlayedCard;
     }
-    public List<Number> getActiveOnGainedTag() {
+    public List<String> getActiveOnGainedTag() {
         return activeOnGainedTag;
     }
-    public void setActiveOnGainedTag(List<Number> activeOnGainedTag) {
+    public void setActiveOnGainedTag(List<String> activeOnGainedTag) {
         this.activeOnGainedTag = activeOnGainedTag;
     }
-    public List<Number> getActiveCostModTrigger() {
+    public List<String> getActiveCostModTrigger() {
         return activeCostModTrigger;
     }
-    public void setActiveCostModTrigger(List<Number> activeCostModTrigger) {
+    public void setActiveCostModTrigger(List<String> activeCostModTrigger) {
         this.activeCostModTrigger = activeCostModTrigger;
     }
 }

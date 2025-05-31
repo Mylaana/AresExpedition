@@ -27,6 +27,7 @@ import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 import { CardStatusComponent } from '../card-blocks/card-status/card-status.component';
 import { ProjectCardPrerequisiteEffectService } from '../../../../services/cards/project-card-prerequisite-effect.service';
 import { CardBuildable } from '../../../../interfaces/card.interface';
+import { Utils } from '../../../../utils/utils';
 
 @Component({
     selector: 'app-playable-card',
@@ -135,15 +136,14 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private updateClientState(state: PlayerStateModel): void {
 		if(state===undefined){return}
 		this.clientState = state
-		this.megacreditAvailable = state.getRessourceInfoFromType('megacredit')?.valueStock??0
 		this.updateCost()
-		this.setBuildable()
 	}
 	public updateCost(): void {
 		if(['played'].includes(this.parentListType)){
 			this.projectCard.cost = this.projectCard.costInitial
 			return
 		}
+		this.megacreditAvailable = this.clientState.getRessourceInfoFromType('megacredit')?.valueStock??0
 		this.projectCard.cost = this.cardCost.updateCost({
 			tagList: this.projectCard.tagsId,
 			steelState: this.clientState.getRessourceInfoFromType('steel'),

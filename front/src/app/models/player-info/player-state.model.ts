@@ -1,6 +1,6 @@
-import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter, PlayerPhase, OceanBonus } from "../../interfaces/global.interface";
+import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, ProjectFilter, PlayerPhase, OceanBonus, RessourceStock } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
-import { myUUID, PlayableCardType, RessourceType, RGB } from "../../types/global.type";
+import { myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
@@ -16,9 +16,11 @@ import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
+import { ProjectCardScalingProductionsService } from "../../services/cards/project-card-scaling-productions.service";
+import { Utils } from "../../utils/utils";
 
 
 export class PlayerStateModel {
@@ -72,19 +74,28 @@ export class PlayerStateModel {
 	//scoreState
 	getMilestoneCompleted(): number {return this.scoreState.getMilestoneCompletedNumber()}
 	addMilestoneCompleted(){this.scoreState.addMilestoneCompleted()}
-	getVP(): number {return this.scoreState.getVP()}
-	addVP(vp: number){this.scoreState.addVP(vp)}
+	getBaseVP(): number {return this.scoreState.getBaseVP()}
+	getTotalVP(): number {return this.scoreState.getTotalVP()}
+	addVP(vp: number){this.scoreState.addBaseVP(vp)}
 	setScalingVp(){
-		this.scoreState.setScalingVP(ProjectCardScalingVPService.getScalingVP(this.getProjectPlayedModelList()))
+		this.scoreState.setScalingVP(ProjectCardScalingVPService.getScalingVP(this))
 	}
-	getTR(): number {return this.scoreState.getVP()}
-	addTR(vp: number){this.scoreState.addVP(vp)}
+	getTR(): number {return this.scoreState.getTR()}
+	addTR(tr: number){this.scoreState.addTR(tr)}
 	addForest(forest: number): void {this.scoreState.addForest(forest)}
 	getForest(): number {return this.scoreState.getForest()}
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}
-	addPlayedCardTags(card: PlayableCardModel): void {this.tagState.addPlayedCardTags(card)}
+	getTagsOfType(tagType: TagType): number {return this.tagState.getTagsOfType(tagType)}
+	addTagsFromPlayedCard(card: PlayableCardModel): void {
+		this.tagState.addPlayedCardTags(card)
+	}
+	addTagFromOtherSource(tagId: number, quantity: number){
+		this.tagState.addTag(tagId, quantity)
+		this.setScalingProduction()
+		this.setScalingVp()
+	}
 
 	//ressourceState
 	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}
@@ -92,8 +103,26 @@ export class PlayerStateModel {
 	getRessourceInfoFromId(id: number): RessourceInfo | undefined {return this.ressourceState.getRessourceInfoFromId(id)}
 	getRessourceInfoFromType(type: RessourceType): RessourceInfo | undefined {return this.ressourceState.getRessourceStateFromType(type)}
 	addRessource(type: RessourceType, quantity: number): void {this.ressourceState.addRessource(type, quantity)}
-	addProduction(type: RessourceType, quantity: number): void {this.ressourceState.addProduction(type, quantity)}
-	setScalingProduction(type: RessourceType, quantity: number): void {this.ressourceState.setScalingProduction(type, quantity)}
+	addProduction(ressources: RessourceStock | RessourceStock[]): void {
+		let production: RessourceStock[] = Utils.toArray(ressources)
+		for(let p of production){
+			this.ressourceState.addProduction(p.name, p.valueStock)
+		}
+		this.setScalingProduction()
+	}
+	setScalingProduction(): void {
+		let ressources: RessourceInfo[] = this.getRessources()
+		for(let i=0 ;i<ressources.length; i++){
+			let scalingProd =
+				ProjectCardScalingProductionsService.getScalingProduction(
+					ressources[i].name,
+					this.getProjectPlayedIdList(),
+					this.getTags()
+				)
+			this.ressourceState.setScalingProduction(ressources[i].name, scalingProd)
+		}
+	}
+	increaseProductionModValue(ressourceType: Extract<RessourceType, 'steel' | 'titanium'>) {this.ressourceState.increaseProductionModValue(ressourceType)}
 
 	//phaseCardState
 	getPhaseCardUpgradedCount(): number {return this.phaseCardState.getPhaseCardUpgradedCount()}
@@ -119,6 +148,8 @@ export class PlayerStateModel {
 		return
 	}
 	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {return this.globalParameterState.isGlobalParameterMaxedOutAtPhaseBeginning(parameterName)}
+	getGlobalParameterColorAtPhaseBeginning(parameterName: GlobalParameterNameEnum): GlobalParameterColorEnum {return this.globalParameterState.getGlobalParameterColorAtPhaseBegining(parameterName)}
+	getOceanFlippedNumberAtPhaseBeginning(): number {return this.globalParameterState.getOceanFlippedNumberAtPhaseBeginning()}
 	addOceanFlippedBonus(bonus: OceanBonus){this.globalParameterState.addOceanFlippedBonus(bonus)}
 	getOceanFlippedBonus(): OceanBonus[] {return this.globalParameterState.getOceanFlippedBonus()}
 
@@ -132,26 +163,26 @@ export class PlayerStateModel {
 	addSellCardValueMod(value: number): void {this.otherState.addSellCardValueMod(value)}
 
 	//cardState
-	setTriggerInactive(triggerId: number): void {this.projectCardState.setTriggerInactive(triggerId)}
-	getTriggersIdOnPlayedCard(): number[] {return this.projectCardState.getTriggersIdOnPlayedCard()}
-	getTriggersIdOnParameterIncrease(): number[] {return this.projectCardState.getTriggersIdOnParameterIncrease()}
-	getTriggersIdOnRessourceAddedToCard(): number[] {return this.projectCardState.getTriggersIdOnRessourceAddedToCard()}
-	getTriggersIdOnGainedTag(){return this.projectCardState.getTriggersIdOnGainedTag()}
-	getTriggerCostMod(): number[] {return this.projectCardState.getTriggerCostMod()}
+	setTriggerInactive(trigger: string): void {this.projectCardState.setTriggerInactive(trigger)}
+	getTriggersIdOnPlayedCard(): string[] {return this.projectCardState.getTriggersIdOnPlayedCard()}
+	getTriggersIdOnParameterIncrease(): string[] {return this.projectCardState.getTriggersIdOnParameterIncrease()}
+	getTriggersIdOnRessourceAddedToCard(): string[] {return this.projectCardState.getTriggersIdOnRessourceAddedToCard()}
+	getTriggersIdOnGainedTag(): string[] {return this.projectCardState.getTriggersIdOnGainedTag()}
+	getTriggerCostMod(): string[] {return this.projectCardState.getTriggerCostMod()}
 
 	addCardsToHand(cards: number | number[]) {this.projectCardState.addCardsToHand(cards)}
-	removeCardsFromHand(cardIdList: number | number[], cardType: PlayableCardType): void {this.projectCardState.removeCardsFromHand(cardIdList, cardType)}
+	removeCardsFromHand(cardCodeList: number | number[], cardType: PlayableCardType): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType)}
 	getProjectHandIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectHandIdList(filter)}
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
 	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
 	addCardsToDiscard(cards: number | number[]) {this.projectCardState.addCardsToDiscard(cards)}
 
-	addRessourceToCard(cardId: number, advancedRessourceStock: AdvancedRessourceStock): void {
-		this.projectCardState.addRessourceToCard(cardId,advancedRessourceStock)
+	addRessourceToCard(cardCode: string, advancedRessourceStock: AdvancedRessourceStock): void {
+		this.projectCardState.addRessourceToCard(cardCode,advancedRessourceStock)
 		this.setScalingVp()
 	}
-	getProjectPlayedModelFromId(cardId:number): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromId(cardId)}
+	getProjectPlayedModelFromId(cardCode:string): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromCode(cardCode)}
 	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
 
@@ -162,8 +193,15 @@ export class PlayerStateModel {
 		this.projectCardState.playCard(card)
 		this.removeCardsFromHand([card.id], cardType)
 		this.payCardCost(card)
-		this.addPlayedCardTags(card)
+		this.addTagsFromPlayedCard(card)
+		if(Number(card.vpNumber??'')!=0 && !isNaN(Number(card.vpNumber??''))){
+			this.addVP(parseInt(card.vpNumber??''))
+		}
+		if(cardType==='corporation'){
+			this.addRessource('megacredit', card.startingMegacredits??0)
+		}
 		this.setScalingVp()
+		this.setScalingProduction()
 	}
 
 	loadEventStateActivator(dto: EventStateDTO): void {this.projectCardState.loadEventStateActivator(dto)}

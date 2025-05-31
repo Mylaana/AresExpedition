@@ -2,6 +2,7 @@ import { TagInfo } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { GAME_TAG_LIST } from "../../global/global-const";
 import { PlayerTagStateDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { TagType } from "../../types/global.type";
 
 export class PlayerTagStateModel {
     private tags: TagInfo[] = [] //this.initializeTags()
@@ -25,16 +26,22 @@ export class PlayerTagStateModel {
 		return result
 	}
 
-	addTag(tagId:number):void{
+	addTag(tagId:number, quantity: number):void{
 		if(tagId===-1){return}
-		this.tags[tagId].valueCount += 1
+		this.tags[tagId].valueCount += quantity
 	}
 	addPlayedCardTags(card: PlayableCardModel): void {
 		for(let tagId of card.tagsId){
-			this.addTag(tagId)
+			this.addTag(tagId, 1)
 		}
 	}
 	getTags(): TagInfo[] {return this.tags}
+	getTagsOfType(tagType: TagType): number {
+		for(let tag of this.tags){
+			if(tag.name===tagType){return tag.valueCount}
+		}
+		return 0
+	}
 	toJson(): PlayerTagStateDTO {
 		return {
 			t: this.tags

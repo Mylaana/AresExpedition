@@ -9,7 +9,8 @@ import { RxStompService } from '../../../../services/websocket/rx-stomp.service'
 import { WebsocketQueryMessageFactory } from '../../../../services/designers/websocket-message-factory.service';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
-import { myUUID } from '../../../../types/global.type';
+import { myUUID, TagType } from '../../../../types/global.type';
+import { GlobalParameterNameEnum } from '../../../../enum/global.enum';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -150,12 +151,10 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	addRessources(): void {
 		this.gameStateService.addRessourceToClient([{name:"megacredit", valueStock:200}])
-		//let cardList = this.gameStateService.getClientHandModelList()
-		//this.gameStateService.playCardFromClientHand(cardList[6])
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [46, 284]
+		let cardDrawList: number[] = [214]
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
 		this.gameStateService.cleanAndNextEventQueue()
@@ -179,15 +178,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		return ''
 	}
 	addTag(index: number) {
-		let state = this.gameStateService.getClientState()
-		let tags = state.getTags()
-		for(let tag of tags){
-			if(tag.id===index){
-				tag.valueCount+=1
-				return
-			}
-		}
-		this.gameStateService.updateClientState(state)
+		this.gameStateService.addTagFromOtherSourceToClient(this.getTagName(index) as TagType)
 	}
 	resetRessource(): void {
 		let state = this.gameStateService.getClientState()
@@ -213,13 +204,15 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 			if(ressource.id!=index){continue}
 			switch(index){
 				case(0):{
-					ressource.valueStock+=10
-					this.gameStateService.updateClientState(state)
+					this.gameStateService.addRessourceToClient([{name:'megacredit', valueStock:10}])
 					return
 				}
-				case(1):case(2):{
-					ressource.valueStock+=5
-					this.gameStateService.updateClientState(state)
+				case(1):{
+					this.gameStateService.addRessourceToClient([{name:'heat', valueStock:5}])
+					break
+				}
+				case(2):{
+					this.gameStateService.addRessourceToClient([{name:'plant', valueStock:5}])
 					return
 				}
 				case(3):case(4):{
@@ -229,5 +222,17 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 				}
 			}
 		}
+	}
+	getParameterName(index: number): GlobalParameterNameEnum{
+		switch(index){
+			case(0):{return GlobalParameterNameEnum.ocean}
+			case(1):{return GlobalParameterNameEnum.temperature}
+			case(2):{return GlobalParameterNameEnum.oxygen}
+			case(3):{return GlobalParameterNameEnum.infrastructure}
+		}
+		return GlobalParameterNameEnum.ocean
+	}
+	addParameter(index: number) {
+		this.gameStateService.addGlobalParameterStepsEOPtoClient({name:this.getParameterName(index), steps:1})
 	}
 }

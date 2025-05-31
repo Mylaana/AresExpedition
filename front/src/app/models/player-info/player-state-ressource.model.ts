@@ -73,6 +73,13 @@ export class PlayerRessourceStateModel {
 		this.ressources[Number(ressourceIndex.get(ressource))].valueProd =
 			this.ressources[Number(ressourceIndex.get(ressource))].valueBaseProd + scalingProduction
 	}
+	increaseProductionModValue(ressourceType: Extract<RessourceType, 'steel' | 'titanium'>) {
+		for(let ressource of this.ressources){
+			if(ressource.name===ressourceType){
+				ressource.valueMod =+1
+			}
+		}
+	}
 	toJson(): PlayerRessourceStateDTO {
 		return {
 			r: this.ressources

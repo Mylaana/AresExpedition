@@ -30,6 +30,7 @@ interface CreateEventOptionsGeneric {
 	addForestPoint?: number
 	oceanQueryNumber?: number
 	production?: RessourceStock | RessourceStock[]
+	increaseTr?: number
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -220,7 +221,7 @@ export class EventDesigner{
 
         return event
     }
-    public static createTargetCard(subType:EventTargetCardSubType, targetCardId:number ,args?: CreateEventOptionsTargetCard): EventTargetCard {
+    public static createTargetCard(subType:EventTargetCardSubType, targetCardId:string, args?: CreateEventOptionsTargetCard): EventTargetCard {
         let event = new EventTargetCard
 
         event.targetCardId = targetCardId
@@ -259,6 +260,10 @@ export class EventDesigner{
                 event.baseRessource = args?.baseRessource
                 break
             }
+			case('addProduction'):{
+                event.baseRessource = args?.baseRessource
+                break
+            }
             case('increaseResearchScanKeep'):{
                 event.increaseResearchScanKeep = args?.scanKeep
                 break
@@ -285,12 +290,16 @@ export class EventDesigner{
 				event.lockValidateButton = true
                 break
             }
-			case('addForestPoint'):{
+			case('addForestPointAndOxygen'):{
 				event.addForestPoint = args?.addForestPoint
 				break
 			}
 			case('oceanQuery'):{
 				event.gainOceanNumber = args?.oceanQueryNumber
+				break
+			}
+			case('addTr'):{
+				event.increaseTr = args?.increaseTr
 				break
 			}
             default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}

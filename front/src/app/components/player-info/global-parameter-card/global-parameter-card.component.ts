@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
-import { GlobalParameterColor } from '../../../types/global.type';
 import { CommonModule } from '@angular/common';
-import { GlobalParameterNameEnum } from '../../../enum/global.enum';
+import { GlobalParameterColorEnum, GlobalParameterNameEnum } from '../../../enum/global.enum';
 
 @Component({
     selector: 'app-global-parameter-card',
@@ -43,36 +42,36 @@ export class GlobalParameterCardComponent implements OnInit {
 			}
 		}
 	}
-	getStepColor(stepCount: number): GlobalParameterColor {
+	getStepColor(stepCount: number): string {
 		switch(this.parameter){
 			case(GlobalParameterNameEnum.oxygen):{
 				switch(true){
-					case(stepCount <= .02):{return 'purple'}
-					case(stepCount <= .06):{return 'red'}
-					case(stepCount <= .11):{return 'yellow'}
-					default:{return 'white'}
+					case(stepCount <= .02):{return GlobalParameterColorEnum.purple.toLowerCase()}
+					case(stepCount <= .06):{return GlobalParameterColorEnum.red.toLowerCase()}
+					case(stepCount <= .11):{return GlobalParameterColorEnum.yellow.toLowerCase()}
+					default:{return GlobalParameterColorEnum.white.toLowerCase()}
 				}
 			}
 			case(GlobalParameterNameEnum.infrastructure):{
 				switch(true){
-					case(stepCount <= .14):{return 'purple'}
-					case(stepCount <= .49):{return 'red'}
-					case(stepCount <= .77):{return 'yellow'}
-					default:{return 'white'}
+					case(stepCount <= .14):{return GlobalParameterColorEnum.purple.toLowerCase()}
+					case(stepCount <= .49):{return GlobalParameterColorEnum.red.toLowerCase()}
+					case(stepCount <= .77):{return GlobalParameterColorEnum.yellow.toLowerCase()}
+					default:{return GlobalParameterColorEnum.white.toLowerCase()}
 				}
 			}
 			case(GlobalParameterNameEnum.temperature):{
 				switch(true){
-					case(stepCount <= -20):{return 'purple'}
-					case(stepCount <= -10):{return 'red'}
-					case(stepCount <= 0):{return 'yellow'}
-					default:{return 'white'}
+					case(stepCount <= -20):{return GlobalParameterColorEnum.purple.toLowerCase()}
+					case(stepCount <= -10):{return GlobalParameterColorEnum.red.toLowerCase()}
+					case(stepCount <= 0):{return GlobalParameterColorEnum.yellow.toLowerCase()}
+					default:{return GlobalParameterColorEnum.white.toLowerCase()}
 				}
 			}
-			default:{return 'purple'}
+			default:{return GlobalParameterColorEnum.purple.toLowerCase()}
 		}
 	}
-	getCurrentStepColor(): GlobalParameterColor {
+	getCurrentStepColor(): string {
 		return this.getStepColor(this._progressionList[this.currentStep])
 	}
 	isCurrentStep(bubble: number): boolean {

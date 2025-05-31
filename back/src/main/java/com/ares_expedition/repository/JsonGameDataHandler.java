@@ -1,5 +1,6 @@
     package com.ares_expedition.repository;
 
+import com.ares_expedition.enums.game.CardTypeEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.repository.core.GameData;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -77,7 +78,7 @@ public class JsonGameDataHandler {
         }
     }
 
-    public static List<Integer> getCardsIdList(){
+    public static List<Integer> getCardsIdList(CardTypeEnum type){
         File file = Paths.get(CARDS_DATA_PATH).toFile();
         List<Integer> idList = new ArrayList<>();
         if(!file.exists()){
@@ -95,9 +96,16 @@ public class JsonGameDataHandler {
 
         for(Map<String, Object> card: cards) {
             Object id = card.get("id");
-            if(!(card.get("cardType").equals("corporation")) && id instanceof Integer){
-                idList.add(Integer.parseInt(id.toString()));
+            switch(type){
+                case PROJECT:
+                    if((card.get("cardType").equals("corporation")) && id instanceof Integer){continue;}
+                    break;
+                case CORPORATION:
+                    if((!card.get("cardType").equals("corporation")) && id instanceof Integer){continue;}
+                    break;
             }
+            if((card.get("status").equals("blocked") && id instanceof Integer)){continue;}
+            idList.add(Integer.parseInt(id.toString()));
         }
 
         return idList;

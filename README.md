@@ -47,8 +47,15 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ :
 No visual effect for discarding cards   
+No visual effect for adding a ressource to card   
 Builder: Disabled card appear buildable (visually only) when card selection active   
-Ressource on cards not being saved serverside   
+Adding forest point via event doesnt add VP   
+DRAW QUERY/RESULT are not 'saved' in eventstate, resulting in card disapearing if client refresh after draw   
+Events related to card played not savec in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
+Hand discard getting all cards during scan/keep (even the selected ones)   
+Adding oxygen via event increases forests! (Towing a comet)   
+Adding Forest via actionPhase doesnt trigger oxygen based triggers (ex: cardCode 33)   
+Card Activation cost check not being refreshed on clientstate refresh !   
 
 
 ## Must have for v1 :
@@ -56,12 +63,31 @@ Ressource on cards not being saved serverside
 root services: switch to static if possible   
 TriggerState: switch out trigger id checks from model to a service   
 Rework Buildable system in playableCardComponent   
+Merge services :
+    - play Prerequisite & activated cost check   
+    - played effect & activated effect (+triggers?)   
 
 ### Cards
-Implement all cards   
-Implement all corps   
-Add Event removing any ressource in list on played card   
-Add Event adding any ressource in list on played card   
+Implement missing cards & corps   
+Create Event type :   
+    - removing any ressource in list on played card   
+    - adding any ressource in list on played card   
+    - new builder event   
+    - discard type/Quantity watching discarded card datas (mars univ/49)   
+    - "action portal" type event casting subsequent events   
+Create trigger hooks :
+    - on card activation   
+Activation:
+    - Multiple activation options   
+    - Scaling activation cost   
+    - Droplist/Custom value selection on activation (card 32/47)   
+Other:
+    - Need prerequisite offset mechanic   
+    - Standard tech reduction mechanic   
+    - Conditionnal scan/keep (based on tag)   
+    - Conditionnal scan result (card 13)   
+    - Droplist
+
 
 ### Misc
 Add victory check   
@@ -94,7 +120,8 @@ test needs: empty components from the app logic and transfer it into services/cl
 global: removing obvious comments   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
-Refactor VP system   
+Refactor Ressource system (scaling, base etc.)   
+Refactor Tag System   
 
 ### Interface
 Add Display property for current event, so the screen does not flash when resolving technical events   

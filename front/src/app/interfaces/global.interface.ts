@@ -1,4 +1,4 @@
-import { AdvancedRessourceType, GameItemType, GlobalParameterColor, myUUID, PlayerColor, RGB, SelectablePhase, TagType } from "../types/global.type"
+import { AdvancedRessourceType, GameItemType, myUUID, PlayerColor, RGB, SelectablePhase, TagType } from "../types/global.type"
 import { PhaseCardType } from "../types/phase-card.type"
 import { PlayableCardModel } from "../models/cards/project-card.model"
 import { MinMaxEqualType } from "../types/global.type"
@@ -72,7 +72,7 @@ export interface GlobalParameterValue {
 }
 
 export interface CardRessourceStock {
-    cardId: number,
+    cardCode: string,
     stock: AdvancedRessourceStock[]
 }
 
