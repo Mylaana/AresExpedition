@@ -34,7 +34,7 @@ describe('Services - Core game - Game state', () => {
 
 			projectCardService = injector.get(ProjectCardInfoService)
 			scalingProdService = injector.get(ProjectCardScalingProductionsService)
-			playedCardService = new ProjectCardPlayedEffectService(scalingProdService)
+			playedCardService = new ProjectCardPlayedEffectService()
 			rxStompService = injector.get(RxStompService)
 			gameParam = injector.get(GameParamService)
 

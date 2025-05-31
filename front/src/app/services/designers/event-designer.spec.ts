@@ -443,12 +443,12 @@ describe('Service - Designers - Event', () => {
     describe('createTargetCard Event', () => {
         let expectedEvent: EventTargetCard
         let expectedSubType: EventTargetCardSubType
-        let expectedCardId: number
+        let expectedCardId: string
 
         beforeEach(() => {
             expectedEvent = new EventTargetCard
             expectedEvent.button = undefined
-            expectedCardId = 253
+            expectedCardId = '253'
         })
         describe('UNIT TEST', () => {
             it('should create a addRessourceToCardId target Event', () => {
