@@ -42,8 +42,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(): void {
-		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(
-			state => {this.onStateUpdate(state)})
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => {this.onStateUpdate(state)})
 		this._actionEvent = this.event as EventCardActivator
 		this.updateButtonState()
 	}
@@ -62,11 +61,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		if(!this._loaded){return}
 		this.updateButtonState()
 		if(this.event.button){this.updateEndPhaseButton(this.event.button as EventMainButton)}
-
-		let finishPhaseButtonEnabled = (this._heatStock>=8  || this._plantStock>=8 || (this._heatStock>=5  && this._plantStock>=3)) === false
-
-		//this._actionEvent.button?.updateEnabled(finishPhaseButtonEnabled)
-		//this.actionPhaseButtonUpdate.emit(finishPhaseButtonEnabled)
 	}
 	updateButtonState(): void {
 		this._convertForest.updateEnabled(this._plantStock>=8)

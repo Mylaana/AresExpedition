@@ -92,10 +92,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
 		this.setBuildable()
 		this.setMaximumActivation()
-
-		if(this.state.isActivable()){
-			this.setActivationPayable()
-		}
 		this._loaded = true
 	}
 	ngOnDestroy(): void {
@@ -137,6 +133,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		if(state===undefined){return}
 		this.clientState = state
 		this.updateCost()
+		console.log('clientstate updated')
 	}
 	public updateCost(): void {
 		if(!['hand', 'builderSelector'].includes(this.parentListType)){
@@ -170,14 +167,11 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		return true
 	}
 	public onActivation(twice: boolean): void {
-		this.setActivationPayable()
 		this.setMaximumActivation()
 
 		this.cardActivated.emit({card: this.projectCard, twice: twice})
 	}
-	private setActivationPayable(): void {
-		this._activationCostPayable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.gameStateService.getClientState())
-	}
+
 	private setMaximumActivation(): void {
 		this._maximumActivation = (this.projectCard.activated>=2) || (this.projectCard.activated>=1 && this.activableTwice === false)
 	}
