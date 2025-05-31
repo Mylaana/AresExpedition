@@ -183,6 +183,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 
 	public isDisabled(): boolean{
+		if(this.state.isIgnoreCost()){return false}
 		if (this.state.isBuildable()===false && this.state.isIgnoreCost()!=false && this.state.isActivable()===false && this.parentListSubType!='research'){
 			return true
 		}

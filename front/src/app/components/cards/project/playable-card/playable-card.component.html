@@ -1,6 +1,4 @@
 <div class="wrapper-main"
-	[class.hovered]="_hovered"
-	[class.selectable]="state.isSelectable()"
 	(mouseenter)="_hovered=true"
 	(mouseleave)="_hovered=false">
 	<app-card-highlight *ngIf="state.isSelected() && parentListSubType!='none'" [highlightStyle]="parentListSubType"></app-card-highlight>

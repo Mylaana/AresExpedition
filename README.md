@@ -46,10 +46,8 @@ Backend: Junit
 
 # WIP : 
 ## /!\Critical BUG/!\ :
-Builder: Disabled card appear buildable (visually only) when card selection active   
-Adding forest point via event doesnt add VP   
 DRAW QUERY/RESULT are not 'saved' in eventstate, resulting in card disapearing if client refresh after draw   
-Events related to card played not savec in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
+Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Hand discard getting all cards during scan/keep (even the selected ones)   
 Adding oxygen via event increases forests! (Towing a comet)   
 Adding Forest via actionPhase doesnt trigger oxygen based triggers (ex: cardCode 33)   
