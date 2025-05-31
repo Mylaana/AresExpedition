@@ -88,6 +88,7 @@ Add scan/keep modifier display
 Always display steel/titanium cost mod   
 Add visual effect for discarding cards   
 Add visual effect for adding a ressource to card   
+Rollback button does nothing   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
