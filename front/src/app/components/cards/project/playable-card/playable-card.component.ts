@@ -133,11 +133,9 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		if(state===undefined){return}
 		this.clientState = state
 		this.updateCost()
-		console.log('clientstate updated')
 	}
 	public updateCost(): void {
 		if(!['hand', 'builderSelector'].includes(this.parentListType)){
-			//this.projectCard.cost = this.projectCard.costInitial
 			return
 		}
 		this.megacreditAvailable = this.clientState.getRessourceInfoFromType('megacredit')?.valueStock??0

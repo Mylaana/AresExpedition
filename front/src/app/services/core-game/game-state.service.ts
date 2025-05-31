@@ -472,7 +472,6 @@ export class GameState{
 		//add TR if not maxed out
 		if(!state.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){
 			state.addTR(parameter.steps)
-
 			switch(parameter.name){
 				//query server for ocean bonus
 				case(GlobalParameterNameEnum.ocean):{

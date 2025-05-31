@@ -64,7 +64,7 @@ export class PlayerProjectCardStateModel {
 				case('corporation'):{
 					let index = this.handCorporation.indexOf(Number(card), 0);
 					if (index > -1) {
-						this.handCorporation.splice(index, 1)
+						this.handCorporation = []
 					}
 					break
 				}

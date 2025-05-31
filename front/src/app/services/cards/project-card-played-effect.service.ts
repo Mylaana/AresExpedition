@@ -994,7 +994,6 @@ export class ProjectCardPlayedEffectService {
 			}
 			//CreditCor
 			case('C1'):{
-				console.log('creditcor', card)
 				if(!card){break}
 				if(card.costInitial>=20){costMod += 4}
 				break
