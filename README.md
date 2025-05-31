@@ -88,6 +88,7 @@ Always display steel/titanium cost mod
 Add visual effect for discarding cards   
 Add visual effect for adding a ressource to card   
 Rollback button does nothing   
+Fix multiple activation display (transfer wrapper to activationList)   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
