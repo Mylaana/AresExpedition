@@ -99,9 +99,7 @@ export class EventHandler {
 		let event = this.currentEvent as EventCardActivator
 		event.activationLog[input.card.id.toString()] = input.card.activated
 		if(input.twice){event.doubleActivationCount += 1}
-		let addEvents = ProjectCardActivatedEffectService.getActivateCardEvent(input.card, this.gameStateService.getClientState(), input.option)
-		if(!addEvents){return}
-		this.gameStateService.addEventQueue(addEvents,'first')
+		this.gameStateService.activateCard(input.card, input.option)
 	}
 	public updateActionPhaseMainButtonState(enabled?: boolean): void {
 		let state = this.gameStateService.getClientState()

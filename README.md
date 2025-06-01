@@ -50,6 +50,8 @@ Events related to card played not saved in eventstate (see a card with oceanflip
 scankeepResult not being saved thus can be dodged (card 83)   
 Double activation count being ignored by multiple activation option cards (18/27/43)   
 
+potentially : All triggers (need testing them)   
+
 ## Must have for v1 :
 ### Refactoring
 root services: reorganize services/stateless classes and tree   

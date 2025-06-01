@@ -24,7 +24,6 @@ import { CardStartingMegacreditsComponent } from '../card-blocks/card-starting-m
 import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 import { CardStatusComponent } from '../card-blocks/card-status/card-status.component';
 import { CardBuildable } from '../../../../interfaces/card.interface';
-import { Utils } from '../../../../utils/utils';
 import { CardActivationListComponent } from '../card-blocks/card-activation-list/card-activation-list.component';
 import { CardConditionChecker } from '../../../../services/cards/project-card-prerequisite-effect';
 

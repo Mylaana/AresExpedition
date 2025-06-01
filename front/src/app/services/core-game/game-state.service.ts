@@ -7,7 +7,6 @@ import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel, EventPhase } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
-import { ProjectCardPlayedEffectService } from "../cards/project-card-played-effect.service";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
@@ -20,6 +19,9 @@ import { Utils } from "../../utils/utils";
 import { GlobalParameterNameEnum, OceanBonusEnum } from "../../enum/global.enum";
 import { EventStateFactory } from "../../factory/event-state-factory.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
+import { ProjectEffectEventFactory } from "../cards/project-card-played-effect.service";
+import { ProjectCardActivatedEffectService } from "../cards/project-card-activated-effect.service";
+import { ActivationOption } from "../../types/project-card.type";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -94,7 +96,6 @@ export class GameState{
 
 	constructor(
         private projectCardService: ProjectCardInfoService,
-		private readonly projectCardPlayed : ProjectCardPlayedEffectService,
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private injector: Injector
@@ -427,23 +428,17 @@ export class GameState{
         let events: EventBaseModel[] = []
 		let state = this.getClientState()
 		state.playCard(card, cardType)
-		let playedCardEvents = ProjectCardPlayedEffectService.getPlayedCardEvent(card.cardCode, state)
+		let playedCardEvents = ProjectEffectEventFactory.getPlayed(card.cardCode, state)
 
         //check for triggers and add them to queue
-        let onPlayedTriggers = state.getTriggersIdOnPlayedCard()
-        if(onPlayedTriggers.length!=0){
-            let eventsOnPlayed = ProjectCardPlayedEffectService.getEventTriggerByPlayedCard(card, onPlayedTriggers, state)
-            if(eventsOnPlayed!=undefined){
-                events = events.concat(eventsOnPlayed)
-            }
+		let activeTriggers = state.getTriggersIdActive()
+        let eventsOnPlayed = ProjectEffectEventFactory.trigger.getTriggerred('ON_CARD_PLAYED', activeTriggers, state, {})
+        if(eventsOnPlayed.length>0){
+            events = events.concat(eventsOnPlayed)
         }
-
-        let onTagGainedTriggers = state.getTriggersIdOnGainedTag()
-        if(onTagGainedTriggers.length!=0){
-            let eventsOnTagGained = ProjectCardPlayedEffectService.getTriggerByTagGained(card.tagsId, onTagGainedTriggers, onTagGainedTriggers.includes(card.cardCode))
-            if(eventsOnTagGained!=undefined){
-                events = events.concat(eventsOnTagGained)
-            }
+        let eventsOnTagGained = ProjectEffectEventFactory.trigger.getTriggerred('ON_TAG_GAINED', activeTriggers, state, {tagList:card.tagsId, playedCard: card})
+        if(eventsOnTagGained.length>0){
+            events = events.concat(eventsOnTagGained)
         }
 
         if(playedCardEvents!=undefined){
@@ -483,7 +478,7 @@ export class GameState{
 
 		let triggers = state.getTriggersIdOnParameterIncrease()
 		if(triggers.length>0){
-			newEvents = newEvents.concat(ProjectCardPlayedEffectService.getEventTriggerByGlobalParameterIncrease(triggers,parameter)??[])
+			newEvents = newEvents.concat(ProjectEffectEventFactory.trigger.getTriggerred("ON_PARAMETER_INCREASED", triggers, state, {increasedParameter:parameter.name, increasedParameterValue:parameter.steps}))
 		}
         if(newEvents.length===0){return}
         this.addEventQueue(newEvents, 'first')
@@ -499,28 +494,19 @@ export class GameState{
     }
     addRessourceToClientCard(cardStock: CardRessourceStock): void {
         let newState = this.getClientState()
-
+		let newEvents: EventBaseModel[] = []
+		let triggers = newState.getTriggersIdActive()
+		let card = newState.getProjectPlayedModelFromId(cardStock.cardCode)
         for(let stock of cardStock.stock){
             newState.addRessourceToCard(cardStock.cardCode, stock)
+			if(triggers.length>0){
+				newEvents = newEvents.concat(ProjectEffectEventFactory.trigger.getTriggerred('ON_RESSOURCE_ADDED_TO_CARD', triggers, newState, {receivingCard:card, ressourceAdded:stock.name, ressourceAddedValue:stock.valueStock}))
+			}
         }
-
+		if(newEvents.length>0){
+			this.addEventQueue(newEvents, 'first')
+		}
         this.updateClientState(newState)
-
-        for(let ressource of cardStock.stock){
-            let card = newState.getProjectPlayedModelFromId(cardStock.cardCode)
-            if(!card){continue}
-
-            let triggers = newState.getTriggersIdOnRessourceAddedToCard()
-            if(triggers.length===0){break}
-
-            let events = ProjectCardPlayedEffectService.getEventTriggerByRessourceAddedToCard(
-                card,
-                triggers,
-                ressource
-            )
-            if(!events){continue}
-            this.addEventQueue(events, 'first')
-        }
     }
     addClientResearchScanValue(scan: number): void {
         let newState = this.getClientState()
@@ -739,6 +725,11 @@ export class GameState{
 		let state = this.getClientState()
 		state.addForest(forestNumber)
 		this.updateClientState(state)
+
+		let newEvents =  ProjectEffectEventFactory.trigger.getTriggerred('ON_FOREST_GAINED', state.getTriggersIdActive(), state, {forestGained:forestNumber})
+		if(newEvents.length>0){
+			this.addEventQueue(newEvents, 'first')
+		}
 		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen)){return}
 		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.oxygen, steps:1})
 	}
@@ -758,10 +749,18 @@ export class GameState{
 		state.addTagFromOtherSource(tagId, 1)
 		this.updateClientState(state)
 
-		if(state.getTriggersIdOnGainedTag().length>0){
-			let newEvents = ProjectCardPlayedEffectService.getTriggerByTagGained([tagId], state.getTriggersIdOnGainedTag(), false)
+		if(state.getTriggersIdActive().length>0){
+			let newEvents = ProjectEffectEventFactory.trigger.getTriggerred('ON_TAG_GAINED', state.getTriggersIdActive(), state, {tagList:[tagId]})
 			if(!newEvents){return}
 			this.addEventQueue(newEvents,'first')
 		}
 	}
+    public activateCard(card: PlayableCardModel, option: ActivationOption){
+		let clientState = this.getClientState()
+		let newEvents: EventBaseModel[] = ProjectCardActivatedEffectService.getActivateCardEvent(card, this.getClientState(), option)??[]
+		let triggerredEvents = ProjectEffectEventFactory.trigger.getTriggerred('ON_CARD_ACTIVATED', clientState.getTriggersIdActive(), clientState, {})
+		newEvents = newEvents.concat(triggerredEvents)
+		if(newEvents?.length>0){return}
+		this.addEventQueue(newEvents,'first')
+    }
 }

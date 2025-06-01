@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
-import { ProjectFilter, RessourceStock } from "../../interfaces/global.interface";
-import { AdvancedRessourceStock } from "../../interfaces/global.interface";
+import { RessourceStock } from "../../interfaces/global.interface";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
@@ -273,30 +272,5 @@ export class ProjectCardActivatedEffectService {
 			}
 		}
 		return
-	}
-	private static checkPlayerHasBaseRessourceStock(state: PlayerStateModel, ressource: RessourceStock): boolean {
-		return (state.getRessourceInfoFromType(ressource.name)?.valueStock??0) >= ressource.valueStock
-	}
-	private static checkCardsWithRessourcesStock(state: PlayerStateModel, ressource: AdvancedRessourceStock | AdvancedRessourceStock[], anyOrAll: 'any' | 'all'): boolean {
-		let ressources: AdvancedRessourceStock[] = []
-		let hasStock : number = 0
-		if(Array.isArray(ressource)){
-			ressources = ressource
-		} else {
-			ressources = [ressource]
-		}
-
-		for(let r of ressources){
-			let filter: ProjectFilter = {type: 'stockable', stockableType: r.name}
-			hasStock += Math.min(state.getProjectPlayedModelList(filter).length, 1)
-		}
-
-		switch(anyOrAll){
-			case('all'):{return hasStock === ressources.length}
-			case('any'):{return hasStock >= 1}
-		}
-	}
-	private static checkPlayerHasCardsInHand(state: PlayerStateModel, cardsInHandNumber: number): boolean {
-		return state.getHandCurrentSize()>=1
 	}
 }
