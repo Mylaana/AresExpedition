@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
-import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsOceanQuery, WsOceanResult, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../../interfaces/websocket.interface";
-import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
-import { PlayerMessage } from "../../interfaces/websocket.interface";
+import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../enum/websocket.enum";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsOceanQuery, WsOceanResult, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../interfaces/websocket.interface";
+import { SelectablePhaseEnum } from "../enum/phase.enum";
+import { PlayerStateModel } from "../models/player-info/player-state.model";
+import { PlayerStateDTO } from "../interfaces/dto/player-state-dto.interface";
+import { PlayerMessage } from "../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid'
-import { myUUID } from "../../types/global.type";
-import { OceanBonusEnum } from "../../enum/global.enum";
-import { OceanBonus } from "../../interfaces/global.interface";
+import { myUUID } from "../types/global.type";
+import { OceanBonusEnum } from "../enum/global.enum";
+import { OceanBonus } from "../interfaces/global.interface";
 
 @Injectable({
     providedIn: 'root'

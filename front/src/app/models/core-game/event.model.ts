@@ -7,7 +7,7 @@ import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
-import { EventStateFactory } from "../../services/designers/event-state-factory.service";
+import { EventStateFactory } from "../../factory/event-state-factory.service";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'

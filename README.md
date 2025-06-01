@@ -52,7 +52,7 @@ Double activation count being ignored by multiple activation option cards (18/27
 
 ## Must have for v1 :
 ### Refactoring
-root services: switch to static if possible   
+root services: reorganize services/stateless classes and tree   
 TriggerState: switch out trigger id checks from model to a service   
 Rework Buildable system in playableCardComponent   
 Merge services :

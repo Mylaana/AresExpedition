@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { EventUnionSubTypes } from "../../types/event.type";
-import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
-import { EventStateOriginEnum, EventStateTypeEnum } from "../../enum/eventstate.enum";
-import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from "../../models/core-game/event.model";
-import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { OceanBonus } from "../../interfaces/global.interface";
-import { EventFactory } from "../../factory/event factory/event-factory";
+import { EventUnionSubTypes } from "../types/event.type";
+import { EventStateDTO } from "../interfaces/dto/event-state-dto.interface";
+import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
+import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from "../models/core-game/event.model";
+import { PlayerStateModel } from "../models/player-info/player-state.model";
+import { OceanBonus } from "../interfaces/global.interface";
+import { EventFactory } from "./event factory/event-factory";
 
 const EventSubTypeToStateMap = new Map<EventUnionSubTypes, EventStateTypeEnum>([
 	['developmentPhaseBuilder', EventStateTypeEnum.builderDevelopemntLocked],

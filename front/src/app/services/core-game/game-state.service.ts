@@ -15,12 +15,11 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.en
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
-import { EventDesigner } from "../designers/event-designer.service";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterNameEnum, OceanBonusEnum } from "../../enum/global.enum";
-import { EventStateTypeEnum } from "../../enum/eventstate.enum";
-import { EventStateFactory } from "../designers/event-state-factory.service";
+import { EventStateFactory } from "../../factory/event-state-factory.service";
+import { EventFactory } from "../../factory/event factory/event-factory";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -475,7 +474,7 @@ export class GameState{
 			switch(parameter.name){
 				//query server for ocean bonus
 				case(GlobalParameterNameEnum.ocean):{
-					newEvents.push(EventDesigner.createGeneric('oceanQuery', {oceanQueryNumber: parameter.steps}))
+					newEvents.push(EventFactory.createGeneric('oceanQuery', {oceanQueryNumber: parameter.steps}))
 					break
 				}
 			}
@@ -623,16 +622,16 @@ export class GameState{
 	}
 	public setSelectStartingHandEvents(): void {
 		let events: EventBaseModel[] = []
-		events.push(EventDesigner.createCardSelector('selectStartingHand'))
-		events.push(EventDesigner.createGeneric('endOfPhase'))
-		events.push(EventDesigner.createGeneric('waitingGroupReady'))
+		events.push(EventFactory.createCardSelector('selectStartingHand'))
+		events.push(EventFactory.createGeneric('endOfPhase'))
+		events.push(EventFactory.createGeneric('waitingGroupReady'))
 		this.addEventQueue(events,'first')
 	}
 	public setSelectCorporationEvents(): void {
 		let events: EventBaseModel[] = []
-		events.push(EventDesigner.createCardSelector('selectCorporation', {cardSelector: {selectFrom: this.getClientHandCorporationModelList()}}))
-		events.push(EventDesigner.createGeneric('endOfPhase'))
-		events.push(EventDesigner.createGeneric('waitingGroupReady'))
+		events.push(EventFactory.createCardSelector('selectCorporation', {cardSelector: {selectFrom: this.getClientHandCorporationModelList()}}))
+		events.push(EventFactory.createGeneric('endOfPhase'))
+		events.push(EventFactory.createGeneric('waitingGroupReady'))
 		this.addEventQueue(events,'first')
 	}
 	public playCorporation(corporation: PlayableCardModel): void {
@@ -721,7 +720,7 @@ export class GameState{
 		}
 		if(megacredit>0){ressources.push({name: 'megacredit', valueStock: megacredit})}
 		if(plant>0){ressources.push({name: 'plant', valueStock: plant})}
-		if(ressources.length>0){newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource:ressources}))}
+		if(ressources.length>0){newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource:ressources}))}
 		if(oceanBonus.draw.length>0){this.addCardsToClientHand(oceanBonus.draw)}
 
 		if(newEvents.length>0){

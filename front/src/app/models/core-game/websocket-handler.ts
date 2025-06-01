@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanQuery, WsOceanResult, WsReadyQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanResult, WsReadyQuery } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
-import { WebsocketResultMessageFactory } from "../../services/designers/websocket-message-factory.service";
+import { WebsocketResultMessageFactory } from "../../factory/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
-import { EventDesigner } from "../../services/designers/event-designer.service";
-import { Utils } from "../../utils/utils";
+import { Logger, Utils } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { EventFactory } from "../../factory/event factory/event-factory";
 
 @Injectable()
 export class WebsocketHandler {
@@ -16,7 +16,7 @@ export class WebsocketHandler {
     constructor(private gameStateService: GameState){}
 
     public handlePlayerMessage(message: PlayerMessageResult){
-        Utils.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
+        Logger.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
         switch(message.contentEnum){
             case(PlayerMessageContentResultEnum.draw):{
                 this.handlePlayerMessageDrawResult(message.content)
@@ -40,7 +40,7 @@ export class WebsocketHandler {
         }
     }
     public handleGroupMessage(message: GroupMessageResult){
-        Utils.logReceivedMessage(`[${message.contentEnum}] ON [GROUP CHANNEL]`, message.content)
+        Logger.logReceivedMessage(`[${message.contentEnum}] ON [GROUP CHANNEL]`, message.content)
 		console.log('message:',message)
         switch(message.contentEnum){
             case(GroupMessageContentResultEnum.debug):{
@@ -120,7 +120,7 @@ export class WebsocketHandler {
 			}
 		}
 		if(this.gameStateService.getClientReady()){
-			this.gameStateService.addEventQueue(EventDesigner.createGeneric('waitingGroupReady'),'first')
+			this.gameStateService.addEventQueue(EventFactory.createGeneric('waitingGroupReady'),'first')
 		}
 	}
 

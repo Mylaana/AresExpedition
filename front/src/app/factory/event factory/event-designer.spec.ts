@@ -4,7 +4,7 @@ import { CardBuilder, EventCardActivator, EventCardBuilder, EventCardSelector, E
 import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type"
 import { CardBuilderOptionType } from "../../types/global.type"
 import { ButtonDesigner } from "./button-designer.service"
-import { EventDesigner } from "./event-designer.service"
+import { EventDesigner } from "./event-factory"
 import { BuilderType } from "../../types/phase-card.type"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { Utils } from "../../utils/utils"

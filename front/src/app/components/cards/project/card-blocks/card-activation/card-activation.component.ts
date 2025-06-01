@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NonEventButtonComponent } from '../../../../tools/button/non-event-button.component';
 import { CommonModule } from '@angular/common';
-import { ButtonDesigner } from '../../../../../services/designers/button-designer.service';
+import { ButtonDesigner } from '../../../../../factory/button-designer.service';
 import { NonEventButton } from '../../../../../models/core-game/button.model';
 import { expandCollapseVertical } from '../../../../../animations/animations';
 import { PlayableCardModel } from '../../../../../models/cards/project-card.model';

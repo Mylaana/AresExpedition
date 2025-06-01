@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { RxStomp } from '@stomp/rx-stomp';
-import { WebsocketQueryMessageFactory } from '../designers/websocket-message-factory.service';
+import { WebsocketQueryMessageFactory } from '../../factory/websocket-message-factory.service';
 import { GLOBAL_WS_APP_PLAYER, GLOBAL_WS_APP_DEBUG } from '../../global/global-const';
 import { MessageContentQueryEnum } from '../../enum/websocket.enum';
 import { myRxStompConfig } from './rx-stomp.config';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
 import { PlayerStateModel } from '../../models/player-info/player-state.model';
-import { Utils } from '../../utils/utils';
+import { Logger, Utils } from '../../utils/utils';
 import { PlayerMessage } from '../../interfaces/websocket.interface';
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from '../../types/global.type';
@@ -63,7 +63,7 @@ export class RxStompService extends RxStomp {
     }
 
     private enqueueMessage(message: PlayerMessage, destination: string=GLOBAL_WS_APP_PLAYER) {
-		Utils.logPublishMessage(`${message.contentEnum}`, message.content)
+		Logger.logPublishMessage(`${message.contentEnum}`, message.content)
 		message.playerId = this.clientId
 		message.gameId = this.gameId
 
@@ -106,7 +106,7 @@ export class RxStompService extends RxStomp {
 	  }
 
     public publishDebugMessage(args: { gameId?: myUUID; playerId?: myUUID; contentEnum?: MessageContentQueryEnum; content: any }) {
-        Utils.logError(`PUBLISHED DEBUG: ${args.contentEnum} `, args.content)
+        Logger.logError(`PUBLISHED DEBUG: ${args.contentEnum} `, args.content)
         const message : PlayerMessage = {
 			uuid: uuidv4(),
             contentEnum: args.contentEnum ?? MessageContentQueryEnum.debug,
