@@ -67,12 +67,12 @@ export class ButtonDesigner{
             case('planificationPhase'):{caption='$other_validate$';break}
             case('upgradePhaseCards'):{caption='$other_validate$';break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='$other_validate$';break}
-            case('addRessourceToSelectedCard'):{caption='Add ressources';break}
+            case('addRessourceToSelectedCard'):{caption='$other_validate$';break}
             case('researchPhaseResult'):{caption='$other_validate$';break}
             case('selectCardForcedSell'):{caption='$other_validate$';break}
             case('selectCardOptionalSell'):{caption='$other_validate$';break}
             case('discardCards'):{caption='$other_validate$';break}
-            case('scanKeepResult'):{caption='Add selection to hand';break}
+            case('scanKeepResult'):{caption='$other_validate$';break}
 			case('selectStartingHand'):{caption='$other_validate$';break}
 			case('selectCorporation'):{caption='$other_validate$';break}
 			case('actionPhaseActivator'):{caption='$other_validate$';break}
@@ -162,12 +162,12 @@ export class ButtonDesigner{
 
         return buttons
     }
-	public static createNonEventButton(name: NonEventButtonNames): NonEventButton {
+	public static createNonEventButton(name: NonEventButtonNames, caption?:string): NonEventButton {
 		let button = new NonEventButton
 		button.name = name
         button.startEnabled = this.getStartEnabled(name)
         button.enabled = button.startEnabled
-        button.caption = this.getCaption(name)
+        button.caption = caption??this.getCaption(name)
 
         return button
 	}

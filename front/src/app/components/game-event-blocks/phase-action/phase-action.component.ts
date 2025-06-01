@@ -10,6 +10,7 @@ import { EventDesigner } from '../../../services/designers/event-designer.servic
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
+import { ActivationOption } from '../../../types/project-card.type';
 
 @Component({
     selector: 'app-phase-action',
@@ -23,7 +24,7 @@ import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	@Input() event!: EventBaseModel
 	@Output() actionPhaseButtonUpdate: EventEmitter<boolean> = new EventEmitter<boolean>()
-	@Output() projectActivated = new EventEmitter<{card: PlayableCardModel, twice: boolean}>()
+	@Output() projectActivated = new EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}>()
 	_convertForest: NonEventButton = ButtonDesigner.createNonEventButton('convertForest')
 	_buyForest: NonEventButton = ButtonDesigner.createNonEventButton('buyForest')
 	_convertTemperature: NonEventButton = ButtonDesigner.createNonEventButton('convertTemperature')
@@ -119,7 +120,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this.gameStateService.addEventQueue(newEvents, 'first')
 	}
 
-	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}){
+	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}){
 		this.projectActivated.emit(input)
 	}
 }

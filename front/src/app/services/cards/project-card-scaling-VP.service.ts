@@ -15,6 +15,11 @@ export class ProjectCardScalingVPService {
 					totalScalingVp += card.getStockValue('animal')
 					break
 				}
+				//Conserved Biome
+				case("18"):{
+					totalScalingVp += Math.floor(clientState.getForest() / 2)
+					break
+				}
 				//Fish
 				case("30"):{
 					totalScalingVp += card.getStockValue('animal')

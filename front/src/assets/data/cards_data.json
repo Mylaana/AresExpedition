@@ -14390,7 +14390,7 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$3$other_researchcard$$tag_event$:$skipline$$ressource_card$",
+            "en": "$other_arrow$3$other_researchcard$$tag_event$:$skipline$$other_hand$$ressource_card$",
             "fr": ""
         },
         "effectText": {

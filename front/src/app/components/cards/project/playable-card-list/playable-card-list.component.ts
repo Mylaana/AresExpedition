@@ -7,7 +7,8 @@ import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';
 import { PlayableCardComponent } from '../playable-card/playable-card.component';
-import { ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
+import { ActivationOption, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
+import { EventUnionSubTypes } from '../../../../types/event.type';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
 
@@ -34,7 +35,7 @@ export class PlayableCardListComponent implements OnChanges{
 	@Input() hovered!: boolean
 
 	@Output() updateSelectedCardList: EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}> = new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
-	@Output() projectActivated: EventEmitter<{card: PlayableCardModel, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, twice: boolean}>()
+	@Output() projectActivated: EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}>()
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<PlayableCardComponent>
 
 	_buildDiscount: number = 0
@@ -67,9 +68,13 @@ export class PlayableCardListComponent implements OnChanges{
 		}
 	}
 	private setListSubType(event: EventCardSelector): void {
-		switch(event.subType){
+		let subtype: EventUnionSubTypes = event.subType as EventUnionSubTypes
+		switch(subtype){
 			case('selectCardForcedSell'):case('selectCardOptionalSell'):{this.listSubType = 'sell'; break}
 			case('researchPhaseResult'):{this.listSubType = 'research'; break}
+			case('discardCards'):{this.listSubType='discard'; break}
+			case('addRessourceToSelectedCard'):{this.listSubType='addRessource';break}
+			case('scanKeepResult'):{this.listSubType='scanKeepResult';break}
 		}
 	}
 	private resetSelector(): void {
@@ -154,7 +159,7 @@ export class PlayableCardListComponent implements OnChanges{
 		this.selectedCardList = []
 	}
 
-	public onProjectActivated(input: {card: PlayableCardModel, twice: boolean}): void {
+	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}): void {
 		this.projectActivated.emit(input)
 		this.setSelector()
 	}

@@ -47,6 +47,7 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
+scankeepResult not being saved thus can be dodged (card 83)
 
 ## Must have for v1 :
 ### Refactoring
@@ -68,7 +69,6 @@ Create Event type :
 Create trigger hooks :
     - on card activation   
 Activation:   
-    - Multiple activation options   
     - Scaling activation cost   
     - Droplist/Custom value selection on activation (card 32/47)   
 Other:   
@@ -86,8 +86,8 @@ Add victory check
 Design production phase screen   
 Add scan/keep modifier display   
 Always display steel/titanium cost mod   
-Add visual effect for discarding cards   
-Add visual effect for adding a ressource to card   
+Rollback button does nothing   
+Fix multiple activation display (transfer wrapper to activationList)   
 
 ### CI/CD
 Frontend automated testing: Ongoing   

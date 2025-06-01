@@ -7,6 +7,7 @@ import { EventDesigner } from "../designers/event-designer.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
+import { ActivationOption } from "../../types/project-card.type";
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class ProjectCardActivatedEffectService {
 
 	* Events should be filled to the list according to their order of execution.
 	 */
-	static getActivateCardEvent(card: PlayableCardModel, clientState: PlayerStateModel): EventBaseModel[] | undefined{
+	static getActivateCardEvent(card: PlayableCardModel, clientState: PlayerStateModel, activationOption:  ActivationOption): EventBaseModel[] | undefined{
 		let result: EventBaseModel[] = []
 		switch(card.cardCode){
 			//AI Central
@@ -58,6 +59,20 @@ export class ProjectCardActivatedEffectService {
 					ressources.push({name:'plant', valueStock:1})
 				}
 				result.push(this.createEventAddRessource(ressources))
+				break
+			}
+			//Conserved Biomes
+			case('18'):{
+				switch(activationOption){
+					case(1):{
+						result.push(this.createEventAddRessourceToSelectedCard({name:'microbe', valueStock:1}))
+						break
+					}
+					case(2):{
+						result.push(this.createEventAddRessourceToSelectedCard({name:'animal', valueStock:1}))
+						break
+					}
+				}
 				break
 			}
 			//Decomposing Fungus
@@ -147,7 +162,7 @@ export class ProjectCardActivatedEffectService {
 		return result
 	}
 
-	static isActivationCostPayable(card: PlayableCardModel, clientState: PlayerStateModel): boolean {
+	static isActivationCostPayable(card: PlayableCardModel, clientState: PlayerStateModel, activationOption:  ActivationOption = 1): boolean {
 		switch(card.cardCode){
 			//AI Central
 			case('4'):{break}
@@ -167,6 +182,8 @@ export class ProjectCardActivatedEffectService {
 			case('15'):{break}
 			//Community Gardens
 			case('16'):{break}
+			//Conserved Biomes
+			case('18'):{break}
 			//Decomposing Fungus
 			case('20'):{
 				return false
@@ -227,6 +244,31 @@ export class ProjectCardActivatedEffectService {
 			}
 		}
 		return true
+	}
+	public static getActivationOption(card: PlayableCardModel): ActivationOption[]{
+		switch(card.cardCode){
+			case('18'):{
+				break
+			}
+			default:{
+				return [1]
+			}
+		}
+		return [1,2]
+	}
+	public static getActivationCaption(card: PlayableCardModel, option: ActivationOption): string | undefined {
+		switch(card.cardCode){
+			case('18'):{
+				switch(option){
+					case(1):{return '$ressource_microbe$'}
+					case(2):{return '$ressource_animal$'}
+				}
+			}
+			default:{
+				return
+			}
+		}
+		return
 	}
 	private static checkPlayerHasBaseRessourceStock(state: PlayerStateModel, ressource: RessourceStock): boolean {
 		return (state.getRessourceInfoFromType(ressource.name)?.valueStock??0) >= ressource.valueStock
