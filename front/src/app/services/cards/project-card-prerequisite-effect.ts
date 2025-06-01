@@ -299,7 +299,6 @@ export const CardConditionChecker = {
 			//Caretaker Contract
 			case('14'):{
 				return Checker.isRessourceOk('heat', 8, 'min', clientState)
-				break
 			}
 			//Circuit Board Factory
 			case('15'):{break}
@@ -330,7 +329,6 @@ export const CardConditionChecker = {
 			//Farmers Market
 			case('28'):{
 				return Checker.isRessourceOk('megacredit', 1, 'min', clientState)
-				break
 			}
 			//Farming Co-ops
 			case('29'):{
