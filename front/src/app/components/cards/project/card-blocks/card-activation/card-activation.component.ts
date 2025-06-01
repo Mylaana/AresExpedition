@@ -10,7 +10,7 @@ import { PlayerStateModel } from '../../../../../models/player-info/player-state
 import { GameState } from '../../../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivationOption } from '../../../../../types/project-card.type';
-import { CardConditionChecker } from '../../../../../services/cards/project-card-prerequisite-effect.service';
+import { CardConditionChecker } from '../../../../../services/cards/project-card-prerequisite-effect';
 
 @Component({
     selector: 'app-card-activation',

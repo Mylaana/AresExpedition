@@ -26,7 +26,7 @@ import { CardStatusComponent } from '../card-blocks/card-status/card-status.comp
 import { CardBuildable } from '../../../../interfaces/card.interface';
 import { Utils } from '../../../../utils/utils';
 import { CardActivationListComponent } from '../card-blocks/card-activation-list/card-activation-list.component';
-import { CardConditionChecker } from '../../../../services/cards/project-card-prerequisite-effect.service';
+import { CardConditionChecker } from '../../../../services/cards/project-card-prerequisite-effect';
 
 @Component({
     selector: 'app-playable-card',
