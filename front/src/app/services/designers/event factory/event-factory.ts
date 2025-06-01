@@ -5,7 +5,7 @@ import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCar
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType } from "../../../types/event.type"
 import { CardBuilderOptionType } from "../../../types/global.type"
 import { BuilderType } from "../../../types/phase-card.type"
-import { Utils } from "../../../utils/utils"
+import { Logger, Utils } from "../../../utils/utils"
 import { ButtonDesigner } from "../../../factory/button-designer.service"
 
 type CardSelectorOptions = Partial<CardSelector>
@@ -161,7 +161,7 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.refreshSelectorOnSwitch = false
             break
         }
-        default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 
@@ -251,7 +251,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
             for(let i=0; i<=1; i++){event.cardBuilder.push(generateCardBuilder(i))}
             break
         }
-        default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}
     }
 
     switch(subType){
@@ -265,7 +265,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
             event.cardSelector.filter = {type:'construction'}
             break
         }
-        default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
 
     event.buildDiscountValue = buildDiscountValue
@@ -287,7 +287,7 @@ function createTargetCard(subType:EventTargetCardSubType, targetCardId:string, a
         case('deactivateTrigger'):{
             break
         }
-        default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
     event.button = ButtonDesigner.createEventMainButton(event.subType)
     return event
@@ -354,7 +354,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
             event.increaseTr = args?.increaseTr
             break
         }
-        default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
     }
     event.button = ButtonDesigner.createEventMainButton(event.subType)
     return event
@@ -377,7 +377,7 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
             event.scanKeep = args?.scanKeep
             break
         }
-        default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
     return event
 }
@@ -394,7 +394,7 @@ function createWaiter(subType:EventWaiterSubType, waiterId: number) : EventWaite
             event.lockValidateButton = true
             break
         }
-        default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
     return event
 }
@@ -412,7 +412,7 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
         case('developmentPhase'):{break}
         case('constructionPhase'):{break}
         case('researchPhase'):{break}
-        default:{Utils.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType)}
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType)}
     }
     event.button = ButtonDesigner.createEventMainButton(event.subType)
     return event
