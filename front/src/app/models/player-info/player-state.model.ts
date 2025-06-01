@@ -177,7 +177,6 @@ export class PlayerStateModel {
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
 	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
 	addCardsToDiscard(cards: number | number[]) {this.projectCardState.addCardsToDiscard(cards)}
-
 	addRessourceToCard(cardCode: string, advancedRessourceStock: AdvancedRessourceStock): void {
 		this.projectCardState.addRessourceToCard(cardCode,advancedRessourceStock)
 		this.setScalingVp()
@@ -185,7 +184,8 @@ export class PlayerStateModel {
 	getProjectPlayedModelFromId(cardCode:string): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromCode(cardCode)}
 	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
-
+	hasProjectPlayedOfFilterType(filter: ProjectFilter): boolean {return this.projectCardState.hasProjectPlayedOfFilterType(filter)}
+	getProjectPlayedStock(cardCode: string): AdvancedRessourceStock[] {return this.projectCardState.getProjectPlayedStock(cardCode)}
 	getEventQueueState(): EventStateDTO[] {return this.eventState.eventQueueState}
 
 	//to refactor

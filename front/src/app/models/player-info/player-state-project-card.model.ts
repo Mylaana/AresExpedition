@@ -4,7 +4,7 @@ import { PlayerProjectCardStateDTO } from "../../interfaces/dto/player-state-dto
 import { AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
 import { ProjectCardInitializeService } from "../../services/cards/project-card-initialize.service"
-import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type"
+import { AdvancedRessourceType, PlayableCardType, RessourceType } from "../../types/global.type"
 import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
@@ -105,12 +105,13 @@ export class PlayerProjectCardStateModel {
     getProjectHandIdList(filter?: ProjectFilter): number[] {return this.filterCardIdList(this.hand, filter)}
 	getCorporationHandIdList(): number[] {return this.handCorporation}
 
-	private filterCardModelList(cards: PlayableCardModel[],  filter: ProjectFilter | undefined): PlayableCardModel[] {
+	private filterCardModelList(cards: PlayableCardModel[],  filter: ProjectFilter | undefined, returnOnlyFirst: boolean = false): PlayableCardModel[] {
         if(!filter){return cards}
 		let projectList:PlayableCardModel[] = []
         for(let card of cards){
             if(card.isFilterOk(filter)===true){
                 projectList.push(card)
+				if(returnOnlyFirst){return projectList}
             }
         }
         return projectList
@@ -141,6 +142,12 @@ export class PlayerProjectCardStateModel {
 				console.warn(`Invalid entry in event state activator:`, key, value);
 			}
 		}
+	}
+	hasProjectPlayedOfFilterType(filter: ProjectFilter): boolean {
+		return this.filterCardModelList(this.projects.playedProjectList, filter).length>0
+	}
+	getProjectPlayedStock(cardCode:string): AdvancedRessourceStock[]{
+		return this.getProjectPlayedModelFromCode(cardCode)?.stock??[]
 	}
 	private loadCardActivationCount(cardId: string, activationCount: number){
 		for(let card of this.projects.playedProjectList){

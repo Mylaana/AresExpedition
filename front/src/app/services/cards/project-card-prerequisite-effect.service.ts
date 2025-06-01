@@ -35,9 +35,17 @@ export class ProjectCardPrerequisiteEffectService {
 			case('14'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
 			}
+			//Extreme-Cold Fungus
+			case('27'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', clientState)
+			}
 			//Fish
 			case('30'):{
 				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
+			//GHG Producing Bacteria
+			case('31'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
 			}
 			//Herbivores
 			case('33'):{
@@ -50,6 +58,10 @@ export class ProjectCardPrerequisiteEffectService {
 			//Physics Complex
 			case('46'):{
 				return this.isTagNumberOk('science', 4, 'min', clientState)
+			}
+			//Regolith Eaters
+			case('50'):{
+				return this.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
 			}
 			//Symbiotic Fungus
 			case('57'):{
