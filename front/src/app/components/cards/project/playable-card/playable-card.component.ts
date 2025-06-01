@@ -8,10 +8,8 @@ import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
 import { ActivationOption, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
-import { ProjectCardActivatedEffectService } from '../../../../services/cards/project-card-activated-effect.service';
 import { expandCollapseVertical } from '../../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
-import { CardActivationComponent } from '../card-blocks/card-activation/card-activation.component';
 import { CardCostComponent } from '../card-blocks/card-cost/card-cost.component';
 import { CardEffectComponent } from '../card-blocks/card-effect/card-effect.component';
 import { CardHighlightComponent } from '../card-blocks/card-highlight/card-highlight.component';
@@ -25,10 +23,10 @@ import { CardTitleComponent } from '../card-blocks/card-title/card-title.compone
 import { CardStartingMegacreditsComponent } from '../card-blocks/card-starting-megacredits/card-starting-megacredits.component';
 import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 import { CardStatusComponent } from '../card-blocks/card-status/card-status.component';
-import { ProjectCardPrerequisiteEffectService } from '../../../../services/cards/project-card-prerequisite-effect.service';
 import { CardBuildable } from '../../../../interfaces/card.interface';
 import { Utils } from '../../../../utils/utils';
 import { CardActivationListComponent } from '../card-blocks/card-activation-list/card-activation-list.component';
+import { CardConditionChecker } from '../../../../services/cards/project-card-prerequisite-effect.service';
 
 @Component({
     selector: 'app-playable-card',
@@ -156,7 +154,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private setBuildableCheckList() {
 		this._buildableCheckList = {
 			costOk: this.megacreditAvailable >= this.projectCard.cost,
-			prerequisiteOk: ProjectCardPrerequisiteEffectService.isPrerequisiteOk(this.projectCard, this.clientState)
+			prerequisiteOk: CardConditionChecker.canBePlayed(this.projectCard, this.clientState)
 		}
 	}
 	private isBuildable(): boolean {

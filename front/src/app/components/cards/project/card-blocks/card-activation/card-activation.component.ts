@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NonEventButtonComponent } from '../../../../tools/button/non-event-button.component';
 import { CommonModule } from '@angular/common';
 import { ButtonDesigner } from '../../../../../factory/button-designer.service';
@@ -10,6 +10,7 @@ import { PlayerStateModel } from '../../../../../models/player-info/player-state
 import { GameState } from '../../../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivationOption } from '../../../../../types/project-card.type';
+import { CardConditionChecker } from '../../../../../services/cards/project-card-prerequisite-effect.service';
 
 @Component({
     selector: 'app-card-activation',
@@ -57,7 +58,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 		this.setActivationPayable()
 	}
 	private setActivationPayable(): void {
-		this.activationCostPayable = ProjectCardActivatedEffectService.isActivationCostPayable(this.projectCard, this.clientState, this.actionIndex)
+		this.activationCostPayable = CardConditionChecker.canBeActivated(this.projectCard, this.clientState, this.actionIndex)
 		this.updateButtonStatus()
 	}
 	private updateButtonStatus(): void {

@@ -32,8 +32,6 @@ const PhaseGroupToPhaseCards: Map<SelectablePhaseEnum, PhaseCardType[]> = new Ma
 	]
 )
 
-type phaseName = 'development' | 'construction' | 'action' | 'production' | 'research'
-
 function jsonCopy(item: any): any{
 		return JSON.parse(JSON.stringify(item))
 }
