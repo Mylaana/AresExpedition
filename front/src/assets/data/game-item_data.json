@@ -59,6 +59,72 @@
         "imageUrl": "assets/tag/event.png",
         "name": "$tag_event$"
     },
+	{
+        "id": 1000,
+        "description": "steel",
+        "imageUrl": "assets/ressource/steel.png",
+        "name": "$ressource_steel$"
+    },
+    {
+        "id": 1001,
+        "description": "titanium",
+        "imageUrl": "assets/ressource/titanium.png",
+        "name": "$ressource_titanium$"
+    },
+    {
+        "id": 1002,
+        "description": "science",
+        "imageUrl": "assets/ressource/science.png",
+        "name": "$ressource_science$"
+    },
+    {
+        "id": 1003,
+        "description": "power",
+        "imageUrl": "assets/ressource/power.png",
+        "name": "$ressource_power$"
+    },
+    {
+        "id": 1004,
+        "description": "plant",
+        "imageUrl": "assets/ressource/plant.png",
+        "name": "$ressource_plant$"
+    },
+    {
+        "id": 1005,
+        "description": "animal",
+        "imageUrl": "assets/ressource/animal.png",
+        "name": "$ressource_animal$"
+    },
+    {
+        "id": 1006,
+        "description": "microbe",
+        "imageUrl": "assets/ressource/microbe.png",
+        "name": "$ressource_microbe$"
+    },
+    {
+        "id": 1007,
+        "description": "heat",
+        "imageUrl": "assets/ressource/heat.png",
+        "name": "$ressource_heat$"
+    },
+    {
+        "id": 1008,
+        "description": "card",
+        "imageUrl": "assets/ressource/card.png",
+        "name": "$ressource_card$"
+    },
+    {
+        "id": 1009,
+        "description": "megacredit",
+        "imageUrl": "assets/ressource/megacredit.png",
+        "name": "$ressource_megacredit$"
+    },
+    {
+        "id": 1010,
+        "description": "megacreditvoid",
+        "imageUrl": "assets/ressource/megacreditvoid.png",
+        "name": "$ressource_megacreditvoid$"
+    },
     {
         "id": 100,
         "description": "redarrow",
@@ -305,70 +371,10 @@
         "imageUrl": "assets/other/standard.png",
         "name": "$other_standard$"
     },
-    {
-        "id": 1000,
-        "description": "steel",
-        "imageUrl": "assets/ressource/steel.png",
-        "name": "$ressource_steel$"
-    },
-    {
-        "id": 1001,
-        "description": "titanium",
-        "imageUrl": "assets/ressource/titanium.png",
-        "name": "$ressource_titanium$"
-    },
-    {
-        "id": 1002,
-        "description": "science",
-        "imageUrl": "assets/ressource/science.png",
-        "name": "$ressource_science$"
-    },
-    {
-        "id": 1003,
-        "description": "power",
-        "imageUrl": "assets/ressource/power.png",
-        "name": "$ressource_power$"
-    },
-    {
-        "id": 1004,
-        "description": "plant",
-        "imageUrl": "assets/ressource/plant.png",
-        "name": "$ressource_plant$"
-    },
-    {
-        "id": 1005,
-        "description": "animal",
-        "imageUrl": "assets/ressource/animal.png",
-        "name": "$ressource_animal$"
-    },
-    {
-        "id": 1006,
-        "description": "microbe",
-        "imageUrl": "assets/ressource/microbe.png",
-        "name": "$ressource_microbe$"
-    },
-    {
-        "id": 1007,
-        "description": "heat",
-        "imageUrl": "assets/ressource/heat.png",
-        "name": "$ressource_heat$"
-    },
-    {
-        "id": 1008,
-        "description": "card",
-        "imageUrl": "assets/ressource/card.png",
-        "name": "$ressource_card$"
-    },
-    {
-        "id": 1009,
-        "description": "megacredit",
-        "imageUrl": "assets/ressource/megacredit.png",
-        "name": "$ressource_megacredit$"
-    },
-    {
-        "id": 1010,
-        "description": "megacreditvoid",
-        "imageUrl": "assets/ressource/megacreditvoid.png",
-        "name": "$ressource_megacreditvoid$"
-    }
+	{
+        "id": 141,
+        "description": "hand",
+        "imageUrl": "assets/other/hand.png",
+        "name": "$other_hand$"
+	}
 ]

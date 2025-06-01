@@ -1,7 +1,7 @@
 <div class="wrapper-main"
 	(mouseenter)="_hovered=true"
 	(mouseleave)="_hovered=false">
-	<app-card-highlight *ngIf="state.isSelected() && parentListSubType!='none'" [highlightStyle]="parentListSubType"></app-card-highlight>
+	<app-card-highlight *ngIf="state.isSelected()" [highlightStyle]="parentListSubType"></app-card-highlight>
 	<div class="wrapper-selection-border"
 		[class]="parentListSubType"
 		[class.selected]="state.isSelected()"
@@ -80,6 +80,8 @@
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>
+<p>{{parentListType}}</p>
+<p>{{parentListSubType}}</p>
 <!--
 <p>{{_maximumActivation}}</p>
 <p>{{activableTwice}}</p>

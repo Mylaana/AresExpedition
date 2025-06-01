@@ -32,4 +32,16 @@
 		aspect-ratio: 1;
 		opacity: 85%;
 	}
+	& > .addRessource {
+		width: 80%;
+		height: auto;
+		aspect-ratio: 1;
+		opacity: 100%;
+	}
+	& > .scanKeepResult {
+		width: 60%;
+		height: auto;
+		aspect-ratio: .7;
+		opacity: 100%;
+	}
 }

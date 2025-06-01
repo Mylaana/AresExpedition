@@ -8,6 +8,7 @@ import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector
 import { Utils } from '../../../../utils/utils';
 import { PlayableCardComponent } from '../playable-card/playable-card.component';
 import { ActivationOption, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
+import { EventUnionSubTypes } from '../../../../types/event.type';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
 
@@ -67,9 +68,13 @@ export class PlayableCardListComponent implements OnChanges{
 		}
 	}
 	private setListSubType(event: EventCardSelector): void {
-		switch(event.subType){
+		let subtype: EventUnionSubTypes = event.subType as EventUnionSubTypes
+		switch(subtype){
 			case('selectCardForcedSell'):case('selectCardOptionalSell'):{this.listSubType = 'sell'; break}
 			case('researchPhaseResult'):{this.listSubType = 'research'; break}
+			case('discardCards'):{this.listSubType='discard'; break}
+			case('addRessourceToSelectedCard'):{this.listSubType='addRessource';break}
+			case('scanKeepResult'):{this.listSubType='scanKeepResult';break}
 		}
 	}
 	private resetSelector(): void {

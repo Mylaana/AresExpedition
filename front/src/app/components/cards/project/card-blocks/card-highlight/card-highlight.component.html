@@ -1,4 +1,6 @@
-<img *ngIf="highlightStyle==='sell'" [class]="highlightStyle" src="/assets/other/cancel.png" alt="">
+<img *ngIf="highlightStyle==='sell' || highlightStyle==='discard'" [class]="highlightStyle" src="/assets/other/cancel.png" alt="">
 <img *ngIf="highlightStyle==='research'" [class]="highlightStyle" src="/assets/other/research_eye.png" alt="">
 <img *ngIf="highlightStyle==='recycleStartingProject'" [class]="highlightStyle" src="/assets/other/circular.png" alt="">
 <img *ngIf="highlightStyle==='selectCorporation'" [class]="highlightStyle" src="/assets/other/validate.png" alt="">
+<img *ngIf="highlightStyle==='addRessource'" [class]="highlightStyle" src="/assets/other/validate.png" alt="">
+<img *ngIf="highlightStyle==='scanKeepResult'" [class]="highlightStyle" src="/assets/other/hand.png" alt="">
