@@ -110,12 +110,12 @@ export class PlayableCardModel{
             }
             case('stockable'):{
                 //converts filterValue into stockable name list
-                if(!filter.value){return false}
+                if(!filter.stockableType){return false}
                 let filterValueList: any[] = []
-                if(!Array.isArray(filter.value)){
-                    filterValueList.push(filter.value)
+                if(!Array.isArray(filter.stockableType)){
+                    filterValueList.push(filter.stockableType)
                 } else {
-                    filterValueList = filter.value
+                    filterValueList = filter.stockableType
                 }
 
                 for(let f of filterValueList){

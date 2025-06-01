@@ -83,7 +83,7 @@ export interface ScanKeep {
 
 export interface ProjectFilter {
     type: ProjectFilterType,
-    value?: AdvancedRessourceType | AdvancedRessourceType[]
+    stockableType?: AdvancedRessourceType | AdvancedRessourceType[]
 }
 
 export interface DrawDiscard {

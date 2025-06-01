@@ -122,7 +122,7 @@ export class EventDesigner{
         event.subType = 'addRessourceToSelectedCard'
         event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
         event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`
-        event.cardSelector.filter =  {type:'stockable', value:event.advancedRessource?.name}
+        event.cardSelector.filter =  {type:'stockable', stockableType:event.advancedRessource?.name}
         event.cardSelector.cardInitialState = {selectable: true, ignoreCost:true}
         event.cardSelector.selectionQuantityTreshold = 'equal'
         event.cardSelector.selectionQuantity = 1
