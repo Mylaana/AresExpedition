@@ -45,3 +45,26 @@
 		opacity: 100%;
 	}
 }
+.wrapper-sell{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	& > .cancel {
+		z-index: 1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 70%;
+	}
+	& > .megacredit {
+		z-index: 2;
+		position: absolute;
+		top: 0;
+		left: 60%;
+		width: 40%;
+		aspect-ratio: 1;
+		opacity: 60%;
+	}
+}
