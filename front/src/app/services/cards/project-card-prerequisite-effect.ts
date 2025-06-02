@@ -57,6 +57,10 @@ export const CardConditionChecker = {
 			case('50'):{
 				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
 			}
+			//Small Animals
+			case('53'):{
+				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
+			}
 			//Symbiotic Fungus
 			case('57'):{
 				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)

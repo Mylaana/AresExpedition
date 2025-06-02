@@ -20,6 +20,7 @@ export class CardActivationListComponent implements OnInit{
 	@Output() activated: EventEmitter<{card: PlayableCardModel, option: ActivationOption, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, option: ActivationOption, twice: boolean}>()
 
 	activationOptions: ActivationOption[] = []
+
 	ngOnInit(): void {
 		this.activationOptions = ProjectCardActivatedEffectService.getActivationOption(this.projectCard)
 	}

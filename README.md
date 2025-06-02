@@ -50,7 +50,12 @@ Events related to card played not saved in eventstate (see a card with oceanflip
 scankeepResult not being saved thus can be dodged (card 83)   
 Double activation count being ignored by multiple activation option cards (18/27/43)   
 
-potentially : All triggers (need testing them)   
+potentially : All triggers (need testing them), types tested:   
+    - On card played   
+    - on tag played   
+    - on parameter increased    
+    - on forest gained   
+    - on Activated card
 
 ## Must have for v1 :
 ### Refactoring
@@ -60,6 +65,9 @@ Rework Buildable system in playableCardComponent
 Merge services :
     - play Prerequisite & activated cost check   
     - played effect & activated effect (+triggers?)   
+Ccaling vp cards:
+    - switch to record system
+    - display dynamically vp gained   
 
 ### Cards
 Implement missing cards & corps   

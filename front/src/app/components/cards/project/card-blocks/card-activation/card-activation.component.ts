@@ -37,7 +37,6 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(): void {
-		console.log(this.projectCard.title, ProjectCardActivatedEffectService.getActivationCaption(this.projectCard, this.actionIndex))
 		this._activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce', ProjectCardActivatedEffectService.getActivationCaption(this.projectCard, this.actionIndex))
 		this._activateTwice = ButtonDesigner.createNonEventButton('activateProjectTwice')
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))

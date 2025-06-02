@@ -756,11 +756,11 @@ export class GameState{
 		}
 	}
     public activateCard(card: PlayableCardModel, option: ActivationOption){
-		let clientState = this.getClientState()
+        let clientState = this.getClientState()
 		let newEvents: EventBaseModel[] = ProjectCardActivatedEffectService.getActivateCardEvent(card, this.getClientState(), option)??[]
 		let triggerredEvents = ProjectEffectEventFactory.trigger.getTriggerred('ON_CARD_ACTIVATED', clientState.getTriggersIdActive(), clientState, {})
 		newEvents = newEvents.concat(triggerredEvents)
-		if(newEvents?.length>0){return}
+		if(newEvents?.length===0){return}
 		this.addEventQueue(newEvents,'first')
     }
 }
