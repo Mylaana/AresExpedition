@@ -16,6 +16,7 @@ export interface PlayableCardEffect {
 	effectSummaryText: string
 	effectText: string
 	effectSummaryType: SummaryType
+	effectAction: string[]
 }
 
 export interface PlayableCardInterface {

@@ -200,17 +200,24 @@ export class ProjectCardInfoService {
     }
 	private loadEffects(input: any){
 		let effects: PlayableCardEffect[] = []
-
+		let actionText: string[] = []
+		if(input['effectActionTextOption1'][language]){actionText.push(input['effectActionTextOption1'][language])}
+		if(input['effectActionTextOption2'][language]){actionText.push(input['effectActionTextOption2'][language])}
 		effects.push({
 			effectText: input['effectText'][language],
 			effectSummaryText: input['effectSummaryText'][language],
-			effectSummaryType: this.convertSummaryType(input['effectSummaryType'])
+			effectSummaryType: this.convertSummaryType(input['effectSummaryType']),
+			effectAction: actionText
 		})
 		if(input['effectSummaryType2']){
+			let actionText: string[] = []
+			if(input['effectActionText2Option1'][language]){actionText.push(input['effectActionText2Option1'][language])}
+			if(input['effectActionText2Option2'][language]){actionText.push(input['effectActionText2Option2'][language])}
 			effects.push({
 				effectText: input['effectText2'][language],
 				effectSummaryText: input['effectSummaryText2'][language],
-				effectSummaryType: this.convertSummaryType(input['effectSummaryType2'])
+				effectSummaryType: this.convertSummaryType(input['effectSummaryType2']),
+				effectAction: actionText
 			})
 		}
 		return effects

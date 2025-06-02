@@ -26,6 +26,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	@Input() maximumCardActivation!: boolean
 	@Input() projectCard!: PlayableCardModel
 	@Input() actionIndex: ActivationOption = 1
+	@Input() caption!: string
 	@Output() activated = new EventEmitter<{option: ActivationOption, twice: boolean}>()
 	_activateOnce!: NonEventButton
 	_activateTwice!: NonEventButton
@@ -37,7 +38,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(): void {
-		this._activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce', ProjectCardActivatedEffectService.getActivationCaption(this.projectCard, this.actionIndex))
+		this._activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce', this.caption)
 		this._activateTwice = ButtonDesigner.createNonEventButton('activateProjectTwice')
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
 		this.updateButtonStatus()
