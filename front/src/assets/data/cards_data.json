@@ -56,7 +56,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 2,
@@ -115,7 +131,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 3,
@@ -174,7 +206,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 4,
@@ -234,7 +282,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 5,
@@ -295,7 +359,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 6,
@@ -354,7 +434,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 7,
@@ -413,7 +509,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 8,
@@ -472,7 +584,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 9,
@@ -529,7 +657,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 10,
@@ -588,7 +732,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 11,
@@ -647,7 +807,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 12,
@@ -708,7 +884,23 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 13,
@@ -767,7 +959,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 14,
@@ -824,7 +1032,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 15,
@@ -883,7 +1107,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 16,
@@ -942,7 +1182,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 17,
@@ -1001,7 +1257,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 18,
@@ -1062,7 +1334,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "$ressource_microbe$*",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "$ressource_animal$*",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 19,
@@ -1123,7 +1411,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 20,
@@ -1184,7 +1488,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 21,
@@ -1241,7 +1561,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 22,
@@ -1301,7 +1637,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 23,
@@ -1361,7 +1713,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 24,
@@ -1423,7 +1791,23 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 25,
@@ -1482,7 +1866,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 26,
@@ -1542,7 +1942,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 27,
@@ -1601,7 +2017,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 28,
@@ -1660,7 +2092,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 29,
@@ -1719,7 +2167,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 30,
@@ -1780,7 +2244,23 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 31,
@@ -1842,7 +2322,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 32,
@@ -1902,7 +2398,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 33,
@@ -1963,7 +2475,23 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 34,
@@ -2022,7 +2550,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 35,
@@ -2082,7 +2626,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 36,
@@ -2141,7 +2701,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 37,
@@ -2200,7 +2776,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 38,
@@ -2259,7 +2851,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 39,
@@ -2320,7 +2928,23 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 40,
@@ -2380,7 +3004,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 41,
@@ -2439,7 +3079,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 42,
@@ -2498,7 +3154,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 43,
@@ -2559,7 +3231,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 44,
@@ -2620,7 +3308,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 45,
@@ -2679,7 +3383,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 46,
@@ -2741,7 +3461,23 @@
             "science"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 47,
@@ -2801,7 +3537,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 48,
@@ -2858,7 +3610,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 49,
@@ -2915,7 +3683,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 50,
@@ -2977,7 +3761,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 51,
@@ -3037,7 +3837,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 52,
@@ -3094,7 +3910,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 53,
@@ -3155,7 +3987,23 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 54,
@@ -3215,7 +4063,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 55,
@@ -3274,7 +4138,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 56,
@@ -3333,7 +4213,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 57,
@@ -3392,7 +4288,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 58,
@@ -3453,7 +4365,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 59,
@@ -3512,7 +4440,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 60,
@@ -3572,7 +4516,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 61,
@@ -3632,7 +4592,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 62,
@@ -3691,7 +4667,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 63,
@@ -3751,7 +4743,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 64,
@@ -3810,7 +4818,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 65,
@@ -3871,7 +4895,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 66,
@@ -3930,7 +4970,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 67,
@@ -3990,7 +5046,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 68,
@@ -4049,7 +5121,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 69,
@@ -4109,7 +5197,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 70,
@@ -4169,7 +5273,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 71,
@@ -4228,7 +5348,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 72,
@@ -4289,7 +5425,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 73,
@@ -4349,7 +5501,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 74,
@@ -4409,7 +5577,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 75,
@@ -4468,7 +5652,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 76,
@@ -4528,7 +5728,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 77,
@@ -4588,7 +5804,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 78,
@@ -4648,7 +5880,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 79,
@@ -4707,7 +5955,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 80,
@@ -4768,7 +6032,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 81,
@@ -4829,7 +6109,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 82,
@@ -4890,7 +6186,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 83,
@@ -4950,7 +6262,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 84,
@@ -5010,7 +6338,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 85,
@@ -5071,7 +6415,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 86,
@@ -5130,7 +6490,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 87,
@@ -5191,7 +6567,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 88,
@@ -5250,7 +6642,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 89,
@@ -5309,7 +6717,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 90,
@@ -5369,7 +6793,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 91,
@@ -5429,7 +6869,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 92,
@@ -5488,7 +6944,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 93,
@@ -5548,7 +7020,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 94,
@@ -5608,7 +7096,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 95,
@@ -5667,7 +7171,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 96,
@@ -5728,7 +7248,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 97,
@@ -5787,7 +7323,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 98,
@@ -5846,7 +7398,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 99,
@@ -5907,7 +7475,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 100,
@@ -5968,7 +7552,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 101,
@@ -6028,7 +7628,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 102,
@@ -6087,7 +7703,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 103,
@@ -6147,7 +7779,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 104,
@@ -6207,7 +7855,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 105,
@@ -6266,7 +7930,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 106,
@@ -6325,7 +8005,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 107,
@@ -6384,7 +8080,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 108,
@@ -6443,7 +8155,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 109,
@@ -6502,7 +8230,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 110,
@@ -6562,7 +8306,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 111,
@@ -6619,7 +8379,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 112,
@@ -6678,7 +8454,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 113,
@@ -6738,7 +8530,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 114,
@@ -6797,7 +8605,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 116,
@@ -6858,7 +8682,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 117,
@@ -6918,7 +8758,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 118,
@@ -6978,7 +8834,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 119,
@@ -7037,7 +8909,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 120,
@@ -7096,7 +8984,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 121,
@@ -7155,7 +9059,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 122,
@@ -7216,7 +9136,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 123,
@@ -7275,7 +9211,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 124,
@@ -7334,7 +9286,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 125,
@@ -7393,7 +9361,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 126,
@@ -7453,7 +9437,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 127,
@@ -7513,7 +9513,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 128,
@@ -7572,7 +9588,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 129,
@@ -7629,7 +9661,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 130,
@@ -7688,7 +9736,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 131,
@@ -7747,7 +9811,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 132,
@@ -7807,7 +9887,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 133,
@@ -7866,7 +9962,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 134,
@@ -7925,7 +10037,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 135,
@@ -7984,7 +10112,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 136,
@@ -8044,7 +10188,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 137,
@@ -8105,7 +10265,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 138,
@@ -8165,7 +10341,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 139,
@@ -8224,7 +10416,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 140,
@@ -8284,7 +10492,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 141,
@@ -8344,7 +10568,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 142,
@@ -8403,7 +10643,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 143,
@@ -8463,7 +10719,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 144,
@@ -8520,7 +10792,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 145,
@@ -8579,7 +10867,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 146,
@@ -8639,7 +10943,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 147,
@@ -8699,7 +11019,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 148,
@@ -8758,7 +11094,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 149,
@@ -8817,7 +11169,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 150,
@@ -8876,7 +11244,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 151,
@@ -8936,7 +11320,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 152,
@@ -8995,7 +11395,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 153,
@@ -9056,7 +11472,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 154,
@@ -9113,7 +11545,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 155,
@@ -9172,7 +11620,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 156,
@@ -9232,7 +11696,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 157,
@@ -9291,7 +11771,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 158,
@@ -9351,7 +11847,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 159,
@@ -9412,7 +11924,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 160,
@@ -9471,7 +11999,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 161,
@@ -9531,7 +12075,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 162,
@@ -9590,7 +12150,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 163,
@@ -9650,7 +12226,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 164,
@@ -9709,7 +12301,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 165,
@@ -9770,7 +12378,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 166,
@@ -9829,7 +12453,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 167,
@@ -9886,7 +12526,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 168,
@@ -9945,7 +12601,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 169,
@@ -10005,7 +12677,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 170,
@@ -10065,7 +12753,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 171,
@@ -10124,7 +12828,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 172,
@@ -10184,7 +12904,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 173,
@@ -10243,7 +12979,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 174,
@@ -10303,7 +13055,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 175,
@@ -10363,7 +13131,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 176,
@@ -10422,7 +13206,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 177,
@@ -10482,7 +13282,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 178,
@@ -10543,7 +13359,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 179,
@@ -10600,7 +13432,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 180,
@@ -10659,7 +13507,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 181,
@@ -10718,7 +13582,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 182,
@@ -10777,7 +13657,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 183,
@@ -10837,7 +13733,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 184,
@@ -10896,7 +13808,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 185,
@@ -10956,7 +13884,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 186,
@@ -11015,7 +13959,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 187,
@@ -11074,7 +14034,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 188,
@@ -11133,7 +14109,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 189,
@@ -11192,7 +14184,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 190,
@@ -11251,7 +14259,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 191,
@@ -11310,7 +14334,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 192,
@@ -11369,7 +14409,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 193,
@@ -11429,7 +14485,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 194,
@@ -11488,7 +14560,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 195,
@@ -11545,7 +14633,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 196,
@@ -11602,7 +14706,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 197,
@@ -11659,7 +14779,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 198,
@@ -11718,7 +14854,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 199,
@@ -11775,7 +14927,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 200,
@@ -11834,7 +15002,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 201,
@@ -11893,7 +15077,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 202,
@@ -11953,7 +15153,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 203,
@@ -12010,7 +15226,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 204,
@@ -12071,7 +15303,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 205,
@@ -12130,7 +15378,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 206,
@@ -12190,7 +15454,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 207,
@@ -12249,7 +15529,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 208,
@@ -12306,7 +15602,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 209,
@@ -12365,7 +15677,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 210,
@@ -12425,7 +15753,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 211,
@@ -12484,7 +15828,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 212,
@@ -12545,7 +15905,23 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 213,
@@ -12604,7 +15980,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 214,
@@ -12664,7 +16056,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 215,
@@ -12724,7 +16132,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 216,
@@ -12784,7 +16208,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 217,
@@ -12843,7 +16283,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 218,
@@ -12902,7 +16358,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 219,
@@ -12963,7 +16435,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 222,
@@ -13025,7 +16513,23 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 229,
@@ -13084,7 +16588,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 230,
@@ -13143,7 +16663,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 232,
@@ -13202,7 +16738,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 233,
@@ -13261,7 +16813,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 260,
@@ -13320,7 +16888,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 263,
@@ -13380,7 +16964,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 266,
@@ -13440,7 +17040,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 268,
@@ -13499,7 +17115,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 271,
@@ -13559,7 +17191,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 275,
@@ -13618,7 +17266,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 279,
@@ -13679,7 +17343,23 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 280,
@@ -13739,7 +17419,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 281,
@@ -13798,7 +17494,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 282,
@@ -13857,7 +17569,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 284,
@@ -13918,7 +17646,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 286,
@@ -13979,7 +17723,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 289,
@@ -14039,7 +17799,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 292,
@@ -14098,7 +17874,23 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1001,
@@ -14155,7 +17947,23 @@
         },
         "stockable": [],
         "startingMegacredits": 48,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1002,
@@ -14214,7 +18022,23 @@
         },
         "stockable": [],
         "startingMegacredits": 27,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1003,
@@ -14273,7 +18097,23 @@
         },
         "stockable": [],
         "startingMegacredits": 28,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1004,
@@ -14332,7 +18172,23 @@
         },
         "stockable": [],
         "startingMegacredits": 46,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1005,
@@ -14391,7 +18247,23 @@
         },
         "stockable": [],
         "startingMegacredits": 33,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1006,
@@ -14451,7 +18323,23 @@
         },
         "stockable": [],
         "startingMegacredits": 27,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1007,
@@ -14510,7 +18398,23 @@
         },
         "stockable": [],
         "startingMegacredits": 20,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1008,
@@ -14569,7 +18473,23 @@
         },
         "stockable": [],
         "startingMegacredits": 24,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1009,
@@ -14628,7 +18548,23 @@
         },
         "stockable": [],
         "startingMegacredits": 51,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1010,
@@ -14685,7 +18621,23 @@
         },
         "stockable": [],
         "startingMegacredits": 40,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1011,
@@ -14744,7 +18696,23 @@
         },
         "stockable": [],
         "startingMegacredits": 45,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1012,
@@ -14801,7 +18769,23 @@
         },
         "stockable": [],
         "startingMegacredits": 35,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1013,
@@ -14863,7 +18847,23 @@
             "animal"
         ],
         "startingMegacredits": 43,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1014,
@@ -14922,7 +18922,23 @@
         },
         "stockable": [],
         "startingMegacredits": 50,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1015,
@@ -14981,7 +18997,23 @@
         },
         "stockable": [],
         "startingMegacredits": 40,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1016,
@@ -15040,7 +19072,23 @@
         },
         "stockable": [],
         "startingMegacredits": 36,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1017,
@@ -15099,7 +19147,23 @@
         },
         "stockable": [],
         "startingMegacredits": 48,
-        "status": "blocked"
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 1018,
@@ -15156,7 +19220,23 @@
         },
         "stockable": [],
         "startingMegacredits": 43,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     },
     {
         "id": 10001,
@@ -15216,6 +19296,22 @@
         },
         "stockable": [],
         "startingMegacredits": 25,
-        "status": "implemented"
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        }
     }
 ]
