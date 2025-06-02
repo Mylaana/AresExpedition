@@ -31,6 +31,7 @@
             "en": "EFFECT: When you play a card with requirements, you can consider oxygen or temperature or infrastructure a higher or lower color. This cannot be combined with other effects.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -40,6 +41,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -88,6 +90,7 @@
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional 1 MC. Each Steel you have reduces the cost of cards by an additional 1 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -97,6 +100,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -145,6 +149,7 @@
             "en": "Action: Reveal the top three cards of the deck. Place a card with a $tag_science$ or $tag_plant$ revealed this way into your hand. Discard the rest",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -154,6 +159,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -203,6 +209,7 @@
             "en": "Action: Draw 2 cards.",
             "fr": "Action: Piochez 2 cartes."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -212,6 +219,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -260,6 +268,7 @@
             "en": "EFFECT: When you play a card, you can remove 2 microbes from this card to pay 10 MC less for it.\nEFFECT: Whenever you play a $tag_animal$, $tag_microbe$S or $tag_plant$, including this one, add a microbe to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -269,6 +278,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -319,6 +329,7 @@
             "en": "EFFECT: When you play a card, gain 2 heat and 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -328,6 +339,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -376,6 +388,7 @@
             "en": "ACTION: Spend 10 MC to flip an ocean tile. Reduce this cost by 2 MC per steel production you have.",
             "fr": ""
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -385,6 +398,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -433,6 +447,7 @@
             "en": "EFFECT: When you flip an ocean tile, gain 4 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -442,6 +457,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -488,6 +504,7 @@
             "en": "Action: Spend 1 plant to draw 1 card.",
             "fr": "Action: D\u00e9pensez 1 plante pour piocher 1 carte."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -497,6 +514,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -545,6 +563,7 @@
             "en": "EFFECT: Whenever you use an \"ACTION:\" from one of your cards, gain 1 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -554,6 +573,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -568,7 +588,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "implemented"
     },
     {
         "id": 11,
@@ -602,6 +622,7 @@
             "en": "ACTION: Spend 1 terraforming point to draw 3 cards.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -611,6 +632,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You may play an additional blue or red card during this phase.",
             "fr": ""
@@ -659,6 +681,7 @@
             "en": "ACTION: Add an animal to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -668,6 +691,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -718,6 +742,7 @@
             "en": "ACTION: Reveal the top card of the deck. If it's green, discard it and gain 1 MC. Otherwise, keep it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -727,6 +752,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -773,6 +799,7 @@
             "en": "ACTION: Spend 8 heat to increase your terraforming score by 1 step.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -782,6 +809,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -830,6 +858,7 @@
             "en": "ACTION: Draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -839,6 +868,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -887,6 +917,7 @@
             "en": "ACTION: Earn 2 MC. If you chose the action phase this round, you also gain 1 plant.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -896,6 +927,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -944,6 +976,7 @@
             "en": "EFFECT: Cards you discard for MC are worth an additional MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -953,6 +986,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1003,6 +1037,7 @@
             "en": "Action: Add a microbe to another card or add an animal to another card.",
             "fr": "Action: Ajoutez un microbe sur une autre* carte ou ajoutez un animal sur une autre* carte."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1012,6 +1047,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1026,7 +1062,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "implemented"
     },
     {
         "id": 19,
@@ -1060,6 +1096,7 @@
             "en": "EFFECT: When you play a $tag_animal$, $tag_microbe$ or $tag_plant$, including this one, add a microbe here or remove a microbe here to draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1069,6 +1106,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1119,6 +1157,7 @@
             "en": "Action: Remove 1 animal or 1 microbe from one of your cards to gain 3 plants.",
             "fr": "Action: Retirez 1 animal ou 1 microbe de l'une de vos cartes pour gagner 3 plantes."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1128,6 +1167,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Place 2 microbes on this card.",
             "fr": "Placez 2 microbes sur cette carte."
@@ -1176,6 +1216,7 @@
             "en": "ACTION: Spend 10 MC to increase the temperature by 1 step. Reduce this cost by 5 MC if you have 5 or more blue cards in play.",
             "fr": ""
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1185,6 +1226,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1234,6 +1276,7 @@
             "en": "ACTION: Spend 2 heat to draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1243,6 +1286,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1292,6 +1336,7 @@
             "en": "EFFECT: Whenever you play a card, you pay 2 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1301,6 +1346,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1350,6 +1396,7 @@
             "en": "EFFECT: When you play one $tag_plant$ or $tag_animal$ including this one, add an animal to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1359,6 +1406,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1409,6 +1457,7 @@
             "en": "Effect: When you play a $tag_power$, you pay 4 MC less for it and draw a card.",
             "fr": "Effet: Lorsque vous jouez un $tag_power$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC et vous piochez une carte"
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1418,6 +1467,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1467,6 +1517,7 @@
             "en": "EFFECT: When you keep cards during the research phase, keep 1 additional card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1476,6 +1527,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1524,6 +1576,7 @@
             "en": "ACTION: Gain 1 plant or add 1 microbe to another card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1533,6 +1586,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1547,7 +1601,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "implemented"
     },
     {
         "id": 28,
@@ -1581,6 +1635,7 @@
             "en": "ACTION: Spend 1 MC to gain 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1590,6 +1645,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1638,6 +1694,7 @@
             "en": "Action: Discard a card from your hand to gain 3 plants.",
             "fr": "Action: D\u00e9faussez une carte de votre main pour gagner 3 plantes"
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1647,6 +1704,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 3 plants.",
             "fr": "Gagnez 3 plantes."
@@ -1695,6 +1753,7 @@
             "en": "EFFECT: When you flip an ocean tile, add 1 animal to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1704,6 +1763,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1755,6 +1815,7 @@
             "en": "ACTION: Add 1 microbe to this card, or remove 2 microbes to raise the temperature 1 step.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1764,6 +1825,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1780,7 +1842,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "implemented"
     },
     {
         "id": 32,
@@ -1815,6 +1877,7 @@
             "en": "ACTION: Spend up to 4 heat to get that number of plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1824,6 +1887,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1872,6 +1936,7 @@
             "en": "EFFECT: Whenever you raise oxygen, flip an ocean tile, or increase temperature, add 1 animal to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1881,6 +1946,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1931,6 +1997,7 @@
             "en": "ACTION: Spend 1 MC to gain 2 heat. If you chose the action phase this round, gain 1 additional heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1940,6 +2007,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -1989,6 +2057,7 @@
             "en": "EFFECT: When you draw cards during the research phase, draw an additional card and keep an additional card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -1998,6 +2067,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2046,6 +2116,7 @@
             "en": "Effect: When you draw cards during the research phase, draw 2 additional cards.",
             "fr": "Effet: Lorsque vous piochez des cartes pendant la phase de recherche, piochez deux cartes suppl\u00e9mentaires."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2055,6 +2126,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2103,6 +2175,7 @@
             "en": "Effect : When you play an $tag_earth$ or $tag_jovian$, excluding this one, you pay 3 MC less and draw a card.",
             "fr": "Effet : Lorsque vous jouez un $tag_earth$ ou $tag_jovian$, celui-ci exclu, le co\u00fbt est r\u00e9duit de 3 MC et vous piochez une carte."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2112,6 +2185,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2160,6 +2234,7 @@
             "en": "ACTION: Spend 4 heat to raise oxygen 1 step.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2169,6 +2244,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2217,6 +2293,7 @@
             "en": "EFFECT: When you raise the temperature, add 1 animal to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2226,6 +2303,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2277,6 +2355,7 @@
             "en": "EFFECT: Whenever you play a SCIENCE, including this one, you may discard a card. If that card had a $tag_plant$, draw 2 cards. Otherwise, draw 1 card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2286,6 +2365,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2334,6 +2414,7 @@
             "en": "ACTION: Spend 1 MC to draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2343,6 +2424,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2391,6 +2473,7 @@
             "en": "Effect: When you play an $tag_event$, you pay 5 MC less for it.",
             "fr": "Effet: Lorsque vous jouez $tag_event$, le co\u00fbt associ\u00e9 est r\u00e9duit de 5 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2400,6 +2483,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2448,6 +2532,7 @@
             "en": "Add 3 microbes to this card.\nACTION: Add 1 microbe to this card, or remove 3 microbes from this card to flip an ocean tile.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2457,6 +2542,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2473,7 +2559,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "implemented"
     },
     {
         "id": 44,
@@ -2509,6 +2595,7 @@
             "en": "EFFECT: Whenever you play a SCIENCE, including this one, draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2518,6 +2605,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2566,6 +2654,7 @@
             "en": "Effect: When you play an $tag_event$, you gain 2 heat and 2 plants.",
             "fr": "Effet: Lorsque vous jouez un $tag_event$, vous gagnez 2 chaleurs et 2 plantes."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2575,6 +2664,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2624,6 +2714,7 @@
             "en": "Effect: When you raise the temperature, add a $ressource_science$ to this card.",
             "fr": "Effet:Lorsque vous augmentez la temp\u00e9rature, ajoutez 1 $ressource_science$ sur cette carte."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2633,6 +2724,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2684,6 +2776,7 @@
             "en": "ACTION: Spend any amount of heat to gain that many MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2693,6 +2786,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2739,6 +2833,7 @@
             "en": "EFFECT: When you play an EVENT, draw 2 cards.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2748,6 +2843,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2794,6 +2890,7 @@
             "en": "ACTION: Discard up to 3 cards from your hand. Draw that number of cards.",
             "fr": "Action: D\u00e9faussez jusqu'\u00e0 trois cartes de votre main. Piochez un m\u00eame nombre de cartes."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2803,6 +2900,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2845,13 +2943,14 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_microbe$$skipline$Or$skipline$-2$ressource_microbe$: $other_oxygen$",
+            "en": "$other_arrow$$ressource_microbe$$skipline$Or$skipline$-$ressource_microbe$$ressource_microbe$: $other_oxygen$",
             "fr": ""
         },
         "effectText": {
             "en": "ACTION: Add 1 microbe to this card, or remove 2 microbes from this card and increase oxygen 1 step.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2861,6 +2960,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2877,7 +2977,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "implemented"
     },
     {
         "id": 51,
@@ -2912,6 +3012,7 @@
             "en": "EFFECT: Whenever you play a card, you pay 1 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2921,6 +3022,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -2967,6 +3069,7 @@
             "en": "EFFECT: When you play a card, you can spend 1 plant to reduce the cost of the card by 5 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -2976,6 +3079,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3024,6 +3128,7 @@
             "en": "EFFECT: When you gain forest victory points, add 1 animal to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3033,6 +3138,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3049,7 +3155,7 @@
             "animal"
         ],
         "startingMegacredits": 0,
-        "status": "blocked"
+        "status": "implemented"
     },
     {
         "id": 54,
@@ -3084,6 +3190,7 @@
             "en": "Action: Spend 15 MC to gain a forest tile and increase oxygen by 1 step. Reduce the cost by 2 MC per Titanium you have.",
             "fr": "Action: D\u00e9pensez 15 MC pour gagner 1 PV For\u00eat et augmenter de l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC par titane en votre possession."
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3093,6 +3200,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3141,6 +3249,7 @@
             "en": "EFFECT: You pay 4 MC less for standard actions that cost MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3150,6 +3259,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3198,6 +3308,7 @@
             "en": "ACTION: Spend 6 heat to gain 2 MC and increase oxygen by 1 step.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3207,6 +3318,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3255,6 +3367,7 @@
             "en": "ACTION: Add a microbe to another card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3264,6 +3377,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3312,6 +3426,7 @@
             "en": "Action: Add 1 microbe to this card.",
             "fr": "Action: Ajoutez 1 microbe sur cette carte."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3321,6 +3436,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3371,6 +3487,7 @@
             "en": "ACTION: Spend 2 MC to draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3380,6 +3497,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3429,6 +3547,7 @@
             "en": "EFFECT: When you draw cards during the research phase, draw an additional card and keep an additional card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3438,6 +3557,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3487,6 +3607,7 @@
             "en": "EFFECT: When you play a $tag_animal$, $tag_microbe$ or $tag_plant$, including this one, gain 1 plant or add 1 animal or microbe to another card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3496,6 +3617,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3544,6 +3666,7 @@
             "en": "Action: Spend 12 MC to flip an ocean tile. Reduce its cost by 1 MC for each $tag_power$ you have.",
             "fr": "Action: D\u00e9pensez 12 MC pour r\u00e9v\u00e9ler une tuile Oc\u00e9an. Ce co\u00fbt est r\u00e9duit de 1 MC par $tag_power$ en votre possession."
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3553,6 +3676,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3602,6 +3726,7 @@
             "en": "ACTION: Spend 12 MC to flip an ocean tile. Reduce the cost by 1 MC for each Titanium you have.",
             "fr": ""
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3611,6 +3736,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3659,6 +3785,7 @@
             "en": "ACTION: Spend 4 plants to increase the temperature by 1 step. If you choose the action phase this round, spend only 3 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3668,6 +3795,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 4 plants.",
             "fr": ""
@@ -3718,6 +3846,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3727,6 +3856,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3775,6 +3905,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3784,6 +3915,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile.",
             "fr": "R\u00e9v\u00e9lez une tuile Oc\u00e9an."
@@ -3833,6 +3965,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3842,6 +3975,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Raise oxygen 1 step",
             "fr": ""
@@ -3890,6 +4024,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3899,6 +4034,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -3948,6 +4084,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -3957,6 +4094,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase your $other_tr$ by 2 steps.",
             "fr": "Augmentez votre $other_tr$ de 2."
@@ -4006,6 +4144,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4015,6 +4154,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw 4 cards. Then, discard 2 cards.",
             "fr": ""
@@ -4063,6 +4203,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4072,6 +4213,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Add 2 resources to a card that already has resources.",
             "fr": ""
@@ -4122,6 +4264,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4131,6 +4274,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -4180,6 +4324,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4189,6 +4334,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the temperature 1 step. Flip an ocean tile.",
             "fr": ""
@@ -4238,6 +4384,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4247,6 +4394,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw a card.$skipline$Flip an ocean tile.",
             "fr": "Piochez une carte$skipline$R\u00e9v\u00e9lez une tuile Oc\u00e9an."
@@ -4295,6 +4443,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4304,6 +4453,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile.",
             "fr": ""
@@ -4353,6 +4503,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4362,6 +4513,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the temperature 3 steps.$skipline$Earn 7 MC.",
             "fr": "Augmentez la temp\u00e9rature de 3 niveaux.$skipline$Gagnez 7 MC."
@@ -4411,6 +4563,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4420,6 +4573,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the temperature 2 steps.$skipline$ Flip 2 ocean tiles.",
             "fr": "Augmentez la temp\u00e9rature de 2 niveaux.$skipline$R\u00e9v\u00e9lez 2 tuiles Oc\u00e9an."
@@ -4469,6 +4623,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4478,6 +4633,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip 2 ocean tiles.",
             "fr": ""
@@ -4526,6 +4682,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4535,6 +4692,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile.",
             "fr": ""
@@ -4585,6 +4743,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4594,6 +4753,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile.$skipline$Gain 3 plants, or add 3 microbes or 2 animals to another card.",
             "fr": ""
@@ -4644,6 +4804,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4653,6 +4814,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase your $other_tr$ by 1 step.$skipline$Gain 4 plants.$skipline$Add 2 animals to another card.$skipline$Add 3 microbes to another card.",
             "fr": "Augmentez votre $other_tr$ de 1.$skipline$Gagnez 4 plantes.$skipline$Ajoutez 2 animaux sur une autre carte.$skipline$Ajoutez 3 microbes sur une autre carte."
@@ -4703,6 +4865,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4712,6 +4875,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -4761,6 +4925,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4770,6 +4935,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw 3 cards. Keep one of them and discard the other two.",
             "fr": "Piochez 3 cartes. Conservez-en une et d\u00e9faussez les deux autres."
@@ -4819,6 +4985,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4828,6 +4995,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Earn 10 MC.",
             "fr": ""
@@ -4878,6 +5046,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4887,6 +5056,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw 1 card.",
             "fr": ""
@@ -4935,6 +5105,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -4944,6 +5115,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip 2 ocean tiles.",
             "fr": ""
@@ -4994,6 +5166,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5003,6 +5176,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile. You draw 2 cards. Gain 5 plants or add 3 animals to another card.",
             "fr": ""
@@ -5051,6 +5225,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5060,6 +5235,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the temperature 2 steps.",
             "fr": ""
@@ -5108,6 +5284,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5117,6 +5294,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 4 plants and add 2 animals or microbes to another card.",
             "fr": ""
@@ -5166,6 +5344,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5175,6 +5354,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain a forest tile and increase oxygen by 1 step.",
             "fr": ""
@@ -5224,6 +5404,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5233,6 +5414,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increases your terraforming score by 2 steps. Increase the temperature 1 step. Gain 2 plants. If you have 3 or more $tag_plant$, gain 4 additional plants.",
             "fr": ""
@@ -5281,6 +5463,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5290,6 +5473,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile.",
             "fr": "R\u00e9v\u00e9lez 1 tuile Oc\u00e9an."
@@ -5339,6 +5523,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5348,6 +5533,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the temperature 1 step.$skipline$Flip an ocean tile.$skipline$Draw 2 cards.",
             "fr": "Augmentez la temp\u00e9rature de 1 niveau.$skipline$R\u00e9v\u00e9lez une tuile Oc\u00e9an.$skipline$Piochez 2 cartes."
@@ -5397,6 +5583,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5406,6 +5593,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 2 forest tiles and increase oxygen by 2 steps.",
             "fr": ""
@@ -5454,6 +5642,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5463,6 +5652,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increases your terraforming score by 2 steps.",
             "fr": ""
@@ -5513,6 +5703,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5522,6 +5713,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw 2 cards.",
             "fr": "Piochez 2 cartes."
@@ -5570,6 +5762,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5579,6 +5772,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You may play an additional blue or red card in this phase. For the next card you play in this phase, you can consider oxygen or temperature as a higher or lower color.",
             "fr": ""
@@ -5627,6 +5821,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5636,6 +5831,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile.",
             "fr": ""
@@ -5686,6 +5882,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5695,6 +5892,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile. Draw 2 cards.",
             "fr": ""
@@ -5745,6 +5943,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5754,6 +5953,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase your terraforming score by 1 step for each JOVIAN you have, including this one.",
             "fr": ""
@@ -5803,6 +6003,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5812,6 +6013,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increases oxygen 1 step. Flip an ocean tile. Gain 2 plants.",
             "fr": ""
@@ -5860,6 +6062,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5869,6 +6072,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You may play an additional blue or red card in this phase. You can pay 11 MC less for the next card you play in this phase.",
             "fr": ""
@@ -5918,6 +6122,7 @@
             "en": "During the production phase, draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5927,6 +6132,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -5976,6 +6182,7 @@
             "en": "During the production phase, this card produces 1 plant.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -5985,6 +6192,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6033,6 +6241,7 @@
             "en": "During the production phase, you draw a card and this card produces 2 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6042,6 +6251,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6090,6 +6300,7 @@
             "en": "During the production phase, this card produces 2 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6099,6 +6310,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increases oxygen 1 step.",
             "fr": ""
@@ -6147,6 +6359,7 @@
             "en": "During the production phase, this card produces 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6156,6 +6369,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6204,6 +6418,7 @@
             "en": "During the production phase, this card produces 1 plant.",
             "fr": "Lors de la phase de production, cette carte produit 1 plante."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6213,6 +6428,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6261,6 +6477,7 @@
             "en": "During the production phase, this card produces 1 plant and 1 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6270,6 +6487,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6319,6 +6537,7 @@
             "en": "When you play a $tag_space$, you pay 6 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6328,6 +6547,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6374,6 +6594,7 @@
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6383,6 +6604,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6431,6 +6653,7 @@
             "en": "During the production phase, this card produces 1 plant and 3 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6440,6 +6663,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Add 2 microbes to another card. ",
             "fr": ""
@@ -6489,6 +6713,7 @@
             "en": "During the production phase, this card produces 1 heat for each EARTH you have, including this one.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6498,6 +6723,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6546,6 +6772,7 @@
             "en": "During the production phase, draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6555,6 +6782,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You can play a green card from your hand that has a cost of 9 MC or less without paying its MC cost.",
             "fr": ""
@@ -6605,6 +6833,7 @@
             "en": "During the production phase, this card produces 1 plant and 3 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6614,6 +6843,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6663,6 +6893,7 @@
             "en": "During the production phase, this card produces 5 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6672,6 +6903,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6721,6 +6953,7 @@
             "en": "During the production phase, this card produces 1 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6730,6 +6963,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain a forest tile and increase oxygen by 1 step.",
             "fr": ""
@@ -6778,6 +7012,7 @@
             "en": "During the production phase, you draw a card and this produces 2 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6787,6 +7022,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6835,6 +7071,7 @@
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6844,6 +7081,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -6892,6 +7130,7 @@
             "en": "During the production phase, this card produces 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6901,6 +7140,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 2 plants.",
             "fr": ""
@@ -6951,6 +7191,7 @@
             "en": "During the production phase, draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -6960,6 +7201,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7008,6 +7250,7 @@
             "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_earth$ en votre possession, y compris celui-ci."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7017,6 +7260,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7065,6 +7309,7 @@
             "en": "During the production phase, this card produces 3 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7074,6 +7319,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7122,6 +7368,7 @@
             "en": "During the production phase, this card produces 4 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7131,6 +7378,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7180,6 +7428,7 @@
             "en": "During the production phase, this card produces 1 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7189,6 +7438,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the temperature 1 step.",
             "fr": ""
@@ -7238,6 +7488,7 @@
             "en": "During the production phase, this card produces 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7247,6 +7498,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7295,6 +7547,7 @@
             "en": "During the production phase, this card produces 1 plant.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7304,6 +7557,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 3 plants and 3 heat.",
             "fr": ""
@@ -7350,6 +7604,7 @@
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7359,6 +7614,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7407,6 +7663,7 @@
             "en": "During the production phase, this card produces 3 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7416,6 +7673,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7464,6 +7722,7 @@
             "en": "During the production phase, draw 2 cards.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7473,6 +7732,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7522,6 +7782,7 @@
             "en": "During the production phase, this card produces 2 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7531,6 +7792,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Add 1 animal to another card and gain 3 plants.",
             "fr": ""
@@ -7579,6 +7841,7 @@
             "en": "During the production phase, this card produces 2 MC and 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7588,6 +7851,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 2 plants.",
             "fr": ""
@@ -7636,6 +7900,7 @@
             "en": "During the production phase, this card produces 4 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7645,6 +7910,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7693,6 +7959,7 @@
             "en": "During the production phase, this card produces 1 MC.$skipline$When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC.$skipline$Lorsque vous jouez un $tag_space$, le co\u00fbt associ\u00e9 est r\u00e9duit de 3 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7702,6 +7969,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7751,6 +8019,7 @@
             "en": "During the production phase, this card produces 2 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7760,6 +8029,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7810,6 +8080,7 @@
             "en": "During the production phase, draw a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7819,6 +8090,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7868,6 +8140,7 @@
             "en": "When you play a $tag_space$, you pay 6 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7877,6 +8150,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7925,6 +8199,7 @@
             "en": "During the production phase, this card produces 2 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7934,6 +8209,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -7983,6 +8259,7 @@
             "en": "During the production phase, this card produces 2 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -7992,6 +8269,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8041,6 +8319,7 @@
             "en": "During the production phase, this card produce 3 heat.",
             "fr": "Lors de la phase de production, cette carte produit 3 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8050,6 +8329,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8098,6 +8378,7 @@
             "en": "During the production phase, this card produces 1 plant.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8107,6 +8388,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 3 plants.",
             "fr": ""
@@ -8156,6 +8438,7 @@
             "en": "During the production phase, this card produces 2 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8165,6 +8448,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8211,6 +8495,7 @@
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8220,6 +8505,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8268,6 +8554,7 @@
             "en": "During the production phase, this card produce 1 plant.",
             "fr": "Lors de la phase de production, cette carte produit 1 plante."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8277,6 +8564,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 1 plant.",
             "fr": "Gagnez 1 plante."
@@ -8326,6 +8614,7 @@
             "en": "During the production phase, this card produces 3 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8335,6 +8624,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8384,6 +8674,7 @@
             "en": "During the production phase, this card produces 2 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8393,6 +8684,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8441,6 +8733,7 @@
             "en": "During the production phase, this card produces 1 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8450,6 +8743,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 5 heat.",
             "fr": ""
@@ -8498,6 +8792,7 @@
             "en": "During production, this card produces 3 MC. When you play a building, you pay 2 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8507,6 +8802,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8555,6 +8851,7 @@
             "en": "During the production phase, this card produces 1 MC and 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8564,6 +8861,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8613,6 +8911,7 @@
             "en": "During production, this card produces 1 heat. When you play a building, you pay 2 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8622,6 +8921,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8670,6 +8970,7 @@
             "en": "During the production phase, this card produces 1 plant for each $tag_plant$ you have.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8679,6 +8980,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8729,6 +9031,7 @@
             "en": "During the production phase, this card produces 2 MC. When you play a $tag_space$, you pay 6 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8738,6 +9041,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8784,6 +9088,7 @@
             "en": "During the production phase, this card produces 2 MC and 3 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8793,6 +9098,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 2 plants.",
             "fr": ""
@@ -8841,6 +9147,7 @@
             "en": "During the production phase, this card produce 1 plant.",
             "fr": "Lors de la phase de production, cette carte produit 1 plante."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8850,6 +9157,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8899,6 +9207,7 @@
             "en": "During the production phase, this card produces 1 MC for each $tag_science$ you have, including this one.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8908,6 +9217,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -8956,6 +9266,7 @@
             "en": "During the production phase, this card produces 1 mc and 2 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -8965,6 +9276,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9014,6 +9326,7 @@
             "en": "During the production phase, this card produces 4 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9023,6 +9336,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9073,6 +9387,7 @@
             "en": "During the production phase, this card produces 3 heat. When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9082,6 +9397,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9130,6 +9446,7 @@
             "en": "During the production phase, you produce 1 MC per each $tag_building$ you have, including this one.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9139,6 +9456,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9188,6 +9506,7 @@
             "en": "During the production phase, this card produce 2 plant et 2 heat.",
             "fr": "Lors de la phase de production, cette carte produit 2 plantes et 2 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9197,6 +9516,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9245,6 +9565,7 @@
             "en": "During the production phase, this card produces 1 heat. When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9254,6 +9575,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9303,6 +9625,7 @@
             "en": "During the production phase, this card produce 3 heat.",
             "fr": "Lors de la phase de production, cette carte produit 3 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9312,6 +9635,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw 2 cards. Then, discard a card.",
             "fr": "Piochez 2 cartes. Puis, d\u00e9faussez une carte."
@@ -9360,6 +9684,7 @@
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9369,6 +9694,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9419,6 +9745,7 @@
             "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9428,6 +9755,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9476,6 +9804,7 @@
             "en": "During the production phase, this card produces 4 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9485,6 +9814,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9531,6 +9861,7 @@
             "en": "During the production phase, this card produces 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9540,6 +9871,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9588,6 +9920,7 @@
             "en": "During the production phase, this card produces 1 plant.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9597,6 +9930,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9646,6 +9980,7 @@
             "en": "During the production phase, this card produces 2 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9655,6 +9990,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9704,6 +10040,7 @@
             "en": "During the production phase, this card produces 1 MC, 1 plant and 1 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9713,6 +10050,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9761,6 +10099,7 @@
             "en": "During the production phase, this card produce 2 plant.",
             "fr": "Lors de la phase de production, cette carte produit 2 plantes."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9770,6 +10109,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9819,6 +10159,7 @@
             "en": "During the production phase, this card produces 1 plant.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9828,6 +10169,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 2 plants.",
             "fr": ""
@@ -9876,6 +10218,7 @@
             "en": "During the production phase, this card produces 1 MC and 3 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9885,6 +10228,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9934,6 +10278,7 @@
             "en": "During the production phase, this card produces 1 MC for each $tag_power$ you have, including this one.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -9943,6 +10288,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -9992,6 +10338,7 @@
             "en": "During the production phase, this card produces 1 heat.",
             "fr": "Durant la phase de production, cette carte produit 1 chaleur."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10001,6 +10348,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10049,6 +10397,7 @@
             "en": "During the production phase, this card produces 2 MC and 1 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10058,6 +10407,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10107,6 +10457,7 @@
             "en": "During the production phase, this card produces 2 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10116,6 +10467,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain a forest tile and increase oxygen by 1 step.",
             "fr": ""
@@ -10166,6 +10518,7 @@
             "en": "During the production phase, this card produces 3 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10175,6 +10528,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10221,6 +10575,7 @@
             "en": "During the production phase, this card produces 2 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10230,6 +10585,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10278,6 +10634,7 @@
             "en": "During the production phase, this card produces 1 heat for each $tag_space$ you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 chaleur par $tag_space$ en votre possession, y compris celui-ci."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10287,6 +10644,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10335,6 +10693,7 @@
             "en": "During the production phase, this card produces 1 MC for each $tag_space$ you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_space$ en votre possession, y compris celui-ci."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10344,6 +10703,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10392,6 +10752,7 @@
             "en": "During the production phase, this card produce 2 plant.",
             "fr": "Lors de la phase de production, cette carte produit 2 plantes."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10401,6 +10762,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10450,6 +10812,7 @@
             "en": "During the production phase, this card produce 5 heat.",
             "fr": "Lors de la phase de production, cette carte produit 5 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10459,6 +10822,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw 2 cards.",
             "fr": "Piochez 2 cartes."
@@ -10507,6 +10871,7 @@
             "en": "During the production phase, this card produce 2 plant.",
             "fr": "Lors de la phase de production, cette carte produit 2 plantes."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10516,6 +10881,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the temperature 1 step.",
             "fr": "Augmentez la temp\u00e9rature de 1 niveau."
@@ -10565,6 +10931,7 @@
             "en": "During the production phase, this card produces 1 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10574,6 +10941,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10622,6 +10990,7 @@
             "en": "During the production phase, this card produces 1 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10631,6 +11000,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw a card and gain 3 heat.",
             "fr": ""
@@ -10679,6 +11049,7 @@
             "en": "During the production phase, this card produces 5 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10688,6 +11059,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10736,6 +11108,7 @@
             "en": "Draw a card.\nDuring the production phase, this card produces 2 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10745,6 +11118,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10793,6 +11167,7 @@
             "en": "When you play a $tag_space$, pay 3 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10802,6 +11177,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10850,6 +11226,7 @@
             "en": "During the production phase, this card produces 2 MC.",
             "fr": "Lors de la phase de production, cette carte produit 2 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10859,6 +11236,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10907,6 +11285,7 @@
             "en": "When you play a $tag_building$, you pay 4 MC less for it. When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10916,6 +11295,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -10964,6 +11344,7 @@
             "en": "When you play a $tag_building$, you pay 2 MC less for it. When you play a $tag_space$, pay 3 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -10973,6 +11354,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11022,6 +11404,7 @@
             "en": "During the production phase, this card produces 3 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11031,6 +11414,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11079,6 +11463,7 @@
             "en": "When you play a $tag_space$, pay 3 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11088,6 +11473,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11134,6 +11520,7 @@
             "en": "During the production phase, this card produces 3 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11143,6 +11530,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You can play a green card from your hand that has a cost of 9 MC or less without paying its cost in MC.",
             "fr": ""
@@ -11189,6 +11577,7 @@
             "en": "During the production phase, this card produces 2 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11198,6 +11587,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 2 plants.",
             "fr": ""
@@ -11244,6 +11634,7 @@
             "en": "During the production phase, this card produce 2 heat.",
             "fr": "Lors de la phase de production, cette carte produit 2 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11253,6 +11644,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile.",
             "fr": "R\u00e9v\u00e9lez 1 tuile Oc\u00e9an."
@@ -11301,6 +11693,7 @@
             "en": "During the production phase, this card produce 3 plant.",
             "fr": "Lors de la phase de production, cette carte produit 3 plantes."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11310,6 +11703,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 1 plant.",
             "fr": "Gagnez 1 plante."
@@ -11356,6 +11750,7 @@
             "en": "During the production phase, this card produces 4 MC.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11365,6 +11760,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11413,6 +11809,7 @@
             "en": "During the production phase, this card produces 2 MC and 1 plant.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11422,6 +11819,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 1 plant.",
             "fr": ""
@@ -11470,6 +11868,7 @@
             "en": "During the production phase, this card produces 1 MC. When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC.$skipline$Lorsque vous jouez un $other_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11479,6 +11878,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11528,6 +11928,7 @@
             "en": "During the production phase, this card produces 4 heat.",
             "fr": "Lors de la phase de production, vous piochez 1 carte et cette carte produit 4 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11537,6 +11938,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11583,6 +11985,7 @@
             "en": "During the production phase, this card produces 1 MC for each $tag_event$ you have.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11592,6 +11995,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11642,6 +12046,7 @@
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11651,6 +12056,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11699,6 +12105,7 @@
             "en": "During the production phase, this card produces 3 heat.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11708,6 +12115,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11757,6 +12165,7 @@
             "en": "During the production phase, this card produces 1 heat for each POWER you have, including this one.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11766,6 +12175,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11814,6 +12224,7 @@
             "en": "During the production phase, this card produces 1 plant for each $tag_microbe$ you have, including this one.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11823,6 +12234,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11869,6 +12281,7 @@
             "en": "During the production phase, this card produces 1 MC for each forest tile you have.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11878,6 +12291,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -11926,6 +12340,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11935,6 +12350,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You may play an additional card this phase. That card may be a green card. You pay 2 MC less for the card you play this phase.",
             "fr": ""
@@ -11984,6 +12400,7 @@
             "en": "During the production phase, you draw a card and this produces 2 heat and 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -11993,6 +12410,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12041,6 +12459,7 @@
             "en": "During the production phase, this produces 1 MC per $tag_animal$ and $tag_plant$ you have, including this.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12050,6 +12469,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12098,6 +12518,7 @@
             "en": "EFFECT: When you add any number of microbes to another card, add 1 animal to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12107,6 +12528,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12157,6 +12579,7 @@
             "en": "During the production phase, draw a card for every 3 $tag_science$ you have, including this.",
             "fr": "Lors de la phase de production, piochez 1 carte par groupe de 3 $tag_science$ en votre possession, y compris celui-ci."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12166,6 +12589,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12215,6 +12639,7 @@
             "en": "Action: Discard a card in hand to gain 6 MC.",
             "fr": "Action: D\u00e9faussez une carte de votre main pour gagner 6 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12224,6 +12649,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw 2 cards.",
             "fr": "Piochez 2 cartes."
@@ -12273,6 +12699,7 @@
             "en": "When you play a $tag_space$, you pay 6 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12282,6 +12709,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Draw a card for each POWER you have, including this.",
             "fr": ""
@@ -12331,6 +12759,7 @@
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12340,6 +12769,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Reveal cards from the top of the deck until you reveal a BUILDING. Place it into your hand. Discard the rest.",
             "fr": ""
@@ -12388,6 +12818,7 @@
             "en": "Action : Spend 10 MC to raise the oxygen 1 step. Reduce this by 5 MC if you have 4 or more $tag_event$.",
             "fr": "Action : D\u00e9pensez 10 MC pour augmenter le niveau d'oxyg\u00e8ne de 1. Ce co\u00fbt est r\u00e9duit de 5MC si vous avez 4 $tag_event$ ou plus en jeu."
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12397,6 +12828,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12445,6 +12877,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12454,6 +12887,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You may return another red card you have in play to your hand.",
             "fr": ""
@@ -12502,6 +12936,7 @@
             "en": "ACTION: Add a microbe to this card, or remove 5 microbes from this card to play a card from your hand. You pay 25 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12511,6 +12946,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12562,6 +12998,7 @@
             "en": "Effect: When you play a $tag_earth$, including this, add a microbe to this card (5 max).$skipline$Effect: When you draw cards during the research phase, draw an additional card for each $ressource_microbe$ on this card.",
             "fr": "Effet: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$Effet: Lorsque vous piochez des cartes pendant la phase de recherche, piochez une carte suppl\u00e9mentaire pour chaque $ressource_microbe$ sur cette carte."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12571,6 +13008,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12621,6 +13059,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12630,6 +13069,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase your $other_tr$ by 1 level for each Improved Phase card you have.",
             "fr": "Augmentez votre $other_tr$ de 1 niveau pour chaque carte Phase am\u00e9lior\u00e9e en votre possession."
@@ -12678,6 +13118,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12687,6 +13128,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Upgrade your Phase card II. Collect the associate \"Bonus\" during this phase.",
             "fr": "Am\u00e9liorer Votre carte Phase II. Gagnez le \"Bonus\" associ\u00e9 lors de cette phase."
@@ -12735,6 +13177,7 @@
             "en": "During the production phase, this card produce 4 heat.",
             "fr": "Lors de la phase de production, cette carte produit 4 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12744,6 +13187,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12792,6 +13236,7 @@
             "en": "During the production phase, this card produce 2 MC.",
             "fr": "Lors de la phase de production, cette carte produit 2 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12801,6 +13246,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase your $other_tr$ by 1 level for each Objective you have.",
             "fr": "Augmentez votre $other_tr$ de 1 niveau pour chaque Objectif en votre possession."
@@ -12849,6 +13295,7 @@
             "en": "During the production phase, draw 2 cards.$skipline$When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": "Lors de la phase de production, piochez 2 cartes.$skipline$Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12858,6 +13305,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -12907,6 +13355,7 @@
             "en": "During the production phase, this card produce 4 heat.",
             "fr": "Lors de la phase de production, cette carte produit 4 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12916,6 +13365,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Upgrade a Phase card.",
             "fr": "Am\u00e9liorer une carte Phase."
@@ -12965,6 +13415,7 @@
             "en": "During the production phase, this card produce 3 heat.",
             "fr": "Lors de la phase de production, cette carte produit 3 chaleurs."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -12974,6 +13425,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "If you have a milestone, gain 4 heats.",
             "fr": "Si vous avez un objectif, gagnez 4 chaleurs."
@@ -13022,6 +13474,7 @@
             "en": "During the production phase, this card produce 1 heat.",
             "fr": "Lors de la phase de production, cette carte produit 1 chaleur."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13031,6 +13484,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Upgrade your Phase card I.",
             "fr": "Am\u00e9liorez votre carte Phase I."
@@ -13080,6 +13534,7 @@
             "en": "During the production phase, this card produce 1 plant.",
             "fr": "Lors de la phase de production, cette carte produit 1 plante."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13089,6 +13544,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Upgrade your Phase card IV.",
             "fr": "Am\u00e9liorez votre carte Phase IV."
@@ -13137,6 +13593,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13146,6 +13603,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You may play an additional blue or red card in this phase. For the next card you play in this phase, you can consider oxygen or temperature as a higher or lower color.",
             "fr": ""
@@ -13194,6 +13652,7 @@
             "en": "Effect: When you increase the infrastructure, add 1 animal to this card.",
             "fr": "Effet: Lorsque vous augmentez l'infrastructure, ajoutez 1 animal sur cette carte."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13203,6 +13662,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -13254,6 +13714,7 @@
             "en": "Action: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 2 MC for each $tag_plant$ you have.",
             "fr": "Action: D\u00e9pensez 10 MC pour augmenter l'infrastructure de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC pour chaque $tag_plant$ en votre possession."
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13263,6 +13724,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "",
             "fr": ""
@@ -13311,6 +13773,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13320,6 +13783,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the infrastructure 1 step.$skipline$Draw 2 cards, then discard 1 card.",
             "fr": "Augmentez l'infrastructure de 1 niveau.$skipline$Piochez 2 cartes. Puis, d\u00e9faussez 1 carte."
@@ -13368,6 +13832,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13377,6 +13842,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Flip an ocean tile.$skipline$Increase the infrastructure 1 step.",
             "fr": "R\u00e9v\u00e9lez une tuile Oc\u00e9an.$skipline$Augmentez l'infrastructure de 1 niveau."
@@ -13427,6 +13893,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13436,6 +13903,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the infrastructure 1 step.$skipline$Increase the oxygen 1 step.$skipline$Increase the temperature 1 step.",
             "fr": "Augmentez l'infrastructure de 1 niveau.$skipline$Augmentez l'oxyg\u00e8ne de 1 niveau.$skipline$Augmentez la temp\u00e9rature de 1 niveau."
@@ -13486,6 +13954,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13495,6 +13964,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the infrastructure 2 step.$skipline$Gain 4 plant.",
             "fr": "Augmentez l'infrastructure de 2 niveaux.$skipline$Gagnez 4 plantes."
@@ -13544,6 +14014,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13553,6 +14024,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Increase the infrastructure 3 step.",
             "fr": "Augmentez l'infrastructure de 3 niveaux."
@@ -13601,6 +14073,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13610,6 +14083,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "Gain 1 Forest VP and increase oxygen by 1 level.$skipline$Earn 5 MC.",
             "fr": "Gagnez 1 PV For\u00eat et augmentez l'oxyg\u00e8ne de 1 niveau.$skipline$Gagnez 5 MC."
@@ -13656,6 +14130,7 @@
             "en": "EFFECT: When you play a card that costs 20 MC or more, you pay 4 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13665,6 +14140,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 48MC.",
             "fr": "Vous commencez avec 48MC."
@@ -13713,6 +14189,7 @@
             "en": "Increase yout plant production by 1.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
             "en": "\"8$ressource_plant$$other_arrow$$other_forest$\":$skipline$-$ressource_plant$",
@@ -13722,6 +14199,7 @@
             "en": "EFFECT: When you spend plants to gain a forest tile and increase oxygen, you spend one less plant.",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 27MC.",
             "fr": "Vous commencez avec 27MC."
@@ -13770,6 +14248,7 @@
             "en": "Increase yout heat production by 3.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
             "en": "X$ressource_heat$ = $ressource_megacreditvoid_X$",
@@ -13779,6 +14258,7 @@
             "en": "EFFECT: You can use the heat as MC. You cannot use MC as heat.",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 28MC.",
             "fr": "Vous commencez avec 28MC."
@@ -13827,6 +14307,7 @@
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
             "en": "$tag_event$: $ressource_megacreditvoid_-2$",
@@ -13836,6 +14317,7 @@
             "en": "EFFECT: When you play a EVENT, you pay 2 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 46MC.",
             "fr": "Vous commencez avec 46MC."
@@ -13884,6 +14366,7 @@
             "en": "EFFECT: When you play a card with requirements, you can consider oxygen or temperature or infrastructure a higher or lower color. This cannot be combined with other effects.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -13893,6 +14376,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 33MC.$skipline$Draw $ressource_card$$ressource_card$$ressource_card$",
             "fr": "Vous commencez avec 33MC."
@@ -13942,6 +14426,7 @@
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
             "en": "$ressource_steel$:$skipline$$other_tr$",
@@ -13951,6 +14436,7 @@
             "en": "EFFECT: Each time you play BUILDING, excluding this, gain 1 terraforming point.",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 27MC.",
             "fr": "Vous commencez avec 27MC."
@@ -13999,6 +14485,7 @@
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
             "en": "$ressource_titanium$:$skipline$$tag_space$$ressource_megacreditvoid_-1$",
@@ -14008,6 +14495,7 @@
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional MC.",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 20MC.",
             "fr": "Vous commencez avec 20MC."
@@ -14056,6 +14544,7 @@
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
             "en": "$tag_jovian$: +1 $other_tr$",
@@ -14065,6 +14554,7 @@
             "en": "Effect: Each time you play a $tag_jovian$, excluding this, gain 1 TR",
             "fr": "Effet: Lorsque vous jouez un badge $tag_jovian$, except\u00e9 celui-ci, vous gagnez 1 NT."
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 24MC.",
             "fr": "Vous commencez avec 24MC."
@@ -14113,6 +14603,7 @@
             "en": "Effect : When you play an $tag_earth$, you pay 3 MC less.",
             "fr": "Effet : Lorsque vous jouez un $tag_earth$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14122,6 +14613,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 51MC.",
             "fr": "Vous commencez avec 51MC."
@@ -14168,6 +14660,7 @@
             "en": "EFFECT: When you draw cards during the research phase, draw an additional card and keep an additional card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14177,6 +14670,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 40MC.",
             "fr": "Vous commencez avec 40MC."
@@ -14225,6 +14719,7 @@
             "en": "Increase yout heat production by 1.",
             "fr": "Augmentez votre production de chaleur de 1."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
             "en": "$tag_power$ :$ressource_megacreditvoid_-3$",
@@ -14234,6 +14729,7 @@
             "en": "Effect : When you play an $tag_power$, you pay 3 MC less.",
             "fr": "Effet : Lorsque vous jouez un $tag_power$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 45MC.",
             "fr": "Vous commencez avec 45MC."
@@ -14280,6 +14776,7 @@
             "en": "EFFECT: The first time your terraforming score is increased in each phase, you can pay 6 MC to increase your terraforming score by 1 step.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14289,6 +14786,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 35MC.",
             "fr": "Vous commencez avec 35MC."
@@ -14338,6 +14836,7 @@
             "en": "EFFECT: When you play an ANIMAL or PLANT, including these, add an animal to this card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14347,6 +14846,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 43MC.",
             "fr": "Vous commencez avec 43MC."
@@ -14397,6 +14897,7 @@
             "en": "ACTION: Reveal the top 3 cards of the deck. Place a card with an EVENT revealed this way into your hand.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14406,6 +14907,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 50MC.",
             "fr": "Vous commencez avec 50MC."
@@ -14454,6 +14956,7 @@
             "en": "EFFECT: When you play a green card, you pay 2 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14463,6 +14966,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 40MC.$skipline$At the start of the game, reveal the top 5 cards of the deck. Place a green card that was revealed this way into your hand. Discard the rest.",
             "fr": "Vous commencez avec 40MC."
@@ -14511,6 +15015,7 @@
             "en": "EFFECT: When you play a blue card, you pay 3 MC less for it.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14520,6 +15025,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 36MC.$skipline$At the start of the game, reveal cards from the deck until you reveal a blue card. Place it into your hand. Discard the rest.",
             "fr": "Vous commencez avec 36MC."
@@ -14568,6 +15074,7 @@
             "en": "EFFECT: When you play a green card, draw a card and then discard a card.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14577,6 +15084,7 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 48MC.$skipline$At the start of the game, play a card from your hand that costs 12MC or less without paying the cost. The requirements of this card must be fullfilled.",
             "fr": "Vous commencez avec 48MC."
@@ -14623,6 +15131,7 @@
             "en": "EFFECT: When you flip an ocean tile, gain 2 MC and 2 plants.",
             "fr": ""
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -14632,8 +15141,9 @@
             "en": "",
             "fr": ""
         },
+        "effectSummaryOption2": "",
         "playedText": {
-            "en": "You start with 43MC.$skipline$At the start of the game, + $ressource_card$$ressource_card$$ressource_card$$ressource_card$$ressource_card$$skipline$- $ressource_card$$ressource_card$$ressource_card$$ressource_card$",
+            "en": "You start with 43MC.$skipline$$skipline$At the start of the game, + $ressource_card$$ressource_card$$ressource_card$$ressource_card$$ressource_card$$skipline$- $ressource_card$$ressource_card$$ressource_card$$ressource_card$",
             "fr": "Vous commencez avec 43MC."
         },
         "prerequisiteText": {
@@ -14681,6 +15191,7 @@
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
+        "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
             "en": "$tag_earth$: +$ressource_card$",
@@ -14690,6 +15201,7 @@
             "en": "Effect: Each time you play a $tag_earth$, draw a card",
             "fr": "Effet: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
         },
+        "effectSummaryOption2": "",
         "playedText": {
             "en": "You start with 25MC.",
             "fr": "Vous commencez avec 25MC."
