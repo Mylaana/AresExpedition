@@ -2,7 +2,9 @@
 	<app-card-activation
 		[maximumCardActivation]="maximumCardActivation"
 		[projectCard]="projectCard"
-		[actionIndex]="option"
+		[actionIndex]="option.index"
+		[caption]="option.caption"
+		[isScalingCostActivation]="isScalingCostActivation"
 		(activated)="onActivation($event)">
 	</app-card-activation>
 </ng-container>

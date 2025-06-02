@@ -1,9 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { PlayableCardModel } from '../../../../../models/cards/project-card.model';
 import { CardActivationComponent } from '../card-activation/card-activation.component';
 import { ActivationOption } from '../../../../../types/project-card.type';
 import { ProjectCardActivatedEffectService } from '../../../../../services/cards/project-card-activated-effect.service';
 import { CommonModule } from '@angular/common';
+import { GameState } from '../../../../../services/core-game/game-state.service';
+import { Subject, takeUntil } from 'rxjs';
+import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
+
+interface Activation {
+	index: ActivationOption
+	caption: string
+}
 
 @Component({
   selector: 'app-card-activation-list',
@@ -14,17 +22,44 @@ import { CommonModule } from '@angular/common';
   templateUrl: './card-activation-list.component.html',
   styleUrl: './card-activation-list.component.scss'
 })
-export class CardActivationListComponent implements OnInit{
+export class CardActivationListComponent implements OnInit, OnDestroy{
 	@Input() maximumCardActivation!: boolean
 	@Input() projectCard!: PlayableCardModel
 	@Output() activated: EventEmitter<{card: PlayableCardModel, option: ActivationOption, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, option: ActivationOption, twice: boolean}>()
 
-	activationOptions: ActivationOption[] = []
+	activationOptions: Activation[] = []
+	clientState!: PlayerStateModel
+	destroy$ = new Subject<void>()
+	isScalingCostActivation: boolean = false
 
+	constructor(private gameStateService: GameState){}
 	ngOnInit(): void {
-		this.activationOptions = ProjectCardActivatedEffectService.getActivationOption(this.projectCard)
+		if(this.projectCard.effectSummaryOption==='scalingCostActivation' || this.projectCard.effectSummaryOption2==='scalingCostActivation'){
+			this.isScalingCostActivation = true
+			this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
+		} else {
+			this.updateActivationOptions()
+		}
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 	public onActivation(activation: {option: ActivationOption, twice: boolean}): void {
 		this.activated.emit({card: this.projectCard, option: activation.option, twice: activation.twice})
+	}
+	private onClientStateUpdate(state: PlayerStateModel){
+		this.clientState = state
+		this.updateActivationOptions()
+	}
+	private updateActivationOptions(){
+		this.activationOptions = []
+		let options = ProjectCardActivatedEffectService.getActivationOption(this.projectCard)
+		for(let i=0; i<options.length; i++){
+			this.activationOptions.push({
+				caption: this.projectCard.effects[0].effectAction[i],
+				index: options[i]
+			})
+		}
 	}
 }

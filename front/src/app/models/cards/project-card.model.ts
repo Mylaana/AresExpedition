@@ -36,6 +36,8 @@ export class PlayableCardModel{
 	activated: number = 0
 	startingMegacredits?: number
 	status!: string
+    effectSummaryOption!: string
+    effectSummaryOption2!: string
 
     //not loaded from data
 

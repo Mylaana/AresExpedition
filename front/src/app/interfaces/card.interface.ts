@@ -16,6 +16,7 @@ export interface PlayableCardEffect {
 	effectSummaryText: string
 	effectText: string
 	effectSummaryType: SummaryType
+	effectAction: string[]
 }
 
 export interface PlayableCardInterface {
@@ -44,7 +45,9 @@ export interface PlayableCardInterface {
 	stock?: AdvancedRessourceStock[]
 	stockable?: AdvancedRessourceType[]
 	startingMegacredits?: number
-	status: string
+	status: string,
+	effectSummaryOption: string,
+    effectSummaryOption2: string
 
 	//not loaded from data
 

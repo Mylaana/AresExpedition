@@ -55,6 +55,11 @@ function getPlayed(cardCode: string, clientstate: PlayerStateModel): EventBaseMo
 			result.push(EventFactory.simple.increaseResearchScanKeep({keep:1, scan:1}))
 			break
 		}
+		//Wood Burning Stoves
+		case('64'):{
+			result.push(EventFactory.simple.addRessource({name: 'plant',valueStock: 4}))
+			break
+		}
 		//Artificial Lake
 		case('66'):{
 			result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean,1))

@@ -29,6 +29,12 @@ export class ProjectCardActivatedEffectService {
 				result.push(EventFactory.simple.draw(2))
 				break
 			}
+			//Aquifer Pumping
+			case('7'):{
+				result.push(EventFactory.simple.addRessource({name:'megacredit', valueStock: - this.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1))
+				break
+			}
 			//Artificial Jungle
 			case('9'):{
 				result.push(EventFactory.simple.addRessource({name: "plant", valueStock: -1}))
@@ -78,6 +84,12 @@ export class ProjectCardActivatedEffectService {
 			case('20'):{
 				//add new event type removing any ressource on card
 				result.push(EventFactory.simple.addRessource({name: "plant", valueStock: 3}))
+				break
+			}
+			//Developed Infrastructure
+			case('21'):{
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - this.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1))
 				break
 			}
 			//Development Center
@@ -183,6 +195,12 @@ export class ProjectCardActivatedEffectService {
 				}
 				break
 			}
+			//Solarpunk
+			case('54'):{
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addForestAndOxygen(1))
+				break
+			}
 			//Steelworks
 			case('56'):{
 				result.push(EventFactory.simple.addRessource([
@@ -207,10 +225,40 @@ export class ProjectCardActivatedEffectService {
 				result.push(EventFactory.simple.draw(1))
 				break
 			}
+			//Volcanic Pools
+			case('62'):{
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1))
+				break
+			}
+			//Water Import from Europa
+			case('63'):{
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1))
+				break
+			}
+			//Wood Burning Stoves
+			case('64'):{
+				result.push(EventFactory.simple.addRessource({name: "plant", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1))
+				break
+			}
+			//Sawmill
+			case('F08'):{
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1))
+				break
+			}
 			//Matter Generator
 			case('P06'):{
 				result.push(EventFactory.simple.discard(1))
 				result.push(EventFactory.simple.addRessource({name:'megacredit', valueStock:6}))
+				break
+			}
+			//Progressive Policies
+			case('P09'):{
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1))
 				break
 			}
 			default:{
@@ -230,47 +278,94 @@ export class ProjectCardActivatedEffectService {
 		if(doubleActivationCards.includes(card.cardCode)){return [1,2]}
 		return [1]
 	}
-	public static getActivationCaption(card: PlayableCardModel, option: ActivationOption): string | undefined {
+	public static getScalingCostActivationCaption(card: PlayableCardModel, clientState: PlayerStateModel): string {
 		switch(card.cardCode){
-			//Conserved Biome
-			case('18'):{
-				switch(option){
-					case(1):{return '$ressource_microbe$*'}
-					case(2):{return '$ressource_animal$*'}
-				}
+			//Aquifer Pumping
+			case('7'):{
+				let cost = this.getScalingActivationCost(card, clientState)
+				return `$ressource_megacreditvoid_${cost}$: $other_ocean$`
 			}
-			//Extreme-Cold Fungus
-			case('27'):{
-				switch(option){
-					case(1):{return '$ressource_plant$'}
-					case(2):{return '$ressource_microbe$*'}
-				}
+			//Developed Infrastructure
+			case('21'):{
+				let cost = this.getScalingActivationCost(card, clientState)
+				return `$ressource_megacreditvoid_${cost}$: $other_temperature$`
 			}
-			//GHG Producing Bacteria
-			case('31'):{
-				switch(option){
-					case(1):{return '$ressource_microbe$'}
-					case(2):{return '-2$ressource_microbe$:$other_temperature$'}
-				}
+			//Solarpunk
+			case('54'):{
+				let cost = this.getScalingActivationCost(card, clientState)
+				return `$ressource_megacreditvoid_${cost}$: $other_forest$`
 			}
-			//Nitrite Reducing Bacteria
-			case('43'):{
-				switch(option){
-					case(1):{return '$ressource_microbe$'}
-					case(2):{return '-3$ressource_microbe$:$other_ocean$'}
-				}
+			//Volcanic Pools
+			case('62'):{
+				let cost = this.getScalingActivationCost(card, clientState)
+				return `$ressource_megacreditvoid_${cost}$: $other_ocean$`
 			}
-			//Regolith Eaters
-			case('50'):{
-				switch(option){
-					case(1):{return '$ressource_microbe$'}
-					case(2):{return '-2$ressource_microbe$:$other_oxygen$'}
-				}
+			//Water Import from Europa
+			case('63'):{
+				let cost = this.getScalingActivationCost(card, clientState)
+				return `$ressource_megacreditvoid_${cost}$: $other_ocean$`
+			}
+			//Wood Burning Stoves
+			case('64'):{
+				let cost = this.getScalingActivationCost(card, clientState)
+				return `$-${cost}$ressource_plant$: $other_temperature$`
+			}
+			//Sawmill
+			case('F08'):{
+				let cost = this.getScalingActivationCost(card, clientState)
+				return `$ressource_megacreditvoid_${cost}$: $other_infrastructure$`
+			}
+			//Progressive Policies
+			case('P09'):{
+				let cost = this.getScalingActivationCost(card, clientState)
+				return `$ressource_megacreditvoid_${cost}$: $other_oxygen$`
 			}
 			default:{
-				return
+				return ''
 			}
 		}
-		return
+	}
+	public static getScalingActivationCost(card: PlayableCardModel, clientState: PlayerStateModel): number {
+		switch(card.cardCode){
+			//Aquifer Pumping
+			case('7'):{
+				return Math.max(0, 10 - (clientState.getRessourceInfoFromType('steel')?.valueProd??0) * 2)
+			}
+			//Developed Infrastructure
+			case('21'):{
+				if(clientState.getProjectPlayedModelList({type:'blueProject'}).length>=5){
+					return 5
+				}
+				return 10
+			}
+			//Solarpunk
+			case('54'):{
+				return Math.max(0, 15 - (clientState.getRessourceInfoFromType('titanium')?.valueProd??0) * 2)
+			}
+			//Volcanic Pools
+			case('62'):{
+				return Math.max(0, 12 - clientState.getTagsOfType('power'))
+			}
+			//Water Import from Europa
+			case('63'):{
+				return Math.max(0, 12 - (clientState.getRessourceInfoFromType('titanium')?.valueProd??0))
+			}
+			//Wood Burning Stoves
+			case('64'):{
+				return Math.max(0, 4 - Number((clientState.getPhaseSelected()===SelectablePhaseEnum.action)))
+			}
+			//Sawmill
+			case('F08'):{
+				return Math.max(0, 10 - clientState.getTagsOfType('plant') * 2)
+			}
+			//Progressive Polices
+			case('P09'):{
+				if(clientState.getTagsOfType('event')>=4){
+					return 5
+				}
+				return 10
+			}
+			default:{return 0}
+		}
 	}
 }

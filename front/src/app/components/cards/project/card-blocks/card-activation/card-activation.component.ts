@@ -26,6 +26,8 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	@Input() maximumCardActivation!: boolean
 	@Input() projectCard!: PlayableCardModel
 	@Input() actionIndex: ActivationOption = 1
+	@Input() caption!: string
+	@Input() isScalingCostActivation!: boolean
 	@Output() activated = new EventEmitter<{option: ActivationOption, twice: boolean}>()
 	_activateOnce!: NonEventButton
 	_activateTwice!: NonEventButton
@@ -37,7 +39,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(): void {
-		this._activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce', ProjectCardActivatedEffectService.getActivationCaption(this.projectCard, this.actionIndex))
+		this._activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce', this.caption)
 		this._activateTwice = ButtonDesigner.createNonEventButton('activateProjectTwice')
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
 		this.updateButtonStatus()
@@ -55,6 +57,12 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	private onClientStateUpdate(state: PlayerStateModel){
 		this.clientState = state
 		this.setActivationPayable()
+		this.updateCaption()
+	}
+	private updateCaption(){
+		if(!this.isScalingCostActivation){return}
+		this.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption(this.projectCard, this.clientState)
+		this._activateOnce.caption = this.caption
 	}
 	private setActivationPayable(): void {
 		this.activationCostPayable = CardConditionChecker.canBeActivated(this.projectCard, this.clientState, this.actionIndex)
