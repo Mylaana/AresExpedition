@@ -77,10 +77,7 @@ Create Event type :
     - new builder event   
     - discard type/Quantity watching discarded card datas (mars univ/49)   
     - "action portal" type event casting subsequent events   
-Create trigger hooks :
-    - on card activation   
 Activation:   
-    - Scaling activation cost   
     - Droplist/Custom value selection on activation (card 32/47)   
 Other:   
     - Need prerequisite offset mechanic   
