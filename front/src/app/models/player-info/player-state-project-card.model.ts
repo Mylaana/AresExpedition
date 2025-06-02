@@ -56,8 +56,9 @@ export class PlayerProjectCardStateModel {
 			switch(cardType){
 				case('project'):{
 					let index = this.hand.indexOf(Number(card), 0);
+					let discarded = this.hand.splice(index, 1)[0]
 					if (index > -1 && addRemovedCardsToDiscard) {
-						this.addCardsToDiscard(this.hand.splice(index, 1)[0])
+						this.addCardsToDiscard(discarded)
 					}
 					break
 				}
