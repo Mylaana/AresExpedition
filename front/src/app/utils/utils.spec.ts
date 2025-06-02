@@ -1,6 +1,6 @@
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
 import { PlayableCardModel } from "../models/cards/project-card.model"
-import { Utils } from "./utils"
+import { Logger, Utils } from "./utils"
 
 describe('Functions', () => {
     describe('copy', () => {
@@ -19,7 +19,7 @@ describe('Functions', () => {
         it('should call console.log', () => {
             const spy = spyOn(console, 'log')
 
-            Utils.logText('some text')
+            Logger.logText('some text')
 
             expect(spy).toHaveBeenCalled()
         })

@@ -197,7 +197,6 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
 function generateCardBuilder(builderId:number, option?:CardBuilderOptionType): CardBuilder {
     let builder = new CardBuilder
     builder.addButtons(ButtonDesigner.createEventCardBuilderButton(builderId, option))
-    //builder.setId(builderId)
     option?builder.setOption(option):null
     return builder
 }
@@ -429,4 +428,9 @@ export const EventFactory = {
     createDeckQueryEvent,
     createWaiter,
     createPhase
+}
+
+export const __testOnly__ = {
+	generateCardSelector,
+	generateCardBuilder
 }

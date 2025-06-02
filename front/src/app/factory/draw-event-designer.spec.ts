@@ -1,7 +1,7 @@
 import { ScanKeep } from "../interfaces/global.interface"
 import { DrawEvent } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
-import { DrawEventDesigner } from "./draw-event-designer.service"
+import { DrawEventFactory } from "./draw-event-designer.service"
 
 describe('Service - Designers - Draw Event', () => {
     describe('createDrawEvent', () => {
@@ -20,7 +20,7 @@ describe('Service - Designers - Draw Event', () => {
                 expectedEvent.resolveEventSubType = expectedResolveType
                 expectedEvent.waiterId = expectedWaiterId
 
-                let event = DrawEventDesigner.createDrawEvent(expectedResolveType, expectedDrawNumber, expectedWaiterId)
+                let event = DrawEventFactory.createDrawEvent(expectedResolveType, expectedDrawNumber, expectedWaiterId)
 
                 //date might differ on test so we exclude it
                 expect(event.drawDate).not.toBeUndefined()
@@ -36,7 +36,7 @@ describe('Service - Designers - Draw Event', () => {
                 expectedEvent.resolveEventSubType = expectedResolveType
                 expectedEvent.waiterId = expectedWaiterId
 
-                let event = DrawEventDesigner.createScanKeepEvent(expectedResolveType, expectedScanKeep, expectedWaiterId)
+                let event = DrawEventFactory.createScanKeepEvent(expectedResolveType, expectedScanKeep, expectedWaiterId)
 
                 //date might differ on test so we exclude it
                 expect(event.drawDate).not.toBeUndefined()
