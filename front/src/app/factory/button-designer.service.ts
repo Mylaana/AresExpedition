@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { EventUnionSubTypes } from "../../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton } from "../../models/core-game/button.model";
-import { CardBuilderOptionType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../../types/global.type";
+import { EventUnionSubTypes } from "../types/event.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton } from "../models/core-game/button.model";
+import { CardBuilderOptionType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../types/global.type";
 
 
 @Injectable({

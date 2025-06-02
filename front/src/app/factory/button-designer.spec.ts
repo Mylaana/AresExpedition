@@ -1,5 +1,5 @@
-import { EventCardBuilderButton, EventMainButton, EventMainButtonSelector } from "../../models/core-game/button.model"
-import { EventUnionSubTypes } from "../../types/event.type"
+import { EventCardBuilderButton, EventMainButton, EventMainButtonSelector } from "../models/core-game/button.model"
+import { EventUnionSubTypes } from "../types/event.type"
 import { ButtonDesigner } from "./button-designer.service"
 
 describe('Service - Designers - Button', () => {

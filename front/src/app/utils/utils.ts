@@ -32,142 +32,162 @@ const PhaseGroupToPhaseCards: Map<SelectablePhaseEnum, PhaseCardType[]> = new Ma
 	]
 )
 
-type phaseName = 'development' | 'construction' | 'action' | 'production' | 'research'
-
-export class Utils {
-	public static jsonCopy(item: any): any{
+function jsonCopy(item: any): any{
 		return JSON.parse(JSON.stringify(item))
-	}
-	/**
-	 *
-	 * @param treshold
-	 * @param value
-	 * @param tresholdType
-	 * @returns boolean
-	 * returns true if value is in treshold limit
-	 */
-	public static getValueVsTreshold(args: MinMaxEqualTreshold): boolean {
-		switch(args.treshold){
-			case('equal'):{
-				return args.value === args.tresholdValue
-			}
-			case('min'): {
-				return  args.value >= args.tresholdValue
-			}
-			case('max'): {
-				return  args.value <= args.tresholdValue
-			}
+}
+/**
+ *
+ * @param treshold
+ * @param value
+ * @param tresholdType
+ * @returns boolean
+ * returns true if value is in treshold limit
+ */
+function getValueVsTreshold(args: MinMaxEqualTreshold): boolean {
+	switch(args.treshold){
+		case('equal'):{
+			return args.value === args.tresholdValue
+		}
+		case('min'): {
+			return  args.value >= args.tresholdValue
+		}
+		case('max'): {
+			return  args.value <= args.tresholdValue
 		}
 	}
-	public static logText(...text: any ): void {
-		console.log(text)
-	}
-	public static logEventResolution(...text: any): void {
-		if(!DEBUG_LOG_EVENT_RESOLUTION){return}
-		this.logText(text)
-	}
-	public static logError(...text: any): void{
-		console.log(text)
-	}
-	public static logPublishMessage(prefix: any, content: any): void {
-		if(!DEBUG_LOG_WS_PUBLISH){return}
-		console.log(`%cPUBLISHED: ${prefix}: `, 'color:red', content)
-	}
-	public static logReceivedMessage(prefix: any, content: any): void {
-		if(!DEBUG_LOG_WS_RECEIVED){return}
-		console.log(`%cRECEIVED: ${prefix}: `, 'color:green', content)
-	}
-	public static getSelectablePhaseFromPhaseUpgrade(upgrade: PhaseCardUpgradeType): SelectablePhaseEnum {
+}
+function logText(...text: any ): void {
+	console.log(text)
+}
+function logEventResolution(...text: any): void {
+	if(!DEBUG_LOG_EVENT_RESOLUTION){return}
+	Logger.logText(text)
+}
+function logError(...text: any): void{
+	console.log(text)
+}
+function logPublishMessage(prefix: any, content: any): void {
+	if(!DEBUG_LOG_WS_PUBLISH){return}
+	console.log(`%cPUBLISHED: ${prefix}: `, 'color:red', content)
+}
+function logReceivedMessage(prefix: any, content: any): void {
+	if(!DEBUG_LOG_WS_RECEIVED){return}
+	console.log(`%cRECEIVED: ${prefix}: `, 'color:green', content)
+}
+function getSelectablePhaseFromPhaseUpgrade(upgrade: PhaseCardUpgradeType): SelectablePhaseEnum {
 
-		return PhaseUpgrade.get(upgrade)??SelectablePhaseEnum.undefined
+	return PhaseUpgrade.get(upgrade)??SelectablePhaseEnum.undefined
+}
+function getPhaseCardsListFromPhaseGroupType(groupType: SelectablePhaseEnum): PhaseCardType[] {
+	return PhaseGroupToPhaseCards.get(groupType)??[]
+}
+/**
+* Can use 'development' | 'construction' | 'action' | 'production' | 'research'
+*
+* Any other value returns SelectablePhaseEnum.undefined
+*
+* Input converted to lowercase before comparison
+*/
+function toSelectablePhase(name: string): SelectablePhaseEnum {
+	switch(name.toLowerCase()){
+		case("development"):{return SelectablePhaseEnum.development}
+		case("construction"):{return SelectablePhaseEnum.construction}
+		case("action"):{return SelectablePhaseEnum.action}
+		case("production"):{return SelectablePhaseEnum.production}
+		case("research"):{return SelectablePhaseEnum.research}
+		default:{return SelectablePhaseEnum.undefined}
 	}
-	public static getPhaseCardsListFromPhaseGroupType(groupType: SelectablePhaseEnum): PhaseCardType[] {
-		return PhaseGroupToPhaseCards.get(groupType)??[]
+}
+function toNumberArray(value: number | number[]): number[] {
+	if(Array.isArray(value)){return value}
+	return [value]
+}
+function toCardsIdList(modelList: PlayableCardModel[]): number[]{
+	let list: number[] = []
+	for(let card of modelList){
+		list.push(card.id)
 	}
-	/**
-	* Can use 'development' | 'construction' | 'action' | 'production' | 'research'
-	*
-	* Any other value returns SelectablePhaseEnum.undefined
-	*
-	* Input converted to lowercase before comparison
-	*/
-	public static toSelectablePhase(name: string): SelectablePhaseEnum {
-		switch(name.toLowerCase()){
-			case("development"):{return SelectablePhaseEnum.development}
-			case("construction"):{return SelectablePhaseEnum.construction}
-			case("action"):{return SelectablePhaseEnum.action}
-			case("production"):{return SelectablePhaseEnum.production}
-			case("research"):{return SelectablePhaseEnum.research}
-			default:{return SelectablePhaseEnum.undefined}
+	return list
+}
+function toFullCardState(partialState: Partial<CardState>): CardState {
+	return Object.assign({
+		selectable: false,
+		selected: false,
+		upgradable: false,
+		upgraded: false,
+		buildable: false,
+		activable: false,
+		ignoreCost: false
+	}, partialState);
+}
+function newUUID(): myUUID {
+	return uuidv4()
+}
+function toCardTypeColor(cardType: CardType): CardTypeColor {
+	switch(cardType){
+		case('blueProject'):{return 'blue'}
+		case('redProject'):{return 'red'}
+		case('greenProject'):{return 'green'}
+		case('corporation'):{return 'corporation'}
+	}
+	return undefined
+}
+function toArray(input: any | any[]): any[] {
+	if(Array.isArray(input)){return input}
+	return [input]
+}
+function toGlobalParameterColor(parameterName: GlobalParameterNameEnum, step: number): GlobalParameterColorEnum {
+	switch(parameterName){
+		case(GlobalParameterNameEnum.temperature):{
+			if(step<=5){return GlobalParameterColorEnum.purple}
+			if(step<=10){return GlobalParameterColorEnum.red}
+			if(step<=15){return GlobalParameterColorEnum.yellow}
+			return GlobalParameterColorEnum.white
+		}
+		case(GlobalParameterNameEnum.infrastructure):{
+			if(step<=2){return GlobalParameterColorEnum.purple}
+			if(step<=7){return GlobalParameterColorEnum.red}
+			if(step<=11){return GlobalParameterColorEnum.yellow}
+			return GlobalParameterColorEnum.white
+		}
+		case(GlobalParameterNameEnum.oxygen):{
+			if(step<=2){return GlobalParameterColorEnum.purple}
+			if(step<=6){return GlobalParameterColorEnum.red}
+			if(step<=11){return GlobalParameterColorEnum.yellow}
+			return GlobalParameterColorEnum.white
 		}
 	}
-	public static toNumberArray(value: number | number[]): number[] {
-		if(Array.isArray(value)){return value}
-		return [value]
-	}
-	public static toCardsIdList(modelList: PlayableCardModel[]): number[]{
-		let list: number[] = []
-		for(let card of modelList){
-			list.push(card.id)
+	return GlobalParameterColorEnum.purple
+}
+function toTagId(tagType: TagType): number {
+	for(let i=0; i<GAME_TAG_LIST.length; i++){
+		if(GAME_TAG_LIST[i]===tagType){
+			return i
 		}
-		return list
 	}
-	public static toFullCardState(partialState: Partial<CardState>): CardState {
-		return Object.assign({
-			selectable: false,
-			selected: false,
-			upgradable: false,
-			upgraded: false,
-			buildable: false,
-			activable: false,
-			ignoreCost: false
-		}, partialState);
-	}
-	public static newUUID(): myUUID {
-		return uuidv4()
-	}
-	public static toCardTypeColor(cardType: CardType): CardTypeColor {
-		switch(cardType){
-			case('blueProject'):{return 'blue'}
-			case('redProject'):{return 'red'}
-			case('greenProject'):{return 'green'}
-			case('corporation'):{return 'corporation'}
-		}
-		return undefined
-	}
-	public static toArray(input: any | any[]): any[] {
-		if(Array.isArray(input)){return input}
-		return [input]
-	}
-	public static toGlobalParameterColor(parameterName: GlobalParameterNameEnum, step: number): GlobalParameterColorEnum {
-		switch(parameterName){
-			case(GlobalParameterNameEnum.temperature):{
-				if(step<=5){return GlobalParameterColorEnum.purple}
-				if(step<=10){return GlobalParameterColorEnum.red}
-				if(step<=15){return GlobalParameterColorEnum.yellow}
-				return GlobalParameterColorEnum.white
-			}
-			case(GlobalParameterNameEnum.infrastructure):{
-				if(step<=2){return GlobalParameterColorEnum.purple}
-				if(step<=7){return GlobalParameterColorEnum.red}
-				if(step<=11){return GlobalParameterColorEnum.yellow}
-				return GlobalParameterColorEnum.white
-			}
-			case(GlobalParameterNameEnum.oxygen):{
-				if(step<=2){return GlobalParameterColorEnum.purple}
-				if(step<=6){return GlobalParameterColorEnum.red}
-				if(step<=11){return GlobalParameterColorEnum.yellow}
-				return GlobalParameterColorEnum.white
-			}
-		}
-		return GlobalParameterColorEnum.purple
-	}
-	public static toTagId(tagType: TagType): number {
-		for(let i=0; i<GAME_TAG_LIST.length; i++){
-			if(GAME_TAG_LIST[i]===tagType){
-				return i
-			}
-		}
-		return -1
-	}
+	return -1
+}
+
+export const Logger = {
+	logText,
+	logEventResolution,
+	logError,
+	logPublishMessage,
+	logReceivedMessage
+}
+
+export const Utils = {
+	jsonCopy,
+	getValueVsTreshold,
+	getSelectablePhaseFromPhaseUpgrade,
+	getPhaseCardsListFromPhaseGroupType,
+	toSelectablePhase,
+	toNumberArray,
+	toCardsIdList,
+	toFullCardState,
+	newUUID,
+	toCardTypeColor,
+	toArray,
+	toGlobalParameterColor,
+	toTagId
 }

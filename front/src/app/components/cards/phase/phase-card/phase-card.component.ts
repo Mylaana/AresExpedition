@@ -9,7 +9,7 @@ import { CardState } from '../../../../interfaces/card.interface';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
-import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { NonEventButton } from '../../../../models/core-game/button.model';
 
 @Component({

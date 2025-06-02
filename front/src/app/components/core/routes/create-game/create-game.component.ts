@@ -6,7 +6,7 @@ import { ApiService } from '../../../../services/api/api.service';
 import { ROUTE_NEWGAMELINKS } from '../../../../global/global-const';
 import { NonEventButton } from '../../../../models/core-game/button.model';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
-import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { PlayerCreationPannelComponent } from '../../../create-game/player-creation-pannel/player-creation-pannel.component';
 import { PlayerNumberComponent } from '../../../create-game/player-number/player-number.component';
 import { CreatePlayer } from '../../../../interfaces/global.interface';

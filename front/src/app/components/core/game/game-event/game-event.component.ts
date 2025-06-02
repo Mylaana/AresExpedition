@@ -8,10 +8,8 @@ import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../
 import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
-import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
-import { EventDesigner } from '../../../../services/designers/event-designer.service';
+import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { ActivationOption, ProjectListType } from '../../../../types/project-card.type';
-import { CardBuilderListComponent } from '../../../cards/card-builder-list/card-builder-list.component';
 import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
 import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { EventMainButtonComponent } from "../../../tools/button/event-main-button.component";
@@ -24,6 +22,7 @@ import { PhasePlanificationComponent } from '../../../game-event-blocks/phase-pl
 import { PhaseProductionComponent } from '../../../game-event-blocks/phase-production/phase-production.component';
 import { PhaseActionComponent } from '../../../game-event-blocks/phase-action/phase-action.component';
 import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/phase-builder.component';
+import { EventFactory } from '../../../../factory/event factory/event-factory';
 
 //this component is the main controller, and view
 
@@ -116,22 +115,22 @@ export class GameEventComponent {
 		let events: EventBaseModel[] = []
 		switch(phase){
 			case(NonSelectablePhaseEnum.undefined):{return}
-			case(NonSelectablePhaseEnum.planification):{events.push(EventDesigner.createGeneric('planificationPhase'));break}
-			case(NonSelectablePhaseEnum.development):{events.push(EventDesigner.createPhase('developmentPhase'));break}
-			case(NonSelectablePhaseEnum.construction):{events.push(EventDesigner.createPhase('constructionPhase'));break}
-			case(NonSelectablePhaseEnum.action):{events.push(EventDesigner.createPhase('actionPhase'));break}
-			case(NonSelectablePhaseEnum.production):{events.push(EventDesigner.createPhase('productionPhase'));break}
-			case(NonSelectablePhaseEnum.research):{events.push(EventDesigner.createPhase('researchPhase'));break}
+			case(NonSelectablePhaseEnum.planification):{events.push(EventFactory.createGeneric('planificationPhase'));break}
+			case(NonSelectablePhaseEnum.development):{events.push(EventFactory.createPhase('developmentPhase'));break}
+			case(NonSelectablePhaseEnum.construction):{events.push(EventFactory.createPhase('constructionPhase'));break}
+			case(NonSelectablePhaseEnum.action):{events.push(EventFactory.createPhase('actionPhase'));break}
+			case(NonSelectablePhaseEnum.production):{events.push(EventFactory.createPhase('productionPhase'));break}
+			case(NonSelectablePhaseEnum.research):{events.push(EventFactory.createPhase('researchPhase'));break}
 
 		}
-		events.push(EventDesigner.createCardSelector('selectCardForcedSell'))
-		events.push(EventDesigner.createGeneric('endOfPhase'))
-		events.push(EventDesigner.createGeneric('waitingGroupReady'))
+		events.push(EventFactory.createCardSelector('selectCardForcedSell'))
+		events.push(EventFactory.createGeneric('endOfPhase'))
+		events.push(EventFactory.createGeneric('waitingGroupReady'))
 		this.gameStateService.addEventQueue(events,'last')
 	}
 
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
-		let newEvent = EventDesigner.createGeneric(
+		let newEvent = EventFactory.createGeneric(
 			'upgradePhaseCards',
 			{
 				phaseCardUpgradeNumber: upgradeNumber,
@@ -187,7 +186,7 @@ export class GameEventComponent {
 	public nonEventButtonClicked(button: NonEventButton){
 		switch(button.name){
 			case('sellOptionalCard'):{
-				this.gameStateService.addEventQueue(EventDesigner.createCardSelector('selectCardOptionalSell'), 'first')
+				this.gameStateService.addEventQueue(EventFactory.createCardSelector('selectCardOptionalSell'), 'first')
 				this.sellCardsButton.updateEnabled(false)
 				this.sellCardsCancelButton.updateEnabled(true)
 				break

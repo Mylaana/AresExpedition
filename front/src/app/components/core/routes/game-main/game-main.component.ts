@@ -5,7 +5,7 @@ import { GLOBAL_WS_ACKNOWLEDGE, GLOBAL_WS_GROUP, GLOBAL_WS_PLAYER } from '../../
 import { PlayerMessageResult } from '../../../../interfaces/websocket.interface';
 import { NonEventButton } from '../../../../models/core-game/button.model';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
-import { WebsocketResultMessageFactory } from '../../../../services/designers/websocket-message-factory.service';
+import { WebsocketResultMessageFactory } from '../../../../factory/websocket-message-factory.service';
 import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { HorizontalSeparatorComponent } from '../../../tools/layouts/horizontal-separator/horizontal-separator.component';
@@ -18,7 +18,7 @@ import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
-import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { fadeIn } from '../../../../animations/animations';

@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { NonEventButton } from '../../../models/core-game/button.model';
 import { GAME_MAXIMUM_PLAYER_NUMBER } from '../../../global/global-const';
-import { ButtonDesigner } from '../../../services/designers/button-designer.service';
+import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

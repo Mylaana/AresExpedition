@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { WebsocketHandler } from './models/core-game/websocket-handler';
 import { expandCollapseVertical, fadeIn, fadeInFadeOut } from './animations/animations';
 import { RouterOutlet } from '@angular/router';
-import { ButtonDesigner } from './services/designers/button-designer.service';
+import { ButtonDesigner } from './factory/button-designer.service';
 import { NonEventButtonComponent } from './components/tools/button/non-event-button.component';
 import { NonEventButton } from './models/core-game/button.model';
 import { Router } from '@angular/router';

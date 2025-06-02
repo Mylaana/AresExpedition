@@ -50,6 +50,11 @@ export class ProjectCardScalingVPService {
 					totalScalingVp += Math.floor(card.getStockValue('science') / 2)
 					break
 				}
+				//Small Animals
+				case("53"):{
+					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
+					break
+				}
 				//Tardigrades
 				case("58"):{
 					totalScalingVp += Math.floor(card.getStockValue('microbe') / 3)

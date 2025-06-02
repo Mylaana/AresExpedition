@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ColorButton } from '../../../models/core-game/button.model';
 import { PlayerColor } from '../../../types/global.type';
-import { ButtonDesigner } from '../../../services/designers/button-designer.service';
+import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { CommonModule } from '@angular/common';
 

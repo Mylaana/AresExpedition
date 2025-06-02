@@ -1,16 +1,16 @@
 import { AfterViewInit, Component, EventEmitter, Input, input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { EventMainButton, NonEventButton } from '../../../models/core-game/button.model';
-import { ButtonDesigner } from '../../../services/designers/button-designer.service';
+import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { Subject, takeUntil } from 'rxjs';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { EventBaseModel, EventCardActivator } from '../../../models/core-game/event.model';
-import { EventDesigner } from '../../../services/designers/event-designer.service';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
+import { EventFactory } from '../../../factory/event factory/event-factory';
 
 @Component({
     selector: 'app-phase-action',
@@ -80,40 +80,40 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		let newEvents: EventBaseModel[] = []
 		switch(button.name){
 			case('convertForest'):{
-				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'plant', valueStock: -8}}))
-				newEvents.push(EventDesigner.createGeneric('addForestPointAndOxygen', {addForestPoint: 1}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'plant', valueStock: -8}}))
+				newEvents.push(EventFactory.createGeneric('addForestPointAndOxygen', {addForestPoint: 1}))
 				break
 			}
 			case('buyForest'):{
-				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
-				newEvents.push(EventDesigner.createGeneric('addForestPointAndOxygen', {addForestPoint: 1}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
+				newEvents.push(EventFactory.createGeneric('addForestPointAndOxygen', {addForestPoint: 1}))
 				break
 			}
 			case('convertTemperature'):{
-				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'heat', valueStock: -8}}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.temperature, steps:1}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'heat', valueStock: -8}}))
+				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.temperature, steps:1}}))
 				break
 			}
 			case('buyTemperature'):{
-				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -14}}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.temperature, steps:1}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -14}}))
+				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.temperature, steps:1}}))
 				break
 			}
 			case('convertInfrastructure'):{
-				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: [{name:'heat', valueStock: -5}, {name:'plant', valueStock: -3}]}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.infrastructure, steps:1}}))
-				newEvents.push(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: [{name:'heat', valueStock: -5}, {name:'plant', valueStock: -3}]}))
+				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.infrastructure, steps:1}}))
+				newEvents.push(EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}}))
 				break
 			}
 			case('buyInfrastructure'):{
-				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -15}}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.infrastructure, steps:1}}))
-				newEvents.push(EventDesigner.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -15}}))
+				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.infrastructure, steps:1}}))
+				newEvents.push(EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}}))
 				break
 			}
 			case('buyOcean'):{
-				newEvents.push(EventDesigner.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
-				newEvents.push(EventDesigner.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.ocean, steps:1}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
+				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.ocean, steps:1}}))
 				break
 			}
 		}

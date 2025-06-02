@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NonEventButton } from '../../../../models/core-game/button.model';
-import { ButtonDesigner } from '../../../../services/designers/button-designer.service';
+import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { fadeIn } from '../../../../animations/animations';

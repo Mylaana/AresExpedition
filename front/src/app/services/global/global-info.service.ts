@@ -7,7 +7,7 @@ import jsonData from '../../../assets/data/game-item_data.json'
     providedIn: 'root'
 })
 export class GlobalInfo {
-    private static readonly gameItems: GameItem[] = GlobalInfo.loadJson()    
+    private static readonly gameItems: GameItem[] = GlobalInfo.loadJson()
 
     private static loadJson(): GameItem[] {
         let result: GameItem[] = []

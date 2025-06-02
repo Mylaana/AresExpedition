@@ -163,6 +163,7 @@ export class PlayerStateModel {
 	addSellCardValueMod(value: number): void {this.otherState.addSellCardValueMod(value)}
 
 	//cardState
+	getTriggersIdActive(): string[] {return this.projectCardState.getActivePlayedTriggersId()}
 	setTriggerInactive(trigger: string): void {this.projectCardState.setTriggerInactive(trigger)}
 	getTriggersIdOnPlayedCard(): string[] {return this.projectCardState.getTriggersIdOnPlayedCard()}
 	getTriggersIdOnParameterIncrease(): string[] {return this.projectCardState.getTriggersIdOnParameterIncrease()}

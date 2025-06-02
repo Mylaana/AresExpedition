@@ -1,5 +1,5 @@
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
-import { ButtonDesigner } from "../../services/designers/button-designer.service";
+import { ButtonDesigner } from "../../factory/button-designer.service";
 import { EventCardBuilderButtonNames } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";

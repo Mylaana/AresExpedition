@@ -6,7 +6,7 @@ import { DrawEvent, EventBaseModel } from '../../../../models/core-game/event.mo
 import { MessageContentQueryEnum } from '../../../../enum/websocket.enum';
 import { Subject, Subscription, take, takeUntil } from 'rxjs';
 import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
-import { WebsocketQueryMessageFactory } from '../../../../services/designers/websocket-message-factory.service';
+import { WebsocketQueryMessageFactory } from '../../../../factory/websocket-message-factory.service';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { myUUID, TagType } from '../../../../types/global.type';
@@ -154,7 +154,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [31,50]
+		let cardDrawList: number[] = [10]
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
 		this.gameStateService.cleanAndNextEventQueue()
