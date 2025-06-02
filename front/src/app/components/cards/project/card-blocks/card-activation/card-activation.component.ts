@@ -27,6 +27,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	@Input() projectCard!: PlayableCardModel
 	@Input() actionIndex: ActivationOption = 1
 	@Input() caption!: string
+	@Input() isScalingCostActivation!: boolean
 	@Output() activated = new EventEmitter<{option: ActivationOption, twice: boolean}>()
 	_activateOnce!: NonEventButton
 	_activateTwice!: NonEventButton
@@ -56,6 +57,12 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	private onClientStateUpdate(state: PlayerStateModel){
 		this.clientState = state
 		this.setActivationPayable()
+		this.updateCaption()
+	}
+	private updateCaption(){
+		if(!this.isScalingCostActivation){return}
+		this.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption(this.projectCard, this.clientState)
+		this._activateOnce.caption = this.caption
 	}
 	private setActivationPayable(): void {
 		this.activationCostPayable = CardConditionChecker.canBeActivated(this.projectCard, this.clientState, this.actionIndex)

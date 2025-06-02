@@ -4,6 +4,7 @@ import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/gl
 import { DEBUG_IGNORE_PREREQUISITES } from "../../global/global-const";
 import { Checker } from "../../utils/checker";
 import { ActivationOption } from "../../types/project-card.type";
+import { ProjectCardActivatedEffectService } from "./project-card-activated-effect.service";
 
 export const CardConditionChecker = {
 	canBePlayed(card: PlayableCardModel, clientState: PlayerStateModel): boolean {
@@ -293,10 +294,13 @@ export const CardConditionChecker = {
 		switch(card.cardCode){
 			//AI Central
 			case('4'):{break}
+			//Aquifer Pumping
+			case('7'):{
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card,clientState), 'min', clientState)
+			}
 			//Artificial Jungle
 			case('9'):{
 				return Checker.isRessourceOk('plant', 1, 'min', clientState)
-				break
 			}
 			//Birds
 			case('12'):{break}
@@ -315,9 +319,13 @@ export const CardConditionChecker = {
 				return false
 				return Checker.isMinimumStockOnPlayedCardOk([{name:'animal', valueStock:1}, {name:'microbe', valueStock:1}], clientState)
 			}
+			//Developed Infrastructure
+			case('21'):{
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+			}
 			//Development Center
 			case('22'):{
-				Checker.isRessourceOk('heat', 2, 'min', clientState)
+				return Checker.isRessourceOk('heat', 2, 'min', clientState)
 				break
 			}
 			//Extreme-Cold Fungus
@@ -392,6 +400,10 @@ export const CardConditionChecker = {
 					}
 				}
 			}
+			//Solarpunk
+			case('54'):{
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+			}
 			//Steelworks
 			case('56'):{
 				return Checker.isRessourceOk('heat', 6, 'min', clientState)
@@ -403,6 +415,26 @@ export const CardConditionChecker = {
 			//Steelworks
 			case('59'):{
 				return Checker.isRessourceOk('megacredit', 2, 'min', clientState)
+			}
+			//Volcanic Pools
+			case('62'):{
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+			}
+			//Water Import from Europa
+			case('63'):{
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+			}
+			//Wood Burning Stoves
+			case('64'):{
+				return Checker.isRessourceOk('plant', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+			}
+			//Sawmill
+			case('F08'):{
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+			}
+			//Progressive Policies
+			case('P09'):{
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
 			}
 			//Matter Generator
 			case('P06'):{

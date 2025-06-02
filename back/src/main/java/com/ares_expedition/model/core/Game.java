@@ -323,7 +323,7 @@ public class Game {
 
     public void setStartingHandCorporations() {
         for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
-            entry.getValue().setHandCorporations(drawCorporations(19));
+            entry.getValue().setHandCorporations(drawCorporations(4));
         }
     }
 

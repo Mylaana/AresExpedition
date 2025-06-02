@@ -45,7 +45,9 @@ export interface PlayableCardInterface {
 	stock?: AdvancedRessourceStock[]
 	stockable?: AdvancedRessourceType[]
 	startingMegacredits?: number
-	status: string
+	status: string,
+	effectSummaryOption: string,
+    effectSummaryOption2: string
 
 	//not loaded from data
 

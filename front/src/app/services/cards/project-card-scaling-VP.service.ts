@@ -65,6 +65,11 @@ export class ProjectCardScalingVPService {
 					totalScalingVp += Math.floor(clientState.getProjectPlayedIdList({type:'blueProject'}).length / 3)
 					break
 				}
+				//Water Import from Europa
+				case("63"):{
+					totalScalingVp += clientState.getTagsOfType('jovian')
+					break
+				}
 				//Io Mining Industry
 				case("153"):{
 					totalScalingVp += clientState.getTagsOfType('jovian')
@@ -75,7 +80,7 @@ export class ProjectCardScalingVPService {
 					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
 					break
 				}
-				//Pets
+				//Arklight
 				case("CP01"):{
 					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
 					break

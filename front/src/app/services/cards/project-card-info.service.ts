@@ -91,7 +91,9 @@ export class ProjectCardInfoService {
 				prerequisiteSummaryText: jsonCard.prerequisiteSummaryText[language],
 				stockable: this.convertStockable(jsonCard.stockable),
 				startingMegacredits: jsonCard.startingMegacredits,
-				status: jsonCard.status
+				status: jsonCard.status,
+				effectSummaryOption: jsonCard.effectSummaryOption,
+				effectSummaryOption2: jsonCard.effectSummaryOption2
 			}
 			let cardModel = PlayableCardModel.fromInterface(card)
 			if(card.stockable){
