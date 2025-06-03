@@ -43,7 +43,9 @@ export class ProjectCardScalingVPService {
 		this.scaledVpList = result
 	}
 	getCardScaledVp(cardCode: string): number {
-		return this.scaledVpList.filter((code) => code.cardCode===cardCode)[0].vp
+		let result = this.scaledVpList.filter((code) => code.cardCode===cardCode)
+		if(result.length>0){return result[0].vp}
+		return 0
 	}
 	getTotalScalingVP(): number {
 		return this.scaledVpList.reduce((sum, entry) => sum + entry.vp, 0);

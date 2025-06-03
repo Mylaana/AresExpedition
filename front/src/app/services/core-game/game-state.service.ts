@@ -478,7 +478,7 @@ export class GameState{
 		}
 		this.updateClientState(state)
 
-		let triggers = state.getTriggersIdOnParameterIncrease()
+		let triggers = state.getTriggersIdActive()
 		if(triggers.length>0){
 			newEvents = newEvents.concat(ProjectEffectRouter.trigger.getTriggerred("ON_PARAMETER_INCREASED", triggers, state, {increasedParameter:parameter.name, increasedParameterValue:parameter.steps}))
 		}

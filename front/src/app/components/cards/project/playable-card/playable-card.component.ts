@@ -130,7 +130,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private updateClientState(state: PlayerStateModel): void {
 		if(!state){return}
 		this.clientState = state
-		if(this.projectCard.scalingVp && this.projectCard.cardCode){
+		if(this.parentListType==='played' && this.projectCard.scalingVp && this.projectCard.cardCode){
 			this.projectCard.vpNumber=this.clientState.getCardScaledVp(this.projectCard.cardCode).toString()
 		}
 		this.updateCost()

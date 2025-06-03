@@ -33,6 +33,7 @@ export class PlayerStateModel {
 	private globalParameterState: PlayerGlobalParameterStateModel
 	private eventState: PlayerEventStateModel
 	private otherState: PlayerOtherStateModel
+
 	private scalingVp!: ProjectCardScalingVPService
 
 	constructor(
@@ -171,10 +172,6 @@ export class PlayerStateModel {
 	//cardState
 	getTriggersIdActive(): string[] {return this.projectCardState.getActivePlayedTriggersId()}
 	setTriggerInactive(trigger: string): void {this.projectCardState.setTriggerInactive(trigger)}
-	getTriggersIdOnPlayedCard(): string[] {return this.projectCardState.getTriggersIdOnPlayedCard()}
-	getTriggersIdOnParameterIncrease(): string[] {return this.projectCardState.getTriggersIdOnParameterIncrease()}
-	getTriggersIdOnRessourceAddedToCard(): string[] {return this.projectCardState.getTriggersIdOnRessourceAddedToCard()}
-	getTriggersIdOnGainedTag(): string[] {return this.projectCardState.getTriggersIdOnGainedTag()}
 	getTriggerCostMod(): string[] {return this.projectCardState.getTriggerCostMod()}
 
 	addCardsToHand(cards: number | number[]) {this.projectCardState.addCardsToHand(cards)}
