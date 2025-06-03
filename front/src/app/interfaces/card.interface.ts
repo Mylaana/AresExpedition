@@ -61,3 +61,8 @@ export interface CardBuildable {
 	costOk: boolean
 	prerequisiteOk: boolean
 }
+
+export interface CardScalingVP {
+	cardCode: string,
+	vp: number
+}

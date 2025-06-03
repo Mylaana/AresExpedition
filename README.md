@@ -70,7 +70,6 @@ Ccaling vp cards:
     - display dynamically vp gained   
 
 ### Cards
-Implement missing cards & corps   
 Create Event type :   
     - removing any ressource in list on played card   
     - adding any ressource in list on played card   
