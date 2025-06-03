@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class VpComponent {
 	@Input() vpNumber!: string
-  @Input() shape: 'round' | 'square' = 'round'
+  	@Input() shape: 'round' | 'square' = 'round'
 }

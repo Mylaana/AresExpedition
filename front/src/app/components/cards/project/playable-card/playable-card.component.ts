@@ -87,7 +87,9 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		}
 
 		// subscribe to gameState
-		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
+		if(this.parentListType!='played' || this.projectCard.scalingVp){
+			this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
+		}
 		this.setBuildable()
 		this.setMaximumActivation()
 		this._loaded = true
@@ -128,8 +130,11 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.cardStateChange.emit({card:this.projectCard, state: this.state})
 	}
 	private updateClientState(state: PlayerStateModel): void {
-		if(state===undefined){return}
+		if(!state){return}
 		this.clientState = state
+		if(this.parentListType==='played' && this.projectCard.scalingVp && this.projectCard.cardCode){
+			this.projectCard.vpNumber=this.clientState.getCardScaledVp(this.projectCard.cardCode).toString()
+		}
 		this.updateCost()
 	}
 	public updateCost(): void {

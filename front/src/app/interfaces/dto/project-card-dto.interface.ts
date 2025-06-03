@@ -5,11 +5,6 @@ export interface PlayedCardDTO {
 	s?: AdvancedRessourceStock[] //stock
 }
 export interface TriggerStateDTO {
-	pci: string[] //playedCardsId
-    aci: string[] //activeCardsId
-    aoratc: string[] //activeOnRessourceAddedToCard
-    aopi: string[] //activeOnParameterIncrease
-    aopc: string[] //activeOnPlayedCard
-    aogt: string[] //activeOnGainedTag
-    acmt: string[] //activeCostModTrigger
+	p: string[] //played
+    a: string[] //active
 }

@@ -38,6 +38,7 @@ export class PlayableCardModel{
 	status!: string
     effectSummaryOption!: string
     effectSummaryOption2!: string
+	scalingVp!: boolean
 
     //not loaded from data
 
@@ -169,13 +170,8 @@ export class TriggerState {
 
 	constructor(dto?: TriggerStateDTO){
 		if(!dto){return}
-		this.playedCards = dto.pci
-		this.activeCards = dto.aci
-		this.activeOnRessourceAddedToCard = dto.aoratc
-		this.activeOnParameterIncrease = dto.aopi
-		this.activeOnPlayedCard = dto.aopc
-		this.activeOnGainedTag = dto.aogt
-		this.activeCostModTrigger = dto.acmt
+		this.playedCards = dto.p
+		this.activeCards = dto.a
 	}
 
     getPlayedTriggers(): string[] {
@@ -202,104 +198,20 @@ export class TriggerState {
     playTrigger(cardCode: string): void {
         this.playedCards.push(cardCode)
         this.activeCards.push(cardCode)
-
-        //adds played trigger to relevant lists
-        this.addTriggerOnRessource(cardCode)
-        this.addTriggerOnParameter(cardCode)
-        this.addTriggerOnPlayedCard(cardCode)
-        this.addTriggerOnGainedTag(cardCode)
-        this.addTriggerToCostMod(cardCode)
-    }
-    private addTriggerOnRessource(cardCode: string): void {
-        switch(cardCode){
-            case('P19'):{break} //Bacterial Aggregate
-			case('P04'):{break} //Filter Feeders
-            default:{return}
-        }
-        this.activeOnRessourceAddedToCard.push(cardCode)
-    }
-    private addTriggerOnParameter(cardCode: string): void {
-        switch(cardCode){
-			case('8'):{break} //Arctic Algae
-			case('30'):{break} //Fish
-			case('33'):{break} //Herbivore
-			case('39'):{break} //Herbivore
-            case('46'):{break} //Physics Complex
-			case('F07'):{break} //Pets
-
-			case('CP06'):{break} //Zetasel
-            default:{return}
-        }
-        this.activeOnParameterIncrease.push(cardCode)
-    }
-    private addTriggerOnPlayedCard(cardCode: string): void {
-        switch(cardCode){
-			case('6'):{break} //Antigravity Technology
-            default:{return}
-        }
-        this.activeOnPlayedCard.push(cardCode)
-    }
-    private addTriggerOnGainedTag(cardCode: string): void {
-        switch(cardCode){
-			case('19'):{break} //Decomposers
-			case('24'):{break} //Ecological Zone
-            case('25'):{break} //Energy Subsidies
-            case('37'):{break} //Interplanetary Conference
-			case('44'):{break} //Olympus Conference
-            case('45'):{break} //Optimal aerobreaking
-			case('48'):{break} //Recycled Detritus
-            case('P19'):{break} //Bacterial Aggregate
-
-			case('C8'):{break} //Saturn Systems
-			case('CP01'):{break} //Arklight
-			case('CF1'):{break} //Point Luna
-            default:{return}
-        }
-        this.activeOnGainedTag.push(cardCode)
-    }
-    private addTriggerToCostMod(cardCode: string): void {
-        switch(cardCode){
-			case('23'):{break} //Earth Catapult
-            case('25'):{break} //Energy Subsidies
-            case('37'):{break} //Interplanetary Conference
-			case('42'):{break} //Media Group
-			case('51'):{break} //Research Outpost
-
-			case('C1'):{break} //CreditCor
-			case('C4'):{break} //Interplanetary Cinematics
-			case('C9'):{break} //Teractor
-			case('C11'):{break} //Thorgate
-            default:{return}
-        }
-        this.activeCostModTrigger.push(cardCode)
     }
     setTriggerInactive(cardCode: string): void {
         this.activeCards = this.activeCards.filter((e, i) => e !== cardCode)
-
-        switch(cardCode){
-            //Bacterial Aggregate
-            case('P19'):{
-                this.activeOnRessourceAddedToCard = this.activeOnRessourceAddedToCard.filter((e, i) => e !== cardCode)
-                this.activeOnGainedTag = this.activeOnGainedTag.filter((e, i) => e !== cardCode)
-                break
-            }
-        }
     }
 	public static fromJson(data: TriggerStateDTO): TriggerState {
-		if (!data.aci || !data.acmt || !data.aogt|| !data.aopc || !data.aopi || !data.aoratc || !data.pci){
+		if (!data.a || !data.p){
 			throw new Error("Invalid TriggerStateDTO: Missing required fields")
 		}
 		return new TriggerState(data)
 	}
 	public toJson(): TriggerStateDTO {
 		return {
-			aci: this.activeCards,
-			acmt: this.activeCostModTrigger,
-			aogt: this.activeOnGainedTag,
-			aopc: this.activeOnPlayedCard,
-			aopi: this.activeOnParameterIncrease,
-			aoratc: this.activeOnRessourceAddedToCard,
-			pci: this.playedCards
+			a: this.activeCards,
+			p: this.playedCards
 		}
 	}
 }

@@ -29,6 +29,7 @@ parser_columns_map = [
     {'column_name': 'status', 'column_id': -1 , 'output_field_name': 'status', 'split_per_language': False},
     {'column_name': 'effectSummaryOption', 'column_id': -1 , 'output_field_name': 'effectSummaryOption', 'split_per_language': False},
     {'column_name': 'effectSummaryOption2', 'column_id': -1 , 'output_field_name': 'effectSummaryOption2', 'split_per_language': False},
+    {'column_name': 'vpScaling', 'column_id': -1 , 'output_field_name': 'vpScaling', 'split_per_language': False},
 
     {'column_name': 'title_en', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
     {'column_name': 'title_fr', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
@@ -48,7 +49,6 @@ parser_columns_map = [
     {'column_name': 'prerequisiteText_fr', 'column_id': -1 , 'output_field_name': 'prerequisiteText', 'split_per_language': True},
     {'column_name': 'prerequisiteSummaryText_en', 'column_id': -1 , 'output_field_name': 'prerequisiteSummaryText', 'split_per_language': True},
     {'column_name': 'prerequisiteSummaryText_fr', 'column_id': -1 , 'output_field_name': 'prerequisiteSummaryText', 'split_per_language': True},
-
     {'column_name': 'effectActionTextOption1_en', 'column_id': -1 , 'output_field_name': 'effectActionTextOption1', 'split_per_language': True},
     {'column_name': 'effectActionTextOption1_fr', 'column_id': -1 , 'output_field_name': 'effectActionTextOption1', 'split_per_language': True},
     {'column_name': 'effectActionTextOption2_en', 'column_id': -1 , 'output_field_name': 'effectActionTextOption2', 'split_per_language': True},
@@ -91,7 +91,8 @@ PARSER_CARD_INFO_MODEL = {
     "effectActionTextOption1": {},
     "effectActionTextOption2": {},
     "effectActionText2Option1": {},
-    "effectActionText2Option2": {}
+    "effectActionText2Option2": {},
+    "vpScaling": ""
 }
 
 AUTHORIZED_STATUS = ['implemented', 'validated', 'bugged', 'filled', 'blocked']

@@ -93,7 +93,8 @@ export class ProjectCardInfoService {
 				startingMegacredits: jsonCard.startingMegacredits,
 				status: jsonCard.status,
 				effectSummaryOption: jsonCard.effectSummaryOption,
-				effectSummaryOption2: jsonCard.effectSummaryOption2
+				effectSummaryOption2: jsonCard.effectSummaryOption2,
+				scalingVp: Boolean(jsonCard.vpScaling)
 			}
 			let cardModel = PlayableCardModel.fromInterface(card)
 			if(card.stockable){

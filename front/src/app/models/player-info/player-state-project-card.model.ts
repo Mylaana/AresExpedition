@@ -4,12 +4,11 @@ import { PlayerProjectCardStateDTO } from "../../interfaces/dto/player-state-dto
 import { AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
 import { ProjectCardInitializeService } from "../../services/cards/project-card-initialize.service"
-import { AdvancedRessourceType, PlayableCardType, RessourceType } from "../../types/global.type"
+import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type"
 import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface"
-import { PlayedCardDTO } from "../../interfaces/dto/project-card-dto.interface"
 
 export class PlayerProjectCardStateModel {
     private hand: number[] = []
@@ -226,7 +225,7 @@ export class PlayerProjectCardStateModel {
 				hd: [],
 				hms: GAME_HAND_MAXIMUM_SIZE,
 				cp: [],
-				t: {aci: [], acmt: [], aogt: [], aopc: [], aopi: [], aoratc: [], pci: []}
+				t: {a: [], p: []}
 			}
 		)
 	}

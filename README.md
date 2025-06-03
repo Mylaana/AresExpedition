@@ -49,28 +49,14 @@ Backend: Junit
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 scankeepResult not being saved thus can be dodged (card 83)   
 Double activation count being ignored by multiple activation option cards (18/27/43)   
-
-potentially : All triggers (need testing them), types tested:   
-    - On card played   
-    - on tag played   
-    - on parameter increased    
-    - on forest gained   
-    - on Activated card
+reloading during research phase adds the previously rolled card in hand + new set to select from   
 
 ## Must have for v1 :
 ### Refactoring
 root services: reorganize services/stateless classes and tree   
-TriggerState: switch out trigger id checks from model to a service   
 Rework Buildable system in playableCardComponent   
-Merge services :
-    - play Prerequisite & activated cost check   
-    - played effect & activated effect (+triggers?)   
-Ccaling vp cards:
-    - switch to record system
-    - display dynamically vp gained   
 
 ### Cards
-Implement missing cards & corps   
 Create Event type :   
     - removing any ressource in list on played card   
     - adding any ressource in list on played card   
@@ -85,7 +71,6 @@ Other:
     - Conditionnal scan/keep (based on tag)   
     - Conditionnal scan result (card 13)   
     - Droplist   
-
 
 ### Misc
 Add victory check   

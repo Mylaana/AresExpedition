@@ -941,7 +941,7 @@ function getPlayed(cardCode: string, clientstate: PlayerStateModel): EventBaseMo
 	return result
 }
 
-export const ProjectEffectEventFactory = {
+export const ProjectEffectRouter = {
 	trigger: TriggerEffectEventFactory,
 	costMod: CostModCalulator,
 	getPlayed

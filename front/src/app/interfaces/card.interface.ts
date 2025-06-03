@@ -47,7 +47,8 @@ export interface PlayableCardInterface {
 	startingMegacredits?: number
 	status: string,
 	effectSummaryOption: string,
-    effectSummaryOption2: string
+    effectSummaryOption2: string,
+	scalingVp: boolean,
 
 	//not loaded from data
 
@@ -60,4 +61,9 @@ export interface PlayableCardInterface {
 export interface CardBuildable {
 	costOk: boolean
 	prerequisiteOk: boolean
+}
+
+export interface CardScalingVP {
+	cardCode: string,
+	vp: number
 }

@@ -1,92 +1,54 @@
 import { Injectable } from "@angular/core";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
+import { CardScalingVP } from "../../interfaces/card.interface";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 export class ProjectCardScalingVPService {
-	public static getScalingVP(clientState: PlayerStateModel): number{
-		let totalScalingVp: number = 0
-		for(let card of clientState.getProjectPlayedModelList()){
-			switch(card.cardCode){
-				//Birds
-				case("12"):{
-					totalScalingVp += card.getStockValue('animal')
-					break
-				}
-				//Conserved Biome
-				case("18"):{
-					totalScalingVp += Math.floor(clientState.getForest() / 2)
-					break
-				}
-				//Fish
-				case("30"):{
-					totalScalingVp += card.getStockValue('animal')
-					break
-				}
-				//Herbivore
-				case("33"):{
-					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
-					break
-				}
-				//Interplanetary Relations
-				case("35"):{
-					let cardList = clientState.getProjectPlayedModelList()
-					let valid: number = 0
-					for(let c of cardList){
-						if(c.cardType!='corporation'){valid++}
-					}
-					totalScalingVp += Math.floor(valid/4)
-					break
-				}
-				//Livestock
-				case("39"):{
-					totalScalingVp += card.getStockValue('animal')
-					break
-				}
-				//Physics Complex
-				case("46"):{
-					totalScalingVp += Math.floor(card.getStockValue('science') / 2)
-					break
-				}
-				//Small Animals
-				case("53"):{
-					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
-					break
-				}
-				//Tardigrades
-				case("58"):{
-					totalScalingVp += Math.floor(card.getStockValue('microbe') / 3)
-					break
-				}
-				//Think Tank
-				case("59"):{
-					totalScalingVp += Math.floor(clientState.getProjectPlayedIdList({type:'blueProject'}).length / 3)
-					break
-				}
-				//Water Import from Europa
-				case("63"):{
-					totalScalingVp += clientState.getTagsOfType('jovian')
-					break
-				}
-				//Io Mining Industry
-				case("153"):{
-					totalScalingVp += clientState.getTagsOfType('jovian')
-					break
-				}
-				//Pets
-				case("F07"):{
-					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
-					break
-				}
-				//Arklight
-				case("CP01"):{
-					totalScalingVp += Math.floor(card.getStockValue('animal') / 2)
-					break
-				}
-			}
+	scaledVpList: CardScalingVP[]= []
+	private readonly vpCalculators: Record<string, (card: PlayableCardModel, state: PlayerStateModel) => number> = {
+		"12": (card) => card.getStockValue('animal'), //Birds
+		"18": (_, state) => Math.floor(state.getForest() / 2),
+		"30": (card) => card.getStockValue('animal'), //Fish
+		"33": (card) => Math.floor(card.getStockValue('animal') / 2), //Herbivore
+		//Interplanetary Relations
+		"35": (_, state) => {
+			const valid = state.getProjectPlayedModelList()
+				.filter(c => c.cardType !== 'corporation').length;
+			return Math.floor(valid / 4);
+		},
+		"39": (card) => card.getStockValue('animal'), //Livestock
+		"46": (card) => Math.floor(card.getStockValue('science') / 2),
+		"53": (card) => Math.floor(card.getStockValue('animal') / 2), //Small Animals
+		"58": (card) => Math.floor(card.getStockValue('microbe') / 3), //Tardigrades
+		"59": (_, state) => Math.floor(state.getProjectPlayedIdList({ type: 'blueProject' }).length / 3), //Think Tank
+		"63": (_, state) => state.getTagsOfType('jovian'), //Water Import from Europa
+		"153": (_, state) => state.getTagsOfType('jovian'), //Io Mining Industries
+		"F07": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets
+		"CP01": (card) => Math.floor(card.getStockValue('animal') / 2), //Arklight
+	};
+
+	updateCardScalingVPList(clientState: PlayerStateModel) {
+		const result: CardScalingVP[] = [];
+
+		for (const card of clientState.getProjectPlayedModelList()) {
+			const calculator = this.vpCalculators[card.cardCode];
+			if (!calculator) continue;
+
+			const vp = calculator(card, clientState);
+			result.push({ cardCode: card.cardCode, vp });
 		}
-		return totalScalingVp
+
+		this.scaledVpList = result
+	}
+	getCardScaledVp(cardCode: string): number {
+		let result = this.scaledVpList.filter((code) => code.cardCode===cardCode)
+		if(result.length>0){return result[0].vp}
+		return 0
+	}
+	getTotalScalingVP(): number {
+		return this.scaledVpList.reduce((sum, entry) => sum + entry.vp, 0);
 	}
 }
