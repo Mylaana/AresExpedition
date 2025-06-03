@@ -38,6 +38,7 @@ export class PlayableCardModel{
 	status!: string
     effectSummaryOption!: string
     effectSummaryOption2!: string
+	scalingVp!: boolean
 
     //not loaded from data
 

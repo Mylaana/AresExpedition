@@ -22,6 +22,7 @@ import { EventFactory } from "../../factory/event factory/event-factory";
 import { ProjectCardActivatedEffectService } from "../cards/project-card-activated-effect.service";
 import { ActivationOption } from "../../types/project-card.type";
 import { ProjectEffectRouter } from "../cards/project-card-played-effect";
+import { ProjectCardScalingVPService } from "../cards/project-card-scaling-VP.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -98,6 +99,7 @@ export class GameState{
         private projectCardService: ProjectCardInfoService,
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
+		private scalingVp: ProjectCardScalingVPService,
 		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})

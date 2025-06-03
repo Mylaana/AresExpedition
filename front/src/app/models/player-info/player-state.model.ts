@@ -33,6 +33,7 @@ export class PlayerStateModel {
 	private globalParameterState: PlayerGlobalParameterStateModel
 	private eventState: PlayerEventStateModel
 	private otherState: PlayerOtherStateModel
+	private scalingVp!: ProjectCardScalingVPService
 
 	constructor(
 		private injector: Injector,
@@ -48,7 +49,6 @@ export class PlayerStateModel {
 			this.globalParameterState = new PlayerGlobalParameterStateModel(dto.globalParameterState)
 			this.eventState = new PlayerEventStateModel(dto.eventState)
 			this.otherState = new PlayerOtherStateModel(dto.otherState)
-			this.setScalingVp()
 		} else {
 			this.infoState = PlayerInfoStateModel.empty()
 			this.scoreState = PlayerScoreStateModel.empty()
@@ -60,6 +60,8 @@ export class PlayerStateModel {
 			this.eventState = PlayerEventStateModel.empty()
 			this.otherState = PlayerOtherStateModel.empty()
 		}
+		this.scalingVp = injector.get(ProjectCardScalingVPService)
+		this.setScalingVp()
 	  }
 
 
@@ -78,7 +80,11 @@ export class PlayerStateModel {
 	getTotalVP(): number {return this.scoreState.getTotalVP()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}
 	setScalingVp(){
-		this.scoreState.setScalingVP(ProjectCardScalingVPService.getScalingVP(this))
+		this.scalingVp.updateCardScalingVPList(this)
+		this.scoreState.setScalingVP(this.scalingVp.getTotalScalingVP())
+	}
+	getCardScaledVp(cardCode: string): number {
+		return this.scalingVp.getCardScaledVp(cardCode)
 	}
 	getTR(): number {return this.scoreState.getTR()}
 	addTR(tr: number){this.scoreState.addTR(tr)}

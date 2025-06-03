@@ -62,12 +62,6 @@ potentially : All triggers (need testing them), types tested:
 root services: reorganize services/stateless classes and tree   
 TriggerState: switch out trigger id checks from model to a service   
 Rework Buildable system in playableCardComponent   
-Merge services :
-    - play Prerequisite & activated cost check   
-    - played effect & activated effect (+triggers?)   
-Ccaling vp cards:
-    - switch to record system
-    - display dynamically vp gained   
 
 ### Cards
 Create Event type :   
