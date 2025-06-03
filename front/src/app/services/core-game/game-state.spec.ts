@@ -6,6 +6,7 @@ import { ProjectCardScalingProductionsService } from "../cards/project-card-scal
 import { RxStompService } from "../websocket/rx-stomp.service"
 import { GameState } from "./game-state.service"
 import { GameParamService } from './game-param.service'
+import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.service'
 
 describe('Services - Core game - Game state', () => {
     describe('UNIT TEST', () => {
@@ -15,6 +16,7 @@ describe('Services - Core game - Game state', () => {
 		let rxStompService: RxStompService
 		let gameState: GameState
 		let gameParam: GameParamService
+		let scalingVp: ProjectCardScalingVPService
 
 		beforeAll(() => {
 			TestBed.configureTestingModule({
@@ -22,7 +24,8 @@ describe('Services - Core game - Game state', () => {
 					ProjectCardInfoService,
 					PhaseCardInfoService,
 					ProjectCardScalingProductionsService,
-					RxStompService
+					RxStompService,
+					ProjectCardScalingVPService
 				]
 			})
 
@@ -32,11 +35,13 @@ describe('Services - Core game - Game state', () => {
 			scalingProdService = injector.get(ProjectCardScalingProductionsService)
 			rxStompService = injector.get(RxStompService)
 			gameParam = injector.get(GameParamService)
+			scalingVp = injector.get(ProjectCardScalingVPService)
 
 			gameState = new GameState(
 				projectCardService,
 				rxStompService,
 				gameParam,
+				scalingVp,
 				injector
 			)
 		})
