@@ -87,7 +87,9 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		}
 
 		// subscribe to gameState
-		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
+		if(this.parentListType!='played' || this.projectCard.scalingVp){
+			this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
+		}
 		this.setBuildable()
 		this.setMaximumActivation()
 		this._loaded = true
