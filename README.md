@@ -51,13 +51,6 @@ scankeepResult not being saved thus can be dodged (card 83)
 Double activation count being ignored by multiple activation option cards (18/27/43)   
 reloading during research phase adds the previously rolled card in hand + new set to select from   
 
-potentially : All triggers (need testing them), types tested:   
-    - On card played   
-    - on tag played   
-    - on parameter increased    
-    - on forest gained   
-    - on Activated card
-
 ## Must have for v1 :
 ### Refactoring
 root services: reorganize services/stateless classes and tree   
@@ -78,7 +71,6 @@ Other:
     - Conditionnal scan/keep (based on tag)   
     - Conditionnal scan result (card 13)   
     - Droplist   
-
 
 ### Misc
 Add victory check   
