@@ -2,6 +2,7 @@ package com.ares_expedition.model.player_state.subclass.substates;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.EventStateDTO;
 import com.ares_expedition.enums.game.EventStateOrigin;
@@ -35,6 +36,20 @@ public class EventState {
 
     public static EventState addEventDrawCards(List<Integer> cards) {
         return new EventState(EventStateTypeEnum.DRAW_CARDS, cards);
+    }
+
+    public static EventState addEventResearchCards(List<Integer> cards, Integer keep) {
+        Map<String, Object> content = new HashMap<>();
+        content.put("cards", cards);
+        content.put("keep", keep);
+        return new EventState(EventStateTypeEnum.RESEARCH_CARDS_QUERIED, content);
+    }
+
+    public static EventState addEventScanKeepCards(List<Integer> cards, Integer keep) {
+        Map<String, Object> content = new HashMap<>();
+        content.put("cards", cards);
+        content.put("keep", keep);
+        return new EventState(EventStateTypeEnum.SCAN_KEEP_QUERIED, content);
     }
 
     public static EventState addEventProductionCards(List<Integer> cards) {

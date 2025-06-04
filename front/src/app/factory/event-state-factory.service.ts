@@ -6,6 +6,7 @@ import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event factory/event-factory";
+import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 
 const EventSubTypeToStateMap = new Map<EventUnionSubTypes, EventStateTypeEnum>([
 	['developmentPhaseBuilder', EventStateTypeEnum.builderDevelopemntLocked],
@@ -16,6 +17,8 @@ const EventSubTypeToStateMap = new Map<EventUnionSubTypes, EventStateTypeEnum>([
 	providedIn: 'root'
 })
 export class EventStateFactory{
+	constructor(private projectCardInfoService: ProjectCardInfoService){
+	}
 	public static toJson(event: EventBaseModel, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined {
 		switch(event.type){
 			case('cardSelectorCardBuilder'):{return this.eventBuilderToJson(event as EventCardBuilder, eventStateOperation)}
@@ -72,7 +75,7 @@ export class EventStateFactory{
 		}
 		return true
 	}
-	public static createEventsFromJson(eventStateList: EventStateDTO[], clientState: PlayerStateModel): EventBaseModel[] {
+	public createEventsFromJson(eventStateList: EventStateDTO[], clientState: PlayerStateModel): EventBaseModel[] {
 		let newEvents: EventBaseModel[] = []
 		let treated: boolean
 		for (let i = eventStateList.length - 1; i >= 0; i--) {
@@ -109,6 +112,20 @@ export class EventStateFactory{
 				}
 				case(EventStateTypeEnum.discard):{
 					newEvents.push(EventFactory.createCardSelector('discardCards', {cardSelector:{selectionQuantity: state.v}}))
+					break
+				}
+				case(EventStateTypeEnum.researchCardsQueried):{
+					newEvents.push(EventFactory.createCardSelector('researchPhaseResult', {cardSelector:{
+						selectFrom: this.projectCardInfoService.getProjectCardList(state.v['cards']),
+						selectionQuantity: state.v['keep']
+					}}))
+					break
+				}
+				case(EventStateTypeEnum.scanKeepQueried):{
+					newEvents.push(EventFactory.createCardSelector('scanKeepResult', {cardSelector:{
+						selectFrom: this.projectCardInfoService.getProjectCardList(state.v['cards']),
+						selectionQuantity: state.v['keep']
+					}}))
 					break
 				}
 				default:{treated = false}

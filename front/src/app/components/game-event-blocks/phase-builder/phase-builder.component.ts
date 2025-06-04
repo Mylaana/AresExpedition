@@ -32,5 +32,6 @@ export class PhaseBuilderComponent {
 	}
 	public onUpdateSelectedCardList(output: any){
 		this.updateSelectedCardList.emit(output)
+		this.cardListSelector.updateCardList()
 	}
 }

@@ -39,6 +39,12 @@ export interface WsDrawQuery extends WsQuery {
 	isCardProduction: boolean
 	playerState: PlayerStateDTO
 }
+export interface WsScanKeepQuery extends WsQuery {
+    scan: number
+	keep: number
+    eventId: number
+	playerState: PlayerStateDTO
+}
 export interface WsReadyQuery extends WsQuery {
     ready: boolean
 }
@@ -64,6 +70,10 @@ export interface WsDrawResult extends WsResult {
 export interface WsOceanResult extends WsResult {
 	bonuses: OceanBonus[]
 	draw: number[]
+}
+export interface WsScanKeepResult extends WsResult {
+	cards: number[],
+	keep: number
 }
 export interface WsGameState extends WsResult {
     currentPhase: NonSelectablePhaseEnum

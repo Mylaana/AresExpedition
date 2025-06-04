@@ -6,6 +6,8 @@ export enum MessageContentQueryEnum {
     playerStatePush = 'PLAYER_STATE_PUSH',
 	playerConnect = 'PLAYER_CONNECT',
 	oceanQuery = 'OCEAN_QUERY',
+	scanKeepQuery = 'SCAN_KEEP_QUERY',
+	researchQuery = 'RESEARCH_QUERY',
 
     debug = 'DEBUG'
 }
@@ -15,6 +17,8 @@ export enum PlayerMessageContentResultEnum {
 	startGame = 'START_GAME',
 	playerConnect = 'PLAYER_CONNECT',
 	oceanResult = 'OCEAN_RESULT',
+	researchResult = 'RESEARCH_RESULT',
+	scanKeepResult = 'SCAN_KEEP_RESULT',
 
 	acknowledge = 'ACKNOWLEDGE'
 }

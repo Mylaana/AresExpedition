@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WSGroupState, WsOceanQuery, WsOceanResult, WsPlayerState, WsReadyQuery, WsSelectedPhaseQuery } from "../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WsOceanQuery, WsOceanResult, WsPlayerState, WsReadyQuery, WsScanKeepQuery, WsScanKeepResult, WsSelectedPhaseQuery } from "../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { PlayerStateDTO } from "../interfaces/dto/player-state-dto.interface";
@@ -8,7 +8,8 @@ import { PlayerMessage } from "../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from "../types/global.type";
 import { OceanBonusEnum } from "../enum/global.enum";
-import { OceanBonus } from "../interfaces/global.interface";
+import { OceanBonus, ScanKeep } from "../interfaces/global.interface";
+import { EventUnionSubTypes } from "../types/event.type";
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,26 @@ export class WebsocketQueryMessageFactory{
     public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO, isCardProduction: boolean = false): PlayerMessage {
         let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto, isCardProduction: isCardProduction}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
+    }
+    public static createScanKeepQuery(scanKeep: ScanKeep, eventId: number, dto: PlayerStateDTO, resultType: EventUnionSubTypes): PlayerMessage {
+        let query: WsScanKeepQuery = {scan:scanKeep.scan, keep:scanKeep.keep, eventId: eventId, playerState: dto}
+		let contentEnum: MessageContentQueryEnum
+		switch(resultType){
+			case('researchPhaseResult'):{
+				contentEnum = MessageContentQueryEnum.researchQuery
+				break
+			}
+			case('scanKeepResult'):{
+				contentEnum = MessageContentQueryEnum.scanKeepQuery
+				break
+			}
+			default:{
+				console.error('UNHANDLED RESULT TYPE RECEIVED: ', resultType)
+				contentEnum = MessageContentQueryEnum.debug
+				break
+			}
+		}
+        return this.generatePlayerMessage(contentEnum, query)
     }
     public static createReadyQuery(ready: boolean): PlayerMessage {
         let query: WsReadyQuery = {ready: ready}
@@ -115,5 +136,8 @@ export class WebsocketResultMessageFactory{
             bonuses: oceanBonuses,
             draw: content['d']??[],
         }
+	}
+	public static inputToScanKeepResult(content: any): WsScanKeepResult {
+		return {cards: content['cardIdList'], keep:content['keep']}
 	}
 }

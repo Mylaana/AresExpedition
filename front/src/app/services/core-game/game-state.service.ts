@@ -8,7 +8,7 @@ import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type
 import { DrawEvent, EventBaseModel, EventPhase } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
+import { WsDrawResult, WsGroupReady, WsOceanResult, WsScanKeepResult } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
@@ -100,6 +100,7 @@ export class GameState{
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private scalingVp: ProjectCardScalingVPService,
+		private eventStateFactory: EventStateFactory,
 		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
@@ -109,9 +110,27 @@ export class GameState{
         this.playerCount.next(playerIdList)
     }
 
-    public setCurrentPhase(newPhase: NonSelectablePhaseEnum): void {
-        this.phase.next(newPhase)
+    public setCurrentPhase(newPhase: NonSelectablePhaseEnum, isReconnect: boolean): void {
         this.setClientReady(false)
+
+		let events: EventBaseModel[] = []
+		switch(newPhase){
+			case(NonSelectablePhaseEnum.undefined):{return}
+			case(NonSelectablePhaseEnum.planification):{events.push(EventFactory.createGeneric('planificationPhase'));break}
+			case(NonSelectablePhaseEnum.development):{events.push(EventFactory.createPhase('developmentPhase'));break}
+			case(NonSelectablePhaseEnum.construction):{events.push(EventFactory.createPhase('constructionPhase'));break}
+			case(NonSelectablePhaseEnum.action):{events.push(EventFactory.createPhase('actionPhase'));break}
+			case(NonSelectablePhaseEnum.production):{events.push(EventFactory.createPhase('productionPhase'));break}
+			case(NonSelectablePhaseEnum.research):{
+				if(!isReconnect){
+					events.push(EventFactory.createPhase('researchPhase'));break}
+				}
+		}
+		events.push(EventFactory.createCardSelector('selectCardForcedSell'))
+		events.push(EventFactory.createGeneric('endOfPhase'))
+		events.push(EventFactory.createGeneric('waitingGroupReady'))
+		this.phase.next(newPhase)
+		this.addEventQueue(events,'last')
     };
 
     public setClientReady(ready: boolean){
@@ -144,42 +163,6 @@ export class GameState{
         }
         return false
     }
-
-    /*
-    GoToNextPhaseIfPlayerReady(){
-        let newPhase = this.goToNextPhase(this.phase.getValue())
-        this.updatePhase(newPhase)
-    }
-        */
-
-    /**
-     * @param currentPhase as NonSelectablePhase
-     * @returns next phase name
-     *
-     * triggers all phase change and cleaning related stuff
-     */
-	/*
-    goToNextPhase(currentPhase:NonSelectablePhase):NonSelectablePhase{
-        let nextPhase: NonSelectablePhase;
-        let startCounting: number = Math.max(this.phaseIndex + 1, 1) //start looping at phase index +1 or 1
-		console.log('GO TO NEXT PHASE')
-
-        for(let i=startCounting; i<=phaseCount; i++){
-            if(this.accessSelectedPhase(this.accessPhaseOrder(i))===true){
-                this.phaseIndex = i
-                nextPhase = this.accessPhaseOrder(i)
-                this.setPhaseAsPlayed(currentPhase)
-                return nextPhase
-            }
-        }
-        //if no phase left selected to be played, restart to planification phase
-        this.phaseIndex = 0
-        this.setPhaseAsPlayed(currentPhase)
-        this.resetPhaseSelection()
-        return this.phaseOrder["0"]
-    }
-		*/
-
     updateGroupPlayerState(newState: PlayerStateModel[]): void{
         this.groupPlayerState.next(newState)
 		//this.clientState.next(newState[this.clientPlayerId])
@@ -281,18 +264,6 @@ export class GameState{
         return undefined
     }
 
-    /**
-     * clears up current phase selection for players and adds previous selected phase
-     */
-	/*
-    resetPhaseSelection(){
-		console.log('RESET PHASE SELECTION')
-        for(let i=0; i<this.groupPlayerSelectedPhase.getValue().length; i++){
-            this.groupPlayerSelectedPhase.getValue()[i].previousSelectedPhase = this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase
-            this.groupPlayerSelectedPhase.getValue()[i].currentSelectedPhase = SelectablePhaseEnum.undefined
-        }
-    }
-*/
     updateGroupPlayerSelectedPhase(newGroupPlayerSelectedPhase: PlayerPhase[]):void{
         this.groupPlayerSelectedPhase.next(newGroupPlayerSelectedPhase)
     }
@@ -395,7 +366,7 @@ export class GameState{
 			//load data in existing events
 			this.loadEventQueueSavedState(newQueue)
 			//create new events
-			newQueue = EventStateFactory.createEventsFromJson(this.eventQueueSavedState, this.getClientState()).concat(newQueue)
+			newQueue = this.eventStateFactory.createEventsFromJson(this.eventQueueSavedState, this.getClientState()).concat(newQueue)
 		}
         this.eventQueue.next(newQueue)
     }
@@ -578,7 +549,6 @@ export class GameState{
 		this.updateGroupPlayerState(groupPlayerState)
 
 		this.updateGroupPlayerSelectedPhase(PlayerStateModel.toPlayerPhaseGroup(dto))
-		console.log('state loaded: ', this.groupPlayerState.getValue())
 
 		for(let state of this.groupPlayerState.getValue()){
 			if(state.getId()===this.clientId){
@@ -587,14 +557,13 @@ export class GameState{
 		}
 		//create events from eventqueue saved state
 		//this.createEventFromEventQueueSavedState()
-		console.log('client state loaded: ', this.clientState.getValue())
-		console.log('eventstate loaded:', Utils.jsonCopy(this.eventQueueSavedState))
+		console.log('state loaded: ', this.groupPlayerState.getValue(), 'client state loaded: ', this.clientState.getValue(), 'eventstate loaded:', Utils.jsonCopy(this.eventQueueSavedState))
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
 	}
 	public reset(): void {
-		this.setCurrentPhase(NonSelectablePhaseEnum.undefined)
+		this.setCurrentPhase(NonSelectablePhaseEnum.undefined, false)
 	}
 
 	public newGame(groupDto: PlayerStateDTO[]): void {
@@ -765,4 +734,16 @@ export class GameState{
 		if(newEvents?.length===0){return}
 		this.addEventQueue(newEvents,'first')
     }
+	public applyResearchResult(result: WsScanKeepResult){
+		this.addEventQueue(EventFactory.createCardSelector('researchPhaseResult', {cardSelector:{
+			selectFrom: this.projectCardService.getProjectCardList(result.cards),
+			selectionQuantity: result.keep
+		}}), 'first')
+	}
+	public applyScanKeepResult(result: WsScanKeepResult){
+		this.addEventQueue(EventFactory.createCardSelector('scanKeepResult', {cardSelector:{
+			selectFrom: this.projectCardService.getProjectCardList(result.cards),
+			selectionQuantity: result.keep
+		}}), 'first')
+	}
 }

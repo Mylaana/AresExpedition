@@ -7,5 +7,7 @@ public enum EventStateTypeEnum {
     CARD_ACTIVATOR,
     DRAW_CARDS,
     PRODUCTION_CARDS,
-    DISCARD
+    DISCARD,
+    RESEARCH_CARDS_QUERIED,
+    SCAN_KEEP_QUERIED
 }

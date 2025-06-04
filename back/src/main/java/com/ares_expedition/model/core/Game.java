@@ -1,6 +1,7 @@
 package com.ares_expedition.model.core;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.ares_expedition.dto.api.CreatePlayerDTO;
@@ -393,9 +394,32 @@ public class Game {
         }
     }
 
+    public Boolean isResearchResolved(String playerId){
+        return this.groupPlayerState.get(playerId).isResearchResolved();
+    }
+
+    public void setResearchResolved(String playerId, List<Integer> cardList, Integer keep){
+        this.groupPlayerState.get(playerId).setResearchResolved(cardList, keep);
+    }
+
+    public void resetResearchResolved() {
+        for(Entry<String, PlayerState> entry: groupPlayerState.entrySet()){
+            entry.getValue().resetResearchResolved();
+        }
+    }
+
     public void addEventDrawCardsToPlayer(String playerId, List<Integer> cards){
         this.groupPlayerState.get(playerId).addEventDrawCards(cards);
     }
+
+    public void addEventResearchCardsToPlayer(String playerId, List<Integer> cards, Integer keep){
+        this.groupPlayerState.get(playerId).addEventResearchCards(cards, keep);
+    }
+
+    public void addEventScanKeepCardsToPlayer(String playerId, List<Integer> cards, Integer keep){
+        this.groupPlayerState.get(playerId).addEventScanKeepCards(cards, keep);
+    }
+
 
     public GameData toData(){
         return new GameData(this);

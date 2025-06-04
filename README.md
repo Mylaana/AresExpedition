@@ -47,9 +47,7 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
-scankeepResult not being saved thus can be dodged (card 83)   
 Double activation count being ignored by multiple activation option cards (18/27/43)   
-reloading during research phase adds the previously rolled card in hand + new set to select from   
 
 ## Must have for v1 :
 ### Refactoring
