@@ -38,6 +38,10 @@ export class WebsocketHandler {
 				this.handleResearchResult(WebsocketResultMessageFactory.inputToScanKeepResult(message.content))
 				break
 			}
+			case(PlayerMessageContentResultEnum.scanKeepResult):{
+				this.handleScanKeepResult(WebsocketResultMessageFactory.inputToScanKeepResult(message.content))
+				break
+			}
             default:{
                 console.log('UNHANDLED PLAYER MESSAGE RECEIVED: ', message)
             }
@@ -161,5 +165,8 @@ export class WebsocketHandler {
 	}
 	private handleResearchResult(content: WsScanKeepResult){
 		this.gameStateService.applyResearchResult(content)
+	}
+	private handleScanKeepResult(content: WsScanKeepResult){
+		this.gameStateService.applyScanKeepResult(content)
 	}
 }

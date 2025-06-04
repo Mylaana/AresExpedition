@@ -209,22 +209,12 @@ public class InputRouter {
             );
         List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep);
 
-        switch(query.getContentEnum()){
-            case RESEARCH_QUERY:
-                wsOutput.sendPushToPlayer(
-                    MessageOutputFactory.createScanKeepResultMessage(query.getGameId(), new ScanKeepResult(drawCards, keep, query.getEventId())),
-                    query.getPlayerId()
-                );
-                break;
-            case SCAN_KEEP_QUERY:
-                wsOutput.sendPushToPlayer(
-                    MessageOutputFactory.createScanKeepResultMessage(query.getGameId(), new ScanKeepResult(drawCards, keep, query.getEventId())),
-                    query.getPlayerId()
-                );
-                break;
-            default:
-                return;
-        }
+
+
+        wsOutput.sendPushToPlayer(
+            MessageOutputFactory.createScanKeepResultMessage(query.getGameId(), new ScanKeepResult(drawCards, keep, query.getEventId())),
+            query.getPlayerId()
+        );
     }
 
     private void handleResearch(ScanKeepMessageDTO query){

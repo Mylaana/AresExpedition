@@ -740,4 +740,10 @@ export class GameState{
 			selectionQuantity: result.keep
 		}}), 'first')
 	}
+	public applyScanKeepResult(result: WsScanKeepResult){
+		this.addEventQueue(EventFactory.createCardSelector('scanKeepResult', {cardSelector:{
+			selectFrom: this.projectCardService.getProjectCardList(result.cards),
+			selectionQuantity: result.keep
+		}}), 'first')
+	}
 }

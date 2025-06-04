@@ -308,7 +308,10 @@ public class PlayerState {
 
     public void addEventResearchCards(List<Integer> cards, Integer keep){
         this.eventState.addEventResearchCards(cards, keep);
+    }
 
+    public void addEventScanKeepCards(List<Integer> cards, Integer keep){
+        this.eventState.addEventScanKeepCards(cards, keep);
     }
 
     //=============================================================

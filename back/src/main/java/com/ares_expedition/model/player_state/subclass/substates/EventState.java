@@ -45,6 +45,13 @@ public class EventState {
         return new EventState(EventStateTypeEnum.RESEARCH_CARDS_QUERIED, content);
     }
 
+    public static EventState addEventScanKeepCards(List<Integer> cards, Integer keep) {
+        Map<String, Object> content = new HashMap<>();
+        content.put("cards", cards);
+        content.put("keep", keep);
+        return new EventState(EventStateTypeEnum.SCAN_KEEP_QUERIED, content);
+    }
+
     public static EventState addEventProductionCards(List<Integer> cards) {
         return new EventState(EventStateTypeEnum.PRODUCTION_CARDS, cards);
     }

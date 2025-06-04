@@ -6,7 +6,7 @@ export enum MessageContentQueryEnum {
     playerStatePush = 'PLAYER_STATE_PUSH',
 	playerConnect = 'PLAYER_CONNECT',
 	oceanQuery = 'OCEAN_QUERY',
-	scanKeep = 'SCAN_KEEP_QUERY',
+	scanKeepQuery = 'SCAN_KEEP_QUERY',
 	researchQuery = 'RESEARCH_QUERY',
 
     debug = 'DEBUG'

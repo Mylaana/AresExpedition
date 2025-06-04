@@ -35,8 +35,12 @@ export class WebsocketQueryMessageFactory{
 				contentEnum = MessageContentQueryEnum.researchQuery
 				break
 			}
+			case('scanKeepResult'):{
+				contentEnum = MessageContentQueryEnum.scanKeepQuery
+				break
+			}
 			default:{
-				console.log('UNHANDLED RESULT TYPE RECEIVED: ', resultType)
+				console.error('UNHANDLED RESULT TYPE RECEIVED: ', resultType)
 				contentEnum = MessageContentQueryEnum.debug
 				break
 			}

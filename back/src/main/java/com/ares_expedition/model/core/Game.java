@@ -416,6 +416,11 @@ public class Game {
         this.groupPlayerState.get(playerId).addEventResearchCards(cards, keep);
     }
 
+    public void addEventScanKeepCardsToPlayer(String playerId, List<Integer> cards, Integer keep){
+        this.groupPlayerState.get(playerId).addEventScanKeepCards(cards, keep);
+    }
+
+
     public GameData toData(){
         return new GameData(this);
     }

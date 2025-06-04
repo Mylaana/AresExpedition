@@ -47,6 +47,10 @@ public class PlayerEventState {
         this.events.add(EventState.addEventResearchCards(cards, keep));
     }
 
+    public void addEventScanKeepCards(List<Integer> cards, Integer keep) {
+        this.events.add(EventState.addEventScanKeepCards(cards, keep));
+    }
+
     public void addEventProductionCards(List<Integer> cards) {
         this.events.add(EventState.addEventProductionCards(cards));
     }

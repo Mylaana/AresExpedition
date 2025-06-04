@@ -6946,7 +6946,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Increases your terraforming score by 2 steps. Increase the temperature 1 step. Gain 2 plants. If you have 3 or more $tag_plant$, gain 4 additional plants.",
+            "en": "Increases your terraforming score by 2 steps.$skipline$Increase the temperature 1 step.$skipline$Gain 2 plants.$skipline$If you have 3 or more $tag_plant$, gain 4 additional plants.",
             "fr": ""
         },
         "prerequisiteText": {

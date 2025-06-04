@@ -546,8 +546,12 @@ export class DrawEventHandler {
 				this.rxStompService.publishScanKeep({scan:event.drawCardNumber, keep: event.keepCardNumber??0}, event.waiterId, this.gameStateService.getClientStateDTO(), event.resolveEventSubType)
 				break
 			}
+			case('scanKeepResult'):{
+				this.rxStompService.publishScanKeep({scan:event.drawCardNumber, keep: event.keepCardNumber??0}, event.waiterId, this.gameStateService.getClientStateDTO(), event.resolveEventSubType)
+				break
+			}
 			default:{
-				console.error('UNMAPED DRAW QUERY RESULT TYPE')
+				console.error('UNMAPED DRAW QUERY RESULT TYPE: ',event.resolveEventSubType)
 			}
 		}
 	}

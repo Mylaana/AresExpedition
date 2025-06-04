@@ -26,7 +26,7 @@ public class BaseMessageInputDTO<T>{
     @JsonSubTypes.Type(value = GenericContentDTO.class, name = "DEBUG"),
     @JsonSubTypes.Type(value = GenericContentDTO.class, name = "PLAYER_CONNECT"),
     @JsonSubTypes.Type(value = OceanContentDTO.class, name = "OCEAN_QUERY"),
-    //@JsonSubTypes.Type(value = Sc.class, name = "SCAN_KEEP_QUERY"),
+    @JsonSubTypes.Type(value = ScanKeepContentDTO.class, name = "SCAN_KEEP_QUERY"),
     @JsonSubTypes.Type(value = ScanKeepContentDTO.class, name = "RESEARCH_QUERY"),
     // Add other types here
 

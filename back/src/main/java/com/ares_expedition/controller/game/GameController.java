@@ -46,7 +46,6 @@ public class GameController {
         if(cards.size() < drawNumber){
             wsOutput.sendPushToGroup(new BaseMessageOutputDTO(gameId, "not enough cards in deck"));
         }
-
         Game game = this.getGameFromId(gameId);
 
         switch(reason){
@@ -57,6 +56,8 @@ public class GameController {
                 game.setResearchResolved(playerId, cards, keep);
                 game.addEventResearchCardsToPlayer(playerId, cards, keep);
                 break;
+            case SCAN_KEEP_QUERY :
+                game.addEventScanKeepCardsToPlayer(playerId, cards, keep);
             default:
                 System.err.println("UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: " + reason);
                 break;

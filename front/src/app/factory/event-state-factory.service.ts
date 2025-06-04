@@ -121,6 +121,13 @@ export class EventStateFactory{
 					}}))
 					break
 				}
+				case(EventStateTypeEnum.scanKeepQueried):{
+					newEvents.push(EventFactory.createCardSelector('scanKeepResult', {cardSelector:{
+						selectFrom: this.projectCardInfoService.getProjectCardList(state.v['cards']),
+						selectionQuantity: state.v['keep']
+					}}))
+					break
+				}
 				default:{treated = false}
 			}
 			if(treated){eventStateList.splice(i, 1)}
