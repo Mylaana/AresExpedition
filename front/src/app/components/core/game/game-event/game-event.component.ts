@@ -112,21 +112,6 @@ export class GameEventComponent {
 	updatePhase(phase:NonSelectablePhaseEnum):void{
 		this.currentPhase = phase
 		if(this.gameStateService.getClientReady()){return}
-		let events: EventBaseModel[] = []
-		switch(phase){
-			case(NonSelectablePhaseEnum.undefined):{return}
-			case(NonSelectablePhaseEnum.planification):{events.push(EventFactory.createGeneric('planificationPhase'));break}
-			case(NonSelectablePhaseEnum.development):{events.push(EventFactory.createPhase('developmentPhase'));break}
-			case(NonSelectablePhaseEnum.construction):{events.push(EventFactory.createPhase('constructionPhase'));break}
-			case(NonSelectablePhaseEnum.action):{events.push(EventFactory.createPhase('actionPhase'));break}
-			case(NonSelectablePhaseEnum.production):{events.push(EventFactory.createPhase('productionPhase'));break}
-			case(NonSelectablePhaseEnum.research):{events.push(EventFactory.createPhase('researchPhase'));break}
-
-		}
-		events.push(EventFactory.createCardSelector('selectCardForcedSell'))
-		events.push(EventFactory.createGeneric('endOfPhase'))
-		events.push(EventFactory.createGeneric('waitingGroupReady'))
-		this.gameStateService.addEventQueue(events,'last')
 	}
 
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {

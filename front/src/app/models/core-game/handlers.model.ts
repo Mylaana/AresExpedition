@@ -12,7 +12,6 @@ import { Logger, Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ActivationOption, ProjectListType } from "../../types/project-card.type";
-import { ProjectCardActivatedEffectService } from "../../services/cards/project-card-activated-effect.service";
 import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
@@ -538,7 +537,19 @@ export class DrawEventHandler {
 	}
 	private sendWsDrawQuery(event: DrawEvent){
 		event.queried = true
-		this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction)
+		switch(event.resolveEventSubType){
+			case('drawResult'):{
+				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction)
+				break
+			}
+			case('researchPhaseResult'):{
+				this.rxStompService.publishScanKeep({scan:event.drawCardNumber, keep: event.keepCardNumber??0}, event.waiterId, this.gameStateService.getClientStateDTO(), event.resolveEventSubType)
+				break
+			}
+			default:{
+				console.error('UNMAPED DRAW QUERY RESULT TYPE')
+			}
+		}
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel

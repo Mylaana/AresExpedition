@@ -12,6 +12,7 @@ import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.enums.websocket.ContentQueryEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.factory.MessageOutputFactory;
@@ -37,16 +38,29 @@ public class GameController {
     }
 
     public Game getGameFromId(String gameId){
-        System.out.print(gameHolder);
         return this.gameHolder.get(gameId);
     }
 
-    public List<Integer> drawCards(String gameId, Integer drawNumber, String playerId){
+    public List<Integer> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer keep){
         List<Integer> cards = getGameFromId(gameId).drawCards(drawNumber);
         if(cards.size() < drawNumber){
             wsOutput.sendPushToGroup(new BaseMessageOutputDTO(gameId, "not enough cards in deck"));
         }
-        this.getGameFromId(gameId).addEventDrawCardsToPlayer(playerId, cards);
+
+        Game game = this.getGameFromId(gameId);
+
+        switch(reason){
+            case DRAW_QUERY:
+                game.addEventDrawCardsToPlayer(playerId, cards);
+                break;
+            case RESEARCH_QUERY :
+                game.setResearchResolved(playerId, cards, keep);
+                game.addEventResearchCardsToPlayer(playerId, cards, keep);
+                break;
+            default:
+                System.err.println("UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: " + reason);
+                break;
+        }
         return cards;
     }
 
@@ -67,6 +81,7 @@ public class GameController {
         game.nextPhaseSelected();
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
+        game.resetResearchResolved();
         if(game.getCurrentPhase()==PhaseEnum.PRODUCTION){
             game.applyDrawProduction();
         }
@@ -164,5 +179,9 @@ public class GameController {
         game.setPlayerState(playerId, playerState);
         JsonGameDataHandler.saveGame(game);
         wsOutput.sendPushToPlayer(MessageOutputFactory.createOceanFlippedMessage(gameId, oceans, cardsToDraw), playerId);
+    }
+
+    public Boolean isResearchResolved(String gameId, String playerId) {
+        return getGameFromId(gameId).isResearchResolved(playerId);
     }
 }

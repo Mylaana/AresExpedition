@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanResult, WsReadyQuery } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanResult, WsReadyQuery, WsScanKeepResult } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../factory/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
-import { Logger, Utils } from "../../utils/utils";
+import { Logger } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
@@ -23,7 +23,7 @@ export class WebsocketHandler {
                 break
             }
             case(PlayerMessageContentResultEnum.gameState):{
-                this.handleMessageStartedGameClientGameState(message.content)
+                this.handleMessageStartedGameClientGameState(message.content, false)
                 break
             }
 			case(PlayerMessageContentResultEnum.playerConnect):{
@@ -32,6 +32,10 @@ export class WebsocketHandler {
 			}
 			case(PlayerMessageContentResultEnum.oceanResult):{
 				this.handleMessageOceanResult(WebsocketResultMessageFactory.inputToOceanResult(message.content))
+				break
+			}
+			case(PlayerMessageContentResultEnum.researchResult):{
+				this.handleResearchResult(WebsocketResultMessageFactory.inputToScanKeepResult(message.content))
 				break
 			}
             default:{
@@ -82,15 +86,15 @@ export class WebsocketHandler {
         this.gameStateService.clearEventQueue()
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
-		this.gameStateService.setCurrentPhase(content.currentPhase)
+		this.gameStateService.setCurrentPhase(content.currentPhase, false)
 		this.gameStateService.setSelectedPhaseList(content.selectedPhase)
     }
-	private handleMessageStartedGameClientGameState(content: WsGameState): void {
+	private handleMessageStartedGameClientGameState(content: WsGameState, isReconnect: boolean): void {
 		this.gameStateService.reset()
         this.gameStateService.clearEventQueue()
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
-		this.gameStateService.setCurrentPhase(content.currentPhase)
+		this.gameStateService.setCurrentPhase(content.currentPhase, isReconnect)
 		this.gameStateService.setSelectedPhaseList(content.selectedPhase)
 	}
 
@@ -115,7 +119,7 @@ export class WebsocketHandler {
 				break
 			}
 			case(GameStatusEnum.started):{
-				this.handleMessageStartedGameClientGameState(content)
+				this.handleMessageStartedGameClientGameState(content, true)
 				break
 			}
 		}
@@ -154,5 +158,8 @@ export class WebsocketHandler {
 	}
 	private handleMessageOceanResult(content: WsOceanResult){
 		this.gameStateService.addOceanBonus(content)
+	}
+	private handleResearchResult(content: WsScanKeepResult){
+		this.gameStateService.applyResearchResult(content)
 	}
 }

@@ -14,6 +14,7 @@ import com.ares_expedition.dto.websocket.content.input.GenericContentDTO;
 import com.ares_expedition.dto.websocket.content.input.OceanContentDTO;
 import com.ares_expedition.dto.websocket.content.input.PhaseSelectedContentDTO;
 import com.ares_expedition.dto.websocket.content.input.PlayerReadyContentDTO;
+import com.ares_expedition.dto.websocket.content.input.ScanKeepContentDTO;
 import com.ares_expedition.dto.websocket.content.input.UnHandledContentDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.messages.input.*;
@@ -21,6 +22,8 @@ import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
+import com.ares_expedition.model.answer.ResearchResult;
+import com.ares_expedition.model.answer.ScanKeepResult;
 import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.services.QueryMessageFactory;
@@ -75,6 +78,16 @@ public class InputRouter {
                 handleQuery(message, OceanContentDTO.class, 
                 OceanMessageDTO.class, this::handleOceanQuery);
                 break;
+            case SCAN_KEEP_QUERY:
+                handleQuery(
+                    message, ScanKeepContentDTO.class,
+                    ScanKeepMessageDTO.class, this::handleScanKeepQuery);
+                break;
+            case RESEARCH_QUERY:
+                handleQuery(
+                    message, ScanKeepContentDTO.class,
+                    ScanKeepMessageDTO.class, this::handleResearch);
+                break;
             default:
                 handleQuery(
                     message, UnHandledContentDTO.class,
@@ -120,23 +133,6 @@ public class InputRouter {
         wsOutput.sendPushToGroup(new BaseMessageOutputDTO(query.getGameId(), ContentResultEnum.SERVER_SIDE_UNHANDLED, result));
     }
 
-    private void handleDrawQuery(DrawMessageDTO query){
-        Integer drawNumber = query.getDrawNumber();
-        if (drawNumber == 0) {
-            return;
-        }
-        gameController.setPlayerState(
-            query.getGameId(),
-            query.getPlayerId(),
-            PlayerState.fromJson(query.getContent().getPlayerState())
-            );
-        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId());
-        wsOutput.sendPushToPlayer(
-            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId())),
-            query.getPlayerId()
-            );
-    }
-
     private void handlePlayerReadyQuery(PlayerReadyMessageDTO query) {
         System.out.println("\u001B[32m HANDLEING PlayerReadyQuery for gameId: " + query.getGameId() + "\u001B[0m");
         String gameId = query.getGameId();
@@ -170,14 +166,7 @@ public class InputRouter {
     private void handlePlayerConnection(GenericMessageDTO query) {
         System.out.println("\u001B[32m HANDLEING player connection query for gameId: " + query.getGameId() + " with playerId:" + query.getPlayerId() +"\u001B[0m");
         String gameId = query.getGameId();
-        //GameStatusEnum gameStarted = gameController.getGameStatus(gameId);
         wsOutput.sendPushToPlayer(MessageOutputFactory.createConnectMessage(gameId, gameController.getGameState(gameId)), query.getPlayerId());    
-        /*
-        if (gameStarted == GameStatusEnum.STARTED) {
-        } else {
-            wsOutput.sendPushToPlayer(MessageOutputFactory.createStartGameMessage(gameId, ""), query.getPlayerId());
-        }
-             */
     }
 
     private void handleOceanQuery(OceanMessageDTO query) {
@@ -188,5 +177,76 @@ public class InputRouter {
             query.getOceanNumber(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
+    }
+
+    private void handleDrawQuery(DrawMessageDTO query){
+        Integer drawNumber = query.getDrawNumber();
+        if (drawNumber == 0) {
+            return;
+        }
+        gameController.setPlayerState(
+            query.getGameId(),
+            query.getPlayerId(),
+            PlayerState.fromJson(query.getContent().getPlayerState())
+            );
+        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), 0);
+        wsOutput.sendPushToPlayer(
+            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId())),
+            query.getPlayerId()
+            );
+    }
+
+    private void handleScanKeepQuery(ScanKeepMessageDTO query){
+        Integer scan = query.getScan();
+        Integer keep = query.getKeep();
+        if (scan == 0) {
+            return;
+        }
+        gameController.setPlayerState(
+            query.getGameId(),
+            query.getPlayerId(),
+            PlayerState.fromJson(query.getContent().getPlayerState())
+            );
+        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep);
+
+        switch(query.getContentEnum()){
+            case RESEARCH_QUERY:
+                wsOutput.sendPushToPlayer(
+                    MessageOutputFactory.createScanKeepResultMessage(query.getGameId(), new ScanKeepResult(drawCards, keep, query.getEventId())),
+                    query.getPlayerId()
+                );
+                break;
+            case SCAN_KEEP_QUERY:
+                wsOutput.sendPushToPlayer(
+                    MessageOutputFactory.createScanKeepResultMessage(query.getGameId(), new ScanKeepResult(drawCards, keep, query.getEventId())),
+                    query.getPlayerId()
+                );
+                break;
+            default:
+                return;
+        }
+    }
+
+    private void handleResearch(ScanKeepMessageDTO query){
+        if(this.gameController.isResearchResolved(query.getGameId(), query.getPlayerId())){
+            return;
+        }
+        
+        Integer scan = query.getScan();
+        Integer keep = query.getKeep();
+        if (scan == 0) {
+            return;
+        }
+        gameController.setPlayerState(
+            query.getGameId(),
+            query.getPlayerId(),
+            PlayerState.fromJson(query.getContent().getPlayerState())
+            );
+        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep);
+
+        wsOutput.sendPushToPlayer(
+            MessageOutputFactory.createResearchResultMessage(query.getGameId(), new ResearchResult(drawCards, keep, query.getEventId())),
+            query.getPlayerId()
+        );
     }
 }

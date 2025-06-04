@@ -1,5 +1,6 @@
 package com.ares_expedition.model.player_state;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,9 @@ public class PlayerState {
     private PlayerGlobalParameterState globalParameterState = new PlayerGlobalParameterState();
     private PlayerEventState eventState = new PlayerEventState();
     private PlayerOtherState otherState = new PlayerOtherState();
+
+    private List<Integer> researchResolved = new ArrayList<>();
+    private Integer researchResolvedKeep;
 
     PlayerState(){
     }
@@ -302,6 +306,11 @@ public class PlayerState {
         this.eventState.addEventDrawCards(cards);
     }
 
+    public void addEventResearchCards(List<Integer> cards, Integer keep){
+        this.eventState.addEventResearchCards(cards, keep);
+
+    }
+
     //=============================================================
     //Other
     public PlayerOtherState getOtherState() {
@@ -346,6 +355,27 @@ public class PlayerState {
         return playerStates;
     }
 
+    public List<Integer> getResearchResolved() {
+        return researchResolved;
+    }
+
+    public void setResearchResolved(List<Integer> researchResolved, Integer keep) {
+        this.researchResolved = researchResolved;
+        this.researchResolvedKeep = keep;
+    }
+
+    public Integer getResearchResolvedKeep(){
+        return this.researchResolvedKeep;
+    }
+
+    public void resetResearchResolved() {
+        this.researchResolved.clear();
+    }
+
+    public Boolean isResearchResolved() {
+        return this.researchResolved.size()!=0;
+    }
+    
     public PlayerStateData toData(){
         return new PlayerStateData(this);
     }

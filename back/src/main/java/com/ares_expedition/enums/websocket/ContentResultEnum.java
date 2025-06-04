@@ -6,6 +6,8 @@ public enum ContentResultEnum {
     PLAYER_STATE,
     PLAYER_CONNECT,
     OCEAN_RESULT,
+    SCAN_KEEP_RESULT,
+    RESEARCH_RESULT,
     
     //Group
     READY_RESULT,

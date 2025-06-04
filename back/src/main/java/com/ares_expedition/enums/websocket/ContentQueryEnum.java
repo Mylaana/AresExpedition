@@ -8,7 +8,8 @@ public enum ContentQueryEnum {
     PLAYER_STATE_PUSH,
     PLAYER_CONNECT,
     OCEAN_QUERY,
-
+    RESEARCH_QUERY,
+    SCAN_KEEP_QUERY,
 
     DEBUG
 }

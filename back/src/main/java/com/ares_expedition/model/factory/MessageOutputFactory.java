@@ -11,6 +11,8 @@ import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputD
 import com.ares_expedition.enums.game.RessourceEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
+import com.ares_expedition.model.answer.ResearchResult;
+import com.ares_expedition.model.answer.ScanKeepResult;
 import com.ares_expedition.model.core.Ocean;
 
 public class MessageOutputFactory {
@@ -30,6 +32,14 @@ public class MessageOutputFactory {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.DRAW_RESULT, content);
     }
 
+    public static BaseMessageOutputDTO createScanKeepResultMessage(String gameId, ScanKeepResult content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.SCAN_KEEP_RESULT, content);
+    }
+
+    public static BaseMessageOutputDTO createResearchResultMessage(String gameId, ResearchResult content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.RESEARCH_RESULT, content);
+    }
+    
     public static BaseMessageOutputDTO createGameStateMessage(String gameId, GameStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.GAME_STATE, content);
     }
