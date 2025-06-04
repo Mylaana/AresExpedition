@@ -241,7 +241,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
     buildDiscountUsed!: boolean
     override hasCardBuilder(): boolean {return true}
     override updateCardSelection(selection: PlayableCardModel[]): void {
-        this.setSelectedCardToBuild(selection[0])
+		this.setSelectedCardToBuild(selection[0])
     }
     private setSelectedCardToBuild(card: PlayableCardModel): void {
 		if(this.cardBuilderIdHavingFocus===undefined){return}
@@ -300,8 +300,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
 	}
 	private resetNonFocusedBuildersState(){
 		for(let i=0; i<this.cardBuilder.length; i++){
-			if(i===this.cardBuilderIdHavingFocus){continue}
-			//this.cardBuilder[i].resetButtons()
+			if(i===this.cardBuilderIdHavingFocus || this.cardBuilder[i].getbuilderIsLocked()){continue}
 			this.discardBuilderSelectedCard(i)
 			this.cardBuilder[i].resetBuilder()
 			break

@@ -147,7 +147,7 @@ export class PlayableCardListComponent implements OnChanges{
 	public updateDiscount(event: EventCardBuilder): void {
 		this.applyDiscount(event)
 	}
-	private updateCardList(): void {
+	public updateCardList(): void {
 		if(selectorTypes.includes(this.listType)){this.setSelector()}
 		this.setDisplay()
 		this.setBackground()
