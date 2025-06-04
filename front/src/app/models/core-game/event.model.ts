@@ -1,4 +1,4 @@
-import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType } from "../../types/event.type";
+import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventScanKeepResult } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
 import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
@@ -8,6 +8,7 @@ import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventStateFactory } from "../../factory/event-state-factory.service";
+import { DeckQueryOptionsEnum } from "../../enum/global.enum";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -77,6 +78,12 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
 export class EventCardSelector extends EventBaseCardSelector{
     override readonly type: EventType = 'cardSelector'
     override subType!: EventCardSelectorSubType
+}
+
+export class EventScanKeepCardSelector extends EventBaseCardSelector{
+    override readonly type: EventType = 'scanKeepSelector'
+    override subType!: EventScanKeepResult
+	options!: DeckQueryOptionsEnum
 }
 
 export class EventCardSelectorRessource extends EventBaseCardSelector {
@@ -371,6 +378,7 @@ export class EventDeckQuery extends EventBaseModel {
     scanKeep?: Partial<ScanKeep>
     drawDiscard?: Partial<DrawDiscard>
 	isCardProduction?: boolean
+	options?: DeckQueryOptionsEnum
 }
 
 export class EventWaiter extends EventBaseModel {
@@ -392,6 +400,7 @@ export class DrawEvent {
     queried: boolean = false
     waiterId!: number
 	isCardProduction: boolean = false
+	scanKeepOptions?: DeckQueryOptionsEnum
 }
 
 export class EventPhase extends EventBaseModel {

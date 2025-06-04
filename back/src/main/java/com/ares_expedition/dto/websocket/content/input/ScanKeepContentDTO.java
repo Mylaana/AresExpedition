@@ -1,19 +1,22 @@
 package com.ares_expedition.dto.websocket.content.input;
 
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
+import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 
 public class ScanKeepContentDTO extends BaseContentDTO{
     Integer scan;
     Integer keep;
     Integer eventId;
+    ScanKeepOptionsEnum options;
     PlayerStateDTO playerState;
 
     public ScanKeepContentDTO(){
     }
 
-    public ScanKeepContentDTO(Integer scan, Integer keep, Integer eventId){
+    public ScanKeepContentDTO(Integer scan, Integer keep, Integer eventId, ScanKeepOptionsEnum options){
       this.scan = scan;
       this.keep = keep;
+      this.options = options;
       this.eventId = eventId;
     }
 
@@ -27,6 +30,14 @@ public class ScanKeepContentDTO extends BaseContentDTO{
 
     public Integer getKeep() {
       return keep;
+    }
+
+    public ScanKeepOptionsEnum getOptions() {
+      return options;
+    }
+
+    public void setOptions(ScanKeepOptionsEnum options) {
+      this.options = options;
     }
 
     public void setKeep(Integer keep) {
@@ -48,4 +59,6 @@ public class ScanKeepContentDTO extends BaseContentDTO{
     public void setPlayerState(PlayerStateDTO playerState) {
       this.playerState = playerState;
     }
+
+    
 }

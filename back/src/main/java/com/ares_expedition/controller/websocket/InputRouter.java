@@ -20,6 +20,7 @@ import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.messages.input.*;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 import com.ares_expedition.enums.websocket.ContentResultEnum;
 import com.ares_expedition.model.answer.DrawResult;
 import com.ares_expedition.model.answer.ResearchResult;
@@ -189,7 +190,7 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), 0);
+        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum());
         wsOutput.sendPushToPlayer(
             MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId())),
             query.getPlayerId()
@@ -207,12 +208,10 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep);
-
-
+        List<Integer> drawCards = this.gameController.scanKeepCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep, query.getContent().getOptions());
 
         wsOutput.sendPushToPlayer(
-            MessageOutputFactory.createScanKeepResultMessage(query.getGameId(), new ScanKeepResult(drawCards, keep, query.getEventId())),
+            MessageOutputFactory.createScanKeepResultMessage(query.getGameId(), new ScanKeepResult(drawCards, keep, query.getEventId(), query.getContent().getOptions())),
             query.getPlayerId()
         );
     }
@@ -232,7 +231,7 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep);
+        List<Integer> drawCards = this.gameController.scanKeepCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep, ScanKeepOptionsEnum.RESEARCH);
 
         wsOutput.sendPushToPlayer(
             MessageOutputFactory.createResearchResultMessage(query.getGameId(), new ResearchResult(drawCards, keep, query.getEventId())),

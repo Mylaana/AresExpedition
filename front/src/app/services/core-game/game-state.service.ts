@@ -8,7 +8,7 @@ import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type
 import { DrawEvent, EventBaseModel, EventPhase } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { WsDrawResult, WsGroupReady, WsOceanResult, WsScanKeepResult } from "../../interfaces/websocket.interface";
+import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
@@ -501,6 +501,8 @@ export class GameState{
             if(event.waiterId!=wsDrawResult.eventId){continue}
             event.served = true
             event.drawResultCardList = wsDrawResult.cardIdList
+			event.scanKeepOptions = wsDrawResult.options
+			event.keepCardNumber = wsDrawResult.keep
             eventFound = true
             this.cleanAndNextDrawQueue()
             break
@@ -734,16 +736,16 @@ export class GameState{
 		if(newEvents?.length===0){return}
 		this.addEventQueue(newEvents,'first')
     }
-	public applyResearchResult(result: WsScanKeepResult){
+	public applyResearchResult(result: WsDrawResult){
 		this.addEventQueue(EventFactory.createCardSelector('researchPhaseResult', {cardSelector:{
-			selectFrom: this.projectCardService.getProjectCardList(result.cards),
+			selectFrom: this.projectCardService.getProjectCardList(result.cardIdList),
 			selectionQuantity: result.keep
 		}}), 'first')
 	}
-	public applyScanKeepResult(result: WsScanKeepResult){
-		this.addEventQueue(EventFactory.createCardSelector('scanKeepResult', {cardSelector:{
-			selectFrom: this.projectCardService.getProjectCardList(result.cards),
-			selectionQuantity: result.keep
-		}}), 'first')
+	public applyScanKeepResult(result: WsDrawResult){
+		let newEvent = EventFactory.createScanKeepResult(this.projectCardService.getProjectCardList(result.cardIdList), result.keep,  result.options)
+		if(newEvent){
+			this.addEventQueue(newEvent, 'first')
+		}
 	}
 }

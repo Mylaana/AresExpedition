@@ -15,3 +15,6 @@ export enum OceanBonusEnum {
 	card = 'CARD',
 	plant = 'PLANT'
 }
+export enum DeckQueryOptionsEnum {
+	greenCardGivesMegacreditOtherDraw = 'O1'
+}

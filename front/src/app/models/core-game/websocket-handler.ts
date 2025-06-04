@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanResult, WsReadyQuery, WsScanKeepResult } from "../../interfaces/websocket.interface";
+import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../factory/websocket-message-factory.service";
 import { GameState } from "../../services/core-game/game-state.service";
@@ -83,6 +83,9 @@ export class WebsocketHandler {
     private handlePlayerMessageDrawResult(content: WsDrawResult): void {
         this.gameStateService.handleWsDrawResult(content)
     }
+	private handleScanKeepResult(content: WsDrawResult){
+		this.gameStateService.handleWsDrawResult(content)
+	}
 
 	//these two functions will need to be different cause of private datas in it or not
     private handleMessageStartedGameGroupGameState(content: WsGameState): void {
@@ -163,10 +166,7 @@ export class WebsocketHandler {
 	private handleMessageOceanResult(content: WsOceanResult){
 		this.gameStateService.addOceanBonus(content)
 	}
-	private handleResearchResult(content: WsScanKeepResult){
+	private handleResearchResult(content: WsDrawResult){
 		this.gameStateService.applyResearchResult(content)
-	}
-	private handleScanKeepResult(content: WsScanKeepResult){
-		this.gameStateService.applyScanKeepResult(content)
 	}
 }

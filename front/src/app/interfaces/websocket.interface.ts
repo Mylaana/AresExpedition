@@ -1,4 +1,4 @@
-import { OceanBonusEnum } from "../enum/global.enum"
+import { DeckQueryOptionsEnum } from "../enum/global.enum"
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
 import { GameStatusEnum, GroupMessageContentResultEnum, MessageContentQueryEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
 import { myUUID, PlayerColor } from "../types/global.type"
@@ -42,6 +42,7 @@ export interface WsDrawQuery extends WsQuery {
 export interface WsScanKeepQuery extends WsQuery {
     scan: number
 	keep: number
+	options?: DeckQueryOptionsEnum
     eventId: number
 	playerState: PlayerStateDTO
 }
@@ -66,14 +67,12 @@ export interface WsGroupReady extends WsResult {
 export interface WsDrawResult extends WsResult {
     cardIdList: number[]
     eventId: number
+	keep: number,
+	options: DeckQueryOptionsEnum
 }
 export interface WsOceanResult extends WsResult {
 	bonuses: OceanBonus[]
 	draw: number[]
-}
-export interface WsScanKeepResult extends WsResult {
-	cards: number[],
-	keep: number
 }
 export interface WsGameState extends WsResult {
     currentPhase: NonSelectablePhaseEnum

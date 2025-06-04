@@ -21,6 +21,7 @@ export class ButtonDesigner{
 			case('planificationPhase'):{startEnabled=false;break}
 			case('selectStartingHand'):{startEnabled=true;break}
 			case('selectCorporation'):{startEnabled=false;break}
+			case('scanKeepResult'):{startEnabled=false;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}

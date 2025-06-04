@@ -13,6 +13,7 @@ import com.ares_expedition.enums.game.GlobalConstants;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.game.RessourceEnum;
+import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.model.player_state.subclass.substates.OceanFlippedBonus;
@@ -416,8 +417,8 @@ public class Game {
         this.groupPlayerState.get(playerId).addEventResearchCards(cards, keep);
     }
 
-    public void addEventScanKeepCardsToPlayer(String playerId, List<Integer> cards, Integer keep){
-        this.groupPlayerState.get(playerId).addEventScanKeepCards(cards, keep);
+    public void addEventScanKeepCardsToPlayer(String playerId, List<Integer> cards, Integer keep, ScanKeepOptionsEnum options){
+        this.groupPlayerState.get(playerId).addEventScanKeepCards(cards, keep, options);
     }
 
 

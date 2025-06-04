@@ -291,6 +291,8 @@ export const CardConditionChecker = {
 		}
 	},
 	canBeActivated(card: PlayableCardModel, clientState: PlayerStateModel, activationOption:  ActivationOption = 1): boolean {
+		const noCost = ['4','13','15','16','18']
+		if(noCost.includes(card.cardCode)){return true}
 		switch(card.cardCode){
 			//AI Central
 			case('4'):{break}
@@ -326,7 +328,6 @@ export const CardConditionChecker = {
 			//Development Center
 			case('22'):{
 				return Checker.isRessourceOk('heat', 2, 'min', clientState)
-				break
 			}
 			//Extreme-Cold Fungus
 			case('27'):{

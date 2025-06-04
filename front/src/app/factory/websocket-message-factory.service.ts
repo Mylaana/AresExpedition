@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../enum/websocket.enum";
-import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsGroupReady, WsOceanQuery, WsOceanResult, WsPlayerState, WsReadyQuery, WsScanKeepQuery, WsScanKeepResult, WsSelectedPhaseQuery } from "../interfaces/websocket.interface";
+import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsDrawResult, WsGroupReady, WsOceanQuery, WsOceanResult, WsReadyQuery, WsScanKeepQuery, WsSelectedPhaseQuery } from "../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { PlayerStateDTO } from "../interfaces/dto/player-state-dto.interface";
 import { PlayerMessage } from "../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from "../types/global.type";
-import { OceanBonusEnum } from "../enum/global.enum";
+import { DeckQueryOptionsEnum, OceanBonusEnum } from "../enum/global.enum";
 import { OceanBonus, ScanKeep } from "../interfaces/global.interface";
 import { EventUnionSubTypes } from "../types/event.type";
 
@@ -27,8 +27,8 @@ export class WebsocketQueryMessageFactory{
         let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto, isCardProduction: isCardProduction}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
-    public static createScanKeepQuery(scanKeep: ScanKeep, eventId: number, dto: PlayerStateDTO, resultType: EventUnionSubTypes): PlayerMessage {
-        let query: WsScanKeepQuery = {scan:scanKeep.scan, keep:scanKeep.keep, eventId: eventId, playerState: dto}
+    public static createScanKeepQuery(scanKeep: ScanKeep, eventId: number, dto: PlayerStateDTO, resultType: EventUnionSubTypes, options?:DeckQueryOptionsEnum): PlayerMessage {
+        let query: WsScanKeepQuery = {scan:scanKeep.scan, keep:scanKeep.keep, eventId: eventId, playerState: dto, options:options}
 		let contentEnum: MessageContentQueryEnum
 		switch(resultType){
 			case('researchPhaseResult'):{
@@ -137,7 +137,12 @@ export class WebsocketResultMessageFactory{
             draw: content['d']??[],
         }
 	}
-	public static inputToScanKeepResult(content: any): WsScanKeepResult {
-		return {cards: content['cardIdList'], keep:content['keep']}
+	public static inputToScanKeepResult(content: any): WsDrawResult {
+		return {
+			cardIdList: content['cardIdList'],
+			keep:content['keep'],
+			options: content['options'],
+			eventId: content['eventId']
+		}
 	}
 }

@@ -3,7 +3,7 @@ import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
 import { RessourceStock } from "../../interfaces/global.interface";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ActivationOption } from "../../types/project-card.type";
 import { EventFactory } from "../../factory/event factory/event-factory";
@@ -44,6 +44,11 @@ export class ProjectCardActivatedEffectService {
 			//Birds
 			case('12'):{
 				result.push(EventFactory.simple.addRessourceToCardId({name: "animal", valueStock: 1}, card.cardCode))
+				break
+			}
+			//BrainStorming Session
+			case('13'):{
+				result.push(EventFactory.simple.scanKeep({scan:1, keep:0}, DeckQueryOptionsEnum.greenCardGivesMegacreditOtherDraw))
 				break
 			}
 			//Caretaker Contract
