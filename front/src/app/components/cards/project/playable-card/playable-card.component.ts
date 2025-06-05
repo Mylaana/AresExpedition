@@ -26,6 +26,7 @@ import { CardStatusComponent } from '../card-blocks/card-status/card-status.comp
 import { CardBuildable } from '../../../../interfaces/card.interface';
 import { CardActivationListComponent } from '../card-blocks/card-activation-list/card-activation-list.component';
 import { CardConditionChecker } from '../../../../services/cards/project-card-prerequisite-effect';
+import { ProjectFilter } from '../../../../interfaces/global.interface';
 
 @Component({
     selector: 'app-playable-card',
@@ -58,6 +59,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	@Input() parentListType: ProjectListType = 'none'
 	@Input() parentListSubType: ProjectListSubType = 'none'
 	@Input() activableTwice: boolean = false
+	@Input() filter?: ProjectFilter
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
 	private clientState!: PlayerStateModel
@@ -125,6 +127,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 	cardClick(){
 		if(this.state.isSelectable()!=true){return}
+		if(this.isDisabled()){return}
 		if(this.state.isBuildable()===false && this.state.isIgnoreCost()!=true){return}
 		this.state.setSelected(this.state.isSelected()===false)
 		this.cardStateChange.emit({card:this.projectCard, state: this.state})
@@ -146,7 +149,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 			tagList: this.projectCard.tagsId,
 			steelState: this.clientState.getRessourceInfoFromType('steel'),
 			titaniumState: this.clientState.getRessourceInfoFromType('titanium'),
-			playedTriggersList: this.clientState.getTriggerCostMod(),
+			playedTriggersList: this.clientState.getTriggersIdActive(),
 			buildDiscount: this.buildDiscount
 		})
 		this.setBuildable()
@@ -174,8 +177,10 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private setMaximumActivation(): void {
 		this._maximumActivation = (this.projectCard.activated>=2) || (this.projectCard.activated>=1 && this.activableTwice === false)
 	}
-
 	public isDisabled(): boolean{
+		if(this.filter){
+			return !this.projectCard.isFilterOk(this.filter)
+		}
 		if(this.state.isIgnoreCost()){return false}
 		if (this.state.isBuildable()===false && this.state.isIgnoreCost()!=false && this.state.isActivable()===false && this.parentListSubType!='research'){
 			return true
@@ -187,6 +192,10 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 			return true
 		}
 		return false
+	}
+	public isSelectable(): boolean {
+		if(this.isDisabled()){return false}
+		return this.state.isSelectable()
 	}
 	public isGreyedWhenSelected(): boolean {
 		if(this.parentListSubType==='none'){return false}

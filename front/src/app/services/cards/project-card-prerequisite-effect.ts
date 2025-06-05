@@ -291,7 +291,7 @@ export const CardConditionChecker = {
 		}
 	},
 	canBeActivated(card: PlayableCardModel, clientState: PlayerStateModel, activationOption:  ActivationOption = 1): boolean {
-		const noCost = ['4','13','15','16','18']
+		const noCost = ['4','13','15','16','18', 'CP02']
 		if(noCost.includes(card.cardCode)){return true}
 		switch(card.cardCode){
 			//AI Central

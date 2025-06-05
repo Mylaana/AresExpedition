@@ -266,6 +266,11 @@ export class ProjectCardActivatedEffectService {
 				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1))
 				break
 			}
+			//Celestior
+			case('CP02'):{
+				result.push(EventFactory.simple.scanKeep({scan: 3, keep: 1}, DeckQueryOptionsEnum.keepEvent))
+				break
+			}
 			default:{
 				return undefined
 			}

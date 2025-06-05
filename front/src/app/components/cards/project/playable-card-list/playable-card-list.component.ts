@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { CardState } from '../../../../interfaces/card.interface';
-import { CardSelector } from '../../../../interfaces/global.interface';
+import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
 import { Utils } from '../../../../utils/utils';

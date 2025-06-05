@@ -1,6 +1,6 @@
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { CostModCalulator, TriggerEffectEventFactory } from "./trigger-event";
 
@@ -921,6 +921,11 @@ function getPlayed(cardCode: string, clientstate: PlayerStateModel): EventBaseMo
 		//Thorgate
 		case('C11'):{
 			result.push(EventFactory.simple.addProduction({name:'heat', valueStock:1}))
+			break
+		}
+		//DevTechs
+		case('CP03'):{
+			result.push(EventFactory.simple.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.keepGreen))
 			break
 		}
 		//Zetasel

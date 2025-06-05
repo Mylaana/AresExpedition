@@ -16,5 +16,7 @@ export enum OceanBonusEnum {
 	plant = 'PLANT'
 }
 export enum DeckQueryOptionsEnum {
-	greenCardGivesMegacreditOtherDraw = 'O1'
+	greenCardGivesMegacreditOtherDraw = 'O1',
+	keepEvent = 'O2',
+	keepGreen = 'O3'
 }

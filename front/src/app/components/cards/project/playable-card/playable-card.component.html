@@ -5,14 +5,14 @@
 	<div class="wrapper-selection-border"
 		[class]="parentListSubType"
 		[class.selected]="state.isSelected()"
-		[class.selectable]="state.isSelectable()"
+		[class.selectable]="isSelectable()"
 		[class.hovered]="_hovered"
 		[class.disabled]="isDisabled()"
 		[class.greyed-when-selected]="isGreyedWhenSelected()">
 		<button class="wrapper-card"
 			[class]="projectCard.cardType"
 			[class.hovered]="_hovered"
-			[class.selectable]="state.isSelectable()"
+			[class.selectable]="isSelectable()"
 			(click)="cardClick()">
 			<div class="wrapper-card-element-left">
 				<app-card-cost

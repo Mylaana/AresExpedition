@@ -19400,7 +19400,7 @@
         },
         "stockable": [],
         "startingMegacredits": 50,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "3$other_researchcard$$tag_event$:$skipline$$other_hand$$ressource_card$",
             "fr": ""
@@ -19476,7 +19476,7 @@
         },
         "stockable": [],
         "startingMegacredits": 40,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""

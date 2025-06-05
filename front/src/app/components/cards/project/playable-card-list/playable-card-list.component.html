@@ -11,6 +11,7 @@
 			[buildDiscount]="_buildDiscount"
 			[parentListType]="listType"
 			[parentListSubType]="listSubType"
+			[filter]="_cardSelector.filter"
 			[activableTwice]="_activateTwiceRemaining>0"
 			(cardStateChange)="cardStateChange($event)"
 			(cardActivated)="onProjectActivated($event)"></app-playable-card>

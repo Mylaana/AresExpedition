@@ -180,6 +180,38 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.waiterId = waiter
 			return event
 		}
+		case(DeckQueryOptionsEnum.keepEvent):{
+			let event = new EventScanKeepCardSelector
+            event.title = `Select a card with Event tag.`
+            event.refreshSelectorOnSwitch = false
+            event.cardSelector.selectionQuantityTreshold = 'max'
+			event.cardSelector.selectFrom = cardList
+			event.cardSelector.selectionQuantity = 1
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = true
+			event.options = options
+			event.cardSelector.filter = {type: "containsEventTag"}
+			event.waiterId = waiter
+			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			return event
+		}
+		case(DeckQueryOptionsEnum.keepGreen):{
+			let event = new EventScanKeepCardSelector
+            event.title = `Select a green card.`
+            event.refreshSelectorOnSwitch = false
+            event.cardSelector.selectionQuantityTreshold = 'max'
+			event.cardSelector.selectFrom = cardList
+			event.cardSelector.selectionQuantity = 1
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = true
+			event.options = options
+			event.cardSelector.filter = {type: 'development'}
+			event.waiterId = waiter
+			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			return event
+		}
 		default:{
 			console.error('UNHANDLED SCANKEEP OPTION')
 			return new EventCardSelector
