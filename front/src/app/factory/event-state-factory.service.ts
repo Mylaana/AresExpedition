@@ -122,10 +122,10 @@ export class EventStateFactory{
 					break
 				}
 				case(EventStateTypeEnum.scanKeepQueried):{
-					newEvents.push(EventFactory.createCardSelector('scanKeepResult', {cardSelector:{
-						selectFrom: this.projectCardInfoService.getProjectCardList(state.v['cards']),
-						selectionQuantity: state.v['keep']
-					}}))
+					newEvents.push(EventFactory.createScanKeepResult(
+						this.projectCardInfoService.getProjectCardList(state.v['cards']),
+						state.v['keep'],
+						state.v['options']))
 					break
 				}
 				default:{treated = false}

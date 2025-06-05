@@ -19,10 +19,10 @@ $alternative-width: 200px;
 	width: 100%;
 	margin-top: $builder-padding;
 }
-.filter-type-development{
+.filter-type-greenProject{
 	background: linear-gradient(130deg,var(--color-ares-green-light3) 0%, var(--color-ares-green) 35%, var(--color-ares-green-dark4) 80%);
 }
-.filter-type-construction{
+.filter-type-blueOrRedProject{
 	background: linear-gradient(130deg, var(--color-ares-blue-dark0) 49%, black 50%, var(--color-ares-red-dark) 51%);
 	opacity: .9;
 }

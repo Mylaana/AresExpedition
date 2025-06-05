@@ -7,6 +7,7 @@ import java.util.Map;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.EventStateDTO;
 import com.ares_expedition.enums.game.EventStateOrigin;
 import com.ares_expedition.enums.game.EventStateTypeEnum;
+import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 import com.ares_expedition.model.core.Ocean;
 
 public class EventState {
@@ -45,10 +46,11 @@ public class EventState {
         return new EventState(EventStateTypeEnum.RESEARCH_CARDS_QUERIED, content);
     }
 
-    public static EventState addEventScanKeepCards(List<Integer> cards, Integer keep) {
+    public static EventState addEventScanKeepCards(List<Integer> cards, Integer keep, ScanKeepOptionsEnum options) {
         Map<String, Object> content = new HashMap<>();
         content.put("cards", cards);
         content.put("keep", keep);
+        content.put("options", options);
         return new EventState(EventStateTypeEnum.SCAN_KEEP_QUERIED, content);
     }
 

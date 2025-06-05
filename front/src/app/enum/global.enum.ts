@@ -15,3 +15,20 @@ export enum OceanBonusEnum {
 	card = 'CARD',
 	plant = 'PLANT'
 }
+export enum DeckQueryOptionsEnum {
+	greenCardGivesMegacreditOtherDraw = 'O1',
+	keepEvent = 'O2',
+	keepGreen = 'O3',
+	keepScienceOrPlant = 'O4'
+}
+
+export enum ProjectFilterNameEnum {
+	undefined = 'undefined',
+	greenProject = 'greenProject',
+	blueOrRedProject = 'blueOrRedProject',
+	action = 'action',
+	stockable = 'stockable',
+	blueProject = 'blueProject',
+	hasTagEvent = 'hasTagEvent',
+	hasTagPlantOrScience = 'hasTagPlantOrScience'
+}

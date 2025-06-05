@@ -2,9 +2,10 @@ import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, PlayedCardStock} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
-import { PlayedCardDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
+import {  TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
 import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
 import { Utils } from "../../utils/utils"
+import { ProjectFilterNameEnum } from "../../enum/global.enum"
 
 export class PlayableCardModel{
     id!: number;
@@ -96,22 +97,22 @@ export class PlayableCardModel{
     }
     isFilterOk(filter: ProjectFilter): boolean {
         switch(filter.type){
-            case('development'):{
+            case(ProjectFilterNameEnum.greenProject):{
                 if(this.cardType==='greenProject'){
                     return true
                 }
                 break
             }
-            case('construction'):{
+            case(ProjectFilterNameEnum.blueOrRedProject):{
                 if(this.cardType!='greenProject'){
                     return true
                 }
                 break
             }
-            case('action'):{
+            case(ProjectFilterNameEnum.action):{
 				return this.hasSummaryType('action')
             }
-            case('stockable'):{
+            case(ProjectFilterNameEnum.stockable):{
                 //converts filterValue into stockable name list
                 if(!filter.stockableType){return false}
                 let filterValueList: any[] = []
@@ -128,8 +129,14 @@ export class PlayableCardModel{
                 }
                 break
             }
-			case('blueProject'):{
+			case(ProjectFilterNameEnum.blueProject):{
 				return this.cardType === 'blueProject'
+			}
+			case(ProjectFilterNameEnum.hasTagEvent):{
+				return this.hasTag(Utils.toTagId('event'))
+			}
+			case(ProjectFilterNameEnum.hasTagPlantOrScience):{
+				return this.hasTag(Utils.toTagId('science')) || this.hasTag(Utils.toTagId('plant'))
 			}
         }
         return false
@@ -142,6 +149,14 @@ export class PlayableCardModel{
 	}
 	hasTrigger(): boolean {
 		return this.hasSummaryType('trigger')
+	}
+	private hasTag(tagId: number): boolean {
+		for(let t of this.tagsId){
+			if(t===tagId){
+				return true
+			}
+		}
+		return false
 	}
 	toDTO(): PlayedCardStock {
 		return {[this.id]: this.stock??[]}

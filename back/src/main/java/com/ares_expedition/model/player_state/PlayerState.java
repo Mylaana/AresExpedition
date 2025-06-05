@@ -10,6 +10,7 @@ import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.subclass.PlayerEventState;
 import com.ares_expedition.model.player_state.subclass.PlayerGlobalParameterState;
@@ -310,8 +311,8 @@ public class PlayerState {
         this.eventState.addEventResearchCards(cards, keep);
     }
 
-    public void addEventScanKeepCards(List<Integer> cards, Integer keep){
-        this.eventState.addEventScanKeepCards(cards, keep);
+    public void addEventScanKeepCards(List<Integer> cards, Integer keep, ScanKeepOptionsEnum options){
+        this.eventState.addEventScanKeepCards(cards, keep, options);
     }
 
     //=============================================================

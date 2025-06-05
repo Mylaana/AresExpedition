@@ -7,7 +7,7 @@ import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
-import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase, EventCardActivator } from "./event.model";
+import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase, EventCardActivator, EventScanKeepCardSelector } from "./event.model";
 import { Logger, Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
@@ -16,6 +16,7 @@ import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
+import { DeckQueryOptionsEnum } from "../../enum/global.enum";
 
 @Injectable()
 export class EventHandler {
@@ -236,6 +237,7 @@ export class EventHandler {
 			case('waiter'):{this.finishEventWaiter(this.currentEvent as EventWaiter);break}
 			case('phase'):{this.finishEventPhase(this.currentEvent as EventPhase); break}
 			case('cardActivator'):{this.finishEventCardActivator(this.currentEvent as EventCardActivator); break}
+			case('scanKeepSelector'):{this.finishEventScanKeepCardSelector(this.currentEvent as EventScanKeepCardSelector); break}
 			default:{Logger.logError('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
         }
 		if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
@@ -262,13 +264,6 @@ export class EventHandler {
 				)
 				break
 			}
-			case('scanKeepResult'):{
-				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
-					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
-				)
-				break
-			}
 			case('selectStartingHand'):{
 				let drawNumber = event.cardSelector.selectedList.length
 				event.finalized = true
@@ -285,6 +280,31 @@ export class EventHandler {
         }
 		event.activateSelection()
     }
+	private finishEventScanKeepCardSelector(event: EventScanKeepCardSelector): void {
+		Logger.logEventResolution('resolving event: ','EventScanKeepCardSelector ', event.subType)
+
+		event.finalized = true
+		switch(event.options){
+			case(DeckQueryOptionsEnum.greenCardGivesMegacreditOtherDraw):{
+				let card = event.cardSelector.selectFrom[0]
+				switch(card.cardType){
+					case ('greenProject'):{
+						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:1}), 'first')
+						break
+					}
+					case('blueProject'):case('redProject'):{
+						this.gameStateService.addCardsToClientHand(card.id)
+					}
+				}
+			}
+		}
+		if(event.cardSelector.selectedList.length>0){
+			this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
+				ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
+				ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+			)
+		}
+	}
     private finishEventCardSelectorRessource(event: EventCardSelectorRessource): void {
 		Logger.logEventResolution('resolving event: ','EventCardSelectorRessource ', event.subType)
 		switch(event.subType){
@@ -437,7 +457,7 @@ export class EventHandler {
 		}
 		if(event.scanKeep!==undefined){
 			let scanKeep: ScanKeep = {scan:event.scanKeep?.scan?event.scanKeep?.scan:0, keep:event.scanKeep?.keep?event.scanKeep?.keep:0}
-			this.gameStateService.addDrawQueue(DrawEventFactory.createScanKeepEvent(resolveType, scanKeep, event.waiterId))
+			this.gameStateService.addDrawQueue(DrawEventFactory.createScanKeepEvent(resolveType, scanKeep, event.waiterId, event.options))
 		}
 		this.gameStateService.cleanAndNextEventQueue()
 	}
@@ -547,7 +567,7 @@ export class DrawEventHandler {
 				break
 			}
 			case('scanKeepResult'):{
-				this.rxStompService.publishScanKeep({scan:event.drawCardNumber, keep: event.keepCardNumber??0}, event.waiterId, this.gameStateService.getClientStateDTO(), event.resolveEventSubType)
+				this.rxStompService.publishScanKeep({scan:event.drawCardNumber, keep: event.keepCardNumber??0}, event.waiterId, this.gameStateService.getClientStateDTO(), event.resolveEventSubType, event.scanKeepOptions)
 				break
 			}
 			default:{
@@ -558,6 +578,7 @@ export class DrawEventHandler {
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
 		Logger.logEventResolution('resolving deck event: ',drawEvent.resolveEventSubType)
+		console.log('resolving drawevent with waiter id :', drawEvent.waiterId)
 		switch(drawEvent.resolveEventSubType){
 			case('drawResult'):{
 				resultEvent = EventFactory.createGeneric(
@@ -585,17 +606,11 @@ export class DrawEventHandler {
 			}
 			case('scanKeepResult'):{
 				if(drawEvent.keepCardNumber===undefined){break}
-				resultEvent = EventFactory.createCardSelector(
-					'scanKeepResult',
-					{
-						cardSelector:{
-							selectFrom: this.projectCardInfoService.getProjectCardList(drawEvent.drawResultCardList),
-							selectedList: [],
-							selectionQuantity: drawEvent.keepCardNumber
-						},
-						waiterId:drawEvent.waiterId
-					}
-				)
+				resultEvent = EventFactory.createScanKeepResult(
+					this.projectCardInfoService.getProjectCardList(drawEvent.drawResultCardList),
+					drawEvent.keepCardNumber,
+					drawEvent.scanKeepOptions,
+					drawEvent.waiterId)
 				break
 			}
 		}

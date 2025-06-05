@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { CardScalingVP } from "../../interfaces/card.interface";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
+import { ProjectFilterNameEnum } from "../../enum/global.enum";
 
 @Injectable({
 	providedIn: 'root'
@@ -23,7 +24,7 @@ export class ProjectCardScalingVPService {
 		"46": (card) => Math.floor(card.getStockValue('science') / 2),
 		"53": (card) => Math.floor(card.getStockValue('animal') / 2), //Small Animals
 		"58": (card) => Math.floor(card.getStockValue('microbe') / 3), //Tardigrades
-		"59": (_, state) => Math.floor(state.getProjectPlayedIdList({ type: 'blueProject' }).length / 3), //Think Tank
+		"59": (_, state) => Math.floor(state.getProjectPlayedIdList({ type: ProjectFilterNameEnum.blueProject }).length / 3), //Think Tank
 		"63": (_, state) => state.getTagsOfType('jovian'), //Water Import from Europa
 		"153": (_, state) => state.getTagsOfType('jovian'), //Io Mining Industries
 		"F07": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets

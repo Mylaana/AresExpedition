@@ -1,6 +1,6 @@
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterColorEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { DEBUG_IGNORE_PREREQUISITES } from "../../global/global-const";
 import { Checker } from "../../utils/checker";
 import { ActivationOption } from "../../types/project-card.type";
@@ -291,6 +291,8 @@ export const CardConditionChecker = {
 		}
 	},
 	canBeActivated(card: PlayableCardModel, clientState: PlayerStateModel, activationOption:  ActivationOption = 1): boolean {
+		const noCost = ['3','4','13','15','16','18', 'CP02']
+		if(noCost.includes(card.cardCode)){return true}
 		switch(card.cardCode){
 			//AI Central
 			case('4'):{break}
@@ -326,14 +328,13 @@ export const CardConditionChecker = {
 			//Development Center
 			case('22'):{
 				return Checker.isRessourceOk('heat', 2, 'min', clientState)
-				break
 			}
 			//Extreme-Cold Fungus
 			case('27'):{
 				switch(activationOption){
 					case(1):{return true}
 					case(2):{
-						return clientState.hasProjectPlayedOfFilterType({type:'stockable', stockableType:'microbe'})
+						return clientState.hasProjectPlayedOfFilterType({type:ProjectFilterNameEnum.stockable, stockableType:'microbe'})
 					}
 				}
 				break

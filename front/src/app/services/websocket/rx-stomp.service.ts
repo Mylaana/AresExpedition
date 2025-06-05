@@ -6,7 +6,7 @@ import { MessageContentQueryEnum } from '../../enum/websocket.enum';
 import { myRxStompConfig } from './rx-stomp.config';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
 import { PlayerStateModel } from '../../models/player-info/player-state.model';
-import { Logger, Utils } from '../../utils/utils';
+import { Logger } from '../../utils/utils';
 import { PlayerMessage } from '../../interfaces/websocket.interface';
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from '../../types/global.type';
@@ -14,6 +14,7 @@ import { GameParamService } from '../core-game/game-param.service';
 import { PlayerStateDTO } from '../../interfaces/dto/player-state-dto.interface';
 import { ScanKeep } from '../../interfaces/global.interface';
 import { EventUnionSubTypes } from '../../types/event.type';
+import { DeckQueryOptionsEnum } from '../../enum/global.enum';
 
 
 interface QueueMessage {
@@ -122,8 +123,8 @@ export class RxStompService extends RxStomp {
         this.enqueueMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId, playerDTO, isCardProduction))
     }
 
-	public publishScanKeep(scanKeep: ScanKeep, eventId: number, playerDTO: PlayerStateDTO, resultType: EventUnionSubTypes): void {
-        this.enqueueMessage(WebsocketQueryMessageFactory.createScanKeepQuery(scanKeep, eventId, playerDTO, resultType))
+	public publishScanKeep(scanKeep: ScanKeep, eventId: number, playerDTO: PlayerStateDTO, resultType: EventUnionSubTypes, options?: DeckQueryOptionsEnum): void {
+        this.enqueueMessage(WebsocketQueryMessageFactory.createScanKeepQuery(scanKeep, eventId, playerDTO, resultType, options))
     }
 
     public publishClientPlayerReady(ready: boolean): void {

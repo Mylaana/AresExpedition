@@ -1,14 +1,14 @@
 import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { myUUID, PlayableCardType, RGB, TagType } from "../../types/global.type";
-import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter } from "../../interfaces/global.interface";
+import { myUUID, PlayableCardType, TagType } from "../../types/global.type";
+import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter,  } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel, EventPhase } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { WsDrawResult, WsGroupReady, WsOceanResult, WsScanKeepResult } from "../../interfaces/websocket.interface";
+import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
@@ -16,7 +16,7 @@ import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { GameParamService } from "./game-param.service";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { Utils } from "../../utils/utils";
-import { GlobalParameterNameEnum, OceanBonusEnum } from "../../enum/global.enum";
+import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventStateFactory } from "../../factory/event-state-factory.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { ProjectCardActivatedEffectService } from "../cards/project-card-activated-effect.service";
@@ -501,6 +501,8 @@ export class GameState{
             if(event.waiterId!=wsDrawResult.eventId){continue}
             event.served = true
             event.drawResultCardList = wsDrawResult.cardIdList
+			event.scanKeepOptions = wsDrawResult.options
+			event.keepCardNumber = wsDrawResult.keep
             eventFound = true
             this.cleanAndNextDrawQueue()
             break
@@ -734,16 +736,16 @@ export class GameState{
 		if(newEvents?.length===0){return}
 		this.addEventQueue(newEvents,'first')
     }
-	public applyResearchResult(result: WsScanKeepResult){
+	public applyResearchResult(result: WsDrawResult){
 		this.addEventQueue(EventFactory.createCardSelector('researchPhaseResult', {cardSelector:{
-			selectFrom: this.projectCardService.getProjectCardList(result.cards),
+			selectFrom: this.projectCardService.getProjectCardList(result.cardIdList),
 			selectionQuantity: result.keep
 		}}), 'first')
 	}
-	public applyScanKeepResult(result: WsScanKeepResult){
-		this.addEventQueue(EventFactory.createCardSelector('scanKeepResult', {cardSelector:{
-			selectFrom: this.projectCardService.getProjectCardList(result.cards),
-			selectionQuantity: result.keep
-		}}), 'first')
+	public applyScanKeepResult(result: WsDrawResult){
+		let newEvent = EventFactory.createScanKeepResult(this.projectCardService.getProjectCardList(result.cardIdList), result.keep,  result.options)
+		if(newEvent){
+			this.addEventQueue(newEvent, 'first')
+		}
 	}
 }

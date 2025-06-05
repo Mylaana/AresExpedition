@@ -1,4 +1,4 @@
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
@@ -18,9 +18,6 @@ interface TriggerInput {
 	receivingCard: PlayableCardModel,
 	forestGained: number
 }
-
-// Referencing HookType-relevantTriggerList
-const COST_MOD: string[] = []
 
 // Handlers
 //ON_PLAYED_CARD
@@ -258,68 +255,53 @@ export const TriggerEffectEventFactory = {
 		return events;
 	}
 }
+
+
+
 export const CostModCalulator = {
 	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel): number {
-		const relevantTriggers = activeTriggers.filter(trigger => COST_MOD.includes(trigger))
-		let totalMod: number = 0
-		for(let trigger of relevantTriggers){
+		let totalMod = 0
+		for (const trigger of activeTriggers) {
 			totalMod += calculateCostModFromTrigger(trigger, projectCard)
 		}
+
 		return totalMod
 	},
 }
-function calculateCostModFromTrigger(trigger: string,  card?: PlayableCardModel): number {
-	let costMod: number = 0
-	let tagList = card?.tagsId??[]
-	switch(trigger){
+
+function calculateCostModFromTrigger(trigger: string, card?: PlayableCardModel): number {
+	if (!card) return 0
+
+	const tagList = new Set(card.tagsId ?? [])
+
+	const triggerMap: Record<string, () => number> = {
 		//Earth Catapult
-		case('23'):{
-			costMod += 2
-			break
-		}
+		'23': () => 2,
 		//Energy Subsidies
-		case('25'):{
-			if(tagList.includes(GlobalInfo.getIdFromType('power','tag'))===false){break}
-			costMod += 4
-			break
-		}
+		'25': () => tagList.has(GlobalInfo.getIdFromType('power', 'tag')) ? 4 : 0,
 		//Interplanetary Conference
-		case('37'):{
-			if(tagList.includes(GlobalInfo.getIdFromType('earth','tag'))){costMod += 3}
-			if(tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))){costMod += 3}
-			break
-		}
+		'37': () => {
+			let mod = 0
+			if (tagList.has(GlobalInfo.getIdFromType('earth', 'tag'))) mod += 3
+			if (tagList.has(GlobalInfo.getIdFromType('jovian', 'tag'))) mod += 3
+			return mod
+		},
 		//Media Group
-		case('42'):{
-			if(tagList.includes(GlobalInfo.getIdFromType('event','tag'))){costMod += 5}
-			break
-		}
+		'42': () => tagList.has(GlobalInfo.getIdFromType('event', 'tag')) ? 5 : 0,
 		//Research Outpost
-		case('51'):{
-			costMod += 1
-			break
-		}
+		'51': () => 1,
 		//CreditCor
-		case('C1'):{
-			if(!card){break}
-			if(card.costInitial>=20){costMod += 4}
-			break
-		}
+		'C1': () => card.costInitial >= 20 ? 4 : 0,
 		//Interplanetary Cinematics
-		case('C4'):{
-			if(tagList.includes(GlobalInfo.getIdFromType('event','tag'))){costMod += 2}
-			break
-		}
+		'C4': () => tagList.has(GlobalInfo.getIdFromType('event', 'tag')) ? 2 : 0,
 		//Teractor
-		case('C9'):{
-			if(tagList.includes(GlobalInfo.getIdFromType('earth','tag'))){costMod += 3}
-			break
-		}
+		'C9': () => tagList.has(GlobalInfo.getIdFromType('earth', 'tag')) ? 3 : 0,
 		//Thorgate
-		case('C11'):{
-			if(tagList.includes(GlobalInfo.getIdFromType('power','tag'))){costMod += 3}
-			break
-		}
+		'C11': () => tagList.has(GlobalInfo.getIdFromType('power', 'tag')) ? 3 : 0,
+		//DevTechs
+		'CP03': () => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
 	}
-	return costMod
+
+	const handler = triggerMap[trigger]
+	return handler ? handler() : 0
 }

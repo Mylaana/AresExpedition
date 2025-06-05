@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerEventStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.EventStateDTO;
+import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.subclass.substates.EventState;
 
@@ -47,8 +48,8 @@ public class PlayerEventState {
         this.events.add(EventState.addEventResearchCards(cards, keep));
     }
 
-    public void addEventScanKeepCards(List<Integer> cards, Integer keep) {
-        this.events.add(EventState.addEventScanKeepCards(cards, keep));
+    public void addEventScanKeepCards(List<Integer> cards, Integer keep, ScanKeepOptionsEnum options) {
+        this.events.add(EventState.addEventScanKeepCards(cards, keep, options));
     }
 
     public void addEventProductionCards(List<Integer> cards) {

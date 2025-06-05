@@ -5,7 +5,8 @@ import { PlayableCardListComponent } from '../project/playable-card-list/playabl
 import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
 import { CardBuilderOptionType } from '../../../types/global.type';
-import { ProjectFilterType } from '../../../types/project-card.type';
+import { ProjectFilterNameEnum } from '../../../enum/global.enum';
+import { ProjectFilter } from '../../../interfaces/global.interface';
 
 @Component({
     selector: 'app-card-builder',
@@ -21,7 +22,7 @@ export class CardBuilderComponent{
 	@Input() cardBuilder!: CardBuilder
 	@Input() option!: CardBuilderOptionType
 	@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
-	@Input() projectFilterType!: ProjectFilterType
+	@Input() projectFilter?: ProjectFilter
 	@Input() discount: number = 0
 
 	@Input() event!: EventBaseModel

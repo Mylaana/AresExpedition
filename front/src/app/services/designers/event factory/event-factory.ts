@@ -1,4 +1,4 @@
-import { GlobalParameterNameEnum } from "../../../enum/global.enum"
+import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../../interfaces/global.interface"
 import { PlayableCardModel } from "../../../models/cards/project-card.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase } from "../../../models/core-game/event.model"
@@ -136,7 +136,15 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.title = 'Select any number of cards to sell'
             break
         }
-        case('researchPhaseResult'):
+        case('researchPhaseResult'):{
+			event.title = `Select ${event.cardSelector.selectionQuantity} cards to draw`
+            event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
+            event.cardSelector.selectionQuantityTreshold = 'equal'
+            event.refreshSelectorOnSwitch = false
+            event.waiterId = args?.waiterId
+            break
+		}
+		/*
         case('scanKeepResult'):{
             event.title = `Select ${event.cardSelector.selectionQuantity} cards to draw`
             event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
@@ -145,6 +153,7 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.waiterId = args?.waiterId
             break
         }
+			*/
         case('selectStartingHand'):{
             event.title = 'Discard any card number to draw that many new cards.'
             event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
@@ -174,7 +183,7 @@ function createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: Cr
     event.subType = 'addRessourceToSelectedCard'
     event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
     event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`
-    event.cardSelector.filter =  {type:'stockable', stockableType:event.advancedRessource?.name}
+    event.cardSelector.filter =  {type: ProjectFilterNameEnum.stockable, stockableType:event.advancedRessource?.name}
     event.cardSelector.cardInitialState = {selectable: true, ignoreCost:true}
     event.cardSelector.selectionQuantityTreshold = 'equal'
     event.cardSelector.selectionQuantity = 1
@@ -187,7 +196,7 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
     let event = new EventCardActivator
     event.cardSelector = generateCardSelector(args?.cardSelector)
     event.subType = subType
-    event.cardSelector.filter = {type: 'action'}
+    event.cardSelector.filter = {type: ProjectFilterNameEnum.action}
     event.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
     event.title = 'Activate cards'
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
@@ -257,12 +266,12 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
     switch(subType){
         case('developmentPhaseBuilder'):{
             event.title = 'Play Green cards :'
-            event.cardSelector.filter = {type:'development'}
+            event.cardSelector.filter = {type: ProjectFilterNameEnum.greenProject}
             break
         }
         case('constructionPhaseBuilder'):{
             event.title = 'Play Blue or Red cards'
-            event.cardSelector.filter = {type:'construction'}
+            event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
             break
         }
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}

@@ -12,6 +12,7 @@ import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.core.Ocean;
@@ -41,23 +42,30 @@ public class GameController {
         return this.gameHolder.get(gameId);
     }
 
-    public List<Integer> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer keep){
+    private List<Integer> cardsFromDeck(String gameId, Integer drawNumber, String playerId){
         List<Integer> cards = getGameFromId(gameId).drawCards(drawNumber);
         if(cards.size() < drawNumber){
             wsOutput.sendPushToGroup(new BaseMessageOutputDTO(gameId, "not enough cards in deck"));
         }
+        return cards;
+    }
+    public List<Integer> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason){
+        List<Integer> cards = cardsFromDeck(gameId, drawNumber, playerId);
+        this.getGameFromId(gameId).addEventDrawCardsToPlayer(playerId, cards);
+        return cards;
+    }
+
+    public List<Integer> scanKeepCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer keep, ScanKeepOptionsEnum options){
+        List<Integer> cards = cardsFromDeck(gameId, drawNumber, playerId);
         Game game = this.getGameFromId(gameId);
 
         switch(reason){
-            case DRAW_QUERY:
-                game.addEventDrawCardsToPlayer(playerId, cards);
-                break;
             case RESEARCH_QUERY :
                 game.setResearchResolved(playerId, cards, keep);
                 game.addEventResearchCardsToPlayer(playerId, cards, keep);
                 break;
             case SCAN_KEEP_QUERY :
-                game.addEventScanKeepCardsToPlayer(playerId, cards, keep);
+                game.addEventScanKeepCardsToPlayer(playerId, cards, keep, options);
             default:
                 System.err.println("UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: " + reason);
                 break;
