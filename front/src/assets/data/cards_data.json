@@ -73,7 +73,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 2,
@@ -149,7 +149,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 3,
@@ -208,7 +208,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "3$other_researchcard$$tag_science$/$tag_plant$$skipline$+1$ressource_card$",
             "fr": ""
@@ -225,7 +225,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 4,
@@ -302,7 +302,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 5,
@@ -380,7 +380,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 6,
@@ -456,7 +456,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 7,
@@ -532,7 +532,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 8,
@@ -608,7 +608,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 9,
@@ -682,7 +682,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 10,
@@ -758,7 +758,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 11,
@@ -834,7 +834,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 12,
@@ -912,7 +912,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 13,
@@ -971,7 +971,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "$other_researchcard$$skipline$$other_greencard$: $ressource_megacreditvoid_1$$skipline$$other_bluecard$/$other_redcard$: $ressource_card$",
             "fr": ""
@@ -988,7 +988,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 14,
@@ -1062,7 +1062,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 15,
@@ -1138,7 +1138,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 16,
@@ -1214,7 +1214,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 17,
@@ -1290,7 +1290,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 18,
@@ -1368,7 +1368,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 19,
@@ -1446,7 +1446,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 20,
@@ -1524,7 +1524,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 21,
@@ -1598,7 +1598,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 22,
@@ -1675,7 +1675,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 23,
@@ -1752,7 +1752,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 24,
@@ -1831,7 +1831,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 25,
@@ -1907,7 +1907,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 26,
@@ -1984,7 +1984,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 27,
@@ -2060,7 +2060,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 28,
@@ -2136,7 +2136,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 29,
@@ -2212,7 +2212,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 30,
@@ -2290,7 +2290,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 31,
@@ -2369,7 +2369,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 32,
@@ -2446,7 +2446,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 33,
@@ -2524,7 +2524,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 34,
@@ -2600,7 +2600,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 35,
@@ -2677,7 +2677,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 36,
@@ -2753,7 +2753,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 37,
@@ -2829,7 +2829,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 38,
@@ -2905,7 +2905,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 39,
@@ -2983,7 +2983,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 40,
@@ -3060,7 +3060,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 41,
@@ -3136,7 +3136,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 42,
@@ -3212,7 +3212,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 43,
@@ -3290,7 +3290,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 44,
@@ -3368,7 +3368,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 45,
@@ -3444,7 +3444,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 46,
@@ -3523,7 +3523,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 47,
@@ -3600,7 +3600,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 48,
@@ -3674,7 +3674,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 49,
@@ -3748,7 +3748,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 50,
@@ -3827,7 +3827,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 51,
@@ -3904,7 +3904,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 52,
@@ -3978,7 +3978,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 53,
@@ -4056,7 +4056,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 54,
@@ -4133,7 +4133,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 55,
@@ -4209,7 +4209,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 56,
@@ -4285,7 +4285,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 57,
@@ -4361,7 +4361,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 58,
@@ -4439,7 +4439,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 59,
@@ -4515,7 +4515,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 60,
@@ -4592,7 +4592,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 61,
@@ -4669,7 +4669,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 62,
@@ -4745,7 +4745,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 63,
@@ -4822,7 +4822,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 64,
@@ -4898,7 +4898,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 65,
@@ -4976,7 +4976,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 66,
@@ -5052,7 +5052,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 67,
@@ -5129,7 +5129,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 68,
@@ -5205,7 +5205,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 69,
@@ -5282,7 +5282,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 70,
@@ -5359,7 +5359,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 71,
@@ -5435,7 +5435,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 72,
@@ -5513,7 +5513,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 73,
@@ -5590,7 +5590,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 74,
@@ -5667,7 +5667,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 75,
@@ -5743,7 +5743,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 76,
@@ -5820,7 +5820,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 77,
@@ -5897,7 +5897,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 78,
@@ -5974,7 +5974,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 79,
@@ -6050,7 +6050,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 80,
@@ -6128,7 +6128,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 81,
@@ -6206,7 +6206,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 82,
@@ -6284,7 +6284,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 83,
@@ -6361,7 +6361,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 84,
@@ -6438,7 +6438,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 85,
@@ -6516,7 +6516,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 86,
@@ -6592,7 +6592,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 87,
@@ -6670,7 +6670,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 88,
@@ -6746,7 +6746,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 89,
@@ -6822,7 +6822,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 90,
@@ -6899,7 +6899,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 91,
@@ -6976,7 +6976,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 92,
@@ -7052,7 +7052,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 93,
@@ -7129,7 +7129,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 94,
@@ -7206,7 +7206,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 95,
@@ -7282,7 +7282,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 96,
@@ -7360,7 +7360,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 97,
@@ -7436,7 +7436,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 98,
@@ -7512,7 +7512,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 99,
@@ -7590,7 +7590,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 100,
@@ -7668,7 +7668,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 101,
@@ -7745,7 +7745,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 102,
@@ -7821,7 +7821,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 103,
@@ -7898,7 +7898,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 104,
@@ -7975,7 +7975,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 105,
@@ -8051,7 +8051,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 106,
@@ -8127,7 +8127,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 107,
@@ -8203,7 +8203,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 108,
@@ -8279,7 +8279,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 109,
@@ -8355,7 +8355,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 110,
@@ -8432,7 +8432,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 111,
@@ -8506,7 +8506,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 112,
@@ -8582,7 +8582,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 113,
@@ -8659,7 +8659,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 114,
@@ -8735,7 +8735,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 116,
@@ -8813,7 +8813,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 117,
@@ -8890,7 +8890,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 118,
@@ -8967,7 +8967,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 119,
@@ -9043,7 +9043,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 120,
@@ -9119,7 +9119,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 121,
@@ -9195,7 +9195,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 122,
@@ -9273,7 +9273,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 123,
@@ -9349,7 +9349,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 124,
@@ -9425,7 +9425,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 125,
@@ -9501,7 +9501,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 126,
@@ -9578,7 +9578,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 127,
@@ -9655,7 +9655,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 128,
@@ -9731,7 +9731,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 129,
@@ -9805,7 +9805,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 130,
@@ -9881,7 +9881,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 131,
@@ -9957,7 +9957,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 132,
@@ -10034,7 +10034,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 133,
@@ -10110,7 +10110,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 134,
@@ -10186,7 +10186,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 135,
@@ -10262,7 +10262,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 136,
@@ -10339,7 +10339,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 137,
@@ -10417,7 +10417,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 138,
@@ -10494,7 +10494,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 139,
@@ -10570,7 +10570,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 140,
@@ -10647,7 +10647,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 141,
@@ -10724,7 +10724,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 142,
@@ -10800,7 +10800,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 143,
@@ -10877,7 +10877,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 144,
@@ -10951,7 +10951,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 145,
@@ -11027,7 +11027,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 146,
@@ -11104,7 +11104,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 147,
@@ -11181,7 +11181,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 148,
@@ -11257,7 +11257,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 149,
@@ -11333,7 +11333,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 150,
@@ -11409,7 +11409,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 151,
@@ -11486,7 +11486,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 152,
@@ -11562,7 +11562,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 153,
@@ -11640,7 +11640,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 154,
@@ -11714,7 +11714,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 155,
@@ -11790,7 +11790,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 156,
@@ -11867,7 +11867,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 157,
@@ -11943,7 +11943,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 158,
@@ -12020,7 +12020,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 159,
@@ -12098,7 +12098,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 160,
@@ -12174,7 +12174,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 161,
@@ -12251,7 +12251,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 162,
@@ -12327,7 +12327,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 163,
@@ -12404,7 +12404,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 164,
@@ -12480,7 +12480,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 165,
@@ -12558,7 +12558,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 166,
@@ -12634,7 +12634,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 167,
@@ -12708,7 +12708,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 168,
@@ -12784,7 +12784,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 169,
@@ -12861,7 +12861,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 170,
@@ -12938,7 +12938,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 171,
@@ -13014,7 +13014,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 172,
@@ -13091,7 +13091,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 173,
@@ -13167,7 +13167,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 174,
@@ -13244,7 +13244,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 175,
@@ -13321,7 +13321,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 176,
@@ -13397,7 +13397,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 177,
@@ -13474,7 +13474,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 178,
@@ -13552,7 +13552,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 179,
@@ -13626,7 +13626,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 180,
@@ -13702,7 +13702,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 181,
@@ -13778,7 +13778,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 182,
@@ -13854,7 +13854,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 183,
@@ -13931,7 +13931,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 184,
@@ -14007,7 +14007,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 185,
@@ -14084,7 +14084,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 186,
@@ -14160,7 +14160,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 187,
@@ -14236,7 +14236,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 188,
@@ -14312,7 +14312,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 189,
@@ -14388,7 +14388,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 190,
@@ -14464,7 +14464,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 191,
@@ -14540,7 +14540,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 192,
@@ -14616,7 +14616,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 193,
@@ -14693,7 +14693,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 194,
@@ -14769,7 +14769,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 195,
@@ -14843,7 +14843,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 196,
@@ -14917,7 +14917,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 197,
@@ -14991,7 +14991,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 198,
@@ -15067,7 +15067,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 199,
@@ -15141,7 +15141,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 200,
@@ -15217,7 +15217,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 201,
@@ -15293,7 +15293,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 202,
@@ -15370,7 +15370,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 203,
@@ -15444,7 +15444,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 204,
@@ -15522,7 +15522,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 205,
@@ -15598,7 +15598,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 206,
@@ -15675,7 +15675,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 207,
@@ -15751,7 +15751,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 208,
@@ -15825,7 +15825,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 209,
@@ -15901,7 +15901,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 210,
@@ -15978,7 +15978,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 211,
@@ -16054,7 +16054,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 212,
@@ -16132,7 +16132,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 213,
@@ -16208,7 +16208,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 214,
@@ -16285,7 +16285,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 215,
@@ -16362,7 +16362,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 216,
@@ -16439,7 +16439,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 217,
@@ -16515,7 +16515,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 218,
@@ -16591,7 +16591,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 219,
@@ -16669,7 +16669,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 222,
@@ -16748,7 +16748,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 227,
@@ -16824,7 +16824,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 229,
@@ -16900,7 +16900,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 230,
@@ -16976,7 +16976,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 232,
@@ -17052,7 +17052,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 233,
@@ -17128,7 +17128,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 257,
@@ -17204,7 +17204,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 260,
@@ -17280,7 +17280,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 263,
@@ -17357,7 +17357,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 266,
@@ -17434,7 +17434,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 268,
@@ -17510,7 +17510,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 270,
@@ -17586,7 +17586,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 271,
@@ -17663,7 +17663,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 275,
@@ -17739,7 +17739,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 279,
@@ -17817,7 +17817,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 280,
@@ -17894,7 +17894,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 281,
@@ -17970,7 +17970,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 282,
@@ -18046,7 +18046,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 284,
@@ -18124,7 +18124,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 286,
@@ -18202,7 +18202,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 289,
@@ -18279,7 +18279,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 292,
@@ -18355,7 +18355,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1001,
@@ -18429,7 +18429,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1002,
@@ -18505,7 +18505,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1003,
@@ -18581,7 +18581,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1004,
@@ -18657,7 +18657,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1005,
@@ -18733,7 +18733,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1006,
@@ -18810,7 +18810,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1007,
@@ -18886,7 +18886,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1008,
@@ -18962,7 +18962,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1009,
@@ -19038,7 +19038,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1010,
@@ -19112,7 +19112,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1011,
@@ -19188,7 +19188,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1012,
@@ -19262,7 +19262,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1013,
@@ -19341,7 +19341,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 1
+        "vpScaling": "1"
     },
     {
         "id": 1014,
@@ -19400,7 +19400,7 @@
         },
         "stockable": [],
         "startingMegacredits": 50,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "3$other_researchcard$$tag_event$:$skipline$$other_hand$$ressource_card$",
             "fr": ""
@@ -19417,7 +19417,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1015,
@@ -19476,7 +19476,7 @@
         },
         "stockable": [],
         "startingMegacredits": 40,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19493,7 +19493,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1016,
@@ -19569,7 +19569,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1017,
@@ -19645,7 +19645,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 1018,
@@ -19719,7 +19719,7 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     },
     {
         "id": 10001,
@@ -19796,6 +19796,6 @@
             "en": "",
             "fr": ""
         },
-        "vpScaling": 0
+        "vpScaling": "0"
     }
 ]
