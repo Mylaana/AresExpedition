@@ -1,4 +1,4 @@
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
@@ -299,7 +299,7 @@ function calculateCostModFromTrigger(trigger: string, card?: PlayableCardModel):
 		//Thorgate
 		'C11': () => tagList.has(GlobalInfo.getIdFromType('power', 'tag')) ? 3 : 0,
 		//DevTechs
-		'CP03': () => card.isFilterOk?.({ type: 'development' }) ? 2 : 0,
+		'CP03': () => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
 	}
 
 	const handler = triggerMap[trigger]

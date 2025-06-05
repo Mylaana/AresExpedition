@@ -2,7 +2,7 @@
 	<div class="wrapper-card-builder ares-background ares-border">
 		<div class="inner-decoration--side"></div>
 		<div class="selected-card-zone"
-			[ngClass]="'filter-type-'+projectFilterType"
+			[ngClass]="'filter-type-'+projectFilter?.type"
 			[class.locked]="cardBuilder.getbuilderIsLocked()">
 			<app-playable-card-list
 				*ngIf="cardBuilder.getSelectedCard()!=undefined"

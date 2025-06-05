@@ -3,7 +3,7 @@ import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
 import { RessourceStock } from "../../interfaces/global.interface";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ActivationOption } from "../../types/project-card.type";
 import { EventFactory } from "../../factory/event factory/event-factory";
@@ -24,6 +24,11 @@ export class ProjectCardActivatedEffectService {
 	static getActivateCardEvent(card: PlayableCardModel, clientState: PlayerStateModel, activationOption:  ActivationOption): EventBaseModel[] | undefined{
 		let result: EventBaseModel[] = []
 		switch(card.cardCode){
+			//Advanced Screening Technology
+			case('3'):{
+				result.push(EventFactory.simple.scanKeep({scan:3, keep:1}, DeckQueryOptionsEnum.keepScienceOrPlant))
+				break
+			}
 			//AI Central
 			case('4'):{
 				result.push(EventFactory.simple.draw(2))
@@ -343,7 +348,7 @@ export class ProjectCardActivatedEffectService {
 			}
 			//Developed Infrastructure
 			case('21'):{
-				if(clientState.getProjectPlayedModelList({type:'blueProject'}).length>=5){
+				if(clientState.getProjectPlayedModelList({type:ProjectFilterNameEnum.blueProject}).length>=5){
 					return 5
 				}
 				return 10

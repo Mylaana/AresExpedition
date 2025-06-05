@@ -1,8 +1,8 @@
 import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { myUUID, PlayableCardType, RGB, TagType } from "../../types/global.type";
-import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter } from "../../interfaces/global.interface";
+import { myUUID, PlayableCardType, TagType } from "../../types/global.type";
+import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter,  } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel, EventPhase } from "../../models/core-game/event.model";
@@ -16,7 +16,7 @@ import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { GameParamService } from "./game-param.service";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { Utils } from "../../utils/utils";
-import { GlobalParameterNameEnum, OceanBonusEnum } from "../../enum/global.enum";
+import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventStateFactory } from "../../factory/event-state-factory.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { ProjectCardActivatedEffectService } from "../cards/project-card-activated-effect.service";
