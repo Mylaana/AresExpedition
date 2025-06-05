@@ -35,6 +35,7 @@ describe('Service - Designers - Draw Event', () => {
                 expectedEvent.keepCardNumber = expectedScanKeep.keep
                 expectedEvent.resolveEventSubType = expectedResolveType
                 expectedEvent.waiterId = expectedWaiterId
+				expectedEvent.scanKeepOptions = undefined
 
                 let event = DrawEventFactory.createScanKeepEvent(expectedResolveType, expectedScanKeep, expectedWaiterId)
 

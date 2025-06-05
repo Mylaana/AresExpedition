@@ -142,6 +142,12 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             break
         }
         case('researchPhaseResult'):
+			event.title = `Select ${event.cardSelector.selectionQuantity} cards to draw`
+            event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
+            event.cardSelector.selectionQuantityTreshold = 'equal'
+            event.refreshSelectorOnSwitch = false
+            event.waiterId = args?.waiterId
+			break
         case('selectStartingHand'):{
             event.title = 'Discard any card number to draw that many new cards.'
             event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}

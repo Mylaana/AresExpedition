@@ -6,7 +6,7 @@ import { CardBuilderOptionType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { Logger } from "../../utils/utils"
-import { GlobalParameterNameEnum } from "../../enum/global.enum"
+import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import  * as event_factory from "./event-factory"
 import { ButtonDesigner } from "../button-designer.service"
 
@@ -60,7 +60,7 @@ describe('Service - Designers - Event', () => {
                     selectionQuantity: 3,
                     selectionQuantityTreshold: 'min',
                     cardInitialState: {activable:true, selectable:true},
-                    filter: {type:'action'},
+                    filter: {type: ProjectFilterNameEnum.action},
                     stateFromParent: {selected:false}
                 }
 
@@ -187,11 +187,10 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
                 expectedEvent.cardSelector.selectionQuantityTreshold = 'equal'
                 expectedEvent.refreshSelectorOnSwitch = false
-                expectedEvent.waiterId = expectedWaiterId
+				expectedEvent.waiterId = expectedWaiterId
                 expectedArgs = {waiterId:expectedWaiterId}
 
                 let resultEvent = event_factory.EventFactory.createCardSelector(expectedSubType, expectedArgs)
-
                 expect(expectedEvent).toEqual(resultEvent)
                 expect(buttonSpy).toHaveBeenCalled()
             })
@@ -241,7 +240,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.advancedRessource = expectedRessource
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
                 expectedEvent.title = `Select a card to add ${expectedRessource.valueStock} ${expectedRessource.name}(s).`
-                expectedEvent.cardSelector.filter = {type:"stockable", stockableType:expectedRessource.name}
+                expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.stockable, stockableType:expectedRessource.name}
                 expectedEvent.cardSelector.selectionQuantity = 1
                 expectedEvent.refreshSelectorOnSwitch = false
 
@@ -289,7 +288,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.title = 'Play Green cards :'
                 expectedEvent.refreshSelectorOnSwitch = true
                 expectedEvent.button = undefined
-                expectedEvent.cardSelector.filter = {type:'development'}
+                expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.greenProject}
                 expectedEvent.cardBuilder.push(expectedBuilder)
 
 
@@ -334,7 +333,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.title = 'Play Blue or Red cards'
                 expectedEvent.refreshSelectorOnSwitch = true
                 expectedEvent.button = undefined
-                expectedEvent.cardSelector.filter = {type:'construction'}
+                expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.blueOrRedProject}
                 expectedEvent.cardBuilder.push(expectedBuilder)
                 expectedEvent.buildDiscountValue = 0
 
@@ -426,7 +425,7 @@ describe('Service - Designers - Event', () => {
 					const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
 					expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
 					expectedEvent.title = 'Activate cards'
-					expectedEvent.cardSelector.filter = {type:"action"}
+					expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.action}
 
 					let resultEvent = event_factory.EventFactory.createCardActivator(expectedSubType)
 
@@ -584,10 +583,10 @@ describe('Service - Designers - Event', () => {
                 expectedSubType = 'scanKeepQuery'
                 expectedEvent.subType = expectedSubType
                 expectedEvent.scanKeep = expectedScanKeep
+				expectedEvent.options = undefined
 
-                let event = event_factory.EventFactory.createDeckQueryEvent(expectedSubType, {scanKeep:expectedScanKeep})
-
-                expect(event).toEqual(expectedEvent)
+                let resultEvent = event_factory.EventFactory.createDeckQueryEvent(expectedSubType, {scanKeep:expectedScanKeep})
+                expect(resultEvent).toEqual(expectedEvent)
             })
             it('should create a drawQuery target Event', () => {
                 expectedSubType = 'drawQuery'
@@ -595,9 +594,9 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.drawDiscard = expectedDrawDiscard
 				expectedEvent.isCardProduction = false
 
-                let event = event_factory.EventFactory.createDeckQueryEvent(expectedSubType, {drawDiscard:expectedDrawDiscard, isCardProduction: false})
+                let resultEvent = event_factory.EventFactory.createDeckQueryEvent(expectedSubType, {drawDiscard:expectedDrawDiscard, isCardProduction: false})
 
-                expect(event).toEqual(expectedEvent)
+                expect(resultEvent).toEqual(expectedEvent)
             })
             it('should create a researchPhaseQuery target Event', () => {
                 expectedSubType = 'researchPhaseQuery'
