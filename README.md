@@ -68,8 +68,6 @@ Activation:
 Other:   
     - Need prerequisite offset mechanic   
     - Standard tech reduction mechanic   
-    - Conditionnal scan/keep (based on tag)   
-    - Conditionnal scan result (card 13)   
     - Droplist   
 
 ### Misc
