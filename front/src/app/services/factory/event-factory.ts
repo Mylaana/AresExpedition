@@ -1,12 +1,12 @@
-import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../../enum/global.enum"
-import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../../interfaces/global.interface"
-import { PlayableCardModel } from "../../../models/cards/project-card.model"
-import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase } from "../../../models/core-game/event.model"
-import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType } from "../../../types/event.type"
-import { CardBuilderOptionType } from "../../../types/global.type"
-import { BuilderType } from "../../../types/phase-card.type"
-import { Logger, Utils } from "../../../utils/utils"
-import { ButtonDesigner } from "../../../factory/button-designer.service"
+import { DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
+import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../interfaces/global.interface"
+import { PlayableCardModel } from "../../models/cards/project-card.model"
+import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector } from "../../models/core-game/event.model"
+import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
+import { CardBuilderOptionType, MinMaxEqualType } from "../../types/global.type"
+import { BuilderType } from "../../types/phase-card.type"
+import { Logger, Utils } from "../../utils/utils"
+import { ButtonDesigner } from "../../factory/button-designer.service"
 
 type CardSelectorOptions = Partial<CardSelector>
 
@@ -14,6 +14,7 @@ interface CreateEventOptionsSelector {
     cardSelector?: CardSelectorOptions
     title?: string
     waiterId?:number
+	discardOptions?:DiscardOptionsEnum
 }
 interface CreateEventOptionsTargetCard {
     advancedRessource?: AdvancedRessourceStock
@@ -41,8 +42,16 @@ interface CreateEventOptionsDeckQuery {
 function draw(drawNumber: number): EventBaseModel {
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
-function discard(discardNumber: number): EventCardSelector {
-	return EventFactory.createCardSelector("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
+function discard(discardNumber: number): EventComplexCardSelector {
+	return EventFactory.createComplexCardSelector("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
+}
+function discardOptions(discardNumber: number, treshold?: MinMaxEqualType, discardOptions?: DiscardOptionsEnum): EventComplexCardSelector {
+	return EventFactory.createComplexCardSelector("discardCards", {
+		cardSelector: {
+			selectionQuantity: discardNumber,
+			selectionQuantityTreshold: treshold??'equal'},
+		discardOptions: discardOptions
+	})
 }
 function upgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
 	return EventFactory.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
@@ -81,6 +90,7 @@ function addForestAndOxygen(quantity: number): EventBaseModel {
 const SimpleEvent = {
 	draw,
 	discard,
+	discardOptions,
 	upgradePhaseCard,
 	increaseGlobalParameter,
 	addRessource,
@@ -115,13 +125,6 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
     event.subType = subType
 
     switch(subType){
-        case('discardCards'):{
-            event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0} card(s) to discard.`
-            event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
-            event.lockSellButton = true
-            event.lockRollbackButton = true
-            break
-        }
         case('selectCardForcedSell'):{
             event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
             event.cardSelector.selectionQuantityTreshold = 'min'
@@ -144,16 +147,6 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.waiterId = args?.waiterId
             break
 		}
-		/*
-        case('scanKeepResult'):{
-            event.title = `Select ${event.cardSelector.selectionQuantity} cards to draw`
-            event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
-            event.cardSelector.selectionQuantityTreshold = 'equal'
-            event.refreshSelectorOnSwitch = false
-            event.waiterId = args?.waiterId
-            break
-        }
-			*/
         case('selectStartingHand'):{
             event.title = 'Discard any card number to draw that many new cards.'
             event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
@@ -168,6 +161,28 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.cardSelector.selectionQuantityTreshold = 'equal'
             event.cardSelector.selectionQuantity = 1
             event.refreshSelectorOnSwitch = false
+            break
+        }
+        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
+    }
+    event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+
+    return event
+}
+function createComplexCardSelector(subType:EventComplexCardSelectorSubType, args?: CreateEventOptionsSelector): EventComplexCardSelector {
+    let event = new EventComplexCardSelector
+    event.cardSelector = generateCardSelector(args?.cardSelector)
+    event.subType = subType
+
+    switch(subType){
+		case('discardCards'):{
+            event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0} card(s) to discard.`
+            event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
+            event.lockSellButton = true
+            event.lockRollbackButton = true
+			if(args?.discardOptions){
+				event.discardOptions = args.discardOptions
+			}
             break
         }
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
@@ -431,6 +446,7 @@ export const EventFactory = {
 
     createCardSelector,
     createCardSelectorRessource,
+	createComplexCardSelector,
     createCardActivator,
     createCardBuilder,
     createTargetCard,

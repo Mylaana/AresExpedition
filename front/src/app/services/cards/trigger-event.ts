@@ -1,13 +1,13 @@
-import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType } from "../../types/global.type";
-import { EventFactory } from "../designers/event factory/event-factory";
+import { EventFactory } from "../factory/event-factory";
 import { GlobalInfo } from "../global/global-info.service";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_GAINED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
-| 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED'
+| 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION'
 interface TriggerInput {
 	playedCard: PlayableCardModel,
 	increasedParameter: GlobalParameterNameEnum
@@ -16,7 +16,8 @@ interface TriggerInput {
 	ressourceAdded: AdvancedRessourceType
 	ressourceAddedValue: number
 	receivingCard: PlayableCardModel,
-	forestGained: number
+	forestGained: number,
+	discardedCard: PlayableCardModel
 }
 
 // Handlers
@@ -105,6 +106,12 @@ interface TriggerInput {
 		if(draw===0){return []}
 		return [EventFactory.simple.draw(draw)]
 	}
+	//Mars University
+	function handleTrigger_40(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
+		return [EventFactory.simple.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity)]
+	}
+
 	//Olympus Conference
 	function handleTrigger_44(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
@@ -185,6 +192,17 @@ interface TriggerInput {
 		return [EventFactory.simple.addRessourceToCardId({name:"animal", valueStock:input.forestGained}, trigger)]
 	}
 
+//ON_TRIGGER_RESOLUTION
+//Mars University
+	function handleTrigger_40_resolution(trigger: string, input: TriggerInput): EventBaseModel[] {
+		console.log('mars univ resolv')
+		let card: PlayableCardModel = input.discardedCard
+		let draw = 1
+		if(card.hasTag('plant') || card.hasTag('science')){draw ++}
+		console.log('univ:', draw)
+		return [EventFactory.simple.draw(draw)]
+	}
+
 // Main Dispatch
 const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
@@ -204,6 +222,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'24': handleTrigger_24,
 		'25': handleTrigger_25,
 		'37': handleTrigger_37,
+		'40': handleTrigger_40,
 		'44': handleTrigger_44,
 		'45': handleTrigger_45,
 		'48': handleTrigger_48,
@@ -224,6 +243,9 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 	},
 	ON_PRODUCTION_GAINED: {
 
+	},
+	ON_TRIGGER_RESOLUTION: {
+		'40': handleTrigger_40_resolution,
 	}
 };
 
@@ -236,7 +258,8 @@ function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {
 		receivingCard: input.receivingCard??new PlayableCardModel,
 		ressourceAdded: input.ressourceAdded??"science",
 		ressourceAddedValue: input.ressourceAddedValue??0,
-		forestGained: input.forestGained??0
+		forestGained: input.forestGained??0,
+		discardedCard: input.discardedCard??new PlayableCardModel
 	}
 }
 export const TriggerEffectEventFactory = {
@@ -255,8 +278,6 @@ export const TriggerEffectEventFactory = {
 		return events;
 	}
 }
-
-
 
 export const CostModCalulator = {
 	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel): number {

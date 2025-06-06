@@ -1,8 +1,8 @@
 import { DeckQueryOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
-import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventScanKeepCardSelector } from "../../models/core-game/event.model"
-import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType } from "../../types/event.type"
+import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector } from "../../models/core-game/event.model"
+import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
 import { CardBuilderOptionType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
 import { Logger } from "../../utils/utils"
@@ -14,6 +14,8 @@ interface CreateEventOptionsSelector {
     cardSelector?: CardSelectorOptions
     title?: string
     waiterId?:number,
+}
+interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	scanKeepOptions?: DeckQueryOptionsEnum
 }
 interface CreateEventOptionsTargetCard {
@@ -43,8 +45,11 @@ interface CreateEventOptionsDeckQuery {
 function draw(drawNumber: number): EventBaseModel {
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
-function discard(discardNumber: number): EventCardSelector {
-	return EventFactory.createCardSelector("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
+function discard(discardNumber: number): EventComplexCardSelector {
+	return EventFactory.createCardSelectorComplex("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
+}
+function discardOptions(options: CreateEventOptionsSelectorComplex): EventComplexCardSelector {
+	return EventFactory.createCardSelectorComplex("discardCards", options)
 }
 function upgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
 	return EventFactory.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
@@ -82,10 +87,25 @@ function scanKeep(scanKeep: ScanKeep, options?: DeckQueryOptionsEnum): EventBase
 		scanKeepOptions: options
 	})
 }
+function scanKeepResult(cardList: PlayableCardModel[], keep: number, option: DeckQueryOptionsEnum, waiterId?: number): EventComplexCardSelector {
+	return createCardSelectorComplex(
+		'scanKeepResult',
+		{
+			cardSelector:{
+				selectFrom:cardList,
+				selectionQuantity: keep,
+				selectionQuantityTreshold: 'max'
+			},
+			scanKeepOptions: option,
+			waiterId: waiterId
+		}
+	)
+}
 
 const SimpleEvent = {
 	draw,
 	discard,
+	discardOptions,
 	upgradePhaseCard,
 	increaseGlobalParameter,
 	addRessource,
@@ -94,6 +114,7 @@ const SimpleEvent = {
 	increaseResearchScanKeep,
 	deactivateTrigger,
 	scanKeep,
+	scanKeepResult,
 	addProduction,
 	addTR,
 	addForestAndOxygen
@@ -120,13 +141,6 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
     event.subType = subType
 
     switch(subType){
-        case('discardCards'):{
-            event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0} card(s) to discard.`
-            event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
-            event.lockSellButton = true
-            event.lockRollbackButton = true
-            break
-        }
         case('selectCardForcedSell'):{
             event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
             event.cardSelector.selectionQuantityTreshold = 'min'
@@ -170,10 +184,34 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
 
     return event
 }
-function createScanKeepResult(cardList: PlayableCardModel[], keep: number, options?: DeckQueryOptionsEnum, waiter?: number): EventBaseModel {
+function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, args?:CreateEventOptionsSelectorComplex): EventComplexCardSelector {
+	switch(subType){
+		case('discardCards'):{
+			return createDiscardOptionsResult(args)
+		}
+		case('scanKeepResult'):{
+			return createScanKeepResult(
+				args?.cardSelector?.selectFrom??[],
+				args?.cardSelector?.selectionQuantity??0,
+			 )
+		}
+	}
+}
+function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): EventComplexCardSelector {
+	let event = new EventComplexCardSelector
+    event.cardSelector = generateCardSelector(args?.cardSelector)
+    event.subType = 'discardCards'
+	event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0} card(s) to discard.`
+	event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
+	event.lockSellButton = true
+	event.lockRollbackButton = true
+
+	return event
+}
+function createScanKeepResult(cardList: PlayableCardModel[], keep: number, options?: DeckQueryOptionsEnum, waiter?: number): EventComplexCardSelector {
 	switch(options){
 		case(DeckQueryOptionsEnum.greenCardGivesMegacreditOtherDraw):{
-			let event = new EventScanKeepCardSelector
+			let event = new EventComplexCardSelector
             event.title = `Gain 1MC if card is green or draw card if Red/Blue.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
@@ -182,12 +220,12 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
-			event.options = options
+			event.scanKeepOptions = options
 			event.waiterId = waiter
 			return event
 		}
 		case(DeckQueryOptionsEnum.keepEvent):{
-			let event = new EventScanKeepCardSelector
+			let event = new EventComplexCardSelector
             event.title = `Select a card with Event tag.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
@@ -196,14 +234,14 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
-			event.options = options
+			event.scanKeepOptions = options
 			event.cardSelector.filter = {type: ProjectFilterNameEnum.hasTagEvent}
 			event.waiterId = waiter
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
 		}
 		case(DeckQueryOptionsEnum.keepGreen):{
-			let event = new EventScanKeepCardSelector
+			let event = new EventComplexCardSelector
             event.title = `Select a green card.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
@@ -212,14 +250,14 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
-			event.options = options
+			event.scanKeepOptions = options
 			event.cardSelector.filter = {type: ProjectFilterNameEnum.greenProject}
 			event.waiterId = waiter
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
 		}
 		case(DeckQueryOptionsEnum.keepScienceOrPlant):{
-			let event = new EventScanKeepCardSelector
+			let event = new EventComplexCardSelector
             event.title = `Select a card with a Plant or Science tag.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
@@ -228,7 +266,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
-			event.options = options
+			event.scanKeepOptions = options
 			event.cardSelector.filter = {type: ProjectFilterNameEnum.hasTagPlantOrScience}
 			event.waiterId = waiter
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
@@ -236,7 +274,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 		}
 		default:{
 			console.error('UNHANDLED SCANKEEP OPTION')
-			return new EventCardSelector
+			return new EventComplexCardSelector
 		}
 	}
 }
@@ -495,6 +533,7 @@ export const EventFactory = {
 
     createCardSelector,
     createCardSelectorRessource,
+	createCardSelectorComplex,
     createCardActivator,
     createCardBuilder,
     createTargetCard,
@@ -502,7 +541,6 @@ export const EventFactory = {
     createDeckQueryEvent,
     createWaiter,
     createPhase,
-	createScanKeepResult
 }
 
 export const __testOnly__ = {

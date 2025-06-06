@@ -32,3 +32,6 @@ export enum ProjectFilterNameEnum {
 	hasTagEvent = 'hasTagEvent',
 	hasTagPlantOrScience = 'hasTagPlantOrScience'
 }
+export enum DiscardOptionsEnum {
+	marsUniversity = 'marsUniversity'
+}

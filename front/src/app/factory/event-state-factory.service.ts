@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
 import { EventStateDTO } from "../interfaces/dto/event-state-dto.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
-import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from "../models/core-game/event.model";
+import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector, EventComplexCardSelector } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event factory/event-factory";
@@ -54,6 +54,11 @@ export class EventStateFactory{
 		}
 	}
 	private static eventCardSelectorToJson(event: EventCardSelector, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
+		switch(event.subType){
+			default:{return}
+		}
+	}
+	private static eventComplexCardSelectorToJson(event: EventComplexCardSelector, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
 		switch(event.subType){
 			case('discardCards'):{
 				return {
@@ -111,7 +116,7 @@ export class EventStateFactory{
 					break
 				}
 				case(EventStateTypeEnum.discard):{
-					newEvents.push(EventFactory.createCardSelector('discardCards', {cardSelector:{selectionQuantity: state.v}}))
+					newEvents.push(EventFactory.simple.discardOptions({cardSelector:{selectionQuantity: state.v}}))
 					break
 				}
 				case(EventStateTypeEnum.researchCardsQueried):{
@@ -122,7 +127,7 @@ export class EventStateFactory{
 					break
 				}
 				case(EventStateTypeEnum.scanKeepQueried):{
-					newEvents.push(EventFactory.createScanKeepResult(
+					newEvents.push(EventFactory.simple.scanKeepResult(
 						this.projectCardInfoService.getProjectCardList(state.v['cards']),
 						state.v['keep'],
 						state.v['options']))

@@ -38,7 +38,6 @@ Backend: Junit
 ### CI
 - GitHub Actions   
 - Automated test on branch push   
-- If tests are successfull, create a PR and automerge to main branch (to be added).   
 
 ### CD (to be added)
 - Triggerred when new code is merged on main branch   
@@ -50,6 +49,8 @@ Events related to card played not saved in eventstate (see a card with oceanflip
 Double activation count being ignored by multiple activation option cards (18/27/43)   
 Corpo selection blocking the game if refreshed after corp selected and before subsequent event resolution if refreshed (eg: DevTechs)   
 card status position bugged (see dev techs)   
+drawQueue not purged after researchResult   
+All played cards displaying vp   
 
 ## Must have for v1 :
 ### Refactoring
@@ -90,13 +91,9 @@ Add backend REST requests content validation
 
 ## Nice to have for v1
 ### Non-Critical Bug :
-Expression has changed Error after ocean bonus applied on reload   
-Expression has changed Error after production applied   
 Escape keyboard not exiting card builder selection   
 Websocket connection error while not in the game   
 Project card: layers superposition creating visual bug on edges   
-CardStatus popup not always getting its font color and size properly   
-Builder: after building first card when switching in and out of sell menu, selecting a card on second builder adds the first card built to the selection list   
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

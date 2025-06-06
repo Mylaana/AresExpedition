@@ -1,5 +1,5 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
-import { AdvancedRessourceType } from "../../types/global.type"
+import { AdvancedRessourceType, TagType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, PlayedCardStock} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import {  TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
@@ -133,10 +133,10 @@ export class PlayableCardModel{
 				return this.cardType === 'blueProject'
 			}
 			case(ProjectFilterNameEnum.hasTagEvent):{
-				return this.hasTag(Utils.toTagId('event'))
+				return this.hasTag('event')
 			}
 			case(ProjectFilterNameEnum.hasTagPlantOrScience):{
-				return this.hasTag(Utils.toTagId('science')) || this.hasTag(Utils.toTagId('plant'))
+				return this.hasTag('science') || this.hasTag('plant')
 			}
         }
         return false
@@ -150,13 +150,16 @@ export class PlayableCardModel{
 	hasTrigger(): boolean {
 		return this.hasSummaryType('trigger')
 	}
-	private hasTag(tagId: number): boolean {
+	hasTagId(tagId: number): boolean {
 		for(let t of this.tagsId){
 			if(t===tagId){
 				return true
 			}
 		}
 		return false
+	}
+	hasTag(tag: TagType): boolean {
+		return this.hasTagId(Utils.toTagId(tag))
 	}
 	toDTO(): PlayedCardStock {
 		return {[this.id]: this.stock??[]}
