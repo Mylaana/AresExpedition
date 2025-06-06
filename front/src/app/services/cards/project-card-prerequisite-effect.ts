@@ -387,6 +387,10 @@ export const CardConditionChecker = {
 					}
 				}
 			}
+			//Redrafted contracts
+			case('49'):{
+				return Checker.isHandCurrentSizeOk(1,'min',clientState)
+			}
 			//Regolith Eaters
 			case('50'):{
 				switch(activationOption){

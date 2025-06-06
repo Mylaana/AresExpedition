@@ -313,6 +313,13 @@ export class EventHandler {
 						)
 						break
 					}
+					case(DiscardOptionsEnum.redraftedContracts):{
+						this.gameStateService.addEventQueue(
+							EventFactory.simple.draw(event.cardSelector.selectedList.length),
+							'first'
+						)
+						break
+					}
 				}
 				break
 			}

@@ -1,9 +1,9 @@
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
+import { DeckQueryOptionsEnum, DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector } from "../../models/core-game/event.model"
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
-import { CardBuilderOptionType } from "../../types/global.type"
+import { CardBuilderOptionType, MinMaxEqualType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
 import { Logger } from "../../utils/utils"
 import { ButtonDesigner } from "../button-designer.service"
@@ -16,7 +16,8 @@ interface CreateEventOptionsSelector {
     waiterId?:number,
 }
 interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
-	scanKeepOptions?: DeckQueryOptionsEnum
+	scanKeepOptions?: DeckQueryOptionsEnum,
+	discardOptions?: DiscardOptionsEnum
 }
 interface CreateEventOptionsTargetCard {
     advancedRessource?: AdvancedRessourceStock
@@ -48,8 +49,14 @@ function draw(drawNumber: number): EventBaseModel {
 function discard(discardNumber: number): EventComplexCardSelector {
 	return EventFactory.createCardSelectorComplex("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
 }
-function discardOptions(options: CreateEventOptionsSelectorComplex): EventComplexCardSelector {
-	return EventFactory.createCardSelectorComplex("discardCards", options)
+function discardOptions(discardNumber: number, treshold: MinMaxEqualType, discardOptions: DiscardOptionsEnum): EventComplexCardSelector {
+	return EventFactory.createCardSelectorComplex("discardCards", {
+		cardSelector: {
+			selectionQuantity: discardNumber,
+			selectionQuantityTreshold: treshold
+		},
+		discardOptions: discardOptions
+	})
 }
 function upgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
 	return EventFactory.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
@@ -205,6 +212,10 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
 	event.lockSellButton = true
 	event.lockRollbackButton = true
+	event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+	if(args?.discardOptions){
+		event.discardOptions = args.discardOptions
+	}
 
 	return event
 }

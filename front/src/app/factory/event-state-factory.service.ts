@@ -116,7 +116,7 @@ export class EventStateFactory{
 					break
 				}
 				case(EventStateTypeEnum.discard):{
-					newEvents.push(EventFactory.simple.discardOptions({cardSelector:{selectionQuantity: state.v}}))
+					newEvents.push(EventFactory.simple.discard( state.v))
 					break
 				}
 				case(EventStateTypeEnum.researchCardsQueried):{

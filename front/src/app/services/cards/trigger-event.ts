@@ -1,9 +1,9 @@
 import { DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { EventFactory } from "../../factory/event factory/event-factory";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AdvancedRessourceType } from "../../types/global.type";
-import { EventFactory } from "../factory/event-factory";
 import { GlobalInfo } from "../global/global-info.service";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_GAINED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'

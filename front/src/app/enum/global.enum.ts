@@ -33,5 +33,6 @@ export enum ProjectFilterNameEnum {
 	hasTagPlantOrScience = 'hasTagPlantOrScience'
 }
 export enum DiscardOptionsEnum {
-	marsUniversity = 'marsUniversity'
+	marsUniversity = 'marsUniversity',
+	redraftedContracts = 'redraftedContracts'
 }
