@@ -395,7 +395,7 @@ export class EventHandler {
 		switch(event.subType){
 			case('endOfPhase'):{
 				this.gameStateService.setClientReady(true)
-				this.rxStompService.publishPlayerState(this.gameStateService.getClientState())
+				this.gameStateService.endOfPhase()
 				break
 			}
 			case('buildCard'):{

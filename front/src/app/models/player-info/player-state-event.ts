@@ -28,7 +28,7 @@ export class PlayerEventStateModel {
 		let result: EventStateDTO[] = []
 		for(let event of eventQueue){
 			let dto = event.toJson()
-			if(dto){
+			if(dto && event.finalized != true){
 				result.push(dto)
 			}
 		}

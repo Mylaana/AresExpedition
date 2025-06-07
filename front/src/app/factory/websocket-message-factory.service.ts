@@ -58,9 +58,9 @@ export class WebsocketQueryMessageFactory{
         let query: WsSelectedPhaseQuery = {phase: phase}
         return this.generatePlayerMessage(MessageContentQueryEnum.selectedPhase, query)
     }
-    public static createClientPlayerStatePush(state: PlayerStateModel): PlayerMessage {
-        let query: PlayerStateDTO = state.toJson() //{secretState: state.toSecretDTO(), publicState: state.toPublicDTO()}
-        return this.generatePlayerMessage(MessageContentQueryEnum.playerStatePush, query)
+    public static createClientPlayerStatePush(dto: PlayerStateDTO): PlayerMessage {
+        //let query: PlayerStateDTO = state.toJson() //{secretState: state.toSecretDTO(), publicState: state.toPublicDTO()}
+        return this.generatePlayerMessage(MessageContentQueryEnum.playerStatePush, dto)
     }
 	public static createConnectionQuery(): PlayerMessage {
 		return this.generatePlayerMessage(MessageContentQueryEnum.playerConnect)

@@ -148,7 +148,6 @@ export class WebsocketHandler {
 		this.gameStateService.setGameLoaded()
 	}
 	private handleMessageSelectStartingHand(content: WsGameState){
-		console.log('WS SELECT STARTING HAND')
 		this.gameStateService.reset()
 		this.gameStateService.clearEventQueue()
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
@@ -156,7 +155,6 @@ export class WebsocketHandler {
 		this.gameStateService.setSelectStartingHandEvents()
 	}
 	private handleMessageSelectCorporation(content: WsGameState){
-		console.log('WS SELECT CORP')
 		this.gameStateService.reset()
 		this.gameStateService.clearEventQueue()
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))

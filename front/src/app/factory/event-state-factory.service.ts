@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
 import { EventStateDTO } from "../interfaces/dto/event-state-dto.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
-import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector, EventComplexCardSelector } from "../models/core-game/event.model";
+import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector, EventComplexCardSelector, EventDeckQuery } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event factory/event-factory";
@@ -24,6 +24,7 @@ export class EventStateFactory{
 			case('cardSelectorCardBuilder'):{return this.eventBuilderToJson(event as EventCardBuilder, eventStateOperation)}
 			case('cardActivator'):{return this.eventActivatorToJson(event as EventCardActivator, eventStateOperation)}
 			case('cardSelector'):{return this.eventCardSelectorToJson(event as EventCardSelector, eventStateOperation)}
+			case('deck'):{return this.eventDeckQueryToJson(event as EventDeckQuery, eventStateOperation)}
 			default:{return}
 		}
 	}
@@ -56,6 +57,24 @@ export class EventStateFactory{
 	private static eventCardSelectorToJson(event: EventCardSelector, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
 		switch(event.subType){
 			default:{return}
+		}
+	}
+	private static eventDeckQueryToJson(event: EventDeckQuery, eventStateOperation: EventStateOriginEnum): EventStateDTO | undefined {
+		console.log(event)
+		switch(event.subType){
+			case('scanKeepQuery'):{
+				return {
+					o: eventStateOperation,
+					t: EventStateTypeEnum.scanKeepUnQueried,
+					v: {
+						'scanKeep': event.scanKeep,
+						'options': event.options
+					}
+				}
+			}
+			default:{
+				return
+			}
 		}
 	}
 	private static eventComplexCardSelectorToJson(event: EventComplexCardSelector, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
@@ -133,10 +152,18 @@ export class EventStateFactory{
 						state.v['options']))
 					break
 				}
+				case(EventStateTypeEnum.scanKeepUnQueried):{
+					newEvents.push(EventFactory.createDeckQueryEvent('scanKeepQuery', {
+						scanKeep: state.v['scanKeep'],
+						scanKeepOptions: state.v['options']
+					}))
+					break
+				}
 				default:{treated = false}
 			}
 			if(treated){eventStateList.splice(i, 1)}
 		}
+		console.log(eventStateList)
 		return newEvents
 	}
 }
