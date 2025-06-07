@@ -179,6 +179,7 @@ export class GameState{
         return this.clientState.getValue()
     }
 	getClientStateDTO(): PlayerStateDTO {
+		console.log(this.eventQueue.getValue())
 		return this.getClientState().toJson(this.eventQueue.getValue())
 	}
 	/*
@@ -418,7 +419,10 @@ export class GameState{
             events = events.concat(playedCardEvents)
         }
         if(events.length===0){return}
-        this.addEventQueue(events, 'first')
+        this.addEventQueue(events, cardType==='project'?'first':'last')
+		if(cardType==='corporation'){
+			console.log(this.eventQueue.getValue())
+		}
 	}
     setClientTriggerAsInactive(trigger: string): void {
         let newState: PlayerStateModel = this.getClientState()
@@ -504,6 +508,7 @@ export class GameState{
 			event.scanKeepOptions = wsDrawResult.options
 			event.keepCardNumber = wsDrawResult.keep
             eventFound = true
+			console.log(event)
             this.cleanAndNextDrawQueue()
             break
         }
@@ -576,7 +581,7 @@ export class GameState{
 				this.updateClientState(clientState)
 			}
 		}
-		this.rxStompService.publishPlayerState(clientState)
+		this.rxStompService.publishPlayerState(clientState.toJson())
 		console.log('newGame state loaded:', clientState)
 	}
 	public setSelectStartingHandEvents(): void {
@@ -736,6 +741,7 @@ export class GameState{
 		if(newEvents?.length===0){return}
 		this.addEventQueue(newEvents,'first')
     }
+	/*
 	public applyResearchResult(result: WsDrawResult){
 		this.addEventQueue(EventFactory.createCardSelector('researchPhaseResult', {cardSelector:{
 			selectFrom: this.projectCardService.getProjectCardList(result.cardIdList),
@@ -755,5 +761,9 @@ export class GameState{
 		if(newEvent){
 			this.addEventQueue(newEvent, 'first')
 		}
+	}
+		*/
+	endOfPhase() {
+		this.rxStompService.publishPlayerState(this.getClientState().toJson(this.eventQueue.getValue()))
 	}
 }

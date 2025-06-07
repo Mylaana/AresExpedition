@@ -49,8 +49,8 @@
 						[cardStock]="projectCard.stock">
 					</app-card-stock>
 					<app-card-vp
-						*ngIf="projectCard.vpNumber"
-						[vpNumber]="projectCard.vpNumber"
+						*ngIf="projectCard.vpNumber!='' || projectCard.scalingVp===true"
+						[vpNumber]="projectCard.vpNumber??''"
 						[vpDescription]="projectCard.vpText">
 					</app-card-vp>
 				</div>
@@ -64,7 +64,6 @@
 						[effectSummaryType]="effect.effectSummaryType">
 					</app-card-effect>
 				</ng-container>
-				<app-card-status [cardId]="projectCard.id" [cardCode]="projectCard.cardCode" [cardStatus]="projectCard.status"  [hovered]="_hovered"></app-card-status>
 			</div>
 		</button>
 		<div class="wrapper-left-layout">
@@ -72,6 +71,7 @@
 			<div class="top-left-layout" [ngClass]="projectCard.cardType"></div>
 		</div>
 		<app-card-background [cardType]="projectCard.cardType"></app-card-background>
+		<app-card-status [cardId]="projectCard.id" [cardCode]="projectCard.cardCode" [cardStatus]="projectCard.status"  [hovered]="_hovered"></app-card-status>
 	</div>
 	<app-card-activation-list
 		*ngIf="state.isActivable()"

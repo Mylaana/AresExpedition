@@ -178,17 +178,13 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this._maximumActivation = (this.projectCard.activated>=2) || (this.projectCard.activated>=1 && this.activableTwice === false)
 	}
 	public isDisabled(): boolean{
-		if(this.filter){
-			return !this.projectCard.isFilterOk(this.filter)
-		}
-		if(this.state.isIgnoreCost()){return false}
-		if (this.state.isBuildable()===false && this.state.isIgnoreCost()!=false && this.state.isActivable()===false && this.parentListSubType!='research'){
+		if(this.filter && !this.projectCard.isFilterOk(this.filter)){return true}
+		if (this.state.isBuildable()===false
+			&& this.state.isIgnoreCost()!=false
+			&& this.parentListType==='builderSelector'){
 			return true
 		}
 		if(this.state.isActivable()===true && this._maximumActivation){
-			return true
-		}
-		if(this.state.isBuildable()===false && this.parentListType==='builderSelector'){
 			return true
 		}
 		return false

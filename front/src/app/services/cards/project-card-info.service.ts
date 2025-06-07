@@ -94,7 +94,7 @@ export class ProjectCardInfoService {
 				status: jsonCard.status,
 				effectSummaryOption: jsonCard.effectSummaryOption,
 				effectSummaryOption2: jsonCard.effectSummaryOption2,
-				scalingVp: Boolean(jsonCard.vpScaling)
+				scalingVp: Boolean(Number(jsonCard.vpScaling))
 			}
 			let cardModel = PlayableCardModel.fromInterface(card)
 			if(card.stockable){

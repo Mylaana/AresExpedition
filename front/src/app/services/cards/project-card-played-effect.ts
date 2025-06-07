@@ -944,7 +944,7 @@ function getPlayed(cardCode: string, clientstate: PlayerStateModel): EventBaseMo
 		}
 		//DevTechs
 		case('CP03'):{
-			result.push(EventFactory.simple.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.keepGreen))
+			result.push(EventFactory.simple.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.DevTechs))
 			break
 		}
 		//Zetasel

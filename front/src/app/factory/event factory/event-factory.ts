@@ -200,6 +200,8 @@ function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, arg
 			return createScanKeepResult(
 				args?.cardSelector?.selectFrom??[],
 				args?.cardSelector?.selectionQuantity??0,
+				args?.scanKeepOptions,
+				args?.waiterId
 			 )
 		}
 	}
@@ -251,7 +253,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
 		}
-		case(DeckQueryOptionsEnum.keepGreen):{
+		case(DeckQueryOptionsEnum.DevTechs):{
 			let event = new EventComplexCardSelector
             event.title = `Select a green card.`
             event.refreshSelectorOnSwitch = false
