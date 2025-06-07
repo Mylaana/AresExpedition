@@ -1,4 +1,4 @@
-import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, PlayerPhase, OceanBonus, RessourceStock, ProjectFilter } from "../../interfaces/global.interface";
+import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, PlayerPhase, OceanBonus, RessourceStock, ProjectFilter, GlobalParameterOffset } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
@@ -191,6 +191,7 @@ export class PlayerStateModel {
 	hasProjectPlayedOfFilterType(filter: ProjectFilter): boolean {return this.projectCardState.hasProjectPlayedOfFilterType(filter)}
 	getProjectPlayedStock(cardCode: string): AdvancedRessourceStock[] {return this.projectCardState.getProjectPlayedStock(cardCode)}
 	getEventQueueState(): EventStateDTO[] {return this.eventState.eventQueueState}
+	setPrerequisiteOffset(offset: GlobalParameterOffset | GlobalParameterOffset[]){this.projectCardState.setPrerequisiteOffset(offset)}
 
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
