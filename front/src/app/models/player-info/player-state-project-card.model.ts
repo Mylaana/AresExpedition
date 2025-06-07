@@ -39,6 +39,9 @@ export class PlayerProjectCardStateModel {
 
 		this.loadPlayedCardsFromJson(dto.cp)
 		this.triggers = TriggerState.fromJson(dto.t)
+		this.prerequisiteOffset = new Map<GlobalParameterNameEnum, number>(
+			Object.entries(dto.o).map(([key, value]) => [key as GlobalParameterNameEnum, value])
+		)
 	}
 
     playCard(card: PlayableCardModel): void {
@@ -178,7 +181,8 @@ export class PlayerProjectCardStateModel {
 			hd: this.handDiscard,
 			cp: this.projectCardPlayedStockToJson(),
 			t: this.triggers.toJson(),
-			hms: this.handMaximumSize
+			hms: this.handMaximumSize,
+			o: this.prerequisiteOffsetToJson()
 		}
 	}
 	private projectCardPlayedStockToJson(): PlayedCardStock[] {
@@ -188,6 +192,10 @@ export class PlayerProjectCardStateModel {
 		}
 
 		return result
+	}
+	private prerequisiteOffsetToJson(): {[key: string]: number} {
+		let dto: {[key: string]: number} = Object.fromEntries(this.prerequisiteOffset)
+		return dto
 	}
 	newGame(dto: PlayerProjectCardStateDTO): void {
 		this.hand = dto.h
@@ -239,7 +247,8 @@ export class PlayerProjectCardStateModel {
 				hd: [],
 				hms: GAME_HAND_MAXIMUM_SIZE,
 				cp: [],
-				t: {a: [], p: []}
+				t: {a: [], p: []},
+				o: {}
 			}
 		)
 	}
