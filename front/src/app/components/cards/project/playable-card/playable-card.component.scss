@@ -184,3 +184,10 @@ app-card-starting-megacredits{
 	width: 25%;
 	height: 100%;
 }
+app-card-status {
+	position: absolute;
+	top: calc(100% - 12px);
+	@media (max-width:1919px) {
+		top: calc(100% - 10px);
+	}
+}
