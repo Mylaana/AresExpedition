@@ -49,8 +49,8 @@
 						[cardStock]="projectCard.stock">
 					</app-card-stock>
 					<app-card-vp
-						*ngIf="projectCard.vpNumber"
-						[vpNumber]="projectCard.vpNumber"
+						*ngIf="projectCard.vpNumber!='' || projectCard.scalingVp===true"
+						[vpNumber]="projectCard.vpNumber??''"
 						[vpDescription]="projectCard.vpText">
 					</app-card-vp>
 				</div>

@@ -50,7 +50,6 @@ Double activation count being ignored by multiple activation option cards (18/27
 Corpo selection blocking the game if refreshed after corp selected and before subsequent event resolution if refreshed (eg: DevTechs)   
 card status position bugged (see dev techs)   
 drawQueue not purged after researchResult   
-All played cards displaying vp   
 
 ## Must have for v1 :
 ### Refactoring
