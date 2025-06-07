@@ -1,6 +1,7 @@
 package com.ares_expedition.model.player_state.subclass;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class PlayerProjectCardState {
     private List<Map<Integer, Object>> cardPlayed = new ArrayList<>();
     private TriggerState triggers = new TriggerState();
     private Integer handMaximumSize = 10;
+    private Map<String, Integer> prerequisiteOffset = new HashMap<>();
 
     public PlayerProjectCardState() {
     }
@@ -25,6 +27,7 @@ public class PlayerProjectCardState {
         this.cardPlayed = dto.getCardPlayed();
         this.triggers = TriggerState.fromJson(dto.getTriggers());
         this.handMaximumSize = dto.getHandMaximumSize();
+        this.prerequisiteOffset = dto.getPrerequisiteOffset();
     }
 
     public List<Integer> getHand() {
@@ -81,5 +84,13 @@ public class PlayerProjectCardState {
 
     public void setCardPlayed(List<Map<Integer, Object>> cardPlayed) {
         this.cardPlayed = cardPlayed;
+    }
+
+    public Map<String, Integer> getPrerequisiteOffset() {
+        return prerequisiteOffset;
+    }
+
+    public void setPrerequisiteOffset(Map<String, Integer> prerequisiteOffset) {
+        this.prerequisiteOffset = prerequisiteOffset;
     }   
 }

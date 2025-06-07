@@ -1,6 +1,7 @@
 package com.ares_expedition.dto.websocket.content.player_state.subclass;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,8 @@ public class PlayerProjectCardStateDTO {
     private TriggerStateDTO triggers = new TriggerStateDTO();
     @JsonProperty("hms")
     private Integer handMaximumSize;
+    @JsonProperty("o")
+    private Map<String, Integer> prerequisiteOffset = new HashMap<>();
 
     PlayerProjectCardStateDTO() {
     }
@@ -34,6 +37,7 @@ public class PlayerProjectCardStateDTO {
         this.triggers = state.getTriggers().toJson();
         this.handMaximumSize = state.getHandMaximumSize();
         this.cardPlayed = state.getCardPlayed();
+        this.prerequisiteOffset = state.getPrerequisiteOffset();
     }
 
     public List<Integer> getHand() {
@@ -90,5 +94,13 @@ public class PlayerProjectCardStateDTO {
 
     public void setCardPlayed(List<Map<Integer, Object>> cardPlayed) {
         this.cardPlayed = cardPlayed;
+    }
+
+    public Map<String, Integer> getPrerequisiteOffset() {
+        return prerequisiteOffset;
+    }
+
+    public void setPrerequisiteOffset(Map<String, Integer> prerequisiteOffset) {
+        this.prerequisiteOffset = prerequisiteOffset;
     }
 }

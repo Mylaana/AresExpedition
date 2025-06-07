@@ -51,6 +51,7 @@ Corpo selection blocking the game if refreshed after corp selected and before su
 card status position bugged (see dev techs)   
 drawQueue not purged after researchResult   
 All played cards displaying vp   
+builder: Not enough MC still displays cards enabled   
 
 ## Must have for v1 :
 ### Refactoring
