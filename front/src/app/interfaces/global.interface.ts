@@ -111,3 +111,7 @@ export interface OceanBonus {
 	plant: number
 	card: number
 }
+export interface GlobalParameterOffset {
+	name: GlobalParameterNameEnum
+	offset: number
+}

@@ -14,6 +14,15 @@ import { CostModCalulator, TriggerEffectEventFactory } from "./trigger-event";
 function getPlayed(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 	let result: EventBaseModel[] = []
 	switch(cardCode){
+		//Adaptation Technology
+		case('1'):{
+			clientstate.setPrerequisiteOffset([
+				{name: GlobalParameterNameEnum.infrastructure, offset:1},
+				{name: GlobalParameterNameEnum.oxygen, offset:1},
+				{name: GlobalParameterNameEnum.temperature, offset:1}
+			])
+			break
+		}
 		//Advanced Alloys
 		case('2'):{
 			clientstate.increaseProductionModValue('steel')
@@ -900,6 +909,16 @@ function getPlayed(cardCode: string, clientstate: PlayerStateModel): EventBaseMo
 		//Interplanetary Cinematics
 		case('C4'):{
 			result.push(EventFactory.simple.addProduction({name:'steel', valueStock:1}))
+			break
+		}
+		//Inventrix
+		case('C5'):{
+			clientstate.setPrerequisiteOffset([
+				{name: GlobalParameterNameEnum.infrastructure, offset:1},
+				{name: GlobalParameterNameEnum.oxygen, offset:1},
+				{name: GlobalParameterNameEnum.temperature, offset:1}
+			])
+			result.push(EventFactory.simple.draw(3))
 			break
 		}
 		//Phobolog

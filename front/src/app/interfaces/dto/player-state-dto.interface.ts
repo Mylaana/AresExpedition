@@ -40,6 +40,7 @@ export interface PlayerProjectCardStateDTO {
 	hd: number[],
 	cp: PlayedCardStock[]
 	t: TriggerStateDTO
+	o: {[key: string]: number}
 	hms: number
 }
 export interface PlayerPhaseCardStateDTO {

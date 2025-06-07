@@ -4,6 +4,23 @@ import { PlayerStateModel } from "../models/player-info/player-state.model"
 import { RessourceType, MinMaxEqualType, TagType } from "../types/global.type"
 import { Utils } from "./utils"
 
+const minIndex = 0
+const maxIndex = 5
+const parameterColorIndexOffset : Map<number, GlobalParameterColorEnum> = new Map([
+	[0, GlobalParameterColorEnum.purple],
+	[1, GlobalParameterColorEnum.purple],
+	[2, GlobalParameterColorEnum.red],
+	[3, GlobalParameterColorEnum.yellow],
+	[4, GlobalParameterColorEnum.white],
+	[5, GlobalParameterColorEnum.white],
+])
+const parameterColorIndex : Map<GlobalParameterColorEnum, number> = new Map([
+	[GlobalParameterColorEnum.purple, 1],
+	[GlobalParameterColorEnum.red, 2],
+	[GlobalParameterColorEnum.yellow, 3],
+	[GlobalParameterColorEnum.white, 4],
+])
+
 function isRessourceOk(ressource: RessourceType, quantity: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
     let check = clientState.getRessourceInfoFromType(ressource)
     if(!check){return false}
@@ -17,34 +34,26 @@ function isTagOk(tagType: TagType, requiredTagNumber: number, treshold: MinMaxEq
     }
     return false
 }
-function isGlobalParameterOk(parameter: Extract<GlobalParameterNameEnum, GlobalParameterNameEnum.infrastructure | GlobalParameterNameEnum.oxygen | GlobalParameterNameEnum.temperature>, color: GlobalParameterColorEnum, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
-    const colorList: GlobalParameterColorEnum[] = [GlobalParameterColorEnum.purple, GlobalParameterColorEnum.red, GlobalParameterColorEnum.yellow, GlobalParameterColorEnum.white]
-    let currentColor = clientState.getGlobalParameterColorAtPhaseBeginning(parameter)
-    if(treshold==="equal"){
-        return color===currentColor
-    }
-    let authorizedColor: GlobalParameterColorEnum[] = []
-    let addToList: boolean
-    switch(treshold){
-        case('min'):{
-            //starts false then goes true
-            addToList = false
-            break
-        }
-        case('max'):{
-            //starts true then goes false
-            addToList = true
-            break
-        }
-    }
-    for(let c of colorList){
-        if(color===c&&treshold==='min'){addToList=addToList===false}
-        if(addToList){
-            authorizedColor.push(c)
-        }
-        if(color===c&&treshold==='max'){addToList=addToList===false}
-    }
-    return authorizedColor.includes(currentColor)
+function isGlobalParameterOk(parameter: Extract<GlobalParameterNameEnum, GlobalParameterNameEnum.infrastructure | GlobalParameterNameEnum.oxygen | GlobalParameterNameEnum.temperature>, color: GlobalParameterColorEnum, treshold: MinMaxEqualType, clientState: PlayerStateModel, offset?: number): boolean {
+	let currentIndex = parameterColorIndex.get(clientState.getGlobalParameterColorAtPhaseBeginning(parameter))
+	let colorToTestIndex: number | undefined = parameterColorIndex.get(color)
+	if(!colorToTestIndex || !currentIndex){return false}
+
+	if(!offset){
+		offset = clientState.getPrerequisiteOffset(parameter)
+	}
+
+	switch(treshold){
+		case("equal"):{
+			return currentIndex >= (colorToTestIndex - offset) && currentIndex <= (colorToTestIndex + offset)
+		}
+		case('min'):{
+			return currentIndex >= (colorToTestIndex - offset)
+		}
+		case('max'):{
+			return currentIndex <= (colorToTestIndex + offset)
+		}
+	}
 }
 function isOceanOk(oceanFlippedNumber: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
     let currentOcean = clientState.getOceanFlippedNumberAtPhaseBeginning()

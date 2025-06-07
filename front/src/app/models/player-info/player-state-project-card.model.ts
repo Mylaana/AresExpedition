@@ -1,7 +1,7 @@
 import { Injector } from "@angular/core"
 import { GAME_HAND_MAXIMUM_SIZE } from "../../global/global-const"
 import { PlayerProjectCardStateDTO } from "../../interfaces/dto/player-state-dto.interface"
-import { AdvancedRessourceStock, ProjectFilter } from "../../interfaces/global.interface"
+import { AdvancedRessourceStock, GlobalParameterOffset, ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
 import { ProjectCardInitializeService } from "../../services/cards/project-card-initialize.service"
 import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type"
@@ -9,6 +9,8 @@ import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface"
+import { GlobalParameterNameEnum } from "../../enum/global.enum"
+import { map } from "rxjs"
 
 export class PlayerProjectCardStateModel {
     private hand: number[] = []
@@ -23,6 +25,8 @@ export class PlayerProjectCardStateModel {
 
 	private cardInfoService: ProjectCardInfoService
 	private cardInitializeService: ProjectCardInitializeService
+	private prerequisiteOffset: Map<GlobalParameterNameEnum, number> = new Map
+
 
     constructor(private injector: Injector, dto: PlayerProjectCardStateDTO,
 	){
@@ -35,6 +39,9 @@ export class PlayerProjectCardStateModel {
 
 		this.loadPlayedCardsFromJson(dto.cp)
 		this.triggers = TriggerState.fromJson(dto.t)
+		this.prerequisiteOffset = new Map<GlobalParameterNameEnum, number>(
+			Object.entries(dto.o).map(([key, value]) => [key as GlobalParameterNameEnum, value])
+		)
 	}
 
     playCard(card: PlayableCardModel): void {
@@ -105,6 +112,19 @@ export class PlayerProjectCardStateModel {
     getProjectHandIdList(filter?: ProjectFilter): number[] {return this.filterCardIdList(this.hand, filter)}
 	getCorporationHandIdList(): number[] {return this.handCorporation}
 
+	setPrerequisiteOffset(offset: GlobalParameterOffset | GlobalParameterOffset[]) {
+		let offsets: GlobalParameterOffset[] = Utils.toArray(offset)
+		for(let newOffset of offsets){
+			let currentOffset = this.prerequisiteOffset.get(newOffset.name)
+			if(!currentOffset || currentOffset && currentOffset<newOffset.offset){
+				this.prerequisiteOffset.set(newOffset.name, newOffset.offset)
+			}
+		}
+		console.log(this.prerequisiteOffset)
+	}
+	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {
+		return this.prerequisiteOffset.get(parameter)??0
+	}
 	private filterCardModelList(cards: PlayableCardModel[],  filter: ProjectFilter | undefined, returnOnlyFirst: boolean = false): PlayableCardModel[] {
         if(!filter){return cards}
 		let projectList:PlayableCardModel[] = []
@@ -164,7 +184,8 @@ export class PlayerProjectCardStateModel {
 			hd: this.handDiscard,
 			cp: this.projectCardPlayedStockToJson(),
 			t: this.triggers.toJson(),
-			hms: this.handMaximumSize
+			hms: this.handMaximumSize,
+			o: this.prerequisiteOffsetToJson()
 		}
 	}
 	private projectCardPlayedStockToJson(): PlayedCardStock[] {
@@ -174,6 +195,10 @@ export class PlayerProjectCardStateModel {
 		}
 
 		return result
+	}
+	private prerequisiteOffsetToJson(): {[key: string]: number} {
+		let dto: {[key: string]: number} = Object.fromEntries(this.prerequisiteOffset)
+		return dto
 	}
 	newGame(dto: PlayerProjectCardStateDTO): void {
 		this.hand = dto.h
@@ -225,7 +250,8 @@ export class PlayerProjectCardStateModel {
 				hd: [],
 				hms: GAME_HAND_MAXIMUM_SIZE,
 				cp: [],
-				t: {a: [], p: []}
+				t: {a: [], p: []},
+				o: {}
 			}
 		)
 	}
