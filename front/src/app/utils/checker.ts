@@ -40,7 +40,7 @@ function isGlobalParameterOk(parameter: Extract<GlobalParameterNameEnum, GlobalP
 	if(!colorToTestIndex || !currentIndex){return false}
 
 	if(!offset){
-		offset = clientState.getPrerequisiteOffset(parameter)
+		offset = 0//clientState.getPrerequisiteOffset(parameter)
 	}
 
 	switch(treshold){
