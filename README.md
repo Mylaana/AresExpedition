@@ -48,7 +48,6 @@ Backend: Junit
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Double activation count being ignored by multiple activation option cards (18/27/43)   
 Corpo selection blocking the game if refreshed after corp selected and before subsequent event resolution if refreshed (eg: DevTechs)   
-drawQueue not purged after researchResult   
 
 ## Must have for v1 :
 ### Refactoring

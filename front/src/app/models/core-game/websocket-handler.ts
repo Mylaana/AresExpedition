@@ -86,6 +86,9 @@ export class WebsocketHandler {
 	private handleScanKeepResult(content: WsDrawResult){
 		this.gameStateService.handleWsDrawResult(content)
 	}
+	private handleResearchResult(content: WsDrawResult){
+		this.gameStateService.handleWsDrawResult(content)
+	}
 
 	//these two functions will need to be different cause of private datas in it or not
     private handleMessageStartedGameGroupGameState(content: WsGameState): void {
@@ -160,13 +163,7 @@ export class WebsocketHandler {
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setSelectCorporationEvents()
 	}
-	private handleGroupMessageSelectedPhaseList(content: SelectablePhaseEnum[]){
-
-	}
 	private handleMessageOceanResult(content: WsOceanResult){
 		this.gameStateService.addOceanBonus(content)
-	}
-	private handleResearchResult(content: WsDrawResult){
-		this.gameStateService.applyResearchResult(content)
 	}
 }

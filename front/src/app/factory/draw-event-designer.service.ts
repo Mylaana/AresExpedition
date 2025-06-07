@@ -13,12 +13,13 @@ export const DrawEventFactory = {
         return event
     },
     createScanKeepEvent(resolveType:EventUnionSubTypes, scanKeep:ScanKeep ,waiterId:number, options?:DeckQueryOptionsEnum): DrawEvent {
-        let event = new DrawEvent
+		let event = new DrawEvent
         event.drawCardNumber = scanKeep.scan
         event.resolveEventSubType = resolveType
         event.waiterId = waiterId
         event.keepCardNumber = scanKeep.keep
 		event.scanKeepOptions = options
+		console.log(event)
         return event
     }
 }

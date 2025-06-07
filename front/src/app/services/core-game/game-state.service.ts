@@ -504,6 +504,7 @@ export class GameState{
 			event.scanKeepOptions = wsDrawResult.options
 			event.keepCardNumber = wsDrawResult.keep
             eventFound = true
+			console.log(event)
             this.cleanAndNextDrawQueue()
             break
         }
@@ -736,6 +737,7 @@ export class GameState{
 		if(newEvents?.length===0){return}
 		this.addEventQueue(newEvents,'first')
     }
+	/*
 	public applyResearchResult(result: WsDrawResult){
 		this.addEventQueue(EventFactory.createCardSelector('researchPhaseResult', {cardSelector:{
 			selectFrom: this.projectCardService.getProjectCardList(result.cardIdList),
@@ -756,4 +758,5 @@ export class GameState{
 			this.addEventQueue(newEvent, 'first')
 		}
 	}
+		*/
 }
