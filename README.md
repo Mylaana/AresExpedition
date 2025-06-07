@@ -52,6 +52,7 @@ card status position bugged (see dev techs)
 drawQueue not purged after researchResult   
 All played cards displaying vp   
 builder: Not enough MC still displays cards enabled   
+builder: Prerequisite not Ok still displays cards enabled   
 
 ## Must have for v1 :
 ### Refactoring
@@ -117,6 +118,7 @@ Card Builder: show already built card on refresh
 Add proper Hybrid production zone looks   
 Rework effect summary zone (refacto + looks)   
 Create switch button   
+Builder: display visual list of active triggers   
 
 ### Responsiveness
 Game creation menu

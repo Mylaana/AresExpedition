@@ -911,6 +911,16 @@ function getPlayed(cardCode: string, clientstate: PlayerStateModel): EventBaseMo
 			result.push(EventFactory.simple.addProduction({name:'steel', valueStock:1}))
 			break
 		}
+		//Inventrix
+		case('C5'):{
+			clientstate.setPrerequisiteOffset([
+				{name: GlobalParameterNameEnum.infrastructure, offset:1},
+				{name: GlobalParameterNameEnum.oxygen, offset:1},
+				{name: GlobalParameterNameEnum.temperature, offset:1}
+			])
+			result.push(EventFactory.simple.draw(3))
+			break
+		}
 		//Phobolog
 		case('C7'):{
 			result.push(EventFactory.simple.addProduction({name:'titanium', valueStock:1}))

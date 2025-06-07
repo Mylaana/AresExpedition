@@ -122,6 +122,9 @@ export class PlayerProjectCardStateModel {
 		}
 		console.log(this.prerequisiteOffset)
 	}
+	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {
+		return this.prerequisiteOffset.get(parameter)??0
+	}
 	private filterCardModelList(cards: PlayableCardModel[],  filter: ProjectFilter | undefined, returnOnlyFirst: boolean = false): PlayableCardModel[] {
         if(!filter){return cards}
 		let projectList:PlayableCardModel[] = []

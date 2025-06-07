@@ -18716,7 +18716,7 @@
         },
         "stockable": [],
         "startingMegacredits": 33,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""

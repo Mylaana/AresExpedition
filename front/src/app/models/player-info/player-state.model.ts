@@ -192,6 +192,7 @@ export class PlayerStateModel {
 	getProjectPlayedStock(cardCode: string): AdvancedRessourceStock[] {return this.projectCardState.getProjectPlayedStock(cardCode)}
 	getEventQueueState(): EventStateDTO[] {return this.eventState.eventQueueState}
 	setPrerequisiteOffset(offset: GlobalParameterOffset | GlobalParameterOffset[]){this.projectCardState.setPrerequisiteOffset(offset)}
+	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {return this.projectCardState.getPrerequisiteOffset(parameter)}
 
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{

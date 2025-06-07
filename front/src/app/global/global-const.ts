@@ -21,7 +21,7 @@ export const EXTERNAL_LINK_FRYXGAMES = 'https://fryxgames.se/'
 export const DEBUG_LOG_EVENT_RESOLUTION = false
 export const DEBUG_LOG_WS_PUBLISH = true
 export const DEBUG_LOG_WS_RECEIVED = true
-export const DEBUG_IGNORE_PREREQUISITES = true
+export const DEBUG_IGNORE_PREREQUISITES = false
 
 export const GAME_TAG_LIST: TagType[] = ['building','space','science','power','earth','jovian','plant','animal','microbe','event']
 export const GAME_RESSOURCE_LIST: RessourceType[] = ['megacredit', 'heat', 'plant', 'steel', 'titanium', 'card']
