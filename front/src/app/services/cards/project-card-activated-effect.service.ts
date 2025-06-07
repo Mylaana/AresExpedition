@@ -3,7 +3,7 @@ import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
 import { RessourceStock } from "../../interfaces/global.interface";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { DeckQueryOptionsEnum, DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ActivationOption } from "../../types/project-card.type";
 import { EventFactory } from "../../factory/event factory/event-factory";
@@ -188,6 +188,11 @@ export class ProjectCardActivatedEffectService {
 						break
 					}
 				}
+				break
+			}
+			//Redrafted Contracts
+			case('49'):{
+				result.push(EventFactory.simple.discardOptions(1, 'min', DiscardOptionsEnum.redraftedContracts))
 				break
 			}
 			//Regolith Eaters

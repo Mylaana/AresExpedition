@@ -1,5 +1,5 @@
-export type EventType = 'cardSelector' | 'cardSelectorRessource' | 'cardSelectorCardBuilder' | 'generic' | 'deck' | 'targetCard' | 'waiter' | 'phase' | 'cardActivator' | 'scanKeepSelector'
-export type EventCardSelectorSubType = 'selectCardOptionalSell' | 'selectCardForcedSell'| 'discardCards' | 'researchPhaseResult'
+export type EventType = 'cardSelector' | 'cardSelectorRessource' | 'cardSelectorCardBuilder' | 'generic' | 'deck' | 'targetCard' | 'waiter' | 'phase' | 'cardActivator' | 'ComplexSelector'
+export type EventCardSelectorSubType = 'selectCardOptionalSell' | 'selectCardForcedSell' | 'researchPhaseResult'
 | 'selectStartingHand' | 'selectCorporation' | 'scanKeepResult'
 export type EventCardActivatorSubType = 'actionPhaseActivator'
 export type EventCardSelectorRessourceSubType = 'addRessourceToSelectedCard'
@@ -12,7 +12,7 @@ export type EventDeckQuerySubType = 'drawQuery' | 'scanKeepQuery' | 'researchPha
 export type EventTechnical = 'default'
 export type EventWaiterSubType = 'deckWaiter'
 export type EventPhaseSubType = 'developmentPhase' | 'constructionPhase' | 'productionPhase' | 'researchPhase' | 'actionPhase'
-export type EventScanKeepResult = 'scanKeepResult'
+export type EventComplexCardSelectorSubType = 'scanKeepResult' | 'discardCards'
 
-export type EventUnionSubTypes = EventCardSelectorSubType | EventCardSelectorRessourceSubType | EventCardBuilderSubType | EventScanKeepResult
+export type EventUnionSubTypes = EventCardSelectorSubType | EventCardSelectorRessourceSubType | EventCardBuilderSubType | EventComplexCardSelectorSubType
 | EventGenericSubType | EventTargetCardSubType | EventDeckQuerySubType | EventTechnical | EventWaiterSubType | EventPhaseSubType | EventCardActivatorSubType

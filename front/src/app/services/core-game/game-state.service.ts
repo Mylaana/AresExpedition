@@ -743,7 +743,15 @@ export class GameState{
 		}}), 'first')
 	}
 	public applyScanKeepResult(result: WsDrawResult){
-		let newEvent = EventFactory.createScanKeepResult(this.projectCardService.getProjectCardList(result.cardIdList), result.keep,  result.options)
+		let newEvent = EventFactory.createCardSelectorComplex(
+			'scanKeepResult',
+			{
+				cardSelector:{
+					selectFrom: this.projectCardService.getProjectCardList(result.cardIdList),
+					selectionQuantity: result.keep
+				},
+				scanKeepOptions: result.options
+			})
 		if(newEvent){
 			this.addEventQueue(newEvent, 'first')
 		}
