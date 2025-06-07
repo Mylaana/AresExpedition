@@ -61,7 +61,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	}
 	private updateCaption(){
 		if(!this.isScalingCostActivation){return}
-		this.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption(this.projectCard, this.clientState)
+		this.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption(this.projectCard.cardCode, this.clientState)
 		this._activateOnce.caption = this.caption
 	}
 	private setActivationPayable(): void {

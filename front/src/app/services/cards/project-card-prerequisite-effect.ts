@@ -298,7 +298,7 @@ export const CardConditionChecker = {
 			case('4'):{break}
 			//Aquifer Pumping
 			case('7'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card,clientState), 'min', clientState)
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
 			}
 			//Artificial Jungle
 			case('9'):{
@@ -323,7 +323,7 @@ export const CardConditionChecker = {
 			}
 			//Developed Infrastructure
 			case('21'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
 			}
 			//Development Center
 			case('22'):{
@@ -407,7 +407,7 @@ export const CardConditionChecker = {
 			}
 			//Solarpunk
 			case('54'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
 			}
 			//Steelworks
 			case('56'):{
@@ -423,23 +423,23 @@ export const CardConditionChecker = {
 			}
 			//Volcanic Pools
 			case('62'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
 			}
 			//Water Import from Europa
 			case('63'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
 			}
 			//Wood Burning Stoves
 			case('64'):{
-				return Checker.isRessourceOk('plant', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+				return Checker.isRessourceOk('plant', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
 			}
 			//Sawmill
 			case('F08'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
 			}
 			//Progressive Policies
 			case('P09'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState), 'min', clientState)
+				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
 			}
 			//Matter Generator
 			case('P06'):{

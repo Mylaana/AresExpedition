@@ -84,7 +84,6 @@ export class ButtonDesigner{
 			case('rollBack'):{caption='$other_rollback$';break}
 			case('settings'):{caption='$other_settings$';break}
 
-			case('convertForest'):{caption='8$ressource_plant$ $other_arrow$ $other_forest$';break}
 			case('buyForest'):{caption='$ressource_megacreditvoid_16$ $other_arrow$ $other_forest$';break}
 			case('buyTemperature'):{caption='$ressource_megacreditvoid_14$ $other_arrow$$other_temperature$';break}
 			case('convertTemperature'):{caption='$ressource_heat$ $other_arrow$ $other_temperature$';break}

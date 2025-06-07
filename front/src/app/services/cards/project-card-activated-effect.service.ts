@@ -36,7 +36,7 @@ export class ProjectCardActivatedEffectService {
 			}
 			//Aquifer Pumping
 			case('7'):{
-				result.push(EventFactory.simple.addRessource({name:'megacredit', valueStock: - this.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addRessource({name:'megacredit', valueStock: - this.getScalingActivationCost(card.cardCode, clientState)}))
 				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1))
 				break
 			}
@@ -98,7 +98,7 @@ export class ProjectCardActivatedEffectService {
 			}
 			//Developed Infrastructure
 			case('21'):{
-				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - this.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - this.getScalingActivationCost(card.cardCode, clientState)}))
 				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1))
 				break
 			}
@@ -212,7 +212,7 @@ export class ProjectCardActivatedEffectService {
 			}
 			//Solarpunk
 			case('54'):{
-				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState)}))
 				result.push(EventFactory.simple.addForestAndOxygen(1))
 				break
 			}
@@ -242,25 +242,25 @@ export class ProjectCardActivatedEffectService {
 			}
 			//Volcanic Pools
 			case('62'):{
-				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState)}))
 				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1))
 				break
 			}
 			//Water Import from Europa
 			case('63'):{
-				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState)}))
 				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1))
 				break
 			}
 			//Wood Burning Stoves
 			case('64'):{
-				result.push(EventFactory.simple.addRessource({name: "plant", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addRessource({name: "plant", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState)}))
 				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1))
 				break
 			}
 			//Sawmill
 			case('F08'):{
-				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState)}))
 				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1))
 				break
 			}
@@ -272,7 +272,7 @@ export class ProjectCardActivatedEffectService {
 			}
 			//Progressive Policies
 			case('P09'):{
-				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card, clientState)}))
+				result.push(EventFactory.simple.addRessource({name: "megacredit", valueStock: - ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState)}))
 				result.push(EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1))
 				break
 			}
@@ -298,55 +298,62 @@ export class ProjectCardActivatedEffectService {
 		if(doubleActivationCards.includes(card.cardCode)){return [1,2]}
 		return [1]
 	}
-	public static getScalingCostActivationCaption(card: PlayableCardModel, clientState: PlayerStateModel): string {
-		switch(card.cardCode){
+	public static getScalingCostActivationCaption(code: string, clientState: PlayerStateModel): string {
+		switch(code){
 			//Aquifer Pumping
 			case('7'):{
-				let cost = this.getScalingActivationCost(card, clientState)
+				let cost = this.getScalingActivationCost(code, clientState)
 				return `$ressource_megacreditvoid_${cost}$: $other_ocean$`
 			}
 			//Developed Infrastructure
 			case('21'):{
-				let cost = this.getScalingActivationCost(card, clientState)
+				let cost = this.getScalingActivationCost(code, clientState)
 				return `$ressource_megacreditvoid_${cost}$: $other_temperature$`
 			}
 			//Solarpunk
 			case('54'):{
-				let cost = this.getScalingActivationCost(card, clientState)
+				let cost = this.getScalingActivationCost(code, clientState)
 				return `$ressource_megacreditvoid_${cost}$: $other_forest$`
 			}
 			//Volcanic Pools
 			case('62'):{
-				let cost = this.getScalingActivationCost(card, clientState)
+				let cost = this.getScalingActivationCost(code, clientState)
 				return `$ressource_megacreditvoid_${cost}$: $other_ocean$`
 			}
 			//Water Import from Europa
 			case('63'):{
-				let cost = this.getScalingActivationCost(card, clientState)
+				let cost = this.getScalingActivationCost(code, clientState)
 				return `$ressource_megacreditvoid_${cost}$: $other_ocean$`
 			}
 			//Wood Burning Stoves
 			case('64'):{
-				let cost = this.getScalingActivationCost(card, clientState)
+				let cost = this.getScalingActivationCost(code, clientState)
 				return `$-${cost}$ressource_plant$: $other_temperature$`
 			}
 			//Sawmill
 			case('F08'):{
-				let cost = this.getScalingActivationCost(card, clientState)
+				let cost = this.getScalingActivationCost(code, clientState)
 				return `$ressource_megacreditvoid_${cost}$: $other_infrastructure$`
 			}
 			//Progressive Policies
 			case('P09'):{
-				let cost = this.getScalingActivationCost(card, clientState)
+				let cost = this.getScalingActivationCost(code, clientState)
 				return `$ressource_megacreditvoid_${cost}$: $other_oxygen$`
+			}
+
+			//SPECIAL
+			//Convert Forest - Ecoline
+			case('ConvertForest'):{
+				let cost = this.getScalingActivationCost(code, clientState)
+				return `${cost}$ressource_plant$ $other_arrow$ $other_forest$`
 			}
 			default:{
 				return ''
 			}
 		}
 	}
-	public static getScalingActivationCost(card: PlayableCardModel, clientState: PlayerStateModel): number {
-		switch(card.cardCode){
+	public static getScalingActivationCost(code: string, clientState: PlayerStateModel): number {
+		switch(code){
 			//Aquifer Pumping
 			case('7'):{
 				return Math.max(0, 10 - (clientState.getRessourceInfoFromType('steel')?.valueProd??0) * 2)
@@ -384,6 +391,16 @@ export class ProjectCardActivatedEffectService {
 					return 5
 				}
 				return 10
+			}
+
+
+			//SPECIAL
+			//Convert Forest - Ecoline
+			case('ConvertForest'):{
+				if(clientState.getTriggersIdActive().includes('C2')){
+					return 7
+				}
+				return 8
 			}
 			default:{return 0}
 		}

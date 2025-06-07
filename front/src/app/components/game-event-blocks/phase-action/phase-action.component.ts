@@ -11,6 +11,7 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event factory/event-factory';
+import { ProjectCardActivatedEffectService } from '../../../services/cards/project-card-activated-effect.service';
 
 @Component({
     selector: 'app-phase-action',
@@ -39,6 +40,8 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	private _actionEvent!: EventCardActivator
 	private _loaded = false
 	private destroy$ = new Subject<void>()
+	private clientState!: PlayerStateModel
+	private convertPlantCost: number = 8
 
 	constructor(private gameStateService: GameState){}
 
@@ -56,6 +59,10 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this.destroy$.complete()
 	}
 	onStateUpdate(state: PlayerStateModel): void {
+		this.clientState = state
+		this.convertPlantCost = ProjectCardActivatedEffectService.getScalingActivationCost('ConvertForest', this.clientState)
+		this._convertForest.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('ConvertForest', this.clientState)
+
 		this._mcStock = state.getRessourceInfoFromType('megacredit')?.valueStock??0
 		this._plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 		this._heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
@@ -64,7 +71,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		if(this.event.button){this.updateEndPhaseButton(this.event.button as EventMainButton)}
 	}
 	updateButtonState(): void {
-		this._convertForest.updateEnabled(this._plantStock>=8)
+		this._convertForest.updateEnabled(this._plantStock>=this.convertPlantCost)
 		this._buyForest.updateEnabled(this._mcStock>=16)
 		this._convertTemperature.updateEnabled(this._heatStock>=8)
 		this._buyTemperature.updateEnabled(this._mcStock>=14)
@@ -80,7 +87,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		let newEvents: EventBaseModel[] = []
 		switch(button.name){
 			case('convertForest'):{
-				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'plant', valueStock: -8}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'plant', valueStock: - this.convertPlantCost}}))
 				newEvents.push(EventFactory.createGeneric('addForestPointAndOxygen', {addForestPoint: 1}))
 				break
 			}
