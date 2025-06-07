@@ -1,6 +1,6 @@
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface"
 import { EventCardBuilderButton } from "../../models/core-game/button.model"
-import { CardBuilder, EventCardActivator, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventPhase, EventTargetCard, EventWaiter } from "../../models/core-game/event.model"
+import { CardBuilder, EventCardActivator, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventComplexCardSelector, EventDeckQuery, EventGeneric, EventPhase, EventTargetCard, EventWaiter } from "../../models/core-game/event.model"
 import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type"
 import { CardBuilderOptionType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
@@ -119,37 +119,6 @@ describe('Service - Designers - Event', () => {
             expectedWaiterId = 5
         })
         describe('UNIT TEST', () => {
-
-            it('should create a discardEvent selector Event', () => {
-                expectedSubType = 'discardCards'
-                expectedEvent.subType = expectedSubType
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
-                expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
-				expectedEvent.lockRollbackButton = true
-				expectedEvent.lockSellButton = true
-
-                let resultEvent = event_factory.EventFactory.createCardSelector(expectedSubType)
-
-                expect(expectedEvent).toEqual(resultEvent)
-                expect(buttonSpy).toHaveBeenCalled()
-            })
-
-            it('should create a discardEvent selector with initialState option', () => {
-                expectedSubType = 'discardCards'
-                expectedEvent.subType = expectedSubType
-                expectedArgs = {cardSelector:{cardInitialState:{ignoreCost:true}}}
-                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = expectedArgs.cardSelector?.cardInitialState
-                expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
-                expectedEvent.lockRollbackButton = true
-				expectedEvent.lockSellButton = true
-
-                let resultEvent = event_factory.EventFactory.createCardSelector(expectedSubType, expectedArgs)
-
-                expect(expectedEvent).toEqual(resultEvent)
-                expect(buttonSpy).toHaveBeenCalled()
-            })
             it('should create a selectCardForcedSell selector Event', () => {
                 expectedSubType = 'selectCardForcedSell'
                 expectedEvent.subType = expectedSubType
@@ -251,6 +220,62 @@ describe('Service - Designers - Event', () => {
             })
         })
     })
+	describe('createCardSelectorComplex Event', () => {
+        let expectedSelector: CardSelector
+        let expectedArgs: CreateEventOptionsSelector
+        let expectedEvent: EventComplexCardSelector
+        let expectedSubType: EventUnionSubTypes
+        let expectedWaiterId: number
+
+        beforeEach(() => {
+            expectedSelector = {
+                selectFrom: [],
+                selectedList: [],
+                selectionQuantity: 0,
+                selectionQuantityTreshold: 'equal',
+                cardInitialState: undefined,
+                filter: undefined,
+                stateFromParent: undefined
+            }
+
+            expectedEvent = new EventComplexCardSelector
+            expectedEvent.button = undefined
+            expectedEvent.cardSelector = expectedSelector
+            expectedWaiterId = 5
+        })
+        describe('UNIT TEST', () => {
+            it('should create a discardEvent selector Event', () => {
+                expectedSubType = 'discardCards'
+                expectedEvent.subType = expectedSubType
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
+                expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
+                expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
+				expectedEvent.lockRollbackButton = true
+				expectedEvent.lockSellButton = true
+
+                let resultEvent = event_factory.EventFactory.createCardSelectorComplex(expectedSubType)
+
+                expect(expectedEvent).toEqual(resultEvent)
+                expect(buttonSpy).toHaveBeenCalled()
+            })
+
+            it('should create a discardEvent selector with initialState option', () => {
+                expectedSubType = 'discardCards'
+                expectedEvent.subType = expectedSubType
+                expectedArgs = {cardSelector:{cardInitialState:{ignoreCost:true}}}
+                const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
+                expectedEvent.cardSelector.cardInitialState = expectedArgs.cardSelector?.cardInitialState
+                expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
+                expectedEvent.lockRollbackButton = true
+				expectedEvent.lockSellButton = true
+
+                let resultEvent = event_factory.EventFactory.createCardSelectorComplex(expectedSubType, expectedArgs)
+
+                expect(expectedEvent).toEqual(resultEvent)
+                expect(buttonSpy).toHaveBeenCalled()
+            })
+		})
+	})
     describe('createCardBuilder Event', () => {
         let expectedSelector: CardSelector
         let expectedBuilder: CardBuilder
