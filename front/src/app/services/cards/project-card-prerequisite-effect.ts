@@ -1,454 +1,224 @@
-import { PlayableCardModel } from "../../models/cards/project-card.model";
-import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { GlobalParameterColorEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
-import { DEBUG_IGNORE_PREREQUISITES } from "../../global/global-const";
-import { Checker } from "../../utils/checker";
-import { ActivationOption } from "../../types/project-card.type";
-import { ProjectCardActivatedEffectService } from "./project-card-activated-effect.service";
+import { PlayableCardModel } from "../../models/cards/project-card.model"
+import { PlayerStateModel } from "../../models/player-info/player-state.model"
+import { GlobalParameterColorEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
+import { DEBUG_IGNORE_PREREQUISITES } from "../../global/global-const"
+import { Checker } from "../../utils/checker"
+import { ActivationOption } from "../../types/project-card.type"
+import { ProjectCardActivatedEffectService } from "./project-card-activated-effect.service"
+import { RessourceType } from "../../types/global.type"
 
+const PLAY_CARD_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) => boolean> = {
+	//AI Central
+	'4':  (s) => Checker.isTagOk('science', 5, 'min', s),
+	//Antigravity Technology
+	'6':  (s) => Checker.isTagOk('science', 5, 'min', s),
+	//Arctic Algae
+	'8':  (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Birds
+	'12': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.white, 'min', s),
+	//Caretaker Contract
+	'14': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Extreme-Cold Fungus
+	'27': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', s),
+	//Fish
+	'30': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//GHG Producing Bacteria
+	'31': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
+	//Herbivores
+	'33': (s) => Checker.isOceanOk(5, 'min', s),
+	//Livestock
+	'39': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', s),
+	//Physics Complex
+	'46': (s) => Checker.isTagOk('science', 4, 'min', s),
+	//Regolith Eaters
+	'50': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Small Animals
+	'53': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Symbiotic Fungus
+	'57': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Advanced Ecosystems
+	'65': (s) =>
+		Checker.isTagOk('animal', 1, 'min', s) &&
+		Checker.isTagOk('plant', 1, 'min', s) &&
+		Checker.isTagOk('microbe', 1, 'min', s),
+	//Artificial Lake
+	'66': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Atmosphere filtering
+	'67': (s) => Checker.isTagOk('science', 2, 'min', s),
+	//Breathing Filters
+	'68': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', s),
+	//Colonizer Training Camp
+	'72': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'max', s),
+	//Crater
+	'75': (s) => Checker.isTagOk('event', 3, 'min', s),
+	//Ice Cap Melting
+	'79': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', s),
+	//Interstellar Colony Ship
+	'82': (s) => Checker.isTagOk('science', 4, 'min', s),
+	//Investment Loan
+	'84': (s) => Checker.isTrOk(1, 'min', s),
+	//Lake Marineris
+	'86': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Mangrove
+	'90': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Permafrost Extraction
+	'92': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', s),
+	//Plantation
+	'94': (s) => Checker.isTagOk('science', 4, 'min', s),
+	//Aerated Magma
+	'105': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
+	//Airborne Radiation
+	'106': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
+	//Algae
+	'107': (s) => Checker.isOceanOk(5, 'min', s),
+	//Archaebacteria
+	'108': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', s),
+	//Beam from a Thorium Asteroid
+	'116': (s) => Checker.isTagOk('jovian', 1, 'min', s),
+	//Biomass Combustors
+	'117': (s) => Checker.isTagOk('plant', 2, 'min', s),
+	//Building Industries
+	'120': (s) => Checker.isRessourceOk('heat', 4, 'min', s),
+	//Bushes
+	'121': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Designed Microorganisms
+	'127': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'max', s),
+	//Designed Microorganisms
+	'129': (s) => Checker.isOceanOk(3, 'max', s),
+	//Energy Storage
+	'131': (s) => Checker.isTrOk(7, 'min', s),
+	//Eos Chasma National Park
+	'132': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Farming
+	'133': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', s),
+	//Food factory
+	'134': (s) => Checker.isRessourceOk('plant', 2, 'min', s),
+	//Fuel factory
+	'135': (s) => Checker.isRessourceOk('heat', 3, 'min', s),
+	//Fuel Generators
+	'136': (s) => Checker.isTrOk(1, 'min', s),
+	//Fusion Power
+	'137': (s) => Checker.isTagOk('power', 2, 'min', s),
+	//Gene Repair
+	'139': (s) => Checker.isTagOk('science', 3, 'min', s),
+	//Grass
+	'142': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Great Dam
+	'143': (s) => Checker.isOceanOk(2, 'min', s),
+	//Kelp Farming
+	'154': (s) => Checker.isOceanOk(6, 'min', s),
+	//Low-Atmo Shields
+	'157': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
+	//Lunar Beam
+	'158': (s) => Checker.isTrOk(1, 'min', s),
+	//Mass Converter
+	'159': (s) => Checker.isTagOk('science', 4, 'min', s),
+	//Methane from Titan
+	'161': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
+	//Monocultures
+	'167': (s) => Checker.isTrOk(1, 'min', s),
+	//Moss
+	'168': (s) => Checker.isOceanOk(3, 'min', s) && Checker.isRessourceOk('plant', 1, 'min', s),
+	//Natural Preserve
+	'169': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
+	//Noctis Farming
+	'172': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Quantum Extractor
+	'178': (s) => Checker.isTagOk('science', 3, 'min', s),
+	//Rad Suits
+	'179': (s) => Checker.isOceanOk(2, 'min', s),
+	//Strip Mine
+	'191': (s) => Checker.isTrOk(1, 'min', s),
+	//Trapped Heat
+	'197': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Trees
+	'198': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Tropical Forest
+	'199': (s) => Checker.isRessourceOk('heat', 5, 'min', s),
+	//Tundra Farming
+	'200': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Wave Power
+	'203': (s) => Checker.isOceanOk(3, 'min', s),
+	//Worms
+	'207': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Zeppelins
+	'208': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Urban Forestry
+	'F20': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.yellow, 'min', s),
+	//Filter Feeders
+	'P04': (s) => Checker.isOceanOk(2, 'min', s),
+
+}
 export const CardConditionChecker = {
 	canBePlayed(card: PlayableCardModel, clientState: PlayerStateModel): boolean {
-		if(DEBUG_IGNORE_PREREQUISITES){return true}
-		switch(card.cardCode){
-			//AI Central
-			case('4'):{
-				return Checker.isTagOk('science', 5, 'min', clientState)
-			}
-			//Antigravity Technology
-			case('6'):{
-				return Checker.isTagOk('science', 5, 'min', clientState)
-			}
-			//Arctic Algae
-			case('8'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Birds
-			case('12'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.white, 'min', clientState)
-			}
-			//Caretaker Contract
-			case('14'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Extreme-Cold Fungus
-			case('27'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', clientState)
-			}
-			//Fish
-			case('30'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//GHG Producing Bacteria
-			case('31'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Herbivores
-			case('33'):{
-				return Checker.isOceanOk(5, 'min', clientState)
-			}
-			//Livestock
-			case('39'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Physics Complex
-			case('46'):{
-				return Checker.isTagOk('science', 4, 'min', clientState)
-			}
-			//Regolith Eaters
-			case('50'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Small Animals
-			case('53'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Symbiotic Fungus
-			case('57'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Advanced Ecosystems
-			case('65'):{
-				return Checker.isTagOk('animal', 1, 'min', clientState)
-					&& Checker.isTagOk('plant', 1, 'min', clientState)
-					&& Checker.isTagOk('microbe', 1, 'min', clientState)
-			}
-			//Artificial Lake
-			case('66'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Atmosphere filtering
-			case('67'):{
-				return Checker.isTagOk('science', 2, 'min', clientState)
-			}
-			//Breathing Filters
-			case('68'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Colonizer Training Camp
-			case('72'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'max', clientState)
-			}
-			//Crater
-			case('75'):{
-				return Checker.isTagOk('event', 3, 'min', clientState)
-			}
-			//Ice Cap Melting
-			case('79'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', clientState)
-			}
-			//Interstellar Colony Ship
-			case('82'):{
-				return Checker.isTagOk('science', 4, 'min', clientState)
-			}
-			//Investment Loan
-			case('84'):{
-				return Checker.isTrOk(1, 'min', clientState)
-			}
-			//Lake Marineris
-			case('86'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Mangrove
-			case('90'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Permafrost Extraction
-			case('92'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', clientState)
-			}
-			//Plantation
-			case('94'):{
-				return Checker.isTagOk('science', 4, 'min', clientState)
-			}
-			//Aerated Magma
-			case('105'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Airborne Radiation
-			case('106'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Algae
-			case('107'):{
-				return Checker.isOceanOk(5, 'min', clientState)
-			}
-			//Archaebacteria
-			case('108'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', clientState)
-			}
-			//Beam from a Thorium Asteroid
-			case('116'):{
-				return Checker.isTagOk('jovian', 1, 'min', clientState)
-			}
-			//Biomass Combustors
-			case('117'):{
-				return Checker.isRessourceOk('plant', 2, 'min', clientState)
-			}
-			//Building Industries
-			case('120'):{
-				return Checker.isRessourceOk('heat', 4, 'min', clientState)
-			}
-			//Bushes
-			case('121'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Designed Microorganisms
-			case('127'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'max', clientState)
-			}
-			//Dust Quarry
-			case('129'):{
-				return Checker.isOceanOk(3, 'max', clientState)
-			}
-			//Energy Storage
-			case('131'):{
-				return Checker.isTrOk(7, 'min', clientState)
-			}
-			//Eos Chasma National Park
-			case('132'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Farming
-			case('133'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', clientState)
-			}
-			//Food factory
-			case('134'):{
-				return Checker.isRessourceOk('plant', 2, 'min', clientState)
-			}
-			//Fuel factory
-			case('135'):{
-				return Checker.isRessourceOk('heat', 3, 'min', clientState)
-			}
-			//Fuel Generators
-			case('136'):{
-				return Checker.isTrOk(1, 'min', clientState)
-			}
-			//Fusion Power
-			case('137'):{
-				return Checker.isTagOk('power', 2, 'min', clientState)
-			}
-			//Gene Repair
-			case('139'):{
-				return Checker.isTagOk('science', 3, 'min', clientState)
-			}
-			//Grass
-			case('142'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Great Dam
-			case('143'):{
-				return Checker.isOceanOk(2, 'min', clientState)
-			}
-			//Kelp Farming
-			case('154'):{
-				return Checker.isOceanOk(6, 'min', clientState)
-			}
-			//Low-Atmo Shields
-			case('157'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Lunar Beam
-			case('158'):{
-				return Checker.isTrOk(1, 'min', clientState)
-			}
-			//Mass Converter
-			case('159'):{
-				return Checker.isTagOk('science', 4, 'min', clientState)
-			}
-			//Methane from Titan
-			case('161'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Monocultures
-			case('167'):{
-				return Checker.isTrOk(1, 'min', clientState)
-			}
-			//Moss
-			case('168'):{
-				if(Checker.isOceanOk(3, 'min', clientState)===false){return false}
-				return Checker.isRessourceOk('plant', 1, 'min', clientState)
-			}
-			//Natural Preserve
-			case('169'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Noctis Farming
-			case('172'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Quantum Extractor
-			case('178'):{
-				return Checker.isTagOk('science', 3, 'min', clientState)
-			}
-			//Rad Suits
-			case('179'):{
-				return Checker.isOceanOk(2, 'min', clientState)
-			}
-			//Strip Mine
-			case('191'):{
-				return Checker.isTrOk(1, 'min', clientState)
-			}
-			//Trapped Heat
-			case('197'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Trees
-			case('198'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Tropical Forest
-			case('199'):{
-				return Checker.isRessourceOk('heat', 5, 'min', clientState)
-			}
-			//Tundra Farming
-			case('200'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Wave Power
-			case('203'):{
-				return Checker.isOceanOk(3, 'min', clientState)
-			}
-			//Worms
-			case('207'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Zeppelins
-			case('208'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', clientState)
-			}
-			//Urban Forestry
-			case('F20'):{
-				return Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.yellow, 'min', clientState)
-			}
-			//Filter Feeders
-			case('P04'):{
-				return Checker.isOceanOk(2, 'min', clientState)
-			}
-			default:{
-				return true
-			}
-		}
+		if (DEBUG_IGNORE_PREREQUISITES) return true
+
+		const checkFn = PLAY_CARD_REQUIREMENTS[card.cardCode]
+		return checkFn ? checkFn(clientState) : true
 	},
-	canBeActivated(card: PlayableCardModel, clientState: PlayerStateModel, activationOption:  ActivationOption = 1): boolean {
-		const noCost = ['3','4','13','15','16','18', 'CP02']
-		if(noCost.includes(card.cardCode)){return true}
-		switch(card.cardCode){
-			//AI Central
-			case('4'):{break}
-			//Aquifer Pumping
-			case('7'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
-			}
-			//Artificial Jungle
-			case('9'):{
-				return Checker.isRessourceOk('plant', 1, 'min', clientState)
-			}
-			//Birds
-			case('12'):{break}
-			//Caretaker Contract
-			case('14'):{
-				return Checker.isRessourceOk('heat', 8, 'min', clientState)
-			}
-			//Circuit Board Factory
-			case('15'):{break}
-			//Community Gardens
-			case('16'):{break}
-			//Conserved Biomes
-			case('18'):{break}
-			//Decomposing Fungus
-			case('20'):{
-				return false
-				return Checker.isMinimumStockOnPlayedCardOk([{name:'animal', valueStock:1}, {name:'microbe', valueStock:1}], clientState)
-			}
-			//Developed Infrastructure
-			case('21'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
-			}
-			//Development Center
-			case('22'):{
-				return Checker.isRessourceOk('heat', 2, 'min', clientState)
-			}
-			//Extreme-Cold Fungus
-			case('27'):{
-				switch(activationOption){
-					case(1):{return true}
-					case(2):{
-						return clientState.hasProjectPlayedOfFilterType({type:ProjectFilterNameEnum.stockable, stockableType:'microbe'})
-					}
-				}
-				break
-			}
-			//Farmers Market
-			case('28'):{
-				return Checker.isRessourceOk('megacredit', 1, 'min', clientState)
-			}
-			//Farming Co-ops
-			case('29'):{
-				return Checker.isHandCurrentSizeOk(1, 'min', clientState)
-			}
-			//GHG Producing Bacteria
-			case('31'):{
-				switch(activationOption){
-					case(1):{return true}
-					case(2):{
-						for(let s of clientState.getProjectPlayedStock(card.cardCode)){
-							if(s.name==='microbe'){
-								return s.valueStock>=2
-							}
-						}
-						return false
-					}
-				}
-			}
-			//Hydro-Electric Energy
-			case('34'):{
-				return Checker.isRessourceOk( 'megacredit',  1, 'min', clientState)
-			}
-			//Ironworks
-			case('38'):{
-				return Checker.isRessourceOk('heat', 4, 'min', clientState)
-			}
-			//Matter Manufacturing
-			case('41'):{
-				return Checker.isRessourceOk('megacredit', 1, 'min', clientState)
-			}
-			//Nitrite Reducing Bacteria
-			case('43'):{
-				switch(activationOption){
-					case(1):{return true}
-					case(2):{
-						for(let s of clientState.getProjectPlayedStock(card.cardCode)){
-							if(s.name==='microbe'){
-								return s.valueStock>=3
-							}
-						}
-						return false
-					}
-				}
-			}
-			//Redrafted contracts
-			case('49'):{
-				return Checker.isHandCurrentSizeOk(1,'min',clientState)
-			}
-			//Regolith Eaters
-			case('50'):{
-				switch(activationOption){
-					case(1):{return true}
-					case(2):{
-						for(let s of clientState.getProjectPlayedStock(card.cardCode)){
-							if(s.name==='microbe'){
-								return s.valueStock>=2
-							}
-						}
-						return false
-					}
-				}
-			}
-			//Solarpunk
-			case('54'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
-			}
-			//Steelworks
-			case('56'):{
-				return Checker.isRessourceOk('heat', 6, 'min', clientState)
-			}
-			//Symbiotic Fungus
-			case('57'):{break}
-			//Tardigrades
-			case('58'):{break}
-			//Steelworks
-			case('59'):{
-				return Checker.isRessourceOk('megacredit', 2, 'min', clientState)
-			}
-			//Volcanic Pools
-			case('62'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
-			}
-			//Water Import from Europa
-			case('63'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
-			}
-			//Wood Burning Stoves
-			case('64'):{
-				return Checker.isRessourceOk('plant', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
-			}
-			//Sawmill
-			case('F08'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
-			}
-			//Progressive Policies
-			case('P09'):{
-				return Checker.isRessourceOk('megacredit', ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
-			}
-			//Matter Generator
-			case('P06'):{
-				return Checker.isHandCurrentSizeOk(1, 'min', clientState)
-			}
-			default:{
-				return false
-			}
+	canBeActivated(card: PlayableCardModel, clientState: PlayerStateModel, activationOption: ActivationOption = 1): boolean {
+		const noCost = new Set(['3', '4', '13', '15', '16', '18', 'CP02'])
+		if (noCost.has(card.cardCode)) return true
+
+		const scalingCost = (resource: RessourceType) =>
+			Checker.isRessourceOk(resource, ProjectCardActivatedEffectService.getScalingActivationCost(card.cardCode, clientState), 'min', clientState)
+
+		const hasMicrobes = (count: number) =>
+			clientState.getProjectPlayedStock(card.cardCode).some(s => s.name === 'microbe' && s.valueStock >= count)
+
+		const rules: Record<string, () => boolean> = {
+			// Aquifer Pumping
+			'7': () => scalingCost('megacredit'),
+			// Artificial Jungle
+			'9': () => Checker.isRessourceOk('plant', 1, 'min', clientState),
+			// Caretaker Contract
+			'14': () => Checker.isRessourceOk('heat', 8, 'min', clientState),
+			// Decomposing Fungus
+			'20': () => false,
+			// Developed Infrastructure
+			'21': () => scalingCost('megacredit'),
+			// Development Center
+			'22': () => Checker.isRessourceOk('heat', 2, 'min', clientState),
+			// Extreme-Cold Fungus
+			'27': () => activationOption === 1 || clientState.hasProjectPlayedOfFilterType({ type: ProjectFilterNameEnum.stockable, stockableType: 'microbe' }),
+			// Farmers Market
+			'28': () => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
+			// Farming Co-ops
+			'29': () => Checker.isHandCurrentSizeOk(1, 'min', clientState),
+			// GHG Producing Bacteria
+			'31': () => activationOption === 1 || hasMicrobes(2),
+			// Hydro-Electric Energy
+			'34': () => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
+			// Ironworks
+			'38': () => Checker.isRessourceOk('heat', 4, 'min', clientState),
+			// Matter Manufacturing
+			'41': () => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
+			// Nitrite Reducing Bacteria
+			'43': () => activationOption === 1 || hasMicrobes(3),
+			// Redrafted contracts
+			'49': () => Checker.isHandCurrentSizeOk(1, 'min', clientState),
+			// Regolith Eaters
+			'50': () => activationOption === 1 || hasMicrobes(2),
+			// Solarpunk
+			'54': () => scalingCost('megacredit'),
+			// Steelworks
+			'56': () => Checker.isRessourceOk('heat', 6, 'min', clientState),
+			// Steelworks (duplicate ID?)
+			'59': () => Checker.isRessourceOk('megacredit', 2, 'min', clientState),
+			// Volcanic Pools
+			'62': () => scalingCost('megacredit'),
+			// Water Import from Europa
+			'63': () => scalingCost('megacredit'),
+			// Wood Burning Stoves
+			'64': () => scalingCost('plant'),
+			// Sawmill
+			'F08': () => scalingCost('megacredit'),
+			// Matter Generator
+			'P06': () => Checker.isHandCurrentSizeOk(1, 'min', clientState),
+			// Progressive Policies
+			'P09': () => scalingCost('megacredit'),
 		}
-		return true
+
+		return rules[card.cardCode]?.() ?? false
 	}
 }
