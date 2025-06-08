@@ -56,7 +56,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -3043,7 +3043,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -3731,7 +3731,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "1-3 $other_discard$: 1-3$ressource_card$",
             "fr": ""
@@ -4192,7 +4192,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16672,6 +16672,82 @@
         "vpScaling": "0"
     },
     {
+        "id": 220,
+        "card_code": "P17",
+        "origin": "promo",
+        "cost": 9,
+        "tagsId": [
+            4
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Tourism",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
         "id": 222,
         "card_code": "P19",
         "origin": "promo",
@@ -16732,6 +16808,310 @@
         ],
         "startingMegacredits": 0,
         "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 223,
+        "card_code": "P20",
+        "origin": "promo",
+        "cost": 21,
+        "tagsId": [
+            0
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "City Council",
+            "fr": "Conseil Municipal"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$ $ressource_card$$skipline$+ $ressource_card$ / $other_objective$",
+            "fr": "$other_arrow$ $ressource_card$$skipline$+ $ressource_card$ / $other_objective$"
+        },
+        "effectText": {
+            "en": "Action: Draw a card. Draw 1 additional card for each Objective you have.",
+            "fr": "Action: Piochez 1 carte. Piochez 1 carte suppl\u00e9mentaire pour chaque Objectif en votre possession."
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 224,
+        "card_code": "P21",
+        "origin": "promo",
+        "cost": 13,
+        "tagsId": [
+            6
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "1",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "Community Afforestation",
+            "fr": "Communaut\u00e9 de Reforestation"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $otherobjective$",
+            "fr": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $otherobjective$"
+        },
+        "effectText": {
+            "en": "Action: Spend 14 MC to take 1 Forest VP and raise the oxygen 1 step. Reduce its cost by 4 MC for each Objective you have.",
+            "fr": "Action: D\u00e9pensez 14 MC pour gagner un PV For\u00eat et augmenter l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 4 MC pour chaque Objectif en votre possession."
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 225,
+        "card_code": "P22",
+        "origin": "promo",
+        "cost": 16,
+        "tagsId": [
+            0
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "I-II",
+        "phaseDown": "",
+        "title": {
+            "en": "Orbital Outpost",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 226,
+        "card_code": "P23",
+        "origin": "promo",
+        "cost": 16,
+        "tagsId": [
+            0
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "Gas-Cooled Reactors",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "scalingCostActivation",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16960,6 +17340,83 @@
         "stockable": [],
         "startingMegacredits": 0,
         "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 231,
+        "card_code": "P28",
+        "origin": "promo",
+        "cost": 26,
+        "tagsId": [
+            8,
+            6
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Genetically Modified Vegetables",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18488,7 +18945,7 @@
         },
         "stockable": [],
         "startingMegacredits": 27,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
