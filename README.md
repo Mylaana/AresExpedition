@@ -51,7 +51,6 @@ Arklight not self triggerring
 
 ## Must have for v1 :
 ### Refactoring
-root services: reorganize services/stateless classes and tree   
 Rework Buildable system in playableCardComponent   
 
 ### Cards
