@@ -347,6 +347,22 @@ export class ProjectCardActivatedEffectService {
 				let cost = this.getScalingActivationCost(code, clientState)
 				return `${cost}$ressource_plant$ $other_arrow$ $other_forest$`
 			}
+			case('buyForest'):{
+				let cost = this.getScalingActivationCost(code, clientState)
+				return `$ressource_megacreditvoid_${cost}$ $other_arrow$ $other_forest$`
+			}
+			case('buyInfrastructure'):{
+				let cost = this.getScalingActivationCost(code, clientState)
+				return `$ressource_megacreditvoid_${cost}$ $other_arrow$ $skipline$ $other_infrastructure$ + $ressource_card$`
+			}
+			case('buyOcean'):{
+				let cost = this.getScalingActivationCost(code, clientState)
+				return `$ressource_megacreditvoid_${cost}$ $other_arrow$ $other_ocean$`
+			}
+			case('buyTemperature'):{
+				let cost = this.getScalingActivationCost(code, clientState)
+				return `$ressource_megacreditvoid_${cost}$ $other_arrow$$other_temperature$`
+			}
 			default:{
 				return ''
 			}
@@ -401,6 +417,34 @@ export class ProjectCardActivatedEffectService {
 					return 7
 				}
 				return 8
+			}
+			//BuyForest - Standard Technology
+			case('buyForest'):{
+				if(clientState.getTriggersIdActive().includes('55')){
+					return 10
+				}
+				return 14
+			}
+			//BuyInfrastructure - Standard Technology
+			case('buyInfrastructure'):{
+				if(clientState.getTriggersIdActive().includes('55')){
+					return 11
+				}
+				return 15
+			}
+			//BuyOcean - Standard Technology
+			case('buyOcean'):{
+				if(clientState.getTriggersIdActive().includes('55')){
+					return 12
+				}
+				return 16
+			}
+			//BuyTemperature - Standard Technology
+			case('buyTemperature'):{
+				if(clientState.getTriggersIdActive().includes('55')){
+					return 10
+				}
+				return 14
 			}
 			default:{return 0}
 		}

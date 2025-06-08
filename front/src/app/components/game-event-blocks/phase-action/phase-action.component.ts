@@ -41,7 +41,12 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	private _loaded = false
 	private destroy$ = new Subject<void>()
 	private clientState!: PlayerStateModel
+
 	private convertPlantCost: number = 8
+	private _buyForestCost!: number
+	private _buyInfrastructureCost!: number
+	private _buyOceanCost!: number
+	private _buyTemperatureCost!: number
 
 	constructor(private gameStateService: GameState){}
 
@@ -63,6 +68,18 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this.convertPlantCost = ProjectCardActivatedEffectService.getScalingActivationCost('ConvertForest', this.clientState)
 		this._convertForest.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('ConvertForest', this.clientState)
 
+		this._buyForest.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('buyForest', this.clientState)
+		this._buyForestCost = ProjectCardActivatedEffectService.getScalingActivationCost('buyForest', this.clientState)
+
+		this._buyInfrastructure.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('buyInfrastructure', this.clientState)
+		this._buyInfrastructureCost = ProjectCardActivatedEffectService.getScalingActivationCost('buyInfrastructure', this.clientState)
+
+		this._buyOcean.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('buyOcean', this.clientState)
+		this._buyOceanCost = ProjectCardActivatedEffectService.getScalingActivationCost('buyOcean', this.clientState)
+
+		this._buyTemperature.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('buyTemperature', this.clientState)
+		this._buyTemperatureCost = ProjectCardActivatedEffectService.getScalingActivationCost('buyTemperature', this.clientState)
+
 		this._mcStock = state.getRessourceInfoFromType('megacredit')?.valueStock??0
 		this._plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 		this._heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
@@ -72,12 +89,12 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	}
 	updateButtonState(): void {
 		this._convertForest.updateEnabled(this._plantStock>=this.convertPlantCost)
-		this._buyForest.updateEnabled(this._mcStock>=16)
+		this._buyForest.updateEnabled(this._mcStock>=this._buyForestCost)
 		this._convertTemperature.updateEnabled(this._heatStock>=8)
-		this._buyTemperature.updateEnabled(this._mcStock>=14)
+		this._buyTemperature.updateEnabled(this._mcStock>=this._buyTemperatureCost)
 		this._convertInfrastructure.updateEnabled(this._heatStock>=5 && this._plantStock>=3)
-		this._buyInfrastructure.updateEnabled(this._mcStock>=15)
-		this._buyOcean.updateEnabled(this._mcStock>=16)
+		this._buyInfrastructure.updateEnabled(this._mcStock>=this._buyInfrastructureCost)
+		this._buyOcean.updateEnabled(this._mcStock>=this._buyOceanCost)
 	}
 	updateEndPhaseButton(button: EventMainButton){
 		let finishPhaseButtonEnabled = (this._heatStock>=8  || this._plantStock>=8 || (this._heatStock>=5  && this._plantStock>=3)) === false
@@ -92,7 +109,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 				break
 			}
 			case('buyForest'):{
-				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - this._buyForestCost}}))
 				newEvents.push(EventFactory.createGeneric('addForestPointAndOxygen', {addForestPoint: 1}))
 				break
 			}
@@ -102,7 +119,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 				break
 			}
 			case('buyTemperature'):{
-				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -14}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - this._buyTemperatureCost}}))
 				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.temperature, steps:1}}))
 				break
 			}
@@ -113,13 +130,13 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 				break
 			}
 			case('buyInfrastructure'):{
-				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -15}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - this._buyInfrastructureCost}}))
 				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.infrastructure, steps:1}}))
 				newEvents.push(EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}}))
 				break
 			}
 			case('buyOcean'):{
-				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: -16}}))
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - this._buyOceanCost}}))
 				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.ocean, steps:1}}))
 				break
 			}
