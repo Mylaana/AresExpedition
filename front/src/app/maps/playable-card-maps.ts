@@ -229,6 +229,58 @@ export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: Playe
 	'buyOcean': (state) => `$ressource_megacreditvoid_${getScaling('buyOcean', state)}$ $other_arrow$ $other_ocean$`,
 	'buyTemperature': (state) => `$ressource_megacreditvoid_${getScaling('buyTemperature', state)}$ $other_arrow$$other_temperature$`,
 }
+export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: ActivationOption, clientState: PlayerStateModel) => boolean> = {
+	// Aquifer Pumping
+	'7': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('7', clientState), 'min', clientState),
+	// Artificial Jungle
+	'9': (_, clientState) => Checker.isRessourceOk('plant', 1, 'min', clientState),
+	// Caretaker Contract
+	'14': (_, clientState) => Checker.isRessourceOk('heat', 8, 'min', clientState),
+	// Decomposing Fungus
+	'20': () => false,
+	// Developed Infrastructure
+	'21': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('21', clientState), 'min', clientState),
+	// Development Center
+	'22': (_, clientState) => Checker.isRessourceOk('heat', 2, 'min', clientState),
+	// Extreme-Cold Fungus
+	'27': (activationOption, clientState) => activationOption === 1 || clientState.hasProjectPlayedOfFilterType({ type: ProjectFilterNameEnum.stockable, stockableType: 'microbe' }),
+	// Farmers Market
+	'28': (_, clientState) => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
+	// Farming Co-ops
+	'29': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
+	// GHG Producing Bacteria
+	'31': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('31').some(s => s.name === 'microbe' && s.valueStock >= 2),
+	// Hydro-Electric Energy
+	'34': (_, clientState) => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
+	// Ironworks
+	'38': (_, clientState) => Checker.isRessourceOk('heat', 4, 'min', clientState),
+	// Matter Manufacturing
+	'41': (_, clientState) => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
+	// Nitrite Reducing Bacteria
+	'43': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('43').some(s => s.name === 'microbe' && s.valueStock >= 3),
+	// Redrafted contracts
+	'49': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
+	// Regolith Eaters
+	'50': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('50').some(s => s.name === 'microbe' && s.valueStock >= 2),
+	// Solarpunk
+	'54': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('54', clientState), 'min', clientState),
+	// Steelworks
+	'56': (_, clientState) => Checker.isRessourceOk('heat', 6, 'min', clientState),
+	// Steelworks (duplicate ID?)
+	'59': (_, clientState) => Checker.isRessourceOk('megacredit', 2, 'min', clientState),
+	// Volcanic Pools
+	'62': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('62', clientState), 'min', clientState),
+	// Water Import from Europa
+	'63': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('63', clientState), 'min', clientState),
+	// Wood Burning Stoves
+	'64': (_, clientState) =>  Checker.isRessourceOk('plant', getScaling('64', clientState), 'min', clientState),
+	// Sawmill
+	'F08': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('F08', clientState), 'min', clientState),
+	// Matter Generator
+	'P06': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
+	// Progressive Policies
+	'P09': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('P09', clientState), 'min', clientState),
+}
 export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) => boolean> = {
 	//AI Central
 	'4':  (s) => Checker.isTagOk('science', 5, 'min', s),
@@ -369,58 +421,6 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'F20': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.yellow, 'min', s),
 	//Filter Feeders
 	'P04': (s) => Checker.isOceanOk(2, 'min', s),
-}
-export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: ActivationOption, clientState: PlayerStateModel) => boolean> = {
-	// Aquifer Pumping
-	'7': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('7', clientState), 'min', clientState),
-	// Artificial Jungle
-	'9': (_, clientState) => Checker.isRessourceOk('plant', 1, 'min', clientState),
-	// Caretaker Contract
-	'14': (_, clientState) => Checker.isRessourceOk('heat', 8, 'min', clientState),
-	// Decomposing Fungus
-	'20': () => false,
-	// Developed Infrastructure
-	'21': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('21', clientState), 'min', clientState),
-	// Development Center
-	'22': (_, clientState) => Checker.isRessourceOk('heat', 2, 'min', clientState),
-	// Extreme-Cold Fungus
-	'27': (activationOption, clientState) => activationOption === 1 || clientState.hasProjectPlayedOfFilterType({ type: ProjectFilterNameEnum.stockable, stockableType: 'microbe' }),
-	// Farmers Market
-	'28': (_, clientState) => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
-	// Farming Co-ops
-	'29': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
-	// GHG Producing Bacteria
-	'31': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('31').some(s => s.name === 'microbe' && s.valueStock >= 2),
-	// Hydro-Electric Energy
-	'34': (_, clientState) => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
-	// Ironworks
-	'38': (_, clientState) => Checker.isRessourceOk('heat', 4, 'min', clientState),
-	// Matter Manufacturing
-	'41': (_, clientState) => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
-	// Nitrite Reducing Bacteria
-	'43': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('43').some(s => s.name === 'microbe' && s.valueStock >= 3),
-	// Redrafted contracts
-	'49': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
-	// Regolith Eaters
-	'50': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('50').some(s => s.name === 'microbe' && s.valueStock >= 2),
-	// Solarpunk
-	'54': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('54', clientState), 'min', clientState),
-	// Steelworks
-	'56': (_, clientState) => Checker.isRessourceOk('heat', 6, 'min', clientState),
-	// Steelworks (duplicate ID?)
-	'59': (_, clientState) => Checker.isRessourceOk('megacredit', 2, 'min', clientState),
-	// Volcanic Pools
-	'62': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('62', clientState), 'min', clientState),
-	// Water Import from Europa
-	'63': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('63', clientState), 'min', clientState),
-	// Wood Burning Stoves
-	'64': (_, clientState) =>  Checker.isRessourceOk('plant', getScaling('64', clientState), 'min', clientState),
-	// Sawmill
-	'F08': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('F08', clientState), 'min', clientState),
-	// Matter Generator
-	'P06': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
-	// Progressive Policies
-	'P09': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('P09', clientState), 'min', clientState),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	// Adaptation Technology
