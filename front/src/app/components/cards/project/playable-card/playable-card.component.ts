@@ -25,8 +25,8 @@ import { GAME_CARD_DEFAULT_TAG_NUMBER } from '../../../../global/global-const';
 import { CardStatusComponent } from '../card-blocks/card-status/card-status.component';
 import { CardBuildable } from '../../../../interfaces/card.interface';
 import { CardActivationListComponent } from '../card-blocks/card-activation-list/card-activation-list.component';
-import { CardConditionChecker } from '../../../../services/cards/project-card-prerequisite-effect';
 import { ProjectFilter } from '../../../../interfaces/global.interface';
+import { PlayableCard } from '../../../../services/cards/playable-card';
 
 @Component({
     selector: 'app-playable-card',
@@ -161,7 +161,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private setBuildableCheckList() {
 		this._buildableCheckList = {
 			costOk: this.megacreditAvailable >= this.projectCard.cost,
-			prerequisiteOk: CardConditionChecker.canBePlayed(this.projectCard, this.clientState)
+			prerequisiteOk: PlayableCard.prerequisite.canBePlayed(this.projectCard, this.clientState)
 		}
 	}
 	private isBuildable(): boolean {

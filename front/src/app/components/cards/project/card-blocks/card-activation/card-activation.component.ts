@@ -5,12 +5,11 @@ import { ButtonDesigner } from '../../../../../factory/button-designer.service';
 import { NonEventButton } from '../../../../../models/core-game/button.model';
 import { expandCollapseVertical } from '../../../../../animations/animations';
 import { PlayableCardModel } from '../../../../../models/cards/project-card.model';
-import { ProjectCardActivatedEffectService } from '../../../../../services/cards/project-card-activated-effect.service';
 import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
 import { GameState } from '../../../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivationOption } from '../../../../../types/project-card.type';
-import { CardConditionChecker } from '../../../../../services/cards/project-card-prerequisite-effect';
+import { PlayableCard } from '../../../../../services/cards/playable-card';
 
 @Component({
     selector: 'app-card-activation',
@@ -61,11 +60,11 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	}
 	private updateCaption(){
 		if(!this.isScalingCostActivation){return}
-		this.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption(this.projectCard.cardCode, this.clientState)
+		this.caption = PlayableCard.activable.getScalingCostActivationCaption(this.projectCard.cardCode, this.clientState)
 		this._activateOnce.caption = this.caption
 	}
 	private setActivationPayable(): void {
-		this.activationCostPayable = CardConditionChecker.canBeActivated(this.projectCard, this.clientState, this.actionIndex)
+		this.activationCostPayable = PlayableCard.prerequisite.canBeActivated(this.projectCard, this.clientState, this.actionIndex)
 		this.updateButtonStatus()
 	}
 	private updateButtonStatus(): void {

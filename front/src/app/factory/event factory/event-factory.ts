@@ -223,7 +223,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 }
 function createScanKeepResult(cardList: PlayableCardModel[], keep: number, options?: DeckQueryOptionsEnum, waiter?: number): EventComplexCardSelector {
 	switch(options){
-		case(DeckQueryOptionsEnum.greenCardGivesMegacreditOtherDraw):{
+		case(DeckQueryOptionsEnum.brainstormingSession):{
 			let event = new EventComplexCardSelector
             event.title = `Gain 1MC if card is green or draw card if Red/Blue.`
             event.refreshSelectorOnSwitch = false
@@ -237,7 +237,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.waiterId = waiter
 			return event
 		}
-		case(DeckQueryOptionsEnum.keepEvent):{
+		case(DeckQueryOptionsEnum.celestior):{
 			let event = new EventComplexCardSelector
             event.title = `Select a card with Event tag.`
             event.refreshSelectorOnSwitch = false
@@ -253,7 +253,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
 		}
-		case(DeckQueryOptionsEnum.DevTechs):{
+		case(DeckQueryOptionsEnum.devTechs):{
 			let event = new EventComplexCardSelector
             event.title = `Select a green card.`
             event.refreshSelectorOnSwitch = false
@@ -269,7 +269,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
 		}
-		case(DeckQueryOptionsEnum.keepScienceOrPlant):{
+		case(DeckQueryOptionsEnum.advancedScreeningTechnology):{
 			let event = new EventComplexCardSelector
             event.title = `Select a card with a Plant or Science tag.`
             event.refreshSelectorOnSwitch = false
