@@ -16,10 +16,10 @@ export enum OceanBonusEnum {
 	plant = 'PLANT'
 }
 export enum DeckQueryOptionsEnum {
-	greenCardGivesMegacreditOtherDraw = 'O1',
-	keepEvent = 'O2',
-	DevTechs = 'O3',
-	keepScienceOrPlant = 'O4'
+	brainstormingSession = 'O1',
+	celestior = 'O2',
+	devTechs = 'O3',
+	advancedScreeningTechnology = 'O4'
 }
 
 export enum ProjectFilterNameEnum {

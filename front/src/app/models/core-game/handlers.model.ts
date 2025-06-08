@@ -17,7 +17,7 @@ import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
 import { DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
-import { ProjectEffectRouter } from "../../services/cards/project-card-played-effect";
+import { PlayableCard } from "../../services/cards/playable-card";
 
 @Injectable()
 export class EventHandler {
@@ -301,7 +301,7 @@ export class EventHandler {
 				switch(event.discardOptions){
 					case(DiscardOptionsEnum.marsUniversity):{
 						let clientState = this.gameStateService.getClientState()
-						let newEvents = ProjectEffectRouter.trigger.getTriggerred(
+						let newEvents = PlayableCard.getOnTriggerredEvents(
 								'ON_TRIGGER_RESOLUTION',
 								clientState.getTriggersIdActive(),
 								clientState,
@@ -325,7 +325,7 @@ export class EventHandler {
 			}
 			case('scanKeepResult'):{
 				switch(event.scanKeepOptions){
-					case(DeckQueryOptionsEnum.greenCardGivesMegacreditOtherDraw):{
+					case(DeckQueryOptionsEnum.brainstormingSession):{
 						let card = event.cardSelector.selectFrom[0]
 						switch(card.cardType){
 							case ('greenProject'):{

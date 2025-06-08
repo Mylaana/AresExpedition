@@ -1,4 +1,4 @@
-import { DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { DiscardOptionsEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
@@ -277,52 +277,4 @@ export const TriggerEffectEventFactory = {
 		}
 		return events;
 	}
-}
-
-export const CostModCalulator = {
-	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel): number {
-		let totalMod = 0
-		for (const trigger of activeTriggers) {
-			totalMod += calculateCostModFromTrigger(trigger, projectCard)
-		}
-
-		return totalMod
-	},
-}
-
-function calculateCostModFromTrigger(trigger: string, card?: PlayableCardModel): number {
-	if (!card) return 0
-
-	const tagList = new Set(card.tagsId ?? [])
-
-	const triggerMap: Record<string, () => number> = {
-		//Earth Catapult
-		'23': () => 2,
-		//Energy Subsidies
-		'25': () => tagList.has(GlobalInfo.getIdFromType('power', 'tag')) ? 4 : 0,
-		//Interplanetary Conference
-		'37': () => {
-			let mod = 0
-			if (tagList.has(GlobalInfo.getIdFromType('earth', 'tag'))) mod += 3
-			if (tagList.has(GlobalInfo.getIdFromType('jovian', 'tag'))) mod += 3
-			return mod
-		},
-		//Media Group
-		'42': () => tagList.has(GlobalInfo.getIdFromType('event', 'tag')) ? 5 : 0,
-		//Research Outpost
-		'51': () => 1,
-		//CreditCor
-		'C1': () => card.costInitial >= 20 ? 4 : 0,
-		//Interplanetary Cinematics
-		'C4': () => tagList.has(GlobalInfo.getIdFromType('event', 'tag')) ? 2 : 0,
-		//Teractor
-		'C9': () => tagList.has(GlobalInfo.getIdFromType('earth', 'tag')) ? 3 : 0,
-		//Thorgate
-		'C11': () => tagList.has(GlobalInfo.getIdFromType('power', 'tag')) ? 3 : 0,
-		//DevTechs
-		'CP03': () => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
-	}
-
-	const handler = triggerMap[trigger]
-	return handler ? handler() : 0
 }

@@ -11,7 +11,7 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event factory/event-factory';
-import { ProjectCardActivatedEffectService } from '../../../services/cards/project-card-activated-effect.service';
+import { PlayableCard } from '../../../services/cards/playable-card';
 
 @Component({
     selector: 'app-phase-action',
@@ -65,20 +65,20 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	}
 	onStateUpdate(state: PlayerStateModel): void {
 		this.clientState = state
-		this.convertPlantCost = ProjectCardActivatedEffectService.getScalingActivationCost('ConvertForest', this.clientState)
-		this._convertForest.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('ConvertForest', this.clientState)
+		this.convertPlantCost = PlayableCard.activable.getScalingCostActivation('ConvertForest', this.clientState)
+		this._convertForest.caption = PlayableCard.activable.getScalingCostActivationCaption('ConvertForest', this.clientState)
 
-		this._buyForest.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('buyForest', this.clientState)
-		this._buyForestCost = ProjectCardActivatedEffectService.getScalingActivationCost('buyForest', this.clientState)
+		this._buyForest.caption = PlayableCard.activable.getScalingCostActivationCaption('buyForest', this.clientState)
+		this._buyForestCost = PlayableCard.activable.getScalingCostActivation('buyForest', this.clientState)
 
-		this._buyInfrastructure.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('buyInfrastructure', this.clientState)
-		this._buyInfrastructureCost = ProjectCardActivatedEffectService.getScalingActivationCost('buyInfrastructure', this.clientState)
+		this._buyInfrastructure.caption = PlayableCard.activable.getScalingCostActivationCaption('buyInfrastructure', this.clientState)
+		this._buyInfrastructureCost = PlayableCard.activable.getScalingCostActivation('buyInfrastructure', this.clientState)
 
-		this._buyOcean.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('buyOcean', this.clientState)
-		this._buyOceanCost = ProjectCardActivatedEffectService.getScalingActivationCost('buyOcean', this.clientState)
+		this._buyOcean.caption = PlayableCard.activable.getScalingCostActivationCaption('buyOcean', this.clientState)
+		this._buyOceanCost = PlayableCard.activable.getScalingCostActivation('buyOcean', this.clientState)
 
-		this._buyTemperature.caption = ProjectCardActivatedEffectService.getScalingCostActivationCaption('buyTemperature', this.clientState)
-		this._buyTemperatureCost = ProjectCardActivatedEffectService.getScalingActivationCost('buyTemperature', this.clientState)
+		this._buyTemperature.caption = PlayableCard.activable.getScalingCostActivationCaption('buyTemperature', this.clientState)
+		this._buyTemperatureCost = PlayableCard.activable.getScalingCostActivation('buyTemperature', this.clientState)
 
 		this._mcStock = state.getRessourceInfoFromType('megacredit')?.valueStock??0
 		this._plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0

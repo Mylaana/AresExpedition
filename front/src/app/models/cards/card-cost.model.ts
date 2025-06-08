@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CostMod } from "../../types/project-card.type";
 import { GAME_RESSOURCE_STEEL_BASE_REDUCTION, GAME_RESSOURCE_TITANIUM_BASE_REDUCTION } from "../../global/global-const";
 import { PlayableCardModel } from "./project-card.model";
-import { ProjectEffectRouter } from "../../services/cards/project-card-played-effect";
+import { PlayableCard } from "../../services/cards/playable-card";
 
 @Injectable()
 export class CardCost {
@@ -26,7 +26,7 @@ export class CardCost {
 		let newMod: number = 0
 		if(mod.steelState && mod.tagList?.includes(0)){newMod += mod.steelState.valueProd * (mod.steelState.valueMod + GAME_RESSOURCE_STEEL_BASE_REDUCTION)}
 		if(mod.titaniumState && mod.tagList?.includes(1)){newMod += mod.titaniumState.valueProd * (mod.titaniumState.valueMod + GAME_RESSOURCE_TITANIUM_BASE_REDUCTION)}
-		if(mod.playedTriggersList){newMod += ProjectEffectRouter.costMod.getCostMod(mod.playedTriggersList, this.projectCard)}
+		if(mod.playedTriggersList){newMod += PlayableCard.getCostMod(mod.playedTriggersList, this.projectCard)}
 		if(mod.buildDiscount){newMod += mod.buildDiscount}
 
 		return newMod

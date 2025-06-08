@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { PlayableCardModel } from '../../../../../models/cards/project-card.model';
 import { CardActivationComponent } from '../card-activation/card-activation.component';
 import { ActivationOption } from '../../../../../types/project-card.type';
-import { ProjectCardActivatedEffectService } from '../../../../../services/cards/project-card-activated-effect.service';
 import { CommonModule } from '@angular/common';
 import { GameState } from '../../../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
+import { PlayableCard } from '../../../../../services/cards/playable-card';
 
 interface Activation {
 	index: ActivationOption
@@ -54,7 +54,7 @@ export class CardActivationListComponent implements OnInit, OnDestroy{
 	}
 	private updateActivationOptions(){
 		this.activationOptions = []
-		let options = ProjectCardActivatedEffectService.getActivationOption(this.projectCard)
+		let options = PlayableCard.activable.getActivationOption(this.projectCard.cardCode)
 		for(let i=0; i<options.length; i++){
 			this.activationOptions.push({
 				caption: this.projectCard.effects[0].effectAction[i],
