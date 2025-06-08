@@ -6,7 +6,6 @@ import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { PlayableCard } from "../services/cards/playable-card";
-import { GlobalInfo } from "../services/global/global-info.service";
 import { ActivationOption } from "../types/project-card.type";
 import { Checker } from "../utils/checker";
 
