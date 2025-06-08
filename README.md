@@ -62,7 +62,6 @@ Create Event type :
 Activation:   
     - Droplist/Custom value selection on activation (card 32/47)   
 Other:   
-    - Standard tech reduction mechanic   
     - Stockable tags   
 
 ### Misc
