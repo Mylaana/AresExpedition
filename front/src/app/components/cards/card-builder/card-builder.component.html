@@ -25,7 +25,7 @@
 					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
 				</div>
 			</div>
-			<ng-container *ngIf="cardBuilder.getOption()!=undefined">
+			<ng-container *ngIf="hasOptionButton()">
 				<div class="inner-decoration--separator"></div>
 				<div class="wrapper-alternative">
 					<div class="wrapper-alternative-inner">
@@ -39,3 +39,4 @@
 		</div>
 	</div>
 </div>
+<p>{{option |json}}</p>

@@ -1,9 +1,9 @@
-import { DeckQueryOptionsEnum, DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector } from "../../models/core-game/event.model"
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
-import { CardBuilderOptionType, MinMaxEqualType } from "../../types/global.type"
+import { MinMaxEqualType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
 import { Logger } from "../../utils/utils"
 import { ButtonDesigner } from "../button-designer.service"
@@ -318,13 +318,13 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
 
     return event
 }
-function generateCardBuilder(builderId:number, option?:CardBuilderOptionType): CardBuilder {
+function generateCardBuilder(builderId:number, option?:BuilderOption): CardBuilder {
     let builder = new CardBuilder
     builder.addButtons(ButtonDesigner.createEventCardBuilderButton(builderId, option))
     option?builder.setOption(option):null
     return builder
 }
-function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType): EventCardBuilder {
+function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType, builderOption?: BuilderOption): EventCardBuilder {
     let event = new EventCardBuilder
     event.cardSelector = generateCardSelector()
     event.cardSelector.cardInitialState = {selectable: false, buildable: true}
@@ -362,18 +362,32 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
         }
         case('construction_base'):{
             event.cardBuilder.push(generateCardBuilder(0))
-            event.cardBuilder.push(generateCardBuilder(1,'drawCard'))
+            event.cardBuilder.push(generateCardBuilder(1,BuilderOption.drawCard))
             break
         }
         case('construction_6mc'):{
             event.cardBuilder.push(generateCardBuilder(0))
-            event.cardBuilder.push(generateCardBuilder(1,'gain6MC'))
+            event.cardBuilder.push(generateCardBuilder(1,BuilderOption.gain6MC))
             break
         }
         case('construction_draw_card'):{
             for(let i=0; i<=1; i++){event.cardBuilder.push(generateCardBuilder(i))}
             break
         }
+		case('specialBuilder'):{
+			switch(builderOption){
+				case(BuilderOption.workCrews):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 11
+					event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
+
+					event.title = 'Play Blue or Red card with 11MC discount'
+				}
+			}
+			break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}
     }
 
@@ -388,6 +402,9 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
             event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
             break
         }
+		case('specialBuilder'):{
+			break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
 

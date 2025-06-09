@@ -3,7 +3,7 @@ export type EventCardSelectorSubType = 'selectCardOptionalSell' | 'selectCardFor
 | 'selectStartingHand' | 'selectCorporation' | 'scanKeepResult'
 export type EventCardActivatorSubType = 'actionPhaseActivator'
 export type EventCardSelectorRessourceSubType = 'addRessourceToSelectedCard'
-export type EventCardBuilderSubType = 'developmentPhaseBuilder' | 'constructionPhaseBuilder'
+export type EventCardBuilderSubType = 'developmentPhaseBuilder' | 'constructionPhaseBuilder' | 'specialBuilder'
 export type EventGenericSubType =  'endOfPhase' | 'planificationPhase' | 'upgradePhaseCards' | 'oceanQuery'
 | 'increaseGlobalParameter' | 'addRessourceToPlayer' | 'increaseResearchScanKeep' | 'buildCard' | 'drawResult'
 | 'waitingGroupReady' | 'addForestPointAndOxygen' | 'addProduction' | 'addTr'

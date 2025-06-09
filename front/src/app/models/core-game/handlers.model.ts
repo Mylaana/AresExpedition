@@ -16,7 +16,7 @@ import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
-import { DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
 import { PlayableCard } from "../../services/cards/playable-card";
 
 @Injectable()
@@ -66,11 +66,11 @@ export class EventHandler {
 				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
 				break
 			}
-			case('drawCard'):{
+			case(BuilderOption.drawCard):{
 				this.gameStateService.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}), 'first')
 				break
 			}
-			case('gain6MC'):{
+			case(BuilderOption.gain6MC):{
 				this.gameStateService.addEventQueue(EventFactory.createGeneric('addRessourceToPlayer',{baseRessource:{name:"megacredit",valueStock:6}}), 'first')
 				break
 			}
@@ -380,7 +380,7 @@ export class EventHandler {
 	private finishEventCardBuilder(event: EventCardBuilder): void {
 		Logger.logEventResolution('resolving event: ','EventCardBuilder ', event.subType)
 		switch(event.subType){
-			case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):{
+			case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('specialBuilder'):{
 				event.finalized = true
 				break
 			}

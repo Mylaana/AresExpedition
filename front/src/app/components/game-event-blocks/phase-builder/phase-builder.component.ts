@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
 import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
@@ -19,7 +19,7 @@ import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
   styleUrl: './phase-builder.component.scss',
   animations: [fadeIn]
 })
-export class PhaseBuilderComponent {
+export class PhaseBuilderComponent{
 	@Input() event!: EventBaseModel
 	@Input() currentPhase!: NonSelectablePhaseEnum
 	@Output() cardBuilderButtonClicked = new EventEmitter<any>()
