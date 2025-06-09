@@ -80,26 +80,3 @@
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>
-<!--
-<p>{{_maximumActivation}}</p>
-<p>{{activableTwice}}</p>
-<p>{{projectCard.activated}}</p>
-
-<p>{{projectCard.id}} {{projectCard.cardCode}}</p>
-<p>{{projectCard.stock | json}}</p>
-<p>{{projectCard.stockable | json}}</p>
-<p>cost {{projectCard.cost}}</p>
-<p>current: {{state.getCurrentState().buildable| json}}</p>
-<p>selected: {{state.isSelected()}}</p>
-<p>selectable: {{state.isSelectable()}}</p>
-<p>buildable: {{state.isBuildable()}}</p>
-<p>ignorecost: {{state.isIgnoreCost()}}</p>
-<p>initial selectable: {{initialState?.selectable| json}}</p>
-<p>initial ignore cost: {{initialState?.ignoreCost| json}}</p>
-<p>initial buildable: {{initialState?.buildable | json}}</p>
-<p>parent selectable: {{stateFromParent?.selectable | json}}</p>
-<p>parent ignore cost: {{stateFromParent?.ignoreCost | json}}</p>
-<p>parent buildable: {{stateFromParent?.buildable | json}}</p>
-
-[ngClass]="[((state.isSelectable()===true && state.isBuildable()===true) || (state.isSelectable()===true && !state.isBuildable()) || state.isIgnoreCost())? 'element-selectable': '', state.isSelected()!=true? 'selected':'']"
--->

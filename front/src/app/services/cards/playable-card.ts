@@ -43,7 +43,7 @@ const PlayableCardPrerequisite = {
 }
 function calculateCostModFromTrigger(triggerCode: string, card?: PlayableCardModel): number {
 	if (!card) return 0
-	return COST_MOD[triggerCode]?.(card)
+	return COST_MOD[triggerCode]?.(card)??0
 }
 const CostModCalulator = {
 	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel): number {

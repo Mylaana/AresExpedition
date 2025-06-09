@@ -48,8 +48,7 @@ Backend: Junit
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
 Arklight not self triggerring   
-NaN cost   
-builder: specialBuilder event not refreshing correctly phaseBuilderComponent when activated over phasebuilder   
+builder: unsatisfied Tags requirements not diasbling card visually   
 
 ## Must have for v1 :
 ### Refactoring

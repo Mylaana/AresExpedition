@@ -160,7 +160,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.state.setBuildable(this.isBuildable())
 	}
 	private setBuildableCheckList() {
-		console.log(this.projectCard.title)
 		this._buildableCheckList = {
 			costOk: this.megacreditAvailable >= this.projectCard.cost,
 			prerequisiteOk: PlayableCard.prerequisite.canBePlayed(this.projectCard, this.clientState)
