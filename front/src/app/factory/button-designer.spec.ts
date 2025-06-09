@@ -1,3 +1,4 @@
+import { BuilderOption } from "../enum/global.enum"
 import { EventCardBuilderButton, EventMainButton, EventMainButtonSelector } from "../models/core-game/button.model"
 import { EventUnionSubTypes } from "../types/event.type"
 import { ButtonDesigner } from "./button-designer.service"
@@ -163,7 +164,7 @@ describe('Service - Designers - Button', () => {
                 }
             })
             it('should return a card builder event button list with gain6MC option', () => {
-                let buttons = ButtonDesigner.createEventCardBuilderButton(expectedZoneId, 'gain6MC')
+                let buttons = ButtonDesigner.createEventCardBuilderButton(expectedZoneId, BuilderOption.gain6MC)
 				let expectedButtonsNumber: number = 5
 
                 expect(buttons.length).toEqual(expectedButtonsNumber)
@@ -172,7 +173,7 @@ describe('Service - Designers - Button', () => {
                 }
             })
             it('should return a card builder event button list with drawCard option', () => {
-                let buttons = ButtonDesigner.createEventCardBuilderButton(expectedZoneId, 'drawCard')
+                let buttons = ButtonDesigner.createEventCardBuilderButton(expectedZoneId, BuilderOption.drawCard)
 				let expectedButtonsNumber: number = 5
 
                 expect(buttons.length).toEqual(expectedButtonsNumber)

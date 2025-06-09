@@ -4,6 +4,7 @@ import { EventCardBuilderButtonNames } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
 import { CardBuilder, EventBaseCardSelector, EventBaseModel, EventCardBuilder } from "./event.model";
+import { BuilderOption } from "../../enum/global.enum";
 
 
 class testEventBaseModel extends EventBaseModel{}
@@ -86,7 +87,7 @@ describe('Models - Event', () => {
                 expect(builder.getOption()).toBeUndefined()
             })
             it('should evaluate setOptions', () => {
-                builder.setOption('gain6MC')
+                builder.setOption(BuilderOption.gain6MC)
                 expect(builder.getOption()).toEqual('gain6MC')
             })
             it('should evaluate getCardSelected returning undefined', () => {
