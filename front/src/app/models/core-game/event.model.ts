@@ -1,14 +1,14 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
-import { CardBuilderOptionType, EventCardBuilderButtonNames } from "../../types/global.type";
+import { EventCardBuilderButtonNames } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventStateFactory } from "../../factory/event-state-factory.service";
-import { DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -109,7 +109,7 @@ export class CardBuilder {
 	private selectedCard!: PlayableCardModel | undefined
 	private cardInitialState?: CardState
     private buttons: EventCardBuilderButton[] = []
-    private option!: CardBuilderOptionType
+    private option!: BuilderOption
     private builderIsLocked: boolean = false
 
     addButtons(buttons: EventCardBuilderButton[]): void {
@@ -124,8 +124,8 @@ export class CardBuilder {
         }
         return
     }
-    setOption(option: CardBuilderOptionType): void {this.option = option}
-    getOption(): CardBuilderOptionType {return this.option}
+    setOption(option: BuilderOption): void {this.option = option}
+    getOption(): BuilderOption {return this.option}
     private updateButtonEnabled(name: EventCardBuilderButtonNames, enabled: boolean): void {
         let button = this.getButtonFromName(name)
         if(!button){return}
@@ -138,8 +138,8 @@ export class CardBuilder {
 				this.updateButtonEnabled('cancelSelectCard', true)
                 this.updateButtonEnabled('buildCard', false)
                 this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled('drawCard', false)
-                this.updateButtonEnabled('gain6MC', false)
+                this.updateButtonEnabled(BuilderOption.drawCard, false)
+                this.updateButtonEnabled(BuilderOption.gain6MC, false)
                 break
             }
 			case('cancelSelectCard'):{
@@ -147,8 +147,8 @@ export class CardBuilder {
 				this.updateButtonEnabled('cancelSelectCard', false)
                 this.updateButtonEnabled('buildCard', false)
                 this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled('drawCard', true)
-                this.updateButtonEnabled('gain6MC', true)
+                this.updateButtonEnabled(BuilderOption.drawCard, true)
+                this.updateButtonEnabled(BuilderOption.gain6MC, true)
                 break
             }
             case('buildCard'):{
@@ -156,8 +156,8 @@ export class CardBuilder {
 				this.updateButtonEnabled('cancelSelectCard', false)
                 this.updateButtonEnabled('buildCard', false)
                 this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled('drawCard', false)
-                this.updateButtonEnabled('gain6MC', false)
+                this.updateButtonEnabled(BuilderOption.drawCard, false)
+                this.updateButtonEnabled(BuilderOption.gain6MC, false)
                 break
             }
 			case('discardSelectedCard'):{
@@ -165,17 +165,17 @@ export class CardBuilder {
 				this.updateButtonEnabled('cancelSelectCard', false)
                 this.updateButtonEnabled('buildCard', false)
                 this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled('drawCard', true)
-                this.updateButtonEnabled('gain6MC', true)
+                this.updateButtonEnabled(BuilderOption.drawCard, true)
+                this.updateButtonEnabled(BuilderOption.gain6MC, true)
                 break
             }
-            case('drawCard'):case('gain6MC'):{
+            case(BuilderOption.drawCard):case(BuilderOption.gain6MC):{
                 this.updateButtonEnabled('selectCard', false)
 				this.updateButtonEnabled('cancelSelectCard', false)
                 this.updateButtonEnabled('buildCard', false)
                 this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled('drawCard', false)
-                this.updateButtonEnabled('gain6MC', false)
+                this.updateButtonEnabled(BuilderOption.drawCard, false)
+                this.updateButtonEnabled(BuilderOption.gain6MC, false)
                 break
             }
 			case('selectionCardSelected'):{
@@ -183,8 +183,8 @@ export class CardBuilder {
 				this.updateButtonEnabled('cancelSelectCard', false)
 				this.updateButtonEnabled('buildCard', true)
 				this.updateButtonEnabled('discardSelectedCard', true)
-				this.updateButtonEnabled('drawCard', false)
-                this.updateButtonEnabled('gain6MC', false)
+				this.updateButtonEnabled(BuilderOption.drawCard, false)
+                this.updateButtonEnabled(BuilderOption.gain6MC, false)
 				break
 			}
 			case('selectionCardDiscarded'):{
@@ -192,8 +192,8 @@ export class CardBuilder {
 				this.updateButtonEnabled('cancelSelectCard', false)
 				this.updateButtonEnabled('buildCard', false)
 				this.updateButtonEnabled('discardSelectedCard', false)
-				this.updateButtonEnabled('drawCard', true)
-                this.updateButtonEnabled('gain6MC', true)
+				this.updateButtonEnabled(BuilderOption.drawCard, true)
+                this.updateButtonEnabled(BuilderOption.gain6MC, true)
 				break
 			}
 			case('resetState'):{
@@ -215,7 +215,7 @@ export class CardBuilder {
                 this.removeSelectedCard()
                 break
             }
-            case('buildCard'):case('drawCard'):case('gain6MC'):{
+            case('buildCard'):case(BuilderOption.drawCard):case(BuilderOption.gain6MC):{
                 this.setbuilderIsLocked()
                 break
             }

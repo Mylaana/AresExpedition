@@ -21,7 +21,6 @@ export enum DeckQueryOptionsEnum {
 	devTechs = 'O3',
 	advancedScreeningTechnology = 'O4'
 }
-
 export enum ProjectFilterNameEnum {
 	undefined = 'undefined',
 	greenProject = 'greenProject',
@@ -35,4 +34,9 @@ export enum ProjectFilterNameEnum {
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
 	redraftedContracts = 'redraftedContracts'
+}
+export enum BuilderOption {
+	gain6MC = 'gain6MC',
+	drawCard = 'drawCard',
+	workCrews = 'workCrews'
 }

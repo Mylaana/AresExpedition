@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton } from "../models/core-game/button.model";
-import { CardBuilderOptionType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../types/global.type";
+import { EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../types/global.type";
+import { BuilderOption } from "../enum/global.enum";
 
 
 @Injectable({
@@ -22,6 +23,7 @@ export class ButtonDesigner{
 			case('selectStartingHand'):{startEnabled=true;break}
 			case('selectCorporation'):{startEnabled=false;break}
 			case('scanKeepResult'):{startEnabled=false;break}
+			case('specialBuilder'):{startEnabled=true;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
@@ -77,6 +79,7 @@ export class ButtonDesigner{
 			case('selectStartingHand'):{caption='$other_validate$';break}
 			case('selectCorporation'):{caption='$other_validate$';break}
 			case('actionPhaseActivator'):{caption='$other_validate$';break}
+			case('specialBuilder'):{caption='$other_validate$';break}
 
 			//button name related rules
 			case('sellOptionalCard'):{caption='$other_sellcard$';break}
@@ -129,7 +132,7 @@ export class ButtonDesigner{
         button.eventSubType = eventSubType
         return button
     }
-    public static createEventCardBuilderButton(zoneId:number, option?: CardBuilderOptionType): EventCardBuilderButton[] {
+    public static createEventCardBuilderButton(zoneId:number, option?: BuilderOption): EventCardBuilderButton[] {
         let buttons: EventCardBuilderButton[] = []
         let buttonCount: number = 4
 
@@ -152,8 +155,8 @@ export class ButtonDesigner{
         button.parentCardBuilderId=zoneId
         button.enabled = button.startEnabled
         switch(option){
-            case('gain6MC'):{button.caption = '+ $ressource_megacreditvoid_6$';break}
-            case('drawCard'):{button.caption = '$ressource_card$';break}
+            case(BuilderOption.gain6MC):{button.caption = '+ $ressource_megacreditvoid_6$';break}
+            case(BuilderOption.drawCard):{button.caption = '$ressource_card$';break}
         }
         button.startEnabled=true
         button.name = option as EventCardBuilderButtonNames

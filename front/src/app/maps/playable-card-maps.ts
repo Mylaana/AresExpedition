@@ -1,4 +1,4 @@
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum } from "../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum, BuilderOption } from "../enum/global.enum";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
 import { EventFactory } from "../factory/event factory/event-factory";
 import { RessourceStock } from "../interfaces/global.interface";
@@ -562,6 +562,9 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addRessource({name: 'plant', valueStock: 2}),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+	// Work Crews
+	'102': () => [
+		EventFactory.createCardBuilder('specialBuilder', 'specialBuilder', BuilderOption.workCrews)],
 	// Acquired Company
 	'103': () => [
 		S.addProduction({name: 'card', valueStock: 1})],

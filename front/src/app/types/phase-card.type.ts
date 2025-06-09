@@ -15,4 +15,5 @@ export type ProductionUpgradeType = "production_7mc" | "production_1mc_activate_
 export type ResearchPhaseType = "research_base" | "researchAbilityOnly" | ResearchUpgradeType
 export type ResearchUpgradeType = "research_scan2_keep2" | "research_scan6_keep1"
 
-export type BuilderType = DevelopmentPhaseType | ConstructionPhaseType
+export type OtherBuilderType = 'specialBuilder'
+export type BuilderType = DevelopmentPhaseType | ConstructionPhaseType | OtherBuilderType

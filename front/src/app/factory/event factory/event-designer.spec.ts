@@ -2,11 +2,10 @@ import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue
 import { EventCardBuilderButton } from "../../models/core-game/button.model"
 import { CardBuilder, EventCardActivator, EventCardBuilder, EventCardSelector, EventCardSelectorRessource, EventComplexCardSelector, EventDeckQuery, EventGeneric, EventPhase, EventTargetCard, EventWaiter } from "../../models/core-game/event.model"
 import { EventCardBuilderSubType, EventCardSelectorSubType, EventDeckQuerySubType, EventGenericSubType, EventPhaseSubType, EventTargetCardSubType, EventUnionSubTypes, EventWaiterSubType } from "../../types/event.type"
-import { CardBuilderOptionType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { Logger } from "../../utils/utils"
-import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
+import { BuilderOption, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import  * as event_factory from "./event-factory"
 import { ButtonDesigner } from "../button-designer.service"
 
@@ -83,7 +82,7 @@ describe('Service - Designers - Event', () => {
             })
             it('should return default card Builder with option', () => {
                 let expectedCardBuilder = new CardBuilder
-                let expectedOption: CardBuilderOptionType = 'drawCard'
+                let expectedOption =  BuilderOption.drawCard
                 const spy = spyOn(ButtonDesigner, 'createEventCardBuilderButton').and.returnValue([])
                 expectedCardBuilder.addButtons([] as EventCardBuilderButton[])
                 expectedCardBuilder['option'] = expectedOption

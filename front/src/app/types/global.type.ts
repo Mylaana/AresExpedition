@@ -1,3 +1,5 @@
+import { BuilderOption } from "../enum/global.enum";
+
 export type RGB = `rgb(${number}, ${number}, ${number})`;
 /**this should be used for player selection */
 export type SelectablePhase = undefined | "development" | "construction" | "action" | "production" | "research"
@@ -20,13 +22,12 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'upgradePhase'
 | 'routeCreateGame' | 'routeCardOverview' | 'routeBuy' | 'routeHome' | 'routeCreateNewGameValidation'
 | 'createGamePlayerNumber'
-export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | CardBuilderOptionType
+export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
 export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event' | 'wild'
 export type GameItemType = TagType | RessourceType
 export type DrawRule = 'draw' | 'research' | 'scanKeep'
-export type CardBuilderOptionType = 'gain6MC' | 'drawCard'
 export type myUUID = string
 export type PlayerColor = undefined | 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'white'
 export type PlayableCardType = 'project' | 'corporation'

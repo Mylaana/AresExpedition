@@ -4,9 +4,8 @@ import { EventBaseModel, EventCardBuilder, CardBuilder } from '../../../models/c
 import { PlayableCardListComponent } from '../project/playable-card-list/playable-card-list.component';
 import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
-import { CardBuilderOptionType } from '../../../types/global.type';
-import { ProjectFilterNameEnum } from '../../../enum/global.enum';
 import { ProjectFilter } from '../../../interfaces/global.interface';
+import { BuilderOption } from '../../../enum/global.enum';
 
 @Component({
     selector: 'app-card-builder',
@@ -20,7 +19,7 @@ import { ProjectFilter } from '../../../interfaces/global.interface';
 })
 export class CardBuilderComponent{
 	@Input() cardBuilder!: CardBuilder
-	@Input() option!: CardBuilderOptionType
+	@Input() option!: BuilderOption
 	@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
 	@Input() projectFilter?: ProjectFilter
 	@Input() discount: number = 0
@@ -31,5 +30,8 @@ export class CardBuilderComponent{
 
 	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
 		this.cardBuilderListButtonClicked.emit(button)
+	}
+	public hasOptionButton(): boolean {
+		return [BuilderOption.drawCard, BuilderOption.gain6MC].includes(this.cardBuilder.getOption())
 	}
 }
