@@ -188,6 +188,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		if(this.state.isActivable()===true && this._maximumActivation){
 			return true
 		}
+		if(this._buildableCheckList && !(this._buildableCheckList.costOk && this._buildableCheckList.prerequisiteOk)){return true}
 		return false
 	}
 	public isSelectable(): boolean {
