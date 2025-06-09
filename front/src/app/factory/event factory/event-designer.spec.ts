@@ -27,7 +27,7 @@ interface CreateEventOptionsGeneric {
     baseRessource?: RessourceStock | RessourceStock[]
     scanKeep?: ScanKeep
     cardId?: number
-    drawEventResult?:number[]
+    drawEventResult?:string[]
     waiterId?:number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number
@@ -536,7 +536,7 @@ describe('Service - Designers - Event', () => {
                             break
                         }
                         case('drawResult'):{
-                            let expectedDrawResult: number[] = [5, 227, 3]
+                            let expectedDrawResult: string[] = ['5', '227', '3']
                             let expectedWaiterId = 7
                             expectedEvent.drawResultList = expectedDrawResult
                             expectedEvent.waiterId = expectedWaiterId

@@ -66,10 +66,10 @@ describe('Models - Event', () => {
                 cardInfoService = new ProjectCardInfoService
             })
             it('should evaluate updateCardSelection', () => {
-                let testCardId = 263
+                let testCardId = 'P28'
                 event.updateCardSelection(cardInfoService.getProjectCardList([testCardId]))
                 expect(event.cardSelector.selectedList.length).toEqual(1)
-                expect(event.cardSelector.selectedList[0].id).toEqual(testCardId)
+                expect(event.cardSelector.selectedList[0].cardCode).toEqual(testCardId)
             })
         })
     })
