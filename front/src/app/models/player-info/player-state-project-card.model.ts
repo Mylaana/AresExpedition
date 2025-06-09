@@ -47,6 +47,7 @@ export class PlayerProjectCardStateModel {
     playCard(card: PlayableCardModel): void {
         this.projects.playedIdList.push(card.cardCode)
 		let cardCopy = this.cardInfoService.getCardById(card.cardCode)
+		console.log(cardCopy)
 		if(!cardCopy){return}
         this.projects.playedProjectList.push(cardCopy)
 		this.cardInitializeService.initialize(cardCopy)

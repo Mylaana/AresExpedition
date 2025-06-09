@@ -170,7 +170,7 @@ export class PlayableCardModel{
 		return this.hasTagId(Utils.toTagId(tag))
 	}
 	toDTO(): PlayedCardStock {
-		return {[this.id]: this.stock??[]}
+		return {[this.cardCode]: this.stock??[]}
 	}
 	public static fromInterface(input: PlayableCardInterface): PlayableCardModel {
 		let newCard: PlayableCardModel = Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))

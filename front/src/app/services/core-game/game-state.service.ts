@@ -397,7 +397,8 @@ export class GameState{
 		this.updateClientState(playerState)
 	}
 	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{
-        let events: EventBaseModel[] = []
+        console.log('playing card:', card)
+		let events: EventBaseModel[] = []
 		let state = this.getClientState()
 		state.playCard(card, cardType)
 		let playedCardEvents = PlayableCard.getOnPlayedEvents(card.cardCode, state)
