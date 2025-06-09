@@ -29,14 +29,24 @@ export enum ProjectFilterNameEnum {
 	stockable = 'stockable',
 	blueProject = 'blueProject',
 	hasTagEvent = 'hasTagEvent',
-	hasTagPlantOrScience = 'hasTagPlantOrScience'
+	hasTagPlantOrScience = 'hasTagPlantOrScience',
+	green9MCFree = 'green9MCFree',
+	maiNiProductions = 'maiNiProductions',
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
 	redraftedContracts = 'redraftedContracts'
 }
 export enum BuilderOption {
+	//Phase builders
 	gain6MC = 'gain6MC',
 	drawCard = 'drawCard',
-	workCrews = 'workCrews'
+
+	//Special builders
+	workCrews = 'workCrews',
+	assetLiquidation = 'assetLiquidation',
+	green9MCFree = 'green9MCFree',
+	assortedEnterprises = 'assortedEnterprises',
+	selfReplicatingBacteria = 'selfReplicatingBacteria',
+	maiNiProductions = 'maiNiProductions',
 }

@@ -138,6 +138,14 @@ export class PlayableCardModel{
 			case(ProjectFilterNameEnum.hasTagPlantOrScience):{
 				return this.hasTag('science') || this.hasTag('plant')
 			}
+			case(ProjectFilterNameEnum.green9MCFree):{
+				if(this.costInitial <= 9 && this.cardType==='greenProject'){return true}
+				break
+			}
+			case(ProjectFilterNameEnum.maiNiProductions):{
+				if(this.costInitial <= 12){return true}
+				break
+			}
         }
         return false
     }

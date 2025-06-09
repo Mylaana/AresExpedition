@@ -2,16 +2,14 @@ import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
 import { EventStateDTO } from "../interfaces/dto/event-state-dto.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
-import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector, EventComplexCardSelector, EventDeckQuery, EventTargetCard } from "../models/core-game/event.model";
+import { EventBaseModel, EventCardActivator, EventCardBuilder, EventDeckQuery, EventTargetCard } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event factory/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
+import { BuilderOption } from "../enum/global.enum";
+import { PlayableCardModel } from "../models/cards/project-card.model";
 
-const EventSubTypeToStateMap = new Map<EventUnionSubTypes, EventStateTypeEnum>([
-	['developmentPhaseBuilder', EventStateTypeEnum.builderDevelopemntLocked],
-	['constructionPhaseBuilder', EventStateTypeEnum.builderConstructionLocked],
-])
 
 @Injectable({
 	providedIn: 'root'
@@ -20,37 +18,47 @@ export class EventStateFactory{
 	constructor(private projectCardInfoService: ProjectCardInfoService){
 	}
 	public static toJson(event: EventBaseModel, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined {
+		const excludedSubtypes : EventUnionSubTypes[] = ['endOfPhase', 'waitingGroupReady', 'selectCardForcedSell', 'deckWaiter']
+		if(excludedSubtypes.includes(event.subType)){return}
+		let dto: EventStateDTO | undefined
 		switch(event.type){
-			case('cardSelectorCardBuilder'):{return this.eventBuilderToJson(event as EventCardBuilder, eventStateOperation)}
-			case('cardActivator'):{return this.eventActivatorToJson(event as EventCardActivator, eventStateOperation)}
-			case('deck'):{return this.eventDeckQueryToJson(event as EventDeckQuery, eventStateOperation)}
-			case('targetCard'):{return this.eventTargetCardToJson(event as EventTargetCard, eventStateOperation)}
-			default:{
-				const excludedSubtypes : EventUnionSubTypes[] = ['endOfPhase', 'waitingGroupReady', 'selectCardForcedSell']
-				if(excludedSubtypes.includes(event.subType)){break}
-				console.error('UNSAVED EVENTSTATE ON EVENT: ', event)
-				break
-			}
+			case('cardSelectorCardBuilder'):{dto = this.eventBuilderToJson(event as EventCardBuilder, eventStateOperation); break}
+			case('cardActivator'):{dto = this.eventActivatorToJson(event as EventCardActivator, eventStateOperation); break}
+			case('deck'):{dto = this.eventDeckQueryToJson(event as EventDeckQuery, eventStateOperation); break}
+			case('targetCard'):{dto = this.eventTargetCardToJson(event as EventTargetCard, eventStateOperation); break}
+			default:{break}
+		}
+		if(dto){return dto}
+		if(event.finalized===false){
+			console.error('UNSAVED EVENTSTATE ON EVENT: ', event)
 		}
 		return
 	}
 	private static eventBuilderToJson(event: EventCardBuilder, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
-		let builderLocked: boolean[] = []
+		let cardBuilt: (string | undefined)[] = []
+		let specialBuilderOption!: BuilderOption
+		let stateType!: EventStateTypeEnum
 		for(let builder of event.cardBuilder){
-			builderLocked.push(builder.getbuilderIsLocked())
+			cardBuilt.push(builder.getBuitCardCode())
 		}
 
-		let stateType = EventSubTypeToStateMap.get(event.subType)
-		if(!stateType){return}
 		switch(event.subType){
 			case('developmentPhaseBuilder'):{stateType = EventStateTypeEnum.builderDevelopemntLocked; break}
 			case('constructionPhaseBuilder'):{stateType = EventStateTypeEnum.builderConstructionLocked; break}
+			case('specialBuilder'):{
+				stateType = EventStateTypeEnum.specialBuilder
+				specialBuilderOption = event.cardBuilder[0].getOption()
+				break
+			}
 			default:{return}
 		}
 		return {
 			o: eventStateOperation,
 			t: stateType,
-			v: builderLocked
+			v: {
+				'cardBuilt': cardBuilt,
+				'options': specialBuilderOption??''
+			}
 		}
 	}
 	private static eventActivatorToJson(event: EventCardActivator, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined {
@@ -72,9 +80,7 @@ export class EventStateFactory{
 					}
 				}
 			}
-			default:{
-				return
-			}
+			default:{return}
 		}
 	}
 	private static eventTargetCardToJson(event: EventTargetCard, eventStateOperation: EventStateOriginEnum): EventStateDTO | undefined {
@@ -162,7 +168,17 @@ export class EventStateFactory{
 						state.v['cardId'],
 						{advancedRessource: state.v['ressources']}
 					))
-					console.log(newEvents, state)
+					break
+				}
+				case(EventStateTypeEnum.specialBuilder):{
+					let event = EventFactory.simple.specialBuilder(state.v['options']) as EventCardBuilder
+					for(let i=0; i<state.v['cardBuilt'].length; i++){
+						if(state.v['cardBuilt'][i]){
+							event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(Number(state.v['cardBuilt'][i]))??new PlayableCardModel)
+							event.cardBuilder[i].setbuilderIsLocked(true)
+						}
+					}
+					newEvents.push(event)
 					break
 				}
 				default:{treated = false}

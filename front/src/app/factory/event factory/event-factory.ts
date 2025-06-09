@@ -108,6 +108,9 @@ function scanKeepResult(cardList: PlayableCardModel[], keep: number, option: Dec
 		}
 	)
 }
+function specialBuilder(option: BuilderOption): EventCardBuilder {
+	return EventFactory.createCardBuilder('specialBuilder', 'specialBuilder', option)
+}
 
 const SimpleEvent = {
 	draw,
@@ -124,7 +127,8 @@ const SimpleEvent = {
 	scanKeepResult,
 	addProduction,
 	addTR,
-	addForestAndOxygen
+	addForestAndOxygen,
+	specialBuilder,
 }
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
@@ -383,7 +387,56 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					buildDiscountValue = 11
 					event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
 
-					event.title = 'Play Blue or Red card with 11MC discount'
+					event.title = 'Play an additional Blue or Red card with a 11MC discount'
+					break
+				}
+				case(BuilderOption.assetLiquidation):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
+
+					event.title = 'Play an additional Blue or Red card.'
+					break
+
+				}
+				case(BuilderOption.green9MCFree):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 100
+					event.cardSelector.filter = {type: ProjectFilterNameEnum.green9MCFree}
+
+					event.title = "Play a green card which value is 9MC or less without paying it's cost"
+					break
+				}
+				case(BuilderOption.assortedEnterprises):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 2
+
+					event.title = "Play an additional card of any color with a 2MC discount"
+					break
+				}
+				case(BuilderOption.selfReplicatingBacteria):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 25
+
+					event.title = "Play a card of any color with a 25MC discount"
+					break
+				}
+				case(BuilderOption.maiNiProductions):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 100
+					event.cardSelector.filter = {type: ProjectFilterNameEnum.maiNiProductions}
+
+					event.title = "Play a card of any color which value is 12MC or less without paying it's cost"
+					break
 				}
 			}
 			break

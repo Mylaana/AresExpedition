@@ -233,6 +233,10 @@ export class CardBuilder {
 	}
     setbuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
     getbuilderIsLocked(): boolean {return this.builderIsLocked}
+	getBuitCardCode(): string | undefined {
+		if(this.builderIsLocked===false){return}
+		return this.getSelectedCard().cardCode
+	}
 	resetBuilder(): void {
 		if(this.builderIsLocked){return}
 		this.resetButtons()
@@ -334,6 +338,15 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		}
 	}
 	override fromJson(dto: EventStateDTO): void {
+		if(dto.v)
+			console.log(dto)
+		for(let i=0; i<dto.v['cardBuilt'].length; i++){
+			if(dto.v['cardBuilt'][i]){
+				//event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(Number(state.v['cardBuilt'][i]))??new PlayableCardModel)
+				this.cardBuilder[i].setbuilderIsLocked(true)
+			}
+		}
+		return
 		if(dto.v){
 			let index: number = 0
 			for(let locked of dto.v){

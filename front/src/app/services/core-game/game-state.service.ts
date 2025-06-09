@@ -178,7 +178,6 @@ export class GameState{
         return this.clientState.getValue()
     }
 	getClientStateDTO(): PlayerStateDTO {
-		console.log(this.eventQueue.getValue())
 		return this.getClientState().toJson(this.eventQueue.getValue())
 	}
 	/*
@@ -405,7 +404,7 @@ export class GameState{
 
         //check for triggers and add them to queue
 		let activeTriggers = state.getTriggersIdActive()
-        let eventsOnPlayed =PlayableCard.getOnTriggerredEvents('ON_CARD_PLAYED', activeTriggers, state, {})
+        let eventsOnPlayed =PlayableCard.getOnTriggerredEvents('ON_CARD_PLAYED', activeTriggers, state, {playedCard:card})
         if(eventsOnPlayed.length>0){
             events = events.concat(eventsOnPlayed)
         }
@@ -738,7 +737,6 @@ export class GameState{
 		this.addEventQueue(newEvents,'first')
     }
 	endOfPhase() {
-		console.log(this.eventQueue.getValue())
 		this.rxStompService.publishPlayerState(this.getClientState().toJson(this.eventQueue.getValue()))
 	}
 }

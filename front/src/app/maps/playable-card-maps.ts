@@ -18,7 +18,8 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'27', //Extreme-Cold Fungus
 	'31', //GHG Producing Bacteria
 	'43', //Nitrite Reducing Bacteria
-	'50', //Regolith Eaters
+	'50', //Regolith Eaters,
+	'P11', //Self Replicating Bacteria
 ]
 export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'CP02']
 
@@ -33,6 +34,11 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	// Artificial Jungle
 	'9': () => [S.addRessource({ name: 'plant', valueStock: -1 }), S.draw(1)],
+	// Asset Liquidation
+	'11': () => [
+		S.addTR(-1),
+		S.draw(3)
+	],
 	// Birds
 	'12': (cardCode) => [S.addRessourceToCardId({ name: 'animal', valueStock: 1 }, cardCode)],
 	// BrainStorming Session
@@ -170,6 +176,15 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'P09': (card, clientState) => [
 		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
+	// Self Replicating Bacteria
+	'P11': (cardCode, _, option) => option === 1
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		: option === 2
+		? [
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -5 }, cardCode),
+			S.specialBuilder(BuilderOption.selfReplicatingBacteria)
+			]
+		: [],
 	// Celestior
 	'CP02': () => [S.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)]
 }
@@ -233,6 +248,8 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'7': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('7', clientState), 'min', clientState),
 	// Artificial Jungle
 	'9': (_, clientState) => Checker.isRessourceOk('plant', 1, 'min', clientState),
+	// Asset Liquidation
+	'11': (_, clientState) => Checker.isTrOk(1, 'min', clientState),
 	// Caretaker Contract
 	'14': (_, clientState) => Checker.isRessourceOk('heat', 8, 'min', clientState),
 	// Decomposing Fungus
@@ -279,6 +296,8 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'P06': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
 	// Progressive Policies
 	'P09': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('P09', clientState), 'min', clientState),
+	// Self Replicating Bacteria
+	'P11': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('P11').some(s => s.name === 'microbe' && s.valueStock >= 5),
 }
 export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) => boolean> = {
 	//AI Central
@@ -437,6 +456,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		state.increaseProductionModValue('titanium')
 		return []
 	},
+	// Assets Liquidation
+	'11': () => [S.specialBuilder(BuilderOption.assetLiquidation)],
 	// Composting Factory
 	'17': (state) => {
 		state.addSellCardValueMod(1)
@@ -563,8 +584,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	// Work Crews
-	'102': () => [
-		EventFactory.createCardBuilder('specialBuilder', 'specialBuilder', BuilderOption.workCrews)],
+	'102': () => [S.specialBuilder(BuilderOption.workCrews)],
 	// Acquired Company
 	'103': () => [
 		S.addProduction({name: 'card', valueStock: 1})],
@@ -606,6 +626,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 			{name: 'plant', valueStock: 1},
 			{name: 'heat', valueStock: 3}
 		])],
+	// Automated Factories
+	'114': () => [
+		S.addProduction({name:'card', valueStock: 1}),
+		S.specialBuilder(BuilderOption.green9MCFree)
+	],
 	// Beam from a Thorium Asteroid
 	'116': () => [
 		S.addProduction([
@@ -950,6 +975,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'193': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
 	// Titanium Mine
 	'194': () => [S.addProduction({ name: 'titanium', valueStock: 1 })],
+	// Toll Station
+	'195': () => [
+		S.addProduction({name:'megacredit', valueStock: 3}),
+		S.specialBuilder(BuilderOption.green9MCFree)
+	],
 	// Trading Post
 	'196': () => [
 		S.addProduction({ name: 'megacredit', valueStock: 2 }),
@@ -1062,6 +1092,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addForestAndOxygen(1),
 		S.addRessource({ name: 'megacredit', valueStock: 5 })
 	],
+	// Assorted Enterprises
+	'P01': () => [S.specialBuilder(BuilderOption.assortedEnterprises)],
 	// Commercial Imports
 	'P02': () => [
 		S.addProduction([
@@ -1123,6 +1155,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//DevTechs
 	'CP03': () => [
 		S.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.devTechs)
+	],
+	//Mai-Ni Productions
+	'CP05': () => [
+		S.specialBuilder(BuilderOption.maiNiProductions)
 	],
 	//Zetasel
 	'CP06': () => [

@@ -19,49 +19,57 @@ interface TriggerInput {
 	forestGained: number,
 	discardedCard: PlayableCardModel
 }
+const S = EventFactory.simple
 
 // Handlers
 //ON_PLAYED_CARD
 	//Antigravity Technology
 	function handleTrigger_6(trigger: string, input: TriggerInput): EventBaseModel[] {
-		return [EventFactory.simple.addRessource([{name: 'plant', valueStock: 2},{name: 'heat', valueStock: 2}])]
+		return [S.addRessource([{name: 'plant', valueStock: 2},{name: 'heat', valueStock: 2}])]
+	}
+	function handleTrigger_CP05(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.playedCard.cardType!='greenProject'){return []}
+		return [
+			S.draw(1),
+			S.discard(1)
+		]
 	}
 
 //ON_PARAMETER_INCREASED
 	//Arctic Alagae
 	function handleTrigger_8(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.ocean){return []}
-		return [EventFactory.simple.addRessource({name:'plant', valueStock:4})]
+		return [S.addRessource({name:'plant', valueStock:4})]
 	}
 	//Fish
 	function handleTrigger_30(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.ocean){return []}
-		return [EventFactory.simple.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
+		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Herbivores
 	function handleTrigger_33(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter===GlobalParameterNameEnum.infrastructure){return []}
-		return [EventFactory.simple.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
+		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Livestock
 	function handleTrigger_39(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
-		return [EventFactory.simple.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
+		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Physics Complex
 	function handleTrigger_46(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
-		return [EventFactory.simple.addRessourceToCardId({name:"science", valueStock:input.increasedParameterValue}, trigger)]
+		return [S.addRessourceToCardId({name:"science", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Pets
 	function handleTrigger_F07(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
-		return [EventFactory.simple.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
+		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Zetasel
 	function handleTrigger_CP06(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.ocean){return []}
-		return [EventFactory.simple.addRessource([{name:'megacredit', valueStock:2},{name:'plant', valueStock:2}])]
+		return [S.addRessource([{name:'megacredit', valueStock:2},{name:'plant', valueStock:2}])]
 	}
 
 //ON_TAG_GAINED
@@ -73,7 +81,7 @@ interface TriggerInput {
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
 		for(let i=0; i<triggerred; i++){
-			result.push(EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+			result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
 		}
 		return result
 	}
@@ -84,14 +92,14 @@ interface TriggerInput {
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
 		for(let i=0; i<triggerred; i++){
-			result.push(EventFactory.simple.addRessourceToCardId({name:'animal', valueStock:1}, trigger))
+			result.push(S.addRessourceToCardId({name:'animal', valueStock:1}, trigger))
 		}
 		return result
 	}
 	//Energy Subsidies
 	function handleTrigger_25(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('power','tag'))!=true){return []}
-		return [EventFactory.simple.draw(1)]
+		return [S.draw(1)]
 	}
 	//Interplanetary Conference
 	function handleTrigger_37(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -104,39 +112,39 @@ interface TriggerInput {
 			}
 		}
 		if(draw===0){return []}
-		return [EventFactory.simple.draw(draw)]
+		return [S.draw(draw)]
 	}
 	//Mars University
 	function handleTrigger_40(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
-		return [EventFactory.simple.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity)]
+		return [S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity)]
 	}
 
 	//Olympus Conference
 	function handleTrigger_44(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
-		return [EventFactory.simple.draw(1)]
+		return [S.draw(1)]
 	}
 	//Optimal Aerobraking
 	function handleTrigger_45(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
-		return [EventFactory.simple.addRessource([{name: 'plant', valueStock: 2},{name: 'heat', valueStock: 2}])]
+		return [S.addRessource([{name: 'plant', valueStock: 2},{name: 'heat', valueStock: 2}])]
 	}
 	//Recycled Detritus
 	function handleTrigger_48(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
-		return [EventFactory.simple.draw(2)]
+		return [S.draw(2)]
 	}
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnTagGained(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
-		return [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock: 1}, trigger)]
+		return [S.addRessourceToCardId({name:'microbe', valueStock: 1}, trigger)]
 	}
 	//Saturn Systems
 	function handleTrigger_C8(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
 		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===false){return []}
-		return [EventFactory.simple.addTR(1)]
+		return [S.addTR(1)]
 	}
 	//Arklight
 	function handleTrigger_CP01(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -145,20 +153,20 @@ interface TriggerInput {
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
 		if(triggerred>0){
-			result.push(EventFactory.simple.addRessourceToCardId({name:'animal', valueStock:triggerred}, trigger))
+			result.push(S.addRessourceToCardId({name:'animal', valueStock:triggerred}, trigger))
 		}
 		return result
 	}
 	//Point Luna
 	function handleTrigger_CF1(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
-		return [EventFactory.simple.draw(1)]
+		return [S.draw(1)]
 	}
 //ON_RESSOURCE_ADDED_TO_CARD
 	//Filter Feeders
 	function handleTrigger_P04(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.ressourceAdded!='microbe'){return []}
-		return [EventFactory.simple.addRessourceToCardId({name:"animal", valueStock:1}, trigger)]
+		return [S.addRessourceToCardId({name:"animal", valueStock:1}, trigger)]
 	}
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnRessourceAdded(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -167,7 +175,7 @@ interface TriggerInput {
 		let stock = input.receivingCard.getStockValue('microbe')
 		let result: EventBaseModel[] = []
 		if(stock>=5){
-			result.push(EventFactory.simple.deactivateTrigger(trigger))
+			result.push(S.deactivateTrigger(trigger))
 		}
 
 		let limit = input.receivingCard.getCardTriggerLimit()
@@ -176,20 +184,20 @@ interface TriggerInput {
 		let addValue = Math.min(input.ressourceAddedValue, limit?.limit - limit.value)
 		if(addValue<=0){return[]}
 
-		result.push(EventFactory.simple.increaseResearchScanKeep({keep:0, scan:addValue}))
+		result.push(S.increaseResearchScanKeep({keep:0, scan:addValue}))
 		input.receivingCard.triggerLimit.value += addValue
 		return result
 	}
 //ON_CARD_ACTIVATED
 	//Assembly Lines
 	function handleTrigger_10(trigger: string, input: TriggerInput): EventBaseModel[] {
-		return [EventFactory.simple.addRessource({name:"megacredit", valueStock:1})]
+		return [S.addRessource({name:"megacredit", valueStock:1})]
 	}
 
 //ON_FOREST_GAINED
 	//Small Animals
 	function handleTrigger_53(trigger: string, input: TriggerInput): EventBaseModel[] {
-		return [EventFactory.simple.addRessourceToCardId({name:"animal", valueStock:input.forestGained}, trigger)]
+		return [S.addRessourceToCardId({name:"animal", valueStock:input.forestGained}, trigger)]
 	}
 
 //ON_TRIGGER_RESOLUTION
@@ -200,13 +208,14 @@ interface TriggerInput {
 		let draw = 1
 		if(card.hasTag('plant') || card.hasTag('science')){draw ++}
 		console.log('univ:', draw)
-		return [EventFactory.simple.draw(draw)]
+		return [S.draw(draw)]
 	}
 
 // Main Dispatch
 const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
-		'6': handleTrigger_6
+		'6': handleTrigger_6,
+		'CP05': handleTrigger_CP05
 	},
 	ON_PARAMETER_INCREASED: {
 		'8': handleTrigger_8,

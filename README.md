@@ -47,6 +47,7 @@ Backend: Junit
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
+need save/load basic builder rework (bugged)   
 
 ## Must have for v1 :
 ### Refactoring

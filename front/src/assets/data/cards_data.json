@@ -817,7 +817,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "-$other_tr$: 3$ressource_card$",
             "fr": ""
@@ -7804,7 +7804,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -8718,7 +8718,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -14826,7 +14826,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -15884,7 +15884,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16625,7 +16625,7 @@
             "en": "ACTION: Add a microbe to this card, or remove 5 microbes from this card to play a card from your hand. You pay 25 MC less for it.",
             "fr": ""
         },
-        "effectSummaryOption": "",
+        "effectSummaryOption": "$ressource_microbe$",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -16652,13 +16652,13 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_microbe$",
             "fr": ""
         },
         "effectActionTextOption2": {
-            "en": "",
+            "en": "-5$ressource_microbe$:$other_omnicard$$ressource_megacreditvoid_-25$",
             "fr": ""
         },
         "effectActionText2Option1": {
@@ -18179,7 +18179,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20085,7 +20085,7 @@
         },
         "stockable": [],
         "startingMegacredits": 48,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
