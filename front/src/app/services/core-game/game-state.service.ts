@@ -419,9 +419,6 @@ export class GameState{
         }
         if(events.length===0){return}
         this.addEventQueue(events, cardType==='project'?'first':'last')
-		if(cardType==='corporation'){
-			console.log(this.eventQueue.getValue())
-		}
 	}
     setClientTriggerAsInactive(trigger: string): void {
         let newState: PlayerStateModel = this.getClientState()
@@ -740,29 +737,8 @@ export class GameState{
 		if(newEvents?.length===0){return}
 		this.addEventQueue(newEvents,'first')
     }
-	/*
-	public applyResearchResult(result: WsDrawResult){
-		this.addEventQueue(EventFactory.createCardSelector('researchPhaseResult', {cardSelector:{
-			selectFrom: this.projectCardService.getProjectCardList(result.cardIdList),
-			selectionQuantity: result.keep
-		}}), 'first')
-	}
-	public applyScanKeepResult(result: WsDrawResult){
-		let newEvent = EventFactory.createCardSelectorComplex(
-			'scanKeepResult',
-			{
-				cardSelector:{
-					selectFrom: this.projectCardService.getProjectCardList(result.cardIdList),
-					selectionQuantity: result.keep
-				},
-				scanKeepOptions: result.options
-			})
-		if(newEvent){
-			this.addEventQueue(newEvent, 'first')
-		}
-	}
-		*/
 	endOfPhase() {
+		console.log(this.eventQueue.getValue())
 		this.rxStompService.publishPlayerState(this.getClientState().toJson(this.eventQueue.getValue()))
 	}
 }

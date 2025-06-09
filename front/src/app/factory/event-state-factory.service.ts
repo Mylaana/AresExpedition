@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
 import { EventStateDTO } from "../interfaces/dto/event-state-dto.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
-import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector, EventComplexCardSelector, EventDeckQuery } from "../models/core-game/event.model";
+import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector, EventComplexCardSelector, EventDeckQuery, EventTargetCard } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event factory/event-factory";
@@ -23,10 +23,16 @@ export class EventStateFactory{
 		switch(event.type){
 			case('cardSelectorCardBuilder'):{return this.eventBuilderToJson(event as EventCardBuilder, eventStateOperation)}
 			case('cardActivator'):{return this.eventActivatorToJson(event as EventCardActivator, eventStateOperation)}
-			case('cardSelector'):{return this.eventCardSelectorToJson(event as EventCardSelector, eventStateOperation)}
 			case('deck'):{return this.eventDeckQueryToJson(event as EventDeckQuery, eventStateOperation)}
-			default:{return}
+			case('targetCard'):{return this.eventTargetCardToJson(event as EventTargetCard, eventStateOperation)}
+			default:{
+				const excludedSubtypes : EventUnionSubTypes[] = ['endOfPhase', 'waitingGroupReady', 'selectCardForcedSell']
+				if(excludedSubtypes.includes(event.subType)){break}
+				console.error('UNSAVED EVENTSTATE ON EVENT: ', event)
+				break
+			}
 		}
+		return
 	}
 	private static eventBuilderToJson(event: EventCardBuilder, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
 		let builderLocked: boolean[] = []
@@ -54,13 +60,7 @@ export class EventStateFactory{
 			v: event.activationLog
 		}
 	}
-	private static eventCardSelectorToJson(event: EventCardSelector, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
-		switch(event.subType){
-			default:{return}
-		}
-	}
 	private static eventDeckQueryToJson(event: EventDeckQuery, eventStateOperation: EventStateOriginEnum): EventStateDTO | undefined {
-		console.log(event)
 		switch(event.subType){
 			case('scanKeepQuery'):{
 				return {
@@ -77,16 +77,14 @@ export class EventStateFactory{
 			}
 		}
 	}
-	private static eventComplexCardSelectorToJson(event: EventComplexCardSelector, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
-		switch(event.subType){
-			case('discardCards'):{
-				return {
-					o: eventStateOperation,
-					t: EventStateTypeEnum.discard,
-					v: event.cardSelector.selectionQuantity
-				}
+	private static eventTargetCardToJson(event: EventTargetCard, eventStateOperation: EventStateOriginEnum): EventStateDTO | undefined {
+		return {
+			o: eventStateOperation,
+			t: EventStateTypeEnum.targetCardAddRessource,
+			v: {
+				'cardId': event.targetCardId,
+				'ressources': event.advancedRessource
 			}
-			default:{return}
 		}
 	}
 	public static shouldLoadEventFromThisSavedState(event: EventBaseModel, eventState: EventStateDTO) : boolean {
@@ -159,11 +157,18 @@ export class EventStateFactory{
 					}))
 					break
 				}
+				case(EventStateTypeEnum.targetCardAddRessource):{
+					newEvents.push(EventFactory.createTargetCard('addRessourceToCardId',
+						state.v['cardId'],
+						{advancedRessource: state.v['ressources']}
+					))
+					console.log(newEvents, state)
+					break
+				}
 				default:{treated = false}
 			}
 			if(treated){eventStateList.splice(i, 1)}
 		}
-		console.log(eventStateList)
 		return newEvents
 	}
 }

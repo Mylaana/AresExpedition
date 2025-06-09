@@ -47,7 +47,6 @@ Backend: Junit
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
-Arklight not self triggerring   
 
 ## Must have for v1 :
 ### Refactoring
@@ -86,6 +85,7 @@ Add backend REST requests content validation
 Escape keyboard not exiting card builder selection   
 Websocket connection error while not in the game   
 Project card: layers superposition creating visual bug on edges   
+Expression has changed on client refresh right after selecting Arklight
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   

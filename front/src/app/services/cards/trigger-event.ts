@@ -144,8 +144,8 @@ interface TriggerInput {
 		let result: EventBaseModel[] = []
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
-		for(let i=0; i<triggerred; i++){
-			result.push(EventFactory.simple.addRessourceToCardId({name:'animal', valueStock:1}, trigger))
+		if(triggerred>0){
+			result.push(EventFactory.simple.addRessourceToCardId({name:'animal', valueStock:triggerred}, trigger))
 		}
 		return result
 	}
