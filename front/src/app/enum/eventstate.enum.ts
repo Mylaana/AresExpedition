@@ -9,6 +9,7 @@ export enum EventStateTypeEnum {
 	researchCardsQueried = 'RESEARCH_CARDS_QUERIED',
 	scanKeepQueried = 'SCAN_KEEP_QUERIED',
 	scanKeepUnQueried = 'SCAN_KEEP_UNQUERIED',
+	targetCardAddRessource = 'TARGET_CARD_ADD_RESSOURCE',
 
 	undefined = 'UNDEFINED'
 }
