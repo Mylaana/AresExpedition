@@ -35,18 +35,18 @@ public class EventState {
         this.value = ocean.getBonuses();
     }
 
-    public static EventState addEventDrawCards(List<Integer> cards) {
+    public static EventState addEventDrawCards(List<String> cards) {
         return new EventState(EventStateTypeEnum.DRAW_CARDS, cards);
     }
 
-    public static EventState addEventResearchCards(List<Integer> cards, Integer keep) {
+    public static EventState addEventResearchCards(List<String> cards, Integer keep) {
         Map<String, Object> content = new HashMap<>();
         content.put("cards", cards);
         content.put("keep", keep);
         return new EventState(EventStateTypeEnum.RESEARCH_CARDS_QUERIED, content);
     }
 
-    public static EventState addEventScanKeepCards(List<Integer> cards, Integer keep, ScanKeepOptionsEnum options) {
+    public static EventState addEventScanKeepCards(List<String> cards, Integer keep, ScanKeepOptionsEnum options) {
         Map<String, Object> content = new HashMap<>();
         content.put("cards", cards);
         content.put("keep", keep);
@@ -54,7 +54,7 @@ public class EventState {
         return new EventState(EventStateTypeEnum.SCAN_KEEP_QUERIED, content);
     }
 
-    public static EventState addEventProductionCards(List<Integer> cards) {
+    public static EventState addEventProductionCards(List<String> cards) {
         return new EventState(EventStateTypeEnum.PRODUCTION_CARDS, cards);
     }
 

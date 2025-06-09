@@ -333,7 +333,7 @@ export class EventHandler {
 								break
 							}
 							case('blueProject'):case('redProject'):{
-								this.gameStateService.addCardsToClientHand(card.id)
+								this.gameStateService.addCardsToClientHand(card.cardCode)
 							}
 						}
 					}

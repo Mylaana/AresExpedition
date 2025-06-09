@@ -43,7 +43,7 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
 })
 export class GameMainComponent implements OnInit{
 	playerHand: PlayableCardModel[] = [];
-	playerHandCorporation: number[] = [];
+	playerHandCorporation: string[] = [];
 	playerPlayed: PlayableCardModel[] = [];
 	playerIdList: myUUID[] = []
 	clientId!: myUUID

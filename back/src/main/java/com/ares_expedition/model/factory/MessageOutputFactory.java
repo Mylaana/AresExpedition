@@ -52,7 +52,7 @@ public class MessageOutputFactory {
         return new AckMessageOutput(gameId, uuid);
     }
 
-    public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, List<Ocean> oceans, List<Integer> cardsToDraw){
+    public static BaseMessageOutputDTO createOceanFlippedMessage(String gameId, List<Ocean> oceans, List<String> cardsToDraw){
         List<Map<RessourceEnum, Integer>> bonuses = new ArrayList<>();
         Map<String, Object> content = new HashMap<>();
         for(Ocean ocean: oceans){

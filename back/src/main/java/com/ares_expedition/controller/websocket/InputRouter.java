@@ -190,7 +190,7 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<Integer> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum());
+        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum());
         wsOutput.sendPushToPlayer(
             MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId())),
             query.getPlayerId()
@@ -208,7 +208,7 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<Integer> drawCards = this.gameController.scanKeepCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep, query.getContent().getOptions());
+        List<String> drawCards = this.gameController.scanKeepCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep, query.getContent().getOptions());
 
         wsOutput.sendPushToPlayer(
             MessageOutputFactory.createScanKeepResultMessage(query.getGameId(), new ScanKeepResult(drawCards, keep, query.getEventId(), query.getContent().getOptions())),
@@ -231,7 +231,7 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<Integer> drawCards = this.gameController.scanKeepCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep, ScanKeepOptionsEnum.RESEARCH);
+        List<String> drawCards = this.gameController.scanKeepCards(query.getGameId(), scan, query.getPlayerId(), query.getContentEnum(), keep, ScanKeepOptionsEnum.RESEARCH);
 
         wsOutput.sendPushToPlayer(
             MessageOutputFactory.createResearchResultMessage(query.getGameId(), new ResearchResult(drawCards, keep, query.getEventId())),

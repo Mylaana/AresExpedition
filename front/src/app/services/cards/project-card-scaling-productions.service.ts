@@ -7,156 +7,156 @@ import { TagType } from "../../types/global.type";
     providedIn: 'root'
 })
 export class ProjectCardScalingProductionsService {
-	public static getScalingProduction(ressource: RessourceType, playedCardList: number[], tagState:TagInfo[]): number{
+	public static getScalingProduction(ressource: RessourceType, playedCardList: string[], tagState:TagInfo[]): number{
 		let scalingProductions = 0
 		switch(ressource){
 			case('megacredit'):{
 				//Cartel
-				if(playedCardList.includes(123)){
-					scalingProductions += this.getCardScalingProduction(123, tagState)
+				if(playedCardList.includes('123')){
+					scalingProductions += this.getCardScalingProduction('123', tagState)
 				}
 
 				//Lightning Harvest
-				if(playedCardList.includes(156)){
-					scalingProductions += this.getCardScalingProduction(156, tagState)
+				if(playedCardList.includes('156')){
+					scalingProductions += this.getCardScalingProduction('156', tagState)
 				}
 				//Medical lab
-				if(playedCardList.includes(160)){
-					scalingProductions += this.getCardScalingProduction(160, tagState)
+				if(playedCardList.includes('160')){
+					scalingProductions += this.getCardScalingProduction('160', tagState)
 				}
 				//Miranda Resort
-				if(playedCardList.includes(165)){
-					scalingProductions += this.getCardScalingProduction(165, tagState)
+				if(playedCardList.includes('165')){
+					scalingProductions += this.getCardScalingProduction('165', tagState)
 				}
 				//Miranda Resort
-				if(playedCardList.includes(174)){
-					scalingProductions += this.getCardScalingProduction(174, tagState)
+				if(playedCardList.includes('174')){
+					scalingProductions += this.getCardScalingProduction('174', tagState)
 				}
 				//Satellites
-				if(playedCardList.includes(181)){
-					scalingProductions += this.getCardScalingProduction(181, tagState)
+				if(playedCardList.includes('181')){
+					scalingProductions += this.getCardScalingProduction('181', tagState)
 				}
 				//Venture Capitalism
-				if(playedCardList.includes(203)){
-					scalingProductions += this.getCardScalingProduction(203, tagState)
+				if(playedCardList.includes('203')){
+					scalingProductions += this.getCardScalingProduction('203', tagState)
 				}
 				break
 			}
 			case('heat'):{
 				//Atospheric Insulators
-				if(playedCardList.includes(113)){
-					scalingProductions += this.getCardScalingProduction(113, tagState)
+				if(playedCardList.includes('113')){
+					scalingProductions += this.getCardScalingProduction('113', tagState)
 				}
 				//Satellite Farms
-				if(playedCardList.includes(180)){
-					scalingProductions += this.getCardScalingProduction(180, tagState)
+				if(playedCardList.includes('180')){
+					scalingProductions += this.getCardScalingProduction('180', tagState)
 				}
 				//Windmills
-				if(playedCardList.includes(206)){
-					scalingProductions += this.getCardScalingProduction(206, tagState)
+				if(playedCardList.includes('206')){
+					scalingProductions += this.getCardScalingProduction('206', tagState)
 				}
 				break
 			}
 			case('plant'):{
 				//Insects
-				if(playedCardList.includes(152)){
-					scalingProductions += this.getCardScalingProduction(152, tagState)
+				if(playedCardList.includes('152')){
+					scalingProductions += this.getCardScalingProduction('152', tagState)
 				}
 				//Worms
-				if(playedCardList.includes(207)){
-					scalingProductions += this.getCardScalingProduction(207, tagState)
+				if(playedCardList.includes('207')){
+					scalingProductions += this.getCardScalingProduction('207', tagState)
 				}
 				//Diverse Habitats
-				if(playedCardList.includes(211)){
-					scalingProductions += this.getCardScalingProduction(211, tagState)
+				if(playedCardList.includes('211')){
+					scalingProductions += this.getCardScalingProduction('211', tagState)
 				}
 				break
 			}
 			case('card'):{
 				//Laboratories
-				if(playedCardList.includes(213)){
-					scalingProductions += this.getCardScalingProduction(213, tagState)
+				if(playedCardList.includes('213')){
+					scalingProductions += this.getCardScalingProduction('213', tagState)
 				}
 			}
 		}
 		return scalingProductions
 	}
-	public static getCardScalingProduction(cardId:number, tagState:TagInfo[]):number{
+	public static getCardScalingProduction(cardCode:string, tagState:TagInfo[]):number{
 		let scalingProduction: number = 0
-		switch(cardId){
+		switch(cardCode){
 			//Cartel
-			case(113):{
+			case('113'):{
 				scalingProduction = this.getPlayedTagNumber('earth', tagState)
 				break
 			}
 			//Cartel
-			case(123):{
+			case('123'):{
 				scalingProduction = this.getPlayedTagNumber('earth', tagState)
 				break
 			}
 			//Insects
-			case(152):{
+			case('152'):{
 				scalingProduction = this.getPlayedTagNumber('plant', tagState)
 				break
 			}
 			//Lightning Harvest
-			case(156):{
+			case('156'):{
 				scalingProduction = this.getPlayedTagNumber('science', tagState)
 				break
 			}
 			//Medical Lab
-			case(160):{
+			case('160'):{
 				scalingProduction = this.getPlayedTagNumber('building', tagState)
 				break
 			}
 			//Miranda Resort
-			case(165):{
+			case('165'):{
 				scalingProduction = this.getPlayedTagNumber('earth', tagState)
 				break
 			}
 			//Miranda Resort
-			case(174):{
+			case('174'):{
 				scalingProduction = this.getPlayedTagNumber('power', tagState)
 				break
 			}
 			//Satellite Farms
-			case(180):{
+			case('180'):{
 				scalingProduction = this.getPlayedTagNumber('space', tagState)
 				break
 			}
 			//Satellites
-			case(181):{
+			case('181'):{
 				scalingProduction = this.getPlayedTagNumber('space', tagState)
 				break
 			}
 			//Venture Capitalism
-			case(203):{
+			case('203'):{
 				scalingProduction = this.getPlayedTagNumber('event', tagState)
 				break
 			}
 			//Laboratories
-			case(213):{
+			case('213'):{
 				scalingProduction = Math.floor(this.getPlayedTagNumber('science', tagState) / 3)
 				break
 			}
 			//Windmills
-			case(206):{
+			case('206'):{
 				scalingProduction = this.getPlayedTagNumber('power', tagState)
 				break
 			}
 			//Worms
-			case(207):{
+			case('207'):{
 				scalingProduction = this.getPlayedTagNumber('microbe', tagState)
 				break
 			}
 			/*
 			//Zeppelins
-			case(213):{
-				//scalingProduction = this.getPlayedTagNumber('science', tagState)
+			case('213'):{
+				//scalingProduction = this.getPlayedTagNumber('science', tagState))
 				break
 			}*/
 			//Diverse Habitats
-			case(211):{
+			case('211'):{
 				scalingProduction = this.getPlayedTagNumber('animal', tagState)
 				scalingProduction += this.getPlayedTagNumber('plant', tagState)
 				break

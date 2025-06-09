@@ -35,9 +35,9 @@ export interface PlayerRessourceStateDTO {
 	r: RessourceInfo[]
 }
 export interface PlayerProjectCardStateDTO {
-	h: number[],
-	hc: number[],
-	hd: number[],
+	h: string[],
+	hc: string[],
+	hd: string[],
 	cp: PlayedCardStock[]
 	t: TriggerStateDTO
 	o: {[key: string]: number}

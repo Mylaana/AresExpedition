@@ -39,7 +39,7 @@ public class PlayerState {
     private PlayerEventState eventState = new PlayerEventState();
     private PlayerOtherState otherState = new PlayerOtherState();
 
-    private List<Integer> researchResolved = new ArrayList<>();
+    private List<String> researchResolved = new ArrayList<>();
     private Integer researchResolvedKeep;
 
     PlayerState(){
@@ -192,27 +192,27 @@ public class PlayerState {
         this.projectCardState = projectCardState;
     }
 
-    public List<Integer> getHand() {
+    public List<String> getHand() {
         return projectCardState.getHand();
     }
 
-    public void setHand(List<Integer> hand) {
+    public void setHand(List<String> hand) {
         this.projectCardState.setHand(hand);
     }
 
-    public List<Integer> getHandCorporations() {
+    public List<String> getHandCorporations() {
         return projectCardState.getHandCorporations();
     }
 
-    public void setHandCorporations(List<Integer> handCorporations) {
+    public void setHandCorporations(List<String> handCorporations) {
         this.projectCardState.setHandCorporations(handCorporations);
     }
 
-    public List<Map<Integer,Object>> getCardPlayed() {
+    public List<Map<String,Object>> getCardPlayed() {
         return projectCardState.getCardPlayed();
     }
 
-    public void setCardPlayed(List<Map<Integer,Object>> playedProjectIdList) {
+    public void setCardPlayed(List<Map<String,Object>> playedProjectIdList) {
         this.projectCardState.setCardPlayed(playedProjectIdList);
     }
 
@@ -303,15 +303,15 @@ public class PlayerState {
         this.eventState.addEventOceans(oceans);
     }
 
-    public void addEventDrawCards(List<Integer> cards){
+    public void addEventDrawCards(List<String> cards){
         this.eventState.addEventDrawCards(cards);
     }
 
-    public void addEventResearchCards(List<Integer> cards, Integer keep){
+    public void addEventResearchCards(List<String> cards, Integer keep){
         this.eventState.addEventResearchCards(cards, keep);
     }
 
-    public void addEventScanKeepCards(List<Integer> cards, Integer keep, ScanKeepOptionsEnum options){
+    public void addEventScanKeepCards(List<String> cards, Integer keep, ScanKeepOptionsEnum options){
         this.eventState.addEventScanKeepCards(cards, keep, options);
     }
 
@@ -359,11 +359,11 @@ public class PlayerState {
         return playerStates;
     }
 
-    public List<Integer> getResearchResolved() {
+    public List<String> getResearchResolved() {
         return researchResolved;
     }
 
-    public void setResearchResolved(List<Integer> researchResolved, Integer keep) {
+    public void setResearchResolved(List<String> researchResolved, Integer keep) {
         this.researchResolved = researchResolved;
         this.researchResolvedKeep = keep;
     }

@@ -13,9 +13,9 @@ import { GlobalParameterNameEnum } from "../../enum/global.enum"
 import { map } from "rxjs"
 
 export class PlayerProjectCardStateModel {
-    private hand: number[] = []
-	private handCorporation: number[] = []
-	private handDiscard: number[] = []
+    private hand: string[] = []
+	private handCorporation: string[] = []
+	private handDiscard: string[] = []
     private projects: PlayedProject = {
         playedIdList: [],
         playedProjectList: []
@@ -45,8 +45,8 @@ export class PlayerProjectCardStateModel {
 	}
 
     playCard(card: PlayableCardModel): void {
-        this.projects.playedIdList.push(card.id)
-		let cardCopy = this.cardInfoService.getCardById(card.id)
+        this.projects.playedIdList.push(card.cardCode)
+		let cardCopy = this.cardInfoService.getCardById(card.cardCode)
 		if(!cardCopy){return}
         this.projects.playedProjectList.push(cardCopy)
 		this.cardInitializeService.initialize(cardCopy)
@@ -54,14 +54,14 @@ export class PlayerProjectCardStateModel {
         if(!cardCopy.hasTrigger()){return}
         this.triggers.playTrigger(cardCopy.cardCode)
     }
-	addCardsToHand(cards: number | number[]){this.hand = this.hand.concat(Utils.toNumberArray(cards))}
-	addCardsToDiscard(cards: number | number[]){this.handDiscard = this.handDiscard.concat(Utils.toNumberArray(cards))}
-	removeCardsFromHand(cards: number | number[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true):void{
-		let cardList = Utils.toNumberArray(cards)
+	addCardsToHand(cards: string | string[]){this.hand = this.hand.concat(Utils.toArray(cards))}
+	addCardsToDiscard(cards: string | string[]){this.handDiscard = this.handDiscard.concat(Utils.toArray(cards))}
+	removeCardsFromHand(cards: string | string[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true):void{
+		let cardList = Utils.toArray(cards)
 		for(let card of cardList){
 			switch(cardType){
 				case('project'):{
-					let index = this.hand.indexOf(Number(card), 0);
+					let index = this.hand.indexOf(card, 0);
 					let discarded = this.hand.splice(index, 1)[0]
 					if (index > -1 && addRemovedCardsToDiscard) {
 						this.addCardsToDiscard(discarded)
@@ -69,7 +69,7 @@ export class PlayerProjectCardStateModel {
 					break
 				}
 				case('corporation'):{
-					let index = this.handCorporation.indexOf(Number(card), 0);
+					let index = this.handCorporation.indexOf(card, 0);
 					if (index > -1) {
 						this.handCorporation = []
 					}
@@ -83,13 +83,8 @@ export class PlayerProjectCardStateModel {
 	getHandMaximumSize(): number {return this.handMaximumSize}
     getPlayedTriggersId(): string[] {return this.triggers.getPlayedTriggers()}
     getActivePlayedTriggersId(): string[] {return this.triggers.getActivePlayedTriggers()}
-    getTriggersIdOnRessourceAddedToCard(): string[] {return this.triggers.getOnRessourceAddedToCard()}
-    getTriggersIdOnParameterIncrease(): string[] {return this.triggers.getOnParameterIncrease()}
-    getTriggersIdOnPlayedCard(): string[] {return this.triggers.getOnPlayedCard()}
-    getTriggersIdOnGainedTag(): string[] {return this.triggers.getOnGainedTag()}
-    getTriggerCostMod(): string[] {return this.triggers.getCostMod()}
     setTriggerInactive(triggerId: string): void {this.triggers.setTriggerInactive(triggerId)}
-    getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.filterCardIdList(this.projects.playedIdList, filter)}
+    getProjectPlayedIdList(filter?: ProjectFilter): string[] {return this.filterCardIdList(this.projects.playedIdList, filter)}
     getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.filterCardModelList(this.projects.playedProjectList, filter)}
     getProjectPlayedModelFromCode(cardCode: string): PlayableCardModel | undefined {
         for(let card of this.projects.playedProjectList){
@@ -109,8 +104,8 @@ export class PlayerProjectCardStateModel {
         if(!result){return 0}
         return result
     }
-    getProjectHandIdList(filter?: ProjectFilter): number[] {return this.filterCardIdList(this.hand, filter)}
-	getCorporationHandIdList(): number[] {return this.handCorporation}
+    getProjectHandIdList(filter?: ProjectFilter): string[] {return this.filterCardIdList(this.hand, filter)}
+	getCorporationHandIdList(): string[] {return this.handCorporation}
 
 	setPrerequisiteOffset(offset: GlobalParameterOffset | GlobalParameterOffset[]) {
 		let offsets: GlobalParameterOffset[] = Utils.toArray(offset)
@@ -136,13 +131,13 @@ export class PlayerProjectCardStateModel {
         }
         return projectList
 	}
-	private filterCardIdList(cards:number[], filter: ProjectFilter | undefined): number[] {
+	private filterCardIdList(cards:string[], filter: ProjectFilter | undefined): string[] {
 		if(!filter){return cards}
 		let projectList:PlayableCardModel[] = this.filterCardModelList(this.cardInfoService.getProjectCardList(cards), filter)
-		let idList: number[] = []
+		let idList: string[] = []
 
 		for(let project of projectList){
-			idList.push(project.id)
+			idList.push(project.cardCode)
 		}
 		return idList
 	}
@@ -223,14 +218,13 @@ export class PlayerProjectCardStateModel {
 	}
 	private loadPlayedCardsFromJson(dto: PlayedCardStock[]) {
 		if(!dto){return}
-		let playedIdList: number[] = []
+		let playedIdList: string[] = []
 		let playedModelList: PlayableCardModel[] = []
-		for (const stockMap of dto) {
-			for (const key in stockMap) {
-				const numericKey = parseInt(key)
-				const value = stockMap[numericKey]
-				playedIdList.push(numericKey)
-				let card = this.cardInfoService.getCardById(numericKey)
+		for (let stockMap of dto) {
+			for (let key in stockMap) {
+				let value = stockMap[key]
+				playedIdList.push(key)
+				let card = this.cardInfoService.getCardById(key)
 				if(!card){continue}
 				card.loadStockFromJson(value)
 				playedModelList.push(card)

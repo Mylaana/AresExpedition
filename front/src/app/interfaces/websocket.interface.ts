@@ -65,14 +65,14 @@ export interface WsGroupReady extends WsResult {
     ready: boolean
 }
 export interface WsDrawResult extends WsResult {
-    cardIdList: number[]
+    cardIdList: string[]
     eventId: number
 	keep: number,
 	options: DeckQueryOptionsEnum
 }
 export interface WsOceanResult extends WsResult {
 	bonuses: OceanBonus[]
-	draw: number[]
+	draw: string[]
 }
 export interface WsGameState extends WsResult {
     currentPhase: NonSelectablePhaseEnum

@@ -27,7 +27,7 @@ interface CreateEventOptionsGeneric {
     baseRessource?: RessourceStock | RessourceStock[]
     scanKeep?: ScanKeep
     card?: PlayableCardModel
-    drawEventResult?:number[]
+    drawEventResult?:string[]
     waiterId?:number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number

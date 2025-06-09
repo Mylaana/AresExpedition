@@ -22,16 +22,16 @@ const stockableMap = new Map<string, AdvancedRessourceType>(
 export class ProjectCardInfoService {
 	private projectCardInfo: PlayableCardInterface[] = this.loadJson()
 
-	getCardById(cardId:number): PlayableCardModel | undefined {
-		let card = this.projectCardInfo.find(x => x.id === cardId)
+	getCardById(code:string): PlayableCardModel | undefined {
+		let card = this.projectCardInfo.find(x => x.cardCode === code)
 		if(!card){return}
         return PlayableCardModel.fromInterface(card)
     }
 
-    getProjectCardIdList(): number[] {
-        let cardList: number[] = []
+    getProjectCardIdList(): string[] {
+        let cardList: string[] = []
         for(let card of this.projectCardInfo){
-            cardList.push(card.id)
+            cardList.push(card.cardCode)
         }
         return cardList
     }
@@ -46,7 +46,7 @@ export class ProjectCardInfoService {
 		}
 		return result
 	}
-    getProjectCardList(cardIdList: number[]): PlayableCardModel[] {
+    getProjectCardList(cardIdList: string[]): PlayableCardModel[] {
         let resultProjectCardList: PlayableCardModel[] = [];
         cardIdList.forEach(element => {
             let card = this.getCardById(Utils.jsonCopy(element))
@@ -56,10 +56,10 @@ export class ProjectCardInfoService {
         });
         return resultProjectCardList;
     }
-    public static getProjectCardIdListFromModel(cards: PlayableCardModel[]): number[] {
-        let idList: number[] = []
+    public static getProjectCardIdListFromModel(cards: PlayableCardModel[]): string[] {
+        let idList: string[] = []
         for(let card of cards){
-            idList.push(card.id)
+            idList.push(card.cardCode)
         }
         return idList
     }

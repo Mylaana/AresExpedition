@@ -174,7 +174,7 @@ export class EventStateFactory{
 					let event = EventFactory.simple.specialBuilder(state.v['options']) as EventCardBuilder
 					for(let i=0; i<state.v['cardBuilt'].length; i++){
 						if(state.v['cardBuilt'][i]){
-							event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(Number(state.v['cardBuilt'][i]))??new PlayableCardModel)
+							event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(state.v['cardBuilt'][i])??new PlayableCardModel)
 							event.cardBuilder[i].setbuilderIsLocked(true)
 						}
 					}

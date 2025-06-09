@@ -270,44 +270,44 @@ export class GameState{
 	getClientPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPhaseSelected()}
 	getClientPreviousPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPreviousPhaseSelected()}
 	getClientPhaseCards(onlyUpgraded: boolean = false): PhaseCardModel[] {return this.getClientState().getPhaseCards(onlyUpgraded)}
-    getClientHandIdList(filter?: ProjectFilter): number[] {return this.getClientState().getProjectHandIdList(filter)}
+    getClientHandIdList(filter?: ProjectFilter): string[] {return this.getClientState().getProjectHandIdList(filter)}
     getClientHandModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList(filter))}
-	getClientHandCorporationIdList(filter?: ProjectFilter): number[] {return this.getClientState().getCorporationHandIdList()}
+	getClientHandCorporationIdList(filter?: ProjectFilter): string[] {return this.getClientState().getCorporationHandIdList()}
 	getClientHandCorporationModelList(): PlayableCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandCorporationIdList())}
 
-    getClientProjectPlayedIdList(): number[] {return this.getPlayerProjectPlayedIdList(this.clientId)}
-	getPlayerProjectPlayedIdList(playerId: myUUID): number[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedIdList()??[]}
+    getClientProjectPlayedIdList(): string[] {return this.getPlayerProjectPlayedIdList(this.clientId)}
+	getPlayerProjectPlayedIdList(playerId: myUUID): string[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedIdList()??[]}
     getClientProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel [] {return this.getPlayerProjectPlayedModelList(this.clientId, filter)}
     getPlayerProjectPlayedModelList(playerId: myUUID, filter?: ProjectFilter): PlayableCardModel[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedModelList(filter)??[]}
 
-    addCardsToClientHand(cardsToAdd: number | number[]):void{
+    addCardsToClientHand(cardsToAdd: string | string[]):void{
         let clientState = this.getClientState()
         clientState.addCardsToHand(cardsToAdd)
 		this.updateClientState(clientState)
     }
-	addCardsToClientDiscard(cardsToAdd: number | number[]):void{
+	addCardsToClientDiscard(cardsToAdd: string | string[]):void{
 		let clientState = this.getClientState()
         clientState.addCardsToDiscard(cardsToAdd)
 		this.updateClientState(clientState)
 	}
-	addCardsSelectedFromListAndDiscardTheRest(cardsToKeep: number | number[], cardList: number[]){
+	addCardsSelectedFromListAndDiscardTheRest(cardsToKeep: string | string[], cardList: string[]){
 		this.addCardsToClientHand(cardsToKeep)
 		this.addCardsToClientDiscard(cardList.filter(toDiscard => !Utils.toArray(cardsToKeep).includes(toDiscard)))
 	}
-    removeCardsFromClientHandById(cardsToRemove: number | number[], cardType: PlayableCardType):void{
+    removeCardsFromClientHandById(cardsToRemove: string | string[], cardType: PlayableCardType):void{
 		let clientState = this.getClientState()
         clientState.removeCardsFromHand(cardsToRemove, cardType)
 		this.updateClientState(clientState)
     }
     removeCardsFromClientHandByModel(cardsToRemove: PlayableCardModel | PlayableCardModel[], cardType: PlayableCardType):void{
-		let removeListId: number[] = []
+		let removeListId: string[] = []
 		if(!Array.isArray(cardsToRemove)){
-			this.removeCardsFromClientHandById(cardsToRemove.id, cardType)
+			this.removeCardsFromClientHandById(cardsToRemove.cardCode, cardType)
 			return
 		}
 
 		for(let removeCard of cardsToRemove){
-			removeListId.push(removeCard.id)
+			removeListId.push(removeCard.cardCode)
 		}
 		this.removeCardsFromClientHandById(removeListId, cardType)
     }

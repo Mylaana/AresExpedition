@@ -11,15 +11,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerProjectCardStateDTO {
     @JsonProperty("h")
-    private List<Integer> hand = new ArrayList<>();
+    private List<String> hand = new ArrayList<>();
     @JsonProperty("hc")
-    private List<Integer> handCorporations = new ArrayList<>();
+    private List<String> handCorporations = new ArrayList<>();
     @JsonProperty("hd")
-    private List<Integer> handDiscard = new ArrayList<>();
+    private List<String> handDiscard = new ArrayList<>();
     @JsonProperty("ppil")
-    private List<Integer> playedProjectIdList = new ArrayList<>();
+    private List<String> playedProjectIdList = new ArrayList<>();
     @JsonProperty("cp")
-    private List<Map<Integer, Object>> cardPlayed = new ArrayList<>();
+    private List<Map<String, Object>> cardPlayed = new ArrayList<>();
     @JsonProperty("t")
     private TriggerStateDTO triggers = new TriggerStateDTO();
     @JsonProperty("hms")
@@ -40,19 +40,19 @@ public class PlayerProjectCardStateDTO {
         this.prerequisiteOffset = state.getPrerequisiteOffset();
     }
 
-    public List<Integer> getHand() {
+    public List<String> getHand() {
         return this.hand;
     }
 
-    public void setHand(List<Integer> hand) {
+    public void setHand(List<String> hand) {
         this.hand = hand;
     }
 
-    public List<Integer> getPlayedProjectIdList() {
+    public List<String> getPlayedProjectIdList() {
         return this.playedProjectIdList;
     }
 
-    public void setPlayedProjectIdList(List<Integer> playedProjectIdList) {
+    public void setPlayedProjectIdList(List<String> playedProjectIdList) {
         this.playedProjectIdList = playedProjectIdList;
     }
 
@@ -72,27 +72,27 @@ public class PlayerProjectCardStateDTO {
         this.handMaximumSize = handMaximumSize;
     }
 
-    public List<Integer> getHandCorporations() {
+    public List<String> getHandCorporations() {
         return handCorporations;
     }
 
-    public void setHandCorporations(List<Integer> handCorporations) {
+    public void setHandCorporations(List<String> handCorporations) {
         this.handCorporations = handCorporations;
     }
 
-    public List<Integer> getHandDiscard() {
+    public List<String> getHandDiscard() {
         return handDiscard;
     }
 
-    public void setHandDiscard(List<Integer> handDiscard) {
+    public void setHandDiscard(List<String> handDiscard) {
         this.handDiscard = handDiscard;
     }
 
-    public List<Map<Integer, Object>> getCardPlayed() {
+    public List<Map<String, Object>> getCardPlayed() {
         return cardPlayed;
     }
 
-    public void setCardPlayed(List<Map<Integer, Object>> cardPlayed) {
+    public void setCardPlayed(List<Map<String, Object>> cardPlayed) {
         this.cardPlayed = cardPlayed;
     }
 

@@ -9,7 +9,7 @@ export type PrerequisiteType = 'tag' | 'oxygen' | 'infrastructure' | 'ocean' | '
 export type PrerequisiteTresholdType = 'min' | 'max' | undefined
 export type CostMod = {tagList?:number[], steelState?: RessourceInfo, titaniumState?: RessourceInfo, playedTriggersList?: string[], buildDiscount?: number}
 export type PlayedProject = {
-	playedIdList: number[],
+	playedIdList: string[],
     playedProjectList: PlayableCardModel[]
 }
 export type TriggerLimit = {
@@ -19,5 +19,5 @@ export type TriggerLimit = {
 
 export type ProjectListType = 'none' | 'hand' | 'played' | 'selector' | 'builderSelector' | 'builderSelectedZone' | 'playedSelector'
 export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'discard' | 'addRessource' | 'scanKeepResult'
-export type PlayedCardStock = {[key: number]: AdvancedRessourceStock[]}
+export type PlayedCardStock = {[key: string]: AdvancedRessourceStock[]}
 export type ActivationOption = 1 | 2

@@ -374,7 +374,7 @@ export class EventGeneric extends EventBaseModel {
     increaseResearchScanKeep?: Partial<ScanKeep>
     baseRessource?:RessourceStock | RessourceStock[]
     cardIdToBuild?: PlayableCardModel
-    drawResultList?: number[]
+    drawResultList?: string[]
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeQuantity?: number
 	addForestPoint?: number
@@ -408,7 +408,7 @@ export class DrawEvent {
     drawCardNumber!: number
     keepCardNumber?:number
     drawDate = new Date()
-    drawResultCardList: number[] = []
+    drawResultCardList: string[] = []
     finalized: boolean = false
     served: boolean = false
     queried: boolean = false

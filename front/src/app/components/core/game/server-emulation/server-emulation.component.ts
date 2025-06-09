@@ -29,7 +29,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	currentPhase: string = "planification";
 	currentDrawQueue: DrawEvent[] = []
 	currentGroupReady: PlayerReadyModel[] = []
-	cardsDeck: number[] = [];
 	cardsDiscarded: number[] = [];
 	phaseList: SelectablePhaseEnum[] = [SelectablePhaseEnum.development,SelectablePhaseEnum.construction,SelectablePhaseEnum.action,SelectablePhaseEnum.production,SelectablePhaseEnum.research]
 	authorizedBotPhaseSelection: SelectablePhaseEnum[] = [SelectablePhaseEnum.development,SelectablePhaseEnum.construction,SelectablePhaseEnum.action,SelectablePhaseEnum.production,SelectablePhaseEnum.research]
@@ -49,8 +48,6 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	){}
 
 	ngOnInit(){
-		this.cardsDeck = this.cardInfoService.getProjectCardIdList()
-
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(
 			phase => this.phaseChanged(phase)
 		)
@@ -154,7 +151,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: number[] = [219]
+		let cardDrawList: string[] = ['P17']
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
 		this.gameStateService.cleanAndNextEventQueue()

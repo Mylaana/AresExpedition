@@ -42,21 +42,21 @@ public class GameController {
         return this.gameHolder.get(gameId);
     }
 
-    private List<Integer> cardsFromDeck(String gameId, Integer drawNumber, String playerId){
-        List<Integer> cards = getGameFromId(gameId).drawCards(drawNumber);
+    private List<String> cardsFromDeck(String gameId, Integer drawNumber, String playerId){
+        List<String> cards = getGameFromId(gameId).drawCards(drawNumber);
         if(cards.size() < drawNumber){
             wsOutput.sendPushToGroup(new BaseMessageOutputDTO(gameId, "not enough cards in deck"));
         }
         return cards;
     }
-    public List<Integer> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason){
-        List<Integer> cards = cardsFromDeck(gameId, drawNumber, playerId);
+    public List<String> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason){
+        List<String> cards = cardsFromDeck(gameId, drawNumber, playerId);
         this.getGameFromId(gameId).addEventDrawCardsToPlayer(playerId, cards);
         return cards;
     }
 
-    public List<Integer> scanKeepCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer keep, ScanKeepOptionsEnum options){
-        List<Integer> cards = cardsFromDeck(gameId, drawNumber, playerId);
+    public List<String> scanKeepCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer keep, ScanKeepOptionsEnum options){
+        List<String> cards = cardsFromDeck(gameId, drawNumber, playerId);
         Game game = this.getGameFromId(gameId);
 
         switch(reason){
@@ -181,7 +181,7 @@ public class GameController {
         Game game = getGameFromId(gameId);
         List<Ocean> oceans = game.flipOceans(oceanNumber);
         playerState.addEventOceans(oceans);
-        List<Integer> cardsToDraw = game.drawFlippedOceanCards(playerId, oceans);
+        List<String> cardsToDraw = game.drawFlippedOceanCards(playerId, oceans);
         if(cardsToDraw.size()>0){
             playerState.addEventDrawCards(cardsToDraw); 
         }
