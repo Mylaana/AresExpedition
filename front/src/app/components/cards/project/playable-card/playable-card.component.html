@@ -71,7 +71,7 @@
 			<div class="top-left-layout" [ngClass]="projectCard.cardType"></div>
 		</div>
 		<app-card-background [cardType]="projectCard.cardType"></app-card-background>
-		<app-card-status [cardId]="projectCard.id" [cardCode]="projectCard.cardCode" [cardStatus]="projectCard.status"  [hovered]="_hovered"></app-card-status>
+		<app-card-status [cardCode]="projectCard.cardCode" [cardStatus]="projectCard.status"  [hovered]="_hovered"></app-card-status>
 	</div>
 	<app-card-activation-list
 		*ngIf="state.isActivable()"

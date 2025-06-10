@@ -98,7 +98,7 @@ export class EventHandler {
 	}
 	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}): void {
 		let event = this.currentEvent as EventCardActivator
-		event.activationLog[input.card.id.toString()] = input.card.activated
+		event.activationLog[input.card.cardCode] = input.card.activated
 		if(input.twice){event.doubleActivationCount += 1}
 		this.gameStateService.activateCard(input.card, input.option)
 	}

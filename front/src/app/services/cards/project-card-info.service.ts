@@ -70,7 +70,6 @@ export class ProjectCardInfoService {
 
         for(let jsonCard of jsonData){
             let card: PlayableCardInterface = {
-				id: jsonCard.id,
 				cardCode: jsonCard.card_code,
 				origin: jsonCard.origin,
 				costInitial: jsonCard.cost,

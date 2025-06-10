@@ -8,7 +8,6 @@ import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
 
 export class PlayableCardModel{
-    id!: number;
     cardCode!: string;
     origin!: string;
     costInitial!: number;

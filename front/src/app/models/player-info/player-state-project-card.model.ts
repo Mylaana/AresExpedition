@@ -167,7 +167,7 @@ export class PlayerProjectCardStateModel {
 	}
 	private loadCardActivationCount(cardId: string, activationCount: number){
 		for(let card of this.projects.playedProjectList){
-			if(card.id.toString()===cardId){
+			if(card.cardCode.toString()===cardId){
 				card.activated = activationCount
 				return
 			}

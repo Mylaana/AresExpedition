@@ -265,7 +265,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
     }
     private removeCardFromSelector(card: PlayableCardModel): void {
         for(let i=0; i<this.cardSelector.selectFrom.length; i++){
-            if(this.cardSelector.selectFrom[i].id===card.id){
+            if(this.cardSelector.selectFrom[i].cardCode===card.cardCode){
                 this.cardSelector.selectFrom.splice(i, 1)
             }
         }

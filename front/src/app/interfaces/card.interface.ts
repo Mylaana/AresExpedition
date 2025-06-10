@@ -20,7 +20,6 @@ export interface PlayableCardEffect {
 }
 
 export interface PlayableCardInterface {
-	id: number
 	cardCode: string
 	origin: string
 	costInitial: number
