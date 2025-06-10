@@ -16,6 +16,6 @@ export enum EventStateTypeEnum {
 }
 
 export enum EventStateOriginEnum {
-	client = 'CLIENT',
-	server = 'SERVER'
+	load = 'LOAD',
+	create = 'CREATE'
 }

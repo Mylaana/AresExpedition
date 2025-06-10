@@ -19,7 +19,7 @@ public class EventState {
     }
     
     public EventState(EventStateTypeEnum type, Object value){
-        this.origin = EventStateOrigin.SERVER;
+        this.origin = EventStateOrigin.CREATE;
         this.type = type;
         this.value = value;
     }
@@ -30,7 +30,7 @@ public class EventState {
     }
 
     public EventState(Ocean ocean){
-        this.origin = EventStateOrigin.SERVER;
+        this.origin = EventStateOrigin.CREATE;
         this.type = EventStateTypeEnum.OCEAN_FLIPPED;
         this.value = ocean.getBonuses();
     }

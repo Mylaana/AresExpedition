@@ -7,7 +7,7 @@ import { RxStompService } from "../websocket/rx-stomp.service"
 import { GameState } from "./game-state.service"
 import { GameParamService } from './game-param.service'
 import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.service'
-import { EventStateFactory } from '../../factory/event-state-factory.service'
+import { EventStateFactory } from '../../factory/event-state-service.service'
 
 describe('Services - Core game - Game state', () => {
     describe('UNIT TEST', () => {

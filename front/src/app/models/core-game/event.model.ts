@@ -5,9 +5,7 @@ import { EventCardBuilderButtonNames } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
-import { EventStateOriginEnum } from "../../enum/eventstate.enum";
-import { EventStateFactory } from "../../factory/event-state-factory.service";
+import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
 
 
@@ -32,9 +30,6 @@ export abstract class EventBaseModel {
 	hasCardActivator(): boolean {return false}
     getSelectionActive(): boolean {return false}
 	onSwitch(): void {}
-	toJson(eventStateOperation: EventStateOriginEnum = EventStateOriginEnum.client): EventStateDTO | undefined{
-		return EventStateFactory.toJson(this, eventStateOperation)
-	}
 	fromJson(dto: EventStateDTO){return}
 }
 
@@ -100,9 +95,6 @@ export class EventCardActivator extends EventBaseCardSelector {
 	doubleActivationMaxNumber!: number
 	doubleActivationCount: number = 0
 	override hasCardActivator(): boolean {return true}
-	override fromJson(dto: EventStateDTO): void {
-		this.activationLog = dto.v??{}
-	}
 }
 
 export class CardBuilder {
@@ -216,7 +208,7 @@ export class CardBuilder {
                 break
             }
             case('buildCard'):case(BuilderOption.drawCard):case(BuilderOption.gain6MC):{
-                this.setbuilderIsLocked()
+                this.setBSuilderIsLocked()
                 break
             }
         }
@@ -231,10 +223,11 @@ export class CardBuilder {
 		this.selectedCard = undefined
         this.updateButtonGroupState('cancelSelectCard')
 	}
-    setbuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
-    getbuilderIsLocked(): boolean {return this.builderIsLocked}
+    setBSuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
+    getBuilderIsLocked(): boolean {return this.builderIsLocked}
 	getBuitCardCode(): string | undefined {
 		if(this.builderIsLocked===false){return}
+		if(!this.selectedCard){return}
 		return this.getSelectedCard().cardCode
 	}
 	resetBuilder(): void {
@@ -312,7 +305,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
 	}
 	private resetNonFocusedBuildersState(){
 		for(let i=0; i<this.cardBuilder.length; i++){
-			if(i===this.cardBuilderIdHavingFocus || this.cardBuilder[i].getbuilderIsLocked()){continue}
+			if(i===this.cardBuilderIdHavingFocus || this.cardBuilder[i].getBuilderIsLocked()){continue}
 			this.discardBuilderSelectedCard(i)
 			this.cardBuilder[i].resetBuilder()
 			break
@@ -335,24 +328,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		//reset cardBuilder's selection onSwitch
 		for(let builder of this.cardBuilder){
 			builder.resetBuilder()
-		}
-	}
-	override fromJson(dto: EventStateDTO): void {
-		if(dto.v)
-			console.log(dto)
-		for(let i=0; i<dto.v['cardBuilt'].length; i++){
-			if(dto.v['cardBuilt'][i]){
-				//event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(Number(state.v['cardBuilt'][i]))??new PlayableCardModel)
-				this.cardBuilder[i].setbuilderIsLocked(true)
-			}
-		}
-		return
-		if(dto.v){
-			let index: number = 0
-			for(let locked of dto.v){
-				this.cardBuilder[index].setbuilderIsLocked(locked)
-				index ++
-			}
 		}
 	}
 }

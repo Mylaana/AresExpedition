@@ -17,7 +17,7 @@ import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
-import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
+import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { ProjectCardScalingProductionsService } from "../../services/cards/project-card-scaling-productions.service";
 import { Utils } from "../../utils/utils";
@@ -215,7 +215,7 @@ export class PlayerStateModel {
 		this.addRessource('megacredit', -card.cost)
 	}
 
-	public toJson(eventQueue?: EventBaseModel[]): PlayerStateDTO {
+	public toJson(eventStateDTO?: EventStateDTO[]): PlayerStateDTO {
 		return {
 			infoState: this.infoState.toJson(),
 			scoreState: this.scoreState.toJson(),
@@ -224,7 +224,7 @@ export class PlayerStateModel {
 			projectCardState: this.projectCardState.toJson(),
 			phaseCardState: this.phaseCardState.toJson(),
 			globalParameterState: this.globalParameterState.toJson(),
-			eventState: this.eventState.toJson(eventQueue),
+			eventState: this.eventState.toJson(eventStateDTO),
 			otherState: this.otherState.toJson()
 		}
 	}

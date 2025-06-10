@@ -17,7 +17,7 @@ import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
-import { PlayableCard } from "../../services/cards/playable-card";
+import { PlayableCard } from "../../factory/playable-card.factory";
 
 @Injectable()
 export class EventHandler {

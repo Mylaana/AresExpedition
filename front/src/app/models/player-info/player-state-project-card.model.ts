@@ -8,7 +8,7 @@ import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type
 import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
-import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface"
+import { EventStateDTO } from "../../interfaces/event-state.interface"
 import { GlobalParameterNameEnum } from "../../enum/global.enum"
 import { map } from "rxjs"
 
@@ -47,7 +47,6 @@ export class PlayerProjectCardStateModel {
     playCard(card: PlayableCardModel): void {
         this.projects.playedIdList.push(card.cardCode)
 		let cardCopy = this.cardInfoService.getCardById(card.cardCode)
-		console.log(cardCopy)
 		if(!cardCopy){return}
         this.projects.playedProjectList.push(cardCopy)
 		this.cardInitializeService.initialize(cardCopy)

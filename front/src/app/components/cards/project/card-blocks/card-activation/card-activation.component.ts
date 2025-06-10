@@ -9,7 +9,7 @@ import { PlayerStateModel } from '../../../../../models/player-info/player-state
 import { GameState } from '../../../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivationOption } from '../../../../../types/project-card.type';
-import { PlayableCard } from '../../../../../services/cards/playable-card';
+import { PlayableCard } from '../../../../../factory/playable-card.factory';
 
 @Component({
     selector: 'app-card-activation',

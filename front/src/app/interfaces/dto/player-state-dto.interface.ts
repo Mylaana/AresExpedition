@@ -3,7 +3,7 @@ import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { myUUID, RGB } from "../../types/global.type";
 import { PlayedCardStock } from "../../types/project-card.type";
 import { AdvancedRessourceStock, RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
-import { EventStateDTO } from "./event-state-dto.interface";
+import { EventStateDTO } from "../event-state.interface";
 import { PlayedCardDTO, TriggerStateDTO } from "./project-card-dto.interface";
 
 export interface PlayerStateDTO {

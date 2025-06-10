@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CostMod } from "../../types/project-card.type";
 import { GAME_RESSOURCE_STEEL_BASE_REDUCTION, GAME_RESSOURCE_TITANIUM_BASE_REDUCTION } from "../../global/global-const";
 import { PlayableCardModel } from "./project-card.model";
-import { PlayableCard } from "../../services/cards/playable-card";
+import { PlayableCard } from "../../factory/playable-card.factory";
 
 @Injectable()
 export class CardCost {

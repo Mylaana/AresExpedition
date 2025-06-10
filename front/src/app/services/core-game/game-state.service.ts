@@ -14,14 +14,16 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.en
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
-import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
+import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
-import { EventStateFactory } from "../../factory/event-state-factory.service";
+import { EventStateService } from "../../factory/event-state-service.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { ActivationOption } from "../../types/project-card.type";
-import { PlayableCard } from "../cards/playable-card";
+import { PlayableCard } from "../../factory/playable-card.factory";
 import { ProjectCardScalingVPService } from "../cards/project-card-scaling-VP.service";
+import { EventStateOriginEnum } from "../../enum/eventstate.enum";
+import { EventSerializer } from "../../utils/event-serializer.utils";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -99,7 +101,7 @@ export class GameState{
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private scalingVp: ProjectCardScalingVPService,
-		private eventStateFactory: EventStateFactory,
+		private eventStateService: EventStateService,
 		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
@@ -178,7 +180,9 @@ export class GameState{
         return this.clientState.getValue()
     }
 	getClientStateDTO(): PlayerStateDTO {
-		return this.getClientState().toJson(this.eventQueue.getValue())
+		return this.getClientState().toJson(
+			EventSerializer.eventQueueToJson(
+			this.eventQueue.getValue()))
 	}
 	/*
     updatePlayerState(playerId:myUUID, playerState: PlayerStateModel): void{
@@ -362,14 +366,32 @@ export class GameState{
             }
         }
 		if(this.eventQueueSavedState.length>0){
-			//load data in existing events
-			this.loadEventQueueSavedState(newQueue)
-			//create new events
-			newQueue = this.eventStateFactory.createEventsFromJson(this.eventQueueSavedState, this.getClientState()).concat(newQueue)
+			newQueue = this.applyEventQueueSavedState(newQueue)
 		}
         this.eventQueue.next(newQueue)
     }
+	private applyEventQueueSavedState(queue: EventBaseModel[]): EventBaseModel[] {
+		//create new events
+		if(this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create).length>0){
+			queue = this.eventStateService.createFromJson(this.eventQueueSavedState).concat(queue)
+			console.log(queue)
+			this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create)
+		}
 
+		//load data in existing events
+		if(this.eventQueueSavedState.length>0){
+			for(let event of queue){
+				for(let dto of this.eventQueueSavedState){
+					if(this.eventStateService.shouldLoadEvent(event, dto)){
+						this.eventStateService.loadFromJson(event, dto)
+						this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e!=dto)
+					}
+				}
+			}
+			//this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.load)
+		}
+		return queue
+	}
     /**
      * gets nothing
      * returns nothing
@@ -397,7 +419,6 @@ export class GameState{
 		this.updateClientState(playerState)
 	}
 	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{
-        console.log('playing card:', card)
 		let events: EventBaseModel[] = []
 		let state = this.getClientState()
 		state.playCard(card, cardType)
@@ -635,12 +656,13 @@ export class GameState{
 		}
 		this.selectedPhaseList.next(list)
 	}
+	/*
 	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
 		let playerState: PlayerStateModel = this.getClientState()
 
 		for(let event of eventQueue){
 			for(let eventState of this.eventQueueSavedState){
-				if(EventStateFactory.shouldLoadEventFromThisSavedState(event, eventState)){
+				if(EventStateService.shouldLoadEvent(event, eventState)){
 					console.log('loading eventState:',eventState, event)
 					//specific cases
 					switch(true){
@@ -666,6 +688,7 @@ export class GameState{
 			}
 		}
 	}
+		*/
 
 	public addOceanBonus(oceanBonus: WsOceanResult){
 		let ressources: RessourceStock[] = []
@@ -738,6 +761,6 @@ export class GameState{
 		this.addEventQueue(newEvents,'first')
     }
 	endOfPhase() {
-		this.rxStompService.publishPlayerState(this.getClientState().toJson(this.eventQueue.getValue()))
+		this.rxStompService.publishPlayerState(this.getClientState().toJson(EventSerializer.eventQueueToJson(this.eventQueue.getValue())))
 	}
 }
