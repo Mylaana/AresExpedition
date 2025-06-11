@@ -374,7 +374,6 @@ export class GameState{
 		//create new events
 		if(this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create).length>0){
 			queue = this.eventStateService.createFromJson(this.eventQueueSavedState).concat(queue)
-			console.log(queue)
 			this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create)
 		}
 

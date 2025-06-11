@@ -33,12 +33,12 @@ export interface EventStateContentScanKeepQueriedDTO extends EventStateContentDT
 	options: DeckQueryOptionsEnum
 }
 export interface EventStateContentScanKeepUnqueriedDTO extends EventStateContentDTO {
-	scanKeep: Partial<ScanKeep>
-	options: DeckQueryOptionsEnum
+	scanKeep: Partial<ScanKeep> | undefined
+	options: DeckQueryOptionsEnum | undefined
 }
 export interface EventStateContentTargetCardDTO extends EventStateContentDTO {
 	cardId: string
-	ressources: AdvancedRessourceStock
+	ressources: AdvancedRessourceStock | AdvancedRessourceStock [] | undefined
 }
 export interface BuilderStatusDTO {
 	l: boolean,

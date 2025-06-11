@@ -76,7 +76,7 @@ export class EventStateService{
 							let card = this.projectCardInfoService.getCardById(cardCode)
 							card?eventBuilder.cardBuilder[i].setSelectedCard(card):null
 						}
-						eventBuilder.cardBuilder[i].setBSuilderIsLocked(true)
+						eventBuilder.cardBuilder[i].setBSuilderIsLocked(content.s[i].l)
 					}
 				}
 			}
@@ -146,7 +146,7 @@ export class EventStateService{
 						let cardCode = content.s[i].cc
 						if(cardCode){
 							event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(cardCode)??new PlayableCardModel)
-							event.cardBuilder[i].setBSuilderIsLocked(true)
+							event.cardBuilder[i].setBSuilderIsLocked(content.s[i].l)
 						}
 					}
 					newEvents.push(event)

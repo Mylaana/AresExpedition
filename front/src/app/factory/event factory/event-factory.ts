@@ -20,7 +20,7 @@ interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	discardOptions?: DiscardOptionsEnum
 }
 interface CreateEventOptionsTargetCard {
-    advancedRessource?: AdvancedRessourceStock
+    advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock []
 }
 interface CreateEventOptionsGeneric {
     increaseParameter?: GlobalParameterValue
@@ -214,7 +214,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	let event = new EventComplexCardSelector
     event.cardSelector = generateCardSelector(args?.cardSelector)
     event.subType = 'discardCards'
-	event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0} card(s) to discard.`
+	event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
 	event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
 	event.lockSellButton = true
 	event.lockRollbackButton = true
@@ -222,6 +222,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
+	console.log(event, `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`)
 
 	return event
 }
