@@ -316,6 +316,7 @@ export class GameState{
 		this.removeCardsFromClientHandById(removeListId, cardType)
     }
     addDrawQueue(drawEvent: DrawEvent):void{
+		console.log(drawEvent)
         this.drawQueue.next(this.drawQueue.getValue().concat([drawEvent]));
     }
 
@@ -367,14 +368,16 @@ export class GameState{
         }
 		if(this.eventQueueSavedState.length>0){
 			newQueue = this.applyEventQueueSavedState(newQueue)
+			console.log(newQueue)
 		}
         this.eventQueue.next(newQueue)
     }
 	private applyEventQueueSavedState(queue: EventBaseModel[]): EventBaseModel[] {
 		//create new events
-		if(this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create).length>0){
+		if(this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.load).length>0){
 			queue = this.eventStateService.createFromJson(this.eventQueueSavedState).concat(queue)
 			this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create)
+			console.log(this.eventQueueSavedState)
 		}
 
 		//load data in existing events

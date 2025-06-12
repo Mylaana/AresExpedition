@@ -44,6 +44,7 @@ interface CreateEventOptionsDeckQuery {
 }
 
 function draw(drawNumber: number): EventBaseModel {
+	console.log(drawNumber)
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
 function discard(discardNumber: number): EventComplexCardSelector {

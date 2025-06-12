@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { EventStateBuilderContentDTO, EventStateContentDiscardDTO, EventStateContentDrawDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO } from "../interfaces/event-state.interface";
+import { EventStateBuilderContentDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO } from "../interfaces/event-state.interface";
 import { EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
@@ -85,6 +85,9 @@ export class EventStateService{
 	public createFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
 		let newEvents: EventBaseModel[] = []
 		let treated: boolean
+
+		console.log(eventStateList)
+		//loops backwards to preserve saved order of events
 		for (let i = eventStateList.length - 1; i >= 0; i--) {
 			let state = eventStateList[i]
 			treated = true
@@ -94,7 +97,7 @@ export class EventStateService{
 					break
 				}
 				case(EventStateTypeEnum.drawCards):{
-					let content: EventStateContentDrawDTO =  {
+					let content: EventStateContentDrawResultDTO =  {
 						cl: state.v
 					}
 					newEvents.push(EventFactory.createGeneric('drawResult', {drawEventResult:content.cl}))
@@ -150,6 +153,11 @@ export class EventStateService{
 						}
 					}
 					newEvents.push(event)
+					break
+				}
+				case(EventStateTypeEnum.drawCardsUnqueried):{
+					let content = state.v as EventStateContentDrawQueryDTO
+					newEvents.push(EventFactory.simple.draw(content.d))
 					break
 				}
 				default:{treated = false}

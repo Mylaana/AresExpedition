@@ -49,6 +49,11 @@ Events related to card played not saved in eventstate (see a card with oceanflip
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
 need save/load basic builder rework (bugged)   
 
+Bug that need rework on WS & event saving, every saved event must be split in two categories : 
+    - events that use common ressources (draw, research, oceans) and must be resolved all at once serverside, then converted in their resolution event state and returned all at once
+    - events that dont, that are just being deserialized to be saved in case of refresh and serialized at that moment
+this implies that drawEventQueue has no purpose anymore, and waiter events should just be destroyed when server returns ressources, no need to match with ack id.
+
 ## Must have for v1 :
 ### Refactoring
 Rework Buildable system in playableCardComponent   

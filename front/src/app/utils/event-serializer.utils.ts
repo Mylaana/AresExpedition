@@ -1,6 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO } from "../interfaces/event-state.interface"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO } from "../interfaces/event-state.interface"
 import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
@@ -55,6 +55,17 @@ function eventDeckQueryToJson(event: EventDeckQuery, eventStateOperation: EventS
 			return {
 				o: eventStateOperation,
 				t: EventStateTypeEnum.scanKeepUnQueried,
+				v: content
+			}
+		}
+		case('drawQuery'):{
+			let content:  EventStateContentDrawQueryDTO = {
+				d: event.drawDiscard?.draw??0
+			}
+			if(content.d===0){return}
+			return {
+				o:EventStateOriginEnum.create,
+				t:EventStateTypeEnum.drawCardsUnqueried,
 				v: content
 			}
 		}
