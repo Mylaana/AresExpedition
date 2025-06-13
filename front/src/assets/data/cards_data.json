@@ -817,7 +817,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "-$other_tr$: 3$ressource_card$",
             "fr": ""
@@ -7804,7 +7804,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -8718,7 +8718,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -14826,7 +14826,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -15884,7 +15884,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16652,14 +16652,14 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
-            "fr": ""
+            "en": "ressource_microbe$",
+            "fr": "ressource_microbe$"
         },
         "effectActionTextOption2": {
-            "en": "",
-            "fr": ""
+            "en": "-5$ressource_microbe$:$other_omnicard$$ressource_megacreditvoid_-25$",
+            "fr": "-5$ressource_microbe$:$other_omnicard$$ressource_megacreditvoid_-25$"
         },
         "effectActionText2Option1": {
             "en": "",
@@ -16694,13 +16694,13 @@
             "en": "",
             "fr": ""
         },
-        "effectSummaryType": "",
+        "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "",
+            "en": "$ressource_megacreditvoid_2$",
             "fr": ""
         },
         "effectText": {
-            "en": "",
+            "en": "Raise your TR 1 step for every milestone you have.\nDuring the production phase, this card produce 2 MC.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -17003,11 +17003,11 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "",
+            "en": "<=1$tag_wild$: $ressource_megacreditvoid_-3$",
             "fr": ""
         },
         "effectText": {
-            "en": "",
+            "en": "EFFECT: When you play a card with 1 or fewer tags, you pay 3 MC less for it.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -17079,11 +17079,11 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "",
+            "en": "$other_arrow$$skipline$$ressource_megacreditvoid_12$:$other_temperature$$skipline$$ressource_megacreditvoid_-2$/$other_upgrade$",
             "fr": ""
         },
         "effectText": {
-            "en": "",
+            "en": "ACTION: Spend 12 MC to raise the temperature. Reduce this by 2 MC for every upgraded phase card you have.",
             "fr": ""
         },
         "effectSummaryOption": "scalingCostActivation",
@@ -17384,11 +17384,11 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "",
+            "en": "$ressource_plant$$ressource_plant$$ressource_plant$",
             "fr": ""
         },
         "effectText": {
-            "en": "",
+            "en": "During the production phase, this card produces 3 plants.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -20085,7 +20085,7 @@
         },
         "stockable": [],
         "startingMegacredits": 48,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""

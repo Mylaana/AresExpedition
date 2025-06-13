@@ -78,9 +78,9 @@ public class JsonGameDataHandler {
         }
     }
 
-    public static List<Integer> getCardsIdList(CardTypeEnum type){
+    public static List<String> getCardsIdList(CardTypeEnum type){
         File file = Paths.get(CARDS_DATA_PATH).toFile();
-        List<Integer> idList = new ArrayList<>();
+        List<String> idList = new ArrayList<>();
         if(!file.exists()){
             System.err.println("\\u001B[32m File not found: " + new File(CARDS_DATA_PATH).getAbsolutePath());
             return idList;
@@ -95,17 +95,17 @@ public class JsonGameDataHandler {
         }
 
         for(Map<String, Object> card: cards) {
-            Object id = card.get("id");
+            Object cardCode = card.get("card_code");
             switch(type){
                 case PROJECT:
-                    if((card.get("cardType").equals("corporation")) && id instanceof Integer){continue;}
+                    if((card.get("cardType").equals("corporation")) && cardCode instanceof String){continue;}
                     break;
                 case CORPORATION:
-                    if((!card.get("cardType").equals("corporation")) && id instanceof Integer){continue;}
+                    if((!card.get("cardType").equals("corporation")) && cardCode instanceof String){continue;}
                     break;
             }
-            if((card.get("status").equals("blocked") && id instanceof Integer)){continue;}
-            idList.add(Integer.parseInt(id.toString()));
+            if((card.get("status").equals("blocked") && cardCode instanceof String)){continue;}
+            idList.add(cardCode.toString());
         }
 
         return idList;

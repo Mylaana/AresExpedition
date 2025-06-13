@@ -62,8 +62,9 @@ function isOceanOk(oceanFlippedNumber: number, treshold: MinMaxEqualType, client
 function isTrOk(tr: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
     return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:tr, value: clientState.getTR()})
 }
-function isMinimumStockOnPlayedCardOk(stock: AdvancedRessourceStock[], clientState: PlayerStateModel): boolean {
-    return false
+function isMinimumStockOnPlayedCardOk(stock: AdvancedRessourceStock[], treshold: MinMaxEqualType, clientState: PlayerStateModel, cardCode: string): boolean {
+    clientState.getProjectPlayedStock(cardCode)
+	return false
 }
 function isHandCurrentSizeOk(size: number, treshold: MinMaxEqualType, clientstate: PlayerStateModel): boolean {
     return Utils.getValueVsTreshold({treshold: treshold, tresholdValue: size, value: clientstate.getHandCurrentSize()})

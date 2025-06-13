@@ -6,9 +6,9 @@ import { PlayableCardModel } from "../../models/cards/project-card.model";
 })
 export class ProjectCardInitializeService {
 	initialize(card: PlayableCardModel): void {
-		switch(card.id){
+		switch(card.cardCode){
 			//Bacterial Aggregate
-			case(222):{
+			case('222'):{
 				card.triggerLimit = {limit:5, value:0}
 				break
 			}

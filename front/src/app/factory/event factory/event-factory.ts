@@ -20,14 +20,14 @@ interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	discardOptions?: DiscardOptionsEnum
 }
 interface CreateEventOptionsTargetCard {
-    advancedRessource?: AdvancedRessourceStock
+    advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock []
 }
 interface CreateEventOptionsGeneric {
     increaseParameter?: GlobalParameterValue
     baseRessource?: RessourceStock | RessourceStock[]
     scanKeep?: ScanKeep
     card?: PlayableCardModel
-    drawEventResult?:number[]
+    drawEventResult?:string[]
     waiterId?:number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number
@@ -44,6 +44,7 @@ interface CreateEventOptionsDeckQuery {
 }
 
 function draw(drawNumber: number): EventBaseModel {
+	console.log(drawNumber)
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
 function discard(discardNumber: number): EventComplexCardSelector {
@@ -108,6 +109,9 @@ function scanKeepResult(cardList: PlayableCardModel[], keep: number, option: Dec
 		}
 	)
 }
+function specialBuilder(option: BuilderOption): EventCardBuilder {
+	return EventFactory.createCardBuilder('specialBuilder', 'specialBuilder', option)
+}
 
 const SimpleEvent = {
 	draw,
@@ -124,7 +128,8 @@ const SimpleEvent = {
 	scanKeepResult,
 	addProduction,
 	addTR,
-	addForestAndOxygen
+	addForestAndOxygen,
+	specialBuilder,
 }
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
@@ -210,7 +215,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	let event = new EventComplexCardSelector
     event.cardSelector = generateCardSelector(args?.cardSelector)
     event.subType = 'discardCards'
-	event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity? args.cardSelector.selectionQuantity:0} card(s) to discard.`
+	event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
 	event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
 	event.lockSellButton = true
 	event.lockRollbackButton = true
@@ -218,6 +223,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
+	console.log(event, `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`)
 
 	return event
 }
@@ -383,7 +389,56 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					buildDiscountValue = 11
 					event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
 
-					event.title = 'Play Blue or Red card with 11MC discount'
+					event.title = 'Play an additional Blue or Red card with a 11MC discount'
+					break
+				}
+				case(BuilderOption.assetLiquidation):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
+
+					event.title = 'Play an additional Blue or Red card.'
+					break
+
+				}
+				case(BuilderOption.green9MCFree):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 100
+					event.cardSelector.filter = {type: ProjectFilterNameEnum.green9MCFree}
+
+					event.title = "Play a green card which value is 9MC or less without paying it's cost"
+					break
+				}
+				case(BuilderOption.assortedEnterprises):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 2
+
+					event.title = "Play an additional card of any color with a 2MC discount"
+					break
+				}
+				case(BuilderOption.selfReplicatingBacteria):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 25
+
+					event.title = "Play a card of any color with a 25MC discount"
+					break
+				}
+				case(BuilderOption.maiNiProductions):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 100
+					event.cardSelector.filter = {type: ProjectFilterNameEnum.maiNiProductions}
+
+					event.title = "Play a card of any color which value is 12MC or less without paying it's cost"
+					break
 				}
 			}
 			break

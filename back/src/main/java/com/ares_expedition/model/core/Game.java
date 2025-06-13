@@ -22,8 +22,8 @@ import com.ares_expedition.repository.core.GameData;
 
 public class Game {
     private String gameId;
-    private List<Integer> deck = new ArrayList<>();
-    private List<Integer> discard = new ArrayList<>();
+    private List<String> deck = new ArrayList<>();
+    private List<String> discard = new ArrayList<>();
     private List<String> groupPlayerId = new ArrayList<>();
     private Map<String, Boolean> groupPlayerReady = new HashMap<>();
     private PhaseEnum currentPhase;
@@ -31,7 +31,7 @@ public class Game {
     private Map<String, PlayerState> groupPlayerState = new HashMap<>();
     private GameStatusEnum gameStatus;
     private List<GlobalParameter> globalParameters = new ArrayList<>();
-    private List<Integer> deckCorporations = new ArrayList<>();
+    private List<String> deckCorporations = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
 
     public Game() {
@@ -65,7 +65,7 @@ public class Game {
     }
 
     public Game(
-        String gameId, List<Integer> deck, List<Integer> discard, List<String> groupPlayerId,
+        String gameId, List<String> deck, List<String> discard, List<String> groupPlayerId,
         PhaseEnum currentPhase, List<GlobalParameter> parameters) {
             this.gameId = gameId;
             this.deck = deck;
@@ -83,19 +83,19 @@ public class Game {
         this.gameId = gameId;
     }
 
-    public List<Integer> getDeck() {
+    public List<String> getDeck() {
         return this.deck;
     }
 
-    public void setDeck(List<Integer> deck) {
+    public void setDeck(List<String> deck) {
         this.deck = deck;
     }
 
-    public List<Integer> getDiscard() {
+    public List<String> getDiscard() {
         return this.discard;
     }
 
-    public void setDiscard(List<Integer> discard) {
+    public void setDiscard(List<String> discard) {
         this.discard = discard;
     }
 
@@ -132,11 +132,11 @@ public class Game {
         this.selectedPhase = selectedPhase;
     }
 
-    public List<Integer> drawCards(Integer drawNumber){
-        ArrayList<Integer> result = new ArrayList<Integer>();
+    public List<String> drawCards(Integer drawNumber){
+        ArrayList<String> result = new ArrayList<String>();
 
         checkDeckSize(drawNumber);        
-        Integer cardsToDraw = Math.min(drawNumber,this.deck.size());
+        Integer cardsToDraw = Math.min(drawNumber, this.deck.size());
 
         for(Integer i=0; i<cardsToDraw; i++){
             result.add(this.deck.get(0));
@@ -158,15 +158,15 @@ public class Game {
         this.discard.clear();
     }
 
-    public List<Integer> drawCorporations(Integer corpNumber) {
-        List<Integer> result = new ArrayList<>();
+    public List<String> drawCorporations(Integer corpNumber) {
+        List<String> result = new ArrayList<>();
         result.addAll(deckCorporations.subList(0, Math.min(corpNumber, deckCorporations.size())));
         deckCorporations.subList(0, Math.min(corpNumber, deckCorporations.size())).clear();
 
         return result;
     }
 
-    public void shuffleDeck(List<Integer> deck){
+    public void shuffleDeck(List<String> deck){
         if (this.deck == null) {
             throw new IllegalStateException("Deck must be initialized before shuffling.");
         }
@@ -263,11 +263,11 @@ public class Game {
         this.gameStatus = gameStatus;
     }
     
-    public List<Integer> getDeckCorporations() {
+    public List<String> getDeckCorporations() {
         return deckCorporations;
     }
 
-    public void setDeckCorporations(List<Integer> deckCorporations) {
+    public void setDeckCorporations(List<String> deckCorporations) {
         this.deckCorporations = deckCorporations;
     }
 
@@ -325,13 +325,13 @@ public class Game {
 
     public void setStartingHandCorporations() {
         for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
-            entry.getValue().setHandCorporations(drawCorporations(19));
+            entry.getValue().setHandCorporations(drawCorporations(20));
         }
     }
 
     public void fillDiscardPileFromPlayerDiscard() {
         for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
-            List<Integer> playerDiscard = entry.getValue().getProjectCardState().getHandDiscard();
+            List<String> playerDiscard = entry.getValue().getProjectCardState().getHandDiscard();
             this.discard.addAll(playerDiscard);
             playerDiscard.clear();
         }
@@ -363,8 +363,8 @@ public class Game {
         return oceans.getLast();
     }
 
-    public List<Integer> drawFlippedOceanCards(String playerId, List<Ocean> flippedOceans) {
-        List<Integer> drawFromFlipped = new ArrayList<>();
+    public List<String> drawFlippedOceanCards(String playerId, List<Ocean> flippedOceans) {
+        List<String> drawFromFlipped = new ArrayList<>();
 
         for(Ocean ocean: flippedOceans){
             Integer cardsToDraw = ocean.getBonuses().get(RessourceEnum.CARD);
@@ -389,7 +389,7 @@ public class Game {
             PlayerState state = entry.getValue();
             Integer productionCards = state.getCardsProduction();
             if(productionCards>0){
-                List<Integer> cardList = drawCards(productionCards);
+                List<String> cardList = drawCards(productionCards);
                 state.getEventState().addEventProductionCards(cardList);
             }
         }
@@ -399,7 +399,7 @@ public class Game {
         return this.groupPlayerState.get(playerId).isResearchResolved();
     }
 
-    public void setResearchResolved(String playerId, List<Integer> cardList, Integer keep){
+    public void setResearchResolved(String playerId, List<String> cardList, Integer keep){
         this.groupPlayerState.get(playerId).setResearchResolved(cardList, keep);
     }
 
@@ -409,15 +409,15 @@ public class Game {
         }
     }
 
-    public void addEventDrawCardsToPlayer(String playerId, List<Integer> cards){
+    public void addEventDrawCardsToPlayer(String playerId, List<String> cards){
         this.groupPlayerState.get(playerId).addEventDrawCards(cards);
     }
 
-    public void addEventResearchCardsToPlayer(String playerId, List<Integer> cards, Integer keep){
+    public void addEventResearchCardsToPlayer(String playerId, List<String> cards, Integer keep){
         this.groupPlayerState.get(playerId).addEventResearchCards(cards, keep);
     }
 
-    public void addEventScanKeepCardsToPlayer(String playerId, List<Integer> cards, Integer keep, ScanKeepOptionsEnum options){
+    public void addEventScanKeepCardsToPlayer(String playerId, List<String> cards, Integer keep, ScanKeepOptionsEnum options){
         this.groupPlayerState.get(playerId).addEventScanKeepCards(cards, keep, options);
     }
 

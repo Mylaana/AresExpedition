@@ -4,7 +4,7 @@ import java.util.*;
 import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 
 public class ScanKeepResult {
-    List<Integer> cardIdList = new ArrayList<Integer>();
+    List<String> cardIdList = new ArrayList<String>();
     Integer keep;
     Integer eventId;
     ScanKeepOptionsEnum options;
@@ -12,18 +12,18 @@ public class ScanKeepResult {
     public ScanKeepResult(){
     }
 
-    public ScanKeepResult(List<Integer> cardIdList, Integer keep, Integer eventId, ScanKeepOptionsEnum options) {
+    public ScanKeepResult(List<String> cardIdList, Integer keep, Integer eventId, ScanKeepOptionsEnum options) {
         this.cardIdList = cardIdList;
         this.keep = keep;
         this.eventId = eventId;
         this.options = options;
     }
 
-    public List<Integer> getCardIdList() {
+    public List<String> getCardIdList() {
         return cardIdList;
     }
 
-    public void setCardIdList(List<Integer> cardIdList){
+    public void setCardIdList(List<String> cardIdList){
         this.cardIdList = cardIdList;
     }
 

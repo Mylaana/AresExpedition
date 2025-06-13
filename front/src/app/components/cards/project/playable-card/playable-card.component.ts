@@ -26,7 +26,7 @@ import { CardStatusComponent } from '../card-blocks/card-status/card-status.comp
 import { CardBuildable } from '../../../../interfaces/card.interface';
 import { CardActivationListComponent } from '../card-blocks/card-activation-list/card-activation-list.component';
 import { ProjectFilter } from '../../../../interfaces/global.interface';
-import { PlayableCard } from '../../../../services/cards/playable-card';
+import { PlayableCard } from '../../../../factory/playable-card.factory';
 
 @Component({
     selector: 'app-playable-card',

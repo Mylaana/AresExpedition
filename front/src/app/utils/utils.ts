@@ -102,10 +102,10 @@ function toNumberArray(value: number | number[]): number[] {
 	if(Array.isArray(value)){return value}
 	return [value]
 }
-function toCardsIdList(modelList: PlayableCardModel[]): number[]{
-	let list: number[] = []
+function toCardsIdList(modelList: PlayableCardModel[]): string[]{
+	let list: string[] = []
 	for(let card of modelList){
-		list.push(card.id)
+		list.push(card.cardCode)
 	}
 	return list
 }

@@ -2,24 +2,24 @@ package com.ares_expedition.model.answer;
 import java.util.*;
 
 public class ResearchResult {
-    List<Integer> cardIdList = new ArrayList<Integer>();
+    List<String> cardIdList = new ArrayList<String>();
     Integer keep;
     Integer eventId;
 
     public ResearchResult(){
     }
 
-    public ResearchResult(List<Integer> cardIdList, Integer keep, Integer eventId) {
+    public ResearchResult(List<String> cardIdList, Integer keep, Integer eventId) {
         this.cardIdList = cardIdList;
         this.keep = keep;
         this.eventId = eventId;
     }
 
-    public List<Integer> getCardIdList() {
+    public List<String> getCardIdList() {
         return cardIdList;
     }
 
-    public void setCardIdList(List<Integer> cardIdList){
+    public void setCardIdList(List<String> cardIdList){
         this.cardIdList = cardIdList;
     }
 

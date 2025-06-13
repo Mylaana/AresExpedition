@@ -17,7 +17,7 @@ import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
-import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
+import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { ProjectCardScalingProductionsService } from "../../services/cards/project-card-scaling-productions.service";
 import { Utils } from "../../utils/utils";
@@ -172,21 +172,20 @@ export class PlayerStateModel {
 	//cardState
 	getTriggersIdActive(): string[] {return this.projectCardState.getActivePlayedTriggersId()}
 	setTriggerInactive(trigger: string): void {this.projectCardState.setTriggerInactive(trigger)}
-	getTriggerCostMod(): string[] {return this.projectCardState.getTriggerCostMod()}
 
-	addCardsToHand(cards: number | number[]) {this.projectCardState.addCardsToHand(cards)}
-	removeCardsFromHand(cardCodeList: number | number[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType, addRemovedCardsToDiscard)}
-	getProjectHandIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectHandIdList(filter)}
+	addCardsToHand(cards: string | string[]) {this.projectCardState.addCardsToHand(cards)}
+	removeCardsFromHand(cardCodeList: string | string[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType, addRemovedCardsToDiscard)}
+	getProjectHandIdList(filter?: ProjectFilter): string[] {return this.projectCardState.getProjectHandIdList(filter)}
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}
-	getCorporationHandIdList(): number[] {return this.projectCardState.getCorporationHandIdList()}
-	addCardsToDiscard(cards: number | number[]) {this.projectCardState.addCardsToDiscard(cards)}
+	getCorporationHandIdList(): string[] {return this.projectCardState.getCorporationHandIdList()}
+	addCardsToDiscard(cards: string | string[]) {this.projectCardState.addCardsToDiscard(cards)}
 	addRessourceToCard(cardCode: string, advancedRessourceStock: AdvancedRessourceStock): void {
 		this.projectCardState.addRessourceToCard(cardCode,advancedRessourceStock)
 		this.setScalingVp()
 	}
 	getProjectPlayedModelFromId(cardCode:string): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromCode(cardCode)}
-	getProjectPlayedIdList(filter?: ProjectFilter): number[] {return this.projectCardState.getProjectPlayedIdList(filter)}
+	getProjectPlayedIdList(filter?: ProjectFilter): string[] {return this.projectCardState.getProjectPlayedIdList(filter)}
 	getProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardState.getProjectPlayedModelList(filter)}
 	hasProjectPlayedOfFilterType(filter: ProjectFilter): boolean {return this.projectCardState.hasProjectPlayedOfFilterType(filter)}
 	getProjectPlayedStock(cardCode: string): AdvancedRessourceStock[] {return this.projectCardState.getProjectPlayedStock(cardCode)}
@@ -197,7 +196,7 @@ export class PlayerStateModel {
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
 		this.projectCardState.playCard(card)
-		this.removeCardsFromHand([card.id], cardType, false)
+		this.removeCardsFromHand([card.cardCode], cardType, false)
 		this.payCardCost(card)
 		this.addTagsFromPlayedCard(card)
 		if(Number(card.vpNumber??'')!=0 && !isNaN(Number(card.vpNumber??''))){
@@ -216,7 +215,7 @@ export class PlayerStateModel {
 		this.addRessource('megacredit', -card.cost)
 	}
 
-	public toJson(eventQueue?: EventBaseModel[]): PlayerStateDTO {
+	public toJson(eventStateDTO?: EventStateDTO[]): PlayerStateDTO {
 		return {
 			infoState: this.infoState.toJson(),
 			scoreState: this.scoreState.toJson(),
@@ -225,7 +224,7 @@ export class PlayerStateModel {
 			projectCardState: this.projectCardState.toJson(),
 			phaseCardState: this.phaseCardState.toJson(),
 			globalParameterState: this.globalParameterState.toJson(),
-			eventState: this.eventState.toJson(eventQueue),
+			eventState: this.eventState.toJson(eventStateDTO),
 			otherState: this.otherState.toJson()
 		}
 	}

@@ -9,10 +9,10 @@ import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPro
 import com.ares_expedition.model.player_state.subclass.substates.TriggerState;
 
 public class PlayerProjectCardState {
-    private List<Integer> hand = new ArrayList<>();
-    private List<Integer> handCorporations = new ArrayList<>();
-    private List<Integer> handDiscard = new ArrayList<>();
-    private List<Map<Integer, Object>> cardPlayed = new ArrayList<>();
+    private List<String> hand = new ArrayList<>();
+    private List<String> handCorporations = new ArrayList<>();
+    private List<String> handDiscard = new ArrayList<>();
+    private List<Map<String, Object>> cardPlayed = new ArrayList<>();
     private TriggerState triggers = new TriggerState();
     private Integer handMaximumSize = 10;
     private Map<String, Integer> prerequisiteOffset = new HashMap<>();
@@ -30,11 +30,11 @@ public class PlayerProjectCardState {
         this.prerequisiteOffset = dto.getPrerequisiteOffset();
     }
 
-    public List<Integer> getHand() {
+    public List<String> getHand() {
         return hand;
     }
 
-    public void setHand(List<Integer> hand) {
+    public void setHand(List<String> hand) {
         this.hand = hand;
     }
 
@@ -62,27 +62,27 @@ public class PlayerProjectCardState {
         return new PlayerProjectCardStateDTO(this);
     }
 
-    public List<Integer> getHandCorporations() {
+    public List<String> getHandCorporations() {
         return handCorporations;
     }
 
-    public void setHandCorporations(List<Integer> handCorporations) {
+    public void setHandCorporations(List<String> handCorporations) {
         this.handCorporations = handCorporations;
     }
 
-    public List<Integer> getHandDiscard() {
+    public List<String> getHandDiscard() {
         return handDiscard;
     }
 
-    public void setHandDiscard(List<Integer> handDiscard) {
+    public void setHandDiscard(List<String> handDiscard) {
         this.handDiscard = handDiscard;
     }
 
-    public List<Map<Integer, Object>> getCardPlayed() {
+    public List<Map<String, Object>> getCardPlayed() {
         return cardPlayed;
     }
 
-    public void setCardPlayed(List<Map<Integer, Object>> cardPlayed) {
+    public void setCardPlayed(List<Map<String, Object>> cardPlayed) {
         this.cardPlayed = cardPlayed;
     }
 

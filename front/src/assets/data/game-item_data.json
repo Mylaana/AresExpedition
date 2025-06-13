@@ -60,6 +60,12 @@
         "name": "$tag_event$"
     },
 	{
+        "id": 10,
+        "description": "wild",
+        "imageUrl": "assets/tag/wild.png",
+        "name": "$tag_wild$"
+    },
+	{
         "id": 1000,
         "description": "steel",
         "imageUrl": "assets/ressource/steel.png",
@@ -376,5 +382,11 @@
         "description": "hand",
         "imageUrl": "assets/other/hand.png",
         "name": "$other_hand$"
+	},
+	{
+        "id": 142,
+        "description": "phaseupgrade",
+        "imageUrl": "assets/other/phase_upgrade.png",
+        "name": "$other_upgrade$"
 	}
 ]

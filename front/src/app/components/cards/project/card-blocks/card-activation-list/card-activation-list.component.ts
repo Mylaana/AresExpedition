@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { GameState } from '../../../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
-import { PlayableCard } from '../../../../../services/cards/playable-card';
+import { PlayableCard } from '../../../../../factory/playable-card.factory';
 
 interface Activation {
 	index: ActivationOption

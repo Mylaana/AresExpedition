@@ -11,7 +11,7 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event factory/event-factory';
-import { PlayableCard } from '../../../services/cards/playable-card';
+import { PlayableCard } from '../../../factory/playable-card.factory';
 
 @Component({
     selector: 'app-phase-action',

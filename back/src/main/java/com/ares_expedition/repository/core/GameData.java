@@ -17,8 +17,8 @@ import com.ares_expedition.repository.player_state.PlayerStateData;
 //Game DTO is only meant to store their Game related properties, not to be sent to clients
 public class GameData {
     private String gameId;
-    private List<Integer> deck = new ArrayList<>();
-    private List<Integer> discard = new ArrayList<>();
+    private List<String> deck = new ArrayList<>();
+    private List<String> discard = new ArrayList<>();
     private List<String> groupPlayerId = new ArrayList<>();
     private Map<String, Boolean> groupPlayerReady = new HashMap<>();
     private PhaseEnum currentPhase;
@@ -26,7 +26,7 @@ public class GameData {
     private Map<String, PlayerStateData> groupPlayerState = new HashMap<>();
     private GameStatusEnum gameStatus;
     private List<GlobalParameterData> globalParameters = new ArrayList<>();
-    private List<Integer> deckCorporations = new ArrayList<>();
+    private List<String> deckCorporations = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
 
     GameData() {
@@ -55,19 +55,19 @@ public class GameData {
         this.gameId = gameId;
     }
 
-    public List<Integer> getDeck() {
+    public List<String> getDeck() {
         return deck;
     }
 
-    public void setDeck(List<Integer> deck) {
+    public void setDeck(List<String> deck) {
         this.deck = deck;
     }
 
-    public List<Integer> getDiscard() {
+    public List<String> getDiscard() {
         return discard;
     }
 
-    public void setDiscard(List<Integer> discard) {
+    public void setDiscard(List<String> discard) {
         this.discard = discard;
     }
 
@@ -127,11 +127,11 @@ public class GameData {
         this.globalParameters = globalParameters;
     }
 
-    public List<Integer> getDeckCorporations() {
+    public List<String> getDeckCorporations() {
         return deckCorporations;
     }
 
-    public void setDeckCorporations(List<Integer> deckCorporations) {
+    public void setDeckCorporations(List<String> deckCorporations) {
         this.deckCorporations = deckCorporations;
     }
 

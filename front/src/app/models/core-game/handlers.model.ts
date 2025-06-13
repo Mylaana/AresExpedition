@@ -17,7 +17,7 @@ import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
-import { PlayableCard } from "../../services/cards/playable-card";
+import { PlayableCard } from "../../factory/playable-card.factory";
 
 @Injectable()
 export class EventHandler {
@@ -98,7 +98,7 @@ export class EventHandler {
 	}
 	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}): void {
 		let event = this.currentEvent as EventCardActivator
-		event.activationLog[input.card.id.toString()] = input.card.activated
+		event.activationLog[input.card.cardCode] = input.card.activated
 		if(input.twice){event.doubleActivationCount += 1}
 		this.gameStateService.activateCard(input.card, input.option)
 	}
@@ -333,7 +333,7 @@ export class EventHandler {
 								break
 							}
 							case('blueProject'):case('redProject'):{
-								this.gameStateService.addCardsToClientHand(card.id)
+								this.gameStateService.addCardsToClientHand(card.cardCode)
 							}
 						}
 					}
@@ -475,6 +475,7 @@ export class EventHandler {
 		switch(event.subType){
 			case('drawQuery'):{
 				resolveType = 'drawResult'
+				console.log(event)
 				break
 			}
 			case('researchPhaseQuery'):{

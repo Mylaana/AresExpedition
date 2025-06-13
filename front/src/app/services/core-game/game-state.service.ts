@@ -14,14 +14,16 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.en
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GameParamService } from "./game-param.service";
-import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
+import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
-import { EventStateFactory } from "../../factory/event-state-factory.service";
+import { EventStateService } from "../../factory/event-state-service.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { ActivationOption } from "../../types/project-card.type";
-import { PlayableCard } from "../cards/playable-card";
+import { PlayableCard } from "../../factory/playable-card.factory";
 import { ProjectCardScalingVPService } from "../cards/project-card-scaling-VP.service";
+import { EventStateOriginEnum } from "../../enum/eventstate.enum";
+import { EventSerializer } from "../../utils/event-serializer.utils";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -99,7 +101,7 @@ export class GameState{
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private scalingVp: ProjectCardScalingVPService,
-		private eventStateFactory: EventStateFactory,
+		private eventStateService: EventStateService,
 		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
@@ -178,8 +180,9 @@ export class GameState{
         return this.clientState.getValue()
     }
 	getClientStateDTO(): PlayerStateDTO {
-		console.log(this.eventQueue.getValue())
-		return this.getClientState().toJson(this.eventQueue.getValue())
+		return this.getClientState().toJson(
+			EventSerializer.eventQueueToJson(
+			this.eventQueue.getValue()))
 	}
 	/*
     updatePlayerState(playerId:myUUID, playerState: PlayerStateModel): void{
@@ -271,48 +274,49 @@ export class GameState{
 	getClientPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPhaseSelected()}
 	getClientPreviousPhaseSelected(): SelectablePhaseEnum | undefined {return this.getClientState().getPreviousPhaseSelected()}
 	getClientPhaseCards(onlyUpgraded: boolean = false): PhaseCardModel[] {return this.getClientState().getPhaseCards(onlyUpgraded)}
-    getClientHandIdList(filter?: ProjectFilter): number[] {return this.getClientState().getProjectHandIdList(filter)}
+    getClientHandIdList(filter?: ProjectFilter): string[] {return this.getClientState().getProjectHandIdList(filter)}
     getClientHandModelList(filter?: ProjectFilter): PlayableCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandIdList(filter))}
-	getClientHandCorporationIdList(filter?: ProjectFilter): number[] {return this.getClientState().getCorporationHandIdList()}
+	getClientHandCorporationIdList(filter?: ProjectFilter): string[] {return this.getClientState().getCorporationHandIdList()}
 	getClientHandCorporationModelList(): PlayableCardModel[] {return this.projectCardService.getProjectCardList(this.getClientHandCorporationIdList())}
 
-    getClientProjectPlayedIdList(): number[] {return this.getPlayerProjectPlayedIdList(this.clientId)}
-	getPlayerProjectPlayedIdList(playerId: myUUID): number[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedIdList()??[]}
+    getClientProjectPlayedIdList(): string[] {return this.getPlayerProjectPlayedIdList(this.clientId)}
+	getPlayerProjectPlayedIdList(playerId: myUUID): string[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedIdList()??[]}
     getClientProjectPlayedModelList(filter?: ProjectFilter): PlayableCardModel [] {return this.getPlayerProjectPlayedModelList(this.clientId, filter)}
     getPlayerProjectPlayedModelList(playerId: myUUID, filter?: ProjectFilter): PlayableCardModel[] {return this.getPlayerStateFromId(playerId)?.getProjectPlayedModelList(filter)??[]}
 
-    addCardsToClientHand(cardsToAdd: number | number[]):void{
+    addCardsToClientHand(cardsToAdd: string | string[]):void{
         let clientState = this.getClientState()
         clientState.addCardsToHand(cardsToAdd)
 		this.updateClientState(clientState)
     }
-	addCardsToClientDiscard(cardsToAdd: number | number[]):void{
+	addCardsToClientDiscard(cardsToAdd: string | string[]):void{
 		let clientState = this.getClientState()
         clientState.addCardsToDiscard(cardsToAdd)
 		this.updateClientState(clientState)
 	}
-	addCardsSelectedFromListAndDiscardTheRest(cardsToKeep: number | number[], cardList: number[]){
+	addCardsSelectedFromListAndDiscardTheRest(cardsToKeep: string | string[], cardList: string[]){
 		this.addCardsToClientHand(cardsToKeep)
 		this.addCardsToClientDiscard(cardList.filter(toDiscard => !Utils.toArray(cardsToKeep).includes(toDiscard)))
 	}
-    removeCardsFromClientHandById(cardsToRemove: number | number[], cardType: PlayableCardType):void{
+    removeCardsFromClientHandById(cardsToRemove: string | string[], cardType: PlayableCardType):void{
 		let clientState = this.getClientState()
         clientState.removeCardsFromHand(cardsToRemove, cardType)
 		this.updateClientState(clientState)
     }
     removeCardsFromClientHandByModel(cardsToRemove: PlayableCardModel | PlayableCardModel[], cardType: PlayableCardType):void{
-		let removeListId: number[] = []
+		let removeListId: string[] = []
 		if(!Array.isArray(cardsToRemove)){
-			this.removeCardsFromClientHandById(cardsToRemove.id, cardType)
+			this.removeCardsFromClientHandById(cardsToRemove.cardCode, cardType)
 			return
 		}
 
 		for(let removeCard of cardsToRemove){
-			removeListId.push(removeCard.id)
+			removeListId.push(removeCard.cardCode)
 		}
 		this.removeCardsFromClientHandById(removeListId, cardType)
     }
     addDrawQueue(drawEvent: DrawEvent):void{
+		console.log(drawEvent)
         this.drawQueue.next(this.drawQueue.getValue().concat([drawEvent]));
     }
 
@@ -363,14 +367,33 @@ export class GameState{
             }
         }
 		if(this.eventQueueSavedState.length>0){
-			//load data in existing events
-			this.loadEventQueueSavedState(newQueue)
-			//create new events
-			newQueue = this.eventStateFactory.createEventsFromJson(this.eventQueueSavedState, this.getClientState()).concat(newQueue)
+			newQueue = this.applyEventQueueSavedState(newQueue)
+			console.log(newQueue)
 		}
         this.eventQueue.next(newQueue)
     }
+	private applyEventQueueSavedState(queue: EventBaseModel[]): EventBaseModel[] {
+		//create new events
+		if(this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.load).length>0){
+			queue = this.eventStateService.createFromJson(this.eventQueueSavedState).concat(queue)
+			this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create)
+			console.log(this.eventQueueSavedState)
+		}
 
+		//load data in existing events
+		if(this.eventQueueSavedState.length>0){
+			for(let event of queue){
+				for(let dto of this.eventQueueSavedState){
+					if(this.eventStateService.shouldLoadEvent(event, dto)){
+						this.eventStateService.loadFromJson(event, dto)
+						this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e!=dto)
+					}
+				}
+			}
+			//this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.load)
+		}
+		return queue
+	}
     /**
      * gets nothing
      * returns nothing
@@ -398,14 +421,14 @@ export class GameState{
 		this.updateClientState(playerState)
 	}
 	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{
-        let events: EventBaseModel[] = []
+		let events: EventBaseModel[] = []
 		let state = this.getClientState()
 		state.playCard(card, cardType)
 		let playedCardEvents = PlayableCard.getOnPlayedEvents(card.cardCode, state)
 
         //check for triggers and add them to queue
 		let activeTriggers = state.getTriggersIdActive()
-        let eventsOnPlayed =PlayableCard.getOnTriggerredEvents('ON_CARD_PLAYED', activeTriggers, state, {})
+        let eventsOnPlayed =PlayableCard.getOnTriggerredEvents('ON_CARD_PLAYED', activeTriggers, state, {playedCard:card})
         if(eventsOnPlayed.length>0){
             events = events.concat(eventsOnPlayed)
         }
@@ -635,12 +658,13 @@ export class GameState{
 		}
 		this.selectedPhaseList.next(list)
 	}
+	/*
 	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
 		let playerState: PlayerStateModel = this.getClientState()
 
 		for(let event of eventQueue){
 			for(let eventState of this.eventQueueSavedState){
-				if(EventStateFactory.shouldLoadEventFromThisSavedState(event, eventState)){
+				if(EventStateService.shouldLoadEvent(event, eventState)){
 					console.log('loading eventState:',eventState, event)
 					//specific cases
 					switch(true){
@@ -666,6 +690,7 @@ export class GameState{
 			}
 		}
 	}
+		*/
 
 	public addOceanBonus(oceanBonus: WsOceanResult){
 		let ressources: RessourceStock[] = []
@@ -738,7 +763,6 @@ export class GameState{
 		this.addEventQueue(newEvents,'first')
     }
 	endOfPhase() {
-		console.log(this.eventQueue.getValue())
-		this.rxStompService.publishPlayerState(this.getClientState().toJson(this.eventQueue.getValue()))
+		this.rxStompService.publishPlayerState(this.getClientState().toJson(EventSerializer.eventQueueToJson(this.eventQueue.getValue())))
 	}
 }

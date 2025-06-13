@@ -8,7 +8,6 @@ import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
 
 export class PlayableCardModel{
-    id!: number;
     cardCode!: string;
     origin!: string;
     costInitial!: number;
@@ -138,6 +137,14 @@ export class PlayableCardModel{
 			case(ProjectFilterNameEnum.hasTagPlantOrScience):{
 				return this.hasTag('science') || this.hasTag('plant')
 			}
+			case(ProjectFilterNameEnum.green9MCFree):{
+				if(this.costInitial <= 9 && this.cardType==='greenProject'){return true}
+				break
+			}
+			case(ProjectFilterNameEnum.maiNiProductions):{
+				if(this.costInitial <= 12){return true}
+				break
+			}
         }
         return false
     }
@@ -162,7 +169,7 @@ export class PlayableCardModel{
 		return this.hasTagId(Utils.toTagId(tag))
 	}
 	toDTO(): PlayedCardStock {
-		return {[this.id]: this.stock??[]}
+		return {[this.cardCode]: this.stock??[]}
 	}
 	public static fromInterface(input: PlayableCardInterface): PlayableCardModel {
 		let newCard: PlayableCardModel = Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))

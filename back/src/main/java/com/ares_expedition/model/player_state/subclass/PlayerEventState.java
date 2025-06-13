@@ -40,19 +40,19 @@ public class PlayerEventState {
         }
     }
 
-    public void addEventDrawCards(List<Integer> cards) {
+    public void addEventDrawCards(List<String> cards) {
         this.events.add(EventState.addEventDrawCards(cards));
     }
 
-    public void addEventResearchCards(List<Integer> cards, Integer keep) {
+    public void addEventResearchCards(List<String> cards, Integer keep) {
         this.events.add(EventState.addEventResearchCards(cards, keep));
     }
 
-    public void addEventScanKeepCards(List<Integer> cards, Integer keep, ScanKeepOptionsEnum options) {
+    public void addEventScanKeepCards(List<String> cards, Integer keep, ScanKeepOptionsEnum options) {
         this.events.add(EventState.addEventScanKeepCards(cards, keep, options));
     }
 
-    public void addEventProductionCards(List<Integer> cards) {
+    public void addEventProductionCards(List<String> cards) {
         this.events.add(EventState.addEventProductionCards(cards));
     }
 

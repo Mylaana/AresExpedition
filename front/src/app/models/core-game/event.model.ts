@@ -5,9 +5,7 @@ import { EventCardBuilderButtonNames } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { EventStateDTO } from "../../interfaces/dto/event-state-dto.interface";
-import { EventStateOriginEnum } from "../../enum/eventstate.enum";
-import { EventStateFactory } from "../../factory/event-state-factory.service";
+import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
 
 
@@ -32,9 +30,6 @@ export abstract class EventBaseModel {
 	hasCardActivator(): boolean {return false}
     getSelectionActive(): boolean {return false}
 	onSwitch(): void {}
-	toJson(eventStateOperation: EventStateOriginEnum = EventStateOriginEnum.client): EventStateDTO | undefined{
-		return EventStateFactory.toJson(this, eventStateOperation)
-	}
 	fromJson(dto: EventStateDTO){return}
 }
 
@@ -100,9 +95,6 @@ export class EventCardActivator extends EventBaseCardSelector {
 	doubleActivationMaxNumber!: number
 	doubleActivationCount: number = 0
 	override hasCardActivator(): boolean {return true}
-	override fromJson(dto: EventStateDTO): void {
-		this.activationLog = dto.v??{}
-	}
 }
 
 export class CardBuilder {
@@ -216,7 +208,7 @@ export class CardBuilder {
                 break
             }
             case('buildCard'):case(BuilderOption.drawCard):case(BuilderOption.gain6MC):{
-                this.setbuilderIsLocked()
+                this.setBSuilderIsLocked()
                 break
             }
         }
@@ -231,8 +223,13 @@ export class CardBuilder {
 		this.selectedCard = undefined
         this.updateButtonGroupState('cancelSelectCard')
 	}
-    setbuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
-    getbuilderIsLocked(): boolean {return this.builderIsLocked}
+    setBSuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
+    getBuilderIsLocked(): boolean {return this.builderIsLocked}
+	getBuitCardCode(): string | undefined {
+		if(this.builderIsLocked===false){return}
+		if(!this.selectedCard){return}
+		return this.getSelectedCard().cardCode
+	}
 	resetBuilder(): void {
 		if(this.builderIsLocked){return}
 		this.resetButtons()
@@ -261,7 +258,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
     }
     private removeCardFromSelector(card: PlayableCardModel): void {
         for(let i=0; i<this.cardSelector.selectFrom.length; i++){
-            if(this.cardSelector.selectFrom[i].id===card.id){
+            if(this.cardSelector.selectFrom[i].cardCode===card.cardCode){
                 this.cardSelector.selectFrom.splice(i, 1)
             }
         }
@@ -308,7 +305,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
 	}
 	private resetNonFocusedBuildersState(){
 		for(let i=0; i<this.cardBuilder.length; i++){
-			if(i===this.cardBuilderIdHavingFocus || this.cardBuilder[i].getbuilderIsLocked()){continue}
+			if(i===this.cardBuilderIdHavingFocus || this.cardBuilder[i].getBuilderIsLocked()){continue}
 			this.discardBuilderSelectedCard(i)
 			this.cardBuilder[i].resetBuilder()
 			break
@@ -333,15 +330,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
 			builder.resetBuilder()
 		}
 	}
-	override fromJson(dto: EventStateDTO): void {
-		if(dto.v){
-			let index: number = 0
-			for(let locked of dto.v){
-				this.cardBuilder[index].setbuilderIsLocked(locked)
-				index ++
-			}
-		}
-	}
 }
 
 export class EventTargetCard extends EventBaseModel {
@@ -361,7 +349,7 @@ export class EventGeneric extends EventBaseModel {
     increaseResearchScanKeep?: Partial<ScanKeep>
     baseRessource?:RessourceStock | RessourceStock[]
     cardIdToBuild?: PlayableCardModel
-    drawResultList?: number[]
+    drawResultList?: string[]
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeQuantity?: number
 	addForestPoint?: number
@@ -395,7 +383,7 @@ export class DrawEvent {
     drawCardNumber!: number
     keepCardNumber?:number
     drawDate = new Date()
-    drawResultCardList: number[] = []
+    drawResultCardList: string[] = []
     finalized: boolean = false
     served: boolean = false
     queried: boolean = false

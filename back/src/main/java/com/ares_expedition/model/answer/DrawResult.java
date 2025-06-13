@@ -2,22 +2,22 @@ package com.ares_expedition.model.answer;
 import java.util.*;
 
 public class DrawResult {
-    List<Integer> cardIdList = new ArrayList<Integer>();
+    List<String> cardIdList = new ArrayList<String>();
     Integer eventId;
 
     public DrawResult(){
     }
 
-    public DrawResult(List<Integer> cardIdList, Integer eventId) {
+    public DrawResult(List<String> cardIdList, Integer eventId) {
         this.cardIdList = cardIdList;
         this.eventId = eventId;
     }
 
-    public List<Integer> getCardIdList() {
+    public List<String> getCardIdList() {
         return cardIdList;
     }
 
-    public void setCardIdList(List<Integer> cardIdList){
+    public void setCardIdList(List<String> cardIdList){
         this.cardIdList = cardIdList;
     }
 
