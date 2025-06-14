@@ -368,7 +368,6 @@ export class GameState{
         }
 		if(this.eventQueueSavedState.length>0){
 			newQueue = this.applyEventQueueSavedState(newQueue)
-			console.log(newQueue)
 		}
         this.eventQueue.next(newQueue)
     }
@@ -377,7 +376,6 @@ export class GameState{
 		if(this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.load).length>0){
 			queue = this.eventStateService.createFromJson(this.eventQueueSavedState).concat(queue)
 			this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create)
-			console.log(this.eventQueueSavedState)
 		}
 
 		//load data in existing events
@@ -390,7 +388,6 @@ export class GameState{
 					}
 				}
 			}
-			//this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.load)
 		}
 		return queue
 	}
@@ -658,40 +655,6 @@ export class GameState{
 		}
 		this.selectedPhaseList.next(list)
 	}
-	/*
-	private loadEventQueueSavedState(eventQueue: EventBaseModel[]){
-		let playerState: PlayerStateModel = this.getClientState()
-
-		for(let event of eventQueue){
-			for(let eventState of this.eventQueueSavedState){
-				if(EventStateService.shouldLoadEvent(event, eventState)){
-					console.log('loading eventState:',eventState, event)
-					//specific cases
-					switch(true){
-						case(event.type==='cardActivator'):{
-							playerState.loadEventStateActivator(eventState)
-							break
-						}
-						case(event.subType==='productionPhase'):{
-							let productionEvent = event as EventPhase
-							let cardList = this.projectCardService.getProjectCardList(eventState.v)
-							productionEvent.productionCardList = cardList
-							if(eventState.v){
-								this.addCardsToClientHand(eventState.v)
-							}
-						}
-					}
-
-					//generic cases applied from event function
-					event.fromJson(eventState)
-					this.eventQueueSavedState = this.eventQueueSavedState.filter((ele) => ele!==eventState)
-					break
-				}
-			}
-		}
-	}
-		*/
-
 	public addOceanBonus(oceanBonus: WsOceanResult){
 		let ressources: RessourceStock[] = []
 		let megacredit: number = 0

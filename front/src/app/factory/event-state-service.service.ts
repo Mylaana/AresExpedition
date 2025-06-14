@@ -7,39 +7,6 @@ import { EventFactory } from "./event factory/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 
-		/*
-	override fromJson(dto: EventStateDTO): void {
-		this.activationLog = dto.v??{}
-	}
-
-	if(EventSerializer.shouldLoadEventFromThisSavedState(event, eventState)){
-					console.log('loading eventState:',eventState, event)
-					//specific cases
-					switch(true){
-						case(event.type==='cardActivator'):{
-							clientState.loadEventStateActivator(eventState)
-							break
-						}
-						case(event.subType==='productionPhase'):{
-							let productionEvent = event as EventPhase
-							let cardList = this.projectCardService.getProjectCardList(eventState.v)
-							productionEvent.productionCardList = cardList
-							if(eventState.v){
-								clientState.addCardsToHand(eventState.v)
-								this.addCardsToClientHand(eventState.v)
-							}
-						}
-					}
-
-					//generic cases applied from event function
-					event.fromJson(eventState)
-					eventStates = eventStates.filter((ele) => ele!==eventState)
-					break
-				}
-
-	return event
-}
-*/
 function shouldLoadEvent(event: EventBaseModel, eventState: EventStateDTO) : boolean {
 	switch(true){
 		case(event.subType==='actionPhaseActivator' && eventState.t===EventStateTypeEnum.cardActivator):{break}
@@ -86,7 +53,6 @@ export class EventStateService{
 		let newEvents: EventBaseModel[] = []
 		let treated: boolean
 
-		console.log(eventStateList)
 		//loops backwards to preserve saved order of events
 		for (let i = eventStateList.length - 1; i >= 0; i--) {
 			let state = eventStateList[i]
