@@ -47,7 +47,6 @@ Backend: Junit
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
-need save/load basic builder rework (bugged)   
 
 Bug that need rework on WS & event saving, every saved event must be split in three categories : 
     - events that use common ressources (draw, research, oceans) and must be resolved all at once serverside, then converted in their resolution event state and returned all at once
@@ -138,3 +137,4 @@ merger
 fanmade cards   
 some projects cards should only be accessible when 5+ players   
 switch infrastructure completion to be optionnal   
+autoexpand player pannel when in planification phase   
