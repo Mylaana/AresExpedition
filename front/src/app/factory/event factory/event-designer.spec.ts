@@ -699,6 +699,7 @@ describe('Service - Designers - Event', () => {
 						case('productionPhase'):{
 							expectedEvent.autoFinalize = false
 							expectedEvent.productionApplied = false
+							expectedEvent.title = 'Production'
 						}
                     }
 
