@@ -7,7 +7,7 @@ import { RxStompService } from "../websocket/rx-stomp.service"
 import { GameState } from "./game-state.service"
 import { GameParamService } from './game-param.service'
 import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.service'
-import { EventStateFactory } from '../../factory/event-state-service.service'
+import { EventStateService } from '../../factory/event-state-service.service'
 
 describe('Services - Core game - Game state', () => {
     describe('UNIT TEST', () => {
@@ -17,7 +17,7 @@ describe('Services - Core game - Game state', () => {
 		let rxStompService: RxStompService
 		let gameState: GameState
 		let gameParam: GameParamService
-		let eventStateFactory: EventStateFactory
+		let eventStateService: EventStateService
 		let scalingVp: ProjectCardScalingVPService
 
 		beforeAll(() => {
@@ -27,7 +27,7 @@ describe('Services - Core game - Game state', () => {
 					PhaseCardInfoService,
 					ProjectCardScalingProductionsService,
 					RxStompService,
-					EventStateFactory,
+					EventStateService,
 					ProjectCardScalingVPService
 				]
 			})
@@ -38,7 +38,7 @@ describe('Services - Core game - Game state', () => {
 			scalingProdService = injector.get(ProjectCardScalingProductionsService)
 			rxStompService = injector.get(RxStompService)
 			gameParam = injector.get(GameParamService)
-			eventStateFactory = injector.get(EventStateFactory)
+			eventStateService = injector.get(EventStateService)
 			scalingVp = injector.get(ProjectCardScalingVPService)
 
 			gameState = new GameState(
@@ -46,7 +46,7 @@ describe('Services - Core game - Game state', () => {
 				rxStompService,
 				gameParam,
 				scalingVp,
-				eventStateFactory,
+				eventStateService,
 				injector
 			)
 		})

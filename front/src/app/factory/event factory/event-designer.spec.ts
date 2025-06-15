@@ -52,7 +52,7 @@ describe('Service - Designers - Event', () => {
             })
             it('should return selector', () => {
                 let card = new PlayableCardModel
-                card.id = 3
+                card.cardCode = '3'
                 let expectedSelector: CardSelector = {
                     selectFrom: [card],
                     selectedList: [card],

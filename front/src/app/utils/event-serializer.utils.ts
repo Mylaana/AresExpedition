@@ -4,10 +4,11 @@ import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStat
 import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
-function eventBuilderToJson(event: EventCardBuilder, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined{
+function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 	let status: BuilderStatusDTO[] = []
 	let specialBuilderOption!: BuilderOption
 	let stateType!: EventStateTypeEnum
+	let eventStateOperation: EventStateOriginEnum
 	for(let builder of event.cardBuilder){
 		let s: BuilderStatusDTO = {
 			cc: builder.getBuitCardCode(),
@@ -17,11 +18,20 @@ function eventBuilderToJson(event: EventCardBuilder, eventStateOperation : Event
 	}
 
 	switch(event.subType){
-		case('developmentPhaseBuilder'):{stateType = EventStateTypeEnum.builderDevelopemntLocked; break}
-		case('constructionPhaseBuilder'):{stateType = EventStateTypeEnum.builderConstructionLocked; break}
+		case('developmentPhaseBuilder'):{
+			stateType = EventStateTypeEnum.builderDevelopemntLocked
+			eventStateOperation = EventStateOriginEnum.load
+			break
+		}
+		case('constructionPhaseBuilder'):{
+			stateType = EventStateTypeEnum.builderConstructionLocked
+			eventStateOperation = EventStateOriginEnum.load
+			break
+		}
 		case('specialBuilder'):{
 			stateType = EventStateTypeEnum.specialBuilder
 			specialBuilderOption = event.cardBuilder[0].getOption()
+			eventStateOperation = EventStateOriginEnum.create
 			break
 		}
 		default:{return}
@@ -38,14 +48,14 @@ function eventBuilderToJson(event: EventCardBuilder, eventStateOperation : Event
 		v: content
 	}
 }
-function eventActivatorToJson(event: EventCardActivator, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined {
+function eventActivatorToJson(event: EventCardActivator): EventStateDTO | undefined {
 	return {
-		o: eventStateOperation,
+		o: EventStateOriginEnum.load,
 		t: EventStateTypeEnum.cardActivator,
 		v: event.activationLog
 	}
 }
-function eventDeckQueryToJson(event: EventDeckQuery, eventStateOperation: EventStateOriginEnum): EventStateDTO | undefined {
+function eventDeckQueryToJson(event: EventDeckQuery): EventStateDTO | undefined {
 	switch(event.subType){
 		case('scanKeepQuery'):{
 			let content: EventStateContentScanKeepUnqueriedDTO = {
@@ -53,7 +63,7 @@ function eventDeckQueryToJson(event: EventDeckQuery, eventStateOperation: EventS
 				options: event.options
 			}
 			return {
-				o: eventStateOperation,
+				o: EventStateOriginEnum.create,
 				t: EventStateTypeEnum.scanKeepUnQueried,
 				v: content
 			}
@@ -72,25 +82,25 @@ function eventDeckQueryToJson(event: EventDeckQuery, eventStateOperation: EventS
 		default:{return}
 	}
 }
-function eventTargetCardToJson(event: EventTargetCard, eventStateOperation: EventStateOriginEnum): EventStateDTO | undefined {
+function eventTargetCardToJson(event: EventTargetCard): EventStateDTO | undefined {
 	let content: EventStateContentTargetCardDTO = {
 		cardId: event.targetCardId,
 		ressources: event.advancedRessource
 	}
 	return {
-		o: eventStateOperation,
+		o: EventStateOriginEnum.create,
 		t: EventStateTypeEnum.targetCardAddRessource,
 		v: content
 	}
 }
-function eventComplexSelectorToJson(event: EventComplexCardSelector, eventStateOperation: EventStateOriginEnum): EventStateDTO | undefined {
+function eventComplexSelectorToJson(event: EventComplexCardSelector): EventStateDTO | undefined {
 	switch(event.subType){
 		case('discardCards'):{
 			let content: EventStateContentDiscardDTO = {
 				d: event.cardSelector.selectionQuantity
 			}
 			return {
-				o: eventStateOperation,
+				o: EventStateOriginEnum.create,
 				t: EventStateTypeEnum.discard,
 				v: content
 			}
@@ -102,7 +112,7 @@ function eventComplexSelectorToJson(event: EventComplexCardSelector, eventStateO
 function eventQueueToJson(events: EventBaseModel[]): EventStateDTO[] {
 		let result: EventStateDTO[] = []
 		for(let e of events){
-			let dto = toJson(e, EventStateOriginEnum.load)
+			let dto = toJson(e)
 			if(dto){
 				result.push(dto)
 			}
@@ -110,16 +120,17 @@ function eventQueueToJson(events: EventBaseModel[]): EventStateDTO[] {
 		return result
 }
 
-function toJson(event: EventBaseModel, eventStateOperation : EventStateOriginEnum): EventStateDTO | undefined {
+function toJson(event: EventBaseModel): EventStateDTO | undefined {
+	if(event.finalized){return}
 	const excludedSubtypes : EventUnionSubTypes[] = ['endOfPhase', 'waitingGroupReady', 'selectCardForcedSell', 'deckWaiter']
 	if(excludedSubtypes.includes(event.subType)){return}
 	let dto: EventStateDTO | undefined
 	switch(event.type){
-		case('cardSelectorCardBuilder'):{dto = eventBuilderToJson(event as EventCardBuilder, eventStateOperation); break}
-		case('cardActivator'):{dto = eventActivatorToJson(event as EventCardActivator, eventStateOperation); break}
-		case('deck'):{dto = eventDeckQueryToJson(event as EventDeckQuery, eventStateOperation); break}
-		case('targetCard'):{dto = eventTargetCardToJson(event as EventTargetCard, eventStateOperation); break}
-		case('ComplexSelector'):{dto = eventComplexSelectorToJson(event as EventComplexCardSelector, eventStateOperation); break}
+		case('cardSelectorCardBuilder'):{dto = eventBuilderToJson(event as EventCardBuilder); break}
+		case('cardActivator'):{dto = eventActivatorToJson(event as EventCardActivator); break}
+		case('deck'):{dto = eventDeckQueryToJson(event as EventDeckQuery); break}
+		case('targetCard'):{dto = eventTargetCardToJson(event as EventTargetCard); break}
+		case('ComplexSelector'):{dto = eventComplexSelectorToJson(event as EventComplexCardSelector); break}
 		default:{break}
 	}
 	if(dto){return dto}

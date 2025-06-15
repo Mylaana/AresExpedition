@@ -106,11 +106,11 @@ describe('Models - Event', () => {
                 expect(builder.getSelectedCard()).toBeUndefined()
             })
             it('should evaluate getbuilderIsLocked returning false', () => {
-                expect(builder.getbuilderIsLocked()).toEqual(false)
+                expect(builder.getBuilderIsLocked()).toEqual(false)
             })
             it('should evaluate setCardBuilt returning false', () => {
-                builder.setbuilderIsLocked()
-                expect(builder.getbuilderIsLocked()).toEqual(true)
+                builder.setBSuilderIsLocked()
+                expect(builder.getBuilderIsLocked()).toEqual(true)
             })
         })
         describe('INTEGRATION TEST', () => {
@@ -172,7 +172,7 @@ describe('Models - Event', () => {
                 expect(builder.getSelectedCard()).toBeUndefined()
             })
             it('should evaluate resolveCardBuilderButtonClicked with build sent', () => {
-                expect(builder.getbuilderIsLocked()).toBeFalse()
+                expect(builder.getBuilderIsLocked()).toBeFalse()
 
                 let button = builder.getButtonFromName('buildCard') as EventCardBuilderButton
                 builder.resolveCardBuilderButtonClicked(button)
@@ -180,7 +180,7 @@ describe('Models - Event', () => {
                 expect(builder.getButtonFromName('buildCard')?.enabled).toBeFalse()
                 expect(builder.getButtonFromName('discardSelectedCard')?.enabled).toBeFalse()
 
-                expect(builder.getbuilderIsLocked()).toBeTrue()
+                expect(builder.getBuilderIsLocked()).toBeTrue()
             })
         })
     })
