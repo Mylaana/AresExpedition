@@ -616,6 +616,7 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
         case('productionPhase'):{
             event.autoFinalize = false
             event.productionApplied = false
+			event.title = 'Production'
             break
         }
         case('actionPhase'):{break}

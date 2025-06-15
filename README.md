@@ -47,12 +47,8 @@ Backend: Junit
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
-
-Bug that need rework on WS & event saving, every saved event must be split in three categories : 
-    - events that use common ressources (draw, research, oceans) and must be resolved all at once serverside, then converted in their resolution event state and returned all at once
-    - events that dont, that are just being deserialized to be saved in case of refresh and serialized at that moment
-    - events that should not be saved at all (phase, end of phase, max hand size check), these can be recreated on refresh and can use the presence of eventstate to determine if they should load on initial state or not (aka phase 5 triggering a research query or not)
-this implies that drawEventQueue has no purpose anymore, and waiter events should just be destroyed when server returns ressources, no need to match with ack id.
+card production not being applied   
+card activated not being saved in eventstate   
 
 ## Must have for v1 :
 ### Refactoring
@@ -71,7 +67,6 @@ Activation:
 Add victory check   
 
 ### Interface
-Design production phase screen   
 Add scan/keep modifier display   
 Always display steel/titanium cost mod   
 Rollback button does nothing   
