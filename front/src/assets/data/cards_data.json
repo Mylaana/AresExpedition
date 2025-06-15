@@ -16672,82 +16672,6 @@
         "vpScaling": "0"
     },
     {
-        "id": 220,
-        "card_code": "P17",
-        "origin": "promo",
-        "cost": 9,
-        "tagsId": [
-            4
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "IV",
-        "phaseDown": "",
-        "title": {
-            "en": "Tourism",
-            "fr": ""
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "Raise your TR 1 step for every milestone you have.\nDuring the production phase, this card produce 2 MC.",
-            "fr": ""
-        },
-        "effectSummaryOption": "",
-        "effectSummaryType2": "",
-        "effectSummaryText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryOption2": "",
-        "playedText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [],
-        "startingMegacredits": 0,
-        "status": "filled",
-        "effectActionTextOption1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionTextOption2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option2": {
-            "en": "",
-            "fr": ""
-        },
-        "vpScaling": "0"
-    },
-    {
         "id": 222,
         "card_code": "P19",
         "origin": "promo",
@@ -16927,8 +16851,8 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $otherobjective$",
-            "fr": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $otherobjective$"
+            "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_objective$",
+            "fr": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_objective$"
         },
         "effectText": {
             "en": "Action: Spend 14 MC to take 1 Forest VP and raise the oxygen 1 step. Reduce its cost by 4 MC for each Objective you have.",
@@ -17588,35 +17512,36 @@
         "vpScaling": "0"
     },
     {
-        "id": 257,
-        "card_code": "D26",
+        "id": 251,
+        "card_code": "D20",
         "origin": "discovery",
-        "cost": 25,
+        "cost": 10,
         "tagsId": [
-            10
+            10,
+            9
         ],
-        "cardType": "greenProject",
+        "cardType": "redProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
         "prerequisiteType": "",
         "prerequisiteTresholdValue": 0,
-        "phaseUp": "IV",
+        "phaseUp": "",
         "phaseDown": "",
         "title": {
-            "en": "Local Market",
+            "en": "Topographic Mapping",
             "fr": ""
         },
         "vpText": {
             "en": "",
             "fr": ""
         },
-        "effectSummaryType": "production",
+        "effectSummaryType": "",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$",
+            "en": "",
             "fr": ""
         },
         "effectText": {
-            "en": "During the production phase, this card produces 2MC.",
+            "en": "",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -17631,7 +17556,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "",
+            "en": "Upgrade a phase card.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -17644,7 +17569,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17951,82 +17876,6 @@
         "stockable": [],
         "startingMegacredits": 0,
         "status": "implemented",
-        "effectActionTextOption1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionTextOption2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option2": {
-            "en": "",
-            "fr": ""
-        },
-        "vpScaling": "0"
-    },
-    {
-        "id": 270,
-        "card_code": "D39",
-        "origin": "discovery",
-        "cost": 25,
-        "tagsId": [
-            10
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "IV",
-        "phaseDown": "",
-        "title": {
-            "en": "Political Influence",
-            "fr": ""
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryOption": "",
-        "effectSummaryType2": "",
-        "effectSummaryText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryOption2": "",
-        "playedText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [],
-        "startingMegacredits": 0,
-        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20237,6 +20086,158 @@
         "stockable": [],
         "startingMegacredits": 25,
         "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "CD04",
+        "origin": "Discovery",
+        "cost": 0,
+        "tagsId": [
+            3
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Sultira",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "",
+        "origin": "",
+        "cost": 0,
+        "tagsId": [
+            10
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Austellar",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""

@@ -1026,6 +1026,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'204': () => [S.addProduction({ name: 'titanium', valueStock: 1 })],
 	// Wave Power
 	'205': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
+	// Topographic Mapping
+	'D20': () => [
+		S.selectTag('D20'),
+		S.upgradePhaseCard(1)
+	],
 	// Biofoundries
 	'D22': () => [
 		S.upgradePhaseCard(1),
