@@ -21,7 +21,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'50', //Regolith Eaters,
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'CP02']
+export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'CP02', 'P20']
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	// Advanced Screening Technology
@@ -178,13 +178,23 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
 	// Self Replicating Bacteria
 	'P11': (cardCode, _, option) => option === 1
-		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1}, cardCode)]
 		: option === 2
 		? [
-			S.addRessourceToCardId({ name: 'microbe', valueStock: -5 }, cardCode),
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -5}, cardCode),
 			S.specialBuilder(BuilderOption.selfReplicatingBacteria)
 			]
 		: [],
+	// Community Afforestation
+	'P20': (_, clientState) => [S.draw(1 + clientState.getMilestoneCompleted())],
+	// Community Afforestation
+	'P21': (card, clientState) => [
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState)}),
+		S.addForestAndOxygen(1)],
+	// Gas-Cooled Reactors
+	'P23': (card, clientState) => [
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState)}),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
 	// Celestior
 	'CP02': () => [S.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)]
 }
@@ -205,6 +215,10 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	'F08': (state) => Math.max(0, 10 - state.getTagsOfType('plant') * 2),
 	// Progressive Policies
 	'P09': (state) => state.getTagsOfType('event') >= 4 ? 5 : 10,
+	// Community Afforestation
+	'P21': (state) => 14 - state.getMilestoneCompleted() * 4,
+	// Gas-Cooled Reactors
+	'P23': (state) => 12 - state.getPhaseCardUpgradedCount() * 2,
 
 	// SPECIALS
 	// Convert Forest - Ecoline
@@ -235,6 +249,18 @@ export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: Playe
 	'F08': (state) => `$ressource_megacreditvoid_${getScaling('F08', state)}$: $other_infrastructure$`,
 	//Progressive Policies
 	'P09': (state) => `$ressource_megacreditvoid_${getScaling('P09', state)}$: $other_oxygen$`,
+	//City Council
+	'P20': (state) => {
+		let caption :string = ''
+		for(let i=0; i< (1 + state.getMilestoneCompleted()); i++){
+			caption += '$ressource_card$'
+		}
+		return caption
+	},
+	//Community Afforestation
+	'P21': (state) => `$ressource_megacreditvoid_${getScaling('P21', state)}$: $other_forest$`,
+	//Gas-Cooled Reactors
+	'P23': (state) => `$ressource_megacreditvoid_${getScaling('P23', state)}$: $other_temperature$`,
 
 	// SPECIAL
 	'ConvertForest': (state) => `${getScaling('ConvertForest', state)}$ressource_plant$ $other_arrow$ $other_forest$`,
@@ -298,6 +324,10 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'P09': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('P09', clientState), 'min', clientState),
 	// Self Replicating Bacteria
 	'P11': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('P11').some(s => s.name === 'microbe' && s.valueStock >= 5),
+	// Community Afforestation
+	'P21': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('P21', clientState), 'min', clientState),
+	// Gas-Cooled Reactors
+	'P23': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('P23', clientState), 'min', clientState),
 }
 export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) => boolean> = {
 	//AI Central
