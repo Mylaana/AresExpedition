@@ -1,10 +1,30 @@
-<div class="wrapper-production-phase">
-    <ul>you gained :
-        <li>{{clientPlayerState.getRessourceInfoFromId(0)?.valueProd! + clientPlayerState.getTR()}} megacredits ({{clientPlayerState.getRessourceInfoFromId(0)?.valueProd!}} from production and {{clientPlayerState.getTR()}} from TR)</li>
-        <li>{{clientPlayerState.getRessourceInfoFromId(1)?.valueProd!}} heat</li>
-        <li>{{clientPlayerState.getRessourceInfoFromId(2)?.valueProd!}} plants</li>
-        <li>{{clientPlayerState.getRessourceInfoFromId(5)?.valueProd!}} cards</li>
-    </ul>
+<div class="wrapper-main">
+	<div class="production-card ares-background ares-border megacredit-card">
+		<div class="wrapper-top-part">
+			<img [src]="`/assets/ressource/${clientPlayerState.getRessourceInfoFromId(0)?.name}.png`">
+			<p class="production">+{{getProduction(0)}}</p>
+		</div>
+		<div class="wrapper-bottom-part">
+			<div class="wrapper-subcard">
+				<img [src]="`/assets/other/phase_production.png`">
+				<p>{{_phaseMegacreditProduction}}</p>
+			</div>
+			<div class="wrapper-subcard">
+				<img [src]="`/assets/other/tr.png`">
+				<p>{{clientPlayerState.getTR()}}</p>
+			</div>
+		</div>
+	</div>
+	<ng-container *ngFor="let id of [1,2]">
+		<div *ngIf="getProduction(id)>0"
+			class="production-card wrapper-top-part ares-background ares-border">
+			<img [src]="`/assets/ressource/${clientPlayerState.getRessourceInfoFromId(id)?.name}.png`">
+			<p class="production">+{{getProduction(id)}}</p>
+		</div>
+	</ng-container>
 </div>
-<h1 *ngIf="_productionCardList.length>0">New cards:</h1>
-<app-playable-card-list [cardList]="_productionCardList"></app-playable-card-list>
+<ng-container
+	*ngIf="_productionCardList.length>0">
+	<h1>Cards from production:</h1>
+	<app-playable-card-list [cardList]="_productionCardList"></app-playable-card-list>
+</ng-container>

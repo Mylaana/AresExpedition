@@ -230,7 +230,7 @@ export class EventHandler {
 			case('productionPhase'):{
 				if(event.productionApplied){return}
 				event.productionApplied = true // prevents infinite loops
-				this.phaseHandler.resolveProduction();
+				this.phaseHandler.resolveProduction(event);
 				break
 			}
 			case('researchPhase'):{this.phaseHandler.resolveResearch();break}
@@ -726,7 +726,7 @@ class PhaseResolveHandler {
 			this.gameStateService.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}),'second')
 		}
 	}
-	resolveProduction(): void {
+	resolveProduction(event: EventPhase): void {
 		this.refreshCurrentUpgradedPhaseCard()
 
 		let clientState = this.gameStateService.getClientState()
@@ -763,13 +763,16 @@ class PhaseResolveHandler {
 				production.push({name:ressource.name, valueStock:ressourceGain})
 			}
 		}
+
+		event.productionMegacreditFromPhaseCard = this.getProductionPhaseCardSelectionBonus()
+
 		if(production.length>0){
 			//newEvents.push(EventFactory.createGeneric('applyProduction', {production: production}))
 			newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: production}))
 			this.gameStateService.addEventQueue(newEvents, 'first')
 		}
 	}
-	private getProductionPhaseCardSelectionBonus(): number {
+	public getProductionPhaseCardSelectionBonus(): number {
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return 0}
 
 		let bonus: number = 0
