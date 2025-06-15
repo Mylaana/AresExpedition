@@ -7,7 +7,7 @@ import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
-import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase, EventCardActivator, EventComplexCardSelector } from "./event.model";
+import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase, EventCardActivator, EventComplexCardSelector, EventTagSelector } from "./event.model";
 import { Logger, Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
@@ -249,6 +249,7 @@ export class EventHandler {
 			case('phase'):{this.finishEventPhase(this.currentEvent as EventPhase); break}
 			case('cardActivator'):{this.finishEventCardActivator(this.currentEvent as EventCardActivator); break}
 			case('ComplexSelector'):{this.finishEventComplexCardSelector(this.currentEvent as EventComplexCardSelector); break}
+			case('tagSelector'):{this.finishEventTagSelector(this.currentEvent as EventTagSelector); break}
 			default:{Logger.logError('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
         }
 		if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
@@ -538,6 +539,10 @@ export class EventHandler {
 				this.gameStateService.setClientTriggerAsInactive(event.targetCardId)
 				break
 			}
+			case('addTagToCardId'):{
+				this.gameStateService.addTagFromOtherSourceToClient(event.addTag)
+				break
+			}
 			default:{Logger.logError('Non mapped event in handler.finishEventTargetCards: ', this.currentEvent)}
 		}
 	}
@@ -550,6 +555,17 @@ export class EventHandler {
 			}
 			case('productionPhase'):{
 				event.finalized=true
+				break
+			}
+			default:{Logger.logError('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}
+		}
+	}
+	private finishEventTagSelector(event: EventTagSelector) {
+		Logger.logEventResolution('resolving event: ','finishEventTagSelector', event.subType)
+		switch(event.subType){
+			case('tagSelector'):{
+				event.finalized=true
+				this.gameStateService.addEventQueue(EventFactory.simple.addTagToCard(event.targetCardId, event.selectedTag), 'first')
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}

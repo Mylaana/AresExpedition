@@ -1031,6 +1031,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.upgradePhaseCard(1),
 		S.addProduction({ name: 'plant', valueStock: 2 })
 	],
+	// Local Market
+	'D26': () => [
+		S.addProduction({name:'megacredit', valueStock:2}),
+		S.selectTag('D26')
+	],
 	// Hematite Mining
 	'D29': () => [
 		S.addProduction([
@@ -1055,6 +1060,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'D37': () => [
 		S.addProduction({ name: 'heat', valueStock: 1 }),
 		S.upgradePhaseCard(1, [0])
+	],
+	// Political Influence
+	'D39': () => [
+		S.addProduction({name:'heat', valueStock:2}),
+		S.selectTag('D39')
 	],
 	// Biological Factories
 	'D40': () => [

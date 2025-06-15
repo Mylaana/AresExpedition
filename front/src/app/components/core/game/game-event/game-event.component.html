@@ -40,7 +40,7 @@
 				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase'
 				|| currentEvent.subType==='actionPhaseActivator' || currentEvent.subType==='upgradePhaseCards'
 				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'
-				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder()"
+				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder() || currentEvent.subType==='tagSelector'"
 				@fadeIn>
 				<app-phase-planification
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
@@ -79,6 +79,10 @@
 					(cardBuilderButtonClicked)="onCardBuilderButtonClicked($event)"
 					(updateSelectedCardList)="onUpdateSelectedCardList($event)">
 				</app-phase-builder>
+				<app-tag-gain-list
+					*ngIf="currentEvent.subType==='tagSelector'"
+					[event]="currentEvent">
+				</app-tag-gain-list>
 			</div>
 			<div class="wrapper-selectors"
 				*ngIf="currentEvent.hasCardsToSelectFrom() &&currentEvent.subType!='actionPhaseActivator'

@@ -17612,11 +17612,11 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "",
+            "en": "$ressource_megacreditvoid_2$",
             "fr": ""
         },
         "effectText": {
-            "en": "",
+            "en": "During the production phase, this card produces 2MC.",
             "fr": ""
         },
         "effectSummaryOption": "",

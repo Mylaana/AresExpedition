@@ -14,7 +14,6 @@ import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-ca
 import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { EventMainButtonComponent } from "../../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
-import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { InitialDraftComponent } from '../../../game-initialization/initial-draft/initial-draft.component';
 import { WaitingReadyComponent } from '../../waiting-ready/waiting-ready.component';
@@ -23,6 +22,7 @@ import { PhaseProductionComponent } from '../../../game-event-blocks/phase-produ
 import { PhaseActionComponent } from '../../../game-event-blocks/phase-action/phase-action.component';
 import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/phase-builder.component';
 import { EventFactory } from '../../../../factory/event factory/event-factory';
+import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/tag-gain-list.component';
 
 //this component is the main controller, and view
 
@@ -40,7 +40,8 @@ import { EventFactory } from '../../../../factory/event factory/event-factory';
         PhaseActionComponent,
         InitialDraftComponent,
         WaitingReadyComponent,
-		PhaseBuilderComponent
+		PhaseBuilderComponent,
+		TagGainListComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',
