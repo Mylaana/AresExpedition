@@ -1201,6 +1201,8 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	'42': (card) => card.hasTag('event') ? 5 : 0,
 	//Research Outpost
 	'51': () => 1,
+	//Orbital Outpost
+	'P22': (card) => card.tagsId.filter((t) => t!=-1).length<=1? 3:0,
 	//CreditCor
 	'C1': (card) => card.costInitial >= 20 ? 4 : 0,
 	//Interplanetary Cinematics
