@@ -1,9 +1,9 @@
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
-import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector } from "../../models/core-game/event.model"
+import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
-import { MinMaxEqualType } from "../../types/global.type"
+import { MinMaxEqualType, TagType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
 import { Logger } from "../../utils/utils"
 import { ButtonDesigner } from "../button-designer.service"
@@ -21,6 +21,7 @@ interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 }
 interface CreateEventOptionsTargetCard {
     advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock []
+	addTagToCard?: TagType
 }
 interface CreateEventOptionsGeneric {
     increaseParameter?: GlobalParameterValue
@@ -112,7 +113,12 @@ function scanKeepResult(cardList: PlayableCardModel[], keep: number, option: Dec
 function specialBuilder(option: BuilderOption): EventCardBuilder {
 	return EventFactory.createCardBuilder('specialBuilder', 'specialBuilder', option)
 }
-
+function selectTag(cardCode: string) : EventTagSelector {
+	return EventFactory.createTagSelector(cardCode)
+}
+function addTagToCard(cardCode: string, tag: TagType): EventTargetCard {
+	return EventFactory.createTargetCard('addTagToCardId', cardCode, {addTagToCard:tag})
+}
 const SimpleEvent = {
 	draw,
 	discard,
@@ -130,6 +136,8 @@ const SimpleEvent = {
 	addTR,
 	addForestAndOxygen,
 	specialBuilder,
+	selectTag,
+	addTagToCard,
 }
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
@@ -482,6 +490,12 @@ function createTargetCard(subType:EventTargetCardSubType, targetCardId:string, a
         case('deactivateTrigger'):{
             break
         }
+		case('addTagToCardId'):{
+			if(args?.addTagToCard){
+				event.addTag = args?.addTagToCard
+			}
+			break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
     event.button = ButtonDesigner.createEventMainButton(event.subType)
@@ -613,6 +627,15 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
     event.button = ButtonDesigner.createEventMainButton(event.subType)
     return event
 }
+function createTagSelector(cardCode: string): EventTagSelector {
+	let event = new EventTagSelector
+	event.subType = 'tagSelector'
+	event.targetCardId = cardCode
+	event.button = ButtonDesigner.createEventMainButton(event.subType)
+	event.title = 'Select a tag to add to this card.'
+
+	return event
+}
 export const EventFactory = {
 	simple: SimpleEvent,
 
@@ -626,6 +649,7 @@ export const EventFactory = {
     createDeckQueryEvent,
     createWaiter,
     createPhase,
+	createTagSelector
 }
 
 export const __testOnly__ = {

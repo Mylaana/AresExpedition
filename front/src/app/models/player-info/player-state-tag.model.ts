@@ -3,6 +3,7 @@ import { PlayableCardModel } from "../cards/project-card.model";
 import { GAME_TAG_LIST } from "../../global/global-const";
 import { PlayerTagStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { TagType } from "../../types/global.type";
+import { Utils } from "../../utils/utils";
 
 export class PlayerTagStateModel {
     private tags: TagInfo[] = [] //this.initializeTags()
@@ -28,6 +29,7 @@ export class PlayerTagStateModel {
 
 	addTag(tagId:number, quantity: number):void{
 		if(tagId===-1){return}
+		if(tagId===10){return}
 		this.tags[tagId].valueCount += quantity
 	}
 	addPlayedCardTags(card: PlayableCardModel): void {

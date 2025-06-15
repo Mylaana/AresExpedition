@@ -66,8 +66,6 @@ Create Event type :
     - "action portal" type event casting subsequent events   
 Activation:   
     - Droplist/Custom value selection on activation (card 32/47)   
-Other:   
-    - Stockable tags   
 
 ### Misc
 Add victory check   
@@ -117,6 +115,7 @@ Add proper Hybrid production zone looks
 Rework effect summary zone (refacto + looks)   
 Create switch button   
 Builder: display visual list of active triggers   
+Cards: Display wild tag converted   
 
 ### Responsiveness
 Game creation menu

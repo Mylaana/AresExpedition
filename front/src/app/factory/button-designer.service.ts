@@ -24,6 +24,7 @@ export class ButtonDesigner{
 			case('selectCorporation'):{startEnabled=false;break}
 			case('scanKeepResult'):{startEnabled=false;break}
 			case('specialBuilder'):{startEnabled=true;break}
+			case('tagSelector'):{startEnabled=false;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
@@ -38,6 +39,7 @@ export class ButtonDesigner{
 			case('buyInfrastructure'):{startEnabled=true;break}
 			case('convertInfrastructure'):{startEnabled=true;break}
 			case('buyOcean'):{startEnabled=true;break}
+			case('tagGain'):{startEnabled=true;break}
 
 			//cards
 			case('activateProjectOnce'):{startEnabled=true; break}
@@ -80,6 +82,7 @@ export class ButtonDesigner{
 			case('selectCorporation'):{caption='$other_validate$';break}
 			case('actionPhaseActivator'):{caption='$other_validate$';break}
 			case('specialBuilder'):{caption='$other_validate$';break}
+			case('tagSelector'):{caption='$other_validate$';break}
 
 			//button name related rules
 			case('sellOptionalCard'):{caption='$other_sellcard$';break}

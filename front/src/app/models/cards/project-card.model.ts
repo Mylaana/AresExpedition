@@ -39,6 +39,7 @@ export class PlayableCardModel{
     effectSummaryOption!: string
     effectSummaryOption2!: string
 	scalingVp!: boolean
+	additionalTags!: number[]
 
     //not loaded from data
 

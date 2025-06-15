@@ -1,7 +1,7 @@
-import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType } from "../../types/event.type";
+import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
-import { EventCardBuilderButtonNames } from "../../types/global.type";
+import { EventCardBuilderButtonNames, TagType } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
@@ -332,10 +332,20 @@ export class EventCardBuilder extends EventBaseCardSelector {
 	}
 }
 
+export class EventTagSelector extends EventBaseModel {
+    override readonly type: EventType = 'tagSelector'
+    override subType!: EventTagSelectorSubType;
+    override title!: string
+    targetCardId!: string
+	selectedTag!: TagType
+    override autoFinalize: boolean = false
+}
+
 export class EventTargetCard extends EventBaseModel {
     override readonly type: EventType = 'targetCard'
     override subType!: EventTargetCardSubType;
     targetCardId!: string
+	addTag!: TagType
     override autoFinalize: boolean = true
     advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock[]
 }

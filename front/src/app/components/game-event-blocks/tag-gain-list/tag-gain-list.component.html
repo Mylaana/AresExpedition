@@ -1,0 +1,10 @@
+<app-playable-card-list [cardList]="[_card]"></app-playable-card-list>
+<div [ngClass]="['wrapper-button', 'ares-border', 'ares-background']">
+	<app-non-event-button
+		*ngFor="let b of _buttonsId"
+		[ngClass]="[_selected!=-1 && b!=_selected?'disabled':'']"
+		[button]="getButton(b)" [shape]="'hex'"
+		[style]="'transparent'" (buttonClicked)="onTagSelected(b)">
+	</app-non-event-button>
+</div>
+<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>
