@@ -1130,6 +1130,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'P26': (clientstate) => [
 		S.addTR(clientstate.getPhaseCardUpgradedCount())
 	],
+	//Genetically Modified Vegetables
+	'P28': (clientstate) => [
+		S.addProduction({name:'plant', valueStock:3})
+	],
 	//Glacial Evaporation
 	'P29': () => [
 		S.addProduction({name:'heat', valueStock:4})
