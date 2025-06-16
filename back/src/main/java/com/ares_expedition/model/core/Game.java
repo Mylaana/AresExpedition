@@ -421,6 +421,14 @@ public class Game {
         this.groupPlayerState.get(playerId).addEventScanKeepCards(cards, keep, options);
     }
 
+    public boolean isGameOver(){
+        for(GlobalParameter p: this.globalParameters){
+            if(p.isMaxedOut()==false){
+                return false;
+            }
+        }
+        return true;
+    }
 
     public GameData toData(){
         return new GameData(this);

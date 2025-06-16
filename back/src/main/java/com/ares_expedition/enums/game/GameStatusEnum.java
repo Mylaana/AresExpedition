@@ -4,5 +4,6 @@ public enum GameStatusEnum {
     NEW_GAME,
     SELECT_STARTING_HAND,
     SELECT_CORPORATION,
-    STARTED
+    STARTED,
+    GAME_OVER
 }

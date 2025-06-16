@@ -17,6 +17,7 @@ export class WebsocketHandler {
 
     public handlePlayerMessage(message: PlayerMessageResult){
         Logger.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
+		console.log('message:',message)
         switch(message.contentEnum){
             case(PlayerMessageContentResultEnum.draw):{
                 this.handlePlayerMessageDrawResult(message.content)
@@ -59,7 +60,10 @@ export class WebsocketHandler {
                 break
             }
             case(GroupMessageContentResultEnum.nextPhase):{
-                this.handleMessageStartedGameGroupGameState(message.content)
+				this.handleMessageStartedGameGroupGameState(message.content)
+				if(message.content.gameStatus===GameStatusEnum.gameOver){
+					this.gameStateService.setGameOver()
+				}
                 break
             }
             case(GroupMessageContentResultEnum.serverSideUnhandled):{
@@ -130,6 +134,11 @@ export class WebsocketHandler {
 			}
 			case(GameStatusEnum.started):{
 				this.handleMessageStartedGameClientGameState(content, true)
+				break
+			}
+			case(GameStatusEnum.gameOver):{
+				this.handleMessageStartedGameClientGameState(content, true)
+				this.gameStateService.setGameOver()
 				break
 			}
 		}

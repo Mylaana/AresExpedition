@@ -97,10 +97,10 @@ export class PlayerGlobalParameterStateModel {
 	}
 	newGame(): void {
 		this.parameters = [
-			{name: GlobalParameterNameEnum.infrastructure,step: 0, addEndOfPhase: 0},
+			{name: GlobalParameterNameEnum.infrastructure,step: 1, addEndOfPhase: 0},
 			{name: GlobalParameterNameEnum.ocean,step: 0,addEndOfPhase: 0},
-			{name: GlobalParameterNameEnum.oxygen,step: 0,addEndOfPhase: 0},
-			{name: GlobalParameterNameEnum.temperature,step: 0,addEndOfPhase: 0}
+			{name: GlobalParameterNameEnum.oxygen,step: 1,addEndOfPhase: 0},
+			{name: GlobalParameterNameEnum.temperature,step: 1,addEndOfPhase: 0}
 		]
 	}
 	private parameterToJson(parameter: GlobalParameter): GlobalParameterDTO {
