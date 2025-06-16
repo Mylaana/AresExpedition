@@ -1084,12 +1084,27 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addProduction({name:'megacredit', valueStock:2}),
 		S.selectTag('D26')
 	],
+	// Manufacturing Hub
+	'D27': () => [
+		S.addProduction([{name:'megacredit', valueStock:2},{name:'heat', valueStock:1}]),
+		S.upgradePhaseCard(1),
+	],
+	// Heat reflective Glass
+	'D28': () => [
+		S.addProduction({name:'heat', valueStock:1}),
+		S.upgradePhaseCard(1),
+	],
 	// Hematite Mining
 	'D29': () => [
 		S.addProduction([
 			{ name: 'card', valueStock: 2 },
 			{ name: 'steel', valueStock: 1 }
 		])
+	],
+	// Hydroponic Gardens
+	'D30': () => [
+		S.addProduction([{name:'megacredit', valueStock:3},{name:'plant', valueStock:1}]),
+		S.upgradePhaseCard(1),
 	],
 	// Industrial Complex
 	'D32': () => [
