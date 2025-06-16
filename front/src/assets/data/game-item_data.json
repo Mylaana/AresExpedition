@@ -188,8 +188,8 @@
     {
         "id": 109,
         "description": "objective",
-        "imageUrl": "assets/other/objective.png",
-        "name": "$other_objective$"
+        "imageUrl": "assets/other/milestone.png",
+        "name": "$other_milestone$"
     },
     {
         "id": 110,

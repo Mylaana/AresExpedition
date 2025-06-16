@@ -8746,7 +8746,7 @@
             2
         ],
         "cardType": "greenProject",
-        "vpNumber": "",
+        "vpNumber": "1",
         "prerequisiteTresholdType": "",
         "prerequisiteType": "",
         "prerequisiteTresholdValue": 0,
@@ -8794,7 +8794,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16851,8 +16851,8 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$ $ressource_card$$skipline$+ $ressource_card$ / $other_objective$",
-            "fr": "$other_arrow$ $ressource_card$$skipline$+ $ressource_card$ / $other_objective$"
+            "en": "$other_arrow$ $ressource_card$$skipline$+ $ressource_card$ / $other_milestone$",
+            "fr": "$other_arrow$ $ressource_card$$skipline$+ $ressource_card$ / $other_milestone$"
         },
         "effectText": {
             "en": "Action: Draw a card. Draw 1 additional card for each Objective you have.",
@@ -16927,8 +16927,8 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_objective$",
-            "fr": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_objective$"
+            "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_milestone$",
+            "fr": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_milestone$"
         },
         "effectText": {
             "en": "Action: Spend 14 MC to take 1 Forest VP and raise the oxygen 1 step. Reduce its cost by 4 MC for each Objective you have.",
@@ -17263,7 +17263,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17721,7 +17721,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17797,7 +17797,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17874,10 +17874,10 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
-            "fr": ""
+            "fr": "-$other_tr$: $other_upgrade$"
         },
         "effectActionTextOption2": {
             "en": "",
@@ -17951,7 +17951,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18028,7 +18028,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18102,15 +18102,17 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [],
+        "stockable": [
+            "science"
+        ],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
-            "fr": ""
+            "fr": "$ressource_science$"
         },
         "effectActionTextOption2": {
-            "en": "",
+            "en": "-3$ressource_science$: $other_upgrade$",
             "fr": ""
         },
         "effectActionText2Option1": {
@@ -18181,10 +18183,10 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
-            "fr": ""
+            "fr": "2$ressource_card$ -2$ressource_card$"
         },
         "effectActionTextOption2": {
             "en": "",
@@ -18257,10 +18259,10 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
-            "fr": ""
+            "fr": "$other_upgrade$"
         },
         "effectActionTextOption2": {
             "en": "",
@@ -18335,7 +18337,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18412,7 +18414,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18489,7 +18491,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18566,7 +18568,237 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 248,
+        "card_code": "D17",
+        "origin": "discovery",
+        "cost": 10,
+        "tagsId": [
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Imported Construction Crews",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade two Phase cards.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Requires a yellow or warmer temperature level.",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "$other_temperature$",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 249,
+        "card_code": "D18",
+        "origin": "discovery",
+        "cost": 35,
+        "tagsId": [
+            1,
+            5,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Ore Leaching",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Increase temperature level 2 steps.$skipline$Draw 2 cards.$skipline$Upgrade a phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 250,
+        "card_code": "D19",
+        "origin": "discovery",
+        "cost": 8,
+        "tagsId": [
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Private Investor Beach",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Flip an ocean tile.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Requires that you have one or more milestone.",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "$other_milestone$",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18630,7 +18862,610 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Upgrade a phase card.",
+            "en": "Chose a tag and add it to this card.$skipline$Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 252,
+        "card_code": "D21",
+        "origin": "discovery",
+        "cost": 14,
+        "tagsId": [
+            0
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "3D Printing",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_4$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 4MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 253,
+        "card_code": "D22",
+        "origin": "discovery",
+        "cost": 27,
+        "tagsId": [
+            0,
+            6
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Biofoundries",
+            "fr": "Biofonderies"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_plant$ $ressource_plant$",
+            "fr": "$ressource_plant$ $ressource_plant$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2 plants.",
+            "fr": "Lors de la Phase de production, cette carte produit 2 plantes."
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": "Am\u00e9liorer une carte Phase."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 254,
+        "card_code": "D23",
+        "origin": "discovery",
+        "cost": 14,
+        "tagsId": [],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "I-II",
+        "phaseDown": "",
+        "title": {
+            "en": "Blast Furnace",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_steel$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "When you play a $tag_building$, you pay 2 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 255,
+        "card_code": "D24",
+        "origin": "discovery",
+        "cost": 14,
+        "tagsId": [
+            6
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Dandelions",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_card$$skipline$$ressource_plant$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, draw a card and this card produces 1 plant.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Requires a red or warmer temperature level.",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "$other_temperature$",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 256,
+        "card_code": "D25",
+        "origin": "discovery",
+        "cost": 9,
+        "tagsId": [],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "I-II",
+        "phaseDown": "",
+        "title": {
+            "en": "Electric Arc Furnaces",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_steel$$ressource_steel$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "When you play a $tag_building$, you pay 4 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 257,
+        "card_code": "D26",
+        "origin": "discovery",
+        "cost": 7,
+        "tagsId": [
+            10
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Local Market",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_2$",
+            "fr": "$ressource_megacreditvoid_2$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Chose a tag and add it to this card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 258,
+        "card_code": "D27",
+        "origin": "discovery",
+        "cost": 22,
+        "tagsId": [
+            0
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Manufacturing Hub",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_2$$skipline$$ressource_heat$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2MC and 1 heat.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 259,
+        "card_code": "D28",
+        "origin": "discovery",
+        "cost": 12,
+        "tagsId": [],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Heat Reflective Glass",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_heat$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 heat.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -18688,11 +19523,164 @@
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
             "en": "$ressource_card$$ressource_card$$mix$$ressource_steel$",
-            "fr": "2 $ressource_card$$mix$$ressource_steel$"
+            "fr": "$ressource_card$$ressource_card$$mix$$ressource_steel$"
         },
         "effectText": {
             "en": "During the production phase, draw 2 cards.$skipline$When you play a $tag_building$, you pay 2 MC less for it.",
             "fr": "Lors de la phase de production, piochez 2 cartes.$skipline$Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 261,
+        "card_code": "D30",
+        "origin": "discovery",
+        "cost": 28,
+        "tagsId": [
+            1,
+            8
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Hydroponic Gardens",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 3MC and 1 plant.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 262,
+        "card_code": "D31",
+        "origin": "discovery",
+        "cost": 16,
+        "tagsId": [
+            1
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "I-II",
+        "phaseDown": "",
+        "title": {
+            "en": "Ilmenite Deposits",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_titanium$$ressource_titanium$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "When you play a $tag_space$, you pay 6MC less for it.",
+            "fr": ""
         },
         "effectSummaryOption": "",
         "effectSummaryType2": "",
@@ -18816,6 +19804,159 @@
         "vpScaling": "0"
     },
     {
+        "id": 264,
+        "card_code": "D33",
+        "origin": "discovery",
+        "cost": 12,
+        "tagsId": [
+            0
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Martian Museum",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_1$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 265,
+        "card_code": "D34",
+        "origin": "discovery",
+        "cost": 19,
+        "tagsId": [
+            2,
+            1
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "I-II",
+        "phaseDown": "",
+        "title": {
+            "en": "Metallurgy",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_titanium$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "When you play a $tag_space$, you pay 3MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
         "id": 266,
         "card_code": "D35",
         "origin": "discovery",
@@ -18893,6 +20034,83 @@
         "vpScaling": "0"
     },
     {
+        "id": 267,
+        "card_code": "D36",
+        "origin": "discovery",
+        "cost": 19,
+        "tagsId": [
+            0,
+            3
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Oxidation Byproducts",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_heat$$ressource_heat$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produce 2 heat.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
         "id": 268,
         "card_code": "D37",
         "origin": "discovery",
@@ -18938,6 +20156,158 @@
         "playedText": {
             "en": "Upgrade your Phase card I.",
             "fr": "Am\u00e9liorez votre carte Phase I."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 269,
+        "card_code": "D38",
+        "origin": "discovery",
+        "cost": 18,
+        "tagsId": [
+            0
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Magnetic Field Generator",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_plant$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 plant.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 270,
+        "card_code": "D39",
+        "origin": "discovery",
+        "cost": 10,
+        "tagsId": [
+            10
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Political Influence",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_3$",
+            "fr": "$ressource_megacreditvoid_3$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 3MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Chose a tag and add it to this card.",
+            "fr": ""
         },
         "prerequisiteText": {
             "en": "",
@@ -19046,6 +20416,156 @@
         "vpScaling": "0"
     },
     {
+        "id": 272,
+        "card_code": "D41",
+        "origin": "discovery",
+        "cost": 12,
+        "tagsId": [],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Nuclear Detonation Site",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produce 3 heat.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 273,
+        "card_code": "D42",
+        "origin": "discovery",
+        "cost": 17,
+        "tagsId": [
+            0
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Warehouses",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_2$",
+            "fr": "$ressource_megacreditvoid_2$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
         "id": 275,
         "card_code": "F03",
         "origin": "foundations",
@@ -19103,6 +20623,234 @@
         "stockable": [],
         "startingMegacredits": 0,
         "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 276,
+        "card_code": "F04",
+        "origin": "foundations",
+        "cost": 15,
+        "tagsId": [],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Cargo Ships",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_infrastructure$:$skipline$2$ressource_heat$/2$ressource_plant$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "Effect: When you increase the infrastructure, gain 2 heats or gain 2 plants.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 277,
+        "card_code": "F05",
+        "origin": "foundations",
+        "cost": 15,
+        "tagsId": [
+            2,
+            1,
+            4
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "Interplanetary Superhighway",
+            "fr": "Liaison Interplan\u00e9taire Express"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ If 4 $tag_science$",
+            "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ Si 4 $tag_science$"
+        },
+        "effectText": {
+            "en": "Action: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 5 MC if you have 4 $tag_science$ or more.",
+            "fr": "Action: D\u00e9pensez 10 MC pour augmentr l'infrastructure de 1 niveau. Ce Co\u00fbt est r\u00e9duit de 5 MC si vous avez 4 $tag_science$ ou plus."
+        },
+        "effectSummaryOption": "scalingCostActivation",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 278,
+        "card_code": "F06",
+        "origin": "foundations",
+        "cost": 16,
+        "tagsId": [
+            0
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "III",
+        "phaseDown": "",
+        "title": {
+            "en": "Maglev Trains",
+            "fr": "Train \u00e0 Sustentation Magn\u00e9tique"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$ $ressource_card$$skipline$If $other_infrastructure$ + $ressource_card$",
+            "fr": "$other_arrow$ $ressource_card$$skipline$If $other_infrastructure$ + $ressource_card$"
+        },
+        "effectText": {
+            "en": "Action: Draw a card.$skipline$If the infrastructure was at the yellow level or higher at the beginning of this phase, draw 1 additional card.",
+            "fr": "Action: Piochez 1 carte.$skipline$Si l'infrastructure \u00e9tait au niveau jaune ou sup\u00e9rieur au d\u00e9but de cette phase, piochez 1 carte suppl\u00e9mentaire."
+        },
+        "effectSummaryOption": "scalingCostActivation",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19429,6 +21177,84 @@
         "vpScaling": "0"
     },
     {
+        "id": 283,
+        "card_code": "F11",
+        "origin": "foundations",
+        "cost": 17,
+        "tagsId": [
+            1,
+            5,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Callisto Skybridge",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Raise infrastructure 1 step.$skipline$If you have 3 or more other $tag_jovian$ (>=4 total), increase infrastructure an additional step.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
         "id": 284,
         "card_code": "F12",
         "origin": "foundations",
@@ -19476,6 +21302,82 @@
         "playedText": {
             "en": "Increase the infrastructure 1 step.$skipline$Increase the oxygen 1 step.$skipline$Increase the temperature 1 step.",
             "fr": "Augmentez l'infrastructure de 1 niveau.$skipline$Augmentez l'oxyg\u00e8ne de 1 niveau.$skipline$Augmentez la temp\u00e9rature de 1 niveau."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 285,
+        "card_code": "F13",
+        "origin": "foundations",
+        "cost": 23,
+        "tagsId": [
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "City Planning",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Raise infrastructure 2 steps.",
+            "fr": ""
         },
         "prerequisiteText": {
             "en": "",
@@ -19585,6 +21487,161 @@
         "vpScaling": "0"
     },
     {
+        "id": 287,
+        "card_code": "F15",
+        "origin": "foundations",
+        "cost": 24,
+        "tagsId": [
+            0,
+            6,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "-2",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Invasive Irigation",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Flip an ocean tile.$skipline$Raise infrastructure 2 steps.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 288,
+        "card_code": "F16",
+        "origin": "foundations",
+        "cost": 20,
+        "tagsId": [
+            0,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Jezero Crater Hospital",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Raise infrastructure 1 step.$skipline$Upgrade a phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
         "id": 289,
         "card_code": "F17",
         "origin": "foundations",
@@ -19631,6 +21688,159 @@
         "playedText": {
             "en": "Increase the infrastructure 3 step.",
             "fr": "Augmentez l'infrastructure de 3 niveaux."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 290,
+        "card_code": "F18",
+        "origin": "foundations",
+        "cost": 32,
+        "tagsId": [
+            3,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Power Grid Uplink",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Raise infrastructure 2 steps.$skipline$Increase temperature level 1 step.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 291,
+        "card_code": "F19",
+        "origin": "foundations",
+        "cost": 11,
+        "tagsId": [
+            0
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Subways",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Raise infrastructure 1 step.",
+            "fr": ""
         },
         "prerequisiteText": {
             "en": "",
@@ -19711,6 +21921,233 @@
         "prerequisiteText": {
             "en": "Requires a yellow infrastructure level or higher.",
             "fr": "Requiert un niveau d'infrastructure jaune ou sup\u00e9rieur."
+        },
+        "prerequisiteSummaryText": {
+            "en": "$other_infrastructure$",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 293,
+        "card_code": "F21",
+        "origin": "foundations",
+        "cost": 16,
+        "tagsId": [],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Microloans",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_2$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 294,
+        "card_code": "F22",
+        "origin": "foundations",
+        "cost": 16,
+        "tagsId": [
+            0,
+            8
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Seed Bank",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_plant$$ressource_plant$$skipline$$ressource_heat$$ressource_heat$$ressource_heat$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2 plants and 3 heats.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Requires a red or higher infrastructuer level.",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "$other_infrastructure$",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 295,
+        "card_code": "F23",
+        "origin": "foundations",
+        "cost": 13,
+        "tagsId": [
+            2
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "1",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "",
+        "title": {
+            "en": "Quant-Link Conferencing",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_card$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, draw 1 card.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Requires a red or higher infrastructuer level.",
+            "fr": ""
         },
         "prerequisiteSummaryText": {
             "en": "$other_infrastructure$",
@@ -20646,7 +23083,7 @@
     },
     {
         "id": 1013,
-        "card_code": "CP01",
+        "card_code": "P12",
         "origin": "Promo",
         "cost": 0,
         "tagsId": [
@@ -20725,7 +23162,7 @@
     },
     {
         "id": 1014,
-        "card_code": "CP02",
+        "card_code": "P13",
         "origin": "Promo",
         "cost": 0,
         "tagsId": [
@@ -20801,7 +23238,7 @@
     },
     {
         "id": 1015,
-        "card_code": "CP03",
+        "card_code": "P14",
         "origin": "Promo",
         "cost": 0,
         "tagsId": [
@@ -20877,7 +23314,7 @@
     },
     {
         "id": 1016,
-        "card_code": "CP04",
+        "card_code": "P15",
         "origin": "Promo",
         "cost": 0,
         "tagsId": [
@@ -20953,7 +23390,7 @@
     },
     {
         "id": 1017,
-        "card_code": "CP05",
+        "card_code": "P16",
         "origin": "Promo",
         "cost": 0,
         "tagsId": [
@@ -21131,7 +23568,7 @@
             "fr": "$ressource_titanium$"
         },
         "effectText": {
-            "en": "When you play a $tag_space$, you pay 3 MC less for it.",
+            "en": "EFFECT: When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
         "effectSummaryOption": "",
@@ -21180,7 +23617,7 @@
     },
     {
         "id": 0,
-        "card_code": "CD04",
+        "card_code": "D04",
         "origin": "Discovery",
         "cost": 0,
         "tagsId": [
@@ -21201,13 +23638,13 @@
             "en": "",
             "fr": ""
         },
-        "effectSummaryType": "",
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "",
+            "en": "$tag_power$: $ressource_heat$$ressource_heat$",
             "fr": ""
         },
         "effectText": {
-            "en": "",
+            "en": "EFFECT: When you play a $tag_power$ (including this one), gain 2 heats.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -21222,7 +23659,83 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
+            "en": "Upgrade your Phase card I.",
+            "fr": ""
+        },
+        "prerequisiteText": {
             "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 38,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "P31",
+        "origin": "",
+        "cost": 0,
+        "tagsId": [
+            6
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "The Next Step Initiative",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "$other_upgrade$:$ressource_megacreditvoid_2$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: Whenever you reveal an upgraded Phase card during planification, gain 2MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -21256,7 +23769,7 @@
     },
     {
         "id": 0,
-        "card_code": "",
+        "card_code": "P35",
         "origin": "",
         "cost": 0,
         "tagsId": [
@@ -21312,6 +23825,158 @@
         "stockable": [],
         "startingMegacredits": 0,
         "status": "blocked",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "D01",
+        "origin": "",
+        "cost": 0,
+        "tagsId": [
+            1
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Apollo Industries",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$tag_science$: $ressource_card$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a $tag_science$, draw 1 card.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade your Phase card II.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 33,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "D02",
+        "origin": "",
+        "cost": 0,
+        "tagsId": [
+            2
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Exocorp",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_sellcard$: +$ressource_megacreditvoid_1$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: Whenever you sell a card, you gain one more MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade your Phase card V.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 26,
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
