@@ -69,6 +69,9 @@ function isMinimumStockOnPlayedCardOk(stock: AdvancedRessourceStock[], treshold:
 function isHandCurrentSizeOk(size: number, treshold: MinMaxEqualType, clientstate: PlayerStateModel): boolean {
     return Utils.getValueVsTreshold({treshold: treshold, tresholdValue: size, value: clientstate.getHandCurrentSize()})
 }
+function isMilestoneOk(quantity: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
+	return Utils.getValueVsTreshold({treshold:treshold, tresholdValue: quantity, value:clientState.getMilestoneCompleted()})
+}
 export const Checker = {
     isRessourceOk,
     isTagOk,
@@ -76,5 +79,6 @@ export const Checker = {
     isOceanOk,
     isTrOk,
 	isMinimumStockOnPlayedCardOk,
-    isHandCurrentSizeOk
+    isHandCurrentSizeOk,
+	isMilestoneOk
 }

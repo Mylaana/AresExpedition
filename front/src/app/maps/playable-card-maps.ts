@@ -475,6 +475,10 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'F22': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.red, 'min', s),
 	//Quant-Link Conferencing
 	'F23': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.red, 'min', s),
+	//Imported Construction Crews
+	'D17': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Private Investor Beach
+	'D19': (s) => Checker.isMilestoneOk(1, 'min', s),
 	//Filter Feeders
 	'P04': (s) => Checker.isOceanOk(2, 'min', s),
 }
@@ -1069,6 +1073,23 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'204': () => [S.addProduction({ name: 'titanium', valueStock: 1 })],
 	//Wave Power
 	'205': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
+	//Exosuits
+	'D16': () => [
+		S.draw(1),
+		S.upgradePhaseCard(1)
+	],
+	//Imported Construction Crews
+	'D17': () => [S.upgradePhaseCard(2)],
+	//Ore Leaching
+	'D18': () => [
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2),
+		S.draw(2),
+		S.upgradePhaseCard(1)
+	],
+	//Private Investor Beach
+	'D19': () => [
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+	],
 	//Topographic Mapping
 	'D20': () => [
 		S.selectTag('D20'),
