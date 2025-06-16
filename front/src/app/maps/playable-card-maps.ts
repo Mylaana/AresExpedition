@@ -22,7 +22,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'D07', 'D11', 'D12','CP02', 'P20']
+export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'D07', 'D11', 'D12', 'F06', 'CP02', 'P20']
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -165,10 +165,6 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'64': (card, clientState) => [
 		S.addRessource({ name: 'plant', valueStock: -getScaling(card, clientState) }),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
-	//Sawmill
-	'F08': (card, clientState) => [
-		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
-		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)],
 	//Experimental Technology
 	'D07': () => [
 		S.addTR(-1),
@@ -190,6 +186,17 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	],
 	//Virtual Employee Development
 	'D12': () => [S.upgradePhaseCard(1)],
+	//Interplanetary Superhighway
+	'F05': (card, clientState) => [
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)],
+	//Maglev Trains
+	'F06': (card, clientState) => [S.draw(getScaling(card, clientState))],
+	//Sawmill
+	'F08': (card, clientState) => [
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
+	],
 	//Matter Generator
 	'P06': () => [
 		S.discard(1),
@@ -233,6 +240,10 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	'63': (state) => Math.max(0, 12 - (state.getRessourceInfoFromType('titanium')?.valueProd ?? 0)),
 	//Wood Burning Stoves
 	'64': (state) => Math.max(0, 4 - Number(state.getPhaseSelected() === SelectablePhaseEnum.action)),
+	//Interplanetary Superhighway
+	'F05': (state) => state.getTagsOfType('science') >= 4 ? 5 : 10,
+	//Maglev Trains
+	'F06': (state) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.yellow, 'min', state)?2:1,
 	//Sawmill
 	'F08': (state) => Math.max(0, 10 - state.getTagsOfType('plant') * 2),
 	//Progressive Policies
@@ -267,6 +278,16 @@ export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: Playe
 	'63': (state) => `$ressource_megacreditvoid_${getScaling('63', state)}$: $other_ocean$`,
 	//Wood Burning Stoves
 	'64': (state) => `$-${getScaling('64', state)}$ressource_plant$: $other_temperature$`,
+	//Interplanetary Superhighway
+	'F05': (state) => `$ressource_megacreditvoid_${getScaling('F05', state)}$: $other_infrastructure$`,
+	//Maglev Train
+	'F06': (state) => {
+		let caption = ''
+		for(let i=0; i<getScaling('F06', state); i++){
+			caption += '$ressource_card$'
+		}
+		return caption
+	},
 	//Sawmill
 	'F08': (state) => `$ressource_megacreditvoid_${getScaling('F08', state)}$: $other_infrastructure$`,
 	//Progressive Policies
@@ -342,6 +363,8 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'D07': (_, clientState) => Checker.isTrOk(1, 'min', clientState),
 	//Fibrous Composite Material
 	'D10': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('D10').some(s => s.name === 'science' && s.valueStock >= 3),
+	//Interplanetary Superhighway
+	'F05': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('F05', clientState), 'min', clientState),
 	//Sawmill
 	'F08': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('F08', clientState), 'min', clientState),
 	//Matter Generator

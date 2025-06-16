@@ -72,6 +72,7 @@ Always display steel/titanium cost mod
 Rollback button does nothing   
 Fix multiple activation display (transfer wrapper to activationList)   
 Phase upgraded status menu   
+Activable cards with megacredit cost in it display bugged   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
