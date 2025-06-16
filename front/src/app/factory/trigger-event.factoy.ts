@@ -140,6 +140,16 @@ const S = EventFactory.simple
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
 		return [S.draw(2)]
 	}
+	//Apollo Industriees
+	function handleTrigger_D01(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
+		return [S.draw(1)]
+	}
+	//Sultira
+	function handleTrigger_D04(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('power','tag'))===false){return []}
+		return [S.addRessource({name:'heat', valueStock:2})]
+	}
 	//Impact Analysis
 	function handleTrigger_D08(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
@@ -157,7 +167,7 @@ const S = EventFactory.simple
 		return [S.addTR(1)]
 	}
 	//Arklight
-	function handleTrigger_CP01(trigger: string, input: TriggerInput): EventBaseModel[] {
+	function handleTrigger_P12(trigger: string, input: TriggerInput): EventBaseModel[] {
 		let triggerred: number = 0
 		let result: EventBaseModel[] = []
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
@@ -247,8 +257,10 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'45': handleTrigger_45,
 		'48': handleTrigger_48,
 		'C8': handleTrigger_C8,
+		'D01': handleTrigger_D01,
+		'D04': handleTrigger_D04,
 		'D08': handleTrigger_D08,
-		'CP01': handleTrigger_CP01,
+		'P12': handleTrigger_P12,
 		'CF1': handleTrigger_CF1,
 		'P19': handleTrigger_P19_OnTagGained
 	},

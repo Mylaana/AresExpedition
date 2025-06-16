@@ -22,7 +22,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'D07', 'D11', 'D12', 'F06', 'CP02', 'P20']
+export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20']
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -225,7 +225,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState)}),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
 	//Celestior
-	'CP02': () => [S.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)]
+	'P13': () => [S.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)]
 }
 export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateModel) => number> = {
 	//Aquifer Pumping
@@ -1124,6 +1124,15 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'204': () => [S.addProduction({ name: 'titanium', valueStock: 1 })],
 	//Wave Power
 	'205': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
+	//Apollo Industries
+	'D01': () => [S.upgradePhaseCard(1, [2])],
+	//Exocorp
+	'D02': (clientState) => {
+		clientState.addSellCardValueMod(1)
+		return [S.upgradePhaseCard(1, [5])]
+	},
+	//Sultira
+	'D04': () => [S.upgradePhaseCard(1, [1])],
 	//Exosuits
 	'D09': () => [S.upgradePhaseCard(1)],
 	//Fibrous Composite Material
@@ -1381,7 +1390,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addProduction({name:'heat', valueStock:1})
 	],
 	//DevTechs
-	'CP03': () => [
+	'P14': () => [
 		S.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.devTechs)
 	],
 	//Mai-Ni Productions
@@ -1427,5 +1436,5 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Thorgate
 	'C11': (card) => card.hasTag('power') ? 3 : 0,
 	//DevTechs
-	'CP03': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0
+	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0
 }

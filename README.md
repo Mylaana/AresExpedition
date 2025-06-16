@@ -49,6 +49,8 @@ Events related to card played not saved in eventstate (see a card with oceanflip
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
 card production not being applied   
 card activated not being saved in eventstate   
+Need to test all corps events at start   
+Upgrade phase card eventstate not saved   
 
 ## Must have for v1 :
 ### Refactoring
