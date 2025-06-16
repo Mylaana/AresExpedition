@@ -23672,7 +23672,7 @@
         },
         "stockable": [],
         "startingMegacredits": 38,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -23868,7 +23868,7 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_science$:$ressource_card$",
+            "en": "$tag_science$: $ressource_card$",
             "fr": ""
         },
         "effectText": {
@@ -23900,7 +23900,7 @@
         },
         "stockable": [],
         "startingMegacredits": 33,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -23976,7 +23976,7 @@
         },
         "stockable": [],
         "startingMegacredits": 26,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""

@@ -75,6 +75,7 @@ Rollback button does nothing
 Fix multiple activation display (transfer wrapper to activationList)   
 Phase upgraded status menu   
 Activable cards with megacredit cost in it display bugged   
+add FR translation   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
