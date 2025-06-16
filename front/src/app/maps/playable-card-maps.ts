@@ -1138,14 +1138,24 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		}
 		return result
 	},
+	//Oxidation Byproducts
+	'D36': () => [
+		S.addProduction({ name: 'heat', valueStock: 2}),
+		S.upgradePhaseCard(1)
+	],
 	//Perfluorocarbon Production
 	'D37': () => [
 		S.addProduction({ name: 'heat', valueStock: 1 }),
 		S.upgradePhaseCard(1, [0])
 	],
+	//Magnetic Field Generator
+	'D38': () => [
+		S.addProduction({ name: 'plant', valueStock: 1}),
+		S.upgradePhaseCard(1)
+	],
 	//Political Influence
 	'D39': () => [
-		S.addProduction({name:'heat', valueStock:2}),
+		S.addProduction({name:'megacredit', valueStock:3}),
 		S.selectTag('D39')
 	],
 	//Biological Factories
