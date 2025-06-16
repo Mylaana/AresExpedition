@@ -18,7 +18,11 @@ public class GlobalParameter {
     }
     GlobalParameter(GlobalParameterNameEnum name){
         this.name = name;
-        this.step = 0;
+        if(name==GlobalParameterNameEnum.OCEAN){
+            this.step = 0;
+        } else {
+            this.step = 1;
+        }
         this.addEop = 0;
         this.setMaxStep(name);
     }
@@ -76,6 +80,10 @@ public class GlobalParameter {
     public void increaseStep(Integer addStep) {
         this.step = Math.min(this.step + addStep, this.maxStep);
         this.addEop = 0;
+    }
+    public boolean isMaxedOut(){
+        System.err.println(name + " " + step + " " + maxStep);
+        return this.step==this.maxStep;
     }
 
     public GlobalParameterDTO toJson(){

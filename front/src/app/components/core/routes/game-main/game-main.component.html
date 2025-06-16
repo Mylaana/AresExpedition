@@ -4,8 +4,8 @@
 <div *ngIf="loaded===false && _connected" class="wrapper-loading" @fadeIn>
 	<h1 class="ares-title">LOADING</h1>
 </div>
-<div class="background-image nav-background" *ngIf="loaded && _connected" @fadeIn></div>
-<nav *ngIf="loaded && _connected" id="navbar" [class.settings-openned]="_settings">
+<div class="background-image nav-background" *ngIf="loaded && _connected  && !_gameOver" @fadeIn></div>
+<nav *ngIf="loaded && _connected && !_gameOver" id="navbar" [class.settings-openned]="_settings">
 	<app-navigation  [clientPlayerId]="clientId" [isScrolled]="isScrolled"></app-navigation>
 </nav>
 <div id="settings" *ngIf="_settings" @fadeInFadeOut>
@@ -13,7 +13,7 @@
 		(closeSettings)="closeSettings()">
 	</app-settings>
 </div>
-<div @fadeIn *ngIf="loaded && _connected" class="wrapper-app"
+<div @fadeIn *ngIf="loaded && _connected && !_gameOver" class="wrapper-app"
 	[class.settings-openned]="_settings">
     <div class="wrapper-main">
         <div class="wrapper-other">
@@ -44,4 +44,4 @@
 		</div>
 	</div>
 </div>
-
+<app-game-over *ngIf="_gameOver"></app-game-over>

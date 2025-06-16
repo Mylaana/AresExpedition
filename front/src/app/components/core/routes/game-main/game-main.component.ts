@@ -24,6 +24,7 @@ import { ActivatedRoute } from '@angular/router';
 import { fadeIn } from '../../../../animations/animations';
 import { myUUID } from '../../../../types/global.type';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
+import { GameOverComponent } from '../../game/game-over/game-over.component';
 
 @Component({
     selector: 'app-game-main',
@@ -35,7 +36,8 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
         HorizontalSeparatorComponent,
         NonEventButtonComponent,
         SettingsComponent,
-        GameEventComponent
+        GameEventComponent,
+		GameOverComponent
     ],
     templateUrl: './game-main.component.html',
     styleUrl: './game-main.component.scss',
@@ -58,6 +60,7 @@ export class GameMainComponent implements OnInit{
 	_settings: boolean = false
 	_lastScrollY: number = 0
 	_connected: boolean = false
+	_gameOver: boolean = false
 
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
@@ -92,6 +95,9 @@ export class GameMainComponent implements OnInit{
 
 		this.gameStateService.currentLoadingState.subscribe(
 			loading => this.loadingFinished(loading)
+		)
+		this.gameStateService.currentGameOver.subscribe(
+			over => this._gameOver = over
 		)
 
 		this.rxStompService.connectionState$.subscribe(() => {

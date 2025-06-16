@@ -64,6 +64,7 @@ export class GameState{
     private eventQueue = new BehaviorSubject<EventBaseModel[]>([])
 	private clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
 	private selectedPhaseList = new BehaviorSubject<SelectablePhaseEnum[]>([])
+	private gameOver = new BehaviorSubject<boolean>(false)
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
@@ -74,6 +75,7 @@ export class GameState{
     currentPlayerCount = this.playerCount.asObservable()
     currentLoadingState = this.loading.asObservable()
 	currentSelectedPhaseList = this.selectedPhaseList.asObservable()
+	currentGameOver = this.gameOver.asObservable()
 
 	currentClientState = this.clientState.asObservable();
 
@@ -727,5 +729,8 @@ export class GameState{
     }
 	endOfPhase() {
 		this.rxStompService.publishPlayerState(this.getClientState().toJson(EventSerializer.eventQueueToJson(this.eventQueue.getValue())))
+	}
+	setGameOver(){
+		this.gameOver.next(true)
 	}
 }

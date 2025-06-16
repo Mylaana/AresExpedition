@@ -19,6 +19,7 @@ export enum PlayerMessageContentResultEnum {
 	oceanResult = 'OCEAN_RESULT',
 	researchResult = 'RESEARCH_RESULT',
 	scanKeepResult = 'SCAN_KEEP_RESULT',
+	gameOver = 'GAME_OVER',
 
 	acknowledge = 'ACKNOWLEDGE'
 }
@@ -39,5 +40,6 @@ export enum GameStatusEnum {
 	newGame = "NEW_GAME",
 	selectStartingHand = 'SELECT_STARTING_HAND',
 	selectCorporation = 'SELECT_CORPORATION',
-    started = "STARTED"
+    started = "STARTED",
+	gameOver = 'GAME_OVER'
 }

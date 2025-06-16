@@ -91,6 +91,12 @@ public class GameController {
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
         game.resetResearchResolved();
+        System.err.println("GAME OVER:" + game.isGameOver());
+        if(game.isGameOver()){
+            game.setGameStatus(GameStatusEnum.GAME_OVER);
+            wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
+            return;
+        }
         if(game.getCurrentPhase()==PhaseEnum.PRODUCTION){
             game.applyDrawProduction();
         }
@@ -163,7 +169,7 @@ public class GameController {
                 break;
 
             case SELECT_CORPORATION:
-            game.setGameStatus(GameStatusEnum.STARTED);
+                game.setGameStatus(GameStatusEnum.STARTED);
                 this.goToNextPhase(game);
                 break;
 
@@ -171,6 +177,9 @@ public class GameController {
                 this.goToNextPhase(game);
                 break;
 
+            case GAME_OVER:
+                wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
+                break;
             default:
                 break;
         }
