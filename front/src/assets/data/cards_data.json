@@ -8794,7 +8794,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18412,7 +18412,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18489,7 +18489,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18566,7 +18566,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18642,7 +18642,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18720,7 +18720,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18796,7 +18796,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18949,7 +18949,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19026,7 +19026,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19100,7 +19100,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19176,7 +19176,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19250,7 +19250,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19326,7 +19326,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19402,7 +19402,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19476,7 +19476,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19629,7 +19629,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19705,7 +19705,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19858,7 +19858,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -19935,7 +19935,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20089,7 +20089,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20241,7 +20241,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20317,7 +20317,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20468,7 +20468,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20544,7 +20544,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20694,7 +20694,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -21220,7 +21220,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Increase infrastructure level 1 step.$skipline$If you have 3 other $tag_jovian$ or more (>=4 total), increase infrastructure 1 more step.",
+            "en": "Raise infrastructure 1 step.$skipline$If you have 3 or more other $tag_jovian$ (>=4 total), increase infrastructure an additional step.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -21374,7 +21374,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Flip an ocean tile.$skipline$Increase the infrastructure 2 steps.",
+            "en": "Raise infrastructure 2 steps.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -21530,7 +21530,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Increase infrastructure level 1 step.$skipline$Upgrade a phase card.",
+            "en": "Flip an ocean tile.$skipline$Raise infrastructure 2 steps.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -21607,7 +21607,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Increase infrastructure level 2 steps.$skipline$Increase temperature level 1 step.",
+            "en": "Raise infrastructure 1 step.$skipline$Upgrade a phase card.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -21761,7 +21761,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Increase infrastructure level 1 step.",
+            "en": "Raise infrastructure 2 steps.$skipline$Increase temperature level 1 step.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -21837,7 +21837,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "",
+            "en": "Raise infrastructure 1 step.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -22000,7 +22000,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -22077,7 +22077,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -22153,7 +22153,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""

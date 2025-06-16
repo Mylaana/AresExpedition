@@ -1206,21 +1206,48 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 	],
+	//Callisto Skybridge
+	'F11': (clientState) => {
+		let infra = 1
+		if(clientState.getTagsOfType('jovian')>3){
+			infra++
+		}
+		return [S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, infra)]
+	},
 	//CHP Combustion Turbines
 	'F12': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
 	],
+	//City Planning
+	'F13': () => [S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2)],
 	//Grain Silos
 	'F14': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
 		S.addRessource({ name: 'plant', valueStock: 4 })
 	],
+	//City Planning
+	'F15': () => [
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+	],
+	//Jezero Crater Hospital
+	'F16': () => [
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
+		S.upgradePhaseCard(1)
+	],
 	//Low-Atmosphere Planes
 	'F17': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 3)
 	],
+	//Power Grid Uplink
+	'F18': () => [
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
+	],
+	//Subways
+	'F19': () => [S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)],
 	//Urban Forestry
 	'F20': () => [
 		S.addForestAndOxygen(1),
