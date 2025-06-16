@@ -471,6 +471,10 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'D24': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Urban Forestry
 	'F20': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.yellow, 'min', s),
+	//Seed Bank
+	'F22': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.red, 'min', s),
+	//Quant-Link Conferencing
+	'F23': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.red, 'min', s),
 	//Filter Feeders
 	'P04': (s) => Checker.isOceanOk(2, 'min', s),
 }
@@ -1160,8 +1164,15 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Biological Factories
 	'D40': () => [
-		S.addProduction({ name: 'plant', valueStock: 1 }),
+		S.addProduction({ name: 'plant', valueStock: 1}),
 		S.upgradePhaseCard(1, [3])
+	],
+	//Nuclear Detonation Site
+	'D41': () => [S.addProduction({ name: 'heat', valueStock: 3})],
+	//Warehouse
+	'D42': () => [
+		S.addProduction({ name: 'megacredit', valueStock: 2}),
+		S.upgradePhaseCard(1)
 	],
 	//Architecture Blueprints
 	'F09': () => [
@@ -1194,6 +1205,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addForestAndOxygen(1),
 		S.addRessource({ name: 'megacredit', valueStock: 5 })
 	],
+	//Microloans
+	'F21': () => [S.addProduction({ name: 'megacredit', valueStock: 2})],
+	//Seed Bank
+	'F22': () => [S.addProduction([{ name: 'plant', valueStock: 2}, { name: 'heat', valueStock: 3}])],
+	//Quant-Link Conferencing
+	'F23': () => [S.addProduction({ name: 'card', valueStock: 1})],
 	//Assorted Enterprises
 	'P01': () => [S.specialBuilder(BuilderOption.assortedEnterprises)],
 	//Commercial Imports
