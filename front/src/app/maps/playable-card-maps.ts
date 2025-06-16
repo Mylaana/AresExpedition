@@ -465,6 +465,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'207': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Zeppelins
 	'208': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Dandelions
+	'D24': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Urban Forestry
 	'F20': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.yellow, 'min', s),
 	//Filter Feeders
@@ -1061,11 +1063,22 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.selectTag('D20'),
 		S.upgradePhaseCard(1)
 	],
+	// 3D printing
+	'D21': () => [S.addProduction({name:'megacredit', valueStock:4})],
 	// Biofoundries
 	'D22': () => [
 		S.upgradePhaseCard(1),
 		S.addProduction({ name: 'plant', valueStock: 2 })
 	],
+	// Blast Furnace
+	'D23': () => [
+		S.upgradePhaseCard(1),
+		S.addProduction({ name: 'steel', valueStock: 1})
+	],
+	// Dandelions
+	'D24': () => [S.addProduction([{ name: 'card', valueStock: 1}, { name: 'plant', valueStock: 1}])],
+	// Electric Arc Furnace
+	'D25': () => [S.addProduction({ name: 'steel', valueStock: 2})],
 	// Local Market
 	'D26': () => [
 		S.addProduction({name:'megacredit', valueStock:2}),
