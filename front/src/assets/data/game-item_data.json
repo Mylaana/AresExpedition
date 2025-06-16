@@ -189,7 +189,7 @@
         "id": 109,
         "description": "objective",
         "imageUrl": "assets/other/objective.png",
-        "name": "$other_objective$"
+        "name": "$other_milestone$"
     },
     {
         "id": 110,
