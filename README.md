@@ -71,6 +71,7 @@ Add scan/keep modifier display
 Always display steel/titanium cost mod   
 Rollback button does nothing   
 Fix multiple activation display (transfer wrapper to activationList)   
+Phase upgraded status menu   
 
 ### CI/CD
 Frontend automated testing: Ongoing   

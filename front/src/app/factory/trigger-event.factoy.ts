@@ -61,6 +61,11 @@ const S = EventFactory.simple
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
 		return [S.addRessourceToCardId({name:"science", valueStock:input.increasedParameterValue}, trigger)]
 	}
+	//Volcanic Soil
+	function handleTrigger_D13(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
+		return [S.addRessource({name:'plant', valueStock:2})]
+	}
 	//Pets
 	function handleTrigger_F07(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
@@ -134,6 +139,11 @@ const S = EventFactory.simple
 	function handleTrigger_48(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
 		return [S.draw(2)]
+	}
+	//Impact Analysis
+	function handleTrigger_D08(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
+		return [S.draw(1)]
 	}
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnTagGained(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -223,6 +233,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'33': handleTrigger_33,
 		'39': handleTrigger_39,
 		'46': handleTrigger_46,
+		'D13': handleTrigger_D13,
 		'F07': handleTrigger_F07,
 		'CP06': handleTrigger_CP06
 	},
@@ -236,6 +247,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'45': handleTrigger_45,
 		'48': handleTrigger_48,
 		'C8': handleTrigger_C8,
+		'D08': handleTrigger_D08,
 		'CP01': handleTrigger_CP01,
 		'CF1': handleTrigger_CF1,
 		'P19': handleTrigger_P19_OnTagGained

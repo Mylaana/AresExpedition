@@ -18,10 +18,11 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'27', //Extreme-Cold Fungus
 	'31', //GHG Producing Bacteria
 	'43', //Nitrite Reducing Bacteria
-	'50', //Regolith Eaters,
+	'50', //Regolith Eaters
+	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'CP02', 'P20']
+export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'D07', 'D11', 'D12','CP02', 'P20']
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -168,6 +169,27 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'F08': (card, clientState) => [
 		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)],
+	//Experimental Technology
+	'D07': () => [
+		S.addTR(-1),
+		S.upgradePhaseCard(1)
+	],
+	//Fibrous Composite Material
+	'D10': (cardCode, _, option) => option === 1
+		? [S.addRessourceToCardId({ name: 'science', valueStock: 1}, cardCode)]
+		: option === 2
+		? [
+			S.addRessourceToCardId({ name: 'science', valueStock: -3}, cardCode),
+			S.upgradePhaseCard(1)
+			]
+		: [],
+	//Software Streamlining
+	'D11': () => [
+		S.draw(2),
+		S.discard(2)
+	],
+	//Virtual Employee Development
+	'D12': () => [S.upgradePhaseCard(1)],
 	//Matter Generator
 	'P06': () => [
 		S.discard(1),
@@ -316,6 +338,10 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'63': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('63', clientState), 'min', clientState),
 	//Wood Burning Stoves
 	'64': (_, clientState) =>  Checker.isRessourceOk('plant', getScaling('64', clientState), 'min', clientState),
+	//Experimental Technology
+	'D07': (_, clientState) => Checker.isTrOk(1, 'min', clientState),
+	//Fibrous Composite Material
+	'D10': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('D10').some(s => s.name === 'science' && s.valueStock >= 3),
 	//Sawmill
 	'F08': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('F08', clientState), 'min', clientState),
 	//Matter Generator
@@ -475,6 +501,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'F22': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.red, 'min', s),
 	//Quant-Link Conferencing
 	'F23': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.infrastructure, GlobalParameterColorEnum.red, 'min', s),
+	//Virtual Employee Development
+	'D12': (s) => Checker.isTagOk('science', 3, 'min', s),
 	//Imported Construction Crews
 	'D17': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
 	//Private Investor Beach
@@ -1074,6 +1102,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Wave Power
 	'205': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
 	//Exosuits
+	'D09': () => [S.upgradePhaseCard(1)],
+	//Fibrous Composite Material
+	'D10': () => [S.addRessourceToCardId({name:'science', valueStock:3}, 'D10')],
+	//Software Streamlining
+	'D11': () => [S.upgradePhaseCard(1)],
+	//Exosuits
 	'D16': () => [
 		S.draw(1),
 		S.upgradePhaseCard(1)
@@ -1357,6 +1391,8 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	'42': (card) => card.hasTag('event') ? 5 : 0,
 	//Research Outpost
 	'51': () => 1,
+	//Hohmann Transfer Shipping
+	'D09': () => 1,
 	//Orbital Outpost
 	'P22': (card) => card.tagsId.filter((t) => t!=-1).length<=1? 3:0,
 	//CreditCor

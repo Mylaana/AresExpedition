@@ -17876,7 +17876,7 @@
         "startingMegacredits": 0,
         "status": "filled",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "-$other_tr$: $other_upgrade$",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -18102,15 +18102,15 @@
             "en": "",
             "fr": ""
         },
-        "stockable": [],
+        "stockable": ["science"],
         "startingMegacredits": 0,
         "status": "filled",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_science$",
             "fr": ""
         },
         "effectActionTextOption2": {
-            "en": "",
+            "en": "-3$ressource_science$: $other_upgrade$",
             "fr": ""
         },
         "effectActionText2Option1": {
@@ -18183,7 +18183,7 @@
         "startingMegacredits": 0,
         "status": "filled",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "2$ressource_card$ -2$ressource_card$",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -18259,7 +18259,7 @@
         "startingMegacredits": 0,
         "status": "filled",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$other_upgrade$",
             "fr": ""
         },
         "effectActionTextOption2": {
