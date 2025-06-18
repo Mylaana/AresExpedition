@@ -57,9 +57,6 @@ Phase selection can be rolledback
 race condition on backend resource query : can lead to drawing multiple times the same card !   
 switch card 49 to minimum 0   
 
-unsaved eventstate : 
-    - action phase
-
 ## Bug not found while testing :   
 VP scaling cards displayed points are locket at 0   
 

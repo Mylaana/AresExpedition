@@ -5,7 +5,7 @@ import { myUUID, PlayableCardType, TagType } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter,  } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
-import { DrawEvent, EventBaseModel, EventPhase } from "../../models/core-game/event.model";
+import { DrawEvent, EventBaseModel, EventCardActivator, EventPhase } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
@@ -385,7 +385,7 @@ export class GameState{
 			for(let event of queue){
 				for(let dto of this.eventQueueSavedState){
 					if(this.eventStateService.shouldLoadEvent(event, dto)){
-						this.eventStateService.loadFromJson(event, dto)
+						this.eventStateService.loadFromJson(event, dto, this.getClientState())
 						this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e!=dto)
 					}
 				}

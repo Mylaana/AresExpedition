@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import { EventStateAddProduction, EventStateBuilderContentDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
-import { EventBaseModel, EventCardBuilder } from "../models/core-game/event.model";
+import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event factory/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 import { PlayableCardModel } from "../models/cards/project-card.model";
+import { GameState } from "../services/core-game/game-state.service";
+import { PlayerStateModel } from "../models/player-info/player-state.model";
 
 function shouldLoadEvent(event: EventBaseModel, eventState: EventStateDTO) : boolean {
 	switch(true){
@@ -26,12 +28,11 @@ function toContentDto<T>(json: any): T {
 	providedIn: 'root'
 })
 export class EventStateService{
-	constructor(private projectCardInfoService: ProjectCardInfoService){
-	}
+	constructor(private projectCardInfoService: ProjectCardInfoService){}
 	public shouldLoadEvent(event: EventBaseModel, eventState: EventStateDTO) : boolean {
 		return shouldLoadEvent(event,eventState)
 	}
-	public loadFromJson(event: EventBaseModel, dto: EventStateDTO) {
+	public loadFromJson(event: EventBaseModel, dto: EventStateDTO, clientState: PlayerStateModel) {
 		switch(dto.t){
 			case(EventStateTypeEnum.builderConstructionLocked):case(EventStateTypeEnum.builderDevelopemntLocked):{
 				let content = toContentDto<EventStateBuilderContentDTO>(dto.v);
@@ -48,8 +49,14 @@ export class EventStateService{
 				}
 				break
 			}
+			case(EventStateTypeEnum.cardActivator):{
+				let eventActivator: EventCardActivator = event as EventCardActivator
+				eventActivator.activationLog = dto.v
+				clientState.loadEventStateActivator(dto)
+				break
+			}
 			default:{
-				console.error('UNTREATED LOAD EVENTSTATE: ', event)
+				console.error('UNTREATED LOAD EVENTSTATE: ', event, dto)
 			}
 		}
 	}
