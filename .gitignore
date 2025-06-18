@@ -1,7 +1,8 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Local DB.json
-/data/database.json
+data/database.json
+back/data
 
 # Compiled output
 /dist

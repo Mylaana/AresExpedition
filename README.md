@@ -48,15 +48,21 @@ Backend: Junit
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
 card production not being applied   
-card activated not being saved in eventstate   
 Need to test all corps events at start   
 Upgrade phase card eventstate not saved   
 if research keep> scan, game locked ?   
-production : draw is not working   
 invention contest : UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: SCAN_KEEP_QUERY ?
 UNHANDLED SCANKEEP OPTION
 Phase selection can be rolledback   
+race condition on backend resource query : can lead to drawing multiple times the same card !   
+VP scaling cards displayed points are locket at 0   
+switch card 49 to minimum 0   
 
+unsaved eventstate : 
+    - production
+    - increase scan/keep
+    - base builder
+    - action phase
 
 ## Must have for v1 :
 ### Refactoring
@@ -72,7 +78,7 @@ Activation:
     - Droplist/Custom value selection on activation (card 32/47)   
 
 ### Misc
-Add victory check   
+Check in rules if a phase can be upgraded multiple times   
 
 ### Interface
 Add scan/keep modifier display   
@@ -84,6 +90,9 @@ Activable cards with megacredit cost in it display bugged
 add FR translation   
 Waiting player event : rollback button display bugged   
 add validation confirmation if not all builders locked   
+add players being ready visibility on player's interface when not yet ready   
+when selling cards, display the total value of selected cards   
+display the phase we selected on the left progression pannel   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
@@ -98,7 +107,7 @@ Add backend REST requests content validation
 Escape keyboard not exiting card builder selection   
 Websocket connection error while not in the game   
 Project card: layers superposition creating visual bug on edges   
-Expression has changed on client refresh right after selecting Arklight
+Expression has changed on client refresh right after selecting Arklight   
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -124,6 +133,13 @@ Rework effect summary zone (refacto + looks)
 Create switch button   
 Builder: display visual list of active triggers   
 Cards: Display wild tag converted   
+Add a wizz button when player being too long to play <3   
+During every phase, display the current phase card   
+force client to appear on the bottom of the player pannels   
+have "lines" the same size between navigation pannels (eg: global parameter line size should be the same as players so 3 player game should be same height as global parameter pannel)   
+Display other player's played cards   
+
+
 
 ### Responsiveness
 Game creation menu
@@ -133,6 +149,8 @@ hand border radius
 Command buttons / setting button position   
 project card: reduce stock size on small card version   
 Effect zone: need an autoshrink calculation   
+improve readability when many big texts
+reduce space between text lines
 
 ### Misc
 Add settings options   

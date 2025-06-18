@@ -75,17 +75,17 @@ button {
 			box-shadow: 0 0 10px 10px white;
 			cursor: pointer;
 			&.disabled{
-				filter: grayscale(100%);
+				filter: grayscale(80%);
 			}
 		}
 	}
 	&.selected{
 		&.greyed-when-selected{
-			filter: grayscale(100%);
+			filter: grayscale(80%);
 		}
 	}
 	&.disabled{
-		filter: grayscale(100%);
+		filter: grayscale(80%);
 	}
 }
 .wrapper-card-element-main{
