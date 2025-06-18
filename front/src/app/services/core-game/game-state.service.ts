@@ -114,12 +114,18 @@ export class GameState{
     }
 
     public setCurrentPhase(newPhase: NonSelectablePhaseEnum, isReconnect: boolean): void {
-        this.setClientReady(false)
 
 		let events: EventBaseModel[] = []
 		switch(newPhase){
 			case(NonSelectablePhaseEnum.undefined):{return}
-			case(NonSelectablePhaseEnum.planification):{events.push(EventFactory.createGeneric('planificationPhase'));break}
+			case(NonSelectablePhaseEnum.planification):{
+				let selected = this.getClientPhaseSelected()
+				if(selected && selected != SelectablePhaseEnum.undefined ){
+					events.push(EventFactory.createGeneric('waitingGroupReady'))
+					break
+				}
+				events.push(EventFactory.createGeneric('planificationPhase'))
+				break}
 			case(NonSelectablePhaseEnum.development):{events.push(EventFactory.createPhase('developmentPhase'));break}
 			case(NonSelectablePhaseEnum.construction):{events.push(EventFactory.createPhase('constructionPhase'));break}
 			case(NonSelectablePhaseEnum.action):{events.push(EventFactory.createPhase('actionPhase'));break}
@@ -149,6 +155,7 @@ export class GameState{
                 break
             }
         }
+		console.trace(Utils.jsonCopy(groupReady))
         this.groupPlayerReady.next(groupReady)
     }
 
@@ -536,9 +543,16 @@ export class GameState{
         }
     }
     public setGroupReady(wsGroupReady: WsGroupReady[]): void {
-		for(let ready of wsGroupReady){
-			this.setPlayerReady(ready.playerId,ready.ready)
-        }
+		let groupReady = this.groupPlayerReady.getValue()
+		for(let wsPlayerReady of wsGroupReady){
+			for(let player of groupReady){
+				if(player.id===wsPlayerReady.playerId){
+					player.isReady = wsPlayerReady.ready
+					break
+				}
+			}
+		}
+        this.groupPlayerReady.next(groupReady)
     }
     public clearEventQueue(){
 		this.eventQueue.next([])
