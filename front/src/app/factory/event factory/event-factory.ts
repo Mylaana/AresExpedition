@@ -36,6 +36,7 @@ interface CreateEventOptionsGeneric {
 	oceanQueryNumber?: number
 	production?: RessourceStock | RessourceStock[]
 	increaseTr?: number
+	loadProductionCardList?: string[]
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -596,6 +597,10 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
             event.increaseTr = args?.increaseTr
             break
         }
+		case('loadProductionPhaseCards'):{
+			event.loadProductionCardList = args?.loadProductionCardList
+			break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
     }
     event.button = ButtonDesigner.createEventMainButton(event.subType)

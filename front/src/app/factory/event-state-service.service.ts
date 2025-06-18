@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { EventStateAddProduction, EventStateBuilderContentDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
+import { EventStateAddProduction, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
@@ -145,6 +145,13 @@ export class EventStateService{
 				case(EventStateTypeEnum.increaseResearchScanKeep):{
 					let content = state.v as EventStateIncreaseResearchScanKeep
 					newEvents.push(EventFactory.simple.increaseResearchScanKeep(content.s))
+					break
+				}
+				case(EventStateTypeEnum.productionCards):{
+					let content: EventStateCardProduction = {
+						cl:state.v
+					}
+					newEvents.push(EventFactory.createGeneric('loadProductionPhaseCards', {loadProductionCardList: content.cl}))
 					break
 				}
 				default:{treated = false}

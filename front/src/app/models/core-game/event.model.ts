@@ -367,6 +367,7 @@ export class EventGeneric extends EventBaseModel {
 	gainOceanNumber?: number
 	production?: RessourceStock | RessourceStock[]
 	increaseTr?: number
+	loadProductionCardList?: string[]
 }
 
 export class EventDeckQuery extends EventBaseModel {

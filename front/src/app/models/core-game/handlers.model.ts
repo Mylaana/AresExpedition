@@ -467,6 +467,11 @@ export class EventHandler {
 				this.gameStateService.addTr(event.increaseTr)
 				break
 			}
+			case('loadProductionPhaseCards'):{
+				if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
+				this.gameStateService.loadProductionPhaseCardList(event.loadProductionCardList)
+				break
+			}
 			default:{Logger.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}

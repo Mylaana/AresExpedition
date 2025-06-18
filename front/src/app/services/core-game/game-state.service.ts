@@ -733,4 +733,13 @@ export class GameState{
 	setGameOver(){
 		this.gameOver.next(true)
 	}
+	loadProductionPhaseCardList(cardList: string[]){
+		for(let e of this.eventQueue.getValue()){
+			if(e.subType==='productionPhase'){
+				let event = e as EventPhase
+				event.productionCardList = this.projectCardService.getProjectCardList(cardList)
+				this.getClientState().addCardsToHand(cardList)
+			}
+		}
+	}
 }
