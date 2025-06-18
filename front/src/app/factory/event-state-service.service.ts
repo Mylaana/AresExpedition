@@ -82,7 +82,7 @@ export class EventStateService{
 				}
 				case(EventStateTypeEnum.discard):{
 					let content: EventStateContentDiscardDTO =  {
-						d: state.v
+						d: state.v['d']
 					}
 					newEvents.push(EventFactory.simple.discard(content.d))
 					break
