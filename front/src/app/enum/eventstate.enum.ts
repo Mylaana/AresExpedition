@@ -14,6 +14,7 @@ export enum EventStateTypeEnum {
 	targetCardAddRessource = 'TARGET_CARD_ADD_RESSOURCE',
 	specialBuilder = 'SPECIAL_BUILDER',
 	increaseResearchScanKeep = 'INCREASE_RESEARCH_SCANKEEP',
+	upgradePhase = 'UPGRADE_PHASE',
 
 	undefined = 'UNDEFINED'
 }

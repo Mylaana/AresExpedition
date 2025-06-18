@@ -47,8 +47,6 @@ Backend: Junit
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
-Need to test all corps events at start   
-Upgrade phase card eventstate not saved   
 if research keep> scan, game locked ?   
 Phase selection can be rolledback   
 race condition on backend resource query : can lead to drawing multiple times the same card !   

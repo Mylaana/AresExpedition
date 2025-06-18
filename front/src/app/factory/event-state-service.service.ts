@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { EventStateAddProduction, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
+import { EventStateAddProduction, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateIncreaseResearchScanKeep, EventStateUpgradePhase } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
@@ -152,6 +152,14 @@ export class EventStateService{
 						cl:state.v
 					}
 					newEvents.push(EventFactory.createGeneric('loadProductionPhaseCards', {loadProductionCardList: content.cl}))
+					break
+				}
+				case(EventStateTypeEnum.upgradePhase):{
+					let content: EventStateUpgradePhase = {
+						u: state.v['u'],
+						l: state.v['l']??undefined
+					}
+					newEvents.push(EventFactory.simple.upgradePhaseCard(content.u, content.l))
 					break
 				}
 				default:{treated = false}

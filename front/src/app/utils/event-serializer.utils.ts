@@ -1,6 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateAddProduction, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateAddProduction, EventStateIncreaseResearchScanKeep, EventStateUpgradePhase } from "../interfaces/event-state.interface"
 import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
@@ -141,6 +141,18 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 			return {
 				o: EventStateOriginEnum.create,
 				t: EventStateTypeEnum.increaseResearchScanKeep,
+				v: content
+			}
+		}
+		case('upgradePhaseCards'):{
+			if(!event.phaseCardUpgradeQuantity || event.phaseCardUpgradeQuantity===0){return}
+			let content: EventStateUpgradePhase = {
+				u: event.phaseCardUpgradeQuantity??0,
+				l: event.phaseCardUpgradeList
+			}
+			return {
+				o: EventStateOriginEnum.create,
+				t: EventStateTypeEnum.upgradePhase,
 				v: content
 			}
 		}

@@ -49,6 +49,10 @@ export interface EventStateAddProduction extends EventStateContentDTO {
 export interface EventStateIncreaseResearchScanKeep extends EventStateContentDTO {
 	s: ScanKeep
 }
+export interface EventStateUpgradePhase extends EventStateContentDTO {
+	u: number
+	l: number[] | undefined
+}
 export interface EventStateCardProduction extends EventStateContentDTO {
 	cl: string[]
 }
