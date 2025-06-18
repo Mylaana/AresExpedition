@@ -1132,7 +1132,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		return [S.upgradePhaseCard(1, [5])]
 	},
 	//Sultira
-	'D04': () => [S.upgradePhaseCard(1, [1])],
+	'D04': () => [S.upgradePhaseCard(1, [0])],
 	//Exosuits
 	'D09': () => [S.upgradePhaseCard(1)],
 	//Fibrous Composite Material

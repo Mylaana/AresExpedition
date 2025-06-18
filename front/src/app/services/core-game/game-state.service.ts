@@ -155,7 +155,6 @@ export class GameState{
                 break
             }
         }
-		console.trace(Utils.jsonCopy(groupReady))
         this.groupPlayerReady.next(groupReady)
     }
 

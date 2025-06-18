@@ -56,7 +56,9 @@ export interface EventStateUpgradePhase extends EventStateContentDTO {
 export interface EventStateCardProduction extends EventStateContentDTO {
 	cl: string[]
 }
-
+export interface EventStateAddRessourceToPlayer extends EventStateContentDTO{
+	r: RessourceStock | RessourceStock[]
+}
 export interface BuilderStatusDTO {
 	l: boolean,
 	cc: string | undefined

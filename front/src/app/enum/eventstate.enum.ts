@@ -15,6 +15,7 @@ export enum EventStateTypeEnum {
 	specialBuilder = 'SPECIAL_BUILDER',
 	increaseResearchScanKeep = 'INCREASE_RESEARCH_SCANKEEP',
 	upgradePhase = 'UPGRADE_PHASE',
+	addRessourceToPlayer = 'ADD_RESSOURCE_TO_PLAYER',
 
 	undefined = 'UNDEFINED'
 }
