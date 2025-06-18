@@ -627,6 +627,11 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
         }
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
+
+	//adding keep security to be never superior to scan
+	if(event.scanKeep){
+		event.scanKeep.keep = Math.min(event.scanKeep.keep??0, event.scanKeep.scan??0)
+	}
     return event
 }
 function createWaiter(subType:EventWaiterSubType, waiterId: number) : EventWaiter {
