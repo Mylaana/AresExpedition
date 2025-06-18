@@ -1,7 +1,7 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Local DB.json
-/back/data/database.json
+/data/database.json
 
 # Compiled output
 /dist
@@ -52,6 +52,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+/**/src/main/**/static
+!/**/src/main/**/static/index.html
 
 # STS #
 .apt_generated
@@ -80,3 +82,13 @@ build/
 
 # VS Code #
 **/.vscode/
+
+# Angular Environments
+/front/**/environments/*
+!/front/**/environments/environment.example.ts
+!/front/**/environments/environment.ts
+
+# Java Environments
+/back/**/resources/application-*.properties
+!/back/**/resources/application-example.properties
+!/back/**/resources/application-dev.properties

@@ -149,7 +149,7 @@ public class PlayerState {
     public void setTagState(PlayerTagState tagState) {
         this.tagState = tagState;
     }
-
+    /*/
     public List<Map<String, Object>> getTags() {
         return this.tagState.getTags();
     }
@@ -157,6 +157,7 @@ public class PlayerState {
     public void setTags(List<Map<String, Object>> tags) {
         this.tagState.setTags(tags);
     }
+        */
 
 
     //=============================================================
