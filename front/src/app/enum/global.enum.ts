@@ -19,7 +19,8 @@ export enum DeckQueryOptionsEnum {
 	brainstormingSession = 'O1',
 	celestior = 'O2',
 	devTechs = 'O3',
-	advancedScreeningTechnology = 'O4'
+	advancedScreeningTechnology = 'O4',
+	inventionContest = 'O5'
 }
 export enum ProjectFilterNameEnum {
 	undefined = 'undefined',

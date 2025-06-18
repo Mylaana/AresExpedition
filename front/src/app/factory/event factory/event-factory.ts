@@ -90,7 +90,7 @@ function addTR(quantity: number): EventBaseModel {
 function addForestAndOxygen(quantity: number): EventBaseModel {
 	return EventFactory.createGeneric('addForestPointAndOxygen', {addForestPoint:quantity})
 }
-function scanKeep(scanKeep: ScanKeep, options?: DeckQueryOptionsEnum): EventBaseModel {
+function scanKeep(scanKeep: ScanKeep, options: DeckQueryOptionsEnum): EventBaseModel {
 	return EventFactory.createDeckQueryEvent('scanKeepQuery',{
 		scanKeep:{scan: scanKeep.scan, keep: scanKeep.keep},
 		scanKeepOptions: options
@@ -299,8 +299,24 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
 		}
+		case(DeckQueryOptionsEnum.inventionContest):{
+			let event = new EventComplexCardSelector
+            event.title = `Select one card to keep.`
+            event.refreshSelectorOnSwitch = false
+            event.cardSelector.selectionQuantityTreshold = 'equal'
+			event.cardSelector.selectFrom = cardList
+			event.cardSelector.selectionQuantity = 1
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = false
+			event.scanKeepOptions = options
+			event.cardSelector.filter = {type: ProjectFilterNameEnum.hasTagPlantOrScience}
+			event.waiterId = waiter
+			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			return event
+		}
 		default:{
-			console.error('UNHANDLED SCANKEEP OPTION')
+			console.error('UNHANDLED SCANKEEP OPTION: ', options)
 			return new EventComplexCardSelector
 		}
 	}

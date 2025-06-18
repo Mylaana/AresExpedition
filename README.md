@@ -51,8 +51,6 @@ card production not being applied
 Need to test all corps events at start   
 Upgrade phase card eventstate not saved   
 if research keep> scan, game locked ?   
-invention contest : UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: SCAN_KEEP_QUERY ?
-UNHANDLED SCANKEEP OPTION
 Phase selection can be rolledback   
 race condition on backend resource query : can lead to drawing multiple times the same card !   
 switch card 49 to minimum 0   

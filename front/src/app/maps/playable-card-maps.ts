@@ -617,7 +617,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addTR(1)],
 	//Invention Contest
 	'83': () => [
-		S.scanKeep({scan: 3, keep: 1})],
+		S.scanKeep({scan: 3, keep: 1}, DeckQueryOptionsEnum.inventionContest)],
 	//Investment Loan
 	'84': () => [
 		S.addRessource({name: 'megacredit', valueStock: 10}),
