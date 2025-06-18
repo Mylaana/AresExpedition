@@ -1395,7 +1395,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.devTechs)
 	],
 	//Mai-Ni Productions
-	'CP05': () => [
+	'P16': () => [
 		S.specialBuilder(BuilderOption.maiNiProductions)
 	],
 	//Zetasel
