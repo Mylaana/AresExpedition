@@ -173,7 +173,10 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 
 function toJson(event: EventBaseModel): EventStateDTO | undefined {
 	if(event.finalized){return}
-	const excludedSubtypes : EventUnionSubTypes[] = ['endOfPhase', 'waitingGroupReady', 'selectCardForcedSell', 'deckWaiter']
+	const excludedSubtypes : EventUnionSubTypes[] = [
+		'endOfPhase', 'waitingGroupReady', 'selectCardForcedSell', 'deckWaiter',
+		'planificationPhase'
+	]
 	if(excludedSubtypes.includes(event.subType)){return}
 	let dto: EventStateDTO | undefined
 	switch(event.type){

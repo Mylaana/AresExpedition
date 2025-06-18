@@ -134,13 +134,14 @@ public class Game {
 
     public List<String> drawCards(Integer drawNumber){
         ArrayList<String> result = new ArrayList<String>();
-
-        checkDeckSize(drawNumber);        
-        Integer cardsToDraw = Math.min(drawNumber, this.deck.size());
-
-        for(Integer i=0; i<cardsToDraw; i++){
-            result.add(this.deck.get(0));
-            this.deck.remove(0);
+        synchronized(deck){
+            checkDeckSize(drawNumber);        
+            Integer cardsToDraw = Math.min(drawNumber, this.deck.size());
+            
+            for(Integer i=0; i<cardsToDraw; i++){
+                result.add(this.deck.get(0));
+                this.deck.remove(0);
+            }
         }
 
         return result;

@@ -537,6 +537,11 @@ export class GameState{
             break
         }
 
+		//debug case
+		if(wsDrawResult.eventId===-1){
+			this.addCardsToClientHand(wsDrawResult.cardIdList)
+			eventFound = true
+		}
         if(eventFound===false){
             console.log('event not found', wsDrawResult, drawQueue, this.eventQueue.getValue())
         }
