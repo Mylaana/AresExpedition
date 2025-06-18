@@ -28,7 +28,7 @@ export class ProjectCardScalingVPService {
 		"63": (_, state) => state.getTagsOfType('jovian'), //Water Import from Europa
 		"153": (_, state) => state.getTagsOfType('jovian'), //Io Mining Industries
 		"F07": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets
-		"CP01": (card) => Math.floor(card.getStockValue('animal') / 2), //Arklight
+		"P12": (card) => Math.floor(card.getStockValue('animal') / 2), //Arklight
 	};
 
 	updateCardScalingVPList(clientState: PlayerStateModel) {
