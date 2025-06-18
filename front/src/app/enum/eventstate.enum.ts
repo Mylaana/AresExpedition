@@ -13,6 +13,7 @@ export enum EventStateTypeEnum {
 	scanKeepUnQueried = 'SCAN_KEEP_UNQUERIED',
 	targetCardAddRessource = 'TARGET_CARD_ADD_RESSOURCE',
 	specialBuilder = 'SPECIAL_BUILDER',
+	increaseResearchScanKeep = 'INCREASE_RESEARCH_SCANKEEP',
 
 	undefined = 'UNDEFINED'
 }

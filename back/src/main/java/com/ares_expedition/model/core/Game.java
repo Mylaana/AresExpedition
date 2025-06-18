@@ -325,7 +325,11 @@ public class Game {
 
     public void setStartingHandCorporations() {
         for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
-            entry.getValue().setHandCorporations(drawCorporations(4));
+            Integer corpNumber = 4;
+            if(this.groupPlayerState.entrySet().size()==1){
+                corpNumber = 100;
+            }
+            entry.getValue().setHandCorporations(drawCorporations(corpNumber));
         }
     }
 

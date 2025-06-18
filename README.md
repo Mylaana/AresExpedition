@@ -55,12 +55,13 @@ invention contest : UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE:
 UNHANDLED SCANKEEP OPTION
 Phase selection can be rolledback   
 race condition on backend resource query : can lead to drawing multiple times the same card !   
-VP scaling cards displayed points are locket at 0   
 switch card 49 to minimum 0   
 
 unsaved eventstate : 
-    - increase scan/keep
     - action phase
+
+## Bug not found while testing :   
+VP scaling cards displayed points are locket at 0   
 
 ## Must have for v1 :
 ### Refactoring

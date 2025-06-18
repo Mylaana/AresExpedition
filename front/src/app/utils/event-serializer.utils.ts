@@ -1,6 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateAddProduction } from "../interfaces/event-state.interface"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateAddProduction, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface"
 import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
@@ -129,6 +129,18 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 			return {
 				o: EventStateOriginEnum.create,
 				t: EventStateTypeEnum.addProduction,
+				v: content
+			}
+		}
+		case('increaseResearchScanKeep'):{
+			if(!event.increaseResearchScanKeep){return}
+			if(event.increaseResearchScanKeep.scan===0 && event.increaseResearchScanKeep.keep===0){return}
+			let content: EventStateIncreaseResearchScanKeep = {
+				s: {scan:event.increaseResearchScanKeep.scan??0, keep:event.increaseResearchScanKeep.keep??0}
+			}
+			return {
+				o: EventStateOriginEnum.create,
+				t: EventStateTypeEnum.increaseResearchScanKeep,
 				v: content
 			}
 		}

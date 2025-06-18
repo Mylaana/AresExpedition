@@ -46,7 +46,9 @@ export interface EventStateContentTargetCardDTO extends EventStateContentDTO {
 export interface EventStateAddProduction extends EventStateContentDTO {
 	p: RessourceStock | RessourceStock[]
 }
-
+export interface EventStateIncreaseResearchScanKeep extends EventStateContentDTO {
+	s: ScanKeep
+}
 export interface BuilderStatusDTO {
 	l: boolean,
 	cc: string | undefined
