@@ -59,9 +59,7 @@ VP scaling cards displayed points are locket at 0
 switch card 49 to minimum 0   
 
 unsaved eventstate : 
-    - production
     - increase scan/keep
-    - base builder
     - action phase
 
 ## Must have for v1 :

@@ -1,7 +1,7 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO } from "../interfaces/event-state.interface"
-import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector } from "../models/core-game/event.model"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateAddProduction } from "../interfaces/event-state.interface"
+import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
 function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
@@ -119,6 +119,22 @@ function eventQueueToJson(events: EventBaseModel[]): EventStateDTO[] {
 		}
 		return result
 }
+function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
+	switch(event.subType){
+		case('addProduction'):{
+			if(!event.baseRessource){return}
+			let content: EventStateAddProduction = {
+				p: event.baseRessource
+			}
+			return {
+				o: EventStateOriginEnum.create,
+				t: EventStateTypeEnum.addProduction,
+				v: content
+			}
+		}
+	}
+	return
+}
 
 function toJson(event: EventBaseModel): EventStateDTO | undefined {
 	if(event.finalized){return}
@@ -131,6 +147,7 @@ function toJson(event: EventBaseModel): EventStateDTO | undefined {
 		case('deck'):{dto = eventDeckQueryToJson(event as EventDeckQuery); break}
 		case('targetCard'):{dto = eventTargetCardToJson(event as EventTargetCard); break}
 		case('ComplexSelector'):{dto = eventComplexSelectorToJson(event as EventComplexCardSelector); break}
+		case('generic'):{dto = eventGenericToJson(event as EventGeneric); break}
 		default:{break}
 	}
 	if(dto){return dto}

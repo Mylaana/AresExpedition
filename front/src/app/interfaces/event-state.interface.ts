@@ -1,6 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption, DeckQueryOptionsEnum } from "../enum/global.enum"
-import { AdvancedRessourceStock, ScanKeep } from "./global.interface"
+import { AdvancedRessourceStock, RessourceStock, ScanKeep } from "./global.interface"
 
 export interface EventStateDTO {
 	o: EventStateOriginEnum
@@ -43,6 +43,10 @@ export interface EventStateContentTargetCardDTO extends EventStateContentDTO {
 	cardId: string
 	ressources: AdvancedRessourceStock | AdvancedRessourceStock [] | undefined
 }
+export interface EventStateAddProduction extends EventStateContentDTO {
+	p: RessourceStock | RessourceStock[]
+}
+
 export interface BuilderStatusDTO {
 	l: boolean,
 	cc: string | undefined

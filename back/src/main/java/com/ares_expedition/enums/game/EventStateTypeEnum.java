@@ -14,4 +14,5 @@ public enum EventStateTypeEnum {
     TARGET_CARD_ADD_RESSOURCE,
     SPECIAL_BUILDER,
     DRAW_CARDS_UNQUERIED,
+    ADD_PRODUCTION
 }

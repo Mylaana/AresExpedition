@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { EventStateBuilderContentDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO } from "../interfaces/event-state.interface";
-import { EventStateTypeEnum } from "../enum/eventstate.enum";
+import { EventStateAddProduction, EventStateBuilderContentDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO } from "../interfaces/event-state.interface";
+import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event factory/event-factory";
@@ -33,7 +33,7 @@ export class EventStateService{
 	}
 	public loadFromJson(event: EventBaseModel, dto: EventStateDTO) {
 		switch(dto.t){
-			case(EventStateTypeEnum.builderConstructionLocked):{
+			case(EventStateTypeEnum.builderConstructionLocked):case(EventStateTypeEnum.builderDevelopemntLocked):{
 				let content = toContentDto<EventStateBuilderContentDTO>(dto.v);
 				let eventBuilder: EventCardBuilder = event as EventCardBuilder
 				for(let i=0; i<content.s.length; i++){
@@ -46,6 +46,10 @@ export class EventStateService{
 						eventBuilder.cardBuilder[i].setBSuilderIsLocked(content.s[i].l)
 					}
 				}
+				break
+			}
+			default:{
+				console.error('UNTREATED LOAD EVENTSTATE: ', event)
 			}
 		}
 	}
@@ -126,9 +130,17 @@ export class EventStateService{
 					newEvents.push(EventFactory.simple.draw(content.d))
 					break
 				}
+				case(EventStateTypeEnum.addProduction):{
+					let content = state.v as EventStateAddProduction
+					newEvents.push(EventFactory.simple.addProduction(content.p))
+					break
+				}
 				default:{treated = false}
 			}
 			if(treated){eventStateList.splice(i, 1)}
+		}
+		for(let e of eventStateList.filter((el) => el.o===EventStateOriginEnum.create)){
+			console.error('UNTREATED CREATE EVENTSTATE: ', e)
 		}
 		return newEvents
 	}

@@ -7,6 +7,7 @@ export enum EventStateTypeEnum {
 	drawCards = 'DRAW_CARDS',
 	drawCardsUnqueried = 'DRAW_CARDS_UNQUERIED',
 	productionCards = 'PRODUCTION_CARDS',
+	addProduction = 'ADD_PRODUCTION',
 	researchCardsQueried = 'RESEARCH_CARDS_QUERIED',
 	scanKeepQueried = 'SCAN_KEEP_QUERIED',
 	scanKeepUnQueried = 'SCAN_KEEP_UNQUERIED',
