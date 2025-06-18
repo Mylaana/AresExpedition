@@ -51,6 +51,12 @@ card production not being applied
 card activated not being saved in eventstate   
 Need to test all corps events at start   
 Upgrade phase card eventstate not saved   
+if research keep> scan, game locked ?   
+production : draw is not working   
+invention contest : UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: SCAN_KEEP_QUERY ?
+UNHANDLED SCANKEEP OPTION
+Phase selection can be rolledback   
+
 
 ## Must have for v1 :
 ### Refactoring
@@ -76,6 +82,8 @@ Fix multiple activation display (transfer wrapper to activationList)
 Phase upgraded status menu   
 Activable cards with megacredit cost in it display bugged   
 add FR translation   
+Waiting player event : rollback button display bugged   
+add validation confirmation if not all builders locked   
 
 ### CI/CD
 Frontend automated testing: Ongoing   

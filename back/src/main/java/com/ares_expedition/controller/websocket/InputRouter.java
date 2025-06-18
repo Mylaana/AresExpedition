@@ -44,6 +44,13 @@ public class InputRouter {
                     GenericMessageDTO.class, this::handleDEBUGMessage);
     }
     public <T> void routeInput(BaseMessageInputDTO<T> message) {
+        if (message.getGameId() == null || message.getGameId().isBlank()) {
+            return;
+        }
+        
+        if (gameController.getGameFromId(message.getGameId())==null){
+            return;
+        }
         switch (message.getContentEnum()) {
             case DRAW_QUERY:
                 handleQuery(

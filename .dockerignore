@@ -1,0 +1,28 @@
+# front
+front/node_modules
+front/dist
+front/.git
+front/coverage
+front/.vscode
+
+# back
+back/.mvn
+
+# global
+.git
+.gitignore
+.vscode
+test
+parser
+ressources
+scripts
+
+# Angular Environments
+## add environments docker ignore later at build
+
+# Java Environments
+## add environments docker ignore later at build
+
+# other env files
+*.env
+.env.*

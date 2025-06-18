@@ -22,14 +22,14 @@ import java.util.Map;
 
 public class JsonGameDataHandler {
     private static final String DATABASE_NAME = "database.json";
-    private static final String DATABASE_DIRECTORY = "back/data/";
+    private static final String DATABASE_DIRECTORY = "data/";
     private static final String DATABASE_PATH = DATABASE_DIRECTORY + DATABASE_NAME;
-    private static final String CARDS_DATA_PATH = "front/src/assets/data/cards_data.json";
+    private static final String CARDS_DATA_PATH = "data/cards_data.json";
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static Game getGame(String gameId){
         checkDatabaseExistOrCreateIt();
-        System.out.println("\u001B[31m GET GAME \u001B[0m");
+        System.out.println("\u001B[31m GET GAME: " +gameId +" \u001B[0m");
         Map<String, Game> games = readGames();
         return games.getOrDefault(gameId, new Game());
     }
@@ -61,6 +61,11 @@ public class JsonGameDataHandler {
         }
 
         try (Reader reader = new FileReader(file)){
+            long length = file.length();
+            if (length == 0) {
+                System.err.println("Empty database.json file.");
+                return new HashMap<>();
+            }
             return objectMapper.readValue(reader, new TypeReference<Map<String, Game>>(){});
         } catch (IOException error) {
             error.printStackTrace();

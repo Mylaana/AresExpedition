@@ -37,6 +37,7 @@ export class RxStompService extends RxStomp {
     constructor(
 		private gameParam: GameParamService
 	) {
+		console.log('RX STOMP INITIALIZING')
         super()
 		this.gameParam.currentGameId.subscribe((id) => (this.gameId = id??''))
 		this.gameParam.currentClientId.subscribe((id) => (this.clientId = id??''))
@@ -56,6 +57,7 @@ export class RxStompService extends RxStomp {
 		})
 		*/
         this.activate()
+		console.log('RX STOMP INITIALIZED')
     }
 
     private onClientConnected() {
