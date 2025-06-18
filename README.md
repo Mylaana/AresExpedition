@@ -53,7 +53,6 @@ Upgrade phase card eventstate not saved
 if research keep> scan, game locked ?   
 Phase selection can be rolledback   
 race condition on backend resource query : can lead to drawing multiple times the same card !   
-switch card 49 to minimum 0   
 
 ## Bug not found while testing :   
 VP scaling cards displayed points are locket at 0   

@@ -315,6 +315,7 @@ export class EventHandler {
 						break
 					}
 					case(DiscardOptionsEnum.redraftedContracts):{
+						if(event.cardSelector.selectedList.length===0){break}
 						this.gameStateService.addEventQueue(
 							EventFactory.simple.draw(event.cardSelector.selectedList.length),
 							'first'

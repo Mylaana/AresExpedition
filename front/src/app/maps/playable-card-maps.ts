@@ -126,7 +126,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 			]
 		: [],
 	//Redrafted Contracts
-	'49': () => [S.discardOptions(1, 'min', DiscardOptionsEnum.redraftedContracts)],
+	'49': () => [S.discardOptions(3, 'max', DiscardOptionsEnum.redraftedContracts)],
 	//Regolith Eaters
 	'50': (cardCode, _, option) => option === 1
 		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]

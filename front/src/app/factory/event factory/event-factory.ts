@@ -221,13 +221,30 @@ function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, arg
 }
 function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): EventComplexCardSelector {
 	let event = new EventComplexCardSelector
+	let title = ''
     event.cardSelector = generateCardSelector(args?.cardSelector)
     event.subType = 'discardCards'
-	event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
+	event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+	switch(event.cardSelector.selectionQuantityTreshold){
+		case('equal'):{
+			title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
+			break
+		}
+		case('min'):{
+			title = args?.title? args.title: `Select at least ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
+			break
+		}
+		case('max'):{
+			title = args?.title? args.title: `Select up to ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
+			event.button.startEnabled = true
+			event.button.resetStartEnabled()
+			break
+		}
+	}
+	event.title = title
 	event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
 	event.lockSellButton = true
 	event.lockRollbackButton = true
-	event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
