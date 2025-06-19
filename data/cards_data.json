@@ -18108,7 +18108,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_science$",
             "fr": "$ressource_science$"
         },
         "effectActionTextOption2": {
