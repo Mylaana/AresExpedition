@@ -8,24 +8,25 @@ $description-pannel-margin-left: 2%;
 #command-pannel {
 	$command-pannel-padding: 1%;
 	$command-pannel-width: 240px;
-	width: calc($command-pannel-width + $command-pannel-padding * 2);
+	//width: calc($command-pannel-width + $command-pannel-padding * 2);
+	width: 100%;
     z-index: 10;
     position: sticky;
     left: 0%;
     top: calc(var(--navbar-height));
-    max-height: 100%;
-    aspect-ratio: 3;
-    padding: $command-pannel-padding;
-	padding-right: 0;
 
     display: flex;
     flex-direction: row;
     align-items: top;
 	justify-content: space-between;
-	@media (max-width: 1919px) {
-		$command-pannel-width: 160px;
-		width: calc($command-pannel-width + $command-pannel-padding * 2);
-	}
+}
+.left-command, .right-command{
+	display: flex;
+	gap: 5px;
+	height: 100%;
+	height: 100px;
+	max-height: 100%;
+	margin: 20px;
 }
 #round-pannel{
 	z-index: 1000;
@@ -118,9 +119,14 @@ app-hexed-tooltip-background{
 	width: 100%;
 }
 .wrapper-event-button{
-	height: 100%;
-	&--smaller{
+	&--big{
+		height: 100%;
+	}
+	&--medium{
 		height: 70%;
+	}
+	&--small{
+		height: 50%;
 	}
 }
 .wrapper-title{

@@ -69,7 +69,6 @@ Check in rules if a phase can be upgraded multiple times
 
 ### Interface
 Add scan/keep modifier display   
-Always display steel/titanium cost mod   
 Rollback button does nothing   
 Fix multiple activation display (transfer wrapper to activationList)   
 Phase upgraded status menu   
@@ -78,7 +77,6 @@ add FR translation
 Waiting player event : rollback button display bugged   
 add validation confirmation if not all builders locked   
 add players being ready visibility on player's interface when not yet ready   
-when selling cards, display the total value of selected cards   
 display the phase we selected on the left progression pannel   
 
 ### CI/CD

@@ -1,0 +1,11 @@
+<div [ngClass]="['wrapper-sell-total', 'ares-border', 'ares-background', _totalSell===0?'disabled':'']">
+	<p>+{{_totalSell}}</p>
+	<img src="/assets/ressource/megacreditvoid.png" alt="">
+</div>
+<app-playable-card-list
+	[event]="event"
+	[listType]="'selector'"
+	[listSubType]="'none'"
+	(updateSelectedCardList)="onUpdateSelectedCardList($event)">
+</app-playable-card-list>
+

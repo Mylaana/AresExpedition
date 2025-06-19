@@ -75,17 +75,17 @@ button {
 			box-shadow: 0 0 10px 10px white;
 			cursor: pointer;
 			&.disabled{
-				filter: grayscale(80%);
+				filter: grayscale(90%);
 			}
 		}
 	}
 	&.selected{
 		&.greyed-when-selected{
-			filter: grayscale(80%);
+			filter: grayscale(90%);
 		}
 	}
 	&.disabled{
-		filter: grayscale(80%);
+		filter: grayscale(90%);
 	}
 }
 .wrapper-card-element-main{
@@ -189,5 +189,16 @@ app-card-status {
 	top: calc(100% - 12px);
 	@media (max-width:1919px) {
 		top: calc(100% - 10px);
+	}
+}
+app-card-disabled-foreground{
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	&.hovered{
+		opacity: 20%;
 	}
 }

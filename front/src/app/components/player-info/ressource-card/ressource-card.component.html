@@ -6,12 +6,13 @@
         <p *ngIf="ressource.name!='card'"> {{ ressource.valueStock }}</p>
 		<p *ngIf="ressource.name==='card'"> {{ handSize }}</p>
     </div>
-    <div *ngIf="ressource.valueMod" class="wrapper-ressource-mod">
+    <div class="wrapper-ressource-mod"
+	 	*ngIf="ressource.name==='steel' || ressource.name==='titanium'">
         <div class="box-ressource-mod-icon center">
             <img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
         </div>
         <div class="box-ressource-mod-value">
-            <p class="text-cost-mod center">{{ ressource.valueMod }}</p>
+            <p class="text-cost-mod center">{{ getValueModTotal(ressource) }}</p>
         </div>
     </div>
 </div>

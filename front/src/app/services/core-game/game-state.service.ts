@@ -24,6 +24,7 @@ import { PlayableCard } from "../../factory/playable-card.factory";
 import { ProjectCardScalingVPService } from "../cards/project-card-scaling-VP.service";
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
+import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -44,7 +45,6 @@ interface PhaseOrder {
 
 type EventPileAddRule = 'first' | 'second' | 'last'
 
-const cardSellValue: number = 3;
 
 @Injectable({
     providedIn: 'root'
@@ -422,7 +422,7 @@ export class GameState{
 	}
 	sellCardsFromClientHand(quantity: number){
 		let playerState = this.getClientState()
-		playerState.addRessource('megacredit', quantity * (cardSellValue + playerState.getSellCardValueMod()))
+		playerState.addRessource('megacredit', quantity * (GAME_CARD_SELL_VALUE + playerState.getSellCardValueMod()))
 		this.updateClientState(playerState)
 	}
 	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{

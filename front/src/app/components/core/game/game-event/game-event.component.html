@@ -1,16 +1,23 @@
 <div class="wrapper-game-event" *ngIf="currentEvent">
 	<div id="command-pannel">
-		<div *ngIf="currentEvent.button" class="wrapper-event-button wrapper-validate-button">
-			<app-event-main-button  [button]="currentEvent.button" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
+		<div class="left-command">
+			<div *ngIf="currentEvent.button" class="wrapper-event-button--big wrapper-validate-button">
+				<app-event-main-button  [button]="currentEvent.button" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
+			</div>
+			<div *ngIf="rollbackButton.displayed" class="wrapper-event-button--medium">
+				<app-non-event-button  [button]="rollbackButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(rollbackButton)"></app-non-event-button>
+			</div>
+			<div *ngIf="sellCardsButton.displayed" class="wrapper-event-button--small wrapper-sell-button">
+				<app-non-event-button  [button]="sellCardsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
+			</div>
+			<div *ngIf="sellCardsCancelButton.displayed" class="wrapper-event-button--small">
+				<app-non-event-button  [button]="sellCardsCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
+			</div>
+			<div *ngIf="displayPhaseUpgradeButton.displayed" class="wrapper-event-button--small">
+				<app-non-event-button  [button]="displayPhaseUpgradeButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeButton)"></app-non-event-button>
+			</div>
 		</div>
-		<div *ngIf="sellCardsButton.displayed" class="wrapper-event-button--smaller wrapper-sell-button">
-			<app-non-event-button  [button]="sellCardsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
-		</div>
-		<div *ngIf="sellCardsCancelButton.displayed" class="wrapper-event-button--smaller">
-			<app-non-event-button  [button]="sellCardsCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
-		</div>
-		<div *ngIf="rollbackButton.displayed" class="wrapper-event-button--smaller">
-			<app-non-event-button  [button]="rollbackButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(rollbackButton)"></app-non-event-button>
+		<div class="right-command">
 		</div>
 	</div>
 	<div class="wrapper-title">
@@ -40,7 +47,9 @@
 				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase'
 				|| currentEvent.subType==='actionPhaseActivator' || currentEvent.subType==='upgradePhaseCards'
 				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'
-				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder() || currentEvent.subType==='tagSelector'"
+				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder()
+				|| currentEvent.subType==='tagSelector' || currentEvent.subType==='selectCardOptionalSell'
+				|| currentEvent.subType==='selectCardForcedSell'"
 				@fadeIn>
 				<app-phase-planification
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
@@ -83,11 +92,17 @@
 					*ngIf="currentEvent.subType==='tagSelector'"
 					[event]="currentEvent">
 				</app-tag-gain-list>
+				<app-sell-cards
+					*ngIf="currentEvent.subType==='selectCardOptionalSell' || currentEvent.subType==='selectCardForcedSell'"
+					[event]="currentEvent"
+					(updateSelectedCardList)="onUpdateSelectedCardList($event)">
+				</app-sell-cards>
 			</div>
 			<div class="wrapper-selectors"
 				*ngIf="currentEvent.hasCardsToSelectFrom() &&currentEvent.subType!='actionPhaseActivator'
 					&& currentEvent.subType!='selectStartingHand' && currentEvent.subType!='selectCorporation'
-					&& !currentEvent.hasCardBuilder()"
+					&& !currentEvent.hasCardBuilder() && currentEvent.subType!='selectCardOptionalSell'
+					&& currentEvent.subType!='selectCardForcedSell'"
 				[class.centered]="currentEvent.hasCardBuilder() === false"
 				@fadeIn>
 				<div class="wrapper-card-selector" >

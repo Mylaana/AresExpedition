@@ -2,6 +2,10 @@
 	(mouseenter)="_hovered=true"
 	(mouseleave)="_hovered=false">
 	<app-card-highlight *ngIf="state.isSelected()" [highlightStyle]="parentListSubType"></app-card-highlight>
+	<app-card-disabled-foreground *ngIf="isDisabled()"
+		[class.hovered]="_hovered"
+		[cardType]="projectCard.cardType">
+	</app-card-disabled-foreground>
 	<div class="wrapper-selection-border"
 		[class]="parentListSubType"
 		[class.selected]="state.isSelected()"

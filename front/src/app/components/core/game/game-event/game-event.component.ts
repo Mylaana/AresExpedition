@@ -23,6 +23,7 @@ import { PhaseActionComponent } from '../../../game-event-blocks/phase-action/ph
 import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/phase-builder.component';
 import { EventFactory } from '../../../../factory/event factory/event-factory';
 import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/tag-gain-list.component';
+import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-cards.component';
 
 //this component is the main controller, and view
 
@@ -41,7 +42,8 @@ import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/t
         InitialDraftComponent,
         WaitingReadyComponent,
 		PhaseBuilderComponent,
-		TagGainListComponent
+		TagGainListComponent,
+		SellCardsComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',
@@ -69,6 +71,7 @@ export class GameEventComponent {
 	sellCardsButton!: NonEventButton;
 	sellCardsCancelButton!: NonEventButton;
 	rollbackButton!: NonEventButton;
+	displayPhaseUpgradeButton!: NonEventButton;
 
 	phaseList: NonSelectablePhaseEnum[] = [
 		NonSelectablePhaseEnum.planification,
@@ -93,6 +96,7 @@ export class GameEventComponent {
 		this.sellCardsButton = ButtonDesigner.createNonEventButton('sellOptionalCard')
 		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
 		this.rollbackButton = ButtonDesigner.createNonEventButton('rollBack')
+		this.displayPhaseUpgradeButton = ButtonDesigner.createNonEventButton('displayUpgradedPhase')
 
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
@@ -137,7 +141,6 @@ export class GameEventComponent {
 		this.updateSellButtonsDisplay(this.currentEvent)
 	}
 	private resetMainButtonState(event: EventBaseModel): void {
-
 		this.sellCardsButton.resetStartEnabled()
 		this.sellCardsButton.locked = event.lockSellButton
 		this.sellCardsCancelButton.resetStartEnabled()
@@ -170,6 +173,7 @@ export class GameEventComponent {
 		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
+		console.log(button)
 		switch(button.name){
 			case('sellOptionalCard'):{
 				this.gameStateService.addEventQueue(EventFactory.createCardSelector('selectCardOptionalSell'), 'first')
@@ -179,6 +183,12 @@ export class GameEventComponent {
 			}
 			case('sellOptionalCardCancel'):{
 				this.eventHandler.cancelSellCardsOptional()
+				break
+			}
+			case('displayUpgradedPhase'):{
+				console.log('display upgradde')
+				this.gameStateService.addEventQueue(EventFactory.simple.upgradePhaseCard(0), 'first')
+				break
 			}
 		}
 	}
