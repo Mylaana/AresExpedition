@@ -39,7 +39,8 @@ export enum ProjectFilterNameEnum {
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
-	redraftedContracts = 'redraftedContracts'
+	redraftedContracts = 'redraftedContracts',
+	matterGenerator = 'matterGenerator'
 }
 export enum BuilderOption {
 	//Phase builders

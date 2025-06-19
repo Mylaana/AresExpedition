@@ -197,9 +197,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
 	],
 	//Matter Generator
-	'P06': () => [
-		S.discard(1),
-		S.addRessource({ name: 'megacredit', valueStock: 6 })],
+	'P06': () => [S.discardOptions(1, 'max', DiscardOptionsEnum.matterGenerator)],
 	//Progressive Policies
 	'P09': (card, clientState) => [
 		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),

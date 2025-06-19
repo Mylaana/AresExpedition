@@ -322,6 +322,10 @@ export class EventHandler {
 						)
 						break
 					}
+					case(DiscardOptionsEnum.matterGenerator):{
+						if(event.cardSelector.selectedList.length===0){break}
+						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:6}), 'first')
+					}
 				}
 				break
 			}
