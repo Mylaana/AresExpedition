@@ -21,7 +21,7 @@ export class ProjectCardScalingVPService {
 			return Math.floor(valid / 4);
 		},
 		"39": (card) => card.getStockValue('animal'), //Livestock
-		"46": (card) => Math.floor(card.getStockValue('science') / 2),
+		"46": (card) => Math.floor(card.getStockValue('science') / 2), //Physics complex
 		"53": (card) => Math.floor(card.getStockValue('animal') / 2), //Small Animals
 		"58": (card) => Math.floor(card.getStockValue('microbe') / 3), //Tardigrades
 		"59": (_, state) => Math.floor(state.getProjectPlayedIdList({ type: ProjectFilterNameEnum.blueProject }).length / 3), //Think Tank
