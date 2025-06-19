@@ -508,7 +508,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//Tundra Farming
 	'200': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
 	//Wave Power
-	'203': (s) => Checker.isOceanOk(3, 'min', s),
+	'205': (s) => Checker.isOceanOk(3, 'min', s),
 	//Worms
 	'207': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Zeppelins

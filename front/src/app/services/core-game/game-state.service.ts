@@ -499,7 +499,8 @@ export class GameState{
 		let triggers = newState.getTriggersIdActive()
 		let card = newState.getProjectPlayedModelFromId(cardStock.cardCode)
         for(let stock of cardStock.stock){
-            newState.addRessourceToCard(cardStock.cardCode, stock)
+			newState.addRessourceToCard(cardStock.cardCode, stock)
+			if(stock.valueStock<0){continue}
 			if(triggers.length>0){
 				newEvents = newEvents.concat(PlayableCard.getOnTriggerredEvents('ON_RESSOURCE_ADDED_TO_CARD', triggers, newState, {receivingCard:card, ressourceAdded:stock.name, ressourceAddedValue:stock.valueStock}))
 			}

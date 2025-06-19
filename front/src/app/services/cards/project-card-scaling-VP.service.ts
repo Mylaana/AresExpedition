@@ -9,9 +9,11 @@ import { ProjectFilterNameEnum } from "../../enum/global.enum";
 })
 export class ProjectCardScalingVPService {
 	scaledVpList: CardScalingVP[]= []
+
 	private readonly vpCalculators: Record<string, (card: PlayableCardModel, state: PlayerStateModel) => number> = {
 		"12": (card) => card.getStockValue('animal'), //Birds
 		"18": (_, state) => Math.floor(state.getForest() / 2),
+		"24": (card) => Math.floor(card.getStockValue('animal') / 2), //Ecological zone
 		"30": (card) => card.getStockValue('animal'), //Fish
 		"33": (card) => Math.floor(card.getStockValue('animal') / 2), //Herbivore
 		//Interplanetary Relations
@@ -28,6 +30,7 @@ export class ProjectCardScalingVPService {
 		"63": (_, state) => state.getTagsOfType('jovian'), //Water Import from Europa
 		"153": (_, state) => state.getTagsOfType('jovian'), //Io Mining Industries
 		"F07": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets
+		"P04": (card) => Math.floor(card.getStockValue('animal') / 3), //Filter Feeders
 		"P12": (card) => Math.floor(card.getStockValue('animal') / 2), //Arklight
 	};
 
