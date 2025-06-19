@@ -34,7 +34,6 @@ import { PlayerPlayedCardComponent } from '../../../cards/project/player-played-
         ServerEmulationComponent,
         PlayableCardListComponent,
         NavigationComponent,
-        HorizontalSeparatorComponent,
         NonEventButtonComponent,
         SettingsComponent,
         GameEventComponent,

@@ -16081,7 +16081,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_plant$ / $tag_animal$+$tag_plant$",
+            "en": "$ressource_megacreditvoid_1$ / $tag_animal$+$tag_plant$",
             "fr": ""
         },
         "effectText": {
@@ -18113,7 +18113,7 @@
         },
         "effectActionTextOption2": {
             "en": "-3$ressource_science$: $other_upgrade$",
-            "fr": ""
+            "fr": "-3$ressource_science$: $other_upgrade$"
         },
         "effectActionText2Option1": {
             "en": "",
