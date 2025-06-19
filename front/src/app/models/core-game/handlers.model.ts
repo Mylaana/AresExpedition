@@ -663,7 +663,6 @@ export class DrawEventHandler {
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
 		Logger.logEventResolution('resolving deck event: ',drawEvent.resolveEventSubType)
-		console.log('resolving drawevent with waiter id :', drawEvent)
 		switch(drawEvent.resolveEventSubType){
 			case('drawResult'):{
 				resultEvent = EventFactory.createGeneric(

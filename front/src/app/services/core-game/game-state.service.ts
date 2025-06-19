@@ -532,7 +532,6 @@ export class GameState{
 			event.scanKeepOptions = wsDrawResult.options
 			event.keepCardNumber = wsDrawResult.keep
             eventFound = true
-			console.log(event)
             this.cleanAndNextDrawQueue()
             break
         }
