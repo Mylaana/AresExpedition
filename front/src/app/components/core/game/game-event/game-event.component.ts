@@ -71,6 +71,7 @@ export class GameEventComponent {
 	sellCardsButton!: NonEventButton;
 	sellCardsCancelButton!: NonEventButton;
 	rollbackButton!: NonEventButton;
+	displayPhaseUpgradeButton!: NonEventButton;
 
 	phaseList: NonSelectablePhaseEnum[] = [
 		NonSelectablePhaseEnum.planification,
@@ -95,6 +96,7 @@ export class GameEventComponent {
 		this.sellCardsButton = ButtonDesigner.createNonEventButton('sellOptionalCard')
 		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
 		this.rollbackButton = ButtonDesigner.createNonEventButton('rollBack')
+		this.displayPhaseUpgradeButton = ButtonDesigner.createNonEventButton('displayUpgradedPhase')
 
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
@@ -139,7 +141,6 @@ export class GameEventComponent {
 		this.updateSellButtonsDisplay(this.currentEvent)
 	}
 	private resetMainButtonState(event: EventBaseModel): void {
-
 		this.sellCardsButton.resetStartEnabled()
 		this.sellCardsButton.locked = event.lockSellButton
 		this.sellCardsCancelButton.resetStartEnabled()
@@ -172,6 +173,7 @@ export class GameEventComponent {
 		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
+		console.log(button)
 		switch(button.name){
 			case('sellOptionalCard'):{
 				this.gameStateService.addEventQueue(EventFactory.createCardSelector('selectCardOptionalSell'), 'first')
@@ -181,6 +183,12 @@ export class GameEventComponent {
 			}
 			case('sellOptionalCardCancel'):{
 				this.eventHandler.cancelSellCardsOptional()
+				break
+			}
+			case('displayUpgradedPhase'):{
+				console.log('display upgradde')
+				this.gameStateService.addEventQueue(EventFactory.simple.upgradePhaseCard(0), 'first')
+				break
 			}
 		}
 	}
