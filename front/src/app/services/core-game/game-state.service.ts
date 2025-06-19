@@ -324,7 +324,6 @@ export class GameState{
 		this.removeCardsFromClientHandById(removeListId, cardType)
     }
     addDrawQueue(drawEvent: DrawEvent):void{
-		console.log(drawEvent)
         this.drawQueue.next(this.drawQueue.getValue().concat([drawEvent]));
     }
 

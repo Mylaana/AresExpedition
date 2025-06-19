@@ -494,7 +494,6 @@ export class EventHandler {
 		switch(event.subType){
 			case('drawQuery'):{
 				resolveType = 'drawResult'
-				console.log(event)
 				break
 			}
 			case('researchPhaseQuery'):{

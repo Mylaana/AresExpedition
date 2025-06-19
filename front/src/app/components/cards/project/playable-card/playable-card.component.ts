@@ -139,7 +139,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.clientState = state
 		if(this.parentListType==='played' && this.projectCard.scalingVp && this.projectCard.cardCode){
 			this.projectCard.vpNumber = this.clientState.getCardScaledVp(this.projectCard.cardCode).toString()
-			console.log('refresg VP:', this.projectCard.title, this.projectCard.vpNumber)
 		}
 		this.updateCost()
 	}
