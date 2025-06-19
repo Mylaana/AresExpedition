@@ -598,9 +598,6 @@ export class GameState{
 				this.updateClientState(state)
 			}
 		}
-		//create events from eventqueue saved state
-		//this.createEventFromEventQueueSavedState()
-		console.log('state loaded: ', this.groupPlayerState.getValue(), 'client state loaded: ', this.clientState.getValue(), 'eventstate loaded:', Utils.jsonCopy(this.eventQueueSavedState))
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length
