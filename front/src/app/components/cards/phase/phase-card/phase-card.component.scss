@@ -101,3 +101,8 @@ app-hexed-background{
 app-non-event-button{
 	height: 50%;
 }
+.wrapper-description::ng-deep p {
+	@media (max-width: 1919px) {
+		font-size: 60%;
+	}
+}
