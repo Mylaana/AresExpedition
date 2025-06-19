@@ -67,13 +67,15 @@ img {
 	height: 100%;
 }
 .wrapper-ressource-mod{
-	$offset: 4%;
+	$offset: 0%;
 	$size: 50%;
 	position: absolute;
 	width: $size;
 	aspect-ratio: 1;
 	top: - $offset;
 	left: calc($size + $offset);
+	display: flex;
+	justify-content: center;
 	p{
 		font-size: 90%;
 	}
@@ -85,8 +87,8 @@ img {
 	.box-ressource-mod-value{
 		position: relative;
 		z-index: 10;
-		width: 100%;
 		height: 100%;
+		font-size: 80%;
 	}
 }
 .box-production{
