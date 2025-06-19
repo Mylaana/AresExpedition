@@ -3,6 +3,7 @@ import { NonEventButtonComponent } from '../../../tools/button/non-event-button.
 import { NonEventButton } from '../../../../models/core-game/button.model';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { GameParamService } from '../../../../services/core-game/game-param.service';
 
 
 @Component({
@@ -16,19 +17,26 @@ import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-b
 })
 export class SettingsComponent {
 	@Output() closeSettings: EventEmitter<any> = new EventEmitter<any>()
-	closeButton!: NonEventButton
+	_closeButton!: NonEventButton
+	_toggleDebugMode!: NonEventButton
 
+	constructor(private gameParam: GameParamService){}
 	ngOnInit(): void {
-		this.closeButton = ButtonDesigner.createNonEventButton('closeSettings')
+		this._closeButton = ButtonDesigner.createNonEventButton('closeSettings')
+		this._toggleDebugMode = ButtonDesigner.createNonEventButton('settingToggleDebug')
 	}
-
 	public closeSettingsPannel(){
-		console.log('close settings pannel:')
 		this.closeSettings.emit()
 	}
-
+	public onButtonClicked(button: NonEventButton){
+		console.log('settings button :', button.name)
+		switch(button.name){
+			case('settingToggleDebug'):{
+				this.gameParam.toggleDebug()
+			}
+		}
+	}
 	public nonEventButtonClicked(button: NonEventButton){
-		console.log('button clicked in settings:', button)
 		switch(button.name){
 		}
 	}

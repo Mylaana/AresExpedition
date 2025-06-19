@@ -5,7 +5,7 @@ import { TextWithImageComponent } from '../text-with-image/text-with-image.compo
 import { PlayerColor } from '../../../types/global.type';
 
 type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right' | 'action' | 'selection_rounded_square'
-type style = 'plain' | 'floating'  | 'transparent'
+type style = 'plain' | 'floating'  | 'transparent' | 'toggle'
 
 @Component({
     selector: 'app-button',

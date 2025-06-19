@@ -8,7 +8,9 @@ import { BehaviorSubject, filter } from 'rxjs'
 export class GameParamService {
 	private gameIdSubject = new BehaviorSubject<string | null>(null)
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
+	private debug = new BehaviorSubject<boolean>(false)
 
+	currentDebug = this.debug.asObservable()
 	currentGameId = this.gameIdSubject.asObservable()
 	currentClientId = this.clientIdSubject.asObservable()
 
@@ -27,4 +29,6 @@ export class GameParamService {
 	  this.gameIdSubject.next(urlSegments[2] || null)
 	  this.clientIdSubject.next(urlSegments[3] || null)
 	}
+
+	toggleDebug() {this.debug.next(this.debug.getValue()===false)}
   }

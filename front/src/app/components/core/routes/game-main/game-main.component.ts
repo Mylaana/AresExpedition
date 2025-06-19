@@ -21,7 +21,7 @@ import { RxStompService } from '../../../../services/websocket/rx-stomp.service'
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { fadeIn } from '../../../../animations/animations';
+import { fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { myUUID } from '../../../../types/global.type';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { GameOverComponent } from '../../game/game-over/game-over.component';
@@ -42,7 +42,7 @@ import { PlayerPlayedCardComponent } from '../../../cards/project/player-played-
     ],
     templateUrl: './game-main.component.html',
     styleUrl: './game-main.component.scss',
-    animations: [fadeIn]
+    animations: [fadeIn, fadeInFadeOut]
 })
 export class GameMainComponent implements OnInit{
 	playerHand: PlayableCardModel[] = [];
