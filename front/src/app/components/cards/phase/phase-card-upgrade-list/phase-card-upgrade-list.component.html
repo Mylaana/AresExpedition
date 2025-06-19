@@ -7,7 +7,8 @@
 			[initialState]="cardInitialState"
 			[phaseCard]="phaseCardModels[card.cardLevel]"
 			[stateFromParent]="stateFromParent"
-			[phaseGroupUpgraded]="phaseGroup.phaseIsUpgraded || upgradeFinished"
+			[phaseGroupUpgraded]="phaseGroup.phaseIsUpgraded"
+			[upgradeFinished]="upgradeFinished"
 			(phaseCardUpgraded)="phaseCardUpgraded($event)"></app-phase-card>
 	</div>
 </div>
