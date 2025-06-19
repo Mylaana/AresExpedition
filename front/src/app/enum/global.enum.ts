@@ -33,6 +33,9 @@ export enum ProjectFilterNameEnum {
 	hasTagPlantOrScience = 'hasTagPlantOrScience',
 	green9MCFree = 'green9MCFree',
 	maiNiProductions = 'maiNiProductions',
+	playedDisplayCorpsAndActivable = 'playedDisplayCorpsAndActivable',
+	playedDisplayTriggers = 'playedDisplayTriggers',
+	playedDisplayRed = 'playedDisplayRed',
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',

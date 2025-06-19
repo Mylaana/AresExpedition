@@ -1121,7 +1121,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Wave Power
 	'205': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
 	//Apollo Industries
-	'D01': () => [S.upgradePhaseCard(1, [2])],
+	'D01': () => [S.upgradePhaseCard(1, [1])],
 	//Exocorp
 	'D02': (clientState) => {
 		clientState.addSellCardValueMod(1)

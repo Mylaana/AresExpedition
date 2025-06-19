@@ -25,6 +25,7 @@ import { fadeIn } from '../../../../animations/animations';
 import { myUUID } from '../../../../types/global.type';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { GameOverComponent } from '../../game/game-over/game-over.component';
+import { PlayerPlayedCardComponent } from '../../../cards/project/player-played-card/player-played-card.component';
 
 @Component({
     selector: 'app-game-main',
@@ -37,7 +38,8 @@ import { GameOverComponent } from '../../game/game-over/game-over.component';
         NonEventButtonComponent,
         SettingsComponent,
         GameEventComponent,
-		GameOverComponent
+		GameOverComponent,
+		PlayerPlayedCardComponent
     ],
     templateUrl: './game-main.component.html',
     styleUrl: './game-main.component.scss',
@@ -55,6 +57,8 @@ export class GameMainComponent implements OnInit{
 	isScrolled = false
 	settingsButton!: NonEventButton;
 
+	_clientState!: PlayerStateModel
+	_groupState!: PlayerStateModel[]
 	_handIsHovered: boolean = false
 	_playerPannelIsHovered: boolean = false
 	_settings: boolean = false
@@ -86,23 +90,15 @@ export class GameMainComponent implements OnInit{
 			}
 		})
 		this.gameParam.currentClientId.subscribe((id) => {
-			if(id){
-				this.clientId = id
+			if(id){this.clientId = id
 				this.subscribeWsIfValidSessionIds()
 			}
 		})
+		this.gameStateService.currentGroupPlayerState.subscribe(states => this.updateGroupState(states))
+		this.gameStateService.currentLoadingState.subscribe(loading => this.loadingFinished(loading))
+		this.gameStateService.currentGameOver.subscribe(over => this._gameOver = over)
+		this.rxStompService.connectionState$.subscribe(() => {this._connected = this.rxStompService.connectionState$.getValue() === 1})
 		this.settingsButton = ButtonDesigner.createNonEventButton('settings')
-
-		this.gameStateService.currentLoadingState.subscribe(
-			loading => this.loadingFinished(loading)
-		)
-		this.gameStateService.currentGameOver.subscribe(
-			over => this._gameOver = over
-		)
-
-		this.rxStompService.connectionState$.subscribe(() => {
-			this._connected = this.rxStompService.connectionState$.getValue() === 1
-		})
 	}
 	subscribeWsIfValidSessionIds(): void {
 		if(!this.gameId || !this.clientId){return}
@@ -123,10 +119,10 @@ export class GameMainComponent implements OnInit{
 			this.handleAcknowledgeMessage(message.body)
 		});
 	}
-	updateHandOnStateChange(state: PlayerStateModel): void {
+	updateClientState(state: PlayerStateModel): void {
 		this.playerHand = this.cardInfoService.getProjectCardList(state.getProjectHandIdList())
-		this.playerPlayed = state.getProjectPlayedModelList()
 		this.playerHandCorporation = state.getCorporationHandIdList()
+		this._clientState = state
 	}
 	updatePlayerList(playerIdList: myUUID[]){
 		this.playerIdList = playerIdList
@@ -139,10 +135,10 @@ export class GameMainComponent implements OnInit{
 		this.gameStateService.currentPlayerCount.subscribe(
 			playerCount => this.updatePlayerList(playerCount)
 		)
-
-		this.gameStateService.currentClientState.subscribe(
-			state => this.updateHandOnStateChange(state)
-		)
+		this.gameStateService.currentClientState.subscribe(state => this.updateClientState(state))
+	}
+	private updateGroupState(states: PlayerStateModel[]){
+		this._groupState = states
 	}
 	private handleGroupMessage(message: any){
 		this.wsHandler.handleGroupMessage(WebsocketResultMessageFactory.createGroupMessageResult(message))
