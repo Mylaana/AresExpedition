@@ -23,6 +23,7 @@ import { PhaseActionComponent } from '../../../game-event-blocks/phase-action/ph
 import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/phase-builder.component';
 import { EventFactory } from '../../../../factory/event factory/event-factory';
 import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/tag-gain-list.component';
+import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-cards.component';
 
 //this component is the main controller, and view
 
@@ -41,7 +42,8 @@ import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/t
         InitialDraftComponent,
         WaitingReadyComponent,
 		PhaseBuilderComponent,
-		TagGainListComponent
+		TagGainListComponent,
+		SellCardsComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',

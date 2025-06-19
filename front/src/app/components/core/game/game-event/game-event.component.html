@@ -40,7 +40,9 @@
 				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase'
 				|| currentEvent.subType==='actionPhaseActivator' || currentEvent.subType==='upgradePhaseCards'
 				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'
-				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder() || currentEvent.subType==='tagSelector'"
+				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder()
+				|| currentEvent.subType==='tagSelector' || currentEvent.subType==='selectCardOptionalSell'
+				|| currentEvent.subType==='selectCardForcedSell'"
 				@fadeIn>
 				<app-phase-planification
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
@@ -83,11 +85,17 @@
 					*ngIf="currentEvent.subType==='tagSelector'"
 					[event]="currentEvent">
 				</app-tag-gain-list>
+				<app-sell-cards
+					*ngIf="currentEvent.subType==='selectCardOptionalSell' || currentEvent.subType==='selectCardForcedSell'"
+					[event]="currentEvent"
+					(updateSelectedCardList)="onUpdateSelectedCardList($event)">
+				</app-sell-cards>
 			</div>
 			<div class="wrapper-selectors"
 				*ngIf="currentEvent.hasCardsToSelectFrom() &&currentEvent.subType!='actionPhaseActivator'
 					&& currentEvent.subType!='selectStartingHand' && currentEvent.subType!='selectCorporation'
-					&& !currentEvent.hasCardBuilder()"
+					&& !currentEvent.hasCardBuilder() && currentEvent.subType!='selectCardOptionalSell'
+					&& currentEvent.subType!='selectCardForcedSell'"
 				[class.centered]="currentEvent.hasCardBuilder() === false"
 				@fadeIn>
 				<div class="wrapper-card-selector" >
