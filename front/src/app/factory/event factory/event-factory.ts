@@ -29,6 +29,7 @@ interface CreateEventOptionsGeneric {
     scanKeep?: ScanKeep
     card?: PlayableCardModel
     drawEventResult?:string[]
+	thenDiscard?: number
     waiterId?:number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number
@@ -36,20 +37,24 @@ interface CreateEventOptionsGeneric {
 	oceanQueryNumber?: number
 	production?: RessourceStock | RessourceStock[]
 	increaseTr?: number
+	loadProductionCardList?: string[]
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
     scanKeep?: Partial<ScanKeep>,
 	isCardProduction?: boolean,
 	scanKeepOptions?: DeckQueryOptionsEnum
+	drawThenDiscard?: boolean
 }
 
 function draw(drawNumber: number): EventBaseModel {
-	console.log(drawNumber)
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
 function discard(discardNumber: number): EventComplexCardSelector {
 	return EventFactory.createCardSelectorComplex("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
+}
+function drawThenDiscard(drawNumber: number, discard: number): EventBaseModel {
+	return EventFactory.createDeckQueryEvent('drawThenDiscard', {drawDiscard:{draw:drawNumber,discard:discard}, drawThenDiscard: true})
 }
 function discardOptions(discardNumber: number, treshold: MinMaxEqualType, discardOptions: DiscardOptionsEnum): EventComplexCardSelector {
 	return EventFactory.createCardSelectorComplex("discardCards", {
@@ -90,7 +95,7 @@ function addTR(quantity: number): EventBaseModel {
 function addForestAndOxygen(quantity: number): EventBaseModel {
 	return EventFactory.createGeneric('addForestPointAndOxygen', {addForestPoint:quantity})
 }
-function scanKeep(scanKeep: ScanKeep, options?: DeckQueryOptionsEnum): EventBaseModel {
+function scanKeep(scanKeep: ScanKeep, options: DeckQueryOptionsEnum): EventBaseModel {
 	return EventFactory.createDeckQueryEvent('scanKeepQuery',{
 		scanKeep:{scan: scanKeep.scan, keep: scanKeep.keep},
 		scanKeepOptions: options
@@ -123,6 +128,7 @@ const SimpleEvent = {
 	draw,
 	discard,
 	discardOptions,
+	drawThenDiscard,
 	upgradePhaseCard,
 	increaseGlobalParameter,
 	addRessource,
@@ -221,17 +227,33 @@ function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, arg
 }
 function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): EventComplexCardSelector {
 	let event = new EventComplexCardSelector
+	let title = ''
     event.cardSelector = generateCardSelector(args?.cardSelector)
     event.subType = 'discardCards'
-	event.title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
+	event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+	switch(event.cardSelector.selectionQuantityTreshold){
+		case('equal'):{
+			title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
+			break
+		}
+		case('min'):{
+			title = args?.title? args.title: `Select at least ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
+			break
+		}
+		case('max'):{
+			title = args?.title? args.title: `Select up to ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
+			event.button.startEnabled = true
+			event.button.resetStartEnabled()
+			break
+		}
+	}
+	event.title = title
 	event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
 	event.lockSellButton = true
 	event.lockRollbackButton = true
-	event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
-	console.log(event, `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`)
 
 	return event
 }
@@ -299,8 +321,24 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
 		}
+		case(DeckQueryOptionsEnum.inventionContest):{
+			let event = new EventComplexCardSelector
+            event.title = `Select one card to keep.`
+            event.refreshSelectorOnSwitch = false
+            event.cardSelector.selectionQuantityTreshold = 'equal'
+			event.cardSelector.selectFrom = cardList
+			event.cardSelector.selectionQuantity = 1
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = false
+			event.scanKeepOptions = options
+			event.cardSelector.filter = {type: ProjectFilterNameEnum.hasTagPlantOrScience}
+			event.waiterId = waiter
+			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			return event
+		}
 		default:{
-			console.error('UNHANDLED SCANKEEP OPTION')
+			console.error('UNHANDLED SCANKEEP OPTION: ', options)
 			return new EventComplexCardSelector
 		}
 	}
@@ -513,7 +551,15 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         case('upgradePhaseCards'):{
             event.title = 'Select a phase card to upgrade'
             event.autoFinalize = false
-            event.phaseCardUpgradeList = args?.phaseCardUpgradeList
+			let phaseList: number[] | undefined = args?.phaseCardUpgradeList
+			for(let phase of phaseList??[]){
+				if(phase>=5 || phase <0){
+					console.error('UNHANDLED PHASE INDEX INPUT: ', phase)
+					phaseList = undefined
+					break
+				}
+			}
+            event.phaseCardUpgradeList = phaseList
             event.phaseCardUpgradeQuantity = args?.phaseCardUpgradeNumber
             break
         }
@@ -563,6 +609,16 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
             event.increaseTr = args?.increaseTr
             break
         }
+		case('loadProductionPhaseCards'):{
+			event.loadProductionCardList = args?.loadProductionCardList
+			break
+		}
+		case('drawResultThenDiscard'):{
+            event.drawResultList = args?.drawEventResult
+            event.waiterId = args?.waiterId
+			event.thenDiscard = args?.thenDiscard??0
+            break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
     }
     event.button = ButtonDesigner.createEventMainButton(event.subType)
@@ -587,8 +643,18 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
             event.scanKeep = args?.scanKeep
             break
         }
+		case('drawThenDiscard'):{
+			event.drawDiscard = args?.drawDiscard
+			event.drawThenDiscard = true
+			break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
+
+	//adding keep security to be never superior to scan
+	if(event.scanKeep){
+		event.scanKeep.keep = Math.min(event.scanKeep.keep??0, event.scanKeep.scan??0)
+	}
     return event
 }
 function createWaiter(subType:EventWaiterSubType, waiterId: number) : EventWaiter {

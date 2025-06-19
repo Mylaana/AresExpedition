@@ -27,7 +27,8 @@ const S = EventFactory.simple
 	function handleTrigger_6(trigger: string, input: TriggerInput): EventBaseModel[] {
 		return [S.addRessource([{name: 'plant', valueStock: 2},{name: 'heat', valueStock: 2}])]
 	}
-	function handleTrigger_CP05(trigger: string, input: TriggerInput): EventBaseModel[] {
+	//Main-ni production
+	function handleTrigger_P16(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardType!='greenProject'){return []}
 		return [
 			S.draw(1),
@@ -235,7 +236,7 @@ const S = EventFactory.simple
 const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
 		'6': handleTrigger_6,
-		'CP05': handleTrigger_CP05
+		'P16': handleTrigger_P16
 	},
 	ON_PARAMETER_INCREASED: {
 		'8': handleTrigger_8,

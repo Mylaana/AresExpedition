@@ -192,6 +192,7 @@ export class PlayerStateModel {
 	getEventQueueState(): EventStateDTO[] {return this.eventState.eventQueueState}
 	setPrerequisiteOffset(offset: GlobalParameterOffset | GlobalParameterOffset[]){this.projectCardState.setPrerequisiteOffset(offset)}
 	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {return this.projectCardState.getPrerequisiteOffset(parameter)}
+	loadEventStateActivator(dto: EventStateDTO): void {this.projectCardState.loadEventStateActivator(dto)}
 
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
@@ -208,8 +209,6 @@ export class PlayerStateModel {
 		this.setScalingVp()
 		this.setScalingProduction()
 	}
-
-	loadEventStateActivator(dto: EventStateDTO): void {this.projectCardState.loadEventStateActivator(dto)}
 
 	private payCardCost(card: PlayableCardModel):void{
 		this.addRessource('megacredit', -card.cost)

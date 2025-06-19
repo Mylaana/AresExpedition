@@ -6,6 +6,7 @@ public class DrawContentDTO extends BaseContentDTO{
     Integer drawNumber;
     Integer eventId;
     PlayerStateDTO playerState;
+    Integer thenDiscard;
 
     public DrawContentDTO(){
     }
@@ -37,6 +38,14 @@ public class DrawContentDTO extends BaseContentDTO{
 
     public void setPlayerState(PlayerStateDTO playerState) {
       this.playerState = playerState;
+    }
+
+    public Integer getThenDiscard() {
+      return thenDiscard;
+    }
+
+    public void setThenDiscard(Integer thenDiscard) {
+      this.thenDiscard = thenDiscard;
     }
 }
 

@@ -4,13 +4,15 @@ import java.util.*;
 public class DrawResult {
     List<String> cardIdList = new ArrayList<String>();
     Integer eventId;
+    Integer thenDiscard;
 
     public DrawResult(){
     }
 
-    public DrawResult(List<String> cardIdList, Integer eventId) {
+    public DrawResult(List<String> cardIdList, Integer eventId, Integer thenDiscard) {
         this.cardIdList = cardIdList;
         this.eventId = eventId;
+        this.thenDiscard = thenDiscard;
     }
 
     public List<String> getCardIdList() {
@@ -28,4 +30,14 @@ public class DrawResult {
     public void setEventId(Integer eventId) {
         this.eventId = eventId;
     }
+
+    public Integer getThenDiscard() {
+        return thenDiscard;
+    }
+
+    public void setThenDiscard(Integer thenDiscard) {
+        this.thenDiscard = thenDiscard;
+    }
+
+    
 }

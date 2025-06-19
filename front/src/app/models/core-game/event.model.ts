@@ -360,6 +360,7 @@ export class EventGeneric extends EventBaseModel {
     baseRessource?:RessourceStock | RessourceStock[]
     cardIdToBuild?: PlayableCardModel
     drawResultList?: string[]
+	thenDiscard?: number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeQuantity?: number
 	addForestPoint?: number
@@ -367,6 +368,7 @@ export class EventGeneric extends EventBaseModel {
 	gainOceanNumber?: number
 	production?: RessourceStock | RessourceStock[]
 	increaseTr?: number
+	loadProductionCardList?: string[]
 }
 
 export class EventDeckQuery extends EventBaseModel {
@@ -378,6 +380,7 @@ export class EventDeckQuery extends EventBaseModel {
     drawDiscard?: Partial<DrawDiscard>
 	isCardProduction?: boolean
 	options?: DeckQueryOptionsEnum
+	drawThenDiscard?: boolean
 }
 
 export class EventWaiter extends EventBaseModel {
@@ -400,6 +403,7 @@ export class DrawEvent {
     waiterId!: number
 	isCardProduction: boolean = false
 	scanKeepOptions?: DeckQueryOptionsEnum
+	discardAfterDraw?: number
 }
 
 export class EventPhase extends EventBaseModel {

@@ -105,8 +105,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	loadingFinished(loading: boolean):void{
 		if(loading===true){return}
 	}
-	sendDrawNumber(): void {
-		this.rxStompService.publishDraw(2, -1, this.gameStateService.getClientStateDTO())
+	sendDrawNumber(drawNumber: number): void {
+		this.rxStompService.publishDraw(drawNumber, -1, this.gameStateService.getClientStateDTO())
 	}
 	sendReady(): void {
 		//this.websocket.sendReady(true)
@@ -151,7 +151,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: string[] = ['F05','F06']
+		let cardDrawList: string[] = ['43']
 
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())
@@ -239,5 +239,10 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	addParameter(index: number) {
 		this.gameStateService.addGlobalParameterStepsEOPtoClient({name:this.getParameterName(index), steps:1})
+	}
+	rapidfireDraw(){
+		for(let i = 0; i<10; i++){
+			this.sendDrawNumber(1)
+		}
 	}
 }

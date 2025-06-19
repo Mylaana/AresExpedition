@@ -315,6 +315,7 @@ export class EventHandler {
 						break
 					}
 					case(DiscardOptionsEnum.redraftedContracts):{
+						if(event.cardSelector.selectedList.length===0){break}
 						this.gameStateService.addEventQueue(
 							EventFactory.simple.draw(event.cardSelector.selectedList.length),
 							'first'
@@ -410,6 +411,14 @@ export class EventHandler {
 				this.gameStateService.addCardsToClientHand(event.drawResultList)
 				break
 			}
+			case('drawResultThenDiscard'):{
+				if(event.drawResultList===undefined){break}
+				this.gameStateService.addCardsToClientHand(event.drawResultList)
+				if(event.thenDiscard && event.thenDiscard>0){
+					this.gameStateService.addEventQueue(EventFactory.simple.discard(event.thenDiscard), 'first')
+				}
+				break
+			}
 			case('increaseGlobalParameter'):{
 				if(!event.increaseParameter){break}
 				this.gameStateService.addGlobalParameterStepsEOPtoClient(event.increaseParameter)
@@ -466,6 +475,11 @@ export class EventHandler {
 				this.gameStateService.addTr(event.increaseTr)
 				break
 			}
+			case('loadProductionPhaseCards'):{
+				if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
+				this.gameStateService.loadProductionPhaseCardList(event.loadProductionCardList)
+				break
+			}
 			default:{Logger.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}
@@ -487,6 +501,10 @@ export class EventHandler {
 				resolveType = 'scanKeepResult'
 				break
 			}
+			case('drawThenDiscard'):{
+				resolveType = 'drawResultThenDiscard'
+				break
+			}
 			default:{Logger.logError('Non mapped event in handler.finishEventDeckQuery: ', this.currentEvent)}
 		}
 
@@ -499,7 +517,9 @@ export class EventHandler {
 
 		let drawNumber = event.drawDiscard?.draw
 		if(drawNumber!=undefined && drawNumber>0){
-			this.gameStateService.addDrawQueue(DrawEventFactory.createDrawEvent(resolveType, drawNumber,event.id, event.isCardProduction))
+			this.gameStateService.addDrawQueue(
+				DrawEventFactory.createDrawEvent(resolveType, drawNumber,event.id, event.isCardProduction, event.drawThenDiscard?event.drawDiscard?.discard:0)
+			)
 		}
 		if(event.scanKeep!==undefined){
 			let scanKeep: ScanKeep = {scan:event.scanKeep?.scan?event.scanKeep?.scan:0, keep:event.scanKeep?.keep?event.scanKeep?.keep:0}
@@ -631,6 +651,10 @@ export class DrawEventHandler {
 				this.rxStompService.publishScanKeep({scan:event.drawCardNumber, keep: event.keepCardNumber??0}, event.waiterId, this.gameStateService.getClientStateDTO(), event.resolveEventSubType, event.scanKeepOptions)
 				break
 			}
+			case('drawResultThenDiscard'):{
+				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, event.discardAfterDraw)
+				break
+			}
 			default:{
 				console.error('UNMAPED DRAW QUERY RESULT TYPE: ',event.resolveEventSubType)
 			}
@@ -639,7 +663,7 @@ export class DrawEventHandler {
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
 		Logger.logEventResolution('resolving deck event: ',drawEvent.resolveEventSubType)
-		console.log('resolving drawevent with waiter id :', drawEvent.waiterId)
+		console.log('resolving drawevent with waiter id :', drawEvent)
 		switch(drawEvent.resolveEventSubType){
 			case('drawResult'):{
 				resultEvent = EventFactory.createGeneric(
@@ -675,6 +699,17 @@ export class DrawEventHandler {
 							selectionQuantity: drawEvent.keepCardNumber
 						},
 						scanKeepOptions:drawEvent.scanKeepOptions,
+						waiterId:drawEvent.waiterId
+					}
+				)
+				break
+			}
+			case('drawResultThenDiscard'):{
+				resultEvent = EventFactory.createGeneric(
+					'drawResultThenDiscard',
+					{
+						drawEventResult:drawEvent.drawResultCardList,
+						thenDiscard: drawEvent.discardAfterDraw,
 						waiterId:drawEvent.waiterId
 					}
 				)

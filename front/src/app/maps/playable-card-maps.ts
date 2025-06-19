@@ -126,7 +126,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 			]
 		: [],
 	//Redrafted Contracts
-	'49': () => [S.discardOptions(1, 'min', DiscardOptionsEnum.redraftedContracts)],
+	'49': () => [S.discardOptions(3, 'max', DiscardOptionsEnum.redraftedContracts)],
 	//Regolith Eaters
 	'50': (cardCode, _, option) => option === 1
 		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
@@ -181,8 +181,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		: [],
 	//Software Streamlining
 	'D11': () => [
-		S.draw(2),
-		S.discard(2)
+		S.drawThenDiscard(2,2),
 	],
 	//Virtual Employee Development
 	'D12': () => [S.upgradePhaseCard(1)],
@@ -565,7 +564,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Interplanetary Relations
 	'35': () => [S.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Interns
-	'36': () => [S.increaseResearchScanKeep({keep: 0, scan: 2})],
+	//'36': () => [S.increaseResearchScanKeep({keep: 0, scan: 2})],
+	'36': () => [S.increaseResearchScanKeep({keep: 10, scan: 0})],
 	//United Planetary Alliance
 	'60': () => [S.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Wood Burning Stoves
@@ -581,9 +581,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'69': () => [
 		S.addTR(2)],
 	//Business Contact
-	'70': () => [
-		S.draw(4),
-		S.discard(2)],
+	'70': () => [S.drawThenDiscard(4,2)],
 	//Comet
 	'73': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
@@ -617,7 +615,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addTR(1)],
 	//Invention Contest
 	'83': () => [
-		S.scanKeep({scan: 3, keep: 1})],
+		S.scanKeep({scan: 3, keep: 1}, DeckQueryOptionsEnum.inventionContest)],
 	//Investment Loan
 	'84': () => [
 		S.addRessource({name: 'megacredit', valueStock: 10}),
@@ -961,8 +959,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Microprocessor
 	'163': () => [
 		S.addProduction({ name: 'heat', valueStock: 3 }),
-		S.draw(2),
-		S.discard(1),
+		S.drawThenDiscard(2,1),
 	],
 	//Mine
 	'164': () => [
@@ -1129,10 +1126,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Exocorp
 	'D02': (clientState) => {
 		clientState.addSellCardValueMod(1)
-		return [S.upgradePhaseCard(1, [5])]
+		return [S.upgradePhaseCard(1, [4])]
 	},
 	//Sultira
-	'D04': () => [S.upgradePhaseCard(1, [1])],
+	'D04': () => [S.upgradePhaseCard(1, [0])],
 	//Exosuits
 	'D09': () => [S.upgradePhaseCard(1)],
 	//Fibrous Composite Material
@@ -1264,8 +1261,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Architecture Blueprints
 	'F09': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		S.draw(2),
-		S.discard(1)
+		S.drawThenDiscard(2,1),
 	],
 	//Bedrock Wellbore
 	'F10': () => [
@@ -1394,14 +1390,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.devTechs)
 	],
 	//Mai-Ni Productions
-	'CP05': () => [
+	'P16': () => [
 		S.specialBuilder(BuilderOption.maiNiProductions)
 	],
 	//Zetasel
-	'CP06': () => [
-		S.draw(5),
-		S.discard(4)
-	],
+	'CP06': () => [S.drawThenDiscard(5,4)],
 	//Point Luna
 	'CF1': () => [
 		S.addProduction({name:'titanium', valueStock:1})

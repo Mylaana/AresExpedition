@@ -134,13 +134,14 @@ public class Game {
 
     public List<String> drawCards(Integer drawNumber){
         ArrayList<String> result = new ArrayList<String>();
-
-        checkDeckSize(drawNumber);        
-        Integer cardsToDraw = Math.min(drawNumber, this.deck.size());
-
-        for(Integer i=0; i<cardsToDraw; i++){
-            result.add(this.deck.get(0));
-            this.deck.remove(0);
+        synchronized(deck){
+            checkDeckSize(drawNumber);        
+            Integer cardsToDraw = Math.min(drawNumber, this.deck.size());
+            
+            for(Integer i=0; i<cardsToDraw; i++){
+                result.add(this.deck.get(0));
+                this.deck.remove(0);
+            }
         }
 
         return result;
@@ -325,7 +326,11 @@ public class Game {
 
     public void setStartingHandCorporations() {
         for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
-            entry.getValue().setHandCorporations(drawCorporations(4));
+            Integer corpNumber = 4;
+            if(this.groupPlayerState.entrySet().size()==1){
+                corpNumber = 100;
+            }
+            entry.getValue().setHandCorporations(drawCorporations(corpNumber));
         }
     }
 
@@ -409,8 +414,8 @@ public class Game {
         }
     }
 
-    public void addEventDrawCardsToPlayer(String playerId, List<String> cards){
-        this.groupPlayerState.get(playerId).addEventDrawCards(cards);
+    public void addEventDrawCardsToPlayer(String playerId, List<String> cards, Integer thenDiscard){
+        this.groupPlayerState.get(playerId).addEventDrawCards(cards, thenDiscard);
     }
 
     public void addEventResearchCardsToPlayer(String playerId, List<String> cards, Integer keep){

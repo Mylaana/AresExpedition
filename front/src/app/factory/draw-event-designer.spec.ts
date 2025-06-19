@@ -19,6 +19,7 @@ describe('Service - Designers - Draw Event', () => {
                 expectedEvent.drawCardNumber = expectedDrawNumber
                 expectedEvent.resolveEventSubType = expectedResolveType
                 expectedEvent.waiterId = expectedWaiterId
+				expectedEvent.discardAfterDraw = 0
 
                 let event = DrawEventFactory.createDrawEvent(expectedResolveType, expectedDrawNumber, expectedWaiterId)
 

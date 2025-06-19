@@ -35,8 +35,11 @@ public class EventState {
         this.value = ocean.getBonuses();
     }
 
-    public static EventState addEventDrawCards(List<String> cards) {
-        return new EventState(EventStateTypeEnum.DRAW_CARDS, cards);
+    public static EventState addEventDrawCards(List<String> cards, Integer thenDiscard){
+        Map<String, Object> content = new HashMap<>();
+        content.put("cardIdList", cards);
+        content.put("thenDiscard", thenDiscard);
+        return new EventState(EventStateTypeEnum.DRAW_CARDS, content);
     }
 
     public static EventState addEventResearchCards(List<String> cards, Integer keep) {

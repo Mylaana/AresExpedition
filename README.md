@@ -46,23 +46,10 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
-Double activation count being ignored by multiple activation option cards (43), it seems to happen only with the lake (or other server syncing event?) happening   
-card production not being applied   
-Need to test all corps events at start   
-Upgrade phase card eventstate not saved   
-if research keep> scan, game locked ?   
-invention contest : UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: SCAN_KEEP_QUERY ?
-UNHANDLED SCANKEEP OPTION
-Phase selection can be rolledback   
+
+## Bug not found while testing :   
 race condition on backend resource query : can lead to drawing multiple times the same card !   
 VP scaling cards displayed points are locket at 0   
-switch card 49 to minimum 0   
-
-unsaved eventstate : 
-    - production
-    - increase scan/keep
-    - base builder
-    - action phase
 
 ## Must have for v1 :
 ### Refactoring

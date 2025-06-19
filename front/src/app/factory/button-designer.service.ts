@@ -25,6 +25,7 @@ export class ButtonDesigner{
 			case('scanKeepResult'):{startEnabled=false;break}
 			case('specialBuilder'):{startEnabled=true;break}
 			case('tagSelector'):{startEnabled=false;break}
+			case('waitingGroupReady'):{startEnabled=false;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
@@ -69,20 +70,6 @@ export class ButtonDesigner{
         switch(buttonRule){
 			//events related rules
             case('default'):{caption='default validation button';break}
-            case('planificationPhase'):{caption='$other_validate$';break}
-            case('upgradePhaseCards'):{caption='$other_validate$';break}
-            case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{caption='$other_validate$';break}
-            case('addRessourceToSelectedCard'):{caption='$other_validate$';break}
-            case('researchPhaseResult'):{caption='$other_validate$';break}
-            case('selectCardForcedSell'):{caption='$other_validate$';break}
-            case('selectCardOptionalSell'):{caption='$other_validate$';break}
-            case('discardCards'):{caption='$other_validate$';break}
-            case('scanKeepResult'):{caption='$other_validate$';break}
-			case('selectStartingHand'):{caption='$other_validate$';break}
-			case('selectCorporation'):{caption='$other_validate$';break}
-			case('actionPhaseActivator'):{caption='$other_validate$';break}
-			case('specialBuilder'):{caption='$other_validate$';break}
-			case('tagSelector'):{caption='$other_validate$';break}
 
 			//button name related rules
 			case('sellOptionalCard'):{caption='$other_sellcard$';break}
@@ -115,7 +102,7 @@ export class ButtonDesigner{
 			//create game
 			case('createGamePlayerNumber'):{caption='123456'; break}
 
-            default:{caption='';break}
+            default:{caption='$other_validate$';break}
         }
         return caption
     }
