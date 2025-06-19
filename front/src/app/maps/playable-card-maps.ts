@@ -1194,7 +1194,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addProduction([
 			{ name: 'card', valueStock: 2 },
 			{ name: 'steel', valueStock: 1 }
-		])
+		]),
+		S.upgradePhaseCard(1)
 	],
 	//Hydroponic Gardens
 	'D30': () => [
