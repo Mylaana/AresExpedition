@@ -40,6 +40,10 @@ export class ProjectCardScalingProductionsService {
 				if(playedCardList.includes('203')){
 					scalingProductions += this.getCardScalingProduction('203', tagState)
 				}
+				//Diverse Habitats
+				if(playedCardList.includes('P03')){
+					scalingProductions += this.getCardScalingProduction('P03', tagState)
+				}
 				break
 			}
 			case('heat'):{
@@ -65,10 +69,6 @@ export class ProjectCardScalingProductionsService {
 				//Worms
 				if(playedCardList.includes('207')){
 					scalingProductions += this.getCardScalingProduction('207', tagState)
-				}
-				//Diverse Habitats
-				if(playedCardList.includes('P03')){
-					scalingProductions += this.getCardScalingProduction('P03', tagState)
 				}
 				break
 			}
