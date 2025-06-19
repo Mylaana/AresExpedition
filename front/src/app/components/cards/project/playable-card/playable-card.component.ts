@@ -27,6 +27,7 @@ import { CardBuildable } from '../../../../interfaces/card.interface';
 import { CardActivationListComponent } from '../card-blocks/card-activation-list/card-activation-list.component';
 import { ProjectFilter } from '../../../../interfaces/global.interface';
 import { PlayableCard } from '../../../../factory/playable-card.factory';
+import { CardDisabledForegroundComponent } from '../card-blocks/card-disabled-foreground/card-disabled-foreground.component';
 
 @Component({
     selector: 'app-playable-card',
@@ -45,7 +46,8 @@ import { PlayableCard } from '../../../../factory/playable-card.factory';
         CardTagsZoneComponent,
         CardTitleComponent,
         CardStartingMegacreditsComponent,
-		CardStatusComponent
+		CardStatusComponent,
+		CardDisabledForegroundComponent
     ],
     templateUrl: './playable-card.component.html',
     styleUrl: './playable-card.component.scss',
