@@ -256,7 +256,7 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	//Convert Forest - Ecoline
 	'ConvertForest': (state) => state.getTriggersIdActive().includes('C2') ? 7 : 8,
 	//Buy Forest - Standard Technology
-	'buyForest': (state) => state.getTriggersIdActive().includes('55') ? 10 : 14,
+	'buyForest': (state) => state.getTriggersIdActive().includes('55') ? 16 : 20,
 	//Buy Infrastructure - Standard Technology
 	'buyInfrastructure': (state) => state.getTriggersIdActive().includes('55') ? 11 : 15,
 	//Buy Ocean - Standard Technology
