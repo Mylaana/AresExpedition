@@ -564,8 +564,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Interplanetary Relations
 	'35': () => [S.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Interns
-	//'36': () => [S.increaseResearchScanKeep({keep: 0, scan: 2})],
-	'36': () => [S.increaseResearchScanKeep({keep: 10, scan: 0})],
+	'36': () => [S.increaseResearchScanKeep({keep: 0, scan: 2})],
 	//United Planetary Alliance
 	'60': () => [S.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Wood Burning Stoves

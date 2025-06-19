@@ -332,7 +332,6 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = false
 			event.scanKeepOptions = options
-			event.cardSelector.filter = {type: ProjectFilterNameEnum.hasTagPlantOrScience}
 			event.waiterId = waiter
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event

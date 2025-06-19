@@ -61,6 +61,7 @@ export class EventStateService{
 		}
 	}
 	public createFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
+		console.log('eventstate list: ', eventStateList)
 		let newEvents: EventBaseModel[] = []
 		let remainingStates: EventStateDTO[] = []
 		let treated: boolean
