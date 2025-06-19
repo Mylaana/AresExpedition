@@ -181,8 +181,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		: [],
 	//Software Streamlining
 	'D11': () => [
-		S.draw(2),
-		S.discard(2)
+		S.drawThenDiscard(2,2),
 	],
 	//Virtual Employee Development
 	'D12': () => [S.upgradePhaseCard(1)],
@@ -582,9 +581,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'69': () => [
 		S.addTR(2)],
 	//Business Contact
-	'70': () => [
-		S.draw(4),
-		S.discard(2)],
+	'70': () => [S.drawThenDiscard(4,2)],
 	//Comet
 	'73': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
@@ -962,8 +959,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Microprocessor
 	'163': () => [
 		S.addProduction({ name: 'heat', valueStock: 3 }),
-		S.draw(2),
-		S.discard(1),
+		S.drawThenDiscard(2,1),
 	],
 	//Mine
 	'164': () => [
@@ -1130,7 +1126,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Exocorp
 	'D02': (clientState) => {
 		clientState.addSellCardValueMod(1)
-		return [S.upgradePhaseCard(1, [5])]
+		return [S.upgradePhaseCard(1, [4])]
 	},
 	//Sultira
 	'D04': () => [S.upgradePhaseCard(1, [0])],
@@ -1265,8 +1261,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Architecture Blueprints
 	'F09': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		S.draw(2),
-		S.discard(1)
+		S.drawThenDiscard(2,1),
 	],
 	//Bedrock Wellbore
 	'F10': () => [
@@ -1399,10 +1394,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.specialBuilder(BuilderOption.maiNiProductions)
 	],
 	//Zetasel
-	'CP06': () => [
-		S.draw(5),
-		S.discard(4)
-	],
+	'CP06': () => [S.drawThenDiscard(5,4)],
 	//Point Luna
 	'CF1': () => [
 		S.addProduction({name:'titanium', valueStock:1})

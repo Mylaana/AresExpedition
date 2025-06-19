@@ -19,6 +19,7 @@ export interface EventStateContentOceanFlippedDTO extends EventStateContentDTO {
 }
 export interface EventStateContentDrawResultDTO extends EventStateContentDTO {
 	cl: string[]
+	td: number
 }
 export interface EventStateContentDiscardDTO extends EventStateContentDTO {
 	d: number
@@ -29,6 +30,10 @@ export interface EventStateContentResearchCardsQueriedDTO extends EventStateCont
 }
 export interface EventStateContentDrawQueryDTO extends EventStateContentDTO {
 	d: number
+}
+export interface EventStateContentDrawQueryThenDiscardDTO extends EventStateContentDTO {
+	dr: number
+	di: number
 }
 export interface EventStateContentScanKeepQueriedDTO extends EventStateContentDTO {
 	keep: number

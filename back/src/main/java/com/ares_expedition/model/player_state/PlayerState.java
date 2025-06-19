@@ -304,8 +304,8 @@ public class PlayerState {
         this.eventState.addEventOceans(oceans);
     }
 
-    public void addEventDrawCards(List<String> cards){
-        this.eventState.addEventDrawCards(cards);
+    public void addEventDrawCards(List<String> cards, Integer thenDiscard){
+        this.eventState.addEventDrawCards(cards, thenDiscard);
     }
 
     public void addEventResearchCards(List<String> cards, Integer keep){

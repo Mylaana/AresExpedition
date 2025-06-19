@@ -414,8 +414,8 @@ public class Game {
         }
     }
 
-    public void addEventDrawCardsToPlayer(String playerId, List<String> cards){
-        this.groupPlayerState.get(playerId).addEventDrawCards(cards);
+    public void addEventDrawCardsToPlayer(String playerId, List<String> cards, Integer thenDiscard){
+        this.groupPlayerState.get(playerId).addEventDrawCards(cards, thenDiscard);
     }
 
     public void addEventResearchCardsToPlayer(String playerId, List<String> cards, Integer keep){

@@ -29,6 +29,7 @@ interface CreateEventOptionsGeneric {
     scanKeep?: ScanKeep
     card?: PlayableCardModel
     drawEventResult?:string[]
+	thenDiscard?: number
     waiterId?:number
     phaseCardUpgradeList?: number[]
     phaseCardUpgradeNumber?: number
@@ -43,14 +44,17 @@ interface CreateEventOptionsDeckQuery {
     scanKeep?: Partial<ScanKeep>,
 	isCardProduction?: boolean,
 	scanKeepOptions?: DeckQueryOptionsEnum
+	drawThenDiscard?: boolean
 }
 
 function draw(drawNumber: number): EventBaseModel {
-	console.log(drawNumber)
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
 function discard(discardNumber: number): EventComplexCardSelector {
 	return EventFactory.createCardSelectorComplex("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
+}
+function drawThenDiscard(drawNumber: number, discard: number): EventBaseModel {
+	return EventFactory.createDeckQueryEvent('drawThenDiscard', {drawDiscard:{draw:drawNumber,discard:discard}, drawThenDiscard: true})
 }
 function discardOptions(discardNumber: number, treshold: MinMaxEqualType, discardOptions: DiscardOptionsEnum): EventComplexCardSelector {
 	return EventFactory.createCardSelectorComplex("discardCards", {
@@ -124,6 +128,7 @@ const SimpleEvent = {
 	draw,
 	discard,
 	discardOptions,
+	drawThenDiscard,
 	upgradePhaseCard,
 	increaseGlobalParameter,
 	addRessource,
@@ -249,7 +254,6 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
-	console.log(event, `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`)
 
 	return event
 }
@@ -547,7 +551,15 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         case('upgradePhaseCards'):{
             event.title = 'Select a phase card to upgrade'
             event.autoFinalize = false
-            event.phaseCardUpgradeList = args?.phaseCardUpgradeList
+			let phaseList: number[] | undefined = args?.phaseCardUpgradeList
+			for(let phase of phaseList??[]){
+				if(phase>=5 || phase <0){
+					console.error('UNHANDLED PHASE INDEX INPUT: ', phase)
+					phaseList = undefined
+					break
+				}
+			}
+            event.phaseCardUpgradeList = phaseList
             event.phaseCardUpgradeQuantity = args?.phaseCardUpgradeNumber
             break
         }
@@ -601,6 +613,12 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 			event.loadProductionCardList = args?.loadProductionCardList
 			break
 		}
+		case('drawResultThenDiscard'):{
+            event.drawResultList = args?.drawEventResult
+            event.waiterId = args?.waiterId
+			event.thenDiscard = args?.thenDiscard??0
+            break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
     }
     event.button = ButtonDesigner.createEventMainButton(event.subType)
@@ -625,6 +643,11 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
             event.scanKeep = args?.scanKeep
             break
         }
+		case('drawThenDiscard'):{
+			event.drawDiscard = args?.drawDiscard
+			event.drawThenDiscard = true
+			break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
 

@@ -23,8 +23,8 @@ export class WebsocketQueryMessageFactory{
         }
         return message
     }
-    public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO, isCardProduction: boolean = false): PlayerMessage {
-        let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto, isCardProduction: isCardProduction}
+    public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO, isCardProduction: boolean = false, thenDiscard: number = 0): PlayerMessage {
+        let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto, isCardProduction: isCardProduction, thenDiscard: thenDiscard}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
     public static createScanKeepQuery(scanKeep: ScanKeep, eventId: number, dto: PlayerStateDTO, resultType: EventUnionSubTypes, options?:DeckQueryOptionsEnum): PlayerMessage {

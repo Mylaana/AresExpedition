@@ -6,6 +6,7 @@ export enum EventStateTypeEnum {
 	cardActivator = 'CARD_ACTIVATOR',
 	drawCards = 'DRAW_CARDS',
 	drawCardsUnqueried = 'DRAW_CARDS_UNQUERIED',
+	drawThenDiscardUnqueried = 'DRAW_THEN_DISCARD_UNQUERIED',
 	productionCards = 'PRODUCTION_CARDS',
 	addProduction = 'ADD_PRODUCTION',
 	researchCardsQueried = 'RESEARCH_CARDS_QUERIED',

@@ -30,4 +30,8 @@ public class DrawMessageDTO extends BaseMessageInputDTO<DrawContentDTO> {
     public Integer getEventId(){
         return content.getEventId();
     }
+
+    public Integer getThenDiscard(){
+        return this.content.getThenDiscard();
+    }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { EventStateAddProduction, EventStateAddRessourceToPlayer, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateIncreaseResearchScanKeep, EventStateUpgradePhase } from "../interfaces/event-state.interface";
+import { EventStateAddProduction, EventStateAddRessourceToPlayer, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateIncreaseResearchScanKeep, EventStateUpgradePhase } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
@@ -62,10 +62,9 @@ export class EventStateService{
 	}
 	public createFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
 		let newEvents: EventBaseModel[] = []
+		let remainingStates: EventStateDTO[] = []
 		let treated: boolean
-
-		//loops backwards to preserve saved order of events
-		for (let i = eventStateList.length - 1; i >= 0; i--) {
+		for (let i=0; i<eventStateList.length; i++) {
 			let state = eventStateList[i]
 			treated = true
 			switch (state.t){
@@ -75,9 +74,14 @@ export class EventStateService{
 				}
 				case(EventStateTypeEnum.drawCards):{
 					let content: EventStateContentDrawResultDTO =  {
-						cl: state.v
+						cl: state.v['cardIdList'],
+						td: state.v['thenDiscard']
 					}
-					newEvents.push(EventFactory.createGeneric('drawResult', {drawEventResult:content.cl}))
+					if(content.td===0){
+						newEvents.push(EventFactory.createGeneric('drawResult', {drawEventResult:content.cl}))
+					} else{
+						newEvents.push(EventFactory.createGeneric('drawResultThenDiscard', {drawEventResult:content.cl, thenDiscard: content.td}))
+					}
 					break
 				}
 				case(EventStateTypeEnum.discard):{
@@ -169,13 +173,22 @@ export class EventStateService{
 					newEvents.push(EventFactory.simple.addRessource(content.r))
 					break
 				}
+				case(EventStateTypeEnum.drawThenDiscardUnqueried):{
+					let content: EventStateContentDrawQueryThenDiscardDTO = {
+						dr: state.v['dr'],
+						di: state.v['di']
+					}
+					newEvents.push(EventFactory.simple.drawThenDiscard(content.dr, content.di))
+					break
+				}
 				default:{treated = false}
 			}
-			if(treated){eventStateList.splice(i, 1)}
+			if(treated===false){remainingStates.push(state)}
 		}
-		for(let e of eventStateList.filter((el) => el.o===EventStateOriginEnum.create)){
+		for(let e of remainingStates.filter((el) => el.o===EventStateOriginEnum.create)){
 			console.error('UNTREATED CREATE EVENTSTATE: ', e)
 		}
+		eventStateList = remainingStates
 		return newEvents
 	}
 	private createEventOceanFlipped(content: EventStateContentOceanFlippedDTO): EventBaseModel[] {

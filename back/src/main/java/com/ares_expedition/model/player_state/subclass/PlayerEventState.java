@@ -40,8 +40,8 @@ public class PlayerEventState {
         }
     }
 
-    public void addEventDrawCards(List<String> cards) {
-        this.events.add(EventState.addEventDrawCards(cards));
+    public void addEventDrawCards(List<String> cards, Integer thenDiscard) {
+        this.events.add(EventState.addEventDrawCards(cards, thenDiscard));
     }
 
     public void addEventResearchCards(List<String> cards, Integer keep) {

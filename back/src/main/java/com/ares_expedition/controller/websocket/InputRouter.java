@@ -192,14 +192,15 @@ public class InputRouter {
         if (drawNumber == 0) {
             return;
         }
+        Integer thenDiscard = query.getThenDiscard();
         gameController.setPlayerState(
             query.getGameId(),
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum());
+        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), thenDiscard);
         wsOutput.sendPushToPlayer(
-            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId())),
+            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId(), thenDiscard)),
             query.getPlayerId()
             );
     }
