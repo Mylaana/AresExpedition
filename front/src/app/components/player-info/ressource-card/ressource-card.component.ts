@@ -17,6 +17,7 @@ export class RessourceCardComponent implements OnInit {
 	//@Input() ressourceCard!: RessourceCardModel;
 	@Input() playerId!: number;
 	@Input() ressource!: RessourceInfo;
+	@Input() handSize!: number
 	_production!: Production
 
 	imageUrl!: string;

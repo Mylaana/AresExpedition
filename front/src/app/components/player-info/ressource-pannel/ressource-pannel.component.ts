@@ -16,6 +16,7 @@ import { myUUID } from '../../../types/global.type';
 export class RessourcePannelComponent {
   @Input() playerId!: myUUID;
   @Input() ressource!: RessourceInfo[];
+  @Input() handSize!: number
 
   ngOnInit(): void {
 

@@ -3,7 +3,8 @@
         <img [ngClass]="{'img-card': ressource.name=='card'}" [src]="imageUrl" [alt]="ressource.name">
     </div>
     <div *ngIf="ressource.hasStock" class="box-stock">
-        <p> {{ ressource.valueStock }}</p>
+        <p *ngIf="ressource.name!='card'"> {{ ressource.valueStock }}</p>
+		<p *ngIf="ressource.name==='card'"> {{ handSize }}</p>
     </div>
     <div *ngIf="ressource.valueMod" class="wrapper-ressource-mod">
         <div class="box-ressource-mod-icon center">
