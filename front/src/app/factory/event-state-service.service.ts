@@ -54,6 +54,12 @@ export class EventStateService{
 			case(EventStateTypeEnum.cardActivator):{
 				let eventActivator: EventCardActivator = event as EventCardActivator
 				eventActivator.activationLog = dto.v
+				let doubleActivation = 0
+				for(let key in dto.v){
+					doubleActivation += dto.v[key]>1?1:0
+
+				}
+				eventActivator.doubleActivationCount = doubleActivation
 				clientState.loadEventStateActivator(dto)
 				break
 			}
