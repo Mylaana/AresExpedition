@@ -16,9 +16,11 @@
 			<div *ngIf="displayPhaseUpgradeButton.displayed" class="wrapper-event-button--small">
 				<app-non-event-button  [button]="displayPhaseUpgradeButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeButton)"></app-non-event-button>
 			</div>
-			<div *ngIf="displayPhaseUpgradeButton.displayed" class="wrapper-event-button--small">
-				<app-non-event-button  [button]="killCard" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(killCard)"></app-non-event-button>
-			</div>
+			<!--
+				<div *ngIf="displayPhaseUpgradeButton.displayed" class="wrapper-event-button--small">
+					<app-non-event-button  [button]="killCard" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(killCard)"></app-non-event-button>
+				</div>
+			-->
 		</div>
 		<div class="right-command">
 		</div>

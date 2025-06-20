@@ -159,6 +159,10 @@ export class PlayableCardModel{
 				if(this.cardType==='redProject'){return true}
 				break
 			}
+			case(ProjectFilterNameEnum.developmentPhaseSecondBuilder):{
+				if(this.cardType!='greenProject'){return false}
+				return this.costInitial<=12
+			}
         }
         return false
     }

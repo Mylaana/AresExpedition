@@ -387,6 +387,7 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
 }
 function generateCardBuilder(builderId:number, option?:BuilderOption): CardBuilder {
     let builder = new CardBuilder
+	console.log(option)
     builder.addButtons(ButtonDesigner.createEventCardBuilderButton(builderId, option))
     option?builder.setOption(option):null
     return builder
@@ -398,6 +399,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
     event.subType = subType
     event.cardBuilder = []
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+	event.builderType = builderType
 
     let buildDiscountValue = 0
     switch(builderType){
@@ -417,9 +419,8 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
         }
         case('development_second_card'):{
             buildDiscountValue = 3
-            for(let i=0; i<=1; i++){
-                event.cardBuilder.push(generateCardBuilder(i))
-            }
+			event.cardBuilder.push(generateCardBuilder(0))
+			event.cardBuilder.push(generateCardBuilder(1, BuilderOption.developmentSecondBuilder))
             break
         }
 

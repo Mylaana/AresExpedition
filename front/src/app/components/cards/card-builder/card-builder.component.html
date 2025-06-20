@@ -2,7 +2,7 @@
 	<div class="wrapper-card-builder ares-background ares-border">
 		<div class="inner-decoration--side"></div>
 		<div class="selected-card-zone"
-			[ngClass]="'filter-type-'+projectFilter?.type"
+			[ngClass]="getBackground()"
 			[class.locked]="cardBuilder.getBuilderIsLocked()">
 			<app-playable-card-list
 				*ngIf="cardBuilder.getSelectedCard()"
@@ -39,4 +39,3 @@
 		</div>
 	</div>
 </div>
-<p>{{option |json}}</p>

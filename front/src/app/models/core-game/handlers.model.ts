@@ -16,7 +16,7 @@ import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { PlayableCard } from "../../factory/playable-card.factory";
 
 @Injectable()
@@ -64,6 +64,14 @@ export class EventHandler {
 				let card = event.getCardToBuildId()
 				if(card===undefined){return}
 				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
+				if(event.builderType==='development_second_card'){
+					console.log('second builder lets go')
+					event.cardBuilder[1].setFirstCardBuilt()
+					event.cardSelector.filter = {type:ProjectFilterNameEnum.developmentPhaseSecondBuilder}
+					event.title = 'Play a second green card with a printed cost of 12MC or less.'
+					event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList({type:ProjectFilterNameEnum.developmentPhaseSecondBuilder})
+					console.log(event)
+				}
 				break
 			}
 			case(BuilderOption.drawCard):{

@@ -29,6 +29,7 @@ export class PhaseBuilderComponent{
 	public onEventCardBuilderListButtonClicked(output: any){
 		this.cardBuilderButtonClicked.emit(output)
 		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
+		this.cardListSelector.updateCardList()
 	}
 	public onUpdateSelectedCardList(output: any){
 		this.updateSelectedCardList.emit(output)

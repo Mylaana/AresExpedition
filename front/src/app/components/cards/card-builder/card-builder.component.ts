@@ -5,7 +5,9 @@ import { PlayableCardListComponent } from '../project/playable-card-list/playabl
 import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
 import { ProjectFilter } from '../../../interfaces/global.interface';
-import { BuilderOption } from '../../../enum/global.enum';
+import { BuilderOption, ProjectFilterNameEnum } from '../../../enum/global.enum';
+
+type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white'
 
 @Component({
     selector: 'app-card-builder',
@@ -33,5 +35,21 @@ export class CardBuilderComponent{
 	}
 	public hasOptionButton(): boolean {
 		return [BuilderOption.drawCard, BuilderOption.gain6MC].includes(this.cardBuilder.getOption())
+	}
+	public getBackground(): BuilderBackgroundColor {
+		switch(this.projectFilter?.type){
+			case(ProjectFilterNameEnum.blueOrRedProject):{
+				return 'bluered'
+			}
+			case(ProjectFilterNameEnum.developmentPhaseSecondBuilder):
+			case(ProjectFilterNameEnum.green9MCFree):
+			case(ProjectFilterNameEnum.greenProject):{
+				return 'green'
+			}
+
+			case(ProjectFilterNameEnum.blueProject):
+				return 'blue'
+		}
+		return 'white'
 	}
 }
