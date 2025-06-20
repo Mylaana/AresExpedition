@@ -29,7 +29,6 @@ export class SettingsComponent {
 		this.closeSettings.emit()
 	}
 	public onButtonClicked(button: NonEventButton){
-		console.log('settings button :', button.name)
 		switch(button.name){
 			case('settingToggleDebug'):{
 				this.gameParam.toggleDebug()

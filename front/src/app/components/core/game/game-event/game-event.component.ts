@@ -177,7 +177,6 @@ export class GameEventComponent {
 		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
-		console.log(button)
 		switch(button.name){
 			case('sellOptionalCard'):{
 				this.gameStateService.addEventQueue(EventFactory.createCardSelector('selectCardOptionalSell'), 'first')

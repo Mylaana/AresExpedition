@@ -341,13 +341,7 @@ export class GameState{
     }
 
     cleanAndNextDrawQueue(): void{
-        let newDrawQueue: DrawEvent[] = [];
-        //clean draw queue
-        for(let drawEvent of this.drawQueue.getValue()){
-            if(drawEvent.finalized!=true){
-                newDrawQueue.push(drawEvent)
-            }
-        }
+        let newDrawQueue: DrawEvent[] = this.drawQueue.getValue().filter((e) => e.finalized!=true);
         this.drawQueue.next(newDrawQueue)
     }
 	/**

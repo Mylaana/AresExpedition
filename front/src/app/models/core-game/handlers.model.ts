@@ -635,8 +635,8 @@ export class DrawEventHandler {
 		}
 		if(drawQueue[0].served===false){return}
 		let event = drawQueue[0]
-		this.resolveDrawEvent(event)
 		event.finalized = true
+		this.resolveDrawEvent(event)
 		this.gameStateService.cleanAndNextDrawQueue()
 	}
 	private sendWsDrawQuery(event: DrawEvent){
