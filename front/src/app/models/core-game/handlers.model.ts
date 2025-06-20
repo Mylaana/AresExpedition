@@ -301,6 +301,7 @@ export class EventHandler {
 
 				switch(event.discardOptions){
 					case(DiscardOptionsEnum.marsUniversity):{
+						if(event.cardSelector.selectedList.length===0){break}
 						let clientState = this.gameStateService.getClientState()
 						let newEvents = PlayableCard.getOnTriggerredEvents(
 								'ON_TRIGGER_RESOLUTION',
