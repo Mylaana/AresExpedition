@@ -47,10 +47,6 @@ Backend: Junit
 ## /!\Critical BUG/!\ :
 Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
 
-## Bug not found while testing :   
-race condition on backend resource query : can lead to drawing multiple times the same card !   
-VP scaling cards displayed points are locket at 0   
-
 ## Must have for v1 :
 ### Refactoring
 Rework Buildable system in playableCardComponent   

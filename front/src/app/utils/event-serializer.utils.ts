@@ -1,6 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateAddProduction, EventStateIncreaseResearchScanKeep, EventStateUpgradePhase, EventStateAddRessourceToPlayer, EventStateContentDrawQueryThenDiscardDTO } from "../interfaces/event-state.interface"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGeneric } from "../interfaces/event-state.interface"
 import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
@@ -133,17 +133,6 @@ function eventQueueToJson(events: EventBaseModel[]): EventStateDTO[] {
 }
 function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 	switch(event.subType){
-		case('addProduction'):{
-			if(!event.baseRessource){return}
-			let content: EventStateAddProduction = {
-				p: event.baseRessource
-			}
-			return {
-				o: EventStateOriginEnum.create,
-				t: EventStateTypeEnum.addProduction,
-				v: content
-			}
-		}
 		case('increaseResearchScanKeep'):{
 			if(!event.increaseResearchScanKeep){return}
 			if(event.increaseResearchScanKeep.scan===0 && event.increaseResearchScanKeep.keep===0){return}
@@ -156,26 +145,25 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 				v: content
 			}
 		}
-		case('upgradePhaseCards'):{
-			if(!event.phaseCardUpgradeQuantity || event.phaseCardUpgradeQuantity===0){return}
-			let content: EventStateUpgradePhase = {
+		case('increaseGlobalParameter'):
+		case('addForestPointAndOxygen'):
+		case('addTr'):
+		case('addRessourceToPlayer'):
+		case('upgradePhaseCards'):
+		case('addProduction'):
+		{
+			let content: EventStateGeneric = {
+				igp: event.increaseParameter,
+				tr: event.increaseTr,
+				fo: event.addForestPoint,
+				r: event.baseRessource,
 				u: event.phaseCardUpgradeQuantity??0,
-				l: event.phaseCardUpgradeList
+				l: event.phaseCardUpgradeList,
+				p: event.baseRessource
 			}
 			return {
 				o: EventStateOriginEnum.create,
-				t: EventStateTypeEnum.upgradePhase,
-				v: content
-			}
-		}
-		case('addRessourceToPlayer'):{
-			if(!event.baseRessource){return}
-			let content: EventStateAddRessourceToPlayer = {
-				r: event.baseRessource
-			}
-			return {
-				o: EventStateOriginEnum.create,
-				t: EventStateTypeEnum.addRessourceToPlayer,
+				t: EventStateTypeEnum.generic,
 				v: content
 			}
 		}
