@@ -871,6 +871,7 @@ class PhaseResolveHandler {
 			}
 			case('action_scan_cards'):{
 				activatorEvent.doubleActivationMaxNumber = 1
+				activatorEvent.hasScan = true
 				events.push(activatorEvent)
 				break
 			}

@@ -94,6 +94,8 @@ export class EventCardActivator extends EventBaseCardSelector {
     activationLog: {[key: string]: number } = {}
 	doubleActivationMaxNumber!: number
 	doubleActivationCount: number = 0
+	scanUsed: boolean = false
+	hasScan: boolean = false
 	override hasCardActivator(): boolean {return true}
 }
 

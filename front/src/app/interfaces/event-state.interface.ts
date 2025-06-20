@@ -67,3 +67,9 @@ export interface BuilderStatusDTO {
 	l: boolean,
 	cc: string | undefined
 }
+export interface EventStateActivator extends EventStateContentDTO {
+	cl: {[key: string]: number}, //cardList
+	ca: number //current doubleActivation count
+	ma: number //max activation
+	su: boolean //scan used
+}

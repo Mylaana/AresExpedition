@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGeneric, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
+import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGeneric, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
@@ -53,14 +53,18 @@ export class EventStateService{
 			}
 			case(EventStateTypeEnum.cardActivator):{
 				let eventActivator: EventCardActivator = event as EventCardActivator
-				eventActivator.activationLog = dto.v
-				let doubleActivation = 0
-				for(let key in dto.v){
-					doubleActivation += dto.v[key]>1?1:0
-
+				let content: EventStateActivator = {
+					cl: dto.v['cl'],
+					ca: dto.v['ca'],
+					ma: dto.v['ma'],
+					su: dto.v['su']
 				}
-				eventActivator.doubleActivationCount = doubleActivation
-				clientState.loadEventStateActivator(dto)
+				eventActivator.activationLog = content.cl
+				eventActivator.doubleActivationCount = content.ca
+				eventActivator.doubleActivationMaxNumber = content.ma
+				eventActivator.scanUsed = content.su
+
+				clientState.loadEventStateActivator(content)
 				break
 			}
 			default:{

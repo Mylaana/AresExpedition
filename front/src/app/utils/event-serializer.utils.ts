@@ -1,6 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGeneric } from "../interfaces/event-state.interface"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGeneric, EventStateActivator } from "../interfaces/event-state.interface"
 import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
@@ -49,10 +49,16 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 	}
 }
 function eventActivatorToJson(event: EventCardActivator): EventStateDTO | undefined {
+	let content: EventStateActivator = {
+		cl: event.activationLog,
+		ca: event.doubleActivationCount,
+		ma: event.doubleActivationMaxNumber,
+		su: event.scanUsed
+	}
 	return {
 		o: EventStateOriginEnum.load,
 		t: EventStateTypeEnum.cardActivator,
-		v: event.activationLog
+		v: content
 	}
 }
 function eventDeckQueryToJson(event: EventDeckQuery): EventStateDTO | undefined {

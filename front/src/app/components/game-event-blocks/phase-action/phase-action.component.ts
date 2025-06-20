@@ -8,7 +8,7 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
 import { EventBaseModel, EventCardActivator } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
-import { GlobalParameterNameEnum } from '../../../enum/global.enum';
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event factory/event-factory';
 import { PlayableCard } from '../../../factory/playable-card.factory';
@@ -53,6 +53,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => {this.onStateUpdate(state)})
 		this._actionEvent = this.event as EventCardActivator
+		this.applyPhaseCardBonusIfRelevant()
 		this.updateButtonState()
 	}
 	ngAfterViewInit(): void {
@@ -99,6 +100,12 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	updateEndPhaseButton(button: EventMainButton){
 		let finishPhaseButtonEnabled = (this._heatStock>=8  || this._plantStock>=8 || (this._heatStock>=5  && this._plantStock>=3)) === false
 		button.updateEnabled(finishPhaseButtonEnabled)
+	}
+	applyPhaseCardBonusIfRelevant() {
+		if(this._actionEvent.hasScan===false || this._actionEvent.scanUsed){return}
+		console.log(this._actionEvent)
+		this._actionEvent.scanUsed=true
+		this.gameStateService.addEventQueue(EventFactory.simple.scanKeep({scan:3, keep:1}, DeckQueryOptionsEnum.actionPhaseScan), 'first')
 	}
 	onClick(button: NonEventButton): void {
 		let newEvents: EventBaseModel[] = []
