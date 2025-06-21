@@ -157,6 +157,9 @@ export class WebsocketHandler {
 	private handleMessageSelectStartingHand(content: WsGameState){
 		this.gameStateService.reset()
 		this.gameStateService.clearEventQueue()
+		this.gameStateService.initializeGroupReady(
+			WebsocketResultMessageFactory.inputToGroupReady(content.groupReady),
+			WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setSelectStartingHandEvents()
