@@ -261,6 +261,8 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	'buyOcean': (state) => state.getTriggersIdActive().includes('55') ? 12 : 16,
 	//Buy Temperature - Standard Technology
 	'buyTemperature': (state) => state.getTriggersIdActive().includes('55') ? 10 : 14,
+	//Buy Temperature - Standard Technology
+	'buyUpgrade': (state) => state.getTriggersIdActive().includes('55') ? 14 : 18,
 }
 export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: PlayerStateModel) => string> = {
 	//Aquifer Pumping
@@ -303,11 +305,12 @@ export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: Playe
 	'P23': (state) => `$ressource_megacreditvoid_${getScaling('P23', state)}$: $other_temperature$`,
 
 	//SPECIAL
-	'ConvertForest': (state) => `${getScaling('ConvertForest', state)}$ressource_plant$ $other_arrow$ $other_forest$`,
-	'buyForest': (state) => `$ressource_megacreditvoid_${getScaling('buyForest', state)}$ $other_arrow$ $other_forest$`,
-	'buyInfrastructure': (state) => `$ressource_megacreditvoid_${getScaling('buyInfrastructure', state)}$ $other_arrow$ $skipline$ $other_infrastructure$ + $ressource_card$`,
-	'buyOcean': (state) => `$ressource_megacreditvoid_${getScaling('buyOcean', state)}$ $other_arrow$ $other_ocean$`,
-	'buyTemperature': (state) => `$ressource_megacreditvoid_${getScaling('buyTemperature', state)}$ $other_arrow$$other_temperature$`,
+	'ConvertForest': (state) => `${getScaling('ConvertForest', state)}$ressource_plant$: $other_forest$`,
+	'buyForest': (state) => `$ressource_megacreditvoid_${getScaling('buyForest', state)}$: $other_forest$`,
+	'buyInfrastructure': (state) => `$ressource_megacreditvoid_${getScaling('buyInfrastructure', state)}$: $other_infrastructure$ + $ressource_card$`,
+	'buyOcean': (state) => `$ressource_megacreditvoid_${getScaling('buyOcean', state)}$: $other_ocean$`,
+	'buyTemperature': (state) => `$ressource_megacreditvoid_${getScaling('buyTemperature', state)}$: $other_temperature$`,
+	'buyUpgrade': (state) => `$ressource_megacreditvoid_${getScaling('buyUpgrade', state)}$: $other_upgrade$`,
 }
 export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: ActivationOption, clientState: PlayerStateModel) => boolean> = {
 	//Aquifer Pumping

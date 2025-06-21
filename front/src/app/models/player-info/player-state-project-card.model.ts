@@ -115,7 +115,6 @@ export class PlayerProjectCardStateModel {
 				this.prerequisiteOffset.set(newOffset.name, newOffset.offset)
 			}
 		}
-		console.log(this.prerequisiteOffset)
 	}
 	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {
 		return this.prerequisiteOffset.get(parameter)??0

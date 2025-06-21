@@ -120,7 +120,6 @@ have "lines" the same size between navigation pannels (eg: global parameter line
 Display other player's played cards   
 
 
-
 ### Responsiveness
 Game creation menu
 Previous phase selected resizing   

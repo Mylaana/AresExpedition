@@ -33,6 +33,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	_convertInfrastructure: NonEventButton = ButtonDesigner.createNonEventButton('convertInfrastructure')
 	_buyInfrastructure: NonEventButton = ButtonDesigner.createNonEventButton('buyInfrastructure')
 	_buyOcean: NonEventButton = ButtonDesigner.createNonEventButton('buyOcean')
+	_buyUpgrade: NonEventButton = ButtonDesigner.createNonEventButton('buyUpgrade')
 
 	private _mcStock: number = 0
 	private _plantStock: number = 0
@@ -47,6 +48,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	private _buyInfrastructureCost!: number
 	private _buyOceanCost!: number
 	private _buyTemperatureCost!: number
+	private _buyUpgradeCost!: number
 
 	constructor(private gameStateService: GameState){}
 
@@ -81,6 +83,9 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this._buyTemperature.caption = PlayableCard.activable.getScalingCostActivationCaption('buyTemperature', this.clientState)
 		this._buyTemperatureCost = PlayableCard.activable.getScalingCostActivation('buyTemperature', this.clientState)
 
+		this._buyUpgrade.caption = PlayableCard.activable.getScalingCostActivationCaption('buyUpgrade', this.clientState)
+		this._buyUpgradeCost = PlayableCard.activable.getScalingCostActivation('buyUpgrade', this.clientState)
+
 		this._mcStock = state.getRessourceInfoFromType('megacredit')?.valueStock??0
 		this._plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 		this._heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
@@ -96,6 +101,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this._convertInfrastructure.updateEnabled(this._heatStock>=5 && this._plantStock>=3)
 		this._buyInfrastructure.updateEnabled(this._mcStock>=this._buyInfrastructureCost)
 		this._buyOcean.updateEnabled(this._mcStock>=this._buyOceanCost)
+		this._buyUpgrade.updateEnabled(this._mcStock>=this._buyUpgradeCost)
 	}
 	updateEndPhaseButton(button: EventMainButton){
 		let finishPhaseButtonEnabled = (this._heatStock>=8  || this._plantStock>=8 || (this._heatStock>=5  && this._plantStock>=3)) === false
@@ -145,6 +151,11 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 			case('buyOcean'):{
 				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - this._buyOceanCost}}))
 				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.ocean, steps:1}}))
+				break
+			}
+			case('buyUpgrade'):{
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - this._buyUpgradeCost}}))
+				newEvents.push(EventFactory.simple.upgradePhaseCard(1))
 				break
 			}
 		}
