@@ -94,12 +94,18 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		if(this.event.button){this.updateEndPhaseButton(this.event.button as EventMainButton)}
 	}
 	updateButtonState(): void {
-		this._convertForest.updateEnabled(this._plantStock>=this.convertPlantCost)
 		this._buyForest.updateEnabled(this._mcStock>=this._buyForestCost)
-		this._convertTemperature.updateEnabled(this._heatStock>=8)
+		this._convertForest.updateEnabled(this._plantStock>=this.convertPlantCost)
+		this._convertForest.warning = this._plantStock>=this.convertPlantCost
+
 		this._buyTemperature.updateEnabled(this._mcStock>=this._buyTemperatureCost)
-		this._convertInfrastructure.updateEnabled(this._heatStock>=5 && this._plantStock>=3)
+		this._convertTemperature.updateEnabled(this._heatStock>=8)
+		this._convertTemperature.warning = this._heatStock>=8
+
 		this._buyInfrastructure.updateEnabled(this._mcStock>=this._buyInfrastructureCost)
+		this._convertInfrastructure.updateEnabled(this._heatStock>=5 && this._plantStock>=3)
+		this._convertInfrastructure.warning = this._heatStock>=5 && this._plantStock>=3
+
 		this._buyOcean.updateEnabled(this._mcStock>=this._buyOceanCost)
 		this._buyUpgrade.updateEnabled(this._mcStock>=this._buyUpgradeCost)
 	}
@@ -109,7 +115,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	}
 	applyPhaseCardBonusIfRelevant() {
 		if(this._actionEvent.hasScan===false || this._actionEvent.scanUsed){return}
-		console.log(this._actionEvent)
 		this._actionEvent.scanUsed=true
 		this.gameStateService.addEventQueue(EventFactory.simple.scanKeep({scan:3, keep:1}, DeckQueryOptionsEnum.actionPhaseScan), 'first')
 	}
