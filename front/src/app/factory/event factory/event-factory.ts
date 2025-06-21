@@ -387,7 +387,6 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
 }
 function generateCardBuilder(builderId:number, option?:BuilderOption): CardBuilder {
     let builder = new CardBuilder
-	console.log(option)
     builder.addButtons(ButtonDesigner.createEventCardBuilderButton(builderId, option))
     option?builder.setOption(option):null
     return builder

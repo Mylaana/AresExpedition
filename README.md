@@ -44,8 +44,7 @@ Backend: Junit
 - TBD (pbly AWS LightSail)   
 
 # WIP : 
-## /!\Critical BUG/!\ :
-Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
+## /!\Critical BUG/!\ : 
 
 ## Must have for v1 :
 ### Refactoring
@@ -88,7 +87,7 @@ Add backend REST requests content validation
 Escape keyboard not exiting card builder selection   
 Websocket connection error while not in the game   
 Project card: layers superposition creating visual bug on edges   
-Expression has changed on client refresh right after selecting Arklight   
+Expression has changed on client refresh with all the player pannel if something moves (VP increased with arklight, any gain)   
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
