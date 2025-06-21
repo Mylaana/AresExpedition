@@ -249,6 +249,9 @@ export class CardBuilder {
 		this.firstCardBuilt = true
 		this.resetButtons()
 	}
+	isLockingValidation(): boolean {
+		return this.selectedCard!=undefined && this.builderIsLocked===false
+	}
 }
 
 export class EventCardBuilder extends EventBaseCardSelector {
@@ -344,6 +347,16 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		for(let builder of this.cardBuilder){
 			builder.resetBuilder()
 		}
+	}
+	updateButtonEnabled(){
+		if(!this.button){return}
+		for(let b of this.cardBuilder){
+			if(b.isLockingValidation()){
+				this.button.enabled = false
+				return
+			}
+		}
+		this.button.enabled = true
 	}
 }
 

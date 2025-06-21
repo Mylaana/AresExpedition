@@ -83,6 +83,7 @@ export class EventHandler {
 				break
 			}
 		}
+		event.updateButtonEnabled()
 	}
 	public updateSelectedCardList(selected: PlayableCardModel[], listType: ProjectListType): void {
 		switch(listType){
@@ -94,6 +95,7 @@ export class EventHandler {
 			case('builderSelector'):{
 				let event = this.currentEvent as EventCardBuilder
 				event.updateCardSelection(selected)
+				event.updateButtonEnabled()
 				break
 			}
 			default:{

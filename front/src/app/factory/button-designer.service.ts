@@ -34,6 +34,7 @@ export class ButtonDesigner{
 			case('settings'):{startEnabled=true;break}
 			case('displayUpgradedPhase'):{startEnabled=true;break}
 			case('killCard'):{startEnabled=true;break}
+			case('lockBuilder'):{startEnabled=true;break}
 
 
 			case('buyForest'):{startEnabled=true;break}
@@ -81,6 +82,7 @@ export class ButtonDesigner{
 			case('rollBack'):{caption='$other_rollback$';break}
 			case('displayUpgradedPhase'):{caption='$other_upgrade$';break}
 			case('killCard'):{caption='kill cards';break}
+			case('lockBuilder'):{caption='$other_cancel$';break}
 
 
 			//settings
