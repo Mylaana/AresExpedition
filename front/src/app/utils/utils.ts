@@ -139,21 +139,21 @@ function toArray(input: any | any[]): any[] {
 function toGlobalParameterColor(parameterName: GlobalParameterNameEnum, step: number): GlobalParameterColorEnum {
 	switch(parameterName){
 		case(GlobalParameterNameEnum.temperature):{
-			if(step<=5){return GlobalParameterColorEnum.purple}
-			if(step<=10){return GlobalParameterColorEnum.red}
-			if(step<=15){return GlobalParameterColorEnum.yellow}
+			if(step<=6){return GlobalParameterColorEnum.purple}
+			if(step<=11){return GlobalParameterColorEnum.red}
+			if(step<=16){return GlobalParameterColorEnum.yellow}
 			return GlobalParameterColorEnum.white
 		}
 		case(GlobalParameterNameEnum.infrastructure):{
-			if(step<=2){return GlobalParameterColorEnum.purple}
+			if(step<=3){return GlobalParameterColorEnum.purple}
 			if(step<=7){return GlobalParameterColorEnum.red}
-			if(step<=11){return GlobalParameterColorEnum.yellow}
+			if(step<=12){return GlobalParameterColorEnum.yellow}
 			return GlobalParameterColorEnum.white
 		}
 		case(GlobalParameterNameEnum.oxygen):{
-			if(step<=2){return GlobalParameterColorEnum.purple}
-			if(step<=6){return GlobalParameterColorEnum.red}
-			if(step<=11){return GlobalParameterColorEnum.yellow}
+			if(step<=3){return GlobalParameterColorEnum.purple}
+			if(step<=7){return GlobalParameterColorEnum.red}
+			if(step<=12){return GlobalParameterColorEnum.yellow}
 			return GlobalParameterColorEnum.white
 		}
 	}

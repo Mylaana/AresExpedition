@@ -6653,7 +6653,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16081,7 +16081,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_plant$ / $tag_animal$+$tag_plant$",
+            "en": "$ressource_megacreditvoid_1$ / $tag_animal$+$tag_plant$",
             "fr": ""
         },
         "effectText": {
@@ -18108,12 +18108,12 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_science$",
             "fr": "$ressource_science$"
         },
         "effectActionTextOption2": {
             "en": "-3$ressource_science$: $other_upgrade$",
-            "fr": ""
+            "fr": "-3$ressource_science$: $other_upgrade$"
         },
         "effectActionText2Option1": {
             "en": "",
@@ -23977,6 +23977,160 @@
         "stockable": [],
         "startingMegacredits": 26,
         "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "CF2",
+        "origin": "",
+        "cost": 0,
+        "tagsId": [
+            0
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Pushnik hacker alliance",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_steel$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "Whenever you play a $tag_building$, you pay 2MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$other_planification$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : 1MC.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$ $ressource_microbe$.$skipline$$other_phase_production$: +1 random prod:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$/$ressource_card$.$skipline$$other_phase_research$ : Draw a card.",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 25,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "CF3",
+        "origin": "",
+        "cost": 0,
+        "tagsId": [
+            2
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "CLM - The hesitant hive mind",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a card, add a $ressource_science$$skipline$ When you play a $tag_science$, add a $ressource_science$.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "action",
+        "effectSummaryText2": {
+            "en": "$other_arrow$ $ressource_science$$skipline$OR$skipline$-X$ressource_science$: ?",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade your Phase card V.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [
+            ""
+        ],
+        "startingMegacredits": 10,
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""

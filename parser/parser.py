@@ -164,7 +164,7 @@ def main():
     dir_name = os.path.dirname(__file__)
     input_path = os.path.join(dir_name, 'Input/')
     input_name = 'card_list'
-    output_path = os.path.join(os.path.abspath(os.path.join(dir_name, os.pardir)), 'front', 'src', 'assets', 'data')
+    output_path = os.path.join(os.path.abspath(os.path.join(dir_name, os.pardir)), 'data')
     output_name = 'cards_data.json'
 
     parsed = []

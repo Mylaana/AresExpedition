@@ -10,13 +10,11 @@ $main-padding: 5px;
 	top: 0;
 	left: 0;
 }
-
 .inner-window{
 	position: relative;
 	z-index: 1000;
 
 	display: flex;
-	//justify-content: center;
 
 	width: 50%;
 	height: 50%;
@@ -25,10 +23,12 @@ $main-padding: 5px;
 .main{
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 5px;
 
 	width: 100%;
 	height: 100%;
-
 }
 .button-close{
 	$width: 5%;
@@ -56,5 +56,21 @@ $main-padding: 5px;
 	border-color: var(--color-ares-orange);
 	h1{
 		color: var(--color-ares-orange);
+	}
+}
+.wrapper-setting-zone{
+	width: 100%;
+	height: 100%;
+	border: red solid 1px;
+}
+.wrapper-setting{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border: blue solid 1px;
+	width: 150px;
+	height: 40px;
+	& > app-non-event-button{
+		height: 100%;
 	}
 }

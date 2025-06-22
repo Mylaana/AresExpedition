@@ -7,16 +7,20 @@ export enum EventStateTypeEnum {
 	drawCards = 'DRAW_CARDS',
 	drawCardsUnqueried = 'DRAW_CARDS_UNQUERIED',
 	drawThenDiscardUnqueried = 'DRAW_THEN_DISCARD_UNQUERIED',
-	productionCards = 'PRODUCTION_CARDS',
-	addProduction = 'ADD_PRODUCTION',
 	researchCardsQueried = 'RESEARCH_CARDS_QUERIED',
 	scanKeepQueried = 'SCAN_KEEP_QUERIED',
 	scanKeepUnQueried = 'SCAN_KEEP_UNQUERIED',
 	targetCardAddRessource = 'TARGET_CARD_ADD_RESSOURCE',
 	specialBuilder = 'SPECIAL_BUILDER',
 	increaseResearchScanKeep = 'INCREASE_RESEARCH_SCANKEEP',
-	upgradePhase = 'UPGRADE_PHASE',
+	generic = 'GENERIC',
+	productionCards = 'PRODUCTION_CARDS',
+
+	/*
 	addRessourceToPlayer = 'ADD_RESSOURCE_TO_PLAYER',
+	upgradePhase = 'UPGRADE_PHASE',
+	addProduction = 'ADD_PRODUCTION',
+	*/
 
 	undefined = 'UNDEFINED'
 }

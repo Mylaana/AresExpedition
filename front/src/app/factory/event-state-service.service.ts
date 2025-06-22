@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
-import { EventStateAddProduction, EventStateAddRessourceToPlayer, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateIncreaseResearchScanKeep, EventStateUpgradePhase } from "../interfaces/event-state.interface";
+import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGeneric, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event factory/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 import { PlayableCardModel } from "../models/cards/project-card.model";
-import { GameState } from "../services/core-game/game-state.service";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
+
+
+const S = EventFactory.simple
 
 function shouldLoadEvent(event: EventBaseModel, eventState: EventStateDTO) : boolean {
 	switch(true){
@@ -51,8 +53,18 @@ export class EventStateService{
 			}
 			case(EventStateTypeEnum.cardActivator):{
 				let eventActivator: EventCardActivator = event as EventCardActivator
-				eventActivator.activationLog = dto.v
-				clientState.loadEventStateActivator(dto)
+				let content: EventStateActivator = {
+					cl: dto.v['cl'],
+					ca: dto.v['ca'],
+					ma: dto.v['ma'],
+					su: dto.v['su']
+				}
+				eventActivator.activationLog = content.cl
+				eventActivator.doubleActivationCount = content.ca
+				eventActivator.doubleActivationMaxNumber = content.ma
+				eventActivator.scanUsed = content.su
+
+				clientState.loadEventStateActivator(content)
 				break
 			}
 			default:{
@@ -61,6 +73,7 @@ export class EventStateService{
 		}
 	}
 	public createFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
+		console.log('eventstate list: ', eventStateList)
 		let newEvents: EventBaseModel[] = []
 		let remainingStates: EventStateDTO[] = []
 		let treated: boolean
@@ -141,11 +154,6 @@ export class EventStateService{
 					newEvents.push(EventFactory.simple.draw(content.d))
 					break
 				}
-				case(EventStateTypeEnum.addProduction):{
-					let content = state.v as EventStateAddProduction
-					newEvents.push(EventFactory.simple.addProduction(content.p))
-					break
-				}
 				case(EventStateTypeEnum.increaseResearchScanKeep):{
 					let content = state.v as EventStateIncreaseResearchScanKeep
 					newEvents.push(EventFactory.simple.increaseResearchScanKeep(content.s))
@@ -158,19 +166,19 @@ export class EventStateService{
 					newEvents.push(EventFactory.createGeneric('loadProductionPhaseCards', {loadProductionCardList: content.cl}))
 					break
 				}
-				case(EventStateTypeEnum.upgradePhase):{
-					let content: EventStateUpgradePhase = {
-						u: state.v['u'],
-						l: state.v['l']??undefined
+				case(EventStateTypeEnum.generic):{
+					let content: EventStateGeneric = {
+						fo: state.v['fo'],
+						igp: state.v['igp'],
+						l: state.v['l'],
+						p: state.v['p'],
+						r: state.v['r'],
+						tr: state.v['tr'],
+						u: state.v['u']
 					}
-					newEvents.push(EventFactory.simple.upgradePhaseCard(content.u, content.l))
-					break
-				}
-				case(EventStateTypeEnum.addRessourceToPlayer):{
-					let content: EventStateAddRessourceToPlayer = {
-						r: state.v['r']
-					}
-					newEvents.push(EventFactory.simple.addRessource(content.r))
+					let event = this.createGenericEvents(content)
+					if(!event){treated = false; break}
+					newEvents.push(event)
 					break
 				}
 				case(EventStateTypeEnum.drawThenDiscardUnqueried):{
@@ -210,9 +218,40 @@ export class EventStateService{
 			oceanBonus.card = content.CARD??0
 		}
 		return newEvents
-		/*
-		clientState.addOceanFlippedBonus(oceanBonus)
-		eventStateList.splice(i, 1)
-		*/
+	}
+	private createGenericEvents(content: EventStateGeneric): EventBaseModel | undefined {
+		let newEvents: EventBaseModel[] = []
+
+		//add production
+		if(content.p){
+			return S.addProduction(content.p)
+		}
+
+		//upgrade phase
+		if(content.u){
+			return S.upgradePhaseCard(content.u, content.l??undefined)
+		}
+
+		//add ressource
+		if(content.r){
+			return S.addRessource(content.r)
+		}
+
+		//increase global parameter
+		if(content.igp){
+			return S.increaseGlobalParameter(content.igp.name, content.igp.steps)
+		}
+
+		//add forest and oxygen
+		if(content.fo){
+			return S.addForestAndOxygen(content.fo)
+		}
+
+		//add TR
+		if(content.tr){
+			return S.addTR(content.tr)
+		}
+		return
+
 	}
 }

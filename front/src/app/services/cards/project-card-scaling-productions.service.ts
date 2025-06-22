@@ -40,6 +40,10 @@ export class ProjectCardScalingProductionsService {
 				if(playedCardList.includes('203')){
 					scalingProductions += this.getCardScalingProduction('203', tagState)
 				}
+				//Diverse Habitats
+				if(playedCardList.includes('P03')){
+					scalingProductions += this.getCardScalingProduction('P03', tagState)
+				}
 				break
 			}
 			case('heat'):{
@@ -66,16 +70,12 @@ export class ProjectCardScalingProductionsService {
 				if(playedCardList.includes('207')){
 					scalingProductions += this.getCardScalingProduction('207', tagState)
 				}
-				//Diverse Habitats
-				if(playedCardList.includes('211')){
-					scalingProductions += this.getCardScalingProduction('211', tagState)
-				}
 				break
 			}
 			case('card'):{
 				//Laboratories
-				if(playedCardList.includes('213')){
-					scalingProductions += this.getCardScalingProduction('213', tagState)
+				if(playedCardList.includes('P05')){
+					scalingProductions += this.getCardScalingProduction('P05', tagState)
 				}
 			}
 		}
@@ -135,7 +135,7 @@ export class ProjectCardScalingProductionsService {
 				break
 			}
 			//Laboratories
-			case('213'):{
+			case('P05'):{
 				scalingProduction = Math.floor(this.getPlayedTagNumber('science', tagState) / 3)
 				break
 			}
@@ -156,7 +156,7 @@ export class ProjectCardScalingProductionsService {
 				break
 			}*/
 			//Diverse Habitats
-			case('211'):{
+			case('P03'):{
 				scalingProduction = this.getPlayedTagNumber('animal', tagState)
 				scalingProduction += this.getPlayedTagNumber('plant', tagState)
 				break

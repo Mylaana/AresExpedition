@@ -13,24 +13,20 @@
 		(closeSettings)="closeSettings()">
 	</app-settings>
 </div>
-<div @fadeIn *ngIf="loaded && _connected && !_gameOver" class="wrapper-app"
+<app-game-over *ngIf="_gameOver"></app-game-over>
+<div @fadeIn *ngIf="loaded && _connected" class="wrapper-app"
 	[class.settings-openned]="_settings">
     <div class="wrapper-main">
         <div class="wrapper-other">
-			<div class="wrapper-settings-button">
+			<div class="wrapper-settings-button" *ngIf="!_gameOver">
 				<app-non-event-button [button]="settingsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(settingsButton)"></app-non-event-button>
 			</div>
-            <app-server-emulation></app-server-emulation>
-            <app-game-event></app-game-event>
-			<div class="horizontal-separator">
-				<app-horizontal-separator></app-horizontal-separator>
-			</div>
-			<div class="ares-title">
-				<h1>Cards Played:</h1>
-			</div>
-			<div class="wrapper-played">
-				<app-playable-card-list #hand [cardList]="playerPlayed" [listType]="'played'"></app-playable-card-list>
-			</div>
+            <app-server-emulation *ngIf="!_gameOver"></app-server-emulation>
+            <app-game-event *ngIf="!_gameOver"></app-game-event>
+			<app-player-played-card [state]="_clientState" [isClient]="true"></app-player-played-card>
+			<ng-container *ngFor="let state of _groupState">
+				<app-player-played-card *ngIf="state.getId()!=_clientState.getId()" [state]="state"></app-player-played-card>
+			</ng-container>
         </div>
     </div>
 
@@ -44,4 +40,3 @@
 		</div>
 	</div>
 </div>
-<app-game-over *ngIf="_gameOver"></app-game-over>

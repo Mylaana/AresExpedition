@@ -28,6 +28,7 @@ export class PhaseCardComponent extends BaseCardComponent {
 	@Input() phaseIndex!: number;
 	@Input() phaseCard!: PhaseCardModel;
 	@Input() phaseGroupUpgraded: boolean = false
+	@Input() upgradeFinished!: boolean
 	@Output() phaseCardUpgraded: EventEmitter<PhaseCardUpgradeType> = new EventEmitter<PhaseCardUpgradeType>()
 
 	_upgradeButton: NonEventButton = ButtonDesigner.createNonEventButton('upgradePhase')
@@ -56,7 +57,7 @@ export class PhaseCardComponent extends BaseCardComponent {
 				return false
 			}
 			default:{
-				return this.state.isUpgraded()!=true && this.state?.isUpgradable()==true && this.phaseGroupUpgraded===false
+				return this.upgradeFinished===false
 			}
 		}
 
@@ -67,7 +68,7 @@ export class PhaseCardComponent extends BaseCardComponent {
 				return this.phaseGroupUpgraded===false
 			}
 			default:{
-				return this.phaseGroupUpgraded===false || this.state.isUpgraded()
+				return this.phaseGroupUpgraded===true && this.state.isUpgraded()
 			}
 		}
 	}

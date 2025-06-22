@@ -20,16 +20,19 @@
 				<app-text-with-image [rawText]="_caption"></app-text-with-image>
 			</div>
 			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, isEnabled()? 'enabled':'disabled']"
+				[class.warning]="button.warning"
 				[class.hovered]="isHovered()">
 			</div>
 			<div *ngIf="_style==='floating'"
 				[ngClass]="[isEnabled()? 'enabled':'disabled', 'button-border--' + shape]"
+				[class.warning]="button.warning"
 				[class.hovered]="isHovered()" >
 			</div>
 		</div>
 	</button>
 	<div *ngIf="_style==='floating'" class="shadow"
 		[class.hovered]="isHovered()"
+		[class.warning]="button.warning"
 		[ngClass]="[isEnabled()? 'enabled':'disabled']">
 	</div>
 </div>

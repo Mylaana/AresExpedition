@@ -8,7 +8,7 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
 import { EventBaseModel, EventCardActivator } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
-import { GlobalParameterNameEnum } from '../../../enum/global.enum';
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event factory/event-factory';
 import { PlayableCard } from '../../../factory/playable-card.factory';
@@ -33,6 +33,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	_convertInfrastructure: NonEventButton = ButtonDesigner.createNonEventButton('convertInfrastructure')
 	_buyInfrastructure: NonEventButton = ButtonDesigner.createNonEventButton('buyInfrastructure')
 	_buyOcean: NonEventButton = ButtonDesigner.createNonEventButton('buyOcean')
+	_buyUpgrade: NonEventButton = ButtonDesigner.createNonEventButton('buyUpgrade')
 
 	private _mcStock: number = 0
 	private _plantStock: number = 0
@@ -47,12 +48,14 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	private _buyInfrastructureCost!: number
 	private _buyOceanCost!: number
 	private _buyTemperatureCost!: number
+	private _buyUpgradeCost!: number
 
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => {this.onStateUpdate(state)})
 		this._actionEvent = this.event as EventCardActivator
+		this.applyPhaseCardBonusIfRelevant()
 		this.updateButtonState()
 	}
 	ngAfterViewInit(): void {
@@ -80,6 +83,9 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this._buyTemperature.caption = PlayableCard.activable.getScalingCostActivationCaption('buyTemperature', this.clientState)
 		this._buyTemperatureCost = PlayableCard.activable.getScalingCostActivation('buyTemperature', this.clientState)
 
+		this._buyUpgrade.caption = PlayableCard.activable.getScalingCostActivationCaption('buyUpgrade', this.clientState)
+		this._buyUpgradeCost = PlayableCard.activable.getScalingCostActivation('buyUpgrade', this.clientState)
+
 		this._mcStock = state.getRessourceInfoFromType('megacredit')?.valueStock??0
 		this._plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 		this._heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
@@ -88,17 +94,29 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		if(this.event.button){this.updateEndPhaseButton(this.event.button as EventMainButton)}
 	}
 	updateButtonState(): void {
-		this._convertForest.updateEnabled(this._plantStock>=this.convertPlantCost)
 		this._buyForest.updateEnabled(this._mcStock>=this._buyForestCost)
-		this._convertTemperature.updateEnabled(this._heatStock>=8)
+		this._convertForest.updateEnabled(this._plantStock>=this.convertPlantCost)
+		this._convertForest.warning = this._plantStock>=this.convertPlantCost
+
 		this._buyTemperature.updateEnabled(this._mcStock>=this._buyTemperatureCost)
-		this._convertInfrastructure.updateEnabled(this._heatStock>=5 && this._plantStock>=3)
+		this._convertTemperature.updateEnabled(this._heatStock>=8)
+		this._convertTemperature.warning = this._heatStock>=8
+
 		this._buyInfrastructure.updateEnabled(this._mcStock>=this._buyInfrastructureCost)
+		this._convertInfrastructure.updateEnabled(this._heatStock>=5 && this._plantStock>=3)
+		this._convertInfrastructure.warning = this._heatStock>=5 && this._plantStock>=3
+
 		this._buyOcean.updateEnabled(this._mcStock>=this._buyOceanCost)
+		this._buyUpgrade.updateEnabled(this._mcStock>=this._buyUpgradeCost)
 	}
 	updateEndPhaseButton(button: EventMainButton){
 		let finishPhaseButtonEnabled = (this._heatStock>=8  || this._plantStock>=8 || (this._heatStock>=5  && this._plantStock>=3)) === false
 		button.updateEnabled(finishPhaseButtonEnabled)
+	}
+	applyPhaseCardBonusIfRelevant() {
+		if(this._actionEvent.hasScan===false || this._actionEvent.scanUsed){return}
+		this._actionEvent.scanUsed=true
+		this.gameStateService.addEventQueue(EventFactory.simple.scanKeep({scan:3, keep:1}, DeckQueryOptionsEnum.actionPhaseScan), 'first')
 	}
 	onClick(button: NonEventButton): void {
 		let newEvents: EventBaseModel[] = []
@@ -138,6 +156,11 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 			case('buyOcean'):{
 				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - this._buyOceanCost}}))
 				newEvents.push(EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.ocean, steps:1}}))
+				break
+			}
+			case('buyUpgrade'):{
+				newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - this._buyUpgradeCost}}))
+				newEvents.push(EventFactory.simple.upgradePhaseCard(1))
 				break
 			}
 		}

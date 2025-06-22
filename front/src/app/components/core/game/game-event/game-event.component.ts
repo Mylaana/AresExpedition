@@ -72,6 +72,7 @@ export class GameEventComponent {
 	sellCardsCancelButton!: NonEventButton;
 	rollbackButton!: NonEventButton;
 	displayPhaseUpgradeButton!: NonEventButton;
+	killCard!: NonEventButton;
 
 	phaseList: NonSelectablePhaseEnum[] = [
 		NonSelectablePhaseEnum.planification,
@@ -97,6 +98,7 @@ export class GameEventComponent {
 		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
 		this.rollbackButton = ButtonDesigner.createNonEventButton('rollBack')
 		this.displayPhaseUpgradeButton = ButtonDesigner.createNonEventButton('displayUpgradedPhase')
+		this.killCard = ButtonDesigner.createNonEventButton('killCard')
 
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
@@ -119,6 +121,7 @@ export class GameEventComponent {
 		if(this.gameStateService.getClientReady()){return}
 	}
 
+	/*
 	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
 		let newEvent = EventFactory.createGeneric(
 			'upgradePhaseCards',
@@ -130,6 +133,7 @@ export class GameEventComponent {
 		this.gameStateService.addEventQueue(newEvent, 'first')
 		//this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
 	}
+	*/
 
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 
@@ -173,7 +177,6 @@ export class GameEventComponent {
 		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
-		console.log(button)
 		switch(button.name){
 			case('sellOptionalCard'):{
 				this.gameStateService.addEventQueue(EventFactory.createCardSelector('selectCardOptionalSell'), 'first')
@@ -189,6 +192,14 @@ export class GameEventComponent {
 				console.log('display upgradde')
 				this.gameStateService.addEventQueue(EventFactory.simple.upgradePhaseCard(0), 'first')
 				break
+			}
+			case('killCard'):{
+				this.gameStateService.addEventQueue(EventFactory.createCardSelectorComplex('discardCards',{
+					cardSelector:{
+						selectionQuantity:100,
+						selectionQuantityTreshold:'max'
+					}
+				}), 'first')
 			}
 		}
 	}

@@ -146,6 +146,23 @@ export class PlayableCardModel{
 				if(this.costInitial <= 12){return true}
 				break
 			}
+			case(ProjectFilterNameEnum.playedDisplayCorpsAndActivable):{
+				if(this.cardType==='corporation'){return true}
+				if(this.cardType==='blueProject' && this.hasSummaryType('action')){return true}
+				break
+			}
+			case(ProjectFilterNameEnum.playedDisplayTriggers):{
+				if(this.cardType==='blueProject' && this.hasSummaryType('trigger')){return true}
+				break
+			}
+			case(ProjectFilterNameEnum.playedDisplayRed):{
+				if(this.cardType==='redProject'){return true}
+				break
+			}
+			case(ProjectFilterNameEnum.developmentPhaseSecondBuilder):{
+				if(this.cardType!='greenProject'){return false}
+				return this.costInitial<=12
+			}
         }
         return false
     }

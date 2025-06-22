@@ -7,7 +7,10 @@
 	height: fit-content;
 	padding: 0%;
 	filter: grayscale(85%);
-	&.upgraded{
+	&.current{
+		filter: grayscale(0%);
+	}
+	&.upgradable{
 		filter: grayscale(0%);
 	}
 }
@@ -100,4 +103,9 @@ app-hexed-background{
 }
 app-non-event-button{
 	height: 50%;
+}
+.wrapper-description::ng-deep p {
+	@media (max-width: 1919px) {
+		font-size: 60%;
+	}
 }

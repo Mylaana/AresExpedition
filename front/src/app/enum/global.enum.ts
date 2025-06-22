@@ -20,7 +20,8 @@ export enum DeckQueryOptionsEnum {
 	celestior = 'O2',
 	devTechs = 'O3',
 	advancedScreeningTechnology = 'O4',
-	inventionContest = 'O5'
+	inventionContest = 'O5',
+	actionPhaseScan = 'O6'
 }
 export enum ProjectFilterNameEnum {
 	undefined = 'undefined',
@@ -33,15 +34,21 @@ export enum ProjectFilterNameEnum {
 	hasTagPlantOrScience = 'hasTagPlantOrScience',
 	green9MCFree = 'green9MCFree',
 	maiNiProductions = 'maiNiProductions',
+	playedDisplayCorpsAndActivable = 'playedDisplayCorpsAndActivable',
+	playedDisplayTriggers = 'playedDisplayTriggers',
+	playedDisplayRed = 'playedDisplayRed',
+	developmentPhaseSecondBuilder = 'developmentPhaseSecondBuilder'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
-	redraftedContracts = 'redraftedContracts'
+	redraftedContracts = 'redraftedContracts',
+	matterGenerator = 'matterGenerator'
 }
 export enum BuilderOption {
 	//Phase builders
 	gain6MC = 'gain6MC',
 	drawCard = 'drawCard',
+	developmentSecondBuilder = 'developmentSecondBuilder',
 
 	//Special builders
 	workCrews = 'workCrews',

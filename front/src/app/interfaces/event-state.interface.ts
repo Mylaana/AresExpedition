@@ -1,6 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption, DeckQueryOptionsEnum } from "../enum/global.enum"
-import { AdvancedRessourceStock, RessourceStock, ScanKeep } from "./global.interface"
+import { AdvancedRessourceStock, GlobalParameter, GlobalParameterValue, RessourceStock, ScanKeep } from "./global.interface"
 
 export interface EventStateDTO {
 	o: EventStateOriginEnum
@@ -48,23 +48,28 @@ export interface EventStateContentTargetCardDTO extends EventStateContentDTO {
 	cardId: string
 	ressources: AdvancedRessourceStock | AdvancedRessourceStock [] | undefined
 }
-export interface EventStateAddProduction extends EventStateContentDTO {
-	p: RessourceStock | RessourceStock[]
-}
 export interface EventStateIncreaseResearchScanKeep extends EventStateContentDTO {
 	s: ScanKeep
-}
-export interface EventStateUpgradePhase extends EventStateContentDTO {
-	u: number
-	l: number[] | undefined
 }
 export interface EventStateCardProduction extends EventStateContentDTO {
 	cl: string[]
 }
-export interface EventStateAddRessourceToPlayer extends EventStateContentDTO{
-	r: RessourceStock | RessourceStock[]
+export interface EventStateGeneric extends EventStateContentDTO {
+	igp?: GlobalParameterValue, // increase global parameter
+	fo?: number //forest and oxygen
+	tr?: number //add tr
+	r?: RessourceStock | RessourceStock[] //add flat ressource
+	u?: number // upgrade phase quantity
+	l?: number[] | undefined // upgrade phase authorized list
+	p?: RessourceStock | RessourceStock[] // increase production
 }
 export interface BuilderStatusDTO {
 	l: boolean,
 	cc: string | undefined
+}
+export interface EventStateActivator extends EventStateContentDTO {
+	cl: {[key: string]: number}, //cardList
+	ca: number //current doubleActivation count
+	ma: number //max activation
+	su: boolean //scan used
 }

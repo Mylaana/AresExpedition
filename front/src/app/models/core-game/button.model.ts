@@ -10,6 +10,7 @@ export abstract class ButtonBase {
     caption?: string
 	type!: ButtonType
 	locked: boolean = false
+	warning: boolean = false
     clicked(): any {}
 	resetStartEnabled(){
 		this.enabled = this.startEnabled

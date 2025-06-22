@@ -33,6 +33,9 @@ export class ButtonDesigner{
 			case('rollBack'):{startEnabled=true;break}
 			case('settings'):{startEnabled=true;break}
 			case('displayUpgradedPhase'):{startEnabled=true;break}
+			case('killCard'):{startEnabled=true;break}
+			case('lockBuilder'):{startEnabled=true;break}
+
 
 			case('buyForest'):{startEnabled=true;break}
 			case('convertForest'):{startEnabled=true;break}
@@ -50,6 +53,7 @@ export class ButtonDesigner{
 
 			//global
 			case('closeSettings'):{startEnabled=true;break}
+			case('settingToggleDebug'):{startEnabled=true;break}
 
 			//router
 			case('routeCreateGame'):{startEnabled=true; break}
@@ -76,15 +80,17 @@ export class ButtonDesigner{
 			case('sellOptionalCard'):{caption='$other_sellcard$';break}
 			case('sellOptionalCardCancel'):{caption='$other_cancel$';break}
 			case('rollBack'):{caption='$other_rollback$';break}
-			case('settings'):{caption='$other_settings$';break}
 			case('displayUpgradedPhase'):{caption='$other_upgrade$';break}
+			case('killCard'):{caption='kill cards';break}
+			case('lockBuilder'):{caption='$other_cancel$';break}
 
-			case('buyForest'):{caption='$ressource_megacreditvoid_16$ $other_arrow$ $other_forest$';break}
-			case('buyTemperature'):{caption='$ressource_megacreditvoid_14$ $other_arrow$$other_temperature$';break}
-			case('convertTemperature'):{caption='$ressource_heat$ $other_arrow$ $other_temperature$';break}
-			case('convertInfrastructure'):{caption='5$ressource_heat$ + 3$ressource_plant$ $skipline$$other_arrow$ $skipline$ $other_infrastructure$ + $ressource_card$';break}
-			case('buyInfrastructure'):{caption='$ressource_megacreditvoid_15$ $other_arrow$ $skipline$ $other_infrastructure$ + $ressource_card$';break}
-			case('buyOcean'):{caption='$ressource_megacreditvoid_16$ $other_arrow$ $other_ocean$';break}
+
+			//settings
+			case('settings'):{caption='$other_settings$';break}
+			case('settingToggleDebug'):{caption='';break}
+
+			case('convertTemperature'):{caption='8$ressource_heat$: $other_temperature$';break}
+			case('convertInfrastructure'):{caption='5$ressource_heat$ + 3$ressource_plant$:$skipline$$other_infrastructure$ + $ressource_card$';break}
 
 
 			//cards

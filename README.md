@@ -44,12 +44,8 @@ Backend: Junit
 - TBD (pbly AWS LightSail)   
 
 # WIP : 
-## /!\Critical BUG/!\ :
-Events related to card played not saved in eventstate (see a card with oceanflip/draw and put this event on top then refresh)   
-
-## Bug not found while testing :   
-race condition on backend resource query : can lead to drawing multiple times the same card !   
-VP scaling cards displayed points are locket at 0   
+## /!\Critical BUG/!\ : 
+:)
 
 ## Must have for v1 :
 ### Refactoring
@@ -92,7 +88,7 @@ Add backend REST requests content validation
 Escape keyboard not exiting card builder selection   
 Websocket connection error while not in the game   
 Project card: layers superposition creating visual bug on edges   
-Expression has changed on client refresh right after selecting Arklight   
+Expression has changed on client refresh with all the player pannel if something moves (VP increased with arklight, any gain)   
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -123,7 +119,6 @@ During every phase, display the current phase card
 force client to appear on the bottom of the player pannels   
 have "lines" the same size between navigation pannels (eg: global parameter line size should be the same as players so 3 player game should be same height as global parameter pannel)   
 Display other player's played cards   
-
 
 
 ### Responsiveness
