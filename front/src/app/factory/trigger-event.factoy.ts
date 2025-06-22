@@ -1,4 +1,4 @@
-import { DiscardOptionsEnum, GlobalParameterNameEnum } from "../enum/global.enum";
+import { DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum } from "../enum/global.enum";
 import { EventFactory } from "./event factory/event-factory";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
@@ -80,14 +80,20 @@ const S = EventFactory.simple
 
 //ON_TAG_GAINED
 	//Decomposers
-	function handleTrigger_19(trigger: string, input: TriggerInput): EventBaseModel[] {
+	function handleTrigger_19(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
 		let triggerred: number = 0
 		let result: EventBaseModel[] = []
+		let card = clientState?.getProjectPlayedModelFromId('19')
+		if(!card){return []}
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
 		for(let i=0; i<triggerred; i++){
-			result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+			if(card.getStockValue('microbe')===0 && i===0){
+				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+			} else{
+				result.push(S.effectPortal(EffectPortalEnum.decomposers))
+			}
 		}
 		return result
 	}
@@ -232,7 +238,7 @@ const S = EventFactory.simple
 	}
 
 // Main Dispatch
-const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput) => EventBaseModel[]>> = {
+const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput, clientState?: PlayerStateModel) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
 		'6': handleTrigger_6,
 		'P16': handleTrigger_P16
@@ -305,7 +311,7 @@ export const TriggerEffectEventFactory = {
 		for (const trig of relevantTriggers) {
 			const handler = handlers[trig];
 			if (handler) {
-				events.push(...handler(trig,  fullInput));
+				events.push(...handler(trig,  fullInput, clientState));
 			}
 		}
 		return events;

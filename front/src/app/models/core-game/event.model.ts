@@ -6,7 +6,7 @@ import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { BuilderType } from "../../types/phase-card.type";
 
 
@@ -397,6 +397,7 @@ export class EventGeneric extends EventBaseModel {
 	production?: RessourceStock | RessourceStock[]
 	increaseTr?: number
 	loadProductionCardList?: string[]
+    effectPortal?: EffectPortalEnum
 }
 
 export class EventDeckQuery extends EventBaseModel {

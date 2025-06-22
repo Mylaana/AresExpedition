@@ -58,3 +58,10 @@ export enum BuilderOption {
 	selfReplicatingBacteria = 'selfReplicatingBacteria',
 	maiNiProductions = 'maiNiProductions',
 }
+export enum EffectPortalEnum {
+	decomposers = "decomposers"
+}
+export enum EffectPortalButtonEnum {
+	decomposersAdd,
+	decomposersDraw,
+}
