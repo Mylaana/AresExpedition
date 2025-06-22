@@ -1,12 +1,10 @@
 import { Injectable } from "@angular/core";
-import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { GameState } from "./game-state.service";
-import { EffectPortalButtonEnum, EffectPortalEnum } from "../../enum/global.enum";
-import { EffectPortalButton, NonEventButton } from "../../models/core-game/button.model";
+import { EffectPortalEnum } from "../../enum/global.enum";
+import { EffectPortalButton} from "../../models/core-game/button.model";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
-import { EventFactory } from "../../factory/event factory/event-factory";
-import { EFFECT_PORTAL } from "../../maps/playable-card-maps";
+import { EFFECT_ENUM_TO_CODE, EFFECT_PORTAL } from "../../maps/playable-card-maps";
 import { ButtonDesigner } from "../../factory/button-designer.service";
 
 
@@ -20,14 +18,10 @@ export class EffectPortalService {
     ){}
     initialize(portal: EffectPortalEnum){
         this.portal = portal
-        this.buttons = ButtonDesigner.createPortalButtonSet(portal)
         let cards = this.gameStateService.getClientProjectPlayedModelList()
         if(!cards){return new PlayableCardModel}
-        switch(portal){
-            case(EffectPortalEnum.decomposers):{
-                this.portalCard =  cards.filter((e) => e.cardCode==='19')[0]
-            }
-        }
+        this.portalCard =  cards.filter((e) => e.cardCode===EFFECT_ENUM_TO_CODE[portal])[0]
+        this.buttons = ButtonDesigner.createPortalButtonSet(EFFECT_ENUM_TO_CODE[portal]) 
         return
     }
     getPortalCard(): PlayableCardModel | undefined {

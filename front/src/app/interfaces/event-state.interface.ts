@@ -1,6 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
-import { BuilderOption, DeckQueryOptionsEnum } from "../enum/global.enum"
-import { AdvancedRessourceStock, GlobalParameter, GlobalParameterValue, RessourceStock, ScanKeep } from "./global.interface"
+import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum } from "../enum/global.enum"
+import { AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep } from "./global.interface"
 
 export interface EventStateDTO {
 	o: EventStateOriginEnum
@@ -62,6 +62,7 @@ export interface EventStateGeneric extends EventStateContentDTO {
 	u?: number // upgrade phase quantity
 	l?: number[] | undefined // upgrade phase authorized list
 	p?: RessourceStock | RessourceStock[] // increase production
+	ep?: EffectPortalEnum // effect portal
 }
 export interface BuilderStatusDTO {
 	l: boolean,

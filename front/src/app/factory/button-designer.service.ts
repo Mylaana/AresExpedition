@@ -3,7 +3,7 @@ import { EventUnionSubTypes } from "../types/event.type";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton } from "../models/core-game/button.model";
 import { EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../types/global.type";
 import { BuilderOption, EffectPortalButtonEnum, EffectPortalEnum } from "../enum/global.enum";
-import { EFFECT_PORTAL_BUTTON_CAPTION } from "../maps/playable-card-maps";
+import { EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-maps";
 
 
 @Injectable({
@@ -188,13 +188,12 @@ export class ButtonDesigner{
 		button.effect = effectButton
 		return button
 	}
-	public static createPortalButtonSet(portal: EffectPortalEnum): EffectPortalButton[] {
+	public static createPortalButtonSet(cardCode: string): EffectPortalButton[] {
 		let buttons: EffectPortalButton[] = []
-		switch(portal){
-			case(EffectPortalEnum.decomposers):{
-				buttons.push(this.createPortalButton('19', EffectPortalButtonEnum.decomposersAdd))
-				buttons.push(this.createPortalButton('19', EffectPortalButtonEnum.decomposersDraw))
-			}
+		let buttonEnumList: EffectPortalButtonEnum[] = EFFECT_PORTAL_BUTTON_ENUM_LIST[cardCode]()
+
+		for(let b of buttonEnumList){
+			buttons.push(this.createPortalButton(cardCode, b))
 		}
 		return buttons
 	}

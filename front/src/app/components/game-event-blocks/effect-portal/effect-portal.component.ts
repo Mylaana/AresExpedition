@@ -29,7 +29,7 @@ export class EffectPortalComponent implements OnInit{
 	constructor(private portalService: EffectPortalService){}
 	ngOnInit(): void {
 		let event: EventGeneric = this.event as EventGeneric
-		if(!event.effectPortal){return}
+		if(event.effectPortal===undefined){return}
 		this._portal = event.effectPortal
 		this.portalService.initialize(this._portal)
 		this.loadPortal()

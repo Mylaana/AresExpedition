@@ -59,9 +59,14 @@ export enum BuilderOption {
 	maiNiProductions = 'maiNiProductions',
 }
 export enum EffectPortalEnum {
-	decomposers = "decomposers"
+	decomposers,
+	importedHydrogen
 }
 export enum EffectPortalButtonEnum {
-	decomposersAdd,
-	decomposersDraw,
+	decomposers_Add,
+	decomposers_Draw,
+
+	importedHydrogen_Plant,
+	importedHydrogen_Microbe,
+	importedHydrogen_Animal,
 }
