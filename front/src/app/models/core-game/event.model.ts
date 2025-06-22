@@ -6,7 +6,8 @@ import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { BuilderType } from "../../types/phase-card.type";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -94,6 +95,8 @@ export class EventCardActivator extends EventBaseCardSelector {
     activationLog: {[key: string]: number } = {}
 	doubleActivationMaxNumber!: number
 	doubleActivationCount: number = 0
+	scanUsed: boolean = false
+	hasScan: boolean = false
 	override hasCardActivator(): boolean {return true}
 }
 
@@ -103,6 +106,7 @@ export class CardBuilder {
     private buttons: EventCardBuilderButton[] = []
     private option!: BuilderOption
     private builderIsLocked: boolean = false
+	private firstCardBuilt: boolean = false
 
     addButtons(buttons: EventCardBuilderButton[]): void {
         this.buttons = buttons
@@ -224,7 +228,12 @@ export class CardBuilder {
         this.updateButtonGroupState('cancelSelectCard')
 	}
     setBSuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
-    getBuilderIsLocked(): boolean {return this.builderIsLocked}
+    getBuilderIsLocked(): boolean {
+		if(this.option===BuilderOption.developmentSecondBuilder && !this.firstCardBuilt){
+			return true
+		}
+		return this.builderIsLocked
+	}
 	getBuitCardCode(): string | undefined {
 		if(this.builderIsLocked===false){return}
 		if(!this.selectedCard){return}
@@ -235,6 +244,14 @@ export class CardBuilder {
 		this.resetButtons()
 		this.selectedCard = undefined
 	}
+	setFirstCardBuilt(): void {
+		if(this.option!=BuilderOption.developmentSecondBuilder){return}
+		this.firstCardBuilt = true
+		this.resetButtons()
+	}
+	isLockingValidation(): boolean {
+		return this.selectedCard!=undefined && this.builderIsLocked===false
+	}
 }
 
 export class EventCardBuilder extends EventBaseCardSelector {
@@ -244,6 +261,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
     cardBuilderIdHavingFocus?: number
     buildDiscountValue!: number
     buildDiscountUsed!: boolean
+	builderType!: BuilderType
     override hasCardBuilder(): boolean {return true}
     override updateCardSelection(selection: PlayableCardModel[]): void {
 		this.setSelectedCardToBuild(selection[0])
@@ -329,6 +347,16 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		for(let builder of this.cardBuilder){
 			builder.resetBuilder()
 		}
+	}
+	updateButtonEnabled(){
+		if(!this.button){return}
+		for(let b of this.cardBuilder){
+			if(b.isLockingValidation()){
+				this.button.enabled = false
+				return
+			}
+		}
+		this.button.enabled = true
 	}
 }
 

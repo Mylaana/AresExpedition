@@ -17,7 +17,6 @@ export class WebsocketHandler {
 
     public handlePlayerMessage(message: PlayerMessageResult){
         Logger.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
-		console.log('message:',message)
         switch(message.contentEnum){
             case(PlayerMessageContentResultEnum.draw):{
                 this.handlePlayerMessageDrawResult(message.content)
@@ -50,7 +49,6 @@ export class WebsocketHandler {
     }
     public handleGroupMessage(message: GroupMessageResult){
         Logger.logReceivedMessage(`[${message.contentEnum}] ON [GROUP CHANNEL]`, message.content)
-		console.log('message:',message)
         switch(message.contentEnum){
             case(GroupMessageContentResultEnum.debug):{
                 break
@@ -159,6 +157,9 @@ export class WebsocketHandler {
 	private handleMessageSelectStartingHand(content: WsGameState){
 		this.gameStateService.reset()
 		this.gameStateService.clearEventQueue()
+		this.gameStateService.initializeGroupReady(
+			WebsocketResultMessageFactory.inputToGroupReady(content.groupReady),
+			WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setSelectStartingHandEvents()

@@ -17,7 +17,7 @@ export class PhaseCardGroupModel {
 		return new PhaseCardModel
 	}
 	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
-		if(this.phaseIsUpgraded){return}
+		//if(this.phaseIsUpgraded){return}
 		for(let card of this.phaseCards){
 			card.setPhaseCardUpgraded(card.phaseType==upgrade)
 		}

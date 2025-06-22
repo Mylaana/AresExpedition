@@ -324,7 +324,6 @@ export class GameState{
 		this.removeCardsFromClientHandById(removeListId, cardType)
     }
     addDrawQueue(drawEvent: DrawEvent):void{
-		console.log(drawEvent)
         this.drawQueue.next(this.drawQueue.getValue().concat([drawEvent]));
     }
 
@@ -342,13 +341,7 @@ export class GameState{
     }
 
     cleanAndNextDrawQueue(): void{
-        let newDrawQueue: DrawEvent[] = [];
-        //clean draw queue
-        for(let drawEvent of this.drawQueue.getValue()){
-            if(drawEvent.finalized!=true){
-                newDrawQueue.push(drawEvent)
-            }
-        }
+        let newDrawQueue: DrawEvent[] = this.drawQueue.getValue().filter((e) => e.finalized!=true);
         this.drawQueue.next(newDrawQueue)
     }
 	/**
@@ -499,7 +492,8 @@ export class GameState{
 		let triggers = newState.getTriggersIdActive()
 		let card = newState.getProjectPlayedModelFromId(cardStock.cardCode)
         for(let stock of cardStock.stock){
-            newState.addRessourceToCard(cardStock.cardCode, stock)
+			newState.addRessourceToCard(cardStock.cardCode, stock)
+			if(stock.valueStock<0){continue}
 			if(triggers.length>0){
 				newEvents = newEvents.concat(PlayableCard.getOnTriggerredEvents('ON_RESSOURCE_ADDED_TO_CARD', triggers, newState, {receivingCard:card, ressourceAdded:stock.name, ressourceAddedValue:stock.valueStock}))
 			}
@@ -532,7 +526,6 @@ export class GameState{
 			event.scanKeepOptions = wsDrawResult.options
 			event.keepCardNumber = wsDrawResult.keep
             eventFound = true
-			console.log(event)
             this.cleanAndNextDrawQueue()
             break
         }
@@ -598,9 +591,6 @@ export class GameState{
 				this.updateClientState(state)
 			}
 		}
-		//create events from eventqueue saved state
-		//this.createEventFromEventQueueSavedState()
-		console.log('state loaded: ', this.groupPlayerState.getValue(), 'client state loaded: ', this.clientState.getValue(), 'eventstate loaded:', Utils.jsonCopy(this.eventQueueSavedState))
 	}
 	public getPlayerCount(): number {
 		return this.groupPlayerState.getValue().length

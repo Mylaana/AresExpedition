@@ -82,7 +82,6 @@ public class GlobalParameter {
         this.addEop = 0;
     }
     public boolean isMaxedOut(){
-        System.err.println(name + " " + step + " " + maxStep);
         return this.step==this.maxStep;
     }
 

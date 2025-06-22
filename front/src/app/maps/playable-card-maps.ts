@@ -22,7 +22,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '13', '15', '16', '18', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20']
+export const ACTIVATION_NO_COST: string[] = ['3', '4', '12', '13', '15', '16', '18', '57', '58', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20']
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -197,9 +197,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
 	],
 	//Matter Generator
-	'P06': () => [
-		S.discard(1),
-		S.addRessource({ name: 'megacredit', valueStock: 6 })],
+	'P06': () => [S.discardOptions(1, 'max', DiscardOptionsEnum.matterGenerator)],
 	//Progressive Policies
 	'P09': (card, clientState) => [
 		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
@@ -256,13 +254,15 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	//Convert Forest - Ecoline
 	'ConvertForest': (state) => state.getTriggersIdActive().includes('C2') ? 7 : 8,
 	//Buy Forest - Standard Technology
-	'buyForest': (state) => state.getTriggersIdActive().includes('55') ? 10 : 14,
+	'buyForest': (state) => state.getTriggersIdActive().includes('55') ? 16 : 20,
 	//Buy Infrastructure - Standard Technology
 	'buyInfrastructure': (state) => state.getTriggersIdActive().includes('55') ? 11 : 15,
 	//Buy Ocean - Standard Technology
 	'buyOcean': (state) => state.getTriggersIdActive().includes('55') ? 12 : 16,
 	//Buy Temperature - Standard Technology
 	'buyTemperature': (state) => state.getTriggersIdActive().includes('55') ? 10 : 14,
+	//Buy Temperature - Standard Technology
+	'buyUpgrade': (state) => state.getTriggersIdActive().includes('55') ? 14 : 18,
 }
 export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: PlayerStateModel) => string> = {
 	//Aquifer Pumping
@@ -305,11 +305,12 @@ export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: Playe
 	'P23': (state) => `$ressource_megacreditvoid_${getScaling('P23', state)}$: $other_temperature$`,
 
 	//SPECIAL
-	'ConvertForest': (state) => `${getScaling('ConvertForest', state)}$ressource_plant$ $other_arrow$ $other_forest$`,
-	'buyForest': (state) => `$ressource_megacreditvoid_${getScaling('buyForest', state)}$ $other_arrow$ $other_forest$`,
-	'buyInfrastructure': (state) => `$ressource_megacreditvoid_${getScaling('buyInfrastructure', state)}$ $other_arrow$ $skipline$ $other_infrastructure$ + $ressource_card$`,
-	'buyOcean': (state) => `$ressource_megacreditvoid_${getScaling('buyOcean', state)}$ $other_arrow$ $other_ocean$`,
-	'buyTemperature': (state) => `$ressource_megacreditvoid_${getScaling('buyTemperature', state)}$ $other_arrow$$other_temperature$`,
+	'ConvertForest': (state) => `${getScaling('ConvertForest', state)}$ressource_plant$: $other_forest$`,
+	'buyForest': (state) => `$ressource_megacreditvoid_${getScaling('buyForest', state)}$: $other_forest$`,
+	'buyInfrastructure': (state) => `$ressource_megacreditvoid_${getScaling('buyInfrastructure', state)}$: $other_infrastructure$ + $ressource_card$`,
+	'buyOcean': (state) => `$ressource_megacreditvoid_${getScaling('buyOcean', state)}$: $other_ocean$`,
+	'buyTemperature': (state) => `$ressource_megacreditvoid_${getScaling('buyTemperature', state)}$: $other_temperature$`,
+	'buyUpgrade': (state) => `$ressource_megacreditvoid_${getScaling('buyUpgrade', state)}$: $other_upgrade$`,
 }
 export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: ActivationOption, clientState: PlayerStateModel) => boolean> = {
 	//Aquifer Pumping
@@ -510,7 +511,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//Tundra Farming
 	'200': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
 	//Wave Power
-	'203': (s) => Checker.isOceanOk(3, 'min', s),
+	'205': (s) => Checker.isOceanOk(3, 'min', s),
 	//Worms
 	'207': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Zeppelins
@@ -564,8 +565,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Interplanetary Relations
 	'35': () => [S.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Interns
-	//'36': () => [S.increaseResearchScanKeep({keep: 0, scan: 2})],
-	'36': () => [S.increaseResearchScanKeep({keep: 10, scan: 0})],
+	'36': () => [S.increaseResearchScanKeep({keep: 0, scan: 2})],
 	//United Planetary Alliance
 	'60': () => [S.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Wood Burning Stoves
@@ -1122,7 +1122,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Wave Power
 	'205': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
 	//Apollo Industries
-	'D01': () => [S.upgradePhaseCard(1, [2])],
+	'D01': () => [S.upgradePhaseCard(1, [1])],
 	//Exocorp
 	'D02': (clientState) => {
 		clientState.addSellCardValueMod(1)

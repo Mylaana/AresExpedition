@@ -19,6 +19,10 @@ $description-pannel-margin-left: 2%;
     flex-direction: row;
     align-items: top;
 	justify-content: space-between;
+	pointer-events: none;
+}
+app-non-event-button, app-event-main-button{
+	pointer-events: all;
 }
 .left-command, .right-command{
 	display: flex;

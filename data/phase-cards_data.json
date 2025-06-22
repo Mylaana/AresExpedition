@@ -37,7 +37,7 @@
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "You can play an additional green project card this phase.$skipline$Reduced cost of the first card you play this phase by 3MC.",
+            "en": "Reduce the cost of the first card you play this phase by 3MC.$skipline$You may play a second green card this phase with a printed cost of 12 MC or less.",
             "fr": "abc"
         }
     },

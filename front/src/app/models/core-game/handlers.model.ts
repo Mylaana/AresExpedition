@@ -16,7 +16,7 @@ import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event factory/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { PlayableCard } from "../../factory/playable-card.factory";
 
 @Injectable()
@@ -64,6 +64,14 @@ export class EventHandler {
 				let card = event.getCardToBuildId()
 				if(card===undefined){return}
 				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
+				if(event.builderType==='development_second_card'){
+					console.log('second builder lets go')
+					event.cardBuilder[1].setFirstCardBuilt()
+					event.cardSelector.filter = {type:ProjectFilterNameEnum.developmentPhaseSecondBuilder}
+					event.title = 'Play a second green card with a printed cost of 12MC or less.'
+					event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList({type:ProjectFilterNameEnum.developmentPhaseSecondBuilder})
+					console.log(event)
+				}
 				break
 			}
 			case(BuilderOption.drawCard):{
@@ -75,6 +83,7 @@ export class EventHandler {
 				break
 			}
 		}
+		event.updateButtonEnabled()
 	}
 	public updateSelectedCardList(selected: PlayableCardModel[], listType: ProjectListType): void {
 		switch(listType){
@@ -86,6 +95,7 @@ export class EventHandler {
 			case('builderSelector'):{
 				let event = this.currentEvent as EventCardBuilder
 				event.updateCardSelection(selected)
+				event.updateButtonEnabled()
 				break
 			}
 			default:{
@@ -301,6 +311,7 @@ export class EventHandler {
 
 				switch(event.discardOptions){
 					case(DiscardOptionsEnum.marsUniversity):{
+						if(event.cardSelector.selectedList.length===0){break}
 						let clientState = this.gameStateService.getClientState()
 						let newEvents = PlayableCard.getOnTriggerredEvents(
 								'ON_TRIGGER_RESOLUTION',
@@ -321,6 +332,10 @@ export class EventHandler {
 							'first'
 						)
 						break
+					}
+					case(DiscardOptionsEnum.matterGenerator):{
+						if(event.cardSelector.selectedList.length===0){break}
+						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:6}), 'first')
 					}
 				}
 				break
@@ -490,7 +505,6 @@ export class EventHandler {
 		switch(event.subType){
 			case('drawQuery'):{
 				resolveType = 'drawResult'
-				console.log(event)
 				break
 			}
 			case('researchPhaseQuery'):{
@@ -632,8 +646,8 @@ export class DrawEventHandler {
 		}
 		if(drawQueue[0].served===false){return}
 		let event = drawQueue[0]
-		this.resolveDrawEvent(event)
 		event.finalized = true
+		this.resolveDrawEvent(event)
 		this.gameStateService.cleanAndNextDrawQueue()
 	}
 	private sendWsDrawQuery(event: DrawEvent){
@@ -663,7 +677,6 @@ export class DrawEventHandler {
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
 		Logger.logEventResolution('resolving deck event: ',drawEvent.resolveEventSubType)
-		console.log('resolving drawevent with waiter id :', drawEvent)
 		switch(drawEvent.resolveEventSubType){
 			case('drawResult'):{
 				resultEvent = EventFactory.createGeneric(
@@ -868,6 +881,7 @@ class PhaseResolveHandler {
 			}
 			case('action_scan_cards'):{
 				activatorEvent.doubleActivationMaxNumber = 1
+				activatorEvent.hasScan = true
 				events.push(activatorEvent)
 				break
 			}

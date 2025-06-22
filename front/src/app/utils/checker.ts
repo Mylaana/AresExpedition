@@ -40,9 +40,8 @@ function isGlobalParameterOk(parameter: Extract<GlobalParameterNameEnum, GlobalP
 	if(!colorToTestIndex || !currentIndex){return false}
 
 	if(!offset){
-		offset = 0//clientState.getPrerequisiteOffset(parameter)
+		offset = clientState.getPrerequisiteOffset(parameter)
 	}
-
 	switch(treshold){
 		case("equal"):{
 			return currentIndex >= (colorToTestIndex - offset) && currentIndex <= (colorToTestIndex + offset)

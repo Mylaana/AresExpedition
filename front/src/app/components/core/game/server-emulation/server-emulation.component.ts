@@ -11,6 +11,7 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/ph
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { myUUID, TagType } from '../../../../types/global.type';
 import { GlobalParameterNameEnum } from '../../../../enum/global.enum';
+import { GameParamService } from '../../../../services/core-game/game-param.service';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -44,7 +45,8 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 
 	constructor(private gameStateService: GameState,
 		private cardInfoService: ProjectCardInfoService,
-		private rxStompService: RxStompService
+		private rxStompService: RxStompService,
+		private gameParam: GameParamService
 	){}
 
 	ngOnInit(){
@@ -66,6 +68,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe(
 			ready => this.onGroupReadyUpdate(ready)
 		)
+		this.gameParam.currentDebug.subscribe(debug => this.debug = debug)
 
 
 		//EventDesigner.createGeneric('upgradePhaseCards', {phaseCardUpgradeList:phaseCardList, phaseCardUpgradeNumber:phaseCardUpgradeCount})
@@ -151,7 +154,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: string[] = ['D29']
+		let cardDrawList: string[] = ['1']
 
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())

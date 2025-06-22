@@ -17,7 +17,7 @@ import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
-import { EventStateDTO } from "../../interfaces/event-state.interface";
+import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { ProjectCardScalingProductionsService } from "../../services/cards/project-card-scaling-productions.service";
 import { Utils } from "../../utils/utils";
@@ -192,7 +192,7 @@ export class PlayerStateModel {
 	getEventQueueState(): EventStateDTO[] {return this.eventState.eventQueueState}
 	setPrerequisiteOffset(offset: GlobalParameterOffset | GlobalParameterOffset[]){this.projectCardState.setPrerequisiteOffset(offset)}
 	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {return this.projectCardState.getPrerequisiteOffset(parameter)}
-	loadEventStateActivator(dto: EventStateDTO): void {this.projectCardState.loadEventStateActivator(dto)}
+	loadEventStateActivator(dto: EventStateActivator): void {this.projectCardState.loadEventStateActivator(dto)}
 
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{

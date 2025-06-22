@@ -9,9 +9,11 @@ import { ProjectFilterNameEnum } from "../../enum/global.enum";
 })
 export class ProjectCardScalingVPService {
 	scaledVpList: CardScalingVP[]= []
+
 	private readonly vpCalculators: Record<string, (card: PlayableCardModel, state: PlayerStateModel) => number> = {
 		"12": (card) => card.getStockValue('animal'), //Birds
 		"18": (_, state) => Math.floor(state.getForest() / 2),
+		"24": (card) => Math.floor(card.getStockValue('animal') / 2), //Ecological zone
 		"30": (card) => card.getStockValue('animal'), //Fish
 		"33": (card) => Math.floor(card.getStockValue('animal') / 2), //Herbivore
 		//Interplanetary Relations
@@ -21,13 +23,14 @@ export class ProjectCardScalingVPService {
 			return Math.floor(valid / 4);
 		},
 		"39": (card) => card.getStockValue('animal'), //Livestock
-		"46": (card) => Math.floor(card.getStockValue('science') / 2),
+		"46": (card) => Math.floor(card.getStockValue('science') / 2), //Physics complex
 		"53": (card) => Math.floor(card.getStockValue('animal') / 2), //Small Animals
 		"58": (card) => Math.floor(card.getStockValue('microbe') / 3), //Tardigrades
 		"59": (_, state) => Math.floor(state.getProjectPlayedIdList({ type: ProjectFilterNameEnum.blueProject }).length / 3), //Think Tank
 		"63": (_, state) => state.getTagsOfType('jovian'), //Water Import from Europa
 		"153": (_, state) => state.getTagsOfType('jovian'), //Io Mining Industries
 		"F07": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets
+		"P04": (card) => Math.floor(card.getStockValue('animal') / 3), //Filter Feeders
 		"P12": (card) => Math.floor(card.getStockValue('animal') / 2), //Arklight
 	};
 

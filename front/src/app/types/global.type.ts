@@ -18,10 +18,11 @@ export type ButtonNames =
 export type ButtonType = 'image' | 'eventMain' | 'nonEvent' |  'color'
 
 export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' | 'rollBack' | 'settings' | 'closeSettings' | 'activateProjectOnce' | 'activateProjectTwice'
-| 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure'
+| 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure' | 'buyUpgrade'
 | 'upgradePhase'
 | 'routeCreateGame' | 'routeCardOverview' | 'routeBuy' | 'routeHome' | 'routeCreateNewGameValidation'
-| 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase'
+| 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'killCard' | 'lockBuilder'
+| 'settingToggleDebug'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'

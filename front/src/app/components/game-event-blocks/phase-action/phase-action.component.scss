@@ -7,10 +7,18 @@
 }
 .wrapper-buttons{
 	display: flex;
-	justify-content: space-between;
-	width: 65%;
-	height: 70px;
+	justify-content: center;
+	width: 90%;
+	gap: 5px;
+	flex-wrap: wrap;
 	margin-bottom: 3%;
+}
+app-non-event-button{
+	height: 70px;
+	width: fit-content;
+	@media (max-width: 1919px) {
+		height: 50px;
+	}
 }
 :host::ng-deep app-text-with-image .wrapper-megacredit{
 	width: 20%;

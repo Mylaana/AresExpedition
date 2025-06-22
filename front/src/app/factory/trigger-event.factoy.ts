@@ -125,7 +125,6 @@ const S = EventFactory.simple
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
 		return [S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity)]
 	}
-
 	//Olympus Conference
 	function handleTrigger_44(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}

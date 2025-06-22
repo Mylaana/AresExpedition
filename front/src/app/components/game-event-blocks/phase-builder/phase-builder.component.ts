@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
 import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
@@ -29,6 +29,7 @@ export class PhaseBuilderComponent{
 	public onEventCardBuilderListButtonClicked(output: any){
 		this.cardBuilderButtonClicked.emit(output)
 		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
+		this.cardListSelector.updateCardList()
 	}
 	public onUpdateSelectedCardList(output: any){
 		this.updateSelectedCardList.emit(output)

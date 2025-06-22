@@ -261,7 +261,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 	switch(options){
 		case(DeckQueryOptionsEnum.brainstormingSession):{
 			let event = new EventComplexCardSelector
-            event.title = `Gain 1MC if card is green or draw card if Red/Blue.`
+            event.title = `Brainstorming sessions: gain 1MC if card is green or draw card if Red/Blue.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
 			event.cardSelector.selectFrom = cardList
@@ -275,7 +275,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 		}
 		case(DeckQueryOptionsEnum.celestior):{
 			let event = new EventComplexCardSelector
-            event.title = `Select a card with Event tag.`
+            event.title = `Calestior: select a card with Event tag.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
 			event.cardSelector.selectFrom = cardList
@@ -291,7 +291,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 		}
 		case(DeckQueryOptionsEnum.devTechs):{
 			let event = new EventComplexCardSelector
-            event.title = `Select a green card.`
+            event.title = `Dev Techs: select a green card.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
 			event.cardSelector.selectFrom = cardList
@@ -307,7 +307,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 		}
 		case(DeckQueryOptionsEnum.advancedScreeningTechnology):{
 			let event = new EventComplexCardSelector
-            event.title = `Select a card with a Plant or Science tag.`
+            event.title = `Advanced screening technology : select a card with a Plant or Science tag.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
 			event.cardSelector.selectFrom = cardList
@@ -323,7 +323,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 		}
 		case(DeckQueryOptionsEnum.inventionContest):{
 			let event = new EventComplexCardSelector
-            event.title = `Select one card to keep.`
+            event.title = `Invention contest : select one card to keep.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'equal'
 			event.cardSelector.selectFrom = cardList
@@ -332,7 +332,22 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = false
 			event.scanKeepOptions = options
-			event.cardSelector.filter = {type: ProjectFilterNameEnum.hasTagPlantOrScience}
+			event.waiterId = waiter
+			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			return event
+		}
+		case(DeckQueryOptionsEnum.actionPhaseScan):{
+			let event = new EventComplexCardSelector
+            event.title = `Action phase scan : select one red or blue card to keep.`
+            event.refreshSelectorOnSwitch = false
+            event.cardSelector.selectionQuantityTreshold = 'max'
+			event.cardSelector.selectFrom = cardList
+			event.cardSelector.selectionQuantity = 1
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = true
+			event.scanKeepOptions = options
+			event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
 			event.waiterId = waiter
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
@@ -383,6 +398,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
     event.subType = subType
     event.cardBuilder = []
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+	event.builderType = builderType
 
     let buildDiscountValue = 0
     switch(builderType){
@@ -402,9 +418,8 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
         }
         case('development_second_card'):{
             buildDiscountValue = 3
-            for(let i=0; i<=1; i++){
-                event.cardBuilder.push(generateCardBuilder(i))
-            }
+			event.cardBuilder.push(generateCardBuilder(0))
+			event.cardBuilder.push(generateCardBuilder(1, BuilderOption.developmentSecondBuilder))
             break
         }
 

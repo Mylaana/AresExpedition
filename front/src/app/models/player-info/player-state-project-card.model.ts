@@ -8,7 +8,7 @@ import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type
 import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
-import { EventStateDTO } from "../../interfaces/event-state.interface"
+import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface"
 import { GlobalParameterNameEnum } from "../../enum/global.enum"
 import { map } from "rxjs"
 
@@ -115,7 +115,6 @@ export class PlayerProjectCardStateModel {
 				this.prerequisiteOffset.set(newOffset.name, newOffset.offset)
 			}
 		}
-		console.log(this.prerequisiteOffset)
 	}
 	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {
 		return this.prerequisiteOffset.get(parameter)??0
@@ -142,8 +141,8 @@ export class PlayerProjectCardStateModel {
 		return idList
 	}
 
-	loadEventStateActivator(dto: EventStateDTO){
-		const raw = dto.v;
+	loadEventStateActivator(dto: EventStateActivator){
+		const raw = dto.cl;
 
 		if (!raw || typeof raw !== 'object') {
 			console.warn('Invalid event state format:', raw);

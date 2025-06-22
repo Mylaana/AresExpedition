@@ -1,5 +1,6 @@
 <div class="wrapper-main"
-	[class.upgraded]="isCurrentUpgrade()">
+	[class.current]="isCurrentUpgrade()"
+	[class.upgradable]="isUpgradeable()">
 	<div class="wrapper-phase-card">
 		<div class="wrapper-description ares-background ares-border">
 			<h5>Ability</h5>
@@ -16,6 +17,7 @@
 	</div>
 
 	<div class="wrapper-upgrade ares-border ares-background"
+		*ngIf="!isCurrentUpgrade()"
 		[class.upgradable]="isUpgradeable()===false">
 		<div class="wrapper-button"
 			*ngIf="isUpgradeable()">
