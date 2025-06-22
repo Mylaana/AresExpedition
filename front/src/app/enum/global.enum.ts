@@ -60,7 +60,8 @@ export enum BuilderOption {
 }
 export enum EffectPortalEnum {
 	decomposers,
-	importedHydrogen
+	importedHydrogen,
+	largeConvoy,
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -69,4 +70,9 @@ export enum EffectPortalButtonEnum {
 	importedHydrogen_Plant,
 	importedHydrogen_Microbe,
 	importedHydrogen_Animal,
+
+	largeConvoy_Plant,
+	largeConvoy_Animal,
+
+
 }

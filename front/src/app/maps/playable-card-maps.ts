@@ -607,7 +607,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Ice Cap Melting
 	'79': () => [
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
-	//Ice Cap Melting
+	//Imported Hyrdrogen
 	'80': () => [
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1),
 		EventFactory.simple.effectPortal(EffectPortalEnum.importedHydrogen)
@@ -631,6 +631,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Lake Marineris
 	'86': () => [
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 2)],
+	//Large Convoy
+	'87': () => [
+		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1),
+		EventFactory.simple.draw(2),
+		EventFactory.simple.effectPortal(EffectPortalEnum.largeConvoy)
+	],
 	//Lava Flows
 	'88': () => [
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2)],
@@ -1438,6 +1444,7 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0
 }
 export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => EventBaseModel[]> = {
+	//Decomposers
 	'19': (button) => {
 		if(button===EffectPortalButtonEnum.decomposers_Add){
 			return  [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:1}, '19')]
@@ -1447,6 +1454,7 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 			EventFactory.simple.draw(1)
 		]
 	},
+	//Imported Hydrogen
 	'80': (button) => {
 		switch(button){
 			case(EffectPortalButtonEnum.importedHydrogen_Plant):{
@@ -1460,10 +1468,19 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 			}
 		}
 		return []
-	}
+	},
+	//Large Convoy
+	'87': (button) => {
+		if(button===EffectPortalButtonEnum.largeConvoy_Animal){
+			return [EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:3}, 1)]
+		}
+		return [EventFactory.simple.addRessource({name:'plant', valueStock:5})]
+	},
 }
 export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalButtonEnum) => string> = {
+	//Decomposers
 	'19': (button) => button===EffectPortalButtonEnum.decomposers_Add?'$ressource_microbe$':'-$ressource_microbe$: $ressource_card$',
+	//Imported Hydrogen
 	'80': (button) => {
 		switch(button){
 			case(EffectPortalButtonEnum.importedHydrogen_Plant):{
@@ -1477,13 +1494,20 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 			}
 		}
 		return ''
-	}
+	},
+	//Large Convoy
+	'87': (button) => button===EffectPortalButtonEnum.largeConvoy_Plant?'$ressource_plant$$ressource_plant$$ressource_plant$$skipline$$ressource_plant$$ressource_plant$':'$ressource_animal$$ressource_animal$$ressource_animal$',
 }
 export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalButtonEnum[]> = {
+	//Decomposers
 	'19': ()=> [EffectPortalButtonEnum.decomposers_Add, EffectPortalButtonEnum.decomposers_Draw],
+	//Imported Hydrogen
 	'80': ()=> [EffectPortalButtonEnum.importedHydrogen_Plant, EffectPortalButtonEnum.importedHydrogen_Microbe, EffectPortalButtonEnum.importedHydrogen_Animal],
+	//Large Convoy
+	'87': ()=> [EffectPortalButtonEnum.largeConvoy_Plant, EffectPortalButtonEnum.largeConvoy_Animal],
 }
 export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
-	[EffectPortalEnum.importedHydrogen]:'80'
+	[EffectPortalEnum.importedHydrogen]:'80',
+	[EffectPortalEnum.largeConvoy]: '87',
 }
