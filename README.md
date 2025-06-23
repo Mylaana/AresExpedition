@@ -50,7 +50,6 @@ Rollback button does nothing
 
 ## Other BUG:   
 bouton de rollback disparait pendant le waiting players
-le disable foreground dépasse sur la zone activable
 Fix multiple activation display (transfer wrapper to activationList)   
 le texte en planification ne tient pas compte de la phase améliorée
 

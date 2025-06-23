@@ -22,10 +22,11 @@ import { PlayableCard } from '../../../../../factory/playable-card.factory';
     animations: [expandCollapseVertical]
 })
 export class CardActivationComponent implements OnInit, OnDestroy{
-	@Input() maximumCardActivation!: boolean
+	//@Input() maximumCardActivation!: boolean
 	@Input() projectCard!: PlayableCardModel
 	@Input() actionIndex: ActivationOption = 1
 	@Input() caption!: string
+	@Input() optionTotalQuantity: number = 1
 	@Input() isScalingCostActivation!: boolean
 	@Output() activated = new EventEmitter<{option: ActivationOption, twice: boolean}>()
 	_activateOnce!: NonEventButton
