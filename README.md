@@ -45,7 +45,17 @@ Backend: Junit
 
 # WIP : 
 ## /!\Critical BUG/!\ : 
-:)
+bug eventstate avec gain plant/mc? de flip d'ocean, bonus perdu au refresh
+action phase : plant/heat conversion should not be mandatory if param is maxed out at start   
+phase upgrade count should be increased immediatly, not at the end of the phase
+Rollback button does nothing   
+
+## Other BUG:   
+bouton de rollback disparait pendant le waiting players
+le disable foreground dépasse sur la zone activable
+Fix multiple activation display (transfer wrapper to activationList)   
+
+le texte en planification ne tient pas compte de la phase améliorée
 
 ## Must have for v1 :
 ### Refactoring
@@ -56,24 +66,22 @@ project-card-scaling-prodction-service
 Create Event type :   
     - removing any ressource in list on played card   
     - adding any ressource in list on played card    
-    - "action portal" type event casting subsequent events   
 Activation:   
     - Droplist/Custom value selection on activation (card 32/47)   
-
-### Misc
-Check in rules if a phase can be upgraded multiple times   
+effect portal improvement: enable the validate button to be able to pass, add a condition check on every button, disable them accordingly   
+add trigger resolution priority   
 
 ### Interface
+display other player production
 Add scan/keep modifier display   
-Rollback button does nothing   
-Fix multiple activation display (transfer wrapper to activationList)   
 Phase upgraded status menu   
 Activable cards with megacredit cost in it display bugged   
 add FR translation   
 Waiting player event : rollback button display bugged   
-add validation confirmation if not all builders locked   
 add players being ready visibility on player's interface when not yet ready   
-display the phase we selected on the left progression pannel   
+add display for the phase we selected on the left progression pannel   
+add display for discounts on tags / cards
+add display for total cards played
 
 ### CI/CD
 Frontend automated testing: Ongoing   
