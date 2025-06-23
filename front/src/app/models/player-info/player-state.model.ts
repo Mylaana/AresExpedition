@@ -133,8 +133,11 @@ export class PlayerStateModel {
 
 	//phaseCardState
 	getPhaseCardUpgradedCount(): number {return this.phaseCardState.getPhaseCardUpgradedCount()}
-	addPhaseCardUpgradeCount(): void {this.phaseCardState.addPhaseCardUpgradeCount()}
-	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {this.phaseCardState.setPhaseCardUpgraded(upgrade)}
+	refreshPhaseCardUpgradeCount(): void {this.phaseCardState.refreshPhaseCardUpgradeCount()}
+	setPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
+		this.phaseCardState.setPhaseCardUpgraded(upgrade)
+		this.refreshPhaseCardUpgradeCount()
+	}
 	getPhaseSelected(): SelectablePhaseEnum {return this.phaseCardState.getPhaseSelected()}
 	getPreviousPhaseSelected(): SelectablePhaseEnum {return this.phaseCardState.getPreviousPhaseSelected()}
 	setPhaseSelected(selection: SelectablePhaseEnum): void {this.phaseCardState.setPhaseSelected(selection)}

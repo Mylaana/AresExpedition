@@ -31,7 +31,15 @@ export class PlayerPhaseCardStateModel {
 	}
 
 	getPhaseCardUpgradedCount(): number { return this.phaseCardUpgradeCount}
-	addPhaseCardUpgradeCount(): void { this.phaseCardUpgradeCount++}
+	refreshPhaseCardUpgradeCount(): void {
+		let upgraded: number = 0
+		for(let g of this.phaseGroups){
+			if(g.getPhaseIsUpgraded()){
+				upgraded++
+			}
+		}
+		this.phaseCardUpgradeCount = upgraded
+	}
 	getPhaseSelected(): SelectablePhaseEnum { return this.selectedPhase}
 	setPhaseSelected(selection: SelectablePhaseEnum): void {this.selectedPhase = selection}
 	getPreviousPhaseSelected(): SelectablePhaseEnum { return this.previousSelectedPhase}
