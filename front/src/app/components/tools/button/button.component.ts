@@ -4,7 +4,7 @@ import { ButtonBase, ColorButton, ImageButton } from '../../../models/core-game/
 import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
 import { PlayerColor } from '../../../types/global.type';
 
-type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right' | 'action' | 'selection_rounded_square' | 'xs'
+type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right' | 'leftSmall' | 'rightSmall' | 'action' | 'selection_rounded_square' | 'xs'
 type style = 'plain' | 'floating'  | 'transparent' | 'toggle'
 
 @Component({

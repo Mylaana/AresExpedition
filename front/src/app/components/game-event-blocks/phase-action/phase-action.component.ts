@@ -44,11 +44,18 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	private clientState!: PlayerStateModel
 
 	private convertPlantCost: number = 8
+	private convertHeatCost: number = 8
+	private convertInfrastructureHeatCost: number = 5
+	private convertInfrastructurePlantCost: number = 3
 	private _buyForestCost!: number
 	private _buyInfrastructureCost!: number
 	private _buyOceanCost!: number
 	private _buyTemperatureCost!: number
 	private _buyUpgradeCost!: number
+
+	private convertPlantLock!: boolean
+	private convertHeatLock!: boolean
+	private convertInfrastructureLock!: boolean
 
 	constructor(private gameStateService: GameState){}
 
@@ -56,6 +63,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => {this.onStateUpdate(state)})
 		this._actionEvent = this.event as EventCardActivator
 		this.applyPhaseCardBonusIfRelevant()
+		this.updateConvertButtonLock()
 		this.updateButtonState()
 	}
 	ngAfterViewInit(): void {
@@ -90,28 +98,36 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this._plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 		this._heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
 		if(!this._loaded){return}
+		this.updateConvertButtonLock()
 		this.updateButtonState()
 		if(this.event.button){this.updateEndPhaseButton(this.event.button as EventMainButton)}
 	}
 	updateButtonState(): void {
 		this._buyForest.updateEnabled(this._mcStock>=this._buyForestCost)
 		this._convertForest.updateEnabled(this._plantStock>=this.convertPlantCost)
-		this._convertForest.warning = this._plantStock>=this.convertPlantCost
+		this._convertForest.warning = this.convertPlantLock
 
 		this._buyTemperature.updateEnabled(this._mcStock>=this._buyTemperatureCost)
 		this._convertTemperature.updateEnabled(this._heatStock>=8)
-		this._convertTemperature.warning = this._heatStock>=8
+		this._convertTemperature.warning = this.convertHeatLock
 
 		this._buyInfrastructure.updateEnabled(this._mcStock>=this._buyInfrastructureCost)
 		this._convertInfrastructure.updateEnabled(this._heatStock>=5 && this._plantStock>=3)
-		this._convertInfrastructure.warning = this._heatStock>=5 && this._plantStock>=3
+		this._convertInfrastructure.warning = this.convertInfrastructureLock
 
 		this._buyOcean.updateEnabled(this._mcStock>=this._buyOceanCost)
 		this._buyUpgrade.updateEnabled(this._mcStock>=this._buyUpgradeCost)
 	}
+	updateConvertButtonLock(){
+		this.convertPlantLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen) 
+			&& this._plantStock>=this.convertPlantCost
+		this.convertHeatLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.temperature) 
+			&& this._heatStock>=this.convertHeatCost
+		this.convertInfrastructureLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.infrastructure) 
+			&& this._heatStock>=this.convertInfrastructureHeatCost && this._plantStock>=this.convertInfrastructurePlantCost
+	}
 	updateEndPhaseButton(button: EventMainButton){
-		let finishPhaseButtonEnabled = (this._heatStock>=8  || this._plantStock>=8 || (this._heatStock>=5  && this._plantStock>=3)) === false
-		button.updateEnabled(finishPhaseButtonEnabled)
+		button.updateEnabled(!this.convertHeatLock && !this.convertInfrastructureLock && !this.convertPlantLock)
 	}
 	applyPhaseCardBonusIfRelevant() {
 		if(this._actionEvent.hasScan===false || this._actionEvent.scanUsed){return}
