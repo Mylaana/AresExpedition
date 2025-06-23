@@ -1,6 +1,6 @@
 import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, PlayerPhase, OceanBonus, RessourceStock, ProjectFilter, GlobalParameterOffset } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
-import { myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
+import { AdvancedRessourceType, myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
@@ -193,6 +193,7 @@ export class PlayerStateModel {
 	setPrerequisiteOffset(offset: GlobalParameterOffset | GlobalParameterOffset[]){this.projectCardState.setPrerequisiteOffset(offset)}
 	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {return this.projectCardState.getPrerequisiteOffset(parameter)}
 	loadEventStateActivator(dto: EventStateActivator): void {this.projectCardState.loadEventStateActivator(dto)}
+	getPlayedListWithStockableTypes(stockType: AdvancedRessourceType | AdvancedRessourceType[]): PlayableCardModel[] {return this.projectCardState.getPlayedListWithStockableTypes(stockType)}
 
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{

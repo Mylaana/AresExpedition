@@ -1454,6 +1454,21 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 			EventFactory.simple.draw(1)
 		]
 	},
+	//Decomposers
+	'61': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.viralEnhancer_Plant):{
+				return [EventFactory.simple.addRessource({name:'plant', valueStock:1})]
+			}
+			case(EffectPortalButtonEnum.viralEnhancer_Microbe):{
+				return [EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:1}, 1)]
+			}
+			case(EffectPortalButtonEnum.viralEnhancer_Animal):{
+				return [EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:1}, 1)]
+			}
+		}
+		return []
+	},
 	//Imported Hydrogen
 	'80': (button) => {
 		switch(button){
@@ -1481,6 +1496,21 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	//Decomposers
 	'19': (button) => button===EffectPortalButtonEnum.decomposers_Add?'$ressource_microbe$':'-$ressource_microbe$: $ressource_card$',
 	//Imported Hydrogen
+	'61': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.viralEnhancer_Plant):{
+				return '$ressource_plant$'
+			}
+			case(EffectPortalButtonEnum.viralEnhancer_Microbe):{
+				return '$ressource_microbe$*'
+			}
+			case(EffectPortalButtonEnum.viralEnhancer_Animal):{
+				return '$ressource_animal$*'
+			}
+		}
+		return ''
+	},
+	//Imported Hydrogen
 	'80': (button) => {
 		switch(button){
 			case(EffectPortalButtonEnum.importedHydrogen_Plant):{
@@ -1501,6 +1531,8 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalButtonEnum[]> = {
 	//Decomposers
 	'19': ()=> [EffectPortalButtonEnum.decomposers_Add, EffectPortalButtonEnum.decomposers_Draw],
+	//Viral Enhancers
+	'61': ()=> [EffectPortalButtonEnum.viralEnhancer_Plant, EffectPortalButtonEnum.viralEnhancer_Microbe, EffectPortalButtonEnum.viralEnhancer_Animal],
 	//Imported Hydrogen
 	'80': ()=> [EffectPortalButtonEnum.importedHydrogen_Plant, EffectPortalButtonEnum.importedHydrogen_Microbe, EffectPortalButtonEnum.importedHydrogen_Animal],
 	//Large Convoy
@@ -1508,6 +1540,7 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 }
 export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
+	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
 }

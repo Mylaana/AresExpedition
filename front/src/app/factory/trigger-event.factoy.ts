@@ -146,6 +146,26 @@ const S = EventFactory.simple
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
 		return [S.draw(2)]
 	}
+	//Viral Enhancers
+	function handleTrigger_61(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
+		if(!clientState){return []}
+		let triggerred: number = 0
+		let result: EventBaseModel[] = []
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
+		if(triggerred===0){return []}
+		console.log('stockable cards: ',clientState.getPlayedListWithStockableTypes(['animal', 'microbe']).length)
+		if(clientState.getPlayedListWithStockableTypes(['animal', 'microbe']).length===0){
+			result.push(S.addRessource({name:'plant', valueStock:triggerred}))
+		} else {
+			for(let i=0; i<triggerred; i++){
+				result.push(S.effectPortal(EffectPortalEnum.viralEnhancer))
+			}
+		}
+		
+		return result
+	}
 	//Apollo Industriees
 	function handleTrigger_D01(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
@@ -262,6 +282,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'44': handleTrigger_44,
 		'45': handleTrigger_45,
 		'48': handleTrigger_48,
+		'61': handleTrigger_61,
 		'C8': handleTrigger_C8,
 		'D01': handleTrigger_D01,
 		'D04': handleTrigger_D04,

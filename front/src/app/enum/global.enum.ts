@@ -62,6 +62,7 @@ export enum EffectPortalEnum {
 	decomposers,
 	importedHydrogen,
 	largeConvoy,
+	viralEnhancer
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -74,5 +75,7 @@ export enum EffectPortalButtonEnum {
 	largeConvoy_Plant,
 	largeConvoy_Animal,
 
-
+	viralEnhancer_Plant,
+	viralEnhancer_Microbe,
+	viralEnhancer_Animal,
 }
