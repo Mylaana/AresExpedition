@@ -1147,6 +1147,16 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'D10': () => [EventFactory.simple.addRessourceToCardId({name:'science', valueStock:3}, 'D10')],
 	//Software Streamlining
 	'D11': () => [EventFactory.simple.upgradePhaseCard(1)],
+	//Biomedical Imports
+	'D14': () => [EventFactory.simple.effectPortal(EffectPortalEnum.biomedicalImports)],
+	//Cryogentic Shipment
+	'D15': (clientState) => {
+		let events: EventBaseModel[] = [EventFactory.simple.upgradePhaseCard(1)]
+		if(clientState.getPlayedListWithStockableTypes(['microbe', 'animal']).length!=0){
+			events.push(EventFactory.simple.effectPortal(EffectPortalEnum.cryogenticShipment))
+		}
+		return events
+	},
 	//Exosuits
 	'D16': () => [
 		EventFactory.simple.draw(1),
@@ -1491,6 +1501,20 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 		}
 		return [EventFactory.simple.addRessource({name:'plant', valueStock:5})]
 	},
+	//Biomedical Imports
+	'D14': (button) => {
+		if(button===EffectPortalButtonEnum.biomedicalImports_Oxygen){
+			return [EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)]
+		}
+		return [EventFactory.simple.upgradePhaseCard(1)]
+	},
+	//Cryogentic Shipment
+	'D15': (button) => {
+		if(button===EffectPortalButtonEnum.cryogenticShipment_Microbe){
+			return [EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:3})]
+		}
+		return [EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:2})]
+	},
 }
 export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalButtonEnum) => string> = {
 	//Decomposers
@@ -1527,6 +1551,10 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	},
 	//Large Convoy
 	'87': (button) => button===EffectPortalButtonEnum.largeConvoy_Plant?'$ressource_plant$$ressource_plant$$ressource_plant$$skipline$$ressource_plant$$ressource_plant$':'$ressource_animal$$ressource_animal$$ressource_animal$',
+	//Biomedical Imports
+	'D14': (button) => button===EffectPortalButtonEnum.biomedicalImports_Oxygen?'$other_oxygen$':'$other_upgrade$',
+	//Cryogentic Shipment
+	'D15': (button) => button===EffectPortalButtonEnum.cryogenticShipment_Microbe?'$ressource_microbe$$ressource_microbe$$ressource_microbe$':'$ressource_animal$$ressource_animal$',
 }
 export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalButtonEnum[]> = {
 	//Decomposers
@@ -1537,10 +1565,17 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	'80': ()=> [EffectPortalButtonEnum.importedHydrogen_Plant, EffectPortalButtonEnum.importedHydrogen_Microbe, EffectPortalButtonEnum.importedHydrogen_Animal],
 	//Large Convoy
 	'87': ()=> [EffectPortalButtonEnum.largeConvoy_Plant, EffectPortalButtonEnum.largeConvoy_Animal],
+	//Biomedical Imports
+	'D14': ()=> [EffectPortalButtonEnum.biomedicalImports_Oxygen, EffectPortalButtonEnum.biomedicalImports_Upgrade],
+	//Cryogentic Shipment
+	'D15': ()=> [EffectPortalButtonEnum.cryogenticShipment_Microbe, EffectPortalButtonEnum.cryogenticShipment_Animal],
+
 }
 export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
 	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
+	[EffectPortalEnum.biomedicalImports]: 'D14',
+	[EffectPortalEnum.cryogenticShipment]: 'D15'
 }
