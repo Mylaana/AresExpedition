@@ -67,6 +67,11 @@ const S = EventFactory.simple
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
 		return [S.addRessource({name:'plant', valueStock:2})]
 	}
+	//Cargo Ships
+	function handleTrigger_F04(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
+		return [S.effectPortal(EffectPortalEnum.cargoShips)]
+	}
 	//Pets
 	function handleTrigger_F07(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
@@ -270,6 +275,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'39': handleTrigger_39,
 		'46': handleTrigger_46,
 		'D13': handleTrigger_D13,
+		'F04': handleTrigger_F04,
 		'F07': handleTrigger_F07,
 		'CP06': handleTrigger_CP06
 	},
@@ -288,8 +294,8 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'D04': handleTrigger_D04,
 		'D08': handleTrigger_D08,
 		'P12': handleTrigger_P12,
+		'P19': handleTrigger_P19_OnTagGained,
 		'CF1': handleTrigger_CF1,
-		'P19': handleTrigger_P19_OnTagGained
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
 		'P04': handleTrigger_P04,

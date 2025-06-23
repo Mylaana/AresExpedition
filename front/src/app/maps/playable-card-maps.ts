@@ -1515,6 +1515,13 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 		}
 		return [EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:2})]
 	},
+	//Cargo Ships
+	'F04': (button) => {
+		if(button===EffectPortalButtonEnum.cargoShips_Heat){
+			return [EventFactory.simple.addRessource({name:'heat', valueStock:2})]
+		}
+		return [EventFactory.simple.addRessource({name:'plant', valueStock:2})]
+	},
 }
 export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalButtonEnum) => string> = {
 	//Decomposers
@@ -1555,6 +1562,9 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	'D14': (button) => button===EffectPortalButtonEnum.biomedicalImports_Oxygen?'$other_oxygen$':'$other_upgrade$',
 	//Cryogentic Shipment
 	'D15': (button) => button===EffectPortalButtonEnum.cryogenticShipment_Microbe?'$ressource_microbe$$ressource_microbe$$ressource_microbe$':'$ressource_animal$$ressource_animal$',
+	//Cargo Ships
+	'F04': (button) => button===EffectPortalButtonEnum.cargoShips_Heat?'$ressource_heat$$ressource_heat$':'$ressource_plant$$ressource_plant$',
+
 }
 export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalButtonEnum[]> = {
 	//Decomposers
@@ -1569,6 +1579,8 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	'D14': ()=> [EffectPortalButtonEnum.biomedicalImports_Oxygen, EffectPortalButtonEnum.biomedicalImports_Upgrade],
 	//Cryogentic Shipment
 	'D15': ()=> [EffectPortalButtonEnum.cryogenticShipment_Microbe, EffectPortalButtonEnum.cryogenticShipment_Animal],
+	//Cargo Ships
+	'F04': ()=> [EffectPortalButtonEnum.cargoShips_Heat, EffectPortalButtonEnum.cargoShips_Plant],
 
 }
 export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
@@ -1577,5 +1589,6 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
 	[EffectPortalEnum.biomedicalImports]: 'D14',
-	[EffectPortalEnum.cryogenticShipment]: 'D15'
+	[EffectPortalEnum.cryogenticShipment]: 'D15',
+	[EffectPortalEnum.cargoShips]: 'F04',
 }
