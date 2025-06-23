@@ -46,7 +46,6 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ : 
 bug eventstate avec gain plant/mc? de flip d'ocean, bonus perdu au refresh
-action phase : plant/heat conversion should not be mandatory if param is maxed out at start   
 Rollback button does nothing   
 
 ## Other BUG:   
