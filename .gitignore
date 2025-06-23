@@ -3,6 +3,7 @@
 # Local DB.json
 data/database.json
 back/data
+front/src/assets/data
 
 # Compiled output
 /dist
