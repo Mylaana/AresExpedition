@@ -46,16 +46,12 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ : 
 bug eventstate avec gain plant/mc? de flip d'ocean, bonus perdu au refresh
-action phase : plant/heat conversion should not be mandatory if param is maxed out at start   
-phase upgrade count should be increased immediatly, not at the end of the phase
 Rollback button does nothing   
 
 ## Other BUG:   
 bouton de rollback disparait pendant le waiting players
-le disable foreground dépasse sur la zone activable
-Fix multiple activation display (transfer wrapper to activationList)   
-
 le texte en planification ne tient pas compte de la phase améliorée
+
 
 ## Must have for v1 :
 ### Refactoring

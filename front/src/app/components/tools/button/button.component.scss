@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'sass:color';
 $transition-delay : 0.15s;
-$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right', 'action', 'selection_rounded_square', 'xs');
+$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right', 'leftSmall', 'rightSmall', 'action', 'selection_rounded_square', 'xs');
 $border-shape-name: ('hex_floating', 'action');
 $shape-width: (
 	'hex': 25%,
@@ -11,6 +11,8 @@ $shape-width: (
 	'large': 10%,
 	'left': 21%,
 	'right': 35%,
+	'leftSmall': 21%,
+	'rightSmall': 35%,
 	'action': 15%,
 	'selection_rounded_square': 0
 );
@@ -134,7 +136,7 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 			background-color: $disabled-color;
 		}
 	}
-	&--left{
+	&--left, &--leftSmall{
 		width: calc(100% - 1px);
 		background-color: var(--color-ares-blue-light2);
 		&::ng-deep > *{
@@ -144,7 +146,7 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 			filter: grayscale(50%);
 		}
 	}
-	&--right{
+	&--right, &--rightSmall{
 		width: calc(100% - 1px);
 		background-color: var(--color-ares-blue-dark);
 		left: 0;
@@ -226,7 +228,7 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 		}
 
 	}
-	&--left, &--right{
+	&--left, &--right, &--leftSmall, &--rightSmall{
 		background: var(--color-ares-blue);
 	}
 }
@@ -257,12 +259,24 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 
 	&--left{
 		$width: map.get($shape-width, $key:'left' );
-		aspect-ratio: 2.5 / 1;
+		aspect-ratio: 1.83 / 1;
 		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, calc(100% - #{$width}) 100%, #{$width} 100%);
 		clip-path: polygon(0% 50%, #{$width} 0%, 100% 0%, 100% 100%, #{$width} 100%);
 	}
 	&--right{
 		$width: map.get($shape-width, $key:'right' );
+		aspect-ratio: 1.1 / 1;
+		-webkit-clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
+		clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
+	}
+	&--leftSmall{
+		$width: map.get($shape-width, $key:'leftSmall' );
+		aspect-ratio: 2.5 / 1;
+		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, calc(100% - #{$width}) 100%, #{$width} 100%);
+		clip-path: polygon(0% 50%, #{$width} 0%, 100% 0%, 100% 100%, #{$width} 100%);
+	}
+	&--rightSmall{
+		$width: map.get($shape-width, $key:'rightSmall' );
 		aspect-ratio: 1.5 / 1;
 		-webkit-clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
 		clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
