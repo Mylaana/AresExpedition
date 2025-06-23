@@ -1,0 +1,9 @@
+<app-playable-card-list *ngIf="_portalCard" [cardList]="[_portalCard]"></app-playable-card-list>
+<div class="wrapper-button">
+    <app-portal-effect-button
+        *ngFor="let b of _buttons"
+        [button]="b"
+        [shape]="'xs'"
+        (buttonClicked)="onButtonClicked(b)">
+    </app-portal-effect-button>
+</div>

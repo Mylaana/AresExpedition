@@ -58,3 +58,36 @@ export enum BuilderOption {
 	selfReplicatingBacteria = 'selfReplicatingBacteria',
 	maiNiProductions = 'maiNiProductions',
 }
+export enum EffectPortalEnum {
+	decomposers,
+	importedHydrogen,
+	largeConvoy,
+	viralEnhancer,
+	biomedicalImports,
+	cryogenticShipment,
+	cargoShips,
+}
+export enum EffectPortalButtonEnum {
+	decomposers_Add,
+	decomposers_Draw,
+
+	importedHydrogen_Plant,
+	importedHydrogen_Microbe,
+	importedHydrogen_Animal,
+
+	largeConvoy_Plant,
+	largeConvoy_Animal,
+
+	viralEnhancer_Plant,
+	viralEnhancer_Microbe,
+	viralEnhancer_Animal,
+
+	biomedicalImports_Oxygen,
+	biomedicalImports_Upgrade,
+
+	cryogenticShipment_Microbe,
+	cryogenticShipment_Animal,
+
+	cargoShips_Plant,
+	cargoShips_Heat
+}

@@ -9,7 +9,7 @@ import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface"
-import { GlobalParameterNameEnum } from "../../enum/global.enum"
+import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { map } from "rxjs"
 
 export class PlayerProjectCardStateModel {
@@ -162,6 +162,9 @@ export class PlayerProjectCardStateModel {
 	}
 	getProjectPlayedStock(cardCode:string): AdvancedRessourceStock[]{
 		return this.getProjectPlayedModelFromCode(cardCode)?.stock??[]
+	}
+	getPlayedListWithStockableTypes(stockType: AdvancedRessourceType | AdvancedRessourceType[]): PlayableCardModel[] {
+		return this.filterCardModelList(this.projects.playedProjectList, {type:ProjectFilterNameEnum.stockable, stockableType:stockType})
 	}
 	private loadCardActivationCount(cardId: string, activationCount: number){
 		for(let card of this.projects.playedProjectList){

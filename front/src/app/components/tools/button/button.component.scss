@@ -1,12 +1,13 @@
 @use 'sass:map';
 @use 'sass:color';
 $transition-delay : 0.15s;
-$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right', 'action', 'selection_rounded_square');
+$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right', 'action', 'selection_rounded_square', 'xs');
 $border-shape-name: ('hex_floating', 'action');
 $shape-width: (
 	'hex': 25%,
 	'hex_floating': 25%,
 	'small': 15%,
+	'xs': 20%,
 	'large': 10%,
 	'left': 21%,
 	'right': 35%,
@@ -233,6 +234,9 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 .button-shape{
 	&--hex, &--hex_floating{
 		aspect-ratio: 1.15 / 1;
+	}
+	&--xs{
+		aspect-ratio: 2 / 1;
 	}
 	&--small{
 		aspect-ratio: 3.5 / 1;

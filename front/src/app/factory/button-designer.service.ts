@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton } from "../models/core-game/button.model";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton } from "../models/core-game/button.model";
 import { EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../types/global.type";
-import { BuilderOption } from "../enum/global.enum";
+import { BuilderOption, EffectPortalButtonEnum, EffectPortalEnum } from "../enum/global.enum";
+import { EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-maps";
 
 
 @Injectable({
@@ -177,5 +178,23 @@ export class ButtonDesigner{
 		let button = new ColorButton
 		button.color = color
 		return button
+	}
+	private static createPortalButton(portalCode: string, effectButton: EffectPortalButtonEnum): EffectPortalButton {
+		let button = new EffectPortalButton
+		button.name = 'portalEffect'
+		button.startEnabled = true
+		button.enabled = button.startEnabled
+		button.caption = EFFECT_PORTAL_BUTTON_CAPTION[portalCode](effectButton)
+		button.effect = effectButton
+		return button
+	}
+	public static createPortalButtonSet(cardCode: string): EffectPortalButton[] {
+		let buttons: EffectPortalButton[] = []
+		let buttonEnumList: EffectPortalButtonEnum[] = EFFECT_PORTAL_BUTTON_ENUM_LIST[cardCode]()
+
+		for(let b of buttonEnumList){
+			buttons.push(this.createPortalButton(cardCode, b))
+		}
+		return buttons
 	}
 }

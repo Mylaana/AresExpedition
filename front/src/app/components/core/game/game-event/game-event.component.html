@@ -54,7 +54,7 @@
 				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'
 				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder()
 				|| currentEvent.subType==='tagSelector' || currentEvent.subType==='selectCardOptionalSell'
-				|| currentEvent.subType==='selectCardForcedSell'"
+				|| currentEvent.subType==='selectCardForcedSell' || currentEvent.subType==='effectPortal'"
 				@fadeIn>
 				<app-phase-planification
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
@@ -102,6 +102,11 @@
 					[event]="currentEvent"
 					(updateSelectedCardList)="onUpdateSelectedCardList($event)">
 				</app-sell-cards>
+				<app-effect-portal
+					*ngIf="currentEvent.subType==='effectPortal'"
+					[event]="currentEvent">
+
+				</app-effect-portal>
 			</div>
 			<div class="wrapper-selectors"
 				*ngIf="currentEvent.hasCardsToSelectFrom() &&currentEvent.subType!='actionPhaseActivator'

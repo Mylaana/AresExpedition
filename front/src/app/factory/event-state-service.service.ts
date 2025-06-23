@@ -174,7 +174,8 @@ export class EventStateService{
 						p: state.v['p'],
 						r: state.v['r'],
 						tr: state.v['tr'],
-						u: state.v['u']
+						u: state.v['u'],
+						ep: state.v['ep'],
 					}
 					let event = this.createGenericEvents(content)
 					if(!event){treated = false; break}
@@ -250,6 +251,11 @@ export class EventStateService{
 		//add TR
 		if(content.tr){
 			return S.addTR(content.tr)
+		}
+
+		//effect portal
+		if(content.ep){
+			return S.effectPortal(content.ep)
 		}
 		return
 

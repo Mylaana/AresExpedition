@@ -24,6 +24,7 @@ import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/
 import { EventFactory } from '../../../../factory/event factory/event-factory';
 import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/tag-gain-list.component';
 import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-cards.component';
+import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/effect-portal.component';
 
 //this component is the main controller, and view
 
@@ -43,7 +44,8 @@ import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-c
         WaitingReadyComponent,
 		PhaseBuilderComponent,
 		TagGainListComponent,
-		SellCardsComponent
+		SellCardsComponent,
+		EffectPortalComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',

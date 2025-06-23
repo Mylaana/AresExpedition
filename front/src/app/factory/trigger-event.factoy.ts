@@ -1,4 +1,4 @@
-import { DiscardOptionsEnum, GlobalParameterNameEnum } from "../enum/global.enum";
+import { DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum } from "../enum/global.enum";
 import { EventFactory } from "./event factory/event-factory";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
@@ -67,6 +67,11 @@ const S = EventFactory.simple
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
 		return [S.addRessource({name:'plant', valueStock:2})]
 	}
+	//Cargo Ships
+	function handleTrigger_F04(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
+		return [S.effectPortal(EffectPortalEnum.cargoShips)]
+	}
 	//Pets
 	function handleTrigger_F07(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
@@ -80,14 +85,20 @@ const S = EventFactory.simple
 
 //ON_TAG_GAINED
 	//Decomposers
-	function handleTrigger_19(trigger: string, input: TriggerInput): EventBaseModel[] {
+	function handleTrigger_19(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
 		let triggerred: number = 0
 		let result: EventBaseModel[] = []
+		let card = clientState?.getProjectPlayedModelFromId('19')
+		if(!card){return []}
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
 		for(let i=0; i<triggerred; i++){
-			result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+			if(card.getStockValue('microbe')===0 && i===0){
+				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+			} else{
+				result.push(S.effectPortal(EffectPortalEnum.decomposers))
+			}
 		}
 		return result
 	}
@@ -139,6 +150,26 @@ const S = EventFactory.simple
 	function handleTrigger_48(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
 		return [S.draw(2)]
+	}
+	//Viral Enhancers
+	function handleTrigger_61(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
+		if(!clientState){return []}
+		let triggerred: number = 0
+		let result: EventBaseModel[] = []
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
+		if(triggerred===0){return []}
+		console.log('stockable cards: ',clientState.getPlayedListWithStockableTypes(['animal', 'microbe']).length)
+		if(clientState.getPlayedListWithStockableTypes(['animal', 'microbe']).length===0){
+			result.push(S.addRessource({name:'plant', valueStock:triggerred}))
+		} else {
+			for(let i=0; i<triggerred; i++){
+				result.push(S.effectPortal(EffectPortalEnum.viralEnhancer))
+			}
+		}
+		
+		return result
 	}
 	//Apollo Industriees
 	function handleTrigger_D01(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -232,7 +263,7 @@ const S = EventFactory.simple
 	}
 
 // Main Dispatch
-const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput) => EventBaseModel[]>> = {
+const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput, clientState?: PlayerStateModel) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
 		'6': handleTrigger_6,
 		'P16': handleTrigger_P16
@@ -244,6 +275,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'39': handleTrigger_39,
 		'46': handleTrigger_46,
 		'D13': handleTrigger_D13,
+		'F04': handleTrigger_F04,
 		'F07': handleTrigger_F07,
 		'CP06': handleTrigger_CP06
 	},
@@ -256,13 +288,14 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'44': handleTrigger_44,
 		'45': handleTrigger_45,
 		'48': handleTrigger_48,
+		'61': handleTrigger_61,
 		'C8': handleTrigger_C8,
 		'D01': handleTrigger_D01,
 		'D04': handleTrigger_D04,
 		'D08': handleTrigger_D08,
 		'P12': handleTrigger_P12,
+		'P19': handleTrigger_P19_OnTagGained,
 		'CF1': handleTrigger_CF1,
-		'P19': handleTrigger_P19_OnTagGained
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
 		'P04': handleTrigger_P04,
@@ -305,7 +338,7 @@ export const TriggerEffectEventFactory = {
 		for (const trig of relevantTriggers) {
 			const handler = handlers[trig];
 			if (handler) {
-				events.push(...handler(trig,  fullInput));
+				events.push(...handler(trig,  fullInput, clientState));
 			}
 		}
 		return events;

@@ -1,4 +1,4 @@
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
@@ -38,6 +38,7 @@ interface CreateEventOptionsGeneric {
 	production?: RessourceStock | RessourceStock[]
 	increaseTr?: number
 	loadProductionCardList?: string[]
+    effectPortal?: EffectPortalEnum
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -124,6 +125,9 @@ function selectTag(cardCode: string) : EventTagSelector {
 function addTagToCard(cardCode: string, tag: TagType): EventTargetCard {
 	return EventFactory.createTargetCard('addTagToCardId', cardCode, {addTagToCard:tag})
 }
+function effectPortal(portal: EffectPortalEnum): EventGeneric{
+    return EventFactory.createGeneric('effectPortal', {effectPortal: portal})
+}
 const SimpleEvent = {
 	draw,
 	discard,
@@ -144,6 +148,7 @@ const SimpleEvent = {
 	specialBuilder,
 	selectTag,
 	addTagToCard,
+    effectPortal,
 }
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
@@ -634,6 +639,12 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 			event.thenDiscard = args?.thenDiscard??0
             break
 		}
+        case('effectPortal'):{
+            event.effectPortal = args?.effectPortal
+            event.autoFinalize = false
+            event.title = 'Select one :'
+            break
+        }
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
     }
     event.button = ButtonDesigner.createEventMainButton(event.subType)
