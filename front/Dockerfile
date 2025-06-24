@@ -5,6 +5,7 @@ WORKDIR /app
 COPY front/package*.json ./
 RUN npm ci
 COPY front/ ./
+COPY data ./src/assets/data
 RUN npm run build --prod
 
 # Stage 2: Serve avec NGINX

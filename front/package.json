@@ -5,7 +5,7 @@
     "copy-data": "copyfiles -u 2 ../data/* ./src/assets/data",
     "ng": "ng",
     "start": "npm run copy-data && ng serve",
-    "build": "npm run copy-data && ng build",
+    "build": "npm run ng build",
     "watch": "npm run copy-data && ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadless"
