@@ -49,7 +49,7 @@ jobs:
       with: 
         context: ./front
         push: true
-        tags: ${{ secret.DOCKER_USERNAME }}/front:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/front:latest
       
     - name: Build and push back image
       uses: docker/build-push-action@v5
