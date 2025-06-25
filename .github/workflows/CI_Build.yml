@@ -58,7 +58,7 @@ jobs:
         context: .
         file: ./back/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}//${{ secrets.DOCKER_REPOSITORYNAME }}:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORYNAME }}:latest
 
 #    - name: Run build
 #      run: npm run build --if-present
