@@ -6,7 +6,11 @@ COPY front/package*.json ./
 RUN npm ci
 COPY front/ ./
 COPY data/ ./src/assets/data
-RUN npm run build --prod
+
+RUN echo "🛠️ Vérification de /src/assets/data :" && ls -al ./src/assets/data || echo "❌ Dossier introuvable"
+RUN npm run build:prod || (echo '❌ Build Angular échoué' && exit 1)
+#RUN npm run build:prod
+
 
 # Stage 2: Serve avec NGINX
 FROM nginx:alpine
