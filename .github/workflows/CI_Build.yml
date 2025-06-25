@@ -47,14 +47,16 @@ jobs:
     - name: Build and push front image
       uses: docker/build-push-action@v5
       with: 
-        context: ./front
+        context: .
+        file: ./front/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORYNAME }}:latest
       
     - name: Build and push back image
       uses: docker/build-push-action@v5
       with:
-        context: ./back
+        context: .
+        file: ./back/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}//${{ secrets.DOCKER_REPOSITORYNAME }}:latest
 
