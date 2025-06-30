@@ -84,3 +84,9 @@ build/
 
 # VS Code #
 **/.vscode/
+
+# Angular Environments
+/config/frontend/config.json
+
+# Java Environments
+/config/backend/.env

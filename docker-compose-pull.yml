@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  front:
+    image: mylaana/ares-expedition-front:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - back
+    volumes:
+      - ./config/front/config.json:/usr/share/nginx/html/assets/config.json
+
+  back:
+    image: mylaana/ares-expedition-back:latest
+    env_file:
+      - ./config/back/.env
