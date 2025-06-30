@@ -7,10 +7,18 @@ services:
       - "8080:80"
     depends_on:
       - back
+    networks:
+      - ares-network
     volumes:
-      - ./config/front/config.json:/usr/share/nginx/html/assets/config.json
+      - ./config/front/config.json:/usr/share/nginx/html/assets/config/config.json
 
   back:
     image: mylaana/ares-expedition-back:latest
     env_file:
       - ./config/back/.env
+    networks:
+      - ares-network
+
+networks:
+  ares-network:
+    driver: bridge
