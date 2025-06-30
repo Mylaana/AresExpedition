@@ -20,21 +20,46 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: '**/package-lock.json'
-    - run: npm ci
+        cache-dependency-path: 'front/package-lock.json'
+    
+    - name: Install front dependencies
+      run: npm ci
       working-directory: front
 
-    - name: Run tests
-      working-directory: front
+    - name: Run front tests
       run: npm run test:ci
+      working-directory: front
     
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_ID }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push front image
+      uses: docker/build-push-action@v5
+      with: 
+        context: .
+        file: ./front/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_FRONT }}:latest
       
+    - name: Build and push back image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./back/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_BACK }}:latest
+
 #    - name: Run build
 #      run: npm run build --if-present
 #      working-directory: front
