@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
-import { RxStomp } from '@stomp/rx-stomp';
+import { inject, Injectable } from '@angular/core';
+import { RxStomp, RxStompConfig } from '@stomp/rx-stomp';
 import { WebsocketQueryMessageFactory } from '../../factory/websocket-message-factory.service';
 import { GLOBAL_WS_APP_PLAYER, GLOBAL_WS_APP_DEBUG } from '../../global/global-const';
 import { MessageContentQueryEnum } from '../../enum/websocket.enum';
-import { myRxStompConfig } from './rx-stomp.config';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
-import { PlayerStateModel } from '../../models/player-info/player-state.model';
 import { Logger } from '../../utils/utils';
 import { PlayerMessage } from '../../interfaces/websocket.interface';
 import { v4 as uuidv4 } from 'uuid'
@@ -15,6 +13,7 @@ import { PlayerStateDTO } from '../../interfaces/dto/player-state-dto.interface'
 import { ScanKeep } from '../../interfaces/global.interface';
 import { EventUnionSubTypes } from '../../types/event.type';
 import { DeckQueryOptionsEnum } from '../../enum/global.enum';
+import { AppConfigService } from '../app-config.service';
 
 
 interface QueueMessage {
@@ -41,7 +40,8 @@ export class RxStompService extends RxStomp {
 		this.gameParam.currentGameId.subscribe((id) => (this.gameId = id??''))
 		this.gameParam.currentClientId.subscribe((id) => (this.clientId = id??''))
 
-        this.configure(myRxStompConfig)
+		const stompConfig = this.buildRxStompConfig()
+        this.configure(stompConfig)
         this.connected$.subscribe(() => {
             this.onClientConnected()
         })
@@ -51,6 +51,21 @@ export class RxStompService extends RxStomp {
 		})
         this.activate()
     }
+
+	private buildRxStompConfig(): RxStompConfig {
+		const configService = inject(AppConfigService)
+
+		return {
+			brokerURL: configService.wsUrl,
+			connectHeaders: {},
+			heartbeatIncoming: 0,
+			heartbeatOutgoing: 20000,
+			reconnectDelay: 2000,
+			debug: (msg: string): void => {
+				// console.log(msg)
+			}
+		}
+	}
 
     private onClientConnected() {
         console.log('%cCLIENT RECONNECTED', 'color:blue')
