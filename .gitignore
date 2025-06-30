@@ -86,11 +86,7 @@ build/
 **/.vscode/
 
 # Angular Environments
-/front/**/environments/*
-!/front/**/environments/environment.example.ts
-!/front/**/environments/environment.ts
+/config/frontend/config.json
 
 # Java Environments
-/back/**/resources/application-*.properties
-!/back/**/resources/application-example.properties
-!/back/**/resources/application-dev.properties
+/config/backend/.env
