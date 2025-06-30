@@ -18,6 +18,12 @@ services:
       - ./config/back/.env
     networks:
       - ares-network
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xmx256m -Xms128m
+    deploy:
+      resources:
+        limits:
+          memory: 256M
 
 networks:
   ares-network:
