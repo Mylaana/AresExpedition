@@ -1,0 +1,5 @@
+{
+  "production": true,
+  "apiUrl": "http://<IP>/api",
+  "wsUrl": "ws://<IP>/ws"
+}
