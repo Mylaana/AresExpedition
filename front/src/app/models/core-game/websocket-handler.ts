@@ -7,7 +7,7 @@ import { Logger } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { EventFactory } from "../../factory/event factory/event-factory";
+import { EventFactory } from "../../factory/event/event-factory";
 
 @Injectable()
 export class WebsocketHandler {

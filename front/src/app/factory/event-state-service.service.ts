@@ -3,7 +3,7 @@ import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduct
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
-import { EventFactory } from "./event factory/event-factory";
+import { EventFactory } from "./event/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";

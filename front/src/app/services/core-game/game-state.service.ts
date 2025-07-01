@@ -18,7 +18,7 @@ import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventStateService } from "../../factory/event-state-service.service";
-import { EventFactory } from "../../factory/event factory/event-factory";
+import { EventFactory } from "../../factory/event/event-factory";
 import { ActivationOption } from "../../types/project-card.type";
 import { PlayableCard } from "../../factory/playable-card.factory";
 import { ProjectCardScalingVPService } from "../cards/project-card-scaling-VP.service";

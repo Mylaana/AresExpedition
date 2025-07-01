@@ -10,7 +10,7 @@ import { PlayableCardListComponent } from '../../cards/project/playable-card-lis
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { DeckQueryOptionsEnum, GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
-import { EventFactory } from '../../../factory/event factory/event-factory';
+import { EventFactory } from '../../../factory/event/event-factory';
 import { PlayableCard } from '../../../factory/playable-card.factory';
 
 @Component({
@@ -119,11 +119,11 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 		this._buyUpgrade.updateEnabled(this._mcStock>=this._buyUpgradeCost)
 	}
 	updateConvertButtonLock(){
-		this.convertPlantLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen) 
+		this.convertPlantLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen)
 			&& this._plantStock>=this.convertPlantCost
-		this.convertHeatLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.temperature) 
+		this.convertHeatLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.temperature)
 			&& this._heatStock>=this.convertHeatCost
-		this.convertInfrastructureLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.infrastructure) 
+		this.convertInfrastructureLock = !this.clientState.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.infrastructure)
 			&& this._heatStock>=this.convertInfrastructureHeatCost && this._plantStock>=this.convertInfrastructurePlantCost
 	}
 	updateEndPhaseButton(button: EventMainButton){

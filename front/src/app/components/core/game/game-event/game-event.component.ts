@@ -21,7 +21,7 @@ import { PhasePlanificationComponent } from '../../../game-event-blocks/phase-pl
 import { PhaseProductionComponent } from '../../../game-event-blocks/phase-production/phase-production.component';
 import { PhaseActionComponent } from '../../../game-event-blocks/phase-action/phase-action.component';
 import { PhaseBuilderComponent } from '../../../game-event-blocks/phase-builder/phase-builder.component';
-import { EventFactory } from '../../../../factory/event factory/event-factory';
+import { EventFactory } from '../../../../factory/event/event-factory';
 import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/tag-gain-list.component';
 import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-cards.component';
 import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/effect-portal.component';

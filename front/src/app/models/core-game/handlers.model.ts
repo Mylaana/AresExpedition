@@ -14,7 +14,7 @@ import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ActivationOption, ProjectListType } from "../../types/project-card.type";
 import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
-import { EventFactory } from "../../factory/event factory/event-factory";
+import { EventFactory } from "../../factory/event/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { PlayableCard } from "../../factory/playable-card.factory";
