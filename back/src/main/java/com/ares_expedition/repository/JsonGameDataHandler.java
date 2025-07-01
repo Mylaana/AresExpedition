@@ -109,7 +109,7 @@ public class JsonGameDataHandler {
                     if((!card.get("cardType").equals("corporation")) && cardCode instanceof String){continue;}
                     break;
             }
-            if((card.get("status").equals("blocked") && cardCode instanceof String)){continue;}
+            if(!(card.get("status").equals("implemented") || card.get("status").equals("validated")) || !(cardCode instanceof String)){continue;}
             idList.add(cardCode.toString());
         }
 
