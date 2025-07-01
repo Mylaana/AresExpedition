@@ -64,14 +64,8 @@ export class EventHandler {
 				let card = event.getCardToBuildId()
 				if(card===undefined){return}
 				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
-				if(event.builderType==='development_second_card'){
-					console.log('second builder lets go')
-					event.cardBuilder[1].setFirstCardBuilt()
-					event.cardSelector.filter = {type:ProjectFilterNameEnum.developmentPhaseSecondBuilder}
-					event.title = 'Play a second green card with a printed cost of 12MC or less.'
-					event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList({type:ProjectFilterNameEnum.developmentPhaseSecondBuilder})
-					console.log(event)
-				}
+				event.setFirstCardBuilt()
+				event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList({type:ProjectFilterNameEnum.developmentPhaseSecondBuilder})
 				break
 			}
 			case(BuilderOption.drawCard):{
