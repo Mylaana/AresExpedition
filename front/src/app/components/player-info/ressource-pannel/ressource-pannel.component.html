@@ -1,1 +1,7 @@
-<app-ressource-card *ngFor="let ressourceCard of ressource" [ressource]="ressourceCard" [handSize]="handSize"></app-ressource-card>
+<div class="wrapper-pannel">
+	<ng-container *ngFor="let ressourceCard of ressource">
+		<app-ressource-card [ressource]="ressourceCard" [handSize]="handSize"></app-ressource-card>
+		<div class="separator"
+			*ngIf="ressourceCard.id<5"></div>
+	</ng-container>
+</div>

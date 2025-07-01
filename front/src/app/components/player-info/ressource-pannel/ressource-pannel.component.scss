@@ -1,11 +1,21 @@
-:host {
+.wrapper-pannel {
     display: flex;
     align-items: center;
     gap: 2px;
 
     width: auto;
     height: 100%;
+
+	border: rgba(rgb(255, 129, 25), .5) solid 1px;
+	border-radius: 5px;
+	padding-left: 1px;
+	padding-right: 1px;
 }
 app-ressource-card{
     height: 100%;
+}
+.separator{
+	border-left: rgba(rgb(255, 129, 25), .5) solid 2px;
+	height: 80%;
+	margin: 1px;
 }
