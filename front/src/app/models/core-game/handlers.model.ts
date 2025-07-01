@@ -65,7 +65,7 @@ export class EventHandler {
 				if(card===undefined){return}
 				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
 				event.setFirstCardBuilt()
-				event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList({type:ProjectFilterNameEnum.developmentPhaseSecondBuilder})
+				event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList(event.cardSelector.filter)
 				break
 			}
 			case(BuilderOption.drawCard):{
