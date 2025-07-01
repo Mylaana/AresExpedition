@@ -1429,7 +1429,7 @@
             "microbe"
         ],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -2045,11 +2045,11 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_plant$",
             "fr": ""
         },
         "effectActionTextOption2": {
-            "en": "",
+            "en": " $ressource_microbe$*",
             "fr": ""
         },
         "effectActionText2Option1": {
@@ -2354,11 +2354,11 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$other_arrow$$ressource_microbe$",
             "fr": ""
         },
         "effectActionTextOption2": {
-            "en": "",
+            "en": "-$ressource_microbe$$ressource_microbe$:  $other_temperature$",
             "fr": ""
         },
         "effectActionText2Option1": {
@@ -3275,11 +3275,11 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_microbe$",
             "fr": ""
         },
         "effectActionTextOption2": {
-            "en": "",
+            "en": "-3$ressource_microbe$: $other_ocean$",
             "fr": ""
         },
         "effectActionText2Option1": {
@@ -3812,11 +3812,11 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_microbe$",
             "fr": ""
         },
         "effectActionTextOption2": {
-            "en": "",
+            "en": "-$ressource_microbe$$ressource_microbe$: $other_oxygen$",
             "fr": ""
         },
         "effectActionText2Option1": {
@@ -4652,7 +4652,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -6111,7 +6111,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -6653,7 +6653,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -11163,7 +11163,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "implemented",
+        "status": "bugged",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16885,7 +16885,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_card$$skipline$+ $ressource_card$ / $other_milestone$",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -16961,7 +16961,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_milestone$",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -17113,7 +17113,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$other_arrow$$skipline$$ressource_megacreditvoid_12$:$other_temperature$$skipline$$ressource_megacreditvoid_-2$/$other_upgrade$",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -17799,7 +17799,7 @@
         "startingMegacredits": 0,
         "status": "blocked",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_megacreditvoid_2$$skipline$$ressource_megacreditvoid_2$*",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -17876,7 +17876,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "-$other_tr$: $other_upgrade$",
             "fr": "-$other_tr$: $other_upgrade$"
         },
         "effectActionTextOption2": {
@@ -18185,7 +18185,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "2$ressource_card$ -2$ressource_card$",
             "fr": "2$ressource_card$ -2$ressource_card$"
         },
         "effectActionTextOption2": {
@@ -18261,7 +18261,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$other_upgrade$",
             "fr": "$other_upgrade$"
         },
         "effectActionTextOption2": {
@@ -18414,7 +18414,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -18491,7 +18491,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20696,7 +20696,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -20776,7 +20776,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ If 4 $tag_science$",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -20852,7 +20852,7 @@
         "startingMegacredits": 0,
         "status": "implemented",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$other_arrow$ $ressource_card$$skipline$If $other_infrastructure$ + $ressource_card$",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -24030,7 +24030,7 @@
         "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
-            "en": "$other_planification$",
+            "en": "",
             "fr": ""
         },
         "effectText2": {
@@ -24052,7 +24052,7 @@
         },
         "stockable": [],
         "startingMegacredits": 25,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24127,10 +24127,10 @@
             "fr": ""
         },
         "stockable": [
-            ""
+            "science"
         ],
         "startingMegacredits": 10,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
