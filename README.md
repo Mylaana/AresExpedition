@@ -38,10 +38,7 @@ Backend: Junit
 ### CI
 - GitHub Actions   
 - Automated test on branch push   
-
-### CD (to be added)
-- Triggerred when new code is merged on main branch   
-- TBD (pbly AWS LightSail)   
+- Automated Image build and push   
 
 # WIP : 
 ## /!\Critical BUG/!\ : 
@@ -49,8 +46,8 @@ bug eventstate avec gain plant/mc? de flip d'ocean, bonus perdu au refresh
 Rollback button does nothing   
 
 ## Other BUG:   
-bouton de rollback disparait pendant le waiting players
-le texte en planification ne tient pas compte de la phase améliorée
+rollback button disapearing while waiting for other players   
+planification text not being updated with phase card upgraded   
 
 
 ## Must have for v1 :
@@ -82,10 +79,6 @@ add display for total cards played
 ### CI/CD
 Frontend automated testing: Ongoing   
 Backend automated testing: no backend yet   
-Deploy on AWS Lightsail   
-
-### Security
-Add backend REST requests content validation   
 
 ## Nice to have for v1
 ### Non-Critical Bug :

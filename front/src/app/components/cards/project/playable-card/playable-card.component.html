@@ -80,7 +80,7 @@
 	<app-card-activation-list
 		*ngIf="state.isActivable()"
 		[projectCard]="projectCard"
-		[maximumCardActivation]="_maximumActivation"
+		[maximumCardActivation]="!isActivable()"
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>

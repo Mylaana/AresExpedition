@@ -3,7 +3,7 @@ import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduct
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
-import { EventFactory } from "./event factory/event-factory";
+import { EventFactory } from "./event/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
@@ -46,6 +46,19 @@ export class EventStateService{
 							let card = this.projectCardInfoService.getCardById(cardCode)
 							card?eventBuilder.cardBuilder[i].setSelectedCard(card):null
 						}
+
+						/*special case with development second builder being locked without
+						being used due to eventstate saving triggerred by first built card*/
+						if(dto.t===EventStateTypeEnum.builderDevelopemntLocked){
+							if(i===1 && content.s[i].cc===undefined){
+								eventBuilder.setFirstCardBuilt()
+								//eventBuilder.cardBuilder[i].setBSuilderIsLocked(false)
+								console.log(eventBuilder)
+								continue
+							}
+						}
+
+						//default
 						eventBuilder.cardBuilder[i].setBSuilderIsLocked(content.s[i].l)
 					}
 				}

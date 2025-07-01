@@ -341,6 +341,13 @@ export class EventCardBuilder extends EventBaseCardSelector {
             }
         }
     }
+	setFirstCardBuilt(){
+		if(this.builderType!="development_second_card"){return}
+		this.cardBuilder[1].setFirstCardBuilt()
+		this.cardBuilder[1].setFirstCardBuilt()
+		this.cardSelector.filter = {type:ProjectFilterNameEnum.developmentPhaseSecondBuilder}
+		this.title = 'Play a second green card with a printed cost of 12MC or less.'
+	}
 
 	override onSwitch(): void {
 		//reset cardBuilder's selection onSwitch

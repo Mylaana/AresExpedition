@@ -1,6 +1,5 @@
 import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum, BuilderOption, EffectPortalEnum, EffectPortalButtonEnum } from "../enum/global.enum";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
-import { EventFactory } from "../factory/event factory/event-factory";
 import { RessourceStock } from "../interfaces/global.interface";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
@@ -8,8 +7,9 @@ import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { PlayableCard } from "../factory/playable-card.factory";
 import { ActivationOption } from "../types/project-card.type";
 import { Checker } from "../utils/checker";
+import { EventFactory } from "../factory/event/event-factory";
 
-//const S = EventFactory.simple
+
 function getScaling(cardCode: string, clientState: PlayerStateModel){
 	return PlayableCard.activable.getScalingCostActivation(cardCode, clientState)
 }
@@ -152,7 +152,11 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Tardigrades
 	'58': (cardCode) => [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)],
 	//Think Tank
-	'59': () => [EventFactory.simple.draw(1)],
+	'59': () => [
+		EventFactory.simple.draw(1),
+		EventFactory.simple.addRessource({name:'megacredit', valueStock:-2})
+
+	],
 	//Volcanic Pools
 	'62': (card, clientState) => [
 		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
@@ -351,7 +355,7 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'54': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('54', clientState), 'min', clientState),
 	//Steelworks
 	'56': (_, clientState) => Checker.isRessourceOk('heat', 6, 'min', clientState),
-	//Steelworks (duplicate ID?)
+	//Think Tank
 	'59': (_, clientState) => Checker.isRessourceOk('megacredit', 2, 'min', clientState),
 	//Volcanic Pools
 	'62': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('62', clientState), 'min', clientState),

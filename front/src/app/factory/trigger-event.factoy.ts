@@ -1,5 +1,5 @@
 import { DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum } from "../enum/global.enum";
-import { EventFactory } from "./event factory/event-factory";
+import { EventFactory } from "./event/event-factory";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
@@ -168,7 +168,7 @@ const S = EventFactory.simple
 				result.push(S.effectPortal(EffectPortalEnum.viralEnhancer))
 			}
 		}
-		
+
 		return result
 	}
 	//Apollo Industriees
