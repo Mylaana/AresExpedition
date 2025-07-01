@@ -118,12 +118,11 @@ public class JsonGameDataHandler {
     private static void checkDatabaseExistOrCreateIt(){
         File f = new File(DATABASE_PATH);
         
-        if(!f.isFile()){
-            ObjectMapper mapper = new ObjectMapper();
+        if (!f.isFile()) {
             try {  
                 Files.createDirectories(Paths.get(DATABASE_DIRECTORY));
-                mapper.writeValue(new File(DATABASE_PATH), new Object());
-
+                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+                objectMapper.writeValue(f, new HashMap<String, GameData>());
             } catch (IOException e) {  
                 e.printStackTrace();  
             } 

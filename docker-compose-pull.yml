@@ -1,0 +1,29 @@
+services:
+  front:
+    image: mylaana/ares-expedition-front:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - back
+    networks:
+      - ares-network
+    volumes:
+      - ./config/front/config.json:/usr/share/nginx/html/assets/config/config.json
+
+  back:
+    image: mylaana/ares-expedition-back:latest
+    env_file:
+      - ./config/back/.env
+    networks:
+      - ares-network
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xmx256m -Xms128m
+    deploy:
+      resources:
+        limits:
+          memory: 400MB
+          cpus: '0.5'
+
+networks:
+  ares-network:
+    driver: bridge
