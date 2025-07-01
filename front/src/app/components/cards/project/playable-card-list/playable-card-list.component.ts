@@ -48,6 +48,7 @@ export class PlayableCardListComponent implements OnChanges{
 		this.resetSelector()
 		this.updateCardList()
 		this.setBackground()
+		console.log(this.event)
 		if(this.event){this.setListSubType(this.event as EventCardSelector)}
 		if(this.event?.hasCardActivator()){
 			this.setActivationCount(this.event as EventCardActivator)
@@ -108,6 +109,7 @@ export class PlayableCardListComponent implements OnChanges{
 	}
 	private setActivationCount(event: EventCardActivator): void {
 		this._activateTwiceRemaining = event.doubleActivationMaxNumber - event.doubleActivationCount
+		console.log('set activation count', event, this._activateTwiceRemaining)
 	}
 	private setSelectorFromEvent(event: EventCardSelector): void {
 		this._cardSelector = event.cardSelector
