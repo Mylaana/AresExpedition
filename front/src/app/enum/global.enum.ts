@@ -37,7 +37,8 @@ export enum ProjectFilterNameEnum {
 	playedDisplayCorpsAndActivable = 'playedDisplayCorpsAndActivable',
 	playedDisplayTriggers = 'playedDisplayTriggers',
 	playedDisplayRed = 'playedDisplayRed',
-	developmentPhaseSecondBuilder = 'developmentPhaseSecondBuilder'
+	developmentPhaseSecondBuilder = 'developmentPhaseSecondBuilder',
+	corporations = 'corporations'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
