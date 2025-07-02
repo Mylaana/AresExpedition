@@ -1602,3 +1602,11 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},
 }
+
+export const EFFECT_PORTAL_BUTTON_ENABLED: Record<string, (clientState: PlayerStateModel, buttonRule: EffectPortalButtonEnum) => boolean> = {
+	'19': (clientState, buttonRule)=> {
+		if(buttonRule===EffectPortalButtonEnum.decomposers_Add){return true}
+		if(!clientState){return false}
+		return Checker.isMinimumStockOnPlayedCardOk({name:'microbe', valueStock:1},'min', clientState, '19')
+	}
+}

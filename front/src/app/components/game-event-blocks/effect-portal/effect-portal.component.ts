@@ -7,6 +7,9 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { EffectPortalButton, NonEventButton } from '../../../models/core-game/button.model';
 import { EffectPortalService } from '../../../services/core-game/effect-portal.service';
 import { PortalEffectButtonComponent } from '../../tools/button/portal-effect-button.component';
+import { GameState } from '../../../services/core-game/game-state.service';
+import { PlayerStateModel } from '../../../models/player-info/player-state.model';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
 	selector: 'app-effect-portal',
@@ -25,18 +28,34 @@ export class EffectPortalComponent implements OnInit{
 	_portal!: EffectPortalEnum
 	_portalCard!: PlayableCardModel | undefined
 	_buttons!: EffectPortalButton[]
+	private clientState!: PlayerStateModel
+	private destroy$ = new Subject<void>
 
-	constructor(private portalService: EffectPortalService){}
+	constructor(
+		private portalService: EffectPortalService,
+		private gameStateService: GameState
+	){}
 	ngOnInit(): void {
 		let event: EventGeneric = this.event as EventGeneric
 		if(event.effectPortal===undefined){return}
 		this._portal = event.effectPortal
 		this.portalService.initialize(this._portal)
 		this.loadPortal()
+
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this.updateClientState(state))
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
+	}
+	updateClientState(state: PlayerStateModel){
+		this.clientState = state
+		this.portalService.onStateUpdate(state)
+		this._buttons = this.portalService.buttons
 	}
 	loadPortal(){
 		this._portalCard = this.portalService.getPortalCard()
-		this._buttons = this.portalService.getButtons()
+		this._buttons = this.portalService.buttons
 	}
 	onButtonClicked(button: EffectPortalButton){
 		this.event.finalized = true
