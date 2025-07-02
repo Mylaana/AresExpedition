@@ -24052,7 +24052,7 @@
         },
         "stockable": [],
         "startingMegacredits": 25,
-        "status": "implemented",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24130,7 +24130,7 @@
             "science"
         ],
         "startingMegacredits": 10,
-        "status": "implemented",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
