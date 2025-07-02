@@ -7,7 +7,7 @@ import { AdvancedRessourceType } from "../types/global.type";
 import { GlobalInfo } from "../services/global/global-info.service";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_GAINED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
-| 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION'
+| 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
 interface TriggerInput {
 	playedCard: PlayableCardModel,
 	increasedParameter: GlobalParameterNameEnum
@@ -265,6 +265,17 @@ const S = EventFactory.simple
 		return [S.draw(draw)]
 	}
 
+//ON_UPGRADED_PHASE_SELECTED
+//Communication Streamlining
+	function handleTrigger_D05(trigger: string, input: TriggerInput):EventBaseModel[]{
+		return [S.addRessource({name:'megacredit', valueStock:1})]
+	}
+
+//Nebu Labs
+	function handleTrigger_P31(trigger: string, input: TriggerInput):EventBaseModel[]{
+		return [S.addRessource({name:'megacredit', valueStock:2})]
+	}
+
 // Main Dispatch
 const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput, clientState?: PlayerStateModel) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
@@ -315,6 +326,10 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 	},
 	ON_TRIGGER_RESOLUTION: {
 		'40': handleTrigger_40_resolution,
+	},
+	ON_UPGRADED_PHASE_SELECTED: {
+		'D05': handleTrigger_D05,
+		'P31': handleTrigger_P31,
 	}
 };
 

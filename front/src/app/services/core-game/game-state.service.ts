@@ -224,6 +224,13 @@ export class GameState{
 		let state = this.getClientState()
 		state.setPhaseSelected(phase)
 		this.updateClientState(state)
+
+
+		if(!state.isSelectedPhaseUpgraded()){return}
+		let triggers = state.getTriggersIdActive()
+		let newEvents = PlayableCard.getOnTriggerredEvents('ON_UPGRADED_PHASE_SELECTED', triggers, state, {})
+		this.addEventQueue(newEvents, 'last')
+
     }
     clientPlayerValidateSelectedPhase(): void {
         this.rxStompService.publishSelectedPhase(this.getClientCurrentSelectedPhase())
@@ -426,7 +433,7 @@ export class GameState{
 
         //check for triggers and add them to queue
 		let activeTriggers = state.getTriggersIdActive()
-        let eventsOnPlayed =PlayableCard.getOnTriggerredEvents('ON_CARD_PLAYED', activeTriggers, state, {playedCard:card})
+        let eventsOnPlayed = PlayableCard.getOnTriggerredEvents('ON_CARD_PLAYED', activeTriggers, state, {playedCard:card})
         if(eventsOnPlayed.length>0){
             events = events.concat(eventsOnPlayed)
         }

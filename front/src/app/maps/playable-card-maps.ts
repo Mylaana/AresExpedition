@@ -1147,6 +1147,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	},
 	//Sultira
 	'D04': () => [EventFactory.simple.upgradePhaseCard(1, [0])],
+	//Communication Streamlining
+	'D05': () => [
+		EventFactory.simple.upgradePhaseCard(1, [2])
+	],
 	//Exosuits
 	'D09': () => [EventFactory.simple.upgradePhaseCard(1)],
 	//Fibrous Composite Material
@@ -1421,6 +1425,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'P16': () => [
 		EventFactory.simple.specialBuilder(BuilderOption.maiNiProductions)
 	],
+	//Nebu Labs
+	'P31': () => [
+		EventFactory.simple.upgradePhaseCard(1)
+	],
 	//Zetasel
 	'CP06': () => [EventFactory.simple.drawThenDiscard(5,4)],
 	//Point Luna
@@ -1593,11 +1601,9 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.cryogenticShipment]: 'D15',
 	[EffectPortalEnum.cargoShips]: 'F04',
 }
-
 export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},
 }
-
 export const EFFECT_PORTAL_BUTTON_ENABLED: Record<string, (clientState: PlayerStateModel, buttonRule: EffectPortalButtonEnum) => boolean> = {
 	'19': (clientState, buttonRule)=> {
 		if(buttonRule===EffectPortalButtonEnum.decomposers_Add){return true}
