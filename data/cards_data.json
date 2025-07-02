@@ -17772,7 +17772,7 @@
             "en": "Action: Gain 2 MC.\n*If you selected an upgraded phase card during this round, gain 2 additional MC.",
             "fr": ""
         },
-        "effectSummaryOption": "scalingCostActivation",
+        "effectSummaryOption": "",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -23712,7 +23712,7 @@
             "en": "",
             "fr": ""
         },
-        "effectSummaryType": "trigger",
+        "effectSummaryType": "",
         "effectSummaryText": {
             "en": "$other_upgrade$:$ressource_megacreditvoid_2$",
             "fr": ""
@@ -23733,7 +23733,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Upgrade a Phase card.",
+            "en": "",
             "fr": ""
         },
         "prerequisiteText": {
@@ -23746,7 +23746,7 @@
         },
         "stockable": [],
         "startingMegacredits": 25,
-        "status": "implemented",
+        "status": "filled",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
