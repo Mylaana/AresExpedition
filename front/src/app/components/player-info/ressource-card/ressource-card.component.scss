@@ -34,12 +34,13 @@ $brackground-production: (
 	height: fit-content;
 }
 .text-production-symbol{
-	color: white;
+	color:var(--color-ares-orange);
 	font-size: 55%;
 }
 .text-production{
-	color: white;
-	font-size: 100%;
+	color: var(--color-ares-orange);
+	font-size: 95%;
+	font-weight: 300;
 }
 .wrapper-text-production{
 	flex-grow: 1;
