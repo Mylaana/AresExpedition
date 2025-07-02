@@ -18,9 +18,9 @@ $brackground-production: (
 	margin-right: $horizontal-padding;
 
     height: 100%;
-    aspect-ratio: 2;
+    aspect-ratio: 2
 }
-p{
+.text-default{
 	color: black;
 	margin: 0px;
 	background-color: rgba(255,255,255, 0.3);
@@ -28,10 +28,24 @@ p{
 	padding: 0;
 	padding-left: 0px;
 	padding-right: 0px;
-	font-size: 100%;
+	font-size: 85%;
 	border-radius: 25%;
 	width: fit-content;
 	height: fit-content;
+}
+.text-production-symbol{
+	color:var(--color-ares-orange);
+	font-size: 55%;
+}
+.text-production{
+	color: var(--color-ares-orange);
+	font-size: 95%;
+	font-weight: 300;
+}
+.wrapper-text-production{
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
 }
 img {
     max-width: 100%;
@@ -43,9 +57,11 @@ img {
 			position: relative;
 			aspect-ratio: 1;
 			height: 95%;
+			width: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			flex-direction: column;
 		}
 	  }
 }
@@ -92,8 +108,8 @@ img {
 	}
 }
 .box-production{
-	height: calc(100% - $production-border * 2);
-	aspect-ratio: 1;
+	height: 15%;
+	width: 90%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -101,9 +117,8 @@ img {
 .background-production{
 	@each $name in $brackground-production{
 		&--#{$name}{
-			border: grey $production-border solid;
-			border-radius: 4px;
-			background-size: 80px 80px;
+			border-radius: 2px;
+			background-size: 10px 80px;
 		}
 	}
 }

@@ -3,8 +3,8 @@
         <img [ngClass]="{'img-card': ressource.name=='card'}" [src]="imageUrl" [alt]="ressource.name">
     </div>
     <div *ngIf="ressource.hasStock" class="box-stock">
-        <p *ngIf="ressource.name!='card'"> {{ ressource.valueStock }}</p>
-		<p *ngIf="ressource.name==='card'"> {{ handSize }}</p>
+        <p class="text-default" *ngIf="ressource.name!='card'"> {{ ressource.valueStock }}</p>
+		<p class="text-default" *ngIf="ressource.name==='card'"> {{ handSize }}</p>
     </div>
     <div class="wrapper-ressource-mod"
 	 	*ngIf="ressource.name==='steel' || ressource.name==='titanium'">
@@ -17,7 +17,9 @@
     </div>
 </div>
 <div class="wrapper-ressource--production">
-    <div class="box-production" [ngClass]="['background-production--'+_production]">
-        <p>{{ ressource.valueProd }}</p>
-    </div>
+	<div class="wrapper-text-production">
+		<p class="text-production-symbol">+</p>
+		<p class="text-production">{{ ressource.valueProd }}</p>
+	</div>
+    <div class="box-production" [ngClass]="['background-production--'+_production]"></div>
 </div>
