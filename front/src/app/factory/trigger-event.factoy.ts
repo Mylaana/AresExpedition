@@ -121,15 +121,12 @@ const S = EventFactory.simple
 	//Interplanetary Conference
 	function handleTrigger_37(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
-		//triggers for each tag in the played card
-		let draw = 0
 		for(let tag of input.tagList){
 			if(tag === GlobalInfo.getIdFromType('earth','tag') || tag === GlobalInfo.getIdFromType('jovian','tag')){
-				draw += 1
+				return [S.draw(1)]
 			}
 		}
-		if(draw===0){return []}
-		return [S.draw(draw)]
+		return []
 	}
 	//Mars University
 	function handleTrigger_40(trigger: string, input: TriggerInput): EventBaseModel[] {

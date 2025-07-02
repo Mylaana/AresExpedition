@@ -1434,12 +1434,7 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Energy Subsidies
 	'25': (card) => card.hasTag('power') ? 4 : 0,
 	//Interplanetary Conference
-	'37': (card) => {
-		let mod = 0
-		if (card.hasTag('earth')){ mod += 3}
-		if (card.hasTag('jovian')){mod += 3}
-		return mod
-	},
+	'37': (card) => card.hasTag('earth') || card.hasTag('jovian')?3:0,
 	//Media Group
 	'42': (card) => card.hasTag('event') ? 5 : 0,
 	//Research Outpost
