@@ -6640,7 +6640,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "Flip an ocean tile. You draw 2 cards. Gain 5 plants or add 3 animals to another card.",
+            "en": "Flip an ocean tile.$skipline$You draw 2 cards.$skipline$Gain 5 plants or add 3 animals to another card.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -17721,7 +17721,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17772,7 +17772,7 @@
             "en": "Action: Gain 2 MC.\n*If you selected an upgraded phase card during this round, gain 2 additional MC.",
             "fr": ""
         },
-        "effectSummaryOption": "",
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
@@ -17797,7 +17797,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "$ressource_megacreditvoid_2$$skipline$$ressource_megacreditvoid_2$*",
             "fr": ""
@@ -22610,7 +22610,7 @@
         },
         "stockable": [],
         "startingMegacredits": 27,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -23694,6 +23694,80 @@
     {
         "id": 0,
         "card_code": "P31",
+        "origin": "Promo",
+        "cost": 0,
+        "tagsId": [],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Nebu Labs",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_upgrade$:$ressource_megacreditvoid_2$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: Whenever you reveal an upgraded Phase card during planification, gain 2MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 25,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "",
         "origin": "",
         "cost": 0,
         "tagsId": [
@@ -23716,11 +23790,11 @@
         },
         "effectSummaryType": "",
         "effectSummaryText": {
-            "en": "$other_upgrade$:$ressource_megacreditvoid_2$",
+            "en": "",
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever you reveal an upgraded Phase card during planification, gain 2MC.",
+            "en": "",
             "fr": ""
         },
         "effectSummaryOption": "",
