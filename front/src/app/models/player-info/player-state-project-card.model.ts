@@ -3,14 +3,13 @@ import { GAME_HAND_MAXIMUM_SIZE } from "../../global/global-const"
 import { PlayerProjectCardStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { AdvancedRessourceStock, GlobalParameterOffset, ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
-import { ProjectCardInitializeService } from "../../services/cards/project-card-initialize.service"
 import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type"
 import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
-import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface"
+import { EventStateActivator } from "../../interfaces/event-state.interface"
 import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
-import { map } from "rxjs"
+import { TRIGGER_LIMIT } from "../../maps/playable-card-maps"
 
 export class PlayerProjectCardStateModel {
     private hand: string[] = []
@@ -24,14 +23,12 @@ export class PlayerProjectCardStateModel {
 	private handMaximumSize
 
 	private cardInfoService: ProjectCardInfoService
-	private cardInitializeService: ProjectCardInitializeService
 	private prerequisiteOffset: Map<GlobalParameterNameEnum, number> = new Map
 
 
     constructor(private injector: Injector, dto: PlayerProjectCardStateDTO,
 	){
 		this.cardInfoService = this.injector.get(ProjectCardInfoService)
-		this.cardInitializeService = this.injector.get(ProjectCardInitializeService)
 
 		this.hand = dto.h,
 		this.handCorporation = dto.hc,
@@ -49,10 +46,12 @@ export class PlayerProjectCardStateModel {
 		let cardCopy = this.cardInfoService.getCardById(card.cardCode)
 		if(!cardCopy){return}
         this.projects.playedProjectList.push(cardCopy)
-		this.cardInitializeService.initialize(cardCopy)
 
         if(!cardCopy.hasTrigger()){return}
         this.triggers.playTrigger(cardCopy.cardCode)
+		let limit = TRIGGER_LIMIT[cardCopy.cardCode]()
+		if(!limit){return}
+		cardCopy.setCardTriggerLimit(limit)
     }
 	addCardsToHand(cards: string | string[]){this.hand = this.hand.concat(Utils.toArray(cards))}
 	addCardsToDiscard(cards: string | string[]){this.handDiscard = this.handDiscard.concat(Utils.toArray(cards))}

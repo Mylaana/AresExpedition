@@ -5,7 +5,7 @@ import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { PlayableCard } from "../factory/playable-card.factory";
-import { ActivationOption } from "../types/project-card.type";
+import { ActivationOption, TriggerLimit } from "../types/project-card.type";
 import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
 
@@ -1595,4 +1595,8 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.biomedicalImports]: 'D14',
 	[EffectPortalEnum.cryogenticShipment]: 'D15',
 	[EffectPortalEnum.cargoShips]: 'F04',
+}
+
+export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> ={
+	'P19': ()=> {return {value:0, limit:5}},
 }
