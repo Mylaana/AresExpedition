@@ -1,5 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum } from "../enum/global.enum"
+import { TagType } from "../types/global.type"
 import { AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep } from "./global.interface"
 
 export interface EventStateDTO {
@@ -54,7 +55,7 @@ export interface EventStateIncreaseResearchScanKeep extends EventStateContentDTO
 export interface EventStateCardProduction extends EventStateContentDTO {
 	cl: string[]
 }
-export interface EventStateGeneric extends EventStateContentDTO {
+export interface EventStateGenericDTO extends EventStateContentDTO {
 	igp?: GlobalParameterValue, // increase global parameter
 	fo?: number //forest and oxygen
 	tr?: number //add tr
@@ -73,4 +74,7 @@ export interface EventStateActivator extends EventStateContentDTO {
 	ca: number //current doubleActivation count
 	ma: number //max activation
 	su: boolean //scan used
+}
+export interface EventStateContentTagSelectorDTO extends EventStateContentDTO {
+	atl: TagType[]
 }
