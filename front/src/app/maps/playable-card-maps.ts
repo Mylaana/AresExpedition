@@ -1597,6 +1597,6 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.cargoShips]: 'F04',
 }
 
-export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> ={
+export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},
 }

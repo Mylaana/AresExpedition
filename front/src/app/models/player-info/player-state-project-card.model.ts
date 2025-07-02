@@ -49,9 +49,9 @@ export class PlayerProjectCardStateModel {
 
         if(!cardCopy.hasTrigger()){return}
         this.triggers.playTrigger(cardCopy.cardCode)
-		let limit = TRIGGER_LIMIT[cardCopy.cardCode]()
-		if(!limit){return}
-		cardCopy.setCardTriggerLimit(limit)
+		let limitFunction = TRIGGER_LIMIT[cardCopy.cardCode]
+		if(!limitFunction){return}
+		cardCopy.setCardTriggerLimit(limitFunction())
     }
 	addCardsToHand(cards: string | string[]){this.hand = this.hand.concat(Utils.toArray(cards))}
 	addCardsToDiscard(cards: string | string[]){this.handDiscard = this.handDiscard.concat(Utils.toArray(cards))}
