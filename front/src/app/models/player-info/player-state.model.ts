@@ -209,6 +209,7 @@ export class PlayerStateModel {
 	getPrerequisiteOffset(parameter: GlobalParameterNameEnum): number {return this.projectCardState.getPrerequisiteOffset(parameter)}
 	loadEventStateActivator(dto: EventStateActivator): void {this.projectCardState.loadEventStateActivator(dto)}
 	getPlayedListWithStockableTypes(stockType: AdvancedRessourceType | AdvancedRessourceType[]): PlayableCardModel[] {return this.projectCardState.getPlayedListWithStockableTypes(stockType)}
+	getPlayedCorporations(): PlayableCardModel[] {return this.projectCardState.getPlayedCorporations()}
 
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{

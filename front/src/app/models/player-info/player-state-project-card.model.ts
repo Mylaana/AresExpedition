@@ -174,6 +174,9 @@ export class PlayerProjectCardStateModel {
 			}
 		}
 	}
+	getPlayedCorporations(): PlayableCardModel[] {
+		return this.getProjectPlayedModelList({type:ProjectFilterNameEnum.corporations})
+	}
 	toJson(): PlayerProjectCardStateDTO {
 		return {
 			h: this.hand,

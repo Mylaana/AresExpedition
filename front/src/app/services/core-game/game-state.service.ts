@@ -774,4 +774,18 @@ export class GameState{
 			}
 		}
 	}
+	applyAverageStartingMegacredits(){
+		let clientState = this.getClientState()
+		let corps = clientState.getPlayedCorporations()
+		let penalty: number = 0
+
+		for(let c of corps){
+			penalty += c.startingMegacredits??0
+		}
+
+		//rounds up MC penalty
+		let event = EventFactory.simple.addRessource({name:'megacredit', valueStock: -Math.ceil(penalty /2)})
+		this.addEventQueue(event, 'first')
+		console.log('average', penalty, event)
+	}
 }

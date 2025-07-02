@@ -166,6 +166,10 @@ export class PlayableCardModel{
 				if(this.cardType!='greenProject'){return false}
 				return this.costInitial<=12
 			}
+			case(ProjectFilterNameEnum.corporations):{
+				if(this.cardType!='corporation'){return false}
+				return true
+			}
         }
         return false
     }

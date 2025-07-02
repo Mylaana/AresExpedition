@@ -293,6 +293,7 @@ export class EventHandler {
 			case('selectMerger'):{
 				event.finalized = true
 				this.gameStateService.playCorporation(event.cardSelector.selectedList[0], true)
+				this.gameStateService.applyAverageStartingMegacredits()
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
