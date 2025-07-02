@@ -55,7 +55,6 @@ export class GameState{
     private clientId!: myUUID
     playerCount = new BehaviorSubject<myUUID[]>([]);
 	private eventQueueSavedState: EventStateDTO[] = []
-	private mergerGame: boolean = false
 
     private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
@@ -115,7 +114,6 @@ export class GameState{
     }
 
     public setCurrentPhase(newPhase: NonSelectablePhaseEnum, isReconnect: boolean): void {
-
 		let events: EventBaseModel[] = []
 		switch(newPhase){
 			case(NonSelectablePhaseEnum.undefined):{return}
@@ -136,13 +134,20 @@ export class GameState{
 					events.push(EventFactory.createPhase('researchPhase'));break}
 				}
 		}
-		events.push(EventFactory.createCardSelector('selectCardForcedSell'))
+		if(this.isLastPhaseOfRound(newPhase)){
+			events.push(EventFactory.createCardSelector('selectCardForcedSell'))
+		}
 		events.push(EventFactory.createGeneric('endOfPhase'))
 		events.push(EventFactory.createGeneric('waitingGroupReady'))
 		this.phase.next(newPhase)
 		this.addEventQueue(events,'last')
     };
-
+	private isLastPhaseOfRound(phase: NonSelectablePhaseEnum): boolean {
+		if(phase===NonSelectablePhaseEnum.planification){false}
+		let phaseList = this.selectedPhaseList.getValue()
+		console.log('is last phase :', phase.toString()===phaseList[phaseList.length-1])
+		return phase.toString()===phaseList[phaseList.length-1]
+	}
     public setClientReady(ready: boolean){
         this.setPlayerReady(this.clientId, ready)
     };
