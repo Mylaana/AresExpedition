@@ -94,7 +94,7 @@ const S = EventFactory.simple
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
 		for(let i=0; i<triggerred; i++){
-			if(card.getStockValue('microbe')===0 && i===0){
+			if(card.getStockValue('microbe')<=0 && i===0){
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
 			} else{
 				result.push(S.effectPortal(EffectPortalEnum.decomposers))

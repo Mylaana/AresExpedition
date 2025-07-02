@@ -163,10 +163,10 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 				igp: event.increaseParameter,
 				tr: event.increaseTr,
 				fo: event.addForestPoint,
-				r: event.baseRessource,
-				u: event.phaseCardUpgradeQuantity??0,
+				r: event.subType==='addRessourceToPlayer'?event.baseRessource:undefined,
+				u: event.phaseCardUpgradeQuantity??undefined,
 				l: event.phaseCardUpgradeList,
-				p: event.baseRessource,
+				p: event.subType==='addProduction'?event.baseRessource:undefined,
 				ep: event.effectPortal
 			}
 			return {

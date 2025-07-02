@@ -267,7 +267,7 @@ export class EventStateService{
 		}
 
 		//effect portal
-		if(content.ep){
+		if(content.ep!=undefined){
 			return S.effectPortal(content.ep)
 		}
 		return
