@@ -75,4 +75,7 @@ public class MessageOutputFactory {
     public static BaseMessageOutputDTO createSelectCorporationMessage(String gameId,  GameStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.SELECT_CORPORATION, content);
     }
+    public static BaseMessageOutputDTO createSelectCorporationMergerMessage(String gameId,  GameStateMessageOutputDTO content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.SELECT_CORPORATION_MERGER, content);
+    }
 }

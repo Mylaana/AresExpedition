@@ -169,7 +169,21 @@ public class GameController {
                 break;
 
             case SELECT_CORPORATION:
+                Boolean merger = game.getGameOptions().getMerger();
+                if(merger){
+                    game.setAllPlayersNotReady();
+                    game.setGameStatus(GameStatusEnum.SELECT_CORPORATION_MERGER);
+                    wsOutput.sendPushToGroup(MessageOutputFactory.createSelectCorporationMergerMessage(game.getGameId(), game.getGameState()));
+                } else {
+                    game.setGameStatus(GameStatusEnum.STARTED);
+                    game.removeCorporationsFromHands();
+                    this.goToNextPhase(game);
+                }
+                break;
+
+            case SELECT_CORPORATION_MERGER:
                 game.setGameStatus(GameStatusEnum.STARTED);
+                game.removeCorporationsFromHands();
                 this.goToNextPhase(game);
                 break;
 

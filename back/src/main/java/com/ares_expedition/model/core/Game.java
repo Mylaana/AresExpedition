@@ -33,6 +33,7 @@ public class Game {
     private List<GlobalParameter> globalParameters = new ArrayList<>();
     private List<String> deckCorporations = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
+    private GameOptions gameOptions;
 
     public Game() {
     }
@@ -48,6 +49,7 @@ public class Game {
         this.globalParameters = GlobalParameter.createGameGlobalParameters();
         this.deckCorporations = JsonGameDataHandler.getCardsIdList(CardTypeEnum.CORPORATION);
         this.shuffleDeck(this.deckCorporations);
+        this.gameOptions = new GameOptions(gameConfig.getOptions());
 
         for(CreatePlayerDTO playerConfig: gameConfig.getPlayers()){
             //groupPlayerId
@@ -325,13 +327,29 @@ public class Game {
     }
 
     public void setStartingHandCorporations() {
+        Integer totalCorpNumber = this.deckCorporations.size();
+        Integer playerNumber = this.groupPlayerState.entrySet().size();
+        Integer corpNumber;
+        if(this.getGameOptions().getMerger()){
+             corpNumber = Math.min(6, totalCorpNumber / playerNumber);
+        } else {
+            corpNumber = 4;
+        }
+
+        //distribute all corps if single player
+        if(playerNumber==1){
+            corpNumber=totalCorpNumber;
+        }
+
         for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
-            Integer corpNumber = 4;
-            if(this.groupPlayerState.entrySet().size()==1){
-                corpNumber = 100;
-            }
             entry.getValue().setHandCorporations(drawCorporations(corpNumber));
         }
+    }
+    
+    public void removeCorporationsFromHands(){
+        for(Map.Entry<String,PlayerState> entry: this.groupPlayerState.entrySet()){
+            entry.getValue().setHandCorporations(new ArrayList<>());
+        } 
     }
 
     public void fillDiscardPileFromPlayerDiscard() {
@@ -433,6 +451,14 @@ public class Game {
             }
         }
         return true;
+    }
+
+    public GameOptions getGameOptions() {
+        return this.gameOptions;
+    }
+
+    public void setGameOptions(GameOptions gameOptions) {
+        this.gameOptions = gameOptions;
     }
 
     public GameData toData(){

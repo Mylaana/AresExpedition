@@ -6,7 +6,6 @@ import { GameState } from "../../services/core-game/game-state.service";
 import { Logger } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";
-import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventFactory } from "../../factory/event/event-factory";
 
 @Injectable()
@@ -76,6 +75,10 @@ export class WebsocketHandler {
 				this.handleMessageSelectCorporation(message.content)
 				break
 			}
+			case(GroupMessageContentResultEnum.selectCorporationMerger):{
+				this.handleMessageSelectCorporation(message.content, true)
+				break
+			}
             default:{
                 console.log('UNHANDLED GROUP MESSAGE RECEIVED: ', message)
             }
@@ -126,6 +129,10 @@ export class WebsocketHandler {
 				this.handleMessageSelectCorporation(content)
 				break
 			}
+			case(GameStatusEnum.selectCorporationMerger):{
+				this.handleMessageSelectCorporation(content, true)
+				break
+			}
 			case(GameStatusEnum.selectStartingHand):{
 				this.handleMessageSelectStartingHand(content)
 				break
@@ -164,12 +171,12 @@ export class WebsocketHandler {
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setSelectStartingHandEvents()
 	}
-	private handleMessageSelectCorporation(content: WsGameState){
+	private handleMessageSelectCorporation(content: WsGameState, merger: boolean = false){
 		this.gameStateService.reset()
 		this.gameStateService.clearEventQueue()
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
-		this.gameStateService.setSelectCorporationEvents()
+		this.gameStateService.setSelectCorporationEvents(merger)
 	}
 	private handleMessageOceanResult(content: WsOceanResult){
 		this.gameStateService.addOceanBonus(content)

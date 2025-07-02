@@ -55,6 +55,7 @@ export class GameState{
     private clientId!: myUUID
     playerCount = new BehaviorSubject<myUUID[]>([]);
 	private eventQueueSavedState: EventStateDTO[] = []
+	private mergerGame: boolean = false
 
     private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
@@ -425,10 +426,13 @@ export class GameState{
 		playerState.addRessource('megacredit', quantity * (GAME_CARD_SELL_VALUE + playerState.getSellCardValueMod()))
 		this.updateClientState(playerState)
 	}
-	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType):void{
+	playCardFromClientHand(card: PlayableCardModel, cardType: PlayableCardType, removeCorpoHand: boolean = false):void{
 		let events: EventBaseModel[] = []
 		let state = this.getClientState()
 		state.playCard(card, cardType)
+		if(removeCorpoHand){
+			state.removeCorporationsFromHand()
+		}
 		let playedCardEvents = PlayableCard.getOnPlayedEvents(card.cardCode, state)
 
         //check for triggers and add them to queue
@@ -624,27 +628,25 @@ export class GameState{
 		events.push(EventFactory.createGeneric('waitingGroupReady'))
 		this.addEventQueue(events,'first')
 	}
-	public setSelectCorporationEvents(): void {
+	public setSelectCorporationEvents(isMerger: boolean = false): void {
 		let events: EventBaseModel[] = []
-		events.push(EventFactory.createCardSelector('selectCorporation', {cardSelector: {selectFrom: this.getClientHandCorporationModelList()}}))
+		console.log(isMerger)
+		if(isMerger){
+			events.push(EventFactory.createCardSelector('selectMerger',{cardSelector: {selectFrom: this.getClientHandCorporationModelList(),},isMerger:isMerger}))
+		} else {
+			events.push(EventFactory.createCardSelector('selectCorporation', {cardSelector: {selectFrom: this.getClientHandCorporationModelList()}}))
+		}
+
 		events.push(EventFactory.createGeneric('endOfPhase'))
 		events.push(EventFactory.createGeneric('waitingGroupReady'))
 		this.addEventQueue(events,'first')
 	}
-	public playCorporation(corporation: PlayableCardModel): void {
-		this.playCardFromClientHand(corporation, 'corporation')
-	}
-	private dtoToPlayerState(dto: PlayerStateDTO): PlayerStateModel {
-		return PlayerStateModel.fromJson(dto, this.injector)
-	}
-	private dtoToGroupPlayerState(groupDto: PlayerStateDTO[]): PlayerStateModel[] {
-		let groupState: PlayerStateModel[] = []
-
-		for(let dto of groupDto){
-			groupState.push(PlayerStateModel.fromJson(dto, this.injector))
-		}
-
-		return groupState
+	public playCorporation(corporation: PlayableCardModel, isMerger: boolean = false): void {
+		this.playCardFromClientHand(
+			corporation,
+			'corporation',
+			//this.mergerGame && isMerger || this.mergerGame===false
+		)
 	}
 	public initializeGroupReady(wsGroupReady: WsGroupReady[], wsGroupState: PlayerStateDTO[]): void {
 		let groupReady: PlayerReadyModel[] = []

@@ -52,6 +52,7 @@
 				*ngIf="currentEvent.subType==='planificationPhase' || currentEvent.subType==='productionPhase'
 				|| currentEvent.subType==='actionPhaseActivator' || currentEvent.subType==='upgradePhaseCards'
 				|| currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'
+				|| currentEvent.subType==='selectMerger'
 				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder()
 				|| currentEvent.subType==='tagSelector' || currentEvent.subType==='selectCardOptionalSell'
 				|| currentEvent.subType==='selectCardForcedSell' || currentEvent.subType==='effectPortal'"
@@ -77,7 +78,8 @@
 					[event]="currentEvent">
 				</app-phase-card-upgrade-selector>
 				<app-initial-draft
-					*ngIf="currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'"
+					*ngIf="currentEvent.subType==='selectStartingHand' || currentEvent.subType==='selectCorporation'
+						|| currentEvent.subType==='selectMerger'"
 					[event]="currentEvent"
 					(updateSelectedCardList)="onUpdateSelectedCardList($event)">
 				</app-initial-draft>
@@ -111,6 +113,7 @@
 			<div class="wrapper-selectors"
 				*ngIf="currentEvent.hasCardsToSelectFrom() &&currentEvent.subType!='actionPhaseActivator'
 					&& currentEvent.subType!='selectStartingHand' && currentEvent.subType!='selectCorporation'
+					&& currentEvent.subType!='selectMerger'
 					&& !currentEvent.hasCardBuilder() && currentEvent.subType!='selectCardOptionalSell'
 					&& currentEvent.subType!='selectCardForcedSell'"
 				[class.centered]="currentEvent.hasCardBuilder() === false"

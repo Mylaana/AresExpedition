@@ -290,6 +290,11 @@ export class EventHandler {
 				this.gameStateService.playCorporation(event.cardSelector.selectedList[0])
 				break
 			}
+			case('selectMerger'):{
+				event.finalized = true
+				this.gameStateService.playCorporation(event.cardSelector.selectedList[0], true)
+				break
+			}
 			default:{Logger.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
         }
 		event.activateSelection()

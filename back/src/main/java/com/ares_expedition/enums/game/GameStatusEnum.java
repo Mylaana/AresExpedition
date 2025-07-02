@@ -5,5 +5,6 @@ public enum GameStatusEnum {
     SELECT_STARTING_HAND,
     SELECT_CORPORATION,
     STARTED,
-    GAME_OVER
+    GAME_OVER,
+    SELECT_CORPORATION_MERGER
 }

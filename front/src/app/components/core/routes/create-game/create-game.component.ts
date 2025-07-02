@@ -56,7 +56,7 @@ export class CreateGameComponent {
 		const gameConfig: ApiMessage = {
 			gameId: Utils.newUUID(),
 			players:  postPlayerList,
-			options: {gameMode: 'standard'}
+			options: {merger: true}
 		};
 		console.log('post gameconfig:',gameConfig)
 		this.apiService.createGame(gameConfig).subscribe({
