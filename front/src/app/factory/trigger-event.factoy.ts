@@ -5,9 +5,10 @@ import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { AdvancedRessourceType } from "../types/global.type";
 import { GlobalInfo } from "../services/global/global-info.service";
+import { RessourceStock } from "../interfaces/global.interface";
 
-export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_GAINED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
-| 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION'
+export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
+| 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
 interface TriggerInput {
 	playedCard: PlayableCardModel,
 	increasedParameter: GlobalParameterNameEnum
@@ -17,7 +18,8 @@ interface TriggerInput {
 	ressourceAddedValue: number
 	receivingCard: PlayableCardModel,
 	forestGained: number,
-	discardedCard: PlayableCardModel
+	discardedCard: PlayableCardModel,
+	productionIncreased: RessourceStock
 }
 const S = EventFactory.simple
 
@@ -265,6 +267,24 @@ const S = EventFactory.simple
 		return [S.draw(draw)]
 	}
 
+//ON_UPGRADED_PHASE_SELECTED
+//Communication Streamlining
+	function handleTrigger_D05(trigger: string, input: TriggerInput):EventBaseModel[]{
+		return [S.addRessource({name:'megacredit', valueStock:1})]
+	}
+
+//ON_PRODUCTION_INCREASED
+//Mining Guild
+	function handleTrigger_C6(trigger: string, input: TriggerInput):EventBaseModel[]{
+		if(input.productionIncreased.name!='steel' || input.productionIncreased.valueStock<=0){return []}
+		return [S.addTR(input.productionIncreased.valueStock)]
+	}
+
+//Nebu Labs
+	function handleTrigger_P31(trigger: string, input: TriggerInput):EventBaseModel[]{
+		return [S.addRessource({name:'megacredit', valueStock:2})]
+	}
+
 // Main Dispatch
 const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput, clientState?: PlayerStateModel) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
@@ -310,12 +330,16 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 	ON_FOREST_GAINED: {
 		'53': handleTrigger_53
 	},
-	ON_PRODUCTION_GAINED: {
-
+	ON_PRODUCTION_INCREASED: {
+		'C6': handleTrigger_C6
 	},
 	ON_TRIGGER_RESOLUTION: {
 		'40': handleTrigger_40_resolution,
-	}
+	},
+	ON_UPGRADED_PHASE_SELECTED: {
+		'D05': handleTrigger_D05,
+		'P31': handleTrigger_P31,
+	},
 };
 
 function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {
@@ -328,7 +352,8 @@ function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {
 		ressourceAdded: input.ressourceAdded??"science",
 		ressourceAddedValue: input.ressourceAddedValue??0,
 		forestGained: input.forestGained??0,
-		discardedCard: input.discardedCard??new PlayableCardModel
+		discardedCard: input.discardedCard??new PlayableCardModel,
+		productionIncreased: input.productionIncreased??{name:'megacredit', valueStock:0}
 	}
 }
 export const TriggerEffectEventFactory = {

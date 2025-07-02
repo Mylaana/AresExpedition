@@ -143,6 +143,17 @@ export class PlayerStateModel {
 	setPhaseSelected(selection: SelectablePhaseEnum): void {this.phaseCardState.setPhaseSelected(selection)}
 	getPhaseCards(onlyUpgraded: boolean = false): PhaseCardModel[] {return this.phaseCardState.getPhaseCards(onlyUpgraded)}
 	getPhaseGroups(): PhaseCardGroupModel[] {return this.phaseCardState.getPhaseGroups()}
+	isSelectedPhaseUpgraded(): boolean {
+		let selected = this.getPhaseSelected()
+		if(selected===SelectablePhaseEnum.undefined){return false}
+		let group = this.getPhaseGroups()
+		for(let g of group){
+			if(selected===g.phaseGroup && g.phaseIsUpgraded){
+				return true
+			}
+		}
+		return false
+	}
 
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {
