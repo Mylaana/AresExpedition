@@ -1,11 +1,13 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: CI build and test
+name: CI build test and push image on PR
 
 on:
+  pull_request:
+    branches: ["main"]
   push:
-    branches-ignore: "main"
+    branches: ["main"]
 
 jobs:
   build-and-test:
@@ -59,7 +61,3 @@ jobs:
         file: ./back/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_BACK }}:latest
-
-#    - name: Run build
-#      run: npm run build --if-present
-#      working-directory: front
