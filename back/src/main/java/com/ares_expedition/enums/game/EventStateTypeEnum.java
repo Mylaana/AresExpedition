@@ -19,5 +19,6 @@ public enum EventStateTypeEnum {
     UPGRADE_PHASE,
     ADD_RESSOURCE_TO_PLAYER,
     DRAW_THEN_DISCARD_UNQUERIED,
-    GENERIC
+    GENERIC,
+    TAG_SELECTION
 }

@@ -1,7 +1,7 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGeneric, EventStateActivator } from "../interfaces/event-state.interface"
-import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric } from "../models/core-game/event.model"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGenericDTO, EventStateActivator, EventStateContentTagSelectorDTO } from "../interfaces/event-state.interface"
+import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric, EventTagSelector } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
 function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
@@ -125,7 +125,20 @@ function eventComplexSelectorToJson(event: EventComplexCardSelector): EventState
 		}
 	}
 	return
-
+}
+function eventTagSelectorToJson(event: EventTagSelector): EventStateDTO | undefined {
+	switch(event.subType){
+		case('tagSelector'):{
+			let content: EventStateContentTagSelectorDTO = {
+				atl: event.authorizedTagList
+			}
+			return {
+				o: EventStateOriginEnum.create,
+				t: EventStateTypeEnum.tagSelection,
+				v: content
+			}
+		}
+	}
 }
 function eventQueueToJson(events: EventBaseModel[]): EventStateDTO[] {
 		let result: EventStateDTO[] = []
@@ -159,14 +172,14 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 		case('addProduction'):
 		case('effectPortal'):
 		{
-			let content: EventStateGeneric = {
+			let content: EventStateGenericDTO = {
 				igp: event.increaseParameter,
 				tr: event.increaseTr,
 				fo: event.addForestPoint,
-				r: event.baseRessource,
-				u: event.phaseCardUpgradeQuantity??0,
+				r: event.subType==='addRessourceToPlayer'?event.baseRessource:undefined,
+				u: event.phaseCardUpgradeQuantity??undefined,
 				l: event.phaseCardUpgradeList,
-				p: event.baseRessource,
+				p: event.subType==='addProduction'?event.baseRessource:undefined,
 				ep: event.effectPortal
 			}
 			return {
@@ -194,6 +207,7 @@ function toJson(event: EventBaseModel): EventStateDTO | undefined {
 		case('targetCard'):{dto = eventTargetCardToJson(event as EventTargetCard); break}
 		case('ComplexSelector'):{dto = eventComplexSelectorToJson(event as EventComplexCardSelector); break}
 		case('generic'):{dto = eventGenericToJson(event as EventGeneric); break}
+		case('tagSelector'):{dto = eventTagSelectorToJson(event as EventTagSelector); break}
 		default:{break}
 	}
 	if(dto){return dto}

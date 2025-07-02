@@ -52,6 +52,9 @@ export class PlayableCardModel{
     getCardTriggerLimit(): TriggerLimit | undefined{
         return this.triggerLimit
     }
+	setCardTriggerLimit(limit: TriggerLimit){
+		this.triggerLimit = limit
+	}
     addRessourceToStock(ressource: AdvancedRessourceStock): void {
         if(this.checkStockable(ressource.name)===false){return}
         if(this.checkStockExists(ressource.name)===false){
@@ -205,10 +208,6 @@ export class PlayableCardModel{
 export class TriggerState {
     playedCards: string[] = []
     activeCards: string[] = []
-    activeOnRessourceAddedToCard: string[] = []
-    activeOnParameterIncrease: string[] = []
-    activeOnPlayedCard: string[] = []
-    activeOnGainedTag: string[] = []
     activeCostModTrigger: string[] = []
 
 	constructor(dto?: TriggerStateDTO){
@@ -222,18 +221,6 @@ export class TriggerState {
     }
     getActivePlayedTriggers(): string[] {
         return this.activeCards
-    }
-    getOnRessourceAddedToCard(): string[] {
-        return this.activeOnRessourceAddedToCard
-    }
-    getOnParameterIncrease(): string[] {
-        return this.activeOnParameterIncrease
-    }
-    getOnPlayedCard(): string[] {
-        return this.activeOnPlayedCard
-    }
-    getOnGainedTag(): string[] {
-        return this.activeOnGainedTag
     }
     getCostMod(): string[] {
         return this.activeCostModTrigger

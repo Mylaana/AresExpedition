@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGeneric, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
+import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTagSelectorDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGenericDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
-import { EventBaseModel, EventCardActivator, EventCardBuilder } from "../models/core-game/event.model";
+import { EventBaseModel, EventCardActivator, EventCardBuilder, EventTagSelector } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
@@ -180,7 +180,7 @@ export class EventStateService{
 					break
 				}
 				case(EventStateTypeEnum.generic):{
-					let content: EventStateGeneric = {
+					let content: EventStateGenericDTO = {
 						fo: state.v['fo'],
 						igp: state.v['igp'],
 						l: state.v['l'],
@@ -201,6 +201,15 @@ export class EventStateService{
 						di: state.v['di']
 					}
 					newEvents.push(EventFactory.simple.drawThenDiscard(content.dr, content.di))
+					break
+				}
+				case(EventStateTypeEnum.tagSelection):{
+					let content: EventStateContentTagSelectorDTO = {
+						atl:state.v['atl']
+					}
+					let event = this.createEventTagSelector(content)
+					if(!event){treated = false; break}
+					newEvents.push(event)
 					break
 				}
 				default:{treated = false}
@@ -233,9 +242,10 @@ export class EventStateService{
 		}
 		return newEvents
 	}
-	private createGenericEvents(content: EventStateGeneric): EventBaseModel | undefined {
-		let newEvents: EventBaseModel[] = []
-
+	private createEventTagSelector(content: EventStateContentTagSelectorDTO):  EventTagSelector | undefined{
+		return S.selectTag('D20')
+	}
+	private createGenericEvents(content: EventStateGenericDTO): EventBaseModel | undefined {
 		//add production
 		if(content.p){
 			return S.addProduction(content.p)
@@ -267,7 +277,7 @@ export class EventStateService{
 		}
 
 		//effect portal
-		if(content.ep){
+		if(content.ep!=undefined){
 			return S.effectPortal(content.ep)
 		}
 		return

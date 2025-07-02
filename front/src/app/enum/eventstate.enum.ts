@@ -15,6 +15,7 @@ export enum EventStateTypeEnum {
 	increaseResearchScanKeep = 'INCREASE_RESEARCH_SCANKEEP',
 	generic = 'GENERIC',
 	productionCards = 'PRODUCTION_CARDS',
+	tagSelection = 'TAG_SELECTION',
 
 	/*
 	addRessourceToPlayer = 'ADD_RESSOURCE_TO_PLAYER',

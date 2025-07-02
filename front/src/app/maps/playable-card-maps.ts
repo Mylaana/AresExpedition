@@ -5,7 +5,7 @@ import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { PlayableCard } from "../factory/playable-card.factory";
-import { ActivationOption } from "../types/project-card.type";
+import { ActivationOption, TriggerLimit } from "../types/project-card.type";
 import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
 
@@ -393,6 +393,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'12': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.white, 'min', s),
 	//Caretaker Contract
 	'14': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Decomposers
+	'19': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
 	//Extreme-Cold Fungus
 	'27': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.purple, 'max', s),
 	//Fish
@@ -1432,12 +1434,7 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Energy Subsidies
 	'25': (card) => card.hasTag('power') ? 4 : 0,
 	//Interplanetary Conference
-	'37': (card) => {
-		let mod = 0
-		if (card.hasTag('earth')){ mod += 3}
-		if (card.hasTag('jovian')){mod += 3}
-		return mod
-	},
+	'37': (card) => card.hasTag('earth') || card.hasTag('jovian')?3:0,
 	//Media Group
 	'42': (card) => card.hasTag('event') ? 5 : 0,
 	//Research Outpost
@@ -1595,4 +1592,16 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.biomedicalImports]: 'D14',
 	[EffectPortalEnum.cryogenticShipment]: 'D15',
 	[EffectPortalEnum.cargoShips]: 'F04',
+}
+
+export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
+	'P19': ()=> {return {value:0, limit:5}},
+}
+
+export const EFFECT_PORTAL_BUTTON_ENABLED: Record<string, (clientState: PlayerStateModel, buttonRule: EffectPortalButtonEnum) => boolean> = {
+	'19': (clientState, buttonRule)=> {
+		if(buttonRule===EffectPortalButtonEnum.decomposers_Add){return true}
+		if(!clientState){return false}
+		return Checker.isMinimumStockOnPlayedCardOk({name:'microbe', valueStock:1},'min', clientState, '19')
+	}
 }

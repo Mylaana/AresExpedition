@@ -373,6 +373,7 @@ export class EventTagSelector extends EventBaseModel {
     override title!: string
     targetCardId!: string
 	selectedTag!: TagType
+	authorizedTagList!: TagType[]
     override autoFinalize: boolean = false
 }
 

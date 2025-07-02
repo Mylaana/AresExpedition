@@ -3,7 +3,9 @@ import { EventUnionSubTypes } from "../types/event.type";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton } from "../models/core-game/button.model";
 import { EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../types/global.type";
 import { BuilderOption, EffectPortalButtonEnum, EffectPortalEnum } from "../enum/global.enum";
-import { EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-maps";
+import { EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENABLED, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-maps";
+import { Checker } from "../utils/checker";
+import { PlayerStateModel } from "../models/player-info/player-state.model";
 
 
 @Injectable({
@@ -179,21 +181,23 @@ export class ButtonDesigner{
 		button.color = color
 		return button
 	}
-	private static createPortalButton(portalCode: string, effectButton: EffectPortalButtonEnum): EffectPortalButton {
+	private static createPortalButton(portalCode: string, effectButton: EffectPortalButtonEnum, clientState: PlayerStateModel): EffectPortalButton {
 		let button = new EffectPortalButton
+		let enabledRule= EFFECT_PORTAL_BUTTON_ENABLED[portalCode]? EFFECT_PORTAL_BUTTON_ENABLED[portalCode](clientState, effectButton):true
 		button.name = 'portalEffect'
-		button.startEnabled = true
+		button.startEnabled = enabledRule
 		button.enabled = button.startEnabled
 		button.caption = EFFECT_PORTAL_BUTTON_CAPTION[portalCode](effectButton)
 		button.effect = effectButton
+
 		return button
 	}
-	public static createPortalButtonSet(cardCode: string): EffectPortalButton[] {
+	public static createPortalButtonSet(cardCode: string, clientState: PlayerStateModel): EffectPortalButton[] {
 		let buttons: EffectPortalButton[] = []
 		let buttonEnumList: EffectPortalButtonEnum[] = EFFECT_PORTAL_BUTTON_ENUM_LIST[cardCode]()
 
 		for(let b of buttonEnumList){
-			buttons.push(this.createPortalButton(cardCode, b))
+			buttons.push(this.createPortalButton(cardCode, b, clientState))
 		}
 		return buttons
 	}

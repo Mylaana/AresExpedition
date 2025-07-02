@@ -94,7 +94,7 @@ const S = EventFactory.simple
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
 		for(let i=0; i<triggerred; i++){
-			if(card.getStockValue('microbe')===0 && i===0){
+			if(card.getStockValue('microbe')<=0 && i===0){
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
 			} else{
 				result.push(S.effectPortal(EffectPortalEnum.decomposers))
@@ -121,15 +121,12 @@ const S = EventFactory.simple
 	//Interplanetary Conference
 	function handleTrigger_37(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
-		//triggers for each tag in the played card
-		let draw = 0
 		for(let tag of input.tagList){
 			if(tag === GlobalInfo.getIdFromType('earth','tag') || tag === GlobalInfo.getIdFromType('jovian','tag')){
-				draw += 1
+				return [S.draw(1)]
 			}
 		}
-		if(draw===0){return []}
-		return [S.draw(draw)]
+		return []
 	}
 	//Mars University
 	function handleTrigger_40(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -189,6 +186,7 @@ const S = EventFactory.simple
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnTagGained(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
+		console.log('bacterial triggerred on tag gained')
 		return [S.addRessourceToCardId({name:'microbe', valueStock: 1}, trigger)]
 	}
 	//Saturn Systems
@@ -222,21 +220,26 @@ const S = EventFactory.simple
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnRessourceAdded(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.ressourceAdded!='microbe'|| input.ressourceAddedValue<1){return []}
+		console.log('bacterial triggerred on ressource added')
 
 		let stock = input.receivingCard.getStockValue('microbe')
 		let result: EventBaseModel[] = []
 		if(stock>=5){
 			result.push(S.deactivateTrigger(trigger))
+			console.log('deactivating trigger')
 		}
 
 		let limit = input.receivingCard.getCardTriggerLimit()
+		console.log('limit: ', limit)
 		if(limit===undefined){return []}
 
 		let addValue = Math.min(input.ressourceAddedValue, limit?.limit - limit.value)
+		console.log('add value: ', addValue)
 		if(addValue<=0){return[]}
 
 		result.push(S.increaseResearchScanKeep({keep:0, scan:addValue}))
 		input.receivingCard.triggerLimit.value += addValue
+		console.log(addValue)
 		return result
 	}
 //ON_CARD_ACTIVATED
