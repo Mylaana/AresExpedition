@@ -22,7 +22,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '12', '13', '15', '16', '18', '57', '58', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20']
+export const ACTIVATION_NO_COST: string[] = ['3', '4', '12', '13', '15', '16', '18', '57', '58', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20']
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -169,6 +169,11 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'64': (card, clientState) => [
 		EventFactory.simple.addRessource({ name: 'plant', valueStock: -getScaling(card, clientState) }),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
+	//Drone Assisted Construction
+	//Will give 4MC if phase 3 is selected by owner and is then upgraded during phase3 itself
+	'D06': (card, clientState) => [
+		EventFactory.simple.addRessource({name:'megacredit',valueStock:getScaling(card, clientState)})
+	],
 	//Experimental Technology
 	'D07': () => [
 		EventFactory.simple.addTR(-1),
@@ -241,6 +246,8 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	'63': (state) => Math.max(0, 12 - (state.getRessourceInfoFromType('titanium')?.valueProd ?? 0)),
 	//Wood Burning Stoves
 	'64': (state) => Math.max(0, 4 - Number(state.getPhaseSelected() === SelectablePhaseEnum.action)),
+	//Drone Assisted Construction
+	'D06': (state) => state.isSelectedPhaseUpgraded()?4:2,
 	//Interplanetary Superhighway
 	'F05': (state) => state.getTagsOfType('science') >= 4 ? 5 : 10,
 	//Maglev Trains
@@ -281,6 +288,8 @@ export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: Playe
 	'63': (state) => `$ressource_megacreditvoid_${getScaling('63', state)}$: $other_ocean$`,
 	//Wood Burning Stoves
 	'64': (state) => `$-${getScaling('64', state)}$ressource_plant$: $other_temperature$`,
+	//Drone Assisted Construction
+	'D06': (state) => `$ressource_megacreditvoid_${getScaling('D06', state)}$`,
 	//Interplanetary Superhighway
 	'F05': (state) => `$ressource_megacreditvoid_${getScaling('F05', state)}$: $other_infrastructure$`,
 	//Maglev Train

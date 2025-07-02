@@ -17772,7 +17772,7 @@
             "en": "Action: Gain 2 MC.\n*If you selected an upgraded phase card during this round, gain 2 additional MC.",
             "fr": ""
         },
-        "effectSummaryOption": "",
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryType2": "",
         "effectSummaryText2": {
             "en": "",
