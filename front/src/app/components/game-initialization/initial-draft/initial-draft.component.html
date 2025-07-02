@@ -17,11 +17,11 @@
 		</app-playable-card-list>
 	</ng-container>
 	<ng-container
-		*ngIf="event.subType==='selectCorporation'">
+		*ngIf="event.subType==='selectCorporation' || event.subType==='selectMerger'">
 		<app-playable-card-list #cardListSelector
 			[event]="event"
 			[listType]="'selector'"
-			[listSubType]="'selectCorporation'"
+			[listSubType]="event.subType"
 			(updateSelectedCardList)="onUpdateSelectedCardList($event)">
 		</app-playable-card-list>
 	</ng-container>

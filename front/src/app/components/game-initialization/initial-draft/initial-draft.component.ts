@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { CommonModule } from '@angular/common';
@@ -28,14 +28,15 @@ export class InitialDraftComponent implements OnInit, OnDestroy{
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(): void {
-		//this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
-		this._playerHandCorporation = this.gameStateService.getClientHandCorporationModelList()
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
 	onClientStateUpdate(state: PlayerStateModel): void {
+		this._playerHandCorporation = this.gameStateService.getClientHandCorporationModelList()
+		console.log(this._playerHandCorporation)
 	}
 	onUpdateSelectedCardList(output: any): void {
 		this.updateSelectedCardList.emit(output)

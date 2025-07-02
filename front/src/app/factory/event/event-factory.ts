@@ -14,6 +14,7 @@ interface CreateEventOptionsSelector {
     cardSelector?: CardSelectorOptions
     title?: string
     waiterId?:number,
+	isMerger?:boolean
 }
 interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	scanKeepOptions?: DeckQueryOptionsEnum,
@@ -201,8 +202,8 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.refreshSelectorOnSwitch = true
             break
         }
-        case('selectCorporation'):{
-            event.title = 'Select your Corporation'
+        case('selectCorporation'):case('selectMerger'):{
+            event.title = args?.isMerger?'Select your Merger':'Select your Corporation'
             event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
             event.cardSelector.selectionQuantityTreshold = 'equal'
             event.cardSelector.selectionQuantity = 1

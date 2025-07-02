@@ -69,14 +69,15 @@ export class PlayerProjectCardStateModel {
 				}
 				case('corporation'):{
 					let index = this.handCorporation.indexOf(card, 0);
-					if (index > -1) {
-						this.handCorporation = []
-					}
+					let discarded = this.handCorporation.splice(index, 1)[0]
 					break
 				}
 			}
 
 		}
+	}
+	removeCorporationsFromHand(){
+		this.handCorporation = []
 	}
 	getHandCurrentSize(): number {return this.hand.length}
 	getHandMaximumSize(): number {return this.handMaximumSize}

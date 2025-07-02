@@ -189,6 +189,7 @@ export class PlayerStateModel {
 
 	addCardsToHand(cards: string | string[]) {this.projectCardState.addCardsToHand(cards)}
 	removeCardsFromHand(cardCodeList: string | string[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType, addRemovedCardsToDiscard)}
+	removeCorporationsFromHand(){this.projectCardState.removeCorporationsFromHand()}
 	getProjectHandIdList(filter?: ProjectFilter): string[] {return this.projectCardState.getProjectHandIdList(filter)}
 	getHandCurrentSize(): number {return this.projectCardState.getHandCurrentSize()}
 	getHandMaximumSize(): number {return this.projectCardState.getHandMaximumSize()}

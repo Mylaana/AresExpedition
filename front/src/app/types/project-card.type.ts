@@ -18,6 +18,6 @@ export type TriggerLimit = {
 }
 
 export type ProjectListType = 'none' | 'hand' | 'played' | 'selector' | 'builderSelector' | 'builderSelectedZone' | 'playedSelector'
-export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'discard' | 'addRessource' | 'scanKeepResult'
+export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'selectMerger' | 'discard' | 'addRessource' | 'scanKeepResult'
 export type PlayedCardStock = {[key: string]: AdvancedRessourceStock[]}
 export type ActivationOption = 1 | 2

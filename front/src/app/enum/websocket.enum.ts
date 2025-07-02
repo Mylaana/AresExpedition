@@ -28,7 +28,7 @@ export enum GroupMessageContentResultEnum {
     nextPhase = 'NEXT_PHASE',
 	selectStartingHand = 'SELECT_STARTING_HAND',
 	selectCorporation = 'SELECT_CORPORATION',
-
+	selectCorporationMerger = 'SELECT_CORPORATION_MERGER',
     debug = 'DEBUG',
     serverSideUnhandled = 'SERVER_SIDE_UNHANDLED'
 }
@@ -40,6 +40,7 @@ export enum GameStatusEnum {
 	newGame = "NEW_GAME",
 	selectStartingHand = 'SELECT_STARTING_HAND',
 	selectCorporation = 'SELECT_CORPORATION',
+	selectCorporationMerger = 'SELECT_CORPORATION_MERGER',
     started = "STARTED",
 	gameOver = 'GAME_OVER'
 }

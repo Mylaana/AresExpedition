@@ -76,6 +76,7 @@ export class PlayableCardListComponent implements OnChanges{
 			case('addRessourceToSelectedCard'):{this.listSubType='addRessource';break}
 			case('scanKeepResult'):{this.listSubType='scanKeepResult';break}
 		}
+		console.log(subtype)
 	}
 	private resetSelector(): void {
 		this._cardSelector = {
