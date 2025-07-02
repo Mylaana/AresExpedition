@@ -716,6 +716,16 @@ export class GameState{
 		let state = this.getClientState()
 		state.addProduction(ressources)
 		this.updateClientState(state)
+
+		if(state.getTriggersIdActive().length>0){
+			let newEvents: EventBaseModel[] = []
+			for(let r of Utils.toArray(ressources)){
+				newEvents = newEvents.concat(PlayableCard.getOnTriggerredEvents('ON_PRODUCTION_INCREASED', state.getTriggersIdActive(), state, {productionIncreased: r}))
+			}
+			if(!newEvents){return}
+			this.addEventQueue(newEvents,'first')
+		}
+
 	}
 	public addTr(quantity: number){
 		let state = this.getClientState()

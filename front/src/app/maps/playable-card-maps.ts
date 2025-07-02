@@ -1409,6 +1409,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		])
 		return [EventFactory.simple.draw(3)]
 	},
+	//Mining Guild
+	'C6': () => {
+		return [EventFactory.simple.addProduction({name:'steel', valueStock:1})]
+	},
 	//Phobolog
 	'C7': (clientstate) => {
 		clientstate.increaseProductionModValue('titanium')
