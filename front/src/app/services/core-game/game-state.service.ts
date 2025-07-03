@@ -470,10 +470,11 @@ export class GameState{
     addGlobalParameterStepsEOPtoClient(parameter:GlobalParameterValue): void {
 		let state = this.getClientState()
 		let newEvents: EventBaseModel[] = []
+		let isMaxedOut = state.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)
 
 		state.addGlobalParameterStepEOP(parameter)
 		//add TR if not maxed out
-		if(!state.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){
+		if(!isMaxedOut){
 			state.addTR(parameter.steps)
 			switch(parameter.name){
 				//query server for ocean bonus
@@ -487,7 +488,16 @@ export class GameState{
 
 		let triggers = state.getTriggersIdActive()
 		if(triggers.length>0){
-			newEvents = newEvents.concat(PlayableCard.getOnTriggerredEvents("ON_PARAMETER_INCREASED", triggers, state, {increasedParameter:parameter.name, increasedParameterValue:parameter.steps}))
+			newEvents = newEvents.concat(PlayableCard.getOnTriggerredEvents(
+				"ON_PARAMETER_INCREASED",
+				triggers,
+				state,
+				{
+					increasedParameter:parameter.name,
+					increasedParameterValue:parameter.steps,
+					isParameterMaxedOutAtBeginningOfPhase: isMaxedOut
+				}
+			))
 		}
         if(newEvents.length===0){return}
         this.addEventQueue(newEvents, 'first')
