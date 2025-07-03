@@ -12,12 +12,26 @@
     align-items: center;
     justify-content: space-around;
     height: 100%;
-    //width: fit-content;
-    &.tr, &.forest, &.phase-upgraded{
-        min-width: 60px;
-        border: rgba(rgb(255, 129, 25), .5) solid 1px;
-        border-radius: 5px;
-    }
+}
+.pannel-card-style{
+	border: rgba(rgb(255, 129, 25), .5) solid 1px;
+	border-radius: 5px;
+	min-width: 60px;
+	&.research{
+		min-width: 70px;
+		& p{
+			min-width: 0;
+		}
+	}
+	&.activables{
+		min-width: 50px;
+		& img{
+			width: 70%;
+		}
+	}
+	&.cards-played{
+		min-width: 50px;
+	}
 }
 .img-padding{
 	height: 80%;
@@ -42,19 +56,21 @@
         max-height: 100%;
     }
 }
+.previous-phase-selected{
+	height: 100%;
+	aspect-ratio: 1;
+}
 p{
     color: white;
     font-size: 100%;
     &.pannel-text{
         position: relative;
         margin: 0px;
-        background-color: rgba(black, 0.3);
         padding: 0;
         border-radius: 25%;
         min-width: 20px;
     }
 	text-align: center;
-	//border: red solid 1px;
 }
 .wrapper-player-name{
     display: flex;

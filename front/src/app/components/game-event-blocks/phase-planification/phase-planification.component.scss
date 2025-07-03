@@ -13,6 +13,9 @@
 	filter: grayscale(20%);
 	&:hover{
 		filter: grayscale(0%);
+		$colorShadow: white;
+		border-radius: 15px;
+		box-shadow: 0 0 10px 2px $colorShadow;
 	}
 }
 button{
@@ -31,4 +34,7 @@ button{
 	box-shadow: 0 0 20px 10px $colorShadow;
 	border-radius: 15px;
 	filter: grayscale(0%);
+	&:hover{
+		box-shadow: 0 0 20px 10px $colorShadow;
+	}
 }

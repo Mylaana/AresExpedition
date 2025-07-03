@@ -35,10 +35,11 @@ export enum ProjectFilterNameEnum {
 	green9MCFree = 'green9MCFree',
 	maiNiProductions = 'maiNiProductions',
 	playedDisplayCorpsAndActivable = 'playedDisplayCorpsAndActivable',
-	playedDisplayTriggers = 'playedDisplayTriggers',
+	playedDisplayCorpsAndTriggers = 'playedDisplayCorpsAndTriggers',
 	playedDisplayRed = 'playedDisplayRed',
 	developmentPhaseSecondBuilder = 'developmentPhaseSecondBuilder',
-	corporations = 'corporations'
+	corporations = 'corporations',
+	notCorporations = 'notCorporations'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',

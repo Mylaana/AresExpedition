@@ -29,7 +29,7 @@ export class PlayerPlayedCardComponent{
 				return this.state.getProjectPlayedModelList({type:ProjectFilterNameEnum.playedDisplayCorpsAndActivable})
 			}
 			case(1):{
-				return this.state.getProjectPlayedModelList({type:ProjectFilterNameEnum.playedDisplayTriggers})
+				return this.state.getProjectPlayedModelList({type:ProjectFilterNameEnum.playedDisplayCorpsAndTriggers})
 			}
 			case(2):{
 				return this.state.getProjectPlayedModelList({type: ProjectFilterNameEnum.playedDisplayRed})

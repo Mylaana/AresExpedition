@@ -150,12 +150,11 @@ export class PlayableCardModel{
 				break
 			}
 			case(ProjectFilterNameEnum.playedDisplayCorpsAndActivable):{
-				if(this.cardType==='corporation'){return true}
-				if(this.cardType==='blueProject' && this.hasSummaryType('action')){return true}
+				if(this.hasSummaryType('action')){return true}
 				break
 			}
-			case(ProjectFilterNameEnum.playedDisplayTriggers):{
-				if(this.cardType==='blueProject' && this.hasSummaryType('trigger')){return true}
+			case(ProjectFilterNameEnum.playedDisplayCorpsAndTriggers):{
+				if(this.hasSummaryType('trigger')){return true}
 				break
 			}
 			case(ProjectFilterNameEnum.playedDisplayRed):{
@@ -168,6 +167,10 @@ export class PlayableCardModel{
 			}
 			case(ProjectFilterNameEnum.corporations):{
 				if(this.cardType!='corporation'){return false}
+				return true
+			}
+			case(ProjectFilterNameEnum.notCorporations):{
+				if(this.cardType==='corporation'){return false}
 				return true
 			}
         }
