@@ -222,26 +222,20 @@ const S = EventFactory.simple
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnRessourceAdded(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.ressourceAdded!='microbe'|| input.ressourceAddedValue<1){return []}
-		console.log('bacterial triggerred on ressource added')
 
 		let stock = input.receivingCard.getStockValue('microbe')
+		let stockBefore = stock - input.ressourceAddedValue
 		let result: EventBaseModel[] = []
 		if(stock>=5){
 			result.push(S.deactivateTrigger(trigger))
-			console.log('deactivating trigger')
 		}
 
-		let limit = input.receivingCard.getCardTriggerLimit()
-		console.log('limit: ', limit)
-		if(limit===undefined){return []}
+		let limit = 5
 
-		let addValue = Math.min(input.ressourceAddedValue, limit?.limit - limit.value)
-		console.log('add value: ', addValue)
+		let addValue = Math.min(input.ressourceAddedValue, limit - stockBefore)
 		if(addValue<=0){return[]}
 
 		result.push(S.increaseResearchScanKeep({keep:0, scan:addValue}))
-		input.receivingCard.triggerLimit.value += addValue
-		console.log(addValue)
 		return result
 	}
 //ON_CARD_ACTIVATED
