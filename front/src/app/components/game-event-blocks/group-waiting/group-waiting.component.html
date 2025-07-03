@@ -1,0 +1,14 @@
+<div class="wrapper-group-ready">
+	<ng-container *ngFor="let p of _otherPlayers">
+		<div class="wrapper-player-ready-outer">
+			<div class="wrapper-player-ready-inner"
+				[ngClass]="p.getColor()"
+				@fadeIn>
+				<div class="wrapper-name">
+					<p>{{p.getName()}}</p>
+				</div>
+			</div>
+			<img src="assets/other/ready.png" alt="">
+		</div>
+	</ng-container>
+</div>

@@ -36,7 +36,6 @@ export class InitialDraftComponent implements OnInit, OnDestroy{
 	}
 	onClientStateUpdate(state: PlayerStateModel): void {
 		this._playerHandCorporation = this.gameStateService.getClientHandCorporationModelList()
-		console.log(this._playerHandCorporation)
 	}
 	onUpdateSelectedCardList(output: any): void {
 		this.updateSelectedCardList.emit(output)

@@ -25,6 +25,8 @@ import { EventFactory } from '../../../../factory/event/event-factory';
 import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/tag-gain-list.component';
 import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-cards.component';
 import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/effect-portal.component';
+import { GroupWaitingComponent } from '../../../game-event-blocks/group-waiting/group-waiting.component';
+import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 
 //this component is the main controller, and view
 
@@ -45,7 +47,8 @@ import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/
 		PhaseBuilderComponent,
 		TagGainListComponent,
 		SellCardsComponent,
-		EffectPortalComponent
+		EffectPortalComponent,
+		GroupWaitingComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',
@@ -68,6 +71,7 @@ export class GameEventComponent {
 
 	currentPhase: NonSelectablePhaseEnum = NonSelectablePhaseEnum.planification;
 	currentButtonSelectorId!: number;
+	_groupReady!: PlayerReadyModel[]
 
 	//Non event buttons
 	sellCardsButton!: NonEventButton;
@@ -106,6 +110,7 @@ export class GameEventComponent {
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
+		this.gameStateService.currentGroupPlayerReady.subscribe((groupReady) => this._groupReady = groupReady)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -216,4 +221,11 @@ export class GameEventComponent {
 		this.eventHandler.cardBuilderButtonClicked(button)
 	}
 	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
+	displayGroupReady(): boolean {
+		if(this.gameStateService.getClientReady()===true){return false}
+		for(let p of this._groupReady){
+			if(p.isReady){return true}
+		}
+		return false
+	}
 }

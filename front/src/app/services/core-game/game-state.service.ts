@@ -635,7 +635,6 @@ export class GameState{
 	}
 	public setSelectCorporationEvents(isMerger: boolean = false): void {
 		let events: EventBaseModel[] = []
-		console.log(isMerger)
 		if(isMerger){
 			events.push(EventFactory.createCardSelector('selectMerger',{cardSelector: {selectFrom: this.getClientHandCorporationModelList(),},isMerger:isMerger}))
 		} else {
@@ -787,5 +786,8 @@ export class GameState{
 		let event = EventFactory.simple.addRessource({name:'megacredit', valueStock: -Math.ceil(penalty /2)})
 		this.addEventQueue(event, 'first')
 		console.log('average', penalty, event)
+	}
+	getGroupState(): PlayerStateModel[] {
+		return this.groupPlayerState.getValue()
 	}
 }

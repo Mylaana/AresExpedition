@@ -133,6 +133,11 @@ app-hexed-tooltip-background{
 		height: 50%;
 	}
 }
+app-group-waiting{
+	position: relative;
+	top: calc(-1 * var(--command-pannel-height));
+	height: fit-content;
+}
 .wrapper-title{
 	position: relative;
 	display: flex;
