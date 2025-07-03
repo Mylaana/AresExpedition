@@ -13,6 +13,7 @@ interface TriggerInput {
 	playedCard: PlayableCardModel,
 	increasedParameter: GlobalParameterNameEnum
 	increasedParameterValue: number,
+	isParameterMaxedOutAtBeginningOfPhase: boolean
 	tagList: number[]
 	ressourceAdded: AdvancedRessourceType
 	ressourceAddedValue: number
@@ -42,46 +43,56 @@ const S = EventFactory.simple
 	//Arctic Alagae
 	function handleTrigger_8(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.ocean){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.addRessource({name:'plant', valueStock:4})]
 	}
 	//Fish
 	function handleTrigger_30(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.ocean){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Herbivores
 	function handleTrigger_33(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter===GlobalParameterNameEnum.infrastructure){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Livestock
 	function handleTrigger_39(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Physics Complex
 	function handleTrigger_46(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.addRessourceToCardId({name:"science", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Volcanic Soil
 	function handleTrigger_D13(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
+		console.log('fire !', input.isParameterMaxedOutAtBeginningOfPhase)
 		return [S.addRessource({name:'plant', valueStock:2})]
 	}
 	//Cargo Ships
 	function handleTrigger_F04(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.effectPortal(EffectPortalEnum.cargoShips)]
 	}
 	//Pets
 	function handleTrigger_F07(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Zetasel
 	function handleTrigger_CP06(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.ocean){return []}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.addRessource([{name:'megacredit', valueStock:2},{name:'plant', valueStock:2}])]
 	}
 
@@ -222,26 +233,20 @@ const S = EventFactory.simple
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnRessourceAdded(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.ressourceAdded!='microbe'|| input.ressourceAddedValue<1){return []}
-		console.log('bacterial triggerred on ressource added')
 
 		let stock = input.receivingCard.getStockValue('microbe')
+		let stockBefore = stock - input.ressourceAddedValue
 		let result: EventBaseModel[] = []
 		if(stock>=5){
 			result.push(S.deactivateTrigger(trigger))
-			console.log('deactivating trigger')
 		}
 
-		let limit = input.receivingCard.getCardTriggerLimit()
-		console.log('limit: ', limit)
-		if(limit===undefined){return []}
+		let limit = 5
 
-		let addValue = Math.min(input.ressourceAddedValue, limit?.limit - limit.value)
-		console.log('add value: ', addValue)
+		let addValue = Math.min(input.ressourceAddedValue, limit - stockBefore)
 		if(addValue<=0){return[]}
 
 		result.push(S.increaseResearchScanKeep({keep:0, scan:addValue}))
-		input.receivingCard.triggerLimit.value += addValue
-		console.log(addValue)
 		return result
 	}
 //ON_CARD_ACTIVATED
@@ -353,7 +358,8 @@ function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {
 		ressourceAddedValue: input.ressourceAddedValue??0,
 		forestGained: input.forestGained??0,
 		discardedCard: input.discardedCard??new PlayableCardModel,
-		productionIncreased: input.productionIncreased??{name:'megacredit', valueStock:0}
+		productionIncreased: input.productionIncreased??{name:'megacredit', valueStock:0},
+		isParameterMaxedOutAtBeginningOfPhase: input.isParameterMaxedOutAtBeginningOfPhase??true
 	}
 }
 export const TriggerEffectEventFactory = {
