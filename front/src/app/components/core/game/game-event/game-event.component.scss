@@ -4,6 +4,9 @@ $description-pannel-margin-left: 2%;
 :host{
 	--command-pannel-height: 0px;
 	--event-min-height: 55vh;
+	@media (max-width:1919px) {
+		--event-min-height: 40vh;
+	}
 }
 #command-pannel {
 	$command-pannel-padding: 1%;

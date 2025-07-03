@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { ImageButton } from '../../../models/core-game/button.model';
 import { PhaseCardModel } from '../../../models/cards/phase-card.model';
-import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
+
 import { SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { ButtonNames, myUUID } from '../../../types/global.type';
 import { expandCollapseVertical, fadeIn } from '../../../animations/animations';
 import { EventBaseModel, EventGeneric } from '../../../models/core-game/event.model';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { PhaseCardComponent } from '../../cards/phase/phase-card/phase-card.component';
 
 const phaseList: SelectablePhaseEnum[] = [SelectablePhaseEnum.development, SelectablePhaseEnum.construction, SelectablePhaseEnum.action, SelectablePhaseEnum.production, SelectablePhaseEnum.research]
 const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
@@ -24,9 +25,7 @@ const phaseIndexMap = new Map<number, SelectablePhaseEnum>([
     selector: 'app-phase-planification',
     imports: [
         CommonModule,
-        ButtonComponent,
-        TextWithImageComponent,
-        HexedBackgroundComponent
+		PhaseCardComponent
     ],
     templateUrl: './phase-planification.component.html',
     styleUrl: './phase-planification.component.scss',
@@ -38,30 +37,20 @@ export class PhasePlanificationComponent {
 	buttonList: ImageButton [] = []
 	currentPhaseSelected!: SelectablePhaseEnum;
 	selectedPhaseCards: PhaseCardModel[] = []
-	currentPhaseCard!: PhaseCardModel | undefined
 
+	currentPhaseCard!: PhaseCardModel | undefined
+	_hovered: boolean = false
+	_previousSelectedPhase!: SelectablePhaseEnum | undefined
 	constructor(private gameStateService: GameState){}
 
 	ngOnInit(){
 		let playerPhase = this.gameStateService.getClientPhaseSelected()
 		this.setPhaseCards()
 		if(playerPhase===undefined){return}
-		let previousSelectedPhase = this.gameStateService.getClientPreviousPhaseSelected()
-		for(let phase of phaseList){
-			this.createPhaseButtons(phase, previousSelectedPhase!=phase)
-		}
-	}
-	createPhaseButtons(buttonPhase: SelectablePhaseEnum, enabled: boolean): void {
-		let newButton = new ImageButton
-		newButton.name = buttonPhase.toLocaleLowerCase() as ButtonNames,
-		newButton.enabled = enabled,
-		newButton.startEnabled = enabled,
-		newButton.value = buttonPhase,
-		newButton.imageUrl = `/assets/other/phase_${buttonPhase.toLocaleLowerCase()}.png`
-		this.buttonList.push(newButton)
+		this._previousSelectedPhase = this.gameStateService.getClientPreviousPhaseSelected()
 	}
 	setPhaseCards(): void {
-		this.selectedPhaseCards = this.gameStateService.getClientPhaseCards()
+		this.selectedPhaseCards = this.gameStateService.getClientPhaseCards(true)
 	}
 	setCurrentPhaseCard(): void {
 		for(let index of phaseIndexMap.keys()){
@@ -70,13 +59,10 @@ export class PhasePlanificationComponent {
 				return
 			}
 		}
-
 		this.currentPhaseCard = undefined
 	}
-	public buttonClicked(button: ImageButton){
-		if(button.name===undefined){return}
-		this.setSelectedPhase(this.event as EventGeneric, button.name as SelectablePhaseEnum)
-
+	public onPhaseSelected(phaseCard: PhaseCardModel){
+		this.setSelectedPhase(this.event as EventGeneric, phaseCard.phaseGroup)
 		this.currentPhaseCard = undefined
 		this.setCurrentPhaseCard()
 	}
