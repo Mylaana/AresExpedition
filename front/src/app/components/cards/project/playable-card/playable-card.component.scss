@@ -38,7 +38,15 @@ button {
 		z-index: 10;
 	}
 }
-.wrapper-card{
+.wrapper-border{
+	position: relative;
+	border: black solid 2px;
+    border-radius: calc(var(--card-height) * .05);
+	overflow: hidden;
+	height:var(--card-height);
+    width: var(--card-width);
+}
+.wrapper-inner{
     z-index: 0;
     position: relative;
 
@@ -48,23 +56,18 @@ button {
 
     height: var(--card-height);
     width: var(--card-width);
-
+	background: transparent;
+	border: 0;
 	overflow: hidden;
-	border: black solid 2px;
-    border-radius: calc(var(--card-height) * .05);
 }
-.wrapper-selection-border{
+.wrapper-core{
 	position: relative;
     $selection-offset: 0px;
-    border-radius: calc((var(--card-height) + $selection-offset)* .05);
-    height: calc(var(--card-height) + $selection-offset);
-    width: calc(var(--card-width) + $selection-offset);
     display: flex;
     justify-content: center;
     align-items: center;
-
+	overflow: hidden;
 	border: 0;
-
 	&.selectable{
 		filter: grayscale(40%);
 		&.hovered{
@@ -174,6 +177,8 @@ app-card-tags{
 	flex: 1;
 }
 app-card-activation-list{
+	position: relative;
+	z-index: -2;
 	width: var(--card-width);
 	height: 100%;
 }
@@ -186,10 +191,7 @@ app-card-starting-megacredits{
 }
 app-card-status {
 	position: absolute;
-	top: calc(100% - 12px);
-	@media (max-width:1919px) {
-		top: calc(100% - 10px);
-	}
+	bottom: 0;
 }
 app-card-disabled-foreground{
 	position: absolute;

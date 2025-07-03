@@ -47,8 +47,6 @@ Rollback button does nothing
 
 ## Other BUG:   
 rollback button disapearing while waiting for other players   
-planification text not being updated with phase card upgraded   
-
 
 ## Must have for v1 :
 ### Refactoring
@@ -66,15 +64,11 @@ add trigger resolution priority
 
 ### Interface
 display other player production
-Add scan/keep modifier display   
-Phase upgraded status menu   
 Activable cards with megacredit cost in it display bugged   
 add FR translation   
 Waiting player event : rollback button display bugged   
-add players being ready visibility on player's interface when not yet ready   
 add display for the phase we selected on the left progression pannel   
-add display for discounts on tags / cards
-add display for total cards played
+add display for discounts on tags / cards   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
