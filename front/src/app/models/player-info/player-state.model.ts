@@ -73,6 +73,7 @@ export class PlayerStateModel {
 	setName(name: string){this.infoState.setName(name)}
 	getColor(): RGB {return this.infoState.getColor()}
 	setColor(color: RGB){this.infoState.setColor(color)}
+	getInfoState(): PlayerInfoStateModel {return this.infoState}
 
 	//scoreState
 	getMilestoneCompleted(): number {return this.scoreState.getMilestoneCompletedNumber()}
