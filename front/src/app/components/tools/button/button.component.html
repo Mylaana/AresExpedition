@@ -9,7 +9,8 @@
 		(mouseenter)="setHovered(true)"
 		(mouseleave)="setHovered(false)"
 		(click)="onClick(button)">
-
+		<div class="disabled-grid"
+			*ngIf="!isEnabled()"></div>
 		<div class="wrapper-elements">
 			<div *ngIf="_style==='plain' && isEnabled()"
 				[ngClass]="['button-shape--'+shape, 'gradiant-mask--'+shape]">
