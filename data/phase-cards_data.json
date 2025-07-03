@@ -37,7 +37,7 @@
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "Reduce the cost of the first card you play this phase by 3MC.$skipline$You may play a second green card this phase with a printed cost of 12 MC or less.",
+            "en": "Reduce the cost of the first card you play this phase by 3MC.$$You may play a second green card this phase with a printed cost of 12 MC or less.",
             "fr": "abc"
         }
     },
@@ -51,7 +51,7 @@
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "Draw a card.$skipline$OR$skipline$Play an additional blue card OR red card this phase.",
+            "en": "Draw a card.$$OR$$Play an additional blue card OR red card this phase.",
             "fr": "abc"
         }
     },
@@ -65,7 +65,7 @@
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "Play an additional blue card OR red card this phase.$skipline$OR$skipline$Gain 6MC.",
+            "en": "Play an additional blue card OR red card this phase.$$OR$$Gain 6MC.",
             "fr": "abc"
         }
     },
@@ -79,7 +79,7 @@
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "Play an additional blue card OR red card this phase.$skipline$AND$skipline$Draw a card.",
+            "en": "Play an additional blue card OR red card this phase.$$AND$$Draw a card.",
             "fr": "abc"
         }
     },
@@ -107,7 +107,7 @@
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "You may repeat one of your ACTION effects once.$skipline$Reveal the top 3 cards of the deck. Place a blue or red card revealed this way into your hand, discard the rest.",
+            "en": "You may repeat one of your ACTION effects once.$$Reveal the top 3 cards of the deck. Place a blue or red card revealed this way into your hand, discard the rest.",
             "fr": "abc"
         }
     },
@@ -131,7 +131,7 @@
 		"phaseGroupType": "production",
         "phaseType": "production_base",
         "baseDescription": {
-            "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
+            "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
             "fr": "abc"
         },
         "bonusDescription": {
@@ -145,7 +145,7 @@
 		"phaseGroupType": "production",
         "phaseType": "production_7mc",
         "baseDescription": {
-            "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
+            "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
             "fr": "abc"
         },
         "bonusDescription": {
@@ -159,11 +159,11 @@
 		"phaseGroupType": "production",
         "phaseType": "production_1mc_activate_card",
         "baseDescription": {
-            "en": "Each player gains heat, plants, and draw cards according to their production. They also gain MC equal to their production + TR.",
+            "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
             "fr": "abc"
         },
         "bonusDescription": {
-            "en": "Gain 1MC.$skipline$Activate the production effect of one of your green cards an additional time this phase.",
+            "en": "Gain 1MC.$$Activate the production effect of one of your green cards an additional time this phase.",
             "fr": "abc"
         }
     },

@@ -39,6 +39,7 @@ export class PhaseCardModel {
 	phaseGroup!: SelectablePhaseEnum
 	phaseType!: PhaseCardType
 	phaseCardUpgraded!: boolean
+	title!: string
 
 	baseDescription!: string
 	bonusDescription!: string

@@ -18,14 +18,13 @@
 	z-index: 1;
 	position: relative;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	flex-direction: column;
 
 	width: var(--card-width);
 	height: var(--card-height);
 	border-radius: 15px;
-	padding: 5;
 	border: black solid 2px;
 	overflow: hidden;
 }
@@ -37,11 +36,19 @@
 	width: 100%;
 	height: 100%;
 }
+.wrapper-content{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1;
+	padding: 10px;
+}
 .wrapper-description{
 	z-index: 1;
 	position: relative;
 	height: fit-content;
-	width: 85%;
+	width: 90%;
 	padding: 5px;
 
 	display: flex;
@@ -51,10 +58,21 @@
 	&::ng-deep p {
 		text-align: center;
 		display: block;
+		font-size: 83%;
+	}
+	@media (max-width:1919px) {
+		width: 100%;
+		padding: 2px;
 	}
 }
-h5{
+.title{
+	font-size: 100%;
+	font-weight: 600;
+	font-family: "Times New Roman", serif;
+}
+.subtitle{
 	padding-bottom: 3px;
+	font-weight: 600;
 }
 
 app-hexed-background{
@@ -107,5 +125,18 @@ app-non-event-button{
 .wrapper-description::ng-deep p {
 	@media (max-width: 1919px) {
 		font-size: 60%;
+	}
+}
+.wrapper-title{
+	width: 100%;
+	height: fit-content;
+	padding-top: 15px;
+	padding-bottom: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@media (max-width:1919px) {
+		padding-top: 7px;
+		padding-bottom: 0px;
 	}
 }
