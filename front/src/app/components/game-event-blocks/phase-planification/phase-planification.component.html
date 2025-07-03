@@ -1,14 +1,13 @@
 <ng-container *ngFor="let phaseCard of selectedPhaseCards">
 	<div @fadeIn class="wrapper-phase-card"
 		[ngClass]="[phaseCard.phaseGroup==_previousSelectedPhase?'previous':'',
-			phaseCard.phaseGroup===currentPhaseSelected?'current':''
-		]">
+			phaseCard.phaseGroup===currentPhaseSelected?'current':'']">
 		<button
 			(mouseenter)="_hovered=true"
 			(mouseleave)="_hovered=false"
 			(click)="onPhaseSelected(phaseCard)">
 			<app-phase-card
-				[class.hovered]="_hovered"
+			[class.hovered]="_hovered"
 				[phaseCard]="phaseCard"
 				[phaseIndex]="phaseCard.phaseId">
 			</app-phase-card>

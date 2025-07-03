@@ -10,6 +10,10 @@
     display: flex;
     justify-content: center;
     height: auto;
+	filter: grayscale(20%);
+	&:hover{
+		filter: grayscale(0%);
+	}
 }
 button{
 	background: transparent;
@@ -26,4 +30,5 @@ button{
 	$colorShadow: white;
 	box-shadow: 0 0 20px 10px $colorShadow;
 	border-radius: 15px;
+	filter: grayscale(0%);
 }
