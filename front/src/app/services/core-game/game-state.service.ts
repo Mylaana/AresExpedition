@@ -145,7 +145,6 @@ export class GameState{
 	private isLastPhaseOfRound(phase: NonSelectablePhaseEnum): boolean {
 		if(phase===NonSelectablePhaseEnum.planification){false}
 		let phaseList = this.selectedPhaseList.getValue()
-		console.log('is last phase :', phase.toString()===phaseList[phaseList.length-1])
 		return phase.toString()===phaseList[phaseList.length-1]
 	}
     public setClientReady(ready: boolean){
