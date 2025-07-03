@@ -76,7 +76,7 @@ export class PlayerRessourceStateModel {
 	increaseProductionModValue(ressourceType: Extract<RessourceType, 'steel' | 'titanium'>) {
 		for(let ressource of this.ressources){
 			if(ressource.name===ressourceType){
-				ressource.valueMod =+1
+				ressource.valueMod += 1
 			}
 		}
 	}
