@@ -448,7 +448,7 @@ describe('Service - Designers - Event', () => {
 					expectedEvent.subType = 'actionPhaseActivator'
 					const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
 					expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
-					expectedEvent.title = 'Activate cards'
+					expectedEvent.title = 'Action Phase'
 					expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.action}
 
 					let resultEvent = event_factory.EventFactory.createCardActivator(expectedSubType)
