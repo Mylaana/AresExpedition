@@ -42,13 +42,15 @@ $padding-small: 5px;
 	}
 }
 .wrapper-image{
-	width: 60px;
+	width: 40px;
+
 	filter: grayscale(80%);
 	& ::ng-deep app-text-with-image img{
 		width: 100%;
 	}
 
 	&.current{
+		width: 60px;
 		filter: grayscale(0);
 		border-radius: 5px;
 		box-shadow: 0 0 5px 3px var(--color-ares-orange);
@@ -89,13 +91,17 @@ $padding-small: 5px;
 	}
 }
 .wrapper-player-selected{
+
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: center;
 	width: fit-content;
-	height: 60px;
+	height: 40px;
 	gap: 3px;
+	&.current{
+		height: 60px;
+	}
 	@media (max-width: 1919px) {
 		height: 40px;
 	}

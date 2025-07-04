@@ -67,4 +67,7 @@ export class LeftPannelComponent implements OnInit, OnDestroy{
 		console.log(result)
 		return result
 	}
+	isCurrentPhase(phase: SelectablePhaseEnum): boolean {
+		return this.currentPhase.toString()===phase.toString()
+	}
 }
