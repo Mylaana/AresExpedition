@@ -27,6 +27,7 @@ import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-c
 import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/effect-portal.component';
 import { GroupWaitingComponent } from '../../../game-event-blocks/group-waiting/group-waiting.component';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
+import { LeftPannelComponent } from '../../../game-event-blocks/left-pannel/left-pannel.component';
 
 //this component is the main controller, and view
 
@@ -40,7 +41,7 @@ import { PlayerReadyModel } from '../../../../models/player-info/player-state.mo
         PhaseCardUpgradeSelectorComponent,
         EventMainButtonComponent,
         NonEventButtonComponent,
-        TextWithImageComponent,
+		LeftPannelComponent,
         PhaseActionComponent,
         InitialDraftComponent,
         WaitingReadyComponent,

@@ -4,6 +4,9 @@ $description-pannel-margin-left: 2%;
 :host{
 	--command-pannel-height: 0px;
 	--event-min-height: 55vh;
+	@media (max-width:1919px) {
+		--event-min-height: 40vh;
+	}
 }
 #command-pannel {
 	$command-pannel-padding: 1%;
@@ -31,66 +34,6 @@ app-non-event-button, app-event-main-button{
 	height: 100px;
 	max-height: 100%;
 	margin: 20px;
-}
-#round-pannel{
-	z-index: 1000;
-	position: fixed;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: auto;
-	width: 60px;
-	top: 34%;
-	border-left: 0;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-	overflow: hidden;
-
-	@media (max-width: 1919px) {
-		width: 40px;
-	}
-}
-.wrapper-phase{
-	filter: grayscale(80%);
-
-	& ::ng-deep app-text-with-image img{
-		width: 100%;
-	}
-	margin: 10%;
-
-	&.current{
-		filter: grayscale(0);
-		border-radius: 5px;
-		box-shadow: 0 0 5px 3px var(--color-ares-orange);
-		background: var(--color-ares-orange);
-	}
-	& ::ng-deep app-text-with-image{
-		* {
-			display: block;
-		}
-		img{
-			width: 100%;
-			aspect-ratio: 1;
-		}
-	}
-}
-.wrapper-next{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 25%;
-	aspect-ratio: 1;
-
-	& ::ng-deep app-text-with-image{
-		* {
-			display: block;
-		}
-		img{
-			width: 100%;
-			aspect-ratio: 1;
-		}
-	}
-
 }
 .wrapper-card-selector{
     width: 100%;

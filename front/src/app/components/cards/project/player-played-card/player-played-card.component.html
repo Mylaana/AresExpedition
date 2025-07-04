@@ -6,6 +6,7 @@
 	<h1 *ngIf="!isClient">{{state.getName()}}'s Cards Played:</h1>
 </div>
 <div class="wrapper-played">
+	<app-phase-card-display-list [phaseCardList]="displayPhase()"></app-phase-card-display-list>
 	<app-playable-card-list [cardList]="displayCards(0)" [listType]="'played'"></app-playable-card-list>
 	<app-playable-card-list [cardList]="displayCards(1)" [listType]="'played'"></app-playable-card-list>
 	<app-playable-card-list [cardList]="displayCards(2)" [listType]="'played'"></app-playable-card-list>

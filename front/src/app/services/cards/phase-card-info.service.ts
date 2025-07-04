@@ -25,7 +25,7 @@ export class PhaseCardInfoService {
 			newPhaseCard.baseDescription = cardData.baseDescription[language]
 			newPhaseCard.bonusDescription = cardData.bonusDescription[language]
 			newPhaseCard.phaseCardUpgraded = false
-
+			newPhaseCard.title = this.getTitle(cardData.phaseId, cardData.cardLevel)
 			phaseCards.push(newPhaseCard)
 		}
 		return phaseCards
@@ -62,6 +62,7 @@ export class PhaseCardInfoService {
 				newCard.baseDescription = card.baseDescription
 				newCard.bonusDescription = card.bonusDescription
 				newCard.phaseCardUpgraded = Utils.jsonCopy(card.phaseCardUpgraded)
+				newCard.title = card.title
 				phaseGroup.phaseCards.push(newCard)
 			}
 		}
@@ -70,5 +71,45 @@ export class PhaseCardInfoService {
 		phaseGroup.phaseGroup = phaseGroupType
 
 		return phaseGroup
+	}
+	private getTitle(phaseId: number, cardLevel: number): string {
+		let title: string =''
+		switch(phaseId){
+			case(0):{
+				title = 'I'
+				break
+			}
+			case(1):{
+				title = 'II'
+				break
+			}
+			case(2):{
+				title = 'III'
+				break
+			}
+			case(3):{
+				title = 'IV'
+				break
+			}
+			case(4):{
+				title = 'V'
+				break
+			}
+		}
+		switch(cardLevel){
+			case(0):{
+				title += ''
+				break
+			}
+			case(1):{
+				title += ' - B'
+				break
+			}
+			case(2):{
+				title += ' - C'
+				break
+			}
+		}
+		return title
 	}
 }

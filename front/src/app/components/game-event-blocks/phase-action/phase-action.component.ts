@@ -12,12 +12,14 @@ import { DeckQueryOptionsEnum, GlobalParameterNameEnum } from '../../../enum/glo
 import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event/event-factory';
 import { PlayableCard } from '../../../factory/playable-card.factory';
+import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 
 @Component({
     selector: 'app-phase-action',
     imports: [
         NonEventButtonComponent,
-        PlayableCardListComponent
+        PlayableCardListComponent,
+		HexedBackgroundComponent
     ],
     templateUrl: './phase-action.component.html',
     styleUrl: './phase-action.component.scss'

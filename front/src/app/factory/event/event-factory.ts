@@ -386,7 +386,7 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
     event.subType = subType
     event.cardSelector.filter = {type: ProjectFilterNameEnum.action}
     event.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
-    event.title = 'Activate cards'
+    event.title = 'Action Phase'
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 
     return event

@@ -1,0 +1,132 @@
+@use '../../../../styles/abstracts/colors' as colors;
+$padding: 7px;
+$padding-small: 5px;
+:host{
+	z-index: 1000;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	height: auto;
+	min-width: 60px;
+	top: 34%;
+	border-left: 0;
+	overflow: visible;
+	padding: $padding;
+
+	margin-top: 5px;
+	margin-bottom: 5px;
+	@media (max-width: 1919px) {
+		padding: $padding-small;
+	}
+}
+.background{
+	position: absolute;
+	z-index: -1;
+	height: 100%;
+	width: calc(60px + $padding * 2);
+	top: 0;
+	left: 0;
+	border-radius: 10px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	@media (max-width: 1919px) {
+		width: calc(40px + $padding-small * 2);
+	}
+}
+.wrapper-phase{
+	display: flex;
+	gap: $padding *2.5;
+	@media (max-width: 1919px) {
+		gap: $padding-small *2.5;
+	}
+}
+.wrapper-image{
+	width: 40px;
+
+	filter: grayscale(80%);
+	& ::ng-deep app-text-with-image img{
+		width: 100%;
+	}
+
+	&.current{
+		width: 60px;
+		filter: grayscale(0);
+		border-radius: 5px;
+		box-shadow: 0 0 5px 3px var(--color-ares-orange);
+		background: var(--color-ares-orange);
+	}
+	& ::ng-deep app-text-with-image{
+		* {
+			display: block;
+		}
+		img{
+			width: 100%;
+			aspect-ratio: 1;
+		}
+	}
+	@media (max-width: 1919px) {
+		width: 40px;
+	}
+}
+.wrapper-next{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	& app-text-with-image{
+		width: 40%;
+		aspect-ratio: 1;
+	}
+	& ::ng-deep app-text-with-image{
+		img{
+			width: 100%;
+			aspect-ratio: 1;
+		}
+	}
+	@media (max-width: 1919px) {
+		width: 40px;
+	}
+}
+.wrapper-player-selected{
+
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: fit-content;
+	height: 40px;
+	gap: 3px;
+	&.current{
+		height: 60px;
+	}
+	@media (max-width: 1919px) {
+		height: 40px;
+	}
+}
+.wrapper-color{
+	width: 12px;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	border: white solid 1px;
+	box-shadow: 0 0 3px 1px white;
+	&.color--white{
+		border-color: rgb(225, 225, 225);
+		outline-color: rgb(225, 225, 225);
+	}
+	@each $name, $value in colors.$colors {
+        &.color--#{$name}{
+            background-color: rgba($value, 1);
+			&.self{
+				outline: rgba($value, 1) solid 1px;
+				outline-offset: 1px;
+				box-shadow: 0 0 5px 3px white;
+			}
+        }
+    }
+	@media (max-width: 1919px) {
+		width: 9px;
+	}
+}

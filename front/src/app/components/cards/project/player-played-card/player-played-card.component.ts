@@ -5,13 +5,16 @@ import { PlayerStateModel } from '../../../../models/player-info/player-state.mo
 import { HorizontalSeparatorComponent } from '../../../tools/layouts/horizontal-separator/horizontal-separator.component';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ProjectFilterNameEnum } from '../../../../enum/global.enum';
+import { PhaseCardDisplayListComponent } from '../../phase/phase-card-display-list/phase-card-display-list.component';
+import { PhaseCardModel } from '../../../../models/cards/phase-card.model';
 
 @Component({
   selector: 'app-player-played-card',
   imports: [
 	CommonModule,
 	PlayableCardListComponent,
-	HorizontalSeparatorComponent
+	HorizontalSeparatorComponent,
+	PhaseCardDisplayListComponent,
   ],
   templateUrl: './player-played-card.component.html',
   styleUrl: './player-played-card.component.scss'
@@ -26,7 +29,7 @@ export class PlayerPlayedCardComponent{
 				return this.state.getProjectPlayedModelList({type:ProjectFilterNameEnum.playedDisplayCorpsAndActivable})
 			}
 			case(1):{
-				return this.state.getProjectPlayedModelList({type:ProjectFilterNameEnum.playedDisplayTriggers})
+				return this.state.getProjectPlayedModelList({type:ProjectFilterNameEnum.playedDisplayCorpsAndTriggers})
 			}
 			case(2):{
 				return this.state.getProjectPlayedModelList({type: ProjectFilterNameEnum.playedDisplayRed})
@@ -36,5 +39,8 @@ export class PlayerPlayedCardComponent{
 			}
 			default:{return []}
 		}
+	}
+	displayPhase(): PhaseCardModel[] {
+		return this.state.getPhaseCards(true)
 	}
 }

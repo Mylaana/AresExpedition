@@ -1,0 +1,26 @@
+<div class="background"></div>
+<ng-container *ngFor="let phase of selectedPhaseList">
+	<ng-container>
+		<div class="wrapper-phase">
+			<div class="wrapper-image"
+				[class.current]="isCurrentPhase(phase)">
+				<app-text-with-image [rawText]="'$other_phase_'+ (phase | lowercase) +'$'"></app-text-with-image>
+			</div>
+			<div class="wrapper-player-selected"
+				[class.current]="isCurrentPhase(phase)">
+				<ng-container *ngFor="let c of getSelected(phase)">
+					<div [ngClass]="[
+						'color--'+c.color,
+						'wrapper-color',
+						c.self?'self':''
+						]">
+					</div>
+				</ng-container>
+			</div>
+		</div>
+		<div class="wrapper-next"
+			*ngIf="phase!=selectedPhaseList[selectedPhaseList.length-1]">
+
+		</div>
+	</ng-container>
+</ng-container>

@@ -16,7 +16,7 @@ import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { EventBaseModel } from "../core-game/event.model";
-import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterColorEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { ProjectCardScalingProductionsService } from "../../services/cards/project-card-scaling-productions.service";
@@ -211,7 +211,8 @@ export class PlayerStateModel {
 	loadEventStateActivator(dto: EventStateActivator): void {this.projectCardState.loadEventStateActivator(dto)}
 	getPlayedListWithStockableTypes(stockType: AdvancedRessourceType | AdvancedRessourceType[]): PlayableCardModel[] {return this.projectCardState.getPlayedListWithStockableTypes(stockType)}
 	getPlayedCorporations(): PlayableCardModel[] {return this.projectCardState.getPlayedCorporations()}
-
+	getActivableCount(): number {return this.projectCardState.getProjectPlayedModelList({type:ProjectFilterNameEnum.action}).length}
+	getPlayedProjectCardCount(): number {return this.projectCardState.getProjectPlayedModelList({type:ProjectFilterNameEnum.notCorporations}).length}
 	//to refactor
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
 		this.projectCardState.playCard(card)

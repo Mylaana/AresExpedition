@@ -2,17 +2,22 @@
 	[class.current]="isCurrentUpgrade()"
 	[class.upgradable]="isUpgradeable()">
 	<div class="wrapper-phase-card">
-		<div class="wrapper-description ares-background ares-border">
-			<h5>Ability</h5>
-			<app-text-with-image [rawText]="phaseCard.baseDescription"></app-text-with-image>
+		<div class="wrapper-title">
+			<h1 class="title">{{phaseCard.title}}</h1>
 		</div>
-		<div class="wrapper-description ares-background ares-border">
-			<h5>Bonus</h5>
-			<app-text-with-image [rawText]="phaseCard.bonusDescription"></app-text-with-image>
-		</div>
-		<app-hexed-background [column]="5" [row]="6" ></app-hexed-background>
-		<div class="background-color"
-			[ngClass]="['phase' + phaseIndex, state.isUpgraded()===true? 'selected':'']">
+		<div class="wrapper-content">
+			<div class="wrapper-description ares-background ares-border">
+				<h1 class="subtitle">Ability</h1>
+				<app-text-with-image [rawText]="phaseCard.baseDescription"></app-text-with-image>
+			</div>
+			<div class="wrapper-description ares-background ares-border">
+				<h1 class="subtitle">Bonus</h1>
+				<app-text-with-image [rawText]="phaseCard.bonusDescription"></app-text-with-image>
+			</div>
+			<app-hexed-background [autoFillHexSize]="'medium'" ></app-hexed-background>
+			<div class="background-color"
+				[ngClass]="['phase' + phaseIndex, state.isUpgraded()===true? 'selected':'']">
+			</div>
 		</div>
 	</div>
 

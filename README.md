@@ -47,8 +47,6 @@ Rollback button does nothing
 
 ## Other BUG:   
 rollback button disapearing while waiting for other players   
-planification text not being updated with phase card upgraded   
-
 
 ## Must have for v1 :
 ### Refactoring
@@ -66,15 +64,11 @@ add trigger resolution priority
 
 ### Interface
 display other player production
-Add scan/keep modifier display   
-Phase upgraded status menu   
 Activable cards with megacredit cost in it display bugged   
 add FR translation   
 Waiting player event : rollback button display bugged   
-add players being ready visibility on player's interface when not yet ready   
 add display for the phase we selected on the left progression pannel   
-add display for discounts on tags / cards
-add display for total cards played
+add display for discounts on tags / cards   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
@@ -103,9 +97,6 @@ Add log
 Add main buttons help popup   
 Add onClick visual effect for buttons   
 Add popup-like window for non-production phase gains   
-Action phase: Switch buttons to vertical on the left
-Production phase: add cards drew display   
-Card Builder: show already built card on refresh   
 Add proper Hybrid production zone looks   
 Rework effect summary zone (refacto + looks)   
 Create switch button   
@@ -115,7 +106,6 @@ Add a wizz button when player being too long to play <3
 During every phase, display the current phase card   
 force client to appear on the bottom of the player pannels   
 have "lines" the same size between navigation pannels (eg: global parameter line size should be the same as players so 3 player game should be same height as global parameter pannel)   
-Display other player's played cards   
 
 
 ### Responsiveness

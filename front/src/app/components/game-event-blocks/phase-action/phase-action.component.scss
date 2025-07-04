@@ -8,10 +8,11 @@
 .wrapper-buttons{
 	display: flex;
 	justify-content: center;
-	width: 90%;
+	width: fit-content;
 	gap: 5px;
 	flex-wrap: wrap;
 	margin-bottom: 3%;
+	padding: 20px;
 }
 app-non-event-button{
 	height: 70px;
