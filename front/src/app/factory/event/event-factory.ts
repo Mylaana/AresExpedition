@@ -129,6 +129,9 @@ function addTagToCard(cardCode: string, tag: TagType): EventTargetCard {
 function effectPortal(portal: EffectPortalEnum): EventGeneric{
     return EventFactory.createGeneric('effectPortal', {effectPortal: portal})
 }
+function recallCardInHandFromPlay(){
+	return EventFactory.createCardSelector('recallCardInHand')
+}
 const SimpleEvent = {
 	draw,
 	discard,
@@ -150,6 +153,7 @@ const SimpleEvent = {
 	selectTag,
 	addTagToCard,
     effectPortal,
+	recallCardInHandFromPlay
 }
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
@@ -210,6 +214,16 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.refreshSelectorOnSwitch = false
             break
         }
+		case('recallCardInHand'):{
+			event.title = 'Return target event in hand.'
+            event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
+            event.cardSelector.selectionQuantityTreshold = 'max'
+			event.cardSelector.selectionQuantity = 1
+			event.cardSelector.filter = {type:ProjectFilterNameEnum.syntheticCatastrophe}
+            event.lockSellButton = true
+            event.lockRollbackButton = true
+            break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)

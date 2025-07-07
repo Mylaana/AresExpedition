@@ -55,7 +55,6 @@ export class LeftPannelComponent implements OnInit, OnDestroy{
 				}
 			)
 		}
-		console.log(this.phaseSelection)
 	}
 	getSelected(phase: SelectablePhaseEnum): PlayerPhaseSelection[] {
 		let result: PlayerPhaseSelection [] = []
@@ -64,7 +63,6 @@ export class LeftPannelComponent implements OnInit, OnDestroy{
 				result.push(p)
 			}
 		}
-		console.log(result)
 		return result
 	}
 	isCurrentPhase(phase: SelectablePhaseEnum): boolean {

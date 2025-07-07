@@ -187,7 +187,7 @@
     },
     {
         "id": 109,
-        "description": "objective",
+        "description": "milestone",
         "imageUrl": "assets/other/milestone.png",
         "name": "$other_milestone$"
     },

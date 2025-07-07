@@ -44,6 +44,12 @@ export class PlayerTagStateModel {
 		}
 		return 0
 	}
+	removeTags(tagsIds: number[]){
+		for(let t of tagsIds){
+			if([-1,10].includes(t)){continue}
+			this.tags[t].valueCount -= 1
+		}
+	}
 	toJson(): PlayerTagStateDTO {
 		return {
 			t: this.tags

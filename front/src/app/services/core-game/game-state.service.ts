@@ -799,4 +799,10 @@ export class GameState{
 	getGroupState(): PlayerStateModel[] {
 		return this.groupPlayerState.getValue()
 	}
+	recallCardFromPlayed(card: PlayableCardModel){
+		let state = this.getClientState()
+		state.removeTag(card.tagsId)
+		state.addCardsToHand(card.cardCode)
+		state.removeCardFromPlayed(card)
+	}
 }
