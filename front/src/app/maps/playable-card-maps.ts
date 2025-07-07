@@ -581,6 +581,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'35': () => [EventFactory.simple.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Interns
 	'36': () => [EventFactory.simple.increaseResearchScanKeep({keep: 0, scan: 2})],
+	//Nitrite Reducing Bacteria
+	'43': () => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:3}, '43')],
 	//United Planetary Alliance
 	'60': () => [EventFactory.simple.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Wood Burning Stoves
@@ -772,7 +774,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'119': () => [
 		EventFactory.simple.addProduction([
 		{ name: 'card', valueStock: 1 },
-		{ name: 'heat', valueStock: 1 },
+		{ name: 'megacredit', valueStock: 2 },
 		]),
 	],
 	//Building Industries
@@ -1104,7 +1106,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Trading Post
 	'196': () => [
 		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 2 })
+		EventFactory.simple.addRessource({ name: 'plant', valueStock: 3 })
 	],
 	//Trapped Heat
 	'197': () => [
@@ -1357,7 +1359,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: 5 })
 	],
 	//Microloans
-	'F21': () => [EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2})],
+	'F21': () => [
+		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2}),
+		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
+	],
 	//Seed Bank
 	'F22': () => [EventFactory.simple.addProduction([{ name: 'plant', valueStock: 2}, { name: 'heat', valueStock: 3}])],
 	//Quant-Link Conferencing
