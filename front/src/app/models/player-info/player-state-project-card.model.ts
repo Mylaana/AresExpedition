@@ -177,6 +177,10 @@ export class PlayerProjectCardStateModel {
 	getPlayedCorporations(): PlayableCardModel[] {
 		return this.getProjectPlayedModelList({type:ProjectFilterNameEnum.corporations})
 	}
+	removeCardFromPlayed(card: PlayableCardModel){
+		this.projects.playedIdList = this.projects.playedIdList.filter((el) => el!=card.cardCode)
+		this.projects.playedProjectList = this.projects.playedProjectList.filter((el) => el!=card)
+	}
 	toJson(): PlayerProjectCardStateDTO {
 		return {
 			h: this.hand,

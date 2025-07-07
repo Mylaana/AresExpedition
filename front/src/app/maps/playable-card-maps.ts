@@ -1393,6 +1393,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Processed Metals
 	'P08': () => [EventFactory.simple.addProduction({name:'steel', valueStock:2})],
+	//Synthetic Catastrophe
+	'P10': () => [EventFactory.simple.recallCardInHandFromPlay()],
 	//Innovative Technologies Award
 	'P26': (clientstate) => [
 		EventFactory.simple.addTR(clientstate.getPhaseCardUpgradedCount())

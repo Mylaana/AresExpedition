@@ -104,6 +104,9 @@ export class PlayerStateModel {
 		this.setScalingProduction()
 		this.setScalingVp()
 	}
+	removeTag(tagsIds: number[]){
+		this.tagState.removeTags(tagsIds)
+	}
 
 	//ressourceState
 	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}
@@ -227,6 +230,9 @@ export class PlayerStateModel {
 		}
 		this.setScalingVp()
 		this.setScalingProduction()
+	}
+	removeCardFromPlayed(card: PlayableCardModel){
+		this.projectCardState.removeCardFromPlayed(card)
 	}
 
 	private payCardCost(card: PlayableCardModel):void{

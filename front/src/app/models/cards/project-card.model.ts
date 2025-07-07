@@ -173,6 +173,10 @@ export class PlayableCardModel{
 				if(this.cardType==='corporation'){return false}
 				return true
 			}
+			case(ProjectFilterNameEnum.syntheticCatastrophe):{
+                if(this.cardType==='redProject' && this.cardCode!='P10'){return true}
+                break
+            }
         }
         return false
     }

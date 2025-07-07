@@ -189,6 +189,10 @@ export class EventHandler {
 				event.cardSelector.selectFrom = selectFrom
 				break
 			}
+			case('recallCardInHand'):{
+				event.cardSelector.selectFrom = this.gameStateService.getClientState().getProjectPlayedModelList(event.cardSelector.filter)
+				break
+			}
 		}
     }
 	private switchEventComplexCardSelector(event: EventComplexCardSelector){
@@ -294,6 +298,12 @@ export class EventHandler {
 				event.finalized = true
 				this.gameStateService.playCorporation(event.cardSelector.selectedList[0], true)
 				this.gameStateService.applyAverageStartingMegacredits()
+				break
+			}
+			case('recallCardInHand'):{
+				event.finalized = true
+				if(event.cardSelector.selectedList.length===0){break}
+				this.gameStateService.recallCardFromPlayed(event.cardSelector.selectedList[0])
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
