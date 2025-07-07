@@ -445,6 +445,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'84': (s) => Checker.isTrOk(1, 'min', s),
 	//Lake Marineris
 	'86': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
+	//Local Heat Trapping
+	'89': (s) => Checker.isRessourceOk('heat', 3, 'min', s),
 	//Mangrove
 	'90': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
 	//Permafrost Extraction
@@ -657,6 +659,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Lava Flows
 	'88': () => [
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2)],
+	//Local Heat Trapping
+	'89': () => [
+		EventFactory.simple.addRessource({name:'plant', valueStock:4}),
+		EventFactory.simple.effectPortal(EffectPortalEnum.localHeatTrapping)
+	],
 	//Mangrove
 	'90': () => [
 		EventFactory.simple.addForestAndOxygen(1)],
@@ -1528,6 +1535,13 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 		}
 		return [EventFactory.simple.addRessource({name:'plant', valueStock:5})]
 	},
+	//Local Heat Trapping
+	'89': (button) => {
+		if(button===EffectPortalButtonEnum.localHeatTrapping_Microbe){
+			return [EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:2}, 1)]
+		}
+		return [EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:2}, 1)]
+	},
 	//Biomedical Imports
 	'D14': (button) => {
 		if(button===EffectPortalButtonEnum.biomedicalImports_Oxygen){
@@ -1585,6 +1599,8 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	},
 	//Large Convoy
 	'87': (button) => button===EffectPortalButtonEnum.largeConvoy_Plant?'$ressource_plant$$ressource_plant$$ressource_plant$$skipline$$ressource_plant$$ressource_plant$':'$ressource_animal$$ressource_animal$$ressource_animal$',
+	//Local Heat Trapping
+	'89': (button) => button===EffectPortalButtonEnum.localHeatTrapping_Microbe?'$ressource_microbe$$ressource_microbe$':'$ressource_animal$$ressource_animal$',
 	//Biomedical Imports
 	'D14': (button) => button===EffectPortalButtonEnum.biomedicalImports_Oxygen?'$other_oxygen$':'$other_upgrade$',
 	//Cryogentic Shipment
@@ -1602,6 +1618,8 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	'80': ()=> [EffectPortalButtonEnum.importedHydrogen_Plant, EffectPortalButtonEnum.importedHydrogen_Microbe, EffectPortalButtonEnum.importedHydrogen_Animal],
 	//Large Convoy
 	'87': ()=> [EffectPortalButtonEnum.largeConvoy_Plant, EffectPortalButtonEnum.largeConvoy_Animal],
+	//Local Heat Trapping
+	'89': ()=> [EffectPortalButtonEnum.localHeatTrapping_Microbe, EffectPortalButtonEnum.localHeatTrapping_Animal],
 	//Biomedical Imports
 	'D14': ()=> [EffectPortalButtonEnum.biomedicalImports_Oxygen, EffectPortalButtonEnum.biomedicalImports_Upgrade],
 	//Cryogentic Shipment
@@ -1615,6 +1633,7 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
+	[EffectPortalEnum.localHeatTrapping]: '89',
 	[EffectPortalEnum.biomedicalImports]: 'D14',
 	[EffectPortalEnum.cryogenticShipment]: 'D15',
 	[EffectPortalEnum.cargoShips]: 'F04',

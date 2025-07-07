@@ -68,6 +68,7 @@ export enum EffectPortalEnum {
 	biomedicalImports,
 	cryogenticShipment,
 	cargoShips,
+	localHeatTrapping
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -91,5 +92,8 @@ export enum EffectPortalButtonEnum {
 	cryogenticShipment_Animal,
 
 	cargoShips_Plant,
-	cargoShips_Heat
+	cargoShips_Heat,
+
+	localHeatTrapping_Microbe,
+	localHeatTrapping_Animal
 }
