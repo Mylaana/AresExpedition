@@ -106,7 +106,7 @@ export class ProjectCardScalingProductionsService {
 			}
 			//Medical Lab
 			case('160'):{
-				scalingProduction = this.getPlayedTagNumber('building', tagState)
+				scalingProduction = Math.floor(this.getPlayedTagNumber('building', tagState) / 2)
 				break
 			}
 			//Miranda Resort
