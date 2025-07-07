@@ -28,6 +28,7 @@ export class ProjectCardScalingVPService {
 		"58": (card) => Math.floor(card.getStockValue('microbe') / 3), //Tardigrades
 		"59": (_, state) => Math.floor(state.getProjectPlayedIdList({ type: ProjectFilterNameEnum.blueProject }).length / 3), //Think Tank
 		"63": (_, state) => state.getTagsOfType('jovian'), //Water Import from Europa
+		"146": (_, state) => Math.floor(state.getTagsOfType('earth') / 2), //Immigration Shuttles
 		"153": (_, state) => state.getTagsOfType('jovian'), //Io Mining Industries
 		"F07": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets
 		"P04": (card) => Math.floor(card.getStockValue('animal') / 3), //Filter Feeders
