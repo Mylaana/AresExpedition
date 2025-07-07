@@ -22,7 +22,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '12', '13', '15', '16', '18', '57', '58', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20']
+export const ACTIVATION_NO_COST: string[] = ['3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20']
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -169,6 +169,10 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'64': (card, clientState) => [
 		EventFactory.simple.addRessource({ name: 'plant', valueStock: -getScaling(card, clientState) }),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
+	//Hyperion Systems
+	'D03': (card, clientState) => [
+		EventFactory.simple.addRessource({name:'megacredit',valueStock:getScaling(card, clientState)})
+	],
 	//Drone Assisted Construction
 	//Will give 4MC if phase 3 is selected by owner and is then upgraded during phase3 itself
 	'D06': (card, clientState) => [
@@ -233,7 +237,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Celestior
 	'P13': () => [EventFactory.simple.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)]
 }
-export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateModel) => number> = {
+export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
 	//Aquifer Pumping
 	'7': (clientstate) => Math.max(0, 10 - (clientstate.getRessourceInfoFromType('steel')?.valueProd??0) * 2),
 	//Developed Infrastructure
@@ -246,6 +250,8 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	'63': (state) => Math.max(0, 12 - (state.getRessourceInfoFromType('titanium')?.valueProd ?? 0)),
 	//Wood Burning Stoves
 	'64': (state) => Math.max(0, 4 - Number(state.getPhaseSelected() === SelectablePhaseEnum.action)),
+	//Hyperion Systems
+	'D03': (state) => state.getPhaseSelected()===SelectablePhaseEnum.action?2:1,
 	//Drone Assisted Construction
 	'D06': (state) => state.isSelectedPhaseUpgraded()?4:2,
 	//Interplanetary Superhighway
@@ -260,10 +266,9 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	'P21': (state) => 14 - state.getMilestoneCompleted() * 4,
 	//Gas-Cooled Reactors
 	'P23': (state) => 12 - state.getPhaseCardUpgradedCount() * 2,
-
 	//SPECIALS
 	//Convert Forest - Ecoline
-	'ConvertForest': (state) => state.getTriggersIdActive().includes('C2') ? 7 : 8,
+	'ConvertForest': (state) => state.getTriggersIdActive().includes('210') ? 7 : 8,
 	//Buy Forest - Standard Technology
 	'buyForest': (state) => state.getTriggersIdActive().includes('55') ? 16 : 20,
 	//Buy Infrastructure - Standard Technology
@@ -275,7 +280,7 @@ export const ACTIVATION_SCALING_COST: Record<string, (clientstate: PlayerStateMo
 	//Buy Temperature - Standard Technology
 	'buyUpgrade': (state) => state.getTriggersIdActive().includes('55') ? 14 : 18,
 }
-export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: PlayerStateModel) => string> = {
+export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: PlayerStateModel) => string> = {
 	//Aquifer Pumping
 	'7': (state) => `$ressource_megacreditvoid_${getScaling('7', state)}$: $other_ocean$`,
 	//Developed Infrastructure
@@ -288,6 +293,8 @@ export const ACTIVATION_SCALING_COST_CAPTION: Record<string, (clientState: Playe
 	'63': (state) => `$ressource_megacreditvoid_${getScaling('63', state)}$: $other_ocean$`,
 	//Wood Burning Stoves
 	'64': (state) => `$-${getScaling('64', state)}$ressource_plant$: $other_temperature$`,
+	//Hyperion Systems
+	'D03': (state) => `$ressource_megacreditvoid_${getScaling('D03', state)}$`,
 	//Drone Assisted Construction
 	'D06': (state) => `$ressource_megacreditvoid_${getScaling('D06', state)}$`,
 	//Interplanetary Superhighway
@@ -1163,6 +1170,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		clientState.addSellCardValueMod(1)
 		return [EventFactory.simple.upgradePhaseCard(1, [4])]
 	},
+	//Hyperion Systems
+	'D03': () => {
+		return [EventFactory.simple.upgradePhaseCard(1, [2])]
+	},
 	//Sultira
 	'D04': () => [EventFactory.simple.upgradePhaseCard(1, [0])],
 	//Communication Streamlining
@@ -1412,10 +1423,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:2}),
 		EventFactory.simple.addTR(clientstate.getMilestoneCompleted())
 	],
+	//Ecoline
+	'210': () => [EventFactory.simple.addProduction({name:'plant', valueStock:1})],
 	//Interplanetary Cinematics
-	'C4': () => [EventFactory.simple.addProduction({name:'steel', valueStock:1})],
+	'212': () => [EventFactory.simple.addProduction({name:'steel', valueStock:1})],
 	//Inventrix
-	'C5': (clientstate) => {
+	'213': (clientstate) => {
 		clientstate.setPrerequisiteOffset([
 			{name: GlobalParameterNameEnum.infrastructure, offset:1},
 			{name: GlobalParameterNameEnum.oxygen, offset:1},
@@ -1424,24 +1437,24 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		return [EventFactory.simple.draw(3)]
 	},
 	//Mining Guild
-	'C6': () => {
+	'214': () => {
 		return [EventFactory.simple.addProduction({name:'steel', valueStock:1})]
 	},
 	//Phobolog
-	'C7': (clientstate) => {
+	'215': (clientstate) => {
 		clientstate.increaseProductionModValue('titanium')
 		return [EventFactory.simple.addProduction({name:'titanium', valueStock:1})]
 	},
 	//Saturn Systems
-	'C8': () => [
+	'216': () => [
 		EventFactory.simple.addProduction({name:'titanium', valueStock:1})
 	],
 	//Tharsis Republic
-	'C10': () => [
+	'218': () => [
 		EventFactory.simple.increaseResearchScanKeep({keep:1, scan:1})
 	],
 	//Thorgate
-	'C11': () => [
+	'219': () => [
 		EventFactory.simple.addProduction({name:'heat', valueStock:1})
 	],
 	//DevTechs
@@ -1457,7 +1470,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.upgradePhaseCard(1)
 	],
 	//Zetasel
-	'CP06': () => [EventFactory.simple.drawThenDiscard(5,4)],
+	'P17': () => [EventFactory.simple.drawThenDiscard(5,4)],
 	//Point Luna
 	'CF1': () => [
 		EventFactory.simple.addProduction({name:'titanium', valueStock:1})
@@ -1478,14 +1491,14 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	'D09': () => 1,
 	//Orbital Outpost
 	'P22': (card) => card.tagsId.filter((t) => t!=-1).length<=1? 3:0,
-	//CreditCor
-	'C1': (card) => card.costInitial >= 20 ? 4 : 0,
+	//CrediCor
+	'209': (card) => card.costInitial >= 20 ? 4 : 0,
 	//Interplanetary Cinematics
-	'C4': (card) => card.hasTag('event') ? 2 : 0,
+	'212': (card) => card.hasTag('event') ? 2 : 0,
 	//Teractor
-	'C9': (card) => card.hasTag('earth') ? 3 : 0,
+	'217': (card) => card.hasTag('earth') ? 3 : 0,
 	//Thorgate
-	'C11': (card) => card.hasTag('power') ? 3 : 0,
+	'219': (card) => card.hasTag('power') ? 3 : 0,
 	//DevTechs
 	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0
 }

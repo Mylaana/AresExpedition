@@ -56,6 +56,9 @@ export class CardBuilderComponent implements OnInit{
 			case(ProjectFilterNameEnum.blueProject):{
 				return 'blue'
 			}
+			case(ProjectFilterNameEnum.maiNiProductions):{
+				return 'redbluegreen'
+			}
 			case(undefined):{
 				return 'redbluegreen'
 			}

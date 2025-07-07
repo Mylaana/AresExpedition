@@ -90,7 +90,7 @@ const S = EventFactory.simple
 		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Zetasel
-	function handleTrigger_CP06(trigger: string, input: TriggerInput): EventBaseModel[] {
+	function handleTrigger_P17(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.ocean){return []}
 		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
 		return [S.addRessource([{name:'megacredit', valueStock:2},{name:'plant', valueStock:2}])]
@@ -203,7 +203,7 @@ const S = EventFactory.simple
 		return [S.addRessourceToCardId({name:'microbe', valueStock: 1}, trigger)]
 	}
 	//Saturn Systems
-	function handleTrigger_C8(trigger: string, input: TriggerInput): EventBaseModel[] {
+	function handleTrigger_216(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
 		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===false){return []}
 		return [S.addTR(1)]
@@ -280,7 +280,7 @@ const S = EventFactory.simple
 
 //ON_PRODUCTION_INCREASED
 //Mining Guild
-	function handleTrigger_C6(trigger: string, input: TriggerInput):EventBaseModel[]{
+	function handleTrigger_214(trigger: string, input: TriggerInput):EventBaseModel[]{
 		if(input.productionIncreased.name!='steel' || input.productionIncreased.valueStock<=0){return []}
 		return [S.addTR(input.productionIncreased.valueStock)]
 	}
@@ -305,7 +305,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'D13': handleTrigger_D13,
 		'F04': handleTrigger_F04,
 		'F07': handleTrigger_F07,
-		'CP06': handleTrigger_CP06
+		'P17': handleTrigger_P17
 	},
 	ON_TAG_GAINED: {
 		'19': handleTrigger_19,
@@ -317,7 +317,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'45': handleTrigger_45,
 		'48': handleTrigger_48,
 		'61': handleTrigger_61,
-		'C8': handleTrigger_C8,
+		'216': handleTrigger_216,
 		'D01': handleTrigger_D01,
 		'D04': handleTrigger_D04,
 		'D08': handleTrigger_D08,
@@ -336,7 +336,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'53': handleTrigger_53
 	},
 	ON_PRODUCTION_INCREASED: {
-		'C6': handleTrigger_C6
+		'214': handleTrigger_214
 	},
 	ON_TRIGGER_RESOLUTION: {
 		'40': handleTrigger_40_resolution,
