@@ -8,6 +8,17 @@ import { GameState } from "./game-state.service"
 import { GameParamService } from './game-param.service'
 import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.service'
 import { EventStateService } from '../../factory/event-state-service.service'
+import { of } from 'rxjs'
+
+
+class MockRxStompService {
+  connect() {}
+  disconnect() {}
+  send() {}
+  watch() {
+    return of(); // empty Observable
+  }
+}
 
 describe('Services - Core game - Game state', () => {
     describe('UNIT TEST', () => {
@@ -26,7 +37,7 @@ describe('Services - Core game - Game state', () => {
 					ProjectCardInfoService,
 					PhaseCardInfoService,
 					ProjectCardScalingProductionsService,
-					RxStompService,
+					{ provide: RxStompService, useClass: MockRxStompService }, // << ici
 					EventStateService,
 					ProjectCardScalingVPService
 				]
