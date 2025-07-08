@@ -209,11 +209,11 @@ public class PlayerState {
         this.projectCardState.setHandCorporations(handCorporations);
     }
 
-    public List<Map<String,Object>> getCardPlayed() {
+    public Map<String,Object> getCardPlayed() {
         return projectCardState.getCardPlayed();
     }
 
-    public void setCardPlayed(List<Map<String,Object>> playedProjectIdList) {
+    public void setCardPlayed(Map<String,Object> playedProjectIdList) {
         this.projectCardState.setCardPlayed(playedProjectIdList);
     }
 
