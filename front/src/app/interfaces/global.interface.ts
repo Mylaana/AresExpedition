@@ -83,6 +83,7 @@ export interface ScanKeep {
 export interface ProjectFilter {
     type: ProjectFilterNameEnum,
     stockableType?: AdvancedRessourceType | AdvancedRessourceType[]
+	authorizedTag?: TagType[]
 }
 
 export interface DrawDiscard {

@@ -277,7 +277,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 
 	return event
 }
-function createScanKeepResult(cardList: PlayableCardModel[], keep: number, options?: DeckQueryOptionsEnum, waiter?: number): EventComplexCardSelector {
+function createScanKeepResult(cardList: PlayableCardModel[], keep: number, options?: DeckQueryOptionsEnum, waiter?: number, authorizedTag?: TagType[]): EventComplexCardSelector {
 	switch(options){
 		case(DeckQueryOptionsEnum.brainstormingSession):{
 			let event = new EventComplexCardSelector
@@ -368,6 +368,22 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
 			event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
+			event.waiterId = waiter
+			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			return event
+		}
+		case(DeckQueryOptionsEnum.modPro):{
+			let event = new EventComplexCardSelector
+            event.title = `Add one card to hand sharing a tag with Modpro Corporation.`
+            event.refreshSelectorOnSwitch = false
+            event.cardSelector.selectionQuantityTreshold = 'max'
+			event.cardSelector.selectFrom = cardList
+			event.cardSelector.selectionQuantity = 1
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = true
+			event.scanKeepOptions = options
+			event.cardSelector.filter = {type: ProjectFilterNameEnum.authorizedTag, authorizedTag: authorizedTag}
 			event.waiterId = waiter
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event

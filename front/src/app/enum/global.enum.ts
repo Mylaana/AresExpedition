@@ -21,7 +21,8 @@ export enum DeckQueryOptionsEnum {
 	devTechs = 'O3',
 	advancedScreeningTechnology = 'O4',
 	inventionContest = 'O5',
-	actionPhaseScan = 'O6'
+	actionPhaseScan = 'O6',
+	modPro = 'O7'
 }
 export enum ProjectFilterNameEnum {
 	undefined = 'undefined',
@@ -40,7 +41,8 @@ export enum ProjectFilterNameEnum {
 	playedDisplayRed = 'playedDisplayRed',
 	developmentPhaseSecondBuilder = 'developmentPhaseSecondBuilder',
 	corporations = 'corporations',
-	notCorporations = 'notCorporations'
+	notCorporations = 'notCorporations',
+	authorizedTag = 'authorizedTag'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
