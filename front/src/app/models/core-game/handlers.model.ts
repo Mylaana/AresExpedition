@@ -12,7 +12,7 @@ import { Logger, Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ActivationOption, ProjectListType } from "../../types/project-card.type";
-import { myUUID } from "../../types/global.type";
+import { myUUID, TagType } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
@@ -201,6 +201,16 @@ export class EventHandler {
 				event.activateSelection()
 				event.cardSelector.stateFromParent =  Utils.toFullCardState({selectable:true, ignoreCost:true})
 				break
+			}
+			case('scanKeepResult'):{
+				if(event.scanKeepOptions===DeckQueryOptionsEnum.modPro){
+					let card = this.gameStateService.getClientProjectPlayedModelList().filter((el)=>el.cardCode==='P32')[0]
+					if(!card){break}
+					let tag = Utils.toTagType(card.tagsId[0])
+					if(!event.cardSelector.filter){break}
+					event.cardSelector.filter.authorizedTag = [tag]
+					event.title = `Modpro : add one card to hand with an ${tag[0].toUpperCase() + tag.slice(1)} tag`
+				}
 			}
 		}
 	}
@@ -720,10 +730,10 @@ export class DrawEventHandler {
 					{
 						cardSelector:{
 							selectFrom:this.projectCardInfoService.getProjectCardList(drawEvent.drawResultCardList),
-							selectionQuantity: drawEvent.keepCardNumber
+							selectionQuantity: drawEvent.keepCardNumber,
 						},
 						scanKeepOptions:drawEvent.scanKeepOptions,
-						waiterId:drawEvent.waiterId
+						waiterId:drawEvent.waiterId,
 					}
 				)
 				break

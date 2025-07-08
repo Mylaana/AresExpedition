@@ -18,7 +18,8 @@ interface CreateEventOptionsSelector {
 }
 interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	scanKeepOptions?: DeckQueryOptionsEnum,
-	discardOptions?: DiscardOptionsEnum
+	discardOptions?: DiscardOptionsEnum,
+	authorizedTag?: TagType[]
 }
 interface CreateEventOptionsTargetCard {
     advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock []
@@ -240,7 +241,8 @@ function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, arg
 				args?.cardSelector?.selectFrom??[],
 				args?.cardSelector?.selectionQuantity??0,
 				args?.scanKeepOptions,
-				args?.waiterId
+				args?.waiterId,
+				args?.authorizedTag
 			 )
 		}
 	}

@@ -237,7 +237,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState)}),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
 	//Modpro
-	'P32': (card, clientState) => [
+	'P32': () => [
 		EventFactory.simple.scanKeep({scan:4, keep:1}, DeckQueryOptionsEnum.modPro)
 	]
 }

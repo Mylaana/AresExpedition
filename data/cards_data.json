@@ -24019,7 +24019,7 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_researchcard$$tag_wild$$$$other_hand$$ressource_card$",
+            "en": "$other_arrow$4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$",
             "fr": ""
         },
         "effectText": {
@@ -24051,7 +24051,7 @@
         },
         "stockable": [],
         "startingMegacredits": 37,
-        "status": "blocked",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""

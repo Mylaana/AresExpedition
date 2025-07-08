@@ -177,6 +177,11 @@ export class PlayableCardModel{
                 if(this.cardType==='redProject' && this.cardCode!='P10'){return true}
                 break
             }
+			case(ProjectFilterNameEnum.authorizedTag):{
+				for(let t of this.tagsId){
+					if(filter.authorizedTag?.includes(Utils.toTagType(t))){return true}
+				}
+			}
         }
         return false
     }
