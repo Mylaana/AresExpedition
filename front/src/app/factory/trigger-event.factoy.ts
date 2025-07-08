@@ -232,6 +232,7 @@ const S = EventFactory.simple
 	}
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnRessourceAdded(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.receivingCard.cardCode!=trigger){return []}
 		if(input.ressourceAdded!='microbe'|| input.ressourceAddedValue<1){return []}
 
 		let stock = input.receivingCard.getStockValue('microbe')

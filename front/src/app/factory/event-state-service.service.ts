@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTagSelectorDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGenericDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
+import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentCardSelectorDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTagSelectorDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGenericDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder, EventTagSelector } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
@@ -213,6 +213,15 @@ export class EventStateService{
 					newEvents.push(event)
 					break
 				}
+				case(EventStateTypeEnum.selectorSubType):{
+					let content: EventStateContentCardSelectorDTO = {
+						st:state.v['st']
+					}
+					let event = this.createEventCardSelector(content)
+					if(!event){treated = false; break}
+					newEvents.push(event)
+					break
+				}
 				default:{treated = false}
 			}
 			if(treated===false){remainingStates.push(state)}
@@ -283,5 +292,13 @@ export class EventStateService{
 		}
 		return
 
+	}
+	private createEventCardSelector(content: EventStateContentCardSelectorDTO): EventBaseModel | undefined {
+		switch(content.st){
+			case('recallCardInHand'):{
+				return S.recallCardInHandFromPlay()
+			}
+		}
+		return
 	}
 }

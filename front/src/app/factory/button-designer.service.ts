@@ -29,6 +29,7 @@ export class ButtonDesigner{
 			case('specialBuilder'):{startEnabled=true;break}
 			case('tagSelector'):{startEnabled=false;break}
 			case('waitingGroupReady'):{startEnabled=false;break}
+			case('recallCardInHand'):{startEnabled=true;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
