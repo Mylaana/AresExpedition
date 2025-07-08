@@ -77,4 +77,5 @@ export interface EventStateActivator extends EventStateContentDTO {
 }
 export interface EventStateContentTagSelectorDTO extends EventStateContentDTO {
 	atl: TagType[]
+	cc: string
 }

@@ -584,7 +584,7 @@ export class EventHandler {
 				break
 			}
 			case('addTagToCardId'):{
-				this.gameStateService.addTagFromOtherSourceToClient(event.addTag)
+				this.gameStateService.addTagToTargetCard(event.targetCardId, event.addTag)
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventTargetCards: ', this.currentEvent)}
@@ -606,6 +606,7 @@ export class EventHandler {
 	}
 	private finishEventTagSelector(event: EventTagSelector) {
 		Logger.logEventResolution('resolving event: ','finishEventTagSelector', event.subType)
+		console.log(event)
 		switch(event.subType){
 			case('tagSelector'):{
 				event.finalized=true

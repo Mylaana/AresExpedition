@@ -19,7 +19,7 @@ public class PlayerProjectCardStateDTO {
     @JsonProperty("ppil")
     private List<String> playedProjectIdList = new ArrayList<>();
     @JsonProperty("cp")
-    private List<Map<String, Object>> cardPlayed = new ArrayList<>();
+    private Map<String, Object> cardPlayed = new HashMap<>();
     @JsonProperty("t")
     private TriggerStateDTO triggers = new TriggerStateDTO();
     @JsonProperty("hms")
@@ -88,11 +88,11 @@ public class PlayerProjectCardStateDTO {
         this.handDiscard = handDiscard;
     }
 
-    public List<Map<String, Object>> getCardPlayed() {
+    public Map<String, Object> getCardPlayed() {
         return cardPlayed;
     }
 
-    public void setCardPlayed(List<Map<String, Object>> cardPlayed) {
+    public void setCardPlayed(Map<String, Object> cardPlayed) {
         this.cardPlayed = cardPlayed;
     }
 

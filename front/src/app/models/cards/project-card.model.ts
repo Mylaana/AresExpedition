@@ -1,8 +1,8 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType, TagType } from "../../types/global.type"
-import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, PlayedCardStock} from "../../types/project-card.type"
+import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
-import {  TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
+import { PlayedCardStocksDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
 import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
 import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
@@ -39,7 +39,7 @@ export class PlayableCardModel{
     effectSummaryOption!: string
     effectSummaryOption2!: string
 	scalingVp!: boolean
-	additionalTags!: number[]
+	tagStock!: number[] // this stores additional tags and wildtags result
 
     //not loaded from data
 
@@ -200,16 +200,38 @@ export class PlayableCardModel{
 	hasTag(tag: TagType): boolean {
 		return this.hasTagId(Utils.toTagId(tag))
 	}
-	toDTO(): PlayedCardStock {
-		return {[this.cardCode]: this.stock??[]}
+	addTagToStock(tag: TagType){
+		if(!this.tagStock){this.tagStock=[]}
+		this.tagStock.push(Utils.toTagId(tag))
+		this.replaceWildTagWithStock()
+	}
+	replaceWildTagWithStock(){
+		let stockIndex: number = 0
+		for(let i=0; i<this.tagsId.length; i++){
+			let t =this.tagsId[i]
+			if(t===10){
+				this.tagsId[i] = this.tagStock[stockIndex]
+				stockIndex ++
+			}
+		}
+	}
+	toStockDTO(): PlayedCardStocksDTO {
+		let dto : PlayedCardStocksDTO = {}
+		if(this.stock){dto.s = this.stock}
+		if(this.tagStock){dto.t = this.tagStock}
+		return dto
 	}
 	public static fromInterface(input: PlayableCardInterface): PlayableCardModel {
 		let newCard: PlayableCardModel = Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))
 		newCard.cost = newCard.costInitial
 		return newCard
 	}
-	loadStockFromJson(stock: AdvancedRessourceStock[]){
+	loadRessourceStockFromJson(stock: AdvancedRessourceStock[]){
 		this.stock = stock
+	}
+	loadTagStockFromJson(tagStock: number[]){
+		this.tagStock = tagStock
+		this.replaceWildTagWithStock()
 	}
 }
 

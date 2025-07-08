@@ -1215,7 +1215,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Topographic Mapping
 	'D20': () => [
-		EventFactory.simple.selectTag('D20'),
+		EventFactory.simple.resolveWildTag('D20'),
 		EventFactory.simple.upgradePhaseCard(1)
 	],
 	//3D printing
@@ -1237,7 +1237,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Local Market
 	'D26': () => [
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:2}),
-		EventFactory.simple.selectTag('D26')
+		EventFactory.simple.resolveWildTag('D26')
 	],
 	//Manufacturing Hub
 	'D27': () => [
@@ -1305,7 +1305,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Political Influence
 	'D39': () => [
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:3}),
-		EventFactory.simple.selectTag('D39')
+		EventFactory.simple.resolveWildTag('D39')
 	],
 	//Biological Factories
 	'D40': () => [

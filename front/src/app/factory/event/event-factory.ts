@@ -120,7 +120,7 @@ function scanKeepResult(cardList: PlayableCardModel[], keep: number, option: Dec
 function specialBuilder(option: BuilderOption): EventCardBuilder {
 	return EventFactory.createCardBuilder('specialBuilder', 'specialBuilder', option)
 }
-function selectTag(cardCode: string) : EventTagSelector {
+function resolveWildTag(cardCode: string) : EventTagSelector {
 	return EventFactory.createTagSelector(cardCode)
 }
 function addTagToCard(cardCode: string, tag: TagType): EventTargetCard {
@@ -150,7 +150,7 @@ const SimpleEvent = {
 	addTR,
 	addForestAndOxygen,
 	specialBuilder,
-	selectTag,
+	resolveWildTag,
 	addTagToCard,
     effectPortal,
 	recallCardInHandFromPlay
