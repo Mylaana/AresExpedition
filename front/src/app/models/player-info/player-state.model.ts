@@ -234,6 +234,9 @@ export class PlayerStateModel {
 	removeCardFromPlayed(card: PlayableCardModel){
 		this.projectCardState.removeCardFromPlayed(card)
 	}
+	addTagToCardId(cardCode: string, tag: TagType){
+		this.projectCardState.addTagToCardId(cardCode, tag)
+	}
 
 	private payCardCost(card: PlayableCardModel):void{
 		this.addRessource('megacredit', -card.cost)

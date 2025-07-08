@@ -22,7 +22,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20']
+export const ACTIVATION_NO_COST: string[] = ['3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32']
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -224,6 +224,8 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 			EventFactory.simple.specialBuilder(BuilderOption.selfReplicatingBacteria)
 			]
 		: [],
+	//Celestior
+	'P13': () => [EventFactory.simple.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)],
 	//Community Afforestation
 	'P20': (_, clientState) => [EventFactory.simple.draw(1 + clientState.getMilestoneCompleted())],
 	//Community Afforestation
@@ -234,8 +236,10 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'P23': (card, clientState) => [
 		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState)}),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
-	//Celestior
-	'P13': () => [EventFactory.simple.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)]
+	//Modpro
+	'P32': (card, clientState) => [
+		EventFactory.simple.scanKeep({scan:4, keep:1}, DeckQueryOptionsEnum.modPro)
+	]
 }
 export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
 	//Aquifer Pumping
@@ -1215,7 +1219,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Topographic Mapping
 	'D20': () => [
-		EventFactory.simple.selectTag('D20'),
+		EventFactory.simple.resolveWildTag('D20'),
 		EventFactory.simple.upgradePhaseCard(1)
 	],
 	//3D printing
@@ -1237,7 +1241,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Local Market
 	'D26': () => [
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:2}),
-		EventFactory.simple.selectTag('D26')
+		EventFactory.simple.resolveWildTag('D26')
 	],
 	//Manufacturing Hub
 	'D27': () => [
@@ -1305,7 +1309,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Political Influence
 	'D39': () => [
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:3}),
-		EventFactory.simple.selectTag('D39')
+		EventFactory.simple.resolveWildTag('D39')
 	],
 	//Biological Factories
 	'D40': () => [
@@ -1422,6 +1426,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'P30': (clientstate) => [
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:2}),
 		EventFactory.simple.addTR(clientstate.getMilestoneCompleted())
+	],
+	//Modpro
+	'P32': () => [
+		EventFactory.simple.resolveWildTag('P32'),
 	],
 	//Ecoline
 	'210': () => [EventFactory.simple.addProduction({name:'plant', valueStock:1})],

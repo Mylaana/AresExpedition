@@ -3,8 +3,8 @@ import { GAME_HAND_MAXIMUM_SIZE } from "../../global/global-const"
 import { PlayerProjectCardStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { AdvancedRessourceStock, GlobalParameterOffset, ProjectFilter } from "../../interfaces/global.interface"
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service"
-import { AdvancedRessourceType, PlayableCardType } from "../../types/global.type"
-import { PlayedCardStock, PlayedProject } from "../../types/project-card.type"
+import { AdvancedRessourceType, PlayableCardType, TagType } from "../../types/global.type"
+import { PlayedCardDTO, PlayedProject } from "../../types/project-card.type"
 import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
 import { EventStateActivator } from "../../interfaces/event-state.interface"
@@ -34,7 +34,7 @@ export class PlayerProjectCardStateModel {
 		this.handCorporation = dto.hc,
 		this.handMaximumSize = dto.hms
 
-		this.loadPlayedCardsFromJson(dto.cp)
+		this.loadPlayedCardsStockFromJson(dto.cp)
 		this.triggers = TriggerState.fromJson(dto.t)
 		this.prerequisiteOffset = new Map<GlobalParameterNameEnum, number>(
 			Object.entries(dto.o).map(([key, value]) => [key as GlobalParameterNameEnum, value])
@@ -181,6 +181,12 @@ export class PlayerProjectCardStateModel {
 		this.projects.playedIdList = this.projects.playedIdList.filter((el) => el!=card.cardCode)
 		this.projects.playedProjectList = this.projects.playedProjectList.filter((el) => el!=card)
 	}
+	addTagToCardId(cardCode: string, tag: TagType){
+		let card = this.getProjectPlayedModelFromCode(cardCode)
+		if(!card){return}
+		console.log(card)
+		card.addTagToStock(tag)
+	}
 	toJson(): PlayerProjectCardStateDTO {
 		return {
 			h: this.hand,
@@ -189,15 +195,14 @@ export class PlayerProjectCardStateModel {
 			cp: this.projectCardPlayedStockToJson(),
 			t: this.triggers.toJson(),
 			hms: this.handMaximumSize,
-			o: this.prerequisiteOffsetToJson()
+			o: this.prerequisiteOffsetToJson(),
 		}
 	}
-	private projectCardPlayedStockToJson(): PlayedCardStock[] {
-		let result: PlayedCardStock[] = []
+	private projectCardPlayedStockToJson(): PlayedCardDTO {
+		let result: PlayedCardDTO = {}
 		for(let card of this.getProjectPlayedModelList()){
-			result.push(card.toDTO())
+			result[card.cardCode] = card.toStockDTO()
 		}
-
 		return result
 	}
 	private prerequisiteOffsetToJson(): {[key: string]: number} {
@@ -208,36 +213,26 @@ export class PlayerProjectCardStateModel {
 		this.hand = dto.h
 	}
 	static fromJson(data: PlayerProjectCardStateDTO, injector: Injector): PlayerProjectCardStateModel {
-		if (!data.h|| data.cp|| !data.t || !data.hms || !data.hd){
+		if (!data.h|| !data.hc|| !data.hd || !data.cp || !data.t || !data.hms || !data.o ){
 			throw new Error("Invalid PlayerProjectCardStateDTO: Missing required fields")
 		}
 		return new PlayerProjectCardStateModel(injector, data)
 	}
-	private cardPlayedIdListFromJson(dto: PlayedCardStock[]): number[] {
-		if(!dto){return []}
-		let list: number[] = []
-		for (const stockMap of dto) {
-			for (const key in stockMap) {
-				const numericKey = parseInt(key)
-				const value = stockMap[numericKey]
-				list.push(numericKey)
-			}
-		}
-		return list
-	}
-	private loadPlayedCardsFromJson(dto: PlayedCardStock[]) {
+	private loadPlayedCardsStockFromJson(dto: PlayedCardDTO){
 		if(!dto){return}
 		let playedIdList: string[] = []
 		let playedModelList: PlayableCardModel[] = []
-		for (let stockMap of dto) {
-			for (let key in stockMap) {
-				let value = stockMap[key]
-				playedIdList.push(key)
-				let card = this.cardInfoService.getCardById(key)
-				if(!card){continue}
-				card.loadStockFromJson(value)
-				playedModelList.push(card)
+		for(const [key, value] of Object.entries(dto)){
+			playedIdList.push(key)
+			let card = this.cardInfoService.getCardById(key)
+			if(!card){continue}
+			if(value.s){
+				card.loadRessourceStockFromJson(value.s)
 			}
+			if(value.t){
+				card.loadTagStockFromJson(value.t)
+			}
+			playedModelList.push(card)
 		}
 		this.projects = {
 			playedIdList: playedIdList,
@@ -252,9 +247,9 @@ export class PlayerProjectCardStateModel {
 				hc: [],
 				hd: [],
 				hms: GAME_HAND_MAXIMUM_SIZE,
-				cp: [],
+				cp: {},
 				t: {a: [], p: []},
-				o: {}
+				o: {},
 			}
 		)
 	}

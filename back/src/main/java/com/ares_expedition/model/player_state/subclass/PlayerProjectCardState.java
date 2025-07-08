@@ -12,7 +12,7 @@ public class PlayerProjectCardState {
     private List<String> hand = new ArrayList<>();
     private List<String> handCorporations = new ArrayList<>();
     private List<String> handDiscard = new ArrayList<>();
-    private List<Map<String, Object>> cardPlayed = new ArrayList<>();
+    private Map<String, Object> cardPlayed = new HashMap<>();
     private TriggerState triggers = new TriggerState();
     private Integer handMaximumSize = 10;
     private Map<String, Integer> prerequisiteOffset = new HashMap<>();
@@ -78,11 +78,11 @@ public class PlayerProjectCardState {
         this.handDiscard = handDiscard;
     }
 
-    public List<Map<String, Object>> getCardPlayed() {
+    public Map<String, Object> getCardPlayed() {
         return cardPlayed;
     }
 
-    public void setCardPlayed(List<Map<String, Object>> cardPlayed) {
+    public void setCardPlayed(Map<String, Object> cardPlayed) {
         this.cardPlayed = cardPlayed;
     }
 
@@ -92,5 +92,5 @@ public class PlayerProjectCardState {
 
     public void setPrerequisiteOffset(Map<String, Integer> prerequisiteOffset) {
         this.prerequisiteOffset = prerequisiteOffset;
-    }   
+    }
 }

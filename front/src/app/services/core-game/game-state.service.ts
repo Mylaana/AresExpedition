@@ -804,5 +804,14 @@ export class GameState{
 		state.removeTag(card.tagsId)
 		state.addCardsToHand(card.cardCode)
 		state.removeCardFromPlayed(card)
+		if(card.vpNumber)
+		if(Number(card.vpNumber??'')!=0 && !isNaN(Number(card.vpNumber??''))){
+			state.addVP(-parseInt(card.vpNumber??''))
+		}
+	}
+	addTagToTargetCard(cardCode: string, tag: TagType){
+		this.addTagFromOtherSourceToClient(tag)
+		let state = this.getClientState()
+		state.addTagToCardId(cardCode, tag)
 	}
 }

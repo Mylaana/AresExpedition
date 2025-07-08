@@ -1,6 +1,7 @@
 import { RessourceInfo } from "../interfaces/global.interface"
 import { PlayableCardModel } from "../models/cards/project-card.model"
 import { AdvancedRessourceStock } from "../interfaces/global.interface"
+import { PlayedCardStocksDTO } from "../interfaces/dto/project-card-dto.interface"
 
 export type SummaryType = 'action' | 'trigger' | 'production' | 'greyProduction' | 'mixedProduction' | undefined
 export type CardType = 'redProject' | 'greenProject' | 'blueProject' | undefined | 'corporation'
@@ -19,5 +20,5 @@ export type TriggerLimit = {
 
 export type ProjectListType = 'none' | 'hand' | 'played' | 'selector' | 'builderSelector' | 'builderSelectedZone' | 'playedSelector'
 export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'selectMerger' | 'discard' | 'addRessource' | 'scanKeepResult'
-export type PlayedCardStock = {[key: string]: AdvancedRessourceStock[]}
+export type PlayedCardDTO = {[key: string]: PlayedCardStocksDTO}
 export type ActivationOption = 1 | 2

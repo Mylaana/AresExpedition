@@ -205,7 +205,8 @@ export class EventStateService{
 				}
 				case(EventStateTypeEnum.tagSelection):{
 					let content: EventStateContentTagSelectorDTO = {
-						atl:state.v['atl']
+						atl:state.v['atl'],
+						cc:state.v['cc']
 					}
 					let event = this.createEventTagSelector(content)
 					if(!event){treated = false; break}
@@ -243,7 +244,7 @@ export class EventStateService{
 		return newEvents
 	}
 	private createEventTagSelector(content: EventStateContentTagSelectorDTO):  EventTagSelector | undefined{
-		return S.selectTag('D20')
+		return S.resolveWildTag(content.cc)
 	}
 	private createGenericEvents(content: EventStateGenericDTO): EventBaseModel | undefined {
 		//add production
