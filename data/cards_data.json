@@ -762,82 +762,6 @@
     },
     {
         "id": 0,
-        "card_code": "11",
-        "origin": "base",
-        "cost": 0,
-        "tagsId": [
-            2
-        ],
-        "cardType": "blueProject",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "III",
-        "phaseDown": "",
-        "title": {
-            "en": "Asset Liquidation",
-            "fr": ""
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "action",
-        "effectSummaryText": {
-            "en": "$other_arrow$$skipline$-$other_tr$: 3$ressource_card$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "ACTION: Spend 1 terraforming point to draw 3 cards.",
-            "fr": ""
-        },
-        "effectSummaryOption": "",
-        "effectSummaryType2": "",
-        "effectSummaryText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryOption2": "",
-        "playedText": {
-            "en": "You may play an additional blue or red card during this phase.",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [],
-        "startingMegacredits": 0,
-        "status": "validated",
-        "effectActionTextOption1": {
-            "en": "-$other_tr$: 3$ressource_card$",
-            "fr": ""
-        },
-        "effectActionTextOption2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option2": {
-            "en": "",
-            "fr": ""
-        },
-        "vpScaling": "0"
-    },
-    {
-        "id": 0,
         "card_code": "12",
         "origin": "base",
         "cost": 15,
@@ -15958,7 +15882,7 @@
         },
         "stockable": [],
         "startingMegacredits": 48,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16034,7 +15958,7 @@
         },
         "stockable": [],
         "startingMegacredits": 27,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16186,7 +16110,7 @@
         },
         "stockable": [],
         "startingMegacredits": 46,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16262,7 +16186,7 @@
         },
         "stockable": [],
         "startingMegacredits": 33,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16339,7 +16263,7 @@
         },
         "stockable": [],
         "startingMegacredits": 27,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16415,7 +16339,7 @@
         },
         "stockable": [],
         "startingMegacredits": 20,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16491,7 +16415,7 @@
         },
         "stockable": [],
         "startingMegacredits": 24,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16567,7 +16491,7 @@
         },
         "stockable": [],
         "startingMegacredits": 51,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16641,7 +16565,7 @@
         },
         "stockable": [],
         "startingMegacredits": 40,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16717,7 +16641,7 @@
         },
         "stockable": [],
         "startingMegacredits": 45,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -16922,7 +16846,7 @@
         "effectSummaryOption": "",
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
-            "en": "",
+            "en": "$other_planification$: ?",
             "fr": ""
         },
         "effectText2": {
@@ -17096,7 +17020,7 @@
         },
         "stockable": [],
         "startingMegacredits": 43,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17172,7 +17096,7 @@
         },
         "stockable": [],
         "startingMegacredits": 33,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17248,7 +17172,7 @@
         },
         "stockable": [],
         "startingMegacredits": 26,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17324,7 +17248,7 @@
         },
         "stockable": [],
         "startingMegacredits": 30,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -17400,7 +17324,7 @@
         },
         "stockable": [],
         "startingMegacredits": 38,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -22757,7 +22681,7 @@
             "animal"
         ],
         "startingMegacredits": 43,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -22833,7 +22757,7 @@
         },
         "stockable": [],
         "startingMegacredits": 50,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "3$other_researchcard$$tag_event$:$skipline$$other_hand$$ressource_card$",
             "fr": ""
@@ -22909,7 +22833,7 @@
         },
         "stockable": [],
         "startingMegacredits": 40,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -23061,7 +22985,7 @@
         },
         "stockable": [],
         "startingMegacredits": 48,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24127,7 +24051,7 @@
         },
         "stockable": [],
         "startingMegacredits": 37,
-        "status": "implemented",
+        "status": "blocked",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24169,7 +24093,7 @@
             "en": "",
             "fr": ""
         },
-        "effectSummaryType": "",
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_milestone$$other_validate$:$$$other_tr$$other_tr$$other_tr$",
             "fr": ""
