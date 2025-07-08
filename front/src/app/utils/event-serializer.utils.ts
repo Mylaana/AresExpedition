@@ -1,7 +1,7 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGenericDTO, EventStateActivator, EventStateContentTagSelectorDTO } from "../interfaces/event-state.interface"
-import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric, EventTagSelector } from "../models/core-game/event.model"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGenericDTO, EventStateActivator, EventStateContentTagSelectorDTO, EventStateContentCardSelectorDTO } from "../interfaces/event-state.interface"
+import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric, EventTagSelector, EventCardSelector } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
 function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
@@ -192,7 +192,21 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 	}
 	return
 }
-
+function eventCardSelectorToJson(event: EventCardSelector): EventStateDTO | undefined {
+	switch(event.subType){
+		case('recallCardInHand'):{
+			let content: EventStateContentCardSelectorDTO = {
+				st: event.subType
+			}
+			return {
+				o: EventStateOriginEnum.create,
+				t: EventStateTypeEnum.selectorSubType,
+				v: content
+			}
+		}
+	}
+	return
+}
 function toJson(event: EventBaseModel): EventStateDTO | undefined {
 	if(event.finalized){return}
 	const excludedSubtypes : EventUnionSubTypes[] = [
@@ -209,6 +223,7 @@ function toJson(event: EventBaseModel): EventStateDTO | undefined {
 		case('ComplexSelector'):{dto = eventComplexSelectorToJson(event as EventComplexCardSelector); break}
 		case('generic'):{dto = eventGenericToJson(event as EventGeneric); break}
 		case('tagSelector'):{dto = eventTagSelectorToJson(event as EventTagSelector); break}
+		case('cardSelector'):{dto = eventCardSelectorToJson(event as EventCardSelector); break}
 		default:{break}
 	}
 	if(dto){return dto}

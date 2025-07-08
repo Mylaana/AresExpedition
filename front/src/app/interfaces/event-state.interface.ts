@@ -1,5 +1,6 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum } from "../enum/global.enum"
+import { EventCardSelectorSubType } from "../types/event.type"
 import { TagType } from "../types/global.type"
 import { AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep } from "./global.interface"
 
@@ -78,4 +79,7 @@ export interface EventStateActivator extends EventStateContentDTO {
 export interface EventStateContentTagSelectorDTO extends EventStateContentDTO {
 	atl: TagType[]
 	cc: string
+}
+export interface EventStateContentCardSelectorDTO extends EventStateContentDTO {
+	st: EventCardSelectorSubType //type
 }
