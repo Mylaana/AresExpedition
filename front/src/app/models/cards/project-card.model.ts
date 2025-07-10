@@ -177,6 +177,11 @@ export class PlayableCardModel{
                 if(this.cardType==='redProject' && this.cardCode!='P10'){return true}
                 break
             }
+			case(ProjectFilterNameEnum.authorizedTag):{
+				for(let t of this.tagsId){
+					if(filter.authorizedTag?.includes(Utils.toTagType(t))){return true}
+				}
+			}
         }
         return false
     }
@@ -203,16 +208,25 @@ export class PlayableCardModel{
 	addTagToStock(tag: TagType){
 		if(!this.tagStock){this.tagStock=[]}
 		this.tagStock.push(Utils.toTagId(tag))
-		this.replaceWildTagWithStock()
+		this.applyTagStockToCurrentTags()
 	}
-	replaceWildTagWithStock(){
+	applyTagStockToCurrentTags(){
 		let stockIndex: number = 0
+		let remainingStock = Utils.jsonCopy(this.tagStock)
+
+		//Research grant exception
+		if(this.cardCode==='P24'){
+			this.tagsId = this.tagStock
+			return
+		}
+		//replace wild tags with stock
 		for(let i=0; i<this.tagsId.length; i++){
 			let t =this.tagsId[i]
 			if(t===10){
-				this.tagsId[i] = this.tagStock[stockIndex]
+				this.tagsId[i] = remainingStock.splice(stockIndex)[0]
 				stockIndex ++
 			}
+			if(remainingStock.length===0){break}
 		}
 	}
 	toStockDTO(): PlayedCardStocksDTO {
@@ -231,7 +245,7 @@ export class PlayableCardModel{
 	}
 	loadTagStockFromJson(tagStock: number[]){
 		this.tagStock = tagStock
-		this.replaceWildTagWithStock()
+		this.applyTagStockToCurrentTags()
 	}
 }
 

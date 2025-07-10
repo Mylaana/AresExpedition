@@ -8,6 +8,8 @@ import { PlayableCard } from "../factory/playable-card.factory";
 import { ActivationOption, TriggerLimit } from "../types/project-card.type";
 import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
+import { GAME_TAG_LIST } from "../global/global-const";
+import { Utils } from "../utils/utils";
 
 
 function getScaling(cardCode: string, clientState: PlayerStateModel){
@@ -229,15 +231,28 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Community Afforestation
 	'P20': (_, clientState) => [EventFactory.simple.draw(1 + clientState.getMilestoneCompleted())],
 	//Community Afforestation
-	'P21': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState)}),
+	'P21': (cardCode, clientState) => [
+		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState)}),
 		EventFactory.simple.addForestAndOxygen(1)],
 	//Gas-Cooled Reactors
-	'P23': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState)}),
+	'P23': (cardCode, clientState) => [
+		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState)}),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
+	//Research Grant
+	'P24': (cardCode, clientState) => {
+		let card = clientState.getPlayedProjectWithId(cardCode)
+		let tags = card?.tagStock
+		if(!tags){
+			return [EventFactory.simple.resolveWildTag(cardCode)]
+		}
+		let authorizedTags = GAME_TAG_LIST
+		for(let t of tags){
+			authorizedTags = authorizedTags.filter((el) => el!= Utils.toTagType(t))
+		}
+		return [EventFactory.simple.resolveWildTag(cardCode,authorizedTags)]
+	},
 	//Modpro
-	'P32': (card, clientState) => [
+	'P32': () => [
 		EventFactory.simple.scanKeep({scan:4, keep:1}, DeckQueryOptionsEnum.modPro)
 	]
 }
@@ -401,6 +416,12 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'P21': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('P21', clientState), 'min', clientState),
 	//Gas-Cooled Reactors
 	'P23': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('P23', clientState), 'min', clientState),
+	//Research Grant
+	'P24': (_, clientState) => {
+		let card = clientState.getPlayedProjectWithId('P24')
+		if(!card){return false}
+		return !card.tagStock || card.tagStock.length<3
+	},
 }
 export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) => boolean> = {
 	//AI Central
@@ -1410,6 +1431,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'P08': () => [EventFactory.simple.addProduction({name:'steel', valueStock:2})],
 	//Synthetic Catastrophe
 	'P10': () => [EventFactory.simple.recallCardInHandFromPlay()],
+	//Research Grant
+	'P24': (clientstate) => [
+		EventFactory.simple.specialBuilder(BuilderOption.researchGrant)
+	],
 	//Innovative Technologies Award
 	'P26': (clientstate) => [
 		EventFactory.simple.addTR(clientstate.getPhaseCardUpgradedCount())

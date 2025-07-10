@@ -167,6 +167,9 @@ function toTagId(tagType: TagType): number {
 	}
 	return -1
 }
+function toTagType(tagId: number): TagType {
+	return GAME_TAG_LIST[tagId]
+}
 
 export const Logger = {
 	logText,
@@ -189,5 +192,6 @@ export const Utils = {
 	toCardTypeColor,
 	toArray,
 	toGlobalParameterColor,
-	toTagId
+	toTagId,
+	toTagType
 }

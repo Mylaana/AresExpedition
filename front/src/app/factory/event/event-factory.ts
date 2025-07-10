@@ -18,7 +18,8 @@ interface CreateEventOptionsSelector {
 }
 interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	scanKeepOptions?: DeckQueryOptionsEnum,
-	discardOptions?: DiscardOptionsEnum
+	discardOptions?: DiscardOptionsEnum,
+	authorizedTag?: TagType[]
 }
 interface CreateEventOptionsTargetCard {
     advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock []
@@ -120,8 +121,8 @@ function scanKeepResult(cardList: PlayableCardModel[], keep: number, option: Dec
 function specialBuilder(option: BuilderOption): EventCardBuilder {
 	return EventFactory.createCardBuilder('specialBuilder', 'specialBuilder', option)
 }
-function resolveWildTag(cardCode: string) : EventTagSelector {
-	return EventFactory.createTagSelector(cardCode)
+function resolveWildTag(cardCode: string, authorizedTagList?: TagType[]) : EventTagSelector {
+	return EventFactory.createTagSelector(cardCode, authorizedTagList)
 }
 function addTagToCard(cardCode: string, tag: TagType): EventTargetCard {
 	return EventFactory.createTargetCard('addTagToCardId', cardCode, {addTagToCard:tag})
@@ -240,7 +241,8 @@ function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, arg
 				args?.cardSelector?.selectFrom??[],
 				args?.cardSelector?.selectionQuantity??0,
 				args?.scanKeepOptions,
-				args?.waiterId
+				args?.waiterId,
+				args?.authorizedTag
 			 )
 		}
 	}
@@ -489,7 +491,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					event.title = 'Play an additional Blue or Red card with a 11MC discount'
 					break
 				}
-				case(BuilderOption.assetLiquidation):{
+				case(BuilderOption.assetLiquidation):case(BuilderOption.researchGrant):{
 					let builder = generateCardBuilder(0)
 					builder.setOption(builderOption)
 					event.cardBuilder.push(builder)
@@ -751,12 +753,15 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
     event.button = ButtonDesigner.createEventMainButton(event.subType)
     return event
 }
-function createTagSelector(cardCode: string): EventTagSelector {
+function createTagSelector(cardCode: string, authorizedTagList?: TagType[]): EventTagSelector {
 	let event = new EventTagSelector
 	event.subType = 'tagSelector'
 	event.targetCardId = cardCode
 	event.button = ButtonDesigner.createEventMainButton(event.subType)
 	event.title = 'Select a tag to add to this card.'
+	if(authorizedTagList){
+		event.authorizedTagList = authorizedTagList
+	}
 
 	return event
 }

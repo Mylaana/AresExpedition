@@ -216,7 +216,7 @@ export class PlayerStateModel {
 	getPlayedCorporations(): PlayableCardModel[] {return this.projectCardState.getPlayedCorporations()}
 	getActivableCount(): number {return this.projectCardState.getProjectPlayedModelList({type:ProjectFilterNameEnum.action}).length}
 	getPlayedProjectCardCount(): number {return this.projectCardState.getProjectPlayedModelList({type:ProjectFilterNameEnum.notCorporations}).length}
-	//to refactor
+	getPlayedProjectWithId(cardCode: string): PlayableCardModel | undefined{return this.projectCardState.getPlayedProjectWithId(cardCode)}
 	playCard(card:PlayableCardModel, cardType: PlayableCardType):void{
 		this.projectCardState.playCard(card)
 		this.removeCardsFromHand([card.cardCode], cardType, false)
