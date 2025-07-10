@@ -814,4 +814,7 @@ export class GameState{
 		let state = this.getClientState()
 		state.addTagToCardId(cardCode, tag)
 	}
+	publishRollbackQuery(){
+		this.rxStompService.publishRollbackQuery()
+	}
 }
