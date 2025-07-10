@@ -616,7 +616,6 @@ export class EventHandler {
 	}
 	private finishEventTagSelector(event: EventTagSelector) {
 		Logger.logEventResolution('resolving event: ','finishEventTagSelector', event.subType)
-		console.log(event)
 		switch(event.subType){
 			case('tagSelector'):{
 				event.finalized=true

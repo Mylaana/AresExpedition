@@ -9,6 +9,7 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
 import { EventBaseModel, EventTagSelector } from '../../../models/core-game/event.model';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { TagType } from '../../../types/global.type';
 
 @Component({
   selector: 'app-tag-gain-list',
@@ -27,11 +28,13 @@ export class TagGainListComponent implements OnInit{
 	_buttonsId: number [] = []
 	_card!: PlayableCardModel
 	_selected:number = -1
+	_authorizedTagList!: TagType[]
 
 	constructor(private cardService: ProjectCardInfoService){}
 	ngOnInit(): void {
 		let index = 0
-		for(let tag of GAME_TAG_LIST){
+		this._authorizedTagList = this.getAuthorizedTagList(this.event as EventTagSelector)
+		for(let tag of this._authorizedTagList){
 			this.buttons.push(ButtonDesigner.createNonEventButton('tagGain', `$tag_${tag}$`))
 			this._buttonsId.push(index)
 			index ++
@@ -44,7 +47,7 @@ export class TagGainListComponent implements OnInit{
 	}
 	onTagSelected(id: number){
 		let e = this.event as EventTagSelector
-		e.selectedTag = GAME_TAG_LIST[id]
+		e.selectedTag = this._authorizedTagList[id]
 		if(e.button){
 			e.button.enabled = true
 		}
@@ -52,5 +55,8 @@ export class TagGainListComponent implements OnInit{
 	}
 	getButton(id: number): NonEventButton{
 		return this.buttons[id]
+	}
+	private getAuthorizedTagList(event: EventTagSelector): TagType[] {
+		return event.authorizedTagList??GAME_TAG_LIST
 	}
 }

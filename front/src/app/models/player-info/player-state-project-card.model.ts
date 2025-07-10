@@ -184,7 +184,6 @@ export class PlayerProjectCardStateModel {
 	addTagToCardId(cardCode: string, tag: TagType){
 		let card = this.getProjectPlayedModelFromCode(cardCode)
 		if(!card){return}
-		console.log(card)
 		card.addTagToStock(tag)
 	}
 	toJson(): PlayerProjectCardStateDTO {
@@ -197,6 +196,11 @@ export class PlayerProjectCardStateModel {
 			hms: this.handMaximumSize,
 			o: this.prerequisiteOffsetToJson(),
 		}
+	}
+	getPlayedProjectWithId(cardCode: string): PlayableCardModel | undefined {
+		let card = this.projects.playedProjectList.filter((el)=> el.cardCode===cardCode)
+		if(card.length!=0){return card[0]}
+		return
 	}
 	private projectCardPlayedStockToJson(): PlayedCardDTO {
 		let result: PlayedCardDTO = {}

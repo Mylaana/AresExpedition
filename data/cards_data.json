@@ -15830,7 +15830,7 @@
     {
         "id": 0,
         "card_code": "209",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [],
         "cardType": "corporation",
@@ -15904,7 +15904,7 @@
     {
         "id": 0,
         "card_code": "210",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             6
@@ -15980,7 +15980,7 @@
     {
         "id": 0,
         "card_code": "211",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             1
@@ -16056,7 +16056,7 @@
     {
         "id": 0,
         "card_code": "212",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             0
@@ -16132,7 +16132,7 @@
     {
         "id": 0,
         "card_code": "213",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             2
@@ -16208,7 +16208,7 @@
     {
         "id": 0,
         "card_code": "214",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             0,
@@ -16285,7 +16285,7 @@
     {
         "id": 0,
         "card_code": "215",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             1
@@ -16361,7 +16361,7 @@
     {
         "id": 0,
         "card_code": "216",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             5
@@ -16437,7 +16437,7 @@
     {
         "id": 0,
         "card_code": "217",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             4
@@ -16513,7 +16513,7 @@
     {
         "id": 0,
         "card_code": "218",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [],
         "cardType": "corporation",
@@ -16587,7 +16587,7 @@
     {
         "id": 0,
         "card_code": "219",
-        "origin": "Base",
+        "origin": "base",
         "cost": 0,
         "tagsId": [
             3
@@ -16663,7 +16663,7 @@
     {
         "id": 0,
         "card_code": "220",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [],
         "cardType": "corporation",
@@ -16736,239 +16736,8 @@
     },
     {
         "id": 0,
-        "card_code": "CF1",
-        "origin": "FanMade",
-        "cost": 0,
-        "tagsId": [
-            4,
-            1
-        ],
-        "cardType": "corporation",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "",
-        "phaseDown": "",
-        "title": {
-            "en": "Point Luna",
-            "fr": "Point Luna"
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "greyProduction",
-        "effectSummaryText": {
-            "en": "$ressource_titanium$",
-            "fr": "$ressource_titanium$"
-        },
-        "effectText": {
-            "en": "EFFECT: When you play a $tag_space$, you pay 3 MC less for it.",
-            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
-        },
-        "effectSummaryOption": "",
-        "effectSummaryType2": "trigger",
-        "effectSummaryText2": {
-            "en": "$tag_earth$: +$ressource_card$",
-            "fr": "$tag_earth$: +$ressource_card$"
-        },
-        "effectText2": {
-            "en": "Effect: Each time you play a $tag_earth$, draw a card",
-            "fr": "Effet: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
-        },
-        "effectSummaryOption2": "",
-        "playedText": {
-            "en": "You start with 25MC.",
-            "fr": "Vous commencez avec 25MC."
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [],
-        "startingMegacredits": 25,
-        "status": "implemented",
-        "effectActionTextOption1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionTextOption2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option2": {
-            "en": "",
-            "fr": ""
-        },
-        "vpScaling": "0"
-    },
-    {
-        "id": 0,
-        "card_code": "CF2",
-        "origin": "FanMade",
-        "cost": 0,
-        "tagsId": [
-            0
-        ],
-        "cardType": "corporation",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "",
-        "phaseDown": "",
-        "title": {
-            "en": "Pushnik hacker alliance",
-            "fr": ""
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "greyProduction",
-        "effectSummaryText": {
-            "en": "$ressource_steel$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "Whenever you play a $tag_building$, you pay 2MC less for it.",
-            "fr": ""
-        },
-        "effectSummaryOption": "",
-        "effectSummaryType2": "trigger",
-        "effectSummaryText2": {
-            "en": "$other_planification$: ?",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : 1MC.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$ $ressource_microbe$.$skipline$$other_phase_production$: +1 random prod:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$/$ressource_card$.$skipline$$other_phase_research$ : Draw a card.",
-            "fr": ""
-        },
-        "effectSummaryOption2": "",
-        "playedText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [],
-        "startingMegacredits": 25,
-        "status": "filled",
-        "effectActionTextOption1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionTextOption2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option2": {
-            "en": "",
-            "fr": ""
-        },
-        "vpScaling": "0"
-    },
-    {
-        "id": 0,
-        "card_code": "CF3",
-        "origin": "FanMade",
-        "cost": 0,
-        "tagsId": [
-            2
-        ],
-        "cardType": "corporation",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "",
-        "phaseDown": "",
-        "title": {
-            "en": "CLM - The hesitant hive mind",
-            "fr": ""
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "trigger",
-        "effectSummaryText": {
-            "en": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "EFFECT: When you play a card, add a $ressource_science$$skipline$ When you play a $tag_science$, add a $ressource_science$.",
-            "fr": ""
-        },
-        "effectSummaryOption": "",
-        "effectSummaryType2": "action",
-        "effectSummaryText2": {
-            "en": "$other_arrow$ $ressource_science$$skipline$OR$skipline$-X$ressource_science$: ?",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
-            "fr": ""
-        },
-        "effectSummaryOption2": "",
-        "playedText": {
-            "en": "Upgrade your Phase card V.",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [
-            "science"
-        ],
-        "startingMegacredits": 10,
-        "status": "filled",
-        "effectActionTextOption1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionTextOption2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option2": {
-            "en": "",
-            "fr": ""
-        },
-        "vpScaling": "0"
-    },
-    {
-        "id": 0,
         "card_code": "P17",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [],
         "cardType": "corporation",
@@ -22624,7 +22393,7 @@
     {
         "id": 0,
         "card_code": "P12",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [
             6,
@@ -22703,7 +22472,7 @@
     {
         "id": 0,
         "card_code": "P13",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [
             1
@@ -22779,7 +22548,7 @@
     {
         "id": 0,
         "card_code": "P14",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [
             0
@@ -22855,7 +22624,7 @@
     {
         "id": 0,
         "card_code": "P15",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [
             2
@@ -22931,7 +22700,7 @@
     {
         "id": 0,
         "card_code": "P16",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [
             4
@@ -23392,9 +23161,7 @@
         "card_code": "P24",
         "origin": "promo",
         "cost": 3,
-        "tagsId": [
-            10
-        ],
+        "tagsId": [],
         "cardType": "blueProject",
         "vpNumber": "",
         "prerequisiteTresholdType": "",
@@ -23412,11 +23179,11 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "",
+            "en": "$other_arrow$$tag_wild$*",
             "fr": ""
         },
         "effectText": {
-            "en": "",
+            "en": "ACTION: Choose a tag not already present on this card and add it to this card. (Max 3.) This counts as playing a tag.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -23431,7 +23198,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "",
+            "en": "You may play an additional blue or red card this phase.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -23444,9 +23211,9 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "blocked",
+        "status": "filled",
         "effectActionTextOption1": {
-            "en": "",
+            "en": "$tag_wild$*",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -23923,7 +23690,7 @@
     {
         "id": 0,
         "card_code": "P31",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [],
         "cardType": "corporation",
@@ -23997,7 +23764,7 @@
     {
         "id": 0,
         "card_code": "P32",
-        "origin": "Promo",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [
             10
@@ -24019,7 +23786,7 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$",
+            "en": "$other_arrow$4$other_researchcard$$tag_wild$$$$other_hand$$ressource_card$",
             "fr": ""
         },
         "effectText": {
@@ -24051,7 +23818,7 @@
         },
         "stockable": [],
         "startingMegacredits": 37,
-        "status": "implemented",
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24073,7 +23840,7 @@
     {
         "id": 0,
         "card_code": "P35",
-        "origin": "",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [
             10
@@ -24149,7 +23916,7 @@
     {
         "id": 0,
         "card_code": "Z",
-        "origin": "",
+        "origin": "promo",
         "cost": 0,
         "tagsId": [
             6
@@ -24221,5 +23988,1163 @@
             "fr": ""
         },
         "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "CF1",
+        "origin": "fanmade",
+        "cost": 0,
+        "tagsId": [
+            4,
+            1
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Point Luna",
+            "fr": "Point Luna"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_titanium$",
+            "fr": "$ressource_titanium$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a $tag_space$, you pay 3 MC less for it.",
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$tag_earth$: +$ressource_card$",
+            "fr": "$tag_earth$: +$ressource_card$"
+        },
+        "effectText2": {
+            "en": "Effect: Each time you play a $tag_earth$, draw a card",
+            "fr": "Effet: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "You start with 25MC.",
+            "fr": "Vous commencez avec 25MC."
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 25,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "CF2",
+        "origin": "fanmade",
+        "cost": 0,
+        "tagsId": [
+            0
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Pushnik hacker alliance",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_steel$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "Whenever you play a $tag_building$, you pay 2MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$other_planification$: ?",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : 1MC.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$ $ressource_microbe$.$skipline$$other_phase_production$: +1 random prod:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$/$ressource_card$.$skipline$$other_phase_research$ : Draw a card.",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 25,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "CF3",
+        "origin": "fanmade",
+        "cost": 0,
+        "tagsId": [
+            2
+        ],
+        "cardType": "corporation",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "CLM - The hesitant hive mind",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a card, add a $ressource_science$$skipline$ When you play a $tag_science$, add a $ressource_science$.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "action",
+        "effectSummaryText2": {
+            "en": "$other_arrow$ $ressource_science$$skipline$OR$skipline$-X$ressource_science$: ?",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade your Phase card V.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [
+            "science"
+        ],
+        "startingMegacredits": 10,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM1",
+        "origin": "fanmade",
+        "cost": 0,
+        "tagsId": [
+            2
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Asset Liquidation V2",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "You may play an additional blue or red card during this phase.$skipline$Draw 3 cards.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Lose 1 TR.",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "-$other_tr$",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM2",
+        "origin": "fanmade",
+        "cost": 20,
+        "tagsId": [
+            4,
+            1
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Solar Logistics",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$tag_earth$: $ressource_megacreditvoid_-3$$skipline$$tag_space$$tag_event$: $ressource_card$$skipline$$tag_space$$tag_event$: $ressource_megacreditvoid_-6$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT : When you play an $tag_earth$, you pay 3 MC less.$skipline$When you play an $tag_space$$tag_event$, draw a card. When you play an $tag_space$+$tag_event$, you pay 6 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "$ressource_titanium$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "When you play a $tag_space$, you pay 3 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM3",
+        "origin": "fanmade",
+        "cost": 9,
+        "tagsId": [
+            4,
+            8
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Topsoils Contract",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$ressource_microbe$*: $ressource_megacreditvoid_1$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you add any number of microbe to another card, gain 1MC for each microbe added.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Gain 3 plants.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM4",
+        "origin": "fanmade",
+        "cost": 5,
+        "tagsId": [
+            0
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Meat Industry",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$ressource_animal$*: $ressource_megacreditvoid_2$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: When you add any number of animal to another card, gain 2MC for each animal added.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM5",
+        "origin": "fanmade",
+        "cost": 10,
+        "tagsId": [
+            0
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "1",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Rego Plastics",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$ressource_steel$:$tag_building$$ressource_megacreditvoid_-1$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: Each steel you have reduces the cost of cards by an additional 1 MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM6",
+        "origin": "fanmade",
+        "cost": 3,
+        "tagsId": [
+            1
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Mercurian Alloys",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$ressource_titanium$:$tag_space$$ressource_megacreditvoid_-1$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional 1 MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM7",
+        "origin": "fanmade",
+        "cost": 9,
+        "tagsId": [
+            1,
+            2,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "1",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Solar Probe",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Draw 1 card for each 2 $tag_science$ you have.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM8",
+        "origin": "fanmade",
+        "cost": 18,
+        "tagsId": [
+            10,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Social Event",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Gain 1 TR for each pair of $tag_earth$+$tag_jovian$.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM9",
+        "origin": "fanmade",
+        "cost": 7,
+        "tagsId": [
+            2,
+            8,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Bactoviral Research",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "For every $tag_science$ you have add $ressource_microbe$ to another card.$skipline$Draw a card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM10",
+        "origin": "fanmade",
+        "cost": 30,
+        "tagsId": [
+            1,
+            5,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Ceres Spaceport",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "For every 2 $tag_jovian$ you have gain $ressource_titanium$.$skipline$Flip an ocean.$skipline$Draw a card$",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM10",
+        "origin": "fanmade",
+        "cost": 20,
+        "tagsId": [
+            1,
+            5,
+            9
+        ],
+        "cardType": "redProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Oumuamua Type Object Survey",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "",
+        "effectSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Draw two cards. If the first card has $tag_science$ or $tag_microbe$ in it, play it for free, if not, if the first card has a $tag_space$: gain 5 $ressource_heat$.$skipline$If the first card had none of thos badges, repeat the process with the second card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
+    },
+    {
+        "id": 0,
+        "card_code": "FM11",
+        "origin": "fanmade",
+        "cost": 22,
+        "tagsId": [
+            2,
+            2,
+            1
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "*",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "",
+        "phaseDown": "",
+        "title": {
+            "en": "Pride of the earth Arkship",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "*=1 victory point for each $ressource_science$ here.",
+            "fr": ""
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$$ressource_science$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "ACTION : Add 1$ressource_science$ here for each 4 $tag_science$ you have.",
+            "fr": ""
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "$ressource_titanium$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "",
+            "fr": ""
+        },
+        "stockable": [
+            "science"
+        ],
+        "startingMegacredits": 0,
+        "status": "filled",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "1"
     }
 ]

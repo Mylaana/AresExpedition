@@ -62,6 +62,7 @@ export enum BuilderOption {
 	assortedEnterprises = 'assortedEnterprises',
 	selfReplicatingBacteria = 'selfReplicatingBacteria',
 	maiNiProductions = 'maiNiProductions',
+	researchGrant = 'researchGrant'
 }
 export enum EffectPortalEnum {
 	decomposers,
