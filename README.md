@@ -43,7 +43,6 @@ Backend: Junit
 # WIP : 
 ## /!\Critical BUG/!\ : 
 bug eventstate avec gain plant/mc? de flip d'ocean, bonus perdu au refresh
-Rollback button does nothing   
 
 ## Other BUG:   
 rollback button disapearing while waiting for other players   
@@ -68,7 +67,6 @@ display other player production
 Activable cards with megacredit cost in it display bugged   
 add FR translation   
 Waiting player event : rollback button display bugged   
-add display for the phase we selected on the left progression pannel   
 add display for discounts on tags / cards   
 
 ### CI/CD
@@ -79,7 +77,6 @@ Backend automated testing: no backend yet
 ### Non-Critical Bug :
 Escape keyboard not exiting card builder selection   
 Websocket connection error while not in the game   
-Project card: layers superposition creating visual bug on edges   
 Expression has changed on client refresh with all the player pannel if something moves (VP increased with arklight, any gain)   
 
 ### Refactoring :
@@ -102,7 +99,6 @@ Add proper Hybrid production zone looks
 Rework effect summary zone (refacto + looks)   
 Create switch button   
 Builder: display visual list of active triggers   
-Cards: Display wild tag converted   
 Add a wizz button when player being too long to play <3   
 During every phase, display the current phase card   
 force client to appear on the bottom of the player pannels   

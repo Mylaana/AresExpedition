@@ -128,23 +128,7 @@ export class GameEventComponent {
 		this.currentPhase = phase
 		if(this.gameStateService.getClientReady()){return}
 	}
-
-	/*
-	addPhaseCardUpgradeEvent(upgradeNumber:number, phaseIndexToUpgrade?: number[]): void {
-		let newEvent = EventFactory.createGeneric(
-			'upgradePhaseCards',
-			{
-				phaseCardUpgradeNumber: upgradeNumber,
-				phaseCardUpgradeList: phaseIndexToUpgrade
-			}
-		)
-		this.gameStateService.addEventQueue(newEvent, 'first')
-		//this.gameStateService.addPhaseCardUpgradeNumber(this.clientPlayerId, upgradeNumber)
-	}
-	*/
-
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
-
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
 		if(!this.currentEvent){return}
@@ -208,6 +192,11 @@ export class GameEventComponent {
 						selectionQuantityTreshold:'max'
 					}
 				}), 'first')
+				break
+			}
+			case('rollBack'):{
+				this.gameStateService.publishRollbackQuery()
+				break
 			}
 		}
 	}

@@ -160,4 +160,7 @@ export class RxStompService extends RxStomp {
 	public publishOceanQuery(oceanNumber: number, playerDTO: PlayerStateDTO): void {
 		this.enqueueMessage(WebsocketQueryMessageFactory.createOceanQuery(oceanNumber, playerDTO))
 	}
+	public publishRollbackQuery(){
+		this.publishConnectionQuery()
+	}
 }
