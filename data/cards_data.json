@@ -21174,7 +21174,8 @@
         "origin": "foundations",
         "cost": 11,
         "tagsId": [
-            0
+            0,
+            9
         ],
         "cardType": "redProject",
         "vpNumber": "",
@@ -23179,7 +23180,7 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$tag_wild$*",
+            "en": "$other_arrow$$tag_wild$",
             "fr": ""
         },
         "effectText": {
@@ -23211,9 +23212,9 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "validated",
         "effectActionTextOption1": {
-            "en": "$tag_wild$*",
+            "en": "",
             "fr": ""
         },
         "effectActionTextOption2": {
@@ -24957,7 +24958,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "For every 2 $tag_jovian$ you have gain $ressource_titanium$.$skipline$Flip an ocean.$skipline$Draw a card$",
+            "en": "For every 2 $tag_jovian$ you have gain $ressource_titanium$.$skipline$Flip an ocean.$skipline$Raise infrastructure 1 step.$skipline$Draw a card$",
             "fr": ""
         },
         "prerequisiteText": {
@@ -24996,7 +24997,7 @@
         "cost": 20,
         "tagsId": [
             1,
-            5,
+            2,
             9
         ],
         "cardType": "redProject",
