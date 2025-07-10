@@ -498,7 +498,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//Beam from a Thorium Asteroid
 	'116': (s) => Checker.isTagOk('jovian', 1, 'min', s),
 	//Biomass Combustors
-	'117': (s) => Checker.isTagOk('plant', 2, 'min', s),
+	'117': (s) => Checker.isRessourceOk('plant', 2, 'min', s),
 	//Building Industries
 	'120': (s) => Checker.isRessourceOk('heat', 4, 'min', s),
 	//Bushes
@@ -562,7 +562,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//Wave Power
 	'205': (s) => Checker.isOceanOk(3, 'min', s),
 	//Worms
-	'207': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	'207': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
 	//Zeppelins
 	'208': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Dandelions
