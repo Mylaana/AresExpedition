@@ -331,7 +331,7 @@ public class Game {
         Integer playerNumber = this.groupPlayerState.entrySet().size();
         Integer corpNumber;
         if(this.getGameOptions().getMerger()){
-             corpNumber = Math.min(6, totalCorpNumber / playerNumber);
+             corpNumber = Math.min(8, totalCorpNumber / playerNumber);
         } else {
             corpNumber = 4;
         }
