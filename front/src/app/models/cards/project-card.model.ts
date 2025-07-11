@@ -181,11 +181,16 @@ export class PlayableCardModel{
 				for(let t of this.tagsId){
 					if(filter.authorizedTag?.includes(Utils.toTagType(t))){return true}
 				}
+				break
+			}
+			case(ProjectFilterNameEnum.doubleProduction):{
+				return this.title, this.hasSummaryType('production') || this.hasSummaryType('mixedProduction')
 			}
         }
         return false
     }
 	private hasSummaryType(summaryType: SummaryType): boolean {
+		//console.log(this.title, this.effects)
 		for(let effect of this.effects){
 			if(effect.effectSummaryType===summaryType){return true}
 		}

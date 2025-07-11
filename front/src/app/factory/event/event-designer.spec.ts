@@ -700,6 +700,7 @@ describe('Service - Designers - Event', () => {
 							expectedEvent.autoFinalize = false
 							expectedEvent.productionApplied = false
 							expectedEvent.title = 'Production'
+							expectedEvent.productionDoubleApplied = false
 						}
                     }
 

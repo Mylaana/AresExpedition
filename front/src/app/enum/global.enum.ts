@@ -42,7 +42,8 @@ export enum ProjectFilterNameEnum {
 	developmentPhaseSecondBuilder = 'developmentPhaseSecondBuilder',
 	corporations = 'corporations',
 	notCorporations = 'notCorporations',
-	authorizedTag = 'authorizedTag'
+	authorizedTag = 'authorizedTag',
+	doubleProduction = 'doubleProduction'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',

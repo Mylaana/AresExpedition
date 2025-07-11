@@ -17,6 +17,7 @@ export enum EventStateTypeEnum {
 	productionCards = 'PRODUCTION_CARDS',
 	tagSelection = 'TAG_SELECTION',
 	selectorSubType = 'SELECTOR_SUBTYPE',
+	productionPhase = 'PRODUCTION_PHASE',
 	/*
 	addRessourceToPlayer = 'ADD_RESSOURCE_TO_PLAYER',
 	upgradePhase = 'UPGRADE_PHASE',

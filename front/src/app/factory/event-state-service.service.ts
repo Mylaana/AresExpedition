@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentCardSelectorDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTagSelectorDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGenericDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
-import { EventBaseModel, EventCardActivator, EventCardBuilder, EventTagSelector } from "../models/core-game/event.model";
+import { EventBaseModel, EventCardActivator, EventCardBuilder, EventPhase, EventTagSelector } from "../models/core-game/event.model";
 import { OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
@@ -17,6 +17,7 @@ function shouldLoadEvent(event: EventBaseModel, eventState: EventStateDTO) : boo
 		case(event.subType==='developmentPhaseBuilder'  && eventState.t===EventStateTypeEnum.builderDevelopemntLocked):{break}
 		case(event.subType==='constructionPhaseBuilder'  && eventState.t===EventStateTypeEnum.builderConstructionLocked):{break}
 		case(event.subType==='productionPhase' && eventState.t===EventStateTypeEnum.productionCards):{break}
+		case(event.subType==='productionPhase' && eventState.t===EventStateTypeEnum.productionPhase):{break}
 		default:{return false}
 	}
 	return true
@@ -53,7 +54,6 @@ export class EventStateService{
 							if(i===1 && content.s[i].cc===undefined){
 								eventBuilder.setFirstCardBuilt()
 								//eventBuilder.cardBuilder[i].setBSuilderIsLocked(false)
-								console.log(eventBuilder)
 								continue
 							}
 						}
@@ -80,13 +80,17 @@ export class EventStateService{
 				clientState.loadEventStateActivator(content)
 				break
 			}
+			case(EventStateTypeEnum.productionPhase):{
+				let eventPhase = event as EventPhase
+				eventPhase.productionDoubleApplied = dto.v['pda']
+				break
+			}
 			default:{
 				console.error('UNTREATED LOAD EVENTSTATE: ', event, dto)
 			}
 		}
 	}
 	public createFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
-		console.log('eventstate list: ', eventStateList)
 		let newEvents: EventBaseModel[] = []
 		let remainingStates: EventStateDTO[] = []
 		let treated: boolean

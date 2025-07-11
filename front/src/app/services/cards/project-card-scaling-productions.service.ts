@@ -84,7 +84,7 @@ export class ProjectCardScalingProductionsService {
 	public static getCardScalingProduction(cardCode:string, tagState:TagInfo[]):number{
 		let scalingProduction: number = 0
 		switch(cardCode){
-			//Cartel
+			//Atmospheric Insulators
 			case('113'):{
 				scalingProduction = this.getPlayedTagNumber('earth', tagState)
 				break

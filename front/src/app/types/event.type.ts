@@ -1,6 +1,6 @@
 export type EventType = 'cardSelector' | 'cardSelectorRessource' | 'cardSelectorCardBuilder' | 'generic' | 'deck' | 'targetCard' | 'waiter' | 'phase' | 'cardActivator' | 'ComplexSelector' | 'tagSelector'
 export type EventCardSelectorSubType = 'selectCardOptionalSell' | 'selectCardForcedSell' | 'researchPhaseResult'
-| 'selectStartingHand' | 'selectCorporation' | 'selectMerger' | 'scanKeepResult' | 'recallCardInHand'
+| 'selectStartingHand' | 'selectCorporation' | 'selectMerger' | 'scanKeepResult' | 'recallCardInHand' | 'doubleProduction'
 export type EventCardActivatorSubType = 'actionPhaseActivator'
 export type EventCardSelectorRessourceSubType = 'addRessourceToSelectedCard'
 export type EventCardBuilderSubType = 'developmentPhaseBuilder' | 'constructionPhaseBuilder' | 'specialBuilder'

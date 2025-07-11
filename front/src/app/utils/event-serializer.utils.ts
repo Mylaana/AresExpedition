@@ -1,7 +1,7 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption } from "../enum/global.enum"
-import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGenericDTO, EventStateActivator, EventStateContentTagSelectorDTO, EventStateContentCardSelectorDTO } from "../interfaces/event-state.interface"
-import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric, EventTagSelector, EventCardSelector } from "../models/core-game/event.model"
+import { EventStateDTO, BuilderStatusDTO, EventStateBuilderContentDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTargetCardDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateIncreaseResearchScanKeep, EventStateContentDrawQueryThenDiscardDTO, EventStateGenericDTO, EventStateActivator, EventStateContentTagSelectorDTO, EventStateContentCardSelectorDTO, EventStateContentPhaseDTO } from "../interfaces/event-state.interface"
+import { EventCardBuilder, EventCardActivator, EventDeckQuery, EventTargetCard, EventBaseModel, EventComplexCardSelector, EventGeneric, EventTagSelector, EventCardSelector, EventPhase } from "../models/core-game/event.model"
 import { EventUnionSubTypes } from "../types/event.type"
 
 function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
@@ -207,6 +207,21 @@ function eventCardSelectorToJson(event: EventCardSelector): EventStateDTO | unde
 	}
 	return
 }
+function eventPhaseToJson(event: EventPhase): EventStateDTO | undefined {
+	switch(event.subType){
+		case('productionPhase'):{
+			let content: EventStateContentPhaseDTO = {
+				pda: event.productionDoubleApplied??false
+			}
+			return {
+				o: EventStateOriginEnum.load,
+				t: EventStateTypeEnum.productionPhase,
+				v: content
+			}
+		}
+	}
+	return
+}
 function toJson(event: EventBaseModel): EventStateDTO | undefined {
 	if(event.finalized){return}
 	const excludedSubtypes : EventUnionSubTypes[] = [
@@ -224,6 +239,7 @@ function toJson(event: EventBaseModel): EventStateDTO | undefined {
 		case('generic'):{dto = eventGenericToJson(event as EventGeneric); break}
 		case('tagSelector'):{dto = eventTagSelectorToJson(event as EventTagSelector); break}
 		case('cardSelector'):{dto = eventCardSelectorToJson(event as EventCardSelector); break}
+		case('phase'):{dto = eventPhaseToJson(event as EventPhase); break}
 		default:{break}
 	}
 	if(dto){return dto}
