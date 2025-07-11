@@ -1,11 +1,11 @@
 import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { myUUID, PlayableCardType, TagType } from "../../types/global.type";
+import { myUUID, PlayableCardType, RessourceType, TagType } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter,  } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
-import { DrawEvent, EventBaseModel, EventCardActivator, EventPhase } from "../../models/core-game/event.model";
+import { DrawEvent, EventBaseModel, EventCardActivator, EventGeneric, EventPhase } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
@@ -25,6 +25,7 @@ import { ProjectCardScalingVPService } from "../cards/project-card-scaling-VP.se
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
+import { SCALING_PRODUCTION } from "../../maps/playable-card-maps";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -390,7 +391,6 @@ export class GameState{
 			queue = this.eventStateService.createFromJson(this.eventQueueSavedState).concat(queue)
 			this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create)
 		}
-
 		//load data in existing events
 		if(this.eventQueueSavedState.length>0){
 			for(let event of queue){
@@ -816,5 +816,54 @@ export class GameState{
 	}
 	publishRollbackQuery(){
 		this.rxStompService.publishRollbackQuery()
+	}
+	applyDoubleProduction(card: PlayableCardModel){
+		if(!card){return}
+		let resources: RessourceStock[] = []
+		if(card.cardCode in SCALING_PRODUCTION){
+			resources = SCALING_PRODUCTION[card.cardCode](this.getClientState())
+		} else {
+			resources = this.getFlatDoubleProduction(card)
+		}
+		if(resources.length===0){return}
+
+		//remove cards resources and treat them separately
+		let newEvents: EventBaseModel[] = []
+		let cardToDraw: number = 0
+		for(let r of resources){
+			if(r.name==='card'){
+				cardToDraw += r.valueStock
+			}
+		}
+		resources = resources.filter((el) => el.name!='card')
+		if(cardToDraw>0){
+			newEvents.push(EventFactory.simple.draw(cardToDraw))
+		}
+		if(resources.length>0){
+			newEvents.push(EventFactory.simple.addRessource(resources))
+		}
+		if(newEvents.length>0){
+			this.addEventQueue(newEvents, 'first')
+		}
+	}
+	private getFlatDoubleProduction(card: PlayableCardModel): RessourceStock[] {
+		let playEvents: EventGeneric[] | undefined = PlayableCard.getOnPlayedEvents(card.cardCode, this.getClientState())
+			?.filter((pe)=> pe.subType==='addProduction') as EventGeneric[] | undefined
+		if(!playEvents || playEvents.length===0){return []}
+		let resources: RessourceStock[] = []
+		for(let e of playEvents){
+			if(!e.baseRessource){continue}
+			resources = resources.concat(this.toValidDoubleProductionRessource(Utils.toArray(e.baseRessource)))
+		}
+		return resources
+	}
+	private toValidDoubleProductionRessource(resources: RessourceStock[]): RessourceStock[] {
+		let result: RessourceStock[] = []
+		const excluded: RessourceType[] = ['steel', 'titanium']
+		for(let r of resources){
+			if(excluded.includes(r.name)){continue}
+			result.push(r)
+		}
+		return result
 	}
 }

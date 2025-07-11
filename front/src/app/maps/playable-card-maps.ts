@@ -1696,3 +1696,33 @@ export const EFFECT_PORTAL_BUTTON_ENABLED: Record<string, (clientState: PlayerSt
 		return Checker.isMinimumStockOnPlayedCardOk({name:'microbe', valueStock:1},'min', clientState, '19')
 	}
 }
+export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=> RessourceStock[]> = {
+	//Atospheric Insulators
+	'113': (s)=> [{name:'heat', valueStock:s.getTagsOfType('earth')}],
+	//Cartel
+	'123': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('earth')}],
+	//Insects
+	'152': (s)=> [{name:'plant', valueStock:s.getTagsOfType('plant')}],
+	//Lightning Harvest
+	'156': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('science')}],
+	//Medical lab
+	'160': (s)=> [{name:'megacredit', valueStock:Math.floor(s.getTagsOfType('building') /2)}],
+	//Miranda Resort
+	'165': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('earth')}],
+	//Power Grid
+	'174': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('power')}],
+	//Satellite Farms
+	'180': (s)=> [{name:'heat', valueStock:s.getTagsOfType('space')}],
+	//Satellites
+	'181': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('space')}],
+	//Venture Capitalism
+	'203': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('event')}],
+	//Windmills
+	'206': (s)=> [{name:'heat', valueStock:s.getTagsOfType('power')}],
+	//Worms
+	'207': (s)=> [{name:'plant', valueStock:s.getTagsOfType('microbe')}],
+	//Diverse Habitats
+	'P03': (s)=> [{name:'megacredit', valueStock:(s.getTagsOfType('animal') + s.getTagsOfType('plant'))}],
+	//Laboratories
+	'P05': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('science') /3)}],
+}

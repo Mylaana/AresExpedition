@@ -83,3 +83,6 @@ export interface EventStateContentTagSelectorDTO extends EventStateContentDTO {
 export interface EventStateContentCardSelectorDTO extends EventStateContentDTO {
 	st: EventCardSelectorSubType //type
 }
+export interface EventStateContentPhaseDTO extends EventStateContentDTO {
+	pda: boolean //doubleProductionApplied
+}

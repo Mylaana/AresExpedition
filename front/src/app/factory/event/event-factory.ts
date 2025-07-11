@@ -225,6 +225,15 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.lockRollbackButton = true
             break
 		}
+		case('doubleProduction'):{
+			event.title = 'Select a production card that will produce a second time'
+			event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
+            event.cardSelector.selectionQuantityTreshold = 'max'
+            event.cardSelector.selectionQuantity = 1
+			event.cardSelector.filter = {type:ProjectFilterNameEnum.doubleProduction}
+            event.refreshSelectorOnSwitch = true
+			break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
@@ -741,6 +750,7 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
         case('productionPhase'):{
             event.autoFinalize = false
             event.productionApplied = false
+			event.productionDoubleApplied = false
 			event.title = 'Production'
             break
         }

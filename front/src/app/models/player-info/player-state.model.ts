@@ -15,12 +15,11 @@ import { PlayerOtherStateModel } from "./player-state-other.model";
 import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter.model";
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
-import { EventBaseModel } from "../core-game/event.model";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
-import { ProjectCardScalingProductionsService } from "../../services/cards/project-card-scaling-productions.service";
 import { Utils } from "../../utils/utils";
+import { SCALING_PRODUCTION } from "../../maps/playable-card-maps";
 
 
 export class PlayerStateModel {
@@ -122,15 +121,22 @@ export class PlayerStateModel {
 		this.setScalingProduction()
 	}
 	setScalingProduction(): void {
-		let ressources: RessourceInfo[] = this.getRessources()
-		for(let i=0 ;i<ressources.length; i++){
-			let scalingProd =
-				ProjectCardScalingProductionsService.getScalingProduction(
-					ressources[i].name,
-					this.getProjectPlayedIdList(),
-					this.getTags()
-				)
-			this.ressourceState.setScalingProduction(ressources[i].name, scalingProd)
+		let projects = this.getProjectPlayedIdList()
+		let scaledResources: RessourceStock[] = []
+		const scaleList: RessourceType[] = ['megacredit', 'heat', 'plant', 'card']
+		for(let p of projects){
+			if(!(p in SCALING_PRODUCTION)){continue}
+			scaledResources = scaledResources.concat(SCALING_PRODUCTION[p](this))
+		}
+		for(let s of scaleList){
+			let total: number = 0
+			for(let r of scaledResources){
+				if(r.name===s){
+					total+=r.valueStock
+				}
+			}
+			this.ressourceState.setScalingProduction(s, total)
+			scaledResources = scaledResources.filter((el)=> el.name!=s)
 		}
 	}
 	increaseProductionModValue(ressourceType: Extract<RessourceType, 'steel' | 'titanium'>) {this.ressourceState.increaseProductionModValue(ressourceType)}

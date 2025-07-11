@@ -451,6 +451,7 @@ export class EventPhase extends EventBaseModel {
 	productionApplied?: boolean
 	productionCardList?: PlayableCardModel[]
 	productionMegacreditFromPhaseCard?: number
+	productionDoubleApplied?: boolean
     increaseParameter?: GlobalParameterValue
     increaseResearchScanKeep?: Partial<ScanKeep>
     baseRessource?:RessourceStock | RessourceStock[]

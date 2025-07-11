@@ -189,7 +189,7 @@ export class EventHandler {
 				event.cardSelector.selectFrom = selectFrom
 				break
 			}
-			case('recallCardInHand'):{
+			case('recallCardInHand'):case('doubleProduction'):{
 				event.cardSelector.selectFrom = this.gameStateService.getClientState().getProjectPlayedModelList(event.cardSelector.filter)
 				break
 			}
@@ -314,6 +314,11 @@ export class EventHandler {
 				event.finalized = true
 				if(event.cardSelector.selectedList.length===0){break}
 				this.gameStateService.recallCardFromPlayed(event.cardSelector.selectedList[0])
+				break
+			}
+			case('doubleProduction'):{
+				event.finalized = true
+				this.gameStateService.applyDoubleProduction(event.cardSelector.selectedList[0])
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
@@ -816,16 +821,6 @@ class PhaseResolveHandler {
 					ressourceGain = ressource.valueProd
 					break
 				}
-				//cards draw will be sent by server as an eventstate
-				/*
-				case('card'):{
-					ressourceGain = ressource.valueProd
-					if(ressourceGain>0){
-						newEvents.push(EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:ressourceGain, discard:0}, isCardProduction: true}))
-					}
-					break
-				}
-				*/
 			}
 			if(ressourceGain>0){
 				production.push({name:ressource.name, valueStock:ressourceGain})
@@ -833,9 +828,12 @@ class PhaseResolveHandler {
 		}
 
 		event.productionMegacreditFromPhaseCard = this.getProductionPhaseCardSelectionBonus()
+		if(this.shouldApplyDoubleProduction(event)){
+			event.productionDoubleApplied = true
+			newEvents.push(EventFactory.createCardSelector('doubleProduction'))
+		}
 
 		if(production.length>0){
-			//newEvents.push(EventFactory.createGeneric('applyProduction', {production: production}))
 			newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: production}))
 			this.gameStateService.addEventQueue(newEvents, 'first')
 		}
@@ -853,6 +851,10 @@ class PhaseResolveHandler {
 		}
 
 		return bonus
+	}
+	public shouldApplyDoubleProduction(event: EventPhase): boolean {
+		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return false}
+		return this.currentUpgradedPhaseCards[3].phaseType === 'production_1mc_activate_card' && event.productionDoubleApplied===false
 	}
 	resolveResearch(): void {
 		this.refreshCurrentUpgradedPhaseCard()
