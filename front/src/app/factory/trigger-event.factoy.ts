@@ -224,6 +224,12 @@ const S = EventFactory.simple
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
 		return [S.draw(1)]
 	}
+	//Solar Logistics
+	function handleTrigger_FM2(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false || input.tagList.includes(GlobalInfo.getIdFromType('space','tag'))===false){return []}
+		return [S.draw(1)]
+	}
+
 //ON_RESSOURCE_ADDED_TO_CARD
 	//Filter Feeders
 	function handleTrigger_P04(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -250,6 +256,18 @@ const S = EventFactory.simple
 		result.push(S.increaseResearchScanKeep({keep:0, scan:addValue}))
 		return result
 	}
+	//Topsoil contract
+	function handleTrigger_FM3(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.ressourceAdded!='microbe'){return []}
+		return [S.addRessource({name:"megacredit", valueStock:1})]
+	}
+	//Meat Industry
+	function handleTrigger_FM4(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.ressourceAdded!='animal'){return []}
+		return [S.addRessource({name:"megacredit", valueStock:1})]
+	}
+
+
 //ON_CARD_ACTIVATED
 	//Assembly Lines
 	function handleTrigger_10(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -325,10 +343,13 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'P12': handleTrigger_P12,
 		'P19': handleTrigger_P19_OnTagGained,
 		'CF1': handleTrigger_CF1,
+		'FM2': handleTrigger_FM2,
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
 		'P04': handleTrigger_P04,
-		'P19': handleTrigger_P19_OnRessourceAdded
+		'P19': handleTrigger_P19_OnRessourceAdded,
+		'FM3': handleTrigger_FM3,
+		'FM4': handleTrigger_FM4
 	},
 	ON_CARD_ACTIVATED: {
 		'10': handleTrigger_10
