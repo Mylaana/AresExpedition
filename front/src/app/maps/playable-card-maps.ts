@@ -1542,7 +1542,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Ceres Spaceport
 	'FM10': (state) => [
-		EventFactory.simple.addRessource({name:'titanium', valueStock:3}),
+		EventFactory.simple.addProduction({name:'titanium', valueStock:3}),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 	],
 }

@@ -124,6 +124,7 @@ export class PlayerStateModel {
 		let projects = this.getProjectPlayedIdList()
 		let scaledResources: RessourceStock[] = []
 		const scaleList: RessourceType[] = ['megacredit', 'heat', 'plant', 'card']
+		const nonScaleList: RessourceType[] = ['steel', 'titanium']
 		for(let p of projects){
 			if(!(p in SCALING_PRODUCTION)){continue}
 			scaledResources = scaledResources.concat(SCALING_PRODUCTION[p](this))
@@ -137,6 +138,10 @@ export class PlayerStateModel {
 			}
 			this.ressourceState.setScalingProduction(s, total)
 			scaledResources = scaledResources.filter((el)=> el.name!=s)
+		}
+		//refresh non scalable ressource
+		for(let o of nonScaleList){
+			this.ressourceState.setScalingProduction(o, 0)
 		}
 	}
 	increaseProductionModValue(ressourceType: Extract<RessourceType, 'steel' | 'titanium'>) {this.ressourceState.increaseProductionModValue(ressourceType)}
