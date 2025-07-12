@@ -51,7 +51,6 @@ autohex background height bug on being displayed after resolving another event o
 ## Must have for v1 :
 ### Refactoring
 Rework Buildable system in playableCardComponent   
-project-card-scaling-prodction-service   
 
 ### Cards
 Create Event type :   

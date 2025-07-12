@@ -585,6 +585,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'FM1': (s) => Checker.isTrOk(1, 'min', s),
 	//Mercurian Alloys
 	'FM6': (s) => Checker.isTagOk('science', 2, 'min', s),
+	//Hematite Mining V2
+	'FM12': (s) => Checker.isRessourceOk('heat', 5, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -1544,6 +1546,15 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'FM10': (state) => [
 		EventFactory.simple.addProduction({name:'titanium', valueStock:3}),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+	],
+	//Hematite Mining V2
+	'FM12': () => [
+		EventFactory.simple.addProduction([
+			{ name: 'card', valueStock: 2 },
+			{ name: 'steel', valueStock: 1 }
+		]),
+		EventFactory.simple.addRessource({name:'heat', valueStock:-5}),
+		EventFactory.simple.upgradePhaseCard(1)
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {

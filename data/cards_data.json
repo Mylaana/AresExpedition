@@ -18948,82 +18948,6 @@
     },
     {
         "id": 0,
-        "card_code": "D29",
-        "origin": "discovery",
-        "cost": 28,
-        "tagsId": [
-            0
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "",
-        "prerequisiteTresholdType": "",
-        "prerequisiteType": "",
-        "prerequisiteTresholdValue": 0,
-        "phaseUp": "IV",
-        "phaseDown": "I-II",
-        "title": {
-            "en": "Hematite Mining",
-            "fr": "Extraction d'H\u00e9matite"
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryType": "mixedProduction",
-        "effectSummaryText": {
-            "en": "$ressource_card$$ressource_card$$mix$$ressource_steel$",
-            "fr": "$ressource_card$$ressource_card$$mix$$ressource_steel$"
-        },
-        "effectText": {
-            "en": "During the production phase, draw 2 cards.$skipline$When you play a $tag_building$, you pay 2 MC less for it.",
-            "fr": "Lors de la phase de production, piochez 2 cartes.$skipline$Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
-        },
-        "effectSummaryOption": "",
-        "effectSummaryType2": "",
-        "effectSummaryText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectSummaryOption2": "",
-        "playedText": {
-            "en": "Upgrade a Phase card.",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "",
-            "fr": ""
-        },
-        "stockable": [],
-        "startingMegacredits": 0,
-        "status": "validated",
-        "effectActionTextOption1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionTextOption2": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option1": {
-            "en": "",
-            "fr": ""
-        },
-        "effectActionText2Option2": {
-            "en": "",
-            "fr": ""
-        },
-        "vpScaling": "0"
-    },
-    {
-        "id": 0,
         "card_code": "D30",
         "origin": "discovery",
         "cost": 28,
@@ -24278,7 +24202,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24355,7 +24279,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24432,7 +24356,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24508,7 +24432,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24584,7 +24508,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24660,7 +24584,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24738,7 +24662,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24814,7 +24738,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24892,7 +24816,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24970,7 +24894,7 @@
         },
         "stockable": [],
         "startingMegacredits": 0,
-        "status": "filled",
+        "status": "implemented",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -25116,16 +25040,14 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
+            "en": "Requires 4$tag_science$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "4$tag_science$",
             "fr": ""
         },
-        "stockable": [
-            "science"
-        ],
+        "stockable": [],
         "startingMegacredits": 0,
         "status": "filled",
         "effectActionTextOption1": {
@@ -25145,5 +25067,81 @@
             "fr": ""
         },
         "vpScaling": "1"
+    },
+    {
+        "id": 0,
+        "card_code": "FM12",
+        "origin": "discovery",
+        "cost": 28,
+        "tagsId": [
+            0
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "",
+        "prerequisiteTresholdType": "",
+        "prerequisiteType": "",
+        "prerequisiteTresholdValue": 0,
+        "phaseUp": "IV",
+        "phaseDown": "I-II",
+        "title": {
+            "en": "Hematite Mining V2",
+            "fr": "Hematite Mining V2"
+        },
+        "vpText": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryType": "mixedProduction",
+        "effectSummaryText": {
+            "en": "$ressource_card$$ressource_card$$mix$$ressource_steel$",
+            "fr": "$ressource_card$$ressource_card$$mix$$ressource_steel$"
+        },
+        "effectText": {
+            "en": "During the production phase, draw 2 cards.$skipline$When you play a $tag_building$, you pay 2 MC less for it.",
+            "fr": "Lors de la phase de production, piochez 2 cartes.$skipline$Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+        },
+        "effectSummaryOption": "",
+        "effectSummaryType2": "",
+        "effectSummaryText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectSummaryOption2": "",
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Requires that you spend 5$ressource_heat$",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "-5$ressource_heat$",
+            "fr": ""
+        },
+        "stockable": [],
+        "startingMegacredits": 0,
+        "status": "implemented",
+        "effectActionTextOption1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionTextOption2": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option1": {
+            "en": "",
+            "fr": ""
+        },
+        "effectActionText2Option2": {
+            "en": "",
+            "fr": ""
+        },
+        "vpScaling": "0"
     }
 ]
