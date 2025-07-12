@@ -4692,7 +4692,7 @@
             "fr": ""
         },
         "vpText": {
-            "en": "*=1 victory point for each JOVIAN you have.",
+            "en": "*=1 victory point for each $tag_jovian$ you have.",
             "fr": ""
         },
         "effectSummaryType": "action",
@@ -8538,7 +8538,7 @@
             "fr": ""
         },
         "effectText": {
-            "en": "During the production phase, this card produces 1 heat for each EARTH you have, including this one.",
+            "en": "During the production phase, this card produces 1 heat for each $tag_earth$ you have, including this one.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -23787,7 +23787,7 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$4$other_researchcard$$tag_wild$$$$other_hand$$ressource_card$",
+            "en": "$other_arrow$4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$",
             "fr": ""
         },
         "effectText": {
@@ -24035,8 +24035,8 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "You start with 25MC.",
-            "fr": "Vous commencez avec 25MC."
+            "en": "You start with 32MC.",
+            "fr": "Vous commencez avec 32MC."
         },
         "prerequisiteText": {
             "en": "",
@@ -24047,8 +24047,8 @@
             "fr": ""
         },
         "stockable": [],
-        "startingMegacredits": 25,
-        "status": "implemented",
+        "startingMegacredits": 32,
+        "status": "validated",
         "effectActionTextOption1": {
             "en": "",
             "fr": ""
@@ -24323,11 +24323,11 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_earth$: $ressource_megacreditvoid_-3$$skipline$$tag_space$$tag_event$: $ressource_card$$skipline$$tag_space$$tag_event$: $ressource_megacreditvoid_-6$",
+            "en": "$tag_earth$: $ressource_megacreditvoid_-3$$skipline$$tag_space$$tag_event$: $ressource_megacreditvoid_-6$$ressource_card$",
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT : When you play an $tag_earth$, you pay 3 MC less.$skipline$When you play an $tag_space$$tag_event$, draw a card. When you play an $tag_space$+$tag_event$, you pay 6 MC less for it.",
+            "en": "EFFECT : When you play an $tag_earth$, you pay 3 MC less.$skipline$EFFECT: When you play an $tag_space$$tag_event$, draw a card.$skipline$EFFECT: When you play an $tag_space$$tag_event$, you pay 6 MC less for it.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -24476,11 +24476,11 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_animal$*: $ressource_megacreditvoid_2$",
+            "en": "$ressource_animal$*: $ressource_megacreditvoid_1$",
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: When you add any number of animal to another card, gain 2MC for each animal added.",
+            "en": "EFFECT: When you add any number of animal to another card, gain 1MC for each animal added.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -24651,11 +24651,11 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "",
+            "en": "Requires 2 $tag_science$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "",
+            "en": "$tag_science$$tag_science$",
             "fr": ""
         },
         "stockable": [],
@@ -24763,7 +24763,6 @@
         "origin": "fanmade",
         "cost": 18,
         "tagsId": [
-            10,
             9
         ],
         "cardType": "redProject",
@@ -24916,14 +24915,14 @@
         "id": 0,
         "card_code": "FM10",
         "origin": "fanmade",
-        "cost": 30,
+        "cost": 40,
         "tagsId": [
             1,
             5,
-            9
+            5
         ],
-        "cardType": "redProject",
-        "vpNumber": "",
+        "cardType": "greenProject",
+        "vpNumber": "2",
         "prerequisiteTresholdType": "",
         "prerequisiteType": "",
         "prerequisiteTresholdValue": 0,
@@ -24937,13 +24936,13 @@
             "en": "",
             "fr": ""
         },
-        "effectSummaryType": "",
+        "effectSummaryType": "greyProduction",
         "effectSummaryText": {
-            "en": "",
+            "en": "$ressource_titanium$$ressource_titanium$$ressource_titanium$",
             "fr": ""
         },
         "effectText": {
-            "en": "",
+            "en": "EFFECT: When you play a $tag_space$, you pay 9MC less for it.",
             "fr": ""
         },
         "effectSummaryOption": "",
@@ -24958,7 +24957,7 @@
         },
         "effectSummaryOption2": "",
         "playedText": {
-            "en": "For every 2 $tag_jovian$ you have gain $ressource_titanium$.$skipline$Flip an ocean.$skipline$Raise infrastructure 1 step.$skipline$Draw a card$",
+            "en": "Flip an ocean.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -25075,7 +25074,6 @@
         "cost": 22,
         "tagsId": [
             2,
-            2,
             1
         ],
         "cardType": "blueProject",
@@ -25099,7 +25097,7 @@
             "fr": ""
         },
         "effectText": {
-            "en": "ACTION : Add 1$ressource_science$ here for each 4 $tag_science$ you have.",
+            "en": "ACTION : Add 1$ressource_science$ here per 5 $tag_science$ you have.",
             "fr": ""
         },
         "effectSummaryOption": "",
