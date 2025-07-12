@@ -581,6 +581,10 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'D19': (s) => Checker.isMilestoneOk(1, 'min', s),
 	//Filter Feeders
 	'P04': (s) => Checker.isOceanOk(2, 'min', s),
+	//Asset Liquidation V2
+	'FM1': (s) => Checker.isTrOk(1, 'min', s),
+	//Mercurian Alloys
+	'FM6': (s) => Checker.isTagOk('science', 2, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -1507,7 +1511,40 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Point Luna
 	'CF1': () => [
 		EventFactory.simple.addProduction({name:'titanium', valueStock:1})
-	]
+	],
+	//Asset Liquidation v2
+	'FM1': () => [
+		EventFactory.simple.addTR(-1),
+		EventFactory.simple.draw(3),
+		EventFactory.simple.specialBuilder(BuilderOption.assetLiquidation)
+	],
+	//Rego Plastics
+	'FM5': (state) => {
+		state.increaseProductionModValue('steel')
+		return []
+	},
+	//Mercurian Alloys
+	'FM6': (state) => {
+		state.increaseProductionModValue('titanium')
+		return []
+	},
+	//Solar Probe
+	'FM7': (state) => [
+		EventFactory.simple.draw(Math.floor(state.getTagsOfType('science')/2))
+	],
+	//Social Event
+	'FM8': (state) => [
+		EventFactory.simple.addTR(Math.floor(Math.min(state.getTagsOfType('earth'), state.getTagsOfType('jovian'))))
+	],
+	//Bactoviral Research
+	'FM9': (state) => [
+		EventFactory.simple.addRessourceToSelectedCard({name:'microbe',valueStock:state.getTagsOfType('science')})
+	],
+	//Ceres Spaceport
+	'FM10': (state) => [
+		EventFactory.simple.addRessource({name:'titanium', valueStock:3}),
+		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Earth Catapult
@@ -1533,7 +1570,14 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Thorgate
 	'219': (card) => card.hasTag('power') ? 3 : 0,
 	//DevTechs
-	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0
+	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
+	//Solar Logistics
+	'FM2': (card) => {
+		let total: number = 0
+		if(card.hasTag('earth')){total += 3}
+		if(card.hasTag('space') && card.hasTag('event')){total += 6}
+		return total
+	}
 }
 export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => EventBaseModel[]> = {
 	//Decomposers
