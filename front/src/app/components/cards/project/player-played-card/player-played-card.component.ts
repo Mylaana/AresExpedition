@@ -41,6 +41,6 @@ export class PlayerPlayedCardComponent{
 		}
 	}
 	displayPhase(): PhaseCardModel[] {
-		return this.state.getPhaseCards(true)
+		return this.state.getPhaseCards(true).filter((el) => el.phaseCardUpgraded===true)
 	}
 }
