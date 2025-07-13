@@ -141,6 +141,8 @@ describe('Service - Designers - Event', () => {
 
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
+				expectedEvent.lockRollbackButton = true
+				expectedEvent.lockDisplayUpgraded = true
 
                 let resultEvent = event_factory.EventFactory.createCardSelector(expectedSubType)
 
@@ -567,6 +569,9 @@ describe('Service - Designers - Event', () => {
                             expectedEvent.autoFinalize = false
                             expectedEvent.phaseCardUpgradeList = expectedList
                             expectedEvent.phaseCardUpgradeQuantity = expectedQuantity
+							expectedEvent.lockRollbackButton = true
+							expectedEvent.lockSellButton = true
+							expectedEvent.lockValidateButton = true
                             expectedArgs = {phaseCardUpgradeList:expectedList, phaseCardUpgradeNumber:expectedQuantity}
                             break
                         }
