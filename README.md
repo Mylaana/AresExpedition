@@ -65,7 +65,6 @@ add trigger resolution priority
 display other player production
 Activable cards with megacredit cost in it display bugged   
 add FR translation   
-Waiting player event : rollback button display bugged   
 add display for discounts on tags / cards   
 
 ### CI/CD
