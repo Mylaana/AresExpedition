@@ -209,10 +209,6 @@ export class GameEventComponent {
 				this.eventHandler.cancelDisplayUpgradedPhase()
 				break
 			}
-			case('sellOptionalCardCancel'):{
-				this.eventHandler.cancelSellCardsOptional()
-				break
-			}
 			case('killCard'):{
 				this.gameStateService.addEventQueue(EventFactory.createCardSelectorComplex('discardCards',{
 					cardSelector:{
