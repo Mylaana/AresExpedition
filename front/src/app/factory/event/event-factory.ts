@@ -626,7 +626,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
             event.phaseCardUpgradeList = phaseList
             event.phaseCardUpgradeQuantity = args?.phaseCardUpgradeNumber
 			event.lockSellButton = true
-			event.lockValidateButton = true
+			//event.lockValidateButton = true
 			event.lockRollbackButton = true
             break
         }
