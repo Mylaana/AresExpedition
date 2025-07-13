@@ -100,6 +100,10 @@ export class EventHandler {
 		if(this.currentEvent.subType!='selectCardOptionalSell'){return}
 		this.cancelCurrentEvent()
 	}
+	public cancelDisplayUpgradedPhase(): void {
+		if(this.currentEvent.subType!='upgradePhaseCards'){return}
+		this.cancelCurrentEvent()
+	}
 	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}): void {
 		let event = this.currentEvent as EventCardActivator
 		event.activationLog[input.card.cardCode] = input.card.activated

@@ -38,6 +38,7 @@ export class ButtonDesigner{
 			case('rollBack'):{startEnabled=true;break}
 			case('settings'):{startEnabled=true;break}
 			case('displayUpgradedPhase'):{startEnabled=true;break}
+			case('displayUpgradedPhaseCancel'):{startEnabled=true;break}
 			case('killCard'):{startEnabled=true;break}
 			case('lockBuilder'):{startEnabled=true;break}
 
@@ -86,6 +87,7 @@ export class ButtonDesigner{
 			case('sellOptionalCardCancel'):{caption='$other_cancel$';break}
 			case('rollBack'):{caption='$other_rollback$';break}
 			case('displayUpgradedPhase'):{caption='$other_upgrade$';break}
+			case('displayUpgradedPhaseCancel'):{caption='other_cancel';break}
 			case('killCard'):{caption='kill cards';break}
 			case('lockBuilder'):{caption='$other_cancel$';break}
 

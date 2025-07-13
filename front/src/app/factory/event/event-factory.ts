@@ -190,6 +190,8 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.cardSelector.selectionQuantityTreshold = 'min'
             event.cardSelector.selectionQuantity = 1
             event.title = 'Select any number of cards to sell'
+			event.lockDisplayUpgraded = true
+			event.lockRollbackButton = true
             break
         }
         case('researchPhaseResult'):
@@ -623,6 +625,9 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 			}
             event.phaseCardUpgradeList = phaseList
             event.phaseCardUpgradeQuantity = args?.phaseCardUpgradeNumber
+			event.lockSellButton = true
+			event.lockValidateButton = true
+			event.lockRollbackButton = true
             break
         }
         case('addRessourceToPlayer'):{

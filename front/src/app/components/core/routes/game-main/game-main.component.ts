@@ -64,6 +64,7 @@ export class GameMainComponent implements OnInit{
 	_lastScrollY: number = 0
 	_connected: boolean = false
 	_gameOver: boolean = false
+	_gameStarted: boolean = false
 
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
@@ -95,6 +96,7 @@ export class GameMainComponent implements OnInit{
 		})
 		this.gameStateService.currentGroupPlayerState.subscribe(states => this.updateGroupState(states))
 		this.gameStateService.currentLoadingState.subscribe(loading => this.loadingFinished(loading))
+		this.gameStateService.currentGameStartedState.subscribe(started => this._gameStarted = started)
 		this.gameStateService.currentGameOver.subscribe(over => this._gameOver = over)
 		this.rxStompService.connectionState$.subscribe(() => {this._connected = this.rxStompService.connectionState$.getValue() === 1})
 		this.settingsButton = ButtonDesigner.createNonEventButton('settings')

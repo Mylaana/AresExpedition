@@ -82,7 +82,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 
 	phaseChanged(phase: NonSelectablePhaseEnum){
-		if(this.gameStateService.loading.getValue()===true){return}
+		//if(this.loading===true){return}
 		this.currentPhase = phase
 
 		if(this.currentPhase===NonSelectablePhaseEnum.planification){

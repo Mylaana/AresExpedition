@@ -5,7 +5,7 @@ import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '..
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
-import { DrawEvent, EventBaseModel, EventCardBuilder } from '../../../../models/core-game/event.model';
+import { DrawEvent, EventBaseModel } from '../../../../models/core-game/event.model';
 import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
@@ -14,7 +14,6 @@ import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-ca
 import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { EventMainButtonComponent } from "../../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
-import { TextWithImageComponent } from '../../../tools/text-with-image/text-with-image.component';
 import { InitialDraftComponent } from '../../../game-initialization/initial-draft/initial-draft.component';
 import { WaitingReadyComponent } from '../../waiting-ready/waiting-ready.component';
 import { PhasePlanificationComponent } from '../../../game-event-blocks/phase-planification/phase-planification.component';
@@ -79,6 +78,7 @@ export class GameEventComponent {
 	sellCardsCancelButton!: NonEventButton;
 	rollbackButton!: NonEventButton;
 	displayPhaseUpgradeButton!: NonEventButton;
+	displayPhaseUpgradeCancelButton!: NonEventButton;
 	killCard!: NonEventButton;
 
 	phaseList: NonSelectablePhaseEnum[] = [
@@ -105,6 +105,7 @@ export class GameEventComponent {
 		this.sellCardsCancelButton = ButtonDesigner.createNonEventButton('sellOptionalCardCancel')
 		this.rollbackButton = ButtonDesigner.createNonEventButton('rollBack')
 		this.displayPhaseUpgradeButton = ButtonDesigner.createNonEventButton('displayUpgradedPhase')
+		this.displayPhaseUpgradeCancelButton = ButtonDesigner.createNonEventButton('displayUpgradedPhaseCancel')
 		this.killCard = ButtonDesigner.createNonEventButton('killCard')
 
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
@@ -135,6 +136,7 @@ export class GameEventComponent {
 		this.resetValidateButtonState(this.currentEvent)
 		this.resetMainButtonState(this.currentEvent)
 		this.updateSellButtonsDisplay(this.currentEvent)
+		this.updateUpgradedPhaseCardsDisplay(this.currentEvent)
 	}
 	private resetMainButtonState(event: EventBaseModel): void {
 		this.sellCardsButton.resetStartEnabled()
@@ -143,6 +145,10 @@ export class GameEventComponent {
 		this.sellCardsCancelButton.locked = event.lockSellButton
 		this.rollbackButton.resetStartEnabled()
 		this.rollbackButton.locked = event.lockRollbackButton
+		this.displayPhaseUpgradeButton.resetStartEnabled()
+		this.displayPhaseUpgradeButton.locked = event.lockDisplayUpgraded
+		this.displayPhaseUpgradeCancelButton.resetStartEnabled()
+		this.displayPhaseUpgradeCancelButton.locked = event.lockDisplayUpgraded
 	}
 	private resetValidateButtonState(event: EventBaseModel): void {
 		if(!event.button){return}
@@ -159,6 +165,19 @@ export class GameEventComponent {
 			default:{
 				this.sellCardsCancelButton.displayed = false
 				this.sellCardsButton.displayed = true
+			}
+		}
+	}
+	private updateUpgradedPhaseCardsDisplay(event: EventBaseModel){
+		switch(event.subType){
+			case('upgradePhaseCards'):{
+				this.displayPhaseUpgradeCancelButton.displayed = true
+				this.displayPhaseUpgradeButton.displayed = false
+				break
+			}
+			default:{
+				this.displayPhaseUpgradeCancelButton.displayed = false
+				this.displayPhaseUpgradeButton.displayed = true
 			}
 		}
 	}
@@ -181,8 +200,13 @@ export class GameEventComponent {
 				break
 			}
 			case('displayUpgradedPhase'):{
-				console.log('display upgradde')
 				this.gameStateService.addEventQueue(EventFactory.simple.upgradePhaseCard(0), 'first')
+				this.displayPhaseUpgradeButton.updateEnabled(false)
+				this.displayPhaseUpgradeCancelButton.updateEnabled(true)
+				break
+			}
+			case('displayUpgradedPhaseCancel'):{
+				this.eventHandler.cancelDisplayUpgradedPhase()
 				break
 			}
 			case('killCard'):{
@@ -212,6 +236,7 @@ export class GameEventComponent {
 	}
 	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
 	displayGroupReady(): boolean {
+		if(this.currentPhase===NonSelectablePhaseEnum.action){return false}
 		if(this.gameStateService.getClientReady()===true){return false}
 		for(let p of this._groupReady){
 			if(p.isReady){return true}
