@@ -51,7 +51,8 @@ type EventPileAddRule = 'first' | 'second' | 'last'
     providedIn: 'root'
 })
 export class GameState{
-    loading = new BehaviorSubject<boolean>(true);
+    private loading = new BehaviorSubject<boolean>(true);
+	private gameStarted = new BehaviorSubject<boolean>(true);
 
     private clientId!: myUUID
     playerCount = new BehaviorSubject<myUUID[]>([]);
@@ -75,6 +76,7 @@ export class GameState{
     currentEventQueue = this.eventQueue.asObservable()
     currentPlayerCount = this.playerCount.asObservable()
     currentLoadingState = this.loading.asObservable()
+	currentGameStartedState = this.gameStarted.asObservable()
 	currentSelectedPhaseList = this.selectedPhaseList.asObservable()
 	currentGameOver = this.gameOver.asObservable()
 
@@ -865,5 +867,8 @@ export class GameState{
 			result.push(r)
 		}
 		return result
+	}
+	setGameStarted(started: boolean = true){
+		this.gameStarted.next(started)
 	}
 }

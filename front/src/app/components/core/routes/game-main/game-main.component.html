@@ -2,7 +2,8 @@
 	<h1 class="ares-title">CONNECTION LOST</h1>
 </div>
 <div *ngIf="loaded===false && _connected" class="wrapper-loading" @fadeIn>
-	<h1 class="ares-title">LOADING</h1>
+	<h1 *ngIf="_gameStarted" class="ares-title">LOADING</h1>
+	<h1 *ngIf="!_gameStarted" class="ares-title">WAITING OTHER PLAYERS TO CONNECT</h1>
 </div>
 <div class="background-image nav-background" *ngIf="loaded && _connected  && !_gameOver" @fadeIn></div>
 <nav *ngIf="loaded && _connected && !_gameOver" id="navbar" [class.settings-openned]="_settings">
