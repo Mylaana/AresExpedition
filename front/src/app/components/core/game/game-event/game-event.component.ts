@@ -212,6 +212,7 @@ export class GameEventComponent {
 	}
 	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
 	displayGroupReady(): boolean {
+		if(this.currentPhase===NonSelectablePhaseEnum.action){return false}
 		if(this.gameStateService.getClientReady()===true){return false}
 		for(let p of this._groupReady){
 			if(p.isReady){return true}
