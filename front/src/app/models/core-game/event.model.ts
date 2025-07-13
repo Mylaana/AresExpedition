@@ -24,6 +24,7 @@ export abstract class EventBaseModel {
 	lockSellButton: boolean = false
 	lockRollbackButton: boolean = false
 	lockValidateButton: boolean = false
+	lockDisplayUpgraded: boolean = false
 
     hasSelector(): boolean {return false}
 	hasCardsToSelectFrom(): boolean {return false}
