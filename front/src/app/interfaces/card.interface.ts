@@ -45,8 +45,8 @@ export interface PlayableCardInterface {
 	stockable?: AdvancedRessourceType[]
 	startingMegacredits?: number
 	status: string,
-	effectSummaryOption: string,
-    effectSummaryOption2: string,
+	effectSummaryOption?: string,
+    effectSummaryOption2?: string,
 	scalingVp: boolean,
 
 	//not loaded from data
