@@ -48,15 +48,10 @@ parser_columns_map = [
     {'column_name': 'prerequisiteText_fr', 'column_id': -1 , 'output_field_name': 'prerequisiteText', 'split_per_language': True},
     {'column_name': 'prerequisiteSummaryText_en', 'column_id': -1 , 'output_field_name': 'prerequisiteSummaryText', 'split_per_language': True},
     {'column_name': 'prerequisiteSummaryText_fr', 'column_id': -1 , 'output_field_name': 'prerequisiteSummaryText', 'split_per_language': True},
-    {'column_name': 'effectActionTextOption1_en', 'column_id': -1 , 'output_field_name': 'effectActionTextOption1', 'split_per_language': True},
-    {'column_name': 'effectActionTextOption1_fr', 'column_id': -1 , 'output_field_name': 'effectActionTextOption1', 'split_per_language': True},
-    {'column_name': 'effectActionTextOption2_en', 'column_id': -1 , 'output_field_name': 'effectActionTextOption2', 'split_per_language': True},
-    {'column_name': 'effectActionTextOption2_fr', 'column_id': -1 , 'output_field_name': 'effectActionTextOption2', 'split_per_language': True},
-    {'column_name': 'effectActionText2Option1_en', 'column_id': -1 , 'output_field_name': 'effectActionText2Option1', 'split_per_language': True},
-    {'column_name': 'effectActionText2Option1_fr', 'column_id': -1 , 'output_field_name': 'effectActionText2Option1', 'split_per_language': True},
-    {'column_name': 'effectActionText2Option2_en', 'column_id': -1 , 'output_field_name': 'effectActionText2Option2', 'split_per_language': True},
-    {'column_name': 'effectActionText2Option2_fr', 'column_id': -1 , 'output_field_name': 'effectActionText2Option2', 'split_per_language': True}
-    ]
+    {'column_name': 'actionTextOption1_en', 'column_id': -1 , 'output_field_name': 'actionTextOption1', 'split_per_language': True},
+    {'column_name': 'actionTextOption1_fr', 'column_id': -1 , 'output_field_name': 'actionTextOption1', 'split_per_language': True},
+    {'column_name': 'actionTextOption2_en', 'column_id': -1 , 'output_field_name': 'actionTextOption2', 'split_per_language': True},
+    {'column_name': 'actionTextOption2_fr', 'column_id': -1 , 'output_field_name': 'actionTextOption2', 'split_per_language': True},    ]
 
 PARSER_CARD_INFO_MODEL = {
     "card_code": "",
@@ -86,10 +81,10 @@ PARSER_CARD_INFO_MODEL = {
     "stockable": [],
     "startingMegacredits": 0,
     "status": "",
-    "effectActionTextOption1": {},
-    "effectActionTextOption2": {},
-    "effectActionText2Option1": {},
-    "effectActionText2Option2": {},
+    "actionTextOption1": {},
+    "actionTextOption2": {},
+    "actionText2Option1": {},
+    "actionText2Option2": {},
     "vpScaling": ""
 }
 

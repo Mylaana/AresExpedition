@@ -73,7 +73,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "3$other_researchcard$$tag_science$/$tag_plant$$skipline$+1$ressource_card$",
             "fr": ""
         },
@@ -112,7 +112,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_card$$ressource_card$",
             "fr": ""
         },
@@ -204,7 +204,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_10$:$other_ocean$$skipline$$ressource_megacreditvoid_-2$/$ressource_steel$",
             "fr": ""
         },
@@ -264,7 +264,7 @@
             "fr": "ACTION: D\u00e9pensez 1 plante pour piocher 1 carte."
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-$ressource_plant$: $ressource_card$",
             "fr": ""
         },
@@ -334,7 +334,7 @@
             "animal"
         ],
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_animal$",
             "fr": ""
         },
@@ -363,7 +363,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$other_researchcard$$skipline$$other_greencard$: $ressource_megacreditvoid_1$$skipline$$other_bluecard$/$other_redcard$: $ressource_card$",
             "fr": ""
         },
@@ -398,7 +398,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-8$ressource_heat$: +$other_tr$",
             "fr": ""
         },
@@ -427,7 +427,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_card$",
             "fr": ""
         },
@@ -456,7 +456,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_2$ $ressource_plant$*",
             "fr": ""
         },
@@ -518,11 +518,11 @@
             "fr": "ACTION: Ajoutez un microbe sur une autre* carte ou ajoutez un animal sur une autre* carte."
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_microbe$*",
             "fr": ""
         },
-        "effectActionTextOption2": {
+        "actionTextOption2": {
             "en": "$ressource_animal$*",
             "fr": ""
         },
@@ -595,7 +595,7 @@
             "microbe"
         ],
         "status": "blocked",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-$ressource_animal$* / -$ressource_microbe$*:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$",
             "fr": ""
         },
@@ -623,7 +623,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_10$:$other_temperature$$skipline$$ressource_megacreditvoid_-5$ if >=5$other_bluecard$",
             "fr": ""
         },
@@ -653,7 +653,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-$ressource_heat$$ressource_heat$: $ressource_card$",
             "fr": ""
         },
@@ -802,11 +802,11 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_plant$",
             "fr": ""
         },
-        "effectActionTextOption2": {
+        "actionTextOption2": {
             "en": " $ressource_microbe$*",
             "fr": ""
         },
@@ -836,7 +836,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_-1$: $ressource_plant$$ressource_plant$",
             "fr": ""
         },
@@ -869,7 +869,7 @@
             "fr": "Gagnez 3 plantes."
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_card$  3 $ressource_plant$",
             "fr": ""
         },
@@ -951,11 +951,11 @@
             "microbe"
         ],
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$other_arrow$$ressource_microbe$",
             "fr": ""
         },
-        "effectActionTextOption2": {
+        "actionTextOption2": {
             "en": "-$ressource_microbe$$ressource_microbe$:  $other_temperature$",
             "fr": ""
         },
@@ -993,7 +993,7 @@
             "fr": ""
         },
         "status": "blocked",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "1-4$ressource_heat$: 1-4$ressource_plant$",
             "fr": ""
         },
@@ -1063,7 +1063,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_-1$: $ressource_heat$$ressource_heat$$skipline$$ressource_heat$*",
             "fr": ""
         },
@@ -1173,7 +1173,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-4$ressource_heat$: $other_oxygen$",
             "fr": ""
         },
@@ -1270,7 +1270,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_-1$: $ressource_card$",
             "fr": ""
         },
@@ -1331,11 +1331,11 @@
             "microbe"
         ],
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_microbe$",
             "fr": ""
         },
-        "effectActionTextOption2": {
+        "actionTextOption2": {
             "en": "-3$ressource_microbe$: $other_ocean$",
             "fr": ""
         },
@@ -1460,7 +1460,7 @@
             "fr": ""
         },
         "status": "blocked",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-X$ressource_heat$: $ressource_megacreditvoid_X$",
             "fr": ""
         },
@@ -1509,7 +1509,7 @@
             "fr": "ACTION: D\u00e9faussez jusqu'\u00e0 trois cartes de votre main. Piochez un m\u00eame nombre de cartes."
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "1-3 $other_discard$: 1-3$ressource_card$",
             "fr": ""
         },
@@ -1550,11 +1550,11 @@
             "microbe"
         ],
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_microbe$",
             "fr": ""
         },
-        "effectActionTextOption2": {
+        "actionTextOption2": {
             "en": "-$ressource_microbe$$ressource_microbe$: $other_oxygen$",
             "fr": ""
         },
@@ -1675,7 +1675,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_15$  $other_forest$$skipline$$ressource_megacreditvoid_-2$ / $ressource_titanium$",
             "fr": ""
         },
@@ -1731,7 +1731,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-6$ressource_heat$: $ressource_megacreditvoid_2$$other_oxygen$",
             "fr": ""
         },
@@ -1768,7 +1768,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_microbe$*",
             "fr": ""
         },
@@ -1805,7 +1805,7 @@
             "microbe"
         ],
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_microbe$",
             "fr": ""
         },
@@ -1839,7 +1839,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_-2$: $ressource_card$",
             "fr": ""
         },
@@ -1922,7 +1922,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_12$  $other_ocean$$skipline$$ressource_megacreditvoid_-1$ / $tag_power$",
             "fr": ""
         },
@@ -1958,7 +1958,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_12$:$other_ocean$$skipline$$ressource_megacreditvoid_-1$/$ressource_titanium$",
             "fr": ""
         },
@@ -1992,7 +1992,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-4$ressource_plant$: $other_temperature$$skipline$-3$ressource_plant$*",
             "fr": ""
         },
@@ -6568,7 +6568,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_2$$skipline$$ressource_megacreditvoid_2$*",
             "fr": ""
         },
@@ -6598,7 +6598,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "-$other_tr$: $other_upgrade$",
             "fr": "-$other_tr$: $other_upgrade$"
         },
@@ -6690,11 +6690,11 @@
             "science"
         ],
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_science$",
             "fr": "$ressource_science$"
         },
-        "effectActionTextOption2": {
+        "actionTextOption2": {
             "en": "-3$ressource_science$: $other_upgrade$",
             "fr": "-3$ressource_science$: $other_upgrade$"
         },
@@ -6728,7 +6728,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "2$ressource_card$ -2$ressource_card$",
             "fr": "2$ressource_card$ -2$ressource_card$"
         },
@@ -6766,7 +6766,7 @@
             "fr": ""
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$other_upgrade$",
             "fr": "$other_upgrade$"
         },
@@ -7593,7 +7593,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ If 4 $tag_science$",
             "fr": ""
         },
@@ -7623,7 +7623,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$other_arrow$ $ressource_card$$skipline$If $other_infrastructure$ + $ressource_card$",
             "fr": ""
         },
@@ -7687,7 +7687,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_10$  $other_infrastructure$$skipline$$ressource_megacreditvoid_-2$ / $tag_plant$",
             "fr": ""
         },
@@ -8201,7 +8201,7 @@
             "fr": "Piochez 2 cartes."
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$other_discard$  $ressource_megacreditvoid_6$",
             "fr": ""
         },
@@ -8292,7 +8292,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_10$  $other_oxygen$$skipline$$ressource_megacreditvoid_-5$ if 4 $tag_event$",
             "fr": ""
         },
@@ -8342,11 +8342,11 @@
             "microbe"
         ],
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "ressource_microbe$",
             "fr": "ressource_microbe$"
         },
-        "effectActionTextOption2": {
+        "actionTextOption2": {
             "en": "-5$ressource_microbe$:$other_omnicard$$ressource_megacreditvoid_-25$",
             "fr": "-5$ressource_microbe$:$other_omnicard$$ressource_megacreditvoid_-25$"
         },
@@ -8415,7 +8415,7 @@
         },
         "startingMegacredits": 50,
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "3$other_researchcard$$tag_event$:$skipline$$other_hand$$ressource_card$",
             "fr": ""
         },
@@ -8558,7 +8558,7 @@
             "fr": "ACTION: Piochez 1 carte. Piochez 1 carte suppl\u00e9mentaire pour chaque Objectif en votre possession."
         },
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_card$$skipline$+ $ressource_card$ / $other_milestone$",
             "fr": ""
         },
@@ -8589,7 +8589,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_milestone$",
             "fr": ""
         },
@@ -8645,7 +8645,7 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
-        "effectActionTextOption1": {
+        "actionTextOption1": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_12$:$other_temperature$$skipline$$ressource_megacreditvoid_-2$/$other_upgrade$",
             "fr": ""
         },
@@ -9098,17 +9098,18 @@
             1
         ],
         "cardType": "blueProject",
+        "vpNumber": "2",
         "title": {
             "en": "Solar Logistics",
             "fr": ""
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_earth$: $ressource_megacreditvoid_-3$$skipline$$tag_space$$tag_event$: $ressource_megacreditvoid_-6$$ressource_card$",
-            "fr": "$tag_earth$: $ressource_megacreditvoid_-3$$skipline$$tag_space$$tag_event$: $ressource_megacreditvoid_-6$$ressource_card$"
+            "en": "$tag_space$$tag_event$: $ressource_megacreditvoid_-10$$ressource_card$$ressource_card$",
+            "fr": "$tag_space$$tag_event$: $ressource_megacreditvoid_-10$$ressource_card$$ressource_card$"
         },
         "effectText": {
-            "en": "EFFECT : When you play an $tag_earth$, you pay 3 MC less.$skipline$EFFECT: When you play an $tag_space$$tag_event$, you pay 6 MC less for it and draw a card.",
+            "en": "EFFECT: When you play an $tag_space$$tag_event$, you pay 10 MC less for it and draw 2 cards.",
             "fr": ""
         },
         "effectSummaryText2": {
@@ -9475,8 +9476,8 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_jovian$:$ressource_megacreditvoid_-5$$skipline$$tag_jovian$:$ressource_card$",
-            "fr": "$tag_jovian$:$ressource_megacreditvoid_-5$$skipline$$tag_jovian$:$ressource_card$"
+            "en": "$tag_jovian$: $ressource_megacreditvoid_-5$$skipline$$tag_jovian$: $ressource_card$",
+            "fr": "$tag_jovian$: $ressource_megacreditvoid_-5$$skipline$$tag_jovian$: $ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_jovian$, you pay 5MC less for it and draw a card.",

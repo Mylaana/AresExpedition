@@ -57,7 +57,7 @@ export class CardActivationListComponent implements OnInit, OnDestroy{
 		let options = PlayableCard.activable.getActivationOption(this.projectCard.cardCode)
 		for(let i=0; i<options.length; i++){
 			this.activationOptions.push({
-				caption: this.projectCard.getEffects()[0].effectAction[i],
+				caption: this.projectCard.getActionCaption(i),
 				index: options[i]
 			})
 		}

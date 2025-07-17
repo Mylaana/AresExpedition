@@ -103,7 +103,6 @@ export class WebsocketHandler {
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, false)
-		console.log(content)
     }
 	private handleMessageStartedGameClientGameState(content: WsGameState, isReconnect: boolean): void {
 		this.gameStateService.reset()
@@ -112,7 +111,6 @@ export class WebsocketHandler {
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, isReconnect)
-		console.log(content)
 	}
 
 	private handleMessageConnection(content: WsGameState): void {

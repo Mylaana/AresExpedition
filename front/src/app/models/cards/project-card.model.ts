@@ -89,8 +89,13 @@ export class PlayableCardModel {
 	getEffects(): PlayableCardEffect[] {return this.effects}
 	getEffectText(effect: PlayableCardEffect): string {return this.getLanguageOrFallback(effect.effectText)}
 	getEffectSummaryText(effect: PlayableCardEffect): string {return this.getLanguageOrFallback(effect.effectSummaryText)}
+	getActionCaption(optionIndex: number): string {
+		if(!this.raw?.actionCaption || this.raw.actionCaption.length < optionIndex+1){return ''}
+		return this.getLanguageOrFallback(this.raw.actionCaption[optionIndex])
+	}
 	getPrerequisiteText(): string {return this.getLanguageOrFallback(this.raw?.prerequisiteText)}
 	getPrerequisiteSummary(): string {return this.getLanguageOrFallback(this.raw?.prerequisiteSummaryText)}
+
 	getLanguageOrFallback(obj: LocalizedText | undefined, displayMissing: boolean = true, fallbackLang: SupportedLanguage = GAME_DEFAULT_LANGUAGE): string {
 		let result = obj?.[PlayableCardModel._language] || obj?.[fallbackLang]
 		if(result){return result}

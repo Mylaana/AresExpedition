@@ -82,6 +82,7 @@ export class ProjectCardInfoService {
 				stockable: this.convertStockable(jsonCard.stockable??[]),
 				status: jsonCard.status,
 				scalingVp: Boolean(Number(jsonCard.vpScaling)),
+				actionCaption: []
 
 			}
 			if (jsonCard.vpNumber!='') {card.vpNumber = jsonCard.vpNumber}
@@ -93,6 +94,8 @@ export class ProjectCardInfoService {
 			if (jsonCard.prerequisiteSummaryText) {card.prerequisiteSummaryText = jsonCard.prerequisiteSummaryText}
 			if (jsonCard.startingMegacredits) {card.startingMegacredits = jsonCard.startingMegacredits}
 			if (jsonCard.effectSummaryOption) {card.effectSummaryOption = jsonCard.effectSummaryOption}
+			if (jsonCard.actionTextOption1) {card.actionCaption?.push(jsonCard.actionTextOption1)}
+			if (jsonCard.actionTextOption2) {card.actionCaption?.push(jsonCard.actionTextOption2)}
 
             cardList.push(card)
         }
@@ -207,7 +210,6 @@ export class ProjectCardInfoService {
 			effectText: input['effectText'],
 			effectSummaryText: input['effectSummaryText'],
 			effectSummaryType: input['effectSummaryType'],
-			effectAction: actionText
 		})
 		if(input['effectSummaryType2']){
 			let actionText: string[] = []
@@ -221,7 +223,6 @@ export class ProjectCardInfoService {
 				effectText: input['effectText2'],
 				effectSummaryText: input['effectSummaryText2'],
 				effectSummaryType: input['effectSummaryType2'],
-				effectAction: actionText
 			})
 		}
 		return effects
