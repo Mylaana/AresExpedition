@@ -1563,6 +1563,13 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		]),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
 	],
+	//Ringcom
+	'CF4': () => [
+		EventFactory.simple.addProduction([
+			{ name: 'megacredit', valueStock: 3 },
+		]),
+		EventFactory.simple.scanKeep({scan:15, keep:15}, DeckQueryOptionsEnum.ringCom)
+	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Earth Catapult
@@ -1592,7 +1599,9 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Solar Logistics
 	'FM2': (card) => {
 		return card.hasTag('space') && card.hasTag('event')?10:0
-	}
+	},
+	//Space Relay
+	'FM14': (card) => card.hasTag('jovian')? 5 : 0
 }
 export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => EventBaseModel[]> = {
 	//Decomposers

@@ -22,7 +22,8 @@ export enum DeckQueryOptionsEnum {
 	advancedScreeningTechnology = 'O4',
 	inventionContest = 'O5',
 	actionPhaseScan = 'O6',
-	modPro = 'O7'
+	modPro = 'O7',
+	ringCom = 'O8'
 }
 export enum ProjectFilterNameEnum {
 	undefined = 'undefined',

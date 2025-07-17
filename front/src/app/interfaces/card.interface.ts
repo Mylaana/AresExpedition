@@ -16,7 +16,6 @@ export interface PlayableCardEffect {
 	effectSummaryText: LocalizedText
 	effectText: LocalizedText
 	effectSummaryType: SummaryType
-	effectAction: string[]
 }
 
 export interface PlayableCardInterface {
@@ -48,6 +47,7 @@ export interface PlayableCardInterface {
 	effectSummaryOption?: string,
     effectSummaryOption2?: string,
 	scalingVp: boolean,
+	actionCaption?: LocalizedText[]
 
 	//not loaded from data
 

@@ -224,9 +224,19 @@ const S = EventFactory.simple
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
 		return [S.draw(1)]
 	}
+	//Ringcom
+	function handleTrigger_CF4(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===false){return []}
+		return [S.addProduction({name:'titanium', valueStock:1})]
+	}
 	//Solar Logistics
 	function handleTrigger_FM2(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false || input.tagList.includes(GlobalInfo.getIdFromType('space','tag'))===false){return []}
+		return [S.draw(2)]
+	}
+	//Space Relay
+	function handleTrigger_FM14(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===false ){return []}
 		return [S.draw(1)]
 	}
 
@@ -343,7 +353,9 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'P12': handleTrigger_P12,
 		'P19': handleTrigger_P19_OnTagGained,
 		'CF1': handleTrigger_CF1,
+		'CF4': handleTrigger_CF4,
 		'FM2': handleTrigger_FM2,
+		'FM14': handleTrigger_FM14,
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
 		'P04': handleTrigger_P04,

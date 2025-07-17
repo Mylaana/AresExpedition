@@ -162,7 +162,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 
 	}
 	playCard(){
-		let playCard = this.cardInfoService.getCardById('46')
+		let playCard = this.cardInfoService.getCardById('FM14')
 		if(playCard){
 			this.gameStateService.playCardFromClientHand(playCard, 'project')
 		}

@@ -8,5 +8,6 @@ public enum ScanKeepOptionsEnum {
     O4,
     O5,
     O6,
-    O7
+    O7,
+    O8
 }
