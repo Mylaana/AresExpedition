@@ -16,7 +16,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_temperature$$other_oxygen$$other_infrastructure$:$skipline$$other_purplesquare$$other_redsquare$$other_yellowsquare$$other_whitesquare$$skipline$$other_arrowtop$$other_arrowbottom$",
-            "fr": ""
+            "fr": "$other_temperature$$other_oxygen$$other_infrastructure$:$skipline$$other_purplesquare$$other_redsquare$$other_yellowsquare$$other_whitesquare$$skipline$$other_arrowtop$$other_arrowbottom$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card with requirements, you can consider oxygen or temperature or infrastructure a higher or lower color. This cannot be combined with other effects.",
@@ -41,7 +41,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_titanium$:$tag_space$$ressource_megacreditvoid_-1$$skipline$AND$skipline$$ressource_steel$:$tag_building$$ressource_megacreditvoid_-1$",
-            "fr": ""
+            "fr": "$ressource_titanium$:$tag_space$$ressource_megacreditvoid_-1$$skipline$ET$skipline$$ressource_steel$:$tag_building$$ressource_megacreditvoid_-1$"
         },
         "effectText": {
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional 1 MC. Each Steel you have reduces the cost of cards by an additional 1 MC.",
@@ -66,10 +66,10 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$3$other_researchcard$$tag_science$/$tag_plant$$skipline$$other_hand$$ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$3$other_researchcard$$tag_science$/$tag_plant$$skipline$$other_hand$$ressource_card$"
         },
         "effectText": {
-            "en": "Action: Reveal the top three cards of the deck. Place a card with a $tag_science$ or $tag_plant$ revealed this way into your hand. Discard the rest",
+            "en": "ACTION: Reveal the top three cards of the deck. Place a card with a $tag_science$ or $tag_plant$ revealed this way into your hand. Discard the rest",
             "fr": ""
         },
         "status": "validated",
@@ -100,12 +100,12 @@
             "fr": "$other_arrow$ 2 $ressource_card$"
         },
         "effectText": {
-            "en": "Action: Draw 2 cards.",
-            "fr": "Action: Piochez 2 cartes."
+            "en": "ACTION: Draw 2 cards.",
+            "fr": "ACTION: Piochez 2 cartes."
         },
         "prerequisiteText": {
-            "en": "Requiert 5 $tag_science$.",
-            "fr": ""
+            "en": "Requires 5 $tag_science$.",
+            "fr": "Requiert 5 $tag_science$."
         },
         "prerequisiteSummaryText": {
             "en": "5$tag_science$",
@@ -134,7 +134,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_card$: -2$ressource_microbe$:$ressource_megacreditvoid_-10$$skipline$$tag_microbe$/$tag_animal$/$tag_plant$: $ressource_microbe$",
-            "fr": ""
+            "fr": "$ressource_card$: -2$ressource_microbe$:$ressource_megacreditvoid_-10$$skipline$$tag_microbe$/$tag_animal$/$tag_plant$: $ressource_microbe$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card, you can remove 2 microbes from this card to pay 10 MC less for it.\nEFFECT: Whenever you play a $tag_animal$, $tag_microbe$S or $tag_plant$, including this one, add a microbe to this card.",
@@ -163,14 +163,14 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_card$:$skipline$2$ressource_heat$+2$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_card$:$skipline$2$ressource_heat$+2$ressource_plant$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card, gain 2 heat and 2 plants.",
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "Requires 5 Science tags.",
+            "en": "Requires 5 $tag_science$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
@@ -196,7 +196,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_10$:$other_ocean$$skipline$$ressource_megacreditvoid_-2$/$ressource_steel$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_10$:$other_ocean$$skipline$$ressource_megacreditvoid_-2$/$ressource_steel$"
         },
         "effectText": {
             "en": "ACTION: Spend 10 MC to flip an ocean tile. Reduce this cost by 2 MC per steel production you have.",
@@ -227,7 +227,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_ocean$: 4$ressource_plant$",
-            "fr": ""
+            "fr": "$other_ocean$: 4$ressource_plant$"
         },
         "effectText": {
             "en": "EFFECT: When you flip an ocean tile, gain 4 plants.",
@@ -260,8 +260,8 @@
             "fr": "$other_arrow$$skipline$$ressource_plant$: $ressource_card$"
         },
         "effectText": {
-            "en": "Action: Spend 1 plant to draw 1 card.",
-            "fr": "Action: D\u00e9pensez 1 plante pour piocher 1 carte."
+            "en": "ACTION: Spend 1 plant to draw 1 card.",
+            "fr": "ACTION: D\u00e9pensez 1 plante pour piocher 1 carte."
         },
         "status": "validated",
         "effectActionTextOption1": {
@@ -286,7 +286,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "\"$other_arrow$\": $ressource_megacreditvoid_1$",
-            "fr": ""
+            "fr": "\"$other_arrow$\": $ressource_megacreditvoid_1$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you use an \"ACTION:\" from one of your cards, gain 1 MC.",
@@ -316,7 +316,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_animal$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_animal$"
         },
         "effectText": {
             "en": "ACTION: Add an animal to this card.",
@@ -356,7 +356,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$other_researchcard$$skipline$$other_greencard$: $ressource_megacreditvoid_1$$skipline$$other_bluecard$/$other_redcard$: $ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$$other_researchcard$$skipline$$other_greencard$: $ressource_megacreditvoid_1$$skipline$$other_bluecard$/$other_redcard$: $ressource_card$"
         },
         "effectText": {
             "en": "ACTION: Reveal the top card of the deck. If it's green, discard it and gain 1 MC. Otherwise, keep it.",
@@ -383,7 +383,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$-8$ressource_heat$: +$other_tr$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$-8$ressource_heat$: +$other_tr$"
         },
         "effectText": {
             "en": "ACTION: Spend 8 heat to increase your terraforming score by 1 step.",
@@ -420,7 +420,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_card$"
         },
         "effectText": {
             "en": "ACTION: Draw a card.",
@@ -449,7 +449,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_2$ $ressource_plant$*",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_2$ $ressource_plant$*"
         },
         "effectText": {
             "en": "ACTION: Earn 2 MC. If you chose the action phase this round, you also gain 1 plant.",
@@ -479,7 +479,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_sellcard$: +$ressource_megacreditvoid_1$",
-            "fr": ""
+            "fr": "$other_sellcard$: +$ressource_megacreditvoid_1$"
         },
         "effectText": {
             "en": "EFFECT: Cards you discard for MC are worth an additional MC.",
@@ -510,12 +510,12 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$ $ressource_microbe$ *$skipline$Or$skipline$$other_arrow$ $ressource_animal$ *",
-            "fr": "$other_arrow$ $ressource_microbe$ *$skipline$Ou$skipline$$other_arrow$ $ressource_animal$ *"
+            "en": "$other_arrow$ $ressource_microbe$ *$skipline$OR$skipline$$other_arrow$ $ressource_animal$ *",
+            "fr": "$other_arrow$ $ressource_microbe$ *$skipline$OU$skipline$$other_arrow$ $ressource_animal$ *"
         },
         "effectText": {
-            "en": "Action: Add a microbe to another card or add an animal to another card.",
-            "fr": "Action: Ajoutez un microbe sur une autre* carte ou ajoutez un animal sur une autre* carte."
+            "en": "ACTION: Add a microbe to another card or add an animal to another card.",
+            "fr": "ACTION: Ajoutez un microbe sur une autre* carte ou ajoutez un animal sur une autre* carte."
         },
         "status": "validated",
         "effectActionTextOption1": {
@@ -544,8 +544,8 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_animal$/$tag_microbe$/$tag_plant$: +$ressource_microbe$ Or $skipline$-$ressource_microbe$: $ressource_card$",
-            "fr": ""
+            "en": "$tag_animal$/$tag_microbe$/$tag_plant$: +$ressource_microbe$ OR $skipline$-$ressource_microbe$: $ressource_card$",
+            "fr": "$tag_animal$/$tag_microbe$/$tag_plant$: +$ressource_microbe$ OU $skipline$-$ressource_microbe$: $ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_animal$, $tag_microbe$ or $tag_plant$, including this one, add a microbe here or remove a microbe here to draw a card.",
@@ -584,8 +584,8 @@
             "fr": "$other_arrow$$skipline$-$ressource_animal$* / -$ressource_microbe$*:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
-            "en": "Action: Remove 1 animal or 1 microbe from one of your cards to gain 3 plants.",
-            "fr": "Action: Retirez 1 animal ou 1 microbe de l'une de vos cartes pour gagner 3 plantes."
+            "en": "ACTION: Remove 1 animal or 1 microbe from one of your cards to gain 3 plants.",
+            "fr": "ACTION: Retirez 1 animal ou 1 microbe de l'une de vos cartes pour gagner 3 plantes."
         },
         "playedText": {
             "en": "Place 2 microbes on this card.",
@@ -615,7 +615,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_10$:$other_temperature$$skipline$$ressource_megacreditvoid_-5$ if >=5$other_bluecard$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_10$:$other_temperature$$skipline$$ressource_megacreditvoid_-5$ if >=5$other_bluecard$"
         },
         "effectText": {
             "en": "ACTION: Spend 10 MC to increase the temperature by 1 step. Reduce this cost by 5 MC if you have 5 or more blue cards in play.",
@@ -646,7 +646,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$-$ressource_heat$$ressource_heat$: $ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$-$ressource_heat$$ressource_heat$: $ressource_card$"
         },
         "effectText": {
             "en": "ACTION: Spend 2 heat to draw a card.",
@@ -677,7 +677,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_card$: $ressource_megacreditvoid_-2$",
-            "fr": ""
+            "fr": "$ressource_card$: $ressource_megacreditvoid_-2$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you play a card, you pay 2 MC less for it.",
@@ -708,7 +708,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_plant$/$tag_animal$: $ressource_animal$",
-            "fr": ""
+            "fr": "$tag_plant$/$tag_animal$: $ressource_animal$"
         },
         "effectText": {
             "en": "EFFECT: When you play one $tag_plant$ or $tag_animal$ including this one, add an animal to this card.",
@@ -739,8 +739,8 @@
             "fr": "$tag_power$ : $ressource_megacreditvoid_-4$ + $ressource_card$"
         },
         "effectText": {
-            "en": "Effect: When you play a $tag_power$, you pay 4 MC less for it and draw a card.",
-            "fr": "Effet: Lorsque vous jouez un $tag_power$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC et vous piochez une carte"
+            "en": "EFFECT: When you play a $tag_power$, you pay 4 MC less for it and draw a card.",
+            "fr": "EFFET: Lorsque vous jouez un $tag_power$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC et vous piochez une carte"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -762,7 +762,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_researchsymbol$: +$ressource_card$",
-            "fr": ""
+            "fr": "$other_researchsymbol$: +$ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you keep cards during the research phase, keep 1 additional card.",
@@ -787,7 +787,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_plant$ / $ressource_microbe$*",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_plant$ / $ressource_microbe$*"
         },
         "effectText": {
             "en": "ACTION: Gain 1 plant or add 1 microbe to another card.",
@@ -829,7 +829,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_-1$: $ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_-1$: $ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "ACTION: Spend 1 MC to gain 2 plants.",
@@ -861,8 +861,8 @@
             "fr": "$ressource_card$ $other_arrow$ 3 $ressource_plant$"
         },
         "effectText": {
-            "en": "Action: Discard a card from your hand to gain 3 plants.",
-            "fr": "Action: D\u00e9faussez une carte de votre main pour gagner 3 plantes"
+            "en": "ACTION: Discard a card from your hand to gain 3 plants.",
+            "fr": "ACTION: D\u00e9faussez une carte de votre main pour gagner 3 plantes"
         },
         "playedText": {
             "en": "Gain 3 plants.",
@@ -896,7 +896,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_ocean$: $ressource_animal$",
-            "fr": ""
+            "fr": "$other_ocean$: $ressource_animal$"
         },
         "effectText": {
             "en": "EFFECT: When you flip an ocean tile, add 1 animal to this card.",
@@ -932,8 +932,8 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_microbe$$skipline$Or$skipline$-$ressource_microbe$$ressource_microbe$:  $other_temperature$",
-            "fr": ""
+            "en": "$other_arrow$$ressource_microbe$$skipline$OR$skipline$-$ressource_microbe$$ressource_microbe$:  $other_temperature$",
+            "fr": "$other_arrow$$ressource_microbe$$skipline$OU$skipline$-$ressource_microbe$$ressource_microbe$:  $other_temperature$"
         },
         "effectText": {
             "en": "ACTION: Add 1 microbe to this card, or remove 2 microbes to raise the temperature 1 step.",
@@ -978,7 +978,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$1-4$ressource_heat$: 1-4$ressource_plant$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$1-4$ressource_heat$: 1-4$ressource_plant$"
         },
         "effectText": {
             "en": "ACTION: Spend up to 4 heat to get that number of plants.",
@@ -1020,7 +1020,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_ocean$/$other_temperature$/$other_oxygen$: $ressource_animal$",
-            "fr": ""
+            "fr": "$other_ocean$/$other_temperature$/$other_oxygen$: $ressource_animal$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you raise oxygen, flip an ocean tile, or increase temperature, add 1 animal to this card.",
@@ -1056,7 +1056,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_-1$: $ressource_heat$$ressource_heat$$skipline$$ressource_heat$*",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_-1$: $ressource_heat$$ressource_heat$$skipline$$ressource_heat$*"
         },
         "effectText": {
             "en": "ACTION: Spend 1 MC to gain 2 heat. If you chose the action phase this round, gain 1 additional heat.",
@@ -1091,7 +1091,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_researchsymbol$: +$other_researchcard$+$ressource_card$",
-            "fr": ""
+            "fr": "$other_researchsymbol$: +$other_researchcard$+$ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you draw cards during the research phase, draw an additional card and keep an additional card.",
@@ -1119,8 +1119,8 @@
             "fr": "$other_researchsymbol$ : + $other_researchcard$$other_researchcard$"
         },
         "effectText": {
-            "en": "Effect: When you draw cards during the research phase, draw 2 additional cards.",
-            "fr": "Effet: Lorsque vous piochez des cartes pendant la phase de recherche, piochez deux cartes suppl\u00e9mentaires."
+            "en": "EFFECT: When you draw cards during the research phase, draw 2 additional cards.",
+            "fr": "EFFET: Lorsque vous piochez des cartes pendant la phase de recherche, piochez deux cartes suppl\u00e9mentaires."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -1144,8 +1144,8 @@
             "fr": "$tag_earth$ / $tag_jovian$ :$skipline$$ressource_megacreditvoid_-3$ + $ressource_card$"
         },
         "effectText": {
-            "en": "Effect : When you play an $tag_earth$ or $tag_jovian$, excluding this one, you pay 3 MC less and draw a card.",
-            "fr": "Effet : Lorsque vous jouez un $tag_earth$ ou $tag_jovian$, celui-ci exclu, le co\u00fbt est r\u00e9duit de 3 MC et vous piochez une carte."
+            "en": "EFFECT: When you play an $tag_earth$ or $tag_jovian$, excluding this one, you pay 3 MC less and draw a card.",
+            "fr": "EFFET: Lorsque vous jouez un $tag_earth$ ou $tag_jovian$, celui-ci exclu, le co\u00fbt est r\u00e9duit de 3 MC et vous piochez une carte."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -1166,7 +1166,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$-4$ressource_heat$: $other_oxygen$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$-4$ressource_heat$: $other_oxygen$"
         },
         "effectText": {
             "en": "ACTION: Spend 4 heat to raise oxygen 1 step.",
@@ -1200,7 +1200,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_temperature$: $ressource_animal$",
-            "fr": ""
+            "fr": "$other_temperature$: $ressource_animal$"
         },
         "effectText": {
             "en": "EFFECT: When you raise the temperature, add 1 animal to this card.",
@@ -1238,7 +1238,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_science$:$other_discard$:$skipline$-$other_discard$$tag_plant$+$ressource_card$$ressource_card$/$skipline$-$other_discard$+$ressource_card$",
-            "fr": ""
+            "fr": "$tag_science$:$other_discard$:$skipline$-$other_discard$$tag_plant$+$ressource_card$$ressource_card$/$skipline$-$other_discard$+$ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you play a SCIENCE, including this one, you may discard a card. If that card had a $tag_plant$, draw 2 cards. Otherwise, draw 1 card.",
@@ -1263,7 +1263,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_-1$: $ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_-1$: $ressource_card$"
         },
         "effectText": {
             "en": "ACTION: Spend 1 MC to draw a card.",
@@ -1295,8 +1295,8 @@
             "fr": "$tag_event$ : $ressource_megacreditvoid_-5$"
         },
         "effectText": {
-            "en": "Effect: When you play an $tag_event$, you pay 5 MC less for it.",
-            "fr": "Effet: Lorsque vous jouez $tag_event$, le co\u00fbt associ\u00e9 est r\u00e9duit de 5 MC."
+            "en": "EFFECT: When you play an $tag_event$, you pay 5 MC less for it.",
+            "fr": "EFFET: Lorsque vous jouez $tag_event$, le co\u00fbt associ\u00e9 est r\u00e9duit de 5 MC."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -1316,8 +1316,8 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_microbe$$skipline$Or$skipline$-3$ressource_microbe$: $other_ocean$",
-            "fr": ""
+            "en": "$other_arrow$$ressource_microbe$$skipline$OR$skipline$-3$ressource_microbe$: $other_ocean$",
+            "fr": "$other_arrow$$ressource_microbe$$skipline$OU$skipline$-3$ressource_microbe$: $other_ocean$"
         },
         "effectText": {
             "en": "Add 3 microbes to this card.\nACTION: Add 1 microbe to this card, or remove 3 microbes from this card to flip an ocean tile.",
@@ -1360,7 +1360,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_science$: $ressource_card$",
-            "fr": ""
+            "fr": "$tag_science$: $ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you play a SCIENCE, including this one, draw a card.",
@@ -1388,8 +1388,8 @@
             "fr": "$tag_event$ :$skipline$2 $ressource_heat$ 2 $ressource_plant$"
         },
         "effectText": {
-            "en": "Effect: When you play an $tag_event$, you gain 2 heat and 2 plants.",
-            "fr": "Effet: Lorsque vous jouez un $tag_event$, vous gagnez 2 chaleurs et 2 plantes."
+            "en": "EFFECT: When you play an $tag_event$, you gain 2 heat and 2 plants.",
+            "fr": "EFFET: Lorsque vous jouez un $tag_event$, vous gagnez 2 chaleurs et 2 plantes."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -1419,8 +1419,8 @@
             "fr": "$other_temperature$ : $ressource_science$"
         },
         "effectText": {
-            "en": "Effect: When you raise the temperature, add a $ressource_science$ to this card.",
-            "fr": "Effet:Lorsque vous augmentez la temp\u00e9rature, ajoutez 1 $ressource_science$ sur cette carte."
+            "en": "EFFECT: When you raise the temperature, add a $ressource_science$ to this card.",
+            "fr": "EFFET:Lorsque vous augmentez la temp\u00e9rature, ajoutez 1 $ressource_science$ sur cette carte."
         },
         "prerequisiteText": {
             "en": "Requires 4 $tag_science$.",
@@ -1453,7 +1453,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$-X$ressource_heat$: $ressource_megacreditvoid_X$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$-X$ressource_heat$: $ressource_megacreditvoid_X$"
         },
         "effectText": {
             "en": "ACTION: Spend any amount of heat to gain that many MC.",
@@ -1480,7 +1480,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_event$: $ressource_card$$ressource_card$",
-            "fr": ""
+            "fr": "$tag_event$: $ressource_card$$ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you play an EVENT, draw 2 cards.",
@@ -1506,7 +1506,7 @@
         },
         "effectText": {
             "en": "ACTION: Discard up to 3 cards from your hand. Draw that number of cards.",
-            "fr": "Action: D\u00e9faussez jusqu'\u00e0 trois cartes de votre main. Piochez un m\u00eame nombre de cartes."
+            "fr": "ACTION: D\u00e9faussez jusqu'\u00e0 trois cartes de votre main. Piochez un m\u00eame nombre de cartes."
         },
         "status": "validated",
         "effectActionTextOption1": {
@@ -1531,8 +1531,8 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_microbe$$skipline$Or$skipline$-$ressource_microbe$$ressource_microbe$: $other_oxygen$",
-            "fr": ""
+            "en": "$other_arrow$$ressource_microbe$$skipline$OR$skipline$-$ressource_microbe$$ressource_microbe$: $other_oxygen$",
+            "fr": "$other_arrow$$ressource_microbe$$skipline$OU$skipline$-$ressource_microbe$$ressource_microbe$: $other_oxygen$"
         },
         "effectText": {
             "en": "ACTION: Add 1 microbe to this card, or remove 2 microbes from this card and increase oxygen 1 step.",
@@ -1577,7 +1577,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_card$: $ressource_megacreditvoid_-1$",
-            "fr": ""
+            "fr": "$ressource_card$: $ressource_megacreditvoid_-1$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you play a card, you pay 1 MC less for it.",
@@ -1599,7 +1599,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_card$:$skipline$-$ressource_plant$: $ressource_megacreditvoid_-5$",
-            "fr": ""
+            "fr": "$ressource_card$:$skipline$-$ressource_plant$: $ressource_megacreditvoid_-5$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card, you can spend 1 plant to reduce the cost of the card by 5 MC.",
@@ -1629,7 +1629,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_forest$: $ressource_animal$",
-            "fr": ""
+            "fr": "$other_forest$: $ressource_animal$"
         },
         "effectText": {
             "en": "EFFECT: When you gain forest victory points, add 1 animal to this card.",
@@ -1670,8 +1670,8 @@
             "fr": "$ressource_megacreditvoid_15$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-2$ / $ressource_titanium$"
         },
         "effectText": {
-            "en": "Action: Spend 15 MC to gain a forest tile and increase oxygen by 1 step. Reduce the cost by 2 MC per Titanium you have.",
-            "fr": "Action: D\u00e9pensez 15 MC pour gagner 1 PV For\u00eat et augmenter de l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC par titane en votre possession."
+            "en": "ACTION: Spend 15 MC to gain a forest tile and increase oxygen by 1 step. Reduce the cost by 2 MC per Titanium you have.",
+            "fr": "ACTION: D\u00e9pensez 15 MC pour gagner 1 PV For\u00eat et augmenter de l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC par titane en votre possession."
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -1698,7 +1698,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_standard$: $ressource_megacreditvoid_-4$",
-            "fr": ""
+            "fr": "$other_standard$: $ressource_megacreditvoid_-4$"
         },
         "effectText": {
             "en": "EFFECT: You pay 4 MC less for standard actions that cost MC.",
@@ -1724,7 +1724,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$-6$ressource_heat$: $ressource_megacreditvoid_2$$other_oxygen$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$-6$ressource_heat$: $ressource_megacreditvoid_2$$other_oxygen$"
         },
         "effectText": {
             "en": "ACTION: Spend 6 heat to gain 2 MC and increase oxygen by 1 step.",
@@ -1753,7 +1753,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_microbe$*",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_microbe$*"
         },
         "effectText": {
             "en": "ACTION: Add a microbe to another card.",
@@ -1798,8 +1798,8 @@
             "fr": "$other_arrow$$skipline$$ressource_microbe$"
         },
         "effectText": {
-            "en": "Action: Add 1 microbe to this card.",
-            "fr": "Action: Ajoutez 1 microbe sur cette carte."
+            "en": "ACTION: Add 1 microbe to this card.",
+            "fr": "ACTION: Ajoutez 1 microbe sur cette carte."
         },
         "stockable": [
             "microbe"
@@ -1832,7 +1832,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_-2$: $ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_-2$: $ressource_card$"
         },
         "effectText": {
             "en": "ACTION: Spend 2 MC to draw a card.",
@@ -1862,7 +1862,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_researchsymbol$: +$other_researchcard$+$ressource_card$",
-            "fr": ""
+            "fr": "$other_researchsymbol$: +$other_researchcard$+$ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you draw cards during the research phase, draw an additional card and keep an additional card.",
@@ -1888,7 +1888,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_animal$/$tag_microbe$/$tag_plant$: $ressource_plant$/$ressource_microbe$*/$ressource_animal$*",
-            "fr": ""
+            "fr": "$tag_animal$/$tag_microbe$/$tag_plant$: $ressource_plant$/$ressource_microbe$*/$ressource_animal$*"
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_animal$, $tag_microbe$ or $tag_plant$, including this one, gain 1 plant or add 1 animal or microbe to another card.",
@@ -1917,8 +1917,8 @@
             "fr": "$ressource_megacreditvoid_12$ $other_arrow$ $other_ocean$$skipline$$ressource_megacreditvoid_-1$ / $tag_power$"
         },
         "effectText": {
-            "en": "Action: Spend 12 MC to flip an ocean tile. Reduce its cost by 1 MC for each $tag_power$ you have.",
-            "fr": "Action: D\u00e9pensez 12 MC pour r\u00e9v\u00e9ler une tuile Oc\u00e9an. Ce co\u00fbt est r\u00e9duit de 1 MC par $tag_power$ en votre possession."
+            "en": "ACTION: Spend 12 MC to flip an ocean tile. Reduce its cost by 1 MC for each $tag_power$ you have.",
+            "fr": "ACTION: D\u00e9pensez 12 MC pour r\u00e9v\u00e9ler une tuile Oc\u00e9an. Ce co\u00fbt est r\u00e9duit de 1 MC par $tag_power$ en votre possession."
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -1950,7 +1950,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_12$:$other_ocean$$skipline$$ressource_megacreditvoid_-1$/$ressource_titanium$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_12$:$other_ocean$$skipline$$ressource_megacreditvoid_-1$/$ressource_titanium$"
         },
         "effectText": {
             "en": "ACTION: Spend 12 MC to flip an ocean tile. Reduce the cost by 1 MC for each Titanium you have.",
@@ -1980,7 +1980,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$-4$ressource_plant$: $other_temperature$$skipline$-3$ressource_plant$*",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$-4$ressource_plant$: $other_temperature$$skipline$-3$ressource_plant$*"
         },
         "effectText": {
             "en": "ACTION: Spend 4 plants to increase the temperature by 1 step. If you choose the action phase this round, spend only 3 plants.",
@@ -2880,7 +2880,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$",
-            "fr": ""
+            "fr": "$ressource_card$"
         },
         "effectText": {
             "en": "During the production phase, draw a card.",
@@ -2906,7 +2906,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
@@ -2931,7 +2931,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$$skipline$2$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_card$$skipline$2$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, you draw a card and this card produces 2 heat.",
@@ -3001,7 +3001,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$",
-            "fr": "2$ressource_plant$"
+            "fr": "$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 plants.",
@@ -3067,7 +3067,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_plant$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant and 1 heat.",
@@ -3094,7 +3094,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 6 MC less for it.",
@@ -3116,7 +3116,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
@@ -3141,7 +3141,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$skipline$$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_plant$$skipline$$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant and 3 heat.",
@@ -3171,7 +3171,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$/$tag_earth$",
-            "fr": ""
+            "fr": "$ressource_heat$/$tag_earth$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat for each $tag_earth$ you have, including this one.",
@@ -3196,7 +3196,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$",
-            "fr": ""
+            "fr": "$ressource_card$"
         },
         "effectText": {
             "en": "During the production phase, draw a card.",
@@ -3226,7 +3226,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_3$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_3$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3MC.",
@@ -3262,7 +3262,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$skipline$3$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_plant$$skipline$3$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant and 3 heat.",
@@ -3296,7 +3296,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": "$ressource_heat$ $ressource_heat$ $ressource_heat$$skipline$$ressource_heat$ $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 5 heat.",
@@ -3330,7 +3330,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
@@ -3359,7 +3359,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$$skipline$$ressource_megacreditvoid_2$",
-            "fr": ""
+            "fr": "$ressource_card$$skipline$$ressource_megacreditvoid_2$"
         },
         "effectText": {
             "en": "During the production phase, you draw a card and this produces 2 MC.",
@@ -3384,7 +3384,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_steel$$ressource_steel$"
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
@@ -3417,7 +3417,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 plants.",
@@ -3457,7 +3457,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$",
-            "fr": ""
+            "fr": "$ressource_card$"
         },
         "effectText": {
             "en": "During the production phase, draw a card.",
@@ -3533,7 +3533,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_4$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_4$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 4 MC.",
@@ -3559,7 +3559,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
@@ -3589,7 +3589,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 plants.",
@@ -3622,7 +3622,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
@@ -3681,7 +3681,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_3$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_3$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 MC.",
@@ -3706,7 +3706,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$$ressource_card$",
-            "fr": ""
+            "fr": "$ressource_card$$ressource_card$"
         },
         "effectText": {
             "en": "During the production phase, draw 2 cards.",
@@ -3741,7 +3741,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
@@ -3779,7 +3779,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$$skipline$$$ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$$skipline$$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC and 2 plants.",
@@ -3816,7 +3816,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_4$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_4$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 4 MC.",
@@ -3850,7 +3850,7 @@
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$",
-            "fr": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$$ressource_titanium$"
+            "fr": "$ressource_megacreditvoid_1$$mix$$ressource_titanium$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC.$skipline$When you play a $tag_space$, you pay 3 MC less for it.",
@@ -3885,7 +3885,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$",
-            "fr": "$ressource_heat$ $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -3920,7 +3920,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$",
-            "fr": ""
+            "fr": "$ressource_card$"
         },
         "effectText": {
             "en": "During the production phase, draw a card.",
@@ -3954,7 +3954,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 6 MC less for it.",
@@ -3980,7 +3980,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
@@ -4014,7 +4014,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$",
-            "fr": "$ressource_heat$ $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -4040,7 +4040,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": "3 $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 3 heat.",
@@ -4065,7 +4065,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
@@ -4104,7 +4104,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$",
-            "fr": "$ressource_heat$ $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -4195,7 +4195,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_3$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_3$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 MC.",
@@ -4221,7 +4221,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$",
-            "fr": "$ressource_heat$ $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 heat.",
@@ -4246,7 +4246,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
@@ -4275,7 +4275,7 @@
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_3$$mix$$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_3$$mix$$ressource_steel$"
         },
         "effectText": {
             "en": "During production, this card produces 3 MC. When you play a building, you pay 2 MC less for it.",
@@ -4300,7 +4300,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$$skipline$$ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC and 2 plants.",
@@ -4326,7 +4326,7 @@
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
             "en": "$ressource_heat$$mix$$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_heat$$mix$$ressource_steel$"
         },
         "effectText": {
             "en": "During production, this card produces 1 heat. When you play a building, you pay 2 MC less for it.",
@@ -4351,7 +4351,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$ / $tag_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$ / $tag_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant for each $tag_plant$ you have.",
@@ -4383,7 +4383,7 @@
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$$mix$$ressource_titanium$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$$mix$$ressource_titanium$$ressource_titanium$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC. When you play a $tag_space$, you pay 6 MC less for it.",
@@ -4406,7 +4406,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$$skipline$$$ressource_plant$$ressource_plant$$ressource_plant$",
-            "fr": "$ressource_megacreditvoid_2$$skipline$$3$ressource_plant$"
+            "fr": "$ressource_megacreditvoid_2$$skipline$$$ressource_plant$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC and 3 plants.",
@@ -4470,7 +4470,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacredit$ / $tag_science$",
-            "fr": ""
+            "fr": "$ressource_megacredit$ / $tag_science$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_science$ you have, including this one.",
@@ -4495,7 +4495,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 mc and 2 heat.",
@@ -4529,7 +4529,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 4 heat.",
@@ -4565,7 +4565,7 @@
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$$mix$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$$mix$$ressource_titanium$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 heat. When you play a $tag_space$, you pay 3 MC less for it.",
@@ -4599,7 +4599,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacredit$ / $tag_building$$tag_building$",
-            "fr": ""
+            "fr": "$ressource_megacredit$ / $tag_building$$tag_building$"
         },
         "effectText": {
             "en": "During the production phase, you produce 1 MC per 2 $tag_building$ you have, including this one.",
@@ -4626,7 +4626,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": "$ressource_plant$ $ressource_plant$$skipline$$ressource_heat$ $ressource_heat$"
+            "fr": "$ressource_plant$$ressource_plant$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 2 plant et 2 heat.",
@@ -4659,7 +4659,7 @@
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
             "en": "$ressource_heat$$mix$$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_heat$$mix$$ressource_steel$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat. When you play a $tag_building$, you pay 2 MC less for it.",
@@ -4685,7 +4685,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": "3 $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 3 heat.",
@@ -4714,7 +4714,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_steel$$ressource_steel$"
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
@@ -4742,7 +4742,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacredit$/$tag_earth$",
-            "fr": ""
+            "fr": "$ressource_megacredit$/$tag_earth$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
@@ -4767,7 +4767,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 4 heat.",
@@ -4789,7 +4789,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 plants.",
@@ -4822,7 +4822,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
@@ -4857,7 +4857,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
@@ -4891,7 +4891,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$$skipline$$ressource_heat$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_heat$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC, 1 plant and 1 heat.",
@@ -4916,7 +4916,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$",
-            "fr": "$ressource_plant$ $ressource_plant$"
+            "fr": "$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 2 plant.",
@@ -4943,7 +4943,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
@@ -4981,7 +4981,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$$skipline$$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_1$$skipline$$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC and 3 heat.",
@@ -5007,7 +5007,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacredit$ / $tag_power$",
-            "fr": ""
+            "fr": "$ressource_megacredit$ / $tag_power$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_power$ you have, including this one.",
@@ -5058,7 +5058,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC and 1 heat.",
@@ -5084,7 +5084,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
@@ -5116,7 +5116,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 heat.",
@@ -5179,7 +5179,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$ / $tag_space$",
-            "fr": "$ressource_heat$/$tag_space$"
+            "fr": "$ressource_heat$ / $tag_space$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat for each $tag_space$ you have, including this one.",
@@ -5256,7 +5256,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": "5 $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 5 heat.",
@@ -5285,7 +5285,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$",
-            "fr": "$ressource_plant$ $ressource_plant$"
+            "fr": "$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 2 plant.",
@@ -5316,7 +5316,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
@@ -5341,7 +5341,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
@@ -5371,7 +5371,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 5 heat.",
@@ -5396,7 +5396,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "Draw a card.\nDuring the production phase, this card produces 2 heat.",
@@ -5422,7 +5422,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, pay 3 MC less for it.",
@@ -5472,7 +5472,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$$ressource_steel$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_steel$$ressource_steel$$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it. When you play a $tag_space$, you pay 3 MC less for it.",
@@ -5505,7 +5505,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_steel$$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it. When you play a $tag_space$, pay 3 MC less for it.",
@@ -5532,7 +5532,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 heat.",
@@ -5557,7 +5557,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, pay 3 MC less for it.",
@@ -5579,7 +5579,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_3$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_3$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 MC.",
@@ -5605,7 +5605,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
@@ -5631,7 +5631,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$",
-            "fr": "2 $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 2 heat.",
@@ -5669,7 +5669,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$$ressource_plant$",
-            "fr": "3 $ressource_plant$"
+            "fr": "$ressource_plant$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 3 plant.",
@@ -5704,7 +5704,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_4$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_4$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 4 MC.",
@@ -5738,7 +5738,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$$skipline$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$$skipline$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC and 1 plant.",
@@ -5824,7 +5824,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacredit$ / $tag_event$",
-            "fr": ""
+            "fr": "$ressource_megacredit$ / $tag_event$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_event$ you have.",
@@ -5912,7 +5912,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$ / $tag_power$",
-            "fr": ""
+            "fr": "$ressource_heat$ / $tag_power$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat for each POWER you have, including this one.",
@@ -5937,7 +5937,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$ / $tag_microbe$",
-            "fr": ""
+            "fr": "$ressource_plant$ / $tag_microbe$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant for each $tag_microbe$ you have, including this one.",
@@ -5968,7 +5968,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacredit$ / $other_forest$",
-            "fr": ""
+            "fr": "$ressource_megacredit$ / $other_forest$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each forest tile you have.",
@@ -5996,7 +5996,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": ">=$ressource_megacreditvoid_20$: $ressource_megacreditvoid_-4$",
-            "fr": ""
+            "fr": ">=$ressource_megacreditvoid_20$: $ressource_megacreditvoid_-4$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card that costs 20 MC or more, you pay 4 MC less for it.",
@@ -6024,7 +6024,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$"
         },
         "effectText": {
             "en": "Increase yout plant production by 1.",
@@ -6061,7 +6061,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "Increase yout heat production by 3.",
@@ -6098,7 +6098,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_steel$"
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
@@ -6135,7 +6135,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_temperature$$other_oxygen$$other_infrastructure$:$skipline$$other_purplesquare$$other_redsquare$$other_yellowsquare$$other_whitesquare$$skipline$$other_arrowtop$$other_arrowbottom$",
-            "fr": ""
+            "fr": "$other_temperature$$other_oxygen$$other_infrastructure$:$skipline$$other_purplesquare$$other_redsquare$$other_yellowsquare$$other_whitesquare$$skipline$$other_arrowtop$$other_arrowbottom$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card with requirements, you can consider oxygen or temperature or infrastructure a higher or lower color. This cannot be combined with other effects.",
@@ -6164,10 +6164,10 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_steel$"
         },
         "effectText": {
-            "en": "When you play a $tag_building$, you pay 2 MC less for it.",
+            "en": "For each $ressource_steel$ you gain, you also gain $other_tr$.",
             "fr": ""
         },
         "effectSummaryType2": "trigger",
@@ -6201,7 +6201,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
@@ -6278,8 +6278,8 @@
             "fr": "$tag_earth$ :$ressource_megacreditvoid_-3$"
         },
         "effectText": {
-            "en": "Effect : When you play an $tag_earth$, you pay 3 MC less.",
-            "fr": "Effet : Lorsque vous jouez un $tag_earth$, le co\u00fbt est r\u00e9duit de 3 MC."
+            "en": "EFFECT: When you play an $tag_earth$, you pay 3 MC less.",
+            "fr": "EFFET: Lorsque vous jouez un $tag_earth$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
         "playedText": {
             "en": "You start with 51MC.",
@@ -6300,7 +6300,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_researchsymbol$: +$other_researchcard$+$ressource_card$",
-            "fr": ""
+            "fr": "$other_researchsymbol$: +$other_researchcard$+$ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you draw cards during the research phase, draw an additional card and keep an additional card.",
@@ -6362,7 +6362,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_tr$:$skipline$$ressource_megacreditvoid_6$: $other_tr$",
-            "fr": ""
+            "fr": "$other_tr$:$skipline$$ressource_megacreditvoid_6$: $other_tr$"
         },
         "effectText": {
             "en": "EFFECT: The first time your terraforming score is increased in each phase, you can pay 6 MC to increase your terraforming score by 1 step.",
@@ -6387,7 +6387,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_ocean$:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$other_ocean$:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "EFFECT: When you flip an ocean tile, gain 2 MC and 2 plants.",
@@ -6415,7 +6415,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_science$: $ressource_card$",
-            "fr": ""
+            "fr": "$tag_science$: $ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_science$, draw 1 card.",
@@ -6443,7 +6443,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_sellcard$: +$ressource_megacreditvoid_1$",
-            "fr": ""
+            "fr": "$other_sellcard$: +$ressource_megacreditvoid_1$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you sell a card, you gain one more MC.",
@@ -6471,7 +6471,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$ressource_megacreditvoid_1$$$$*$ressource_megacreditvoid_1$",
-            "fr": ""
+            "fr": "$other_arrow$$ressource_megacreditvoid_1$$$$*$ressource_megacreditvoid_1$"
         },
         "effectText": {
             "en": "ACTION: Gain 1MC.$$*If you chose the action phase this turn, gain an additional 1MC.",
@@ -6500,7 +6500,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_power$: $ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$tag_power$: $ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_power$ (including this one), gain 2 heats.",
@@ -6531,10 +6531,10 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_upgrade$: $ressource_megacreditvoid_1$",
-            "fr": ""
+            "fr": "$other_upgrade$: $ressource_megacreditvoid_1$"
         },
         "effectText": {
-            "en": "Effect: When you reveal an upgraded phase card during Planification, gain 1 MC.",
+            "en": "EFFECT: When you reveal an upgraded phase card during Planification, gain 1 MC.",
             "fr": ""
         },
         "playedText": {
@@ -6560,10 +6560,10 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$ $ressource_megacreditvoid_2$$skipline$$ressource_megacreditvoid_2$*",
-            "fr": ""
+            "fr": "$other_arrow$ $ressource_megacreditvoid_2$$skipline$$ressource_megacreditvoid_2$*"
         },
         "effectText": {
-            "en": "Action: Gain 2 MC.\n*If you selected an upgraded phase card during this round, gain 2 additional MC.",
+            "en": "ACTION: Gain 2 MC.\n*If you selected an upgraded phase card during this round, gain 2 additional MC.",
             "fr": ""
         },
         "effectSummaryOption": "scalingCostActivation",
@@ -6591,10 +6591,10 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$-$other_tr$: $other_upgrade$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$-$other_tr$: $other_upgrade$"
         },
         "effectText": {
-            "en": "Action: Spend 1 TR to upgrade a phase card.",
+            "en": "ACTION: Spend 1 TR to upgrade a phase card.",
             "fr": ""
         },
         "status": "validated",
@@ -6621,10 +6621,10 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_event$: $ressource_card$",
-            "fr": ""
+            "fr": "$tag_event$: $ressource_card$"
         },
         "effectText": {
-            "en": "Effect: When you play a $tag_event$, draw a card.",
+            "en": "EFFECT: When you play a $tag_event$, draw a card.",
             "fr": ""
         },
         "status": "validated",
@@ -6647,10 +6647,10 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_card$: $ressource_megacreditvoid_-1$",
-            "fr": ""
+            "fr": "$ressource_card$: $ressource_megacreditvoid_-1$"
         },
         "effectText": {
-            "en": "Effect: Whenever you play a card, you pay 1MC less for it.",
+            "en": "EFFECT: Whenever you play a card, you pay 1MC less for it.",
             "fr": ""
         },
         "playedText": {
@@ -6676,10 +6676,10 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$ $ressource_science$$skipline$OR$skipline$-3$ressource_science$: $other_upgrade$",
-            "fr": ""
+            "fr": "$other_arrow$ $ressource_science$$skipline$OU$skipline$-3$ressource_science$: $other_upgrade$"
         },
         "effectText": {
-            "en": "Action: Add 1 $ressource_science$ here, or remove 3 $ressource_science$ from this card to upgrade a phase card.",
+            "en": "ACTION: Add 1 $ressource_science$ here, or remove 3 $ressource_science$ from this card to upgrade a phase card.",
             "fr": ""
         },
         "playedText": {
@@ -6717,10 +6717,10 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$2$ressource_card$ -2$ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$2$ressource_card$ -2$ressource_card$"
         },
         "effectText": {
-            "en": "Action: Draw two card, then discard 2 cards.",
+            "en": "ACTION: Draw two card, then discard 2 cards.",
             "fr": ""
         },
         "playedText": {
@@ -6751,10 +6751,10 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$ $other_upgrade$",
-            "fr": ""
+            "fr": "$other_arrow$ $other_upgrade$"
         },
         "effectText": {
-            "en": "Action: Upgrade a phase card.",
+            "en": "ACTION: Upgrade a phase card.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -6790,10 +6790,10 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_temperature$: $ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$other_temperature$: $ressource_plant$$ressource_plant$"
         },
         "effectText": {
-            "en": "Effect: Whenever you increase temperature, gain 2$ressource_plant$.",
+            "en": "EFFECT: Whenever you increase temperature, gain 2$ressource_plant$.",
             "fr": ""
         },
         "status": "validated",
@@ -6970,7 +6970,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_4$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_4$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 4MC.",
@@ -7022,7 +7022,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_steel$"
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
@@ -7051,7 +7051,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$$skipline$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_card$$skipline$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, draw a card and this card produces 1 plant.",
@@ -7081,7 +7081,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_steel$$ressource_steel$"
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
@@ -7135,7 +7135,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$$skipline$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$$skipline$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2MC and 1 heat.",
@@ -7161,7 +7161,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
@@ -7191,7 +7191,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3MC and 1 plant.",
@@ -7220,7 +7220,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 6MC less for it.",
@@ -7246,7 +7246,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": "4 $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 4 heat.",
@@ -7275,7 +7275,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_1$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1MC.",
@@ -7305,7 +7305,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 3MC less for it.",
@@ -7335,7 +7335,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": "3 $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 3 heat.",
@@ -7365,7 +7365,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 2 heat.",
@@ -7423,7 +7423,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
@@ -7508,7 +7508,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 3 heat.",
@@ -7558,10 +7558,10 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_infrastructure$:$skipline$2$ressource_heat$/2$ressource_plant$",
-            "fr": ""
+            "fr": "$other_infrastructure$:$skipline$2$ressource_heat$/2$ressource_plant$"
         },
         "effectText": {
-            "en": "Effect: When you increase the infrastructure, gain 2 heats or gain 2 plants.",
+            "en": "EFFECT: When you increase the infrastructure, gain 2 heats or gain 2 plants.",
             "fr": ""
         },
         "status": "validated",
@@ -7585,11 +7585,11 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ If 4 $tag_science$",
-            "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ Si 4 $tag_science$"
+            "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-5$ If 4 $tag_science$"
         },
         "effectText": {
-            "en": "Action: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 5 MC if you have 4 $tag_science$ or more.",
-            "fr": "Action: D\u00e9pensez 10 MC pour augmentr l'infrastructure de 1 niveau. Ce Co\u00fbt est r\u00e9duit de 5 MC si vous avez 4 $tag_science$ ou plus."
+            "en": "ACTION: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 5 MC if you have 4 $tag_science$ or more.",
+            "fr": "ACTION: D\u00e9pensez 10 MC pour augmentr l'infrastructure de 1 niveau. Ce Co\u00fbt est r\u00e9duit de 5 MC si vous avez 4 $tag_science$ ou plus."
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -7618,8 +7618,8 @@
             "fr": "$other_arrow$ $ressource_card$$skipline$If $other_infrastructure$ + $ressource_card$"
         },
         "effectText": {
-            "en": "Action: Draw a card.$skipline$If the infrastructure was at the yellow level or higher at the beginning of this phase, draw 1 additional card.",
-            "fr": "Action: Piochez 1 carte.$skipline$Si l'infrastructure \u00e9tait au niveau jaune ou sup\u00e9rieur au d\u00e9but de cette phase, piochez 1 carte suppl\u00e9mentaire."
+            "en": "ACTION: Draw a card.$skipline$If the infrastructure was at the yellow level or higher at the beginning of this phase, draw 1 additional card.",
+            "fr": "ACTION: Piochez 1 carte.$skipline$Si l'infrastructure \u00e9tait au niveau jaune ou sup\u00e9rieur au d\u00e9but de cette phase, piochez 1 carte suppl\u00e9mentaire."
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -7653,8 +7653,8 @@
             "fr": "$other_infrastructure$ : $ressource_animal$"
         },
         "effectText": {
-            "en": "Effect: When you increase the infrastructure, add 1 animal to this card.",
-            "fr": "Effet: Lorsque vous augmentez l'infrastructure, ajoutez 1 animal sur cette carte."
+            "en": "EFFECT: When you increase the infrastructure, add 1 animal to this card.",
+            "fr": "EFFET: Lorsque vous augmentez l'infrastructure, ajoutez 1 animal sur cette carte."
         },
         "stockable": [
             "animal"
@@ -7682,8 +7682,8 @@
             "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_infrastructure$$skipline$$ressource_megacreditvoid_-2$ / $tag_plant$"
         },
         "effectText": {
-            "en": "Action: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 2 MC for each $tag_plant$ you have.",
-            "fr": "Action: D\u00e9pensez 10 MC pour augmenter l'infrastructure de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC pour chaque $tag_plant$ en votre possession."
+            "en": "ACTION: Spend 10 MC to raise the infrastructure 1 step. Reduce its cost by 2 MC for each $tag_plant$ you have.",
+            "fr": "ACTION: D\u00e9pensez 10 MC pour augmenter l'infrastructure de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC pour chaque $tag_plant$ en votre possession."
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -7956,7 +7956,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_2$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2MC.",
@@ -7986,7 +7986,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$$skipline$$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": ""
+            "fr": "$ressource_plant$$ressource_plant$$skipline$$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 plants and 3 heats.",
@@ -8020,7 +8020,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$",
-            "fr": ""
+            "fr": "$ressource_card$"
         },
         "effectText": {
             "en": "During the production phase, draw 1 card.",
@@ -8073,7 +8073,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$$skipline$$ressource_heat$$ressource_heat$$skipline$$ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_card$$skipline$$ressource_heat$$ressource_heat$$skipline$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, you draw a card and this produces 2 heat and 2 plants.",
@@ -8098,7 +8098,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_1$ / $tag_animal$+$tag_plant$",
-            "fr": ""
+            "fr": "$ressource_megacreditvoid_1$ / $tag_animal$+$tag_plant$"
         },
         "effectText": {
             "en": "During the production phase, this produces 1 MC per $tag_animal$ and $tag_plant$ you have, including this.",
@@ -8128,7 +8128,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_microbe$*: $ressource_animal$",
-            "fr": ""
+            "fr": "$ressource_microbe$*: $ressource_animal$"
         },
         "effectText": {
             "en": "EFFECT: When you add any number of microbes to another card, add 1 animal to this card.",
@@ -8164,7 +8164,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_card$ / 3$tag_science$",
-            "fr": "$ressource_card$ / 3 $tag_science$"
+            "fr": "$ressource_card$ / 3$tag_science$"
         },
         "effectText": {
             "en": "During the production phase, draw a card for every 3 $tag_science$ you have, including this.",
@@ -8193,8 +8193,8 @@
             "fr": "$other_discard$ $other_arrow$ $ressource_megacreditvoid_6$"
         },
         "effectText": {
-            "en": "Action: Discard a card in hand to gain 6 MC.",
-            "fr": "Action: D\u00e9faussez une carte de votre main pour gagner 6 MC."
+            "en": "ACTION: Discard a card in hand to gain 6 MC.",
+            "fr": "ACTION: D\u00e9faussez une carte de votre main pour gagner 6 MC."
         },
         "playedText": {
             "en": "Draw 2 cards.",
@@ -8225,7 +8225,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$$ressource_titanium$"
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 6 MC less for it.",
@@ -8255,7 +8255,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_steel$$ressource_steel$"
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
@@ -8284,11 +8284,11 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$ressource_megacreditvoid_10$ $other_arrow$ $other_oxygen$$skipline$$ressource_megacreditvoid_-5$ if 4 $tag_event$",
-            "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_oxygen$ $skipline$ $ressource_megacreditvoid_-5$ si 4 $tag_event$"
+            "fr": "$ressource_megacreditvoid_10$ $other_arrow$ $other_oxygen$$skipline$$ressource_megacreditvoid_-5$ if 4 $tag_event$"
         },
         "effectText": {
-            "en": "Action : Spend 10 MC to raise the oxygen 1 step. Reduce this by 5 MC if you have 4 or more $tag_event$.",
-            "fr": "Action : D\u00e9pensez 10 MC pour augmenter le niveau d'oxyg\u00e8ne de 1. Ce co\u00fbt est r\u00e9duit de 5MC si vous avez 4 $tag_event$ ou plus en jeu."
+            "en": "ACTION: Spend 10 MC to raise the oxygen 1 step. Reduce this by 5 MC if you have 4 or more $tag_event$.",
+            "fr": "ACTION: D\u00e9pensez 10 MC pour augmenter le niveau d'oxyg\u00e8ne de 1. Ce co\u00fbt est r\u00e9duit de 5MC si vous avez 4 $tag_event$ ou plus en jeu."
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -8332,7 +8332,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$ressource_microbe$$skipline$or$skipline$-5$ressource_microbe$:$other_omnicard$$ressource_megacreditvoid_-25$",
-            "fr": ""
+            "fr": "$other_arrow$$ressource_microbe$$skipline$ou$skipline$-5$ressource_microbe$:$other_omnicard$$ressource_megacreditvoid_-25$"
         },
         "effectText": {
             "en": "ACTION: Add a microbe to this card, or remove 5 microbes from this card to play a card from your hand. You pay 25 MC less for it.",
@@ -8372,7 +8372,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$",
-            "fr": ""
+            "fr": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$"
         },
         "effectText": {
             "en": "EFFECT: When you play an ANIMAL or PLANT, including these, add an animal to this card.",
@@ -8403,7 +8403,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$3$other_researchcard$$tag_event$:$skipline$$other_hand$$ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$3$other_researchcard$$tag_event$:$skipline$$other_hand$$ressource_card$"
         },
         "effectText": {
             "en": "ACTION: Reveal the top 3 cards of the deck. Place a card with an EVENT revealed this way into your hand.",
@@ -8435,7 +8435,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_greencard$: $ressource_megacreditvoid_-2$",
-            "fr": ""
+            "fr": "$other_greencard$: $ressource_megacreditvoid_-2$"
         },
         "effectText": {
             "en": "EFFECT: When you play a green card, you pay 2 MC less for it.",
@@ -8463,7 +8463,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_bluecard$: $ressource_megacreditvoid_-3$",
-            "fr": ""
+            "fr": "$other_bluecard$: $ressource_megacreditvoid_-3$"
         },
         "effectText": {
             "en": "EFFECT: When you play a blue card, you pay 3 MC less for it.",
@@ -8491,7 +8491,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_greencard$: +$ressource_card$-$ressource_card$",
-            "fr": ""
+            "fr": "$other_greencard$: +$ressource_card$-$ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you play a green card, draw a card and then discard a card.",
@@ -8526,8 +8526,8 @@
             "fr": "$tag_earth$ : $ressource_microbe$$skipline$$other_researchsymbol$ :$other_researchcard$/$ressource_microbe$"
         },
         "effectText": {
-            "en": "Effect: When you play a $tag_earth$, including this, add a microbe to this card (5 max).$skipline$Effect: When you draw cards during the research phase, draw an additional card for each $ressource_microbe$ on this card.",
-            "fr": "Effet: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$Effet: Lorsque vous piochez des cartes pendant la phase de recherche, piochez une carte suppl\u00e9mentaire pour chaque $ressource_microbe$ sur cette carte."
+            "en": "EFFECT: When you play a $tag_earth$, including this, add a microbe to this card (5 max).$skipline$EFFECT: When you draw cards during the research phase, draw an additional card for each $ressource_microbe$ on this card.",
+            "fr": "EFFET: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$EFFET: Lorsque vous piochez des cartes pendant la phase de recherche, piochez une carte suppl\u00e9mentaire pour chaque $ressource_microbe$ sur cette carte."
         },
         "stockable": [
             "microbe"
@@ -8554,8 +8554,8 @@
             "fr": "$other_arrow$ $ressource_card$$skipline$+ $ressource_card$ / $other_milestone$"
         },
         "effectText": {
-            "en": "Action: Draw a card. Draw 1 additional card for each Objective you have.",
-            "fr": "Action: Piochez 1 carte. Piochez 1 carte suppl\u00e9mentaire pour chaque Objectif en votre possession."
+            "en": "ACTION: Draw a card. Draw 1 additional card for each Objective you have.",
+            "fr": "ACTION: Piochez 1 carte. Piochez 1 carte suppl\u00e9mentaire pour chaque Objectif en votre possession."
         },
         "status": "validated",
         "effectActionTextOption1": {
@@ -8584,8 +8584,8 @@
             "fr": "$ressource_megacreditvoid_14$ $other_arrow$ $other_forest$$skipline$$ressource_megacreditvoid_-4$ / $other_milestone$"
         },
         "effectText": {
-            "en": "Action: Spend 14 MC to take 1 Forest VP and raise the oxygen 1 step. Reduce its cost by 4 MC for each Objective you have.",
-            "fr": "Action: D\u00e9pensez 14 MC pour gagner un PV For\u00eat et augmenter l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 4 MC pour chaque Objectif en votre possession."
+            "en": "ACTION: Spend 14 MC to take 1 Forest VP and raise the oxygen 1 step. Reduce its cost by 4 MC for each Objective you have.",
+            "fr": "ACTION: D\u00e9pensez 14 MC pour gagner un PV For\u00eat et augmenter l'oxyg\u00e8ne de 1 niveau. Ce co\u00fbt est r\u00e9duit de 4 MC pour chaque Objectif en votre possession."
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -8611,7 +8611,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "<=1$tag_wild$: $ressource_megacreditvoid_-3$",
-            "fr": ""
+            "fr": "<=1$tag_wild$: $ressource_megacreditvoid_-3$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card with 1 or fewer tags, you pay 3 MC less for it.",
@@ -8637,7 +8637,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$skipline$$ressource_megacreditvoid_12$:$other_temperature$$skipline$$ressource_megacreditvoid_-2$/$other_upgrade$",
-            "fr": ""
+            "fr": "$other_arrow$$skipline$$ressource_megacreditvoid_12$:$other_temperature$$skipline$$ressource_megacreditvoid_-2$/$other_upgrade$"
         },
         "effectText": {
             "en": "ACTION: Spend 12 MC to raise the temperature. Reduce this by 2 MC for every upgraded phase card you have.",
@@ -8664,7 +8664,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$tag_wild$",
-            "fr": ""
+            "fr": "$other_arrow$$tag_wild$"
         },
         "effectText": {
             "en": "ACTION: Choose a tag not already present on this card and add it to this card. (Max 3.) This counts as playing a tag.",
@@ -8693,10 +8693,10 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_milestone$: $ressource_animal$",
-            "fr": ""
+            "fr": "$other_milestone$: $ressource_animal$"
         },
         "effectText": {
-            "en": "Effect: When you reach a milestone, add an animal to this card.",
+            "en": "EFFECT: When you reach a milestone, add an animal to this card.",
             "fr": ""
         },
         "status": "blocked",
@@ -8757,7 +8757,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_plant$$ressource_plant$$ressource_plant$",
-            "fr": ""
+            "fr": "$ressource_plant$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 plants.",
@@ -8782,7 +8782,7 @@
         "effectSummaryType": "production",
         "effectSummaryText": {
             "en": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$",
-            "fr": "4 $ressource_heat$"
+            "fr": "$ressource_heat$$ressource_heat$$skipline$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
             "en": "During the production phase, this card produce 4 heat.",
@@ -8831,7 +8831,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_upgrade$:$ressource_megacreditvoid_2$",
-            "fr": ""
+            "fr": "$other_upgrade$:$ressource_megacreditvoid_2$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you reveal an upgraded Phase card during planification, gain 2MC.",
@@ -8859,7 +8859,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$",
-            "fr": ""
+            "fr": "$other_arrow$4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$"
         },
         "effectText": {
             "en": "ACTION: Reveal the top 4 cards of the deck.$$Add one to your hand that shares a tag with this corporation.$$Discard the rest.",
@@ -8887,7 +8887,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_milestone$$other_validate$:$$$other_tr$$other_tr$$other_tr$",
-            "fr": ""
+            "fr": "$other_milestone$$other_validate$:$$$other_tr$$other_tr$$other_tr$"
         },
         "effectText": {
             "en": "EFFECT: Whenever you accomplish the marked objective, gain 3 TR.",
@@ -8942,7 +8942,7 @@
             "fr": "$tag_earth$: +$ressource_card$"
         },
         "effectText2": {
-            "en": "Effect: Each time you play a $tag_earth$, draw a card",
+            "en": "EFFECT: Each time you play a $tag_earth$, draw a card",
             "fr": "Effet: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
         },
         "playedText": {
@@ -8967,7 +8967,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_steel$",
-            "fr": ""
+            "fr": "$ressource_steel$"
         },
         "effectText": {
             "en": "Whenever you play a $tag_building$, you pay 2MC less for it.",
@@ -9000,7 +9000,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$",
-            "fr": ""
+            "fr": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card, add a $ressource_science$$skipline$ When you play a $tag_science$, add a $ressource_science$.",
@@ -9023,6 +9023,43 @@
             "science"
         ],
         "startingMegacredits": 10,
+        "status": "filled",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "CF4",
+        "origin": "fanmade",
+        "tagsId": [
+            5
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "Ringcom",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$tag_jovian$: $ressource_titanium$",
+            "fr": "$tag_jovian$: $ressource_titanium$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a $tag_jovian$, increase your $ressource_titanium$ production by 1.",
+            "fr": ""
+        },
+        "effectSummaryType2": "production",
+        "effectSummaryText2": {
+            "en": "$ressource_megacreditvoid_3$",
+            "fr": ""
+        },
+        "effectText2": {
+            "en": "During the production phase, this card produces 3 MC.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "At the start of the game, reveal the top 10 cards of the deck. Take one with $tag_jovian$. Discard the rest.\"",
+            "fr": ""
+        },
+        "startingMegacredits": 32,
         "status": "filled",
         "vpScaling": "0"
     },
@@ -9068,10 +9105,10 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$tag_earth$: $ressource_megacreditvoid_-3$$skipline$$tag_space$$tag_event$: $ressource_megacreditvoid_-6$$ressource_card$",
-            "fr": ""
+            "fr": "$tag_earth$: $ressource_megacreditvoid_-3$$skipline$$tag_space$$tag_event$: $ressource_megacreditvoid_-6$$ressource_card$"
         },
         "effectText": {
-            "en": "EFFECT : When you play an $tag_earth$, you pay 3 MC less.$skipline$EFFECT: When you play an $tag_space$$tag_event$, draw a card.$skipline$EFFECT: When you play an $tag_space$$tag_event$, you pay 6 MC less for it.",
+            "en": "EFFECT : When you play an $tag_earth$, you pay 3 MC less.$skipline$EFFECT: When you play an $tag_space$$tag_event$, you pay 6 MC less for it and draw a card.",
             "fr": ""
         },
         "effectSummaryText2": {
@@ -9101,7 +9138,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_microbe$*: $ressource_megacreditvoid_1$",
-            "fr": ""
+            "fr": "$ressource_microbe$*: $ressource_megacreditvoid_1$"
         },
         "effectText": {
             "en": "EFFECT: When you add any number of microbe to another card, gain 1MC for each microbe added.",
@@ -9129,7 +9166,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_animal$*: $ressource_megacreditvoid_1$",
-            "fr": ""
+            "fr": "$ressource_animal$*: $ressource_megacreditvoid_1$"
         },
         "effectText": {
             "en": "EFFECT: When you add any number of animal to another card, gain 1MC for each animal added.",
@@ -9154,7 +9191,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_steel$:$tag_building$$ressource_megacreditvoid_-1$",
-            "fr": ""
+            "fr": "$ressource_steel$:$tag_building$$ressource_megacreditvoid_-1$"
         },
         "effectText": {
             "en": "EFFECT: Each steel you have reduces the cost of cards by an additional 1 MC.",
@@ -9178,7 +9215,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_titanium$:$tag_space$$ressource_megacreditvoid_-1$",
-            "fr": ""
+            "fr": "$ressource_titanium$:$tag_space$$ressource_megacreditvoid_-1$"
         },
         "effectText": {
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional 1 MC.",
@@ -9275,7 +9312,7 @@
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
             "en": "$ressource_titanium$$ressource_titanium$$ressource_titanium$",
-            "fr": ""
+            "fr": "$ressource_titanium$$ressource_titanium$$ressource_titanium$"
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_space$, you pay 9MC less for it.",
@@ -9330,7 +9367,7 @@
         "effectSummaryType": "action",
         "effectSummaryText": {
             "en": "$other_arrow$$ressource_science$",
-            "fr": ""
+            "fr": "$other_arrow$$ressource_science$"
         },
         "effectText": {
             "en": "ACTION : Add 1$ressource_science$ here per 5 $tag_science$ you have.",
@@ -9353,7 +9390,7 @@
     },
     {
         "card_code": "FM12",
-        "origin": "discovery",
+        "origin": "fanmade",
         "cost": 28,
         "tagsId": [
             0
@@ -9387,6 +9424,65 @@
             "fr": ""
         },
         "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM13",
+        "origin": "fanmade",
+        "cost": 28,
+        "tagsId": [
+            1,
+            5
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "*",
+        "title": {
+            "en": "Ganymede Colony",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "*=1 victory point for each JOVIAN you have.",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_2$",
+            "fr": "$ressource_megacreditvoid_2$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2 MC.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Raise infrastructure 1 step.",
+            "fr": ""
+        },
+        "status": "filled",
+        "vpScaling": "1"
+    },
+    {
+        "card_code": "FM14",
+        "origin": "fanmade",
+        "cost": 13,
+        "tagsId": [
+            1,
+            5
+        ],
+        "cardType": "blueProject",
+        "title": {
+            "en": "Space Relay",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$tag_jovian$:$ressource_megacreditvoid_-5$$skipline$$tag_jovian$:$ressource_card$",
+            "fr": "$tag_jovian$:$ressource_megacreditvoid_-5$$skipline$$tag_jovian$:$ressource_card$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a $tag_jovian$, you pay 5MC less for it and draw a card.",
+            "fr": ""
+        },
+        "status": "filled",
         "vpScaling": "0"
     }
 ]
