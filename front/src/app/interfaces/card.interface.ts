@@ -1,5 +1,5 @@
-import { AdvancedRessourceType } from "../types/global.type"
-import { SummaryType, CardType, PrerequisiteTresholdType, PrerequisiteType } from "../types/project-card.type"
+import { AdvancedRessourceType, SupportedLanguage } from "../types/global.type"
+import { SummaryType, CardType, PrerequisiteTresholdType, PrerequisiteType, LocalizedText } from "../types/project-card.type"
 import { AdvancedRessourceStock } from "./global.interface"
 
 export interface CardState{
@@ -13,8 +13,8 @@ export interface CardState{
 }
 
 export interface PlayableCardEffect {
-	effectSummaryText: string
-	effectText: string
+	effectSummaryText: LocalizedText
+	effectText: LocalizedText
 	effectSummaryType: SummaryType
 	effectAction: string[]
 }
@@ -31,15 +31,15 @@ export interface PlayableCardInterface {
 	prerequisiteTresholdValue?: number
 	phaseUp?: string
 	phaseDown?: string
-	title: string
-	vpText?: string
+	title: LocalizedText
+	vpText?: LocalizedText
 	effectSummaryText?: string
 	effectText?: string
 	cardSummaryType?: SummaryType
 	effects: PlayableCardEffect[]
-	playedText?: string
-	prerequisiteText?: string
-	prerequisiteSummaryText?: string
+	playedText?: LocalizedText
+	prerequisiteText?: LocalizedText
+	prerequisiteSummaryText?: LocalizedText
 	prerequisiteTagId?: number
 	stock?: AdvancedRessourceStock[]
 	stockable?: AdvancedRessourceType[]
@@ -53,9 +53,6 @@ export interface PlayableCardInterface {
 
 	//costMod?: number
 	tagsUrl?: string[]
-
-	//delete
-	description?: string
 }
 export interface CardBuildable {
 	costOk: boolean

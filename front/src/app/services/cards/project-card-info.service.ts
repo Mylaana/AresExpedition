@@ -2,11 +2,10 @@ import { Injectable } from "@angular/core";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
-import { AdvancedRessourceType } from "../../types/global.type";
+import { AdvancedRessourceType, SupportedLanguage } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface";
-
-const language = 'fr'
+import { GameParamService } from "../core-game/game-param.service";
 
 const stockableMap = new Map<string, AdvancedRessourceType>(
     [
@@ -20,12 +19,19 @@ const stockableMap = new Map<string, AdvancedRessourceType>(
     providedIn: 'root'
 })
 export class ProjectCardInfoService {
-	private projectCardInfo: PlayableCardInterface[] = this.loadJson()
+	private projectCardInfo!: PlayableCardInterface[]
+	private language!: SupportedLanguage
+
+	constructor(private gameParam: GameParamService){
+		this.gameParam.currentLanguage.subscribe(l => this.updateLanguage(l))
+		this.projectCardInfo = this.loadJson()
+
+	}
 
 	getCardById(code:string): PlayableCardModel | undefined {
 		let card = this.projectCardInfo.find(x => x.cardCode === code)
 		if(!card){return}
-        return PlayableCardModel.fromInterface(card)
+        return new PlayableCardModel(card)
     }
 
     getProjectCardIdList(): string[] {
@@ -39,7 +45,7 @@ export class ProjectCardInfoService {
 	getAllProjectCard(): PlayableCardModel[]{
 		let result: PlayableCardModel[] = []
 		for(let card of this.projectCardInfo){
-			let cardModel = PlayableCardModel.fromInterface(card)
+			let cardModel = new PlayableCardModel(card)
 			if(cardModel){
 				result.push(cardModel)
 			}
@@ -65,7 +71,7 @@ export class ProjectCardInfoService {
     }
     private loadJson(): PlayableCardInterface[] {
         this.projectCardInfo = []
-        let cardList: PlayableCardModel[] = []
+        let cardList: PlayableCardInterface[] = []
 
         for(let jsonCard of jsonData){
             let card: PlayableCardInterface = {
@@ -74,7 +80,7 @@ export class ProjectCardInfoService {
 				costInitial: jsonCard.cost ?? 0,
 				tagsId: this.convertTagList(jsonCard.tagsId ?? []),
 				cardType: this.convertCardType(jsonCard.cardType),
-				title: this.getLanguageOrFallback(jsonCard.title, language),
+				title: jsonCard.title,
 				effects: this.loadEffects(jsonCard),
 				stockable: this.convertStockable(jsonCard.stockable??[]),
 				status: jsonCard.status,
@@ -84,19 +90,14 @@ export class ProjectCardInfoService {
 			if (jsonCard.vpNumber!='') {card.vpNumber = jsonCard.vpNumber}
 			if (jsonCard.phaseUp) {card.phaseUp = jsonCard.phaseUp}
 			if (jsonCard.phaseDown) {card.phaseDown = jsonCard.phaseDown}
-			if (jsonCard.vpText) {card.vpText = this.getLanguageOrFallback(jsonCard.vpText, language)}
-			if (jsonCard.playedText) {card.playedText = this.getLanguageOrFallback(jsonCard.playedText, language)}
-			if (jsonCard.prerequisiteText) {card.prerequisiteText = this.getLanguageOrFallback(jsonCard.prerequisiteText, language)}
-			if (jsonCard.prerequisiteSummaryText) {card.prerequisiteSummaryText = this.getLanguageOrFallback(jsonCard.prerequisiteSummaryText, language)}
+			if (jsonCard.vpText) {card.vpText = jsonCard.vpText}
+			if (jsonCard.playedText) {card.playedText = jsonCard.playedText}
+			if (jsonCard.prerequisiteText) {card.prerequisiteText = jsonCard.prerequisiteText}
+			if (jsonCard.prerequisiteSummaryText) {card.prerequisiteSummaryText = jsonCard.prerequisiteSummaryText}
 			if (jsonCard.startingMegacredits) {card.startingMegacredits = jsonCard.startingMegacredits}
 			if (jsonCard.effectSummaryOption) {card.effectSummaryOption = jsonCard.effectSummaryOption}
-			let cardModel = PlayableCardModel.fromInterface(card)
-			if(card.stockable){
-				for(let stock of card.stockable){
-					cardModel.setInitialStock(stock)
-				}
-			}
-            cardList.push(cardModel)
+
+            cardList.push(card)
         }
         return cardList
     }
@@ -195,44 +196,40 @@ export class ProjectCardInfoService {
             }
         }
     }
-	getLanguageOrFallback<T extends Record<string, string>>(obj: T | undefined, lang: string, fallbackLang: string = 'en'): string {
-		if (!obj) return '[Missing]'
-		if(obj[lang]===''){
-			return obj['en']
-		}
-		return obj[lang]
-	}
 	private loadEffects(input: any){
 		let effects: PlayableCardEffect[] = []
 		let actionText: string[] = []
 		if(input['effectActionTextOption1']){
-			actionText.push(this.getLanguageOrFallback(input['effectActionTextOption1'], language))
+			actionText.push(input['effectActionTextOption1'])
 		}
 		if(input['effectActionTextOption2']){
-			actionText.push(this.getLanguageOrFallback(input['effectActionTextOption2'], language))
+			actionText.push(input['effectActionTextOption2'])
 		}
 		if(!input['effectText']){return []}
 		effects.push({
-			effectText: this.getLanguageOrFallback(input['effectText'],language),
-			effectSummaryText: this.getLanguageOrFallback(input['effectSummaryText'], language),
-			effectSummaryType: this.convertSummaryType(input['effectSummaryType']),
+			effectText: input['effectText'],
+			effectSummaryText: input['effectSummaryText'],
+			effectSummaryType: input['effectSummaryType'],
 			effectAction: actionText
 		})
 		if(input['effectSummaryType2']){
 			let actionText: string[] = []
 			if(input['effectActionText2Option1']){
-				actionText.push(this.getLanguageOrFallback(input['effectActionText2Option1'], language))
+				actionText.push(input['effectActionText2Option1'])
 			}
 			if(input['effectActionText2Option2']){
-				actionText.push(this.getLanguageOrFallback(input['effectActionText2Option2'], language))
+				actionText.push(input['effectActionText2Option2'])
 			}
 			effects.push({
-				effectText: this.getLanguageOrFallback(input['effectText2'], language),
-				effectSummaryText: this.getLanguageOrFallback(input['effectSummaryText2'], language),
-				effectSummaryType: this.convertSummaryType(input['effectSummaryType2']),
+				effectText: input['effectText2'],
+				effectSummaryText: input['effectSummaryText2'],
+				effectSummaryType: input['effectSummaryType2'],
 				effectAction: actionText
 			})
 		}
 		return effects
+	}
+	private updateLanguage(language: SupportedLanguage){
+		this.language = language
 	}
 }

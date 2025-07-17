@@ -22,7 +22,7 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'upgradePhase'
 | 'routeCreateGame' | 'routeCardOverview' | 'routeBuy' | 'routeHome' | 'routeCreateNewGameValidation'
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'killCard' | 'lockBuilder'
-| 'settingToggleDebug' | 'portalEffect'
+| 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
@@ -32,3 +32,4 @@ export type DrawRule = 'draw' | 'research' | 'scanKeep'
 export type myUUID = string
 export type PlayerColor = undefined | 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'white'
 export type PlayableCardType = 'project' | 'corporation'
+export type SupportedLanguage = 'en' | 'fr'
