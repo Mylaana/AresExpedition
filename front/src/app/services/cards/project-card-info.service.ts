@@ -20,12 +20,9 @@ const stockableMap = new Map<string, AdvancedRessourceType>(
 })
 export class ProjectCardInfoService {
 	private projectCardInfo!: PlayableCardInterface[]
-	private language!: SupportedLanguage
 
-	constructor(private gameParam: GameParamService){
-		this.gameParam.currentLanguage.subscribe(l => this.updateLanguage(l))
+	constructor(){
 		this.projectCardInfo = this.loadJson()
-
 	}
 
 	getCardById(code:string): PlayableCardModel | undefined {
@@ -228,8 +225,5 @@ export class ProjectCardInfoService {
 			})
 		}
 		return effects
-	}
-	private updateLanguage(language: SupportedLanguage){
-		this.language = language
 	}
 }
