@@ -9037,13 +9037,13 @@
             "en": "Ringcom",
             "fr": ""
         },
-        "effectSummaryType": "trigger",
+        "effectSummaryType": "greyProduction",
         "effectSummaryText": {
-            "en": "$tag_jovian$: $ressource_titanium$",
-            "fr": "$tag_jovian$: $ressource_titanium$"
+            "en": "$ressource_titanium$",
+            "fr": "$ressource_titanium$"
         },
         "effectText": {
-            "en": "EFFECT: When you play a $tag_jovian$, increase your $ressource_titanium$ production by 1.",
+            "en": "EFFECT: When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": ""
         },
         "effectSummaryType2": "production",
@@ -9056,10 +9056,10 @@
             "fr": ""
         },
         "playedText": {
-            "en": "At the start of the game, reveal the top 10 cards of the deck. Take one with $tag_jovian$. Discard the rest.\"",
+            "en": "At the start of the game, reveal the top 15 cards of the deck. Take up to two cards with $tag_jovian$. Discard the rest.\"",
             "fr": ""
         },
-        "startingMegacredits": 32,
+        "startingMegacredits": 38,
         "status": "implemented",
         "vpScaling": "0"
     },
@@ -9105,8 +9105,8 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_space$$tag_event$: $ressource_megacreditvoid_-10$$ressource_card$$ressource_card$",
-            "fr": "$tag_space$$tag_event$: $ressource_megacreditvoid_-10$$ressource_card$$ressource_card$"
+            "en": "$tag_space$$tag_event$:$skipline$$ressource_megacreditvoid_-10$$ressource_card$$ressource_card$",
+            "fr": "$tag_space$$tag_event$:$skipline$$ressource_megacreditvoid_-10$$ressource_card$$ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you play an $tag_space$$tag_event$, you pay 10 MC less for it and draw 2 cards.",
@@ -9277,13 +9277,14 @@
     {
         "card_code": "FM9",
         "origin": "fanmade",
-        "cost": 7,
+        "cost": 5,
         "tagsId": [
             2,
             8,
             9
         ],
         "cardType": "redProject",
+        "vpNumber": "1",
         "title": {
             "en": "Bactoviral Research",
             "fr": ""
@@ -9458,7 +9459,7 @@
             "en": "Raise infrastructure 1 step.",
             "fr": ""
         },
-        "status": "filled",
+        "status": "implemented",
         "vpScaling": "1"
     },
     {
@@ -9483,7 +9484,7 @@
             "en": "EFFECT: When you play a $tag_jovian$, you pay 5MC less for it and draw a card.",
             "fr": ""
         },
-        "status": "filled",
+        "status": "implemented",
         "vpScaling": "0"
     }
 ]

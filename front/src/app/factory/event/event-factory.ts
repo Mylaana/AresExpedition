@@ -403,7 +403,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 		}
 		case(DeckQueryOptionsEnum.ringCom):{
 			let event = new EventComplexCardSelector
-            event.title = `Ringcom - Select any number of Jovian cards to add to your hand.`
+            event.title = `Ringcom - Select up to two Jovian cards to add to your hand.`
             event.refreshSelectorOnSwitch = false
             event.cardSelector.selectionQuantityTreshold = 'max'
 			event.cardSelector.selectFrom = cardList

@@ -1567,8 +1567,9 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'CF4': () => [
 		EventFactory.simple.addProduction([
 			{ name: 'megacredit', valueStock: 3 },
+			{ name: 'titanium', valueStock: 1 }
 		]),
-		EventFactory.simple.scanKeep({scan:15, keep:15}, DeckQueryOptionsEnum.ringCom)
+		EventFactory.simple.scanKeep({scan:15, keep:2}, DeckQueryOptionsEnum.ringCom)
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
