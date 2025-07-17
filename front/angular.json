@@ -50,6 +50,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+			  "src/ares_expedition.png",
               "src/assets"
             ],
             "styles": [
