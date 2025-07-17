@@ -1556,6 +1556,13 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.addRessource({name:'heat', valueStock:-5}),
 		EventFactory.simple.upgradePhaseCard(1)
 	],
+	//Ganymede Colony
+	'FM13': () => [
+		EventFactory.simple.addProduction([
+			{ name: 'megacredit', valueStock: 2 },
+		]),
+		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
+	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Earth Catapult
@@ -1584,10 +1591,7 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
 	//Solar Logistics
 	'FM2': (card) => {
-		let total: number = 0
-		if(card.hasTag('earth')){total += 3}
-		if(card.hasTag('space') && card.hasTag('event')){total += 6}
-		return total
+		return card.hasTag('space') && card.hasTag('event')?10:0
 	}
 }
 export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => EventBaseModel[]> = {
