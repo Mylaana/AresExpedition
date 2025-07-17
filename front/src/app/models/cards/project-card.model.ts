@@ -1,13 +1,14 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
-import { AdvancedRessourceType, TagType } from "../../types/global.type"
-import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit} from "../../types/project-card.type"
+import { AdvancedRessourceType, SupportedLanguage, TagType } from "../../types/global.type"
+import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, LocalizedText} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { PlayedCardStocksDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
 import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
 import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
+import { GAME_DEFAULT_LANGUAGE } from "../../global/global-const"
 
-export class PlayableCardModel{
+export class PlayableCardModel {
     cardCode!: string;
     origin!: string;
     costInitial!: number;
@@ -21,14 +22,9 @@ export class PlayableCardModel{
     prerequisiteTresholdValue?: number;
     phaseUp?: string;
     phaseDown?: string;
-    title!: string;
-    vpText?: string;
-	effects: PlayableCardEffect[] = []
+	private effects: PlayableCardEffect[] = []
     effectSummaryText?: string;
     effectText?: string;
-    playedText?: string;
-    prerequisiteText?: string;
-    prerequisiteSummaryText?: string;
     prerequisiteTagId?: number;
 	stock?: AdvancedRessourceStock[];
     stockable?: AdvancedRessourceType[]
@@ -40,15 +36,72 @@ export class PlayableCardModel{
     effectSummaryOption2!: string
 	scalingVp!: boolean
 	tagStock!: number[] // this stores additional tags and wildtags result
-
-    //not loaded from data
-
-    //costMod?: number;
     tagsUrl?: string[];
 
-    //delete
-    description?: string;
+	private static _language: SupportedLanguage = GAME_DEFAULT_LANGUAGE
+	constructor(
+		private raw?: PlayableCardInterface,
+	){
+		if(!raw){return}
+		this.cardCode = raw.cardCode
+		this.origin = raw.origin
+		this.costInitial = raw.costInitial ?? 0
+		this.cost = this.costInitial
+		this.tagsId = raw.tagsId ?? []
+		this.cardSummaryType = raw.cardSummaryType
+		this.cardType = raw.cardType
+		this.vpNumber = raw.vpNumber
+		this.prerequisiteTresholdType = raw.prerequisiteTresholdType
+		this.prerequisiteType = raw.prerequisiteType
+		this.prerequisiteTresholdValue = raw.prerequisiteTresholdValue
+		this.phaseUp = raw.phaseUp
+		this.phaseDown = raw.phaseDown
+		this.effects = raw.effects ?? []
+		this.effectSummaryText = raw.effectSummaryText
+		this.effectText = raw.effectText
+		this.prerequisiteTagId = raw.prerequisiteTagId
+		this.stock = raw.stock ?? []
+		this.stockable = raw.stockable
+		this.activated = 0
+		this.startingMegacredits = raw.startingMegacredits
+		this.status = raw.status
+		this.effectSummaryOption = raw.effectSummaryOption ?? ''
+		this.effectSummaryOption2 = raw.effectSummaryOption2 ?? ''
+		this.scalingVp = raw.scalingVp ?? false
+		this.tagStock = []
+		this.tagsUrl = raw.tagsUrl
+		if(this.stockable){
+			for(let stock of this.stockable){
+				this.setInitialStock(stock)
+			}
+		}
+	}
 
+	static setLanguage(lang: SupportedLanguage) {
+		PlayableCardModel._language = lang;
+	}
+	//Localized getters
+	hasPlayedText(): boolean {return this.hasLocalizedField(this.raw?.playedText)}
+	hasPrerequisiteText(): boolean {return this.hasLocalizedField(this.raw?.prerequisiteText)}
+	getTitle(): string {return this.getLanguageOrFallback(this.raw?.title)}
+	getPlayedText(): string {return this.getLanguageOrFallback(this.raw?.playedText)}
+	getVpText(): string {return this.getLanguageOrFallback(this.raw?.vpText, false)}
+	getEffects(): PlayableCardEffect[] {return this.effects}
+	getEffectText(effect: PlayableCardEffect): string {return this.getLanguageOrFallback(effect.effectText)}
+	getEffectSummaryText(effect: PlayableCardEffect): string {return this.getLanguageOrFallback(effect.effectSummaryText)}
+	getPrerequisiteText(): string {return this.getLanguageOrFallback(this.raw?.prerequisiteText)}
+	getPrerequisiteSummary(): string {return this.getLanguageOrFallback(this.raw?.prerequisiteSummaryText)}
+	getLanguageOrFallback(obj: LocalizedText | undefined, displayMissing: boolean = true, fallbackLang: SupportedLanguage = GAME_DEFAULT_LANGUAGE): string {
+		let result = obj?.[PlayableCardModel._language] || obj?.[fallbackLang]
+		if(result){return result}
+		if(displayMissing){return '[Missing]'}
+		return ''
+	}
+	hasLocalizedField(field?: LocalizedText): boolean {
+		return !!(field?.[PlayableCardModel._language] || field?.[GAME_DEFAULT_LANGUAGE]);
+	}
+
+	//Other
     getCardTriggerLimit(): TriggerLimit | undefined{
         return this.triggerLimit
     }
@@ -184,7 +237,7 @@ export class PlayableCardModel{
 				break
 			}
 			case(ProjectFilterNameEnum.doubleProduction):{
-				return this.title, this.hasSummaryType('production') || this.hasSummaryType('mixedProduction')
+				return this.getTitle(), this.hasSummaryType('production') || this.hasSummaryType('mixedProduction')
 			}
         }
         return false
@@ -240,11 +293,12 @@ export class PlayableCardModel{
 		if(this.tagStock){dto.t = this.tagStock}
 		return dto
 	}
+	/*
 	public static fromInterface(input: PlayableCardInterface): PlayableCardModel {
-		let newCard: PlayableCardModel = Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))
+		let newCard: PlayableCardModel = new PlayableCardModel(input) //Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))
 		newCard.cost = newCard.costInitial
 		return newCard
-	}
+	}*/
 	loadRessourceStockFromJson(stock: AdvancedRessourceStock[]){
 		this.stock = stock
 	}

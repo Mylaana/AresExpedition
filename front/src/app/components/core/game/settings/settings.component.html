@@ -11,6 +11,10 @@
 				<p>Debug:</p>
 				<app-non-event-button [button]="_toggleDebugMode" [shape]="'hex'" [style]="'toggle'" (buttonClicked)="onButtonClicked(_toggleDebugMode)"></app-non-event-button>
 			</div>
+			<div class="wrapper-setting">
+				<p>Language:</p>
+				<app-non-event-button [button]="_toggleLanguage" [shape]="'hex'" [style]="'toggle'" (buttonClicked)="onButtonClicked(_toggleLanguage)"></app-non-event-button>
+			</div>
 		</div>
 	</div>
 	<app-non-event-button class="button-close" [button]="_closeButton" [shape]="'hex'" (buttonClicked)="closeSettingsPannel()"></app-non-event-button>

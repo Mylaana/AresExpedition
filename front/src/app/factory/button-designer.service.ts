@@ -60,6 +60,7 @@ export class ButtonDesigner{
 			//global
 			case('closeSettings'):{startEnabled=true;break}
 			case('settingToggleDebug'):{startEnabled=true;break}
+			case('settingToggleLanguage'):{startEnabled=true;break}
 
 			//router
 			case('routeCreateGame'):{startEnabled=true; break}
@@ -95,6 +96,7 @@ export class ButtonDesigner{
 			//settings
 			case('settings'):{caption='$other_settings$';break}
 			case('settingToggleDebug'):{caption='';break}
+			case('settingToggleLanguage'):{caption='';break}
 
 			case('convertTemperature'):{caption='8$ressource_heat$: $other_temperature$';break}
 			case('convertInfrastructure'):{caption='5$ressource_heat$ + 3$ressource_plant$:$skipline$$other_infrastructure$ + $ressource_card$';break}
