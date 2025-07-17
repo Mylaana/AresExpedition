@@ -19,11 +19,13 @@ export class SettingsComponent {
 	@Output() closeSettings: EventEmitter<any> = new EventEmitter<any>()
 	_closeButton!: NonEventButton
 	_toggleDebugMode!: NonEventButton
+	_toggleLanguage!: NonEventButton
 
 	constructor(private gameParam: GameParamService){}
 	ngOnInit(): void {
 		this._closeButton = ButtonDesigner.createNonEventButton('closeSettings')
 		this._toggleDebugMode = ButtonDesigner.createNonEventButton('settingToggleDebug')
+		this._toggleLanguage = ButtonDesigner.createNonEventButton('settingToggleLanguage')
 	}
 	public closeSettingsPannel(){
 		this.closeSettings.emit()
@@ -32,6 +34,11 @@ export class SettingsComponent {
 		switch(button.name){
 			case('settingToggleDebug'):{
 				this.gameParam.toggleDebug()
+				break
+			}
+			case('settingToggleLanguage'):{
+				this.gameParam.toggleLanguage()
+				break
 			}
 		}
 	}

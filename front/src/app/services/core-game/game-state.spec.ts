@@ -34,7 +34,7 @@ describe('Services - Core game - Game state', () => {
 				providers: [
 					ProjectCardInfoService,
 					PhaseCardInfoService,
-					{ provide: RxStompService, useClass: MockRxStompService }, // << ici
+					{ provide: RxStompService, useClass: MockRxStompService },
 					EventStateService,
 					ProjectCardScalingVPService
 				]

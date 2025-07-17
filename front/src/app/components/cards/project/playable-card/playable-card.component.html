@@ -32,7 +32,7 @@
 				</div>
 				<div class="wrapper-card-element-main">
 					<div class="wrapper-card-element-top">
-						<app-card-title [title]="projectCard.title" [cardType]="projectCard.cardType"></app-card-title>
+						<app-card-title [title]="projectCard.getTitle()" [cardType]="projectCard.cardType"></app-card-title>
 						<app-card-starting-megacredits
 							*ngIf="projectCard.cardType==='corporation'"
 							[startingMegacredits]="projectCard.startingMegacredits??0">
@@ -40,32 +40,32 @@
 					</div>
 					<div class="wrapper-card-element-center">
 						<app-card-prerequisite
-							*ngIf="projectCard.prerequisiteText"
+							*ngIf="projectCard.hasPrerequisiteText()"
 							[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
-							[prerequisiteSummary]="projectCard.prerequisiteSummaryText"
-							[prerequisiteText]="projectCard.prerequisiteText">
+							[prerequisiteSummary]="projectCard.getPrerequisiteSummary()"
+							[prerequisiteText]="projectCard.getPrerequisiteText()">
 						</app-card-prerequisite>
 						<app-card-played-info
-							*ngIf="projectCard.playedText"
-							[playedText]="projectCard.playedText">
+							*ngIf="projectCard.hasPlayedText()"
+							[playedText]="projectCard.getPlayedText()">
 						</app-card-played-info>
 						<app-card-stock
 							*ngIf="projectCard.stockable?.length!=0"
 							[cardStock]="projectCard.stock">
 						</app-card-stock>
 						<app-card-vp
-							*ngIf="projectCard.vpNumber!='' || projectCard.scalingVp===true"
+							*ngIf="projectCard.vpNumber || projectCard.scalingVp===true"
 							[vpNumber]="projectCard.vpNumber??''"
-							[vpDescription]="projectCard.vpText">
+							[vpDescription]="projectCard.getVpText()">
 						</app-card-vp>
 					</div>
 				</div>
 				<div [ngClass]="['wrapper-card-element-bottom', !projectCard.vpNumber?'grow':'']">
-					<ng-container *ngFor="let effect of projectCard.effects">
+					<ng-container *ngFor="let effect of projectCard.getEffects()">
 						<app-card-effect
 							*ngIf="effect"
-							[effectText]="effect.effectText"
-							[effectSummaryText]="effect.effectSummaryText"
+							[effectText]="projectCard.getEffectText(effect)"
+							[effectSummaryText]="projectCard.getEffectSummaryText(effect)"
 							[effectSummaryType]="effect.effectSummaryType">
 						</app-card-effect>
 					</ng-container>
@@ -88,3 +88,4 @@
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>
+<p>{{projectCard.prerequisiteTresholdType}}</p>

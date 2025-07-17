@@ -6,7 +6,6 @@ import traceback
 
 
 parser_columns_map = [
-    {'column_name': 'id', 'column_id': -1 , 'output_field_name': 'id', 'split_per_language': False},
     {'column_name': 'title', 'column_id': -1 , 'output_field_name': '', 'split_per_language': False},
     {'column_name': 'card_code', 'column_id': -1 , 'output_field_name': 'card_code', 'split_per_language': False},
     {'column_name': 'origin', 'column_id': -1 , 'output_field_name': 'origin', 'split_per_language': False},
@@ -60,7 +59,6 @@ parser_columns_map = [
     ]
 
 PARSER_CARD_INFO_MODEL = {
-    "id": 0,
     "card_code": "",
     "origin": "",
     "cost": 0,
@@ -104,6 +102,37 @@ def map_csv_columns(csv_header: str):
             if c['column_name'] == csv_header[column_index]:
                 c['column_id'] = column_index
                 break
+
+def is_empty_dict(input: dict):
+    if not isinstance(input, dict):
+        return False
+    all_empty = True
+    for i in input:
+        if input[i] != '':
+            all_empty = False
+            break
+    return all_empty
+
+
+def remove_unused_fields(input: dict):
+    cleaned_row: dict = {}
+    if not isinstance(input, dict):
+        print('not a dict:')
+        print(input)
+        return input
+
+    for key in input:
+        if input[key] == '':
+            continue
+        if input[key] == 0:
+            continue
+        if is_empty_dict(input[key]):
+            continue
+        if input[key] == []:
+            continue
+        cleaned_row[key] = input[key]
+
+    return cleaned_row
 
 
 def parse_row(csv_row: str):
@@ -156,7 +185,7 @@ def parse_row(csv_row: str):
                 parsed_row[map['output_field_name']] = int(parsed_value)
             case _:
                 parsed_row[map['output_field_name']] = parsed_value
-
+    
     return parsed_row
 
 
@@ -180,7 +209,9 @@ def main():
                 continue
 
             result = parse_row(row)
+
             if result:
+                result = remove_unused_fields(result)
                 parsed.append(copy.deepcopy(result))
 
     with open(os.path.join(output_path, output_name), 'w') as f:
