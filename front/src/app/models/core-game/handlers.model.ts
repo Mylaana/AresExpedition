@@ -207,14 +207,22 @@ export class EventHandler {
 				break
 			}
 			case('scanKeepResult'):{
-				if(event.scanKeepOptions===DeckQueryOptionsEnum.modPro){
-					let card = this.gameStateService.getClientProjectPlayedModelList().filter((el)=>el.cardCode==='P32')[0]
-					if(!card){break}
-					let tag = Utils.toTagType(card.tagsId[0])
-					if(!event.cardSelector.filter){break}
-					event.cardSelector.filter.authorizedTag = [tag]
-					event.title = `Modpro : add one card to hand with an ${tag[0].toUpperCase() + tag.slice(1)} tag`
+				switch(event.scanKeepOptions){
+					case(DeckQueryOptionsEnum.modPro):{
+						let card = this.gameStateService.getClientProjectPlayedModelList().filter((el)=>el.cardCode==='P32')[0]
+						if(!card){break}
+						let tag = Utils.toTagType(card.tagsId[0])
+						if(!event.cardSelector.filter){break}
+						event.cardSelector.filter.authorizedTag = [tag]
+						event.title = `Modpro : add one card to hand with an ${tag[0].toUpperCase() + tag.slice(1)} tag`
+						break
+					}
+					case(DeckQueryOptionsEnum.ringCom):{
+						if(!event.cardSelector.filter){break}
+						event.cardSelector.filter.authorizedTag = ['jovian']
+					}
 				}
+
 			}
 		}
 	}

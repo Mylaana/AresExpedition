@@ -401,6 +401,22 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
 			return event
 		}
+		case(DeckQueryOptionsEnum.ringCom):{
+			let event = new EventComplexCardSelector
+            event.title = `Ringcom - Select any number of Jovian cards to add to your hand.`
+            event.refreshSelectorOnSwitch = false
+            event.cardSelector.selectionQuantityTreshold = 'max'
+			event.cardSelector.selectFrom = cardList
+			event.cardSelector.selectionQuantity = keep
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = true
+			event.scanKeepOptions = options
+			event.cardSelector.filter = {type: ProjectFilterNameEnum.authorizedTag, authorizedTag: authorizedTag}
+			event.waiterId = waiter
+			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			return event
+		}
 		default:{
 			console.error('UNHANDLED SCANKEEP OPTION: ', options)
 			return new EventComplexCardSelector
