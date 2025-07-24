@@ -38,7 +38,7 @@ export enum ProjectFilterNameEnum {
 	green9MCFree = 'green9MCFree',
 	maiNiProductions = 'maiNiProductions',
 	playedDisplayCorpsAndActivable = 'playedDisplayCorpsAndActivable',
-	playedDisplayCorpsAndTriggers = 'playedDisplayCorpsAndTriggers',
+	playedDisplayTriggersAndNonActivableCorps = 'playedDisplayTriggersAndNonActivableCorps',
 	playedDisplayRed = 'playedDisplayRed',
 	developmentPhaseSecondBuilder = 'developmentPhaseSecondBuilder',
 	corporations = 'corporations',
