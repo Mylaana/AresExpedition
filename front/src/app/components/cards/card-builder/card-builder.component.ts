@@ -70,10 +70,6 @@ export class CardBuilderComponent implements OnInit{
 	onAlternativePayButtonClicked(button: NonEventButton){
 		this.alternativePayButtonClicked.emit(button)
 	}
-	getAlternativePayLocked(): boolean {
-		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
-		return !builderEvent.cardBuilder[0].getBuilderIsLocked() && builderEvent.cardBuilder[0] != this.cardBuilder
-	}
 	public updateAlternativeCostButtonsEnabled(){
 		if(this.cardBuilder.getBuilderIsLocked()){return}
 		console.log('calling update')

@@ -1839,6 +1839,6 @@ export const ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS: Partial<Record<NonEventButto
 	'alternativePayRestructuredResources': () => [EventFactory.simple.addRessource({name:'plant', valueStock:-1})]
 }
 export const ALTERNATIVE_PAY_REQUIREMENTS: Partial<Record<NonEventButtonNames, (clientState: PlayerStateModel) => boolean>> ={
-	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>2,
+	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>=2,
 	'alternativePayRestructuredResources': (c) => Checker.isRessourceOk('plant', 1, 'min', c),
 }

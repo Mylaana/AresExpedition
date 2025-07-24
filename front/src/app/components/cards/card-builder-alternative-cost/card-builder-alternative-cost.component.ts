@@ -39,6 +39,9 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges{
 		if(changes['locked'] && changes['locked'].currentValue){
 			this.updateButtonEnabled()
 		}
+		if(changes['event'] && changes['event'].currentValue){
+			this.updateButtonEnabled()
+		}
 	}
 	updateButtonList(){
 		this._buttons = []
@@ -58,9 +61,8 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges{
 		}
 	}
 	private getButtonEnabled(button: NonEventButton): boolean {
-		//if(this.locked){return false}
+		if(this.getAlternativePayLocked()){return false}
 		if(this._used.includes(button.name)){return false}
-		//return true
 		return PlayableCard.prerequisite.canBeAlternativePaid(button.name, this.clientState)
 	}
 	onClientStateUpdate(state: PlayerStateModel){
@@ -89,5 +91,10 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges{
 		}
 		this.updateButtonEnabled()
 		this.buttonClicked.emit(button)
+	}
+	getAlternativePayLocked(): boolean {
+		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
+		if(builderEvent.cardSelector.selectFrom.length===0){return true}
+		return !builderEvent.cardBuilder[0].getBuilderIsLocked() && builderEvent.cardBuilder[0] != this.builder
 	}
 }
