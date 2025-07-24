@@ -6,6 +6,7 @@ import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { AdvancedRessourceType } from "../types/global.type";
 import { GlobalInfo } from "../services/global/global-info.service";
 import { RessourceStock } from "../interfaces/global.interface";
+import { Utils } from "../utils/utils";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
@@ -216,8 +217,13 @@ const S = EventFactory.simple
 	//Saturn Systems
 	function handleTrigger_216(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
-		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===false){return []}
-		return [S.addTR(1)]
+		let tr = 0
+		for(let t of input.tagList){
+			if(Utils.toTagType(t)==='jovian'){
+				tr += 1
+			}
+		}
+		return [S.addTR(tr)]
 	}
 	//Arklight
 	function handleTrigger_P12(trigger: string, input: TriggerInput): EventBaseModel[] {
