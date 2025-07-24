@@ -297,7 +297,7 @@
     },
     {
         "card_code": "11B",
-        "origin": "fanmade",
+        "origin": "base",
         "tagsId": [
             2
         ],
@@ -4684,7 +4684,7 @@
         "phaseUp": "IV, I-II",
         "title": {
             "en": "Micro-Mills",
-            "fr": ""
+            "fr": "Micro-Girouettes"
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
@@ -4693,7 +4693,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat. When you play a $tag_building$, you pay 2 MC less for it.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur. $skipline$ Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -4739,7 +4739,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Mine",
-            "fr": ""
+            "fr": "Mine "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -4748,7 +4748,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez une $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -4767,7 +4767,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Miranda Resort",
-            "fr": ""
+            "fr": "Complexe de Miranda "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -4776,7 +4776,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_earth$ en votre possession, y compris celui-ci."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -4792,7 +4792,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Mohole Area",
-            "fr": ""
+            "fr": "Zone de Mohole "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -4801,7 +4801,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 4 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 4 chaleurs. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -4814,7 +4814,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Monocultures",
-            "fr": ""
+            "fr": "Monocultures "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -4823,15 +4823,15 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 plants.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 plantes. "
         },
         "prerequisiteText": {
             "en": "Spend 1 TR",
-            "fr": ""
+            "fr": "Requiert que vous d\u00e9pensiez 1 NT. "
         },
         "prerequisiteSummaryText": {
             "en": "-$other_tr$",
-            "fr": ""
+            "fr": "-$other_tr$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -4847,7 +4847,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Moss",
-            "fr": ""
+            "fr": "Mousses"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -4856,15 +4856,15 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 plante. "
         },
         "prerequisiteText": {
             "en": "3 Oceans flipped, Spend 1 Plant",
-            "fr": ""
+            "fr": "Requiert que 3 tuiles Oc\u00e9an soient r\u00e9v\u00e9l\u00e9es et que vous d\u00e9pensiez 1 plante. "
         },
         "prerequisiteSummaryText": {
             "en": "3$other_ocean$ -$ressource_plant$",
-            "fr": ""
+            "fr": "3$other_ocean$ -$ressource_plant$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -4882,7 +4882,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Natural Preserve",
-            "fr": ""
+            "fr": "Pr\u00e9servation de la Nature "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -4891,7 +4891,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 MC. "
         },
         "prerequisiteText": {
             "en": "Requires a red or higher oxygen level.",
@@ -4916,7 +4916,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "New Portfolios",
-            "fr": ""
+            "fr": "Nouveaux Portefeuilles "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -4925,7 +4925,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC, 1 plant and 1 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 MC, 1 plante et 1 chaleur. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -4968,7 +4968,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Noctis Farming",
-            "fr": ""
+            "fr": "Ferme de Noctis "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -4977,19 +4977,19 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 plante. "
         },
         "playedText": {
             "en": "Gain 2 plants.",
-            "fr": ""
+            "fr": "Gagnez 2 plantes. "
         },
         "prerequisiteText": {
             "en": "Requires a red temperature level.",
-            "fr": ""
+            "fr": "Requiert un niveau de temp\u00e9rature rouge ou plus chaud. "
         },
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
-            "fr": ""
+            "fr": "$other_temperature$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5006,7 +5006,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Nuclear Plants",
-            "fr": ""
+            "fr": "Centrales Nucl\u00e9aires "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5015,7 +5015,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC and 3 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 mc et 3 chaleurs. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5032,7 +5032,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Power Grid",
-            "fr": ""
+            "fr": "R\u00e9seau Electrique "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5041,7 +5041,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_power$ you have, including this one.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_power$ en votre possession, y compris celui-ci. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5083,7 +5083,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Power Supply Consortium",
-            "fr": ""
+            "fr": "Consortium pour l'Energie "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5092,7 +5092,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC and 1 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 MC et 1 chaleur. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5109,7 +5109,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Protected Valley",
-            "fr": ""
+            "fr": "Vall\u00e9e Prot\u00e9g\u00e9e "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5118,11 +5118,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2MC. "
         },
         "playedText": {
             "en": "Gain a forest tile and increase oxygen by 1 step.",
-            "fr": ""
+            "fr": "Gagnez un PV For\u00eat et augmentez l'oxyg\u00e8ne de 1 niveau. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5141,7 +5141,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Quantum Extractor",
-            "fr": ""
+            "fr": "Extraction Quantique "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5150,15 +5150,15 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 chaleurs. "
         },
         "prerequisiteText": {
             "en": "Requires 3 $tag_science$.",
-            "fr": "3 $tag_science$."
+            "fr": "Requiert 3 $tag_science$."
         },
         "prerequisiteSummaryText": {
             "en": "3$tag_science$.",
-            "fr": ""
+            "fr": "3$tag_science$."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5171,7 +5171,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Rad Suits",
-            "fr": ""
+            "fr": "Combinaisons Antiradiations "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5180,7 +5180,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 MC. "
         },
         "prerequisiteText": {
             "en": "Requires 2 Oceans flipped.",
@@ -5310,7 +5310,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Soil Warming",
-            "fr": "R\u00e9chauffements des Sols"
+            "fr": "R\u00e9chauffements des Sols "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5341,7 +5341,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Solar Power",
-            "fr": ""
+            "fr": "Energie Solaire "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5350,7 +5350,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5366,7 +5366,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Solar Trapping",
-            "fr": ""
+            "fr": "Pi\u00e8ges Solaires "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5375,11 +5375,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur. "
         },
         "playedText": {
             "en": "Draw a card and gain 3 heat.",
-            "fr": ""
+            "fr": "Piochez une carte et gagnez 3 chaleurs. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5396,7 +5396,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Soletta",
-            "fr": ""
+            "fr": "Soletta "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5405,7 +5405,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 5 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 5 chaleurs. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5421,7 +5421,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Space Heaters",
-            "fr": ""
+            "fr": "Miroirs Spatiaux "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5430,7 +5430,11 @@
         },
         "effectText": {
             "en": "Draw a card.\nDuring the production phase, this card produces 2 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 chaleurs. "
+        },
+        "playedText": {
+            "en": "Draw a card.",
+            "fr": "Piochez une carte "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5447,7 +5451,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Space Station",
-            "fr": ""
+            "fr": "Station Spatiale "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -5456,7 +5460,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_space$, pay 3 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_space$ , le co\u00fbt associ\u00e9 est r\u00e9duit de 3 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5497,7 +5501,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Strip Mine",
-            "fr": ""
+            "fr": "Mine \u00e0 Ciel Ouvert "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -7215,7 +7219,7 @@
     },
     {
         "card_code": "D29B",
-        "origin": "fanmade",
+        "origin": "discovery",
         "cost": 28,
         "tagsId": [
             0
