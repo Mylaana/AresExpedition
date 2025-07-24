@@ -156,7 +156,13 @@ const S = EventFactory.simple
 	//Mars University
 	function handleTrigger_40(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
-		return [S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity)]
+		let events: EventBaseModel[] = []
+		for(let t of input.tagList){
+			if(Utils.toTagType(t)==='science'){
+				events.push(S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity))
+			}
+		}
+		return events
 	}
 	//Olympus Conference
 	function handleTrigger_44(trigger: string, input: TriggerInput): EventBaseModel[] {
