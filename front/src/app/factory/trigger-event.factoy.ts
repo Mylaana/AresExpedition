@@ -82,7 +82,11 @@ const S = EventFactory.simple
 	function handleTrigger_F04(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
 		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
-		return [S.effectPortal(EffectPortalEnum.cargoShips)]
+		let events: EventBaseModel[] = []
+		for(let i=0; i<input.increasedParameterValue; i++){
+			events.push(S.effectPortal(EffectPortalEnum.cargoShips))
+		}
+		return events
 	}
 	//Pets
 	function handleTrigger_F07(trigger: string, input: TriggerInput): EventBaseModel[] {
