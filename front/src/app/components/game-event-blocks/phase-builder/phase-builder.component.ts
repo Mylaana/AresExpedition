@@ -6,6 +6,7 @@ import { PlayableCardListComponent } from '../../cards/project/playable-card-lis
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { fadeIn } from '../../../animations/animations';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
+import { NonEventButton } from '../../../models/core-game/button.model';
 
 @Component({
   selector: 'app-phase-builder',
@@ -34,5 +35,8 @@ export class PhaseBuilderComponent{
 	public onUpdateSelectedCardList(output: any){
 		this.updateSelectedCardList.emit(output)
 		this.cardListSelector.updateCardList()
+	}
+	public onAlternativePayButtonClicked(button: NonEventButton){
+		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
 	}
 }

@@ -97,6 +97,17 @@ const S = EventFactory.simple
 	}
 
 //ON_TAG_GAINED
+	//Anaerobic Mircroorganisms
+	function handleTrigger_5(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
+		let triggerred: number = 0
+		/*
+		let card = clientState?.getProjectPlayedModelFromId(trigger)
+		if(!card){return []}*/
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
+		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
+		return [S.addRessourceToCardId({name:'microbe', valueStock:triggerred}, trigger)]
+	}
 	//Decomposers
 	function handleTrigger_19(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
 		let triggerred: number = 0
@@ -339,6 +350,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'P17': handleTrigger_P17
 	},
 	ON_TAG_GAINED: {
+		'5': handleTrigger_5,
 		'19': handleTrigger_19,
 		'24': handleTrigger_24,
 		'25': handleTrigger_25,

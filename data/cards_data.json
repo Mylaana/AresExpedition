@@ -143,7 +143,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "blocked",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -1605,7 +1605,7 @@
             "en": "EFFECT: When you play a card, you can spend 1 plant to reduce the cost of the card by 5 MC.",
             "fr": ""
         },
-        "status": "blocked",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {
