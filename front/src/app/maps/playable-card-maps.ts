@@ -1135,7 +1135,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Soletta
 	'187': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 5 })],
 	//Space Heaters
-	'188': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 })],
+	'188': () => [
+		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 }),
+		EventFactory.simple.draw(1)
+	],
 	//Space Station
 	'189': () => [EventFactory.simple.addProduction({ name: 'titanium', valueStock: 1 })],
 	//Sponsor
