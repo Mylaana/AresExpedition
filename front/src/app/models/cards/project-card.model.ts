@@ -211,8 +211,9 @@ export class PlayableCardModel {
 				if(this.hasSummaryType('action')){return true}
 				break
 			}
-			case(ProjectFilterNameEnum.playedDisplayCorpsAndTriggers):{
+			case(ProjectFilterNameEnum.playedDisplayTriggersAndNonActivableCorps):{
 				if(this.hasSummaryType('trigger')){return true}
+				if(this.hasSummaryType('action')===false && this.cardType==='corporation'){return true}
 				break
 			}
 			case(ProjectFilterNameEnum.playedDisplayRed):{

@@ -9008,22 +9008,13 @@
             "en": "Ringcom",
             "fr": ""
         },
-        "effectSummaryType": "greyProduction",
+        "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
-            "en": "$ressource_titanium$",
-            "fr": "$ressource_titanium$"
+            "en": "$ressource_megacreditvoid_3$$mix$$ressource_titanium$",
+            "fr": "$ressource_megacreditvoid_3$$mix$$ressource_titanium$"
         },
         "effectText": {
-            "en": "EFFECT: When you play a $tag_space$, you pay 3 MC less for it.",
-            "fr": ""
-        },
-        "effectSummaryType2": "production",
-        "effectSummaryText2": {
-            "en": "$ressource_megacreditvoid_3$",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "During the production phase, this card produces 3 MC.",
+            "en": "During the production phase, this card produces 3 MC.$skipline$When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": ""
         },
         "playedText": {
@@ -9174,8 +9165,8 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_animal$*: $ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$",
-            "fr": "$ressource_animal$*: $ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$"
+            "en": "$ressource_animal$*:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$",
+            "fr": "$ressource_animal$*:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "EFFECT: When you add any number of animal to another card, gain 2MC and 2 plants for each animal added.",
