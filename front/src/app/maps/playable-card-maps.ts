@@ -26,7 +26,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'P11', //Self Replicating Bacteria
 ]
 export const ACTIVATION_NO_COST: string[] = [
-	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D03B', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32'
+	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32'
 ]
 export const ALTERNATIVE_PAY_TRIGGER_LIST: string[] = [
 	'5', '52'
