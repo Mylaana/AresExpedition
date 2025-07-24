@@ -26,7 +26,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'P11', //Self Replicating Bacteria
 ]
 export const ACTIVATION_NO_COST: string[] = [
-	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'CF5'
+	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32'
 ]
 export const ALTERNATIVE_PAY_TRIGGER_LIST: string[] = [
 	'5', '52'
@@ -181,6 +181,10 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'D03': (card, clientState) => [
 		EventFactory.simple.addRessource({name:'megacredit',valueStock:getScaling(card, clientState)})
 	],
+	//Hyperion Systems V2
+	'D03B': (card, clientState) => [
+		EventFactory.simple.addRessource({name:'megacredit', valueStock:1})
+	],
 	//Drone Assisted Construction
 	//Will give 4MC if phase 3 is selected by owner and is then upgraded during phase3 itself
 	'D06': (card, clientState) => [
@@ -260,10 +264,6 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Modpro
 	'P32': () => [
 		EventFactory.simple.scanKeep({scan:4, keep:1}, DeckQueryOptionsEnum.modPro)
-	],
-	//Hyperion Systems V2
-	'CF5': (card, clientState) => [
-		EventFactory.simple.addRessource({name:'megacredit', valueStock:1})
 	],
 }
 export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
@@ -440,6 +440,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'6':  (s) => Checker.isTagOk('science', 5, 'min', s),
 	//Arctic Algae
 	'8':  (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	//Asset Liquidation V2
+	'11B': (s) => Checker.isTrOk(1, 'min', s),
 	//Birds
 	'12': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.white, 'min', s),
 	//Caretaker Contract
@@ -589,14 +591,12 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'D17': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
 	//Private Investor Beach
 	'D19': (s) => Checker.isMilestoneOk(1, 'min', s),
+	//Hematite Mining V2
+	'D29B': (s) => Checker.isRessourceOk('heat', 5, 'min', s),
 	//Filter Feeders
 	'P04': (s) => Checker.isOceanOk(2, 'min', s),
-	//Asset Liquidation V2
-	'FM1': (s) => Checker.isTrOk(1, 'min', s),
 	//Mercurian Alloys
 	'FM6': (s) => Checker.isTagOk('science', 2, 'min', s),
-	//Hematite Mining V2
-	'FM12': (s) => Checker.isRessourceOk('heat', 5, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -616,6 +616,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	},
 	//Assets Liquidation
 	'11': () => [EventFactory.simple.specialBuilder(BuilderOption.assetLiquidation)],
+	//Asset Liquidation v2
+	'11B': () => [
+		EventFactory.simple.addTR(-1),
+		EventFactory.simple.draw(3),
+		EventFactory.simple.specialBuilder(BuilderOption.assetLiquidation)
+	],
 	//Composting Factory
 	'17': (state) => {
 		state.addSellCardValueMod(1)
@@ -1129,7 +1135,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Soletta
 	'187': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 5 })],
 	//Space Heaters
-	'188': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 })],
+	'188': () => [
+		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 }),
+		EventFactory.simple.draw(1)
+	],
 	//Space Station
 	'189': () => [EventFactory.simple.addProduction({ name: 'titanium', valueStock: 1 })],
 	//Sponsor
@@ -1211,8 +1220,17 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		clientState.addSellCardValueMod(1)
 		return [EventFactory.simple.upgradePhaseCard(1, [4])]
 	},
+	//Exocorp v2
+	'D02B': (clientState) => {
+		clientState.addSellCardValueMod(1)
+		return [EventFactory.simple.upgradePhaseCard(1, [4])]
+	},
 	//Hyperion Systems
 	'D03': () => {
+		return [EventFactory.simple.upgradePhaseCard(1, [2])]
+	},
+	//Hyperion Systems v2
+	'D03B': () => {
 		return [EventFactory.simple.upgradePhaseCard(1, [2])]
 	},
 	//Sultira
@@ -1298,12 +1316,22 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		]),
 		EventFactory.simple.upgradePhaseCard(1)
 	],
+	//Hematite Mining V2
+	'D29B': () => [
+		EventFactory.simple.addProduction([
+			{ name: 'card', valueStock: 2 },
+			{ name: 'steel', valueStock: 1 }
+		]),
+		EventFactory.simple.addRessource({name:'heat', valueStock:-5}),
+		EventFactory.simple.upgradePhaseCard(1)
+	],
 	//Hydroponic Gardens
 	'D30': () => [
 		EventFactory.simple.addProduction([{name:'megacredit', valueStock:3},{name:'plant', valueStock:1}]),
 		EventFactory.simple.upgradePhaseCard(1),
 	],
 	//Ilmenite Deposits
+
 	'D31': () => [EventFactory.simple.addProduction({name:'titanium', valueStock:2})],
 	//Industrial Complex
 	'D32': () => [
@@ -1524,12 +1552,6 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'CF1': () => [
 		EventFactory.simple.addProduction({name:'titanium', valueStock:1})
 	],
-	//Asset Liquidation v2
-	'FM1': () => [
-		EventFactory.simple.addTR(-1),
-		EventFactory.simple.draw(3),
-		EventFactory.simple.specialBuilder(BuilderOption.assetLiquidation)
-	],
 	//Topsoil Contract
 	'FM3': () => [EventFactory.simple.addRessource({name:'plant', valueStock:3})],
 	//Rego Plastics
@@ -1558,15 +1580,6 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'FM10': (state) => [
 		EventFactory.simple.addProduction({name:'titanium', valueStock:3}),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
-	],
-	//Hematite Mining V2
-	'FM12': () => [
-		EventFactory.simple.addProduction([
-			{ name: 'card', valueStock: 2 },
-			{ name: 'steel', valueStock: 1 }
-		]),
-		EventFactory.simple.addRessource({name:'heat', valueStock:-5}),
-		EventFactory.simple.upgradePhaseCard(1)
 	],
 	//Ganymede Colony
 	'FM13': () => [
@@ -1806,6 +1819,14 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'P03': (s)=> [{name:'megacredit', valueStock:(s.getTagsOfType('animal') + s.getTagsOfType('plant'))}],
 	//Laboratories
 	'P05': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('science') /3)}],
+	//Meat Industries
+	'FM4': (s)=> {
+		let total: number = 1
+		for(let c of s.getPlayedListWithStockableTypes('animal')){
+			total += c.getStockValue('animal')
+		}
+		return [{name:'megacredit',	valueStock:Math.floor(total/2)}]
+	},
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms
@@ -1818,6 +1839,6 @@ export const ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS: Partial<Record<NonEventButto
 	'alternativePayRestructuredResources': () => [EventFactory.simple.addRessource({name:'plant', valueStock:-1})]
 }
 export const ALTERNATIVE_PAY_REQUIREMENTS: Partial<Record<NonEventButtonNames, (clientState: PlayerStateModel) => boolean>> ={
-	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>2,
+	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>=2,
 	'alternativePayRestructuredResources': (c) => Checker.isRessourceOk('plant', 1, 'min', c),
 }

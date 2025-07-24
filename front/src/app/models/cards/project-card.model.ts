@@ -212,7 +212,7 @@ export class PlayableCardModel {
 				break
 			}
 			case(ProjectFilterNameEnum.playedDisplayTriggersAndNonActivableCorps):{
-				if(this.hasSummaryType('trigger')){return true}
+				if(this.hasSummaryType('trigger') && this.hasSummaryType('action')===false){return true}
 				if(this.hasSummaryType('action')===false && this.cardType==='corporation'){return true}
 				break
 			}

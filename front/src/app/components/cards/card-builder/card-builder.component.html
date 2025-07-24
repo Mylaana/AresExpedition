@@ -43,7 +43,6 @@
 		*ngIf="!cardBuilder.getBuilderIsLocked()"
 		[event]="event"
 		[builder]="cardBuilder"
-		[locked]="getAlternativePayLocked()"
 		(buttonClicked)="onAlternativePayButtonClicked($event)">
 	</app-card-builder-alternative-cost>
 </div>

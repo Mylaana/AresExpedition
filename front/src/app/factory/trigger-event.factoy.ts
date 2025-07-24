@@ -6,6 +6,7 @@ import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { AdvancedRessourceType } from "../types/global.type";
 import { GlobalInfo } from "../services/global/global-info.service";
 import { RessourceStock } from "../interfaces/global.interface";
+import { Utils } from "../utils/utils";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
@@ -81,7 +82,11 @@ const S = EventFactory.simple
 	function handleTrigger_F04(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.infrastructure){return []}
 		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
-		return [S.effectPortal(EffectPortalEnum.cargoShips)]
+		let events: EventBaseModel[] = []
+		for(let i=0; i<input.increasedParameterValue; i++){
+			events.push(S.effectPortal(EffectPortalEnum.cargoShips))
+		}
+		return events
 	}
 	//Pets
 	function handleTrigger_F07(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -155,7 +160,13 @@ const S = EventFactory.simple
 	//Mars University
 	function handleTrigger_40(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
-		return [S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity)]
+		let events: EventBaseModel[] = []
+		for(let t of input.tagList){
+			if(Utils.toTagType(t)==='science'){
+				events.push(S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity))
+			}
+		}
+		return events
 	}
 	//Olympus Conference
 	function handleTrigger_44(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -216,8 +227,13 @@ const S = EventFactory.simple
 	//Saturn Systems
 	function handleTrigger_216(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
-		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===false){return []}
-		return [S.addTR(1)]
+		let tr = 0
+		for(let t of input.tagList){
+			if(Utils.toTagType(t)==='jovian'){
+				tr += 1
+			}
+		}
+		return [S.addTR(tr)]
 	}
 	//Arklight
 	function handleTrigger_P12(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -277,14 +293,6 @@ const S = EventFactory.simple
 		if(input.ressourceAdded!='microbe'){return []}
 		return [S.addRessource({name:"megacredit", valueStock:1})]
 	}
-	//Meat Industry
-	function handleTrigger_FM4(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.ressourceAdded!='animal'){return []}
-		return [
-			S.addRessource({name:"megacredit", valueStock:2}),
-			S.addRessource({name:"plant", valueStock:2})
-		]
-	}
 
 
 //ON_CARD_ACTIVATED
@@ -293,8 +301,8 @@ const S = EventFactory.simple
 		return [S.addRessource({name:"megacredit", valueStock:1})]
 	}
 	//Hyperion systems v2
-	function handleTrigger_CF5(trigger: string, input: TriggerInput): EventBaseModel[] {
-		return [S.addRessource({name:"megacredit", valueStock:2})]
+	function handleTrigger_D03B(trigger: string, input: TriggerInput): EventBaseModel[] {
+		return [S.addRessource({name:"megacredit", valueStock:1})]
 	}
 
 //ON_FOREST_GAINED
@@ -374,11 +382,10 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'P04': handleTrigger_P04,
 		'P19': handleTrigger_P19_OnRessourceAdded,
 		'FM3': handleTrigger_FM3,
-		'FM4': handleTrigger_FM4
 	},
 	ON_CARD_ACTIVATED: {
 		'10': handleTrigger_10,
-		'CF5': handleTrigger_CF5
+		'D03B': handleTrigger_D03B
 	},
 	ON_FOREST_GAINED: {
 		'53': handleTrigger_53
