@@ -269,7 +269,10 @@ const S = EventFactory.simple
 	//Meat Industry
 	function handleTrigger_FM4(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.ressourceAdded!='animal'){return []}
-		return [S.addRessource({name:"megacredit", valueStock:1})]
+		return [
+			S.addRessource({name:"megacredit", valueStock:2}),
+			S.addRessource({name:"plant", valueStock:2})
+		]
 	}
 
 
@@ -277,6 +280,10 @@ const S = EventFactory.simple
 	//Assembly Lines
 	function handleTrigger_10(trigger: string, input: TriggerInput): EventBaseModel[] {
 		return [S.addRessource({name:"megacredit", valueStock:1})]
+	}
+	//Hyperion systems v2
+	function handleTrigger_CF5(trigger: string, input: TriggerInput): EventBaseModel[] {
+		return [S.addRessource({name:"megacredit", valueStock:2})]
 	}
 
 //ON_FOREST_GAINED
@@ -358,7 +365,8 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'FM4': handleTrigger_FM4
 	},
 	ON_CARD_ACTIVATED: {
-		'10': handleTrigger_10
+		'10': handleTrigger_10,
+		'CF5': handleTrigger_CF5
 	},
 	ON_FOREST_GAINED: {
 		'53': handleTrigger_53

@@ -24,7 +24,9 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
-export const ACTIVATION_NO_COST: string[] = ['3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32']
+export const ACTIVATION_NO_COST: string[] = [
+	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'CF5'
+]
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -254,7 +256,11 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Modpro
 	'P32': () => [
 		EventFactory.simple.scanKeep({scan:4, keep:1}, DeckQueryOptionsEnum.modPro)
-	]
+	],
+	//Hyperion Systems V2
+	'CF5': (card, clientState) => [
+		EventFactory.simple.addRessource({name:'megacredit', valueStock:1})
+	],
 }
 export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
 	//Aquifer Pumping

@@ -6458,35 +6458,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "D03",
-        "origin": "discovery",
-        "tagsId": [
-            4
-        ],
-        "cardType": "corporation",
-        "title": {
-            "en": "Hyperion Systems",
-            "fr": ""
-        },
-        "effectSummaryType": "action",
-        "effectSummaryText": {
-            "en": "$other_arrow$$ressource_megacreditvoid_1$$$$*$ressource_megacreditvoid_1$",
-            "fr": "$other_arrow$$ressource_megacreditvoid_1$$$$*$ressource_megacreditvoid_1$"
-        },
-        "effectText": {
-            "en": "ACTION: Gain 1MC.$$*If you chose the action phase this turn, gain an additional 1MC.",
-            "fr": ""
-        },
-        "effectSummaryOption": "scalingCostActivation",
-        "playedText": {
-            "en": "Upgrade your Phase card III.",
-            "fr": ""
-        },
-        "startingMegacredits": 30,
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "D04",
         "origin": "discovery",
         "tagsId": [
@@ -8938,8 +8909,8 @@
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
-            "en": "$tag_earth$: +$ressource_card$",
-            "fr": "$tag_earth$: +$ressource_card$"
+            "en": "$tag_earth$: $ressource_card$",
+            "fr": "$tag_earth$: $ressource_card$"
         },
         "effectText2": {
             "en": "EFFECT: Each time you play a $tag_earth$, draw a card",
@@ -9064,6 +9035,43 @@
         "vpScaling": "0"
     },
     {
+        "card_code": "CF5",
+        "origin": "discovery",
+        "tagsId": [
+            4
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "Hyperion Systems V2",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "\"$other_arrow$\": $ressource_megacreditvoid_2$",
+            "fr": "\"$other_arrow$\": $ressource_megacreditvoid_2$"
+        },
+        "effectText": {
+            "en": "EFFECT: Whenever you use an \"ACTION:\" from one of your cards, gain 2 MC.",
+            "fr": ""
+        },
+        "effectSummaryType2": "action",
+        "effectSummaryText2": {
+            "en": "$other_arrow$$ressource_megacreditvoid_1$",
+            "fr": "$other_arrow$$ressource_megacreditvoid_1$"
+        },
+        "effectText2": {
+            "en": "ACTION: Gain 1MC.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Upgrade your Phase card III.",
+            "fr": ""
+        },
+        "startingMegacredits": 30,
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
         "card_code": "FM1",
         "origin": "fanmade",
         "tagsId": [
@@ -9166,11 +9174,11 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_animal$*: $ressource_megacreditvoid_1$",
-            "fr": "$ressource_animal$*: $ressource_megacreditvoid_1$"
+            "en": "$ressource_animal$*: $ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$",
+            "fr": "$ressource_animal$*: $ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
-            "en": "EFFECT: When you add any number of animal to another card, gain 1MC for each animal added.",
+            "en": "EFFECT: When you add any number of animal to another card, gain 2MC and 2 plants for each animal added.",
             "fr": ""
         },
         "status": "implemented",
