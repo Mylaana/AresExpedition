@@ -10,6 +10,7 @@ import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
 import { GAME_TAG_LIST } from "../global/global-const";
 import { Utils } from "../utils/utils";
+import { NonEventButtonNames } from "../types/global.type";
 
 
 function getScaling(cardCode: string, clientState: PlayerStateModel){
@@ -26,6 +27,9 @@ export const ACTIVATION_DOUBLE: string[] = [
 ]
 export const ACTIVATION_NO_COST: string[] = [
 	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D06', 'D07', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'CF5'
+]
+export const ALTERNATIVE_PAY_TRIGGER_LIST: string[] = [
+	'5', '52'
 ]
 
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
@@ -1802,4 +1806,18 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'P03': (s)=> [{name:'megacredit', valueStock:(s.getTagsOfType('animal') + s.getTagsOfType('plant'))}],
 	//Laboratories
 	'P05': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('science') /3)}],
+}
+export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
+	//Anaerobic Microorganisms
+	'5': () => 'alternativePayAnaerobicMicroorganisms',
+		//Anaerobic Microorganisms
+	'52': () => 'alternativePayRestructuredResources'
+}
+export const ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS: Partial<Record<NonEventButtonNames, () => EventBaseModel[]>> ={
+	'alternativePayAnaerobicMicroorganisms': () => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:-2}, '5')],
+	'alternativePayRestructuredResources': () => [EventFactory.simple.addRessource({name:'plant', valueStock:-1})]
+}
+export const ALTERNATIVE_PAY_REQUIREMENTS: Partial<Record<NonEventButtonNames, (clientState: PlayerStateModel) => boolean>> ={
+	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>2,
+	'alternativePayRestructuredResources': (c) => Checker.isRessourceOk('plant', 1, 'min', c),
 }

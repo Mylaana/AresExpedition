@@ -41,6 +41,7 @@ export class ButtonDesigner{
 			case('displayUpgradedPhaseCancel'):{startEnabled=true;break}
 			case('killCard'):{startEnabled=true;break}
 			case('lockBuilder'):{startEnabled=true;break}
+			case('alternativePayAnaerobicMicroorganisms'):{startEnabled=true; break}
 
 
 			case('buyForest'):{startEnabled=true;break}
@@ -91,6 +92,8 @@ export class ButtonDesigner{
 			case('displayUpgradedPhaseCancel'):{caption='other_cancel';break}
 			case('killCard'):{caption='kill cards';break}
 			case('lockBuilder'):{caption='$other_cancel$';break}
+			case('alternativePayAnaerobicMicroorganisms'):{caption='$ressource_microbe$$ressource_microbe$: -10$ressource_megacredit$';break}
+			case('alternativePayRestructuredResources'):{caption='$ressource_plant$: -5$ressource_megacredit$';break}
 
 
 			//settings

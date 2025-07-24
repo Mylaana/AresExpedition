@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventBaseModel, EventCardBuilder, CardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../project/playable-card-list/playable-card-list.component';
@@ -6,8 +6,8 @@ import { EventCardBuilderButton, NonEventButton } from '../../../models/core-gam
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
 import { ProjectFilter } from '../../../interfaces/global.interface';
 import { BuilderOption, ProjectFilterNameEnum } from '../../../enum/global.enum';
-import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
+import { CardBuilderAlternativeCostComponent } from '../card-builder-alternative-cost/card-builder-alternative-cost.component';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
 
@@ -17,6 +17,7 @@ type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | '
         CommonModule,
         EventCardBuilderButtonComponent,
         PlayableCardListComponent,
+		CardBuilderAlternativeCostComponent
     ],
     templateUrl: './card-builder.component.html',
     styleUrl: './card-builder.component.scss'
@@ -24,9 +25,11 @@ type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | '
 export class CardBuilderComponent implements OnInit{
 	@Input() cardBuilder!: CardBuilder
 	@Input() option!: BuilderOption
-	@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
 	@Input() projectFilter?: ProjectFilter
 	@Input() discount: number = 0
+	@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
+	@Output() alternativePayButtonClicked: EventEmitter<NonEventButton> = new EventEmitter<NonEventButton>()
+	@ViewChildren('altCost') alternativeCost!: QueryList<CardBuilderAlternativeCostComponent>
 
 	@Input() event!: EventBaseModel
 	@Input() eventId!: number
@@ -52,7 +55,6 @@ export class CardBuilderComponent implements OnInit{
 			case(ProjectFilterNameEnum.greenProject):{
 				return 'green'
 			}
-
 			case(ProjectFilterNameEnum.blueProject):{
 				return 'blue'
 			}
@@ -65,5 +67,18 @@ export class CardBuilderComponent implements OnInit{
 		}
 		return 'white'
 	}
-
+	onAlternativePayButtonClicked(button: NonEventButton){
+		this.alternativePayButtonClicked.emit(button)
+	}
+	getAlternativePayLocked(): boolean {
+		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
+		return !builderEvent.cardBuilder[0].getBuilderIsLocked() && builderEvent.cardBuilder[0] != this.cardBuilder
+	}
+	public updateAlternativeCostButtonsEnabled(){
+		if(this.cardBuilder.getBuilderIsLocked()){return}
+		console.log('calling update')
+		for(let a of this.alternativeCost){
+			a.updateButtonEnabled()
+		}
+	}
 }

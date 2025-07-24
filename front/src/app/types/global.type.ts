@@ -25,6 +25,7 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'settingToggleDebug' | 'portalEffect'
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'killCard' | 'lockBuilder'
 | 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage'
+| 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
