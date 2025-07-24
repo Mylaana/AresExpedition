@@ -1520,6 +1520,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.draw(3),
 		EventFactory.simple.specialBuilder(BuilderOption.assetLiquidation)
 	],
+	//Topsoil Contract
+	'FM3': () => [EventFactory.simple.addRessource({name:'plant', valueStock:3})],
 	//Rego Plastics
 	'FM5': (state) => {
 		state.increaseProductionModValue('steel')
