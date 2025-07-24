@@ -8,7 +8,7 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
 import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
-import { ButtonNames, NonEventButtonNames } from '../../../types/global.type';
+import { NonEventButtonNames } from '../../../types/global.type';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',
