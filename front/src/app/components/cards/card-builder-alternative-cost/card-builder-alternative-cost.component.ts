@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { NonEventButton } from '../../../models/core-game/button.model';
 import { Subject, takeUntil } from 'rxjs';
@@ -19,7 +19,7 @@ import { NonEventButtonNames } from '../../../types/global.type';
   templateUrl: './card-builder-alternative-cost.component.html',
   styleUrl: './card-builder-alternative-cost.component.scss'
 })
-export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges{
+export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, OnDestroy{
 	@Input() event!: EventBaseModel
 	@Input() locked!: boolean //should be true when first builder isnt locked
 	@Output() buttonClicked = new  EventEmitter<any>()
@@ -42,6 +42,10 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges{
 		if(changes['event'] && changes['event'].currentValue){
 			this.updateButtonEnabled()
 		}
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 	updateButtonList(){
 		this._buttons = []
