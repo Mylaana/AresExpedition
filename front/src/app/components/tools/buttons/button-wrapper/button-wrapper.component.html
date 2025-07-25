@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="button.type">
+	<app-button-carousel *ngSwitchCase="'carousel'" [button]="castToCarousel(button)"></app-button-carousel>
+	<app-button-toggle *ngSwitchCase="'toggle'" [button]="castToToggle(button)"></app-button-toggle>
+	<app-non-event-button *ngSwitchCase="'nonEvent'" [button]="castToNonEvent(button)"></app-non-event-button>
+</ng-container>

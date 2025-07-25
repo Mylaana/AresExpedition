@@ -13,6 +13,8 @@ import { CreatePlayer } from '../../../../interfaces/global.interface';
 import { CommonModule } from '@angular/common';
 import { ApiMessage, ApiPlayer } from '../../../../interfaces/websocket.interface';
 import { Utils } from '../../../../utils/utils';
+import { CreateGameOptionsComponent } from '../../../create-game/create-game-options/create-game-options.component';
+import { CreateGameOptionService } from '../../../../services/core-game/create-game.service';
 
 @Component({
     selector: 'app-new-game',
@@ -21,7 +23,8 @@ import { Utils } from '../../../../utils/utils';
         HexedBackgroundComponent,
         NonEventButtonComponent,
         PlayerCreationPannelComponent,
-        PlayerNumberComponent
+        PlayerNumberComponent,
+		CreateGameOptionsComponent
     ],
     templateUrl: './create-game.component.html',
     styleUrl: './create-game.component.scss',
@@ -37,6 +40,7 @@ export class CreateGameComponent {
 	constructor(
 		private apiService: ApiService,
 		private router: Router,
+		private createGameOptionService: CreateGameOptionService
 	) {}
 
 	displayError(message: string){
@@ -56,7 +60,7 @@ export class CreateGameComponent {
 		const gameConfig: ApiMessage = {
 			gameId: Utils.newUUID(),
 			players:  postPlayerList,
-			options: {merger: true}
+			options: this.createGameOptionService.getGameOptions()
 		};
 		console.log('post gameconfig:',gameConfig)
 		this.apiService.createGame(gameConfig).subscribe({

@@ -2,6 +2,7 @@
 
 import com.ares_expedition.enums.game.CardTypeEnum;
 import com.ares_expedition.model.core.Game;
+import com.ares_expedition.model.core.GameOptions;
 import com.ares_expedition.repository.core.GameData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -83,7 +84,7 @@ public class JsonGameDataHandler {
         }
     }
 
-    public static List<String> getCardsIdList(CardTypeEnum type){
+    public static List<String> getCardsIdList(CardTypeEnum type, GameOptions gameOptions){
         File file = Paths.get(CARDS_DATA_PATH).toFile();
         List<String> idList = new ArrayList<>();
         if(!file.exists()){
@@ -101,6 +102,19 @@ public class JsonGameDataHandler {
 
         for(Map<String, Object> card: cards) {
             Object cardCode = card.get("card_code");
+
+            //game options
+            if(!gameOptions.getExpansionDiscovery() && card.get("origin").equals("discovery")){continue;}
+            if(!gameOptions.getExpansionFoundations() && card.get("origin").equals("foundations")){continue;}
+            if(!gameOptions.getExpansionPromo() && card.get("origin").equals("promo")){continue;}
+            if(!gameOptions.getExpansionFanMade() && card.get("origin").equals("fanmade")){continue;}
+            
+            if(card.containsKey("balancedVersion")){
+                if(!gameOptions.getExpansionBalanced() && card.get("balancedVersion").equals("add")){continue;}
+                if(gameOptions.getExpansionDiscovery() && card.get("balancedVersion").equals("remove")){continue;}
+            }
+            System.out.println(cardCode);
+
             switch(type){
                 case PROJECT:
                     if((card.get("cardType").equals("corporation")) && cardCode instanceof String){continue;}

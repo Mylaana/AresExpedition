@@ -19,6 +19,7 @@ export class PlayerCreationPannelComponent implements OnInit, OnChanges{
 	@Output() updatePlayerList = new EventEmitter<CreatePlayer[]>()
 	_playerIndexList!: number[];
 	_players: CreatePlayer[] = []
+	_playerIndexListTotal: number[] = [0,1,2,3,4,5]
 
 	ngOnInit(): void {
 
@@ -51,5 +52,8 @@ export class PlayerCreationPannelComponent implements OnInit, OnChanges{
 	emitPlayerList(): void {
 		this._players.sort((a, b) => a.index - b.index)
 		this.updatePlayerList.emit(this._players)
+	}
+	isPlayerCardDisabled(index: number){
+		return !this._playerIndexList.includes(index)
 	}
 }

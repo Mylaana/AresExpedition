@@ -1,0 +1,72 @@
+<div class="wrapper-expansions">
+	<div class="wrapper-option">
+		<h4>Official expansions:</h4>
+		<div class="wrapper-option-inner">
+			<div class="card-option">
+				<p>Discovery: </p>
+				<div class="wrapper-toggle">
+					<app-button-wrapper [button]="_expansionDiscovery" (click)="onClick(_expansionDiscovery)"></app-button-wrapper>
+				</div>
+			</div>
+			<div class="card-option">
+				<p>Foundations: </p>
+				<div class="wrapper-toggle">
+					<app-button-wrapper [button]="_expansionFoundations" (click)="onClick(_expansionFoundations)"></app-button-wrapper>
+				</div>
+			</div>
+			<div class="card-option">
+				<p>Promo cards: </p>
+				<div class="wrapper-toggle">
+					<app-button-wrapper [button]="_expansionPromo" (click)="onClick(_expansionPromo)"></app-button-wrapper>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper-option">
+		<h4>Fanmade expansions:</h4>
+		<div class="wrapper-option-inner">
+			<div class="card-option">
+				<p>Dev FanMade cards: </p>
+				<div class="wrapper-toggle">
+					<app-button-wrapper [button]="_expansionDevFanMade" (click)="onClick(_expansionDevFanMade)"></app-button-wrapper>
+				</div>
+			</div>
+			<div class="card-option">
+				<p>Balanced cards: </p>
+				<div class="wrapper-toggle">
+					<app-button-wrapper [button]="_expansionBalancedCards" (click)="onClick(_expansionBalancedCards)"></app-button-wrapper>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="wrapper-game-mode">
+	<div class="wrapper-option">
+		<h4>Official game mode:</h4>
+		<div class="wrapper-option-inner">
+			<div class="card-option">
+				<p>Initial draft: </p>
+				<div class="wrapper-toggle">
+					<app-button-wrapper [button]="_modeInitialDraft" (click)="onClick(_modeInitialDraft)"></app-button-wrapper>
+				</div>
+			</div>
+			<div class="card-option">
+				<p>Infrastructure mandatory: </p>
+				<div class="wrapper-toggle">
+					<app-button-wrapper [button]="_modeInfrastructureMandatory" (click)="onClick(_modeInfrastructureMandatory)"></app-button-wrapper>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper-option">
+		<h4>Fanmade game mode:</h4>
+		<div class="wrapper-option-inner">
+			<div class="card-option">
+				<p>Merger: </p>
+				<div class="wrapper-toggle">
+					<app-button-wrapper [button]="_modeMerger" (click)="onClick(_modeMerger)"></app-button-wrapper>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

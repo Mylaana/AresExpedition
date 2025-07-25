@@ -29,6 +29,7 @@ parser_columns_map = [
     {'column_name': 'effectSummaryOption', 'column_id': -1 , 'output_field_name': 'effectSummaryOption', 'split_per_language': False},
     {'column_name': 'effectSummaryOption2', 'column_id': -1 , 'output_field_name': 'effectSummaryOption2', 'split_per_language': False},
     {'column_name': 'vpScaling', 'column_id': -1 , 'output_field_name': 'vpScaling', 'split_per_language': False},
+    {'column_name': 'balancedVersion', 'column_id': -1 , 'output_field_name': 'balancedVersion', 'split_per_language': False},
 
     {'column_name': 'title_en', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
     {'column_name': 'title_fr', 'column_id': -1 , 'output_field_name': 'title', 'split_per_language': True},
@@ -85,7 +86,8 @@ PARSER_CARD_INFO_MODEL = {
     "actionTextOption2": {},
     "actionText2Option1": {},
     "actionText2Option2": {},
-    "vpScaling": ""
+    "vpScaling": "",
+    "balancedVersion": ""
 }
 
 AUTHORIZED_STATUS = ['implemented', 'validated', 'bugged', 'filled', 'blocked']

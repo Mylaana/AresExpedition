@@ -169,7 +169,7 @@ public class GameController {
                 break;
 
             case SELECT_CORPORATION:
-                Boolean merger = game.getGameOptions().getMerger();
+                Boolean merger = game.getGameOptions().getModeMerger();
                 if(merger){
                     game.setAllPlayersNotReady();
                     game.setGameStatus(GameStatusEnum.SELECT_CORPORATION_MERGER);

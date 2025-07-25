@@ -17,6 +17,7 @@ import { PlayerColor } from '../../../types/global.type';
 })
 export class PlayerCreationCardComponent {
 	@Input() playerIndex!: number
+	@Input() disabled!: boolean
 	@Output() playerData = new EventEmitter<CreatePlayer>()
 
 	_playerData: CreatePlayer = {

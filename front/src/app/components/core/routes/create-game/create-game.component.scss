@@ -8,15 +8,16 @@
 	width: 100%;
 }
 .wrapper-main{
+	position: absolute;
+	top: 0;
+	left: 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	height: fit-content;
 	width: 100%;
-	gap: 50px;
-	margin-top: 50px;
-	padding-bottom: 50px;
+	min-height: 95%;
 }
 h1{
 	padding: .5%;
@@ -25,19 +26,24 @@ h1{
 	font-size: 200%;
 	text-align: center;
 	width: fit-content;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	&.ares-title{
+		margin-top: 50px;
+		margin-bottom: 30px;
+	}
 }
-.wrapper-game-options{
+.wrapper-inner{
 	position: relative;
 	display: flex;
-	align-items: center;
-	width: 90%;
+	align-items: start;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 20px 0px;
+	width: 80%;
 	height: 100%;
-	gap: .5%;
-
 }
 .wrapper-button{
-	height: 100px;
+	height: 60px;
 	&::ng-deep button {
 		font-size: 150%;
 	}
@@ -49,24 +55,21 @@ h1{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 50%;
-	min-height: fit-content;
-	flex: 1;
-	padding: 1%;
+	width: 550px;
+	padding: 10px;
+	margin: 10px;
 }
 .wrapper-player-creation-menu{
 	display: flex;
 	flex-direction: column;
+	justify-content: start;
 	height: fit-content;
-	justify-content: center;
-	width: 100%;
 }
 .wrapper-other-options{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	width: 50%;
 	height: 100%;
 }
 .horizontal-separator{
@@ -76,11 +79,11 @@ h1{
 }
 .wrapper-number-selection{
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
 	height: fit-content;
-}
-app-player-creation-pannel{
-	height: fit-content;
+	width: 100%;
 }
 p{
 	font-weight: bold;
@@ -88,6 +91,7 @@ p{
 	padding: 10px;
 }
 .wrapper-error{
+	padding: 10px;
 	&--hidden{
 		opacity: 0;
 	}
@@ -95,9 +99,7 @@ p{
 		opacity:1
 	}
 	& > p {
-		color: red;
 		text-decoration: none;
 		padding-bottom: 0;
 	}
-	//margin-bottom: 5px;
 }

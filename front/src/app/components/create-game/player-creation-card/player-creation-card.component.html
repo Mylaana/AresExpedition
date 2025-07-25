@@ -1,5 +1,5 @@
 <div class="wrapper-main"
-	[ngClass]="'border--'+ _playerData.color">
+	[ngClass]="['border--'+ _playerData.color, disabled?'disabled':'']">
 	<div class="wrapper-name">
 		<input type="text"
 			[(ngModel)]="_playerData.name"

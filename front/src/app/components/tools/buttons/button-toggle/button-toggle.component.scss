@@ -1,0 +1,49 @@
+$radius: 100px;
+$border-size: 2px;
+:host{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.wrapper-main{
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	aspect-ratio: 2;
+	background-color: transparent;
+	border: 0;
+	border-color: transparent;
+	:hover{
+		cursor: pointer;
+	}
+}
+.slider{
+	position: absolute;
+	top: $border-size;
+	height: calc(100% - $border-size *2);
+	aspect-ratio: 1;
+	background-color: white;
+	border-radius: $radius;
+	margin: 2px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	&.toggle-true{
+		right: 0;
+	}
+}
+.background{
+	$border-color: rgb(149, 149, 149);
+	$back-color-false: rgb(206, 206, 206);
+	$back-color-true: var(--color-ares-orange);
+	position: relative;
+	height: calc(100% - $border-size *2);
+	width: calc(100% - $border-size *2);
+	border-radius: $radius;
+	border: solid 2px;
+	background: $back-color-false;
+	border-color: $border-color;
+	&.toggle-true{
+		background: $back-color-true;
+	}
+}
