@@ -113,8 +113,6 @@ public class JsonGameDataHandler {
                 if(!gameOptions.getExpansionBalanced() && card.get("balancedVersion").equals("add")){continue;}
                 if(gameOptions.getExpansionDiscovery() && card.get("balancedVersion").equals("remove")){continue;}
             }
-            System.out.println(cardCode);
-
             switch(type){
                 case PROJECT:
                     if((card.get("cardType").equals("corporation")) && cardCode instanceof String){continue;}
