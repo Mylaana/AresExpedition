@@ -1,8 +1,8 @@
 <div class="wrapper-main">
-	<ng-container *ngFor="let card of _playerIndexList">
+	<ng-container *ngFor="let card of _playerIndexListTotal">
 		<app-player-creation-card
-			@expandCollapseVertical
 			[playerIndex]="card"
+			[disabled]="isPlayerCardDisabled(card)"
 			(playerData)="onPlayerDataValidated($event)"></app-player-creation-card>
 	</ng-container>
 </div>

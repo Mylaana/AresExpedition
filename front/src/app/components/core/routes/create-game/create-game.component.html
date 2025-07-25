@@ -1,6 +1,6 @@
 <div class="wrapper-main" @fadeIn>
 	<h1 class="ares-title">NEW GAME</h1>
-	<div class="wrapper-game-options">
+	<div class="wrapper-inner">
 		<div class="wrapper-menu ares-border ares-background">
 			<h1 class="ares-title--orange">Players</h1>
 			<div class="wrapper-player-creation-menu">
@@ -33,5 +33,5 @@
 			[shape]="'large'"
 			(buttonClicked)="createGame()"></app-non-event-button>
 	</div>
-	<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>
 </div>
+<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>
