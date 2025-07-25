@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, input, OnDestroy, OnInit
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { EventMainButton, NonEventButton } from '../../../models/core-game/button.model';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { EventBaseModel, EventCardActivator } from '../../../models/core-game/event.model';
@@ -13,10 +13,13 @@ import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event/event-factory';
 import { PlayableCard } from '../../../factory/playable-card.factory';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
+import { GameOption } from '../../../services/core-game/create-game.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-phase-action',
     imports: [
+		CommonModule,
         NonEventButtonComponent,
         PlayableCardListComponent,
 		HexedBackgroundComponent
@@ -36,6 +39,8 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 	_buyInfrastructure: NonEventButton = ButtonDesigner.createNonEventButton('buyInfrastructure')
 	_buyOcean: NonEventButton = ButtonDesigner.createNonEventButton('buyOcean')
 	_buyUpgrade: NonEventButton = ButtonDesigner.createNonEventButton('buyUpgrade')
+
+	_gameOptions!: GameOption
 
 	private _mcStock: number = 0
 	private _plantStock: number = 0
@@ -63,6 +68,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => {this.onStateUpdate(state)})
+		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(options => this._gameOptions = options)
 		this._actionEvent = this.event as EventCardActivator
 		this.applyPhaseCardBonusIfRelevant()
 		this.updateConvertButtonLock()
@@ -187,5 +193,13 @@ export class PhaseActionComponent implements OnInit, OnDestroy, AfterViewInit{
 
 	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}){
 		this.projectActivated.emit(input)
+	}
+	public isStandardPhaseUpgradeOptionActive(): boolean {
+		if(!this._gameOptions){return false}
+		return this._gameOptions.standardUpgrade && this._gameOptions.discovery
+	}
+	public isFoundationsActive(): boolean {
+		if(!this._gameOptions){return false}
+		return this._gameOptions.foundations
 	}
 }

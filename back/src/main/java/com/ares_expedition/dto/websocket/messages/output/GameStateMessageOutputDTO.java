@@ -7,6 +7,7 @@ import java.util.Map;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
+import com.ares_expedition.model.core.GameOptions;
 import com.ares_expedition.model.player_state.PlayerState;
 
 public class GameStateMessageOutputDTO {
@@ -15,6 +16,7 @@ public class GameStateMessageOutputDTO {
     private LinkedHashSet<PhaseEnum> selectedPhase;
     private Map<String, PlayerStateDTO> groupPlayerState;
     private GameStatusEnum gameStatus;
+    private GameOptions gameOptions;
 
     public GameStateMessageOutputDTO(){
     }
@@ -58,6 +60,12 @@ public class GameStateMessageOutputDTO {
     }
     public void setGameStatus(GameStatusEnum gameStatus) {
         this.gameStatus = gameStatus;
+    }
+    public GameOptions getGameOptions() {
+        return gameOptions;
+    }
+    public void setGameOptions(GameOptions gameOptions) {
+        this.gameOptions = gameOptions;
     }
     
 }

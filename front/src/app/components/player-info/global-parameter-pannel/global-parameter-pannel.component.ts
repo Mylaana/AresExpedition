@@ -9,6 +9,7 @@ import { GlobalParameter, OceanBonus } from '../../../interfaces/global.interfac
 import { Utils } from '../../../utils/utils';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
+import { GameOption } from '../../../services/core-game/create-game.service';
 
 @Component({
     selector: 'app-global-parameter-pannel',
@@ -32,9 +33,12 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 
 	_oceanFlippedBonus: OceanBonus[] = []
 
-	constructor(private gameStateService: GameState){}
+	private gameOptions!: GameOption
+
+	constructor(private gameStateService: GameState,){}
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onStateUpdate(state))
+		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(options => this.gameOptions = options)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -50,5 +54,9 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 			}
 		}
 		this._oceanFlippedBonus = clientState.getOceanFlippedBonus()
+	}
+	isFoundationsActive(): boolean {
+		if(!this.gameOptions){return false}
+		return this.gameOptions.foundations
 	}
 }

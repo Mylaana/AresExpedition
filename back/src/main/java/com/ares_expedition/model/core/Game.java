@@ -189,6 +189,7 @@ public class Game {
 
     public GameStateMessageOutputDTO getGameState(){
         GameStateMessageOutputDTO gameState = new GameStateMessageOutputDTO();
+        gameState.setGameOptions(gameOptions);
         gameState.setCurrentPhase(currentPhase);
         gameState.setGroupReady(groupPlayerReady);
         gameState.setSelectedPhase(selectedPhase);
@@ -446,9 +447,11 @@ public class Game {
 
     public boolean isGameOver(){
         for(GlobalParameter p: this.globalParameters){
-            if(p.isMaxedOut()==false){
-                return false;
+            if(p.getName()==GlobalParameterNameEnum.INFRASTRUCTURE){
+                if(this.gameOptions.getExpansionFoundations()==false){continue;}
+                if(this.gameOptions.getModeInfrastructureMandatory()==false){continue;}
             }
+            if(p.isMaxedOut()==false){return false;}
         }
         return true;
     }

@@ -24,6 +24,7 @@ export class CreateGameOptionsComponent implements OnInit{
 	_modeInitialDraft!: ToggleButton
 	_modeInfrastructureMandatory!: ToggleButton
 	_modeMerger!: ToggleButton
+	_modeStandardProjectPhaseUpgrade!: ToggleButton
 
 	constructor(private createGameOptionService: CreateGameOptionService){}
 
@@ -37,13 +38,14 @@ export class CreateGameOptionsComponent implements OnInit{
 		this._modeInitialDraft = ButtonDesigner.createToggleButton('modeInitialDraft')
 		this._modeInfrastructureMandatory = ButtonDesigner.createToggleButton('modeInfrastructureMandatory')
 		this._modeMerger = ButtonDesigner.createToggleButton('modeMerger')
+		this._modeStandardProjectPhaseUpgrade = ButtonDesigner.createToggleButton('modeStandardProjectPhaseUpgrade')
 
-		this.createGameOptionService.currentGameOptions.subscribe(options => this.updateButtonsValue(options))
+		this.createGameOptionService.currentGameOptions.subscribe(options => this.updateButtonsState(options))
 	}
 	onClick(button: ToggleButton){
 		this.createGameOptionService.toggleOption(button.name)
 	}
-	updateButtonsValue(options: GameOption){
+	updateButtonsState(options: GameOption){
 		this._expansionDiscovery.value = options.discovery
 		this._expansionFoundations.value = options.foundations
 		this._expansionPromo.value = options.promo
@@ -52,6 +54,8 @@ export class CreateGameOptionsComponent implements OnInit{
 
 		this._modeInitialDraft.value = options.initialDraft
 		this._modeInfrastructureMandatory.value = options.infrastructureMandatory
+		this._modeInfrastructureMandatory.updateEnabled(options.foundations)
 		this._modeMerger.value = options.merger
+		this._modeStandardProjectPhaseUpgrade.value = options.standardUpgrade
 	}
 }

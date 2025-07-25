@@ -6,12 +6,13 @@ public class GameOptions {
     Boolean expansionDiscovery;
     Boolean expansionFoundations;
     Boolean expansionPromo;
-    Boolean expansionFanMade;
+    Boolean expansionFanmade;
     Boolean expansionBalanced;
 
     Boolean modeInitialDraft;
     Boolean modeInfrastructureMandatory;
     Boolean modeMerger;
+    Boolean modeStandardUpgrade;
 
     GameOptions(){
     }
@@ -20,12 +21,13 @@ public class GameOptions {
         this.expansionDiscovery = (boolean) gameOptions.get("discovery");
         this.expansionFoundations = (boolean) gameOptions.get("foundations");
         this.expansionPromo = (boolean) gameOptions.get("promo");
-        this.expansionFanMade = (boolean) gameOptions.get("fanmade");
+        this.expansionFanmade = (boolean) gameOptions.get("fanmade");
         this.expansionBalanced = (boolean) gameOptions.get("balanced");
 
         this.modeInitialDraft = (boolean) gameOptions.get("initialDraft");
         this.modeInfrastructureMandatory = (boolean) gameOptions.get("infrastructureMandatory");
         this.modeMerger = (boolean) gameOptions.get("merger");
+        this.modeStandardUpgrade = (boolean) gameOptions.get("standardUpgrade");
     }
 
     public Boolean getModeMerger() {
@@ -60,12 +62,12 @@ public class GameOptions {
         this.expansionPromo = expansionPromo;
     }
 
-    public Boolean getExpansionFanMade() {
-        return expansionFanMade;
+    public Boolean getExpansionFanmade() {
+        return expansionFanmade;
     }
 
-    public void setExpansionFanMade(Boolean expansionFanMade) {
-        this.expansionFanMade = expansionFanMade;
+    public void setExpansionFanmade(Boolean expansionFanmade) {
+        this.expansionFanmade = expansionFanmade;
     }
 
     public Boolean getExpansionBalanced() {
@@ -92,5 +94,11 @@ public class GameOptions {
         this.modeInfrastructureMandatory = modeInfrastructureMandatory;
     }
 
-    
+    public Boolean getModeStandardUpgrade() {
+        return modeStandardUpgrade;
+    }
+
+    public void setModeStandardUpgrade(Boolean modeStandardUpgrade) {
+        this.modeStandardUpgrade = modeStandardUpgrade;
+    }
 }

@@ -10,6 +10,7 @@ import { myUUID } from "../types/global.type";
 import { DeckQueryOptionsEnum, OceanBonusEnum } from "../enum/global.enum";
 import { OceanBonus, ScanKeep } from "../interfaces/global.interface";
 import { EventUnionSubTypes } from "../types/event.type";
+import { GameOption } from "../services/core-game/create-game.service";
 
 @Injectable({
     providedIn: 'root'
@@ -144,5 +145,19 @@ export class WebsocketResultMessageFactory{
 			options: content['options'],
 			eventId: content['eventId']
 		}
+	}
+	public static inputToGameOption(content: any): GameOption {
+		let options: GameOption = {
+			discovery: content['expansionDiscovery'],
+			foundations: content['expansionFoundations'],
+			promo: content['expansionPromo'],
+			fanmade: content['expansionFanmade'],
+			balanced: content['expansionBalanced'],
+			infrastructureMandatory: content['modeInfrastructureMandatory'],
+			initialDraft: content['modeInitialDraft'],
+			merger: content['modeMerger'],
+			standardUpgrade: content['modeStandardUpgrade']
+		}
+		return options
 	}
 }

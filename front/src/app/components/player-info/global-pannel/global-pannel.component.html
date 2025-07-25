@@ -34,7 +34,8 @@
 	</div>
 	<p class="pannel-text">{{playerState.getForest()}}</p>
 </div>
-<div class="pannel-card phase-upgraded pannel-card-style">
+<div class="pannel-card phase-upgraded pannel-card-style"
+	*ngIf="isDiscoveryActive()">
 	<div class="pannel-card-icon">
 		<img class="img-padding"
 			src="/assets/other/phase_upgrade.png" alt="">

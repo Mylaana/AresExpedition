@@ -12,7 +12,8 @@ export interface GameOption {
 
 	initialDraft: boolean,
 	infrastructureMandatory: boolean,
-	merger: boolean
+	merger: boolean,
+	standardUpgrade: boolean
 }
 
 @Injectable({
@@ -28,7 +29,8 @@ export class CreateGameOptionService {
 
 		initialDraft: true,
 		infrastructureMandatory: true,
-		merger: true
+		merger: true,
+		standardUpgrade: true
 	})
 
 	currentGameOptions = this.gameOptions.asObservable()
@@ -51,6 +53,7 @@ export class CreateGameOptionService {
 			case('modeInitialDraft'):{newOption.initialDraft = !newOption.initialDraft; break}
 			case('modeInfrastructureMandatory'):{newOption.infrastructureMandatory = !newOption.infrastructureMandatory; break}
 			case('modeMerger'):{newOption.merger = !newOption.merger; break}
+			case('modeStandardProjectPhaseUpgrade'):{newOption.standardUpgrade = !newOption.standardUpgrade; break}
 		}
 		this.gameOptions.next(newOption)
 	}

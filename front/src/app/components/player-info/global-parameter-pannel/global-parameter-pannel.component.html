@@ -1,14 +1,15 @@
 <div class="wrapper-ocean">
 	<app-ocean-card [addEop]="_oceanState.addEndOfPhase" [currentStep]="_oceanState.step" [oceanFlippedBonus]="_oceanFlippedBonus"></app-ocean-card>
 </div>
-<div class="wrapper-other">
-	<div class="wrapper-parameter-card">
+<div [ngClass]="['wrapper-other']">
+	<div [ngClass]="['wrapper-parameter-card', isFoundationsActive()?'big':'small']">
 		<app-global-parameter-card [parameter]="_temperatureState.name" [addEop]="_temperatureState.addEndOfPhase" [currentStep]="_temperatureState.step-1"></app-global-parameter-card>
 	</div>
-	<div class="wrapper-parameter-card">
+	<div [ngClass]="['wrapper-parameter-card', isFoundationsActive()?'big':'small']">
 		<app-global-parameter-card [parameter]="_oxygenState.name" [addEop]="_oxygenState.addEndOfPhase" [currentStep]="_oxygenState.step-1"></app-global-parameter-card>
 	</div>
-	<div class="wrapper-parameter-card">
+	<div [ngClass]="['wrapper-parameter-card', isFoundationsActive()?'big':'small']"
+	*ngIf="isFoundationsActive()">
 		<app-global-parameter-card [parameter]="_infrastructureState.name" [addEop]="_infrastructureState.addEndOfPhase" [currentStep]="_infrastructureState.step-1"></app-global-parameter-card>
 	</div>
 </div>
