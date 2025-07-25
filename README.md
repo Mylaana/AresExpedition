@@ -45,7 +45,6 @@ Backend: Junit
 bug eventstate avec gain plant/mc? de flip d'ocean, bonus perdu au refresh
 
 ## Other BUG:   
-rollback button disapearing while waiting for other players   
 autohex background height bug on being displayed after resolving another event on top (eg : action phase -> upgrade standard -> action phase)   
 
 ## Must have for v1 :

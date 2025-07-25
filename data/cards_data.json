@@ -5510,15 +5510,15 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it. When you play a $tag_space$, you pay 3 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC. $skipline$ Lorsque vous jouez un $tag_space$, le co\u00fbt associ\u00e9 est r\u00e9duit de 3 MC. "
         },
         "prerequisiteText": {
             "en": "Spend 1 TR",
-            "fr": ""
+            "fr": "Requiert que vous d\u00e9pensiez 1 NT. "
         },
         "prerequisiteSummaryText": {
             "en": "-$other_tr$",
-            "fr": ""
+            "fr": "-$other_tr$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5534,7 +5534,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Surface Mines",
-            "fr": ""
+            "fr": "Mines de Surface"
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -5543,7 +5543,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it. When you play a $tag_space$, pay 3 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC. $skipline$ Lorsque vous jouez un $tag_space$, le co\u00fbt associ\u00e9 est r\u00e9duit de 3 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5561,7 +5561,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Tectonic Stress Power",
-            "fr": ""
+            "fr": "Energie des Contraintes Tectoniques "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5570,7 +5570,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 chaleurs. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5586,7 +5586,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Titanium Mine",
-            "fr": ""
+            "fr": "Mine de Titane "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -5595,7 +5595,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_space$, pay 3 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt associ\u00e9 est r\u00e9duit de 3 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5608,7 +5608,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Toll Station",
-            "fr": ""
+            "fr": "Station de P\u00e9age "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5617,11 +5617,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 MC. "
         },
         "playedText": {
             "en": "You can play a green card from your hand that has a cost of 9 MC or less without paying its cost in MC.",
-            "fr": ""
+            "fr": "Vous pouvez jouer une carte verte de votre main dont le co\u00fbt imprim\u00e9 est de 9 MC ou moins sans payer son co\u00fbt en MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5634,7 +5634,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Trading Post",
-            "fr": ""
+            "fr": "Poste de Commerce "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5643,11 +5643,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produitn 2 MC. "
         },
         "playedText": {
             "en": "Gain 3 plants.",
-            "fr": ""
+            "fr": "Gagnez 3 plantes. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5733,7 +5733,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Tropical Forest",
-            "fr": ""
+            "fr": "Station Baln\u00e9aire Tropicale "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5742,7 +5742,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 4 MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 4 MC. "
         },
         "prerequisiteText": {
             "en": "Spend 5 $ressource_heat$.",
@@ -5750,7 +5750,7 @@
         },
         "prerequisiteSummaryText": {
             "en": "-5 $ressource_heat$",
-            "fr": ""
+            "fr": "-5 $ressource_heat$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5767,7 +5767,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Tundra Farming",
-            "fr": ""
+            "fr": "Agriculture dans la Toundra"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5776,19 +5776,19 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC and 1 plant.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 MC et 1 plante. "
         },
         "playedText": {
             "en": "Gain 1 plant.",
-            "fr": ""
+            "fr": "Gagnez 1 plante. "
         },
         "prerequisiteText": {
             "en": "Requires a yellow or warmer temperature level.",
-            "fr": ""
+            "fr": "Requiert un niveau de temp\u00e9rature jaune ou plus chaud. "
         },
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
-            "fr": ""
+            "fr": "$other_temperature$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5853,7 +5853,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Venture Capitalism",
-            "fr": ""
+            "fr": "Capitalisme d'Entreprise "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5862,7 +5862,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_event$ you have.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_event$ en votre possession. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5906,7 +5906,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Wave Power",
-            "fr": ""
+            "fr": "Energie Mar\u00e9motrice "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5915,7 +5915,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 chaleurs. "
         },
         "prerequisiteText": {
             "en": "Requires 3 Oceans flipped.",
@@ -5941,7 +5941,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Windmills",
-            "fr": ""
+            "fr": "Eoliennes"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5950,7 +5950,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat for each POWER you have, including this one.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur par $tag_power$ en votre possession, y compris celle-ci. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -5966,7 +5966,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Worms",
-            "fr": ""
+            "fr": "Vers de Terre "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -5975,7 +5975,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant for each $tag_microbe$ you have, including this one.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 plante par $tag_microbe$ en votre possession, y compris celui-ci. "
         },
         "prerequisiteText": {
             "en": "Requires a red or higher oxygen level.",
@@ -5997,7 +5997,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Zeppelins",
-            "fr": ""
+            "fr": "Zeppelins"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -6006,7 +6006,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each forest tile you have.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par PV For\u00eat en votre possession. "
         },
         "prerequisiteText": {
             "en": "Requires a red or higher oxygen level.",
@@ -6411,31 +6411,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "P17",
-        "origin": "promo",
-        "cardType": "corporation",
-        "title": {
-            "en": "Zetasel",
-            "fr": "Zetasel"
-        },
-        "effectSummaryType": "trigger",
-        "effectSummaryText": {
-            "en": "$other_ocean$:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$",
-            "fr": "$other_ocean$:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$"
-        },
-        "effectText": {
-            "en": "EFFECT: When you flip an ocean tile, gain 2 MC and 2 plants.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "You start with 43MC.$skipline$$skipline$At the start of the game, + $ressource_card$$ressource_card$$ressource_card$$ressource_card$$ressource_card$$skipline$- $ressource_card$$ressource_card$$ressource_card$$ressource_card$",
-            "fr": "Vous commencez avec 43MC."
-        },
-        "startingMegacredits": 43,
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "D01",
         "origin": "discovery",
         "tagsId": [
@@ -6569,7 +6544,7 @@
         "phaseUp": "PLAN",
         "title": {
             "en": "Communications Streamlining",
-            "fr": ""
+            "fr": "Normalisation des Communications "
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -6578,11 +6553,11 @@
         },
         "effectText": {
             "en": "EFFECT: When you reveal an upgraded phase card during Planification, gain 1 MC.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous r\u00e9v\u00e9lez une carte Phase am\u00e9lior\u00e9e, gagnez 1 MC. "
         },
         "playedText": {
             "en": "Upgrade you phase card III.",
-            "fr": ""
+            "fr": "Am\u00e9liorez votre carte Phase III. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6598,7 +6573,7 @@
         "phaseUp": "III",
         "title": {
             "en": "Drone Assisted Construction",
-            "fr": ""
+            "fr": "Contruction Assist\u00e9e par Drone"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -6607,7 +6582,7 @@
         },
         "effectText": {
             "en": "ACTION: Gain 2 MC.\n*If you selected an upgraded phase card during this round, gain 2 additional MC.",
-            "fr": ""
+            "fr": "ACTION: Gagnez 2 MC. *Si vous jouez une carte Phase am\u00e9lior\u00e9e lors de cette manche, gagnez 2 MC suppl\u00e9mentaires. "
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -6629,7 +6604,7 @@
         "phaseUp": "III",
         "title": {
             "en": "Experimental Technology",
-            "fr": ""
+            "fr": "Technologie Exp\u00e9rimentale "
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -6638,7 +6613,7 @@
         },
         "effectText": {
             "en": "ACTION: Spend 1 TR to upgrade a phase card.",
-            "fr": ""
+            "fr": "ACTION: D\u00e9pensez 1 NT pour am\u00e9liorer une carte Phase. "
         },
         "status": "validated",
         "actionTextOption1": {
@@ -6659,7 +6634,7 @@
         "phaseUp": "II",
         "title": {
             "en": "Impact Analysis",
-            "fr": ""
+            "fr": "Analyse d'Impact "
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -6668,7 +6643,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_event$, draw a card.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez un $tag_event$, piochez une carte. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6685,7 +6660,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Hohmann Transfer Shipping",
-            "fr": ""
+            "fr": "Transbordement de Hohmann"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -6694,11 +6669,11 @@
         },
         "effectText": {
             "en": "EFFECT: Whenever you play a card, you pay 1MC less for it.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez une carte, le co\u00fbt associ\u00e9 est r\u00e9duit de 1 MC. "
         },
         "playedText": {
             "en": "Upgrade a phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6714,7 +6689,7 @@
         "phaseUp": "III",
         "title": {
             "en": "Fibrous Composite Material",
-            "fr": ""
+            "fr": "Mat\u00e9riau en Fibre Composite "
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -6723,11 +6698,11 @@
         },
         "effectText": {
             "en": "ACTION: Add 1 $ressource_science$ here, or remove 3 $ressource_science$ from this card to upgrade a phase card.",
-            "fr": ""
+            "fr": "ACTION: Ajoutez 1 ressource Science sur cette carte ou retirez 3 ressources Science pour am\u00e9liorer une carte Phase. "
         },
         "playedText": {
             "en": "Add 3 $ressource_science$ to this card.",
-            "fr": ""
+            "fr": "Ajoutez 3 ressources Science sur cette carte. "
         },
         "stockable": [
             "science"
@@ -6755,7 +6730,7 @@
         "phaseUp": "III",
         "title": {
             "en": "Software Streamlining",
-            "fr": ""
+            "fr": "Standardisation Logicielle "
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -6764,11 +6739,11 @@
         },
         "effectText": {
             "en": "ACTION: Draw two card, then discard 2 cards.",
-            "fr": ""
+            "fr": "ACTION: Piochez deux cartes. Puis, d\u00e9faussez deux cartes. "
         },
         "playedText": {
             "en": "Upgrade a phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "actionTextOption1": {
@@ -6789,7 +6764,7 @@
         "phaseUp": "III",
         "title": {
             "en": "Virtual Employee Development",
-            "fr": ""
+            "fr": "D\u00e9veloppement d'Emply\u00e9s Virtuels "
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -6798,7 +6773,7 @@
         },
         "effectText": {
             "en": "ACTION: Upgrade a phase card.",
-            "fr": ""
+            "fr": "ACTION: Am\u00e9liorez une carte Phase. "
         },
         "prerequisiteText": {
             "en": "Requires 3 $tag_science$.",
@@ -6828,7 +6803,7 @@
         "phaseUp": "I-III",
         "title": {
             "en": "Volcanic Soil",
-            "fr": ""
+            "fr": "Terre Volcanique"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -6837,7 +6812,7 @@
         },
         "effectText": {
             "en": "EFFECT: Whenever you increase temperature, gain 2$ressource_plant$.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous augmentez la temp\u00e9rature gagnez 2 plantes. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6853,11 +6828,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Biomedical Imports",
-            "fr": ""
+            "fr": "Importations Biom\u00e9dicales "
         },
         "playedText": {
             "en": "Increase oxygen 1 level OR upgrade a phase card.",
-            "fr": ""
+            "fr": "Augmentez l'oxyg\u00e8ne de 1 niveau OU am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6873,11 +6848,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Cryogentic Shipment",
-            "fr": ""
+            "fr": "Transport Cryog\u00e9nique"
         },
         "playedText": {
             "en": "Upgrade a phase card.\nAdd 3$ressource_microbe$ OR add 2$ressource_animal$ to another card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase $skipline$ Ajoutez 3 microbes ou 2 animaux  \u00e0 une AUTRE carte. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6893,11 +6868,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Exosuits",
-            "fr": ""
+            "fr": "Exocombinaisons"
         },
         "playedText": {
             "en": "Upgrade a phase card.\nDraw a card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. $skipline$ Piochez une carte. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6912,15 +6887,15 @@
         "cardType": "redProject",
         "title": {
             "en": "Imported Construction Crews",
-            "fr": ""
+            "fr": "Equipages de Constructions Pr\u00e9fabriqu\u00e9es"
         },
         "playedText": {
             "en": "Upgrade two Phase cards.",
-            "fr": ""
+            "fr": "Am\u00e9liorez deux cartes Phase. "
         },
         "prerequisiteText": {
             "en": "Requires a yellow or warmer temperature level.",
-            "fr": ""
+            "fr": "Requiert un niveau de temp\u00e9rature jaune ou plus chaud. "
         },
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
@@ -6941,11 +6916,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Ore Leaching",
-            "fr": ""
+            "fr": "Lixiviation de Minerai "
         },
         "playedText": {
             "en": "Increase temperature level 2 steps.$skipline$Draw 2 cards.$skipline$Upgrade a phase card.",
-            "fr": ""
+            "fr": "Augmentez le temp\u00e9rature de 2 niveaux $skipline$ Piochez deux cartes $skipline$ Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6960,15 +6935,15 @@
         "cardType": "redProject",
         "title": {
             "en": "Private Investor Beach",
-            "fr": ""
+            "fr": "Plage pour Investisseur Priv\u00e9 "
         },
         "playedText": {
             "en": "Flip an ocean tile.",
-            "fr": ""
+            "fr": "R\u00e9v\u00e9lez une tuile Oc\u00e9an. "
         },
         "prerequisiteText": {
             "en": "Requires that you have one or more milestone.",
-            "fr": ""
+            "fr": "Requiert un Objectif. "
         },
         "prerequisiteSummaryText": {
             "en": "$other_milestone$",
@@ -6988,11 +6963,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Topographic Mapping",
-            "fr": ""
+            "fr": "Relev\u00e9 Topographique"
         },
         "playedText": {
             "en": "Chose a tag and add it to this card.$skipline$Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Choisissez un badge et ajoutez-le \u00e0 cette carte. $skipline$ Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7008,7 +6983,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "3D Printing",
-            "fr": ""
+            "fr": "Impression 3D"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7017,7 +6992,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 4MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 4 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7060,7 +7035,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Blast Furnace",
-            "fr": ""
+            "fr": "Hauts Fourneaux "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -7069,7 +7044,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez une $tag_bulding$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
@@ -7089,7 +7064,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Dandelions",
-            "fr": ""
+            "fr": "Pissenlits"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7098,15 +7073,15 @@
         },
         "effectText": {
             "en": "During the production phase, draw a card and this card produces 1 plant.",
-            "fr": ""
+            "fr": "Lors de la phase de production, piochez une carte et cette carte produit 1 plante. "
         },
         "prerequisiteText": {
             "en": "Requires a red or warmer temperature level.",
-            "fr": ""
+            "fr": "Requiert un niveau de temp\u00e9rature rouge ou plus chaud. "
         },
         "prerequisiteSummaryText": {
             "en": "$other_temperature$",
-            "fr": ""
+            "fr": "$other_temperature$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7119,7 +7094,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Electric Arc Furnaces",
-            "fr": ""
+            "fr": "Fours \u00e0 Arcs Electriques "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -7128,7 +7103,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7144,7 +7119,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Local Market",
-            "fr": ""
+            "fr": "March\u00e9 Local "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7153,11 +7128,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 MC. "
         },
         "playedText": {
             "en": "Chose a tag and add it to this card.",
-            "fr": ""
+            "fr": "Choisissez un badge et ajoutez-le \u00e0 cette carte. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7173,7 +7148,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Manufacturing Hub",
-            "fr": ""
+            "fr": "Centre de Production "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7182,11 +7157,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2MC and 1 heat.",
-            "fr": ""
+            "fr": "Lors de la phase production, cette carte produit 2 MC et 1 chaleur. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7199,7 +7174,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Heat Reflective Glass",
-            "fr": ""
+            "fr": "Miroirs de R\u00e9flexion de Chaleur "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7208,11 +7183,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7267,7 +7242,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Hydroponic Gardens",
-            "fr": ""
+            "fr": "Jardins Hydroponiques"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7276,11 +7251,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 3MC and 1 plant.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 MC et 1 plante. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7296,7 +7271,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Ilmenite Deposits",
-            "fr": ""
+            "fr": "Gisement d'Ilm\u00e9nite "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -7305,7 +7280,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 6MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt associ\u00e9 est r\u00e9duit de 6 MC."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7351,7 +7326,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Martian Museum",
-            "fr": ""
+            "fr": "Mus\u00e9e Martien "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7360,11 +7335,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 MC. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7381,7 +7356,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Metallurgy",
-            "fr": ""
+            "fr": "M\u00e9tallurgie"
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -7390,11 +7365,11 @@
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 3MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt associ\u00e9 est r\u00e9duit de 3 MC. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7441,7 +7416,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Oxidation Byproducts",
-            "fr": ""
+            "fr": "Sous- Produit d'Oxydation"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7450,11 +7425,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produce 2 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 chaleurs "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7499,7 +7474,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Magnetic Field Generator",
-            "fr": ""
+            "fr": "G\u00e9n\u00e9rateur de Champ Magn\u00e9tique"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7508,11 +7483,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 plante. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7528,7 +7503,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Political Influence",
-            "fr": ""
+            "fr": "Influence Politique "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7537,11 +7512,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 3MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 MC. "
         },
         "playedText": {
             "en": "Chose a tag and add it to this card.",
-            "fr": ""
+            "fr": "Choisissez un badge et ajoutez-le\u00e0 cette carte. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7584,7 +7559,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Nuclear Detonation Site",
-            "fr": ""
+            "fr": "Site d'Explosion Nucl\u00e9aire"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7593,7 +7568,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produce 3 heat.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 chaleurs. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7609,7 +7584,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Warehouses",
-            "fr": ""
+            "fr": "Entrep\u00f4ts"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -7618,11 +7593,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 MC. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7634,7 +7609,7 @@
         "cardType": "blueProject",
         "title": {
             "en": "Cargo Ships",
-            "fr": ""
+            "fr": "Vaisseaux Cargos "
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -7643,7 +7618,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you increase the infrastructure, gain 2 heats or gain 2 plants.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous augmentez l'infrastructure, gagnez 2 chaleurs ou 2 plantes. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7824,11 +7799,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Callisto Skybridge",
-            "fr": ""
+            "fr": "Passerelle C\u00e9leste "
         },
         "playedText": {
             "en": "Raise infrastructure 1 step.$skipline$If you have 3 or more other $tag_jovian$ (>=4 total), increase infrastructure an additional step.",
-            "fr": ""
+            "fr": "Augmentez l'infrastructure de 1 niveau. $skipline$ Si vous avez 3 autre $tag_jovian$ ou plus, augmentez l'infrastructure de 1 niveau suppl\u00e9mentaire. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7864,11 +7839,11 @@
         "cardType": "redProject",
         "title": {
             "en": "City Planning",
-            "fr": ""
+            "fr": "Plan d'Urbanisation"
         },
         "playedText": {
             "en": "Raise infrastructure 2 steps.",
-            "fr": ""
+            "fr": "Augmentez l'infrastructure de 2 niveaux. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7907,11 +7882,11 @@
         "vpNumber": "-2",
         "title": {
             "en": "Invasive Irigation",
-            "fr": ""
+            "fr": "Irrigation Envahissante "
         },
         "playedText": {
             "en": "Flip an ocean tile.$skipline$Raise infrastructure 2 steps.",
-            "fr": ""
+            "fr": "R\u00e9v\u00e9lez une tuile Oc\u00e9an $skipline$ Augmentez l'infrastructure de 2 niveaux. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7927,11 +7902,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Jezero Crater Hospital",
-            "fr": ""
+            "fr": "H\u00f4pital de Crat\u00e8re Jezero "
         },
         "playedText": {
             "en": "Raise infrastructure 1 step.$skipline$Upgrade a phase card.",
-            "fr": ""
+            "fr": "Augmentez l'infrastructure de 1 niveau $skipline$ Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7968,11 +7943,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Power Grid Uplink",
-            "fr": ""
+            "fr": "Bornes de Recharge "
         },
         "playedText": {
             "en": "Raise infrastructure 2 steps.$skipline$Increase temperature level 1 step.",
-            "fr": ""
+            "fr": "Augmentez l'infrastructures de 2 niveaux $skipline$ Augmentez la temp\u00e9rature de 1 niveau. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7988,11 +7963,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Subways",
-            "fr": ""
+            "fr": "M\u00e9tros"
         },
         "playedText": {
             "en": "Raise infrastructure 1 step.",
-            "fr": ""
+            "fr": "Augmentez l'infrastructure de 1 niveau. $skipline$ Si vous avez 3 autre $tag_jovian$ ou plus, augmentez l'infrastructure de 1 niveau suppl\u00e9mentaire. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8032,7 +8007,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Microloans",
-            "fr": ""
+            "fr": "Microcr\u00e9dits "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -8041,11 +8016,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2 MC. "
         },
         "playedText": {
             "en": "Raise infrastructure 1 step.",
-            "fr": ""
+            "fr": "Augmentez l'infrastructure de 1 niveau. $skipline$ Si vous avez 3 autre $tag_jovian$ ou plus, augmentez l'infrastructure de 1 niveau suppl\u00e9mentaire. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8062,7 +8037,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Seed Bank",
-            "fr": ""
+            "fr": "Banque de Graines "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -8071,11 +8046,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 plants and 3 heats.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 chaleurs et 2 plantes. "
         },
         "prerequisiteText": {
             "en": "Requires a red or higher infrastructuer level.",
-            "fr": ""
+            "fr": "Requiert un niveau d'infrastructure rouge ou sup\u00e9rieur. "
         },
         "prerequisiteSummaryText": {
             "en": "$other_infrastructure$",
@@ -8096,7 +8071,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Quant-Link Conferencing",
-            "fr": ""
+            "fr": "Conf\u00e9rence de Liaison Quantique "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -8105,11 +8080,11 @@
         },
         "effectText": {
             "en": "During the production phase, draw 1 card.",
-            "fr": ""
+            "fr": "Lors de la phase de production, piochez une carte. "
         },
         "prerequisiteText": {
             "en": "Requires a red or higher infrastructuer level.",
-            "fr": ""
+            "fr": "Requiert un niveau d'infrastructure rouge ou sup\u00e9rieur. "
         },
         "prerequisiteSummaryText": {
             "en": "$other_infrastructure$",
@@ -8128,11 +8103,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Assorted Enterprises",
-            "fr": ""
+            "fr": "Entreprises Assorties "
         },
         "playedText": {
             "en": "You may play an additional card this phase. That card may be a green card. You pay 2 MC less for the card you play this phase.",
-            "fr": ""
+            "fr": "Vous pouvez jouer une carte suppl\u00e9mentaire lors de cette phase. Cette carte peut \u00eatre verte. Le co\u00fbt de la prochaine carte que vous jouez lors de cette phase est r\u00e9duit de 2 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8149,7 +8124,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Commercial Imports",
-            "fr": ""
+            "fr": "Importations Commerciales "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -8158,7 +8133,7 @@
         },
         "effectText": {
             "en": "During the production phase, you draw a card and this produces 2 heat and 2 plants.",
-            "fr": ""
+            "fr": "Lors de la phase de production, vous piochez une carte et cette carte produit 2 chaleurs et 2 plantes. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8174,7 +8149,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Diverse Habitats",
-            "fr": ""
+            "fr": "Habitats Diversifi\u00e9s "
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -8183,7 +8158,7 @@
         },
         "effectText": {
             "en": "During the production phase, this produces 1 MC per $tag_animal$ and $tag_plant$ you have, including this.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_animal$ et $tag_plant$ en votre possession, y compris celui-ci. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8200,11 +8175,11 @@
         "phaseUp": "I-III",
         "title": {
             "en": "Filter Feeders",
-            "fr": ""
+            "fr": "Esp\u00e8ces Filtrantes"
         },
         "vpText": {
             "en": "* = 1 VP for every 3 animals resources on this card.",
-            "fr": ""
+            "fr": "*=1 PV par groupe de 3 animaux sur cette carte"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -8213,15 +8188,15 @@
         },
         "effectText": {
             "en": "EFFECT: When you add any number of microbes to another card, add 1 animal to this card.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous ajoutez n'importe quel nombre de microbes sur une AUTRE* carte, ajoutez un animal sur cette carte. "
         },
         "prerequisiteText": {
             "en": "Requires 2 Oceans flipped.",
-            "fr": ""
+            "fr": "Requiert que 2 tuiles Ox\u00e9an soient r\u00e9v\u00e9l\u00e9es. "
         },
         "prerequisiteSummaryText": {
             "en": "2$other_ocean$",
-            "fr": ""
+            "fr": "2$other_ocean$"
         },
         "stockable": [
             "animal"
@@ -8301,7 +8276,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Processed Metals",
-            "fr": ""
+            "fr": "M\u00e9taux Trait\u00e9s "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -8310,11 +8285,11 @@
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 6 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 6 MC. "
         },
         "playedText": {
             "en": "Draw a card for each POWER you have, including this.",
-            "fr": ""
+            "fr": "Piochez une carte pour chaque $tag_power$ en votre possession, y compris celui-ci. $skipline$ Lorsque vous jouez un $tag_space$, le co\u00fbt associ\u00e9 est r\u00e9duit de 6 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8331,7 +8306,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Processing Plant",
-            "fr": ""
+            "fr": "Usine de Traitement "
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -8340,11 +8315,11 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 4 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC. "
         },
         "playedText": {
             "en": "Reveal cards from the top of the deck until you reveal a BUILDING. Place it into your hand. Discard the rest.",
-            "fr": ""
+            "fr": "R\u00e9v\u00e9lez les premi\u00e8res cartes de la pioche jusqu'\u00e0 r\u00e9v\u00e9ler un $tag_building$. Placez le dans votre main. D\u00e9faussez les autres. "
         },
         "status": "blocked",
         "vpScaling": "0"
@@ -8388,11 +8363,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Synthetic Catastrophe",
-            "fr": ""
+            "fr": "Catastrophes Synth\u00e9tique "
         },
         "playedText": {
             "en": "You may return another red card you have in play to your hand.",
-            "fr": ""
+            "fr": "Vous pouvez renvoyer dans votre main une autre carte rouge que vous avez en jeu. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8408,7 +8383,7 @@
         "phaseUp": "III",
         "title": {
             "en": "Self-Replicating Bacteria",
-            "fr": ""
+            "fr": "Bact\u00e9ries Clon\u00e9es"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -8417,7 +8392,7 @@
         },
         "effectText": {
             "en": "ACTION: Add a microbe to this card, or remove 5 microbes from this card to play a card from your hand. You pay 25 MC less for it.",
-            "fr": ""
+            "fr": "ACTION: ajoutez un microbe sur cette carte ou retirez 5 microbes de cette carte pour jouer une carte de votre main. Le co\u00fbt associ\u00e9 \u00e0 cette carte est r\u00e9duit de 25 MC."
         },
         "stockable": [
             "microbe"
@@ -8587,6 +8562,31 @@
         "vpScaling": "0"
     },
     {
+        "card_code": "P17",
+        "origin": "promo",
+        "cardType": "corporation",
+        "title": {
+            "en": "Zetasel",
+            "fr": "Zetasel"
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_ocean$:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$",
+            "fr": "$other_ocean$:$skipline$$ressource_megacreditvoid_2$$ressource_plant$$ressource_plant$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you flip an ocean tile, gain 2 MC and 2 plants.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You start with 43MC.$skipline$$skipline$At the start of the game, + $ressource_card$$ressource_card$$ressource_card$$ressource_card$$ressource_card$$skipline$- $ressource_card$$ressource_card$$ressource_card$$ressource_card$",
+            "fr": "Vous commencez avec 43MC."
+        },
+        "startingMegacredits": 43,
+        "status": "validated",
+        "vpScaling": "0"
+    },
+    {
         "card_code": "P19",
         "origin": "promo",
         "cost": 7,
@@ -8687,7 +8687,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Orbital Outpost",
-            "fr": ""
+            "fr": "Station Orbitale "
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -8696,7 +8696,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a card with 1 or fewer tags, you pay 3 MC less for it.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez une carte disposant de 1 badge ou moins, son co\u00fbt est r\u00e9duit de 3 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8713,6 +8713,10 @@
         "phaseUp": "III",
         "title": {
             "en": "Gas-Cooled Reactors",
+            "fr": "G\u00e9n\u00e9rateurs \u00e0 Refroidissement par Gaz "
+        },
+        "vpText": {
+            "en": " ",
             "fr": ""
         },
         "effectSummaryType": "action",
@@ -8722,7 +8726,7 @@
         },
         "effectText": {
             "en": "ACTION: Spend 12 MC to raise the temperature. Reduce this by 2 MC for every upgraded phase card you have.",
-            "fr": ""
+            "fr": "ACTION: D\u00e9pensez 12 MC pour augmenter la temp\u00e9rature de 1 niveau. Ce co\u00fbt est r\u00e9duit de 2 MC pour chaque carte Phase am\u00e9lior\u00e9e en votre possession. "
         },
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
@@ -8740,7 +8744,7 @@
         "phaseUp": "III",
         "title": {
             "en": "Research Grant",
-            "fr": ""
+            "fr": "Subventions de Recherche "
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -8749,11 +8753,11 @@
         },
         "effectText": {
             "en": "ACTION: Choose a tag not already present on this card and add it to this card. (Max 3.) This counts as playing a tag.",
-            "fr": ""
+            "fr": "ACTION: Choisissez un badge qui n'est pas encore pr\u00e9sent sur cette carte et ajoutez-le \u00e0 cette carte (3max). C'est consid\u00e9r\u00e9 comme jouer un badge. "
         },
         "playedText": {
             "en": "You may play an additional blue or red card this phase.",
-            "fr": ""
+            "fr": "Vous pouvez jouer une carte bleue ou rouge suppl\u00e9mentaire lors de cette phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8766,10 +8770,15 @@
             7
         ],
         "cardType": "blueProject",
+        "vpNumber": "*",
         "phaseUp": "I-V",
         "title": {
             "en": "Zoos",
-            "fr": ""
+            "fr": "Zoos"
+        },
+        "vpText": {
+            "en": "*= 1VP per animal on this card",
+            "fr": "*= 1PV par animal sur cette carte"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -8778,10 +8787,10 @@
         },
         "effectText": {
             "en": "EFFECT: When you reach a milestone, add an animal to this card.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous remportez un Objectif, ajoutez un animal sur cette carte. "
         },
         "status": "blocked",
-        "vpScaling": "0"
+        "vpScaling": "1"
     },
     {
         "card_code": "P26",
@@ -8833,7 +8842,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Genetically Modified Vegetables",
-            "fr": ""
+            "fr": "L\u00e9gumes G\u00e9n\u00e9tiquement Modifi\u00e9s"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -8842,7 +8851,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 plants.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3 plantes. "
         },
         "status": "validated",
         "vpScaling": "0"
