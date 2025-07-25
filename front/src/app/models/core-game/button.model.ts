@@ -1,7 +1,7 @@
 import { Utils } from "../../utils/utils"
 import { MinMaxEqualTreshold } from "../../interfaces/global.interface"
 import { EventUnionSubTypes } from "../../types/event.type"
-import { ButtonType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../../types/global.type"
+import { ButtonType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../../types/global.type"
 import { EffectPortalButtonEnum } from "../../enum/global.enum"
 
 export abstract class ButtonBase {
@@ -52,4 +52,13 @@ export class NonEventButton extends ButtonBase {
 export class EffectPortalButton extends NonEventButton {
     override type: ButtonType = 'nonEvent'
     effect!: EffectPortalButtonEnum
+}
+export class CarouselButton extends ButtonBase {
+	override type: ButtonType = 'carousel'
+    name!: NonEventButtonNames
+}
+export class ToggleButton extends ButtonBase {
+	override type: ButtonType = 'toggle'
+	name!: ToggleButtonNames
+    value: boolean = true
 }

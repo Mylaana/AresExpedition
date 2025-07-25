@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton } from "../models/core-game/button.model";
-import { EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor } from "../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton, ToggleButton } from "../models/core-game/button.model";
+import { ButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
 import { BuilderOption, EffectPortalButtonEnum, EffectPortalEnum } from "../enum/global.enum";
 import { EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENABLED, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-maps";
 import { Checker } from "../utils/checker";
@@ -209,5 +209,10 @@ export class ButtonDesigner{
 			buttons.push(this.createPortalButton(cardCode, b, clientState))
 		}
 		return buttons
+	}
+	public static createToggleButton(name: ToggleButtonNames){
+		let button = new ToggleButton
+		button.name = name
+		return button
 	}
 }
