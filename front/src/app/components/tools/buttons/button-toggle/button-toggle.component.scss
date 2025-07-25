@@ -35,7 +35,7 @@ $border-size: 2px;
 .background{
 	$border-color: rgb(149, 149, 149);
 	$back-color-false: rgb(206, 206, 206);
-	$back-color-true:orange;
+	$back-color-true: var(--color-ares-orange);
 	position: relative;
 	height: calc(100% - $border-size *2);
 	width: calc(100% - $border-size *2);

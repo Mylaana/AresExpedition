@@ -40,16 +40,16 @@ public class Game {
     
     Game(NewGameConfigDTO gameConfig){
         this.gameId = gameConfig.getGameId();
-        this.deck = JsonGameDataHandler.getCardsIdList(CardTypeEnum.PROJECT);
-        this.shuffleDeck(this.deck);
         this.currentPhase = PhaseEnum.PLANIFICATION;
         this.selectedPhase.add(currentPhase);
         this.groupPlayerState = PlayerState.createGamePlayerStates(gameConfig);
         this.gameStatus = GameStatusEnum.NEW_GAME;
         this.globalParameters = GlobalParameter.createGameGlobalParameters();
-        this.deckCorporations = JsonGameDataHandler.getCardsIdList(CardTypeEnum.CORPORATION);
-        this.shuffleDeck(this.deckCorporations);
         this.gameOptions = new GameOptions(gameConfig.getOptions());
+        this.deck = JsonGameDataHandler.getCardsIdList(CardTypeEnum.PROJECT, this.gameOptions);
+        this.deckCorporations = JsonGameDataHandler.getCardsIdList(CardTypeEnum.CORPORATION, this.gameOptions);
+        this.shuffleDeck(this.deck);
+        this.shuffleDeck(this.deckCorporations);
 
         for(CreatePlayerDTO playerConfig: gameConfig.getPlayers()){
             //groupPlayerId
@@ -330,7 +330,7 @@ public class Game {
         Integer totalCorpNumber = this.deckCorporations.size();
         Integer playerNumber = this.groupPlayerState.entrySet().size();
         Integer corpNumber;
-        if(this.getGameOptions().getMerger()){
+        if(this.getGameOptions().getModeMerger()){
              corpNumber = Math.min(8, totalCorpNumber / playerNumber);
         } else {
             corpNumber = 4;

@@ -296,6 +296,39 @@
         "vpScaling": "0"
     },
     {
+        "card_code": "11",
+        "origin": "base",
+        "tagsId": [
+            2
+        ],
+        "cardType": "blueProject",
+        "phaseUp": "III",
+        "title": {
+            "en": "Asset Liquidation",
+            "fr": "Liquidation d'Actifs"
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$$skipline$-$other_tr$: 3$ressource_card$",
+            "fr": "$other_arrow$$skipline$-$other_tr$: 3$ressource_card$"
+        },
+        "effectText": {
+            "en": "ACTION: Spend 1 terraforming point to draw 3 cards.",
+            "fr": "ACTION: D\u00e9pensez 1 NT pour piocher trois cartes. "
+        },
+        "playedText": {
+            "en": "You may play an additional blue or red card during this phase.",
+            "fr": "Vous pouvez jouer une carte bleue ou rouge suppl\u00e9mentaire lors de cette phase. "
+        },
+        "status": "validated",
+        "actionTextOption1": {
+            "en": "-$other_tr$: 3$ressource_card$",
+            "fr": ""
+        },
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
         "card_code": "11B",
         "origin": "base",
         "tagsId": [
@@ -304,7 +337,7 @@
         "cardType": "redProject",
         "title": {
             "en": "Asset Liquidation V2",
-            "fr": "Liquidation d'Actifs"
+            "fr": "Liquidation d'Actifs V2"
         },
         "playedText": {
             "en": "You may play an additional blue or red card during this phase.$skipline$Draw 3 cards.",
@@ -318,8 +351,9 @@
             "en": "-$other_tr$",
             "fr": "-$other_tr$"
         },
-        "status": "implemented",
-        "vpScaling": "0"
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "12",
@@ -6439,12 +6473,41 @@
         "vpScaling": "0"
     },
     {
+        "card_code": "D02",
+        "origin": "discovery",
+        "tagsId": [
+            2
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "Exocorp",
+            "fr": "Exocorp"
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_sellcard$: +$ressource_megacreditvoid_1$",
+            "fr": "$other_sellcard$: +$ressource_megacreditvoid_1$"
+        },
+        "effectText": {
+            "en": "EFFECT: Whenever you sell a card, you gain one more MC.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Upgrade your Phase card V.",
+            "fr": ""
+        },
+        "startingMegacredits": 26,
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
         "card_code": "D02B",
         "origin": "discovery",
         "cardType": "corporation",
         "title": {
             "en": "Exocorp V2",
-            "fr": ""
+            "fr": "Exocorp V2"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -6461,7 +6524,38 @@
         },
         "startingMegacredits": 15,
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "add"
+    },
+    {
+        "card_code": "D03",
+        "origin": "discovery",
+        "tagsId": [
+            4
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "Hyperion Systems",
+            "fr": "Hyperion Systems"
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$$ressource_megacreditvoid_1$$$$*$ressource_megacreditvoid_1$",
+            "fr": "$other_arrow$$ressource_megacreditvoid_1$$$$*$ressource_megacreditvoid_1$"
+        },
+        "effectText": {
+            "en": "ACTION: Gain 1MC.$$*If you chose the action phase this turn, gain an additional 1MC.",
+            "fr": ""
+        },
+        "effectSummaryOption": "scalingCostActivation",
+        "playedText": {
+            "en": "Upgrade your Phase card III.",
+            "fr": ""
+        },
+        "startingMegacredits": 30,
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "remove"
     },
     {
         "card_code": "D03B",
@@ -6472,7 +6566,7 @@
         "cardType": "corporation",
         "title": {
             "en": "Hyperion Systems V2",
-            "fr": ""
+            "fr": "Hyperion Systems V2"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -6502,7 +6596,8 @@
             "en": "$ressource_megacreditvoid_1$",
             "fr": "$ressource_megacreditvoid_1$"
         },
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "D04",
@@ -7193,6 +7288,37 @@
         "vpScaling": "0"
     },
     {
+        "card_code": "D29",
+        "origin": "discovery",
+        "cost": 28,
+        "tagsId": [
+            0
+        ],
+        "cardType": "greenProject",
+        "phaseUp": "IV",
+        "phaseDown": "I-II",
+        "title": {
+            "en": "Hematite Mining",
+            "fr": "Extraction d'H\u00e9matite"
+        },
+        "effectSummaryType": "mixedProduction",
+        "effectSummaryText": {
+            "en": "$ressource_card$$ressource_card$$mix$$ressource_steel$",
+            "fr": "$ressource_card$$ressource_card$$mix$$ressource_steel$"
+        },
+        "effectText": {
+            "en": "During the production phase, draw 2 cards.$skipline$When you play a $tag_building$, you pay 2 MC less for it.",
+            "fr": "Lors de la phase de production, piochez 2 cartes.$skipline$Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+        },
+        "playedText": {
+            "en": "Upgrade a Phase card.",
+            "fr": ""
+        },
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
         "card_code": "D29B",
         "origin": "discovery",
         "cost": 28,
@@ -7228,7 +7354,8 @@
             "fr": ""
         },
         "status": "implemented",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "D30",
@@ -8613,7 +8740,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "validated",
+        "status": "blocked",
         "vpScaling": "0"
     },
     {
@@ -8638,7 +8765,7 @@
             "en": "ACTION: Draw a card. Draw 1 additional card for each Objective you have.",
             "fr": "ACTION: Piochez 1 carte. Piochez 1 carte suppl\u00e9mentaire pour chaque Objectif en votre possession."
         },
-        "status": "validated",
+        "status": "blocked",
         "actionTextOption1": {
             "en": "$ressource_card$$skipline$+ $ressource_card$ / $other_milestone$",
             "fr": ""
@@ -8907,7 +9034,7 @@
             "en": "Increase your $other_tr$ by 1 level for each Objective you have.",
             "fr": "Augmentez votre $other_tr$ de 1 niveau pour chaque Objectif en votre possession."
         },
-        "status": "validated",
+        "status": "blocked",
         "vpScaling": "0"
     },
     {

@@ -37,13 +37,19 @@ export class CreateGameOptionService {
 		let newOption = this.gameOptions.getValue()
 		switch(option){
 			case('expansionDiscovery'):{newOption.discovery = newOption.discovery===false; break}
-			case('expansionFoundations'):{newOption.foundations = !newOption.foundations; break}
+			case('expansionFoundations'):{
+				newOption.foundations = !newOption.foundations
+				if(!newOption.foundations){
+					newOption.infrastructureMandatory = false
+				}
+				break
+			}
 			case('expansionPromo'):{newOption.promo = !newOption.promo; break}
 			case('expansionDevFanMade'):{newOption.fanmade = !newOption.fanmade; break}
 			case('expansionBalancedCards'):{newOption.balanced = !newOption.balanced; break}
 
-			case('modeInitialDraft'):{newOption.merger = !newOption.initialDraft; break}
-			case('modeInfrastructureMandatory'):{newOption.merger = !newOption.infrastructureMandatory; break}
+			case('modeInitialDraft'):{newOption.initialDraft = !newOption.initialDraft; break}
+			case('modeInfrastructureMandatory'):{newOption.infrastructureMandatory = !newOption.infrastructureMandatory; break}
 			case('modeMerger'):{newOption.merger = !newOption.merger; break}
 		}
 		this.gameOptions.next(newOption)
