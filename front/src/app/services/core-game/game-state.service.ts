@@ -888,4 +888,7 @@ export class GameState{
 		this.gameOptions.next(options)
 		console.log(options)
 	}
+	getGameOptions(): GameOption {
+		return this.gameOptions.getValue()
+	}
 }

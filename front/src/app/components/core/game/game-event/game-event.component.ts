@@ -27,6 +27,7 @@ import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/
 import { GroupWaitingComponent } from '../../../game-event-blocks/group-waiting/group-waiting.component';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { LeftPannelComponent } from '../../../game-event-blocks/left-pannel/left-pannel.component';
+import { GameOption } from '../../../../services/core-game/create-game.service';
 
 //this component is the main controller, and view
 
@@ -92,6 +93,7 @@ export class GameEventComponent {
 	selectionActive: boolean = false
 
 	_selectedPhaseList: SelectablePhaseEnum[] = []
+	private gameOptions!: GameOption
 
 	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
@@ -113,6 +115,7 @@ export class GameEventComponent {
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
 		this.gameStateService.currentGroupPlayerReady.subscribe((groupReady) => this._groupReady = groupReady)
+		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(option => this.gameOptions = option)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -242,5 +245,8 @@ export class GameEventComponent {
 			if(p.isReady){return true}
 		}
 		return false
+	}
+	isDiscoveryActive(): boolean {
+		return this.gameOptions.discovery
 	}
 }
