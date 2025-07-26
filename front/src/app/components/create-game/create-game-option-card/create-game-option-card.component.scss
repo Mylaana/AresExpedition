@@ -1,0 +1,23 @@
+.card-option{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	width: 100%;
+	height: 30px;
+	&.subcataa{
+		padding-left: 10%;
+		width: 90%;
+	}
+}
+.wrapper-toggle{
+	height: 22px;
+}
+.locked{
+	pointer-events: none;
+	cursor: unset;
+	filter: grayscale(50%);
+	&>p{
+		color: gray;
+	}
+}

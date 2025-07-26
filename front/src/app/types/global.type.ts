@@ -1,4 +1,5 @@
 import { BuilderOption } from "../enum/global.enum";
+import { CarouselButton, NonEventButton, ToggleButton } from "../models/core-game/button.model";
 
 export type RGB = `rgb(${number}, ${number}, ${number})`;
 /**this should be used for player selection */
@@ -39,3 +40,4 @@ export type myUUID = string
 export type PlayerColor = undefined | 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'white'
 export type PlayableCardType = 'project' | 'corporation'
 export type SupportedLanguage = 'en' | 'fr'
+export type AnyButton = NonEventButton | CarouselButton | ToggleButton

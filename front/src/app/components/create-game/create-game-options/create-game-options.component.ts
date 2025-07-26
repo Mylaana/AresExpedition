@@ -4,12 +4,14 @@ import { ButtonWrapperComponent } from '../../tools/buttons/button-wrapper/butto
 import { ToggleButton } from '../../../models/core-game/button.model';
 import { CreateGameOptionService, GameOption } from '../../../services/core-game/create-game.service';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
+import { CreateGameOptionCardComponent } from '../create-game-option-card/create-game-option-card.component';
+import { AnyButton } from '../../../types/global.type';
 
 @Component({
   selector: 'app-create-game-options',
   imports: [
 	CommonModule,
-	ButtonWrapperComponent
+	CreateGameOptionCardComponent
   ],
   templateUrl: './create-game-options.component.html',
   styleUrl: './create-game-options.component.scss'
@@ -42,8 +44,8 @@ export class CreateGameOptionsComponent implements OnInit{
 
 		this.createGameOptionService.currentGameOptions.subscribe(options => this.updateButtonsState(options))
 	}
-	onClick(button: ToggleButton){
-		this.createGameOptionService.toggleOption(button.name)
+	onClick(button: AnyButton){
+		this.createGameOptionService.toggleOption((button as ToggleButton).name)
 	}
 	updateButtonsState(options: GameOption){
 		this._expansionDiscovery.value = options.discovery
@@ -53,9 +55,15 @@ export class CreateGameOptionsComponent implements OnInit{
 		this._expansionBalancedCards.value = options.balanced
 
 		this._modeInitialDraft.value = options.initialDraft
-		this._modeInfrastructureMandatory.value = options.infrastructureMandatory
-		this._modeInfrastructureMandatory.updateEnabled(options.foundations)
+		this._modeInitialDraft.locked = true
+
 		this._modeMerger.value = options.merger
+
+		//bound sub-options
+		this._modeInfrastructureMandatory.value = options.infrastructureMandatory
+		this._modeInfrastructureMandatory.locked = options.foundations===false
+
 		this._modeStandardProjectPhaseUpgrade.value = options.standardUpgrade
+		this._modeStandardProjectPhaseUpgrade.locked = options.discovery===false
 	}
 }

@@ -38,12 +38,14 @@ export class CreateGameOptionService {
 	toggleOption(option: ToggleButtonNames){
 		let newOption = this.gameOptions.getValue()
 		switch(option){
-			case('expansionDiscovery'):{newOption.discovery = newOption.discovery===false; break}
+			case('expansionDiscovery'):{
+				newOption.discovery = newOption.discovery===false
+				if(!newOption.discovery){newOption.standardUpgrade= false}
+				break
+			}
 			case('expansionFoundations'):{
 				newOption.foundations = !newOption.foundations
-				if(!newOption.foundations){
-					newOption.infrastructureMandatory = false
-				}
+				if(!newOption.foundations){newOption.infrastructureMandatory = false}
 				break
 			}
 			case('expansionPromo'):{newOption.promo = !newOption.promo; break}

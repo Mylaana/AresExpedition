@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonCarouselComponent } from '../button-carousel/button-carousel.component';
 import { NonEventButtonComponent } from '../../button/non-event-button.component';
 import { ButtonToggleComponent } from '../button-toggle/button-toggle.component';
-
-type AnyButton = NonEventButton | CarouselButton | ToggleButton
+import { AnyButton } from '../../../../types/global.type';
 
 @Component({
   selector: 'app-button-wrapper',

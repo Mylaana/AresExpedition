@@ -1,0 +1,6 @@
+<div [ngClass]="['card-option', button.locked?'locked':'', isSubCat?'subcat':'']">
+	<p>{{caption}}</p>
+	<div class="wrapper-toggle">
+		<app-button-wrapper [button]="button" (click)="onClick()"></app-button-wrapper>
+	</div>
+</div>
