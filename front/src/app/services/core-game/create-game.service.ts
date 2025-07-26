@@ -12,7 +12,8 @@ export interface GameOption {
 
 	initialDraft: boolean,
 	infrastructureMandatory: boolean,
-	merger: boolean
+	merger: boolean,
+	standardUpgrade: boolean
 }
 
 @Injectable({
@@ -28,7 +29,8 @@ export class CreateGameOptionService {
 
 		initialDraft: true,
 		infrastructureMandatory: true,
-		merger: true
+		merger: true,
+		standardUpgrade: true
 	})
 
 	currentGameOptions = this.gameOptions.asObservable()
@@ -36,12 +38,14 @@ export class CreateGameOptionService {
 	toggleOption(option: ToggleButtonNames){
 		let newOption = this.gameOptions.getValue()
 		switch(option){
-			case('expansionDiscovery'):{newOption.discovery = newOption.discovery===false; break}
+			case('expansionDiscovery'):{
+				newOption.discovery = newOption.discovery===false
+				if(!newOption.discovery){newOption.standardUpgrade= false}
+				break
+			}
 			case('expansionFoundations'):{
 				newOption.foundations = !newOption.foundations
-				if(!newOption.foundations){
-					newOption.infrastructureMandatory = false
-				}
+				if(!newOption.foundations){newOption.infrastructureMandatory = false}
 				break
 			}
 			case('expansionPromo'):{newOption.promo = !newOption.promo; break}
@@ -51,6 +55,7 @@ export class CreateGameOptionService {
 			case('modeInitialDraft'):{newOption.initialDraft = !newOption.initialDraft; break}
 			case('modeInfrastructureMandatory'):{newOption.infrastructureMandatory = !newOption.infrastructureMandatory; break}
 			case('modeMerger'):{newOption.merger = !newOption.merger; break}
+			case('modeStandardProjectPhaseUpgrade'):{newOption.standardUpgrade = !newOption.standardUpgrade; break}
 		}
 		this.gameOptions.next(newOption)
 	}

@@ -47,13 +47,13 @@ export class WebsocketHandler {
         }
     }
     public handleGroupMessage(message: GroupMessageResult){
-        Logger.logReceivedMessage(`[${message.contentEnum}] ON [GROUP CHANNEL]`, message.content)
+		Logger.logReceivedMessage(`[${message.contentEnum}] ON [GROUP CHANNEL]`, message.content)
         switch(message.contentEnum){
-            case(GroupMessageContentResultEnum.debug):{
-                break
+			case(GroupMessageContentResultEnum.debug):{
+				break
             }
             case(GroupMessageContentResultEnum.ready):{
-                this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(message.content))
+				this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(message.content))
                 break
             }
             case(GroupMessageContentResultEnum.nextPhase):{
@@ -103,6 +103,7 @@ export class WebsocketHandler {
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, false)
+		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
     }
 	private handleMessageStartedGameClientGameState(content: WsGameState, isReconnect: boolean): void {
 		this.gameStateService.reset()
@@ -111,9 +112,11 @@ export class WebsocketHandler {
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, isReconnect)
+		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
 	}
 
 	private handleMessageConnection(content: WsGameState): void {
+		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
 		if(content.gameStatus===GameStatusEnum.newGame){
 			this.gameStateService.setGameStarted(false)
 			this.gameStateService.newGame(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))

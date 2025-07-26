@@ -13,10 +13,10 @@
 			<div *ngIf="sellCardsCancelButton.displayed" class="wrapper-event-button--small">
 				<app-non-event-button  [button]="sellCardsCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
 			</div>
-			<div *ngIf="displayPhaseUpgradeButton.displayed" class="wrapper-event-button--small">
+			<div *ngIf="displayPhaseUpgradeButton.displayed && isDiscoveryActive()" class="wrapper-event-button--small">
 				<app-non-event-button  [button]="displayPhaseUpgradeButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeButton)"></app-non-event-button>
 			</div>
-			<div *ngIf="displayPhaseUpgradeCancelButton.displayed" class="wrapper-event-button--small">
+			<div *ngIf="displayPhaseUpgradeCancelButton.displayed && isDiscoveryActive()" class="wrapper-event-button--small">
 				<app-non-event-button  [button]="displayPhaseUpgradeCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeCancelButton)"></app-non-event-button>
 			</div>
 		</div>

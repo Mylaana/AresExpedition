@@ -26,6 +26,7 @@ import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
 import { SCALING_PRODUCTION } from "../../maps/playable-card-maps";
+import { GameOption } from "./create-game.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -67,6 +68,17 @@ export class GameState{
 	private clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
 	private selectedPhaseList = new BehaviorSubject<SelectablePhaseEnum[]>([])
 	private gameOver = new BehaviorSubject<boolean>(false)
+	private gameOptions = new BehaviorSubject<GameOption>({
+		balanced: false,
+		discovery: false,
+		fanmade: false,
+		foundations: false,
+		infrastructureMandatory: false,
+		initialDraft: false,
+		merger: false,
+		promo: false,
+		standardUpgrade: false
+	})
 
     currentGroupPlayerState = this.groupPlayerState.asObservable();
     currentGroupPlayerReady = this.groupPlayerReady.asObservable();
@@ -79,6 +91,7 @@ export class GameState{
 	currentGameStartedState = this.gameStarted.asObservable()
 	currentSelectedPhaseList = this.selectedPhaseList.asObservable()
 	currentGameOver = this.gameOver.asObservable()
+	currentGameOptions = this.gameOptions.asObservable()
 
 	currentClientState = this.clientState.asObservable();
 
@@ -870,5 +883,12 @@ export class GameState{
 	}
 	setGameStarted(started: boolean = true){
 		this.gameStarted.next(started)
+	}
+	setGameOptions(options: GameOption){
+		this.gameOptions.next(options)
+		console.log(options)
+	}
+	getGameOptions(): GameOption {
+		return this.gameOptions.getValue()
 	}
 }

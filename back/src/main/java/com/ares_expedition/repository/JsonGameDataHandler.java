@@ -107,14 +107,12 @@ public class JsonGameDataHandler {
             if(!gameOptions.getExpansionDiscovery() && card.get("origin").equals("discovery")){continue;}
             if(!gameOptions.getExpansionFoundations() && card.get("origin").equals("foundations")){continue;}
             if(!gameOptions.getExpansionPromo() && card.get("origin").equals("promo")){continue;}
-            if(!gameOptions.getExpansionFanMade() && card.get("origin").equals("fanmade")){continue;}
+            if(!gameOptions.getExpansionFanmade() && card.get("origin").equals("fanmade")){continue;}
             
             if(card.containsKey("balancedVersion")){
                 if(!gameOptions.getExpansionBalanced() && card.get("balancedVersion").equals("add")){continue;}
                 if(gameOptions.getExpansionDiscovery() && card.get("balancedVersion").equals("remove")){continue;}
             }
-            System.out.println(cardCode);
-
             switch(type){
                 case PROJECT:
                     if((card.get("cardType").equals("corporation")) && cardCode instanceof String){continue;}

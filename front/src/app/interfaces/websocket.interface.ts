@@ -1,6 +1,7 @@
 import { DeckQueryOptionsEnum } from "../enum/global.enum"
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
 import { GameStatusEnum, GroupMessageContentResultEnum, MessageContentQueryEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
+import { GameOption } from "../services/core-game/create-game.service"
 import { myUUID, PlayerColor } from "../types/global.type"
 import { PlayerStateDTO } from "./dto/player-state-dto.interface"
 import { OceanBonus } from "./global.interface"
@@ -81,6 +82,7 @@ export interface WsGameState extends WsResult {
     groupReady: Map<myUUID, boolean>
     groupPlayerStatePublic: Map<string, any>
 	gameStatus: GameStatusEnum
+	gameOptions: GameOption
 }
 export interface WSGroupState extends WsResult {
 	groupState: PlayerStateDTO[]

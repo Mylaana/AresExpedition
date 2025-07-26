@@ -1,4 +1,5 @@
 import { BuilderOption } from "../enum/global.enum";
+import { CarouselButton, NonEventButton, ToggleButton } from "../models/core-game/button.model";
 
 export type RGB = `rgb(${number}, ${number}, ${number})`;
 /**this should be used for player selection */
@@ -27,7 +28,8 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'killCard' | 'lockBuilder'
 | 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage'
 | 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
-export type ToggleButtonNames = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo' | 'expansionDevFanMade' | 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger'
+export type ToggleButtonNames = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
+| 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
@@ -38,3 +40,4 @@ export type myUUID = string
 export type PlayerColor = undefined | 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'white'
 export type PlayableCardType = 'project' | 'corporation'
 export type SupportedLanguage = 'en' | 'fr'
+export type AnyButton = NonEventButton | CarouselButton | ToggleButton
