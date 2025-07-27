@@ -648,7 +648,6 @@ export class GameState{
 			}
 		}
 		this.rxStompService.publishPlayerState(clientState.toJson())
-		console.log('newGame state loaded:', clientState)
 	}
 	public setSelectStartingHandEvents(): void {
 		let events: EventBaseModel[] = []

@@ -8,6 +8,7 @@ import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
 import { v4 as uuidv4 } from 'uuid'
 import { CardType, CardTypeColor } from "../types/project-card.type"
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../enum/global.enum"
+import { environment } from "../../environments/environment"
 
 const PhaseUpgrade: Map<PhaseCardUpgradeType, SelectablePhaseEnum> = new Map<PhaseCardUpgradeType, SelectablePhaseEnum>([
 	['development_6mc', SelectablePhaseEnum.development],
@@ -57,21 +58,23 @@ function getValueVsTreshold(args: MinMaxEqualTreshold): boolean {
 	}
 }
 function logText(...text: any ): void {
+	if(environment.production===false){return}
 	console.log(text)
 }
 function logEventResolution(...text: any): void {
-	if(!DEBUG_LOG_EVENT_RESOLUTION){return}
+	if(environment.production===false){return}
 	Logger.logText(text)
 }
 function logError(...text: any): void{
+	if(environment.production===false){return}
 	console.log(text)
 }
 function logPublishMessage(prefix: any, content: any): void {
-	if(!DEBUG_LOG_WS_PUBLISH){return}
+	if(environment.production===false){return}
 	console.log(`%cPUBLISHED: ${prefix}: `, 'color:red', content)
 }
 function logReceivedMessage(prefix: any, content: any): void {
-	if(!DEBUG_LOG_WS_RECEIVED){return}
+	if(environment.production===false){return}
 	console.log(`%cRECEIVED: ${prefix}: `, 'color:green', content)
 }
 function getSelectablePhaseFromPhaseUpgrade(upgrade: PhaseCardUpgradeType): SelectablePhaseEnum {
