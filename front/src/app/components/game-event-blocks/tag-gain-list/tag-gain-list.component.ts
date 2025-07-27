@@ -49,7 +49,7 @@ export class TagGainListComponent implements OnInit{
 		let e = this.event as EventTagSelector
 		e.selectedTag = this._authorizedTagList[id]
 		if(e.button){
-			e.button.enabled = true
+			e.button.setEnabled(true)
 		}
 		this._selected = id
 	}

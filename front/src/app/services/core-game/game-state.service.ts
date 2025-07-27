@@ -886,7 +886,6 @@ export class GameState{
 	}
 	setGameOptions(options: GameOption){
 		this.gameOptions.next(options)
-		console.log(options)
 	}
 	getGameOptions(): GameOption {
 		return this.gameOptions.getValue()

@@ -130,7 +130,7 @@ export class ButtonDesigner{
     public static createEventMainButton(eventSubType: EventUnionSubTypes): EventMainButton {
         let button = new EventMainButton
         button.startEnabled = this.getStartEnabled(eventSubType)
-        button.enabled = button.startEnabled
+        button.setEnabled(button.startEnabled)
         button.caption = this.getCaption(eventSubType)
         button.eventSubType = eventSubType
         return button
@@ -138,7 +138,7 @@ export class ButtonDesigner{
     public static createEventSelectorMainButton(eventSubType: EventUnionSubTypes): EventMainButtonSelector {
         let button = new EventMainButtonSelector
         button.startEnabled = this.getStartEnabled(eventSubType)
-        button.enabled = button.startEnabled
+        button.setEnabled(button.startEnabled)
         button.caption = this.getCaption(eventSubType)
         button.eventSubType = eventSubType
         return button
@@ -156,7 +156,7 @@ export class ButtonDesigner{
 					case(3):{button.name='discardSelectedCard';button.caption='$other_cancel$';break}
                 }
             button.parentCardBuilderId=zoneId
-            button.enabled = button.startEnabled
+            button.setEnabled(button.startEnabled)
             buttons.push(button)
         }
 
@@ -164,14 +164,14 @@ export class ButtonDesigner{
         let button = new EventCardBuilderButton
 
         button.parentCardBuilderId=zoneId
-        button.enabled = button.startEnabled
+        button.setEnabled(button.startEnabled)
         switch(option){
             case(BuilderOption.gain6MC):{button.caption = '+ $ressource_megacreditvoid_6$';break}
             case(BuilderOption.drawCard):{button.caption = '$ressource_card$';break}
         }
         button.startEnabled=true
         button.name = option as EventCardBuilderButtonNames
-        button.enabled = button.startEnabled
+        button.setEnabled(button.startEnabled)
         buttons.push(button)
 
         return buttons
@@ -180,7 +180,7 @@ export class ButtonDesigner{
 		let button = new NonEventButton
 		button.name = name
         button.startEnabled = this.getStartEnabled(name)
-        button.enabled = button.startEnabled
+		button.setEnabled(button.startEnabled)
         button.caption = caption??this.getCaption(name)
 
         return button
@@ -195,7 +195,7 @@ export class ButtonDesigner{
 		let enabledRule= EFFECT_PORTAL_BUTTON_ENABLED[portalCode]? EFFECT_PORTAL_BUTTON_ENABLED[portalCode](clientState, effectButton):true
 		button.name = 'portalEffect'
 		button.startEnabled = enabledRule
-		button.enabled = button.startEnabled
+		button.setEnabled(button.startEnabled)
 		button.caption = EFFECT_PORTAL_BUTTON_CAPTION[portalCode](effectButton)
 		button.effect = effectButton
 

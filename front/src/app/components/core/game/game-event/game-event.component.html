@@ -59,7 +59,6 @@
 				<app-phase-action
 					*ngIf="currentPhase==='ACTION' && currentEvent.subType==='actionPhaseActivator'"
 					[event]="this.currentEvent"
-					(actionPhaseButtonUpdate)="onActionPhaseStateUpdate()"
 					(projectActivated)="onProjectActivated($event)">
 				</app-phase-action>
 				<app-phase-card-upgrade-selector

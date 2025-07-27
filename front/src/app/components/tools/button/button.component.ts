@@ -61,7 +61,7 @@ export class ButtonComponent implements OnChanges {
 	}
 	isEnabled(): boolean {
 		if(this.button.locked){return false}
-		return this.button.enabled
+		return this.button.isEnabled()
 	}
 	private handleImageButtonChange(){
 		let imageButton = this.button as ImageButton

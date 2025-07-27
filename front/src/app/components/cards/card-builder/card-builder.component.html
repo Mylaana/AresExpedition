@@ -16,11 +16,11 @@
 		<div class="wrapper-buton-zone"
 			*ngIf="!cardBuilder.getBuilderIsLocked()">
 			<div class="wrapper-buttons">
-				<div *ngIf="cardBuilder.getButtons()[0].enabled || cardBuilder.getButtons()[1].enabled" class="wrapper-select-button">
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].enabled" [button]="cardBuilder.getButtons()[0]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[1].enabled" [button]="cardBuilder.getButtons()[1]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
+				<div *ngIf="cardBuilder.getButtons()[0].isEnabled() || cardBuilder.getButtons()[1].isEnabled()" class="wrapper-select-button">
+					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].isEnabled()" [button]="cardBuilder.getButtons()[0]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
+					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[1].isEnabled()" [button]="cardBuilder.getButtons()[1]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
 				</div>
-				<div *ngIf="cardBuilder.getButtons()[2].enabled || cardBuilder.getButtons()[3].enabled" class="wrapper-build-button">
+				<div *ngIf="cardBuilder.getButtons()[2].isEnabled() || cardBuilder.getButtons()[3].isEnabled()" class="wrapper-build-button">
 					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
 					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
 				</div>

@@ -53,7 +53,7 @@ export class EventHandler {
 		this.finishEventEffect()
 	}
 	public updateValidateButton(enabled: boolean): void {
-		this.currentEvent.button?.updateEnabled(enabled)
+		this.currentEvent.button?.setEnabled(enabled)
 		this.currentEvent.button?.locked?this.currentEvent.lockValidateButton:false
 	}
 	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
@@ -111,12 +111,13 @@ export class EventHandler {
 		this.gameStateService.activateCard(input.card, input.option)
 	}
 	public updateActionPhaseMainButtonState(enabled?: boolean): void {
+		console.log('action phase update')
 		let state = this.gameStateService.getClientState()
 		let plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 		let heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
 		enabled = (heatStock>=8  || plantStock>=8 || (heatStock>=5  && plantStock>=3)) === false
 
-		this.currentEvent.button?.updateEnabled(enabled)
+		this.currentEvent.button?.setEnabled(enabled)
 	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
@@ -240,10 +241,12 @@ export class EventHandler {
 				let finishPhaseButtonEnabled = (heatStock>=8  || plantStock>=8 || (heatStock>=5  && plantStock>=3)) === false
 
 				event.cardSelector.selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.cardSelector.filter)
+				/*
 				if(event.button){
 					event.button.startEnabled = finishPhaseButtonEnabled
 					event.button.resetStartEnabled()
 				}
+				*/
 				break
 			}
 		}

@@ -73,7 +73,7 @@ describe('Service - Designers - Button', () => {
                 expectedButton.caption = 'caption'
                 expectedButton.eventSubType = expectedSubType
                 expectedButton.startEnabled = true
-                expectedButton.enabled = expectedButton.startEnabled
+                expectedButton.setEnabled(expectedButton.startEnabled)
                 const captionSpy = spyOn<any>(ButtonDesigner, 'getCaption').and.returnValue('caption')
                 const startEnabledSpy = spyOn<any>(ButtonDesigner, 'getStartEnabled').and.returnValue(true)
 
@@ -94,7 +94,7 @@ describe('Service - Designers - Button', () => {
                 expectedButton.caption = '$other_validate$'
                 expectedButton.eventSubType = expectedSubType
                 expectedButton.startEnabled = false
-                expectedButton.enabled = expectedButton.startEnabled
+                expectedButton.setEnabled(expectedButton.startEnabled)
 
                 let button = ButtonDesigner.createEventMainButton(expectedSubType)
 
@@ -115,7 +115,7 @@ describe('Service - Designers - Button', () => {
                 expectedButton.caption = 'Add selection to hand'
                 expectedButton.eventSubType = expectedSubType
                 expectedButton.startEnabled = true
-                expectedButton.enabled = expectedButton.startEnabled
+                expectedButton.setEnabled(expectedButton.startEnabled)
                 const captionSpy = spyOn<any>(ButtonDesigner, 'getCaption').and.returnValue('Add selection to hand')
                 const startEnabledSpy = spyOn<any>(ButtonDesigner, 'getStartEnabled').and.returnValue(true)
 
@@ -136,7 +136,7 @@ describe('Service - Designers - Button', () => {
                 expectedButton.caption = '$other_validate$'
                 expectedButton.eventSubType = expectedSubType
                 expectedButton.startEnabled = false
-                expectedButton.enabled = expectedButton.startEnabled
+                expectedButton.setEnabled(expectedButton.startEnabled)
 
                 let button = ButtonDesigner.createEventSelectorMainButton(expectedSubType)
 
