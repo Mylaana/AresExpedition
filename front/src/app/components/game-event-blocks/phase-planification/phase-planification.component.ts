@@ -69,6 +69,6 @@ export class PhasePlanificationComponent {
 	public setSelectedPhase(event: EventGeneric, phase: SelectablePhaseEnum): void {
 		this.currentPhaseSelected = phase
 		event.selectedPhase = phase
-		event.button?.updateEnabled(true)
+		event.button?.setEnabled(true)
 	}
 }

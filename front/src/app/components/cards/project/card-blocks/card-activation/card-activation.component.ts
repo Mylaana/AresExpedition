@@ -69,7 +69,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 		this.updateButtonStatus()
 	}
 	private updateButtonStatus(): void {
-		this._activateOnce.updateEnabled(this.projectCard.activated<1 && this.activationCostPayable)
-		this._activateTwice.updateEnabled(this.projectCard.activated===1 && this.activationCostPayable)
+		this._activateOnce.setEnabled(this.projectCard.activated<1 && this.activationCostPayable)
+		this._activateTwice.setEnabled(this.projectCard.activated===1 && this.activationCostPayable)
 	}
 }

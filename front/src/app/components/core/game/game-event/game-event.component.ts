@@ -194,8 +194,8 @@ export class GameEventComponent {
 		switch(button.name){
 			case('sellOptionalCard'):{
 				this.gameStateService.addEventQueue(EventFactory.createCardSelector('selectCardOptionalSell'), 'first')
-				this.sellCardsButton.updateEnabled(false)
-				this.sellCardsCancelButton.updateEnabled(true)
+				this.sellCardsButton.setEnabled(false)
+				this.sellCardsCancelButton.setEnabled(true)
 				break
 			}
 			case('sellOptionalCardCancel'):{
@@ -204,8 +204,8 @@ export class GameEventComponent {
 			}
 			case('displayUpgradedPhase'):{
 				this.gameStateService.addEventQueue(EventFactory.simple.upgradePhaseCard(0), 'first')
-				this.displayPhaseUpgradeButton.updateEnabled(false)
-				this.displayPhaseUpgradeCancelButton.updateEnabled(true)
+				this.displayPhaseUpgradeButton.setEnabled(false)
+				this.displayPhaseUpgradeCancelButton.setEnabled(true)
 				break
 			}
 			case('displayUpgradedPhaseCancel'):{
@@ -230,9 +230,12 @@ export class GameEventComponent {
 	public onProjectActivated(input: {card: PlayableCardModel, option: ActivationOption, twice: boolean}){
 		this.eventHandler.onProjectActivated(input)
 	}
+	/*
 	public onActionPhaseStateUpdate(): void {
+				console.log('action phase update')
 		this.eventHandler.updateActionPhaseMainButtonState()
 	}
+	*/
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public onCardBuilderButtonClicked(button: EventCardBuilderButton){
 		this.eventHandler.cardBuilderButtonClicked(button)

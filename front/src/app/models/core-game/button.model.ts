@@ -5,7 +5,7 @@ import { ButtonType, EventCardBuilderButtonNames, NonEventButtonNames, PlayerCol
 import { EffectPortalButtonEnum } from "../../enum/global.enum"
 
 export abstract class ButtonBase {
-    enabled: boolean = false
+    private enabled: boolean = false
     startEnabled: boolean = false
 	displayed: boolean = true
     caption?: string
@@ -16,9 +16,12 @@ export abstract class ButtonBase {
 	resetStartEnabled(){
 		this.enabled = this.startEnabled
 	}
-	updateEnabled(enabled: boolean){
-        this.enabled = enabled
+	setEnabled(enabled: boolean){
+		this.enabled = enabled
     }
+	isEnabled(): boolean {
+		return this.enabled
+	}
 }
 export class ImageButton extends ButtonBase{
 	override type: ButtonType = 'image'
@@ -37,7 +40,7 @@ export abstract class EventButtonBase extends ButtonBase {
 export class EventMainButton extends EventButtonBase {}
 export class EventMainButtonSelector extends EventMainButton {
     updateEnabledTreshold(args: MinMaxEqualTreshold): void {
-        this.enabled = Utils.getValueVsTreshold(args)
+        this.setEnabled(Utils.getValueVsTreshold(args))
     }
 }
 export class EventCardBuilderButton extends EventButtonBase {

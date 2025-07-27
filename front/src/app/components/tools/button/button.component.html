@@ -38,8 +38,8 @@
 	</div>
 </div>
 <div *ngIf="button.type==='image'" class="wrapper-button">
-    <div [ngClass]="{'element-disabled': button.enabled===false}">
-        <button [disabled]="button.enabled===false" [ngClass]="[_imageUrl ? 'image-button':'validation-button', button.enabled===true ? 'element-clickable':'']" (click)="onClick(button)"  >
+    <div [ngClass]="{'element-disabled': button.isEnabled()===false}">
+        <button [disabled]="button.isEnabled()===false" [ngClass]="[_imageUrl ? 'image-button':'validation-button', button.isEnabled() ? 'element-clickable':'']" (click)="onClick(button)"  >
             <p>{{button.caption}}</p>
             <img *ngIf="_imageUrl" [src]="_imageUrl" alt="">
         </button>

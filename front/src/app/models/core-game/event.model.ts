@@ -126,7 +126,7 @@ export class CardBuilder {
     private updateButtonEnabled(name: EventCardBuilderButtonNames, enabled: boolean): void {
         let button = this.getButtonFromName(name)
         if(!button){return}
-        button.enabled = enabled
+        button.setEnabled(enabled)
     }
     private updateButtonGroupState(buttonName: ButtonGroupUpdateType): void {
         switch(buttonName){
@@ -360,11 +360,11 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		if(!this.button){return}
 		for(let b of this.cardBuilder){
 			if(b.isLockingValidation()){
-				this.button.enabled = false
+				this.button.setEnabled(false)
 				return
 			}
 		}
-		this.button.enabled = true
+		this.button.setEnabled(true)
 	}
 }
 
