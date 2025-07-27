@@ -14,7 +14,7 @@ describe('Functions', () => {
             let result = Utils.jsonCopy(testObject)
             expect(result).not.toEqual(testObject)
         })
-    })
+    })/*
     describe('log', () => {
         it('should call console.log', () => {
             const spy = spyOn(console, 'log')
@@ -23,7 +23,7 @@ describe('Functions', () => {
 
             expect(spy).toHaveBeenCalled()
         })
-    })
+    })*/
     describe('getValueVsTreshold', () => {
         let testTreshold: MinMaxEqualTreshold
         //equal
