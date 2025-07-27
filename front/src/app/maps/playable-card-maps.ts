@@ -1221,8 +1221,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		return [EventFactory.simple.upgradePhaseCard(1, [4])]
 	},
 	//Exocorp v2
-	'D02B': (clientState) => {
-		clientState.addSellCardValueMod(1)
+	'D02B': () => {
 		return [EventFactory.simple.upgradePhaseCard(1, [4])]
 	},
 	//Hyperion Systems
@@ -1622,6 +1621,8 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	'219': (card) => card.hasTag('power') ? 3 : 0,
 	//DevTechs
 	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
+	//Exocorp v2
+	'D02B': () => 2,
 	//Solar Logistics
 	'FM2': (card) => {
 		return card.hasTag('space') && card.hasTag('event')?10:0

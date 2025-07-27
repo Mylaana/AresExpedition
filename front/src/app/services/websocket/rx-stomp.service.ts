@@ -4,7 +4,7 @@ import { WebsocketQueryMessageFactory } from '../../factory/websocket-message-fa
 import { GLOBAL_WS_APP_PLAYER, GLOBAL_WS_APP_DEBUG } from '../../global/global-const';
 import { MessageContentQueryEnum } from '../../enum/websocket.enum';
 import { SelectablePhaseEnum } from '../../enum/phase.enum';
-import { Logger } from '../../utils/utils';
+import { Logger, Utils } from '../../utils/utils';
 import { PlayerMessage } from '../../interfaces/websocket.interface';
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from '../../types/global.type';
@@ -68,7 +68,7 @@ export class RxStompService extends RxStomp {
 	}
 
     private onClientConnected() {
-        console.log('%cCLIENT RECONNECTED', 'color:blue')
+        Logger.logText('%cCLIENT RECONNECTED', 'color:blue')
 		this.isProcessingQueue = false
 		this.messageQueue = []
         this.publishConnectionQuery()

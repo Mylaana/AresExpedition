@@ -5,8 +5,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.ares_expedition.controller.websocket.InputRouter;
 import com.ares_expedition.controller.websocket.WsControllerOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
@@ -22,6 +25,7 @@ import com.ares_expedition.repository.JsonGameDataHandler;
 
 @Service
 public class GameController {
+    private static final Logger logger = LoggerFactory.getLogger(InputRouter.class);
     private final WsControllerOutput wsOutput;
     private Map<String, Game> gameHolder = new HashMap<>();
 
@@ -67,7 +71,7 @@ public class GameController {
             case SCAN_KEEP_QUERY :
                 game.addEventScanKeepCardsToPlayer(playerId, cards, keep, options);
             default:
-                System.err.println("UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: " + reason);
+                logger.debug("UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: " + reason);
                 break;
         }
         return cards;
@@ -91,7 +95,7 @@ public class GameController {
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
         game.resetResearchResolved();
-        System.err.println("GAME OVER:" + game.isGameOver());
+        logger.debug("GAME OVER:" + game.isGameOver());
         if(game.isGameOver()){
             game.setGameStatus(GameStatusEnum.GAME_OVER);
             wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));

@@ -21,7 +21,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class JsonGameDataHandler {
+    private static final Logger logger = LoggerFactory.getLogger(JsonGameDataHandler.class);
+    
     private static final String DATABASE_NAME = "database.json";
     private static final String DATABASE_DIRECTORY = "data/";
     private static final String DATABASE_PATH = DATABASE_DIRECTORY + DATABASE_NAME;
@@ -30,14 +35,14 @@ public class JsonGameDataHandler {
 
     public static Game getGame(String gameId){
         checkDatabaseExistOrCreateIt();
-        System.out.println("\u001B[31m GET GAME: " +gameId +" \u001B[0m");
+        logger.debug("\u001B[31m GET GAME: " +gameId +" \u001B[0m");
         Map<String, Game> games = readGames();
         return games.getOrDefault(gameId, new Game());
     }
 
     public static Map<String, Game> getAllGames() {
         checkDatabaseExistOrCreateIt();
-        System.out.println("\u001B[31m GET ALL GAMES \u001B[0m");
+        logger.debug("\u001B[31m GET ALL GAMES \u001B[0m");
         Map<String, Game> games = readGames();
         System.out.println("games loaded");
         return games;
@@ -45,7 +50,7 @@ public class JsonGameDataHandler {
 
     public static void saveGame(Game saveGame) {
         checkDatabaseExistOrCreateIt();
-        System.out.println("\u001B[31m SAVE GAME \u001B[0m");
+        logger.debug("\u001B[31m SAVE GAME \u001B[0m");
 
         Map<String, Game> games = readGames();
         Map<String, GameData> gamesDTO = Game.toDataMap(games);
@@ -55,16 +60,16 @@ public class JsonGameDataHandler {
 
     private static Map<String, Game> readGames(){
         File file = Paths.get(DATABASE_PATH).toFile();
-        //System.out.println("\u001B[32m \u001B[0m");
+        logger.debug("\u001B[32m \u001B[0m");
         if(!file.exists()){
-            System.err.println("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath());
+            logger.debug("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath());
             return new HashMap<>();
         }
 
         try (Reader reader = new FileReader(file)){
             long length = file.length();
             if (length == 0) {
-                System.err.println("Empty database.json file.");
+                logger.debug("Empty database.json file.");
                 return new HashMap<>();
             }
             return objectMapper.readValue(reader, new TypeReference<Map<String, Game>>(){});
@@ -88,7 +93,7 @@ public class JsonGameDataHandler {
         File file = Paths.get(CARDS_DATA_PATH).toFile();
         List<String> idList = new ArrayList<>();
         if(!file.exists()){
-            System.err.println("\\u001B[32m File not found: " + new File(CARDS_DATA_PATH).getAbsolutePath());
+            logger.debug("\\u001B[32m File not found: " + new File(CARDS_DATA_PATH).getAbsolutePath());
             return idList;
         }
 
