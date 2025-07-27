@@ -71,7 +71,7 @@ public class GameController {
             case SCAN_KEEP_QUERY :
                 game.addEventScanKeepCardsToPlayer(playerId, cards, keep, options);
             default:
-                System.err.println("UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: " + reason);
+                logger.debug("UNHANDLED DRAW REASON - NO EVENT SAVED IN PLAYER EVENTSTATE: " + reason);
                 break;
         }
         return cards;
