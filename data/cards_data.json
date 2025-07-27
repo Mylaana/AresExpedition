@@ -546,7 +546,8 @@
             "fr": "EFFET: Les cartes que vous d\u00e9faussez pour gagner des MC vous rapportent 1 MC supll\u00e9mentaire. "
         },
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
     },
     {
         "card_code": "18",
@@ -6511,12 +6512,12 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$other_sellcard$: +$ressource_megacreditvoid_1$",
-            "fr": "$other_sellcard$: +$ressource_megacreditvoid_1$"
+            "en": "$ressource_card$: $ressource_megacreditvoid_-2$",
+            "fr": "$ressource_card$: $ressource_megacreditvoid_-2$"
         },
         "effectText": {
-            "en": "EFFECT: Whenever you sell a card, you gain one more MC.",
-            "fr": ""
+            "en": "EFFECT: Whenever you play a card, you pay 2 MC less for it.",
+            "fr": "EFFET : Lorsque vous jouez une carte, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC. "
         },
         "playedText": {
             "en": "Upgrade your Phase card V.",
@@ -7528,7 +7529,7 @@
             "en": "If you have a milestone, gain 4 heats.",
             "fr": "Si vous avez un objectif, gagnez 4 chaleurs."
         },
-        "status": "validated",
+        "status": "blocked",
         "vpScaling": "0"
     },
     {
