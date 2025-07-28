@@ -13,7 +13,7 @@
 			</div>
 			<div class="wrapper-setting">
 				<p>Language:</p>
-				<app-non-event-button [button]="_toggleLanguage" [shape]="'hex'" [style]="'toggle'" (buttonClicked)="onButtonClicked(_toggleLanguage)"></app-non-event-button>
+				<app-button-carousel [button]="_carouselLanguage" (valueChanged)="onCarouselButtonClicked(_carouselLanguage, $event)"></app-button-carousel>
 			</div>
 		</div>
 	</div>

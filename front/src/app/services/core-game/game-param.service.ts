@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router'
 import { BehaviorSubject, filter } from 'rxjs'
 import { SupportedLanguage } from '../../types/global.type'
 import { PlayableCardModel } from '../../models/cards/project-card.model'
+import { GAME_SUPPORTED_LANGUAGE } from '../../global/global-const'
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class GameParamService {
 	currentClientId = this.clientIdSubject.asObservable()
 	currentLanguage = this.language.asObservable()
 
-	constructor(private router: Router) {
+	constructor(private router: Router){
 	  this.router.events
 		.pipe(filter(event => event instanceof NavigationEnd))
 		.subscribe(() => {
@@ -35,15 +36,15 @@ export class GameParamService {
 	}
 
 	toggleDebug() {this.debug.next(this.debug.getValue()===false)}
-	toggleLanguage() {
-		let newLanguage: SupportedLanguage = 'en'
-		if(this.language.getValue()==='en'){
-			newLanguage = 'fr'
-		} else {
-			newLanguage = 'en'
+	setNewLanguage(language: string){
+		if(!GAME_SUPPORTED_LANGUAGE.includes(language as SupportedLanguage)){
+			console.error('UNSUPPORTED LANGUAGE: ', language)
+			return
 		}
-		this.language.next(newLanguage)
-		PlayableCardModel.setLanguage(newLanguage)
-		console.log('switched to :', newLanguage)
+		this.language.next(language as SupportedLanguage)
+		PlayableCardModel.setLanguage(language as SupportedLanguage)
+	}
+	getCurrentLanguage(): string {
+		return this.language.getValue()
 	}
   }

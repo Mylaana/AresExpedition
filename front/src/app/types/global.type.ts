@@ -16,7 +16,7 @@ export type ButtonNames =
 | 'upgradePhase'
 | 'drawCards' | 'discardCards' | 'scanKeep'
 | 'addRessourceToSelectedCard'
-| ToggleButtonNames
+| ToggleButtonNames | CarouselButtonNames
 export type ButtonType = 'image' | 'eventMain' | 'nonEvent' |  'color' | 'toggle' | 'carousel'
 
 export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' | 'rollBack' | 'settings' | 'closeSettings' | 'activateProjectOnce' | 'activateProjectTwice'
@@ -26,10 +26,11 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'displayUpgradedPhaseCancel' | 'killCard' | 'lockBuilder'
 | 'settingToggleDebug' | 'portalEffect'
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'killCard' | 'lockBuilder'
-| 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage'
+| 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage' | 'carouselLeft' | 'carouselRight'
 | 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 export type ToggleButtonNames = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
 | 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade'
+export type CarouselButtonNames = 'carousel'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'

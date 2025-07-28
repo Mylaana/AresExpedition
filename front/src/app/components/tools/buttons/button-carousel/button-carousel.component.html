@@ -1,1 +1,7 @@
-<p>button-carousel works!</p>
+<div class="wrapper-button">
+	<app-button [button]="_left" [shape]="'leftCarousel'" (buttonClicked)="onLeftClick()"></app-button>
+</div>
+<p>{{button.value}}</p>
+<div class="wrapper-button">
+	<app-button [button]="_right" [shape]="'rightCarousel'" (buttonClicked)="onRightClick()"></app-button>
+</div>

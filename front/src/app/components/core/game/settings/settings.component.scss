@@ -67,9 +67,10 @@ $main-padding: 5px;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	width: 150px;
+	width: 300px;
 	height: 40px;
 	& > app-non-event-button{
 		height: 100%;
 	}
+	border: green dotted 1px;
 }

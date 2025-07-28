@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ButtonBase, ToggleButton } from '../../../../models/core-game/button.model';
+import { ToggleButton } from '../../../../models/core-game/button.model';
 import { CommonModule } from '@angular/common';
 
 @Component({

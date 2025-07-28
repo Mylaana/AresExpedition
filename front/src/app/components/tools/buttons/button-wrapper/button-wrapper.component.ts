@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ButtonBase, CarouselButton, NonEventButton, ToggleButton } from '../../../../models/core-game/button.model';
+import { CarouselButton, NonEventButton, ToggleButton } from '../../../../models/core-game/button.model';
 import { CommonModule } from '@angular/common';
 import { ButtonCarouselComponent } from '../button-carousel/button-carousel.component';
 import { NonEventButtonComponent } from '../../button/non-event-button.component';
