@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { CardState } from '../../../../interfaces/card.interface';
 import { CardSelector,  } from '../../../../interfaces/global.interface';
@@ -9,6 +9,9 @@ import { Utils } from '../../../../utils/utils';
 import { PlayableCardComponent } from '../playable-card/playable-card.component';
 import { ActivationOption, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 import { EventUnionSubTypes } from '../../../../types/event.type';
+import { GameParamService } from '../../../../services/core-game/game-param.service';
+import { Subject, takeUntil } from 'rxjs';
+import { SettingCardSize } from '../../../../types/global.type';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
 
@@ -21,7 +24,7 @@ const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builder
     templateUrl: './playable-card-list.component.html',
     styleUrl: './playable-card-list.component.scss'
 })
-export class PlayableCardListComponent implements OnChanges{
+export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Input() event?: EventBaseModel;
 	@Input() eventId?: number;
 	@Input() cardList!: PlayableCardModel[]
@@ -44,6 +47,11 @@ export class PlayableCardListComponent implements OnChanges{
 	_activateTwiceRemaining: number = 0
 	private selectedCardList: PlayableCardModel[] = [];
 
+	_cardSize!: SettingCardSize
+	private destroy$ = new Subject<void>
+
+	constructor(private gameParam: GameParamService){}
+
 	ngOnInit(){
 		this.resetSelector()
 		this.updateCardList()
@@ -51,6 +59,11 @@ export class PlayableCardListComponent implements OnChanges{
 		if(this.event){this.setListSubType(this.event as EventCardSelector)}
 		if(this.event?.hasCardActivator()){
 			this.setActivationCount(this.event as EventCardActivator)
+		}
+		if(this.listType!='hand'){
+			this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
+		} else {
+			this.gameParam.currentHandCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
 		}
 	}
 	ngOnChanges(changes: SimpleChanges) {
@@ -60,6 +73,10 @@ export class PlayableCardListComponent implements OnChanges{
 			this.updateCardList()
 			return
 		}
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 	private setBackground(): void{
 		switch(this.listType){

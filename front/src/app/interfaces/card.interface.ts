@@ -1,4 +1,4 @@
-import { AdvancedRessourceType, SupportedLanguage } from "../types/global.type"
+import { AdvancedRessourceType } from "../types/global.type"
 import { SummaryType, CardType, PrerequisiteTresholdType, PrerequisiteType, LocalizedText } from "../types/project-card.type"
 import { AdvancedRessourceStock } from "./global.interface"
 

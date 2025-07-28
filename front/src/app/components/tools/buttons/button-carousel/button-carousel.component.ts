@@ -23,7 +23,6 @@ export class ButtonCarouselComponent implements OnInit{
 	ngOnInit(): void {
 		this._left = ButtonDesigner.createNonEventButton('carouselLeft')
 		this._right = ButtonDesigner.createNonEventButton('carouselRight')
-		console.log(this.button, this.getCurrentIndex())
 	}
 	onLeftClick(){
 		this.changeValue(-1)

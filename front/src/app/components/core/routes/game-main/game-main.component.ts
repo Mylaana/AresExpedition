@@ -100,7 +100,6 @@ export class GameMainComponent implements OnInit{
 		this.gameStateService.currentGameOver.subscribe(over => this._gameOver = over)
 		this.rxStompService.connectionState$.subscribe(() => {this._connected = this.rxStompService.connectionState$.getValue() === 1})
 		this.settingsButton = ButtonDesigner.createNonEventButton('settings')
-		this.openSettings()
 	}
 	subscribeWsIfValidSessionIds(): void {
 		if(!this.gameId || !this.clientId){return}

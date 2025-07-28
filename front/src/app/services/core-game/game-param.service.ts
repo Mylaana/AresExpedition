@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { BehaviorSubject, filter } from 'rxjs'
-import { SupportedLanguage } from '../../types/global.type'
+import { SettingCardSize, SettingSupportedLanguage } from '../../types/global.type'
 import { PlayableCardModel } from '../../models/cards/project-card.model'
-import { GAME_SUPPORTED_LANGUAGE } from '../../global/global-const'
+import { SETTING_CARD_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/global-const'
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,16 @@ export class GameParamService {
 	private gameIdSubject = new BehaviorSubject<string | null>(null)
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
 	private debug = new BehaviorSubject<boolean>(false)
-	private language = new BehaviorSubject<SupportedLanguage>('en')
+	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
+	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
+	private handCardSize = new BehaviorSubject<SettingCardSize>('small')
 
 	currentDebug = this.debug.asObservable()
 	currentGameId = this.gameIdSubject.asObservable()
 	currentClientId = this.clientIdSubject.asObservable()
 	currentLanguage = this.language.asObservable()
+	currentCardSize = this.cardSize.asObservable()
+	currentHandCardSize = this.handCardSize.asObservable()
 
 	constructor(private router: Router){
 	  this.router.events
@@ -37,14 +41,27 @@ export class GameParamService {
 
 	toggleDebug() {this.debug.next(this.debug.getValue()===false)}
 	setNewLanguage(language: string){
-		if(!GAME_SUPPORTED_LANGUAGE.includes(language as SupportedLanguage)){
+		if(!SETTING_SUPPORTED_LANGUAGE.includes(language as SettingSupportedLanguage)){
 			console.error('UNSUPPORTED LANGUAGE: ', language)
 			return
 		}
-		this.language.next(language as SupportedLanguage)
-		PlayableCardModel.setLanguage(language as SupportedLanguage)
+		this.language.next(language as SettingSupportedLanguage)
+		PlayableCardModel.setLanguage(language as SettingSupportedLanguage)
 	}
 	getCurrentLanguage(): string {
 		return this.language.getValue()
+	}
+	setNewCardSize(value: string){
+		if(!SETTING_CARD_SIZE.includes(value as SettingCardSize)){
+			console.error('UNSUPPORTED CARD SIZE: ', value)
+			return
+		}
+		this.cardSize.next(value as SettingCardSize)
+	}
+	getCurrentCardSize(): string {
+		return this.cardSize.getValue()
+	}
+	getCurrentHandCardSize(): string {
+		return this.handCardSize.getValue()
 	}
   }

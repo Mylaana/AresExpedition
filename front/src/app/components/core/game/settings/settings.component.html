@@ -8,12 +8,20 @@
 		</div>
 		<div class="wrapper-setting-zone">
 			<div class="wrapper-setting">
-				<p>Debug:</p>
+				<p>Debug :</p>
 				<app-non-event-button [button]="_toggleDebugMode" [shape]="'hex'" [style]="'toggle'" (buttonClicked)="onButtonClicked(_toggleDebugMode)"></app-non-event-button>
 			</div>
 			<div class="wrapper-setting">
-				<p>Language:</p>
+				<p>Language :</p>
 				<app-button-carousel [button]="_carouselLanguage" (valueChanged)="onCarouselButtonClicked(_carouselLanguage, $event)"></app-button-carousel>
+			</div>
+			<div class="wrapper-setting">
+				<p>Card size :</p>
+				<app-button-carousel [button]="_carouselCardSize" (valueChanged)="onCarouselButtonClicked(_carouselCardSize, $event)"></app-button-carousel>
+			</div>
+			<div class="wrapper-setting">
+				<p>Hand Card size :</p>
+				<app-button-carousel [button]="_carouselHandCardSize" (valueChanged)="onCarouselButtonClicked(_carouselHandCardSize, $event)"></app-button-carousel>
 			</div>
 		</div>
 	</div>

@@ -1,12 +1,12 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
-import { AdvancedRessourceType, SupportedLanguage, TagType } from "../../types/global.type"
+import { AdvancedRessourceType, SettingSupportedLanguage, TagType } from "../../types/global.type"
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, LocalizedText} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { PlayedCardStocksDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
 import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
 import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
-import { GAME_DEFAULT_LANGUAGE } from "../../global/global-const"
+import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const"
 
 export class PlayableCardModel {
     cardCode!: string;
@@ -38,7 +38,7 @@ export class PlayableCardModel {
 	tagStock!: number[] // this stores additional tags and wildtags result
     tagsUrl?: string[];
 
-	private static _language: SupportedLanguage = GAME_DEFAULT_LANGUAGE
+	private static _language: SettingSupportedLanguage = SETTING_DEFAULT_LANGUAGE
 	constructor(
 		private raw?: PlayableCardInterface,
 	){
@@ -77,7 +77,7 @@ export class PlayableCardModel {
 		}
 	}
 
-	static setLanguage(lang: SupportedLanguage) {
+	static setLanguage(lang: SettingSupportedLanguage) {
 		PlayableCardModel._language = lang;
 	}
 	//Localized getters
@@ -96,14 +96,14 @@ export class PlayableCardModel {
 	getPrerequisiteText(): string {return this.getLanguageOrFallback(this.raw?.prerequisiteText)}
 	getPrerequisiteSummary(): string {return this.getLanguageOrFallback(this.raw?.prerequisiteSummaryText)}
 
-	getLanguageOrFallback(obj: LocalizedText | undefined, displayMissing: boolean = true, fallbackLang: SupportedLanguage = GAME_DEFAULT_LANGUAGE): string {
+	getLanguageOrFallback(obj: LocalizedText | undefined, displayMissing: boolean = true, fallbackLang: SettingSupportedLanguage = SETTING_DEFAULT_LANGUAGE): string {
 		let result = obj?.[PlayableCardModel._language] || obj?.[fallbackLang]
 		if(result){return result}
 		if(displayMissing){return '[Missing]'}
 		return ''
 	}
 	hasLocalizedField(field?: LocalizedText): boolean {
-		return !!(field?.[PlayableCardModel._language] || field?.[GAME_DEFAULT_LANGUAGE]);
+		return !!(field?.[PlayableCardModel._language] || field?.[SETTING_DEFAULT_LANGUAGE]);
 	}
 
 	//Other
