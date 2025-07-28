@@ -59,6 +59,14 @@ export class SettingsComponent {
 				this.gameParam.setNewLanguage(value)
 				break
 			}
+			case(this._carouselCardSize):{
+				this.gameParam.setNewCardSize(value)
+				break
+			}
+			case(this._carouselHandCardSize):{
+				this.gameParam.setNewHandCardSize(value)
+				break
+			}
 		}
 	}
 }

@@ -56,9 +56,10 @@
 	}
 }
 .wrapper-effect-summary-border{
+	$h: calc(var(--card-effect-height));
     position: relative;
 	height: calc(var(--card-effect-height));
-	aspect-ratio: 1;
+	width: calc(var(--card-effect-width));
     display: flex;
     justify-content: center;
     align-items: center;

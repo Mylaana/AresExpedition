@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CardStateModel } from '../../../../models/cards/card-state.model';
 import { CardState } from '../../../../interfaces/card.interface';
 import { SettingCardSize } from '../../../../types/global.type';
+import { GameParamService } from '../../../../services/core-game/game-param.service';
 
 @Component({
     selector: 'app-base-card',

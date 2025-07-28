@@ -78,8 +78,6 @@
 			<app-card-background [cardType]="projectCard.cardType"></app-card-background>
 			<app-card-status [cardCode]="projectCard.cardCode" [cardStatus]="projectCard.status"  [hovered]="_hovered"></app-card-status>
 		</div>
-
-
 	</div>
 	<app-card-activation-list
 		*ngIf="state.isActivable()"
@@ -88,4 +86,3 @@
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>
-<p>{{projectCard.prerequisiteTresholdType}}</p>

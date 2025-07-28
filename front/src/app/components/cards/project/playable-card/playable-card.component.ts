@@ -67,7 +67,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private clientState!: PlayerStateModel
 
 	_hovered: boolean = false
-	//_maximumActivation: boolean = false
 	_activationCostPayable: boolean = false
 	_buildableCheckList!: CardBuildable
 

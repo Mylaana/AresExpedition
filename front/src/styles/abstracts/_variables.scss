@@ -1,17 +1,19 @@
 :root {
-	--card-height: calc(var(--card-width) * 88 / 63);
-	--card-effect-height: calc(var(--card-height) * .26);
-	--settings-button-size: 9%;
+	--text-size: 11px;
 
+	--card-height: calc(var(--card-width) * 88 / 63);
+	--settings-button-size: 80px;
 
 	--card-width: 214px;
-	--text-size: 11px;
+	--card-text-size: 11px;
 	--card-element-padding: 5px;
 	--card-text-right-padding: 5px;
-	@media (max-width: 1919px) {
-		--card-width: 150px;
-		--text-size: 9px;
-		--card-element-padding: 1px;
-		--card-text-right-padding: 0px;
-	}
+
+	--card-cost-square-padding: 6px;
+	--card-cost-top-cost-padding: 15px;
+	--card-cost-current-cost-text-size: 15px;
+	--card-cost-not-current-cost-text-size: 11px;
+
+	--card-effect-height: 75px;
+	--card-effect-width: 75px;
 }

@@ -1,10 +1,11 @@
 $card-bottom-padding: calc(var(--card-height) * .015);
+
 :host ::ng-deep p  {
     color: white;
-    font-size: var(--text-size);
+    font-size: var(--card-text-size);
 }
 :host ::ng-deep app-text-with-image .text-tag{
-    $tag-max-size: calc(var(--text-size) * 1.5);
+    $tag-max-size: calc(var(--card-text-size) * 1.5);
     top: 0;
     max-width: $tag-max-size;
     max-height: $tag-max-size;

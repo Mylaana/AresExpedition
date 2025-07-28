@@ -15,15 +15,10 @@
 	gap: 1px;
 	height: fit-content;
 	width: fit-content;
-	padding: 6px;
-	padding-top: 15px;
+	padding: var(--card-cost-square-padding);
+	padding-top: var(--card-cost-top-cost-padding);
 	border-radius: 10px;
 	overflow: hidden;
-	@media (max-width: 1919px) {
-		padding: 3px;
-		padding-top: 6px;
-		border-radius: 10px;
-	}
 	&.red{
 		border: 2px solid var(--color-ares-red);
 	}
@@ -109,10 +104,7 @@
 		width: calc(var(--card-width) * .12);
 		height: calc(var(--card-width) * .12);
 		& p {
-			font-size: 15px;
-			@media (max-width: 1919px) {
-				font-size: 13px;
-			}
+			font-size: var(--card-cost-current-cost-text-size);
 		}
 	}
     &.not-current-cost{
@@ -121,10 +113,7 @@
         filter: grayscale(20%);
         opacity: 80%;
         & p {
-			font-size: 11px;
-			@media (max-width: 1919px) {
-				font-size: 9px;
-			}
+			font-size: var(--card-cost-not-current-cost-text-size);
         }
     }
 }
