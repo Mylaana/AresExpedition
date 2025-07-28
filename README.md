@@ -78,8 +78,6 @@ Expression has changed on client refresh with all the player pannel if something
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
-text with image component: refactoring   
-test needs: empty components from the app logic and transfer it into services/classes    
 global: removing obvious comments   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
