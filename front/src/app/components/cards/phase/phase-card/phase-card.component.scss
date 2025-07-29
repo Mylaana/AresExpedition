@@ -48,8 +48,8 @@
 	z-index: 1;
 	position: relative;
 	height: fit-content;
-	width: 90%;
-	padding: 5px;
+	width: var(--phase-card-description-width);
+	padding: var(--phase-card-description-padding);
 
 	display: flex;
 	justify-content: center;
@@ -58,28 +58,18 @@
 	&::ng-deep p {
 		text-align: center;
 		display: block;
-		font-size: 83%;
-	}
-	@media (max-width:1919px) {
-		width: 100%;
-		padding: 2px;
+		font-size: var(--phase-card-description-font-size);
 	}
 }
 .title{
-	font-size: 180%;
+	font-size: var(--phase-card-title-font-size);
 	font-weight: 600;
 	font-family: "Times New Roman", serif;
-	@media (max-width:1919px) {
-		font-size: 100%;
-	}
 }
 .subtitle{
 	padding-bottom: 3px;
-	font-size: 110%;
+	font-size: var(--phase-card-subtitle-font-size);
 	font-weight: 600;
-	@media (max-width:1919px) {
-		font-size: 65%;
-	}
 }
 
 app-hexed-background{
@@ -129,15 +119,10 @@ app-hexed-background{
 app-non-event-button{
 	height: 50%;
 }
-.wrapper-description::ng-deep p {
-	@media (max-width: 1919px) {
-		font-size: 60%;
-	}
-}
 .wrapper-title{
 	width: 100%;
 	height: fit-content;
-	padding-top: 10px;
+	padding-top: var(--phase-card-wrapper-title-padding);
 	display: flex;
 	justify-content: center;
 	align-items: center;
