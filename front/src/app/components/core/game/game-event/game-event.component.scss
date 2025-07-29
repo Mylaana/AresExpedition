@@ -114,9 +114,11 @@ app-group-waiting{
 	align-items: top;
 	flex: 1;
 	height: fit-content;
-	margin-left: calc(var(--settings-button-size) / 2);
+
 	margin-top: var(--command-pannel-height);
 	min-height: var(--event-min-height);
+	border: red solid 1px;
+	margin-left: calc(60px + 7px * 2 + 3px);
 	&.flex-column{
 		flex-direction: column;
 	}

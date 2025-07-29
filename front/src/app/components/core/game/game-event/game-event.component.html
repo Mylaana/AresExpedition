@@ -33,7 +33,8 @@
 	<app-left-pannel @enterFromLeft
 		*ngIf="currentPhase!='PLANIFICATION' && _selectedPhaseList.length!=0"
 		[currentPhase]="currentPhase"
-		[selectedPhaseList]="_selectedPhaseList"></app-left-pannel>
+		[selectedPhaseList]="_selectedPhaseList">
+	</app-left-pannel>
     <div class="wrapper-event-main">
 		<div class="wrapper-event-top"
 			[class.flex-column]="currentEvent.subType==='actionPhase'">
