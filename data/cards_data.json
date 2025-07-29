@@ -133,11 +133,11 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_card$: -2$ressource_microbe$:$ressource_megacreditvoid_-10$$skipline$$tag_microbe$/$tag_animal$/$tag_plant$: $ressource_microbe$",
-            "fr": "$ressource_card$: -2$ressource_microbe$:$ressource_megacreditvoid_-10$$skipline$$tag_microbe$/$tag_animal$/$tag_plant$: $ressource_microbe$"
+            "en": "$ressource_card$: -2$ressource_microbe$:$ressource_megacreditvoid_-10$$skipline$$tag_microbe$/$tag_animal$/$tag_plant$:$skipline$$ressource_microbe$",
+            "fr": "$ressource_card$: -2$ressource_microbe$:$ressource_megacreditvoid_-10$$skipline$$tag_microbe$/$tag_animal$/$tag_plant$:$skipline$$ressource_microbe$"
         },
         "effectText": {
-            "en": "EFFECT: When you play a card, you can remove 2 microbes from this card to pay 10 MC less for it.\nEFFECT: Whenever you play a $tag_animal$, $tag_microbe$S or $tag_plant$, including this one, add a microbe to this card.",
+            "en": "EFFECT: When you play a card, you can remove 2 microbes from this card to pay 10 MC less for it.\nEFFECT: Whenever you play a $tag_animal$, $tag_microbe$ or $tag_plant$, including this one, add a microbe to this card.",
             "fr": "EFFET: Lorsque vous jouez une carte, vous pouvez retirer 2 microbes de cette carte pour r\u00e9duire de 10 MC le co\u00fbt associ\u00e9 \u00e0 la carte jou\u00e9e. EFFET: Lorsque vous jouez un $tag_animal$, $tag_microbe$, ou $tag_plant$, y compris celui-ci, ajoutez un microbe sur cette carte"
         },
         "stockable": [
@@ -605,8 +605,8 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_animal$/$tag_microbe$/$tag_plant$: +$ressource_microbe$ OR $skipline$-$ressource_microbe$: $ressource_card$",
-            "fr": "$tag_animal$/$tag_microbe$/$tag_plant$: +$ressource_microbe$ OU $skipline$-$ressource_microbe$: $ressource_card$"
+            "en": "$tag_animal$/$tag_microbe$/$tag_plant$:$skipline$+$ressource_microbe$ OR$skipline$-$ressource_microbe$: $ressource_card$",
+            "fr": "$tag_animal$/$tag_microbe$/$tag_plant$:$skipline$+$ressource_microbe$ OU$skipline$-$ressource_microbe$: $ressource_card$"
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_animal$, $tag_microbe$ or $tag_plant$, including this one, add a microbe here or remove a microbe here to draw a card.",
@@ -8793,10 +8793,6 @@
         "title": {
             "en": "Gas-Cooled Reactors",
             "fr": "G\u00e9n\u00e9rateurs \u00e0 Refroidissement par Gaz "
-        },
-        "vpText": {
-            "en": "",
-            "fr": ""
         },
         "effectSummaryType": "action",
         "effectSummaryText": {

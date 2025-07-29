@@ -1622,7 +1622,7 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//DevTechs
 	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
 	//Exocorp v2
-	'D02B': () => 2,
+	'D02B': () => 1,
 	//Solar Logistics
 	'FM2': (card) => {
 		return card.hasTag('space') && card.hasTag('event')?10:0
