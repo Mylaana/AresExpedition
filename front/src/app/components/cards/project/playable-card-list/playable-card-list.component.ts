@@ -60,11 +60,6 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		if(this.event?.hasCardActivator()){
 			this.setActivationCount(this.event as EventCardActivator)
 		}
-		if(this.listType!='hand'){
-			this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
-		} else {
-			this.gameParam.currentHandCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
-		}
 	}
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['event'] && changes['event'].currentValue) {this.updateCardList(); return}
