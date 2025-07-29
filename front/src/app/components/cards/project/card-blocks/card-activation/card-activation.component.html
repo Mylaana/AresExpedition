@@ -1,5 +1,5 @@
 
 	<div class="wrapper-button">
-		<app-non-event-button id="activate-once" [button]="_activateOnce" [shape]="optionTotalQuantity===1?'left':'leftSmall'" (buttonClicked)="onActivation(_activateOnce)"></app-non-event-button>
-		<app-non-event-button id="activate-twice" [button]="_activateTwice" [shape]="optionTotalQuantity===1?'right':'rightSmall'" (buttonClicked)="onActivation(_activateTwice)"></app-non-event-button>
+		<app-non-event-button id="activate-once" [button]="_activateOnce" [context]="'activateCardButton'" [shape]="optionTotalQuantity===1?'left':'leftSmall'" (buttonClicked)="onActivation(_activateOnce)"></app-non-event-button>
+		<app-non-event-button id="activate-twice" [button]="_activateTwice" [context]="'activateCardButton'" [shape]="optionTotalQuantity===1?'right':'rightSmall'" (buttonClicked)="onActivation(_activateTwice)"></app-non-event-button>
 	</div>

@@ -15,11 +15,8 @@
 	padding: 20px;
 }
 app-non-event-button{
-	height: 70px;
+	height: 60px;
 	width: fit-content;
-	@media (max-width: 1919px) {
-		height: 50px;
-	}
 }
 :host::ng-deep app-text-with-image .wrapper-megacredit{
 	width: 20%;

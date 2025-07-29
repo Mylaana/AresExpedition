@@ -3,7 +3,7 @@
 	display: inline;
     word-wrap: break-word;
 }
-:host ::ng-deep .wrapper-megacredit{
+.wrapper-text-with-image ::ng-deep .wrapper-megacredit.default{
     position: relative;
 	text-align: center;
     & img {
@@ -60,11 +60,36 @@
 	width: 100%;
 
 	& > .wrapper-megacredit{
+		position: relative;
+		text-align: center;
 		& > p {
-			padding-top: calc(var(--card-text-size) * .05);
-			font-size: calc(var(--card-text-size) * .8);
+			position: absolute;
+			left: 0;
+			top: 0;
+			padding-top: calc(var(--twi-effect-summary-image-height) *.1);
+			padding-left: calc(var(--twi-effect-summary-image-height) *.2);
+			//padding-top: calc(var(--twi-effect-summary-image-height) * .04);
+			font-size: calc(var(--twi-effect-summary-image-height) * .65);
 		}
 	}
+	/*
+	&.wrapper-megacredit.default{
+    & img {
+        top: 0;
+        left: 0;
+    }
+    & p {
+        position: absolute;
+        top: calc(var(--card-text-size) *.05);
+        left: 0px;
+		min-width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+		display: inline-block;
+    }
+	}
+	*/
 }
 .wrapper-text-with-image::ng-deep .block-flex.cardVpText{
 	display: flex;
@@ -86,4 +111,66 @@
 		height: var(--twi-effect-text-image-height);
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.commandButton{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	& img{
+		height: 45%;
+	}
+}
+.wrapper-text-with-image::ng-deep .block-flex.convertButton{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50%;
+	width: 100%;
+	& img{
+		height: 75%;
+	}
+	& p{
+		font-size: 15px;
+	}
+	& > .wrapper-megacredit{
+		position: relative;
+		& > p {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding-top: 2px;
+			padding-left: 2px;
+			font-size: 13px;
+			font-weight: 600;
+		}
+	}
+}
+.wrapper-text-with-image::ng-deep .block-flex.activateCardButton{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	& > img{
+		height: var(--twi-activate-image-height);
+	}
+	& p{
+		font-size: var(--twi-activate-text-height);
+	}
+	& > .wrapper-megacredit{
+		height: var(--twi-activate-image-height);
+		width: var(--twi-activate-image-height);
+		position: relative;
 
+		& > p {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding-top: calc(var(--twi-activate-text-height) *.1);
+			padding-left: calc(var(--twi-activate-text-height) *.15);
+			font-size: calc(var(--twi-activate-text-height) *.9);
+			font-weight: 600;
+		}
+	}
+}

@@ -1,13 +1,13 @@
 <div class="wrapper-main">
 	<div class="wrapper-buttons">
-		<app-non-event-button [button]="_convertForest" [shape]="'action'" (buttonClicked)="onClick(_convertForest)"></app-non-event-button>
-		<app-non-event-button [button]="_buyForest" [shape]="'action'" (buttonClicked)="onClick(_buyForest)"></app-non-event-button>
-		<app-non-event-button [button]="_convertTemperature" [shape]="'action'" (buttonClicked)="onClick(_convertTemperature)"></app-non-event-button>
-		<app-non-event-button [button]="_buyTemperature" [shape]="'action'" (buttonClicked)="onClick(_buyTemperature)"></app-non-event-button>
-		<app-non-event-button *ngIf="isFoundationsActive()" [button]="_convertInfrastructure" [shape]="'action'" (buttonClicked)="onClick(_convertInfrastructure)"></app-non-event-button>
-		<app-non-event-button *ngIf="isFoundationsActive()" [button]="_buyInfrastructure" [shape]="'action'" (buttonClicked)="onClick(_buyInfrastructure)"></app-non-event-button>
-		<app-non-event-button [button]="_buyOcean" [shape]="'action'" (buttonClicked)="onClick(_buyOcean)"></app-non-event-button>
-		<app-non-event-button *ngIf="isStandardPhaseUpgradeOptionActive()" [button]="_buyUpgrade" [shape]="'action'" (buttonClicked)="onClick(_buyUpgrade)"></app-non-event-button>
+		<app-non-event-button [button]="_convertForest" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_convertForest)"></app-non-event-button>
+		<app-non-event-button [button]="_buyForest" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyForest)"></app-non-event-button>
+		<app-non-event-button [button]="_convertTemperature" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_convertTemperature)"></app-non-event-button>
+		<app-non-event-button [button]="_buyTemperature" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyTemperature)"></app-non-event-button>
+		<app-non-event-button *ngIf="isFoundationsActive()" [button]="_convertInfrastructure" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_convertInfrastructure)"></app-non-event-button>
+		<app-non-event-button *ngIf="isFoundationsActive()" [button]="_buyInfrastructure" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyInfrastructure)"></app-non-event-button>
+		<app-non-event-button [button]="_buyOcean" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyOcean)"></app-non-event-button>
+		<app-non-event-button *ngIf="isStandardPhaseUpgradeOptionActive()" [button]="_buyUpgrade" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyUpgrade)"></app-non-event-button>
 	</div>
 	<app-playable-card-list [event]="event" [listType]="'selector'" (projectActivated)="onProjectActivated($event)"></app-playable-card-list>
 	<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>

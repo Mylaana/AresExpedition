@@ -2,7 +2,7 @@ import { Component, Output, Input, EventEmitter, OnChanges, SimpleChanges, OnIni
 import { CommonModule } from '@angular/common';
 import { ButtonBase, ColorButton, ImageButton } from '../../../models/core-game/button.model';
 import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
-import { PlayerColor } from '../../../types/global.type';
+import { PlayerColor, TextWithImageContext } from '../../../types/global.type';
 
 type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right' | 'leftSmall' | 'rightSmall' | 'action' | 'selection_rounded_square' | 'xs'
 | 'leftCarousel' | 'rightCarousel'
@@ -22,6 +22,7 @@ export class ButtonComponent implements OnChanges {
 	@Input() button!: ButtonBase;
 	@Input() shape: shape = 'hex'
 	@Input() selected!: boolean;
+	@Input() context: TextWithImageContext = 'default'
 	_imageUrl!: string
 	_caption!: string
 	private hovered: boolean = false

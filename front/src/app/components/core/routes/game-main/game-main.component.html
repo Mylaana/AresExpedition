@@ -20,7 +20,7 @@
     <div class="wrapper-main">
         <div class="wrapper-other">
 			<div class="wrapper-settings-button" *ngIf="!_gameOver">
-				<app-non-event-button [button]="settingsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(settingsButton)"></app-non-event-button>
+				<app-non-event-button [button]="settingsButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(settingsButton)"></app-non-event-button>
 			</div>
             <app-server-emulation *ngIf="!_gameOver"></app-server-emulation>
             <app-game-event *ngIf="!_gameOver"></app-game-event>

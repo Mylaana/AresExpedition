@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { GlobalInfo } from '../../../services/global/global-info.service';
 import { CommonModule } from '@angular/common';
+import { TextWithImageContext } from '../../../types/global.type';
 
 type HtmlTag = 'p' | 'img' | 'div';
-type Context = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText'
 
 @Component({
   selector: 'app-text-with-image',
@@ -14,7 +14,7 @@ type Context = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText
 })
 export class TextWithImageComponent implements OnInit, OnChanges {
   @Input() rawText!: string;
-  @Input() context: Context = 'default'
+  @Input() context: TextWithImageContext = 'default'
   textWithImages: string = '';
 
   ngOnInit() {
