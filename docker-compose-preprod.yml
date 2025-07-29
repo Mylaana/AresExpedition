@@ -2,11 +2,11 @@ services:
   front:
     build:
       context: .
-      dockerfile: front/Dockerfile.dev
+      dockerfile: front/Dockerfile.preprod
     ports:
       - "18001:80"
     volumes:
-      - ./config/front/config.dev.json:/usr/share/nginx/html/assets/config/config.json
+      - ./config/front/config.preprod.json:/usr/share/nginx/html/assets/config/config.json
     depends_on:
       - back
     networks:
