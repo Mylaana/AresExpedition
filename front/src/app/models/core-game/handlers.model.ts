@@ -235,18 +235,7 @@ export class EventHandler {
 		//check per subType special rules:
 		switch(subType){
 			case('actionPhaseActivator'):{
-				let state = this.gameStateService.getClientState()
-				let plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
-				let heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
-				let finishPhaseButtonEnabled = (heatStock>=8  || plantStock>=8 || (heatStock>=5  && plantStock>=3)) === false
-
 				event.cardSelector.selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.cardSelector.filter)
-				/*
-				if(event.button){
-					event.button.startEnabled = finishPhaseButtonEnabled
-					event.button.resetStartEnabled()
-				}
-				*/
 				break
 			}
 		}

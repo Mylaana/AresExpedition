@@ -7,6 +7,7 @@ import { EffectPortalButtonEnum } from "../../enum/global.enum"
 export abstract class ButtonBase {
     private enabled: boolean = false
     startEnabled: boolean = false
+	resetEnabledOnEventSwitch: boolean = true
 	displayed: boolean = true
     caption?: string
 	type!: ButtonType
@@ -37,7 +38,8 @@ export abstract class EventButtonBase extends ButtonBase {
 	override type: ButtonType = 'eventMain'
     eventSubType!: EventUnionSubTypes
 }
-export class EventMainButton extends EventButtonBase {}
+export class EventMainButton extends EventButtonBase {
+}
 export class EventMainButtonSelector extends EventMainButton {
     updateEnabledTreshold(args: MinMaxEqualTreshold): void {
         this.setEnabled(Utils.getValueVsTreshold(args))

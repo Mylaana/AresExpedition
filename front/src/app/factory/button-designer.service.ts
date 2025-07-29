@@ -19,7 +19,7 @@ export class ButtonDesigner{
             case('default'):{startEnabled=true;break}
             case('upgradePhaseCards'):{startEnabled=true;break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{startEnabled=true;break}
-            case('actionPhaseActivator'):{startEnabled=true;break}
+            case('actionPhaseActivator'):{startEnabled=false;break}
             case('selectCardOptionalSell'):{startEnabled=false;break}
 			case('planificationPhase'):{startEnabled=false;break}
 			case('selectStartingHand'):{startEnabled=true;break}
@@ -43,7 +43,6 @@ export class ButtonDesigner{
 			case('alternativePayAnaerobicMicroorganisms'):{startEnabled=true; break}
 			case('carouselLeft'):{startEnabled=true; break}
 			case('carouselRight'):{startEnabled=true; break}
-
 
 			case('buyForest'):{startEnabled=true;break}
 			case('convertForest'):{startEnabled=true;break}
@@ -77,6 +76,17 @@ export class ButtonDesigner{
             default:{startEnabled=false;break}
         }
         return startEnabled
+    }
+	private static getResetStartEnabledOnEventSwitch(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames) : boolean {
+        let resetEnabled: boolean = true
+
+        switch(buttonRule){
+			//events related rules
+            case('actionPhaseActivator'):{resetEnabled=false;break}
+
+            default:{resetEnabled=true;break}
+        }
+        return resetEnabled
     }
     private static getCaption(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames): string {
         let caption: string
@@ -136,6 +146,7 @@ export class ButtonDesigner{
         button.setEnabled(button.startEnabled)
         button.caption = this.getCaption(eventSubType)
         button.eventSubType = eventSubType
+		button.resetEnabledOnEventSwitch = this.getResetStartEnabledOnEventSwitch(eventSubType)
         return button
     }
     public static createEventSelectorMainButton(eventSubType: EventUnionSubTypes): EventMainButtonSelector {
@@ -144,6 +155,7 @@ export class ButtonDesigner{
         button.setEnabled(button.startEnabled)
         button.caption = this.getCaption(eventSubType)
         button.eventSubType = eventSubType
+		button.resetEnabledOnEventSwitch = this.getResetStartEnabledOnEventSwitch(eventSubType)
         return button
     }
     public static createEventCardBuilderButton(zoneId:number, option?: BuilderOption): EventCardBuilderButton[] {
