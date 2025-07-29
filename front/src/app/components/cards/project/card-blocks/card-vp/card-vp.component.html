@@ -1,6 +1,9 @@
 <div class="wrapper-main">
 	<div *ngIf="vpDescription" class="wrapper-vp-text shadowed-text">
-		<app-text-with-image [rawText]="vpDescription"></app-text-with-image>
+		<app-vp *ngIf="isScalingVp" [vpNumber]="'1'" class="wrapper-one-vp"></app-vp>
+		<div class="wrapper-text">
+			<app-text-with-image [rawText]="vpDescription" [context]="'cardVpText'"></app-text-with-image>
+		</div>
 	</div>
 	<div class="wrapper-vp-icon">
 		<app-vp [vpNumber]="vpNumber"></app-vp>

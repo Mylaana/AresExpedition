@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: back/Dockerfile
     env_file:
-      - ./config/back/.env.dev
+      - ./config/back/.env.preprod
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx512m -Xms256m
     # ports:

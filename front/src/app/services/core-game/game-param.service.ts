@@ -22,12 +22,19 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 
 		'--card-played-symbol-size': '15px',
 
+		'--card-scaling-vp-one-vp-size': '16px',
+		'--scaling-vp-description-padding': '5px',
+
 		'--phase-card-title-font-size': '100%',
 		'--phase-card-subtitle-font-size': '65%',
 		'--phase-card-description-width': '100%',
 		'--phase-card-description-padding': '2px',
 		'--phase-card-description-font-size': '60%',
 		'--phase-card-wrapper-title-padding': '7px',
+
+		'--twi-effect-summary-image-height': '12px',
+		'--twi-effect-text-image-height': '10px',
+		'--twi-vp-text-size': '15px',
 	},
 	medium: {
 		'--card-width': '214px',
@@ -44,6 +51,8 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--card-effect-width': '75px',
 
 		'--card-played-symbol-size': '20px',
+
+		'--card-scaling-vp-description-size': '20px',
 
 		'--phase-card-title-font-size': '180%',
 		'--phase-card-subtitle-font-size': '110%',

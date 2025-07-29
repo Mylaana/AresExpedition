@@ -13,14 +13,21 @@
 	//gap: var(--card-element-padding);
 }
 .wrapper-vp-text{
-	flex: 1;
+	//flex: 1;
+	width: fit-content;
+	padding-left: var(--scaling-vp-description-padding);
+	padding-right: var(--scaling-vp-description-padding);
 
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
 
 	margin-right: var(--card-element-padding);
 	border: white solid 1px;
+}
+.wrapper-text{
+	display: flex;
+	align-items: center;
 }
 .wrapper-vp-icon{
 	position: relative;
@@ -68,4 +75,9 @@ app-vp{
     position: relative;
     z-index: 1;
     height: 85%;
+}
+.wrapper-one-vp{
+	height: var(--card-scaling-vp-one-vp-size);
+	width: var(--card-scaling-vp-one-vp-size);
+	padding-right: 1px;
 }

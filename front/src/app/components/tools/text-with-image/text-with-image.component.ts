@@ -1,16 +1,20 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { GlobalInfo } from '../../../services/global/global-info.service';
+import { CommonModule } from '@angular/common';
 
 type HtmlTag = 'p' | 'img' | 'div';
+type Context = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText'
 
 @Component({
   selector: 'app-text-with-image',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './text-with-image.component.html',
   styleUrls: ['./text-with-image.component.scss'],
 })
 export class TextWithImageComponent implements OnInit, OnChanges {
   @Input() rawText!: string;
+  @Input() context: Context = 'default'
   textWithImages: string = '';
 
   ngOnInit() {
@@ -28,14 +32,14 @@ export class TextWithImageComponent implements OnInit, OnChanges {
   }
 
   private buildHtmlFromBlocks(text: string): string {
-    // On découpe le texte en blocs avec skipline comme délimiteur
+    //Splitting the block in divs around $skipline$
     const rawBlocks = text.split('$skipline$');
     const processedBlocks = rawBlocks.map(blockText => {
 		const segments = blockText.split('$');
 		const htmlSegments = segments.map(segment => this.transformSegment(segment)).join('');
 		return this.createHtmlTag('div', {
 			inputValue: htmlSegments,
-			inputClass: 'block-flex',
+			inputClass: `block-flex ${this.context}`,
 		});
     });
 
@@ -76,7 +80,7 @@ export class TextWithImageComponent implements OnInit, OnChanges {
 			return this.createHtmlTag('img', {
 			inputValue: GlobalInfo.getUrlFromName(`$${segment}$`),
 			imgAlt: segment,
-			inputClass: 'text-tag',
+			//inputClass: 'text-tag',
 			});
 		}
 

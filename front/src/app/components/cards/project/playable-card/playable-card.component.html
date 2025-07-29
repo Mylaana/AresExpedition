@@ -56,7 +56,8 @@
 						<app-card-vp
 							*ngIf="projectCard.vpNumber || projectCard.scalingVp===true"
 							[vpNumber]="projectCard.vpNumber??''"
-							[vpDescription]="projectCard.getVpText()">
+							[vpDescription]="projectCard.getVpText()"
+							[isScalingVp]="projectCard.scalingVp">
 						</app-card-vp>
 					</div>
 				</div>

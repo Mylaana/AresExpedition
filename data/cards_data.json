@@ -370,8 +370,8 @@
             "fr": "Oiseaux"
         },
         "vpText": {
-            "en": "*=1 victory point per animal on this card.",
-            "fr": "*=1 PV par animal sur cette carte"
+            "en": "/ $ressource_animal$",
+            "fr": "/ $ressource_animal$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -566,8 +566,8 @@
             "fr": "Biome Pr\u00e9serv\u00e9"
         },
         "vpText": {
-            "en": "*=1 victory point for every 2 forest tiles you have.",
-            "fr": "*= 1 PV par groupe de 2 PVs For\u00eat en votre possession."
+            "en": "/ $other_forest$$other_forest$",
+            "fr": "/ $other_forest$$other_forest$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -763,8 +763,8 @@
             "fr": "Zone Ecologique "
         },
         "vpText": {
-            "en": "*=1 victory point for every 2 animals on this card.",
-            "fr": "*=1 PV par groupe de 2 animaux sur cette carte."
+            "en": "/ $ressource_animal$$ressource_animal$",
+            "fr": "/ $ressource_animal$$ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -951,8 +951,8 @@
             "fr": "Poissons "
         },
         "vpText": {
-            "en": "*=1 victory point per animal on this card.",
-            "fr": "*=1 PV par animal sur cette carte."
+            "en": "/ $ressource_animal$",
+            "fr": "/ $ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -1075,8 +1075,8 @@
             "fr": "Herbivores"
         },
         "vpText": {
-            "en": "*=1 victory point for every 2 animals on this card.",
-            "fr": "*=1 PV par groupe de 2 animaux sur cette carte. "
+            "en": "/ $ressource_animal$$ressource_animal$",
+            "fr": "/ $ressource_animal$$ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -1146,8 +1146,8 @@
             "fr": "Relations Interplan\u00e9taires"
         },
         "vpText": {
-            "en": "*=1 victory point for every 4 cards you have played.",
-            "fr": "*=1 PV par groupe de 4 cartes que vous avez jou\u00e9es. "
+            "en": "/ $other_omnicard$$other_omnicard$$other_omnicard$$other_omnicard$",
+            "fr": "/ $other_omnicard$$other_omnicard$$other_omnicard$$other_omnicard$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -1259,8 +1259,8 @@
             "fr": "B\u00e9tail "
         },
         "vpText": {
-            "en": "*=1 victory point per animal on this card.",
-            "fr": "*=1 PV par animal sur cette carte"
+            "en": "/ $ressource_animal$",
+            "fr": "/ $ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -1475,8 +1475,8 @@
             "fr": "Complexe Physique"
         },
         "vpText": {
-            "en": "*=1 VP for every 2 $tag_science$ resources on this card.",
-            "fr": "* = 1 PV par groupe de 2 ressources $tag_science$ sur cette carte."
+            "en": "/ $ressource_science$$ressource_science$",
+            "fr": "/ $ressource_science$$ressource_science$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -1688,8 +1688,8 @@
             "fr": "Petits Animaux"
         },
         "vpText": {
-            "en": "*=1 victory point for every 2 animals on this card.",
-            "fr": "*=1 PV par groupe de 2 animaux sur cette carte."
+            "en": "/ $ressource_animal$$ressource_animal$",
+            "fr": "/ $ressource_animal$$ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -1854,8 +1854,8 @@
             "fr": "Tardigrades"
         },
         "vpText": {
-            "en": "* = 1 VP for every 3 microbes on this card.",
-            "fr": "* = 1 PV par groupe de 3 microbes sur cette carte."
+            "en": "/ $ressource_microbe$$ressource_microbe$$ressource_microbe$",
+            "fr": "/ $ressource_microbe$$ressource_microbe$$ressource_microbe$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -1891,8 +1891,8 @@
             "fr": "Cellule de R\u00e9flexion "
         },
         "vpText": {
-            "en": "*=1 victory point for every 3 blue cards you have played.",
-            "fr": "*= 1 PV par groupe de trois cartes bleues que vous avez en jeu. "
+            "en": "/ $other_bluecard$$other_bluecard$$other_bluecard$",
+            "fr": "/ $other_bluecard$$other_bluecard$$other_bluecard$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -2009,8 +2009,8 @@
             "fr": "Importation d'eau d'Europa"
         },
         "vpText": {
-            "en": "*=1 victory point for each $tag_jovian$ you have.",
-            "fr": "*=1 PV par $tag_jovian$ en votre possession. "
+            "en": "/ $tag_jovian$",
+            "fr": "/ $tag_jovian$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -4254,8 +4254,8 @@
             "fr": "Navettes d'Immigration "
         },
         "vpText": {
-            "en": "*=1 victory point for every 2 $tag_earth$ you have.",
-            "fr": "*=1 PV par groupe de 2 $tag_earth$ en votre possession. "
+            "en": "/ $tag_earth$$tag_earth$",
+            "fr": "/ $tag_earth$$tag_earth$"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -4442,8 +4442,8 @@
             "fr": "Industries Mini\u00e8res sur Io "
         },
         "vpText": {
-            "en": "*=1 victory point for each JOVIAN you have.",
-            "fr": "*=1 PV par $tag_jovian$ en votre possession "
+            "en": "/ $tag_jovian$",
+            "fr": "/ $tag_jovian$"
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
@@ -6092,13 +6092,13 @@
             "fr": "$ressource_plant$"
         },
         "effectText": {
-            "en": "Increase yout plant production by 1.",
+            "en": "Increase your plant production by 1.",
             "fr": ""
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
-            "en": "\"8$ressource_plant$$other_arrow$$other_forest$\":$skipline$-$ressource_plant$",
-            "fr": ""
+            "en": "-8$ressource_plant$$other_forest$:$skipline$-$ressource_plant$",
+            "fr": "-8$ressource_plant$$other_forest$:$skipline$-$ressource_plant$"
         },
         "effectText2": {
             "en": "EFFECT: When you spend plants to gain a forest tile and increase oxygen, you spend one less plant.",
@@ -6125,7 +6125,7 @@
             "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
         },
         "effectText": {
-            "en": "Increase yout heat production by 3.",
+            "en": "Increase your heat production by 3.",
             "fr": ""
         },
         "effectSummaryType2": "trigger",
@@ -6364,7 +6364,7 @@
             "fr": "$ressource_heat$"
         },
         "effectText": {
-            "en": "Increase yout heat production by 1.",
+            "en": "Increase your heat production by 1.",
             "fr": "Augmentez votre production de chaleur de 1."
         },
         "effectSummaryType2": "trigger",
@@ -7787,8 +7787,8 @@
             "fr": "Animaux Domestiques"
         },
         "vpText": {
-            "en": "* = 1 VP for every 2 animals resources on this card.",
-            "fr": "* = 1 PV par groupe de 2 animaux sur cette carte."
+            "en": "/ $ressource_animal$$ressource_animal$",
+            "fr": "/ $ressource_animal$$ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -8265,8 +8265,8 @@
             "fr": "Esp\u00e8ces Filtrantes"
         },
         "vpText": {
-            "en": "* = 1 VP for every 3 animals resources on this card.",
-            "fr": "*=1 PV par groupe de 3 animaux sur cette carte"
+            "en": "/ $ressource_animal$$ressource_animal$$ressource_animal$",
+            "fr": "/ $ressource_animal$$ressource_animal$$ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -8509,8 +8509,8 @@
             "fr": "ArkLight"
         },
         "vpText": {
-            "en": "\"*=1 victory point for every 2 animals on this card.\"",
-            "fr": ""
+            "en": "/ $ressource_animal$$ressource_animal$",
+            "fr": "/ $ressource_animal$$ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -8795,7 +8795,7 @@
             "fr": "G\u00e9n\u00e9rateurs \u00e0 Refroidissement par Gaz "
         },
         "vpText": {
-            "en": " ",
+            "en": "",
             "fr": ""
         },
         "effectSummaryType": "action",
@@ -8856,8 +8856,8 @@
             "fr": "Zoos"
         },
         "vpText": {
-            "en": "*= 1VP per animal on this card",
-            "fr": "*= 1PV par animal sur cette carte"
+            "en": "/ $ressource_animal$",
+            "fr": "/ $ressource_animal$"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -9493,8 +9493,8 @@
             "fr": ""
         },
         "vpText": {
-            "en": "*=1 victory point for each $ressource_science$ here.",
-            "fr": ""
+            "en": "/ $ressource_science$",
+            "fr": "/ $ressource_science$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
@@ -9535,8 +9535,8 @@
             "fr": ""
         },
         "vpText": {
-            "en": "*=1 victory point for each JOVIAN you have.",
-            "fr": ""
+            "en": "/ $tag_jovian$",
+            "fr": "/ $tag_jovian$"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {

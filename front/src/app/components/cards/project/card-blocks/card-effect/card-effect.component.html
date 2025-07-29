@@ -8,7 +8,7 @@
 			<div [ngClass]="'effect-summary-background--' + effectSummaryType | lowercase"></div>
 			<div class="wrapper-effect-summary-text">
 				<div class="summary-text" *ngFor="let t of _summaryText">
-					<app-text-with-image [rawText]="t"></app-text-with-image>
+					<app-text-with-image [rawText]="t" [context]="'cardEffectSummary'"></app-text-with-image>
 				</div>
 			</div>
 		</div>
@@ -16,5 +16,5 @@
 </div>
 <div *ngIf="effectText"
 	[ngClass]="['wrapper-effect-text', 'shadowed-text', effectSummaryType??'']" >
-	<app-text-with-image [rawText]="effectText"></app-text-with-image>
+	<app-text-with-image [rawText]="effectText" [context]="'cardTextAndIcon'"></app-text-with-image>
 </div>

@@ -22,6 +22,7 @@
 	flex-direction: column;
 	min-height: calc(var(--card-height) *.15);
 	border: lightgrey solid 1px;
+	/*
 	@media (max-width: 1919px) {
 		overflow: scroll;
 		scrollbar-width: none;
@@ -29,28 +30,32 @@
 		justify-content: left;
 		align-items: center;
 		flex-direction: column;
-	}
+	}*/
 	&.action{
 		border: var(--color-ares-blue-light2) solid 1px;
+		/*
 		@media (max-width: 1919px) {
 			border-right: 0;
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;
-		}
+		}*/
 	}
 	&.trigger{
 		border: var(--color-ares-purple-light2) solid 1px;
+		/*
 		@media (max-width: 1919px) {
 			border-right: 0;
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;
 		}
+			*/
 	}
+	/*
 	@media (max-width: 1919px) {
 		border-right: 0;
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
-	}
+	}*/
 	span{
 		flex: 1;
 	}

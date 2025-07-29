@@ -16,4 +16,5 @@ import { VpComponent } from '../../../../tools/vp/vp.component';
 export class CardVpComponent {
 	@Input() vpNumber!: string
 	@Input() vpDescription?: string
+	@Input() isScalingVp: boolean = false
 }
