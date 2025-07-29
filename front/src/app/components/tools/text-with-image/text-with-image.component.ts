@@ -59,7 +59,6 @@ export class TextWithImageComponent implements OnInit, OnChanges {
 			const img = this.createHtmlTag('img', {
 				inputValue: GlobalInfo.getUrlFromName(`$ressource_megacreditvoid$`),
 				imgAlt: segment,
-				inputClass: 'text-tag',
 			});
 
 			const value = rest[1];

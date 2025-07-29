@@ -7,15 +7,14 @@
     position: relative;
 	text-align: center;
     & img {
-        position: relative;
         top: 0;
         left: 0;
     }
     & p {
         position: absolute;
-        top: calc(var(--card-text-size) *.1);
+        top: calc(var(--card-text-size) *.05);
         left: 0px;
-		width: 100%;
+		min-width: 100%;
         text-align: center;
         margin: 0;
         padding: 0;
@@ -59,6 +58,13 @@
 .wrapper-text-with-image::ng-deep .block-flex.cardEffectSummary{
 	height: var(--twi-effect-summary-image-height);
 	width: 100%;
+
+	& > .wrapper-megacredit{
+		& > p {
+			padding-top: calc(var(--card-text-size) * .05);
+			font-size: calc(var(--card-text-size) * .8);
+		}
+	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.cardVpText{
 	display: flex;
