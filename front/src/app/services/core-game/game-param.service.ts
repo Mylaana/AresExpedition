@@ -54,7 +54,7 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 
 		'--card-played-symbol-size': '20px',
 
-		'--card-scaling-vp-one-vp-size': '17px',
+		'--card-scaling-vp-one-vp-size': '20px',
 		'--scaling-vp-description-padding': '5px',
 
 		'--phase-card-title-font-size': '180%',
@@ -66,7 +66,7 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 
 		'--twi-effect-summary-image-height': '16px',
 		'--twi-effect-text-image-height': '14px',
-		'--twi-vp-text-size': '15px',
+		'--twi-vp-text-size': '20px',
 		'--twi-activate-image-height': '20px',
 		'--twi-activate-text-height': '15px'
 	},
@@ -81,7 +81,7 @@ export class GameParamService {
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
 	private debug = new BehaviorSubject<boolean>(false)
 	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
-	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
+	private cardSize = new BehaviorSubject<SettingCardSize>('small')
 	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
 
 	currentDebug = this.debug.asObservable()

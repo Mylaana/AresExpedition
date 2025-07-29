@@ -22,4 +22,8 @@ export class CardEffectComponent implements OnInit{
 		this._summaryText = this.effectSummaryText?.split('$mix$')??[this.effectSummaryText??'']
 		if(this._summaryText.length<2){return}
 	}
+	isMixProduction(): boolean {
+		if(!this.effectSummaryText){return false}
+		return this._summaryText.length>1
+	}
 }

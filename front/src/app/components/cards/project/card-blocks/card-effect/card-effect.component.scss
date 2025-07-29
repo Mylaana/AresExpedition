@@ -343,10 +343,14 @@
     justify-content: center;
     align-items: center;
 	flex-direction: column;
-	gap: 10%;
-	//background: yellow;
+	gap: 0%;
 }
 .summary-text{
-	flex: 1;
 	width: 100%;
+	&.mix{
+		height: 30%;
+	}
+	&.single{
+		flex: 1;
+	}
 }
