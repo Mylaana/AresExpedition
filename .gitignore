@@ -87,6 +87,8 @@ build/
 
 # Angular Environments
 /config/front/config.json
+/config/front/config.dev.json
 
 # Java Environments
 /config/back/.env
+/config/back/.env.dev
