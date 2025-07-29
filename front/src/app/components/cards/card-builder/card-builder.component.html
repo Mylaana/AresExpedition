@@ -17,12 +17,12 @@
 			*ngIf="!cardBuilder.getBuilderIsLocked()">
 			<div class="wrapper-buttons">
 				<div *ngIf="cardBuilder.getButtons()[0].isEnabled() || cardBuilder.getButtons()[1].isEnabled()" class="wrapper-select-button">
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].isEnabled()" [button]="cardBuilder.getButtons()[0]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[1].isEnabled()" [button]="cardBuilder.getButtons()[1]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
+					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].isEnabled()" [button]="cardBuilder.getButtons()[0]" [context]="'otherButton'" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
+					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[1].isEnabled()" [button]="cardBuilder.getButtons()[1]" [context]="'otherButton'" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
 				</div>
 				<div *ngIf="cardBuilder.getButtons()[2].isEnabled() || cardBuilder.getButtons()[3].isEnabled()" class="wrapper-build-button">
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [context]="'otherButton'" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [context]="'otherButton'" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
 				</div>
 			</div>
 			<ng-container *ngIf="hasOptionButton()">
@@ -31,7 +31,7 @@
 					<div class="wrapper-alternative-inner">
 						<h2>Or</h2>
 						<div class="wrapper-buttons">
-							<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
+							<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [context]="'otherButton'" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
 						</div>
 					</div>
 				</div>

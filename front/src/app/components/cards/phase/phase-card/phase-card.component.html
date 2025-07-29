@@ -26,7 +26,7 @@
 		[class.upgradable]="isUpgradeable()===false">
 		<div class="wrapper-button"
 			*ngIf="isUpgradeable()">
-			<app-non-event-button [shape]="'small'" [button]="_upgradeButton" (buttonClicked)="upgrade()"></app-non-event-button>
+			<app-non-event-button [shape]="'small'" [context]="'otherButton'" [button]="_upgradeButton" (buttonClicked)="upgrade()"></app-non-event-button>
 		</div>
 	</div>
 </div>

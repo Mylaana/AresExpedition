@@ -174,3 +174,33 @@
 		}
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.otherButton{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	& img{
+		height: 75%;
+	}
+	& > .wrapper-megacredit{
+		display: flex;
+		align-items: center;
+		height: 75%;
+		aspect-ratio: 1;
+		position: relative;
+		& > img{
+			height: 100%;
+		}
+		& > p {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding-top: calc(var(--twi-activate-text-height) *.1);
+			width: 100%;
+			text-align: center;
+			font-size: calc(var(--twi-activate-text-height) *.9);
+			font-weight: 600;
+		}
+	}
+}
