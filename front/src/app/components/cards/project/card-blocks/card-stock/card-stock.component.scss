@@ -1,3 +1,11 @@
+.small{
+	--card-stock-image-height: var(--card-stock-image-height--small);
+	--card-stock-text-size: var(--card-stock-text-size--small);
+}
+.medium{
+	--card-stock-image-height: var(--card-stock-image-height--medium);
+	--card-stock-text-size: var(--card-stock-text-size--medium);
+}
 :host{
 	display: flex;
 	justify-content: right;
@@ -6,10 +14,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 5px;
-	width: auto;
-	height: 25px;
 	border: white solid 1px;
+	padding: 2px;
 	border-radius: 5px;
 	border-bottom-right-radius: 0;
 	border-top-right-radius: 0;
@@ -19,7 +25,7 @@
 }
 p{
 	color: black;
-	font-size: 14px;
+	font-size: var(--card-stock-text-size) !important;
 }
 .wrapper-stock{
 	display: flex;
@@ -27,8 +33,8 @@ p{
 	justify-content: center;
 	gap: 2px;
 	height: 80%;
-	min-width: 45px;
+	//min-width: 45px;
 }
 img{
-	height: 100%;
+	height: var(--card-stock-image-height);
 }

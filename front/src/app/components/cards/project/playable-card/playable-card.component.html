@@ -34,7 +34,11 @@
 				</div>
 				<div class="wrapper-card-element-main">
 					<div class="wrapper-card-element-top">
-						<app-card-title [title]="projectCard.getTitle()" [cardType]="projectCard.cardType"></app-card-title>
+						<app-card-title
+							[title]="projectCard.getTitle()"
+							[cardType]="projectCard.cardType"
+							[cardSize]="cardSize">
+						</app-card-title>
 						<app-card-starting-megacredits
 							*ngIf="projectCard.cardType==='corporation'"
 							[startingMegacredits]="projectCard.startingMegacredits??0">
@@ -54,8 +58,9 @@
 							[cardSize]="cardSize">
 						</app-card-played-info>
 						<app-card-stock
-							*ngIf="projectCard.stockable?.length!=0"
-							[cardStock]="projectCard.stock">
+							*ngIf="projectCard.stockable?.length!=0 && parentListType!='hand' && parentListType!='builderSelector' && parentListType!='builderSelectedZone'"
+							[cardStock]="projectCard.stock"
+							[cardSize]="cardSize">
 						</app-card-stock>
 						<app-card-vp
 							*ngIf="projectCard.vpNumber || projectCard.scalingVp===true"

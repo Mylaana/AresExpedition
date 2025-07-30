@@ -21,12 +21,15 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--card-effect-height--small': '60px',
 		'--card-effect-width--small': '50px',
 
+		'--card-stock-image-height--small': '18px',
+		'--card-stock-text-size--small': '13px',
+
 		'--card-played-symbol-size--small': '15px',
 
 		'--card-scaling-vp-one-vp-size--small': '16px',
 		'--scaling-vp-description-padding--small': '5px',
 
-		'--twi-prerequisite-summary-text-image-height--medium': '13px',
+		'--card-title-size--small': '24px',
 
 		'--phase-card-title-font-size--small': '100%',
 		'--phase-card-subtitle-font-size--small': '65%',
@@ -35,11 +38,15 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--phase-card-description-font-size--small': '60%',
 		'--phase-card-wrapper-title-padding--small': '7px',
 
+		'--twi-prerequisite-summary-text-image-height--medium': '13px',
 		'--twi-effect-summary-image-height--small': '12px',
 		'--twi-effect-text-image-height--small': '10px',
 		'--twi-vp-text-size--small': '15px',
 		'--twi-activate-image-height--small': '18px',
 		'--twi-activate-text-height--small': '12px',
+		'--twi-megacredit-text-offset-left--small': '1.5px',
+		'--twi-megacredit-text-offset-top--small': '0px',
+		'--twi-megacredit-text-size--small': '9px',
 
 		'--builder-padding--small': '13px',
 	},
@@ -58,12 +65,15 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--card-effect-height--medium': '75px',
 		'--card-effect-width--medium': '75px',
 
+		'--card-stock-image-height--medium': '22px',
+		'--card-stock-text-size--medium': '15px',
+
 		'--card-played-symbol-size--medium': '20px',
 
 		'--card-scaling-vp-one-vp-size--medium': '20px',
 		'--scaling-vp-description-padding--medium': '5px',
 
-		'--twi-prerequisite-summary-text-image-height--medium': '20px',
+		'--card-title-size--medium': '32px',
 
 		'--phase-card-title-font-size--medium': '180%',
 		'--phase-card-subtitle-font-size--medium': '110%',
@@ -72,11 +82,15 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--phase-card-description-font-size--medium': '83%',
 		'--phase-card-wrapper-title-padding--medium': '10px',
 
+		'--twi-prerequisite-summary-text-image-height--medium': '20px',
 		'--twi-effect-summary-image-height--medium': '16px',
 		'--twi-effect-text-image-height--medium': '14px',
 		'--twi-vp-text-size--medium': '20px',
 		'--twi-activate-image-height--medium': '20px',
 		'--twi-activate-text-height--medium': '15px',
+		'--twi-megacredit-text-offset-left--medium': '0px',
+		'--twi-megacredit-text-offset-top--medium': '1px',
+		'--twi-megacredit-text-size--medium': '12px',
 
 		'--builder-padding--medium': '18px',
 	},
@@ -91,8 +105,8 @@ export class GameParamService {
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
 	private debug = new BehaviorSubject<boolean>(false)
 	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
-	private cardSize = new BehaviorSubject<SettingCardSize>('small')
-	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
+	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
+	private handCardSize = new BehaviorSubject<SettingCardSize>('small')
 
 	currentDebug = this.debug.asObservable()
 	currentGameId = this.gameIdSubject.asObservable()

@@ -26,6 +26,9 @@ export class TextWithImageComponent implements OnInit, OnChanges {
     if (changes['rawText']?.currentValue) {
       this.processText();
     }
+	if (changes['cardSize']?.currentValue) {
+      this.processText();
+    }
   }
 
   private processText() {
@@ -40,7 +43,7 @@ export class TextWithImageComponent implements OnInit, OnChanges {
 		const htmlSegments = segments.map(segment => this.transformSegment(segment)).join('');
 		return this.createHtmlTag('div', {
 			inputValue: htmlSegments,
-			inputClass: `block-flex ${this.context}`,
+			inputClass: `block-flex ${this.context} ${this.cardSize}`,
 		});
     });
 
@@ -60,6 +63,7 @@ export class TextWithImageComponent implements OnInit, OnChanges {
 			const img = this.createHtmlTag('img', {
 				inputValue: GlobalInfo.getUrlFromName(`$ressource_megacreditvoid$`),
 				imgAlt: segment,
+				inputClass: `${this.cardSize}`,
 			});
 
 			const value = rest[1];
@@ -68,12 +72,12 @@ export class TextWithImageComponent implements OnInit, OnChanges {
 
 			const text = this.createHtmlTag('p', {
 				inputValue: paddedValue,
-				inputClass: 'megacredit-text',
+				inputClass: `megacredit-text ${this.cardSize}`,
 			});
 
 			return this.createHtmlTag('div', {
 				inputValue: img + text,
-				inputClass: 'wrapper-megacredit',
+				inputClass: `wrapper-megacredit ${this.cardSize}`,
 			});
 			}
 

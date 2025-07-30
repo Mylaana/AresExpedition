@@ -44,5 +44,5 @@ export type AnyButton = NonEventButton | CarouselButton | ToggleButton
 
 export type SettingSupportedLanguage = 'en' | 'fr'
 export type SettingCardSize = 'small' | 'medium'
-export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText'
+export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText' | 'portalButton' | 'wildButton'
 | 'commandButton' | 'convertButton' | 'convertButtonTwoLines' | 'activateCardButton' | 'otherButton' | 'cardPrerequisite'

@@ -61,9 +61,13 @@
 	height: 100%;
 }
 .wrapper-text-with-image::ng-deep .block-flex.cardEffectSummary{
-	height: var(--twi-effect-summary-image-height--small);
 	width: 100%;
-
+	&.small{
+		height: var(--twi-effect-summary-image-height--small);
+	}
+	&.medium{
+		height: var(--twi-effect-summary-image-height--medium);
+	}
 	& > .wrapper-megacredit{
 		position: relative;
 		text-align: center;
@@ -72,14 +76,15 @@
 			left: 0;
 			top: 0;
 			&.small{
-				padding-top: calc(var(--twi-effect-summary-image-height--small) *.1);
-				padding-left: calc(var(--twi-effect-summary-image-height--small) *.2);
-				font-size: calc(var(--twi-effect-summary-image-height--small) * .65);
+				padding-top: var(--twi-megacredit-text-offset-top--small);
+				padding-left: var(--twi-megacredit-text-offset-left--small);
+				font-size: var(--twi-megacredit-text-size--small);
 			}
-			&.small{
-				padding-top: calc(var(--twi-effect-summary-image-height--medium) *.1);
-				padding-left: calc(var(--twi-effect-summary-image-height--medium) *.2);
-				font-size: calc(var(--twi-effect-summary-image-height--medium) * .65);
+			&.medium{
+				width: 100%;
+				padding-top: var(--twi-megacredit-text-offset-top--medium);
+				padding-left: var(--twi-megacredit-text-offset-left--medium);
+				font-size: var(--twi-megacredit-text-size--medium);
 			}
 		}
 	}
@@ -101,7 +106,12 @@
 	height: fit-content;
 	width: 100%;
 	& img{
-		height: var(--twi-effect-text-image-height--small);
+		&.small{
+			height: var(--twi-effect-text-image-height--small);
+		}
+		&.medium{
+			height: var(--twi-effect-text-image-height--medium);
+		}
 	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.cardPrerequisite{
@@ -202,5 +212,45 @@
 			font-size: calc(var(--twi-activate-text-height--small) *.9);
 			font-weight: 600;
 		}
+	}
+}
+.wrapper-text-with-image::ng-deep .block-flex.portalButton{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	& img{
+		height: 40%;
+	}
+	& > .wrapper-megacredit{
+		display: flex;
+		align-items: center;
+		height: 40%;
+		aspect-ratio: 1;
+		position: relative;
+		& > img{
+			height: 100%;
+		}
+		& > p {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding-top: calc(var(--twi-activate-text-height--medium) *.1);
+			width: 100%;
+			text-align: center;
+			font-size: calc(var(--twi-activate-text-height--medium) *.9);
+			font-weight: 600;
+		}
+	}
+}
+.wrapper-text-with-image::ng-deep .block-flex.wildButton{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	& img{
+		height: 55%;
 	}
 }

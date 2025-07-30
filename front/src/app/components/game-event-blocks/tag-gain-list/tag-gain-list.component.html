@@ -4,7 +4,7 @@
 		*ngFor="let b of _buttonsId"
 		[ngClass]="[_selected!=-1 && b!=_selected?'disabled':'']"
 		[button]="getButton(b)" [shape]="'hex'"
-		[context]="'otherButton'"
+		[context]="'wildButton'"
 		[style]="'transparent'" (buttonClicked)="onTagSelected(b)">
 	</app-non-event-button>
 </div>
