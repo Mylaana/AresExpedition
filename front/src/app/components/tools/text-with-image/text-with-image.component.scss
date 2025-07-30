@@ -104,6 +104,13 @@
 		height: var(--twi-effect-text-image-height--small);
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.cardPrerequisite{
+	height: fit-content;
+	width: 100%;
+	& img{
+		height: var(--twi-prerequisite-summary-text-image-height--medium);
+	}
+}
 .wrapper-text-with-image::ng-deep .block-flex.commandButton{
 	display: flex;
 	align-items: center;
