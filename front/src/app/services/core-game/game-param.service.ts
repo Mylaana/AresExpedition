@@ -103,8 +103,8 @@ export class GameParamService {
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
 	private debug = new BehaviorSubject<boolean>(false)
 	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
-	private cardSize = new BehaviorSubject<SettingCardSize>('small')
-	private handCardSize = new BehaviorSubject<SettingCardSize>('small')
+	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
+	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
 
 	currentDebug = this.debug.asObservable()
 	currentGameId = this.gameIdSubject.asObservable()
