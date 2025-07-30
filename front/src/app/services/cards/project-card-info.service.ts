@@ -227,4 +227,7 @@ export class ProjectCardInfoService {
 		}
 		return effects
 	}
+	private loadPlayed(input: string): string[] {
+		return input.split('$skipline$')
+	}
 }

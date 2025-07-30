@@ -52,11 +52,13 @@
 							[prerequisiteText]="projectCard.getPrerequisiteText()"
 							[cardSize]="cardSize">
 						</app-card-prerequisite>
-						<app-card-played-info
-							*ngIf="projectCard.hasPlayedText()"
-							[playedText]="projectCard.getPlayedText()"
-							[cardSize]="cardSize">
-						</app-card-played-info>
+						<ng-container *ngIf="projectCard.hasPlayedText()">
+							<app-card-played-info
+								*ngFor="let text of projectCard.getPlayedText()"
+								[playedText]="text"
+								[cardSize]="cardSize">
+							</app-card-played-info>
+						</ng-container>
 						<app-card-stock
 							*ngIf="projectCard.stockable?.length!=0 && parentListType!='hand' && parentListType!='builderSelector' && parentListType!='builderSelectedZone'"
 							[cardStock]="projectCard.stock"

@@ -84,7 +84,7 @@ export class PlayableCardModel {
 	hasPlayedText(): boolean {return this.hasLocalizedField(this.raw?.playedText)}
 	hasPrerequisiteText(): boolean {return this.hasLocalizedField(this.raw?.prerequisiteText)}
 	getTitle(): string {return this.getLanguageOrFallback(this.raw?.title)}
-	getPlayedText(): string {return this.getLanguageOrFallback(this.raw?.playedText)}
+	getPlayedText(): string[] {return this.getLanguageOrFallback(this.raw?.playedText).split('$skipline$')}
 	getVpText(): string {return this.getLanguageOrFallback(this.raw?.vpText, false)}
 	getEffects(): PlayableCardEffect[] {return this.effects}
 	getEffectText(effect: PlayableCardEffect): string {return this.getLanguageOrFallback(effect.effectText)}
