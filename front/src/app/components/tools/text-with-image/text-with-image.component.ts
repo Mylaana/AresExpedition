@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { GlobalInfo } from '../../../services/global/global-info.service';
 import { CommonModule } from '@angular/common';
-import { TextWithImageContext } from '../../../types/global.type';
+import { SettingCardSize, TextWithImageContext } from '../../../types/global.type';
 
 type HtmlTag = 'p' | 'img' | 'div';
 
@@ -15,6 +15,7 @@ type HtmlTag = 'p' | 'img' | 'div';
 export class TextWithImageComponent implements OnInit, OnChanges {
   @Input() rawText!: string;
   @Input() context: TextWithImageContext = 'default'
+  @Input() cardSize!: SettingCardSize
   textWithImages: string = '';
 
   ngOnInit() {
@@ -79,12 +80,15 @@ export class TextWithImageComponent implements OnInit, OnChanges {
 			return this.createHtmlTag('img', {
 			inputValue: GlobalInfo.getUrlFromName(`$${segment}$`),
 			imgAlt: segment,
-			//inputClass: 'text-tag',
+			inputClass: this.cardSize,
 			});
 		}
 
 		default:
-			return this.createHtmlTag('p', { inputValue: segment });
+			return this.createHtmlTag('p', {
+				inputValue: segment ,
+				inputClass: this.cardSize
+			});
 		}
 	}
 

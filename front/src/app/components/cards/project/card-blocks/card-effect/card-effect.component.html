@@ -1,20 +1,23 @@
-<div *ngIf="effectSummaryType" class="wrapper-effect-summary">
-	<div class="wrapper-effect-summary-border">
-		<div class="effect-summary-top-shape"></div>
-		<div class="effect-summary-bottom-shape"></div>
-		<div class="wrapper-inner">
-			<div [ngClass]="['effect-summary-foreground-radial-white', effectSummaryType]" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
-			<div [ngClass]="['effect-summary-background-radial-grid', effectSummaryType]" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
-			<div [ngClass]="'effect-summary-background--' + effectSummaryType | lowercase"></div>
-			<div class="wrapper-effect-summary-text">
-				<div [ngClass]="['summary-text', isMixProduction()?'mix':'single']" *ngFor="let t of _summaryText">
-					<app-text-with-image [rawText]="t" [context]="'cardEffectSummary'"></app-text-with-image>
+<div [ngClass]="['wrapper-main', cardSize]">
+	<div *ngIf="effectSummaryType">
+		<div [ngClass]="['wrapper-effect-summary-border', cardSize]">
+			<div class="effect-summary-top-shape"></div>
+			<div class="effect-summary-bottom-shape"></div>
+			<div class="wrapper-inner">
+				<div [ngClass]="['effect-summary-foreground-radial-white', effectSummaryType]" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
+				<div [ngClass]="['effect-summary-background-radial-grid', effectSummaryType]" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
+				<div [ngClass]="'effect-summary-background--' + effectSummaryType | lowercase"></div>
+				<div class="wrapper-effect-summary-text">
+					<div [ngClass]="['summary-text', isMixProduction()?'mix':'single']" *ngFor="let t of _summaryText">
+						<app-text-with-image [rawText]="t" [cardSize]="cardSize" [context]="'cardEffectSummary'"></app-text-with-image>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div *ngIf="effectText"
-	[ngClass]="['wrapper-effect-text', 'shadowed-text', effectSummaryType??'']" >
-	<app-text-with-image [rawText]="effectText" [context]="'cardTextAndIcon'"></app-text-with-image>
+		<div *ngIf="effectText" [ngClass]="['wrapper-effect-text-aligner', cardSize]">
+			<div [ngClass]="['wrapper-effect-text', 'shadowed-text', effectSummaryType??'', cardSize]" >
+				<app-text-with-image [rawText]="effectText" [cardSize]="cardSize" [context]="'cardTextAndIcon'"></app-text-with-image>
+		</div>
+	</div>
 </div>

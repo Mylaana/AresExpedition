@@ -7,68 +7,70 @@ import { SETTING_CARD_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/glob
 
 const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 	small: {
-		'--card-width': '150px',
-		'--card-text-size': '8.5px',
-		'--card-element-padding': '1px',
-		'--card-text-right-padding': '0px',
+		'--card-height--medium': '209px',
+		'--card-width--small': '150px',
+		'--card-text-size--small': '8.5px',
+		'--card-element-padding--small': '1px',
+		'--card-text-right-padding--small': '0px',
 
-		'--card-cost-square-padding': '3px',
-		'--card-cost-top-cost-padding': '6px',
-		'--card-cost-current-cost-text-size': '13px',
-		'--card-cost-not-current-cost-text-size': '8px',
+		'--card-cost-square-padding--small': '3px',
+		'--card-cost-top-cost-padding--small': '6px',
+		'--card-cost-current-cost-text-size--small': '13px',
+		'--card-cost-not-current-cost-text-size--small': '8px',
 
-		'--card-effect-height': '60px',
-		'--card-effect-width': '50px',
+		'--card-effect-height--small': '60px',
+		'--card-effect-width--small': '50px',
 
-		'--card-played-symbol-size': '15px',
+		'--card-played-symbol-size--small': '15px',
 
-		'--card-scaling-vp-one-vp-size': '16px',
-		'--scaling-vp-description-padding': '5px',
+		'--card-scaling-vp-one-vp-size--small': '16px',
+		'--scaling-vp-description-padding--small': '5px',
 
-		'--phase-card-title-font-size': '100%',
-		'--phase-card-subtitle-font-size': '65%',
-		'--phase-card-description-width': '100%',
-		'--phase-card-description-padding': '2px',
-		'--phase-card-description-font-size': '60%',
-		'--phase-card-wrapper-title-padding': '7px',
+		'--phase-card-title-font-size--small': '100%',
+		'--phase-card-subtitle-font-size--small': '65%',
+		'--phase-card-description-width--small': '100%',
+		'--phase-card-description-padding--small': '2px',
+		'--phase-card-description-font-size--small': '60%',
+		'--phase-card-wrapper-title-padding--small': '7px',
 
-		'--twi-effect-summary-image-height': '12px',
-		'--twi-effect-text-image-height': '10px',
-		'--twi-vp-text-size': '15px',
-		'--twi-activate-image-height': '18px',
-		'--twi-activate-text-height': '12px'
+		'--twi-effect-summary-image-height--small': '12px',
+		'--twi-effect-text-image-height--small': '10px',
+		'--twi-vp-text-size--small': '15px',
+		'--twi-activate-image-height--small': '18px',
+		'--twi-activate-text-height--small': '12px'
 	},
 	medium: {
-		'--card-width': '214px',
-		'--card-text-size': '11px',
-		'--card-element-padding': '5px',
-		'--card-text-right-padding': '5px',
+		'--card-height--medium': '299px',
+		'--card-width--medium': '214px',
+		'--card-text-size--medium': '11px',
+		'--card-element-padding--medium': '5px',
+		'--card-text-right-padding--medium': '5px',
 
-		'--card-cost-square-padding': '6px',
-		'--card-cost-top-cost-padding': '15px',
-		'--card-cost-current-cost-text-size': '15px',
-		'--card-cost-not-current-cost-text-size': '11px',
+		'--card-cost-square-padding--medium': '6px',
+		'--card-cost-top-cost-padding--medium': '15px',
+		'--card-cost-current-cost-text-size--medium': '15px',
+		'--card-cost-not-current-cost-text-size--medium': '11px',
 
-		'--card-effect-height': '75px',
-		'--card-effect-width': '75px',
+		'--card-effect-height--medium': '75px',
+		'--card-effect-width--medium': '75px',
 
-		'--card-played-symbol-size': '20px',
+		'--card-played-symbol-size--medium': '20px',
 
-		'--card-scaling-vp-one-vp-size': '20px',
-		'--scaling-vp-description-padding': '5px',
+		'--card-scaling-vp-one-vp-size--medium': '20px',
+		'--scaling-vp-description-padding--medium': '5px',
 
-		'--phase-card-title-font-size': '180%',
-		'--phase-card-subtitle-font-size': '110%',
-		'--phase-card-description-width': '90%',
-		'--phase-card-description-padding': '5px',
-		'--phase-card-description-font-size': '83%',
-		'--phase-card-wrapper-title-padding': '10px',
+		'--phase-card-title-font-size--medium': '180%',
+		'--phase-card-subtitle-font-size--medium': '110%',
+		'--phase-card-description-width--medium': '90%',
+		'--phase-card-description-padding--medium': '5px',
+		'--phase-card-description-font-size--medium': '83%',
+		'--phase-card-wrapper-title-padding--medium': '10px',
 
-		'--twi-effect-summary-image-height': '16px',
-		'--twi-effect-text-image-height': '14px',
-		'--twi-vp-text-size': '20px',
-		'--twi-activate-image-height': '20px',
-		'--twi-activate-text-height': '15px'
+		'--twi-effect-summary-image-height--medium': '16px',
+		'--twi-effect-text-image-height--medium': '14px',
+		'--twi-vp-text-size--medium': '20px',
+		'--twi-activate-image-height--medium': '20px',
+		'--twi-activate-text-height--medium': '15px'
 	},
 }
 
@@ -81,7 +83,7 @@ export class GameParamService {
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
 	private debug = new BehaviorSubject<boolean>(false)
 	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
-	private cardSize = new BehaviorSubject<SettingCardSize>('small')
+	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
 	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
 
 	currentDebug = this.debug.asObservable()
@@ -99,7 +101,8 @@ export class GameParamService {
 		})
 
 	  	this.updateParams()
-		this.updateCardCssVariables(this.cardSize.getValue())
+		this.updateCardCssVariables('medium')
+		this.updateCardCssVariables('small')
 	}
 
 	private updateParams() {

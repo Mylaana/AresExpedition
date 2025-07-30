@@ -1,17 +1,33 @@
 @use '../../../../../../styles/abstracts/colors' as colors;
 @use 'sass:map';
 :host{
-	display: flex;
-	align-items: center;
-	gap: var(--card-element-padding);
 	width: 100%;
-	margin-top: var(--card-element-padding);
-	margin-bottom: var(--card-element-padding);
 }
-.wrapper-effect-summary{
+.wrapper-main{
 	display: flex;
 	align-items: end;
-	height: 100%;
+	width: 100%;
+	height: auto;
+	&.small{
+		gap: var(--card-element-padding--small);
+		margin-top: var(--card-element-padding--small);
+		margin-bottom: var(--card-element-padding--small);
+	}
+	&.medium{
+		gap: var(--card-element-padding--medium);
+		margin-top: var(--card-element-padding--medium);
+		margin-bottom: var(--card-element-padding--medium);
+	}
+}
+.wrapper-effect-text-aligner{
+	display: flex;
+	align-items: center;
+	&.small{
+		min-height: calc(var(--card-effect-height--small));
+	}
+	&.medium{
+		min-height: calc(var(--card-effect-height--medium));
+	}
 }
 .wrapper-effect-text{
     height: fit-content;
@@ -20,51 +36,45 @@
     justify-content: center;
     align-items: center;
 	flex-direction: column;
-	min-height: calc(var(--card-height) *.15);
 	border: lightgrey solid 1px;
-	/*
-	@media (max-width: 1919px) {
+	&.small{
+		min-height: calc(var(--card-height--small) *.15);
+		max-height: calc(var(--card-height--small) * .48);
 		overflow: scroll;
 		scrollbar-width: none;
-		max-height: calc(var(--card-height) * .48);
 		justify-content: left;
 		align-items: center;
 		flex-direction: column;
-	}*/
+		border-right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+	&.medium{
+		min-height: calc(var(--card-height--medium) *.3);
+		min-width: calc(var(--card-width--medium) *.6);
+	}
 	&.action{
 		border: var(--color-ares-blue-light2) solid 1px;
-		/*
-		@media (max-width: 1919px) {
-			border-right: 0;
-			border-top-right-radius: 0;
-			border-bottom-right-radius: 0;
-		}*/
-	}
-	&.trigger{
-		border: var(--color-ares-purple-light2) solid 1px;
-		/*
-		@media (max-width: 1919px) {
+		&.small{
 			border-right: 0;
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;
 		}
-			*/
 	}
-	/*
-	@media (max-width: 1919px) {
-		border-right: 0;
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-	}*/
+	&.trigger{
+		border: var(--color-ares-purple-light2) solid 1px;
+		&.small{
+			border-right: 0;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+	}
 	span{
 		flex: 1;
 	}
 }
 .wrapper-effect-summary-border{
-	$h: calc(var(--card-effect-height));
     position: relative;
-	height: calc(var(--card-effect-height));
-	width: calc(var(--card-effect-width));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,6 +108,14 @@
         calc($top-inside-width + $top-offset-angle) 100%,
         calc($top-inside-width) calc(100% - $top-offset-height),
         0 calc(100% - $top-offset-height), 0 calc($top-left-angle + $top-offset-height));
+	&.small{
+		height: calc(var(--card-effect-height--small));
+		width: calc(var(--card-effect-width--small));
+	}
+	&.medium{
+		height: calc(var(--card-effect-height--medium));
+		width: calc(var(--card-effect-width--medium));
+	}
 }
 .wrapper-inner{
     position: absolute;
@@ -251,7 +269,6 @@
     background: -moz-repeating-linear-gradient(135deg,$color-one 0%, $color-two $step1, $color-two $step2, $color-one $step3);
 }
 .effect-summary-background--mixedproduction{
-
     $color-one: rgb(253, 157, 67);
     $color-two: rgb(125, 125, 125);
     $step1: 2%;

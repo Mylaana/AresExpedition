@@ -43,7 +43,8 @@
 							*ngIf="projectCard.hasPrerequisiteText()"
 							[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
 							[prerequisiteSummary]="projectCard.getPrerequisiteSummary()"
-							[prerequisiteText]="projectCard.getPrerequisiteText()">
+							[prerequisiteText]="projectCard.getPrerequisiteText()"
+							[cardSize]="cardSize">
 						</app-card-prerequisite>
 						<app-card-played-info
 							*ngIf="projectCard.hasPlayedText()"
@@ -67,7 +68,8 @@
 							*ngIf="effect"
 							[effectText]="projectCard.getEffectText(effect)"
 							[effectSummaryText]="projectCard.getEffectSummaryText(effect)"
-							[effectSummaryType]="effect.effectSummaryType">
+							[effectSummaryType]="effect.effectSummaryType"
+							[cardSize]="cardSize">
 						</app-card-effect>
 					</ng-container>
 				</div>
@@ -87,3 +89,4 @@
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>
+<p>{{cardSize}}</p>
