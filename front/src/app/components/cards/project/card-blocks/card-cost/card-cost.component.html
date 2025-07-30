@@ -1,7 +1,7 @@
 <div [ngClass]="['top-left-layout', _color]"></div>
-<div [ngClass]="['wrapper-main', _color]">
+<div [ngClass]="['wrapper-main', _color, cardSize]">
 	<div [ngClass]="['background', _color]"></div>
-	<div [ngClass]="['wrapper-cost', isCostMod()?'not-current-cost':'current-cost']">
+	<div [ngClass]="['wrapper-cost', isCostMod()?'not-current-cost':'current-cost', cardSize]">
 		<div [ngClass]="['wrapper-cost-image']">
 			<img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
 		</div>
@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<div *ngIf="isCostMod()"
-		[ngClass]="['wrapper-cost', isCostMod()?'current-cost':'not-current-cost']">
+		[ngClass]="['wrapper-cost', isCostMod()?'current-cost':'not-current-cost', cardSize]">
 		<div class="wrapper-cost-image">
 			<img src="/assets/ressource/megacreditvoid.png" alt="ressourceCard.description">
 		</div>

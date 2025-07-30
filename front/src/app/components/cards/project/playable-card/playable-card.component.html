@@ -26,7 +26,8 @@
 						[cardType]="projectCard.cardType"
 						[cardLocation]="parentListType"
 						[costInitial]="projectCard.costInitial"
-						[cost]="projectCard.cost">
+						[cost]="projectCard.cost"
+						[cardSize]="cardSize">
 					</app-card-cost>
 					<app-card-tags [cardType]="projectCard.cardType" [tagsUrl]="projectCard.tagsUrl"></app-card-tags>
 					<app-card-tags-zone *ngIf="projectCard.cardType!='corporation'"  [cardType]="projectCard.cardType"></app-card-tags-zone>

@@ -1,4 +1,17 @@
 @use '../../../../../../styles/abstracts/colors' as colors;
+.small{
+	--card-cost-square-padding: var(--card-cost-square-padding--small);
+	--card-cost-top-cost-padding: var(--card-cost-top-cost-padding--small);
+	--card-cost-current-cost-text-size: var(--card-cost-current-cost-text-size--small);
+	--card-cost-not-current-cost-text-size: var(--card-cost-not-current-cost-text-size--small);
+}
+.medium{
+	--card-cost-square-padding: var(--card-cost-square-padding--medium);
+	--card-cost-top-cost-padding: var(--card-cost-top-cost-padding--medium);
+	--card-cost-current-cost-text-size: var(--card-cost-current-cost-text-size--medium);
+	--card-cost-not-current-cost-text-size: var(--card-cost-not-current-cost-text-size--medium);
+}
+
 :host{
 	z-index: 10;
 	position: relative;
