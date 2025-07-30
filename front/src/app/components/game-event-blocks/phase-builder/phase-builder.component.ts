@@ -7,6 +7,9 @@ import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-back
 import { fadeIn } from '../../../animations/animations';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { NonEventButton } from '../../../models/core-game/button.model';
+import { Subject, takeUntil } from 'rxjs';
+import { GameParamService } from '../../../services/core-game/game-param.service';
+import { SettingCardSize } from '../../../types/global.type';
 
 @Component({
   selector: 'app-phase-builder',
@@ -27,6 +30,19 @@ export class PhaseBuilderComponent{
 	@Output() updateSelectedCardList = new EventEmitter<any>()
 	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
+	_cardSize!: SettingCardSize
+
+	private destroy$ = new Subject<void>
+
+	constructor(private gameParam: GameParamService){}
+
+	ngOnInit(): void {
+		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
+	}
 	public onEventCardBuilderListButtonClicked(output: any){
 		this.cardBuilderButtonClicked.emit(output)
 		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
