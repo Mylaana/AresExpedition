@@ -3,27 +3,16 @@
 	display: inline;
     word-wrap: break-word;
 }
-.wrapper-text-with-image ::ng-deep .wrapper-megacredit.default{
+.wrapper-text-with-image ::ng-deep .wrapper-megacredit{
     position: relative;
-	text-align: center;
-    & img {
-        top: 0;
-        left: 0;
-    }
+	height: 100%;
     & p {
         position: absolute;
-        left: 0px;
+        left: 0;
+		top: 0;
 		min-width: 100%;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-		display: inline-block;
-		&.small{
-        	top: calc(var(--card-text-size--small) *.05);
-		}
-		&.medium{
-        	top: calc(var(--card-text-size--medium) *.05);
-		}
+		width: fit-content;
+		box-sizing: border-box;
     }
 }
 :host ::ng-deep .megacredit-text{
@@ -72,18 +61,14 @@
 		position: relative;
 		text-align: center;
 		& > p {
-			position: absolute;
-			left: 0;
-			top: 0;
 			&.small{
-				padding-top: var(--twi-megacredit-text-offset-top--small);
-				padding-left: var(--twi-megacredit-text-offset-left--small);
+				left: var(--twi-megacredit-text-offset-left--small);
+				top: var(--twi-megacredit-text-offset-top--small);
 				font-size: var(--twi-megacredit-text-size--small);
 			}
 			&.medium{
-				width: 100%;
-				padding-top: var(--twi-megacredit-text-offset-top--medium);
-				padding-left: var(--twi-megacredit-text-offset-left--medium);
+				left: var(--twi-megacredit-text-offset-left--medium);
+				top: var(--twi-megacredit-text-offset-top--medium);
 				font-size: var(--twi-megacredit-text-size--medium);
 			}
 		}
@@ -139,79 +124,34 @@
 	width: 100%;
 	& img{
 		height: 75%;
+		aspect-ratio: 1;
 	}
 	& p{
 		font-size: 15px;
+		color: black;
+		font-weight: 600;
+		padding: 1px;
 	}
 	& > .wrapper-megacredit{
-		position: relative;
+		height: 75%;
+		aspect-ratio: 1;
 		& > p {
-			position: absolute;
-			top: 0;
-			left: 0;
-			padding-top: 2px;
-			padding-left: 2px;
+			padding-top: 3px;
 			font-size: 13px;
 			font-weight: 600;
+		}
+		& > img {
+			height: 100%;
+			aspect-ratio: 1;
 		}
 	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.activateCardButton{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
-	& > img{
+	&.small{
 		height: var(--twi-activate-image-height--small);
 	}
-	& p{
-		font-size: var(--twi-activate-text-height--small);
-	}
-	& > .wrapper-megacredit{
-		height: var(--twi-activate-image-height--small);
-		width: var(--twi-activate-image-height--small);
-		position: relative;
-
-		& > p {
-			position: absolute;
-			top: 0;
-			left: 0;
-			padding-top: calc(var(--twi-activate-text-height--small) *.1);
-			padding-left: calc(var(--twi-activate-text-height--small) *.15);
-			font-size: calc(var(--twi-activate-text-height--small) *.9);
-			font-weight: 600;
-		}
-	}
-}
-.wrapper-text-with-image::ng-deep .block-flex.otherButton{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
-	& img{
-		height: 75%;
-	}
-	& > .wrapper-megacredit{
-		display: flex;
-		align-items: center;
-		height: 75%;
-		aspect-ratio: 1;
-		position: relative;
-		& > img{
-			height: 100%;
-		}
-		& > p {
-			position: absolute;
-			top: 0;
-			left: 0;
-			padding-top: calc(var(--twi-activate-text-height--small) *.1);
-			width: 100%;
-			text-align: center;
-			font-size: calc(var(--twi-activate-text-height--small) *.9);
-			font-weight: 600;
-		}
+	&.medium{
+		height: var(--twi-activate-image-height--medium);
 	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.portalButton{
@@ -222,26 +162,6 @@
 	width: 100%;
 	& img{
 		height: 40%;
-	}
-	& > .wrapper-megacredit{
-		display: flex;
-		align-items: center;
-		height: 40%;
-		aspect-ratio: 1;
-		position: relative;
-		& > img{
-			height: 100%;
-		}
-		& > p {
-			position: absolute;
-			top: 0;
-			left: 0;
-			padding-top: calc(var(--twi-activate-text-height--medium) *.1);
-			width: 100%;
-			text-align: center;
-			font-size: calc(var(--twi-activate-text-height--medium) *.9);
-			font-weight: 600;
-		}
 	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.wildButton{

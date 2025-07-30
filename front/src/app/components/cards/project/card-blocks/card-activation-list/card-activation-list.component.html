@@ -1,4 +1,4 @@
-<div [ngClass]="['wrapper-activation-list', 'ares-border', 'ares-background', 
+<div [ngClass]="['wrapper-activation-list', 'ares-border', 'ares-background',
 		maximumCardActivation?'maximum-activation':'', activationOptions.length===1?'one-button':'two-button']">
 	<ng-container *ngIf="maximumCardActivation===false">
 		<app-card-activation
@@ -7,6 +7,7 @@
 			[actionIndex]="option.index"
 			[caption]="option.caption"
 			[optionTotalQuantity]="activationOptions.length"
+			[cardSize]="cardSize"
 			[isScalingCostActivation]="isScalingCostActivation"
 			(activated)="onActivation($event)">
 		</app-card-activation>

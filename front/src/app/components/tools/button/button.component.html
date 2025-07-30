@@ -18,7 +18,7 @@
 			</div>
 			<div [ngClass]="['button-main--'+shape,'button-shape--'+shape, isEnabled()? 'enabled':'disabled']"
 				[class.hovered]="isHovered()">
-				<app-text-with-image [rawText]="_caption" [context]="context"></app-text-with-image>
+				<app-text-with-image [rawText]="_caption" [cardSize]="cardSize" [context]="context"></app-text-with-image>
 			</div>
 			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, isEnabled()? 'enabled':'disabled']"
 				[class.warning]="button.warning"

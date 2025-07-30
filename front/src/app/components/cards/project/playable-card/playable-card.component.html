@@ -94,6 +94,7 @@
 		*ngIf="state.isActivable()"
 		[projectCard]="projectCard"
 		[maximumCardActivation]="!isActivable()"
+		[cardSize]="cardSize"
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>

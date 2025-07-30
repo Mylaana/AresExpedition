@@ -15,7 +15,7 @@
 	</app-settings>
 </div>
 <app-game-over *ngIf="_gameOver"></app-game-over>
-<div @fadeIn *ngIf="loaded && _connected" class="wrapper-app"
+<div @fadeIn *ngIf="loaded && _connected" [ngClass]="['wrapper-app', _cardSize]"
 	[class.settings-openned]="_settings">
     <div class="wrapper-main">
         <div class="wrapper-other">
@@ -34,6 +34,7 @@
 	<div id="wrapper-hand" *ngIf="playerHand.length>0"
 		[class.hovered]="_handIsHovered"
 		[ngClass]="[_handCardSize]"
+		[class]="_cardSize"
 		(mouseenter)="updateHandHeight(true)"
 		(mouseleave)="updateHandHeight(false)">
 		<div class="hand-mask"
