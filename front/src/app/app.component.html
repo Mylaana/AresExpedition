@@ -4,5 +4,6 @@
 	@fadeInFadeOut
 	*ngIf="displayHomeButton()"
 	[button]="_home" [shape]="'hex_floating'"
+	[context]="'commandButton'"
 	(buttonClicked)="onClick(_home)">
 </app-non-event-button>

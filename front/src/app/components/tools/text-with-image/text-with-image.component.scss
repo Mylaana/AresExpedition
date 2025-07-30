@@ -158,6 +158,46 @@
 		}
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.builderButton{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 80%;
+	width: 100%;
+	& img{
+		height: 90%;
+		aspect-ratio: 1;
+	}
+	& p{
+		padding: 1px;
+		&.small{
+			font-size: calc(var(--card-text-size--small) * 1.2);
+		}
+		&.medium{
+			font-size: calc(var(--card-text-size--medium) * 1.2);
+		}
+	}
+	& > .wrapper-megacredit{
+		height: 90%;
+		aspect-ratio: 1;
+		& > p {
+			padding-top: 0px;
+			font-weight: 600;
+			&.small{
+				padding-top: 2px;
+				font-size: calc(var(--card-text-size--small) * 1.1);
+			}
+			&.medium{
+				padding-top: 2px;
+				font-size: calc(var(--card-text-size--medium) * 1.1);
+			}
+		}
+		& > img {
+			height: 100%;
+			aspect-ratio: 1;
+		}
+	}
+}
 .wrapper-text-with-image::ng-deep .block-flex.activateCardButton{
 	&.small{
 		height: var(--twi-activate-image-height--small);

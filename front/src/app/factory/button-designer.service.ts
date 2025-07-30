@@ -103,7 +103,7 @@ export class ButtonDesigner{
 			case('displayUpgradedPhaseCancel'):{caption='other_cancel';break}
 			case('killCard'):{caption='kill cards';break}
 			case('lockBuilder'):{caption='$other_cancel$';break}
-			case('alternativePayAnaerobicMicroorganisms'):{caption='$ressource_microbe$$ressource_microbe$: -10$ressource_megacredit$';break}
+			case('alternativePayAnaerobicMicroorganisms'):{caption='$ressource_microbe$$ressource_microbe$:  $ressource_megacreditvoid_-10$';break}
 			case('alternativePayRestructuredResources'):{caption='$ressource_plant$: -5$ressource_megacredit$';break}
 			case('carouselLeft'):{caption='';break}
 			case('carouselRight'):{caption='';break}

@@ -3,13 +3,13 @@
 	<div class="wrapper-menu">
 		<div class="menu ares-border ares-background">
 			<div class="wrapper-button">
-				<app-non-event-button [button]="_newGameButton" [shape]="'large'" (buttonClicked)="onClick(_newGameButton)"></app-non-event-button>
+				<app-non-event-button [button]="_newGameButton" [context]="'commandButton'" [shape]="'large'" (buttonClicked)="onClick(_newGameButton)"></app-non-event-button>
 			</div>
 			<div class="wrapper-button">
-				<app-non-event-button [button]="_cardOverviewButton"  [shape]="'large'" (buttonClicked)="onClick(_cardOverviewButton)"></app-non-event-button>
+				<app-non-event-button [button]="_cardOverviewButton" [context]="'commandButton'" [shape]="'large'" (buttonClicked)="onClick(_cardOverviewButton)"></app-non-event-button>
 			</div>
 			<div class="wrapper-button">
-				<app-non-event-button [button]="_buyGame"  [shape]="'large'" (buttonClicked)="onClick(_buyGame)"></app-non-event-button>
+				<app-non-event-button [button]="_buyGame"  [context]="'commandButton'" [shape]="'large'" (buttonClicked)="onClick(_buyGame)"></app-non-event-button>
 			</div>
 		</div>
 		<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>
