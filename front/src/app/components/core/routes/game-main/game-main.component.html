@@ -31,8 +31,9 @@
         </div>
     </div>
 
-	<div id="wrapper-hand" *ngIf="playerHand.length===0"
+	<div id="wrapper-hand" *ngIf="playerHand.length>0"
 		[class.hovered]="_handIsHovered"
+		[ngClass]="[_handCardSize]"
 		(mouseenter)="updateHandHeight(true)"
 		(mouseleave)="updateHandHeight(false)">
 		<div class="hand-mask"

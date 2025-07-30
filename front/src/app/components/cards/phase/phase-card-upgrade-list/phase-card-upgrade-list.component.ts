@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChildren, QueryList, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhaseCardComponent } from '../phase-card/phase-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
@@ -7,8 +7,9 @@ import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
 import { CardStateModel } from '../../../../models/cards/card-state.model';
 import { CardState } from '../../../../interfaces/card.interface';
 import { Utils } from '../../../../utils/utils';
-import { myUUID } from '../../../../types/global.type';
+import { myUUID, SettingCardSize } from '../../../../types/global.type';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
     templateUrl: './phase-card-upgrade-list.component.html',
     styleUrl: './phase-card-upgrade-list.component.scss'
 })
-export class PhaseCardUpgradeListComponent {
+export class PhaseCardUpgradeListComponent implements OnInit, OnDestroy{
 	@Input() phaseGroup!: PhaseCardGroupModel
 	@Input() upgradeFinished: boolean = false
 	cardInitialState!: CardState
@@ -35,18 +36,26 @@ export class PhaseCardUpgradeListComponent {
 	clientPlayerPhaseCardGroupState!: PhaseCardGroupModel;
 
 	loaded: boolean = false
+	_cardSize!: SettingCardSize
+	private destroy$ = new Subject<void>
 
 	constructor(
 		private gameStateService: GameState,
+		private gameParam: GameParamService
 	){}
 
 	ngOnInit(): void {
+		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
 		this.phaseCardLevelList = [0, 1, 2]
 		this.phaseCardModels = this.phaseGroup.phaseCards
 
 		this.loaded = true
 		this.cardInitialState = Utils.toFullCardState({upgradable: this.canUpgrade()})
 		this.setState()
+	}
+	ngOnDestroy(): void {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 	refreshPhaseGroup(): void {
 		for(let card of this.phaseCards){

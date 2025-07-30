@@ -44,7 +44,7 @@ export class PhasePlanificationComponent implements OnInit, OnDestroy{
 	_hovered: boolean = false
 	_previousSelectedPhase!: SelectablePhaseEnum | undefined
 
-	cardSize!: SettingCardSize
+	_cardSize!: SettingCardSize
 
 	destroy$ = new Subject<void>
 
@@ -58,7 +58,7 @@ export class PhasePlanificationComponent implements OnInit, OnDestroy{
 		this.setPhaseCards()
 		if(playerPhase===undefined){return}
 		this._previousSelectedPhase = this.gameStateService.getClientPreviousPhaseSelected()
-		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this.cardSize = size)
+		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
