@@ -9,7 +9,7 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 	small: {
 		'--card-height--small': '209px',
 		'--card-width--small': '150px',
-		'--card-text-size--small': '10px',
+		'--card-text-size--small': '8px',
 		'--card-element-padding--small': '1px',
 		'--card-text-right-padding--small': '0px',
 
@@ -87,7 +87,7 @@ export class GameParamService {
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
 	private debug = new BehaviorSubject<boolean>(false)
 	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
-	private cardSize = new BehaviorSubject<SettingCardSize>('small')
+	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
 	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
 
 	currentDebug = this.debug.asObservable()

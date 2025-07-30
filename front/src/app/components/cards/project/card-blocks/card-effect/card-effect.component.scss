@@ -26,18 +26,20 @@
 	display: flex;
 	align-items: center;
 	min-height: calc(var(--card-effect-height));
+	width: 100%;
 }
 .wrapper-effect-text{
     height: fit-content;
-
     display: flex;
     justify-content: center;
     align-items: center;
 	flex-direction: column;
 	border: lightgrey solid 1px;
+
 	&.small{
 		min-height: calc(var(--card-height--small) *.15);
 		max-height: calc(var(--card-height--small) * .48);
+		width: 100%;
 		overflow: scroll;
 		scrollbar-width: none;
 		justify-content: left;
@@ -48,8 +50,8 @@
 		border-bottom-right-radius: 0;
 	}
 	&.medium{
-		min-height: calc(var(--card-height--medium) *.3);
-		min-width: calc(var(--card-width--medium) *.6);
+		min-height: calc(var(--card-effect-height) *.5);
+		min-width: calc(var(--card-width) *.6);
 	}
 	&.action{
 		border: var(--color-ares-blue-light2) solid 1px;
