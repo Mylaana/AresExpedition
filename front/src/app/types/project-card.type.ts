@@ -1,7 +1,7 @@
 import { RessourceInfo } from "../interfaces/global.interface"
 import { PlayableCardModel } from "../models/cards/project-card.model"
 import { PlayedCardStocksDTO } from "../interfaces/dto/project-card-dto.interface"
-import { SupportedLanguage } from "./global.type"
+import { SettingSupportedLanguage } from "./global.type"
 
 export type SummaryType = 'action' | 'trigger' | 'production' | 'greyProduction' | 'mixedProduction' | undefined
 export type CardType = 'redProject' | 'greenProject' | 'blueProject' | undefined | 'corporation'
@@ -22,4 +22,4 @@ export type ProjectListType = 'none' | 'hand' | 'played' | 'selector' | 'builder
 export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'selectMerger' | 'discard' | 'addRessource' | 'scanKeepResult'
 export type PlayedCardDTO = {[key: string]: PlayedCardStocksDTO}
 export type ActivationOption = 1 | 2
-export type LocalizedText = Partial<Record<SupportedLanguage, string>>;
+export type LocalizedText = Partial<Record<SettingSupportedLanguage, string>>;

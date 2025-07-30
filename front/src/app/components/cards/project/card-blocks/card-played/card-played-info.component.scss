@@ -1,15 +1,21 @@
 @use 'sass:color';
-$size: calc(var(--card-width) * .13);
+.small{
+	--card-played-symbol-size: var(--card-played-symbol-size--small);
+}
+.medium{
+	--card-played-symbol-size: var(--card-played-symbol-size--medium);
+}
 :host{
     display: flex;
     flex-direction: row;
+	margin-bottom: 5px;
 }
 .wrapper-played-icon{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
-	height: $size;
+	height: var(--card-played-symbol-size);
 	aspect-ratio: 1;
 
     border: 1px gold solid;
@@ -21,7 +27,7 @@ $size: calc(var(--card-width) * .13);
 	margin-bottom: 5px;
 	background: rgba(color.scale(gold, $lightness: -50%), .3);
     & img{
-        height: calc($size * .8);
+        height: calc(var(--card-played-symbol-size));
 		aspect-ratio: 1;
     }
 }
@@ -33,9 +39,9 @@ $size: calc(var(--card-width) * .13);
 	border: 1px gold solid;
 	border-top-left-radius: 0;
 	flex: 1;
-	@media (max-width: 1919px) {
-		border-right: 0;
+	&.small{
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
+		border-right: 0;
 	}
 }

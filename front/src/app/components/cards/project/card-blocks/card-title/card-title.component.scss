@@ -1,3 +1,11 @@
+.small{
+	--card-title-size: var(--card-title-size--small);
+	--card-height: var(--card-height--small);
+}
+.medium{
+	--card-title-size: var(--card-title-size--medium);
+	--card-height: var(--card-height--medium);
+}
 :host{
 	width: 100%;
 	height: 100%;
@@ -14,10 +22,7 @@ p{
 	font-weight: bold;
 	font-style: italic;
 	text-align: center;
-	font-size: calc(var(--card-width) / 15);
-	@media (max-width: 1919px) {
-		font-size: calc(var(--card-width) / 16);
-	}
+	font-size: var(--card-title-size);
 }
 .white {
 	text-size-adjust: 50%;

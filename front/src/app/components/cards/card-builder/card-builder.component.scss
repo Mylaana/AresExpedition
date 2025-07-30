@@ -1,8 +1,17 @@
-$builder-padding: calc(var(--card-height) * .06);
 $selected-card-zone-coeff: 1.05;
 $selected-card-zone-border-size: 3px;
 $inner-decoration-width: 2px;
 $alternative-width: 200px;
+.small{
+	--card-width: var(--card-width--small);
+	--card-height: var(--card-height--small);
+	--builder-padding: var(--builder-padding--small);
+}
+.medium{
+	--card-width: var(--card-width--medium);
+	--card-height: var(--card-height--medium);
+	--builder-padding: var(--builder-padding--medium);
+}
 :host{
 	position: relative;
 }
@@ -11,7 +20,7 @@ $alternative-width: 200px;
     display: flex;
 	flex-direction: column;
 	width: calc(var(--card-width) * $selected-card-zone-coeff + $selected-card-zone-border-size + $inner-decoration-width * 2);
-	padding: $builder-padding;
+	padding: var(--builder-padding);
 }
 .wrapper-buton-zone{
 	display: flex;
@@ -20,7 +29,7 @@ $alternative-width: 200px;
 	align-items: center;
 
 	width: 100%;
-	margin-top: $builder-padding;
+	margin-top: var(--builder-padding);
 }
 .green{
 	background: linear-gradient(130deg,var(--color-ares-green-light3) 0%, var(--color-ares-green) 35%, var(--color-ares-green-dark4) 80%);
@@ -97,12 +106,12 @@ app-event-card-builder-button{
 	width: 100%;
 	height: 100%;
 }
-app-project-card-list{
+/*app-project-card-list{
 	position: relative;
 	z-index: 10;
 	width: var(--card-width);
 	height: var(--card-height);
-}
+}*/
 .wrapper-main{
 	display: flex;
 	flex-direction: column;
@@ -111,34 +120,22 @@ app-project-card-list{
 
 	position: relative;
 }
-.wrapper-top-decoration{
-	$height-coeff: .07;
-	$height-offset: calc(var(--card-height) *.01);
-	$shape-width: calc(var(--card-width) * .8);
-	$shape-height: calc(var(--card-height) * $height-coeff);
-
-	position: relative;
-	top: calc($shape-height * .2);
-	left: 0;
-    height: $shape-height;
-    width: 80%;
-}
 .inner-decoration--side{
 	position: absolute;
-	width: calc(100% - $builder-padding);
-	height: calc(var(--card-height) * $selected-card-zone-coeff + $builder-padding);
+	width: calc(100% - var(--builder-padding));
+	height: calc(var(--card-height) * $selected-card-zone-coeff + var(--builder-padding));
 	border-left: solid $inner-decoration-width;
 	border-right: solid $inner-decoration-width;
 	border-image: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--color-ares-orange) 5%, var(--color-ares-orange) 95%,  rgba(255,255,255,0)) 1;
-	top: calc($builder-padding / 2);
-	left: calc($builder-padding / 2 - $inner-decoration-width);
+	top: calc(var(--builder-padding) / 2);
+	left: calc(var(--builder-padding) / 2 - $inner-decoration-width);
 }
 .inner-decoration--separator{
 	$border-thickness: 2px;
 	z-index: 10;
 	width: calc(100%);
-	margin-top: calc($builder-padding / 2);
-	margin-bottom: calc($builder-padding / 2);
+	margin-top: calc(var(--builder-padding) / 2);
+	margin-bottom: calc(var(--builder-padding) / 2);
 
 	border-top: solid $border-thickness;
 	border-image: linear-gradient(to right, rgba(255,255,255,0) 0%, var(--color-ares-orange) 5%, var(--color-ares-orange) 95%,  rgba(255,255,255,0)) 1;

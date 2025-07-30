@@ -8,7 +8,7 @@ import { PlayerStateModel } from '../../../models/player-info/player-state.model
 import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
-import { NonEventButtonNames } from '../../../types/global.type';
+import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',
@@ -24,6 +24,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	@Input() locked!: boolean //should be true when first builder isnt locked
 	@Output() buttonClicked = new  EventEmitter<any>()
 	@Input() builder!: CardBuilder
+	@Input() cardSize!: SettingCardSize
 	_buttons: NonEventButton[] = []
 	_used: NonEventButtonNames[] = []
 

@@ -1,4 +1,5 @@
 <div class="wrapper-main"
+	[ngClass]="[cardSize]"
 	(mouseenter)="_hovered=true"
 	(mouseleave)="_hovered=false">
 	<div class="wrapper-border">
@@ -25,14 +26,19 @@
 						[cardType]="projectCard.cardType"
 						[cardLocation]="parentListType"
 						[costInitial]="projectCard.costInitial"
-						[cost]="projectCard.cost">
+						[cost]="projectCard.cost"
+						[cardSize]="cardSize">
 					</app-card-cost>
 					<app-card-tags [cardType]="projectCard.cardType" [tagsUrl]="projectCard.tagsUrl"></app-card-tags>
 					<app-card-tags-zone *ngIf="projectCard.cardType!='corporation'"  [cardType]="projectCard.cardType"></app-card-tags-zone>
 				</div>
 				<div class="wrapper-card-element-main">
 					<div class="wrapper-card-element-top">
-						<app-card-title [title]="projectCard.getTitle()" [cardType]="projectCard.cardType"></app-card-title>
+						<app-card-title
+							[title]="projectCard.getTitle()"
+							[cardType]="projectCard.cardType"
+							[cardSize]="cardSize">
+						</app-card-title>
 						<app-card-starting-megacredits
 							*ngIf="projectCard.cardType==='corporation'"
 							[startingMegacredits]="projectCard.startingMegacredits??0">
@@ -43,20 +49,27 @@
 							*ngIf="projectCard.hasPrerequisiteText()"
 							[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
 							[prerequisiteSummary]="projectCard.getPrerequisiteSummary()"
-							[prerequisiteText]="projectCard.getPrerequisiteText()">
+							[prerequisiteText]="projectCard.getPrerequisiteText()"
+							[cardSize]="cardSize">
 						</app-card-prerequisite>
-						<app-card-played-info
-							*ngIf="projectCard.hasPlayedText()"
-							[playedText]="projectCard.getPlayedText()">
-						</app-card-played-info>
+						<ng-container *ngIf="projectCard.hasPlayedText()">
+							<app-card-played-info
+								*ngFor="let text of projectCard.getPlayedText()"
+								[playedText]="text"
+								[cardSize]="cardSize">
+							</app-card-played-info>
+						</ng-container>
 						<app-card-stock
-							*ngIf="projectCard.stockable?.length!=0"
-							[cardStock]="projectCard.stock">
+							*ngIf="projectCard.stockable?.length!=0 && parentListType!='hand' && parentListType!='builderSelector' && parentListType!='builderSelectedZone'"
+							[cardStock]="projectCard.stock"
+							[cardSize]="cardSize">
 						</app-card-stock>
 						<app-card-vp
 							*ngIf="projectCard.vpNumber || projectCard.scalingVp===true"
 							[vpNumber]="projectCard.vpNumber??''"
-							[vpDescription]="projectCard.getVpText()">
+							[vpDescription]="projectCard.getVpText()"
+							[isScalingVp]="projectCard.scalingVp"
+							[cardSize]="cardSize">
 						</app-card-vp>
 					</div>
 				</div>
@@ -66,7 +79,8 @@
 							*ngIf="effect"
 							[effectText]="projectCard.getEffectText(effect)"
 							[effectSummaryText]="projectCard.getEffectSummaryText(effect)"
-							[effectSummaryType]="effect.effectSummaryType">
+							[effectSummaryType]="effect.effectSummaryType"
+							[cardSize]="cardSize">
 						</app-card-effect>
 					</ng-container>
 				</div>
@@ -78,14 +92,12 @@
 			<app-card-background [cardType]="projectCard.cardType"></app-card-background>
 			<app-card-status [cardCode]="projectCard.cardCode" [cardStatus]="projectCard.status"  [hovered]="_hovered"></app-card-status>
 		</div>
-
-
 	</div>
 	<app-card-activation-list
 		*ngIf="state.isActivable()"
 		[projectCard]="projectCard"
 		[maximumCardActivation]="!isActivable()"
+		[cardSize]="cardSize"
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>
-<p>{{projectCard.prerequisiteTresholdType}}</p>

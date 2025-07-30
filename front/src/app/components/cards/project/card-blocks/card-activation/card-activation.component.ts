@@ -10,6 +10,7 @@ import { GameState } from '../../../../../services/core-game/game-state.service'
 import { Subject, takeUntil } from 'rxjs';
 import { ActivationOption } from '../../../../../types/project-card.type';
 import { PlayableCard } from '../../../../../factory/playable-card.factory';
+import { SettingCardSize } from '../../../../../types/global.type';
 
 @Component({
     selector: 'app-card-activation',
@@ -28,6 +29,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	@Input() caption!: string
 	@Input() optionTotalQuantity: number = 1
 	@Input() isScalingCostActivation!: boolean
+	@Input() cardSize!: SettingCardSize
 	@Output() activated = new EventEmitter<{option: ActivationOption, twice: boolean}>()
 	_activateOnce!: NonEventButton
 	_activateTwice!: NonEventButton

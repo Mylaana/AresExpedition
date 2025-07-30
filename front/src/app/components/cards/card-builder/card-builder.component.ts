@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventBaseModel, EventCardBuilder, CardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../project/playable-card-list/playable-card-list.component';
@@ -8,6 +8,9 @@ import { ProjectFilter } from '../../../interfaces/global.interface';
 import { BuilderOption, ProjectFilterNameEnum } from '../../../enum/global.enum';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilderAlternativeCostComponent } from '../card-builder-alternative-cost/card-builder-alternative-cost.component';
+import { SettingCardSize } from '../../../types/global.type';
+import { Subject, takeUntil } from 'rxjs';
+import { GameParamService } from '../../../services/core-game/game-param.service';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
 
@@ -27,6 +30,7 @@ export class CardBuilderComponent implements OnInit{
 	@Input() option!: BuilderOption
 	@Input() projectFilter?: ProjectFilter
 	@Input() discount: number = 0
+	@Input() cardSize!: SettingCardSize
 	@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
 	@Output() alternativePayButtonClicked: EventEmitter<NonEventButton> = new EventEmitter<NonEventButton>()
 	@ViewChildren('altCost') alternativeCost!: QueryList<CardBuilderAlternativeCostComponent>
@@ -35,7 +39,13 @@ export class CardBuilderComponent implements OnInit{
 	@Input() eventId!: number
 
 	currentEvent!: EventCardBuilder
+
 	_lockBuilder!: NonEventButton
+
+	private destroy$ = new Subject<void>
+
+	constructor(private gameParam: GameParamService){}
+
 	ngOnInit(): void {
 		this._lockBuilder = ButtonDesigner.createNonEventButton('lockBuilder')
 	}

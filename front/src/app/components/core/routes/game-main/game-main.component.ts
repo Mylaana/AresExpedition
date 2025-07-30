@@ -22,7 +22,7 @@ import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { fadeIn, fadeInFadeOut } from '../../../../animations/animations';
-import { myUUID } from '../../../../types/global.type';
+import { myUUID, SettingCardSize } from '../../../../types/global.type';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { GameOverComponent } from '../../game/game-over/game-over.component';
 import { PlayerPlayedCardComponent } from '../../../cards/project/player-played-card/player-played-card.component';
@@ -65,6 +65,8 @@ export class GameMainComponent implements OnInit{
 	_connected: boolean = false
 	_gameOver: boolean = false
 	_gameStarted: boolean = false
+	_cardSize!: SettingCardSize
+	_handCardSize!: SettingCardSize
 
 	private readonly wsHandler = inject(WebsocketHandler)
 	//@ts-ignore
@@ -100,6 +102,8 @@ export class GameMainComponent implements OnInit{
 		this.gameStateService.currentGameOver.subscribe(over => this._gameOver = over)
 		this.rxStompService.connectionState$.subscribe(() => {this._connected = this.rxStompService.connectionState$.getValue() === 1})
 		this.settingsButton = ButtonDesigner.createNonEventButton('settings')
+		this.gameParam.currentCardSize.subscribe(size => this._cardSize = size)
+		this.gameParam.currentHandCardSize.subscribe(size => this._handCardSize = size)
 	}
 	subscribeWsIfValidSessionIds(): void {
 		if(!this.gameId || !this.clientId){return}

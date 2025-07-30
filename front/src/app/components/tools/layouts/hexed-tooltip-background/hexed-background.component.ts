@@ -32,7 +32,7 @@ export class HexedBackgroundComponent implements OnInit, OnDestroy {
 	private destroy$ = new Subject<void>()
 
 	constructor(private elRef: ElementRef) {
-		fromEvent(window, 'resize').pipe(takeUntil(this.destroy$), debounceTime(10)).subscribe(() => {this.refreshHexNumbers(); console.log('resized')});
+		fromEvent(window, 'resize').pipe(takeUntil(this.destroy$), debounceTime(10)).subscribe(() => {this.refreshHexNumbers()});
 	}
 
 	ngOnInit(): void {

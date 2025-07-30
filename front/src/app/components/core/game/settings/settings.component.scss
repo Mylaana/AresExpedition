@@ -1,4 +1,4 @@
-$main-padding: 5px;
+$main-padding: 20px;
 :host{
 	position: relative;
 	display: flex;
@@ -16,8 +16,8 @@ $main-padding: 5px;
 
 	display: flex;
 
-	width: 50%;
-	height: 50%;
+	width: 400px;
+	height: 400px;
 	padding: $main-padding;
 }
 .main{
@@ -25,15 +25,15 @@ $main-padding: 5px;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	gap: 5px;
+	gap: 20px;
 
 	width: 100%;
 	height: 100%;
 }
 .button-close{
-	$width: 5%;
+	$width: 40px;
 	position: absolute;
-	left: calc(100% - $width - $main-padding);
+	right: $main-padding;
 	width: $width;
 	aspect-ratio: 1;
 }
@@ -59,17 +59,26 @@ $main-padding: 5px;
 	}
 }
 .wrapper-setting-zone{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 	width: 100%;
 	height: 100%;
-	border: red solid 1px;
 }
 .wrapper-setting{
 	display: flex;
-	justify-content: space-around;
 	align-items: center;
-	width: 150px;
+	gap: 10px;
+	width: 250px;
 	height: 40px;
 	& > app-non-event-button{
 		height: 100%;
+	}
+	& > app-button-carousel{
+		height: 100%;
+		flex: 1;
+	}
+	& p {
+		min-width: 70px;
 	}
 }

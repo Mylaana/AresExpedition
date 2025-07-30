@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<div class="wrapper-button">
-		<app-non-event-button [button]="_createGame"
+		<app-non-event-button [context]="'commandButton'" [button]="_createGame"
 			[shape]="'large'"
 			(buttonClicked)="createGame()"></app-non-event-button>
 	</div>

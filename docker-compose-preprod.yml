@@ -1,0 +1,30 @@
+services:
+  front:
+    build:
+      context: .
+      dockerfile: front/Dockerfile.preprod
+    ports:
+      - "18001:80"
+    volumes:
+      - ./config/front/config.preprod.json:/usr/share/nginx/html/assets/config/config.json
+    depends_on:
+      - back
+    networks:
+      - ares-network
+
+  back:
+    build:
+      context: .
+      dockerfile: back/Dockerfile
+    env_file:
+      - ./config/back/.env.preprod
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xmx512m -Xms256m
+    # ports:
+      # - "18002:8080" # direct access to backend
+    networks:
+      - ares-network
+
+networks:
+  ares-network:
+    driver: bridge

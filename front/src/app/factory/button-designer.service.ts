@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton, ToggleButton } from "../models/core-game/button.model";
-import { ButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
-import { BuilderOption, EffectPortalButtonEnum, EffectPortalEnum } from "../enum/global.enum";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton, ToggleButton, CarouselButton } from "../models/core-game/button.model";
+import { CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
+import { BuilderOption, EffectPortalButtonEnum } from "../enum/global.enum";
 import { EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENABLED, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-maps";
-import { Checker } from "../utils/checker";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 
 
@@ -12,7 +11,7 @@ import { PlayerStateModel } from "../models/player-info/player-state.model";
     providedIn: 'root'
 })
 export class ButtonDesigner{
-    private static getStartEnabled(buttonRule: EventUnionSubTypes | NonEventButtonNames) : boolean {
+    private static getStartEnabled(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames) : boolean {
         let startEnabled: boolean
 
         switch(buttonRule){
@@ -20,7 +19,7 @@ export class ButtonDesigner{
             case('default'):{startEnabled=true;break}
             case('upgradePhaseCards'):{startEnabled=true;break}
             case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('productionPhase'):{startEnabled=true;break}
-            case('actionPhaseActivator'):{startEnabled=true;break}
+            case('actionPhaseActivator'):{startEnabled=false;break}
             case('selectCardOptionalSell'):{startEnabled=false;break}
 			case('planificationPhase'):{startEnabled=false;break}
 			case('selectStartingHand'):{startEnabled=true;break}
@@ -42,7 +41,8 @@ export class ButtonDesigner{
 			case('killCard'):{startEnabled=true;break}
 			case('lockBuilder'):{startEnabled=true;break}
 			case('alternativePayAnaerobicMicroorganisms'):{startEnabled=true; break}
-
+			case('carouselLeft'):{startEnabled=true; break}
+			case('carouselRight'):{startEnabled=true; break}
 
 			case('buyForest'):{startEnabled=true;break}
 			case('convertForest'):{startEnabled=true;break}
@@ -77,7 +77,18 @@ export class ButtonDesigner{
         }
         return startEnabled
     }
-    private static getCaption(buttonRule: EventUnionSubTypes | NonEventButtonNames): string {
+	private static getResetStartEnabledOnEventSwitch(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames) : boolean {
+        let resetEnabled: boolean = true
+
+        switch(buttonRule){
+			//events related rules
+            case('actionPhaseActivator'):{resetEnabled=false;break}
+
+            default:{resetEnabled=true;break}
+        }
+        return resetEnabled
+    }
+    private static getCaption(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames): string {
         let caption: string
 
         switch(buttonRule){
@@ -92,8 +103,10 @@ export class ButtonDesigner{
 			case('displayUpgradedPhaseCancel'):{caption='other_cancel';break}
 			case('killCard'):{caption='kill cards';break}
 			case('lockBuilder'):{caption='$other_cancel$';break}
-			case('alternativePayAnaerobicMicroorganisms'):{caption='$ressource_microbe$$ressource_microbe$: -10$ressource_megacredit$';break}
+			case('alternativePayAnaerobicMicroorganisms'):{caption='$ressource_microbe$$ressource_microbe$:  $ressource_megacreditvoid_-10$';break}
 			case('alternativePayRestructuredResources'):{caption='$ressource_plant$: -5$ressource_megacredit$';break}
+			case('carouselLeft'):{caption='';break}
+			case('carouselRight'):{caption='';break}
 
 
 			//settings
@@ -133,6 +146,7 @@ export class ButtonDesigner{
         button.setEnabled(button.startEnabled)
         button.caption = this.getCaption(eventSubType)
         button.eventSubType = eventSubType
+		button.resetEnabledOnEventSwitch = this.getResetStartEnabledOnEventSwitch(eventSubType)
         return button
     }
     public static createEventSelectorMainButton(eventSubType: EventUnionSubTypes): EventMainButtonSelector {
@@ -141,6 +155,7 @@ export class ButtonDesigner{
         button.setEnabled(button.startEnabled)
         button.caption = this.getCaption(eventSubType)
         button.eventSubType = eventSubType
+		button.resetEnabledOnEventSwitch = this.getResetStartEnabledOnEventSwitch(eventSubType)
         return button
     }
     public static createEventCardBuilderButton(zoneId:number, option?: BuilderOption): EventCardBuilderButton[] {
@@ -214,5 +229,15 @@ export class ButtonDesigner{
 		let button = new ToggleButton
 		button.name = name
 		return button
+	}
+	public static createCarouselButton(name: CarouselButtonNames, valueList: string[], startingValue?: string): CarouselButton {
+		let button = new CarouselButton
+		button.name = name
+        button.startEnabled = this.getStartEnabled(name)
+		button.setEnabled(button.startEnabled)
+        button.valueList = valueList
+		button.value = startingValue??(valueList[0]??'')
+
+        return button
 	}
 }

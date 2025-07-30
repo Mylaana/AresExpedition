@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
 import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
-import { AdvancedRessourceType, SupportedLanguage } from "../../types/global.type";
+import { AdvancedRessourceType, SettingSupportedLanguage } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface";
 import { GameParamService } from "../core-game/game-param.service";
@@ -226,5 +226,8 @@ export class ProjectCardInfoService {
 			})
 		}
 		return effects
+	}
+	private loadPlayed(input: string): string[] {
+		return input.split('$skipline$')
 	}
 }

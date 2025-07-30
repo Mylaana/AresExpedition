@@ -155,7 +155,9 @@ export class GameEventComponent {
 	}
 	private resetValidateButtonState(event: EventBaseModel): void {
 		if(!event.button){return}
-		event.button.resetStartEnabled()
+		if(event.button.resetEnabledOnEventSwitch){
+			event.button.resetStartEnabled()
+		}
 		event.button.locked = event.lockValidateButton
 	}
 	private updateSellButtonsDisplay(event: EventBaseModel){

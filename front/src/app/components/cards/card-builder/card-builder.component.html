@@ -1,37 +1,36 @@
 <div class="wrapper-main">
-	<div class="wrapper-card-builder ares-background ares-border">
-		<div class="inner-decoration--side"></div>
-		<div class="selected-card-zone"
-			[ngClass]="getBackground()"
+	<div [ngClass]="['wrapper-card-builder', 'ares-background', 'ares-border', cardSize]">
+		<div [ngClass]="['inner-decoration--side', cardSize]"></div>
+		<div [ngClass]="['selected-card-zone',getBackground(), cardSize]"
 			[class.locked]="cardBuilder.getBuilderIsLocked()">
 			<app-playable-card-list
 				*ngIf="cardBuilder.getSelectedCard()"
-				class="play-card-zone-list"
+				[ngClass]="['play-card-zone-list']"
 				[cardList]="[cardBuilder.getSelectedCard()]"
 				[listType]="'builderSelectedZone'"
 				[event]="event"
 				[selectedDiscount]="discount">
 			</app-playable-card-list>
 		</div>
-		<div class="wrapper-buton-zone"
+		<div [ngClass]="['wrapper-buton-zone', cardSize]"
 			*ngIf="!cardBuilder.getBuilderIsLocked()">
-			<div class="wrapper-buttons">
+			<div [ngClass]="['wrapper-buttons', cardSize]">
 				<div *ngIf="cardBuilder.getButtons()[0].isEnabled() || cardBuilder.getButtons()[1].isEnabled()" class="wrapper-select-button">
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].isEnabled()" [button]="cardBuilder.getButtons()[0]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[1].isEnabled()" [button]="cardBuilder.getButtons()[1]" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
+					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].isEnabled()" [button]="cardBuilder.getButtons()[0]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
+					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[1].isEnabled()" [button]="cardBuilder.getButtons()[1]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
 				</div>
 				<div *ngIf="cardBuilder.getButtons()[2].isEnabled() || cardBuilder.getButtons()[3].isEnabled()" class="wrapper-build-button">
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
+					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
 				</div>
 			</div>
 			<ng-container *ngIf="hasOptionButton()">
-				<div class="inner-decoration--separator"></div>
+				<div [ngClass]="['inner-decoration--separator', cardSize]"></div>
 				<div class="wrapper-alternative">
 					<div class="wrapper-alternative-inner">
 						<h2>Or</h2>
-						<div class="wrapper-buttons">
-							<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
+						<div [ngClass]="['wrapper-buttons', cardSize]">
+							<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
 						</div>
 					</div>
 				</div>
@@ -43,6 +42,7 @@
 		*ngIf="!cardBuilder.getBuilderIsLocked()"
 		[event]="event"
 		[builder]="cardBuilder"
+		[cardSize]="cardSize"
 		(buttonClicked)="onAlternativePayButtonClicked($event)">
 	</app-card-builder-alternative-cost>
 </div>

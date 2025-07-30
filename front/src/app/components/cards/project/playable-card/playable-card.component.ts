@@ -28,6 +28,7 @@ import { CardActivationListComponent } from '../card-blocks/card-activation-list
 import { ProjectFilter } from '../../../../interfaces/global.interface';
 import { PlayableCard } from '../../../../factory/playable-card.factory';
 import { CardDisabledForegroundComponent } from '../card-blocks/card-disabled-foreground/card-disabled-foreground.component';
+import { SettingCardSize } from '../../../../types/global.type';
 
 @Component({
     selector: 'app-playable-card',
@@ -62,12 +63,12 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	@Input() parentListSubType: ProjectListSubType = 'none'
 	@Input() activableTwice: boolean = false
 	@Input() filter?: ProjectFilter
+	@Input() cardSize!: SettingCardSize
 	private megacreditAvailable: number = 0
 	private readonly cardCost = inject(CardCost);
 	private clientState!: PlayerStateModel
 
 	_hovered: boolean = false
-	//_maximumActivation: boolean = false
 	_activationCostPayable: boolean = false
 	_buildableCheckList!: CardBuildable
 

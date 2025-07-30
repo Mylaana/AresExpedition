@@ -1,3 +1,11 @@
+.small{
+	--card-width: var(--card-width--small);
+	--card-height: var(--card-height--small);
+}
+.medium{
+	--card-width: var(--card-width--medium);
+	--card-height: var(--card-height--medium);
+}
 :host{
 	width: 100%;
 	height: fit-content;

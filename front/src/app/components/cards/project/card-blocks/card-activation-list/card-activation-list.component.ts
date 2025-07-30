@@ -7,6 +7,7 @@ import { GameState } from '../../../../../services/core-game/game-state.service'
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
 import { PlayableCard } from '../../../../../factory/playable-card.factory';
+import { SettingCardSize } from '../../../../../types/global.type';
 
 interface Activation {
 	index: ActivationOption
@@ -25,6 +26,7 @@ interface Activation {
 export class CardActivationListComponent implements OnInit, OnDestroy{
 	@Input() maximumCardActivation!: boolean
 	@Input() projectCard!: PlayableCardModel
+	@Input() cardSize!: SettingCardSize
 	@Output() activated: EventEmitter<{card: PlayableCardModel, option: ActivationOption, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, option: ActivationOption, twice: boolean}>()
 
 	activationOptions: Activation[] = []

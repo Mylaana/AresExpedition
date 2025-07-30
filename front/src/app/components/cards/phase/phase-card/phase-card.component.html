@@ -1,13 +1,13 @@
 <div class="wrapper-main"
 	[class.current]="isCurrentUpgrade()"
 	[class.upgradable]="isUpgradeable()">
-	<div class="wrapper-phase-card">
-		<div class="wrapper-title">
-			<h1 class="title">{{phaseCard.title}}</h1>
+	<div [ngClass]="['wrapper-phase-card', cardSize]">
+		<div [ngClass]="['wrapper-title', cardSize]">
+			<h1 [ngClass]="['title', cardSize]">{{phaseCard.title}}</h1>
 		</div>
 		<div class="wrapper-content">
-			<div class="wrapper-description ares-background ares-border">
-				<h1 class="subtitle">Ability</h1>
+			<div [ngClass]="['wrapper-description', 'ares-background', 'ares-border', cardSize]">
+				<h1 [ngClass]="['subtitle', cardSize]">Ability</h1>
 				<app-text-with-image [rawText]="phaseCard.baseDescription"></app-text-with-image>
 			</div>
 			<div class="wrapper-description ares-background ares-border">
@@ -21,12 +21,12 @@
 		</div>
 	</div>
 
-	<div class="wrapper-upgrade ares-border ares-background"
+	<div [ngClass]="['wrapper-upgrade', 'ares-border', 'ares-background', cardSize]"
 		*ngIf="!isCurrentUpgrade()"
 		[class.upgradable]="isUpgradeable()===false">
 		<div class="wrapper-button"
 			*ngIf="isUpgradeable()">
-			<app-non-event-button [shape]="'small'" [button]="_upgradeButton" (buttonClicked)="upgrade()"></app-non-event-button>
+			<app-non-event-button [shape]="'small'" [context]="'builderButton'" [cardSize]="cardSize" [button]="_upgradeButton" (buttonClicked)="upgrade()"></app-non-event-button>
 		</div>
 	</div>
 </div>

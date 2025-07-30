@@ -1,67 +1,111 @@
-import { Component, Input, OnInit, SimpleChanges} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { GlobalInfo } from '../../../services/global/global-info.service';
+import { CommonModule } from '@angular/common';
+import { SettingCardSize, TextWithImageContext } from '../../../types/global.type';
 
-type HtmlTag = 'p' | 'img'| 'div'
+type HtmlTag = 'p' | 'img' | 'div';
 
 @Component({
-    selector: 'app-text-with-image',
-    imports: [],
-    templateUrl: './text-with-image.component.html',
-    styleUrl: './text-with-image.component.scss'
+  selector: 'app-text-with-image',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './text-with-image.component.html',
+  styleUrls: ['./text-with-image.component.scss'],
 })
-export class TextWithImageComponent implements OnInit{
-	@Input() rawText!: string;
-	textWithImages!: string;
+export class TextWithImageComponent implements OnInit, OnChanges {
+  @Input() rawText!: string;
+  @Input() context: TextWithImageContext = 'default'
+  @Input() cardSize!: SettingCardSize
+  textWithImages: string = '';
 
-	ngOnInit() {
-		this.textWithImages = this.replaceImageTags(this.rawText);
-	}
+  ngOnInit() {
+    this.processText();
+  }
 
-	ngOnChanges(changes: SimpleChanges): void {
-		if(changes['rawText'] && changes['rawText'].currentValue){
-			this.textWithImages = this.replaceImageTags(this.rawText);
-		}
-	}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['rawText']?.currentValue) {
+      this.processText();
+    }
+	if (changes['cardSize']?.currentValue) {
+      this.processText();
+    }
+  }
 
-	replaceImageTags(text: string): string {
-		var splittedText = text.split("$")
-		splittedText.forEach((value, index) => {
-			if(value.split("_")[0]==="tag"){
-				splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, GlobalInfo.getUrlFromName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
-			}else if(value.split("_")[0]==="ressource"){
-				let splittedValue = value.split("_")
-				if (splittedValue[1] != 'megacreditvoid') {
-					splittedText[index] = this.htmlTag('img', {inputValue:value.replace(value, GlobalInfo.getUrlFromName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
-				} else {
-					value = 'ressource_megacreditvoid'
-					var theImage = this.htmlTag('img',{inputValue:value.replace(value, GlobalInfo.getUrlFromName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
-					var theText = this.htmlTag('p', {inputValue:splittedValue[2], inputClass:"megacredit-text"})
-					splittedText[index] = this.htmlTag('div',{inputClass:"wrapper-megacredit",inputValue: theImage + theText})
-				}
-			}else if(value.split("_")[0]==="other"){
-				splittedText[index] = this.htmlTag('img', { inputValue:value.replace(value, GlobalInfo.getUrlFromName('$' + value + '$')), imgAlt:value, inputClass:"text-tag"})
-			}else if(value==='skipline'){
-				splittedText[index] = `<br>`
-			}else if(value!=''){
-				splittedText[index] = `<p>${value}</p>`
-			}
+  private processText() {
+    this.textWithImages = this.buildHtmlFromBlocks(this.rawText);
+  }
+
+  private buildHtmlFromBlocks(text: string): string {
+    //Splitting the block in divs around $skipline$
+    const rawBlocks = text.split('$skipline$');
+    const processedBlocks = rawBlocks.map(blockText => {
+		const segments = blockText.split('$');
+		const htmlSegments = segments.map(segment => this.transformSegment(segment)).join('');
+		return this.createHtmlTag('div', {
+			inputValue: htmlSegments,
+			inputClass: `block-flex ${this.context} ${this.cardSize}`,
 		});
-		for(let i=splittedText.length; i<0; i--){
-			if(String(splittedText[i])===''){
-				splittedText.splice(i,1)
+    });
+
+    return processedBlocks.join('');
+  }
+
+  private transformSegment(segment: string): string {
+    if (!segment) return '';
+
+    const [type, ...rest] = segment.split('_');
+
+    switch (type) {
+      case 'tag':
+      case 'ressource':
+      case 'other': {
+			if (type === 'ressource' && rest[0] === 'megacreditvoid') {
+			const img = this.createHtmlTag('img', {
+				inputValue: GlobalInfo.getUrlFromName(`$ressource_megacreditvoid$`),
+				imgAlt: segment,
+				inputClass: `${this.cardSize}`,
+			});
+
+			const value = rest[1];
+			const isNegative = Number(value) < 0;
+			const paddedValue = isNegative ? value + ' ' : value;
+
+			const text = this.createHtmlTag('p', {
+				inputValue: paddedValue,
+				inputClass: `megacredit-text ${this.cardSize}`,
+			});
+
+			return this.createHtmlTag('div', {
+				inputValue: img + text,
+				inputClass: `wrapper-megacredit ${this.cardSize}`,
+			});
 			}
+
+			return this.createHtmlTag('img', {
+			inputValue: GlobalInfo.getUrlFromName(`$${segment}$`),
+			imgAlt: segment,
+			inputClass: this.cardSize,
+			});
 		}
-		return splittedText.join("")
+
+		default:
+			return this.createHtmlTag('p', {
+				inputValue: segment ,
+				inputClass: this.cardSize
+			});
+		}
 	}
-	htmlTag(tag:HtmlTag,  options:{inputValue?:string, imgAlt?:string, inputClass?:string}): string {
-		//wraps input in an html tag
-		var resultClass: string =''
-		if(options.inputClass){
-			resultClass = ` class="${options.inputClass}" `
+
+	private createHtmlTag(
+		tag: HtmlTag,
+		options: { inputValue?: string; imgAlt?: string; inputClass?: string }
+	): string {
+		const classAttr = options.inputClass ? ` class="${options.inputClass}"` : '';
+
+		if (tag === 'img') {
+		return `<img${classAttr} src="${options.inputValue}" alt="${options.imgAlt}">`;
 		}
-		if(tag === 'img'){
-			return `<${tag} ${resultClass} src=${options.inputValue} alt=${options.imgAlt}>`
-		}
-		return `<${tag} ${resultClass}>` + options.inputValue + `</${tag}>`
+
+		return `<${tag}${classAttr}>${options.inputValue ?? ''}</${tag}>`;
 	}
 }

@@ -2,7 +2,7 @@
 @use 'sass:map';
 @use 'sass:color';
 $transition-delay : 0.15s;
-$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right', 'leftSmall', 'rightSmall', 'action', 'selection_rounded_square', 'xs');
+$shape-name: ('hex', 'small', 'large', 'hex_floating', 'left', 'right', 'leftSmall', 'rightSmall', 'action', 'selection_rounded_square', 'xs', 'leftCarousel', 'rightCarousel');
 $border-shape-name: ('hex_floating', 'action');
 $shape-width: (
 	'hex': 25%,
@@ -15,7 +15,9 @@ $shape-width: (
 	'leftSmall': 21%,
 	'rightSmall': 35%,
 	'action': 15%,
-	'selection_rounded_square': 0
+	'selection_rounded_square': 0,
+	'leftCarousel': 35%,
+	'rightCarousel': 35%
 );
 $disabled-color: gray;
 $disabled-border: color.scale(gray, $lightness: -15%);
@@ -285,6 +287,18 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 		//aspect-ratio: 1;
 		border-radius: 10px;
 		width: 100%;
+	}
+	&--leftCarousel{
+		$width: map.get($shape-width, $key:'leftCarousel' );
+		aspect-ratio: 1.2;
+		-webkit-clip-path: polygon(0% 50%, #{$width} 0%, 100% 0%, 100% 100%, #{$width} 100%);
+		clip-path: polygon(0% 50%, #{$width} 0%, 100% 0%, 100% 100%, #{$width} 100%);
+	}
+	&--rightCarousel{
+		$width: map.get($shape-width, $key:'rightCarousel' );
+		aspect-ratio: 1.2;
+		-webkit-clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
+		clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
 	}
 }
 .button-border {

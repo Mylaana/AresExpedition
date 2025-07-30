@@ -3,6 +3,7 @@ import { CardBuilderComponent } from '../card-builder/card-builder.component';
 import { CommonModule } from '@angular/common';
 import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
+import { SettingCardSize } from '../../../types/global.type';
 
 @Component({
     selector: 'app-card-builder-list',
@@ -16,6 +17,7 @@ import { EventCardBuilderButton, NonEventButton } from '../../../models/core-gam
 export class CardBuilderListComponent implements OnInit, OnChanges{
 	@Input() event!: EventBaseModel
 	@Input() eventId!: number
+	@Input() cardSize!: SettingCardSize
 	@Output() cardBuilderButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
 	@Output() alternativePayButtonClicked: EventEmitter<NonEventButton> = new EventEmitter<NonEventButton>()
 	@ViewChildren('builder') builders!: QueryList<CardBuilderComponent>

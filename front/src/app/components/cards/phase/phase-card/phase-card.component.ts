@@ -11,6 +11,7 @@ import { TextWithImageComponent } from '../../../tools/text-with-image/text-with
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { NonEventButton } from '../../../../models/core-game/button.model';
+import { SettingCardSize } from '../../../../types/global.type';
 
 @Component({
     selector: 'app-phase-card',
@@ -29,6 +30,7 @@ export class PhaseCardComponent extends BaseCardComponent {
 	@Input() phaseCard!: PhaseCardModel;
 	@Input() phaseGroupUpgraded: boolean = false
 	@Input() upgradeFinished!: boolean
+	@Input() cardSize!: SettingCardSize
 	@Output() phaseCardUpgraded: EventEmitter<PhaseCardUpgradeType> = new EventEmitter<PhaseCardUpgradeType>()
 
 	_upgradeButton: NonEventButton = ButtonDesigner.createNonEventButton('upgradePhase')

@@ -1,4 +1,9 @@
-$size: calc(var(--card-width) * .13);
+.small{
+	--card-height: var(--card-height--small);
+}
+.medium{
+	--card-height: var(--card-height--medium);
+}
 :host{
     display: flex;
     width: 100%;
@@ -23,7 +28,7 @@ div{
     justify-content: center;
     flex: 1;
 	border-top-left-radius: 0;
-	@media (max-width: 1919px) {
+	&.small{
 		border-right: 0;
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
@@ -34,8 +39,6 @@ div{
     align-items: center;
     justify-content: center;
 
-    width: $size;
-    min-height: $size;
 	height: fit-content;
 
     background: rgba(grey, .6);
@@ -44,4 +47,6 @@ div{
 	border-bottom-right-radius: 0;
 	border-right: 0;
 	margin-bottom: 5px;
+	width: calc(var(--card-height) * .10);
+	min-height: calc(var(--card-height) * .10);
 }

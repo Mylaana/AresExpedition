@@ -2,22 +2,22 @@
 	<div id="command-pannel">
 		<div class="left-command">
 			<div *ngIf="currentEvent.button" class="wrapper-event-button--big wrapper-validate-button">
-				<app-event-main-button  [button]="currentEvent.button" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
+				<app-event-main-button  [button]="currentEvent.button" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
 			</div>
 			<div *ngIf="rollbackButton.displayed" class="wrapper-event-button--medium">
-				<app-non-event-button  [button]="rollbackButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(rollbackButton)"></app-non-event-button>
+				<app-non-event-button  [button]="rollbackButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(rollbackButton)"></app-non-event-button>
 			</div>
 			<div *ngIf="sellCardsButton.displayed" class="wrapper-event-button--small wrapper-sell-button">
-				<app-non-event-button  [button]="sellCardsButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
+				<app-non-event-button  [button]="sellCardsButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsButton)"></app-non-event-button>
 			</div>
 			<div *ngIf="sellCardsCancelButton.displayed" class="wrapper-event-button--small">
-				<app-non-event-button  [button]="sellCardsCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
+				<app-non-event-button  [button]="sellCardsCancelButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(sellCardsCancelButton)"></app-non-event-button>
 			</div>
 			<div *ngIf="displayPhaseUpgradeButton.displayed && isDiscoveryActive()" class="wrapper-event-button--small">
-				<app-non-event-button  [button]="displayPhaseUpgradeButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeButton)"></app-non-event-button>
+				<app-non-event-button  [button]="displayPhaseUpgradeButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeButton)"></app-non-event-button>
 			</div>
 			<div *ngIf="displayPhaseUpgradeCancelButton.displayed && isDiscoveryActive()" class="wrapper-event-button--small">
-				<app-non-event-button  [button]="displayPhaseUpgradeCancelButton" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeCancelButton)"></app-non-event-button>
+				<app-non-event-button  [button]="displayPhaseUpgradeCancelButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeCancelButton)"></app-non-event-button>
 			</div>
 		</div>
 		<div class="right-command">
@@ -33,7 +33,8 @@
 	<app-left-pannel @enterFromLeft
 		*ngIf="currentPhase!='PLANIFICATION' && _selectedPhaseList.length!=0"
 		[currentPhase]="currentPhase"
-		[selectedPhaseList]="_selectedPhaseList"></app-left-pannel>
+		[selectedPhaseList]="_selectedPhaseList">
+	</app-left-pannel>
     <div class="wrapper-event-main">
 		<div class="wrapper-event-top"
 			[class.flex-column]="currentEvent.subType==='actionPhase'">

@@ -25,16 +25,19 @@ $colors: (
 	box-shadow: 0 0 2px 1px rgba(rgb(255, 129, 25), .6);
 	aspect-ratio: 1;
 	object-fit: contain;
+	/*
 	&::ng-deep img{
 		height: 100%;
 		aspect-ratio: 1;
 		object-fit: contain
 	}
+		*/
 }
+/*
 app-text-with-image{
 	height: 80%;
 	aspect-ratio: 1;
-}
+}*/
 .wrapper-progression-bar{
 	position: relative;
 	display: flex;

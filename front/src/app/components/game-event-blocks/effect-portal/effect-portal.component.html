@@ -4,6 +4,7 @@
         *ngFor="let b of _buttons"
         [button]="b"
         [shape]="'xs'"
+		[context]="'portalButton'"
         (buttonClicked)="onButtonClicked(b)">
     </app-portal-effect-button>
 </div>

@@ -1,7 +1,13 @@
 @use "../../../../../styles/abstracts/variables" as vars;
+.small{
+	--card-height: var(--card-height--small)
+}
+.medium{
+	--card-height: var(--card-height--medium)
+}
+
 $buttons-margin: 2%;
 $scrollbar-width: 15px;
-
 :root{
 	--navbar-height: 0px;
 }
@@ -94,6 +100,10 @@ app-game-event{
 	border-top-right-radius: 20px;
 	border: solid 2px rgba(255, 129, 25, .8);
 	border-bottom: 0;
+	&.small{
+		border-top-left-radius: 15px;
+		border-top-right-radius: 15px;
+	}
 	&.hovered{
 		box-shadow: 0 0 10px 5px rgba(rgb(255, 129, 25), .6);
 		top: calc(100% - var(--hand-height));
