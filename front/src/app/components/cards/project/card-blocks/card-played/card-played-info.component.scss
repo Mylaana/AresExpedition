@@ -38,4 +38,9 @@
 	border: 1px gold solid;
 	border-top-left-radius: 0;
 	flex: 1;
+	&.small{
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border-right: 0;
+	}
 }

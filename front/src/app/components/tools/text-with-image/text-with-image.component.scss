@@ -80,11 +80,23 @@
 	height: fit-content;
 	width: 100%;
 	& p {
-		font-size: var(--twi-vp-text-size--small);
+		&.small{
+			font-size: var(--twi-vp-text-size--small);
+		}
+		&.medium{
+			font-size: var(--twi-vp-text-size--medium);
+		}
 		padding: 0;
+		color: black;
+		padding-right: 3px;
 	}
 	& img{
-		height: var(--twi-vp-text-size--small);
+		&.small{
+			height: var(--twi-vp-text-size--small);
+		}
+		&.medium{
+			height: var(--twi-vp-text-size--medium);
+		}
 	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.cardTextAndIcon{

@@ -10,10 +10,9 @@
 	width: 100%;
 	display: flex;
 	justify-content: right;
-	//gap: var(--card-element-padding);
 }
 .wrapper-vp-text{
-	//flex: 1;
+	z-index: 10;
 	width: fit-content;
 	padding-left: var(--scaling-vp-description-padding);
 	padding-right: var(--scaling-vp-description-padding);
@@ -22,21 +21,22 @@
     align-items: center;
     justify-content: center;
 
-	margin-right: var(--card-element-padding);
-	border: white solid 1px;
+	margin-right: 10px;
 }
 .wrapper-text{
 	display: flex;
 	align-items: center;
+	width: fit-content;
 }
 .wrapper-vp-icon{
 	position: relative;
 	height: calc(var(--card-height) * .14);
-	padding-right: 3px;
+	width: fit-content;
 
     display: flex;
     align-items: center;
     justify-content: left;
+	padding-left: 3px;
 }
 .wrapper-vp-background{
     z-index: 0;
@@ -45,16 +45,15 @@
     justify-content: space-between;
     align-items: center;
 
+	gap: 3px;
     width: 100%;
     height: 100%;
-
-    padding-left: 3px;
 }
 .layout-vp-right{
-    width: 65%;
+    flex: 1;
 }
 .layout-vp-left{
-    width: 20%;
+    width: 7px;
 }
 .layout-vp-right, .layout-vp-left{
     z-index: 0;
@@ -73,11 +72,8 @@
 }
 app-vp{
     position: relative;
+	left: -5px;
     z-index: 1;
     height: 85%;
-}
-.wrapper-one-vp{
-	height: var(--card-scaling-vp-one-vp-size);
-	width: var(--card-scaling-vp-one-vp-size);
-	padding-right: 1px;
+	width: fit-content;
 }

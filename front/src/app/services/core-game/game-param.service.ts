@@ -26,7 +26,6 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 
 		'--card-played-symbol-size--small': '15px',
 
-		'--card-scaling-vp-one-vp-size--small': '16px',
 		'--scaling-vp-description-padding--small': '5px',
 
 		'--card-title-size--small': '24px',
@@ -70,7 +69,6 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 
 		'--card-played-symbol-size--medium': '20px',
 
-		'--card-scaling-vp-one-vp-size--medium': '20px',
 		'--scaling-vp-description-padding--medium': '5px',
 
 		'--card-title-size--medium': '32px',
@@ -85,7 +83,7 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--twi-prerequisite-summary-text-image-height--medium': '20px',
 		'--twi-effect-summary-image-height--medium': '16px',
 		'--twi-effect-text-image-height--medium': '14px',
-		'--twi-vp-text-size--medium': '20px',
+		'--twi-vp-text-size--medium': '22px',
 		'--twi-activate-image-height--medium': '20px',
 		'--twi-activate-text-height--medium': '15px',
 		'--twi-megacredit-text-offset-left--medium': '0px',
@@ -105,7 +103,7 @@ export class GameParamService {
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
 	private debug = new BehaviorSubject<boolean>(false)
 	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
-	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
+	private cardSize = new BehaviorSubject<SettingCardSize>('small')
 	private handCardSize = new BehaviorSubject<SettingCardSize>('small')
 
 	currentDebug = this.debug.asObservable()

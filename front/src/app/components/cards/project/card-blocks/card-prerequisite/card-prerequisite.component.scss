@@ -28,7 +28,7 @@ div{
     justify-content: center;
     flex: 1;
 	border-top-left-radius: 0;
-	.small{
+	&.small{
 		border-right: 0;
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;

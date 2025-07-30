@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TextWithImageComponent } from '../../../../tools/text-with-image/text-with-image.component';
 import { VpComponent } from '../../../../tools/vp/vp.component';
+import { SettingCardSize } from '../../../../../types/global.type';
 
 @Component({
     selector: 'app-card-vp',
@@ -17,4 +18,5 @@ export class CardVpComponent {
 	@Input() vpNumber!: string
 	@Input() vpDescription?: string
 	@Input() isScalingVp: boolean = false
+	@Input() cardSize!: SettingCardSize
 }
