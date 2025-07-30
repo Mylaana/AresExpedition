@@ -7,9 +7,10 @@
 			(mouseleave)="_hovered=false"
 			(click)="onPhaseSelected(phaseCard)">
 			<app-phase-card
-			[class.hovered]="_hovered"
+				[class.hovered]="_hovered"
 				[phaseCard]="phaseCard"
-				[phaseIndex]="phaseCard.phaseId">
+				[phaseIndex]="phaseCard.phaseId"
+				[cardSize]="cardSize">
 			</app-phase-card>
 		</button>
 	</div>

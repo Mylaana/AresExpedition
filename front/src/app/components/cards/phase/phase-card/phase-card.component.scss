@@ -1,3 +1,23 @@
+.small{
+	--card-width: var(--card-width--small);
+	--card-height: var(--card-height--small);
+	--phase-card-description-width: var(--phase-card-description-width--small);
+	--phase-card-description-padding: var(--phase-card-description-padding--small);
+	--phase-card-description-font-size: var(--phase-card-description-font-size--small);
+	--phase-card-title-font-size: var(--phase-card-title-font-size--small);
+	--phase-card-subtitle-font-size: var(--phase-card-subtitle-font-size--small);
+	--phase-card-wrapper-title-padding: var(--phase-card-wrapper-title-padding--small);
+}
+.medium{
+	--card-width: var(--card-width--medium);
+	--card-height: var(--card-height--medium);
+	--phase-card-description-width: var(--phase-card-description-width--medium);
+	--phase-card-description-padding: var(--phase-card-description-padding--medium);
+	--phase-card-description-font-size: var(--phase-card-description-font-size--medium);
+	--phase-card-title-font-size: var(--phase-card-title-font-size--medium);
+	--phase-card-subtitle-font-size: var(--phase-card-subtitle-font-size--medium);
+	--phase-card-wrapper-title-padding: var(--phase-card-wrapper-title-padding--medium);
+}
 .wrapper-main{
 	position: relative;
 	display: flex;

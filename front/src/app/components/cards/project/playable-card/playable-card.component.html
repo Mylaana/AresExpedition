@@ -1,4 +1,5 @@
 <div class="wrapper-main"
+	[ngClass]="[cardSize]"
 	(mouseenter)="_hovered=true"
 	(mouseleave)="_hovered=false">
 	<div class="wrapper-border">
@@ -48,7 +49,8 @@
 						</app-card-prerequisite>
 						<app-card-played-info
 							*ngIf="projectCard.hasPlayedText()"
-							[playedText]="projectCard.getPlayedText()">
+							[playedText]="projectCard.getPlayedText()"
+							[cardSize]="cardSize">
 						</app-card-played-info>
 						<app-card-stock
 							*ngIf="projectCard.stockable?.length!=0"
@@ -89,4 +91,3 @@
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
 </div>
-<p>{{cardSize}}</p>

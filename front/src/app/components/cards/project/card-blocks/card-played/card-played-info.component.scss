@@ -1,4 +1,10 @@
 @use 'sass:color';
+.small{
+	--card-played-symbol-size: var(--card-played-symbol-size--small);
+}
+.medium{
+	--card-played-symbol-size: var(--card-played-symbol-size--medium);
+}
 :host{
     display: flex;
     flex-direction: row;

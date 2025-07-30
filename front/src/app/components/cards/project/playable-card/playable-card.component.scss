@@ -1,25 +1,22 @@
+.small {
+	--card-width: var(--card-width--small);
+	--card-height: var(--card-height--small);
+	--card-text-size: var(--text-size--small);
+	--card-element-padding: var(--card-element-padding--small)
+	--card-effect-height: var(--card-effect-height--small)
+	--card-text-right-padding: var(--card-text-right-padding--small)
+}
+.medium {
+	--card-width: var(--card-width--medium);
+	--card-height: var(--card-height--medium);
+	--card-text-size: var(--card-text-size--medium);
+	--card-element-padding: var(--card-element-padding--medium)
+	--card-effect-height: var(--card-effect-height--medium)
+	--card-text-right-padding: var(--card-text-right-padding--medium)
+}
 $card-bottom-padding: calc(var(--card-height) * .015);
 :host ::ng-deep p  {
     color: white;
-    font-size: var(--card-text-size);
-}
-:host ::ng-deep app-text-with-image .text-tag{
-    $tag-max-size: calc(var(--card-text-size) * 1.5);
-    top: 0;
-    max-width: $tag-max-size;
-    max-height: $tag-max-size;
-}
-:host ::ng-deep app-text-with-image .wrapper-megacredit{
-    $tag-max-size: calc(var(--text-size) * 1.5);
-    top: 0;
-    width: $tag-max-size;
-    height: $tag-max-size;
-}
-:host ::ng-deep .effect-summary-text.text-tag{
-    $tag-max-size: calc(var(--text-size) * 5);
-    top: 0;
-    width: $tag-max-size;
-    height: $tag-max-size;
 }
 button {
     background: transparent;
@@ -36,6 +33,16 @@ button {
 	border-radius: calc(var(--card-height) * .05);
 	&.hovered.selectable{
 		z-index: 10;
+	}
+	&.small{
+		&::ng-deep p  {
+			font-size: var(--card-text-size);
+		}
+	}
+	&.medium{
+		&::ng-deep p  {
+			font-size: var(--card-text-size);
+		}
 	}
 }
 .wrapper-border{

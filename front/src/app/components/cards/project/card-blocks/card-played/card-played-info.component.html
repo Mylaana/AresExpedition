@@ -1,6 +1,6 @@
-<div class="wrapper-played-icon">
+<div [ngClass]="['wrapper-played-icon', cardSize]">
 	<img src="/assets/other/played.png" alt="played image">
 </div>
-<div class="wrapper-played-text shadowed-text">
+<div [ngClass]="['wrapper-played-text', 'shadowed-text', cardSize]">
 	<app-text-with-image [rawText]="playedText" [context]="'cardTextAndIcon'"></app-text-with-image>
 </div>

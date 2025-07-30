@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TextWithImageComponent } from '../../../../tools/text-with-image/text-with-image.component';
+import { SettingCardSize } from '../../../../../types/global.type';
 
 @Component({
     selector: 'app-card-played-info',
@@ -13,4 +14,5 @@ import { TextWithImageComponent } from '../../../../tools/text-with-image/text-w
 })
 export class CardPlayedInfoComponent {
 	@Input() playedText!: string
+	@Input() cardSize!: SettingCardSize
 }

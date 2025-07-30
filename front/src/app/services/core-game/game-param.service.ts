@@ -7,7 +7,7 @@ import { SETTING_CARD_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/glob
 
 const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 	small: {
-		'--card-height--medium': '209px',
+		'--card-height--small': '209px',
 		'--card-width--small': '150px',
 		'--card-text-size--small': '8.5px',
 		'--card-element-padding--small': '1px',

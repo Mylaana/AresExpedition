@@ -1,5 +1,15 @@
 @use '../../../../../../styles/abstracts/colors' as colors;
 @use 'sass:map';
+.small {
+	--card-element-padding: var(--card-element-padding--small);
+	--card-effect-height: var(--card-effect-height--small);
+	--card-effect-width: var(--card-effect-width--small);
+}
+.medium {
+	--card-element-padding: var(--card-element-padding--medium);
+	--card-effect-height: var(--card-effect-height--medium);
+	--card-effect-width: var(--card-effect-width--medium);
+}
 :host{
 	width: 100%;
 }
@@ -8,26 +18,14 @@
 	align-items: end;
 	width: 100%;
 	height: auto;
-	&.small{
-		gap: var(--card-element-padding--small);
-		margin-top: var(--card-element-padding--small);
-		margin-bottom: var(--card-element-padding--small);
-	}
-	&.medium{
-		gap: var(--card-element-padding--medium);
-		margin-top: var(--card-element-padding--medium);
-		margin-bottom: var(--card-element-padding--medium);
-	}
+	gap: var(--card-element-padding);
+	margin-top: var(--card-element-padding);
+	margin-bottom: var(--card-element-padding);
 }
 .wrapper-effect-text-aligner{
 	display: flex;
 	align-items: center;
-	&.small{
-		min-height: calc(var(--card-effect-height--small));
-	}
-	&.medium{
-		min-height: calc(var(--card-effect-height--medium));
-	}
+	min-height: calc(var(--card-effect-height));
 }
 .wrapper-effect-text{
     height: fit-content;
@@ -108,14 +106,8 @@
         calc($top-inside-width + $top-offset-angle) 100%,
         calc($top-inside-width) calc(100% - $top-offset-height),
         0 calc(100% - $top-offset-height), 0 calc($top-left-angle + $top-offset-height));
-	&.small{
-		height: calc(var(--card-effect-height--small));
-		width: calc(var(--card-effect-width--small));
-	}
-	&.medium{
-		height: calc(var(--card-effect-height--medium));
-		width: calc(var(--card-effect-width--medium));
-	}
+	height: calc(var(--card-effect-height));
+	width: calc(var(--card-effect-width));
 }
 .wrapper-inner{
     position: absolute;

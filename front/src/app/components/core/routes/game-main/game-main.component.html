@@ -31,7 +31,7 @@
         </div>
     </div>
 
-	<div id="wrapper-hand" *ngIf="playerHand.length>0"
+	<div id="wrapper-hand" *ngIf="playerHand.length===0"
 		[class.hovered]="_handIsHovered"
 		(mouseenter)="updateHandHeight(true)"
 		(mouseleave)="updateHandHeight(false)">
