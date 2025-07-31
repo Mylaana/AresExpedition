@@ -58,23 +58,23 @@ function getValueVsTreshold(args: MinMaxEqualTreshold): boolean {
 	}
 }
 function logText(...text: any ): void {
-	if(environment.production===false){return}
+	if(environment.production===true){return}
 	console.log(text)
 }
 function logEventResolution(...text: any): void {
-	if(environment.production===false){return}
+	if(environment.production===true){return}
 	Logger.logText(text)
 }
 function logError(...text: any): void{
-	if(environment.production===false){return}
+	if(environment.production===true){return}
 	console.log(text)
 }
 function logPublishMessage(prefix: any, content: any): void {
-	if(environment.production===false){return}
+	if(environment.production===true){return}
 	console.log(`%cPUBLISHED: ${prefix}: `, 'color:red', content)
 }
 function logReceivedMessage(prefix: any, content: any): void {
-	if(environment.production===false){return}
+	if(environment.production===true){return}
 	console.log(`%cRECEIVED: ${prefix}: `, 'color:green', content)
 }
 function getSelectablePhaseFromPhaseUpgrade(upgrade: PhaseCardUpgradeType): SelectablePhaseEnum {
