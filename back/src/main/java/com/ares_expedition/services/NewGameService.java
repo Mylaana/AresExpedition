@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.ares_expedition.controller.websocket.InputRouter;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.api.NewGameInfoDTO;
 import com.ares_expedition.model.core.Game;
