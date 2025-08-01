@@ -1,3 +1,4 @@
+import { MilestonesEnum } from "../../enum/global.enum"
 import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 
 export class PlayerScoreStateModel {
@@ -6,6 +7,7 @@ export class PlayerScoreStateModel {
 	private scalingVp: number = 0
 	private terraformingRating: number = 0
 	private forest: number = 0
+	private claimedMilestones: MilestonesEnum[] = []
 
 	constructor(data: PlayerScoreStateDTO){
 		this.milestoneCount = data.mc
@@ -14,8 +16,13 @@ export class PlayerScoreStateModel {
 		this.forest = data.f
 	}
 
-	addMilestoneCompleted(milestone: number = 1): void {
-		this.milestoneCount += milestone
+	addMilestoneCompleted(milestone: MilestonesEnum): void {
+		if(this.claimedMilestones.includes(milestone)){return}
+		this.milestoneCount += 1
+		this.claimedMilestones.push(milestone)
+	}
+	getClaimedMilestoneList(): MilestonesEnum[] {
+		return this.claimedMilestones
 	}
 	getMilestoneCompletedNumber(): number {return this.milestoneCount}
 	addBaseVP(points: number): void {this.vp += points}

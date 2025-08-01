@@ -15,7 +15,7 @@ import { PlayerOtherStateModel } from "./player-state-other.model";
 import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter.model";
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
-import { GlobalParameterColorEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterColorEnum, GlobalParameterNameEnum, MilestonesEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { Utils } from "../../utils/utils";
@@ -76,7 +76,7 @@ export class PlayerStateModel {
 
 	//scoreState
 	getMilestoneCompleted(): number {return this.scoreState.getMilestoneCompletedNumber()}
-	addMilestoneCompleted(){this.scoreState.addMilestoneCompleted()}
+	addMilestoneCompleted(milestone: MilestonesEnum){this.scoreState.addMilestoneCompleted(milestone)}
 	getBaseVP(): number {return this.scoreState.getBaseVP()}
 	getTotalVP(): number {return this.scoreState.getTotalVP()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}

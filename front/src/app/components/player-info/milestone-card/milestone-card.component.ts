@@ -3,7 +3,7 @@ import { MilestonesEnum } from '../../../enum/global.enum';
 import { CommonModule } from '@angular/common';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { MilestoneAwardService } from '../../../services/core-game/milestone-award.service';
-import { MilestoneCard } from '../../../interfaces/global.interface';
+import { ClaimedMilestoneCard, MilestoneCard } from '../../../interfaces/global.interface';
 
 @Component({
   selector: 'app-milestone-card',
@@ -16,8 +16,7 @@ import { MilestoneCard } from '../../../interfaces/global.interface';
 })
 export class MilestoneCardComponent {
 	@Input() milestone!: MilestoneCard
-
-	constructor(private milestoneAwardService: MilestoneAwardService){}
+	@Input() claimed!: ClaimedMilestoneCard | undefined
 
 	getCaption(): string {
 		return this.milestone.caption

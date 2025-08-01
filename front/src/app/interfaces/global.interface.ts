@@ -5,7 +5,7 @@ import { MinMaxEqualType } from "../types/global.type"
 import { RessourceType } from "../types/global.type"
 import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { CardState } from "./card.interface"
-import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../enum/global.enum"
+import { GlobalParameterNameEnum, MilestonesEnum, ProjectFilterNameEnum } from "../enum/global.enum"
 
 export interface RessourceInfo {
     id: number,
@@ -117,7 +117,7 @@ export interface GlobalParameterOffset {
 	offset: number
 }
 export interface MilestoneCard {
-	caption: string
+	caption: string,
 	value: MilestoneValue[]
 }
 export interface MilestoneValue {
@@ -131,4 +131,12 @@ export interface AwardCard {
 export interface AwardValue {
 	color: PlayerColor
 	playersValue: number
+}
+export interface ClaimedMilestone {
+	name: MilestonesEnum,
+	player: Set<myUUID>
+	color: Set<PlayerColor>
+}
+export interface ClaimedMilestoneCard {
+	color: PlayerColor[]
 }
