@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { MilestoneAwardService } from '../../../services/core-game/milestone-award.service';
 import { ClaimedMilestoneCard, MilestoneCard } from '../../../interfaces/global.interface';
+import { PlayerColor } from '../../../types/global.type';
 
 @Component({
   selector: 'app-milestone-card',
@@ -20,5 +21,11 @@ export class MilestoneCardComponent {
 
 	getCaption(): string {
 		return this.milestone.caption
+	}
+	isClaimed(): boolean {
+		return this.claimed!=undefined && this.claimed.color?.length!=0
+	}
+	getClaimedColors(): PlayerColor[] {
+		return this.claimed?.color??[]
 	}
 }

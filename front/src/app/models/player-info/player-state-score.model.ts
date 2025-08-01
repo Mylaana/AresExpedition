@@ -2,7 +2,6 @@ import { MilestonesEnum } from "../../enum/global.enum"
 import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 
 export class PlayerScoreStateModel {
-	private milestoneCount: number = 0
 	private vp: number = 0
 	private scalingVp: number = 0
 	private terraformingRating: number = 0
@@ -10,7 +9,6 @@ export class PlayerScoreStateModel {
 	private claimedMilestones: MilestonesEnum[] = []
 
 	constructor(data: PlayerScoreStateDTO){
-		this.milestoneCount = data.mc
 		this.vp = data.v
 		this.terraformingRating = data.tr
 		this.forest = data.f
@@ -18,13 +16,12 @@ export class PlayerScoreStateModel {
 
 	addMilestoneCompleted(milestone: MilestonesEnum): void {
 		if(this.claimedMilestones.includes(milestone)){return}
-		this.milestoneCount += 1
 		this.claimedMilestones.push(milestone)
 	}
 	getClaimedMilestoneList(): MilestonesEnum[] {
 		return this.claimedMilestones
 	}
-	getMilestoneCompletedNumber(): number {return this.milestoneCount}
+	getMilestoneCompletedNumber(): number {return this.claimedMilestones.length}
 	addBaseVP(points: number): void {this.vp += points}
 	getBaseVP(): number {return this.vp }
 	getTotalVP(): number {
@@ -38,7 +35,7 @@ export class PlayerScoreStateModel {
 
 	toJson(): PlayerScoreStateDTO {
 		return {
-			mc: this.milestoneCount,
+			cm: this.claimedMilestones,
 			v: this.vp,
 			tr: this.terraformingRating,
 			f: this.forest
@@ -49,7 +46,7 @@ export class PlayerScoreStateModel {
 		this.addTR(5)
 	}
 	static fromJson(data: PlayerScoreStateDTO): PlayerScoreStateModel {
-		if (!data.mc || !data.v || !data.tr || !data.f){
+		if (!data.cm || !data.v || !data.tr || !data.f){
 			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
 		}
 		return new PlayerScoreStateModel(data)
@@ -57,7 +54,7 @@ export class PlayerScoreStateModel {
 	static empty(): PlayerScoreStateModel {
 		return new PlayerScoreStateModel(
 			{
-				mc: 0,
+				cm: [],
 				tr: 0,
 				v:0,
 				f: 0

@@ -34,6 +34,7 @@
 	gap: 2px 2px;
 }
 .box-player{
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -53,4 +54,22 @@
 			background-color: $value;
 		}
 	}
+}
+.claimed{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+.unclaimed{
+	display: flex;
+	height: 100%;
+	width: 100%;
+}
+img{
+	position: absolute;
+	height: 80%;
+	top: -2px;
+	right: -2px;
 }

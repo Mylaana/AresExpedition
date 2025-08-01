@@ -5,7 +5,7 @@ import { GameState } from '../../../services/core-game/game-state.service';
 import { AwardsEnum, MilestonesEnum } from '../../../enum/global.enum';
 import { Subject, take, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { AwardCard, MilestoneCard } from '../../../interfaces/global.interface';
+import { AwardCard, ClaimedMilestoneCard, MilestoneCard } from '../../../interfaces/global.interface';
 import { MilestoneAwardService } from '../../../services/core-game/milestone-award.service';
 
 @Component({
@@ -40,5 +40,8 @@ export class MilestoneAndAwardComponent implements OnInit, OnDestroy{
 	}
 	getAwardCard(): AwardCard[]{
 		return this.milestoneAwardService.getAwardsCards()
+	}
+	getClaimedMilestoneCard(): ClaimedMilestoneCard[]{
+		return this.milestoneAwardService.getClaimedMilestoneStatus()
 	}
 }

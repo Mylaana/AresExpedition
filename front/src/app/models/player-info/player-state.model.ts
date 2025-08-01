@@ -77,6 +77,7 @@ export class PlayerStateModel {
 	//scoreState
 	getMilestoneCompleted(): number {return this.scoreState.getMilestoneCompletedNumber()}
 	addMilestoneCompleted(milestone: MilestonesEnum){this.scoreState.addMilestoneCompleted(milestone)}
+	getClaimedMilestoneList(): MilestonesEnum[] {return this.scoreState.getClaimedMilestoneList()}
 	getBaseVP(): number {return this.scoreState.getBaseVP()}
 	getTotalVP(): number {return this.scoreState.getTotalVP()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}

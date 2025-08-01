@@ -50,8 +50,10 @@ export class MilestoneAwardService {
 	}
 	getClaimedMilestoneStatus(): ClaimedMilestoneCard[]{
 		let result: ClaimedMilestoneCard[] = []
-
-		return []
+		for(let c of this.claimedMilestones){
+			result.push({color: Array.from(c.color)})
+		}
+		return result
 	}
 	private getMilestoneCaption(milestone: MilestonesEnum): string {
 		switch(milestone){
@@ -73,6 +75,19 @@ export class MilestoneAwardService {
 		this._groupState = state
 		this.updateMilestone()
 		this.updateAward()
+
+		if(this.milestoneList===undefined || this.milestoneList.length===0){return}
+		for(let s of state){
+			/*
+			for(let m of this.milestoneList){
+				if(this.shouldClaimMilestone(s, m)){
+					this.claimMilestone(s, m)
+					console.log(s, m)
+				}
+			}
+			*/
+			this.addPlayerClaimedMilestoneToSet(s)
+		}
 	}
 	private onMilestonesUpdate(milestones: MilestonesEnum[]){
 		if(!this.milestoneList || this.milestoneList.length===0){
@@ -108,7 +123,7 @@ export class MilestoneAwardService {
 		}
 		//generate a temporary array with color,value
 		for(let s of this._groupState){
-			let activeState: PlayerStateModel = s.getId()===this.clientState.getId()?this.clientState:s
+			let activeState: PlayerStateModel = this.getStateOrClientState(s)
 			groupTemp.push({
 				color: s.getColor() as PlayerColor,
 				playersValue: this.getMilestoneValueFromState(activeState, milestone)
@@ -157,7 +172,7 @@ export class MilestoneAwardService {
 		}
 		//generate a temporary array with color,value
 		for(let s of this._groupState){
-			let activeState: PlayerStateModel = s.getId()===this.clientState.getId()?this.clientState:s
+			let activeState: PlayerStateModel = this.getStateOrClientState(s)
 			groupTemp.push({
 				color: s.getColor() as PlayerColor,
 				playersValue: this.getAwardValueFromState(activeState, award)
@@ -196,22 +211,44 @@ export class MilestoneAwardService {
 
 		for(let m of this.milestoneList){
 			if(this.shouldClaimMilestone(state, m)){
-				console.log('claim it FFS !', m)
-				this.claimMilestone(state, m)
+				this.claimMilestone(m)
 			}
 		}
-		console.log(this.claimedMilestones)
 		this.updateAward()
 		this.updateMilestone()
 	}
 	private shouldClaimMilestone(state: PlayerStateModel, milestone: MilestonesEnum): boolean {
-		return true
+		let current = this.getMilestoneValueFromState(state, milestone)
+		switch(milestone){
+			case(MilestonesEnum.builder):{return current>=8}
+			case(MilestonesEnum.diversifier):{return current>=9}
+			case(MilestonesEnum.energizer):{return current>=10}
+			case(MilestonesEnum.farmer):{return current>=5}
+			case(MilestonesEnum.gardener):{return current>=3}
+			case(MilestonesEnum.legend):{return current>=6}
+			case(MilestonesEnum.magnate):{return current>=8}
+			case(MilestonesEnum.planner):{return current>=12}
+			case(MilestonesEnum.spaceBaron):{return current>=6}
+			case(MilestonesEnum.terraformer):{return current>=15}
+			case(MilestonesEnum.tycoon):{return current>=6}
+			default:{return false}
+		}
 	}
-	private claimMilestone(state: PlayerStateModel, milestone: MilestonesEnum){
-		for(let claimed of this.claimedMilestones){
-			if(claimed.name===milestone){
-				claimed.player.add(state.getId())
-				claimed.color.add(state.getColor() as PlayerColor)
+	private claimMilestone(milestone: MilestonesEnum){
+		this.clientState.addMilestoneCompleted(milestone)
+		this.addPlayerClaimedMilestoneToSet(this.clientState)
+	}
+	private getStateOrClientState(state: PlayerStateModel): PlayerStateModel {
+		if(!this.clientState){return state}
+		if(state.getId()!=this.clientState.getId()){return state}
+		return this.clientState
+	}
+	private addPlayerClaimedMilestoneToSet(state: PlayerStateModel) {
+		let claimed: MilestonesEnum[] = state.getClaimedMilestoneList()
+		for(let i=0; i<this.claimedMilestones.length; i++){
+			if(claimed.includes(this.claimedMilestones[i].name)){
+				this.claimedMilestones[i].player.add(state.getId())
+				this.claimedMilestones[i].color.add(state.getColor() as PlayerColor)
 			}
 		}
 	}

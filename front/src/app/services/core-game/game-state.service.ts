@@ -810,7 +810,6 @@ export class GameState{
 		//rounds up MC penalty
 		let event = EventFactory.simple.addRessource({name:'megacredit', valueStock: -Math.ceil(penalty /2)})
 		this.addEventQueue(event, 'first')
-		console.log('average', penalty, event)
 	}
 	getGroupState(): PlayerStateModel[] {
 		return this.groupPlayerState.getValue()

@@ -9,6 +9,7 @@ import com.ares_expedition.dto.api.CreatePlayerDTO;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPhaseCardStateDTO;
+import com.ares_expedition.enums.game.MilestonesEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 import com.ares_expedition.model.core.Ocean;
@@ -131,12 +132,12 @@ public class PlayerState {
         this.scoreState.setVp(vp);
     }
 
-    public Integer getMilestoneCount() {
-        return this.scoreState.getMilestoneCount();
+    public List<MilestonesEnum> getClaimedMilestone() {
+        return this.scoreState.getClaimedMilestone();
     }
 
-    public void setMilestoneCount(Integer milestoneCount) {
-        this.scoreState.setMilestoneCount(milestoneCount);
+    public void setMilestoneCount(List<MilestonesEnum> milestones) {
+        this.scoreState.setClaimedMilestone(milestones);
     }
 
 
