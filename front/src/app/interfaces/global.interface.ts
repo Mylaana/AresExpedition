@@ -116,3 +116,19 @@ export interface GlobalParameterOffset {
 	name: GlobalParameterNameEnum
 	offset: number
 }
+export interface MilestoneCard {
+	caption: string
+	value: MilestoneValue[]
+}
+export interface MilestoneValue {
+	color: PlayerColor
+	playersValue: number
+}
+export interface AwardCard {
+	caption: string
+	value: AwardValue[]
+}
+export interface AwardValue {
+	color: PlayerColor
+	playersValue: number
+}

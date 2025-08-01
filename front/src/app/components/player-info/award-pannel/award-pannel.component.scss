@@ -1,0 +1,25 @@
+:host{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	gap: 3px;
+}
+.wrapper-main{
+	display: flex;
+	flex-direction: column;
+}
+.wrapper-vp{
+	display: flex;
+	height: 15px;
+}
+.wrapper-main-image{
+	height: 40px;
+	aspect-ratio: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+img{
+	max-height: 100%;
+	max-width: 100%;
+}

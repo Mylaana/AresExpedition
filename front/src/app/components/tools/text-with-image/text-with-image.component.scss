@@ -226,3 +226,32 @@
 		height: 55%;
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.award{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	& p{
+		color: white;
+		font-size: 15px;
+	}
+	& img {
+		max-height: 85%;
+		max-width: 85%;
+		aspect-ratio: 1;
+	}
+}
+.wrapper-text-with-image::ng-deep .block-flex.milestone{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	height: 100%;
+	width: 100%;
+	& p{
+		color: white;
+		font-size: 15px;
+	}
+}

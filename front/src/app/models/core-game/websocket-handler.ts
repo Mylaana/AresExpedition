@@ -104,6 +104,8 @@ export class WebsocketHandler {
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, false)
 		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
+		this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
+		this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
     }
 	private handleMessageStartedGameClientGameState(content: WsGameState, isReconnect: boolean): void {
 		this.gameStateService.reset()
@@ -113,10 +115,14 @@ export class WebsocketHandler {
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, isReconnect)
 		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
+		this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
+		this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 	}
 
 	private handleMessageConnection(content: WsGameState): void {
 		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
+		this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
+		this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 		if(content.gameStatus===GameStatusEnum.newGame){
 			this.gameStateService.setGameStarted(false)
 			this.gameStateService.newGame(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))

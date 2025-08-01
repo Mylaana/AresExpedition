@@ -7,13 +7,15 @@ import { AnimationEvent } from '@angular/animations';
 import { GlobalParameterPannelComponent } from '../../../player-info/global-parameter-pannel/global-parameter-pannel.component';
 import { Subject, takeUntil } from 'rxjs';
 import { myUUID } from '../../../../types/global.type';
+import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-award/milestone-and-award.component';
 
 @Component({
     selector: 'app-navigation',
     imports: [
         CommonModule,
         PlayerPannelComponent,
-        GlobalParameterPannelComponent
+        GlobalParameterPannelComponent,
+		MilestoneAndAwardComponent
     ],
     templateUrl: './navigation.component.html',
     styleUrl: './navigation.component.scss',
@@ -24,7 +26,7 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 	@Input() clientPlayerId!: myUUID
 	_playerIdList: myUUID[] = []
 	_playerPannelIsHovered: boolean = false
-
+	discoveryActive: boolean = false
 	private destroy$ = new Subject<void>()
 
 	constructor(
@@ -34,6 +36,7 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 
 	ngOnInit(): void {
 		this.gameStateService.currentPlayerCount.pipe(takeUntil(this.destroy$)).subscribe(playerCount => this.updatePlayerList(playerCount))
+		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(options => this.discoveryActive = options.discovery)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()

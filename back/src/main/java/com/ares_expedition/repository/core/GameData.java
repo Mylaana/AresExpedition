@@ -6,7 +6,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
+import com.ares_expedition.enums.game.AwardsEnum;
 import com.ares_expedition.enums.game.GameStatusEnum;
+import com.ares_expedition.enums.game.MilestonesEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.core.GameOptions;
@@ -30,6 +32,8 @@ public class GameData {
     private List<String> deckCorporations = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
     private GameOptions gameOptions;
+    private List<MilestonesEnum> milestones = new ArrayList<>();
+    private List<AwardsEnum> awards = new ArrayList<>();
 
     GameData() {
     }
@@ -48,6 +52,8 @@ public class GameData {
         this.deckCorporations = game.getDeckCorporations();
         this.oceans = game.getOceans();
         this.gameOptions = game.getGameOptions();
+        this.awards = game.getAwards();
+        this.milestones = game.getMilestones();
     }
 
     public String getGameId() {
@@ -152,5 +158,21 @@ public class GameData {
 
     public void setGameOptions(GameOptions gameOptions) {
         this.gameOptions = gameOptions;
+    }
+
+    public List<MilestonesEnum> getMilestones() {
+        return milestones;
+    }
+
+    public void setMilestones(List<MilestonesEnum> milestones) {
+        this.milestones = milestones;
+    }
+
+    public List<AwardsEnum> getAwards() {
+        return awards;
+    }
+
+    public void setAwards(List<AwardsEnum> awards) {
+        this.awards = awards;
     }   
 }

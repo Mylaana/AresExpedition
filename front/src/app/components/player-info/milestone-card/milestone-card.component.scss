@@ -1,0 +1,56 @@
+@use '../../../../styles/abstracts/colors' as colors;
+:host{
+	height: 100%;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-left: solid 1px silver;
+}
+.wrapper-main{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+
+	height: fit-content;
+	min-height: 95%;
+	width: 100%;
+	padding: 2px;
+}
+.wrapper-image{
+	height: 18px;
+	padding-bottom: 2px;
+	object-fit: contain;
+	display: flex;
+
+}
+.wrapper-bottom{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: 2px 2px;
+}
+.box-player{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 13px;
+	background-color: white;
+	border-radius: 3px;
+
+	width: 31%;
+	&.group-1, &.group-2, &.group-3{
+		flex: 1;
+	}
+	p{
+		text-align: center;
+	}
+	@each $name, $value in colors.$colors{
+		&.#{$name}{
+			background-color: $value;
+		}
+	}
+}

@@ -1,0 +1,12 @@
+<div class="wrapper-main">
+	<div class="wrapper-image">
+		<app-text-with-image [rawText]="getCaption()" [context]="'milestone'"></app-text-with-image>
+	</div>
+	<div class="wrapper-bottom">
+		<ng-container *ngFor="let m of milestone.value">
+			<div [ngClass]="['box-player', m.color, 'group-'+milestone.value.length]">
+				<p>{{m.playersValue}}</p>
+			</div>
+		</ng-container>
+	</div>
+</div>

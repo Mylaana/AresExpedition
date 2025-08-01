@@ -1,0 +1,20 @@
+<div class="wrapper-main">
+	<div class="wrapper-image">
+		<app-text-with-image [rawText]="getCaption()" [context]="'award'"></app-text-with-image>
+	</div>
+	<div class="wrapper-other">
+		<div class="wrapper-ranking first">
+			<p class="ranking-caption">{{getFirstValue()}}</p>
+			<div class="wrapper-colors">
+				<div *ngFor="let c of getFirstColors()" [ngClass]="['box-player', c, 'group-'+award.value.length]"></div>
+			</div>
+		</div>
+		<div *ngIf="hasSecondValue()"
+			class="wrapper-ranking second">
+			<p class="ranking-caption">{{getSecondValue()}}</p>
+			<div class="wrapper-colors">
+				<div *ngFor="let c of getSecondColors()" [ngClass]="['box-player', c, 'group-'+award.value.length]"></div>
+			</div>
+		</div>
+	</div>
+</div>

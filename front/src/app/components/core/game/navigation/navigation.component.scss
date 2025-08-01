@@ -59,3 +59,13 @@ app-global-parameter-pannel{
 	}
 	pointer-events: all;
 }
+app-milestone-and-award{
+	height: 100%;
+	width: 300px;
+	gap: 1%;
+	& > h1 {
+		display: inline-block;
+		text-align: center;
+	}
+	pointer-events: all;
+}

@@ -7,7 +7,7 @@ import { PlayerStateDTO } from "../interfaces/dto/player-state-dto.interface";
 import { PlayerMessage } from "../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid'
 import { myUUID } from "../types/global.type";
-import { DeckQueryOptionsEnum, OceanBonusEnum } from "../enum/global.enum";
+import { AwardsEnum, DeckQueryOptionsEnum, MilestonesEnum, OceanBonusEnum } from "../enum/global.enum";
 import { OceanBonus, ScanKeep } from "../interfaces/global.interface";
 import { EventUnionSubTypes } from "../types/event.type";
 import { GameOption } from "../services/core-game/create-game.service";
@@ -159,5 +159,29 @@ export class WebsocketResultMessageFactory{
 			standardUpgrade: content['modeStandardUpgrade']
 		}
 		return options
+	}
+	public static inputToAwards(content: any): AwardsEnum[] {
+		let result: AwardsEnum[] = [];
+
+		for (let a of Object.values(AwardsEnum)) {
+			for (let c of content) {
+				if (c.toString() === a.toString()) {
+					result.push(a as AwardsEnum);
+				}
+			}
+		}
+		return result;
+	}
+	public static inputToMilestone(content: any): MilestonesEnum[] {
+		let result: MilestonesEnum[] = [];
+
+		for (let a of Object.values(MilestonesEnum)) {
+			for (let c of content) {
+				if (c.toString() === a.toString()) {
+					result.push(a as MilestonesEnum);
+				}
+			}
+		}
+		return result;
 	}
 }

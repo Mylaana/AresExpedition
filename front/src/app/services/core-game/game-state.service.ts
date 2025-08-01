@@ -5,7 +5,7 @@ import { myUUID, PlayableCardType, RessourceType, TagType } from "../../types/gl
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter,  } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
-import { DrawEvent, EventBaseModel, EventCardActivator, EventGeneric, EventPhase } from "../../models/core-game/event.model";
+import { DrawEvent, EventBaseModel, EventGeneric, EventPhase } from "../../models/core-game/event.model";
 import { PlayableCardModel} from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
@@ -16,7 +16,7 @@ import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { GameParamService } from "./game-param.service";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { AwardsEnum, GlobalParameterNameEnum, MilestonesEnum } from "../../enum/global.enum";
 import { EventStateService } from "../../factory/event-state-service.service";
 import { EventFactory } from "../../factory/event/event-factory";
 import { ActivationOption } from "../../types/project-card.type";
@@ -79,11 +79,13 @@ export class GameState{
 		promo: false,
 		standardUpgrade: false
 	})
+	private milestones = new BehaviorSubject<MilestonesEnum[]>([])
+	private awards = new BehaviorSubject<AwardsEnum[]>([])
 
-    currentGroupPlayerState = this.groupPlayerState.asObservable();
-    currentGroupPlayerReady = this.groupPlayerReady.asObservable();
+    currentGroupPlayerState = this.groupPlayerState.asObservable()
+    currentGroupPlayerReady = this.groupPlayerReady.asObservable()
     currentGroupPlayerSelectedPhase = this.groupPlayerSelectedPhase.asObservable()
-    currentPhase = this.phase.asObservable();
+    currentPhase = this.phase.asObservable()
     currentDrawQueue = this.drawQueue.asObservable()
     currentEventQueue = this.eventQueue.asObservable()
     currentPlayerCount = this.playerCount.asObservable()
@@ -92,10 +94,11 @@ export class GameState{
 	currentSelectedPhaseList = this.selectedPhaseList.asObservable()
 	currentGameOver = this.gameOver.asObservable()
 	currentGameOptions = this.gameOptions.asObservable()
+	currentClientState = this.clientState.asObservable()
+	currentMilestones = this.milestones.asObservable()
+	currentAwards = this.awards.asObservable()
 
-	currentClientState = this.clientState.asObservable();
-
-    phaseIndex: number = 0;
+    phaseIndex: number = 0
 
     phaseOrder: PhaseOrder = {
         "0":"planification",
@@ -118,7 +121,6 @@ export class GameState{
         private projectCardService: ProjectCardInfoService,
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
-		private scalingVp: ProjectCardScalingVPService,
 		private eventStateService: EventStateService,
 		private injector: Injector
 	){
@@ -888,5 +890,15 @@ export class GameState{
 	}
 	getGameOptions(): GameOption {
 		return this.gameOptions.getValue()
+	}
+	setAwards(awards: AwardsEnum[]){
+		if(this.awards.getValue().length===0){
+			this.awards.next(awards)
+		}
+	}
+	setMilestone(milestone: MilestonesEnum[]){
+		if(this.milestones.getValue().length===0){
+			this.milestones.next(milestone)
+		}
 	}
 }

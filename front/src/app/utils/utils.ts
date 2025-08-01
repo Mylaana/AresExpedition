@@ -63,6 +63,7 @@ function logText(...text: any ): void {
 }
 function logEventResolution(...text: any): void {
 	if(environment.production===true){return}
+	if(DEBUG_LOG_EVENT_RESOLUTION===false){return}
 	Logger.logText(text)
 }
 function logError(...text: any): void{
