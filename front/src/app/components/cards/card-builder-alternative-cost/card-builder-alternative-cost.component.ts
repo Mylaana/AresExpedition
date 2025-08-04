@@ -49,6 +49,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		this.destroy$.complete()
 	}
 	updateButtonList(){
+		if(!this.clientState){return}
 		this._buttons = []
 		let alternativeCardCode: string[] = PlayableCard.getAlternativePayActiveCodeList(this.clientState)
 		if(alternativeCardCode.length===0){return}
@@ -57,9 +58,9 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 			if(!caption){continue}
 			this._buttons.push(ButtonDesigner.createNonEventButton(caption))
 		}
-		this.updateButtonEnabled()
 	}
 	public updateButtonEnabled(){
+		this.updateButtonList()
 		for(let b of this._buttons){
 			b.setEnabled(this.getButtonEnabled(b))
 		}
@@ -71,7 +72,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	}
 	onClientStateUpdate(state: PlayerStateModel){
 		this.clientState = state
-		this.updateButtonList()
+		this.updateButtonEnabled()
 	}
 	onButtonClicked(button: NonEventButton){
 		console.log(button)

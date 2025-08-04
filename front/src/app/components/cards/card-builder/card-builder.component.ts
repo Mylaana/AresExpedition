@@ -82,7 +82,6 @@ export class CardBuilderComponent implements OnInit{
 	}
 	public updateAlternativeCostButtonsEnabled(){
 		if(this.cardBuilder.getBuilderIsLocked()){return}
-		console.log('calling update')
 		for(let a of this.alternativeCost){
 			a.updateButtonEnabled()
 		}
