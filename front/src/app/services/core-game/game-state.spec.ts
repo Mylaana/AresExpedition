@@ -52,7 +52,6 @@ describe('Services - Core game - Game state', () => {
 				projectCardService,
 				rxStompService,
 				gameParam,
-				scalingVp,
 				eventStateService,
 				injector
 			)
