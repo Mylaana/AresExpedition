@@ -1,7 +1,7 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
 import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum } from "../enum/global.enum"
 import { EventCardSelectorSubType } from "../types/event.type"
-import { TagType } from "../types/global.type"
+import { NonEventButtonNames, TagType } from "../types/global.type"
 import { AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep } from "./global.interface"
 
 export interface EventStateDTO {
@@ -12,7 +12,9 @@ export interface EventStateDTO {
 export interface EventStateContentDTO {}
 export interface EventStateBuilderContentDTO extends EventStateContentDTO {
 	o: BuilderOption,
-	s: BuilderStatusDTO[]
+	s: BuilderStatusDTO[],
+	ac: NonEventButtonNames[] // alternative cost used
+	d: number // discount
 }
 export interface EventStateContentOceanFlippedDTO extends EventStateContentDTO {
 	MEGACREDIT?: number,

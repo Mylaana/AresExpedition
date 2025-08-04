@@ -39,7 +39,9 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 
 	let content: EventStateBuilderContentDTO = {
 		s: status,
-		o: specialBuilderOption??''
+		o: specialBuilderOption??'',
+		ac: event.alternativeCostUsedButtonName,
+		d: event.buildDiscountValue
 	}
 
 	return {

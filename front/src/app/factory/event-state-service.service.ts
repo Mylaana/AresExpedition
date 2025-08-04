@@ -59,7 +59,9 @@ export class EventStateService{
 						}
 
 						//default
-						eventBuilder.cardBuilder[i].setBSuilderIsLocked(content.s[i].l)
+						eventBuilder.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
+						eventBuilder.alternativeCostUsedButtonName = dto.v['ac']
+						eventBuilder.buildDiscountValue = dto.v['d']
 					}
 				}
 				break
@@ -160,7 +162,7 @@ export class EventStateService{
 						let cardCode = content.s[i].cc
 						if(cardCode){
 							event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(cardCode)??new PlayableCardModel)
-							event.cardBuilder[i].setBSuilderIsLocked(content.s[i].l)
+							event.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
 						}
 					}
 					newEvents.push(event)

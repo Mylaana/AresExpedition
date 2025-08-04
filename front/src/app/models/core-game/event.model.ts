@@ -213,7 +213,7 @@ export class CardBuilder {
                 break
             }
             case('buildCard'):case(BuilderOption.drawCard):case(BuilderOption.gain6MC):{
-                this.setBSuilderIsLocked()
+                this.setBuilderIsLocked()
                 break
             }
         }
@@ -228,7 +228,7 @@ export class CardBuilder {
 		this.selectedCard = undefined
         this.updateButtonGroupState('cancelSelectCard')
 	}
-    setBSuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
+    setBuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
     getBuilderIsLocked(): boolean {
 		if(this.option===BuilderOption.developmentSecondBuilder && !this.firstCardBuilt){
 			return true
