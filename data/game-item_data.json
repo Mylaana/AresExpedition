@@ -132,6 +132,12 @@
         "name": "$ressource_megacreditvoid$"
     },
     {
+        "id": 1011,
+        "description": "wild",
+        "imageUrl": "assets/ressource/wild.png",
+        "name": "$ressource_wild$"
+    },
+    {
         "id": 100,
         "description": "redarrow",
         "imageUrl": "assets/other/arrow.png",
@@ -388,5 +394,11 @@
         "description": "phaseupgrade",
         "imageUrl": "assets/other/phase_upgrade.png",
         "name": "$other_upgrade$"
-	}
+	},
+    {
+        "id": 143,
+        "description": "milestonevp",
+        "imageUrl": "assets/other/milestone_vp.png",
+        "name": "$other_milestone_vp$"
+    }
 ]

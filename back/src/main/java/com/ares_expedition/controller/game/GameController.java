@@ -25,7 +25,7 @@ import com.ares_expedition.repository.JsonGameDataHandler;
 
 @Service
 public class GameController {
-    private static final Logger logger = LoggerFactory.getLogger(InputRouter.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameController.class);
     private final WsControllerOutput wsOutput;
     private Map<String, Game> gameHolder = new HashMap<>();
 
@@ -95,6 +95,7 @@ public class GameController {
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
         game.resetResearchResolved();
+        game.claimMilestones();
         logger.debug("GAME OVER:" + game.isGameOver());
         if(game.isGameOver()){
             game.setGameStatus(GameStatusEnum.GAME_OVER);

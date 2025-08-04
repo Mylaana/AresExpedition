@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 import com.ares_expedition.dto.api.CreatePlayerDTO;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.AwardsEnum;
 import com.ares_expedition.enums.game.CardTypeEnum;
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.GlobalConstants;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
+import com.ares_expedition.enums.game.MilestonesEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.game.RessourceEnum;
 import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
@@ -34,6 +36,8 @@ public class Game {
     private List<String> deckCorporations = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
     private GameOptions gameOptions;
+    private Map<MilestonesEnum, Boolean> milestones = new HashMap<>();
+    private List<AwardsEnum> awards = new ArrayList<>();
 
     public Game() {
     }
@@ -64,6 +68,22 @@ public class Game {
             oceans.add(new Ocean(i));
         }
         Collections.shuffle(oceans);
+
+        if(this.gameOptions.getExpansionDiscovery()){
+            List<AwardsEnum> allAwards = new ArrayList<>(List.of(AwardsEnum.values()));
+            Collections.shuffle(allAwards);
+            List<AwardsEnum> selectedAwards = new ArrayList<>();
+            for(int i=0; i<Math.min(3, allAwards.size()); i++){
+                selectedAwards.add(allAwards.get(i));
+            }
+            this.setAwards(selectedAwards);
+            
+            List<MilestonesEnum> allMilestones = new ArrayList<>(List.of(MilestonesEnum.values()));
+            Collections.shuffle(allMilestones);
+            for(int i=0; i<Math.min(3, allMilestones.size()); i++){
+				this.milestones.put(allMilestones.get(i), Boolean.FALSE);
+            }
+        }
     }
 
     public Game(
@@ -195,6 +215,10 @@ public class Game {
         gameState.setSelectedPhase(selectedPhase);
         gameState.setGroupPlayerStatePublic(this.groupPlayerState);
         gameState.setGameStatus(gameStatus);
+        if(this.getGameOptions().getExpansionDiscovery()){
+            gameState.setAwards(awards);
+            gameState.setMilestones(milestones);
+        }
 
         return gameState;
     }
@@ -460,8 +484,33 @@ public class Game {
         return this.gameOptions;
     }
 
+    public Map<MilestonesEnum, Boolean> getMilestones() {
+        return milestones;
+    }
+
+    public void setMilestones(Map<MilestonesEnum, Boolean> milestones) {
+        this.milestones = milestones;
+    }
+	
+    public List<AwardsEnum> getAwards() {
+        return awards;
+    }
+
+    public void setAwards(List<AwardsEnum> awards) {
+        this.awards = awards;
+    }
+
     public void setGameOptions(GameOptions gameOptions) {
         this.gameOptions = gameOptions;
+    }
+
+    public void claimMilestones(){
+        for(Entry<String, PlayerState> entry: groupPlayerState.entrySet()){
+            PlayerState state = entry.getValue();
+            for(MilestonesEnum milestone: state.getClaimedMilestone()){
+                this.milestones.put(milestone, Boolean.TRUE);
+            }
+        }
     }
 
     public GameData toData(){

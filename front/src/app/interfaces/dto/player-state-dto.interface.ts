@@ -1,4 +1,4 @@
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterNameEnum, MilestonesEnum } from "../../enum/global.enum";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { myUUID, RGB } from "../../types/global.type";
 import { PlayedCardDTO } from "../../types/project-card.type";
@@ -23,10 +23,11 @@ export interface PlayerInfoStateDTO {
 	c: RGB //color
 }
 export interface PlayerScoreStateDTO {
-	mc: number,
+	cm: MilestonesEnum[],
 	v: number,
 	tr: number,
-	f: number
+	f: number,
+	a: number
 }
 export interface PlayerTagStateDTO {
 	t: TagInfo[]

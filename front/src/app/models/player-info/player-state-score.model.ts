@@ -1,27 +1,37 @@
+import { MilestonesEnum } from "../../enum/global.enum"
 import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 
 export class PlayerScoreStateModel {
-	private milestoneCount: number = 0
 	private vp: number = 0
 	private scalingVp: number = 0
 	private terraformingRating: number = 0
 	private forest: number = 0
+	private claimedMilestones: MilestonesEnum[] = []
+	private awardsVp: number = 0
 
 	constructor(data: PlayerScoreStateDTO){
-		this.milestoneCount = data.mc
 		this.vp = data.v
 		this.terraformingRating = data.tr
 		this.forest = data.f
+		this.claimedMilestones = data.cm
+		this.awardsVp = data.a
 	}
 
-	addMilestoneCompleted(milestone: number = 1): void {
-		this.milestoneCount += milestone
+	addMilestoneCompleted(milestone: MilestonesEnum): void {
+		if(this.claimedMilestones.includes(milestone)){return}
+		this.claimedMilestones.push(milestone)
 	}
-	getMilestoneCompletedNumber(): number {return this.milestoneCount}
+	getClaimedMilestoneList(): MilestonesEnum[] {
+		return this.claimedMilestones
+	}
+	getClaimedMilestoneCount(): number {return this.claimedMilestones.length}
+	setAwardsVp(vp: number){
+		this.awardsVp = vp
+	}
 	addBaseVP(points: number): void {this.vp += points}
 	getBaseVP(): number {return this.vp }
 	getTotalVP(): number {
-		return this.vp + this.scalingVp + this.terraformingRating + this.forest
+		return this.vp + this.scalingVp + this.terraformingRating + this.forest + this.getClaimedMilestoneCount() * 3 + this.awardsVp
 	}
 	setScalingVP(scalingVp: number){this.scalingVp = scalingVp}
 	addTR(tr: number): void {this.terraformingRating += tr}
@@ -31,10 +41,11 @@ export class PlayerScoreStateModel {
 
 	toJson(): PlayerScoreStateDTO {
 		return {
-			mc: this.milestoneCount,
+			cm: this.claimedMilestones,
 			v: this.vp,
 			tr: this.terraformingRating,
-			f: this.forest
+			f: this.forest,
+			a: this.awardsVp
 		}
 	}
 
@@ -42,7 +53,7 @@ export class PlayerScoreStateModel {
 		this.addTR(5)
 	}
 	static fromJson(data: PlayerScoreStateDTO): PlayerScoreStateModel {
-		if (!data.mc || !data.v || !data.tr || !data.f){
+		if (!data.cm || !data.v || !data.tr || !data.f){
 			throw new Error("Invalid PlayerInfoStateDTO: Missing required fields")
 		}
 		return new PlayerScoreStateModel(data)
@@ -50,10 +61,11 @@ export class PlayerScoreStateModel {
 	static empty(): PlayerScoreStateModel {
 		return new PlayerScoreStateModel(
 			{
-				mc: 0,
+				cm: [],
 				tr: 0,
 				v:0,
-				f: 0
+				f: 0,
+				a: 0
 			}
 		)
 	}

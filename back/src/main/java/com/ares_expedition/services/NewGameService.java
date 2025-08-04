@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.ares_expedition.controller.websocket.InputRouter;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.api.NewGameInfoDTO;
 import com.ares_expedition.model.core.Game;
@@ -12,7 +11,7 @@ import com.ares_expedition.repository.JsonGameDataHandler;
 
 @Service
 public class NewGameService {
-    private static final Logger logger = LoggerFactory.getLogger(InputRouter.class);
+    private static final Logger logger = LoggerFactory.getLogger(NewGameService.class);
     public NewGameInfoDTO createGame(NewGameConfigDTO gameConfig) {
         Game game = Game.createGame(gameConfig);
         this.addNewGameToDataBase(game);

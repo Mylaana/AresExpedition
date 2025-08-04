@@ -2,10 +2,13 @@ package com.ares_expedition.dto.websocket.messages.output;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
+import com.ares_expedition.enums.game.AwardsEnum;
 import com.ares_expedition.enums.game.GameStatusEnum;
+import com.ares_expedition.enums.game.MilestonesEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.core.GameOptions;
 import com.ares_expedition.model.player_state.PlayerState;
@@ -17,6 +20,8 @@ public class GameStateMessageOutputDTO {
     private Map<String, PlayerStateDTO> groupPlayerState;
     private GameStatusEnum gameStatus;
     private GameOptions gameOptions;
+    private Map<MilestonesEnum, Boolean> milestones;
+    private List<AwardsEnum> awards;
 
     public GameStateMessageOutputDTO(){
     }
@@ -66,6 +71,18 @@ public class GameStateMessageOutputDTO {
     }
     public void setGameOptions(GameOptions gameOptions) {
         this.gameOptions = gameOptions;
+    }
+    public Map<MilestonesEnum, Boolean> getMilestones() {
+        return milestones;
+    }
+    public void setMilestones(Map<MilestonesEnum, Boolean> milestones) {
+        this.milestones = milestones;
+    }
+    public List<AwardsEnum> getAwards() {
+        return awards;
+    }
+    public void setAwards(List<AwardsEnum> awards) {
+        this.awards = awards;
     }
     
 }

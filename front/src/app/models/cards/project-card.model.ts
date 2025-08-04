@@ -245,6 +245,9 @@ export class PlayableCardModel {
 			case(ProjectFilterNameEnum.doubleProduction):{
 				return this.getTitle(), this.hasSummaryType('production') || this.hasSummaryType('mixedProduction')
 			}
+			case(ProjectFilterNameEnum.redProject):{
+				return this.cardType==='redProject'
+			}
         }
         return false
     }

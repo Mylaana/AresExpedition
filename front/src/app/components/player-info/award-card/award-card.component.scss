@@ -1,0 +1,79 @@
+@use '../../../../styles/abstracts/colors' as colors;
+:host{
+	height: 100%;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-left: solid 1px rgb(167, 128, 0);
+}
+.wrapper-main{
+	display: flex;
+	height: 90%;
+	width: 100%;
+	gap: 2px;
+	padding: 2px;
+}
+.wrapper-image{
+	height: 100%;
+	width: 18px;
+	margin-right: 2px;
+	display: flex;
+	flex-direction: column;
+}
+.wrapper-other{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: space-between;
+	flex: 1;
+	height: 100%;
+	gap: 2px;
+}
+app-vp{
+	height: 85%;
+	width: fit-content;
+	margin-right: 2px;
+}
+.wrapper-ranking{
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	width: 100%;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.ranking-caption{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	align-content: center;
+	font-weight: 600;
+}
+.wrapper-colors{
+	display: flex;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+.box-player{
+	height: 100%;
+	background-color: white;
+	flex: 1;
+	p{
+		text-align: center;
+		font-size: 14px;
+	}
+	@each $name, $value in colors.$colors{
+		&.#{$name}{
+			background-color: $value;
+		}
+	}
+}

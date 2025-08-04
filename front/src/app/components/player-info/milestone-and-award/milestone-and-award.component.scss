@@ -1,0 +1,31 @@
+:host{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1px;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to top right, rgba(black, .0) 20%, rgba(0, 0, 0, 0.6) 100%);
+}
+.divider{
+	background-color: var(--color-ares-orange);
+	width: 80%;
+	height: 2px;
+	border-radius: 5px;
+	//margin: 1px;
+}
+app-award-pannel{
+	$space: 2px;
+	height: 40px;
+	width: calc(100% - $space * 2);
+	margin: $space;
+	border-bottom: solid 1px rgb(167, 128, 0);
+}
+app-milestone-pannel{
+	$space: 2px;
+	flex: 1;
+	width: calc(100% - $space * 2);
+	margin: $space;
+	border-top: solid 1px silver;
+}

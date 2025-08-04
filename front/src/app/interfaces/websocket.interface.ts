@@ -1,4 +1,4 @@
-import { DeckQueryOptionsEnum } from "../enum/global.enum"
+import { AwardsEnum, DeckQueryOptionsEnum, MilestonesEnum } from "../enum/global.enum"
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum"
 import { GameStatusEnum, GroupMessageContentResultEnum, MessageContentQueryEnum, PlayerMessageContentResultEnum, SubscriptionEnum } from "../enum/websocket.enum"
 import { GameOption } from "../services/core-game/create-game.service"
@@ -83,6 +83,8 @@ export interface WsGameState extends WsResult {
     groupPlayerStatePublic: Map<string, any>
 	gameStatus: GameStatusEnum
 	gameOptions: GameOption
+	awards: AwardsEnum[]
+	milestones: MilestonesEnum[]
 }
 export interface WSGroupState extends WsResult {
 	groupState: PlayerStateDTO[]

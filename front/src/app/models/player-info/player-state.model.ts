@@ -15,7 +15,7 @@ import { PlayerOtherStateModel } from "./player-state-other.model";
 import { PlayerGlobalParameterStateModel } from "./player-state-global-parameter.model";
 import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
-import { GlobalParameterColorEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { GlobalParameterColorEnum, GlobalParameterNameEnum, MilestonesEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { Utils } from "../../utils/utils";
@@ -75,8 +75,9 @@ export class PlayerStateModel {
 	getInfoState(): PlayerInfoStateModel {return this.infoState}
 
 	//scoreState
-	getMilestoneCompleted(): number {return this.scoreState.getMilestoneCompletedNumber()}
-	addMilestoneCompleted(){this.scoreState.addMilestoneCompleted()}
+	getMilestoneCompleted(): number {return this.scoreState.getClaimedMilestoneCount()}
+	addMilestoneCompleted(milestone: MilestonesEnum){this.scoreState.addMilestoneCompleted(milestone)}
+	getClaimedMilestoneList(): MilestonesEnum[] {return this.scoreState.getClaimedMilestoneList()}
 	getBaseVP(): number {return this.scoreState.getBaseVP()}
 	getTotalVP(): number {return this.scoreState.getTotalVP()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}
@@ -91,6 +92,7 @@ export class PlayerStateModel {
 	addTR(tr: number){this.scoreState.addTR(tr)}
 	addForest(forest: number): void {this.scoreState.addForest(forest)}
 	getForest(): number {return this.scoreState.getForest()}
+	setAwardsVp(vp: number){this.scoreState.setAwardsVp(vp)}
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}

@@ -44,7 +44,8 @@ export enum ProjectFilterNameEnum {
 	corporations = 'corporations',
 	notCorporations = 'notCorporations',
 	authorizedTag = 'authorizedTag',
-	doubleProduction = 'doubleProduction'
+	doubleProduction = 'doubleProduction',
+	redProject = 'redProject'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
@@ -102,4 +103,44 @@ export enum EffectPortalButtonEnum {
 
 	localHeatTrapping_Microbe,
 	localHeatTrapping_Animal
+}
+export enum AwardsEnum {
+	/** most phase upgraded*/
+	visionary = 'A_VISIONARY',
+    /** most heat production*/
+	generator = 'A_GENERATOR',
+    /** most cards played*/
+	projectManager = 'A_PROJECT_MANAGER',
+    /** most ressources on cards*/
+	collecter = 'A_COLLECTER',
+	/** most MC prod (without TR)*/
+    celebrity = 'A_CELEBRITY',
+    /** most steel + titanium*/
+	industrialist = 'A_INDUSTRIALIST',
+    /** most science tags*/
+	researcher = 'A_RESEARCHER',
+}
+export enum MilestonesEnum {
+	/**6 space tags*/
+    spaceBaron = 'M_SPACE_BARON',
+	/**15 TR*/
+    terraformer = 'M_TERRAFORMER',
+	/**6 red cards*/
+    legend = 'M_LEGEND',
+	/**3 forest*/
+    gardener = 'M_GARDENER',
+	/**12 projects*/
+    planner = 'M_PLANNER',
+	/**5 plant production*/
+    farmer = 'M_FARMER',
+	/**8 building tags*/
+    builder = 'M_BUILDER',
+	/**10 heat production*/
+    energizer = 'M_ENERGIZER',
+	/**8 green cards*/
+    magnate = 'M_MAGNATE',
+	/**9 different tags*/
+    diversifier = 'M_DIVERSIFIER',
+	/**6 blue cards*/
+    tycoon = 'M_TYCOON',
 }

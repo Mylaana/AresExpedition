@@ -1,21 +1,26 @@
 
 package com.ares_expedition.model.player_state.subclass;
 
+import java.util.List;
+
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerScoreStateDTO;
+import com.ares_expedition.enums.game.MilestonesEnum;
 
 public class PlayerScoreState {
     private Integer vp;
-    private Integer milestoneCount;
     private Integer terraformingRating;
     private Integer forest;
+    private List<MilestonesEnum> claimedMilestone;
+    private Integer award;
 
     public PlayerScoreState() {
     }
     PlayerScoreState(PlayerScoreStateDTO dto) {
         this.vp = dto.getVp();
-        this.milestoneCount = dto.getMilestoneCount();
         this.terraformingRating = dto.getTerraformingRating();
         this.forest = dto.getForest();
+        this.claimedMilestone = dto.getClaimedMilestone();
+        this.award = dto.getAward();
     }
 
     public Integer getVp() {
@@ -24,14 +29,6 @@ public class PlayerScoreState {
 
     public void setVp(Integer vp) {
         this.vp = vp;
-    }
-
-    public Integer getMilestoneCount() {
-        return milestoneCount;
-    }
-
-    public void setMilestoneCount(Integer milestoneCount) {
-        this.milestoneCount = milestoneCount;
     }
 
     public Integer getTerraformingRating() {
@@ -56,5 +53,21 @@ public class PlayerScoreState {
 
     public PlayerScoreStateDTO toJson() {
         return new PlayerScoreStateDTO(this);
-    }    
+    }
+
+    public List<MilestonesEnum> getClaimedMilestone() {
+        return claimedMilestone;
+    }
+
+    public void setClaimedMilestone(List<MilestonesEnum> claimedMilestone) {
+        this.claimedMilestone = claimedMilestone;
+    }
+
+    public Integer getAward() {
+        return award;
+    }
+    
+    public void setAward(Integer award) {
+        this.award = award;
+    }
 }

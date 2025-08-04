@@ -1,0 +1,83 @@
+@use '../../../../styles/abstracts/colors' as colors;
+:host{
+	height: 100%;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-left: solid 1px silver;
+}
+.wrapper-main{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+
+	height: fit-content;
+	min-height: 95%;
+	width: 100%;
+	padding: 2px;
+	&.claimed{
+		background: rgba(255, 194, 39, 0.25);
+	}
+}
+.wrapper-image{
+	height: 18px;
+	padding-bottom: 2px;
+	object-fit: contain;
+	display: flex;
+	&.claimed{
+		& > app-text-with-image {
+			filter: grayscale(100%);
+		}
+		width: 100%;
+	}
+}
+.wrapper-bottom{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: 2px 2px;
+	.claimed{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+	}
+	.unclaimed{
+		display: flex;
+		height: 100%;
+		width: 100%;
+	}
+}
+.box-player{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 13px;
+	background-color: white;
+	border-radius: 3px;
+
+	width: 31%;
+	&.group-1, &.group-2, &.group-3{
+		flex: 1;
+	}
+	p{
+		text-align: center;
+	}
+	@each $name, $value in colors.$colors{
+		&.#{$name}{
+			background-color: $value;
+		}
+	}
+}
+img{
+	position: absolute;
+	height: 80%;
+	top: -2px;
+	right: -2px;
+}

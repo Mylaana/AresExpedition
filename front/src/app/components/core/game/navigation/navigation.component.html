@@ -15,10 +15,6 @@
 			</app-player-pannel>
 		</ng-container>
 	</div>
-	<span class="wrapper-awards"></span>
-	<!--
-	<div class="wrapper-awards ares-background ares ares-border">
-			<h1>awards here</h1>
-		</div>
-		-->
+	<span *ngIf="!discoveryActive" class="wrapper-awards"></span>
+	<app-milestone-and-award *ngIf="discoveryActive" class="ares-navigation-pannel"></app-milestone-and-award>
 </nav>

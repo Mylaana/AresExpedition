@@ -10,7 +10,7 @@ import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 
 @Controller
 public class WsControllerOutput {
-    private static final Logger logger = LoggerFactory.getLogger(InputRouter.class);
+    private static final Logger logger = LoggerFactory.getLogger(WsControllerOutput.class);
     private final SimpMessagingTemplate messagingTemplate;
 
     public WsControllerOutput(SimpMessagingTemplate messagingTemplate) {

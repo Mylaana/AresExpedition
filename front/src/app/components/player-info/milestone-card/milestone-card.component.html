@@ -1,0 +1,23 @@
+<div [ngClass]="['wrapper-main', isClaimed()?'claimed':'']">
+	<div [ngClass]="['wrapper-image', isClaimed()?'claimed':'']">
+		<app-text-with-image [rawText]="getCaption()" [context]="isClaimed()?'milestoneClaimed':'milestone'"></app-text-with-image>
+	</div>
+	<div class="wrapper-bottom">
+		<div class="unclaimed"
+			*ngIf="claimed?.color?.length===0">
+			<ng-container *ngFor="let m of milestone.value">
+				<div [ngClass]="['box-player', m.color, 'group-'+milestone.value.length]">
+					<p>{{m.playersValue}}</p>
+				</div>
+			</ng-container>
+		</div>
+		<div class="claimed"
+			*ngIf="isClaimed()">
+			<ng-container *ngFor="let c of getClaimedColors()">
+				<div [ngClass]="['box-player', c]">
+					<img *ngIf="isClaimed()" src="/assets/other/ready.png" alt="">
+				</div>
+			</ng-container>
+		</div>
+	</div>
+</div>
