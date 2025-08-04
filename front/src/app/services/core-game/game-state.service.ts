@@ -1,7 +1,7 @@
 import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
-import { myUUID, PlayableCardType, RessourceType, TagType } from "../../types/global.type";
+import { MilestoneState, myUUID, PlayableCardType, RessourceType, TagType } from "../../types/global.type";
 import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter,  } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
@@ -16,12 +16,11 @@ import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { GameParamService } from "./game-param.service";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
-import { AwardsEnum, GlobalParameterNameEnum, MilestonesEnum } from "../../enum/global.enum";
+import { AwardsEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
 import { EventStateService } from "../../factory/event-state-service.service";
 import { EventFactory } from "../../factory/event/event-factory";
 import { ActivationOption } from "../../types/project-card.type";
 import { PlayableCard } from "../../factory/playable-card.factory";
-import { ProjectCardScalingVPService } from "../cards/project-card-scaling-VP.service";
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
@@ -79,7 +78,7 @@ export class GameState{
 		promo: false,
 		standardUpgrade: false
 	})
-	private milestones = new BehaviorSubject<MilestonesEnum[]>([])
+	private milestones = new BehaviorSubject<Partial<MilestoneState>>({})
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
 
     currentGroupPlayerState = this.groupPlayerState.asObservable()
@@ -895,9 +894,7 @@ export class GameState{
 			this.awards.next(awards)
 		}
 	}
-	setMilestone(milestone: MilestonesEnum[]){
-		if(this.milestones.getValue().length===0){
-			this.milestones.next(milestone)
-		}
+	setMilestone(milestone: MilestoneState){
+		this.milestones.next(milestone)
 	}
 }

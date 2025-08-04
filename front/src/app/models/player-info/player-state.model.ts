@@ -75,7 +75,7 @@ export class PlayerStateModel {
 	getInfoState(): PlayerInfoStateModel {return this.infoState}
 
 	//scoreState
-	getMilestoneCompleted(): number {return this.scoreState.getMilestoneCompletedNumber()}
+	getMilestoneCompleted(): number {return this.scoreState.getClaimedMilestoneCount()}
 	addMilestoneCompleted(milestone: MilestonesEnum){this.scoreState.addMilestoneCompleted(milestone)}
 	getClaimedMilestoneList(): MilestonesEnum[] {return this.scoreState.getClaimedMilestoneList()}
 	getBaseVP(): number {return this.scoreState.getBaseVP()}
@@ -92,6 +92,7 @@ export class PlayerStateModel {
 	addTR(tr: number){this.scoreState.addTR(tr)}
 	addForest(forest: number): void {this.scoreState.addForest(forest)}
 	getForest(): number {return this.scoreState.getForest()}
+	setAwardsVp(vp: number){this.scoreState.setAwardsVp(vp)}
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}

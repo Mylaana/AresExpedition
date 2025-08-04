@@ -32,7 +32,7 @@ public class GameData {
     private List<String> deckCorporations = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
     private GameOptions gameOptions;
-    private List<MilestonesEnum> milestones = new ArrayList<>();
+    private Map<MilestonesEnum, Boolean> milestones = new HashMap<>();
     private List<AwardsEnum> awards = new ArrayList<>();
 
     GameData() {
@@ -160,13 +160,7 @@ public class GameData {
         this.gameOptions = gameOptions;
     }
 
-    public List<MilestonesEnum> getMilestones() {
-        return milestones;
-    }
 
-    public void setMilestones(List<MilestonesEnum> milestones) {
-        this.milestones = milestones;
-    }
 
     public List<AwardsEnum> getAwards() {
         return awards;
@@ -174,5 +168,13 @@ public class GameData {
 
     public void setAwards(List<AwardsEnum> awards) {
         this.awards = awards;
+    }
+
+    public Map<MilestonesEnum, Boolean> getMilestones() {
+        return milestones;
+    }
+
+    public void setMilestones(Map<MilestonesEnum, Boolean> milestones) {
+        this.milestones = milestones;
     }   
 }

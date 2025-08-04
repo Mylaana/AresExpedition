@@ -15,6 +15,8 @@ public class PlayerScoreStateDTO {
     private Integer forest;
     @JsonProperty("cm")
     private List<MilestonesEnum> claimedMilestone;
+    @JsonProperty("a")
+    private Integer award;
 
     PlayerScoreStateDTO() {
     }
@@ -24,6 +26,7 @@ public class PlayerScoreStateDTO {
         this.terraformingRating = state.getTerraformingRating();
         this.forest = state.getForest();
         this.claimedMilestone = state.getClaimedMilestone();
+        this.award = state.getAward();
     }
 
     public Integer getVp() {
@@ -49,5 +52,11 @@ public class PlayerScoreStateDTO {
     }
     public void setClaimedMilestone(List<MilestonesEnum> claimedMilestone) {
         this.claimedMilestone = claimedMilestone;
+    }
+    public Integer getAward() {
+        return award;
+    }
+    public void setAward(Integer award) {
+        this.award = award;
     }
 }

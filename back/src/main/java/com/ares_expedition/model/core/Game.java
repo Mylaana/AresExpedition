@@ -36,7 +36,7 @@ public class Game {
     private List<String> deckCorporations = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
     private GameOptions gameOptions;
-    private List<MilestonesEnum> milestones = new ArrayList<>();
+    private Map<MilestonesEnum, Boolean> milestones = new HashMap<>();
     private List<AwardsEnum> awards = new ArrayList<>();
 
     public Game() {
@@ -80,11 +80,9 @@ public class Game {
             
             List<MilestonesEnum> allMilestones = new ArrayList<>(List.of(MilestonesEnum.values()));
             Collections.shuffle(allMilestones);
-            List<MilestonesEnum> selectedMilestones = new ArrayList<>();
             for(int i=0; i<Math.min(3, allMilestones.size()); i++){
-                selectedMilestones.add(allMilestones.get(i));
+				this.milestones.put(allMilestones.get(i), Boolean.FALSE);
             }
-            this.setMilestones(selectedMilestones);
         }
     }
 
@@ -486,14 +484,14 @@ public class Game {
         return this.gameOptions;
     }
 
-    public List<MilestonesEnum> getMilestones() {
+    public Map<MilestonesEnum, Boolean> getMilestones() {
         return milestones;
     }
 
-    public void setMilestones(List<MilestonesEnum> milestones) {
+    public void setMilestones(Map<MilestonesEnum, Boolean> milestones) {
         this.milestones = milestones;
     }
-
+	
     public List<AwardsEnum> getAwards() {
         return awards;
     }
@@ -504,6 +502,15 @@ public class Game {
 
     public void setGameOptions(GameOptions gameOptions) {
         this.gameOptions = gameOptions;
+    }
+
+    public void claimMilestones(){
+        for(Entry<String, PlayerState> entry: groupPlayerState.entrySet()){
+            PlayerState state = entry.getValue();
+            for(MilestonesEnum milestone: state.getClaimedMilestone()){
+                this.milestones.put(milestone, Boolean.TRUE);
+            }
+        }
     }
 
     public GameData toData(){

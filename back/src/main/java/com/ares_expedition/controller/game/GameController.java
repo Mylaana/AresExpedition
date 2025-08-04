@@ -95,6 +95,7 @@ public class GameController {
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
         game.resetResearchResolved();
+        game.claimMilestones();
         logger.debug("GAME OVER:" + game.isGameOver());
         if(game.isGameOver()){
             game.setGameStatus(GameStatusEnum.GAME_OVER);

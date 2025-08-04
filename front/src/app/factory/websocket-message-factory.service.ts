@@ -2,12 +2,11 @@ import { Injectable } from "@angular/core";
 import { MessageContentQueryEnum, PlayerMessageContentResultEnum } from "../enum/websocket.enum";
 import { GroupMessageResult, MessageResult, PlayerMessageResult, WsAck, WsDrawQuery, WsDrawResult, WsGroupReady, WsOceanQuery, WsOceanResult, WsReadyQuery, WsScanKeepQuery, WsSelectedPhaseQuery } from "../interfaces/websocket.interface";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
-import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { PlayerStateDTO } from "../interfaces/dto/player-state-dto.interface";
 import { PlayerMessage } from "../interfaces/websocket.interface";
-import { v4 as uuidv4 } from 'uuid'
-import { myUUID } from "../types/global.type";
-import { AwardsEnum, DeckQueryOptionsEnum, MilestonesEnum, OceanBonusEnum } from "../enum/global.enum";
+import { v4 as uuidv4 } from 'uuid';
+import { MilestoneState, myUUID } from "../types/global.type";
+import { AwardsEnum, DeckQueryOptionsEnum, OceanBonusEnum } from "../enum/global.enum";
 import { OceanBonus, ScanKeep } from "../interfaces/global.interface";
 import { EventUnionSubTypes } from "../types/event.type";
 import { GameOption } from "../services/core-game/create-game.service";
@@ -172,16 +171,7 @@ export class WebsocketResultMessageFactory{
 		}
 		return result;
 	}
-	public static inputToMilestone(content: any): MilestonesEnum[] {
-		let result: MilestonesEnum[] = [];
-
-		for (let a of Object.values(MilestonesEnum)) {
-			for (let c of content) {
-				if (c.toString() === a.toString()) {
-					result.push(a as MilestonesEnum);
-				}
-			}
-		}
-		return result;
+	public static inputToMilestone(content: any): MilestoneState {
+		return content as MilestoneState
 	}
 }

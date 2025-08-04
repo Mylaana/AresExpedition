@@ -20,7 +20,7 @@ public class GameStateMessageOutputDTO {
     private Map<String, PlayerStateDTO> groupPlayerState;
     private GameStatusEnum gameStatus;
     private GameOptions gameOptions;
-    private List<MilestonesEnum> milestones;
+    private Map<MilestonesEnum, Boolean> milestones;
     private List<AwardsEnum> awards;
 
     public GameStateMessageOutputDTO(){
@@ -72,10 +72,10 @@ public class GameStateMessageOutputDTO {
     public void setGameOptions(GameOptions gameOptions) {
         this.gameOptions = gameOptions;
     }
-    public List<MilestonesEnum> getMilestones() {
+    public Map<MilestonesEnum, Boolean> getMilestones() {
         return milestones;
     }
-    public void setMilestones(List<MilestonesEnum> milestones) {
+    public void setMilestones(Map<MilestonesEnum, Boolean> milestones) {
         this.milestones = milestones;
     }
     public List<AwardsEnum> getAwards() {

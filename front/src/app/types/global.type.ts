@@ -1,4 +1,4 @@
-import { BuilderOption } from "../enum/global.enum";
+import { BuilderOption, MilestonesEnum } from "../enum/global.enum";
 import { CarouselButton, NonEventButton, ToggleButton } from "../models/core-game/button.model";
 
 export type RGB = `rgb(${number}, ${number}, ${number})`;
@@ -46,4 +46,5 @@ export type SettingSupportedLanguage = 'en' | 'fr'
 export type SettingCardSize = 'small' | 'medium'
 export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText' | 'portalButton' | 'wildButton'
 | 'commandButton' | 'convertButton' | 'convertButtonTwoLines' | 'activateCardButton' | 'builderButton' | 'cardPrerequisite'
-| 'milestone' | 'award'
+| 'milestone' | 'milestoneClaimed' | 'award'
+export type MilestoneState = Record<MilestonesEnum, boolean>

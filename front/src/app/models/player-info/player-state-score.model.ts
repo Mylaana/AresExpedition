@@ -7,11 +7,14 @@ export class PlayerScoreStateModel {
 	private terraformingRating: number = 0
 	private forest: number = 0
 	private claimedMilestones: MilestonesEnum[] = []
+	private awardsVp: number = 0
 
 	constructor(data: PlayerScoreStateDTO){
 		this.vp = data.v
 		this.terraformingRating = data.tr
 		this.forest = data.f
+		this.claimedMilestones = data.cm
+		this.awardsVp = data.a
 	}
 
 	addMilestoneCompleted(milestone: MilestonesEnum): void {
@@ -21,11 +24,14 @@ export class PlayerScoreStateModel {
 	getClaimedMilestoneList(): MilestonesEnum[] {
 		return this.claimedMilestones
 	}
-	getMilestoneCompletedNumber(): number {return this.claimedMilestones.length}
+	getClaimedMilestoneCount(): number {return this.claimedMilestones.length}
+	setAwardsVp(vp: number){
+		this.awardsVp = vp
+	}
 	addBaseVP(points: number): void {this.vp += points}
 	getBaseVP(): number {return this.vp }
 	getTotalVP(): number {
-		return this.vp + this.scalingVp + this.terraformingRating + this.forest
+		return this.vp + this.scalingVp + this.terraformingRating + this.forest + this.getClaimedMilestoneCount() * 3 + this.awardsVp
 	}
 	setScalingVP(scalingVp: number){this.scalingVp = scalingVp}
 	addTR(tr: number): void {this.terraformingRating += tr}
@@ -38,7 +44,8 @@ export class PlayerScoreStateModel {
 			cm: this.claimedMilestones,
 			v: this.vp,
 			tr: this.terraformingRating,
-			f: this.forest
+			f: this.forest,
+			a: this.awardsVp
 		}
 	}
 
@@ -57,7 +64,8 @@ export class PlayerScoreStateModel {
 				cm: [],
 				tr: 0,
 				v:0,
-				f: 0
+				f: 0,
+				a: 0
 			}
 		)
 	}

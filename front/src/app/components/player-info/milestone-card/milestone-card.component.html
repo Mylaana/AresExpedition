@@ -1,6 +1,6 @@
-<div class="wrapper-main">
-	<div class="wrapper-image">
-		<app-text-with-image [rawText]="getCaption()" [context]="'milestone'"></app-text-with-image>
+<div [ngClass]="['wrapper-main', isClaimed()?'claimed':'']">
+	<div [ngClass]="['wrapper-image', isClaimed()?'claimed':'']">
+		<app-text-with-image [rawText]="getCaption()" [context]="isClaimed()?'milestoneClaimed':'milestone'"></app-text-with-image>
 	</div>
 	<div class="wrapper-bottom">
 		<div class="unclaimed"

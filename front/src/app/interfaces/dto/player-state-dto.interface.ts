@@ -26,7 +26,8 @@ export interface PlayerScoreStateDTO {
 	cm: MilestonesEnum[],
 	v: number,
 	tr: number,
-	f: number
+	f: number,
+	a: number
 }
 export interface PlayerTagStateDTO {
 	t: TagInfo[]

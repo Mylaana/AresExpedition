@@ -3,7 +3,7 @@ import { AwardsEnum, MilestonesEnum, ProjectFilterNameEnum } from "../../enum/gl
 import { GameState } from "./game-state.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AwardCard, AwardValue, ClaimedMilestone, ClaimedMilestoneCard, MilestoneCard, MilestoneValue } from "../../interfaces/global.interface";
-import { myUUID, PlayerColor } from "../../types/global.type";
+import { MilestoneState, myUUID, PlayerColor } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 
 interface PlayerMilestoneTemp {
@@ -17,6 +17,7 @@ interface PlayerMilestoneTemp {
 export class MilestoneAwardService {
 	_groupState!: PlayerStateModel[]
 	private clientState!: PlayerStateModel
+	private milestoneState!: Partial<MilestoneState>
 	private milestoneList!: MilestonesEnum[]
 	private milestoneCards!: MilestoneCard[]
 	private claimedMilestones!:ClaimedMilestone[]
@@ -29,7 +30,6 @@ export class MilestoneAwardService {
 		this.gameStateService.currentAwards.subscribe(v => this.onAwardsUpdate(v))
 		this.gameStateService.currentClientState.subscribe(v => this.onClientStateUpdate(v))
 	}
-
 	getMilestoneCards(): MilestoneCard[]{
 		return this.milestoneCards
 	}
@@ -75,33 +75,39 @@ export class MilestoneAwardService {
 		this._groupState = state
 		this.updateMilestone()
 		this.updateAward()
-
-		if(this.milestoneList===undefined || this.milestoneList.length===0){return}
-		for(let s of state){
-			/*
-			for(let m of this.milestoneList){
-				if(this.shouldClaimMilestone(s, m)){
-					this.claimMilestone(s, m)
-					console.log(s, m)
-				}
-			}
-			*/
+		this.updateGroupClaimedMilestones()
+	}
+	private updateGroupClaimedMilestones(){
+		if(!this._groupState){return}
+		if(!this.milestoneList){return}
+		for(let s of this._groupState){
 			this.addPlayerClaimedMilestoneToSet(s)
 		}
 	}
-	private onMilestonesUpdate(milestones: MilestonesEnum[]){
-		if(!this.milestoneList || this.milestoneList.length===0){
-			this.claimedMilestones = []
-			for(let m of milestones){
-				this.claimedMilestones.push({
-					name:m,
-					player: new Set<myUUID>,
-					color: new Set<PlayerColor>
-				})
+	private onMilestonesUpdate(milestones: Partial<MilestoneState>){
+		this.milestoneState = milestones
+		this.updateMilestoneList()
+		if(!this.claimedMilestones){this.initializeClaimedMilestones()}
+		this.updateGroupClaimedMilestones()
+	}
+	private updateMilestoneList(){
+		this.milestoneList = []
+		for(let v of Object.values(MilestonesEnum)){
+			if(v in this.milestoneState){
+				this.milestoneList.push(v)
 			}
-			this.milestoneList = milestones
 		}
-		this.updateMilestone()
+	}
+	private initializeClaimedMilestones(){
+		if(!this.milestoneList || this.milestoneList.length===0){return}
+		this.claimedMilestones = []
+		for(let m of this.milestoneList){
+			this.claimedMilestones.push({
+				name:m,
+				player: new Set<myUUID>,
+				color: new Set<PlayerColor>
+			})
+		}
 	}
 	private onAwardsUpdate(awards: AwardsEnum[]){
 		this.awardList = awards
@@ -160,8 +166,8 @@ export class MilestoneAwardService {
 		if(!this._groupState){return}
 		if(!this.awardList){return}
 		this.awardCards = []
-		for(let m of this.awardList){
-			this.awardCards.push(this.getAwardCard(m))
+		for(let a of this.awardList){
+			this.awardCards.push(this.getAwardCard(a))
 		}
 	}
 	private getAwardCard(award: AwardsEnum): AwardCard {
@@ -180,6 +186,14 @@ export class MilestoneAwardService {
 		}
 
 		groupTemp.sort((a, b) => b.playersValue - a.playersValue);
+
+		//remove second place players in case of first place equality
+		let maxValue = groupTemp[0].playersValue
+		let firstPlaceGroup = groupTemp.filter((el) => el.playersValue===maxValue)
+		if(firstPlaceGroup.length>1){
+			groupTemp = firstPlaceGroup
+		}
+
 		card.value = groupTemp
 		return card
 	}
@@ -208,7 +222,7 @@ export class MilestoneAwardService {
 	private onClientStateUpdate(state: PlayerStateModel){
 		this.clientState = state
 		if(this.milestoneList.length===0){return}
-
+		this.clientState.setAwardsVp(this.getAwardsVp())
 		for(let m of this.milestoneList){
 			if(this.shouldClaimMilestone(state, m)){
 				this.claimMilestone(m)
@@ -218,6 +232,8 @@ export class MilestoneAwardService {
 		this.updateMilestone()
 	}
 	private shouldClaimMilestone(state: PlayerStateModel, milestone: MilestonesEnum): boolean {
+		//only claim milestone if not already claimed
+		if(this.milestoneState[milestone]===true){return false}
 		let current = this.getMilestoneValueFromState(state, milestone)
 		switch(milestone){
 			case(MilestonesEnum.builder):{return current>=8}
@@ -251,5 +267,23 @@ export class MilestoneAwardService {
 				this.claimedMilestones[i].color.add(state.getColor() as PlayerColor)
 			}
 		}
+	}
+	private getAwardsVp(): number {
+		let result = 0
+		let clientColor: PlayerColor = this.clientState.getColor() as PlayerColor
+
+		for(let a of this.awardCards){
+			let firstValue = a.value[0].playersValue
+			let otherValueGroup = a.value.filter((el) => el.playersValue<firstValue)
+			let secondValue: number | undefined
+			if(otherValueGroup.length!=0){secondValue = otherValueGroup[0].playersValue}
+			for(let player of a.value){
+				if(player.color===clientColor){
+					result += player.playersValue===firstValue?5:0
+					result += (secondValue && player.playersValue===secondValue)?2:0
+				}
+			}
+		}
+		return result
 	}
 }
