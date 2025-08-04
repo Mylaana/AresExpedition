@@ -9,6 +9,7 @@ import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
+import { ALTERNATIVE_PAY_BUTTON_NAME } from '../../../maps/playable-card-maps';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',
@@ -25,6 +26,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	@Output() buttonClicked = new  EventEmitter<any>()
 	@Input() builder!: CardBuilder
 	@Input() cardSize!: SettingCardSize
+	@Input() alreadyUsedButtons: NonEventButtonNames[] = []
 	_buttons: NonEventButton[] = []
 	_used: NonEventButtonNames[] = []
 
@@ -66,8 +68,10 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		}
 	}
 	private getButtonEnabled(button: NonEventButton): boolean {
+		if(this.locked){return false}
 		if(this.getAlternativePayLocked()){return false}
 		if(this._used.includes(button.name)){return false}
+		if(this.alreadyUsedButtons.includes(button.name)){return false}
 		return PlayableCard.prerequisite.canBeAlternativePaid(button.name, this.clientState)
 	}
 	onClientStateUpdate(state: PlayerStateModel){
@@ -75,21 +79,20 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		this.updateButtonEnabled()
 	}
 	onButtonClicked(button: NonEventButton){
-		console.log(button)
 		let events = PlayableCard.getAlternativePayButtonClickedEvents(button.name)
 		if(events.length===0){return}
 		this.gameStateService.addEventQueue(events, 'first')
 		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
 		switch(button.name){
 			case('alternativePayAnaerobicMicroorganisms'):{
-				console.log(builderEvent)
 				builderEvent.buildDiscountValue += 10
+				builderEvent.onAlternativeCostUse(button.name)
 				this._used.push(button.name)
 				break
 			}
 			case('alternativePayRestructuredResources'):{
-				console.log(builderEvent)
 				builderEvent.buildDiscountValue += 5
+				builderEvent.onAlternativeCostUse(button.name)
 				this._used.push(button.name)
 				break
 			}

@@ -1,7 +1,7 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
-import { EventCardBuilderButtonNames, TagType } from "../../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton  } from "./button.model";
+import { ButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, TagType } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
@@ -262,6 +262,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
     cardBuilderIdHavingFocus?: number
     buildDiscountValue!: number
     buildDiscountUsed!: boolean
+	alternativeCostUsedButtonName: NonEventButtonNames[] = []
 	builderType!: BuilderType
     override hasCardBuilder(): boolean {return true}
     override updateCardSelection(selection: PlayableCardModel[]): void {
@@ -365,6 +366,12 @@ export class EventCardBuilder extends EventBaseCardSelector {
 			}
 		}
 		this.button.setEnabled(true)
+	}
+	onAlternativeCostUse(buttonName: NonEventButtonNames){
+		this.alternativeCostUsedButtonName.push(buttonName)
+	}
+	getAlternativeCostUsed(): NonEventButtonNames[] {
+		return this.alternativeCostUsedButtonName
 	}
 }
 

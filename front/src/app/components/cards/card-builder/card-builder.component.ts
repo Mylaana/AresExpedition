@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventBaseModel, EventCardBuilder, CardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../project/playable-card-list/playable-card-list.component';
@@ -8,8 +8,8 @@ import { ProjectFilter } from '../../../interfaces/global.interface';
 import { BuilderOption, ProjectFilterNameEnum } from '../../../enum/global.enum';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilderAlternativeCostComponent } from '../card-builder-alternative-cost/card-builder-alternative-cost.component';
-import { SettingCardSize } from '../../../types/global.type';
-import { Subject, takeUntil } from 'rxjs';
+import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
+import { Subject } from 'rxjs';
 import { GameParamService } from '../../../services/core-game/game-param.service';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
@@ -51,6 +51,7 @@ export class CardBuilderComponent implements OnInit{
 	}
 	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
 		this.cardBuilderListButtonClicked.emit(button)
+		this.updateAlternativeCostButtonsEnabled()
 	}
 	public hasOptionButton(): boolean {
 		return [BuilderOption.drawCard, BuilderOption.gain6MC].includes(this.cardBuilder.getOption())
@@ -79,11 +80,16 @@ export class CardBuilderComponent implements OnInit{
 	}
 	onAlternativePayButtonClicked(button: NonEventButton){
 		this.alternativePayButtonClicked.emit(button)
+		this.updateAlternativeCostButtonsEnabled()
 	}
 	public updateAlternativeCostButtonsEnabled(){
+		if(!this.alternativeCost){return}
 		if(this.cardBuilder.getBuilderIsLocked()){return}
 		for(let a of this.alternativeCost){
 			a.updateButtonEnabled()
 		}
+	}
+	getAlernativeCostButtonUsed(): NonEventButtonNames[]{
+		return (this.event as EventCardBuilder).getAlternativeCostUsed()
 	}
 }
