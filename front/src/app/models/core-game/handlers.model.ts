@@ -65,7 +65,7 @@ export class EventHandler {
 				if(card===undefined){return}
 				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
 				event.setFirstCardBuilt()
-				event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList(event.cardSelector.filter)
+				event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))
 				break
 			}
 			case(BuilderOption.drawCard):{
@@ -163,7 +163,7 @@ export class EventHandler {
         //reset currentEvent parameters
 		event.deactivateSelection()
 		let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
-		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList(event.cardSelector.filter)}
+		if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))}
 
 		//check per subType special rules:
 		switch(subType){
@@ -176,26 +176,26 @@ export class EventHandler {
                     event.finalized = true
                     break
                 }
-				event.cardSelector.selectionQuantity = currentSize - maximumSize
+				event.setSelectorQuantity(currentSize - maximumSize)
 				event.activateSelection()
-				event.cardSelector.stateFromParent =  Utils.toFullCardState({selectable:true, ignoreCost:true})
-				event.title = `Too many cards in hand, please select ${event.cardSelector.selectionQuantity} cards to sell or more.`
+				event.setSelectorStateFromParent(Utils.toFullCardState({selectable:true, ignoreCost:true}))
+				event.title = `Too many cards in hand, please select ${event.getSelectorQuantity()} cards to sell or more.`
 				break
 			}
 			case('selectCardOptionalSell'):{
 				event.activateSelection()
-				event.cardSelector.stateFromParent =  Utils.toFullCardState({selectable:true, ignoreCost:true})
+				event.setSelectorStateFromParent(Utils.toFullCardState({selectable:true, ignoreCost:true}))
 				break
 			}
 			case('addRessourceToSelectedCard'):{
-				let selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.cardSelector.filter)
+				let selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.getSelectorFilter())
 				if(selectFrom.length===0){event.finalized=true;break}
 				event.activateSelection()
-				event.cardSelector.selectFrom = selectFrom
+				event.setSelectorSelectFrom(selectFrom)
 				break
 			}
 			case('recallCardInHand'):case('doubleProduction'):{
-				event.cardSelector.selectFrom = this.gameStateService.getClientState().getProjectPlayedModelList(event.cardSelector.filter)
+				event.setSelectorSelectFrom(this.gameStateService.getClientState().getProjectPlayedModelList(event.getSelectorFilter()))
 				break
 			}
 		}
@@ -204,7 +204,7 @@ export class EventHandler {
 		switch(event.subType){
 			case('discardCards'):{
 				event.activateSelection()
-				event.cardSelector.stateFromParent =  Utils.toFullCardState({selectable:true, ignoreCost:true})
+				event.setSelectorStateFromParent(Utils.toFullCardState({selectable:true, ignoreCost:true}))
 				break
 			}
 			case('scanKeepResult'):{
@@ -213,14 +213,14 @@ export class EventHandler {
 						let card = this.gameStateService.getClientProjectPlayedModelList().filter((el)=>el.cardCode==='P32')[0]
 						if(!card){break}
 						let tag = Utils.toTagType(card.tagsId[0])
-						if(!event.cardSelector.filter){break}
-						event.cardSelector.filter.authorizedTag = [tag]
+						if(!event.getSelectorFilter()){break}
+						event.setSelectorFilterAuthorizedTag([tag])
 						event.title = `Modpro : add one card to hand with an ${tag[0].toUpperCase() + tag.slice(1)} tag`
 						break
 					}
 					case(DeckQueryOptionsEnum.ringCom):{
-						if(!event.cardSelector.filter){break}
-						event.cardSelector.filter.authorizedTag = ['jovian']
+						if(!event.getSelectorFilter()){break}
+						event.setSelectorFilterAuthorizedTag(['jovian'])
 					}
 				}
 
@@ -230,12 +230,12 @@ export class EventHandler {
 	private switchEventCardActivator(event: EventCardActivator){
 
 		let subType = event.subType as EventCardActivatorSubType
-		if(event.refreshSelectorOnSwitch){event.cardSelector.selectFrom = this.gameStateService.getClientHandModelList(event.cardSelector.filter)}
+		if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))}
 
 		//check per subType special rules:
 		switch(subType){
 			case('actionPhaseActivator'):{
-				event.cardSelector.selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.cardSelector.filter)
+				event.setSelectorSelectFrom(this.gameStateService.getClientProjectPlayedModelList(event.getSelectorFilter()))
 				break
 			}
 		}
@@ -285,44 +285,44 @@ export class EventHandler {
         switch(event.subType){
 			case('selectCardForcedSell'):case('selectCardOptionalSell'):{
 				event.finalized = true
-				this.gameStateService.removeCardsFromClientHandById(Utils.toCardsIdList(event.cardSelector.selectedList), 'project')
-				this.gameStateService.sellCardsFromClientHand(event.cardSelector.selectedList.length)
+				this.gameStateService.removeCardsFromClientHandById(Utils.toCardsIdList(event.getSelectorSelectedList()), 'project')
+				this.gameStateService.sellCardsFromClientHand(event.getSelectorSelectedQuantity())
 				break
 			}
 			case('researchPhaseResult'):{
 				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
-					ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.getSelectorSelectedList()),
+					ProjectCardInfoService.getProjectCardIdListFromModel(event.getSelectorSelectFrom())
 				)
 				break
 			}
 			case('selectStartingHand'):{
-				let drawNumber = event.cardSelector.selectedList.length
+				let drawNumber = event.getSelectorSelectedQuantity()
 				event.finalized = true
-				this.gameStateService.removeCardsFromClientHandByModel(event.cardSelector.selectedList, 'project')
+				this.gameStateService.removeCardsFromClientHandByModel(event.getSelectorSelectedList(), 'project')
 				this.gameStateService.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber}}), 'first')
 				break
 			}
 			case('selectCorporation'):{
 				event.finalized = true
-				this.gameStateService.playCorporation(event.cardSelector.selectedList[0])
+				this.gameStateService.playCorporation(event.getSelectorSelectedList()[0])
 				break
 			}
 			case('selectMerger'):{
 				event.finalized = true
-				this.gameStateService.playCorporation(event.cardSelector.selectedList[0], true)
+				this.gameStateService.playCorporation(event.getSelectorSelectedList()[0], true)
 				this.gameStateService.applyAverageStartingMegacredits()
 				break
 			}
 			case('recallCardInHand'):{
 				event.finalized = true
-				if(event.cardSelector.selectedList.length===0){break}
-				this.gameStateService.recallCardFromPlayed(event.cardSelector.selectedList[0])
+				if(event.hasSelectorCardSelected()===false){break}
+				this.gameStateService.recallCardFromPlayed(event.getSelectorSelectedList()[0])
 				break
 			}
 			case('doubleProduction'):{
 				event.finalized = true
-				this.gameStateService.applyDoubleProduction(event.cardSelector.selectedList[0])
+				this.gameStateService.applyDoubleProduction(event.getSelectorSelectedList()[0])
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
@@ -335,12 +335,12 @@ export class EventHandler {
 		switch(event.subType){
 			case('discardCards'):{
 				event.finalized = true
-				let discardedList = event.cardSelector.selectedList
+				let discardedList = event.getSelectorSelectedList()
 				this.gameStateService.removeCardsFromClientHandById(Utils.toCardsIdList(discardedList), 'project')
 
 				switch(event.discardOptions){
 					case(DiscardOptionsEnum.marsUniversity):{
-						if(event.cardSelector.selectedList.length===0){break}
+						if(event.hasSelectorCardSelected()===false){break}
 						let clientState = this.gameStateService.getClientState()
 						let newEvents = PlayableCard.getOnTriggerredEvents(
 								'ON_TRIGGER_RESOLUTION',
@@ -355,15 +355,15 @@ export class EventHandler {
 						break
 					}
 					case(DiscardOptionsEnum.redraftedContracts):{
-						if(event.cardSelector.selectedList.length===0){break}
+						if(event.hasSelectorCardSelected()===false){break}
 						this.gameStateService.addEventQueue(
-							EventFactory.simple.draw(event.cardSelector.selectedList.length),
+							EventFactory.simple.draw(event.getSelectorSelectedQuantity()),
 							'first'
 						)
 						break
 					}
 					case(DiscardOptionsEnum.matterGenerator):{
-						if(event.cardSelector.selectedList.length===0){break}
+						if(event.hasSelectorCardSelected()===false){break}
 						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:6}), 'first')
 					}
 				}
@@ -372,7 +372,7 @@ export class EventHandler {
 			case('scanKeepResult'):{
 				switch(event.scanKeepOptions){
 					case(DeckQueryOptionsEnum.brainstormingSession):{
-						let card = event.cardSelector.selectFrom[0]
+						let card = event.getSelectorSelectFrom()[0]
 						switch(card.cardType){
 							case ('greenProject'):{
 								this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:1}), 'first')
@@ -384,10 +384,10 @@ export class EventHandler {
 						}
 					}
 				}
-				if(event.cardSelector.selectedList.length>0){
+				if(event.hasSelectorCardSelected()){
 					this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-						ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectedList),
-						ProjectCardInfoService.getProjectCardIdListFromModel(event.cardSelector.selectFrom)
+						ProjectCardInfoService.getProjectCardIdListFromModel(event.getSelectorSelectedList()),
+						ProjectCardInfoService.getProjectCardIdListFromModel(event.getSelectorSelectFrom())
 					)
 				}
 			}
@@ -403,7 +403,7 @@ export class EventHandler {
 				let stock: AdvancedRessourceStock[] = event.advancedRessource?[event.advancedRessource]:[]
 				if(stock.length===0){break}
 
-				this.gameStateService.addRessourceToClientCard({cardCode: event.cardSelector.selectedList[0].cardCode,stock: stock})
+				this.gameStateService.addRessourceToClientCard({cardCode: event.getSelectorSelectedList()[0].cardCode,stock: stock})
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
@@ -415,7 +415,7 @@ export class EventHandler {
 
 		switch(event.subType){
 			case('actionPhaseActivator'):{
-				for(let card of event.cardSelector.selectFrom){
+				for(let card of event.getSelectorSelectFrom()){
 					card.activated = 0
 				}
 				break

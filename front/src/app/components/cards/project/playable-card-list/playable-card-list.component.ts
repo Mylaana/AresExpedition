@@ -127,7 +127,7 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		this._activateTwiceRemaining = event.doubleActivationMaxNumber - event.doubleActivationCount
 	}
 	private setSelectorFromEvent(event: EventCardSelector): void {
-		this._cardSelector = event.cardSelector
+		this._cardSelector = event.getCardSelector()
 	}
 	private setDisplay(): void {
 		switch(this.listType){

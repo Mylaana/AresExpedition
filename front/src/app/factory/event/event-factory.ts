@@ -5,7 +5,7 @@ import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCar
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
 import { MinMaxEqualType, TagType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
-import { Logger } from "../../utils/utils"
+import { Logger, Utils } from "../../utils/utils"
 import { ButtonDesigner } from "../button-designer.service"
 
 type CardSelectorOptions = Partial<CardSelector>
@@ -174,65 +174,65 @@ function generateCardSelector(args?: CardSelectorOptions): CardSelector {
 }
 function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEventOptionsSelector): EventCardSelector {
     let event = new EventCardSelector
-    event.cardSelector = generateCardSelector(args?.cardSelector)
+    event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = subType
 
     switch(subType){
         case('selectCardForcedSell'):{
-            event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
-            event.cardSelector.selectionQuantityTreshold = 'min'
+            event.setSelectorInitialState({selectable: true, ignoreCost: true})
+            event.setSelectorQuantityTreshold('min')
             event.lockSellButton = true
             event.lockRollbackButton = true
             break
         }
         case('selectCardOptionalSell'):{
-            event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
-            event.cardSelector.selectionQuantityTreshold = 'min'
-            event.cardSelector.selectionQuantity = 1
+            event.setSelectorInitialState({selectable: true, ignoreCost: true})
+            event.setSelectorQuantityTreshold('min')
+            event.setSelectorQuantity(1)
             event.title = 'Select any number of cards to sell'
 			event.lockDisplayUpgraded = true
 			event.lockRollbackButton = true
             break
         }
         case('researchPhaseResult'):
-			event.title = `Select ${event.cardSelector.selectionQuantity} cards to draw`
-            event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
-            event.cardSelector.selectionQuantityTreshold = 'equal'
+			event.title = `Select ${event.getSelectorQuantity()} cards to draw`
+            event.setSelectorInitialState({selectable:true, ignoreCost: true})
+            event.setSelectorQuantityTreshold('equal')
             event.refreshSelectorOnSwitch = false
             event.waiterId = args?.waiterId
 			break
         case('selectStartingHand'):{
             event.title = 'Discard any card number to draw that many new cards.'
-            event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
-            event.cardSelector.selectionQuantityTreshold = 'min'
-            event.cardSelector.selectionQuantity = 0
+            event.setSelectorInitialState({selectable:true, ignoreCost: true})
+            event.setSelectorQuantityTreshold('min')
+            event.setSelectorQuantity(0)
             event.refreshSelectorOnSwitch = true
             break
         }
         case('selectCorporation'):case('selectMerger'):{
             event.title = args?.isMerger?'Select your Merger':'Select your Corporation'
-            event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
-            event.cardSelector.selectionQuantityTreshold = 'equal'
-            event.cardSelector.selectionQuantity = 1
+            event.setSelectorInitialState({selectable:true, ignoreCost: true})
+            event.setSelectorQuantityTreshold('equal')
+            event.setSelectorQuantity(1)
             event.refreshSelectorOnSwitch = false
             break
         }
 		case('recallCardInHand'):{
 			event.title = 'Return target event in hand.'
-            event.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
-            event.cardSelector.selectionQuantityTreshold = 'max'
-			event.cardSelector.selectionQuantity = 1
-			event.cardSelector.filter = {type:ProjectFilterNameEnum.syntheticCatastrophe}
+            event.setSelectorInitialState({selectable: true, ignoreCost: true})
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorQuantity(1)
+			event.setSelectorFilter({type:ProjectFilterNameEnum.syntheticCatastrophe})
             event.lockSellButton = true
             event.lockRollbackButton = true
             break
 		}
 		case('doubleProduction'):{
 			event.title = 'Select a production card that will produce a second time'
-			event.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
-            event.cardSelector.selectionQuantityTreshold = 'max'
-            event.cardSelector.selectionQuantity = 1
-			event.cardSelector.filter = {type:ProjectFilterNameEnum.doubleProduction}
+			event.setSelectorInitialState({selectable:true, ignoreCost: true})
+            event.setSelectorQuantityTreshold('max')
+            event.setSelectorQuantity(1)
+			event.setSelectorFilter({type:ProjectFilterNameEnum.doubleProduction})
             event.refreshSelectorOnSwitch = true
 			break
 		}
@@ -261,10 +261,10 @@ function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, arg
 function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): EventComplexCardSelector {
 	let event = new EventComplexCardSelector
 	let title = ''
-    event.cardSelector = generateCardSelector(args?.cardSelector)
+        event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = 'discardCards'
 	event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
-	switch(event.cardSelector.selectionQuantityTreshold){
+	switch(event.getSelectorQuantityTreshold()){
 		case('equal'):{
 			title = args?.title? args.title: `Select ${args?.cardSelector?.selectionQuantity??0} card(s) to discard.`
 			break
@@ -281,7 +281,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 		}
 	}
 	event.title = title
-	event.cardSelector.cardInitialState = args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true}
+	event.setSelectorInitialState(args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true})
 	event.lockSellButton = true
 	event.lockRollbackButton = true
 	if(args?.discardOptions){
@@ -296,9 +296,9 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			let event = new EventComplexCardSelector
             event.title = `Brainstorming sessions: gain 1MC if card is green or draw card if Red/Blue.`
             event.refreshSelectorOnSwitch = false
-            event.cardSelector.selectionQuantityTreshold = 'max'
-			event.cardSelector.selectFrom = cardList
-			event.cardSelector.selectionQuantity = keep
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(keep)
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
@@ -310,111 +310,111 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			let event = new EventComplexCardSelector
             event.title = `Calestior: select a card with Event tag.`
             event.refreshSelectorOnSwitch = false
-            event.cardSelector.selectionQuantityTreshold = 'max'
-			event.cardSelector.selectFrom = cardList
-			event.cardSelector.selectionQuantity = keep
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(keep)
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
-			event.cardSelector.filter = {type: ProjectFilterNameEnum.hasTagEvent}
+			event.setSelectorFilter({type: ProjectFilterNameEnum.hasTagEvent})
 			event.waiterId = waiter
-			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.devTechs):{
 			let event = new EventComplexCardSelector
             event.title = `Dev Techs: select a green card.`
             event.refreshSelectorOnSwitch = false
-            event.cardSelector.selectionQuantityTreshold = 'max'
-			event.cardSelector.selectFrom = cardList
-			event.cardSelector.selectionQuantity = keep
+			event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(keep)
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
-			event.cardSelector.filter = {type: ProjectFilterNameEnum.greenProject}
+			event.setSelectorFilter({type: ProjectFilterNameEnum.greenProject})
 			event.waiterId = waiter
-			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.advancedScreeningTechnology):{
 			let event = new EventComplexCardSelector
             event.title = `Advanced screening technology : select a card with a Plant or Science tag.`
             event.refreshSelectorOnSwitch = false
-            event.cardSelector.selectionQuantityTreshold = 'max'
-			event.cardSelector.selectFrom = cardList
-			event.cardSelector.selectionQuantity = 1
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(1)
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
-			event.cardSelector.filter = {type: ProjectFilterNameEnum.hasTagPlantOrScience}
+			event.setSelectorFilter({type: ProjectFilterNameEnum.hasTagPlantOrScience})
 			event.waiterId = waiter
-			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.inventionContest):{
 			let event = new EventComplexCardSelector
             event.title = `Invention contest : select one card to keep.`
             event.refreshSelectorOnSwitch = false
-            event.cardSelector.selectionQuantityTreshold = 'equal'
-			event.cardSelector.selectFrom = cardList
-			event.cardSelector.selectionQuantity = 1
+            event.setSelectorQuantityTreshold('equal')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(1)
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = false
 			event.scanKeepOptions = options
 			event.waiterId = waiter
-			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.actionPhaseScan):{
 			let event = new EventComplexCardSelector
             event.title = `Action phase scan : select one red or blue card to keep.`
             event.refreshSelectorOnSwitch = false
-            event.cardSelector.selectionQuantityTreshold = 'max'
-			event.cardSelector.selectFrom = cardList
-			event.cardSelector.selectionQuantity = 1
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(1)
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
-			event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
+			event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
 			event.waiterId = waiter
-			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.modPro):{
 			let event = new EventComplexCardSelector
             event.title = `Add one card to hand sharing a tag with Modpro Corporation.`
             event.refreshSelectorOnSwitch = false
-            event.cardSelector.selectionQuantityTreshold = 'max'
-			event.cardSelector.selectFrom = cardList
-			event.cardSelector.selectionQuantity = 1
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(1)
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
-			event.cardSelector.filter = {type: ProjectFilterNameEnum.authorizedTag, authorizedTag: authorizedTag}
+			event.setSelectorFilter({type: ProjectFilterNameEnum.authorizedTag, authorizedTag: authorizedTag})
 			event.waiterId = waiter
-			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.ringCom):{
 			let event = new EventComplexCardSelector
             event.title = `Ringcom - Select up to two Jovian cards to add to your hand.`
             event.refreshSelectorOnSwitch = false
-            event.cardSelector.selectionQuantityTreshold = 'max'
-			event.cardSelector.selectFrom = cardList
-			event.cardSelector.selectionQuantity = keep
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(keep)
 			event.subType = 'scanKeepResult'
 			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
-			event.cardSelector.filter = {type: ProjectFilterNameEnum.authorizedTag, authorizedTag: authorizedTag}
+			event.setSelectorFilter({type: ProjectFilterNameEnum.authorizedTag, authorizedTag: authorizedTag})
 			event.waiterId = waiter
-			event.cardSelector.stateFromParent = {selectable: true, ignoreCost: true}
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
 		default:{
@@ -425,15 +425,15 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 }
 function createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: CreateEventOptionsSelector): EventCardSelectorRessource {
     let event = new EventCardSelectorRessource
-    event.cardSelector = generateCardSelector(args?.cardSelector)
+        event.setCardSelector(generateCardSelector(args?.cardSelector))
 
     event.subType = 'addRessourceToSelectedCard'
     event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
     event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`
-    event.cardSelector.filter =  {type:ProjectFilterNameEnum.stockable, stockableType:event.advancedRessource?.name}
-    event.cardSelector.cardInitialState = {selectable: true, ignoreCost:true}
-    event.cardSelector.selectionQuantityTreshold = 'equal'
-    event.cardSelector.selectionQuantity = 1
+    event.setSelectorFilter({type:ProjectFilterNameEnum.stockable, stockableType:event.advancedRessource?.name})
+    event.setSelectorInitialState({selectable: true, ignoreCost:true})
+    event.setSelectorQuantityTreshold('equal')
+    event.setSelectorQuantity(1)
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
     event.refreshSelectorOnSwitch = false
 
@@ -441,10 +441,10 @@ function createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: Cr
 }
 function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEventOptionsSelector): EventCardActivator {
     let event = new EventCardActivator
-    event.cardSelector = generateCardSelector(args?.cardSelector)
+    event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = subType
-    event.cardSelector.filter = {type: ProjectFilterNameEnum.action}
-    event.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
+    event.setSelectorFilter({type: ProjectFilterNameEnum.action})
+    event.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
     event.title = 'Action Phase'
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 
@@ -458,8 +458,8 @@ function generateCardBuilder(builderId:number, option?:BuilderOption): CardBuild
 }
 function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType, builderOption?: BuilderOption): EventCardBuilder {
     let event = new EventCardBuilder
-    event.cardSelector = generateCardSelector()
-    event.cardSelector.cardInitialState = {selectable: false, buildable: true}
+    event.setCardSelector(generateCardSelector())
+    event.setSelectorInitialState({selectable: false, buildable: true})
     event.subType = subType
     event.cardBuilder = []
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
@@ -513,7 +513,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					builder.setOption(builderOption)
 					event.cardBuilder.push(builder)
 					buildDiscountValue = 11
-					event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
+					event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
 
 					event.title = 'Play an additional Blue or Red card with a 11MC discount'
 					break
@@ -522,7 +522,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					let builder = generateCardBuilder(0)
 					builder.setOption(builderOption)
 					event.cardBuilder.push(builder)
-					event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
+					event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
 
 					event.title = 'Play an additional Blue or Red card.'
 					break
@@ -533,7 +533,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					builder.setOption(builderOption)
 					event.cardBuilder.push(builder)
 					buildDiscountValue = 100
-					event.cardSelector.filter = {type: ProjectFilterNameEnum.green9MCFree}
+					event.setSelectorFilter({type: ProjectFilterNameEnum.green9MCFree})
 
 					event.title = "Play a green card which value is 9MC or less without paying it's cost"
 					break
@@ -561,7 +561,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					builder.setOption(builderOption)
 					event.cardBuilder.push(builder)
 					buildDiscountValue = 100
-					event.cardSelector.filter = {type: ProjectFilterNameEnum.maiNiProductions}
+					event.setSelectorFilter({type: ProjectFilterNameEnum.maiNiProductions})
 
 					event.title = "Play a card of any color which value is 12MC or less without paying it's cost"
 					break
@@ -575,12 +575,12 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
     switch(subType){
         case('developmentPhaseBuilder'):{
             event.title = 'Play Green cards :'
-            event.cardSelector.filter = {type: ProjectFilterNameEnum.greenProject}
+            event.setSelectorFilter({type: ProjectFilterNameEnum.greenProject})
             break
         }
         case('constructionPhaseBuilder'):{
             event.title = 'Play Blue or Red cards'
-            event.cardSelector.filter = {type: ProjectFilterNameEnum.blueOrRedProject}
+            event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
             break
         }
 		case('specialBuilder'):{
