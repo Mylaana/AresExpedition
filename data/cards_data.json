@@ -1449,8 +1449,8 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_event$ :$skipline$2 $ressource_heat$ 2 $ressource_plant$",
-            "fr": "$tag_event$ :$skipline$2 $ressource_heat$ 2 $ressource_plant$"
+            "en": "$tag_event$:$skipline$$ressource_heat$$ressource_heat$$skipline$$ressource_plant$$ressource_plant$",
+            "fr": "$tag_event$:$skipline$$ressource_heat$$ressource_heat$$skipline$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "EFFECT: When you play an $tag_event$, you gain 2 heat and 2 plants.",
@@ -2270,7 +2270,7 @@
             "fr": "Com\u00e8te "
         },
         "playedText": {
-            "en": "Increase the temperature 1 step.$$Flip an ocean tile.",
+            "en": "Increase the temperature 1 step.$skipline$Flip an ocean tile.",
             "fr": "Augmentez la tempr\u00e9taure de 1 niveau. $skipline$R\u00e9v\u00e9lez une tuile Oc\u00e9an. "
         },
         "status": "validated",
@@ -2861,7 +2861,7 @@
             "fr": "D\u00e9monstration Technologique "
         },
         "playedText": {
-            "en": "Flip an ocean tile.$$Draw 2 cards.",
+            "en": "Flip an ocean tile.$skipline$Draw 2 cards.",
             "fr": "R\u00e9v\u00e9lez une tuile Oc\u00e9an. $skipline$ Piochez deux cartes. "
         },
         "status": "validated",
@@ -2903,7 +2903,7 @@
             "fr": "Remorquage de Com\u00e8te "
         },
         "playedText": {
-            "en": "Increases oxygen 1 step. Flip an ocean tile. Gain 2 plants.",
+            "en": "Increases oxygen 1 step.$skipline$Flip an ocean tile.$skipline$Gain 2 plants.",
             "fr": "Augmentez l'oxyg\u00e8ne de 1 niveau. $skipline$ R\u00e9v\u00e9lez une tuile Oc\u00e9an. $skipline$ Gagnez 2 plantes. "
         },
         "status": "validated",
@@ -6903,7 +6903,7 @@
             "fr": "Transport Cryog\u00e9nique"
         },
         "playedText": {
-            "en": "Upgrade a phase card.\nAdd 3$ressource_microbe$ OR add 2$ressource_animal$ to another card.",
+            "en": "Upgrade a phase card.$skipline$Add 3$ressource_microbe$ OR add 2$ressource_animal$ to another card.",
             "fr": "Am\u00e9liorez une carte Phase $skipline$ Ajoutez 3 microbes ou 2 animaux  \u00e0 une AUTRE carte. "
         },
         "status": "validated",
@@ -6923,8 +6923,8 @@
             "fr": "Exocombinaisons"
         },
         "playedText": {
-            "en": "Upgrade a phase card.\nDraw a card.",
-            "fr": "Am\u00e9liorez une carte Phase. $skipline$ Piochez une carte. "
+            "en": "Upgrade a phase card.$skipline$Draw a card.",
+            "fr": "Am\u00e9liorez une carte Phase.$skipline$ Piochez une carte. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8523,6 +8523,39 @@
         ],
         "startingMegacredits": 43,
         "status": "validated",
+        "vpScaling": "1"
+    },
+    {
+        "card_code": "P12B",
+        "origin": "promo",
+        "tagsId": [
+            6,
+            7
+        ],
+        "cardType": "corporation",
+        "vpNumber": "*",
+        "title": {
+            "en": "ArkLight B",
+            "fr": "ArkLight B"
+        },
+        "vpText": {
+            "en": "/ $ressource_animal$$ressource_animal$",
+            "fr": "/ $ressource_animal$$ressource_animal$"
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$",
+            "fr": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you play an ANIMAL or PLANT, including these, add an animal to this card.",
+            "fr": ""
+        },
+        "stockable": [
+            "animal"
+        ],
+        "startingMegacredits": 43,
+        "status": "blocked",
         "vpScaling": "1"
     },
     {
