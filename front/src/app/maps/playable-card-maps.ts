@@ -26,7 +26,8 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'P11', //Self Replicating Bacteria
 ]
 export const ACTIVATION_NO_COST: string[] = [
-	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03', 'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32'
+	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03',
+	'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'FM11', 'FM15'
 ]
 export const ALTERNATIVE_PAY_TRIGGER_LIST: string[] = [
 	'5', '52'
@@ -264,6 +265,14 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Modpro
 	'P32': () => [
 		EventFactory.simple.scanKeep({scan:4, keep:1}, DeckQueryOptionsEnum.modPro)
+	],
+	//Pride of the earth Arkship
+	'FM11': (cardCode, state) => [
+		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 5)}, cardCode)
+	],
+	//Ants
+	'FM15': (cardCode, state) => [
+		EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:state.getTagsOfType('microbe')}, cardCode)
 	],
 }
 export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
@@ -597,6 +606,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'P04': (s) => Checker.isOceanOk(2, 'min', s),
 	//Mercurian Alloys
 	'FM6': (s) => Checker.isTagOk('science', 2, 'min', s),
+	//Mercurian Alloys
+	'FM11': (s) => Checker.isTagOk('science', 4, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -1593,7 +1604,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 			{ name: 'megacredit', valueStock: 3 },
 			{ name: 'titanium', valueStock: 1 }
 		]),
-		EventFactory.simple.scanKeep({scan:15, keep:2}, DeckQueryOptionsEnum.ringCom)
+		//EventFactory.simple.scanKeep({scan:15, keep:2}, DeckQueryOptionsEnum.ringCom)
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
@@ -1627,6 +1638,8 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	'FM2': (card) => {
 		return card.hasTag('space') && card.hasTag('event')?10:0
 	},
+	//Meat industry
+	'FM4': (card) => card.hasTag('plant') || card.hasTag('animal')?3:0,
 	//Space Relay
 	'FM14': (card) => card.hasTag('jovian')? 5 : 0
 }
@@ -1820,14 +1833,14 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'P03': (s)=> [{name:'megacredit', valueStock:(s.getTagsOfType('animal') + s.getTagsOfType('plant'))}],
 	//Laboratories
 	'P05': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('science') /3)}],
-	//Meat Industries
-	'FM4': (s)=> {
-		let total: number = 1
-		for(let c of s.getPlayedListWithStockableTypes('animal')){
-			total += c.getStockValue('animal')
-		}
-		return [{name:'megacredit',	valueStock:Math.floor(total/2)}]
+	//Arklight B
+	'P12B': (s)=> {
+		let stock = s.getProjectPlayedStock('P12B')
+		if(stock && stock.length<1){return []}
+			return [{name:'megacredit',	valueStock: stock[0].valueStock}]
 	},
+	//Ringcom
+	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /3)}],
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms

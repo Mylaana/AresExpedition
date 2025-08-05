@@ -151,10 +151,8 @@ const S = EventFactory.simple
 	//Interplanetary Conference
 	function handleTrigger_37(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
-		for(let tag of input.tagList){
-			if(tag === GlobalInfo.getIdFromType('earth','tag') || tag === GlobalInfo.getIdFromType('jovian','tag')){
-				return [S.draw(1)]
-			}
+		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag')) || input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))){
+			return [S.draw(1)]
 		}
 		return []
 	}
@@ -256,6 +254,13 @@ const S = EventFactory.simple
 	function handleTrigger_FM2(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false || input.tagList.includes(GlobalInfo.getIdFromType('space','tag'))===false){return []}
 		return [S.draw(2)]
+	}
+	//Meat Industry
+	function handleTrigger_FM4(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')) || input.tagList.includes(GlobalInfo.getIdFromType('animal','tag'))){
+			return [S.draw(1)]
+		}
+		return []
 	}
 	//Space Relay
 	function handleTrigger_FM14(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -379,9 +384,11 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'D04': handleTrigger_D04,
 		'D08': handleTrigger_D08,
 		'P12': handleTrigger_P12,
+		'P12B': handleTrigger_P12,
 		'P19': handleTrigger_P19_OnTagGained,
 		'CF1': handleTrigger_CF1,
 		'FM2': handleTrigger_FM2,
+		'FM4': handleTrigger_FM4,
 		'FM14': handleTrigger_FM14,
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
