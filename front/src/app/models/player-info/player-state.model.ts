@@ -76,8 +76,10 @@ export class PlayerStateModel {
 
 	//scoreState
 	getMilestoneCompleted(): number {return this.scoreState.getClaimedMilestoneCount()}
-	addMilestoneCompleted(milestone: MilestonesEnum){this.scoreState.addMilestoneCompleted(milestone)}
+	claimMilestone(milestone: MilestonesEnum){this.scoreState.addMilestoneCompleted(milestone)}
 	getClaimedMilestoneList(): MilestonesEnum[] {return this.scoreState.getClaimedMilestoneList()}
+	getMilestonesVp(): number {return this.getMilestoneCompleted() * 3}
+	getAwardsVp(): number {return this.scoreState.getAwardsVp()}
 	getBaseVP(): number {return this.scoreState.getBaseVP()}
 	getTotalVP(): number {return this.scoreState.getTotalVP()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}

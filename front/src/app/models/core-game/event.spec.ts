@@ -68,8 +68,8 @@ describe('Models - Event', () => {
             it('should evaluate updateCardSelection', () => {
                 let testCardId = 'P28'
                 event.updateCardSelection(cardInfoService.getProjectCardList([testCardId]))
-                expect(event.cardSelector.selectedList.length).toEqual(1)
-                expect(event.cardSelector.selectedList[0].cardCode).toEqual(testCardId)
+                expect(event.getSelectorSelectedQuantity()).toEqual(1)
+                expect(event.getSelectorSelectedList()[0].cardCode).toEqual(testCardId)
             })
         })
     })
@@ -109,7 +109,7 @@ describe('Models - Event', () => {
                 expect(builder.getBuilderIsLocked()).toEqual(false)
             })
             it('should evaluate setCardBuilt returning false', () => {
-                builder.setBSuilderIsLocked()
+                builder.setBuilderIsLocked()
                 expect(builder.getBuilderIsLocked()).toEqual(true)
             })
         })

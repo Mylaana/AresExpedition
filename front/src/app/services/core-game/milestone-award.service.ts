@@ -251,7 +251,8 @@ export class MilestoneAwardService {
 		}
 	}
 	private claimMilestone(milestone: MilestonesEnum){
-		this.clientState.addMilestoneCompleted(milestone)
+		if(this.gameStateService.getClientState().getClaimedMilestoneList().includes(milestone)){return}
+		this.gameStateService.claimMilestone(milestone)
 		this.addPlayerClaimedMilestoneToSet(this.clientState)
 	}
 	private getStateOrClientState(state: PlayerStateModel): PlayerStateModel {
@@ -274,16 +275,19 @@ export class MilestoneAwardService {
 
 		for(let a of this.awardCards){
 			let firstValue = a.value[0].playersValue
+			let firstPoints = a.value.filter((el) => el.playersValue===firstValue).length<=1?5:4
 			let otherValueGroup = a.value.filter((el) => el.playersValue<firstValue)
 			let secondValue: number | undefined
+			let secondPoints = otherValueGroup.length<=1?2:1
 			if(otherValueGroup.length!=0){secondValue = otherValueGroup[0].playersValue}
 			for(let player of a.value){
 				if(player.color===clientColor){
-					result += player.playersValue===firstValue?5:0
-					result += (secondValue && player.playersValue===secondValue)?2:0
+					result += player.playersValue===firstValue?firstPoints:0
+					result += (secondValue!=undefined && player.playersValue===secondValue)?secondPoints:0
 				}
 			}
 		}
+
 		return result
 	}
 }

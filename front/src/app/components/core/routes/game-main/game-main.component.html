@@ -7,14 +7,14 @@
 </div>
 <div class="background-image nav-background" *ngIf="loaded && _connected  && !_gameOver" @fadeIn></div>
 <nav *ngIf="loaded && _connected && !_gameOver" id="navbar" [class.settings-openned]="_settings">
-	<app-navigation  [clientPlayerId]="clientId" [isScrolled]="isScrolled"></app-navigation>
+	<app-navigation  [clientPlayerId]="clientId" [isScrolled]="isScrolled" [gameOver]="_gameOver"></app-navigation>
 </nav>
 <div id="settings" *ngIf="_settings" @fadeInFadeOut>
 	<app-settings
 		(closeSettings)="closeSettings()">
 	</app-settings>
 </div>
-<app-game-over *ngIf="_gameOver"></app-game-over>
+<app-game-over *ngIf="_gameOver" [gameOver]="_gameOver"></app-game-over>
 <div @fadeIn *ngIf="loaded && _connected" [ngClass]="['wrapper-app', _cardSize]"
 	[class.settings-openned]="_settings">
     <div class="wrapper-main">

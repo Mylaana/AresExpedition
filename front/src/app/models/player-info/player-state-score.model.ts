@@ -25,9 +25,8 @@ export class PlayerScoreStateModel {
 		return this.claimedMilestones
 	}
 	getClaimedMilestoneCount(): number {return this.claimedMilestones.length}
-	setAwardsVp(vp: number){
-		this.awardsVp = vp
-	}
+	setAwardsVp(vp: number){this.awardsVp = vp}
+	getAwardsVp(): number {return this.awardsVp}
 	addBaseVP(points: number): void {this.vp += points}
 	getBaseVP(): number {return this.vp }
 	getTotalVP(): number {

@@ -3,7 +3,7 @@
 	#builder
 	[event]="event"
 	[cardBuilder]="builder"
-	[projectFilter]="currentEvent.cardSelector.filter"
+	[projectFilter]="currentEvent.getSelectorFilter()"
 	[discount]="currentEvent.buildDiscountValue"
 	[cardSize]="cardSize"
 	(cardBuilderListButtonClicked)="onCardBuilderButtonClicked($event)"

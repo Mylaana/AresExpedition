@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CardType, CardTypeColor } from '../../../../../types/project-card.type';
-import { Utils } from '../../../../../utils/utils';
+import { Component, Input } from '@angular/core';
+import { CardType } from '../../../../../types/project-card.type';
 import { CommonModule } from '@angular/common';
 import { SettingCardSize } from '../../../../../types/global.type';
 

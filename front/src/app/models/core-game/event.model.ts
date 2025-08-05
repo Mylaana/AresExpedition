@@ -1,13 +1,14 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType } from "../../types/event.type";
-import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
-import { EventCardBuilderButtonNames, TagType } from "../../types/global.type";
+import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, MinMaxEqualTreshold, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton  } from "./button.model";
+import { ButtonNames, EventCardBuilderButtonNames, MinMaxEqualType, NonEventButtonNames, TagType } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { BuilderType } from "../../types/phase-card.type";
+import { Utils } from "../../utils/utils";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -39,7 +40,7 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
     override title: string = 'no title provided'
     override button?: EventMainButtonSelector
     refreshSelectorOnSwitch: boolean = true
-    cardSelector: CardSelector = {
+    protected cardSelector: CardSelector = {
         selectFrom: [],
         selectedList: [],
         selectionQuantity: 0,
@@ -70,6 +71,25 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
     override getSelectionActive(): boolean {
         return this.selectionActive
     }
+	setCardSelector(selector: CardSelector){this.cardSelector = selector}
+	getCardSelector():CardSelector{return this.cardSelector}
+	getSelectorQuantity(): number {return this.cardSelector.selectionQuantity}
+	setSelectorQuantity(quantity: number){this.cardSelector.selectionQuantity = quantity}
+	getSelectorSelectFrom(): PlayableCardModel[] {return this.cardSelector.selectFrom}
+	setSelectorSelectFrom(selectFrom: PlayableCardModel[]) {this.cardSelector.selectFrom = selectFrom}
+	getSelectorSelectedList(): PlayableCardModel[] {return this.cardSelector.selectedList}
+	hasSelectorCardSelected(): boolean {return this.cardSelector.selectedList.length>0}
+	getSelectorSelectedQuantity():number {return this.getSelectorSelectedList().length}
+	getSelectorFilter(): ProjectFilter | undefined {return this.cardSelector.filter}
+	setSelectorFilter(filter: ProjectFilter){this.cardSelector.filter = filter}
+	setSelectorStateFromParent(state: Partial<CardState>) {this.cardSelector.stateFromParent = Utils.toFullCardState(state)}
+	setSelectorFilterAuthorizedTag(tagType: TagType | TagType[]) {
+		if(!this.cardSelector.filter){return}
+		this.cardSelector.filter.authorizedTag = Utils.toArray(tagType)
+	}
+	setSelectorQuantityTreshold(tresholdType: MinMaxEqualType){this.cardSelector.selectionQuantityTreshold = tresholdType}
+	getSelectorQuantityTreshold():MinMaxEqualType {return this.cardSelector.selectionQuantityTreshold}
+	setSelectorInitialState(state: Partial<CardState>){this.cardSelector.cardInitialState = Utils.toFullCardState(state)}
 }
 
 export class EventCardSelector extends EventBaseCardSelector{
@@ -213,7 +233,7 @@ export class CardBuilder {
                 break
             }
             case('buildCard'):case(BuilderOption.drawCard):case(BuilderOption.gain6MC):{
-                this.setBSuilderIsLocked()
+                this.setBuilderIsLocked()
                 break
             }
         }
@@ -225,10 +245,11 @@ export class CardBuilder {
     }
     getSelectedCard(): PlayableCardModel {return this.selectedCard as PlayableCardModel}
     removeSelectedCard(): void {
+		console.log('removed')
 		this.selectedCard = undefined
         this.updateButtonGroupState('cancelSelectCard')
 	}
-    setBSuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
+    setBuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
     getBuilderIsLocked(): boolean {
 		if(this.option===BuilderOption.developmentSecondBuilder && !this.firstCardBuilt){
 			return true
@@ -262,6 +283,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
     cardBuilderIdHavingFocus?: number
     buildDiscountValue!: number
     buildDiscountUsed!: boolean
+	alternativeCostUsedButtonName: NonEventButtonNames[] = []
 	builderType!: BuilderType
     override hasCardBuilder(): boolean {return true}
     override updateCardSelection(selection: PlayableCardModel[]): void {
@@ -365,6 +387,12 @@ export class EventCardBuilder extends EventBaseCardSelector {
 			}
 		}
 		this.button.setEnabled(true)
+	}
+	onAlternativeCostUse(buttonName: NonEventButtonNames){
+		this.alternativeCostUsedButtonName.push(buttonName)
+	}
+	getAlternativeCostUsed(): NonEventButtonNames[] {
+		return this.alternativeCostUsedButtonName
 	}
 }
 

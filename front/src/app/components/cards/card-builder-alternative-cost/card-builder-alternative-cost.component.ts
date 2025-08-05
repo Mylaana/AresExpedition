@@ -9,6 +9,7 @@ import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
+import { ALTERNATIVE_PAY_BUTTON_NAME } from '../../../maps/playable-card-maps';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',
@@ -25,6 +26,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	@Output() buttonClicked = new  EventEmitter<any>()
 	@Input() builder!: CardBuilder
 	@Input() cardSize!: SettingCardSize
+	@Input() alreadyUsedButtons: NonEventButtonNames[] = []
 	_buttons: NonEventButton[] = []
 	_used: NonEventButtonNames[] = []
 
@@ -49,6 +51,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		this.destroy$.complete()
 	}
 	updateButtonList(){
+		if(!this.clientState){return}
 		this._buttons = []
 		let alternativeCardCode: string[] = PlayableCard.getAlternativePayActiveCodeList(this.clientState)
 		if(alternativeCardCode.length===0){return}
@@ -57,38 +60,39 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 			if(!caption){continue}
 			this._buttons.push(ButtonDesigner.createNonEventButton(caption))
 		}
-		this.updateButtonEnabled()
 	}
 	public updateButtonEnabled(){
+		this.updateButtonList()
 		for(let b of this._buttons){
 			b.setEnabled(this.getButtonEnabled(b))
 		}
 	}
 	private getButtonEnabled(button: NonEventButton): boolean {
+		if(this.locked){return false}
 		if(this.getAlternativePayLocked()){return false}
 		if(this._used.includes(button.name)){return false}
+		if(this.alreadyUsedButtons.includes(button.name)){return false}
 		return PlayableCard.prerequisite.canBeAlternativePaid(button.name, this.clientState)
 	}
 	onClientStateUpdate(state: PlayerStateModel){
 		this.clientState = state
-		this.updateButtonList()
+		this.updateButtonEnabled()
 	}
 	onButtonClicked(button: NonEventButton){
-		console.log(button)
 		let events = PlayableCard.getAlternativePayButtonClickedEvents(button.name)
 		if(events.length===0){return}
 		this.gameStateService.addEventQueue(events, 'first')
 		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
 		switch(button.name){
 			case('alternativePayAnaerobicMicroorganisms'):{
-				console.log(builderEvent)
 				builderEvent.buildDiscountValue += 10
+				builderEvent.onAlternativeCostUse(button.name)
 				this._used.push(button.name)
 				break
 			}
 			case('alternativePayRestructuredResources'):{
-				console.log(builderEvent)
 				builderEvent.buildDiscountValue += 5
+				builderEvent.onAlternativeCostUse(button.name)
 				this._used.push(button.name)
 				break
 			}
@@ -98,7 +102,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	}
 	getAlternativePayLocked(): boolean {
 		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
-		if(builderEvent.cardSelector.selectFrom.length===0){return true}
+		if(builderEvent.hasSelectorCardSelected()===true){return true}
 		return !builderEvent.cardBuilder[0].getBuilderIsLocked() && builderEvent.cardBuilder[0] != this.builder
 	}
 }

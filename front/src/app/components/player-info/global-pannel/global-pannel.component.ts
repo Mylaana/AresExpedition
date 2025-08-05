@@ -23,6 +23,7 @@ export class GlobalPannelComponent implements OnInit{
   @Input() playerIsReady!: boolean
   @Input() playerPhase!: PlayerPhase
   @Input() currentPhase!: NonSelectablePhaseEnum
+  @Input() gameOver!: boolean
 
 	private gameOptions!: GameOption
 

@@ -39,7 +39,9 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 
 	let content: EventStateBuilderContentDTO = {
 		s: status,
-		o: specialBuilderOption??''
+		o: specialBuilderOption??'',
+		ac: event.alternativeCostUsedButtonName,
+		d: event.buildDiscountValue
 	}
 
 	return {
@@ -115,7 +117,7 @@ function eventComplexSelectorToJson(event: EventComplexCardSelector): EventState
 	switch(event.subType){
 		case('discardCards'):{
 			let content: EventStateContentDiscardDTO = {
-				d: event.cardSelector.selectionQuantity
+				d: event.getSelectorQuantity()
 			}
 			return {
 				o: EventStateOriginEnum.create,

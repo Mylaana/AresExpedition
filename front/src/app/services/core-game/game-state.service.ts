@@ -16,7 +16,7 @@ import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { GameParamService } from "./game-param.service";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
-import { AwardsEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
+import { AwardsEnum, GlobalParameterNameEnum, MilestonesEnum } from "../../enum/global.enum";
 import { EventStateService } from "../../factory/event-state-service.service";
 import { EventFactory } from "../../factory/event/event-factory";
 import { ActivationOption } from "../../types/project-card.type";
@@ -896,5 +896,13 @@ export class GameState{
 	}
 	setMilestone(milestone: MilestoneState){
 		this.milestones.next(milestone)
+	}
+	claimMilestone(milestone: MilestonesEnum){
+		let state = this.getClientState()
+		state.claimMilestone(milestone)
+		let newEvents = PlayableCard.getOnTriggerredEvents('ON_MILESTONE_CLAIMED', state.getTriggersIdActive(), state, {})
+		if(newEvents.length>0){
+			this.addEventQueue(newEvents, 'first')
+		}
 	}
 }

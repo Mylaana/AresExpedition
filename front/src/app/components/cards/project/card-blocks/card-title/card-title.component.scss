@@ -22,7 +22,7 @@ p{
 	font-weight: bold;
 	font-style: italic;
 	text-align: center;
-	font-size: var(--card-title-size);
+	font-size: var(--card-title-size) !important;
 }
 .white {
 	text-size-adjust: 50%;
