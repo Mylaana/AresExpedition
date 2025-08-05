@@ -114,7 +114,7 @@ describe('Service - Designers - Event', () => {
 
             expectedEvent = new EventCardSelector
             expectedEvent.button = undefined
-            expectedEvent.cardSelector = expectedSelector
+            expectedEvent.setCardSelector(expectedSelector)
             expectedWaiterId = 5
         })
         describe('UNIT TEST', () => {
@@ -122,8 +122,8 @@ describe('Service - Designers - Event', () => {
                 expectedSubType = 'selectCardForcedSell'
                 expectedEvent.subType = expectedSubType
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
-                expectedEvent.cardSelector.selectionQuantityTreshold = 'min'
+                expectedEvent.setSelectorInitialState({selectable: true, ignoreCost: true})
+                expectedEvent.setSelectorQuantityTreshold('min')
 				expectedEvent.lockRollbackButton = true
 				expectedEvent.lockSellButton = true
 
@@ -140,7 +140,7 @@ describe('Service - Designers - Event', () => {
 				expectedSelector.selectionQuantityTreshold = 'min'
 
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
+                expectedEvent.setSelectorInitialState({selectable: true, ignoreCost: true})
 				expectedEvent.lockRollbackButton = true
 				expectedEvent.lockDisplayUpgraded = true
 
@@ -153,9 +153,9 @@ describe('Service - Designers - Event', () => {
                 expectedSubType = 'researchPhaseResult'
                 expectedEvent.subType = expectedSubType
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} cards to draw`
-                expectedEvent.cardSelector.cardInitialState = {selectable:true, ignoreCost: true}
-                expectedEvent.cardSelector.selectionQuantityTreshold = 'equal'
+                expectedEvent.title = `Select ${expectedEvent.getSelectorQuantity()} cards to draw`
+                expectedEvent.setSelectorInitialState({selectable:true, ignoreCost: true})
+                expectedEvent.setSelectorQuantityTreshold('equal')
                 expectedEvent.refreshSelectorOnSwitch = false
 				expectedEvent.waiterId = expectedWaiterId
                 expectedArgs = {waiterId:expectedWaiterId}
@@ -198,7 +198,7 @@ describe('Service - Designers - Event', () => {
 
             expectedEvent = new EventCardSelectorRessource
             expectedEvent.button = undefined
-            expectedEvent.cardSelector = expectedSelector
+            expectedEvent.setCardSelector(expectedSelector)
             expectedWaiterId = 5
             expectedRessource = {name:'microbe', valueStock: 5}
         })
@@ -208,10 +208,10 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.subType = expectedSubType
                 const spy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 expectedEvent.advancedRessource = expectedRessource
-                expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
+                expectedEvent.setSelectorInitialState({selectable: true, ignoreCost: true})
                 expectedEvent.title = `Select a card to add ${expectedRessource.valueStock} ${expectedRessource.name}(s).`
-                expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.stockable, stockableType:expectedRessource.name}
-                expectedEvent.cardSelector.selectionQuantity = 1
+                expectedEvent.setSelectorFilter({type:ProjectFilterNameEnum.stockable, stockableType:expectedRessource.name})
+                expectedEvent.setSelectorQuantity(1)
                 expectedEvent.refreshSelectorOnSwitch = false
 
                 let resultEvent = event_factory.EventFactory.createCardSelectorRessource(expectedRessource)
@@ -241,7 +241,7 @@ describe('Service - Designers - Event', () => {
 
             expectedEvent = new EventComplexCardSelector
             expectedEvent.button = undefined
-            expectedEvent.cardSelector = expectedSelector
+            expectedEvent.setCardSelector(expectedSelector)
             expectedWaiterId = 5
         })
         describe('UNIT TEST', () => {
@@ -249,8 +249,8 @@ describe('Service - Designers - Event', () => {
                 expectedSubType = 'discardCards'
                 expectedEvent.subType = expectedSubType
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = {selectable: true, ignoreCost: true}
-                expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
+                expectedEvent.setSelectorInitialState({selectable: true, ignoreCost: true})
+                expectedEvent.title = `Select ${expectedEvent.getSelectorQuantity()} card(s) to discard.`
 				expectedEvent.lockRollbackButton = true
 				expectedEvent.lockSellButton = true
 
@@ -265,8 +265,10 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.subType = expectedSubType
                 expectedArgs = {cardSelector:{cardInitialState:{ignoreCost:true}}}
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = expectedArgs.cardSelector?.cardInitialState
-                expectedEvent.title = `Select ${expectedEvent.cardSelector.selectionQuantity} card(s) to discard.`
+                if(expectedArgs.cardSelector && expectedArgs.cardSelector.cardInitialState){
+					expectedEvent.setSelectorInitialState(expectedArgs.cardSelector.cardInitialState)
+				}
+                expectedEvent.title = `Select ${expectedEvent.getSelectorQuantity()} card(s) to discard.`
                 expectedEvent.lockRollbackButton = true
 				expectedEvent.lockSellButton = true
 
@@ -296,7 +298,7 @@ describe('Service - Designers - Event', () => {
 
             expectedEvent = new EventCardBuilder
             expectedEvent.button = undefined
-            expectedEvent.cardSelector = expectedSelector
+            expectedEvent.setCardSelector(expectedSelector)
 			expectedBuilder = new CardBuilder
         })
         describe('UNIT TEST', () => {
@@ -305,16 +307,16 @@ describe('Service - Designers - Event', () => {
 
                 expectedSubType = 'developmentPhaseBuilder'
                 expectedEvent.subType = expectedSubType
-                expectedEvent.cardSelector = expectedSelector
+                expectedEvent.setCardSelector(expectedSelector)
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.cardSelector.cardInitialState = {selectable: false, buildable: true}
+                expectedEvent.setSelectorInitialState({selectable: false, buildable: true})
                 expectedEvent.refreshSelectorOnSwitch = false
                 expectedEvent.buildDiscountUsed = false
 
                 expectedEvent.title = 'Play Green cards :'
                 expectedEvent.refreshSelectorOnSwitch = true
                 expectedEvent.button = undefined
-                expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.greenProject}
+                expectedEvent.setSelectorFilter({type:ProjectFilterNameEnum.greenProject})
                 expectedEvent.cardBuilder.push(expectedBuilder)
 
 
@@ -350,16 +352,16 @@ describe('Service - Designers - Event', () => {
 
                 expectedSubType = 'constructionPhaseBuilder'
                 expectedEvent.subType = expectedSubType
-                expectedEvent.cardSelector = expectedSelector
+                expectedEvent.setCardSelector(expectedSelector)
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
                 const cardBuilderSpy = spyOn<any>(event_factory.__testOnly__ , 'generateCardBuilder').and.returnValue(new CardBuilder)
-                expectedEvent.cardSelector.cardInitialState = {selectable: false, buildable: true}
+                expectedEvent.setSelectorInitialState({selectable: false, buildable: true})
                 expectedEvent.refreshSelectorOnSwitch = false
                 expectedEvent.buildDiscountUsed = false
                 expectedEvent.title = 'Play Blue or Red cards'
                 expectedEvent.refreshSelectorOnSwitch = true
                 expectedEvent.button = undefined
-                expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.blueOrRedProject}
+                expectedEvent.setSelectorFilter({type:ProjectFilterNameEnum.blueOrRedProject})
                 expectedEvent.cardBuilder.push(expectedBuilder)
                 expectedEvent.buildDiscountValue = 0
 
@@ -430,7 +432,7 @@ describe('Service - Designers - Event', () => {
 
 				expectedEvent = new EventCardActivator
 				expectedEvent.button = undefined
-				expectedEvent.cardSelector = expectedSelector
+				expectedEvent.setCardSelector(expectedSelector)
 				expectedWaiterId = 5
 			})
 			describe('UNIT TEST', () => {
@@ -445,13 +447,13 @@ describe('Service - Designers - Event', () => {
 						stateFromParent: undefined
 					}
 					expectedEvent.doubleActivationCount = 0
-					expectedEvent.cardSelector = expectedSelector
+					expectedEvent.setCardSelector(expectedSelector)
 					expectedSubType = 'actionPhaseActivator'
 					expectedEvent.subType = 'actionPhaseActivator'
 					const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-					expectedEvent.cardSelector.cardInitialState = {activable: true, selectable: false, buildable: false, ignoreCost:true}
+					expectedEvent.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
 					expectedEvent.title = 'Action Phase'
-					expectedEvent.cardSelector.filter = {type:ProjectFilterNameEnum.action}
+					expectedEvent.setSelectorFilter({type:ProjectFilterNameEnum.action})
 
 					let resultEvent = event_factory.EventFactory.createCardActivator(expectedSubType)
 
