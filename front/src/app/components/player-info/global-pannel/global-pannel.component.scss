@@ -16,7 +16,8 @@
 .pannel-card-style{
 	border: rgba(rgb(255, 129, 25), .5) solid 1px;
 	border-radius: 5px;
-	min-width: 60px;
+	min-width: 50px;
+	padding-left: 2px;
 	&.research{
 		min-width: 70px;
 		& p{
@@ -31,6 +32,9 @@
 	}
 	&.cards-played{
 		min-width: 50px;
+	}
+	&.phase-upgraded{
+		min-width: 45px;
 	}
 }
 .img-padding{
@@ -76,7 +80,7 @@ p{
     display: flex;
     align-items: center;
     height: 100%;
-    aspect-ratio: 5;
+    aspect-ratio: 3.5;
     padding-left: 5px;
     overflow: hidden;
 	@each $name, $value in colors.$colors {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerPannelComponent } from '../../../player-info/player-pannel/player-pannel.component';
@@ -15,6 +15,7 @@ import { myUUID } from '../../../../types/global.type';
   styleUrl: './game-over.component.scss'
 })
 export class GameOverComponent implements OnInit{
+	@Input() gameOver!: boolean
 	groupState!: PlayerStateModel[]
 	_playerIdList: myUUID[] = []
 

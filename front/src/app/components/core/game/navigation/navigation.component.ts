@@ -24,6 +24,7 @@ import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-a
 export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 	@Input() isScrolled: boolean = false
 	@Input() clientPlayerId!: myUUID
+	@Input() gameOver!: boolean
 	_playerIdList: myUUID[] = []
 	_playerPannelIsHovered: boolean = false
 	discoveryActive: boolean = false

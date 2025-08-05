@@ -25,6 +25,7 @@ import { myUUID } from '../../../types/global.type';
 })
 export class PlayerPannelComponent implements OnInit, OnDestroy{
 	@Input() playerId!: myUUID;
+	@Input() gameOver!: boolean;
 
 	_playerState!: PlayerStateModel;
 	playerIsReady!: boolean;

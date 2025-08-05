@@ -8,7 +8,6 @@ import { PlayerStateModel } from '../../../../models/player-info/player-state.mo
 import { WebsocketResultMessageFactory } from '../../../../factory/websocket-message-factory.service';
 import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
-import { HorizontalSeparatorComponent } from '../../../tools/layouts/horizontal-separator/horizontal-separator.component';
 import { GameEventComponent } from '../../game/game-event/game-event.component';
 import { NavigationComponent } from '../../game/navigation/navigation.component';
 import { ServerEmulationComponent } from '../../game/server-emulation/server-emulation.component';
@@ -20,7 +19,6 @@ import { ProjectCardInfoService } from '../../../../services/cards/project-card-
 import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 import { fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { myUUID, SettingCardSize } from '../../../../types/global.type';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
@@ -81,7 +79,6 @@ export class GameMainComponent implements OnInit{
 		private gameStateService: GameState,
 		private cardInfoService: ProjectCardInfoService,
 		private rxStompService: RxStompService,
-		private route: ActivatedRoute,
 		private gameParam: GameParamService
 	){}
 	ngOnInit(): void {
