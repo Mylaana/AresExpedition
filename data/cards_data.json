@@ -8895,6 +8895,9 @@
             "en": "EFFECT: When you reach a milestone, add an animal to this card.",
             "fr": "EFFET: Lorsque vous remportez un Objectif, ajoutez un animal sur cette carte. "
         },
+        "stockable": [
+            "animal"
+        ],
         "status": "filled",
         "vpScaling": "1"
     },

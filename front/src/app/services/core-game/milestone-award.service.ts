@@ -251,7 +251,8 @@ export class MilestoneAwardService {
 		}
 	}
 	private claimMilestone(milestone: MilestonesEnum){
-		this.clientState.addMilestoneCompleted(milestone)
+		if(this.gameStateService.getClientState().getClaimedMilestoneList().includes(milestone)){return}
+		this.gameStateService.claimMilestone(milestone)
 		this.addPlayerClaimedMilestoneToSet(this.clientState)
 	}
 	private getStateOrClientState(state: PlayerStateModel): PlayerStateModel {

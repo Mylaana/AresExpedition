@@ -10,6 +10,7 @@ import { Utils } from "../utils/utils";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
+| 'ON_MILESTONE_CLAIMED'
 interface TriggerInput {
 	playedCard: PlayableCardModel,
 	increasedParameter: GlobalParameterNameEnum
@@ -312,7 +313,7 @@ const S = EventFactory.simple
 	}
 
 //ON_TRIGGER_RESOLUTION
-//Mars University
+	//Mars University
 	function handleTrigger_40_resolution(trigger: string, input: TriggerInput): EventBaseModel[] {
 		console.log('mars univ resolv')
 		let card: PlayableCardModel = input.discardedCard
@@ -323,23 +324,28 @@ const S = EventFactory.simple
 	}
 
 //ON_UPGRADED_PHASE_SELECTED
-//Communication Streamlining
+	//Communication Streamlining
 	function handleTrigger_D05(trigger: string, input: TriggerInput):EventBaseModel[]{
 		return [S.addRessource({name:'megacredit', valueStock:1})]
 	}
 
 //ON_PRODUCTION_INCREASED
-//Mining Guild
+	//Mining Guild
 	function handleTrigger_214(trigger: string, input: TriggerInput):EventBaseModel[]{
 		if(input.productionIncreased.name!='steel' || input.productionIncreased.valueStock<=0){return []}
 		return [S.addTR(input.productionIncreased.valueStock)]
 	}
-
-//Nebu Labs
+	//Nebu Labs
 	function handleTrigger_P31(trigger: string, input: TriggerInput):EventBaseModel[]{
 		return [S.addRessource({name:'megacredit', valueStock:2})]
 	}
 
+//ON_MILESTONE_CLAIMED
+	//Zoo
+	function handleTrigger_P25(trigger: string, input: TriggerInput):EventBaseModel[]{
+		console.log(trigger)
+		return [S.addRessourceToCardId({name:'animal', valueStock:1}, trigger)]
+	}
 // Main Dispatch
 const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput, clientState?: PlayerStateModel) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
@@ -400,6 +406,9 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'D05': handleTrigger_D05,
 		'P31': handleTrigger_P31,
 	},
+	ON_MILESTONE_CLAIMED: {
+		'P25': handleTrigger_P25,
+	}
 };
 
 function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {

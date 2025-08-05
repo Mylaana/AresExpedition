@@ -34,6 +34,7 @@ export class ProjectCardScalingVPService {
 		"P04": (card) => Math.floor(card.getStockValue('animal') / 3), //Filter Feeders
 		"P12": (card) => Math.floor(card.getStockValue('animal') / 2), //Arklight
 		"FM13": (_, state) => state.getTagsOfType('jovian'), //Ganymede Colony
+		"P25": (card) => card.getStockValue('animal')
 	};
 
 	updateCardScalingVPList(clientState: PlayerStateModel) {
