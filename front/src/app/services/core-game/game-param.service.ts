@@ -28,7 +28,7 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 
 		'--scaling-vp-description-padding--small': '5px',
 
-		'--card-title-size--small': '24px',
+		'--card-title-size--small': '10px',
 
 		'--phase-card-title-font-size--small': '100%',
 		'--phase-card-subtitle-font-size--small': '65%',
@@ -71,7 +71,7 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 
 		'--scaling-vp-description-padding--medium': '5px',
 
-		'--card-title-size--medium': '32px',
+		'--card-title-size--medium': '14px',
 
 		'--phase-card-title-font-size--medium': '180%',
 		'--phase-card-subtitle-font-size--medium': '110%',
