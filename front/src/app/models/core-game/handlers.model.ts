@@ -111,7 +111,6 @@ export class EventHandler {
 		this.gameStateService.activateCard(input.card, input.option)
 	}
 	public updateActionPhaseMainButtonState(enabled?: boolean): void {
-		console.log('action phase update')
 		let state = this.gameStateService.getClientState()
 		let plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
 		let heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0

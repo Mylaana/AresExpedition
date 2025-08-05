@@ -9,8 +9,6 @@ import { BuilderOption, ProjectFilterNameEnum } from '../../../enum/global.enum'
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilderAlternativeCostComponent } from '../card-builder-alternative-cost/card-builder-alternative-cost.component';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
-import { Subject } from 'rxjs';
-import { GameParamService } from '../../../services/core-game/game-param.service';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
 
@@ -41,11 +39,6 @@ export class CardBuilderComponent implements OnInit{
 	currentEvent!: EventCardBuilder
 
 	_lockBuilder!: NonEventButton
-
-	private destroy$ = new Subject<void>
-
-	constructor(private gameParam: GameParamService){}
-
 	ngOnInit(): void {
 		this._lockBuilder = ButtonDesigner.createNonEventButton('lockBuilder')
 	}

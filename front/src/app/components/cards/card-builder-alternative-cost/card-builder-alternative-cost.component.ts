@@ -66,7 +66,6 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		for(let b of this._buttons){
 			b.setEnabled(this.getButtonEnabled(b))
 		}
-		console.log(this._buttons)
 	}
 	private getButtonEnabled(button: NonEventButton): boolean {
 		if(this.locked){return false}
