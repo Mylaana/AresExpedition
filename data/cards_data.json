@@ -7001,7 +7001,7 @@
             "en": "$other_milestone$",
             "fr": ""
         },
-        "status": "blocked",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -7485,7 +7485,7 @@
             "en": "If you have a milestone, gain 4 heats.",
             "fr": "Si vous avez un objectif, gagnez 4 chaleurs."
         },
-        "status": "blocked",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -8722,7 +8722,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "blocked",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -8747,7 +8747,8 @@
             "en": "ACTION: Draw a card. Draw 1 additional card for each Objective you have.",
             "fr": "ACTION: Piochez 1 carte. Piochez 1 carte suppl\u00e9mentaire pour chaque Objectif en votre possession."
         },
-        "status": "blocked",
+        "effectSummaryOption": "scalingCostActivation",
+        "status": "validated",
         "actionTextOption1": {
             "en": "$ressource_card$$skipline$+ $ressource_card$ / $other_milestone$",
             "fr": ""
@@ -8894,7 +8895,7 @@
             "en": "EFFECT: When you reach a milestone, add an animal to this card.",
             "fr": "EFFET: Lorsque vous remportez un Objectif, ajoutez un animal sur cette carte. "
         },
-        "status": "blocked",
+        "status": "filled",
         "vpScaling": "1"
     },
     {
@@ -9012,7 +9013,7 @@
             "en": "Increase your $other_tr$ by 1 level for each Objective you have.",
             "fr": "Augmentez votre $other_tr$ de 1 niveau pour chaque Objectif en votre possession."
         },
-        "status": "blocked",
+        "status": "validated",
         "vpScaling": "0"
     },
     {

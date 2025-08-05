@@ -239,7 +239,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Celestior
 	'P13': () => [EventFactory.simple.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)],
 	//Community Afforestation
-	'P20': (_, clientState) => [EventFactory.simple.draw(1 + clientState.getMilestoneCompleted())],
+	'P20': (_, clientState) => {return [EventFactory.simple.draw(1 + clientState.getMilestoneCompleted())]},
 	//Community Afforestation
 	'P21': (cardCode, clientState) => [
 		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState)}),
@@ -1351,7 +1351,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'D35': (clientstate) => {
 		let result : EventBaseModel[] = [EventFactory.simple.addProduction({name:'heat', valueStock:3})]
 		if(clientstate.getMilestoneCompleted()>0){
-			EventFactory.simple.addRessource({name:'heat', valueStock:4})
+			result.push(EventFactory.simple.addRessource({name:'heat', valueStock:4}))
 		}
 		return result
 	},
