@@ -66,6 +66,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		for(let b of this._buttons){
 			b.setEnabled(this.getButtonEnabled(b))
 		}
+		console.log(this._buttons)
 	}
 	private getButtonEnabled(button: NonEventButton): boolean {
 		if(this.locked){return false}
@@ -102,7 +103,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	}
 	getAlternativePayLocked(): boolean {
 		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
-		if(builderEvent.cardSelector.selectFrom.length===0){return true}
+		if(builderEvent.hasSelectorCardSelected()===true){return true}
 		return !builderEvent.cardBuilder[0].getBuilderIsLocked() && builderEvent.cardBuilder[0] != this.builder
 	}
 }
