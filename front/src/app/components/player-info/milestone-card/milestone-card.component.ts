@@ -22,6 +22,12 @@ export class MilestoneCardComponent {
 	getCaption(): string {
 		return this.milestone.caption
 	}
+	getIcon(): string {
+		return this.milestone.iconCaption
+	}
+	isProduction(): boolean {
+		return this.milestone.isProduction
+	}
 	isClaimed(): boolean {
 		return this.claimed!=undefined && this.claimed.color?.length!=0
 	}

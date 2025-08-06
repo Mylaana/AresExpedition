@@ -1,6 +1,9 @@
 <div class="wrapper-main">
 	<div class="wrapper-image">
-		<app-text-with-image [rawText]="getCaption()" [context]="'award'"></app-text-with-image>
+		<div [ngClass]="['wrapper-text', isProduction()?'production':'non-production']">
+			<app-text-with-image [rawText]="getCaption()" [context]="'award'"></app-text-with-image>
+			<div *ngIf="isProduction()" class="production-bar background-production--red"></div>
+		</div>
 	</div>
 	<div class="wrapper-other">
 		<div class="wrapper-ranking first">

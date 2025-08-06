@@ -22,6 +22,9 @@ export class AwardCardComponent {
 	getCaption(): string {
 		return this.award.caption
 	}
+	isProduction(): boolean {
+		return this.award.isProduction
+	}
 	getFirstColors(): PlayerColor[] {
 		let firstValue = this.award.value[0].playersValue
 		let colors: PlayerColor[] = []
@@ -36,7 +39,7 @@ export class AwardCardComponent {
 		let secondValue = this.getSecondValue()
 		if(secondValue===undefined){return []}
 		let secondPool = this.award.value.filter((el) => el.playersValue===secondValue)
-		let colors: PlayerColor[] = this.getBestColorsFromPool({caption: '', value:secondPool})
+		let colors: PlayerColor[] = this.getBestColorsFromPool({caption: '',isProduction: false, value:secondPool})
 		return colors
 	}
 	getFirstValue(): number {

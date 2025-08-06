@@ -1,6 +1,11 @@
 <div [ngClass]="['wrapper-main', isClaimed()?'claimed':'']">
 	<div [ngClass]="['wrapper-image', isClaimed()?'claimed':'']">
-		<app-text-with-image [rawText]="getCaption()" [context]="isClaimed()?'milestoneClaimed':'milestone'"></app-text-with-image>
+		<div [ngClass]="['wrapper-text', isProduction()?'production':'non-production']">
+			<div *ngIf="isProduction()" class="production-bar background-production--red"></div>
+			<p *ngIf="isProduction()" class="production-text">+{{getCaption()}}</p>
+			<p *ngIf="isProduction()===false" class="non-production-text">{{getCaption()}}</p>
+		</div>
+		<app-text-with-image [rawText]="getIcon()" [context]="isClaimed()?'milestoneClaimed':'milestone'"></app-text-with-image>
 	</div>
 	<div class="wrapper-bottom">
 		<div class="unclaimed"

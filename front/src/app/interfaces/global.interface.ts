@@ -118,6 +118,8 @@ export interface GlobalParameterOffset {
 }
 export interface MilestoneCard {
 	caption: string,
+	iconCaption: string,
+	isProduction: boolean,
 	value: MilestoneValue[]
 }
 export interface MilestoneValue {
@@ -126,6 +128,7 @@ export interface MilestoneValue {
 }
 export interface AwardCard {
 	caption: string
+	isProduction: boolean
 	value: AwardValue[]
 }
 export interface AwardValue {

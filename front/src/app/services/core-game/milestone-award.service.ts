@@ -38,9 +38,9 @@ export class MilestoneAwardService {
 	}
 	getAwardCaption(award: AwardsEnum): string {
 		switch(award){
-			case(AwardsEnum.celebrity):{return '+$ressource_megacredit$'}
+			case(AwardsEnum.celebrity):{return '$ressource_megacredit$'}
 			case(AwardsEnum.collecter):{return '$ressource_wild$$other_omnicard$'}
-			case(AwardsEnum.generator):{return '+$ressource_heat$'}
+			case(AwardsEnum.generator):{return '$ressource_heat$'}
 			case(AwardsEnum.industrialist):{return '$ressource_steel$$ressource_titanium'}
 			case(AwardsEnum.projectManager):{return '$other_omnicard$'}
 			case(AwardsEnum.researcher):{return '$tag_science$'}
@@ -55,20 +55,27 @@ export class MilestoneAwardService {
 		}
 		return result
 	}
-	private getMilestoneCaption(milestone: MilestonesEnum): string {
+	private getMilestoneIconCaption(milestone: MilestonesEnum): string {
 		switch(milestone){
-			case(MilestonesEnum.builder):{return '8$tag_building$'}
-			case(MilestonesEnum.diversifier):{return '9$tag_wild$'}
-			case(MilestonesEnum.energizer):{return '10P$ressource_heat$'}
-			case(MilestonesEnum.farmer):{return '5P$ressource_plant$'}
-			case(MilestonesEnum.gardener):{return '3$other_forest$'}
-			case(MilestonesEnum.legend):{return '6$other_redcard$'}
-			case(MilestonesEnum.magnate):{return '8$other_greencard$'}
-			case(MilestonesEnum.planner):{return '12$other_omnicard$'}
-			case(MilestonesEnum.spaceBaron):{return '6$tag_space$'}
-			case(MilestonesEnum.terraformer):{return '15$other_tr$'}
-			case(MilestonesEnum.tycoon):{return '6$other_bluecard$'}
+			case(MilestonesEnum.builder):{return '$tag_building$'}
+			case(MilestonesEnum.diversifier):{return '$tag_wild$'}
+			case(MilestonesEnum.energizer):{return '$ressource_heat$'}
+			case(MilestonesEnum.farmer):{return '$ressource_plant$'}
+			case(MilestonesEnum.gardener):{return '$other_forest$'}
+			case(MilestonesEnum.legend):{return '$other_redcard$'}
+			case(MilestonesEnum.magnate):{return '$other_greencard$'}
+			case(MilestonesEnum.planner):{return '$other_omnicard$'}
+			case(MilestonesEnum.spaceBaron):{return '$tag_space$'}
+			case(MilestonesEnum.terraformer):{return '$other_tr$'}
+			case(MilestonesEnum.tycoon):{return '$other_bluecard$'}
 			default:{return ''}
+		}
+	}
+	private isMilestoneProductionBased(milestone: MilestonesEnum): boolean {
+		switch(milestone){
+			case(MilestonesEnum.energizer):{return true}
+			case(MilestonesEnum.farmer):{return true}
+			default:{return false}
 		}
 	}
 	private onGroupStateUpdate(state: PlayerStateModel[]){
@@ -124,7 +131,9 @@ export class MilestoneAwardService {
 	private getMilestoneCard(milestone: MilestonesEnum): MilestoneCard {
 		let groupTemp: MilestoneValue[] = []
 		let card: MilestoneCard = {
-			caption: this.getMilestoneCaption(milestone),
+			caption: this.getMilestoneClaimTreshold(milestone).toString(),
+			iconCaption: this.getMilestoneIconCaption(milestone),
+			isProduction: this.isMilestoneProductionBased(milestone),
 			value: []
 		}
 		//generate a temporary array with color,value
@@ -174,6 +183,7 @@ export class MilestoneAwardService {
 		let groupTemp: AwardValue[] = []
 		let card: AwardCard = {
 			caption: this.getAwardCaption(award),
+			isProduction: this.isAwardProductionBased(award),
 			value: []
 		}
 		//generate a temporary array with color,value
@@ -196,6 +206,13 @@ export class MilestoneAwardService {
 
 		card.value = groupTemp
 		return card
+	}
+	private isAwardProductionBased(award: AwardsEnum): boolean {
+		switch(award){
+			case(AwardsEnum.celebrity):{return true}
+			case(AwardsEnum.generator):{return true}
+			default:{return false}
+		}
 	}
 	private getAwardValueFromState(state: PlayerStateModel, award: AwardsEnum): number {
 		switch(award){
@@ -234,20 +251,22 @@ export class MilestoneAwardService {
 	private shouldClaimMilestone(state: PlayerStateModel, milestone: MilestonesEnum): boolean {
 		//only claim milestone if not already claimed
 		if(this.milestoneState[milestone]===true){return false}
-		let current = this.getMilestoneValueFromState(state, milestone)
+		return this.getMilestoneValueFromState(state, milestone) >= this.getMilestoneClaimTreshold(milestone)
+	}
+	private getMilestoneClaimTreshold(milestone: MilestonesEnum): number {
 		switch(milestone){
-			case(MilestonesEnum.builder):{return current>=8}
-			case(MilestonesEnum.diversifier):{return current>=9}
-			case(MilestonesEnum.energizer):{return current>=10}
-			case(MilestonesEnum.farmer):{return current>=5}
-			case(MilestonesEnum.gardener):{return current>=3}
-			case(MilestonesEnum.legend):{return current>=6}
-			case(MilestonesEnum.magnate):{return current>=8}
-			case(MilestonesEnum.planner):{return current>=12}
-			case(MilestonesEnum.spaceBaron):{return current>=6}
-			case(MilestonesEnum.terraformer):{return current>=15}
-			case(MilestonesEnum.tycoon):{return current>=6}
-			default:{return false}
+			case(MilestonesEnum.builder):{return 8}
+			case(MilestonesEnum.diversifier):{return 9}
+			case(MilestonesEnum.energizer):{return 10}
+			case(MilestonesEnum.farmer):{return 5}
+			case(MilestonesEnum.gardener):{return 3}
+			case(MilestonesEnum.legend):{return 6}
+			case(MilestonesEnum.magnate):{return 8}
+			case(MilestonesEnum.planner):{return 12}
+			case(MilestonesEnum.spaceBaron):{return 6}
+			case(MilestonesEnum.terraformer):{return 15}
+			case(MilestonesEnum.tycoon):{return 6}
+			default:{return 0}
 		}
 	}
 	private claimMilestone(milestone: MilestonesEnum){

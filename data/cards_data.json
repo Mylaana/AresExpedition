@@ -9668,5 +9668,36 @@
             "fr": "$ressource_microbe$/$tag_microbe$"
         },
         "vpScaling": "1"
+    },
+    {
+        "card_code": "FM16",
+        "origin": "fanmade",
+        "cost": 28,
+        "tagsId": [
+            4,
+            1
+        ],
+        "cardType": "greenProject",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Lunar Embassy",
+            "fr": "Lunar Embassy"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$/$tag_earth$$tag_earth$",
+            "fr": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$/$tag_earth$$tag_earth$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 3 MC and 1 $ressource_plant$ per two $tag_earth$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 $ressource_plant$ tous les deux $tag_earth$ en votre possession, y compris celui-ci."
+        },
+        "playedText": {
+            "en": "Draw a card.$skipline$Raise infrastructure 1 step.",
+            "fr": "Piochez une carte.$skipline$Augmentez l'infrastructure de 1."
+        },
+        "status": "implemented",
+        "vpScaling": "0",
+        "vpNumber": "2"
     }
 ]
