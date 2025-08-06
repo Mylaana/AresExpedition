@@ -120,6 +120,7 @@ export interface MilestoneCard {
 	caption: string,
 	iconCaption: string,
 	isProduction: boolean,
+	helper: string,
 	value: MilestoneValue[]
 }
 export interface MilestoneValue {
@@ -129,6 +130,7 @@ export interface MilestoneValue {
 export interface AwardCard {
 	caption: string
 	isProduction: boolean
+	help: string
 	value: AwardValue[]
 }
 export interface AwardValue {

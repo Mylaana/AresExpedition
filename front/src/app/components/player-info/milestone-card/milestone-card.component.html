@@ -1,5 +1,7 @@
-<div [ngClass]="['wrapper-main', isClaimed()?'claimed':'']">
-	<div [ngClass]="['wrapper-image', isClaimed()?'claimed':'']">
+<div [ngClass]="['wrapper-main', isClaimed()?'claimed':'', _hovered?'hovered':'']"
+	(mouseenter)="_hovered=true"
+	(mouseleave)="_hovered=false">
+	<div [ngClass]="['wrapper-image']">
 		<div [ngClass]="['wrapper-text', isProduction()?'production':'non-production']">
 			<div *ngIf="isProduction()" class="production-bar background-production--red"></div>
 			<p *ngIf="isProduction()" class="production-text">+{{getCaption()}}</p>
@@ -24,5 +26,10 @@
 				</div>
 			</ng-container>
 		</div>
+	</div>
+	<div class="wrapper-helper"
+		@fadeIn
+		*ngIf="_hovered">
+		<app-text-with-image [rawText]="getHelper()" [context]="'milestoneAwardHelper'"></app-text-with-image>
 	</div>
 </div>

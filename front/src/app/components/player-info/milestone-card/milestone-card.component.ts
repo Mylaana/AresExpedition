@@ -5,6 +5,7 @@ import { TextWithImageComponent } from '../../tools/text-with-image/text-with-im
 import { MilestoneAwardService } from '../../../services/core-game/milestone-award.service';
 import { ClaimedMilestoneCard, MilestoneCard } from '../../../interfaces/global.interface';
 import { PlayerColor } from '../../../types/global.type';
+import { fadeIn } from '../../../animations/animations';
 
 @Component({
   selector: 'app-milestone-card',
@@ -13,11 +14,14 @@ import { PlayerColor } from '../../../types/global.type';
 	TextWithImageComponent
   ],
   templateUrl: './milestone-card.component.html',
-  styleUrl: './milestone-card.component.scss'
+  styleUrl: './milestone-card.component.scss',
+  animations: [fadeIn]
 })
 export class MilestoneCardComponent {
 	@Input() milestone!: MilestoneCard
 	@Input() claimed!: ClaimedMilestoneCard | undefined
+
+	_hovered: boolean = false
 
 	getCaption(): string {
 		return this.milestone.caption
@@ -33,5 +37,8 @@ export class MilestoneCardComponent {
 	}
 	getClaimedColors(): PlayerColor[] {
 		return this.claimed?.color??[]
+	}
+	getHelper(): string{
+		return this.milestone.helper
 	}
 }

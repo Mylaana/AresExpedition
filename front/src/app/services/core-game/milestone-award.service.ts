@@ -36,7 +36,7 @@ export class MilestoneAwardService {
 	getAwardsCards(): AwardCard[]{
 		return this.awardCards
 	}
-	getAwardCaption(award: AwardsEnum): string {
+	private getAwardCaption(award: AwardsEnum): string {
 		switch(award){
 			case(AwardsEnum.celebrity):{return '$ressource_megacredit$'}
 			case(AwardsEnum.collecter):{return '$ressource_wild$$other_omnicard$'}
@@ -45,6 +45,28 @@ export class MilestoneAwardService {
 			case(AwardsEnum.projectManager):{return '$other_omnicard$'}
 			case(AwardsEnum.researcher):{return '$tag_science$'}
 			case(AwardsEnum.visionary):{return '$other_upgrade$'}
+			default:{return ''}
+		}
+	}
+	getMilestoneHelp(milestone: MilestonesEnum): string{
+		switch(milestone){
+			case(MilestonesEnum.diversifier):{return 'Have 9 or more different tags'}
+			case(MilestonesEnum.energizer):case(MilestonesEnum.farmer):
+				{return `Have ${this.getMilestoneClaimTreshold(milestone)} or more ${this.getMilestoneIconCaption(milestone)} production`}
+			case(MilestonesEnum.legend):case(MilestonesEnum.magnate):case(MilestonesEnum.tycoon):case(MilestonesEnum.planner):
+				{return `Have ${this.getMilestoneClaimTreshold(milestone)} or more ${this.getMilestoneIconCaption(milestone)} played cards`}
+			default:{return `Have ${this.getMilestoneClaimTreshold(milestone)} or more ${this.getMilestoneIconCaption(milestone)}`}
+		}
+	}
+	getAwardHelp(award: AwardsEnum): string{
+		switch(award){
+			case(AwardsEnum.celebrity):{return 'Most $ressource_megacredit$ production (w/o TR)'}
+			case(AwardsEnum.collecter):{return 'Most resources on cards'}
+			case(AwardsEnum.generator):{return 'Most $ressource_heat$ production'}
+			case(AwardsEnum.industrialist):{return 'Most $ressource_steel$+$ressource_titanium$ production total'}
+			case(AwardsEnum.projectManager):{return 'Most project cards played'}
+			case(AwardsEnum.researcher):{return 'Most $tag_science$ played'}
+			case(AwardsEnum.visionary):{return 'Most upgraded phase cards.'}
 			default:{return ''}
 		}
 	}
@@ -134,6 +156,7 @@ export class MilestoneAwardService {
 			caption: this.getMilestoneClaimTreshold(milestone).toString(),
 			iconCaption: this.getMilestoneIconCaption(milestone),
 			isProduction: this.isMilestoneProductionBased(milestone),
+			helper: this.getMilestoneHelp(milestone),
 			value: []
 		}
 		//generate a temporary array with color,value
@@ -184,6 +207,7 @@ export class MilestoneAwardService {
 		let card: AwardCard = {
 			caption: this.getAwardCaption(award),
 			isProduction: this.isAwardProductionBased(award),
+			help: this.getAwardHelp(award),
 			value: []
 		}
 		//generate a temporary array with color,value

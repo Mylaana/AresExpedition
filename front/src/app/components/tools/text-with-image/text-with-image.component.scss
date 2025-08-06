@@ -243,6 +243,30 @@
 		aspect-ratio: 1;
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.milestoneAwardHelper{
+	display: block;
+	text-align: center;
+	flex-wrap: wrap;
+	height: fit-content;
+	max-height: 90%;
+	max-width: 90%;
+	width: fit-content;
+	gap: 0px;
+	& p{
+		margin: 0;
+		padding: 0;
+		color: white;
+		font-size: 10px;
+		display: inline-block;
+	}
+	& img {
+		max-height: 14px;
+		aspect-ratio: 1;
+		padding-left: 2px;
+		padding-right: 2px;
+		display: inline-block;
+	}
+}
 .wrapper-text-with-image::ng-deep .block-flex.milestone{
 	display: flex;
 	align-items: center;

@@ -8,6 +8,7 @@
 	border-left: solid 1px rgb(167, 128, 0);
 }
 .wrapper-main{
+	position: relative;
 	display: flex;
 	height: 90%;
 	width: 100%;
@@ -20,6 +21,8 @@
 	margin-right: 2px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .wrapper-other{
 	position: relative;
@@ -81,7 +84,10 @@ app-vp{
 	position: relative;
 	display: flex;
 	align-items: center;
-	height: 100%;
+	justify-content: center;
+	flex-direction: column;
+	min-height: 70%;
+	max-height: 100%;
 	padding-right: 0px;
 	&.production{
 		justify-content: center;
@@ -108,4 +114,18 @@ app-vp{
 .production-text{
 	font-size: 14px;
 	color: orange;
+}
+.wrapper-helper{
+	z-index: 1;
+	position: absolute;
+	display: flex;
+	backdrop-filter: blur(10px);
+	background-color: rgba(128, 128, 128, 0.19);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.hovered{
+	cursor: default;
 }
