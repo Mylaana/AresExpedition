@@ -740,7 +740,7 @@ export class GameState{
 			this.addEventQueue(newEvents, 'first')
 		}
 		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.oxygen)){return}
-		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.oxygen, steps:1})
+		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.oxygen, steps:forestNumber})
 	}
 	public addProductionToClient(ressources: RessourceStock | RessourceStock[]){
 		let state = this.getClientState()
