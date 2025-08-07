@@ -73,51 +73,35 @@ Backend automated testing: no backend yet
 ## Nice to have for v1
 ### Non-Critical Bug :
 Escape keyboard not exiting card builder selection   
-Websocket connection error while not in the game   
 Expression has changed on client refresh with all the player pannel if something moves (VP increased with arklight, any gain)   
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
-global: removing obvious comments   
 Optimize data volume exchanged   
 Refactor playable cards component should be storing clientstate and not repeatedly check for state   
 Refactor Ressource system (scaling, base etc.)   
 Refactor Tag System   
 
 ### Interface
-Add Display property for current event, so the screen does not flash when resolving technical events   
 Add log   
 Add main buttons help popup   
 Add onClick visual effect for buttons   
 Add popup-like window for non-production phase gains   
 Add proper Hybrid production zone looks   
 Rework effect summary zone (refacto + looks)   
-Create switch button   
 Builder: display visual list of active triggers   
 Add a wizz button when player being too long to play <3   
-During every phase, display the current phase card   
 force client to appear on the bottom of the player pannels   
 have "lines" the same size between navigation pannels (eg: global parameter line size should be the same as players so 3 player game should be same height as global parameter pannel)   
 
 
 ### Responsiveness
-Game creation menu
-Previous phase selected resizing   
-Hand size   
-hand border radius   
-Command buttons / setting button position   
-project card: reduce stock size on small card version   
 Effect zone: need an autoshrink calculation   
-improve readability when many big texts
-reduce space between text lines
 
 ### Misc
-Add settings options   
-Add game modes   
+-
 
 ## Game Options
 initial mulligan is an andvanced game mode option, not base   
-fanmade cards   
 some projects cards should only be accessible when 5+ players   
-switch infrastructure completion to be optionnal   
 autoexpand player pannel when in planification phase   
