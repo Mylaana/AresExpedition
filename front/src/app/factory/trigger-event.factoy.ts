@@ -57,7 +57,7 @@ const S = EventFactory.simple
 	//Herbivores
 	function handleTrigger_33(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter===GlobalParameterNameEnum.infrastructure){return []}
-		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
+		if(input.isParameterMaxedOutAtBeginningOfPhase){return []}
 		return [S.addRessourceToCardId({name:"animal", valueStock:input.increasedParameterValue}, trigger)]
 	}
 	//Livestock
