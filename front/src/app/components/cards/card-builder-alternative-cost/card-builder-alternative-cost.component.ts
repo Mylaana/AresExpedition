@@ -26,17 +26,17 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	@Output() buttonClicked = new  EventEmitter<any>()
 	@Input() builder!: CardBuilder
 	@Input() cardSize!: SettingCardSize
-	@Input() alreadyUsedButtons: NonEventButtonNames[] = []
 	_buttons: NonEventButton[] = []
 	_used: NonEventButtonNames[] = []
 
+	private alreadyUsedButtons: NonEventButtonNames[] = []
 	private destroy$ = new Subject<void>
 	private clientState!: PlayerStateModel
 
 	constructor(private gameStateService: GameState){}
-
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
+		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(() => this.onEventQueueUpdate())
 	}
 	ngOnChanges(changes: SimpleChanges): void {
 		if(changes['locked'] && changes['locked'].currentValue){
@@ -62,6 +62,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		}
 	}
 	public updateButtonEnabled(){
+		this.alreadyUsedButtons = (this.event as EventCardBuilder).getAlternativeCostUsed()
 		this.updateButtonList()
 		for(let b of this._buttons){
 			b.setEnabled(this.getButtonEnabled(b))
@@ -74,8 +75,11 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		if(this.alreadyUsedButtons.includes(button.name)){return false}
 		return PlayableCard.prerequisite.canBeAlternativePaid(button.name, this.clientState)
 	}
-	onClientStateUpdate(state: PlayerStateModel){
+	private onClientStateUpdate(state: PlayerStateModel){
 		this.clientState = state
+		this.updateButtonEnabled()
+	}
+	private onEventQueueUpdate(){
 		this.updateButtonEnabled()
 	}
 	onButtonClicked(button: NonEventButton){

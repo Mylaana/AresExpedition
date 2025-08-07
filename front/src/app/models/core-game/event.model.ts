@@ -365,6 +365,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
         }
     }
 	setFirstCardBuilt(){
+		this.alternativeCostUsedButtonName = []
 		if(this.builderType!="development_second_card"){return}
 		this.cardBuilder[1].setFirstCardBuilt()
 		this.cardBuilder[1].setFirstCardBuilt()

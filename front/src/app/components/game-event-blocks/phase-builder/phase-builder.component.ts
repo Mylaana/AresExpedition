@@ -42,8 +42,7 @@ export class PhaseBuilderComponent{
 
 	ngOnInit(): void {
 		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
-		this.gameState.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(v => this.cardListSelector.updateCardList())
-		console.log('update phase builder', this.event)
+		this.gameState.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(v => this.onEventQueueUpdate())
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -60,5 +59,9 @@ export class PhaseBuilderComponent{
 	}
 	public onAlternativePayButtonClicked(button: NonEventButton){
 		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
+	}
+	public onEventQueueUpdate(){
+		if(!this.cardListSelector){return}
+		this.cardListSelector.updateCardList()
 	}
 }
