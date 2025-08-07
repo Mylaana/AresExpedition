@@ -129,7 +129,7 @@ export class ButtonDesigner{
 			//router
 			case('routeCreateGame'):{caption='NEW GAME'; break}
 			case('routeCardOverview'):{caption='CARD OVERVIEW'; break}
-			case('routeBuy'):{caption='BUY ARES EXPEDITION'; break}
+			case('routeBuy'):{caption='BUY ARES EXPEDITION FROM FRYXGAMES'; break}
 			case('routeHome'):{caption='$other_home$'; break}
 			case('routeCreateNewGameValidation'):{caption='CREATE GAME'; break}
 
