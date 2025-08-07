@@ -124,7 +124,9 @@
 	justify-content: center;
 	height: 100%;
 	width: 100%;
-	font-size: 18px;
+	& p {
+		font-size: 20px;
+	}
 	& img{
 		height: 45%;
 	}
