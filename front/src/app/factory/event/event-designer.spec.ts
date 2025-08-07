@@ -573,7 +573,8 @@ describe('Service - Designers - Event', () => {
                             expectedEvent.phaseCardUpgradeQuantity = expectedQuantity
 							expectedEvent.lockRollbackButton = true
 							expectedEvent.lockSellButton = true
-							expectedEvent.lockValidateButton = false
+							expectedEvent.lockValidateButton = expectedQuantity>=1?false:true
+							expectedEvent.lockDisplayUpgraded = true
                             expectedArgs = {phaseCardUpgradeList:expectedList, phaseCardUpgradeNumber:expectedQuantity}
                             break
                         }

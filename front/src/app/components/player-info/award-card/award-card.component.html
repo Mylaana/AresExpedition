@@ -1,6 +1,12 @@
-<div class="wrapper-main">
+<div class="wrapper-main"
+	[class.hovered]="_hovered"
+	(mouseenter)="_hovered=true"
+	(mouseleave)="_hovered=false">
 	<div class="wrapper-image">
-		<app-text-with-image [rawText]="getCaption()" [context]="'award'"></app-text-with-image>
+		<div [ngClass]="['wrapper-text', isProduction()?'production':'non-production']">
+			<app-text-with-image [rawText]="getCaption()" [context]="'award'"></app-text-with-image>
+			<div *ngIf="isProduction()" class="production-bar background-production--red"></div>
+		</div>
 	</div>
 	<div class="wrapper-other">
 		<div class="wrapper-ranking first">
@@ -16,5 +22,10 @@
 				<div *ngFor="let c of getSecondColors()" [ngClass]="['box-player', c, 'group-'+award.value.length]"></div>
 			</div>
 		</div>
+	</div>
+	<div class="wrapper-helper"
+		@fadeIn
+		*ngIf="_hovered">
+		<app-text-with-image [rawText]="getHelper()" [context]="'milestoneAwardHelper'"></app-text-with-image>
 	</div>
 </div>

@@ -151,7 +151,7 @@ export class GameEventComponent {
 		this.displayPhaseUpgradeButton.resetStartEnabled()
 		this.displayPhaseUpgradeButton.locked = event.lockDisplayUpgraded
 		this.displayPhaseUpgradeCancelButton.resetStartEnabled()
-		this.displayPhaseUpgradeCancelButton.locked = event.lockDisplayUpgraded
+		this.displayPhaseUpgradeCancelButton.locked = false
 	}
 	private resetValidateButtonState(event: EventBaseModel): void {
 		if(!event.button){return}
@@ -174,8 +174,8 @@ export class GameEventComponent {
 		}
 	}
 	private updateUpgradedPhaseCardsDisplay(event: EventBaseModel){
-		switch(event.subType){
-			case('upgradePhaseCards'):{
+		switch(true){
+			case(event.subType==='upgradePhaseCards' && event.lockValidateButton===true):{
 				this.displayPhaseUpgradeCancelButton.displayed = true
 				this.displayPhaseUpgradeButton.displayed = false
 				break

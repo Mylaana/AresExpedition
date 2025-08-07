@@ -217,6 +217,7 @@ export class PlayerStateModel {
 	addRessourceToCard(cardCode: string, advancedRessourceStock: AdvancedRessourceStock): void {
 		this.projectCardState.addRessourceToCard(cardCode,advancedRessourceStock)
 		this.setScalingVp()
+		this.setScalingProduction()
 	}
 	getProjectPlayedModelFromId(cardCode:string): PlayableCardModel | undefined {return this.projectCardState.getProjectPlayedModelFromCode(cardCode)}
 	getProjectPlayedIdList(filter?: ProjectFilter): string[] {return this.projectCardState.getProjectPlayedIdList(filter)}

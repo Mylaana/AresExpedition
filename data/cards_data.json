@@ -336,8 +336,8 @@
         ],
         "cardType": "redProject",
         "title": {
-            "en": "Asset Liquidation V2",
-            "fr": "Liquidation d'Actifs V2"
+            "en": "Asset Liquidation B",
+            "fr": "Liquidation d'Actifs B"
         },
         "playedText": {
             "en": "You may play an additional blue or red card during this phase.$skipline$Draw 3 cards.",
@@ -6463,8 +6463,8 @@
         "origin": "discovery",
         "cardType": "corporation",
         "title": {
-            "en": "Exocorp V2",
-            "fr": "Exocorp V2"
+            "en": "Exocorp B",
+            "fr": "Exocorp B"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -6522,8 +6522,8 @@
         ],
         "cardType": "corporation",
         "title": {
-            "en": "Hyperion Systems V2",
-            "fr": "Hyperion Systems V2"
+            "en": "Hyperion Systems B",
+            "fr": "Hyperion Systems B"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -7286,8 +7286,8 @@
         "phaseUp": "IV",
         "phaseDown": "I-II",
         "title": {
-            "en": "Hematite Mining V2",
-            "fr": "Hematite Mining V2"
+            "en": "Hematite Mining B",
+            "fr": "Hematite Mining B"
         },
         "effectSummaryType": "mixedProduction",
         "effectSummaryText": {
@@ -8523,7 +8523,8 @@
         ],
         "startingMegacredits": 43,
         "status": "validated",
-        "vpScaling": "1"
+        "vpScaling": "1",
+        "balancedVersion": "remove"
     },
     {
         "card_code": "P12B",
@@ -8542,21 +8543,31 @@
             "en": "/ $ressource_animal$$ressource_animal$",
             "fr": "/ $ressource_animal$$ressource_animal$"
         },
-        "effectSummaryType": "trigger",
+        "effectSummaryType": "production",
         "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_1$ / $ressource_animal$",
+            "fr": "$ressource_megacreditvoid_1$ / $ressource_animal$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 MC per $ressource_animal$ here.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $ressource_animal$ sur cette carte. "
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
             "en": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$",
             "fr": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$"
         },
-        "effectText": {
+        "effectText2": {
             "en": "EFFECT: When you play an ANIMAL or PLANT, including these, add an animal to this card.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $ressource_animal$ sur cette carte. "
         },
         "stockable": [
             "animal"
         ],
         "startingMegacredits": 43,
-        "status": "blocked",
-        "vpScaling": "1"
+        "status": "validated",
+        "vpScaling": "1",
+        "balancedVersion": "add"
     },
     {
         "card_code": "P13",
@@ -8898,7 +8909,7 @@
         "stockable": [
             "animal"
         ],
-        "status": "filled",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -9241,9 +9252,14 @@
             "en": "During the production phase, this card produces 3 MC.$skipline$When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": ""
         },
-        "playedText": {
-            "en": "At the start of the game, reveal the top 15 cards of the deck. Take up to two cards with $tag_jovian$. Discard the rest.\"",
-            "fr": ""
+        "effectSummaryType2": "production",
+        "effectSummaryText2": {
+            "en": "$ressource_card$/$tag_jovian$$tag_jovian$$tag_jovian$",
+            "fr": "$ressource_card$/$tag_jovian$$tag_jovian$$tag_jovian$"
+        },
+        "effectText2": {
+            "en": "During the production phase, draw a card for every 3 $tag_jovian$ you have, including this.",
+            "fr": "Lors de la phase de production, piochez 1 carte par groupe de 3 $tag_jovian$ en votre possession, y compris celui-ci."
         },
         "startingMegacredits": 38,
         "status": "implemented",
@@ -9298,11 +9314,11 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_microbe$*: $ressource_megacreditvoid_1$",
-            "fr": "$ressource_microbe$*: $ressource_megacreditvoid_1$"
+            "en": "$ressource_microbe$*: $ressource_megacreditvoid_2$",
+            "fr": "$ressource_microbe$*: $ressource_megacreditvoid_2$"
         },
         "effectText": {
-            "en": "EFFECT: When you add any number of microbe to another card, gain 1MC for each microbe added.",
+            "en": "EFFECT: When you add any number of microbe to another card, gain 2MC for each microbe added.",
             "fr": ""
         },
         "playedText": {
@@ -9319,19 +9335,19 @@
         "tagsId": [
             0
         ],
-        "cardType": "greenProject",
+        "cardType": "blueProject",
         "title": {
             "en": "Meat Industry",
             "fr": ""
         },
-        "effectSummaryType": "production",
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$ / $ressource_animal$$ressource_animal$*",
-            "fr": "$ressource_megacreditvoid_1$ / $ressource_animal$$ressource_animal$*"
+            "en": "$tag_animal$ / $tag_plant$ :$skipline$$ressource_megacreditvoid_-3$$ressource_card$",
+            "fr": "$tag_animal$ / $tag_plant$ :$skipline$$ressource_megacreditvoid_-3$$ressource_card$"
         },
         "effectText": {
-            "en": "During the production phase, this card produces 1 MC per 2 $ressource_animal$ you have in total on all your cards.",
-            "fr": ""
+            "en": "EFFECT: When you play an $tag_animal$ or $tag_plant$, you pay 3 MC less and draw a card.",
+            "fr": "EFFET: Lorsque vous jouez un $tag_animal$ ou $tag_plant$, le co\u00fbt est r\u00e9duit de 3 MC et vous piochez une carte."
         },
         "status": "implemented",
         "vpScaling": "0"
@@ -9528,13 +9544,14 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_science$",
-            "fr": "$other_arrow$$ressource_science$"
+            "en": "$other_arrow$$skipline$$ressource_science$/6$tag_science$",
+            "fr": "$other_arrow$$skipline$$ressource_science$/6$tag_science$"
         },
         "effectText": {
-            "en": "ACTION : Add 1$ressource_science$ here per 5 $tag_science$ you have.",
+            "en": "ACTION : Add 1$ressource_science$ here per 6 $tag_science$ you have.",
             "fr": ""
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryText2": {
             "en": "$ressource_titanium$",
             "fr": ""
@@ -9547,7 +9564,14 @@
             "en": "4$tag_science$",
             "fr": ""
         },
-        "status": "filled",
+        "stockable": [
+            "science"
+        ],
+        "status": "implemented",
+        "actionTextOption1": {
+            "en": "$ressource_science$ / 5$tag_science$",
+            "fr": "$ressource_science$ / 5$tag_science$"
+        },
         "vpScaling": "1"
     },
     {
@@ -9605,6 +9629,75 @@
         "effectText": {
             "en": "EFFECT: When you play a $tag_jovian$, you pay 5MC less for it and draw a card.",
             "fr": ""
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM15",
+        "origin": "fanmade",
+        "cost": 10,
+        "tagsId": [
+            8
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "*",
+        "phaseUp": "III",
+        "title": {
+            "en": "Ants",
+            "fr": "Ants"
+        },
+        "vpText": {
+            "en": "/ $ressource_microbe$$ressource_microbe$",
+            "fr": "/ $ressource_microbe$$ressource_microbe$"
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$$skipline$$ressource_microbe$$skipline$if $tag_microbe$>=5: $ressource_microbe$",
+            "fr": "$other_arrow$$skipline$$ressource_microbe$$skipline$if $tag_microbe$>=5: $ressource_microbe$"
+        },
+        "effectText": {
+            "en": "ACTION: Add 1 $ressource_microbe$ to this card, if you have 5 or more $tag_microbe$, add another one.",
+            "fr": "ACTION: Ajoutez 1 microbe sur cette carte, si vous avez 5 $tag_microbe$ ou plus, ajoutez en un suppl\u00e9mentaire."
+        },
+        "effectSummaryOption": "scalingCostActivation",
+        "stockable": [
+            "microbe"
+        ],
+        "status": "implemented",
+        "actionTextOption1": {
+            "en": "$ressource_microbe$/$tag_microbe$",
+            "fr": "$ressource_microbe$/$tag_microbe$"
+        },
+        "vpScaling": "1"
+    },
+    {
+        "card_code": "FM16",
+        "origin": "fanmade",
+        "cost": 28,
+        "tagsId": [
+            4,
+            1
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "2",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Lunar Embassy",
+            "fr": "Lunar Embassy"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$/$tag_earth$$tag_earth$",
+            "fr": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$/$tag_earth$$tag_earth$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 3 MC and 1 $ressource_plant$ per two $tag_earth$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 $ressource_plant$ tous les deux $tag_earth$ en votre possession, y compris celui-ci."
+        },
+        "playedText": {
+            "en": "Draw a card.$skipline$Raise infrastructure 1 step.",
+            "fr": "Piochez une carte.$skipline$Augmentez l'infrastructure de 1."
         },
         "status": "implemented",
         "vpScaling": "0"

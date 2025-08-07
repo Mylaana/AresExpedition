@@ -63,8 +63,8 @@ export class EventHandler {
 			case('buildCard'):{
 				let card = event.getCardToBuildId()
 				if(card===undefined){return}
-				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
 				event.setFirstCardBuilt()
+				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
 				event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))
 				break
 			}

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { AwardCard } from '../../../interfaces/global.interface';
 import { PlayerColor } from '../../../types/global.type';
+import { fadeIn } from '../../../animations/animations';
 
 @Component({
   selector: 'app-award-card',
@@ -13,14 +14,23 @@ import { PlayerColor } from '../../../types/global.type';
 	TextWithImageComponent,
   ],
   templateUrl: './award-card.component.html',
-  styleUrl: './award-card.component.scss'
+  styleUrl: './award-card.component.scss',
+  animations: [fadeIn]
 })
 export class AwardCardComponent {
 	@Input() award!: AwardCard
+
+	_hovered: boolean = false
 	constructor(private milestoneAwardService: MilestoneAwardService){}
 
 	getCaption(): string {
 		return this.award.caption
+	}
+	isProduction(): boolean {
+		return this.award.isProduction
+	}
+	getHelper(): string {
+		return this.award.help
 	}
 	getFirstColors(): PlayerColor[] {
 		let firstValue = this.award.value[0].playersValue
@@ -36,7 +46,7 @@ export class AwardCardComponent {
 		let secondValue = this.getSecondValue()
 		if(secondValue===undefined){return []}
 		let secondPool = this.award.value.filter((el) => el.playersValue===secondValue)
-		let colors: PlayerColor[] = this.getBestColorsFromPool({caption: '', value:secondPool})
+		let colors: PlayerColor[] = this.getBestColorsFromPool({caption: '',isProduction: false, help:'', value:secondPool})
 		return colors
 	}
 	getFirstValue(): number {

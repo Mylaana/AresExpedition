@@ -13,13 +13,13 @@
 	width: 80%;
 	height: 2px;
 	border-radius: 5px;
-	//margin: 1px;
 }
 app-award-pannel{
 	$space: 2px;
 	height: 40px;
 	width: calc(100% - $space * 2);
 	margin: $space;
+	margin-top: 0;
 	border-bottom: solid 1px rgb(167, 128, 0);
 }
 app-milestone-pannel{
@@ -27,5 +27,6 @@ app-milestone-pannel{
 	flex: 1;
 	width: calc(100% - $space * 2);
 	margin: $space;
+	margin-bottom: 0;
 	border-top: solid 1px silver;
 }

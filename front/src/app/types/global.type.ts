@@ -46,5 +46,5 @@ export type SettingSupportedLanguage = 'en' | 'fr'
 export type SettingCardSize = 'small' | 'medium'
 export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText' | 'portalButton' | 'wildButton'
 | 'commandButton' | 'convertButton' | 'convertButtonTwoLines' | 'activateCardButton' | 'builderButton' | 'cardPrerequisite'
-| 'milestone' | 'milestoneClaimed' | 'award'
+| 'milestone' | 'milestoneClaimed' | 'award' | 'milestoneAwardHelper'
 export type MilestoneState = Record<MilestonesEnum, boolean>
