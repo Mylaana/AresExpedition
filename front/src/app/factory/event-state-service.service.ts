@@ -62,6 +62,7 @@ export class EventStateService{
 						eventBuilder.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
 						eventBuilder.alternativeCostUsedButtonName = dto.v['ac']
 						eventBuilder.buildDiscountValue = dto.v['d']
+						console.log(dto)
 					}
 				}
 				break
