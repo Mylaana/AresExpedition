@@ -297,7 +297,7 @@ const S = EventFactory.simple
 	//Topsoil contract
 	function handleTrigger_FM3(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.ressourceAdded!='microbe'){return []}
-		return [S.addRessource({name:"megacredit", valueStock:2})]
+		return [S.addRessource({name:"megacredit", valueStock:input.ressourceAddedValue*2})]
 	}
 
 

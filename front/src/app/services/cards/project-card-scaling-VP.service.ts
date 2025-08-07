@@ -34,9 +34,10 @@ export class ProjectCardScalingVPService {
 		"P04": (card) => Math.floor(card.getStockValue('animal') / 3), //Filter Feeders
 		"P12": (card) => Math.floor(card.getStockValue('animal') / 2), //Arklight
 		"P12B": (card) => Math.floor(card.getStockValue('animal') / 2), //Arklight B
-		"P25": (card) => card.getStockValue('animal'),
+		"P25": (card) => card.getStockValue('animal'), //Zoo
 		"FM11": (card) => card.getStockValue('science'), //Arkship
 		"FM13": (_, state) => state.getTagsOfType('jovian'), //Ganymede Colony
+		"FM15": (card) => Math.floor(card.getStockValue('microbe')/2), //Ants
 	};
 
 	updateCardScalingVPList(clientState: PlayerStateModel) {

@@ -9544,13 +9544,14 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_science$",
-            "fr": "$other_arrow$$ressource_science$"
+            "en": "$other_arrow$$skipline$$ressource_science$/6$tag_science$",
+            "fr": "$other_arrow$$skipline$$ressource_science$/6$tag_science$"
         },
         "effectText": {
-            "en": "ACTION : Add 1$ressource_science$ here per 5 $tag_science$ you have.",
+            "en": "ACTION : Add 1$ressource_science$ here per 6 $tag_science$ you have.",
             "fr": ""
         },
+        "effectSummaryOption": "scalingCostActivation",
         "effectSummaryText2": {
             "en": "$ressource_titanium$",
             "fr": ""
@@ -9647,18 +9648,19 @@
             "fr": "Ants"
         },
         "vpText": {
-            "en": "/ $ressource_microbe$$ressource_microbe$$ressource_microbe$",
-            "fr": "/ $ressource_microbe$$ressource_microbe$$ressource_microbe$"
+            "en": "/ $ressource_microbe$$ressource_microbe$",
+            "fr": "/ $ressource_microbe$$ressource_microbe$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_microbe$/$tag_microbe$",
-            "fr": "$other_arrow$$skipline$$ressource_microbe$/$tag_microbe$"
+            "en": "$other_arrow$$skipline$$ressource_microbe$$skipline$if $tag_microbe$>=5: $ressource_microbe$",
+            "fr": "$other_arrow$$skipline$$ressource_microbe$$skipline$if $tag_microbe$>=5: $ressource_microbe$"
         },
         "effectText": {
-            "en": "ACTION: Add 1 microbe to this card per $tag_microbe$ you have.",
-            "fr": "ACTION: Ajoutez 1 microbe sur cette carte pour chaque $tag_microbe$ que vous avez."
+            "en": "ACTION: Add 1 $ressource_microbe$ to this card, if you have 5 or more $tag_microbe$, add another one.",
+            "fr": "ACTION: Ajoutez 1 microbe sur cette carte, si vous avez 5 $tag_microbe$ ou plus, ajoutez en un suppl\u00e9mentaire."
         },
+        "effectSummaryOption": "scalingCostActivation",
         "stockable": [
             "microbe"
         ],
@@ -9678,6 +9680,7 @@
             1
         ],
         "cardType": "greenProject",
+        "vpNumber": "2",
         "phaseUp": "IV",
         "title": {
             "en": "Lunar Embassy",
@@ -9697,7 +9700,6 @@
             "fr": "Piochez une carte.$skipline$Augmentez l'infrastructure de 1."
         },
         "status": "implemented",
-        "vpScaling": "0",
-        "vpNumber": "2"
+        "vpScaling": "0"
     }
 ]

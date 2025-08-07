@@ -271,9 +271,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 5)}, cardCode)
 	],
 	//Ants
-	'FM15': (cardCode, state) => [
-		EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:state.getTagsOfType('microbe')}, cardCode)
-	],
+	'FM15': (cardCode, state) => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:getScaling(cardCode, state)}, cardCode)],
 }
 export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
 	//Aquifer Pumping
@@ -304,6 +302,8 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 	'P21': (state) => 14 - state.getMilestoneCompleted() * 4,
 	//Gas-Cooled Reactors
 	'P23': (state) => 12 - state.getPhaseCardUpgradedCount() * 2,
+	'FM15': (state) =>  state.getTagsOfType('microbe')>=5?2:1,
+
 	//SPECIALS
 	//Convert Forest - Ecoline
 	'ConvertForest': (state) => state.getTriggersIdActive().includes('210') ? 7 : 8,
@@ -317,6 +317,7 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 	'buyTemperature': (state) => state.getTriggersIdActive().includes('55') ? 10 : 14,
 	//Buy Temperature - Standard Technology
 	'buyUpgrade': (state) => state.getTriggersIdActive().includes('55') ? 14 : 18,
+
 }
 export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: PlayerStateModel) => string> = {
 	//Aquifer Pumping
@@ -361,6 +362,13 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 	'P21': (state) => `$ressource_megacreditvoid_${getScaling('P21', state)}$: $other_forest$`,
 	//Gas-Cooled Reactors
 	'P23': (state) => `$ressource_megacreditvoid_${getScaling('P23', state)}$: $other_temperature$`,
+	'FM15': (state) => {
+		let caption :string = ''
+		for(let i=0; i< (getScaling('FM15', state)); i++){
+			caption += '$ressource_microbe$'
+		}
+		return caption
+	},
 
 	//SPECIAL
 	'ConvertForest': (state) => `${getScaling('ConvertForest', state)}$ressource_plant$: $other_forest$`,
