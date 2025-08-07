@@ -268,7 +268,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	],
 	//Pride of the earth Arkship
 	'FM11': (cardCode, state) => [
-		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 5)}, cardCode)
+		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 6)}, cardCode)
 	],
 	//Ants
 	'FM15': (cardCode, state) => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:getScaling(cardCode, state)}, cardCode)],
@@ -1614,6 +1614,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		]),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
 	],
+	//Lunar Embassy
+	'FM16': () => [
+		EventFactory.simple.draw(1),
+		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
+		EventFactory.simple.addProduction({name:'megacredit', valueStock:3})
+	]
 
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
@@ -1850,6 +1856,8 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	},
 	//Ringcom
 	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /3)}],
+	//Lunar Embassy
+	'FM16': (s)=> [{name:'plant', valueStock:Math.floor(s.getTagsOfType('earth') /2)}],
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms

@@ -69,6 +69,7 @@ export class ButtonDesigner{
 			case('routeBuy'):{startEnabled=true; break}
 			case('routeHome'):{startEnabled=true; break}
 			case('routeCreateNewGameValidation'):{startEnabled=true; break}
+			case('routeDiscord'):{startEnabled=true; break}
 
 			//create game
 			case('createGamePlayerNumber'):{startEnabled=true; break}
@@ -129,9 +130,10 @@ export class ButtonDesigner{
 			//router
 			case('routeCreateGame'):{caption='NEW GAME'; break}
 			case('routeCardOverview'):{caption='CARD OVERVIEW'; break}
-			case('routeBuy'):{caption='BUY ARES EXPEDITION'; break}
+			case('routeBuy'):{caption='BUY ARES EXPEDITION FROM FRYXGAMES'; break}
 			case('routeHome'):{caption='$other_home$'; break}
 			case('routeCreateNewGameValidation'):{caption='CREATE GAME'; break}
+			case('routeDiscord'):{caption='JOIN US ON DISCORD'; break}
 
 			//create game
 			case('createGamePlayerNumber'):{caption='123456'; break}
