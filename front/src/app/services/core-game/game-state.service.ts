@@ -905,4 +905,7 @@ export class GameState{
 			this.addEventQueue(newEvents, 'first')
 		}
 	}
+	isDiscoveryEnabled(): boolean {
+		return this.gameOptions.getValue().discovery
+	}
 }
