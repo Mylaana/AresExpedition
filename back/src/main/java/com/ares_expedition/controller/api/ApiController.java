@@ -1,7 +1,6 @@
 package com.ares_expedition.controller.api;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +8,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,11 +35,13 @@ public class ApiController {
     }
 
     @PostMapping("/create-game")
-    public ResponseEntity<Map<String, Object>> createGame(@RequestBody NewGameConfigDTO gameConfig) {
+    public ResponseEntity<?> createGame(@RequestBody NewGameConfigDTO gameConfig) {
         NewGameInfoDTO newGameInfo = newGameService.createGame(gameConfig);
         Map<String, Object> response = new HashMap<>();
-        if(newGameInfo==null){
-            return (ResponseEntity<Map<String, Object>>) ResponseEntity.badRequest();
+        if (newGameInfo == null) {
+            return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("error", "Game could not be created"));
         }
         List<String> optionList = new ArrayList<>();
         for(Map.Entry<String, Object> entry: gameConfig.getOptions().entrySet()){
@@ -63,7 +65,7 @@ public class ApiController {
         logger.warn("\u001B[32m -------------------------------- \u001B[0m");
 
         gameController.loadGame(gameConfig.getGameId());
-        response.put("message", newGameInfo);
-        return ResponseEntity.ok(response);
+        //response.put("message", newGameInfo);
+        return ResponseEntity.ok(newGameInfo);
     }
 }

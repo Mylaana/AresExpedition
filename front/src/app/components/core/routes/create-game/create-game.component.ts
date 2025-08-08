@@ -68,9 +68,9 @@ export class CreateGameComponent {
 				console.log('response:', response)
 				this.router.navigate([ROUTE_NEWGAMELINKS], {
 					queryParams: {
-						gameId: JSON.stringify(response.message.gameId),
-						players: JSON.stringify(response.message.players),
-						options: JSON.stringify(response.message.options)??null
+						gameId: JSON.stringify(response.gameId),
+						players: JSON.stringify(response.players),
+						options: JSON.stringify(response.options)??null
 					}
 				});
 			},
