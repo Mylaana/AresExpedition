@@ -1,6 +1,11 @@
 <h1 class="ares-title">Mars is terraformed !</h1>
-	<div class="wrapper-player-pannel ares-navigation-pannel">
-		<ng-container *ngFor="let id of _playerIdList">
-			<app-player-pannel [playerId]="id" [gameOver]="gameOver"></app-player-pannel>
-		</ng-container>
-	</div>
+<div class="wrapper-player-pannel pannel ares-navigation-pannel">
+	<ng-container *ngFor="let id of _playerIdList">
+		<app-player-pannel [playerId]="id" [gameOver]="gameOver"></app-player-pannel>
+	</ng-container>
+</div>
+<div class="wrapper-phase-selected-pannel pannel ares-navigation-pannel">
+	<ng-container *ngFor="let state of groupState">
+		<app-phase-selected-player-pannel [state]="state"></app-phase-selected-player-pannel>
+	</ng-container>
+</div>

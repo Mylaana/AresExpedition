@@ -1,0 +1,21 @@
+@use '../../../../styles/abstracts/colors' as colors;
+.wrapper-player-name{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    aspect-ratio: 3.5;
+    padding-left: 5px;
+    overflow: hidden;
+	@each $name, $value in colors.$colors {
+        &.#{$name}{
+            border: $value solid 1px;
+            border-radius: 2px;
+            border-left-width: 30px;
+            background-color: rgba($value, .2);
+        }
+    }
+    & > p{
+		font-size: 90%;
+		color: white;
+    }
+}

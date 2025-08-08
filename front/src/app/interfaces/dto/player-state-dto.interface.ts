@@ -15,6 +15,7 @@ export interface PlayerStateDTO {
 	phaseCardState: PlayerPhaseCardStateDTO
 	globalParameterState: PlayerGlobalParameterStateDTO
 	eventState: PlayerEventStateDTO
+	statState: PlayerStatStateDTO
 	otherState: PlayerOtherStateDTO
 }
 export interface PlayerInfoStateDTO {
@@ -69,4 +70,8 @@ export interface PlayerEventStateDTO {
 export interface PhaseCardDTO {
 	pi: number
 	cl: number
+}
+export interface PlayerStatStateDTO{
+	/** slected phase round */
+	spr: {[key: number]: SelectablePhaseEnum}
 }

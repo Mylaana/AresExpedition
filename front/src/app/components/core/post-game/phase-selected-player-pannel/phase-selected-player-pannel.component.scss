@@ -1,0 +1,26 @@
+:host{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	height: 30px;
+}
+.wrapper-phase-selected{
+	display: flex;
+	align-items: center;
+	height: 100%;
+	gap: 1px;
+}
+.wrapper-image{
+	display: flex;
+	align-items: center;
+	height: 100%;
+	aspect-ratio: 1;
+}
+img{
+	height: 100%;
+	width: 100%;
+}
+app-player-name{
+	height: 100%;
+}
