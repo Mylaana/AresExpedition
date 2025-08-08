@@ -21,6 +21,7 @@ import com.ares_expedition.model.player_state.subclass.PlayerPhaseCardState;
 import com.ares_expedition.model.player_state.subclass.PlayerProjectCardState;
 import com.ares_expedition.model.player_state.subclass.PlayerRessourceState;
 import com.ares_expedition.model.player_state.subclass.PlayerScoreState;
+import com.ares_expedition.model.player_state.subclass.PlayerStatState;
 import com.ares_expedition.model.player_state.subclass.PlayerTagState;
 import com.ares_expedition.model.player_state.subclass.substates.EventState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
@@ -38,6 +39,7 @@ public class PlayerState {
     private PlayerPhaseCardState phaseCardState = new PlayerPhaseCardState();
     private PlayerGlobalParameterState globalParameterState = new PlayerGlobalParameterState();
     private PlayerEventState eventState = new PlayerEventState();
+    private PlayerStatState statState = new PlayerStatState();
     private PlayerOtherState otherState = new PlayerOtherState();
 
     private List<String> researchResolved = new ArrayList<>();
@@ -62,6 +64,7 @@ public class PlayerState {
         this.globalParameterState = PlayerGlobalParameterState.fromJson(dto.getGlobalParameterState());
         this.eventState = PlayerEventState.fromJson(dto.getEventState());
         this.otherState = PlayerOtherState.fromJson(dto.getOtherState());
+        this.statState = PlayerStatState.fromJson(dto.getStatState());
     }
 
     //=============================================================
@@ -382,6 +385,14 @@ public class PlayerState {
         return this.researchResolved.size()!=0;
     }
     
+    public PlayerStatState getStatState() {
+        return statState;
+    }
+
+    public void setStatState(PlayerStatState statState) {
+        this.statState = statState;
+    }
+
     public PlayerStateData toData(){
         return new PlayerStateData(this);
     }

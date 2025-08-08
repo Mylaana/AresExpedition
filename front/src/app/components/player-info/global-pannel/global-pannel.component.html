@@ -14,10 +14,7 @@
 				alt="">
         </div>
     </div>
-    <div class="wrapper-player-name"
-	[ngClass]="[playerState.getColor()]">
-	<p>{{playerState.getName()}}</p>
-</div>
+	<app-player-name [name]="playerState.getName()" [color]="playerState.getColor()"></app-player-name>
 <div class="pannel-card">
 	<app-vp [vpNumber]="playerState.getTotalVP().toString()" [shape]="'square'"></app-vp>
 </div>

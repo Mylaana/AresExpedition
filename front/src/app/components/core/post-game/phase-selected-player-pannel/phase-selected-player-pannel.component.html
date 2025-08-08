@@ -1,0 +1,8 @@
+<app-player-name [name]="state.getName()" [color]="state.getColor()"></app-player-name>
+<div class="wrapper-phase-selected">
+	<ng-container *ngFor="let round of totalRounds">
+		<div class="wrapper-image">
+			<img src="/assets/other/phase_{{getSelectedPhaseFromIndexAsSring(round)}}.png" alt="">
+		</div>
+	</ng-container>
+</div>

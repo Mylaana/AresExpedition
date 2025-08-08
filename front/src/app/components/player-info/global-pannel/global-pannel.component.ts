@@ -7,12 +7,14 @@ import { myUUID } from '../../../types/global.type';
 import { VpComponent } from '../../tools/vp/vp.component';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { GameOption } from '../../../services/core-game/create-game.service';
+import { PlayerNameComponent } from '../player-name/player-name.component';
 
 @Component({
     selector: 'app-global-pannel',
     imports: [
       CommonModule,
-      VpComponent
+      VpComponent,
+	  PlayerNameComponent
     ],
     templateUrl: './global-pannel.component.html',
     styleUrl: './global-pannel.component.scss'

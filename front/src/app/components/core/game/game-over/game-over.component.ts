@@ -4,12 +4,14 @@ import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerPannelComponent } from '../../../player-info/player-pannel/player-pannel.component';
 import { CommonModule } from '@angular/common';
 import { myUUID } from '../../../../types/global.type';
+import { PhaseSelectedPlayerPannelComponent } from '../../post-game/phase-selected-player-pannel/phase-selected-player-pannel.component';
 
 @Component({
   selector: 'app-game-over',
   imports: [
 	CommonModule,
-	PlayerPannelComponent
+	PlayerPannelComponent,
+	PhaseSelectedPlayerPannelComponent
 ],
   templateUrl: './game-over.component.html',
   styleUrl: './game-over.component.scss'

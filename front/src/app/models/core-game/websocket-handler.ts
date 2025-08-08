@@ -100,6 +100,7 @@ export class WebsocketHandler {
 		this.gameStateService.reset()
         this.gameStateService.clearEventQueue()
 		this.gameStateService.setSelectedPhaseList(content.selectedPhase)
+		this.gameStateService.setRound(content.round)
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, false)
@@ -111,6 +112,7 @@ export class WebsocketHandler {
 		this.gameStateService.reset()
         this.gameStateService.clearEventQueue()
 		this.gameStateService.setSelectedPhaseList(content.selectedPhase)
+		this.gameStateService.setRound(content.round)
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, isReconnect)
@@ -123,6 +125,7 @@ export class WebsocketHandler {
 		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
 		this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
 		this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
+		this.gameStateService.setRound(content.round)
 		if(content.gameStatus===GameStatusEnum.newGame){
 			this.gameStateService.setGameStarted(false)
 			this.gameStateService.newGame(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))

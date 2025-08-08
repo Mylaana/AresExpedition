@@ -80,6 +80,7 @@ export class GameState{
 	})
 	private milestones = new BehaviorSubject<Partial<MilestoneState>>({})
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
+	private round = new BehaviorSubject<number>(0)
 
     currentGroupPlayerState = this.groupPlayerState.asObservable()
     currentGroupPlayerReady = this.groupPlayerReady.asObservable()
@@ -96,6 +97,7 @@ export class GameState{
 	currentClientState = this.clientState.asObservable()
 	currentMilestones = this.milestones.asObservable()
 	currentAwards = this.awards.asObservable()
+	currentRound = this.round.asObservable()
 
     phaseIndex: number = 0
 
@@ -244,7 +246,7 @@ export class GameState{
             return
         }
 		let state = this.getClientState()
-		state.setPhaseSelected(phase)
+		state.setPhaseSelected(phase, this.getRound())
 		this.updateClientState(state)
 
 
@@ -904,5 +906,12 @@ export class GameState{
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents, 'first')
 		}
+	}
+	setRound(round: number){
+		if(round===this.getRound()){return}
+		this.round.next(round)
+	}
+	getRound(): number{
+		return this.round.getValue()
 	}
 }
