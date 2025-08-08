@@ -11,7 +11,7 @@ export class ApiService {
 
   constructor(private http: HttpClient){}
 
-  createGame(gameConfig: any): Observable<{ message: ApiMessage }> {
-    return this.http.post<{ message: ApiMessage }>(GLOBAL_API_NEWGAME, gameConfig);
+  createGame(gameConfig: any): Observable<ApiMessage> {
+    return this.http.post<ApiMessage>(GLOBAL_API_NEWGAME, gameConfig);
   }
 }

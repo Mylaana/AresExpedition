@@ -30,7 +30,6 @@ public class PlayerRessourceState {
     public Integer getCardsProduction() {
         for(Map<String, Object> ressource: this.ressources){
             if(ressource.get("name").equals("card")){
-                System.out.print("CARDS PRODUCTION: " + ressource.get("valueStock"));
                 return (Integer) ressource.get("valueProd");
             }
         }
