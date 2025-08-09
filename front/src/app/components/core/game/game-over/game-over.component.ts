@@ -5,13 +5,15 @@ import { PlayerPannelComponent } from '../../../player-info/player-pannel/player
 import { CommonModule } from '@angular/common';
 import { myUUID } from '../../../../types/global.type';
 import { PhaseSelectedPlayerPannelComponent } from '../../post-game/phase-selected-player-pannel/phase-selected-player-pannel.component';
+import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-award/milestone-and-award.component';
 
 @Component({
   selector: 'app-game-over',
   imports: [
 	CommonModule,
 	PlayerPannelComponent,
-	PhaseSelectedPlayerPannelComponent
+	PhaseSelectedPlayerPannelComponent,
+	MilestoneAndAwardComponent
 ],
   templateUrl: './game-over.component.html',
   styleUrl: './game-over.component.scss'
@@ -21,13 +23,15 @@ export class GameOverComponent implements OnInit{
 	groupState!: PlayerStateModel[]
 	_playerIdList: myUUID[] = []
 
+	_discoveryEnabled: boolean = false
+
 	constructor(private gameStateService: GameState){}
 	ngOnInit(): void {
 		this.gameStateService.currentPlayerCount.subscribe(playerCount => this.updatePlayerList(playerCount))
 		this.gameStateService.currentGroupPlayerState.subscribe(
 			states => this.updateState(states)
 		)
-
+		this._discoveryEnabled = false
 	}
 	updateState(state: PlayerStateModel[]){
 		this.groupState = state

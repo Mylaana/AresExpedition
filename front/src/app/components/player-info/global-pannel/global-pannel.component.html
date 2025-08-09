@@ -1,5 +1,5 @@
 <div class="wrapper-pannel">
-    <div class="previous-phase-selected">
+    <div class="previous-phase-selected" *ngIf="!gameOver">
         <div class="pannel-image">
 			<img *ngIf="currentPhase=='PLANIFICATION' && playerPhase.previousSelectedPhase.toString()!='UNDEFINED'"
 				class="heavy-greyed-filter"
