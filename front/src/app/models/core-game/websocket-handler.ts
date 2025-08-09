@@ -136,7 +136,10 @@ export class WebsocketHandler {
 		this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
 		this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 		this.gameStateService.setRound(content.round)
+<<<<<<< HEAD
 >>>>>>> a5d47465 (adding post game phase selected pannel)
+=======
+>>>>>>> a5d474659a9d5311d74cb1f92df1e4af0419c4df
 		if(content.gameStatus===GameStatusEnum.newGame){
 			this.gameStateService.setGameStarted(false)
 			this.gameStateService.newGame(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
