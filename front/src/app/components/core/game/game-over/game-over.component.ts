@@ -31,7 +31,7 @@ export class GameOverComponent implements OnInit{
 		this.gameStateService.currentGroupPlayerState.subscribe(
 			states => this.updateState(states)
 		)
-		this._discoveryEnabled = false
+		this._discoveryEnabled = this.gameStateService.getGameOptions().discovery
 	}
 	updateState(state: PlayerStateModel[]){
 		this.groupState = state

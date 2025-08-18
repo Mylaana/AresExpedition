@@ -131,8 +131,6 @@ export class WebsocketHandler {
 			this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
 			this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 		}
-		this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
-		this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 		this.gameStateService.setRound(content.round)
 		if(content.gameStatus===GameStatusEnum.newGame){
 			this.gameStateService.setGameStarted(false)

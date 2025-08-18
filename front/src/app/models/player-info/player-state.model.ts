@@ -184,6 +184,7 @@ export class PlayerStateModel {
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {
 		this.globalParameterState.addGlobalParameterStepEOP(parameter)
+		this.statState.increaseParameter(parameter.name, parameter.steps)
 	}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
 	getGlobalParameterFromName(parameterName: GlobalParameterNameEnum): GlobalParameter | undefined {

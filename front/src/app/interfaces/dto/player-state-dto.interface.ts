@@ -71,7 +71,9 @@ export interface PhaseCardDTO {
 	pi: number
 	cl: number
 }
-export interface PlayerStatStateDTO{
+export interface PlayerStatStateDTO {
 	/** slected phase round */
 	spr: {[key: number]: SelectablePhaseEnum}
+	/** increased parameter */
+	ip: Record<GlobalParameterNameEnum, number>
 }
