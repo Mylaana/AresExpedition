@@ -25,10 +25,12 @@ export class MilestoneAwardService {
 	private awardCards!: AwardCard[]
 
     constructor(private gameStateService: GameState){
-		this.gameStateService.currentGroupPlayerState.subscribe(state => this.onGroupStateUpdate(state))
-		this.gameStateService.currentMilestones.subscribe(v => this.onMilestonesUpdate(v))
-		this.gameStateService.currentAwards.subscribe(v => this.onAwardsUpdate(v))
-		this.gameStateService.currentClientState.subscribe(v => this.onClientStateUpdate(v))
+		if(gameStateService.isDiscoveryEnabled()){
+			this.gameStateService.currentGroupPlayerState.subscribe(state => this.onGroupStateUpdate(state))
+			this.gameStateService.currentMilestones.subscribe(v => this.onMilestonesUpdate(v))
+			this.gameStateService.currentAwards.subscribe(v => this.onAwardsUpdate(v))
+			this.gameStateService.currentClientState.subscribe(v => this.onClientStateUpdate(v))
+		}
 	}
 	getMilestoneCards(): MilestoneCard[]{
 		return this.milestoneCards
@@ -316,17 +318,26 @@ export class MilestoneAwardService {
 		let result = 0
 		let clientColor: PlayerColor = this.clientState.getColor() as PlayerColor
 
+		//for each card, set 5vp for first player (4 in case of tie), and 2vp for second player(1 in case of tie)
 		for(let a of this.awardCards){
 			let firstValue = a.value[0].playersValue
-			let firstPoints = a.value.filter((el) => el.playersValue===firstValue).length<=1?5:4
+			let firstPoints = a.value.filter((el) => el.playersValue===firstValue).length <= 1? 5:4
 			let otherValueGroup = a.value.filter((el) => el.playersValue<firstValue)
+			let secondPoints: number
+			if(otherValueGroup.length>0){
+				let secondValueGroup = a.value.filter((el) => el.playersValue===otherValueGroup[0].playersValue)
+				secondPoints = secondValueGroup.length<=1?2:1
+			} else {
+				secondPoints = 0
+			}
 			let secondValue: number | undefined
-			let secondPoints = otherValueGroup.length<=1?2:1
+			console.log(otherValueGroup, firstValue)
 			if(otherValueGroup.length!=0){secondValue = otherValueGroup[0].playersValue}
 			for(let player of a.value){
 				if(player.color===clientColor){
 					result += player.playersValue===firstValue?firstPoints:0
 					result += (secondValue!=undefined && player.playersValue===secondValue)?secondPoints:0
+					console.log(result)
 				}
 			}
 		}
