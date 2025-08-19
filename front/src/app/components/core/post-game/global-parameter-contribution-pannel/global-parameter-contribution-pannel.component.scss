@@ -7,13 +7,15 @@
 	justify-content: center;
 	width: 30px;
 	aspect-ratio: 1;
-	& > p {
-		color: white;
-	}
 }
-.wrapper-image{
+p {
+	color: white;
+}
+.wrapper-header{
+	display: flex;
+	align-items: center;
 	height: 30px;
-	aspect-ratio: 1;
+	width: fit-content;
 	& > img {
 		height: 100%;
 		width: 100%;
