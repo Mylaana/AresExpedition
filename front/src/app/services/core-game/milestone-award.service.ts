@@ -331,13 +331,11 @@ export class MilestoneAwardService {
 				secondPoints = 0
 			}
 			let secondValue: number | undefined
-			console.log(otherValueGroup, firstValue)
 			if(otherValueGroup.length!=0){secondValue = otherValueGroup[0].playersValue}
 			for(let player of a.value){
 				if(player.color===clientColor){
 					result += player.playersValue===firstValue?firstPoints:0
 					result += (secondValue!=undefined && player.playersValue===secondValue)?secondPoints:0
-					console.log(result)
 				}
 			}
 		}
