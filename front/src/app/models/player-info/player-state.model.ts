@@ -20,6 +20,7 @@ import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { Utils } from "../../utils/utils";
 import { SCALING_PRODUCTION } from "../../maps/playable-card-maps";
+import { PlayerStatStateModel } from "./player-state-stat";
 
 
 export class PlayerStateModel {
@@ -31,6 +32,7 @@ export class PlayerStateModel {
 	private phaseCardState: PlayerPhaseCardStateModel
 	private globalParameterState: PlayerGlobalParameterStateModel
 	private eventState: PlayerEventStateModel
+	private statState: PlayerStatStateModel
 	private otherState: PlayerOtherStateModel
 
 	private scalingVp!: ProjectCardScalingVPService
@@ -49,6 +51,7 @@ export class PlayerStateModel {
 			this.globalParameterState = new PlayerGlobalParameterStateModel(dto.globalParameterState)
 			this.eventState = new PlayerEventStateModel(dto.eventState)
 			this.otherState = new PlayerOtherStateModel(dto.otherState)
+			this.statState = new PlayerStatStateModel(dto.statState)
 		} else {
 			this.infoState = PlayerInfoStateModel.empty()
 			this.scoreState = PlayerScoreStateModel.empty()
@@ -59,6 +62,7 @@ export class PlayerStateModel {
 			this.globalParameterState = PlayerGlobalParameterStateModel.empty()
 			this.eventState = PlayerEventStateModel.empty()
 			this.otherState = PlayerOtherStateModel.empty()
+			this.statState = PlayerStatStateModel.empty()
 		}
 		this.scalingVp = injector.get(ProjectCardScalingVPService)
 		this.setScalingVp()
@@ -159,7 +163,10 @@ export class PlayerStateModel {
 	}
 	getPhaseSelected(): SelectablePhaseEnum {return this.phaseCardState.getPhaseSelected()}
 	getPreviousPhaseSelected(): SelectablePhaseEnum {return this.phaseCardState.getPreviousPhaseSelected()}
-	setPhaseSelected(selection: SelectablePhaseEnum): void {this.phaseCardState.setPhaseSelected(selection)}
+	setPhaseSelected(selection: SelectablePhaseEnum, round: number): void {
+		this.phaseCardState.setPhaseSelected(selection)
+		this.statState.addSelectedPhaseOnRound(selection, round)
+	}
 	getPhaseCards(onlyUpgraded: boolean = false): PhaseCardModel[] {return this.phaseCardState.getPhaseCards(onlyUpgraded)}
 	getPhaseGroups(): PhaseCardGroupModel[] {return this.phaseCardState.getPhaseGroups()}
 	isSelectedPhaseUpgraded(): boolean {
@@ -177,6 +184,8 @@ export class PlayerStateModel {
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {
 		this.globalParameterState.addGlobalParameterStepEOP(parameter)
+		if(this.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){return}
+		this.statState.increaseParameter(parameter.name, parameter.steps)
 	}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
 	getGlobalParameterFromName(parameterName: GlobalParameterNameEnum): GlobalParameter | undefined {
@@ -253,10 +262,15 @@ export class PlayerStateModel {
 	addTagToCardId(cardCode: string, tag: TagType){
 		this.projectCardState.addTagToCardId(cardCode, tag)
 	}
-
 	private payCardCost(card: PlayableCardModel):void{
 		this.addRessource('megacredit', -card.cost)
 	}
+
+	//Stat State
+	getStatState(): PlayerStatStateModel {
+		return this.statState
+	}
+	getGlobalParameterContribution(): Map<GlobalParameterNameEnum, number> {return this.statState.getIncreasedParameters()}
 
 	public toJson(eventStateDTO?: EventStateDTO[]): PlayerStateDTO {
 		return {
@@ -268,7 +282,8 @@ export class PlayerStateModel {
 			phaseCardState: this.phaseCardState.toJson(),
 			globalParameterState: this.globalParameterState.toJson(),
 			eventState: this.eventState.toJson(eventStateDTO),
-			otherState: this.otherState.toJson()
+			otherState: this.otherState.toJson(),
+			statState: this.statState.toJson()
 		}
 	}
 	public static fromJson(data: Partial<PlayerStateDTO>, injector: Injector): PlayerStateModel {

@@ -2,7 +2,11 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 100px;
+	gap: 50px;
+}
+.pannel{
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 10px;
 }
 h1{
 	margin-top: 50px;
@@ -14,6 +18,28 @@ h1{
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	background-color: rgba(0, 0, 0, 0.6);
-	padding: 10px;
+}
+.wrapper-phase-selected-pannel{
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	overflow: scroll;
+	scrollbar-width: none;
+	overflow: scroll;
+	scrollbar-width: none;
+}
+.wrapper-milestone-awards{
+	width: 300px;
+}
+.wrapper-phases{
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.wrapper-vp-breakdown{
+	display: flex;
+	gap: 50px;
+}
+app-milestone-and-award, .wrapper-milestone-awards{
+	height: fit-content;
 }

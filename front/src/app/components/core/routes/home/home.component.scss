@@ -72,9 +72,10 @@ h1{
 	text-align: center;
 	margin-top: 3%;
 }
-.wrapper-disclaimer{
-	width: 100%;
+.wrapper-bottom{
+	width: 98%;
+	display: flex;
+	justify-content: space-between;
 	height: fit-content;
-	margin-bottom: 1%;
-	margin-right: 2%;
+	margin: 10px;
 }

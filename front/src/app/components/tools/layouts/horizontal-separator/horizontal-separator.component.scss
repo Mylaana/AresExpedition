@@ -1,5 +1,11 @@
 $color: rgb(255, 255, 255);
 $glow-color: rgb(255, 129, 25);
+:host{
+	width: 100%;
+	height: 30px;
+	margin-top: 3%;
+	margin-bottom: 3%;
+}
 .main{
 	position: relative;
 	display: flex;

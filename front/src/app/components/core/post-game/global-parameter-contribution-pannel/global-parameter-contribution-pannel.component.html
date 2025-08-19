@@ -1,0 +1,14 @@
+<ng-container *ngFor="let c of getColumnName()">
+	<div [ngClass]="['wrapper-column']">
+		<div class="wrapper-header">
+			<img *ngIf="c" src="/assets/other/{{c.toLowerCase()}}.png" alt="">
+			<p *ngIf="!c">Contributions :</p>
+		</div>
+		<ng-container *ngFor="let state of groupState">
+			<div *ngIf="c" [ngClass]="['wrapper-parameter-contribution', 'box', hasRightBorder(c)===false?'not-right':'']">
+				<p>{{getParameterContribution(state, c)}}</p>
+			</div>
+			<app-player-name *ngIf="!c" class="name" [name]="state.getName()" [color]="state.getColor()"></app-player-name>
+		</ng-container>
+	</div>
+</ng-container>

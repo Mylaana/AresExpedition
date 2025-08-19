@@ -17,7 +17,7 @@ export const ROUTE_CARD_OVERVIEW = 'card-overview'
 export const ROUTE_GAME = 'game/:gameId/:playerId'
 
 export const EXTERNAL_LINK_FRYXGAMES = 'https://fryxgames.se/'
-export const EXTERNAL_LINK_DISCORD = 'https://discord.gg/XApu4zMA'
+export const EXTERNAL_LINK_DISCORD = 'https://discord.gg/5SYQN5yxF6'
 
 export const DEBUG_LOG_EVENT_RESOLUTION = false
 export const DEBUG_LOG_WS_PUBLISH = true

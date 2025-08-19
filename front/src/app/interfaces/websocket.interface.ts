@@ -85,6 +85,7 @@ export interface WsGameState extends WsResult {
 	gameOptions: GameOption
 	awards: AwardsEnum[]
 	milestones: MilestonesEnum[]
+	round: number
 }
 export interface WSGroupState extends WsResult {
 	groupState: PlayerStateDTO[]

@@ -1,5 +1,5 @@
 <div class="wrapper-pannel">
-    <div class="previous-phase-selected">
+    <div class="previous-phase-selected" *ngIf="!gameOver">
         <div class="pannel-image">
 			<img *ngIf="currentPhase=='PLANIFICATION' && playerPhase.previousSelectedPhase.toString()!='UNDEFINED'"
 				class="heavy-greyed-filter"
@@ -14,10 +14,7 @@
 				alt="">
         </div>
     </div>
-    <div class="wrapper-player-name"
-	[ngClass]="[playerState.getColor()]">
-	<p>{{playerState.getName()}}</p>
-</div>
+	<app-player-name [name]="playerState.getName()" [color]="playerState.getColor()"></app-player-name>
 <div class="pannel-card">
 	<app-vp [vpNumber]="playerState.getTotalVP().toString()" [shape]="'square'"></app-vp>
 </div>

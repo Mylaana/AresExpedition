@@ -38,6 +38,7 @@ public class Game {
     private GameOptions gameOptions;
     private Map<MilestonesEnum, Boolean> milestones = new HashMap<>();
     private List<AwardsEnum> awards = new ArrayList<>();
+    private int round = 0;
 
     public Game() {
     }
@@ -215,6 +216,7 @@ public class Game {
         gameState.setSelectedPhase(selectedPhase);
         gameState.setGroupPlayerStatePublic(this.groupPlayerState);
         gameState.setGameStatus(gameStatus);
+        gameState.setRound(round);
         if(this.getGameOptions().getExpansionDiscovery()){
             gameState.setAwards(awards);
             gameState.setMilestones(milestones);
@@ -253,6 +255,7 @@ public class Game {
         this.selectedPhase.clear();
         this.selectedPhase.add(PhaseEnum.PLANIFICATION);
         this.currentPhase = this.selectedPhase.getFirst();
+        this.increaseRound();
         for(Map.Entry<String, PlayerState> entry:  this.groupPlayerState.entrySet()){
             entry.getValue().getPhaseCardState().newRound();
         }
@@ -513,6 +516,14 @@ public class Game {
         }
     }
 
+    public int getRound() {
+        return round;
+    }
+
+    public void increaseRound() {
+        this.round++;
+    }
+    
     public GameData toData(){
         return new GameData(this);
     }
@@ -525,4 +536,5 @@ public class Game {
 
         return dataMap;
     }
+
 }
