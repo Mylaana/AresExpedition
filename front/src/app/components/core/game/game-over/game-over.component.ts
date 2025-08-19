@@ -42,4 +42,7 @@ export class GameOverComponent implements OnInit{
 	updatePlayerList(playerIdList: myUUID[]){
 		this._playerIdList = playerIdList
 	}
+	isDiscoveryEnabled(): boolean {
+		return this.gameStateService.isDiscoveryEnabled()
+	}
 }

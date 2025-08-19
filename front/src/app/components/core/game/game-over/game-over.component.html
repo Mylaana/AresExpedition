@@ -5,7 +5,7 @@
 	</ng-container>
 </div>
 <div class="wrapper-vp-breakdown">
-	<div class="wrapper-milestone-awards ares-navigation-pannel pannel">
+	<div *ngIf="isDiscoveryEnabled()"	class="wrapper-milestone-awards ares-navigation-pannel pannel">
 		<app-milestone-and-award *ngIf="_discoveryEnabled"></app-milestone-and-award>
 	</div>
 	<div class="wrapper-parameter ares-navigation-pannel pannel">
