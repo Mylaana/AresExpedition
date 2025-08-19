@@ -36,3 +36,10 @@ h1{
 	flex-direction: column;
 	gap: 5px;
 }
+.wrapper-vp-breakdown{
+	display: flex;
+	gap: 50px;
+}
+app-milestone-and-award, .wrapper-milestone-awards{
+	height: fit-content;
+}

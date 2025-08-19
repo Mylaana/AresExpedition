@@ -130,8 +130,6 @@ export class WebsocketResultMessageFactory{
 			plant: e[OceanBonusEnum.plant]??0,
 			card: e[OceanBonusEnum.card]??0,
 		}));
-		console.log(entries,oceanBonuses)
-
         return {
             bonuses: oceanBonuses,
             draw: content['d']??[],

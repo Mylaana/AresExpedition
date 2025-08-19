@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { myUUID } from '../../../../types/global.type';
 import { PhaseSelectedPlayerPannelComponent } from '../../post-game/phase-selected-player-pannel/phase-selected-player-pannel.component';
 import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-award/milestone-and-award.component';
+import { GlobalParameterContributionPannelComponent } from '../../post-game/global-parameter-contribution-pannel/global-parameter-contribution-pannel.component';
+import { HorizontalSeparatorComponent } from '../../../tools/layouts/horizontal-separator/horizontal-separator.component';
 
 @Component({
   selector: 'app-game-over',
@@ -13,7 +15,9 @@ import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-a
 	CommonModule,
 	PlayerPannelComponent,
 	PhaseSelectedPlayerPannelComponent,
-	MilestoneAndAwardComponent
+	MilestoneAndAwardComponent,
+	GlobalParameterContributionPannelComponent,
+	HorizontalSeparatorComponent
 ],
   templateUrl: './game-over.component.html',
   styleUrl: './game-over.component.scss'

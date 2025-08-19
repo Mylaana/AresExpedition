@@ -910,6 +910,9 @@ export class GameState{
 	isDiscoveryEnabled(): boolean {
 		return this.gameOptions.getValue().discovery
 	}
+	isFoundationEnabled(): boolean {
+		return this.gameOptions.getValue().foundations
+	}
 	setRound(round: number){
 		if(round===this.getRound()){return}
 		this.round.next(round)

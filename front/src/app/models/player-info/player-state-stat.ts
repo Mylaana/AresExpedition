@@ -25,7 +25,8 @@ export class PlayerStatStateModel {
 		return this.selectedPhaseRound
 	}
 	public increaseParameter(parameter: GlobalParameterNameEnum, value: number){
-		this.increasedParameter.set(parameter, this.increasedParameter.get(parameter)??0 + value)
+		let current = this.increasedParameter.get(parameter)??0
+		this.increasedParameter.set(parameter, current + value)
 	}
 	public getIncreasedParameters(): Map<GlobalParameterNameEnum, number> {return this.increasedParameter}
 	static mapToObject<K extends string | number | symbol, V>(

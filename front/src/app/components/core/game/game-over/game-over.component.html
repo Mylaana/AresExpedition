@@ -4,8 +4,13 @@
 		<app-player-pannel [playerId]="id" [gameOver]="gameOver"></app-player-pannel>
 	</ng-container>
 </div>
-<div class="wrapper-milestone-awards">
-	<app-milestone-and-award *ngIf="_discoveryEnabled" class="ares-navigation-pannel"></app-milestone-and-award>
+<div class="wrapper-vp-breakdown">
+	<div class="wrapper-milestone-awards ares-navigation-pannel pannel">
+		<app-milestone-and-award *ngIf="_discoveryEnabled"></app-milestone-and-award>
+	</div>
+	<div class="wrapper-parameter ares-navigation-pannel pannel">
+		<app-global-parameter-contribution-pannel [groupState]="groupState"></app-global-parameter-contribution-pannel>
+	</div>
 </div>
 <div class="wrapper-phases">
 	<ng-container *ngFor="let state of groupState">

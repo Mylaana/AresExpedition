@@ -184,6 +184,7 @@ export class PlayerStateModel {
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {
 		this.globalParameterState.addGlobalParameterStepEOP(parameter)
+		if(this.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){return}
 		this.statState.increaseParameter(parameter.name, parameter.steps)
 	}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
@@ -269,6 +270,7 @@ export class PlayerStateModel {
 	getStatState(): PlayerStatStateModel {
 		return this.statState
 	}
+	getGlobalParameterContribution(): Map<GlobalParameterNameEnum, number> {return this.statState.getIncreasedParameters()}
 
 	public toJson(eventStateDTO?: EventStateDTO[]): PlayerStateDTO {
 		return {
