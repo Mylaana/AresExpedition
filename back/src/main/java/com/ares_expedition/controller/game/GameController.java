@@ -95,7 +95,9 @@ public class GameController {
         game.fillDiscardPileFromPlayerDiscard();
         game.resetResearchResolved();
         game.claimMilestones();
-        logger.debug("GAME OVER:" + game.isGameOver());
+        logger.warn("\u001B[32m ------------Game Over------------ \u001B[0m");
+        logger.warn("id: " + game.getGameId());
+        logger.warn("\u001B[32m -------------------------------- \u001B[0m");
         if(game.isGameOver()){
             game.setGameStatus(GameStatusEnum.GAME_OVER);
             wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
