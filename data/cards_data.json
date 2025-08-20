@@ -332,7 +332,8 @@
         "card_code": "11B",
         "origin": "base",
         "tagsId": [
-            2
+            2,
+            9
         ],
         "cardType": "redProject",
         "title": {
@@ -6051,7 +6052,7 @@
             "en": "$other_oxygen$",
             "fr": "$other_oxygen$"
         },
-        "status": "blocked",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {
@@ -8848,7 +8849,7 @@
         "effectSummaryOption": "scalingCostActivation",
         "status": "validated",
         "actionTextOption1": {
-            "en": "$other_arrow$$skipline$$ressource_megacreditvoid_12$:$other_temperature$$skipline$$ressource_megacreditvoid_-2$/$other_upgrade$",
+            "en": "$ressource_megacreditvoid_12$:$other_temperature$$skipline$$ressource_megacreditvoid_-2$/$other_upgrade$",
             "fr": ""
         },
         "vpScaling": "0"
@@ -8877,6 +8878,10 @@
             "fr": "Vous pouvez jouer une carte bleue ou rouge suppl\u00e9mentaire lors de cette phase. "
         },
         "status": "validated",
+        "actionTextOption1": {
+            "en": "$tag_wild$",
+            "fr": "$tag_wild$"
+        },
         "vpScaling": "0"
     },
     {
@@ -9221,15 +9226,15 @@
             "en": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
             "fr": ""
         },
-        "playedText": {
-            "en": "Upgrade your Phase V.",
-            "fr": ""
-        },
         "stockable": [
             "science"
         ],
-        "startingMegacredits": 10,
+        "startingMegacredits": 15,
         "status": "filled",
+        "actionTextOption1": {
+            "en": "-X $ressource_science$",
+            "fr": ""
+        },
         "vpScaling": "0"
     },
     {
@@ -9262,6 +9267,34 @@
             "fr": "Lors de la phase de production, piochez 1 carte par groupe de 3 $tag_jovian$ en votre possession, y compris celui-ci."
         },
         "startingMegacredits": 38,
+        "status": "validated",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "CF5",
+        "origin": "fanmade",
+        "tagsId": [
+            0
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "Lili's Volunteering Initiative",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_card$$skipline$$ressource_megacreditvoid_2$$ressource_heat$$ressource_plant$",
+            "fr": "$ressource_card$$skipline$$ressource_megacreditvoid_2$$ressource_heat$$ressource_plant$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2 MC, 1heat and 1 plant, draw a card.",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "Upgrade your phase card I, II or IV.",
+            "fr": ""
+        },
+        "startingMegacredits": 40,
         "status": "implemented",
         "vpScaling": "0"
     },
@@ -9296,7 +9329,7 @@
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9325,7 +9358,7 @@
             "en": "Gain 3 plants.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9349,7 +9382,7 @@
             "en": "EFFECT: When you play an $tag_animal$ or $tag_plant$, you pay 3 MC less and draw a card.",
             "fr": "EFFET: Lorsque vous jouez un $tag_animal$ ou $tag_plant$, le co\u00fbt est r\u00e9duit de 3 MC et vous piochez une carte."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9374,7 +9407,7 @@
             "en": "EFFECT: Each steel you have reduces the cost of cards by an additional 1 MC.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9406,7 +9439,7 @@
             "en": "$tag_science$$tag_science$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9428,7 +9461,7 @@
             "en": "Draw 1 card for each 2 $tag_science$ you have.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9447,7 +9480,7 @@
             "en": "Gain 1 TR for each pair of $tag_earth$+$tag_jovian$.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9469,7 +9502,7 @@
             "en": "For every $tag_science$ you have add $ressource_microbe$ to another card.$skipline$Draw a card.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9494,13 +9527,13 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_space$, you pay 9MC less for it.",
-            "fr": ""
+            "fr": "EFFECT: Lorsque vous jouez un $tag_space$, payez 9MC de moins."
         },
         "playedText": {
             "en": "Flip an ocean.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9544,18 +9577,14 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_science$/6$tag_science$",
-            "fr": "$other_arrow$$skipline$$ressource_science$/6$tag_science$"
+            "en": "$other_arrow$$skipline$$ressource_science$/4$tag_science$",
+            "fr": "$other_arrow$$skipline$$ressource_science$/4$tag_science$"
         },
         "effectText": {
-            "en": "ACTION : Add 1$ressource_science$ here per 6 $tag_science$ you have.",
-            "fr": ""
+            "en": "ACTION : Add 1$ressource_science$ here per 4 $tag_science$ you have.",
+            "fr": "ACTION : ajoutez 1 $ressource_science$ pour 4 $tag_science$ en votre possession."
         },
         "effectSummaryOption": "scalingCostActivation",
-        "effectSummaryText2": {
-            "en": "$ressource_titanium$",
-            "fr": ""
-        },
         "prerequisiteText": {
             "en": "Requires 4$tag_science$.",
             "fr": ""
@@ -9567,7 +9596,7 @@
         "stockable": [
             "science"
         ],
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "$ressource_science$ / 5$tag_science$",
             "fr": "$ressource_science$ / 5$tag_science$"
@@ -9605,7 +9634,7 @@
             "en": "Raise infrastructure 1 step.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -9630,7 +9659,7 @@
             "en": "EFFECT: When you play a $tag_jovian$, you pay 5MC less for it and draw a card.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9664,7 +9693,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "$ressource_microbe$/$tag_microbe$",
             "fr": "$ressource_microbe$/$tag_microbe$"
@@ -9684,7 +9713,7 @@
         "phaseUp": "IV",
         "title": {
             "en": "Lunar Embassy",
-            "fr": "Lunar Embassy"
+            "fr": "Embassade Lunaire"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
@@ -9698,6 +9727,119 @@
         "playedText": {
             "en": "Draw a card.$skipline$Raise infrastructure 1 step.",
             "fr": "Piochez une carte.$skipline$Augmentez l'infrastructure de 1."
+        },
+        "status": "validated",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM17",
+        "origin": "fanmade",
+        "cost": 21,
+        "tagsId": [
+            2,
+            8,
+            7
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "1",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Ecology Research",
+            "fr": "Recherche Ecologique"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_plant$/$tag_science$$tag_science$",
+            "fr": "$ressource_plant$/$tag_science$$tag_science$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces $ressource_plant$ per two $tag_science$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit $ressource_plant$ tous les deux $tag_science$ en votre possession, y compris celui-ci."
+        },
+        "playedText": {
+            "en": "Add 2 $ressource_microbe$ to another card.$skipline$Add  $ressource_animal$ to another card.",
+            "fr": "Ajoutez 2 $ressource_microbe$ \u00e0 une autre carte.$skipline$Ajoutez $ressource_animal$ \u00e0 une autre carte."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM18",
+        "origin": "fanmade",
+        "cost": 15,
+        "tagsId": [
+            1,
+            5
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "1",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Galilean Waystation",
+            "fr": "Escale de Galil\u00e9e"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacredit$/$tag_jovian$",
+            "fr": "$ressource_megacredit$/$tag_jovian$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 MC per $tag_jovian$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_jovian$ en votre possession, y compris celui-ci."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM19",
+        "origin": "fanmade",
+        "cost": 43,
+        "tagsId": [
+            1,
+            0,
+            4
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "4",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Earth Elevator",
+            "fr": "Ascenseur Terrestre"
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_titanium$$ressource_titanium$$ressource_titanium$",
+            "fr": "$ressource_titanium$$ressource_titanium$$ressource_titanium$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a $tag_space$, you pay 9MC less for it.",
+            "fr": "EFFECT: Lorsque vous jouez un $tag_space$, payez 9MC de moins."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM20",
+        "origin": "fanmade",
+        "cost": 27,
+        "tagsId": [
+            1
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "1",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Interplanetary Trade",
+            "fr": "Interplanetary Trade"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacredit$/$tag_omni$",
+            "fr": "$ressource_megacredit$/$tag_omni$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 MC per different tag you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par badge diff\u00e9rent en votre possession, y compris celui-ci."
         },
         "status": "implemented",
         "vpScaling": "0"

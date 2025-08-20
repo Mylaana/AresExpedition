@@ -534,7 +534,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'121': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Designed Microorganisms
 	'127': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'max', s),
-	//Designed Microorganisms
+	//Dust Quarry
 	'129': (s) => Checker.isOceanOk(3, 'max', s),
 	//Energy Storage
 	'131': (s) => Checker.isTrOk(7, 'min', s),
@@ -1578,6 +1578,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		]),
 		//EventFactory.simple.scanKeep({scan:15, keep:2}, DeckQueryOptionsEnum.ringCom)
 	],
+	//Lili volunteering initiative
+	'CF5': () => [
+		EventFactory.simple.addProduction([{name:'megacredit', valueStock:2},{name:'plant', valueStock:1},{name:'megacredit', valueStock:1}]),
+		EventFactory.simple.upgradePhaseCard(1,[0,1,3])
+	],
 	//Topsoil Contract
 	'FM3': () => [EventFactory.simple.addRessource({name:'plant', valueStock:3})],
 	//Rego Plastics
@@ -1619,8 +1624,18 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.draw(1),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:3})
-	]
-
+	],
+	//Ecology research
+	'FM17': () => [
+		EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:2}),
+		EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:1})
+	],
+	//Earth Elevator
+	'FM19': () => [
+		EventFactory.simple.addProduction([
+			{ name: 'titanium', valueStock: 3 },
+		]),
+	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Earth Catapult
@@ -1844,6 +1859,8 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'206': (s)=> [{name:'heat', valueStock:s.getTagsOfType('power')}],
 	//Worms
 	'207': (s)=> [{name:'plant', valueStock:s.getTagsOfType('microbe')}],
+	//Zeppelins
+	'208': (s)=> [{name:'megacredit', valueStock:s.getForest()}],
 	//Diverse Habitats
 	'P03': (s)=> [{name:'megacredit', valueStock:(s.getTagsOfType('animal') + s.getTagsOfType('plant'))}],
 	//Laboratories
@@ -1858,6 +1875,12 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /3)}],
 	//Lunar Embassy
 	'FM16': (s)=> [{name:'plant', valueStock:Math.floor(s.getTagsOfType('earth') /2)}],
+	//Ecology Research
+	'FM17': (s)=> [{name:'plant', valueStock:Math.floor(s.getTagsOfType('science') /2)}],
+	//Galilean Waystation
+	'FM18': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('jovian')}],
+	//Interplanetary Trade
+	'FM20': (s)=> [{name:'megacredit', valueStock:s.getDifferentTagTypeCount()}],
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms
