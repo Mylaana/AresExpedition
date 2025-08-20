@@ -65,6 +65,12 @@
         "imageUrl": "assets/tag/wild.png",
         "name": "$tag_wild$"
     },
+    {
+        "id": 11,
+        "description": "omni",
+        "imageUrl": "assets/tag/omni.png",
+        "name": "$tag_omni$"
+    },
 	{
         "id": 1000,
         "description": "steel",

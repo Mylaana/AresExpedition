@@ -82,7 +82,7 @@ export class MilestoneAwardService {
 	private getMilestoneIconCaption(milestone: MilestonesEnum): string {
 		switch(milestone){
 			case(MilestonesEnum.builder):{return '$tag_building$'}
-			case(MilestonesEnum.diversifier):{return '$tag_wild$'}
+			case(MilestonesEnum.diversifier):{return '$tag_omni$'}
 			case(MilestonesEnum.energizer):{return '$ressource_heat$'}
 			case(MilestonesEnum.farmer):{return '$ressource_plant$'}
 			case(MilestonesEnum.gardener):{return '$other_forest$'}
@@ -178,11 +178,7 @@ export class MilestoneAwardService {
 		switch(milestone){
 			case(MilestonesEnum.builder):{return state.getTagsOfType('building')}
 			case(MilestonesEnum.diversifier):{
-				let diversifier: number = 0
-				for(let i=0; i<10; i++){
-					diversifier += state.getTagsOfType(Utils.toTagType(i))>=1?1:0
-				}
-				return diversifier
+				return state.getDifferentTagTypeCount()
 			}
 			case(MilestonesEnum.energizer):{return state.getRessourceInfoFromType('heat')?.valueProd??0}
 			case(MilestonesEnum.farmer):{return state.getRessourceInfoFromType('plant')?.valueProd??0}
