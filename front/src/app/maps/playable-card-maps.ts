@@ -616,6 +616,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'FM6': (s) => Checker.isTagOk('science', 2, 'min', s),
 	//Mercurian Alloys
 	'FM11': (s) => Checker.isTagOk('science', 4, 'min', s),
+	//Magnetic Shield
+	'FM22': (s) => Checker.isTagOk('power', 3, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -1635,6 +1637,14 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.addProduction([
 			{ name: 'titanium', valueStock: 3 },
 		]),
+	],
+	//Io Sulphur Research
+	'FM21': (state) => [
+		EventFactory.simple.draw(state.getTagsOfType('jovian')>=3?3:1)
+	],
+	//Magnetic shield
+	'FM22': () => [
+		EventFactory.simple.addTR(4),
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {

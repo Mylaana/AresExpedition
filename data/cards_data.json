@@ -8304,8 +8304,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_card$ / 3$tag_science$",
-            "fr": "$ressource_card$ / 3$tag_science$"
+            "en": "$ressource_card$ / $tag_science$$tag_science$$tag_science$",
+            "fr": "$ressource_card$ / $tag_science$$tag_science$$tag_science$"
         },
         "effectText": {
             "en": "During the production phase, draw a card for every 3 $tag_science$ you have, including this.",
@@ -8403,7 +8403,7 @@
             "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 4 MC. "
         },
         "playedText": {
-            "en": "Reveal cards from the top of the deck until you reveal a BUILDING. Place it into your hand. Discard the rest.",
+            "en": "Reveal cards from the top of the deck until you reveal a $tag_building$. Place it into your hand. Discard the rest.",
             "fr": "R\u00e9v\u00e9lez les premi\u00e8res cartes de la pioche jusqu'\u00e0 r\u00e9v\u00e9ler un $tag_building$. Placez le dans votre main. D\u00e9faussez les autres. "
         },
         "status": "blocked",
@@ -9840,6 +9840,56 @@
         "effectText": {
             "en": "During the production phase, this card produces 1 MC per different tag you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC par badge diff\u00e9rent en votre possession, y compris celui-ci."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM21",
+        "origin": "fanmade",
+        "cost": 17,
+        "tagsId": [
+            9,
+            2,
+            5
+        ],
+        "cardType": "redProject",
+        "vpNumber": "2",
+        "title": {
+            "en": "Io Sulphur Research",
+            "fr": "Recherche de Souffre sur Io"
+        },
+        "playedText": {
+            "en": "Draw a card.$skipline$If you have3 $tag_jovian$ or more (this one included), draw 2 additional cards.",
+            "fr": "Piochez une carte.$skipline$Si vous avez 3 $tag_jovian$ ou plus (celui-ci inclus), piochez 2 cartes suppl\u00e9mentaires."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM22",
+        "origin": "fanmade",
+        "cost": 24,
+        "tagsId": [
+            9,
+            1
+        ],
+        "cardType": "redProject",
+        "title": {
+            "en": "Magnetic Shield",
+            "fr": "Bouclier Magn\u00e9tique"
+        },
+        "playedText": {
+            "en": "Gain $other_tr$$other_tr$$other_tr$$other_tr$.",
+            "fr": "Gagnez $other_tr$$other_tr$$other_tr$$other_tr$."
+        },
+        "prerequisiteText": {
+            "en": "Requires 3 $tag_power$.",
+            "fr": "Requiert 3 $tag_power$."
+        },
+        "prerequisiteSummaryText": {
+            "en": "$tag_power$$tag_power$$tag_power$",
+            "fr": "$tag_power$$tag_power$$tag_power$"
         },
         "status": "implemented",
         "vpScaling": "0"
