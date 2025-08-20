@@ -268,7 +268,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	],
 	//Pride of the earth Arkship
 	'FM11': (cardCode, state) => [
-		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 6)}, cardCode)
+		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 4)}, cardCode)
 	],
 	//Ants
 	'FM15': (cardCode, state) => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:getScaling(cardCode, state)}, cardCode)],
