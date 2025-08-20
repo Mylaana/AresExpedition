@@ -9158,7 +9158,7 @@
         },
         "effectText2": {
             "en": "EFFECT: Each time you play a $tag_earth$, draw a card",
-            "fr": "Effet: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
+            "fr": "EFFET: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
         },
         "startingMegacredits": 32,
         "status": "validated",
@@ -9172,8 +9172,8 @@
         ],
         "cardType": "corporation",
         "title": {
-            "en": "Pushnik hacker alliance",
-            "fr": ""
+            "en": "Pu$hn!k H4ck3r 4ll!@nc3",
+            "fr": "Pu$hn!k H4ck3r 4ll!@nc3"
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -9190,11 +9190,11 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : 1MC.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$ $ressource_microbe$.$skipline$$other_phase_production$: +1 random prod:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$/$ressource_card$.$skipline$$other_phase_research$ : Draw a card.",
-            "fr": ""
+            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: +1 random prod:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card.",
+            "fr": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: +1 random prod:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card."
         },
         "startingMegacredits": 25,
-        "status": "filled",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {
@@ -9224,7 +9224,7 @@
         },
         "effectText2": {
             "en": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
-            "fr": ""
+            "fr": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$."
         },
         "stockable": [
             "science"
@@ -9860,7 +9860,7 @@
             "fr": "Recherche de Souffre sur Io"
         },
         "playedText": {
-            "en": "Draw a card.$skipline$If you have3 $tag_jovian$ or more (this one included), draw 2 additional cards.",
+            "en": "Draw a card.$skipline$If you have 3 $tag_jovian$ or more (this one included), draw 2 additional cards.",
             "fr": "Piochez une carte.$skipline$Si vous avez 3 $tag_jovian$ ou plus (celui-ci inclus), piochez 2 cartes suppl\u00e9mentaires."
         },
         "status": "implemented",

@@ -75,7 +75,9 @@ export enum EffectPortalEnum {
 	biomedicalImports,
 	cryogenticShipment,
 	cargoShips,
-	localHeatTrapping
+	localHeatTrapping,
+	pushnikAction,
+	pushnikProduction
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -102,7 +104,15 @@ export enum EffectPortalButtonEnum {
 	cargoShips_Heat,
 
 	localHeatTrapping_Microbe,
-	localHeatTrapping_Animal
+	localHeatTrapping_Animal,
+
+	pushnikAction_Microbe,
+	pushnikAction_Animal,
+	pushnikAction_Science,
+
+	pushnikProduction_mc,
+	pushnikProduction_heat,
+	pushnikProduction_plant,
 }
 export enum AwardsEnum {
 	/** most phase upgraded*/

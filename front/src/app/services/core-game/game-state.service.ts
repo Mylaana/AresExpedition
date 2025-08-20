@@ -156,6 +156,13 @@ export class GameState{
 		if(this.isLastPhaseOfRound(newPhase)){
 			events.push(EventFactory.createCardSelector('selectCardForcedSell'))
 		}
+		if(newPhase!=NonSelectablePhaseEnum.planification){
+			let state = this.getClientState()
+			let triggers = state.getTriggersIdActive()
+			let newEvents = PlayableCard.getOnTriggerredEvents('ON_PHASE_ACTIVATED', triggers, state, {activatedPhase: newPhase, clientSelectedPhase: state.getPhaseSelected()})
+			this.addEventQueue(newEvents, 'first')
+			console.log(newEvents)
+		}
 		events.push(EventFactory.createGeneric('endOfPhase'))
 		events.push(EventFactory.createGeneric('waitingGroupReady'))
 		this.phase.next(newPhase)
@@ -254,7 +261,6 @@ export class GameState{
 		let triggers = state.getTriggersIdActive()
 		let newEvents = PlayableCard.getOnTriggerredEvents('ON_UPGRADED_PHASE_SELECTED', triggers, state, {})
 		this.addEventQueue(newEvents, 'last')
-
     }
     clientPlayerValidateSelectedPhase(): void {
         this.rxStompService.publishSelectedPhase(this.getClientCurrentSelectedPhase())

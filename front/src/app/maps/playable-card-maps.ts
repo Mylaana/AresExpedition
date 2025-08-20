@@ -1572,6 +1572,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'CF1': () => [
 		EventFactory.simple.addProduction({name:'titanium', valueStock:1})
 	],
+	//Pushnik Haker alliance
+	'CF2': () => [
+		EventFactory.simple.addProduction({name:'steel', valueStock:1})
+	],
 	//Ringcom
 	'CF4': () => [
 		EventFactory.simple.addProduction([
@@ -1759,6 +1763,30 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 		}
 		return [EventFactory.simple.addRessource({name:'plant', valueStock:2})]
 	},
+	//Pushnik Haker alliance - Action
+	'CF2': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.pushnikAction_Animal):{
+				return [EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:1}, 1)]
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Microbe):{
+				return [EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:1}, 1)]
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Science):{
+				return [EventFactory.simple.addRessourceToSelectedCard({name:'science', valueStock:1}, 1)]
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_mc):{
+				return [EventFactory.simple.addProduction({name:'megacredit', valueStock:1})]
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_heat):{
+				return [EventFactory.simple.addProduction({name:'heat', valueStock:1})]
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_plant):{
+				return [EventFactory.simple.addProduction({name:'plant', valueStock:1})]
+			}
+		}
+		return []
+	},
 }
 export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalButtonEnum) => string> = {
 	//Decomposers
@@ -1803,7 +1831,36 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	'D15': (button) => button===EffectPortalButtonEnum.cryogenticShipment_Microbe?'$ressource_microbe$$ressource_microbe$$ressource_microbe$':'$ressource_animal$$ressource_animal$',
 	//Cargo Ships
 	'F04': (button) => button===EffectPortalButtonEnum.cargoShips_Heat?'$ressource_heat$$ressource_heat$':'$ressource_plant$$ressource_plant$',
-
+	//Pushink haker alliance - Action
+	'CF2-Action': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.pushnikAction_Animal):{
+				return '$ressource_animal$*'
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Microbe):{
+				return '$ressource_microbe$*'
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Science):{
+				return '$ressource_science$*'
+			}
+		}
+		return ''
+	},
+	//Pushink haker alliance - Production
+	'CF2-Production': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.pushnikProduction_mc):{
+				return '$ressource_megacredit$'
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_heat):{
+				return '$ressource_heat$'
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_plant):{
+				return '$ressource_plant$'
+			}
+		}
+		return ''
+	},
 }
 export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalButtonEnum[]> = {
 	//Decomposers
@@ -1822,9 +1879,13 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	'D15': ()=> [EffectPortalButtonEnum.cryogenticShipment_Microbe, EffectPortalButtonEnum.cryogenticShipment_Animal],
 	//Cargo Ships
 	'F04': ()=> [EffectPortalButtonEnum.cargoShips_Heat, EffectPortalButtonEnum.cargoShips_Plant],
+	//Pushnik Action
+	'CF2-Action': ()=> [EffectPortalButtonEnum.pushnikAction_Animal, EffectPortalButtonEnum.pushnikAction_Microbe, EffectPortalButtonEnum.pushnikAction_Science],
+	//Pushnik Action
+	'CF2-Production': ()=> [EffectPortalButtonEnum.pushnikProduction_mc, EffectPortalButtonEnum.pushnikProduction_heat, EffectPortalButtonEnum.pushnikProduction_plant],
 
 }
-export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
+export const EFFECT_ENUM_TO_EFFECT_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
 	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
@@ -1833,6 +1894,20 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.biomedicalImports]: 'D14',
 	[EffectPortalEnum.cryogenticShipment]: 'D15',
 	[EffectPortalEnum.cargoShips]: 'F04',
+	[EffectPortalEnum.pushnikAction]: 'CF2-Action',
+	[EffectPortalEnum.pushnikProduction]: 'CF2-Production',
+}
+export const EFFECT_ENUM_TO_CARD_CODE: Record<EffectPortalEnum, string> = {
+	[EffectPortalEnum.decomposers]: '19',
+	[EffectPortalEnum.viralEnhancer]: '61',
+	[EffectPortalEnum.importedHydrogen]:'80',
+	[EffectPortalEnum.largeConvoy]: '87',
+	[EffectPortalEnum.localHeatTrapping]: '89',
+	[EffectPortalEnum.biomedicalImports]: 'D14',
+	[EffectPortalEnum.cryogenticShipment]: 'D15',
+	[EffectPortalEnum.cargoShips]: 'F04',
+	[EffectPortalEnum.pushnikAction]: 'CF2',
+	[EffectPortalEnum.pushnikProduction]: 'CF2',
 }
 export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},

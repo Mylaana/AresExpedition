@@ -4,7 +4,7 @@ import { EffectPortalEnum } from "../../enum/global.enum";
 import { EffectPortalButton} from "../../models/core-game/button.model";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventBaseModel } from "../../models/core-game/event.model";
-import { EFFECT_ENUM_TO_CODE, EFFECT_PORTAL } from "../../maps/playable-card-maps";
+import { EFFECT_ENUM_TO_CARD_CODE, EFFECT_ENUM_TO_EFFECT_CODE, EFFECT_PORTAL } from "../../maps/playable-card-maps";
 import { ButtonDesigner } from "../../factory/button-designer.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 
@@ -24,12 +24,12 @@ export class EffectPortalService {
         this.portal = portal
         let cards = this.gameStateService.getClientProjectPlayedModelList()
         if(!cards){return}
-        this.portalCard =  cards.filter((e) => e.cardCode===EFFECT_ENUM_TO_CODE[portal])[0]
+        this.portalCard =  cards.filter((e) => e.cardCode===EFFECT_ENUM_TO_CARD_CODE[portal])[0]
 		this.updateButtons()
     }
 	updateButtons(){
 		if(this.portal===undefined){return}
-		this.buttons = ButtonDesigner.createPortalButtonSet(EFFECT_ENUM_TO_CODE[this.portal], this.clientState)
+		this.buttons = ButtonDesigner.createPortalButtonSet(EFFECT_ENUM_TO_EFFECT_CODE[this.portal], this.clientState)
 	}
 	onStateUpdate(state: PlayerStateModel){
 		this.clientState = state
@@ -42,6 +42,7 @@ export class EffectPortalService {
         return this.buttons
     }
     resolveButtonClicked(button: EffectPortalButton){
+		console.log(button)
         let newEvents: EventBaseModel[] = EFFECT_PORTAL[this.portalCard.cardCode](button.effect)
         if(newEvents.length===0){return}
         this.gameStateService.addEventQueue(newEvents, 'first')
