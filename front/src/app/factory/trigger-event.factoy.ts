@@ -43,6 +43,20 @@ const S = EventFactory.simple
 			S.discard(1)
 		]
 	}
+	//Advertising
+	function handleTrigger_FM23(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.playedCard.costInitial<20){return []}
+		return [
+			S.addProduction({name:'megacredit', valueStock:1}),
+		]
+	}
+	//Spinoff Department
+	function handleTrigger_FM24(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.playedCard.costInitial<20){return []}
+		return [
+			S.draw(1),
+		]
+	}
 
 //ON_PARAMETER_INCREASED
 	//Arctic Alagae
@@ -385,7 +399,9 @@ const S = EventFactory.simple
 const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput, clientState?: PlayerStateModel) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
 		'6': handleTrigger_6,
-		'P16': handleTrigger_P16
+		'P16': handleTrigger_P16,
+		'FM23': handleTrigger_FM23,
+		'FM24': handleTrigger_FM24
 	},
 	ON_PARAMETER_INCREASED: {
 		'8': handleTrigger_8,

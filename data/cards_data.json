@@ -9190,8 +9190,8 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: +1 random prod:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card.",
-            "fr": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: +1 random prod:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card."
+            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: increase one production:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card.",
+            "fr": ""
         },
         "startingMegacredits": 25,
         "status": "implemented",
@@ -9892,6 +9892,76 @@
             "fr": "$tag_power$$tag_power$$tag_power$"
         },
         "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM23",
+        "origin": "fanmade",
+        "cost": 4,
+        "tagsId": [
+            4
+        ],
+        "cardType": "blueProject",
+        "title": {
+            "en": "Advertising",
+            "fr": ""
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": ">=$ressource_megacreditvoid_20$: +1$ressource_megacreditvoid_1$",
+            "fr": ">=$ressource_megacreditvoid_20$: +1$ressource_megacreditvoid_1$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a card that costs 20 MC or more, increase your MC production by 1.",
+            "fr": "EFFET: lorsque vous jouez une carte dont le co\u00fbt imprim\u00e9 est de 20 ou plus, augmentez votre production de MC de 1."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM24",
+        "origin": "fanmade",
+        "cost": 10,
+        "tagsId": [
+            0
+        ],
+        "cardType": "blueProject",
+        "title": {
+            "en": "Spinoff Department",
+            "fr": "P\u00e9pini\u00e8re d'entreprises"
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": ">=$ressource_megacreditvoid_20$: $ressource_card$",
+            "fr": ">=$ressource_megacreditvoid_20$: $ressource_card$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you play a card that costs 20 MC or more, draw a card.",
+            "fr": "EFFET: lorsque vous jouez une carte dont le co\u00fbt imprim\u00e9 est de 20 ou plus, piochez une carte."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM25",
+        "origin": "fanmade",
+        "cost": 21,
+        "tagsId": [
+            9,
+            1,
+            5
+        ],
+        "cardType": "redProject",
+        "vpNumber": "1",
+        "title": {
+            "en": "Secret Labs",
+            "fr": "Laboratoires Secrets"
+        },
+        "playedText": {
+            "en": "Increase one : $other_ocean$+$ressource_microbe$$ressource_microbe$* / $other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$ / $other_temperature$+$ressource_science$$ressource_science$*",
+            "fr": "Increase one : $other_ocean$+$ressource_microbe$$ressource_microbe$* / $other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$ / $other_temperature$+$ressource_science$$ressource_science$*"
+        },
+        "status": "filled",
         "vpScaling": "0"
     }
 ]
