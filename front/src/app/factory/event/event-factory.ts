@@ -570,6 +570,15 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					event.title = "Play a card of any color which value is 12MC or less without paying it's cost"
 					break
 				}
+				case(BuilderOption.conscription):{
+					let builder = generateCardBuilder(0)
+					builder.setOption(builderOption)
+					event.cardBuilder.push(builder)
+					buildDiscountValue = 16
+
+					event.title = "Play a card of any color which value is 12MC or less without paying it's cost"
+					break
+				}
 			}
 			break
 		}

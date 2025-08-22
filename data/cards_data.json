@@ -9832,7 +9832,7 @@
             "en": "During the production phase, this card produces 1 MC per different tag you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC par badge diff\u00e9rent en votre possession, y compris celui-ci."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9949,10 +9949,122 @@
             "fr": "Laboratoires Secrets"
         },
         "playedText": {
-            "en": "Increase one : $other_ocean$+$ressource_microbe$$ressource_microbe$* / $other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$ / $other_temperature$+$ressource_science$$ressource_science$*",
-            "fr": "Increase one : $other_ocean$+$ressource_microbe$$ressource_microbe$* / $other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$ / $other_temperature$+$ressource_science$$ressource_science$*"
+            "en": "Choose one : $other_ocean$+$ressource_microbe$$ressource_microbe$* / $other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$ / $other_temperature$+$ressource_science$$ressource_science$*",
+            "fr": "Choisissez un : $other_ocean$+$ressource_microbe$$ressource_microbe$* / $other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$ / $other_temperature$+$ressource_science$$ressource_science$*"
         },
-        "status": "filled",
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM26",
+        "origin": "fanmade",
+        "cost": 17,
+        "tagsId": [
+            2,
+            5
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "2",
+        "title": {
+            "en": "Red Spot Observatory",
+            "fr": "Observatoire de la Grande Tache Rouge"
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$$ressource_card$",
+            "fr": "$other_arrow$$ressource_card$"
+        },
+        "effectText": {
+            "en": "ACTION: Draw a card.",
+            "fr": "ACTION: Piochez une carte"
+        },
+        "playedText": {
+            "en": "Draw two cards.",
+            "fr": "Piochez deux cartes."
+        },
+        "prerequisiteText": {
+            "en": "Requires 3 $tag_science$.",
+            "fr": "Requiert 3 $tag_science$."
+        },
+        "prerequisiteSummaryText": {
+            "en": "$tag_science$$tag_science$$tag_science$",
+            "fr": "$tag_science$$tag_science$$tag_science$"
+        },
+        "status": "implemented",
+        "actionTextOption1": {
+            "en": "$ressource_card$",
+            "fr": "$ressource_card$"
+        },
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM27",
+        "origin": "fanmade",
+        "cost": 20,
+        "tagsId": [
+            5
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "*",
+        "title": {
+            "en": "Jovian Lanterns",
+            "fr": "Lanternes Joviennes"
+        },
+        "vpText": {
+            "en": "/ $ressource_science$",
+            "fr": "/ $ressource_science$"
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$$skipline$$ressource_science$/$tag_jovian$$tag_jovian$$tag_jovian$",
+            "fr": "$other_arrow$$skipline$$ressource_science$/$tag_jovian$$tag_jovian$$tag_jovian$"
+        },
+        "effectText": {
+            "en": "ACTION: Add 1 $ressource_science$ here per 3 $tag_jovian$ you have.",
+            "fr": "ACTION: Ajoutez 1 $ressource_science$ sur cette carte pour 3 $tag_jovian$ en votre possession."
+        },
+        "effectSummaryOption": "scalingCostActivation",
+        "prerequisiteText": {
+            "en": "Requires 1 $tag_jovian$.",
+            "fr": "Requiert 1 $tag_jovian$."
+        },
+        "prerequisiteSummaryText": {
+            "en": "$tag_jovian$",
+            "fr": "$tag_jovian$"
+        },
+        "stockable": [
+            "science"
+        ],
+        "status": "implemented",
+        "vpScaling": "1"
+    },
+    {
+        "card_code": "FM28",
+        "origin": "fanmade",
+        "cost": 5,
+        "tagsId": [
+            9,
+            4
+        ],
+        "cardType": "redProject",
+        "vpNumber": "-1",
+        "title": {
+            "en": "Conscription",
+            "fr": "Conscription"
+        },
+        "playedText": {
+            "en": "You may play an additional card this phase. That card may be a green card. You pay 16 MC less for the card you play this phase.",
+            "fr": "Vous pouvez jouer une carte suppl\u00e9mentaire lors de cette phase. Cette carte peut \u00eatre verte. Le co\u00fbt de la prochaine carte que vous jouez lors de cette phase est r\u00e9duit de 16 MC. "
+        },
+        "prerequisiteText": {
+            "en": "Requires 2 $tag_earth$.",
+            "fr": "Requiert 2 $tag_earth$."
+        },
+        "prerequisiteSummaryText": {
+            "en": "$tag_earth$$tag_earth$",
+            "fr": "$tag_earth$$tag_earth$"
+        },
+        "status": "implemented",
         "vpScaling": "0"
     }
 ]

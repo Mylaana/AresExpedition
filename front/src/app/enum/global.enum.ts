@@ -65,7 +65,8 @@ export enum BuilderOption {
 	assortedEnterprises = 'assortedEnterprises',
 	selfReplicatingBacteria = 'selfReplicatingBacteria',
 	maiNiProductions = 'maiNiProductions',
-	researchGrant = 'researchGrant'
+	researchGrant = 'researchGrant',
+	conscription = 'conscription'
 }
 export enum EffectPortalEnum {
 	decomposers,
@@ -77,7 +78,8 @@ export enum EffectPortalEnum {
 	cargoShips,
 	localHeatTrapping,
 	pushnikAction,
-	pushnikProduction
+	pushnikProduction,
+	secretLabs
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -113,6 +115,10 @@ export enum EffectPortalButtonEnum {
 	pushnikProduction_mc,
 	pushnikProduction_heat,
 	pushnikProduction_plant,
+
+	secretLabs_Ocean,
+	secretLabs_Oxygen,
+	secretLabs_Temperature
 }
 export enum AwardsEnum {
 	/** most phase upgraded*/
