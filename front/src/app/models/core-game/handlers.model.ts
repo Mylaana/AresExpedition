@@ -451,7 +451,11 @@ export class EventHandler {
 			}
 			case('drawResult'):{
 				if(event.drawResultList===undefined){break}
-				this.gameStateService.addCardsToClientHand(event.drawResultList)
+				if(event.isCardProductionDouble){
+					this.gameStateService.addCardProduction(event.drawResultList, false)
+				} else {
+					this.gameStateService.addCardsToClientHand(event.drawResultList)
+				}
 				break
 			}
 			case('drawResultThenDiscard'):{
@@ -520,7 +524,13 @@ export class EventHandler {
 			}
 			case('loadProductionPhaseCards'):{
 				if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
-				this.gameStateService.loadProductionPhaseCardList(event.loadProductionCardList)
+				this.gameStateService.loadProductionPhaseCardList(event.loadProductionCardList, false)
+				break
+			}
+			case('loadProductionPhaseCardDouble'):{
+				if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
+				this.gameStateService.loadProductionPhaseCardList(event.loadProductionCardList, true)
+				this.gameStateService.loadProductionPhaseCardList(event.firstCardProduction??[], false)
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
@@ -560,7 +570,14 @@ export class EventHandler {
 		let drawNumber = event.drawDiscard?.draw
 		if(drawNumber!=undefined && drawNumber>0){
 			this.gameStateService.addDrawQueue(
-				DrawEventFactory.createDrawEvent(resolveType, drawNumber,event.id, event.isCardProduction, event.drawThenDiscard?event.drawDiscard?.discard:0)
+				DrawEventFactory.createDrawEvent(
+					resolveType,
+					drawNumber,event.id,
+					event.isCardProduction,
+					event.drawThenDiscard?event.drawDiscard?.discard:0,
+					event.isCardProductionDouble,
+					event.firstCardProduction
+				)
 			)
 		}
 		if(event.scanKeep!==undefined){
@@ -682,7 +699,7 @@ export class DrawEventHandler {
 		event.queried = true
 		switch(event.resolveEventSubType){
 			case('drawResult'):{
-				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction)
+				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, undefined, event.isCardProductionDouble, event.firstCardProduction)
 				break
 			}
 			case('researchPhaseResult'):{
@@ -711,7 +728,8 @@ export class DrawEventHandler {
 					'drawResult',
 					{
 						drawEventResult:drawEvent.drawResultCardList,
-						waiterId:drawEvent.waiterId
+						waiterId:drawEvent.waiterId,
+						isCardProductionDouble:drawEvent.isCardProductionDouble
 					}
 				)
 				break

@@ -41,13 +41,17 @@ interface CreateEventOptionsGeneric {
 	increaseTr?: number
 	loadProductionCardList?: string[]
     effectPortal?: EffectPortalEnum
+	isCardProductionDouble?: boolean
+	firstProductionCardList?: string[]
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
     scanKeep?: Partial<ScanKeep>,
 	isCardProduction?: boolean,
-	scanKeepOptions?: DeckQueryOptionsEnum
-	drawThenDiscard?: boolean
+	isCardProductionDouble?: boolean,
+	scanKeepOptions?: DeckQueryOptionsEnum,
+	drawThenDiscard?: boolean,
+	firstProductionCardList?: string[]
 }
 
 function draw(drawNumber: number): EventBaseModel {
@@ -672,6 +676,8 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         case('drawResult'):{
             event.drawResultList = args?.drawEventResult
             event.waiterId = args?.waiterId
+			event.isCardProductionDouble = args?.isCardProductionDouble
+			event.firstCardProduction = args?.firstProductionCardList
             break
         }
         case('waitingGroupReady'):{
@@ -695,6 +701,11 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         }
 		case('loadProductionPhaseCards'):{
 			event.loadProductionCardList = args?.loadProductionCardList
+			break
+		}
+		case('loadProductionPhaseCardDouble'):{
+			event.loadProductionCardList = args?.loadProductionCardList
+			event.firstCardProduction = args?.firstProductionCardList
 			break
 		}
 		case('drawResultThenDiscard'):{
@@ -727,6 +738,8 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
         case('drawQuery'):{
             event.drawDiscard = args?.drawDiscard
             event.isCardProduction = args?.isCardProduction
+			event.isCardProductionDouble = args?.isCardProductionDouble
+			event.firstCardProduction = args?.firstProductionCardList
             break
         }
         case('researchPhaseQuery'):{

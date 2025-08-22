@@ -162,8 +162,8 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_card$:$skipline$2$ressource_heat$+2$ressource_plant$",
-            "fr": "$ressource_card$:$skipline$2$ressource_heat$+2$ressource_plant$"
+            "en": "$ressource_card$:$skipline$$ressource_heat$$ressource_heat$$skipline$$ressource_plant$$ressource_plant$",
+            "fr": "$ressource_card$:$skipline$$ressource_heat$$ressource_heat$$skipline$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card, gain 2 heat and 2 plants.",
@@ -9175,25 +9175,16 @@
             "en": "Pu$hn!k H4ck3r 4ll!@nc3",
             "fr": "Pu$hn!k H4ck3r 4ll!@nc3"
         },
-        "effectSummaryType": "greyProduction",
+        "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_steel$",
-            "fr": "$ressource_steel$"
-        },
-        "effectText": {
-            "en": "Whenever you play a $tag_building$, you pay 2MC less for it.",
-            "fr": ""
-        },
-        "effectSummaryType2": "trigger",
-        "effectSummaryText2": {
             "en": "$other_planification$: ?",
             "fr": ""
         },
-        "effectText2": {
+        "effectText": {
             "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: increase one production:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card.",
             "fr": ""
         },
-        "startingMegacredits": 25,
+        "startingMegacredits": 40,
         "status": "implemented",
         "vpScaling": "0"
     },
@@ -9291,7 +9282,7 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Upgrade your phase card I, II or IV.",
+            "en": "Upgrade your phase card I or II.",
             "fr": ""
         },
         "startingMegacredits": 40,
@@ -9787,7 +9778,7 @@
             "en": "During the production phase, this card produces 1 MC per $tag_jovian$ you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_jovian$ en votre possession, y compris celui-ci."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9815,7 +9806,7 @@
             "en": "EFFECT: When you play a $tag_space$, you pay 9MC less for it.",
             "fr": "EFFECT: Lorsque vous jouez un $tag_space$, payez 9MC de moins."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9863,7 +9854,7 @@
             "en": "Draw a card.$skipline$If you have 3 $tag_jovian$ or more (this one included), draw 2 additional cards.",
             "fr": "Piochez une carte.$skipline$Si vous avez 3 $tag_jovian$ ou plus (celui-ci inclus), piochez 2 cartes suppl\u00e9mentaires."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9908,14 +9899,14 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": ">=$ressource_megacreditvoid_20$: +1$ressource_megacreditvoid_1$",
-            "fr": ">=$ressource_megacreditvoid_20$: +1$ressource_megacreditvoid_1$"
+            "en": ">=$ressource_megacreditvoid_20$: $skipline$$ressource_megacreditvoid_1$production",
+            "fr": ">=$ressource_megacreditvoid_20$: $skipline$$ressource_megacreditvoid_1$production"
         },
         "effectText": {
             "en": "EFFECT: When you play a card that costs 20 MC or more, increase your MC production by 1.",
             "fr": "EFFET: lorsque vous jouez une carte dont le co\u00fbt imprim\u00e9 est de 20 ou plus, augmentez votre production de MC de 1."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9939,7 +9930,7 @@
             "en": "EFFECT: When you play a card that costs 20 MC or more, draw a card.",
             "fr": "EFFET: lorsque vous jouez une carte dont le co\u00fbt imprim\u00e9 est de 20 ou plus, piochez une carte."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {

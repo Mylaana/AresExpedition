@@ -196,14 +196,15 @@ public class InputRouter {
             return;
         }
         Integer thenDiscard = query.getThenDiscard();
+        Boolean isCardProductionDouble = query.isCardProductionDouble();
         gameController.setPlayerState(
             query.getGameId(),
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), thenDiscard);
+        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), thenDiscard, isCardProductionDouble, query.getFirstCardProductionList());
         wsOutput.sendPushToPlayer(
-            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId(), thenDiscard)),
+            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId(), thenDiscard, isCardProductionDouble, query.getFirstCardProductionList())),
             query.getPlayerId()
             );
     }

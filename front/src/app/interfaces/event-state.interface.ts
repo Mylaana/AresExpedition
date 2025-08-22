@@ -87,4 +87,5 @@ export interface EventStateContentCardSelectorDTO extends EventStateContentDTO {
 }
 export interface EventStateContentPhaseDTO extends EventStateContentDTO {
 	pda: boolean //doubleProductionApplied
+	cl: string[] //card List
 }

@@ -62,7 +62,6 @@ export class EventStateService{
 						eventBuilder.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
 						eventBuilder.alternativeCostUsedButtonName = dto.v['ac']
 						eventBuilder.buildDiscountValue = dto.v['d']
-						console.log(dto)
 					}
 				}
 				break
@@ -227,6 +226,13 @@ export class EventStateService{
 					let event = this.createEventCardSelector(content)
 					if(!event){treated = false; break}
 					newEvents.push(event)
+					break
+				}
+				case(EventStateTypeEnum.productionCardDouble):{
+					newEvents.push(EventFactory.createGeneric('loadProductionPhaseCardDouble', {
+						loadProductionCardList:state.v['scp'],
+						firstProductionCardList:state.v['fcp']
+					}))
 					break
 				}
 				default:{treated = false}

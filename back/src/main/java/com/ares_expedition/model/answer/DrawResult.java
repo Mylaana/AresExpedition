@@ -5,14 +5,18 @@ public class DrawResult {
     List<String> cardIdList = new ArrayList<String>();
     Integer eventId;
     Integer thenDiscard;
+    Boolean isProductionDouble;
+    List<String> firstCardProductionList;
 
     public DrawResult(){
     }
 
-    public DrawResult(List<String> cardIdList, Integer eventId, Integer thenDiscard) {
+    public DrawResult(List<String> cardIdList, Integer eventId, Integer thenDiscard, Boolean isProductionDouble, List<String> firstCardProductionList) {
         this.cardIdList = cardIdList;
         this.eventId = eventId;
         this.thenDiscard = thenDiscard;
+        this.isProductionDouble = isProductionDouble;
+        this.firstCardProductionList = firstCardProductionList;
     }
 
     public List<String> getCardIdList() {
@@ -39,5 +43,19 @@ public class DrawResult {
         this.thenDiscard = thenDiscard;
     }
 
-    
+    public Boolean getIsProductionDouble() {
+        return isProductionDouble;
+    }
+
+    public void setIsProductionDouble(Boolean isProductionDouble) {
+        this.isProductionDouble = isProductionDouble;
+    }
+
+    public List<String> getFirstCardProductionList() {
+        return firstCardProductionList;
+    }
+
+    public void setFirstCardProductionList(List<String> firstCardProductionList) {
+        this.firstCardProductionList = firstCardProductionList;
+    }
 }

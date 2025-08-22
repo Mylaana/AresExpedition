@@ -1,5 +1,7 @@
 package com.ares_expedition.dto.websocket.content.input;
 
+import java.util.List;
+
 import com.ares_expedition.dto.websocket.content.player_state.PlayerStateDTO;
 
 public class DrawContentDTO extends BaseContentDTO{
@@ -7,13 +9,17 @@ public class DrawContentDTO extends BaseContentDTO{
     Integer eventId;
     PlayerStateDTO playerState;
     Integer thenDiscard;
+    Boolean isCardProductionDouble;
+    List<String> firstCardProductionList;
 
     public DrawContentDTO(){
     }
 
-    public DrawContentDTO(Integer drawNumber, Integer eventId){
+    public DrawContentDTO(Integer drawNumber, Integer eventId, Boolean isProductionDouble, List<String> firstCardProductionList){
       this.drawNumber = drawNumber;
       this.eventId = eventId;
+      this.isCardProductionDouble = isProductionDouble;
+      this.firstCardProductionList = firstCardProductionList;
     }
 
     public Integer getDrawNumber() {
@@ -46,6 +52,22 @@ public class DrawContentDTO extends BaseContentDTO{
 
     public void setThenDiscard(Integer thenDiscard) {
       this.thenDiscard = thenDiscard;
+    }
+
+    public Boolean getIsCardProductionDouble() {
+      return isCardProductionDouble;
+    }
+
+    public void setIsCardProductionDouble(Boolean isProductionDouble) {
+      this.isCardProductionDouble = isProductionDouble;
+    }
+
+    public List<String> getFirstCardProductionList() {
+      return firstCardProductionList;
+    }
+
+    public void setFirstCardProductionList(List<String> firstCardProductionList) {
+      this.firstCardProductionList = firstCardProductionList;
     }
 }
 

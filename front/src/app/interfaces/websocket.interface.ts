@@ -38,8 +38,10 @@ export interface WsDrawQuery extends WsQuery {
     drawNumber: number
     eventId: number
 	isCardProduction: boolean
+	isCardProductionDouble: boolean
 	thenDiscard: number
 	playerState: PlayerStateDTO
+	firstCardProductionList: string[]
 }
 export interface WsScanKeepQuery extends WsQuery {
     scan: number

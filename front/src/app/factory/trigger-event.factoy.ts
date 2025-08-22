@@ -490,7 +490,6 @@ export const TriggerEffectEventFactory = {
 		const relevantTriggers = activeTriggers.filter(trigger => trigger in handlers);
 		const events: EventBaseModel[] = [];
 		const fullInput = toFullTriggerInput(input)
-		console.log(input)
 
 		for (const trig of relevantTriggers) {
 			const handler = handlers[trig];

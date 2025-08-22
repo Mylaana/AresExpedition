@@ -11,6 +11,13 @@ import { OceanBonus, ScanKeep } from "../interfaces/global.interface";
 import { EventUnionSubTypes } from "../types/event.type";
 import { GameOption } from "../services/core-game/create-game.service";
 
+interface DrawQueryOptions {
+	isCardProduction?: boolean
+	thenDiscard?: number,
+	isCardProductionDouble?: boolean
+	firstCardProductionList?: string[]
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -23,8 +30,17 @@ export class WebsocketQueryMessageFactory{
         }
         return message
     }
-    public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO, isCardProduction: boolean = false, thenDiscard: number = 0): PlayerMessage {
-        let query: WsDrawQuery = {drawNumber:drawNumber, eventId: eventId, playerState: dto, isCardProduction: isCardProduction, thenDiscard: thenDiscard}
+    public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO, queryOptions?: DrawQueryOptions): PlayerMessage {
+
+        let query: WsDrawQuery = {
+			drawNumber:drawNumber,
+			eventId: eventId,
+			playerState: dto,
+			isCardProduction: queryOptions?.isCardProduction??false,
+			thenDiscard: queryOptions?.thenDiscard??0,
+			isCardProductionDouble: queryOptions?.isCardProductionDouble??false,
+			firstCardProductionList: queryOptions?.firstCardProductionList??[]
+		}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
     public static createScanKeepQuery(scanKeep: ScanKeep, eventId: number, dto: PlayerStateDTO, resultType: EventUnionSubTypes, options?:DeckQueryOptionsEnum): PlayerMessage {

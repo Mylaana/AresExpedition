@@ -1583,7 +1583,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Lili volunteering initiative
 	'CF5': () => [
 		EventFactory.simple.addProduction([{name:'megacredit', valueStock:2},{name:'plant', valueStock:1},{name:'heat', valueStock:1},{name:'card', valueStock:1}]),
-		EventFactory.simple.upgradePhaseCard(1,[0,1,3])
+		EventFactory.simple.upgradePhaseCard(1,[0,1])
 	],
 	//Topsoil Contract
 	'FM3': () => [EventFactory.simple.addRessource({name:'plant', valueStock:3})],

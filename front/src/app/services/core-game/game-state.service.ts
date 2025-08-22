@@ -81,6 +81,7 @@ export class GameState{
 	private milestones = new BehaviorSubject<Partial<MilestoneState>>({})
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
 	private round = new BehaviorSubject<number>(0)
+	private cardProduction = new BehaviorSubject<string[]>([])
 
     currentGroupPlayerState = this.groupPlayerState.asObservable()
     currentGroupPlayerReady = this.groupPlayerReady.asObservable()
@@ -98,6 +99,7 @@ export class GameState{
 	currentMilestones = this.milestones.asObservable()
 	currentAwards = this.awards.asObservable()
 	currentRound = this.round.asObservable()
+	currentCardProduction = this.cardProduction.asObservable()
 
     phaseIndex: number = 0
 
@@ -147,7 +149,11 @@ export class GameState{
 			case(NonSelectablePhaseEnum.development):{events.push(EventFactory.createPhase('developmentPhase'));break}
 			case(NonSelectablePhaseEnum.construction):{events.push(EventFactory.createPhase('constructionPhase'));break}
 			case(NonSelectablePhaseEnum.action):{events.push(EventFactory.createPhase('actionPhase'));break}
-			case(NonSelectablePhaseEnum.production):{events.push(EventFactory.createPhase('productionPhase'));break}
+			case(NonSelectablePhaseEnum.production):{
+				this.cardProduction.next([])
+				events.push(EventFactory.createPhase('productionPhase'))
+				break
+			}
 			case(NonSelectablePhaseEnum.research):{
 				if(!isReconnect){
 					events.push(EventFactory.createPhase('researchPhase'));break}
@@ -161,7 +167,6 @@ export class GameState{
 			let triggers = state.getTriggersIdActive()
 			let newEvents = PlayableCard.getOnTriggerredEvents('ON_PHASE_ACTIVATED', triggers, state, {activatedPhase: newPhase, clientSelectedPhase: state.getPhaseSelected()})
 			this.addEventQueue(newEvents, 'first')
-			console.log(newEvents)
 		}
 		events.push(EventFactory.createGeneric('endOfPhase'))
 		events.push(EventFactory.createGeneric('waitingGroupReady'))
@@ -796,14 +801,8 @@ export class GameState{
 	setGameOver(){
 		this.gameOver.next(true)
 	}
-	loadProductionPhaseCardList(cardList: string[]){
-		for(let e of this.eventQueue.getValue()){
-			if(e.subType==='productionPhase'){
-				let event = e as EventPhase
-				event.productionCardList = this.projectCardService.getProjectCardList(cardList)
-				this.getClientState().addCardsToHand(cardList)
-			}
-		}
+	loadProductionPhaseCardList(cardList: string[], addToHand: boolean){
+		this.addCardProduction(cardList, addToHand)
 	}
 	applyAverageStartingMegacredits(){
 		let clientState = this.getClientState()
@@ -859,7 +858,11 @@ export class GameState{
 		}
 		resources = resources.filter((el) => el.name!='card')
 		if(cardToDraw>0){
-			newEvents.push(EventFactory.simple.draw(cardToDraw))
+			newEvents.push(EventFactory.createDeckQueryEvent('drawQuery', {
+				isCardProductionDouble:true,
+				drawDiscard: {draw:cardToDraw},
+				firstProductionCardList: this.cardProduction.getValue()
+			}))
 		}
 		if(resources.length>0){
 			newEvents.push(EventFactory.simple.addRessource(resources))
@@ -925,5 +928,12 @@ export class GameState{
 	}
 	getRound(): number{
 		return this.round.getValue()
+	}
+	addCardProduction(cardList: string | string[], addToHand: boolean){
+		let cards: string[] = Utils.toArray(cardList)
+		let totalCards: string[] = this.cardProduction.getValue().concat(cards)
+		this.cardProduction.next(totalCards)
+		if(!addToHand)
+		this.getClientState().addCardsToHand(cardList)
 	}
 }

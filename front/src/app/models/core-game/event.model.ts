@@ -436,6 +436,8 @@ export class EventGeneric extends EventBaseModel {
 	increaseTr?: number
 	loadProductionCardList?: string[]
     effectPortal?: EffectPortalEnum
+	isCardProductionDouble?: boolean
+	firstCardProduction?: string[]
 }
 
 export class EventDeckQuery extends EventBaseModel {
@@ -446,8 +448,10 @@ export class EventDeckQuery extends EventBaseModel {
     scanKeep?: Partial<ScanKeep>
     drawDiscard?: Partial<DrawDiscard>
 	isCardProduction?: boolean
+	isCardProductionDouble?: boolean
 	options?: DeckQueryOptionsEnum
 	drawThenDiscard?: boolean
+	firstCardProduction?: string[]
 }
 
 export class EventWaiter extends EventBaseModel {
@@ -469,8 +473,10 @@ export class DrawEvent {
     queried: boolean = false
     waiterId!: number
 	isCardProduction: boolean = false
+	isCardProductionDouble: boolean = false
 	scanKeepOptions?: DeckQueryOptionsEnum
 	discardAfterDraw?: number
+	firstCardProduction?: string []
 }
 
 export class EventPhase extends EventBaseModel {
@@ -479,7 +485,6 @@ export class EventPhase extends EventBaseModel {
     override autoFinalize: boolean = true
     override title!: string
 	productionApplied?: boolean
-	productionCardList?: PlayableCardModel[]
 	productionMegacreditFromPhaseCard?: number
 	productionDoubleApplied?: boolean
     increaseParameter?: GlobalParameterValue
