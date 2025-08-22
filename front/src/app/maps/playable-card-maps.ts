@@ -1572,10 +1572,6 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'CF1': () => [
 		EventFactory.simple.addProduction({name:'titanium', valueStock:1})
 	],
-	//Pushnik Haker alliance
-	'CF2': () => [
-		EventFactory.simple.addProduction({name:'steel', valueStock:1})
-	],
 	//Ringcom
 	'CF4': () => [
 		EventFactory.simple.addProduction([
