@@ -545,6 +545,8 @@ describe('Service - Designers - Event', () => {
                             expectedEvent.drawResultList = expectedDrawResult
                             expectedEvent.waiterId = expectedWaiterId
                             expectedArgs = {drawEventResult:expectedDrawResult, waiterId:expectedWaiterId}
+							expectedEvent.isCardProductionDouble = undefined
+							expectedEvent.firstCardProduction = undefined
                             break
                         }
                         case('increaseGlobalParameter'):{
@@ -584,7 +586,11 @@ describe('Service - Designers - Event', () => {
                     }
 
                     let event = event_factory.EventFactory.createGeneric(genericSubType, expectedArgs?expectedArgs:undefined)
-
+					if(event != expectedEvent){
+						console.log(expectedEvent.subType)
+						console.log(event)
+						console.log(expectedEvent)
+					}
                     expect(event).toEqual(expectedEvent)
                 }
             })
@@ -625,9 +631,11 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.subType = expectedSubType
                 expectedEvent.drawDiscard = expectedDrawDiscard
 				expectedEvent.isCardProduction = false
+				expectedEvent.firstCardProduction = undefined
+				expectedEvent.isCardProductionDouble = undefined
+
 
                 let resultEvent = event_factory.EventFactory.createDeckQueryEvent(expectedSubType, {drawDiscard:expectedDrawDiscard, isCardProduction: false})
-
                 expect(resultEvent).toEqual(expectedEvent)
             })
             it('should create a researchPhaseQuery target Event', () => {
