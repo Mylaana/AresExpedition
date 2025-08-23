@@ -166,7 +166,6 @@ public class Game {
                 this.deck.remove(0);
             }
         }
-
         return result;
     }
 
@@ -470,6 +469,12 @@ public class Game {
 
     public void addEventScanKeepCardsToPlayer(String playerId, List<String> cards, Integer keep, ScanKeepOptionsEnum options){
         this.groupPlayerState.get(playerId).addEventScanKeepCards(cards, keep, options);
+    }
+
+    public void addEventCardDoubleProduction(String playerId, List<String> cardList, List<String> firstCardProduction) {
+        if(cardList.size()==0){return;}
+        PlayerState state = this.groupPlayerState.get(playerId);
+        state.getEventState().addEventCardProductionDouble(cardList, firstCardProduction);
     }
 
     public boolean isGameOver(){

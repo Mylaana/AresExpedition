@@ -209,11 +209,12 @@ function eventCardSelectorToJson(event: EventCardSelector): EventStateDTO | unde
 	}
 	return
 }
-function eventPhaseToJson(event: EventPhase): EventStateDTO | undefined {
+function eventPhaseToJson(event: EventPhase, cardList: string[]): EventStateDTO | undefined {
 	switch(event.subType){
 		case('productionPhase'):{
 			let content: EventStateContentPhaseDTO = {
-				pda: event.productionDoubleApplied??false
+				pda: event.productionDoubleApplied??false,
+				cl: cardList
 			}
 			return {
 				o: EventStateOriginEnum.load,
@@ -241,7 +242,10 @@ function toJson(event: EventBaseModel): EventStateDTO | undefined {
 		case('generic'):{dto = eventGenericToJson(event as EventGeneric); break}
 		case('tagSelector'):{dto = eventTagSelectorToJson(event as EventTagSelector); break}
 		case('cardSelector'):{dto = eventCardSelectorToJson(event as EventCardSelector); break}
-		case('phase'):{dto = eventPhaseToJson(event as EventPhase); break}
+		case('phase'):{
+			dto = eventPhaseToJson(event as EventPhase, [])
+			break
+		}
 		default:{break}
 	}
 	if(dto){return dto}

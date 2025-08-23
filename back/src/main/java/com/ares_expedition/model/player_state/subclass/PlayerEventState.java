@@ -56,6 +56,10 @@ public class PlayerEventState {
         this.events.add(EventState.addEventProductionCards(cards));
     }
 
+    public void addEventCardProductionDouble(List<String> cards, List<String> firstCardProduction) {
+        this.events.add(EventState.addEventCardProductionDouble(cards, firstCardProduction));
+    }
+
     public PlayerEventStateDTO toJson() {
         return new PlayerEventStateDTO(this);
     }

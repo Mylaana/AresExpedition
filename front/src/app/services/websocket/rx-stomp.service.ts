@@ -128,8 +128,20 @@ export class RxStompService extends RxStomp {
 		//this.publish({destination:GLOBAL_WS_APP_DEBUG, body:JSON.stringify(message)})
     }
 
-    public publishDraw(drawNumber: number, eventId: number, playerDTO: PlayerStateDTO, isCardProduction: boolean = false, thenDiscard: number =0): void {
-        this.enqueueMessage(WebsocketQueryMessageFactory.createDrawQuery(drawNumber, eventId, playerDTO, isCardProduction, thenDiscard))
+    public publishDraw(drawNumber: number, eventId: number, playerDTO: PlayerStateDTO, isCardProduction: boolean = false, thenDiscard: number =0, isCardProductionDouble: boolean = false, firstCardProductionList: string [] = []): void {
+		this.enqueueMessage(WebsocketQueryMessageFactory.createDrawQuery
+			(
+				drawNumber,
+				eventId,
+				playerDTO,
+				{
+					isCardProduction: isCardProduction,
+					thenDiscard: thenDiscard,
+					isCardProductionDouble: isCardProductionDouble,
+					firstCardProductionList: firstCardProductionList
+				}
+
+			))
     }
 
 	public publishScanKeep(scanKeep: ScanKeep, eventId: number, playerDTO: PlayerStateDTO, resultType: EventUnionSubTypes, options?: DeckQueryOptionsEnum): void {

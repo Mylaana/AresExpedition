@@ -27,7 +27,9 @@ export const ACTIVATION_DOUBLE: string[] = [
 ]
 export const ACTIVATION_NO_COST: string[] = [
 	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03',
-	'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'FM11', 'FM15'
+	'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'FM11', 'FM15',
+	'FM26', 'FM27'
+
 ]
 export const ALTERNATIVE_PAY_TRIGGER_LIST: string[] = [
 	'5', '52'
@@ -268,10 +270,18 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	],
 	//Pride of the earth Arkship
 	'FM11': (cardCode, state) => [
-		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 6)}, cardCode)
+		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 4)}, cardCode)
 	],
 	//Ants
 	'FM15': (cardCode, state) => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:getScaling(cardCode, state)}, cardCode)],
+	//Red Spot Observatory
+	'FM26': () => [
+		EventFactory.simple.draw(1),
+	],
+	//Red Spot Observatory
+	'FM27': (cardCode, state) => [
+		EventFactory.simple.addRessourceToCardId({name:'science', valueStock:getScaling(cardCode, state)}, cardCode),
+	],
 }
 export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
 	//Aquifer Pumping
@@ -302,7 +312,10 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 	'P21': (state) => 14 - state.getMilestoneCompleted() * 4,
 	//Gas-Cooled Reactors
 	'P23': (state) => 12 - state.getPhaseCardUpgradedCount() * 2,
+	//Ants
 	'FM15': (state) =>  state.getTagsOfType('microbe')>=5?2:1,
+	//Jovian Lanterns
+	'FM27': (state) =>  Math.floor(state.getTagsOfType('jovian')/3),
 
 	//SPECIALS
 	//Convert Forest - Ecoline
@@ -362,10 +375,19 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 	'P21': (state) => `$ressource_megacreditvoid_${getScaling('P21', state)}$: $other_forest$`,
 	//Gas-Cooled Reactors
 	'P23': (state) => `$ressource_megacreditvoid_${getScaling('P23', state)}$: $other_temperature$`,
+	//Ants
 	'FM15': (state) => {
 		let caption :string = ''
 		for(let i=0; i< (getScaling('FM15', state)); i++){
 			caption += '$ressource_microbe$'
+		}
+		return caption
+	},
+	//Jovian Lanterns
+	'FM27': (state) => {
+		let caption :string = ''
+		for(let i=0; i< (getScaling('FM27', state)); i++){
+			caption += '$ressource_science$'
 		}
 		return caption
 	},
@@ -534,7 +556,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'121': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Designed Microorganisms
 	'127': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'max', s),
-	//Designed Microorganisms
+	//Dust Quarry
 	'129': (s) => Checker.isOceanOk(3, 'max', s),
 	//Energy Storage
 	'131': (s) => Checker.isTrOk(7, 'min', s),
@@ -593,7 +615,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//Worms
 	'207': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
 	//Zeppelins
-	'208': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
+	'208': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.red, 'min', s),
 	//Dandelions
 	'D24': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Urban Forestry
@@ -616,6 +638,12 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'FM6': (s) => Checker.isTagOk('science', 2, 'min', s),
 	//Mercurian Alloys
 	'FM11': (s) => Checker.isTagOk('science', 4, 'min', s),
+	//Magnetic Shield
+	'FM22': (s) => Checker.isTagOk('power', 3, 'min', s),
+	//Red Spot Observatory
+	'FM26': (s) => Checker.isTagOk('science', 3, 'min', s),
+	//Jovian Lanterns
+	'FM27': (s) => Checker.isTagOk('jovian', 1, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -1578,6 +1606,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		]),
 		//EventFactory.simple.scanKeep({scan:15, keep:2}, DeckQueryOptionsEnum.ringCom)
 	],
+	//Lili volunteering initiative
+	'CF5': () => [
+		EventFactory.simple.addProduction([{name:'megacredit', valueStock:2},{name:'plant', valueStock:1},{name:'heat', valueStock:1},{name:'card', valueStock:1}]),
+		EventFactory.simple.upgradePhaseCard(1,[0,1])
+	],
 	//Topsoil Contract
 	'FM3': () => [EventFactory.simple.addRessource({name:'plant', valueStock:3})],
 	//Rego Plastics
@@ -1619,8 +1652,36 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.draw(1),
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:3})
-	]
-
+	],
+	//Ecology research
+	'FM17': () => [
+		EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:2}),
+		EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:1})
+	],
+	//Earth Elevator
+	'FM19': () => [
+		EventFactory.simple.addProduction([
+			{ name: 'titanium', valueStock: 3 },
+		]),
+	],
+	//Io Sulphur Research
+	'FM21': (state) => [
+		EventFactory.simple.draw(state.getTagsOfType('jovian')>=3?3:1)
+	],
+	//Magnetic shield
+	'FM22': () => [
+		EventFactory.simple.addTR(4),
+	],
+	//Red Spot Observatory
+	'FM25': () => [
+		EventFactory.simple.effectPortal(EffectPortalEnum.secretLabs),
+	],
+	//Red Spot Observatory
+	'FM26': () => [
+		EventFactory.simple.draw(2),
+	],
+	//Conscription
+	'FM28': () => [EventFactory.simple.specialBuilder(BuilderOption.conscription)],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Earth Catapult
@@ -1734,6 +1795,54 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 		}
 		return [EventFactory.simple.addRessource({name:'plant', valueStock:2})]
 	},
+	//Pushnik Haker alliance - Action
+	'CF2': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.pushnikAction_Animal):{
+				return [EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:1}, 1)]
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Microbe):{
+				return [EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:1}, 1)]
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Science):{
+				return [EventFactory.simple.addRessourceToSelectedCard({name:'science', valueStock:1}, 1)]
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_mc):{
+				return [EventFactory.simple.addProduction({name:'megacredit', valueStock:1})]
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_heat):{
+				return [EventFactory.simple.addProduction({name:'heat', valueStock:1})]
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_plant):{
+				return [EventFactory.simple.addProduction({name:'plant', valueStock:1})]
+			}
+		}
+		return []
+	},
+	//Secret Labs
+	'FM25': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.secretLabs_Ocean):{
+				return [
+					EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:2}),
+					EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+				]
+			}
+			case(EffectPortalButtonEnum.secretLabs_Oxygen):{
+				return [
+					EventFactory.simple.addRessource({name:'plant', valueStock:3}),
+					EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)
+				]
+			}
+			case(EffectPortalButtonEnum.secretLabs_Temperature):{
+				return [
+					EventFactory.simple.addRessourceToSelectedCard({name:'science', valueStock:2}),
+					EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
+				]
+			}
+		}
+		return []
+	},
 }
 export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalButtonEnum) => string> = {
 	//Decomposers
@@ -1778,7 +1887,51 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	'D15': (button) => button===EffectPortalButtonEnum.cryogenticShipment_Microbe?'$ressource_microbe$$ressource_microbe$$ressource_microbe$':'$ressource_animal$$ressource_animal$',
 	//Cargo Ships
 	'F04': (button) => button===EffectPortalButtonEnum.cargoShips_Heat?'$ressource_heat$$ressource_heat$':'$ressource_plant$$ressource_plant$',
-
+	//Pushink haker alliance - Action
+	'CF2-Action': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.pushnikAction_Animal):{
+				return '$ressource_animal$*'
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Microbe):{
+				return '$ressource_microbe$*'
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Science):{
+				return '$ressource_science$*'
+			}
+		}
+		return ''
+	},
+	//Pushink haker alliance - Production
+	'CF2-Production': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.pushnikProduction_mc):{
+				return '$ressource_megacredit$'
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_heat):{
+				return '$ressource_heat$'
+			}
+			case(EffectPortalButtonEnum.pushnikProduction_plant):{
+				return '$ressource_plant$'
+			}
+		}
+		return ''
+	},
+	//Secret Labs
+	'FM25': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.secretLabs_Ocean):{
+				return '$other_ocean$+$ressource_microbe$$ressource_microbe$*'
+			}
+			case(EffectPortalButtonEnum.secretLabs_Oxygen):{
+				return '$other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$'
+			}
+			case(EffectPortalButtonEnum.secretLabs_Temperature):{
+				return '$other_temperature$+$ressource_science$$ressource_science$*'
+			}
+		}
+		return ''
+	},
 }
 export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalButtonEnum[]> = {
 	//Decomposers
@@ -1797,9 +1950,15 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	'D15': ()=> [EffectPortalButtonEnum.cryogenticShipment_Microbe, EffectPortalButtonEnum.cryogenticShipment_Animal],
 	//Cargo Ships
 	'F04': ()=> [EffectPortalButtonEnum.cargoShips_Heat, EffectPortalButtonEnum.cargoShips_Plant],
+	//Pushnik Action
+	'CF2-Action': ()=> [EffectPortalButtonEnum.pushnikAction_Animal, EffectPortalButtonEnum.pushnikAction_Microbe, EffectPortalButtonEnum.pushnikAction_Science],
+	//Pushnik Action
+	'CF2-Production': ()=> [EffectPortalButtonEnum.pushnikProduction_mc, EffectPortalButtonEnum.pushnikProduction_heat, EffectPortalButtonEnum.pushnikProduction_plant],
+	//Secret Labs
+	'FM25': ()=> [EffectPortalButtonEnum.secretLabs_Ocean, EffectPortalButtonEnum.secretLabs_Oxygen, EffectPortalButtonEnum.secretLabs_Temperature],
 
 }
-export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
+export const EFFECT_ENUM_TO_EFFECT_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
 	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
@@ -1808,6 +1967,22 @@ export const EFFECT_ENUM_TO_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.biomedicalImports]: 'D14',
 	[EffectPortalEnum.cryogenticShipment]: 'D15',
 	[EffectPortalEnum.cargoShips]: 'F04',
+	[EffectPortalEnum.pushnikAction]: 'CF2-Action',
+	[EffectPortalEnum.pushnikProduction]: 'CF2-Production',
+	[EffectPortalEnum.secretLabs]: 'FM25',
+}
+export const EFFECT_ENUM_TO_CARD_CODE: Record<EffectPortalEnum, string> = {
+	[EffectPortalEnum.decomposers]: '19',
+	[EffectPortalEnum.viralEnhancer]: '61',
+	[EffectPortalEnum.importedHydrogen]:'80',
+	[EffectPortalEnum.largeConvoy]: '87',
+	[EffectPortalEnum.localHeatTrapping]: '89',
+	[EffectPortalEnum.biomedicalImports]: 'D14',
+	[EffectPortalEnum.cryogenticShipment]: 'D15',
+	[EffectPortalEnum.cargoShips]: 'F04',
+	[EffectPortalEnum.pushnikAction]: 'CF2',
+	[EffectPortalEnum.pushnikProduction]: 'CF2',
+	[EffectPortalEnum.secretLabs]: 'FM25',
 }
 export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},
@@ -1844,6 +2019,8 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'206': (s)=> [{name:'heat', valueStock:s.getTagsOfType('power')}],
 	//Worms
 	'207': (s)=> [{name:'plant', valueStock:s.getTagsOfType('microbe')}],
+	//Zeppelins
+	'208': (s)=> [{name:'megacredit', valueStock:s.getForest()}],
 	//Diverse Habitats
 	'P03': (s)=> [{name:'megacredit', valueStock:(s.getTagsOfType('animal') + s.getTagsOfType('plant'))}],
 	//Laboratories
@@ -1858,6 +2035,12 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /3)}],
 	//Lunar Embassy
 	'FM16': (s)=> [{name:'plant', valueStock:Math.floor(s.getTagsOfType('earth') /2)}],
+	//Ecology Research
+	'FM17': (s)=> [{name:'plant', valueStock:Math.floor(s.getTagsOfType('science') /2)}],
+	//Galilean Waystation
+	'FM18': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('jovian')}],
+	//Interplanetary Trade
+	'FM20': (s)=> [{name:'megacredit', valueStock:s.getDifferentTagTypeCount()}],
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms

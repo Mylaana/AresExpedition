@@ -1,5 +1,7 @@
 package com.ares_expedition.dto.websocket.messages.input;
 
+import java.util.List;
+
 import com.ares_expedition.dto.websocket.content.input.DrawContentDTO;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
 
@@ -33,5 +35,13 @@ public class DrawMessageDTO extends BaseMessageInputDTO<DrawContentDTO> {
 
     public Integer getThenDiscard(){
         return this.content.getThenDiscard();
+    }
+
+    public Boolean isCardProductionDouble(){
+        return this.content.getIsCardProductionDouble();
+    }
+
+    public List<String> getFirstCardProductionList(){
+        return this.content.getFirstCardProductionList();
     }
 }

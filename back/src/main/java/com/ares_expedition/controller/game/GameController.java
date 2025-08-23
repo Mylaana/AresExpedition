@@ -52,9 +52,14 @@ public class GameController {
         }
         return cards;
     }
-    public List<String> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer thenDiscard){
+    public List<String> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer thenDiscard, Boolean isCardProductionDouble, List<String> firstCardProduction){
         List<String> cards = cardsFromDeck(gameId, drawNumber, playerId);
-        this.getGameFromId(gameId).addEventDrawCardsToPlayer(playerId, cards, thenDiscard);
+        Game game = this.getGameFromId(gameId);
+        if(isCardProductionDouble){
+            game.addEventCardDoubleProduction(playerId, cards, firstCardProduction);
+        } else {
+            game.addEventDrawCardsToPlayer(playerId, cards, thenDiscard);
+        }
         return cards;
     }
 

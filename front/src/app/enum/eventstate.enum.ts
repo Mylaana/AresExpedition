@@ -15,6 +15,7 @@ export enum EventStateTypeEnum {
 	increaseResearchScanKeep = 'INCREASE_RESEARCH_SCANKEEP',
 	generic = 'GENERIC',
 	productionCards = 'PRODUCTION_CARDS',
+	productionCardDouble = 'PRODUCTION_CARD_DOUBLE',
 	tagSelection = 'TAG_SELECTION',
 	selectorSubType = 'SELECTOR_SUBTYPE',
 	productionPhase = 'PRODUCTION_PHASE',

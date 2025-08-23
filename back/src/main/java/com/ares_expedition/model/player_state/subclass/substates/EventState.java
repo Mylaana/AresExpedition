@@ -61,6 +61,12 @@ public class EventState {
         return new EventState(EventStateTypeEnum.PRODUCTION_CARDS, cards);
     }
 
+    public static EventState addEventCardProductionDouble(List<String> cards, List<String> firstCardProduction) {
+        Map<String, Object> content = new HashMap<>();
+        content.put("fcp", firstCardProduction);
+        content.put("scp", cards);
+        return new EventState(EventStateTypeEnum.PRODUCTION_CARD_DOUBLE, content);
+    }
     public Object getValue() {
         return value;
     }

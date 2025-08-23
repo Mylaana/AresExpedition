@@ -38,6 +38,7 @@ export class ProjectCardScalingVPService {
 		"FM11": (card) => card.getStockValue('science'), //Arkship
 		"FM13": (_, state) => state.getTagsOfType('jovian'), //Ganymede Colony
 		"FM15": (card) => Math.floor(card.getStockValue('microbe')/2), //Ants
+		"FM27": (card) => card.getStockValue('science'), //Jovian Lanterns
 	};
 
 	updateCardScalingVPList(clientState: PlayerStateModel) {

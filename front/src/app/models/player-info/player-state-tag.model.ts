@@ -50,6 +50,14 @@ export class PlayerTagStateModel {
 			this.tags[t].valueCount -= 1
 		}
 	}
+	/**counts the number of different tag type possessed */
+	getDifferentTagTypeCount(): number {
+		let different: number = 0
+		for(let i=0; i<10; i++){
+			different += this.getTagsOfType(Utils.toTagType(i))>=1?1:0
+		}
+		return different
+	}
 	toJson(): PlayerTagStateDTO {
 		return {
 			t: this.tags
