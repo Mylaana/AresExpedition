@@ -6221,7 +6221,7 @@
             "fr": "$ressource_steel$"
         },
         "effectText": {
-            "en": "For each $ressource_steel$ you gain, you also gain $other_tr$.",
+            "en": "When you play an $tag_building$, you pay 2 MC less.",
             "fr": ""
         },
         "effectSummaryType2": "trigger",
@@ -6230,7 +6230,7 @@
             "fr": "$ressource_steel$: $other_tr$"
         },
         "effectText2": {
-            "en": "EFFECT: Each time you play BUILDING, excluding this, gain 1 terraforming point.",
+            "en": "EFFECT: For each $ressource_steel$ you gain, you also gain $other_tr$.",
             "fr": ""
         },
         "startingMegacredits": 27,
