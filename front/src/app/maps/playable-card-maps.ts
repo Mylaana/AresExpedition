@@ -1594,10 +1594,6 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Zetasel
 	'P17': () => [EventFactory.simple.drawThenDiscard(5,4)],
-	//Point Luna
-	'CF1': () => [
-		EventFactory.simple.addProduction({name:'titanium', valueStock:1})
-	],
 	//Ringcom
 	'CF4': () => [
 		EventFactory.simple.addProduction([
@@ -1611,6 +1607,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.addProduction([{name:'megacredit', valueStock:2},{name:'plant', valueStock:1},{name:'heat', valueStock:1},{name:'card', valueStock:1}]),
 		EventFactory.simple.upgradePhaseCard(1,[0,1])
 	],
+	//Aridor
+	'CF6': ()=>  [EventFactory.simple.resolveWildTag('CF6')],
+	//Aridor
+	'CF7': ()=>  [EventFactory.simple.addProduction({name:'steel', valueStock:1})],
 	//Topsoil Contract
 	'FM3': () => [EventFactory.simple.addRessource({name:'plant', valueStock:3})],
 	//Rego Plastics
@@ -1682,6 +1682,11 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Conscription
 	'FM28': () => [EventFactory.simple.specialBuilder(BuilderOption.conscription)],
+	//Research coordination
+	'FM29': () => [
+		EventFactory.simple.resolveWildTag('FM29'),
+		EventFactory.simple.addProduction({name:'megacredit', valueStock:2})
+	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Earth Catapult
@@ -2031,8 +2036,12 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 		if(stock && stock.length<1){return []}
 			return [{name:'megacredit',	valueStock: stock[0].valueStock}]
 	},
+	//Point Luna
+	'CF1': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('earth')}],
 	//Ringcom
 	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /3)}],
+	//Aridor
+	'CF6': (s)=> [{name:'megacredit', valueStock:s.getDifferentTagTypeCount()}],
 	//Lunar Embassy
 	'FM16': (s)=> [{name:'plant', valueStock:Math.floor(s.getTagsOfType('earth') /2)}],
 	//Ecology Research
