@@ -267,6 +267,24 @@ const S = EventFactory.simple
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
 		return [S.draw(1)]
 	}
+	//Recyclon
+	function handleTrigger_CF7(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('building','tag'))===false){return []}
+		let triggerred: number = 0
+		let result: EventBaseModel[] = []
+		let card = clientState?.getProjectPlayedModelFromId(trigger)
+		if(!card){return []}
+		triggerred += input.tagList.filter((el) => el===GlobalInfo.getIdFromType('building','tag')).length
+		for(let i=0; i<triggerred; i++){
+			if(card.getStockValue('microbe')<=1 && i===0){
+				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+			} else{
+				result.push(S.addRessourceToCardId({name:'microbe', valueStock:-2}, trigger))
+				result.push(S.addProduction({name:'plant', valueStock:1}))
+			}
+		}
+		return result
+	}
 	//Solar Logistics
 	function handleTrigger_FM2(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false || input.tagList.includes(GlobalInfo.getIdFromType('space','tag'))===false){return []}
@@ -433,6 +451,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'P12B': handleTrigger_P12,
 		'P19': handleTrigger_P19_OnTagGained,
 		'CF1': handleTrigger_CF1,
+		'CF7': handleTrigger_CF7,
 		'FM2': handleTrigger_FM2,
 		'FM4': handleTrigger_FM4,
 		'FM14': handleTrigger_FM14,

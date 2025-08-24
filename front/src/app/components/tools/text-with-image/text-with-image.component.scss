@@ -294,3 +294,28 @@
 		font-size: 15px;
 	}
 }
+.wrapper-text-with-image::ng-deep .wrapper-production{
+	position: relative;
+	display: inline-block;
+	height: 100%;
+	aspect-ratio: 1;
+	border-radius: 5px;
+	border-radius: 2px;
+
+	& > .production-bar{
+		background-size: 10px 80px;
+		position: absolute;
+		bottom: 0;
+		display: block;
+		height: 30%;
+		width: 100%;
+		border-radius: 10px;
+	}
+
+	& > .production-text{
+		position: relative;
+		z-index: 2;
+		color: var(--color-ares-orange);
+		color: white;
+	}
+}

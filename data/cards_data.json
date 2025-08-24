@@ -2069,9 +2069,9 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
+            9,
             8,
-            7,
-            9
+            7
         ],
         "cardType": "redProject",
         "vpNumber": "3",
@@ -6221,7 +6221,7 @@
             "fr": "$ressource_steel$"
         },
         "effectText": {
-            "en": "For each $ressource_steel$ you gain, you also gain $other_tr$.",
+            "en": "When you play an $tag_building$, you pay 2 MC less.",
             "fr": ""
         },
         "effectSummaryType2": "trigger",
@@ -6230,7 +6230,7 @@
             "fr": "$ressource_steel$: $other_tr$"
         },
         "effectText2": {
-            "en": "EFFECT: Each time you play BUILDING, excluding this, gain 1 terraforming point.",
+            "en": "EFFECT: For each $ressource_steel$ you gain, you also gain $other_tr$.",
             "fr": ""
         },
         "startingMegacredits": 27,
@@ -9134,22 +9134,21 @@
         "card_code": "CF1",
         "origin": "fanmade",
         "tagsId": [
-            4,
-            1
+            4
         ],
         "cardType": "corporation",
         "title": {
             "en": "Point Luna",
             "fr": "Point Luna"
         },
-        "effectSummaryType": "greyProduction",
+        "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_titanium$",
-            "fr": "$ressource_titanium$"
+            "en": "$ressource_megacreditvoid_1$/$tag_earth$",
+            "fr": "$ressource_megacreditvoid_1$/$tag_earth$"
         },
         "effectText": {
-            "en": "EFFECT: When you play a $tag_space$, you pay 3 MC less for it.",
-            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
+            "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_earth$ en votre possession, y compris celui-ci."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -9160,7 +9159,7 @@
             "en": "EFFECT: Each time you play a $tag_earth$, draw a card",
             "fr": "EFFET: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
         },
-        "startingMegacredits": 32,
+        "startingMegacredits": 28,
         "status": "validated",
         "vpScaling": "0"
     },
@@ -9286,6 +9285,67 @@
             "fr": ""
         },
         "startingMegacredits": 40,
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "CF6",
+        "origin": "fanmade",
+        "tagsId": [
+            10
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "Aridor",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacredit$/$tag_omni$",
+            "fr": "$ressource_megacredit$/$tag_omni$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 MC per different tag you have.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC par badge diff\u00e9rent en votre possession."
+        },
+        "startingMegacredits": 28,
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "CF7",
+        "origin": "fanmade",
+        "tagsId": [
+            0,
+            8
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "Recyclon",
+            "fr": ""
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_steel$",
+            "fr": "$ressource_steel$"
+        },
+        "effectText": {
+            "en": "When you play a $tag_building$, you pay 2 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$tag_building$: $ressource_microbe$ OR$skipline$-2$ressource_microbe$: $production_+1$$ressource_plant$",
+            "fr": "$tag_building$: $ressource_microbe$ OR$skipline$-2$ressource_microbe$: $production_+1$$ressource_plant$"
+        },
+        "effectText2": {
+            "en": "EFFECT: When you play a $tag_building$, add a $ressource_microbe$ to this card or remove 2 $ressource_microbe$ from this card to gain one $ressource_plant$ production.",
+            "fr": ""
+        },
+        "stockable": [
+            "microbe"
+        ],
+        "startingMegacredits": 38,
         "status": "implemented",
         "vpScaling": "0"
     },
@@ -9863,7 +9923,8 @@
         "cost": 24,
         "tagsId": [
             9,
-            1
+            1,
+            3
         ],
         "cardType": "redProject",
         "title": {
@@ -9882,7 +9943,7 @@
             "en": "$tag_power$$tag_power$$tag_power$",
             "fr": "$tag_power$$tag_power$$tag_power$"
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9899,8 +9960,8 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": ">=$ressource_megacreditvoid_20$: $skipline$$ressource_megacreditvoid_1$production",
-            "fr": ">=$ressource_megacreditvoid_20$: $skipline$$ressource_megacreditvoid_1$production"
+            "en": ">=$ressource_megacreditvoid_20$: $skipline$$production_+1$$ressource_megacredit$",
+            "fr": ">=$ressource_megacreditvoid_20$: $skipline$$production_+1$$ressource_megacredit$"
         },
         "effectText": {
             "en": "EFFECT: When you play a card that costs 20 MC or more, increase your MC production by 1.",
@@ -9952,7 +10013,7 @@
             "en": "Choose one : $other_ocean$+$ressource_microbe$$ressource_microbe$* / $other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$ / $other_temperature$+$ressource_science$$ressource_science$*",
             "fr": "Choisissez un : $other_ocean$+$ressource_microbe$$ressource_microbe$* / $other_oxygen$+$ressource_plant$$ressource_plant$$ressource_plant$ / $other_temperature$+$ressource_science$$ressource_science$*"
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9990,7 +10051,7 @@
             "en": "$tag_science$$tag_science$$tag_science$",
             "fr": "$tag_science$$tag_science$$tag_science$"
         },
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "$ressource_card$",
             "fr": "$ressource_card$"
@@ -10035,7 +10096,7 @@
         "stockable": [
             "science"
         ],
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -10063,6 +10124,35 @@
         "prerequisiteSummaryText": {
             "en": "$tag_earth$$tag_earth$",
             "fr": "$tag_earth$$tag_earth$"
+        },
+        "status": "validated",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM29",
+        "origin": "fanmade",
+        "cost": 8,
+        "tagsId": [
+            10
+        ],
+        "cardType": "greenProject",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Research Coordination",
+            "fr": "Coordination de la recherche"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacreditvoid_2$",
+            "fr": "$ressource_megacreditvoid_2$"
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2 MC.",
+            "fr": "Lors de la phase de production, cette carte produit 2 MC."
+        },
+        "playedText": {
+            "en": "Chose a tag and add it to this card.",
+            "fr": "Choisissez un badge et ajoutez-le\u00e0 cette carte. "
         },
         "status": "implemented",
         "vpScaling": "0"
