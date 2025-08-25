@@ -1,14 +1,9 @@
-<div class="wrapper-main ares-background ares-border" @fadeIn>
-	<div class="wrapper-player"
-		*ngFor="let playerReady of _groupPlayerReady">
-		<h1>{{playerReady.name}}</h1>
-		<ng-container *ngIf="playerReady.isReady">
-			<img src="/assets/other/validate.png" alt="">
-		</ng-container>
-		<ng-container *ngIf="!playerReady.isReady">
-			<img src="/assets/other/hourglass.png" alt="">
-		</ng-container>
-	</div>
+<div class="wrapper-group-ready ares-background ares-border">
+	<ng-container *ngFor="let p of _groupInfo">
+		<div class="wrapper-player">
+			<app-player-name [name]="p.getName()" [color]="p.getColor()" [isReady]="isReady(p.getName())" [style]="'short'"></app-player-name>
+		</div>
+	</ng-container>
 </div>
 <div class="wrapper-corporation-selection"
 	*ngIf="_waitingCorporationList.length>0">

@@ -1,4 +1,6 @@
 <div class="wrapper-player-name"
-	[ngClass]="[color]">
-	<p>{{name}}</p>
+	[ngClass]="[color, style, isReady===false?'not-ready':'']">
+	<p *ngIf="style!='short'">{{name}}</p>
 </div>
+<img *ngIf="isReady" [ngClass]="[style]" src="assets/other/ready.png" alt="">
+<img *ngIf="isReady===false" [ngClass]="[style,'not-ready']" src="assets/other/hourglass.png" alt="">

@@ -1,8 +1,7 @@
 <div class="wrapper-group-ready">
 	<ng-container *ngFor="let p of _otherPlayers">
 		<div class="wrapper-player-ready-outer">
-			<app-player-name [name]="p.getName()" [color]="p.getColor()"></app-player-name>
-			<img src="assets/other/ready.png" alt="">
+			<app-player-name [name]="p.getName()" [color]="p.getColor()" [isReady]="true"></app-player-name>
 		</div>
 	</ng-container>
 </div>
