@@ -150,7 +150,7 @@ function toGlobalParameterColor(parameterName: GlobalParameterNameEnum, step: nu
 		}
 		case(GlobalParameterNameEnum.infrastructure):{
 			if(step<=3){return GlobalParameterColorEnum.purple}
-			if(step<=7){return GlobalParameterColorEnum.red}
+			if(step<=8){return GlobalParameterColorEnum.red}
 			if(step<=12){return GlobalParameterColorEnum.yellow}
 			return GlobalParameterColorEnum.white
 		}

@@ -70,4 +70,11 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 		this._playerIdList = playerIdList
 		this.updateNavHeight()
 	}
+	isClient(playerId: string): boolean {
+		return playerId === this.clientPlayerId
+	}
+	setHovered(hovered: boolean){
+		if(this._playerIdList.length===1){this._playerPannelIsHovered=false; return}
+		this._playerPannelIsHovered=hovered
+	}
 }

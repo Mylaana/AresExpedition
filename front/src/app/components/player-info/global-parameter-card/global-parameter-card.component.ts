@@ -143,4 +143,7 @@ export class GlobalParameterCardComponent implements OnInit {
 			default:{return false}
 		}
 	}
+	isGlobalParameterMaxedOutAtPhaseBeginning(): boolean {
+		return this.currentStep===this._maxStep-1
+	}
 }

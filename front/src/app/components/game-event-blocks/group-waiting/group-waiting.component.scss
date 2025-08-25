@@ -11,12 +11,10 @@
 	justify-content: center;
 	align-items: center;
 	gap: 5px 15px;
-	height: fit-content;
 	width: 900px;
-	@media (max-width: 1919px) {
+	@media (max-width: 1900px) {
 		width: 500px;
 	}
-
 }
 .wrapper-player-ready-outer{
 	position: relative;
@@ -24,39 +22,14 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 150px;
-	height: 30px;
-}
-
-.wrapper-player-ready-inner{
-	position: absolute;
-	height: calc(100% - 4px);
-	width: calc(100% - 20px);
-	border-radius: 5px;
-	padding: 2px;
-	@each $name, $value in colors.$colors {
-        &.#{$name}{
-            border: $value solid 1px;
-            border-radius: 5px;
-            border-width: 2px;
-			border-left-width: 10px;
-			border-right-width: 10px;
-            background-color: rgba($value, .2);
-        }
-    }
+	height: 100%;
 }
 img{
 	position: absolute;
 	height: 70%;
-	top: -10px;
-	right: -10px;
+	top: -5px;
+	right: 5px;
 }
-.wrapper-name{
-	display: flex;
-	justify-content: left;
-	align-items: center;
-	overflow: hidden;
+app-player-name{
 	height: 100%;
-	flex: 1;
-	margin-left: 5px;
-	position: relative;
 }

@@ -9085,7 +9085,11 @@
             "fr": ""
         },
         "startingMegacredits": 37,
-        "status": "bugged",
+        "status": "implemented",
+        "actionTextOption1": {
+            "en": "4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$",
+            "fr": "4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$"
+        },
         "vpScaling": "0"
     },
     {
@@ -9335,11 +9339,11 @@
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
-            "en": "$tag_building$: $ressource_microbe$ OR$skipline$-2$ressource_microbe$: $production_+1$$ressource_plant$",
-            "fr": "$tag_building$: $ressource_microbe$ OR$skipline$-2$ressource_microbe$: $production_+1$$ressource_plant$"
+            "en": "$tag_building$: $ressource_microbe$ OR$skipline$-$ressource_microbe$: $production_+1$$ressource_plant$",
+            "fr": "$tag_building$: $ressource_microbe$ OR$skipline$-$ressource_microbe$: $production_+1$$ressource_plant$"
         },
         "effectText2": {
-            "en": "EFFECT: When you play a $tag_building$, add a $ressource_microbe$ to this card or remove 2 $ressource_microbe$ from this card to gain one $ressource_plant$ production.",
+            "en": "EFFECT: When you play a $tag_building$, add a $ressource_microbe$ to this card or remove $ressource_microbe$ from this card to gain one $ressource_plant$ production.",
             "fr": ""
         },
         "stockable": [

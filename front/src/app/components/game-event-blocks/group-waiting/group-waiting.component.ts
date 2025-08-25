@@ -5,10 +5,14 @@ import { CommonModule } from '@angular/common';
 import { fadeIn } from '../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerInfoStateModel } from '../../../models/player-info/player-state-info.model';
+import { PlayerNameComponent } from '../../player-info/player-name/player-name.component';
 
 @Component({
   selector: 'app-group-waiting',
-  imports: [CommonModule],
+  imports: [
+	CommonModule,
+	PlayerNameComponent
+],
   templateUrl: './group-waiting.component.html',
   styleUrl: './group-waiting.component.scss',
   animations: [fadeIn]

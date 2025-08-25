@@ -270,7 +270,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	],
 	//Pride of the earth Arkship
 	'FM11': (cardCode, state) => [
-		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: Math.floor(state.getTagsOfType('science')/ 4)}, cardCode)
+		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: getScaling(cardCode, state)}, cardCode)
 	],
 	//Ants
 	'FM15': (cardCode, state) => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:getScaling(cardCode, state)}, cardCode)],
@@ -312,6 +312,8 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 	'P21': (state) => 14 - state.getMilestoneCompleted() * 4,
 	//Gas-Cooled Reactors
 	'P23': (state) => 12 - state.getPhaseCardUpgradedCount() * 2,
+	//Pride of the earth Arkship
+	'FM11': (state) =>   Math.floor(state.getTagsOfType('science')/4),
 	//Ants
 	'FM15': (state) =>  state.getTagsOfType('microbe')>=5?2:1,
 	//Jovian Lanterns
@@ -375,6 +377,14 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 	'P21': (state) => `$ressource_megacreditvoid_${getScaling('P21', state)}$: $other_forest$`,
 	//Gas-Cooled Reactors
 	'P23': (state) => `$ressource_megacreditvoid_${getScaling('P23', state)}$: $other_temperature$`,
+	//Pride of the earth Arkship
+	'FM11': (state) => {
+		let caption :string = ''
+		for(let i=0; i< (getScaling('FM11', state)); i++){
+			caption += '$ressource_science$'
+		}
+		return caption
+	},
 	//Ants
 	'FM15': (state) => {
 		let caption :string = ''

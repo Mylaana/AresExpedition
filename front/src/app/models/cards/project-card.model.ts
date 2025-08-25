@@ -280,6 +280,7 @@ export class PlayableCardModel {
 	applyTagStockToCurrentTags(){
 		let stockIndex: number = 0
 		let remainingStock = Utils.jsonCopy(this.tagStock)
+		let tagCount = this.tagsId.length
 
 		//Research grant exception
 		if(this.cardCode==='P24'){
@@ -287,14 +288,7 @@ export class PlayableCardModel {
 			return
 		}
 		//replace wild tags with stock
-		for(let i=0; i<this.tagsId.length; i++){
-			let t =this.tagsId[i]
-			if(t===10){
-				this.tagsId[i] = remainingStock.splice(stockIndex)[0]
-				stockIndex ++
-			}
-			if(remainingStock.length===0){break}
-		}
+		this.tagsId = this.tagsId.filter((el) => ![10, -1].includes(el)).concat(remainingStock)
 	}
 	toStockDTO(): PlayedCardStocksDTO {
 		let dto : PlayedCardStocksDTO = {}
