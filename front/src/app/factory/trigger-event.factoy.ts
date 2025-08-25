@@ -276,10 +276,10 @@ const S = EventFactory.simple
 		if(!card){return []}
 		triggerred += input.tagList.filter((el) => el===GlobalInfo.getIdFromType('building','tag')).length
 		for(let i=0; i<triggerred; i++){
-			if(card.getStockValue('microbe')<=1 && i===0){
+			if(card.getStockValue('microbe')<=0 && i===0){
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
 			} else{
-				result.push(S.addRessourceToCardId({name:'microbe', valueStock:-2}, trigger))
+				result.push(S.addRessourceToCardId({name:'microbe', valueStock:-1}, trigger))
 				result.push(S.addProduction({name:'plant', valueStock:1}))
 			}
 		}
