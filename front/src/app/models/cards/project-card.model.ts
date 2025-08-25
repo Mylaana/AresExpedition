@@ -289,16 +289,6 @@ export class PlayableCardModel {
 		}
 		//replace wild tags with stock
 		this.tagsId = this.tagsId.filter((el) => ![10, -1].includes(el)).concat(remainingStock)
-		console.log(this.getTitle(), this.tagsId, remainingStock)
-		return
-		for(let i=0; i<this.tagsId.length; i++){
-			let t =this.tagsId[i]
-			if(t===10){
-				this.tagsId[i] = remainingStock.splice(stockIndex)[0]
-				stockIndex ++
-			}
-			if(remainingStock.length===0){break}
-		}
 	}
 	toStockDTO(): PlayedCardStocksDTO {
 		let dto : PlayedCardStocksDTO = {}
