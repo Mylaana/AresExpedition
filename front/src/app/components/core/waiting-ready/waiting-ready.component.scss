@@ -2,8 +2,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 	height: 100%;
 	width: 100%;
+	gap: 50px;
 }
 .wrapper-main{
 	width: fit-content;
@@ -25,4 +27,14 @@ img{
 }
 h1{
 	font-size: 30px;
+	width: 60%;
+	text-align: center;
+	padding: 10px;
+}
+.wrapper-corporation-selection{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 50px;
 }

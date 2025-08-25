@@ -10,3 +10,8 @@
 		</ng-container>
 	</div>
 </div>
+<div class="wrapper-corporation-selection"
+	*ngIf="_waitingCorporationList.length>0">
+	<h1 class="ares-title">Then select a corporation:</h1>
+	<app-playable-card-list [cardList]="_waitingCorporationList"></app-playable-card-list>
+</div>
