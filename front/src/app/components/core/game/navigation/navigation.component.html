@@ -4,8 +4,8 @@
 	<app-global-parameter-pannel class="ares-navigation-pannel"></app-global-parameter-pannel>
 	<div class="wrapper-player-pannel ares-navigation-pannel"
 		[class.hovered]="_playerPannelIsHovered"
-		(mouseenter)="_playerPannelIsHovered=true"
-		(mouseleave)="_playerPannelIsHovered=false"
+		(mouseenter)="setHovered(true)"
+		(mouseleave)="setHovered(false)"
 		@fadeIn>
 		<app-player-pannel
 			[@expandCollapseVertical]
