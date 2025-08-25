@@ -110,19 +110,17 @@ $padding-small: 5px;
 	width: 12px;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	border: white solid 1px;
-	box-shadow: 0 0 3px 1px white;
 	&.color--white{
 		border-color: rgb(225, 225, 225);
 		outline-color: rgb(225, 225, 225);
 	}
 	@each $name, $value in colors.$colors {
-        &.color--#{$name}{
-            background-color: rgba($value, 1);
+		&.color--#{$name}{
+			background-color: rgba($value, 1);
+			box-shadow: 0 0 4px 0px $value;
+			border: var(--color-ares-#{$name}-dark) solid 1px;
 			&.self{
-				outline: rgba($value, 1) solid 1px;
-				outline-offset: 1px;
-				box-shadow: 0 0 5px 3px white;
+				border-radius: 2px;
 			}
         }
     }
