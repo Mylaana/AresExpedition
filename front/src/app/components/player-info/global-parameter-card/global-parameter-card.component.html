@@ -1,7 +1,9 @@
 <div class="wrapper-icon">
 	<app-text-with-image [rawText]="'$other_'+parameter.toLocaleLowerCase()"></app-text-with-image>
+	<img *ngIf="isGlobalParameterMaxedOutAtPhaseBeginning()" src="/assets/other/ready.png" alt="">
 </div>
 <div class="wrapper-progression-bar"
+	*ngIf="!isGlobalParameterMaxedOutAtPhaseBeginning()"
 	[ngClass]="getCurrentStepColor()">
 	<div *ngFor="let bubble of _progressionList" class="wrapper-bubble"
 		[class.current]="bubble===_progressionList[currentStep]"
