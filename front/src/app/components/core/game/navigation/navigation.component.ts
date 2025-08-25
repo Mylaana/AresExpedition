@@ -70,4 +70,7 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 		this._playerIdList = playerIdList
 		this.updateNavHeight()
 	}
+	isClient(playerId: string): boolean {
+		return playerId === this.clientPlayerId
+	}
 }

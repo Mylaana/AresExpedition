@@ -7,11 +7,20 @@
 		(mouseenter)="_playerPannelIsHovered=true"
 		(mouseleave)="_playerPannelIsHovered=false"
 		@fadeIn>
+		<app-player-pannel
+			[@expandCollapseVertical]
+			(@expandCollapseVertical.done)="updateNavHeight()"
+			[playerId]="clientPlayerId">
+		</app-player-pannel>
+		<div class="hovered-seperator-client"
+			*ngIf="_playerPannelIsHovered"
+			[@expandCollapseVertical]>
+		</div>
 		<ng-container *ngFor="let id of _playerIdList">
 			<app-player-pannel
 				[@expandCollapseVertical]
 				(@expandCollapseVertical.done)="updateNavHeight()"
-				*ngIf="_playerPannelIsHovered || id===clientPlayerId" [playerId]="id">
+				*ngIf="_playerPannelIsHovered && id!=clientPlayerId" [playerId]="id">
 			</app-player-pannel>
 		</ng-container>
 	</div>
