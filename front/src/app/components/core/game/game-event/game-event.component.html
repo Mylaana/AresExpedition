@@ -23,8 +23,12 @@
 		<div class="right-command">
 		</div>
 	</div>
-	<app-group-waiting *ngIf="displayGroupReady()"
-		@fadeIn></app-group-waiting>
+	<div class="wrapper-group-waiting">
+		<app-group-waiting
+			*ngIf="displayGroupReady()"
+			@fadeIn>
+		</app-group-waiting>
+	</div>
 	<div class="wrapper-title">
 		<div *ngIf="currentEvent.title!=undefined" class="wrapper-event-description ares-title">
 			<h1 *ngIf="currentEvent.title!=undefined">{{currentEvent.title}}</h1>

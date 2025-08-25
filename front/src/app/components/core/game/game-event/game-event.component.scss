@@ -4,7 +4,7 @@ $description-pannel-margin-left: 2%;
 :host{
 	--command-pannel-height: 0px;
 	--event-min-height: 55vh;
-	@media (max-width:1919px) {
+	@media (max-width:1900px) {
 		--event-min-height: 40vh;
 	}
 }
@@ -77,9 +77,12 @@ app-hexed-tooltip-background{
 	}
 }
 app-group-waiting{
+	height: 100%;
+}
+.wrapper-group-waiting{
+	height: 30px;
 	position: relative;
-	top: calc(-1 * var(--command-pannel-height));
-	height: fit-content;
+	top: calc(-1 * var(--command-pannel-height) + 10px);
 }
 .wrapper-title{
 	position: relative;
@@ -126,7 +129,7 @@ app-group-waiting{
 	}
 
 	margin-right: calc(var(--settings-button-size) / 2);
-	@media (max-width: 1919px) {
+	@media (max-width: 1900px) {
 		margin-right: 20px;
 	}
 }
