@@ -17,5 +17,8 @@
     & > p{
 		font-size: 90%;
 		color: white;
+		word-break: unset;
+		width: fit-content;
+		white-space: nowrap;
     }
 }
