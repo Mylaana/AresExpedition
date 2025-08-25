@@ -233,6 +233,9 @@ public class Game {
     }
 
     public void nextPhaseSelected(){
+        if(this.gameOptions.getModeDeadHand() && currentPhase==PhaseEnum.PLANIFICATION && this.selectedPhase.size()>1){
+            addDeadHandPhase();
+        }
         LinkedHashSet<PhaseEnum> tempSelectedPhase = new LinkedHashSet<>(this.selectedPhase);
 
         for(PhaseEnum phase: this.selectedPhase){
@@ -248,6 +251,23 @@ public class Game {
             return;
         }
         this.newRound();
+    }
+
+    private void addDeadHandPhase(){
+        List<PhaseEnum> randomPhase = new ArrayList<>();
+        randomPhase.add(PhaseEnum.DEVELOPMENT);
+        randomPhase.add(PhaseEnum.CONSTRUCTION);
+        randomPhase.add(PhaseEnum.ACTION);
+        randomPhase.add(PhaseEnum.PRODUCTION);
+        randomPhase.add(PhaseEnum.RESEARCH);
+
+        Collections.shuffle(randomPhase);
+        for(PhaseEnum p: randomPhase){
+            if(!this.selectedPhase.contains(p)){
+                addPhaseSelected(p);
+                return;
+            }
+        }
     }
 
     private void newRound(){

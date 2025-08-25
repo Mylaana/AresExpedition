@@ -26,6 +26,7 @@ export class CreateGameOptionsComponent implements OnInit{
 	_modeInitialDraft!: ToggleButton
 	_modeInfrastructureMandatory!: ToggleButton
 	_modeMerger!: ToggleButton
+	_modeDeadHand!: ToggleButton
 	_modeStandardProjectPhaseUpgrade!: ToggleButton
 
 	constructor(private createGameOptionService: CreateGameOptionService){}
@@ -41,6 +42,7 @@ export class CreateGameOptionsComponent implements OnInit{
 		this._modeInfrastructureMandatory = ButtonDesigner.createToggleButton('modeInfrastructureMandatory')
 		this._modeMerger = ButtonDesigner.createToggleButton('modeMerger')
 		this._modeStandardProjectPhaseUpgrade = ButtonDesigner.createToggleButton('modeStandardProjectPhaseUpgrade')
+		this._modeDeadHand = ButtonDesigner.createToggleButton('modeDeadHand')
 
 		this.createGameOptionService.currentGameOptions.subscribe(options => this.updateButtonsState(options))
 	}
@@ -65,5 +67,7 @@ export class CreateGameOptionsComponent implements OnInit{
 
 		this._modeStandardProjectPhaseUpgrade.value = options.standardUpgrade
 		this._modeStandardProjectPhaseUpgrade.locked = options.discovery===false
+
+		this._modeDeadHand.value = options.deadHand
 	}
 }
