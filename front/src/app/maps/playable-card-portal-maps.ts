@@ -28,6 +28,17 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 				EventFactory.simple.addRessource({name:'plant', valueStock:3})
 			]
 	},
+	//Greenhouses
+	'32': (button) => {
+		let value: number = 0
+		switch(button){
+			case(EffectPortalButtonEnum.greenhouses_1):{value=1; break}
+			case(EffectPortalButtonEnum.greenhouses_2):{value=2; break}
+			case(EffectPortalButtonEnum.greenhouses_3):{value=3; break}
+			case(EffectPortalButtonEnum.greenhouses_4):{value=4; break}
+		}
+		return [EventFactory.simple.addRessource([{name:'plant', valueStock:value},{name:'heat', valueStock:-value}])]
+	},
 	//Viral Enhancer
 	'61': (button) => {
 		switch(button){
@@ -197,6 +208,16 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	'19': (button) => button===EffectPortalButtonEnum.decomposers_Add?'$ressource_microbe$':'-$ressource_microbe$: $ressource_card$',
 	//Decomposing Fungus
 	'20': (button) => button===EffectPortalButtonEnum.decomposingFungus_Animal?'-$ressource_animal$:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$':'-$ressource_microbe$:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$',
+	//Greenhouses
+	'32': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.greenhouses_1):{return '-$ressource_heat$:$skipline$$ressource_plant$'}
+			case(EffectPortalButtonEnum.greenhouses_2):{return '-$ressource_heat$$ressource_heat$:$skipline$$ressource_plant$$ressource_plant$'}
+			case(EffectPortalButtonEnum.greenhouses_3):{return '-$ressource_heat$$ressource_heat$$ressource_heat$:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$'}
+			case(EffectPortalButtonEnum.greenhouses_4):{return '-$ressource_heat$$ressource_heat$$ressource_heat$$ressource_heat$:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$$ressource_plant$'}
+		}
+		return ''
+	},
 	//Imported Hydrogen
 	'61': (button) => {
 		switch(button){
@@ -316,6 +337,8 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	//Decomposing Fungus
 	'20': ()=> [EffectPortalButtonEnum.decomposingFungus_Animal, EffectPortalButtonEnum.decomposingFungus_Microbe],
 	//Viral Enhancers
+	'32': ()=> [EffectPortalButtonEnum.greenhouses_1, EffectPortalButtonEnum.greenhouses_2, EffectPortalButtonEnum.greenhouses_3, EffectPortalButtonEnum.greenhouses_4],
+	//Greenhouses
 	'61': ()=> [EffectPortalButtonEnum.viralEnhancer_Plant, EffectPortalButtonEnum.viralEnhancer_Microbe, EffectPortalButtonEnum.viralEnhancer_Animal],
 	//Imported Hydrogen
 	'80': ()=> [EffectPortalButtonEnum.importedHydrogen_Plant, EffectPortalButtonEnum.importedHydrogen_Microbe, EffectPortalButtonEnum.importedHydrogen_Animal],
@@ -342,6 +365,7 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 export const EFFECT_PORTAL_ENUM_TO_EFFECT_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
 	[EffectPortalEnum.decomposingFungus]: '20',
+	[EffectPortalEnum.greenhouses]: '32',
 	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
@@ -357,6 +381,7 @@ export const EFFECT_PORTAL_ENUM_TO_EFFECT_CODE: Record<EffectPortalEnum, string>
 export const EFFECT_PORTAL_ENUM_TO_CARD_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
 	[EffectPortalEnum.decomposingFungus]: '20',
+	[EffectPortalEnum.greenhouses]: '32',
 	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
@@ -385,6 +410,16 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 			case(EffectPortalButtonEnum.decomposingFungus_Microbe):{
 				return Checker.hasCardWithStockType('microbe', clientState)
 			}
+		}
+		return false
+	},
+	//Greenhouse
+	'32': (clientState, buttonRule)=> {
+		switch(buttonRule){
+			case(EffectPortalButtonEnum.greenhouses_1):{return Checker.isRessourceOk('heat', 1, 'min', clientState)}
+			case(EffectPortalButtonEnum.greenhouses_2):{return Checker.isRessourceOk('heat', 2, 'min', clientState)}
+			case(EffectPortalButtonEnum.greenhouses_3):{return Checker.isRessourceOk('heat', 3, 'min', clientState)}
+			case(EffectPortalButtonEnum.greenhouses_4):{return Checker.isRessourceOk('heat', 4, 'min', clientState)}
 		}
 		return false
 	},

@@ -93,6 +93,8 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'29': () => [
 		EventFactory.simple.discard(1),
 		EventFactory.simple.addRessource({ name: 'plant', valueStock: 3 })],
+	//Greenhouse
+	'32': () => [EventFactory.simple.effectPortal(EffectPortalEnum.greenhouses, true)],
 	//GHG Producing Bacteria
 	'31': (cardCode, _, option) => option === 1
 		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
@@ -433,6 +435,8 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'29': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
 	//GHG Producing Bacteria
 	'31': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('31').some(s => s.name === 'microbe' && s.valueStock >= 2),
+	//Greenhouses
+	'32': (_, clientState) => Checker.isRessourceOk('heat', 1,'min',clientState),
 	//Hydro-Electric Energy
 	'34': (_, clientState) => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
 	//Ironworks
