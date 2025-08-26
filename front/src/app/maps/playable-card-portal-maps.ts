@@ -350,11 +350,66 @@ export const EFFECT_PORTAL_ENUM_TO_CARD_CODE: Record<EffectPortalEnum, string> =
 	[EffectPortalEnum.secretLabs]: 'FM25',
 }
 export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clientState: PlayerStateModel, buttonRule: EffectPortalButtonEnum) => boolean> = {
+	//Decomposers
 	'19': (clientState, buttonRule)=> {
 		if(buttonRule===EffectPortalButtonEnum.decomposers_Add){return true}
 		if(!clientState){return false}
 		return Checker.isMinimumStockOnPlayedCardOk({name:'microbe', valueStock:1},'min', clientState, '19')
 	},
+	//Viral Enhancer
+	'61': (clientState, buttonRule)=> {
+		switch(buttonRule){
+			case(EffectPortalButtonEnum.viralEnhancer_Animal):{
+				return Checker.hasCardWithStockType('animal', clientState)
+			}
+			case(EffectPortalButtonEnum.viralEnhancer_Microbe):{
+				return Checker.hasCardWithStockType('microbe', clientState)
+			}
+		}
+		return true
+	},
+	//Imported Hydrogen
+	'80': (clientState, buttonRule)=> {
+		switch(buttonRule){
+			case(EffectPortalButtonEnum.importedHydrogen_Animal):{
+				return Checker.hasCardWithStockType('animal', clientState)
+			}
+			case(EffectPortalButtonEnum.importedHydrogen_Microbe):{
+				return Checker.hasCardWithStockType('microbe', clientState)
+			}
+		}
+		return true
+	},
+	//Large Convoy
+	'87': (clientState, buttonRule)=> {
+		if(buttonRule===EffectPortalButtonEnum.largeConvoy_Plant){return true}
+		return Checker.hasCardWithStockType('animal', clientState)
+	},
+	//Local heat trapping
+	'89': (clientState, buttonRule)=> {
+		switch(buttonRule){
+			case(EffectPortalButtonEnum.localHeatTrapping_Animal):{
+				return Checker.hasCardWithStockType('animal', clientState)
+			}
+			case(EffectPortalButtonEnum.localHeatTrapping_Microbe):{
+				return Checker.hasCardWithStockType('microbe', clientState)
+			}
+		}
+		return false
+	},
+	//Cryogentic shipments
+	'D15': (clientState, buttonRule)=> {
+		switch(buttonRule){
+			case(EffectPortalButtonEnum.cryogenticShipment_Animal):{
+				return Checker.hasCardWithStockType('animal', clientState)
+			}
+			case(EffectPortalButtonEnum.cryogenticShipment_Microbe):{
+				return Checker.hasCardWithStockType('microbe', clientState)
+			}
+		}
+		return false
+	},
+	//Pushnik - Action
 	'CF2-Action': (clientState, buttonRule) => {
 		switch(buttonRule){
 			case(EffectPortalButtonEnum.pushnikAction_Animal):{
@@ -369,6 +424,7 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 		}
 		return false
 	},
+	//CLM - The hesitant hivemind
 	'CF3': (clientState, buttonRule) => {
 		switch(buttonRule){
 			case(EffectPortalButtonEnum.clm_2):{
