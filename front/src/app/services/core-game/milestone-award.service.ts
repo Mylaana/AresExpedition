@@ -213,6 +213,7 @@ export class MilestoneAwardService {
 		for(let a of this.awardList){
 			this.awardCards.push(this.getAwardCard(a))
 		}
+				console.log(this.awardCards)
 	}
 	private getAwardCard(award: AwardsEnum): AwardCard {
 		let groupTemp: AwardValue[] = []

@@ -73,7 +73,7 @@ public class Game {
         if(this.gameOptions.getExpansionDiscovery()){
             List<AwardsEnum> allAwards = 
                 new ArrayList<>(List.of(AwardsEnum.values()).stream()
-                .filter(a -> a.getCategory().equals("FANMADE"))
+                .filter(a -> a.getCategory().equals("BASE"))
                 .collect(Collectors.toList()));
                 
             Collections.shuffle(allAwards);

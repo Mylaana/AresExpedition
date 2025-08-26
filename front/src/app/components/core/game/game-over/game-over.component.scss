@@ -28,9 +28,7 @@ h1{
 	overflow: scroll;
 	scrollbar-width: none;
 }
-.wrapper-milestone-awards{
-	width: 300px;
-}
+
 .wrapper-phases{
 	display: flex;
 	flex-direction: column;
@@ -38,10 +36,15 @@ h1{
 }
 .wrapper-vp-breakdown{
 	display: flex;
-	gap: 50px;
-}
-app-milestone-and-award, .wrapper-milestone-awards{
+	gap: 20px;
 	height: fit-content;
+}
+app-milestone-and-award{
+	height: 100%;
+}
+.wrapper-milestone-awards{
+	width: 300px;
+	max-height: 100px;
 }
 .wrapper-round{
 	display: flex;
@@ -56,4 +59,5 @@ app-milestone-and-award, .wrapper-milestone-awards{
 	& > img {
 		height: 50px;
 	}
+	max-height: 100px;
 }
