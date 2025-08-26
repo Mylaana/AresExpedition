@@ -83,6 +83,7 @@ export class GameState{
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
 	private round = new BehaviorSubject<number>(0)
 	private cardProduction = new BehaviorSubject<string[]>([])
+	private deck = new BehaviorSubject<number>(0)
 
     currentGroupPlayerState = this.groupPlayerState.asObservable()
     currentGroupPlayerReady = this.groupPlayerReady.asObservable()
@@ -101,6 +102,7 @@ export class GameState{
 	currentAwards = this.awards.asObservable()
 	currentRound = this.round.asObservable()
 	currentCardProduction = this.cardProduction.asObservable()
+	currentDeck = this.deck.asObservable()
 
     phaseIndex: number = 0
 
@@ -936,5 +938,8 @@ export class GameState{
 		this.cardProduction.next(totalCards)
 		if(!addToHand)
 		this.getClientState().addCardsToHand(cardList)
+	}
+	setDeckSize(size: number){
+		this.deck.next(size)
 	}
 }

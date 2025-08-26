@@ -216,6 +216,7 @@ public class Game {
         gameState.setGroupPlayerStatePublic(this.groupPlayerState);
         gameState.setGameStatus(gameStatus);
         gameState.setRound(round);
+        gameState.setDeck(getDeck().size());
         if(this.getGameOptions().getExpansionDiscovery()){
             gameState.setAwards(awards);
             gameState.setMilestones(milestones);

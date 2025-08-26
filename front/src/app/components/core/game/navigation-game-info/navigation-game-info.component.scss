@@ -1,0 +1,19 @@
+:host{
+	display: flex;
+	justify-content: space-around;
+	height: 100%;
+}
+.wrapper-info{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	height: 100%;
+	& > img{
+		height: 70%;
+	}
+	& > p {
+		color: white;
+		font-size: 18px;
+	}
+}

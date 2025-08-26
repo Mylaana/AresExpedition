@@ -1,7 +1,10 @@
 <nav id="nav"
 	@fadeIn
 	(@expandCollapseVertical.done)="updateNavHeight()">
-	<app-global-parameter-pannel class="ares-navigation-pannel"></app-global-parameter-pannel>
+	<div class="wrapper-left">
+		<app-global-parameter-pannel class="ares-navigation-pannel"></app-global-parameter-pannel>
+		<app-navigation-game-info class="ares-navigation-pannel"></app-navigation-game-info>
+	</div>
 	<div class="wrapper-player-pannel ares-navigation-pannel"
 		[class.hovered]="_playerPannelIsHovered"
 		(mouseenter)="setHovered(true)"
