@@ -421,6 +421,21 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
+		case(DeckQueryOptionsEnum.clm):{
+			let event = new EventComplexCardSelector
+            event.title = `CLM - Select up to one card.`
+            event.refreshSelectorOnSwitch = false
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(keep)
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = true
+			event.scanKeepOptions = options
+			event.waiterId = waiter
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			return event
+		}
 		default:{
 			console.error('UNHANDLED SCANKEEP OPTION: ', options)
 			return new EventComplexCardSelector

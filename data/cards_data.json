@@ -9088,7 +9088,7 @@
         "status": "implemented",
         "actionTextOption1": {
             "en": "4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$",
-            "fr": "4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$"
+            "fr": ""
         },
         "vpScaling": "0"
     },
@@ -9217,14 +9217,14 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
-            "fr": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$."
+            "en": "$other_arrow$  -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $production_+2$$ressource_heat$$production_+1$$ressource_plant$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-7$ressource_science$: $production_+1$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "fr": ""
         },
         "stockable": [
             "science"
         ],
-        "startingMegacredits": 15,
-        "status": "filled",
+        "startingMegacredits": 25,
+        "status": "implemented",
         "actionTextOption1": {
             "en": "-X $ressource_science$",
             "fr": ""
@@ -9617,8 +9617,9 @@
         "origin": "fanmade",
         "cost": 22,
         "tagsId": [
+            1,
             2,
-            1
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -9652,10 +9653,6 @@
             "science"
         ],
         "status": "validated",
-        "actionTextOption1": {
-            "en": "$ressource_science$ / 5$tag_science$",
-            "fr": "$ressource_science$ / 5$tag_science$"
-        },
         "vpScaling": "1"
     },
     {

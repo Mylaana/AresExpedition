@@ -23,7 +23,8 @@ export enum DeckQueryOptionsEnum {
 	inventionContest = 'O5',
 	actionPhaseScan = 'O6',
 	modPro = 'O7',
-	ringCom = 'O8'
+	ringCom = 'O8',
+	clm = 'O9'
 }
 export enum ProjectFilterNameEnum {
 	undefined = 'undefined',
@@ -50,7 +51,8 @@ export enum ProjectFilterNameEnum {
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
 	redraftedContracts = 'redraftedContracts',
-	matterGenerator = 'matterGenerator'
+	matterGenerator = 'matterGenerator',
+	clm = 'CLM'
 }
 export enum BuilderOption {
 	//Phase builders
@@ -66,7 +68,7 @@ export enum BuilderOption {
 	selfReplicatingBacteria = 'selfReplicatingBacteria',
 	maiNiProductions = 'maiNiProductions',
 	researchGrant = 'researchGrant',
-	conscription = 'conscription'
+	conscription = 'conscription',
 }
 export enum EffectPortalEnum {
 	decomposers,
@@ -79,7 +81,8 @@ export enum EffectPortalEnum {
 	localHeatTrapping,
 	pushnikAction,
 	pushnikProduction,
-	secretLabs
+	secretLabs,
+	clm
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -118,7 +121,15 @@ export enum EffectPortalButtonEnum {
 
 	secretLabs_Ocean,
 	secretLabs_Oxygen,
-	secretLabs_Temperature
+	secretLabs_Temperature,
+
+	clm_2,
+	clm_3,
+	clm_4,
+	clm_5,
+	clm_7,
+	clm_8,
+	clm_12
 }
 export enum AwardsEnum {
 	/** most phase upgraded*/

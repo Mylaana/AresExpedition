@@ -3,8 +3,8 @@ import { EventUnionSubTypes } from "../types/event.type";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton, ToggleButton, CarouselButton } from "../models/core-game/button.model";
 import { CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
 import { BuilderOption, EffectPortalButtonEnum } from "../enum/global.enum";
-import { EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENABLED, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-maps";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
+import { EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS, EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-portal-maps";
 
 
 @Injectable({
@@ -209,7 +209,7 @@ export class ButtonDesigner{
 	}
 	private static createPortalButton(portalCode: string, effectButton: EffectPortalButtonEnum, clientState: PlayerStateModel): EffectPortalButton {
 		let button = new EffectPortalButton
-		let enabledRule= EFFECT_PORTAL_BUTTON_ENABLED[portalCode]? EFFECT_PORTAL_BUTTON_ENABLED[portalCode](clientState, effectButton):true
+		let enabledRule= EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS[portalCode]? EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS[portalCode](clientState, effectButton):true
 		button.name = 'portalEffect'
 		button.startEnabled = enabledRule
 		button.setEnabled(button.startEnabled)

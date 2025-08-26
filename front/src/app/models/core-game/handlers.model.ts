@@ -220,6 +220,7 @@ export class EventHandler {
 					case(DeckQueryOptionsEnum.ringCom):{
 						if(!event.getSelectorFilter()){break}
 						event.setSelectorFilterAuthorizedTag(['jovian'])
+						break
 					}
 				}
 
@@ -364,6 +365,12 @@ export class EventHandler {
 					case(DiscardOptionsEnum.matterGenerator):{
 						if(event.hasSelectorCardSelected()===false){break}
 						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:6}), 'first')
+						break
+					}
+					case(DiscardOptionsEnum.clm):{
+						if(event.hasSelectorCardSelected()===false){break}
+						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:5}), 'first')
+						break
 					}
 				}
 				break

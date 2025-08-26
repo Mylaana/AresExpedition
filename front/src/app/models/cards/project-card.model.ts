@@ -281,6 +281,8 @@ export class PlayableCardModel {
 		let stockIndex: number = 0
 		let remainingStock = Utils.jsonCopy(this.tagStock)
 		let tagCount = this.tagsId.length
+		//CLM exception
+		if(this.cardCode==='CF3'){return}
 
 		//Research grant exception
 		if(this.cardCode==='P24'){

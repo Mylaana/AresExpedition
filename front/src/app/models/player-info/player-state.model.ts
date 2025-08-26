@@ -19,7 +19,7 @@ import { GlobalParameterColorEnum, GlobalParameterNameEnum, MilestonesEnum, Proj
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
 import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { Utils } from "../../utils/utils";
-import { SCALING_PRODUCTION } from "../../maps/playable-card-maps";
+import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
 import { PlayerStatStateModel } from "./player-state-stat";
 
 

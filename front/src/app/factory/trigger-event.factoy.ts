@@ -57,6 +57,10 @@ const S = EventFactory.simple
 			S.draw(1),
 		]
 	}
+	//CLM
+	function handleTrigger_CF3_ON_PLAYED_CARD(trigger: string, input: TriggerInput): EventBaseModel[] {
+		return [S.addRessourceToCardId({name:'science', valueStock:1}, trigger)]
+	}
 
 //ON_PARAMETER_INCREASED
 	//Arctic Alagae
@@ -267,6 +271,11 @@ const S = EventFactory.simple
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
 		return [S.draw(1)]
 	}
+	//CLM
+	function handleTrigger_CF3_ON_TAG_GAIN(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
+		return [S.addRessourceToCardId({name:'science', valueStock:1}, trigger)]
+	}
 	//Recyclon
 	function handleTrigger_CF7(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('building','tag'))===false){return []}
@@ -419,7 +428,8 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'6': handleTrigger_6,
 		'P16': handleTrigger_P16,
 		'FM23': handleTrigger_FM23,
-		'FM24': handleTrigger_FM24
+		'FM24': handleTrigger_FM24,
+		'CF3': handleTrigger_CF3_ON_PLAYED_CARD
 	},
 	ON_PARAMETER_INCREASED: {
 		'8': handleTrigger_8,
@@ -455,6 +465,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'FM2': handleTrigger_FM2,
 		'FM4': handleTrigger_FM4,
 		'FM14': handleTrigger_FM14,
+		'CF3': handleTrigger_CF3_ON_TAG_GAIN
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
 		'P04': handleTrigger_P04,

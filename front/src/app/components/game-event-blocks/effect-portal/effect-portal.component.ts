@@ -28,7 +28,6 @@ export class EffectPortalComponent implements OnInit{
 	_portal!: EffectPortalEnum
 	_portalCard!: PlayableCardModel | undefined
 	_buttons!: EffectPortalButton[]
-	private clientState!: PlayerStateModel
 	private destroy$ = new Subject<void>
 
 	constructor(
@@ -39,17 +38,16 @@ export class EffectPortalComponent implements OnInit{
 		let event: EventGeneric = this.event as EventGeneric
 		if(event.effectPortal===undefined){return}
 		this._portal = event.effectPortal
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this.updateClientState(state))
 		this.portalService.initialize(this._portal)
 		this.loadPortal()
 
-		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this.updateClientState(state))
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
 	updateClientState(state: PlayerStateModel){
-		this.clientState = state
 		this.portalService.onStateUpdate(state)
 		this._buttons = this.portalService.buttons
 	}
