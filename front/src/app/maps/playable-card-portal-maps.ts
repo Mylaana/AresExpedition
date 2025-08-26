@@ -93,7 +93,7 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 				return [EventFactory.simple.addRessourceToSelectedCard({name:'science', valueStock:1}, 1)]
 			}
 			case(EffectPortalButtonEnum.pushnikProduction_mc):{
-				return [EventFactory.simple.addProduction({name:'megacredit', valueStock:1})]
+				return [EventFactory.simple.addProduction({name:'megacredit', valueStock:2})]
 			}
 			case(EffectPortalButtonEnum.pushnikProduction_heat):{
 				return [EventFactory.simple.addProduction({name:'heat', valueStock:1})]
@@ -241,7 +241,7 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	'CF2-Production': (button) => {
 		switch(button){
 			case(EffectPortalButtonEnum.pushnikProduction_mc):{
-				return '$ressource_megacredit$'
+				return '$ressource_megacreditvoid_2$'
 			}
 			case(EffectPortalButtonEnum.pushnikProduction_heat):{
 				return '$ressource_heat$'
