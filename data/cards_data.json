@@ -9213,7 +9213,7 @@
         },
         "effectSummaryType2": "action",
         "effectSummaryText2": {
-            "en": "$other_arrow$ $ressource_science$$skipline$OR$skipline$-X$ressource_science$: ?",
+            "en": "$other_arrow$ $skipline$-X$ressource_science$: ?",
             "fr": ""
         },
         "effectText2": {

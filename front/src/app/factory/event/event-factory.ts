@@ -43,6 +43,7 @@ interface CreateEventOptionsGeneric {
     effectPortal?: EffectPortalEnum
 	isCardProductionDouble?: boolean
 	firstProductionCardList?: string[]
+	portalActionMustBeResolvedToFinishEvent?: boolean
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -131,8 +132,8 @@ function resolveWildTag(cardCode: string, authorizedTagList?: TagType[]) : Event
 function addTagToCard(cardCode: string, tag: TagType): EventTargetCard {
 	return EventFactory.createTargetCard('addTagToCardId', cardCode, {addTagToCard:tag})
 }
-function effectPortal(portal: EffectPortalEnum): EventGeneric{
-    return EventFactory.createGeneric('effectPortal', {effectPortal: portal})
+function effectPortal(portal: EffectPortalEnum, portalActionMustBeResolvedToFinishEvent: boolean = false): EventGeneric{
+    return EventFactory.createGeneric('effectPortal', {effectPortal: portal, portalActionMustBeResolvedToFinishEvent: portalActionMustBeResolvedToFinishEvent})
 }
 function recallCardInHandFromPlay(){
 	return EventFactory.createCardSelector('recallCardInHand')
@@ -746,7 +747,13 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         }
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
     }
-    event.button = ButtonDesigner.createEventMainButton(event.subType)
+
+	let portalMustResolve = args?.portalActionMustBeResolvedToFinishEvent
+	if(event.subType=='effectPortal' && portalMustResolve!=undefined){
+		event.button = ButtonDesigner.createEventMainButton(event.subType, portalMustResolve===false)
+	} else {
+		event.button = ButtonDesigner.createEventMainButton(event.subType)
+	}
     return event
 }
 function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptionsDeckQuery ) : EventDeckQuery {

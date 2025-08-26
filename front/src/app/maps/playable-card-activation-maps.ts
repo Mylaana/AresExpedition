@@ -26,7 +26,7 @@ export const ACTIVATION_DOUBLE: string[] = [
 export const ACTIVATION_NO_COST: string[] = [
 	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03',
 	'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'FM11', 'FM15',
-	'FM26', 'FM27', 'CF3'
+	'FM26', 'FM27'
 
 ]
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
@@ -278,7 +278,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	],
 	//CLM - The Hesitant Hivemind
 	'CF3': () => [
-		EventFactory.simple.effectPortal(EffectPortalEnum.clm)
+		EventFactory.simple.effectPortal(EffectPortalEnum.clm, true)
 	],
 }
 export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
@@ -479,4 +479,7 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 		if(!card){return false}
 		return !card.tagStock || card.tagStock.length<3
 	},
+	//CLM - The hesistant hiveming
+	'CF3': (_, clientState) => Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:2}, 'min', clientState, 'CF3'),
+
 }

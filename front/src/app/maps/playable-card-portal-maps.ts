@@ -355,6 +355,20 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 		if(!clientState){return false}
 		return Checker.isMinimumStockOnPlayedCardOk({name:'microbe', valueStock:1},'min', clientState, '19')
 	},
+	'CF2-Action': (clientState, buttonRule) => {
+		switch(buttonRule){
+			case(EffectPortalButtonEnum.pushnikAction_Animal):{
+				return Checker.hasCardWithStockType('animal', clientState)
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Microbe):{
+				return Checker.hasCardWithStockType('microbe', clientState)
+			}
+			case(EffectPortalButtonEnum.pushnikAction_Science):{
+				return Checker.hasCardWithStockType('science', clientState)
+			}
+		}
+		return false
+	},
 	'CF3': (clientState, buttonRule) => {
 		switch(buttonRule){
 			case(EffectPortalButtonEnum.clm_2):{
@@ -381,5 +395,5 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 			}
 		}
 		return false
-	}
+	},
 }

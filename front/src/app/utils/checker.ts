@@ -1,7 +1,7 @@
 import { GlobalParameterNameEnum, GlobalParameterColorEnum } from "../enum/global.enum"
 import { AdvancedRessourceStock } from "../interfaces/global.interface"
 import { PlayerStateModel } from "../models/player-info/player-state.model"
-import { RessourceType, MinMaxEqualType, TagType } from "../types/global.type"
+import { RessourceType, MinMaxEqualType, TagType, AdvancedRessourceType } from "../types/global.type"
 import { Utils } from "./utils"
 
 const minIndex = 0
@@ -76,6 +76,9 @@ function isHandCurrentSizeOk(size: number, treshold: MinMaxEqualType, clientstat
 function isMilestoneOk(quantity: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
 	return Utils.getValueVsTreshold({treshold:treshold, tresholdValue: quantity, value:clientState.getMilestoneCompleted()})
 }
+function hasCardWithStockType(ressourceType: AdvancedRessourceType | AdvancedRessourceType[], clientState: PlayerStateModel): boolean{
+	return clientState.getPlayedListWithStockableTypes(ressourceType).length>0
+}
 export const Checker = {
     isRessourceOk,
     isTagOk,
@@ -84,5 +87,6 @@ export const Checker = {
     isTrOk,
 	isMinimumStockOnPlayedCardOk,
     isHandCurrentSizeOk,
-	isMilestoneOk
+	isMilestoneOk,
+	hasCardWithStockType
 }

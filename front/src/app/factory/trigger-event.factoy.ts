@@ -8,6 +8,7 @@ import { GlobalInfo } from "../services/global/global-info.service";
 import { RessourceStock } from "../interfaces/global.interface";
 import { Utils } from "../utils/utils";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum";
+import { Checker } from "../utils/checker";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
@@ -397,23 +398,21 @@ const S = EventFactory.simple
 	}
 //ON_PHASE_ACTIVATED
 	//Pu$hnik
-	function handleTrigger_CF2(trigger: string, input: TriggerInput): EventBaseModel[] {
+	function handleTrigger_CF2(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
 		if(input.activatedPhase.toString()===input.clientSelectedPhase.toString()){return []}
 		switch(input.activatedPhase){
 			case(NonSelectablePhaseEnum.development):case(NonSelectablePhaseEnum.construction):{
 				return [EventFactory.simple.addRessource({name:'megacredit', valueStock:2})]
 			}
 			case(NonSelectablePhaseEnum.action):{
-				return [
-					EventFactory.simple.addRessource([{name:'plant', valueStock:1},{name:'heat', valueStock:1}]),
-					EventFactory.simple.effectPortal(EffectPortalEnum.pushnikAction)
-				]
+				let result = [EventFactory.simple.addRessource([{name:'plant', valueStock:1},{name:'heat', valueStock:1}])]
+				if(clientState && Checker.hasCardWithStockType(['animal','microbe','science'], clientState)){
+					result.push(EventFactory.simple.effectPortal(EffectPortalEnum.pushnikAction))
+				}
+				return result
 			}
 			case(NonSelectablePhaseEnum.production):{
-				return [EventFactory.simple.effectPortal(EffectPortalEnum.pushnikProduction)]
-				let randomPool: RessourceType[] = ['megacredit', 'heat', 'plant']
-				let prod = randomPool[Math.floor(Math.random() * randomPool.length)];
-				return [EventFactory.simple.addProduction({name:prod, valueStock:1})]
+				return [EventFactory.simple.effectPortal(EffectPortalEnum.pushnikProduction, true)]
 			}
 			case(NonSelectablePhaseEnum.research):{
 				return [EventFactory.simple.draw(1)]

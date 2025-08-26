@@ -30,6 +30,7 @@ export class ButtonDesigner{
 			case('waitingGroupReady'):{startEnabled=false;break}
 			case('recallCardInHand'):{startEnabled=true;break}
 			case('doubleProduction'):{startEnabled=true;break}
+			case('effectPortal'):{startEnabled=true;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
@@ -142,9 +143,13 @@ export class ButtonDesigner{
         }
         return caption
     }
-    public static createEventMainButton(eventSubType: EventUnionSubTypes): EventMainButton {
+    public static createEventMainButton(eventSubType: EventUnionSubTypes, startEnabled?: boolean): EventMainButton {
         let button = new EventMainButton
-        button.startEnabled = this.getStartEnabled(eventSubType)
+		if(startEnabled!=undefined){
+			button.startEnabled = startEnabled
+		} else {
+			button.startEnabled = this.getStartEnabled(eventSubType)
+		}
         button.setEnabled(button.startEnabled)
         button.caption = this.getCaption(eventSubType)
         button.eventSubType = eventSubType
