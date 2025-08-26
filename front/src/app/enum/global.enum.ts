@@ -82,7 +82,8 @@ export enum EffectPortalEnum {
 	pushnikAction,
 	pushnikProduction,
 	secretLabs,
-	clm
+	clm,
+	decomposingFungus
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -129,7 +130,10 @@ export enum EffectPortalButtonEnum {
 	clm_7,
 	clm_8,
 	clm_9,
-	clm_10
+	clm_10,
+
+	decomposingFungus_Animal,
+	decomposingFungus_Microbe
 }
 export enum AwardsEnum {
 	/** most phase upgraded*/

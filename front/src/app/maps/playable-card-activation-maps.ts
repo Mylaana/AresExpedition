@@ -68,7 +68,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		undefined
 	].filter(Boolean) as EventBaseModel[],
 	//Decomposing Fungus
-	'20': () => [EventFactory.simple.addRessource({ name: 'plant', valueStock: 3 })],
+	'20': () => [EventFactory.simple.effectPortal(EffectPortalEnum.decomposingFungus, true)],
 	//Developed Infrastructure
 	'21': (card, clientState) => [
 		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
@@ -418,7 +418,9 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	//Caretaker Contract
 	'14': (_, clientState) => Checker.isRessourceOk('heat', 8, 'min', clientState),
 	//Decomposing Fungus
-	'20': () => false,
+	'20': (_, clientState) => {
+		return Checker.hasCardWithStockQuantityPerType([{name:'microbe', valueStock:1}, {name:'animal', valueStock:1}], clientState)
+	},
 	//Developed Infrastructure
 	'21': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('21', clientState), 'min', clientState),
 	//Development Center

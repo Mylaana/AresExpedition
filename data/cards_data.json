@@ -656,7 +656,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "blocked",
+        "status": "implemented",
         "actionTextOption1": {
             "en": "-$ressource_animal$* / -$ressource_microbe$*:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$",
             "fr": ""

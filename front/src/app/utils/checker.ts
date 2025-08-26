@@ -79,6 +79,15 @@ function isMilestoneOk(quantity: number, treshold: MinMaxEqualType, clientState:
 function hasCardWithStockType(ressourceType: AdvancedRessourceType | AdvancedRessourceType[], clientState: PlayerStateModel): boolean{
 	return clientState.getPlayedListWithStockableTypes(ressourceType).length>0
 }
+function hasCardWithStockQuantityPerType(ressourceType: AdvancedRessourceStock | AdvancedRessourceStock[], clientState: PlayerStateModel): boolean{
+	let stocks: AdvancedRessourceStock[] = Utils.toArray(ressourceType)
+	for(let s of stocks){
+		for(let c of clientState.getPlayedListWithStockableTypes(s.name)){
+			if(c.getStockValue(s.name)>=s.valueStock){return true}
+		}
+	}
+	return false
+}
 export const Checker = {
     isRessourceOk,
     isTagOk,
@@ -88,5 +97,6 @@ export const Checker = {
 	isMinimumStockOnPlayedCardOk,
     isHandCurrentSizeOk,
 	isMilestoneOk,
-	hasCardWithStockType
+	hasCardWithStockType,
+	hasCardWithStockQuantityPerType
 }

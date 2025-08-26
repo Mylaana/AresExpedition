@@ -15,7 +15,20 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 			EventFactory.simple.draw(1)
 		]
 	},
-	//Decomposers
+	//Decomposing Fungus
+	'20': (button) => {
+		if(button===EffectPortalButtonEnum.decomposingFungus_Animal){
+			return  [
+				EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:-1}),
+				EventFactory.simple.addRessource({name:'plant', valueStock:3})
+			]
+		}
+			return  [
+				EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:-1}),
+				EventFactory.simple.addRessource({name:'plant', valueStock:3})
+			]
+	},
+	//Viral Enhancer
 	'61': (button) => {
 		switch(button){
 			case(EffectPortalButtonEnum.viralEnhancer_Plant):{
@@ -182,6 +195,8 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalButtonEnum) => string> = {
 	//Decomposers
 	'19': (button) => button===EffectPortalButtonEnum.decomposers_Add?'$ressource_microbe$':'-$ressource_microbe$: $ressource_card$',
+	//Decomposing Fungus
+	'20': (button) => button===EffectPortalButtonEnum.decomposingFungus_Animal?'-$ressource_animal$:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$':'-$ressource_microbe$:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$',
 	//Imported Hydrogen
 	'61': (button) => {
 		switch(button){
@@ -298,6 +313,8 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalButtonEnum[]> = {
 	//Decomposers
 	'19': ()=> [EffectPortalButtonEnum.decomposers_Add, EffectPortalButtonEnum.decomposers_Draw],
+	//Decomposing Fungus
+	'20': ()=> [EffectPortalButtonEnum.decomposingFungus_Animal, EffectPortalButtonEnum.decomposingFungus_Microbe],
 	//Viral Enhancers
 	'61': ()=> [EffectPortalButtonEnum.viralEnhancer_Plant, EffectPortalButtonEnum.viralEnhancer_Microbe, EffectPortalButtonEnum.viralEnhancer_Animal],
 	//Imported Hydrogen
@@ -324,6 +341,7 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 }
 export const EFFECT_PORTAL_ENUM_TO_EFFECT_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
+	[EffectPortalEnum.decomposingFungus]: '20',
 	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
@@ -338,6 +356,7 @@ export const EFFECT_PORTAL_ENUM_TO_EFFECT_CODE: Record<EffectPortalEnum, string>
 }
 export const EFFECT_PORTAL_ENUM_TO_CARD_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
+	[EffectPortalEnum.decomposingFungus]: '20',
 	[EffectPortalEnum.viralEnhancer]: '61',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
@@ -356,6 +375,18 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 		if(buttonRule===EffectPortalButtonEnum.decomposers_Add){return true}
 		if(!clientState){return false}
 		return Checker.isMinimumStockOnPlayedCardOk({name:'microbe', valueStock:1},'min', clientState, '19')
+	},
+	//Decomposing Fungus
+	'20': (clientState, buttonRule)=> {
+		switch(buttonRule){
+			case(EffectPortalButtonEnum.decomposingFungus_Animal):{
+				return Checker.hasCardWithStockType('animal', clientState)
+			}
+			case(EffectPortalButtonEnum.decomposingFungus_Microbe):{
+				return Checker.hasCardWithStockType('microbe', clientState)
+			}
+		}
+		return false
 	},
 	//Viral Enhancer
 	'61': (clientState, buttonRule)=> {

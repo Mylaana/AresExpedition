@@ -214,7 +214,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		return []
 	},
 	//Decomposing Fungus
-	'20': () => [EventFactory.simple.addRessourceToSelectedCard({name: 'microbe', valueStock: 2})],
+	'20': () => [EventFactory.simple.addRessourceToCardId({name: 'microbe', valueStock: 2},'20')],
 	//Extended Resources
 	'26': () => [EventFactory.simple.increaseResearchScanKeep({keep: 1, scan: 0})],
 	//Farming Co-ops
