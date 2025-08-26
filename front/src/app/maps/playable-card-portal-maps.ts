@@ -1,4 +1,4 @@
-import { GlobalParameterNameEnum, EffectPortalEnum, EffectPortalButtonEnum, DiscardOptionsEnum, DeckQueryOptionsEnum } from "../enum/global.enum";
+import { GlobalParameterNameEnum, EffectPortalEnum, EffectPortalButtonEnum, DiscardOptionsEnum, DeckQueryOptionsEnum, ProjectFilterNameEnum } from "../enum/global.enum";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { Checker } from "../utils/checker";
@@ -50,6 +50,21 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 			}
 			case(EffectPortalButtonEnum.viralEnhancer_Animal):{
 				return [EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:1}, 1)]
+			}
+		}
+		return []
+	},
+	//CEO's favorite project
+	'71': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.ceo_Animal):{
+				return [EventFactory.createCardSelectorRessource({name:'animal', valueStock:2}, {filterMinimumStock: 1})]
+			}
+			case(EffectPortalButtonEnum.ceo_Microbe):{
+				return [EventFactory.createCardSelectorRessource({name:'microbe', valueStock:2}, {filterMinimumStock: 1})]
+			}
+			case(EffectPortalButtonEnum.ceo_Science):{
+				return [EventFactory.createCardSelectorRessource({name:'science', valueStock:2}, {filterMinimumStock: 1})]
 			}
 		}
 		return []
@@ -233,6 +248,21 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 		}
 		return ''
 	},
+	//CEO's favorite project
+	'71': (button) => {
+		switch(button){
+			case(EffectPortalButtonEnum.ceo_Animal):{
+				return '$ressource_animal$$ressource_animal$*'
+			}
+			case(EffectPortalButtonEnum.ceo_Microbe):{
+				return '$ressource_microbe$$ressource_microbe$*'
+			}
+			case(EffectPortalButtonEnum.ceo_Science):{
+				return '$ressource_science$$ressource_science$*'
+			}
+		}
+		return ''
+	},
 	//Imported Hydrogen
 	'80': (button) => {
 		switch(button){
@@ -340,6 +370,8 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	'32': ()=> [EffectPortalButtonEnum.greenhouses_1, EffectPortalButtonEnum.greenhouses_2, EffectPortalButtonEnum.greenhouses_3, EffectPortalButtonEnum.greenhouses_4],
 	//Greenhouses
 	'61': ()=> [EffectPortalButtonEnum.viralEnhancer_Plant, EffectPortalButtonEnum.viralEnhancer_Microbe, EffectPortalButtonEnum.viralEnhancer_Animal],
+	//CEO's favorite project
+	'71': ()=> [EffectPortalButtonEnum.ceo_Animal, EffectPortalButtonEnum.ceo_Microbe, EffectPortalButtonEnum.ceo_Science],
 	//Imported Hydrogen
 	'80': ()=> [EffectPortalButtonEnum.importedHydrogen_Plant, EffectPortalButtonEnum.importedHydrogen_Microbe, EffectPortalButtonEnum.importedHydrogen_Animal],
 	//Large Convoy
@@ -360,13 +392,13 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	'CF3': ()=> [EffectPortalButtonEnum.clm_0, EffectPortalButtonEnum.clm_2,EffectPortalButtonEnum.clm_4,EffectPortalButtonEnum.clm_7,EffectPortalButtonEnum.clm_8,EffectPortalButtonEnum.clm_9,EffectPortalButtonEnum.clm_10,],
 	//Secret Labs
 	'FM25': ()=> [EffectPortalButtonEnum.secretLabs_Ocean, EffectPortalButtonEnum.secretLabs_Oxygen, EffectPortalButtonEnum.secretLabs_Temperature],
-
 }
 export const EFFECT_PORTAL_ENUM_TO_EFFECT_CODE: Record<EffectPortalEnum, string> = {
 	[EffectPortalEnum.decomposers]: '19',
 	[EffectPortalEnum.decomposingFungus]: '20',
 	[EffectPortalEnum.greenhouses]: '32',
 	[EffectPortalEnum.viralEnhancer]: '61',
+	[EffectPortalEnum.ceo]:'71',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
 	[EffectPortalEnum.localHeatTrapping]: '89',
@@ -383,6 +415,7 @@ export const EFFECT_PORTAL_ENUM_TO_CARD_CODE: Record<EffectPortalEnum, string> =
 	[EffectPortalEnum.decomposingFungus]: '20',
 	[EffectPortalEnum.greenhouses]: '32',
 	[EffectPortalEnum.viralEnhancer]: '61',
+	[EffectPortalEnum.ceo]:'71',
 	[EffectPortalEnum.importedHydrogen]:'80',
 	[EffectPortalEnum.largeConvoy]: '87',
 	[EffectPortalEnum.localHeatTrapping]: '89',
@@ -431,6 +464,21 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 			}
 			case(EffectPortalButtonEnum.viralEnhancer_Microbe):{
 				return Checker.hasCardWithStockType('microbe', clientState)
+			}
+		}
+		return true
+	},
+	//CEO Favorite project
+	'71': (clientState, buttonRule)=> {
+		switch(buttonRule){
+			case(EffectPortalButtonEnum.ceo_Animal):{
+				return Checker.hasCardWithStockQuantityPerType({name:'animal', valueStock:1}, clientState)
+			}
+			case(EffectPortalButtonEnum.ceo_Microbe):{
+				return Checker.hasCardWithStockQuantityPerType({name:'microbe', valueStock:1}, clientState)
+			}
+			case(EffectPortalButtonEnum.ceo_Science):{
+				return Checker.hasCardWithStockQuantityPerType({name:'science', valueStock:1}, clientState)
 			}
 		}
 		return true

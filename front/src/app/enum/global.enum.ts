@@ -46,7 +46,10 @@ export enum ProjectFilterNameEnum {
 	notCorporations = 'notCorporations',
 	authorizedTag = 'authorizedTag',
 	doubleProduction = 'doubleProduction',
-	redProject = 'redProject'
+	redProject = 'redProject',
+	ceo_Animal = 'ceoAnimal',
+	ceo_Microbe = 'ceoMicrobe',
+	ceo_Science = 'ceoScience'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
@@ -84,7 +87,8 @@ export enum EffectPortalEnum {
 	secretLabs,
 	clm,
 	decomposingFungus,
-	greenhouses
+	greenhouses,
+	ceo
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -139,7 +143,11 @@ export enum EffectPortalButtonEnum {
 	greenhouses_1,
 	greenhouses_2,
 	greenhouses_3,
-	greenhouses_4
+	greenhouses_4,
+
+	ceo_Animal,
+	ceo_Microbe,
+	ceo_Science
 }
 export enum AwardsEnum {
 	/** most phase upgraded*/

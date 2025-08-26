@@ -243,6 +243,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.addTR(2)],
 	//Business Contact
 	'70': () => [EventFactory.simple.drawThenDiscard(4,2)],
+	//CEO's Favorite Project
+	'71': () => [EventFactory.simple.effectPortal(EffectPortalEnum.ceo)],
 	//Comet
 	'73': () => [
 		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),

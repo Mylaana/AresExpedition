@@ -15,6 +15,7 @@ interface CreateEventOptionsSelector {
     title?: string
     waiterId?:number,
 	isMerger?:boolean
+	filterMinimumStock?: number
 }
 interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	scanKeepOptions?: DeckQueryOptionsEnum,
@@ -164,9 +165,8 @@ const SimpleEvent = {
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
     let selector: CardSelector
-
     selector ={
-        selectFrom: args?.selectFrom? args.selectFrom:[],
+		selectFrom: args?.selectFrom? args.selectFrom:[],
         selectedList:  args?.selectedList? args.selectedList:[],
         selectionQuantity: args?.selectionQuantity? args.selectionQuantity:0,
         selectionQuantityTreshold: args?.selectionQuantityTreshold? args.selectionQuantityTreshold:'equal',
@@ -447,10 +447,11 @@ function createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: Cr
     let event = new EventCardSelectorRessource
         event.setCardSelector(generateCardSelector(args?.cardSelector))
 
+	console.log(args)
     event.subType = 'addRessourceToSelectedCard'
     event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
     event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`
-    event.setSelectorFilter({type:ProjectFilterNameEnum.stockable, stockableType:event.advancedRessource?.name})
+    event.setSelectorFilter({type:ProjectFilterNameEnum.stockable, stockableType:event.advancedRessource?.name, minimumStockQuantity:args?.filterMinimumStock??0})
     event.setSelectorInitialState({selectable: true, ignoreCost:true})
     event.setSelectorQuantityTreshold('equal')
     event.setSelectorQuantity(1)
