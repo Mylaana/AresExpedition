@@ -60,7 +60,7 @@ const S = EventFactory.simple
 	}
 	//CLM
 	function handleTrigger_CF3_ON_PLAYED_CARD(trigger: string, input: TriggerInput): EventBaseModel[] {
-		return [S.addRessourceToCardId({name:'science', valueStock:1}, trigger)]
+		return [S.addRessourceToCardId({name:'science', valueStock:2}, trigger)]
 	}
 
 //ON_PARAMETER_INCREASED
@@ -242,7 +242,6 @@ const S = EventFactory.simple
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnTagGained(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
-		console.log('bacterial triggerred on tag gained')
 		return [S.addRessourceToCardId({name:'microbe', valueStock: 1}, trigger)]
 	}
 	//Saturn Systems
@@ -274,6 +273,7 @@ const S = EventFactory.simple
 	}
 	//CLM
 	function handleTrigger_CF3_ON_TAG_GAIN(trigger: string, input: TriggerInput): EventBaseModel[] {
+		return []
 		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
 		return [S.addRessourceToCardId({name:'science', valueStock:1}, trigger)]
 	}

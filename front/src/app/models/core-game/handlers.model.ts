@@ -369,7 +369,7 @@ export class EventHandler {
 					}
 					case(DiscardOptionsEnum.clm):{
 						if(event.hasSelectorCardSelected()===false){break}
-						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:5}), 'first')
+						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:7}), 'first')
 						break
 					}
 				}

@@ -480,6 +480,5 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 		return !card.tagStock || card.tagStock.length<3
 	},
 	//CLM - The hesistant hiveming
-	'CF3': (_, clientState) => Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:2}, 'min', clientState, 'CF3'),
-
+	'CF3': (_, clientState) => Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:0}, 'min', clientState, 'CF3'),
 }

@@ -9204,11 +9204,11 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$",
-            "fr": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$"
+            "en": "$ressource_card$: $ressource_science$$ressource_science$",
+            "fr": "$ressource_card$: $ressource_science$$ressource_science$"
         },
         "effectText": {
-            "en": "EFFECT: When you play a card or a $tag_science$, add a $ressource_science$,",
+            "en": "EFFECT: When you play a card, add 2 $ressource_science$.",
             "fr": ""
         },
         "effectSummaryType2": "action",
@@ -9217,7 +9217,7 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "$other_arrow$  -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $production_+2$$ressource_heat$$production_+1$$ressource_plant$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-7$ressource_science$: $production_+1$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "en": "$other_arrow$  3$ressource_card$$other_hand$1$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_7$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+1$$ressource_plant$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-8$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-9$ressource_science$: Add $other_tr$$other_tr$$other_tr$$skipline$-10$ressource_science$: +$tag_earth$$tag_jovian$.",
             "fr": ""
         },
         "stockable": [

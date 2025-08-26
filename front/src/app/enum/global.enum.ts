@@ -123,13 +123,13 @@ export enum EffectPortalButtonEnum {
 	secretLabs_Oxygen,
 	secretLabs_Temperature,
 
+	clm_0,
 	clm_2,
-	clm_3,
 	clm_4,
-	clm_5,
 	clm_7,
 	clm_8,
-	clm_12
+	clm_9,
+	clm_10
 }
 export enum AwardsEnum {
 	/** most phase upgraded*/
