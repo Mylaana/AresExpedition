@@ -47,6 +47,13 @@ export class MilestoneAwardService {
 			case(AwardsEnum.projectManager):{return '$other_omnicard$'}
 			case(AwardsEnum.researcher):{return '$tag_science$'}
 			case(AwardsEnum.visionary):{return '$other_upgrade$'}
+
+			case(AwardsEnum.contractor):{return '$tag_building$'}
+			case(AwardsEnum.spaceBaron):{return '$tag_space$'}
+			case(AwardsEnum.traveller):{return '$tag_earth$$tag_jovian$'}
+			case(AwardsEnum.biologist):{return '$tag_plant$$tag_animal$$tag_microbe$'}
+			case(AwardsEnum.electrician):{return '$tag_power$'}
+			case(AwardsEnum.spendthrift):{return '$other_omnicard$$ressource_megacreditvoid_20$'}
 			default:{return ''}
 		}
 	}
@@ -69,6 +76,13 @@ export class MilestoneAwardService {
 			case(AwardsEnum.projectManager):{return 'Most project cards played'}
 			case(AwardsEnum.researcher):{return 'Most $tag_science$ played'}
 			case(AwardsEnum.visionary):{return 'Most upgraded phase cards.'}
+
+			case(AwardsEnum.contractor):{return 'Most $tag_building$ played'}
+			case(AwardsEnum.spaceBaron):{return 'Most $tag_space$ played'}
+			case(AwardsEnum.traveller):{return 'Most $tag_earth$$tag_jovian$ played'}
+			case(AwardsEnum.biologist):{return 'Most $tag_plant$$tag_animal$$tag_microbe$ played'}
+			case(AwardsEnum.electrician):{return 'Most $tag_power$ played'}
+			case(AwardsEnum.spendthrift):{return 'Most cards played with base cost >= 20 MC'}
 			default:{return ''}
 		}
 	}
@@ -255,6 +269,13 @@ export class MilestoneAwardService {
 			case(AwardsEnum.projectManager):{return state.getProjectPlayedModelList({type:ProjectFilterNameEnum.notCorporations}).length}
 			case(AwardsEnum.researcher):{return state.getTagsOfType('science')}
 			case(AwardsEnum.visionary):{return state.getPhaseCardUpgradedCount()}
+
+			case(AwardsEnum.contractor):{return state.getTagsOfType('building')}
+			case(AwardsEnum.spaceBaron):{return state.getTagsOfType('space')}
+			case(AwardsEnum.traveller):{return state.getTagsOfType('earth')+state.getTagsOfType('jovian')}
+			case(AwardsEnum.biologist):{return state.getTagsOfType('plant')+state.getTagsOfType('animal')+state.getTagsOfType('microbe')}
+			case(AwardsEnum.electrician):{return state.getTagsOfType('power')}
+			case(AwardsEnum.spendthrift):{return state.getProjectPlayedModelList({type:ProjectFilterNameEnum.cost20orMore}).length}
 			default:{return 0}
 		}
 	}

@@ -47,9 +47,7 @@ export enum ProjectFilterNameEnum {
 	authorizedTag = 'authorizedTag',
 	doubleProduction = 'doubleProduction',
 	redProject = 'redProject',
-	ceo_Animal = 'ceoAnimal',
-	ceo_Microbe = 'ceoMicrobe',
-	ceo_Science = 'ceoScience'
+	cost20orMore = 'cost20orMore'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
@@ -164,6 +162,19 @@ export enum AwardsEnum {
 	industrialist = 'A_INDUSTRIALIST',
     /** most science tags*/
 	researcher = 'A_RESEARCHER',
+
+	/** most building tags */
+	contractor = 'A_CONTRACTOR',
+	/** most space tags */
+	spaceBaron = 'A_SPACEBARON',
+	/** most earth + jovian */
+	traveller = 'A_TRAVELLER',
+	/** most bio tags */
+	biologist = 'A_BIOLOGIST',
+	/** most power tags*/
+	electrician = 'A_ELECTRICIAN',
+ 	/** most card of 20+MC value */
+	spendthrift = 'A_SPENDTHRIFT',
 }
 export enum MilestonesEnum {
 	/**6 space tags*/

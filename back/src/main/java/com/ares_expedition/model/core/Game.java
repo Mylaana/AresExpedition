@@ -71,7 +71,11 @@ public class Game {
         Collections.shuffle(oceans);
 
         if(this.gameOptions.getExpansionDiscovery()){
-            List<AwardsEnum> allAwards = new ArrayList<>(List.of(AwardsEnum.values()));
+            List<AwardsEnum> allAwards = 
+                new ArrayList<>(List.of(AwardsEnum.values()).stream()
+                .filter(a -> a.getCategory().equals("FANMADE"))
+                .collect(Collectors.toList()));
+                
             Collections.shuffle(allAwards);
             List<AwardsEnum> selectedAwards = new ArrayList<>();
             for(int i=0; i<Math.min(3, allAwards.size()); i++){

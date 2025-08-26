@@ -1054,7 +1054,7 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "status": "blocked",
+        "status": "implemented",
         "actionTextOption1": {
             "en": "1-4$ressource_heat$: 1-4$ressource_plant$",
             "fr": ""
@@ -2227,7 +2227,7 @@
             "en": "Add 2 resources to a card that already has resources.",
             "fr": "Ajoutez 2 ressources \u00e0 une carte stockant des ressources. "
         },
-        "status": "blocked",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {

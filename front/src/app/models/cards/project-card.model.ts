@@ -247,9 +247,8 @@ export class PlayableCardModel {
 			case(ProjectFilterNameEnum.redProject):{
 				return this.cardType==='redProject'
 			}
-			case(ProjectFilterNameEnum.ceo_Science):{
-				console.log(this.stock)
-				return true
+			case(ProjectFilterNameEnum.cost20orMore):{
+				return this.costInitial>=20
 			}
         }
         return false

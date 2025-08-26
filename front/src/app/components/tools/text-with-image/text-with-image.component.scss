@@ -245,6 +245,16 @@
 		max-width: 85%;
 		aspect-ratio: 1;
 	}
+	& > .wrapper-megacredit{
+		height: 50%;
+		aspect-ratio: 1;
+		& > p {
+			padding-top: 1px;
+			padding-left: 2px;
+			font-size: 10px;
+			color: black;
+		}
+	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.milestoneAwardHelper{
 	display: block;
