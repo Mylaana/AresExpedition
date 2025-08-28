@@ -14,6 +14,8 @@ export interface GameOption {
 	infrastructureMandatory: boolean,
 	merger: boolean,
 	standardUpgrade: boolean
+	deadHand: boolean
+	additionalAwards: boolean
 }
 
 @Injectable({
@@ -30,7 +32,9 @@ export class CreateGameOptionService {
 		initialDraft: true,
 		infrastructureMandatory: true,
 		merger: true,
-		standardUpgrade: true
+		standardUpgrade: true,
+		deadHand: true,
+		additionalAwards: true
 	})
 
 	currentGameOptions = this.gameOptions.asObservable()
@@ -40,7 +44,10 @@ export class CreateGameOptionService {
 		switch(option){
 			case('expansionDiscovery'):{
 				newOption.discovery = newOption.discovery===false
-				if(!newOption.discovery){newOption.standardUpgrade= false}
+				if(!newOption.discovery){
+					newOption.standardUpgrade= false
+					newOption.additionalAwards = false
+				}
 				break
 			}
 			case('expansionFoundations'):{
@@ -56,6 +63,8 @@ export class CreateGameOptionService {
 			case('modeInfrastructureMandatory'):{newOption.infrastructureMandatory = !newOption.infrastructureMandatory; break}
 			case('modeMerger'):{newOption.merger = !newOption.merger; break}
 			case('modeStandardProjectPhaseUpgrade'):{newOption.standardUpgrade = !newOption.standardUpgrade; break}
+			case('modeAdditionalAwards'):{newOption.additionalAwards = !newOption.additionalAwards; break}
+			case('modeDeadHand'):{newOption.deadHand = !newOption.deadHand; break}
 		}
 		this.gameOptions.next(newOption)
 	}

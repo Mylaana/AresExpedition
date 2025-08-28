@@ -84,6 +84,7 @@ export interface ProjectFilter {
     type: ProjectFilterNameEnum,
     stockableType?: AdvancedRessourceType | AdvancedRessourceType[]
 	authorizedTag?: TagType[]
+	minimumStockQuantity?: number
 }
 
 export interface DrawDiscard {

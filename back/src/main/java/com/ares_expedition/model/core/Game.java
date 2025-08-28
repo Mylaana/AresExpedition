@@ -71,7 +71,14 @@ public class Game {
         Collections.shuffle(oceans);
 
         if(this.gameOptions.getExpansionDiscovery()){
-            List<AwardsEnum> allAwards = new ArrayList<>(List.of(AwardsEnum.values()));
+            List<AwardsEnum> allAwards;
+            if(this.gameOptions.getModeAdditionalAwards()){
+                allAwards = new ArrayList<>(List.of(AwardsEnum.values()));
+            } else {
+                allAwards = new ArrayList<>(List.of(AwardsEnum.values()).stream()
+                    .filter(a -> a.getCategory().equals("BASE"))
+                    .collect(Collectors.toList()));
+            }
             Collections.shuffle(allAwards);
             List<AwardsEnum> selectedAwards = new ArrayList<>();
             for(int i=0; i<Math.min(3, allAwards.size()); i++){
@@ -172,7 +179,6 @@ public class Game {
     private void checkDeckSize(Integer drawNumber){
         if(drawNumber<=this.deck.size()){return;}
         addDiscardToDeck();
-        
     }
 
     private void addDiscardToDeck(){
@@ -216,6 +222,7 @@ public class Game {
         gameState.setGroupPlayerStatePublic(this.groupPlayerState);
         gameState.setGameStatus(gameStatus);
         gameState.setRound(round);
+        gameState.setDeck(getDeck().size());
         if(this.getGameOptions().getExpansionDiscovery()){
             gameState.setAwards(awards);
             gameState.setMilestones(milestones);
@@ -233,6 +240,9 @@ public class Game {
     }
 
     public void nextPhaseSelected(){
+        if(this.gameOptions.getModeDeadHand() && currentPhase==PhaseEnum.PLANIFICATION && this.selectedPhase.size()>1){
+            addDeadHandPhase();
+        }
         LinkedHashSet<PhaseEnum> tempSelectedPhase = new LinkedHashSet<>(this.selectedPhase);
 
         for(PhaseEnum phase: this.selectedPhase){
@@ -248,6 +258,23 @@ public class Game {
             return;
         }
         this.newRound();
+    }
+
+    private void addDeadHandPhase(){
+        List<PhaseEnum> randomPhase = new ArrayList<>();
+        randomPhase.add(PhaseEnum.DEVELOPMENT);
+        randomPhase.add(PhaseEnum.CONSTRUCTION);
+        randomPhase.add(PhaseEnum.ACTION);
+        randomPhase.add(PhaseEnum.PRODUCTION);
+        randomPhase.add(PhaseEnum.RESEARCH);
+
+        Collections.shuffle(randomPhase);
+        for(PhaseEnum p: randomPhase){
+            if(!this.selectedPhase.contains(p)){
+                addPhaseSelected(p);
+                return;
+            }
+        }
     }
 
     private void newRound(){

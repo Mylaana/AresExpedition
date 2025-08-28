@@ -24,7 +24,7 @@ export class GameOverComponent implements OnInit{
 	@Input() gameOver!: boolean
 	groupState!: PlayerStateModel[]
 	_playerIdList: myUUID[] = []
-
+	_round!: number
 	_discoveryEnabled: boolean = false
 
 	constructor(private gameStateService: GameState){}
@@ -34,10 +34,10 @@ export class GameOverComponent implements OnInit{
 			states => this.updateState(states)
 		)
 		this._discoveryEnabled = this.gameStateService.getGameOptions().discovery
+		this.gameStateService.currentRound.subscribe(round => this._round = round)
 	}
 	updateState(state: PlayerStateModel[]){
 		this.groupState = state
-		console.log(this.groupState)
 	}
 	updatePlayerList(playerIdList: myUUID[]){
 		this._playerIdList = playerIdList

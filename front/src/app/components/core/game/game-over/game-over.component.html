@@ -5,6 +5,10 @@
 	</ng-container>
 </div>
 <div class="wrapper-vp-breakdown">
+	<div class="wrapper-round ares-navigation-pannel pannel">
+		<img src="/assets/other/round.png" alt="">
+		<p>{{_round}}</p>
+	</div>
 	<div *ngIf="isDiscoveryEnabled()"	class="wrapper-milestone-awards ares-navigation-pannel pannel">
 		<app-milestone-and-award *ngIf="_discoveryEnabled"></app-milestone-and-award>
 	</div>

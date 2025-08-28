@@ -9,7 +9,7 @@ import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
-import { ALTERNATIVE_PAY_BUTTON_NAME } from '../../../maps/playable-card-maps';
+import { ALTERNATIVE_PAY_BUTTON_NAME } from '../../../maps/playable-card-other-maps';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',

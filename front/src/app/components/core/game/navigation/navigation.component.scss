@@ -30,19 +30,34 @@ $nav-gap: 1.5%;
 		box-shadow: 0 0 10px 5px rgba(rgb(255, 129, 25), .8);
 	}
 }
+.wrapper-left{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 300px;
+	background: linear-gradient(to top left, rgba(black, .0) 20%, rgba(0, 0, 0, 0.6) 100%);
+}
 app-global-parameter-pannel{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	flex-direction: row;
-	height: 100%;
-	width: 300px;
+	height: 100px;
+	width: 100%;
 	gap: 1%;
+	pointer-events: all;
+	//border-bottom-right-radius: 0;
 	& > h1 {
 		display: inline-block;
 		text-align: center;
 	}
-	pointer-events: all;
+}
+app-navigation-game-info{
+	width: 50%;
+	height: 40px;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: 0;
 }
 .wrapper-awards{
 	position: sticky;
@@ -60,7 +75,7 @@ app-global-parameter-pannel{
 	pointer-events: all;
 }
 app-milestone-and-award{
-	height: 100%;
+	height: 100px;
 	width: 300px;
 	gap: 1%;
 	& > h1 {

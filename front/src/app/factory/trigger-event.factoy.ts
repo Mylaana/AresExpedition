@@ -8,6 +8,7 @@ import { GlobalInfo } from "../services/global/global-info.service";
 import { RessourceStock } from "../interfaces/global.interface";
 import { Utils } from "../utils/utils";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum";
+import { Checker } from "../utils/checker";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
@@ -56,6 +57,10 @@ const S = EventFactory.simple
 		return [
 			S.draw(1),
 		]
+	}
+	//CLM
+	function handleTrigger_CF3_ON_PLAYED_CARD(trigger: string, input: TriggerInput): EventBaseModel[] {
+		return [S.addRessourceToCardId({name:'science', valueStock:2}, trigger)]
 	}
 
 //ON_PARAMETER_INCREASED
@@ -237,7 +242,6 @@ const S = EventFactory.simple
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnTagGained(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
-		console.log('bacterial triggerred on tag gained')
 		return [S.addRessourceToCardId({name:'microbe', valueStock: 1}, trigger)]
 	}
 	//Saturn Systems
@@ -266,6 +270,12 @@ const S = EventFactory.simple
 	function handleTrigger_CF1(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
 		return [S.draw(1)]
+	}
+	//CLM
+	function handleTrigger_CF3_ON_TAG_GAIN(trigger: string, input: TriggerInput): EventBaseModel[] {
+		return []
+		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
+		return [S.addRessourceToCardId({name:'science', valueStock:1}, trigger)]
 	}
 	//Recyclon
 	function handleTrigger_CF7(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
@@ -388,23 +398,21 @@ const S = EventFactory.simple
 	}
 //ON_PHASE_ACTIVATED
 	//Pu$hnik
-	function handleTrigger_CF2(trigger: string, input: TriggerInput): EventBaseModel[] {
+	function handleTrigger_CF2(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
 		if(input.activatedPhase.toString()===input.clientSelectedPhase.toString()){return []}
 		switch(input.activatedPhase){
 			case(NonSelectablePhaseEnum.development):case(NonSelectablePhaseEnum.construction):{
 				return [EventFactory.simple.addRessource({name:'megacredit', valueStock:2})]
 			}
 			case(NonSelectablePhaseEnum.action):{
-				return [
-					EventFactory.simple.addRessource([{name:'plant', valueStock:1},{name:'heat', valueStock:1}]),
-					EventFactory.simple.effectPortal(EffectPortalEnum.pushnikAction)
-				]
+				let result = [EventFactory.simple.addRessource([{name:'plant', valueStock:1},{name:'heat', valueStock:1}])]
+				if(clientState && Checker.hasCardWithStockType(['animal','microbe','science'], clientState)){
+					result.push(EventFactory.simple.effectPortal(EffectPortalEnum.pushnikAction))
+				}
+				return result
 			}
 			case(NonSelectablePhaseEnum.production):{
-				return [EventFactory.simple.effectPortal(EffectPortalEnum.pushnikProduction)]
-				let randomPool: RessourceType[] = ['megacredit', 'heat', 'plant']
-				let prod = randomPool[Math.floor(Math.random() * randomPool.length)];
-				return [EventFactory.simple.addProduction({name:prod, valueStock:1})]
+				return [EventFactory.simple.effectPortal(EffectPortalEnum.pushnikProduction, true)]
 			}
 			case(NonSelectablePhaseEnum.research):{
 				return [EventFactory.simple.draw(1)]
@@ -419,7 +427,8 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'6': handleTrigger_6,
 		'P16': handleTrigger_P16,
 		'FM23': handleTrigger_FM23,
-		'FM24': handleTrigger_FM24
+		'FM24': handleTrigger_FM24,
+		'CF3': handleTrigger_CF3_ON_PLAYED_CARD
 	},
 	ON_PARAMETER_INCREASED: {
 		'8': handleTrigger_8,
@@ -455,6 +464,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'FM2': handleTrigger_FM2,
 		'FM4': handleTrigger_FM4,
 		'FM14': handleTrigger_FM14,
+		'CF3': handleTrigger_CF3_ON_TAG_GAIN
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
 		'P04': handleTrigger_P04,

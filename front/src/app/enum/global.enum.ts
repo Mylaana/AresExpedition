@@ -23,7 +23,8 @@ export enum DeckQueryOptionsEnum {
 	inventionContest = 'O5',
 	actionPhaseScan = 'O6',
 	modPro = 'O7',
-	ringCom = 'O8'
+	ringCom = 'O8',
+	clm = 'O9'
 }
 export enum ProjectFilterNameEnum {
 	undefined = 'undefined',
@@ -45,12 +46,14 @@ export enum ProjectFilterNameEnum {
 	notCorporations = 'notCorporations',
 	authorizedTag = 'authorizedTag',
 	doubleProduction = 'doubleProduction',
-	redProject = 'redProject'
+	redProject = 'redProject',
+	cost20orMore = 'cost20orMore'
 }
 export enum DiscardOptionsEnum {
 	marsUniversity = 'marsUniversity',
 	redraftedContracts = 'redraftedContracts',
-	matterGenerator = 'matterGenerator'
+	matterGenerator = 'matterGenerator',
+	clm = 'CLM'
 }
 export enum BuilderOption {
 	//Phase builders
@@ -66,7 +69,7 @@ export enum BuilderOption {
 	selfReplicatingBacteria = 'selfReplicatingBacteria',
 	maiNiProductions = 'maiNiProductions',
 	researchGrant = 'researchGrant',
-	conscription = 'conscription'
+	conscription = 'conscription',
 }
 export enum EffectPortalEnum {
 	decomposers,
@@ -79,7 +82,11 @@ export enum EffectPortalEnum {
 	localHeatTrapping,
 	pushnikAction,
 	pushnikProduction,
-	secretLabs
+	secretLabs,
+	clm,
+	decomposingFungus,
+	greenhouses,
+	ceo
 }
 export enum EffectPortalButtonEnum {
 	decomposers_Add,
@@ -118,7 +125,27 @@ export enum EffectPortalButtonEnum {
 
 	secretLabs_Ocean,
 	secretLabs_Oxygen,
-	secretLabs_Temperature
+	secretLabs_Temperature,
+
+	clm_0,
+	clm_2,
+	clm_4,
+	clm_7,
+	clm_8,
+	clm_9,
+	clm_10,
+
+	decomposingFungus_Animal,
+	decomposingFungus_Microbe,
+
+	greenhouses_1,
+	greenhouses_2,
+	greenhouses_3,
+	greenhouses_4,
+
+	ceo_Animal,
+	ceo_Microbe,
+	ceo_Science
 }
 export enum AwardsEnum {
 	/** most phase upgraded*/
@@ -135,6 +162,19 @@ export enum AwardsEnum {
 	industrialist = 'A_INDUSTRIALIST',
     /** most science tags*/
 	researcher = 'A_RESEARCHER',
+
+	/** most building tags */
+	contractor = 'A_CONTRACTOR',
+	/** most space tags */
+	spaceBaron = 'A_SPACEBARON',
+	/** most earth + jovian */
+	traveller = 'A_TRAVELLER',
+	/** most bio tags */
+	biologist = 'A_BIOLOGIST',
+	/** most power tags*/
+	electrician = 'A_ELECTRICIAN',
+ 	/** most card of 20+MC value */
+	spendthrift = 'A_SPENDTHRIFT',
 }
 export enum MilestonesEnum {
 	/**6 space tags*/

@@ -1,17 +1,28 @@
 @use '../../../../styles/abstracts/colors' as colors;
+:host{
+	position: relative;
+	height: 100%;
+}
 .wrapper-player-name{
+	position: relative;
     display: flex;
     align-items: center;
     height: 100%;
-    aspect-ratio: 3.5;
     padding-left: 5px;
     overflow: hidden;
 	@each $name, $value in colors.$colors {
-        &.#{$name}{
-            border: $value solid 1px;
-            border-radius: 2px;
-            border-left-width: 30px;
-            background-color: rgba($value, .2);
+		&.#{$name}{
+			border-radius: 2px;
+			&.default{
+				aspect-ratio: 3.5;
+				border: $value solid 1px;
+				border-left-width: 30px;
+				background-color: rgba($value, .2);
+			}
+			&.short{
+				aspect-ratio: 1.5;
+				background-color: $value;
+			}
         }
     }
     & > p{
@@ -21,4 +32,23 @@
 		width: fit-content;
 		white-space: nowrap;
     }
+}
+.not-ready{
+	opacity: 50%;
+}
+img{
+	height: 70%;
+	position: absolute;
+	&.default{
+		top: -10%;
+		right: -3%;
+	}
+	&.short{
+		top: -15%;
+		right: -10%;
+		&.not-ready{
+			top: 15%;
+			left: 30%
+		}
+	}
 }

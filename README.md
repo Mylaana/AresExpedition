@@ -42,7 +42,7 @@ Backend: Junit
 
 # WIP : 
 ## /!\Critical BUG/!\ : 
-bug eventstate avec gain plant/mc? de flip d'ocean, bonus perdu au refresh
+-
 
 ## Other BUG:   
 autohex background height bug on being displayed after resolving another event on top (eg : action phase -> upgrade standard -> action phase)   
@@ -53,18 +53,12 @@ Rework Buildable system in playableCardComponent
 
 ### Cards
 Create Event type :   
-    - removing any ressource in list on played card   
-    - adding any ressource in list on played card    
 Activation:   
-    - Droplist/Custom value selection on activation (card 32/47)   
-effect portal improvement: enable the validate button to be able to pass, add a condition check on every button, disable them accordingly   
+    - Droplist/Custom value selection on activation (card 32/47)    
 add trigger resolution priority   
 
 ### Interface
 display other player production
-Activable cards with megacredit cost in it display bugged   
-add FR translation   
-add display for discounts on tags / cards   
 
 ### CI/CD
 Frontend automated testing: Ongoing   
@@ -91,12 +85,11 @@ Add proper Hybrid production zone looks
 Rework effect summary zone (refacto + looks)   
 Builder: display visual list of active triggers   
 Add a wizz button when player being too long to play <3   
-force client to appear on the bottom of the player pannels   
 have "lines" the same size between navigation pannels (eg: global parameter line size should be the same as players so 3 player game should be same height as global parameter pannel)   
 
 
 ### Responsiveness
-Effect zone: need an autoshrink calculation   
+-
 
 ### Misc
 -

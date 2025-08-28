@@ -8,6 +8,7 @@ import { GlobalParameterPannelComponent } from '../../../player-info/global-para
 import { Subject, takeUntil } from 'rxjs';
 import { myUUID } from '../../../../types/global.type';
 import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-award/milestone-and-award.component';
+import { NavigationGameInfoComponent } from '../navigation-game-info/navigation-game-info.component';
 
 @Component({
     selector: 'app-navigation',
@@ -15,7 +16,8 @@ import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-a
         CommonModule,
         PlayerPannelComponent,
         GlobalParameterPannelComponent,
-		MilestoneAndAwardComponent
+		MilestoneAndAwardComponent,
+		NavigationGameInfoComponent
     ],
     templateUrl: './navigation.component.html',
     styleUrl: './navigation.component.scss',

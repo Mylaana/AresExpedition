@@ -126,10 +126,14 @@ export class PlayableCardModel {
             }
         }
     }
-    checkStockable(ressourceType: any): boolean {
+    checkStockable(ressourceType: AdvancedRessourceType, minimumStockQuantity: number = 0): boolean {
         //add a check if ressource is stockable on this card
         if(this.stockable===undefined || this.stockable.length===0){return false}
-        return this.stockable.includes(ressourceType)
+        if(!this.stockable.includes(ressourceType)){return false}
+		for(let s of this.stock??[]){
+			if(s.name===ressourceType && s.valueStock>=minimumStockQuantity){return true}
+		}
+		return false
     }
     checkStockExists(ressource:AdvancedRessourceType): boolean {
         if(!this.stock){return false}
@@ -176,15 +180,10 @@ export class PlayableCardModel {
             case(ProjectFilterNameEnum.stockable):{
                 //converts filterValue into stockable name list
                 if(!filter.stockableType){return false}
-                let filterValueList: any[] = []
-                if(!Array.isArray(filter.stockableType)){
-                    filterValueList.push(filter.stockableType)
-                } else {
-                    filterValueList = filter.stockableType
-                }
+                let filterValueList: AdvancedRessourceType[] = Utils.toArray(filter.stockableType)
 
                 for(let f of filterValueList){
-                    if(this.checkStockable(f)){
+                    if(this.checkStockable(f, filter.minimumStockQuantity)){
                         return true
                     }
                 }
@@ -248,6 +247,9 @@ export class PlayableCardModel {
 			case(ProjectFilterNameEnum.redProject):{
 				return this.cardType==='redProject'
 			}
+			case(ProjectFilterNameEnum.cost20orMore):{
+				return this.costInitial>=20
+			}
         }
         return false
     }
@@ -281,6 +283,8 @@ export class PlayableCardModel {
 		let stockIndex: number = 0
 		let remainingStock = Utils.jsonCopy(this.tagStock)
 		let tagCount = this.tagsId.length
+		//CLM exception
+		if(this.cardCode==='CF3'){return}
 
 		//Research grant exception
 		if(this.cardCode==='P24'){

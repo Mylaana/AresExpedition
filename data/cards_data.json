@@ -656,7 +656,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "blocked",
+        "status": "implemented",
         "actionTextOption1": {
             "en": "-$ressource_animal$* / -$ressource_microbe$*:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$",
             "fr": ""
@@ -1054,7 +1054,7 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "status": "blocked",
+        "status": "implemented",
         "actionTextOption1": {
             "en": "1-4$ressource_heat$: 1-4$ressource_plant$",
             "fr": ""
@@ -2227,7 +2227,7 @@
             "en": "Add 2 resources to a card that already has resources.",
             "fr": "Ajoutez 2 ressources \u00e0 une carte stockant des ressources. "
         },
-        "status": "blocked",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {
@@ -4899,8 +4899,8 @@
             "fr": "Requiert que 3 tuiles Oc\u00e9an soient r\u00e9v\u00e9l\u00e9es et que vous d\u00e9pensiez 1 plante. "
         },
         "prerequisiteSummaryText": {
-            "en": "3$other_ocean$ -$ressource_plant$",
-            "fr": "3$other_ocean$ -$ressource_plant$"
+            "en": "3$other_ocean$$skipline$-$ressource_plant$",
+            "fr": "3$other_ocean$$skipline$-$ressource_plant$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9088,7 +9088,7 @@
         "status": "implemented",
         "actionTextOption1": {
             "en": "4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$",
-            "fr": "4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$"
+            "fr": ""
         },
         "vpScaling": "0"
     },
@@ -9184,7 +9184,7 @@
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: increase one production:$skipline$$ressource_megacredit$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card.",
+            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: increase one production:$skipline$$ressource_megacreditvoid_2$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card.",
             "fr": ""
         },
         "startingMegacredits": 40,
@@ -9204,27 +9204,27 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$",
-            "fr": "$ressource_card$: $ressource_science$$skipline$$tag_science$: $ressource_science$"
+            "en": "$ressource_card$: $ressource_science$$ressource_science$",
+            "fr": "$ressource_card$: $ressource_science$$ressource_science$"
         },
         "effectText": {
-            "en": "EFFECT: When you play a card or a $tag_science$, add a $ressource_science$,",
+            "en": "EFFECT: When you play a card, add 2 $ressource_science$ here.",
             "fr": ""
         },
         "effectSummaryType2": "action",
         "effectSummaryText2": {
-            "en": "$other_arrow$ $ressource_science$$skipline$OR$skipline$-X$ressource_science$: ?",
+            "en": "$other_arrow$ $skipline$-X$ressource_science$: ?",
             "fr": ""
         },
         "effectText2": {
-            "en": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
-            "fr": "$other_arrow$ +$ressource_science$/ -2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_5$$skipline$-3$ressource_science$: $ressource_plant$$ressource_plant$$ressource_heat$$ressource_heat$$skipline$-4$ressource_science$: 3$ressource_card$$other_hand$1$ressource_card$$skipline$-5$ressource_science$: +$tag_wild$!=$tag_science$$tag_earth$$tag_jovian$$skipline$-6$ressource_science$:$ressource_steel$/ -7$ressource_science$: $ressource_titanium$$skipline$-8$ressource_science$: Add $other_tr$$other_tr$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$."
+            "en": "$other_arrow$  3$ressource_card$$other_hand$1$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_7$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+1$$ressource_plant$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-8$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-9$ressource_science$: Add $other_tr$$other_tr$$other_tr$$skipline$-10$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "fr": ""
         },
         "stockable": [
             "science"
         ],
-        "startingMegacredits": 15,
-        "status": "filled",
+        "startingMegacredits": 20,
+        "status": "implemented",
         "actionTextOption1": {
             "en": "-X $ressource_science$",
             "fr": ""
@@ -9617,8 +9617,9 @@
         "origin": "fanmade",
         "cost": 22,
         "tagsId": [
+            1,
             2,
-            1
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -9652,10 +9653,6 @@
             "science"
         ],
         "status": "validated",
-        "actionTextOption1": {
-            "en": "$ressource_science$ / 5$tag_science$",
-            "fr": "$ressource_science$ / 5$tag_science$"
-        },
         "vpScaling": "1"
     },
     {

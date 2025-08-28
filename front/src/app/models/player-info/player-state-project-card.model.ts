@@ -9,7 +9,7 @@ import { Utils } from "../../utils/utils"
 import { PlayableCardModel, TriggerState } from "../cards/project-card.model"
 import { EventStateActivator } from "../../interfaces/event-state.interface"
 import { GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
-import { TRIGGER_LIMIT } from "../../maps/playable-card-maps"
+import { TRIGGER_LIMIT } from "../../maps/playable-card-other-maps"
 
 export class PlayerProjectCardStateModel {
     private hand: string[] = []

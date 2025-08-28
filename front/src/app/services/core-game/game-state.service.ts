@@ -24,7 +24,7 @@ import { PlayableCard } from "../../factory/playable-card.factory";
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
-import { SCALING_PRODUCTION } from "../../maps/playable-card-maps";
+import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
 import { GameOption } from "./create-game.service";
 
 interface SelectedPhase {
@@ -76,12 +76,15 @@ export class GameState{
 		initialDraft: false,
 		merger: false,
 		promo: false,
-		standardUpgrade: false
+		standardUpgrade: false,
+		deadHand: false,
+		additionalAwards: false,
 	})
 	private milestones = new BehaviorSubject<Partial<MilestoneState>>({})
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
 	private round = new BehaviorSubject<number>(0)
 	private cardProduction = new BehaviorSubject<string[]>([])
+	private deck = new BehaviorSubject<number>(0)
 
     currentGroupPlayerState = this.groupPlayerState.asObservable()
     currentGroupPlayerReady = this.groupPlayerReady.asObservable()
@@ -100,6 +103,7 @@ export class GameState{
 	currentAwards = this.awards.asObservable()
 	currentRound = this.round.asObservable()
 	currentCardProduction = this.cardProduction.asObservable()
+	currentDeck = this.deck.asObservable()
 
     phaseIndex: number = 0
 
@@ -935,5 +939,8 @@ export class GameState{
 		this.cardProduction.next(totalCards)
 		if(!addToHand)
 		this.getClientState().addCardsToHand(cardList)
+	}
+	setDeckSize(size: number){
+		this.deck.next(size)
 	}
 }

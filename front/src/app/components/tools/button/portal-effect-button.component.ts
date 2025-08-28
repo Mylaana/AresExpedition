@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { EffectPortalButton, NonEventButton } from '../../../models/core-game/button.model';
 import { ButtonComponent } from './button.component';
 import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-portal-effect-button',

@@ -210,7 +210,7 @@ describe('Service - Designers - Event', () => {
                 expectedEvent.advancedRessource = expectedRessource
                 expectedEvent.setSelectorInitialState({selectable: true, ignoreCost: true})
                 expectedEvent.title = `Select a card to add ${expectedRessource.valueStock} ${expectedRessource.name}(s).`
-                expectedEvent.setSelectorFilter({type:ProjectFilterNameEnum.stockable, stockableType:expectedRessource.name})
+                expectedEvent.setSelectorFilter({type:ProjectFilterNameEnum.stockable, stockableType:expectedRessource.name, minimumStockQuantity:0})
                 expectedEvent.setSelectorQuantity(1)
                 expectedEvent.refreshSelectorOnSwitch = false
 
@@ -586,11 +586,6 @@ describe('Service - Designers - Event', () => {
                     }
 
                     let event = event_factory.EventFactory.createGeneric(genericSubType, expectedArgs?expectedArgs:undefined)
-					if(event != expectedEvent){
-						console.log(expectedEvent.subType)
-						console.log(event)
-						console.log(expectedEvent)
-					}
                     expect(event).toEqual(expectedEvent)
                 }
             })

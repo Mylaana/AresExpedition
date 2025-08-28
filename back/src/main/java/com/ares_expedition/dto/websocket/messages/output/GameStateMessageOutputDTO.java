@@ -23,6 +23,7 @@ public class GameStateMessageOutputDTO {
     private Map<MilestonesEnum, Boolean> milestones;
     private List<AwardsEnum> awards;
     private int round;
+    private int deck;
 
     public GameStateMessageOutputDTO(){
     }
@@ -90,5 +91,11 @@ public class GameStateMessageOutputDTO {
     }
     public void setRound(int round) {
         this.round = round;
+    }
+    public int getDeck() {
+        return deck;
+    }
+    public void setDeck(int deck) {
+        this.deck = deck;
     }
 }

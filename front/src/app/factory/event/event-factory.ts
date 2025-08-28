@@ -15,6 +15,7 @@ interface CreateEventOptionsSelector {
     title?: string
     waiterId?:number,
 	isMerger?:boolean
+	filterMinimumStock?: number
 }
 interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	scanKeepOptions?: DeckQueryOptionsEnum,
@@ -43,6 +44,7 @@ interface CreateEventOptionsGeneric {
     effectPortal?: EffectPortalEnum
 	isCardProductionDouble?: boolean
 	firstProductionCardList?: string[]
+	portalActionMustBeResolvedToFinishEvent?: boolean
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -131,8 +133,8 @@ function resolveWildTag(cardCode: string, authorizedTagList?: TagType[]) : Event
 function addTagToCard(cardCode: string, tag: TagType): EventTargetCard {
 	return EventFactory.createTargetCard('addTagToCardId', cardCode, {addTagToCard:tag})
 }
-function effectPortal(portal: EffectPortalEnum): EventGeneric{
-    return EventFactory.createGeneric('effectPortal', {effectPortal: portal})
+function effectPortal(portal: EffectPortalEnum, portalActionMustBeResolvedToFinishEvent: boolean = false): EventGeneric{
+    return EventFactory.createGeneric('effectPortal', {effectPortal: portal, portalActionMustBeResolvedToFinishEvent: portalActionMustBeResolvedToFinishEvent})
 }
 function recallCardInHandFromPlay(){
 	return EventFactory.createCardSelector('recallCardInHand')
@@ -163,9 +165,8 @@ const SimpleEvent = {
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
     let selector: CardSelector
-
     selector ={
-        selectFrom: args?.selectFrom? args.selectFrom:[],
+		selectFrom: args?.selectFrom? args.selectFrom:[],
         selectedList:  args?.selectedList? args.selectedList:[],
         selectionQuantity: args?.selectionQuantity? args.selectionQuantity:0,
         selectionQuantityTreshold: args?.selectionQuantityTreshold? args.selectionQuantityTreshold:'equal',
@@ -421,6 +422,21 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
 			return event
 		}
+		case(DeckQueryOptionsEnum.clm):{
+			let event = new EventComplexCardSelector
+            event.title = `CLM - Select up to one card.`
+            event.refreshSelectorOnSwitch = false
+            event.setSelectorQuantityTreshold('max')
+			event.setSelectorSelectFrom(cardList)
+			event.setSelectorQuantity(keep)
+			event.subType = 'scanKeepResult'
+			event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+			event.button.startEnabled = true
+			event.scanKeepOptions = options
+			event.waiterId = waiter
+			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			return event
+		}
 		default:{
 			console.error('UNHANDLED SCANKEEP OPTION: ', options)
 			return new EventComplexCardSelector
@@ -431,10 +447,11 @@ function createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: Cr
     let event = new EventCardSelectorRessource
         event.setCardSelector(generateCardSelector(args?.cardSelector))
 
+	console.log(args)
     event.subType = 'addRessourceToSelectedCard'
     event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
     event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`
-    event.setSelectorFilter({type:ProjectFilterNameEnum.stockable, stockableType:event.advancedRessource?.name})
+    event.setSelectorFilter({type:ProjectFilterNameEnum.stockable, stockableType:event.advancedRessource?.name, minimumStockQuantity:args?.filterMinimumStock??0})
     event.setSelectorInitialState({selectable: true, ignoreCost:true})
     event.setSelectorQuantityTreshold('equal')
     event.setSelectorQuantity(1)
@@ -731,7 +748,13 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         }
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
     }
-    event.button = ButtonDesigner.createEventMainButton(event.subType)
+
+	let portalMustResolve = args?.portalActionMustBeResolvedToFinishEvent
+	if(event.subType=='effectPortal' && portalMustResolve!=undefined){
+		event.button = ButtonDesigner.createEventMainButton(event.subType, portalMustResolve===false)
+	} else {
+		event.button = ButtonDesigner.createEventMainButton(event.subType)
+	}
     return event
 }
 function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptionsDeckQuery ) : EventDeckQuery {
