@@ -185,6 +185,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'FM26': (s) => Checker.isTagOk('science', 3, 'min', s),
 	//Jovian Lanterns
 	'FM27': (s) => Checker.isTagOk('jovian', 1, 'min', s),
+	//Conscription
+	'FM28': (s) => Checker.isTagOk('earth', 2, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
