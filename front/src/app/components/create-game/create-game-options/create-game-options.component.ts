@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ButtonWrapperComponent } from '../../tools/buttons/button-wrapper/button-wrapper.component';
 import { ToggleButton } from '../../../models/core-game/button.model';
 import { CreateGameOptionService, GameOption } from '../../../services/core-game/create-game.service';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
@@ -28,6 +27,7 @@ export class CreateGameOptionsComponent implements OnInit{
 	_modeMerger!: ToggleButton
 	_modeDeadHand!: ToggleButton
 	_modeStandardProjectPhaseUpgrade!: ToggleButton
+	_modeAdditionalAwards!: ToggleButton
 
 	constructor(private createGameOptionService: CreateGameOptionService){}
 
@@ -43,6 +43,7 @@ export class CreateGameOptionsComponent implements OnInit{
 		this._modeMerger = ButtonDesigner.createToggleButton('modeMerger')
 		this._modeStandardProjectPhaseUpgrade = ButtonDesigner.createToggleButton('modeStandardProjectPhaseUpgrade')
 		this._modeDeadHand = ButtonDesigner.createToggleButton('modeDeadHand')
+		this._modeAdditionalAwards = ButtonDesigner.createToggleButton('modeAdditionalAwards')
 
 		this.createGameOptionService.currentGameOptions.subscribe(options => this.updateButtonsState(options))
 	}
@@ -58,8 +59,8 @@ export class CreateGameOptionsComponent implements OnInit{
 
 		this._modeInitialDraft.value = options.initialDraft
 		this._modeInitialDraft.locked = true
-
 		this._modeMerger.value = options.merger
+		this._modeDeadHand.value = options.deadHand
 
 		//bound sub-options
 		this._modeInfrastructureMandatory.value = options.infrastructureMandatory
@@ -67,7 +68,7 @@ export class CreateGameOptionsComponent implements OnInit{
 
 		this._modeStandardProjectPhaseUpgrade.value = options.standardUpgrade
 		this._modeStandardProjectPhaseUpgrade.locked = options.discovery===false
-
-		this._modeDeadHand.value = options.deadHand
+		this._modeAdditionalAwards.value = options.additionalAwards
+		this._modeAdditionalAwards.locked = options.discovery===false
 	}
 }

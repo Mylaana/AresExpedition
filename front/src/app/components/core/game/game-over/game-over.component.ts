@@ -38,7 +38,6 @@ export class GameOverComponent implements OnInit{
 	}
 	updateState(state: PlayerStateModel[]){
 		this.groupState = state
-		console.log(this.groupState)
 	}
 	updatePlayerList(playerIdList: myUUID[]){
 		this._playerIdList = playerIdList

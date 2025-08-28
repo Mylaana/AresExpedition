@@ -71,11 +71,14 @@ public class Game {
         Collections.shuffle(oceans);
 
         if(this.gameOptions.getExpansionDiscovery()){
-            List<AwardsEnum> allAwards = 
-                new ArrayList<>(List.of(AwardsEnum.values()).stream()
-                .filter(a -> a.getCategory().equals("BASE"))
-                .collect(Collectors.toList()));
-                
+            List<AwardsEnum> allAwards;
+            if(this.gameOptions.getModeAdditionalAwards()){
+                allAwards = new ArrayList<>(List.of(AwardsEnum.values()));
+            } else {
+                allAwards = new ArrayList<>(List.of(AwardsEnum.values()).stream()
+                    .filter(a -> a.getCategory().equals("BASE"))
+                    .collect(Collectors.toList()));
+            }
             Collections.shuffle(allAwards);
             List<AwardsEnum> selectedAwards = new ArrayList<>();
             for(int i=0; i<Math.min(3, allAwards.size()); i++){
@@ -176,7 +179,6 @@ public class Game {
     private void checkDeckSize(Integer drawNumber){
         if(drawNumber<=this.deck.size()){return;}
         addDiscardToDeck();
-        
     }
 
     private void addDiscardToDeck(){

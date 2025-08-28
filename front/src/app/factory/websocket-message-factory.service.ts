@@ -170,7 +170,8 @@ export class WebsocketResultMessageFactory{
 			initialDraft: content['modeInitialDraft'],
 			merger: content['modeMerger'],
 			standardUpgrade: content['modeStandardUpgrade'],
-			deadHand: content['modeDeadHand']
+			deadHand: content['modeDeadHand'],
+			additionalAwards: content['modeAdditionalAwards']
 		}
 		return options
 	}

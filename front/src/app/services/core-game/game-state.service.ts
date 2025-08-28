@@ -77,7 +77,8 @@ export class GameState{
 		merger: false,
 		promo: false,
 		standardUpgrade: false,
-		deadHand: false
+		deadHand: false,
+		additionalAwards: false,
 	})
 	private milestones = new BehaviorSubject<Partial<MilestoneState>>({})
 	private awards = new BehaviorSubject<AwardsEnum[]>([])

@@ -14,6 +14,7 @@ public class GameOptions {
     Boolean modeMerger;
     Boolean modeStandardUpgrade;
     Boolean modeDeadHand;
+    Boolean modeAdditionalAwards;
 
     GameOptions(){
     }
@@ -30,6 +31,7 @@ public class GameOptions {
         this.modeMerger = (boolean) gameOptions.get("merger");
         this.modeStandardUpgrade = (boolean) gameOptions.get("standardUpgrade");
         this.modeDeadHand = (boolean) gameOptions.get("deadHand");
+        modeAdditionalAwardsFromJson(gameOptions);
     }
 
     public Boolean getModeMerger() {
@@ -110,5 +112,21 @@ public class GameOptions {
 
     public void setModeDeadHand(Boolean modeDeadHand) {
         this.modeDeadHand = modeDeadHand;
+    }
+
+    public Boolean getModeAdditionalAwards() {
+        return modeAdditionalAwards;
+    }
+
+    public void modeAdditionalAwardsFromJson(Map<String, Object> gameOptions) {
+        Object result = gameOptions.get("additionalAwards");
+        if(result == null){
+            this.modeAdditionalAwards = false;
+            return;
+        }
+        this.modeAdditionalAwards = (boolean) result;
+    }
+    public void setModeAdditionalAwards(Boolean modeAdditionalAwards) {
+        this.modeAdditionalAwards = modeAdditionalAwards;
     }
 }
