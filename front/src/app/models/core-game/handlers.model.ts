@@ -16,7 +16,7 @@ import { myUUID, TagType } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { PlayableCard } from "../../factory/playable-card.factory";
 
 @Injectable()
@@ -538,6 +538,16 @@ export class EventHandler {
 				if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
 				this.gameStateService.loadProductionPhaseCardList(event.loadProductionCardList, true)
 				this.gameStateService.loadProductionPhaseCardList(event.firstCardProduction??[], false)
+				break
+			}
+			case('resourceConversion'):{
+				switch(event.resourceConversionInputRule){
+					case(InputRuleEnum.powerInfrastructure):{
+						let conversion: number = event.resourceConversionQuantity??0
+						this.gameStateService.addEventQueue(EventFactory.simple.addRessource([{name:'heat', valueStock:-conversion},{name:'megacredit', valueStock:conversion}]), 'first')
+						break
+					}
+				}
 				break
 			}
 			default:{Logger.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}

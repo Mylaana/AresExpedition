@@ -1,4 +1,4 @@
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum, BuilderOption, EffectPortalEnum } from "../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum, BuilderOption, EffectPortalEnum, InputRuleEnum } from "../enum/global.enum";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
 import { RessourceStock } from "../interfaces/global.interface";
 import { EventBaseModel } from "../models/core-game/event.model";
@@ -132,6 +132,8 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 			]
 		: [],
+	//Power Infrastructure
+	'47': (cardCode) => [EventFactory.simple.resourceConversion(InputRuleEnum.powerInfrastructure, {originType:'cardCode', originValue:cardCode})],
 	//Redrafted Contracts
 	'49': () => [EventFactory.simple.discardOptions(3, 'max', DiscardOptionsEnum.redraftedContracts)],
 	//Regolith Eaters
@@ -445,6 +447,8 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'41': (_, clientState) => Checker.isRessourceOk('megacredit', 1, 'min', clientState),
 	//Nitrite Reducing Bacteria
 	'43': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('43').some(s => s.name === 'microbe' && s.valueStock >= 3),
+	//Power Infrastructure
+	'47': (_, clientState) => Checker.isRessourceOk('heat', 1, 'min', clientState),
 	//Redrafted contracts
 	'49': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
 	//Regolith Eaters

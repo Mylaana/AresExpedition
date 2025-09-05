@@ -1,0 +1,14 @@
+<app-playable-card-list [cardList]="[_card]"></app-playable-card-list>
+<div [ngClass]="['wrapper-main', 'ares-border', 'ares-background']">
+	<p>Conversion:</p>
+	<div class="wrapper-conversion">
+		<div class="wrapper-input">
+			<app-input [inputRule]="_inputRule" (inputValue)="onInputValueNumberUpdate($event)"></app-input>
+			<p>:</p>
+		</div>
+		<div class="wrapper-conversion-summary">
+			<app-text-with-image [rawText]="`-${_convertValueInitial}$ressource_heat$+$ressource_megacreditvoid_${_convertValueInitial}$`" [context]="'convertResource'"></app-text-with-image>
+		</div>
+	</div>
+</div>
+<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>

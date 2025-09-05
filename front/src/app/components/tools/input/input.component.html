@@ -1,0 +1,14 @@
+<input *ngIf="_inputType==='number'"
+	type="number"
+	[(ngModel)]="_valueNumber"
+	name="value"
+	placeholder=""
+	step="1"
+	pattern="[0-9]*"
+	(ngModelChange)="onFieldUpdate()">
+<input *ngIf="_inputType==='string'"
+	type="text"
+	[(ngModel)]="_valueString"
+	name="value"
+	placeholder=""
+	(ngModelChange)="onFieldUpdate()">

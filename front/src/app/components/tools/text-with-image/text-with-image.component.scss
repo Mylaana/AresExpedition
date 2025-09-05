@@ -329,3 +329,22 @@
 		color: white;
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.convertResource{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	height: 100%;
+	width: 100%;
+	& p{
+		font-size: 15px;
+	}
+	& > .wrapper-megacredit{
+		& > p {
+			padding-top: 5px;
+			text-align: center;
+			width: 100%;
+			font-size: 15px;
+		}
+	}
+}

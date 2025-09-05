@@ -200,3 +200,6 @@ export enum MilestonesEnum {
 	/**6 blue cards*/
     tycoon = 'M_TYCOON',
 }
+export enum InputRuleEnum {
+	powerInfrastructure
+}

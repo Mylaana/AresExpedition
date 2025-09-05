@@ -28,6 +28,7 @@ import { GroupWaitingComponent } from '../../../game-event-blocks/group-waiting/
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { LeftPannelComponent } from '../../../game-event-blocks/left-pannel/left-pannel.component';
 import { GameOption } from '../../../../services/core-game/create-game.service';
+import { ConvertResourceComponent } from '../../../game-event-blocks/convert-resource/convert-resource.component';
 
 //this component is the main controller, and view
 
@@ -49,7 +50,8 @@ import { GameOption } from '../../../../services/core-game/create-game.service';
 		TagGainListComponent,
 		SellCardsComponent,
 		EffectPortalComponent,
-		GroupWaitingComponent
+		GroupWaitingComponent,
+		ConvertResourceComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',

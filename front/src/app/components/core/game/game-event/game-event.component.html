@@ -49,7 +49,8 @@
 				|| currentEvent.subType==='selectMerger'
 				|| currentEvent.subType==='waitingGroupReady' || currentEvent.hasCardBuilder()
 				|| currentEvent.subType==='tagSelector' || currentEvent.subType==='selectCardOptionalSell'
-				|| currentEvent.subType==='selectCardForcedSell' || currentEvent.subType==='effectPortal'"
+				|| currentEvent.subType==='selectCardForcedSell' || currentEvent.subType==='effectPortal'
+				|| currentEvent.subType==='resourceConversion'"
 				@fadeIn>
 				<app-phase-planification
 					*ngIf="currentPhase==='PLANIFICATION' && currentEvent.subType==='planificationPhase'"
@@ -102,6 +103,10 @@
 					[event]="currentEvent">
 
 				</app-effect-portal>
+				<app-convert-resource
+					*ngIf="currentEvent.subType==='resourceConversion'"
+					[event]="currentEvent">
+				</app-convert-resource>
 			</div>
 			<div class="wrapper-selectors"
 				*ngIf="currentEvent.hasCardsToSelectFrom() &&currentEvent.subType!='actionPhaseActivator'

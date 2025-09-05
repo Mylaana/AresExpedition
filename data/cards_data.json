@@ -1525,7 +1525,7 @@
             "en": "ACTION: Spend any amount of heat to gain that many MC.",
             "fr": "ACTION: D\u00e9pensez n'importe quelle quantit\u00e9 de chaleur pour gagner une m\u00eame quantit\u00e9 de MC. "
         },
-        "status": "blocked",
+        "status": "implemented",
         "actionTextOption1": {
             "en": "-X$ressource_heat$: $ressource_megacreditvoid_X$",
             "fr": ""

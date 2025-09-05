@@ -31,6 +31,7 @@ export class ButtonDesigner{
 			case('recallCardInHand'):{startEnabled=true;break}
 			case('doubleProduction'):{startEnabled=true;break}
 			case('effectPortal'):{startEnabled=true;break}
+			case('resourceConversion'):{startEnabled=true;break}
 
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
