@@ -1,12 +1,12 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType } from "../../types/event.type";
-import { AdvancedRessourceStock, CardSelector, DrawDiscard, GlobalParameterValue, MinMaxEqualTreshold, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardSelector, DrawDiscard, EventOrigin, GlobalParameterValue, MinMaxEqualTreshold, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton  } from "./button.model";
 import { ButtonNames, EventCardBuilderButtonNames, MinMaxEqualType, NonEventButtonNames, TagType } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { BuilderType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 
@@ -26,6 +26,7 @@ export abstract class EventBaseModel {
 	lockRollbackButton: boolean = false
 	lockValidateButton: boolean = false
 	lockDisplayUpgraded: boolean = false
+	eventOrigin?: EventOrigin
 
     hasSelector(): boolean {return false}
 	hasCardsToSelectFrom(): boolean {return false}
@@ -438,6 +439,8 @@ export class EventGeneric extends EventBaseModel {
     effectPortal?: EffectPortalEnum
 	isCardProductionDouble?: boolean
 	firstCardProduction?: string[]
+	resourceConversionInputRule?:InputRuleEnum
+	resourceConversionQuantity?:number
 }
 
 export class EventDeckQuery extends EventBaseModel {

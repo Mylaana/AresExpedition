@@ -7,7 +7,7 @@ export type EventCardBuilderSubType = 'developmentPhaseBuilder' | 'constructionP
 export type EventGenericSubType =  'endOfPhase' | 'planificationPhase' | 'upgradePhaseCards' | 'oceanQuery'
 | 'increaseGlobalParameter' | 'addRessourceToPlayer' | 'increaseResearchScanKeep' | 'buildCard' | 'drawResult'
 | 'waitingGroupReady' | 'addForestPointAndOxygen' | 'addProduction' | 'addTr' | 'loadProductionPhaseCards' | 'drawResultThenDiscard'
-| 'effectPortal' | 'loadProductionPhaseCardDouble'
+| 'effectPortal' | 'loadProductionPhaseCardDouble' | 'resourceConversion'
 export type EventTargetCardSubType = 'addRessourceToCardId' | 'deactivateTrigger' | 'addTagToCardId'
 export type EventDeckQuerySubType = 'drawQuery' | 'scanKeepQuery' | 'researchPhaseQuery' | 'drawThenDiscard'
 export type EventTechnical = 'default'
@@ -19,3 +19,5 @@ export type EventTagSelectorSubType = 'tagSelector'
 export type EventUnionSubTypes = EventCardSelectorSubType | EventCardSelectorRessourceSubType | EventCardBuilderSubType | EventComplexCardSelectorSubType
 | EventGenericSubType | EventTargetCardSubType | EventDeckQuerySubType | EventTechnical | EventWaiterSubType | EventPhaseSubType | EventCardActivatorSubType
 | EventTagSelectorSubType
+
+export type EventOriginType = 'cardCode'

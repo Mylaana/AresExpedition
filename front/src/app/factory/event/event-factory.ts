@@ -1,11 +1,11 @@
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
-import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard } from "../../interfaces/global.interface"
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
+import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
 import { MinMaxEqualType, TagType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
-import { Logger, Utils } from "../../utils/utils"
+import { Logger} from "../../utils/utils"
 import { ButtonDesigner } from "../button-designer.service"
 
 type CardSelectorOptions = Partial<CardSelector>
@@ -44,7 +44,11 @@ interface CreateEventOptionsGeneric {
     effectPortal?: EffectPortalEnum
 	isCardProductionDouble?: boolean
 	firstProductionCardList?: string[]
-	portalActionMustBeResolvedToFinishEvent?: boolean
+	portalActionMustBeResolvedToFinishEvent?: boolean,
+	resourceConversionInputRule?: InputRuleEnum
+	resourceConversionInputQuantity?: number
+
+	eventOrigin?: EventOrigin
 }
 interface CreateEventOptionsDeckQuery {
     drawDiscard?: Partial<DrawDiscard>
@@ -139,6 +143,9 @@ function effectPortal(portal: EffectPortalEnum, portalActionMustBeResolvedToFini
 function recallCardInHandFromPlay(){
 	return EventFactory.createCardSelector('recallCardInHand')
 }
+function resourceConversion(conversionInputRule: InputRuleEnum, eventOrigin?: EventOrigin){
+	return EventFactory.createGeneric('resourceConversion', {resourceConversionInputRule: conversionInputRule, eventOrigin:eventOrigin})
+}
 const SimpleEvent = {
 	draw,
 	discard,
@@ -160,7 +167,8 @@ const SimpleEvent = {
 	resolveWildTag,
 	addTagToCard,
     effectPortal,
-	recallCardInHandFromPlay
+	recallCardInHandFromPlay,
+	resourceConversion
 }
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
@@ -746,6 +754,13 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
             event.title = 'Select one :'
             break
         }
+		case('resourceConversion'):{
+			event.resourceConversionInputRule = args?.resourceConversionInputRule
+			event.autoFinalize = false
+			event.eventOrigin = args?.eventOrigin
+			event.title = 'Select the resource quantity to convert'
+			break
+		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}
     }
 
@@ -855,7 +870,7 @@ export const EventFactory = {
     createDeckQueryEvent,
     createWaiter,
     createPhase,
-	createTagSelector
+	createTagSelector,
 }
 
 export const __testOnly__ = {

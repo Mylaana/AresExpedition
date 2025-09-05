@@ -1,0 +1,51 @@
+:host{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	gap: 100px;
+}
+.wrapper-main{
+	width: fit-content;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 15px;
+}
+.wrapper-conversion{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+}
+.wrapper-input{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	gap: 10px;
+
+}
+.wrapper-conversion-summary{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 30px;
+}
+app-input{
+	width: 65px;
+	height: fit-content;
+	background-color: white;
+	padding: 5px;
+	border-radius: 5px;
+}
+app-playable-card-list{
+	width: fit-content;
+}
+p{
+	font-weight: 600;
+	font-size: 18px;
+}

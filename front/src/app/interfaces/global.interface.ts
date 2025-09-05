@@ -1,4 +1,4 @@
-import { AdvancedRessourceType, GameItemType, myUUID, PlayerColor, TagType } from "../types/global.type"
+import { AdvancedRessourceType, GameItemType, InputRuleType, myUUID, PlayerColor, TagType } from "../types/global.type"
 import { PhaseCardType } from "../types/phase-card.type"
 import { PlayableCardModel } from "../models/cards/project-card.model"
 import { MinMaxEqualType } from "../types/global.type"
@@ -6,6 +6,7 @@ import { RessourceType } from "../types/global.type"
 import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { CardState } from "./card.interface"
 import { GlobalParameterNameEnum, MilestonesEnum, ProjectFilterNameEnum } from "../enum/global.enum"
+import { EventOriginType } from "../types/event.type"
 
 export interface RessourceInfo {
     id: number,
@@ -145,4 +146,14 @@ export interface ClaimedMilestone {
 }
 export interface ClaimedMilestoneCard {
 	color: PlayerColor[]
+}
+export interface EventOrigin {
+	originValue: string
+	originType: EventOriginType
+}
+export interface InputRule {
+	type: InputRuleType
+	numberMin?: number
+	numberMax?: number
+	stringLenght?: number
 }
