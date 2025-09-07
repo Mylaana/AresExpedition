@@ -4,7 +4,8 @@ import { ToggleButton } from '../../../models/core-game/button.model';
 import { CreateGameOptionService, GameOption } from '../../../services/core-game/create-game.service';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CreateGameOptionCardComponent } from '../create-game-option-card/create-game-option-card.component';
-import { AnyButton } from '../../../types/global.type';
+import { AnyButton, GameOptionName } from '../../../types/global.type';
+import { GameTextService } from '../../../services/core-game/game-text.service';
 
 @Component({
   selector: 'app-create-game-options',
@@ -29,8 +30,10 @@ export class CreateGameOptionsComponent implements OnInit{
 	_modeStandardProjectPhaseUpgrade!: ToggleButton
 	_modeAdditionalAwards!: ToggleButton
 
-	constructor(private createGameOptionService: CreateGameOptionService){}
-
+	constructor(
+		private createGameOptionService: CreateGameOptionService,
+		private gameTextService: GameTextService
+	){}
 	ngOnInit(): void {
 		this._expansionDiscovery = ButtonDesigner.createToggleButton('expansionDiscovery')
 		this._expansionFoundations = ButtonDesigner.createToggleButton('expansionFoundations')
@@ -70,5 +73,11 @@ export class CreateGameOptionsComponent implements OnInit{
 		this._modeStandardProjectPhaseUpgrade.locked = options.discovery===false
 		this._modeAdditionalAwards.value = options.additionalAwards
 		this._modeAdditionalAwards.locked = options.discovery===false
+	}
+	getCaption(option: GameOptionName): string {
+		return this.gameTextService.getGameOptionCaption(option)
+	}
+	getTooltip(option: GameOptionName): string {
+		return this.gameTextService.getGameOptionToolTip(option)
 	}
 }
