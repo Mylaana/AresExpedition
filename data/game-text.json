@@ -1,0 +1,125 @@
+{
+    "gameOption": {
+        "discovery": {
+            "caption": {
+                "en": "Discovery",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Adds Upgradeable phase cards, Milestones, Awards and new cards.",
+                "fr": ""
+            }
+
+        },
+        "standardProjectUpgrade": {
+            "caption": {
+                "en": "Standard project phase upgrade",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Adds a standard project in Action phase to upgrade a phase card of your choice.",
+                "fr": ""
+            }
+
+        },
+        "additionalAwards": {
+            "caption": {
+                "en": "Additional Awards",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Adds new awards to the pool.",
+                "fr": ""
+            }
+
+        },
+        "foundations": {
+            "caption": {
+                "en": "Foundations",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Adds a new global parameter: Infrastructure",
+                "fr": ""
+            }
+
+        },
+        "infrastructureMandatory": {
+            "caption": {
+                "en": "Infrastructure mandatory",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "The Infrastructure global parameter must also be completed to end the game.",
+                "fr": ""
+            }
+
+        },
+        "promoCards": {
+            "caption": {
+                "en": "Promo cards",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Adds official promo cards.",
+                "fr": ""
+            }
+
+        },
+        "fanmadeCards": {
+            "caption": {
+                "en": "Fanmade cards",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Adds unofficial cards, mostly from TM 1, some homebrewed.",
+                "fr": ""
+            }
+
+        },
+        "balancedCards": {
+            "caption": {
+                "en": "Balanced cards",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Adds new homebrewed balanced version of some cards, remove the original one.",
+                "fr": ""
+            }
+
+        },
+        "initialDraft": {
+            "caption": {
+                "en": "Initial draft",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Allows you to discard any number of cards from your starting hand to draw that many, once.",
+                "fr": ""
+            }
+
+        },
+        "merger": {
+            "caption": {
+                "en": "Merger",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Draws more corporations at the start of the game and allows you to chose a second one, playing with both.",
+                "fr": ""
+            }
+
+        },
+        "deadHand": {
+            "caption": {
+                "en": "Dead hand",
+                "fr": ""
+            },
+            "tooltip": {
+                "en": "Adds a random phase that will be played, chosen at ramdom amongst the ones not selected by players.",
+                "fr": ""
+            }
+
+        }
+    }
+}

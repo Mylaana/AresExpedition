@@ -1,6 +1,16 @@
-<div [ngClass]="['card-option', button.locked?'locked':'', isSubCat?'subcat':'']">
-	<p>{{caption}}</p>
-	<div class="wrapper-toggle">
+<div [ngClass]="['card-option', isSubCat?'subcat':'']">
+	<div class="wrapper-caption">
+		<p [ngClass]="[button.locked?'locked':'']">{{caption}}</p>
+		<div *ngIf="tooltip" class="tooltip-icon"
+			(mouseenter)="_tooltipHovered=true"
+			(mouseleave)="_tooltipHovered=false">
+			<p>i</p>
+			<p class="tooltip-box ares-background ares-border"
+			*ngIf="tooltip && _tooltipHovered"
+			@fadeIn>{{tooltip}}</p>
+		</div>
+	</div>
+	<div [ngClass]="['wrapper-toggle', button.locked?'locked':'']">
 		<app-button-wrapper [button]="button" (click)="onClick()"></app-button-wrapper>
 	</div>
 </div>
