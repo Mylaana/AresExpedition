@@ -238,7 +238,7 @@ public class GameController {
         for(Entry<String, Game> g: this.gameHolder.entrySet()){
             Game game = g.getValue();
             Duration age = Duration.between(game.getLastUpdate(), Instant.now());
-            if(age.toDays() > 7){
+            if(age.toHours() >= 1){
                 logger.warn("\u001B[31m removing : " + game.getGameId()+ ": " + age.toMinutes() + "\u001B[0m");
                 this.gameHolder.remove(g.getKey());
                 cleanedGames++;
