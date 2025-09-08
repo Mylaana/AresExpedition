@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -233,25 +234,26 @@ public class GameController {
     }
     public void cleanupOldGames() {
         logger.warn("\u001B[32m ------------ Scheduler - Old game cleanup ------------ \u001B[0m");
-        Map<String, GameData> remainingGames = new HashMap<>();
-        Integer cleanedGames = 0;
-        for(Entry<String, Game> g: this.gameHolder.entrySet()){
-            Game game = g.getValue();
-            Duration age = Duration.between(game.getLastUpdate(), Instant.now());
-            if(age.toHours() >= 1){
-                logger.warn("\u001B[31m removing : " + game.getGameId()+ ": " + age.toMinutes() + "\u001B[0m");
-                this.gameHolder.remove(g.getKey());
-                cleanedGames++;
-            } else {
-                remainingGames.put(game.getGameId(), game.toData());
+        Integer gamesCountBeforeCleaning = gameHolder.size();
+        Instant now = Instant.now();
+        gameHolder.entrySet().removeIf(entry -> {
+            Game game = entry.getValue();
+            Duration age = Duration.between(game.getLastUpdate(), now);
+
+            if (age.toHours() >= 24) {
+                logger.warn("\u001B[31m removing : " + game.getGameId() + ": " + age.toMinutes() + "min old \u001B[0m");
+                return true;
             }
-        }
-        if(cleanedGames>0){
+            return false;
+        });
+        if(gamesCountBeforeCleaning!= gameHolder.size()){
+            Map<String, GameData> remainingGames = gameHolder.values().stream()
+                .collect(Collectors.toMap(Game::getGameId, Game::toData));
             JsonGameDataHandler.savePostCleanupGames(remainingGames);
         } else {
             logger.warn("No games were deleted");
         }
-        logger.warn("Remaining active games: " + remainingGames.size());
+        logger.warn("Remaining active games: " + gameHolder.size());
         logger.warn("\u001B[32m -------------------------------- \u001B[0m");
     }
 }
