@@ -1,5 +1,6 @@
 package com.ares_expedition.model.core;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -39,7 +40,8 @@ public class Game {
     private Map<MilestonesEnum, Boolean> milestones = new HashMap<>();
     private List<AwardsEnum> awards = new ArrayList<>();
     private int round = 0;
-
+    private Instant creationDate;
+    private Instant lastUpdate;
     public Game() {
     }
     
@@ -53,6 +55,8 @@ public class Game {
         this.gameOptions = new GameOptions(gameConfig.getOptions());
         this.deck = JsonGameDataHandler.getCardsIdList(CardTypeEnum.PROJECT, this.gameOptions);
         this.deckCorporations = JsonGameDataHandler.getCardsIdList(CardTypeEnum.CORPORATION, this.gameOptions);
+        this.creationDate = Instant.now();
+        this.lastUpdate = creationDate;
         this.shuffleDeck(this.deck);
         this.shuffleDeck(this.deckCorporations);
 
@@ -556,7 +560,24 @@ public class Game {
         this.round++;
     }
     
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Instant getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
     public GameData toData(){
+        this.lastUpdate = Instant.now();
         return new GameData(this);
     }
 

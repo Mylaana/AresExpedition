@@ -1,5 +1,7 @@
 package com.ares_expedition.repository.core;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -16,6 +18,7 @@ import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.repository.player_state.PlayerStateData;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 //Game DTO is only meant to store their Game related properties, not to be sent to clients
 public class GameData {
@@ -34,6 +37,8 @@ public class GameData {
     private GameOptions gameOptions;
     private Map<MilestonesEnum, Boolean> milestones = new HashMap<>();
     private List<AwardsEnum> awards = new ArrayList<>();
+    private Instant creationDate;
+    private Instant lastUpdate;
 
     GameData() {
     }
@@ -54,6 +59,8 @@ public class GameData {
         this.gameOptions = game.getGameOptions();
         this.awards = game.getAwards();
         this.milestones = game.getMilestones();
+        this.creationDate = game.getCreationDate();
+        this.lastUpdate = game.getLastUpdate();
     }
 
     public String getGameId() {
@@ -160,8 +167,6 @@ public class GameData {
         this.gameOptions = gameOptions;
     }
 
-
-
     public List<AwardsEnum> getAwards() {
         return awards;
     }
@@ -176,5 +181,21 @@ public class GameData {
 
     public void setMilestones(Map<MilestonesEnum, Boolean> milestones) {
         this.milestones = milestones;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Instant getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }   
 }
