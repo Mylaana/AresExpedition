@@ -17,6 +17,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +57,7 @@ public class JsonGameDataHandler {
     public static void saveGame(Game saveGame) {
         checkDatabaseExistOrCreateIt();
         logger.debug("\u001B[31m SAVE GAME \u001B[0m");
+        saveGame.setLastUpdate(Instant.now());
 
         Map<String, Game> games = readGames();
         Map<String, GameData> gamesDTO = Game.toDataMap(games);
@@ -67,14 +69,14 @@ public class JsonGameDataHandler {
         File file = Paths.get(DATABASE_PATH).toFile();
         logger.debug("\u001B[32m \u001B[0m");
         if(!file.exists()){
-            logger.debug("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath());
+            logger.debug("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath() + "\u001B[0m");
             return new HashMap<>();
         }
 
         try (Reader reader = new FileReader(file)){
             long length = file.length();
             if (length == 0) {
-                logger.debug("Empty database.json file.");
+                logger.debug("\u001B[32m Empty database.json file.\u001B[0m");
                 return new HashMap<>();
             }
             return objectMapper.readValue(reader, new TypeReference<Map<String, Game>>(){});
@@ -82,7 +84,10 @@ public class JsonGameDataHandler {
             error.printStackTrace();
             return new HashMap<>();
         }
+    }
 
+    public static void savePostCleanupGames(Map<String, GameData> remainingGames){
+        JsonGameDataHandler.writeGames(remainingGames);
     }
 
     private static void writeGames(Map<String, GameData> games){

@@ -577,7 +577,6 @@ public class Game {
     }
 
     public GameData toData(){
-        this.lastUpdate = Instant.now();
         return new GameData(this);
     }
 
