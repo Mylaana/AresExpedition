@@ -241,7 +241,7 @@ public class GameController {
             Duration age = Duration.between(game.getLastUpdate(), now);
 
             if (age.toHours() >= 24) {
-                logger.warn("\u001B[31m removing : " + game.getGameId() + ": " + age.toMinutes() + "min old \u001B[0m");
+                logger.warn("\u001B[31m removing : " + game.getGameId() + ": " + age.toHours() + "hours old \u001B[0m");
                 return true;
             }
             return false;

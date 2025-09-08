@@ -15,7 +15,7 @@ public class Scheduler {
     @Autowired
     private GameController gameController;
 
-    @Scheduled(fixedRate =  60 * 60 * 1000)
+    @Scheduled(fixedRate =  12 * 60 * 60 * 1000)
     public void runCleanup() {
         gameController.cleanupOldGames();
     }
