@@ -1,9 +1,12 @@
 package com.ares_expedition.controller.game;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +24,7 @@ import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.factory.MessageOutputFactory;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.repository.JsonGameDataHandler;
+import com.ares_expedition.repository.core.GameData;
 
 @Service
 public class GameController {
@@ -226,5 +230,28 @@ public class GameController {
 
     public Boolean isResearchResolved(String gameId, String playerId) {
         return getGameFromId(gameId).isResearchResolved(playerId);
+    }
+    public void cleanupOldGames() {
+        logger.warn("\u001B[32m ------------ Scheduler - Old game cleanup ------------ \u001B[0m");
+        Map<String, GameData> remainingGames = new HashMap<>();
+        Integer cleanedGames = 0;
+        for(Entry<String, Game> g: this.gameHolder.entrySet()){
+            Game game = g.getValue();
+            Duration age = Duration.between(game.getLastUpdate(), Instant.now());
+            if(age.toDays() > 7){
+                logger.warn("\u001B[31m removing : " + game.getGameId()+ ": " + age.toMinutes() + "\u001B[0m");
+                this.gameHolder.remove(g.getKey());
+                cleanedGames++;
+            } else {
+                remainingGames.put(game.getGameId(), game.toData());
+            }
+        }
+        if(cleanedGames>0){
+            JsonGameDataHandler.savePostCleanupGames(remainingGames);
+        } else {
+            logger.warn("No games were deleted");
+        }
+        logger.warn("Remaining active games: " + remainingGames.size());
+        logger.warn("\u001B[32m -------------------------------- \u001B[0m");
     }
 }

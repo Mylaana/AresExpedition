@@ -7,6 +7,7 @@ import com.ares_expedition.repository.core.GameData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.FileReader;
@@ -16,6 +17,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +25,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JsonGameDataHandler {
     private static final Logger logger = LoggerFactory.getLogger(JsonGameDataHandler.class);
     
@@ -31,7 +35,9 @@ public class JsonGameDataHandler {
     private static final String DATABASE_DIRECTORY = "data/";
     private static final String DATABASE_PATH = DATABASE_DIRECTORY + DATABASE_NAME;
     private static final String CARDS_DATA_PATH = "data/cards_data.json";
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper()
+            .registerModule(new JavaTimeModule())
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
     public static Game getGame(String gameId){
         checkDatabaseExistOrCreateIt();
@@ -51,6 +57,7 @@ public class JsonGameDataHandler {
     public static void saveGame(Game saveGame) {
         checkDatabaseExistOrCreateIt();
         logger.debug("\u001B[31m SAVE GAME \u001B[0m");
+        saveGame.setLastUpdate(Instant.now());
 
         Map<String, Game> games = readGames();
         Map<String, GameData> gamesDTO = Game.toDataMap(games);
@@ -62,14 +69,14 @@ public class JsonGameDataHandler {
         File file = Paths.get(DATABASE_PATH).toFile();
         logger.debug("\u001B[32m \u001B[0m");
         if(!file.exists()){
-            logger.debug("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath());
+            logger.debug("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath() + "\u001B[0m");
             return new HashMap<>();
         }
 
         try (Reader reader = new FileReader(file)){
             long length = file.length();
             if (length == 0) {
-                logger.debug("Empty database.json file.");
+                logger.debug("\u001B[32m Empty database.json file.\u001B[0m");
                 return new HashMap<>();
             }
             return objectMapper.readValue(reader, new TypeReference<Map<String, Game>>(){});
@@ -77,7 +84,10 @@ public class JsonGameDataHandler {
             error.printStackTrace();
             return new HashMap<>();
         }
+    }
 
+    public static void savePostCleanupGames(Map<String, GameData> remainingGames){
+        JsonGameDataHandler.writeGames(remainingGames);
     }
 
     private static void writeGames(Map<String, GameData> games){

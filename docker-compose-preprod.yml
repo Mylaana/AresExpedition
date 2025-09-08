@@ -20,8 +20,8 @@ services:
       - ./config/back/.env.preprod
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx512m -Xms256m
-    # ports:
-      # - "18002:8080" # direct access to backend
+    volumes:
+      - ./data:/app/data
     networks:
       - ares-network
 

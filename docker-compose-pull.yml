@@ -2,14 +2,17 @@ services:
   front:
     image: mylaana/ares-expedition-front:latest
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     depends_on:
       - back
     networks:
       - ares-network
     volumes:
       - ./config/front/config.json:/usr/share/nginx/html/assets/config/config.json
-
+      - /home/ubuntu/letsencrypt-certs/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro
+      - /home/ubuntu/letsencrypt-certs/privkey.pem:/etc/ssl/private/privkey.pem:ro
+      - ./nginx-log:/var/log/nginx
   back:
     image: mylaana/ares-expedition-back:latest
     env_file:
@@ -21,8 +24,8 @@ services:
     deploy:
       resources:
         limits:
-          memory: 400MB
           cpus: '0.5'
+          memory: 400M
 
 networks:
   ares-network:
