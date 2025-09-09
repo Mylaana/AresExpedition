@@ -8,7 +8,7 @@ import { NonEventButtonComponent } from './components/tools/button/non-event-but
 import { NonEventButton } from './models/core-game/button.model';
 import { Router } from '@angular/router';
 import {} from '@angular/common/http';
-import { ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_NEWGAMELINKS } from './global/global-const';
+import { ROUTE_404, ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_NEWGAMELINKS } from './global/global-const';
 
 @Component({
     selector: 'app-root',
@@ -37,8 +37,11 @@ export class AppComponent {
 		}
 	}
 	displayHomeButton(): boolean {
-		switch(this.router.url.substring(1)){
-			case(ROUTE_CARD_OVERVIEW):case(ROUTE_CREATEGAME):case(ROUTE_NEWGAMELINKS):{return true}
+		switch(this.router.url.substring(1).split('?')[0]){
+			case(ROUTE_CARD_OVERVIEW):
+			case(ROUTE_CREATEGAME):
+			case(ROUTE_404):
+			case(ROUTE_NEWGAMELINKS):{return true}
 			default:{return false}
 		}
 	  }
