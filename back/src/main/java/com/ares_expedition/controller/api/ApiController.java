@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,7 @@ import com.ares_expedition.controller.game.GameController;
 import com.ares_expedition.dto.api.CreatePlayerDTO;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.api.NewGameInfoDTO;
+import com.ares_expedition.dto.api.ValidateSessionDTO;
 import com.ares_expedition.services.NewGameService;
 
 @RestController
@@ -68,7 +72,13 @@ public class ApiController {
         logger.warn("\u001B[32m -------------------------------- \u001B[0m");
 
         gameController.loadGame(gameConfig.getGameId());
-        //response.put("message", newGameInfo);
         return ResponseEntity.ok(newGameInfo);
+    }
+    @GetMapping("session/{gameId}/{playerId}")
+    public ResponseEntity<?> validateSession(@PathVariable("gameId") String gameId, @PathVariable("playerId") String playerId){
+        if(this.gameController.validateSession(gameId, playerId)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

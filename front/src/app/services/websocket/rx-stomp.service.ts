@@ -14,6 +14,7 @@ import { ScanKeep } from '../../interfaces/global.interface';
 import { EventUnionSubTypes } from '../../types/event.type';
 import { DeckQueryOptionsEnum } from '../../enum/global.enum';
 import { AppConfigService } from '../app-config.service';
+import { ApiService } from '../api/api.service';
 
 
 interface QueueMessage {
@@ -34,12 +35,13 @@ export class RxStompService extends RxStomp {
 	private clientId: myUUID = ''
 
     constructor(
-		private gameParam: GameParamService
+		private gameParam: GameParamService,
+		private apiService: ApiService
 	) {
         super()
 		this.gameParam.currentGameId.subscribe((id) => (this.gameId = id??''))
 		this.gameParam.currentClientId.subscribe((id) => (this.clientId = id??''))
-
+		this.apiService.currentSessionValid.subscribe((session) => this.onSessionUpdate(session))
 		const stompConfig = this.buildRxStompConfig()
         this.configure(stompConfig)
         this.connected$.subscribe(() => {
@@ -49,9 +51,14 @@ export class RxStompService extends RxStomp {
 			let state = this.connectionState$.getValue()
 			this.connectionState = state===1
 		})
-        this.activate()
     }
 
+	private onSessionUpdate(session: boolean){
+		if(!this.gameId || !this.clientId){return}
+		if(session!=true){return}
+
+        this.activate()
+	}
 	private buildRxStompConfig(): RxStompConfig {
 		const configService = inject(AppConfigService)
 

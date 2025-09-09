@@ -15,12 +15,6 @@ public class WsControllerInput {
     public WsControllerInput(InputRouter inputRouter) {
         this.inputRouter = inputRouter;
     }
-
-    /*
-    @MessageMapping("/player")
-    public <T> void resolvePlayerQuery(PlayerMessageQuery<T> message) throws Exception {
-        inputRouter.routeInput(message);
-    }*/
     @MessageMapping("/player")
     public void resolvePlayerQuery(BaseMessageInputDTO<?> message) throws Exception {
         logger.debug("\u001B[32m Received message: " + message.getContentEnum() + " uuid:" + message.getUuid() + "\u001B[0m");
