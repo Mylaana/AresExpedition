@@ -108,3 +108,8 @@ export interface ApiPlayer {
 	name: string,
 	color: PlayerColor
 }
+
+export interface ApiSession {
+	gameId: myUUID,
+	playerId: myUUID
+}

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -255,5 +254,15 @@ public class GameController {
         }
         logger.warn("Remaining active games: " + gameHolder.size());
         logger.warn("\u001B[32m -------------------------------- \u001B[0m");
+    }
+    public Boolean validateSession(String gameId, String playerId){
+        if(!this.gameHolder.containsKey(gameId)){
+            return false;
+        }
+        List<String> players = gameHolder.get(gameId).getGroupPlayerId();
+        if(!players.contains(playerId)){
+            return false;
+        }
+        return true;
     }
 }
