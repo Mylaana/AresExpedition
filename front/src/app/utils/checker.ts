@@ -88,6 +88,11 @@ function hasCardWithStockQuantityPerType(ressourceType: AdvancedRessourceStock |
 	}
 	return false
 }
+function isProductionOk(ressource: RessourceType, quantity: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
+    let check = clientState.getRessourceInfoFromType(ressource)
+    if(!check){return false}
+    return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:quantity, value:check.valueProd})
+}
 export const Checker = {
     isRessourceOk,
     isTagOk,
@@ -98,5 +103,6 @@ export const Checker = {
     isHandCurrentSizeOk,
 	isMilestoneOk,
 	hasCardWithStockType,
-	hasCardWithStockQuantityPerType
+	hasCardWithStockQuantityPerType,
+	isProductionOk,
 }

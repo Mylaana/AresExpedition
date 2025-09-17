@@ -7517,7 +7517,7 @@
         },
         "prerequisiteText": {
             "en": "Requires that you spend 5$ressource_heat$",
-            "fr": ""
+            "fr": "Requiert que vous d\u00e9pensiez 5$ressource_heat$."
         },
         "prerequisiteSummaryText": {
             "en": "-5$ressource_heat$",
@@ -9982,7 +9982,7 @@
             "en": "Add 2 $ressource_microbe$ to another card.$skipline$Add  $ressource_animal$ to another card.",
             "fr": "Ajoutez 2 $ressource_microbe$ \u00e0 une autre carte.$skipline$Ajoutez $ressource_animal$ \u00e0 une autre carte."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10324,6 +10324,182 @@
         "playedText": {
             "en": "Chose a tag and add it to this card.",
             "fr": "Choisissez un badge et ajoutez-le\u00e0 cette carte. "
+        },
+        "status": "validated",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM30",
+        "origin": "fanmade",
+        "cost": 23,
+        "tagsId": [
+            1,
+            2,
+            3
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "2",
+        "phaseUp": "IV",
+        "title": {
+            "en": "HelioLink Space Station",
+            "fr": "Station Spatiale HelioLink"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_heat$ / $tag_science$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 heat for each $tag_science$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur par $tag_science$ en votre possession, y compris celui-ci."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM31",
+        "origin": "fanmade",
+        "cost": 11,
+        "tagsId": [
+            1,
+            2,
+            3
+        ],
+        "cardType": "greenProject",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Solar Wind Power",
+            "fr": "Energie Des Vents Solaires"
+        },
+        "effectSummaryType": "mixedProduction",
+        "effectSummaryText": {
+            "en": "$ressource_heat$$mix$$ressource_titanium$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 heat. When you play a $tag_space$ you pay 3 MC less for it.",
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur. Lorsque vous jouez un $tag_space$ vous payez 3 MC de moins."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM32",
+        "origin": "fanmade",
+        "cost": 10,
+        "tagsId": [
+            6
+        ],
+        "cardType": "greenProject",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Potatoes Farm",
+            "fr": "Ferme De Patates"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacredit$$ressource_plant$ / $tag_plant$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 MC and 1 plant per $tag_plant$ you have, including this.",
+            "fr": "Lors de la phase de production, cette carte produit 1 plante et 1 MC pour chaque $tag_plant$ en votre possession, y compris celui-ci."
+        },
+        "prerequisiteText": {
+            "en": "Requires 2 $tag_plant$",
+            "fr": "Requiert 2 $tag_plant$."
+        },
+        "prerequisiteSummaryText": {
+            "en": "$tag_plant$$tag_plant$",
+            "fr": ""
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM33",
+        "origin": "fanmade",
+        "cost": 12,
+        "tagsId": [
+            0,
+            6,
+            3
+        ],
+        "cardType": "greenProject",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Solar Farm",
+            "fr": "Ferme Solaire"
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_heat$ / $tag_plant$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 heat per $tag_plant$ you have, including this.",
+            "fr": "Lors de la phase de production, cette carte produit 1 chaleur pour chaque $tag_plant$ en votre possession, y compris celui-ci."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM34",
+        "origin": "fanmade",
+        "cost": 9,
+        "tagsId": [
+            9,
+            2,
+            4
+        ],
+        "cardType": "redProject",
+        "vpNumber": "1",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Sponsored Academies",
+            "fr": "Acad\u00e9mies Sponsoris\u00e9es"
+        },
+        "playedText": {
+            "en": "Discard $ressource_card$.$skipline$Draw $ressource_card$$ressource_card$$ressource_card$.",
+            "fr": "D\u00e9faussez $ressource_card$.$skipline$ Piochez $ressource_card$$ressource_card$$ressource_card$."
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "FM35",
+        "origin": "fanmade",
+        "cost": 28,
+        "tagsId": [
+            0,
+            3
+        ],
+        "cardType": "greenProject",
+        "phaseUp": "IV",
+        "title": {
+            "en": "Lunar Industry Complex",
+            "fr": "Complexe Industriel Lunaire"
+        },
+        "effectSummaryType": "mixedProduction",
+        "effectSummaryText": {
+            "en": "$ressource_heat$$ressource_heat$$mix$$ressource_steel$$ressource_steel$$ressource_titanium$$ressource_titanium$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 2 heat.$skipline$When you play a $tag_building$, you pay 4 MC less for it.$skipline$When you play a $tag_space$ you pay 6 MC less for it.",
+            "fr": "Lors de la phase de production, cette carte produit 2 chaleur.$skipline$Lorsque vous jouez un $tag_building$, vous payez 4 MC de moins.$skipline$Lorsque vous jouez un $tag_space$, vous payez 6 MC de moins."
+        },
+        "playedText": {
+            "en": "Gain $other_tr$$other_tr$.",
+            "fr": "Gagnez $other_tr$$other_tr$."
+        },
+        "prerequisiteText": {
+            "en": "Requires 2 $ressource_titanium$ production.",
+            "fr": "Requiert une production de 2 $ressource_titanium$."
+        },
+        "prerequisiteSummaryText": {
+            "en": "$ressource_titanium$$ressource_titanium$",
+            "fr": "$ressource_titanium$$ressource_titanium$"
         },
         "status": "implemented",
         "vpScaling": "0"
