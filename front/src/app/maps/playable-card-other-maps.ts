@@ -189,6 +189,12 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'FM27': (s) => Checker.isTagOk('jovian', 1, 'min', s),
 	//Conscription
 	'FM28': (s) => Checker.isTagOk('earth', 2, 'min', s),
+	//Potatoes Farm
+	'FM32': (s) => Checker.isTagOk('plant', 2, 'min', s),
+	//Sponsored Academies
+	'FM34': (s) => Checker.isHandCurrentSizeOk(1, 'min', s),
+	//Lunar industry complex
+	'FM35': (s)=> Checker.isProductionOk('titanium', 2, 'min', s)
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -1245,6 +1251,24 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		EventFactory.simple.resolveWildTag('FM29'),
 		EventFactory.simple.addProduction({name:'megacredit', valueStock:2})
 	],
+	//Solar wind power
+	'FM31': () => [
+		EventFactory.simple.addProduction([{name:'heat', valueStock:1}, {name:'titanium', valueStock:1}])
+	],
+	//Sponsored Academies
+	'FM34': () => [
+		EventFactory.simple.discard(1),
+		EventFactory.simple.draw(3)
+	],
+	//Lunar Industry Complex
+	'FM35': () => [
+		EventFactory.simple.addTR(2),
+		EventFactory.simple.addProduction([
+			{name: 'heat', valueStock: 2},
+			{name: 'steel', valueStock: 2},
+			{name: 'titanium', valueStock: 2},
+		]),
+	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Earth Catapult
@@ -1336,6 +1360,15 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'FM18': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('jovian')}],
 	//Interplanetary Trade
 	'FM20': (s)=> [{name:'megacredit', valueStock:s.getDifferentTagTypeCount()}],
+	//HelioLink space station
+	'FM30': (s)=> [{name:'heat', valueStock:s.getTagsOfType('science')}],
+	//Potatoes Farm
+	'FM32': (s)=> {
+		let scaling = s.getTagsOfType('plant')
+		return [{name:'megacredit', valueStock:scaling}, {name:'plant', valueStock:scaling}]
+	},
+	//Solar farm
+	'FM33': (s)=> [{name:'heat', valueStock:s.getTagsOfType('plant')}],
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms
