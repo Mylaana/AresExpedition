@@ -40,6 +40,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'39': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.oxygen, GlobalParameterColorEnum.yellow, 'min', s),
 	//Physics Complex
 	'46': (s) => Checker.isTagOk('science', 4, 'min', s),
+	//Physics Complex
+	'48B': (s) => Checker.isTagOk('event', 2, 'min', s),
 	//Regolith Eaters
 	'50': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.red, 'min', s),
 	//Small Animals
@@ -1093,6 +1095,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Ecoline
 	'210': () => [EventFactory.simple.addProduction({name:'plant', valueStock:1})],
+	//Ecoline
+	'210B': () => [EventFactory.simple.addProduction({name:'plant', valueStock:3})],
 	//Interplanetary Cinematics
 	'212': () => [EventFactory.simple.addProduction({name:'steel', valueStock:1})],
 	//Inventrix
@@ -1108,10 +1112,19 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'214': () => {
 		return [EventFactory.simple.addProduction({name:'steel', valueStock:1})]
 	},
+	//Mining Guild
+	'214B': () => {
+		return [EventFactory.simple.addProduction({name:'steel', valueStock:2})]
+	},
 	//Phobolog
 	'215': (clientstate) => {
 		clientstate.increaseProductionModValue('titanium')
 		return [EventFactory.simple.addProduction({name:'titanium', valueStock:1})]
+	},
+	//Phobolog
+	'215B': (clientstate) => {
+		clientstate.increaseProductionModValue('titanium')
+		return [EventFactory.simple.addProduction({name:'titanium', valueStock:2})]
 	},
 	//Saturn Systems
 	'216': () => [
@@ -1310,7 +1323,7 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 			return [{name:'megacredit',	valueStock: stock[0].valueStock}]
 	},
 	//Point Luna
-	'CF1': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('earth')}],
+	'CF1': (s)=> [{name:'megacredit', valueStock: Math.floor(s.getTagsOfType('earth')/ 2)}],
 	//Ringcom
 	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /3)}],
 	//Aridor

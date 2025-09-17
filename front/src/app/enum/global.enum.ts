@@ -23,8 +23,6 @@ export enum DeckQueryOptionsEnum {
 	inventionContest = 'O5',
 	actionPhaseScan = 'O6',
 	modPro = 'O7',
-	ringCom = 'O8',
-	clm = 'O9'
 }
 export enum ProjectFilterNameEnum {
 	undefined = 'undefined',

@@ -17,9 +17,9 @@ function getScaling(cardCode: string, clientState: PlayerStateModel){
 export const ACTIVATION_DOUBLE: string[] = [
 	'18', //Conserved Biome
 	'27', //Extreme-Cold Fungus
-	'31', //GHG Producing Bacteria
+	'31', '31B', //GHG Producing Bacteria
 	'43', //Nitrite Reducing Bacteria
-	'50', //Regolith Eaters
+	'50', '50B', //Regolith Eaters
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
 ]
@@ -104,6 +104,15 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
 			]
 		: [],
+	//GHG Producing Bacteria B
+	'31B': (cardCode, _, option) => option === 1
+		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		: option === 2
+		? [
+			EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
+			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
+			]
+		: [],
 	//Hydro-Electric Energy
 	'34': (_, clientState) => {
 		let value = 2;
@@ -138,6 +147,15 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	'49': () => [EventFactory.simple.discardOptions(3, 'max', DiscardOptionsEnum.redraftedContracts)],
 	//Regolith Eaters
 	'50': (cardCode, _, option) => option === 1
+		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		: option === 2
+		? [
+			EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
+			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)
+			]
+		: [],
+	//Regolith Eaters B
+	'50B': (cardCode, _, option) => option === 1
 		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
 		: option === 2
 		? [
@@ -317,24 +335,53 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 	//Pride of the earth Arkship
 	'FM11': (state) =>   Math.floor(state.getTagsOfType('science')/4),
 	//Ants
-	'FM15': (state) =>  state.getTagsOfType('microbe')>=5?2:1,
+	'FM15': (state) =>  Math.floor(state.getTagsOfType('microbe')/2),
 	//Jovian Lanterns
 	'FM27': (state) =>  Math.floor(state.getTagsOfType('jovian')/3),
 
 	//SPECIALS
 	//Convert Forest - Ecoline
-	'ConvertForest': (state) => state.getTriggersIdActive().includes('210') ? 7 : 8,
+	'ConvertForest': (state) => {
+		let result: number = 8
+		result -= state.getTriggersIdActive().includes('210')? 1:0
+		result -= state.getTriggersIdActive().includes('210B')? 2:0
+		return result
+	},
 	//Buy Forest - Standard Technology
-	'buyForest': (state) => state.getTriggersIdActive().includes('55') ? 16 : 20,
+	'buyForest': (state) => {
+		let result: number = 20
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
 	//Buy Infrastructure - Standard Technology
-	'buyInfrastructure': (state) => state.getTriggersIdActive().includes('55') ? 11 : 15,
+	'buyInfrastructure': (state) => {
+		let result: number = 15
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
 	//Buy Ocean - Standard Technology
-	'buyOcean': (state) => state.getTriggersIdActive().includes('55') ? 12 : 16,
+	'buyOcean': (state) => {
+		let result: number = 16
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
 	//Buy Temperature - Standard Technology
-	'buyTemperature': (state) => state.getTriggersIdActive().includes('55') ? 10 : 14,
+	'buyTemperature': (state) => {
+		let result: number = 14
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
 	//Buy Temperature - Standard Technology
-	'buyUpgrade': (state) => state.getTriggersIdActive().includes('55') ? 14 : 18,
-
+	'buyUpgrade': (state) => {
+		let result: number = 18
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
 }
 export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: PlayerStateModel) => string> = {
 	//Aquifer Pumping
@@ -437,6 +484,8 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'29': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
 	//GHG Producing Bacteria
 	'31': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('31').some(s => s.name === 'microbe' && s.valueStock >= 2),
+	//GHG Producing Bacteria B
+	'31B': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('31B').some(s => s.name === 'microbe' && s.valueStock >= 2),
 	//Greenhouses
 	'32': (_, clientState) => Checker.isRessourceOk('heat', 1,'min',clientState),
 	//Hydro-Electric Energy
@@ -453,6 +502,8 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	'49': (_, clientState) => Checker.isHandCurrentSizeOk(1, 'min', clientState),
 	//Regolith Eaters
 	'50': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('50').some(s => s.name === 'microbe' && s.valueStock >= 2),
+	//Regolith Eaters B
+	'50B': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('50B').some(s => s.name === 'microbe' && s.valueStock >= 2),
 	//Solarpunk
 	'54': (_, clientState) =>  Checker.isRessourceOk('megacredit', getScaling('54', clientState), 'min', clientState),
 	//Steelworks

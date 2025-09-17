@@ -217,11 +217,6 @@ export class EventHandler {
 						event.title = `Modpro : add one card to hand with an ${tag[0].toUpperCase() + tag.slice(1)} tag`
 						break
 					}
-					case(DeckQueryOptionsEnum.ringCom):{
-						if(!event.getSelectorFilter()){break}
-						event.setSelectorFilterAuthorizedTag(['jovian'])
-						break
-					}
 				}
 
 			}
@@ -369,7 +364,7 @@ export class EventHandler {
 					}
 					case(DiscardOptionsEnum.clm):{
 						if(event.hasSelectorCardSelected()===false){break}
-						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:7}), 'first')
+						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:10}), 'first')
 						break
 					}
 				}
