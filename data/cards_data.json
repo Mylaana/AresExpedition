@@ -1021,7 +1021,46 @@
             "en": "-$ressource_microbe$$ressource_microbe$:  $other_temperature$",
             "fr": ""
         },
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
+        "card_code": "31B",
+        "origin": "base",
+        "cost": 10,
+        "tagsId": [
+            2,
+            8
+        ],
+        "cardType": "blueProject",
+        "phaseUp": "III",
+        "title": {
+            "en": "GHG Producing Bacteria B",
+            "fr": "Bact\u00e9ries Productrices de GES B"
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$$ressource_microbe$$skipline$OR$skipline$-$ressource_microbe$$ressource_microbe$:  $other_temperature$",
+            "fr": "$other_arrow$$ressource_microbe$$skipline$OU$skipline$-$ressource_microbe$$ressource_microbe$:  $other_temperature$"
+        },
+        "effectText": {
+            "en": "ACTION: Add 1 microbe to this card, or remove 2 microbes to raise the temperature 1 step.",
+            "fr": "ACTION: Ajoutez 1 microbe sur cette carte ou retirez 2 microbes pour augmenter la temp\u00e9rature de 1 niveau. "
+        },
+        "stockable": [
+            "microbe"
+        ],
+        "status": "validated",
+        "actionTextOption1": {
+            "en": "$other_arrow$$ressource_microbe$",
+            "fr": ""
+        },
+        "actionTextOption2": {
+            "en": "-$ressource_microbe$$ressource_microbe$:  $other_temperature$",
+            "fr": ""
+        },
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "32",
@@ -1553,7 +1592,40 @@
             "fr": "EFFET: Lorsque vous jouez un $tag_event$, piochez deux cartes. "
         },
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
+        "card_code": "48B",
+        "origin": "base",
+        "cost": 24,
+        "cardType": "blueProject",
+        "vpNumber": "1",
+        "phaseUp": "I-II",
+        "title": {
+            "en": "Recycled Detritus B",
+            "fr": "D\u00e9chets Recycl\u00e9s B"
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$tag_event$: $ressource_card$$ressource_card$",
+            "fr": "$tag_event$: $ressource_card$$ressource_card$"
+        },
+        "effectText": {
+            "en": "EFFECT: When you play an EVENT, draw 2 cards.",
+            "fr": "EFFET: Lorsque vous jouez un $tag_event$, piochez deux cartes. "
+        },
+        "prerequisiteText": {
+            "en": "Requires 2 $tag_event$.",
+            "fr": "Requiert 2 $tag_event$."
+        },
+        "prerequisiteSummaryText": {
+            "en": "$tag_event$$tag_event$",
+            "fr": ""
+        },
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "49",
@@ -1624,7 +1696,46 @@
             "en": "-$ressource_microbe$$ressource_microbe$: $other_oxygen$",
             "fr": ""
         },
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
+        "card_code": "50B",
+        "origin": "base",
+        "cost": 10,
+        "tagsId": [
+            2,
+            8
+        ],
+        "cardType": "blueProject",
+        "phaseUp": "III",
+        "title": {
+            "en": "Regolith Eaters B",
+            "fr": "R\u00e9golitovores B"
+        },
+        "effectSummaryType": "action",
+        "effectSummaryText": {
+            "en": "$other_arrow$$ressource_microbe$$skipline$OR$skipline$-$ressource_microbe$$ressource_microbe$: $other_oxygen$",
+            "fr": "$other_arrow$$ressource_microbe$$skipline$OU$skipline$-$ressource_microbe$$ressource_microbe$: $other_oxygen$"
+        },
+        "effectText": {
+            "en": "ACTION: Add 1 microbe to this card, or remove 2 microbes from this card and increase oxygen 1 step.",
+            "fr": "ACTION: Ajoutez 1 microbe sur cette carte ou retirez 2 microbes de cette carte pour augmenter l'oxyg\u00e8ne de 1 niveau. "
+        },
+        "stockable": [
+            "microbe"
+        ],
+        "status": "validated",
+        "actionTextOption1": {
+            "en": "$ressource_microbe$",
+            "fr": ""
+        },
+        "actionTextOption2": {
+            "en": "-$ressource_microbe$$ressource_microbe$: $other_oxygen$",
+            "fr": ""
+        },
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "51",
@@ -1771,7 +1882,35 @@
             "fr": "EFFET: Le co\u00fbt associ\u00e9 aux actions standards co\u00fbtant des MC est r\u00e9duit de 4 MC. "
         },
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
+        "card_code": "55B",
+        "origin": "base",
+        "cost": 11,
+        "tagsId": [
+            2
+        ],
+        "cardType": "blueProject",
+        "vpNumber": "1",
+        "phaseUp": "III",
+        "title": {
+            "en": "Standard Technology B",
+            "fr": "Technologie Standard B"
+        },
+        "effectSummaryType": "trigger",
+        "effectSummaryText": {
+            "en": "$other_standard$:$skipline$$ressource_megacreditvoid_-2$",
+            "fr": "$other_standard$:$skipline$$ressource_megacreditvoid_-2$"
+        },
+        "effectText": {
+            "en": "EFFECT: You pay 2 MC less for standard actions that cost MC.",
+            "fr": "EFFET: Le co\u00fbt associ\u00e9 aux actions standards co\u00fbtant des MC est r\u00e9duit de 2 MC. "
+        },
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "56",
@@ -6107,40 +6246,42 @@
         },
         "startingMegacredits": 27,
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
     },
     {
-        "card_code": "211",
+        "card_code": "210B",
         "origin": "base",
         "tagsId": [
-            1
+            6
         ],
         "cardType": "corporation",
         "title": {
-            "en": "Helion",
-            "fr": "Helion"
+            "en": "Ecoline B",
+            "fr": "Ecoline B"
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_heat$$ressource_heat$$ressource_heat$",
-            "fr": "$ressource_heat$$ressource_heat$$ressource_heat$"
+            "en": "$ressource_plant$$ressource_plant$$ressource_plant$",
+            "fr": "$ressource_plant$$ressource_plant$$ressource_plant$"
         },
         "effectText": {
-            "en": "Increase your heat production by 3.",
+            "en": "Increase your plant production by 3.",
             "fr": ""
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
-            "en": "X$ressource_heat$ = $ressource_megacreditvoid_X$",
-            "fr": "X$ressource_heat$ = $ressource_megacreditvoid_X$"
+            "en": "-8$ressource_plant$$other_forest$:$skipline$-$ressource_plant$$ressource_plant$",
+            "fr": "-8$ressource_plant$$other_forest$:$skipline$-$ressource_plant$$ressource_plant$"
         },
         "effectText2": {
-            "en": "EFFECT: You can use the heat as MC. You cannot use MC as heat.",
+            "en": "EFFECT: When you spend plants to gain a forest tile and increase oxygen, you spend 2 less plant.",
             "fr": ""
         },
-        "startingMegacredits": 28,
-        "status": "blocked",
-        "vpScaling": "0"
+        "startingMegacredits": 37,
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "212",
@@ -6235,7 +6376,43 @@
         },
         "startingMegacredits": 27,
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
+        "card_code": "214B",
+        "origin": "base",
+        "tagsId": [
+            0,
+            0
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "Mining Guild B",
+            "fr": "Mining Guild B"
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_steel$$ressource_steel$",
+            "fr": "$ressource_steel$$ressource_steel$"
+        },
+        "effectText": {
+            "en": "When you play an $tag_building$, you pay 4 MC less.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$ressource_steel$: $other_tr$",
+            "fr": "$ressource_steel$: $other_tr$"
+        },
+        "effectText2": {
+            "en": "EFFECT: For each $ressource_steel$ you gain, you also gain $other_tr$.",
+            "fr": ""
+        },
+        "startingMegacredits": 27,
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "215",
@@ -6268,7 +6445,42 @@
         },
         "startingMegacredits": 20,
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
+        "card_code": "215B",
+        "origin": "base",
+        "tagsId": [
+            1
+        ],
+        "cardType": "corporation",
+        "title": {
+            "en": "PhoboLog B",
+            "fr": "PhoboLog B"
+        },
+        "effectSummaryType": "greyProduction",
+        "effectSummaryText": {
+            "en": "$ressource_titanium$$ressource_titanium$",
+            "fr": "$ressource_titanium$$ressource_titanium$"
+        },
+        "effectText": {
+            "en": "When you play a $tag_space$, you pay 6 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$ressource_titanium$:$skipline$$tag_space$$ressource_megacreditvoid_-1$",
+            "fr": "$ressource_titanium$:$skipline$$tag_space$$ressource_megacreditvoid_-1$"
+        },
+        "effectText2": {
+            "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional MC.",
+            "fr": ""
+        },
+        "startingMegacredits": 25,
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "216",
@@ -9093,48 +9305,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "P35",
-        "origin": "promo",
-        "tagsId": [
-            10
-        ],
-        "cardType": "corporation",
-        "title": {
-            "en": "Austellar",
-            "fr": ""
-        },
-        "effectSummaryType": "trigger",
-        "effectSummaryText": {
-            "en": "$other_milestone$$other_validate$:$$$other_tr$$other_tr$$other_tr$",
-            "fr": "$other_milestone$$other_validate$:$$$other_tr$$other_tr$$other_tr$"
-        },
-        "effectText": {
-            "en": "EFFECT: Whenever you accomplish the marked objective, gain 3 TR.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Chose a tag and add it to this corporation.$$At the beginning of the game mark an objective.",
-            "fr": ""
-        },
-        "startingMegacredits": 42,
-        "status": "blocked",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "Z",
-        "origin": "promo",
-        "tagsId": [
-            6
-        ],
-        "cardType": "corporation",
-        "title": {
-            "en": "The Next Step Initiative",
-            "fr": ""
-        },
-        "status": "blocked",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "CF1",
         "origin": "fanmade",
         "tagsId": [
@@ -9147,12 +9317,12 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$/$tag_earth$",
-            "fr": "$ressource_megacreditvoid_1$/$tag_earth$"
+            "en": "$ressource_megacreditvoid_1$/$tag_earth$$tag_earth$",
+            "fr": "$ressource_megacreditvoid_1$/$tag_earth$$tag_earth$"
         },
         "effectText": {
-            "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
-            "fr": "Lors de la phase de production, cette carte produit 1 MC par $tag_earth$ en votre possession, y compris celui-ci."
+            "en": "During the production phase, this card produces 1 MC per two $tag_earth$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC pour 2 $tag_earth$ en votre possession, y compris celui-ci."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -9163,7 +9333,7 @@
             "en": "EFFECT: Each time you play a $tag_earth$, draw a card",
             "fr": "EFFET: Lorsque vous jouez un badge $tag_earth$, piochez une carte."
         },
-        "startingMegacredits": 28,
+        "startingMegacredits": 25,
         "status": "validated",
         "vpScaling": "0"
     },
@@ -9217,7 +9387,7 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "$other_arrow$  3$ressource_card$$other_hand$1$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_7$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+1$$ressource_plant$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-8$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-9$ressource_science$: Add $other_tr$$other_tr$$other_tr$$skipline$-10$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "en": "$other_arrow$  $ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-8$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-9$ressource_science$: Add $other_tr$$other_tr$$other_tr$$skipline$-10$ressource_science$: +$tag_earth$$tag_jovian$.",
             "fr": ""
         },
         "stockable": [
@@ -9734,12 +9904,12 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_microbe$$skipline$if $tag_microbe$>=5: $ressource_microbe$",
-            "fr": "$other_arrow$$skipline$$ressource_microbe$$skipline$if $tag_microbe$>=5: $ressource_microbe$"
+            "en": "$other_arrow$$skipline$$ressource_microbe$/$tag_microbe$$tag_microbe$",
+            "fr": ""
         },
         "effectText": {
-            "en": "ACTION: Add 1 $ressource_microbe$ to this card, if you have 5 or more $tag_microbe$, add another one.",
-            "fr": "ACTION: Ajoutez 1 microbe sur cette carte, si vous avez 5 $tag_microbe$ ou plus, ajoutez en un suppl\u00e9mentaire."
+            "en": "ACTION: Add 1 $ressource_microbe$ to this card per 2 $tag_microbe$ you have, including this one.",
+            "fr": "ACTION: Ajoutez 1 microbe sur cette carte pour 2 $tag_microbe$ en votre possession, y compris celui-ci."
         },
         "effectSummaryOption": "scalingCostActivation",
         "stockable": [

@@ -148,7 +148,7 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 		switch(button){
 			case(EffectPortalButtonEnum.clm_0):{
 				return [
-					EventFactory.simple.scanKeep({scan:3, keep:1}, DeckQueryOptionsEnum.clm)
+					EventFactory.simple.draw(1)
 				]
 			}
 			case(EffectPortalButtonEnum.clm_2):{
@@ -160,7 +160,7 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 			case(EffectPortalButtonEnum.clm_4):{
 				return [
 					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-4}, 'CF3'),
-					EventFactory.simple.addProduction([{name:'heat', valueStock:2}, {name:'plant', valueStock:1}])
+					EventFactory.simple.addProduction([{name:'heat', valueStock:2}, {name:'plant', valueStock:2}])
 				]
 			}
 			case(EffectPortalButtonEnum.clm_7):{
@@ -322,13 +322,13 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	'CF3': (button) => {
 		switch(button){
 			case(EffectPortalButtonEnum.clm_0):{
-				return '3$ressource_card$$other_hand$1$ressource_card$'
+				return '$ressource_card$'
 			}
 			case(EffectPortalButtonEnum.clm_2):{
-				return '-2$ressource_science$:$skipline$$other_sellcard$$ressource_megacreditvoid_7$'
+				return '-2$ressource_science$:$skipline$$other_sellcard$$ressource_megacreditvoid_10$'
 			}
 			case(EffectPortalButtonEnum.clm_4):{
-				return '-4$ressource_science$:$skipline$$production_+2$$ressource_heat$$production_+1$$ressource_plant$'
+				return '-4$ressource_science$:$skipline$$production_+2$$ressource_heat$$production_+2$$ressource_plant$'
 			}
 			case(EffectPortalButtonEnum.clm_7):{
 				return '-7$ressource_science$:$skipline$$production_+2$$ressource_steel$$production_+1$$ressource_titanium$'

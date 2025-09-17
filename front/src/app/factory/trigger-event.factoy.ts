@@ -451,6 +451,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'44': handleTrigger_44,
 		'45': handleTrigger_45,
 		'48': handleTrigger_48,
+		'48B': handleTrigger_48,
 		'61': handleTrigger_61,
 		'216': handleTrigger_216,
 		'D01': handleTrigger_D01,
@@ -479,7 +480,8 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'53': handleTrigger_53
 	},
 	ON_PRODUCTION_INCREASED: {
-		'214': handleTrigger_214
+		'214': handleTrigger_214,
+		'214B': handleTrigger_214
 	},
 	ON_TRIGGER_RESOLUTION: {
 		'40': handleTrigger_40_resolution,
