@@ -1,4 +1,5 @@
-<div class="wrapper-pannel">
+<div class="wrapper-pannel"
+	[ngClass]="interfaceSize">
     <div class="previous-phase-selected" *ngIf="!gameOver">
         <div class="pannel-image">
 			<img *ngIf="currentPhase=='PLANIFICATION' && playerPhase.previousSelectedPhase.toString()!='UNDEFINED'"
@@ -15,66 +16,62 @@
         </div>
     </div>
 	<app-player-name [name]="playerState.getName()" [color]="playerState.getColor()"></app-player-name>
-<div class="pannel-card">
-	<app-vp [vpNumber]="playerState.getTotalVP().toString()" [shape]="'square'"></app-vp>
-</div>
-<div class="pannel-card tr pannel-card-style">
-	<div class="pannel-card-icon">
-		<img src="/assets/other/tr.png" alt="">
+	<div class="pannel-card">
+		<app-vp [vpNumber]="playerState.getTotalVP().toString()" [shape]="'square'"></app-vp>
 	</div>
-	<p class="pannel-text">{{playerState.getTR()}}</p>
-</div>
-<div class="pannel-card forest pannel-card-style">
-	<div class="pannel-card-icon">
-		<img class="img-padding"
-			src="/assets/other/forest.png" alt="">
+	<div class="wrapper-pannel-card pannel-border">
+		<div class="pannel-card tr pannel-card-style">
+			<div class="pannel-card-icon">
+				<img src="/assets/other/tr.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getTR()}}</p>
+		</div>
+		<div [ngClass]="['separator']"></div>
+		<div class="pannel-card forest pannel-card-style">
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/forest.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getForest()}}</p>
+		</div>
 	</div>
-	<p class="pannel-text">{{playerState.getForest()}}</p>
-</div>
-<div class="pannel-card award-milestone pannel-card-style"
-	*ngIf="isDiscoveryActive() && gameOver">
-	<div class="pannel-card-icon">
-		<img class="img-padding"
-		src="/assets/other/award.png" alt="">
+	<div [ngClass]="['wrapper-pannel-card pannel-border', interfaceSize==='small'?'pannel-flex':'']">
+		<div class="pannel-card phase-upgraded pannel-card-style"
+			*ngIf="isDiscoveryActive()">
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/phase_upgrade.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getPhaseCardUpgradedCount()}}</p>
+		</div>
+		<div [ngClass]="['separator']"></div>
+		<div class="pannel-card research pannel-card-style">
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/research_card.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getResearchScan()}}</p>
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/research_card_keep.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getResearchKeep()}}</p>
+		</div>
+		<div [ngClass]="['separator']"></div>
+		<div class="pannel-card activables pannel-card-style">
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/activate.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getActivableCount()}}</p>
+		</div>
+		<div [ngClass]="['separator']"></div>
+		<div class="pannel-card cards-played pannel-card-style">
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/omnicard.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getPlayedProjectCardCount()}}</p>
+		</div>
 	</div>
-	<p class="pannel-text">{{playerState.getAwardsVp()}}</p>
-	<div class="pannel-card-icon">
-		<img class="img-padding"
-		src="/assets/other/milestone.png" alt="">
-	</div>
-	<p class="pannel-text">{{playerState.getMilestonesVp()}}</p>
-</div>
-<div class="pannel-card phase-upgraded pannel-card-style"
-	*ngIf="isDiscoveryActive()">
-	<div class="pannel-card-icon">
-		<img class="img-padding"
-			src="/assets/other/phase_upgrade.png" alt="">
-	</div>
-	<p class="pannel-text">{{playerState.getPhaseCardUpgradedCount()}}</p>
-</div>
-<div class="pannel-card research pannel-card-style">
-	<div class="pannel-card-icon">
-		<img class="img-padding"
-			src="/assets/other/research_card.png" alt="">
-	</div>
-	<p class="pannel-text">{{playerState.getResearchScan()}}</p>
-	<div class="pannel-card-icon">
-		<img class="img-padding"
-			src="/assets/other/research_card_keep.png" alt="">
-	</div>
-	<p class="pannel-text">{{playerState.getResearchKeep()}}</p>
-</div>
-<div class="pannel-card activables pannel-card-style">
-	<div class="pannel-card-icon">
-		<img class="img-padding"
-			src="/assets/other/activate.png" alt="">
-	</div>
-	<p class="pannel-text">{{playerState.getActivableCount()}}</p>
-</div>
-<div class="pannel-card cards-played pannel-card-style">
-	<div class="pannel-card-icon">
-		<img class="img-padding"
-			src="/assets/other/omnicard.png" alt="">
-	</div>
-	<p class="pannel-text">{{playerState.getPlayedProjectCardCount()}}</p>
 </div>

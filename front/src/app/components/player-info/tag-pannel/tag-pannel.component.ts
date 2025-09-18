@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagCardComponent } from '../tag-card/tag-card.component';
 import { TagInfo } from '../../../interfaces/global.interface';
-import { myUUID } from '../../../types/global.type';
+import { myUUID, SettingInterfaceSize } from '../../../types/global.type';
 
 @Component({
     selector: 'app-tag-pannel',
@@ -16,6 +16,7 @@ import { myUUID } from '../../../types/global.type';
 export class TagPannelComponent {
 	@Input() playerId!: myUUID;
 	@Input() tagState!: TagInfo[];
+	@Input() interfaceSize!: SettingInterfaceSize
 
 	ngOnInit(): void {
 

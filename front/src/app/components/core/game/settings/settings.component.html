@@ -23,6 +23,10 @@
 				<p>Hand Card size :</p>
 				<app-button-carousel [button]="_carouselHandCardSize" (valueChanged)="onCarouselButtonClicked(_carouselHandCardSize, $event)"></app-button-carousel>
 			</div>
+			<div class="wrapper-setting">
+				<p>Interface size :</p>
+				<app-button-carousel [button]="_carouselInterfaceSize" (valueChanged)="onCarouselButtonClicked(_carouselInterfaceSize, $event)"></app-button-carousel>
+			</div>
 		</div>
 	</div>
 	<app-non-event-button class="button-close" [button]="_closeButton" [shape]="'hex'" (buttonClicked)="closeSettingsPannel()"></app-non-event-button>

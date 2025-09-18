@@ -1,3 +1,20 @@
-<app-global-pannel [playerId]="playerId" [playerState]="_playerState" [playerIsReady]="playerIsReady" [playerPhase]="playerPhase" [currentPhase]="currentPhase" [gameOver]="gameOver"> </app-global-pannel>
-<app-ressource-pannel [playerId]="playerId" [ressource]="_playerState.getRessources()" [handSize]="_playerState.getHandCurrentSize()"></app-ressource-pannel>
-<app-tag-pannel [playerId]="playerId" [tagState]="_playerState.getTags()"></app-tag-pannel>
+<app-global-pannel
+	[playerId]="playerId"
+	[playerState]="_playerState"
+	[playerIsReady]="playerIsReady"
+	[playerPhase]="playerPhase"
+	[currentPhase]="currentPhase"
+	[gameOver]="gameOver"
+	[interfaceSize]="_interfaceSize">
+</app-global-pannel>
+<app-ressource-pannel
+	[playerId]="playerId"
+	[ressource]="_playerState.getRessources()"
+	[handSize]="_playerState.getHandCurrentSize()"
+	[interfaceSize]="_interfaceSize">
+</app-ressource-pannel>
+<app-tag-pannel
+	[playerId]="playerId"
+	[tagState]="_playerState.getTags()"
+	[interfaceSize]="_interfaceSize">
+</app-tag-pannel>

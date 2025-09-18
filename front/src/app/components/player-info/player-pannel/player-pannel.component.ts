@@ -9,7 +9,8 @@ import { RessourcePannelComponent } from '../ressource-pannel/ressource-pannel.c
 import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
 import { expandCollapseVertical } from '../../../animations/animations';
 import { Subject, takeUntil } from 'rxjs';
-import { myUUID } from '../../../types/global.type';
+import { myUUID, SettingInterfaceSize } from '../../../types/global.type';
+import { GameParamService } from '../../../services/core-game/game-param.service';
 
 @Component({
     selector: 'app-player-pannel',
@@ -35,10 +36,14 @@ export class PlayerPannelComponent implements OnInit, OnDestroy{
 
 	private isClient: boolean = this.gameStateService.isClient(this.playerId)
 	private destroy$ = new Subject<void>()
-
-	constructor(private gameStateService: GameState){}
+	_interfaceSize!: SettingInterfaceSize
+	constructor(
+		private gameStateService: GameState,
+		private gameParam: GameParamService
+	){}
 
 	ngOnInit(){
+		this.gameParam.currentInterfaceSize.subscribe(size => this._interfaceSize = size)
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateClientState(state))
 		this.gameStateService.currentGroupPlayerState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updatePlayerState(state))
 		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe(ready => this.updatePlayerReady(ready))

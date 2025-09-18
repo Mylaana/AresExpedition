@@ -5,7 +5,7 @@ import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { ButtonCarouselComponent } from '../../../tools/buttons/button-carousel/button-carousel.component';
-import { SETTING_CARD_SIZE, SETTING_DEFAULT_CARD_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../../../global/global-const';
+import { SETTING_CARD_SIZE, SETTING_DEFAULT_CARD_SIZE, SETTING_INTERFACE_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../../../global/global-const';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class SettingsComponent {
 		this._carouselLanguage = ButtonDesigner.createCarouselButton('carousel', SETTING_SUPPORTED_LANGUAGE, this.gameParam.getCurrentLanguage())
 		this._carouselCardSize = ButtonDesigner.createCarouselButton('carousel', SETTING_CARD_SIZE, this.gameParam.getCurrentCardSize())
 		this._carouselHandCardSize = ButtonDesigner.createCarouselButton('carousel', SETTING_CARD_SIZE, this.gameParam.getCurrentHandCardSize())
-		//this._carouselInterfaceSize = ButtonDesigner.createCarouselButton('carousel', SETTING_SUPPORTED_LANGUAGE, this.gameParam.getCurrentLanguage())
+		this._carouselInterfaceSize = ButtonDesigner.createCarouselButton('carousel', SETTING_INTERFACE_SIZE, this.gameParam.getCurrentInterfaceSize())
 	}
 	public closeSettingsPannel(){
 		this.closeSettings.emit()
@@ -65,6 +65,10 @@ export class SettingsComponent {
 			}
 			case(this._carouselHandCardSize):{
 				this.gameParam.setNewHandCardSize(value)
+				break
+			}
+			case(this._carouselInterfaceSize):{
+				this.gameParam.setInterfaceSize(value)
 				break
 			}
 		}

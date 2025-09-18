@@ -1,3 +1,4 @@
-<div class="tag-pannel ares-card">
+<div class="tag-pannel ares-card"
+	[ngClass]="interfaceSize">
     <app-tag-card *ngFor="let tagCard of tagState" [tagState]="tagCard"></app-tag-card>
 </div>

@@ -7,16 +7,17 @@
 	position: relative;
     display: flex;
     align-items: center;
-    height: 100%;
+    height: calc(100% - 2px);
     padding-left: 5px;
     overflow: hidden;
 	@each $name, $value in colors.$colors {
 		&.#{$name}{
 			border-radius: 2px;
 			&.default{
-				aspect-ratio: 3.5;
+				aspect-ratio: 4; //acts as min width
+				width: calc(100% - 21px);
 				border: $value solid 1px;
-				border-left-width: 30px;
+				border-left-width: 15px;
 				background-color: rgba($value, .2);
 			}
 			&.short{
