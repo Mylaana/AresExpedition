@@ -27,6 +27,10 @@
 				<p>Interface size :</p>
 				<app-button-carousel [button]="_carouselInterfaceSize" (valueChanged)="onCarouselButtonClicked(_carouselInterfaceSize, $event)"></app-button-carousel>
 			</div>
+			<div class="wrapper-setting">
+				<p>Player pannel size :</p>
+				<app-button-carousel [button]="_carouselPlayerPannelSize" (valueChanged)="onCarouselButtonClicked(_carouselPlayerPannelSize, $event)"></app-button-carousel>
+			</div>
 		</div>
 	</div>
 	<app-non-event-button class="button-close" [button]="_closeButton" [shape]="'hex'" (buttonClicked)="closeSettingsPannel()"></app-non-event-button>

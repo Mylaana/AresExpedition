@@ -1,7 +1,7 @@
 <div class="wrapper-pannel"
-	[ngClass]="interfaceSize">
+	[ngClass]="pannelSize">
 	<ng-container *ngFor="let ressourceCard of ressource">
 		<app-ressource-card [ressource]="ressourceCard" [handSize]="handSize"></app-ressource-card>
-		<div [ngClass]="['separator']" *ngIf="ressourceCard.id<5 && !(ressourceCard.id===2 && interfaceSize==='small')"></div>
+		<div [ngClass]="['separator']" *ngIf="ressourceCard.id<5 && !(ressourceCard.id===2 && pannelSize==='small')"></div>
 	</ng-container>
 </div>

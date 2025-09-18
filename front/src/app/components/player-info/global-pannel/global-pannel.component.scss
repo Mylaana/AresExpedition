@@ -8,7 +8,7 @@
 
 	&.small{
 		flex-wrap: wrap;
-		width: 350px;
+		width: 400px;
 		height: calc(var(--interface-line) * 2 + var(--interface-line-gap) + 4px);
 	}
 }
@@ -33,7 +33,6 @@
 	}
 	&.activables{
 		min-width: 35px;
-		padding-right: 5px;
 		& img{
 			width: 55%;
 		}
@@ -107,7 +106,10 @@ p{
 }
 app-player-name{
 	height: var(--interface-line);
-	flex: 1;
+	&.small{
+		min-width: 90%;
+		flex: 1;
+	}
 }
 .separator{
 	border-left: rgba(rgb(255, 129, 25), .5) solid 2px;

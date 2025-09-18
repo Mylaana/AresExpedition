@@ -5,7 +5,7 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
-import { RGB } from '../../../types/global.type';
+import { RGB, SettingInterfaceSize } from '../../../types/global.type';
 
 interface PlayerPhaseSelection {
 	color: RGB
@@ -25,6 +25,7 @@ interface PlayerPhaseSelection {
 export class LeftPannelComponent implements OnInit, OnDestroy{
 	@Input() selectedPhaseList!: SelectablePhaseEnum[]
 	@Input() currentPhase!: NonSelectablePhaseEnum
+	@Input() interfaceSize!: SettingInterfaceSize
 
 	groupState!: PlayerStateModel[]
 	phaseSelection!: PlayerPhaseSelection[]

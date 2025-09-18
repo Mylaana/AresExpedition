@@ -1,5 +1,5 @@
 <div class="wrapper-pannel"
-	[ngClass]="interfaceSize">
+	[ngClass]="pannelSize">
     <div class="previous-phase-selected" *ngIf="!gameOver">
         <div class="pannel-image">
 			<img *ngIf="currentPhase=='PLANIFICATION' && playerPhase.previousSelectedPhase.toString()!='UNDEFINED'"
@@ -15,7 +15,7 @@
 				alt="">
         </div>
     </div>
-	<app-player-name [name]="playerState.getName()" [color]="playerState.getColor()"></app-player-name>
+	<app-player-name [ngClass]="pannelSize" [name]="playerState.getName()" [color]="playerState.getColor()"></app-player-name>
 	<div class="pannel-card">
 		<app-vp [vpNumber]="playerState.getTotalVP().toString()" [shape]="'square'"></app-vp>
 	</div>
@@ -35,7 +35,7 @@
 			<p class="pannel-text">{{playerState.getForest()}}</p>
 		</div>
 	</div>
-	<div [ngClass]="['wrapper-pannel-card pannel-border', interfaceSize==='small'?'pannel-flex':'']">
+	<div [ngClass]="['wrapper-pannel-card pannel-border', pannelSize==='small'?'pannel-flex':'']">
 		<div class="pannel-card phase-upgraded pannel-card-style"
 			*ngIf="isDiscoveryActive()">
 			<div class="pannel-card-icon">

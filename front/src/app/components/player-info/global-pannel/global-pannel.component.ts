@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { PlayerPhase } from '../../../interfaces/global.interface';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
-import { myUUID, SettingInterfaceSize } from '../../../types/global.type';
+import { myUUID, SettingInterfaceSize, SettingPlayerPannelSize } from '../../../types/global.type';
 import { VpComponent } from '../../tools/vp/vp.component';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { GameOption } from '../../../services/core-game/create-game.service';
@@ -27,7 +27,7 @@ export class GlobalPannelComponent implements OnInit{
 	@Input() playerPhase!: PlayerPhase
 	@Input() currentPhase!: NonSelectablePhaseEnum
 	@Input() gameOver!: boolean
-	@Input() interfaceSize!: SettingInterfaceSize
+	@Input() pannelSize!: SettingPlayerPannelSize
 
 	private gameOptions!: GameOption
 

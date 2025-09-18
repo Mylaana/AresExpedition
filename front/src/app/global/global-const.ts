@@ -1,5 +1,5 @@
 import { SelectablePhaseEnum } from "../enum/phase.enum"
-import { RessourceType, SettingCardSize, SettingInterfaceSize, SettingSupportedLanguage, TagType } from "../types/global.type"
+import { RessourceType, SettingCardSize, SettingInterfaceSize, SettingPlayerPannelSize, SettingSupportedLanguage, TagType } from "../types/global.type"
 import { ActionPhaseType, ConstructionPhaseType, DevelopmentPhaseType, ProductionPhaseType, ResearchPhaseType } from "../types/phase-card.type"
 
 //export const GLOBAL_GAME_ID = "1"
@@ -50,3 +50,4 @@ export const SETTING_DEFAULT_LANGUAGE: SettingSupportedLanguage = 'en'
 export const SETTING_CARD_SIZE: SettingCardSize[] = ['small','medium']
 export const SETTING_DEFAULT_CARD_SIZE: SettingCardSize = 'medium'
 export const SETTING_INTERFACE_SIZE: SettingInterfaceSize[] = ['small', 'medium']
+export const SETTING_PLAYERPANNEL_SIZE: SettingPlayerPannelSize[] = ['small', 'medium']

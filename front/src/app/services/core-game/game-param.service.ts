@@ -1,9 +1,9 @@
 import { ElementRef, Injectable, NgZone } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { BehaviorSubject, debounceTime, filter, fromEvent, map, startWith } from 'rxjs'
-import { SettingCardSize, SettingInterfaceSize, SettingSupportedLanguage } from '../../types/global.type'
+import { SettingCardSize, SettingInterfaceSize, SettingPlayerPannelSize, SettingSupportedLanguage } from '../../types/global.type'
 import { PlayableCardModel } from '../../models/cards/project-card.model'
-import { SETTING_CARD_SIZE, SETTING_INTERFACE_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/global-const'
+import { SETTING_CARD_SIZE, SETTING_INTERFACE_SIZE, SETTING_PLAYERPANNEL_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/global-const'
 
 interface WindowSize {
 	width: number,
@@ -110,8 +110,9 @@ export class GameParamService {
 	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
 	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
 	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
-	private interfaceSize = new BehaviorSubject<SettingInterfaceSize>('small')
+	private interfaceSize = new BehaviorSubject<SettingInterfaceSize>('medium')
 	private windowSize = new BehaviorSubject<WindowSize>({height:0, width:0})
+	private playerPannelSize = new BehaviorSubject<SettingPlayerPannelSize>('medium')
 
 	currentDebug = this.debug.asObservable()
 	currentGameId = this.gameIdSubject.asObservable()
@@ -121,10 +122,10 @@ export class GameParamService {
 	currentHandCardSize = this.handCardSize.asObservable()
 	currentInterfaceSize = this.interfaceSize.asObservable()
 	currentWindowSize = this.windowSize.asObservable()
+	currentPlayerPannelSize = this.playerPannelSize.asObservable()
 
 	constructor(
 		private router: Router,
-		//private elRef: ElementRef
 		private ngZone: NgZone
 	){
 	  this.router.events
@@ -136,7 +137,6 @@ export class GameParamService {
 	  	this.updateParams()
 		this.updateCardCssVariables('medium')
 		this.updateCardCssVariables('small')
-		//fromEvent(window, 'resize').pipe(debounceTime(10)).subscribe(() => {this.adjustInterfaceSize({window})});
 		this.ngZone.runOutsideAngular(() => {
 			fromEvent(window, 'resize')
 				.pipe(
@@ -208,6 +208,16 @@ export class GameParamService {
 		}
 		this.interfaceSize.next(value as SettingInterfaceSize)
 	}
+	getCurrentPlayerPannelSize(): string {
+		return this.playerPannelSize.getValue()
+	}
+	setPlayerPannelSize(value: string){
+		if(!SETTING_PLAYERPANNEL_SIZE.includes(value as SettingPlayerPannelSize)){
+			console.error('UNSUPPORTED PLAYER PANNEL SIZE: ', value)
+			return
+		}
+		this.playerPannelSize.next(value as SettingPlayerPannelSize)
+	}
 	private applyCssVars(vars: Record<string, string>) {
 		const root = document.documentElement;
 		for (const [key, value] of Object.entries(vars)) {
@@ -226,10 +236,8 @@ export class GameParamService {
 					this.interfaceSize.next('small')
 					this.cardSize.next('small')
 					this.handCardSize.next('small')
+					this.playerPannelSize.next('small')
 				break
-			}
-			default:{
-				this.interfaceSize.next('medium')
 			}
 		}
 	}

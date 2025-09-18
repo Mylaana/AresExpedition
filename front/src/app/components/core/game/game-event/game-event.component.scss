@@ -28,51 +28,51 @@ app-non-event-button, app-event-main-button{
 	display: flex;
 	height: fit-content;
 	padding-left: 20px;
-	padding-top: 20px;
+	padding-top: 30px;
 	&.small{
 		padding-left: 15px;
-		padding-top: 15px;
+		padding-top: 25px;
 	}
 	& > div {
 		position: relative;
 		&.rollback{
 			&.small{
-				top: 31px;
-				left: -9px;
+				top: -15px;
+				left: -12px;
 			}
 			&.medium {
-				top: 43px;
+				top: -20px;
 				left: -14px;
 			}
 		}
 		&.sell{
 			&.small{
-				top: 11px;
-				left: -18px;
+				top: 9px;
+				left: -19px;
 			}
 			&.medium {
-				top: 15px;
-				left: -27px;
+				top: 12px;
+				left: -24px;
 			}
 		}
 		&.upgrade{
 			&.small{
-				top: 31px;
+				top: -15px;
 				left: -26px;
 			}
 			&.medium {
-				top: 43px;
-				left: -40px;
+				top: -20px;
+				left: -34px;
 			}
 		}
 	}
 	& > .wrapper-event-button{
 		&--big{
 			&.small{
-				height: 60px;
+				height: 80px;
 			}
 			&.medium {
-				height: 80px;
+				height: 100px;
 			}
 		}
 		&--medium{

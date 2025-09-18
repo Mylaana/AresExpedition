@@ -5,7 +5,7 @@ import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { ButtonCarouselComponent } from '../../../tools/buttons/button-carousel/button-carousel.component';
-import { SETTING_CARD_SIZE, SETTING_DEFAULT_CARD_SIZE, SETTING_INTERFACE_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../../../global/global-const';
+import { SETTING_CARD_SIZE, SETTING_INTERFACE_SIZE, SETTING_PLAYERPANNEL_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../../../global/global-const';
 
 
 @Component({
@@ -27,6 +27,7 @@ export class SettingsComponent {
 	_carouselCardSize!: CarouselButton
 	_carouselHandCardSize!: CarouselButton
 	_carouselInterfaceSize!: CarouselButton
+	_carouselPlayerPannelSize!: CarouselButton
 
 	constructor(private gameParam: GameParamService){}
 	ngOnInit(): void {
@@ -37,6 +38,7 @@ export class SettingsComponent {
 		this._carouselCardSize = ButtonDesigner.createCarouselButton('carousel', SETTING_CARD_SIZE, this.gameParam.getCurrentCardSize())
 		this._carouselHandCardSize = ButtonDesigner.createCarouselButton('carousel', SETTING_CARD_SIZE, this.gameParam.getCurrentHandCardSize())
 		this._carouselInterfaceSize = ButtonDesigner.createCarouselButton('carousel', SETTING_INTERFACE_SIZE, this.gameParam.getCurrentInterfaceSize())
+		this._carouselPlayerPannelSize = ButtonDesigner.createCarouselButton('carousel', SETTING_PLAYERPANNEL_SIZE, this.gameParam.getCurrentPlayerPannelSize())
 	}
 	public closeSettingsPannel(){
 		this.closeSettings.emit()
@@ -69,6 +71,10 @@ export class SettingsComponent {
 			}
 			case(this._carouselInterfaceSize):{
 				this.gameParam.setInterfaceSize(value)
+				break
+			}
+			case(this._carouselPlayerPannelSize):{
+				this.gameParam.setPlayerPannelSize(value)
 				break
 			}
 		}

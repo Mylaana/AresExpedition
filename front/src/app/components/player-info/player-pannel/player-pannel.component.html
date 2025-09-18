@@ -5,16 +5,16 @@
 	[playerPhase]="playerPhase"
 	[currentPhase]="currentPhase"
 	[gameOver]="gameOver"
-	[interfaceSize]="_interfaceSize">
+	[pannelSize]="_pannelSize">
 </app-global-pannel>
 <app-ressource-pannel
 	[playerId]="playerId"
 	[ressource]="_playerState.getRessources()"
 	[handSize]="_playerState.getHandCurrentSize()"
-	[interfaceSize]="_interfaceSize">
+	[pannelSize]="_pannelSize">
 </app-ressource-pannel>
 <app-tag-pannel
 	[playerId]="playerId"
 	[tagState]="_playerState.getTags()"
-	[interfaceSize]="_interfaceSize">
+	[pannelSize]="_pannelSize">
 </app-tag-pannel>

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RessourceCardComponent } from '../ressource-card/ressource-card.component';
 import { RessourceInfo } from '../../../interfaces/global.interface';
-import { myUUID, SettingInterfaceSize } from '../../../types/global.type';
+import { myUUID, SettingPlayerPannelSize } from '../../../types/global.type';
 
 @Component({
     selector: 'app-ressource-pannel',
@@ -17,5 +17,5 @@ export class RessourcePannelComponent {
 	@Input() playerId!: myUUID;
 	@Input() ressource!: RessourceInfo[];
 	@Input() handSize!: number
-	@Input() interfaceSize!: SettingInterfaceSize
+	@Input() pannelSize!: SettingPlayerPannelSize
 }

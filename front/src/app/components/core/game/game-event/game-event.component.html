@@ -36,6 +36,7 @@
 	</div>
 	<app-left-pannel @enterFromLeft
 		*ngIf="currentPhase!='PLANIFICATION' && _selectedPhaseList.length!=0"
+		[interfaceSize]="_interfaceSize"
 		[currentPhase]="currentPhase"
 		[selectedPhaseList]="_selectedPhaseList">
 	</app-left-pannel>
