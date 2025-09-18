@@ -89,7 +89,7 @@ app-game-event{
 	align-items: top;
 	width: fit-content;
 
-	left: 5%;
+	left: 100px;
 	top: calc(100% - (var(--card-height) * .23));
 	transition: top $transition-delay ease;
 
@@ -127,7 +127,6 @@ app-game-event{
 	position: fixed;
 	display: flex;
 	justify-content: right;
-	$height: 6%;
 	top: calc(100% - var(--settings-button-size));
 	left: 0;
 	height: var(--settings-button-size);

@@ -1,9 +1,14 @@
-import { Injectable } from '@angular/core'
+import { ElementRef, Injectable, NgZone } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
-import { BehaviorSubject, filter } from 'rxjs'
-import { SettingCardSize, SettingSupportedLanguage } from '../../types/global.type'
+import { BehaviorSubject, debounceTime, filter, fromEvent, map, startWith } from 'rxjs'
+import { SettingCardSize, SettingInterfaceSize, SettingPlayerPannelSize, SettingSupportedLanguage } from '../../types/global.type'
 import { PlayableCardModel } from '../../models/cards/project-card.model'
-import { SETTING_CARD_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/global-const'
+import { SETTING_CARD_SIZE, SETTING_INTERFACE_SIZE, SETTING_PLAYERPANNEL_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/global-const'
+
+interface WindowSize {
+	width: number,
+	height: number
+}
 
 const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 	small: {
@@ -105,6 +110,9 @@ export class GameParamService {
 	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
 	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
 	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
+	private interfaceSize = new BehaviorSubject<SettingInterfaceSize>('medium')
+	private windowSize = new BehaviorSubject<WindowSize>({height:0, width:0})
+	private playerPannelSize = new BehaviorSubject<SettingPlayerPannelSize>('medium')
 
 	currentDebug = this.debug.asObservable()
 	currentGameId = this.gameIdSubject.asObservable()
@@ -112,8 +120,14 @@ export class GameParamService {
 	currentLanguage = this.language.asObservable()
 	currentCardSize = this.cardSize.asObservable()
 	currentHandCardSize = this.handCardSize.asObservable()
+	currentInterfaceSize = this.interfaceSize.asObservable()
+	currentWindowSize = this.windowSize.asObservable()
+	currentPlayerPannelSize = this.playerPannelSize.asObservable()
 
-	constructor(private router: Router){
+	constructor(
+		private router: Router,
+		private ngZone: NgZone
+	){
 	  this.router.events
 		.pipe(filter(event => event instanceof NavigationEnd))
 		.subscribe(() => {
@@ -123,6 +137,23 @@ export class GameParamService {
 	  	this.updateParams()
 		this.updateCardCssVariables('medium')
 		this.updateCardCssVariables('small')
+		this.ngZone.runOutsideAngular(() => {
+			fromEvent(window, 'resize')
+				.pipe(
+					map(() => ({
+						width: window.innerWidth,
+						height: window.innerHeight,
+					})),
+					startWith({
+						width: window.innerWidth,
+						height: window.innerHeight,
+					})
+				)
+				.subscribe(size => {
+					this.ngZone.run(() => this.windowSize.next(size))
+				});
+		});
+		this.adjustInterfaceSizeAtStart()
 	}
 
 	private updateParams() {
@@ -167,10 +198,47 @@ export class GameParamService {
 	updateCardCssVariables(size: SettingCardSize) {
 		this.applyCssVars(CARD_SIZE_MAP[size]);
 	}
+	getCurrentInterfaceSize(): string {
+		return this.interfaceSize.getValue()
+	}
+	setInterfaceSize(value: string){
+		if(!SETTING_INTERFACE_SIZE.includes(value as SettingInterfaceSize)){
+			console.error('UNSUPPORTED INTERFACE SIZE: ', value)
+			return
+		}
+		this.interfaceSize.next(value as SettingInterfaceSize)
+	}
+	getCurrentPlayerPannelSize(): string {
+		return this.playerPannelSize.getValue()
+	}
+	setPlayerPannelSize(value: string){
+		if(!SETTING_PLAYERPANNEL_SIZE.includes(value as SettingPlayerPannelSize)){
+			console.error('UNSUPPORTED PLAYER PANNEL SIZE: ', value)
+			return
+		}
+		this.playerPannelSize.next(value as SettingPlayerPannelSize)
+	}
 	private applyCssVars(vars: Record<string, string>) {
 		const root = document.documentElement;
 		for (const [key, value] of Object.entries(vars)) {
 			root.style.setProperty(key, value);
+		}
+	}
+	private adjustInterfaceSizeAtStart(){
+		let size = this.windowSize.getValue()
+		const root = document.documentElement;
+		root.style.setProperty('--interface-line', '30px');
+		root.style.setProperty('--interface-line-gap', '3px');
+		root.style.setProperty('--player-pannel-padding', '1px');
+		root.style.setProperty('--player-pannel-border', '1px');
+			switch(true){
+				case(size.width<1800):{
+					this.interfaceSize.next('small')
+					this.cardSize.next('small')
+					this.handCardSize.next('small')
+					this.playerPannelSize.next('small')
+				break
+			}
 		}
 	}
   }

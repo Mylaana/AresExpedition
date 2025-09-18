@@ -1,21 +1,27 @@
 .wrapper-pannel {
     display: flex;
     align-items: center;
-    gap: 2px;
+	justify-content: space-between;
+    gap: var(--interface-line-gap);
 
     width: auto;
-    height: 100%;
 
 	border: rgba(rgb(255, 129, 25), .5) solid 1px;
 	border-radius: 5px;
-	padding-left: 1px;
-	padding-right: 1px;
+	padding: 1px;
+
+	height: var(--interface-line);
+	&.small{
+		flex-wrap: wrap;
+		height: calc(var(--interface-line) * 2 + var(--interface-line-gap));
+		width: 200px;
+	}
 }
 app-ressource-card{
-    height: 100%;
+    height: var(--interface-line);
 }
 .separator{
 	border-left: rgba(rgb(255, 129, 25), .5) solid 2px;
-	height: 80%;
 	margin: 1px;
+	height: calc(var(--interface-line) * .8);
 }

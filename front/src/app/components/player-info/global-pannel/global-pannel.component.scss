@@ -2,43 +2,68 @@
 .wrapper-pannel{
     display: flex;
     align-items: center;
-    gap: 3px;
+	justify-content: space-between;
+    gap: var(--interface-line-gap) var(--interface-line-gap);
+	height: var(--interface-line);
 
-    height: 100%;
+	&.small{
+		flex-wrap: wrap;
+		width: 400px;
+		height: calc(var(--interface-line) * 2 + var(--interface-line-gap) + 4px);
+	}
 }
 .pannel-card{
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: 100%;
+    height: var(--interface-line);
 }
 .pannel-card-style{
-	border: rgba(rgb(255, 129, 25), .5) solid 1px;
-	border-radius: 5px;
+	display: flex;
+	justify-content: space-around;
 	min-width: 50px;
-	padding-left: 2px;
+	max-width: 60px;
 	&.research{
 		min-width: 70px;
 		& p{
 			min-width: 0;
 		}
+				flex: 1;
 	}
 	&.activables{
-		min-width: 50px;
+		min-width: 35px;
 		& img{
-			width: 70%;
+			width: 55%;
 		}
+		flex: 1;
 	}
 	&.cards-played{
 		min-width: 50px;
+		flex: 1;
 	}
 	&.phase-upgraded{
 		min-width: 45px;
+		flex: 1;
 	}
 	&.tr{
 		min-width: 60px;
 	}
+	&.forest {
+		min-width: 60px;
+	}
+}
+.wrapper-pannel-card{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.pannel-border{
+	border: rgba(rgb(255, 129, 25), .5) solid 1px;
+	border-radius: 5px;
+}
+.pannel-flex{
+	flex: 1;
 }
 .img-padding{
 	height: 80%;
@@ -64,7 +89,7 @@
     }
 }
 .previous-phase-selected{
-	height: 100%;
+	height: var(--interface-line);
 	aspect-ratio: 1;
 }
 p{
@@ -75,10 +100,19 @@ p{
         margin: 0px;
         padding: 0;
         border-radius: 25%;
-        min-width: 20px;
+        //min-width: 20px;
     }
 	text-align: center;
 }
 app-player-name{
-	height: 100%;
+	height: var(--interface-line);
+	&.small{
+		min-width: 90%;
+		flex: 1;
+	}
+}
+.separator{
+	border-left: rgba(rgb(255, 129, 25), .5) solid 2px;
+	margin: 1px;
+	height: calc(var(--interface-line) * .8);
 }

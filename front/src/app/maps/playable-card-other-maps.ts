@@ -1164,7 +1164,6 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 			{ name: 'megacredit', valueStock: 3 },
 			{ name: 'titanium', valueStock: 1 }
 		]),
-		//EventFactory.simple.scanKeep({scan:15, keep:2}, DeckQueryOptionsEnum.ringCom)
 	],
 	//Lili volunteering initiative
 	'CF5': () => [
@@ -1349,7 +1348,7 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	//Point Luna
 	'CF1': (s)=> [{name:'megacredit', valueStock: Math.floor(s.getTagsOfType('earth')/ 2)}],
 	//Ringcom
-	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /3)}],
+	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /2)}],
 	//Aridor
 	'CF6': (s)=> [{name:'megacredit', valueStock:s.getDifferentTagTypeCount()}],
 	//Lunar Embassy

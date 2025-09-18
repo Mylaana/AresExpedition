@@ -4,20 +4,7 @@
 
     margin: 2px;
     width: 100%;
-	gap: 5px 10px;
-	@media (min-width: 1920px) {
-		flex-direction: row;
-		justify-content: space-between;
-	}
-	@media (max-width: 1919px) {
-		flex-direction: column;
-	}
-}
-app-global-pannel, app-ressource-pannel, app-tag-pannel{
-    height: 100%;
-    width: fit-content;
-	height: 30px;
-	@media (max-width: 1919px) {
-		height: 25px;
-	}
+	gap: 5px;
+	flex-direction: row;
+	justify-content: space-between;
 }

@@ -1,7 +1,6 @@
 @use '../../../../styles/abstracts/colors' as colors;
 $padding: 7px;
-$padding-small: 5px;
-:host{
+.wrapper-main{
 	z-index: 1000;
 	position: fixed;
 	display: flex;
@@ -9,48 +8,29 @@ $padding-small: 5px;
 	align-items: left;
 	height: auto;
 	min-width: 60px;
-	top: 34%;
 	border-left: 0;
 	overflow: visible;
 	padding: $padding;
 
 	margin-top: 5px;
 	margin-bottom: 5px;
-	@media (max-width: 1919px) {
-		padding: $padding-small;
-	}
-}
-.background{
-	position: absolute;
-	z-index: -1;
-	height: 100%;
-	width: calc(60px + $padding * 2);
-	top: 0;
-	left: 0;
-	border-radius: 10px;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-	@media (max-width: 1919px) {
-		width: calc(40px + $padding-small * 2);
+
+	top: 320px;
+	&.small{
+		top: 250px;
+		min-width: 40px;
 	}
 }
 .wrapper-phase{
 	display: flex;
 	gap: $padding *2.5;
-	@media (max-width: 1919px) {
-		gap: $padding-small *2.5;
-	}
 }
 .wrapper-image{
-	width: 40px;
-
 	filter: grayscale(80%);
 	& ::ng-deep app-text-with-image img{
 		width: 100%;
 	}
-
 	&.current{
-		width: 60px;
 		filter: grayscale(0);
 		border-radius: 5px;
 		box-shadow: 0 0 5px 3px var(--color-ares-orange);
@@ -64,9 +44,6 @@ $padding-small: 5px;
 			width: 100%;
 			aspect-ratio: 1;
 		}
-	}
-	@media (max-width: 1919px) {
-		width: 40px;
 	}
 }
 .wrapper-next{
@@ -86,9 +63,6 @@ $padding-small: 5px;
 			aspect-ratio: 1;
 		}
 	}
-	@media (max-width: 1919px) {
-		width: 40px;
-	}
 }
 .wrapper-player-selected{
 
@@ -99,12 +73,6 @@ $padding-small: 5px;
 	width: fit-content;
 	height: 40px;
 	gap: 3px;
-	&.current{
-		height: 60px;
-	}
-	@media (max-width: 1919px) {
-		height: 40px;
-	}
 }
 .wrapper-color{
 	width: 12px;
@@ -126,5 +94,17 @@ $padding-small: 5px;
     }
 	@media (max-width: 1919px) {
 		width: 9px;
+	}
+}
+.small{
+	height: 30px;
+	&.current{
+		height: 40px;
+	}
+}
+.medium{
+	height: 40px;
+	&.current{
+		height: 60px;
 	}
 }

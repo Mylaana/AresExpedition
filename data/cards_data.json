@@ -1093,7 +1093,7 @@
             "en": "$other_temperature$",
             "fr": "$other_temperature$"
         },
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "1-4$ressource_heat$: 1-4$ressource_plant$",
             "fr": ""
@@ -1564,7 +1564,7 @@
             "en": "ACTION: Spend any amount of heat to gain that many MC.",
             "fr": "ACTION: D\u00e9pensez n'importe quelle quantit\u00e9 de chaleur pour gagner une m\u00eame quantit\u00e9 de MC. "
         },
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "-X$ressource_heat$: $ressource_megacreditvoid_X$",
             "fr": ""
@@ -1725,7 +1725,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "validated",
+        "status": "implemented",
         "actionTextOption1": {
             "en": "$ressource_microbe$",
             "fr": ""
@@ -1782,7 +1782,7 @@
             "en": "EFFECT: When you play a card, you can spend 1 plant to reduce the cost of the card by 5 MC.",
             "fr": "EFFET: Lorsque vous jouez une carte, vous pouvez d\u00e9penser 1 plante pour r\u00e9duire le coput associ\u00e9 de 5 MC. "
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -2366,7 +2366,7 @@
             "en": "Add 2 resources to a card that already has resources.",
             "fr": "Ajoutez 2 ressources \u00e0 une carte stockant des ressources. "
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -6410,7 +6410,7 @@
             "fr": ""
         },
         "startingMegacredits": 27,
-        "status": "validated",
+        "status": "implemented",
         "vpScaling": "0",
         "balancedVersion": "add"
     },
@@ -6761,7 +6761,7 @@
             "fr": ""
         },
         "startingMegacredits": 30,
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "$ressource_megacreditvoid_1$",
             "fr": "$ressource_megacreditvoid_1$"
@@ -7523,7 +7523,7 @@
             "en": "-5$ressource_heat$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0",
         "balancedVersion": "add"
     },
@@ -9297,7 +9297,7 @@
             "fr": ""
         },
         "startingMegacredits": 37,
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "4$other_researchcard$$tag_wild$$skipline$$other_hand$$ressource_card$",
             "fr": ""
@@ -9358,7 +9358,7 @@
             "fr": ""
         },
         "startingMegacredits": 40,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9394,7 +9394,7 @@
             "science"
         ],
         "startingMegacredits": 20,
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "-X $ressource_science$",
             "fr": ""
@@ -9423,14 +9423,14 @@
         },
         "effectSummaryType2": "production",
         "effectSummaryText2": {
-            "en": "$ressource_card$/$tag_jovian$$tag_jovian$$tag_jovian$",
-            "fr": "$ressource_card$/$tag_jovian$$tag_jovian$$tag_jovian$"
+            "en": "$ressource_card$/$tag_jovian$$tag_jovian$",
+            "fr": ""
         },
         "effectText2": {
-            "en": "During the production phase, draw a card for every 3 $tag_jovian$ you have, including this.",
-            "fr": "Lors de la phase de production, piochez 1 carte par groupe de 3 $tag_jovian$ en votre possession, y compris celui-ci."
+            "en": "During the production phase, draw a card for every 2 $tag_jovian$ you have, including this.",
+            "fr": "Lors de la phase de production, piochez 1 carte par groupe de 2 $tag_jovian$ en votre possession, y compris celui-ci."
         },
-        "startingMegacredits": 38,
+        "startingMegacredits": 30,
         "status": "validated",
         "vpScaling": "0"
     },
@@ -9459,7 +9459,7 @@
             "fr": ""
         },
         "startingMegacredits": 40,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9483,7 +9483,7 @@
             "fr": "Lors de la phase de production, cette carte produit 1 MC par badge diff\u00e9rent en votre possession."
         },
         "startingMegacredits": 28,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -9520,7 +9520,7 @@
             "microbe"
         ],
         "startingMegacredits": 38,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10353,7 +10353,7 @@
             "en": "During the production phase, this card produces 1 heat for each $tag_science$ you have, including this one.",
             "fr": "Lors de la phase de production, cette carte produit 1 chaleur par $tag_science$ en votre possession, y compris celui-ci."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10380,7 +10380,7 @@
             "en": "During the production phase, this card produces 1 heat. When you play a $tag_space$ you pay 3 MC less for it.",
             "fr": "Lors de la phase de production, cette carte produit 1 chaleur. Lorsque vous jouez un $tag_space$ vous payez 3 MC de moins."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10413,7 +10413,7 @@
             "en": "$tag_plant$$tag_plant$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10440,7 +10440,7 @@
             "en": "During the production phase, this card produces 1 heat per $tag_plant$ you have, including this.",
             "fr": "Lors de la phase de production, cette carte produit 1 chaleur pour chaque $tag_plant$ en votre possession, y compris celui-ci."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10463,7 +10463,7 @@
             "en": "Discard $ressource_card$.$skipline$Draw $ressource_card$$ressource_card$$ressource_card$.",
             "fr": "D\u00e9faussez $ressource_card$.$skipline$ Piochez $ressource_card$$ressource_card$$ressource_card$."
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10501,7 +10501,7 @@
             "en": "$ressource_titanium$$ressource_titanium$",
             "fr": "$ressource_titanium$$ressource_titanium$"
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     }
 ]
