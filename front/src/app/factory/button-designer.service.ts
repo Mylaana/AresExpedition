@@ -45,6 +45,9 @@ export class ButtonDesigner{
 			case('alternativePayAnaerobicMicroorganisms'):{startEnabled=true; break}
 			case('carouselLeft'):{startEnabled=true; break}
 			case('carouselRight'):{startEnabled=true; break}
+			case('cardOverviewInvertTagSelection'):{startEnabled=true; break}
+			case('cardOverviewResetTagSelection'):{startEnabled=true; break}
+			case('cardOverviewNoneTag'):{startEnabled=true; break}
 
 			case('buyForest'):{startEnabled=true;break}
 			case('convertForest'):{startEnabled=true;break}
@@ -110,7 +113,8 @@ export class ButtonDesigner{
 			case('alternativePayRestructuredResources'):{caption='$ressource_plant$: -5$ressource_megacredit$';break}
 			case('carouselLeft'):{caption='';break}
 			case('carouselRight'):{caption='';break}
-
+			case('cardOverviewInvertTagSelection'):{caption='$other_invert$';break}
+			case('cardOverviewResetTagSelection'):{caption='$other_rollback$';break}
 
 			//settings
 			case('settings'):{caption='$other_settings$';break}

@@ -1,4 +1,6 @@
 <div class="wrapper-main" @fadeIn>
 	<h1 class="ares-title">CARD LIST</h1>
+	<app-card-overview-tag-list-filter (tagList)="onTagListUpdate($event)"></app-card-overview-tag-list-filter>
 	<app-playable-card-list [cardList]="_cardList"></app-playable-card-list>
 </div>
+<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>

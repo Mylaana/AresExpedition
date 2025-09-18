@@ -272,7 +272,18 @@ export class PlayableCardModel {
 		return false
 	}
 	hasTag(tag: TagType): boolean {
+		if(tag==='none'){
+			return this.tagsId.filter((el) => el!=-1).length===0
+		}
 		return this.hasTagId(Utils.toTagId(tag))
+	}
+	hasTagInList(tagList: TagType[]): boolean {
+		for(let t of tagList){
+			if(this.hasTag(t)){
+				return true
+			}
+		}
+		return false
 	}
 	addTagToStock(tag: TagType){
 		if(!this.tagStock){this.tagStock=[]}
@@ -280,9 +291,8 @@ export class PlayableCardModel {
 		this.applyTagStockToCurrentTags()
 	}
 	applyTagStockToCurrentTags(){
-		let stockIndex: number = 0
 		let remainingStock = Utils.jsonCopy(this.tagStock)
-		let tagCount = this.tagsId.length
+
 		//CLM exception
 		if(this.cardCode==='CF3'){return}
 
@@ -300,12 +310,6 @@ export class PlayableCardModel {
 		if(this.tagStock){dto.t = this.tagStock}
 		return dto
 	}
-	/*
-	public static fromInterface(input: PlayableCardInterface): PlayableCardModel {
-		let newCard: PlayableCardModel = new PlayableCardModel(input) //Object.assign(new PlayableCardModel(), Utils.jsonCopy(input))
-		newCard.cost = newCard.costInitial
-		return newCard
-	}*/
 	loadRessourceStockFromJson(stock: AdvancedRessourceStock[]){
 		this.stock = stock
 	}

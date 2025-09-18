@@ -406,5 +406,17 @@
         "description": "milestonevp",
         "imageUrl": "assets/other/milestone_vp.png",
         "name": "$other_milestone_vp$"
+    },
+    {
+        "id": 144,
+        "description": "invert",
+        "imageUrl": "assets/other/invert.png",
+        "name": "$other_invert$"
+    },
+    {
+        "id": 145,
+        "description": "none",
+        "imageUrl": "assets/other/none.png",
+        "name": "$other_none$"
     }
 ]

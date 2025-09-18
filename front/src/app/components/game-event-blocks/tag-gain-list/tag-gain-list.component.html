@@ -1,4 +1,4 @@
-<app-playable-card-list [cardList]="[_card]"></app-playable-card-list>
+<app-playable-card-list *ngIf="event" [cardList]="[_card]"></app-playable-card-list>
 <div [ngClass]="['wrapper-button', 'ares-border', 'ares-background']">
 	<app-non-event-button
 		*ngFor="let b of _buttonsId"
