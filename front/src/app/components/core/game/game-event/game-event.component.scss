@@ -9,10 +9,6 @@ $description-pannel-margin-left: 2%;
 	}
 }
 #command-pannel {
-	$command-pannel-padding: 1%;
-	$command-pannel-width: 240px;
-	//width: calc($command-pannel-width + $command-pannel-padding * 2);
-	width: 100%;
     z-index: 10;
     position: sticky;
     left: 0%;
@@ -27,13 +23,75 @@ $description-pannel-margin-left: 2%;
 app-non-event-button, app-event-main-button{
 	pointer-events: all;
 }
-.left-command, .right-command{
+.left-command{
+	position: relative;
 	display: flex;
-	gap: 5px;
-	height: 100%;
-	height: 100px;
-	max-height: 100%;
-	margin: 20px;
+	height: fit-content;
+	padding-left: 20px;
+	padding-top: 20px;
+	&.small{
+		padding-left: 15px;
+		padding-top: 15px;
+	}
+	& > div {
+		position: relative;
+		&.rollback{
+			&.small{
+				top: 31px;
+				left: -9px;
+			}
+			&.medium {
+				top: 43px;
+				left: -14px;
+			}
+		}
+		&.sell{
+			&.small{
+				top: 11px;
+				left: -18px;
+			}
+			&.medium {
+				top: 15px;
+				left: -27px;
+			}
+		}
+		&.upgrade{
+			&.small{
+				top: 31px;
+				left: -26px;
+			}
+			&.medium {
+				top: 43px;
+				left: -40px;
+			}
+		}
+	}
+	& > .wrapper-event-button{
+		&--big{
+			&.small{
+				height: 60px;
+			}
+			&.medium {
+				height: 80px;
+			}
+		}
+		&--medium{
+			&.small{
+				height: 42px;
+			}
+			&.medium {
+				height: 56px;
+			}
+		}
+		&--small{
+			&.small{
+				height: 30px;
+			}
+			&.medium {
+				height: 40px;
+			}
+		}
+	}
 }
 .wrapper-card-selector{
     width: 100%;
@@ -64,17 +122,6 @@ app-non-event-button, app-event-main-button{
 }
 app-hexed-tooltip-background{
 	width: 100%;
-}
-.wrapper-event-button{
-	&--big{
-		height: 100%;
-	}
-	&--medium{
-		height: 70%;
-	}
-	&--small{
-		height: 50%;
-	}
 }
 app-group-waiting{
 	height: 100%;

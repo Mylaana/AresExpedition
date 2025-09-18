@@ -29,6 +29,8 @@ import { PlayerReadyModel } from '../../../../models/player-info/player-state.mo
 import { LeftPannelComponent } from '../../../game-event-blocks/left-pannel/left-pannel.component';
 import { GameOption } from '../../../../services/core-game/create-game.service';
 import { ConvertResourceComponent } from '../../../game-event-blocks/convert-resource/convert-resource.component';
+import { GameParamService } from '../../../../services/core-game/game-param.service';
+import { SettingInterfaceSize } from '../../../../types/global.type';
 
 //this component is the main controller, and view
 
@@ -65,6 +67,7 @@ export class GameEventComponent {
 	constructor(
 		private elRef: ElementRef, private renderer: Renderer2,
 		private gameStateService: GameState,
+		private gameParamService: GameParamService
 	){}
 	delete: EventBaseModel[] = []
 
@@ -95,6 +98,7 @@ export class GameEventComponent {
 	selectionActive: boolean = false
 
 	_selectedPhaseList: SelectablePhaseEnum[] = []
+	_interfaceSize!: SettingInterfaceSize
 	private gameOptions!: GameOption
 
 	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
@@ -118,6 +122,7 @@ export class GameEventComponent {
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
 		this.gameStateService.currentGroupPlayerReady.subscribe((groupReady) => this._groupReady = groupReady)
 		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(option => this.gameOptions = option)
+		this.gameParamService.currentInterfaceSize.subscribe(size => this._interfaceSize = size)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
