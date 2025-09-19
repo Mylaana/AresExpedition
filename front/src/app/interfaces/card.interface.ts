@@ -48,6 +48,7 @@ export interface PlayableCardInterface {
     effectSummaryOption2?: string,
 	scalingVp: boolean,
 	actionCaption?: LocalizedText[]
+	balancedVersion?: string
 
 	//not loaded from data
 

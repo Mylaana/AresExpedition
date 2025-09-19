@@ -43,7 +43,7 @@ export class CardOverviewTagListFilterComponent {
 
 		this.resetActiveTags()
 	}
-	private resetActiveTags(){
+	resetActiveTags(){
 		this.activeTags = []
 		for(let t of this._authorizedTagList){
 			this.activeTags.push(t)

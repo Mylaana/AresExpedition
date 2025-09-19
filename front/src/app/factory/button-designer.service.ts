@@ -48,6 +48,8 @@ export class ButtonDesigner{
 			case('cardOverviewInvertTagSelection'):{startEnabled=true; break}
 			case('cardOverviewResetTagSelection'):{startEnabled=true; break}
 			case('cardOverviewNoneTag'):{startEnabled=true; break}
+			case('cardOverviewDisplayAll'):{startEnabled=true; break}
+			case('cardOverviewDisplayBalanced'):{startEnabled=true; break}
 
 			case('buyForest'):{startEnabled=true;break}
 			case('convertForest'):{startEnabled=true;break}
@@ -115,6 +117,8 @@ export class ButtonDesigner{
 			case('carouselRight'):{caption='';break}
 			case('cardOverviewInvertTagSelection'):{caption='$other_invert$';break}
 			case('cardOverviewResetTagSelection'):{caption='$other_rollback$';break}
+			case('cardOverviewDisplayAll'):{caption='Display All';break}
+			case('cardOverviewDisplayBalanced'):{caption='Display$skipline$Balanced$skipline$only';break}
 
 			//settings
 			case('settings'):{caption='$other_settings$';break}

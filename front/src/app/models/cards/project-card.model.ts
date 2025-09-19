@@ -11,6 +11,7 @@ import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const"
 export class PlayableCardModel {
     cardCode!: string;
     origin!: string;
+	balancedVersion!: string;
     costInitial!: number;
 	cost!: number;
     tagsId!: number[];
@@ -75,6 +76,7 @@ export class PlayableCardModel {
 				this.setInitialStock(stock)
 			}
 		}
+		this.balancedVersion = raw.balancedVersion??''
 	}
 
 	static setLanguage(lang: SettingSupportedLanguage) {
