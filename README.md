@@ -52,9 +52,6 @@ autohex background height bug on being displayed after resolving another event o
 Rework Buildable system in playableCardComponent   
 
 ### Cards
-Create Event type :   
-Activation:   
-    - Droplist/Custom value selection on activation (card 32/47)    
 add trigger resolution priority   
 
 ### Interface
