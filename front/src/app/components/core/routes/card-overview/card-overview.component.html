@@ -1,4 +1,13 @@
 <div class="wrapper-main" @fadeIn>
 	<h1 class="ares-title">CARD LIST</h1>
-	<app-playable-card-list [cardList]="_cardList"></app-playable-card-list>
+	<div class="wrapper-filter">
+		<div class="wrapper-button ares-background ares-border">
+			<app-non-event-button [button]="_displayAllButton" [shape]="'xs'" [context]="'wildButton'" (buttonClicked)="onDisplayButtonClick(_displayAllButton)"></app-non-event-button>
+			<app-non-event-button [button]="_displayBalancedButton" [shape]="'xs'" [context]="'wildButton'" (buttonClicked)="onDisplayButtonClick(_displayBalancedButton)"></app-non-event-button>
+		</div>
+		<app-card-overview-tag-list-filter #tagListFilter [ngClass]="[_displayAllCards===false?'disabled':'']" (tagList)="onTagListUpdate($event)"></app-card-overview-tag-list-filter>
+	</div>
+	<app-balanced-cards-list @fadeIn *ngIf="_displayAllCards===false" [cardList]="_cardList"></app-balanced-cards-list>
+	<app-playable-card-list @fadeIn *ngIf="_displayAllCards===true" [cardList]="_cardList"></app-playable-card-list>
 </div>
+<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>

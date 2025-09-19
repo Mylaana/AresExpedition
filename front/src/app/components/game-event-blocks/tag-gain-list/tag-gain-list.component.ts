@@ -33,7 +33,7 @@ export class TagGainListComponent implements OnInit{
 	constructor(private cardService: ProjectCardInfoService){}
 	ngOnInit(): void {
 		let index = 0
-		this._authorizedTagList = this.getAuthorizedTagList(this.event as EventTagSelector)
+		this._authorizedTagList = this.getAuthorizedTagList()
 		for(let tag of this._authorizedTagList){
 			this.buttons.push(ButtonDesigner.createNonEventButton('tagGain', `$tag_${tag}$`))
 			this._buttonsId.push(index)
@@ -56,7 +56,9 @@ export class TagGainListComponent implements OnInit{
 	getButton(id: number): NonEventButton{
 		return this.buttons[id]
 	}
-	private getAuthorizedTagList(event: EventTagSelector): TagType[] {
+	private getAuthorizedTagList(): TagType[] {
+		if(!this.event){return GAME_TAG_LIST}
+		let event = this.event as EventTagSelector
 		return event.authorizedTagList??GAME_TAG_LIST
 	}
 }

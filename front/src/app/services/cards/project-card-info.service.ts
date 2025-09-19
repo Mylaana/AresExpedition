@@ -96,6 +96,7 @@ export class ProjectCardInfoService {
 			if (jsonCard.effectSummaryOption) {card.effectSummaryOption = jsonCard.effectSummaryOption}
 			if (jsonCard.actionTextOption1) {card.actionCaption?.push(jsonCard.actionTextOption1)}
 			if (jsonCard.actionTextOption2) {card.actionCaption?.push(jsonCard.actionTextOption2)}
+			if (jsonCard.balancedVersion) {card.balancedVersion = jsonCard.balancedVersion}
 
             cardList.push(card)
         }

@@ -49,6 +49,10 @@
 	&.hand{
 		justify-content: left;
 	}
+	&.cardOverviewBalanced{
+		//justify-content: space-between;
+		gap: 200px;
+	}
 }
 .background{
 	$list:('played', 'selector', 'development', 'construction');

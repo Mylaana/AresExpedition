@@ -28,6 +28,7 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'killCard' | 'lockBuilder'
 | 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage' | 'carouselLeft' | 'carouselRight'
 | 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
+| 'cardOverviewInvertTagSelection' | 'cardOverviewResetTagSelection' | 'cardOverviewNoneTag' | 'cardOverviewDisplayAll' | 'cardOverviewDisplayBalanced'
 export type ToggleButtonNames = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
 | 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade' | 'modeDeadHand'
 | 'modeAdditionalAwards'
@@ -35,7 +36,7 @@ export type CarouselButtonNames = 'carousel'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
-export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event' | 'wild'
+export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event' | 'wild' | 'none'
 export type GameItemType = TagType | RessourceType
 export type DrawRule = 'draw' | 'research' | 'scanKeep'
 export type myUUID = string
@@ -56,3 +57,4 @@ export type GameOptionName = 'discovery' |  'standardProjectUpgrade' | 'addition
 | 'foundations' | 'infrastructureMandatory'
 | 'promoCards' | 'fanmadeCards' | 'balancedCards'
 | 'initialDraft' | 'merger' | 'deadHand'
+export type GoToPage = 'cardOverviewBalanced'

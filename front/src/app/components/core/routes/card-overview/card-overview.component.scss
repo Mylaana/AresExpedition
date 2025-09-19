@@ -1,4 +1,5 @@
 :host{
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -11,7 +12,7 @@
 	justify-content: space-around;
 	align-items: center;
 	height: auto;
-	width: 100%;
+	width: 90%;
 	gap: 50px;
 	margin-top: 50px;
 	margin-bottom: 100px;
@@ -26,4 +27,33 @@ h1{
 }
 app-project-card-list{
 	height: fit-content;
+	width: 80%;
+}
+app-hexed-background{
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+}
+.wrapper-filter{
+	display: flex;
+	gap: 50px;
+}
+.wrapper-button{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	height: fit-content;
+	width: fit-content;
+	padding: 10px;
+}
+app-non-event-button{
+	height: 50px;
+	width: fit-content;
+}
+.disabled{
+	filter: grayscale(90%);
+	pointer-events: none;
 }

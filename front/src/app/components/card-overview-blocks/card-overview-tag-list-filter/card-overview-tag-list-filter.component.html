@@ -1,0 +1,11 @@
+<div [ngClass]="['wrapper-button', 'ares-border', 'ares-background']">
+	<app-non-event-button [button]="_resetTagSelection" [shape]="'xs'" [context]="'commandButton'" (buttonClicked)="onNonTagButtonClick(_resetTagSelection)"></app-non-event-button>
+	<app-non-event-button [button]="_invertTagSelection" [shape]="'xs'" [context]="'commandButton'" (buttonClicked)="onNonTagButtonClick(_invertTagSelection)"></app-non-event-button>
+	<app-non-event-button
+		*ngFor="let b of _tagButtonsId"
+		[ngClass]="[isActive(b)?'':'disabled']"
+		[button]="getButton(b)" [shape]="'hex'"
+		[context]="'wildButton'"
+		(buttonClicked)="onTagSelected(b)">
+	</app-non-event-button>
+</div>

@@ -31,7 +31,6 @@ export class AppComponent {
 	constructor(private router: Router){}
 
 	onClick(button: NonEventButton): void {
-		console.log(button)
 		if(button===this._home){
 			this.router.navigate([''])
 		}
