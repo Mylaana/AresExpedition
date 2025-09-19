@@ -57,3 +57,4 @@ export type GameOptionName = 'discovery' |  'standardProjectUpgrade' | 'addition
 | 'foundations' | 'infrastructureMandatory'
 | 'promoCards' | 'fanmadeCards' | 'balancedCards'
 | 'initialDraft' | 'merger' | 'deadHand'
+export type GoToPage = 'cardOverviewBalanced'

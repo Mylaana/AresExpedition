@@ -9,8 +9,14 @@
 			*ngIf="tooltip && _tooltipHovered"
 			@fadeIn>{{tooltip}}</p>
 		</div>
+		<div *ngIf="goToPage"
+			class="wrapper-gotopage">
+			<button (click)="onGoToPageClick()">
+				<img [src]="getGoToPageUrl()" alt="">
+			</button>
+		</div>
 	</div>
 	<div [ngClass]="['wrapper-toggle', button.locked?'locked':'']">
-		<app-button-wrapper [button]="button" (click)="onClick()"></app-button-wrapper>
+		<app-button-wrapper [button]="button" (click)="onToggleClick()"></app-button-wrapper>
 	</div>
 </div>

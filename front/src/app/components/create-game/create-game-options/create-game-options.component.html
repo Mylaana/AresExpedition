@@ -11,7 +11,7 @@
 			<div class="divider"></div>
 			<app-create-game-option-card [caption]="getCaption('promoCards')" [tooltip]="getTooltip('promoCards')" [button]="_expansionPromo" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<app-create-game-option-card [caption]="getCaption('fanmadeCards')" [tooltip]="getTooltip('fanmadeCards')" [button]="_expansionDevFanMade" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<app-create-game-option-card [caption]="getCaption('balancedCards')" [tooltip]="getTooltip('balancedCards')" [button]="_expansionBalancedCards" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('balancedCards')" [tooltip]="getTooltip('balancedCards')" [button]="_expansionBalancedCards" [goToPage]="'cardOverviewBalanced'" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<div class="wrapper-option-inner">
 			</div>
 		</div>

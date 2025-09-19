@@ -22,10 +22,8 @@ export class BalancedCardsListComponent implements OnInit {
 		this.generateBalancedPairs()
 	}
 	generateBalancedPairs(){
-		//this._balancedCardList = this.cardList.filter((el) => el.balancedVersion)
 		for(let c of this.cardList){
 			if(c.balancedVersion!='remove'){continue}
-			console.log(c.getTitle(), c.cardCode)
 			let pair: PlayableCardModel[] = []
 			let cardCode = c.cardCode
 			pair.push(c)

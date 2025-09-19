@@ -6,12 +6,12 @@ import { fadeIn } from '../../../../animations/animations';
 import { CommonModule } from '@angular/common';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { CardOverviewTagListFilterComponent } from '../../../card-overview-blocks/card-overview-tag-list-filter/card-overview-tag-list-filter.component';
-import { GAME_TAG_LIST } from '../../../../global/global-const';
-import { TagType } from '../../../../types/global.type';
+import { GoToPage, TagType } from '../../../../types/global.type';
 import { BalancedCardsListComponent } from '../../../card-overview-blocks/balanced-cards-list/balanced-cards-list.component';
 import { NonEventButton } from '../../../../models/core-game/button.model';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-card-overview',
@@ -33,12 +33,24 @@ export class CardOverviewComponent implements OnInit{
 	private allCards: PlayableCardModel[] = []
 
 	//_filteredTags = GAME_TAG_LIST
-	_displayAllCards: boolean = false
+	_displayAllCards: boolean = true
 
 	_displayAllButton: NonEventButton = ButtonDesigner.createNonEventButton('cardOverviewDisplayAll')
 	_displayBalancedButton: NonEventButton = ButtonDesigner.createNonEventButton('cardOverviewDisplayBalanced')
 
-	constructor(private cardInfoService: ProjectCardInfoService){}
+	constructor(
+		private cardInfoService: ProjectCardInfoService,
+		private router: Router
+	){
+		const nav = this.router.getCurrentNavigation();
+		if (nav?.extras.state) {
+			let filter: GoToPage = 'cardOverviewBalanced'
+			if(nav.extras.state['filter']===filter.toString()){
+				this._displayAllCards = false
+			}
+		}
+	}
+
 	ngOnInit(): void {
 		this.allCards = this.cardInfoService.getAllProjectCard()
 		this._cardList = this.allCards

@@ -418,5 +418,11 @@
         "description": "none",
         "imageUrl": "assets/other/none.png",
         "name": "$other_none$"
+    },
+    {
+        "id": 146,
+        "description": "none",
+        "imageUrl": "assets/other/go_to_page.png",
+        "name": "$other_gotopage$"
     }
 ]
