@@ -1,22 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ToggleButton } from '../../../models/core-game/button.model';
+import { NonEventButton, ToggleButton } from '../../../models/core-game/button.model';
 import { CreateGameOptionService, GameOption } from '../../../services/core-game/create-game.service';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CreateGameOptionCardComponent } from '../create-game-option-card/create-game-option-card.component';
 import { AnyButton, GameOptionName } from '../../../types/global.type';
 import { GameTextService } from '../../../services/core-game/game-text.service';
+import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 
 @Component({
   selector: 'app-create-game-options',
   imports: [
 	CommonModule,
-	CreateGameOptionCardComponent
+	CreateGameOptionCardComponent,
+	NonEventButtonComponent
   ],
   templateUrl: './create-game-options.component.html',
   styleUrl: './create-game-options.component.scss'
 })
 export class CreateGameOptionsComponent implements OnInit{
+	_activateAll!: NonEventButton
+	_deactivateAll!: NonEventButton
+
 	_expansionDiscovery!: ToggleButton
 	_expansionFoundations!: ToggleButton
 	_expansionPromo!: ToggleButton
@@ -35,6 +40,9 @@ export class CreateGameOptionsComponent implements OnInit{
 		private gameTextService: GameTextService
 	){}
 	ngOnInit(): void {
+		this._activateAll = ButtonDesigner.createNonEventButton('createGameOptionActivateAll')
+		this._deactivateAll = ButtonDesigner.createNonEventButton('createGameOptionDeactivateAll')
+
 		this._expansionDiscovery = ButtonDesigner.createToggleButton('expansionDiscovery')
 		this._expansionFoundations = ButtonDesigner.createToggleButton('expansionFoundations')
 		this._expansionPromo = ButtonDesigner.createToggleButton('expansionPromo')
@@ -79,5 +87,8 @@ export class CreateGameOptionsComponent implements OnInit{
 	}
 	getTooltip(option: GameOptionName): string {
 		return this.gameTextService.getGameOptionToolTip(option)
+	}
+	onAllOptionClick(button: NonEventButton){
+		this.createGameOptionService.toggleAllOptions(button===this._activateAll)
 	}
 }

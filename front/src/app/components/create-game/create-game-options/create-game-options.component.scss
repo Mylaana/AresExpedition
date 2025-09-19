@@ -1,11 +1,27 @@
 :host{
 	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
 	gap: 1px;
 	height: fit-content;
+	max-height: 500px;
+	flex: 1;
 	width: 100%;
-	gap: 5px;
+	gap: 10px;
+}
+.wrapper-all{
+	display: flex;
+	justify-content: space-around;
+	height: 30px;
+	width: 60%;
+}
+.wrapper-options{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	width: 100%;
+	max-height: 400px;
+	gap: 5px 5px;
 }
 .card-option{
 	display: flex;
@@ -18,10 +34,7 @@
 .wrapper-toggle{
 	height: 22px;
 }
-.wrapper-expansions,.wrapper-game-mode{
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
+.category{
 	width: 45%;
 	border: gray 2px solid;
 	border-radius: 10px;
