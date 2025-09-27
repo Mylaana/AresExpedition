@@ -1,6 +1,10 @@
-<div class="wrapper-expansions">
-	<div class="wrapper-option">
-		<h4>Expansions:</h4>
+<div class="wrapper-all">
+	<app-non-event-button [button]="_activateAll" [shape]="'large'" [context]="'commandButtonSmall'" (buttonClicked)="onAllOptionClick(_activateAll)"></app-non-event-button>
+	<app-non-event-button [button]="_deactivateAll" [shape]="'large'" [context]="'commandButtonSmall'" (buttonClicked)="onAllOptionClick(_deactivateAll)"></app-non-event-button>
+</div>
+<div class="wrapper-options">
+	<div class="wrapper-option category">
+		<h4>Additional Content:</h4>
 		<div class="wrapper-option-inner">
 			<app-create-game-option-card [caption]="getCaption('discovery')" [tooltip]="getTooltip('discovery')" [button]="_expansionDiscovery" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<app-create-game-option-card [caption]="getCaption('standardProjectUpgrade')" [tooltip]="getTooltip('standardProjectUpgrade')" [isSubCat]="true"  [button]="_modeStandardProjectPhaseUpgrade" (buttonClick)="onClick($event)"></app-create-game-option-card>
@@ -8,7 +12,13 @@
 			<div class="divider"></div>
 			<app-create-game-option-card [caption]="getCaption('foundations')" [tooltip]="getTooltip('foundations')" [button]="_expansionFoundations" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<app-create-game-option-card [caption]="getCaption('infrastructureMandatory')" [tooltip]="getTooltip('infrastructureMandatory')" [isSubCat]="true" [button]="_modeInfrastructureMandatory" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<div class="divider"></div>
+
+			<div class="wrapper-option-inner"></div>
+		</div>
+	</div>
+	<div class="wrapper-option category">
+		<h4>Additional Cards:</h4>
+		<div class="wrapper-option-inner">
 			<app-create-game-option-card [caption]="getCaption('promoCards')" [tooltip]="getTooltip('promoCards')" [button]="_expansionPromo" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<app-create-game-option-card [caption]="getCaption('fanmadeCards')" [tooltip]="getTooltip('fanmadeCards')" [button]="_expansionDevFanMade" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<app-create-game-option-card [caption]="getCaption('balancedCards')" [tooltip]="getTooltip('balancedCards')" [button]="_expansionBalancedCards" [goToPage]="'cardOverviewBalanced'" (buttonClick)="onClick($event)"></app-create-game-option-card>
@@ -16,9 +26,8 @@
 			</div>
 		</div>
 	</div>
-</div>
-<div class="wrapper-game-mode">
-	<div class="wrapper-option">
+
+	<div class="wrapper-option category">
 		<h4>Game mode:</h4>
 		<div class="wrapper-option-inner">
 			<app-create-game-option-card [caption]="getCaption('initialDraft')" [tooltip]="getTooltip('initialDraft')" [button]="_modeInitialDraft" (buttonClick)="onClick($event)"></app-create-game-option-card>

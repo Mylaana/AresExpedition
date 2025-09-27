@@ -71,4 +71,21 @@ export class CreateGameOptionService {
 	getGameOptions():GameOption {
 		return this.gameOptions.getValue()
 	}
+	toggleAllOptions(activate: boolean){
+		let newOptions: GameOption = {
+			discovery: activate,
+			foundations: activate,
+			promo: activate,
+			fanmade: activate,
+			balanced: activate,
+
+			initialDraft: true,
+			infrastructureMandatory: activate,
+			merger: activate,
+			standardUpgrade: activate,
+			deadHand: activate,
+			additionalAwards: activate
+		}
+		this.gameOptions.next(newOptions)
+	}
   }
