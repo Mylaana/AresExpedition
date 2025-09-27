@@ -1,4 +1,4 @@
-$player-color: ('blue', 'red', 'green', 'yellow', 'white', 'orange', 'purple');
+@use '../../../../../styles/abstracts/colors' as colors;
 .wrapper-main{
 	display: flex;
 	align-items: center;
@@ -45,42 +45,25 @@ p, a{
 	font-size: 1.1em;
 }
 .wrapper-player{
-	@each $color in $player-color{
-		&--#{$color}{
+	@each $name, $value in colors.$colors{
+		&--#{$name}{
 			display: flex;
 			border: solid 1px;
-			border-color: var(--color-ares-#{$color});
+			border-color: $value;
 			border-radius: 5px;
 			padding: 10px;
 			gap: 3%;
 		}
 	}
-	&--blue{
-		box-shadow: 0 0 3px 0px rgba(rgb(39, 177, 229), 1);
-		background-color: rgba(rgb(39, 177, 229), .3);
+	@each $name, $value in colors.$colors{
+		&--#{$name}{
+			border-color: $value;
+			box-shadow: 0 0 3px 0px rgba($value, 1);
+		}
 	}
-	&--red{
-		box-shadow: 0 0 3px 0px rgba(rgb(237, 53, 49), 1);
-		background-color: rgba(rgb(237, 53, 49), .3);
-	}
-	&--yellow{
-		box-shadow: 0 0 3px 1px rgba(yellow, 1);
-		background-color: rgba(yellow, .3);
-	}
-	&--green{
-		box-shadow: 0 0 3px 0px rgba(rgb(42, 180, 92), 1);
-		background-color: rgba(rgb(42, 180, 92), .3);
-	}
-	&--orange{
-		box-shadow: 0 0 3px 0px rgba(rgb(255, 129, 25), 1);
-		background-color: rgba(rgb(255, 129, 25), .3);
-	}
-	&--purple{
-		box-shadow: 0 0 3px 0px rgba(rgb(98, 70, 156), 1);
-		background-color: rgba(rgb(98, 70, 156), .3);
-	}
-	&--white{
-		box-shadow: 0 0 3px 2px rgba(white, 1);
-		background-color: rgba(white, .6);
+	@each $name, $value in colors.$player-background-colors{
+		&--#{$name}{
+			background-color: rgba($value, .3);
+		}
 	}
 }

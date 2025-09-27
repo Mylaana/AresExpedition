@@ -1,5 +1,5 @@
 <ng-container *ngFor="let button of _buttonList">
 	<div class="wrapper-button">
-		<app-non-event-button [button]="button" [context]="'commandButton'" [shape]="'selection_rounded_square'" (buttonClicked)="onPlayerNumberSelection(button)"></app-non-event-button>
+		<app-non-event-button [button]="button" [context]="'commandButton'" [shape]="'hex'" (buttonClicked)="onPlayerNumberSelection(button)"></app-non-event-button>
 	</div>
 </ng-container>

@@ -21,7 +21,6 @@ $shape-width: (
 );
 $disabled-color: gray;
 $disabled-border: color.scale(gray, $lightness: -15%);
-$color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 
 .wrapper-button{
 	height: 100%;
@@ -45,7 +44,6 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 		cursor: pointer;
 	}
 	&.disabled, .hovered.disabled{
-		//filter: grayscale(40%);
 		& .wrapper-elements{
 			filter: grayscale(80%);
 		}
@@ -171,9 +169,7 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 		}
 		&.enabled.hovered{
 			border: rgba(black, 0.55) solid 2px;
-			//background-color: rgba(rgb(255, 129, 25), 0.3);
 			background-color: rgba(black, 0.3);
-			//box-shadow: 2px 2px rgb(255, 129, 25);
 			&:active{
 				box-shadow: 1px 1px rgba(0, 0, 0, 0.5) ;
 				margin-top: 1px;
@@ -198,7 +194,6 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 	}
 	&--selection_rounded_square{
 		background-color: transparent;
-
 	}
 	&--hex_floating, &--action{
 		background: rgba(181, 128, 108, .8);
@@ -227,6 +222,9 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 		}
 		&.hovered::after {
 			opacity: 1;
+		}
+		&.pressed {
+			background-color: var(--color-ares-orange-light);
 		}
 
 	}
@@ -284,7 +282,6 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 		clip-path: polygon(0% 0%,calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, 0% 100%);
 	}
 	&--selection_rounded_square{
-		//aspect-ratio: 1;
 		border-radius: 10px;
 		width: 100%;
 	}
@@ -393,14 +390,14 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 	filter: grayscale(0%);
 }
 .color-button{
-	@each $color in $color-buttons{
-		&--#{$color}{
+	@each $name, $value in colors.$colors{
+		&--#{$name}{
 			position: relative;
 			pointer-events: all;
 			z-index: 1;
 			height: 100%;
-			aspect-ratio: 1.5;
-			background-color: var(--color-ares-#{$color});
+			flex: .7;
+			background-color: $value;
 			border-radius: 5px;
 			border: 0;
 			box-shadow: 0 0 2px 1px black;

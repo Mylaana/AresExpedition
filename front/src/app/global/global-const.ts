@@ -1,5 +1,5 @@
 import { SelectablePhaseEnum } from "../enum/phase.enum"
-import { RessourceType, SettingCardSize, SettingInterfaceSize, SettingPlayerPannelSize, SettingSupportedLanguage, TagType } from "../types/global.type"
+import { PlayerColor, RessourceType, SettingCardSize, SettingInterfaceSize, SettingPlayerPannelSize, SettingSupportedLanguage, TagType } from "../types/global.type"
 import { ActionPhaseType, ConstructionPhaseType, DevelopmentPhaseType, ProductionPhaseType, ResearchPhaseType } from "../types/phase-card.type"
 
 //export const GLOBAL_GAME_ID = "1"
@@ -45,6 +45,7 @@ export const GAME_GLOBAL_PARAMETER_OCEAN_MAX_STEP = 9
 export const GAME_RESSOURCE_TITANIUM_BASE_REDUCTION = 3
 export const GAME_RESSOURCE_STEEL_BASE_REDUCTION = 2
 export const GAME_CARD_SELL_VALUE = 3;
+export const GAME_PLAYER_COLOR_LIST: PlayerColor[] = ['blue', 'green', 'orange','purple','red','white','yellow', 'grey']
 
 export const SETTING_SUPPORTED_LANGUAGE: SettingSupportedLanguage[] = ['en', 'fr']
 export const SETTING_DEFAULT_LANGUAGE: SettingSupportedLanguage = 'en'

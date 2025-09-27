@@ -4,10 +4,14 @@
 		[class.hovered]="isHovered()"
 		[ngClass]="[
 			isEnabled()? 'enabled':'disabled',
-			shape?'button-shape--'+shape:''
+			shape?'button-shape--'+shape:'',
+			_isPressed?'pressed':''
 			]"
 		(mouseenter)="setHovered(true)"
 		(mouseleave)="setHovered(false)"
+		(mousedown)="_isPressed=true" 
+  		(mouseup)="_isPressed=false" 
+  		(mouseleave)="_isPressed=false"
 		(click)="onClick(button)">
 		<div class="disabled-grid"
 			*ngIf="!isEnabled()"></div>
@@ -22,7 +26,8 @@
 			</div>
 			<div [ngClass]="['button-background--'+shape, 'button-shape--'+shape, isEnabled()? 'enabled':'disabled']"
 				[class.warning]="button.warning"
-				[class.hovered]="isHovered()">
+				[class.hovered]="isHovered()"
+				[class.pressed]="_isPressed">
 			</div>
 			<div *ngIf="_style==='floating'"
 				[ngClass]="[isEnabled()? 'enabled':'disabled', 'button-border--' + shape]"

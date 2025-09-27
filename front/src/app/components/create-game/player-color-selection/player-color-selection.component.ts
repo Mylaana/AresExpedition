@@ -4,8 +4,7 @@ import { PlayerColor } from '../../../types/global.type';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { CommonModule } from '@angular/common';
-
-const colorList: PlayerColor[] = ['blue', 'green', 'orange','purple','red','white','yellow']
+import { GAME_PLAYER_COLOR_LIST } from '../../../global/global-const';
 
 @Component({
     selector: 'app-player-color-selection',
@@ -20,7 +19,7 @@ export class PlayerColorSelectionComponent implements OnInit{
 	@Output() colorPicked = new EventEmitter<PlayerColor>()
 	_buttonList: ColorButton[] = []
 	ngOnInit(): void {
-		for(let color of colorList){
+		for(let color of GAME_PLAYER_COLOR_LIST){
 			this._buttonList.push(
 				ButtonDesigner.createColorButton(color)
 			)
