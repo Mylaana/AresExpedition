@@ -41,7 +41,7 @@ export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jo
 export type GameItemType = TagType | RessourceType
 export type DrawRule = 'draw' | 'research' | 'scanKeep'
 export type myUUID = string
-export type PlayerColor = undefined | 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'white'
+export type PlayerColor = undefined | 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'white' | 'grey'
 export type PlayableCardType = 'project' | 'corporation'
 export type AnyButton = NonEventButton | CarouselButton | ToggleButton
 

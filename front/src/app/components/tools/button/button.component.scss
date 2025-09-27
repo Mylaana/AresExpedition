@@ -21,7 +21,6 @@ $shape-width: (
 );
 $disabled-color: gray;
 $disabled-border: color.scale(gray, $lightness: -15%);
-$color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 
 .wrapper-button{
 	height: 100%;
@@ -391,14 +390,14 @@ $color-buttons: ('blue', 'red', 'green', 'yellow', 'purple', 'orange', 'white');
 	filter: grayscale(0%);
 }
 .color-button{
-	@each $color in $color-buttons{
-		&--#{$color}{
+	@each $name, $value in colors.$colors{
+		&--#{$name}{
 			position: relative;
 			pointer-events: all;
 			z-index: 1;
 			height: 100%;
-			aspect-ratio: 1.5;
-			background-color: var(--color-ares-#{$color});
+			flex: .7;
+			background-color: $value;
 			border-radius: 5px;
 			border: 0;
 			box-shadow: 0 0 2px 1px black;

@@ -9,7 +9,18 @@ $colors: (
   "orange": rgb(255, 129, 25),
   "yellow": yellow,
   "white": white,
-  "corporation": rgb(215, 224, 231)
+  "corporation": rgb(215, 224, 231),
+  "grey": rgb(77, 77, 77),
+);
+$player-background-colors: (
+  "red": rgba(237, 53, 49, 0.3),
+  "blue": rgba(109, 173, 237, 0.3),
+  "green": rgba(42, 180, 92, 0.3),
+  "purple": rgba(164, 15, 228, 0.3),
+  "orange": rgba(255, 129, 25, 0.3),
+  "yellow": rgba(255, 255, 0, 0.3),
+  "white": rgba(255, 255, 255, 0.6),
+  "grey": rgba(120, 120, 120, 0.3),
 );
 
 $card-back-colors: (
