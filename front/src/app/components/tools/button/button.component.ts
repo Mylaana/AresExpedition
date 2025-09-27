@@ -29,6 +29,7 @@ export class ButtonComponent implements OnChanges {
 	private hovered: boolean = false
 	_style: style ='plain'
 	_color: PlayerColor
+	_isPressed: boolean = false
 
 	ngOnInit(): void {
 		switch(this.shape){
