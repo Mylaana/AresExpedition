@@ -5,3 +5,11 @@
     height: 100%;
     width: 100%;
 }
+img {
+  user-drag: none; // Safari/Chrome
+  -webkit-user-drag: none; 
+  -moz-user-drag: none; 
+  -o-user-drag: none; 
+  user-select: none;   
+  //pointer-events: none;
+}
