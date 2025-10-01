@@ -3,7 +3,9 @@ import { NavigationEnd, Router } from '@angular/router'
 import { BehaviorSubject, debounceTime, filter, fromEvent, map, startWith } from 'rxjs'
 import { SettingCardSize, SettingInterfaceSize, SettingPlayerPannelSize, SettingSupportedLanguage } from '../../types/global.type'
 import { PlayableCardModel } from '../../models/cards/project-card.model'
-import { SETTING_CARD_SIZE, SETTING_INTERFACE_SIZE, SETTING_PLAYERPANNEL_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/global-const'
+import { SETTING_CARD_SIZE, SETTING_DEFAULT_LANGUAGE, SETTING_INTERFACE_SIZE, SETTING_PLAYERPANNEL_SIZE, SETTING_SUPPORTED_LANGUAGE } from '../../global/global-const'
+import { ButtonBase } from '../../models/core-game/button.model'
+import { EventBaseModel } from '../../models/core-game/event.model'
 
 interface WindowSize {
 	width: number,
@@ -107,7 +109,7 @@ export class GameParamService {
 	private gameIdSubject = new BehaviorSubject<string | null>(null)
 	private clientIdSubject = new BehaviorSubject<string | null>(null)
 	private debug = new BehaviorSubject<boolean>(false)
-	private language = new BehaviorSubject<SettingSupportedLanguage>('en')
+	private language = new BehaviorSubject<SettingSupportedLanguage>(SETTING_DEFAULT_LANGUAGE)
 	private cardSize = new BehaviorSubject<SettingCardSize>('medium')
 	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
 	private interfaceSize = new BehaviorSubject<SettingInterfaceSize>('medium')
@@ -154,6 +156,7 @@ export class GameParamService {
 				});
 		});
 		this.adjustInterfaceSizeAtStart()
+		console.log(this.language.getValue())
 	}
 
 	private updateParams() {
@@ -170,6 +173,8 @@ export class GameParamService {
 		}
 		this.language.next(language as SettingSupportedLanguage)
 		PlayableCardModel.setLanguage(language as SettingSupportedLanguage)
+		ButtonBase.setLanguage(language as SettingSupportedLanguage)
+		EventBaseModel.setLanguage(language as SettingSupportedLanguage)
 	}
 	getCurrentLanguage(): string {
 		return this.language.getValue()

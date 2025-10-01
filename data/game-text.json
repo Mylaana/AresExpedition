@@ -7,9 +7,8 @@
             },
             "tooltip": {
                 "en": "Adds Upgradeable phase cards, Milestones, Awards and new cards.",
-                "fr": ""
+                "fr": "Ajoute des cartes phases am\u00e9liorables, des Objectifs, R\u00e9compenses et de nouvelles cartes."
             }
-
         },
         "standardProjectUpgrade": {
             "caption": {
@@ -18,9 +17,8 @@
             },
             "tooltip": {
                 "en": "Adds a standard project in Action phase to upgrade a phase card of your choice.",
-                "fr": ""
+                "fr": "Ajoute un projet standard en phase Action permettant d'am\u00e9liorer une carte Phase."
             }
-
         },
         "additionalAwards": {
             "caption": {
@@ -29,9 +27,8 @@
             },
             "tooltip": {
                 "en": "Adds new awards to the pool.",
-                "fr": ""
+                "fr": "Ajouter de nouveaux awards."
             }
-
         },
         "foundations": {
             "caption": {
@@ -39,21 +36,19 @@
                 "fr": ""
             },
             "tooltip": {
-                "en": "Adds a new global parameter: Infrastructure",
-                "fr": ""
+                "en": "Adds a new global parameter: Infrastructure, and some new cards.",
+                "fr": "Ajoute un nouveau parametre global: l'Infrastructure, ajoute \u00e9galement de nouvelles cartes."
             }
-
         },
         "infrastructureMandatory": {
             "caption": {
                 "en": "Infrastructure mandatory",
-                "fr": ""
+                "fr": "Infrastructure obligatoire"
             },
             "tooltip": {
                 "en": "The Infrastructure global parameter must also be completed to end the game.",
-                "fr": ""
+                "fr": "Le param\u00e8tre infrastructure doit \u00e9galement \u00eatre compl\u00e9t\u00e9 pour mettre fin \u00e0 la partie."
             }
-
         },
         "promoCards": {
             "caption": {
@@ -62,9 +57,8 @@
             },
             "tooltip": {
                 "en": "Adds official promo cards.",
-                "fr": ""
+                "fr": "Ajoute des cartes promotionnelles officielles."
             }
-
         },
         "fanmadeCards": {
             "caption": {
@@ -73,20 +67,18 @@
             },
             "tooltip": {
                 "en": "Adds unofficial cards, mostly from TM 1, some homebrewed.",
-                "fr": ""
+                "fr": "Ajoute de nouvelles cartes non officielles, essentiellement issue de TM 1, certaines faites par nous."
             }
-
         },
         "balancedCards": {
             "caption": {
                 "en": "Balanced cards",
-                "fr": ""
+                "fr": "Equilibrage de cartes"
             },
             "tooltip": {
-                "en": "Adds new homebrewed balanced version of some cards, remove the original one.",
-                "fr": ""
+                "en": "Adds new homebrewed balanced version of some cards, remove the original one. See link.",
+                "fr": "Ajoute des version \u00e9quilibr\u00e9es de certaine cartes et enl\u00e8ve les originales. Voir le lien."
             }
-
         },
         "initialDraft": {
             "caption": {
@@ -95,9 +87,8 @@
             },
             "tooltip": {
                 "en": "Allows you to discard any number of cards from your starting hand to draw that many, once.",
-                "fr": ""
+                "fr": "Ajoute la possibilit\u00e9 de d\u00e9ffausser autant de carte que vous le souhaitez dans la main initiale pour en piocher autant de nouvelles."
             }
-
         },
         "merger": {
             "caption": {
@@ -106,9 +97,8 @@
             },
             "tooltip": {
                 "en": "Draws more corporations at the start of the game and allows you to chose a second one, playing with both.",
-                "fr": ""
+                "fr": "Ajoute des corporations \u00e0 la main de d\u00e9part, vous jouerez ensuite avec une deuxi\u00e8me corporation en plus de la premi\u00e8re."
             }
-
         },
         "deadHand": {
             "caption": {
@@ -116,10 +106,53 @@
                 "fr": ""
             },
             "tooltip": {
-                "en": "Adds a random phase that will be played, chosen at ramdom amongst the ones not selected by players.",
-                "fr": ""
+                "en": "Adds a random phase each round, chosen at random amongst the ones not selected by players.",
+                "fr": "Ajoute une phase al\u00e9atoire \u00e0 chaque round, choisie parmi celles qui n'ont pas \u00e9t\u00e9 s\u00e9lectionn\u00e9es par les joueurs."
             }
-
+        }
+    },
+    "gameEventTitle": {
+        "planification": {
+            "caption": {
+                "en": "Planification: Select a phase",
+                "fr": "Planification: Choisissez une phase"
+            }
+        },
+        "development": {
+            "caption": {
+                "en": "Development Phase",
+                "fr": "Phase D\u00e9veloppement"
+            }
+        },
+        "construction": {
+            "caption": {
+                "en": "Construction Phase",
+                "fr": "Phase Construction"
+            }
+        },
+        "action": {
+            "caption": {
+                "en": "Action Phase",
+                "fr": "Phase Action"
+            }
+        },
+        "production": {
+            "caption": {
+                "en": "Production Phase",
+                "fr": "Phase Production"
+            }
+        },
+        "research": {
+            "caption": {
+                "en": "Research Phase",
+                "fr": "Phase Recherche"
+            }
+        },
+        "conscription": {
+            "caption": {
+                "en": "Play an aditionnal card of any color with it's cost reduced by 16MC.",
+                "fr": "Jouez une carte aditionnelle de n'importe quelle couleur, son co\u00fbt est r\u00e9duit de 16MC."
+            }
         }
     }
 }

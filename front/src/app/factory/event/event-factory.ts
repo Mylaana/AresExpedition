@@ -2,6 +2,7 @@ import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEn
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
+import { GameTextService } from "../../services/core-game/game-text.service"
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
 import { MinMaxEqualType, TagType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
@@ -569,8 +570,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					builder.setOption(builderOption)
 					event.cardBuilder.push(builder)
 					buildDiscountValue = 16
-
-					event.title = "Play a card of any color which value is 12MC or less without paying it's cost"
+					event.titleKey = 'conscription'
 					break
 				}
 			}

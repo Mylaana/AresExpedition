@@ -48,7 +48,7 @@ export const GAME_CARD_SELL_VALUE = 3;
 export const GAME_PLAYER_COLOR_LIST: PlayerColor[] = ['blue', 'green', 'orange','purple','red','white','yellow', 'grey']
 
 export const SETTING_SUPPORTED_LANGUAGE: SettingSupportedLanguage[] = ['en', 'fr']
-export const SETTING_DEFAULT_LANGUAGE: SettingSupportedLanguage = 'en'
+export const SETTING_DEFAULT_LANGUAGE: SettingSupportedLanguage = 'fr'
 export const SETTING_CARD_SIZE: SettingCardSize[] = ['small','medium']
 export const SETTING_DEFAULT_CARD_SIZE: SettingCardSize = 'medium'
 export const SETTING_INTERFACE_SIZE: SettingInterfaceSize[] = ['small', 'medium']

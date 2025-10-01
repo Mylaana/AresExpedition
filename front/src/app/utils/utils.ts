@@ -1,12 +1,12 @@
 import { SelectablePhaseEnum } from "../enum/phase.enum"
-import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST, GAME_TAG_LIST } from "../global/global-const"
+import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST, GAME_TAG_LIST, SETTING_DEFAULT_LANGUAGE } from "../global/global-const"
 import { CardState } from "../interfaces/card.interface"
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
 import { PlayableCardModel } from "../models/cards/project-card.model"
-import { myUUID, TagType } from "../types/global.type"
+import { myUUID, SettingSupportedLanguage, TagType } from "../types/global.type"
 import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
 import { v4 as uuidv4 } from 'uuid'
-import { CardType, CardTypeColor } from "../types/project-card.type"
+import { CardType, CardTypeColor, LocalizedText } from "../types/project-card.type"
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../enum/global.enum"
 import { environment } from "../../environments/environment"
 
@@ -174,6 +174,12 @@ function toTagId(tagType: TagType): number {
 function toTagType(tagId: number): TagType {
 	return GAME_TAG_LIST[tagId]
 }
+function getLanguageOrFallback(obj: LocalizedText | undefined, desiredLanguage: SettingSupportedLanguage, displayMissing: boolean = true, fallbackLang: SettingSupportedLanguage = SETTING_DEFAULT_LANGUAGE): string {
+		let result = obj?.[desiredLanguage] || obj?.[fallbackLang]
+		if(result){return result}
+		if(displayMissing){return '[Missing]'}
+		return ''
+	}
 
 export const Logger = {
 	logText,
@@ -197,5 +203,6 @@ export const Utils = {
 	toArray,
 	toGlobalParameterColor,
 	toTagId,
-	toTagType
+	toTagType,
+	getLanguageOrFallback
 }

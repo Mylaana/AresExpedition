@@ -1,0 +1,30 @@
+level1;level2;level3;en;fr
+gameOption;discovery;caption;Discovery;
+gameOption;discovery;tooltip;Adds Upgradeable phase cards, Milestones, Awards and new cards.;Ajoute des cartes phases améliorables, des Objectifs, Récompenses et de nouvelles cartes.
+gameOption;standardProjectUpgrade;caption;Standard project phase upgrade;
+gameOption;standardProjectUpgrade;tooltip;Adds a standard project in Action phase to upgrade a phase card of your choice.;Ajoute un projet standard en phase Action permettant d'améliorer une carte Phase.
+gameOption;additionalAwards;caption;Additional Awards;
+gameOption;additionalAwards;tooltip;Adds new awards to the pool.;Ajouter de nouveaux awards.
+gameOption;foundations;caption;Foundations;
+gameOption;foundations;tooltip;Adds a new global parameter: Infrastructure, and some new cards.;Ajoute un nouveau parametre global: l'Infrastructure, ajoute également de nouvelles cartes.
+gameOption;infrastructureMandatory;caption;Infrastructure mandatory;Infrastructure obligatoire
+gameOption;infrastructureMandatory;tooltip;The Infrastructure global parameter must also be completed to end the game.;Le paramètre infrastructure doit également être complété pour mettre fin à la partie.
+gameOption;promoCards;caption;Promo cards;
+gameOption;promoCards;tooltip;Adds official promo cards.;Ajoute des cartes promotionnelles officielles.
+gameOption;fanmadeCards;caption;Fanmade cards;
+gameOption;fanmadeCards;tooltip;Adds unofficial cards, mostly from TM 1, some homebrewed.;Ajoute de nouvelles cartes non officielles, essentiellement issue de TM 1, certaines faites par nous.
+gameOption;balancedCards;caption;Balanced cards;Equilibrage de cartes
+gameOption;balancedCards;tooltip;Adds new homebrewed balanced version of some cards, remove the original one. See link.;Ajoute des version équilibrées de certaine cartes et enlève les originales. Voir le lien.
+gameOption;initialDraft;caption;Initial draft;
+gameOption;initialDraft;tooltip;Allows you to discard any number of cards from your starting hand to draw that many, once.;Ajoute la possibilité de déffausser autant de carte que vous le souhaitez dans la main initiale pour en piocher autant de nouvelles.
+gameOption;merger;caption;Merger;
+gameOption;merger;tooltip;Draws more corporations at the start of the game and allows you to chose a second one, playing with both.;Ajoute des corporations à la main de départ, vous jouerez ensuite avec une deuxième corporation en plus de la première.
+gameOption;deadHand;caption;Dead hand;
+gameOption;deadHand;tooltip;Adds a random phase each round, chosen at random amongst the ones not selected by players.;Ajoute une phase aléatoire à chaque round, choisie parmi celles qui n'ont pas été sélectionnées par les joueurs.
+gameEventTitle;planification;caption;Planification: Select a phase;Planification: Choisissez une phase
+gameEventTitle;development;caption;Development Phase;Phase Développement
+gameEventTitle;construction;caption;Construction Phase;Phase Construction
+gameEventTitle;action;caption;Action Phase;Phase Action
+gameEventTitle;production;caption;Production Phase;Phase Production
+gameEventTitle;research;caption;Research Phase;Phase Recherche
+gameEventTitle;conscription;caption;Play an aditionnal card of any color with it's cost reduced by 16MC.;Jouez une carte aditionnelle de n'importe quelle couleur, son coût est réduit de 16MC.
