@@ -636,7 +636,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
             break
         }
         case('upgradePhaseCards'):{
-            event.title = 'Select a phase card to upgrade'
+            event.titleKey = 'phaseCardUpgrade'
             event.autoFinalize = false
 			let phaseList: number[] | undefined = args?.phaseCardUpgradeList
 			for(let phase of phaseList??[]){

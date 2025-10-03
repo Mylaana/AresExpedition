@@ -1,5 +1,5 @@
 import { SelectablePhaseEnum } from "../enum/phase.enum"
-import { PlayerColor, RessourceType, SettingCardSize, SettingInterfaceSize, SettingPlayerPannelSize, SettingSupportedLanguage, TagType } from "../types/global.type"
+import { PlayerColor, RessourceType, SelectablePhase, SettingCardSize, SettingInterfaceSize, SettingPlayerPannelSize, SettingSupportedLanguage, TagType } from "../types/global.type"
 import { ActionPhaseType, ConstructionPhaseType, DevelopmentPhaseType, ProductionPhaseType, ResearchPhaseType } from "../types/phase-card.type"
 
 //export const GLOBAL_GAME_ID = "1"
@@ -35,6 +35,7 @@ export const GAME_PHASE_ACTION_CARDS_LIST: ActionPhaseType[] = ['action_base', '
 export const GAME_PHASE_PRODUCTION_CARDS_LIST: ProductionPhaseType[] = ['production_base', 'production_7mc', 'production_1mc_activate_card']
 export const GAME_PHASE_RESEARCH_CARDS_LIST: ResearchPhaseType[] = ['research_base', 'research_scan6_keep1', 'research_scan2_keep2']
 export const GAME_SELECTABLE_PHASE_LIST: SelectablePhaseEnum[] = [SelectablePhaseEnum.development, SelectablePhaseEnum.construction, SelectablePhaseEnum.action, SelectablePhaseEnum.production, SelectablePhaseEnum.research]
+export const GAME_PHASECARD_NAME_LIST: string[] = [SelectablePhaseEnum.development.toLocaleLowerCase(), SelectablePhaseEnum.construction.toLocaleLowerCase(), SelectablePhaseEnum.action.toLocaleLowerCase(), SelectablePhaseEnum.production.toLocaleLowerCase(), SelectablePhaseEnum.research.toLocaleLowerCase()]
 export const GAME_HAND_MAXIMUM_SIZE = 10
 export const GAME_MAXIMUM_PLAYER_NUMBER = 6
 export const GAME_CARD_DEFAULT_TAG_NUMBER = 3

@@ -181,63 +181,63 @@
     },
     "gamePhaseCardBonus.development_A.caption": {
         "en": "Reduced cost of the card you play this phase by 3MC.",
-        "fr": ""
+        "fr": "Le co\u00fbt de la carte que vous jouez cette phase est r\u00e9duit de 3MC."
     },
     "gamePhaseCardBonus.construction_A.caption": {
         "en": "Draw a card.$$OR$$Play an additional blue card OR red card this phase.",
-        "fr": ""
+        "fr": "Piochez une carte.$$OU$$Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase."
     },
     "gamePhaseCardBonus.action_A.caption": {
         "en": "You may activate one ACTION an additional time.",
-        "fr": ""
+        "fr": "Vous pouvez activer une seule de vos cartes une deuxi\u00e8me fois."
     },
     "gamePhaseCardBonus.production_A.caption": {
         "en": "Gain 4MC.",
-        "fr": ""
+        "fr": "Gagnez 4MC."
     },
     "gamePhaseCardBonus.research_A.caption": {
         "en": "Draw an additional 3 cards and keep an additional 1.",
-        "fr": ""
+        "fr": "Piochez 3 cartes suppl\u00e9mentaires et gardez en 1 de plus."
     },
     "gamePhaseCardBonus.development_B.caption": {
         "en": "Reduced cost of the card you play this phase by 6MC.",
-        "fr": ""
+        "fr": "Le co\u00fbt de la carte que vous jouez cette phase est r\u00e9duit de 6MC."
     },
     "gamePhaseCardBonus.construction_B.caption": {
         "en": "Play an additional blue card OR red card this phase.$$OR$$Gain 6MC.",
-        "fr": ""
+        "fr": "Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase.$$OU$$Gagnez 6MC."
     },
     "gamePhaseCardBonus.action_B.caption": {
         "en": "You may repeat one of your ACTION effects once.$$Reveal the top 3 cards of the deck. Place a blue or red card revealed this way into your hand, discard the rest.",
-        "fr": ""
+        "fr": "Vous pouvez activer une seule de vos cartes une deuxi\u00e8me fois.$$ET$$R\u00e9v\u00e9lez 3 cartes du deck, piochez une carte Bleu ou Rouge parmi celles ci."
     },
     "gamePhaseCardBonus.production_B.caption": {
         "en": "Gain 7MC.",
-        "fr": ""
+        "fr": "Gagnez 7MC."
     },
     "gamePhaseCardBonus.research_B.caption": {
         "en": "Draw an additional 6 cards and keep an additional 1.",
-        "fr": ""
+        "fr": "Piochez 6 cartes suppl\u00e9mentaires et gardez en 1 de plus."
     },
     "gamePhaseCardBonus.development_C.caption": {
         "en": "Reduce the cost of the first card you play this phase by 3MC.$$You may play a second green card this phase with a printed cost of 12 MC or less.",
-        "fr": ""
+        "fr": "Le co\u00fbt de la Premi\u00e8re carte que vous jouez cette phase est r\u00e9duit de 3MC.$$Vous pouvez jouer une deuxi\u00e8me carte Verte dont le co\u00fbt initial est de 12MC ou moins."
     },
     "gamePhaseCardBonus.construction_C.caption": {
         "en": "Play an additional blue card OR red card this phase.$$AND$$Draw a card.",
-        "fr": ""
+        "fr": "Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase.$$ET$$Piochez une carte."
     },
     "gamePhaseCardBonus.action_C.caption": {
         "en": "You may repeat two of your ACTION effects once.",
-        "fr": ""
+        "fr": "Vous pouvez activer deux de vos cartes une deuxi\u00e8me fois."
     },
     "gamePhaseCardBonus.production_C.caption": {
         "en": "Gain 1MC.$$Activate the production effect of one of your green cards an additional time this phase.",
-        "fr": ""
+        "fr": "Gagnez 1MC.$$Gagnez une deuxi\u00e8me fois les productions d'une carte de votre choix cette phase."
     },
     "gamePhaseCardBonus.research_C.caption": {
         "en": "Draw an additional 2 cards and keep an additional 2.",
-        "fr": ""
+        "fr": "Piochez \u00e9 cartes suppl\u00e9mentaires et gardez en 2 de plus."
     },
     "gameEventTitle.builderWorkCrews.caption": {
         "en": "Play an additional Blue or Red card with its cost reduced by 11MC",

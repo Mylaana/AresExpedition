@@ -44,4 +44,14 @@ export class GameTextService{
 		let result = this.translationMap.get(this.setKey('gameEventTitle', eventTitlekey, 'caption'))
 		return result[this._language] || result[this._defaultLanguage]
 	}
+	getPhaseCardTitle(abilityOrBonus: 'ability' | 'bonus'): string {
+		let prefix = abilityOrBonus==='ability'?'Ability':'Bonus'
+		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, 'title', 'caption'))
+		return result[this._language] || result[this._defaultLanguage]
+	}
+	getPhaseCardDescription(abilityOrBonus: 'ability' | 'bonus', card: string): string {
+		let prefix = abilityOrBonus==='ability'?'Ability':'Bonus'
+		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, card, 'caption'))
+		return result[this._language] || result[this._defaultLanguage]
+	}
 }

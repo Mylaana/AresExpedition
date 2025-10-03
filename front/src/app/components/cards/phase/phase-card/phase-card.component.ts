@@ -12,6 +12,10 @@ import { NonEventButtonComponent } from '../../../tools/button/non-event-button.
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { NonEventButton } from '../../../../models/core-game/button.model';
 import { SettingCardSize } from '../../../../types/global.type';
+import { GameTextService } from '../../../../services/core-game/game-text.service';
+import { GAME_PHASECARD_NAME_LIST } from '../../../../global/global-const';
+
+type textType = 'abilityTitle' | 'ability' | 'bonusTitle' | 'bonus'
 
 @Component({
     selector: 'app-phase-card',
@@ -34,6 +38,10 @@ export class PhaseCardComponent extends BaseCardComponent {
 	@Output() phaseCardUpgraded: EventEmitter<PhaseCardUpgradeType> = new EventEmitter<PhaseCardUpgradeType>()
 
 	_upgradeButton: NonEventButton = ButtonDesigner.createNonEventButton('upgradePhase')
+	
+	constructor(private gameTextService: GameTextService){
+		super()
+	}
 
 	override ngOnInit():void {
 		super.ngOnInit()
@@ -73,5 +81,35 @@ export class PhaseCardComponent extends BaseCardComponent {
 				return this.phaseGroupUpgraded===true && this.state.isUpgraded()
 			}
 		}
+	}
+	private getLevelToLetter(): string {
+		switch(this.phaseCardLevel){
+			case(0):{return 'A'}
+			case(1):{return 'B'}
+			case(2):{return 'C'}
+			default:{
+				return ''
+			}
+		}
+	}
+	private getCardText(): string{
+		return GAME_PHASECARD_NAME_LIST[this.phaseIndex] + '_' + this.getLevelToLetter()
+	}
+	getText(type: textType): string {
+		switch(type){
+			case('abilityTitle'):{
+				return this.gameTextService.getPhaseCardTitle('ability')
+			}
+			case('bonusTitle'):{
+				return this.gameTextService.getPhaseCardTitle('bonus')
+			}
+			case('ability'):{
+				return this.gameTextService.getPhaseCardDescription('ability' ,this.getCardText())
+			}
+			case('bonus'):{
+				return this.gameTextService.getPhaseCardDescription('bonus', this.getCardText())
+			}
+		}
+		return ''
 	}
 }
