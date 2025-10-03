@@ -6,39 +6,42 @@ import traceback
 
 def fill_language(header: list, line: list, start_index: int): 
     result: dict = {}
-    for index in range(start_index, len(header)):
-        if(header[index]==''):
-            continue
+    for index in range(start_index, len(line)):
         result[header[index]] =  line[index]
 
     return result
 
-def fill_block(header: list, unparsed: list):
-    result: list = []
-    index = 0
-    caption = ''
-    while header[index].find('level') != -1:
-        if unparsed[0][index]=='':
-            continue
+def fill_block(header: list, unparsed: list, current_level: int, current_level_value: str = ''):
+    # exit condition
+    if len(unparsed) == 0:
+        return
 
-        if caption != '':
-            caption = caption + '.'
+    block: dict = {}
 
-        caption = caption + unparsed[0][index]
-        index += 1
+    while len(unparsed) > 0 :
+        block_caption = unparsed[0][current_level +1]
+        result = {}
+
+        cursor_value = copy.deepcopy(unparsed[0][current_level])
+        if cursor_value != current_level_value  or current_level_value is None:
+            break
+
+        if header[current_level +1].find('level') == -1:
+            result = fill_language(header, unparsed[0], current_level +1)
+            unparsed.pop(0)
+            return result
+        else:
+            result = fill_block(header, unparsed, current_level +1, unparsed[0][current_level +1])
+            block[block_caption] = result
     
-    result.append(caption)
-    result.append(fill_language(header, unparsed[0], index))
-    unparsed.pop(0)
-    
-    return result
+    return block
 
 def fill_dict(header: list, unparsed: list):
     result: dict = {}
 
     while len(unparsed) > 0:
-        block = fill_block(header, unparsed)
-        result[block[0]] = block[1]
+        caption = unparsed[0][0]
+        result[caption] = fill_block(header, unparsed, 0, caption)
 
     return result
 
@@ -78,3 +81,4 @@ if __name__ == '__main__':
         main()
     except Exception:
         traceback.print_exc()
+        print('File must be a csv separated with ";"')

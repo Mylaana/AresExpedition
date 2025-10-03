@@ -4,6 +4,10 @@ import { GameOptionName, SettingSupportedLanguage } from "../../types/global.typ
 import { GameParamService } from "./game-param.service";
 import { LocalizedText } from "../../types/project-card.type";
 import { EventTitleKey } from "../../types/event.type";
+import { map } from "rxjs";
+
+
+const eventKeyPrefix = 'gameEventTitle'
 
 @Injectable({
 	providedIn: "root"
@@ -11,31 +15,33 @@ import { EventTitleKey } from "../../types/event.type";
 export class GameTextService{
 	_language!: SettingSupportedLanguage
 	_defaultLanguage: SettingSupportedLanguage = 'en'
+	
+	private translationMap!: Map<string, any>
 
 	constructor(private gameParamService: GameParamService){
 		gameParamService.currentLanguage.subscribe((l) => this._language = l)
+		this.translationMap = new Map(Object.entries(jsonData))
 	}
-
-	getGameOptionCaption(option: GameOptionName): string {
-		let result =  jsonData['gameOption'][option]['caption'][this._language]
-		console.log(jsonData['gameOption'][option]['caption'])
-		if(result === ''){
-			return 	 jsonData['gameOption'][option]['caption'][this._defaultLanguage]
+	private setKey(...args: string[]): string {
+		let key: string = ''
+		for(let i=0; i<args.length; i++){
+			if(i!=0){
+				key += '.'
+			}
+			key += args[i]
 		}
-		return result
+		return key
+	}
+	getGameOptionCaption(option: GameOptionName): string {
+		let result = this.translationMap.get(this.setKey('gameOption', option, 'caption'))
+		return result[this._language] || result[this._defaultLanguage]
 	}
 	getGameOptionToolTip(option: GameOptionName): string {
-		let result =  jsonData['gameOption'][option]['tooltip'][this._language]
-		if(result === ''){
-			return 	 jsonData['gameOption'][option]['tooltip'][this._defaultLanguage]
-		}
-		return result
+		let result = this.translationMap.get(this.setKey('gameOption', option, 'tooltip'))
+		return result[this._language] || result[this._defaultLanguage]
 	}
-	getEventTitleRaw(eventTitlekey: EventTitleKey): string {
-		let result = jsonData['gameEventTitle'][eventTitlekey]['caption'][this._language] 
-		if(result = ""){
-			return jsonData['gameEventTitle'][eventTitlekey]['caption'][this._defaultLanguage]
-		}
-		return result
+	getEventTitle(eventTitlekey: EventTitleKey): string {
+		let result = this.translationMap.get(this.setKey('gameEventTitle', eventTitlekey, 'caption'))
+		return result[this._language] || result[this._defaultLanguage]
 	}
 }

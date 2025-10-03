@@ -4,12 +4,12 @@ import { EventTitleKey } from '../types/event.type';
 
 @Pipe({
   name: 'eventTitleKeyPipe',
-  pure: false // important : le pipe sera recalculé si la langue change
+  pure: false
 })
 export class EventTitleKeyPipe implements PipeTransform {
   constructor(private gameTextService: GameTextService) {}
 
   transform(key: EventTitleKey): string {
-    return this.gameTextService.getEventTitleRaw(key);
+    return this.gameTextService.getEventTitle(key)
   }
 }

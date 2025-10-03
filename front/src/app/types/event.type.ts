@@ -21,5 +21,5 @@ export type EventUnionSubTypes = EventCardSelectorSubType | EventCardSelectorRes
 | EventTagSelectorSubType
 
 export type EventOriginType = 'cardCode'
-export type EventTitleKey = 'planification' | 'development' | 'construction' | 'action' | 'production' | 'research'
-| 'conscription'
+export type EventTitleKey = 'phasePlanification' | 'phaseDevelopment' | 'phaseConstruction' | 'phaseAction' | 'phaseProduction' | 'phaseResearch'
+| 'builderConscription' | 'builderMaiNi' | 'builderWorkCrews' | 'builderAssetLiquidation' | 'builderGreen9MCFree' | 'builderAssortedEnterprises' | 'builderSelfReplicatingBacteria'

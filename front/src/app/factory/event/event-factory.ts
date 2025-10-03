@@ -444,7 +444,7 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
     event.subType = subType
     event.setSelectorFilter({type: ProjectFilterNameEnum.action})
     event.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
-    event.title = 'Action Phase'
+    event.titleKey = 'phaseAction'
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 
     return event
@@ -514,7 +514,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					buildDiscountValue = 11
 					event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
 
-					event.title = 'Play an additional Blue or Red card with a 11MC discount'
+					event.titleKey = 'builderWorkCrews'
 					break
 				}
 				case(BuilderOption.assetLiquidation):case(BuilderOption.researchGrant):{
@@ -523,7 +523,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					event.cardBuilder.push(builder)
 					event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
 
-					event.title = 'Play an additional Blue or Red card.'
+					event.titleKey = 'builderAssetLiquidation'
 					break
 
 				}
@@ -534,7 +534,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					buildDiscountValue = 100
 					event.setSelectorFilter({type: ProjectFilterNameEnum.green9MCFree})
 
-					event.title = "Play a green card which value is 9MC or less without paying it's cost"
+					event.titleKey = 'builderGreen9MCFree'
 					break
 				}
 				case(BuilderOption.assortedEnterprises):{
@@ -543,7 +543,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					event.cardBuilder.push(builder)
 					buildDiscountValue = 2
 
-					event.title = "Play an additional card of any color with a 2MC discount"
+					event.titleKey = 'builderAssortedEnterprises'
 					break
 				}
 				case(BuilderOption.selfReplicatingBacteria):{
@@ -552,7 +552,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					event.cardBuilder.push(builder)
 					buildDiscountValue = 25
 
-					event.title = "Play a card of any color with a 25MC discount"
+					event.titleKey = 'builderSelfReplicatingBacteria'
 					break
 				}
 				case(BuilderOption.maiNiProductions):{
@@ -561,8 +561,8 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					event.cardBuilder.push(builder)
 					buildDiscountValue = 100
 					event.setSelectorFilter({type: ProjectFilterNameEnum.maiNiProductions})
-
-					event.title = "Play a card of any color which value is 12MC or less without paying it's cost"
+					event.titleKey = 'builderMaiNi'
+					
 					break
 				}
 				case(BuilderOption.conscription):{
@@ -570,7 +570,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					builder.setOption(builderOption)
 					event.cardBuilder.push(builder)
 					buildDiscountValue = 16
-					event.titleKey = 'conscription'
+					event.titleKey = 'builderConscription'
 					break
 				}
 			}
@@ -581,12 +581,12 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 
     switch(subType){
         case('developmentPhaseBuilder'):{
-            event.title = 'Play Green cards :'
+			event.titleKey = 'phaseDevelopment'
             event.setSelectorFilter({type: ProjectFilterNameEnum.greenProject})
             break
         }
         case('constructionPhaseBuilder'):{
-            event.title = 'Play Blue or Red cards'
+			event.titleKey = 'phaseConstruction'
             event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
             break
         }
@@ -668,7 +668,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         }
         case('planificationPhase'):{
             event.autoFinalize = false
-            event.title = 'Select a phase card:'
+            event.titleKey = 'phasePlanification'
             break
         }
         case('buildCard'):{
@@ -802,7 +802,7 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
             event.autoFinalize = false
             event.productionApplied = false
 			event.productionDoubleApplied = false
-			event.title = 'Production'
+			event.titleKey = 'phaseProduction'
             break
         }
         case('actionPhase'):{break}
