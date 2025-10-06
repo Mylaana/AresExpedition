@@ -156,7 +156,7 @@ export class GameParamService {
 				});
 		});
 		this.adjustInterfaceSizeAtStart()
-		console.log(this.language.getValue())
+		this.setInitialLanguage()
 	}
 
 	private updateParams() {
@@ -244,6 +244,12 @@ export class GameParamService {
 					this.playerPannelSize.next('small')
 				break
 			}
+		}
+	}
+	private setInitialLanguage(){
+		let initial = navigator.language.split('-')[0]
+		if(SETTING_SUPPORTED_LANGUAGE.includes(initial as SettingSupportedLanguage)){
+			this.setNewLanguage(initial)
 		}
 	}
   }
