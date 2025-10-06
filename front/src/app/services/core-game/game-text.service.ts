@@ -41,7 +41,7 @@ export class GameTextService{
 		return result[this._language] || result[this._defaultLanguage]
 	}
 	getEventTitle(eventTitlekey: EventTitleKey): string {
-		let result = this.translationMap.get(this.setKey('gameEventTitle', eventTitlekey, 'caption'))
+		let result = this.translationMap.get(this.setKey('gameEventTitle', eventTitlekey))
 		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
