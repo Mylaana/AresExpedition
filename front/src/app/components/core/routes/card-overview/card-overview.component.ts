@@ -12,6 +12,7 @@ import { NonEventButton } from '../../../../models/core-game/button.model';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { Router } from '@angular/router';
+import { GameTextService } from '../../../../services/core-game/game-text.service';
 
 @Component({
     selector: 'app-card-overview',
@@ -40,7 +41,8 @@ export class CardOverviewComponent implements OnInit{
 
 	constructor(
 		private cardInfoService: ProjectCardInfoService,
-		private router: Router
+		private router: Router,
+		private gameTextService: GameTextService
 	){
 		const nav = this.router.getCurrentNavigation();
 		if (nav?.extras.state) {
@@ -74,6 +76,9 @@ export class CardOverviewComponent implements OnInit{
 	resetFilteredTags(){
 		this.tagListFilter.resetActiveTags()
 		this._cardList = this.allCards
+	}
+	getTitle(): string {
+		return this.gameTextService.getInterfaceTitle('cardOverviewTitle')
 	}
 	private filterCardList(tagList: TagType[]){
 		this._cardList = this.allCards.filter((el) => el.hasTagInList(tagList))

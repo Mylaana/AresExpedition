@@ -15,7 +15,7 @@ import { ApiMessage, ApiPlayer } from '../../../../interfaces/websocket.interfac
 import { Utils } from '../../../../utils/utils';
 import { CreateGameOptionsComponent } from '../../../create-game/create-game-options/create-game-options.component';
 import { CreateGameOptionService } from '../../../../services/core-game/create-game.service';
-import { CreateGameKey } from '../../../../types/text.type';
+import { ErrorKey, InterfaceTitleKey } from '../../../../types/text.type';
 import { GameTextService } from '../../../../services/core-game/game-text.service';
 
 @Component({
@@ -46,8 +46,8 @@ export class CreateGameComponent {
 		private gameTextService: GameTextService
 	) {}
 
-	displayError(message: string){
-		this._errorMessage = message
+	displayError(key: ErrorKey){
+		this._errorMessage = this.gameTextService.getErrorText(key)
 		setTimeout(() => {
 			this._errorMessage = null
 		}, 3000);
@@ -55,7 +55,7 @@ export class CreateGameComponent {
 
 	createGame() {
 		if(this._playerNumber != this.playerList.length){
-			this.displayError('Each player must have a valid name and a color selected.')
+			this.displayError('errorCreateGameNameAndColor')
 			return
 		}
 		const postPlayerList: ApiPlayer[] = this.createPostPlayerList()
@@ -79,11 +79,11 @@ export class CreateGameComponent {
 			},
 			error: (error) => {
 				if(error['status']===500){
-					this.displayError('Cannot create game, server is offline')
+					this.displayError('errorCreateGameNameServerOffline')
 					return
 				}
 
-				this.displayError('Error during game creation, see console for full error.')
+				this.displayError('errorCreateGameNameOtherError')
 				console.error(error)
 			}
 		});
@@ -107,8 +107,8 @@ export class CreateGameComponent {
 		}
 		return list
 	}
-	getTitle(key: CreateGameKey): string {
-		return this.gameTextService.getCreateGameText(key)
+	getTitle(key: InterfaceTitleKey): string {
+		return this.gameTextService.getInterfaceTitle(key)
 	}
 }
 

@@ -334,5 +334,21 @@
     "interfaceButton.buttonCardOverviewDisplayBalanced": {
         "en": "Display Balanced Only",
         "fr": "Afficher \"Balanced\" uniquement"
+    },
+    "errorMessage.errorCreateGameNameAndColor": {
+        "en": "Each player must have a valid name and a color selected.",
+        "fr": "Chaque joueur doit avoir un nom valide et une couleur s\u00e9lectionn\u00e9e."
+    },
+    "errorMessage.errorCreateGameNameServerOffline": {
+        "en": "Cannot create game, server is offline.",
+        "fr": "Impossible de cr\u00e9er une partie, serveur injoignable."
+    },
+    "errorMessage.errorCreateGameNameOtherError": {
+        "en": "Error during game creation, see console for full error.",
+        "fr": "Erreur lors de la cr\u00e9ation de partie, voir la console pour plus d'information."
+    },
+    "interfaceTitle.cardOverviewTitle": {
+        "en": "CARD LIST",
+        "fr": "LISTE DES CARTES"
     }
 }

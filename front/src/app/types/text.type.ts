@@ -4,7 +4,9 @@ export type GameOptionKey = 'discovery' |  'standardProjectUpgrade' | 'additiona
 | 'foundations' | 'infrastructureMandatory'
 | 'promoCards' | 'fanmadeCards' | 'balancedCards'
 | 'initialDraft' | 'merger' | 'deadHand'
-export type CreateGameKey = 'createGame' | 'createGamePlayers' | 'createGameOptions' | 'createGamePlayerNumber' | 'createGameAdditionalContent' | 'createGameAdditionalCards' | 'createGameGameMode'
+export type InterfaceTitleKey = 'createGame' | 'createGamePlayers' | 'createGameOptions' | 'createGamePlayerNumber' | 'createGameAdditionalContent' | 'createGameAdditionalCards' | 'createGameGameMode'
+| 'cardOverviewTitle'
 export type ButtonCaptionKey = 'buttonCreateGameCreate' | 'buttonCreateGameEnableAll' | 'buttonCreateGameDisableAll' |
 'buttonHomeNewGame' | 'buttonHomeCardOverview' | 'buttonHomeDiscord' | 'buttonHomeBuyAres'
 | 'buttonCardOverviewDisplayBalanced' | 'buttonCardOverviewDisplayAll'
+export type ErrorKey = 'errorCreateGameNameAndColor' | 'errorCreateGameNameServerOffline' | 'errorCreateGameNameOtherError'

@@ -7,7 +7,7 @@ import { CreateGameOptionCardComponent } from '../create-game-option-card/create
 import { AnyButton } from '../../../types/global.type';
 import { GameTextService } from '../../../services/core-game/game-text.service';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
-import { CreateGameKey, GameOptionKey } from '../../../types/text.type';
+import { GameOptionKey, InterfaceTitleKey } from '../../../types/text.type';
 
 @Component({
   selector: 'app-create-game-options',
@@ -89,8 +89,8 @@ export class CreateGameOptionsComponent implements OnInit{
 	getTooltip(key: GameOptionKey): string {
 		return this.gameTextService.getGameOptionToolTip(key)
 	}
-	getTitle(key: CreateGameKey): string {
-		return this.gameTextService.getCreateGameText(key)
+	getTitle(key: InterfaceTitleKey): string {
+		return this.gameTextService.getInterfaceTitle(key)
 	}
 	onAllOptionClick(button: NonEventButton){
 		this.createGameOptionService.toggleAllOptions(button===this._activateAll)
