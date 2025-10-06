@@ -87,184 +87,216 @@
         "en": "Adds a random phase each round, chosen at random amongst the ones not selected by players.",
         "fr": "Ajoute une phase al\u00e9atoire \u00e0 chaque round, choisie parmi celles qui n'ont pas \u00e9t\u00e9 s\u00e9lectionn\u00e9es par les joueurs."
     },
-    "gameEventTitle.phasePlanification.caption": {
-        "en": "Planification: Select a phase",
-        "fr": "Planification: Choisissez une phase"
-    },
-    "gameEventTitle.phaseDevelopment.caption": {
-        "en": "Development Phase",
-        "fr": "Phase D\u00e9veloppement"
-    },
-    "gameEventTitle.phaseConstruction.caption": {
-        "en": "Construction Phase",
-        "fr": "Phase Construction"
-    },
-    "gameEventTitle.phaseAction.caption": {
-        "en": "Action Phase",
-        "fr": "Phase Action"
-    },
-    "gameEventTitle.phaseProduction.caption": {
-        "en": "Production Phase",
-        "fr": "Phase Production"
-    },
-    "gameEventTitle.phaseResearch.caption": {
-        "en": "Research Phase",
-        "fr": "Phase Recherche"
-    },
-    "gamePhaseCardAbility.title.caption": {
+    "gamePhaseCardAbility.title": {
         "en": "Ability",
         "fr": "Comp\u00e9tence"
     },
-    "gamePhaseCardAbility.development_A.caption": {
+    "gamePhaseCardAbility.development_A": {
         "en": "Each player may play 1 green project card.",
         "fr": "Chaque joueur peut jouer un projet vert."
     },
-    "gamePhaseCardAbility.construction_A.caption": {
+    "gamePhaseCardAbility.construction_A": {
         "en": "Each player may play 1 blue card OR 1 red project card.",
         "fr": "Chaque joueur peut jouer un projet rouge ou bleu."
     },
-    "gamePhaseCardAbility.action_A.caption": {
+    "gamePhaseCardAbility.action_A": {
         "en": "Each player activates any ACTION effect and STANDARD actions.",
         "fr": "Chaque joueur peut activer ses effets d'actions et des projets standards."
     },
-    "gamePhaseCardAbility.production_A.caption": {
+    "gamePhaseCardAbility.production_A": {
         "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
         "fr": "Chaque joueur gagne de la chaleur, des plantes et pioche des cartes en fonction de ses productions et des MC en fonction de leur production + NT."
     },
-    "gamePhaseCardAbility.research_A.caption": {
+    "gamePhaseCardAbility.research_A": {
         "en": "Each player draw 2 cards and keep 1.",
         "fr": "Chaque joueur pioche 2 cartes et en garde 1."
     },
-    "gamePhaseCardAbility.development_B.caption": {
+    "gamePhaseCardAbility.development_B": {
         "en": "Each player may play 1 green project card.",
         "fr": "Chaque joueur peut jouer un projet vert."
     },
-    "gamePhaseCardAbility.construction_B.caption": {
+    "gamePhaseCardAbility.construction_B": {
         "en": "Each player may play 1 blue card OR 1 red project card.",
         "fr": "Chaque joueur peut jouer un projet rouge ou bleu."
     },
-    "gamePhaseCardAbility.action_B.caption": {
+    "gamePhaseCardAbility.action_B": {
         "en": "Each player activates any ACTION effect and STANDARD actions.",
         "fr": "Chaque joueur peut activer ses effets d'actions et des projets standards."
     },
-    "gamePhaseCardAbility.production_B.caption": {
+    "gamePhaseCardAbility.production_B": {
         "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
         "fr": "Chaque joueur gagne de la chaleur, des plantes et pioche des cartes en fonction de ses productions et des MC en fonction de leur production + NT."
     },
-    "gamePhaseCardAbility.research_B.caption": {
+    "gamePhaseCardAbility.research_B": {
         "en": "Each player draw 2 cards and keep 1.",
         "fr": "Chaque joueur pioche 2 cartes et en garde 1."
     },
-    "gamePhaseCardAbility.development_C.caption": {
+    "gamePhaseCardAbility.development_C": {
         "en": "Each player may play 1 green project card.",
         "fr": "Chaque joueur peut jouer un projet vert."
     },
-    "gamePhaseCardAbility.construction_C.caption": {
+    "gamePhaseCardAbility.construction_C": {
         "en": "Each player may play 1 blue card OR 1 red project card.",
         "fr": "Chaque joueur peut jouer un projet rouge ou bleu."
     },
-    "gamePhaseCardAbility.action_C.caption": {
+    "gamePhaseCardAbility.action_C": {
         "en": "Each player activates any ACTION effect and STANDARD actions.",
         "fr": "Chaque joueur peut activer ses effets d'actions et des projets standards."
     },
-    "gamePhaseCardAbility.production_C.caption": {
+    "gamePhaseCardAbility.production_C": {
         "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
         "fr": "Chaque joueur gagne de la chaleur, des plantes et pioche des cartes en fonction de ses productions et des MC en fonction de leur production + NT."
     },
-    "gamePhaseCardAbility.research_C.caption": {
+    "gamePhaseCardAbility.research_C": {
         "en": "Each player draw 2 cards and keep 1.",
         "fr": "Chaque joueur pioche 2 cartes et en garde 1."
     },
-    "gamePhaseCardBonus.title.caption": {
+    "gamePhaseCardBonus.title": {
         "en": "Bonus",
         "fr": "Bonus"
     },
-    "gamePhaseCardBonus.development_A.caption": {
+    "gamePhaseCardBonus.development_A": {
         "en": "Reduced cost of the card you play this phase by 3MC.",
         "fr": "Le co\u00fbt de la carte que vous jouez cette phase est r\u00e9duit de 3MC."
     },
-    "gamePhaseCardBonus.construction_A.caption": {
+    "gamePhaseCardBonus.construction_A": {
         "en": "Draw a card.$$OR$$Play an additional blue card OR red card this phase.",
         "fr": "Piochez une carte.$$OU$$Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase."
     },
-    "gamePhaseCardBonus.action_A.caption": {
+    "gamePhaseCardBonus.action_A": {
         "en": "You may activate one ACTION an additional time.",
         "fr": "Vous pouvez activer une seule de vos cartes une deuxi\u00e8me fois."
     },
-    "gamePhaseCardBonus.production_A.caption": {
+    "gamePhaseCardBonus.production_A": {
         "en": "Gain 4MC.",
         "fr": "Gagnez 4MC."
     },
-    "gamePhaseCardBonus.research_A.caption": {
+    "gamePhaseCardBonus.research_A": {
         "en": "Draw an additional 3 cards and keep an additional 1.",
         "fr": "Piochez 3 cartes suppl\u00e9mentaires et gardez en 1 de plus."
     },
-    "gamePhaseCardBonus.development_B.caption": {
+    "gamePhaseCardBonus.development_B": {
         "en": "Reduced cost of the card you play this phase by 6MC.",
         "fr": "Le co\u00fbt de la carte que vous jouez cette phase est r\u00e9duit de 6MC."
     },
-    "gamePhaseCardBonus.construction_B.caption": {
+    "gamePhaseCardBonus.construction_B": {
         "en": "Play an additional blue card OR red card this phase.$$OR$$Gain 6MC.",
         "fr": "Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase.$$OU$$Gagnez 6MC."
     },
-    "gamePhaseCardBonus.action_B.caption": {
+    "gamePhaseCardBonus.action_B": {
         "en": "You may repeat one of your ACTION effects once.$$Reveal the top 3 cards of the deck. Place a blue or red card revealed this way into your hand, discard the rest.",
         "fr": "Vous pouvez activer une seule de vos cartes une deuxi\u00e8me fois.$$ET$$R\u00e9v\u00e9lez 3 cartes du deck, piochez une carte Bleu ou Rouge parmi celles ci."
     },
-    "gamePhaseCardBonus.production_B.caption": {
+    "gamePhaseCardBonus.production_B": {
         "en": "Gain 7MC.",
         "fr": "Gagnez 7MC."
     },
-    "gamePhaseCardBonus.research_B.caption": {
+    "gamePhaseCardBonus.research_B": {
         "en": "Draw an additional 6 cards and keep an additional 1.",
         "fr": "Piochez 6 cartes suppl\u00e9mentaires et gardez en 1 de plus."
     },
-    "gamePhaseCardBonus.development_C.caption": {
+    "gamePhaseCardBonus.development_C": {
         "en": "Reduce the cost of the first card you play this phase by 3MC.$$You may play a second green card this phase with a printed cost of 12 MC or less.",
         "fr": "Le co\u00fbt de la Premi\u00e8re carte que vous jouez cette phase est r\u00e9duit de 3MC.$$Vous pouvez jouer une deuxi\u00e8me carte Verte dont le co\u00fbt initial est de 12MC ou moins."
     },
-    "gamePhaseCardBonus.construction_C.caption": {
+    "gamePhaseCardBonus.construction_C": {
         "en": "Play an additional blue card OR red card this phase.$$AND$$Draw a card.",
         "fr": "Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase.$$ET$$Piochez une carte."
     },
-    "gamePhaseCardBonus.action_C.caption": {
+    "gamePhaseCardBonus.action_C": {
         "en": "You may repeat two of your ACTION effects once.",
         "fr": "Vous pouvez activer deux de vos cartes une deuxi\u00e8me fois."
     },
-    "gamePhaseCardBonus.production_C.caption": {
+    "gamePhaseCardBonus.production_C": {
         "en": "Gain 1MC.$$Activate the production effect of one of your green cards an additional time this phase.",
         "fr": "Gagnez 1MC.$$Gagnez une deuxi\u00e8me fois les productions d'une carte de votre choix cette phase."
     },
-    "gamePhaseCardBonus.research_C.caption": {
+    "gamePhaseCardBonus.research_C": {
         "en": "Draw an additional 2 cards and keep an additional 2.",
         "fr": "Piochez \u00e9 cartes suppl\u00e9mentaires et gardez en 2 de plus."
     },
-    "gameEventTitle.builderWorkCrews.caption": {
+    "gameEventTitle.phasePlanification": {
+        "en": "Planification: Select a phase",
+        "fr": "Planification: Choisissez une phase"
+    },
+    "gameEventTitle.phaseDevelopment": {
+        "en": "Development Phase",
+        "fr": "Phase D\u00e9veloppement"
+    },
+    "gameEventTitle.phaseConstruction": {
+        "en": "Construction Phase",
+        "fr": "Phase Construction"
+    },
+    "gameEventTitle.phaseAction": {
+        "en": "Action Phase",
+        "fr": "Phase Action"
+    },
+    "gameEventTitle.phaseProduction": {
+        "en": "Production Phase",
+        "fr": "Phase Production"
+    },
+    "gameEventTitle.phaseResearch": {
+        "en": "Research Phase",
+        "fr": "Phase Recherche"
+    },
+    "gameEventTitle.phaseCardUpgrade": {
+        "en": "Upgrade Phase Cards",
+        "fr": "Am\u00e9liorez vos cartes Phase"
+    },
+    "gameEventTitle.builderWorkCrews": {
         "en": "Play an additional Blue or Red card with its cost reduced by 11MC",
         "fr": "Jouez une carte Bleu ou Rouge aditionnelle son co\u00fbt est r\u00e9duit de 11MC"
     },
-    "gameEventTitle.builderAssetLiquidation.caption": {
+    "gameEventTitle.builderAssetLiquidation": {
         "en": "Play an additional Blue or Red card",
         "fr": "Jouez une carte Bleu ou Rouge aditionnelle"
     },
-    "gameEventTitle.builderGreen9MCFree.caption": {
+    "gameEventTitle.builderGreen9MCFree": {
         "en": "Play an additional Green card with a printed cost of 9MC or less without paying its cost",
         "fr": "Jouez gratuitement une carte Verte additionnelle dont le co\u00fbt initial est de 9MC ou moins"
     },
-    "gameEventTitle.builderAssortedEnterprises.caption": {
+    "gameEventTitle.builderAssortedEnterprises": {
         "en": "Play an aditionnal card of any color with it's cost reduced by 2MC",
         "fr": "Jouez une carte aditionnelle de n'importe quelle couleur son co\u00fbt est r\u00e9duit de 2MC"
     },
-    "gameEventTitle.builderSelfReplicatingBacteria.caption": {
+    "gameEventTitle.builderSelfReplicatingBacteria": {
         "en": "Play a card of any color with it's cost reduced by 25MC",
         "fr": "Jouez une carte de n'importe quelle couleur son co\u00fbt est r\u00e9duit de 25MC"
     },
-    "gameEventTitle.builderConscription.caption": {
+    "gameEventTitle.builderConscription": {
         "en": "Play an aditionnal card of any color with it's cost reduced by 16MC",
         "fr": "Jouez une carte aditionnelle de n'importe quelle couleur son co\u00fbt est r\u00e9duit de 16MC"
     },
-    "gameEventTitle.builderMaiNi.caption": {
+    "gameEventTitle.builderMaiNi": {
         "en": "Play a card of any color with a printed cost of 12MC or less without paying its cost",
         "fr": "Jouez gratuitement une carte de n'importe quelle couleur dont le co\u00fbt initial est de 12MC ou moins"
+    },
+    "interfaceTitle.createGame": {
+        "en": "NEW GAME",
+        "fr": "NOUVELLE PARTIE"
+    },
+    "interfaceTitle.createGamePlayers": {
+        "en": "Players",
+        "fr": "Joueurs"
+    },
+    "interfaceTitle.createGameOptions": {
+        "en": "Options",
+        "fr": "Options"
+    },
+    "interfaceTitle.createGamePlayerNumber": {
+        "en": "Number :",
+        "fr": "Nombre :"
+    },
+    "interfaceTitle.createGameAdditionalContent": {
+        "en": "Additional Content :",
+        "fr": "Contenu Additionnel :"
+    },
+    "interfaceTitle.createGameAdditionalCards": {
+        "en": "Additional Cards :",
+        "fr": "Cartes Additionnelles :"
+    },
+    "interfaceTitle.createGameGameMode": {
+        "en": "Game Mode :",
+        "fr": "Mode de Jeu :"
     }
 }

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { GameTextService } from '../services/core-game/game-text.service';
-import { EventTitleKey } from '../types/event.type';
+import { EventTitleKey } from '../types/text.type';
 
 @Pipe({
   name: 'eventTitleKeyPipe',

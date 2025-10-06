@@ -1,10 +1,8 @@
 import { Injectable } from "@angular/core";
 import jsonData from '../../../assets/data/game-text.json'
-import { GameOptionName, SettingSupportedLanguage } from "../../types/global.type";
+import { SettingSupportedLanguage } from "../../types/global.type";
 import { GameParamService } from "./game-param.service";
-import { LocalizedText } from "../../types/project-card.type";
-import { EventTitleKey } from "../../types/event.type";
-import { map } from "rxjs";
+import { CreateGameKey, EventTitleKey, GameOptionKey } from "../../types/text.type";
 
 
 const eventKeyPrefix = 'gameEventTitle'
@@ -15,7 +13,7 @@ const eventKeyPrefix = 'gameEventTitle'
 export class GameTextService{
 	_language!: SettingSupportedLanguage
 	_defaultLanguage: SettingSupportedLanguage = 'en'
-	
+
 	private translationMap!: Map<string, any>
 
 	constructor(private gameParamService: GameParamService){
@@ -32,11 +30,11 @@ export class GameTextService{
 		}
 		return key
 	}
-	getGameOptionCaption(option: GameOptionName): string {
+	getGameOptionCaption(option: GameOptionKey): string {
 		let result = this.translationMap.get(this.setKey('gameOption', option, 'caption'))
 		return result[this._language] || result[this._defaultLanguage]
 	}
-	getGameOptionToolTip(option: GameOptionName): string {
+	getGameOptionToolTip(option: GameOptionKey): string {
 		let result = this.translationMap.get(this.setKey('gameOption', option, 'tooltip'))
 		return result[this._language] || result[this._defaultLanguage]
 	}
@@ -52,6 +50,10 @@ export class GameTextService{
 	getPhaseCardDescription(abilityOrBonus: 'ability' | 'bonus', card: string): string {
 		let prefix = abilityOrBonus==='ability'?'Ability':'Bonus'
 		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, card, 'caption'))
+		return result[this._language] || result[this._defaultLanguage]
+	}
+	getCreateGameText(key: CreateGameKey): string {
+		let result = this.translationMap.get(this.setKey('interfaceTitle', key))
 		return result[this._language] || result[this._defaultLanguage]
 	}
 }

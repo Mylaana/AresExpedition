@@ -15,6 +15,8 @@ import { ApiMessage, ApiPlayer } from '../../../../interfaces/websocket.interfac
 import { Utils } from '../../../../utils/utils';
 import { CreateGameOptionsComponent } from '../../../create-game/create-game-options/create-game-options.component';
 import { CreateGameOptionService } from '../../../../services/core-game/create-game.service';
+import { CreateGameKey } from '../../../../types/text.type';
+import { GameTextService } from '../../../../services/core-game/game-text.service';
 
 @Component({
     selector: 'app-new-game',
@@ -40,7 +42,8 @@ export class CreateGameComponent {
 	constructor(
 		private apiService: ApiService,
 		private router: Router,
-		private createGameOptionService: CreateGameOptionService
+		private createGameOptionService: CreateGameOptionService,
+		private gameTextService: GameTextService
 	) {}
 
 	displayError(message: string){
@@ -104,6 +107,8 @@ export class CreateGameComponent {
 		}
 		return list
 	}
-
+	getTitle(key: CreateGameKey): string {
+		return this.gameTextService.getCreateGameText(key)
+	}
 }
 

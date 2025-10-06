@@ -1,4 +1,4 @@
-import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType, EventTitleKey } from "../../types/event.type";
+import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, EventOrigin, GlobalParameterValue, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
 import { EventCardBuilderButtonNames, MinMaxEqualType, NonEventButtonNames, SettingSupportedLanguage, TagType } from "../../types/global.type";
@@ -11,6 +11,7 @@ import { BuilderType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const";
 import { GameTextService } from "../../services/core-game/game-text.service";
+import { EventTitleKey } from "../../types/text.type";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
@@ -31,7 +32,7 @@ export abstract class EventBaseModel {
 	lockDisplayUpgraded: boolean = false
 	eventOrigin?: EventOrigin
     titleKey!: EventTitleKey
-    
+
     constructor(private gameTextService?: GameTextService){}
 
     static setLanguage(lang: SettingSupportedLanguage) {
