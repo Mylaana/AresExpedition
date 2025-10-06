@@ -4,6 +4,7 @@ import { EventUnionSubTypes } from "../../types/event.type"
 import { ButtonType, CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, SettingSupportedLanguage, ToggleButtonNames } from "../../types/global.type"
 import { EffectPortalButtonEnum } from "../../enum/global.enum"
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const"
+import { ButtonCaptionKey } from "../../types/text.type"
 
 export abstract class ButtonBase {
 	private static language: SettingSupportedLanguage = SETTING_DEFAULT_LANGUAGE
@@ -12,6 +13,7 @@ export abstract class ButtonBase {
 	resetEnabledOnEventSwitch: boolean = true
 	displayed: boolean = true
     caption?: string
+	captionKey?: ButtonCaptionKey
 	type!: ButtonType
 	locked: boolean = false
 	warning: boolean = false

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import jsonData from '../../../assets/data/game-text.json'
 import { SettingSupportedLanguage } from "../../types/global.type";
 import { GameParamService } from "./game-param.service";
-import { CreateGameKey, EventTitleKey, GameOptionKey } from "../../types/text.type";
+import { ButtonCaptionKey, CreateGameKey, EventTitleKey, GameOptionKey } from "../../types/text.type";
 
 
 const eventKeyPrefix = 'gameEventTitle'
@@ -32,28 +32,39 @@ export class GameTextService{
 	}
 	getGameOptionCaption(option: GameOptionKey): string {
 		let result = this.translationMap.get(this.setKey('gameOption', option, 'caption'))
+		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
 	getGameOptionToolTip(option: GameOptionKey): string {
 		let result = this.translationMap.get(this.setKey('gameOption', option, 'tooltip'))
+		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
 	getEventTitle(eventTitlekey: EventTitleKey): string {
 		let result = this.translationMap.get(this.setKey('gameEventTitle', eventTitlekey, 'caption'))
+		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
 	getPhaseCardTitle(abilityOrBonus: 'ability' | 'bonus'): string {
 		let prefix = abilityOrBonus==='ability'?'Ability':'Bonus'
 		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, 'title', 'caption'))
+		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
 	getPhaseCardDescription(abilityOrBonus: 'ability' | 'bonus', card: string): string {
 		let prefix = abilityOrBonus==='ability'?'Ability':'Bonus'
 		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, card, 'caption'))
+		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
 	getCreateGameText(key: CreateGameKey): string {
 		let result = this.translationMap.get(this.setKey('interfaceTitle', key))
+		if(!result){return 'MISSING TEXT IN JSON'}
+		return result[this._language] || result[this._defaultLanguage]
+	}
+	getButtonCaption(key: ButtonCaptionKey): string {
+		let result = this.translationMap.get(this.setKey('interfaceButton', key))
+		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
 }

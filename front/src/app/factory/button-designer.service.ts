@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton, ToggleButton, CarouselButton } from "../models/core-game/button.model";
-import { CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton, ToggleButton, CarouselButton, ButtonBase } from "../models/core-game/button.model";
+import { ButtonNames, CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
 import { BuilderOption, EffectPortalButtonEnum } from "../enum/global.enum";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS, EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-portal-maps";
+import { BUTTON_CAPTIONKEY_FROM_BUTTONNAME, BUTTON_CAPTIONKEY_FROM_EVENTSUBTYPE } from "../maps/button-captionkey-maps";
 
 
 @Injectable({
@@ -98,7 +99,7 @@ export class ButtonDesigner{
         }
         return resetEnabled
     }
-    private static getCaption(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames): string {
+    private static getCaption(buttonRule: EventUnionSubTypes | ButtonNames): string {
         let caption: string
 
         switch(buttonRule){
@@ -164,7 +165,7 @@ export class ButtonDesigner{
 			button.startEnabled = this.getStartEnabled(eventSubType)
 		}
         button.setEnabled(button.startEnabled)
-        button.caption = this.getCaption(eventSubType)
+		this.setCaptionKeyOrCaption(button, {eventSubType})
         button.eventSubType = eventSubType
 		button.resetEnabledOnEventSwitch = this.getResetStartEnabledOnEventSwitch(eventSubType)
         return button
@@ -173,7 +174,7 @@ export class ButtonDesigner{
         let button = new EventMainButtonSelector
         button.startEnabled = this.getStartEnabled(eventSubType)
         button.setEnabled(button.startEnabled)
-        button.caption = this.getCaption(eventSubType)
+        this.setCaptionKeyOrCaption(button, {eventSubType})
         button.eventSubType = eventSubType
 		button.resetEnabledOnEventSwitch = this.getResetStartEnabledOnEventSwitch(eventSubType)
         return button
@@ -216,7 +217,11 @@ export class ButtonDesigner{
 		button.name = name
         button.startEnabled = this.getStartEnabled(name)
 		button.setEnabled(button.startEnabled)
-        button.caption = caption??this.getCaption(name)
+		if(caption){
+			button.caption = caption
+		} else {
+			this.setCaptionKeyOrCaption(button, {buttonName:name})
+		}
 
         return button
 	}
@@ -259,5 +264,24 @@ export class ButtonDesigner{
 		button.value = startingValue??(valueList[0]??'')
 
         return button
+	}
+	private static setCaptionKeyOrCaption(button: ButtonBase, params: {eventSubType?: EventUnionSubTypes, buttonName?: ButtonNames}) {
+		//gets captionKey or caption for eventSubtypes
+		if(params.eventSubType){
+			if(params.eventSubType in BUTTON_CAPTIONKEY_FROM_EVENTSUBTYPE && BUTTON_CAPTIONKEY_FROM_EVENTSUBTYPE[params.eventSubType]){
+				button.captionKey = BUTTON_CAPTIONKEY_FROM_EVENTSUBTYPE[params.eventSubType]?.()
+			} else {
+				button.caption = this.getCaption(params.eventSubType)
+			}
+		}
+
+		//gets captionKey or caption for buttonNames
+		if(params.buttonName){
+			if(params.buttonName in BUTTON_CAPTIONKEY_FROM_BUTTONNAME && BUTTON_CAPTIONKEY_FROM_BUTTONNAME[params.buttonName]){
+				button.captionKey = BUTTON_CAPTIONKEY_FROM_BUTTONNAME[params.buttonName]?.()
+			} else {
+				button.caption = this.getCaption(params.buttonName)
+			}
+		}
 	}
 }

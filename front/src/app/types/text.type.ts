@@ -5,3 +5,6 @@ export type GameOptionKey = 'discovery' |  'standardProjectUpgrade' | 'additiona
 | 'promoCards' | 'fanmadeCards' | 'balancedCards'
 | 'initialDraft' | 'merger' | 'deadHand'
 export type CreateGameKey = 'createGame' | 'createGamePlayers' | 'createGameOptions' | 'createGamePlayerNumber' | 'createGameAdditionalContent' | 'createGameAdditionalCards' | 'createGameGameMode'
+export type ButtonCaptionKey = 'buttonCreateGameCreate' | 'buttonCreateGameEnableAll' | 'buttonCreateGameDisableAll' |
+'buttonHomeNewGame' | 'buttonHomeCardOverview' | 'buttonHomeDiscord' | 'buttonHomeBuyAres'
+| 'buttonCardOverviewDisplayBalanced' | 'buttonCardOverviewDisplayAll'
