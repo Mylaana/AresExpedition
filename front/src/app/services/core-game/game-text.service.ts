@@ -47,13 +47,13 @@ export class GameTextService{
 	}
 	getPhaseCardTitle(abilityOrBonus: 'ability' | 'bonus'): string {
 		let prefix = abilityOrBonus==='ability'?'Ability':'Bonus'
-		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, 'title', 'caption'))
+		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, 'title'))
 		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
 	getPhaseCardDescription(abilityOrBonus: 'ability' | 'bonus', card: string): string {
 		let prefix = abilityOrBonus==='ability'?'Ability':'Bonus'
-		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, card, 'caption'))
+		let result = this.translationMap.get(this.setKey(`gamePhaseCard${prefix}`, card))
 		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}
