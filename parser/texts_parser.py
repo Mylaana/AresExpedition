@@ -1,24 +1,26 @@
 import csv
 import os
 import json
-import copy
 import traceback
+
 
 def fill_language(header: list, line: list, start_index: int): 
     result: dict = {}
     for index in range(start_index, len(header)):
-        if(header[index]==''):
+        if header[index] == '':
             continue
-        result[header[index]] =  line[index]
+        result[header[index]] = line[index]
 
     return result
+
 
 def fill_block(header: list, unparsed: list):
     result: list = []
     index = 0
     caption = ''
     while header[index].find('level') != -1:
-        if unparsed[0][index]=='':
+        if unparsed[0][index] == '':
+            index += 1
             continue
 
         if caption != '':
@@ -33,6 +35,7 @@ def fill_block(header: list, unparsed: list):
     
     return result
 
+
 def fill_dict(header: list, unparsed: list):
     result: dict = {}
 
@@ -41,6 +44,7 @@ def fill_dict(header: list, unparsed: list):
         result[block[0]] = block[1]
 
     return result
+
 
 def main():
     dir_name = os.path.dirname(__file__)
