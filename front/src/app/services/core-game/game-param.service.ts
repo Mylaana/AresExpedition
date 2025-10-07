@@ -46,12 +46,12 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 
 		'--twi-prerequisite-summary-text-image-height--medium': '13px',
 		'--twi-effect-summary-image-height--small': '12px',
-		'--twi-effect-text-image-height--small': '10px',
+		'--twi-effect-text-image-height--small': '9px',
 		'--twi-vp-text-size--small': '15px',
 		'--twi-activate-image-height--small': '16px',
 		'--twi-activate-text-height--small': '11px',
 		'--twi-megacredit-text-offset-left--small': '0px',
-		'--twi-megacredit-text-offset-top--small': '0px',
+		'--twi-megacredit-text-offset-top--small': '4px',
 		'--twi-megacredit-text-size--small': '8px',
 
 		'--builder-padding--small': '13px',

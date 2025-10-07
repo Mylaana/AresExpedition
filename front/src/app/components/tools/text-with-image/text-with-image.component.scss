@@ -1,5 +1,5 @@
 :host ::ng-deep * {
-    vertical-align: top;
+    vertical-align: middle;
 	display: inline;
     word-wrap: break-word;
 }
@@ -52,7 +52,7 @@
 .wrapper-text-with-image::ng-deep .block-flex.cardEffectSummary{
 	width: 100%;
 	&.small{
-		height: var(--twi-effect-summary-image-height--small);
+		height: calc(var(--twi-effect-summary-image-height--small) + 3px);
 	}
 	&.medium{
 		height: var(--twi-effect-summary-image-height--medium);
@@ -104,7 +104,7 @@
 	width: 100%;
 	&.small{
 		line-height: .9;
-		padding-top: 3px;
+		//padding-top: 3px;
 		height: fit-content;
 	}
 	& img{
@@ -121,6 +121,10 @@
 	width: 100%;
 	& img{
 		height: var(--twi-prerequisite-summary-text-image-height--medium);
+	}
+	&.small{
+		line-height: .9;
+		padding-top: 3px;
 	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.commandButton{
