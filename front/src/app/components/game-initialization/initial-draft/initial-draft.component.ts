@@ -7,12 +7,14 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { EventBaseModel } from '../../../models/core-game/event.model';
 import { ProjectListType } from '../../../types/project-card.type';
+import { EventTitleKeyPipe } from '../../../pipes/event-title.pipe';
 
 @Component({
     selector: 'app-initial-draft',
     imports: [
         CommonModule,
-        PlayableCardListComponent
+        PlayableCardListComponent,
+		EventTitleKeyPipe
     ],
     templateUrl: './initial-draft.component.html',
     styleUrl: './initial-draft.component.scss'

@@ -350,5 +350,33 @@
     "interfaceTitle.cardOverviewTitle": {
         "en": "CARD LIST",
         "fr": "LISTE DES CARTES"
+    },
+    "interfaceTitle.newGameLinkTitle": {
+        "en": "READY FOR LAUNCH",
+        "fr": "PARE AU DECOLLAGE"
+    },
+    "interfaceTitle.newGameLinkPlayerLaunchSite": {
+        "en": "Players launch sites:",
+        "fr": "Sites de Lancement:"
+    },
+    "interfaceTitle.newGameLinkGameOptions": {
+        "en": "Game options:",
+        "fr": "Options de Jeu:"
+    },
+    "gameEventTitle.eventInitialDraft": {
+        "en": "Initial Draft: Discard any card number to draw that many new cards",
+        "fr": "Draft Initial: D\u00e9faussez autant de carte que souhait\u00e9 pour en piocher autant de nouvelles"
+    },
+    "gameEventTitle.eventInitialDraftThenCorp": {
+        "en": "Then you will select a corporation",
+        "fr": "Puis vous choisirez une corporation"
+    },
+    "gameEventTitle.eventCorpSelection": {
+        "en": "Select your Corporation",
+        "fr": "S\u00e9lectionnez une Corporation"
+    },
+    "gameEventTitle.eventCorpSelectionMerger": {
+        "en": "Select your Merger Corporation",
+        "fr": "S\u00e9lectionnez une Corporation Merger"
     }
 }

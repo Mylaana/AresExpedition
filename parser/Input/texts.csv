@@ -87,3 +87,10 @@ errorMessage;errorCreateGameNameAndColor;;Each player must have a valid name and
 errorMessage;errorCreateGameNameServerOffline;;Cannot create game, server is offline.;Impossible de créer une partie, serveur injoignable.
 errorMessage;errorCreateGameNameOtherError;;Error during game creation, see console for full error.;Erreur lors de la création de partie, voir la console pour plus d'information.
 interfaceTitle;cardOverviewTitle;;CARD LIST;LISTE DES CARTES
+interfaceTitle;newGameLinkTitle;;READY FOR LAUNCH;PARE AU DECOLLAGE
+interfaceTitle;newGameLinkPlayerLaunchSite;;Players launch sites:;Sites de Lancement:
+interfaceTitle;newGameLinkGameOptions;;Game options:;Options de Jeu:
+gameEventTitle;eventInitialDraft;;Initial Draft: Discard any card number to draw that many new cards;Draft Initial: Défaussez autant de carte que souhaité pour en piocher autant de nouvelles
+gameEventTitle;eventInitialDraftThenCorp;;Then you will select a corporation;Puis vous choisirez une corporation
+gameEventTitle;eventCorpSelection;;Select your Corporation;Sélectionnez une Corporation
+gameEventTitle;eventCorpSelectionMerger;;Select your Merger Corporation;Sélectionnez une Corporation Merger

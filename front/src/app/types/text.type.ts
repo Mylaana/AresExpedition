@@ -1,11 +1,13 @@
 export type EventTitleKey = 'phasePlanification' | 'phaseDevelopment' | 'phaseConstruction' | 'phaseAction' | 'phaseProduction' | 'phaseResearch' | 'phaseCardUpgrade'
 | 'builderConscription' | 'builderMaiNi' | 'builderWorkCrews' | 'builderAssetLiquidation' | 'builderGreen9MCFree' | 'builderAssortedEnterprises' | 'builderSelfReplicatingBacteria'
+| 'eventInitialDraft' | 'eventInitialDraftThenCorp' | 'eventCorpSelection' | 'eventCorpSelectionMerger'
 export type GameOptionKey = 'discovery' |  'standardProjectUpgrade' | 'additionalAwards'
 | 'foundations' | 'infrastructureMandatory'
 | 'promoCards' | 'fanmadeCards' | 'balancedCards'
 | 'initialDraft' | 'merger' | 'deadHand'
 export type InterfaceTitleKey = 'createGame' | 'createGamePlayers' | 'createGameOptions' | 'createGamePlayerNumber' | 'createGameAdditionalContent' | 'createGameAdditionalCards' | 'createGameGameMode'
 | 'cardOverviewTitle'
+| 'newGameLinkPlayerLaunchSite' | 'newGameLinkTitle' | 'newGameLinkGameOptions'
 export type ButtonCaptionKey = 'buttonCreateGameCreate' | 'buttonCreateGameEnableAll' | 'buttonCreateGameDisableAll' |
 'buttonHomeNewGame' | 'buttonHomeCardOverview' | 'buttonHomeDiscord' | 'buttonHomeBuyAres'
 | 'buttonCardOverviewDisplayBalanced' | 'buttonCardOverviewDisplayAll'

@@ -217,6 +217,7 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
 			break
         case('selectStartingHand'):{
             event.title = 'Discard any card number to draw that many new cards.'
+			event.titleKey = 'eventInitialDraft'
             event.setSelectorInitialState({selectable:true, ignoreCost: true})
             event.setSelectorQuantityTreshold('min')
             event.setSelectorQuantity(0)
@@ -224,7 +225,7 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             break
         }
         case('selectCorporation'):case('selectMerger'):{
-            event.title = args?.isMerger?'Select your Merger':'Select your Corporation'
+			event.titleKey = args?.isMerger?'eventCorpSelectionMerger':'eventCorpSelection'
             event.setSelectorInitialState({selectable:true, ignoreCost: true})
             event.setSelectorQuantityTreshold('equal')
             event.setSelectorQuantity(1)
@@ -562,7 +563,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 					buildDiscountValue = 100
 					event.setSelectorFilter({type: ProjectFilterNameEnum.maiNiProductions})
 					event.titleKey = 'builderMaiNi'
-					
+
 					break
 				}
 				case(BuilderOption.conscription):{
