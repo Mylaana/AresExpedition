@@ -11,7 +11,7 @@
         "phaseUp": "I-II",
         "title": {
             "en": "Adaptation Technology",
-            "fr": ""
+            "fr": "Technologie d'Adaptation"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -20,7 +20,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a card with requirements, you can consider oxygen or temperature or infrastructure a higher or lower color. This cannot be combined with other effects.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez une carte avec un pr\u00e9requis, vous pouvez consid\u00e9rer que la temp\u00e9rature, l'oxygene et l'infrastructure sont d'un niveau de couleur inf\u00e9rieur ou sup\u00e9rieur. Cela ne peut pas \u00eatre modifi\u00e9 davantage par d'autres effets. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -1426,7 +1426,7 @@
         },
         "effectText": {
             "en": "Add 3 microbes to this card.\nACTION: Add 1 microbe to this card, or remove 3 microbes from this card to flip an ocean tile.",
-            "fr": "ACTION: Ajoutez 1 microbe sur cette carte ou retirez 3 microbes piur r\u00e9v\u00e9ler une tuile Oc\u00e9an. "
+            "fr": "ACTION: Ajoutez 1 microbe sur cette carte ou retirez 3 microbes pour r\u00e9v\u00e9ler une tuile Oc\u00e9an. "
         },
         "playedText": {
             "en": "Add 3 microbes to this card.",
@@ -1780,7 +1780,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a card, you can spend 1 plant to reduce the cost of the card by 5 MC.",
-            "fr": "EFFET: Lorsque vous jouez une carte, vous pouvez d\u00e9penser 1 plante pour r\u00e9duire le coput associ\u00e9 de 5 MC. "
+            "fr": "EFFET: Lorsque vous jouez une carte, vous pouvez d\u00e9penser 1 plante pour r\u00e9duire le co\u00fbt associ\u00e9 de 5 MC. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -2146,7 +2146,7 @@
         "phaseUp": "III",
         "title": {
             "en": "Water Import from Europa",
-            "fr": "Importation d'eau d'Europa"
+            "fr": "Importation d'eau d'Europe"
         },
         "vpText": {
             "en": "/ $tag_jovian$",
@@ -2411,7 +2411,7 @@
         },
         "playedText": {
             "en": "Increase the temperature 1 step.$skipline$Flip an ocean tile.",
-            "fr": "Augmentez la tempr\u00e9taure de 1 niveau. $skipline$R\u00e9v\u00e9lez une tuile Oc\u00e9an. "
+            "fr": "Augmentez la temp\u00e9rature de 1 niveau. $skipline$R\u00e9v\u00e9lez une tuile Oc\u00e9an. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -2734,7 +2734,7 @@
         },
         "playedText": {
             "en": "Flip an ocean tile.$skipline$You draw 2 cards.$skipline$Gain 5 plants or add 3 animals to another card.",
-            "fr": "R\u00e9v\u00e9lez une tuile Oc\u00e9an. $slipline$Piochez deux cartes. $skipline$ Gagnez 5 plantes ou ajoutez 3 animaux \u00e0 une AUTRE carte. "
+            "fr": "R\u00e9v\u00e9lez une tuile Oc\u00e9an.$skipline$Piochez deux cartes. $skipline$ Gagnez 5 plantes ou ajoutez 3 animaux \u00e0 une AUTRE carte. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -3513,7 +3513,7 @@
         },
         "prerequisiteSummaryText": {
             "en": "-2$ressource_plant$",
-            "fr": "-2$ressources_plant$"
+            "fr": "-2$ressource_plant$"
         },
         "status": "validated",
         "vpScaling": "0"
@@ -3686,8 +3686,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$/$tag_earth$",
-            "fr": "$ressource_megacreditvoid_1$/$tag_earth$"
+            "en": "$ressource_megacredit$/$tag_earth$",
+            "fr": "$ressource_megacredit$/$tag_earth$"
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC for each $tag_earth$ you have, including this one.",
@@ -5989,7 +5989,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC. When you play a $tag_building$, you pay 2 MC less for it.",
-            "fr": "Lors de la phase de production, cette carte produit 1 MC.$skipline$Lorsque vous jouez un $other_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
+            "fr": "Lors de la phase de production, cette carte produit 1 MC.$skipline$Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -6209,7 +6209,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a card that costs 20 MC or more, you pay 4 MC less for it.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez une carte dont le co\u00fbt initial est de 20MC ou plus, vous payez 4MC de moins."
         },
         "startingMegacredits": 48,
         "status": "validated",
@@ -6233,7 +6233,7 @@
         },
         "effectText": {
             "en": "Increase your plant production by 1.",
-            "fr": ""
+            "fr": "Augmentez votre production de plantes de 1."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -6242,7 +6242,7 @@
         },
         "effectText2": {
             "en": "EFFECT: When you spend plants to gain a forest tile and increase oxygen, you spend one less plant.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous d\u00e9pensez des plantes pour gagner une tuile For\u00eat, d\u00e9pensez une plante de moins."
         },
         "startingMegacredits": 27,
         "status": "validated",
@@ -6267,7 +6267,7 @@
         },
         "effectText": {
             "en": "Increase your plant production by 3.",
-            "fr": ""
+            "fr": "Augmentez votre production de plantes de 3."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -6275,8 +6275,8 @@
             "fr": "-8$ressource_plant$$other_forest$:$skipline$-$ressource_plant$$ressource_plant$"
         },
         "effectText2": {
-            "en": "EFFECT: When you spend plants to gain a forest tile and increase oxygen, you spend 2 less plant.",
-            "fr": ""
+            "en": "EFFECT: When you spend plants to gain a forest tile and increase oxygen, you spend 2 less plants.",
+            "fr": "EFFET: Lorsque vous d\u00e9pensez des plantes pour gagner une tuile For\u00eat, d\u00e9pensez 2 plantes de moins."
         },
         "startingMegacredits": 37,
         "status": "validated",
@@ -6301,7 +6301,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt est r\u00e9duit de 2 MC."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -6310,7 +6310,7 @@
         },
         "effectText2": {
             "en": "EFFECT: When you play a EVENT, you pay 2 MC less for it.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez un $tag_event$, payez 2MC de moins."
         },
         "startingMegacredits": 46,
         "status": "validated",
@@ -6363,7 +6363,7 @@
         },
         "effectText": {
             "en": "When you play an $tag_building$, you pay 2 MC less.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt est r\u00e9duit de 2 MC."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -6372,7 +6372,7 @@
         },
         "effectText2": {
             "en": "EFFECT: For each $ressource_steel$ you gain, you also gain $other_tr$.",
-            "fr": ""
+            "fr": "EFFET: Pour chaque $ressource_steel$ que vous gagnez, gagnez \u00e9galement $other_tr$"
         },
         "startingMegacredits": 27,
         "status": "validated",
@@ -6398,7 +6398,7 @@
         },
         "effectText": {
             "en": "When you play an $tag_building$, you pay 4 MC less.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt est r\u00e9duit de 4 MC."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -6407,7 +6407,7 @@
         },
         "effectText2": {
             "en": "EFFECT: For each $ressource_steel$ you gain, you also gain $other_tr$.",
-            "fr": ""
+            "fr": "EFFET: Pour chaque $ressource_steel$ que vous gagnez, gagnez \u00e9galement $other_tr$"
         },
         "startingMegacredits": 27,
         "status": "implemented",
@@ -6432,7 +6432,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 3 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -6441,7 +6441,7 @@
         },
         "effectText2": {
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional MC.",
-            "fr": ""
+            "fr": "EFFET: Chaque $ressource_titane$ en votre possession r\u00e9duit le co\u00fbt des cartes $tag_space$ d'un MC suppl\u00e9mentaire."
         },
         "startingMegacredits": 20,
         "status": "validated",
@@ -6466,7 +6466,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_space$, you pay 6 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 6 MC."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -6475,7 +6475,7 @@
         },
         "effectText2": {
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional MC.",
-            "fr": ""
+            "fr": "EFFET: Chaque $ressource_titane$ en votre possession r\u00e9duit le co\u00fbt des cartes $tag_space$ d'un MC suppl\u00e9mentaire."
         },
         "startingMegacredits": 25,
         "status": "validated",
@@ -6554,7 +6554,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you draw cards during the research phase, draw an additional card and keep an additional card.",
-            "fr": ""
+            "fr": "EFFET: Lorsque de la phase Recherche, piochez et gardez une carte suppl\u00e9mentaire."
         },
         "startingMegacredits": 40,
         "status": "validated",
@@ -6632,11 +6632,11 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_science$, draw 1 card.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez un $tag_science$, piochez 1 carte."
         },
         "playedText": {
             "en": "Upgrade your Phase card II.",
-            "fr": ""
+            "fr": "Am\u00e9liorez votre Phase II."
         },
         "startingMegacredits": 33,
         "status": "validated",
@@ -6660,11 +6660,11 @@
         },
         "effectText": {
             "en": "EFFECT: Whenever you sell a card, you gain one more MC.",
-            "fr": ""
+            "fr": "Lorsque vous vendez une carte, gagnez 1MC suppl\u00e9mentaire."
         },
         "playedText": {
             "en": "Upgrade your Phase card V.",
-            "fr": ""
+            "fr": "Am\u00e9liorez votre Phase V."
         },
         "startingMegacredits": 26,
         "status": "validated",
@@ -6690,7 +6690,7 @@
         },
         "playedText": {
             "en": "Upgrade your Phase card V.",
-            "fr": ""
+            "fr": "Am\u00e9liorez votre Phase V."
         },
         "startingMegacredits": 20,
         "status": "validated",
@@ -6715,12 +6715,12 @@
         },
         "effectText": {
             "en": "ACTION: Gain 1MC.$$*If you chose the action phase this turn, gain an additional 1MC.",
-            "fr": ""
+            "fr": "ACTION: Gagnez 1MC$$*Si vous avez choisi la phase action durant ce round, gagnez 1MC suppl\u00e9mentaire."
         },
         "effectSummaryOption": "scalingCostActivation",
         "playedText": {
             "en": "Upgrade your Phase card III.",
-            "fr": ""
+            "fr": "Am\u00e9liorez votre Phase III."
         },
         "startingMegacredits": 30,
         "status": "validated",
@@ -6745,7 +6745,7 @@
         },
         "effectText": {
             "en": "EFFECT: Whenever you use an \"ACTION:\" from one of your cards, gain 1 MC.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous utiisez une \"ACTION\" d'une de vos cartes, gagnez 1MC."
         },
         "effectSummaryType2": "action",
         "effectSummaryText2": {
@@ -6754,11 +6754,11 @@
         },
         "effectText2": {
             "en": "ACTION: Gain 1MC.",
-            "fr": ""
+            "fr": "ACTION: Gagnez 1MC."
         },
         "playedText": {
             "en": "Upgrade your Phase card III.",
-            "fr": ""
+            "fr": "Am\u00e9liorez votre Phase III."
         },
         "startingMegacredits": 30,
         "status": "validated",
@@ -6787,11 +6787,11 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_power$ (including this one), gain 2 heats.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez un $tag_power$ (y compris celui-ci), gagnez 2 chaleur."
         },
         "playedText": {
             "en": "Upgrade your Phase card I.",
-            "fr": ""
+            "fr": "Am\u00e9liorez votre Phase I."
         },
         "startingMegacredits": 38,
         "status": "validated",
@@ -7313,7 +7313,7 @@
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -7482,7 +7482,7 @@
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "status": "validated",
         "vpScaling": "0",
@@ -7513,7 +7513,7 @@
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase. "
         },
         "prerequisiteText": {
             "en": "Requires that you spend 5$ressource_heat$",
@@ -8264,7 +8264,7 @@
         },
         "playedText": {
             "en": "Raise infrastructure 1 step.",
-            "fr": "Augmentez l'infrastructure de 1 niveau. $skipline$ Si vous avez 3 autre $tag_jovian$ ou plus, augmentez l'infrastructure de 1 niveau suppl\u00e9mentaire. "
+            "fr": "Augmentez l'infrastructure de 1 niveau."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8317,7 +8317,7 @@
         },
         "playedText": {
             "en": "Raise infrastructure 1 step.",
-            "fr": "Augmentez l'infrastructure de 1 niveau. $skipline$ Si vous avez 3 autre $tag_jovian$ ou plus, augmentez l'infrastructure de 1 niveau suppl\u00e9mentaire. "
+            "fr": "Augmentez l'infrastructure de 1 niveau."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -8728,8 +8728,8 @@
             "fr": "$tag_animal$ / $tag_plant$:$skipline$$ressource_animal$"
         },
         "effectText": {
-            "en": "EFFECT: When you play an ANIMAL or PLANT, including these, add an animal to this card.",
-            "fr": ""
+            "en": "EFFECT: When you play an $tag_animal$ or $tag_plant$, including these, add an animal to this card.",
+            "fr": "EFFET: Lorsque vous jouez $tag_animal$ or $tag_plant$ (y compris ceux-ci), ajoutez un $ressource_animal$ \u00e0 cette carte."
         },
         "stockable": [
             "animal"
@@ -8800,7 +8800,7 @@
         },
         "effectText": {
             "en": "ACTION: Reveal the top 3 cards of the deck. Place a card with an EVENT revealed this way into your hand.",
-            "fr": ""
+            "fr": "ACTION: R\u00e9v\u00e9lez 3 cartes du deck. Piochez une carte avec $tag_event$ parmi les cartes r\u00e9v\u00e9l\u00e9es."
         },
         "startingMegacredits": 50,
         "status": "validated",
@@ -8828,11 +8828,11 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a green card, you pay 2 MC less for it.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez une carte Verte, payez 2MC de moins."
         },
         "playedText": {
             "en": "At the start of the game, reveal the top 5 cards of the deck. Place a green card that was revealed this way into your hand. Discard the rest.",
-            "fr": ""
+            "fr": "Au d\u00e9but de la partie, r\u00e9v\u00e9lez 5 cartes du deck. Piochez une carte Verte parmi les cartes r\u00e9v\u00e9l\u00e9es."
         },
         "startingMegacredits": 40,
         "status": "validated",
@@ -8856,7 +8856,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a blue card, you pay 3 MC less for it.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez une carte Bleu, payez 3MC de moins."
         },
         "playedText": {
             "en": "At the start of the game, reveal cards from the deck until you reveal a blue card. Place it into your hand. Discard the rest.",
@@ -8884,11 +8884,11 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a green card, draw a card and then discard a card.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez une carte Verte, piochez une carte puis d\u00e9ffaussez une carte."
         },
         "playedText": {
             "en": "At the start of the game, play a card from your hand that costs 12MC or less without paying the cost. The requirements of this card must be fullfilled.",
-            "fr": ""
+            "fr": "Au d\u00e9but de la partie, jouez une carte de votre main dont le co\u00fbt initial est de 12MC ou moins. Vous devez respecter ses pr\u00e9requis \u00e9ventuels."
         },
         "startingMegacredits": 48,
         "status": "validated",
@@ -8909,11 +8909,11 @@
         },
         "effectText": {
             "en": "EFFECT: When you flip an ocean tile, gain 2 MC and 2 plants.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous r\u00e9v\u00e9lez une tuile Oc\u00e9an, gagnez 2MC et 2 plantes."
         },
         "playedText": {
             "en": "At the start of the game, + $ressource_card$$ressource_card$$ressource_card$$ressource_card$$ressource_card$$skipline$- $ressource_card$$ressource_card$$ressource_card$$ressource_card$",
-            "fr": ""
+            "fr": "Au d\u00e9but de la partie, + $ressource_card$$ressource_card$$ressource_card$$ressource_card$$ressource_card$$skipline$- $ressource_card$$ressource_card$$ressource_card$$ressource_card$"
         },
         "startingMegacredits": 43,
         "status": "validated",
@@ -8940,8 +8940,8 @@
             "fr": "$tag_earth$ : $ressource_microbe$$skipline$$other_researchsymbol$ :$other_researchcard$/$ressource_microbe$"
         },
         "effectText": {
-            "en": "EFFECT: When you play a $tag_earth$, including this, add a microbe to this card (5 max).$skipline$EFFECT: When you draw cards during the research phase, draw an additional card for each $ressource_microbe$ on this card.",
-            "fr": "EFFET: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$EFFET: Lorsque vous piochez des cartes pendant la phase de recherche, piochez une carte suppl\u00e9mentaire pour chaque $ressource_microbe$ sur cette carte."
+            "en": "EFFECT: When you play a $tag_earth$, including this, add a microbe to this card (5 max).$skipline$EFFECT: When you draw cards during the research phase, draw an additional card for each $ressource_microbe$ on this card (5max).",
+            "fr": "EFFET: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$EFFET: Lorsque de la phase de recherche, piochez une carte suppl\u00e9mentaire pour chaque $ressource_microbe$ sur cette carte (5max)."
         },
         "stockable": [
             "microbe"
@@ -9262,11 +9262,11 @@
         },
         "effectText": {
             "en": "EFFECT: Whenever you reveal an upgraded Phase card during planification, gain 2MC.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous r\u00e9v\u00e9lez une carte Phase upgrad\u00e9e lors de la Planification, gagnez 2MC."
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
-            "fr": ""
+            "fr": "Am\u00e9liorez une carte Phase."
         },
         "startingMegacredits": 25,
         "status": "implemented",
@@ -9290,11 +9290,11 @@
         },
         "effectText": {
             "en": "ACTION: Reveal the top 4 cards of the deck.$$Add one to your hand that shares a tag with this corporation.$$Discard the rest.",
-            "fr": ""
+            "fr": "ACTION: R\u00e9v\u00e9lez 4 cartes du deck.$$Piochez une carte avec un badge en commun avec cette corporation parmi les cartes r\u00e9v\u00e9l\u00e9es."
         },
         "playedText": {
             "en": "Chose a tag and add it to this corporation.",
-            "fr": ""
+            "fr": "Choisissez un badge et ajoutez le \u00e0 cette Corporation."
         },
         "startingMegacredits": 37,
         "status": "validated",
@@ -9355,7 +9355,7 @@
         },
         "effectText": {
             "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: increase one production:$skipline$$ressource_megacreditvoid_2$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card.",
-            "fr": ""
+            "fr": "EFFECT: Lorsque une phase que vous n'avez PAS choisie est activ\u00e9e :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: augmentez une production:$skipline$$ressource_megacreditvoid_2$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Piochez une carte."
         },
         "startingMegacredits": 40,
         "status": "validated",
@@ -9379,7 +9379,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a card, add 2 $ressource_science$ here.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez une carte, ajoutez 2$ressource_science$ sur cette carte."
         },
         "effectSummaryType2": "action",
         "effectSummaryText2": {
@@ -9419,7 +9419,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 3 MC.$skipline$When you play a $tag_space$, you pay 3 MC less for it.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 3MC.$skipline$Lorsque vous jouez un $tag_space$, le co\u00fbt est r\u00e9duit de 3 MC."
         },
         "effectSummaryType2": "production",
         "effectSummaryText2": {
@@ -9452,11 +9452,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC, 1heat and 1 plant, draw a card.",
-            "fr": ""
+            "fr": "Lors de la phase production, cette carte produit 2MC, 1 chaleur et 1 plante, piochez une carte."
         },
         "playedText": {
             "en": "Upgrade your phase card I or II.",
-            "fr": ""
+            "fr": "Am\u00e9liorez votre phase I ou II."
         },
         "startingMegacredits": 40,
         "status": "validated",
@@ -9505,7 +9505,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
-            "fr": ""
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt est r\u00e9duit de 2 MC."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -9514,7 +9514,7 @@
         },
         "effectText2": {
             "en": "EFFECT: When you play a $tag_building$, add a $ressource_microbe$ to this card or remove $ressource_microbe$ from this card to gain one $ressource_plant$ production.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez un $tag_building$, ajoutez $ressource_microbe$ \u00e0 cette carte OU retirez un $ressource_microbe$ de cette carte pour augmenter votre production de $ressource_plant$ de 1."
         },
         "stockable": [
             "microbe"
@@ -9535,7 +9535,7 @@
         "vpNumber": "2",
         "title": {
             "en": "Solar Logistics",
-            "fr": ""
+            "fr": "Logistique Solaire"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -9544,15 +9544,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play an $tag_space$$tag_event$, you pay 10 MC less for it and draw 2 cards.",
-            "fr": ""
-        },
-        "effectSummaryText2": {
-            "en": "$ressource_titanium$",
-            "fr": ""
-        },
-        "effectText2": {
-            "en": "When you play a $tag_space$, you pay 3 MC less for it.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez un $tag_space$$tag_event$, payez 10MC de moins et piochez 2 cartes."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9568,7 +9560,7 @@
         "cardType": "blueProject",
         "title": {
             "en": "Topsoils Contract",
-            "fr": ""
+            "fr": "Contrat des Terres Arables"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -9577,11 +9569,11 @@
         },
         "effectText": {
             "en": "EFFECT: When you add any number of microbe to another card, gain 2MC for each microbe added.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous ajoutez des $ressource_microbe$ sur une de vos cartes, gagnez 2MC par microbe ainsi ajout\u00e9."
         },
         "playedText": {
             "en": "Gain 3 plants.",
-            "fr": ""
+            "fr": "Gagnez 3 plantes."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9596,7 +9588,7 @@
         "cardType": "blueProject",
         "title": {
             "en": "Meat Industry",
-            "fr": ""
+            "fr": "Industrie du B\u00e9tail"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -9621,7 +9613,7 @@
         "vpNumber": "1",
         "title": {
             "en": "Rego Plastics",
-            "fr": ""
+            "fr": "R\u00e9goplastiques"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -9630,7 +9622,7 @@
         },
         "effectText": {
             "en": "EFFECT: Each steel you have reduces the cost of cards by an additional 1 MC.",
-            "fr": ""
+            "fr": "EFFET: Chaque $ressource_steel$ en votre possession r\u00e9duit de 1MC suppl\u00e9mentaire le co\u00fbt des cartes."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9645,7 +9637,7 @@
         "cardType": "blueProject",
         "title": {
             "en": "Mercurian Alloys",
-            "fr": ""
+            "fr": "Alliages Mercuriens"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -9654,7 +9646,7 @@
         },
         "effectText": {
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional 1 MC.",
-            "fr": ""
+            "fr": "EFFET: Chaque $ressource_titanium$ en votre possession r\u00e9duit de 1MC suppl\u00e9mentaire le co\u00fbt des cartes."
         },
         "prerequisiteText": {
             "en": "Requires 2 $tag_science$.",
@@ -9680,11 +9672,11 @@
         "vpNumber": "1",
         "title": {
             "en": "Solar Probe",
-            "fr": ""
+            "fr": "Sonde Solaire"
         },
         "playedText": {
             "en": "Draw 1 card for each 2 $tag_science$ you have.",
-            "fr": ""
+            "fr": "Piochez une carte pour chaque 2 $tag_science$ en votre possession."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9699,11 +9691,11 @@
         "cardType": "redProject",
         "title": {
             "en": "Social Event",
-            "fr": ""
+            "fr": "Ev\u00e9nement Social"
         },
         "playedText": {
             "en": "Gain 1 TR for each pair of $tag_earth$+$tag_jovian$.",
-            "fr": ""
+            "fr": "Gagnez 1 NT pour chaque paire de $tag_earth$+$tag_jovien$ en votre possession."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9721,11 +9713,11 @@
         "vpNumber": "1",
         "title": {
             "en": "Bactoviral Research",
-            "fr": ""
+            "fr": "Recherche Bact\u00e9riologique"
         },
         "playedText": {
             "en": "For every $tag_science$ you have add $ressource_microbe$ to another card.$skipline$Draw a card.",
-            "fr": ""
+            "fr": "Pour chaque $tag_science$ en votre possession, ajoutez une $ressource_microbe$ \u00e0 la carte de votre choix.$skipline$Piochez une carte."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9743,7 +9735,7 @@
         "vpNumber": "2",
         "title": {
             "en": "Ceres Spaceport",
-            "fr": ""
+            "fr": "Port Spatial de Ceres"
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
@@ -9756,7 +9748,7 @@
         },
         "playedText": {
             "en": "Flip an ocean.",
-            "fr": ""
+            "fr": "R\u00e9v\u00e9lez une tuile oc\u00e9an."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9813,7 +9805,7 @@
         "effectSummaryOption": "scalingCostActivation",
         "prerequisiteText": {
             "en": "Requires 4$tag_science$.",
-            "fr": ""
+            "fr": "Requiert 4$tag_science$."
         },
         "prerequisiteSummaryText": {
             "en": "4$tag_science$",
@@ -9837,7 +9829,7 @@
         "vpNumber": "*",
         "title": {
             "en": "Ganymede Colony",
-            "fr": ""
+            "fr": "Colonie de Ganymede"
         },
         "vpText": {
             "en": "/ $tag_jovian$",
@@ -9850,11 +9842,11 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 2 MC.",
-            "fr": ""
+            "fr": "Lors de la phase de production, cette carte produit 2MC."
         },
         "playedText": {
             "en": "Raise infrastructure 1 step.",
-            "fr": ""
+            "fr": "Augmentez l'infrastructure de 1 niveau."
         },
         "status": "validated",
         "vpScaling": "1"
@@ -9870,7 +9862,7 @@
         "cardType": "blueProject",
         "title": {
             "en": "Space Relay",
-            "fr": ""
+            "fr": "Relai Spatial"
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
@@ -9879,7 +9871,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_jovian$, you pay 5MC less for it and draw a card.",
-            "fr": ""
+            "fr": "EFFET: Lorsque vous jouez un $tag_jovian$, payez 5MC de moins et piochez une carte."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -10323,7 +10315,7 @@
         },
         "playedText": {
             "en": "Chose a tag and add it to this card.",
-            "fr": "Choisissez un badge et ajoutez-le\u00e0 cette carte. "
+            "fr": "Choisissez un badge et ajoutez-le \u00e0 cette carte. "
         },
         "status": "validated",
         "vpScaling": "0"
