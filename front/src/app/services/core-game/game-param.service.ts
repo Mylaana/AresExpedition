@@ -45,7 +45,7 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--phase-card-wrapper-title-padding--small': '7px',
 
 		'--twi-prerequisite-summary-text-image-height--medium': '13px',
-		'--twi-effect-summary-image-height--small': '12px',
+		'--twi-effect-summary-image-height--small': '8px',
 		'--twi-effect-text-image-height--small': '9px',
 		'--twi-vp-text-size--small': '15px',
 		'--twi-activate-image-height--small': '16px',
