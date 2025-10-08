@@ -44,6 +44,23 @@
 	height: 100%;
 	padding: 0;
 	margin: 0;
+
+	& > .wrapper-megacredit{
+		position: relative;
+		text-align: center;
+		& > p {
+			&.small{
+				left: var(--twi-megacredit-text-offset-left--small);
+				top: var(--twi-megacredit-text-offset-top--small);
+				font-size: var(--twi-megacredit-text-size--small);
+			}
+			&.medium{
+				left: var(--twi-megacredit-text-offset-left--medium);
+				top: var(--twi-megacredit-text-offset-top--medium);
+				font-size: var(--twi-megacredit-text-size--medium);
+			}
+		}
+	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.default{
 	width: 100%;
@@ -115,6 +132,7 @@
 			height: var(--twi-effect-text-image-height--medium);
 		}
 	}
+
 }
 .wrapper-text-with-image::ng-deep .block-flex.cardPrerequisite{
 	height: fit-content;

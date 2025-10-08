@@ -209,14 +209,15 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             break
         }
         case('researchPhaseResult'):
-			event.title = `Select ${event.getSelectorQuantity()} cards to draw`
+			//event.title = `Select ${event.getSelectorQuantity()} cards to draw`
+			event.titleKey = 'phaseResearch'
+			event.titleInterpolation = [event.getSelectorQuantity().toString()]
             event.setSelectorInitialState({selectable:true, ignoreCost: true})
             event.setSelectorQuantityTreshold('equal')
             event.refreshSelectorOnSwitch = false
             event.waiterId = args?.waiterId
 			break
         case('selectStartingHand'):{
-            event.title = 'Discard any card number to draw that many new cards.'
 			event.titleKey = 'eventInitialDraft'
             event.setSelectorInitialState({selectable:true, ignoreCost: true})
             event.setSelectorQuantityTreshold('min')

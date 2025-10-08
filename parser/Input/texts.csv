@@ -58,7 +58,7 @@ gameEventTitle;phaseDevelopment;;Development Phase;Phase Développement
 gameEventTitle;phaseConstruction;;Construction Phase;Phase Construction
 gameEventTitle;phaseAction;;Action Phase;Phase Action
 gameEventTitle;phaseProduction;;Production Phase;Phase Production
-gameEventTitle;phaseResearch;;Research Phase;Phase Recherche
+gameEventTitle;phaseResearch;;Research Phase: Draw $0$ cards;Phase Recherche: Piochez $0$ cartes
 gameEventTitle;phaseCardUpgrade;;Upgrade Phase Cards;Améliorez vos cartes Phase
 gameEventTitle;builderWorkCrews;;Play an additional Blue or Red card with its cost reduced by 11MC;Jouez une carte Bleu ou Rouge aditionnelle son coût est réduit de 11MC
 gameEventTitle;builderAssetLiquidation;;Play an additional Blue or Red card;Jouez une carte Bleu ou Rouge aditionnelle

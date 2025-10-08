@@ -236,8 +236,8 @@
         "fr": "Phase Production"
     },
     "gameEventTitle.phaseResearch": {
-        "en": "Research Phase",
-        "fr": "Phase Recherche"
+        "en": "Research Phase: Draw $0$ cards",
+        "fr": "Phase Recherche: Piochez $0$ cartes"
     },
     "gameEventTitle.phaseCardUpgrade": {
         "en": "Upgrade Phase Cards",

@@ -31,7 +31,7 @@
 	</div>
 	<div class="wrapper-title">
 		<div class="wrapper-event-description ares-title">
-			<h1 *ngIf="currentEvent.titleKey">{{currentEvent.titleKey | eventTitleKeyPipe }}</h1>
+			<h1 *ngIf="currentEvent.titleKey">{{currentEvent.titleKey | eventTitleKeyPipe:{ interpolate:currentEvent.titleInterpolation} }}</h1>
 			<h1 *ngIf="!currentEvent.titleKey">{{currentEvent.title}}</h1>
 		</div>
 	</div>

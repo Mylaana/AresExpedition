@@ -32,6 +32,7 @@ export abstract class EventBaseModel {
 	lockDisplayUpgraded: boolean = false
 	eventOrigin?: EventOrigin
     titleKey!: EventTitleKey
+	titleInterpolation!: string[]
 
     constructor(private gameTextService?: GameTextService){}
 

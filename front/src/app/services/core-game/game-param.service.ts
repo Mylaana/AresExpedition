@@ -94,7 +94,7 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--twi-activate-image-height--medium': '20px',
 		'--twi-activate-text-height--medium': '15px',
 		'--twi-megacredit-text-offset-left--medium': '0px',
-		'--twi-megacredit-text-offset-top--medium': '1px',
+		'--twi-megacredit-text-offset-top--medium': '3px',
 		'--twi-megacredit-text-size--medium': '10px',
 
 		'--builder-padding--medium': '18px',
