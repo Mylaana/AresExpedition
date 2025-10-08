@@ -13,7 +13,7 @@ export class EventTitleKeyPipe implements PipeTransform {
 
 	transform(key: EventTitleKey, params?: Partial<Record<pipeParam, any>>): string {
 		let translated = this.gameTextService.getEventTitle(key)
-		if(params && 'interpolate' in params){
+		if(params && 'interpolate' in params && params.interpolate){
 			translated = this.interpolateParams(translated, params.interpolate)
 		}
 		return translated

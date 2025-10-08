@@ -94,3 +94,5 @@ gameEventTitle;eventInitialDraft;;Initial Draft: Discard any card number to draw
 gameEventTitle;eventInitialDraftThenCorp;;Then you will select a corporation;Puis vous choisirez une corporation
 gameEventTitle;eventCorpSelection;;Select your Corporation;Sélectionnez une Corporation
 gameEventTitle;eventCorpSelectionMerger;;Select your Merger Corporation;Sélectionnez une Corporation Merger
+gameEventTitle;eventOptionalSell;;Select any number of cards to sell;Sélectionnez des cartes à vendre
+gameEventTitle;eventForcedSell;;Too many cards in hand, please select $0$ cards to sell or more;Vous avez trop de cartes en main, sélectionnez $0$ cartes ou plus à vendre

@@ -1,6 +1,7 @@
 export type EventTitleKey = 'phasePlanification' | 'phaseDevelopment' | 'phaseConstruction' | 'phaseAction' | 'phaseProduction' | 'phaseResearch' | 'phaseCardUpgrade'
 | 'builderConscription' | 'builderMaiNi' | 'builderWorkCrews' | 'builderAssetLiquidation' | 'builderGreen9MCFree' | 'builderAssortedEnterprises' | 'builderSelfReplicatingBacteria'
 | 'eventInitialDraft' | 'eventInitialDraftThenCorp' | 'eventCorpSelection' | 'eventCorpSelectionMerger'
+| 'eventOptionalSell' | 'eventForcedSell'
 export type GameOptionKey = 'discovery' |  'standardProjectUpgrade' | 'additionalAwards'
 | 'foundations' | 'infrastructureMandatory'
 | 'promoCards' | 'fanmadeCards' | 'balancedCards'

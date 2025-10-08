@@ -378,5 +378,13 @@
     "gameEventTitle.eventCorpSelectionMerger": {
         "en": "Select your Merger Corporation",
         "fr": "S\u00e9lectionnez une Corporation Merger"
+    },
+    "gameEventTitle.eventOptionalSell": {
+        "en": "Select any number of cards to sell",
+        "fr": "S\u00e9lectionnez des cartes \u00e0 vendre"
+    },
+    "gameEventTitle.eventForcedSell": {
+        "en": "Too many cards in hand, please select $0$ cards to sell or more",
+        "fr": "Vous avez trop de cartes en main, s\u00e9lectionnez $0$ cartes ou plus \u00e0 vendre"
     }
 }

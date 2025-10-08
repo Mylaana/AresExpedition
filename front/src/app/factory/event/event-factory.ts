@@ -203,13 +203,12 @@ function createCardSelector(subType:EventCardSelectorSubType, args?: CreateEvent
             event.setSelectorInitialState({selectable: true, ignoreCost: true})
             event.setSelectorQuantityTreshold('min')
             event.setSelectorQuantity(1)
-            event.title = 'Select any number of cards to sell'
+			event.titleKey = 'eventOptionalSell'
 			event.lockDisplayUpgraded = true
 			event.lockRollbackButton = true
             break
         }
         case('researchPhaseResult'):
-			//event.title = `Select ${event.getSelectorQuantity()} cards to draw`
 			event.titleKey = 'phaseResearch'
 			event.titleInterpolation = [event.getSelectorQuantity().toString()]
             event.setSelectorInitialState({selectable:true, ignoreCost: true})
