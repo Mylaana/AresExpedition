@@ -470,6 +470,7 @@ export class GameState{
 		if(removeCorpoHand){
 			state.removeCorporationsFromHand()
 		}
+		this.updateClientState(state)
 		let playedCardEvents = PlayableCard.getOnPlayedEvents(card.cardCode, state)
 
         //check for triggers and add them to queue
