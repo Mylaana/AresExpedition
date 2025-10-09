@@ -6441,7 +6441,7 @@
         },
         "effectText2": {
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional MC.",
-            "fr": "EFFET: Chaque $ressource_titane$ en votre possession r\u00e9duit le co\u00fbt des cartes $tag_space$ d'un MC suppl\u00e9mentaire."
+            "fr": "EFFET: Chaque $ressource_titanium$ en votre possession r\u00e9duit le co\u00fbt des cartes $tag_space$ d'un MC suppl\u00e9mentaire."
         },
         "startingMegacredits": 20,
         "status": "validated",
@@ -6475,7 +6475,7 @@
         },
         "effectText2": {
             "en": "EFFECT: Each titanium you have reduces the cost of cards by an additional MC.",
-            "fr": "EFFET: Chaque $ressource_titane$ en votre possession r\u00e9duit le co\u00fbt des cartes $tag_space$ d'un MC suppl\u00e9mentaire."
+            "fr": "EFFET: Chaque $ressource_titanium$ en votre possession r\u00e9duit le co\u00fbt des cartes $tag_space$ d'un MC suppl\u00e9mentaire."
         },
         "startingMegacredits": 25,
         "status": "validated",
@@ -8941,7 +8941,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a $tag_earth$, including this, add a microbe to this card (5 max).$skipline$EFFECT: When you draw cards during the research phase, draw an additional card for each $ressource_microbe$ on this card (5max).",
-            "fr": "EFFET: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$EFFET: Lorsque de la phase de recherche, piochez une carte suppl\u00e9mentaire pour chaque $ressource_microbe$ sur cette carte (5max)."
+            "fr": "EFFET: Lorsque vous jouez un $tag-earth$, y compris celui-ci, ajoutez un microbe \u00e0 cette carte (5 max).$skipline$EFFET: Lorsque de la phase de recherche, piochez +1 carte pour chaque $ressource_microbe$ sur cette carte (5max)."
         },
         "stockable": [
             "microbe"
@@ -9695,7 +9695,7 @@
         },
         "playedText": {
             "en": "Gain 1 TR for each pair of $tag_earth$+$tag_jovian$.",
-            "fr": "Gagnez 1 NT pour chaque paire de $tag_earth$+$tag_jovien$ en votre possession."
+            "fr": "Gagnez 1 NT pour chaque paire de $tag_earth$+$tag_jovian$ en votre possession."
         },
         "status": "validated",
         "vpScaling": "0"

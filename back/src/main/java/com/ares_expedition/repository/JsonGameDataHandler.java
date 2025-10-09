@@ -139,7 +139,6 @@ public class JsonGameDataHandler {
             if(!(card.get("status").equals("implemented") || card.get("status").equals("validated")) || !(cardCode instanceof String)){continue;}
             idList.add(cardCode.toString());
         }
-
         return idList;
     }
     private static void checkDatabaseExistOrCreateIt(){

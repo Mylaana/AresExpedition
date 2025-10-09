@@ -32,7 +32,7 @@
 	<div class="wrapper-title">
 		<div class="wrapper-event-description ares-title">
 			<h1 *ngIf="currentEvent.titleKey">{{currentEvent.titleInterpolation?(currentEvent.titleKey | eventTitleKeyPipe:{ interpolate:currentEvent.titleInterpolation}):(currentEvent.titleKey | eventTitleKeyPipe)}}</h1>
-			<h1 *ngIf="!currentEvent.titleKey">{{currentEvent.title}}</h1>
+			<h1 *ngIf="!currentEvent.titleKey && currentEvent.title">{{currentEvent.title}}</h1>
 		</div>
 	</div>
 	<app-left-pannel @enterFromLeft
