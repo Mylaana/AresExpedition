@@ -134,7 +134,7 @@ describe('Service - Designers - Event', () => {
             })
             it('should create a selectCardOptionalSell selector Event', () => {
                 expectedSubType = 'selectCardOptionalSell'
-				expectedEvent.title = 'Select any number of cards to sell'
+				expectedEvent.titleKey = 'eventOptionalSell'
                 expectedEvent.subType = expectedSubType
 				expectedSelector.selectionQuantity = 1
 				expectedSelector.selectionQuantityTreshold = 'min'
@@ -145,7 +145,6 @@ describe('Service - Designers - Event', () => {
 				expectedEvent.lockDisplayUpgraded = true
 
                 let resultEvent = event_factory.EventFactory.createCardSelector(expectedSubType)
-
                 expect(expectedEvent).toEqual(resultEvent)
                 expect(buttonSpy).toHaveBeenCalled()
             })
@@ -153,7 +152,8 @@ describe('Service - Designers - Event', () => {
                 expectedSubType = 'researchPhaseResult'
                 expectedEvent.subType = expectedSubType
                 const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
-                expectedEvent.title = `Select ${expectedEvent.getSelectorQuantity()} cards to draw`
+                expectedEvent.titleKey = 'phaseResearch'
+				expectedEvent.titleInterpolation = ['0']
                 expectedEvent.setSelectorInitialState({selectable:true, ignoreCost: true})
                 expectedEvent.setSelectorQuantityTreshold('equal')
                 expectedEvent.refreshSelectorOnSwitch = false
@@ -452,7 +452,7 @@ describe('Service - Designers - Event', () => {
 					expectedEvent.subType = 'actionPhaseActivator'
 					const buttonSpy = spyOn(ButtonDesigner, 'createEventSelectorMainButton')
 					expectedEvent.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
-					expectedEvent.title = 'Action Phase'
+					expectedEvent.titleKey ='phaseAction'
 					expectedEvent.setSelectorFilter({type:ProjectFilterNameEnum.action})
 
 					let resultEvent = event_factory.EventFactory.createCardActivator(expectedSubType)
@@ -563,13 +563,13 @@ describe('Service - Designers - Event', () => {
                         }
                         case('planificationPhase'):{
                             expectedEvent.autoFinalize = false
-							expectedEvent.title = 'Select a phase card:'
+							expectedEvent.titleKey = 'phasePlanification'
                             break
                         }
                         case('upgradePhaseCards'):{
                             let expectedList = [0,3]
                             let expectedQuantity = 2
-                            expectedEvent.title = 'Select a phase card to upgrade'
+							expectedEvent.titleKey = 'phaseCardUpgrade'
                             expectedEvent.autoFinalize = false
                             expectedEvent.phaseCardUpgradeList = expectedList
                             expectedEvent.phaseCardUpgradeQuantity = expectedQuantity
@@ -585,7 +585,7 @@ describe('Service - Designers - Event', () => {
                         }
                     }
 
-                    let event = event_factory.EventFactory.createGeneric(genericSubType, expectedArgs?expectedArgs:undefined)
+					let event = event_factory.EventFactory.createGeneric(genericSubType, expectedArgs?expectedArgs:undefined)
                     expect(event).toEqual(expectedEvent)
                 }
             })
@@ -710,7 +710,7 @@ describe('Service - Designers - Event', () => {
 						case('productionPhase'):{
 							expectedEvent.autoFinalize = false
 							expectedEvent.productionApplied = false
-							expectedEvent.title = 'Production'
+							expectedEvent.titleKey = 'phaseProduction'
 							expectedEvent.productionDoubleApplied = false
 						}
                     }
