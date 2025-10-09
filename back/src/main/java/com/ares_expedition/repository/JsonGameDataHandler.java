@@ -125,8 +125,8 @@ public class JsonGameDataHandler {
             if(!gameOptions.getExpansionFanmade() && card.get("origin").equals("fanmade")){continue;}
             
             if(card.containsKey("balancedVersion")){
+                if(gameOptions.getExpansionBalanced() && card.get("balancedVersion").equals("remove")){continue;}
                 if(!gameOptions.getExpansionBalanced() && card.get("balancedVersion").equals("add")){continue;}
-                if(gameOptions.getExpansionDiscovery() && card.get("balancedVersion").equals("remove")){continue;}
             }
             switch(type){
                 case PROJECT:
