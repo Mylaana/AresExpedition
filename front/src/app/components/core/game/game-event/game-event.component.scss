@@ -1,12 +1,6 @@
-$description-pannel-margin-top: 2%;
-$description-pannel-margin-left: 2%;
-
 :host{
 	--command-pannel-height: 0px;
 	--event-min-height: 55vh;
-	@media (max-width:1900px) {
-		--event-min-height: 40vh;
-	}
 }
 #command-pannel {
     z-index: 10;
@@ -176,9 +170,6 @@ app-group-waiting{
 	}
 
 	margin-right: calc(var(--settings-button-size) / 2);
-	@media (max-width: 1900px) {
-		margin-right: 20px;
-	}
 }
 app-card-builder-list{
 	height: fit-content;

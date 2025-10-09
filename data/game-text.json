@@ -1,125 +1,390 @@
 {
-    "gameOption": {
-        "discovery": {
-            "caption": {
-                "en": "Discovery",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Adds Upgradeable phase cards, Milestones, Awards and new cards.",
-                "fr": ""
-            }
-
-        },
-        "standardProjectUpgrade": {
-            "caption": {
-                "en": "Standard project phase upgrade",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Adds a standard project in Action phase to upgrade a phase card of your choice.",
-                "fr": ""
-            }
-
-        },
-        "additionalAwards": {
-            "caption": {
-                "en": "Additional Awards",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Adds new awards to the pool.",
-                "fr": ""
-            }
-
-        },
-        "foundations": {
-            "caption": {
-                "en": "Foundations",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Adds a new global parameter: Infrastructure",
-                "fr": ""
-            }
-
-        },
-        "infrastructureMandatory": {
-            "caption": {
-                "en": "Infrastructure mandatory",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "The Infrastructure global parameter must also be completed to end the game.",
-                "fr": ""
-            }
-
-        },
-        "promoCards": {
-            "caption": {
-                "en": "Promo cards",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Adds official promo cards.",
-                "fr": ""
-            }
-
-        },
-        "fanmadeCards": {
-            "caption": {
-                "en": "Fanmade cards",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Adds unofficial cards, mostly from TM 1, some homebrewed.",
-                "fr": ""
-            }
-
-        },
-        "balancedCards": {
-            "caption": {
-                "en": "Balanced cards",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Adds new homebrewed balanced version of some cards, remove the original one.",
-                "fr": ""
-            }
-
-        },
-        "initialDraft": {
-            "caption": {
-                "en": "Initial draft",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Allows you to discard any number of cards from your starting hand to draw that many, once.",
-                "fr": ""
-            }
-
-        },
-        "merger": {
-            "caption": {
-                "en": "Merger",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Draws more corporations at the start of the game and allows you to chose a second one, playing with both.",
-                "fr": ""
-            }
-
-        },
-        "deadHand": {
-            "caption": {
-                "en": "Dead hand",
-                "fr": ""
-            },
-            "tooltip": {
-                "en": "Adds a random phase that will be played, chosen at ramdom amongst the ones not selected by players.",
-                "fr": ""
-            }
-
-        }
+    "gameOption.discovery.caption": {
+        "en": "Discovery",
+        "fr": ""
+    },
+    "gameOption.discovery.tooltip": {
+        "en": "Adds Upgradeable phase cards, Milestones, Awards and new cards.",
+        "fr": "Ajoute des cartes phases am\u00e9liorables, des Objectifs, R\u00e9compenses et de nouvelles cartes."
+    },
+    "gameOption.standardProjectUpgrade.caption": {
+        "en": "Standard project phase upgrade",
+        "fr": ""
+    },
+    "gameOption.standardProjectUpgrade.tooltip": {
+        "en": "Adds a standard project in Action phase to upgrade a phase card of your choice.",
+        "fr": "Ajoute un projet standard en phase Action permettant d'am\u00e9liorer une carte Phase."
+    },
+    "gameOption.additionalAwards.caption": {
+        "en": "Additional Awards",
+        "fr": ""
+    },
+    "gameOption.additionalAwards.tooltip": {
+        "en": "Adds new awards to the pool.",
+        "fr": "Ajouter de nouveaux awards."
+    },
+    "gameOption.foundations.caption": {
+        "en": "Foundations",
+        "fr": ""
+    },
+    "gameOption.foundations.tooltip": {
+        "en": "Adds a new global parameter: Infrastructure, and some new cards.",
+        "fr": "Ajoute un nouveau parametre global: l'Infrastructure, ajoute \u00e9galement de nouvelles cartes."
+    },
+    "gameOption.infrastructureMandatory.caption": {
+        "en": "Infrastructure mandatory",
+        "fr": "Infrastructure obligatoire"
+    },
+    "gameOption.infrastructureMandatory.tooltip": {
+        "en": "The Infrastructure global parameter must also be completed to end the game.",
+        "fr": "Le param\u00e8tre infrastructure doit \u00e9galement \u00eatre compl\u00e9t\u00e9 pour mettre fin \u00e0 la partie."
+    },
+    "gameOption.promoCards.caption": {
+        "en": "Promo cards",
+        "fr": ""
+    },
+    "gameOption.promoCards.tooltip": {
+        "en": "Adds official promo cards.",
+        "fr": "Ajoute des cartes promotionnelles officielles."
+    },
+    "gameOption.fanmadeCards.caption": {
+        "en": "Fanmade cards",
+        "fr": ""
+    },
+    "gameOption.fanmadeCards.tooltip": {
+        "en": "Adds unofficial cards, mostly from TM 1, some homebrewed.",
+        "fr": "Ajoute de nouvelles cartes non officielles, essentiellement issue de TM 1, certaines faites par nous."
+    },
+    "gameOption.balancedCards.caption": {
+        "en": "Balanced cards",
+        "fr": "Equilibrage de cartes"
+    },
+    "gameOption.balancedCards.tooltip": {
+        "en": "Adds new homebrewed balanced version of some cards, remove the original one. See link.",
+        "fr": "Ajoute des version \u00e9quilibr\u00e9es de certaine cartes et enl\u00e8ve les originales. Voir le lien."
+    },
+    "gameOption.initialDraft.caption": {
+        "en": "Initial draft",
+        "fr": ""
+    },
+    "gameOption.initialDraft.tooltip": {
+        "en": "Allows you to discard any number of cards from your starting hand to draw that many, once.",
+        "fr": "Ajoute la possibilit\u00e9 de d\u00e9ffausser autant de carte que vous le souhaitez dans la main initiale pour en piocher autant de nouvelles."
+    },
+    "gameOption.merger.caption": {
+        "en": "Merger",
+        "fr": ""
+    },
+    "gameOption.merger.tooltip": {
+        "en": "Draws more corporations at the start of the game and allows you to chose a second one, playing with both.",
+        "fr": "Ajoute des corporations \u00e0 la main de d\u00e9part, vous jouerez ensuite avec une deuxi\u00e8me corporation en plus de la premi\u00e8re."
+    },
+    "gameOption.deadHand.caption": {
+        "en": "Dead hand",
+        "fr": ""
+    },
+    "gameOption.deadHand.tooltip": {
+        "en": "Adds a random phase each round, chosen at random amongst the ones not selected by players.",
+        "fr": "Ajoute une phase al\u00e9atoire \u00e0 chaque round, choisie parmi celles qui n'ont pas \u00e9t\u00e9 s\u00e9lectionn\u00e9es par les joueurs."
+    },
+    "gamePhaseCardAbility.title": {
+        "en": "Ability",
+        "fr": "Comp\u00e9tence"
+    },
+    "gamePhaseCardAbility.development_A": {
+        "en": "Each player may play 1 green project card.",
+        "fr": "Chaque joueur peut jouer un projet vert."
+    },
+    "gamePhaseCardAbility.construction_A": {
+        "en": "Each player may play 1 blue card OR 1 red project card.",
+        "fr": "Chaque joueur peut jouer un projet rouge ou bleu."
+    },
+    "gamePhaseCardAbility.action_A": {
+        "en": "Each player activates any ACTION effect and STANDARD actions.",
+        "fr": "Chaque joueur peut activer ses effets d'actions et des projets standards."
+    },
+    "gamePhaseCardAbility.production_A": {
+        "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
+        "fr": "Chaque joueur gagne de la chaleur, des plantes et pioche des cartes en fonction de ses productions et des MC en fonction de leur production + NT."
+    },
+    "gamePhaseCardAbility.research_A": {
+        "en": "Each player draw 2 cards and keep 1.",
+        "fr": "Chaque joueur pioche 2 cartes et en garde 1."
+    },
+    "gamePhaseCardAbility.development_B": {
+        "en": "Each player may play 1 green project card.",
+        "fr": "Chaque joueur peut jouer un projet vert."
+    },
+    "gamePhaseCardAbility.construction_B": {
+        "en": "Each player may play 1 blue card OR 1 red project card.",
+        "fr": "Chaque joueur peut jouer un projet rouge ou bleu."
+    },
+    "gamePhaseCardAbility.action_B": {
+        "en": "Each player activates any ACTION effect and STANDARD actions.",
+        "fr": "Chaque joueur peut activer ses effets d'actions et des projets standards."
+    },
+    "gamePhaseCardAbility.production_B": {
+        "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
+        "fr": "Chaque joueur gagne de la chaleur, des plantes et pioche des cartes en fonction de ses productions et des MC en fonction de leur production + NT."
+    },
+    "gamePhaseCardAbility.research_B": {
+        "en": "Each player draw 2 cards and keep 1.",
+        "fr": "Chaque joueur pioche 2 cartes et en garde 1."
+    },
+    "gamePhaseCardAbility.development_C": {
+        "en": "Each player may play 1 green project card.",
+        "fr": "Chaque joueur peut jouer un projet vert."
+    },
+    "gamePhaseCardAbility.construction_C": {
+        "en": "Each player may play 1 blue card OR 1 red project card.",
+        "fr": "Chaque joueur peut jouer un projet rouge ou bleu."
+    },
+    "gamePhaseCardAbility.action_C": {
+        "en": "Each player activates any ACTION effect and STANDARD actions.",
+        "fr": "Chaque joueur peut activer ses effets d'actions et des projets standards."
+    },
+    "gamePhaseCardAbility.production_C": {
+        "en": "Each player gains heat, plants, and draw cards according to their production.$$They also gain MC equal to their production + TR.",
+        "fr": "Chaque joueur gagne de la chaleur, des plantes et pioche des cartes en fonction de ses productions et des MC en fonction de leur production + NT."
+    },
+    "gamePhaseCardAbility.research_C": {
+        "en": "Each player draw 2 cards and keep 1.",
+        "fr": "Chaque joueur pioche 2 cartes et en garde 1."
+    },
+    "gamePhaseCardBonus.title": {
+        "en": "Bonus",
+        "fr": "Bonus"
+    },
+    "gamePhaseCardBonus.development_A": {
+        "en": "Reduced cost of the card you play this phase by 3MC.",
+        "fr": "Le co\u00fbt de la carte que vous jouez cette phase est r\u00e9duit de 3MC."
+    },
+    "gamePhaseCardBonus.construction_A": {
+        "en": "Draw a card.$$OR$$Play an additional blue card OR red card this phase.",
+        "fr": "Piochez une carte.$$OU$$Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase."
+    },
+    "gamePhaseCardBonus.action_A": {
+        "en": "You may activate one ACTION an additional time.",
+        "fr": "Vous pouvez activer une seule de vos cartes une deuxi\u00e8me fois."
+    },
+    "gamePhaseCardBonus.production_A": {
+        "en": "Gain 4MC.",
+        "fr": "Gagnez 4MC."
+    },
+    "gamePhaseCardBonus.research_A": {
+        "en": "Draw an additional 3 cards and keep an additional 1.",
+        "fr": "Piochez 3 cartes suppl\u00e9mentaires et gardez en 1 de plus."
+    },
+    "gamePhaseCardBonus.development_B": {
+        "en": "Reduced cost of the card you play this phase by 6MC.",
+        "fr": "Le co\u00fbt de la carte que vous jouez cette phase est r\u00e9duit de 6MC."
+    },
+    "gamePhaseCardBonus.construction_B": {
+        "en": "Play an additional blue card OR red card this phase.$$OR$$Gain 6MC.",
+        "fr": "Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase.$$OU$$Gagnez 6MC."
+    },
+    "gamePhaseCardBonus.action_B": {
+        "en": "You may repeat one of your ACTION effects once.$$Reveal the top 3 cards of the deck. Place a blue or red card revealed this way into your hand, discard the rest.",
+        "fr": "Vous pouvez activer une seule de vos cartes une deuxi\u00e8me fois.$$ET$$R\u00e9v\u00e9lez 3 cartes du deck, piochez une carte Bleu ou Rouge parmi celles ci."
+    },
+    "gamePhaseCardBonus.production_B": {
+        "en": "Gain 7MC.",
+        "fr": "Gagnez 7MC."
+    },
+    "gamePhaseCardBonus.research_B": {
+        "en": "Draw an additional 6 cards and keep an additional 1.",
+        "fr": "Piochez 6 cartes suppl\u00e9mentaires et gardez en 1 de plus."
+    },
+    "gamePhaseCardBonus.development_C": {
+        "en": "Reduce the cost of the first card you play this phase by 3MC.$$You may play a second green card this phase with a printed cost of 12 MC or less.",
+        "fr": "Le co\u00fbt de la Premi\u00e8re carte que vous jouez cette phase est r\u00e9duit de 3MC.$$Vous pouvez jouer une deuxi\u00e8me carte Verte dont le co\u00fbt initial est de 12MC ou moins."
+    },
+    "gamePhaseCardBonus.construction_C": {
+        "en": "Play an additional blue card OR red card this phase.$$AND$$Draw a card.",
+        "fr": "Jouez une deuxi\u00e8me carte Bleu ou Rouge cette phase.$$ET$$Piochez une carte."
+    },
+    "gamePhaseCardBonus.action_C": {
+        "en": "You may repeat two of your ACTION effects once.",
+        "fr": "Vous pouvez activer deux de vos cartes une deuxi\u00e8me fois."
+    },
+    "gamePhaseCardBonus.production_C": {
+        "en": "Gain 1MC.$$Activate the production effect of one of your green cards an additional time this phase.",
+        "fr": "Gagnez 1MC.$$Gagnez une deuxi\u00e8me fois les productions d'une carte de votre choix cette phase."
+    },
+    "gamePhaseCardBonus.research_C": {
+        "en": "Draw an additional 2 cards and keep an additional 2.",
+        "fr": "Piochez \u00e9 cartes suppl\u00e9mentaires et gardez en 2 de plus."
+    },
+    "gameEventTitle.phasePlanification": {
+        "en": "Planification: Select a phase",
+        "fr": "Planification: Choisissez une phase"
+    },
+    "gameEventTitle.phaseDevelopment": {
+        "en": "Development Phase",
+        "fr": "Phase D\u00e9veloppement"
+    },
+    "gameEventTitle.phaseConstruction": {
+        "en": "Construction Phase",
+        "fr": "Phase Construction"
+    },
+    "gameEventTitle.phaseAction": {
+        "en": "Action Phase",
+        "fr": "Phase Action"
+    },
+    "gameEventTitle.phaseProduction": {
+        "en": "Production Phase",
+        "fr": "Phase Production"
+    },
+    "gameEventTitle.phaseResearch": {
+        "en": "Research Phase: Draw $0$ cards",
+        "fr": "Phase Recherche: Piochez $0$ cartes"
+    },
+    "gameEventTitle.phaseCardUpgrade": {
+        "en": "Upgrade Phase Cards",
+        "fr": "Am\u00e9liorez vos cartes Phase"
+    },
+    "gameEventTitle.builderWorkCrews": {
+        "en": "Play an additional Blue or Red card with its cost reduced by 11MC",
+        "fr": "Jouez une carte Bleu ou Rouge aditionnelle son co\u00fbt est r\u00e9duit de 11MC"
+    },
+    "gameEventTitle.builderAssetLiquidation": {
+        "en": "Play an additional Blue or Red card",
+        "fr": "Jouez une carte Bleu ou Rouge aditionnelle"
+    },
+    "gameEventTitle.builderGreen9MCFree": {
+        "en": "Play an additional Green card with a printed cost of 9MC or less without paying its cost",
+        "fr": "Jouez gratuitement une carte Verte additionnelle dont le co\u00fbt initial est de 9MC ou moins"
+    },
+    "gameEventTitle.builderAssortedEnterprises": {
+        "en": "Play an aditionnal card of any color with it's cost reduced by 2MC",
+        "fr": "Jouez une carte aditionnelle de n'importe quelle couleur son co\u00fbt est r\u00e9duit de 2MC"
+    },
+    "gameEventTitle.builderSelfReplicatingBacteria": {
+        "en": "Play a card of any color with it's cost reduced by 25MC",
+        "fr": "Jouez une carte de n'importe quelle couleur son co\u00fbt est r\u00e9duit de 25MC"
+    },
+    "gameEventTitle.builderConscription": {
+        "en": "Play an aditionnal card of any color with it's cost reduced by 16MC",
+        "fr": "Jouez une carte aditionnelle de n'importe quelle couleur son co\u00fbt est r\u00e9duit de 16MC"
+    },
+    "gameEventTitle.builderMaiNi": {
+        "en": "Play a card of any color with a printed cost of 12MC or less without paying its cost",
+        "fr": "Jouez gratuitement une carte de n'importe quelle couleur dont le co\u00fbt initial est de 12MC ou moins"
+    },
+    "interfaceTitle.createGame": {
+        "en": "NEW GAME",
+        "fr": "NOUVELLE PARTIE"
+    },
+    "interfaceTitle.createGamePlayers": {
+        "en": "Players",
+        "fr": "Joueurs"
+    },
+    "interfaceTitle.createGameOptions": {
+        "en": "Options",
+        "fr": "Options"
+    },
+    "interfaceTitle.createGamePlayerNumber": {
+        "en": "Number :",
+        "fr": "Nombre :"
+    },
+    "interfaceTitle.createGameAdditionalContent": {
+        "en": "Additional Content :",
+        "fr": "Contenu Additionnel :"
+    },
+    "interfaceTitle.createGameAdditionalCards": {
+        "en": "Additional Cards :",
+        "fr": "Cartes Additionnelles :"
+    },
+    "interfaceTitle.createGameGameMode": {
+        "en": "Game Mode :",
+        "fr": "Mode de Jeu :"
+    },
+    "interfaceButton.buttonCreateGameEnableAll": {
+        "en": "Enable All",
+        "fr": "Tout Activer"
+    },
+    "interfaceButton.buttonCreateGameDisableAll": {
+        "en": "Disable All",
+        "fr": "Tout D\u00e9sactiver"
+    },
+    "interfaceButton.buttonCreateGameCreate": {
+        "en": "CREATE GAME",
+        "fr": "CREER LA PARTIE"
+    },
+    "interfaceButton.buttonHomeNewGame": {
+        "en": "NEW GAME",
+        "fr": "NOUVELLE PARTIE"
+    },
+    "interfaceButton.buttonHomeCardOverview": {
+        "en": "CARD OVERVIEW",
+        "fr": "LISTE DES CARTES"
+    },
+    "interfaceButton.buttonHomeDiscord": {
+        "en": "JOIN US ON DISCORD",
+        "fr": "REJOIGNEZ NOUS SUR DISCORD"
+    },
+    "interfaceButton.buttonHomeBuyAres": {
+        "en": "BUY ARES EXPEDITION FROM FRYXGAMES",
+        "fr": "ACHETER ARES EXPEDITION SUR FRYXGAMES"
+    },
+    "interfaceButton.buttonCardOverviewDisplayAll": {
+        "en": "Display All",
+        "fr": "Tout Afficher"
+    },
+    "interfaceButton.buttonCardOverviewDisplayBalanced": {
+        "en": "Display Balanced Only",
+        "fr": "Afficher \"Balanced\" uniquement"
+    },
+    "errorMessage.errorCreateGameNameAndColor": {
+        "en": "Each player must have a valid name and a color selected.",
+        "fr": "Chaque joueur doit avoir un nom valide et une couleur s\u00e9lectionn\u00e9e."
+    },
+    "errorMessage.errorCreateGameNameServerOffline": {
+        "en": "Cannot create game, server is offline.",
+        "fr": "Impossible de cr\u00e9er une partie, serveur injoignable."
+    },
+    "errorMessage.errorCreateGameNameOtherError": {
+        "en": "Error during game creation, see console for full error.",
+        "fr": "Erreur lors de la cr\u00e9ation de partie, voir la console pour plus d'information."
+    },
+    "interfaceTitle.cardOverviewTitle": {
+        "en": "CARD LIST",
+        "fr": "LISTE DES CARTES"
+    },
+    "interfaceTitle.newGameLinkTitle": {
+        "en": "READY FOR LAUNCH",
+        "fr": "PARE AU DECOLLAGE"
+    },
+    "interfaceTitle.newGameLinkPlayerLaunchSite": {
+        "en": "Players launch sites:",
+        "fr": "Sites de Lancement:"
+    },
+    "interfaceTitle.newGameLinkGameOptions": {
+        "en": "Game options:",
+        "fr": "Options de Jeu:"
+    },
+    "gameEventTitle.eventInitialDraft": {
+        "en": "Initial Draft: Discard any card number to draw that many new cards",
+        "fr": "Draft Initial: D\u00e9faussez autant de carte que souhait\u00e9 pour en piocher autant de nouvelles"
+    },
+    "gameEventTitle.eventInitialDraftThenCorp": {
+        "en": "Then you will select a corporation",
+        "fr": "Puis vous choisirez une corporation"
+    },
+    "gameEventTitle.eventCorpSelection": {
+        "en": "Select your Corporation",
+        "fr": "S\u00e9lectionnez une Corporation"
+    },
+    "gameEventTitle.eventCorpSelectionMerger": {
+        "en": "Select your Merger Corporation",
+        "fr": "S\u00e9lectionnez une Corporation Merger"
+    },
+    "gameEventTitle.eventOptionalSell": {
+        "en": "Select any number of cards to sell",
+        "fr": "S\u00e9lectionnez des cartes \u00e0 vendre"
+    },
+    "gameEventTitle.eventForcedSell": {
+        "en": "Too many cards in hand, please select $0$ cards to sell or more",
+        "fr": "Vous avez trop de cartes en main, s\u00e9lectionnez $0$ cartes ou plus \u00e0 vendre"
     }
 }

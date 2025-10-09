@@ -7,12 +7,12 @@
 		</div>
 		<div class="wrapper-content">
 			<div [ngClass]="['wrapper-description', 'ares-background', 'ares-border', cardSize]">
-				<h1 [ngClass]="['subtitle', cardSize]">Ability</h1>
-				<app-text-with-image [rawText]="phaseCard.baseDescription"></app-text-with-image>
+				<h1 [ngClass]="['subtitle', cardSize]">{{getText('abilityTitle')}}</h1>
+				<app-text-with-image [rawText]="getText('ability')"></app-text-with-image>
 			</div>
 			<div class="wrapper-description ares-background ares-border">
-				<h1 class="subtitle">Bonus</h1>
-				<app-text-with-image [rawText]="phaseCard.bonusDescription"></app-text-with-image>
+				<h1 class="subtitle">{{getText('bonusTitle')}}</h1>
+				<app-text-with-image [rawText]="getText('bonus')"></app-text-with-image>
 			</div>
 			<app-hexed-background [autoFillHexSize]="'medium'" ></app-hexed-background>
 			<div class="background-color"

@@ -178,7 +178,8 @@ export class EventHandler {
 				event.setSelectorQuantity(currentSize - maximumSize)
 				event.activateSelection()
 				event.setSelectorStateFromParent(Utils.toFullCardState({selectable:true, ignoreCost:true}))
-				event.title = `Too many cards in hand, please select ${event.getSelectorQuantity()} cards to sell or more.`
+				event.titleKey = 'eventForcedSell'
+				event.titleInterpolation = [event.getSelectorQuantity().toString()]
 				break
 			}
 			case('selectCardOptionalSell'):{

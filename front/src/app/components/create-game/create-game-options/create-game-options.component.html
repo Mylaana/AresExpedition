@@ -4,7 +4,7 @@
 </div>
 <div class="wrapper-options">
 	<div class="wrapper-option category">
-		<h4>Additional Content:</h4>
+		<h4>{{getTitle('createGameAdditionalContent')}}</h4>
 		<div class="wrapper-option-inner">
 			<app-create-game-option-card [caption]="getCaption('discovery')" [tooltip]="getTooltip('discovery')" [button]="_expansionDiscovery" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<app-create-game-option-card [caption]="getCaption('standardProjectUpgrade')" [tooltip]="getTooltip('standardProjectUpgrade')" [isSubCat]="true"  [button]="_modeStandardProjectPhaseUpgrade" (buttonClick)="onClick($event)"></app-create-game-option-card>
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="wrapper-option category">
-		<h4>Additional Cards:</h4>
+		<h4>{{getTitle('createGameAdditionalCards')}}</h4>
 		<div class="wrapper-option-inner">
 			<app-create-game-option-card [caption]="getCaption('promoCards')" [tooltip]="getTooltip('promoCards')" [button]="_expansionPromo" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<app-create-game-option-card [caption]="getCaption('fanmadeCards')" [tooltip]="getTooltip('fanmadeCards')" [button]="_expansionDevFanMade" (buttonClick)="onClick($event)"></app-create-game-option-card>
@@ -28,7 +28,7 @@
 	</div>
 
 	<div class="wrapper-option category">
-		<h4>Game mode:</h4>
+		<h4>{{getTitle('createGameGameMode')}}</h4>
 		<div class="wrapper-option-inner">
 			<app-create-game-option-card [caption]="getCaption('initialDraft')" [tooltip]="getTooltip('initialDraft')" [button]="_modeInitialDraft" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<app-create-game-option-card [caption]="getCaption('merger')" [tooltip]="getTooltip('merger')" [button]="_modeMerger" (buttonClick)="onClick($event)"></app-create-game-option-card>

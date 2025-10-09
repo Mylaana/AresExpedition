@@ -198,7 +198,6 @@ export class GameMainComponent implements OnInit{
 	@HostListener('window:scroll', [])
 	onScroll() {
 		let scrollChanged = window.scrollY > 0;
-		//if(window.scrollY === (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight) {console.log('max scroll')}
 		if(scrollChanged === this.isScrolled){return}
 	  	this.isScrolled = window.scrollY > 0;
 	}

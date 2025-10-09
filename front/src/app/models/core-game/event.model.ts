@@ -1,7 +1,7 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType } from "../../types/event.type";
-import { AdvancedRessourceStock, CardSelector, DrawDiscard, EventOrigin, GlobalParameterValue, MinMaxEqualTreshold, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton  } from "./button.model";
-import { ButtonNames, EventCardBuilderButtonNames, MinMaxEqualType, NonEventButtonNames, TagType } from "../../types/global.type";
+import { AdvancedRessourceStock, CardSelector, DrawDiscard, EventOrigin, GlobalParameterValue, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
+import { EventCardBuilderButtonNames, MinMaxEqualType, NonEventButtonNames, SettingSupportedLanguage, TagType } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
@@ -9,11 +9,15 @@ import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { BuilderType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
+import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const";
+import { GameTextService } from "../../services/core-game/game-text.service";
+import { EventTitleKey } from "../../types/text.type";
 
 
 type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
 
 export abstract class EventBaseModel {
+    private static language: SettingSupportedLanguage = SETTING_DEFAULT_LANGUAGE
     readonly type!: EventType
     readonly subType!: EventUnionSubTypes
     finalized: boolean = false
@@ -27,7 +31,14 @@ export abstract class EventBaseModel {
 	lockValidateButton: boolean = false
 	lockDisplayUpgraded: boolean = false
 	eventOrigin?: EventOrigin
+    titleKey!: EventTitleKey
+	titleInterpolation!: string[]
 
+    constructor(private gameTextService?: GameTextService){}
+
+    static setLanguage(lang: SettingSupportedLanguage) {
+        EventBaseModel.language = lang;
+    }
     hasSelector(): boolean {return false}
 	hasCardsToSelectFrom(): boolean {return false}
     hasCardBuilder(): boolean {return false}

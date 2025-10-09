@@ -16,7 +16,7 @@ export type ButtonNames =
 | 'upgradePhase'
 | 'drawCards' | 'discardCards' | 'scanKeep'
 | 'addRessourceToSelectedCard'
-| ToggleButtonNames | CarouselButtonNames
+| ToggleButtonNames | CarouselButtonNames | NonEventButtonNames
 export type ButtonType = 'image' | 'eventMain' | 'nonEvent' |  'color' | 'toggle' | 'carousel'
 
 export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' | 'rollBack' | 'settings' | 'closeSettings' | 'activateProjectOnce' | 'activateProjectTwice'
@@ -54,8 +54,4 @@ export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAn
 | 'milestone' | 'milestoneClaimed' | 'award' | 'milestoneAwardHelper' | 'convertResource'
 export type MilestoneState = Record<MilestonesEnum, boolean>
 export type InputRuleType = 'number' | 'string'
-export type GameOptionName = 'discovery' |  'standardProjectUpgrade' | 'additionalAwards'
-| 'foundations' | 'infrastructureMandatory'
-| 'promoCards' | 'fanmadeCards' | 'balancedCards'
-| 'initialDraft' | 'merger' | 'deadHand'
 export type GoToPage = 'cardOverviewBalanced'

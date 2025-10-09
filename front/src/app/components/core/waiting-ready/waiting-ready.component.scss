@@ -1,11 +1,22 @@
 :host{
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	//justify-content: center;
+	//align-items: center;
 	flex-direction: column;
 	height: 100%;
 	width: 100%;
 	gap: 50px;
+}
+.wrapper-main{
+	position: sticky;
+	display: flex;
+	//justify-content: center;
+	top: calc(50vh - 100px);
+	width: calc(97.5%);
+	flex-direction: column;
+	align-items: center;
+	gap: 50px;
+	flex: 1;
 }
 .wrapper-group-ready{
 	display: flex;

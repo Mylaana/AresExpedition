@@ -31,6 +31,7 @@ import { GameOption } from '../../../../services/core-game/create-game.service';
 import { ConvertResourceComponent } from '../../../game-event-blocks/convert-resource/convert-resource.component';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { SettingInterfaceSize } from '../../../../types/global.type';
+import { EventTitleKeyPipe } from '../../../../pipes/event-title.pipe';
 
 //this component is the main controller, and view
 
@@ -53,7 +54,8 @@ import { SettingInterfaceSize } from '../../../../types/global.type';
 		SellCardsComponent,
 		EffectPortalComponent,
 		GroupWaitingComponent,
-		ConvertResourceComponent
+		ConvertResourceComponent,
+		EventTitleKeyPipe
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',

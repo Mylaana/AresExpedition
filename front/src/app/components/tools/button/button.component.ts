@@ -1,8 +1,10 @@
-import { Component, Output, Input, EventEmitter, OnChanges, SimpleChanges, OnInit} from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnChanges, SimpleChanges, OnInit, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonBase, ColorButton, ImageButton } from '../../../models/core-game/button.model';
 import { TextWithImageComponent } from '../text-with-image/text-with-image.component';
 import { PlayerColor, SettingCardSize, TextWithImageContext } from '../../../types/global.type';
+import { Subject } from 'rxjs';
+import { GameTextService } from '../../../services/core-game/game-text.service';
 
 type shape = 'hex' | 'hex_floating'| 'small' | 'large' | 'left' | 'right' | 'leftSmall' | 'rightSmall' | 'action' | 'selection_rounded_square' | 'xs'
 | 'leftCarousel' | 'rightCarousel'
@@ -25,11 +27,13 @@ export class ButtonComponent implements OnChanges {
 	@Input() context: TextWithImageContext = 'default'
 	@Input() cardSize!: SettingCardSize
 	_imageUrl!: string
-	_caption!: string
 	private hovered: boolean = false
 	_style: style ='plain'
 	_color: PlayerColor
 	_isPressed: boolean = false
+	_caption!: string
+
+	constructor(private gameTextService: GameTextService){}
 
 	ngOnInit(): void {
 		switch(this.shape){
@@ -40,7 +44,7 @@ export class ButtonComponent implements OnChanges {
 	}
 	ngOnChanges(changes: SimpleChanges): void {
 		if(changes['button'] && changes['button'].currentValue){
-			this._caption =  this.button.caption??''
+			this._caption = this.setCaption()
 			switch(this.button.type){
 				case('image'):{
 					this.handleImageButtonChange()
@@ -66,6 +70,12 @@ export class ButtonComponent implements OnChanges {
 	isEnabled(): boolean {
 		if(this.button.locked){return false}
 		return this.button.isEnabled()
+	}
+	private setCaption(): string {
+		if(this.button.captionKey){
+			return this.gameTextService.getButtonCaption(this.button.captionKey)
+		}
+		return this.button.caption??''
 	}
 	private handleImageButtonChange(){
 		let imageButton = this.button as ImageButton

@@ -43,5 +43,5 @@ export class AppComponent {
 			case(ROUTE_NEWGAMELINKS):{return true}
 			default:{return false}
 		}
-	  }
+	}
 }

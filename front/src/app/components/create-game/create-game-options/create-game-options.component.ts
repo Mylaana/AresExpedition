@@ -4,9 +4,10 @@ import { NonEventButton, ToggleButton } from '../../../models/core-game/button.m
 import { CreateGameOptionService, GameOption } from '../../../services/core-game/create-game.service';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CreateGameOptionCardComponent } from '../create-game-option-card/create-game-option-card.component';
-import { AnyButton, GameOptionName } from '../../../types/global.type';
+import { AnyButton } from '../../../types/global.type';
 import { GameTextService } from '../../../services/core-game/game-text.service';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
+import { GameOptionKey, InterfaceTitleKey } from '../../../types/text.type';
 
 @Component({
   selector: 'app-create-game-options',
@@ -82,11 +83,14 @@ export class CreateGameOptionsComponent implements OnInit{
 		this._modeAdditionalAwards.value = options.additionalAwards
 		this._modeAdditionalAwards.locked = options.discovery===false
 	}
-	getCaption(option: GameOptionName): string {
-		return this.gameTextService.getGameOptionCaption(option)
+	getCaption(key: GameOptionKey): string {
+		return this.gameTextService.getGameOptionCaption(key)
 	}
-	getTooltip(option: GameOptionName): string {
-		return this.gameTextService.getGameOptionToolTip(option)
+	getTooltip(key: GameOptionKey): string {
+		return this.gameTextService.getGameOptionToolTip(key)
+	}
+	getTitle(key: InterfaceTitleKey): string {
+		return this.gameTextService.getInterfaceTitle(key)
 	}
 	onAllOptionClick(button: NonEventButton){
 		this.createGameOptionService.toggleAllOptions(button===this._activateAll)
