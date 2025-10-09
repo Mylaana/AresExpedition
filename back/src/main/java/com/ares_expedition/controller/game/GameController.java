@@ -99,7 +99,6 @@ public class GameController {
     
     public void goToNextPhase(Game game){
         game.setAllPlayersNotReady();
-        game.nextPhaseSelected();
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
         game.resetResearchResolved();
@@ -111,6 +110,8 @@ public class GameController {
             game.setGameStatus(GameStatusEnum.GAME_OVER);
             wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
             return;
+        } else {
+            game.nextPhaseSelected();
         }
         if(game.getCurrentPhase()==PhaseEnum.PRODUCTION){
             game.applyDrawProduction();
