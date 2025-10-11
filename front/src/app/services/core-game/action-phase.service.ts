@@ -54,6 +54,17 @@ export class ActionPhaseService{
                 mustBePaid: false,
                 button: ButtonDesigner.createNonEventButton(s)
             }
+        }
+        this.updateCost()
+        this.updateStandardProjectMustBePaid()
+        this.updateButtonsCaption()
+        this.updateButtonsStatus()
+        this.updateMainButtonStatus()
+    }
+    private updateCost() {
+        if(!this.clientState || !this.actionEvent){return }
+        for(let s of this.standardProjectsList){
+            if(!this.standardProjectStates[s]){continue}
             switch(s){
                 case('convertForest'):{
                     this.standardProjectStates[s].costPlant = PlayableCard.activable.getScalingCostActivation(s, this.clientState)
@@ -73,10 +84,6 @@ export class ActionPhaseService{
                 }
             }
         }
-        this.updateStandardProjectMustBePaid()
-        this.updateButtonsCaption()
-        this.updateButtonsStatus()
-        this.updateMainButtonStatus()
     }
     private onEventQueueUpdate(queue: EventBaseModel[]){
         if(queue.length===0){return}
@@ -98,6 +105,8 @@ export class ActionPhaseService{
             stockChanged += this.updateResourceStockAndReturnsUpdatedStatus(s, state.getRessourceInfoFromType(s)?.valueStock??0)?1:0
         }
 
+        this.updateCost()
+        
         if(stockChanged===0){return}
         this.updateButtonsCaption()
 
