@@ -282,13 +282,16 @@ const S = EventFactory.simple
 		let result: EventBaseModel[] = []
 		let card = clientState?.getProjectPlayedModelFromId(trigger)
 		if(!card){return []}
+		let stock = card.getStockValue('microbe')
 		triggerred += input.tagList.filter((el) => el===GlobalInfo.getIdFromType('building','tag')).length
 		for(let i=0; i<triggerred; i++){
-			if(card.getStockValue('microbe')<=0 && i===0){
+			if(stock<=0){
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+				stock +=1
 			} else{
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:-1}, trigger))
 				result.push(S.addProduction({name:'plant', valueStock:1}))
+				stock -= 1
 			}
 		}
 		return result
