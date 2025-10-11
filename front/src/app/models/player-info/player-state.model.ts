@@ -96,7 +96,10 @@ export class PlayerStateModel {
 	}
 	getTR(): number {return this.scoreState.getTR()}
 	addTR(tr: number){this.scoreState.addTR(tr)}
-	addForest(forest: number): void {this.scoreState.addForest(forest)}
+	addForest(forest: number): void {
+		this.scoreState.addForest(forest)
+		this.setScalingProduction()
+	}
 	getForest(): number {return this.scoreState.getForest()}
 	setAwardsVp(vp: number){this.scoreState.setAwardsVp(vp)}
 

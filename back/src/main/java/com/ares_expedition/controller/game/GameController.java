@@ -31,6 +31,7 @@ public class GameController {
     private static final Logger logger = LoggerFactory.getLogger(GameController.class);
     private final WsControllerOutput wsOutput;
     private Map<String, Game> gameHolder = new HashMap<>();
+    private int databaseVersion = 1;
 
     public GameController(WsControllerOutput wsOutput){
         this.wsOutput = wsOutput;
@@ -99,7 +100,6 @@ public class GameController {
     
     public void goToNextPhase(Game game){
         game.setAllPlayersNotReady();
-        game.nextPhaseSelected();
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
         game.resetResearchResolved();
@@ -111,6 +111,8 @@ public class GameController {
             game.setGameStatus(GameStatusEnum.GAME_OVER);
             wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
             return;
+        } else {
+            game.nextPhaseSelected();
         }
         if(game.getCurrentPhase()==PhaseEnum.PRODUCTION){
             game.applyDrawProduction();
@@ -239,7 +241,7 @@ public class GameController {
             Game game = entry.getValue();
             Duration age = Duration.between(game.getLastUpdate(), now);
 
-            if (age.toHours() >= 24) {
+            if (age.toHours() >= 24 | game.getDatabaseVersion()< this.getDatabaseVersion()) {
                 logger.warn("\u001B[31m removing : " + game.getGameId() + ": " + age.toHours() + "hours old \u001B[0m");
                 return true;
             }
@@ -264,5 +266,11 @@ public class GameController {
             return false;
         }
         return true;
+    }
+    public int getDatabaseVersion() {
+        return databaseVersion;
+    }
+    public void setDatabaseVersion(int databaseVersion) {
+        this.databaseVersion = databaseVersion;
     }
 }

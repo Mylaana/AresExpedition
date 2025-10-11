@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { EffectPortalEnum } from '../../../enum/global.enum';
 import { EventBaseModel, EventGeneric } from '../../../models/core-game/event.model';
 import { CommonModule } from '@angular/common';
@@ -22,12 +22,13 @@ import { Subject, takeUntil } from 'rxjs';
 	templateUrl: './effect-portal.component.html',
 	styleUrl: './effect-portal.component.scss'
 })
-export class EffectPortalComponent implements OnInit{
+export class EffectPortalComponent implements OnInit, OnChanges{
 	@Input() event!: EventBaseModel
 
 	_portal!: EffectPortalEnum
 	_portalCard!: PlayableCardModel | undefined
 	_buttons!: EffectPortalButton[]
+	private eventId!: number
 	private destroy$ = new Subject<void>
 
 	constructor(
@@ -35,17 +36,27 @@ export class EffectPortalComponent implements OnInit{
 		private gameStateService: GameState
 	){}
 	ngOnInit(): void {
-		let event: EventGeneric = this.event as EventGeneric
-		if(event.effectPortal===undefined){return}
-		this._portal = event.effectPortal
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this.updateClientState(state))
-		this.portalService.initialize(this._portal)
-		this.loadPortal()
-
+		this.initializePortal()
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
+	}
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['event'] && changes['event'].currentValue) {
+			if(this.event.id===this.eventId || !this.eventId){return}
+			this.initializePortal()
+		}
+	}
+	private initializePortal(){
+		if(!this.event){return}
+		let event: EventGeneric = this.event as EventGeneric
+		if(event.effectPortal===undefined){return}
+		this._portal = event.effectPortal
+		this.portalService.initialize(this._portal)
+		this.loadPortal()
+		this.eventId = event.id
 	}
 	updateClientState(state: PlayerStateModel){
 		this.portalService.onStateUpdate(state)

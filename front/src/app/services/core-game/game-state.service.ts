@@ -470,6 +470,7 @@ export class GameState{
 		if(removeCorpoHand){
 			state.removeCorporationsFromHand()
 		}
+		this.updateClientState(state)
 		let playedCardEvents = PlayableCard.getOnPlayedEvents(card.cardCode, state)
 
         //check for triggers and add them to queue
@@ -942,5 +943,8 @@ export class GameState{
 	}
 	setDeckSize(size: number){
 		this.deck.next(size)
+	}
+	isInfrastructureMandatory(): boolean {
+		return this.gameOptions.getValue().infrastructureMandatory
 	}
 }

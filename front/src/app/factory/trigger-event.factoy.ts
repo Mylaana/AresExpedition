@@ -98,7 +98,6 @@ const S = EventFactory.simple
 	function handleTrigger_D13(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.increasedParameter!=GlobalParameterNameEnum.temperature){return []}
 		if(input.isParameterMaxedOutAtBeginningOfPhase){return [S.deactivateTrigger(trigger)]}
-		console.log('fire !', input.isParameterMaxedOutAtBeginningOfPhase)
 		return [S.addRessource({name:'plant', valueStock:2})]
 	}
 	//Cargo Ships
@@ -213,7 +212,6 @@ const S = EventFactory.simple
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
 		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
 		if(triggerred===0){return []}
-		console.log('stockable cards: ',clientState.getPlayedListWithStockableTypes(['animal', 'microbe']).length)
 		if(clientState.getPlayedListWithStockableTypes(['animal', 'microbe']).length===0){
 			result.push(S.addRessource({name:'plant', valueStock:triggerred}))
 		} else {
@@ -271,12 +269,6 @@ const S = EventFactory.simple
 		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
 		return [S.draw(1)]
 	}
-	//CLM
-	function handleTrigger_CF3_ON_TAG_GAIN(trigger: string, input: TriggerInput): EventBaseModel[] {
-		return []
-		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
-		return [S.addRessourceToCardId({name:'science', valueStock:1}, trigger)]
-	}
 	//Recyclon
 	function handleTrigger_CF7(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
 		if(input.tagList.includes(GlobalInfo.getIdFromType('building','tag'))===false){return []}
@@ -284,13 +276,16 @@ const S = EventFactory.simple
 		let result: EventBaseModel[] = []
 		let card = clientState?.getProjectPlayedModelFromId(trigger)
 		if(!card){return []}
+		let stock = card.getStockValue('microbe')
 		triggerred += input.tagList.filter((el) => el===GlobalInfo.getIdFromType('building','tag')).length
 		for(let i=0; i<triggerred; i++){
-			if(card.getStockValue('microbe')<=0 && i===0){
+			if(stock<=0){
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
+				stock +=1
 			} else{
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:-1}, trigger))
 				result.push(S.addProduction({name:'plant', valueStock:1}))
+				stock -= 1
 			}
 		}
 		return result
@@ -365,11 +360,9 @@ const S = EventFactory.simple
 //ON_TRIGGER_RESOLUTION
 	//Mars University
 	function handleTrigger_40_resolution(trigger: string, input: TriggerInput): EventBaseModel[] {
-		console.log('mars univ resolv')
 		let card: PlayableCardModel = input.discardedCard
 		let draw = 1
 		if(card.hasTag('plant') || card.hasTag('science')){draw ++}
-		console.log('univ:', draw)
 		return [S.draw(draw)]
 	}
 
@@ -393,7 +386,6 @@ const S = EventFactory.simple
 //ON_MILESTONE_CLAIMED
 	//Zoo
 	function handleTrigger_P25(trigger: string, input: TriggerInput):EventBaseModel[]{
-		console.log(trigger)
 		return [S.addRessourceToCardId({name:'animal', valueStock:1}, trigger)]
 	}
 //ON_PHASE_ACTIVATED
@@ -465,7 +457,6 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'FM2': handleTrigger_FM2,
 		'FM4': handleTrigger_FM4,
 		'FM14': handleTrigger_FM14,
-		'CF3': handleTrigger_CF3_ON_TAG_GAIN
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
 		'P04': handleTrigger_P04,

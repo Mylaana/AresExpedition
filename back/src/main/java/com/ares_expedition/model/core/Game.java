@@ -42,6 +42,7 @@ public class Game {
     private int round = 0;
     private Instant creationDate;
     private Instant lastUpdate;
+    private int databaseVersion = 0;
     public Game() {
     }
     
@@ -59,6 +60,7 @@ public class Game {
         this.lastUpdate = creationDate;
         this.shuffleDeck(this.deck);
         this.shuffleDeck(this.deckCorporations);
+        this.databaseVersion = 1;
 
         for(CreatePlayerDTO playerConfig: gameConfig.getPlayers()){
             //groupPlayerId
@@ -589,4 +591,11 @@ public class Game {
         return dataMap;
     }
 
+    public int getDatabaseVersion() {
+        return databaseVersion;
+    }
+
+    public void setDatabaseVersion(int databaseVersion) {
+        this.databaseVersion = databaseVersion;
+    }
 }

@@ -55,3 +55,4 @@ export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAn
 export type MilestoneState = Record<MilestonesEnum, boolean>
 export type InputRuleType = 'number' | 'string'
 export type GoToPage = 'cardOverviewBalanced'
+export type StandardProjectButtonNames = | 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure' | 'buyUpgrade'

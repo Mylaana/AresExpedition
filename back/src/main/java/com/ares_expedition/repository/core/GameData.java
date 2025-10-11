@@ -18,7 +18,6 @@ import com.ares_expedition.model.core.Ocean;
 import com.ares_expedition.model.player_state.PlayerState;
 import com.ares_expedition.model.player_state.subclass.substates.GlobalParameter;
 import com.ares_expedition.repository.player_state.PlayerStateData;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 //Game DTO is only meant to store their Game related properties, not to be sent to clients
 public class GameData {
@@ -39,6 +38,7 @@ public class GameData {
     private List<AwardsEnum> awards = new ArrayList<>();
     private Instant creationDate;
     private Instant lastUpdate;
+    private int databaseVersion = 0;
 
     GameData() {
     }
@@ -61,6 +61,7 @@ public class GameData {
         this.milestones = game.getMilestones();
         this.creationDate = game.getCreationDate();
         this.lastUpdate = game.getLastUpdate();
+        this.databaseVersion = game.getDatabaseVersion();
     }
 
     public String getGameId() {
@@ -197,5 +198,13 @@ public class GameData {
 
     public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
-    }   
+    }
+
+    public int getDatabaseVersion() {
+        return databaseVersion;
+    }
+
+    public void setDatabaseVersion(int databaseVersion) {
+        this.databaseVersion = databaseVersion;
+    }      
 }

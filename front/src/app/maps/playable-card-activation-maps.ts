@@ -341,11 +341,20 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 
 	//SPECIALS
 	//Convert Forest - Ecoline
-	'ConvertForest': (state) => {
+	'convertForest': (state) => {
 		let result: number = 8
 		result -= state.getTriggersIdActive().includes('210')? 1:0
 		result -= state.getTriggersIdActive().includes('210B')? 2:0
 		return result
+	},
+	'convertTemperature': () => {
+		return 8
+	},
+	'convertInfrastructureHeat': () => {
+		return 5
+	},
+	'convertInfrastructurePlant': () => {
+		return 3
 	},
 	//Buy Forest - Standard Technology
 	'buyForest': (state) => {
@@ -452,7 +461,10 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 	},
 
 	//SPECIAL
-	'ConvertForest': (state) => `${getScaling('ConvertForest', state)}$ressource_plant$: $other_forest$`,
+	'convertForest': (state) => `${getScaling('convertForest', state)}$ressource_plant$: $other_forest$`,
+	'convertTemperature': (state) => `${getScaling('convertTemperature', state)}$ressource_heat$: $other_temperature$`,
+	'convertInfrastructure': (state) => `${getScaling('convertInfrastructureHeat', state)}$ressource_heat$ + ${getScaling('convertInfrastructurePlant', state)}$ressource_plant$:$skipline$$other_infrastructure$ + $ressource_card$`,
+
 	'buyForest': (state) => `$ressource_megacreditvoid_${getScaling('buyForest', state)}$: $other_forest$`,
 	'buyInfrastructure': (state) => `$ressource_megacreditvoid_${getScaling('buyInfrastructure', state)}$: $other_infrastructure$ + $ressource_card$`,
 	'buyOcean': (state) => `$ressource_megacreditvoid_${getScaling('buyOcean', state)}$: $other_ocean$`,
