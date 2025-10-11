@@ -122,9 +122,9 @@ export class GameEventComponent {
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
-		this.gameStateService.currentGroupPlayerReady.subscribe((groupReady) => this._groupReady = groupReady)
+		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe((groupReady) => this._groupReady = groupReady)
 		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(option => this.gameOptions = option)
-		this.gameParamService.currentInterfaceSize.subscribe(size => this._interfaceSize = size)
+		this.gameParamService.currentInterfaceSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._interfaceSize = size)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()

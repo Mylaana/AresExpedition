@@ -944,4 +944,7 @@ export class GameState{
 	setDeckSize(size: number){
 		this.deck.next(size)
 	}
+	isInfrastructureMandatory(): boolean {
+		return this.gameOptions.getValue().infrastructureMandatory
+	}
 }
