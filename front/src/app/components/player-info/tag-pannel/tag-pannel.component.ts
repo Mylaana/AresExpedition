@@ -17,8 +17,4 @@ export class TagPannelComponent {
 	@Input() playerId!: myUUID;
 	@Input() tagState!: TagInfo[];
 	@Input() pannelSize!: SettingPlayerPannelSize
-
-	ngOnInit(): void {
-
-	}
 }
