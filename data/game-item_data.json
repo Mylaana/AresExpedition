@@ -67,6 +67,12 @@
     },
     {
         "id": 11,
+        "description": "moon",
+        "imageUrl": "assets/tag/moon.png",
+        "name": "$tag_moon$"
+    },
+    {
+        "id": 99,
         "description": "omni",
         "imageUrl": "assets/tag/omni.png",
         "name": "$tag_omni$"
