@@ -30,9 +30,7 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 | 'cardOverviewInvertTagSelection' | 'cardOverviewResetTagSelection' | 'cardOverviewNoneTag' | 'cardOverviewDisplayAll' | 'cardOverviewDisplayBalanced'
 | 'createGameOptionActivateAll' | 'createGameOptionDeactivateAll'
-export type ToggleButtonNames = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
-| 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade' | 'modeDeadHand'
-| 'modeAdditionalAwards'
+export type ToggleButtonNames = GameModeContent
 export type CarouselButtonNames = 'carousel'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
@@ -57,3 +55,6 @@ export type MilestoneState = Record<MilestonesEnum, boolean>
 export type InputRuleType = 'number' | 'string'
 export type GoToPage = 'cardOverviewBalanced'
 export type StandardProjectButtonNames = | 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure' | 'buyUpgrade'
+export type GameModeContent = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
+| 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade' | 'modeDeadHand'
+| 'modeAdditionalAwards' | 'expansionMoon'

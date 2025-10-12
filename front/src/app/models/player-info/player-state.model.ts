@@ -309,10 +309,10 @@ export class PlayerStateModel {
 	static empty(injector: Injector): PlayerStateModel {
 		return new PlayerStateModel(injector);
 	}
-	public newGame(dto: PlayerStateDTO): void {
+	public newGame(dto: PlayerStateDTO, tagList: TagType[]): void {
 		this.infoState.newGame(dto.infoState)
 		this.scoreState.newGame()
-		this.tagState.newGame()
+		this.tagState.newGame(tagList)
 		this.ressourceState.newGame()
 		this.projectCardState.newGame(dto.projectCardState)
 		this.phaseCardState.newGame()

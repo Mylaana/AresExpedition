@@ -4,23 +4,24 @@ import { GAME_TAG_LIST } from "../../global/global-const";
 import { PlayerTagStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { TagType } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
+import { Injector } from "@angular/core";
 
 export class PlayerTagStateModel {
     private tags: TagInfo[] = [] //this.initializeTags()
 
-	constructor(data: PlayerTagStateDTO){
+	constructor(
+		data: PlayerTagStateDTO,
+	){
 		this.tags = data.t
 	}
 
-	private initializeTags(): TagInfo[]{
+	private initializeTags(tagList: TagType[]): TagInfo[]{
 		let result: TagInfo[] = []
-		for(let i=0; i<=9; i++){
+		for(let t of tagList){
 			let tag: TagInfo = {
-				id: i,
-				name: GAME_TAG_LIST[i],
-				idImageUrl: i,
+				id: Utils.toTagId(t),
+				name: t,
 				valueCount: 0,
-				valueMod: 0
 			}
 			result.push(tag)
 		}
@@ -29,8 +30,14 @@ export class PlayerTagStateModel {
 
 	addTag(tagId:number, quantity: number):void{
 		if(tagId===-1){return}
-		if(tagId===10){return}
-		this.tags[tagId].valueCount += quantity
+		let type = Utils.toTagType(tagId)
+		if(type==='wild'){return}
+		for(let info of this.tags){
+			if(info.name===type){
+				info.valueCount += quantity
+				return
+			}
+		}
 	}
 	addPlayedCardTags(card: PlayableCardModel): void {
 		for(let tagId of card.tagsId){
@@ -45,26 +52,23 @@ export class PlayerTagStateModel {
 		return 0
 	}
 	removeTags(tagsIds: number[]){
+		let excluded: number[] = [Utils.toTagId('none'), Utils.toTagId('wild')]
 		for(let t of tagsIds){
-			if([-1,10].includes(t)){continue}
+			if(excluded.includes(t)){continue}
 			this.tags[t].valueCount -= 1
 		}
 	}
 	/**counts the number of different tag type possessed */
 	getDifferentTagTypeCount(): number {
-		let different: number = 0
-		for(let i=0; i<10; i++){
-			different += this.getTagsOfType(Utils.toTagType(i))>=1?1:0
-		}
-		return different
+		return this.tags.filter(tag => tag.valueCount>0).length
 	}
 	toJson(): PlayerTagStateDTO {
 		return {
 			t: this.tags
 		}
 	}
-	newGame(): void {
-		this.tags = this.initializeTags()
+	newGame(tagList: TagType[]): void {
+		this.tags = this.initializeTags(tagList)
 	}
 	static fromJson(data: PlayerTagStateDTO): PlayerTagStateModel {
 		if (!data.t){

@@ -2,14 +2,16 @@
 	<div class="box-tag-icon">
 		<img [ngClass]="{'full-greyed-filter': tagState.valueCount===0}" [src]="imageUrl" [alt]="tagState.name">
 	</div>
-	<div *ngIf="tagState.valueMod" class="box-tag-mod">
-		<div class="box-tag-mod-icon center">
-			<img src="imageUrl" alt="tagState.name">
+	<!--
+		<div *ngIf="tagState.valueMod" class="box-tag-mod">
+			<div class="box-tag-mod-icon center">
+				<img src="imageUrl" alt="tagState.name">
+			</div>
+			<div class="box-tag-mod-value">
+				<p class="center">{{tagState.valueMod}}</p>
+			</div>
 		</div>
-		<div class="box-tag-mod-value">
-			<p class="center">{{tagState.valueMod}}</p>
-		</div>
-	</div>
+	-->
 </div>
 <div class="wrapper-tag-text"
 *ngIf="tagState.valueCount">

@@ -26,8 +26,9 @@ export const DEBUG_LOG_WS_PUBLISH = true
 export const DEBUG_LOG_WS_RECEIVED = true
 export const DEBUG_IGNORE_PREREQUISITES = false
 
-export const GAME_TAG_LIST: TagType[] = ['building','space','science','power','earth','jovian','plant','animal','microbe','event']
-export const GAME_TAG_LIST_WITHNONE: TagType[] = ['building','space','science','power','earth','jovian','plant','animal','microbe','event', 'none']
+export const GAME_TAG_LIST: TagType[] = ['building','space','science','power','earth','jovian','plant','animal','microbe','event', 'moon']
+export const GAME_TAG_LIST_WITHNONE: TagType[] = ['building','space','science','power','earth','jovian','plant','animal','microbe','event', 'none', 'moon']
+export const GAME_TAG_LIST_VANILLA: TagType[] = ['building','space','science','power','earth','jovian','plant','animal','microbe','event']
 export const GAME_RESSOURCE_LIST: RessourceType[] = ['megacredit', 'heat', 'plant', 'steel', 'titanium', 'card']
 export const GAME_PHASE_DEVELOPMENT_CARDS_LIST: DevelopmentPhaseType[] = ['development_base', 'development_6mc', 'development_second_card']
 export const GAME_PHASE_CONSTRUCTION_CARDS_LIST: ConstructionPhaseType[] = ['construction_base', 'construction_6mc', 'construction_draw_card']

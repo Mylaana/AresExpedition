@@ -26,6 +26,7 @@ import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
 import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
 import { GameOption } from "./create-game.service";
+import { GameModeContentService } from "./game-mode-content.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -129,7 +130,8 @@ export class GameState{
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private eventStateService: EventStateService,
-		private injector: Injector
+		private injector: Injector,
+		private gameModeContentService: GameModeContentService
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
 	}
@@ -662,7 +664,10 @@ export class GameState{
 		let clientState = this.getClientState()
 		for(let dto of groupDto){
 			if(dto.infoState.i===this.clientId){
-				clientState.newGame(dto)
+				clientState.newGame(
+					dto,
+					this.gameModeContentService.getTagListFromActiveContent()
+				)
 				this.updateClientState(clientState)
 			}
 		}

@@ -29,8 +29,8 @@ export interface AdvancedRessourceStock {
 export interface TagInfo {
     id: number,
     name: TagType,
-    idImageUrl: number
-    valueMod: number
+    //idImageUrl: number
+    //valueMod: number
     valueCount: number
 }
 
