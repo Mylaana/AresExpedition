@@ -1,4 +1,4 @@
 <div class="tag-pannel ares-card"
-	[ngClass]="pannelSize">
+	[ngClass]="[pannelSize, `tag-per-row--${getTagsPerRow()}`]">
     <app-tag-card *ngFor="let tagCard of tagState" [tagState]="tagCard"></app-tag-card>
 </div>

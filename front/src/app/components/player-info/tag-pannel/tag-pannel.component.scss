@@ -1,6 +1,6 @@
 .tag-pannel {
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
 
 	border: rgba(rgb(255, 129, 25), .5) solid 1px;
 	border-radius: 5px;
@@ -8,7 +8,7 @@
 	padding: 1px;
 	&.small{
 		flex-wrap: wrap;
-		width: 150px;
+		width: calc(27px * var(--tags-per-row));
 		height: calc(var(--interface-line) * 2 + var(--interface-line-gap));
 	}
 }
