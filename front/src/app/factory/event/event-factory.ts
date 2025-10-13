@@ -1,5 +1,5 @@
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
-import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin } from "../../interfaces/global.interface"
+import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin, MoonTile } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
 import { GameTextService } from "../../services/core-game/game-text.service"
@@ -48,6 +48,8 @@ interface CreateEventOptionsGeneric {
 	portalActionMustBeResolvedToFinishEvent?: boolean,
 	resourceConversionInputRule?: InputRuleEnum
 	resourceConversionInputQuantity?: number
+	addMoonTile?: MoonTile | MoonTile[]
+
 
 	eventOrigin?: EventOrigin
 }
@@ -147,6 +149,20 @@ function recallCardInHandFromPlay(){
 function resourceConversion(conversionInputRule: InputRuleEnum, eventOrigin?: EventOrigin){
 	return EventFactory.createGeneric('resourceConversion', {resourceConversionInputRule: conversionInputRule, eventOrigin:eventOrigin})
 }
+function addHabitat(quantity: number = 1){
+	return EventFactory.createGeneric('addMoonTile', {addMoonTile: {name:'habitat', quantity: quantity}})
+}
+function addRoad(quantity: number = 1){
+	return EventFactory.createGeneric('addMoonTile', {addMoonTile: {name:'road', quantity: quantity}})
+}
+function addMine(quantity: number = 1){
+	return EventFactory.createGeneric('addMoonTile', {addMoonTile: {name:'mine', quantity: quantity}})
+}
+function addMoonTile(tiles: MoonTile | MoonTile[]){
+	return EventFactory.createGeneric('addMoonTile', {addMoonTile: tiles})
+}
+
+
 const SimpleEvent = {
 	draw,
 	discard,
@@ -169,7 +185,11 @@ const SimpleEvent = {
 	addTagToCard,
     effectPortal,
 	recallCardInHandFromPlay,
-	resourceConversion
+	resourceConversion,
+	addHabitat,
+	addRoad,
+	addMine,
+	addMoonTile
 }
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {
@@ -729,6 +749,10 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 			event.autoFinalize = false
 			event.eventOrigin = args?.eventOrigin
 			event.title = 'Select the resource quantity to convert'
+			break
+		}
+		case('addMoonTile'):{
+			event.addMoonTile = args?.addMoonTile
 			break
 		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',subType, args)}

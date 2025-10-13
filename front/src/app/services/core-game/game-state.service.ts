@@ -2,7 +2,7 @@ import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { MilestoneState, myUUID, PlayableCardType, RessourceType, TagType } from "../../types/global.type";
-import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter,  } from "../../interfaces/global.interface";
+import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter, MoonTile,  } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel, EventGeneric, EventPhase } from "../../models/core-game/event.model";
@@ -952,5 +952,25 @@ export class GameState{
 	}
 	isInfrastructureMandatory(): boolean {
 		return this.gameOptions.getValue().infrastructureMandatory
+	}
+	addMoonTile(tiles: MoonTile | MoonTile[]){
+		let state = this.getClientState()
+		let tilesList: MoonTile[] = Utils.toArray(tiles)
+		for(let t of tilesList){
+			switch(t.name){
+				case('habitat'):{
+					state.addHabitat(t.quantity)
+					break
+				}
+				case('road'):{
+					state.addRoad(t.quantity)
+					break
+				}
+				case('mine'):{
+					state.addMine(t.quantity)
+					break
+				}
+			}
+		}
 	}
 }

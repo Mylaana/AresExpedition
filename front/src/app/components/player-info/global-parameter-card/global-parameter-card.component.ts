@@ -75,6 +75,16 @@ export class GlobalParameterCardComponent implements OnInit {
 			}
 			case(GlobalParameterNameEnum.moon):{
 				return GlobalParameterColorEnum.white.toLowerCase()
+				switch(true){
+					case(stepCount === 3):
+					case(stepCount === 6):
+					case(stepCount === 9):
+					case(stepCount === 12):
+						{return GlobalParameterColorEnum.red.toLocaleLowerCase()}
+					default:{
+						return GlobalParameterColorEnum.white.toLowerCase()
+					}
+				}
 			}
 			default:{return GlobalParameterColorEnum.purple.toLowerCase()}
 		}
@@ -116,6 +126,12 @@ export class GlobalParameterCardComponent implements OnInit {
 					default:{return false}
 				}
 			}
+			case(GlobalParameterNameEnum.moon):{
+				switch(bubble){
+					case(0):{return true}
+					default:{return false}
+				}
+			}
 			default:{return false}
 		}
 	}
@@ -145,6 +161,12 @@ export class GlobalParameterCardComponent implements OnInit {
 					case(-10):{return true}
 					case(0):{return true}
 					case(8):{return true}
+					default:{return false}
+				}
+			}
+			case(GlobalParameterNameEnum.moon):{
+				switch(bubble){
+					case(12):{return true}
 					default:{return false}
 				}
 			}

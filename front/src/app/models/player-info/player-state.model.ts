@@ -102,6 +102,12 @@ export class PlayerStateModel {
 	}
 	getForest(): number {return this.scoreState.getForest()}
 	setAwardsVp(vp: number){this.scoreState.setAwardsVp(vp)}
+	getHabitat(): number {return this.scoreState.getHabitat()}
+	addHabitat(q: number){this.scoreState.addHabitat(q)}
+	getRoad(): number {return this.scoreState.getRoad()}
+	addRoad(q: number){this.scoreState.addRoad(q)}
+	getMine(): number {return this.scoreState.getMine()}
+	addMine(q: number){this.scoreState.addMine(q)}
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}

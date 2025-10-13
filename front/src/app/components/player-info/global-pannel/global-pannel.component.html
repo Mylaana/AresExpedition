@@ -1,6 +1,6 @@
 <div class="wrapper-pannel"
 	[ngClass]="pannelSize">
-    <div class="previous-phase-selected" *ngIf="!gameOver">
+	<div class="previous-phase-selected" *ngIf="!gameOver && pannelSize==='medium'">
         <div class="pannel-image">
 			<img *ngIf="currentPhase=='PLANIFICATION' && playerPhase.previousSelectedPhase.toString()!='UNDEFINED'"
 				class="heavy-greyed-filter"
@@ -15,10 +15,10 @@
 				alt="">
         </div>
     </div>
-	<app-player-name [ngClass]="pannelSize" [name]="playerState.getName()" [color]="playerState.getColor()"></app-player-name>
 	<div class="pannel-card">
 		<app-vp [vpNumber]="playerState.getTotalVP().toString()" [shape]="'square'"></app-vp>
 	</div>
+	<app-player-name [ngClass]="pannelSize" [name]="playerState.getName()" [color]="playerState.getColor()"></app-player-name>
 	<div class="wrapper-pannel-card pannel-border">
 		<div class="pannel-card tr pannel-card-style">
 			<div class="pannel-card-icon">
@@ -35,16 +35,53 @@
 			<p class="pannel-text">{{playerState.getForest()}}</p>
 		</div>
 	</div>
+	<div class="previous-phase-selected" *ngIf="!gameOver && pannelSize==='small'">
+        <div class="pannel-image">
+			<img *ngIf="currentPhase=='PLANIFICATION' && playerPhase.previousSelectedPhase.toString()!='UNDEFINED'"
+				class="heavy-greyed-filter"
+				src="/assets/other/phase_{{playerPhase.previousSelectedPhase.toString().toLowerCase()}}.png"
+				alt="">
+			<img *ngIf="(currentPhase=='PLANIFICATION' || currentPhase=='UNDEFINED') && playerPhase.previousSelectedPhase.toString()==='UNDEFINED'"
+				class="heavy-greyed-filter"
+				src="/assets/other/phase_planification.png"
+				alt="">
+            <img *ngIf="currentPhase!='PLANIFICATION' && currentPhase!='UNDEFINED'"
+				src="/assets/other/phase_{{playerPhase.currentSelectedPhase.toLowerCase()}}.png"
+				alt="">
+        </div>
+    </div>
+	<div class="wrapper-pannel-card pannel-border" *ngIf="isContentActive('expansionMoon')">
+		<div class="pannel-card pannel-card-style moon">
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/moon_habitattile.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getHabitat()}}</p>
+		</div>
+		<div class="pannel-card phase-upgraded pannel-card-style moon">
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/moon_roadtile.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getRoad()}}</p>
+		</div>
+		<div class="pannel-card phase-upgraded pannel-card-style moon">
+			<div class="pannel-card-icon">
+				<img class="img-padding"
+					src="/assets/other/moon_minetile.png" alt="">
+			</div>
+			<p class="pannel-text">{{playerState.getMine()}}</p>
+		</div>
+	</div>
 	<div [ngClass]="['wrapper-pannel-card pannel-border', pannelSize==='small'?'pannel-flex':'']">
 		<div class="pannel-card phase-upgraded pannel-card-style"
-			*ngIf="isDiscoveryActive()">
+			*ngIf="isContentActive('expansionDiscovery')">
 			<div class="pannel-card-icon">
 				<img class="img-padding"
 					src="/assets/other/phase_upgrade.png" alt="">
 			</div>
 			<p class="pannel-text">{{playerState.getPhaseCardUpgradedCount()}}</p>
 		</div>
-		<div [ngClass]="['separator']"></div>
 		<div class="pannel-card research pannel-card-style">
 			<div class="pannel-card-icon">
 				<img class="img-padding"

@@ -8,6 +8,7 @@ export type EventGenericSubType =  'endOfPhase' | 'planificationPhase' | 'upgrad
 | 'increaseGlobalParameter' | 'addRessourceToPlayer' | 'increaseResearchScanKeep' | 'buildCard' | 'drawResult'
 | 'waitingGroupReady' | 'addForestPointAndOxygen' | 'addProduction' | 'addTr' | 'loadProductionPhaseCards' | 'drawResultThenDiscard'
 | 'effectPortal' | 'loadProductionPhaseCardDouble' | 'resourceConversion'
+| 'addMoonTile'
 export type EventTargetCardSubType = 'addRessourceToCardId' | 'deactivateTrigger' | 'addTagToCardId'
 export type EventDeckQuerySubType = 'drawQuery' | 'scanKeepQuery' | 'researchPhaseQuery' | 'drawThenDiscard'
 export type EventTechnical = 'default'

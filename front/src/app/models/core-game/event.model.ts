@@ -1,5 +1,5 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType } from "../../types/event.type";
-import { AdvancedRessourceStock, CardSelector, DrawDiscard, EventOrigin, GlobalParameterValue, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
+import { AdvancedRessourceStock, CardSelector, DrawDiscard, EventOrigin, GlobalParameterValue, MoonTile, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
 import { EventCardBuilderButtonNames, MinMaxEqualType, NonEventButtonNames, SettingSupportedLanguage, TagType } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
@@ -452,6 +452,7 @@ export class EventGeneric extends EventBaseModel {
 	firstCardProduction?: string[]
 	resourceConversionInputRule?:InputRuleEnum
 	resourceConversionQuantity?:number
+	addMoonTile?:MoonTile | MoonTile[]
 }
 
 export class EventDeckQuery extends EventBaseModel {

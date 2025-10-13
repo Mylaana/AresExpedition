@@ -59,3 +59,4 @@ export type StandardProjectButtonNames = | 'convertForest' | 'buyForest' | 'conv
 export type GameContentName = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
 | 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade' | 'modeDeadHand'
 | 'modeAdditionalAwards' | 'expansionMoon'
+export type MoonTileType = 'habitat' | 'road' | 'mine'
