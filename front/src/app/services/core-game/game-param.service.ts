@@ -114,7 +114,7 @@ export class GameParamService {
 	private handCardSize = new BehaviorSubject<SettingCardSize>('medium')
 	private interfaceSize = new BehaviorSubject<SettingInterfaceSize>('medium')
 	private windowSize = new BehaviorSubject<WindowSize>({height:0, width:0})
-	private playerPannelSize = new BehaviorSubject<SettingPlayerPannelSize>('medium')
+	private playerPannelSize = new BehaviorSubject<SettingPlayerPannelSize>('small')
 
 	currentDebug = this.debug.asObservable()
 	currentGameId = this.gameIdSubject.asObservable()
