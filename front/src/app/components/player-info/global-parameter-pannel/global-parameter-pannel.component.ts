@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { GlobalParameterCardComponent } from '../global-parameter-card/global-parameter-card.component';
 import { CommonModule } from '@angular/common';
 import { OceanCardComponent } from '../ocean-card/ocean-card.component';
@@ -9,7 +9,6 @@ import { GlobalParameter, OceanBonus } from '../../../interfaces/global.interfac
 import { Utils } from '../../../utils/utils';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GameOption } from '../../../services/core-game/create-game.service';
 import { GameModeContent } from '../../../types/global.type';
 import { GameModeContentService } from '../../../services/core-game/game-mode-content.service';
 
@@ -38,10 +37,14 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private gameStateService: GameState,
-		private gameContentService: GameModeContentService
+		private gameContentService: GameModeContentService,
+		private el: ElementRef
 	){}
+
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onStateUpdate(state))
+		const host = this.el.nativeElement as HTMLElement;
+		host.style.setProperty('--parameter-count', this.getParameterHeight().toString());
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -61,5 +64,23 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	}
 	isContentActive(content: GameModeContent): boolean {
 		return this.gameContentService.isContentActive(content)
+	}
+	private getParameterHeight(): number {
+		let count = 2
+		count += this.isContentActive('expansionFoundations')? 1:0
+		count += this.isContentActive('expansionMoon')? 1:0
+
+		switch(count){
+			case(2):{
+				return .35
+			}
+			case(3):{
+				return .25
+			}
+			case(4):{
+				return .19
+			}
+		}
+		return .18
 	}
 }

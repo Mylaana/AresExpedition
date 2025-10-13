@@ -431,4 +431,10 @@
         "imageUrl": "assets/other/go_to_page.png",
         "name": "$other_gotopage$"
     }
+    {
+        "id": 147,
+        "description": "none",
+        "imageUrl": "assets/other/moon_parameter.png",
+        "name": "$other_moon$"
+    }
 ]

@@ -39,6 +39,11 @@ export class GlobalParameterCardComponent implements OnInit {
 			case(GlobalParameterNameEnum.temperature):{
 				this._progressionList = [-30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8]
 				this._maxStep = this._progressionList.length
+				break
+			}
+			case(GlobalParameterNameEnum.moon):{
+				this._progressionList = [0,1,2,3,4,5,6,7,8,9,10,11,12]
+				this._maxStep = this._progressionList.length
 			}
 		}
 	}
@@ -67,6 +72,9 @@ export class GlobalParameterCardComponent implements OnInit {
 					case(stepCount <= 0):{return GlobalParameterColorEnum.yellow.toLowerCase()}
 					default:{return GlobalParameterColorEnum.white.toLowerCase()}
 				}
+			}
+			case(GlobalParameterNameEnum.moon):{
+				return GlobalParameterColorEnum.white.toLowerCase()
 			}
 			default:{return GlobalParameterColorEnum.purple.toLowerCase()}
 		}
@@ -145,5 +153,15 @@ export class GlobalParameterCardComponent implements OnInit {
 	}
 	isGlobalParameterMaxedOutAtPhaseBeginning(): boolean {
 		return this.currentStep===this._maxStep-1
+	}
+	getParameterImageName(): string {
+		return '$other_' + this.parameter.toLocaleLowerCase()
+		switch(this.parameter){
+			case(GlobalParameterNameEnum.moon):{
+				return '$other_moon'
+			}
+			default:{
+			}
+		}
 	}
 }

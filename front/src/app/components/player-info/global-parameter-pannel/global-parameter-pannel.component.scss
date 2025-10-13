@@ -12,12 +12,7 @@
 .wrapper-parameter-card{
 	display: flex;
 	width: 100%;
-	&.big{
-		height: 25%;
-	}
-	&.small{
-		height: 35%;
-	}
+	height: calc(var(--parameter-count) * 100%);
 }
 .wrapper-ocean{
 	height: 100%;

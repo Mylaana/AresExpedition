@@ -666,7 +666,8 @@ export class GameState{
 			if(dto.infoState.i===this.clientId){
 				clientState.newGame(
 					dto,
-					this.gameModeContentService.getTagListFromActiveContent()
+					this.gameModeContentService.getTagListFromActiveContent(),
+					this.gameModeContentService.getActiveContentList()
 				)
 				this.updateClientState(clientState)
 			}

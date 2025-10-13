@@ -6,9 +6,21 @@ import { GAME_TAG_GROUP_VANILLA_BIO, GAME_TAG_GROUP_VANILLA_BUILD, GAME_TAG_GROU
     providedIn: 'root'
 })
 export class GameModeContentService{
-    private options: Partial<Record<GameModeContent, boolean>> = {
+    private options: Record<GameModeContent, boolean> = {
+		'expansionBalancedCards': false,
+		'expansionDevFanMade': false,
         'expansionMoon': true,
+		'expansionFoundations': true,
+		'expansionDiscovery': false,
+		'expansionPromo': false,
+		'modeAdditionalAwards': false,
+		'modeDeadHand': false,
+		'modeInfrastructureMandatory': false,
+		'modeInitialDraft': false,
+		'modeMerger': false,
+		'modeStandardProjectPhaseUpgrade': false
     }
+
     isContentActive(content: GameModeContent): boolean {
         if(!(content in this.options) || !this.options[content]){return false}
         return this.options[content]
@@ -24,4 +36,8 @@ export class GameModeContentService{
         if(this.isContentActive('expansionMoon')){planet.push('moon')}
         return build.concat(tech, planet, bio, other, event)
     }
+	getActiveContentList(): GameModeContent[] {
+		return (Object.keys(this.options) as GameModeContent[])
+			.filter(key => this.options[key])
+	}
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagCardComponent } from '../tag-card/tag-card.component';
 import { TagInfo } from '../../../interfaces/global.interface';
@@ -18,9 +18,12 @@ export class TagPannelComponent implements OnInit{
 	@Input() tagState!: TagInfo[];
 	@Input() pannelSize!: SettingPlayerPannelSize
 
+
+	constructor(private el: ElementRef) {}
+
     ngOnInit(): void {
-        const root = document.documentElement;
-		root.style.setProperty('--tags-per-row', Math.ceil(this.tagState.length/2).toString());
+        const host = this.el.nativeElement as HTMLElement;
+		host.style.setProperty('--tags-per-row', Math.ceil(this.tagState.length/2).toString());
     }
 
     getTagsPerRow():number{
