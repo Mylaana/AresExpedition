@@ -20,6 +20,7 @@ export class GameModeContentService{
         let bio = GAME_TAG_GROUP_VANILLA_BIO
         let other = GAME_TAG_GROUP_VANILLA_OTHER
         let event = GAME_TAG_GROUP_VANILLA_EVENT
+
         if(this.isContentActive('expansionMoon')){planet.push('moon')}
         return build.concat(tech, planet, bio, other, event)
     }

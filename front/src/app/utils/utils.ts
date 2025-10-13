@@ -1,5 +1,5 @@
 import { SelectablePhaseEnum } from "../enum/phase.enum"
-import { DEBUG_LOG_EVENT_RESOLUTION, DEBUG_LOG_WS_PUBLISH, DEBUG_LOG_WS_RECEIVED, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST, GAME_TAG_LIST, SETTING_DEFAULT_LANGUAGE } from "../global/global-const"
+import { DEBUG_LOG_EVENT_RESOLUTION, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST, SETTING_DEFAULT_LANGUAGE } from "../global/global-const"
 import { CardState } from "../interfaces/card.interface"
 import { MinMaxEqualTreshold } from "../interfaces/global.interface"
 import { PlayableCardModel } from "../models/cards/project-card.model"
@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { CardType, CardTypeColor, LocalizedText } from "../types/project-card.type"
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../enum/global.enum"
 import { environment } from "../../environments/environment"
-import { TAGS_ID_TO_NAME } from "../maps/other-maps"
+import { TAGS_ID_TO_NAME } from "../maps/const-maps"
 
 const PhaseUpgrade: Map<PhaseCardUpgradeType, SelectablePhaseEnum> = new Map<PhaseCardUpgradeType, SelectablePhaseEnum>([
 	['development_6mc', SelectablePhaseEnum.development],
