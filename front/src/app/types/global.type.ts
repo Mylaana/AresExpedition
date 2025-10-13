@@ -20,7 +20,6 @@ export type ButtonNames =
 export type ButtonType = 'image' | 'eventMain' | 'nonEvent' |  'color' | 'toggle' | 'carousel'
 
 export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' | 'rollBack' | 'settings' | 'closeSettings' | 'activateProjectOnce' | 'activateProjectTwice'
-| 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure' | 'buyUpgrade'
 | 'upgradePhase'
 | 'routeCreateGame' | 'routeCardOverview' | 'routeBuy' | 'routeHome' | 'routeCreateNewGameValidation' | 'routeDiscord'
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'displayUpgradedPhaseCancel' | 'killCard' | 'lockBuilder'
@@ -30,12 +29,13 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 | 'cardOverviewInvertTagSelection' | 'cardOverviewResetTagSelection' | 'cardOverviewNoneTag' | 'cardOverviewDisplayAll' | 'cardOverviewDisplayBalanced'
 | 'createGameOptionActivateAll' | 'createGameOptionDeactivateAll'
-export type ToggleButtonNames = GameModeContent
+| StandardProjectButtonNames
+export type ToggleButtonNames = GameContentName
 export type CarouselButtonNames = 'carousel'
 export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
-export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event' 
+export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event'
 | 'wild' | 'none' | 'moon' | 'omni'
 export type GameItemType = TagType | RessourceType
 export type DrawRule = 'draw' | 'research' | 'scanKeep'
@@ -54,7 +54,8 @@ export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAn
 export type MilestoneState = Record<MilestonesEnum, boolean>
 export type InputRuleType = 'number' | 'string'
 export type GoToPage = 'cardOverviewBalanced'
-export type StandardProjectButtonNames = | 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure' | 'buyUpgrade'
-export type GameModeContent = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
+export type StandardProjectButtonNames = | 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure'
+| 'buyUpgrade' | 'buyMine' | 'buyRoad' | 'buyHabitat'
+export type GameContentName = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
 | 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade' | 'modeDeadHand'
 | 'modeAdditionalAwards' | 'expansionMoon'

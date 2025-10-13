@@ -9,8 +9,8 @@ import { GlobalParameter, OceanBonus } from '../../../interfaces/global.interfac
 import { Utils } from '../../../utils/utils';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GameModeContent } from '../../../types/global.type';
-import { GameModeContentService } from '../../../services/core-game/game-mode-content.service';
+import { GameContentName } from '../../../types/global.type';
+import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
 
 @Component({
     selector: 'app-global-parameter-pannel',
@@ -37,7 +37,7 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private gameStateService: GameState,
-		private gameContentService: GameModeContentService,
+		private gameContentService: GameActiveContentService,
 		private el: ElementRef
 	){}
 
@@ -62,7 +62,7 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 		}
 		this._oceanFlippedBonus = clientState.getOceanFlippedBonus()
 	}
-	isContentActive(content: GameModeContent): boolean {
+	isContentActive(content: GameContentName): boolean {
 		return this.gameContentService.isContentActive(content)
 	}
 	private getParameterHeight(): number {

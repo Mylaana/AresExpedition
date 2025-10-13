@@ -391,6 +391,27 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 		result -= state.getTriggersIdActive().includes('55B')? 2:0
 		return result
 	},
+	//Buy Temperature - Standard Technology
+	'buyHabitat': (state) => {
+		let result: number = 20
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
+	//Buy Temperature - Standard Technology
+	'buyRoad': (state) => {
+		let result: number = 16
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
+	//Buy Temperature - Standard Technology
+	'buyMine': (state) => {
+		let result: number = 20
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
 }
 export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: PlayerStateModel) => string> = {
 	//Aquifer Pumping
@@ -470,6 +491,10 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 	'buyOcean': (state) => `$ressource_megacreditvoid_${getScaling('buyOcean', state)}$: $other_ocean$`,
 	'buyTemperature': (state) => `$ressource_megacreditvoid_${getScaling('buyTemperature', state)}$: $other_temperature$`,
 	'buyUpgrade': (state) => `$ressource_megacreditvoid_${getScaling('buyUpgrade', state)}$: $other_upgrade$`,
+
+	'buyHabitat': (state) => `$ressource_megacreditvoid_${getScaling('buyHabitat', state)}$: $other_habitattile$+$other_moonparameter$`,
+	'buyRoad': (state) => `$ressource_megacreditvoid_${getScaling('buyRoad', state)}$: $other_roadtile$+$other_moonparameter$`,
+	'buyMine': (state) => `$ressource_megacreditvoid_${getScaling('buyMine', state)}$: $other_minetile$+$other_moonparameter$`,
 }
 export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: ActivationOption, clientState: PlayerStateModel) => boolean> = {
 	//Aquifer Pumping

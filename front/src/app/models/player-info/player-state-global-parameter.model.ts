@@ -2,7 +2,7 @@ import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/gl
 import { GlobalParameterDTO, PlayerGlobalParameterStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GlobalParameter, GlobalParameterValue, OceanBonus } from "../../interfaces/global.interface";
 import { GLOBAL_PARAMETER_MAX_STEP } from "../../maps/const-maps";
-import { GameModeContent } from "../../types/global.type";
+import { GameContentName } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 
 
@@ -78,7 +78,7 @@ export class PlayerGlobalParameterStateModel {
 			ofb: this.oceanFlippedBonus
 		}
 	}
-	newGame(parameterRelatedContent: GameModeContent[]): void {
+	newGame(parameterRelatedContent: GameContentName[]): void {
 		this.parameters = [
 			{name: GlobalParameterNameEnum.ocean,step: 0,addEndOfPhase: 0},
 			{name: GlobalParameterNameEnum.oxygen,step: 1,addEndOfPhase: 0},

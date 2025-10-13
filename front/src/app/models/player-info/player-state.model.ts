@@ -1,6 +1,6 @@
 import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, PlayerPhase, OceanBonus, RessourceStock, ProjectFilter, GlobalParameterOffset } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
-import { AdvancedRessourceType, GameModeContent, myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
+import { AdvancedRessourceType, GameContentName, myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
@@ -309,7 +309,7 @@ export class PlayerStateModel {
 	static empty(injector: Injector): PlayerStateModel {
 		return new PlayerStateModel(injector);
 	}
-	public newGame(dto: PlayerStateDTO, tagList: TagType[], activeContent: GameModeContent[]): void {
+	public newGame(dto: PlayerStateDTO, tagList: TagType[], activeContent: GameContentName[]): void {
 		this.infoState.newGame(dto.infoState)
 		this.scoreState.newGame()
 		this.tagState.newGame(tagList)

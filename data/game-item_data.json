@@ -430,11 +430,29 @@
         "description": "none",
         "imageUrl": "assets/other/go_to_page.png",
         "name": "$other_gotopage$"
-    }
+    },
     {
         "id": 147,
         "description": "none",
         "imageUrl": "assets/other/moon_parameter.png",
-        "name": "$other_moon$"
+        "name": "$other_moonparameter$"
+    },
+    {
+        "id": 148,
+        "description": "none",
+        "imageUrl": "assets/other/moon_habitattile.png",
+        "name": "$other_habitattile$"
+    },
+    {
+        "id": 149,
+        "description": "none",
+        "imageUrl": "assets/other/moon_roadtile.png",
+        "name": "$other_roadtile$"
+    },
+    {
+        "id": 150,
+        "description": "none",
+        "imageUrl": "assets/other/moon_minetile.png",
+        "name": "$other_minetile$"
     }
 ]

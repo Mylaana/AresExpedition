@@ -4,10 +4,14 @@
 		<app-non-event-button [button]="_buyForest" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyForest)"></app-non-event-button>
 		<app-non-event-button [button]="_convertTemperature" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_convertTemperature)"></app-non-event-button>
 		<app-non-event-button [button]="_buyTemperature" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyTemperature)"></app-non-event-button>
-		<app-non-event-button *ngIf="isFoundationsActive()" [button]="_convertInfrastructure" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_convertInfrastructure)"></app-non-event-button>
-		<app-non-event-button *ngIf="isFoundationsActive()" [button]="_buyInfrastructure" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyInfrastructure)"></app-non-event-button>
+		<app-non-event-button *ngIf="isContentActive('expansionFoundations')" [button]="_convertInfrastructure" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_convertInfrastructure)"></app-non-event-button>
+		<app-non-event-button *ngIf="isContentActive('expansionFoundations')" [button]="_buyInfrastructure" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyInfrastructure)"></app-non-event-button>
 		<app-non-event-button [button]="_buyOcean" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyOcean)"></app-non-event-button>
-		<app-non-event-button *ngIf="isStandardPhaseUpgradeOptionActive()" [button]="_buyUpgrade" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyUpgrade)"></app-non-event-button>
+		<app-non-event-button *ngIf="isContentActive('modeStandardProjectPhaseUpgrade')" [button]="_buyUpgrade" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyUpgrade)"></app-non-event-button>
+		<app-non-event-button *ngIf="isContentActive('expansionMoon')" [button]="_buyHabitat" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyHabitat)"></app-non-event-button>
+		<app-non-event-button *ngIf="isContentActive('expansionMoon')" [button]="_buyRoad" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyRoad)"></app-non-event-button>
+		<app-non-event-button *ngIf="isContentActive('expansionMoon')" [button]="_buyMine" [context]="'convertButton'" [shape]="'action'" (buttonClicked)="onClick(_buyMine)"></app-non-event-button>
+
 	</div>
 	<app-playable-card-list [event]="event" [listType]="'selector'" (projectActivated)="onProjectActivated($event)"></app-playable-card-list>
 	<app-hexed-background [autoFillHexSize]="'medium'"></app-hexed-background>

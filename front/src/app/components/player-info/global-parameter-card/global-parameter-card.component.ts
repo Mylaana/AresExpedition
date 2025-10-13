@@ -155,13 +155,9 @@ export class GlobalParameterCardComponent implements OnInit {
 		return this.currentStep===this._maxStep-1
 	}
 	getParameterImageName(): string {
-		return '$other_' + this.parameter.toLocaleLowerCase()
-		switch(this.parameter){
-			case(GlobalParameterNameEnum.moon):{
-				return '$other_moon'
-			}
-			default:{
-			}
+		if(this.parameter===GlobalParameterNameEnum.moon){
+			return '$other_moonparameter$'
 		}
+		return '$other_' + this.parameter.toLocaleLowerCase()
 	}
 }

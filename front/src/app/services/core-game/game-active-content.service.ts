@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { GameModeContent, TagType } from "../../types/global.type";
+import { GameContentName, TagType } from "../../types/global.type";
 import { GAME_TAG_GROUP_VANILLA_BIO, GAME_TAG_GROUP_VANILLA_BUILD, GAME_TAG_GROUP_VANILLA_EVENT, GAME_TAG_GROUP_VANILLA_OTHER, GAME_TAG_GROUP_VANILLA_PLANET, GAME_TAG_GROUP_VANILLA_TECH } from "../../global/global-const";
 
 @Injectable({
     providedIn: 'root'
 })
-export class GameModeContentService{
-    private options: Record<GameModeContent, boolean> = {
+export class GameActiveContentService{
+    private options: Record<GameContentName, boolean> = {
 		'expansionBalancedCards': false,
 		'expansionDevFanMade': false,
         'expansionMoon': true,
@@ -18,10 +18,10 @@ export class GameModeContentService{
 		'modeInfrastructureMandatory': false,
 		'modeInitialDraft': false,
 		'modeMerger': false,
-		'modeStandardProjectPhaseUpgrade': false
+		'modeStandardProjectPhaseUpgrade': true
     }
 
-    isContentActive(content: GameModeContent): boolean {
+    isContentActive(content: GameContentName): boolean {
         if(!(content in this.options) || !this.options[content]){return false}
         return this.options[content]
     }
@@ -36,8 +36,8 @@ export class GameModeContentService{
         if(this.isContentActive('expansionMoon')){planet.push('moon')}
         return build.concat(tech, planet, bio, other, event)
     }
-	getActiveContentList(): GameModeContent[] {
-		return (Object.keys(this.options) as GameModeContent[])
+	getActiveContentList(): GameContentName[] {
+		return (Object.keys(this.options) as GameContentName[])
 			.filter(key => this.options[key])
 	}
 }
