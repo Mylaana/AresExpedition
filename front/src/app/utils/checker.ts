@@ -1,7 +1,7 @@
 import { GlobalParameterNameEnum, GlobalParameterColorEnum } from "../enum/global.enum"
 import { AdvancedRessourceStock } from "../interfaces/global.interface"
 import { PlayerStateModel } from "../models/player-info/player-state.model"
-import { RessourceType, MinMaxEqualType, TagType, AdvancedRessourceType } from "../types/global.type"
+import { RessourceType, MinMaxEqualType, TagType, AdvancedRessourceType, MoonTileType } from "../types/global.type"
 import { Utils } from "./utils"
 
 const minIndex = 0
@@ -93,6 +93,9 @@ function isProductionOk(ressource: RessourceType, quantity: number, treshold: Mi
     if(!check){return false}
     return Utils.getValueVsTreshold({treshold:treshold, tresholdValue:quantity, value:check.valueProd})
 }
+function isMoonTileOk(tileType: MoonTileType, quantity: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
+	return Utils.getValueVsTreshold({treshold: treshold, tresholdValue: quantity, value:clientState.getMoonTileOfType(tileType)})
+}
 export const Checker = {
     isRessourceOk,
     isTagOk,
@@ -105,4 +108,5 @@ export const Checker = {
 	hasCardWithStockType,
 	hasCardWithStockQuantityPerType,
 	isProductionOk,
+	isMoonTileOk
 }

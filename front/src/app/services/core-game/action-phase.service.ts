@@ -55,7 +55,7 @@ export class ActionPhaseService{
 			this.standardProjectsList.push('buyUpgrade')
 		}
 		if(this.gameContentService.isContentActive('expansionMoon')){
-			this.standardProjectsList.push('buyHabitat', 'buyMine', 'buyRoad')
+			this.standardProjectsList.push('buyHabitat', 'buyMine')
 		}
 	}
     private initializeStandardProjectStates(){

@@ -5,14 +5,14 @@ import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { AdvancedRessourceType, RessourceType } from "../types/global.type";
 import { GlobalInfo } from "../services/global/global-info.service";
-import { RessourceStock } from "../interfaces/global.interface";
+import { MoonTile, RessourceStock } from "../interfaces/global.interface";
 import { Utils } from "../utils/utils";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum";
 import { Checker } from "../utils/checker";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
-| 'ON_MILESTONE_CLAIMED' | 'ON_PHASE_ACTIVATED'
+| 'ON_MILESTONE_CLAIMED' | 'ON_PHASE_ACTIVATED' | 'ON_MOON_TILE_GAINED'
 interface TriggerInput {
 	playedCard: PlayableCardModel,
 	increasedParameter: GlobalParameterNameEnum
@@ -27,6 +27,7 @@ interface TriggerInput {
 	productionIncreased: RessourceStock,
 	activatedPhase: NonSelectablePhaseEnum
 	clientSelectedPhase: SelectablePhaseEnum
+	moonTiles: MoonTile[]
 }
 const S = EventFactory.simple
 
@@ -413,6 +414,18 @@ const S = EventFactory.simple
 		return []
 	}
 
+//ON MOON TILE GAIN
+	//Luna Mining Federation
+	function handleTrigger_MC2(trigger: string, input: TriggerInput, clientstate?: PlayerStateModel): EventBaseModel[]{
+		let mines = input.moonTiles.filter(tiles => tiles.name==='mine')
+		if(mines.length===0){return []}
+		let quantity = mines[0].quantity
+		return [
+			EventFactory.simple.addTR(quantity),
+			EventFactory.simple.addProduction({name: 'titanium', valueStock: quantity})
+		]
+	}
+
 // Main Dispatch
 const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, input: TriggerInput, clientState?: PlayerStateModel) => EventBaseModel[]>> = {
 	ON_CARD_PLAYED: {
@@ -486,6 +499,9 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 	},
 	ON_PHASE_ACTIVATED: {
 		'CF2': handleTrigger_CF2,
+	},
+	ON_MOON_TILE_GAINED: {
+
 	}
 };
 
@@ -503,7 +519,8 @@ function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {
 		productionIncreased: input.productionIncreased??{name:'megacredit', valueStock:0},
 		isParameterMaxedOutAtBeginningOfPhase: input.isParameterMaxedOutAtBeginningOfPhase??true,
 		activatedPhase: input.activatedPhase??NonSelectablePhaseEnum.undefined,
-		clientSelectedPhase: input.clientSelectedPhase??SelectablePhaseEnum.undefined
+		clientSelectedPhase: input.clientSelectedPhase??SelectablePhaseEnum.undefined,
+		moonTiles: input.moonTiles??[]
 	}
 }
 export const TriggerEffectEventFactory = {

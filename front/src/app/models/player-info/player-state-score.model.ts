@@ -1,5 +1,6 @@
 import { MilestonesEnum } from "../../enum/global.enum"
 import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.interface"
+import { MoonTileType } from "../../types/global.type"
 
 export class PlayerScoreStateModel {
 	private vp: number = 0
@@ -49,7 +50,13 @@ export class PlayerScoreStateModel {
 	getRoad(): number {return this.road}
 	addMine(quantity: number){this.mine += quantity}
 	getMine(): number{return this.mine}
-
+	getMoonTileOfType(tileType: MoonTileType){
+		switch(tileType){
+			case('habitat'):{return this.getHabitat()}
+			case('mine'):{return this.getMine()}
+			case('road'):{return this.getRoad()}
+		}
+	}
 
 	toJson(): PlayerScoreStateDTO {
 		return {

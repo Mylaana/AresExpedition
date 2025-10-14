@@ -39,7 +39,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 	_buyOcean!: NonEventButton
 	_buyUpgrade!: NonEventButton
 	_buyHabitat!: NonEventButton
-	_buyRoad!: NonEventButton
 	_buyMine!: NonEventButton
 
 	//_gameOptions!: GameOption
@@ -64,7 +63,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 		this._buyOcean = this.actionPhaseService.getButton('buyOcean')
 		this._buyUpgrade = this.actionPhaseService.getButton('buyUpgrade')
 		this._buyHabitat = this.actionPhaseService.getButton('buyHabitat')
-		this._buyRoad = this.actionPhaseService.getButton('buyRoad')
 		this._buyMine = this.actionPhaseService.getButton('buyMine')
 
 		this._actionEvent = this.event as EventCardActivator

@@ -41,21 +41,17 @@ export const STANDARD_PROJECT_EVENTS: Record<StandardProjectButtonNames, (costMc
         EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}})
     ],
     'buyHabitat': (costMC, costPlant, costHeat) => [
+		S.addHabitat(),
+		S.draw(),
 		S.addRessource({name:'megacredit', valueStock: - costMC}),
-		S.addProduction({name: 'megacredit', valueStock: 2}),
-		S.increaseGlobalParameter(GlobalParameterNameEnum.moon, 1),
-		S.addHabitat()
     ],
 	'buyRoad': (costMC, costPlant, costHeat) => [
+		S.addRoad(),
 		S.addRessource({name:'megacredit', valueStock: - costMC}),
-		S.addTR(1),
-		S.increaseGlobalParameter(GlobalParameterNameEnum.moon, 1),
-		S.addRoad()
     ],
 	'buyMine': (costMC, costPlant, costHeat) => [
+		S.addMine(),
+		S.addProduction({name:'steel', valueStock:1}),
 		S.addRessource({name:'megacredit', valueStock: - costMC}),
-		S.addProduction({name: 'steel', valueStock: 1}),
-		S.increaseGlobalParameter(GlobalParameterNameEnum.moon, 1),
-		S.addMine()
     ]
 }

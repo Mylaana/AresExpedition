@@ -63,7 +63,7 @@ interface CreateEventOptionsDeckQuery {
 	firstProductionCardList?: string[]
 }
 
-function draw(drawNumber: number): EventBaseModel {
+function draw(drawNumber: number=1): EventBaseModel {
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
 function discard(discardNumber: number): EventComplexCardSelector {
@@ -161,6 +161,9 @@ function addMine(quantity: number = 1){
 function addMoonTile(tiles: MoonTile | MoonTile[]){
 	return EventFactory.createGeneric('addMoonTile', {addMoonTile: tiles})
 }
+function increaseMoonParameter(quantity: number = 1){
+	return EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter:{name:GlobalParameterNameEnum.moon,steps: quantity}})
+}
 
 
 const SimpleEvent = {
@@ -189,7 +192,8 @@ const SimpleEvent = {
 	addHabitat,
 	addRoad,
 	addMine,
-	addMoonTile
+	addMoonTile,
+	increaseMoonParameter
 }
 
 function generateCardSelector(args?: CardSelectorOptions): CardSelector {

@@ -22,5 +22,5 @@ export const GLOBAL_PARAMETER_MAX_STEP: Record<GlobalParameterNameEnum, number> 
 	OCEAN: 9,
 	OXYGEN: 15,
 	TEMPERATURE: 15,
-	MOON: 13
+	MOON: 17
 }

@@ -956,6 +956,7 @@ export class GameState{
 	addMoonTile(tiles: MoonTile | MoonTile[]){
 		let state = this.getClientState()
 		let tilesList: MoonTile[] = Utils.toArray(tiles)
+		let totalTR: number = 0
 		for(let t of tilesList){
 			switch(t.name){
 				case('habitat'):{
@@ -971,6 +972,16 @@ export class GameState{
 					break
 				}
 			}
+			totalTR += t.quantity
 		}
+		this.updateClientState(state)
+
+
+		let newEvents = PlayableCard.getOnTriggerredEvents('ON_MOON_TILE_GAINED', state.getTriggersIdActive(), state, {moonTiles:tilesList})
+		if(newEvents.length>0){
+			this.addEventQueue(newEvents, 'first')
+		}
+		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){return}
+		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
 	}
 }

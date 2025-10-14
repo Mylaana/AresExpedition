@@ -8,6 +8,8 @@ import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
 import { NonEventButtonNames } from "../types/global.type";
 
+export const S = EventFactory.simple
+
 export const ALTERNATIVE_PAY_TRIGGER_LIST: string[] = [
 	'5', '52'
 ]
@@ -193,8 +195,31 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'FM32': (s) => Checker.isTagOk('plant', 2, 'min', s),
 	//Sponsored Academies
 	'FM34': (s) => Checker.isHandCurrentSizeOk(1, 'min', s),
+	//hypersensitive Chip Factory
+	'M10': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
+	//Luna Mining Hub
+	'M11': (s)=> Checker.isMoonTileOk('mine', 2, 'min', s),
+	//Luna Senate
+	'M13': (s)=> Checker.isTagOk('moon', 3, 'min', s),
+	//Luna Train Station
+	'M14': (s)=> Checker.isMoonTileOk('road', 2, 'min', s),
 	//Lunar industry complex
-	'FM35': (s)=> Checker.isProductionOk('titanium', 2, 'min', s)
+	'M15': (s)=> Checker.isProductionOk('titanium', 2, 'min', s),
+	//Mare Serenitatis Mine
+	'M19': (s)=> Checker.isTagOk('science', 3, 'min', s),
+	//Momentum Virum Habitat
+	'M21': (s)=> Checker.isTagOk('moon', 1, 'min', s),
+
+	//The Womb
+	'M24': (s)=> Checker.isTagOk('moon', 4, 'min', s),
+	//Luna Ecumenapolis
+	'M27': (s)=> Checker.isTagOk('space', 4, 'min', s),
+
+	//Lunar Mine Urbanization
+	'M63': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
+
+	//Moon Tether
+	'M80': (s)=> Checker.isTagOk('space', 4, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -213,12 +238,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		return []
 	},
 	//Assets Liquidation
-	'11': () => [EventFactory.simple.specialBuilder(BuilderOption.assetLiquidation)],
+	'11': () => [S.specialBuilder(BuilderOption.assetLiquidation)],
 	//Asset Liquidation v2
 	'11B': () => [
-		EventFactory.simple.addTR(-1),
-		EventFactory.simple.draw(3),
-		EventFactory.simple.specialBuilder(BuilderOption.assetLiquidation)
+		S.addTR(-1),
+		S.draw(3),
+		S.specialBuilder(BuilderOption.assetLiquidation)
 	],
 	//Composting Factory
 	'17': (state) => {
@@ -226,776 +251,776 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		return []
 	},
 	//Decomposing Fungus
-	'20': () => [EventFactory.simple.addRessourceToCardId({name: 'microbe', valueStock: 2},'20')],
+	'20': () => [S.addRessourceToCardId({name: 'microbe', valueStock: 2},'20')],
 	//Extended Resources
-	'26': () => [EventFactory.simple.increaseResearchScanKeep({keep: 1, scan: 0})],
+	'26': () => [S.increaseResearchScanKeep({keep: 1, scan: 0})],
 	//Farming Co-ops
-	'29': () => [EventFactory.simple.addRessource({name: 'plant', valueStock: 3})],
+	'29': () => [S.addRessource({name: 'plant', valueStock: 3})],
 	//Interplanetary Relations
-	'35': () => [EventFactory.simple.increaseResearchScanKeep({keep: 1, scan: 1})],
+	'35': () => [S.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Interns
-	'36': () => [EventFactory.simple.increaseResearchScanKeep({keep: 0, scan: 2})],
+	'36': () => [S.increaseResearchScanKeep({keep: 0, scan: 2})],
 	//Nitrite Reducing Bacteria
-	'43': () => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:3}, '43')],
+	'43': () => [S.addRessourceToCardId({name:'microbe', valueStock:3}, '43')],
 	//United Planetary Alliance
-	'60': () => [EventFactory.simple.increaseResearchScanKeep({keep: 1, scan: 1})],
+	'60': () => [S.increaseResearchScanKeep({keep: 1, scan: 1})],
 	//Wood Burning Stoves
 	'64': () => [
-		EventFactory.simple.addRessource({name: 'plant', valueStock: 4})],
+		S.addRessource({name: 'plant', valueStock: 4})],
 	//Artificial Lake
 	'66': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Atmosphere Filtering
 	'67': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
 	//Bribed Committee
 	'69': () => [
-		EventFactory.simple.addTR(2)],
+		S.addTR(2)],
 	//Business Contact
-	'70': () => [EventFactory.simple.drawThenDiscard(4,2)],
+	'70': () => [S.drawThenDiscard(4,2)],
 	//CEO's Favorite Project
-	'71': () => [EventFactory.simple.effectPortal(EffectPortalEnum.ceo)],
+	'71': () => [S.effectPortal(EffectPortalEnum.ceo)],
 	//Comet
 	'73': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Convoy from Europa
 	'74': () => [
-		EventFactory.simple.draw(1),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.draw(1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Crater
 	'75': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Deimos Down
 	'76': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 3),
-		EventFactory.simple.addRessource({name: 'megacredit', valueStock: 7})],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 3),
+		S.addRessource({name: 'megacredit', valueStock: 7})],
 	//Giant Ice Asteroid
 	'77': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 2)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 2)],
 	//Ice Asteroid
 	'78': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 2)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 2)],
 	//Ice Cap Melting
 	'79': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Imported Hyrdrogen
 	'80': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1),
-		EventFactory.simple.effectPortal(EffectPortalEnum.importedHydrogen)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1),
+		S.effectPortal(EffectPortalEnum.importedHydrogen)
 	],
 	//Imported Nitrogen
 	'81': () => [
-		EventFactory.simple.addRessourceToSelectedCard({name: 'animal', valueStock: 2}),
-		EventFactory.simple.addRessourceToSelectedCard({name: 'microbe', valueStock: 3}),
-		EventFactory.simple.addRessource({name: 'plant', valueStock: 4}),
-		EventFactory.simple.addTR(1)],
+		S.addRessourceToSelectedCard({name: 'animal', valueStock: 2}),
+		S.addRessourceToSelectedCard({name: 'microbe', valueStock: 3}),
+		S.addRessource({name: 'plant', valueStock: 4}),
+		S.addTR(1)],
 	//Invention Contest
 	'83': () => [
-		EventFactory.simple.scanKeep({scan: 3, keep: 1}, DeckQueryOptionsEnum.inventionContest)],
+		S.scanKeep({scan: 3, keep: 1}, DeckQueryOptionsEnum.inventionContest)],
 	//Investment Loan
 	'84': () => [
-		EventFactory.simple.addRessource({name: 'megacredit', valueStock: 10}),
-		EventFactory.simple.addTR(-1)],
+		S.addRessource({name: 'megacredit', valueStock: 10}),
+		S.addTR(-1)],
 	//Lagrange Observatory
 	'85': () => [
-		EventFactory.simple.draw(1)],
+		S.draw(1)],
 	//Lake Marineris
 	'86': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 2)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 2)],
 	//Large Convoy
 	'87': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1),
-		EventFactory.simple.draw(2),
-		EventFactory.simple.effectPortal(EffectPortalEnum.largeConvoy)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1),
+		S.draw(2),
+		S.effectPortal(EffectPortalEnum.largeConvoy)
 	],
 	//Lava Flows
 	'88': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2)],
 	//Local Heat Trapping
 	'89': () => [
-		EventFactory.simple.addRessource({name:'plant', valueStock:4}),
-		EventFactory.simple.effectPortal(EffectPortalEnum.localHeatTrapping)
+		S.addRessource({name:'plant', valueStock:4}),
+		S.effectPortal(EffectPortalEnum.localHeatTrapping)
 	],
 	//Mangrove
 	'90': () => [
-		EventFactory.simple.addForestAndOxygen(1)],
+		S.addForestAndOxygen(1)],
 	//Nitrogen-Rich Asteroid
 	'91': (state) => {
 		let plants = 2
 		if (state.getTagsOfType('plant') >= 3) plants += 4
 		return [
-			EventFactory.simple.addTR(2),
-			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
-			EventFactory.simple.addRessource({name: 'plant', valueStock: plants})
+			S.addTR(2),
+			S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
+			S.addRessource({name: 'plant', valueStock: plants})
 		]
 	},
 	//Permafrost Extraction
 	'92': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Phobos Falls
 	'93': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1),
-		EventFactory.simple.draw(2)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1),
+		S.draw(2)],
 	//Plantation
 	'94': () => [
-		EventFactory.simple.addForestAndOxygen(2)],
+		S.addForestAndOxygen(2)],
 	//Release of Inert Gases
 	'95': () => [
-		EventFactory.simple.addTR(2)],
+		S.addTR(2)],
 	//Research
 	'96': () => [
-		EventFactory.simple.draw(2)],
+		S.draw(2)],
 	//Subterranean Reservoir
 	'98': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Technology Demonstration
 	'99': () => [
-		EventFactory.simple.draw(2),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.draw(2),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Terraforming Ganymede
 	'100': (state) => [
-		EventFactory.simple.addTR(state.getTagsOfType('jovian'))],
+		S.addTR(state.getTagsOfType('jovian'))],
 	//Towing a Comet
 	'101': () => [
-		EventFactory.simple.addRessource({name: 'plant', valueStock: 2}),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.addRessource({name: 'plant', valueStock: 2}),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Work Crews
-	'102': () => [EventFactory.simple.specialBuilder(BuilderOption.workCrews)],
+	'102': () => [S.specialBuilder(BuilderOption.workCrews)],
 	//Acquired Company
 	'103': () => [
-		EventFactory.simple.addProduction({name: 'card', valueStock: 1})],
+		S.addProduction({name: 'card', valueStock: 1})],
 	//Adaptated Lichen
 	'104': () => [
-		EventFactory.simple.addProduction({name: 'plant', valueStock: 1})],
+		S.addProduction({name: 'plant', valueStock: 1})],
 	//Aerated Magma
 	'105': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{name: 'card', valueStock: 1},
 			{name: 'heat', valueStock: 2}
 		])],
 	//Airborne Radiation
 	'106': () => [
-		EventFactory.simple.addProduction({name: 'heat', valueStock: 2}),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
+		S.addProduction({name: 'heat', valueStock: 2}),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
 	//Cultivated Land (erreur dans ton ancien code, code 107 → nom corrigé)
 	'107': () => [
-		EventFactory.simple.addProduction({name: 'plant', valueStock: 2})],
+		S.addProduction({name: 'plant', valueStock: 2})],
 	//Archaebacteria
 	'108': () => [
-		EventFactory.simple.addProduction({name: 'plant', valueStock: 1})],
+		S.addProduction({name: 'plant', valueStock: 1})],
 	//Artificial Photosynthesis
 	'109': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{name: 'plant', valueStock: 1},
 			{name: 'heat', valueStock: 1}
 		])],
 	//Asteroid Mining
 	'110': () => [
-		EventFactory.simple.addProduction({name: 'titanium', valueStock: 2})],
+		S.addProduction({name: 'titanium', valueStock: 2})],
 	//Asteroid Mining Consortium
 	'111': () => [
-		EventFactory.simple.addProduction({name: 'titanium', valueStock: 1})],
+		S.addProduction({name: 'titanium', valueStock: 1})],
 	//Astrofarm
 	'112': () => [
-		EventFactory.simple.addRessourceToSelectedCard({name: 'microbe', valueStock: 2}),
-		EventFactory.simple.addProduction([
+		S.addRessourceToSelectedCard({name: 'microbe', valueStock: 2}),
+		S.addProduction([
 			{name: 'plant', valueStock: 1},
 			{name: 'heat', valueStock: 3}
 		])],
 	//Automated Factories
 	'114': () => [
-		EventFactory.simple.addProduction({name:'card', valueStock: 1}),
-		EventFactory.simple.specialBuilder(BuilderOption.green9MCFree)
+		S.addProduction({name:'card', valueStock: 1}),
+		S.specialBuilder(BuilderOption.green9MCFree)
 	],
 	//Balanced Portfolios
 	'115': () => [
-		EventFactory.simple.addProduction({name:'megacredit', valueStock: 3}),
-		EventFactory.simple.addTR(-1)
+		S.addProduction({name:'megacredit', valueStock: 3}),
+		S.addTR(-1)
 	],
 	//Beam from a Thorium Asteroid
 	'116': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{name: 'plant', valueStock: 1},
 			{name: 'heat', valueStock: 3}
 		])],
 	//Biomass Combustors
 	'117': () => [
-		EventFactory.simple.addProduction({name: 'heat', valueStock: 5}),
-		EventFactory.simple.addRessource({name: 'plant', valueStock: -2})],
+		S.addProduction({name: 'heat', valueStock: 5}),
+		S.addRessource({name: 'plant', valueStock: -2})],
 	//BioThermal Power
 	'118': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 1 }),
-		EventFactory.simple.addForestAndOxygen(1),
+		S.addProduction({ name: 'heat', valueStock: 1 }),
+		S.addForestAndOxygen(1),
 	],
 	//Blueprints
 	'119': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'card', valueStock: 1 },
 		{ name: 'megacredit', valueStock: 2 },
 		]),
 	],
 	//Building Industries
 	'120': () => [
-		EventFactory.simple.addProduction({ name: 'steel', valueStock: 2 }),
-		EventFactory.simple.addRessource({ name: 'heat', valueStock: -4 }),
+		S.addProduction({ name: 'steel', valueStock: 2 }),
+		S.addRessource({ name: 'heat', valueStock: -4 }),
 	],
 	//Bushes
 	'121': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 2 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 2 }),
+		S.addProduction({ name: 'plant', valueStock: 2 }),
+		S.addRessource({ name: 'plant', valueStock: 2 }),
 	],
 	//Callisto Penal Mines
 	'122': () => [
-		EventFactory.simple.addProduction({ name: 'card', valueStock: 1 }),
+		S.addProduction({ name: 'card', valueStock: 1 }),
 	],
 	//Coal Imports
 	'124': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 3 }),
+		S.addProduction({ name: 'heat', valueStock: 3 }),
 	],
 	//Commercial Districts
 	'125': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 4 }),
+		S.addProduction({ name: 'megacredit', valueStock: 4 }),
 	],
 	//Deep Well Heating
 	'126': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 1 }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
+		S.addProduction({ name: 'heat', valueStock: 1 }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1),
 	],
 	//Designed Microorganisms
 	'127': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 2 }),
+		S.addProduction({ name: 'plant', valueStock: 2 }),
 	],
 	//Diversified Interests
 	'128': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 1 }),
-		EventFactory.simple.addRessource([
+		S.addProduction({ name: 'plant', valueStock: 1 }),
+		S.addRessource([
 		{ name: 'plant', valueStock: 3 },
 		{ name: 'heat', valueStock: 3 },
 		]),
 	],
 	//Dust Quarry
 	'129': () => [
-		EventFactory.simple.addProduction({ name: 'steel', valueStock: 1 }),
+		S.addProduction({ name: 'steel', valueStock: 1 }),
 	],
 	//Economic Growth
 	'130': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 3 }),
+		S.addProduction({ name: 'megacredit', valueStock: 3 }),
 	],
 	//Energy Storage
 	'131': () => [
-		EventFactory.simple.addProduction({ name: 'card', valueStock: 2 }),
+		S.addProduction({ name: 'card', valueStock: 2 }),
 	],
 	//Eos Chasma National Park
 	'132': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 3 }),
-		EventFactory.simple.addRessourceToSelectedCard({ name: 'animal', valueStock: 1 }),
+		S.addProduction({ name: 'megacredit', valueStock: 2 }),
+		S.addRessource({ name: 'plant', valueStock: 3 }),
+		S.addRessourceToSelectedCard({ name: 'animal', valueStock: 1 }),
 	],
 	//Farming
 	'133': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'megacredit', valueStock: 2 },
 		{ name: 'plant', valueStock: 2 },
 		]),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 2 }),
+		S.addRessource({ name: 'plant', valueStock: 2 }),
 	],
 	//Food Factory
 	'134': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 4 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: -2 }),
+		S.addProduction({ name: 'megacredit', valueStock: 4 }),
+		S.addRessource({ name: 'plant', valueStock: -2 }),
 	],
 	//Fuel factory
 	'135': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'megacredit', valueStock: 1 },
 		{ name: 'titanium', valueStock: 1 },
 		]),
-		EventFactory.simple.addRessource({ name: 'heat', valueStock: -3 }),
+		S.addRessource({ name: 'heat', valueStock: -3 }),
 	],
 	//Fuel Generators
 	'136': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 }),
-		EventFactory.simple.addTR(-1),
+		S.addProduction({ name: 'heat', valueStock: 2 }),
+		S.addTR(-1),
 	],
 	//Fusion Power
 	'137': () => [
-		EventFactory.simple.addProduction({ name: 'card', valueStock: 1 }),
+		S.addProduction({ name: 'card', valueStock: 1 }),
 	],
 	//Ganymede Shipyard
 	'138': () => [
-		EventFactory.simple.addProduction({ name: 'titanium', valueStock: 2 }),
+		S.addProduction({ name: 'titanium', valueStock: 2 }),
 	],
 	//Gene Repair
 	'139': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2 }),
+		S.addProduction({ name: 'megacredit', valueStock: 2 }),
 	],
 	//Geothermal Power
 	'140': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 }),
+		S.addProduction({ name: 'heat', valueStock: 2 }),
 	],
 	//Giant Space Mirror
 	'141': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 3 }),
+		S.addProduction({ name: 'heat', valueStock: 3 }),
 	],
 	//Grass
 	'142': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 1 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 3 }),
+		S.addProduction({ name: 'plant', valueStock: 1 }),
+		S.addRessource({ name: 'plant', valueStock: 3 }),
 	],
 	//Great Dam
 	'143': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 }),
+		S.addProduction({ name: 'heat', valueStock: 2 }),
 	],
 	//Great Escarpment Consortium
 	'144': () => [
-		EventFactory.simple.addProduction({ name: 'steel', valueStock: 1 }),
+		S.addProduction({ name: 'steel', valueStock: 1 }),
 	],
 	//Heater
 	'145': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 1 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 1 }),
+		S.addProduction({ name: 'plant', valueStock: 1 }),
+		S.addRessource({ name: 'plant', valueStock: 1 }),
 	],
 	//Immigration Shuttles
 	'146': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 3 }),
+		S.addProduction({ name: 'megacredit', valueStock: 3 }),
 	],
 	//Import of Advanced GHG
 	'147': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 }),
+		S.addProduction({ name: 'heat', valueStock: 2 }),
 	],
 	//Imported GHG
 	'148': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 1 }),
-		EventFactory.simple.addRessource({ name: 'heat', valueStock: 5 }),
+		S.addProduction({ name: 'heat', valueStock: 1 }),
+		S.addRessource({ name: 'heat', valueStock: 5 }),
 	],
 	//Industrial Center
 	'149': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'megacredit', valueStock: 3 },
 		{ name: 'steel', valueStock: 1 },
 		]),
 	],
 	//Industrial Farming
 	'150': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'megacredit', valueStock: 1 },
 		{ name: 'plant', valueStock: 2 },
 		]),
 	],
 	//Industrial Microbes
 	'151': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'heat', valueStock: 1 },
 		{ name: 'steel', valueStock: 1 },
 		]),
 	],
 	//Io Mining Industry
 	'153': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'megacredit', valueStock: 2 },
 		{ name: 'titanium', valueStock: 2 },
 		]),
 	],
 	//Kelp Farming
 	'154': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'megacredit', valueStock: 2 },
 		{ name: 'plant', valueStock: 3 },
 		]),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 2 }),
+		S.addRessource({ name: 'plant', valueStock: 2 }),
 	],
 	//Lichen
 	'155': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 1 }),
+		S.addProduction({ name: 'plant', valueStock: 1 }),
 	],
 	//Low-Atmo Shields
 	'157': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'megacredit', valueStock: 1 },
 		{ name: 'heat', valueStock: 2 },
 		]),
 	],
 	//Lunar Beam
 	'158': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 4 }),
-		EventFactory.simple.addTR(-1),
+		S.addProduction({ name: 'heat', valueStock: 4 }),
+		S.addTR(-1),
 	],
 	//Mass Converter
 	'159': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'heat', valueStock: 3 },
 		{ name: 'titanium', valueStock: 1 },
 		]),
 	],
 	//Methane from Titan
 	'161': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'plant', valueStock: 2 },
 		{ name: 'heat', valueStock: 2 },
 		]),
 	],
 	//Micromills
 	'162': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 		{ name: 'heat', valueStock: 1 },
 		{ name: 'steel', valueStock: 1 },
 		]),
 	],
 	//Microprocessor
 	'163': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 3 }),
-		EventFactory.simple.drawThenDiscard(2,1),
+		S.addProduction({ name: 'heat', valueStock: 3 }),
+		S.drawThenDiscard(2,1),
 	],
 	//Mine
 	'164': () => [
-		EventFactory.simple.addProduction({ name: 'steel', valueStock: 2 }),
+		S.addProduction({ name: 'steel', valueStock: 2 }),
 	],
 	//Mohole Area
 	'166': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 4 }),
+		S.addProduction({ name: 'heat', valueStock: 4 }),
 	],
 	//Monocultures
 	'167': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 2 }),
-		EventFactory.simple.addTR(-1),
+		S.addProduction({ name: 'plant', valueStock: 2 }),
+		S.addTR(-1),
 	],
 	//Moss
 	'168': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 1 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: -1 }),
+		S.addProduction({ name: 'plant', valueStock: 1 }),
+		S.addRessource({ name: 'plant', valueStock: -1 }),
 	],
 	//Natural Preserve
 	'169': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2 }),
+		S.addProduction({ name: 'megacredit', valueStock: 2 }),
 	],
 	//New Portfolios
 	'170': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'megacredit', valueStock: 1 },
 			{ name: 'plant', valueStock: 1 },
 			{ name: 'heat', valueStock: 1 }
 		])
 	],
 	//Nitrophilic Moss
-	'171': () => [EventFactory.simple.addProduction({ name: 'plant', valueStock: 2 })],
+	'171': () => [S.addProduction({ name: 'plant', valueStock: 2 })],
 	//Noctis Farming
 	'172': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 1 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 2 })
+		S.addProduction({ name: 'plant', valueStock: 1 }),
+		S.addRessource({ name: 'plant', valueStock: 2 })
 	],
 	//Nuclear Plants
 	'173': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'megacredit', valueStock: 1 },
 			{ name: 'heat', valueStock: 3 }
 		])
 	],
 	//Power plant
-	'175': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 1 })],
+	'175': () => [S.addProduction({ name: 'heat', valueStock: 1 })],
 	//Power Supply Consortium
 	'176': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'megacredit', valueStock: 2 },
 			{ name: 'heat', valueStock: 1 }
 		])
 	],
 	//Protected Valley
 	'177': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2 }),
-		EventFactory.simple.addForestAndOxygen(1)
+		S.addProduction({ name: 'megacredit', valueStock: 2 }),
+		S.addForestAndOxygen(1)
 	],
 	//Quantum Extractor
-	'178': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 3 })],
+	'178': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
 	//Rad Suits
-	'179': () => [EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2 })],
+	'179': () => [S.addProduction({ name: 'megacredit', valueStock: 2 })],
 	//Slash and Burn Agriculture
-	'182': () => [EventFactory.simple.addProduction({ name: 'plant', valueStock: 2 })],
+	'182': () => [S.addProduction({ name: 'plant', valueStock: 2 })],
 	//Smelting
 	'183': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 5 }),
-		EventFactory.simple.draw(2)
+		S.addProduction({ name: 'heat', valueStock: 5 }),
+		S.draw(2)
 	],
 	//Soil Warming
 	'184': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 2 }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
+		S.addProduction({ name: 'plant', valueStock: 2 }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
 	],
 	//Solar Power
-	'185': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 1 })],
+	'185': () => [S.addProduction({ name: 'heat', valueStock: 1 })],
 	//Solar Trapping
 	'186': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 1 }),
-		EventFactory.simple.addRessource({ name: 'heat', valueStock: 3 }),
-		EventFactory.simple.draw(1)
+		S.addProduction({ name: 'heat', valueStock: 1 }),
+		S.addRessource({ name: 'heat', valueStock: 3 }),
+		S.draw(1)
 	],
 	//Soletta
-	'187': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 5 })],
+	'187': () => [S.addProduction({ name: 'heat', valueStock: 5 })],
 	//Space Heaters
 	'188': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 }),
-		EventFactory.simple.draw(1)
+		S.addProduction({ name: 'heat', valueStock: 2 }),
+		S.draw(1)
 	],
 	//Space Station
-	'189': () => [EventFactory.simple.addProduction({ name: 'titanium', valueStock: 1 })],
+	'189': () => [S.addProduction({ name: 'titanium', valueStock: 1 })],
 	//Sponsor
-	'190': () => [EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2 })],
+	'190': () => [S.addProduction({ name: 'megacredit', valueStock: 2 })],
 	//Strip Mine
 	'191': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'steel', valueStock: 2 },
 			{ name: 'titanium', valueStock: 1 }
 		]),
-		EventFactory.simple.addTR(-1)
+		S.addTR(-1)
 	],
 	//Surface Mines
 	'192': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'steel', valueStock: 1 },
 			{ name: 'titanium', valueStock: 1 }
 		])
 	],
 	//Tectonic Stress Power
-	'193': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 3 })],
+	'193': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
 	//Titanium Mine
-	'194': () => [EventFactory.simple.addProduction({ name: 'titanium', valueStock: 1 })],
+	'194': () => [S.addProduction({ name: 'titanium', valueStock: 1 })],
 	//Toll Station
 	'195': () => [
-		EventFactory.simple.addProduction({name:'megacredit', valueStock: 3}),
-		EventFactory.simple.specialBuilder(BuilderOption.green9MCFree)
+		S.addProduction({name:'megacredit', valueStock: 3}),
+		S.specialBuilder(BuilderOption.green9MCFree)
 	],
 	//Trading Post
 	'196': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 3 })
+		S.addProduction({ name: 'megacredit', valueStock: 2 }),
+		S.addRessource({ name: 'plant', valueStock: 3 })
 	],
 	//Trapped Heat
 	'197': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2 }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+		S.addProduction({ name: 'heat', valueStock: 2 }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 	],
 	//Trees
 	'198': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 3 }),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 1 })
+		S.addProduction({ name: 'plant', valueStock: 3 }),
+		S.addRessource({ name: 'plant', valueStock: 1 })
 	],
 	//Tropical Forest
 	'199': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 4 }),
-		EventFactory.simple.addRessource({ name: 'heat', valueStock: -5 })
+		S.addProduction({ name: 'megacredit', valueStock: 4 }),
+		S.addRessource({ name: 'heat', valueStock: -5 })
 	],
 	//Tundra Farming
 	'200': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'megacredit', valueStock: 2 },
 			{ name: 'plant', valueStock: 1 }
 		]),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 1 })
+		S.addRessource({ name: 'plant', valueStock: 1 })
 	],
 	//Underground City
 	'201': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'megacredit', valueStock: 1 },
 			{ name: 'steel', valueStock: 1 }
 		])
 	],
 	//Underseas Vents
 	'202': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'card', valueStock: 1 },
 			{ name: 'heat', valueStock: 4 }
 		])
 	],
 	//Vesta Shipyard
-	'204': () => [EventFactory.simple.addProduction({ name: 'titanium', valueStock: 1 })],
+	'204': () => [S.addProduction({ name: 'titanium', valueStock: 1 })],
 	//Wave Power
-	'205': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 3 })],
+	'205': () => [S.addProduction({ name: 'heat', valueStock: 3 })],
 	//Apollo Industries
-	'D01': () => [EventFactory.simple.upgradePhaseCard(1, [1])],
+	'D01': () => [S.upgradePhaseCard(1, [1])],
 	//Exocorp
 	'D02': (clientState) => {
 		clientState.addSellCardValueMod(1)
-		return [EventFactory.simple.upgradePhaseCard(1, [4])]
+		return [S.upgradePhaseCard(1, [4])]
 	},
 	//Exocorp v2
 	'D02B': () => {
-		return [EventFactory.simple.upgradePhaseCard(1, [4])]
+		return [S.upgradePhaseCard(1, [4])]
 	},
 	//Hyperion Systems
 	'D03': () => {
-		return [EventFactory.simple.upgradePhaseCard(1, [2])]
+		return [S.upgradePhaseCard(1, [2])]
 	},
 	//Hyperion Systems v2
 	'D03B': () => {
-		return [EventFactory.simple.upgradePhaseCard(1, [2])]
+		return [S.upgradePhaseCard(1, [2])]
 	},
 	//Sultira
-	'D04': () => [EventFactory.simple.upgradePhaseCard(1, [0])],
+	'D04': () => [S.upgradePhaseCard(1, [0])],
 	//Communication Streamlining
 	'D05': () => [
-		EventFactory.simple.upgradePhaseCard(1, [2])
+		S.upgradePhaseCard(1, [2])
 	],
 	//Exosuits
-	'D09': () => [EventFactory.simple.upgradePhaseCard(1)],
+	'D09': () => [S.upgradePhaseCard(1)],
 	//Fibrous Composite Material
-	'D10': () => [EventFactory.simple.addRessourceToCardId({name:'science', valueStock:3}, 'D10')],
+	'D10': () => [S.addRessourceToCardId({name:'science', valueStock:3}, 'D10')],
 	//Software Streamlining
-	'D11': () => [EventFactory.simple.upgradePhaseCard(1)],
+	'D11': () => [S.upgradePhaseCard(1)],
 	//Biomedical Imports
-	'D14': () => [EventFactory.simple.effectPortal(EffectPortalEnum.biomedicalImports)],
+	'D14': () => [S.effectPortal(EffectPortalEnum.biomedicalImports)],
 	//Cryogentic Shipment
 	'D15': (clientState) => {
-		let events: EventBaseModel[] = [EventFactory.simple.upgradePhaseCard(1)]
+		let events: EventBaseModel[] = [S.upgradePhaseCard(1)]
 		if(clientState.getPlayedListWithStockableTypes(['microbe', 'animal']).length!=0){
-			events.push(EventFactory.simple.effectPortal(EffectPortalEnum.cryogenticShipment))
+			events.push(S.effectPortal(EffectPortalEnum.cryogenticShipment))
 		}
 		return events
 	},
 	//Exosuits
 	'D16': () => [
-		EventFactory.simple.draw(1),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.draw(1),
+		S.upgradePhaseCard(1)
 	],
 	//Imported Construction Crews
-	'D17': () => [EventFactory.simple.upgradePhaseCard(2)],
+	'D17': () => [S.upgradePhaseCard(2)],
 	//Ore Leaching
 	'D18': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2),
-		EventFactory.simple.draw(2),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 2),
+		S.draw(2),
+		S.upgradePhaseCard(1)
 	],
 	//Private Investor Beach
 	'D19': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 	],
 	//Topographic Mapping
 	'D20': () => [
-		EventFactory.simple.resolveWildTag('D20'),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.resolveWildTag('D20'),
+		S.upgradePhaseCard(1)
 	],
 	//3D printing
-	'D21': () => [EventFactory.simple.addProduction({name:'megacredit', valueStock:4})],
+	'D21': () => [S.addProduction({name:'megacredit', valueStock:4})],
 	//Biofoundries
 	'D22': () => [
-		EventFactory.simple.upgradePhaseCard(1),
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 2 })
+		S.upgradePhaseCard(1),
+		S.addProduction({ name: 'plant', valueStock: 2 })
 	],
 	//Blast Furnace
 	'D23': () => [
-		EventFactory.simple.upgradePhaseCard(1),
-		EventFactory.simple.addProduction({ name: 'steel', valueStock: 1})
+		S.upgradePhaseCard(1),
+		S.addProduction({ name: 'steel', valueStock: 1})
 	],
 	//Dandelions
-	'D24': () => [EventFactory.simple.addProduction([{ name: 'card', valueStock: 1}, { name: 'plant', valueStock: 1}])],
+	'D24': () => [S.addProduction([{ name: 'card', valueStock: 1}, { name: 'plant', valueStock: 1}])],
 	//Electric Arc Furnace
-	'D25': () => [EventFactory.simple.addProduction({ name: 'steel', valueStock: 2})],
+	'D25': () => [S.addProduction({ name: 'steel', valueStock: 2})],
 	//Local Market
 	'D26': () => [
-		EventFactory.simple.addProduction({name:'megacredit', valueStock:2}),
-		EventFactory.simple.resolveWildTag('D26')
+		S.addProduction({name:'megacredit', valueStock:2}),
+		S.resolveWildTag('D26')
 	],
 	//Manufacturing Hub
 	'D27': () => [
-		EventFactory.simple.addProduction([{name:'megacredit', valueStock:2},{name:'heat', valueStock:1}]),
-		EventFactory.simple.upgradePhaseCard(1),
+		S.addProduction([{name:'megacredit', valueStock:2},{name:'heat', valueStock:1}]),
+		S.upgradePhaseCard(1),
 	],
 	//Heat reflective Glass
 	'D28': () => [
-		EventFactory.simple.addProduction({name:'heat', valueStock:1}),
-		EventFactory.simple.upgradePhaseCard(1),
+		S.addProduction({name:'heat', valueStock:1}),
+		S.upgradePhaseCard(1),
 	],
 	//Hematite Mining
 	'D29': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'card', valueStock: 2 },
 			{ name: 'steel', valueStock: 1 }
 		]),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.upgradePhaseCard(1)
 	],
 	//Hematite Mining V2
 	'D29B': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'card', valueStock: 2 },
 			{ name: 'steel', valueStock: 1 }
 		]),
-		EventFactory.simple.addRessource({name:'heat', valueStock:-5}),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.addRessource({name:'heat', valueStock:-5}),
+		S.upgradePhaseCard(1)
 	],
 	//Hydroponic Gardens
 	'D30': () => [
-		EventFactory.simple.addProduction([{name:'megacredit', valueStock:3},{name:'plant', valueStock:1}]),
-		EventFactory.simple.upgradePhaseCard(1),
+		S.addProduction([{name:'megacredit', valueStock:3},{name:'plant', valueStock:1}]),
+		S.upgradePhaseCard(1),
 	],
 	//Ilmenite Deposits
 
-	'D31': () => [EventFactory.simple.addProduction({name:'titanium', valueStock:2})],
+	'D31': () => [S.addProduction({name:'titanium', valueStock:2})],
 	//Industrial Complex
 	'D32': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 4 }),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.addProduction({ name: 'heat', valueStock: 4 }),
+		S.upgradePhaseCard(1)
 	],
 	//Martian Museum
 	'D33': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 1}),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.addProduction({ name: 'megacredit', valueStock: 1}),
+		S.upgradePhaseCard(1)
 	],
 	//Metallurgy
 	'D34': () => [
-		EventFactory.simple.addProduction({ name: 'titanium', valueStock: 1}),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.addProduction({ name: 'titanium', valueStock: 1}),
+		S.upgradePhaseCard(1)
 	],
 	//Award Winning Reflector Material
 	'D35': (clientstate) => {
-		let result : EventBaseModel[] = [EventFactory.simple.addProduction({name:'heat', valueStock:3})]
+		let result : EventBaseModel[] = [S.addProduction({name:'heat', valueStock:3})]
 		if(clientstate.getMilestoneCompleted()>0){
-			result.push(EventFactory.simple.addRessource({name:'heat', valueStock:4}))
+			result.push(S.addRessource({name:'heat', valueStock:4}))
 		}
 		return result
 	},
 	//Oxidation Byproducts
 	'D36': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 2}),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.addProduction({ name: 'heat', valueStock: 2}),
+		S.upgradePhaseCard(1)
 	],
 	//Perfluorocarbon Production
 	'D37': () => [
-		EventFactory.simple.addProduction({ name: 'heat', valueStock: 1 }),
-		EventFactory.simple.upgradePhaseCard(1, [0])
+		S.addProduction({ name: 'heat', valueStock: 1 }),
+		S.upgradePhaseCard(1, [0])
 	],
 	//Magnetic Field Generator
 	'D38': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 1}),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.addProduction({ name: 'plant', valueStock: 1}),
+		S.upgradePhaseCard(1)
 	],
 	//Political Influence
 	'D39': () => [
-		EventFactory.simple.addProduction({name:'megacredit', valueStock:3}),
-		EventFactory.simple.resolveWildTag('D39')
+		S.addProduction({name:'megacredit', valueStock:3}),
+		S.resolveWildTag('D39')
 	],
 	//Biological Factories
 	'D40': () => [
-		EventFactory.simple.addProduction({ name: 'plant', valueStock: 1}),
-		EventFactory.simple.upgradePhaseCard(1, [3])
+		S.addProduction({ name: 'plant', valueStock: 1}),
+		S.upgradePhaseCard(1, [3])
 	],
 	//Nuclear Detonation Site
-	'D41': () => [EventFactory.simple.addProduction({ name: 'heat', valueStock: 3})],
+	'D41': () => [S.addProduction({ name: 'heat', valueStock: 3})],
 	//Warehouse
 	'D42': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2}),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.addProduction({ name: 'megacredit', valueStock: 2}),
+		S.upgradePhaseCard(1)
 	],
 	//Architecture Blueprints
 	'F09': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		EventFactory.simple.drawThenDiscard(2,1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
+		S.drawThenDiscard(2,1),
 	],
 	//Bedrock Wellbore
 	'F10': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 	],
 	//Callisto Skybridge
 	'F11': (clientState) => {
@@ -1003,108 +1028,108 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		if(clientState.getTagsOfType('jovian')>3){
 			infra++
 		}
-		return [EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, infra)]
+		return [S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, infra)]
 	},
 	//CHP Combustion Turbines
 	'F12': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
 	],
 	//City Planning
-	'F13': () => [EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2)],
+	'F13': () => [S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2)],
 	//Grain Silos
 	'F14': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 4 })
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
+		S.addRessource({ name: 'plant', valueStock: 4 })
 	],
 	//City Planning
 	'F15': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 	],
 	//Jezero Crater Hospital
 	'F16': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
+		S.upgradePhaseCard(1)
 	],
 	//Low-Atmosphere Planes
 	'F17': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 3)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 3)
 	],
 	//Power Grid Uplink
 	'F18': () => [
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
 	],
 	//Subways
-	'F19': () => [EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)],
+	'F19': () => [S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)],
 	//Urban Forestry
 	'F20': () => [
-		EventFactory.simple.addForestAndOxygen(1),
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: 5 })
+		S.addForestAndOxygen(1),
+		S.addRessource({ name: 'megacredit', valueStock: 5 })
 	],
 	//Microloans
 	'F21': () => [
-		EventFactory.simple.addProduction({ name: 'megacredit', valueStock: 2}),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
+		S.addProduction({ name: 'megacredit', valueStock: 2}),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
 	],
 	//Seed Bank
-	'F22': () => [EventFactory.simple.addProduction([{ name: 'plant', valueStock: 2}, { name: 'heat', valueStock: 3}])],
+	'F22': () => [S.addProduction([{ name: 'plant', valueStock: 2}, { name: 'heat', valueStock: 3}])],
 	//Quant-Link Conferencing
-	'F23': () => [EventFactory.simple.addProduction({ name: 'card', valueStock: 1})],
+	'F23': () => [S.addProduction({ name: 'card', valueStock: 1})],
 	//Assorted Enterprises
-	'P01': () => [EventFactory.simple.specialBuilder(BuilderOption.assortedEnterprises)],
+	'P01': () => [S.specialBuilder(BuilderOption.assortedEnterprises)],
 	//Commercial Imports
 	'P02': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'card', valueStock: 1 },
 			{ name: 'heat', valueStock: 2 },
 			{ name: 'plant', valueStock: 2 }
 		])
 	],
 	//Matter Generator
-	'P06': () => [EventFactory.simple.draw(2)],
+	'P06': () => [S.draw(2)],
 	//Processed Metals
 	'P07': (clientstate) => [
-		EventFactory.simple.addProduction({ name: 'titanium', valueStock: 2 }),
-		EventFactory.simple.draw(clientstate.getTagsOfType('power'))
+		S.addProduction({ name: 'titanium', valueStock: 2 }),
+		S.draw(clientstate.getTagsOfType('power'))
 	],
 	//Processed Metals
-	'P08': () => [EventFactory.simple.addProduction({name:'steel', valueStock:2})],
+	'P08': () => [S.addProduction({name:'steel', valueStock:2})],
 	//Synthetic Catastrophe
-	'P10': () => [EventFactory.simple.recallCardInHandFromPlay()],
+	'P10': () => [S.recallCardInHandFromPlay()],
 	//Research Grant
 	'P24': (clientstate) => [
-		EventFactory.simple.specialBuilder(BuilderOption.researchGrant)
+		S.specialBuilder(BuilderOption.researchGrant)
 	],
 	//Innovative Technologies Award
 	'P26': (clientstate) => [
-		EventFactory.simple.addTR(clientstate.getPhaseCardUpgradedCount())
+		S.addTR(clientstate.getPhaseCardUpgradedCount())
 	],
 	//Genetically Modified Vegetables
 	'P28': (clientstate) => [
-		EventFactory.simple.addProduction({name:'plant', valueStock:3})
+		S.addProduction({name:'plant', valueStock:3})
 	],
 	//Glacial Evaporation
 	'P29': () => [
-		EventFactory.simple.addProduction({name:'heat', valueStock:4})
+		S.addProduction({name:'heat', valueStock:4})
 	],
 	//Tourism
 	'P30': (clientstate) => [
-		EventFactory.simple.addProduction({name:'megacredit', valueStock:2}),
-		EventFactory.simple.addTR(clientstate.getMilestoneCompleted())
+		S.addProduction({name:'megacredit', valueStock:2}),
+		S.addTR(clientstate.getMilestoneCompleted())
 	],
 	//Modpro
 	'P32': () => [
-		EventFactory.simple.resolveWildTag('P32'),
+		S.resolveWildTag('P32'),
 	],
 	//Ecoline
-	'210': () => [EventFactory.simple.addProduction({name:'plant', valueStock:1})],
+	'210': () => [S.addProduction({name:'plant', valueStock:1})],
 	//Ecoline
-	'210B': () => [EventFactory.simple.addProduction({name:'plant', valueStock:3})],
+	'210B': () => [S.addProduction({name:'plant', valueStock:3})],
 	//Interplanetary Cinematics
-	'212': () => [EventFactory.simple.addProduction({name:'steel', valueStock:1})],
+	'212': () => [S.addProduction({name:'steel', valueStock:1})],
 	//Inventrix
 	'213': (clientstate) => {
 		clientstate.setPrerequisiteOffset([
@@ -1112,70 +1137,70 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 			{name: GlobalParameterNameEnum.oxygen, offset:1},
 			{name: GlobalParameterNameEnum.temperature, offset:1}
 		])
-		return [EventFactory.simple.draw(3)]
+		return [S.draw(3)]
 	},
 	//Mining Guild
 	'214': () => {
-		return [EventFactory.simple.addProduction({name:'steel', valueStock:1})]
+		return [S.addProduction({name:'steel', valueStock:1})]
 	},
 	//Mining Guild
 	'214B': () => {
-		return [EventFactory.simple.addProduction({name:'steel', valueStock:2})]
+		return [S.addProduction({name:'steel', valueStock:2})]
 	},
 	//Phobolog
 	'215': (clientstate) => {
 		clientstate.increaseProductionModValue('titanium')
-		return [EventFactory.simple.addProduction({name:'titanium', valueStock:1})]
+		return [S.addProduction({name:'titanium', valueStock:1})]
 	},
 	//Phobolog
 	'215B': (clientstate) => {
 		clientstate.increaseProductionModValue('titanium')
-		return [EventFactory.simple.addProduction({name:'titanium', valueStock:2})]
+		return [S.addProduction({name:'titanium', valueStock:2})]
 	},
 	//Saturn Systems
 	'216': () => [
-		EventFactory.simple.addProduction({name:'titanium', valueStock:1})
+		S.addProduction({name:'titanium', valueStock:1})
 	],
 	//Tharsis Republic
 	'218': () => [
-		EventFactory.simple.increaseResearchScanKeep({keep:1, scan:1})
+		S.increaseResearchScanKeep({keep:1, scan:1})
 	],
 	//Thorgate
 	'219': () => [
-		EventFactory.simple.addProduction({name:'heat', valueStock:1})
+		S.addProduction({name:'heat', valueStock:1})
 	],
 	//DevTechs
 	'P14': () => [
-		EventFactory.simple.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.devTechs)
+		S.scanKeep({scan:5, keep:1}, DeckQueryOptionsEnum.devTechs)
 	],
 	//Mai-Ni Productions
 	'P16': () => [
-		EventFactory.simple.specialBuilder(BuilderOption.maiNiProductions)
+		S.specialBuilder(BuilderOption.maiNiProductions)
 	],
 	//Nebu Labs
 	'P31': () => [
-		EventFactory.simple.upgradePhaseCard(1)
+		S.upgradePhaseCard(1)
 	],
 	//Zetasel
-	'P17': () => [EventFactory.simple.drawThenDiscard(5,4)],
+	'P17': () => [S.drawThenDiscard(5,4)],
 	//Ringcom
 	'CF4': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'megacredit', valueStock: 3 },
 			{ name: 'titanium', valueStock: 1 }
 		]),
 	],
 	//Lili volunteering initiative
 	'CF5': () => [
-		EventFactory.simple.addProduction([{name:'megacredit', valueStock:2},{name:'plant', valueStock:1},{name:'heat', valueStock:1},{name:'card', valueStock:1}]),
-		EventFactory.simple.upgradePhaseCard(1,[0,1])
+		S.addProduction([{name:'megacredit', valueStock:2},{name:'plant', valueStock:1},{name:'heat', valueStock:1},{name:'card', valueStock:1}]),
+		S.upgradePhaseCard(1,[0,1])
 	],
 	//Aridor
-	'CF6': ()=>  [EventFactory.simple.resolveWildTag('CF6')],
+	'CF6': ()=>  [S.resolveWildTag('CF6')],
 	//Recyclon
-	'CF7': ()=>  [EventFactory.simple.addProduction({name:'steel', valueStock:1})],
+	'CF7': ()=>  [S.addProduction({name:'steel', valueStock:1})],
 	//Topsoil Contract
-	'FM3': () => [EventFactory.simple.addRessource({name:'plant', valueStock:3})],
+	'FM3': () => [S.addRessource({name:'plant', valueStock:3})],
 	//Rego Plastics
 	'FM5': (state) => {
 		state.increaseProductionModValue('steel')
@@ -1188,85 +1213,246 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	},
 	//Solar Probe
 	'FM7': (state) => [
-		EventFactory.simple.draw(Math.floor(state.getTagsOfType('science')/2))
+		S.draw(Math.floor(state.getTagsOfType('science')/2))
 	],
 	//Social Event
 	'FM8': (state) => [
-		EventFactory.simple.addTR(Math.floor(Math.min(state.getTagsOfType('earth'), state.getTagsOfType('jovian'))))
+		S.addTR(Math.floor(Math.min(state.getTagsOfType('earth'), state.getTagsOfType('jovian'))))
 	],
 	//Bactoviral Research
 	'FM9': (state) => [
-		EventFactory.simple.addRessourceToSelectedCard({name:'microbe',valueStock:state.getTagsOfType('science')})
+		S.addRessourceToSelectedCard({name:'microbe',valueStock:state.getTagsOfType('science')})
 	],
 	//Ceres Spaceport
 	'FM10': (state) => [
-		EventFactory.simple.addProduction({name:'titanium', valueStock:3}),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+		S.addProduction({name:'titanium', valueStock:3}),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 	],
 	//Ganymede Colony
 	'FM13': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'megacredit', valueStock: 2 },
 		]),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
 	],
 	//Lunar Embassy
 	'FM16': () => [
-		EventFactory.simple.draw(1),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		EventFactory.simple.addProduction({name:'megacredit', valueStock:3})
+		S.draw(1),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
+		S.addProduction({name:'megacredit', valueStock:3})
 	],
 	//Ecology research
 	'FM17': () => [
-		EventFactory.simple.addRessourceToSelectedCard({name:'microbe', valueStock:2}),
-		EventFactory.simple.addRessourceToSelectedCard({name:'animal', valueStock:1})
+		S.addRessourceToSelectedCard({name:'microbe', valueStock:2}),
+		S.addRessourceToSelectedCard({name:'animal', valueStock:1})
 	],
 	//Earth Elevator
 	'FM19': () => [
-		EventFactory.simple.addProduction([
+		S.addProduction([
 			{ name: 'titanium', valueStock: 3 },
 		]),
 	],
 	//Io Sulphur Research
 	'FM21': (state) => [
-		EventFactory.simple.draw(state.getTagsOfType('jovian')>=3?3:1)
+		S.draw(state.getTagsOfType('jovian')>=3?3:1)
 	],
 	//Magnetic shield
 	'FM22': () => [
-		EventFactory.simple.addTR(4),
+		S.addTR(4),
 	],
 	//Red Spot Observatory
 	'FM25': () => [
-		EventFactory.simple.effectPortal(EffectPortalEnum.secretLabs),
+		S.effectPortal(EffectPortalEnum.secretLabs),
 	],
 	//Red Spot Observatory
 	'FM26': () => [
-		EventFactory.simple.draw(2),
+		S.draw(2),
 	],
 	//Conscription
-	'FM28': () => [EventFactory.simple.specialBuilder(BuilderOption.conscription)],
+	'FM28': () => [S.specialBuilder(BuilderOption.conscription)],
 	//Research coordination
 	'FM29': () => [
-		EventFactory.simple.resolveWildTag('FM29'),
-		EventFactory.simple.addProduction({name:'megacredit', valueStock:2})
+		S.resolveWildTag('FM29'),
+		S.addProduction({name:'megacredit', valueStock:2})
 	],
 	//Solar wind power
 	'FM31': () => [
-		EventFactory.simple.addProduction([{name:'heat', valueStock:1}, {name:'titanium', valueStock:1}])
+		S.addProduction([{name:'heat', valueStock:1}, {name:'titanium', valueStock:1}])
 	],
 	//Sponsored Academies
 	'FM34': () => [
-		EventFactory.simple.discard(1),
-		EventFactory.simple.draw(3)
+		S.discard(1),
+		S.draw(3)
+	],
+	//Archimede's Hydroponics Station
+	'M1': () => [
+		S.addProduction([{name:'plant', valueStock:2}])
+	],
+	//Aristarchus Road Network
+	'M2': () => [
+		S.increaseMoonParameter(),
+		S.addProduction([{name:'megacredit', valueStock:2}]),
+	],
+	//Copernicus Solar Arrays
+	'M3': () => [
+		S.addProduction({name:'heat', valueStock:1}),
+		S.addRessource({name: 'heat', valueStock:2})
+	],
+	//Darkside Mining Syndicate
+	'M4': (state) => [
+		S.addProduction({name:'titanium', valueStock: state.getMine()===0?2:1}),
+		S.increaseMoonParameter()
+	],
+	//Deep Lunar Mining
+	'M5': () => [
+		S.addProduction({name:'titanium', valueStock:2}),
+		S.increaseMoonParameter()
+	],
+	//Geodesic Tentes
+	'M6': () => [
+		S.addHabitat(),
+		S.addProduction({name:'plant', valueStock:1}),
+	],
+	//Heliostat Mirror Array
+	'M9': () => [
+		S.addProduction({name:'heat', valueStock:2}),
+	],
+	//hypersensitive Chip Factory
+	'M10': () => [
+		S.addProduction({name:'megacredit', valueStock:4}),
+	],
+	//Luna Mining Hub
+	'M11': () => [
+		S.addMine(),
+		S.addProduction([{name:'steel', valueStock:1}, {name:'titanium', valueStock:1}]),
+	],
+	//Luna Resort
+	'M12': () => [
+		S.addProduction({name:'megacredit', valueStock:3}),
+		S.increaseMoonParameter()
+	],
+	//Luna Train Station
+	'M14': () => [
+		S.addProduction({name:'megacredit', valueStock:4}),
+		S.addRoad()
 	],
 	//Lunar Industry Complex
-	'FM35': () => [
-		EventFactory.simple.addTR(2),
-		EventFactory.simple.addProduction([
+	'M15': () => [
+		S.addMine(),
+		S.addProduction([
 			{name: 'heat', valueStock: 2},
 			{name: 'steel', valueStock: 2},
 			{name: 'titanium', valueStock: 2},
 		]),
+	],
+	//Mare Imbrium Mine
+	'M16': () => [
+		S.addMine(),
+		S.addProduction([
+			{name: 'steel', valueStock: 1},
+			{name: 'titanium', valueStock: 1},
+		]),
+	],
+	//Mare Nectaris Mine
+	'M17': () => [
+		S.addMine(),
+		S.addProduction([
+			{name: 'steel', valueStock: 1},
+		]),
+	],
+	//Mare Numbium Mine
+	'M18': () => [
+		S.addMine(),
+		S.addProduction([
+			{name: 'steel', valueStock: 1},
+			{name: 'titanium', valueStock: 1},
+		]),
+	],
+	//Mare Serenitatis Mine
+	'M19': () => [
+		S.addMine(2),
+		S.addProduction([
+			{name: 'steel', valueStock: 1},
+			{name: 'titanium', valueStock: 1},
+		]),
+	],
+	//Microsingularity Plant
+	'M20': () => [
+		S.addProduction([
+			{name: 'heat', valueStock: 3},
+		]),
+	],
+	//Momentum Virum Habitat
+	'M21': () => [
+		S.addHabitat(),
+		S.addProduction([
+			{name: 'megacredit', valueStock: 3},
+			{name: 'heat', valueStock: 3},
+		]),
+	],
+	//Sinus Iridium Road Network
+	'M23': () => [
+		S.increaseMoonParameter(),
+		S.addProduction([
+			{name: 'megacredit', valueStock: 2},
+		]),
+	],
+	//The Womb
+	'M24': () => [
+		S.addHabitat(),
+		S.addProduction([
+			{name: 'megacredit', valueStock: 3},
+			{name: 'heat', valueStock: 2},
+			{name: 'plant', valueStock: 1},
+			{name: 'card', valueStock: 1},
+		]),
+	],
+	//Tycho Road Network
+	'M25': () => [
+		S.increaseMoonParameter(),
+		S.addProduction([
+			{name: 'megacredit', valueStock: 1},
+		]),
+	],
+	//Luna Ecumenapolis
+	'M27': () => [
+		S.addHabitat(2)
+	],
+	//Habitat 14
+	'M28': () => [
+		S.addHabitat(1),
+		S.addTR(-1),
+		S.addProduction({name:'card', valueStock:1})
+	],
+	//Sphere Habitat
+	'M29': () => [
+		S.addHabitat(1),
+		S.addProduction({name:'card', valueStock:1})
+	],
+	//Thorium Rush
+	'M60': () => [
+		S.addHabitat(2),
+		S.addMine(2),
+		S.draw(2)
+	],
+	//Lunar Mine Urbanization
+	'M63': () => [
+		S.addHabitat(1),
+		S.increaseMoonParameter(),
+	],
+	//Preliminary Darkside
+	'M64': () => [
+		S.increaseMoonParameter(2),
+		S.draw()
+	],
+	//Darkside Meteor Bombardment
+	'M65': () => [
+		S.increaseMoonParameter(3),
+		S.draw(2)
+	],
+	//Luna Mining Federation
+	'MC2': () => [
+		S.addMine(2),
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
@@ -1303,7 +1489,16 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	//Meat industry
 	'FM4': (card) => card.hasTag('plant') || card.hasTag('animal')?3:0,
 	//Space Relay
-	'FM14': (card) => card.hasTag('jovian')? 5 : 0
+	'FM14': (card) => card.hasTag('jovian')? 5 : 0,
+
+	//Moon Tether
+	'M80': () => 2,
+	//Earth Embassy
+	/*
+	'M81': (card) => {
+		console.log(card.hasTag('moon'), state.getTagsOfType('earth') )
+		return state.getTagsOfType('earth')??0
+		card.hasTag('moon')? state.getTagsOfType('earth') : 0}*/
 }
 export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},
@@ -1368,6 +1563,23 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	},
 	//Solar farm
 	'FM33': (s)=> [{name:'heat', valueStock:s.getTagsOfType('plant')}],
+	//He3 Fusoin Plant
+	'M7': (s)=> [{name:'heat', valueStock:s.getMine()}],
+	//He3 Lobbyists
+	'M8': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
+	//Luna Senate
+	'M13': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
+	//Orbital Power Grid
+	'M22': (s)=> [{name:'heat', valueStock:s.getTagsOfType('moon')}],
+	//Undermoon Drug Lords Network
+	'M26': (s)=> [{name:'megacredit', valueStock:s.getHabitat()}],
+	//Luna Ecumenapolis
+	'M27': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
+	//Grand Luna Academy
+	'M28': (s)=> [{name:'card', valueStock: Math.floor(s.getTagsOfType('moon') / 3)}],
+
+	//Crescent Research Association
+	'MC1': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms
@@ -1376,8 +1588,8 @@ export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonName
 	'52': () => 'alternativePayRestructuredResources'
 }
 export const ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS: Partial<Record<NonEventButtonNames, () => EventBaseModel[]>> ={
-	'alternativePayAnaerobicMicroorganisms': () => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:-2}, '5')],
-	'alternativePayRestructuredResources': () => [EventFactory.simple.addRessource({name:'plant', valueStock:-1})]
+	'alternativePayAnaerobicMicroorganisms': () => [S.addRessourceToCardId({name:'microbe', valueStock:-2}, '5')],
+	'alternativePayRestructuredResources': () => [S.addRessource({name:'plant', valueStock:-1})]
 }
 export const ALTERNATIVE_PAY_REQUIREMENTS: Partial<Record<NonEventButtonNames, (clientState: PlayerStateModel) => boolean>> ={
 	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>=2,

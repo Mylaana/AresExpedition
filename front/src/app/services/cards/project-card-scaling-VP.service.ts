@@ -39,6 +39,13 @@ export class ProjectCardScalingVPService {
 		"FM13": (_, state) => state.getTagsOfType('jovian'), //Ganymede Colony
 		"FM15": (card) => Math.floor(card.getStockValue('microbe')/2), //Ants
 		"FM27": (card) => card.getStockValue('science'), //Jovian Lanterns
+		"M11": (_, state) => state.getMine(), //Luna Mining Hub
+		"M13": (_, state) => state.getTagsOfType('moon'), //Luna Senate
+		"M14": (_, state) => state.getRoad(), //Luna Train Station
+		"M27": (_, state) => state.getHabitat(), //Luna Ecumenapolis
+		"M28": (_, state) => Math.floor(state.getTagsOfType('moon') /2), //Grand Luna academy
+
+		"MC1": (_, state) => Math.floor(state.getTagsOfType('moon') / 2) //Crescent research association
 	};
 
 	updateCardScalingVPList(clientState: PlayerStateModel) {

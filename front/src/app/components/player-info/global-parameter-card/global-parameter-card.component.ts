@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TextWithImageComponent } from '../../tools/text-with-image/text-with-image.component';
 import { CommonModule } from '@angular/common';
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from '../../../enum/global.enum';
+import { GLOBAL_PARAMETER_MAX_STEP } from '../../../maps/const-maps';
 
 @Component({
     selector: 'app-global-parameter-card',
@@ -23,29 +24,28 @@ export class GlobalParameterCardComponent implements OnInit {
 		switch(this.parameter){
 			case(GlobalParameterNameEnum.ocean):{
 				this._progressionList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-				this._maxStep = this._progressionList.length
 				break
 			}
 			case(GlobalParameterNameEnum.oxygen):{
 				this._progressionList = [0, .01, .02, .03, .04, .05, .06, .07, .08, .09, .1, .11, .12, .13, .14]
-				this._maxStep = this._progressionList.length
 				break
 			}
 			case(GlobalParameterNameEnum.infrastructure):{
 				this._progressionList = [0, .07, .14, .27, .28, .35, .42, .49, .56, .63, .70, .77, .85, .92, 1]
-				this._maxStep = this._progressionList.length
 				break
 			}
 			case(GlobalParameterNameEnum.temperature):{
 				this._progressionList = [-30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8]
-				this._maxStep = this._progressionList.length
 				break
 			}
 			case(GlobalParameterNameEnum.moon):{
-				this._progressionList = [0,1,2,3,4,5,6,7,8,9,10,11,12]
-				this._maxStep = this._progressionList.length
+				this._progressionList = []
+				for(let i=0; i<GLOBAL_PARAMETER_MAX_STEP['MOON']; i++){
+					this._progressionList.push(i)
+				}
 			}
 		}
+		this._maxStep = GLOBAL_PARAMETER_MAX_STEP[this.parameter]
 	}
 	getStepColor(stepCount: number): string {
 		switch(this.parameter){
