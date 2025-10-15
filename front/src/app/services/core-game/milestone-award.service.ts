@@ -5,6 +5,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AwardCard, AwardValue, ClaimedMilestone, ClaimedMilestoneCard, MilestoneCard, MilestoneValue } from "../../interfaces/global.interface";
 import { MilestoneState, myUUID, PlayerColor } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
+import { GameActiveContentService } from "./game-active-content.service";
 
 interface PlayerMilestoneTemp {
 	color: PlayerColor,
@@ -24,8 +25,11 @@ export class MilestoneAwardService {
 	private awardList!: AwardsEnum[]
 	private awardCards!: AwardCard[]
 
-    constructor(private gameStateService: GameState){
-		if(gameStateService.isDiscoveryEnabled()){
+    constructor(
+		private gameStateService: GameState,
+		private gameContentService: GameActiveContentService
+	){
+		if(this.gameContentService.isContentActive('expansionDiscovery')){
 			this.gameStateService.currentGroupPlayerState.subscribe(state => this.onGroupStateUpdate(state))
 			this.gameStateService.currentMilestones.subscribe(v => this.onMilestonesUpdate(v))
 			this.gameStateService.currentAwards.subscribe(v => this.onAwardsUpdate(v))

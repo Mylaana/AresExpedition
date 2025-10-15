@@ -1,13 +1,8 @@
 package com.ares_expedition.controller.api;
 
-import java.text.DateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +20,8 @@ import com.ares_expedition.controller.game.GameController;
 import com.ares_expedition.dto.api.CreatePlayerDTO;
 import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.api.NewGameInfoDTO;
-import com.ares_expedition.dto.api.ValidateSessionDTO;
+import com.ares_expedition.enums.game.GameContentNameEnum;
+import com.ares_expedition.model.core.subModel.GameOption;
 import com.ares_expedition.services.NewGameService;
 
 @RestController
@@ -44,14 +40,13 @@ public class ApiController {
     @PostMapping("/create-game")
     public ResponseEntity<?> createGame(@RequestBody NewGameConfigDTO gameConfig) {
         NewGameInfoDTO newGameInfo = newGameService.createGame(gameConfig);
-        Map<String, Object> response = new HashMap<>();
         if (newGameInfo == null) {
             return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(Map.of("error", "Game could not be created"));
         }
         List<String> optionList = new ArrayList<>();
-        for(Map.Entry<String, Object> entry: gameConfig.getOptions().entrySet()){
+        for(Map.Entry<GameContentNameEnum, GameOption> entry: gameConfig.getOptions().entrySet()){
             String enabled = entry.getValue().toString();
             if(enabled=="true"){
                 optionList.add(entry.getKey().toString());

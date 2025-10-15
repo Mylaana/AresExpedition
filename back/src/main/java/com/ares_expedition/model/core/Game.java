@@ -10,6 +10,7 @@ import com.ares_expedition.dto.api.NewGameConfigDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.AwardsEnum;
 import com.ares_expedition.enums.game.CardTypeEnum;
+import com.ares_expedition.enums.game.GameContentNameEnum;
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.GlobalConstants;
 import com.ares_expedition.enums.game.GlobalParameterNameEnum;
@@ -76,9 +77,9 @@ public class Game {
         }
         Collections.shuffle(oceans);
 
-        if(this.gameOptions.getExpansionDiscovery()){
+        if(this.gameOptions.isContentActive(GameContentNameEnum.expansionDiscovery)){
             List<AwardsEnum> allAwards;
-            if(this.gameOptions.getModeAdditionalAwards()){
+            if(this.gameOptions.isContentActive(GameContentNameEnum.modeAdditionalAwards)){
                 allAwards = new ArrayList<>(List.of(AwardsEnum.values()));
             } else {
                 allAwards = new ArrayList<>(List.of(AwardsEnum.values()).stream()
@@ -229,7 +230,7 @@ public class Game {
         gameState.setGameStatus(gameStatus);
         gameState.setRound(round);
         gameState.setDeck(getDeck().size());
-        if(this.getGameOptions().getExpansionDiscovery()){
+        if(this.getGameOptions().isContentActive(GameContentNameEnum.expansionDiscovery)){
             gameState.setAwards(awards);
             gameState.setMilestones(milestones);
         }
@@ -246,7 +247,7 @@ public class Game {
     }
 
     public void nextPhaseSelected(){
-        if(this.gameOptions.getModeDeadHand() && currentPhase==PhaseEnum.PLANIFICATION && this.selectedPhase.size()>1){
+        if(this.gameOptions.isContentActive(GameContentNameEnum.modeDeadHand) && currentPhase==PhaseEnum.PLANIFICATION && this.selectedPhase.size()>1){
             addDeadHandPhase();
         }
         LinkedHashSet<PhaseEnum> tempSelectedPhase = new LinkedHashSet<>(this.selectedPhase);
@@ -390,7 +391,7 @@ public class Game {
         Integer totalCorpNumber = this.deckCorporations.size();
         Integer playerNumber = this.groupPlayerState.entrySet().size();
         Integer corpNumber;
-        if(this.getGameOptions().getModeMerger()){
+        if(this.getGameOptions().isContentActive(GameContentNameEnum.modeMerger)){
              corpNumber = Math.min(8, totalCorpNumber / playerNumber);
         } else {
             corpNumber = 4;
@@ -513,8 +514,8 @@ public class Game {
     public boolean isGameOver(){
         for(GlobalParameter p: this.globalParameters){
             if(p.getName()==GlobalParameterNameEnum.INFRASTRUCTURE){
-                if(this.gameOptions.getExpansionFoundations()==false){continue;}
-                if(this.gameOptions.getModeInfrastructureMandatory()==false){continue;}
+                if(this.gameOptions.isContentActive(GameContentNameEnum.expansionFoundations)==false){continue;}
+                if(this.gameOptions.isContentActive(GameContentNameEnum.modeInfrastructureMandatory)==false){continue;}
             }
             if(p.isMaxedOut()==false){return false;}
         }

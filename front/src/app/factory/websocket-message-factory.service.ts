@@ -5,7 +5,7 @@ import { SelectablePhaseEnum } from "../enum/phase.enum";
 import { PlayerStateDTO } from "../interfaces/dto/player-state-dto.interface";
 import { PlayerMessage } from "../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid';
-import { MilestoneState, myUUID } from "../types/global.type";
+import { GameContentName, MilestoneState, myUUID } from "../types/global.type";
 import { AwardsEnum, DeckQueryOptionsEnum, OceanBonusEnum } from "../enum/global.enum";
 import { OceanBonus, ScanKeep } from "../interfaces/global.interface";
 import { EventUnionSubTypes } from "../types/event.type";
@@ -159,19 +159,13 @@ export class WebsocketResultMessageFactory{
 			eventId: content['eventId']
 		}
 	}
-	public static inputToGameOption(content: any): GameOption {
-		let options: GameOption = {
-			discovery: content['expansionDiscovery'],
-			foundations: content['expansionFoundations'],
-			promo: content['expansionPromo'],
-			fanmade: content['expansionFanmade'],
-			balanced: content['expansionBalanced'],
-			infrastructureMandatory: content['modeInfrastructureMandatory'],
-			initialDraft: content['modeInitialDraft'],
-			merger: content['modeMerger'],
-			standardUpgrade: content['modeStandardUpgrade'],
-			deadHand: content['modeDeadHand'],
-			additionalAwards: content['modeAdditionalAwards']
+	public static inputToGameOption(content: any): Partial<Record<GameContentName, boolean>> {
+		let options: Partial<Record<GameContentName, boolean>> = {}
+		for(let [k, v] of Object.entries(content['options'])){
+			let value = v as Object
+			if('active' in value){
+				options[k as GameContentName] = value['active'] as boolean
+			}
 		}
 		return options
 	}

@@ -68,19 +68,6 @@ export class GameState{
 	private clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
 	private selectedPhaseList = new BehaviorSubject<SelectablePhaseEnum[]>([])
 	private gameOver = new BehaviorSubject<boolean>(false)
-	private gameOptions = new BehaviorSubject<GameOption>({
-		balanced: false,
-		discovery: false,
-		fanmade: false,
-		foundations: false,
-		infrastructureMandatory: false,
-		initialDraft: false,
-		merger: false,
-		promo: false,
-		standardUpgrade: false,
-		deadHand: false,
-		additionalAwards: false,
-	})
 	private milestones = new BehaviorSubject<Partial<MilestoneState>>({})
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
 	private round = new BehaviorSubject<number>(0)
@@ -98,7 +85,6 @@ export class GameState{
 	currentGameStartedState = this.gameStarted.asObservable()
 	currentSelectedPhaseList = this.selectedPhaseList.asObservable()
 	currentGameOver = this.gameOver.asObservable()
-	currentGameOptions = this.gameOptions.asObservable()
 	currentClientState = this.clientState.asObservable()
 	currentMilestones = this.milestones.asObservable()
 	currentAwards = this.awards.asObservable()
@@ -905,12 +891,6 @@ export class GameState{
 	setGameStarted(started: boolean = true){
 		this.gameStarted.next(started)
 	}
-	setGameOptions(options: GameOption){
-		this.gameOptions.next(options)
-	}
-	getGameOptions(): GameOption {
-		return this.gameOptions.getValue()
-	}
 	setAwards(awards: AwardsEnum[]){
 		if(this.awards.getValue().length===0){
 			this.awards.next(awards)
@@ -926,12 +906,6 @@ export class GameState{
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents, 'first')
 		}
-	}
-	isDiscoveryEnabled(): boolean {
-		return this.gameOptions.getValue().discovery
-	}
-	isFoundationEnabled(): boolean {
-		return this.gameOptions.getValue().foundations
 	}
 	setRound(round: number){
 		if(round===this.getRound()){return}
@@ -949,9 +923,6 @@ export class GameState{
 	}
 	setDeckSize(size: number){
 		this.deck.next(size)
-	}
-	isInfrastructureMandatory(): boolean {
-		return this.gameOptions.getValue().infrastructureMandatory
 	}
 	addMoonTiles(tiles: MoonTile | MoonTile[]){
 		let state = this.getClientState()

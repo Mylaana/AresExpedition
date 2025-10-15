@@ -4,7 +4,7 @@ import { NonEventButton, ToggleButton } from '../../../models/core-game/button.m
 import { CreateGameOptionService, GameOption } from '../../../services/core-game/create-game.service';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CreateGameOptionCardComponent } from '../create-game-option-card/create-game-option-card.component';
-import { AnyButton } from '../../../types/global.type';
+import { AnyButton, GameContentName } from '../../../types/global.type';
 import { GameTextService } from '../../../services/core-game/game-text.service';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { GameOptionKey, InterfaceTitleKey } from '../../../types/text.type';
@@ -62,26 +62,26 @@ export class CreateGameOptionsComponent implements OnInit{
 	onClick(button: AnyButton){
 		this.createGameOptionService.toggleOption((button as ToggleButton).name)
 	}
-	updateButtonsState(options: GameOption){
-		this._expansionDiscovery.value = options.discovery
-		this._expansionFoundations.value = options.foundations
-		this._expansionPromo.value = options.promo
-		this._expansionDevFanMade.value = options.fanmade
-		this._expansionBalancedCards.value = options.balanced
+	updateButtonsState(options: Record<GameContentName, boolean>){
+		this._expansionDiscovery.value = options['expansionDiscovery']
+		this._expansionFoundations.value = options['expansionFoundations']
+		this._expansionPromo.value = options['expansionPromo']
+		this._expansionDevFanMade.value = options['expansionDevFanMade']
+		this._expansionBalancedCards.value = options['expansionBalancedCards']
 
-		this._modeInitialDraft.value = options.initialDraft
+		this._modeInitialDraft.value = options['modeInitialDraft']
 		this._modeInitialDraft.locked = true
-		this._modeMerger.value = options.merger
-		this._modeDeadHand.value = options.deadHand
+		this._modeMerger.value = options['modeMerger']
+		this._modeDeadHand.value = options['modeDeadHand']
 
 		//bound sub-options
-		this._modeInfrastructureMandatory.value = options.infrastructureMandatory
-		this._modeInfrastructureMandatory.locked = options.foundations===false
+		this._modeInfrastructureMandatory.value = options['modeInfrastructureMandatory']
+		this._modeInfrastructureMandatory.locked = options['expansionFoundations']===false
 
-		this._modeStandardProjectPhaseUpgrade.value = options.standardUpgrade
-		this._modeStandardProjectPhaseUpgrade.locked = options.discovery===false
-		this._modeAdditionalAwards.value = options.additionalAwards
-		this._modeAdditionalAwards.locked = options.discovery===false
+		this._modeStandardProjectPhaseUpgrade.value = options['modeStandardProjectPhaseUpgrade']
+		this._modeStandardProjectPhaseUpgrade.locked = options['expansionDiscovery']===false
+		this._modeAdditionalAwards.value = options['modeAdditionalAwards']
+		this._modeAdditionalAwards.locked = options['expansionDiscovery']===false
 	}
 	getCaption(key: GameOptionKey): string {
 		return this.gameTextService.getGameOptionCaption(key)

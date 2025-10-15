@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, filter } from 'rxjs'
-import { ToggleButton } from '../../models/core-game/button.model'
-import { ToggleButtonNames } from '../../types/global.type'
+import { BehaviorSubject } from 'rxjs'
+import { GameContentName, ToggleButtonNames } from '../../types/global.type'
+import { GAME_OPTIONS_TEMPLATE } from '../../maps/const-maps'
 
 export interface GameOption {
 	discovery: boolean,
@@ -22,70 +22,60 @@ export interface GameOption {
   providedIn: 'root'
 })
 export class CreateGameOptionService {
-	private gameOptions = new BehaviorSubject<GameOption> ({
-		discovery: true,
-		foundations: true,
-		promo: true,
-		fanmade: true,
-		balanced: true,
-
-		initialDraft: true,
-		infrastructureMandatory: true,
-		merger: true,
-		standardUpgrade: true,
-		deadHand: true,
-		additionalAwards: true
-	})
+	//private createOptions: Record<GameContentName, boolean> = {...GAME_OPTIONS_TEMPLATE}
+	private gameOptions = new BehaviorSubject<Record<GameContentName, boolean>> ({...GAME_OPTIONS_TEMPLATE})
 
 	currentGameOptions = this.gameOptions.asObservable()
 
 	toggleOption(option: ToggleButtonNames){
 		let newOption = this.gameOptions.getValue()
+
+		//toggle the option
+		newOption[option] = newOption[option]===false
+
+		//treat bound options
 		switch(option){
 			case('expansionDiscovery'):{
-				newOption.discovery = newOption.discovery===false
-				if(!newOption.discovery){
-					newOption.standardUpgrade= false
-					newOption.additionalAwards = false
+				if(newOption[option]===false){
+					newOption['modeStandardProjectPhaseUpgrade'] = false
+					newOption['modeAdditionalAwards'] = false
 				}
 				break
 			}
 			case('expansionFoundations'):{
-				newOption.foundations = !newOption.foundations
-				if(!newOption.foundations){newOption.infrastructureMandatory = false}
+				if(newOption[option]===false){
+					newOption['modeInfrastructureMandatory'] = false
+				}
 				break
 			}
-			case('expansionPromo'):{newOption.promo = !newOption.promo; break}
-			case('expansionDevFanMade'):{newOption.fanmade = !newOption.fanmade; break}
-			case('expansionBalancedCards'):{newOption.balanced = !newOption.balanced; break}
-
-			case('modeInitialDraft'):{newOption.initialDraft = !newOption.initialDraft; break}
-			case('modeInfrastructureMandatory'):{newOption.infrastructureMandatory = !newOption.infrastructureMandatory; break}
-			case('modeMerger'):{newOption.merger = !newOption.merger; break}
-			case('modeStandardProjectPhaseUpgrade'):{newOption.standardUpgrade = !newOption.standardUpgrade; break}
-			case('modeAdditionalAwards'):{newOption.additionalAwards = !newOption.additionalAwards; break}
-			case('modeDeadHand'):{newOption.deadHand = !newOption.deadHand; break}
 		}
 		this.gameOptions.next(newOption)
 	}
-	getGameOptions():GameOption {
-		return this.gameOptions.getValue()
+	getGameOptions(): Partial<Record<GameContentName, boolean>> {
+		let result: Partial<Record<GameContentName, boolean>> = {}
+		let options = this.gameOptions.getValue()
+		for(const k in options){
+			const key = k as GameContentName
+			const val = options[key]
+
+			if(val!=false){
+				result[key] = val
+			}
+		}
+		return result
 	}
 	toggleAllOptions(activate: boolean){
-		let newOptions: GameOption = {
-			discovery: activate,
-			foundations: activate,
-			promo: activate,
-			fanmade: activate,
-			balanced: activate,
+		let options = this.gameOptions.getValue()
 
-			initialDraft: true,
-			infrastructureMandatory: activate,
-			merger: activate,
-			standardUpgrade: activate,
-			deadHand: activate,
-			additionalAwards: activate
+		for(const k in options){
+			const key = k as GameContentName
+			if(key==='modeInitialDraft'){
+				options[key]=true
+				continue
+			}
+			options[key] = activate
 		}
-		this.gameOptions.next(newOptions)
+		console.log(options)
+		this.gameOptions.next(options)
 	}
   }

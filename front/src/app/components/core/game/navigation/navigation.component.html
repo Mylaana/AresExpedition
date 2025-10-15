@@ -27,6 +27,6 @@
 			</app-player-pannel>
 		</ng-container>
 	</div>
-	<span *ngIf="!discoveryActive" class="wrapper-awards"></span>
-	<app-milestone-and-award *ngIf="discoveryActive" class="ares-navigation-pannel"></app-milestone-and-award>
+	<span *ngIf="!isContentActive('expansionDiscovery')" class="wrapper-awards"></span>
+	<app-milestone-and-award *ngIf="isContentActive('expansionDiscovery')" class="ares-navigation-pannel"></app-milestone-and-award>
 </nav>

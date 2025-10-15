@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.ares_expedition.controller.websocket.WsControllerOutput;
 import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
+import com.ares_expedition.enums.game.GameContentNameEnum;
 import com.ares_expedition.enums.game.GameStatusEnum;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
@@ -186,7 +187,7 @@ public class GameController {
                 break;
 
             case SELECT_CORPORATION:
-                Boolean merger = game.getGameOptions().getModeMerger();
+                Boolean merger = game.getGameOptions().isContentActive(GameContentNameEnum.modeMerger);
                 if(merger){
                     game.setAllPlayersNotReady();
                     game.setGameStatus(GameStatusEnum.SELECT_CORPORATION_MERGER);

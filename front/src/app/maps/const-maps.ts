@@ -1,5 +1,5 @@
 import { GlobalParameterNameEnum } from "../enum/global.enum";
-import { TagType } from "../types/global.type";
+import { GameContentName, TagType } from "../types/global.type";
 
 export const TAGS_ID_TO_NAME: Record<string,  TagType> = {
     '0':  'building',
@@ -23,4 +23,18 @@ export const GLOBAL_PARAMETER_MAX_STEP: Record<GlobalParameterNameEnum, number> 
 	OXYGEN: 15,
 	TEMPERATURE: 15,
 	MOON: 17
+}
+export const GAME_OPTIONS_TEMPLATE: Record<GameContentName, boolean> = {
+	'expansionBalancedCards': false,
+	'expansionDevFanMade': false,
+	'expansionMoon': true,
+	'expansionFoundations': false,
+	'expansionDiscovery': false,
+	'expansionPromo': false,
+	'modeAdditionalAwards': false,
+	'modeDeadHand': false,
+	'modeInfrastructureMandatory': false,
+	'modeInitialDraft': true,
+	'modeMerger': false,
+	'modeStandardProjectPhaseUpgrade': false
 }

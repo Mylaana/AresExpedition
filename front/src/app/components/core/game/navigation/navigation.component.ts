@@ -6,9 +6,10 @@ import { expandCollapseVertical, fadeIn } from '../../../../animations/animation
 import { AnimationEvent } from '@angular/animations';
 import { GlobalParameterPannelComponent } from '../../../player-info/global-parameter-pannel/global-parameter-pannel.component';
 import { Subject, takeUntil } from 'rxjs';
-import { myUUID } from '../../../../types/global.type';
+import { GameContentName, myUUID } from '../../../../types/global.type';
 import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-award/milestone-and-award.component';
 import { NavigationGameInfoComponent } from '../navigation-game-info/navigation-game-info.component';
+import { GameActiveContentService } from '../../../../services/core-game/game-active-content.service';
 
 @Component({
     selector: 'app-navigation',
@@ -29,17 +30,16 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 	@Input() gameOver!: boolean
 	_playerIdList: myUUID[] = []
 	_playerPannelIsHovered: boolean = false
-	discoveryActive: boolean = false
 	private destroy$ = new Subject<void>()
 
 	constructor(
-				private elRef: ElementRef,
-				private gameStateService: GameState
-			){}
+		private elRef: ElementRef,
+		private gameStateService: GameState,
+		private gameContentService: GameActiveContentService
+	){}
 
 	ngOnInit(): void {
 		this.gameStateService.currentPlayerCount.pipe(takeUntil(this.destroy$)).subscribe(playerCount => this.updatePlayerList(playerCount))
-		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(options => this.discoveryActive = options.discovery)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -78,5 +78,8 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 	setHovered(hovered: boolean){
 		if(this._playerIdList.length===1){this._playerPannelIsHovered=false; return}
 		this._playerPannelIsHovered=hovered
+	}
+	isContentActive(name: GameContentName): boolean {
+		return this.gameContentService.isContentActive(name)
 	}
 }

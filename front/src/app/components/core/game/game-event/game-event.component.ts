@@ -27,11 +27,11 @@ import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/
 import { GroupWaitingComponent } from '../../../game-event-blocks/group-waiting/group-waiting.component';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { LeftPannelComponent } from '../../../game-event-blocks/left-pannel/left-pannel.component';
-import { GameOption } from '../../../../services/core-game/create-game.service';
 import { ConvertResourceComponent } from '../../../game-event-blocks/convert-resource/convert-resource.component';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { SettingInterfaceSize } from '../../../../types/global.type';
 import { EventTitleKeyPipe } from '../../../../pipes/event-title.pipe';
+import { GameActiveContentService } from '../../../../services/core-game/game-active-content.service';
 
 //this component is the main controller, and view
 
@@ -69,7 +69,8 @@ export class GameEventComponent {
 	constructor(
 		private elRef: ElementRef, private renderer: Renderer2,
 		private gameStateService: GameState,
-		private gameParamService: GameParamService
+		private gameParamService: GameParamService,
+		private gameContentService: GameActiveContentService
 	){}
 	delete: EventBaseModel[] = []
 
@@ -101,7 +102,6 @@ export class GameEventComponent {
 
 	_selectedPhaseList: SelectablePhaseEnum[] = []
 	_interfaceSize!: SettingInterfaceSize
-	private gameOptions!: GameOption
 
 	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
@@ -123,7 +123,6 @@ export class GameEventComponent {
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
 		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe((groupReady) => this._groupReady = groupReady)
-		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(option => this.gameOptions = option)
 		this.gameParamService.currentInterfaceSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._interfaceSize = size)
 	}
 	ngOnDestroy(): void {
@@ -241,12 +240,6 @@ export class GameEventComponent {
 	public onProjectActivated(input: {card: PlayableCardModel, option: ActivationOption, twice: boolean}){
 		this.eventHandler.onProjectActivated(input)
 	}
-	/*
-	public onActionPhaseStateUpdate(): void {
-				console.log('action phase update')
-		this.eventHandler.updateActionPhaseMainButtonState()
-	}
-	*/
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
 	public onCardBuilderButtonClicked(button: EventCardBuilderButton){
 		this.eventHandler.cardBuilderButtonClicked(button)
@@ -261,6 +254,6 @@ export class GameEventComponent {
 		return false
 	}
 	isDiscoveryActive(): boolean {
-		return this.gameOptions.discovery
+		return this.gameContentService.isContentActive('expansionDiscovery')
 	}
 }
