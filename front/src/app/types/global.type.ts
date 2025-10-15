@@ -58,5 +58,5 @@ export type StandardProjectButtonNames = | 'convertForest' | 'buyForest' | 'conv
 | 'buyUpgrade' | 'buyMine' | 'buyRoad' | 'buyHabitat'
 export type GameContentName = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
 | 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade' | 'modeDeadHand'
-| 'modeAdditionalAwards' | 'expansionMoon'
+| 'modeAdditionalAwards' | 'expansionMoon' | 'modeMoonMandatory'
 export type MoonTileType = 'habitat' | 'road' | 'mine'

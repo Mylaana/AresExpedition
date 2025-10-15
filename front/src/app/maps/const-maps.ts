@@ -27,7 +27,7 @@ export const GLOBAL_PARAMETER_MAX_STEP: Record<GlobalParameterNameEnum, number> 
 export const GAME_OPTIONS_TEMPLATE: Record<GameContentName, boolean> = {
 	'expansionBalancedCards': false,
 	'expansionDevFanMade': false,
-	'expansionMoon': true,
+	'expansionMoon': false,
 	'expansionFoundations': false,
 	'expansionDiscovery': false,
 	'expansionPromo': false,
@@ -36,5 +36,6 @@ export const GAME_OPTIONS_TEMPLATE: Record<GameContentName, boolean> = {
 	'modeInfrastructureMandatory': false,
 	'modeInitialDraft': true,
 	'modeMerger': false,
-	'modeStandardProjectPhaseUpgrade': false
+	'modeStandardProjectPhaseUpgrade': false,
+	'modeMoonMandatory': false
 }

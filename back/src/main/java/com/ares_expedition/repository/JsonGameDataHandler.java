@@ -124,6 +124,7 @@ public class JsonGameDataHandler {
             if(!gameOptions.isContentActive(GameContentNameEnum.expansionFoundations) && card.get("origin").equals("foundations")){continue;}
             if(!gameOptions.isContentActive(GameContentNameEnum.expansionPromo) && card.get("origin").equals("promo")){continue;}
             if(!gameOptions.isContentActive(GameContentNameEnum.expansionDevFanMade) && card.get("origin").equals("fanmade")){continue;}
+            if(!gameOptions.isContentActive(GameContentNameEnum.expansionMoon) && card.get("origin").equals("moon")){continue;}
             
             if(card.containsKey("balancedVersion")){
                 if(gameOptions.isContentActive(GameContentNameEnum.expansionBalancedCards) && card.get("balancedVersion").equals("remove")){continue;}

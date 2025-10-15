@@ -4735,8 +4735,8 @@
             "fr": "Lors de la phase de production, cette carte produit 4 chaleurs. "
         },
         "prerequisiteText": {
-            "en": "Spend 1 TR",
-            "fr": "Requiert 4 $tag_science$"
+            "en": "Spend 1 TR.",
+            "fr": "Requiert que vous perdiez 1 NT."
         },
         "prerequisiteSummaryText": {
             "en": "-$other_tr$",
@@ -10472,7 +10472,7 @@
             "en": "During the production phase, this card produces 2 plants.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10532,7 +10532,7 @@
             "en": "Gain 2 heat.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10562,7 +10562,7 @@
             "en": "If you have no $other_minetile$ when playing this card, gain an additional $ressource_titanium$ production.$skipline$Increase Moon structures by 1.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10647,7 +10647,7 @@
             "en": "During the production phase, this card produces 1 heat per $other_minetile$ you have.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10822,7 +10822,7 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid$ / $tag_moon$",
+            "en": "$ressource_megacredit$ / $tag_moon$",
             "fr": ""
         },
         "effectText": {
@@ -10878,7 +10878,7 @@
             "en": "$other_roadtile$$other_roadtile$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "blocked",
         "vpScaling": "1"
     },
     {
@@ -10917,7 +10917,7 @@
             "en": "$ressource_titanium$$ressource_titanium$",
             "fr": "$ressource_titanium$$ressource_titanium$"
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10948,7 +10948,7 @@
             "en": "Gain a $other_minetile$.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11205,7 +11205,7 @@
             "en": "4$tag_moon$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11233,7 +11233,7 @@
             "en": "Increase Moon structures by 1.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11416,7 +11416,7 @@
             "en": "Gain $other_habitattile$$other_habitattile$$skipline$Gain $other_minetile$$other_minetile$$skipline$Draw 2 cards.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11485,7 +11485,7 @@
             "en": "Increase Moon structures by 3.$skipline$Draw 2 cards.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11493,6 +11493,7 @@
         "origin": "moon",
         "cost": 18,
         "tagsId": [
+            1,
             11
         ],
         "cardType": "blueProject",
@@ -11583,7 +11584,7 @@
     },
     {
         "card_code": "MC1",
-        "origin": "fanmade",
+        "origin": "moon",
         "tagsId": [
             2,
             11
@@ -11608,12 +11609,12 @@
             "fr": ""
         },
         "startingMegacredits": 40,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
         "card_code": "MC2",
-        "origin": "fanmade",
+        "origin": "moon",
         "tagsId": [
             1,
             11
@@ -11637,7 +11638,7 @@
             "fr": ""
         },
         "startingMegacredits": 20,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     }
 ]

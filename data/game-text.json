@@ -87,6 +87,22 @@
         "en": "Adds a random phase each round, chosen at random amongst the ones not selected by players.",
         "fr": "Ajoute une phase al\u00e9atoire \u00e0 chaque round, choisie parmi celles qui n'ont pas \u00e9t\u00e9 s\u00e9lectionn\u00e9es par les joueurs."
     },
+    "gameOption.moon.caption": {
+        "en": "The Moon",
+        "fr": "La Lune"
+    },
+    "gameOption.moon.tooltip": {
+        "en": "Adds a new moon structures global parameter, and some new cards.",
+        "fr": "Ajoute un nouveau parametre global: les structures lunaires, ajoute \u00e9galement de nouvelles cartes."
+    },
+    "gameOption.moonMandatory.caption": {
+        "en": "Moon structures mandatory",
+        "fr": "Structures lunaires obligatoires"
+    },
+    "gameOption.moonMandatory.tooltip": {
+        "en": "The Moon structures global parameter must also be completed to end the game.",
+        "fr": "Le param\u00e8tre infrastructure doit \u00e9galement \u00eatre compl\u00e9t\u00e9 pour mettre fin \u00e0 la partie."
+    },
     "gamePhaseCardAbility.title": {
         "en": "Ability",
         "fr": "Comp\u00e9tence"
@@ -299,6 +315,22 @@
         "en": "Game Mode :",
         "fr": "Mode de Jeu :"
     },
+    "interfaceTitle.cardOverviewTitle": {
+        "en": "CARD LIST",
+        "fr": "LISTE DES CARTES"
+    },
+    "interfaceTitle.newGameLinkTitle": {
+        "en": "READY FOR LAUNCH",
+        "fr": "PARE AU DECOLLAGE"
+    },
+    "interfaceTitle.newGameLinkPlayerLaunchSite": {
+        "en": "Players launch sites:",
+        "fr": "Sites de Lancement:"
+    },
+    "interfaceTitle.newGameLinkGameOptions": {
+        "en": "Game options:",
+        "fr": "Options de Jeu:"
+    },
     "interfaceButton.buttonCreateGameEnableAll": {
         "en": "Enable All",
         "fr": "Tout Activer"
@@ -347,22 +379,6 @@
         "en": "Error during game creation, see console for full error.",
         "fr": "Erreur lors de la cr\u00e9ation de partie, voir la console pour plus d'information."
     },
-    "interfaceTitle.cardOverviewTitle": {
-        "en": "CARD LIST",
-        "fr": "LISTE DES CARTES"
-    },
-    "interfaceTitle.newGameLinkTitle": {
-        "en": "READY FOR LAUNCH",
-        "fr": "PARE AU DECOLLAGE"
-    },
-    "interfaceTitle.newGameLinkPlayerLaunchSite": {
-        "en": "Players launch sites:",
-        "fr": "Sites de Lancement:"
-    },
-    "interfaceTitle.newGameLinkGameOptions": {
-        "en": "Game options:",
-        "fr": "Options de Jeu:"
-    },
     "gameEventTitle.eventInitialDraft": {
         "en": "Initial Draft: Discard any card number to draw that many new cards",
         "fr": "Draft Initial: D\u00e9faussez autant de carte que souhait\u00e9 pour en piocher autant de nouvelles"
@@ -372,12 +388,12 @@
         "fr": "Puis vous choisirez une corporation"
     },
     "gameEventTitle.eventCorpSelection": {
-        "en": "Select your Corporation",
+        "en": "Select a Corporation",
         "fr": "S\u00e9lectionnez une Corporation"
     },
     "gameEventTitle.eventCorpSelectionMerger": {
-        "en": "Select your Merger Corporation",
-        "fr": "S\u00e9lectionnez une Corporation Merger"
+        "en": "Select a second Corporation (Merger)",
+        "fr": "S\u00e9lectionnez une seconde Corporation (Merger)"
     },
     "gameEventTitle.eventOptionalSell": {
         "en": "Select any number of cards to sell",

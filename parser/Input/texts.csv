@@ -21,6 +21,10 @@ gameOption;merger;caption;Merger;
 gameOption;merger;tooltip;Draws more corporations at the start of the game and allows you to chose a second one, playing with both.;Ajoute des corporations à la main de départ, vous jouerez ensuite avec une deuxième corporation en plus de la première.
 gameOption;deadHand;caption;Dead hand;
 gameOption;deadHand;tooltip;Adds a random phase each round, chosen at random amongst the ones not selected by players.;Ajoute une phase aléatoire à chaque round, choisie parmi celles qui n'ont pas été sélectionnées par les joueurs.
+gameOption;moon;caption;The Moon;La Lune
+gameOption;moon;tooltip;Adds a new moon structures global parameter, and some new cards.;Ajoute un nouveau parametre global: les structures lunaires, ajoute également de nouvelles cartes.
+gameOption;moonMandatory;caption;Moon structures mandatory;Structures lunaires obligatoires
+gameOption;moonMandatory;tooltip;The Moon structures global parameter must also be completed to end the game.;Le paramètre infrastructure doit également être complété pour mettre fin à la partie.
 gamePhaseCardAbility;title;;Ability;Compétence
 gamePhaseCardAbility;development_A;;Each player may play 1 green project card.;Chaque joueur peut jouer un projet vert.
 gamePhaseCardAbility;construction_A;;Each player may play 1 blue card OR 1 red project card.;Chaque joueur peut jouer un projet rouge ou bleu.
@@ -74,6 +78,10 @@ interfaceTitle;createGamePlayerNumber;;Number :;Nombre :
 interfaceTitle;createGameAdditionalContent;;Additional Content :;Contenu Additionnel :
 interfaceTitle;createGameAdditionalCards;;Additional Cards :;Cartes Additionnelles :
 interfaceTitle;createGameGameMode;;Game Mode :;Mode de Jeu :
+interfaceTitle;cardOverviewTitle;;CARD LIST;LISTE DES CARTES
+interfaceTitle;newGameLinkTitle;;READY FOR LAUNCH;PARE AU DECOLLAGE
+interfaceTitle;newGameLinkPlayerLaunchSite;;Players launch sites:;Sites de Lancement:
+interfaceTitle;newGameLinkGameOptions;;Game options:;Options de Jeu:
 interfaceButton;buttonCreateGameEnableAll;;Enable All;Tout Activer
 interfaceButton;buttonCreateGameDisableAll;;Disable All;Tout Désactiver
 interfaceButton;buttonCreateGameCreate;;CREATE GAME;CREER LA PARTIE
@@ -86,13 +94,10 @@ interfaceButton;buttonCardOverviewDisplayBalanced;;Display Balanced Only;"Affich
 errorMessage;errorCreateGameNameAndColor;;Each player must have a valid name and a color selected.;Chaque joueur doit avoir un nom valide et une couleur sélectionnée.
 errorMessage;errorCreateGameNameServerOffline;;Cannot create game, server is offline.;Impossible de créer une partie, serveur injoignable.
 errorMessage;errorCreateGameNameOtherError;;Error during game creation, see console for full error.;Erreur lors de la création de partie, voir la console pour plus d'information.
-interfaceTitle;cardOverviewTitle;;CARD LIST;LISTE DES CARTES
-interfaceTitle;newGameLinkTitle;;READY FOR LAUNCH;PARE AU DECOLLAGE
-interfaceTitle;newGameLinkPlayerLaunchSite;;Players launch sites:;Sites de Lancement:
-interfaceTitle;newGameLinkGameOptions;;Game options:;Options de Jeu:
 gameEventTitle;eventInitialDraft;;Initial Draft: Discard any card number to draw that many new cards;Draft Initial: Défaussez autant de carte que souhaité pour en piocher autant de nouvelles
 gameEventTitle;eventInitialDraftThenCorp;;Then you will select a corporation;Puis vous choisirez une corporation
-gameEventTitle;eventCorpSelection;;Select your Corporation;Sélectionnez une Corporation
-gameEventTitle;eventCorpSelectionMerger;;Select your Merger Corporation;Sélectionnez une Corporation Merger
+gameEventTitle;eventInitialDraft;;Initial Draft: Discard any card number to draw that many new cards;Draft Initial: Défaussez autant de carte que souhaité pour en piocher autant de nouvelles
+gameEventTitle;eventCorpSelection;;Select a Corporation;Sélectionnez une Corporation
+gameEventTitle;eventCorpSelectionMerger;;Select a second Corporation (Merger);Sélectionnez une seconde Corporation (Merger)
 gameEventTitle;eventOptionalSell;;Select any number of cards to sell;Sélectionnez des cartes à vendre
 gameEventTitle;eventForcedSell;;Too many cards in hand, please select $0$ cards to sell or more;Vous avez trop de cartes en main, sélectionnez $0$ cartes ou plus à vendre
