@@ -1,4 +1,4 @@
-import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, PlayerPhase, OceanBonus, RessourceStock, ProjectFilter, GlobalParameterOffset } from "../../interfaces/global.interface";
+import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, PlayerPhase, OceanBonus, RessourceStock, ProjectFilter, GlobalParameterOffset, MoonTile } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { AdvancedRessourceType, GameContentName, MoonTileType, myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
@@ -103,21 +103,23 @@ export class PlayerStateModel {
 	getForest(): number {return this.scoreState.getForest()}
 	setAwardsVp(vp: number){this.scoreState.setAwardsVp(vp)}
 	getHabitat(): number {return this.scoreState.getHabitat()}
-	addHabitat(q: number){
-		this.scoreState.addHabitat(q)
-		this.setScalingProduction()
-	}
 	getRoad(): number {return this.scoreState.getRoad()}
-	addRoad(q: number){
-		this.scoreState.addRoad(q)
-		this.setScalingProduction()
-	}
 	getMine(): number {return this.scoreState.getMine()}
-	addMine(q: number){
-		this.scoreState.addMine(q)
-		this.setScalingProduction()
-	}
 	getMoonTileOfType(tileType: MoonTileType){return this.scoreState.getMoonTileOfType(tileType)}
+	addMoonTile(tile: MoonTile){
+		switch(tile.name){
+			case('habitat'):{
+				this.scoreState.addHabitat(tile.quantity)
+				break
+			}
+			case('mine'):{
+				this.scoreState.addMine(tile.quantity)
+				break
+			}
+		}
+		this.setScalingProduction()
+		this.setScalingVp()
+	}
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}

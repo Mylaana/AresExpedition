@@ -953,29 +953,15 @@ export class GameState{
 	isInfrastructureMandatory(): boolean {
 		return this.gameOptions.getValue().infrastructureMandatory
 	}
-	addMoonTile(tiles: MoonTile | MoonTile[]){
+	addMoonTiles(tiles: MoonTile | MoonTile[]){
 		let state = this.getClientState()
 		let tilesList: MoonTile[] = Utils.toArray(tiles)
 		let totalTR: number = 0
 		for(let t of tilesList){
-			switch(t.name){
-				case('habitat'):{
-					state.addHabitat(t.quantity)
-					break
-				}
-				case('road'):{
-					state.addRoad(t.quantity)
-					break
-				}
-				case('mine'):{
-					state.addMine(t.quantity)
-					break
-				}
-			}
+			state.addMoonTile(t)
 			totalTR += t.quantity
 		}
 		this.updateClientState(state)
-
 
 		let newEvents = PlayableCard.getOnTriggerredEvents('ON_MOON_TILE_GAINED', state.getTriggersIdActive(), state, {moonTiles:tilesList})
 		if(newEvents.length>0){
