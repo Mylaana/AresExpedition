@@ -501,7 +501,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'CF2': handleTrigger_CF2,
 	},
 	ON_MOON_TILE_GAINED: {
-
+		'MC2': handleTrigger_MC2
 	}
 };
 

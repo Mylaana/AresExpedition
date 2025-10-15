@@ -174,6 +174,7 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 		case('upgradePhaseCards'):
 		case('addProduction'):
 		case('effectPortal'):
+		case('addMoonTile'):
 		{
 			let content: EventStateGenericDTO = {
 				igp: event.increaseParameter,
@@ -183,7 +184,8 @@ function eventGenericToJson(event: EventGeneric): EventStateDTO | undefined {
 				u: event.phaseCardUpgradeQuantity??undefined,
 				l: event.phaseCardUpgradeList,
 				p: event.subType==='addProduction'?event.baseRessource:undefined,
-				ep: event.effectPortal
+				ep: event.effectPortal,
+				mt: event.addMoonTile
 			}
 			return {
 				o: EventStateOriginEnum.create,

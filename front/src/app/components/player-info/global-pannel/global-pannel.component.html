@@ -58,7 +58,7 @@
 			</div>
 			<p class="pannel-text">{{playerState.getHabitat()}}</p>
 		</div>
-		<div class="pannel-card phase-upgraded pannel-card-style moon">
+		<div class="pannel-card pannel-card-style moon">
 			<div class="pannel-card-icon">
 				<img class="img-padding"
 					src="/assets/other/moon_minetile.png" alt="">
@@ -75,6 +75,8 @@
 			</div>
 			<p class="pannel-text">{{playerState.getPhaseCardUpgradedCount()}}</p>
 		</div>
+		<div [ngClass]="['separator']"
+			*ngIf="isContentActive('expansionDiscovery')"></div>
 		<div class="pannel-card research pannel-card-style">
 			<div class="pannel-card-icon">
 				<img class="img-padding"

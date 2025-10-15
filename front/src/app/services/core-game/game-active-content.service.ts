@@ -11,7 +11,7 @@ export class GameActiveContentService{
 		'expansionDevFanMade': false,
         'expansionMoon': true,
 		'expansionFoundations': true,
-		'expansionDiscovery': false,
+		'expansionDiscovery': true,
 		'expansionPromo': false,
 		'modeAdditionalAwards': false,
 		'modeDeadHand': false,
