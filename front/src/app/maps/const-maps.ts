@@ -21,7 +21,7 @@ export const GLOBAL_PARAMETER_MAX_STEP: Record<GlobalParameterNameEnum, number> 
 	INFRASTRUCTURE: 15,
 	OCEAN: 9,
 	OXYGEN: 15,
-	TEMPERATURE: 15,
+	TEMPERATURE: 20,
 	MOON: 17
 }
 export const GAME_OPTIONS_TEMPLATE: Record<GameContentName, boolean> = {

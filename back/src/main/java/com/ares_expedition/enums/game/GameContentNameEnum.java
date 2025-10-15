@@ -14,5 +14,6 @@ public enum GameContentNameEnum {
     modeInitialDraft,
     modeMerger,
     modeStandardProjectPhaseUpgrade,
+    modeMoonMandatory
 }
 

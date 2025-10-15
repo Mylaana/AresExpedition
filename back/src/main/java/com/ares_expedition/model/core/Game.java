@@ -517,6 +517,10 @@ public class Game {
                 if(this.gameOptions.isContentActive(GameContentNameEnum.expansionFoundations)==false){continue;}
                 if(this.gameOptions.isContentActive(GameContentNameEnum.modeInfrastructureMandatory)==false){continue;}
             }
+            if(p.getName()==GlobalParameterNameEnum.MOON){
+                if(this.gameOptions.isContentActive(GameContentNameEnum.expansionMoon)==false){continue;}
+                if(this.gameOptions.isContentActive(GameContentNameEnum.modeMoonMandatory)==false){continue;}
+            }
             if(p.isMaxedOut()==false){return false;}
         }
         return true;
