@@ -214,6 +214,8 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'M24': (s)=> Checker.isTagOk('moon', 4, 'min', s),
 	//Luna Ecumenapolis
 	'M27': (s)=> Checker.isTagOk('space', 4, 'min', s),
+	//Habitat 14
+	'M29': (s)=> Checker.isTrOk(1, 'min', s),
 
 	//Lunar Mine Urbanization
 	'M63': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
@@ -1419,13 +1421,13 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addHabitat(2)
 	],
 	//Habitat 14
-	'M28': () => [
+	'M29': () => [
 		S.addHabitat(1),
 		S.addTR(-1),
 		S.addProduction({name:'card', valueStock:1})
 	],
 	//Sphere Habitat
-	'M29': () => [
+	'M30': () => [
 		S.addHabitat(1),
 		S.addProduction({name:'card', valueStock:1})
 	],

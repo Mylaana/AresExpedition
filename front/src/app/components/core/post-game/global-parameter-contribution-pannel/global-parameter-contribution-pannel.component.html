@@ -1,7 +1,7 @@
 <ng-container *ngFor="let c of getColumnName()">
 	<div [ngClass]="['wrapper-column']">
 		<div class="wrapper-header">
-			<img *ngIf="c" src="/assets/other/{{c.toLowerCase()}}.png" alt="">
+			<img *ngIf="c" [src]="getUrl(c)" alt="">
 			<p *ngIf="!c">Contributions :</p>
 		</div>
 		<ng-container *ngFor="let state of groupState">
