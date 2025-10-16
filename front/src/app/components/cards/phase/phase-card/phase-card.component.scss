@@ -27,10 +27,7 @@
 	height: fit-content;
 	padding: 0%;
 	filter: grayscale(85%);
-	&.current{
-		filter: grayscale(0%);
-	}
-	&.upgradable{
+	&.current, &.upgradable, &.display-only{
 		filter: grayscale(0%);
 	}
 }

@@ -35,10 +35,11 @@ export class PhaseCardComponent extends BaseCardComponent {
 	@Input() phaseGroupUpgraded: boolean = false
 	@Input() upgradeFinished!: boolean
 	@Input() cardSize!: SettingCardSize
+	@Input() isDisplayOnly: boolean = false
 	@Output() phaseCardUpgraded: EventEmitter<PhaseCardUpgradeType> = new EventEmitter<PhaseCardUpgradeType>()
 
 	_upgradeButton: NonEventButton = ButtonDesigner.createNonEventButton('upgradePhase')
-	
+
 	constructor(private gameTextService: GameTextService){
 		super()
 	}
