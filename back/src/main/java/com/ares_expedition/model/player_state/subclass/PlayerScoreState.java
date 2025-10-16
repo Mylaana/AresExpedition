@@ -12,6 +12,9 @@ public class PlayerScoreState {
     private Integer forest;
     private List<MilestonesEnum> claimedMilestone;
     private Integer award;
+    private Integer habitat;
+    private Integer road;
+    private Integer mine;
 
     public PlayerScoreState() {
     }
@@ -21,6 +24,9 @@ public class PlayerScoreState {
         this.forest = dto.getForest();
         this.claimedMilestone = dto.getClaimedMilestone();
         this.award = dto.getAward();
+        this.habitat = dto.getHabitat();
+        this.road = dto.getRoad();
+        this.mine = dto.getMine();
     }
 
     public Integer getVp() {
@@ -69,5 +75,23 @@ public class PlayerScoreState {
     
     public void setAward(Integer award) {
         this.award = award;
+    }
+    public Integer getHabitat() {
+        return habitat;
+    }
+    public void setHabitat(Integer habitat) {
+        this.habitat = habitat;
+    }
+    public Integer getRoad() {
+        return road;
+    }
+    public void setRoad(Integer road) {
+        this.road = road;
+    }
+    public Integer getMine() {
+        return mine;
+    }
+    public void setMine(Integer mine) {
+        this.mine = mine;
     }
 }

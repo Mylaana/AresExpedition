@@ -1,5 +1,5 @@
 <div class="wrapper-icon">
-	<app-text-with-image [rawText]="'$other_'+parameter.toLocaleLowerCase()"></app-text-with-image>
+	<app-text-with-image [rawText]="getParameterImageName()"></app-text-with-image>
 	<img *ngIf="isGlobalParameterMaxedOutAtPhaseBeginning()" src="/assets/other/ready.png" alt="">
 </div>
 <div class="wrapper-progression-bar"

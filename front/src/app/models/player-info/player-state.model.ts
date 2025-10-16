@@ -1,6 +1,6 @@
-import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, PlayerPhase, OceanBonus, RessourceStock, ProjectFilter, GlobalParameterOffset } from "../../interfaces/global.interface";
+import { TagInfo, ScanKeep, GlobalParameterValue, RessourceInfo, GlobalParameter, AdvancedRessourceStock, PlayerPhase, OceanBonus, RessourceStock, ProjectFilter, GlobalParameterOffset, MoonTile } from "../../interfaces/global.interface";
 import { PlayableCardModel } from "../cards/project-card.model";
-import { AdvancedRessourceType, myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
+import { AdvancedRessourceType, GameContentName, MoonTileType, myUUID, PlayableCardType, RessourceType, RGB, TagType } from "../../types/global.type";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
@@ -52,6 +52,7 @@ export class PlayerStateModel {
 			this.eventState = new PlayerEventStateModel(dto.eventState)
 			this.otherState = new PlayerOtherStateModel(dto.otherState)
 			this.statState = new PlayerStatStateModel(dto.statState)
+			this.setScalingProduction()
 		} else {
 			this.infoState = PlayerInfoStateModel.empty()
 			this.scoreState = PlayerScoreStateModel.empty()
@@ -102,6 +103,24 @@ export class PlayerStateModel {
 	}
 	getForest(): number {return this.scoreState.getForest()}
 	setAwardsVp(vp: number){this.scoreState.setAwardsVp(vp)}
+	getHabitat(): number {return this.scoreState.getHabitat()}
+	getRoad(): number {return this.scoreState.getRoad()}
+	getMine(): number {return this.scoreState.getMine()}
+	getMoonTileOfType(tileType: MoonTileType){return this.scoreState.getMoonTileOfType(tileType)}
+	addMoonTile(tile: MoonTile){
+		switch(tile.name){
+			case('habitat'):{
+				this.scoreState.addHabitat(tile.quantity)
+				break
+			}
+			case('mine'):{
+				this.scoreState.addMine(tile.quantity)
+				break
+			}
+		}
+		this.setScalingProduction()
+		this.setScalingVp()
+	}
 
 	//tagState
 	getTags(): TagInfo[] {return this.tagState.getTags()}
@@ -190,6 +209,8 @@ export class PlayerStateModel {
 		this.globalParameterState.addGlobalParameterStepEOP(parameter)
 		if(this.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){return}
 		this.statState.increaseParameter(parameter.name, parameter.steps)
+		console.log('call scaling prod')
+		this.setScalingProduction()
 	}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
 	getGlobalParameterFromName(parameterName: GlobalParameterNameEnum): GlobalParameter | undefined {
@@ -309,14 +330,14 @@ export class PlayerStateModel {
 	static empty(injector: Injector): PlayerStateModel {
 		return new PlayerStateModel(injector);
 	}
-	public newGame(dto: PlayerStateDTO): void {
+	public newGame(dto: PlayerStateDTO, tagList: TagType[], activeContent: GameContentName[]): void {
 		this.infoState.newGame(dto.infoState)
 		this.scoreState.newGame()
-		this.tagState.newGame()
+		this.tagState.newGame(tagList)
 		this.ressourceState.newGame()
 		this.projectCardState.newGame(dto.projectCardState)
 		this.phaseCardState.newGame()
-		this.globalParameterState.newGame()
+		this.globalParameterState.newGame(activeContent)
 		this.otherState.newGame()
 	}
 	public static toPlayerPhaseGroup(groupDto: PlayerStateDTO[]){

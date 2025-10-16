@@ -29,7 +29,7 @@
 		& p{
 			min-width: 0;
 		}
-				flex: 1;
+		flex: 1;
 	}
 	&.activables{
 		min-width: 35px;
@@ -51,6 +51,12 @@
 	}
 	&.forest {
 		min-width: 60px;
+	}
+	&.moon {
+		& p{
+			min-width: 15px;
+		}
+		min-width: 45px;
 	}
 }
 .wrapper-pannel-card{
@@ -107,7 +113,7 @@ p{
 app-player-name{
 	height: var(--interface-line);
 	&.small{
-		min-width: 90%;
+		min-width: 58%;
 		flex: 1;
 	}
 }

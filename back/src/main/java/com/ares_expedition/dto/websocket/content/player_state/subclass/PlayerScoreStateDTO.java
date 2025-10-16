@@ -17,6 +17,12 @@ public class PlayerScoreStateDTO {
     private List<MilestonesEnum> claimedMilestone;
     @JsonProperty("a")
     private Integer award;
+    @JsonProperty("mh")
+    private Integer habitat;
+    @JsonProperty("mr")
+    private Integer road;
+    @JsonProperty("mm")
+    private Integer mine;
 
     PlayerScoreStateDTO() {
     }
@@ -27,6 +33,9 @@ public class PlayerScoreStateDTO {
         this.forest = state.getForest();
         this.claimedMilestone = state.getClaimedMilestone();
         this.award = state.getAward();
+        this.habitat = state.getHabitat();
+        this.road = state.getRoad();
+        this.mine = state.getMine();
     }
 
     public Integer getVp() {
@@ -58,5 +67,29 @@ public class PlayerScoreStateDTO {
     }
     public void setAward(Integer award) {
         this.award = award;
+    }
+
+    public Integer getHabitat() {
+        return habitat;
+    }
+
+    public void setHabitat(Integer habitat) {
+        this.habitat = habitat;
+    }
+
+    public Integer getRoad() {
+        return road;
+    }
+
+    public void setRoad(Integer road) {
+        this.road = road;
+    }
+
+    public Integer getMine() {
+        return mine;
+    }
+
+    public void setMine(Integer mine) {
+        this.mine = mine;
     }
 }

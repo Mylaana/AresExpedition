@@ -4,5 +4,6 @@ public enum GlobalParameterNameEnum {
     TEMPERATURE,
     OXYGEN,
     OCEAN,
-    INFRASTRUCTURE
+    INFRASTRUCTURE,
+    MOON
 }

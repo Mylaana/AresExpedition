@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalParameterNameEnum } from '../../../../enum/global.enum';
-import { GameState } from '../../../../services/core-game/game-state.service';
 import { CommonModule } from '@angular/common';
 import { PlayerNameComponent } from '../../../player-info/player-name/player-name.component';
+import { GameActiveContentService } from '../../../../services/core-game/game-active-content.service';
 
 @Component({
   selector: 'app-global-parameter-contribution-pannel',
@@ -18,9 +18,12 @@ export class GlobalParameterContributionPannelComponent implements OnInit{
 	@Input() groupState!: PlayerStateModel[]
 	_parameterList: GlobalParameterNameEnum[] = [GlobalParameterNameEnum.ocean, GlobalParameterNameEnum.temperature, GlobalParameterNameEnum.oxygen]
 
-	constructor(private gameStateService: GameState){}
+	constructor(
+		private gameContentService: GameActiveContentService
+	){}
 	ngOnInit(): void {
-		if(this.gameStateService.isFoundationEnabled()){this._parameterList.push(GlobalParameterNameEnum.infrastructure)}
+		if(this.gameContentService.isContentActive('expansionFoundations')){this._parameterList.push(GlobalParameterNameEnum.infrastructure)}
+		if(this.gameContentService.isContentActive('expansionMoon')){this._parameterList.push(GlobalParameterNameEnum.moon)}
 	}
 	getValue(playerIndex: number, columnIndex: number): string {
 		return ''
@@ -36,5 +39,9 @@ export class GlobalParameterContributionPannelComponent implements OnInit{
 	hasRightBorder(columnName: string): boolean{
 		let names = this.getColumnName()
 		return(columnName===names[names.length-1])
+	}
+	getUrl(param: string): string {
+		let uri = param==='MOON'?'moon_parameter':param
+		return `/assets/other/${uri.toLowerCase()}.png`
 	}
 }

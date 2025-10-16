@@ -2,7 +2,7 @@ import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enu
 import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum } from "../enum/global.enum"
 import { EventCardSelectorSubType } from "../types/event.type"
 import { NonEventButtonNames, TagType } from "../types/global.type"
-import { AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep } from "./global.interface"
+import { AdvancedRessourceStock, GlobalParameterValue, MoonTile, RessourceStock, ScanKeep } from "./global.interface"
 
 export interface EventStateDTO {
 	o: EventStateOriginEnum
@@ -67,6 +67,7 @@ export interface EventStateGenericDTO extends EventStateContentDTO {
 	l?: number[] | undefined // upgrade phase authorized list
 	p?: RessourceStock | RessourceStock[] // increase production
 	ep?: EffectPortalEnum // effect portal
+	mt?: MoonTile | MoonTile[] // moon tile
 }
 export interface BuilderStatusDTO {
 	l: boolean,

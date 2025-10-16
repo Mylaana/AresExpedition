@@ -1,6 +1,7 @@
     package com.ares_expedition.repository;
 
 import com.ares_expedition.enums.game.CardTypeEnum;
+import com.ares_expedition.enums.game.GameContentNameEnum;
 import com.ares_expedition.model.core.Game;
 import com.ares_expedition.model.core.GameOptions;
 import com.ares_expedition.repository.core.GameData;
@@ -119,14 +120,15 @@ public class JsonGameDataHandler {
             Object cardCode = card.get("card_code");
 
             //game options
-            if(!gameOptions.getExpansionDiscovery() && card.get("origin").equals("discovery")){continue;}
-            if(!gameOptions.getExpansionFoundations() && card.get("origin").equals("foundations")){continue;}
-            if(!gameOptions.getExpansionPromo() && card.get("origin").equals("promo")){continue;}
-            if(!gameOptions.getExpansionFanmade() && card.get("origin").equals("fanmade")){continue;}
+            if(!gameOptions.isContentActive(GameContentNameEnum.expansionDiscovery) && card.get("origin").equals("discovery")){continue;}
+            if(!gameOptions.isContentActive(GameContentNameEnum.expansionFoundations) && card.get("origin").equals("foundations")){continue;}
+            if(!gameOptions.isContentActive(GameContentNameEnum.expansionPromo) && card.get("origin").equals("promo")){continue;}
+            if(!gameOptions.isContentActive(GameContentNameEnum.expansionDevFanMade) && card.get("origin").equals("fanmade")){continue;}
+            if(!gameOptions.isContentActive(GameContentNameEnum.expansionMoon) && card.get("origin").equals("moon")){continue;}
             
             if(card.containsKey("balancedVersion")){
-                if(gameOptions.getExpansionBalanced() && card.get("balancedVersion").equals("remove")){continue;}
-                if(!gameOptions.getExpansionBalanced() && card.get("balancedVersion").equals("add")){continue;}
+                if(gameOptions.isContentActive(GameContentNameEnum.expansionBalancedCards) && card.get("balancedVersion").equals("remove")){continue;}
+                if(!gameOptions.isContentActive(GameContentNameEnum.expansionBalancedCards) && card.get("balancedVersion").equals("add")){continue;}
             }
             switch(type){
                 case PROJECT:

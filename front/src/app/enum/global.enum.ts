@@ -2,7 +2,8 @@ export enum GlobalParameterNameEnum {
 	infrastructure = 'INFRASTRUCTURE',
 	ocean = 'OCEAN',
 	temperature = 'TEMPERATURE',
-	oxygen = 'OXYGEN'
+	oxygen = 'OXYGEN',
+	moon = 'MOON'
 }
 export enum GlobalParameterColorEnum {
 	purple = 'PURPLE',

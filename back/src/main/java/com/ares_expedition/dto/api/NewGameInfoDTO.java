@@ -4,22 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.ares_expedition.enums.game.GameContentNameEnum;
+import com.ares_expedition.model.core.subModel.GameOption;
+
 public class NewGameInfoDTO {
     String gameId;
-    Map<String, Object> options;
+    Map<GameContentNameEnum, GameOption> options;
     List<CreatePlayerDTO> players = new ArrayList<>();
 
     NewGameInfoDTO(){
     }
-    public NewGameInfoDTO(String gameId, List<CreatePlayerDTO> players, Map<String, Object> options) {
+    public NewGameInfoDTO(String gameId, List<CreatePlayerDTO> players, Map<GameContentNameEnum, GameOption> options) {
         this.players = players;
         this.options = options;
         this.gameId = gameId;
     }
-    public Map<String, Object> getOptions() {
+    public Map<GameContentNameEnum, GameOption> getOptions() {
         return options;
     }
-    public void setOptions(Map<String, Object> options) {
+    public void setOptions(Map<GameContentNameEnum, GameOption> options) {
         this.options = options;
     }
     public String getGameId() {

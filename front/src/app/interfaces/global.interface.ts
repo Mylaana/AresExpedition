@@ -1,4 +1,4 @@
-import { AdvancedRessourceType, GameItemType, InputRuleType, myUUID, PlayerColor, TagType } from "../types/global.type"
+import { AdvancedRessourceType, GameItemType, InputRuleType, MoonTileType, myUUID, PlayerColor, TagType } from "../types/global.type"
 import { PhaseCardType } from "../types/phase-card.type"
 import { PlayableCardModel } from "../models/cards/project-card.model"
 import { MinMaxEqualType } from "../types/global.type"
@@ -29,8 +29,8 @@ export interface AdvancedRessourceStock {
 export interface TagInfo {
     id: number,
     name: TagType,
-    idImageUrl: number
-    valueMod: number
+    //idImageUrl: number
+    //valueMod: number
     valueCount: number
 }
 
@@ -156,4 +156,8 @@ export interface InputRule {
 	numberMin?: number
 	numberMax?: number
 	stringLenght?: number
+}
+export interface MoonTile {
+    "name": MoonTileType,
+    'quantity': number
 }

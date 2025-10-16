@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ButtonNames, RessourceType, StandardProjectButtonNames } from "../../types/global.type";
+import { RessourceType, StandardProjectButtonNames } from "../../types/global.type";
 import { GameState } from "./game-state.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { EventBaseModel, EventCardActivator } from "../../models/core-game/event.model";
@@ -7,8 +7,8 @@ import { NonEventButton } from "../../models/core-game/button.model";
 import { ButtonDesigner } from "../../factory/button-designer.service";
 import { PlayableCard } from "../../factory/playable-card.factory";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
-import { EventFactory } from "../../factory/event/event-factory";
 import { STANDARD_PROJECT_EVENTS } from "../../maps/standard-project-maps";
+import { GameActiveContentService } from "./game-active-content.service";
 
 interface StandardProjectState {
     costMC?: number
@@ -28,7 +28,7 @@ export class ActionPhaseService{
     private actionEvent!: EventCardActivator | undefined
     private clientState!: PlayerStateModel
 
-    private standardProjectsList: StandardProjectButtonNames[] = ['buyForest', 'buyInfrastructure', 'buyOcean', 'buyTemperature', 'buyUpgrade', 'convertForest', 'convertInfrastructure', 'convertTemperature']
+    private standardProjectsList: StandardProjectButtonNames[] = []
 
     private mcStock: number = 0
 	private plantStock: number = 0
@@ -40,12 +40,24 @@ export class ActionPhaseService{
 
     constructor(
         private gameStateService: GameState,
+		private gameContentService: GameActiveContentService
     ){
-        this.infrastructureMandatory = this.gameStateService.isInfrastructureMandatory()
+		this.initializeFromActiveContent()
         this.gameStateService.currentClientState.subscribe(state => this.onClientStateUpdate(state))
         this.gameStateService.currentEventQueue.subscribe(queue => this.onEventQueueUpdate(queue))
         this.initializeStandardProjectStates()
     }
+	private initializeFromActiveContent(){
+		this.infrastructureMandatory = this.gameContentService.isContentActive('modeInfrastructureMandatory')
+
+		this.standardProjectsList = ['buyForest', 'buyInfrastructure', 'buyOcean', 'buyTemperature', 'convertForest', 'convertInfrastructure', 'convertTemperature']
+		if(this.gameContentService.isContentActive('modeStandardProjectPhaseUpgrade')){
+			this.standardProjectsList.push('buyUpgrade')
+		}
+		if(this.gameContentService.isContentActive('expansionMoon')){
+			this.standardProjectsList.push('buyHabitat', 'buyMine')
+		}
+	}
     private initializeStandardProjectStates(){
         for (let s of this.standardProjectsList){
             this.standardProjectStates[s] = {
@@ -62,7 +74,7 @@ export class ActionPhaseService{
         this.updateMainButtonStatus()
     }
     private updateCost() {
-        if(!this.clientState || !this.actionEvent){return }
+		if(!this.clientState || !this.actionEvent){return }
         for(let s of this.standardProjectsList){
             if(!this.standardProjectStates[s]){continue}
             switch(s){
@@ -93,10 +105,19 @@ export class ActionPhaseService{
             return
         }
         this.actionEvent = currentEvent as EventCardActivator
-        this.updateStandardProjectMustBePaid()
+		this.updateCost()
+		this.updateButtonsCaption()
+		this.updateStandardProjectMustBePaid()
         this.updateButtonsStatus()
         this.updateMainButtonStatus()
     }
+	private updateCostCaption(){
+		if(!this.standardProjectStates){return}
+		for (let s of this.standardProjectsList){
+			if(!this.standardProjectStates[s]){continue}
+            this.standardProjectStates[s].caption =  PlayableCard.activable.getScalingCostActivationCaption(s, this.clientState)
+		}
+	}
     private onClientStateUpdate(state: PlayerStateModel){
         this.clientState = state
         let stockChanged = 0
@@ -106,9 +127,9 @@ export class ActionPhaseService{
         }
 
         this.updateCost()
-        
-        if(stockChanged===0){return}
+		this.updateCostCaption()
         this.updateButtonsCaption()
+        if(stockChanged===0){return}
 
         if(!this.actionEvent){return}
         this.updateStandardProjectMustBePaid()

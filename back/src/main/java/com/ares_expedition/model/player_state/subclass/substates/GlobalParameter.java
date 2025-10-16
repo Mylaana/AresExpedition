@@ -71,6 +71,10 @@ public class GlobalParameter {
             case GlobalParameterNameEnum.OCEAN:
                 this.maxStep =  GlobalConstants.GLOBAL_PARAMETER_OCEAN_MAXSTEP;
                 break;
+            
+            case GlobalParameterNameEnum.MOON:
+                this.maxStep =  GlobalConstants.GLOBAL_PARAMETER_MOON_MAXSTEP;
+                break;
 
             default:
                 this.maxStep = 0;
@@ -99,6 +103,7 @@ public class GlobalParameter {
         parameters.add(new GlobalParameter(GlobalParameterNameEnum.INFRASTRUCTURE));
         parameters.add(new GlobalParameter(GlobalParameterNameEnum.TEMPERATURE));
         parameters.add(new GlobalParameter(GlobalParameterNameEnum.OXYGEN));
+        parameters.add(new GlobalParameter(GlobalParameterNameEnum.MOON));
 
         return parameters;
     }

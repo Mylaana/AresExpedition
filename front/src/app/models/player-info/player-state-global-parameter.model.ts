@@ -1,7 +1,8 @@
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../../enum/global.enum";
-import { GAME_GLOBAL_PARAMETER_INFRASTRUCTURE_MAX_STEP, GAME_GLOBAL_PARAMETER_OCEAN_MAX_STEP, GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP, GAME_GLOBAL_PARAMETER_TEMPERATURE_MAX_STEP } from "../../global/global-const";
 import { GlobalParameterDTO, PlayerGlobalParameterStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { GlobalParameter, GlobalParameterValue, OceanBonus } from "../../interfaces/global.interface";
+import { GLOBAL_PARAMETER_MAX_STEP } from "../../maps/const-maps";
+import { GameContentName } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 
 
@@ -48,26 +49,8 @@ export class PlayerGlobalParameterStateModel {
 		return this.oceanFlippedBonus
 	}
 	isGlobalParameterMaxedOutAtPhaseBeginning(parameterName: GlobalParameterNameEnum): boolean {
-		for(let param of this.parameters){
-			if(param.name===parameterName){
-				switch(param.name){
-					case(GlobalParameterNameEnum.infrastructure):{
-						return param.step>=GAME_GLOBAL_PARAMETER_INFRASTRUCTURE_MAX_STEP
-					}
-					case(GlobalParameterNameEnum.temperature):{
-						return param.step>=GAME_GLOBAL_PARAMETER_TEMPERATURE_MAX_STEP
-					}
-					case(GlobalParameterNameEnum.oxygen):{
-						return param.step>=GAME_GLOBAL_PARAMETER_OXYGEN_MAX_STEP
-					}
-					case(GlobalParameterNameEnum.ocean):{
-						return param.step>=GAME_GLOBAL_PARAMETER_OCEAN_MAX_STEP
-					}
-				}
-
-			}
-		}
-		return false
+		let current = this.parameters.filter(p => p.name===parameterName)[0]
+		return current.step >= GLOBAL_PARAMETER_MAX_STEP[parameterName]
 	}
 	getGlobalParameterColorAtPhaseBegining(parameterName: GlobalParameterNameEnum): GlobalParameterColorEnum {
 		for(let param of this.parameters){
@@ -95,13 +78,22 @@ export class PlayerGlobalParameterStateModel {
 			ofb: this.oceanFlippedBonus
 		}
 	}
-	newGame(): void {
+	newGame(parameterRelatedContent: GameContentName[]): void {
 		this.parameters = [
-			{name: GlobalParameterNameEnum.infrastructure,step: 1, addEndOfPhase: 0},
 			{name: GlobalParameterNameEnum.ocean,step: 0,addEndOfPhase: 0},
 			{name: GlobalParameterNameEnum.oxygen,step: 1,addEndOfPhase: 0},
 			{name: GlobalParameterNameEnum.temperature,step: 1,addEndOfPhase: 0}
 		]
+		if(parameterRelatedContent.includes('expansionFoundations')){
+			this.parameters.push(
+				{name: GlobalParameterNameEnum.infrastructure,step: 1, addEndOfPhase: 0},
+			)
+		}
+		if(parameterRelatedContent.includes('expansionMoon')){
+			this.parameters.push(
+				{name: GlobalParameterNameEnum.moon,step: 1, addEndOfPhase: 0},
+			)
+		}
 	}
 	private parameterToJson(parameter: GlobalParameter): GlobalParameterDTO {
 		return {n:parameter.name, s:parameter.step, ae:parameter.addEndOfPhase}

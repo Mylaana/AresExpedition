@@ -195,6 +195,7 @@ export class EventStateService{
 						tr: state.v['tr'],
 						u: state.v['u'],
 						ep: state.v['ep'],
+						mt: state.v['mt']
 					}
 					let event = this.createGenericEvents(content)
 					if(!event){treated = false; break}
@@ -302,6 +303,11 @@ export class EventStateService{
 		//effect portal
 		if(content.ep!=undefined){
 			return S.effectPortal(content.ep)
+		}
+
+		//add moon tile
+		if(content.mt){
+			return S.addMoonTile(content.mt)
 		}
 		return
 

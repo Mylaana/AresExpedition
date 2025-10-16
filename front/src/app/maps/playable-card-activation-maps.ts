@@ -10,6 +10,8 @@ import { EventFactory } from "../factory/event/event-factory";
 import { GAME_TAG_LIST } from "../global/global-const";
 import { Utils } from "../utils/utils";
 
+const S = EventFactory.simple
+
 
 function getScaling(cardCode: string, clientState: PlayerStateModel){
 	return PlayableCard.activable.getScalingCostActivation(cardCode, clientState)
@@ -26,91 +28,91 @@ export const ACTIVATION_DOUBLE: string[] = [
 export const ACTIVATION_NO_COST: string[] = [
 	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03',
 	'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'FM11', 'FM15',
-	'FM26', 'FM27'
-
+	'FM26', 'FM27',
+	'M80', 'M81', 'M84', 'M85', 'M86', 'M87', 'M88', 'M89', 'M90', 'M92'
 ]
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
-	'3': () => [EventFactory.simple.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.advancedScreeningTechnology)],
+	'3': () => [S.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.advancedScreeningTechnology)],
 	//AI Central
-	'4': () => [EventFactory.simple.draw(2)],
+	'4': () => [S.draw(2)],
 	//Aquifer Pumping
 	'7': (cardCode, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState) }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Artificial Jungle
-	'9': () => [EventFactory.simple.addRessource({ name: 'plant', valueStock: -1 }), EventFactory.simple.draw(1)],
+	'9': () => [S.addRessource({ name: 'plant', valueStock: -1 }), S.draw(1)],
 	//Asset Liquidation
 	'11': () => [
-		EventFactory.simple.addTR(-1),
-		EventFactory.simple.draw(3)
+		S.addTR(-1),
+		S.draw(3)
 	],
 	//Birds
-	'12': (cardCode) => [EventFactory.simple.addRessourceToCardId({ name: 'animal', valueStock: 1 }, cardCode)],
+	'12': (cardCode) => [S.addRessourceToCardId({ name: 'animal', valueStock: 1 }, cardCode)],
 	//BrainStorming Session
-	'13': () => [EventFactory.simple.scanKeep({ scan: 1, keep: 0 }, DeckQueryOptionsEnum.brainstormingSession)],
+	'13': () => [S.scanKeep({ scan: 1, keep: 0 }, DeckQueryOptionsEnum.brainstormingSession)],
 	//Caretaker Contract
-	'14': () => [EventFactory.simple.addRessource({ name: 'heat', valueStock: -8 }), EventFactory.simple.addTR(1)],
+	'14': () => [S.addRessource({ name: 'heat', valueStock: -8 }), S.addTR(1)],
 	//Circuit Board Factory
-	'15': () => [EventFactory.simple.draw(1)],
+	'15': () => [S.draw(1)],
 	//Community Gardens
 	'16': (_, clientState) => {
 		const ressources: RessourceStock[] = [{ name: 'megacredit', valueStock: 2 }];
 		if (clientState.getPhaseSelected() === SelectablePhaseEnum.action) {
 		ressources.push({ name: 'plant', valueStock: 1 });
 		}
-		return [EventFactory.simple.addRessource(ressources)];
+		return [S.addRessource(ressources)];
 	},
 	//Conserved Biomes (Activation 1 or 2)
 	'18': (_, __, option) => [
-		option === 1 ? EventFactory.simple.addRessourceToSelectedCard({ name: 'microbe', valueStock: 1 }) :
-		option === 2 ? EventFactory.simple.addRessourceToSelectedCard({ name: 'animal', valueStock: 1 }) :
+		option === 1 ? S.addRessourceToSelectedCard({ name: 'microbe', valueStock: 1 }) :
+		option === 2 ? S.addRessourceToSelectedCard({ name: 'animal', valueStock: 1 }) :
 		undefined
 	].filter(Boolean) as EventBaseModel[],
 	//Decomposing Fungus
-	'20': () => [EventFactory.simple.effectPortal(EffectPortalEnum.decomposingFungus, true)],
+	'20': () => [S.effectPortal(EffectPortalEnum.decomposingFungus, true)],
 	//Developed Infrastructure
 	'21': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
 	//Development Center
 	'22': () => [
-		EventFactory.simple.addRessource({ name: 'heat', valueStock: -2 }),
-		EventFactory.simple.draw(1)],
+		S.addRessource({ name: 'heat', valueStock: -2 }),
+		S.draw(1)],
 	//Conserved Biomes
 	'27': (_, __, option) => [
-		option === 1 ? EventFactory.simple.addRessource({ name: 'plant', valueStock: 1 }) :
-		option === 2 ? EventFactory.simple.addRessourceToSelectedCard({ name: 'microbe', valueStock: 1 }) :
+		option === 1 ? S.addRessource({ name: 'plant', valueStock: 1 }) :
+		option === 2 ? S.addRessourceToSelectedCard({ name: 'microbe', valueStock: 1 }) :
 		undefined
 	].filter(Boolean) as EventBaseModel[],
 	//Farmers Market
 	'28': () => [
-		EventFactory.simple.addRessource([
+		S.addRessource([
 		{ name: 'megacredit', valueStock: -1 },
 		{ name: 'plant', valueStock: 2 }
 		])],
 	//Farming Co-ops
 	'29': () => [
-		EventFactory.simple.discard(1),
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: 3 })],
+		S.discard(1),
+		S.addRessource({ name: 'plant', valueStock: 3 })],
 	//Greenhouse
-	'32': () => [EventFactory.simple.effectPortal(EffectPortalEnum.greenhouses, true)],
+	'32': () => [S.effectPortal(EffectPortalEnum.greenhouses, true)],
 	//GHG Producing Bacteria
 	'31': (cardCode, _, option) => option === 1
-		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
 		: option === 2
 		? [
-			EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
-			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
+			S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
 			]
 		: [],
 	//GHG Producing Bacteria B
 	'31B': (cardCode, _, option) => option === 1
-		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
 		: option === 2
 		? [
-			EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
-			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
+			S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)
 			]
 		: [],
 	//Hydro-Electric Energy
@@ -118,7 +120,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		let value = 2;
 		if (clientState.getPhaseSelected() === SelectablePhaseEnum.action) value++;
 		return [
-		EventFactory.simple.addRessource([
+		S.addRessource([
 			{ name: 'megacredit', valueStock: -1 },
 			{ name: 'heat', valueStock: value }
 		])
@@ -126,182 +128,257 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	},
 	//Ironworks
 	'38': () => [
-		EventFactory.simple.addRessource({ name: 'heat', valueStock: -4 }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
+		S.addRessource({ name: 'heat', valueStock: -4 }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
 	//Matter Manufacturing
 	'41': () => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -1 }),
-		EventFactory.simple.draw(1)],
+		S.addRessource({ name: 'megacredit', valueStock: -1 }),
+		S.draw(1)],
 	//Nitrite Reducing Bacteria
 	'43': (cardCode, _, option) => option === 1
-		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
 		: option === 2
 		? [
-			EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: -3 }, cardCode),
-			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -3 }, cardCode),
+			S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)
 			]
 		: [],
 	//Power Infrastructure
-	'47': (cardCode) => [EventFactory.simple.resourceConversion(InputRuleEnum.powerInfrastructure, {originType:'cardCode', originValue:cardCode})],
+	'47': (cardCode) => [S.resourceConversion(InputRuleEnum.powerInfrastructure, {originType:'cardCode', originValue:cardCode})],
 	//Redrafted Contracts
-	'49': () => [EventFactory.simple.discardOptions(3, 'max', DiscardOptionsEnum.redraftedContracts)],
+	'49': () => [S.discardOptions(3, 'max', DiscardOptionsEnum.redraftedContracts)],
 	//Regolith Eaters
 	'50': (cardCode, _, option) => option === 1
-		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
 		: option === 2
 		? [
-			EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
-			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
+			S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)
 			]
 		: [],
 	//Regolith Eaters B
 	'50B': (cardCode, _, option) => option === 1
-		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)]
 		: option === 2
 		? [
-			EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
-			EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -2 }, cardCode),
+			S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)
 			]
 		: [],
 	//Solarpunk
 	'54': (cardCode, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState) }),
-		EventFactory.simple.addForestAndOxygen(1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState) }),
+		S.addForestAndOxygen(1)],
 	//Steelworks
 	'56': () => [
-		EventFactory.simple.addRessource([
+		S.addRessource([
 		{ name: 'heat', valueStock: -6 },
 		{ name: 'megacredit', valueStock: 2 }
 		]),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
+		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
 	//Symbiotic Fungus
-	'57': () => [EventFactory.simple.addRessourceToSelectedCard({ name: 'microbe', valueStock: 1 })],
+	'57': () => [S.addRessourceToSelectedCard({ name: 'microbe', valueStock: 1 })],
 	//Tardigrades
-	'58': (cardCode) => [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)],
+	'58': (cardCode) => [S.addRessourceToCardId({ name: 'microbe', valueStock: 1 }, cardCode)],
 	//Think Tank
 	'59': () => [
-		EventFactory.simple.draw(1),
-		EventFactory.simple.addRessource({name:'megacredit', valueStock:-2})
+		S.draw(1),
+		S.addRessource({name:'megacredit', valueStock:-2})
 
 	],
 	//Volcanic Pools
 	'62': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Water Import from Europa
 	'63': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.ocean, 1)],
 	//Wood Burning Stoves
 	'64': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'plant', valueStock: -getScaling(card, clientState) }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
+		S.addRessource({ name: 'plant', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
 	//Hyperion Systems
 	'D03': (card, clientState) => [
-		EventFactory.simple.addRessource({name:'megacredit',valueStock:getScaling(card, clientState)})
+		S.addRessource({name:'megacredit',valueStock:getScaling(card, clientState)})
 	],
 	//Hyperion Systems V2
 	'D03B': (card, clientState) => [
-		EventFactory.simple.addRessource({name:'megacredit', valueStock:1})
+		S.addRessource({name:'megacredit', valueStock:1})
 	],
 	//Drone Assisted Construction
 	//Will give 4MC if phase 3 is selected by owner and is then upgraded during phase3 itself
 	'D06': (card, clientState) => [
-		EventFactory.simple.addRessource({name:'megacredit',valueStock:getScaling(card, clientState)})
+		S.addRessource({name:'megacredit',valueStock:getScaling(card, clientState)})
 	],
 	//Experimental Technology
 	'D07': () => [
-		EventFactory.simple.addTR(-1),
-		EventFactory.simple.upgradePhaseCard(1)
+		S.addTR(-1),
+		S.upgradePhaseCard(1)
 	],
 	//Fibrous Composite Material
 	'D10': (cardCode, _, option) => option === 1
-		? [EventFactory.simple.addRessourceToCardId({ name: 'science', valueStock: 1}, cardCode)]
+		? [S.addRessourceToCardId({ name: 'science', valueStock: 1}, cardCode)]
 		: option === 2
 		? [
-			EventFactory.simple.addRessourceToCardId({ name: 'science', valueStock: -3}, cardCode),
-			EventFactory.simple.upgradePhaseCard(1)
+			S.addRessourceToCardId({ name: 'science', valueStock: -3}, cardCode),
+			S.upgradePhaseCard(1)
 			]
 		: [],
 	//Software Streamlining
 	'D11': () => [
-		EventFactory.simple.drawThenDiscard(2,2),
+		S.drawThenDiscard(2,2),
 	],
 	//Virtual Employee Development
-	'D12': () => [EventFactory.simple.upgradePhaseCard(1)],
+	'D12': () => [S.upgradePhaseCard(1)],
 	//Interplanetary Superhighway
 	'F05': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)],
 	//Maglev Trains
-	'F06': (card, clientState) => [EventFactory.simple.draw(getScaling(card, clientState))],
+	'F06': (card, clientState) => [S.draw(getScaling(card, clientState))],
 	//Sawmill
 	'F08': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
 	],
 	//Matter Generator
-	'P06': () => [EventFactory.simple.discardOptions(1, 'max', DiscardOptionsEnum.matterGenerator)],
+	'P06': () => [S.discardOptions(1, 'max', DiscardOptionsEnum.matterGenerator)],
 	//Progressive Policies
 	'P09': (card, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(card, clientState) }),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.oxygen, 1)],
 	//Self Replicating Bacteria
 	'P11': (cardCode, _, option) => option === 1
-		? [EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: 1}, cardCode)]
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1}, cardCode)]
 		: option === 2
 		? [
-			EventFactory.simple.addRessourceToCardId({ name: 'microbe', valueStock: -5}, cardCode),
-			EventFactory.simple.specialBuilder(BuilderOption.selfReplicatingBacteria)
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -5}, cardCode),
+			S.specialBuilder(BuilderOption.selfReplicatingBacteria)
 			]
 		: [],
 	//Celestior
-	'P13': () => [EventFactory.simple.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)],
+	'P13': () => [S.scanKeep({ scan: 3, keep: 1 }, DeckQueryOptionsEnum.celestior)],
 	//Community Afforestation
-	'P20': (_, clientState) => {return [EventFactory.simple.draw(1 + clientState.getMilestoneCompleted())]},
+	'P20': (_, clientState) => {return [S.draw(1 + clientState.getMilestoneCompleted())]},
 	//Community Afforestation
 	'P21': (cardCode, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState)}),
-		EventFactory.simple.addForestAndOxygen(1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState)}),
+		S.addForestAndOxygen(1)],
 	//Gas-Cooled Reactors
 	'P23': (cardCode, clientState) => [
-		EventFactory.simple.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState)}),
-		EventFactory.simple.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
+		S.addRessource({ name: 'megacredit', valueStock: -getScaling(cardCode, clientState)}),
+		S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 1)],
 	//Research Grant
 	'P24': (cardCode, clientState) => {
 		let card = clientState.getPlayedProjectWithId(cardCode)
 		let tags = card?.tagStock
 		if(!tags){
-			return [EventFactory.simple.resolveWildTag(cardCode)]
+			return [S.resolveWildTag(cardCode)]
 		}
 		let authorizedTags = GAME_TAG_LIST
 		for(let t of tags){
 			authorizedTags = authorizedTags.filter((el) => el!= Utils.toTagType(t))
 		}
-		return [EventFactory.simple.resolveWildTag(cardCode,authorizedTags)]
+		return [S.resolveWildTag(cardCode,authorizedTags)]
 	},
 	//Modpro
 	'P32': () => [
-		EventFactory.simple.scanKeep({scan:4, keep:1}, DeckQueryOptionsEnum.modPro)
+		S.scanKeep({scan:4, keep:1}, DeckQueryOptionsEnum.modPro)
 	],
 	//Pride of the earth Arkship
 	'FM11': (cardCode, state) => [
-		EventFactory.simple.addRessourceToCardId({name:'science', valueStock: getScaling(cardCode, state)}, cardCode)
+		S.addRessourceToCardId({name:'science', valueStock: getScaling(cardCode, state)}, cardCode)
 	],
 	//Ants
-	'FM15': (cardCode, state) => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:getScaling(cardCode, state)}, cardCode)],
+	'FM15': (cardCode, state) => [S.addRessourceToCardId({name:'microbe', valueStock:getScaling(cardCode, state)}, cardCode)],
 	//Red Spot Observatory
 	'FM26': () => [
-		EventFactory.simple.draw(1),
+		S.draw(1),
 	],
 	//Red Spot Observatory
 	'FM27': (cardCode, state) => [
-		EventFactory.simple.addRessourceToCardId({name:'science', valueStock:getScaling(cardCode, state)}, cardCode),
+		S.addRessourceToCardId({name:'science', valueStock:getScaling(cardCode, state)}, cardCode),
 	],
 	//CLM - The Hesitant Hivemind
 	'CF3': () => [
-		EventFactory.simple.effectPortal(EffectPortalEnum.clm, true)
+		S.effectPortal(EffectPortalEnum.clm, true)
 	],
+	//He3 Refinery
+	'M80': (card, state) => [
+		S.addRessource({name:'megacredit', valueStock:getScaling(card, state)})
+	],
+	//Minerals Research Center
+	'M81': (card, state) => {
+		let prod = 	getScaling(card, state)
+		if(prod===0){return []}
+		return [S.addRessourceToCardId({name:'science', valueStock: prod}, card)]
+	},
+	//Ancient Shipyard
+	'M83': () => [
+		S.addRessource({name:'megacredit', valueStock:5}),
+		S.addTR(-1)
+	],
+	//Copernicus Tower
+	'M84': () => [
+		S.addTR()
+	],
+	//Darkside Incubation Plant
+	'M85': (cardCode, _, option) => option === 1
+		? [S.addRessourceToCardId({ name: 'microbe', valueStock: 1}, cardCode)]
+		: option === 2
+		? [
+			S.addRessourceToCardId({ name: 'microbe', valueStock: -1}, cardCode),
+			S.increaseMoonParameter()
+			]
+		: [],
+	//Darkside Observatory
+	'M86': () => [
+		S.addRessourceToSelectedCard({name:'science', valueStock:2})
+	],
+	//Luna Archives
+	'M87': (card, state) => {
+		let gain = 	getScaling(card, state)
+		console.log(gain)
+		if(gain===0){return []}
+		return [S.addRessourceToCardId({name:'science', valueStock: gain}, card)]
+	},
+	//Luna Tradestation
+	'M88': (card, state) => {
+		let gain = 	getScaling(card, state)
+		if(gain===0){return []}
+		return [S.addRessource({name:'megacredit', valueStock:gain})]
+	},
+	//Rust Eating Bacteria
+	'M89': (card, state) => {
+		let gain = 	getScaling(card, state)
+		if(gain===0){return []}
+		return [S.addRessourceToCardId({name:'microbe', valueStock:gain}, card)]
+	},
+	//Pets Acclimatization
+	'M90': (card, state) => {
+		let gain = 	getScaling(card, state)
+		if(gain===0){return []}
+		return [S.addRessourceToCardId({name:'animal', valueStock:gain}, card)]
+	},
+	//3d printing mine facility
+	'M91': (card, state) => {
+		let result: EventBaseModel[] = [S.addMoonTile({name:'mine', quantity:1})		]
+		let loss = getScaling(card,state)
+		if(loss>0){
+			result.push(S.addRessource({name:'megacredit', valueStock:-loss}))
+		}
+		return result
+	},
+	//shelte blueprint factory
+	'M92': (card, state) => {
+		let result: EventBaseModel[] = [S.addMoonTile({name:'habitat', quantity:1})		]
+		let loss = getScaling(card,state)
+		if(loss>0){
+			result.push(S.addRessource({name:'megacredit', valueStock:-loss}))
+		}
+		return result
+	},
 }
 export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
 	//Aquifer Pumping
@@ -338,6 +415,36 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 	'FM15': (state) =>  Math.floor(state.getTagsOfType('microbe')/2),
 	//Jovian Lanterns
 	'FM27': (state) =>  Math.floor(state.getTagsOfType('jovian')/3),
+	//he3 refinery
+	'M80': (state) => state.getMine()*2,
+	//Moon Minerals Tradecenter
+	'M81': (state) => {
+		let prod= 0
+		prod += state.getRessourceInfoFromType('steel')?.valueProd??0
+		prod += state.getRessourceInfoFromType('titanium')?.valueProd??0
+		return Math.floor(prod/5)
+	},
+	//Luna Archives
+	'M87': (state) => {
+		return Math.floor(state.getTagsOfType('moon')/3)
+	},
+	//Luna Trade Station
+	'M88': (state) => state.getHabitat(),
+	//Rust eating Bacteria
+	'M89': (state) => {
+		return state.getRessourceInfoFromType('steel')?.valueProd??0
+	},
+	//Pets Acclimatization
+	'M90': (state) => {
+		return Math.floor(state.getTagsOfType('moon') / 2)
+	},
+	//3d Printing Mine Facility
+	'M91': (clientstate) => Math.max(0, 12 - (clientstate.getRessourceInfoFromType('steel')?.valueProd??0) * 2),
+	//Shelter Blueprint Factory
+	'M92': (clientstate) => Math.max(0, 15 - (clientstate.getRessourceInfoFromType('titanium')?.valueProd??0) * 3),
+
+
+
 
 	//SPECIALS
 	//Convert Forest - Ecoline
@@ -389,6 +496,30 @@ export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerState
 		let result: number = 18
 		result -= state.getTriggersIdActive().includes('55')? 4:0
 		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		return result
+	},
+	//Buy Temperature - Standard Technology
+	'buyHabitat': (state) => {
+		let result: number = 16
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		result -= state.getTriggersIdActive().includes('M122')? 3:0
+		return result
+	},
+	//Buy Temperature - Standard Technology
+	'buyRoad': (state) => {
+		let result: number = 16
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		result -= state.getTriggersIdActive().includes('M122')? 3:0
+		return result
+	},
+	//Buy Temperature - Standard Technology
+	'buyMine': (state) => {
+		let result: number = 16
+		result -= state.getTriggersIdActive().includes('55')? 4:0
+		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		result -= state.getTriggersIdActive().includes('M122')? 3:0
 		return result
 	},
 }
@@ -459,6 +590,58 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 		}
 		return caption
 	},
+	//he3 Refinery
+	'M80': (state) => {
+		let caption = getScaling('M80', state)??0
+		return `$ressource_megacreditvoid_${caption}$`
+	},
+	//Minerals Research Center
+	'M81': (state) => {
+		let caption :string = ''
+		for(let i=0; i< (getScaling('M81', state)); i++){
+			caption += '$ressource_science$'
+		}
+		return caption
+	},
+	//Luna Archives
+	'M87': (state) => {
+		let caption :string = ''
+		for(let i=0; i< (getScaling('M87', state)); i++){
+			caption += '$ressource_science$'
+		}
+		return caption
+	},
+	//Luna Trade Center
+	'M88': (state) => {
+		let caption = getScaling('M88', state)??0
+		return `$ressource_megacreditvoid_${caption}$`
+	},
+	//Rust Eating Bacteria
+	'M89': (state) => {
+		let caption :string = ''
+		for(let i=0; i< (getScaling('M89', state)); i++){
+			caption += '$ressource_microbe$'
+		}
+		return caption
+	},
+	//Pets Acclimatization
+	'M90': (state) => {
+		let caption :string = ''
+		for(let i=0; i< (getScaling('M90', state)); i++){
+			caption += '$ressource_animal$'
+		}
+		return caption
+	},
+	//3d printing mine facility
+	'M91': (state) => {
+		let caption = getScaling('M91', state)??0
+		return `$ressource_megacreditvoid_${caption}$:$other_minetile$`
+	},
+	//Shelter Blueprint factory
+	'M92': (state) => {
+		let caption = getScaling('M92', state)??0
+		return `$ressource_megacreditvoid_${caption}$:$other_habitattile$`
+	},
 
 	//SPECIAL
 	'convertForest': (state) => `${getScaling('convertForest', state)}$ressource_plant$: $other_forest$`,
@@ -470,6 +653,10 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 	'buyOcean': (state) => `$ressource_megacreditvoid_${getScaling('buyOcean', state)}$: $other_ocean$`,
 	'buyTemperature': (state) => `$ressource_megacreditvoid_${getScaling('buyTemperature', state)}$: $other_temperature$`,
 	'buyUpgrade': (state) => `$ressource_megacreditvoid_${getScaling('buyUpgrade', state)}$: $other_upgrade$`,
+
+	'buyHabitat': (state) => `$ressource_megacreditvoid_${getScaling('buyHabitat', state)}$: $other_habitattile$+$ressource_card$`,
+	'buyRoad': (state) => `$ressource_megacreditvoid_${getScaling('buyRoad', state)}$: $other_roadtile$`,
+	'buyMine': (state) => `$ressource_megacreditvoid_${getScaling('buyMine', state)}$: $other_minetile$+$ressource_steel$`,
 }
 export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: ActivationOption, clientState: PlayerStateModel) => boolean> = {
 	//Aquifer Pumping
@@ -554,4 +741,13 @@ export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: Activation
 	},
 	//CLM - The hesistant hiveming
 	'CF3': (_, clientState) => Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:0}, 'min', clientState, 'CF3'),
+
+	//Ancient Shipyard
+	'M83': (_, s) => Checker.isTrOk(1, 'min', s),
+	//Darkside Incubation Plant
+	'M85': (activationOption, clientState) => activationOption === 1 || clientState.getProjectPlayedStock('M85').some(s => s.name === 'microbe' && s.valueStock >= 1),
+	//3D Printing Mine Facility
+	'M91': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('M91', clientState), 'min', clientState),
+	//Shelter Blueprint Factory
+	'M92': (_, clientState) => Checker.isRessourceOk('megacredit', getScaling('M92', clientState), 'min', clientState),
 }

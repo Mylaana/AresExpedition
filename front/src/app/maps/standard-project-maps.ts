@@ -3,6 +3,8 @@ import { EventFactory } from "../factory/event/event-factory";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { StandardProjectButtonNames } from "../types/global.type";
 
+const S = EventFactory.simple
+
 export const STANDARD_PROJECT_EVENTS: Record<StandardProjectButtonNames, (costMc: number, costPlant: number, costHeat: number) => EventBaseModel[]> = {
     'buyForest': (costMC, costPlant, costHeat) => [
         EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: {name:'megacredit', valueStock: - costMC}}),
@@ -38,4 +40,18 @@ export const STANDARD_PROJECT_EVENTS: Record<StandardProjectButtonNames, (costMc
         EventFactory.createGeneric('increaseGlobalParameter', {increaseParameter: {name:GlobalParameterNameEnum.infrastructure, steps:1}}),
         EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw: 1}})
     ],
+    'buyHabitat': (costMC, costPlant, costHeat) => [
+		S.addHabitat(),
+		S.draw(),
+		S.addRessource({name:'megacredit', valueStock: - costMC}),
+    ],
+	'buyRoad': (costMC, costPlant, costHeat) => [
+		S.addRoad(),
+		S.addRessource({name:'megacredit', valueStock: - costMC}),
+    ],
+	'buyMine': (costMC, costPlant, costHeat) => [
+		S.addMine(),
+		S.addProduction({name:'steel', valueStock:1}),
+		S.addRessource({name:'megacredit', valueStock: - costMC}),
+    ]
 }

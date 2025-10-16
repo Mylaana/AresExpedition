@@ -3,14 +3,17 @@ package com.ares_expedition.dto.api;
 import java.util.List;
 import java.util.Map;
 
+import com.ares_expedition.enums.game.GameContentNameEnum;
+import com.ares_expedition.model.core.subModel.GameOption;
+
 public class NewGameConfigDTO {
     private String gameId;
     private List<CreatePlayerDTO> players;
-    private Map<String, Object> options;
+    private Map<GameContentNameEnum, GameOption> options;
 
     public NewGameConfigDTO() {}
 
-    public NewGameConfigDTO(String gameId, List<CreatePlayerDTO> players, Map<String, Object> gameMode) {
+    public NewGameConfigDTO(String gameId, List<CreatePlayerDTO> players, Map<GameContentNameEnum, GameOption> gameMode) {
         this.gameId = gameId;
         this.players = players;
         this.options = gameMode;
@@ -24,11 +27,11 @@ public class NewGameConfigDTO {
         this.players = players;
     }
 
-    public Map<String, Object> getOptions() {
+    public Map<GameContentNameEnum, GameOption> getOptions() {
         return options;
     }
 
-    public void setOptions(Map<String, Object> options) {
+    public void setOptions(Map<GameContentNameEnum, GameOption> options) {
         this.options = options;
     }
 

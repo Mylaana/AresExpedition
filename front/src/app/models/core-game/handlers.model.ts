@@ -546,6 +546,11 @@ export class EventHandler {
 				}
 				break
 			}
+			case('addMoonTile'):{
+				if(!event.addMoonTile){break}
+				this.gameStateService.addMoonTiles(event.addMoonTile)
+				break
+			}
 			default:{Logger.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
 		}
 	}

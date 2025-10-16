@@ -2,7 +2,7 @@ import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { MilestoneState, myUUID, PlayableCardType, RessourceType, TagType } from "../../types/global.type";
-import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter,  } from "../../interfaces/global.interface";
+import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter, MoonTile,  } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { DrawEvent, EventBaseModel, EventGeneric, EventPhase } from "../../models/core-game/event.model";
@@ -25,7 +25,7 @@ import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
 import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
-import { GameOption } from "./create-game.service";
+import { GameActiveContentService } from "./game-active-content.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -67,19 +67,6 @@ export class GameState{
 	private clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
 	private selectedPhaseList = new BehaviorSubject<SelectablePhaseEnum[]>([])
 	private gameOver = new BehaviorSubject<boolean>(false)
-	private gameOptions = new BehaviorSubject<GameOption>({
-		balanced: false,
-		discovery: false,
-		fanmade: false,
-		foundations: false,
-		infrastructureMandatory: false,
-		initialDraft: false,
-		merger: false,
-		promo: false,
-		standardUpgrade: false,
-		deadHand: false,
-		additionalAwards: false,
-	})
 	private milestones = new BehaviorSubject<Partial<MilestoneState>>({})
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
 	private round = new BehaviorSubject<number>(0)
@@ -97,7 +84,6 @@ export class GameState{
 	currentGameStartedState = this.gameStarted.asObservable()
 	currentSelectedPhaseList = this.selectedPhaseList.asObservable()
 	currentGameOver = this.gameOver.asObservable()
-	currentGameOptions = this.gameOptions.asObservable()
 	currentClientState = this.clientState.asObservable()
 	currentMilestones = this.milestones.asObservable()
 	currentAwards = this.awards.asObservable()
@@ -129,6 +115,7 @@ export class GameState{
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private eventStateService: EventStateService,
+		private gameModeContentService: GameActiveContentService,
 		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
@@ -662,7 +649,11 @@ export class GameState{
 		let clientState = this.getClientState()
 		for(let dto of groupDto){
 			if(dto.infoState.i===this.clientId){
-				clientState.newGame(dto)
+				clientState.newGame(
+					dto,
+					this.gameModeContentService.getTagListFromActiveContent(),
+					this.gameModeContentService.getActiveContentList()
+				)
 				this.updateClientState(clientState)
 			}
 		}
@@ -899,12 +890,6 @@ export class GameState{
 	setGameStarted(started: boolean = true){
 		this.gameStarted.next(started)
 	}
-	setGameOptions(options: GameOption){
-		this.gameOptions.next(options)
-	}
-	getGameOptions(): GameOption {
-		return this.gameOptions.getValue()
-	}
 	setAwards(awards: AwardsEnum[]){
 		if(this.awards.getValue().length===0){
 			this.awards.next(awards)
@@ -920,12 +905,6 @@ export class GameState{
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents, 'first')
 		}
-	}
-	isDiscoveryEnabled(): boolean {
-		return this.gameOptions.getValue().discovery
-	}
-	isFoundationEnabled(): boolean {
-		return this.gameOptions.getValue().foundations
 	}
 	setRound(round: number){
 		if(round===this.getRound()){return}
@@ -944,7 +923,21 @@ export class GameState{
 	setDeckSize(size: number){
 		this.deck.next(size)
 	}
-	isInfrastructureMandatory(): boolean {
-		return this.gameOptions.getValue().infrastructureMandatory
+	addMoonTiles(tiles: MoonTile | MoonTile[]){
+		let state = this.getClientState()
+		let tilesList: MoonTile[] = Utils.toArray(tiles)
+		let totalTR: number = 0
+		for(let t of tilesList){
+			state.addMoonTile(t)
+			totalTR += t.quantity
+		}
+		this.updateClientState(state)
+
+		let newEvents = PlayableCard.getOnTriggerredEvents('ON_MOON_TILE_GAINED', state.getTriggersIdActive(), state, {moonTiles:tilesList})
+		if(newEvents.length>0){
+			this.addEventQueue(newEvents, 'first')
+		}
+		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){return}
+		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
 	}
 }

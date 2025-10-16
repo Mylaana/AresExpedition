@@ -1,5 +1,6 @@
 import { MilestonesEnum } from "../../enum/global.enum"
 import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.interface"
+import { MoonTileType } from "../../types/global.type"
 
 export class PlayerScoreStateModel {
 	private vp: number = 0
@@ -8,6 +9,9 @@ export class PlayerScoreStateModel {
 	private forest: number = 0
 	private claimedMilestones: MilestonesEnum[] = []
 	private awardsVp: number = 0
+	private habitat: number = 0
+	private road: number = 0
+	private mine: number = 0
 
 	constructor(data: PlayerScoreStateDTO){
 		this.vp = data.v
@@ -15,6 +19,9 @@ export class PlayerScoreStateModel {
 		this.forest = data.f
 		this.claimedMilestones = data.cm
 		this.awardsVp = data.a
+		this.habitat = data.mh
+		this.road = data.mr
+		this.mine = data.mm
 	}
 
 	addMilestoneCompleted(milestone: MilestonesEnum): void {
@@ -37,6 +44,19 @@ export class PlayerScoreStateModel {
 	getTR(): number {return this.terraformingRating}
 	addForest(forest: number): void {this.forest += forest}
 	getForest(): number {return this.forest}
+	addHabitat(quantity: number){this.habitat += quantity}
+	getHabitat(): number {return this.habitat}
+	addRoad(quantity: number){this.road += quantity}
+	getRoad(): number {return this.road}
+	addMine(quantity: number){this.mine += quantity}
+	getMine(): number{return this.mine}
+	getMoonTileOfType(tileType: MoonTileType){
+		switch(tileType){
+			case('habitat'):{return this.getHabitat()}
+			case('mine'):{return this.getMine()}
+			case('road'):{return this.getRoad()}
+		}
+	}
 
 	toJson(): PlayerScoreStateDTO {
 		return {
@@ -44,7 +64,10 @@ export class PlayerScoreStateModel {
 			v: this.vp,
 			tr: this.terraformingRating,
 			f: this.forest,
-			a: this.awardsVp
+			a: this.awardsVp,
+			mh: this.habitat,
+			mr: this.road,
+			mm: this.mine
 		}
 	}
 
@@ -64,7 +87,10 @@ export class PlayerScoreStateModel {
 				tr: 0,
 				v:0,
 				f: 0,
-				a: 0
+				a: 0,
+				mh: 0,
+				mr: 0,
+				mm: 0
 			}
 		)
 	}

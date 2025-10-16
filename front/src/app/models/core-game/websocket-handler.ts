@@ -7,12 +7,16 @@ import { Logger } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";
 import { EventFactory } from "../../factory/event/event-factory";
+import { GameActiveContentService } from "../../services/core-game/game-active-content.service";
 
 @Injectable()
 export class WebsocketHandler {
     clientPlayerId: myUUID = ''
 
-    constructor(private gameStateService: GameState){}
+    constructor(
+		private gameStateService: GameState,
+		private gameContentService: GameActiveContentService
+	){}
 
     public handlePlayerMessage(message: PlayerMessageResult){
         Logger.logReceivedMessage(`[${message.contentEnum}] ON [PLAYER CHANNEL]`, message.content)
@@ -105,8 +109,8 @@ export class WebsocketHandler {
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, false)
-		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
-		if(this.gameStateService.isDiscoveryEnabled()){
+		this.gameContentService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
+		if(this.gameContentService.isContentActive('expansionDiscovery')){
 			this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
 			this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 		}
@@ -120,16 +124,16 @@ export class WebsocketHandler {
 		this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
 		this.gameStateService.setCurrentPhase(content.currentPhase, isReconnect)
-		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
-		if(this.gameStateService.isDiscoveryEnabled()){
+		this.gameContentService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
+		if(this.gameContentService.isContentActive('expansionDiscovery')){
 			this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
 			this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 		}
 	}
 
 	private handleMessageConnection(content: WsGameState): void {
-		this.gameStateService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
-		if(this.gameStateService.isDiscoveryEnabled()){
+		this.gameContentService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
+		if(this.gameContentService.isContentActive('expansionDiscovery')){
 			this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
 			this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 		}

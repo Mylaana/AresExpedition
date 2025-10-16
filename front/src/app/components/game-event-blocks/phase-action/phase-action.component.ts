@@ -13,7 +13,8 @@ import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-back
 import { GameOption } from '../../../services/core-game/create-game.service';
 import { CommonModule } from '@angular/common';
 import { ActionPhaseService } from '../../../services/core-game/action-phase.service';
-import { StandardProjectButtonNames } from '../../../types/global.type';
+import { GameContentName, StandardProjectButtonNames } from '../../../types/global.type';
+import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
 
 @Component({
     selector: 'app-phase-action',
@@ -37,8 +38,10 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 	_buyInfrastructure!: NonEventButton
 	_buyOcean!: NonEventButton
 	_buyUpgrade!: NonEventButton
+	_buyHabitat!: NonEventButton
+	_buyMine!: NonEventButton
 
-	_gameOptions!: GameOption
+	//_gameOptions!: GameOption
 
 
 	private _actionEvent!: EventCardActivator
@@ -46,7 +49,8 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 
 	constructor(
 		private gameStateService: GameState,
-		private actionPhaseService: ActionPhaseService
+		private actionPhaseService: ActionPhaseService,
+		private gameContentService: GameActiveContentService
 	){}
 
 	ngOnInit(): void {
@@ -58,8 +62,9 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 		this._buyInfrastructure = this.actionPhaseService.getButton('buyInfrastructure')
 		this._buyOcean = this.actionPhaseService.getButton('buyOcean')
 		this._buyUpgrade = this.actionPhaseService.getButton('buyUpgrade')
+		this._buyHabitat = this.actionPhaseService.getButton('buyHabitat')
+		this._buyMine = this.actionPhaseService.getButton('buyMine')
 
-		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(options => this._gameOptions = options)
 		this._actionEvent = this.event as EventCardActivator
 		this.applyPhaseCardBonusIfRelevant()
 	}
@@ -78,12 +83,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}){
 		this.projectActivated.emit(input)
 	}
-	public isStandardPhaseUpgradeOptionActive(): boolean {
-		if(!this._gameOptions){return false}
-		return this._gameOptions.standardUpgrade && this._gameOptions.discovery
-	}
-	public isFoundationsActive(): boolean {
-		if(!this._gameOptions){return false}
-		return this._gameOptions.foundations
+	public isContentActive(name: GameContentName): boolean {
+		return this.gameContentService.isContentActive(name)
 	}
 }

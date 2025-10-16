@@ -9,6 +9,7 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayerNameComponent } from '../../player-info/player-name/player-name.component';
 import { PlayerInfoStateModel } from '../../../models/player-info/player-state-info.model';
+import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
 
 @Component({
     selector: 'app-waiting-ready',
@@ -30,11 +31,14 @@ export class WaitingReadyComponent implements OnInit{
 	_groupPlayerReady: PlayerReadyModel[] = []
 	_groupInfo!: PlayerInfoStateModel[]
 
-	constructor(private gameStateService: GameState){}
+	constructor(
+		private gameStateService: GameState,
+		private gameContentService: GameActiveContentService
+	){}
 
 	ngOnInit(): void {
 		this.setGroupInfo(this.gameStateService.getGroupState())
-		this.maxCorporations = this.gameStateService.getGameOptions().merger?2:1
+		this.maxCorporations = this.gameContentService.isContentActive('modeMerger')?2:1
 		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe(ready => this.onGroupReadyUpdate(ready))
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateWaitingCorporationList(state))
 	}

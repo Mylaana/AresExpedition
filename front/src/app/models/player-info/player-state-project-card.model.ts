@@ -26,7 +26,9 @@ export class PlayerProjectCardStateModel {
 	private prerequisiteOffset: Map<GlobalParameterNameEnum, number> = new Map
 
 
-    constructor(private injector: Injector, dto: PlayerProjectCardStateDTO,
+    constructor(
+		private injector: Injector, 
+		dto: PlayerProjectCardStateDTO,
 	){
 		this.cardInfoService = this.injector.get(ProjectCardInfoService)
 

@@ -4,10 +4,11 @@ import { NonEventButton, ToggleButton } from '../../../models/core-game/button.m
 import { CreateGameOptionService, GameOption } from '../../../services/core-game/create-game.service';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CreateGameOptionCardComponent } from '../create-game-option-card/create-game-option-card.component';
-import { AnyButton } from '../../../types/global.type';
+import { AnyButton, GameContentName, NonEventButtonNames, ToggleButtonNames } from '../../../types/global.type';
 import { GameTextService } from '../../../services/core-game/game-text.service';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { GameOptionKey, InterfaceTitleKey } from '../../../types/text.type';
+import { GAME_OPTIONS_TEMPLATE } from '../../../maps/const-maps';
 
 @Component({
   selector: 'app-create-game-options',
@@ -20,68 +21,47 @@ import { GameOptionKey, InterfaceTitleKey } from '../../../types/text.type';
   styleUrl: './create-game-options.component.scss'
 })
 export class CreateGameOptionsComponent implements OnInit{
+	private buttons: Partial<Record<GameContentName, ToggleButton>> = {}
+	private contentNameList: GameContentName[] = []
+
 	_activateAll!: NonEventButton
 	_deactivateAll!: NonEventButton
-
-	_expansionDiscovery!: ToggleButton
-	_expansionFoundations!: ToggleButton
-	_expansionPromo!: ToggleButton
-	_expansionDevFanMade!: ToggleButton
-	_expansionBalancedCards!: ToggleButton
-
-	_modeInitialDraft!: ToggleButton
-	_modeInfrastructureMandatory!: ToggleButton
-	_modeMerger!: ToggleButton
-	_modeDeadHand!: ToggleButton
-	_modeStandardProjectPhaseUpgrade!: ToggleButton
-	_modeAdditionalAwards!: ToggleButton
 
 	constructor(
 		private createGameOptionService: CreateGameOptionService,
 		private gameTextService: GameTextService
 	){}
 	ngOnInit(): void {
+		for(let k in GAME_OPTIONS_TEMPLATE){
+			this.contentNameList.push(k as GameContentName)
+			this.buttons[k as GameContentName] = ButtonDesigner.createToggleButton(k as GameContentName)
+		}
+
 		this._activateAll = ButtonDesigner.createNonEventButton('createGameOptionActivateAll')
 		this._deactivateAll = ButtonDesigner.createNonEventButton('createGameOptionDeactivateAll')
-
-		this._expansionDiscovery = ButtonDesigner.createToggleButton('expansionDiscovery')
-		this._expansionFoundations = ButtonDesigner.createToggleButton('expansionFoundations')
-		this._expansionPromo = ButtonDesigner.createToggleButton('expansionPromo')
-		this._expansionDevFanMade = ButtonDesigner.createToggleButton('expansionDevFanMade')
-		this._expansionBalancedCards = ButtonDesigner.createToggleButton('expansionBalancedCards')
-
-		this._modeInitialDraft = ButtonDesigner.createToggleButton('modeInitialDraft')
-		this._modeInfrastructureMandatory = ButtonDesigner.createToggleButton('modeInfrastructureMandatory')
-		this._modeMerger = ButtonDesigner.createToggleButton('modeMerger')
-		this._modeStandardProjectPhaseUpgrade = ButtonDesigner.createToggleButton('modeStandardProjectPhaseUpgrade')
-		this._modeDeadHand = ButtonDesigner.createToggleButton('modeDeadHand')
-		this._modeAdditionalAwards = ButtonDesigner.createToggleButton('modeAdditionalAwards')
 
 		this.createGameOptionService.currentGameOptions.subscribe(options => this.updateButtonsState(options))
 	}
 	onClick(button: AnyButton){
 		this.createGameOptionService.toggleOption((button as ToggleButton).name)
 	}
-	updateButtonsState(options: GameOption){
-		this._expansionDiscovery.value = options.discovery
-		this._expansionFoundations.value = options.foundations
-		this._expansionPromo.value = options.promo
-		this._expansionDevFanMade.value = options.fanmade
-		this._expansionBalancedCards.value = options.balanced
+	updateButtonsState(options: Record<GameContentName, boolean>){
+		for(let n of this.contentNameList){
+			if(n in this.buttons && this.buttons[n]){
+				this.buttons[n].value = options[n]
+			}
+		}
 
-		this._modeInitialDraft.value = options.initialDraft
-		this._modeInitialDraft.locked = true
-		this._modeMerger.value = options.merger
-		this._modeDeadHand.value = options.deadHand
+		this.setButtonLocked('modeInitialDraft', true)
 
 		//bound sub-options
-		this._modeInfrastructureMandatory.value = options.infrastructureMandatory
-		this._modeInfrastructureMandatory.locked = options.foundations===false
-
-		this._modeStandardProjectPhaseUpgrade.value = options.standardUpgrade
-		this._modeStandardProjectPhaseUpgrade.locked = options.discovery===false
-		this._modeAdditionalAwards.value = options.additionalAwards
-		this._modeAdditionalAwards.locked = options.discovery===false
+		this.setButtonLocked('modeInfrastructureMandatory', options['expansionFoundations']===false)
+		this.setButtonLocked('modeStandardProjectPhaseUpgrade', options['expansionDiscovery']===false)
+		this.setButtonLocked('modeAdditionalAwards', options['expansionDiscovery']===false)
+	}
+	setButtonLocked(name: GameContentName, locked: boolean){
+		if(!(name in this.buttons) || !this.buttons[name]){return}
+		this.buttons[name].locked = locked
 	}
 	getCaption(key: GameOptionKey): string {
 		return this.gameTextService.getGameOptionCaption(key)
@@ -94,5 +74,8 @@ export class CreateGameOptionsComponent implements OnInit{
 	}
 	onAllOptionClick(button: NonEventButton){
 		this.createGameOptionService.toggleAllOptions(button===this._activateAll)
+	}
+	getToggleButton(name: GameContentName): ToggleButton {
+		return this.buttons[name] || new ToggleButton
 	}
 }

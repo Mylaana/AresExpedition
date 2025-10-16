@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { GlobalParameterCardComponent } from '../global-parameter-card/global-parameter-card.component';
 import { CommonModule } from '@angular/common';
 import { OceanCardComponent } from '../ocean-card/ocean-card.component';
@@ -9,7 +9,8 @@ import { GlobalParameter, OceanBonus } from '../../../interfaces/global.interfac
 import { Utils } from '../../../utils/utils';
 import { GlobalParameterNameEnum } from '../../../enum/global.enum';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GameOption } from '../../../services/core-game/create-game.service';
+import { GameContentName } from '../../../types/global.type';
+import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
 
 @Component({
     selector: 'app-global-parameter-pannel',
@@ -30,15 +31,20 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	_infrastructureState: GlobalParameter = {name:GlobalParameterNameEnum.infrastructure, step: 0, addEndOfPhase: 0}
 	_temperatureState: GlobalParameter = {name:GlobalParameterNameEnum.temperature, step: 0, addEndOfPhase: 0}
 	_oxygenState: GlobalParameter = {name:GlobalParameterNameEnum.oxygen, step: 0, addEndOfPhase: 0}
+	_moonState: GlobalParameter = {name:GlobalParameterNameEnum.moon, step: 0, addEndOfPhase: 0}
 
 	_oceanFlippedBonus: OceanBonus[] = []
 
-	private gameOptions!: GameOption
+	constructor(
+		private gameStateService: GameState,
+		private gameContentService: GameActiveContentService,
+		private el: ElementRef
+	){}
 
-	constructor(private gameStateService: GameState,){}
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onStateUpdate(state))
-		this.gameStateService.currentGameOptions.pipe(takeUntil(this.destroy$)).subscribe(options => this.gameOptions = options)
+		const host = this.el.nativeElement as HTMLElement;
+		host.style.setProperty('--parameter-count', this.getParameterHeight().toString());
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -51,12 +57,30 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 				case(GlobalParameterNameEnum.infrastructure):{this._infrastructureState = Utils.jsonCopy(state); break}
 				case(GlobalParameterNameEnum.oxygen):{this._oxygenState= Utils.jsonCopy(state); break}
 				case(GlobalParameterNameEnum.temperature):{this._temperatureState = Utils.jsonCopy(state); break}
+				case(GlobalParameterNameEnum.moon):{this._moonState = Utils.jsonCopy(state); break}
 			}
 		}
 		this._oceanFlippedBonus = clientState.getOceanFlippedBonus()
 	}
-	isFoundationsActive(): boolean {
-		if(!this.gameOptions){return false}
-		return this.gameOptions.foundations
+	isContentActive(content: GameContentName): boolean {
+		return this.gameContentService.isContentActive(content)
+	}
+	private getParameterHeight(): number {
+		let count = 2
+		count += this.isContentActive('expansionFoundations')? 1:0
+		count += this.isContentActive('expansionMoon')? 1:0
+
+		switch(count){
+			case(2):{
+				return .35
+			}
+			case(3):{
+				return .25
+			}
+			case(4):{
+				return .19
+			}
+		}
+		return .18
 	}
 }

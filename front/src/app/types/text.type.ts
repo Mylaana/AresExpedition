@@ -6,6 +6,7 @@ export type GameOptionKey = 'discovery' |  'standardProjectUpgrade' | 'additiona
 | 'foundations' | 'infrastructureMandatory'
 | 'promoCards' | 'fanmadeCards' | 'balancedCards'
 | 'initialDraft' | 'merger' | 'deadHand'
+| 'moon' | 'moonMandatory'
 export type InterfaceTitleKey = 'createGame' | 'createGamePlayers' | 'createGameOptions' | 'createGamePlayerNumber' | 'createGameAdditionalContent' | 'createGameAdditionalCards' | 'createGameGameMode'
 | 'cardOverviewTitle'
 | 'newGameLinkPlayerLaunchSite' | 'newGameLinkTitle' | 'newGameLinkGameOptions'

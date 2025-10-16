@@ -15,6 +15,6 @@ export class TagCardComponent implements OnInit{
 	imageUrl!: string;
 
 	ngOnInit(): void {
-		this.imageUrl = GlobalInfo.getUrlFromID(this.tagState.idImageUrl)
+		this.imageUrl = GlobalInfo.getUrlFromID(this.tagState.id)
 }
 }

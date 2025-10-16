@@ -1,6 +1,7 @@
 <div class="wrapper-main"
 	[class.current]="isCurrentUpgrade()"
-	[class.upgradable]="isUpgradeable()">
+	[class.upgradable]="isUpgradeable()"
+	[class.display-only]="isDisplayOnly">
 	<div [ngClass]="['wrapper-phase-card', cardSize]">
 		<div [ngClass]="['wrapper-title', cardSize]">
 			<h1 [ngClass]="['title', cardSize]">{{phaseCard.title}}</h1>
@@ -22,7 +23,7 @@
 	</div>
 
 	<div [ngClass]="['wrapper-upgrade', 'ares-border', 'ares-background', cardSize]"
-		*ngIf="!isCurrentUpgrade()"
+		*ngIf="!isCurrentUpgrade() && upgradeFinished!=undefined"
 		[class.upgradable]="isUpgradeable()===false">
 		<div class="wrapper-button"
 			*ngIf="isUpgradeable()">

@@ -6,12 +6,15 @@
 	<div class="wrapper-option category">
 		<h4>{{getTitle('createGameAdditionalContent')}}</h4>
 		<div class="wrapper-option-inner">
-			<app-create-game-option-card [caption]="getCaption('discovery')" [tooltip]="getTooltip('discovery')" [button]="_expansionDiscovery" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<app-create-game-option-card [caption]="getCaption('standardProjectUpgrade')" [tooltip]="getTooltip('standardProjectUpgrade')" [isSubCat]="true"  [button]="_modeStandardProjectPhaseUpgrade" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<app-create-game-option-card [caption]="getCaption('additionalAwards')" [tooltip]="getTooltip('additionalAwards')" [isSubCat]="true" [button]="_modeAdditionalAwards" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('discovery')" [tooltip]="getTooltip('discovery')" [button]="getToggleButton('expansionDiscovery')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('standardProjectUpgrade')" [tooltip]="getTooltip('standardProjectUpgrade')" [isSubCat]="true"  [button]="getToggleButton('modeStandardProjectPhaseUpgrade')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('additionalAwards')" [tooltip]="getTooltip('additionalAwards')" [isSubCat]="true" [button]="getToggleButton('modeAdditionalAwards')" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<div class="divider"></div>
-			<app-create-game-option-card [caption]="getCaption('foundations')" [tooltip]="getTooltip('foundations')" [button]="_expansionFoundations" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<app-create-game-option-card [caption]="getCaption('infrastructureMandatory')" [tooltip]="getTooltip('infrastructureMandatory')" [isSubCat]="true" [button]="_modeInfrastructureMandatory" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('foundations')" [tooltip]="getTooltip('foundations')" [button]="getToggleButton('expansionFoundations')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('infrastructureMandatory')" [tooltip]="getTooltip('infrastructureMandatory')" [isSubCat]="true" [button]="getToggleButton('modeInfrastructureMandatory')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<div class="divider"></div>
+			<app-create-game-option-card [caption]="getCaption('moon')" [tooltip]="getTooltip('moon')" [button]="getToggleButton('expansionMoon')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('moonMandatory')" [tooltip]="getTooltip('moonMandatory')" [isSubCat]="true" [button]="getToggleButton('modeMoonMandatory')" (buttonClick)="onClick($event)"></app-create-game-option-card>
 
 			<div class="wrapper-option-inner"></div>
 		</div>
@@ -19,9 +22,9 @@
 	<div class="wrapper-option category">
 		<h4>{{getTitle('createGameAdditionalCards')}}</h4>
 		<div class="wrapper-option-inner">
-			<app-create-game-option-card [caption]="getCaption('promoCards')" [tooltip]="getTooltip('promoCards')" [button]="_expansionPromo" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<app-create-game-option-card [caption]="getCaption('fanmadeCards')" [tooltip]="getTooltip('fanmadeCards')" [button]="_expansionDevFanMade" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<app-create-game-option-card [caption]="getCaption('balancedCards')" [tooltip]="getTooltip('balancedCards')" [button]="_expansionBalancedCards" [goToPage]="'cardOverviewBalanced'" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('promoCards')" [tooltip]="getTooltip('promoCards')" [button]="getToggleButton('expansionPromo')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('fanmadeCards')" [tooltip]="getTooltip('fanmadeCards')" [button]="getToggleButton('expansionDevFanMade')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('balancedCards')" [tooltip]="getTooltip('balancedCards')" [button]="getToggleButton('expansionBalancedCards')" [goToPage]="'cardOverviewBalanced'" (buttonClick)="onClick($event)"></app-create-game-option-card>
 			<div class="wrapper-option-inner">
 			</div>
 		</div>
@@ -30,9 +33,9 @@
 	<div class="wrapper-option category">
 		<h4>{{getTitle('createGameGameMode')}}</h4>
 		<div class="wrapper-option-inner">
-			<app-create-game-option-card [caption]="getCaption('initialDraft')" [tooltip]="getTooltip('initialDraft')" [button]="_modeInitialDraft" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<app-create-game-option-card [caption]="getCaption('merger')" [tooltip]="getTooltip('merger')" [button]="_modeMerger" (buttonClick)="onClick($event)"></app-create-game-option-card>
-			<app-create-game-option-card [caption]="getCaption('deadHand')" [tooltip]="getTooltip('deadHand')" [button]="_modeDeadHand" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('initialDraft')" [tooltip]="getTooltip('initialDraft')" [button]="getToggleButton('modeInitialDraft')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('merger')" [tooltip]="getTooltip('merger')" [button]="getToggleButton('modeMerger')" (buttonClick)="onClick($event)"></app-create-game-option-card>
+			<app-create-game-option-card [caption]="getCaption('deadHand')" [tooltip]="getTooltip('deadHand')" [button]="getToggleButton('modeDeadHand')" (buttonClick)="onClick($event)"></app-create-game-option-card>
 		</div>
 	</div>
 </div>

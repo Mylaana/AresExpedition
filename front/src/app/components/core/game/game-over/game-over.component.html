@@ -9,8 +9,8 @@
 		<img src="/assets/other/round.png" alt="">
 		<p>{{_round}}</p>
 	</div>
-	<div *ngIf="isDiscoveryEnabled()"	class="wrapper-milestone-awards ares-navigation-pannel pannel">
-		<app-milestone-and-award *ngIf="_discoveryEnabled"></app-milestone-and-award>
+	<div *ngIf="isContentActive('expansionDiscovery')"	class="wrapper-milestone-awards ares-navigation-pannel pannel">
+		<app-milestone-and-award></app-milestone-and-award>
 	</div>
 	<div class="wrapper-parameter ares-navigation-pannel pannel">
 		<app-global-parameter-contribution-pannel [groupState]="groupState"></app-global-parameter-contribution-pannel>

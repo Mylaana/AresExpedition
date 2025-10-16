@@ -28,7 +28,10 @@ export interface PlayerScoreStateDTO {
 	v: number,
 	tr: number,
 	f: number,
-	a: number
+	a: number,
+	mh: number,
+	mr: number,
+	mm: number
 }
 export interface PlayerTagStateDTO {
 	t: TagInfo[]
