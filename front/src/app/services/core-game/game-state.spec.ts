@@ -8,6 +8,7 @@ import { GameParamService } from './game-param.service'
 import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.service'
 import { EventStateService } from '../../factory/event-state-service.service'
 import { of } from 'rxjs'
+import { GameActiveContentService } from './game-active-content.service'
 
 
 class MockRxStompService {
@@ -28,6 +29,7 @@ describe('Services - Core game - Game state', () => {
 		let gameParam: GameParamService
 		let eventStateService: EventStateService
 		let scalingVp: ProjectCardScalingVPService
+		let gameModeContentService: GameActiveContentService
 
 		beforeAll(() => {
 			TestBed.configureTestingModule({
@@ -36,7 +38,8 @@ describe('Services - Core game - Game state', () => {
 					PhaseCardInfoService,
 					{ provide: RxStompService, useClass: MockRxStompService },
 					EventStateService,
-					ProjectCardScalingVPService
+					ProjectCardScalingVPService,
+					GameActiveContentService
 				]
 			})
 
@@ -47,13 +50,15 @@ describe('Services - Core game - Game state', () => {
 			gameParam = injector.get(GameParamService)
 			eventStateService = injector.get(EventStateService)
 			scalingVp = injector.get(ProjectCardScalingVPService)
+			gameModeContentService = injector.get(GameActiveContentService)
 
 			gameState = new GameState(
 				projectCardService,
 				rxStompService,
 				gameParam,
 				eventStateService,
-				injector
+				gameModeContentService,
+				injector,
 			)
 		})
         it('should evaluate getClientState', () => {

@@ -115,8 +115,8 @@ export class GameState{
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private eventStateService: EventStateService,
-		private injector: Injector,
-		private gameModeContentService: GameActiveContentService
+		private gameModeContentService: GameActiveContentService,
+		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
 	}
