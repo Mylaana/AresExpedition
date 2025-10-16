@@ -7309,7 +7309,7 @@
         },
         "effectText": {
             "en": "When you play a $tag_building$, you pay 2 MC less for it.",
-            "fr": "Lorsque vous jouez une $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC. "
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC. "
         },
         "playedText": {
             "en": "Upgrade a Phase card.",
@@ -10512,7 +10512,7 @@
             "en": "Increase Moon structures by 1.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10601,7 +10601,7 @@
             "en": "Increase Moon structures by 1.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10630,7 +10630,7 @@
             "en": "Gain a $other_habitattile$.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10681,7 +10681,7 @@
             "en": "During the production phase, this card produces 1 MC per $tag_moon$ you have, including this one.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10706,7 +10706,7 @@
             "en": "During the production phase, this card produces 2 heat.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10739,7 +10739,7 @@
             "en": "$other_minetile$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10780,7 +10780,7 @@
             "en": "$other_minetile$$other_minetile$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -10808,7 +10808,7 @@
             "en": "Increase Moon structures by 1.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -10847,7 +10847,7 @@
             "en": "3$tag_moon$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -10880,7 +10880,7 @@
             "en": "Increase Moon structures by 1.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -10980,7 +10980,7 @@
             "en": "Gain a $other_minetile$.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11011,7 +11011,7 @@
             "en": "Gain a $other_minetile$.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11051,7 +11051,7 @@
             "en": "3$tag_science$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11088,7 +11088,7 @@
             "en": "1$tag_moon$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11115,7 +11115,7 @@
             "en": "During the production phase, this card produces 1 heat per $tag_moon$ you have, including this one.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11143,7 +11143,7 @@
             "en": "Increase Moon structures by 1.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11235,7 +11235,7 @@
             "en": "During the production phase, this card produces 1MC per $other_habitattile$ you have.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11278,7 +11278,7 @@
             "en": "4$tag_space$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -11308,7 +11308,7 @@
             "en": "During the production phase, draw 1 card per $tag_moon$$tag_moon$$tag_moon$ you have, including this one.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -11344,7 +11344,7 @@
             "en": "-$other_tr$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11372,7 +11372,7 @@
             "en": "Gain a $other_habitattile$.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11398,7 +11398,7 @@
             "en": "During the production phase, this card produces 1 $ressource_plant$ per $other_habitattile$ you have.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11440,7 +11440,7 @@
             "en": "Increase Moon structures by 1.$skipline$Draw a card.$skipline$If you have 3 $other_habitattile$ or more, gain 10MC.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11459,7 +11459,7 @@
             "en": "Gain $ressource_heat$$ressource_heat$ per $other_minetile$ you have.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11487,7 +11487,7 @@
             "en": "$other_minetile$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11507,7 +11507,7 @@
             "en": "Increase Moon structures by 2.$skipline$Draw a card.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11553,7 +11553,7 @@
             "fr": ""
         },
         "effectSummaryOption": "scalingCostActivation",
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11586,7 +11586,7 @@
         "stockable": [
             "science"
         ],
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -11611,7 +11611,7 @@
             "en": "ACTION: lose 1 $other_tr$ to gain $ressource_megacreditvoid_5$.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "-$other_tr$$ressource_megacreditvoid_8$",
             "fr": ""
@@ -11645,7 +11645,7 @@
             "en": "ACTION: gain 1 $other_tr$.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "$other_tr$",
             "fr": ""
@@ -11787,7 +11787,7 @@
             "fr": ""
         },
         "effectSummaryOption": "scalingCostActivation",
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11820,7 +11820,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -11862,7 +11862,7 @@
         "stockable": [
             "animal"
         ],
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -11924,7 +11924,7 @@
             "en": "Draw two cards.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -12017,7 +12017,7 @@
             "en": "$other_minetile$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -12051,7 +12051,7 @@
             "en": "$tag_science$$tag_science$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -12089,7 +12089,7 @@
             "en": "$tag_jovian$$tag_moon$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -12119,7 +12119,7 @@
             "fr": ""
         },
         "startingMegacredits": 40,
-        "status": "implemented",
+        "status": "blocked",
         "vpScaling": "1"
     },
     {
@@ -12172,7 +12172,7 @@
             "fr": ""
         },
         "startingMegacredits": 30,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -12205,7 +12205,7 @@
             "fr": ""
         },
         "startingMegacredits": 30,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     }
 ]
