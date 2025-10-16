@@ -417,12 +417,21 @@ const S = EventFactory.simple
 //ON MOON TILE GAIN
 	//Luna Mining Federation
 	function handleTrigger_MC2(trigger: string, input: TriggerInput, clientstate?: PlayerStateModel): EventBaseModel[]{
-		let mines = input.moonTiles.filter(tiles => tiles.name==='mine')
-		if(mines.length===0){return []}
-		let quantity = mines[0].quantity
+		let tile = input.moonTiles.filter(tiles => tiles.name==='mine')
+		if(tile.length===0){return []}
+		let quantity = tile[0].quantity
 		return [
 			EventFactory.simple.addTR(quantity),
 			EventFactory.simple.addProduction({name: 'titanium', valueStock: quantity})
+		]
+	}
+	//Grand Luna Capital Group
+	function handleTrigger_MC4(trigger: string, input: TriggerInput, clientstate?: PlayerStateModel): EventBaseModel[]{
+		let tile = input.moonTiles.filter(tiles => tiles.name==='habitat')
+		if(tile.length===0){return []}
+		let quantity = tile[0].quantity
+		return [
+			EventFactory.simple.draw(quantity),
 		]
 	}
 
@@ -501,7 +510,8 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'CF2': handleTrigger_CF2,
 	},
 	ON_MOON_TILE_GAINED: {
-		'MC2': handleTrigger_MC2
+		'MC2': handleTrigger_MC2,
+		'MC4': handleTrigger_MC4
 	}
 };
 

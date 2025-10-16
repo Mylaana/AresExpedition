@@ -40,6 +40,7 @@ export class TagGainListComponent implements OnInit{
 	ngOnInit(): void {
 		let index = 0
 		this.tagListFromActiveContent = this.gameContentService.getTagListFromActiveContent()
+		console.log(this.tagListFromActiveContent)
 		this._authorizedTagList = this.getAuthorizedTagList()
 		for(let tag of this._authorizedTagList){
 			this.buttons.push(ButtonDesigner.createNonEventButton('tagGain', `$tag_${tag}$`))

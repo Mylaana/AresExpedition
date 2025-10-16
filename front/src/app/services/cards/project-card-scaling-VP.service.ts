@@ -41,11 +41,20 @@ export class ProjectCardScalingVPService {
 		"FM27": (card) => card.getStockValue('science'), //Jovian Lanterns
 		"M11": (_, state) => state.getMine(), //Luna Mining Hub
 		"M13": (_, state) => state.getTagsOfType('moon'), //Luna Senate
-		"M14": (_, state) => state.getRoad(), //Luna Train Station
+		"M14": (_, state) => state.getHabitat(), //Luna Train Station
 		"M27": (_, state) => state.getHabitat(), //Luna Ecumenapolis
 		"M28": (_, state) => Math.floor(state.getTagsOfType('moon') /2), //Grand Luna academy
+		"M81": (card) => card.getStockValue('science'), //Moon Minerals Tradecenter
+		"M84": (_, state) => state.getTagsOfType('moon'), //Copernicus Tower
+		"M85": (card) => Math.floor(card.getStockValue('microbe') / 2), //Darkside Incubation Plant
+		"M87": (card) => card.getStockValue('science'), //Luna Archives
+		"M89": (card) => Math.floor(card.getStockValue('microbe') / 3), //Rust Eating Bacteria
+		"M90": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets Acclimatization
+		"M91": (_, state) => Math.floor(state.getMine() /2), //3d printing mine facility
+		"M124": (_, state) => state.getTagsOfType('jovian')+state.getTagsOfType('moon'), //Jupiter Embassy
 
-		"MC1": (_, state) => Math.floor(state.getTagsOfType('moon') / 2) //Crescent research association
+		"MC1": (_, state) => Math.floor(state.getTagsOfType('moon') / 2), //Crescent research association
+		"MC4": (_, state) => state.getHabitat() //Grand Luna Capital Group
 	};
 
 	updateCardScalingVPList(clientState: PlayerStateModel) {

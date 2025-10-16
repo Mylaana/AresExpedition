@@ -201,8 +201,6 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'M11': (s)=> Checker.isMoonTileOk('mine', 2, 'min', s),
 	//Luna Senate
 	'M13': (s)=> Checker.isTagOk('moon', 3, 'min', s),
-	//Luna Train Station
-	'M14': (s)=> Checker.isMoonTileOk('road', 2, 'min', s),
 	//Lunar industry complex
 	'M15': (s)=> Checker.isProductionOk('titanium', 2, 'min', s),
 	//Mare Serenitatis Mine
@@ -219,9 +217,18 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 
 	//Lunar Mine Urbanization
 	'M63': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
-
+	//Luna Archives
+	'M87': (s)=> Checker.isTagOk('science', 3, 'min', s),
+	//Pets Acclimatization
+	'M90': (s)=> Checker.isMoonTileOk('habitat', 3, 'min', s),
 	//Moon Tether
-	'M80': (s)=> Checker.isTagOk('space', 4, 'min', s),
+	'M120': (s)=> Checker.isTagOk('space', 4, 'min', s),
+	//Mooncrate Block Factory
+	'M122': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
+	//Luna Archives
+	'M123': (s)=> Checker.isTagOk('science', 2, 'min', s),
+	//Jupiter Embassy
+	'M124': (s)=> Checker.isTagOk('jovian', 1, 'min', s) && Checker.isTagOk('moon', 1, 'min', s),
 }
 export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => EventBaseModel[]> = {
 	//Adaptation Technology
@@ -1437,10 +1444,24 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addMine(2),
 		S.draw(2)
 	],
+	//Colonist Shuttle
+	'M61': (state) => {
+		let result = [
+			S.increaseMoonParameter(),
+			S.draw(1)
+		]
+		if(state.getHabitat()>=3){result.push(S.addRessource({name:'megacredit', valueStock:10}))}
+		return result
+	},
+	//He3 Production Quotas
+	'M62': (state) => {
+		let heat = state.getMine()*2
+		if(heat===0){return []}
+		return [S.addRessource({name:'heat', valueStock:heat})]
+	},
 	//Lunar Mine Urbanization
 	'M63': () => [
 		S.addHabitat(1),
-		S.increaseMoonParameter(),
 	],
 	//Preliminary Darkside
 	'M64': () => [
@@ -1452,9 +1473,21 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.increaseMoonParameter(3),
 		S.draw(2)
 	],
+	//Moon Minerals Tradecenter
+	'M92': () => [
+		S.draw(2)
+	],
+	//Moon Minerals Tradecenter
+	'M123': () => [
+		S.increaseResearchScanKeep({scan:3, keep:0})
+	],
 	//Luna Mining Federation
 	'MC2': () => [
 		S.addMine(2),
+	],
+	//Grand Luna Capital Group
+	'MC4': () => [
+		S.addHabitat(1),
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
@@ -1494,9 +1527,13 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 	'FM14': (card) => card.hasTag('jovian')? 5 : 0,
 
 	//Moon Tether
-	'M80': () => 2,
+	'M120': () => 2,
+	//Jupiter Embassy
+	'M124': (card) => card.hasTag('jovian')||card.hasTag('moon')? 2 : 0,
 	//Earth Embassy
 	/*
+
+
 	'M81': (card) => {
 		console.log(card.hasTag('moon'), state.getTagsOfType('earth') )
 		return state.getTagsOfType('earth')??0
@@ -1571,17 +1608,23 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'M8': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
 	//Luna Senate
 	'M13': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
+	//Luna Train Station
+	'M14': (s)=> [{name:'megacredit', valueStock:s.getMine()}],
 	//Orbital Power Grid
 	'M22': (s)=> [{name:'heat', valueStock:s.getTagsOfType('moon')}],
 	//Undermoon Drug Lords Network
 	'M26': (s)=> [{name:'megacredit', valueStock:s.getHabitat()}],
 	//Luna Ecumenapolis
-	'M27': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
+	'M27': (s)=> [{name:'megacredit', valueStock:s.getHabitat()}],
 	//Grand Luna Academy
 	'M28': (s)=> [{name:'card', valueStock: Math.floor(s.getTagsOfType('moon') / 3)}],
+	//Habitats Greenification
+	'M31': (s)=> [{name:'plant', valueStock:s.getHabitat()}],
 
 	//Crescent Research Association
 	'MC1': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
+	//Luna first
+	'MC3': (s)=> [{name:'megacredit', valueStock:(s.getGlobalParameterFromName(GlobalParameterNameEnum.moon)?.step??0)-1}],
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms

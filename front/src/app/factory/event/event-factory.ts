@@ -105,7 +105,7 @@ function deactivateTrigger(triggerId: string): EventBaseModel {
 function addProduction(gain: RessourceStock | RessourceStock[]): EventBaseModel {
 	return EventFactory.createGeneric('addProduction', {baseRessource:gain})
 }
-function addTR(quantity: number): EventBaseModel {
+function addTR(quantity: number=1): EventBaseModel {
 	return EventFactory.createGeneric('addTr', {increaseTr: quantity})
 }
 function addForestAndOxygen(quantity: number): EventBaseModel {
