@@ -48,6 +48,12 @@ export class CreateGameOptionService {
 				}
 				break
 			}
+			case('expansionMoon'):{
+				if(newOption[option]===false){
+					newOption['modeMoonMandatory'] = false
+				}
+				break
+			}
 		}
 		this.gameOptions.next(newOption)
 	}
