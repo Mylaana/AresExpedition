@@ -74,7 +74,7 @@ export class ActionPhaseService{
         this.updateMainButtonStatus()
     }
     private updateCost() {
-        if(!this.clientState || !this.actionEvent){return }
+		if(!this.clientState || !this.actionEvent){return }
         for(let s of this.standardProjectsList){
             if(!this.standardProjectStates[s]){continue}
             switch(s){
@@ -105,10 +105,19 @@ export class ActionPhaseService{
             return
         }
         this.actionEvent = currentEvent as EventCardActivator
-        this.updateStandardProjectMustBePaid()
+		this.updateCost()
+		this.updateButtonsCaption()
+		this.updateStandardProjectMustBePaid()
         this.updateButtonsStatus()
         this.updateMainButtonStatus()
     }
+	private updateCostCaption(){
+		if(!this.standardProjectStates){return}
+		for (let s of this.standardProjectsList){
+			if(!this.standardProjectStates[s]){continue}
+            this.standardProjectStates[s].caption =  PlayableCard.activable.getScalingCostActivationCaption(s, this.clientState)
+		}
+	}
     private onClientStateUpdate(state: PlayerStateModel){
         this.clientState = state
         let stockChanged = 0
@@ -118,9 +127,9 @@ export class ActionPhaseService{
         }
 
         this.updateCost()
-
-        if(stockChanged===0){return}
+		this.updateCostCaption()
         this.updateButtonsCaption()
+        if(stockChanged===0){return}
 
         if(!this.actionEvent){return}
         this.updateStandardProjectMustBePaid()
