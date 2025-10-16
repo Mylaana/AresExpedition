@@ -52,6 +52,7 @@ export class PlayerStateModel {
 			this.eventState = new PlayerEventStateModel(dto.eventState)
 			this.otherState = new PlayerOtherStateModel(dto.otherState)
 			this.statState = new PlayerStatStateModel(dto.statState)
+			this.setScalingProduction()
 		} else {
 			this.infoState = PlayerInfoStateModel.empty()
 			this.scoreState = PlayerScoreStateModel.empty()
@@ -208,6 +209,8 @@ export class PlayerStateModel {
 		this.globalParameterState.addGlobalParameterStepEOP(parameter)
 		if(this.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){return}
 		this.statState.increaseParameter(parameter.name, parameter.steps)
+		console.log('call scaling prod')
+		this.setScalingProduction()
 	}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
 	getGlobalParameterFromName(parameterName: GlobalParameterNameEnum): GlobalParameter | undefined {

@@ -1624,7 +1624,11 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	//Crescent Research Association
 	'MC1': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
 	//Luna first
-	'MC3': (s)=> [{name:'megacredit', valueStock:(s.getGlobalParameterFromName(GlobalParameterNameEnum.moon)?.step??0)-1}],
+	'MC3': (s)=> {
+		let param = s.getGlobalParameterFromName(GlobalParameterNameEnum.moon)
+		let scale = param? param.step + param.addEndOfPhase -1: 0
+		return [{name:'megacredit', valueStock:scale}]
+	},
 }
 export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
 	//Anaerobic Microorganisms
