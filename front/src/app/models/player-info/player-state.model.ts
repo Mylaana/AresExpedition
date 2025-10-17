@@ -17,7 +17,6 @@ import { PlayerProjectCardStateModel } from "./player-state-project-card.model";
 import { PlayerEventStateModel } from "./player-state-event";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum, MilestonesEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
-import { ProjectCardScalingVPService } from "../../services/cards/project-card-scaling-VP.service";
 import { Utils } from "../../utils/utils";
 import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
 import { PlayerStatStateModel } from "./player-state-stat";
@@ -34,8 +33,6 @@ export class PlayerStateModel {
 	private eventState: PlayerEventStateModel
 	private statState: PlayerStatStateModel
 	private otherState: PlayerOtherStateModel
-
-	private scalingVp!: ProjectCardScalingVPService
 
 	constructor(
 		private injector: Injector,
@@ -65,10 +62,8 @@ export class PlayerStateModel {
 			this.otherState = PlayerOtherStateModel.empty()
 			this.statState = PlayerStatStateModel.empty()
 		}
-		this.scalingVp = injector.get(ProjectCardScalingVPService)
 		this.setScalingVp()
 	  }
-
 
 	//infostate
 	getId(): myUUID {return this.infoState.getId()}
@@ -89,11 +84,11 @@ export class PlayerStateModel {
 	getTotalVP(): number {return this.scoreState.getTotalVP()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}
 	setScalingVp(){
-		this.scalingVp.updateCardScalingVPList(this)
-		this.scoreState.setScalingVP(this.scalingVp.getTotalScalingVP())
+		this.scoreState.updateCardScalingVPList(this)
+		this.scoreState.setScalingVP(this.scoreState.getTotalScalingVP())
 	}
 	getCardScaledVp(cardCode: string): number {
-		return this.scalingVp.getCardScaledVp(cardCode)
+		return this.scoreState.getCardScaledVp(cardCode)
 	}
 	getTR(): number {return this.scoreState.getTR()}
 	addTR(tr: number){this.scoreState.addTR(tr)}

@@ -1,6 +1,9 @@
 import { MilestonesEnum } from "../../enum/global.enum"
+import { CardScalingVP } from "../../interfaces/card.interface"
 import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.interface"
+import { SCALING_VP } from "../../maps/playable-card-vp-maps"
 import { MoonTileType } from "../../types/global.type"
+import { PlayerStateModel } from "./player-state.model"
 
 export class PlayerScoreStateModel {
 	private vp: number = 0
@@ -12,6 +15,8 @@ export class PlayerScoreStateModel {
 	private habitat: number = 0
 	private road: number = 0
 	private mine: number = 0
+
+	private scaledVpList: CardScalingVP[]= []
 
 	constructor(data: PlayerScoreStateDTO){
 		this.vp = data.v
@@ -56,6 +61,27 @@ export class PlayerScoreStateModel {
 			case('mine'):{return this.getMine()}
 			case('road'):{return this.getRoad()}
 		}
+	}
+	updateCardScalingVPList(clientState: PlayerStateModel) {
+		const result: CardScalingVP[] = [];
+
+		for (const card of clientState.getProjectPlayedModelList()) {
+			const calculator = SCALING_VP[card.cardCode];
+			if (!calculator) continue;
+
+			const vp = calculator(card, clientState);
+			result.push({ cardCode: card.cardCode, vp });
+		}
+
+		this.scaledVpList = result
+	}
+	getCardScaledVp(cardCode: string): number {
+		let result = this.scaledVpList.filter((code) => code.cardCode===cardCode)
+		if(result.length>0){return result[0].vp}
+		return 0
+	}
+	getTotalScalingVP(): number {
+		return this.scaledVpList.reduce((sum, entry) => sum + entry.vp, 0);
 	}
 
 	toJson(): PlayerScoreStateDTO {

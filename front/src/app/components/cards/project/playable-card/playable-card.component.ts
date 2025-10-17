@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, inject, EventEmitter, OnDestroy, Simp
 import { CommonModule } from '@angular/common';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { CardBackgroundComponent } from '../card-blocks/card-background/card-background.component';
-import { ProjectCardService } from '../../../../services/cards/project-card.service';
+import { ProjectCardCostService } from '../../../../services/cards/project-card-cost.service';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
@@ -50,7 +50,7 @@ import { SettingCardSize } from '../../../../types/global.type';
     ],
     templateUrl: './playable-card.component.html',
     styleUrl: './playable-card.component.scss',
-    providers: [ProjectCardService],
+    providers: [ProjectCardCostService],
     animations: [expandCollapseVertical]
 })
 export class PlayableCardComponent extends BaseCardComponent implements OnInit, OnDestroy {
@@ -72,7 +72,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 
 	constructor(
 		private gameStateService: GameState,
-		private projectCardService: ProjectCardService
+		private projectCardCostService: ProjectCardCostService
 	){
 		super();
 	}
@@ -80,7 +80,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	override ngOnInit() {
 		super.ngOnInit()
 		this.projectCard.tagsUrl = []
-		this.projectCardService.initialize(this.projectCard)
+		this.projectCardCostService.initialize(this.projectCard)
 
 		this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
 		// fills tagUrl
@@ -112,17 +112,15 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 	resetCardState(): void {
 		if(this.megacreditAvailable===0){return}
-		//this.updateCost()
 		this.setBuildable()
 	}
 	updateDiscount(){
-		this.projectCardService.setBuilderDiscount(this.buildDiscount)
+		this.projectCardCostService.setBuilderDiscount(this.buildDiscount)
 		this.setBuildable()
 	}
 	private fillTagId(tagsId:number[]): number[] {
 		// ensures having 3 tags id in tagId
 		let newTagsId = this.projectCard.tagsId.slice();
-
 		let targetTagsNumber
 		switch(this.projectCard.cardType){
 			case('corporation'):{
@@ -133,7 +131,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 				targetTagsNumber = GAME_CARD_DEFAULT_TAG_NUMBER
 			}
 		}
-
 		for (let i = this.projectCard.tagsId.length; i < targetTagsNumber; i++) {
 		newTagsId.push(-1)
 		}
@@ -149,8 +146,8 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private updateClientState(state: PlayerStateModel): void {
 		if(!state){return}
 		this.clientState = state
-		this.projectCardService.setBuilderDiscount(this.buildDiscount)
-		this.projectCardService.onClientStateUpdate(state)
+		this.projectCardCostService.setBuilderDiscount(this.buildDiscount)
+		this.projectCardCostService.onClientStateUpdate(state)
 		if(this.parentListType==='played' && this.projectCard.scalingVp && this.projectCard.cardCode){
 			this.projectCard.vpNumber = this.clientState.getCardScaledVp(this.projectCard.cardCode).toString()
 		}
@@ -158,7 +155,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 	public setBuildable(): void {
 		if(this.parentListType != 'builderSelector'){return}
-		this.state.setBuildable(this.projectCardService.getCanBePlayed())
+		this.state.setBuildable(this.projectCardCostService.getCanBePlayed())
 	}
 	public onActivation(activation: {option: ActivationOption, twice: boolean}): void {
 		this.cardActivated.emit({card: this.projectCard, option: activation.option, twice: activation.twice})

@@ -1,13 +1,11 @@
 import { Injectable } from "@angular/core";
-import { CostMod } from "../../types/project-card.type";
 import { GAME_RESSOURCE_STEEL_BASE_REDUCTION, GAME_RESSOURCE_TITANIUM_BASE_REDUCTION } from "../../global/global-const";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { PlayableCard } from "../../factory/playable-card.factory";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { RessourceInfo } from "../../interfaces/global.interface";
 
 @Injectable()
-export class ProjectCardService {
+export class ProjectCardCostService {
 	private projectCard!: PlayableCardModel
 	private clientState!: PlayerStateModel
 
