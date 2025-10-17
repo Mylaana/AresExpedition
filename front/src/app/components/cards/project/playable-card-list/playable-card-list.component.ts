@@ -158,7 +158,9 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		if(this.projectCards===undefined){return}
 		for(let card of this.projectCards){
 			card.buildDiscount = this._buildDiscount
-			card.updateCost()
+			//card.updateCost()
+			card.updateDiscount()
+			//console.log('card discount updated:', card.buildDiscount)
 		}
 	}
 	public updateDiscount(event: EventCardBuilder): void {

@@ -257,7 +257,6 @@ export class CardBuilder {
     }
     getSelectedCard(): PlayableCardModel {return this.selectedCard as PlayableCardModel}
     removeSelectedCard(): void {
-		console.log('removed')
 		this.selectedCard = undefined
         this.updateButtonGroupState('cancelSelectCard')
 	}

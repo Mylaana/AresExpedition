@@ -55,10 +55,6 @@ export interface PlayableCardInterface {
 	//costMod?: number
 	tagsUrl?: string[]
 }
-export interface CardBuildable {
-	costOk: boolean
-	prerequisiteOk: boolean
-}
 
 export interface CardScalingVP {
 	cardCode: string,

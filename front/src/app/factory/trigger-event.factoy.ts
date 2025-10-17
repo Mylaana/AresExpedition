@@ -131,9 +131,9 @@ const S = EventFactory.simple
 		/*
 		let card = clientState?.getProjectPlayedModelFromId(trigger)
 		if(!card){return []}*/
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('microbe')))
 		return [S.addRessourceToCardId({name:'microbe', valueStock:triggerred}, trigger)]
 	}
 	//Decomposers
@@ -142,9 +142,9 @@ const S = EventFactory.simple
 		let result: EventBaseModel[] = []
 		let card = clientState?.getProjectPlayedModelFromId('19')
 		if(!card){return []}
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('microbe')))
 		for(let i=0; i<triggerred; i++){
 			if(card.getStockValue('microbe')<=0 && i===0){
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
@@ -158,8 +158,8 @@ const S = EventFactory.simple
 	function handleTrigger_24(trigger: string, input: TriggerInput): EventBaseModel[] {
 		let triggerred: number = 0
 		let result: EventBaseModel[] = []
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
 		for(let i=0; i<triggerred; i++){
 			result.push(S.addRessourceToCardId({name:'animal', valueStock:1}, trigger))
 		}
@@ -167,20 +167,20 @@ const S = EventFactory.simple
 	}
 	//Energy Subsidies
 	function handleTrigger_25(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('power','tag'))!=true){return []}
+		if(input.tagList.includes(Utils.toTagId('power'))!=true){return []}
 		return [S.draw(1)]
 	}
 	//Interplanetary Conference
 	function handleTrigger_37(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
-		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag')) || input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))){
+		if(input.tagList.includes(Utils.toTagId('jovian')) || input.tagList.includes(Utils.toTagId('earth'))){
 			return [S.draw(1)]
 		}
 		return []
 	}
 	//Mars University
 	function handleTrigger_40(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('science'))===false){return []}
 		let events: EventBaseModel[] = []
 		for(let t of input.tagList){
 			if(Utils.toTagType(t)==='science'){
@@ -191,17 +191,17 @@ const S = EventFactory.simple
 	}
 	//Olympus Conference
 	function handleTrigger_44(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('science'))===false){return []}
 		return [S.draw(1)]
 	}
 	//Optimal Aerobraking
 	function handleTrigger_45(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('event'))===false){return []}
 		return [S.addRessource([{name: 'plant', valueStock: 2},{name: 'heat', valueStock: 2}])]
 	}
 	//Recycled Detritus
 	function handleTrigger_48(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('event'))===false){return []}
 		return [S.draw(2)]
 	}
 	//Viral Enhancers
@@ -209,9 +209,9 @@ const S = EventFactory.simple
 		if(!clientState){return []}
 		let triggerred: number = 0
 		let result: EventBaseModel[] = []
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('microbe','tag')))
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('microbe')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
 		if(triggerred===0){return []}
 		if(clientState.getPlayedListWithStockableTypes(['animal', 'microbe']).length===0){
 			result.push(S.addRessource({name:'plant', valueStock:triggerred}))
@@ -225,22 +225,22 @@ const S = EventFactory.simple
 	}
 	//Apollo Industriees
 	function handleTrigger_D01(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('science','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('science'))===false){return []}
 		return [S.draw(1)]
 	}
 	//Sultira
 	function handleTrigger_D04(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('power','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('power'))===false){return []}
 		return [S.addRessource({name:'heat', valueStock:2})]
 	}
 	//Impact Analysis
 	function handleTrigger_D08(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('event'))===false){return []}
 		return [S.draw(1)]
 	}
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnTagGained(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('earth'))===false){return []}
 		return [S.addRessourceToCardId({name:'microbe', valueStock: 1}, trigger)]
 	}
 	//Saturn Systems
@@ -258,8 +258,8 @@ const S = EventFactory.simple
 	function handleTrigger_P12(trigger: string, input: TriggerInput): EventBaseModel[] {
 		let triggerred: number = 0
 		let result: EventBaseModel[] = []
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')))
-		triggerred += Number(input.tagList.includes(GlobalInfo.getIdFromType('animal','tag')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
+		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
 		if(triggerred>0){
 			result.push(S.addRessourceToCardId({name:'animal', valueStock:triggerred}, trigger))
 		}
@@ -267,18 +267,18 @@ const S = EventFactory.simple
 	}
 	//Point Luna
 	function handleTrigger_CF1(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('earth','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('earth'))===false){return []}
 		return [S.draw(1)]
 	}
 	//Recyclon
 	function handleTrigger_CF7(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('building','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('building'))===false){return []}
 		let triggerred: number = 0
 		let result: EventBaseModel[] = []
 		let card = clientState?.getProjectPlayedModelFromId(trigger)
 		if(!card){return []}
 		let stock = card.getStockValue('microbe')
-		triggerred += input.tagList.filter((el) => el===GlobalInfo.getIdFromType('building','tag')).length
+		triggerred += input.tagList.filter((el) => el===Utils.toTagId('building')).length
 		for(let i=0; i<triggerred; i++){
 			if(stock<=0){
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
@@ -293,19 +293,24 @@ const S = EventFactory.simple
 	}
 	//Solar Logistics
 	function handleTrigger_FM2(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('event','tag'))===false || input.tagList.includes(GlobalInfo.getIdFromType('space','tag'))===false){return []}
+		if(input.tagList.includes(Utils.toTagId('event'))===false || input.tagList.includes(Utils.toTagId('space'))===false){return []}
 		return [S.draw(2)]
 	}
 	//Meat Industry
 	function handleTrigger_FM4(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('plant','tag')) || input.tagList.includes(GlobalInfo.getIdFromType('animal','tag'))){
+		if(input.tagList.includes(Utils.toTagId('plant')) || input.tagList.includes(Utils.toTagId('animal'))){
 			return [S.draw(1)]
 		}
 		return []
 	}
 	//Space Relay
 	function handleTrigger_FM14(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(GlobalInfo.getIdFromType('jovian','tag'))===false ){return []}
+		if(input.tagList.includes(Utils.toTagId('jovian'))===false ){return []}
+		return [S.draw(1)]
+	}
+	//Earth Embassy
+	function handleTrigger_M121(trigger: string, input: TriggerInput): EventBaseModel[] {
+		if(input.tagList.includes(Utils.toTagId('moon'))===false ){return []}
 		return [S.draw(1)]
 	}
 
@@ -479,6 +484,7 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 		'FM2': handleTrigger_FM2,
 		'FM4': handleTrigger_FM4,
 		'FM14': handleTrigger_FM14,
+		'M121': handleTrigger_M121,
 	},
 	ON_RESSOURCE_ADDED_TO_CARD: {
 		'P04': handleTrigger_P04,
