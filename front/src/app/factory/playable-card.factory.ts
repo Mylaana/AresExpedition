@@ -62,15 +62,15 @@ const PlayableCardPrerequisite = {
 		return ALTERNATIVE_PAY_REQUIREMENTS[name]?.(clientState) ?? false
 	}
 }
-function calculateCostModFromTrigger(triggerCode: string, card?: PlayableCardModel): number {
+function calculateCostModFromTrigger(triggerCode: string, card: PlayableCardModel, clientState: PlayerStateModel): number {
 	if (!card) return 0
-	return COST_MOD[triggerCode]?.(card)??0
+	return COST_MOD[triggerCode]?.(card, clientState)??0
 }
 const CostModCalulator = {
-	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel): number {
+	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel, clientState: PlayerStateModel): number {
 		let totalMod = 0
 		for (const trigger of activeTriggers) {
-			totalMod += calculateCostModFromTrigger(trigger, projectCard)
+			totalMod += calculateCostModFromTrigger(trigger, projectCard, clientState)
 		}
 
 		return totalMod

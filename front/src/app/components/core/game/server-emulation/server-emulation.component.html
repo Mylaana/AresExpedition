@@ -17,7 +17,7 @@
     </div>
 	<div class="wrapper-tag-state">
 		<button (click)="resetTag()">resetTag</button>
-		<ng-container *ngFor="let id of [0,1,2,3,4,5,6,7,8,9,10]">
+		<ng-container *ngFor="let id of [0,1,2,3,4,5,6,7,8,9,10,11]">
 			<button (click)="addTag(id)">+{{getTagName(id)}}</button>
 		</ng-container>
     </div>
@@ -28,7 +28,7 @@
 		</ng-container>
     </div>
 	<div class="wrapper-parameter-state">
-		<ng-container *ngFor="let id of [0,1,2,3]">
+		<ng-container *ngFor="let id of [0,1,2,3,4]">
 			<button (click)="addParameter(id)">+{{getParameterName(id)}}</button>
 		</ng-container>
     </div>

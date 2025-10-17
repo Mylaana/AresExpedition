@@ -12,6 +12,7 @@ import { EventUnionSubTypes } from '../../../../types/event.type';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { Subject, takeUntil } from 'rxjs';
 import { SettingCardSize } from '../../../../types/global.type';
+import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
 
@@ -31,6 +32,7 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Input() listType: ProjectListType = 'none'
 	@Input() listSubType: ProjectListSubType = 'none'
 	@Input() selectedDiscount: number = 0
+	@Input() notClientState!: PlayerStateModel | undefined
 
 	//display related inputs
 	@Input() currentPhase!: NonSelectablePhaseEnum
@@ -158,7 +160,9 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		if(this.projectCards===undefined){return}
 		for(let card of this.projectCards){
 			card.buildDiscount = this._buildDiscount
-			card.updateCost()
+			//card.updateCost()
+			card.updateDiscount()
+			//console.log('card discount updated:', card.buildDiscount)
 		}
 	}
 	public updateDiscount(event: EventCardBuilder): void {

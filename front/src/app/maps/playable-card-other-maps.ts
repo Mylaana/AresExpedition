@@ -1490,7 +1490,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addHabitat(1),
 	],
 }
-export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
+export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: PlayerStateModel) => number> = {
 	//Earth Catapult
 	'23': () => 2,
 	//Energy Subsidies
@@ -1528,16 +1528,16 @@ export const COST_MOD: Record<string, (card: PlayableCardModel) => number> = {
 
 	//Moon Tether
 	'M120': () => 2,
+	//Earth Embassy
+	'M121': (card, state) => {
+		if(!card.hasTag('moon')){return 0}
+		return state.getTagsOfType('earth')
+	},
 	//Jupiter Embassy
 	'M124': (card) => card.hasTag('jovian')||card.hasTag('moon')? 2 : 0,
-	//Earth Embassy
-	/*
+	//Crescent Research Association
+	'MC1': (card, state) => card.hasTag('moon')? state.getTagsOfType('moon'): 0
 
-
-	'M81': (card) => {
-		console.log(card.hasTag('moon'), state.getTagsOfType('earth') )
-		return state.getTagsOfType('earth')??0
-		card.hasTag('moon')? state.getTagsOfType('earth') : 0}*/
 }
 export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},
@@ -1620,9 +1620,6 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'M28': (s)=> [{name:'card', valueStock: Math.floor(s.getTagsOfType('moon') / 3)}],
 	//Habitats Greenification
 	'M31': (s)=> [{name:'plant', valueStock:s.getHabitat()}],
-
-	//Crescent Research Association
-	'MC1': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
 	//Luna first
 	'MC3': (s)=> {
 		let param = s.getGlobalParameterFromName(GlobalParameterNameEnum.moon)
