@@ -48,8 +48,8 @@ public class ApiController {
         List<String> optionList = new ArrayList<>();
         for(Map.Entry<GameContentNameEnum, GameOption> entry: gameConfig.getOptions().entrySet()){
             String enabled = entry.getValue().toString();
+            optionList.add(entry.getKey().toString());
             if(enabled=="true"){
-                optionList.add(entry.getKey().toString());
             }
         }
         List<String> playerNames = new ArrayList<>();

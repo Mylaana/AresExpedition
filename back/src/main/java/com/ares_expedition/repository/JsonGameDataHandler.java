@@ -70,14 +70,14 @@ public class JsonGameDataHandler {
         File file = Paths.get(DATABASE_PATH).toFile();
         logger.debug("\u001B[32m \u001B[0m");
         if(!file.exists()){
-            logger.debug("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath() + "\u001B[0m");
+            logger.error("\\u001B[32m File not found: " + new File(DATABASE_PATH).getAbsolutePath() + "\u001B[0m");
             return new HashMap<>();
         }
 
         try (Reader reader = new FileReader(file)){
             long length = file.length();
             if (length == 0) {
-                logger.debug("\u001B[32m Empty database.json file.\u001B[0m");
+                logger.warn("\u001B[32m Empty database.json file.\u001B[0m");
                 return new HashMap<>();
             }
             return objectMapper.readValue(reader, new TypeReference<Map<String, Game>>(){});
@@ -104,7 +104,7 @@ public class JsonGameDataHandler {
         File file = Paths.get(CARDS_DATA_PATH).toFile();
         List<String> idList = new ArrayList<>();
         if(!file.exists()){
-            logger.debug("\\u001B[32m File not found: " + new File(CARDS_DATA_PATH).getAbsolutePath());
+            logger.error("\\u001B[32m File not found: " + new File(CARDS_DATA_PATH).getAbsolutePath());
             return idList;
         }
 
