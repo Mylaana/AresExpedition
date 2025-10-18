@@ -177,6 +177,15 @@ function getLanguageOrFallback(obj: LocalizedText | undefined, desiredLanguage: 
 		return ''
 	}
 
+function countTagsOfTypeInIdList(currentTagIdList: number[], authorizedTags: TagType | TagType[]): number {
+	let authorizedList: TagType[] = Utils.toArray(authorizedTags)
+	let result = 0
+	for(let t of currentTagIdList){
+		result += authorizedList.includes(Utils.toTagType(t))?1:0
+	}
+	return result
+}
+
 export const Logger = {
 	logText,
 	logEventResolution,
@@ -200,5 +209,6 @@ export const Utils = {
 	toGlobalParameterColor,
 	toTagId,
 	toTagType,
-	getLanguageOrFallback
+	getLanguageOrFallback,
+	countTagsOfTypeInIdList
 }

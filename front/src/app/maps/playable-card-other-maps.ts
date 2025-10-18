@@ -7,6 +7,7 @@ import { TriggerLimit } from "../types/project-card.type";
 import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
 import { NonEventButtonNames } from "../types/global.type";
+import { Utils } from "../utils/utils";
 
 export const S = EventFactory.simple
 
@@ -1494,9 +1495,9 @@ export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: Pla
 	//Earth Catapult
 	'23': () => 2,
 	//Energy Subsidies
-	'25': (card) => card.hasTag('power') ? 4 : 0,
+	'25': (card) => Utils.countTagsOfTypeInIdList(card.tagsId, 'power') * 4,
 	//Interplanetary Conference
-	'37': (card) => card.hasTag('earth') || card.hasTag('jovian')?3:0,
+	'37': (card) => Utils.countTagsOfTypeInIdList(card.tagsId, ['earth', 'jovian']) * 3,
 	//Media Group
 	'42': (card) => card.hasTag('event') ? 5 : 0,
 	//Research Outpost
@@ -1510,9 +1511,9 @@ export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: Pla
 	//Interplanetary Cinematics
 	'212': (card) => card.hasTag('event') ? 2 : 0,
 	//Teractor
-	'217': (card) => card.hasTag('earth') ? 3 : 0,
+	'217': (card) => Utils.countTagsOfTypeInIdList(card.tagsId, 'earth') * 3,
 	//Thorgate
-	'219': (card) => card.hasTag('power') ? 3 : 0,
+	'219': (card) => Utils.countTagsOfTypeInIdList(card.tagsId, 'power') * 3,
 	//DevTechs
 	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
 	//Exocorp v2
@@ -1522,10 +1523,9 @@ export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: Pla
 		return card.hasTag('space') && card.hasTag('event')?10:0
 	},
 	//Meat industry
-	'FM4': (card) => card.hasTag('plant') || card.hasTag('animal')?3:0,
+	'FM4': (card) => Utils.countTagsOfTypeInIdList(card.tagsId, ['plant', 'animal']) * 3,
 	//Space Relay
-	'FM14': (card) => card.hasTag('jovian')? 5 : 0,
-
+	'FM14': (card) => Utils.countTagsOfTypeInIdList(card.tagsId, 'jovian') * 5,
 	//Moon Tether
 	'M120': () => 2,
 	//Earth Embassy
@@ -1534,10 +1534,9 @@ export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: Pla
 		return state.getTagsOfType('earth')
 	},
 	//Jupiter Embassy
-	'M124': (card) => card.hasTag('jovian')||card.hasTag('moon')? 2 : 0,
+	'M124': (card) => Utils.countTagsOfTypeInIdList(card.tagsId, ['jovian', 'moon']) * 2,
 	//Crescent Research Association
 	'MC1': (card, state) => card.hasTag('moon')? state.getTagsOfType('moon'): 0
-
 }
 export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},

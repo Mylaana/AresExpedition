@@ -3,7 +3,7 @@ import { EventFactory } from "./event/event-factory";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
-import { AdvancedRessourceType, RessourceType } from "../types/global.type";
+import { AdvancedRessourceType, RessourceType, TagType } from "../types/global.type";
 import { GlobalInfo } from "../services/global/global-info.service";
 import { MoonTile, RessourceStock } from "../interfaces/global.interface";
 import { Utils } from "../utils/utils";
@@ -127,25 +127,20 @@ const S = EventFactory.simple
 //ON_TAG_GAINED
 	//Anaerobic Mircroorganisms
 	function handleTrigger_5(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
-		let triggerred: number = 0
-		/*
-		let card = clientState?.getProjectPlayedModelFromId(trigger)
-		if(!card){return []}*/
-		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
-		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
-		triggerred += Number(input.tagList.includes(Utils.toTagId('microbe')))
-		return [S.addRessourceToCardId({name:'microbe', valueStock:triggerred}, trigger)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, ['plant', 'animal', 'microbe'])
+		if(quantity===0){return []}
+		return [S.addRessourceToCardId({name:'microbe', valueStock:quantity}, trigger)]
 	}
 	//Decomposers
 	function handleTrigger_19(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
-		let triggerred: number = 0
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, ['plant', 'animal', 'microbe'])
+		if(quantity===0){return []}
+
 		let result: EventBaseModel[] = []
 		let card = clientState?.getProjectPlayedModelFromId('19')
 		if(!card){return []}
-		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
-		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
-		triggerred += Number(input.tagList.includes(Utils.toTagId('microbe')))
-		for(let i=0; i<triggerred; i++){
+
+		for(let i=0; i<quantity; i++){
 			if(card.getStockValue('microbe')<=0 && i===0){
 				result.push(S.addRessourceToCardId({name:'microbe', valueStock:1}, trigger))
 			} else{
@@ -156,43 +151,43 @@ const S = EventFactory.simple
 	}
 	//Ecological Zone
 	function handleTrigger_24(trigger: string, input: TriggerInput): EventBaseModel[] {
-		let triggerred: number = 0
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, ['plant', 'animal', 'microbe'])
+		if(quantity===0){return []}
+
 		let result: EventBaseModel[] = []
-		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
-		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
-		for(let i=0; i<triggerred; i++){
+		for(let i=0; i<quantity; i++){
 			result.push(S.addRessourceToCardId({name:'animal', valueStock:1}, trigger))
 		}
 		return result
 	}
 	//Energy Subsidies
 	function handleTrigger_25(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('power'))!=true){return []}
-		return [S.draw(1)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'power')
+		if(quantity===0){return []}
+		return [S.draw(quantity)]
 	}
 	//Interplanetary Conference
 	function handleTrigger_37(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
-		if(input.tagList.includes(Utils.toTagId('jovian')) || input.tagList.includes(Utils.toTagId('earth'))){
-			return [S.draw(1)]
-		}
-		return []
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, ['earth', 'jovian'])
+		if(quantity===0){return []}
+		return [S.draw(quantity)]
 	}
 	//Mars University
 	function handleTrigger_40(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('science'))===false){return []}
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'science')
+		if(quantity===0){return []}
 		let events: EventBaseModel[] = []
-		for(let t of input.tagList){
-			if(Utils.toTagType(t)==='science'){
-				events.push(S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity))
-			}
+		for(let i=0; i<quantity; i++){
+			events.push(S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity))
 		}
 		return events
 	}
 	//Olympus Conference
 	function handleTrigger_44(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('science'))===false){return []}
-		return [S.draw(1)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'science')
+		if(quantity===0){return []}
+		return [S.draw(quantity)]
 	}
 	//Optimal Aerobraking
 	function handleTrigger_45(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -207,16 +202,14 @@ const S = EventFactory.simple
 	//Viral Enhancers
 	function handleTrigger_61(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
 		if(!clientState){return []}
-		let triggerred: number = 0
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, ['animal', 'plant', 'microbe'])
+		if(quantity===0){return []}
 		let result: EventBaseModel[] = []
-		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
-		triggerred += Number(input.tagList.includes(Utils.toTagId('microbe')))
-		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
-		if(triggerred===0){return []}
+
 		if(clientState.getPlayedListWithStockableTypes(['animal', 'microbe']).length===0){
-			result.push(S.addRessource({name:'plant', valueStock:triggerred}))
+			result.push(S.addRessource({name:'plant', valueStock:quantity}))
 		} else {
-			for(let i=0; i<triggerred; i++){
+			for(let i=0; i<quantity; i++){
 				result.push(S.effectPortal(EffectPortalEnum.viralEnhancer))
 			}
 		}
@@ -225,13 +218,15 @@ const S = EventFactory.simple
 	}
 	//Apollo Industriees
 	function handleTrigger_D01(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('science'))===false){return []}
-		return [S.draw(1)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'science')
+		if(quantity===0){return []}
+		return [S.draw(quantity)]
 	}
 	//Sultira
 	function handleTrigger_D04(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('power'))===false){return []}
-		return [S.addRessource({name:'heat', valueStock:2})]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'power')
+		if(quantity===0){return []}
+		return [S.addRessource({name:'heat', valueStock:quantity*2})]
 	}
 	//Impact Analysis
 	function handleTrigger_D08(trigger: string, input: TriggerInput): EventBaseModel[] {
@@ -240,35 +235,28 @@ const S = EventFactory.simple
 	}
 	//Bacterial Aggregate
 	function handleTrigger_P19_OnTagGained(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('earth'))===false){return []}
-		return [S.addRessourceToCardId({name:'microbe', valueStock: 1}, trigger)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'earth')
+		if(quantity===0){return []}
+		return [S.addRessourceToCardId({name:'microbe', valueStock: quantity}, trigger)]
 	}
 	//Saturn Systems
 	function handleTrigger_216(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardCode===trigger){return []} //Excluding self
-		let tr = 0
-		for(let t of input.tagList){
-			if(Utils.toTagType(t)==='jovian'){
-				tr += 1
-			}
-		}
-		return [S.addTR(tr)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'jovian')
+		if(quantity===0){return []}
+		return [S.addTR(quantity)]
 	}
 	//Arklight
 	function handleTrigger_P12(trigger: string, input: TriggerInput): EventBaseModel[] {
-		let triggerred: number = 0
-		let result: EventBaseModel[] = []
-		triggerred += Number(input.tagList.includes(Utils.toTagId('plant')))
-		triggerred += Number(input.tagList.includes(Utils.toTagId('animal')))
-		if(triggerred>0){
-			result.push(S.addRessourceToCardId({name:'animal', valueStock:triggerred}, trigger))
-		}
-		return result
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, ['plant', 'animal'])
+		if(quantity===0){return []}
+		return [S.addRessourceToCardId({name:'animal', valueStock:quantity}, trigger)]
 	}
 	//Point Luna
 	function handleTrigger_CF1(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('earth'))===false){return []}
-		return [S.draw(1)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'earth')
+		if(quantity===0){return []}
+		return [S.draw(quantity)]
 	}
 	//Recyclon
 	function handleTrigger_CF7(trigger: string, input: TriggerInput, clientState?: PlayerStateModel): EventBaseModel[] {
@@ -298,20 +286,21 @@ const S = EventFactory.simple
 	}
 	//Meat Industry
 	function handleTrigger_FM4(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('plant')) || input.tagList.includes(Utils.toTagId('animal'))){
-			return [S.draw(1)]
-		}
-		return []
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, ['plant', 'animal'])
+		if(quantity===0){return []}
+		return [S.draw(quantity)]
 	}
 	//Space Relay
 	function handleTrigger_FM14(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('jovian'))===false ){return []}
-		return [S.draw(1)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'jovian')
+		if(quantity===0){return []}
+		return [S.draw(quantity)]
 	}
 	//Earth Embassy
 	function handleTrigger_M121(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.tagList.includes(Utils.toTagId('moon'))===false ){return []}
-		return [S.draw(1)]
+		let quantity = Utils.countTagsOfTypeInIdList(input.tagList, 'moon')
+		if(quantity===0){return []}
+		return [S.draw(quantity)]
 	}
 
 //ON_RESSOURCE_ADDED_TO_CARD
