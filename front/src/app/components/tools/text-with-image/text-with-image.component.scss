@@ -248,6 +248,10 @@
 	&.medium{
 		height: var(--twi-activate-image-height--medium);
 	}
+	& p {
+		color: black;
+		font-weight: 600;
+	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.portalButton{
 	display: flex;

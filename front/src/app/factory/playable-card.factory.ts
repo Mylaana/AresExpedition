@@ -6,7 +6,7 @@ import { DEBUG_IGNORE_PREREQUISITES } from "../global/global-const";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { NonEventButtonNames } from "../types/global.type";
 import { ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS, ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS, PLAY_REQUIREMENTS } from "../maps/playable-card-other-maps";
-import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION_NO_COST, ACTIVATION_SCALING_EFFECT, ACTIVATION_SCALING_EFFECT_CAPTION } from "../maps/playable-card-activation-maps";
+import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION_NO_COST, ACTIVATION_SCALING_EFFECT_CAPTION, ACTIVATION_SCALING_EFFECT_VALUE } from "../maps/playable-card-activation-maps";
 
 function getOnPlayedEvents(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 	return PLAY_EVENTS[cardCode]?.(clientstate)
@@ -15,7 +15,7 @@ function getOnActivationEvents(cardCode: string, clientState: PlayerStateModel, 
 	return ACTIVATION_EVENTS[cardCode]?.(cardCode, clientState, activationOption)
 }
 function getScalingCostActivation(cardCode: string, clientState: PlayerStateModel): number {
-	return ACTIVATION_SCALING_EFFECT[cardCode]?.(clientState)
+	return ACTIVATION_SCALING_EFFECT_VALUE[cardCode]?.(clientState)
 }
 function getScalingCostActivationCaption(cardCode: string, clientState: PlayerStateModel): string{
 	return ACTIVATION_SCALING_EFFECT_CAPTION[cardCode]?.(clientState)
