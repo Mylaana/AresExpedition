@@ -126,12 +126,11 @@ export enum EffectPortalButtonEnum {
 	secretLabs_Oxygen,
 	secretLabs_Temperature,
 
-	clm_0,
+	clm_1,
 	clm_2,
 	clm_4,
+	clm_6,
 	clm_7,
-	clm_8,
-	clm_9,
 	clm_10,
 
 	decomposingFungus_Animal,

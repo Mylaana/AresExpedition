@@ -84,7 +84,8 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -695,7 +696,8 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -810,7 +812,8 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "V",
@@ -1327,7 +1330,8 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "1",
@@ -1500,7 +1504,8 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -1737,7 +1742,8 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "I-II",
@@ -5043,7 +5049,8 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "greenProject",
         "vpNumber": "1",
@@ -6341,6 +6348,7 @@
         "card_code": "214",
         "origin": "base",
         "tagsId": [
+            0,
             0
         ],
         "cardType": "corporation",
@@ -6375,6 +6383,7 @@
         "card_code": "214B",
         "origin": "base",
         "tagsId": [
+            0,
             0
         ],
         "cardType": "corporation",
@@ -6979,7 +6988,8 @@
         "origin": "discovery",
         "cost": 14,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -9366,7 +9376,7 @@
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$ressource_card$: $ressource_science$$ressource_science$",
-            "fr": "$ressource_card$: $ressource_science$$ressource_science$"
+            "fr": ""
         },
         "effectText": {
             "en": "EFFECT: When you play a card, add 2 $ressource_science$ here.",
@@ -9378,7 +9388,7 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "$other_arrow$  $ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-8$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-9$ressource_science$: Add $other_tr$$other_tr$$other_tr$$skipline$-10$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "en": "$other_arrow$  -$ressource_science$:$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-6$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-10$ressource_science$: +$tag_earth$$tag_jovian$.",
             "fr": ""
         },
         "stockable": [
@@ -10107,19 +10117,19 @@
         "tagsId": [
             4
         ],
-        "cardType": "blueProject",
+        "cardType": "greenProject",
         "title": {
             "en": "Advertising",
             "fr": ""
         },
-        "effectSummaryType": "trigger",
+        "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": ">=$ressource_megacreditvoid_20$: $skipline$$production_+1$$ressource_megacredit$",
-            "fr": ">=$ressource_megacreditvoid_20$: $skipline$$production_+1$$ressource_megacredit$"
+            "en": "$ressource_megacredit$ / >=$ressource_megacreditvoid_20$",
+            "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: When you play a card that costs 20 MC or more, increase your MC production by 1.",
-            "fr": "EFFET: lorsque vous jouez une carte dont le co\u00fbt imprim\u00e9 est de 20 ou plus, augmentez votre production de MC de 1."
+            "en": "During the production phase, this card produces 1MC per card you played that have an initial cost of 20MC or more.",
+            "fr": "Lors de la phase de production, cette carte produit 1MC par carte dont le co\u00fbt initial est de 20MC ou plus."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -11971,10 +11981,10 @@
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever you play a $tag_moon$, draw a card.$skipline$When you play a $tag_moon$ you pay 1MC less for it per $tag_earth$ you have.",
+            "en": "EFFECT: Whenever you play a $tag_moon$, draw a card.$skipline$When you play a card that has $tag_moon$ you pay 1MC less for it per $tag_earth$ you have.",
             "fr": ""
         },
-        "status": "filled",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {
@@ -12068,7 +12078,7 @@
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever you play a $tag_jovian$ or $tag_moon$ you pay 2MC less for it.\nEFFECT: Gain 1 VP per TOTAL Jovian + Moon tag you have, including those ones.",
+            "en": "EFFECT: Whenever you play a $tag_jovian$ or $tag_moon$ you pay 2MC less for it.$skipline$\nEFFECT: Gain 1 VP per TOTAL Jovian + Moon tag you have, including those ones.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -12109,7 +12119,7 @@
             "fr": ""
         },
         "startingMegacredits": 40,
-        "status": "validated",
+        "status": "implemented",
         "vpScaling": "1"
     },
     {

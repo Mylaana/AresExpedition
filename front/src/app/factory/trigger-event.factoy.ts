@@ -45,13 +45,6 @@ const S = EventFactory.simple
 			S.discard(1)
 		]
 	}
-	//Advertising
-	function handleTrigger_FM23(trigger: string, input: TriggerInput): EventBaseModel[] {
-		if(input.playedCard.costInitial<20){return []}
-		return [
-			S.addProduction({name:'megacredit', valueStock:1}),
-		]
-	}
 	//Spinoff Department
 	function handleTrigger_FM24(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.costInitial<20){return []}
@@ -434,7 +427,6 @@ const HANDLERS_BY_HOOK: Record<HookType, Record<string, (triggerCode: string, in
 	ON_CARD_PLAYED: {
 		'6': handleTrigger_6,
 		'P16': handleTrigger_P16,
-		'FM23': handleTrigger_FM23,
 		'FM24': handleTrigger_FM24,
 		'CF3': handleTrigger_CF3_ON_PLAYED_CARD
 	},
