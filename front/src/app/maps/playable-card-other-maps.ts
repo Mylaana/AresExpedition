@@ -1067,6 +1067,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'F17': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 3)
 	],
+	//Low-Atmosphere Planes
+	'F17B': () => [
+		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 3)
+	],
 	//Power Grid Uplink
 	'F18': () => [
 		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 2),
@@ -1241,9 +1245,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Ganymede Colony
 	'FM13': () => [
 		S.addProduction([
-			{ name: 'megacredit', valueStock: 2 },
+			{ name: 'megacredit', valueStock: 4},
 		]),
-		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1)
 	],
 	//Lunar Embassy
 	'FM16': () => [
