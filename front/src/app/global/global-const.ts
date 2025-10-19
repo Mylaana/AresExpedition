@@ -27,7 +27,7 @@ export const DEBUG_LOG_WS_RECEIVED = true
 export const DEBUG_IGNORE_PREREQUISITES = false
 
 export const GAME_TAG_LIST: TagType[] = ['building','space','science','power','earth','jovian','plant','animal','microbe','event', 'moon']
-export const GAME_TAG_LIST_WITHNONE: TagType[] = ['building','space','science','power','earth', 'moon', 'jovian','plant','animal','microbe','event', 'none']
+export const GAME_TAG_LIST_WITHNONE: TagType[] = ['building','space','science','power','earth', 'moon', 'jovian','plant','animal','microbe','event', 'wild', 'none']
 export const GAME_TAG_GROUP_VANILLA_BUILD: TagType[] = ['building','space']
 export const GAME_TAG_GROUP_VANILLA_TECH: TagType[] = ['science','power']
 export const GAME_TAG_GROUP_VANILLA_PLANET: TagType[] = ['earth','jovian']
