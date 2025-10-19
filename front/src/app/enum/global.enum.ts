@@ -119,8 +119,7 @@ export enum EffectPortalButtonEnum {
 	pushnikAction_Science,
 
 	pushnikProduction_mc,
-	pushnikProduction_heat,
-	pushnikProduction_plant,
+	pushnikProduction_heatplant,
 
 	secretLabs_Ocean,
 	secretLabs_Oxygen,

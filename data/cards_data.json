@@ -84,8 +84,7 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -696,8 +695,7 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -812,8 +810,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "V",
@@ -1330,8 +1327,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "1",
@@ -1504,8 +1500,7 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -1742,8 +1737,7 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "I-II",
@@ -5049,8 +5043,7 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "greenProject",
         "vpNumber": "1",
@@ -6348,7 +6341,6 @@
         "card_code": "214",
         "origin": "base",
         "tagsId": [
-            0,
             0
         ],
         "cardType": "corporation",
@@ -6383,7 +6375,6 @@
         "card_code": "214B",
         "origin": "base",
         "tagsId": [
-            0,
             0
         ],
         "cardType": "corporation",
@@ -6988,8 +6979,7 @@
         "origin": "discovery",
         "cost": 14,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -9355,8 +9345,8 @@
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: increase one production:$skipline$$ressource_megacreditvoid_2$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Draw a card.",
-            "fr": "EFFECT: Lorsque une phase que vous n'avez PAS choisie est activ\u00e9e :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_2$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: augmentez une production:$skipline$$ressource_megacreditvoid_2$/$ressource_heat$/$ressource_plant$.$skipline$$other_phase_research$ : Piochez une carte."
+            "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_3$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: chose one:$skipline$$production_+3$$ressource_megacredit$ or $production_+1$$ressource_heat$$production_+1$$ressource_plant$.$skipline$$other_phase_research$: gain $other_researchsymbol$$other_researchcard$.",
+            "fr": "EFFECT: Lorsque une phase que vous n'avez PAS choisie est activ\u00e9e:$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_3$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: choisissez un:$skipline$$production_+3$$ressource_megacredit$ ou $production_+1$$ressource_heat$$production_+1$$ressource_plant$.$skipline$$other_phase_research$: gagnez $other_researchsymbol$$other_researchcard$."
         },
         "startingMegacredits": 40,
         "status": "validated",

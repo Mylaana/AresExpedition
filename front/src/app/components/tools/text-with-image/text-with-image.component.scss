@@ -90,6 +90,16 @@
 			}
 		}
 	}
+	& > .wrapper-production{
+		& > .production-text{
+			&.small{
+				top: var(--twi-production-text-offset-top-effect-summary--small);
+			}
+			&.medium{
+				top: var(--twi-production-text-offset-top-effect-summary--medium);
+			}
+		}
+	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.cardVpText{
 	display: flex;
@@ -361,7 +371,7 @@
 		position: absolute;
 		bottom: 0;
 		display: block;
-		height: 30%;
+		height: 25%;
 		width: 100%;
 		border-radius: 10px;
 	}
@@ -371,6 +381,14 @@
 		z-index: 2;
 		color: var(--color-ares-orange);
 		color: white;
+		&.small{
+			top: var(--twi-production-text-offset-top--small);
+			font-size: var(--twi-production-text-size--small);
+		}
+		&.medium{
+			top: var(--twi-production-text-offset-top--medium);
+			font-size: var(--twi-production-text-size--medium);
+		}
 	}
 }
 .wrapper-text-with-image::ng-deep .block-flex.convertResource{

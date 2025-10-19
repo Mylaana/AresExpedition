@@ -132,13 +132,10 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 				return [EventFactory.simple.addRessourceToSelectedCard({name:'science', valueStock:1}, 1)]
 			}
 			case(EffectPortalButtonEnum.pushnikProduction_mc):{
-				return [EventFactory.simple.addProduction({name:'megacredit', valueStock:2})]
+				return [EventFactory.simple.addProduction({name:'megacredit', valueStock:3})]
 			}
-			case(EffectPortalButtonEnum.pushnikProduction_heat):{
-				return [EventFactory.simple.addProduction({name:'heat', valueStock:1})]
-			}
-			case(EffectPortalButtonEnum.pushnikProduction_plant):{
-				return [EventFactory.simple.addProduction({name:'plant', valueStock:1})]
+			case(EffectPortalButtonEnum.pushnikProduction_heatplant):{
+				return [EventFactory.simple.addProduction([{name:'heat', valueStock:1},{name:'plant', valueStock:1}])]
 			}
 		}
 		return []
@@ -304,11 +301,8 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 			case(EffectPortalButtonEnum.pushnikProduction_mc):{
 				return '$ressource_megacreditvoid_2$'
 			}
-			case(EffectPortalButtonEnum.pushnikProduction_heat):{
+			case(EffectPortalButtonEnum.pushnikProduction_heatplant):{
 				return '$ressource_heat$'
-			}
-			case(EffectPortalButtonEnum.pushnikProduction_plant):{
-				return '$ressource_plant$'
 			}
 		}
 		return ''
@@ -379,7 +373,7 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	//Pushnik Action
 	'CF2-Action': ()=> [EffectPortalButtonEnum.pushnikAction_Animal, EffectPortalButtonEnum.pushnikAction_Microbe, EffectPortalButtonEnum.pushnikAction_Science],
 	//Pushnik Action
-	'CF2-Production': ()=> [EffectPortalButtonEnum.pushnikProduction_mc, EffectPortalButtonEnum.pushnikProduction_heat, EffectPortalButtonEnum.pushnikProduction_plant],
+	'CF2-Production': ()=> [EffectPortalButtonEnum.pushnikProduction_mc, EffectPortalButtonEnum.pushnikProduction_heatplant],
 	//CLM - The hesitant hive mind
 	'CF3': ()=> [EffectPortalButtonEnum.clm_1, EffectPortalButtonEnum.clm_2,EffectPortalButtonEnum.clm_4,EffectPortalButtonEnum.clm_6,EffectPortalButtonEnum.clm_7,EffectPortalButtonEnum.clm_10,],
 	//Secret Labs

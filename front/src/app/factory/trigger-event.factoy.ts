@@ -382,7 +382,7 @@ const S = EventFactory.simple
 		if(input.activatedPhase.toString()===input.clientSelectedPhase.toString()){return []}
 		switch(input.activatedPhase){
 			case(NonSelectablePhaseEnum.development):case(NonSelectablePhaseEnum.construction):{
-				return [EventFactory.simple.addRessource({name:'megacredit', valueStock:2})]
+				return [EventFactory.simple.addRessource({name:'megacredit', valueStock:3})]
 			}
 			case(NonSelectablePhaseEnum.action):{
 				let result = [EventFactory.simple.addRessource([{name:'plant', valueStock:1},{name:'heat', valueStock:1}])]
@@ -395,7 +395,7 @@ const S = EventFactory.simple
 				return [EventFactory.simple.effectPortal(EffectPortalEnum.pushnikProduction, true)]
 			}
 			case(NonSelectablePhaseEnum.research):{
-				return [EventFactory.simple.draw(1)]
+				return [EventFactory.simple.increaseResearchScanKeep({scan:1, keep:0})]
 			}
 		}
 		return []
