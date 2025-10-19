@@ -355,6 +355,12 @@
     align-items: center;
 	flex-direction: column;
 	gap: 0%;
+	&.greyProduction{
+		&::ng-deep p {
+			color: black;
+			font-weight: 600;
+		}
+	}
 }
 .summary-text{
 	width: 100%;

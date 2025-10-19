@@ -7,7 +7,7 @@
 				<div [ngClass]="['effect-summary-foreground-radial-white', effectSummaryType]" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
 				<div [ngClass]="['effect-summary-background-radial-grid', effectSummaryType]" *ngIf="effectSummaryType==='action' || effectSummaryType==='trigger'"></div>
 				<div [ngClass]="'effect-summary-background--' + effectSummaryType | lowercase"></div>
-				<div class="wrapper-effect-summary-text">
+				<div [ngClass]="['wrapper-effect-summary-text', effectSummaryType]">
 					<div [ngClass]="['summary-text', isMixProduction()?'mix':'single']" *ngFor="let t of _summaryText">
 						<app-text-with-image [rawText]="t" [cardSize]="cardSize" [context]="'cardEffectSummary'"></app-text-with-image>
 					</div>
