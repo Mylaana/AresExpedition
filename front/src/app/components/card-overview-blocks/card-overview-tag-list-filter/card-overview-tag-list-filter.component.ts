@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
-import { GAME_TAG_LIST, GAME_TAG_LIST_WITHNONE } from '../../../global/global-const';
+import { CARD_OVERVIEW_TAG_LIST } from '../../../global/global-const';
 import { NonEventButton } from '../../../models/core-game/button.model';
 import { TagType } from '../../../types/global.type';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
@@ -61,7 +61,7 @@ export class CardOverviewTagListFilterComponent {
 		return this.buttons[id]
 	}
 	private getAuthorizedTagList(): TagType[] {
-		return GAME_TAG_LIST_WITHNONE
+		return CARD_OVERVIEW_TAG_LIST
 	}
 	isActive(buttonId: number): boolean {
 		if(this.buttons[buttonId]===this._noneTagButton){
