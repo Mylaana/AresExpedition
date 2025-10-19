@@ -9,10 +9,34 @@ import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
 import { GAME_TAG_LIST } from "../global/global-const";
 import { Utils } from "../utils/utils";
+import { AdvancedRessourceType, MoonTileType } from "../types/global.type";
 
 const S = EventFactory.simple
 
-
+function formatGainScalingCaptionMegacredit(cardCode: string, state: PlayerStateModel): string {
+	let scaled = getScaling(cardCode, state)
+	return scaled>0?formatGainScalingCaption(cardCode, state, `$ressource_megacreditvoid_${scaled}`):'$other_none$'
+}
+function formatGainScalingCaptionMoonTile(cardCode: string, state: PlayerStateModel, gainType: MoonTileType): string {
+	return formatGainScalingCaption(cardCode, state, `$other_${gainType}`)
+}
+function formatGainScalingCaptionRessource(cardCode: string, state: PlayerStateModel, gainType: AdvancedRessourceType | 'card'): string {
+	return formatGainScalingCaption(cardCode, state, `$ressource_${gainType}$`)
+}
+function formatGainScalingCaption(cardCode: string, state: PlayerStateModel, text: string): string {
+	let scaled = getScaling(cardCode, state)
+	switch(true){
+		case(scaled>1):{
+			return `+${scaled} ${text}`
+		}
+		case(scaled===1):{
+			return `+ ${text}`
+		}
+		default:{
+			return '$other_none$'
+		}
+	}
+}
 function getScaling(cardCode: string, clientState: PlayerStateModel){
 	return PlayableCard.activable.getScalingCostActivation(cardCode, clientState)
 }
@@ -380,7 +404,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		return result
 	},
 }
-export const ACTIVATION_SCALING_EFFECT: Record<string, (clientstate: PlayerStateModel) => number> = {
+export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: PlayerStateModel) => number> = {
 	//Aquifer Pumping
 	'7': (clientstate) => Math.max(0, 10 - (clientstate.getRessourceInfoFromType('steel')?.valueProd??0) * 2),
 	//Developed Infrastructure
@@ -543,105 +567,39 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 	//Interplanetary Superhighway
 	'F05': (state) => `$ressource_megacreditvoid_${getScaling('F05', state)}$: $other_infrastructure$`,
 	//Maglev Train
-	'F06': (state) => {
-		let caption = ''
-		for(let i=0; i<getScaling('F06', state); i++){
-			caption += '$ressource_card$'
-		}
-		return caption
-	},
+	'F06': (state) => formatGainScalingCaptionRessource('F06', state, 'card'),
 	//Sawmill
 	'F08': (state) => `$ressource_megacreditvoid_${getScaling('F08', state)}$: $other_infrastructure$`,
 	//Progressive Policies
 	'P09': (state) => `$ressource_megacreditvoid_${getScaling('P09', state)}$: $other_oxygen$`,
 	//City Council
-	'P20': (state) => {
-		let caption :string = ''
-		for(let i=0; i< (1 + state.getMilestoneCompleted()); i++){
-			caption += '$ressource_card$'
-		}
-		return caption
-	},
+	'P20': (state) => formatGainScalingCaptionRessource('P20', state, 'card'),
 	//Community Afforestation
 	'P21': (state) => `$ressource_megacreditvoid_${getScaling('P21', state)}$: $other_forest$`,
-	//Gas-Cooled Reactors
+	//Gaz Cooled Reactor
 	'P23': (state) => `$ressource_megacreditvoid_${getScaling('P23', state)}$: $other_temperature$`,
 	//Pride of the earth Arkship
-	'FM11': (state) => {
-		let caption :string = ''
-		for(let i=0; i< (getScaling('FM11', state)); i++){
-			caption += '$ressource_science$'
-		}
-		return caption
-	},
+	'FM11': (state) => formatGainScalingCaptionRessource('FM11', state, 'science'),
 	//Ants
-	'FM15': (state) => {
-		let caption :string = ''
-		for(let i=0; i< (getScaling('FM15', state)); i++){
-			caption += '$ressource_microbe$'
-		}
-		return caption
-	},
+	'FM15': (state) => formatGainScalingCaptionRessource('FM15', state, 'microbe'),
 	//Jovian Lanterns
-	'FM27': (state) => {
-		let caption :string = ''
-		for(let i=0; i< (getScaling('FM27', state)); i++){
-			caption += '$ressource_science$'
-		}
-		return caption
-	},
+	'FM27': (state) => formatGainScalingCaptionRessource('FM27', state, 'science'),
 	//he3 Refinery
-	'M80': (state) => {
-		let caption = getScaling('M80', state)??0
-		return `$ressource_megacreditvoid_${caption}$`
-	},
+	'M80': (state) => formatGainScalingCaptionMegacredit('M80', state),
 	//Minerals Research Center
-	'M81': (state) => {
-		let caption :string = ''
-		for(let i=0; i< (getScaling('M81', state)); i++){
-			caption += '$ressource_science$'
-		}
-		return caption
-	},
+	'M81': (state) => formatGainScalingCaptionRessource('M81', state, 'science'),
 	//Luna Archives
-	'M87': (state) => {
-		let caption :string = ''
-		for(let i=0; i< (getScaling('M87', state)); i++){
-			caption += '$ressource_science$'
-		}
-		return caption
-	},
+	'M87': (state) => formatGainScalingCaptionRessource('M87', state, 'science'),
 	//Luna Trade Center
-	'M88': (state) => {
-		let caption = getScaling('M88', state)??0
-		return `$ressource_megacreditvoid_${caption}$`
-	},
+	'M88': (state) => formatGainScalingCaptionMegacredit('M88', state),
 	//Rust Eating Bacteria
-	'M89': (state) => {
-		let caption :string = ''
-		for(let i=0; i< (getScaling('M89', state)); i++){
-			caption += '$ressource_microbe$'
-		}
-		return caption
-	},
+	'M89': (state) => formatGainScalingCaptionRessource('M89', state, 'microbe'),
 	//Pets Acclimatization
-	'M90': (state) => {
-		let caption :string = ''
-		for(let i=0; i< (getScaling('M90', state)); i++){
-			caption += '$ressource_animal$'
-		}
-		return caption
-	},
+	'M90': (state) => formatGainScalingCaptionRessource('M90', state, 'animal'),
 	//3d printing mine facility
-	'M91': (state) => {
-		let caption = getScaling('M91', state)??0
-		return `$ressource_megacreditvoid_${caption}$:$other_minetile$`
-	},
+	'M91': (state) => formatGainScalingCaptionMoonTile('M91', state, 'mine'),
 	//Shelter Blueprint factory
-	'M92': (state) => {
-		let caption = getScaling('M92', state)??0
-		return `$ressource_megacreditvoid_${caption}$:$other_habitattile$`
-	},
+	'M92': (state) => formatGainScalingCaptionMoonTile('M92', state, 'habitat'),
 
 	//SPECIAL
 	'convertForest': (state) => `${getScaling('convertForest', state)}$ressource_plant$: $other_forest$`,

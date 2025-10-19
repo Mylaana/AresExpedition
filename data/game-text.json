@@ -101,7 +101,7 @@
     },
     "gameOption.moonMandatory.tooltip": {
         "en": "The Moon structures global parameter must also be completed to end the game.",
-        "fr": "Le param\u00e8tre infrastructure doit \u00e9galement \u00eatre compl\u00e9t\u00e9 pour mettre fin \u00e0 la partie."
+        "fr": "Le param\u00e8tre Structures Lunaires doit \u00e9galement \u00eatre compl\u00e9t\u00e9 pour mettre fin \u00e0 la partie."
     },
     "gamePhaseCardAbility.title": {
         "en": "Ability",

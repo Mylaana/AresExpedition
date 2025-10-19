@@ -53,6 +53,9 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--twi-megacredit-text-offset-left--small': '0px',
 		'--twi-megacredit-text-offset-top--small': '4px',
 		'--twi-megacredit-text-size--small': '8px',
+		'--twi-production-text-offset-top--small': '-3px',
+		'--twi-production-text-offset-top-effect-summary--small': '-5px',
+		'--twi-production-text-size--small': '60%',
 
 		'--builder-padding--small': '13px',
 	},
@@ -96,6 +99,10 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--twi-megacredit-text-offset-left--medium': '0px',
 		'--twi-megacredit-text-offset-top--medium': '3px',
 		'--twi-megacredit-text-size--medium': '10px',
+		'--twi-production-text-offset-top--medium': '-5px',
+		'--twi-production-text-size--medium': '80%',
+		'--twi-production-text-offset-top-effect-summary--medium': '-3px',
+		'--twi-production-text-size-effect-summary--medium': '80%',
 
 		'--builder-padding--medium': '18px',
 	},

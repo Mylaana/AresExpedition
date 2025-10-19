@@ -132,13 +132,10 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 				return [EventFactory.simple.addRessourceToSelectedCard({name:'science', valueStock:1}, 1)]
 			}
 			case(EffectPortalButtonEnum.pushnikProduction_mc):{
-				return [EventFactory.simple.addProduction({name:'megacredit', valueStock:2})]
+				return [EventFactory.simple.addProduction({name:'megacredit', valueStock:3})]
 			}
-			case(EffectPortalButtonEnum.pushnikProduction_heat):{
-				return [EventFactory.simple.addProduction({name:'heat', valueStock:1})]
-			}
-			case(EffectPortalButtonEnum.pushnikProduction_plant):{
-				return [EventFactory.simple.addProduction({name:'plant', valueStock:1})]
+			case(EffectPortalButtonEnum.pushnikProduction_heatplant):{
+				return [EventFactory.simple.addProduction([{name:'heat', valueStock:1},{name:'plant', valueStock:1}])]
 			}
 		}
 		return []
@@ -146,8 +143,9 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 	//CLM - The hesitant hivemind
 	'CF3': (button) => {
 		switch(button){
-			case(EffectPortalButtonEnum.clm_0):{
+			case(EffectPortalButtonEnum.clm_1):{
 				return [
+					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-1}, 'CF3'),
 					EventFactory.simple.draw(1)
 				]
 			}
@@ -163,24 +161,18 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 					EventFactory.simple.addProduction([{name:'heat', valueStock:2}, {name:'plant', valueStock:2}])
 				]
 			}
-			case(EffectPortalButtonEnum.clm_7):{
+			case(EffectPortalButtonEnum.clm_6):{
 				return [
-					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-7}, 'CF3'),
-					EventFactory.simple.addProduction([{name:'steel', valueStock:2}, {name:'titanium', valueStock:1}])
-				]
-			}
-			case(EffectPortalButtonEnum.clm_8):{
-				return [
-					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-8}, 'CF3'),
+					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-6}, 'CF3'),
 					EventFactory.simple.addTagToCard('CF3', 'plant'),
 					EventFactory.simple.addTagToCard('CF3', 'animal'),
 					EventFactory.simple.addTagToCard('CF3', 'microbe')
 				]
 			}
-			case(EffectPortalButtonEnum.clm_9):{
+			case(EffectPortalButtonEnum.clm_7):{
 				return [
-					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-9}, 'CF3'),
-					EventFactory.simple.addTR(3)
+					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-7}, 'CF3'),
+					EventFactory.simple.addProduction([{name:'steel', valueStock:2}, {name:'titanium', valueStock:1}])
 				]
 			}
 			case(EffectPortalButtonEnum.clm_10):{
@@ -309,11 +301,8 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 			case(EffectPortalButtonEnum.pushnikProduction_mc):{
 				return '$ressource_megacreditvoid_2$'
 			}
-			case(EffectPortalButtonEnum.pushnikProduction_heat):{
+			case(EffectPortalButtonEnum.pushnikProduction_heatplant):{
 				return '$ressource_heat$'
-			}
-			case(EffectPortalButtonEnum.pushnikProduction_plant):{
-				return '$ressource_plant$'
 			}
 		}
 		return ''
@@ -321,8 +310,8 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	//CLM - The hesitant hivemind
 	'CF3': (button) => {
 		switch(button){
-			case(EffectPortalButtonEnum.clm_0):{
-				return '$ressource_card$'
+			case(EffectPortalButtonEnum.clm_1):{
+				return '-$ressource_science$:$ressource_card$'
 			}
 			case(EffectPortalButtonEnum.clm_2):{
 				return '-2$ressource_science$:$skipline$$other_sellcard$$ressource_megacreditvoid_10$'
@@ -330,14 +319,11 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 			case(EffectPortalButtonEnum.clm_4):{
 				return '-4$ressource_science$:$skipline$$production_+2$$ressource_heat$$production_+2$$ressource_plant$'
 			}
+			case(EffectPortalButtonEnum.clm_6):{
+				return '-6$ressource_science$:$skipline$+$tag_plant$$tag_animal$$tag_microbe$'
+			}
 			case(EffectPortalButtonEnum.clm_7):{
 				return '-7$ressource_science$:$skipline$$production_+2$$ressource_steel$$production_+1$$ressource_titanium$'
-			}
-			case(EffectPortalButtonEnum.clm_8):{
-				return '-8$ressource_science$:$skipline$+$tag_plant$$tag_animal$$tag_microbe$'
-			}
-			case(EffectPortalButtonEnum.clm_9):{
-				return '-9$ressource_science$:$skipline$$other_tr$$other_tr$$other_tr$'
 			}
 			case(EffectPortalButtonEnum.clm_10):{
 				return '-10$ressource_science$:$skipline$+$tag_earth$$tag_jovian$'
@@ -387,9 +373,9 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	//Pushnik Action
 	'CF2-Action': ()=> [EffectPortalButtonEnum.pushnikAction_Animal, EffectPortalButtonEnum.pushnikAction_Microbe, EffectPortalButtonEnum.pushnikAction_Science],
 	//Pushnik Action
-	'CF2-Production': ()=> [EffectPortalButtonEnum.pushnikProduction_mc, EffectPortalButtonEnum.pushnikProduction_heat, EffectPortalButtonEnum.pushnikProduction_plant],
+	'CF2-Production': ()=> [EffectPortalButtonEnum.pushnikProduction_mc, EffectPortalButtonEnum.pushnikProduction_heatplant],
 	//CLM - The hesitant hive mind
-	'CF3': ()=> [EffectPortalButtonEnum.clm_0, EffectPortalButtonEnum.clm_2,EffectPortalButtonEnum.clm_4,EffectPortalButtonEnum.clm_7,EffectPortalButtonEnum.clm_8,EffectPortalButtonEnum.clm_9,EffectPortalButtonEnum.clm_10,],
+	'CF3': ()=> [EffectPortalButtonEnum.clm_1, EffectPortalButtonEnum.clm_2,EffectPortalButtonEnum.clm_4,EffectPortalButtonEnum.clm_6,EffectPortalButtonEnum.clm_7,EffectPortalButtonEnum.clm_10,],
 	//Secret Labs
 	'FM25': ()=> [EffectPortalButtonEnum.secretLabs_Ocean, EffectPortalButtonEnum.secretLabs_Oxygen, EffectPortalButtonEnum.secretLabs_Temperature],
 }
@@ -542,8 +528,8 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 	//CLM - The hesitant hivemind
 	'CF3': (clientState, buttonRule) => {
 		switch(buttonRule){
-			case(EffectPortalButtonEnum.clm_0):{
-				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:0},'min',clientState, 'CF3')
+			case(EffectPortalButtonEnum.clm_1):{
+				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:1},'min',clientState, 'CF3')
 			}
 			case(EffectPortalButtonEnum.clm_2):{
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:2},'min',clientState, 'CF3') &&
@@ -552,14 +538,11 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 			case(EffectPortalButtonEnum.clm_4):{
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:4},'min',clientState, 'CF3')
 			}
+			case(EffectPortalButtonEnum.clm_6):{
+				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:6},'min',clientState, 'CF3')
+			}
 			case(EffectPortalButtonEnum.clm_7):{
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:7},'min',clientState, 'CF3')
-			}
-			case(EffectPortalButtonEnum.clm_8):{
-				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:8},'min',clientState, 'CF3')
-			}
-			case(EffectPortalButtonEnum.clm_9):{
-				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:8},'min',clientState, 'CF3')
 			}
 			case(EffectPortalButtonEnum.clm_10):{
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:10},'min',clientState, 'CF3')
