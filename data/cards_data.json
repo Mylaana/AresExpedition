@@ -9341,8 +9341,8 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$/$tag_earth$$tag_earth$",
-            "fr": "$ressource_megacreditvoid_1$/$tag_earth$$tag_earth$"
+            "en": "$ressource_megacreditvoid_1$/$tag_earth$",
+            "fr": ""
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 MC per $tag_earth$ you have, including this one.",
@@ -10580,7 +10580,7 @@
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
-            "en": "$ressource_titanium$ OR $skipline$$ressource_titanium$$ressource_titanium$",
+            "en": "$ressource_titanium$$ressource_titanium$ OR $skipline$$ressource_titanium$",
             "fr": ""
         },
         "effectText": {

@@ -183,17 +183,24 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		return !(this.projectCard.activated>=2 || (this.projectCard.activated>=1 && this.activableTwice === false))
 	}
 	public isDisabled(): boolean{
-		if(this.parentListType!='builderSelector'){return false}
-		if(this.filter && !this.projectCard.isFilterOk(this.filter)){return true}
-		if (this.state.isBuildable()===false
-			&& this.state.isIgnoreCost()!=false){
+		if(this.isParentListExcludedFromDisabledCheck()){return false}
+		if(this.filter && !this.projectCard.isFilterOk(this.filter)){
+			return true
+		}
+		if(this.parentListType==='builderSelector' && this.state.isBuildable()===false && this.state.isIgnoreCost()!=false){
 			return true
 		}
 		if(this.state.isActivable()===true && !this.isActivable()){
 			return true
 		}
-		if(!this.state.isBuildable() && !this.state.isIgnoreCost()){return true}
+		if(!this.state.isBuildable() && !this.state.isIgnoreCost()){
+			return true
+		}
 		return false
+	}
+	private isParentListExcludedFromDisabledCheck(): boolean {
+		let excluded: ProjectListType[] = ['none', 'builderSelectedZone', 'hand', 'played', ]
+		return excluded.includes(this.parentListType)
 	}
 	public isSelectable(): boolean {
 		if(this.isDisabled()){return false}

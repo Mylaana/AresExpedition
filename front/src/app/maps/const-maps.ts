@@ -12,6 +12,7 @@ export const TAGS_ID_TO_NAME: Record<string,  TagType> = {
     '7':  'animal',
     '8':  'microbe',
     '9':  'event',
+	'10': 'wild',
     '11': 'moon',
 
     '-1':  'none',
