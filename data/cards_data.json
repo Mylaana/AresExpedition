@@ -84,7 +84,8 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -695,7 +696,8 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -810,7 +812,8 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "V",
@@ -1327,7 +1330,8 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "1",
@@ -1500,7 +1504,8 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -1737,7 +1742,8 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "I-II",
@@ -5043,7 +5049,8 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "greenProject",
         "vpNumber": "1",
@@ -6341,6 +6348,7 @@
         "card_code": "214",
         "origin": "base",
         "tagsId": [
+            0,
             0
         ],
         "cardType": "corporation",
@@ -6375,6 +6383,7 @@
         "card_code": "214B",
         "origin": "base",
         "tagsId": [
+            0,
             0
         ],
         "cardType": "corporation",
@@ -6979,7 +6988,8 @@
         "origin": "discovery",
         "cost": 14,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -8217,7 +8227,30 @@
             "fr": "Augmentez l'infrastructure de 3 niveaux."
         },
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "0",
+        "balancedVersion": "remove"
+    },
+    {
+        "card_code": "F17B",
+        "origin": "foundations",
+        "cost": 28,
+        "tagsId": [
+            0,
+            2,
+            9
+        ],
+        "cardType": "redProject",
+        "title": {
+            "en": "Low-Atmosphere Planes B",
+            "fr": "A\u00e9ronefs pour Atmosph\u00e8re Basse B"
+        },
+        "playedText": {
+            "en": "Increase the infrastructure 3 step.",
+            "fr": "Augmentez l'infrastructure de 3 niveaux."
+        },
+        "status": "validated",
+        "vpScaling": "0",
+        "balancedVersion": "add"
     },
     {
         "card_code": "F18",
@@ -9312,8 +9345,8 @@
             "fr": "$ressource_megacreditvoid_1$/$tag_earth$$tag_earth$"
         },
         "effectText": {
-            "en": "During the production phase, this card produces 1 MC per two $tag_earth$ you have, including this one.",
-            "fr": "Lors de la phase de production, cette carte produit 1 MC pour 2 $tag_earth$ en votre possession, y compris celui-ci."
+            "en": "During the production phase, this card produces 1 MC per $tag_earth$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 1 MC pour chaque $tag_earth$ en votre possession, y compris celui-ci."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -9828,16 +9861,12 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$",
-            "fr": "$ressource_megacreditvoid_2$"
+            "en": "$ressource_megacreditvoid_4$",
+            "fr": ""
         },
         "effectText": {
-            "en": "During the production phase, this card produces 2 MC.",
-            "fr": "Lors de la phase de production, cette carte produit 2MC."
-        },
-        "playedText": {
-            "en": "Raise infrastructure 1 step.",
-            "fr": "Augmentez l'infrastructure de 1 niveau."
+            "en": "During the production phase, this card produces 4 MC.",
+            "fr": "Lors de la phase de production, cette carte produit 4MC."
         },
         "status": "validated",
         "vpScaling": "1"
@@ -11436,8 +11465,9 @@
     {
         "card_code": "M62",
         "origin": "moon",
-        "cost": 5,
+        "cost": 14,
         "tagsId": [
+            3,
             9
         ],
         "cardType": "redProject",
@@ -11446,7 +11476,15 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Gain $ressource_heat$$ressource_heat$ per $other_minetile$ you have.",
+            "en": "Increase the temperature 3 steps.",
+            "fr": ""
+        },
+        "prerequisiteText": {
+            "en": "Requires that you have 2 $other_minetile$.",
+            "fr": ""
+        },
+        "prerequisiteSummaryText": {
+            "en": "$other_minetile$$other_minetile$",
             "fr": ""
         },
         "status": "validated",
@@ -11769,7 +11807,7 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_megacredit$/$other_habitattile$",
+            "en": "$other_arrow$$skipline$$ressource_megacredit$/$other_habitattile$",
             "fr": ""
         },
         "effectText": {
@@ -11799,7 +11837,7 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$ressource_microbe$/$ressource_steel$",
+            "en": "$other_arrow$$skipline$$ressource_microbe$/$ressource_steel$",
             "fr": ""
         },
         "effectText": {
@@ -11992,7 +12030,7 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$other_standard$:$skipline$$ressource_megacreditvoid_-3$",
+            "en": "$other_standardmoon$:$skipline$$ressource_megacreditvoid_-3$",
             "fr": ""
         },
         "effectText": {

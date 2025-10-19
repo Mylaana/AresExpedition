@@ -454,5 +454,11 @@
         "description": "minetile",
         "imageUrl": "assets/other/moon_minetile.png",
         "name": "$other_minetile$"
+    },
+    {
+        "id": 151,
+        "description": "standard moon",
+        "imageUrl": "assets/other/standard_moon.png",
+        "name": "$other_standardmoon$"
     }
 ]

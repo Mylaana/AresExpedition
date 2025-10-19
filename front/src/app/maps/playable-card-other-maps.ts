@@ -217,7 +217,10 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	'M29': (s)=> Checker.isTrOk(1, 'min', s),
 
 	//Lunar Mine Urbanization
+	'M62': (s)=> Checker.isMoonTileOk('mine', 2, 'min', s),
+	//Lunar Mine Urbanization
 	'M63': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
+
 	//Luna Archives
 	'M87': (s)=> Checker.isTagOk('science', 3, 'min', s),
 	//Pets Acclimatization
@@ -1458,11 +1461,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		return result
 	},
 	//He3 Production Quotas
-	'M62': (state) => {
-		let heat = state.getMine()*2
-		if(heat===0){return []}
-		return [S.addRessource({name:'heat', valueStock:heat})]
-	},
+	'M62': () => [S.increaseGlobalParameter(GlobalParameterNameEnum.temperature, 3)],
 	//Lunar Mine Urbanization
 	'M63': () => [
 		S.addHabitat(1),
@@ -1582,7 +1581,7 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 			return [{name:'megacredit',	valueStock: stock[0].valueStock}]
 	},
 	//Point Luna
-	'CF1': (s)=> [{name:'megacredit', valueStock: Math.floor(s.getTagsOfType('earth')/ 2)}],
+	'CF1': (s)=> [{name:'megacredit', valueStock: Math.floor(s.getTagsOfType('earth'))}],
 	//Ringcom
 	'CF4': (s)=> [{name:'card', valueStock:Math.floor(s.getTagsOfType('jovian') /2)}],
 	//Aridor
