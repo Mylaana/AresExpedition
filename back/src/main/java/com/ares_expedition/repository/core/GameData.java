@@ -27,7 +27,6 @@ public class GameData {
     private Map<String, Boolean> groupPlayerReady = new HashMap<>();
     private PhaseEnum currentPhase;
     private LinkedHashSet<PhaseEnum> selectedPhase = new LinkedHashSet<>();
-    private Map<String, PlayerStateData> groupPlayerState = new HashMap<>();
     private GameStatusEnum gameStatus;
     private List<GlobalParameterData> globalParameters = new ArrayList<>();
     private List<String> deckCorporations = new ArrayList<>();
@@ -38,6 +37,9 @@ public class GameData {
     private Instant creationDate;
     private Instant lastUpdate;
     private int databaseVersion = 0;
+    private int progression;
+
+    private Map<String, PlayerStateData> groupPlayerState = new HashMap<>();
 
     GameData() {
     }
@@ -61,6 +63,7 @@ public class GameData {
         this.creationDate = game.getCreationDate();
         this.lastUpdate = game.getLastUpdate();
         this.databaseVersion = game.getDatabaseVersion();
+        this.progression = game.getProgression();
     }
 
     public String getGameId() {
@@ -205,5 +208,14 @@ public class GameData {
 
     public void setDatabaseVersion(int databaseVersion) {
         this.databaseVersion = databaseVersion;
-    }      
+    }
+
+    public int getProgression() {
+        return progression;
+    }
+
+    public void setProgression(int progression) {
+        this.progression = progression;
+    }
+    
 }

@@ -17,6 +17,7 @@ import com.ares_expedition.dto.websocket.messages.output.BaseMessageOutputDTO;
 import com.ares_expedition.dto.websocket.messages.output.GameStateMessageOutputDTO;
 import com.ares_expedition.enums.game.GameContentNameEnum;
 import com.ares_expedition.enums.game.GameStatusEnum;
+import com.ares_expedition.enums.game.GlobalConstants;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.enums.game.ScanKeepOptionsEnum;
 import com.ares_expedition.enums.websocket.ContentQueryEnum;
@@ -32,7 +33,6 @@ public class GameController {
     private static final Logger logger = LoggerFactory.getLogger(GameController.class);
     private final WsControllerOutput wsOutput;
     private Map<String, Game> gameHolder = new HashMap<>();
-    private int databaseVersion = 1;
 
     public GameController(WsControllerOutput wsOutput){
         this.wsOutput = wsOutput;
@@ -105,6 +105,7 @@ public class GameController {
         game.fillDiscardPileFromPlayerDiscard();
         game.resetResearchResolved();
         game.claimMilestones();
+        game.updateProgression();
         if(game.isGameOver()){
             logger.warn("\u001B[32m ------------Game Over------------ \u001B[0m");
             logger.warn("id: " + game.getGameId());
@@ -237,16 +238,9 @@ public class GameController {
     public void cleanupOldGames() {
         logger.warn("\u001B[32m ------------ Scheduler - Old game cleanup ------------ \u001B[0m");
         Integer gamesCountBeforeCleaning = gameHolder.size();
-        Instant now = Instant.now();
-        gameHolder.entrySet().removeIf(entry -> {
-            Game game = entry.getValue();
-            Duration age = Duration.between(game.getLastUpdate(), now);
 
-            if (age.toHours() >= 24 | game.getDatabaseVersion()< this.getDatabaseVersion()) {
-                logger.warn("\u001B[31m removing : " + game.getGameId() + ": " + age.toHours() + "hours old \u001B[0m");
-                return true;
-            }
-            return false;
+        gameHolder.entrySet().removeIf(entry -> {
+            return isGameRemoveOk(entry.getValue());
         });
         if(gamesCountBeforeCleaning!= gameHolder.size()){
             Map<String, GameData> remainingGames = gameHolder.values().stream()
@@ -258,6 +252,36 @@ public class GameController {
         logger.warn("Remaining active games: " + gameHolder.size());
         logger.warn("\u001B[32m -------------------------------- \u001B[0m");
     }
+    public Boolean isGameRemoveOk(Game game) {
+        Instant now = Instant.now();
+        long age = Duration.between(game.getLastUpdate(), now).toHours();
+
+        //finished
+        if(game.isGameOver() && age >= GlobalConstants.SCHEDULER_DELETE_AFTER_HOURS_FINISHED){
+            logger.warn("\u001B[31m removing FINISHED: " + game.getGameId() + ": " + age + "hours old \u001B[0m");
+            return true;
+        }
+        //newly created idle
+        if(game.getProgression() <= GlobalConstants.SCHEDULER_DELETE_NEW_GAME_PROGRESSION_TRESHOLD 
+            && age >= GlobalConstants.SCHEDULER_DELETE_AFTER_HOURS_NEW_GAME_INACTIVE) {
+            logger.warn("\u001B[31m removing NEWLY CREATED: " + game.getGameId() + ": " + age + "hours old \u001B[0m");
+            return true; 
+        }
+        //any other but idle
+        if(age >= GlobalConstants.SCHEDULER_DELETE_AFTER_HOURS_RUNNING_INACTIVE) {
+            logger.warn("\u001B[31m removing NORMAL RUNNING: " + game.getGameId() + ": " + age + "hours old \u001B[0m");
+            return true;
+        }
+        //incompatible backend version
+        if (game.getDatabaseVersion()< GlobalConstants.BACKEND_DATABASE_VERSION) {
+            logger.warn("\u001B[31m removing INCOMPATIBLE BACKEND VERSION : " + game.getGameId() + " \u001B[0m");
+            return true;
+        }
+
+        logger.warn("\u001B[34m GAME: " + game.getGameId() + ": " + age + "h" + " progression: " + game.getProgression() + "\u001B[0m");
+
+        return false;
+    }
     public Boolean validateSession(String gameId, String playerId){
         if(!this.gameHolder.containsKey(gameId)){
             return false;
@@ -267,11 +291,5 @@ public class GameController {
             return false;
         }
         return true;
-    }
-    public int getDatabaseVersion() {
-        return databaseVersion;
-    }
-    public void setDatabaseVersion(int databaseVersion) {
-        this.databaseVersion = databaseVersion;
     }
 }
