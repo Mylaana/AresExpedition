@@ -648,6 +648,5 @@ public class Game {
         }
 
         this.setProgression(Math.floorDiv(current * 100, total));
-        System.out.println("\u001B[31m current: " + current + " total:" + total +  "\u001B[0m");
     }
 }
