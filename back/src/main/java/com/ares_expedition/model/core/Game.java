@@ -44,6 +44,8 @@ public class Game {
     private Instant creationDate;
     private Instant lastUpdate;
     private int databaseVersion = 0;
+    private int progression = 0;
+
     public Game() {
     }
     
@@ -61,7 +63,7 @@ public class Game {
         this.lastUpdate = creationDate;
         this.shuffleDeck(this.deck);
         this.shuffleDeck(this.deckCorporations);
-        this.databaseVersion = 1;
+        this.databaseVersion = GlobalConstants.BACKEND_DATABASE_VERSION;
 
         for(CreatePlayerDTO playerConfig: gameConfig.getPlayers()){
             //groupPlayerId
@@ -230,6 +232,7 @@ public class Game {
         gameState.setGameStatus(gameStatus);
         gameState.setRound(round);
         gameState.setDeck(getDeck().size());
+        gameState.setProgression(progression);
         if(this.getGameOptions().isContentActive(GameContentNameEnum.expansionDiscovery)){
             gameState.setAwards(awards);
             gameState.setMilestones(milestones);
@@ -367,6 +370,15 @@ public class Game {
 
     public void setGlobalParameters(List<GlobalParameter> globalParameters) {
         this.globalParameters = globalParameters;
+    }
+
+    public int getGlobalParameterCurrentStep(GlobalParameterNameEnum name) {
+        for(GlobalParameter p: this.globalParameters){
+            if(p.getName()==name){
+                return p.getStep();
+            }
+        }
+        return 0;
     }
 
     public static Game createGame(NewGameConfigDTO gameConfig) {
@@ -602,5 +614,40 @@ public class Game {
 
     public void setDatabaseVersion(int databaseVersion) {
         this.databaseVersion = databaseVersion;
+    }
+
+    public int getProgression() {
+        return progression;
+    }
+
+    public void setProgression(int progression) {
+        this.progression = progression;
+    }
+
+    public void updateProgression() {
+        int current = 0;
+        int total;
+
+        // removing 1 per current step and total step for each parameter except oceans
+        total = GlobalConstants.GLOBAL_PARAMETER_OCEAN_MAXSTEP 
+            + GlobalConstants.GLOBAL_PARAMETER_OXYGEN_MAXSTEP 
+            + GlobalConstants.GLOBAL_PARAMETER_TEMPERATURE_MAXSTEP
+            - 2;
+
+        current = this.getGlobalParameterCurrentStep(GlobalParameterNameEnum.OCEAN) 
+            + this.getGlobalParameterCurrentStep(GlobalParameterNameEnum.OXYGEN) 
+            + this.getGlobalParameterCurrentStep(GlobalParameterNameEnum.TEMPERATURE)
+            - 2;
+        if(gameOptions.isContentActive(GameContentNameEnum.expansionFoundations) && gameOptions.isContentActive(GameContentNameEnum.modeInfrastructureMandatory)){
+            total = total + GlobalConstants.GLOBAL_PARAMETER_INFRASTRUCTURE_MAXSTEP - 1;
+            current = current + this.getGlobalParameterCurrentStep(GlobalParameterNameEnum.INFRASTRUCTURE) - 1;
+        }
+        if(gameOptions.isContentActive(GameContentNameEnum.expansionMoon) && gameOptions.isContentActive(GameContentNameEnum.modeMoonMandatory)){
+            total = total + GlobalConstants.GLOBAL_PARAMETER_MOON_MAXSTEP - 1;
+            current = current + this.getGlobalParameterCurrentStep(GlobalParameterNameEnum.MOON) - 1;
+        }
+
+        this.setProgression(Math.floorDiv(current * 100, total));
+        System.out.println("\u001B[31m current: " + current + " total:" + total +  "\u001B[0m");
     }
 }

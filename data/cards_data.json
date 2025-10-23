@@ -12143,7 +12143,7 @@
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever you play a $tag_moon$, you pay 1MC less per $tag_moon$ you already have, including this one.",
+            "en": "EFFECT: Whenever you play a card that has one or more $tag_moon$, you pay 1MC less per $tag_moon$ you already have, including this one.",
             "fr": ""
         },
         "startingMegacredits": 40,

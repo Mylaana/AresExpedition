@@ -24,6 +24,7 @@ public class GameStateMessageOutputDTO {
     private List<AwardsEnum> awards;
     private int round;
     private int deck;
+    private int progression;
 
     public GameStateMessageOutputDTO(){
     }
@@ -97,5 +98,11 @@ public class GameStateMessageOutputDTO {
     }
     public void setDeck(int deck) {
         this.deck = deck;
+    }
+    public int getProgression() {
+        return progression;
+    }
+    public void setProgression(int progression) {
+        this.progression = progression;
     }
 }
