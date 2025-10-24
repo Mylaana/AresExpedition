@@ -173,11 +173,11 @@ public class JsonGameDataHandler {
         
         //create file
         try {  
-            Files.createDirectories(Paths.get(DATABASE_DIRECTORY));
+            Files.createDirectories(Paths.get(ARCHIVE_DIRECTORY));
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             objectMapper.writeValue(new File(fileName), data);
         } catch (IOException e) {  
-            e.printStackTrace();  
+            logger.error("\\u001B[32m Directory not found: " + ARCHIVE_DIRECTORY);
         } 
     }
 }
