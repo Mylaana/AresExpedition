@@ -177,7 +177,7 @@ public class JsonGameDataHandler {
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             objectMapper.writeValue(new File(fileName), data);
         } catch (IOException e) {  
-            logger.error("\\u001B[32m Directory not found: " + ARCHIVE_DIRECTORY);
+            logger.error("\u001B[32m ❌ Failed to archive game " + game.getGameId() + ", " + e + "\u001B[0m");
         } 
     }
 }
