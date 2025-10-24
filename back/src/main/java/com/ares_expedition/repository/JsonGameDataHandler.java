@@ -165,7 +165,6 @@ public class JsonGameDataHandler {
         GameData data = game.toData();
         String now = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String fileName = ARCHIVE_DIRECTORY +  now + "_" + game.getGameId() + ".json";
-        System.out.println(fileName);
         
         File directory = new File(String.valueOf(ARCHIVE_DIRECTORY));
         if (!directory.exists()) {
