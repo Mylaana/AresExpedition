@@ -240,6 +240,10 @@ public class GameController {
         Integer gamesCountBeforeCleaning = gameHolder.size();
 
         gameHolder.entrySet().removeIf(entry -> {
+            Game game = entry.getValue();
+            if(game.isGameOver()){
+                JsonGameDataHandler.archiveFinishedGame(game);
+            }
             return isGameRemoveOk(entry.getValue());
         });
         if(gamesCountBeforeCleaning!= gameHolder.size()){
@@ -258,7 +262,6 @@ public class GameController {
 
         //finished
         if(game.isGameOver() && age >= GlobalConstants.SCHEDULER_DELETE_AFTER_HOURS_FINISHED){
-            logger.warn("\u001B[31m removing FINISHED: " + game.getGameId() + ": " + age + "hours old \u001B[0m");
             return true;
         }
         //newly created idle

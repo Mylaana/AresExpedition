@@ -18,8 +18,10 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,8 @@ public class JsonGameDataHandler {
     private static final String DATABASE_DIRECTORY = "data/";
     private static final String DATABASE_PATH = DATABASE_DIRECTORY + DATABASE_NAME;
     private static final String CARDS_DATA_PATH = "data/cards_data.json";
+    private static final String ARCHIVE_DIRECTORY = "data/archives/";
+
     private static final ObjectMapper objectMapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -155,5 +159,26 @@ public class JsonGameDataHandler {
                 e.printStackTrace();  
             } 
         }
+    }
+    public static void archiveFinishedGame(Game game) {
+        logger.warn("\u001B[34m ARCHIVING: " + game.getGameId() + " " + game.getProgression() + "% \u001B[0m");
+        GameData data = game.toData();
+        String now = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        String fileName = ARCHIVE_DIRECTORY +  now + "_" + game.getGameId() + ".json";
+        System.out.println(fileName);
+        
+        File directory = new File(String.valueOf(ARCHIVE_DIRECTORY));
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        
+        //create file
+        try {  
+            Files.createDirectories(Paths.get(DATABASE_DIRECTORY));
+            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            objectMapper.writeValue(new File(fileName), data);
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        } 
     }
 }

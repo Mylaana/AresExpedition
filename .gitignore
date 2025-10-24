@@ -2,6 +2,7 @@
 
 # Local DB.json
 data/database.json
+data/archives
 back/data
 front/src/assets/data
 

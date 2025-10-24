@@ -14,6 +14,6 @@ public final class GlobalConstants {
     public static final int SCHEDULER_RUN_INTERVAL_HOURS = 3;
     public static final Integer SCHEDULER_DELETE_AFTER_HOURS_RUNNING_INACTIVE = 48;
     public static final Integer SCHEDULER_DELETE_AFTER_HOURS_NEW_GAME_INACTIVE = 2;
-    public static final Integer SCHEDULER_DELETE_AFTER_HOURS_FINISHED = 96;
+    public static final Integer SCHEDULER_DELETE_AFTER_HOURS_FINISHED = 1;
     public static final Integer SCHEDULER_DELETE_NEW_GAME_PROGRESSION_TRESHOLD = 10;
 }
