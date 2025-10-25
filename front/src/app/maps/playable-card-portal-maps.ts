@@ -299,10 +299,10 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 	'CF2-Production': (button) => {
 		switch(button){
 			case(EffectPortalButtonEnum.pushnikProduction_mc):{
-				return '$ressource_megacreditvoid_2$'
+				return '$production_+3$$ressource_megacredit$'
 			}
 			case(EffectPortalButtonEnum.pushnikProduction_heatplant):{
-				return '$ressource_heat$'
+				return '$production_+1$$ressource_heat$$production_+1$$ressource_plant$'
 			}
 		}
 		return ''
