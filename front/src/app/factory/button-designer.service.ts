@@ -82,6 +82,7 @@ export class ButtonDesigner{
 			case('routeHome'):{startEnabled=true; break}
 			case('routeCreateNewGameValidation'):{startEnabled=true; break}
 			case('routeDiscord'):{startEnabled=true; break}
+			case('routeStats'):{startEnabled=true; break}
 
 			//create game
 			case('createGamePlayerNumber'):{startEnabled=true; break}
@@ -152,6 +153,7 @@ export class ButtonDesigner{
 			case('routeHome'):{caption='$other_home$'; break}
 			case('routeCreateNewGameValidation'):{caption='CREATE GAME'; break}
 			case('routeDiscord'):{caption='JOIN US ON DISCORD'; break}
+			case('routeStats'):{caption='SEE GAMES STATS'; break}
 
 			//create game
 			case('createGamePlayerNumber'):{caption='123456'; break}
