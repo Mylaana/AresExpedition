@@ -22,12 +22,10 @@ function formatGainScalingCaptionMegacredit(cardCode: string, state: PlayerState
 	return scaled===0?'$other_none$':`$ressource_megacreditvoid_${getScaling(cardCode, state)}`
 }
 function formatGainScalingCaptionRessource(cardCode: string, state: PlayerStateModel, gainType: AdvancedRessourceType | 'card'): string {
-	console.log(formatGainScalingCaption(cardCode, state, `$ressource_${gainType}$`), cardCode)
 	return formatGainScalingCaption(cardCode, state, `$ressource_${gainType}$`)
 }
 function formatGainScalingCaption(cardCode: string, state: PlayerStateModel, text: string): string {
 	let scaled = getScaling(cardCode, state)
-	console.log(cardCode, scaled)
 	switch(true){
 		case(scaled>1):{
 			return `+${scaled} ${text}`
@@ -366,7 +364,6 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Luna Archives
 	'M87': (card, state) => {
 		let gain = 	getScaling(card, state)
-		console.log(gain)
 		if(gain===0){return []}
 		return [S.addRessourceToCardId({name:'science', valueStock: gain}, card)]
 	},
