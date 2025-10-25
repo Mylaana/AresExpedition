@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { GLOBAL_API_NEWGAME, GLOBAL_API_SESSION, ROUTE_404 } from '../../global/global-const';
+import { GLOBAL_API_NEWGAME, GLOBAL_API_SESSION, GLOBAL_API_STATS, ROUTE_404, ROUTE_STATS } from '../../global/global-const';
 import { ApiMessage } from '../../interfaces/websocket.interface';
 import { myUUID } from '../../types/global.type';
 import { GameParamService } from '../core-game/game-param.service';
@@ -54,5 +54,23 @@ export class ApiService {
 				this.router.navigate([ROUTE_404])
 			}
 		})
+	}
+	getStats(): Observable<any> {
+		return this.http.get(GLOBAL_API_STATS, {observe: 'response'})
+		/*.subscribe({
+			next: (resp) => {
+				if(resp.status===200){
+					console.log(resp.body)
+					return resp.body
+				} else {
+					return 'not 200'
+				}
+			},
+			error: (resp) => {
+				console.error(resp)
+				return resp
+			}
+		})
+			*/
 	}
 }

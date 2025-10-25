@@ -3,6 +3,7 @@
 # Local DB.json
 data/database.json
 data/archives
+data/game_stats.json
 back/data
 front/src/assets/data
 

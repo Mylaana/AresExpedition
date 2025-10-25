@@ -4,8 +4,9 @@ import { HomeComponent } from './components/core/routes/home/home.component';
 import { CardOverviewComponent } from './components/core/routes/card-overview/card-overview.component';
 import { CreateGameComponent } from './components/core/routes/create-game/create-game.component';
 import { NewGameLinksComponent } from './components/core/routes/new-game-links/new-game-links.component';
-import { ROUTE_404, ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_GAME, ROUTE_NEWGAMELINKS } from './global/global-const';
+import { ROUTE_404, ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_GAME, ROUTE_NEWGAMELINKS, ROUTE_STATS } from './global/global-const';
 import { PageNotFoundComponent } from './components/core/routes/page-not-found/page-not-found.component';
+import { StatsComponent } from './components/core/routes/stats/stats.component';
 
 export const routes: Routes = [
 	{ path: '', component: HomeComponent},
@@ -13,5 +14,6 @@ export const routes: Routes = [
 	{ path: ROUTE_CARD_OVERVIEW, component: CardOverviewComponent},
 	{ path: ROUTE_CREATEGAME, component: CreateGameComponent},
 	{ path: ROUTE_NEWGAMELINKS, component: NewGameLinksComponent},
-	{ path: ROUTE_404, component: PageNotFoundComponent }
+	{ path: ROUTE_404, component: PageNotFoundComponent },
+	{ path: ROUTE_STATS, component: StatsComponent }
 ];
