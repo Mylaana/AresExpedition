@@ -9379,7 +9379,7 @@
         },
         "effectText": {
             "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_3$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: chose one:$skipline$$production_+3$$ressource_megacredit$ or $production_+1$$ressource_heat$$production_+1$$ressource_plant$.$skipline$$other_phase_research$: gain $other_researchsymbol$$other_researchcard$.",
-            "fr": "EFFECT: Lorsque une phase que vous n'avez PAS choisie est activ\u00e9e:$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_3$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: choisissez un:$skipline$$production_+3$$ressource_megacredit$ ou $production_+1$$ressource_heat$$production_+1$$ressource_plant$.$skipline$$other_phase_research$: gagnez $other_researchsymbol$$other_researchcard$."
+            "fr": "EFFECT: Lorsqu'une phase que vous n'avez PAS choisie est activ\u00e9e:$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_3$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: choisissez un:$skipline$$production_+3$$ressource_megacredit$ ou $production_+1$$ressource_heat$$production_+1$$ressource_plant$.$skipline$$other_phase_research$: gagnez $other_researchsymbol$$other_researchcard$."
         },
         "startingMegacredits": 40,
         "status": "validated",

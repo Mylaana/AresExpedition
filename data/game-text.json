@@ -359,6 +359,10 @@
         "en": "BUY ARES EXPEDITION FROM FRYXGAMES",
         "fr": "ACHETER ARES EXPEDITION SUR FRYXGAMES"
     },
+    "interfaceButton.buttonHomeStats": {
+        "en": "GAMES STATS",
+        "fr": "STATISTIQUES DES PARTIES"
+    },
     "interfaceButton.buttonCardOverviewDisplayAll": {
         "en": "Display All",
         "fr": "Tout Afficher"

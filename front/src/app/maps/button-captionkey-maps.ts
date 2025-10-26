@@ -16,6 +16,7 @@ export const BUTTON_CAPTIONKEY_FROM_BUTTONNAME: Partial<Record<ButtonNames, () =
 	'routeCardOverview':() => 'buttonHomeCardOverview',
 	'routeDiscord':() => 'buttonHomeDiscord',
 	'routeBuy':() => 'buttonHomeBuyAres',
+	'routeStats':() => 'buttonHomeStats',
 
 	//Card Overview Route
 	'cardOverviewDisplayAll':() => 'buttonCardOverviewDisplayAll',

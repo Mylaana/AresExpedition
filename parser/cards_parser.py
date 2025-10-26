@@ -182,9 +182,8 @@ def parse_row(csv_row: str):
                 parsed_row[map['output_field_name']] = int(parsed_value)
             case _:
                 parsed_row[map['output_field_name']] = parsed_value
-    
-    return parsed_row
 
+    return parsed_row
 
 def main():
     dir_name = os.path.dirname(__file__)

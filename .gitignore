@@ -96,3 +96,6 @@ build/
 /config/back/.env
 /config/back/.env.dev
 /config/back/.env.preprod
+
+# Python
+__pycache__/

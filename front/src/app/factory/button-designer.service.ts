@@ -147,13 +147,7 @@ export class ButtonDesigner{
 			case('closeSettings'):{caption='$other_cancel$';break}
 
 			//router
-			case('routeCreateGame'):{caption='NEW GAME'; break}
-			case('routeCardOverview'):{caption='CARD OVERVIEW'; break}
-			case('routeBuy'):{caption='BUY ARES EXPEDITION FROM FRYXGAMES'; break}
 			case('routeHome'):{caption='$other_home$'; break}
-			case('routeCreateNewGameValidation'):{caption='CREATE GAME'; break}
-			case('routeDiscord'):{caption='JOIN US ON DISCORD'; break}
-			case('routeStats'):{caption='SEE GAMES STATS'; break}
 
 			//create game
 			case('createGamePlayerNumber'):{caption='123456'; break}
