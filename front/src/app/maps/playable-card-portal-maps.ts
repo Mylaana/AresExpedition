@@ -326,7 +326,7 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 				return '-7$ressource_science$:$skipline$$production_+2$$ressource_steel$$production_+1$$ressource_titanium$'
 			}
 			case(EffectPortalButtonEnum.clm_12):{
-				return '-10$ressource_science$:$skipline$+$tag_earth$$tag_jovian$'
+				return '-12$ressource_science$:$skipline$+$tag_earth$$tag_jovian$'
 			}
 		}
 		return ''
