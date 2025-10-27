@@ -1,5 +1,4 @@
-
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from . import enums_definition as e
 
 
@@ -61,6 +60,7 @@ class PlayerState(BaseModel):
     infoState: PlayerStateInfo
     scoreState: PlayerStateScore
     ressourceState: PlayerStateResource
+    projectCardState: PlayerStateCard
 
     def getScore(self):
         return self.scoreState.getTotalScore()
@@ -115,3 +115,102 @@ class GameState(BaseModel):
             return self.getWinner(True)
 
         return max_score_player_name
+
+
+class Card(BaseModel):
+    card_code: str
+    cardType: e.CardTypeEnum
+
+
+class CardStatExport(BaseModel):
+    played: int
+    win: int
+    type: e.CardTypeEnum
+    winrate: int
+
+    model_config = ConfigDict(use_enum_values=True)
+
+
+class CardStat():
+    def __init__(self, card: Card):
+        self.played: int = 0
+        self.win: int = 0
+        self.type: e.CardTypeEnum = card.cardType
+
+    def addResult(self, win: bool):
+        if win:
+            self.addWin()
+        else:
+            self.addLoss()
+
+    def addWin(self):
+        self.win += 1
+        self.played += 1
+
+    def addLoss(self):
+        self.played += 1
+
+    def getWinrate(self) -> float:
+        if self.played == 0:
+            return 0
+        return round(self.win * 100 / self.played)
+
+
+class CardInfo(BaseModel):
+    cards: list[Card]
+
+    def toCardStats(self) -> dict[str, CardStat]:
+        result: dict[str, CardStat] = {}
+
+        for c in self.cards:
+            result[c.card_code] = CardStat(c)
+
+        return result
+
+
+class ParsedStatsExport(BaseModel):
+    card_stats: dict[str, CardStatExport]
+
+
+class ParsedStats():
+    def __init__(self, card_info: CardInfo):
+        self.card_info: CardInfo = card_info
+        self.card_stats: dict[str, CardStat]
+
+        self.initializeCard()
+
+    def load_game(self, game: GameState):
+        winner_id = game.getWinner()
+
+        for p in game.groupPlayerState:
+            self.treatPlayerStats(game.groupPlayerState[p], p == winner_id)
+
+        print(game.gameId + ' loaded')
+
+    def initializeCard(self):
+        self.card_stats = self.card_info.toCardStats()
+
+    def treatPlayerStats(self, player: PlayerState, win: bool):
+        self.treatCardResult(player.projectCardState, win)
+
+    def treatCardResult(self, card_state: PlayerStateCard, win: bool):
+        for c in card_state.cardPlayed:
+            self.addCardResult(c, win)
+
+    def addCardResult(self, card_code: str, win: bool):
+        self.card_stats[card_code].addResult(win)
+
+    def to_json(self) -> str:
+        """formats and dumps final state using pydantic"""
+        export_model = ParsedStatsExport(
+            card_stats={
+                code: CardStatExport(
+                    played=stat.played,
+                    win=stat.win,
+                    type=stat.type,
+                    winrate=stat.getWinrate()
+                )
+                for code, stat in self.card_stats.items()
+            }
+        )
+        return export_model.model_dump_json(indent=4)

@@ -16,6 +16,7 @@ class PhaseNameEnum(Enum):
     PRODUCTION = "PRODUCTION"
     RESEARCH = "RESEARCH"
 
+
 class ResourceTypeEnum(Enum):
     megacredit = "megacredit"
     heat = "heat"
@@ -23,3 +24,10 @@ class ResourceTypeEnum(Enum):
     steel = "steel"
     titanium = "titanium"
     card = "card"
+
+
+class CardTypeEnum(Enum):
+    green = "greenProject"
+    blue = "blueProject"
+    red = "redProject"
+    corp = "corporation"

@@ -6,6 +6,7 @@ data/archives
 data/game_stats.json
 back/data
 front/src/assets/data
+analyzed_games.json
 
 # Compiled output
 /dist
