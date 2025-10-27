@@ -9411,7 +9411,7 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "$other_arrow$  -$ressource_science$:$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-6$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-10$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "en": "$other_arrow$  -$ressource_science$:$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-6$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-12$ressource_science$: +$tag_earth$$tag_jovian$.",
             "fr": ""
         },
         "stockable": [
@@ -11986,7 +11986,7 @@
             "en": "4$tag_space$",
             "fr": ""
         },
-        "status": "bugged",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {
@@ -12012,7 +12012,7 @@
             "en": "EFFECT: Whenever you play a $tag_moon$, draw a card.$skipline$When you play a card that has $tag_moon$ you pay 1MC less for it per $tag_earth$ you have.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -12097,7 +12097,7 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $tag_jovian$or$tag_moon$",
+            "en": "/ $tag_jovian$/$tag_moon$",
             "fr": ""
         },
         "effectSummaryType": "trigger",
@@ -12147,7 +12147,7 @@
             "fr": ""
         },
         "startingMegacredits": 40,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -12162,13 +12162,17 @@
             "en": "Luna Mining Federation",
             "fr": ""
         },
+        "vpText": {
+            "en": "/$ressource_steel$$ressource_steel$/$ressource_titanium$$ressource_titanium$",
+            "fr": ""
+        },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$other_minetile$: $ressource_titanium$$other_tr$",
+            "en": "$other_minetile$: $ressource_titanium$",
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: When you gain a $other_minetile$, increase your $ressource_titanium$ production by 1 and gain 1 $other_tr$.",
+            "en": "EFFECT: When you gain a $other_minetile$, increase your $ressource_titanium$ production by 1.$skipline$EFFECT: Gain 1 VP per 2 $ressource_steel$ and 1 VP per 2 $ressource_titanium$ you have.",
             "fr": ""
         },
         "playedText": {
