@@ -1594,6 +1594,8 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'FM18': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('jovian')}],
 	//Interplanetary Trade
 	'FM20': (s)=> [{name:'megacredit', valueStock:s.getDifferentTagTypeCount()}],
+	//Advertising
+	'FM23': (s)=> [{name:'megacredit', valueStock:s.getProjectPlayedModelList({type:ProjectFilterNameEnum.cost20orMore}).length}],
 	//HelioLink space station
 	'FM30': (s)=> [{name:'heat', valueStock:s.getTagsOfType('science')}],
 	//Potatoes Farm
