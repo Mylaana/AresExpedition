@@ -56,7 +56,7 @@ gamePhaseCardBonus;development_C;;Reduce the cost of the first card you play thi
 gamePhaseCardBonus;construction_C;;Play an additional blue card OR red card this phase.$$AND$$Draw a card.;Jouez une deuxième carte Bleu ou Rouge cette phase.$$ET$$Piochez une carte.
 gamePhaseCardBonus;action_C;;You may repeat two of your ACTION effects once.;Vous pouvez activer deux de vos cartes une deuxième fois.
 gamePhaseCardBonus;production_C;;Gain 1MC.$$Activate the production effect of one of your green cards an additional time this phase.;Gagnez 1MC.$$Gagnez une deuxième fois les productions d'une carte de votre choix cette phase.
-gamePhaseCardBonus;research_C;;Draw an additional 2 cards and keep an additional 2.;Piochez é cartes supplémentaires et gardez en 2 de plus.
+gamePhaseCardBonus;research_C;;Draw an additional 2 cards and keep an additional 2.;Piochez 2 cartes supplémentaires et gardez en 2 de plus.
 gameEventTitle;phasePlanification;;Planification: Select a phase;Planification: Choisissez une phase
 gameEventTitle;phaseDevelopment;;Development Phase;Phase Développement
 gameEventTitle;phaseConstruction;;Construction Phase;Phase Construction
