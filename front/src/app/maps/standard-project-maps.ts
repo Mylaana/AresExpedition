@@ -51,7 +51,7 @@ export const STANDARD_PROJECT_EVENTS: Record<StandardProjectButtonNames, (costMc
     ],
 	'buyMine': (costMC, costPlant, costHeat) => [
 		S.addMine(),
-		S.addProduction({name:'steel', valueStock:1}),
+		S.draw(),
 		S.addRessource({name:'megacredit', valueStock: - costMC}),
     ]
 }

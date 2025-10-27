@@ -175,9 +175,9 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 					EventFactory.simple.addProduction([{name:'steel', valueStock:2}, {name:'titanium', valueStock:1}])
 				]
 			}
-			case(EffectPortalButtonEnum.clm_10):{
+			case(EffectPortalButtonEnum.clm_12):{
 				return [
-					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-10}, 'CF3'),
+					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-12}, 'CF3'),
 					EventFactory.simple.addTagToCard('CF3', 'jovian'),
 					EventFactory.simple.addTagToCard('CF3', 'earth')
 				]
@@ -325,7 +325,7 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 			case(EffectPortalButtonEnum.clm_7):{
 				return '-7$ressource_science$:$skipline$$production_+2$$ressource_steel$$production_+1$$ressource_titanium$'
 			}
-			case(EffectPortalButtonEnum.clm_10):{
+			case(EffectPortalButtonEnum.clm_12):{
 				return '-10$ressource_science$:$skipline$+$tag_earth$$tag_jovian$'
 			}
 		}
@@ -375,7 +375,7 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	//Pushnik Action
 	'CF2-Production': ()=> [EffectPortalButtonEnum.pushnikProduction_mc, EffectPortalButtonEnum.pushnikProduction_heatplant],
 	//CLM - The hesitant hive mind
-	'CF3': ()=> [EffectPortalButtonEnum.clm_1, EffectPortalButtonEnum.clm_2,EffectPortalButtonEnum.clm_4,EffectPortalButtonEnum.clm_6,EffectPortalButtonEnum.clm_7,EffectPortalButtonEnum.clm_10,],
+	'CF3': ()=> [EffectPortalButtonEnum.clm_1, EffectPortalButtonEnum.clm_2,EffectPortalButtonEnum.clm_4,EffectPortalButtonEnum.clm_6,EffectPortalButtonEnum.clm_7,EffectPortalButtonEnum.clm_12,],
 	//Secret Labs
 	'FM25': ()=> [EffectPortalButtonEnum.secretLabs_Ocean, EffectPortalButtonEnum.secretLabs_Oxygen, EffectPortalButtonEnum.secretLabs_Temperature],
 }
@@ -544,8 +544,8 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 			case(EffectPortalButtonEnum.clm_7):{
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:7},'min',clientState, 'CF3')
 			}
-			case(EffectPortalButtonEnum.clm_10):{
-				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:10},'min',clientState, 'CF3')
+			case(EffectPortalButtonEnum.clm_12):{
+				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:12},'min',clientState, 'CF3')
 			}
 		}
 		return false
