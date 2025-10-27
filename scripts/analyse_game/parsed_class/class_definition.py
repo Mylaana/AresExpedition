@@ -123,6 +123,7 @@ class Card(BaseModel):
 
 
 class CardStatExport(BaseModel):
+    code: str
     played: int
     win: int
     type: e.CardTypeEnum
@@ -133,6 +134,7 @@ class CardStatExport(BaseModel):
 
 class CardStat():
     def __init__(self, card: Card):
+        self.code = card.card_code
         self.played: int = 0
         self.win: int = 0
         self.type: e.CardTypeEnum = card.cardType
@@ -169,7 +171,7 @@ class CardInfo(BaseModel):
 
 
 class ParsedStatsExport(BaseModel):
-    card_stats: dict[str, CardStatExport]
+    card_stats: list[CardStatExport]
 
 
 class ParsedStats():
@@ -203,8 +205,12 @@ class ParsedStats():
     def to_json(self) -> str:
         """formats and dumps final state using pydantic"""
         export_model = ParsedStatsExport(
-            card_stats={
+            card_stats=list(self.card_stats.items())
+        )
+        """
+            {
                 code: CardStatExport(
+                    code=stat.code,
                     played=stat.played,
                     win=stat.win,
                     type=stat.type,
@@ -213,4 +219,5 @@ class ParsedStats():
                 for code, stat in self.card_stats.items()
             }
         )
+        """
         return export_model.model_dump_json(indent=4)
