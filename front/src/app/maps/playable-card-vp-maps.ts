@@ -45,7 +45,7 @@ export const SCALING_VP: Record<string, (card: PlayableCardModel, state: PlayerS
 		"M91": (_, state) => Math.floor(state.getMine() /2), //3d printing mine facility
 		"M124": (_, state) => state.getTagsOfType('jovian')+state.getTagsOfType('moon'), //Jupiter Embassy
 
-		"MC1": (_, state) => Math.floor(state.getTagsOfType('moon') / 2), //Crescent research association
+		"MC1": (_, state) => Math.floor(state.getTagsOfType('moon')), //Crescent research association
 		"MC2": (_, state) => {
 			let result = Math.floor((state.getRessourceInfoFromType('steel')?.valueProd??0) / 2)
 			result += Math.floor((state.getRessourceInfoFromType('titanium')?.valueProd??0) / 2)

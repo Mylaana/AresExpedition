@@ -84,8 +84,7 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -696,8 +695,7 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -812,8 +810,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "V",
@@ -1330,8 +1327,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "1",
@@ -1504,8 +1500,7 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -1742,8 +1737,7 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "I-II",
@@ -5049,8 +5043,7 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "greenProject",
         "vpNumber": "1",
@@ -6348,7 +6341,6 @@
         "card_code": "214",
         "origin": "base",
         "tagsId": [
-            0,
             0
         ],
         "cardType": "corporation",
@@ -6383,7 +6375,6 @@
         "card_code": "214B",
         "origin": "base",
         "tagsId": [
-            0,
             0
         ],
         "cardType": "corporation",
@@ -6988,8 +6979,7 @@
         "origin": "discovery",
         "cost": 14,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -12158,12 +12148,13 @@
             11
         ],
         "cardType": "corporation",
+        "vpNumber": "*",
         "title": {
             "en": "Luna Mining Federation",
             "fr": ""
         },
         "vpText": {
-            "en": "/$ressource_steel$$ressource_steel$/$ressource_titanium$$ressource_titanium$",
+            "en": "/$ressource_steel$$ressource_steel$$skipline$/$ressource_titanium$$ressource_titanium$",
             "fr": ""
         },
         "effectSummaryType": "trigger",

@@ -1,6 +1,6 @@
 <div class="wrapper-main">
-	<div class="wrapper-vp-icon">
-		<app-vp [vpNumber]="vpNumber"></app-vp>
+	<div class="wrapper-vp-icon" [class.big]="isMultiline()">
+		<app-vp [vpNumber]="vpNumber" [class.big]="isMultiline()"></app-vp>
 		<div *ngIf="vpDescription" class="wrapper-vp-text">
 			<div class="wrapper-text">
 				<app-text-with-image [rawText]="vpDescription" [cardSize]="cardSize" [context]="'cardVpText'"></app-text-with-image>
@@ -11,7 +11,7 @@
 				<div class="inner-background"></div>
 			</div>
 			<div class="layout-vp-right">
-				<div class="inner-background"></div>
+				<div [ngClass]="['inner-background']"></div>
 			</div>
 		</div>
 	</div>

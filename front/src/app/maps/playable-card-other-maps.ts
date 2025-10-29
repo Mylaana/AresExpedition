@@ -1484,13 +1484,21 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'M123': () => [
 		S.increaseResearchScanKeep({scan:3, keep:0})
 	],
+	//Crescent research association
+	'MC1': () => [
+		S.increaseResearchScanKeep({scan:1, keep:0})
+	],
 	//Luna Mining Federation
 	'MC2': () => [
 		S.addMine(2),
 	],
+	//Crescent research association
+	'MC3': () => [
+		S.increaseMoonParameter(2)
+	],
 	//Grand Luna Capital Group
 	'MC4': () => [
-		S.addHabitat(1),
+		S.addHabitat(2),
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: PlayerStateModel) => number> = {
