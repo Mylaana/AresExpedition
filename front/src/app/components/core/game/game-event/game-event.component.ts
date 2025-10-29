@@ -142,6 +142,7 @@ export class GameEventComponent {
 	}
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
+		window.scroll({top:0})
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
 		if(!this.currentEvent){return}
 		this.resetValidateButtonState(this.currentEvent)
