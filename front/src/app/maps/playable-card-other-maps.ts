@@ -1254,8 +1254,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Lunar Embassy
 	'FM16': () => [
 		S.draw(1),
-		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		S.addProduction({name:'megacredit', valueStock:3})
+		S.addProduction({name:'megacredit', valueStock:5})
 	],
 	//Ecology research
 	'FM17': () => [
@@ -1486,13 +1485,13 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Crescent research association
 	'MC1': () => [
-		S.increaseResearchScanKeep({scan:1, keep:0})
+		S.increaseResearchScanKeep({scan:2, keep:0})
 	],
 	//Luna Mining Federation
 	'MC2': () => [
 		S.addMine(2),
 	],
-	//Crescent research association
+	//Luna first
 	'MC3': () => [
 		S.increaseMoonParameter(2)
 	],
@@ -1631,6 +1630,8 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'M28': (s)=> [{name:'card', valueStock: Math.floor(s.getTagsOfType('moon') / 3)}],
 	//Habitats Greenification
 	'M31': (s)=> [{name:'plant', valueStock:s.getHabitat()}],
+	//Luna Metropolis
+	'M32': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('earth')}],
 	//Luna first
 	'MC3': (s)=> {
 		let param = s.getGlobalParameterFromName(GlobalParameterNameEnum.moon)

@@ -84,7 +84,8 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -695,7 +696,8 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -810,7 +812,8 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "V",
@@ -1327,7 +1330,8 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "1",
@@ -1500,7 +1504,8 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -1737,7 +1742,8 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "I-II",
@@ -5043,7 +5049,8 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "greenProject",
         "vpNumber": "1",
@@ -6341,6 +6348,7 @@
         "card_code": "214",
         "origin": "base",
         "tagsId": [
+            0,
             0
         ],
         "cardType": "corporation",
@@ -6375,6 +6383,7 @@
         "card_code": "214B",
         "origin": "base",
         "tagsId": [
+            0,
             0
         ],
         "cardType": "corporation",
@@ -6979,7 +6988,8 @@
         "origin": "discovery",
         "cost": 14,
         "tagsId": [
-            2
+            2,
+            0
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -9941,16 +9951,16 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$/$tag_earth$$tag_earth$",
-            "fr": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$/$tag_earth$$tag_earth$"
+            "en": "$ressource_megacreditvoid_5$$skipline$$ressource_plant$/$tag_earth$$tag_earth$",
+            "fr": "$ressource_megacreditvoid_5$$skipline$$ressource_plant$/$tag_earth$$tag_earth$"
         },
         "effectText": {
-            "en": "During the production phase, this card produces 3 MC and 1 $ressource_plant$ per two $tag_earth$ you have, including this one.",
-            "fr": "Lors de la phase de production, cette carte produit 1 $ressource_plant$ tous les deux $tag_earth$ en votre possession, y compris celui-ci."
+            "en": "During the production phase, this card produces 5 MC, $skipline$ During the production phase, this card produces 1 $ressource_plant$ per two $tag_earth$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 5 MC.$skipline$Lors de la phase de production, cette carte produit 1 $ressource_plant$ tous les deux $tag_earth$ en votre possession, y compris celui-ci."
         },
         "playedText": {
-            "en": "Draw a card.$skipline$Raise infrastructure 1 step.",
-            "fr": "Piochez une carte.$skipline$Augmentez l'infrastructure de 1."
+            "en": "Draw a card.",
+            "fr": "Piochez une carte."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -11411,6 +11421,32 @@
         "vpScaling": "0"
     },
     {
+        "card_code": "M32",
+        "origin": "moon",
+        "cost": 21,
+        "tagsId": [
+            1,
+            4
+        ],
+        "cardType": "greenProject",
+        "vpNumber": "2",
+        "title": {
+            "en": "Luna Metropolis",
+            "fr": ""
+        },
+        "effectSummaryType": "production",
+        "effectSummaryText": {
+            "en": "$ressource_megacredit$ / $tag_earth$",
+            "fr": ""
+        },
+        "effectText": {
+            "en": "During the production phase, this card produces 1 MC per $tag_earth$ you have, including this one.",
+            "fr": ""
+        },
+        "status": "implemented",
+        "vpScaling": "0"
+    },
+    {
         "card_code": "M60",
         "origin": "moon",
         "cost": 34,
@@ -12096,7 +12132,7 @@
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever you play a $tag_jovian$ or $tag_moon$ you pay 2MC less for it.$skipline$\nEFFECT: Gain 1 VP per TOTAL Jovian + Moon tag you have, including those ones.",
+            "en": "EFFECT: Whenever you play a $tag_jovian$ or $tag_moon$ you pay 2MC less for it.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -12129,23 +12165,23 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_moon$: $ressource_megacreditvoid_-1$/$tag_moon$",
+            "en": "$other_researchsymbol$ : $other_researchcard$$other_researchcard$",
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever you play a card that has one or more $tag_moon$, you pay 1MC less per $tag_moon$ you already have, including this one.",
-            "fr": ""
+            "en": "EFFECT: When you draw cards during the research phase, draw 2 additional card.",
+            "fr": "EFFET: Lorsque vous piochez des cartes pendant la phase de recherche, piochez 2 carte suppl\u00e9mentaire."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
-            "en": "$other_researchsymbol$ : $other_researchcard$",
+            "en": "$tag_moon$: $ressource_megacreditvoid_-1$/$tag_moon$",
             "fr": ""
         },
         "effectText2": {
-            "en": "EFFECT: When you draw cards during the research phase, draw 1 additional card.",
-            "fr": "EFFET: Lorsque vous piochez des cartes pendant la phase de recherche, piochez 1 carte suppl\u00e9mentaire."
+            "en": "EFFECT: Whenever you play a card that has one or more $tag_moon$, you pay 1MC less per $tag_moon$ you already have, including this one.",
+            "fr": ""
         },
-        "startingMegacredits": 30,
+        "startingMegacredits": 32,
         "status": "validated",
         "vpScaling": "1"
     },
@@ -12172,7 +12208,7 @@
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: When you gain a $other_minetile$, increase your $ressource_titanium$ production by 1.$skipline$EFFECT: Gain 1 VP per 2 $ressource_steel$ and 1 VP per 2 $ressource_titanium$ you have.",
+            "en": "EFFECT: When you gain a $other_minetile$, increase your $ressource_titanium$ production by 1.",
             "fr": ""
         },
         "playedText": {
@@ -12240,7 +12276,7 @@
             "en": "Gain $other_habitattile$$other_habitattile$",
             "fr": ""
         },
-        "startingMegacredits": 30,
+        "startingMegacredits": 34,
         "status": "validated",
         "vpScaling": "1"
     }
