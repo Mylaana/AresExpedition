@@ -89,6 +89,9 @@ class GameState(BaseModel):
         return 'pouet'
 
     def getWinner(self, tie: bool = False) -> str:
+        if len(self.groupPlayerId) <= 1:
+            return 'solo'
+
         max_score = -1
         max_score_player_name = ''
         tie_counter = 0
@@ -204,20 +207,17 @@ class ParsedStats():
 
     def to_json(self) -> str:
         """formats and dumps final state using pydantic"""
+        card_list: list[CardStatExport] = [
+            CardStatExport(
+                code=stat.code,
+                played=stat.played,
+                win=stat.win,
+                type=stat.type,
+                winrate=stat.getWinrate()
+            )
+            for stat in self.card_stats.values()
+        ]
         export_model = ParsedStatsExport(
-            card_stats=list(self.card_stats.items())
+            card_stats=list(card_list)
         )
-        """
-            {
-                code: CardStatExport(
-                    code=stat.code,
-                    played=stat.played,
-                    win=stat.win,
-                    type=stat.type,
-                    winrate=stat.getWinrate()
-                )
-                for code, stat in self.card_stats.items()
-            }
-        )
-        """
         return export_model.model_dump_json(indent=4)

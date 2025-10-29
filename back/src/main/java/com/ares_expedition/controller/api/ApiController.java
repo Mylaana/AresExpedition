@@ -36,7 +36,7 @@ public class ApiController {
     private final GameController gameController;
     private final NewGameService newGameService;
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private static final Path STATS_FILE = Paths.get("data/game_stats.json");
+    private static final Path STATS_FILE = Paths.get("data/analyzed_games.json");
 
     public ApiController(NewGameService newGameService, GameController gameController){
         this.newGameService = newGameService;

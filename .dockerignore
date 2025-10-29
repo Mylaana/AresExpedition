@@ -15,7 +15,6 @@ back/.mvn
 test
 parser
 ressources
-scripts
 
 # Angular Environments
 ## add environments docker ignore later at build
@@ -26,3 +25,4 @@ scripts
 # other env files
 *.env
 .env.*
+env
