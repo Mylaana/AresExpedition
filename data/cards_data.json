@@ -84,8 +84,7 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -696,8 +695,7 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -812,8 +810,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "V",
@@ -1330,8 +1327,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "1",
@@ -1504,8 +1500,7 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -1742,8 +1737,7 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "I-II",
@@ -5049,8 +5043,7 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "greenProject",
         "vpNumber": "1",
@@ -6348,7 +6341,6 @@
         "card_code": "214",
         "origin": "base",
         "tagsId": [
-            0,
             0
         ],
         "cardType": "corporation",
@@ -6383,7 +6375,6 @@
         "card_code": "214B",
         "origin": "base",
         "tagsId": [
-            0,
             0
         ],
         "cardType": "corporation",
@@ -6988,8 +6979,7 @@
         "origin": "discovery",
         "cost": 14,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -11582,6 +11572,27 @@
             "fr": ""
         },
         "status": "validated",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "M66",
+        "origin": "moon",
+        "cost": 48,
+        "tagsId": [
+            1,
+            4,
+            9
+        ],
+        "cardType": "redProject",
+        "title": {
+            "en": "Interplanetary Slingshot Cargo",
+            "fr": ""
+        },
+        "playedText": {
+            "en": "You may play an additional card this phase. That card may be a green card.$skipline$You may play an additional card this phase. That card may be a green card.$skipline$You may play an additional card this phase. That card may be a green card.",
+            "fr": "Vous pouvez jouer une carte suppl\u00e9mentaire lors de cette phase. Cette carte peut \u00eatre verte.$skipline$Vous pouvez jouer une carte suppl\u00e9mentaire lors de cette phase. Cette carte peut \u00eatre verte.$skipline$Vous pouvez jouer une carte suppl\u00e9mentaire lors de cette phase. Cette carte peut \u00eatre verte."
+        },
+        "status": "filled",
         "vpScaling": "0"
     },
     {

@@ -526,7 +526,7 @@ export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: Playe
 	},
 	//Buy Temperature - Standard Technology
 	'buyHabitat': (state) => {
-		let result: number = 18
+		let result: number = 16
 		result -= state.getTriggersIdActive().includes('55')? 4:0
 		result -= state.getTriggersIdActive().includes('55B')? 2:0
 		result -= state.getTriggersIdActive().includes('M122')? 3:0
@@ -542,7 +542,7 @@ export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: Playe
 	},
 	//Buy Temperature - Standard Technology
 	'buyMine': (state) => {
-		let result: number = 18
+		let result: number = 16
 		result -= state.getTriggersIdActive().includes('55')? 4:0
 		result -= state.getTriggersIdActive().includes('55B')? 2:0
 		result -= state.getTriggersIdActive().includes('M122')? 3:0

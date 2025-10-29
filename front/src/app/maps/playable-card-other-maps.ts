@@ -1453,10 +1453,9 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Colonist Shuttle
 	'M61': (state) => {
 		let result = [
-			S.increaseMoonParameter(),
+			S.addHabitat(),
 			S.draw(1)
 		]
-		if(state.getHabitat()>=3){result.push(S.addRessource({name:'megacredit', valueStock:10}))}
 		return result
 	},
 	//He3 Production Quotas
@@ -1467,12 +1466,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Preliminary Darkside
 	'M64': () => [
-		S.increaseMoonParameter(2),
+		S.addMine(),
 		S.draw()
 	],
 	//Darkside Meteor Bombardment
 	'M65': () => [
-		S.increaseMoonParameter(3),
+		S.addMine(2),
 		S.draw(2)
 	],
 	//Moon Minerals Tradecenter
