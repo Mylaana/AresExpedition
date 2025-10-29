@@ -39,6 +39,10 @@ export class PlayableCardModel {
 	tagStock!: number[] // this stores additional tags and wildtags result
     tagsUrl?: string[];
 
+	//stats
+	statWinrate?: number
+	statPlayed?: number
+
 	private static _language: SettingSupportedLanguage = SETTING_DEFAULT_LANGUAGE
 	constructor(
 		private raw?: PlayableCardInterface,
@@ -305,6 +309,13 @@ export class PlayableCardModel {
 		}
 		//replace wild tags with stock
 		this.tagsId = this.tagsId.filter((el) => ![10, -1].includes(el)).concat(remainingStock)
+	}
+	hasStats(): boolean {
+		if(!this.statPlayed || this.statPlayed===0){
+
+			return false
+		}
+		return true
 	}
 	toStockDTO(): PlayedCardStocksDTO {
 		let dto : PlayedCardStocksDTO = {}

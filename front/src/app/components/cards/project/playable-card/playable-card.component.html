@@ -1,5 +1,4 @@
-<div class="wrapper-main"
-	[ngClass]="[cardSize]"
+<div [ngClass]="['wrapper-main', cardSize, projectCard.hasStats()?'stats':'']"
 	(mouseenter)="_hovered=true"
 	(mouseleave)="_hovered=false">
 	<div class="wrapper-border">
@@ -100,4 +99,9 @@
 		[cardSize]="cardSize"
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
+	<app-card-stats
+		*ngIf="projectCard.hasStats()"
+		[played]="projectCard.statPlayed??0"
+		[winrate]="projectCard.statWinrate??0">
+	</app-card-stats>
 </div>

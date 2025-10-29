@@ -28,6 +28,7 @@ import { ProjectFilter } from '../../../../interfaces/global.interface';
 import { CardDisabledForegroundComponent } from '../card-blocks/card-disabled-foreground/card-disabled-foreground.component';
 import { SettingCardSize } from '../../../../types/global.type';
 import { ProjectCardScalingVPService } from '../../../../services/cards/project-card-scaling-VP.service';
+import { CardStatsComponent } from '../card-blocks/card-stats/card-stats.component';
 
 @Component({
     selector: 'app-playable-card',
@@ -47,7 +48,8 @@ import { ProjectCardScalingVPService } from '../../../../services/cards/project-
         CardTitleComponent,
         CardStartingMegacreditsComponent,
 		CardStatusComponent,
-		CardDisabledForegroundComponent
+		CardDisabledForegroundComponent,
+		CardStatsComponent
     ],
     templateUrl: './playable-card.component.html',
     styleUrl: './playable-card.component.scss',
