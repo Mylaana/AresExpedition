@@ -55,7 +55,6 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	constructor(private gameParam: GameParamService){}
 
 	ngOnInit(){
-		console.log(this.listType)
 		this.resetSelector()
 		this.updateCardList()
 		this.setBackground()
