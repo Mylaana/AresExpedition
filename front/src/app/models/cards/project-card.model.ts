@@ -3,10 +3,11 @@ import { AdvancedRessourceType, SettingSupportedLanguage, TagType } from "../../
 import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, LocalizedText} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { PlayedCardStocksDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
-import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
+import { CardStats, PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
 import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const"
+
 
 export class PlayableCardModel {
     cardCode!: string;
@@ -40,8 +41,7 @@ export class PlayableCardModel {
     tagsUrl?: string[];
 
 	//stats
-	statWinrate?: number
-	statPlayed?: number
+	stats?: CardStats
 
 	private static _language: SettingSupportedLanguage = SETTING_DEFAULT_LANGUAGE
 	constructor(
@@ -311,8 +311,7 @@ export class PlayableCardModel {
 		this.tagsId = this.tagsId.filter((el) => ![10, -1].includes(el)).concat(remainingStock)
 	}
 	hasStats(): boolean {
-		if(!this.statPlayed || this.statPlayed===0){
-
+		if(!this.stats){
 			return false
 		}
 		return true

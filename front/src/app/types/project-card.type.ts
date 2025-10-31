@@ -23,3 +23,7 @@ export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStarting
 export type PlayedCardDTO = {[key: string]: PlayedCardStocksDTO}
 export type ActivationOption = 1 | 2
 export type LocalizedText = Partial<Record<SettingSupportedLanguage, string>>;
+
+export type StatsRanking = 'descending' | 'ascending'
+export type StatsCardFamily = 'project' | 'corporation' | 'blueProject' | 'redProject' | 'greenProject'
+export type StatsCardSubFamily = 'activableProject' | 'triggerProject'

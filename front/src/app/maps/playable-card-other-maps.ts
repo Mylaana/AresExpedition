@@ -199,7 +199,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//hypersensitive Chip Factory
 	'M10': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
 	//Luna Mining Hub
-	'M11': (s)=> Checker.isMoonTileOk('mine', 2, 'min', s),
+	'M11': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
 	//Luna Senate
 	'M13': (s)=> Checker.isTagOk('moon', 3, 'min', s),
 	//Lunar industry complex
@@ -224,7 +224,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//Luna Archives
 	'M87': (s)=> Checker.isTagOk('science', 3, 'min', s),
 	//Pets Acclimatization
-	'M90': (s)=> Checker.isMoonTileOk('habitat', 3, 'min', s),
+	'M90': (s)=> Checker.isMoonTileOk('habitat', 2, 'min', s),
 	//Moon Tether
 	'M120': (s)=> Checker.isTagOk('space', 4, 'min', s),
 	//Mooncrate Block Factory
@@ -1484,7 +1484,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Crescent research association
 	'MC1': () => [
-		S.increaseResearchScanKeep({scan:2, keep:0})
+		S.increaseResearchScanKeep({scan:1, keep:0})
 	],
 	//Luna Mining Federation
 	'MC2': () => [

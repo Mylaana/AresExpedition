@@ -1,5 +1,5 @@
 import { AdvancedRessourceType } from "../types/global.type"
-import { SummaryType, CardType, PrerequisiteTresholdType, PrerequisiteType, LocalizedText } from "../types/project-card.type"
+import { SummaryType, CardType, PrerequisiteTresholdType, PrerequisiteType, LocalizedText, StatsCardFamily } from "../types/project-card.type"
 import { AdvancedRessourceStock } from "./global.interface"
 
 export interface CardState{
@@ -59,4 +59,14 @@ export interface PlayableCardInterface {
 export interface CardScalingVP {
 	cardCode: string,
 	vp: number
+}
+
+export interface CardStats {
+	code: string,
+	played: number,
+	win: number,
+	type: StatsCardFamily,
+	winrate: number
+	score: number
+	duration: number
 }

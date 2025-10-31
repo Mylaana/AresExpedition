@@ -4554,7 +4554,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant for each $tag_plant$ you have.",
-            "fr": "Lors de la phase de production, cette carte produit 1 plante par ^tag_plant$ en votre possession. "
+            "fr": "Lors de la phase de production, cette carte produit 1 plante par $tag_plant$ en votre possession. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -10495,125 +10495,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M2",
-        "origin": "moon",
-        "cost": 15,
-        "tagsId": [
-            0,
-            11
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Aristarchus Road Network",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 2MC.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M3",
-        "origin": "moon",
-        "cost": 8,
-        "tagsId": [
-            1,
-            11,
-            3
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Copernicus Solar Arrays",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_heat$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 1 heat.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Gain 2 heat.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M4",
-        "origin": "moon",
-        "cost": 18,
-        "tagsId": [
-            1,
-            11
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "2",
-        "title": {
-            "en": "Darkside Mining Syndicate",
-            "fr": ""
-        },
-        "effectSummaryType": "greyProduction",
-        "effectSummaryText": {
-            "en": "$ressource_titanium$$ressource_titanium$ OR $skipline$$ressource_titanium$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "EFFECT: When you play a $tag_space$, you pay 3 or 6MC less for it.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "If you have no $other_minetile$ when playing this card, gain an additional $ressource_titanium$ production.$skipline$Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M5",
-        "origin": "moon",
-        "cost": 18,
-        "tagsId": [
-            11
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Deep Lunar Mining",
-            "fr": ""
-        },
-        "effectSummaryType": "greyProduction",
-        "effectSummaryText": {
-            "en": "$ressource_titanium$$ressource_titanium$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "EFFECT: When you play a $tag_space$, you pay 6MC less for it.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M6",
         "origin": "moon",
         "cost": 12,
@@ -10694,64 +10575,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M9",
-        "origin": "moon",
-        "cost": 10,
-        "tagsId": [
-            3
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Heliostat Mirror Array",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_heat$$ressource_heat$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 2 heat.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M10",
-        "origin": "moon",
-        "cost": 11,
-        "tagsId": [
-            0,
-            11
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Hypersensitive Silicon Chip Factory",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_4$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 4MC.",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "Requires that you have 1 $other_minetile$.",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "$other_minetile$",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M11",
         "origin": "moon",
         "cost": 23,
@@ -10765,7 +10588,7 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $other_minetile$",
+            "en": "/ $other_minetile$$other_minetile$",
             "fr": ""
         },
         "effectSummaryType": "greyProduction",
@@ -10782,43 +10605,15 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "Requires that you have 2 $other_minetile$.",
+            "en": "Requires that you have $other_minetile$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "$other_minetile$$other_minetile$",
+            "en": "$other_minetile$",
             "fr": ""
         },
         "status": "validated",
         "vpScaling": "1"
-    },
-    {
-        "card_code": "M12",
-        "origin": "moon",
-        "cost": 11,
-        "tagsId": [
-            11
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Luna Resort",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_3$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 3MC.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
     },
     {
         "card_code": "M13",
@@ -11028,7 +10823,6 @@
         "origin": "moon",
         "cost": 21,
         "tagsId": [
-            2,
             0,
             11
         ],
@@ -11128,34 +10922,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M23",
-        "origin": "moon",
-        "cost": 12,
-        "tagsId": [
-            11
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Sinus Iridium Road Network",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 2MC.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M24",
         "origin": "moon",
         "cost": 16,
@@ -11189,34 +10955,6 @@
         },
         "prerequisiteSummaryText": {
             "en": "4$tag_moon$",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M25",
-        "origin": "moon",
-        "cost": 8,
-        "tagsId": [
-            11
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Tycho Road Network",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 1MC.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
             "fr": ""
         },
         "status": "validated",
@@ -11385,32 +11123,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M31",
-        "origin": "moon",
-        "cost": 15,
-        "tagsId": [
-            11,
-            6
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Habitats Greenification",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_plant$ / $other_habitattile$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 1 $ressource_plant$ per $other_habitattile$ you have.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M32",
         "origin": "moon",
         "cost": 21,
@@ -11433,7 +11145,7 @@
             "en": "During the production phase, this card produces 1 MC per $tag_earth$ you have, including this one.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11460,10 +11172,10 @@
     {
         "card_code": "M61",
         "origin": "moon",
-        "cost": 10,
+        "cost": 5,
         "tagsId": [
-            1,
             4,
+            11,
             9
         ],
         "cardType": "redProject",
@@ -11472,7 +11184,7 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Increase Moon structures by 1.$skipline$Draw a card.$skipline$If you have 3 $other_habitattile$ or more, gain 10MC.",
+            "en": "Gain $other_habitattile$.$skipline$Draw a card.",
             "fr": ""
         },
         "status": "validated",
@@ -11548,7 +11260,7 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Increase Moon structures by 2.$skipline$Draw a card.",
+            "en": "Gain $other_minetile$.$skipline$Draw a card.",
             "fr": ""
         },
         "status": "validated",
@@ -11568,7 +11280,7 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Increase Moon structures by 3.$skipline$Draw 2 cards.",
+            "en": "Gain $other_minetile$$other_minetile$.$skipline$Draw 2 cards.",
             "fr": ""
         },
         "status": "validated",
@@ -11596,29 +11308,24 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M80",
+        "card_code": "M67",
         "origin": "moon",
-        "cost": 12,
+        "cost": 9,
         "tagsId": [
-            0
+            11,
+            8,
+            9
         ],
-        "cardType": "blueProject",
-        "vpNumber": "1",
+        "cardType": "redProject",
         "title": {
-            "en": "He3 Refinery",
+            "en": "Biological Lab Implantation",
             "fr": ""
         },
-        "effectSummaryType": "action",
-        "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_megacreditvoid_2$/$other_minetile$",
+        "playedText": {
+            "en": "Gain a $other_habitattile$.$skipline$Draw a card.$skipline$Add 5 $ressource_microbe$ to a card.",
             "fr": ""
         },
-        "effectText": {
-            "en": "ACTION: Gain 2MC per $other_minetile$ you have.",
-            "fr": ""
-        },
-        "effectSummaryOption": "scalingCostActivation",
-        "status": "validated",
+        "status": "filled",
         "vpScaling": "0"
     },
     {
@@ -11653,35 +11360,6 @@
         ],
         "status": "validated",
         "vpScaling": "1"
-    },
-    {
-        "card_code": "M83",
-        "origin": "moon",
-        "cost": 3,
-        "tagsId": [
-            1,
-            11
-        ],
-        "cardType": "blueProject",
-        "title": {
-            "en": "Ancient Shipyard",
-            "fr": ""
-        },
-        "effectSummaryType": "action",
-        "effectSummaryText": {
-            "en": "$other_arrow$$skipline$-$other_tr$: $ressource_megacreditvoid_8$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "ACTION: lose 1 $other_tr$ to gain $ressource_megacreditvoid_5$.",
-            "fr": ""
-        },
-        "status": "blocked",
-        "actionTextOption1": {
-            "en": "-$other_tr$$ressource_megacreditvoid_8$",
-            "fr": ""
-        },
-        "vpScaling": "0"
     },
     {
         "card_code": "M84",
@@ -11830,32 +11508,6 @@
         "vpScaling": "1"
     },
     {
-        "card_code": "M88",
-        "origin": "moon",
-        "cost": 14,
-        "tagsId": [
-            1
-        ],
-        "cardType": "blueProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Luna Trade Station",
-            "fr": ""
-        },
-        "effectSummaryType": "action",
-        "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_megacredit$/$other_habitattile$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "ACTION: Gain 1MC per $other_habitattile$ you have.",
-            "fr": ""
-        },
-        "effectSummaryOption": "scalingCostActivation",
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M89",
         "origin": "moon",
         "cost": 9,
@@ -11917,11 +11569,11 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "prerequisiteText": {
-            "en": "Requires that you have 3 $other_habitattile$.",
+            "en": "Requires that you have 2 $other_habitattile$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "$other_habitattile$$other_habitattile$$other_habitattile$",
+            "en": "$other_habitattile$$other_habitattile$",
             "fr": ""
         },
         "stockable": [
@@ -11935,8 +11587,7 @@
         "origin": "moon",
         "cost": 26,
         "tagsId": [
-            0,
-            2
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -11966,8 +11617,7 @@
         "origin": "moon",
         "cost": 24,
         "tagsId": [
-            0,
-            2
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -12090,7 +11740,6 @@
         "origin": "moon",
         "cost": 5,
         "tagsId": [
-            2,
             2
         ],
         "cardType": "blueProject",
