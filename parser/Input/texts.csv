@@ -102,10 +102,10 @@ gameEventTitle;eventCorpSelection;;Select a Corporation;Sélectionnez une Corpora
 gameEventTitle;eventCorpSelectionMerger;;Select a second Corporation (Merger);Sélectionnez une seconde Corporation (Merger)
 gameEventTitle;eventOptionalSell;;Select any number of cards to sell;Sélectionnez des cartes à vendre
 gameEventTitle;eventForcedSell;;Too many cards in hand, please select $0$ cards to sell or more;Vous avez trop de cartes en main, sélectionnez $0$ cartes ou plus à vendre
-;;;;
-;;;;
-;;;;
-;;;;
+statTooltip;cardStatTooltipWinrate;;Average Winrate;Taux de victoire
+statTooltip;cardStatTooltipPlayed;;Number of time played;Nombre de fois jouée
+statTooltip;cardStatTooltipScore;;Average score;Score moyen
+statTooltip;cardStatTooltipDuration;;Average game length;Durée moyenne de partie
 ;;;;
 ;;;;
 ;;;;

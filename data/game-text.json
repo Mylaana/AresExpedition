@@ -406,5 +406,21 @@
     "gameEventTitle.eventForcedSell": {
         "en": "Too many cards in hand, please select $0$ cards to sell or more",
         "fr": "Vous avez trop de cartes en main, s\u00e9lectionnez $0$ cartes ou plus \u00e0 vendre"
+    },
+    "statTooltip.cardStatTooltipWinrate": {
+        "en": "Average Winrate",
+        "fr": "Taux de victoire"
+    },
+    "statTooltip.cardStatTooltipPlayed": {
+        "en": "Number of time played",
+        "fr": "Nombre de fois jou\u00e9e"
+    },
+    "statTooltip.cardStatTooltipScore": {
+        "en": "Average score",
+        "fr": "Score moyen"
+    },
+    "statTooltip.cardStatTooltipDuration": {
+        "en": "Average game length",
+        "fr": "Dur\u00e9e moyenne de partie"
     }
 }
