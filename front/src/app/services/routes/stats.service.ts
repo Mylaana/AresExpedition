@@ -2,18 +2,10 @@ import { Injectable } from "@angular/core";
 import { Utils } from "../../utils/utils";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
+import { StatsCardFamily, StatsRanking } from "../../types/project-card.type";
+import { CardStats } from "../../interfaces/card.interface";
+import { StatTooltipKey } from "../../types/text.type";
 
-interface CardStats {
-	code: string,
-	played: number,
-	win: number,
-	type: StatsCardFamily,
-	winrate: number
-}
-
-export type StatsRanking = 'descending' | 'ascending'
-export type StatsCardFamily = 'project' | 'corporation' | 'blueProject' | 'redProject' | 'greenProject'
-export type StatsCardSubFamily = 'activableProject' | 'triggerProject'
 
 @Injectable()
 export class StatService {
@@ -21,8 +13,15 @@ export class StatService {
 	rawCardStats!: CardStats[]
 	corpoStats: CardStats[] = []
 	projectStats: CardStats[] = []
-	private baseSampleSize = 10
+	private baseSampleSize = 2
 	private minimumPlayed = 2
+	private cardsRanking: Record<StatsCardFamily, PlayableCardModel[]> = {
+		corporation: [],
+		project: [],
+		greenProject: [],
+		blueProject: [],
+		redProject: []
+	}
 
 	constructor(private cardInfoService: ProjectCardInfoService){}
 
@@ -37,6 +36,47 @@ export class StatService {
 				this.projectStats.push(card)
 			}
 		}
+		this.fillCardsRanking()
+	}
+	fillCardsRanking(){
+		this.cardsRanking['corporation'] = this.fillRanking('corporation')
+		console.log(this.cardsRanking)
+	}
+	fillRanking(family: StatsCardFamily, ranking: StatsRanking = 'descending'){
+		if(!this.rawCardStats){return []}
+		console.log(family)
+		let cards: CardStats[] = []
+		switch(family){
+			case('corporation'):{
+				cards = Utils.jsonCopy(this.corpoStats)
+				break
+			}
+			case('project'):{
+				cards = Utils.jsonCopy(this.projectStats)
+				break
+			}
+			case('blueProject'):
+			case('redProject'):
+			case('greenProject'):{
+				cards = this.projectStats.filter((el) => el.type===family)
+				break
+			}
+		}
+		if(ranking==='ascending'){
+			cards = this.sortArray(cards, ranking)
+		}
+
+		let result: PlayableCardModel [] = []
+		for(let i=0; i<cards.length; i++){
+			let statCard = cards[i]
+			if(!statCard){break}
+			let card = this.cardInfoService.getCardById(statCard.code)
+			if(!card){continue}
+			card.stats = statCard
+
+			result.push(card)
+		}
+		return result
 	}
 	sortArray(array: CardStats[], ranking: StatsRanking): CardStats[] {
 		if(ranking==='descending'){
@@ -64,46 +104,6 @@ export class StatService {
 		return this.rawStats[name]
 	}
 	getRanking(ranking: StatsRanking, type: StatsCardFamily, size: number = this.baseSampleSize): PlayableCardModel[] {
-		if(!this.rawCardStats){return []}
-		let cards: CardStats[] = []
-		switch(type){
-			case('corporation'):{
-				cards = Utils.jsonCopy(this.corpoStats)
-				break
-			}
-			case('project'):{
-				cards = Utils.jsonCopy(this.projectStats)
-				break
-			}
-			case('blueProject'):
-			case('redProject'):
-			case('greenProject'):{
-				cards = this.projectStats.filter((el) => el.type===type)
-				break
-			}
-		}
-		if(ranking==='ascending'){
-			cards = this.sortArray(cards, ranking)
-		}
-		//let cards = this.corpoStats.filter((el) => el.winrate===100)
-		let result: PlayableCardModel [] = []
-		for(let i=0; i<size; i++){
-			let statCard = cards[i]
-			if(!statCard){break}
-			let card = this.cardInfoService.getCardById(statCard.code)
-			if(!card){continue}
-			if(statCard.winrate===undefined){
-
-				console.log(card.cardCode)
-				console.log(statCard)
-
-				continue
-			}
-			card.statPlayed = statCard.played
-			card.statWinrate = statCard.winrate
-
-			result.push(card)
-		}
-		return result
+		return this.cardsRanking[type]
 	}
 }

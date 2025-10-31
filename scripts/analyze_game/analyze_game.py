@@ -18,9 +18,9 @@ def main():
     CARD_INFO_PATH = os.path.join(CARD_INFO_DIR, "cards_data.json")
     RESULT_DIR = os.path.join(BASE_DIR, "data")
     RESULT_PATH = os.path.join(RESULT_DIR, "analyzed_games.json")
-    print(RESULT_PATH)
 
     card_info: CardInfo
+    print("Result file:", RESULT_PATH)
     print("Current working dir:", os.getcwd())
     print("Script dir:", BASE_DIR)
 

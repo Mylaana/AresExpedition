@@ -59,7 +59,7 @@ $fade-transition-time: .2s;
 
 // Backgrounds production
 @each $name, $values in (
-	red: (rgb(237, 53, 49), rgb(255, 129, 25)),
+	red: (rgb(237, 53, 49), rgb(239, 124, 30)),
 	grey: (rgb(66, 66, 66), rgb(184, 184, 184)),
 	blue: (rgb(66, 66, 66), rgb(39, 177, 229))
 ) {

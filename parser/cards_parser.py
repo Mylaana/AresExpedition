@@ -52,7 +52,8 @@ parser_columns_map = [
     {'column_name': 'actionTextOption1_en', 'column_id': -1 , 'output_field_name': 'actionTextOption1', 'split_per_language': True},
     {'column_name': 'actionTextOption1_fr', 'column_id': -1 , 'output_field_name': 'actionTextOption1', 'split_per_language': True},
     {'column_name': 'actionTextOption2_en', 'column_id': -1 , 'output_field_name': 'actionTextOption2', 'split_per_language': True},
-    {'column_name': 'actionTextOption2_fr', 'column_id': -1 , 'output_field_name': 'actionTextOption2', 'split_per_language': True},    ]
+    {'column_name': 'actionTextOption2_fr', 'column_id': -1 , 'output_field_name': 'actionTextOption2', 'split_per_language': True},]
+
 
 PARSER_CARD_INFO_MODEL = {
     "card_code": "",
@@ -99,6 +100,7 @@ def map_csv_columns(csv_header: str):
             if c['column_name'] == csv_header[column_index]:
                 c['column_id'] = column_index
                 break
+
 
 def is_empty_dict(input: dict):
     if not isinstance(input, dict):
@@ -184,6 +186,7 @@ def parse_row(csv_row: str):
                 parsed_row[map['output_field_name']] = parsed_value
 
     return parsed_row
+
 
 def main():
     dir_name = os.path.dirname(__file__)

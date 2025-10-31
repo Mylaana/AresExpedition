@@ -1,0 +1,6 @@
+<div *ngIf="stats" [ngClass]="['wrapper-main', 'ares-border', 'ares-background']">
+	<app-card-stats-card [tooltipKey]="'cardStatTooltipWinrate'" [statType]="'stat'" [value]="stats.winrate" [unit]="'%'" [image]="'assets/other/medal.png'"></app-card-stats-card>
+	<app-card-stats-card [tooltipKey]="'cardStatTooltipPlayed'" [statType]="'stat'" [value]="stats.played" [image]="'assets/other/hand.png'"></app-card-stats-card>
+	<app-card-stats-card [tooltipKey]="'cardStatTooltipScore'" [statType]="'vp'" [value]="stats.score"></app-card-stats-card>
+	<app-card-stats-card [tooltipKey]="'cardStatTooltipDuration'" [statType]="'stat'" [value]="stats.duration" [image]="'assets/other/round.png'"></app-card-stats-card>
+</div>

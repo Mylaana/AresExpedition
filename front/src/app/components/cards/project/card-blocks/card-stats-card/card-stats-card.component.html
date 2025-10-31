@@ -1,0 +1,14 @@
+<div [ngClass]="['wrapper-main']"
+	(mouseenter)="hover(true)"
+	(mouseleave)="hover(false)">
+	<div class="wrapper-image">
+		<app-vp *ngIf="statType==='vp'" [vpNumber]="'VP'"></app-vp>
+		<img *ngIf="statType!='vp'" [src]="image" alt="">
+	</div>
+	<p>{{value}}{{unit}}</p>
+	<div *ngIf="_hovered"
+		[ngClass]="['wrapper-tooltip', 'hovered']"
+		@fadeIn>
+		<p>{{getTooltip()}}</p>
+	</div>
+</div>

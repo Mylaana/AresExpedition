@@ -1,0 +1,57 @@
+.wrapper-main{
+	position: relative;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: 5px;
+	width: 100px;
+	height: 35px;
+	pointer-events: unset;
+}
+.wrapper-tooltip{
+	position: absolute;
+	z-index: 100;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 120%;
+
+	&.hovered{
+		backdrop-filter: blur(10px);
+		background-color: rgba(128, 128, 128, 0.19);
+		cursor: default;
+	}
+
+	& > p {
+		//overrides the general playable card ng-deep on p
+		font-size: 12px !important;
+		max-width: 90%;
+	}
+}
+img{
+	display: block;
+	max-height: 100%;
+	max-width: 100%;
+}
+p{
+	color: black;
+	font-weight: 600;
+	flex: 1;
+	text-align: center;
+
+	//overrides the general playable card ng-deep on p
+	font-size: 16px !important;
+}
+.wrapper-image{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	max-width: 50%;
+	height: 70%;
+}
+app-vp::ng-deep * {
+	font-size: 80%;
+}

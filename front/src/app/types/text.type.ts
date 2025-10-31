@@ -14,3 +14,4 @@ export type ButtonCaptionKey = 'buttonCreateGameCreate' | 'buttonCreateGameEnabl
 'buttonHomeNewGame' | 'buttonHomeCardOverview' | 'buttonHomeDiscord' | 'buttonHomeBuyAres' | 'buttonHomeStats'
 | 'buttonCardOverviewDisplayBalanced' | 'buttonCardOverviewDisplayAll'
 export type ErrorKey = 'errorCreateGameNameAndColor' | 'errorCreateGameNameServerOffline' | 'errorCreateGameNameOtherError'
+export type StatTooltipKey = 'cardStatTooltipWinrate' | 'cardStatTooltipPlayed' | 'cardStatTooltipScore' | 'cardStatTooltipDuration'

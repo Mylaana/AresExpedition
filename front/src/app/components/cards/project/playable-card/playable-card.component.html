@@ -99,9 +99,8 @@
 		[cardSize]="cardSize"
 		(activated)="onActivation($event)">
 	</app-card-activation-list>
-	<app-card-stats
-		*ngIf="projectCard.hasStats()"
-		[played]="projectCard.statPlayed??0"
-		[winrate]="projectCard.statWinrate??0">
-	</app-card-stats>
+	<app-card-stats-list
+		*ngIf="projectCard.stats"
+		[stats]="projectCard.stats">
+	</app-card-stats-list>
 </div>
