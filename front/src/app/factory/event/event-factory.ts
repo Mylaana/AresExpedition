@@ -471,6 +471,7 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
     event.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
     event.titleKey = 'phaseAction'
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
+	event.scrollToTopOnActivation = false
 
     return event
 }
@@ -677,6 +678,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 			event.lockValidateButton = args?.phaseCardUpgradeNumber===0
 			event.lockDisplayUpgraded = true
 			event.lockRollbackButton = true
+			event.scrollToTopOnActivation = true
             break
         }
         case('addRessourceToPlayer'):{
@@ -694,6 +696,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         case('planificationPhase'):{
             event.autoFinalize = false
             event.titleKey = 'phasePlanification'
+			event.scrollToTopOnActivation = true
             break
         }
         case('buildCard'):{
@@ -713,6 +716,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
             event.lockRollbackButton = true
             event.lockSellButton = true
             event.lockValidateButton = true
+			//event.scrollToTopOnActivation = true
             break
         }
         case('addForestPointAndOxygen'):{
