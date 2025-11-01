@@ -9411,7 +9411,7 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "$other_arrow$  -$ressource_science$:$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-5$ressource_science$: $production_+1$$ressource_steel$ OR $production_+1$$ressource_titanium$$skipline$-6$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-9$ressource_science$: +$tag_wild$.",
+            "en": "$other_arrow$  -$ressource_science$:$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-3$ressource_science$: $production_+1$$ressource_steel$ OR $production_+1$$ressource_titanium$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-6$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-7$ressource_science$: +$tag_wild$.",
             "fr": ""
         },
         "stockable": [

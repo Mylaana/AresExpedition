@@ -155,22 +155,22 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 					EventFactory.simple.discardOptions(1, 'max', DiscardOptionsEnum.clm)
 				]
 			}
+			case(EffectPortalButtonEnum.clm_3_steel):{
+				return [
+					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-3}, 'CF3'),
+					EventFactory.simple.addProduction([{name:'steel', valueStock:1}])
+				]
+			}
+			case(EffectPortalButtonEnum.clm_3_titanium):{
+				return [
+					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-3}, 'CF3'),
+					EventFactory.simple.addProduction([{name:'titanium', valueStock:1}])
+				]
+			}
 			case(EffectPortalButtonEnum.clm_4):{
 				return [
 					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-4}, 'CF3'),
 					EventFactory.simple.addProduction([{name:'heat', valueStock:2}, {name:'plant', valueStock:2}])
-				]
-			}
-			case(EffectPortalButtonEnum.clm_5_steel):{
-				return [
-					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-5}, 'CF3'),
-					EventFactory.simple.addProduction([{name:'steel', valueStock:1}])
-				]
-			}
-			case(EffectPortalButtonEnum.clm_5_titanium):{
-				return [
-					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-5}, 'CF3'),
-					EventFactory.simple.addProduction([{name:'titanium', valueStock:1}])
 				]
 			}
 			case(EffectPortalButtonEnum.clm_6):{
@@ -181,9 +181,9 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 					EventFactory.simple.addTagToCard('CF3', 'microbe')
 				]
 			}
-			case(EffectPortalButtonEnum.clm_9):{
+			case(EffectPortalButtonEnum.clm_7):{
 				return [
-					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-9}, 'CF3'),
+					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-7}, 'CF3'),
 					EventFactory.simple.resolveWildTag('CF3')
 				]
 			}
@@ -324,17 +324,17 @@ export const EFFECT_PORTAL_BUTTON_CAPTION: Record<string, (button: EffectPortalB
 			case(EffectPortalButtonEnum.clm_4):{
 				return '-4$ressource_science$:$skipline$$production_+2$$ressource_heat$$production_+2$$ressource_plant$'
 			}
-			case(EffectPortalButtonEnum.clm_5_steel):{
-				return '-5$ressource_science$:$skipline$$production_+1$$ressource_steel$'
+			case(EffectPortalButtonEnum.clm_3_steel):{
+				return '-3$ressource_science$:$skipline$$production_+1$$ressource_steel$'
 			}
-			case(EffectPortalButtonEnum.clm_5_titanium):{
-				return '-5$ressource_science$:$skipline$$production_+1$$ressource_titanium$'
+			case(EffectPortalButtonEnum.clm_3_titanium):{
+				return '-3$ressource_science$:$skipline$$production_+1$$ressource_titanium$'
 			}
 			case(EffectPortalButtonEnum.clm_6):{
 				return '-6$ressource_science$:$skipline$+$tag_plant$$tag_animal$$tag_microbe$'
 			}
-			case(EffectPortalButtonEnum.clm_9):{
-				return '-9$ressource_science$:$skipline$+$tag_wild$'
+			case(EffectPortalButtonEnum.clm_7):{
+				return '-7$ressource_science$:$skipline$+$tag_wild$'
 			}
 		}
 		return ''
@@ -383,7 +383,7 @@ export const EFFECT_PORTAL_BUTTON_ENUM_LIST: Record<string, ()=> EffectPortalBut
 	//Pushnik Action
 	'CF2-Production': ()=> [EffectPortalButtonEnum.pushnikProduction_mc, EffectPortalButtonEnum.pushnikProduction_heatplant],
 	//CLM - The hesitant hive mind
-	'CF3': ()=> [EffectPortalButtonEnum.clm_1, EffectPortalButtonEnum.clm_2,EffectPortalButtonEnum.clm_4,EffectPortalButtonEnum.clm_5_steel,EffectPortalButtonEnum.clm_5_titanium,EffectPortalButtonEnum.clm_6,EffectPortalButtonEnum.clm_9],
+	'CF3': ()=> [EffectPortalButtonEnum.clm_1, EffectPortalButtonEnum.clm_2,EffectPortalButtonEnum.clm_3_steel,EffectPortalButtonEnum.clm_3_titanium,EffectPortalButtonEnum.clm_4,EffectPortalButtonEnum.clm_6,EffectPortalButtonEnum.clm_7],
 	//Secret Labs
 	'FM25': ()=> [EffectPortalButtonEnum.secretLabs_Ocean, EffectPortalButtonEnum.secretLabs_Oxygen, EffectPortalButtonEnum.secretLabs_Temperature],
 }
@@ -543,17 +543,17 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:2},'min',clientState, 'CF3') &&
 				Checker.isHandCurrentSizeOk(1, 'min', clientState)
 			}
+			case(EffectPortalButtonEnum.clm_3_steel):
+			case(EffectPortalButtonEnum.clm_3_titanium):{
+				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:3},'min',clientState, 'CF3')
+			}
 			case(EffectPortalButtonEnum.clm_4):{
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:4},'min',clientState, 'CF3')
-			}
-			case(EffectPortalButtonEnum.clm_5_steel):
-			case(EffectPortalButtonEnum.clm_5_titanium):{
-				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:5},'min',clientState, 'CF3')
 			}
 			case(EffectPortalButtonEnum.clm_6):{
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:6},'min',clientState, 'CF3')
 			}
-			case(EffectPortalButtonEnum.clm_9):{
+			case(EffectPortalButtonEnum.clm_7):{
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:9},'min',clientState, 'CF3')
 			}
 		}

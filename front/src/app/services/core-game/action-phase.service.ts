@@ -115,7 +115,7 @@ export class ActionPhaseService{
 		if(!this.standardProjectStates){return}
 		for (let s of this.standardProjectsList){
 			if(!this.standardProjectStates[s]){continue}
-            this.standardProjectStates[s].caption =  PlayableCard.activable.getScalingCostActivationCaption(s, this.clientState)
+            this.standardProjectStates[s].caption =  PlayableCard.activable.getStandardProjectCaption(s, this.clientState)
 		}
 	}
     private onClientStateUpdate(state: PlayerStateModel){
