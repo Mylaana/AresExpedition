@@ -5,8 +5,6 @@ import { GameParamService } from "./game-param.service";
 import { ButtonCaptionKey, ErrorKey, EventTitleKey, GameOptionKey, InterfaceTitleKey, StatTooltipKey } from "../../types/text.type";
 
 
-const eventKeyPrefix = 'gameEventTitle'
-
 @Injectable({
 	providedIn: "root"
 })

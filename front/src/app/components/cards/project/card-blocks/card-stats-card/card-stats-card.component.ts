@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { VpComponent } from '../../../../tools/vp/vp.component';
-import { StatService } from '../../../../../services/routes/stats.service';
 import { GameTextService } from '../../../../../services/core-game/game-text.service';
 import { StatTooltipKey } from '../../../../../types/text.type';
 import { fadeIn } from '../../../../../animations/animations';

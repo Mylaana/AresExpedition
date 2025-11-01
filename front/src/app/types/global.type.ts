@@ -54,7 +54,8 @@ export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAn
 export type MilestoneState = Record<MilestonesEnum, boolean>
 export type InputRuleType = 'number' | 'string'
 export type GoToPage = 'cardOverviewBalanced'
-export type StandardProjectButtonNames = | 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'convertInfrastructure' | 'buyInfrastructure'
+export type StandardProjectButtonNames = | 'convertForest' | 'buyForest' | 'convertTemperature' | 'buyTemperature' | 'buyOcean' | 'buyInfrastructure'
+| 'convertInfrastructure' | 'convertInfrastructureHeat' | 'convertInfrastructurePlant'
 | 'buyUpgrade' | 'buyMine' | 'buyRoad' | 'buyHabitat'
 export type GameContentName = 'expansionDiscovery' | 'expansionFoundations' | 'expansionPromo'| 'expansionDevFanMade'
 | 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade' | 'modeDeadHand'

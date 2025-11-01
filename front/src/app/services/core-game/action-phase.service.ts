@@ -61,7 +61,7 @@ export class ActionPhaseService{
     private initializeStandardProjectStates(){
         for (let s of this.standardProjectsList){
             this.standardProjectStates[s] = {
-                caption: PlayableCard.activable.getScalingCostActivationCaption(s, this.clientState),
+                caption: PlayableCard.activable.getStandardProjectCaption(s, this.clientState),
                 canBePaid: true,
                 mustBePaid: false,
                 button: ButtonDesigner.createNonEventButton(s)
@@ -79,20 +79,20 @@ export class ActionPhaseService{
             if(!this.standardProjectStates[s]){continue}
             switch(s){
                 case('convertForest'):{
-                    this.standardProjectStates[s].costPlant = PlayableCard.activable.getScalingCostActivation(s, this.clientState)
+                    this.standardProjectStates[s].costPlant = PlayableCard.activable.getStandardProjectCost(s, this.clientState)
                     break
                 }
                 case('convertInfrastructure'):{
-                    this.standardProjectStates[s].costHeat = PlayableCard.activable.getScalingCostActivation(s + 'Heat', this.clientState)
-                    this.standardProjectStates[s].costPlant = PlayableCard.activable.getScalingCostActivation(s + 'Plant', this.clientState)
+                    this.standardProjectStates[s].costHeat = PlayableCard.activable.getStandardProjectCost('convertInfrastructureHeat', this.clientState)
+                    this.standardProjectStates[s].costPlant = PlayableCard.activable.getStandardProjectCost('convertInfrastructurePlant', this.clientState)
                     break
                 }
                 case('convertTemperature'):{
-                    this.standardProjectStates[s].costHeat = PlayableCard.activable.getScalingCostActivation(s, this.clientState)
+                    this.standardProjectStates[s].costHeat = PlayableCard.activable.getStandardProjectCost(s, this.clientState)
                     break
                 }
                 default:{
-                    this.standardProjectStates[s].costMC = PlayableCard.activable.getScalingCostActivation(s, this.clientState)
+                    this.standardProjectStates[s].costMC = PlayableCard.activable.getStandardProjectCost(s, this.clientState)
                 }
             }
         }

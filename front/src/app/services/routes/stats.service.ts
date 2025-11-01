@@ -4,7 +4,6 @@ import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { StatsCardFamily, StatsRanking } from "../../types/project-card.type";
 import { CardStats } from "../../interfaces/card.interface";
-import { StatTooltipKey } from "../../types/text.type";
 
 
 @Injectable()
@@ -40,7 +39,6 @@ export class StatService {
 	}
 	fillCardsRanking(){
 		this.cardsRanking['corporation'] = this.fillRanking('corporation')
-		console.log(this.cardsRanking)
 	}
 	fillRanking(family: StatsCardFamily, ranking: StatsRanking = 'descending'){
 		if(!this.rawCardStats){return []}
