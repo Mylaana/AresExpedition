@@ -5,27 +5,33 @@
 		<app-global-parameter-pannel class="ares-navigation-pannel"></app-global-parameter-pannel>
 		<app-navigation-game-info class="ares-navigation-pannel"></app-navigation-game-info>
 	</div>
-	<div class="wrapper-player-pannel ares-navigation-pannel"
-		[class.hovered]="_playerPannelIsHovered"
-		(mouseenter)="setHovered(true)"
-		(mouseleave)="setHovered(false)"
-		@fadeIn>
-		<app-player-pannel
-			[@expandCollapseVertical]
-			(@expandCollapseVertical.done)="updateNavHeight()"
-			[playerId]="clientPlayerId">
-		</app-player-pannel>
-		<div class="hovered-seperator-client"
-			*ngIf="_playerPannelIsHovered"
-			[@expandCollapseVertical]>
-		</div>
-		<ng-container *ngFor="let id of _playerIdList">
+	<div class="wrapper-middle">
+		<div class="wrapper-player-pannel ares-navigation-pannel"
+			[class.hovered]="_playerPannelIsHovered"
+			(mouseenter)="setHovered(true)"
+			(mouseleave)="setHovered(false)"
+			@fadeIn>
 			<app-player-pannel
 				[@expandCollapseVertical]
 				(@expandCollapseVertical.done)="updateNavHeight()"
-				*ngIf="_playerPannelIsHovered && id!=clientPlayerId" [playerId]="id">
+				[playerId]="clientPlayerId">
 			</app-player-pannel>
-		</ng-container>
+			<div class="hovered-seperator-client"
+				*ngIf="_playerPannelIsHovered"
+				[@expandCollapseVertical]>
+			</div>
+			<ng-container *ngFor="let id of _playerIdList">
+				<app-player-pannel
+					[@expandCollapseVertical]
+					(@expandCollapseVertical.done)="updateNavHeight()"
+					*ngIf="_playerPannelIsHovered && id!=clientPlayerId" [playerId]="id">
+				</app-player-pannel>
+			</ng-container>
+		</div>
+		<app-group-waiting
+			*ngIf="displayGroupReady() && !_playerPannelIsHovered"
+			@fadeInFadeOut>
+		</app-group-waiting>
 	</div>
 	<span *ngIf="!isContentActive('expansionDiscovery')" class="wrapper-awards"></span>
 	<app-milestone-and-award *ngIf="isContentActive('expansionDiscovery')" class="ares-navigation-pannel"></app-milestone-and-award>

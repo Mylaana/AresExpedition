@@ -54,7 +54,6 @@ import { EventPhaseSubType, EventUnionSubTypes } from '../../../../types/event.t
 		TagGainListComponent,
 		SellCardsComponent,
 		EffectPortalComponent,
-		GroupWaitingComponent,
 		ConvertResourceComponent,
 		EventTitleKeyPipe
     ],
@@ -81,7 +80,6 @@ export class GameEventComponent {
 
 	currentPhase: NonSelectablePhaseEnum = NonSelectablePhaseEnum.planification;
 	currentButtonSelectorId!: number;
-	_groupReady!: PlayerReadyModel[]
 
 	//Non event buttons
 	sellCardsButton!: NonEventButton;
@@ -123,7 +121,7 @@ export class GameEventComponent {
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
-		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe((groupReady) => this._groupReady = groupReady)
+
 		this.gameParamService.currentInterfaceSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._interfaceSize = size)
 	}
 	ngOnDestroy(): void {
@@ -139,7 +137,6 @@ export class GameEventComponent {
 	}
 	updatePhase(phase:NonSelectablePhaseEnum):void{
 		this.currentPhase = phase
-		if(this.gameStateService.getClientReady()){return}
 	}
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
@@ -247,14 +244,6 @@ export class GameEventComponent {
 		this.eventHandler.cardBuilderButtonClicked(button)
 	}
 	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
-	displayGroupReady(): boolean {
-		if(this.currentPhase===NonSelectablePhaseEnum.action){return false}
-		if(this.gameStateService.getClientReady()===true){return false}
-		for(let p of this._groupReady){
-			if(p.isReady){return true}
-		}
-		return false
-	}
 	isDiscoveryActive(): boolean {
 		return this.gameContentService.isContentActive('expansionDiscovery')
 	}

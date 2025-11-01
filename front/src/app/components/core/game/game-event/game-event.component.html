@@ -20,14 +20,7 @@
 				<app-non-event-button  [button]="displayPhaseUpgradeCancelButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(displayPhaseUpgradeCancelButton)"></app-non-event-button>
 			</div>
 		</div>
-		<div class="right-command">
-		</div>
-	</div>
-	<div class="wrapper-group-waiting">
-		<app-group-waiting
-			*ngIf="displayGroupReady()"
-			@fadeIn>
-		</app-group-waiting>
+		<div class="right-command"></div>
 	</div>
 	<div class="wrapper-title">
 		<div class="wrapper-event-description ares-title">
