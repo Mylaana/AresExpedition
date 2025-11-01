@@ -11,6 +11,8 @@ import { CardBuilderAlternativeCostComponent } from '../card-builder-alternative
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
+import { PlayerStateModel } from '../../../models/player-info/player-state.model';
+import { PlayableCard } from '../../../factory/playable-card.factory';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
 
@@ -41,6 +43,7 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	currentEvent!: EventCardBuilder
 
 	_lockBuilder!: NonEventButton
+	_hasAlternativeCost: boolean = false
 	private destroy$ = new Subject<void>
 	constructor(private gameState: GameState){
 
@@ -48,6 +51,7 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	ngOnInit(): void {
 		this._lockBuilder = ButtonDesigner.createNonEventButton('lockBuilder')
 		this.gameState.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(() => this.updateAlternativeCostButtonsEnabled())
+		this.gameState.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this._hasAlternativeCost = PlayableCard.getAlternativePayActiveCodeList(state).length > 0)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()

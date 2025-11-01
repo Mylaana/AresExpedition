@@ -39,7 +39,7 @@
 	</div>
 	<app-card-builder-alternative-cost
 		#altCost
-		*ngIf="!cardBuilder.getBuilderIsLocked()"
+		*ngIf="!cardBuilder.getBuilderIsLocked() && _hasAlternativeCost"
 		[event]="event"
 		[builder]="cardBuilder"
 		[cardSize]="cardSize"
