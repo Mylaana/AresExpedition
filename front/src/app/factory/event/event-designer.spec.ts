@@ -434,6 +434,7 @@ describe('Service - Designers - Event', () => {
 				expectedEvent.button = undefined
 				expectedEvent.setCardSelector(expectedSelector)
 				expectedWaiterId = 5
+                expectedEvent.scrollToTopOnActivation = true
 			})
 			describe('UNIT TEST', () => {
 				it('should create a actionPhase activator Event', () => {
@@ -454,6 +455,7 @@ describe('Service - Designers - Event', () => {
 					expectedEvent.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
 					expectedEvent.titleKey ='phaseAction'
 					expectedEvent.setSelectorFilter({type:ProjectFilterNameEnum.action})
+                    expectedEvent.scrollToTopOnActivation = false
 
 					let resultEvent = event_factory.EventFactory.createCardActivator(expectedSubType)
 
@@ -564,6 +566,7 @@ describe('Service - Designers - Event', () => {
                         case('planificationPhase'):{
                             expectedEvent.autoFinalize = false
 							expectedEvent.titleKey = 'phasePlanification'
+                            expectedEvent.scrollToTopOnActivation = true
                             break
                         }
                         case('upgradePhaseCards'):{
@@ -578,6 +581,7 @@ describe('Service - Designers - Event', () => {
 							expectedEvent.lockValidateButton = expectedQuantity>=1?false:true
 							expectedEvent.lockDisplayUpgraded = true
                             expectedArgs = {phaseCardUpgradeList:expectedList, phaseCardUpgradeNumber:expectedQuantity}
+                            expectedEvent.scrollToTopOnActivation = true
                             break
                         }
                         default:{
@@ -585,8 +589,8 @@ describe('Service - Designers - Event', () => {
                         }
                     }
 
-					let event = event_factory.EventFactory.createGeneric(genericSubType, expectedArgs?expectedArgs:undefined)
-                    expect(event).toEqual(expectedEvent)
+					let resultEvent = event_factory.EventFactory.createGeneric(genericSubType, expectedArgs?expectedArgs:undefined)
+                    expect(resultEvent).toEqual(expectedEvent)
                 }
             })
             it('should log an error message and return a default Event', () => {
