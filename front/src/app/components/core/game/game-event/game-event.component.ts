@@ -5,7 +5,7 @@ import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '..
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
-import { DrawEvent, EventBaseModel } from '../../../../models/core-game/event.model';
+import { DrawEvent, EventBaseModel, EventPhase } from '../../../../models/core-game/event.model';
 import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
 import { GameState } from '../../../../services/core-game/game-state.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
@@ -32,6 +32,7 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
 import { SettingInterfaceSize } from '../../../../types/global.type';
 import { EventTitleKeyPipe } from '../../../../pipes/event-title.pipe';
 import { GameActiveContentService } from '../../../../services/core-game/game-active-content.service';
+import { EventPhaseSubType, EventUnionSubTypes } from '../../../../types/event.type';
 
 //this component is the main controller, and view
 
@@ -53,7 +54,6 @@ import { GameActiveContentService } from '../../../../services/core-game/game-ac
 		TagGainListComponent,
 		SellCardsComponent,
 		EffectPortalComponent,
-		GroupWaitingComponent,
 		ConvertResourceComponent,
 		EventTitleKeyPipe
     ],
@@ -80,7 +80,6 @@ export class GameEventComponent {
 
 	currentPhase: NonSelectablePhaseEnum = NonSelectablePhaseEnum.planification;
 	currentButtonSelectorId!: number;
-	_groupReady!: PlayerReadyModel[]
 
 	//Non event buttons
 	sellCardsButton!: NonEventButton;
@@ -122,7 +121,7 @@ export class GameEventComponent {
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
-		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe((groupReady) => this._groupReady = groupReady)
+
 		this.gameParamService.currentInterfaceSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._interfaceSize = size)
 	}
 	ngOnDestroy(): void {
@@ -138,11 +137,11 @@ export class GameEventComponent {
 	}
 	updatePhase(phase:NonSelectablePhaseEnum):void{
 		this.currentPhase = phase
-		if(this.gameStateService.getClientReady()){return}
 	}
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
 		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
+		this.scrollToTop()
 		if(!this.currentEvent){return}
 		this.resetValidateButtonState(this.currentEvent)
 		this.resetMainButtonState(this.currentEvent)
@@ -245,15 +244,12 @@ export class GameEventComponent {
 		this.eventHandler.cardBuilderButtonClicked(button)
 	}
 	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
-	displayGroupReady(): boolean {
-		if(this.currentPhase===NonSelectablePhaseEnum.action){return false}
-		if(this.gameStateService.getClientReady()===true){return false}
-		for(let p of this._groupReady){
-			if(p.isReady){return true}
-		}
-		return false
-	}
 	isDiscoveryActive(): boolean {
 		return this.gameContentService.isContentActive('expansionDiscovery')
+	}
+	private scrollToTop(){
+		if(!this.currentEvent){return}
+		if(this.currentEvent.scrollToTopOnActivation===false){return}
+		window.scroll({top:0})
 	}
 }

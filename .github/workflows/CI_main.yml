@@ -61,3 +61,11 @@ jobs:
         file: ./back/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_BACK }}:latest
+
+    - name: Build and push analyze_game image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./scripts/analyze_game/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_ANALYZE_GAME }}:latest

@@ -28,27 +28,29 @@ import { ProjectFilter } from '../../../../interfaces/global.interface';
 import { CardDisabledForegroundComponent } from '../card-blocks/card-disabled-foreground/card-disabled-foreground.component';
 import { SettingCardSize } from '../../../../types/global.type';
 import { ProjectCardScalingVPService } from '../../../../services/cards/project-card-scaling-VP.service';
+import { CardStatsListComponent } from '../card-blocks/card-stats/card-stats-list.component';
 
 @Component({
     selector: 'app-playable-card',
     imports: [
-        CommonModule,
-        CardBackgroundComponent,
-        CardActivationListComponent,
-        CardCostComponent,
-        CardEffectComponent,
-        CardHighlightComponent,
-        CardTagsComponent,
-        CardVpComponent,
-        CardPlayedInfoComponent,
-        CardPrerequisiteComponent,
-        CardStockComponent,
-        CardTagsZoneComponent,
-        CardTitleComponent,
-        CardStartingMegacreditsComponent,
-		CardStatusComponent,
-		CardDisabledForegroundComponent
-    ],
+    CommonModule,
+    CardBackgroundComponent,
+    CardActivationListComponent,
+    CardCostComponent,
+    CardEffectComponent,
+    CardHighlightComponent,
+    CardTagsComponent,
+    CardVpComponent,
+    CardPlayedInfoComponent,
+    CardPrerequisiteComponent,
+    CardStockComponent,
+    CardTagsZoneComponent,
+    CardTitleComponent,
+    CardStartingMegacreditsComponent,
+    CardStatusComponent,
+    CardDisabledForegroundComponent,
+    CardStatsListComponent,
+],
     templateUrl: './playable-card.component.html',
     styleUrl: './playable-card.component.scss',
     providers: [
@@ -199,7 +201,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		return false
 	}
 	private isParentListExcludedFromDisabledCheck(): boolean {
-		let excluded: ProjectListType[] = ['none', 'builderSelectedZone', 'hand', 'played', ]
+		let excluded: ProjectListType[] = ['none', 'builderSelectedZone', 'hand', 'played', 'statsRoute']
 		return excluded.includes(this.parentListType)
 	}
 	public isSelectable(): boolean {

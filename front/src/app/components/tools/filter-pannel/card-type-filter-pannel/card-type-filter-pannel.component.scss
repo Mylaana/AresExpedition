@@ -1,0 +1,5 @@
+app-non-event-button{
+    &.not-selected{
+        filter: grayscale(50%)
+    }
+}

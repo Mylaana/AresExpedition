@@ -8,7 +8,7 @@ import { NonEventButtonComponent } from './components/tools/button/non-event-but
 import { NonEventButton } from './models/core-game/button.model';
 import { Router } from '@angular/router';
 import {} from '@angular/common/http';
-import { ROUTE_404, ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_NEWGAMELINKS } from './global/global-const';
+import { ROUTE_404, ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_NEWGAMELINKS, ROUTE_STATS } from './global/global-const';
 
 @Component({
     selector: 'app-root',
@@ -40,6 +40,7 @@ export class AppComponent {
 			case(ROUTE_CARD_OVERVIEW):
 			case(ROUTE_CREATEGAME):
 			case(ROUTE_404):
+			case(ROUTE_STATS):
 			case(ROUTE_NEWGAMELINKS):{return true}
 			default:{return false}
 		}

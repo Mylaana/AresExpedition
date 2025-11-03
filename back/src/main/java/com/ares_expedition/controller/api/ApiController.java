@@ -1,5 +1,8 @@
 package com.ares_expedition.controller.api;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,8 @@ import com.ares_expedition.dto.api.NewGameInfoDTO;
 import com.ares_expedition.enums.game.GameContentNameEnum;
 import com.ares_expedition.model.core.subModel.GameOption;
 import com.ares_expedition.services.NewGameService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/api")
@@ -30,8 +35,9 @@ public class ApiController {
     private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
     private final GameController gameController;
     private final NewGameService newGameService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final Path STATS_FILE = Paths.get("data/analyzed_games.json");
 
-    @Autowired
     public ApiController(NewGameService newGameService, GameController gameController){
         this.newGameService = newGameService;
         this.gameController = gameController;
@@ -75,5 +81,15 @@ public class ApiController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
+    }
+    @GetMapping("stats")
+    public ResponseEntity<?> getGameStats(){
+        try {
+            JsonNode stats = objectMapper.readTree(STATS_FILE.toFile());
+            return ResponseEntity.ok(stats);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "Failed to read stats", "details", e.getMessage()));
+        }
     }
 }

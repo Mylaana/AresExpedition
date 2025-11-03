@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CardType } from '../../../../../types/project-card.type';
+import { CardTypeUndefined } from '../../../../../types/project-card.type';
 import { CommonModule } from '@angular/common';
 import { SettingCardSize } from '../../../../../types/global.type';
 
@@ -11,6 +11,6 @@ import { SettingCardSize } from '../../../../../types/global.type';
 })
 export class CardTitleComponent{
 	@Input() title!: string
-	@Input() cardType!: CardType
+	@Input() cardType!: CardTypeUndefined
 	@Input() cardSize!: SettingCardSize
 }

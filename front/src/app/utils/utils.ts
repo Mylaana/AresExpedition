@@ -6,7 +6,7 @@ import { PlayableCardModel } from "../models/cards/project-card.model"
 import { myUUID, SettingSupportedLanguage, TagType } from "../types/global.type"
 import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
 import { v4 as uuidv4 } from 'uuid'
-import { CardType, CardTypeColor, LocalizedText } from "../types/project-card.type"
+import { CardTypeColor, CardTypeUndefined, LocalizedText } from "../types/project-card.type"
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../enum/global.enum"
 import { environment } from "../../environments/environment"
 import { TAGS_ID_TO_NAME } from "../maps/const-maps"
@@ -128,7 +128,7 @@ function toFullCardState(partialState: Partial<CardState>): CardState {
 function newUUID(): myUUID {
 	return uuidv4()
 }
-function toCardTypeColor(cardType: CardType): CardTypeColor {
+function toCardTypeColor(cardType: CardTypeUndefined): CardTypeColor {
 	switch(cardType){
 		case('blueProject'):{return 'blue'}
 		case('redProject'):{return 'red'}

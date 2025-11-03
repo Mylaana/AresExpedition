@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { CardType, CardTypeColor, ProjectListType } from '../../../../../types/project-card.type';
+import { CardTypeUndefined, CardTypeColor, ProjectListType } from '../../../../../types/project-card.type';
 import { Utils } from '../../../../../utils/utils';
 import { SettingCardSize } from '../../../../../types/global.type';
 
@@ -14,7 +14,7 @@ export class CardCostComponent implements OnInit {
 	@Input() cost: number = 0
 	@Input() costInitial !: number
 	@Input() cardLocation: ProjectListType = 'none'
-	@Input() cardType!: CardType
+	@Input() cardType!: CardTypeUndefined
 	@Input() cardSize!: SettingCardSize
 	_color!: CardTypeColor
 

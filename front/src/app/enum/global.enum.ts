@@ -127,10 +127,11 @@ export enum EffectPortalButtonEnum {
 
 	clm_1,
 	clm_2,
+	clm_3_steel,
+	clm_3_titanium,
 	clm_4,
 	clm_6,
 	clm_7,
-	clm_10,
 
 	decomposingFungus_Animal,
 	decomposingFungus_Microbe,

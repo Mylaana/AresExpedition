@@ -11,6 +11,7 @@ export type InterfaceTitleKey = 'createGame' | 'createGamePlayers' | 'createGame
 | 'cardOverviewTitle'
 | 'newGameLinkPlayerLaunchSite' | 'newGameLinkTitle' | 'newGameLinkGameOptions'
 export type ButtonCaptionKey = 'buttonCreateGameCreate' | 'buttonCreateGameEnableAll' | 'buttonCreateGameDisableAll' |
-'buttonHomeNewGame' | 'buttonHomeCardOverview' | 'buttonHomeDiscord' | 'buttonHomeBuyAres'
+'buttonHomeNewGame' | 'buttonHomeCardOverview' | 'buttonHomeDiscord' | 'buttonHomeBuyAres' | 'buttonHomeStats'
 | 'buttonCardOverviewDisplayBalanced' | 'buttonCardOverviewDisplayAll'
 export type ErrorKey = 'errorCreateGameNameAndColor' | 'errorCreateGameNameServerOffline' | 'errorCreateGameNameOtherError'
+export type StatTooltipKey = 'cardStatTooltipWinrate' | 'cardStatTooltipPlayed' | 'cardStatTooltipScore' | 'cardStatTooltipDuration'

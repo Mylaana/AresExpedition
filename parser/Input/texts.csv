@@ -56,7 +56,7 @@ gamePhaseCardBonus;development_C;;Reduce the cost of the first card you play thi
 gamePhaseCardBonus;construction_C;;Play an additional blue card OR red card this phase.$$AND$$Draw a card.;Jouez une deuxième carte Bleu ou Rouge cette phase.$$ET$$Piochez une carte.
 gamePhaseCardBonus;action_C;;You may repeat two of your ACTION effects once.;Vous pouvez activer deux de vos cartes une deuxième fois.
 gamePhaseCardBonus;production_C;;Gain 1MC.$$Activate the production effect of one of your green cards an additional time this phase.;Gagnez 1MC.$$Gagnez une deuxième fois les productions d'une carte de votre choix cette phase.
-gamePhaseCardBonus;research_C;;Draw an additional 2 cards and keep an additional 2.;Piochez é cartes supplémentaires et gardez en 2 de plus.
+gamePhaseCardBonus;research_C;;Draw an additional 2 cards and keep an additional 2.;Piochez 2 cartes supplémentaires et gardez en 2 de plus.
 gameEventTitle;phasePlanification;;Planification: Select a phase;Planification: Choisissez une phase
 gameEventTitle;phaseDevelopment;;Development Phase;Phase Développement
 gameEventTitle;phaseConstruction;;Construction Phase;Phase Construction
@@ -89,6 +89,7 @@ interfaceButton;buttonHomeNewGame;;NEW GAME;NOUVELLE PARTIE
 interfaceButton;buttonHomeCardOverview;;CARD OVERVIEW;LISTE DES CARTES
 interfaceButton;buttonHomeDiscord;;JOIN US ON DISCORD;REJOIGNEZ NOUS SUR DISCORD
 interfaceButton;buttonHomeBuyAres;;BUY ARES EXPEDITION FROM FRYXGAMES;ACHETER ARES EXPEDITION SUR FRYXGAMES
+interfaceButton;buttonHomeStats;;GAMES STATS;STATISTIQUES DES PARTIES
 interfaceButton;buttonCardOverviewDisplayAll;;Display All;Tout Afficher
 interfaceButton;buttonCardOverviewDisplayBalanced;;Display Balanced Only;"Afficher ""Balanced"" uniquement"
 errorMessage;errorCreateGameNameAndColor;;Each player must have a valid name and a color selected.;Chaque joueur doit avoir un nom valide et une couleur sélectionnée.
@@ -101,10 +102,10 @@ gameEventTitle;eventCorpSelection;;Select a Corporation;Sélectionnez une Corpora
 gameEventTitle;eventCorpSelectionMerger;;Select a second Corporation (Merger);Sélectionnez une seconde Corporation (Merger)
 gameEventTitle;eventOptionalSell;;Select any number of cards to sell;Sélectionnez des cartes à vendre
 gameEventTitle;eventForcedSell;;Too many cards in hand, please select $0$ cards to sell or more;Vous avez trop de cartes en main, sélectionnez $0$ cartes ou plus à vendre
-;;;;
-;;;;
-;;;;
-;;;;
+statTooltip;cardStatTooltipWinrate;;Average Winrate;Taux de victoire
+statTooltip;cardStatTooltipPlayed;;Number of time played;Nombre de fois jouée
+statTooltip;cardStatTooltipScore;;Average score;Score moyen
+statTooltip;cardStatTooltipDuration;;Average game length;Durée moyenne de partie
 ;;;;
 ;;;;
 ;;;;

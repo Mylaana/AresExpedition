@@ -19,6 +19,9 @@ services:
       - ./config/back/.env
     networks:
       - ares-network
+    volumes:
+      - ./data/database.json:/app/data/database.json
+      - ./data/archives:/app/data/archives
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx256m -Xms128m
     deploy:

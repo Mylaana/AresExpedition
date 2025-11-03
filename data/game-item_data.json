@@ -460,5 +460,23 @@
         "description": "standard moon",
         "imageUrl": "assets/other/standard_moon.png",
         "name": "$other_standardmoon$"
+    },
+    {
+        "id": 152,
+        "description": "corporation",
+        "imageUrl": "assets/other/corporationcard.png",
+        "name": "$other_corporationcard$"
+    },
+    {
+        "id": 153,
+        "description": "triggercard",
+        "imageUrl": "assets/other/triggercard.png",
+        "name": "$other_triggercard$"
+    },
+    {
+        "id": 154,
+        "description": "activablecard",
+        "imageUrl": "assets/other/activablecard.png",
+        "name": "$other_activablecard$"
     }
 ]

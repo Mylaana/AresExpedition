@@ -17,6 +17,7 @@
 $card-bottom-padding: calc(var(--card-height) * .015);
 :host ::ng-deep p  {
     color: white;
+	width: fit-content;
 }
 button {
     background: transparent;
@@ -43,6 +44,10 @@ button {
 		&::ng-deep p  {
 			font-size: var(--card-text-size);
 		}
+	}
+	&.stats{
+		width: fit-content;
+		display: flex;
 	}
 }
 .wrapper-border{

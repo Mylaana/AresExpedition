@@ -72,6 +72,7 @@ export class GameState{
 	private round = new BehaviorSubject<number>(0)
 	private cardProduction = new BehaviorSubject<string[]>([])
 	private deck = new BehaviorSubject<number>(0)
+	private discard = new BehaviorSubject<number>(0)
 
     currentGroupPlayerState = this.groupPlayerState.asObservable()
     currentGroupPlayerReady = this.groupPlayerReady.asObservable()
@@ -90,6 +91,7 @@ export class GameState{
 	currentRound = this.round.asObservable()
 	currentCardProduction = this.cardProduction.asObservable()
 	currentDeck = this.deck.asObservable()
+	currentDiscard = this.discard.asObservable()
 
     phaseIndex: number = 0
 
@@ -922,6 +924,9 @@ export class GameState{
 	}
 	setDeckSize(size: number){
 		this.deck.next(size)
+	}
+	setDiscardSize(size: number){
+		this.discard.next(size)
 	}
 	addMoonTiles(tiles: MoonTile | MoonTile[]){
 		let state = this.getClientState()

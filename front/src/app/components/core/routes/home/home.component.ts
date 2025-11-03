@@ -5,7 +5,7 @@ import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { HexedBackgroundComponent } from '../../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { fadeIn } from '../../../../animations/animations';
-import { EXTERNAL_LINK_DISCORD, EXTERNAL_LINK_FRYXGAMES, ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME } from '../../../../global/global-const';
+import { EXTERNAL_LINK_DISCORD, EXTERNAL_LINK_FRYXGAMES, ROUTE_CARD_OVERVIEW, ROUTE_CREATEGAME, ROUTE_STATS } from '../../../../global/global-const';
 
 
 @Component({
@@ -24,6 +24,7 @@ export class HomeComponent {
 	_cardOverviewButton: NonEventButton = ButtonDesigner.createNonEventButton('routeCardOverview')
 	_joinDiscord: NonEventButton = ButtonDesigner.createNonEventButton('routeDiscord')
 	_buyGame: NonEventButton = ButtonDesigner.createNonEventButton('routeBuy')
+	_stats: NonEventButton = ButtonDesigner.createNonEventButton('routeStats')
 
 	constructor(private router: Router){}
 
@@ -43,6 +44,10 @@ export class HomeComponent {
 			}
 			case('routeDiscord'):{
 				window.location.href = EXTERNAL_LINK_DISCORD
+				break
+			}
+			case('routeStats'):{
+				this.router.navigate([ROUTE_STATS])
 				break
 			}
 		}

@@ -9,7 +9,7 @@ import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
 import { GAME_TAG_LIST } from "../global/global-const";
 import { Utils } from "../utils/utils";
-import { AdvancedRessourceType, MoonTileType } from "../types/global.type";
+import { AdvancedRessourceType } from "../types/global.type";
 
 const S = EventFactory.simple
 
@@ -22,12 +22,10 @@ function formatGainScalingCaptionMegacredit(cardCode: string, state: PlayerState
 	return scaled===0?'$other_none$':`$ressource_megacreditvoid_${getScaling(cardCode, state)}`
 }
 function formatGainScalingCaptionRessource(cardCode: string, state: PlayerStateModel, gainType: AdvancedRessourceType | 'card'): string {
-	console.log(formatGainScalingCaption(cardCode, state, `$ressource_${gainType}$`), cardCode)
 	return formatGainScalingCaption(cardCode, state, `$ressource_${gainType}$`)
 }
 function formatGainScalingCaption(cardCode: string, state: PlayerStateModel, text: string): string {
 	let scaled = getScaling(cardCode, state)
-	console.log(cardCode, scaled)
 	switch(true){
 		case(scaled>1):{
 			return `+${scaled} ${text}`
@@ -51,12 +49,13 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'50', '50B', //Regolith Eaters
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
+	'M85', //Darkside Incubation Plant
 ]
 export const ACTIVATION_NO_COST: string[] = [
 	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03',
 	'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'FM11', 'FM15',
 	'FM26', 'FM27',
-	'M80', 'M81', 'M84', 'M85', 'M86', 'M87', 'M88', 'M89', 'M90', 'M92'
+	'M80', 'M81', 'M84', 'M86', 'M87', 'M88', 'M89', 'M90'
 ]
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
@@ -366,7 +365,6 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 	//Luna Archives
 	'M87': (card, state) => {
 		let gain = 	getScaling(card, state)
-		console.log(gain)
 		if(gain===0){return []}
 		return [S.addRessourceToCardId({name:'science', valueStock: gain}, card)]
 	},
@@ -471,86 +469,6 @@ export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: Playe
 	'M91': (clientstate) => Math.max(0, 12 - (clientstate.getRessourceInfoFromType('steel')?.valueProd??0) * 2),
 	//Shelter Blueprint Factory
 	'M92': (clientstate) => Math.max(0, 15 - (clientstate.getRessourceInfoFromType('titanium')?.valueProd??0) * 3),
-
-
-
-
-	//SPECIALS
-	//Convert Forest - Ecoline
-	'convertForest': (state) => {
-		let result: number = 8
-		result -= state.getTriggersIdActive().includes('210')? 1:0
-		result -= state.getTriggersIdActive().includes('210B')? 2:0
-		return result
-	},
-	'convertTemperature': () => {
-		return 8
-	},
-	'convertInfrastructureHeat': () => {
-		return 5
-	},
-	'convertInfrastructurePlant': () => {
-		return 3
-	},
-	//Buy Forest - Standard Technology
-	'buyForest': (state) => {
-		let result: number = 20
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		return result
-	},
-	//Buy Infrastructure - Standard Technology
-	'buyInfrastructure': (state) => {
-		let result: number = 15
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		return result
-	},
-	//Buy Ocean - Standard Technology
-	'buyOcean': (state) => {
-		let result: number = 16
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		return result
-	},
-	//Buy Temperature - Standard Technology
-	'buyTemperature': (state) => {
-		let result: number = 14
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		return result
-	},
-	//Buy Temperature - Standard Technology
-	'buyUpgrade': (state) => {
-		let result: number = 18
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		return result
-	},
-	//Buy Temperature - Standard Technology
-	'buyHabitat': (state) => {
-		let result: number = 16
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		result -= state.getTriggersIdActive().includes('M122')? 3:0
-		return result
-	},
-	//Buy Temperature - Standard Technology
-	'buyRoad': (state) => {
-		let result: number = 16
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		result -= state.getTriggersIdActive().includes('M122')? 3:0
-		return result
-	},
-	//Buy Temperature - Standard Technology
-	'buyMine': (state) => {
-		let result: number = 16
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		result -= state.getTriggersIdActive().includes('M122')? 3:0
-		return result
-	},
 }
 export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: PlayerStateModel) => string> = {
 	//Aquifer Pumping
@@ -617,9 +535,9 @@ export const ACTIVATION_SCALING_EFFECT_CAPTION: Record<string, (clientState: Pla
 	'buyTemperature': (state) => `$ressource_megacreditvoid_${getScaling('buyTemperature', state)}$: $other_temperature$`,
 	'buyUpgrade': (state) => `$ressource_megacreditvoid_${getScaling('buyUpgrade', state)}$: $other_upgrade$`,
 
-	'buyHabitat': (state) => `$ressource_megacreditvoid_${getScaling('buyHabitat', state)}$: $other_habitattile$+$ressource_card$`,
+	'buyHabitat': (state) => `$ressource_megacreditvoid_${getScaling('buyHabitat', state)}$: $other_habitattile$`,
 	'buyRoad': (state) => `$ressource_megacreditvoid_${getScaling('buyRoad', state)}$: $other_roadtile$`,
-	'buyMine': (state) => `$ressource_megacreditvoid_${getScaling('buyMine', state)}$: $other_minetile$+$ressource_steel$`,
+	'buyMine': (state) => `$ressource_megacreditvoid_${getScaling('buyMine', state)}$: $other_minetile$`,
 }
 export const ACTIVATE_REQUIREMENTS: Record<string, (activationOption: ActivationOption, clientState: PlayerStateModel) => boolean> = {
 	//Aquifer Pumping

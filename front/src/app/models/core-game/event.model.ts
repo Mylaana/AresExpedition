@@ -33,6 +33,7 @@ export abstract class EventBaseModel {
 	eventOrigin?: EventOrigin
     titleKey!: EventTitleKey
 	titleInterpolation!: string[]
+	scrollToTopOnActivation: boolean = true
 
     constructor(private gameTextService?: GameTextService){}
 
@@ -432,6 +433,7 @@ export class EventGeneric extends EventBaseModel {
     override subType!: EventGenericSubType
     override autoFinalize: boolean = true
     override title!: string
+	override scrollToTopOnActivation: boolean = false
     increaseParameter?: GlobalParameterValue
     increaseResearchScanKeep?: Partial<ScanKeep>
     baseRessource?:RessourceStock | RessourceStock[]

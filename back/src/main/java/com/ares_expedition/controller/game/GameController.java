@@ -261,8 +261,8 @@ public class GameController {
         long age = Duration.between(game.getLastUpdate(), now).toHours();
 
         //finished
-        if(game.isGameOver() && age >= GlobalConstants.SCHEDULER_DELETE_AFTER_HOURS_FINISHED){
-            return true;
+        if(game.isGameOver()){
+            return  age >= GlobalConstants.SCHEDULER_DELETE_AFTER_HOURS_FINISHED;
         }
         //newly created idle
         if(game.getProgression() <= GlobalConstants.SCHEDULER_DELETE_NEW_GAME_PROGRESSION_TRESHOLD 

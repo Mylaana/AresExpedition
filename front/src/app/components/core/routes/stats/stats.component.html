@@ -1,0 +1,8 @@
+<div class="wrapper-main">
+	<h1 class="ares-title">STATS</h1>
+	<app-filter-pannel-wrapper [filterType]="'cardType'" [displayBehavior]="'greyNotSelected'" [currentSelection]="_currentFilter" (buttonClicked)="onButtonClicked($event)"></app-filter-pannel-wrapper>
+	<div class="wrapper-list">
+		<app-playable-card-list [cardList]="getRanking()" [listType]="'statsRoute'"></app-playable-card-list>
+	</div>
+</div>
+

@@ -19,4 +19,8 @@ export class CardVpComponent {
 	@Input() vpDescription?: string
 	@Input() isScalingVp: boolean = false
 	@Input() cardSize!: SettingCardSize
+
+	isMultiline(): boolean {
+		return (this.vpDescription??'').split('$skipline$').length > 1
+	}
 }

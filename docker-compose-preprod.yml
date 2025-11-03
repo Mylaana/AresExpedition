@@ -22,8 +22,17 @@ services:
       - JAVA_TOOL_OPTIONS=-Xmx512m -Xms256m
     volumes:
       - ./data:/app/data
+      - ./data/database.json:/app/data/database.json
     networks:
       - ares-network
+
+  analyze_game:
+    build:
+      context: .
+      dockerfile: scripts/analyze_game/Dockerfile
+    volumes:
+      - ./data:/app/data
+
 
 networks:
   ares-network:

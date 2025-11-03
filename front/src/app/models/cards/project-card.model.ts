@@ -1,12 +1,13 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType, SettingSupportedLanguage, TagType } from "../../types/global.type"
-import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, LocalizedText} from "../../types/project-card.type"
+import { SummaryType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, LocalizedText, CardTypeUndefined} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { PlayedCardStocksDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
-import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
+import { CardStats, PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
 import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const"
+
 
 export class PlayableCardModel {
     cardCode!: string;
@@ -16,7 +17,7 @@ export class PlayableCardModel {
 	cost!: number;
     tagsId!: number[];
     cardSummaryType?: SummaryType;
-    cardType!: CardType;
+    cardType!: CardTypeUndefined;
     vpNumber?: string;
     prerequisiteTresholdType?: PrerequisiteTresholdType;
     prerequisiteType?: PrerequisiteType;
@@ -38,6 +39,9 @@ export class PlayableCardModel {
 	scalingVp!: boolean
 	tagStock!: number[] // this stores additional tags and wildtags result
     tagsUrl?: string[];
+
+	//stats
+	stats?: CardStats
 
 	private static _language: SettingSupportedLanguage = SETTING_DEFAULT_LANGUAGE
 	constructor(
@@ -305,6 +309,12 @@ export class PlayableCardModel {
 		}
 		//replace wild tags with stock
 		this.tagsId = this.tagsId.filter((el) => ![10, -1].includes(el)).concat(remainingStock)
+	}
+	hasStats(): boolean {
+		if(!this.stats){
+			return false
+		}
+		return true
 	}
 	toStockDTO(): PlayedCardStocksDTO {
 		let dto : PlayedCardStocksDTO = {}

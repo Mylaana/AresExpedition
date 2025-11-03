@@ -1,5 +1,5 @@
 import { AdvancedRessourceType } from "../types/global.type"
-import { SummaryType, CardType, PrerequisiteTresholdType, PrerequisiteType, LocalizedText } from "../types/project-card.type"
+import { SummaryType, PrerequisiteTresholdType, PrerequisiteType, LocalizedText, CardType, CardTypeUndefined } from "../types/project-card.type"
 import { AdvancedRessourceStock } from "./global.interface"
 
 export interface CardState{
@@ -23,7 +23,7 @@ export interface PlayableCardInterface {
 	origin: string
 	costInitial: number
 	tagsId: number[]
-	cardType: CardType
+	cardType: CardTypeUndefined
 	vpNumber?: string
 	prerequisiteTresholdType?: PrerequisiteTresholdType
 	prerequisiteType?: PrerequisiteType
@@ -59,4 +59,14 @@ export interface PlayableCardInterface {
 export interface CardScalingVP {
 	cardCode: string,
 	vp: number
+}
+
+export interface CardStats {
+	code: string,
+	played: number,
+	win: number,
+	type: CardType,
+	winrate: number
+	score: number
+	duration: number
 }

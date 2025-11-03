@@ -1,0 +1,22 @@
+:host{
+	position: relative;
+	z-index: -2;
+    display: flex;
+    justify-content: center;
+}
+.wrapper-main{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	height: fit-content;
+	margin-left: -5px;
+	padding-left: 5px;
+	padding-bottom: 0;
+	border-left: 0;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+
+	margin-right: 10px;
+	margin-top: 10%;
+	overflow: hidden;
+}

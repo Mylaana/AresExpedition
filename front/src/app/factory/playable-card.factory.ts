@@ -4,9 +4,10 @@ import { TriggerEffectEventFactory } from "./trigger-event.factoy";
 import { ActivationOption } from "../types/project-card.type";
 import { DEBUG_IGNORE_PREREQUISITES } from "../global/global-const";
 import { PlayableCardModel } from "../models/cards/project-card.model";
-import { NonEventButtonNames } from "../types/global.type";
+import { NonEventButtonNames, StandardProjectButtonNames } from "../types/global.type";
 import { ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS, ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS, PLAY_REQUIREMENTS } from "../maps/playable-card-other-maps";
 import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION_NO_COST, ACTIVATION_SCALING_EFFECT_CAPTION, ACTIVATION_SCALING_EFFECT_VALUE } from "../maps/playable-card-activation-maps";
+import { STANDARD_PROJECT_CAPTION, STANDARD_PROJECT_COST } from "../maps/standard-project-maps";
 
 function getOnPlayedEvents(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 	return PLAY_EVENTS[cardCode]?.(clientstate)
@@ -40,11 +41,19 @@ function getAlternativePayCaption(cardCode: string): NonEventButtonNames | undef
 	if(!ALTERNATIVE_PAY_BUTTON_NAME[cardCode]){return}
 	return ALTERNATIVE_PAY_BUTTON_NAME[cardCode]()
 }
+function getStandardProjectCost(key: StandardProjectButtonNames, clientState: PlayerStateModel): number {
+	return STANDARD_PROJECT_COST[key]?.(clientState)
+}
+function getStandardProjectCaption(key: StandardProjectButtonNames, clientState: PlayerStateModel): string{
+	return STANDARD_PROJECT_CAPTION[key]?.(clientState)
+}
 const PlayableCardActivativable = {
 	getOnActivationEvents,
 	getActivationOption,
 	getScalingCostActivationCaption,
-	getScalingCostActivation
+	getScalingCostActivation,
+	getStandardProjectCost,
+	getStandardProjectCaption,
 }
 const PlayableCardPrerequisite = {
 	canBePlayed(card: PlayableCardModel, clientState: PlayerStateModel): boolean {

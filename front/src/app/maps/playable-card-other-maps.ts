@@ -199,7 +199,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//hypersensitive Chip Factory
 	'M10': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
 	//Luna Mining Hub
-	'M11': (s)=> Checker.isMoonTileOk('mine', 2, 'min', s),
+	'M11': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
 	//Luna Senate
 	'M13': (s)=> Checker.isTagOk('moon', 3, 'min', s),
 	//Lunar industry complex
@@ -224,7 +224,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//Luna Archives
 	'M87': (s)=> Checker.isTagOk('science', 3, 'min', s),
 	//Pets Acclimatization
-	'M90': (s)=> Checker.isMoonTileOk('habitat', 3, 'min', s),
+	'M90': (s)=> Checker.isMoonTileOk('habitat', 2, 'min', s),
 	//Moon Tether
 	'M120': (s)=> Checker.isTagOk('space', 4, 'min', s),
 	//Mooncrate Block Factory
@@ -1254,8 +1254,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Lunar Embassy
 	'FM16': () => [
 		S.draw(1),
-		S.increaseGlobalParameter(GlobalParameterNameEnum.infrastructure, 1),
-		S.addProduction({name:'megacredit', valueStock:3})
+		S.addProduction({name:'megacredit', valueStock:5})
 	],
 	//Ecology research
 	'FM17': () => [
@@ -1454,10 +1453,9 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Colonist Shuttle
 	'M61': (state) => {
 		let result = [
-			S.increaseMoonParameter(),
+			S.addHabitat(),
 			S.draw(1)
 		]
-		if(state.getHabitat()>=3){result.push(S.addRessource({name:'megacredit', valueStock:10}))}
 		return result
 	},
 	//He3 Production Quotas
@@ -1468,12 +1466,12 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Preliminary Darkside
 	'M64': () => [
-		S.increaseMoonParameter(2),
+		S.addMine(),
 		S.draw()
 	],
 	//Darkside Meteor Bombardment
 	'M65': () => [
-		S.increaseMoonParameter(3),
+		S.addMine(2),
 		S.draw(2)
 	],
 	//Moon Minerals Tradecenter
@@ -1484,13 +1482,21 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'M123': () => [
 		S.increaseResearchScanKeep({scan:3, keep:0})
 	],
+	//Crescent research association
+	'MC1': () => [
+		S.increaseResearchScanKeep({scan:1, keep:0})
+	],
 	//Luna Mining Federation
 	'MC2': () => [
 		S.addMine(2),
 	],
+	//Luna first
+	'MC3': () => [
+		S.increaseMoonParameter(2)
+	],
 	//Grand Luna Capital Group
 	'MC4': () => [
-		S.addHabitat(1),
+		S.addHabitat(2),
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: PlayerStateModel) => number> = {
@@ -1594,6 +1600,8 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'FM18': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('jovian')}],
 	//Interplanetary Trade
 	'FM20': (s)=> [{name:'megacredit', valueStock:s.getDifferentTagTypeCount()}],
+	//Advertising
+	'FM23': (s)=> [{name:'megacredit', valueStock:s.getProjectPlayedModelList({type:ProjectFilterNameEnum.cost20orMore}).length}],
 	//HelioLink space station
 	'FM30': (s)=> [{name:'heat', valueStock:s.getTagsOfType('science')}],
 	//Potatoes Farm
@@ -1621,6 +1629,8 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	'M28': (s)=> [{name:'card', valueStock: Math.floor(s.getTagsOfType('moon') / 3)}],
 	//Habitats Greenification
 	'M31': (s)=> [{name:'plant', valueStock:s.getHabitat()}],
+	//Luna Metropolis
+	'M32': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('earth')}],
 	//Luna first
 	'MC3': (s)=> {
 		let param = s.getGlobalParameterFromName(GlobalParameterNameEnum.moon)

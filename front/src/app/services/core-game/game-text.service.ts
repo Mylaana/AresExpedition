@@ -2,10 +2,8 @@ import { Injectable } from "@angular/core";
 import jsonData from '../../../assets/data/game-text.json'
 import { SettingSupportedLanguage } from "../../types/global.type";
 import { GameParamService } from "./game-param.service";
-import { ButtonCaptionKey, ErrorKey, EventTitleKey, GameOptionKey, InterfaceTitleKey } from "../../types/text.type";
+import { ButtonCaptionKey, ErrorKey, EventTitleKey, GameOptionKey, InterfaceTitleKey, StatTooltipKey } from "../../types/text.type";
 
-
-const eventKeyPrefix = 'gameEventTitle'
 
 @Injectable({
 	providedIn: "root"
@@ -69,6 +67,11 @@ export class GameTextService{
 	}
 	getErrorText(key: ErrorKey): string {
 		let result = this.translationMap.get(this.setKey('errorMessage', key))
+		if(!result){return 'MISSING TEXT IN JSON'}
+		return result[this._language] || result[this._defaultLanguage]
+	}
+	getStatToolTip(option: StatTooltipKey): string {
+		let result = this.translationMap.get(this.setKey('statTooltip', option))
 		if(!result){return 'MISSING TEXT IN JSON'}
 		return result[this._language] || result[this._defaultLanguage]
 	}

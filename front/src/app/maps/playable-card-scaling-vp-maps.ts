@@ -31,7 +31,7 @@ export const SCALING_VP: Record<string, (card: PlayableCardModel, state: PlayerS
 		"FM13": (_, state) => state.getTagsOfType('jovian'), //Ganymede Colony
 		"FM15": (card) => Math.floor(card.getStockValue('microbe')/2), //Ants
 		"FM27": (card) => card.getStockValue('science'), //Jovian Lanterns
-		"M11": (_, state) => state.getMine(), //Luna Mining Hub
+		"M11": (_, state) => Math.floor(state.getMine() /2), //Luna Mining Hub
 		"M13": (_, state) => state.getTagsOfType('moon'), //Luna Senate
 		"M14": (_, state) => state.getHabitat(), //Luna Train Station
 		"M27": (_, state) => state.getHabitat(), //Luna Ecumenapolis
@@ -45,6 +45,11 @@ export const SCALING_VP: Record<string, (card: PlayableCardModel, state: PlayerS
 		"M91": (_, state) => Math.floor(state.getMine() /2), //3d printing mine facility
 		"M124": (_, state) => state.getTagsOfType('jovian')+state.getTagsOfType('moon'), //Jupiter Embassy
 
-		"MC1": (_, state) => Math.floor(state.getTagsOfType('moon') / 2), //Crescent research association
+		"MC1": (_, state) => Math.floor(state.getTagsOfType('moon')), //Crescent research association
+		"MC2": (_, state) => {
+			let result = Math.floor((state.getRessourceInfoFromType('steel')?.valueProd??0) / 2)
+			result += Math.floor((state.getRessourceInfoFromType('titanium')?.valueProd??0) / 2)
+			return result
+		}, //Luna mining federation
 		"MC4": (_, state) => state.getHabitat() //Grand Luna Capital Group
 	};

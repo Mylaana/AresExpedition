@@ -233,6 +233,7 @@ public class Game {
         gameState.setRound(round);
         gameState.setDeck(getDeck().size());
         gameState.setProgression(progression);
+        gameState.setDiscard(discard.size());
         if(this.getGameOptions().isContentActive(GameContentNameEnum.expansionDiscovery)){
             gameState.setAwards(awards);
             gameState.setMilestones(milestones);

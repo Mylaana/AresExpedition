@@ -408,7 +408,6 @@ const S = EventFactory.simple
 		if(tile.length===0){return []}
 		let quantity = tile[0].quantity
 		return [
-			EventFactory.simple.addTR(quantity),
 			EventFactory.simple.addProduction({name: 'titanium', valueStock: quantity})
 		]
 	}

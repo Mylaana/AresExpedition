@@ -25,6 +25,7 @@ public class GameStateMessageOutputDTO {
     private int round;
     private int deck;
     private int progression;
+    private int discard;
 
     public GameStateMessageOutputDTO(){
     }
@@ -104,5 +105,11 @@ public class GameStateMessageOutputDTO {
     }
     public void setProgression(int progression) {
         this.progression = progression;
+    }
+    public int getDiscard() {
+        return discard;
+    }
+    public void setDiscard(int discard) {
+        this.discard = discard;
     }
 }

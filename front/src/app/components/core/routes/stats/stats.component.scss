@@ -1,0 +1,31 @@
+:host{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+
+	height: fit-content;
+	width: 100%;
+	padding-top: 30px;
+	padding-bottom: 100px;
+}
+h1{
+	padding: 10px;
+	//padding-left: 100px;
+	//padding-right: 100px;
+	margin-top: 20px;
+	text-align: center;
+	width: 500px;
+}
+.wrapper-main{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 50px;
+	width: 90%;
+}
+.wrapper-list{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}

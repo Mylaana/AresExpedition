@@ -1,0 +1,277 @@
+from pydantic import BaseModel, ConfigDict
+from . import enums_definition as e
+
+
+class PlayerStatState(BaseModel):
+    selectedPhaseRound: dict[str, e.PhaseNameEnum]
+
+
+class PlayedCardState(BaseModel):
+    s: list
+    t: list
+
+
+class PlayerStateCard(BaseModel):
+    cardPlayed: dict[str, PlayedCardState]
+
+
+class PlayerStateStats(BaseModel):
+    selectedPhaseRound: dict[str, str]
+
+    def getRoundNumber(self) -> int :
+        return len(self.selectedPhaseRound)
+
+
+class ResourceInfo(BaseModel):
+    id: int
+    name: e.ResourceTypeEnum
+    valueStock: int
+
+    def getTieStock(self) -> int:
+        if self.name in [e.ResourceTypeEnum.megacredit, e.ResourceTypeEnum.heat, e.ResourceTypeEnum.plant]:
+            return self.valueStock
+
+        return 0
+
+
+class PlayerStateResource(BaseModel):
+    ressources: list[ResourceInfo]
+
+    def getTieResourceTotal(self) -> int:
+        total = 0
+        for r in self.ressources:
+            total += r.getTieStock()
+        return total
+
+
+class PlayerStateScore(BaseModel):
+    vp: int
+    terraformingRating: int
+    forest: int
+    award: int
+    claimedMilestone: list
+    habitat: int
+    mine: int
+
+    def getTotalScore(self):
+        return (self.vp + self.terraformingRating + self.forest + self.award + len(self.claimedMilestone) * 3
+                + self.habitat + self.mine)
+
+
+class PlayerStateInfo(BaseModel):
+    id: str
+    name: str
+
+
+class PlayerState(BaseModel):
+    infoState: PlayerStateInfo
+    scoreState: PlayerStateScore
+    ressourceState: PlayerStateResource
+    projectCardState: PlayerStateCard
+    statState: PlayerStateStats
+
+    def getScore(self) -> int:
+        return self.scoreState.getTotalScore()
+
+    def getTieScore(self):
+        return self.scoreState.getTotalScore() + self.ressourceState.getTieResourceTotal()
+
+    def getRoundNumber(self) -> int:
+        return self.statState.getRoundNumber()
+
+
+class GameOptions(BaseModel):
+    options: dict[str, dict]
+
+
+class GlobalParameter(BaseModel):
+    name: e.GlobalParameterNameEnum
+    step: int
+
+
+class GameState(BaseModel):
+    gameId: str
+    groupPlayerId: list[str]
+    globalParameters: list[GlobalParameter]
+    gameOptions: GameOptions
+    groupPlayerState: dict[str, PlayerState]
+
+    def getTieWinner(self) -> str:
+        return 'pouet'
+
+    def getWinner(self, tie: bool = False) -> str:
+        if len(self.groupPlayerId) <= 1:
+            return 'solo'
+
+        max_score = -1
+        max_score_player_name = ''
+        tie_counter = 0
+
+        for name in self.groupPlayerState:
+            player = self.groupPlayerState[name]
+
+            if tie is False:
+                player_score = player.getScore()
+            else:
+                player_score = player.getTieScore()
+
+            if player_score == max_score:
+                tie_counter += 1
+
+            if player_score > max_score:
+                max_score = player_score
+                max_score_player_name = name
+
+        if tie_counter > 0:
+            if tie:
+                return 'draw'
+
+            return self.getWinner(True)
+
+        return max_score_player_name
+
+
+class Card(BaseModel):
+    card_code: str
+    cardType: e.CardTypeEnum
+    status: str
+
+
+class CardStatExport(BaseModel):
+    code: str
+    played: int
+    win: int
+    type: e.CardTypeEnum
+    winrate: int
+    score: int
+    duration: int
+
+    model_config = ConfigDict(use_enum_values=True)
+
+
+class CardStat():
+    def __init__(self, card: Card):
+        self.code = card.card_code
+        self.played: int = 0
+        self.win: int = 0
+        self.type: e.CardTypeEnum = card.cardType
+        self.score: int = 0
+        self.duration: int = 0
+
+    def addResult(self, win: bool):
+        if win:
+            self.addWin()
+        else:
+            self.addLoss()
+
+    def addWin(self):
+        self.win += 1
+        self.played += 1
+
+    def addLoss(self):
+        self.played += 1
+
+    def getAverageScore(self) -> int:
+        if self.played == 0:
+            return 0
+        return round(self.score / self.played)
+
+    def getAverageDuration(self) -> int:
+        if self.played == 0:
+            return 0
+        return round(self.duration / self.played)
+
+    def getWinrate(self) -> int:
+        if self.played == 0:
+            return 0
+        return round(self.win * 100 / self.played)
+
+    def addScore(self, score: int):
+        self.score += score
+
+    def addDuration(self, duration: int):
+        self.duration += duration
+
+
+class CardInfo(BaseModel):
+    cards: list[Card]
+
+    def isCardValid(self, card_code: str) -> bool:
+        for c in self.cards:
+            if c.card_code == card_code:
+                return True
+        return False
+
+    def toCardStats(self) -> dict[str, CardStat]:
+        result: dict[str, CardStat] = {}
+
+        for c in self.cards:
+            if c.status == 'excluded' or c.status == 'blocked':
+                continue
+
+            result[c.card_code] = CardStat(c)
+
+        return result
+
+
+class ParsedStatsExport(BaseModel):
+    card_stats: list[CardStatExport]
+
+
+class ParsedStats():
+    def __init__(self, card_info: CardInfo):
+        self.card_info: CardInfo = card_info
+        self.card_stats: dict[str, CardStat]
+
+        self.initializeCard()
+
+    def load_game(self, game: GameState):
+        winner_id = game.getWinner()
+
+        for p in game.groupPlayerState:
+            self.treatPlayerStats(game.groupPlayerState[p], p == winner_id)
+
+    def initializeCard(self):
+        self.card_stats = self.card_info.toCardStats()
+
+    def treatPlayerStats(self, player: PlayerState, win: bool):
+        self.treatCardResult(player, win)
+
+    def treatCardResult(self, player: PlayerState, win: bool):
+        score: int = player.getScore()
+        duration: int = player.getRoundNumber()
+
+        for c in player.projectCardState.cardPlayed:
+            if not self.card_info.isCardValid(c):
+                continue
+            self.addCardResult(c, win)
+            self.addCardScore(c, score)
+            self.addCardDuration(c, duration)
+
+    def addCardResult(self, card_code: str, win: bool):
+        self.card_stats[card_code].addResult(win)
+
+    def addCardScore(self, card_code: str, score: int):
+        self.card_stats[card_code].addScore(score)
+
+    def addCardDuration(self, card_code: str, duration: int):
+        self.card_stats[card_code].addDuration(duration)
+
+    def to_json(self) -> str:
+        """formats and dumps final state using pydantic"""
+        card_list: list[CardStatExport] = [
+            CardStatExport(
+                code=stat.code,
+                played=stat.played,
+                win=stat.win,
+                type=stat.type,
+                score=stat.getAverageScore(),
+                duration=stat.getAverageDuration(),
+                winrate=stat.getWinrate()
+            )
+            for stat in self.card_stats.values()
+        ]
+        export_model = ParsedStatsExport(
+            card_stats=list(card_list)
+        )
+        return export_model.model_dump_json(indent=4)

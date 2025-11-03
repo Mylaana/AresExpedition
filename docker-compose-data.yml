@@ -1,0 +1,7 @@
+services:
+  analyze_game:
+    build:
+      context: .
+      dockerfile: scripts/analyze_game/Dockerfile
+    volumes:
+      - ./data:/app/data

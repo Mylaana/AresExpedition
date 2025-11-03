@@ -3,8 +3,10 @@
 # Local DB.json
 data/database.json
 data/archives
+data/game_stats.json
 back/data
 front/src/assets/data
+analyzed_games.json
 
 # Compiled output
 /dist
@@ -95,3 +97,7 @@ build/
 /config/back/.env
 /config/back/.env.dev
 /config/back/.env.preprod
+
+# Python
+__pycache__/
+env

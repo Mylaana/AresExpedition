@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LayoutHexagonsComponent } from '../../../../tools/layouts/layout-hexagons/layout-hexagons.component';
 import { CommonModule } from '@angular/common';
-import { CardType, CardTypeColor } from '../../../../../types/project-card.type';
+import { CardTypeUndefined, CardTypeColor } from '../../../../../types/project-card.type';
 import { Utils } from '../../../../../utils/utils';
 
 @Component({
@@ -14,7 +14,7 @@ import { Utils } from '../../../../../utils/utils';
     styleUrl: './card-background.component.scss'
 })
 export class CardBackgroundComponent implements OnInit{
-	@Input() cardType!: CardType
+	@Input() cardType!: CardTypeUndefined
 	_color!: CardTypeColor
 
 	ngOnInit(): void {

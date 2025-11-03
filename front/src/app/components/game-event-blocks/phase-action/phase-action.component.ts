@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { NonEventButton } from '../../../models/core-game/button.model';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { GameState } from '../../../services/core-game/game-state.service';
 import { EventBaseModel, EventCardActivator } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
@@ -10,7 +10,6 @@ import { DeckQueryOptionsEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event/event-factory';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
-import { GameOption } from '../../../services/core-game/create-game.service';
 import { CommonModule } from '@angular/common';
 import { ActionPhaseService } from '../../../services/core-game/action-phase.service';
 import { GameContentName, StandardProjectButtonNames } from '../../../types/global.type';
@@ -67,6 +66,7 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 
 		this._actionEvent = this.event as EventCardActivator
 		this.applyPhaseCardBonusIfRelevant()
+		window.scroll({top:0})
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()

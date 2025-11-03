@@ -514,7 +514,7 @@
         },
         "effectText": {
             "en": "ACTION: Earn 2 MC. If you chose the action phase this round, you also gain 1 plant.",
-            "fr": "ACTION: Gagnez 2 MC. Si vous avez choisi la phase d'actions lors de cette manche, gagnez \u00e9galement 1 MC. "
+            "fr": "ACTION: Gagnez 2 MC. Si vous avez choisi la phase d'actions lors de cette manche, gagnez \u00e9galement 1 plante. "
         },
         "status": "validated",
         "actionTextOption1": {
@@ -4560,7 +4560,7 @@
         },
         "effectText": {
             "en": "During the production phase, this card produces 1 plant for each $tag_plant$ you have.",
-            "fr": "Lors de la phase de production, cette carte produit 1 plante par ^tag_plant$ en votre possession. "
+            "fr": "Lors de la phase de production, cette carte produit 1 plante par $tag_plant$ en votre possession. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9379,7 +9379,7 @@
         },
         "effectText": {
             "en": "EFFECT: Whenever a phase is activated that you did NOT select :$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_3$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: chose one:$skipline$$production_+3$$ressource_megacredit$ or $production_+1$$ressource_heat$$production_+1$$ressource_plant$.$skipline$$other_phase_research$: gain $other_researchsymbol$$other_researchcard$.",
-            "fr": "EFFECT: Lorsque une phase que vous n'avez PAS choisie est activ\u00e9e:$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_3$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: choisissez un:$skipline$$production_+3$$ressource_megacredit$ ou $production_+1$$ressource_heat$$production_+1$$ressource_plant$.$skipline$$other_phase_research$: gagnez $other_researchsymbol$$other_researchcard$."
+            "fr": "EFFECT: Lorsqu'une phase que vous n'avez PAS choisie est activ\u00e9e:$skipline$$other_phase_development$/$other_phase_construction$ : $ressource_megacreditvoid_3$.$skipline$$other_phase_action$ : $ressource_plant$$ressource_heat$+$ressource_wild$.$skipline$$other_phase_production$: choisissez un:$skipline$$production_+3$$ressource_megacredit$ ou $production_+1$$ressource_heat$$production_+1$$ressource_plant$.$skipline$$other_phase_research$: gagnez $other_researchsymbol$$other_researchcard$."
         },
         "startingMegacredits": 40,
         "status": "validated",
@@ -9411,7 +9411,7 @@
             "fr": ""
         },
         "effectText2": {
-            "en": "$other_arrow$  -$ressource_science$:$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-6$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-7$ressource_science$: $production_+2$$ressource_steel$$production_+1$$ressource_titanium$$skipline$-10$ressource_science$: +$tag_earth$$tag_jovian$.",
+            "en": "$other_arrow$  -$ressource_science$:$ressource_card$$skipline$-2$ressource_science$: $other_sellcard$$ressource_megacreditvoid_10$$skipline$-3$ressource_science$: $production_+1$$ressource_steel$ OR $production_+1$$ressource_titanium$$skipline$-4$ressource_science$: $production_+2$$ressource_heat$$production_+2$$ressource_plant$$skipline$-6$ressource_science$: +$tag_plant$$tag_animal$$tag_microbe$$skipline$-7$ressource_science$: +$tag_wild$.",
             "fr": ""
         },
         "stockable": [
@@ -9951,16 +9951,16 @@
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$/$tag_earth$$tag_earth$",
-            "fr": "$ressource_megacreditvoid_3$$skipline$$ressource_plant$/$tag_earth$$tag_earth$"
+            "en": "$ressource_megacreditvoid_5$$skipline$$ressource_plant$/$tag_earth$$tag_earth$",
+            "fr": "$ressource_megacreditvoid_5$$skipline$$ressource_plant$/$tag_earth$$tag_earth$"
         },
         "effectText": {
-            "en": "During the production phase, this card produces 3 MC and 1 $ressource_plant$ per two $tag_earth$ you have, including this one.",
-            "fr": "Lors de la phase de production, cette carte produit 1 $ressource_plant$ tous les deux $tag_earth$ en votre possession, y compris celui-ci."
+            "en": "During the production phase, this card produces 5 MC, $skipline$ During the production phase, this card produces 1 $ressource_plant$ per two $tag_earth$ you have, including this one.",
+            "fr": "Lors de la phase de production, cette carte produit 5 MC.$skipline$Lors de la phase de production, cette carte produit 1 $ressource_plant$ tous les deux $tag_earth$ en votre possession, y compris celui-ci."
         },
         "playedText": {
-            "en": "Draw a card.$skipline$Raise infrastructure 1 step.",
-            "fr": "Piochez une carte.$skipline$Augmentez l'infrastructure de 1."
+            "en": "Draw a card.",
+            "fr": "Piochez une carte."
         },
         "status": "validated",
         "vpScaling": "0"
@@ -10505,125 +10505,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M2",
-        "origin": "moon",
-        "cost": 15,
-        "tagsId": [
-            0,
-            11
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Aristarchus Road Network",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 2MC.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M3",
-        "origin": "moon",
-        "cost": 8,
-        "tagsId": [
-            1,
-            11,
-            3
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Copernicus Solar Arrays",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_heat$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 1 heat.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Gain 2 heat.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M4",
-        "origin": "moon",
-        "cost": 18,
-        "tagsId": [
-            1,
-            11
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "2",
-        "title": {
-            "en": "Darkside Mining Syndicate",
-            "fr": ""
-        },
-        "effectSummaryType": "greyProduction",
-        "effectSummaryText": {
-            "en": "$ressource_titanium$$ressource_titanium$ OR $skipline$$ressource_titanium$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "EFFECT: When you play a $tag_space$, you pay 3 or 6MC less for it.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "If you have no $other_minetile$ when playing this card, gain an additional $ressource_titanium$ production.$skipline$Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M5",
-        "origin": "moon",
-        "cost": 18,
-        "tagsId": [
-            11
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Deep Lunar Mining",
-            "fr": ""
-        },
-        "effectSummaryType": "greyProduction",
-        "effectSummaryText": {
-            "en": "$ressource_titanium$$ressource_titanium$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "EFFECT: When you play a $tag_space$, you pay 6MC less for it.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M6",
         "origin": "moon",
         "cost": 12,
@@ -10704,64 +10585,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M9",
-        "origin": "moon",
-        "cost": 10,
-        "tagsId": [
-            3
-        ],
-        "cardType": "greenProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Heliostat Mirror Array",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_heat$$ressource_heat$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 2 heat.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M10",
-        "origin": "moon",
-        "cost": 11,
-        "tagsId": [
-            0,
-            11
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Hypersensitive Silicon Chip Factory",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_4$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 4MC.",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "Requires that you have 1 $other_minetile$.",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "$other_minetile$",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M11",
         "origin": "moon",
         "cost": 23,
@@ -10775,7 +10598,7 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $other_minetile$",
+            "en": "/ $other_minetile$$other_minetile$",
             "fr": ""
         },
         "effectSummaryType": "greyProduction",
@@ -10792,43 +10615,15 @@
             "fr": ""
         },
         "prerequisiteText": {
-            "en": "Requires that you have 2 $other_minetile$.",
+            "en": "Requires that you have $other_minetile$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "$other_minetile$$other_minetile$",
+            "en": "$other_minetile$",
             "fr": ""
         },
         "status": "validated",
         "vpScaling": "1"
-    },
-    {
-        "card_code": "M12",
-        "origin": "moon",
-        "cost": 11,
-        "tagsId": [
-            11
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Luna Resort",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_3$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 3MC.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
     },
     {
         "card_code": "M13",
@@ -11038,7 +10833,6 @@
         "origin": "moon",
         "cost": 21,
         "tagsId": [
-            2,
             0,
             11
         ],
@@ -11138,34 +10932,6 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M23",
-        "origin": "moon",
-        "cost": 12,
-        "tagsId": [
-            11
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Sinus Iridium Road Network",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_2$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 2MC.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M24",
         "origin": "moon",
         "cost": 16,
@@ -11199,34 +10965,6 @@
         },
         "prerequisiteSummaryText": {
             "en": "4$tag_moon$",
-            "fr": ""
-        },
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
-        "card_code": "M25",
-        "origin": "moon",
-        "cost": 8,
-        "tagsId": [
-            11
-        ],
-        "cardType": "greenProject",
-        "title": {
-            "en": "Tycho Road Network",
-            "fr": ""
-        },
-        "effectSummaryType": "production",
-        "effectSummaryText": {
-            "en": "$ressource_megacreditvoid_1$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "During the production phase, this card produces 1MC.",
-            "fr": ""
-        },
-        "playedText": {
-            "en": "Increase Moon structures by 1.",
             "fr": ""
         },
         "status": "validated",
@@ -11395,26 +11133,26 @@
         "vpScaling": "0"
     },
     {
-        "card_code": "M31",
+        "card_code": "M32",
         "origin": "moon",
-        "cost": 15,
+        "cost": 21,
         "tagsId": [
-            11,
-            6
+            1,
+            4
         ],
         "cardType": "greenProject",
-        "vpNumber": "1",
+        "vpNumber": "2",
         "title": {
-            "en": "Habitats Greenification",
+            "en": "Luna Metropolis",
             "fr": ""
         },
         "effectSummaryType": "production",
         "effectSummaryText": {
-            "en": "$ressource_plant$ / $other_habitattile$",
+            "en": "$ressource_megacredit$ / $tag_earth$",
             "fr": ""
         },
         "effectText": {
-            "en": "During the production phase, this card produces 1 $ressource_plant$ per $other_habitattile$ you have.",
+            "en": "During the production phase, this card produces 1 MC per $tag_earth$ you have, including this one.",
             "fr": ""
         },
         "status": "validated",
@@ -11444,10 +11182,10 @@
     {
         "card_code": "M61",
         "origin": "moon",
-        "cost": 10,
+        "cost": 5,
         "tagsId": [
-            1,
             4,
+            11,
             9
         ],
         "cardType": "redProject",
@@ -11456,7 +11194,7 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Increase Moon structures by 1.$skipline$Draw a card.$skipline$If you have 3 $other_habitattile$ or more, gain 10MC.",
+            "en": "Gain $other_habitattile$.$skipline$Draw a card.",
             "fr": ""
         },
         "status": "validated",
@@ -11532,7 +11270,7 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Increase Moon structures by 2.$skipline$Draw a card.",
+            "en": "Gain $other_minetile$.$skipline$Draw a card.",
             "fr": ""
         },
         "status": "validated",
@@ -11552,36 +11290,52 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Increase Moon structures by 3.$skipline$Draw 2 cards.",
+            "en": "Gain $other_minetile$$other_minetile$.$skipline$Draw 2 cards.",
             "fr": ""
         },
         "status": "validated",
         "vpScaling": "0"
     },
     {
-        "card_code": "M80",
+        "card_code": "M66",
         "origin": "moon",
-        "cost": 12,
+        "cost": 48,
         "tagsId": [
-            0
+            1,
+            4,
+            9
         ],
-        "cardType": "blueProject",
-        "vpNumber": "1",
+        "cardType": "redProject",
         "title": {
-            "en": "He3 Refinery",
+            "en": "Interplanetary Slingshot Cargo",
             "fr": ""
         },
-        "effectSummaryType": "action",
-        "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_megacreditvoid_2$/$other_minetile$",
+        "playedText": {
+            "en": "You may play an additional card this phase. That card may be a green card.$skipline$You may play an additional card this phase. That card may be a green card.$skipline$You may play an additional card this phase. That card may be a green card.",
+            "fr": "Vous pouvez jouer une carte suppl\u00e9mentaire lors de cette phase. Cette carte peut \u00eatre verte.$skipline$Vous pouvez jouer une carte suppl\u00e9mentaire lors de cette phase. Cette carte peut \u00eatre verte.$skipline$Vous pouvez jouer une carte suppl\u00e9mentaire lors de cette phase. Cette carte peut \u00eatre verte."
+        },
+        "status": "filled",
+        "vpScaling": "0"
+    },
+    {
+        "card_code": "M67",
+        "origin": "moon",
+        "cost": 9,
+        "tagsId": [
+            11,
+            8,
+            9
+        ],
+        "cardType": "redProject",
+        "title": {
+            "en": "Biological Lab Implantation",
             "fr": ""
         },
-        "effectText": {
-            "en": "ACTION: Gain 2MC per $other_minetile$ you have.",
+        "playedText": {
+            "en": "Gain a $other_habitattile$.$skipline$Draw a card.$skipline$Add 5 $ressource_microbe$ to a card.",
             "fr": ""
         },
-        "effectSummaryOption": "scalingCostActivation",
-        "status": "validated",
+        "status": "filled",
         "vpScaling": "0"
     },
     {
@@ -11616,35 +11370,6 @@
         ],
         "status": "validated",
         "vpScaling": "1"
-    },
-    {
-        "card_code": "M83",
-        "origin": "moon",
-        "cost": 3,
-        "tagsId": [
-            1,
-            11
-        ],
-        "cardType": "blueProject",
-        "title": {
-            "en": "Ancient Shipyard",
-            "fr": ""
-        },
-        "effectSummaryType": "action",
-        "effectSummaryText": {
-            "en": "$other_arrow$$skipline$-$other_tr$: $ressource_megacreditvoid_8$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "ACTION: lose 1 $other_tr$ to gain $ressource_megacreditvoid_5$.",
-            "fr": ""
-        },
-        "status": "validated",
-        "actionTextOption1": {
-            "en": "-$other_tr$$ressource_megacreditvoid_8$",
-            "fr": ""
-        },
-        "vpScaling": "0"
     },
     {
         "card_code": "M84",
@@ -11793,32 +11518,6 @@
         "vpScaling": "1"
     },
     {
-        "card_code": "M88",
-        "origin": "moon",
-        "cost": 14,
-        "tagsId": [
-            1
-        ],
-        "cardType": "blueProject",
-        "vpNumber": "1",
-        "title": {
-            "en": "Luna Trade Station",
-            "fr": ""
-        },
-        "effectSummaryType": "action",
-        "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_megacredit$/$other_habitattile$",
-            "fr": ""
-        },
-        "effectText": {
-            "en": "ACTION: Gain 1MC per $other_habitattile$ you have.",
-            "fr": ""
-        },
-        "effectSummaryOption": "scalingCostActivation",
-        "status": "validated",
-        "vpScaling": "0"
-    },
-    {
         "card_code": "M89",
         "origin": "moon",
         "cost": 9,
@@ -11880,11 +11579,11 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "prerequisiteText": {
-            "en": "Requires that you have 3 $other_habitattile$.",
+            "en": "Requires that you have 2 $other_habitattile$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "$other_habitattile$$other_habitattile$$other_habitattile$",
+            "en": "$other_habitattile$$other_habitattile$",
             "fr": ""
         },
         "stockable": [
@@ -11898,8 +11597,7 @@
         "origin": "moon",
         "cost": 26,
         "tagsId": [
-            0,
-            2
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -11929,8 +11627,7 @@
         "origin": "moon",
         "cost": 24,
         "tagsId": [
-            0,
-            2
+            0
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -11986,7 +11683,7 @@
             "en": "4$tag_space$",
             "fr": ""
         },
-        "status": "bugged",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {
@@ -12012,7 +11709,7 @@
             "en": "EFFECT: Whenever you play a $tag_moon$, draw a card.$skipline$When you play a card that has $tag_moon$ you pay 1MC less for it per $tag_earth$ you have.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -12053,7 +11750,6 @@
         "origin": "moon",
         "cost": 5,
         "tagsId": [
-            2,
             2
         ],
         "cardType": "blueProject",
@@ -12097,7 +11793,7 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $tag_jovian$or$tag_moon$",
+            "en": "/ $tag_jovian$$skipline$/$tag_moon$",
             "fr": ""
         },
         "effectSummaryType": "trigger",
@@ -12106,7 +11802,7 @@
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: Whenever you play a $tag_jovian$ or $tag_moon$ you pay 2MC less for it.$skipline$\nEFFECT: Gain 1 VP per TOTAL Jovian + Moon tag you have, including those ones.",
+            "en": "EFFECT: Whenever you play a $tag_jovian$ or $tag_moon$ you pay 2MC less for it.",
             "fr": ""
         },
         "prerequisiteText": {
@@ -12134,20 +11830,29 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $tag_moon$$tag_moon$",
+            "en": "/ $tag_moon$",
             "fr": ""
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$tag_moon$: $ressource_megacreditvoid_-1$/$tag_moon$",
+            "en": "$other_researchsymbol$ : $other_researchcard$",
             "fr": ""
         },
         "effectText": {
+            "en": "EFFECT: When you draw cards during the research phase, draw 1 additional card.",
+            "fr": "EFFET: Lorsque vous piochez des cartes pendant la phase de recherche, piochez 1 carte suppl\u00e9mentaire."
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$tag_moon$: $ressource_megacreditvoid_-1$/$tag_moon$",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "EFFECT: Whenever you play a card that has one or more $tag_moon$, you pay 1MC less per $tag_moon$ you already have, including this one.",
             "fr": ""
         },
-        "startingMegacredits": 40,
-        "status": "implemented",
+        "startingMegacredits": 32,
+        "status": "validated",
         "vpScaling": "1"
     },
     {
@@ -12158,17 +11863,22 @@
             11
         ],
         "cardType": "corporation",
+        "vpNumber": "*",
         "title": {
             "en": "Luna Mining Federation",
             "fr": ""
         },
+        "vpText": {
+            "en": "/$ressource_steel$$ressource_steel$$skipline$/$ressource_titanium$$ressource_titanium$",
+            "fr": ""
+        },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$other_minetile$: $ressource_titanium$$other_tr$",
+            "en": "$other_minetile$: $ressource_titanium$",
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: When you gain a $other_minetile$, increase your $ressource_titanium$ production by 1 and gain 1 $other_tr$.",
+            "en": "EFFECT: When you gain a $other_minetile$, increase your $ressource_titanium$ production by 1.",
             "fr": ""
         },
         "playedText": {
@@ -12177,7 +11887,7 @@
         },
         "startingMegacredits": 20,
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "1"
     },
     {
         "card_code": "MC3",
@@ -12199,7 +11909,11 @@
             "en": "During the production phase, this card produces 1 MC per current Moon Structures level. You don't have to be the one raising it to gain MC.",
             "fr": ""
         },
-        "startingMegacredits": 30,
+        "playedText": {
+            "en": "Increase Moon Structures 2 steps.",
+            "fr": ""
+        },
+        "startingMegacredits": 40,
         "status": "validated",
         "vpScaling": "0"
     },
@@ -12229,10 +11943,10 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Gain $other_habitattile$",
+            "en": "Gain $other_habitattile$$other_habitattile$",
             "fr": ""
         },
-        "startingMegacredits": 30,
+        "startingMegacredits": 34,
         "status": "validated",
         "vpScaling": "1"
     }

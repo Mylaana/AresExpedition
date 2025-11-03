@@ -1,7 +1,7 @@
 import { MilestonesEnum } from "../../enum/global.enum"
 import { CardScalingVP } from "../../interfaces/card.interface"
 import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.interface"
-import { SCALING_VP } from "../../maps/playable-card-vp-maps"
+import { SCALING_VP } from "../../maps/playable-card-scaling-vp-maps"
 import { MoonTileType } from "../../types/global.type"
 import { PlayerStateModel } from "./player-state.model"
 

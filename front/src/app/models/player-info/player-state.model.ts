@@ -204,7 +204,6 @@ export class PlayerStateModel {
 		this.globalParameterState.addGlobalParameterStepEOP(parameter)
 		if(this.isGlobalParameterMaxedOutAtPhaseBeginning(parameter.name)){return}
 		this.statState.increaseParameter(parameter.name, parameter.steps)
-		console.log('call scaling prod')
 		this.setScalingProduction()
 	}
 	getGlobalParameters(): GlobalParameter[] {return this.globalParameterState.getGlobalParameters()}
