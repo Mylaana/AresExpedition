@@ -20,15 +20,14 @@ def main():
     RESULT_PATH = os.path.join(RESULT_DIR, "analyzed_games.json")
 
     card_info: CardInfo
-    print("Result file:", RESULT_PATH)
-    print("Current working dir:", os.getcwd())
-    print("Script dir:", BASE_DIR)
 
     with open(CARD_INFO_PATH, 'r', encoding='utf-8') as file:
         file_data = json.load(file)
         card_info = CardInfo(cards=file_data)
 
     stats = ParsedStats(card_info=card_info)
+    analyzed = 0
+    excluded = 0
 
     for file in os.listdir(ARCHIVES_DIR):
         with open(os.path.join(ARCHIVES_DIR, file), 'r', encoding='utf-8') as file:
@@ -37,14 +36,19 @@ def main():
             winner = game.getWinner()
 
             if winner == 'solo':
-                print(game.gameId, 'excluded(solo)')
+                excluded += 1
                 continue
 
             if winner != 'draw':
                 stats.load_game(game)
+                analyzed += 1
 
     with open(RESULT_PATH, "w") as outfile:
         outfile.write(stats.to_json())
+
+    print('GAMES ANALYZING DONE')
+    print('loaded: ', analyzed)
+    print('excluded(solo): ', excluded)
 
 
 if __name__ == '__main__':

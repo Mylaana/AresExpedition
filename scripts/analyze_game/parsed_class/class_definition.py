@@ -231,8 +231,6 @@ class ParsedStats():
         for p in game.groupPlayerState:
             self.treatPlayerStats(game.groupPlayerState[p], p == winner_id)
 
-        print(game.gameId + ' loaded')
-
     def initializeCard(self):
         self.card_stats = self.card_info.toCardStats()
 
