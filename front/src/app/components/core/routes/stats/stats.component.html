@@ -1,21 +1,8 @@
 <div class="wrapper-main">
+	<h1 class="ares-title">STATS</h1>
+	<app-filter-pannel-wrapper [filterType]="'cardType'" [displayBehavior]="'greyNotSelected'" [currentSelection]="_currentFilter" (buttonClicked)="onButtonClicked($event)"></app-filter-pannel-wrapper>
 	<div class="wrapper-list">
-		<h1 class="ares-title">TOP CORPS</h1>
-		<app-playable-card-list [cardList]="getRanking('descending', 'corporation')" [listType]="'statsRoute'"></app-playable-card-list>
+		<app-playable-card-list [cardList]="getRanking()" [listType]="'statsRoute'"></app-playable-card-list>
 	</div>
-	<!--
-		<div class="wrapper-list">
-			<h1 class="ares-title">TOP GREEN PROJECTS</h1>
-			<app-playable-card-list [cardList]="getRanking('descending', 'greenProject')" [listType]="'statsRoute'"></app-playable-card-list>
-		</div>
-		<div class="wrapper-list">
-			<h1 class="ares-title">TOP BLUE PROJECTS</h1>
-			<app-playable-card-list [cardList]="getRanking('descending', 'blueProject')" [listType]="'statsRoute'"></app-playable-card-list>
-		</div>
-		<div class="wrapper-list">
-			<h1 class="ares-title">TOP RED PROJECTS</h1>
-			<app-playable-card-list [cardList]="getRanking('descending', 'redProject')" [listType]="'statsRoute'"></app-playable-card-list>
-		</div>
-		-->
 </div>
 

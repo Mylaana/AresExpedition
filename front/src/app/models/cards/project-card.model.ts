@@ -1,6 +1,6 @@
 import { AdvancedRessourceStock } from "../../interfaces/global.interface"
 import { AdvancedRessourceType, SettingSupportedLanguage, TagType } from "../../types/global.type"
-import { SummaryType, CardType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, LocalizedText} from "../../types/project-card.type"
+import { SummaryType, PrerequisiteType,PrerequisiteTresholdType, TriggerLimit, LocalizedText, CardTypeUndefined} from "../../types/project-card.type"
 import { ProjectFilter } from "../../interfaces/global.interface"
 import { PlayedCardStocksDTO, TriggerStateDTO } from "../../interfaces/dto/project-card-dto.interface"
 import { CardStats, PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface"
@@ -17,7 +17,7 @@ export class PlayableCardModel {
 	cost!: number;
     tagsId!: number[];
     cardSummaryType?: SummaryType;
-    cardType!: CardType;
+    cardType!: CardTypeUndefined;
     vpNumber?: string;
     prerequisiteTresholdType?: PrerequisiteTresholdType;
     prerequisiteType?: PrerequisiteType;

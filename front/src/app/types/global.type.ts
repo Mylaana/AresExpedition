@@ -1,5 +1,6 @@
 import { BuilderOption, MilestonesEnum } from "../enum/global.enum";
 import { CarouselButton, NonEventButton, ToggleButton } from "../models/core-game/button.model";
+import { CardType } from "./project-card.type";
 
 export type RGB = `rgb(${number}, ${number}, ${number})`;
 /**this should be used for player selection */
@@ -29,6 +30,7 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 | 'cardOverviewInvertTagSelection' | 'cardOverviewResetTagSelection' | 'cardOverviewNoneTag' | 'cardOverviewDisplayAll' | 'cardOverviewDisplayBalanced'
 | 'createGameOptionActivateAll' | 'createGameOptionDeactivateAll'
+| CardType
 | StandardProjectButtonNames
 export type ToggleButtonNames = GameContentName
 export type CarouselButtonNames = 'carousel'
@@ -50,7 +52,7 @@ export type SettingInterfaceSize = 'small' | 'medium'
 export type SettingPlayerPannelSize = 'small' | 'medium'
 export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText' | 'portalButton' | 'wildButton'
 | 'commandButton' | 'commandButtonSmall' | 'convertButton' | 'convertButtonTwoLines' | 'activateCardButton' | 'builderButton' | 'cardPrerequisite'
-| 'milestone' | 'milestoneClaimed' | 'award' | 'milestoneAwardHelper' | 'convertResource'
+| 'milestone' | 'milestoneClaimed' | 'award' | 'milestoneAwardHelper' | 'convertResource' | 'filterPannel'
 export type MilestoneState = Record<MilestonesEnum, boolean>
 export type InputRuleType = 'number' | 'string'
 export type GoToPage = 'cardOverviewBalanced'
@@ -61,3 +63,4 @@ export type GameContentName = 'expansionDiscovery' | 'expansionFoundations' | 'e
 | 'expansionBalancedCards' | 'modeInitialDraft' | 'modeInfrastructureMandatory' | 'modeMerger' | 'modeStandardProjectPhaseUpgrade' | 'modeDeadHand'
 | 'modeAdditionalAwards' | 'expansionMoon' | 'modeMoonMandatory'
 export type MoonTileType = 'habitat' | 'road' | 'mine'
+export type FilterPannelSelectedBehavior = 'all' | 'greyNotSelected'

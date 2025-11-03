@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CardType } from '../../../../../types/project-card.type';
+import { CardTypeUndefined } from '../../../../../types/project-card.type';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './card-disabled-foreground.component.scss'
 })
 export class CardDisabledForegroundComponent {
-	@Input() cardType!: CardType
+	@Input() cardType!: CardTypeUndefined
 }

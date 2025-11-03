@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Utils } from "../../utils/utils";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
-import { StatsCardFamily, StatsRanking } from "../../types/project-card.type";
+import { CardType, StatsRanking } from "../../types/project-card.type";
 import { CardStats } from "../../interfaces/card.interface";
 
 
@@ -14,13 +14,7 @@ export class StatService {
 	projectStats: CardStats[] = []
 	private baseSampleSize = 2
 	private minimumPlayed = 2
-	private cardsRanking: Record<StatsCardFamily, PlayableCardModel[]> = {
-		corporation: [],
-		project: [],
-		greenProject: [],
-		blueProject: [],
-		redProject: []
-	}
+	private cardsRanking!: Record<CardType, PlayableCardModel[]> 
 
 	constructor(private cardInfoService: ProjectCardInfoService){}
 
@@ -38,25 +32,32 @@ export class StatService {
 		this.fillCardsRanking()
 	}
 	fillCardsRanking(){
-		this.cardsRanking['corporation'] = this.fillRanking('corporation')
+		this.cardsRanking = {
+			corporation: this.fillRanking('corporation'),
+			project: this.fillRanking('project'),
+			greenProject: this.fillRanking('greenProject'),
+			blueProject: this.fillRanking('blueProject'),
+			activableProject: this.fillRanking('activableProject'),
+			triggerProject: this.fillRanking('triggerProject'),
+			redProject: this.fillRanking('redProject'),
+		}
 	}
-	fillRanking(family: StatsCardFamily, ranking: StatsRanking = 'descending'){
+	fillRanking(family: CardType, ranking: StatsRanking = 'descending'){
 		if(!this.rawCardStats){return []}
-		console.log(family)
 		let cards: CardStats[] = []
 		switch(family){
 			case('corporation'):{
 				cards = Utils.jsonCopy(this.corpoStats)
 				break
 			}
-			case('project'):{
-				cards = Utils.jsonCopy(this.projectStats)
-				break
-			}
 			case('blueProject'):
 			case('redProject'):
 			case('greenProject'):{
 				cards = this.projectStats.filter((el) => el.type===family)
+				break
+			}
+			case('project'):{
+				cards = this.projectStats
 				break
 			}
 		}
@@ -101,7 +102,8 @@ export class StatService {
 		if(!this.rawStats[name]){return 'cannot find '+ name}
 		return this.rawStats[name]
 	}
-	getRanking(ranking: StatsRanking, type: StatsCardFamily, size: number = this.baseSampleSize): PlayableCardModel[] {
+	getRanking(type: CardType, size: number = this.baseSampleSize): PlayableCardModel[] {
+		if(!this.cardsRanking || !this.cardsRanking[type]){return []}
 		return this.cardsRanking[type]
 	}
 }

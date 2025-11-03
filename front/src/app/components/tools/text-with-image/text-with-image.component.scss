@@ -181,6 +181,19 @@
 		height: 45%;
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.filterPannel{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	& p {
+		font-size: 20px;
+	}
+	& img{
+		height: 70%;
+	}
+}
 .wrapper-text-with-image::ng-deep .block-flex.convertButton{
 	display: flex;
 	align-items: center;

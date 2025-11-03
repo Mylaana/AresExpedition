@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { CardType, CardTypeColor } from '../../../../../types/project-card.type';
+import { CardTypeUndefined, CardTypeColor } from '../../../../../types/project-card.type';
 import { Utils } from '../../../../../utils/utils';
 
 @Component({
@@ -13,7 +13,7 @@ import { Utils } from '../../../../../utils/utils';
 })
 export class CardTagsComponent {
 	@Input() tagsUrl?: string[]
-	@Input() cardType!: CardType;
+	@Input() cardType!: CardTypeUndefined;
 	_color!: CardTypeColor
 
 	ngOnInit(): void {

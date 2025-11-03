@@ -54,15 +54,10 @@ export class ButtonDesigner{
 			case('createGameOptionActivateAll'):{startEnabled=true; break}
 			case('createGameOptionDeactivateAll'):{startEnabled=true; break}
 
-			/*
-			case('buyForest'):{startEnabled=true;break}
-			case('convertForest'):{startEnabled=true;break}
-			case('buyTemperature'):{startEnabled=true;break}
-			case('convertTemperature'):{startEnabled=true;break}
-			case('buyInfrastructure'):{startEnabled=true;break}
-			case('convertInfrastructure'):{startEnabled=true;break}
-			case('buyOcean'):{startEnabled=true;break}
-			*/
+			//filter pannels
+			case('activableProject'):case('triggerProject'):case('greenProject'):case('redProject'):case('corporation'):case('project'):case('blueProject'):
+				{startEnabled=true; break}
+
 			case('tagGain'):{startEnabled=true;break}
 
 			//cards
@@ -133,10 +128,14 @@ export class ButtonDesigner{
 			case('settingToggleDebug'):{caption='';break}
 			case('settingToggleLanguage'):{caption='';break}
 
-			/*
-			case('convertTemperature'):{caption='8$ressource_heat$: $other_temperature$';break}
-			case('convertInfrastructure'):{caption='5$ressource_heat$ + 3$ressource_plant$:$skipline$$other_infrastructure$ + $ressource_card$';break}
-			*/
+			//filter pannels
+			case('corporation'):{caption='$other_corporationcard$';break}
+			case('project'):{caption='$other_omnicard$';break}
+			case('blueProject'):{caption='$other_bluecard$';break}
+			case('activableProject'):{caption='$other_activablecard$';break}
+			case('triggerProject'):{caption='$other_triggercard$';break}
+			case('greenProject'):{caption='$other_greencard$';break}
+			case('redProject'):{caption='$other_redcard$';break}
 
 			//cards
 			case('activateProjectOnce'):{caption='$other_activate$'; break}

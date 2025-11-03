@@ -1,0 +1,6 @@
+<app-non-event-button *ngFor="let b of _buttonList"
+    [ngClass]="displayBehavior==='greyNotSelected'&&b!=currentSelection?'not-selected':''"
+    [button]="getButton(b)" 
+    [context]="'filterPannel'" 
+    (buttonClicked)="onButtonClicked(b)">
+</app-non-event-button>

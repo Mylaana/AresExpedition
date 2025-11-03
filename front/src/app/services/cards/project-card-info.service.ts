@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import jsonData from '../../../assets/data/cards_data.json'
-import { CardType, PrerequisiteTresholdType, SummaryType, PrerequisiteType } from "../../types/project-card.type";
+import { PrerequisiteTresholdType, SummaryType, PrerequisiteType, CardTypeUndefined } from "../../types/project-card.type";
 import { AdvancedRessourceType, SettingSupportedLanguage } from "../../types/global.type";
 import { Utils } from "../../utils/utils";
 import { PlayableCardEffect, PlayableCardInterface } from "../../interfaces/card.interface";
@@ -140,7 +140,7 @@ export class ProjectCardInfoService {
             }
         }
     }
-    private convertCardType(input: string): CardType {
+    private convertCardType(input: string): CardTypeUndefined {
         switch(input){
             case('redProject'):{
                 return 'redProject'

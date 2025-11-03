@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { CardType, CardTypeColor } from '../../../../../types/project-card.type';
+import {  CardTypeColor, CardTypeUndefined } from '../../../../../types/project-card.type';
 import { Utils } from '../../../../../utils/utils';
 
 @Component({
@@ -10,7 +10,7 @@ import { Utils } from '../../../../../utils/utils';
     styleUrl: './card-tags-zone.component.scss'
 })
 export class CardTagsZoneComponent implements OnInit{
-	@Input() cardType!: CardType;
+	@Input() cardType!: CardTypeUndefined;
 	_color!: CardTypeColor
 
 	ngOnInit(): void {
