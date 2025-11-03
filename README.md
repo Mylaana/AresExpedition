@@ -41,25 +41,17 @@ Backend: Junit
 - Automated Image build and push   
 
 # WIP : 
-## /!\Critical BUG/!\ : 
--
-
 ## Other BUG:   
 autohex background height bug on being displayed after resolving another event on top (eg : action phase -> upgrade standard -> action phase)   
 
 ## Must have for v1 :
-### Refactoring
-Rework Buildable system in playableCardComponent   
 
 ### Cards
 add trigger resolution priority   
 
 ### Interface
-display other player production
+display other player production   
 
-### CI/CD
-Frontend automated testing: Ongoing   
-Backend automated testing: no backend yet   
 
 ## Nice to have for v1
 ### Non-Critical Bug :
@@ -69,27 +61,17 @@ Expression has changed on client refresh with all the player pannel if something
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
 Optimize data volume exchanged   
-Refactor playable cards component should be storing clientstate and not repeatedly check for state   
 Refactor Ressource system (scaling, base etc.)   
 Refactor Tag System   
 
 ### Interface
 Add log   
 Add main buttons help popup   
-Add onClick visual effect for buttons   
 Add popup-like window for non-production phase gains   
 Add proper Hybrid production zone looks   
 Rework effect summary zone (refacto + looks)   
 Builder: display visual list of active triggers   
-Add a wizz button when player being too long to play <3   
-have "lines" the same size between navigation pannels (eg: global parameter line size should be the same as players so 3 player game should be same height as global parameter pannel)   
 
-
-### Responsiveness
--
-
-### Misc
--
 
 ## Game Options
 initial mulligan is an andvanced game mode option, not base   
