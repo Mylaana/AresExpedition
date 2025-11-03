@@ -111,6 +111,7 @@ public class GameController {
             logger.warn("id: " + game.getGameId());
             logger.warn("\u001B[32m -------------------------------- \u001B[0m");
             game.setGameStatus(GameStatusEnum.GAME_OVER);
+            JsonGameDataHandler.saveGame(game);
             wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
             return;
         } else {
