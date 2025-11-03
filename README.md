@@ -44,8 +44,6 @@ Backend: Junit
 ## Other BUG:   
 autohex background height bug on being displayed after resolving another event on top (eg : action phase -> upgrade standard -> action phase)   
 
-## Must have for v1 :
-
 ### Cards
 add trigger resolution priority   
 
@@ -56,7 +54,6 @@ display other player production
 ## Nice to have for v1
 ### Non-Critical Bug :
 Escape keyboard not exiting card builder selection   
-Expression has changed on client refresh with all the player pannel if something moves (VP increased with arklight, any gain)   
 
 ### Refactoring :
 Websocket: remove the global channel and switch to multiple sendings on private ones   
@@ -71,7 +68,6 @@ Add popup-like window for non-production phase gains
 Add proper Hybrid production zone looks   
 Rework effect summary zone (refacto + looks)   
 Builder: display visual list of active triggers   
-
 
 ## Game Options
 initial mulligan is an andvanced game mode option, not base   
