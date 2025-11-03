@@ -138,7 +138,7 @@
         },
         "effectText": {
             "en": "EFFECT: When you play a card, you can remove 2 microbes from this card to pay 10 MC less for it.\nEFFECT: Whenever you play a $tag_animal$, $tag_microbe$ or $tag_plant$, including this one, add a microbe to this card.",
-            "fr": "EFFET: Lorsque vous jouez une carte, vous pouvez retirer 2 microbes de cette carte pour r\u00e9duire de 10 MC le co\u00fbt associ\u00e9 \u00e0 la carte jou\u00e9e. EFFET: Lorsque vous jouez un $tag_animal$, $tag_microbe$, ou $tag_plant$, y compris celui-ci, ajoutez un microbe sur cette carte"
+            "fr": "EFFET: Lorsque vous jouez une carte, vous pouvez retirer 2 microbes de cette carte pour r\u00e9duire de 10 MC le co\u00fbt associ\u00e9 \u00e0 la carte jou\u00e9e.$skipline$EFFET: Lorsque vous jouez un $tag_animal$, $tag_microbe$, ou $tag_plant$, y compris celui-ci, ajoutez un microbe sur cette carte"
         },
         "stockable": [
             "microbe"
@@ -11376,6 +11376,7 @@
         "origin": "moon",
         "cost": 35,
         "tagsId": [
+            0,
             2,
             11
         ],
@@ -11435,7 +11436,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "filled",
+        "status": "implemented",
         "actionTextOption1": {
             "en": "$ressource_microbe$",
             "fr": ""
@@ -11781,7 +11782,7 @@
     {
         "card_code": "M124",
         "origin": "moon",
-        "cost": 35,
+        "cost": 25,
         "tagsId": [
             5,
             11

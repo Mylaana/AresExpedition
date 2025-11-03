@@ -22,6 +22,7 @@ services:
     volumes:
       - ./data/database.json:/app/data/database.json
       - ./data/archives:/app/data/archives
+      - ./data/analyzed_games.json:/app/data/analyzed_games.json
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx256m -Xms128m
     deploy:
@@ -29,6 +30,12 @@ services:
         limits:
           cpus: '0.5'
           memory: 400M
+
+  analyze_game:
+    image: mylaana/ares-expedition-analyze-game:latest
+    volumes:
+      - ./data/analyzed_games.json:/app/data/analyzed_games.json
+      - ./data/archives:/app/data/archives
 
 networks:
   ares-network:
