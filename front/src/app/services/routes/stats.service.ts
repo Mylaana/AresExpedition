@@ -13,7 +13,7 @@ export class StatService {
 	corpoStats: CardStats[] = []
 	projectStats: CardStats[] = []
 	private baseSampleSize = 2
-	private minimumPlayed = 2
+	private minimumPlayed = 0
 	private cardsRanking!: Record<CardType, PlayableCardModel[]> 
 
 	constructor(private cardInfoService: ProjectCardInfoService){}

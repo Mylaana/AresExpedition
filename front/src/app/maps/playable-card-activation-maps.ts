@@ -49,12 +49,13 @@ export const ACTIVATION_DOUBLE: string[] = [
 	'50', '50B', //Regolith Eaters
 	'D10', //Fibrous Composite Material
 	'P11', //Self Replicating Bacteria
+	'M85', //Darkside Incubation Plant
 ]
 export const ACTIVATION_NO_COST: string[] = [
 	'3', '4', '12', '13', '15', '16', '18', '57', '58', 'D03',
 	'D03B', 'D06', 'D11', 'D12', 'F06', 'P13', 'P20', 'P32', 'FM11', 'FM15',
 	'FM26', 'FM27',
-	'M80', 'M81', 'M84', 'M85', 'M86', 'M87', 'M88', 'M89', 'M90'
+	'M80', 'M81', 'M84', 'M86', 'M87', 'M88', 'M89', 'M90'
 ]
 export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: PlayerStateModel, activationOption: ActivationOption) => EventBaseModel[]> = {
 	//Advanced Screening Technology
