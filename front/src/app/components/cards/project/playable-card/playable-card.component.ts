@@ -29,6 +29,9 @@ import { CardDisabledForegroundComponent } from '../card-blocks/card-disabled-fo
 import { SettingCardSize } from '../../../../types/global.type';
 import { ProjectCardScalingVPService } from '../../../../services/cards/project-card-scaling-VP.service';
 import { CardStatsListComponent } from '../card-blocks/card-stats/card-stats-list.component';
+import { CardScalingProductionComponent } from '../card-blocks/card-scaling-prod/card-scaling-production.component';
+import { SCALING_PRODUCTION } from '../../../../maps/playable-card-scaling-production-maps';
+import { PlayableCard } from '../../../../factory/playable-card.factory';
 
 @Component({
     selector: 'app-playable-card',
@@ -50,6 +53,7 @@ import { CardStatsListComponent } from '../card-blocks/card-stats/card-stats-lis
     CardStatusComponent,
     CardDisabledForegroundComponent,
     CardStatsListComponent,
+	CardScalingProductionComponent
 ],
     templateUrl: './playable-card.component.html',
     styleUrl: './playable-card.component.scss',
@@ -74,6 +78,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 
 	_hovered: boolean = false
 	_activationCostPayable: boolean = false
+	_hasScalingProduction: boolean = false
 
 	private destroy$ = new Subject<void>()
 
@@ -90,8 +95,9 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.projectCard.tagsUrl = []
 		this.projectCardCostService.initialize(this.projectCard)
 		this.projectCardVpService.initialize(this.projectCard)
-
 		this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
+		this._hasScalingProduction = PlayableCard.hasScalingProduction(this.projectCard.cardCode)
+
 		// fills tagUrl
 		for(let i = 0; i < this.projectCard.tagsId.length; i++) {
 			this.projectCard.tagsUrl.push(GlobalInfo.getUrlFromID(this.projectCard.tagsId[i]))
@@ -217,5 +223,11 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		let authorized: ProjectListType[] = ['hand', 'builderSelector', 'builderSelectedZone', 'played', 'playedSelector']
 		if(!authorized.includes(this.parentListType)){return}
 		this.projectCardVpService.updatePlayerState(this.playerState)
+	}
+	public isRepeatProduction(): boolean {
+		return this.parentListSubType==='repeatProduction'
+	}
+	public getRepeatProductionCaption(): string {
+		return PlayableCard.getRepeatProductionCaption(this.projectCard.cardCode, this.playerState)
 	}
 }

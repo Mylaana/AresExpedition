@@ -1,0 +1,4 @@
+<div [ngClass]="['wrapper-main', 'ares-border', 'ares-background']"
+    *ngIf="hasScalingProduction">
+	<app-text-with-image [rawText]="production" [context]="'repeatProduction'" [cardSize]="cardSize"></app-text-with-image>
+</div>

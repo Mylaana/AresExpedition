@@ -423,3 +423,32 @@
 		}
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.repeatProduction{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	height: 100%;
+	width: 100%;
+	& p{
+		font-size: 15px;
+		color: black;
+		font-weight: 600;
+	}
+	& > .wrapper-megacredit{
+		& > p {
+			
+			text-align: center;
+			width: 100%;
+			font-size: 12px;
+			&.small{
+				padding-top: var(--twi-production-repeat-offset-top--small);
+				font-size: var(--twi-production-repeat-text-size--small);
+			}
+			&.medium{
+				padding-top: var(--twi-production-repeat-offset-top--medium);
+				font-size: var(--twi-production-repeat-text-size--medium);
+			}
+		}
+	}
+}

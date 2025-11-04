@@ -19,7 +19,7 @@ export type TriggerLimit = {
 }
 
 export type ProjectListType = 'none' | 'hand' | 'played' | 'selector' | 'builderSelector' | 'builderSelectedZone' | 'playedSelector' | 'cardOverviewBalanced' | 'statsRoute'
-export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'selectMerger' | 'discard' | 'addRessource' | 'scanKeepResult'
+export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'selectMerger' | 'discard' | 'addRessource' | 'scanKeepResult' | 'repeatProduction'
 export type PlayedCardDTO = {[key: string]: PlayedCardStocksDTO}
 export type ActivationOption = 1 | 2
 export type LocalizedText = Partial<Record<SettingSupportedLanguage, string>>;

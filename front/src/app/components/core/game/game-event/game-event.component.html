@@ -116,7 +116,7 @@
 						[currentPhase]="currentPhase"
 						[event]="currentEvent"
 						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
-						[listSubType]="'none'"
+						[listSubType]="currentEvent.subType==='doubleProduction'?'repeatProduction':'none'"
 						(updateSelectedCardList)="onUpdateSelectedCardList($event)"
 						(projectActivated)="onProjectActivated($event)">
 					</app-playable-card-list>

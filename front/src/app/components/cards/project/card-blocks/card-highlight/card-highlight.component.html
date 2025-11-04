@@ -2,7 +2,7 @@
 <img *ngIf="highlightStyle==='research'" [class]="highlightStyle" src="/assets/other/research_eye.png" alt="">
 <img *ngIf="highlightStyle==='recycleStartingProject'" [class]="highlightStyle" src="/assets/other/circular.png" alt="">
 <img *ngIf="highlightStyle==='selectCorporation' || highlightStyle==='selectMerger'" [class]="highlightStyle" src="/assets/other/validate.png" alt="">
-<img *ngIf="highlightStyle==='addRessource' || highlightStyle==='none'" [class]="'addRessource'" src="/assets/other/validate.png" alt="">
+<img *ngIf="highlightStyle==='addRessource' || highlightStyle==='none' || highlightStyle==='repeatProduction'" [class]="'addRessource'" src="/assets/other/validate.png" alt="">
 <img *ngIf="highlightStyle==='scanKeepResult'" [class]="highlightStyle" src="/assets/other/hand.png" alt="">
 <div *ngIf="highlightStyle==='sell'" class="wrapper-sell">
     <img [ngClass]="[highlightStyle, 'cancel']" src="/assets/other/cancel.png" alt="">

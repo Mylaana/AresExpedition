@@ -103,4 +103,10 @@
 		*ngIf="projectCard.stats"
 		[stats]="projectCard.stats">
 	</app-card-stats-list>
+	<app-card-scaling-production
+		*ngIf="isRepeatProduction()"
+		[production]="getRepeatProductionCaption()"
+		[hasScalingProduction]="_hasScalingProduction"
+		[cardSize]="cardSize">
+	</app-card-scaling-production>
 </div>

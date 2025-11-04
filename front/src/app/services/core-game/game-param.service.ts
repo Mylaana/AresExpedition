@@ -56,6 +56,8 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--twi-production-text-offset-top--small': '-3px',
 		'--twi-production-text-offset-top-effect-summary--small': '-5px',
 		'--twi-production-text-size--small': '60%',
+		'--twi-production-repeat-text-size--small': '12px',
+		'--twi-production-repeat-offset-top--small': '1px',
 
 		'--builder-padding--small': '13px',
 	},
@@ -103,6 +105,8 @@ const CARD_SIZE_MAP: Record<SettingCardSize, Record<string, string>> = {
 		'--twi-production-text-size--medium': '80%',
 		'--twi-production-text-offset-top-effect-summary--medium': '-3px',
 		'--twi-production-text-size-effect-summary--medium': '80%',
+		'--twi-production-repeat-text-size--medium': '15px',
+		'--twi-production-repeat-offset-top--medium': '5px',
 
 		'--builder-padding--medium': '18px',
 	},

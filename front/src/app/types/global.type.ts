@@ -52,7 +52,7 @@ export type SettingInterfaceSize = 'small' | 'medium'
 export type SettingPlayerPannelSize = 'small' | 'medium'
 export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText' | 'portalButton' | 'wildButton'
 | 'commandButton' | 'commandButtonSmall' | 'convertButton' | 'convertButtonTwoLines' | 'activateCardButton' | 'builderButton' | 'cardPrerequisite'
-| 'milestone' | 'milestoneClaimed' | 'award' | 'milestoneAwardHelper' | 'convertResource' | 'filterPannel'
+| 'milestone' | 'milestoneClaimed' | 'award' | 'milestoneAwardHelper' | 'convertResource' | 'filterPannel' | 'repeatProduction'
 export type MilestoneState = Record<MilestonesEnum, boolean>
 export type InputRuleType = 'number' | 'string'
 export type GoToPage = 'cardOverviewBalanced'

@@ -24,8 +24,8 @@ import { PlayableCard } from "../../factory/playable-card.factory";
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
-import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
 import { GameActiveContentService } from "./game-active-content.service";
+import { SCALING_PRODUCTION } from "../../maps/playable-card-scaling-production-maps";
 
 interface SelectedPhase {
     "undefined": boolean,

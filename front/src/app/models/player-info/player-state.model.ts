@@ -18,8 +18,8 @@ import { PlayerEventStateModel } from "./player-state-event";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum, MilestonesEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
-import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
 import { PlayerStatStateModel } from "./player-state-stat";
+import { SCALING_PRODUCTION } from "../../maps/playable-card-scaling-production-maps";
 
 
 export class PlayerStateModel {

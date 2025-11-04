@@ -8,6 +8,7 @@ import { NonEventButtonNames, StandardProjectButtonNames } from "../types/global
 import { ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS, ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS, PLAY_REQUIREMENTS } from "../maps/playable-card-other-maps";
 import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION_NO_COST, ACTIVATION_SCALING_EFFECT_CAPTION, ACTIVATION_SCALING_EFFECT_VALUE } from "../maps/playable-card-activation-maps";
 import { STANDARD_PROJECT_CAPTION, STANDARD_PROJECT_COST } from "../maps/standard-project-maps";
+import { SCALING_PRODUCTION } from "../maps/playable-card-scaling-production-maps";
 
 function getOnPlayedEvents(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 	return PLAY_EVENTS[cardCode]?.(clientstate)
@@ -75,6 +76,31 @@ function calculateCostModFromTrigger(triggerCode: string, card: PlayableCardMode
 	if (!card) return 0
 	return COST_MOD[triggerCode]?.(card, clientState)??0
 }
+function hasScalingProduction(cardCode: string): boolean {
+	if(!SCALING_PRODUCTION[cardCode]){return false}
+	return true
+}
+function getRepeatProductionCaption(cardCode: string, clientState: PlayerStateModel): string {
+	if(hasScalingProduction(cardCode)===false){return '[NO SCALING PRODUCTION]'}
+	let production = SCALING_PRODUCTION[cardCode]?.(clientState)
+	let result: string = ''
+	for(let p of production){
+		if(result!=''){result +=' '}
+		switch(p.name){
+			case('steel'):case('titanium'):{
+				continue
+			}
+			case('megacredit'):{
+				result = result + `$ressource_megacreditvoid_+${p.valueStock}`
+				break
+			}
+			default:{
+				result = result + `+${p.valueStock}$ressource_${p.name}`
+			}
+		}
+	}
+	return result
+}
 const CostModCalulator = {
 	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel, clientState: PlayerStateModel): number {
 		let totalMod = 0
@@ -93,6 +119,8 @@ export const PlayableCard = {
 	getAlternativePayActiveCodeList,
 	getAlternativePayCaption,
 	getAlternativePayButtonClickedEvents,
+	getRepeatProductionCaption,
+	hasScalingProduction,
 	prerequisite: PlayableCardPrerequisite,
 	activable: PlayableCardActivativable
 }
