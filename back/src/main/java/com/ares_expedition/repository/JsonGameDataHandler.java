@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,7 @@ public class JsonGameDataHandler {
     private static final String DATABASE_PATH = DATABASE_DIRECTORY + DATABASE_NAME;
     private static final String CARDS_DATA_PATH = "data/cards_data.json";
     private static final String ARCHIVE_DIRECTORY = "data/archives/";
+    private static final Object FILE_LOCK = new Object();
 
     private static final ObjectMapper objectMapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())
@@ -96,11 +98,13 @@ public class JsonGameDataHandler {
     }
 
     private static void writeGames(Map<String, GameData> games){
-        try (Writer writer = new FileWriter(Paths.get(DATABASE_PATH).toFile())) {
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, games);
-        } catch (IOException error) {
-            error.printStackTrace();
+        synchronized(FILE_LOCK) {   
+            try (Writer writer = new FileWriter(Paths.get(DATABASE_PATH).toFile())) {
+                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+                objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, games);
+            } catch (IOException error) {
+                error.printStackTrace();
+            }
         }
     }
 
