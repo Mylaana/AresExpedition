@@ -1,4 +1,5 @@
 import { MilestonesEnum } from "../../enum/global.enum"
+import { GAME_STARTING_TR } from "../../global/global-const"
 import { CardScalingVP } from "../../interfaces/card.interface"
 import { PlayerScoreStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 import { SCALING_VP } from "../../maps/playable-card-scaling-vp-maps"
@@ -98,7 +99,7 @@ export class PlayerScoreStateModel {
 	}
 
 	newGame(): void {
-		this.addTR(5)
+		this.terraformingRating = GAME_STARTING_TR
 	}
 	static fromJson(data: PlayerScoreStateDTO): PlayerScoreStateModel {
 		if (!data.cm || !data.v || !data.tr || !data.f){
