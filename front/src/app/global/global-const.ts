@@ -47,6 +47,7 @@ export const GAME_PHASECARD_NAME_LIST: string[] = [SelectablePhaseEnum.developme
 export const GAME_HAND_MAXIMUM_SIZE = 10
 export const GAME_MAXIMUM_PLAYER_NUMBER = 6
 export const GAME_CARD_DEFAULT_TAG_NUMBER = 3
+export const GAME_STARTING_TR = 5
 
 export const GAME_RESSOURCE_TITANIUM_BASE_REDUCTION = 3
 export const GAME_RESSOURCE_STEEL_BASE_REDUCTION = 2
