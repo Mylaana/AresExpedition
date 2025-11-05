@@ -24,17 +24,24 @@ import { EventFactory } from '../../../../factory/event/event-factory';
 import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/tag-gain-list.component';
 import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-cards.component';
 import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/effect-portal.component';
-import { GroupWaitingComponent } from '../../../game-event-blocks/group-waiting/group-waiting.component';
-import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { LeftPannelComponent } from '../../../game-event-blocks/left-pannel/left-pannel.component';
 import { ConvertResourceComponent } from '../../../game-event-blocks/convert-resource/convert-resource.component';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { SettingInterfaceSize } from '../../../../types/global.type';
 import { EventTitleKeyPipe } from '../../../../pipes/event-title.pipe';
 import { GameActiveContentService } from '../../../../services/core-game/game-active-content.service';
-import { EventPhaseSubType, EventUnionSubTypes } from '../../../../types/event.type';
+import { EventUnionSubTypes } from '../../../../types/event.type';
+import { StandardCardSelectorComponent } from '../../../game-event-blocks/standard-card-selector/standard-card-selector.component';
 
 //this component is the main controller, and view
+
+const dedicatedComponentEventSubtypeList: EventUnionSubTypes[] = [
+	'planificationPhase', 'productionPhase', 'actionPhaseActivator',
+	'upgradePhaseCards', 'selectStartingHand', 'selectCorporation',
+	'selectMerger', 'waitingGroupReady','tagSelector',
+	'selectCardOptionalSell', 'selectCardForcedSell', 'effectPortal',
+	'resourceConversion'
+]
 
 @Component({
     selector: 'app-game-event',
@@ -55,7 +62,8 @@ import { EventPhaseSubType, EventUnionSubTypes } from '../../../../types/event.t
 		SellCardsComponent,
 		EffectPortalComponent,
 		ConvertResourceComponent,
-		EventTitleKeyPipe
+		EventTitleKeyPipe,
+		StandardCardSelectorComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',
@@ -251,5 +259,16 @@ export class GameEventComponent {
 		if(!this.currentEvent){return}
 		if(this.currentEvent.scrollToTopOnActivation===false){return}
 		window.scroll({top:0})
+	}
+	isEventDedicatedComponent(): boolean {
+		if(!this.currentEvent){return false}
+		if(this.currentEvent.hasCardBuilder()){return true}
+		if(dedicatedComponentEventSubtypeList.includes(this.currentEvent.subType)){return true}
+		return false
+	}
+	isStandardSelectorComponent(): boolean {
+		if(!this.currentEvent){return false}
+		if(this.isEventDedicatedComponent()){return false}
+		return this.currentEvent.hasCardsToSelectFrom()
 	}
 }
