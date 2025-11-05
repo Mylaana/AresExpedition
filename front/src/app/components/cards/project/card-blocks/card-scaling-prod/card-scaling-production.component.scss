@@ -4,16 +4,17 @@
     height: calc(var(--card-height) * .2);
     margin: 10px;
     margin-top: 0px;
-    //asp
 }
 .wrapper-main{
     display: flex;
     justify-content: center;
     align-items: center;
     width: fit-content;
+    //width: 90%;
+    min-width: 30%;
     padding: 5%;
-    padding-left: 15%;
-    padding-right: 15%;
+    //padding-left: 15%;
+    //padding-right: 15%;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }

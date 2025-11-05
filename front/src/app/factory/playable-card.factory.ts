@@ -91,11 +91,11 @@ function getRepeatProductionCaption(cardCode: string, clientState: PlayerStateMo
 				continue
 			}
 			case('megacredit'):{
-				result = result + `$ressource_megacreditvoid_+${p.valueStock}`
+				result = result + `$ressource_megacreditvoid_+${p.valueStock}$`
 				break
 			}
 			default:{
-				result = result + `+${p.valueStock}$ressource_${p.name}`
+				result = result + `+${p.valueStock}$ressource_${p.name}$`
 			}
 		}
 	}

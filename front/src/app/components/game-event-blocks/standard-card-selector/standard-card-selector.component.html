@@ -1,5 +1,6 @@
 <app-playable-card-list #cardListSelector
     [event]="_currentEvent"
+    [eventId]="_currentEvent.id"
     [listType]="_currentEvent.hasCardBuilder()?'builderSelector':'selector'"
     [listSubType]="_currentEvent.subType==='doubleProduction'?'repeatProduction':'none'"
     (updateSelectedCardList)="onUpdateSelectedCardList($event)"

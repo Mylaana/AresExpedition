@@ -54,7 +54,7 @@ const S = EventFactory.simple
 	}
 	//CLM
 	function handleTrigger_CF3_ON_PLAYED_CARD(trigger: string, input: TriggerInput): EventBaseModel[] {
-		return [S.addRessourceToCardId({name:'science', valueStock:2}, trigger)]
+		return [S.addRessourceToCardId({name:'science', valueStock:1}, trigger)]
 	}
 
 //ON_PARAMETER_INCREASED
