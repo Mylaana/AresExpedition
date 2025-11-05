@@ -98,24 +98,11 @@
 			</div>
 			<div class="wrapper-selectors"
 				*ngIf="isStandardSelectorComponent()"
-				[class.centered]="currentEvent.hasCardBuilder() === false"
 				@fadeIn>
 				<app-standard-card-selector
 					[event]="currentEvent"
 					(updateSelectedCardList)="onUpdateSelectedCardList($event)">
 				</app-standard-card-selector>
-				<!--
-				<div class="wrapper-card-selector">
-					<app-playable-card-list #cardListSelector
-						[currentPhase]="currentPhase"
-						[event]="currentEvent"
-						[listType]="currentEvent.hasCardBuilder()?'builderSelector':'selector'"
-						[listSubType]="currentEvent.subType==='doubleProduction'?'repeatProduction':'none'"
-						(updateSelectedCardList)="onUpdateSelectedCardList($event)"
-						(projectActivated)="onProjectActivated($event)">
-					</app-playable-card-list>
-				</div>
-				-->
 			</div>
 		</div>
     </div>

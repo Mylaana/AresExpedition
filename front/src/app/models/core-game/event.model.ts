@@ -103,6 +103,12 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
 	setSelectorQuantityTreshold(tresholdType: MinMaxEqualType){this.cardSelector.selectionQuantityTreshold = tresholdType}
 	getSelectorQuantityTreshold():MinMaxEqualType {return this.cardSelector.selectionQuantityTreshold}
 	setSelectorInitialState(state: Partial<CardState>){this.cardSelector.cardInitialState = Utils.toFullCardState(state)}
+    selectAll(){
+        this.updateCardSelection(this.getSelectorSelectFrom())
+    }
+    selectNone(){
+        this.updateCardSelection([])
+    }
 }
 
 export class EventCardSelector extends EventBaseCardSelector{

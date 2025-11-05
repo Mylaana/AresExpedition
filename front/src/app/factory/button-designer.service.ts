@@ -33,7 +33,7 @@ export class ButtonDesigner{
 			case('doubleProduction'):{startEnabled=true;break}
 			case('effectPortal'):{startEnabled=true;break}
 			case('resourceConversion'):{startEnabled=true;break}
-
+			
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
 			case('sellOptionalCardCancel'):{startEnabled=false;break}
@@ -53,6 +53,8 @@ export class ButtonDesigner{
 			case('cardOverviewDisplayBalanced'):{startEnabled=true; break}
 			case('createGameOptionActivateAll'):{startEnabled=true; break}
 			case('createGameOptionDeactivateAll'):{startEnabled=true; break}
+			case('sellCardsSelectAll'):{startEnabled=true; break}
+			case('sellCardsSelectNone'):{startEnabled=true; break}
 
 			//filter pannels
 			case('activableProject'):case('triggerProject'):case('greenProject'):case('redProject'):case('corporation'):case('project'):case('blueProject'):
@@ -122,6 +124,8 @@ export class ButtonDesigner{
 			case('cardOverviewDisplayBalanced'):{caption='Display$skipline$Balanced$skipline$only';break}
 			case('createGameOptionActivateAll'):{caption='Enable all';break}
 			case('createGameOptionDeactivateAll'):{caption='Disable all';break}
+			case('sellCardsSelectAll'):{caption='$other_all$';break}
+			case('sellCardsSelectNone'):{caption='$other_none$';break}
 
 			//settings
 			case('settings'):{caption='$other_settings$';break}

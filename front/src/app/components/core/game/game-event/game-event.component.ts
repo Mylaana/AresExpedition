@@ -49,7 +49,6 @@ const dedicatedComponentEventSubtypeList: EventUnionSubTypes[] = [
         CommonModule,
         PhasePlanificationComponent,
         PhaseProductionComponent,
-        PlayableCardListComponent,
         PhaseCardUpgradeSelectorComponent,
         EventMainButtonComponent,
         NonEventButtonComponent,
@@ -109,8 +108,6 @@ export class GameEventComponent {
 
 	_selectedPhaseList: SelectablePhaseEnum[] = []
 	_interfaceSize!: SettingInterfaceSize
-
-	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
 	private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)

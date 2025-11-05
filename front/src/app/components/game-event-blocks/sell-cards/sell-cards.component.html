@@ -1,8 +1,15 @@
-<div [ngClass]="['wrapper-sell-total', 'ares-border', 'ares-background', _totalSell===0?'disabled':'']">
-	<p>+{{_totalSell}}</p>
-	<img src="/assets/ressource/megacreditvoid.png" alt="">
+<div class="wrapper-top ares-background ares-border">
+	<div class="wrapper-button">
+		<app-non-event-button [button]="_selectAll" [context]="'commandButton'" (buttonClicked)="onButtonClicked(_selectAll)"></app-non-event-button>
+		<app-non-event-button [button]="_selectNone" [context]="'commandButton'" (buttonClicked)="onButtonClicked(_selectNone)"></app-non-event-button>
+	</div>
+	<div [ngClass]="['wrapper-sell']">
+		<p>+{{_totalSell}}</p>
+		<img src="/assets/ressource/megacreditvoid.png" alt="">
+	</div>
 </div>
 <app-playable-card-list
+	#cardListSelector
 	[event]="event"
 	[listType]="'selector'"
 	[listSubType]="'none'"

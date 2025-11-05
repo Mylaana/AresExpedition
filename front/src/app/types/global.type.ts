@@ -29,7 +29,7 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage' | 'carouselLeft' | 'carouselRight'
 | 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 | 'cardOverviewInvertTagSelection' | 'cardOverviewResetTagSelection' | 'cardOverviewNoneTag' | 'cardOverviewDisplayAll' | 'cardOverviewDisplayBalanced'
-| 'createGameOptionActivateAll' | 'createGameOptionDeactivateAll'
+| 'createGameOptionActivateAll' | 'createGameOptionDeactivateAll' | 'sellCardsSelectAll' | 'sellCardsSelectNone'
 | CardType
 | StandardProjectButtonNames
 export type ToggleButtonNames = GameContentName

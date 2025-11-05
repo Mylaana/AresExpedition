@@ -160,9 +160,7 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		if(this.projectCards===undefined){return}
 		for(let card of this.projectCards){
 			card.buildDiscount = this._buildDiscount
-			//card.updateCost()
 			card.updateDiscount()
-			//console.log('card discount updated:', card.buildDiscount)
 		}
 	}
 	public updateDiscount(event: EventCardBuilder): void {
@@ -179,10 +177,19 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	private resetSelectedCardList(): void {
 		this.selectedCardList = []
 	}
-
 	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}): void {
 		this.projectActivated.emit(input)
 		this.setSelector()
+	}
+	public selectAll(){
+		for(let card of this.projectCards){
+			card.selectFromParent()
+		}
+	}
+	public selectNone(){
+		for(let card of this.projectCards){
+			card.unselectFromParent()
+		}
 	}
 }
 

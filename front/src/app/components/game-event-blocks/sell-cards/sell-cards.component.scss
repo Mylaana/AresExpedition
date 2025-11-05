@@ -6,17 +6,12 @@
 	height: 100%;
 	gap: 50px;
 }
-.wrapper-sell-total{
+.wrapper-sell{
 	position: relative;
 	display: flex;
 	align-items: center;
-	gap: 20px;
-	height: 70px;
-	width: 70px;
-	padding: 10px;
-	&.disabled{
-		opacity: 0;
-	}
+	height: 100%;
+	aspect-ratio: 1;
 }
 p{
 	z-index: 1;
@@ -27,9 +22,21 @@ p{
 	text-align: center;
 }
 img{
-	height: 70%;
+	height: 100%;
 	aspect-ratio: 1;
 	position: absolute;
-	top: 15%;
-	left: 15%;
+}
+.wrapper-top{
+	display: flex;
+	justify-content: center;
+	height: 70px;
+	width: fit-content;
+	gap: 30px;
+	padding: 10px;
+}
+.wrapper-button{
+	display: flex;
+	height: 100%;
+	aspect-ratio: 1;
+	gap: 5px;
 }

@@ -169,8 +169,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		if(this.state.isSelectable()!=true){return}
 		if(this.isDisabled()){return}
 		if(this.state.isBuildable()===false && this.state.isIgnoreCost()!=true){return}
-		this.state.setSelected(this.state.isSelected()===false)
-		this.cardStateChange.emit({card:this.projectCard, state: this.state})
+		this.setSelection(this.state.isSelected()===false)
 	}
 	private updateplayerState(state: PlayerStateModel): void {
 		if(!state){return}
@@ -229,5 +228,15 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 	public getRepeatProductionCaption(): string {
 		return PlayableCard.getRepeatProductionCaption(this.projectCard.cardCode, this.playerState)
+	}
+	public selectFromParent(){
+		this.setSelection(true)
+	}
+	public unselectFromParent(){
+		this.setSelection(false)
+	}
+	private setSelection(newSelection: boolean){
+		this.state.setSelected(newSelection)
+		this.cardStateChange.emit({card:this.projectCard, state: this.state})
 	}
 }
