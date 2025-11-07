@@ -9,7 +9,7 @@ import { BuilderOption, ProjectFilterNameEnum } from '../../../enum/global.enum'
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilderAlternativeCostComponent } from '../card-builder-alternative-cost/card-builder-alternative-cost.component';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { PlayableCard } from '../../../factory/playable-card.factory';

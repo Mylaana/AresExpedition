@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { RessourceType, StandardProjectButtonNames } from "../../types/global.type";
-import { GameState } from "./game-state.service";
+import { GameState } from "../game-state/game-state.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { EventBaseModel, EventCardActivator } from "../../models/core-game/event.model";
 import { NonEventButton } from "../../models/core-game/button.model";

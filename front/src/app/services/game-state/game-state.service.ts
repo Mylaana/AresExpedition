@@ -13,7 +13,7 @@ import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
-import { GameParamService } from "./game-param.service";
+import { GameParamService } from "../core-game/game-param.service";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
 import { AwardsEnum, GlobalParameterNameEnum, MilestonesEnum } from "../../enum/global.enum";
@@ -24,7 +24,7 @@ import { PlayableCard } from "../../factory/playable-card.factory";
 import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
-import { GameActiveContentService } from "./game-active-content.service";
+import { GameActiveContentService } from "../core-game/game-active-content.service";
 import { SCALING_PRODUCTION } from "../../maps/playable-card-scaling-production-maps";
 
 interface SelectedPhase {
@@ -944,5 +944,10 @@ export class GameState{
 		}
 		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){return}
 		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
+	}
+	addCardSeenToClient(quantity: number){
+		let state = this.getClientState()
+		state.addCardSeen(quantity)
+		this.updateClientState(state)
 	}
 }

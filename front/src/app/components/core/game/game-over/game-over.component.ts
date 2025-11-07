@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
-import { GameState } from '../../../../services/core-game/game-state.service';
+import { GameState } from '../../../../services/game-state/game-state.service';
 import { PlayerPannelComponent } from '../../../player-info/player-pannel/player-pannel.component';
 import { CommonModule } from '@angular/common';
 import { GameContentName, myUUID } from '../../../../types/global.type';

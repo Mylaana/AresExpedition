@@ -488,6 +488,7 @@ public class Game {
             if(productionCards>0){
                 List<String> cardList = drawCards(productionCards);
                 state.getEventState().addEventProductionCards(cardList);
+                state.addSeenCard(cardList.size());
             }
         }
     }

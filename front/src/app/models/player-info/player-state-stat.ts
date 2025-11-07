@@ -1,5 +1,6 @@
 import { GlobalParameterNameEnum } from "../../enum/global.enum"
 import { SelectablePhaseEnum } from "../../enum/phase.enum"
+import { GAME_STARTING_HAND_SIZE } from "../../global/global-const"
 import { PlayerStatStateDTO } from "../../interfaces/dto/player-state-dto.interface"
 
 export class PlayerStatStateModel {
@@ -12,10 +13,12 @@ export class PlayerStatStateModel {
 			[GlobalParameterNameEnum.infrastructure, 0],
 		]
 	)
+	private cardSeen: number = GAME_STARTING_HAND_SIZE
 
 	constructor(dto: PlayerStatStateDTO){
 		this.selectedPhaseRound = this.selectedPhaseRoundFromJson(dto.spr)
 		this.increasedParameter = PlayerStatStateModel.objectToMap(dto.ip)
+		this.cardSeen = dto.cs
 	}
 
 	public addSelectedPhaseOnRound(phase: SelectablePhaseEnum, round: number){
@@ -29,6 +32,11 @@ export class PlayerStatStateModel {
 		this.increasedParameter.set(parameter, current + value)
 	}
 	public getIncreasedParameters(): Map<GlobalParameterNameEnum, number> {return this.increasedParameter}
+	public addCardSeen(quantity: number){
+		this.cardSeen += quantity
+		console.log('total seen: ', this.cardSeen)
+	}
+
 	static mapToObject<K extends string | number | symbol, V>(
 		map: Map<K, V>
 	): Record<K, V> {
@@ -66,7 +74,6 @@ export class PlayerStatStateModel {
 				[GlobalParameterNameEnum.infrastructure, 0]
 			])
 		}
-		console.log(dto)
 		let result = new Map<GlobalParameterNameEnum, number>([
 			[GlobalParameterNameEnum.temperature, dto.get(GlobalParameterNameEnum.temperature)??0],
 			[GlobalParameterNameEnum.ocean, dto.get(GlobalParameterNameEnum.ocean)??0],
@@ -76,7 +83,7 @@ export class PlayerStatStateModel {
 		return result
 	}
 	static fromJson(data: PlayerStatStateDTO): PlayerStatStateModel {
-		if (!data.spr || !data.ip){
+		if (!data.spr || !data.ip || data.cs){
 			throw new Error("Invalid PlayerStatStateDTO: Missing required fields")
 		}
 		return new PlayerStatStateModel(data)
@@ -84,13 +91,15 @@ export class PlayerStatStateModel {
 	static empty(): PlayerStatStateModel {
 		return new PlayerStatStateModel({
 			spr:{},
-			ip: this.mapToObject(new Map)
+			ip: this.mapToObject(new Map),
+			cs: GAME_STARTING_HAND_SIZE
 		})
 	}
 	toJson(): PlayerStatStateDTO {
 		return {
 			spr: this.selectedPhaseRoundToJson(),
-			ip: PlayerStatStateModel.mapToObject(this.increasedParameter)
+			ip: PlayerStatStateModel.mapToObject(this.increasedParameter),
+			cs: this.cardSeen
 		}
 	}
 }

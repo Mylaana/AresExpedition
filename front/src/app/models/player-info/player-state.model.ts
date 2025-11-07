@@ -290,7 +290,9 @@ export class PlayerStateModel {
 		return this.statState
 	}
 	getGlobalParameterContribution(): Map<GlobalParameterNameEnum, number> {return this.statState.getIncreasedParameters()}
-
+	addCardSeen(quantity: number){
+		this.statState.addCardSeen(quantity)
+	}
 	public toJson(eventStateDTO?: EventStateDTO[]): PlayerStateDTO {
 		return {
 			infoState: this.infoState.toJson(),

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 
 @Component({
   selector: 'app-player-ready',

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AdvancedRessourceStock, CardRessourceStock, RessourceInfo, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
-import { GameState } from "../../services/core-game/game-state.service";
+import { GameState } from "../../services/game-state/game-state.service";
 import { EventCardActivatorSubType, EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
 import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
@@ -739,6 +739,7 @@ export class DrawEventHandler {
 	}
 	private resolveDrawEvent(drawEvent: DrawEvent): void {
 		let resultEvent!: EventBaseModel
+		this.gameStateService.addCardSeenToClient(drawEvent.drawResultCardList.length)
 		Logger.logEventResolution('resolving deck event: ',drawEvent.resolveEventSubType)
 		switch(drawEvent.resolveEventSubType){
 			case('drawResult'):{

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';

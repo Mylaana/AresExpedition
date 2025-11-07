@@ -79,7 +79,7 @@ export const PLAY_REQUIREMENTS: Record<string, (clientState: PlayerStateModel) =
 	//Mangrove
 	'90': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
 	//Permafrost Extraction
-	'92': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.white, 'min', s),
+	'92': (s) => Checker.isGlobalParameterOk(GlobalParameterNameEnum.temperature, GlobalParameterColorEnum.yellow, 'min', s),
 	//Plantation
 	'94': (s) => Checker.isTagOk('science', 4, 'min', s),
 	//Aerated Magma

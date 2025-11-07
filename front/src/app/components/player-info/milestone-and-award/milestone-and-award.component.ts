@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AwardPannelComponent } from '../award-pannel/award-pannel.component';
 import { MilestonePannelComponent } from '../milestone-pannel/milestone-pannel.component';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { AwardsEnum, MilestonesEnum } from '../../../enum/global.enum';
 import { Subject, take, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';

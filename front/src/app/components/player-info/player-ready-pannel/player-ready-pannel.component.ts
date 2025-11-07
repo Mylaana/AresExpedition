@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { PlayerReadyModel } from '../../../models/player-info/player-state.model';
 import { PlayerPhase } from '../../../interfaces/global.interface';
 import { Subject, takeUntil } from 'rxjs';

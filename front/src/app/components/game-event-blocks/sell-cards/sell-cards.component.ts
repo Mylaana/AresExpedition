@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { ProjectListType } from '../../../types/project-card.type';
 import { Subject, takeUntil } from 'rxjs';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { GAME_CARD_SELL_VALUE } from '../../../global/global-const';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';

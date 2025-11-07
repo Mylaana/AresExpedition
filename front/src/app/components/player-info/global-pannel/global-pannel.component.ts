@@ -5,7 +5,7 @@ import { PlayerPhase } from '../../../interfaces/global.interface';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { GameContentName, myUUID, SettingInterfaceSize, SettingPlayerPannelSize } from '../../../types/global.type';
 import { VpComponent } from '../../tools/vp/vp.component';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { GameOption } from '../../../services/core-game/create-game.service';
 import { PlayerNameComponent } from '../player-name/player-name.component';
 import { GameParamService } from '../../../services/core-game/game-param.service';
@@ -34,7 +34,6 @@ export class GlobalPannelComponent {
 
 	constructor(
 		private gameContentService: GameActiveContentService
-
 	){}
 	isContentActive(name: GameContentName): boolean {
 		return this.gameContentService.isContentActive(name)

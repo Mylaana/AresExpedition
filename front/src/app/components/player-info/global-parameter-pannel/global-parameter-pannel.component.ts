@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { GlobalParameterCardComponent } from '../global-parameter-card/global-parameter-card.component';
 import { CommonModule } from '@angular/common';
 import { OceanCardComponent } from '../ocean-card/ocean-card.component';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerGlobalParameterStateModel } from '../../../models/player-info/player-state-global-parameter.model';
 import { GlobalParameter, OceanBonus } from '../../../interfaces/global.interface';

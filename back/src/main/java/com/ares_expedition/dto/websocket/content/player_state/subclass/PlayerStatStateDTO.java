@@ -8,14 +8,14 @@ public class PlayerStatStateDTO {
     private Object selectedPhaseRound;
     @JsonProperty("ip")
     private Object increasedParameter;
-    @JsonProperty("c")
-    private Object cards;
+    @JsonProperty("cs")
+    private int cardSeen;
 
     PlayerStatStateDTO(){};
     public PlayerStatStateDTO(PlayerStatState state){
         this.selectedPhaseRound = state.getSelectedPhaseRound();
         this.increasedParameter = state.getIncreasedParameter();
-        this.cards = state.getCards();
+        this.cardSeen = state.getCardSeen();
     }
     public Object getSelectedPhaseRound() {
         return selectedPhaseRound;
@@ -29,10 +29,10 @@ public class PlayerStatStateDTO {
     public void setIncreasedParameter(Object increasedParameter) {
         this.increasedParameter = increasedParameter;
     }
-    public Object getCards() {
-        return cards;
+    public int getCardSeen() {
+        return cardSeen;
     }
-    public void setCards(Object cards) {
-        this.cards = cards;
+    public void setCardSeen(int cardSeen) {
+        this.cardSeen = cardSeen;
     }
 }

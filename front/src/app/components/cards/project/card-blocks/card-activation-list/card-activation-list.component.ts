@@ -3,7 +3,7 @@ import { PlayableCardModel } from '../../../../../models/cards/project-card.mode
 import { CardActivationComponent } from '../card-activation/card-activation.component';
 import { ActivationOption } from '../../../../../types/project-card.type';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../../../services/core-game/game-state.service';
+import { GameState } from '../../../../../services/game-state/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
 import { PlayableCard } from '../../../../../factory/playable-card.factory';

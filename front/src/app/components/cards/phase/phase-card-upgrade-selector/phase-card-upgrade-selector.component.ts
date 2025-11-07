@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, QueryList, ViewChildren} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../../services/core-game/game-state.service';
+import { GameState } from '../../../../services/game-state/game-state.service';
 import { PhaseCardUpgradeListComponent } from '../phase-card-upgrade-list/phase-card-upgrade-list.component';
 import { EventBaseModel, EventGeneric } from '../../../../models/core-game/event.model';
 import { PhaseCardGroupModel } from '../../../../models/cards/phase-card.model';

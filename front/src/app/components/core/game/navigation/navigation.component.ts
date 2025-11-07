@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { GameState } from '../../../../services/core-game/game-state.service';
+import { GameState } from '../../../../services/game-state/game-state.service';
 import { PlayerPannelComponent } from '../../../player-info/player-pannel/player-pannel.component';
 import { expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { AnimationEvent } from '@angular/animations';

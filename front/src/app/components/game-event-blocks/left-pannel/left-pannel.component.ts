@@ -3,7 +3,7 @@ import { TextWithImageComponent } from '../../tools/text-with-image/text-with-im
 import { CommonModule } from '@angular/common';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { RGB, SettingInterfaceSize } from '../../../types/global.type';
 

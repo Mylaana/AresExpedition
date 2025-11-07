@@ -7,7 +7,7 @@ import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
 import { DrawEvent, EventBaseModel, EventPhase } from '../../../../models/core-game/event.model';
 import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
-import { GameState } from '../../../../services/core-game/game-state.service';
+import { GameState } from '../../../../services/game-state/game-state.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { ActivationOption, ProjectListType } from '../../../../types/project-card.type';
 import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';

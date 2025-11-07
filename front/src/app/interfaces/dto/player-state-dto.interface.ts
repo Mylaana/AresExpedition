@@ -79,4 +79,6 @@ export interface PlayerStatStateDTO {
 	spr: {[key: number]: SelectablePhaseEnum}
 	/** increased parameter */
 	ip: Record<GlobalParameterNameEnum, number>
+	// cards seen number
+	cs: number
 }

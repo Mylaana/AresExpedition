@@ -4,11 +4,11 @@ import { PhaseCardInfoService } from "../cards/phase-card-info.service"
 import { ProjectCardInfoService } from "../cards/project-card-info.service"
 import { RxStompService } from "../websocket/rx-stomp.service"
 import { GameState } from "./game-state.service"
-import { GameParamService } from './game-param.service'
+import { GameParamService } from '../core-game/game-param.service'
 import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.service'
 import { EventStateService } from '../../factory/event-state-service.service'
 import { of } from 'rxjs'
-import { GameActiveContentService } from './game-active-content.service'
+import { GameActiveContentService } from '../core-game/game-active-content.service'
 
 
 class MockRxStompService {

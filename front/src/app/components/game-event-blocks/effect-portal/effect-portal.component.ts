@@ -7,7 +7,7 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { EffectPortalButton, NonEventButton } from '../../../models/core-game/button.model';
 import { EffectPortalService } from '../../../services/core-game/effect-portal.service';
 import { PortalEffectButtonComponent } from '../../tools/button/portal-effect-button.component';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { Subject, takeUntil } from 'rxjs';
 

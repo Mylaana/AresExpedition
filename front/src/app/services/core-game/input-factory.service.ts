@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { InputRuleEnum } from "../../enum/global.enum";
 import { InputRule } from "../../interfaces/global.interface";
-import { GameState } from "./game-state.service";
+import { GameState } from "../game-state/game-state.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 
 @Injectable({

@@ -10,7 +10,7 @@ import { NonEventButton } from '../../../models/core-game/button.model';
 import { Subject, takeUntil } from 'rxjs';
 import { GameParamService } from '../../../services/core-game/game-param.service';
 import { SettingCardSize } from '../../../types/global.type';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 
 @Component({
   selector: 'app-phase-builder',

@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
-import { GameState } from "./game-state.service";
+import { GameState } from "../game-state/game-state.service";
 import { EffectPortalEnum } from "../../enum/global.enum";
 import { EffectPortalButton} from "../../models/core-game/button.model";
 import { PlayableCardModel } from "../../models/cards/project-card.model";

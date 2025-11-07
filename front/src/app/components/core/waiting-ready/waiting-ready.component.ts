@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { EventBaseModel } from '../../../models/core-game/event.model';
 import { Subject, takeUntil } from 'rxjs';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { PlayerReadyModel, PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { fadeIn } from '../../../animations/animations';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';

@@ -393,6 +393,10 @@ public class PlayerState {
         this.statState = statState;
     }
 
+    public void addSeenCard(int quantity){
+        this.statState.addSeenCard(quantity);
+    }
+
     public PlayerStateData toData(){
         return new PlayerStateData(this);
     }

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../factory/websocket-message-factory.service";
-import { GameState } from "../../services/core-game/game-state.service";
+import { GameState } from "../../services/game-state/game-state.service";
 import { Logger } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";

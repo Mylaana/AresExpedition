@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameState } from '../../../services/game-state/game-state.service';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { ImageButton } from '../../../models/core-game/button.model';

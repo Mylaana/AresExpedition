@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { AwardsEnum, MilestonesEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
-import { GameState } from "./game-state.service";
+import { GameState } from "../game-state/game-state.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AwardCard, AwardValue, ClaimedMilestone, ClaimedMilestoneCard, MilestoneCard, MilestoneValue } from "../../interfaces/global.interface";
 import { MilestoneState, myUUID, PlayerColor } from "../../types/global.type";

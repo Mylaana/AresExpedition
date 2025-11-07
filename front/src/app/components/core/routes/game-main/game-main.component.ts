@@ -14,7 +14,7 @@ import { ServerEmulationComponent } from '../../game/server-emulation/server-emu
 import { SettingsComponent } from '../../game/settings/settings.component';
 import { WebsocketHandler } from '../../../../models/core-game/websocket-handler';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
-import { GameState } from '../../../../services/core-game/game-state.service';
+import { GameState } from '../../../../services/game-state/game-state.service';
 import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';

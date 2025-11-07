@@ -1,18 +1,19 @@
 package com.ares_expedition.model.player_state.subclass;
 
 import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerStatStateDTO;
+import com.ares_expedition.enums.game.GlobalConstants;
 
 public class PlayerStatState {
     private Object selectedPhaseRound;
     private Object increasedParameter;
-    private Object cards;
+    private int cardSeen = GlobalConstants.STARTING_HAND_SIZE;
 
     public PlayerStatState(){};
 
     PlayerStatState(PlayerStatStateDTO dto){
         this.selectedPhaseRound = dto.getSelectedPhaseRound();
         this.increasedParameter = dto.getIncreasedParameter();
-        this.cards = dto.getCards();
+        this.cardSeen = dto.getCardSeen();
     }
 
     public Object getSelectedPhaseRound() {
@@ -39,11 +40,15 @@ public class PlayerStatState {
         this.increasedParameter = increasedParameter;
     }
 
-    public Object getCards() {
-        return cards;
+    public int getCardSeen() {
+        return cardSeen;
     }
 
-    public void setCards(Object cards) {
-        this.cards = cards;
+    public void setCardSeen(int cardSeen) {
+        this.cardSeen = cardSeen;
+    }
+    
+    public void addSeenCard(int quantity) {
+        this.cardSeen += quantity;
     }
 }

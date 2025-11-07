@@ -6,7 +6,7 @@ import { NonEventButton } from '../../../../../models/core-game/button.model';
 import { expandCollapseVertical } from '../../../../../animations/animations';
 import { PlayableCardModel } from '../../../../../models/cards/project-card.model';
 import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
-import { GameState } from '../../../../../services/core-game/game-state.service';
+import { GameState } from '../../../../../services/game-state/game-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivationOption } from '../../../../../types/project-card.type';
 import { PlayableCard } from '../../../../../factory/playable-card.factory';
