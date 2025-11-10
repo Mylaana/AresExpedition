@@ -26,4 +26,4 @@ export type LocalizedText = Partial<Record<SettingSupportedLanguage, string>>;
 export type StatsRanking = 'descending' | 'ascending'
 export type StatsCardSubFamily = 'activableProject' | 'triggerProject'
 export type CardType = 'redProject' | 'greenProject' | 'blueProject' | 'corporation' | 'triggerProject' | 'activableProject' | 'project' | 'blueProject'
-export type ListBehavior = 'display' | 'selector' | 'activator'
+export type ListBehavior = 'display' | 'selector' | 'activator' | 'builder'

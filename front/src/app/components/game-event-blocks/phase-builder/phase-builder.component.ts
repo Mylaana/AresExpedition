@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CardBuilderListComponent } from '../../cards/card-builder-list/card-builder-list.component';
-import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
+import { EventCardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { fadeIn } from '../../../animations/animations';
@@ -11,13 +11,14 @@ import { Subject, takeUntil } from 'rxjs';
 import { GameParamService } from '../../../services/core-game/game-param.service';
 import { SettingCardSize } from '../../../types/global.type';
 import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
+import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
 
 @Component({
   selector: 'app-phase-builder',
   imports: [
 	CommonModule,
 	CardBuilderListComponent,
-	PlayableCardListComponent,
+	PlayableCardListWrapperComponent,
 	HexedBackgroundComponent
 	],
   templateUrl: './phase-builder.component.html',
@@ -25,12 +26,12 @@ import { GameStateFacadeService } from '../../../services/game-state/game-state-
   animations: [fadeIn]
 })
 export class PhaseBuilderComponent{
-	@Input() event!: EventBaseModel
 	@Input() currentPhase!: NonSelectablePhaseEnum
 	@Output() cardBuilderButtonClicked = new EventEmitter<any>()
 	@Output() updateSelectedCardList = new EventEmitter<any>()
 	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
 
+	_currentEvent!: EventCardBuilder | null
 	_cardSize!: SettingCardSize
 
 	private destroy$ = new Subject<void>
@@ -42,6 +43,7 @@ export class PhaseBuilderComponent{
 
 	ngOnInit(): void {
 		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
+		this.gameState.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onBuilderEventUpdate(event))
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -49,7 +51,7 @@ export class PhaseBuilderComponent{
 	}
 	public onEventCardBuilderListButtonClicked(output: any){
 		this.cardBuilderButtonClicked.emit(output)
-		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
+		this.cardListSelector.updateDiscount(this._currentEvent as EventCardBuilder)
 		this.cardListSelector.updateCardList()
 	}
 	public onUpdateSelectedCardList(output: any){
@@ -57,6 +59,12 @@ export class PhaseBuilderComponent{
 		this.cardListSelector.updateCardList()
 	}
 	public onAlternativePayButtonClicked(button: NonEventButton){
-		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
+		this.cardListSelector.updateDiscount(this._currentEvent as EventCardBuilder)
+	}
+	private onBuilderEventUpdate(event: EventCardBuilder | null){
+		this._currentEvent = event
+		if(!event){
+			return
+		}
 	}
 }

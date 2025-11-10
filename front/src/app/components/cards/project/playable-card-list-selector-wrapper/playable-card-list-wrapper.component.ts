@@ -12,7 +12,7 @@ import { EventHandler } from '../../../../models/core-game/handlers.model';
 import { ListBehavior, ProjectListType } from '../../../../types/project-card.type';
 
 @Component({
-	selector: 'app-playable-card-list-selector-wrapper',
+	selector: 'app-playable-card-list-wrapper',
 	imports: [
 		CommonModule,
 		PlayableCardListComponent		
@@ -20,7 +20,7 @@ import { ListBehavior, ProjectListType } from '../../../../types/project-card.ty
 	templateUrl: './playable-card-list-wrapper.component.html',
 	styleUrl: './playable-card-list-wrapper.component.scss'
 })
-export class PlayableCardListSelectorWrapperComponent implements OnInit, OnDestroy {
+export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	@Input() listBehavior: ListBehavior = 'display'
 	@ViewChild('cardList') cardListChild!: PlayableCardListComponent
 	
@@ -38,15 +38,37 @@ export class PlayableCardListSelectorWrapperComponent implements OnInit, OnDestr
 	){}
 	
 	ngOnInit(): void {
-		this.gameStateService.currentEventSelector.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventUpdate(event))
-
+		switch(this.listBehavior){
+			case('selector'):{
+				this.gameStateService.currentEventSelector.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventSelectorUpdate(event))
+				break
+			}
+			case('builder'):{
+				this.gameStateService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventBuilderUpdate(event))
+			}
+		}
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
-	onEventUpdate(event: EventBaseCardSelector | null){
-		console.log('new event focus:',event)
+	onEventSelectorUpdate(event: EventBaseCardSelector | null){
+		console.log('new event Selector focus:',event)
+		this._currentEvent = event
+		if(!event){
+			this.resetState()
+			return
+		}
+		let selector = event.getCardSelector()
+		this._cardList = selector.selectFrom
+		if(selector.cardInitialState){
+			this._initialCardState = Utils.toFullCardState(selector.cardInitialState)
+		}
+		this._selectionQuantity = selector.selectionQuantity
+		this._selectionTresholdType = selector.selectionQuantityTreshold
+	}
+	onEventBuilderUpdate(event: EventBaseCardSelector | null){
+		console.log('new event Builder focus:',event)
 		this._currentEvent = event
 		if(!event){
 			this.resetState()

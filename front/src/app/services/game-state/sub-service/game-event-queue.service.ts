@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { EventBaseCardSelector, EventBaseModel, EventCardActivator } from "../../../models/core-game/event.model";
+import { EventBaseCardSelector, EventBaseModel, EventCardActivator, EventCardBuilder } from "../../../models/core-game/event.model";
 import { BehaviorSubject } from "rxjs";
 import { EventPileAddRule } from "../../../types/event.type";
 import { Utils } from "../../../utils/utils";
@@ -19,6 +19,7 @@ export class GameEventQueueService {
     _eventQueue$ = new BehaviorSubject<EventBaseModel[]>([])
     _eventSelector$ = new BehaviorSubject<EventBaseCardSelector | null>(null)
 	_eventActivator$ = new BehaviorSubject<EventCardActivator | null>(null)
+    _eventBuilder$ = new BehaviorSubject<EventCardBuilder | null>(null)
 
 
     constructor(private eventStateDeserializerService: EventStateDeserializerService){}
@@ -112,6 +113,11 @@ export class GameEventQueueService {
 			? (event as EventBaseCardSelector)
 			: null
 	}
+    private toEventCardBuilder(event: EventBaseModel): EventCardBuilder | null {
+		return event?.hasSelector()
+			? (event as EventCardBuilder)
+			: null
+	}
     private updateSpecificEventSubjects(eventQueue: EventBaseModel[]) {
 		if(eventQueue.length===0){
 			return
@@ -120,5 +126,6 @@ export class GameEventQueueService {
 		
 		this._eventSelector$.next(this.toEventCardSelector(currentEvent))
 		this._eventActivator$.next(this.toEventCardActivator(currentEvent))
+        this._eventBuilder$.next(this.toEventCardBuilder(currentEvent))
 	}
 }

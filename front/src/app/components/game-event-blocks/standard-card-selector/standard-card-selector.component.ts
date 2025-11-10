@@ -3,13 +3,13 @@ import { EventBaseCardSelector, EventBaseModel } from '../../../models/core-game
 import { CommonModule } from '@angular/common';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { ProjectListType } from '../../../types/project-card.type';
-import { PlayableCardListSelectorWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
+import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
 
 @Component({
 	selector: 'app-standard-card-selector',
 	imports: [
 		CommonModule,
-		PlayableCardListSelectorWrapperComponent
+		PlayableCardListWrapperComponent
 	],
 	templateUrl: './standard-card-selector.component.html',
 	styleUrl: './standard-card-selector.component.scss'

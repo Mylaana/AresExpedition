@@ -24,7 +24,7 @@ import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
 import { GameActiveContentService } from "../core-game/game-active-content.service";
 import { SCALING_PRODUCTION } from "../../maps/playable-card-scaling-production-maps";
 import { EventPileAddRule } from "../../types/event.type";
-import { GameEventQueueService } from "./sub-service/game-state-event.service";
+import { GameEventQueueService } from "./sub-service/game-event-queue.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -91,6 +91,7 @@ export class GameStateFacadeService{
 	currentEventQueue = this.gameStateEventService._eventQueue$.asObservable()
 	currentEventSelector = this.gameStateEventService._eventSelector$.asObservable()
 	currentEventActivator = this.gameStateEventService._eventActivator$.asObservable()
+	currentEventBuilder = this.gameStateEventService._eventBuilder$.asObservable()
 
 
     phaseIndex: number = 0

@@ -8,7 +8,7 @@ import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.se
 import { of } from 'rxjs'
 import { GameActiveContentService } from '../core-game/game-active-content.service'
 import { GameStateFacadeService } from './game-state-facade.service'
-import { GameStateEventService } from './sub-service/game-state-event.service'
+import { GameStateEventService } from './sub-service/game-event-queue.service'
 
 
 class MockRxStompService {

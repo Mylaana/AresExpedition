@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { EventBaseModel } from '../../../models/core-game/event.model';
-import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { CommonModule } from '@angular/common';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { ProjectListType } from '../../../types/project-card.type';
@@ -11,13 +10,13 @@ import { GAME_CARD_SELL_VALUE } from '../../../global/global-const';
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { NonEventButton } from '../../../models/core-game/button.model';
-import { PlayableCardListSelectorWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
+import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
 
 @Component({
   selector: 'app-sell-cards',
   imports: [
 	CommonModule,
-	PlayableCardListSelectorWrapperComponent,
+	PlayableCardListWrapperComponent,
 	NonEventButtonComponent
 ],
   templateUrl: './sell-cards.component.html',
@@ -26,7 +25,7 @@ import { PlayableCardListSelectorWrapperComponent } from '../../cards/project/pl
 export class SellCardsComponent implements OnInit, OnDestroy{
 	@Input() event!: EventBaseModel
 	@Output() updateSelectedCardList: EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}> = new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
-	@ViewChild('wrapper') wrapper!: PlayableCardListSelectorWrapperComponent
+	@ViewChild('wrapper') wrapper!: PlayableCardListWrapperComponent
 
 	_totalSell: number = 0
 	_sellValue: number = 3
