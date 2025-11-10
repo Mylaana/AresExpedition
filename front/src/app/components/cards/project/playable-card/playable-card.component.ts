@@ -4,7 +4,7 @@ import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { CardBackgroundComponent } from '../card-blocks/card-background/card-background.component';
 import { ProjectCardCostService } from '../../../../services/cards/project-card-cost.service';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
-import { GameState } from '../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
 import { ActivationOption, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
@@ -83,7 +83,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private destroy$ = new Subject<void>()
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private projectCardCostService: ProjectCardCostService,
 		private projectCardVpService: ProjectCardScalingVPService
 	){

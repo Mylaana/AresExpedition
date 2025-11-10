@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { RessourceType, StandardProjectButtonNames } from "../../types/global.type";
-import { GameState } from "../game-state/game-state.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { EventBaseModel, EventCardActivator } from "../../models/core-game/event.model";
 import { NonEventButton } from "../../models/core-game/button.model";
@@ -9,6 +8,7 @@ import { PlayableCard } from "../../factory/playable-card.factory";
 import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { STANDARD_PROJECT_EVENTS } from "../../maps/standard-project-maps";
 import { GameActiveContentService } from "./game-active-content.service";
+import { GameStateFacadeService } from "../game-state/game-state-facade.service";
 
 interface StandardProjectState {
     costMC?: number
@@ -39,12 +39,12 @@ export class ActionPhaseService{
     private infrastructureMandatory!: boolean
 
     constructor(
-        private gameStateService: GameState,
+        private gameStateService: GameStateFacadeService,
 		private gameContentService: GameActiveContentService
     ){
 		this.initializeFromActiveContent()
         this.gameStateService.currentClientState.subscribe(state => this.onClientStateUpdate(state))
-        this.gameStateService.currentEventQueue.subscribe(queue => this.onEventQueueUpdate(queue))
+        this.gameStateService.currentEventActivator.subscribe(queue => this.onEventQueueUpdate(queue))
         this.initializeStandardProjectStates()
     }
 	private initializeFromActiveContent(){
@@ -97,14 +97,12 @@ export class ActionPhaseService{
             }
         }
     }
-    private onEventQueueUpdate(queue: EventBaseModel[]){
-        if(queue.length===0){return}
-        let currentEvent = queue[0]
-        if(currentEvent.type != 'cardActivator'){
+    private onEventQueueUpdate(event: EventCardActivator | null){
+        if(!event){
             this.actionEvent = undefined
             return
         }
-        this.actionEvent = currentEvent as EventCardActivator
+        this.actionEvent = event
 		this.updateCost()
 		this.updateButtonsCaption()
 		this.updateStandardProjectMustBePaid()

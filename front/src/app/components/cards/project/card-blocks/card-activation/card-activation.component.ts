@@ -6,7 +6,7 @@ import { NonEventButton } from '../../../../../models/core-game/button.model';
 import { expandCollapseVertical } from '../../../../../animations/animations';
 import { PlayableCardModel } from '../../../../../models/cards/project-card.model';
 import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
-import { GameState } from '../../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../../services/game-state/game-state-facade.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivationOption } from '../../../../../types/project-card.type';
 import { PlayableCard } from '../../../../../factory/playable-card.factory';
@@ -38,7 +38,7 @@ export class CardActivationComponent implements OnInit, OnDestroy{
 	private clientState!: PlayerStateModel
 	private destroy$ = new Subject<void>()
 
-	constructor(private gameStateService: GameState){}
+	constructor(private gameStateService: GameStateFacadeService){}
 
 	ngOnInit(): void {
 		this._activateOnce = ButtonDesigner.createNonEventButton('activateProjectOnce', this.caption)

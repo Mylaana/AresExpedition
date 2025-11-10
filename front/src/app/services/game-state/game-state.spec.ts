@@ -3,12 +3,12 @@ import { Injector } from "@angular/core"
 import { PhaseCardInfoService } from "../cards/phase-card-info.service"
 import { ProjectCardInfoService } from "../cards/project-card-info.service"
 import { RxStompService } from "../websocket/rx-stomp.service"
-import { GameState } from "./game-state.service"
 import { GameParamService } from '../core-game/game-param.service'
 import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.service'
-import { EventStateService } from '../../factory/event-state-service.service'
 import { of } from 'rxjs'
 import { GameActiveContentService } from '../core-game/game-active-content.service'
+import { GameStateFacadeService } from './game-state-facade.service'
+import { GameStateEventService } from './sub-service/game-state-event.service'
 
 
 class MockRxStompService {
@@ -25,9 +25,9 @@ describe('Services - Core game - Game state', () => {
 		let injector: Injector
 		let projectCardService: ProjectCardInfoService
 		let rxStompService: RxStompService
-		let gameState: GameState
+		let gameState: GameStateFacadeService
 		let gameParam: GameParamService
-		let eventStateService: EventStateService
+		let gameStateEvent: GameStateEventService
 		let scalingVp: ProjectCardScalingVPService
 		let gameModeContentService: GameActiveContentService
 
@@ -37,8 +37,8 @@ describe('Services - Core game - Game state', () => {
 					ProjectCardInfoService,
 					PhaseCardInfoService,
 					{ provide: RxStompService, useClass: MockRxStompService },
-					EventStateService,
 					ProjectCardScalingVPService,
+					GameStateEventService,
 					GameActiveContentService
 				]
 			})
@@ -48,16 +48,16 @@ describe('Services - Core game - Game state', () => {
 			projectCardService = injector.get(ProjectCardInfoService)
 			rxStompService = injector.get(RxStompService)
 			gameParam = injector.get(GameParamService)
-			eventStateService = injector.get(EventStateService)
 			scalingVp = injector.get(ProjectCardScalingVPService)
 			gameModeContentService = injector.get(GameActiveContentService)
+			gameStateEvent = injector.get(GameStateEventService)
 
-			gameState = new GameState(
+			gameState = new GameStateFacadeService(
 				projectCardService,
 				rxStompService,
 				gameParam,
-				eventStateService,
 				gameModeContentService,
+				gameStateEvent,
 				injector,
 			)
 		})

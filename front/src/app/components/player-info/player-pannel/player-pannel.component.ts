@@ -3,7 +3,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
 import { PlayerPhase } from '../../../interfaces/global.interface';
 import { PlayerReadyModel, PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { GlobalPannelComponent } from '../global-pannel/global-pannel.component';
 import { RessourcePannelComponent } from '../ressource-pannel/ressource-pannel.component';
 import { TagPannelComponent } from '../tag-pannel/tag-pannel.component';
@@ -38,7 +38,7 @@ export class PlayerPannelComponent implements OnInit, OnDestroy{
 	private destroy$ = new Subject<void>()
 	_pannelSize!: SettingPlayerPannelSize
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameParam: GameParamService
 	){}
 

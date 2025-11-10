@@ -10,7 +10,7 @@ import { NonEventButton } from '../../../models/core-game/button.model';
 import { Subject, takeUntil } from 'rxjs';
 import { GameParamService } from '../../../services/core-game/game-param.service';
 import { SettingCardSize } from '../../../types/global.type';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 
 @Component({
   selector: 'app-phase-builder',
@@ -37,12 +37,11 @@ export class PhaseBuilderComponent{
 
 	constructor(
 		private gameParam: GameParamService,
-		private gameState: GameState
+		private gameState: GameStateFacadeService
 	){}
 
 	ngOnInit(): void {
 		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
-		this.gameState.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(v => this.onEventQueueUpdate())
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -59,9 +58,5 @@ export class PhaseBuilderComponent{
 	}
 	public onAlternativePayButtonClicked(button: NonEventButton){
 		this.cardListSelector.updateDiscount(this.event as EventCardBuilder)
-	}
-	public onEventQueueUpdate(){
-		if(!this.cardListSelector){return}
-		this.cardListSelector.updateCardList()
 	}
 }

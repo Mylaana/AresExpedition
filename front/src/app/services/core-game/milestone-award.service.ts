@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core"
 import { AwardsEnum, MilestonesEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
-import { GameState } from "../game-state/game-state.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
 import { AwardCard, AwardValue, ClaimedMilestone, ClaimedMilestoneCard, MilestoneCard, MilestoneValue } from "../../interfaces/global.interface";
 import { MilestoneState, myUUID, PlayerColor } from "../../types/global.type";
-import { Utils } from "../../utils/utils";
 import { GameActiveContentService } from "./game-active-content.service";
+import { GameStateFacadeService } from "../game-state/game-state-facade.service";
 
 interface PlayerMilestoneTemp {
 	color: PlayerColor,
@@ -26,7 +25,7 @@ export class MilestoneAwardService {
 	private awardCards!: AwardCard[]
 
     constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameContentService: GameActiveContentService
 	){
 		if(this.gameContentService.isContentActive('expansionDiscovery')){

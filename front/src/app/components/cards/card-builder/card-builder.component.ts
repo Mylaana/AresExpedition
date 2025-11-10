@@ -9,9 +9,8 @@ import { BuilderOption, ProjectFilterNameEnum } from '../../../enum/global.enum'
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilderAlternativeCostComponent } from '../card-builder-alternative-cost/card-builder-alternative-cost.component';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { Subject, takeUntil } from 'rxjs';
-import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { PlayableCard } from '../../../factory/playable-card.factory';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
@@ -45,7 +44,7 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	_lockBuilder!: NonEventButton
 	_hasAlternativeCost: boolean = false
 	private destroy$ = new Subject<void>
-	constructor(private gameState: GameState){
+	constructor(private gameState: GameStateFacadeService){
 
 	}
 	ngOnInit(): void {

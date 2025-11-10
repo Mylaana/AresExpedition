@@ -1,14 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { PlayerPhase } from '../../../interfaces/global.interface';
 import { NonSelectablePhaseEnum } from '../../../enum/phase.enum';
-import { GameContentName, myUUID, SettingInterfaceSize, SettingPlayerPannelSize } from '../../../types/global.type';
+import { GameContentName, myUUID, SettingPlayerPannelSize } from '../../../types/global.type';
 import { VpComponent } from '../../tools/vp/vp.component';
-import { GameState } from '../../../services/game-state/game-state.service';
 import { GameOption } from '../../../services/core-game/create-game.service';
 import { PlayerNameComponent } from '../player-name/player-name.component';
-import { GameParamService } from '../../../services/core-game/game-param.service';
 import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
 
 @Component({
@@ -29,8 +27,6 @@ export class GlobalPannelComponent {
 	@Input() currentPhase!: NonSelectablePhaseEnum
 	@Input() gameOver!: boolean
 	@Input() pannelSize!: SettingPlayerPannelSize
-
-	private gameOptions!: GameOption
 
 	constructor(
 		private gameContentService: GameActiveContentService

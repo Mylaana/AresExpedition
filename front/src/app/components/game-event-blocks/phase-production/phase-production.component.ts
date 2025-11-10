@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
@@ -21,7 +21,7 @@ export class PhaseProductionComponent implements OnInit, OnDestroy{
 	@Input() event!: EventBaseModel
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private cardInfoService: ProjectCardInfoService
 	){}
 	clientPlayerState!: PlayerStateModel;

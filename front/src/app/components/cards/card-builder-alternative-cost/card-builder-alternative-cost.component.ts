@@ -3,13 +3,12 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, S
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { NonEventButton } from '../../../models/core-game/button.model';
 import { Subject, takeUntil } from 'rxjs';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
-import { ALTERNATIVE_PAY_BUTTON_NAME } from '../../../maps/playable-card-other-maps';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',
@@ -33,7 +32,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	private destroy$ = new Subject<void>
 	private clientState!: PlayerStateModel
 
-	constructor(private gameStateService: GameState){}
+	constructor(private gameStateService: GameStateFacadeService){}
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(() => this.onEventQueueUpdate())

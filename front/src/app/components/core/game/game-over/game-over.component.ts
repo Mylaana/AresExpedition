@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
-import { GameState } from '../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { PlayerPannelComponent } from '../../../player-info/player-pannel/player-pannel.component';
 import { CommonModule } from '@angular/common';
 import { GameContentName, myUUID } from '../../../../types/global.type';
@@ -28,7 +28,7 @@ export class GameOverComponent implements OnInit{
 	_round!: number
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameContentService: GameActiveContentService
 	){}
 	ngOnInit(): void {

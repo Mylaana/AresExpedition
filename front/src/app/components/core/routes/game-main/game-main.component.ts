@@ -14,7 +14,7 @@ import { ServerEmulationComponent } from '../../game/server-emulation/server-emu
 import { SettingsComponent } from '../../game/settings/settings.component';
 import { WebsocketHandler } from '../../../../models/core-game/websocket-handler';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
-import { GameState } from '../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { RxStompService } from '../../../../services/websocket/rx-stomp.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
@@ -78,7 +78,7 @@ export class GameMainComponent implements OnInit{
 
 	constructor(
 		private elRef: ElementRef,
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private cardInfoService: ProjectCardInfoService,
 		private rxStompService: RxStompService,
 		private gameParam: GameParamService,

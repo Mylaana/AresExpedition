@@ -3,7 +3,7 @@ import { PlayableCardModel } from '../../../../../models/cards/project-card.mode
 import { CardActivationComponent } from '../card-activation/card-activation.component';
 import { ActivationOption } from '../../../../../types/project-card.type';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../../services/game-state/game-state-facade.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../../../models/player-info/player-state.model';
 import { PlayableCard } from '../../../../../factory/playable-card.factory';
@@ -34,7 +34,7 @@ export class CardActivationListComponent implements OnInit, OnDestroy{
 	destroy$ = new Subject<void>()
 	isScalingCostActivation: boolean = false
 
-	constructor(private gameStateService: GameState){}
+	constructor(private gameStateService: GameStateFacadeService){}
 	ngOnInit(): void {
 		if(this.projectCard.effectSummaryOption==='scalingCostActivation' || this.projectCard.effectSummaryOption2==='scalingCostActivation'){
 			this.isScalingCostActivation = true

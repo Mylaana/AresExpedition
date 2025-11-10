@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, QueryList, ViewChildren} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { PhaseCardUpgradeListComponent } from '../phase-card-upgrade-list/phase-card-upgrade-list.component';
 import { EventBaseModel, EventGeneric } from '../../../../models/core-game/event.model';
 import { PhaseCardGroupModel } from '../../../../models/cards/phase-card.model';
@@ -26,7 +26,7 @@ export class PhaseCardUpgradeSelectorComponent implements OnDestroy{
 
 	private destroy$ = new Subject<void>()
 
-	constructor(private gameStateService: GameState){}
+	constructor(private gameStateService: GameStateFacadeService){}
 
 	ngOnInit():void{
 		this.currentEvent = this.event as EventGeneric

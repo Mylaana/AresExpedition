@@ -7,7 +7,7 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { EffectPortalButton, NonEventButton } from '../../../models/core-game/button.model';
 import { EffectPortalService } from '../../../services/core-game/effect-portal.service';
 import { PortalEffectButtonComponent } from '../../tools/button/portal-effect-button.component';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -33,7 +33,7 @@ export class EffectPortalComponent implements OnInit, OnChanges{
 
 	constructor(
 		private portalService: EffectPortalService,
-		private gameStateService: GameState
+		private gameStateService: GameStateFacadeService
 	){}
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this.updateClientState(state))

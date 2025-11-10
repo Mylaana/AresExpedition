@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameState } from '../../../services/game-state/game-state-facade.service';
 import { PlayerPhase } from '../../../interfaces/global.interface';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';

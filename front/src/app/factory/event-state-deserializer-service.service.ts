@@ -30,7 +30,7 @@ function toContentDto<T>(json: any): T {
 @Injectable({
 	providedIn: 'root'
 })
-export class EventStateService{
+export class EventStateDeserializerService{
 	constructor(private projectCardInfoService: ProjectCardInfoService){}
 	public shouldLoadEvent(event: EventBaseModel, eventState: EventStateDTO) : boolean {
 		return shouldLoadEvent(event,eventState)

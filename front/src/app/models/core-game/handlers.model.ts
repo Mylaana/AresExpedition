@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AdvancedRessourceStock, CardRessourceStock, RessourceInfo, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
 import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
-import { GameState } from "../../services/game-state/game-state.service";
+import { GameStateFacadeService } from "../../services/game-state/game-state-facade.service";
 import { EventCardActivatorSubType, EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
 import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
@@ -12,14 +12,17 @@ import { Logger, Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { ActivationOption, ProjectListType } from "../../types/project-card.type";
-import { myUUID, TagType } from "../../types/global.type";
+import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum } from "../../enum/global.enum";
 import { PlayableCard } from "../../factory/playable-card.factory";
+import { BehaviorSubject } from "rxjs";
 
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
 export class EventHandler {
     private eventCounter: number = 0
 	private currentEvent!: EventBaseModel
@@ -27,23 +30,28 @@ export class EventHandler {
 	private waiterResolved: number[] = []
 	private readonly phaseHandler = new PhaseResolveHandler(this.gameStateService, this.gameParam)
 
+	private _currentEvent$ = new BehaviorSubject<EventBaseModel | undefined>(undefined)
+	currentEventObs = this._currentEvent$.asObservable()
+
     constructor(
-		private gameStateService: GameState,
-		private projectCardInfoService: ProjectCardInfoService,
+		private gameStateService: GameStateFacadeService,
 		private rxStompService: RxStompService,
 		private gameParam: GameParamService
-	){}
+	){
+		gameStateService.currentEventQueue.subscribe(queue => this.handleQueueUpdate(queue))
+	}
 
 	public handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
-		if(eventQueue.length===0){return undefined}
+		if(eventQueue.length===0){
+			return undefined
+		}
 		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && Utils.jsonCopy(eventQueue[0].id)===Utils.jsonCopy(this.currentEventId)){
-				return this.currentEvent
+			return this.currentEvent
 		}
 		if(eventQueue[0].finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()
 			return this.currentEvent
 		}
-
 		this.switchEvent(eventQueue, this.currentEvent)
 		if(this.waiterResolved.length!=0){this.resolveWaiters(eventQueue)}
 		this.checkFinalized()
@@ -130,6 +138,7 @@ export class EventHandler {
     private switchEvent(eventQueue: EventBaseModel[], event: EventBaseModel): void {
 		//switching current event to top of the pile
 		this.currentEvent = eventQueue[0]
+		this._currentEvent$.next(this.currentEvent)
 		if(!this.currentEvent.id){this.currentEvent.id = this.setEventId()}
 		this.currentEventId = this.currentEvent.id
 
@@ -697,7 +706,7 @@ export class EventHandler {
 @Injectable()
 export class DrawEventHandler {
 	constructor(
-		private gameStateService:GameState,
+		private gameStateService:GameStateFacadeService,
 		private projectCardInfoService: ProjectCardInfoService,
 		private rxStompService: RxStompService
 	){}
@@ -804,7 +813,7 @@ class PhaseResolveHandler {
 	private clientPlayerId: myUUID = ''
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameParam: GameParamService
 	){
 

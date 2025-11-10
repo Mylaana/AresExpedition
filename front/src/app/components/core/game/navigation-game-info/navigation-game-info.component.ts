@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameState } from '../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 
 @Component({
   selector: 'app-navigation-game-info',
@@ -12,7 +12,7 @@ export class NavigationGameInfoComponent implements OnInit{
 	_round!: number
 	_discardSize!: number
 
-	constructor(private gameStateService: GameState){}
+	constructor(private gameStateService: GameStateFacadeService){}
 
 	ngOnInit(): void {
 		this.gameStateService.currentDeck.subscribe(deck => this._deckSize = deck)

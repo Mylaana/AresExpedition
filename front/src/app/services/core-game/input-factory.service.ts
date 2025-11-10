@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { InputRuleEnum } from "../../enum/global.enum";
 import { InputRule } from "../../interfaces/global.interface";
-import { GameState } from "../game-state/game-state.service";
 import { PlayerStateModel } from "../../models/player-info/player-state.model";
+import { GameStateFacadeService } from "../game-state/game-state-facade.service";
 
 @Injectable({
 	providedIn: 'root'
@@ -10,7 +10,7 @@ import { PlayerStateModel } from "../../models/player-info/player-state.model";
 export class InputFactoryService {
 	private clientstate!: PlayerStateModel
 
-	constructor(private gameStateService: GameState){
+	constructor(private gameStateService: GameStateFacadeService){
 		this.gameStateService.currentClientState.subscribe(state => this.clientstate = state)
 	}
 	getInputParams(inputRule: InputRuleEnum): InputRule {

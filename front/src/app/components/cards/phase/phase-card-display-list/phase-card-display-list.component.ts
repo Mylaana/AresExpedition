@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { PhaseCardComponent } from '../phase-card/phase-card.component';
 import { PhaseCardModel } from '../../../../models/cards/phase-card.model';
-import { GameState } from '../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { SettingCardSize } from '../../../../types/global.type';
 
@@ -21,7 +21,7 @@ export class PhaseCardDisplayListComponent implements OnInit{
 	_cardSize!: SettingCardSize
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameParam: GameParamService
 	){}
 

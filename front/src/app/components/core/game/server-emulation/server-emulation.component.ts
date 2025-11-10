@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../../services/game-state/game-state.service';
 import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../../models/core-game/event.model';
 import { MessageContentQueryEnum } from '../../../../enum/websocket.enum';
@@ -12,6 +11,7 @@ import { PlayerReadyModel } from '../../../../models/player-info/player-state.mo
 import { myUUID, TagType } from '../../../../types/global.type';
 import { GlobalParameterNameEnum } from '../../../../enum/global.enum';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -43,7 +43,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 
 	private destroy$ = new Subject<void>()
 
-	constructor(private gameStateService: GameState,
+	constructor(private gameStateService: GameStateFacadeService,
 		private cardInfoService: ProjectCardInfoService,
 		private rxStompService: RxStompService,
 		private gameParam: GameParamService
@@ -154,7 +154,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: string[] = ['M85']
+		let cardDrawList: string[] = ['40']
 
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())

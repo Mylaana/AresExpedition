@@ -1,5 +1,5 @@
-import { Injectable, OnDestroy, OnInit } from "@angular/core";
-import { GameState } from "../game-state/game-state.service";
+import { Injectable } from "@angular/core";
+import { GameStateFacadeService } from "../game-state/game-state-facade.service";
 import { EffectPortalEnum } from "../../enum/global.enum";
 import { EffectPortalButton} from "../../models/core-game/button.model";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
@@ -18,7 +18,7 @@ export class EffectPortalService {
 	private clientState!: PlayerStateModel
 
     constructor(
-        private gameStateService: GameState
+        private gameStateService: GameStateFacadeService
     ){}
     initialize(portal: EffectPortalEnum): void{
         this.portal = portal

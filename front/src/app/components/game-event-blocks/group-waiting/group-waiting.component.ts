@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { PlayerReadyModel, PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { CommonModule } from '@angular/common';
 import { fadeIn } from '../../../animations/animations';
@@ -23,7 +23,7 @@ export class GroupWaitingComponent implements OnInit{
 	_groupInfo!: PlayerInfoStateModel[]
 
 	private destroy$ = new Subject<void>
-	constructor(private gameStateService: GameState){}
+	constructor(private gameStateService: GameStateFacadeService){}
 	ngOnInit(): void {
 		this.clientId = this.gameStateService.getClientState().getId()
 		this.setGroupInfo(this.gameStateService.getGroupState())

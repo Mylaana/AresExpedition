@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { GlobalParameterCardComponent } from '../global-parameter-card/global-parameter-card.component';
 import { CommonModule } from '@angular/common';
 import { OceanCardComponent } from '../ocean-card/ocean-card.component';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerGlobalParameterStateModel } from '../../../models/player-info/player-state-global-parameter.model';
 import { GlobalParameter, OceanBonus } from '../../../interfaces/global.interface';
@@ -36,7 +36,7 @@ export class GlobalParameterPannelComponent implements OnInit, OnDestroy {
 	_oceanFlippedBonus: OceanBonus[] = []
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameContentService: GameActiveContentService,
 		private el: ElementRef
 	){}

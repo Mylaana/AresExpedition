@@ -1,0 +1,12 @@
+<app-playable-card-list 
+    #cardList
+    *ngIf="_currentEvent && _cardList"
+    [listBehavior]="'selector'"
+    [initialChildrenCardState]="_initialCardState"
+    [cardList]="_cardList"
+    [listType]="'selector'"
+    [listSubType]="_currentEvent.subType==='doubleProduction'?'repeatProduction':'none'"
+    [selectionQuantity]="_selectionQuantity"
+    [selectionTresholdType]="_selectionTresholdType"
+    (updateSelectedCardList)="onUpdateSelectedCardList($event)">
+</app-playable-card-list>

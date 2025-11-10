@@ -22,3 +22,4 @@ export type EventUnionSubTypes = EventCardSelectorSubType | EventCardSelectorRes
 | EventTagSelectorSubType
 
 export type EventOriginType = 'cardCode'
+export type EventPileAddRule = 'first' | 'second' | 'last'

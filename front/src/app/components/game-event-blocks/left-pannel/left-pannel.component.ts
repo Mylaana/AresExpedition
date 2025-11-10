@@ -3,7 +3,7 @@ import { TextWithImageComponent } from '../../tools/text-with-image/text-with-im
 import { CommonModule } from '@angular/common';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../enum/phase.enum';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { Subject, takeUntil } from 'rxjs';
 import { RGB, SettingInterfaceSize } from '../../../types/global.type';
 
@@ -32,7 +32,7 @@ export class LeftPannelComponent implements OnInit, OnDestroy{
 	destroy$ = new Subject<void>
 	_clientId!: string
 
-	constructor(private gameStateService: GameState){}
+	constructor(private gameStateService: GameStateFacadeService){}
 
 	ngOnInit(): void {
 		//this.gameStateService.currentGroupPlayerState.pipe(takeUntil(this.destroy$)).subscribe((group) => this.updateGroupState(group))

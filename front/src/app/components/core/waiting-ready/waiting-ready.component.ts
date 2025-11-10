@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { EventBaseModel } from '../../../models/core-game/event.model';
 import { Subject, takeUntil } from 'rxjs';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { PlayerReadyModel, PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { fadeIn } from '../../../animations/animations';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
@@ -32,7 +32,7 @@ export class WaitingReadyComponent implements OnInit{
 	_groupInfo!: PlayerInfoStateModel[]
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameContentService: GameActiveContentService
 	){}
 

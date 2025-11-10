@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
-import { GameState } from '../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../tools/button/button.component';
 import { ImageButton } from '../../../models/core-game/button.model';
@@ -49,7 +49,7 @@ export class PhasePlanificationComponent implements OnInit, OnDestroy{
 	destroy$ = new Subject<void>
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameParam: GameParamService
 	){}
 

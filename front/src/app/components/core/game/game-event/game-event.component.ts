@@ -7,11 +7,10 @@ import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
 import { DrawEvent, EventBaseModel, EventPhase } from '../../../../models/core-game/event.model';
 import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
-import { GameState } from '../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { ActivationOption, ProjectListType } from '../../../../types/project-card.type';
 import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
-import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { EventMainButtonComponent } from "../../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { InitialDraftComponent } from '../../../game-initialization/initial-draft/initial-draft.component';
@@ -33,7 +32,7 @@ import { GameActiveContentService } from '../../../../services/core-game/game-ac
 import { EventUnionSubTypes } from '../../../../types/event.type';
 import { StandardCardSelectorComponent } from '../../../game-event-blocks/standard-card-selector/standard-card-selector.component';
 
-//this component is the main controller, and view
+//this component is the main view
 
 const dedicatedComponentEventSubtypeList: EventUnionSubTypes[] = [
 	'planificationPhase', 'productionPhase', 'actionPhaseActivator',
@@ -68,17 +67,10 @@ const dedicatedComponentEventSubtypeList: EventUnionSubTypes[] = [
     styleUrl: './game-event.component.scss',
     animations: [expandCollapseVertical, enterFromLeft, fadeIn, fadeInFadeOut],
     providers: [
-        EventHandler,
         DrawEventHandler
     ]
 })
 export class GameEventComponent {
-	constructor(
-		private elRef: ElementRef, private renderer: Renderer2,
-		private gameStateService: GameState,
-		private gameParamService: GameParamService,
-		private gameContentService: GameActiveContentService
-	){}
 	delete: EventBaseModel[] = []
 
 	currentEvent!: EventBaseModel | undefined
@@ -109,9 +101,17 @@ export class GameEventComponent {
 	_selectedPhaseList: SelectablePhaseEnum[] = []
 	_interfaceSize!: SettingInterfaceSize
 
-	private readonly eventHandler = inject(EventHandler)
+	//private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
 	private destroy$ = new Subject<void>()
+
+	constructor(
+		private elRef: ElementRef, private renderer: Renderer2,
+		private gameStateService: GameStateFacadeService,
+		private gameParamService: GameParamService,
+		private gameContentService: GameActiveContentService,
+		private eventHandler: EventHandler
+	){}
 
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
@@ -124,10 +124,10 @@ export class GameEventComponent {
 
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
-		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
 
 		this.gameParamService.currentInterfaceSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._interfaceSize = size)
+		this.eventHandler.currentEventObs.subscribe(event => {this.currentEvent = event})
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -145,7 +145,6 @@ export class GameEventComponent {
 	}
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
-		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
 		this.scrollToTop()
 		if(!this.currentEvent){return}
 		this.resetValidateButtonState(this.currentEvent)

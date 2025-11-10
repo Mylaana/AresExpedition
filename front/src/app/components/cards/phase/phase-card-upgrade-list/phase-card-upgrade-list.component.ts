@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChildren, QueryList, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhaseCardComponent } from '../phase-card/phase-card.component';
-import { GameState } from '../../../../services/game-state/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { PhaseCardGroupModel, PhaseCardModel } from '../../../../models/cards/phase-card.model';
 import { PhaseCardUpgradeType } from '../../../../types/phase-card.type';
 import { CardStateModel } from '../../../../models/cards/card-state.model';
@@ -40,7 +40,7 @@ export class PhaseCardUpgradeListComponent implements OnInit, OnDestroy{
 	private destroy$ = new Subject<void>
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameParam: GameParamService
 	){}
 

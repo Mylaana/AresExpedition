@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../factory/websocket-message-factory.service";
-import { GameState } from "../../services/game-state/game-state.service";
+import { GameStateFacadeService } from "../../services/game-state/game-state-facade.service";
 import { Logger } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";
@@ -14,7 +14,7 @@ export class WebsocketHandler {
     clientPlayerId: myUUID = ''
 
     constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameContentService: GameActiveContentService
 	){}
 

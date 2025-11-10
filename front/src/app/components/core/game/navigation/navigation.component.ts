@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { GameState } from '../../../../services/game-state/game-state.service';
 import { PlayerPannelComponent } from '../../../player-info/player-pannel/player-pannel.component';
 import { expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { AnimationEvent } from '@angular/animations';
@@ -13,6 +12,7 @@ import { GameActiveContentService } from '../../../../services/core-game/game-ac
 import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { GroupWaitingComponent } from '../../../game-event-blocks/group-waiting/group-waiting.component';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 
 @Component({
     selector: 'app-navigation',
@@ -41,7 +41,7 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 
 	constructor(
 		private elRef: ElementRef,
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameContentService: GameActiveContentService
 	){}
 
@@ -100,7 +100,7 @@ export class NavigationComponent implements OnInit, AfterViewInit, OnDestroy{
 		}
 		return false
 	}
-	@HostListener('window:scroll', ['$event'])
+	@HostListener('window:scroll')
 	onScroll(){
 		this._currentScrollY = window.pageYOffset
 	}
