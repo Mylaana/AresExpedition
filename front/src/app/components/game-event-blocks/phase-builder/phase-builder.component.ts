@@ -12,6 +12,9 @@ import { GameParamService } from '../../../services/core-game/game-param.service
 import { SettingCardSize } from '../../../types/global.type';
 import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
+import { PlayableCardModel } from '../../../models/cards/project-card.model';
+import { ProjectListType } from '../../../types/project-card.type';
+import { EventHandler } from '../../../models/core-game/handlers.model';
 
 @Component({
   selector: 'app-phase-builder',
@@ -38,7 +41,8 @@ export class PhaseBuilderComponent{
 
 	constructor(
 		private gameParam: GameParamService,
-		private gameState: GameStateFacadeService
+		private gameState: GameStateFacadeService,
+		private eventHandler: EventHandler
 	){}
 
 	ngOnInit(): void {
@@ -55,7 +59,6 @@ export class PhaseBuilderComponent{
 		this.cardListSelector.updateCardList()
 	}
 	public onUpdateSelectedCardList(output: any){
-		this.updateSelectedCardList.emit(output)
 		this.cardListSelector.updateCardList()
 	}
 	public onAlternativePayButtonClicked(button: NonEventButton){
@@ -66,5 +69,9 @@ export class PhaseBuilderComponent{
 		if(!event){
 			return
 		}
+	}
+	onSelectionUpdate(input:  {selected: PlayableCardModel[], listType: ProjectListType}){
+		console.log('selection:', input.selected[0])
+		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 	}
 }

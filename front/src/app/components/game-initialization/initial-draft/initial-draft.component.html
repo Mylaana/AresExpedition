@@ -1,11 +1,9 @@
 <div class="wrapper-main">
 	<ng-container
 		*ngIf="event.subType==='selectStartingHand'">
-		<app-playable-card-list
-			[listType]="'selector'"
-			[listSubType]="'recycleStartingProject'"
-			(updateSelectedCardList)="onUpdateSelectedCardList($event)">
-		</app-playable-card-list>
+		<app-playable-card-list-wrapper
+		[listBehavior]="'selector'">
+		</app-playable-card-list-wrapper>
 		<div class="ares-title">
 			<h1>{{'eventInitialDraftThenCorp' | eventTitleKeyPipe}}</h1>
 		</div>
@@ -16,10 +14,8 @@
 	</ng-container>
 	<ng-container
 		*ngIf="event.subType==='selectCorporation' || event.subType==='selectMerger'">
-		<app-playable-card-list #cardListSelector
-			[listType]="'selector'"
-			[listSubType]="event.subType"
-			(updateSelectedCardList)="onUpdateSelectedCardList($event)">
-		</app-playable-card-list>
+		<app-playable-card-list-wrapper
+		[listBehavior]="'selector'">
+		</app-playable-card-list-wrapper>
 	</ng-container>
 </div>

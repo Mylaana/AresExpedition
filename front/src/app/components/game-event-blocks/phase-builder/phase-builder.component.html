@@ -7,9 +7,11 @@
 	(alternativePayButtonClicked)="onAlternativePayButtonClicked($event)">
 </app-card-builder-list>
 <app-playable-card-list-wrapper
-	[listBehavior]="'builder'">
+	[listBehavior]="'builder'"
+	(onSelectionUpdateForBuilderEvent)="onSelectionUpdate($event)">
 </app-playable-card-list-wrapper>
 <app-hexed-background  *ngIf="_currentEvent && _currentEvent.getSelectionActive()"
 	@fadeIn
 	[autoFillHexSize]="'large'">
 </app-hexed-background>
+<p>{{_currentEvent?.getCardSelector()?.cardInitialState | json}}</p>

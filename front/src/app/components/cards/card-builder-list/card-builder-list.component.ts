@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { SettingCardSize } from '../../../types/global.type';
+import { PlayableCardModel } from '../../../models/cards/project-card.model';
 
 @Component({
     selector: 'app-card-builder-list',

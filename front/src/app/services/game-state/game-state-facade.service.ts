@@ -88,10 +88,10 @@ export class GameStateFacadeService{
 	currentDeck = this.deck.asObservable()
 	currentDiscard = this.discard.asObservable()
 
-	currentEventQueue = this.gameStateEventService._eventQueue$.asObservable()
-	currentEventSelector = this.gameStateEventService._eventSelector$.asObservable()
-	currentEventActivator = this.gameStateEventService._eventActivator$.asObservable()
-	currentEventBuilder = this.gameStateEventService._eventBuilder$.asObservable()
+	currentEventQueue = this.gameEventQueueService._eventQueue$.asObservable()
+	currentEventSelector = this.gameEventQueueService._eventSelector$.asObservable()
+	currentEventActivator = this.gameEventQueueService._eventActivator$.asObservable()
+	currentEventBuilder = this.gameEventQueueService._eventBuilder$.asObservable()
 
 
     phaseIndex: number = 0
@@ -118,7 +118,7 @@ export class GameStateFacadeService{
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private gameModeContentService: GameActiveContentService,
-		private gameStateEventService: GameEventQueueService,
+		private gameEventQueueService: GameEventQueueService,
 		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
@@ -222,11 +222,11 @@ export class GameStateFacadeService{
 	getClientStateDTO(): PlayerStateDTO {
 		return this.getClientState().toJson(
 			EventSerializer.eventQueueToJson(
-			this.gameStateEventService.getCurrentEventQueue()))
+			this.gameEventQueueService.getCurrentEventQueue()))
 	}
 
 	updateClientState(clientState: PlayerStateModel): void{
-		this.gameStateEventService.updateClientState(clientState)
+		this.gameEventQueueService.updateClientState(clientState)
 		this.clientState.next(clientState)
     }
 
@@ -283,7 +283,6 @@ export class GameStateFacadeService{
      * @returns the player's current selected phase
      */
     getPlayerCurrentSelectedPhase(playerId: myUUID): SelectablePhaseEnum {
-		console.log(this.groupPlayerSelectedPhase.getValue(), playerId)
         for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){
             if(playerSelcted.playerId === playerId){
                 return playerSelcted.currentSelectedPhase
@@ -380,7 +379,7 @@ export class GameStateFacadeService{
 	 * adding one or multiple events in queue at the specified [addrule] position, if multiple events added this way, the received order is preserved.	 *
 	 */
     addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
-		this.gameStateEventService.addEventQueue(events, addRule)
+		this.gameEventQueueService.addEventQueue(events, addRule)
     }
 	setClientPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
 		let state = this.getClientState()
@@ -539,8 +538,8 @@ export class GameStateFacadeService{
 		}
         this.groupPlayerReady.next(groupReady)
     }
-    public clearEventQueue(){this.gameStateEventService.clearEventQueue()}
-    public finalizeEventWaitingGroupReady(){this.gameStateEventService.finalizeEventWaitingGroupReady()}
+    public clearEventQueue(){this.gameEventQueueService.clearEventQueue()}
+    public finalizeEventWaitingGroupReady(){this.gameEventQueueService.finalizeEventWaitingGroupReady()}
 	public setGameLoaded(){
 		this.loading.next(false)
 	}
@@ -553,7 +552,7 @@ export class GameStateFacadeService{
 
 			//add playerstate
 			if(playerStateDTO.infoState.i===this.clientId){
-				this.gameStateEventService.loadEventStateDTOFromJson(playerStateDTO.eventState?.e??[])
+				this.gameEventQueueService.loadEventStateDTOFromJson(playerStateDTO.eventState?.e??[])
 				playerStateDTO.eventState.e = []
 			}
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
@@ -722,7 +721,7 @@ export class GameStateFacadeService{
 		this.addEventQueue(newEvents,'first')
     }
 	endOfPhase() {
-		this.rxStompService.publishPlayerState(this.getClientState().toJson(EventSerializer.eventQueueToJson(this.gameStateEventService.getCurrentEventQueue())))
+		this.rxStompService.publishPlayerState(this.getClientState().toJson(EventSerializer.eventQueueToJson(this.gameEventQueueService.getCurrentEventQueue())))
 	}
 	setGameOver(){
 		this.gameOver.next(true)
@@ -879,9 +878,9 @@ export class GameStateFacadeService{
 		this.updateClientState(state)
 	}
 	cleanAndNextEventQueue() {
-		this.gameStateEventService.cleanAndNextEventQueue()
+		this.gameEventQueueService.cleanAndNextEventQueue()
 	}
 	getEventQueue(): EventBaseModel[] {
-		return this.gameStateEventService.getCurrentEventQueue()
+		return this.gameEventQueueService.getCurrentEventQueue()
 	}
 }

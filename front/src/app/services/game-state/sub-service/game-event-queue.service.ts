@@ -53,6 +53,7 @@ export class GameEventQueueService {
         this.updateEventQueue(newQueue)
     }
     cleanAndNextEventQueue(): void{
+        console.error()
         let newEventQueue: EventBaseModel[] = [];
         for(let e of this._eventQueue$.getValue()){
             if(e.finalized!=true){
@@ -100,8 +101,8 @@ export class GameEventQueueService {
         this.clientState = clientState
     }
     private updateEventQueue(queue: EventBaseModel[]){
-		this._eventQueue$.next(queue)
         this.updateSpecificEventSubjects(queue)
+		this._eventQueue$.next(queue)
 	}
     private toEventCardActivator(event: EventBaseModel): EventCardActivator | null {
 		return event?.hasCardActivator()
@@ -109,12 +110,12 @@ export class GameEventQueueService {
 			: null
 	}
 	private toEventCardSelector(event: EventBaseModel): EventBaseCardSelector | null {
-		return event?.hasSelector()
+		return event?.hasSelector() && event?.hasCardBuilder()===false
 			? (event as EventBaseCardSelector)
 			: null
 	}
     private toEventCardBuilder(event: EventBaseModel): EventCardBuilder | null {
-		return event?.hasSelector()
+		return event?.hasCardBuilder()
 			? (event as EventCardBuilder)
 			: null
 	}

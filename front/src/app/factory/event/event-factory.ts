@@ -484,7 +484,7 @@ function generateCardBuilder(builderId:number, option?:BuilderOption): CardBuild
 function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType, builderOption?: BuilderOption): EventCardBuilder {
     let event = new EventCardBuilder
     event.setCardSelector(generateCardSelector())
-    event.setSelectorInitialState({selectable: false, buildable: true})
+    event.setSelectorInitialState({selectable: true, buildable: true})
     event.subType = subType
     event.cardBuilder = []
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)

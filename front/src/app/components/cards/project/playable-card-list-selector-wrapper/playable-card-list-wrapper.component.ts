@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { PlayableCardListComponent } from '../playable-card-list/playable-card-list.component';
 import { Subject, takeUntil } from 'rxjs';
 import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
-import { EventBaseCardSelector } from '../../../../models/core-game/event.model';
+import { EventBaseCardSelector, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { CardState } from '../../../../interfaces/card.interface';
 import { Utils } from '../../../../utils/utils';
@@ -22,6 +22,7 @@ import { ListBehavior, ProjectListType } from '../../../../types/project-card.ty
 })
 export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	@Input() listBehavior: ListBehavior = 'display'
+	@Output() onSelectionUpdateForBuilderEvent = new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
 	@ViewChild('cardList') cardListChild!: PlayableCardListComponent
 	
 
@@ -45,6 +46,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			}
 			case('builder'):{
 				this.gameStateService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventBuilderUpdate(event))
+				break
 			}
 		}
 	}
@@ -53,7 +55,6 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		this.destroy$.complete()
 	}
 	onEventSelectorUpdate(event: EventBaseCardSelector | null){
-		console.log('new event Selector focus:',event)
 		this._currentEvent = event
 		if(!event){
 			this.resetState()
@@ -67,8 +68,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
 	}
-	onEventBuilderUpdate(event: EventBaseCardSelector | null){
-		console.log('new event Builder focus:',event)
+	onEventBuilderUpdate(event: EventCardBuilder | null){
 		this._currentEvent = event
 		if(!event){
 			this.resetState()
@@ -86,7 +86,16 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		this._cardList = []
 	}
 	public onUpdateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){
-		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+		switch(this.listBehavior){
+			case('builder'):{
+				this.onSelectionUpdateForBuilderEvent.emit(input)
+				break
+			}
+			default:{
+				this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+				break
+			}
+		}
 	}
 	public selectAll(){
 		this.cardListChild.selectAll()
