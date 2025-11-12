@@ -73,7 +73,6 @@
 					*ngIf="currentEvent.hasCardBuilder()"
 					@fadeIn
 					[currentPhase]="currentPhase"
-					(cardBuilderButtonClicked)="onCardBuilderButtonClicked($event)"
 					(updateSelectedCardList)="onUpdateSelectedCardList($event)">
 				</app-phase-builder>
 				<app-tag-gain-list

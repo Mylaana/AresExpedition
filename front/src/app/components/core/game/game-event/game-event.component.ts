@@ -244,9 +244,6 @@ export class GameEventComponent {
 		this.eventHandler.onProjectActivated(input)
 	}
 	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
-	public onCardBuilderButtonClicked(button: EventCardBuilderButton){
-		this.eventHandler.cardBuilderButtonClicked(button)
-	}
 	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
 	isDiscoveryActive(): boolean {
 		return this.gameContentService.isContentActive('expansionDiscovery')

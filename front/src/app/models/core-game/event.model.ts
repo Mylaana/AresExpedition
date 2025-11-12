@@ -179,10 +179,10 @@ export class EventCardBuilder extends EventBaseCardSelector {
             }
         }
     }
-    /*getCardToBuildId(): PlayableCardModel | undefined {
-        if(this.cardBuilderIdHavingFocus===undefined){return}
-        return this.cardBuilder[this.cardBuilderIdHavingFocus].getSelectedCard()
-    }*/
+    getCardToBuildId(): PlayableCardModel | undefined {
+		if(!this.currentBuilder){return}
+        return this.currentBuilder.getSelectedCard()
+    }
     cardBuilderButtonClicked(button: EventCardBuilderButton, nonCurrentBuilder?: CardBuilder): void {
         if(this.eventIsComplete){return}
         if(!this.currentBuilder){return}
@@ -191,10 +191,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
 
         switch(button.name){
             case('buildCard'):{
-                /*
-                this.buildDiscountUsed = true
-                this.buildDiscountValue = 0
-                */
                 this.activateNextBuilder()
 				break
             }
@@ -238,17 +234,8 @@ export class EventCardBuilder extends EventBaseCardSelector {
     private setEventIsComplete(){
         this.deactivateSelection()
         this.eventIsComplete = true
+        this.cardSelector.stateFromParent = Utils.toFullCardState({})
     }
-	setFirstCardBuilt(){
-        return
-		//this.alternativeCostUsedButtonName = []
-		if(this.builderType!="development_second_card"){return}
-		this.cardBuilder[1].setFirstCardBuilt()
-		this.cardBuilder[1].setFirstCardBuilt()
-		this.cardSelector.filter = {type:ProjectFilterNameEnum.developmentPhaseSecondBuilder}
-		this.title = 'Play a second green card with a printed cost of 12MC or less.'
-	}
-
 	override onSwitch(): void {
 		//reset cardBuilder's selection onSwitch
 		for(let builder of this.cardBuilder){

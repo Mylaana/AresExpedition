@@ -64,29 +64,6 @@ export class EventHandler {
 		this.currentEvent.button?.setEnabled(enabled)
 		this.currentEvent.button?.locked?this.currentEvent.lockValidateButton:false
 	}
-	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
-		let event = this.currentEvent as EventCardBuilder
-		event.cardBuilderButtonClicked(button)
-		switch(button.name){
-			case('buildCard'):{
-				let card //= event.getCardToBuildId()
-				if(card===undefined){return}
-				event.setFirstCardBuilt()
-				this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
-				event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))
-				break
-			}
-			case(BuilderOption.drawCard):{
-				this.gameStateService.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}), 'first')
-				break
-			}
-			case(BuilderOption.gain6MC):{
-				this.gameStateService.addEventQueue(EventFactory.createGeneric('addRessourceToPlayer',{baseRessource:{name:"megacredit",valueStock:6}}), 'first')
-				break
-			}
-		}
-		event.updateButtonEnabled()
-	}
 	public updateSelectedCardList(selected: PlayableCardModel[], listType: ProjectListType): void {
 		switch(listType){
 			case('selector'):{

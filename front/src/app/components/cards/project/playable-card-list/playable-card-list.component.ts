@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, input, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { CardState } from '../../../../interfaces/card.interface';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
@@ -30,9 +30,10 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Input() listSubType: ProjectListSubType = 'none'
 	@Input() notClientState!: PlayerStateModel | undefined
 	@Input() initialChildrenCardState!: CardState
+	@Input() currentChildrenCardState!: CardState
 	@Input() buildDiscount: number = 0
 	
-	//selection related unputs
+	//selection related inputs
 	@Input() selectionQuantity!: number
 	@Input() selectionTresholdType!: MinMaxEqualType
 
@@ -45,7 +46,7 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Output() projectActivated: EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}>()
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<PlayableCardComponent>
 
-	_childrenCardState!: CardState
+	//_childrenCardState!: CardState
 	_displayedCards!: PlayableCardModel[] | undefined;
 	_activateTwiceRemaining: number = 0
 	private selectedCardList: PlayableCardModel[] = [];

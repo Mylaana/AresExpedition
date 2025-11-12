@@ -52,7 +52,7 @@ export class EventStateDeserializerService{
 						being used due to eventstate saving triggerred by first built card*/
 						if(dto.t===EventStateTypeEnum.builderDevelopemntLocked){
 							if(i===1 && content.s[i].cc===undefined){
-								eventBuilder.setFirstCardBuilt()
+								//eventBuilder.setFirstCardBuilt()
 								//eventBuilder.cardBuilder[i].setBSuilderIsLocked(false)
 								continue
 							}

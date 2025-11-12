@@ -51,7 +51,6 @@ export class ProjectCardCostService {
 	}
 	private setCanBePlayed(){
 		this.canBePlayed = this.checkCanBePlayed()
-		//console.trace(this.canBePlayed, this.megacreditsAvailable)
 	}
 	private checkCanBePlayed(): boolean {
 		if(this.megacreditsAvailable < this.projectCard.cost){return false}

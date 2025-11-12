@@ -144,7 +144,9 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.setBuildable()
 	}
 	updateDiscount(){
-		this.projectCardCostService.setBuilderDiscount(this.buildDiscount)
+		if(this.buildDiscount){
+			this.projectCardCostService.setBuilderDiscount(this.buildDiscount)
+		}
 		this.setBuildable()
 	}
 	private fillTagId(tagsId:number[]): number[] {
@@ -174,7 +176,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	private updateplayerState(state: PlayerStateModel): void {
 		if(!state){return}
 		this.playerState = state
-		this.projectCardCostService.setBuilderDiscount(this.buildDiscount)
+		//this.updateDiscount()
 		this.projectCardCostService.onClientStateUpdate(state)
 		this.updateVpScalingServiceState()
 		this.updateDiscount()

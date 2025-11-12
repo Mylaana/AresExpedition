@@ -10,6 +10,7 @@ import { Utils } from '../../../../utils/utils';
 import { MinMaxEqualType } from '../../../../types/global.type';
 import { EventHandler } from '../../../../models/core-game/handlers.model';
 import { ListBehavior, ProjectListType } from '../../../../types/project-card.type';
+import { CardSelector } from '../../../../interfaces/global.interface';
 
 @Component({
 	selector: 'app-playable-card-list-wrapper',
@@ -30,9 +31,11 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	destroy$ = new Subject<void>()
 	_cardList!: PlayableCardModel[]
 	_initialCardState!: CardState
+	_currentCardState!: CardState
 	_selectionTresholdType!: MinMaxEqualType
 	_selectionQuantity!: number
 	_builderDiscount!: number
+	_listType!: ProjectListType
 	
 	constructor(
 		private gameStateService: GameStateFacadeService,
@@ -43,10 +46,12 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		switch(this.listBehavior){
 			case('selector'):{
 				this.gameStateService.currentEventSelector.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventSelectorUpdate(event))
+				this._listType = 'selector'
 				break
 			}
 			case('builder'):{
 				this.gameStateService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventBuilderUpdate(event))
+				this._listType = 'builderSelector'
 				break
 			}
 		}
@@ -61,13 +66,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			this.resetState()
 			return
 		}
-		let selector = event.getCardSelector()
-		this._cardList = selector.selectFrom
-		if(selector.cardInitialState){
-			this._initialCardState = Utils.toFullCardState(selector.cardInitialState)
-		}
-		this._selectionQuantity = selector.selectionQuantity
-		this._selectionTresholdType = selector.selectionQuantityTreshold
+		this.setSelectorPart(event.getCardSelector())
 		console.log('selector:',event)
 	}
 	onEventBuilderUpdate(event: EventCardBuilder | null){
@@ -76,15 +75,20 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			this.resetState()
 			return
 		}
-		let selector = event.getCardSelector()
+		this.setSelectorPart(event.getCardSelector())
+		this._builderDiscount = event.getCurrentBuilderDiscount()
+		console.log('builder:', event)
+	}
+	setSelectorPart(selector: CardSelector){
 		this._cardList = selector.selectFrom
 		if(selector.cardInitialState){
 			this._initialCardState = Utils.toFullCardState(selector.cardInitialState)
 		}
+		if(selector.stateFromParent){
+			this._currentCardState = Utils.toFullCardState(selector.stateFromParent)
+		}
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
-		this._builderDiscount = event.getCurrentBuilderDiscount()
-		console.log('builder:', event)
 	}
 	resetState(){
 		this._cardList = []

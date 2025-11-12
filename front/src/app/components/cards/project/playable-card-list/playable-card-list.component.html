@@ -5,7 +5,7 @@
 	<div class="wrapper-cards"
 		[ngClass]="listType">
 		<app-playable-card #projectCardComponent *ngFor="let card of _displayedCards"
-			[stateFromParent]="_childrenCardState"
+			[stateFromParent]="currentChildrenCardState"
 			[projectCard]="card"
 			[initialState]="initialChildrenCardState"
 			[buildDiscount]="buildDiscount"
