@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventBaseModel, EventCardBuilder, CardBuilder } from '../../../models/core-game/event.model';
+import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../project/playable-card-list/playable-card-list.component';
 import { EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
@@ -12,6 +12,9 @@ import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type
 import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayableCard } from '../../../factory/playable-card.factory';
+import { CardBuilder } from '../../../models/core-game/card-builder.model';
+import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
+import { fadeIn } from '../../../animations/animations';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
 
@@ -24,7 +27,8 @@ type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | '
 		CardBuilderAlternativeCostComponent
     ],
     templateUrl: './card-builder.component.html',
-    styleUrl: './card-builder.component.scss'
+    styleUrl: './card-builder.component.scss',
+	animations: [fadeIn]
 })
 export class CardBuilderComponent implements OnInit, OnDestroy{
 	@Input() cardBuilder!: CardBuilder
@@ -36,20 +40,22 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	@Output() alternativePayButtonClicked: EventEmitter<NonEventButton> = new EventEmitter<NonEventButton>()
 	@ViewChildren('altCost') alternativeCost!: QueryList<CardBuilderAlternativeCostComponent>
 
-	@Input() event!: EventBaseModel
-	@Input() eventId!: number
-
 	currentEvent!: EventCardBuilder
 
 	_lockBuilder!: NonEventButton
 	_hasAlternativeCost: boolean = false
+	_hoveredBackground = false
+	_hoveredButtons = false
+
 	private destroy$ = new Subject<void>
-	constructor(private gameState: GameStateFacadeService){
+	constructor(
+		private gameState: GameStateFacadeService,
+		private cardBuilderEventService: CardBuilderEventHandlerService
+	){
 
 	}
 	ngOnInit(): void {
 		this._lockBuilder = ButtonDesigner.createNonEventButton('lockBuilder')
-		this.gameState.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(() => this.updateAlternativeCostButtonsEnabled())
 		this.gameState.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this._hasAlternativeCost = PlayableCard.getAlternativePayActiveCodeList(state).length > 0)
 	}
 	ngOnDestroy(): void {
@@ -57,8 +63,7 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 		this.destroy$.complete()
 	}
 	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
-		this.cardBuilderListButtonClicked.emit(button)
-		this.updateAlternativeCostButtonsEnabled()
+		this.cardBuilderEventService.onCardBuilderButtonClicked(button)
 	}
 	public hasOptionButton(): boolean {
 		return [BuilderOption.drawCard, BuilderOption.gain6MC].includes(this.cardBuilder.getOption())
@@ -97,6 +102,10 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 		}
 	}
 	getAlernativeCostButtonUsed(): NonEventButtonNames[]{
-		return (this.event as EventCardBuilder).getAlternativeCostUsed()
+		return []
+		//return (this.event as EventCardBuilder).getAlternativeCostUsed()
+	}
+	displayButtons(): boolean {
+		return (this.cardBuilder.getButtons()[2].isEnabled() || this.cardBuilder.getButtons()[3].isEnabled()) && !(this._hoveredBackground && !this._hoveredButtons)
 	}
 }

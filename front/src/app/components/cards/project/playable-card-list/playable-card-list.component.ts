@@ -133,7 +133,7 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	}
 	
 	private applyDiscount(event?: EventCardBuilder): void {
-		this._buildDiscount = event?.buildDiscountValue??0 + this.selectedDiscount
+		//this._buildDiscount = event?.buildDiscountValue??0 + this.selectedDiscount
 		this.childrenUpdateCost()
 	}
 	private childrenUpdateCost(): void {

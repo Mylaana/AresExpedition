@@ -7,8 +7,9 @@ import { GameStateFacadeService } from '../../../services/game-state/game-state-
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
-import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
+import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
+import { CardBuilder } from '../../../models/core-game/card-builder.model';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',
@@ -88,13 +89,13 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
 		switch(button.name){
 			case('alternativePayAnaerobicMicroorganisms'):{
-				builderEvent.buildDiscountValue += 10
+				//builderEvent.buildDiscountValue += 10
 				builderEvent.onAlternativeCostUse(button.name)
 				this._used.push(button.name)
 				break
 			}
 			case('alternativePayRestructuredResources'):{
-				builderEvent.buildDiscountValue += 5
+				//builderEvent.buildDiscountValue += 5
 				builderEvent.onAlternativeCostUse(button.name)
 				this._used.push(button.name)
 				break

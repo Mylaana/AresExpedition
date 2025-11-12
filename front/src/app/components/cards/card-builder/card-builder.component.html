@@ -6,40 +6,44 @@
 			<app-playable-card-list
 				*ngIf="cardBuilder.getSelectedCard()"
 				[ngClass]="['play-card-zone-list']"
-				[cardList]="[cardBuilder.getSelectedCard()]"
+				[cardList]="cardBuilder.getSelectedCardAsList()"
 				[listType]="'builderSelectedZone'"
 				[selectedDiscount]="discount">
 			</app-playable-card-list>
 		</div>
 		<div [ngClass]="['wrapper-buton-zone', cardSize]"
 			*ngIf="!cardBuilder.getBuilderIsLocked()">
-			<div [ngClass]="['wrapper-buttons', cardSize]">
-				<div *ngIf="cardBuilder.getButtons()[0].isEnabled() || cardBuilder.getButtons()[1].isEnabled()" class="wrapper-select-button">
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].isEnabled()" [button]="cardBuilder.getButtons()[0]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[1].isEnabled()" [button]="cardBuilder.getButtons()[1]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
-				</div>
-				<div *ngIf="cardBuilder.getButtons()[2].isEnabled() || cardBuilder.getButtons()[3].isEnabled()" class="wrapper-build-button">
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
-				</div>
+			<div class="buttons-hider"
+			(mouseenter)="_hoveredBackground=true"
+			(mouseleave)="_hoveredBackground=false"></div>
+			<div [ngClass]="['wrapper-buttons', cardSize]"
+				@fadeIn
+				*ngIf="displayButtons()"
+				(mouseenter)="_hoveredButtons=true"
+				(mouseleave)="_hoveredButtons=false">
+				<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [context]="'builderButton'" [cardSize]="cardSize" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
+				<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [context]="'builderButton'" [cardSize]="cardSize" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
 			</div>
-			<ng-container *ngIf="hasOptionButton()">
-				<div [ngClass]="['inner-decoration--separator', cardSize]"></div>
-				<div class="wrapper-alternative">
-					<div class="wrapper-alternative-inner">
-						<h2>Or</h2>
-						<div [ngClass]="['wrapper-buttons', cardSize]">
-							<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
+			<span class="buttons-filler"
+				*ngIf="!displayButtons()"></span>
+			<!--
+				<ng-container *ngIf="hasOptionButton()">
+					<div [ngClass]="['inner-decoration--separator', cardSize]"></div>
+					<div class="wrapper-alternative">
+						<div class="wrapper-alternative-inner">
+							<h2>Or</h2>
+							<div [ngClass]="['wrapper-buttons', cardSize]">
+								<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</ng-container>
+				</ng-container>
+			-->
 		</div>
 	</div>
 	<app-card-builder-alternative-cost
 		#altCost
 		*ngIf="!cardBuilder.getBuilderIsLocked() && _hasAlternativeCost"
-		[event]="event"
 		[builder]="cardBuilder"
 		[cardSize]="cardSize"
 		(buttonClicked)="onAlternativePayButtonClicked($event)">

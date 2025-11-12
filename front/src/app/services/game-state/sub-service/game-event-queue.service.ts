@@ -101,6 +101,7 @@ export class GameEventQueueService {
         this.clientState = clientState
     }
     private updateEventQueue(queue: EventBaseModel[]){
+        console.log('update queue:', queue)
         this.updateSpecificEventSubjects(queue)
 		this._eventQueue$.next(queue)
 	}
@@ -110,7 +111,7 @@ export class GameEventQueueService {
 			: null
 	}
 	private toEventCardSelector(event: EventBaseModel): EventBaseCardSelector | null {
-		return event?.hasSelector() && event?.hasCardBuilder()===false
+        return event?.hasSelector() && event?.hasCardBuilder()===false
 			? (event as EventBaseCardSelector)
 			: null
 	}

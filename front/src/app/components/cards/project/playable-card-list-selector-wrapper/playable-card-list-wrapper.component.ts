@@ -67,6 +67,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		}
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
+		console.log('selector:',event)
 	}
 	onEventBuilderUpdate(event: EventCardBuilder | null){
 		this._currentEvent = event
@@ -81,6 +82,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		}
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
+		console.log('builder:', event)
 	}
 	resetState(){
 		this._cardList = []

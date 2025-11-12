@@ -16,4 +16,4 @@ export type ResearchPhaseType = "research_base" | "researchAbilityOnly" | Resear
 export type ResearchUpgradeType = "research_scan2_keep2" | "research_scan6_keep1"
 
 export type OtherBuilderType = 'specialBuilder'
-export type BuilderType = DevelopmentPhaseType | ConstructionPhaseType | OtherBuilderType
+//export type BuilderType = DevelopmentPhaseType | ConstructionPhaseType | OtherBuilderType

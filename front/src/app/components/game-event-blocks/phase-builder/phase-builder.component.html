@@ -10,8 +10,7 @@
 	[listBehavior]="'builder'"
 	(onSelectionUpdateForBuilderEvent)="onSelectionUpdate($event)">
 </app-playable-card-list-wrapper>
-<app-hexed-background  *ngIf="_currentEvent && _currentEvent.getSelectionActive()"
+<app-hexed-background  *ngIf="isSelectionActive()"
 	@fadeIn
 	[autoFillHexSize]="'large'">
 </app-hexed-background>
-<p>{{_currentEvent?.getCardSelector()?.cardInitialState | json}}</p>

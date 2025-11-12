@@ -1,10 +1,9 @@
 import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter, OnChanges, ViewChildren, QueryList} from '@angular/core';
 import { CardBuilderComponent } from '../card-builder/card-builder.component';
 import { CommonModule } from '@angular/common';
-import { CardBuilder, EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { SettingCardSize } from '../../../types/global.type';
-import { PlayableCardModel } from '../../../models/cards/project-card.model';
+import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 
 @Component({
     selector: 'app-card-builder-list',
@@ -36,13 +35,8 @@ export class CardBuilderListComponent implements OnInit, OnChanges{
 		this.currentEvent = this.event as EventCardBuilder
 	}
 	public onCardBuilderButtonClicked(button:EventCardBuilderButton): void {
-		this.currentEvent.cardBuilderIdHavingFocus = button.parentCardBuilderId
-		this.cardBuilderButtonClicked.emit(button)
-		if(button.name==='buildCard'){
-			for(let b of this.builders){
-				b.updateAlternativeCostButtonsEnabled()
-			}
-		}
+		console.log(button)
+		return
 	}
 	public onAlternativePayButtonClicked(button: NonEventButton): void {
 		this.alternativePayButtonClicked.emit(button)

@@ -15,6 +15,7 @@ import { PlayableCardListWrapperComponent } from '../../cards/project/playable-c
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { ProjectListType } from '../../../types/project-card.type';
 import { EventHandler } from '../../../models/core-game/handlers.model';
+import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
 
 @Component({
   selector: 'app-phase-builder',
@@ -41,20 +42,19 @@ export class PhaseBuilderComponent{
 
 	constructor(
 		private gameParam: GameParamService,
-		private gameState: GameStateFacadeService,
-		private eventHandler: EventHandler
+		private cardBuilderHandlerService: CardBuilderEventHandlerService
 	){}
 
 	ngOnInit(): void {
 		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
-		this.gameState.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onBuilderEventUpdate(event))
+		this._currentEvent = this.cardBuilderHandlerService._currentEvent
+
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
 	public onEventCardBuilderListButtonClicked(output: any){
-		this.cardBuilderButtonClicked.emit(output)
 		this.cardListSelector.updateDiscount(this._currentEvent as EventCardBuilder)
 		this.cardListSelector.updateCardList()
 	}
@@ -64,14 +64,12 @@ export class PhaseBuilderComponent{
 	public onAlternativePayButtonClicked(button: NonEventButton){
 		this.cardListSelector.updateDiscount(this._currentEvent as EventCardBuilder)
 	}
-	private onBuilderEventUpdate(event: EventCardBuilder | null){
-		this._currentEvent = event
-		if(!event){
-			return
-		}
+	public onSelectionUpdate(input:  {selected: PlayableCardModel[], listType: ProjectListType}){
+		if(input.selected.length===0){return}
+		this.cardBuilderHandlerService.applySelection(input.selected[0])
 	}
-	onSelectionUpdate(input:  {selected: PlayableCardModel[], listType: ProjectListType}){
-		console.log('selection:', input.selected[0])
-		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+	isSelectionActive(): boolean {
+		if(!this._currentEvent){return false}
+		return this._currentEvent.getSelectionActive()
 	}
 }

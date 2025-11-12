@@ -1,7 +1,8 @@
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin, MoonTile } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
-import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
+import { CardBuilder } from "../../models/core-game/card-builder.model"
+import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
 import { GameTextService } from "../../services/core-game/game-text.service"
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
 import { MinMaxEqualType, TagType } from "../../types/global.type"
@@ -622,8 +623,11 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
 
+	event.initialize()
+	/*
     event.buildDiscountValue = buildDiscountValue
     event.buildDiscountUsed = false
+	*/
 
     return event
 }

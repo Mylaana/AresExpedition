@@ -188,8 +188,6 @@ export class ButtonDesigner{
         for(let i=0; i<buttonCount; i++){
             let button = new EventCardBuilderButton
                 switch(i){
-                    case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
-                    case(1):{button.name='cancelSelectCard';button.caption='$other_cancel$';break}
                     case(2):{button.name='buildCard';button.caption='$other_validate$';break}
 					case(3):{button.name='discardSelectedCard';button.caption='$other_cancel$';break}
                 }

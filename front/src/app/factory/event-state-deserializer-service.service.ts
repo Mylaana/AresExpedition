@@ -60,8 +60,10 @@ export class EventStateDeserializerService{
 
 						//default
 						eventBuilder.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
+						/*
 						eventBuilder.alternativeCostUsedButtonName = dto.v['ac']
 						eventBuilder.buildDiscountValue = dto.v['d']
+						*/
 					}
 				}
 				break
