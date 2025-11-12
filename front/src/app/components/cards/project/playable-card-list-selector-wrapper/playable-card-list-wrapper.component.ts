@@ -32,6 +32,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	_initialCardState!: CardState
 	_selectionTresholdType!: MinMaxEqualType
 	_selectionQuantity!: number
+	_builderDiscount!: number
 	
 	constructor(
 		private gameStateService: GameStateFacadeService,
@@ -82,6 +83,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		}
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
+		this._builderDiscount = event.getCurrentBuilderDiscount()
 		console.log('builder:', event)
 	}
 	resetState(){

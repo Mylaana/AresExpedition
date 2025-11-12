@@ -9,7 +9,7 @@ export class ProjectCardCostService {
 	private projectCard!: PlayableCardModel
 	private clientState!: PlayerStateModel
 
-	private discount: number =0
+	private discount: number = 0
 	private canBePlayed: boolean = false
 
 	private megacreditsAvailable: number = 0

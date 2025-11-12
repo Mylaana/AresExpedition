@@ -15,7 +15,7 @@ import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/even
     styleUrl: './card-builder-list.component.scss'
 })
 export class CardBuilderListComponent implements OnInit, OnChanges{
-	@Input() event!: EventBaseModel
+	@Input() event!: EventCardBuilder
 	@Input() eventId!: number
 	@Input() cardSize!: SettingCardSize
 	@Output() cardBuilderButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()

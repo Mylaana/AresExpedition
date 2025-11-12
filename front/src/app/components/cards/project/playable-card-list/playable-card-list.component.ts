@@ -2,10 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { NonSelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { CardState } from '../../../../interfaces/card.interface';
-import { CardSelector,  } from '../../../../interfaces/global.interface';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
-import { EventBaseModel, EventCardActivator, EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
-import { Utils } from '../../../../utils/utils';
+import { EventCardBuilder, EventCardSelector } from '../../../../models/core-game/event.model';
 import { PlayableCardComponent } from '../playable-card/playable-card.component';
 import { ActivationOption, ListBehavior, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 import { EventUnionSubTypes } from '../../../../types/event.type';
@@ -30,9 +28,9 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Input() listBehavior: ListBehavior = 'display'
 	@Input() listType: ProjectListType = 'none'
 	@Input() listSubType: ProjectListSubType = 'none'
-	@Input() selectedDiscount: number = 0
 	@Input() notClientState!: PlayerStateModel | undefined
 	@Input() initialChildrenCardState!: CardState
+	@Input() buildDiscount: number = 0
 	
 	//selection related unputs
 	@Input() selectionQuantity!: number
@@ -47,7 +45,6 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Output() projectActivated: EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}>()
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<PlayableCardComponent>
 
-	_buildDiscount: number = 0
 	_childrenCardState!: CardState
 	_displayedCards!: PlayableCardModel[] | undefined;
 	_activateTwiceRemaining: number = 0
@@ -108,43 +105,24 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		this.updateSelectedCardList.emit({selected:this.selectedCardList, listType: this.listType})
 	}
 	private setDisplay(): void {
-		this._displayedCards = this.cardList
-		return
-
-		switch(this.listType){
-			case('builderSelector'):{
-				//this.applyDiscount(this.event as EventCardBuilder)
-				//this._displayedCards = this._cardSelector.selectFrom
-				break
-			}
-			case('builderSelectedZone'):{
-				this.applyDiscount()
-				this._displayedCards = this.cardList
-				break
-			}
-			case('selector'):case('playedSelector'):{
-				//this._displayedCards = this._cardSelector.selectFrom
-				break
-			}
-			default:{
-				this._displayedCards = this.cardList
-			}
+		if(this.buildDiscount){
+			this.applyDiscount()
 		}
+		this._displayedCards = this.cardList
 	}
 	
-	private applyDiscount(event?: EventCardBuilder): void {
-		//this._buildDiscount = event?.buildDiscountValue??0 + this.selectedDiscount
+	private applyDiscount(): void {
 		this.childrenUpdateCost()
 	}
 	private childrenUpdateCost(): void {
 		if(this.projectCards===undefined){return}
 		for(let card of this.projectCards){
-			card.buildDiscount = this._buildDiscount
+			card.buildDiscount = this.buildDiscount
 			card.updateDiscount()
 		}
 	}
 	public updateDiscount(event: EventCardBuilder): void {
-		this.applyDiscount(event)
+		this.applyDiscount()
 	}
 	public updateCardList(): void {
 		this.setDisplay()

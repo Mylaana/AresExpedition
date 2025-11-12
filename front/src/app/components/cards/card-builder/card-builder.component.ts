@@ -51,9 +51,7 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	constructor(
 		private gameState: GameStateFacadeService,
 		private cardBuilderEventService: CardBuilderEventHandlerService
-	){
-
-	}
+	){}
 	ngOnInit(): void {
 		this._lockBuilder = ButtonDesigner.createNonEventButton('lockBuilder')
 		this.gameState.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this._hasAlternativeCost = PlayableCard.getAlternativePayActiveCodeList(state).length > 0)

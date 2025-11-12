@@ -97,7 +97,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.projectCardVpService.initialize(this.projectCard)
 		this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
 		this._hasScalingProduction = PlayableCard.hasScalingProduction(this.projectCard.cardCode)
-
+		
 		// fills tagUrl
 		for(let i = 0; i < this.projectCard.tagsId.length; i++) {
 			this.projectCard.tagsUrl.push(GlobalInfo.getUrlFromID(this.projectCard.tagsId[i]))

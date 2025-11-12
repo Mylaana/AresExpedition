@@ -1,9 +1,9 @@
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin, MoonTile } from "../../interfaces/global.interface"
+import { BUILDER_LIST_CONFIG } from "../../maps/card-builder-maps"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { CardBuilder } from "../../models/core-game/card-builder.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
-import { GameTextService } from "../../services/core-game/game-text.service"
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
 import { MinMaxEqualType, TagType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
@@ -476,11 +476,8 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
 
     return event
 }
-function generateCardBuilder(builderId:number, option?:BuilderOption): CardBuilder {
-    let builder = new CardBuilder
-    builder.addButtons(ButtonDesigner.createEventCardBuilderButton(builderId, option))
-    option?builder.setOption(option):null
-    return builder
+function generateCardBuilder(builderType: BuilderType, option?:BuilderOption): CardBuilder[] {
+	return BUILDER_LIST_CONFIG[builderType](option)
 }
 function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType, builderOption?: BuilderOption): EventCardBuilder {
     let event = new EventCardBuilder
@@ -491,7 +488,9 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	event.builderType = builderType
 
-    let buildDiscountValue = 0
+    //let buildDiscountValue = 0
+	event.cardBuilder = generateCardBuilder(builderType, builderOption)
+	/*
     switch(builderType){
         case('developmentAbilityOnly'):{
             event.cardBuilder.push(generateCardBuilder(0))
@@ -605,6 +604,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
 		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}
     }
+	*/
 
     switch(subType){
         case('developmentPhaseBuilder'):{

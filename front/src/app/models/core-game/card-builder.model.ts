@@ -90,6 +90,7 @@ export class CardBuilder {
             }
             case('buildCard'):case(BuilderOption.drawCard):case(BuilderOption.gain6MC):{
                 this.setBuilderIsLocked()
+                this.discount = 0
                 break
             }
         }
@@ -140,5 +141,8 @@ export class CardBuilder {
     }
     removeDiscount(){
         this.discount = 0
+    }
+    getDiscount(): number {
+        return this.discount
     }
 }

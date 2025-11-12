@@ -274,6 +274,9 @@ export class EventCardBuilder extends EventBaseCardSelector {
         return []
 		//return this.alternativeCostUsedButtonName
 	}
+    getCurrentBuilderDiscount(): number {
+        return this.currentBuilder.getDiscount()
+    }
 }
 
 /*

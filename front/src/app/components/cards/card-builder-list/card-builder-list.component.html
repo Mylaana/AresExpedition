@@ -1,9 +1,9 @@
-
 <app-card-builder *ngFor="let builder of currentEvent.cardBuilder"
 	#builder
 	[cardBuilder]="builder"
 	[projectFilter]="currentEvent.getSelectorFilter()"
 	[cardSize]="cardSize"
+	[discount]="event.getCurrentBuilderDiscount()"
 	(cardBuilderListButtonClicked)="onCardBuilderButtonClicked($event)"
 	(alternativePayButtonClicked)="onAlternativePayButtonClicked($event)">
 </app-card-builder>

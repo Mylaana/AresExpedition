@@ -7,8 +7,8 @@
 				*ngIf="cardBuilder.getSelectedCard()"
 				[ngClass]="['play-card-zone-list']"
 				[cardList]="cardBuilder.getSelectedCardAsList()"
-				[listType]="'builderSelectedZone'"
-				[selectedDiscount]="discount">
+				[buildDiscount]="discount"
+				[listType]="'builderSelectedZone'">
 			</app-playable-card-list>
 		</div>
 		<div [ngClass]="['wrapper-buton-zone', cardSize]"
