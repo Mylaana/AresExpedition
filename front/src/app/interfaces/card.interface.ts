@@ -7,7 +7,7 @@ export interface CardState{
 	selected: boolean
 	upgradable: boolean
 	upgraded: boolean
-	buildable: boolean
+	//buildable: boolean
 	activable: boolean
 	ignoreCost: boolean
 }

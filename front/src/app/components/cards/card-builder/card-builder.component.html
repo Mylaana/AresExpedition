@@ -17,16 +17,17 @@
 			(mouseenter)="_hoveredBackground=true"
 			(mouseleave)="_hoveredBackground=false"></div>
 			<div [ngClass]="['wrapper-buttons', cardSize]"
-				@fadeIn
+				@fadeOut
 				*ngIf="displayButtons()"
 				(mouseenter)="_hoveredButtons=true"
 				(mouseleave)="_hoveredButtons=false">
 				<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [context]="'builderButton'" [cardSize]="cardSize" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
 				<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [context]="'builderButton'" [cardSize]="cardSize" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
 			</div>
-			<span class="buttons-filler"
-				*ngIf="!displayButtons()"></span>
 			<!--
+			<span class="buttons-filler"
+				*ngIf="!displayButtons()">
+			</span>
 				<ng-container *ngIf="hasOptionButton()">
 					<div [ngClass]="['inner-decoration--separator', cardSize]"></div>
 					<div class="wrapper-alternative">

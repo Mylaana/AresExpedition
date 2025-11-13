@@ -28,12 +28,15 @@ export const BUILDER_LIST_CONFIG: Record<BuilderType, (builderOption?: BuilderOp
         configBuilder('developmentAbilityOnly', builderOption)
     ],
     'construction_base':(builderOption) => [
-        configBuilder('construction_base', builderOption)
+        configBuilder('construction_base'),
+        configBuilder('construction_base')
     ],
     'construction_6mc':(builderOption) => [
+        configBuilder('construction_base'),
         configBuilder('construction_6mc', builderOption)
     ],
     'construction_draw_card':(builderOption) => [
+        configBuilder('construction_base'),
         configBuilder('construction_draw_card', builderOption)
     ],
     'constructionAbilityOnly':(builderOption) => [

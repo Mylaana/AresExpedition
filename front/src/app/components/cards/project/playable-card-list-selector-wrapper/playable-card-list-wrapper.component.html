@@ -3,12 +3,14 @@
     *ngIf="_currentEvent && _cardList"
     [listBehavior]="listBehavior"
     [initialChildrenCardState]="_initialCardState"
-    [currentChildrenCardState]="_currentCardState"
     [cardList]="_cardList"
     [listType]="_listType"
     [listSubType]="_currentEvent.subType==='doubleProduction'?'repeatProduction':'none'"
+    [authorizeSelection]="_authorizeSelection"
     [selectionQuantity]="_selectionQuantity"
     [selectionTresholdType]="_selectionTresholdType"
     [buildDiscount]="_builderDiscount"
     (updateSelectedCardList)="onUpdateSelectedCardList($event)">
 </app-playable-card-list>
+<p>{{listBehavior}} </p>
+<p>. auth: {{_authorizeSelection}}</p>

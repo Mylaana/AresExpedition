@@ -1,6 +1,6 @@
 import { BuilderOption } from "../../enum/global.enum"
 import { CardState } from "../../interfaces/card.interface"
-import { ButtonGroupUpdateType, EventCardBuilderButtonNames } from "../../types/global.type"
+import { ButtonGroupUpdateType, ButtonNames, EventCardBuilderButtonNames } from "../../types/global.type"
 import { PlayableCardModel } from "../cards/project-card.model"
 import { EventCardBuilderButton } from "./button.model"
 
@@ -12,6 +12,7 @@ export class CardBuilder {
     private builderIsLocked: boolean = false
     private firstCardBuilt: boolean = false
     private discount: number = 0
+    private alternativeCostUsed: ButtonNames[] = []
 
     addButtons(buttons: EventCardBuilderButton[]): void {
         this.buttons = buttons
@@ -108,6 +109,7 @@ export class CardBuilder {
         return [this.selectedCard]
     }
     removeSelectedCard(): void {
+        console.log('remove', this.selectedCard)
         this.selectedCard = undefined
     }
     setBuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
@@ -144,5 +146,8 @@ export class CardBuilder {
     }
     getDiscount(): number {
         return this.discount
+    }
+    getAlternativeCostUsed(): ButtonNames[]{
+        return this.alternativeCostUsed
     }
 }

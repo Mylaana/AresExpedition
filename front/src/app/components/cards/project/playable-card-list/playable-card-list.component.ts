@@ -30,8 +30,9 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Input() listSubType: ProjectListSubType = 'none'
 	@Input() notClientState!: PlayerStateModel | undefined
 	@Input() initialChildrenCardState!: CardState
-	@Input() currentChildrenCardState!: CardState
+	//@Input() currentChildrenCardState!: CardState
 	@Input() buildDiscount: number = 0
+	@Input() authorizeSelection: boolean = false
 	
 	//selection related inputs
 	@Input() selectionQuantity!: number
@@ -67,6 +68,10 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		}
 	}
 	ngOnChanges(changes: SimpleChanges) {
+		if (changes['cardList'] && changes['cardList'].currentValue) {
+			this.updateCardList()
+			return
+		}
 		if (changes['cardList'] && changes['cardList'].currentValue) {
 			this.updateCardList()
 			return

@@ -179,7 +179,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
             }
         }
     }
-    getCardToBuildId(): PlayableCardModel | undefined {
+    getCardToBuild(): PlayableCardModel | undefined {
 		if(!this.currentBuilder){return}
         return this.currentBuilder.getSelectedCard()
     }
@@ -236,6 +236,9 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.eventIsComplete = true
         this.cardSelector.stateFromParent = Utils.toFullCardState({})
     }
+    isComplete(): boolean {
+        return this.eventIsComplete
+    }
 	override onSwitch(): void {
 		//reset cardBuilder's selection onSwitch
 		for(let builder of this.cardBuilder){
@@ -263,6 +266,9 @@ export class EventCardBuilder extends EventBaseCardSelector {
 	}
     getCurrentBuilderDiscount(): number {
         return this.currentBuilder.getDiscount()
+    }
+    lockCurrentBuilder(){
+        this.currentBuilder.setBuilderIsLocked()
     }
 }
 

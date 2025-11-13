@@ -101,7 +101,7 @@ export class GameEventQueueService {
         this.clientState = clientState
     }
     private updateEventQueue(queue: EventBaseModel[]){
-        console.log('update queue:', queue)
+        //console.log('update queue:', queue)
         this.updateSpecificEventSubjects(queue)
 		this._eventQueue$.next(queue)
 	}

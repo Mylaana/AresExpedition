@@ -10,6 +10,7 @@ import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
+import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',
@@ -21,22 +22,25 @@ import { CardBuilder } from '../../../models/core-game/card-builder.model';
   styleUrl: './card-builder-alternative-cost.component.scss'
 })
 export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, OnDestroy{
-	@Input() event!: EventBaseModel
 	@Input() locked!: boolean //should be true when first builder isnt locked
 	@Output() buttonClicked = new  EventEmitter<any>()
 	@Input() builder!: CardBuilder
 	@Input() cardSize!: SettingCardSize
-	_buttons: NonEventButton[] = []
+	_buttons: NonEventButton[] = this.cardBuilderEventService._alternativeCostButtons
 	_used: NonEventButtonNames[] = []
 
 	private alreadyUsedButtons: NonEventButtonNames[] = []
 	private destroy$ = new Subject<void>
 	private clientState!: PlayerStateModel
 
-	constructor(private gameStateService: GameStateFacadeService){}
+	constructor(
+		private gameStateService: GameStateFacadeService,
+		private cardBuilderEventService: CardBuilderEventHandlerService
+	){}
+
 	ngOnInit(): void {
-		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
 		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(() => this.onEventQueueUpdate())
+		this.cardBuilderEventService.currentAlternativeCostUnlocked.pipe(takeUntil(this.destroy$)).subscribe(e => this.onEventQueueUpdate())
 	}
 	ngOnChanges(changes: SimpleChanges): void {
 		if(changes['locked'] && changes['locked'].currentValue){
@@ -62,11 +66,13 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		}
 	}
 	public updateButtonEnabled(){
+		/*
 		this.alreadyUsedButtons = (this.event as EventCardBuilder).getAlternativeCostUsed()
 		this.updateButtonList()
 		for(let b of this._buttons){
 			b.setEnabled(this.getButtonEnabled(b))
 		}
+		*/
 	}
 	private getButtonEnabled(button: NonEventButton): boolean {
 		if(this.locked){return false}
@@ -83,6 +89,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		this.updateButtonEnabled()
 	}
 	onButtonClicked(button: NonEventButton){
+		/*
 		let events = PlayableCard.getAlternativePayButtonClickedEvents(button.name)
 		if(events.length===0){return}
 		this.gameStateService.addEventQueue(events, 'first')
@@ -103,10 +110,14 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		}
 		this.updateButtonEnabled()
 		this.buttonClicked.emit(button)
+		*/
 	}
 	getAlternativePayLocked(): boolean {
+		return false
+		/*
 		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
 		if(builderEvent.hasSelectorCardSelected()===true){return true}
 		return !builderEvent.cardBuilder[0].getBuilderIsLocked() && builderEvent.cardBuilder[0] != this.builder
+		*/
 	}
 }

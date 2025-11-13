@@ -56,7 +56,7 @@ export class PhaseCardModel {
 			selected: false,
 			upgradable: false,
 			upgraded: this.phaseCardUpgraded,
-			buildable: false,
+			//buildable: false,
 			activable: false,
 			ignoreCost: false
 		}

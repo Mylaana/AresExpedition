@@ -11,6 +11,7 @@ import { MinMaxEqualType } from '../../../../types/global.type';
 import { EventHandler } from '../../../../models/core-game/handlers.model';
 import { ListBehavior, ProjectListType } from '../../../../types/project-card.type';
 import { CardSelector } from '../../../../interfaces/global.interface';
+import { CardBuilderEventHandlerService } from '../../../../services/core-game/card-builder-event-handler.service';
 
 @Component({
 	selector: 'app-playable-card-list-wrapper',
@@ -26,9 +27,10 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	@Output() onSelectionUpdateForBuilderEvent = new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
 	@ViewChild('cardList') cardListChild!: PlayableCardListComponent
 	
-
-	_currentEvent!: EventBaseCardSelector | null
 	destroy$ = new Subject<void>()
+	
+	_authorizeSelection: boolean = false
+	_currentEvent!: EventBaseCardSelector | null
 	_cardList!: PlayableCardModel[]
 	_initialCardState!: CardState
 	_currentCardState!: CardState
@@ -39,7 +41,8 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	
 	constructor(
 		private gameStateService: GameStateFacadeService,
-		private eventHandler: EventHandler
+		private eventHandler: EventHandler,
+		private builderService: CardBuilderEventHandlerService
 	){}
 	
 	ngOnInit(): void {
@@ -51,6 +54,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			}
 			case('builder'):{
 				this.gameStateService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventBuilderUpdate(event))
+				this.builderService.currentBuilderIsComplete.pipe(takeUntil(this.destroy$)).subscribe(v => this.onBuilderComplete(v))
 				this._listType = 'builderSelector'
 				break
 			}
@@ -67,7 +71,6 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			return
 		}
 		this.setSelectorPart(event.getCardSelector())
-		console.log('selector:',event)
 	}
 	onEventBuilderUpdate(event: EventCardBuilder | null){
 		this._currentEvent = event
@@ -77,7 +80,11 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		}
 		this.setSelectorPart(event.getCardSelector())
 		this._builderDiscount = event.getCurrentBuilderDiscount()
-		console.log('builder:', event)
+	}
+	onBuilderComplete(value: boolean){
+		if(!this._currentEvent){return}
+		if(!value){return}
+		this._authorizeSelection = false
 	}
 	setSelectorPart(selector: CardSelector){
 		this._cardList = selector.selectFrom
@@ -89,6 +96,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		}
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
+		this._authorizeSelection = selector.cardInitialState?.selectable??false
 	}
 	resetState(){
 		this._cardList = []

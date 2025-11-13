@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
+import { EventCardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../project/playable-card-list/playable-card-list.component';
 import { EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
@@ -14,7 +14,8 @@ import { Subject, takeUntil } from 'rxjs';
 import { PlayableCard } from '../../../factory/playable-card.factory';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
 import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
-import { fadeIn } from '../../../animations/animations';
+import { fadeIn, fadeInFadeOut, fadeOut } from '../../../animations/animations';
+import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
 
@@ -28,7 +29,7 @@ type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | '
     ],
     templateUrl: './card-builder.component.html',
     styleUrl: './card-builder.component.scss',
-	animations: [fadeIn]
+	animations: [fadeOut, fadeInFadeOut]
 })
 export class CardBuilderComponent implements OnInit, OnDestroy{
 	@Input() cardBuilder!: CardBuilder
@@ -49,12 +50,12 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 
 	private destroy$ = new Subject<void>
 	constructor(
-		private gameState: GameStateFacadeService,
 		private cardBuilderEventService: CardBuilderEventHandlerService
 	){}
 	ngOnInit(): void {
-		this._lockBuilder = ButtonDesigner.createNonEventButton('lockBuilder')
-		this.gameState.currentClientState.pipe(takeUntil(this.destroy$)).subscribe((state) => this._hasAlternativeCost = PlayableCard.getAlternativePayActiveCodeList(state).length > 0)
+		this.cardBuilderEventService.currentAlternativeCostUnlocked.pipe(takeUntil(this.destroy$)).subscribe(
+			unlocked => this._hasAlternativeCost = unlocked.length>0
+		)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -98,10 +99,6 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 		for(let a of this.alternativeCost){
 			a.updateButtonEnabled()
 		}
-	}
-	getAlernativeCostButtonUsed(): NonEventButtonNames[]{
-		return []
-		//return (this.event as EventCardBuilder).getAlternativeCostUsed()
 	}
 	displayButtons(): boolean {
 		return (this.cardBuilder.getButtons()[2].isEnabled() || this.cardBuilder.getButtons()[3].isEnabled()) && !(this._hoveredBackground && !this._hoveredButtons)

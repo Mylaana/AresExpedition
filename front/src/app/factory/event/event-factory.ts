@@ -469,7 +469,8 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
     event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = subType
     event.setSelectorFilter({type: ProjectFilterNameEnum.action})
-    event.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
+    //event.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
+	event.setSelectorInitialState({activable: true, selectable: false, ignoreCost:true})
     event.titleKey = 'phaseAction'
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	event.scrollToTopOnActivation = false
@@ -482,7 +483,8 @@ function generateCardBuilder(builderType: BuilderType, option?:BuilderOption): C
 function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType, builderOption?: BuilderOption): EventCardBuilder {
     let event = new EventCardBuilder
     event.setCardSelector(generateCardSelector())
-    event.setSelectorInitialState({selectable: true, buildable: true})
+    //event.setSelectorInitialState({selectable: true, buildable: true})
+	event.setSelectorInitialState({selectable: true})
     event.subType = subType
     event.cardBuilder = []
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)

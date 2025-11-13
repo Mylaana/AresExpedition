@@ -11,7 +11,6 @@ export class CardStateModel {
 			selected: false,
 			upgradable: false,
 			upgraded: false,
-			buildable: false,
 			activable: false,
 			ignoreCost: false
 		}
@@ -20,7 +19,6 @@ export class CardStateModel {
 	isSelected(): boolean {return this.currentState.selected}
 	isUpgradable(): boolean {return this.currentState.upgradable}
 	isUpgraded(): boolean {return this.currentState.upgraded}
-	isBuildable(): boolean {return this.currentState.buildable}
 	isActivable(): boolean {return this.currentState.activable}
 	isIgnoreCost(): boolean {return this.currentState.ignoreCost}
 
@@ -28,7 +26,6 @@ export class CardStateModel {
 	setSelected(value: boolean): void  {this.currentState.selected= value}
 	setUpgradable(value: boolean): void  {this.currentState.upgradable= value}
 	setUpgraded(value: boolean): void  {this.currentState.upgraded= value}
-	setBuildable(value: boolean): void  {this.currentState.buildable= value}
 	setActivable(value: boolean): void  {this.currentState.activable= value}
 	setIgnoreCost(value: boolean): void  {this.currentState.ignoreCost= value}
 
@@ -36,10 +33,7 @@ export class CardStateModel {
 
 	getCurrentState(): CardState {return this.currentState}
 	setCurrentState(state: Partial<CardState>): void {
-		//buildable doesnt get overriden
-		let buildable = this.isBuildable()
 		this.currentState = Utils.toFullCardState(state)
-		this.setBuildable(buildable)
 	}
 	getInitialState(): CardState {return this.initialState}
 	setInitialState(state: Partial<CardState>): void {
