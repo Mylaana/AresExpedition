@@ -42,6 +42,7 @@ export class CardBuilderEventHandlerService{
     private onEventUpdate(event: EventCardBuilder | null){
         this._currentEvent = event
         if(!this._currentEvent){return}
+        this.builderIsComplete$.next(this._currentEvent.isComplete())
     }
     public applySelection(card: PlayableCardModel){
         if(!this._currentEvent){return}

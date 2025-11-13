@@ -81,22 +81,27 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		this.setSelectorPart(event.getCardSelector())
 		this._builderDiscount = event.getCurrentBuilderDiscount()
 	}
-	onBuilderComplete(value: boolean){
+	onBuilderComplete(complete: boolean){
 		if(!this._currentEvent){return}
-		if(!value){return}
-		this._authorizeSelection = false
+		if(!complete){return}
+		this.setAuthorizeSelection(!complete)
 	}
 	setSelectorPart(selector: CardSelector){
 		this._cardList = selector.selectFrom
 		if(selector.cardInitialState){
 			this._initialCardState = Utils.toFullCardState(selector.cardInitialState)
 		}
+		/*
 		if(selector.stateFromParent){
 			this._currentCardState = Utils.toFullCardState(selector.stateFromParent)
 		}
+			*/
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
-		this._authorizeSelection = selector.cardInitialState?.selectable??false
+		this.setAuthorizeSelection(selector.cardInitialState?.selectable??false)
+	}
+	private setAuthorizeSelection(authorized: boolean){
+		this._authorizeSelection = authorized
 	}
 	resetState(){
 		this._cardList = []

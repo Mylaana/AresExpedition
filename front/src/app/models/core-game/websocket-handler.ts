@@ -101,7 +101,6 @@ export class WebsocketHandler {
 
 	//these two functions will need to be different cause of private datas in it or not
     private handleMessageStartedGameGroupGameState(content: WsGameState): void {
-		console.log('WEBSOCKET')
 		this.gameStateService.reset()
         this.gameStateService.clearEventQueue()
 		this.gameStateService.setSelectedPhaseList(content.selectedPhase)
