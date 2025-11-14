@@ -4,7 +4,7 @@ import { TriggerEffectEventFactory } from "./trigger-event.factoy";
 import { ActivationOption } from "../types/project-card.type";
 import { DEBUG_IGNORE_PREREQUISITES } from "../global/global-const";
 import { PlayableCardModel } from "../models/cards/project-card.model";
-import { NonEventButtonNames, StandardProjectButtonNames } from "../types/global.type";
+import { AltenativeCostButtonNames, NonEventButtonNames, StandardProjectButtonNames } from "../types/global.type";
 import { ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS, ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS, PLAY_REQUIREMENTS } from "../maps/playable-card-other-maps";
 import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION_NO_COST, ACTIVATION_SCALING_EFFECT_CAPTION, ACTIVATION_SCALING_EFFECT_VALUE } from "../maps/playable-card-activation-maps";
 import { STANDARD_PROJECT_CAPTION, STANDARD_PROJECT_COST } from "../maps/standard-project-maps";

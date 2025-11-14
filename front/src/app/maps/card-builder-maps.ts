@@ -1,6 +1,7 @@
 import { BuilderOption } from "../enum/global.enum";
 import { ButtonDesigner } from "../factory/button-designer.service";
 import { CardBuilder } from "../models/core-game/card-builder.model";
+import { NonEventButtonNames } from "../types/global.type";
 import { BuilderType } from "../types/phase-card.type";
 
 function configBuilder(builderType: BuilderType, builderOption?:BuilderOption): CardBuilder{
@@ -9,7 +10,8 @@ function configBuilder(builderType: BuilderType, builderOption?:BuilderOption): 
         builder = BUILDER_CONFIG[builderType](builder, builderOption)
     }
     builderOption?builder.setOption(builderOption):null
-    builder.addButtons(ButtonDesigner.createEventCardBuilderButton(0, builderOption))
+    builder.addButton(ButtonDesigner.createEventCardBuilderButton('buildCard'))
+    builder.addButton(ButtonDesigner.createEventCardBuilderButton('discardSelectedCard'))
     return builder
 }
 
@@ -20,27 +22,27 @@ export const BUILDER_LIST_CONFIG: Record<BuilderType, (builderOption?: BuilderOp
     'development_6mc':() => [
         configBuilder('development_6mc')
     ],
-    'development_second_card':(builderOption) => [
+    'development_second_card':() => [
         configBuilder('development_second_card'),
-        configBuilder('development_second_card', builderOption)
+        configBuilder('development_second_card', BuilderOption.developmentSecondBuilder)
     ],
-    'developmentAbilityOnly':(builderOption) => [
-        configBuilder('developmentAbilityOnly', builderOption)
+    'developmentAbilityOnly':() => [
+        configBuilder('developmentAbilityOnly')
     ],
-    'construction_base':(builderOption) => [
+    'construction_base':() => [
         configBuilder('construction_base'),
-        configBuilder('construction_base')
+        configBuilder('construction_base', BuilderOption.drawCard)
     ],
-    'construction_6mc':(builderOption) => [
+    'construction_6mc':() => [
         configBuilder('construction_base'),
-        configBuilder('construction_6mc', builderOption)
+        configBuilder('construction_6mc', BuilderOption.gain6MC)
     ],
-    'construction_draw_card':(builderOption) => [
+    'construction_draw_card':() => [
         configBuilder('construction_base'),
-        configBuilder('construction_draw_card', builderOption)
+        configBuilder('construction_draw_card')
     ],
-    'constructionAbilityOnly':(builderOption) => [
-        configBuilder('constructionAbilityOnly', builderOption)
+    'constructionAbilityOnly':() => [
+        configBuilder('constructionAbilityOnly')
     ],
     'specialBuilder':(builderOption) => [
         configBuilder('specialBuilder', builderOption)
@@ -59,6 +61,18 @@ const BUILDER_CONFIG: Partial<Record<BuilderType, (builder: CardBuilder, builder
     'development_second_card':(builder, builderOption) => {
         if(!builderOption){
             builder.addDiscount(3)
+        }
+        return builder
+    },
+    'construction_base': (builder, option) => {
+        if(option){
+            builder.addButton(ButtonDesigner.createEventCardBuilderButton(option), 'option')
+        }
+        return builder
+    },
+    'construction_6mc': (builder, option) => {
+        if(option){
+            builder.addButton(ButtonDesigner.createEventCardBuilderButton(option), 'option')
         }
         return builder
     },
@@ -91,6 +105,19 @@ const SPECIAL_BUILDER_CONFIG: Partial<Record<BuilderOption, (builder: CardBuilde
     },
     'workCrews':(builder) =>{
         builder.addDiscount(11)
+        return builder
+    },
+}
+
+export const ALTERNATIVE_PAY_EVENT: Partial<Record<NonEventButtonNames,  (cardBuilder: CardBuilder) => CardBuilder>> = {
+    'alternativePayAnaerobicMicroorganisms': (builder) => {
+        builder.addDiscount(10)
+        builder.setAlternativeCostUsed('alternativePayAnaerobicMicroorganisms')
+        return builder
+    },
+    'alternativePayRestructuredResources': (builder) => {
+        builder.addDiscount(5)
+        builder.setAlternativeCostUsed('alternativePayRestructuredResources')
         return builder
     },
 }

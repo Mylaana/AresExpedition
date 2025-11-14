@@ -27,14 +27,18 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'settingToggleDebug' | 'portalEffect'
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'killCard' | 'lockBuilder'
 | 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage' | 'carouselLeft' | 'carouselRight'
-| 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 | 'cardOverviewInvertTagSelection' | 'cardOverviewResetTagSelection' | 'cardOverviewNoneTag' | 'cardOverviewDisplayAll' | 'cardOverviewDisplayBalanced'
 | 'createGameOptionActivateAll' | 'createGameOptionDeactivateAll' | 'sellCardsSelectAll' | 'sellCardsSelectNone'
 | CardType
 | StandardProjectButtonNames
+| AltenativeCostButtonNames
+| EventCardBuilderButtonNames
 export type ToggleButtonNames = GameContentName
 export type CarouselButtonNames = 'carousel'
 export type EventCardBuilderButtonNames =  'discardSelectedCard' | 'buildCard' | BuilderOption
+export type AltenativeCostButtonNames = 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
+
+
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
 export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event'

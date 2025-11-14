@@ -54,7 +54,6 @@ export class EventMainButtonSelector extends EventMainButton {
 }
 export class EventCardBuilderButton extends EventButtonBase {
     name!: EventCardBuilderButtonNames
-    parentCardBuilderId!: number
 }
 export class NonEventButton extends ButtonBase {
 	override type: ButtonType = 'nonEvent'

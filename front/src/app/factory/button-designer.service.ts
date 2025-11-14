@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton, ToggleButton, CarouselButton, ButtonBase } from "../models/core-game/button.model";
-import { ButtonNames, CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
+import { AltenativeCostButtonNames, ButtonNames, CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
 import { BuilderOption, EffectPortalButtonEnum } from "../enum/global.enum";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS, EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-portal-maps";
@@ -12,7 +12,7 @@ import { BUTTON_CAPTIONKEY_FROM_BUTTONNAME, BUTTON_CAPTIONKEY_FROM_EVENTSUBTYPE 
     providedIn: 'root'
 })
 export class ButtonDesigner{
-    private static getStartEnabled(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames) : boolean {
+    private static getStartEnabled(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames | AltenativeCostButtonNames) : boolean {
         let startEnabled: boolean
 
         switch(buttonRule){
@@ -181,36 +181,25 @@ export class ButtonDesigner{
 		button.resetEnabledOnEventSwitch = this.getResetStartEnabledOnEventSwitch(eventSubType)
         return button
     }
-    public static createEventCardBuilderButton(zoneId:number, option?: BuilderOption): EventCardBuilderButton[] {
-        let buttons: EventCardBuilderButton[] = []
-        let buttonCount: number = 4
+    public static createEventCardBuilderButton(name:EventCardBuilderButtonNames, option?:BuilderOption): EventCardBuilderButton {
+		let button = new EventCardBuilderButton
 
-        for(let i=0; i<buttonCount; i++){
-            let button = new EventCardBuilderButton
-                switch(i){
-                    case(2):{button.name='buildCard';button.caption='$other_validate$';break}
-					case(3):{button.name='discardSelectedCard';button.caption='$other_cancel$';break}
-                }
-            button.parentCardBuilderId=zoneId
-            button.setEnabled(button.startEnabled)
-            buttons.push(button)
-        }
+		switch(name){
+			case('buildCard'):{button.caption='$other_validate$';break}
+			case('discardSelectedCard'):{button.caption='$other_cancel$';break}
+			case(BuilderOption.gain6MC):{button.caption = '+ $ressource_megacreditvoid_6$';break}
+			case(BuilderOption.drawCard):{button.caption = '$ressource_card$';break}
+			default:{
+				button.caption = name
+				break
+			}
+		}
 
-        if(option===undefined){return buttons}
-        let button = new EventCardBuilderButton
-
-        button.parentCardBuilderId=zoneId
-        button.setEnabled(button.startEnabled)
-        switch(option){
-            case(BuilderOption.gain6MC):{button.caption = '+ $ressource_megacreditvoid_6$';break}
-            case(BuilderOption.drawCard):{button.caption = '$ressource_card$';break}
-        }
         button.startEnabled=true
-        button.name = option as EventCardBuilderButtonNames
-        button.setEnabled(button.startEnabled)
-        buttons.push(button)
+        button.name = name
+		button.setEnabled(button.startEnabled)
 
-        return buttons
+        return button
     }
 	public static createNonEventButton(name: NonEventButtonNames, caption?:string): NonEventButton {
 		let button = new NonEventButton

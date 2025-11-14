@@ -55,6 +55,12 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			case('builder'):{
 				this.gameStateService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventBuilderUpdate(event))
 				this.builderService.currentBuilderIsComplete.pipe(takeUntil(this.destroy$)).subscribe(v => this.onBuilderComplete(v))
+				this.builderService.currentActiveBuilderDiscount.pipe(takeUntil(this.destroy$)).subscribe(d => this.updateDiscount(d))
+				this.builderService.currentNotifyRecalculateSelector.pipe(takeUntil(this.destroy$)).subscribe(() => {
+					if(!this._currentEvent){return}
+					console.log('notified')
+					this.setSelectorPart(this._currentEvent?.getCardSelector())
+				})
 				this._listType = 'builderSelector'
 				break
 			}
@@ -64,7 +70,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
-	onEventSelectorUpdate(event: EventBaseCardSelector | null){
+	private onEventSelectorUpdate(event: EventBaseCardSelector | null){
 		this._currentEvent = event
 		if(!event){
 			this.resetState()
@@ -72,30 +78,28 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		}
 		this.setSelectorPart(event.getCardSelector())
 	}
-	onEventBuilderUpdate(event: EventCardBuilder | null){
+	private onEventBuilderUpdate(event: EventCardBuilder | null){
 		this._currentEvent = event
 		if(!event){
 			this.resetState()
 			return
 		}
 		this.setSelectorPart(event.getCardSelector())
-		this._builderDiscount = event.getCurrentBuilderDiscount()
+		this.updateDiscount(event.getCurrentBuilderDiscount())
 	}
-	onBuilderComplete(complete: boolean){
+	private updateDiscount(discount: number){
+		this._builderDiscount = discount
+	}
+	private onBuilderComplete(complete: boolean){
 		if(!this._currentEvent){return}
 		if(!complete){return}
 		this.setAuthorizeSelection(!complete)
 	}
-	setSelectorPart(selector: CardSelector){
+	private setSelectorPart(selector: CardSelector){
 		this._cardList = selector.selectFrom
 		if(selector.cardInitialState){
 			this._initialCardState = Utils.toFullCardState(selector.cardInitialState)
 		}
-		/*
-		if(selector.stateFromParent){
-			this._currentCardState = Utils.toFullCardState(selector.stateFromParent)
-		}
-			*/
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
 		this.setAuthorizeSelection(selector.cardInitialState?.selectable??false)
@@ -103,7 +107,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	private setAuthorizeSelection(authorized: boolean){
 		this._authorizeSelection = authorized
 	}
-	resetState(){
+	private resetState(){
 		this._cardList = []
 	}
 	public onUpdateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){

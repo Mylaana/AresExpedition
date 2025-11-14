@@ -1,23 +1,44 @@
 import { BuilderOption } from "../../enum/global.enum"
 import { CardState } from "../../interfaces/card.interface"
-import { ButtonGroupUpdateType, ButtonNames, EventCardBuilderButtonNames } from "../../types/global.type"
+import { ButtonGroupUpdateType, ButtonNames, EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type"
 import { PlayableCardModel } from "../cards/project-card.model"
 import { EventCardBuilderButton } from "./button.model"
+
+type ButtonGroup = 'base' | 'option'
 
 export class CardBuilder {
     private selectedCard!: PlayableCardModel | undefined
     private cardInitialState?: CardState
     private buttons: EventCardBuilderButton[] = []
+    private optionButtons: EventCardBuilderButton[] = []
     private option!: BuilderOption
     private builderIsLocked: boolean = false
     private firstCardBuilt: boolean = false
     private discount: number = 0
-    private alternativeCostUsed: ButtonNames[] = []
+    private alternativeCostUsed: NonEventButtonNames[] = []
 
-    addButtons(buttons: EventCardBuilderButton[]): void {
-        this.buttons = buttons
+    addButton(button: EventCardBuilderButton, buttonGroup: ButtonGroup = 'base'): void {
+        switch(buttonGroup){
+            case('base'):{
+                this.buttons.push(button)
+                break
+            }
+            case('option'):{
+                this.optionButtons.push(button)
+                break
+            }
+        }
     }
-    getButtons(): EventCardBuilderButton[] {return this.buttons}
+    getButtons(buttonGroup: ButtonGroup = 'base'): EventCardBuilderButton[] {
+        switch(buttonGroup){
+            case('base'):{
+                return this.buttons
+            }
+            case('option'):{
+                return this.optionButtons
+            }
+        }
+    }
     getButtonFromName(name: EventCardBuilderButtonNames): EventCardBuilderButton | undefined {
         for(let button of this.buttons){
             if(button.name===name){
@@ -147,7 +168,10 @@ export class CardBuilder {
     getDiscount(): number {
         return this.discount
     }
-    getAlternativeCostUsed(): ButtonNames[]{
+    getAlternativeCostUsed(): NonEventButtonNames[]{
         return this.alternativeCostUsed
+    }
+    setAlternativeCostUsed(name: NonEventButtonNames){
+        this.alternativeCostUsed.push(name)
     }
 }

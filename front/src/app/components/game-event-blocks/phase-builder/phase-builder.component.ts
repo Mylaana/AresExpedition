@@ -58,9 +58,6 @@ export class PhaseBuilderComponent{
 		this.cardListSelector.updateDiscount(this._currentEvent as EventCardBuilder)
 		this.cardListSelector.updateCardList()
 	}
-	public onUpdateSelectedCardList(output: any){
-		this.cardListSelector.updateCardList()
-	}
 	public onAlternativePayButtonClicked(button: NonEventButton){
 		this.cardListSelector.updateDiscount(this._currentEvent as EventCardBuilder)
 	}

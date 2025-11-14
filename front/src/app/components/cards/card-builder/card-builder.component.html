@@ -13,16 +13,21 @@
 		</div>
 		<div [ngClass]="['wrapper-buton-zone', cardSize]"
 			*ngIf="!cardBuilder.getBuilderIsLocked()">
-			<div class="buttons-hider"
+			<div [ngClass]="['buttons-hider', displayBuildOrCancel()?'':'hide']"
 			(mouseenter)="_hoveredBackground=true"
-			(mouseleave)="_hoveredBackground=false"></div>
+			(mouseleave)="_hoveredBackground=false">
+				<img src="/assets/other/research_eye_black.png" alt="">
+			</div>
 			<div [ngClass]="['wrapper-buttons', cardSize]"
-				@fadeOut
-				*ngIf="displayButtons()"
+				*ngIf="displayBuildOrCancel()"
 				(mouseenter)="_hoveredButtons=true"
 				(mouseleave)="_hoveredButtons=false">
-				<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [context]="'builderButton'" [cardSize]="cardSize" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
-				<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [context]="'builderButton'" [cardSize]="cardSize" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
+				<app-event-card-builder-button 
+					*ngFor="let b of cardBuilder.getButtons()"
+					[button]="b" [context]="'builderButton'"
+					[cardSize]="cardSize"
+					(buttonClicked)="cardBuilderButtonClicked(b)">
+				</app-event-card-builder-button>
 			</div>
 			<!--
 			<span class="buttons-filler"
@@ -42,6 +47,11 @@
 			-->
 		</div>
 	</div>
+	<app-card-builder-alternative-option
+		*ngIf="_hasOptions"
+		[builder]="cardBuilder"
+		[cardSize]="cardSize">
+	</app-card-builder-alternative-option>
 	<app-card-builder-alternative-cost
 		#altCost
 		*ngIf="!cardBuilder.getBuilderIsLocked() && _hasAlternativeCost"

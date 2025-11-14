@@ -6,7 +6,7 @@ import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { TriggerLimit } from "../types/project-card.type";
 import { Checker } from "../utils/checker";
 import { EventFactory } from "../factory/event/event-factory";
-import { NonEventButtonNames } from "../types/global.type";
+import { AltenativeCostButtonNames, NonEventButtonNames } from "../types/global.type";
 import { Utils } from "../utils/utils";
 
 export const S = EventFactory.simple

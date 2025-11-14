@@ -13,6 +13,7 @@ import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const";
 import { GameTextService } from "../../services/core-game/game-text.service";
 import { EventTitleKey } from "../../types/text.type";
 import { CardBuilder } from "./card-builder.model";
+import { ALTERNATIVE_PAY_EVENT } from "../../maps/card-builder-maps";
 
 
 export abstract class EventBaseModel {
@@ -144,10 +145,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
     override subType!: EventCardBuilderSubType;
     private currentBuilder!: CardBuilder
     cardBuilder: CardBuilder [] = []
-    //cardBuilderIdHavingFocus?: number
-    //buildDiscountValue!: number
-    //buildDiscountUsed!: boolean
-	//alternativeCostUsedButtonName: NonEventButtonNames[] = []
 	builderType!: BuilderType
     private eventIsComplete = false
     override hasCardBuilder(): boolean {return true}
@@ -255,20 +252,20 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		}
 		this.button.setEnabled(true)
 	}
-	onAlternativeCostUse(buttonName: NonEventButtonNames){
-		console.log('alternative cost used [unresolved]')
-        //this.alternativeCostUsedButtonName.push(buttonName)
-	}
-	getAlternativeCostUsed(): NonEventButtonNames[] {
-        console.log('get alternative cost used [unresolved]')
-        return []
-		//return this.alternativeCostUsedButtonName
-	}
     getCurrentBuilderDiscount(): number {
         return this.currentBuilder.getDiscount()
     }
     lockCurrentBuilder(){
         this.currentBuilder.setBuilderIsLocked()
+    }
+    addDiscountToCurrentCardBuilder(discount: number){
+        this.currentBuilder.addDiscount(discount)
+    }
+    resolveCurrentBuilderAlternativeCostUsed(name: NonEventButtonNames){
+        console.log(Utils.jsonCopy(this))
+        if(!ALTERNATIVE_PAY_EVENT[name]){return}
+        ALTERNATIVE_PAY_EVENT[name](this.currentBuilder)
+        console.log(Utils.jsonCopy(this))
     }
 }
 

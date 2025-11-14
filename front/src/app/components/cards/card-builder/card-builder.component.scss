@@ -14,6 +14,7 @@ $alternative-width: 200px;
 }
 :host{
 	position: relative;
+	border: red solid 1px;
 }
 .wrapper-card-builder{
 	position: relative;
@@ -36,21 +37,40 @@ $alternative-width: 200px;
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
-	flex: 1;
+	height: 100%;
 	padding: 10%;
 	padding-left: 0;
 	padding-right: 0;
 	width: 100%;
-	box-shadow: 0 0 10px 5px rgba(255, 255, 255, .7);
-	//border-radius: 10px;
-	background-color: rgba(255, 255, 255, 0.7);
+	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 38.5%, rgba(255, 255, 255, .9) 40%, rgba(255, 255, 255, .9) 60%,  rgba(0, 0, 0, 0.4) 61.5%, rgba(0, 0, 0, 0.1) 100%);
+	
 	& > app-event-card-builder-button{
-		max-height: calc(var(--card-height) * .25);
+		max-height: calc(var(--card-height) * .17);
 	}
+	border-radius: 20px;
 }
 .buttons-hider{
-	height: 50%;
-	width: 100%;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	height: 13%;
+	aspect-ratio: 1;
+	top: 15px;
+	right: 15px;
+	border-radius: 50%;
+	background-color: rgb(255, 255, 255);
+
+	box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+	&.hide{
+		opacity: 0%;
+	}
+	& > img{
+		height: 80%;
+	}
+
+
 }
 .buttons-filler{
 	flex: 1;

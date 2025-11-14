@@ -1,0 +1,7 @@
+<div class="wrapper-main ares-background ares-border">
+    <p>OR:</p>
+	<div *ngFor="let b of _buttons"
+		[ngClass]="['wrapper-button', cardSize]">
+		<app-event-card-builder-button  [button]="b" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'large'" (buttonClicked)="onButtonClicked(b)"></app-event-card-builder-button>
+	</div>
+</div>

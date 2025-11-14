@@ -26,7 +26,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	@Output() buttonClicked = new  EventEmitter<any>()
 	@Input() builder!: CardBuilder
 	@Input() cardSize!: SettingCardSize
-	_buttons: NonEventButton[] = this.cardBuilderEventService._alternativeCostButtons
+	_buttons: NonEventButton[] = []
 	_used: NonEventButtonNames[] = []
 
 	private alreadyUsedButtons: NonEventButtonNames[] = []
@@ -39,8 +39,8 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	){}
 
 	ngOnInit(): void {
-		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(() => this.onEventQueueUpdate())
-		this.cardBuilderEventService.currentAlternativeCostUnlocked.pipe(takeUntil(this.destroy$)).subscribe(e => this.onEventQueueUpdate())
+		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))
+		this.cardBuilderEventService.currentAlternativeCostUnlocked.pipe(takeUntil(this.destroy$)).subscribe(e => this.onAlternativePayListUpdate(e))
 	}
 	ngOnChanges(changes: SimpleChanges): void {
 		if(changes['locked'] && changes['locked'].currentValue){
@@ -54,28 +54,14 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
-	updateButtonList(){
-		if(!this.clientState){return}
-		this._buttons = []
-		let alternativeCardCode: string[] = PlayableCard.getAlternativePayActiveCodeList(this.clientState)
-		if(alternativeCardCode.length===0){return}
-		for(let code of alternativeCardCode){
-			let caption = PlayableCard.getAlternativePayCaption(code)
-			if(!caption){continue}
-			this._buttons.push(ButtonDesigner.createNonEventButton(caption))
-		}
-	}
 	public updateButtonEnabled(){
-		/*
-		this.alreadyUsedButtons = (this.event as EventCardBuilder).getAlternativeCostUsed()
-		this.updateButtonList()
+		if(this._buttons.length===0){return}
+		this.alreadyUsedButtons = this.builder.getAlternativeCostUsed()
 		for(let b of this._buttons){
 			b.setEnabled(this.getButtonEnabled(b))
 		}
-		*/
 	}
 	private getButtonEnabled(button: NonEventButton): boolean {
-		if(this.locked){return false}
 		if(this.getAlternativePayLocked()){return false}
 		if(this._used.includes(button.name)){return false}
 		if(this.alreadyUsedButtons.includes(button.name)){return false}
@@ -85,32 +71,16 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		this.clientState = state
 		this.updateButtonEnabled()
 	}
-	private onEventQueueUpdate(){
+	private onAlternativePayListUpdate(buttonNames: NonEventButtonNames[]){
+		this._buttons = []
+		for(let b of buttonNames){
+			this._buttons.push(ButtonDesigner.createNonEventButton(b))
+		}
 		this.updateButtonEnabled()
 	}
 	onButtonClicked(button: NonEventButton){
-		/*
-		let events = PlayableCard.getAlternativePayButtonClickedEvents(button.name)
-		if(events.length===0){return}
-		this.gameStateService.addEventQueue(events, 'first')
-		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
-		switch(button.name){
-			case('alternativePayAnaerobicMicroorganisms'):{
-				//builderEvent.buildDiscountValue += 10
-				builderEvent.onAlternativeCostUse(button.name)
-				this._used.push(button.name)
-				break
-			}
-			case('alternativePayRestructuredResources'):{
-				//builderEvent.buildDiscountValue += 5
-				builderEvent.onAlternativeCostUse(button.name)
-				this._used.push(button.name)
-				break
-			}
-		}
-		this.updateButtonEnabled()
-		this.buttonClicked.emit(button)
-		*/
+		this._used.push(button.name)
+		this.cardBuilderEventService.onAlternativePayButtonClicked(button)
 	}
 	getAlternativePayLocked(): boolean {
 		return false
