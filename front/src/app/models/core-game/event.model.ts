@@ -211,18 +211,8 @@ export class EventCardBuilder extends EventBaseCardSelector {
             this.setEventIsComplete()
             return
         }
-        let activateNext = false
-        for(let b of this.cardBuilder){
-            if(b===this.currentBuilder){
-                activateNext = true
-                continue
-            }
-            if(activateNext){
-                this.currentBuilder = b
-                break
-            }
-        }
-        if(activateNext===false){
+        let builder = this.getNextBuilder()
+        if(!builder){
             this.setEventIsComplete()
             return
         }
@@ -232,6 +222,15 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.deactivateSelection()
         this.eventIsComplete = true
         this.cardSelector.stateFromParent = Utils.toFullCardState({})
+    }
+    private getNextBuilder(): CardBuilder | undefined {
+        for(let b of this.cardBuilder){
+            if(b===this.currentBuilder){
+                continue
+            }
+            if(b.isEligibleForNext()){return b}
+        }
+        return
     }
     isComplete(): boolean {
         return this.eventIsComplete
@@ -262,135 +261,22 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.currentBuilder.addDiscount(discount)
     }
     resolveCurrentBuilderAlternativeCostUsed(name: NonEventButtonNames){
-        console.log(Utils.jsonCopy(this))
         if(!ALTERNATIVE_PAY_EVENT[name]){return}
         ALTERNATIVE_PAY_EVENT[name](this.currentBuilder)
-        console.log(Utils.jsonCopy(this))
+    }
+    resolveBuilderAlternativeOptionUsed(builder: CardBuilder, option: NonEventButtonNames){
+        for(let b of this.cardBuilder){
+            if(b===builder){
+                b.setBuilderIsLocked(true)
+                b.setAlternativeOptionUsed(option)
+                break
+            }
+        }
+        if(this.cardBuilder.filter((e) => e.getBuilderIsLocked()===false).length===0){
+            this.setEventIsComplete()
+        }
     }
 }
-
-/*
-export class EventCardBuilder extends EventBaseCardSelector {
-    override readonly type: EventType = 'cardSelectorCardBuilder'
-    override subType!: EventCardBuilderSubType;
-    cardBuilder: CardBuilder [] = []
-    cardBuilderIdHavingFocus?: number
-    buildDiscountValue!: number
-    buildDiscountUsed!: boolean
-	alternativeCostUsedButtonName: NonEventButtonNames[] = []
-	builderType!: BuilderType
-    override hasCardBuilder(): boolean {return true}
-    override updateCardSelection(selection: PlayableCardModel[]): void {
-		this.setSelectedCardToBuild(selection[0])
-    }
-    private setSelectedCardToBuild(card: PlayableCardModel): void {
-		if(this.cardBuilderIdHavingFocus===undefined){return}
-        let activeZone = this.cardBuilder[this.cardBuilderIdHavingFocus]
-        activeZone.setSelectedCard(card)
-        this.removeCardFromSelector(card)
-        this.deactivateSelection()
-        this.cardSelector.stateFromParent = {selectable: false}
-    }
-    private removeCardFromSelector(card: PlayableCardModel): void {
-        for(let i=0; i<this.cardSelector.selectFrom.length; i++){
-            if(this.cardSelector.selectFrom[i].cardCode===card.cardCode){
-                this.cardSelector.selectFrom.splice(i, 1)
-            }
-        }
-    }
-    getCardToBuildId(): PlayableCardModel | undefined {
-        if(this.cardBuilderIdHavingFocus===undefined){return}
-        return this.cardBuilder[this.cardBuilderIdHavingFocus].getSelectedCard()
-    }
-    cardBuilderButtonClicked(button: EventCardBuilderButton): void {
-        if(this.cardBuilderIdHavingFocus===undefined){return}
-		//reset state before changing focus
-		this.resetNonFocusedBuildersState()
-
-        this.setSelectionOnButtonClick(button)
-        let activeZone = this.cardBuilder[this.cardBuilderIdHavingFocus]
-
-        switch(button.name){
-            case('selectCard'):{
-                this.cardSelector.stateFromParent = {selectable:true}
-                break
-            }
-            case('cancelSelectCard'):{
-				this.cardSelector.stateFromParent = {selectable:false}
-				break
-            }
-            case('buildCard'):{
-                this.buildDiscountUsed = true
-                this.buildDiscountValue = 0
-				break
-            }
-			case('discardSelectedCard'):{
-				this.discardBuilderSelectedCard(this.cardBuilderIdHavingFocus)
-                break
-            }
-        }
-
-        activeZone.resolveCardBuilderButtonClicked(button)
-    }
-	private discardBuilderSelectedCard(builderId: number){
-		let targetBuilder = this.cardBuilder[builderId]
-		let card = targetBuilder.getSelectedCard()
-		if(card===undefined){return}
-		this.cardSelector.selectFrom.push(card)
-	}
-	private resetNonFocusedBuildersState(){
-		for(let i=0; i<this.cardBuilder.length; i++){
-			if(i===this.cardBuilderIdHavingFocus || this.cardBuilder[i].getBuilderIsLocked()){continue}
-			this.discardBuilderSelectedCard(i)
-			this.cardBuilder[i].resetBuilder()
-			break
-		}
-	}
-    private setSelectionOnButtonClick(button: EventCardBuilderButton): void {
-        switch(button.name){
-            case('selectCard'):{
-                this.activateSelection()
-                break
-            }
-            default:{
-                this.deactivateSelection()
-                break
-            }
-        }
-    }
-	setFirstCardBuilt(){
-		this.alternativeCostUsedButtonName = []
-		if(this.builderType!="development_second_card"){return}
-		this.cardBuilder[1].setFirstCardBuilt()
-		this.cardBuilder[1].setFirstCardBuilt()
-		this.cardSelector.filter = {type:ProjectFilterNameEnum.developmentPhaseSecondBuilder}
-		this.title = 'Play a second green card with a printed cost of 12MC or less.'
-	}
-
-	override onSwitch(): void {
-		//reset cardBuilder's selection onSwitch
-		for(let builder of this.cardBuilder){
-			builder.resetBuilder()
-		}
-	}
-	updateButtonEnabled(){
-		if(!this.button){return}
-		for(let b of this.cardBuilder){
-			if(b.isLockingValidation()){
-				this.button.setEnabled(false)
-				return
-			}
-		}
-		this.button.setEnabled(true)
-	}
-	onAlternativeCostUse(buttonName: NonEventButtonNames){
-		this.alternativeCostUsedButtonName.push(buttonName)
-	}
-	getAlternativeCostUsed(): NonEventButtonNames[] {
-		return this.alternativeCostUsedButtonName
-	}
-}
-    */
 
 export class EventTagSelector extends EventBaseModel {
     override readonly type: EventType = 'tagSelector'

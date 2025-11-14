@@ -4,11 +4,12 @@ import { TriggerEffectEventFactory } from "./trigger-event.factoy";
 import { ActivationOption } from "../types/project-card.type";
 import { DEBUG_IGNORE_PREREQUISITES } from "../global/global-const";
 import { PlayableCardModel } from "../models/cards/project-card.model";
-import { AltenativeCostButtonNames, NonEventButtonNames, StandardProjectButtonNames } from "../types/global.type";
-import { ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS, ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS, PLAY_REQUIREMENTS } from "../maps/playable-card-other-maps";
+import { EventCardBuilderButtonNames, NonEventButtonNames, StandardProjectButtonNames } from "../types/global.type";
+import { ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS, PLAY_REQUIREMENTS } from "../maps/playable-card-other-maps";
 import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION_NO_COST, ACTIVATION_SCALING_EFFECT_CAPTION, ACTIVATION_SCALING_EFFECT_VALUE } from "../maps/playable-card-activation-maps";
 import { STANDARD_PROJECT_CAPTION, STANDARD_PROJECT_COST } from "../maps/standard-project-maps";
 import { SCALING_PRODUCTION } from "../maps/playable-card-scaling-production-maps";
+import { ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS } from "../maps/card-builder-maps";
 
 function getOnPlayedEvents(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 	return PLAY_EVENTS[cardCode]?.(clientstate)
@@ -41,6 +42,11 @@ function getAlternativePayButtonClickedEvents(buttonName: NonEventButtonNames): 
 function getAlternativePayCaption(cardCode: string): NonEventButtonNames | undefined{
 	if(!ALTERNATIVE_PAY_BUTTON_NAME[cardCode]){return}
 	return ALTERNATIVE_PAY_BUTTON_NAME[cardCode]()
+}
+function getBuilderAlternativeOptionButtonClickedEvents(buttonName: NonEventButtonNames): EventBaseModel[]{
+	const fn = ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS[buttonName as EventCardBuilderButtonNames]
+	if (typeof fn !== 'function') return []
+	return fn()
 }
 function getStandardProjectCost(key: StandardProjectButtonNames, clientState: PlayerStateModel): number {
 	return STANDARD_PROJECT_COST[key]?.(clientState)
@@ -119,6 +125,7 @@ export const PlayableCard = {
 	getAlternativePayActiveCodeList,
 	getAlternativePayCaption,
 	getAlternativePayButtonClickedEvents,
+	getBuilderAlternativeOptionButtonClickedEvents,
 	getRepeatProductionCaption,
 	hasScalingProduction,
 	prerequisite: PlayableCardPrerequisite,

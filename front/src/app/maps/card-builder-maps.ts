@@ -1,8 +1,13 @@
 import { BuilderOption } from "../enum/global.enum";
 import { ButtonDesigner } from "../factory/button-designer.service";
+import { EventFactory } from "../factory/event/event-factory";
 import { CardBuilder } from "../models/core-game/card-builder.model";
-import { NonEventButtonNames } from "../types/global.type";
+import { EventBaseModel } from "../models/core-game/event.model";
+import { PlayerStateModel } from "../models/player-info/player-state.model";
+import { EventCardBuilderButtonNames, NonEventButtonNames } from "../types/global.type";
 import { BuilderType } from "../types/phase-card.type";
+import { Checker } from "../utils/checker";
+
 
 function configBuilder(builderType: BuilderType, builderOption?:BuilderOption): CardBuilder{
     let builder = new CardBuilder
@@ -120,4 +125,28 @@ export const ALTERNATIVE_PAY_EVENT: Partial<Record<NonEventButtonNames,  (cardBu
         builder.setAlternativeCostUsed('alternativePayRestructuredResources')
         return builder
     },
+}
+
+export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
+	//Anaerobic Microorganisms
+	'5': () => 'alternativePayAnaerobicMicroorganisms',
+		//Anaerobic Microorganisms
+	'52': () => 'alternativePayRestructuredResources'
+}
+export const ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS: Partial<Record<NonEventButtonNames, () => EventBaseModel[]>> ={
+	'alternativePayAnaerobicMicroorganisms': () => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:-2}, '5')],
+	'alternativePayRestructuredResources': () => [EventFactory.simple.addRessource({name:'plant', valueStock:-1})]
+}
+export const ALTERNATIVE_PAY_REQUIREMENTS: Partial<Record<NonEventButtonNames, (clientState: PlayerStateModel) => boolean>> ={
+	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>=2,
+	'alternativePayRestructuredResources': (c) => Checker.isRessourceOk('plant', 1, 'min', c),
+}
+
+export const ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS: Partial<Record<EventCardBuilderButtonNames, () => EventBaseModel[]>> = {
+    'drawCard': () => [
+        EventFactory.simple.draw(1)
+    ],
+    'gain6MC': () => [
+        EventFactory.simple.addRessource({name:'megacredit', valueStock: 6})
+    ]
 }

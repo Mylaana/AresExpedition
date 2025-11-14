@@ -69,8 +69,6 @@ $alternative-width: 200px;
 	& > img{
 		height: 80%;
 	}
-
-
 }
 .buttons-filler{
 	flex: 1;
@@ -123,20 +121,7 @@ $alternative-width: 200px;
 		background: rgba(0, 0, 0, 0.1);
 	}
 }
-.wrapper-alternative{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-	width: 100%;
-}
-.wrapper-alternative-inner{
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	width: 70%;
-}
-.button-select-card, .button-cancel-card, .button-build-card, .button-discard-card{
+.button-select-card, .button-discard-card{
 	z-index: 1;
 }
 app-event-card-builder-button{

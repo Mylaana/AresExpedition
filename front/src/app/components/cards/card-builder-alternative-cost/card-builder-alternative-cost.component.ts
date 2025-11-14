@@ -26,6 +26,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	@Output() buttonClicked = new  EventEmitter<any>()
 	@Input() builder!: CardBuilder
 	@Input() cardSize!: SettingCardSize
+
 	_buttons: NonEventButton[] = []
 	_used: NonEventButtonNames[] = []
 
@@ -62,7 +63,6 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 		}
 	}
 	private getButtonEnabled(button: NonEventButton): boolean {
-		if(this.getAlternativePayLocked()){return false}
 		if(this._used.includes(button.name)){return false}
 		if(this.alreadyUsedButtons.includes(button.name)){return false}
 		return PlayableCard.prerequisite.canBeAlternativePaid(button.name, this.clientState)
@@ -81,13 +81,5 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 	onButtonClicked(button: NonEventButton){
 		this._used.push(button.name)
 		this.cardBuilderEventService.onAlternativePayButtonClicked(button)
-	}
-	getAlternativePayLocked(): boolean {
-		return false
-		/*
-		let builderEvent: EventCardBuilder = this.event as EventCardBuilder
-		if(builderEvent.hasSelectorCardSelected()===true){return true}
-		return !builderEvent.cardBuilder[0].getBuilderIsLocked() && builderEvent.cardBuilder[0] != this.builder
-		*/
 	}
 }

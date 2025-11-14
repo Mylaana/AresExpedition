@@ -10,8 +10,11 @@
 	display: flex;
 	justify-content: center;
 	width: 95%;
-    background-color: blue;
-    height: 50px;
+	height: calc((var(--card-height) * .25));
+}
+p{
+	font-weight: 600;
+    font-size: calc(var(--card-height) * .09);
 }
 .wrapper-main{
 	display: flex;
@@ -26,9 +29,8 @@
 .wrapper-button{
 	display: flex;
 	justify-content: center;
-	width: var(--card-width);
-	height: calc((var(--card-height) * .1));
 	margin: calc((var(--card-height) * .04));
+    height: 80%;
 }
 :host::ng-deep img {
 	height: 20px;

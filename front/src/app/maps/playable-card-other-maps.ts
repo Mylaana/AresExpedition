@@ -9,7 +9,7 @@ import { EventFactory } from "../factory/event/event-factory";
 import { AltenativeCostButtonNames, NonEventButtonNames } from "../types/global.type";
 import { Utils } from "../utils/utils";
 
-export const S = EventFactory.simple
+const S = EventFactory.simple
 
 export const ALTERNATIVE_PAY_TRIGGER_LIST: string[] = [
 	'5', '52'
@@ -1548,18 +1548,4 @@ export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: Pla
 }
 export const TRIGGER_LIMIT: Record<string, ()=> TriggerLimit> = {
 	'P19': ()=> {return {value:0, limit:5}},
-}
-export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
-	//Anaerobic Microorganisms
-	'5': () => 'alternativePayAnaerobicMicroorganisms',
-		//Anaerobic Microorganisms
-	'52': () => 'alternativePayRestructuredResources'
-}
-export const ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS: Partial<Record<NonEventButtonNames, () => EventBaseModel[]>> ={
-	'alternativePayAnaerobicMicroorganisms': () => [S.addRessourceToCardId({name:'microbe', valueStock:-2}, '5')],
-	'alternativePayRestructuredResources': () => [S.addRessource({name:'plant', valueStock:-1})]
-}
-export const ALTERNATIVE_PAY_REQUIREMENTS: Partial<Record<NonEventButtonNames, (clientState: PlayerStateModel) => boolean>> ={
-	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>=2,
-	'alternativePayRestructuredResources': (c) => Checker.isRessourceOk('plant', 1, 'min', c),
 }

@@ -16,6 +16,7 @@ export class CardBuilder {
     private firstCardBuilt: boolean = false
     private discount: number = 0
     private alternativeCostUsed: NonEventButtonNames[] = []
+    private alternativeOptionUsed: NonEventButtonNames[] = []
 
     addButton(button: EventCardBuilderButton, buttonGroup: ButtonGroup = 'base'): void {
         switch(buttonGroup){
@@ -133,7 +134,9 @@ export class CardBuilder {
         console.log('remove', this.selectedCard)
         this.selectedCard = undefined
     }
-    setBuilderIsLocked(locked?: boolean): void {this.builderIsLocked=locked??true}
+    setBuilderIsLocked(locked?: boolean): void {
+        this.builderIsLocked=locked??true
+    }
     getBuilderIsLocked(): boolean {
         if(this.option===BuilderOption.developmentSecondBuilder && !this.firstCardBuilt){
             return true
@@ -150,11 +153,6 @@ export class CardBuilder {
         if(this.builderIsLocked){return}
         this.resetButtons()
         this.selectedCard = undefined
-    }
-    setFirstCardBuilt(): void {
-        if(this.option!=BuilderOption.developmentSecondBuilder){return}
-        this.firstCardBuilt = true
-        this.resetButtons()
     }
     isLockingValidation(): boolean {
         return this.selectedCard!=undefined && this.builderIsLocked===false
@@ -173,5 +171,15 @@ export class CardBuilder {
     }
     setAlternativeCostUsed(name: NonEventButtonNames){
         this.alternativeCostUsed.push(name)
+    }
+    getAlternativeOptionUsed(): NonEventButtonNames[]{
+        return this.alternativeOptionUsed
+    }
+    setAlternativeOptionUsed(name: NonEventButtonNames){
+        this.alternativeOptionUsed.push(name)
+    }
+    isEligibleForNext(): boolean {
+        if(this.alternativeOptionUsed.length!=0){return false}
+        return true
     }
 }

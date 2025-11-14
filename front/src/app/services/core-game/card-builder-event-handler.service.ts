@@ -76,21 +76,11 @@ export class CardBuilderEventHandlerService{
                 this._currentEvent.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(this._currentEvent.getSelectorFilter()))
                 break
             }
-            /*
-            case(BuilderOption.drawCard):{
-                this.gameStateService.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}), 'first')
-                break
+            case('discardSelectedCard'):{
             }
-            case(BuilderOption.gain6MC):{
-                this.gameStateService.addEventQueue(EventFactory.createGeneric('addRessourceToPlayer',{baseRessource:{name:"megacredit",valueStock:6}}), 'first')
-                break
-            }
-            */
         }
         this._currentEvent.cardBuilderButtonClicked(button, nonCurrentBuilder)
-        if(this._currentEvent.isComplete()){
-            this.builderIsComplete$.next(true)
-        }
+        this.checkIfComplete()
     }
     public onAlternativePayButtonClicked(button: NonEventButton){
         if(!this._currentEvent){return}
@@ -101,18 +91,21 @@ export class CardBuilderEventHandlerService{
         this.activeBuilderDiscount$.next(this._currentEvent.getCurrentBuilderDiscount())
         this.notifyRecalculateSelector$.next()
     }
-    public onAlternativeOptionButtonClicked(button: NonEventButton){
-        
-        console.log(button)
-        return
-        /*
+    public onAlternativeOptionButtonClicked(button: NonEventButton, builder: CardBuilder){
         if(!this._currentEvent){return}
-		let events = PlayableCard.getAlternativePayButtonClickedEvents(button.name)
+		let events = PlayableCard.getBuilderAlternativeOptionButtonClickedEvents(button.name)
 		if(events.length===0){return}
-        this._currentEvent.resolveCurrentBuilderAlternativeCostUsed(button.name)
+        this._currentEvent.resolveBuilderAlternativeOptionUsed(builder, button.name)
 		this.gameStateService.addEventQueue(events, 'first')
-        this.activeBuilderDiscount$.next(this._currentEvent.getCurrentBuilderDiscount())
         this.notifyRecalculateSelector$.next()
-        */
+        this.checkIfComplete()
+    }
+    private checkIfComplete() {
+        if(!this._currentEvent){return}
+        if(this._currentEvent.isComplete()){
+            this.builderIsComplete$.next(true)
+        } else {
+            this.notifyRecalculateSelector$.next()
+        }
     }
 }
