@@ -105,9 +105,10 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		for(let card of this.projectCards){
 			if(card.projectCard!==selectedCard){
 				card.state.setSelected(false)
+			} else if (card.projectCard===selectedCard && card.state.isSelected()===true){
+				this.selectedCardList.push(selectedCard)
 			}
 		}
-		this.selectedCardList.push(selectedCard)
 	}
 	private handleMultipleSelection(selectedCard: PlayableCardModel): void {
 		for(let card of this.projectCards){
