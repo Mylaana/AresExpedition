@@ -94,12 +94,27 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	}
 	public cardStateChange(cardChange: {card: PlayableCardModel, state:CardState}): void {
 		this.resetSelectedCardList()
+		if(this.selectionQuantity===1 && (this.selectionTresholdType==='max' || this.selectionTresholdType==='equal')){
+			this.handleSingleSelection(cardChange.card)
+		} else {
+			this.handleMultipleSelection(cardChange.card)
+		}
+		this.updateSelectedCardList.emit({selected:this.selectedCardList, listType: this.listType})
+	}
+	private handleSingleSelection(selectedCard: PlayableCardModel): void {
+		for(let card of this.projectCards){
+			if(card.projectCard!==selectedCard){
+				card.state.setSelected(false)
+			}
+		}
+		this.selectedCardList.push(selectedCard)
+	}
+	private handleMultipleSelection(selectedCard: PlayableCardModel): void {
 		for(let card of this.projectCards){
 			if(card.state.isSelected()===true){
 				this.selectedCardList.push(card.projectCard)
 			}
 		}
-		this.updateSelectedCardList.emit({selected:this.selectedCardList, listType: this.listType})
 	}
 	private setDisplay(): void {
 		if(this.buildDiscount){
