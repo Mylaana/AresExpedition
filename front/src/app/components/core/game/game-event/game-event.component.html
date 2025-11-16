@@ -1,8 +1,8 @@
 <div class="wrapper-game-event" *ngIf="currentEvent">
 	<div id="command-pannel">
 		<div [ngClass]="['left-command', _interfaceSize]">
-			<div *ngIf="currentEvent.button" [ngClass]="['wrapper-event-button--big', _interfaceSize]">
-				<app-event-main-button  [button]="currentEvent.button" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
+			<div *ngIf="_mainButton" [ngClass]="['wrapper-event-button--big', _interfaceSize]">
+				<app-event-main-button  [button]="_mainButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="eventMainButtonClicked()"></app-event-main-button>
 			</div>
 			<div *ngIf="rollbackButton.displayed" [ngClass]="['wrapper-event-button--medium rollback', _interfaceSize]">
 				<app-non-event-button  [button]="rollbackButton" [context]="'commandButton'" [shape]="'hex_floating'" (buttonClicked)="nonEventButtonClicked(rollbackButton)"></app-non-event-button>

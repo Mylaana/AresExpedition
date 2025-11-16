@@ -344,6 +344,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
 			event.waiterId = waiter
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.celestior):{
@@ -359,7 +360,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.hasTagEvent})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.devTechs):{
@@ -375,7 +376,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.greenProject})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.advancedScreeningTechnology):{
@@ -391,7 +392,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.hasTagPlantOrScience})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.inventionContest):{
@@ -406,7 +407,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.button.startEnabled = false
 			event.scanKeepOptions = options
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.actionPhaseScan):{
@@ -422,7 +423,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.modPro):{
@@ -438,7 +439,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.authorizedTag, authorizedTag: authorizedTag})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		default:{

@@ -12,6 +12,7 @@ import { EventHandler } from '../../../../models/core-game/handlers.model';
 import { ActivationOption, ListBehavior, ProjectListType } from '../../../../types/project-card.type';
 import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
 import { CardBuilderEventHandlerService } from '../../../../services/core-game/card-builder-event-handler.service';
+import { CommandButtonStateService } from '../../../../services/game-state/command-button-state.service';
 
 @Component({
 	selector: 'app-playable-card-list-wrapper',
@@ -44,7 +45,8 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	constructor(
 		private gameStateService: GameStateFacadeService,
 		private eventHandler: EventHandler,
-		private builderService: CardBuilderEventHandlerService
+		private builderService: CardBuilderEventHandlerService,
+		private mainButtonService: CommandButtonStateService
 	){}
 	
 	ngOnInit(): void {
@@ -99,7 +101,6 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			return
 		}
 		this.setSelectorPart(event.getCardSelector())
-		//this.setAuthorizeSelection(true)
 	}
 	private updateDiscount(discount: number){
 		this._builderDiscount = discount
@@ -133,6 +134,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			}
 			default:{
 				this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+				this.mainButtonService.updateCurrentEventMainButton()
 				break
 			}
 		}

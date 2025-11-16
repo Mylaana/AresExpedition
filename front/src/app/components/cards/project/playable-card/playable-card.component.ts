@@ -75,6 +75,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	@Input() cardSize!: SettingCardSize
 	@Input() notClientState!: PlayerStateModel | undefined
 	@Input() authorizeSelection: boolean = false
+	@Input() checkCostSelector: boolean = false
 	private megacreditAvailable: number = 0
 	private playerState!: PlayerStateModel
 

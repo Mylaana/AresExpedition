@@ -4,7 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
-import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
+import { ButtonBase, EventCardBuilderButton, EventMainButton, NonEventButton } from '../../../../models/core-game/button.model';
 import { DrawEvent, EventBaseModel, EventPhase } from '../../../../models/core-game/event.model';
 import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
 import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
@@ -31,6 +31,7 @@ import { EventTitleKeyPipe } from '../../../../pipes/event-title.pipe';
 import { GameActiveContentService } from '../../../../services/core-game/game-active-content.service';
 import { EventUnionSubTypes } from '../../../../types/event.type';
 import { StandardCardSelectorComponent } from '../../../game-event-blocks/standard-card-selector/standard-card-selector.component';
+import { CommandButtonStateService } from '../../../../services/game-state/command-button-state.service';
 
 //this component is the main view
 
@@ -100,6 +101,7 @@ export class GameEventComponent {
 
 	_selectedPhaseList: SelectablePhaseEnum[] = []
 	_interfaceSize!: SettingInterfaceSize
+	_mainButton!: EventMainButton | null
 
 	//private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
@@ -110,7 +112,8 @@ export class GameEventComponent {
 		private gameStateService: GameStateFacadeService,
 		private gameParamService: GameParamService,
 		private gameContentService: GameActiveContentService,
-		private eventHandler: EventHandler
+		private eventHandler: EventHandler,
+		private commandButtonService: CommandButtonStateService
 	){}
 
 	ngOnInit(): void {
@@ -128,6 +131,8 @@ export class GameEventComponent {
 
 		this.gameParamService.currentInterfaceSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._interfaceSize = size)
 		this.eventHandler.currentEventObs.subscribe(event => {this.currentEvent = event})
+		this.commandButtonService.currentEventMainButtonUpdated$.pipe(takeUntil(this.destroy$)).subscribe(button => this._mainButton = button)
+		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()

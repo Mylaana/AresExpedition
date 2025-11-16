@@ -1,12 +1,12 @@
 import { EventCardSelectorSubType, EventType, EventTargetCardSubType, EventCardSelectorRessourceSubType, EventCardBuilderSubType, EventGenericSubType, EventDeckQuerySubType, EventUnionSubTypes, EventWaiterSubType, EventPhaseSubType, EventCardActivatorSubType, EventComplexCardSelectorSubType, EventTagSelectorSubType } from "../../types/event.type";
 import { AdvancedRessourceStock, CardSelector, DrawDiscard, EventOrigin, GlobalParameterValue, MoonTile, ProjectFilter, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
-import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton  } from "./button.model";
-import { EventCardBuilderButtonNames, MinMaxEqualType, NonEventButtonNames, SettingSupportedLanguage, TagType } from "../../types/global.type";
+import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton } from "./button.model";
+import { MinMaxEqualType, NonEventButtonNames, SettingSupportedLanguage, TagType } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, InputRuleEnum } from "../../enum/global.enum";
 import { BuilderType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const";
@@ -63,11 +63,7 @@ export abstract class EventBaseCardSelector extends EventBaseModel {
 
     updateCardSelection(selection:PlayableCardModel[]): void {
         this.cardSelector.selectedList = selection
-        this.button?.updateEnabledTreshold({
-            treshold: this.cardSelector.selectionQuantityTreshold,
-            tresholdValue: this.cardSelector.selectionQuantity,
-            value: this.cardSelector.selectedList.length
-        })
+
     }
     override hasSelector(): boolean {
         return true

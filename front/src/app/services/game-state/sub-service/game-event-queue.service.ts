@@ -20,15 +20,16 @@ export class GameEventQueueService {
     _eventSelector$ = new BehaviorSubject<EventBaseCardSelector | null>(null)
 	_eventActivator$ = new BehaviorSubject<EventCardActivator | null>(null)
     _eventBuilder$ = new BehaviorSubject<EventCardBuilder | null>(null)
+    _eventWithMainButton$ = new BehaviorSubject<EventBaseModel | null>(null)
 
 
     constructor(private eventStateDeserializerService: EventStateDeserializerService){}
 
-    getCurrentEventQueue(): EventBaseModel[] {
+    public getCurrentEventQueue(): EventBaseModel[] {
         return this._eventQueue$.getValue()
     }
 
-    addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
+    public addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
         let newQueue: EventBaseModel[] = []
         let addEvents: EventBaseModel[] = Utils.toArray(events)
 
@@ -52,7 +53,7 @@ export class GameEventQueueService {
         }
         this.updateEventQueue(newQueue)
     }
-    cleanAndNextEventQueue(): void{
+    public cleanAndNextEventQueue(): void{
         console.error()
         let newEventQueue: EventBaseModel[] = [];
         for(let e of this._eventQueue$.getValue()){
@@ -101,7 +102,6 @@ export class GameEventQueueService {
         this.clientState = clientState
     }
     private updateEventQueue(queue: EventBaseModel[]){
-        //console.log('update queue:', queue)
         this.updateSpecificEventSubjects(queue)
 		this._eventQueue$.next(queue)
 	}
@@ -120,6 +120,11 @@ export class GameEventQueueService {
 			? (event as EventCardBuilder)
 			: null
 	}
+    private toEventWithMainButton(event: EventBaseModel): EventBaseModel | null {
+        return event.button
+            ? event
+            : null
+    }
     private updateSpecificEventSubjects(eventQueue: EventBaseModel[]) {
 		if(eventQueue.length===0){
 			return
@@ -129,5 +134,7 @@ export class GameEventQueueService {
 		this._eventSelector$.next(this.toEventCardSelector(currentEvent))
 		this._eventActivator$.next(this.toEventCardActivator(currentEvent))
         this._eventBuilder$.next(this.toEventCardBuilder(currentEvent))
+
+        this._eventWithMainButton$.next(this.toEventWithMainButton(currentEvent))
 	}
 }
