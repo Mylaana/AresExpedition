@@ -2,6 +2,12 @@
     <p>OR:</p>
 	<div *ngFor="let b of _buttons"
 		[ngClass]="['wrapper-button', cardSize]">
-		<app-event-card-builder-button  [button]="b" [context]="'builderButton'" [cardSize]="cardSize" (buttonClicked)="onButtonClicked(b)"></app-event-card-builder-button>
+		<app-event-card-builder-button  
+			[button]="b"
+			[context]="'builderButton'"
+			[cardSize]="cardSize"
+			[shape]="'xs'"
+			(buttonClicked)="onButtonClicked(b)">
+		</app-event-card-builder-button>
 	</div>
 </div>

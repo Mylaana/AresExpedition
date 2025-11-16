@@ -9,10 +9,11 @@ import { CardState } from '../../../../interfaces/card.interface';
 import { Utils } from '../../../../utils/utils';
 import { MinMaxEqualType } from '../../../../types/global.type';
 import { EventHandler } from '../../../../models/core-game/handlers.model';
-import { ActivationOption, ListBehavior, ProjectListType } from '../../../../types/project-card.type';
+import { ActivationOption, ListBehavior, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
 import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
 import { CardBuilderEventHandlerService } from '../../../../services/core-game/card-builder-event-handler.service';
 import { CommandButtonStateService } from '../../../../services/game-state/command-button-state.service';
+import { EventUnionSubTypes } from '../../../../types/event.type';
 
 @Component({
 	selector: 'app-playable-card-list-wrapper',
@@ -41,6 +42,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	_builderDiscount!: number
 	_listType!: ProjectListType
 	_filter!: ProjectFilter | undefined
+	_listSubType: ProjectListSubType = 'none'
 	
 	constructor(
 		private gameStateService: GameStateFacadeService,
@@ -84,6 +86,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			return
 		}
 		this.setSelectorPart(event.getCardSelector())
+		this.setListSubType(event.subType)
 	}
 	private onEventBuilderUpdate(event: EventCardBuilder | null){
 		this._currentEvent = event
@@ -93,6 +96,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		}
 		this.setSelectorPart(event.getCardSelector())
 		this.updateDiscount(event.getCurrentBuilderDiscount())
+		this.setListSubType(event.subType)
 	}
 	private onEventActivatorUpdate(event: EventCardActivator | null){
 		this._currentEvent = event
@@ -101,6 +105,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			return
 		}
 		this.setSelectorPart(event.getCardSelector())
+		this.setListSubType(event.subType)
 	}
 	private updateDiscount(discount: number){
 		this._builderDiscount = discount
@@ -146,7 +151,16 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		this.cardListChild.selectNone()
 	}
 	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}){
-		console.log(input)
 		this.projectActivated.emit(input)
+	}
+	private setListSubType(eventSubtype: EventUnionSubTypes): void {
+		switch(eventSubtype){
+			case('selectCardForcedSell'):case('selectCardOptionalSell'):{this._listSubType = 'sell'; break}
+			case('researchPhaseResult'):{this._listSubType = 'research'; break}
+			case('discardCards'):{this._listSubType='discard'; break}
+			case('addRessourceToSelectedCard'):{this._listSubType='addRessource';break}
+			case('scanKeepResult'):{this._listSubType='scanKeepResult';break}
+			case('doubleProduction'):{this._listSubType='repeatProduction';break}
+		}
 	}
 }

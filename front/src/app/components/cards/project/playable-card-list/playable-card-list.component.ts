@@ -31,7 +31,6 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Input() listSubType: ProjectListSubType = 'none'
 	@Input() notClientState!: PlayerStateModel | undefined
 	@Input() initialChildrenCardState!: CardState
-	//@Input() currentChildrenCardState!: CardState
 	@Input() buildDiscount: number = 0
 	@Input() authorizeSelection: boolean = false
 	@Input() filter?: ProjectFilter
@@ -91,16 +90,6 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 		switch(this.listType){
 			case('builderSelector'):{this.background = (this.currentPhase??'').toLowerCase(); break}
 			default:{this.background = this.listType}
-		}
-	}
-	private setListSubType(event: EventCardSelector): void {
-		let subtype: EventUnionSubTypes = event.subType as EventUnionSubTypes
-		switch(subtype){
-			case('selectCardForcedSell'):case('selectCardOptionalSell'):{this.listSubType = 'sell'; break}
-			case('researchPhaseResult'):{this.listSubType = 'research'; break}
-			case('discardCards'):{this.listSubType='discard'; break}
-			case('addRessourceToSelectedCard'):{this.listSubType='addRessource';break}
-			case('scanKeepResult'):{this.listSubType='scanKeepResult';break}
 		}
 	}
 	public cardStateChange(cardChange: {card: PlayableCardModel, state:CardState}): void {

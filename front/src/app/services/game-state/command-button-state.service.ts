@@ -48,7 +48,6 @@ export class CommandButtonStateService {
             tresholdValue: selector.selectionQuantity,
             value: selector.selectedList.length
         })
-        console.log(button)
         this._eventMainButtonUpdated$.next(button)
     }
 }

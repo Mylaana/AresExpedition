@@ -29,22 +29,6 @@
 					(buttonClicked)="cardBuilderButtonClicked(b)">
 				</app-event-card-builder-button>
 			</div>
-			<!--
-			<span class="buttons-filler"
-				*ngIf="!displayButtons()">
-			</span>
-				<ng-container *ngIf="hasOptionButton()">
-					<div [ngClass]="['inner-decoration--separator', cardSize]"></div>
-					<div class="wrapper-alternative">
-						<div class="wrapper-alternative-inner">
-							<h2>Or</h2>
-							<div [ngClass]="['wrapper-buttons', cardSize]">
-								<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
-							</div>
-						</div>
-					</div>
-				</ng-container>
-			-->
 		</div>
 	</div>
 	<app-card-builder-alternative-option
