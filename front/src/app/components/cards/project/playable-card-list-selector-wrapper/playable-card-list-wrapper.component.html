@@ -10,5 +10,7 @@
     [selectionQuantity]="_selectionQuantity"
     [selectionTresholdType]="_selectionTresholdType"
     [buildDiscount]="_builderDiscount"
-    (updateSelectedCardList)="onUpdateSelectedCardList($event)">
+    [filter]="_filter"
+    (updateSelectedCardList)="onUpdateSelectedCardList($event)"
+    (projectActivated)="onProjectActivated($event)">
 </app-playable-card-list>

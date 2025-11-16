@@ -11,6 +11,7 @@ import { GameParamService } from '../../../../services/core-game/game-param.serv
 import { Subject, takeUntil } from 'rxjs';
 import { MinMaxEqualType, SettingCardSize } from '../../../../types/global.type';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
+import { ProjectFilter } from '../../../../interfaces/global.interface';
 
 const selectorTypes: ProjectListType[] = ['selector', 'playedSelector', 'builderSelector']
 
@@ -33,6 +34,7 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	//@Input() currentChildrenCardState!: CardState
 	@Input() buildDiscount: number = 0
 	@Input() authorizeSelection: boolean = false
+	@Input() filter?: ProjectFilter
 	
 	//selection related inputs
 	@Input() selectionQuantity!: number

@@ -4,7 +4,6 @@ import { NonEventButton } from '../../../models/core-game/button.model';
 import { Subject } from 'rxjs';
 import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { EventBaseModel, EventCardActivator } from '../../../models/core-game/event.model';
-import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { DeckQueryOptionsEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
@@ -14,13 +13,14 @@ import { CommonModule } from '@angular/common';
 import { ActionPhaseService } from '../../../services/core-game/action-phase.service';
 import { GameContentName, StandardProjectButtonNames } from '../../../types/global.type';
 import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
+import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
 
 @Component({
     selector: 'app-phase-action',
     imports: [
 		CommonModule,
         NonEventButtonComponent,
-        PlayableCardListComponent,
+        PlayableCardListWrapperComponent,
 		HexedBackgroundComponent
     ],
     templateUrl: './phase-action.component.html',

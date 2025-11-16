@@ -3,14 +3,14 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } 
 import { PlayableCardListComponent } from '../playable-card-list/playable-card-list.component';
 import { Subject, takeUntil } from 'rxjs';
 import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
-import { EventBaseCardSelector, EventCardBuilder } from '../../../../models/core-game/event.model';
+import { EventBaseCardSelector, EventCardActivator, EventCardBuilder } from '../../../../models/core-game/event.model';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { CardState } from '../../../../interfaces/card.interface';
 import { Utils } from '../../../../utils/utils';
 import { MinMaxEqualType } from '../../../../types/global.type';
 import { EventHandler } from '../../../../models/core-game/handlers.model';
-import { ListBehavior, ProjectListType } from '../../../../types/project-card.type';
-import { CardSelector } from '../../../../interfaces/global.interface';
+import { ActivationOption, ListBehavior, ProjectListType } from '../../../../types/project-card.type';
+import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
 import { CardBuilderEventHandlerService } from '../../../../services/core-game/card-builder-event-handler.service';
 
 @Component({
@@ -25,6 +25,7 @@ import { CardBuilderEventHandlerService } from '../../../../services/core-game/c
 export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	@Input() listBehavior: ListBehavior = 'display'
 	@Output() onSelectionUpdateForBuilderEvent = new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
+	@Output() projectActivated = new EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}>()
 	@ViewChild('cardList') cardListChild!: PlayableCardListComponent
 	
 	destroy$ = new Subject<void>()
@@ -38,6 +39,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	_selectionQuantity!: number
 	_builderDiscount!: number
 	_listType!: ProjectListType
+	_filter!: ProjectFilter | undefined
 	
 	constructor(
 		private gameStateService: GameStateFacadeService,
@@ -64,6 +66,9 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 				this._listType = 'builderSelector'
 				break
 			}
+			case('activator'):{
+				this.gameStateService.currentEventActivator.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventActivatorUpdate(event))
+			}
 		}
 	}
 	ngOnDestroy(): void {
@@ -87,6 +92,15 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		this.setSelectorPart(event.getCardSelector())
 		this.updateDiscount(event.getCurrentBuilderDiscount())
 	}
+	private onEventActivatorUpdate(event: EventCardActivator | null){
+		this._currentEvent = event
+		if(!event){
+			this.resetState()
+			return
+		}
+		this.setSelectorPart(event.getCardSelector())
+		//this.setAuthorizeSelection(true)
+	}
 	private updateDiscount(discount: number){
 		this._builderDiscount = discount
 	}
@@ -103,6 +117,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		this._selectionQuantity = selector.selectionQuantity
 		this._selectionTresholdType = selector.selectionQuantityTreshold
 		this.setAuthorizeSelection(selector.cardInitialState?.selectable??false)
+		this._filter = selector.filter
 	}
 	private setAuthorizeSelection(authorized: boolean){
 		this._authorizeSelection = authorized
@@ -127,5 +142,9 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	}
 	public selectNone(){ 
 		this.cardListChild.selectNone()
+	}
+	public onProjectActivated(input: {card: PlayableCardModel, option:ActivationOption, twice: boolean}){
+		console.log(input)
+		this.projectActivated.emit(input)
 	}
 }
