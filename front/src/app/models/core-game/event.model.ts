@@ -212,6 +212,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
             this.setEventIsComplete()
             return
         }
+        this.currentBuilder = builder
         this.currentBuilder.setBuilderIsLocked(false)
     }
     private setEventIsComplete(){

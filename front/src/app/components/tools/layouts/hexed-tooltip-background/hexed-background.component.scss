@@ -54,4 +54,14 @@
 	background: rgba(255, 255, 255, .3);
 	-webkit-clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
 	clip-path: polygon(0% 50%, #{$width} 0%, calc(100% - #{$width}) 0%, 100% 50%, calc(100% - #{$width}) 100%, #{$width} 100%, 0% 50%, calc($border-thickness) 50%, calc($width + $inner-offset) calc(100% - $border-thickness), calc(100% - calc($width + $inner-offset)) calc(100% - $border-thickness), calc(100% - $border-thickness) 50%, calc(100% - calc($width + $inner-offset)) calc($border-thickness), calc($width + $inner-offset) calc($border-thickness), calc($border-thickness) 50%);
+
+	&.phaseA {
+		background: rgba(255, 255, 255, 0.25);
+	}
+	&.phaseB {
+		background: rgba(255, 255, 255, 0.4);
+	}
+	&.phaseC {
+		background: rgba(255, 255, 255, .65);
+	}
 }

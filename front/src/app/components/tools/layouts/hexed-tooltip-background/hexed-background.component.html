@@ -4,7 +4,7 @@
 			[class.background]="background">
 			<ng-container *ngFor="let c of _columnArray">
 				<ng-container *ngFor="let r of _rowArray">
-					<div class="hex" [ngClass]="['c' + c, 'r' + r, c%2!=0?'odd':'even']">
+					<div *ngIf="display(c, r)" [ngClass]="['hex', 'c' + c, 'r' + r, c%2!=0?'odd':'even', partialStyle]">
 					</div>
 				</ng-container>
 			</ng-container>
