@@ -14,8 +14,8 @@
 		<div [ngClass]="['wrapper-buton-zone', cardSize]"
 			*ngIf="!cardBuilder.getBuilderIsLocked()">
 			<div [ngClass]="['buttons-hider', displayBuildOrCancel()?'':'hide']"
-			(mouseenter)="_hoveredBackground=true"
-			(mouseleave)="_hoveredBackground=false">
+				(mouseenter)="_hoveredBackground=true"
+				(mouseleave)="_hoveredBackground=false">
 				<img src="/assets/other/research_eye_black.png" alt="">
 			</div>
 			<div [ngClass]="['wrapper-buttons', cardSize]"

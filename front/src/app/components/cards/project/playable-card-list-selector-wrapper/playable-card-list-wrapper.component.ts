@@ -65,7 +65,6 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 				this.builderService.currentActiveBuilderDiscount.pipe(takeUntil(this.destroy$)).subscribe(d => this.updateDiscount(d))
 				this.builderService.currentNotifyRecalculateSelector.pipe(takeUntil(this.destroy$)).subscribe(() => {
 					if(!this._currentEvent){return}
-					console.log('notified')
 					this.setSelectorPart(this._currentEvent?.getCardSelector())
 				})
 				this._listType = 'builderSelector'

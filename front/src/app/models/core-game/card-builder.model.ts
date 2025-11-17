@@ -13,7 +13,6 @@ export class CardBuilder {
     private optionButtons: EventCardBuilderButton[] = []
     private option!: BuilderOption
     private builderIsLocked: boolean = false
-    private firstCardBuilt: boolean = false
     private discount: number = 0
     private alternativeCostUsed: NonEventButtonNames[] = []
     private alternativeOptionUsed: NonEventButtonNames[] = []
@@ -131,16 +130,12 @@ export class CardBuilder {
         return [this.selectedCard]
     }
     removeSelectedCard(): void {
-        console.log('remove', this.selectedCard)
         this.selectedCard = undefined
     }
     setBuilderIsLocked(locked?: boolean): void {
         this.builderIsLocked=locked??true
     }
     getBuilderIsLocked(): boolean {
-        if(this.option===BuilderOption.developmentSecondBuilder && !this.firstCardBuilt){
-            return true
-        }
         return this.builderIsLocked
     }
     getBuitCardCode(): string | undefined {
