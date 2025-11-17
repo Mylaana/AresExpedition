@@ -16,9 +16,9 @@
 				<app-text-with-image [rawText]="getText('bonus')"></app-text-with-image>
 			</div>
 			
-			<app-hexed-background *ngIf="phaseCardLevel===0"[autoFillHexSize]="'small'" [partialStyle]="'phaseA'"></app-hexed-background>
-			<app-hexed-background *ngIf="phaseCardLevel===1"[autoFillHexSize]="'small'" [partialStyle]="'phaseB'"></app-hexed-background>
-			<app-hexed-background *ngIf="phaseCardLevel===2"[autoFillHexSize]="'small'" [partialStyle]="'phaseC'"></app-hexed-background>
+			<app-hexed-background *ngIf="phaseCardLevel===0" [autoFillHexSize]="getHexSize()" [partialStyle]="'phaseA'"></app-hexed-background>
+			<app-hexed-background *ngIf="phaseCardLevel===1" [autoFillHexSize]="getHexSize()" [partialStyle]="'phaseB'"></app-hexed-background>
+			<app-hexed-background *ngIf="phaseCardLevel===2" [autoFillHexSize]="getHexSize()" [partialStyle]="'phaseC'"></app-hexed-background>
 			<div class="background-decoration"
 				*ngIf="phaseCardLevel===-1">
 			</div>

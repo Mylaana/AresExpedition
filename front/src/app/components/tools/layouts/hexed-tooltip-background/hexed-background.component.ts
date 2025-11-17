@@ -2,12 +2,13 @@ import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { fromEvent, debounceTime } from 'rxjs';
+import { HexSize } from '../../../../types/global.type';
 
-type HexSize = 'small' | 'medium' | 'large'
 type PartialStyle = 'none' | 'phaseA' | 'phaseB' | 'phaseC'
 const ratioWidthToHeight: number = .88
 
 const hexWidth = new Map<HexSize, number>([
+	["xs", 17],
 	["small", 22],
 	["medium", 35],
 	["large", 50],
@@ -121,13 +122,6 @@ export class HexedBackgroundComponent implements OnInit, OnDestroy {
 		if(this.partialStyle==='phaseA'){return step1}
 		if(this.partialStyle==='phaseB'){return step2 || step1}
 		if(this.partialStyle==='phaseC'){return step3 || step2 || step1}
-		/*
-		if(this.partialStyle==='phaseA' && (c+r)%2===0 && c%5!=0 && r%3!=0){return true}
-		if(this.partialStyle==='phaseB' && (c+r)%3!=0 && c%5!=0 && r%7!=0){return true}
-		if(this.partialStyle==='phaseC' && (c+r)%3!=0 && c%9!=0 && r%9!=0){return true}
-		*/
-
-		//if(((c+r)%2===0 && c%5!=0 && r%3!=0)){return false}
 
 		return false
 	}

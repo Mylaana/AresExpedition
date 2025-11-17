@@ -69,3 +69,4 @@ export type GameContentName = 'expansionDiscovery' | 'expansionFoundations' | 'e
 export type MoonTileType = 'habitat' | 'road' | 'mine'
 export type FilterPannelSelectedBehavior = 'all' | 'greyNotSelected'
 export type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
+export type HexSize = 'xs' | 'small' | 'medium' | 'large'

@@ -11,7 +11,7 @@ import { TextWithImageComponent } from '../../../tools/text-with-image/text-with
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { NonEventButton } from '../../../../models/core-game/button.model';
-import { SettingCardSize } from '../../../../types/global.type';
+import { HexSize, SettingCardSize } from '../../../../types/global.type';
 import { GameTextService } from '../../../../services/core-game/game-text.service';
 import { GAME_PHASECARD_NAME_LIST } from '../../../../global/global-const';
 
@@ -112,5 +112,16 @@ export class PhaseCardComponent extends BaseCardComponent {
 			}
 		}
 		return ''
+	}
+	getHexSize(): HexSize {
+		switch(this.cardSize){
+			case('small'):{
+				return 'xs'
+			}
+			case('medium'):{
+				return 'small'
+			}
+		}
+		return 'small'
 	}
 }

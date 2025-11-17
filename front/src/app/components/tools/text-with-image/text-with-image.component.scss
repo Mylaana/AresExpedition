@@ -251,11 +251,11 @@
 			font-weight: 600;
 			&.small{
 				padding-top: 2px;
-				font-size: calc(var(--card-text-size--small) * 1.1);
+				font-size: calc(var(--card-text-size--small) * 1.4);
 			}
 			&.medium{
-				padding-top: 2px;
-				font-size: calc(var(--card-text-size--medium) * 1.1);
+				padding-top: 7px;
+				font-size: calc(var(--card-text-size--medium) * 1.4);
 			}
 		}
 		& > img {
