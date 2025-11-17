@@ -30,6 +30,7 @@ def main():
     excluded = 0
 
     for file in os.listdir(ARCHIVES_DIR):
+        print(file)
         with open(os.path.join(ARCHIVES_DIR, file), 'r', encoding='utf-8') as file:
             file_data = json.load(file)
             game = GameState(**file_data)

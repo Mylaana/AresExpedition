@@ -56,7 +56,6 @@ export class PlayerScoreStateModel {
 	private setTotalScore(): void {
 		this.totalScore = this.vp + this.scalingVp + this.terraformingRating
 		+ this.forest + this.getClaimedMilestoneCount() * 3 + this.awardsVp
-		+ this.scalingVp
 	}
 	setScalingVP(scalingVp: number){
 		this.scalingVp = scalingVp
