@@ -10,5 +10,6 @@
 </div>
 <app-playable-card-list-wrapper
 	#wrapper
-	[listBehavior]="'selector'">
+	[listBehavior]="'selector'"
+	(onSelectionUpdateForSelectorEvent)="onUpdateSelectedCardList($event)">
 </app-playable-card-list-wrapper>

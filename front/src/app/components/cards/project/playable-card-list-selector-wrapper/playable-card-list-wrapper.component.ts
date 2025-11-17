@@ -27,6 +27,7 @@ import { EventUnionSubTypes } from '../../../../types/event.type';
 export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	@Input() listBehavior: ListBehavior = 'display'
 	@Output() onSelectionUpdateForBuilderEvent = new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
+	@Output() onSelectionUpdateForSelectorEvent = new EventEmitter<{selected: PlayableCardModel[], listType: ProjectListType}>()
 	@Output() projectActivated = new EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}>()
 	@ViewChild('cardList') cardListChild!: PlayableCardListComponent
 	
@@ -138,6 +139,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 				break
 			}
 			default:{
+				this.onSelectionUpdateForSelectorEvent.emit(input)
 				this.eventHandler.updateSelectedCardList(input.selected, input.listType)
 				this.mainButtonService.updateCurrentEventMainButton()
 				break
@@ -161,6 +163,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			case('addRessourceToSelectedCard'):{this._listSubType='addRessource';break}
 			case('scanKeepResult'):{this._listSubType='scanKeepResult';break}
 			case('doubleProduction'):{this._listSubType='repeatProduction';break}
+			case('selectStartingHand'):{this._listSubType='recycleStartingProject';break}
 		}
 	}
 }
