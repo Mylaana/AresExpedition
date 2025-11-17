@@ -7,6 +7,7 @@ import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerSco
 import com.ares_expedition.enums.game.MilestonesEnum;
 
 public class PlayerScoreState {
+    private Integer totalScore;
     private Integer vp;
     private Integer terraformingRating;
     private Integer forest;
@@ -19,6 +20,7 @@ public class PlayerScoreState {
     public PlayerScoreState() {
     }
     PlayerScoreState(PlayerScoreStateDTO dto) {
+        this.totalScore = dto.getTotalScore();
         this.vp = dto.getVp();
         this.terraformingRating = dto.getTerraformingRating();
         this.forest = dto.getForest();
@@ -93,5 +95,11 @@ public class PlayerScoreState {
     }
     public void setMine(Integer mine) {
         this.mine = mine;
+    }
+    public Integer getTotalScore() {
+        return totalScore;
+    }
+    public void setTotalScore(Integer totalScore) {
+        this.totalScore = totalScore;
     }
 }

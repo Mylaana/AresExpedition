@@ -24,6 +24,7 @@ export interface PlayerInfoStateDTO {
 	c: RGB //color
 }
 export interface PlayerScoreStateDTO {
+	ts: number, //total score
 	cm: MilestonesEnum[],
 	v: number,
 	tr: number,

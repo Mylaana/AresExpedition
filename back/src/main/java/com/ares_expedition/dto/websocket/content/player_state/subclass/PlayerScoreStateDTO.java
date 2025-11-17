@@ -7,6 +7,8 @@ import com.ares_expedition.model.player_state.subclass.PlayerScoreState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerScoreStateDTO {
+    @JsonProperty("ts")
+    private Integer totalScore;
     @JsonProperty("v")
     private Integer vp;
     @JsonProperty("tr")
@@ -28,6 +30,7 @@ public class PlayerScoreStateDTO {
     }
 
     public PlayerScoreStateDTO(PlayerScoreState state) {
+        this.totalScore = state.getTotalScore();
         this.vp = state.getVp();
         this.terraformingRating = state.getTerraformingRating();
         this.forest = state.getForest();
@@ -91,5 +94,11 @@ public class PlayerScoreStateDTO {
 
     public void setMine(Integer mine) {
         this.mine = mine;
+    }
+    public Integer getTotalScore() {
+        return totalScore;
+    }
+    public void setTotalScore(Integer totalScore) {
+        this.totalScore = totalScore;
     }
 }

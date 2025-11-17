@@ -81,7 +81,7 @@ export class PlayerStateModel {
 	getMilestonesVp(): number {return this.getMilestoneCompleted() * 3}
 	getAwardsVp(): number {return this.scoreState.getAwardsVp()}
 	getBaseVP(): number {return this.scoreState.getBaseVP()}
-	getTotalVP(): number {return this.scoreState.getTotalVP()}
+	getTotalScore(): number {return this.scoreState.getTotalScore()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}
 	setScalingVp(){
 		this.scoreState.updateCardScalingVPList(this)

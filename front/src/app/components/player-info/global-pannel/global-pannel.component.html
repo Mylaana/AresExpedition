@@ -16,7 +16,7 @@
         </div>
     </div>
 	<div class="pannel-card">
-		<app-vp [vpNumber]="playerState.getTotalVP().toString()" [shape]="'square'"></app-vp>
+		<app-vp [vpNumber]="playerState.getTotalScore().toString()" [shape]="'square'"></app-vp>
 	</div>
 	<app-player-name [ngClass]="pannelSize" [name]="playerState.getName()" [color]="playerState.getColor()"></app-player-name>
 	<div class="wrapper-pannel-card pannel-border">
