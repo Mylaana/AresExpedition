@@ -533,5 +533,13 @@ export const TriggerEffectEventFactory = {
 			}
 		}
 		return events;
+	},
+	isEventGeneratingTrigger(triggerCode: string): boolean {
+		for (const hook in HANDLERS_BY_HOOK) {
+			if (triggerCode in HANDLERS_BY_HOOK[hook as HookType]) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

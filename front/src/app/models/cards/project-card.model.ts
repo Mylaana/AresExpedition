@@ -356,9 +356,11 @@ export class TriggerState {
         return this.activeCostModTrigger
     }
     playTrigger(cardCode: string): void {
-        this.playedCards.push(cardCode)
-        this.activeCards.push(cardCode)
-		this.sortActiveTriggerList()
+		this.playedCards.push(cardCode)
+		if(PlayableCard.isEventGeneratingTrigger(cardCode)){
+			this.activeCards.push(cardCode)
+			this.sortActiveTriggerList()
+		}
     }
     setTriggerInactive(cardCode: string): void {
         this.activeCards = this.activeCards.filter((e, i) => e !== cardCode)

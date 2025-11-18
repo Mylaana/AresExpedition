@@ -30,7 +30,7 @@ function getActivationOption(cardCode: string): ActivationOption[]{
 }
 function getAlternativePayActiveCodeList(clientState: PlayerStateModel):string[]{
 	let result: string[] = []
-	for(let triggerCode of clientState.getTriggersIdActive()){
+	for(let triggerCode of clientState.getTriggersIdPlayed()){
 		if(ALTERNATIVE_PAY_TRIGGER_LIST.includes(triggerCode)){result.push(triggerCode)}
 	}
 	return result
@@ -139,6 +139,7 @@ export const PlayableCard = {
 	getRepeatProductionCaption,
 	hasScalingProduction,
 	sortTriggerList,
+	isEventGeneratingTrigger: TriggerEffectEventFactory.isEventGeneratingTrigger,
 	prerequisite: PlayableCardPrerequisite,
 	activable: PlayableCardActivativable
 }

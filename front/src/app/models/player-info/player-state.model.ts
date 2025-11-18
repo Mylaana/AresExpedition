@@ -233,6 +233,7 @@ export class PlayerStateModel {
 	//cardState
 	getTriggersIdActive(): string[] {return this.projectCardState.getActivePlayedTriggersId()}
 	setTriggerInactive(trigger: string): void {this.projectCardState.setTriggerInactive(trigger)}
+	getTriggersIdPlayed(): string[] {return this.projectCardState.getPlayedTriggersId()}
 
 	addCardsToHand(cards: string | string[]) {this.projectCardState.addCardsToHand(cards)}
 	removeCardsFromHand(cardCodeList: string | string[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType, addRemovedCardsToDiscard)}
