@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Subject, takeUntil, timeout } from 'rxjs';
 import { fromEvent, debounceTime } from 'rxjs';
 import { HexSize } from '../../../../types/global.type';
-import { time } from 'console';
 
-type PartialStyle = 'none' | 'phaseA' | 'phaseB' | 'phaseC' | 'sellEvent'
+type PartialStyle = 'none' | 'phaseBase' | 'phaseUpgraded' | 'sellEvent'
 const ratioWidthToHeight: number = .88
 
 const hexWidth = new Map<HexSize, number>([
@@ -115,18 +114,16 @@ export class HexedBackgroundComponent implements OnDestroy, AfterViewInit {
 	}
 	display(c: number, r: number): boolean {
 		if(this.partialStyle==='none'){return true}
-		if(['phaseA', 'phaseB', 'phaseC'].includes(this.partialStyle)){return this.displayPhaseStyle(c, r)}
+		if(['phaseBase', 'phaseUpgraded'].includes(this.partialStyle)){return this.displayPhaseStyle(c, r)}
 		if(this.partialStyle==='sellEvent'){return this.displayOtherStyle(c, r)}
 		return false
 	}
 	private displayPhaseStyle(c: number, r: number): boolean {
 		let step1 = ((r%2===0 && c%3===0) || (r%3===0 && c%2===0)) &&c!=r || c===(r+2)
-		let step2 = c===(r+4) || c===(r-2)
 		let step3 = c===(r+1) || c===(r-4) || c===(r+3) || c===(r-1)
 
-		if(this.partialStyle==='phaseA'){return step1}
-		if(this.partialStyle==='phaseB'){return step2 || step1}
-		if(this.partialStyle==='phaseC'){return step3 || step2 || step1}
+		if(this.partialStyle==='phaseBase'){return step1}
+		if(this.partialStyle==='phaseUpgraded'){return step3  || step1}
 
 		return false
 	}
