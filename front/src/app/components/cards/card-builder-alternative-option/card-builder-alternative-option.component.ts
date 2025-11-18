@@ -5,7 +5,7 @@ import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 import { CommonModule } from '@angular/common';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
 import { Subject, takeUntil } from 'rxjs';
-import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
+import { EventBuilderHandlerService } from '../../../services/core-game/components-services/card-builder.service';
 
 @Component({
 	selector: 'app-card-builder-alternative-option',
@@ -25,7 +25,7 @@ export class CardBuilderAlternativeOptionComponent implements OnInit{
 	
 	private destroy$ = new Subject<void>
 
-	constructor(private builderService: CardBuilderEventHandlerService){}
+	constructor(private builderService: EventBuilderHandlerService){}
 
 	ngOnInit(): void {
 		this._buttons = this.builder.getButtons('option')

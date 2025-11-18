@@ -8,8 +8,8 @@ import { EventCardBuilderButton } from "./button.model"
 type ButtonGroup = 'base' | 'option'
 
 export class CardBuilder {
+    private index!: number
     private selectedCard!: PlayableCardModel | undefined
-    private cardInitialState?: CardState
     private buttons: EventCardBuilderButton[] = []
     private optionButtons: EventCardBuilderButton[] = []
     private option!: BuilderOption
@@ -55,7 +55,7 @@ export class CardBuilder {
         if(!button){return}
         button.setEnabled(enabled)
     }
-    private updateButtonGroupState(buttonName: ButtonGroupUpdateType): void {
+    private updateButtonGroupState(buttonName: NonEventButtonNames): void {
         switch(buttonName){
             case('buildCard'):{
                 this.updateButtonEnabled('buildCard', false)
@@ -78,6 +78,7 @@ export class CardBuilder {
                 this.updateButtonEnabled(BuilderOption.gain6MC, false)
                 break
             }
+            /*
             case('selectionCardSelected'):{
                 this.updateButtonEnabled('buildCard', true)
                 this.updateButtonEnabled('discardSelectedCard', true)
@@ -97,6 +98,7 @@ export class CardBuilder {
                 this.resetButtons()
                 break
             }
+                */
         }
     }
     public resetButtons(){
@@ -105,8 +107,8 @@ export class CardBuilder {
             button.resetStartEnabled()
         }
     }
-    resolveCardBuilderButtonClicked(button:EventCardBuilderButton){
-        switch(button.name){
+    resolveCardBuilderButtonClicked(buttonName:NonEventButtonNames){
+        switch(buttonName){
             case('discardSelectedCard'):{
                 this.removeSelectedCard()
                 break
@@ -117,11 +119,11 @@ export class CardBuilder {
                 break
             }
         }
-        this.updateButtonGroupState(button.name)
+        this.updateButtonGroupState(buttonName)
     }
     setSelectedCard(card: PlayableCardModel): void {
         this.selectedCard = card
-        this.updateButtonGroupState('selectionCardSelected')
+        //this.updateButtonGroupState('selectionCardSelected')
     }
     getSelectedCard(): PlayableCardModel | undefined {
         return this.selectedCard
@@ -177,6 +179,12 @@ export class CardBuilder {
     isEligibleForNext(): boolean {
         if(this.alternativeOptionUsed.length!=0){return false}
         return true
+    }
+    getIndex(): number {
+        return this.index
+    }
+    setIndex(index: number){
+        this.index = index
     }
     fromDto(dto: BuilderStatusDTO): void {
         this.setBuilderIsLocked(dto.l)

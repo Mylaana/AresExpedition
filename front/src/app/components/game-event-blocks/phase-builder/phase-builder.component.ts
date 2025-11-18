@@ -13,7 +13,7 @@ import { SettingCardSize } from '../../../types/global.type';
 import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { ProjectListType } from '../../../types/project-card.type';
-import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
+import { EventBuilderHandlerService } from '../../../services/core-game/components-services/card-builder.service';
 
 @Component({
   selector: 'app-phase-builder',
@@ -40,7 +40,7 @@ export class PhaseBuilderComponent{
 
 	constructor(
 		private gameParam: GameParamService,
-		private cardBuilderHandlerService: CardBuilderEventHandlerService
+		private cardBuilderHandlerService: EventBuilderHandlerService
 	){}
 
 	ngOnInit(): void {

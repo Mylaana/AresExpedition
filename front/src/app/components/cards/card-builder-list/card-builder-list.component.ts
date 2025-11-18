@@ -5,10 +5,9 @@ import { EventCardBuilderButton, NonEventButton } from '../../../models/core-gam
 import { SettingCardSize } from '../../../types/global.type';
 import { EventCardBuilder } from '../../../models/core-game/event.model';
 import { Subject, takeUntil } from 'rxjs';
-import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
-import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
-import { EventProcessor } from '../../../services/events/event-processor.service';
+import { EventBuilderHandlerService } from '../../../services/core-game/components-services/card-builder.service';
+
 
 @Component({
     selector: 'app-card-builder-list',
@@ -32,7 +31,7 @@ export class CardBuilderListComponent implements OnInit, OnDestroy{
 	destroy$ = new Subject<void>()
 
 	constructor(
-		private builderService: CardBuilderEventHandlerService,
+		private builderService: EventBuilderHandlerService,
 	){}
 
 	ngOnInit(): void {

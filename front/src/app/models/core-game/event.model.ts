@@ -6,7 +6,7 @@ import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
-import { DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, InputRuleEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { BuilderType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const";
@@ -176,13 +176,13 @@ export class EventCardBuilder extends EventBaseCardSelector {
 		if(!this.currentBuilder){return}
         return this.currentBuilder.getSelectedCard()
     }
-    cardBuilderButtonClicked(button: EventCardBuilderButton, nonCurrentBuilder?: CardBuilder): void {
+    cardBuilderButtonClicked(buttonName: NonEventButtonNames, builderIndex?: number): void {
         if(this.eventIsComplete){return}
         if(!this.currentBuilder){return}
 
-        let builder = nonCurrentBuilder?nonCurrentBuilder:this.currentBuilder
+        let builder = builderIndex?this.cardBuilder[builderIndex]:this.currentBuilder
 
-        switch(button.name){
+        switch(buttonName){
             case('buildCard'):{
                 this.activateNextBuilder()
 				break
@@ -193,7 +193,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
             }
         }
 
-        builder.resolveCardBuilderButtonClicked(button)
+        builder.resolveCardBuilderButtonClicked(buttonName)
     }
     private resetCurrentBuilderSelectedCardIfExists(){
         let selectedCard = this.currentBuilder.getSelectedCard()
@@ -213,10 +213,12 @@ export class EventCardBuilder extends EventBaseCardSelector {
             return
         }
         this.currentBuilder = builder
+        if(this.currentBuilder.getOption()===BuilderOption.developmentSecondBuilder){
+            this.setSelectorFilter({type: ProjectFilterNameEnum.developmentPhaseSecondBuilder})
+        }
         this.currentBuilder.setBuilderIsLocked(false)
     }
     private setEventIsComplete(){
-        console.trace('EventCardBuilder - setEventIsComplete', this)
         this.deactivateSelection()
         this.eventIsComplete = true
         this.cardSelector.stateFromParent = Utils.toFullCardState({})
@@ -262,14 +264,12 @@ export class EventCardBuilder extends EventBaseCardSelector {
         if(!ALTERNATIVE_PAY_EVENT[name]){return}
         ALTERNATIVE_PAY_EVENT[name](this.currentBuilder)
     }
-    resolveBuilderAlternativeOptionUsed(builder: CardBuilder, option: NonEventButtonNames){
-        for(let b of this.cardBuilder){
-            if(b===builder){
-                b.setBuilderIsLocked(true)
-                b.setAlternativeOptionUsed(option)
-                break
-            }
-        }
+    resolveBuilderAlternativeOptionUsed(builderIndex: number, option: NonEventButtonNames){
+        let builder = this.cardBuilder[builderIndex]
+        if(!builder){return}
+        builder.setBuilderIsLocked(true)
+        builder.setAlternativeOptionUsed(option)
+
         if(this.cardBuilder.filter((e) => e.getBuilderIsLocked()===false).length===0){
             this.setEventIsComplete()
         }

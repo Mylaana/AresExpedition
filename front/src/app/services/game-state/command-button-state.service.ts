@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { GameEventQueueService } from "./sub-service/game-event-queue.service";
+import { EventQueueService } from "../events/event-queue.service";
 import { EventBaseCardSelector, EventBaseModel } from "../../models/core-game/event.model";
 import { EventMainButton } from "../../models/core-game/button.model";
 import { BehaviorSubject } from "rxjs";

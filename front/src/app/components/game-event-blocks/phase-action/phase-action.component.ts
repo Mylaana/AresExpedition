@@ -40,9 +40,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 	_buyHabitat!: NonEventButton
 	_buyMine!: NonEventButton
 
-	//_gameOptions!: GameOption
-
-
 	private _actionEvent!: EventCardActivator
 	private destroy$ = new Subject<void>()
 

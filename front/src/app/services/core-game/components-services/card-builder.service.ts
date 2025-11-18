@@ -1,20 +1,19 @@
 import { Injectable } from "@angular/core"
 import { BehaviorSubject, Subject } from "rxjs"
-import { EventFactory } from "../../../factory/event/event-factory"
 import { PlayableCard } from "../../../factory/playable-card.factory"
 import { PlayableCardModel } from "../../../models/cards/project-card.model"
 import { EventCardBuilderButton, NonEventButton } from "../../../models/core-game/button.model"
 import { CardBuilder } from "../../../models/core-game/card-builder.model"
-import { EventCardBuilder, EventBaseModel } from "../../../models/core-game/event.model"
+import { EventCardBuilder } from "../../../models/core-game/event.model"
 import { PlayerStateModel } from "../../../models/player-info/player-state.model"
 import { NonEventButtonNames } from "../../../types/global.type"
 import { GameStateFacadeService } from "../../game-state/game-state-facade.service"
-import { EventProcessor } from "../event-processor.service"
+import { EventBuilderCommand } from "../../../interfaces/services.interface"
 
 @Injectable({
     providedIn: 'root'
 })
-export class CardBuilderEventHandlerService{
+export class EventBuilderHandlerService{
     private _currentEvent$ = new BehaviorSubject<EventCardBuilder | null>(null)
     currentEventBuilder = this._currentEvent$.asObservable()
     _currentState!: PlayerStateModel
@@ -38,6 +37,9 @@ export class CardBuilderEventHandlerService{
 
     private cardBuilder$ = new BehaviorSubject<CardBuilder[]>([])
     currentCardBuilder = this.cardBuilder$.asObservable()
+
+    private builderButtonCommand$ = new Subject<EventBuilderCommand>()
+    currentBuilderButtonCommand = this.builderButtonCommand$.asObservable()
 
     constructor(
         private gameStateService: GameStateFacadeService,
@@ -74,58 +76,29 @@ export class CardBuilderEventHandlerService{
         this.notifyRecalculateSelector()
     }
     public onCardBuilderButtonClicked(button: EventCardBuilderButton, nonCurrentBuilder?: CardBuilder){
-        let currentEvent = this.getCurrentEvent()
-        if(!currentEvent){return}
-        let newEvents: EventBaseModel[] = []
-        switch(button.name){
-            case('buildCard'):{
-                let card = currentEvent.getCardToBuild()
-                if(card===undefined){return}
-                currentEvent.lockCurrentBuilder()
-                currentEvent.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(currentEvent.getSelectorFilter()))
-                newEvents = [EventFactory.createGeneric('buildCard', {card:card})]
-                break
-            }
-            case('discardSelectedCard'):{
-            }
-        }
-        currentEvent.cardBuilderButtonClicked(button, nonCurrentBuilder)
-        this.checkIfComplete()
-        this.gameStateService.addEventQueue(newEvents, 'first')
+        this.builderButtonCommand$.next({buttonName: button.name, commandType: 'base', builderIndex:nonCurrentBuilder?.getIndex()})
     }
     public onAlternativePayButtonClicked(button: NonEventButton){
-        /*
-        if(!this._currentEvent){return}
-		let events = PlayableCard.getAlternativePayButtonClickedEvents(button.name)
-		if(events.length===0){return}
-        this._currentEvent.resolveCurrentBuilderAlternativeCostUsed(button.name)
-		this.gameStateService.addEventQueue(events, 'first')
-        this.activeBuilderDiscount$.next(this._currentEvent.getCurrentBuilderDiscount())
+        this.builderButtonCommand$.next({buttonName: button.name, commandType: 'alternativePay'})
         this.notifyRecalculateSelector$.next()
-        */
     }
     public onAlternativeOptionButtonClicked(button: NonEventButton, builder: CardBuilder){
-        /*
-        if(!this._currentEvent){return}
-		let events = PlayableCard.getBuilderAlternativeOptionButtonClickedEvents(button.name)
-		if(events.length===0){return}
-        this._currentEvent.resolveBuilderAlternativeOptionUsed(builder, button.name)
-		this.gameStateService.addEventQueue(events, 'first')
-        this.notifyRecalculateSelector$.next()
-        this.checkIfComplete()
-        */
+        this.builderButtonCommand$.next({buttonName: button.name, builderIndex: builder.getIndex(), commandType: 'alternativeOption'})
     }
+    /*
     private checkIfComplete() {
-        /*
         if(!this._currentEvent){return}
         if(this._currentEvent.isComplete()){
             this.builderIsComplete$.next(true)
         } else {
             this.notifyRecalculateSelector$.next()
         }
-            */
     }
+    */
     public notifyRecalculateSelector(){
         this.notifyRecalculateSelector$.next()
+    }
+    public notifyNewDiscount(discount: number){
+        this.activeBuilderDiscount$.next(discount)
     }
 }

@@ -10,7 +10,7 @@ import { BuilderType } from "../types/phase-card.type";
 import { Checker } from "../utils/checker";
 
 
-function configBuilder(builderType: BuilderType, builderOption?:BuilderOption): CardBuilder{
+function configBuilder(builderType: BuilderType, builderIndex:number=0, builderOption?:BuilderOption): CardBuilder{
     let builder = new CardBuilder
     if(BUILDER_CONFIG[builderType]){
         builder = BUILDER_CONFIG[builderType](builder, builderOption)
@@ -18,6 +18,7 @@ function configBuilder(builderType: BuilderType, builderOption?:BuilderOption): 
     builderOption?builder.setOption(builderOption):null
     builder.addButton(ButtonDesigner.createEventCardBuilderButton('buildCard'))
     builder.addButton(ButtonDesigner.createEventCardBuilderButton('discardSelectedCard'))
+    builder.setIndex(builderIndex)
     return builder
 }
 export const BUILDER_LIST_CONFIG: Record<BuilderType, (builderOption?: BuilderOption) => CardBuilder[]> = {
@@ -29,18 +30,18 @@ export const BUILDER_LIST_CONFIG: Record<BuilderType, (builderOption?: BuilderOp
     ],
     'development_second_card':() => [
         configBuilder('development_second_card'),
-        configBuilder('development_second_card', BuilderOption.developmentSecondBuilder)
+        configBuilder('development_second_card', 1, BuilderOption.developmentSecondBuilder)
     ],
     'developmentAbilityOnly':() => [
         configBuilder('developmentAbilityOnly')
     ],
     'construction_base':() => [
         configBuilder('construction_base'),
-        configBuilder('construction_base', BuilderOption.drawCard)
+        configBuilder('construction_base', 1, BuilderOption.drawCard)
     ],
     'construction_6mc':() => [
         configBuilder('construction_base'),
-        configBuilder('construction_6mc', BuilderOption.gain6MC)
+        configBuilder('construction_6mc', 1, BuilderOption.gain6MC)
     ],
     'construction_draw_card':() => [
         configBuilder('construction_base'),
@@ -50,7 +51,7 @@ export const BUILDER_LIST_CONFIG: Record<BuilderType, (builderOption?: BuilderOp
         configBuilder('constructionAbilityOnly')
     ],
     'specialBuilder':(builderOption) => [
-        configBuilder('specialBuilder', builderOption)
+        configBuilder('specialBuilder', 0, builderOption)
     ],
 }
 

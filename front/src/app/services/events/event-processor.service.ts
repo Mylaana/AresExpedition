@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { Inject, Injectable, InjectionToken } from "@angular/core"
 import { BehaviorSubject } from "rxjs"
 import { DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum } from "../../enum/global.enum"
 import { SelectablePhaseEnum } from "../../enum/phase.enum"
@@ -18,10 +18,16 @@ import { ProjectCardInfoService } from "../cards/project-card-info.service"
 import { GameParamService } from "../core-game/game-param.service"
 import { GameStateFacadeService } from "../game-state/game-state-facade.service"
 import { RxStompService } from "../websocket/rx-stomp.service"
-import { CardBuilderEventHandlerService } from "./Sub/card-builder-event-handler.service"
-import { CardSelectorEventHandlerService } from "./Sub/card-selector-event-handler.service"
-import { GameEventQueueService } from "../game-state/sub-service/game-event-queue.service"
+import { EventSelectorHandlerService } from "../core-game/components-services/card-selector.service"
+import { EventQueueService } from "./event-queue.service"
 import { CommandButtonStateService } from "../game-state/command-button-state.service"
+import { EventBuilderHandlerService } from "../core-game/components-services/card-builder.service"
+import { EventBuilderCommand, GameEventHandler } from "../../interfaces/services.interface"
+import { EventBuilderHandler } from "./handlers/event-builder-handler"
+
+export const GAME_EVENT_HANDLERS = new InjectionToken<GameEventHandler[]>(
+  'GAME_EVENT_HANDLERS'
+);
 
 @Injectable({
 	providedIn: 'root'
@@ -31,6 +37,7 @@ export class EventProcessor {
 	private currentEvent!: EventBaseModel
 	private currentEventId!: number
 	private waiterResolved: number[] = []
+	private currentHandler!: GameEventHandler
 	private readonly phaseHandler = new PhaseResolveHandler(this.gameStateService, this.gameParam)
 
 	private _currentEvent$ = new BehaviorSubject<EventBaseModel | undefined>(undefined)
@@ -39,19 +46,25 @@ export class EventProcessor {
 	private _eventActivator$ = new BehaviorSubject<EventCardActivator | null>(null)
 	readonly currentEventActivator = this._eventActivator$.asObservable()
 	
-	//private _eventWithMainButton$ = new BehaviorSubject<EventBaseModel | null>(null)
 	readonly currentEventQueue = this.gameEventQueueService._eventQueue$.asObservable()
 
     constructor(
 		private gameStateService: GameStateFacadeService,
-		private gameEventQueueService: GameEventQueueService,
+		private gameEventQueueService: EventQueueService,
 		private rxStompService: RxStompService,
 		private gameParam: GameParamService,
-		private builderService: CardBuilderEventHandlerService,
-		private selectorService: CardSelectorEventHandlerService,
-		private commandButtonStateService: CommandButtonStateService
+		private builderService: EventBuilderHandlerService,
+		private selectorService: EventSelectorHandlerService,
+		private commandButtonStateService: CommandButtonStateService,
+
+		@Inject(GAME_EVENT_HANDLERS)
+    	private readonly handlers: GameEventHandler[]
 	){
 		this.currentEventQueue.subscribe(queue => this.handleQueueUpdate(queue))
+		this.builderService.currentBuilderButtonCommand.subscribe(command => {
+			if(!command){return}
+			this.onBuilderButtonCommand(command)
+		})
 	}
 	public handleQueueUpdate(eventQueue: EventBaseModel[]){
 		if(eventQueue.length===0){
@@ -70,6 +83,7 @@ export class EventProcessor {
 		this.updateSpecificEventSubjects(eventQueue)
 	}
 	private toEventCardActivator(event: EventBaseModel): EventCardActivator | null {
+		console.log(event)
 		return event?.hasCardActivator()
 			? (event as EventCardActivator)
 			: null
@@ -147,14 +161,6 @@ export class EventProcessor {
 		if(input.twice){event.doubleActivationCount += 1}
 		this.gameStateService.activateCard(input.card, input.option)
 	}
-	public updateActionPhaseMainButtonState(enabled?: boolean): void {
-		let state = this.gameStateService.getClientState()
-		let plantStock = state.getRessourceInfoFromType('plant')?.valueStock??0
-		let heatStock = state.getRessourceInfoFromType('heat')?.valueStock??0
-		enabled = (heatStock>=8  || plantStock>=8 || (heatStock>=5  && plantStock>=3)) === false
-
-		this.currentEvent.button?.setEnabled(enabled)
-	}
 	private checkFinalized(): void {
 		if(this.currentEvent.finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()
@@ -164,7 +170,7 @@ export class EventProcessor {
 		this.eventCounter += 1
 		return this.eventCounter
 	}
-    private switchEvent(eventQueue: EventBaseModel[], event: EventBaseModel): void {
+    private switchEvent(eventQueue: EventBaseModel[], _event: EventBaseModel): void {
 		//switching current event to top of the pile
 		this.currentEvent = eventQueue[0]
 		this._currentEvent$.next(this.currentEvent)
@@ -462,14 +468,7 @@ export class EventProcessor {
 		}
     }
 	private finishEventCardBuilder(event: EventCardBuilder): void {
-		Logger.logEventResolution('resolving event: ','EventCardBuilder ', event.subType)
-		switch(event.subType){
-			case('developmentPhaseBuilder'):case('constructionPhaseBuilder'):case('specialBuilder'):{
-				event.finalized = true
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventCardBuilder: ', this.currentEvent)}
-		}
+		this.getHandlerFor(event)?.onFinalizeEvent(event)
 	}
 	private finishEventGeneric(event: EventGeneric): void {
 		Logger.logEventResolution('resolving event: ','EventGeneric ', event.subType)
@@ -728,6 +727,24 @@ export class EventProcessor {
 		}
 		return false
 	}
+	onBuilderButtonCommand(command: EventBuilderCommand): void {
+		const handler = this.getHandlerFor(this.currentEvent)
+		if(!(handler && this.isEventBuilderEvent(handler))){return}
+		
+		let event = this.currentEvent as EventCardBuilder
+		handler.onBuilderButtonCommand(event, command)
+
+		if(command.commandType==='alternativePay'){
+			this.builderService.notifyNewDiscount(event.getCurrentBuilderDiscount())
+		}
+	}
+	private getHandlerFor(event: EventBaseModel): GameEventHandler | null {
+		return this.handlers.find(h => h.supports(event)) ?? null;
+	}
+	private isEventBuilderEvent(handler: GameEventHandler): handler is EventBuilderHandler {
+		return typeof(handler as EventBuilderHandler).onBuilderButtonCommand === 'function'
+	}
+
 }
 
 class PhaseResolveHandler {

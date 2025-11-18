@@ -24,7 +24,7 @@ import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
 import { GameActiveContentService } from "../core-game/game-active-content.service";
 import { SCALING_PRODUCTION } from "../../maps/playable-card-scaling-production-maps";
 import { EventPileAddRule } from "../../types/event.type";
-import { GameEventQueueService } from "./sub-service/game-event-queue.service";
+import { EventQueueService } from "../events/event-queue.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -112,7 +112,7 @@ export class GameStateFacadeService{
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private gameModeContentService: GameActiveContentService,
-		private gameEventQueueService: GameEventQueueService,
+		private gameEventQueueService: EventQueueService,
 		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})

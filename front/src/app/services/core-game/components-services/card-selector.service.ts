@@ -2,12 +2,11 @@ import { Injectable } from "@angular/core";
 import { EventBaseCardSelector } from "../../../models/core-game/event.model";
 import { PlayerStateModel } from "../../../models/player-info/player-state.model";
 import { BehaviorSubject, Subject } from "rxjs";
-import { EventProcessor } from "../event-processor.service";
 
 @Injectable({
     providedIn: 'root'
 })
-export class CardSelectorEventHandlerService{
+export class EventSelectorHandlerService{
     private _currentEvent$ = new BehaviorSubject<EventBaseCardSelector | null>(null)
     currentEventSelector = this._currentEvent$.asObservable()
 

@@ -6,15 +6,14 @@ import { ProjectFilter, CardSelector } from "../../../../interfaces/global.inter
 import { PlayableCardModel } from "../../../../models/cards/project-card.model"
 import { EventBaseCardSelector, EventCardBuilder, EventCardActivator } from "../../../../models/core-game/event.model"
 import { EventProcessor } from "../../../../services/events/event-processor.service"
-import { CardBuilderEventHandlerService } from "../../../../services/events/Sub/card-builder-event-handler.service"
-import { CardSelectorEventHandlerService } from "../../../../services/events/Sub/card-selector-event-handler.service"
+import { EventSelectorHandlerService } from "../../../../services/core-game/components-services/card-selector.service"
 import { CommandButtonStateService } from "../../../../services/game-state/command-button-state.service"
-import { GameStateFacadeService } from "../../../../services/game-state/game-state-facade.service"
 import { EventUnionSubTypes } from "../../../../types/event.type"
 import { MinMaxEqualType } from "../../../../types/global.type"
 import { ListBehavior, ProjectListType, ActivationOption, ProjectListSubType } from "../../../../types/project-card.type"
 import { Utils } from "../../../../utils/utils"
 import { PlayableCardListComponent } from "../playable-card-list/playable-card-list.component"
+import { EventBuilderHandlerService } from "../../../../services/core-game/components-services/card-builder.service"
 
 @Component({
 	selector: 'app-playable-card-list-wrapper',
@@ -48,8 +47,8 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	
 	constructor(
 		private eventProcessor: EventProcessor,
-		private builderService: CardBuilderEventHandlerService,
-		private selectorService: CardSelectorEventHandlerService,
+		private builderService: EventBuilderHandlerService,
+		private selectorService: EventSelectorHandlerService,
 		private mainButtonService: CommandButtonStateService
 	){}
 	

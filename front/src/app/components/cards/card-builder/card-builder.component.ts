@@ -11,7 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
 import { fadeInFadeOut, fadeOut } from '../../../animations/animations';
 import { CardBuilderAlternativeOptionComponent } from '../card-builder-alternative-option/card-builder-alternative-option.component';
-import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
+import { EventBuilderHandlerService } from '../../../services/core-game/components-services/card-builder.service';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
 
@@ -48,7 +48,7 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 
 	private destroy$ = new Subject<void>
 	constructor(
-		private cardBuilderEventService: CardBuilderEventHandlerService
+		private cardBuilderEventService: EventBuilderHandlerService
 	){}
 
 	ngOnInit(): void {

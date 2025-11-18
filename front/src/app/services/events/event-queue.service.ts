@@ -1,18 +1,18 @@
 import { Injectable } from "@angular/core";
-import { EventBaseCardSelector, EventBaseModel, EventCardActivator, EventCardBuilder } from "../../../models/core-game/event.model";
+import { EventBaseCardSelector, EventBaseModel, EventCardActivator, EventCardBuilder } from "../../models/core-game/event.model";
 import { BehaviorSubject } from "rxjs";
-import { EventPileAddRule } from "../../../types/event.type";
-import { Utils } from "../../../utils/utils";
-import { EventStateDTO } from "../../../interfaces/event-state.interface";
-import { EventStateOriginEnum } from "../../../enum/eventstate.enum";
-import { EventStateDeserializerService } from "../../../factory/event-state-deserializer-service.service";
-import { PlayerStateModel } from "../../../models/player-info/player-state.model";
+import { EventPileAddRule } from "../../types/event.type";
+import { Utils } from "../../utils/utils";
+import { EventStateDTO } from "../../interfaces/event-state.interface";
+import { EventStateOriginEnum } from "../../enum/eventstate.enum";
+import { EventStateDeserializerService } from "../../factory/event-state-deserializer-service.service";
+import { PlayerStateModel } from "../../models/player-info/player-state.model";
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class GameEventQueueService {
+export class EventQueueService {
     private eventStateDTO: EventStateDTO[] = []
     private clientState!: PlayerStateModel
 
