@@ -14,6 +14,7 @@ import { CardSelector, ProjectFilter } from '../../../../interfaces/global.inter
 import { CardBuilderEventHandlerService } from '../../../../services/core-game/card-builder-event-handler.service';
 import { CommandButtonStateService } from '../../../../services/game-state/command-button-state.service';
 import { EventUnionSubTypes } from '../../../../types/event.type';
+import { CardSelectorEventHandlerService } from '../../../../services/core-game/card-selector-event-handler.service';
 
 @Component({
 	selector: 'app-playable-card-list-wrapper',
@@ -49,6 +50,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		private gameStateService: GameStateFacadeService,
 		private eventHandler: EventHandler,
 		private builderService: CardBuilderEventHandlerService,
+		private selectorService: CardSelectorEventHandlerService,
 		private mainButtonService: CommandButtonStateService
 	){}
 	
@@ -56,6 +58,10 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		switch(this.listBehavior){
 			case('selector'):{
 				this.gameStateService.currentEventSelector.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventSelectorUpdate(event))
+				this.selectorService.currentNotifyRecalculateSelector.pipe(takeUntil(this.destroy$)).subscribe(() => {
+					if(!this._currentEvent){return}
+					this.setSelectorPart(this._currentEvent?.getCardSelector())
+				})
 				this._listType = 'selector'
 				break
 			}
@@ -81,6 +87,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	}
 	private onEventSelectorUpdate(event: EventBaseCardSelector | null){
 		this._currentEvent = event
+		console.log('PlayableCardListWrapperComponent - onEventSelectorUpdate', Utils.jsonCopy(event))
 		if(!event){
 			this.resetState()
 			return

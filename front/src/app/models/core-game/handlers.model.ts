@@ -19,6 +19,7 @@ import { DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum } from "../../e
 import { PlayableCard } from "../../factory/playable-card.factory";
 import { BehaviorSubject } from "rxjs";
 import { CardBuilderEventHandlerService } from "../../services/core-game/card-builder-event-handler.service";
+import { CardSelectorEventHandlerService } from "../../services/core-game/card-selector-event-handler.service";
 
 @Injectable({
 	providedIn: 'root'
@@ -37,7 +38,8 @@ export class EventHandler {
 		private gameStateService: GameStateFacadeService,
 		private rxStompService: RxStompService,
 		private gameParam: GameParamService,
-		private builderService: CardBuilderEventHandlerService
+		private builderService: CardBuilderEventHandlerService,
+		private selectorService: CardSelectorEventHandlerService
 	){
 		gameStateService.currentEventQueue.subscribe(queue => this.handleQueueUpdate(queue))
 	}
@@ -147,6 +149,7 @@ export class EventHandler {
 		let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
 		if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))}
 		this.builderService.notifyRecalculateSelector()
+		this.selectorService.notifyRecalculateSelector()
 
 		//check per subType special rules:
 		switch(subType){
