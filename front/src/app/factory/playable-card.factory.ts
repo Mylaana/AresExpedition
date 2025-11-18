@@ -10,6 +10,7 @@ import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION
 import { STANDARD_PROJECT_CAPTION, STANDARD_PROJECT_COST } from "../maps/standard-project-maps";
 import { SCALING_PRODUCTION } from "../maps/playable-card-scaling-production-maps";
 import { ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS } from "../maps/card-builder-maps";
+import { TRIGGER_PRIORITY_DEFAULT_VALUE, TRIGGER_PRIORITY_MAP } from "../maps/trigger-priority-maps";
 
 function getOnPlayedEvents(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 	return PLAY_EVENTS[cardCode]?.(clientstate)
@@ -107,6 +108,15 @@ function getRepeatProductionCaption(cardCode: string, clientState: PlayerStateMo
 	}
 	return result
 }
+
+function getPriority(code: string): number {
+  return TRIGGER_PRIORITY_MAP.get(code) ?? TRIGGER_PRIORITY_DEFAULT_VALUE;
+}
+
+function sortTriggerList(list: string[]): string[] {
+  return [...list].sort((a, b) => getPriority(b) - getPriority(a));
+}
+
 const CostModCalulator = {
 	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel, clientState: PlayerStateModel): number {
 		let totalMod = 0
@@ -128,6 +138,7 @@ export const PlayableCard = {
 	getBuilderAlternativeOptionButtonClickedEvents,
 	getRepeatProductionCaption,
 	hasScalingProduction,
+	sortTriggerList,
 	prerequisite: PlayableCardPrerequisite,
 	activable: PlayableCardActivativable
 }

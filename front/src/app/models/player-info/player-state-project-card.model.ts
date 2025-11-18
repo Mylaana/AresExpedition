@@ -73,7 +73,6 @@ export class PlayerProjectCardStateModel {
 				}
 				case('corporation'):{
 					let index = this.handCorporation.indexOf(card, 0);
-					let discarded = this.handCorporation.splice(index, 1)[0]
 					break
 				}
 			}

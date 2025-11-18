@@ -7,6 +7,7 @@ import { CardStats, PlayableCardEffect, PlayableCardInterface } from "../../inte
 import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const"
+import { PlayableCard } from "../../factory/playable-card.factory"
 
 
 export class PlayableCardModel {
@@ -357,10 +358,16 @@ export class TriggerState {
     playTrigger(cardCode: string): void {
         this.playedCards.push(cardCode)
         this.activeCards.push(cardCode)
+		this.sortActiveTriggerList()
     }
     setTriggerInactive(cardCode: string): void {
         this.activeCards = this.activeCards.filter((e, i) => e !== cardCode)
     }
+	private sortActiveTriggerList() {
+		console.log('Active triggers before sorting:', this.activeCards);
+		this.activeCards = PlayableCard.sortTriggerList(this.activeCards)
+		console.log('Sorted active triggers:', this.activeCards);
+	}	
 	public static fromJson(data: TriggerStateDTO): TriggerState {
 		if (!data.a || !data.p){
 			throw new Error("Invalid TriggerStateDTO: Missing required fields")
