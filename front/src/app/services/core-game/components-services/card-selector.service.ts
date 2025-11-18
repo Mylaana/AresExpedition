@@ -6,7 +6,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class EventSelectorHandlerService{
+export class CardSelectorService{
     private _currentEvent$ = new BehaviorSubject<EventBaseCardSelector | null>(null)
     currentEventSelector = this._currentEvent$.asObservable()
 

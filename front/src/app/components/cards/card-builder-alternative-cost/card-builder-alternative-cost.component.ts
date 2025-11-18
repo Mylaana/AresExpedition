@@ -9,7 +9,7 @@ import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
-import { EventBuilderHandlerService } from '../../../services/core-game/components-services/card-builder.service';
+import { CardBuilderService } from '../../../services/core-game/components-services/card-builder.service';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',
@@ -35,7 +35,7 @@ export class CardBuilderAlternativeCostComponent implements OnInit, OnChanges, O
 
 	constructor(
 		private gameStateService: GameStateFacadeService,
-		private cardBuilderEventService: EventBuilderHandlerService
+		private cardBuilderEventService: CardBuilderService
 	){}
 
 	ngOnInit(): void {

@@ -6,7 +6,7 @@ import { SettingCardSize } from '../../../types/global.type';
 import { EventCardBuilder } from '../../../models/core-game/event.model';
 import { Subject, takeUntil } from 'rxjs';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
-import { EventBuilderHandlerService } from '../../../services/core-game/components-services/card-builder.service';
+import { CardBuilderService } from '../../../services/core-game/components-services/card-builder.service';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class CardBuilderListComponent implements OnInit, OnDestroy{
 	destroy$ = new Subject<void>()
 
 	constructor(
-		private builderService: EventBuilderHandlerService,
+		private builderService: CardBuilderService,
 	){}
 
 	ngOnInit(): void {

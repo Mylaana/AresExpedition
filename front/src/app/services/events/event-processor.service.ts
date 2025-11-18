@@ -18,10 +18,10 @@ import { ProjectCardInfoService } from "../cards/project-card-info.service"
 import { GameParamService } from "../core-game/game-param.service"
 import { GameStateFacadeService } from "../game-state/game-state-facade.service"
 import { RxStompService } from "../websocket/rx-stomp.service"
-import { EventSelectorHandlerService } from "../core-game/components-services/card-selector.service"
+import { CardSelectorService } from "../core-game/components-services/card-selector.service"
 import { EventQueueService } from "./event-queue.service"
 import { CommandButtonStateService } from "../game-state/command-button-state.service"
-import { EventBuilderHandlerService } from "../core-game/components-services/card-builder.service"
+import { CardBuilderService } from "../core-game/components-services/card-builder.service"
 import { EventBuilderCommand, GameEventHandler } from "../../interfaces/services.interface"
 import { EventBuilderHandler } from "./handlers/event-builder-handler"
 
@@ -37,7 +37,6 @@ export class EventProcessor {
 	private currentEvent!: EventBaseModel
 	private currentEventId!: number
 	private waiterResolved: number[] = []
-	private currentHandler!: GameEventHandler
 	private readonly phaseHandler = new PhaseResolveHandler(this.gameStateService, this.gameParam)
 
 	private _currentEvent$ = new BehaviorSubject<EventBaseModel | undefined>(undefined)
@@ -53,8 +52,8 @@ export class EventProcessor {
 		private gameEventQueueService: EventQueueService,
 		private rxStompService: RxStompService,
 		private gameParam: GameParamService,
-		private builderService: EventBuilderHandlerService,
-		private selectorService: EventSelectorHandlerService,
+		private builderService: CardBuilderService,
+		private selectorService: CardSelectorService,
 		private commandButtonStateService: CommandButtonStateService,
 
 		@Inject(GAME_EVENT_HANDLERS)
@@ -173,10 +172,16 @@ export class EventProcessor {
 		this.currentEvent.onSwitch()
 
         //call general switchEvents cases
-		if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
-		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent as EventPhase)}
-		if(this.currentEvent.type==='cardActivator'){this.switchEventCardActivator(this.currentEvent as EventCardActivator)}
-		if(this.currentEvent.type==='ComplexSelector'){this.switchEventComplexCardSelector(this.currentEvent as EventComplexCardSelector)}
+		const handler = this.getHandlerFor(this.currentEvent)
+		if(handler){
+			handler.onSwitchEvent(this.currentEvent)
+			return
+		} else {
+			//if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
+			if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent as EventPhase)}
+			if(this.currentEvent.type==='cardActivator'){this.switchEventCardActivator(this.currentEvent as EventCardActivator)}
+			if(this.currentEvent.type==='ComplexSelector'){this.switchEventComplexCardSelector(this.currentEvent as EventComplexCardSelector)}
+		}
 
 		//specific cases
 		if(this.currentEvent.subType==='planificationPhase' && this.currentEvent.button){
@@ -192,49 +197,9 @@ export class EventProcessor {
 		this.currentEvent.finalized = true
 		this.finishEventEffect()
 	}
-    private switchEventCardSelector(event: EventCardSelector): void {
-        //reset currentEvent parameters
-		let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
-		if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))}
-		this.builderService.notifyRecalculateSelector()
-		this.selectorService.notifyRecalculateSelector()
-
-		//check per subType special rules:
-		switch(subType){
-			case('selectCardForcedSell'):{
-				Logger.logEventResolution('resolving event: ','EventCardSelector ', event.subType)
-                let clientState = this.gameStateService.getClientState()
-				let currentSize = clientState.getHandCurrentSize()
-				let maximumSize = clientState.getHandMaximumSize()
-                if(currentSize <= maximumSize){
-                    event.finalized = true
-                    break
-                }
-				event.setSelectorQuantity(currentSize - maximumSize)
-				event.activateSelection()
-				event.setSelectorStateFromParent(Utils.toFullCardState({selectable:true, ignoreCost:true}))
-				event.titleKey = 'eventForcedSell'
-				event.titleInterpolation = [event.getSelectorQuantity().toString()]
-				break
-			}
-			case('selectCardOptionalSell'):{
-				event.activateSelection()
-				event.setSelectorStateFromParent(Utils.toFullCardState({selectable:true, ignoreCost:true}))
-				break
-			}
-			case('addRessourceToSelectedCard'):{
-				let selectFrom = this.gameStateService.getClientProjectPlayedModelList(event.getSelectorFilter())
-				if(selectFrom.length===0){event.finalized=true;break}
-				event.activateSelection()
-				event.setSelectorSelectFrom(selectFrom)
-				break
-			}
-			case('recallCardInHand'):case('doubleProduction'):{
-				event.setSelectorSelectFrom(this.gameStateService.getClientState().getProjectPlayedModelList(event.getSelectorFilter()))
-				break
-			}
-		}
-    }
+	private switchEventCardSelector(event: EventCardSelector): void {
+		this.getHandlerFor(event)?.onSwitchEvent(event)
+	}
 	private switchEventComplexCardSelector(event: EventComplexCardSelector){
 		switch(event.subType){
 			case('discardCards'):{
@@ -254,15 +219,15 @@ export class EventProcessor {
 						break
 					}
 				}
-
+				
 			}
 		}
 	}
 	private switchEventCardActivator(event: EventCardActivator){
-
+		
 		let subType = event.subType as EventCardActivatorSubType
 		if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))}
-
+		
 		//check per subType special rules:
 		switch(subType){
 			case('actionPhaseActivator'):{
@@ -271,8 +236,8 @@ export class EventProcessor {
 			}
 		}
 	}
-
-
+	
+	
 	private switchEventPhase(event: EventPhase): void {
 		let subType = event.subType as EventPhaseSubType
 		if(event.autoFinalize===true){event.finalized=true}
@@ -291,10 +256,16 @@ export class EventProcessor {
 		}
 	}
     private finishEventEffect(){
-        switch(this.currentEvent.type){
-            case('cardSelector'):{this.finishEventCardSelector(this.currentEvent as EventCardSelector); break}
+		const handler = this.getHandlerFor(this.currentEvent)
+		if(handler){
+			handler.onFinalizeEvent(this.currentEvent)
+			if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
+			this.checkFinalized()
+			return
+		}
+
+		switch(this.currentEvent.type){
             case('cardSelectorRessource'):{this.finishEventCardSelectorRessource(this.currentEvent as EventCardSelectorRessource); break}
-			case('cardSelectorCardBuilder'):{this.finishEventCardBuilder(this.currentEvent as EventCardBuilder); break}
 			case('generic'):{this.finishEventGeneric(this.currentEvent as EventGeneric); break}
 			case('deck'):{this.finishEventDeckQuery(this.currentEvent as EventDeckQuery); break}
 			case('targetCard'):{this.finishEventTargetCards(this.currentEvent as EventTargetCard); break}
@@ -307,58 +278,6 @@ export class EventProcessor {
         }
 		if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
 		this.checkFinalized()
-    }
-    private finishEventCardSelector(event: EventCardSelector): void {
-		Logger.logEventResolution('resolving event: ','EventCardSelector ', event.subType)
-
-		event.finalized = true
-
-        switch(event.subType){
-			case('selectCardForcedSell'):case('selectCardOptionalSell'):{
-				event.finalized = true
-				this.gameStateService.removeCardsFromClientHandById(Utils.toCardsIdList(event.getSelectorSelectedList()), 'project')
-				this.gameStateService.sellCardsFromClientHand(event.getSelectorSelectedQuantity())
-				break
-			}
-			case('researchPhaseResult'):{
-				this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-					ProjectCardInfoService.getProjectCardIdListFromModel(event.getSelectorSelectedList()),
-					ProjectCardInfoService.getProjectCardIdListFromModel(event.getSelectorSelectFrom())
-				)
-				break
-			}
-			case('selectStartingHand'):{
-				let drawNumber = event.getSelectorSelectedQuantity()
-				event.finalized = true
-				this.gameStateService.removeCardsFromClientHandByModel(event.getSelectorSelectedList(), 'project')
-				this.gameStateService.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber}}), 'first')
-				break
-			}
-			case('selectCorporation'):{
-				event.finalized = true
-				this.gameStateService.playCorporation(event.getSelectorSelectedList()[0])
-				break
-			}
-			case('selectMerger'):{
-				event.finalized = true
-				this.gameStateService.playCorporation(event.getSelectorSelectedList()[0], true)
-				this.gameStateService.applyAverageStartingMegacredits()
-				break
-			}
-			case('recallCardInHand'):{
-				event.finalized = true
-				if(event.hasSelectorCardSelected()===false){break}
-				this.gameStateService.recallCardFromPlayed(event.getSelectorSelectedList()[0])
-				break
-			}
-			case('doubleProduction'):{
-				event.finalized = true
-				this.gameStateService.applyDoubleProduction(event.getSelectorSelectedList()[0])
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventCardSelector: ', this.currentEvent)}
-        }
-		event.activateSelection()
     }
 	private finishEventComplexCardSelector(event: EventComplexCardSelector): void {
 		Logger.logEventResolution('resolving event: ','EventScanKeepCardSelector ', event.subType)
@@ -460,9 +379,6 @@ export class EventProcessor {
 			default:{Logger.logError('Non mapped event in handler.finishEventCardActivator: ', this.currentEvent)}
 		}
     }
-	private finishEventCardBuilder(event: EventCardBuilder): void {
-		this.getHandlerFor(event)?.onFinalizeEvent(event)
-	}
 	private finishEventGeneric(event: EventGeneric): void {
 		Logger.logEventResolution('resolving event: ','EventGeneric ', event.subType)
 

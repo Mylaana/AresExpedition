@@ -6,14 +6,14 @@ import { ProjectFilter, CardSelector } from "../../../../interfaces/global.inter
 import { PlayableCardModel } from "../../../../models/cards/project-card.model"
 import { EventBaseCardSelector, EventCardBuilder, EventCardActivator } from "../../../../models/core-game/event.model"
 import { EventProcessor } from "../../../../services/events/event-processor.service"
-import { EventSelectorHandlerService } from "../../../../services/core-game/components-services/card-selector.service"
+import { CardSelectorService } from "../../../../services/core-game/components-services/card-selector.service"
 import { CommandButtonStateService } from "../../../../services/game-state/command-button-state.service"
 import { EventUnionSubTypes } from "../../../../types/event.type"
 import { MinMaxEqualType } from "../../../../types/global.type"
 import { ListBehavior, ProjectListType, ActivationOption, ProjectListSubType } from "../../../../types/project-card.type"
 import { Utils } from "../../../../utils/utils"
 import { PlayableCardListComponent } from "../playable-card-list/playable-card-list.component"
-import { EventBuilderHandlerService } from "../../../../services/core-game/components-services/card-builder.service"
+import { CardBuilderService } from "../../../../services/core-game/components-services/card-builder.service"
 
 @Component({
 	selector: 'app-playable-card-list-wrapper',
@@ -47,8 +47,8 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	
 	constructor(
 		private eventProcessor: EventProcessor,
-		private builderService: EventBuilderHandlerService,
-		private selectorService: EventSelectorHandlerService,
+		private builderService: CardBuilderService,
+		private selectorService: CardSelectorService,
 		private mainButtonService: CommandButtonStateService
 	){}
 	
@@ -58,8 +58,6 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 				this.selectorService.currentEventSelector.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventSelectorUpdate(event))
 				this.selectorService.currentNotifyRecalculateSelector.pipe(takeUntil(this.destroy$)).subscribe(() => {
 					if(!this._currentEvent){return}
-					let selector = this._currentEvent?.getCardSelector()
-					console.log('PlayableCardListWrapperComponent - notifyRecalculateSelector', Utils.jsonCopy(selector))
 					this.setSelectorPart(this._currentEvent?.getCardSelector())
 				})
 				this._listType = 'selector'
@@ -87,7 +85,6 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	}
 	private onEventSelectorUpdate(event: EventBaseCardSelector | null){
 		this._currentEvent = event
-		console.log('PlayableCardListWrapperComponent - onEventSelectorUpdate', Utils.jsonCopy(event))
 		if(!event){
 			this.resetState()
 			return

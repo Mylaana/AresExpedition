@@ -13,7 +13,7 @@ import { EventBuilderCommand } from "../../../interfaces/services.interface"
 @Injectable({
     providedIn: 'root'
 })
-export class EventBuilderHandlerService{
+export class CardBuilderService{
     private _currentEvent$ = new BehaviorSubject<EventCardBuilder | null>(null)
     currentEventBuilder = this._currentEvent$.asObservable()
     _currentState!: PlayerStateModel

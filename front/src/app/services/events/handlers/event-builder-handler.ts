@@ -6,15 +6,17 @@ import { EventBaseModel, EventCardBuilder } from "../../../models/core-game/even
 import { EventFactory } from "../../../factory/event/event-factory";
 import { Logger } from "../../../utils/utils";
 import { PlayableCard } from "../../../factory/playable-card.factory";
+import { CardBuilderService } from "../../core-game/components-services/card-builder.service";
 
 @Injectable()
 export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
     constructor(
         private gameEventQueue: EventQueueService,
         private gameStateFacade: GameStateFacadeService,
+        private builderService: CardBuilderService
     ){}
-    supports(event: EventCardBuilder): boolean {
-        return true
+    supports(event: EventBaseModel): boolean {
+        return event.type==='cardSelectorCardBuilder'
     }
     onFinalizeEvent(event: EventCardBuilder) {   
         Logger.logEventResolution('resolving event: ','EventCardBuilder ', event.subType)
@@ -27,6 +29,8 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
         }
     }
     onSwitchEvent(event: EventCardBuilder){
+        if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateFacade.getClientHandModelList(event.getSelectorFilter()))}
+        this.builderService.notifyRecalculateSelector()
     }
     onBuilderButtonCommand(event: EventCardBuilder, command: EventBuilderCommand){
         console.log(command, event)
@@ -51,7 +55,7 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
                 }
                 break
             }
-            
+
             case('alternativePay'):{
                 if(!event){return}
                 let newEvents = PlayableCard.getAlternativePayButtonClickedEvents(command.buttonName)
@@ -66,7 +70,7 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
                 if(!event){return}
                 let newEvents = PlayableCard.getBuilderAlternativeOptionButtonClickedEvents(command.buttonName)
                 if(newEvents.length===0){return}
-                
+
                 event.resolveBuilderAlternativeOptionUsed(command.builderIndex??0, command.buttonName)
                 this.gameEventQueue.addEventQueue(newEvents, 'first')
                 break
