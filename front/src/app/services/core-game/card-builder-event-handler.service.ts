@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { GameStateFacadeService } from "../game-state/game-state-facade.service";
-import { EventCardBuilder } from "../../models/core-game/event.model";
+import { EventBaseModel, EventCardBuilder } from "../../models/core-game/event.model";
 import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { EventCardBuilderButton, NonEventButton } from "../../models/core-game/button.model";
 import { CardBuilder } from "../../models/core-game/card-builder.model";
@@ -18,8 +18,6 @@ export class CardBuilderEventHandlerService{
     _currentState!: PlayerStateModel
 
     _alternativeCostCodes: string[] = []
-    //_alternativeCostButtonNames: string[] = []
-    //_alternativeCostButtons!: NonEventButton[]
 
     private alternativeCostUnlocked$ = new BehaviorSubject<NonEventButtonNames[]>([])
     currentAlternativeCostUnlocked = this.alternativeCostUnlocked$.asObservable()
@@ -32,6 +30,12 @@ export class CardBuilderEventHandlerService{
 
     private notifyRecalculateSelector$ = new Subject<void>()
     currentNotifyRecalculateSelector = this.notifyRecalculateSelector$.asObservable()
+
+    private notifyRecalculateCardBuilder$ = new Subject<void>()
+    currentNotifyRecalculateCardBuilder = this.notifyRecalculateCardBuilder$.asObservable()
+
+    private cardBuilder$ = new BehaviorSubject<CardBuilder[]>([])
+    currentCardBuilder = this.cardBuilder$.asObservable()
 
     constructor(
         private gameStateService: GameStateFacadeService,
@@ -59,21 +63,24 @@ export class CardBuilderEventHandlerService{
         if(!this._currentEvent){return}
         this.builderIsComplete$.next(this._currentEvent.isComplete())
         this.activeBuilderDiscount$.next(this._currentEvent.getCurrentBuilderDiscount())
+        this.notifyRecalculateCardBuilder$.next()
+        this.cardBuilder$.next(this._currentEvent.cardBuilder)
     }
     public applySelection(card: PlayableCardModel){
         if(!this._currentEvent){return}
         this._currentEvent.applyCardSelected(card)
-        this.notifyRecalculateSelector$.next()
+        this.notifyRecalculateSelector()
     }
     public onCardBuilderButtonClicked(button: EventCardBuilderButton, nonCurrentBuilder?: CardBuilder){
         if(!this._currentEvent){return}
+        let newEvents: EventBaseModel[] = []
         switch(button.name){
             case('buildCard'):{
                 let card = this._currentEvent.getCardToBuild()
                 if(card===undefined){return}
                 this._currentEvent.lockCurrentBuilder()
-                this.gameStateService.addEventQueue(EventFactory.createGeneric('buildCard', {card:card}), 'first')
                 this._currentEvent.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(this._currentEvent.getSelectorFilter()))
+                newEvents = [EventFactory.createGeneric('buildCard', {card:card})]
                 break
             }
             case('discardSelectedCard'):{
@@ -81,6 +88,7 @@ export class CardBuilderEventHandlerService{
         }
         this._currentEvent.cardBuilderButtonClicked(button, nonCurrentBuilder)
         this.checkIfComplete()
+        this.gameStateService.addEventQueue(newEvents, 'first')
     }
     public onAlternativePayButtonClicked(button: NonEventButton){
         if(!this._currentEvent){return}
@@ -107,5 +115,8 @@ export class CardBuilderEventHandlerService{
         } else {
             this.notifyRecalculateSelector$.next()
         }
+    }
+    public notifyRecalculateSelector(){
+        this.notifyRecalculateSelector$.next()
     }
 }

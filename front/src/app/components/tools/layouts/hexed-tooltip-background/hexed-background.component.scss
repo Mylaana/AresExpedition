@@ -59,9 +59,12 @@
 		background: rgba(255, 255, 255, 0.25);
 	}
 	&.phaseB {
-		background: rgba(255, 255, 255, 0.4);
+		background: rgba(255, 255, 255, 0.3);
 	}
 	&.phaseC {
-		background: rgba(255, 255, 255, .65);
+		background: rgba(255, 255, 255, .35);
+	}
+	&.sellEvent {
+		background: rgba(255, 255, 255, 0.4);
 	}
 }

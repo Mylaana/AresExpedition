@@ -1,6 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventCardBuilder } from '../../../models/core-game/event.model';
 import { PlayableCardListComponent } from '../project/playable-card-list/playable-card-list.component';
 import { EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
@@ -37,10 +36,10 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	@Input() cardSize!: SettingCardSize
 	@Output() cardBuilderListButtonClicked: EventEmitter<EventCardBuilderButton> = new EventEmitter<EventCardBuilderButton>()
 	@Output() alternativePayButtonClicked: EventEmitter<NonEventButton> = new EventEmitter<NonEventButton>()
-	@ViewChildren('altCost') alternativeCost!: QueryList<CardBuilderAlternativeCostComponent>
+	//@ViewChildren('altCost') alternativeCost!: QueryList<CardBuilderAlternativeCostComponent>
 
-	currentEvent!: EventCardBuilder
 
+	_currentBuilder!: CardBuilder
 	_lockBuilder!: NonEventButton
 	_hasAlternativeCost: boolean = false
 	_hasOptions: boolean = false
@@ -51,6 +50,7 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	constructor(
 		private cardBuilderEventService: CardBuilderEventHandlerService
 	){}
+
 	ngOnInit(): void {
 		this.cardBuilderEventService.currentAlternativeCostUnlocked.pipe(takeUntil(this.destroy$)).subscribe(
 			unlocked => this._hasAlternativeCost = unlocked.length>0
@@ -60,6 +60,12 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	ngOnDestroy(): void {
 		this.destroy$.next()
 		this.destroy$.complete()
+	}
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['cardBuilder'] && changes['cardBuilder'].currentValue) {
+			console.log('CardBuilderComponent: cardBuilder input changed', changes['cardBuilder'].currentValue);
+			this._currentBuilder = changes['cardBuilder'].currentValue;
+		}
 	}
 	public cardBuilderButtonClicked(button: EventCardBuilderButton): void {
 		this.cardBuilderEventService.onCardBuilderButtonClicked(button)
@@ -91,15 +97,16 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	}
 	onAlternativePayButtonClicked(button: NonEventButton){
 		this.alternativePayButtonClicked.emit(button)
-		this.updateAlternativeCostButtonsEnabled()
+		//this.updateAlternativeCostButtonsEnabled()
 	}
+	/*
 	public updateAlternativeCostButtonsEnabled(){
 		if(!this.alternativeCost){return}
 		if(this.cardBuilder.getBuilderIsLocked()){return}
 		for(let a of this.alternativeCost){
 			a.updateButtonEnabled()
 		}
-	}
+	}*/
 	displayBuildOrCancel(): boolean {
 		return this.cardBuilder.getSelectedCardAsList().length>0 && !(this._hoveredBackground && !this._hoveredButtons)
 	}

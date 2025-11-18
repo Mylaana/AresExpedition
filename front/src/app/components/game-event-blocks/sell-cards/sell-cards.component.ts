@@ -11,13 +11,15 @@ import { NonEventButtonComponent } from '../../tools/button/non-event-button.com
 import { ButtonDesigner } from '../../../factory/button-designer.service';
 import { NonEventButton } from '../../../models/core-game/button.model';
 import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
+import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 
 @Component({
   selector: 'app-sell-cards',
   imports: [
 	CommonModule,
 	PlayableCardListWrapperComponent,
-	NonEventButtonComponent
+	NonEventButtonComponent,
+	HexedBackgroundComponent
 ],
   templateUrl: './sell-cards.component.html',
   styleUrl: './sell-cards.component.scss'

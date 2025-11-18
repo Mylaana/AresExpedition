@@ -9,7 +9,8 @@
 	</div>
 </div>
 <app-playable-card-list-wrapper
-	#wrapper
-	[listBehavior]="'selector'"
-	(onSelectionUpdateForSelectorEvent)="onUpdateSelectedCardList($event)">
+#wrapper
+[listBehavior]="'selector'"
+(onSelectionUpdateForSelectorEvent)="onUpdateSelectedCardList($event)">
 </app-playable-card-list-wrapper>
+<app-hexed-background [autoFillHexSize]="'medium'" [partialStyle]="'sellEvent'"></app-hexed-background>

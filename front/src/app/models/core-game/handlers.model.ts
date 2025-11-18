@@ -6,7 +6,6 @@ import { EventCardActivatorSubType, EventCardSelectorRessourceSubType, EventCard
 import { BuilderType } from "../../types/phase-card.type";
 import { PhaseCardModel } from "../cards/phase-card.model";
 import { PlayableCardModel } from "../cards/project-card.model";
-import { EventCardBuilderButton } from "./button.model";
 import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase, EventCardActivator, EventComplexCardSelector, EventTagSelector } from "./event.model";
 import { Logger, Utils } from "../../utils/utils";
 import { RxStompService } from "../../services/websocket/rx-stomp.service";
@@ -16,9 +15,10 @@ import { myUUID } from "../../types/global.type";
 import { GameParamService } from "../../services/core-game/game-param.service";
 import { EventFactory } from "../../factory/event/event-factory";
 import { DrawEventFactory } from "../../factory/draw-event-designer.service";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum } from "../../enum/global.enum";
+import { DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum } from "../../enum/global.enum";
 import { PlayableCard } from "../../factory/playable-card.factory";
 import { BehaviorSubject } from "rxjs";
+import { CardBuilderEventHandlerService } from "../../services/core-game/card-builder-event-handler.service";
 
 @Injectable({
 	providedIn: 'root'
@@ -36,7 +36,8 @@ export class EventHandler {
     constructor(
 		private gameStateService: GameStateFacadeService,
 		private rxStompService: RxStompService,
-		private gameParam: GameParamService
+		private gameParam: GameParamService,
+		private builderService: CardBuilderEventHandlerService
 	){
 		gameStateService.currentEventQueue.subscribe(queue => this.handleQueueUpdate(queue))
 	}
@@ -142,13 +143,10 @@ export class EventHandler {
 		this.finishEventEffect()
 	}
     private switchEventCardSelector(event: EventCardSelector): void {
-        //remove stateFromParent before switching event
-        //if(event && event.cardSelector && event.cardSelector.stateFromParent){event.cardSelector.stateFromParent=undefined}
-
         //reset currentEvent parameters
-		//event.deactivateSelection()
 		let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
 		if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))}
+		this.builderService.notifyRecalculateSelector()
 
 		//check per subType special rules:
 		switch(subType){

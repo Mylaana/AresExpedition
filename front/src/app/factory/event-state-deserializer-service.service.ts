@@ -42,30 +42,17 @@ export class EventStateDeserializerService{
 				let eventBuilder: EventCardBuilder = event as EventCardBuilder
 				for(let i=0; i<content.s.length; i++){
 					if(content.s[i]){
+						//default
+						eventBuilder.cardBuilder[i].fromDto(content.s[i])
+						
 						let cardCode = content.s[i].cc
 						if(cardCode){
 							let card = this.projectCardInfoService.getCardById(cardCode)
 							card?eventBuilder.cardBuilder[i].setSelectedCard(card):null
 						}
-
-						/*special case with development second builder being locked without
-						being used due to eventstate saving triggerred by first built card*/
-						if(dto.t===EventStateTypeEnum.builderDevelopemntLocked){
-							if(i===1 && content.s[i].cc===undefined){
-								//eventBuilder.setFirstCardBuilt()
-								//eventBuilder.cardBuilder[i].setBSuilderIsLocked(false)
-								continue
-							}
-						}
-
-						//default
-						eventBuilder.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
-						/*
-						eventBuilder.alternativeCostUsedButtonName = dto.v['ac']
-						eventBuilder.buildDiscountValue = dto.v['d']
-						*/
 					}
 				}
+				eventBuilder.fromJson(dto)
 				break
 			}
 			case(EventStateTypeEnum.cardActivator):{
@@ -159,7 +146,7 @@ export class EventStateDeserializerService{
 				}
 				case(EventStateTypeEnum.specialBuilder):{
 					let content = state.v as EventStateBuilderContentDTO
-					let event = EventFactory.simple.specialBuilder(content.o) as EventCardBuilder
+					let event = EventFactory.simple.specialBuilder(content.s[0].o) as EventCardBuilder
 					for(let i=0; i<content.s.length; i++){
 						let cardCode = content.s[i].cc
 						if(cardCode){

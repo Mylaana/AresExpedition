@@ -1,5 +1,6 @@
 import { BuilderOption } from "../../enum/global.enum"
 import { CardState } from "../../interfaces/card.interface"
+import { BuilderStatusDTO } from "../../interfaces/event-state.interface"
 import { ButtonGroupUpdateType, ButtonNames, EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type"
 import { PlayableCardModel } from "../cards/project-card.model"
 import { EventCardBuilderButton } from "./button.model"
@@ -176,5 +177,11 @@ export class CardBuilder {
     isEligibleForNext(): boolean {
         if(this.alternativeOptionUsed.length!=0){return false}
         return true
+    }
+    fromDto(dto: BuilderStatusDTO): void {
+        this.setBuilderIsLocked(dto.l)
+        this.setOption(dto.o)
+        this.alternativeCostUsed = dto.ac
+        this.discount = dto.d
     }
 }

@@ -12,7 +12,10 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 	for(let builder of event.cardBuilder){
 		let s: BuilderStatusDTO = {
 			cc: builder.getBuitCardCode(),
-			l: builder.getBuilderIsLocked()
+			l: builder.getBuilderIsLocked(),
+			o: builder.getOption(),
+			ac: builder.getAlternativeCostUsed(),
+			d: builder.getDiscount()	
 		}
 		status.push(s)
 	}
@@ -36,14 +39,9 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 		}
 		default:{return}
 	}
-	console.error('UNTREATED BUILDER TO JSON')
+	//console.error('UNTREATED BUILDER TO JSON', stateType, event.subType)
 	let content: EventStateBuilderContentDTO = {
-		s: status,
-		o: specialBuilderOption??'',
-		ac: [],
-		d: 0
-		//ac: event.alternativeCostUsedButtonName,
-		//d: event.buildDiscountValue
+		s: status
 	}
 
 	return {

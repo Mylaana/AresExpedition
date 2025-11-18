@@ -1,6 +1,6 @@
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin, MoonTile } from "../../interfaces/global.interface"
-import { BUILDER_LIST_CONFIG } from "../../maps/card-builder-maps"
+import { BUILDER_LIST_CONFIG, EVENT_FILTER_SPECIAL_BUILDER } from "../../maps/card-builder-maps"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
 import { CardBuilder } from "../../models/core-game/card-builder.model"
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
@@ -470,7 +470,6 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
     event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = subType
     event.setSelectorFilter({type: ProjectFilterNameEnum.action})
-    //event.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
 	event.setSelectorInitialState({activable: true, selectable: false, ignoreCost:true})
     event.titleKey = 'phaseAction'
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
@@ -484,130 +483,17 @@ function generateCardBuilder(builderType: BuilderType, option?:BuilderOption): C
 function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType, builderOption?: BuilderOption): EventCardBuilder {
     let event = new EventCardBuilder
     event.setCardSelector(generateCardSelector())
-    //event.setSelectorInitialState({selectable: true, buildable: true})
 	event.setSelectorInitialState({selectable: true})
     event.subType = subType
     event.cardBuilder = []
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	event.builderType = builderType
-
-    //let buildDiscountValue = 0
 	event.cardBuilder = generateCardBuilder(builderType, builderOption)
-	/*
-    switch(builderType){
-        case('developmentAbilityOnly'):{
-            event.cardBuilder.push(generateCardBuilder(0))
-            break
-        }
-        case('development_base'):{
-            buildDiscountValue = 3
-            event.cardBuilder.push(generateCardBuilder(0))
-            break
-        }
-        case('development_6mc'):{
-            buildDiscountValue = 6
-            event.cardBuilder.push(generateCardBuilder(0))
-            break
-        }
-        case('development_second_card'):{
-            buildDiscountValue = 3
-			event.cardBuilder.push(generateCardBuilder(0))
-			event.cardBuilder.push(generateCardBuilder(1, BuilderOption.developmentSecondBuilder))
-            break
-        }
 
-        case('constructionAbilityOnly'):{
-            event.cardBuilder.push(generateCardBuilder(0))
-            break
-        }
-        case('construction_base'):{
-            event.cardBuilder.push(generateCardBuilder(0))
-            event.cardBuilder.push(generateCardBuilder(1,BuilderOption.drawCard))
-            break
-        }
-        case('construction_6mc'):{
-            event.cardBuilder.push(generateCardBuilder(0))
-            event.cardBuilder.push(generateCardBuilder(1,BuilderOption.gain6MC))
-            break
-        }
-        case('construction_draw_card'):{
-            for(let i=0; i<=1; i++){event.cardBuilder.push(generateCardBuilder(i))}
-            break
-        }
-		case('specialBuilder'):{
-			switch(builderOption){
-				case(BuilderOption.workCrews):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 11
-					event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
-
-					event.titleKey = 'builderWorkCrews'
-					break
-				}
-				case(BuilderOption.assetLiquidation):case(BuilderOption.researchGrant):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
-
-					event.titleKey = 'builderAssetLiquidation'
-					break
-
-				}
-				case(BuilderOption.green9MCFree):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 100
-					event.setSelectorFilter({type: ProjectFilterNameEnum.green9MCFree})
-
-					event.titleKey = 'builderGreen9MCFree'
-					break
-				}
-				case(BuilderOption.assortedEnterprises):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 2
-
-					event.titleKey = 'builderAssortedEnterprises'
-					break
-				}
-				case(BuilderOption.selfReplicatingBacteria):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 25
-
-					event.titleKey = 'builderSelfReplicatingBacteria'
-					break
-				}
-				case(BuilderOption.maiNiProductions):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 100
-					event.setSelectorFilter({type: ProjectFilterNameEnum.maiNiProductions})
-					event.titleKey = 'builderMaiNi'
-
-					break
-				}
-				case(BuilderOption.conscription):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 16
-					event.titleKey = 'builderConscription'
-					break
-				}
-			}
-			break
-		}
-        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}
+	//applying filters and other special rules for special builders
+	if(subType === 'specialBuilder' && builderOption && builderOption in EVENT_FILTER_SPECIAL_BUILDER){
+		event = EVENT_FILTER_SPECIAL_BUILDER[builderOption]!(event)
     }
-	*/
 
     switch(subType){
         case('developmentPhaseBuilder'):{
@@ -627,10 +513,6 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
     }
 
 	event.initialize()
-	/*
-    event.buildDiscountValue = buildDiscountValue
-    event.buildDiscountUsed = false
-	*/
 
     return event
 }

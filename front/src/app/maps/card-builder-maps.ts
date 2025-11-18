@@ -1,8 +1,9 @@
-import { BuilderOption } from "../enum/global.enum";
+import { BuilderOption, ProjectFilterNameEnum } from "../enum/global.enum";
 import { ButtonDesigner } from "../factory/button-designer.service";
 import { EventFactory } from "../factory/event/event-factory";
+import { ProjectFilter } from "../interfaces/global.interface";
 import { CardBuilder } from "../models/core-game/card-builder.model";
-import { EventBaseModel } from "../models/core-game/event.model";
+import { EventBaseModel, EventCardBuilder } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { EventCardBuilderButtonNames, NonEventButtonNames } from "../types/global.type";
 import { BuilderType } from "../types/phase-card.type";
@@ -19,7 +20,6 @@ function configBuilder(builderType: BuilderType, builderOption?:BuilderOption): 
     builder.addButton(ButtonDesigner.createEventCardBuilderButton('discardSelectedCard'))
     return builder
 }
-
 export const BUILDER_LIST_CONFIG: Record<BuilderType, (builderOption?: BuilderOption) => CardBuilder[]> = {
     'development_base':() => [
         configBuilder('development_base')
@@ -149,4 +149,44 @@ export const ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS: Partial<Record<EventCardB
     'gain6MC': () => [
         EventFactory.simple.addRessource({name:'megacredit', valueStock: 6})
     ]
+}
+
+export const EVENT_FILTER_SPECIAL_BUILDER: Partial<Record<BuilderOption, (event: EventCardBuilder) => EventCardBuilder>> = {
+    'workCrews': (event) => {
+        event.setSelectorFilter({ type: ProjectFilterNameEnum.blueOrRedProject})
+        event.titleKey = 'builderWorkCrews'
+        return event
+    },
+    'assetLiquidation':(event) => {
+        event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
+        event.titleKey = 'builderAssetLiquidation'
+        return event
+    },
+    'researchGrant':(event) => {
+        event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
+        event.titleKey = 'builderResearchGrant'
+        return event
+    },
+    'green9MCFree': (event) => {
+        event.setSelectorFilter({type: ProjectFilterNameEnum.green9MCFree})
+        event.titleKey = 'builderGreen9MCFree'
+        return event
+    },
+    'maiNiProductions': (event) => {
+        event.setSelectorFilter({type: ProjectFilterNameEnum.maiNiProductions})
+        event.titleKey = 'builderMaiNi'
+        return event
+    },
+    'assortedEnterprises': (event) => {
+        event.titleKey = 'builderAssortedEnterprises'
+        return event
+    },
+    'conscription': (event) => {
+        event.titleKey = 'builderConscription'
+        return event
+    },
+    'selfReplicatingBacteria': (event) => {
+        event.titleKey = 'builderSelfReplicatingBacteria'
+        return event
+    },
 }

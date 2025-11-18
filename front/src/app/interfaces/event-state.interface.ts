@@ -11,10 +11,7 @@ export interface EventStateDTO {
 }
 export interface EventStateContentDTO {}
 export interface EventStateBuilderContentDTO extends EventStateContentDTO {
-	o: BuilderOption,
 	s: BuilderStatusDTO[],
-	ac: NonEventButtonNames[] // alternative cost used
-	d: number // discount
 }
 export interface EventStateContentOceanFlippedDTO extends EventStateContentDTO {
 	MEGACREDIT?: number,
@@ -70,8 +67,11 @@ export interface EventStateGenericDTO extends EventStateContentDTO {
 	mt?: MoonTile | MoonTile[] // moon tile
 }
 export interface BuilderStatusDTO {
-	l: boolean,
-	cc: string | undefined
+	l: boolean, // locked
+	cc: string | undefined // built card code
+	o: BuilderOption, // buidler option
+	ac: NonEventButtonNames[] // alternative cost used
+	d: number // discount
 }
 export interface EventStateActivator extends EventStateContentDTO {
 	cl: {[key: string]: number}, //cardList

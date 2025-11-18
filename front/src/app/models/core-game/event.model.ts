@@ -216,6 +216,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.currentBuilder.setBuilderIsLocked(false)
     }
     private setEventIsComplete(){
+        console.trace('EventCardBuilder - setEventIsComplete', this)
         this.deactivateSelection()
         this.eventIsComplete = true
         this.cardSelector.stateFromParent = Utils.toFullCardState({})
@@ -272,6 +273,10 @@ export class EventCardBuilder extends EventBaseCardSelector {
         if(this.cardBuilder.filter((e) => e.getBuilderIsLocked()===false).length===0){
             this.setEventIsComplete()
         }
+    }
+    override fromJson(dto: EventStateDTO){
+        super.fromJson(dto)
+        this.activateNextBuilder()
     }
 }
 

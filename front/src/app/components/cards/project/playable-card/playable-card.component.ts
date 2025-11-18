@@ -30,9 +30,7 @@ import { SettingCardSize } from '../../../../types/global.type';
 import { ProjectCardScalingVPService } from '../../../../services/cards/project-card-scaling-VP.service';
 import { CardStatsListComponent } from '../card-blocks/card-stats/card-stats-list.component';
 import { CardScalingProductionComponent } from '../card-blocks/card-scaling-prod/card-scaling-production.component';
-import { SCALING_PRODUCTION } from '../../../../maps/playable-card-scaling-production-maps';
 import { PlayableCard } from '../../../../factory/playable-card.factory';
-import { Utils } from '../../../../utils/utils';
 
 @Component({
     selector: 'app-playable-card',
