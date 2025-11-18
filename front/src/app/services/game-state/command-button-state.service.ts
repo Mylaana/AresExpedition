@@ -3,6 +3,7 @@ import { GameEventQueueService } from "./sub-service/game-event-queue.service";
 import { EventBaseCardSelector, EventBaseModel } from "../../models/core-game/event.model";
 import { EventMainButton } from "../../models/core-game/button.model";
 import { BehaviorSubject } from "rxjs";
+import { EventProcessor } from "../events/event-processor.service";
 
 @Injectable({
     providedIn: 'root'
@@ -13,13 +14,8 @@ export class CommandButtonStateService {
     
     private currentEvent!: EventBaseModel | null
 
-    constructor(
-        private gameEventQueueService: GameEventQueueService
-    ){
-        this.gameEventQueueService._eventWithMainButton$.subscribe(event => this.onEventWithMainButtonUpdate(event))
-    }
     
-    private onEventWithMainButtonUpdate(event: EventBaseModel | null){
+    public onEventWithMainButtonUpdate(event: EventBaseModel | null){
         this.currentEvent = event
         this.updateCurrentEventMainButton()
     }
@@ -29,7 +25,6 @@ export class CommandButtonStateService {
         let button = this.currentEvent.button
         if(!button){return}
         if(this.currentEvent.hasCardActivator()){
-            //handled directly by dedicated service
             this._eventMainButtonUpdated$.next(button)
             return
         }

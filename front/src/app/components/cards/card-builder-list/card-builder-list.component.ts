@@ -1,14 +1,14 @@
-import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter, OnChanges, ViewChildren, QueryList, OnDestroy} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { CardBuilderComponent } from '../card-builder/card-builder.component';
 import { CommonModule } from '@angular/common';
 import { EventCardBuilderButton, NonEventButton } from '../../../models/core-game/button.model';
 import { SettingCardSize } from '../../../types/global.type';
-import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
+import { EventCardBuilder } from '../../../models/core-game/event.model';
 import { Subject, takeUntil } from 'rxjs';
-import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
 import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
-import { Utils } from '../../../utils/utils';
+import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
+import { EventProcessor } from '../../../services/events/event-processor.service';
 
 @Component({
     selector: 'app-card-builder-list',
@@ -33,11 +33,10 @@ export class CardBuilderListComponent implements OnInit, OnDestroy{
 
 	constructor(
 		private builderService: CardBuilderEventHandlerService,
-		private gameStateFacadeService: GameStateFacadeService
 	){}
 
 	ngOnInit(): void {
-		this.gameStateFacadeService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => {	
+		this.builderService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => {	
 			this.updateEvent(event)
 		})
 		this.builderService.currentCardBuilder.pipe(takeUntil(this.destroy$)).subscribe((builders) => {
@@ -49,7 +48,7 @@ export class CardBuilderListComponent implements OnInit, OnDestroy{
 		this.destroy$.next()
 		this.destroy$.complete()
 	}
-	updateEvent(event: EventCardBuilder | null): void {
+	updateEvent(_event: EventCardBuilder | null): void {
 		this.currentEvent = this.event
 		//this.builders = this.currentEvent.cardBuilder
 		//this.recalcuateCardBuilderList()

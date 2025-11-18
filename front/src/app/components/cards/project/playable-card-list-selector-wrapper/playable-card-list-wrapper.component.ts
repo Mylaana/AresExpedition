@@ -1,20 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { PlayableCardListComponent } from '../playable-card-list/playable-card-list.component';
-import { Subject, takeUntil } from 'rxjs';
-import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
-import { EventBaseCardSelector, EventCardActivator, EventCardBuilder } from '../../../../models/core-game/event.model';
-import { PlayableCardModel } from '../../../../models/cards/project-card.model';
-import { CardState } from '../../../../interfaces/card.interface';
-import { Utils } from '../../../../utils/utils';
-import { MinMaxEqualType } from '../../../../types/global.type';
-import { EventHandler } from '../../../../models/core-game/handlers.model';
-import { ActivationOption, ListBehavior, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
-import { CardSelector, ProjectFilter } from '../../../../interfaces/global.interface';
-import { CardBuilderEventHandlerService } from '../../../../services/core-game/card-builder-event-handler.service';
-import { CommandButtonStateService } from '../../../../services/game-state/command-button-state.service';
-import { EventUnionSubTypes } from '../../../../types/event.type';
-import { CardSelectorEventHandlerService } from '../../../../services/core-game/card-selector-event-handler.service';
+import { CommonModule } from "@angular/common"
+import { Component, OnInit, OnDestroy, Input, Output, ViewChild, EventEmitter } from "@angular/core"
+import { Subject, takeUntil } from "rxjs"
+import { CardState } from "../../../../interfaces/card.interface"
+import { ProjectFilter, CardSelector } from "../../../../interfaces/global.interface"
+import { PlayableCardModel } from "../../../../models/cards/project-card.model"
+import { EventBaseCardSelector, EventCardBuilder, EventCardActivator } from "../../../../models/core-game/event.model"
+import { EventProcessor } from "../../../../services/events/event-processor.service"
+import { CardBuilderEventHandlerService } from "../../../../services/events/Sub/card-builder-event-handler.service"
+import { CardSelectorEventHandlerService } from "../../../../services/events/Sub/card-selector-event-handler.service"
+import { CommandButtonStateService } from "../../../../services/game-state/command-button-state.service"
+import { GameStateFacadeService } from "../../../../services/game-state/game-state-facade.service"
+import { EventUnionSubTypes } from "../../../../types/event.type"
+import { MinMaxEqualType } from "../../../../types/global.type"
+import { ListBehavior, ProjectListType, ActivationOption, ProjectListSubType } from "../../../../types/project-card.type"
+import { Utils } from "../../../../utils/utils"
+import { PlayableCardListComponent } from "../playable-card-list/playable-card-list.component"
 
 @Component({
 	selector: 'app-playable-card-list-wrapper',
@@ -47,8 +47,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	_listSubType: ProjectListSubType = 'none'
 	
 	constructor(
-		private gameStateService: GameStateFacadeService,
-		private eventHandler: EventHandler,
+		private eventProcessor: EventProcessor,
 		private builderService: CardBuilderEventHandlerService,
 		private selectorService: CardSelectorEventHandlerService,
 		private mainButtonService: CommandButtonStateService
@@ -57,16 +56,18 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		switch(this.listBehavior){
 			case('selector'):{
-				this.gameStateService.currentEventSelector.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventSelectorUpdate(event))
+				this.selectorService.currentEventSelector.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventSelectorUpdate(event))
 				this.selectorService.currentNotifyRecalculateSelector.pipe(takeUntil(this.destroy$)).subscribe(() => {
 					if(!this._currentEvent){return}
+					let selector = this._currentEvent?.getCardSelector()
+					console.log('PlayableCardListWrapperComponent - notifyRecalculateSelector', Utils.jsonCopy(selector))
 					this.setSelectorPart(this._currentEvent?.getCardSelector())
 				})
 				this._listType = 'selector'
 				break
 			}
 			case('builder'):{
-				this.gameStateService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventBuilderUpdate(event))
+				this.builderService.currentEventBuilder.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventBuilderUpdate(event))
 				this.builderService.currentBuilderIsComplete.pipe(takeUntil(this.destroy$)).subscribe(v => this.onBuilderComplete(v))
 				this.builderService.currentActiveBuilderDiscount.pipe(takeUntil(this.destroy$)).subscribe(d => this.updateDiscount(d))
 				this.builderService.currentNotifyRecalculateSelector.pipe(takeUntil(this.destroy$)).subscribe(() => {
@@ -77,7 +78,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 				break
 			}
 			case('activator'):{
-				this.gameStateService.currentEventActivator.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventActivatorUpdate(event))
+				this.eventProcessor.currentEventActivator.pipe(takeUntil(this.destroy$)).subscribe(event => this.onEventActivatorUpdate(event))
 			}
 		}
 	}
@@ -146,7 +147,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 			}
 			default:{
 				this.onSelectionUpdateForSelectorEvent.emit(input)
-				this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+				this.eventProcessor.updateSelectedCardList(input.selected, input.listType)
 				this.mainButtonService.updateCurrentEventMainButton()
 				break
 			}

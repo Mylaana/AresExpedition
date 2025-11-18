@@ -9,9 +9,9 @@ import { CardBuilderAlternativeCostComponent } from '../card-builder-alternative
 import { SettingCardSize } from '../../../types/global.type';
 import { Subject, takeUntil } from 'rxjs';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
-import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
 import { fadeInFadeOut, fadeOut } from '../../../animations/animations';
 import { CardBuilderAlternativeOptionComponent } from '../card-builder-alternative-option/card-builder-alternative-option.component';
+import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
 
 type BuilderBackgroundColor = 'green' | 'red' | 'blue' | 'bluered' | 'white' | 'redbluegreen'
 

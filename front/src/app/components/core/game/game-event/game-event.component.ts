@@ -6,7 +6,6 @@ import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/ph
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { ButtonBase, EventCardBuilderButton, EventMainButton, NonEventButton } from '../../../../models/core-game/button.model';
 import { DrawEvent, EventBaseModel, EventPhase } from '../../../../models/core-game/event.model';
-import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
 import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { ActivationOption, ProjectListType } from '../../../../types/project-card.type';
@@ -32,6 +31,8 @@ import { GameActiveContentService } from '../../../../services/core-game/game-ac
 import { EventUnionSubTypes } from '../../../../types/event.type';
 import { StandardCardSelectorComponent } from '../../../game-event-blocks/standard-card-selector/standard-card-selector.component';
 import { CommandButtonStateService } from '../../../../services/game-state/command-button-state.service';
+import { EventProcessor } from '../../../../services/events/event-processor.service';
+import { DrawEventHandler } from '../../../../services/events/draw-event-processor.service';
 
 //this component is the main view
 
@@ -103,7 +104,6 @@ export class GameEventComponent {
 	_interfaceSize!: SettingInterfaceSize
 	_mainButton!: EventMainButton | null
 
-	//private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
 	private destroy$ = new Subject<void>()
 
@@ -112,7 +112,7 @@ export class GameEventComponent {
 		private gameStateService: GameStateFacadeService,
 		private gameParamService: GameParamService,
 		private gameContentService: GameActiveContentService,
-		private eventHandler: EventHandler,
+		private eventProcessor: EventProcessor,
 		private commandButtonService: CommandButtonStateService
 	){}
 
@@ -130,9 +130,9 @@ export class GameEventComponent {
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
 
 		this.gameParamService.currentInterfaceSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._interfaceSize = size)
-		this.eventHandler.currentEventObs.subscribe(event => {this.currentEvent = event})
+		this.eventProcessor.currentEventObs.subscribe(event => {this.currentEvent = event})
 		this.commandButtonService.currentEventMainButtonUpdated$.pipe(takeUntil(this.destroy$)).subscribe(button => this._mainButton = button)
-		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
+		this.eventProcessor.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -206,7 +206,7 @@ export class GameEventComponent {
 		console.log('game event button clicked:', button)
 	}
 	public onUpdateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){
-		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+		this.eventProcessor.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
 		switch(button.name){
@@ -217,7 +217,7 @@ export class GameEventComponent {
 				break
 			}
 			case('sellOptionalCardCancel'):{
-				this.eventHandler.cancelSellCardsOptional()
+				this.eventProcessor.cancelSellCardsOptional()
 				break
 			}
 			case('displayUpgradedPhase'):{
@@ -227,7 +227,7 @@ export class GameEventComponent {
 				break
 			}
 			case('displayUpgradedPhaseCancel'):{
-				this.eventHandler.cancelDisplayUpgradedPhase()
+				this.eventProcessor.cancelDisplayUpgradedPhase()
 				break
 			}
 			case('killCard'):{
@@ -246,10 +246,10 @@ export class GameEventComponent {
 		}
 	}
 	public onProjectActivated(input: {card: PlayableCardModel, option: ActivationOption, twice: boolean}){
-		this.eventHandler.onProjectActivated(input)
+		this.eventProcessor.onProjectActivated(input)
 	}
-	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
-	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
+	public eventMainButtonClicked(){this.eventProcessor.eventMainButtonClicked()}
+	public onPhaseSelected(): void {this.eventProcessor.updateValidateButton(true)}
 	isDiscoveryActive(): boolean {
 		return this.gameContentService.isContentActive('expansionDiscovery')
 	}

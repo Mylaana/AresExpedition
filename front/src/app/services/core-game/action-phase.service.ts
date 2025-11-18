@@ -9,6 +9,7 @@ import { GlobalParameterNameEnum } from "../../enum/global.enum";
 import { STANDARD_PROJECT_EVENTS } from "../../maps/standard-project-maps";
 import { GameActiveContentService } from "./game-active-content.service";
 import { GameStateFacadeService } from "../game-state/game-state-facade.service";
+import { EventProcessor } from "../events/event-processor.service";
 
 interface StandardProjectState {
     costMC?: number
@@ -40,11 +41,12 @@ export class ActionPhaseService{
 
     constructor(
         private gameStateService: GameStateFacadeService,
-		private gameContentService: GameActiveContentService
+		private gameContentService: GameActiveContentService,
+        private eventProcessor : EventProcessor,
     ){
 		this.initializeFromActiveContent()
         this.gameStateService.currentClientState.subscribe(state => this.onClientStateUpdate(state))
-        this.gameStateService.currentEventActivator.subscribe(queue => this.onEventQueueUpdate(queue))
+        this.eventProcessor.currentEventActivator.subscribe(queue => this.onEventQueueUpdate(queue))
         this.initializeStandardProjectStates()
     }
 	private initializeFromActiveContent(){

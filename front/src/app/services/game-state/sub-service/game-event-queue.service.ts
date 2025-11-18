@@ -17,10 +17,6 @@ export class GameEventQueueService {
     private clientState!: PlayerStateModel
 
     _eventQueue$ = new BehaviorSubject<EventBaseModel[]>([])
-    _eventSelector$ = new BehaviorSubject<EventBaseCardSelector | null>(null)
-	_eventActivator$ = new BehaviorSubject<EventCardActivator | null>(null)
-    _eventBuilder$ = new BehaviorSubject<EventCardBuilder | null>(null)
-    _eventWithMainButton$ = new BehaviorSubject<EventBaseModel | null>(null)
 
 
     constructor(private eventStateDeserializerService: EventStateDeserializerService){}
@@ -102,39 +98,7 @@ export class GameEventQueueService {
         this.clientState = clientState
     }
     private updateEventQueue(queue: EventBaseModel[]){
-        this.updateSpecificEventSubjects(queue)
 		this._eventQueue$.next(queue)
 	}
-    private toEventCardActivator(event: EventBaseModel): EventCardActivator | null {
-		return event?.hasCardActivator()
-			? (event as EventCardActivator)
-			: null
-	}
-	private toEventCardSelector(event: EventBaseModel): EventBaseCardSelector | null {
-        return event?.hasSelector() && event?.hasCardBuilder()===false
-			? (event as EventBaseCardSelector)
-			: null
-	}
-    private toEventCardBuilder(event: EventBaseModel): EventCardBuilder | null {
-		return event?.hasCardBuilder()
-			? (event as EventCardBuilder)
-			: null
-	}
-    private toEventWithMainButton(event: EventBaseModel): EventBaseModel | null {
-        return event.button
-            ? event
-            : null
-    }
-    private updateSpecificEventSubjects(eventQueue: EventBaseModel[]) {
-		if(eventQueue.length===0){
-			return
-		}
-		const currentEvent = eventQueue[0]
-		
-		this._eventSelector$.next(this.toEventCardSelector(currentEvent))
-		this._eventActivator$.next(this.toEventCardActivator(currentEvent))
-        this._eventBuilder$.next(this.toEventCardBuilder(currentEvent))
 
-        this._eventWithMainButton$.next(this.toEventWithMainButton(currentEvent))
-	}
 }

@@ -4,8 +4,8 @@ import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type
 import { EventCardBuilderButton } from '../../../models/core-game/button.model';
 import { CommonModule } from '@angular/common';
 import { EventCardBuilderButtonComponent } from '../../tools/button/event-card-builder-button.component';
-import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
 import { Subject, takeUntil } from 'rxjs';
+import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
 
 @Component({
 	selector: 'app-card-builder-alternative-option',

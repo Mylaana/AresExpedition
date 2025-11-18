@@ -2,8 +2,9 @@ export const TRIGGER_PRIORITY_DEFAULT_VALUE = 10;
 
 const DRAW = 11;
 const RESOURCES = 9;
-const DRAW_DISCARD = 8;
-const DISCARD_DRAW = 7;
+const RESOURCES_CONSUMPTION = 9;
+const DRAW_DISCARD = 7;
+const DISCARD_DRAW = 6;
 
 export const TRIGGER_PRIORITY_MAP: Map<string, number> = new Map([
     //Draw cards
@@ -12,6 +13,9 @@ export const TRIGGER_PRIORITY_MAP: Map<string, number> = new Map([
     
     //Resource changes
     ["CF2", RESOURCES], ["F04", RESOURCES], ["61", RESOURCES],
+
+    //Resource consumption
+    ["19", RESOURCES_CONSUMPTION],
 
     //Draw then discard
     ["P16", DRAW_DISCARD],

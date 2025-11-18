@@ -10,12 +10,10 @@ import { NonEventButton } from '../../../models/core-game/button.model';
 import { Subject, takeUntil } from 'rxjs';
 import { GameParamService } from '../../../services/core-game/game-param.service';
 import { SettingCardSize } from '../../../types/global.type';
-import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { ProjectListType } from '../../../types/project-card.type';
-import { EventHandler } from '../../../models/core-game/handlers.model';
-import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
+import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
 
 @Component({
   selector: 'app-phase-builder',
@@ -47,8 +45,8 @@ export class PhaseBuilderComponent{
 
 	ngOnInit(): void {
 		this.gameParam.currentCardSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._cardSize = size)
-		this._currentEvent = this.cardBuilderHandlerService._currentEvent
-
+		this.cardBuilderHandlerService.currentEventBuilder.pipe(takeUntil(this.destroy$))
+			.subscribe(event => this._currentEvent = event)
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()

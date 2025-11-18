@@ -7,10 +7,9 @@ import { GameStateFacadeService } from '../../../services/game-state/game-state-
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
 import { PlayableCard } from '../../../factory/playable-card.factory';
 import { ButtonDesigner } from '../../../factory/button-designer.service';
-import { EventBaseModel, EventCardBuilder } from '../../../models/core-game/event.model';
 import { NonEventButtonNames, SettingCardSize } from '../../../types/global.type';
 import { CardBuilder } from '../../../models/core-game/card-builder.model';
-import { CardBuilderEventHandlerService } from '../../../services/core-game/card-builder-event-handler.service';
+import { CardBuilderEventHandlerService } from '../../../services/events/Sub/card-builder-event-handler.service';
 
 @Component({
   selector: 'app-card-builder-alternative-cost',

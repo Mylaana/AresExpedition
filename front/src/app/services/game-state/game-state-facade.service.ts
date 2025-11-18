@@ -88,12 +88,6 @@ export class GameStateFacadeService{
 	currentDeck = this.deck.asObservable()
 	currentDiscard = this.discard.asObservable()
 
-	currentEventQueue = this.gameEventQueueService._eventQueue$.asObservable()
-	currentEventSelector = this.gameEventQueueService._eventSelector$.asObservable()
-	currentEventActivator = this.gameEventQueueService._eventActivator$.asObservable()
-	currentEventBuilder = this.gameEventQueueService._eventBuilder$.asObservable()
-
-
     phaseIndex: number = 0
 
     phaseOrder: PhaseOrder = {

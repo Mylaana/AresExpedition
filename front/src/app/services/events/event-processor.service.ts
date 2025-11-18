@@ -1,30 +1,32 @@
-import { Injectable } from "@angular/core";
-import { AdvancedRessourceStock, CardRessourceStock, RessourceInfo, RessourceStock, ScanKeep } from "../../interfaces/global.interface";
-import { ProjectCardInfoService } from "../../services/cards/project-card-info.service";
-import { GameStateFacadeService } from "../../services/game-state/game-state-facade.service";
-import { EventCardActivatorSubType, EventCardSelectorRessourceSubType, EventCardSelectorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type";
-import { BuilderType } from "../../types/phase-card.type";
-import { PhaseCardModel } from "../cards/phase-card.model";
-import { PlayableCardModel } from "../cards/project-card.model";
-import { DrawEvent, EventBaseModel, EventCardSelector, EventCardBuilder, EventCardSelectorRessource, EventDeckQuery, EventGeneric, EventTargetCard, EventWaiter, EventPhase, EventCardActivator, EventComplexCardSelector, EventTagSelector } from "./event.model";
-import { Logger, Utils } from "../../utils/utils";
-import { RxStompService } from "../../services/websocket/rx-stomp.service";
-import { SelectablePhaseEnum } from "../../enum/phase.enum";
-import { ActivationOption, ProjectListType } from "../../types/project-card.type";
-import { myUUID } from "../../types/global.type";
-import { GameParamService } from "../../services/core-game/game-param.service";
-import { EventFactory } from "../../factory/event/event-factory";
-import { DrawEventFactory } from "../../factory/draw-event-designer.service";
-import { DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum } from "../../enum/global.enum";
-import { PlayableCard } from "../../factory/playable-card.factory";
-import { BehaviorSubject } from "rxjs";
-import { CardBuilderEventHandlerService } from "../../services/core-game/card-builder-event-handler.service";
-import { CardSelectorEventHandlerService } from "../../services/core-game/card-selector-event-handler.service";
+import { Injectable } from "@angular/core"
+import { BehaviorSubject } from "rxjs"
+import { DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum } from "../../enum/global.enum"
+import { SelectablePhaseEnum } from "../../enum/phase.enum"
+import { DrawEventFactory } from "../../factory/draw-event-designer.service"
+import { EventFactory } from "../../factory/event/event-factory"
+import { PlayableCard } from "../../factory/playable-card.factory"
+import { AdvancedRessourceStock, RessourceStock, ScanKeep, CardRessourceStock, RessourceInfo } from "../../interfaces/global.interface"
+import { PhaseCardModel } from "../../models/cards/phase-card.model"
+import { PlayableCardModel } from "../../models/cards/project-card.model"
+import { EventBaseModel, EventCardSelector, EventCardBuilder, EventCardActivator, EventPhase, EventComplexCardSelector, EventCardSelectorRessource, EventGeneric, EventDeckQuery, EventTargetCard, EventWaiter, EventTagSelector, EventBaseCardSelector } from "../../models/core-game/event.model"
+import { EventCardSelectorSubType, EventCardSelectorRessourceSubType, EventCardActivatorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type"
+import { myUUID } from "../../types/global.type"
+import { BuilderType } from "../../types/phase-card.type"
+import { ProjectListType, ActivationOption } from "../../types/project-card.type"
+import { Utils, Logger } from "../../utils/utils"
+import { ProjectCardInfoService } from "../cards/project-card-info.service"
+import { GameParamService } from "../core-game/game-param.service"
+import { GameStateFacadeService } from "../game-state/game-state-facade.service"
+import { RxStompService } from "../websocket/rx-stomp.service"
+import { CardBuilderEventHandlerService } from "./Sub/card-builder-event-handler.service"
+import { CardSelectorEventHandlerService } from "./Sub/card-selector-event-handler.service"
+import { GameEventQueueService } from "../game-state/sub-service/game-event-queue.service"
+import { CommandButtonStateService } from "../game-state/command-button-state.service"
 
 @Injectable({
 	providedIn: 'root'
 })
-export class EventHandler {
+export class EventProcessor {
     private eventCounter: number = 0
 	private currentEvent!: EventBaseModel
 	private currentEventId!: number
@@ -32,33 +34,80 @@ export class EventHandler {
 	private readonly phaseHandler = new PhaseResolveHandler(this.gameStateService, this.gameParam)
 
 	private _currentEvent$ = new BehaviorSubject<EventBaseModel | undefined>(undefined)
-	currentEventObs = this._currentEvent$.asObservable()
+	readonly currentEventObs = this._currentEvent$.asObservable()
+	
+	private _eventActivator$ = new BehaviorSubject<EventCardActivator | null>(null)
+	readonly currentEventActivator = this._eventActivator$.asObservable()
+	
+	//private _eventWithMainButton$ = new BehaviorSubject<EventBaseModel | null>(null)
+	readonly currentEventQueue = this.gameEventQueueService._eventQueue$.asObservable()
 
     constructor(
 		private gameStateService: GameStateFacadeService,
+		private gameEventQueueService: GameEventQueueService,
 		private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private builderService: CardBuilderEventHandlerService,
-		private selectorService: CardSelectorEventHandlerService
+		private selectorService: CardSelectorEventHandlerService,
+		private commandButtonStateService: CommandButtonStateService
 	){
-		gameStateService.currentEventQueue.subscribe(queue => this.handleQueueUpdate(queue))
+		this.currentEventQueue.subscribe(queue => this.handleQueueUpdate(queue))
 	}
-
-	public handleQueueUpdate(eventQueue: EventBaseModel[]): EventBaseModel | undefined {
+	public handleQueueUpdate(eventQueue: EventBaseModel[]){
 		if(eventQueue.length===0){
-			return undefined
+			return
 		}
 		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && Utils.jsonCopy(eventQueue[0].id)===Utils.jsonCopy(this.currentEventId)){
-			return this.currentEvent
+			return
 		}
 		if(eventQueue[0].finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()
-			return this.currentEvent
+			return
 		}
 		this.switchEvent(eventQueue, this.currentEvent)
 		if(this.waiterResolved.length!=0){this.resolveWaiters(eventQueue)}
 		this.checkFinalized()
-		return this.currentEvent
+		this.updateSpecificEventSubjects(eventQueue)
+	}
+	private toEventCardActivator(event: EventBaseModel): EventCardActivator | null {
+		return event?.hasCardActivator()
+			? (event as EventCardActivator)
+			: null
+	}
+	private toEventCardSelector(event: EventBaseModel): EventBaseCardSelector | null {
+        return event?.hasSelector() && event?.hasCardBuilder()===false
+			? (event as EventBaseCardSelector)
+			: null
+	}
+    private toEventCardBuilder(event: EventBaseModel): EventCardBuilder | null {
+		return event?.hasCardBuilder()
+			? (event as EventCardBuilder)
+			: null
+	}
+    private toEventWithMainButton(event: EventBaseModel): EventBaseModel | null {
+        return event.button
+            ? event
+            : null
+    }
+    private updateSpecificEventSubjects(eventQueue: EventBaseModel[]) {
+		if(eventQueue.length===0){
+			return
+		}
+		const currentEvent = eventQueue[0]
+		
+		this._eventActivator$.next(this.toEventCardActivator(currentEvent))
+        this.updateBuilderServiceCurrentEvent()
+		this.updateSelectorServiceCurrentEvent()
+		this.updateEventWithMainButtonServiceCurrentEvent()        
+	}
+	private updateBuilderServiceCurrentEvent(){
+		this.builderService.onEventUpdate(this.toEventCardBuilder(this.currentEvent))
+	}
+	private updateSelectorServiceCurrentEvent(){
+		this.selectorService.onEventUpdate(this.toEventCardSelector(this.currentEvent))
+	}
+	private updateEventWithMainButtonServiceCurrentEvent(){
+		this.commandButtonStateService.onEventWithMainButtonUpdate(this.toEventWithMainButton(this.currentEvent))
 	}
 	public eventMainButtonClicked(): void {
 		this.finishEventEffect()
@@ -678,111 +727,6 @@ export class EventHandler {
 			return true
 		}
 		return false
-	}
-}
-
-@Injectable()
-export class DrawEventHandler {
-	constructor(
-		private gameStateService:GameStateFacadeService,
-		private projectCardInfoService: ProjectCardInfoService,
-		private rxStompService: RxStompService
-	){}
-	handleQueueUpdate(drawQueue: DrawEvent[]): void {
-		if(drawQueue.length===0){return}
-		if(drawQueue[0].finalized===true){return}
-		if(drawQueue[0].queried===false){
-			this.sendWsDrawQuery(drawQueue[0])
-		}
-		if(drawQueue[0].served===false){return}
-		let event = drawQueue[0]
-		event.finalized = true
-		this.resolveDrawEvent(event)
-		this.gameStateService.cleanAndNextDrawQueue()
-	}
-	private sendWsDrawQuery(event: DrawEvent){
-		event.queried = true
-		switch(event.resolveEventSubType){
-			case('drawResult'):{
-				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, undefined, event.isCardProductionDouble, event.firstCardProduction)
-				break
-			}
-			case('researchPhaseResult'):{
-				this.rxStompService.publishScanKeep({scan:event.drawCardNumber, keep: event.keepCardNumber??0}, event.waiterId, this.gameStateService.getClientStateDTO(), event.resolveEventSubType)
-				break
-			}
-			case('scanKeepResult'):{
-				this.rxStompService.publishScanKeep({scan:event.drawCardNumber, keep: event.keepCardNumber??0}, event.waiterId, this.gameStateService.getClientStateDTO(), event.resolveEventSubType, event.scanKeepOptions)
-				break
-			}
-			case('drawResultThenDiscard'):{
-				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, event.discardAfterDraw)
-				break
-			}
-			default:{
-				console.error('UNMAPED DRAW QUERY RESULT TYPE: ',event.resolveEventSubType)
-			}
-		}
-	}
-	private resolveDrawEvent(drawEvent: DrawEvent): void {
-		let resultEvent!: EventBaseModel
-		this.gameStateService.addCardSeenToClient(drawEvent.drawResultCardList.length)
-		Logger.logEventResolution('resolving deck event: ',drawEvent.resolveEventSubType)
-		switch(drawEvent.resolveEventSubType){
-			case('drawResult'):{
-				resultEvent = EventFactory.createGeneric(
-					'drawResult',
-					{
-						drawEventResult:drawEvent.drawResultCardList,
-						waiterId:drawEvent.waiterId,
-						isCardProductionDouble:drawEvent.isCardProductionDouble
-					}
-				)
-				break
-			}
-			case('researchPhaseResult'):{
-				resultEvent = EventFactory.createCardSelector(
-					'researchPhaseResult',
-					{
-						cardSelector:{
-							selectFrom: this.projectCardInfoService.getProjectCardList(drawEvent.drawResultCardList),
-							selectedList: [],
-							selectionQuantity: drawEvent.keepCardNumber,
-						},
-						waiterId:drawEvent.waiterId
-					}
-				)
-				break
-			}
-			case('scanKeepResult'):{
-				if(drawEvent.keepCardNumber===undefined){break}
-				resultEvent = EventFactory.createCardSelectorComplex(
-					'scanKeepResult',
-					{
-						cardSelector:{
-							selectFrom:this.projectCardInfoService.getProjectCardList(drawEvent.drawResultCardList),
-							selectionQuantity: drawEvent.keepCardNumber,
-						},
-						scanKeepOptions:drawEvent.scanKeepOptions,
-						waiterId:drawEvent.waiterId,
-					}
-				)
-				break
-			}
-			case('drawResultThenDiscard'):{
-				resultEvent = EventFactory.createGeneric(
-					'drawResultThenDiscard',
-					{
-						drawEventResult:drawEvent.drawResultCardList,
-						thenDiscard: drawEvent.discardAfterDraw,
-						waiterId:drawEvent.waiterId
-					}
-				)
-				break
-			}
-		}
-		if(resultEvent===undefined){return}
-		this.gameStateService.addEventQueue(resultEvent,'first')
 	}
 }
 
