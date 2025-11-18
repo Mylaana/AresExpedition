@@ -67,12 +67,9 @@ export class EventProcessor {
 		})
 	}
 	public handleQueueUpdate(eventQueue: EventBaseModel[]){
-		if(eventQueue.length===0){
-			return
-		}
-		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined && Utils.jsonCopy(eventQueue[0].id)===Utils.jsonCopy(this.currentEventId)){
-			return
-		}
+		if(eventQueue.length===0){return}
+		if(eventQueue[0].id!=undefined && this.currentEventId!=undefined 
+			&& Utils.jsonCopy(eventQueue[0].id)===Utils.jsonCopy(this.currentEventId)){return}
 		if(eventQueue[0].finalized===true){
 			this.gameStateService.cleanAndNextEventQueue()
 			return
@@ -83,7 +80,6 @@ export class EventProcessor {
 		this.updateSpecificEventSubjects(eventQueue)
 	}
 	private toEventCardActivator(event: EventBaseModel): EventCardActivator | null {
-		console.log(event)
 		return event?.hasCardActivator()
 			? (event as EventCardActivator)
 			: null
@@ -104,12 +100,9 @@ export class EventProcessor {
             : null
     }
     private updateSpecificEventSubjects(eventQueue: EventBaseModel[]) {
-		if(eventQueue.length===0){
-			return
-		}
-		const currentEvent = eventQueue[0]
-		
-		this._eventActivator$.next(this.toEventCardActivator(currentEvent))
+		if(!this.currentEvent){return}
+	
+		this._eventActivator$.next(this.toEventCardActivator(this.currentEvent))
         this.updateBuilderServiceCurrentEvent()
 		this.updateSelectorServiceCurrentEvent()
 		this.updateEventWithMainButtonServiceCurrentEvent()        

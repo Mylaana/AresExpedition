@@ -38,12 +38,12 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
                         let newEvents: EventBaseModel[] = []
                         let card = event.getCardToBuild()
                         if(card===undefined){return}
+
                         event.lockCurrentBuilder()
                         event.setSelectorSelectFrom(this.gameStateFacade.getClientHandModelList(event.getSelectorFilter()))
                         newEvents = [EventFactory.createGeneric('buildCard', {card:card})]
-        
                         event.cardBuilderButtonClicked(command.buttonName, command.builderIndex)
-                        this.gameStateFacade.addEventQueue(newEvents, 'first')
+                        this.gameEventQueue.addEventQueue(newEvents, 'first')
                                 
                         break
                     }
@@ -56,8 +56,9 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
                 if(!event){return}
                 let newEvents = PlayableCard.getAlternativePayButtonClickedEvents(command.buttonName)
                 if(newEvents.length===0){return}
+
                 event.resolveCurrentBuilderAlternativeCostUsed(command.buttonName)
-                this.gameStateFacade.addEventQueue(newEvents, 'first')
+                this.gameEventQueue.addEventQueue(newEvents, 'first')
                 break
             }
 
@@ -65,8 +66,9 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
                 if(!event){return}
                 let newEvents = PlayableCard.getBuilderAlternativeOptionButtonClickedEvents(command.buttonName)
                 if(newEvents.length===0){return}
+                
                 event.resolveBuilderAlternativeOptionUsed(command.builderIndex??0, command.buttonName)
-                this.gameStateFacade.addEventQueue(newEvents, 'first')
+                this.gameEventQueue.addEventQueue(newEvents, 'first')
                 break
             }
 
