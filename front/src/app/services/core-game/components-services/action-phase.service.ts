@@ -101,7 +101,6 @@ export class ActionPhaseService{
         }
     }
     private onEventQueueUpdate(event: EventCardActivator | null){
-        console.log(event)
         if(!event){
             this.actionEvent = undefined
             return

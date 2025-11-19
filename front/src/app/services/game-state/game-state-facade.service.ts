@@ -397,14 +397,17 @@ export class GameStateFacadeService{
 
         //check for triggers and add them to queue
 		let activeTriggers = state.getTriggersIdActive()
-        let eventsOnPlayed = PlayableCard.getOnTriggerredEvents('ON_CARD_PLAYED', activeTriggers, state, {playedCard:card})
+        let eventsOnPlayed = PlayableCard.getOnTriggerredEvents(['ON_CARD_PLAYED', 'ON_TAG_GAINED'], activeTriggers, state, {tagList:card.tagsId, playedCard: card})
         if(eventsOnPlayed.length>0){
             events = events.concat(eventsOnPlayed)
         }
-        let eventsOnTagGained =PlayableCard.getOnTriggerredEvents('ON_TAG_GAINED', activeTriggers, state, {tagList:card.tagsId, playedCard: card})
+        /*
+		let eventsOnTagGained = PlayableCard.getOnTriggerredEvents('ON_TAG_GAINED', activeTriggers, state, {tagList:card.tagsId, playedCard: card})
         if(eventsOnTagGained.length>0){
             events = events.concat(eventsOnTagGained)
         }
+			*/
+		console.log(events)
 
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)

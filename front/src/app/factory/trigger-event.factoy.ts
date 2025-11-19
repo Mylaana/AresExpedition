@@ -9,6 +9,7 @@ import { MoonTile, RessourceStock } from "../interfaces/global.interface";
 import { Utils } from "../utils/utils";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum";
 import { Checker } from "../utils/checker";
+import { PlayableCard } from "./playable-card.factory";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
@@ -520,14 +521,19 @@ function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {
 	}
 }
 export const TriggerEffectEventFactory = {
-	getTriggerred(hook: HookType, activeTriggers: string[], clientState: PlayerStateModel, input: Partial<TriggerInput>): EventBaseModel[] {
-		const handlers = HANDLERS_BY_HOOK[hook] ?? {};
-		const relevantTriggers = activeTriggers.filter(trigger => trigger in handlers);
+	getTriggerred(hooks: HookType | HookType[], activeTriggers: string[], clientState: PlayerStateModel, input: Partial<TriggerInput>): EventBaseModel[] {
+		let relevantTriggers: string[] = []
+		let hookList = Utils.toArray(hooks) as HookType[]
+		for(let hook of hookList){
+			const handler = HANDLERS_BY_HOOK[hook] ?? {};
+			relevantTriggers = relevantTriggers.concat(activeTriggers.filter(trigger => trigger in handler))
+		}
+		relevantTriggers = PlayableCard.sortTriggerList(relevantTriggers)
 		const events: EventBaseModel[] = [];
 		const fullInput = toFullTriggerInput(input)
 
 		for (const trig of relevantTriggers) {
-			const handler = handlers[trig];
+			const handler = getHandlerForTrigger(trig, hookList);
 			if (handler) {
 				events.push(...handler(trig,  fullInput, clientState));
 			}
@@ -541,5 +547,13 @@ export const TriggerEffectEventFactory = {
 			}
 		}
 		return false;
+	}
+}
+function getHandlerForTrigger(triggerCode: string, hooks: HookType[]): any {
+	for(let hook of hooks){
+		let handler = HANDLERS_BY_HOOK[hook]
+		if(handler[triggerCode]){
+			return handler[triggerCode]
+		}
 	}
 }
