@@ -66,8 +66,8 @@ export const STANDARD_PROJECT_COST: Record<StandardProjectButtonNames, (clientst
 	//Convert Forest - Ecoline
 	'convertForest': (state) => {
 		let result: number = 8
-		result -= state.getTriggersIdActive().includes('210')? 1:0
-		result -= state.getTriggersIdActive().includes('210B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('210')? 1:0
+		result -= state.getTriggersIdPlayed().includes('210B')? 2:0
 		return result
 	},
 	'convertTemperature': () => {
@@ -82,60 +82,60 @@ export const STANDARD_PROJECT_COST: Record<StandardProjectButtonNames, (clientst
 	//Buy Forest - Standard Technology
 	'buyForest': (state) => {
 		let result: number = 20
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('55')? 4:0
+		result -= state.getTriggersIdPlayed().includes('55B')? 2:0
 		return result
 	},
 	//Buy Infrastructure - Standard Technology
 	'buyInfrastructure': (state) => {
 		let result: number = 15
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('55')? 4:0
+		result -= state.getTriggersIdPlayed().includes('55B')? 2:0
 		return result
 	},
 	//Buy Ocean - Standard Technology
 	'buyOcean': (state) => {
 		let result: number = 16
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('55')? 4:0
+		result -= state.getTriggersIdPlayed().includes('55B')? 2:0
 		return result
 	},
 	//Buy Temperature - Standard Technology
 	'buyTemperature': (state) => {
 		let result: number = 14
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('55')? 4:0
+		result -= state.getTriggersIdPlayed().includes('55B')? 2:0
 		return result
 	},
 	//Buy Temperature - Standard Technology
 	'buyUpgrade': (state) => {
 		let result: number = 18
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('55')? 4:0
+		result -= state.getTriggersIdPlayed().includes('55B')? 2:0
 		return result
 	},
 	//Buy Temperature - Standard Technology
 	'buyHabitat': (state) => {
 		let result: number = 16
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		result -= state.getTriggersIdActive().includes('M122')? 3:0
+		result -= state.getTriggersIdPlayed().includes('55')? 4:0
+		result -= state.getTriggersIdPlayed().includes('55B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('M122')? 3:0
 		return result
 	},
 	//Buy Temperature - Standard Technology
 	'buyRoad': (state) => {
 		let result: number = 16
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		result -= state.getTriggersIdActive().includes('M122')? 3:0
+		result -= state.getTriggersIdPlayed().includes('55')? 4:0
+		result -= state.getTriggersIdPlayed().includes('55B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('M122')? 3:0
 		return result
 	},
 	//Buy Temperature - Standard Technology
 	'buyMine': (state) => {
 		let result: number = 16
-		result -= state.getTriggersIdActive().includes('55')? 4:0
-		result -= state.getTriggersIdActive().includes('55B')? 2:0
-		result -= state.getTriggersIdActive().includes('M122')? 3:0
+		result -= state.getTriggersIdPlayed().includes('55')? 4:0
+		result -= state.getTriggersIdPlayed().includes('55B')? 2:0
+		result -= state.getTriggersIdPlayed().includes('M122')? 3:0
 		return result
 	},
 
