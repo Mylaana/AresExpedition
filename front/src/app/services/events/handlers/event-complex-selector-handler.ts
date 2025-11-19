@@ -2,8 +2,6 @@ import { Injectable } from "@angular/core";
 import { GameStateFacadeService } from "../../game-state/game-state-facade.service";
 import { GameEventHandler } from "../../../interfaces/services.interface";
 import { EventBaseModel, EventComplexCardSelector } from "../../../models/core-game/event.model";
-import { CardSelectorService } from "../../core-game/components-services/card-selector.service";
-import { EventQueueService } from "../event-queue.service";
 import { DeckQueryOptionsEnum, DiscardOptionsEnum } from "../../../enum/global.enum";
 import { Logger, Utils } from "../../../utils/utils";
 import { EventFactory } from "../../../factory/event/event-factory";
@@ -13,15 +11,12 @@ import { ProjectCardInfoService } from "../../cards/project-card-info.service";
 @Injectable()
 export class EventComplexSelectorHandler implements GameEventHandler<EventComplexCardSelector> {
     constructor(
-        private eventQueue: EventQueueService,
         private gameStateFacade: GameStateFacadeService,
-        private selectorService: CardSelectorService
     ){}
     supports(event: EventBaseModel): boolean {
         return event.type==='ComplexSelector'
     }
     onSwitchEvent(event: EventComplexCardSelector){
-        console.log(event)
         if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateFacade.getClientHandModelList(event.getSelectorFilter()))}
         switch(event.subType){
             case('discardCards'):{

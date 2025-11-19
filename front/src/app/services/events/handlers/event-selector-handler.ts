@@ -3,8 +3,6 @@ import { GameStateFacadeService } from "../../game-state/game-state-facade.servi
 import { GameEventHandler } from "../../../interfaces/services.interface";
 import { EventBaseModel, EventCardSelector, EventCardSelectorRessource } from "../../../models/core-game/event.model";
 import { Logger, Utils } from "../../../utils/utils";
-import { EventCardSelectorSubType, EventCardSelectorRessourceSubType } from "../../../types/event.type";
-import { CardBuilderService } from "../../core-game/components-services/card-builder.service";
 import { CardSelectorService } from "../../core-game/components-services/card-selector.service";
 import { ProjectCardInfoService } from "../../cards/project-card-info.service";
 import { EventFactory } from "../../../factory/event/event-factory";

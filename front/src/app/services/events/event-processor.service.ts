@@ -1,23 +1,14 @@
 import { Inject, Injectable, InjectionToken } from "@angular/core"
 import { BehaviorSubject } from "rxjs"
-import { DeckQueryOptionsEnum, DiscardOptionsEnum, InputRuleEnum } from "../../enum/global.enum"
-import { SelectablePhaseEnum } from "../../enum/phase.enum"
 import { DrawEventFactory } from "../../factory/draw-event-designer.service"
 import { EventFactory } from "../../factory/event/event-factory"
-import { PlayableCard } from "../../factory/playable-card.factory"
-import { AdvancedRessourceStock, RessourceStock, ScanKeep, CardRessourceStock, RessourceInfo } from "../../interfaces/global.interface"
-import { PhaseCardModel } from "../../models/cards/phase-card.model"
+import { AdvancedRessourceStock, ScanKeep, CardRessourceStock } from "../../interfaces/global.interface"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
-import { EventBaseModel, EventCardSelector, EventCardBuilder, EventCardActivator, EventPhase, EventComplexCardSelector, EventCardSelectorRessource, EventGeneric, EventDeckQuery, EventTargetCard, EventWaiter, EventTagSelector, EventBaseCardSelector } from "../../models/core-game/event.model"
-import { EventCardSelectorSubType, EventCardSelectorRessourceSubType, EventCardActivatorSubType, EventPhaseSubType, EventUnionSubTypes } from "../../types/event.type"
-import { myUUID } from "../../types/global.type"
-import { BuilderType } from "../../types/phase-card.type"
+import { EventBaseModel, EventCardSelector, EventCardBuilder, EventCardActivator, EventPhase, EventCardSelectorRessource, EventDeckQuery, EventTargetCard, EventWaiter, EventTagSelector, EventBaseCardSelector } from "../../models/core-game/event.model"
+import { EventCardActivatorSubType, EventUnionSubTypes } from "../../types/event.type"
 import { ProjectListType, ActivationOption } from "../../types/project-card.type"
 import { Utils, Logger } from "../../utils/utils"
-import { ProjectCardInfoService } from "../cards/project-card-info.service"
-import { GameParamService } from "../core-game/game-param.service"
 import { GameStateFacadeService } from "../game-state/game-state-facade.service"
-import { RxStompService } from "../websocket/rx-stomp.service"
 import { CardSelectorService } from "../core-game/components-services/card-selector.service"
 import { EventQueueService } from "./event-queue.service"
 import { CommandButtonStateService } from "../game-state/command-button-state.service"
@@ -38,7 +29,6 @@ export class EventProcessor {
 	private currentEvent!: EventBaseModel
 	private currentEventId!: number
 	private waiterResolved: number[] = []
-	private readonly phaseHandler = new PhaseResolveHandler(this.gameStateService, this.gameParam)
 
 	private _currentEvent$ = new BehaviorSubject<EventBaseModel | undefined>(undefined)
 	readonly currentEventObs = this._currentEvent$.asObservable()
@@ -51,7 +41,6 @@ export class EventProcessor {
     constructor(
 		private gameStateService: GameStateFacadeService,
 		private gameEventQueueService: EventQueueService,
-		private gameParam: GameParamService,
 		private builderService: CardBuilderService,
 		private selectorService: CardSelectorService,
 		private commandButtonStateService: CommandButtonStateService,
@@ -204,21 +193,7 @@ export class EventProcessor {
 		}
 	}
 	private switchEventPhase(event: EventPhase): void {
-		let subType = event.subType as EventPhaseSubType
-		if(event.autoFinalize===true){event.finalized=true}
-		switch(subType){
-			case('developmentPhase'):{this.phaseHandler.resolveDevelopment();break}
-			case('constructionPhase'):{this.phaseHandler.resolveConstruction();break}
-			case('actionPhase'):{this.phaseHandler.resolveAction(); break}
-			case('productionPhase'):{
-				if(event.productionApplied){return}
-				event.productionApplied = true // prevents infinite loops
-				this.phaseHandler.resolveProduction(event);
-				break
-			}
-			case('researchPhase'):{this.phaseHandler.resolveResearch();break}
-			default:{return}
-		}
+
 	}
     private finishEventEffect(){
 		const handler = this.getHandlerFor(this.currentEvent)
@@ -234,7 +209,6 @@ export class EventProcessor {
 			case('deck'):{this.finishEventDeckQuery(this.currentEvent as EventDeckQuery); break}
 			case('targetCard'):{this.finishEventTargetCards(this.currentEvent as EventTargetCard); break}
 			case('waiter'):{this.finishEventWaiter(this.currentEvent as EventWaiter);break}
-			case('phase'):{this.finishEventPhase(this.currentEvent as EventPhase); break}
 			case('cardActivator'):{this.finishEventCardActivator(this.currentEvent as EventCardActivator); break}
 			case('tagSelector'):{this.finishEventTagSelector(this.currentEvent as EventTagSelector); break}
 			default:{Logger.logError('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
@@ -359,20 +333,6 @@ export class EventProcessor {
 			default:{Logger.logError('Non mapped event in handler.finishEventTargetCards: ', this.currentEvent)}
 		}
 	}
-	private finishEventPhase(event: EventPhase): void {
-		Logger.logEventResolution('resolving event: ','finishEventPhase', event.subType)
-
-		switch(event.subType){
-			case('developmentPhase'):case('constructionPhase'):case('researchPhase'):{
-				break
-			}
-			case('productionPhase'):{
-				event.finalized=true
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}
-		}
-	}
 	private finishEventTagSelector(event: EventTagSelector) {
 		Logger.logEventResolution('resolving event: ','finishEventTagSelector', event.subType)
 		switch(event.subType){
@@ -430,160 +390,3 @@ export class EventProcessor {
 	}
 }
 
-class PhaseResolveHandler {
-	private currentUpgradedPhaseCards!: PhaseCardModel[]
-	private clientPlayerId: myUUID = ''
-
-	constructor(
-		private gameStateService: GameStateFacadeService,
-		private gameParam: GameParamService
-	){
-
-	}
-
-	private getPhaseCards(): PhaseCardModel[] {
-		return this.gameStateService.getClientPhaseCards(true)
-	}
-	private refreshCurrentUpgradedPhaseCard(): void {
-		this.currentUpgradedPhaseCards = this.getPhaseCards()
-	}
-	private shouldReceivePhaseCardSelectionBonus(phaseResolved: SelectablePhaseEnum): boolean {
-		return this.gameStateService.getClientCurrentSelectedPhase()===phaseResolved
-	}
-	resolveDevelopment(): void {
-		this.refreshCurrentUpgradedPhaseCard()
-		let builderType: BuilderType = this.currentUpgradedPhaseCards[0].phaseType as BuilderType
-		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.development)){
-			builderType = 'developmentAbilityOnly'
-		}
-		this.gameStateService.addEventQueue(EventFactory.createCardBuilder('developmentPhaseBuilder',builderType),'second')
-	}
-	resolveConstruction(): void {
-		this.refreshCurrentUpgradedPhaseCard()
-		let builderType: BuilderType = this.currentUpgradedPhaseCards[1].phaseType as BuilderType
-		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.construction)){
-			builderType = 'constructionAbilityOnly'
-		}
-		this.gameStateService.addEventQueue(EventFactory.createCardBuilder('constructionPhaseBuilder',builderType),'second')
-
-		if(builderType==='construction_draw_card'){
-			this.gameStateService.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}),'second')
-		}
-	}
-	resolveProduction(event: EventPhase): void {
-		this.refreshCurrentUpgradedPhaseCard()
-
-		let clientState = this.gameStateService.getClientState()
-		let production: RessourceStock[] = []
-		let newEvents: EventBaseModel[] = []
-		let currentClientRessources: RessourceInfo[] = clientState.getRessources()
-
-		for(let i=0; i<currentClientRessources.length; i++){
-			let ressourceGain: number = 0
-			let ressource = currentClientRessources[i]
-			switch(ressource.name){
-				case('megacredit'):{
-						ressourceGain= ressource.valueProd
-						+ clientState.getTR()
-						+ this.getProductionPhaseCardSelectionBonus()
-					break
-				}
-				case('plant'):case('heat'):{
-					ressourceGain = ressource.valueProd
-					break
-				}
-			}
-			if(ressourceGain>0){
-				production.push({name:ressource.name, valueStock:ressourceGain})
-			}
-		}
-
-		event.productionMegacreditFromPhaseCard = this.getProductionPhaseCardSelectionBonus()
-		if(this.shouldApplyDoubleProduction(event)){
-			event.productionDoubleApplied = true
-			newEvents.push(EventFactory.createCardSelector('doubleProduction'))
-		}
-
-		if(production.length>0){
-			newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: production}))
-			this.gameStateService.addEventQueue(newEvents, 'first')
-		}
-	}
-	public getProductionPhaseCardSelectionBonus(): number {
-		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return 0}
-
-		let bonus: number = 0
-		let productionPhaseCard = this.currentUpgradedPhaseCards[3]
-
-		switch(productionPhaseCard.phaseType){
-			case('production_base'):{bonus=4;break}
-			case('production_7mc'):{bonus=7;break}
-			case('production_1mc_activate_card'):{bonus=1;break}
-		}
-
-		return bonus
-	}
-	public shouldApplyDoubleProduction(event: EventPhase): boolean {
-		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return false}
-		return this.currentUpgradedPhaseCards[3].phaseType === 'production_1mc_activate_card' && event.productionDoubleApplied===false
-	}
-	resolveResearch(): void {
-		this.refreshCurrentUpgradedPhaseCard()
-		let baseScanKeep: ScanKeep = {scan:2,keep:1}
-		let clientState = this.gameStateService.getClientState()
-		let modScanKeep: ScanKeep = clientState.getResearch()
-		let bonusScanKeep: ScanKeep = this.getResearchPhaseCardSelectionBonus()
-		let totalScanKeep = {
-			scan: baseScanKeep.scan + modScanKeep.scan + bonusScanKeep.scan,
-			keep: baseScanKeep.keep + modScanKeep.keep + bonusScanKeep.keep,
-		}
-		this.gameStateService.addEventQueue(EventFactory.createDeckQueryEvent(
-			'researchPhaseQuery',
-			{scanKeep:totalScanKeep}
-		),'first')
-
-	}
-	private getResearchPhaseCardSelectionBonus(): ScanKeep {
-		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.research)){return {scan:0, keep:0}}
-
-		let bonus: ScanKeep = {scan:0, keep:0}
-		let researchPhaseCard = this.currentUpgradedPhaseCards[4]
-
-		switch(researchPhaseCard.phaseType){
-			case('research_base'):{bonus={scan:3, keep:1};break}
-			case('research_scan6_keep1'):{bonus={scan:6, keep:1};break}
-			case('research_scan2_keep2'):{bonus={scan:2, keep:2};break}
-		}
-		return bonus
-	}
-	resolveAction(): void {
-		let activatorEvent = EventFactory.createCardActivator('actionPhaseActivator')
-		this.refreshCurrentUpgradedPhaseCard()
-		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.action)){
-			this.gameStateService.addEventQueue(activatorEvent,'first')
-			return
-		}
-
-		let events: EventBaseModel[] = []
-		let actionPhaseCard = this.currentUpgradedPhaseCards[2]
-		switch(actionPhaseCard.phaseType){
-			case('action_base'):{
-				activatorEvent.doubleActivationMaxNumber = 1
-				events.push(activatorEvent)
-				break
-			}
-			case('action_scan_cards'):{
-				activatorEvent.doubleActivationMaxNumber = 1
-				activatorEvent.hasScan = true
-				events.push(activatorEvent)
-				break
-			}
-			case('action_repeat_two'):{
-				activatorEvent.doubleActivationMaxNumber = 2
-				events.push(activatorEvent)
-				break
-			}
-		}
-		this.gameStateService.addEventQueue(events,'first')
-	}
-}

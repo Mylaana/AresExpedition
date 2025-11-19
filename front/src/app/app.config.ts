@@ -8,9 +8,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { GAME_EVENT_HANDLERS } from './services/events/event-processor.service';
 import { EventBuilderHandler } from './services/events/handlers/event-builder-handler';
 import { EventSelectorHandler } from './services/events/handlers/event-selector-handler';
-import { EventComplexCardSelector } from './models/core-game/event.model';
 import { EventComplexSelectorHandler } from './services/events/handlers/event-complex-selector-handler';
 import { EventGenericHandler } from './services/events/handlers/event-generic-handler';
+import { EventPhaseHandler } from './services/events/handlers/event-phase-handler';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,6 +36,11 @@ export const appConfig: ApplicationConfig = {
 	{
 		provide: GAME_EVENT_HANDLERS,
 		useClass: EventGenericHandler,
+		multi: true
+	},
+		{
+		provide: GAME_EVENT_HANDLERS,
+		useClass: EventPhaseHandler,
 		multi: true
 	}
 ]
