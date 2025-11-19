@@ -1,10 +1,15 @@
 <div class="wrapper-event-origin"
-    *ngIf="_eventOriginCardList">
-    <app-playable-card-list
-        [cardList]="_eventOriginCardList">
-    </app-playable-card-list>
+*ngIf="_eventOriginCardList">
+    <div class="list-background ares-background ares-border">
+        <app-playable-card-list
+            [cardList]="_eventOriginCardList">
+        </app-playable-card-list>
+    </div>
     <p>:</p>
 </div>
-<app-playable-card-list-wrapper
-    [listBehavior]="'selector'">
-</app-playable-card-list-wrapper>
+    <app-playable-card-list-wrapper
+        [listBehavior]="'selector'">
+    </app-playable-card-list-wrapper>
+<app-hexed-background
+    [autoFillHexSize]="'medium'">
+</app-hexed-background>

@@ -133,9 +133,9 @@ export class CardBuilder {
         this.index = index
     }
     fromDto(dto: BuilderStatusDTO): void {
-        this.setBuilderIsLocked(dto.l)
         this.setOption(dto.o)
         this.alternativeCostUsed = dto.ac
+        this.alternativeOptionUsed = dto.ao
         this.discount = dto.d
     }
 }

@@ -24,7 +24,7 @@ export class HexedBackgroundComponent implements OnDestroy, AfterViewInit {
 	@Input() row: number = 1; //forced number of rows
 	@Input() column: number = 1; //forced number of columns
 	@Input() background: boolean = false
-	@Input() autoFillHexSize!: HexSize
+	@Input() autoFillHexSize: HexSize = 'medium'
 	@Input() partialStyle: PartialStyle = 'none'
 
 	_rowNumber!: number

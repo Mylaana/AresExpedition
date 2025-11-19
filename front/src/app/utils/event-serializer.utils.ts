@@ -11,11 +11,12 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 	let eventStateOperation: EventStateOriginEnum
 	for(let builder of event.cardBuilder){
 		let s: BuilderStatusDTO = {
-			cc: builder.getBuitCardCode(),
-			l: builder.getBuilderIsLocked(),
+			cc: builder.getBuitCardCode()??'',
+			//l: builder.getBuilderIsLocked(),
 			o: builder.getOption(),
 			ac: builder.getAlternativeCostUsed(),
-			d: builder.getDiscount()	
+			d: builder.getDiscount(),	
+			ao: builder.getAlternativeOptionUsed()
 		}
 		status.push(s)
 	}

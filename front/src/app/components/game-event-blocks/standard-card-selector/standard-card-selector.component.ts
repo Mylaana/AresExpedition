@@ -9,13 +9,15 @@ import { ProjectCardInfoService } from '../../../services/cards/project-card-inf
 import { CardSelectorService } from '../../../services/core-game/components-services/card-selector.service';
 import { Subject, takeUntil } from 'rxjs';
 import { EventOrigin } from '../../../interfaces/global.interface';
+import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 
 @Component({
 	selector: 'app-standard-card-selector',
 	imports: [
 		CommonModule,
 		PlayableCardListWrapperComponent,
-		PlayableCardListComponent
+		PlayableCardListComponent,
+		HexedBackgroundComponent
 	],
 	templateUrl: './standard-card-selector.component.html',
 	styleUrl: './standard-card-selector.component.scss'

@@ -68,10 +68,11 @@ export interface EventStateGenericDTO extends EventStateContentDTO {
 	mt?: MoonTile | MoonTile[] // moon tile
 }
 export interface BuilderStatusDTO {
-	l: boolean, // locked
+	//l: boolean, // locked
 	cc: string | undefined // built card code
 	o: BuilderOption, // buidler option
 	ac: NonEventButtonNames[] // alternative cost used
+	ao: NonEventButtonNames[] // alternative option used
 	d: number // discount
 }
 export interface EventStateActivator extends EventStateContentDTO {

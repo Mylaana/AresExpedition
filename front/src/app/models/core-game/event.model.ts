@@ -204,6 +204,7 @@ export class EventCardBuilder extends EventBaseCardSelector {
     private activateNextBuilder(){
         if(this.eventIsComplete){return}
         if(this.currentBuilder === this.cardBuilder[this.cardBuilder.length-1]){
+            console.log('here')
             this.setEventIsComplete()
             return
         }
@@ -224,11 +225,15 @@ export class EventCardBuilder extends EventBaseCardSelector {
         this.cardSelector.stateFromParent = Utils.toFullCardState({})
     }
     private getNextBuilder(): CardBuilder | undefined {
+        if(!this.currentBuilder.getBuilderIsLocked()){return this.currentBuilder}
         for(let b of this.cardBuilder){
             if(b===this.currentBuilder){
                 continue
             }
             if(b.isEligibleForNext()){return b}
+        }
+        if(!this.currentBuilder && this.cardBuilder[0].isEligibleForNext()){
+            return this.cardBuilder[0]
         }
         return
     }

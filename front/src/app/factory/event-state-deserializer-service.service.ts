@@ -38,6 +38,7 @@ export class EventStateDeserializerService{
 	public loadFromJson(event: EventBaseModel, dto: EventStateDTO, clientState: PlayerStateModel) {
 		switch(dto.t){
 			case(EventStateTypeEnum.builderConstructionLocked):case(EventStateTypeEnum.builderDevelopemntLocked):{
+				console.log(dto)
 				let content = toContentDto<EventStateBuilderContentDTO>(dto.v);
 				let eventBuilder: EventCardBuilder = event as EventCardBuilder
 				for(let i=0; i<content.s.length; i++){
@@ -49,6 +50,7 @@ export class EventStateDeserializerService{
 						if(cardCode){
 							let card = this.projectCardInfoService.getCardById(cardCode)
 							card?eventBuilder.cardBuilder[i].setSelectedCard(card):null
+							eventBuilder.cardBuilder[i].setBuilderIsLocked(true)
 						}
 					}
 				}
@@ -152,7 +154,7 @@ export class EventStateDeserializerService{
 						let cardCode = content.s[i].cc
 						if(cardCode){
 							event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(cardCode)??new PlayableCardModel)
-							event.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
+							//event.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
 						}
 					}
 					newEvents.push(event)
