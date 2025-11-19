@@ -66,7 +66,7 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
 
             case('alternativeOption'):{
                 if(!event){return}
-                let newEvents = PlayableCard.getBuilderAlternativeOptionButtonClickedEvents(command.buttonName)
+                newEvents = PlayableCard.getBuilderAlternativeOptionButtonClickedEvents(command.buttonName)
                 if(newEvents.length===0){return}
 
                 event.resolveBuilderAlternativeOptionUsed(command.builderIndex??0, command.buttonName)
