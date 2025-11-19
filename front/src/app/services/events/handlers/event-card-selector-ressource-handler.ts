@@ -14,7 +14,7 @@ export class EventCardSelectorResourceHandler implements GameEventHandler<EventC
         return event.type==='cardSelectorRessource'
     }
     onSwitchEvent(event: EventCardSelectorRessource){
-
+        event.setSelectorSelectFrom(this.gameStateFacade.getClientProjectPlayedModelList(event.getSelectorFilter()))
     }
     onFinalizeEvent(event: EventCardSelectorRessource) {   
         Logger.logEventResolution('resolving event: ','EventCardSelectorRessource ', event.subType)
