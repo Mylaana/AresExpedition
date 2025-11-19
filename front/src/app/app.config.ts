@@ -11,6 +11,12 @@ import { EventSelectorHandler } from './services/events/handlers/event-selector-
 import { EventComplexSelectorHandler } from './services/events/handlers/event-complex-selector-handler';
 import { EventGenericHandler } from './services/events/handlers/event-generic-handler';
 import { EventPhaseHandler } from './services/events/handlers/event-phase-handler';
+import { EventDeckQueryHandler } from './services/events/handlers/event-deck-query-handler';
+import { EventCardSelectorResourceHandler } from './services/events/handlers/event-card-selector-ressource-handler';
+import { EventCardActivatorHandler } from './services/events/handlers/event-card-activator-handler';
+import { EventTagSelectorHandler } from './services/events/handlers/event-tag-selector-handler';
+import { EventTargetCardHandler } from './services/events/handlers/event-target-card-handler';
+import { EventWaiterHandler } from './services/events/handlers/event-waiter-handler';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,7 +31,12 @@ export const appConfig: ApplicationConfig = {
 	},
 	{
 		provide: GAME_EVENT_HANDLERS,
-		useClass: EventSelectorHandler,
+		useClass: EventCardActivatorHandler,
+		multi: true
+	},
+	{
+		provide: GAME_EVENT_HANDLERS,
+		useClass: EventCardSelectorResourceHandler,
 		multi: true
 	},
 	{
@@ -35,13 +46,38 @@ export const appConfig: ApplicationConfig = {
 	},
 	{
 		provide: GAME_EVENT_HANDLERS,
+		useClass: EventDeckQueryHandler,
+		multi: true
+	},
+	{
+		provide: GAME_EVENT_HANDLERS,
 		useClass: EventGenericHandler,
 		multi: true
 	},
-		{
+	{
 		provide: GAME_EVENT_HANDLERS,
 		useClass: EventPhaseHandler,
 		multi: true
-	}
+	},
+	{
+		provide: GAME_EVENT_HANDLERS,
+		useClass: EventSelectorHandler,
+		multi: true
+	},
+	{
+		provide: GAME_EVENT_HANDLERS,
+		useClass: EventTagSelectorHandler,
+		multi: true
+	},
+	{
+		provide: GAME_EVENT_HANDLERS,
+		useClass: EventTargetCardHandler,
+		multi: true
+	},
+	{
+		provide: GAME_EVENT_HANDLERS,
+		useClass: EventWaiterHandler,
+		multi: true
+	},
 ]
 };

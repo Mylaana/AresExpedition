@@ -30,8 +30,8 @@ export class EventProcessor {
 	private currentEventId!: number
 	private waiterResolved: number[] = []
 
-	private _currentEvent$ = new BehaviorSubject<EventBaseModel | undefined>(undefined)
-	readonly currentEventObs = this._currentEvent$.asObservable()
+	private currentEventSubject$ = new BehaviorSubject<EventBaseModel | undefined>(undefined)
+	readonly currentEventObs = this.currentEventSubject$.asObservable()
 	
 	private _eventActivator$ = new BehaviorSubject<EventCardActivator | null>(null)
 	readonly currentEventActivator = this._eventActivator$.asObservable()
@@ -154,7 +154,7 @@ export class EventProcessor {
     private switchEvent(eventQueue: EventBaseModel[], _event: EventBaseModel): void {
 		//switching current event to top of the pile
 		this.currentEvent = eventQueue[0]
-		this._currentEvent$.next(this.currentEvent)
+		this.currentEventSubject$.next(this.currentEvent)
 		if(!this.currentEvent.id){this.currentEvent.id = this.setEventId()}
 		this.currentEventId = this.currentEvent.id
 
@@ -163,13 +163,6 @@ export class EventProcessor {
 
         //handler onSwitch rules
 		this.getHandlerFor(this.currentEvent)?.onSwitchEvent(this.currentEvent)
-		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent as EventPhase)}
-		if(this.currentEvent.type==='cardActivator'){this.switchEventCardActivator(this.currentEvent as EventCardActivator)}
-
-		//specific cases
-		if(this.currentEvent.subType==='planificationPhase' && this.currentEvent.button){
-			this.currentEvent.button.resetStartEnabled()
-		}
 
 		this.applyAutoFinalize()
     }
@@ -179,22 +172,6 @@ export class EventProcessor {
 		this.currentEvent.finalized = true
 		this.finishEventEffect()
 	}
-	private switchEventCardActivator(event: EventCardActivator){
-		
-		let subType = event.subType as EventCardActivatorSubType
-		if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateService.getClientHandModelList(event.getSelectorFilter()))}
-		
-		//check per subType special rules:
-		switch(subType){
-			case('actionPhaseActivator'):{
-				event.setSelectorSelectFrom(this.gameStateService.getClientProjectPlayedModelList(event.getSelectorFilter()))
-				break
-			}
-		}
-	}
-	private switchEventPhase(event: EventPhase): void {
-
-	}
     private finishEventEffect(){
 		const handler = this.getHandlerFor(this.currentEvent)
 		if(handler){
@@ -202,148 +179,13 @@ export class EventProcessor {
 			if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
 			this.checkFinalized()
 			return
+		} else {
+			Logger.logError('Non mapped event in handler.finishEventEffect: ', this.currentEvent)
 		}
 
-		switch(this.currentEvent.type){
-            case('cardSelectorRessource'):{this.finishEventCardSelectorRessource(this.currentEvent as EventCardSelectorRessource); break}
-			case('deck'):{this.finishEventDeckQuery(this.currentEvent as EventDeckQuery); break}
-			case('targetCard'):{this.finishEventTargetCards(this.currentEvent as EventTargetCard); break}
-			case('waiter'):{this.finishEventWaiter(this.currentEvent as EventWaiter);break}
-			case('cardActivator'):{this.finishEventCardActivator(this.currentEvent as EventCardActivator); break}
-			case('tagSelector'):{this.finishEventTagSelector(this.currentEvent as EventTagSelector); break}
-			default:{Logger.logError('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
-        }
 		if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
 		this.checkFinalized()
     }
-    private finishEventCardSelectorRessource(event: EventCardSelectorRessource): void {
-		Logger.logEventResolution('resolving event: ','EventCardSelectorRessource ', event.subType)
-		switch(event.subType){
-			case('addRessourceToSelectedCard'):{
-				event.finalized = true
-				let stock: AdvancedRessourceStock[] = event.advancedRessource?[event.advancedRessource]:[]
-				if(stock.length===0){break}
-
-				this.gameStateService.addRessourceToClientCard({cardCode: event.getSelectorSelectedList()[0].cardCode,stock: stock})
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventCardSelectorRessource: ', this.currentEvent)}
-		}
-    }
-	private finishEventCardActivator(event: EventCardActivator): void {
-		Logger.logEventResolution('resolving event: ','EventCardActivator ', event.subType)
-		event.finalized = true
-
-		switch(event.subType){
-			case('actionPhaseActivator'):{
-				for(let card of event.getSelectorSelectFrom()){
-					card.activated = 0
-				}
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventCardActivator: ', this.currentEvent)}
-		}
-    }
-	private finishEventDeckQuery(event: EventDeckQuery): void {
-		Logger.logEventResolution('resolving event: ','EventDeckQuery ', event.subType)
-		let resolveType!: EventUnionSubTypes
-		event.waiterId = event.id
-		switch(event.subType){
-			case('drawQuery'):{
-				resolveType = 'drawResult'
-				break
-			}
-			case('researchPhaseQuery'):{
-				resolveType = 'researchPhaseResult'
-				break
-			}
-			case('scanKeepQuery'):{
-				resolveType = 'scanKeepResult'
-				break
-			}
-			case('drawThenDiscard'):{
-				resolveType = 'drawResultThenDiscard'
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventDeckQuery: ', this.currentEvent)}
-		}
-
-		if((event.drawDiscard===undefined && event.scanKeep===undefined) || event.waiterId===undefined || resolveType===undefined){return}
-
-		//adding a deck waiter event until drawEvent resolution if deck event will draw something
-		if((event.drawDiscard?.draw?event.drawDiscard.draw:0)>0 || (event.scanKeep?.scan!=undefined && event.scanKeep.scan>0)){
-			this.gameStateService.addEventQueue(EventFactory.createWaiter('deckWaiter', event.id), 'second')
-		}
-
-		let drawNumber = event.drawDiscard?.draw
-		if(drawNumber!=undefined && drawNumber>0){
-			this.gameStateService.addDrawQueue(
-				DrawEventFactory.createDrawEvent(
-					resolveType,
-					drawNumber,event.id,
-					event.isCardProduction,
-					event.drawThenDiscard?event.drawDiscard?.discard:0,
-					event.isCardProductionDouble,
-					event.firstCardProduction
-				)
-			)
-		}
-		if(event.scanKeep!==undefined){
-			let scanKeep: ScanKeep = {scan:event.scanKeep?.scan?event.scanKeep?.scan:0, keep:event.scanKeep?.keep?event.scanKeep?.keep:0}
-			this.gameStateService.addDrawQueue(DrawEventFactory.createScanKeepEvent(resolveType, scanKeep, event.waiterId, event.options))
-		}
-		this.gameStateService.cleanAndNextEventQueue()
-	}
-	private finishEventWaiter(event: EventWaiter): void {
-		Logger.logEventResolution('resolving event: ','EventWaiter ', event.subType)
-		switch(event.subType){
-			case('deckWaiter'):{
-				return
-			}
-			default:{Logger.logError('Non mapped event in handler.EventWaiter: ', this.currentEvent)}
-		}
-	}
-	private finishEventTargetCards(event: EventTargetCard): void {
-		Logger.logEventResolution('resolving event: ','EventTargetCard ', event.subType)
-
-		switch(event.subType){
-			case('addRessourceToCardId'):{
-				if(event.advancedRessource===undefined){Logger.logError('event tried to add ressource, but variable was empty: ',event); break}
-				let ressourceStock: AdvancedRessourceStock[] = []
-				if(Array.isArray(event.advancedRessource)===true){
-					ressourceStock = event.advancedRessource
-				} else {
-					ressourceStock.push(event.advancedRessource)
-				}
-				let cardStock: CardRessourceStock = {
-					cardCode:event.targetCardId,
-					stock:ressourceStock
-				}
-				this.gameStateService.addRessourceToClientCard(cardStock)
-				break
-			}
-			case('deactivateTrigger'):{
-				this.gameStateService.setClientTriggerAsInactive(event.targetCardId)
-				break
-			}
-			case('addTagToCardId'):{
-				this.gameStateService.addTagToTargetCard(event.targetCardId, event.addTag)
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventTargetCards: ', this.currentEvent)}
-		}
-	}
-	private finishEventTagSelector(event: EventTagSelector) {
-		Logger.logEventResolution('resolving event: ','finishEventTagSelector', event.subType)
-		switch(event.subType){
-			case('tagSelector'):{
-				event.finalized=true
-				this.gameStateService.addEventQueue(EventFactory.simple.addTagToCard(event.targetCardId, event.selectedTag), 'first')
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventPhase: ', this.currentEvent)}
-		}
-	}
 	private cancelCurrentEvent(): void {
 		this.currentEvent.finalized = true
 		this.checkFinalized()
@@ -368,7 +210,7 @@ export class EventProcessor {
 		}
 		return false
 	}
-	onBuilderButtonCommand(command: EventBuilderCommand): void {
+	private onBuilderButtonCommand(command: EventBuilderCommand): void {
 		const handler = this.getHandlerFor(this.currentEvent)
 		if(!(handler && this.isEventBuilderEventHandler(handler))){return}
 		
@@ -385,8 +227,4 @@ export class EventProcessor {
 	private isEventBuilderEventHandler(handler: GameEventHandler): handler is EventBuilderHandler {
 		return typeof(handler as EventBuilderHandler).onBuilderButtonCommand === 'function'
 	}
-	private isEventSelectorEventHandler(handler: GameEventHandler): handler is EventSelectorHandler {
-		return typeof(handler as EventSelectorHandler) === typeof(EventSelectorHandler)
-	}
 }
-

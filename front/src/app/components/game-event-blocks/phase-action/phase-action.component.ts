@@ -10,10 +10,10 @@ import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event/event-factory';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { CommonModule } from '@angular/common';
-import { ActionPhaseService } from '../../../services/core-game/action-phase.service';
 import { GameContentName, StandardProjectButtonNames } from '../../../types/global.type';
 import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
 import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
+import { ActionPhaseService } from '../../../services/core-game/components-services/action-phase.service';
 
 @Component({
     selector: 'app-phase-action',

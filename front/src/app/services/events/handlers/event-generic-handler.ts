@@ -19,7 +19,9 @@ export class EventGenericHandler implements GameEventHandler<EventGeneric> {
         return event.type==='generic'
     }
     onSwitchEvent(event: EventGeneric){
-
+		if(event.subType==='planificationPhase' && event.button){
+			event.button.resetStartEnabled()
+		}
     }
     onFinalizeEvent(event: EventGeneric) {   
         Logger.logEventResolution('resolving event: ','EventGeneric ', event.subType)

@@ -19,7 +19,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
     constructor(
         private gameStateFacade: GameStateFacadeService,
     ){}
-    
+
     supports(event: EventBaseModel): boolean {
         return event.type==='phase'
     }
@@ -38,6 +38,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
             case('researchPhase'):{this.resolveResearch();break}
             default:{return}
         }
+
     }
     onFinalizeEvent(event: EventPhase) {   
         Logger.logEventResolution('resolving event: ','finishEventPhase', event.subType)

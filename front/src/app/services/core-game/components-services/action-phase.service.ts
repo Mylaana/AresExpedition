@@ -1,15 +1,16 @@
 import { Injectable } from "@angular/core";
-import { RessourceType, StandardProjectButtonNames } from "../../types/global.type";
-import { PlayerStateModel } from "../../models/player-info/player-state.model";
-import { EventBaseModel, EventCardActivator } from "../../models/core-game/event.model";
-import { NonEventButton } from "../../models/core-game/button.model";
-import { ButtonDesigner } from "../../factory/button-designer.service";
-import { PlayableCard } from "../../factory/playable-card.factory";
-import { GlobalParameterNameEnum } from "../../enum/global.enum";
-import { STANDARD_PROJECT_EVENTS } from "../../maps/standard-project-maps";
-import { GameActiveContentService } from "./game-active-content.service";
-import { GameStateFacadeService } from "../game-state/game-state-facade.service";
-import { EventProcessor } from "../events/event-processor.service";
+import { GlobalParameterNameEnum } from "../../../enum/global.enum";
+import { ButtonDesigner } from "../../../factory/button-designer.service";
+import { PlayableCard } from "../../../factory/playable-card.factory";
+import { STANDARD_PROJECT_EVENTS } from "../../../maps/standard-project-maps";
+import { NonEventButton } from "../../../models/core-game/button.model";
+import { EventCardActivator, EventBaseModel } from "../../../models/core-game/event.model";
+import { PlayerStateModel } from "../../../models/player-info/player-state.model";
+import { StandardProjectButtonNames, RessourceType } from "../../../types/global.type";
+import { EventProcessor } from "../../events/event-processor.service";
+import { GameStateFacadeService } from "../../game-state/game-state-facade.service";
+import { GameActiveContentService } from "../game-active-content.service";
+
 
 interface StandardProjectState {
     costMC?: number
