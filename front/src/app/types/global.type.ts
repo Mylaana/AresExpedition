@@ -38,7 +38,6 @@ export type CarouselButtonNames = 'carousel'
 export type EventCardBuilderButtonNames =  'discardSelectedCard' | 'buildCard' | BuilderOption
 export type AltenativeCostButtonNames = 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 
-
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
 export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event'
@@ -68,5 +67,5 @@ export type GameContentName = 'expansionDiscovery' | 'expansionFoundations' | 'e
 | 'modeAdditionalAwards' | 'expansionMoon' | 'modeMoonMandatory'
 export type MoonTileType = 'habitat' | 'road' | 'mine'
 export type FilterPannelSelectedBehavior = 'all' | 'greyNotSelected'
-export type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
+//export type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
 export type HexSize = 'xs' | 'small' | 'medium' | 'large'

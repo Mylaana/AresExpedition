@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { GameStateFacadeService } from "../../game-state/game-state-facade.service";
 import { GameEventHandler } from "../../../interfaces/services.interface";
-import { EventBaseModel, EventCardSelector } from "../../../models/core-game/event.model";
+import { EventBaseModel, EventCardSelector, EventCardSelectorRessource } from "../../../models/core-game/event.model";
 import { Logger, Utils } from "../../../utils/utils";
 import { EventCardSelectorSubType, EventCardSelectorRessourceSubType } from "../../../types/event.type";
 import { CardBuilderService } from "../../core-game/components-services/card-builder.service";
@@ -11,26 +11,20 @@ import { EventFactory } from "../../../factory/event/event-factory";
 import { EventQueueService } from "../event-queue.service";
 
 @Injectable()
-export class EventSelectorHandler implements GameEventHandler<EventCardSelector> {
+export class EventSelectorHandler implements GameEventHandler<EventCardSelector | EventCardSelectorRessource> {
     constructor(
         private eventQueue: EventQueueService,
         private gameStateFacade: GameStateFacadeService,
-        private builderService: CardBuilderService,
         private selectorService: CardSelectorService
     ){}
     supports(event: EventBaseModel): boolean {
         return event.type==='cardSelector'
     }
-    onSwitchEvent(event: EventCardSelector){
-        console.log(event)
-        //reset currentEvent parameters
-        let subType = event.subType as EventCardSelectorSubType | EventCardSelectorRessourceSubType
+    onSwitchEvent(event: EventCardSelector | EventCardSelectorRessource){
         if(event.refreshSelectorOnSwitch){event.setSelectorSelectFrom(this.gameStateFacade.getClientHandModelList(event.getSelectorFilter()))}
-        //this.builderService.notifyRecalculateSelector()
-        this.selectorService.notifyRecalculateSelector()
 
         //check per subType special rules:
-        switch(subType){
+        switch(event.subType){
             case('selectCardForcedSell'):{
                 Logger.logEventResolution('resolving event: ','EventCardSelector ', event.subType)
                 let clientState = this.gameStateFacade.getClientState()
@@ -62,8 +56,9 @@ export class EventSelectorHandler implements GameEventHandler<EventCardSelector>
                 break
             }
         }
+        this.selectorService.notifyRecalculateSelector()
     }
-    onFinalizeEvent(event: EventCardSelector) {   
+    onFinalizeEvent(event: EventCardSelector | EventCardSelectorRessource) {   
         Logger.logEventResolution('resolving event: ','EventCardSelector ', event.subType)
         event.finalized = true
 

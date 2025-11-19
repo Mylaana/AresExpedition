@@ -1,7 +1,6 @@
 import { BuilderOption } from "../../enum/global.enum"
-import { CardState } from "../../interfaces/card.interface"
 import { BuilderStatusDTO } from "../../interfaces/event-state.interface"
-import { ButtonGroupUpdateType, ButtonNames, EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type"
+import { EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type"
 import { PlayableCardModel } from "../cards/project-card.model"
 import { EventCardBuilderButton } from "./button.model"
 
@@ -50,57 +49,6 @@ export class CardBuilder {
     }
     setOption(option: BuilderOption): void {this.option = option}
     getOption(): BuilderOption {return this.option}
-    private updateButtonEnabled(name: EventCardBuilderButtonNames, enabled: boolean): void {
-        let button = this.getButtonFromName(name)
-        if(!button){return}
-        button.setEnabled(enabled)
-    }
-    private updateButtonGroupState(buttonName: NonEventButtonNames): void {
-        switch(buttonName){
-            case('buildCard'):{
-                this.updateButtonEnabled('buildCard', false)
-                this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled(BuilderOption.drawCard, false)
-                this.updateButtonEnabled(BuilderOption.gain6MC, false)
-                break
-            }
-            case('discardSelectedCard'):{
-                this.updateButtonEnabled('buildCard', false)
-                this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled(BuilderOption.drawCard, true)
-                this.updateButtonEnabled(BuilderOption.gain6MC, true)
-                break
-            }
-            case(BuilderOption.drawCard):case(BuilderOption.gain6MC):{
-                this.updateButtonEnabled('buildCard', false)
-                this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled(BuilderOption.drawCard, false)
-                this.updateButtonEnabled(BuilderOption.gain6MC, false)
-                break
-            }
-            /*
-            case('selectionCardSelected'):{
-                this.updateButtonEnabled('buildCard', true)
-                this.updateButtonEnabled('discardSelectedCard', true)
-                this.updateButtonEnabled(BuilderOption.drawCard, false)
-                this.updateButtonEnabled(BuilderOption.gain6MC, false)
-                break
-            }
-            case('selectionCardDiscarded'):{
-                this.updateButtonEnabled('buildCard', false)
-                this.updateButtonEnabled('discardSelectedCard', false)
-                this.updateButtonEnabled(BuilderOption.drawCard, true)
-                this.updateButtonEnabled(BuilderOption.gain6MC, true)
-                break
-            }
-            case('resetState'):{
-                if(this.builderIsLocked){break}
-                this.resetButtons()
-                break
-            }
-                */
-        }
-    }
     public resetButtons(){
         if(this.builderIsLocked){return}
         for(let button of this.buttons){
@@ -119,11 +67,9 @@ export class CardBuilder {
                 break
             }
         }
-        this.updateButtonGroupState(buttonName)
     }
     setSelectedCard(card: PlayableCardModel): void {
         this.selectedCard = card
-        //this.updateButtonGroupState('selectionCardSelected')
     }
     getSelectedCard(): PlayableCardModel | undefined {
         return this.selectedCard

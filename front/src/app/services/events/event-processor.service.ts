@@ -24,6 +24,7 @@ import { CommandButtonStateService } from "../game-state/command-button-state.se
 import { CardBuilderService } from "../core-game/components-services/card-builder.service"
 import { EventBuilderCommand, GameEventHandler } from "../../interfaces/services.interface"
 import { EventBuilderHandler } from "./handlers/event-builder-handler"
+import { EventSelectorHandler } from "./handlers/event-selector-handler"
 
 export const GAME_EVENT_HANDLERS = new InjectionToken<GameEventHandler[]>(
   'GAME_EVENT_HANDLERS'
@@ -50,7 +51,6 @@ export class EventProcessor {
     constructor(
 		private gameStateService: GameStateFacadeService,
 		private gameEventQueueService: EventQueueService,
-		private rxStompService: RxStompService,
 		private gameParam: GameParamService,
 		private builderService: CardBuilderService,
 		private selectorService: CardSelectorService,
@@ -169,19 +169,13 @@ export class EventProcessor {
 		if(!this.currentEvent.id){this.currentEvent.id = this.setEventId()}
 		this.currentEventId = this.currentEvent.id
 
+		//event specific onSwitch rules
 		this.currentEvent.onSwitch()
 
-        //call general switchEvents cases
-		const handler = this.getHandlerFor(this.currentEvent)
-		if(handler){
-			handler.onSwitchEvent(this.currentEvent)
-			return
-		} else {
-			//if(this.currentEvent.hasSelector()===true){this.switchEventCardSelector(this.currentEvent as EventCardSelector)}
-			if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent as EventPhase)}
-			if(this.currentEvent.type==='cardActivator'){this.switchEventCardActivator(this.currentEvent as EventCardActivator)}
-			if(this.currentEvent.type==='ComplexSelector'){this.switchEventComplexCardSelector(this.currentEvent as EventComplexCardSelector)}
-		}
+        //handler onSwitch rules
+		this.getHandlerFor(this.currentEvent)?.onSwitchEvent(this.currentEvent)
+		if(this.currentEvent.type==='phase'){this.switchEventPhase(this.currentEvent as EventPhase)}
+		if(this.currentEvent.type==='cardActivator'){this.switchEventCardActivator(this.currentEvent as EventCardActivator)}
 
 		//specific cases
 		if(this.currentEvent.subType==='planificationPhase' && this.currentEvent.button){
@@ -189,39 +183,12 @@ export class EventProcessor {
 		}
 
 		this.applyAutoFinalize()
-        return
     }
 	private applyAutoFinalize(): void {
 		if(this.currentEvent.autoFinalize!=true){return}
 
 		this.currentEvent.finalized = true
 		this.finishEventEffect()
-	}
-	private switchEventCardSelector(event: EventCardSelector): void {
-		this.getHandlerFor(event)?.onSwitchEvent(event)
-	}
-	private switchEventComplexCardSelector(event: EventComplexCardSelector){
-		switch(event.subType){
-			case('discardCards'):{
-				event.activateSelection()
-				event.setSelectorStateFromParent(Utils.toFullCardState({selectable:true, ignoreCost:true}))
-				break
-			}
-			case('scanKeepResult'):{
-				switch(event.scanKeepOptions){
-					case(DeckQueryOptionsEnum.modPro):{
-						let card = this.gameStateService.getClientProjectPlayedModelList().filter((el)=>el.cardCode==='P32')[0]
-						if(!card){break}
-						let tag = Utils.toTagType(card.tagsId[0])
-						if(!event.getSelectorFilter()){break}
-						event.setSelectorFilterAuthorizedTag([tag])
-						event.title = `Modpro : add one card to hand with an ${tag[0].toUpperCase() + tag.slice(1)} tag`
-						break
-					}
-				}
-				
-			}
-		}
 	}
 	private switchEventCardActivator(event: EventCardActivator){
 		
@@ -236,8 +203,6 @@ export class EventProcessor {
 			}
 		}
 	}
-	
-	
 	private switchEventPhase(event: EventPhase): void {
 		let subType = event.subType as EventPhaseSubType
 		if(event.autoFinalize===true){event.finalized=true}
@@ -266,91 +231,17 @@ export class EventProcessor {
 
 		switch(this.currentEvent.type){
             case('cardSelectorRessource'):{this.finishEventCardSelectorRessource(this.currentEvent as EventCardSelectorRessource); break}
-			case('generic'):{this.finishEventGeneric(this.currentEvent as EventGeneric); break}
 			case('deck'):{this.finishEventDeckQuery(this.currentEvent as EventDeckQuery); break}
 			case('targetCard'):{this.finishEventTargetCards(this.currentEvent as EventTargetCard); break}
 			case('waiter'):{this.finishEventWaiter(this.currentEvent as EventWaiter);break}
 			case('phase'):{this.finishEventPhase(this.currentEvent as EventPhase); break}
 			case('cardActivator'):{this.finishEventCardActivator(this.currentEvent as EventCardActivator); break}
-			case('ComplexSelector'):{this.finishEventComplexCardSelector(this.currentEvent as EventComplexCardSelector); break}
 			case('tagSelector'):{this.finishEventTagSelector(this.currentEvent as EventTagSelector); break}
 			default:{Logger.logError('Non mapped event in handler.finishEventEffect: ', this.currentEvent)}
         }
 		if(this.currentEvent.waiterId!=undefined){this.waiterResolved.push(this.currentEvent.waiterId)}
 		this.checkFinalized()
     }
-	private finishEventComplexCardSelector(event: EventComplexCardSelector): void {
-		Logger.logEventResolution('resolving event: ','EventScanKeepCardSelector ', event.subType)
-		event.finalized = true
-		switch(event.subType){
-			case('discardCards'):{
-				event.finalized = true
-				let discardedList = event.getSelectorSelectedList()
-				this.gameStateService.removeCardsFromClientHandById(Utils.toCardsIdList(discardedList), 'project')
-
-				switch(event.discardOptions){
-					case(DiscardOptionsEnum.marsUniversity):{
-						if(event.hasSelectorCardSelected()===false){break}
-						let clientState = this.gameStateService.getClientState()
-						let newEvents = PlayableCard.getOnTriggerredEvents(
-								'ON_TRIGGER_RESOLUTION',
-								clientState.getTriggersIdActive(),
-								clientState,
-								{discardedCard:discardedList[0]}
-							)
-						this.gameStateService.addEventQueue(
-							newEvents,
-							'first'
-						)
-						break
-					}
-					case(DiscardOptionsEnum.redraftedContracts):{
-						if(event.hasSelectorCardSelected()===false){break}
-						this.gameStateService.addEventQueue(
-							EventFactory.simple.draw(event.getSelectorSelectedQuantity()),
-							'first'
-						)
-						break
-					}
-					case(DiscardOptionsEnum.matterGenerator):{
-						if(event.hasSelectorCardSelected()===false){break}
-						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:6}), 'first')
-						break
-					}
-					case(DiscardOptionsEnum.clm):{
-						if(event.hasSelectorCardSelected()===false){break}
-						this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:10}), 'first')
-						break
-					}
-				}
-				break
-			}
-			case('scanKeepResult'):{
-				switch(event.scanKeepOptions){
-					case(DeckQueryOptionsEnum.brainstormingSession):{
-						let card = event.getSelectorSelectFrom()[0]
-						switch(card.cardType){
-							case ('greenProject'):{
-								this.gameStateService.addEventQueue(EventFactory.simple.addRessource({name:'megacredit', valueStock:1}), 'first')
-								break
-							}
-							case('blueProject'):case('redProject'):{
-								this.gameStateService.addCardsToClientHand(card.cardCode)
-							}
-						}
-					}
-				}
-				if(event.hasSelectorCardSelected()){
-					this.gameStateService.addCardsSelectedFromListAndDiscardTheRest(
-						ProjectCardInfoService.getProjectCardIdListFromModel(event.getSelectorSelectedList()),
-						ProjectCardInfoService.getProjectCardIdListFromModel(event.getSelectorSelectFrom())
-					)
-				}
-			}
-		}
-
-
-	}
     private finishEventCardSelectorRessource(event: EventCardSelectorRessource): void {
 		Logger.logEventResolution('resolving event: ','EventCardSelectorRessource ', event.subType)
 		switch(event.subType){
@@ -379,125 +270,6 @@ export class EventProcessor {
 			default:{Logger.logError('Non mapped event in handler.finishEventCardActivator: ', this.currentEvent)}
 		}
     }
-	private finishEventGeneric(event: EventGeneric): void {
-		Logger.logEventResolution('resolving event: ','EventGeneric ', event.subType)
-
-		if(event.subType!='buildCard'){event.finalized = true}
-
-		switch(event.subType){
-			case('endOfPhase'):{
-				this.gameStateService.setClientReady(true)
-				this.gameStateService.endOfPhase()
-				break
-			}
-			case('buildCard'):{
-				let card = event.cardIdToBuild
-				if(!card){break}
-				this.gameStateService.playCardFromClientHand(card, 'project')
-				break
-			}
-			case('drawResult'):{
-				if(event.drawResultList===undefined){break}
-				if(event.isCardProductionDouble){
-					this.gameStateService.addCardProduction(event.drawResultList, false)
-				} else {
-					this.gameStateService.addCardsToClientHand(event.drawResultList)
-				}
-				break
-			}
-			case('drawResultThenDiscard'):{
-				if(event.drawResultList===undefined){break}
-				this.gameStateService.addCardsToClientHand(event.drawResultList)
-				if(event.thenDiscard && event.thenDiscard>0){
-					this.gameStateService.addEventQueue(EventFactory.simple.discard(event.thenDiscard), 'first')
-				}
-				break
-			}
-			case('increaseGlobalParameter'):{
-				if(!event.increaseParameter){break}
-				this.gameStateService.addGlobalParameterStepsEOPtoClient(event.increaseParameter)
-				break
-			}
-			case('increaseResearchScanKeep'):{
-				if(!event.increaseResearchScanKeep){break}
-				if(event.increaseResearchScanKeep.scan!=undefined && event.increaseResearchScanKeep.scan>0){
-					this.gameStateService.addClientResearchScanValue(event.increaseResearchScanKeep.scan)
-				}
-				if(event.increaseResearchScanKeep.keep!=undefined && event.increaseResearchScanKeep.keep>0){
-					this.gameStateService.addClientResearchKeepValue(event.increaseResearchScanKeep.keep)
-				}
-				break
-			}
-			case('addRessourceToPlayer'):{
-				if(event.baseRessource===undefined){break}
-				let baseRessources: RessourceStock[] = []
-
-				if(Array.isArray(event.baseRessource)){
-					baseRessources = event.baseRessource
-				} else {
-					baseRessources.push(event.baseRessource)
-				}
-
-				this.gameStateService.addRessourceToClient(baseRessources)
-				break
-			}
-			case('planificationPhase'):{
-				this.gameStateService.clientSelectPhase(event.selectedPhase?.toUpperCase() as SelectablePhaseEnum)
-				this.gameStateService.clientPlayerValidateSelectedPhase()
-				break
-			}
-			case('oceanQuery'):{
-				if(!event.gainOceanNumber){break}
-				this.rxStompService.publishOceanQuery(event.gainOceanNumber, this.gameStateService.getClientStateDTO())
-				break
-			}
-			case('upgradePhaseCards'):{break}
-			case('waitingGroupReady'):{break}
-			case('addForestPointAndOxygen'):{
-				if(event.addForestPoint){
-					this.gameStateService.addForestPointAndOxygen(event.addForestPoint)
-				}
-				break
-			}
-			case('addProduction'):{
-				if(!event.baseRessource){break}
-				this.gameStateService.addProductionToClient(event.baseRessource)
-				break
-			}
-			case('addTr'):{
-				if(!event.increaseTr){break}
-				this.gameStateService.addTr(event.increaseTr)
-				break
-			}
-			case('loadProductionPhaseCards'):{
-				if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
-				this.gameStateService.loadProductionPhaseCardList(event.loadProductionCardList, false)
-				break
-			}
-			case('loadProductionPhaseCardDouble'):{
-				if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
-				this.gameStateService.loadProductionPhaseCardList(event.loadProductionCardList, true)
-				this.gameStateService.loadProductionPhaseCardList(event.firstCardProduction??[], false)
-				break
-			}
-			case('resourceConversion'):{
-				switch(event.resourceConversionInputRule){
-					case(InputRuleEnum.powerInfrastructure):{
-						let conversion: number = event.resourceConversionQuantity??0
-						this.gameStateService.addEventQueue(EventFactory.simple.addRessource([{name:'heat', valueStock:-conversion},{name:'megacredit', valueStock:conversion}]), 'first')
-						break
-					}
-				}
-				break
-			}
-			case('addMoonTile'):{
-				if(!event.addMoonTile){break}
-				this.gameStateService.addMoonTiles(event.addMoonTile)
-				break
-			}
-			default:{Logger.logError('Non mapped event in handler.finishEventGeneric: ', this.currentEvent)}
-		}
-	}
 	private finishEventDeckQuery(event: EventDeckQuery): void {
 		Logger.logEventResolution('resolving event: ','EventDeckQuery ', event.subType)
 		let resolveType!: EventUnionSubTypes
@@ -638,7 +410,7 @@ export class EventProcessor {
 	}
 	onBuilderButtonCommand(command: EventBuilderCommand): void {
 		const handler = this.getHandlerFor(this.currentEvent)
-		if(!(handler && this.isEventBuilderEvent(handler))){return}
+		if(!(handler && this.isEventBuilderEventHandler(handler))){return}
 		
 		let event = this.currentEvent as EventCardBuilder
 		handler.onBuilderButtonCommand(event, command)
@@ -650,10 +422,12 @@ export class EventProcessor {
 	private getHandlerFor(event: EventBaseModel): GameEventHandler | null {
 		return this.handlers.find(h => h.supports(event)) ?? null;
 	}
-	private isEventBuilderEvent(handler: GameEventHandler): handler is EventBuilderHandler {
+	private isEventBuilderEventHandler(handler: GameEventHandler): handler is EventBuilderHandler {
 		return typeof(handler as EventBuilderHandler).onBuilderButtonCommand === 'function'
 	}
-
+	private isEventSelectorEventHandler(handler: GameEventHandler): handler is EventSelectorHandler {
+		return typeof(handler as EventSelectorHandler) === typeof(EventSelectorHandler)
+	}
 }
 
 class PhaseResolveHandler {

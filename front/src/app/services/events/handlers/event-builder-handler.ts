@@ -33,36 +33,34 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
         this.builderService.notifyRecalculateSelector()
     }
     onBuilderButtonCommand(event: EventCardBuilder, command: EventBuilderCommand){
-        console.log(command, event)
+        let newEvents: EventBaseModel[] = []
         switch(command.commandType){
             case('base'):{
                 if(!event){return}
                 switch(command.buttonName){
                     case('buildCard'):{
-                        let newEvents: EventBaseModel[] = []
                         let card = event.getCardToBuild()
                         if(card===undefined){return}
 
                         event.lockCurrentBuilder()
                         event.setSelectorSelectFrom(this.gameStateFacade.getClientHandModelList(event.getSelectorFilter()))
                         newEvents = [EventFactory.createGeneric('buildCard', {card:card})]
-                        event.cardBuilderButtonClicked(command.buttonName, command.builderIndex)
-                        this.gameEventQueue.addEventQueue(newEvents, 'first')
                                 
                         break
                     }
                     default:{Logger.logError('Non mapped command in handler.handleBuilderButtonCommand: ', command)}
                 }
+
+                event.cardBuilderButtonClicked(command.buttonName, command.builderIndex)
                 break
             }
 
             case('alternativePay'):{
                 if(!event){return}
-                let newEvents = PlayableCard.getAlternativePayButtonClickedEvents(command.buttonName)
+                newEvents = PlayableCard.getAlternativePayButtonClickedEvents(command.buttonName)
                 if(newEvents.length===0){return}
 
                 event.resolveCurrentBuilderAlternativeCostUsed(command.buttonName)
-                this.gameEventQueue.addEventQueue(newEvents, 'first')
                 break
             }
 
@@ -72,10 +70,11 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
                 if(newEvents.length===0){return}
 
                 event.resolveBuilderAlternativeOptionUsed(command.builderIndex??0, command.buttonName)
-                this.gameEventQueue.addEventQueue(newEvents, 'first')
                 break
             }
-
         }
+
+        if(newEvents.length===0){return}
+        this.gameEventQueue.addEventQueue(newEvents, 'first')
     }
 }
