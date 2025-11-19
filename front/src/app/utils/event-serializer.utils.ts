@@ -117,7 +117,8 @@ function eventComplexSelectorToJson(event: EventComplexCardSelector): EventState
 	switch(event.subType){
 		case('discardCards'):{
 			let content: EventStateContentDiscardDTO = {
-				d: event.getSelectorQuantity()
+				d: event.getSelectorQuantity(),
+				o: event.eventOrigin
 			}
 			return {
 				o: EventStateOriginEnum.create,

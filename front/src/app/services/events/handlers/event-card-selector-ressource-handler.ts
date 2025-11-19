@@ -14,7 +14,13 @@ export class EventCardSelectorResourceHandler implements GameEventHandler<EventC
         return event.type==='cardSelectorRessource'
     }
     onSwitchEvent(event: EventCardSelectorRessource){
-        event.setSelectorSelectFrom(this.gameStateFacade.getClientProjectPlayedModelList(event.getSelectorFilter()))
+        let selection = this.gameStateFacade.getClientProjectPlayedModelList(event.getSelectorFilter())
+        if(selection.length===0){
+            //set event as finalized if no valid target
+            event.finalized = true
+            return
+        }
+        event.setSelectorSelectFrom(selection)
     }
     onFinalizeEvent(event: EventCardSelectorRessource) {   
         Logger.logEventResolution('resolving event: ','EventCardSelectorRessource ', event.subType)

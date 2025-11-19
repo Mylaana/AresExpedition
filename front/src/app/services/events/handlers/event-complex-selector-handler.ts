@@ -7,11 +7,13 @@ import { Logger, Utils } from "../../../utils/utils";
 import { EventFactory } from "../../../factory/event/event-factory";
 import { PlayableCard } from "../../../factory/playable-card.factory";
 import { ProjectCardInfoService } from "../../cards/project-card-info.service";
+import { CardSelectorService } from "../../core-game/components-services/card-selector.service";
 
 @Injectable()
 export class EventComplexSelectorHandler implements GameEventHandler<EventComplexCardSelector> {
     constructor(
         private gameStateFacade: GameStateFacadeService,
+        private selectorService: CardSelectorService
     ){}
     supports(event: EventBaseModel): boolean {
         return event.type==='ComplexSelector'
@@ -38,6 +40,7 @@ export class EventComplexSelectorHandler implements GameEventHandler<EventComple
                 }
             }
         }
+        this.selectorService.notifyRecalculateSelector()
     }
     onFinalizeEvent(event: EventComplexCardSelector) {   
         Logger.logEventResolution('resolving event: ','EventScanKeepCardSelector ', event.subType)

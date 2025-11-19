@@ -238,7 +238,6 @@ export class ActionPhaseService{
     private updateMainButtonStatus(){
         if(!this.clientState || !this.actionEvent){return}
         this.actionEvent.button?.setEnabled(this.isPhaseLocked()===false)
-        console.log('Action Phase - is phase locked:', this.isPhaseLocked(), this.actionEvent)
     }
     private isPhaseLocked(): boolean {
         for(let s of this.standardProjectsList){

@@ -23,6 +23,7 @@ interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	scanKeepOptions?: DeckQueryOptionsEnum,
 	discardOptions?: DiscardOptionsEnum,
 	authorizedTag?: TagType[]
+	eventOrigin?: EventOrigin
 }
 interface CreateEventOptionsTargetCard {
     advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock []
@@ -67,19 +68,23 @@ interface CreateEventOptionsDeckQuery {
 function draw(drawNumber: number=1): EventBaseModel {
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
-function discard(discardNumber: number): EventComplexCardSelector {
-	return EventFactory.createCardSelectorComplex("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
+function discard(discardNumber: number, triggerOrigin?:string): EventComplexCardSelector {
+	return EventFactory.createCardSelectorComplex("discardCards", {
+		cardSelector: {selectionQuantity: discardNumber},
+		eventOrigin:{originType:'cardCode', originValue:triggerOrigin??''}
+	})
 }
 function drawThenDiscard(drawNumber: number, discard: number): EventBaseModel {
 	return EventFactory.createDeckQueryEvent('drawThenDiscard', {drawDiscard:{draw:drawNumber,discard:discard}, drawThenDiscard: true})
 }
-function discardOptions(discardNumber: number, treshold: MinMaxEqualType, discardOptions: DiscardOptionsEnum): EventComplexCardSelector {
+function discardOptions(discardNumber: number, treshold: MinMaxEqualType, discardOptions: DiscardOptionsEnum, eventOrigin?: string): EventComplexCardSelector {
 	return EventFactory.createCardSelectorComplex("discardCards", {
 		cardSelector: {
 			selectionQuantity: discardNumber,
 			selectionQuantityTreshold: treshold
 		},
-		discardOptions: discardOptions
+		discardOptions: discardOptions,
+		eventOrigin: {originType:'cardCode', originValue:eventOrigin??''}
 	})
 }
 function upgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
@@ -301,7 +306,7 @@ function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, arg
 function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): EventComplexCardSelector {
 	let event = new EventComplexCardSelector
 	let title = ''
-        event.setCardSelector(generateCardSelector(args?.cardSelector))
+	event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = 'discardCards'
 	event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	switch(event.getSelectorQuantityTreshold()){
@@ -320,6 +325,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 			break
 		}
 	}
+	event.eventOrigin = args?.eventOrigin
 	event.title = title
 	event.setSelectorInitialState(args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true})
 	event.lockSellButton = true
@@ -327,6 +333,7 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
+	console.log(event)
 
 	return event
 }
@@ -450,9 +457,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 }
 function createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: CreateEventOptionsSelector): EventCardSelectorRessource {
     let event = new EventCardSelectorRessource
-        event.setCardSelector(generateCardSelector(args?.cardSelector))
-
-	console.log(args)
+	event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = 'addRessourceToSelectedCard'
     event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
     event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`

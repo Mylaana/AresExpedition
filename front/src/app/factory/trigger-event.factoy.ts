@@ -43,7 +43,7 @@ const S = EventFactory.simple
 		if(input.playedCard.cardType!='greenProject'){return []}
 		return [
 			S.draw(1),
-			S.discard(1)
+			S.discard(1, trigger)
 		]
 	}
 	//Spinoff Department
@@ -173,7 +173,7 @@ const S = EventFactory.simple
 		if(quantity===0){return []}
 		let events: EventBaseModel[] = []
 		for(let i=0; i<quantity; i++){
-			events.push(S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity))
+			events.push(S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity, trigger))
 		}
 		return events
 	}

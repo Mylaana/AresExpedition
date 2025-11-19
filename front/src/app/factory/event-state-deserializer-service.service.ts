@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentCardSelectorDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTagSelectorDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGenericDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder, EventPhase, EventTagSelector } from "../models/core-game/event.model";
-import { OceanBonus } from "../interfaces/global.interface";
+import { EventOrigin, OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 import { PlayableCardModel } from "../models/cards/project-card.model";
@@ -107,9 +107,10 @@ export class EventStateDeserializerService{
 				}
 				case(EventStateTypeEnum.discard):{
 					let content: EventStateContentDiscardDTO =  {
-						d: state.v['d']
+						d: state.v['d'],
+						o: state.v['o'] as EventOrigin
 					}
-					newEvents.push(EventFactory.simple.discard(content.d))
+					newEvents.push(EventFactory.simple.discard(content.d, content.o?.originValue))
 					break
 				}
 				case(EventStateTypeEnum.researchCardsQueried):{

@@ -2,7 +2,7 @@ import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enu
 import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum } from "../enum/global.enum"
 import { EventCardSelectorSubType } from "../types/event.type"
 import { NonEventButtonNames, TagType } from "../types/global.type"
-import { AdvancedRessourceStock, GlobalParameterValue, MoonTile, RessourceStock, ScanKeep } from "./global.interface"
+import { AdvancedRessourceStock, EventOrigin, GlobalParameterValue, MoonTile, RessourceStock, ScanKeep } from "./global.interface"
 
 export interface EventStateDTO {
 	o: EventStateOriginEnum
@@ -24,6 +24,7 @@ export interface EventStateContentDrawResultDTO extends EventStateContentDTO {
 }
 export interface EventStateContentDiscardDTO extends EventStateContentDTO {
 	d: number
+	o?: EventOrigin
 }
 export interface EventStateContentResearchCardsQueriedDTO extends EventStateContentDTO {
 	keep: number
