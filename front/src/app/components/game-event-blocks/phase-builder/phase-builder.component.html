@@ -1,7 +1,6 @@
 <app-card-builder-list
 	*ngIf="_currentEvent"
 	[ngClass]="[_cardSize]"
-	[event]="_currentEvent"
 	[cardSize]="_cardSize"
 	(cardBuilderButtonClicked)="onEventCardBuilderListButtonClicked($event)"
 	(alternativePayButtonClicked)="onAlternativePayButtonClicked($event)">

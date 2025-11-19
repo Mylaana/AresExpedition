@@ -34,6 +34,7 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Input() buildDiscount: number = 0
 	@Input() authorizeSelection: boolean = false
 	@Input() filter?: ProjectFilter
+	@Input() doubleActivationRemaining!: number
 	
 	//selection related inputs
 	@Input() selectionQuantity!: number
@@ -48,9 +49,7 @@ export class PlayableCardListComponent implements OnChanges, OnDestroy, OnInit{
 	@Output() projectActivated: EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}> = new EventEmitter<{card: PlayableCardModel, option:ActivationOption, twice: boolean}>()
 	@ViewChildren('projectCardComponent') projectCards!: QueryList<PlayableCardComponent>
 
-	//_childrenCardState!: CardState
 	_displayedCards!: PlayableCardModel[] | undefined;
-	_activateTwiceRemaining: number = 0
 	private selectedCardList: PlayableCardModel[] = [];
 
 	_cardSize!: SettingCardSize

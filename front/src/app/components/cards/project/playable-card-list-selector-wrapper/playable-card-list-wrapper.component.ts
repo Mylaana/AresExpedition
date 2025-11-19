@@ -44,6 +44,7 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 	_listType!: ProjectListType
 	_filter!: ProjectFilter | undefined
 	_listSubType: ProjectListSubType = 'none'
+	_doubleActivationRemaining!: number
 	
 	constructor(
 		private eventProcessor: EventProcessor,
@@ -110,6 +111,8 @@ export class PlayableCardListWrapperComponent implements OnInit, OnDestroy {
 		}
 		this.setSelectorPart(event.getCardSelector())
 		this.setListSubType(event.subType)
+		this._doubleActivationRemaining = event.doubleActivationMaxNumber - event.doubleActivationCount
+		console.log(this._doubleActivationRemaining)
 	}
 	private updateDiscount(discount: number){
 		this._builderDiscount = discount

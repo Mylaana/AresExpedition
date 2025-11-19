@@ -4,7 +4,7 @@
 		[cardBuilder]="builder"
 		[projectFilter]="currentEvent.getSelectorFilter()"
 		[cardSize]="cardSize"
-		[discount]="currentEvent.getCurrentBuilderDiscount()"
+		[discount]="_discount"
 		(cardBuilderListButtonClicked)="onCardBuilderButtonClicked($event)"
 		(alternativePayButtonClicked)="onAlternativePayButtonClicked($event)">
 	</app-card-builder>

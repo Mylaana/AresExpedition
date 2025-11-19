@@ -48,6 +48,7 @@ export class EventBuilderHandler implements GameEventHandler<EventCardBuilder> {
                                 
                         break
                     }
+                    case('discardSelectedCard'):{break}
                     default:{Logger.logError('Non mapped command in handler.handleBuilderButtonCommand: ', command)}
                 }
 

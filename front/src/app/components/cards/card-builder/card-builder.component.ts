@@ -63,7 +63,6 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 	}
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['cardBuilder'] && changes['cardBuilder'].currentValue) {
-			console.log('CardBuilderComponent: cardBuilder input changed', changes['cardBuilder'].currentValue);
 			this._currentBuilder = changes['cardBuilder'].currentValue;
 		}
 	}
@@ -95,18 +94,12 @@ export class CardBuilderComponent implements OnInit, OnDestroy{
 		}
 		return 'white'
 	}
+	getDiscount(): number {
+		return this.discount
+	}
 	onAlternativePayButtonClicked(button: NonEventButton){
 		this.alternativePayButtonClicked.emit(button)
-		//this.updateAlternativeCostButtonsEnabled()
 	}
-	/*
-	public updateAlternativeCostButtonsEnabled(){
-		if(!this.alternativeCost){return}
-		if(this.cardBuilder.getBuilderIsLocked()){return}
-		for(let a of this.alternativeCost){
-			a.updateButtonEnabled()
-		}
-	}*/
 	displayBuildOrCancel(): boolean {
 		return this.cardBuilder.getSelectedCardAsList().length>0 && !(this._hoveredBackground && !this._hoveredButtons)
 	}
