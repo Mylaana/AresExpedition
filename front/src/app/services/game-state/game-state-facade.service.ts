@@ -160,8 +160,6 @@ export class GameStateFacadeService{
 		events.push(EventFactory.createGeneric('waitingGroupReady'))
 		this.phase.next(newPhase)
 		this.addEventQueue(events,'last')
-		
-		//this.addEventQueue(EventFactory.createCardBuilder('developmentPhaseBuilder', 'constructionAbilityOnly'), 'first')
     };
 	private isLastPhaseOfRound(phase: NonSelectablePhaseEnum): boolean {
 		if(phase===NonSelectablePhaseEnum.planification){false}
@@ -401,13 +399,6 @@ export class GameStateFacadeService{
         if(eventsOnPlayed.length>0){
             events = events.concat(eventsOnPlayed)
         }
-        /*
-		let eventsOnTagGained = PlayableCard.getOnTriggerredEvents('ON_TAG_GAINED', activeTriggers, state, {tagList:card.tagsId, playedCard: card})
-        if(eventsOnTagGained.length>0){
-            events = events.concat(eventsOnTagGained)
-        }
-			*/
-		console.log(events)
 
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)

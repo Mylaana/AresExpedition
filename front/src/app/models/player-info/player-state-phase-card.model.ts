@@ -73,6 +73,9 @@ export class PlayerPhaseCardStateModel {
 			}
 		}
 	}
+	resetAllPhaseActivationBonusCollected() {
+		this.setConstructionBonusCollected(false)
+	}
 	getConstructionBonusCollected(): boolean { return this.constructionBonusCollected }
 	setConstructionBonusCollected(collected: boolean){this.constructionBonusCollected = collected}
 
