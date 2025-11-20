@@ -244,17 +244,17 @@
 		}
 	}
 	& > .wrapper-megacredit{
-		height: 90%;
+		height: 70%;
 		aspect-ratio: 1;
 		& > p {
 			padding-top: 0px;
 			font-weight: 600;
 			&.small{
-				padding-top: 2px;
+				padding-top: 0px;
 				font-size: calc(var(--card-text-size--small) * 1.4);
 			}
 			&.medium{
-				padding-top: 7px;
+				padding-top: 3px;
 				font-size: calc(var(--card-text-size--medium) * 1.4);
 			}
 		}
