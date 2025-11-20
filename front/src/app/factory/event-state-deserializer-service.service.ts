@@ -75,7 +75,6 @@ export class EventStateDeserializerService{
 			}
 			case(EventStateTypeEnum.productionPhase):{
 				let eventPhase = event as EventPhase
-				eventPhase.productionDoubleApplied = dto.v['pda']
 				break
 			}
 			default:{
@@ -84,6 +83,7 @@ export class EventStateDeserializerService{
 		}
 	}
 	public createFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
+		console.log(eventStateList)
 		let newEvents: EventBaseModel[] = []
 		let remainingStates: EventStateDTO[] = []
 		let treated: boolean
@@ -98,10 +98,14 @@ export class EventStateDeserializerService{
 				case(EventStateTypeEnum.drawCards):{
 					let content: EventStateContentDrawResultDTO =  {
 						cl: state.v['cardIdList'],
-						td: state.v['thenDiscard']
+						td: state.v['thenDiscard'],
+						icp: state.v['isCardProduction']
 					}
 					if(content.td===0){
-						newEvents.push(EventFactory.createGeneric('drawResult', {drawEventResult:content.cl}))
+						newEvents.push(EventFactory.createGeneric('drawResult', {
+							drawEventResult:content.cl,
+							isCardProduction: content.icp
+						}))
 					} else{
 						newEvents.push(EventFactory.createGeneric('drawResultThenDiscard', {drawEventResult:content.cl, thenDiscard: content.td}))
 					}
@@ -223,8 +227,7 @@ export class EventStateDeserializerService{
 				}
 				case(EventStateTypeEnum.productionCardDouble):{
 					newEvents.push(EventFactory.createGeneric('loadProductionPhaseCardDouble', {
-						loadProductionCardList:state.v['scp'],
-						firstProductionCardList:state.v['fcp']
+						loadProductionCardList:state.v['scp']
 					}))
 					break
 				}

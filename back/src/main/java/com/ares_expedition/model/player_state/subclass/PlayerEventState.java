@@ -16,7 +16,6 @@ public class PlayerEventState {
     }
 
     public PlayerEventState(PlayerEventStateDTO playerStateDTO){
-        //this.events = dto.getEvents();
         for(EventStateDTO dto: playerStateDTO.getEvents()){
             this.events.add(new EventState(dto));
         }
@@ -40,8 +39,8 @@ public class PlayerEventState {
         }
     }
 
-    public void addEventDrawCards(List<String> cards, Integer thenDiscard) {
-        this.events.add(EventState.addEventDrawCards(cards, thenDiscard));
+    public void addEventDrawCards(List<String> cards, Integer thenDiscard, Boolean isCardProduction) {
+        this.events.add(EventState.addEventDrawCards(cards, thenDiscard, isCardProduction));
     }
 
     public void addEventResearchCards(List<String> cards, Integer keep) {

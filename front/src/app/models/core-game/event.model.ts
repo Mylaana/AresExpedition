@@ -325,8 +325,7 @@ export class EventGeneric extends EventBaseModel {
 	increaseTr?: number
 	loadProductionCardList?: string[]
     effectPortal?: EffectPortalEnum
-	isCardProductionDouble?: boolean
-	firstCardProduction?: string[]
+    isCardProduction?:boolean
 	resourceConversionInputRule?:InputRuleEnum
 	resourceConversionQuantity?:number
 	addMoonTile?:MoonTile | MoonTile[]
@@ -340,10 +339,8 @@ export class EventDeckQuery extends EventBaseModel {
     scanKeep?: Partial<ScanKeep>
     drawDiscard?: Partial<DrawDiscard>
 	isCardProduction?: boolean
-	isCardProductionDouble?: boolean
 	options?: DeckQueryOptionsEnum
 	drawThenDiscard?: boolean
-	firstCardProduction?: string[]
 }
 
 export class EventWaiter extends EventBaseModel {
@@ -365,7 +362,6 @@ export class DrawEvent {
     queried: boolean = false
     waiterId!: number
 	isCardProduction: boolean = false
-	isCardProductionDouble: boolean = false
 	scanKeepOptions?: DeckQueryOptionsEnum
 	discardAfterDraw?: number
 	firstCardProduction?: string []
@@ -378,7 +374,6 @@ export class EventPhase extends EventBaseModel {
     override title!: string
 	productionApplied?: boolean
 	productionMegacreditFromPhaseCard?: number
-	productionDoubleApplied?: boolean
     increaseParameter?: GlobalParameterValue
     increaseResearchScanKeep?: Partial<ScanKeep>
     baseRessource?:RessourceStock | RessourceStock[]

@@ -58,14 +58,15 @@ public class GameController {
         }
         return cards;
     }
-    public List<String> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer thenDiscard, Boolean isCardProductionDouble, List<String> firstCardProduction){
+    public List<String> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer thenDiscard, Boolean isCardProduction, List<String> firstCardProduction){
         List<String> cards = cardsFromDeck(gameId, drawNumber, playerId);
         Game game = this.getGameFromId(gameId);
-        if(isCardProductionDouble){
+        game.addEventDrawCardsToPlayer(playerId, cards, thenDiscard, isCardProduction);
+        /*if(isCardProduction){
             game.addEventCardDoubleProduction(playerId, cards, firstCardProduction);
         } else {
-            game.addEventDrawCardsToPlayer(playerId, cards, thenDiscard);
         }
+            */
         return cards;
     }
 
@@ -226,7 +227,7 @@ public class GameController {
         playerState.addEventOceans(oceans);
         List<String> cardsToDraw = game.drawFlippedOceanCards(playerId, oceans);
         if(cardsToDraw.size()>0){
-            playerState.addEventDrawCards(cardsToDraw,0); 
+            playerState.addEventDrawCards(cardsToDraw,0, false); 
         }
         game.setPlayerState(playerId, playerState);
         JsonGameDataHandler.saveGame(game);

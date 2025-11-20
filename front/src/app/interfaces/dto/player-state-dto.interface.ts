@@ -2,7 +2,7 @@ import { GlobalParameterNameEnum, MilestonesEnum } from "../../enum/global.enum"
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { myUUID, RGB } from "../../types/global.type";
 import { PlayedCardDTO } from "../../types/project-card.type";
-import { RessourceInfo, ScanKeep, TagInfo } from "../global.interface";
+import { RessourceInfo, RessourceStock as ResourceStock, ScanKeep, TagInfo } from "../global.interface";
 import { EventStateDTO } from "../event-state.interface";
 import { TriggerStateDTO } from "./project-card-dto.interface";
 
@@ -50,12 +50,17 @@ export interface PlayerProjectCardStateDTO {
 	hms: number
 }
 export interface PlayerPhaseCardStateDTO {
-	pc : PhaseCardDTO[]
-	sp: SelectablePhaseEnum
-	psp: SelectablePhaseEnum
+	pc : PhaseCardDTO[] // phase cards
+	sp: SelectablePhaseEnum // selected phase
+	psp: SelectablePhaseEnum // previous selected phase
 	cbc: boolean // construction bonus collected
+	abc: boolean // action bonus collected
 	fpc: boolean // first production collected
 	spc: boolean // second production collected
+	rbc: boolean // research bonus collected
+	pcl: string[] // produced card list
+	pr: ResourceStock[] //produced resources
+
 }
 export interface PlayerGlobalParameterStateDTO {
 	gp: GlobalParameterDTO[]

@@ -45,7 +45,6 @@ export class StandardCardSelectorComponent implements OnInit, OnDestroy {
 		this.destroy$.complete()
 	}
 	updateEventOriginList(origin: EventOrigin | null){
-		console.log('update origin', this.event)
 		if(!this.event){return}
 		if(!origin){return}
 		let card = this.cardInfoService.getCardById(origin.originValue)

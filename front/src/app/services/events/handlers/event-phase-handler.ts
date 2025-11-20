@@ -8,6 +8,7 @@ import { RessourceStock, RessourceInfo, ScanKeep } from "../../../interfaces/glo
 import { PhaseCardModel } from "../../../models/cards/phase-card.model";
 import { BuilderType } from "../../../types/phase-card.type";
 import { Logger } from "../../../utils/utils";
+import { RessourceType } from "../../../types/global.type";
 
 @Injectable()
 export class EventPhaseHandler implements GameEventHandler<EventPhase> {
@@ -26,10 +27,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
             case('developmentPhase'):{this.resolveDevelopment();break}
             case('constructionPhase'):{this.resolveConstruction();break}
             case('actionPhase'):{this.resolveAction(); break}
-            case('productionPhase'):{
-                if(event.productionApplied){return}
-                event.productionApplied = true // prevents infinite loops
-                this.resolveProduction(event);
+            case('productionPhase'):{this.resolveProduction(event);
                 break
             }
             case('researchPhase'):{this.resolveResearch();break}
@@ -76,13 +74,20 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		}
 		this.gameStateFacade.addEventQueue(EventFactory.createCardBuilder('constructionPhaseBuilder',builderType),'second')
 
+		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.construction)===true){return}
+		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.construction, true)
 		if(builderType==='construction_draw_card'){
-			if(this.gameStateFacade.getConstructionBonusCollected()===true){return}
-			this.gameStateFacade.setConstructionBonusCollected(true)
 			this.gameStateFacade.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}),'second')
 		}
 	}
 	private resolveProduction(event: EventPhase): void {
+		this.resolveBaseProduction(event)
+		this.resolveSecondProduction(event)
+	}
+	private resolveBaseProduction(event: EventPhase){
+		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.production)===true){return}
+		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.production, true)
+
 		this.refreshCurrentUpgradedPhaseCard()
 
 		let clientState = this.gameStateFacade.getClientState()
@@ -104,6 +109,10 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 					ressourceGain = ressource.valueProd
 					break
 				}
+				case('card'):{
+					ressourceGain = ressource.valueProd
+					break
+				}
 			}
 			if(ressourceGain>0){
 				production.push({name:ressource.name, valueStock:ressourceGain})
@@ -111,15 +120,46 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		}
 
 		event.productionMegacreditFromPhaseCard = this.getProductionPhaseCardSelectionBonus()
-		if(this.shouldApplyDoubleProduction(event)){
-			event.productionDoubleApplied = true
-			newEvents.push(EventFactory.createCardSelector('doubleProduction'))
-		}
+
+		newEvents = this.generateProductionEvents(production)
+		console.log(newEvents)
+		if(newEvents.length===0){return}
+		this.gameStateFacade.addEventQueue(newEvents, 'first')
+	}
+	private resolveSecondProduction(event: EventPhase){
+		if(!this.shouldApplyDoubleProduction(event)){return}
+		if(this.gameStateFacade.getPhaseBonusCollected('secondProduction')){return}
+		this.gameStateFacade.setPhaseBonusCollected('secondProduction', true)
+		
+		let newEvents: EventBaseModel[] = []
+		newEvents.push(EventFactory.createCardSelector('doubleProduction'))
+		
+		if(newEvents.length===0){return}
+		this.gameStateFacade.addEventQueue(newEvents, 'first')
+	}
+	private generateProductionEvents(resources: RessourceStock[]): EventBaseModel[] {
+		if(resources.length===0){return []}
+		let newEvents: EventBaseModel[] = []
+		let cardProduction: RessourceStock
+		let production: RessourceStock[] = []
+		let authorizedResourcesName: RessourceType[] = ['megacredit', 'plant', 'heat']
+
+		cardProduction = resources.filter((el) => el.name==='card')[0]
+		production = resources.filter((el) => authorizedResourcesName.includes(el.name))
 
 		if(production.length>0){
 			newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: production}))
-			this.gameStateFacade.addEventQueue(newEvents, 'first')
+			this.gameStateFacade.addProductionResourcesObtainedThisRound(production)
 		}
+		if(cardProduction){
+			newEvents.push(EventFactory.createDeckQueryEvent('drawQuery',
+				{
+					drawDiscard: {discard:0, draw:cardProduction.valueStock},
+					isCardProduction: true
+				}
+			))
+		}
+		return newEvents
 	}
 	public getProductionPhaseCardSelectionBonus(): number {
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return 0}
@@ -137,7 +177,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 	}
 	private shouldApplyDoubleProduction(event: EventPhase): boolean {
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return false}
-		return this.currentUpgradedPhaseCards[3].phaseType === 'production_1mc_activate_card' && event.productionDoubleApplied===false
+		return this.getPhaseCards()[3].phaseType === 'production_1mc_activate_card'
 	}
 	private resolveResearch(): void {
 		this.refreshCurrentUpgradedPhaseCard()

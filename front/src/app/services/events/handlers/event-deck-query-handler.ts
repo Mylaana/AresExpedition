@@ -62,8 +62,6 @@ export class EventDeckQueryHandler implements GameEventHandler<EventDeckQuery> {
                     drawNumber,event.id,
                     event.isCardProduction,
                     event.drawThenDiscard?event.drawDiscard?.discard:0,
-                    event.isCardProductionDouble,
-                    event.firstCardProduction
                 )
             )
         }

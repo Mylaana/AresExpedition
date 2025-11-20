@@ -11,7 +11,6 @@ export const DrawEventFactory = {
         event.waiterId = waiterId
 		event.isCardProduction = isCardProduction
 		event.discardAfterDraw =  thenDiscard
-		event.isCardProductionDouble = isCardProductionDouble
 		event.firstCardProduction = firstCardProductionList
         return event
     },

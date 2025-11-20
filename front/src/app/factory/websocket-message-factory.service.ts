@@ -38,7 +38,6 @@ export class WebsocketQueryMessageFactory{
 			playerState: dto,
 			isCardProduction: queryOptions?.isCardProduction??false,
 			thenDiscard: queryOptions?.thenDiscard??0,
-			isCardProductionDouble: queryOptions?.isCardProductionDouble??false,
 			firstCardProductionList: queryOptions?.firstCardProductionList??[]
 		}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
@@ -156,7 +155,8 @@ export class WebsocketResultMessageFactory{
 			cardIdList: content['cardIdList'],
 			keep:content['keep'],
 			options: content['options'],
-			eventId: content['eventId']
+			eventId: content['eventId'],
+			isCardProduction: content['isCardProduction']
 		}
 	}
 	public static inputToGameOption(content: any): Partial<Record<GameContentName, boolean>> {

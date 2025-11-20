@@ -37,8 +37,8 @@ public class DrawMessageDTO extends BaseMessageInputDTO<DrawContentDTO> {
         return this.content.getThenDiscard();
     }
 
-    public Boolean isCardProductionDouble(){
-        return this.content.getIsCardProductionDouble();
+    public Boolean isCardProduction(){
+        return this.content.getIsCardProduction();
     }
 
     public List<String> getFirstCardProductionList(){

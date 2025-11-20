@@ -135,7 +135,7 @@ export class RxStompService extends RxStomp {
 		//this.publish({destination:GLOBAL_WS_APP_DEBUG, body:JSON.stringify(message)})
     }
 
-    public publishDraw(drawNumber: number, eventId: number, playerDTO: PlayerStateDTO, isCardProduction: boolean = false, thenDiscard: number =0, isCardProductionDouble: boolean = false, firstCardProductionList: string [] = []): void {
+    public publishDraw(drawNumber: number, eventId: number, playerDTO: PlayerStateDTO, isCardProduction: boolean = false, thenDiscard: number =0, firstCardProductionList: string [] = []): void {
 		this.enqueueMessage(WebsocketQueryMessageFactory.createDrawQuery
 			(
 				drawNumber,
@@ -144,7 +144,6 @@ export class RxStompService extends RxStomp {
 				{
 					isCardProduction: isCardProduction,
 					thenDiscard: thenDiscard,
-					isCardProductionDouble: isCardProductionDouble,
 					firstCardProductionList: firstCardProductionList
 				}
 

@@ -36,7 +36,7 @@ export class DrawEventHandler {
 		event.queried = true
 		switch(event.resolveEventSubType){
 			case('drawResult'):{
-				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, undefined, event.isCardProductionDouble, event.firstCardProduction)
+				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, undefined, event.firstCardProduction)
 				break
 			}
 			case('researchPhaseResult'):{
@@ -67,7 +67,7 @@ export class DrawEventHandler {
 					{
 						drawEventResult:drawEvent.drawResultCardList,
 						waiterId:drawEvent.waiterId,
-						isCardProductionDouble:drawEvent.isCardProductionDouble
+						isCardProduction:drawEvent.isCardProduction
 					}
 				)
 				break
@@ -188,7 +188,6 @@ class PhaseResolveHandler {
 
 		event.productionMegacreditFromPhaseCard = this.getProductionPhaseCardSelectionBonus()
 		if(this.shouldApplyDoubleProduction(event)){
-			event.productionDoubleApplied = true
 			newEvents.push(EventFactory.createCardSelector('doubleProduction'))
 		}
 
@@ -213,7 +212,7 @@ class PhaseResolveHandler {
 	}
 	public shouldApplyDoubleProduction(event: EventPhase): boolean {
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return false}
-		return this.currentUpgradedPhaseCards[3].phaseType === 'production_1mc_activate_card' && event.productionDoubleApplied===false
+		return this.currentUpgradedPhaseCards[3].phaseType === 'production_1mc_activate_card'
 	}
 	resolveResearch(): void {
 		this.refreshCurrentUpgradedPhaseCard()

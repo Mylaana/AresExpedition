@@ -198,8 +198,12 @@ export class PlayerStateModel {
 		}
 		return false
 	}
-	getConstructionBonusCollected(): boolean {return this.phaseCardState.getConstructionBonusCollected()}
-	setConstructionBonusCollected(collected: boolean){this.phaseCardState.setConstructionBonusCollected(collected)}
+	getPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction'): boolean {return this.phaseCardState.getPhaseBonusCollected(phase)}
+	setPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction', collected: boolean){this.phaseCardState.setPhaseBonusCollected(phase, collected)}
+	resetAllPhaseActivationBonusCollected(){this.phaseCardState.resetAllPhaseActivationBonusCollected()}
+	addProductionResourcesObtainedThisRound(resources: RessourceStock[]){this.phaseCardState.addProductionResourcesObtainedThisRound(resources)}
+	addProductionCardsObtainedThisRound(cards: string[]){this.phaseCardState.addProductionCardsObtainedThisRound(cards)}
+	getProductionCardObtainedThisRound(): string[] {return this.phaseCardState.getProductionCardsObtainedThisRound()}
 
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {

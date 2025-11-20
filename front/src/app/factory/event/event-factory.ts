@@ -45,8 +45,7 @@ interface CreateEventOptionsGeneric {
 	increaseTr?: number
 	loadProductionCardList?: string[]
     effectPortal?: EffectPortalEnum
-	isCardProductionDouble?: boolean
-	firstProductionCardList?: string[]
+	isCardProduction?: boolean
 	portalActionMustBeResolvedToFinishEvent?: boolean,
 	resourceConversionInputRule?: InputRuleEnum
 	resourceConversionInputQuantity?: number
@@ -601,8 +600,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         case('drawResult'):{
             event.drawResultList = args?.drawEventResult
             event.waiterId = args?.waiterId
-			event.isCardProductionDouble = args?.isCardProductionDouble
-			event.firstCardProduction = args?.firstProductionCardList
+			event.isCardProduction = args?.isCardProduction
             break
         }
         case('waitingGroupReady'):{
@@ -631,7 +629,6 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 		}
 		case('loadProductionPhaseCardDouble'):{
 			event.loadProductionCardList = args?.loadProductionCardList
-			event.firstCardProduction = args?.firstProductionCardList
 			break
 		}
 		case('drawResultThenDiscard'):{
@@ -681,8 +678,6 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
         case('drawQuery'):{
             event.drawDiscard = args?.drawDiscard
             event.isCardProduction = args?.isCardProduction
-			event.isCardProductionDouble = args?.isCardProductionDouble
-			event.firstCardProduction = args?.firstProductionCardList
             break
         }
         case('researchPhaseQuery'):{
@@ -727,8 +722,6 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
     switch(subType){
         case('productionPhase'):{
             event.autoFinalize = false
-            event.productionApplied = false
-			event.productionDoubleApplied = false
 			event.titleKey = 'phaseProduction'
             break
         }

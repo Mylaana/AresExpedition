@@ -6,15 +6,23 @@ import { PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model"
 import { PhaseCardDTO, PlayerPhaseCardStateDTO } from "../../interfaces/dto/player-state-dto.interface";
+import { RessourceStock } from "../../interfaces/global.interface";
 
 export class PlayerPhaseCardStateModel {
 	private phaseGroups!: PhaseCardGroupModel[]
 	private phaseCardUpgradeCount: number = 0
 	private selectedPhase!: SelectablePhaseEnum
 	private previousSelectedPhase!: SelectablePhaseEnum
+
 	private constructionBonusCollected!: boolean
-	private firstProductionCollected!: boolean
+	private actionBonusCollected!: boolean
+	private productionCollected!: boolean
+	private researchBonusCollected!: boolean
+
 	private secondProductionCollected!: boolean
+
+	private resourcesProducedThisRound: RessourceStock[] = []
+	private cardsProducedThisRound: string[] = []
 	
 	private phaseService: PhaseCardInfoService
 
@@ -35,8 +43,10 @@ export class PlayerPhaseCardStateModel {
 		
 		//load bonus collected from json
 		this.constructionBonusCollected = dto.cbc
-		this.firstProductionCollected = dto.fpc
+		this.productionCollected = dto.fpc
 		this.secondProductionCollected = dto.spc
+		this.cardsProducedThisRound = dto.pcl
+		this.resourcesProducedThisRound = dto.pr
 	}
 
 	getPhaseCardUpgradedCount(): number { return this.phaseCardUpgradeCount}
@@ -74,19 +84,82 @@ export class PlayerPhaseCardStateModel {
 		}
 	}
 	resetAllPhaseActivationBonusCollected() {
-		this.setConstructionBonusCollected(false)
-	}
-	getConstructionBonusCollected(): boolean { return this.constructionBonusCollected }
-	setConstructionBonusCollected(collected: boolean){this.constructionBonusCollected = collected}
+		this.setPhaseBonusCollected(SelectablePhaseEnum.development, false)
+		this.setPhaseBonusCollected(SelectablePhaseEnum.construction, false)
+		this.setPhaseBonusCollected(SelectablePhaseEnum.action, false)
+		this.setPhaseBonusCollected(SelectablePhaseEnum.production, false)
+		this.setPhaseBonusCollected('secondProduction', false)
+		this.setPhaseBonusCollected(SelectablePhaseEnum.research, false)
 
+		this.cardsProducedThisRound = []
+		this.resourcesProducedThisRound = []
+	}
+	getPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction'): boolean {
+		switch(phase){
+			case(SelectablePhaseEnum.construction):{
+				return this.constructionBonusCollected 
+			}
+			case(SelectablePhaseEnum.action):{
+				return this.actionBonusCollected 
+			}
+			case(SelectablePhaseEnum.production):{
+				return this.productionCollected 
+			}
+			case(SelectablePhaseEnum.research):{
+				return this.researchBonusCollected
+			}
+			case('secondProduction'):{
+				return this.secondProductionCollected
+			}
+			default:{return true}
+		}
+	}
+	setPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction', collected: boolean){
+		switch(phase){
+			case(SelectablePhaseEnum.construction):{
+				this.constructionBonusCollected = collected
+				return
+			}
+			case(SelectablePhaseEnum.action):{
+				this.actionBonusCollected = collected
+				return
+			}
+			case(SelectablePhaseEnum.production):{
+				this.productionCollected = collected
+				return
+			}
+			case(SelectablePhaseEnum.research):{
+				this.researchBonusCollected = collected
+				return
+			}
+			case('secondProduction'):{
+				this.secondProductionCollected = collected
+				return
+			}
+		}
+	}
+	addProductionResourcesObtainedThisRound(ressources: RessourceStock[]){
+
+	}
+	addProductionCardsObtainedThisRound(resources: string[]){
+		this.cardsProducedThisRound = this.cardsProducedThisRound.concat(resources)
+	}
+	getProductionCardsObtainedThisRound(): string[] {
+		return this.cardsProducedThisRound
+	}
 	toJson(): PlayerPhaseCardStateDTO {
 		return {
 			pc: this.phaseGroupToJson(this.phaseGroups),
 			sp: this.selectedPhase,
 			psp: this.previousSelectedPhase,
 			cbc: this.constructionBonusCollected,
-			fpc: this.firstProductionCollected,
-			spc: this.secondProductionCollected
+			abc: this.actionBonusCollected,
+			fpc: this.productionCollected,
+			spc: this.secondProductionCollected,
+			rbc: this.researchBonusCollected,
+			pcl: this.cardsProducedThisRound,
+			pr: this.resourcesProducedThisRound
+
 		}
 	}
 	newGame(): void {
@@ -144,8 +217,12 @@ export class PlayerPhaseCardStateModel {
 				sp: SelectablePhaseEnum.undefined,
 				psp: SelectablePhaseEnum.undefined,
 				cbc: false,
+				abc: false,
 				fpc: false,
-				spc: false
+				spc: false,
+				rbc: false,
+				pcl: [],
+				pr: []
 			},
 			true
 		)

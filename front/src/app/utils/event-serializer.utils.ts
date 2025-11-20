@@ -217,7 +217,7 @@ function eventPhaseToJson(event: EventPhase, cardList: string[]): EventStateDTO 
 	switch(event.subType){
 		case('productionPhase'):{
 			let content: EventStateContentPhaseDTO = {
-				pda: event.productionDoubleApplied??false,
+				pda: false,
 				cl: cardList
 			}
 			return {

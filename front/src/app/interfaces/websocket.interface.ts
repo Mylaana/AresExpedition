@@ -38,7 +38,6 @@ export interface WsDrawQuery extends WsQuery {
     drawNumber: number
     eventId: number
 	isCardProduction: boolean
-	isCardProductionDouble: boolean
 	thenDiscard: number
 	playerState: PlayerStateDTO
 	firstCardProductionList: string[]
@@ -73,6 +72,7 @@ export interface WsDrawResult extends WsResult {
     eventId: number
 	keep: number,
 	options: DeckQueryOptionsEnum
+	isCardProduction: boolean
 }
 export interface WsOceanResult extends WsResult {
 	bonuses: OceanBonus[]

@@ -42,7 +42,7 @@ export class EventGenericHandler implements GameEventHandler<EventGeneric> {
             }
             case('drawResult'):{
                 if(event.drawResultList===undefined){break}
-                if(event.isCardProductionDouble){
+                if(event.isCardProduction){
                     this.gameStateFacade.addCardProduction(event.drawResultList, false)
                 } else {
                     this.gameStateFacade.addCardsToClientHand(event.drawResultList)
@@ -115,13 +115,10 @@ export class EventGenericHandler implements GameEventHandler<EventGeneric> {
             }
             case('loadProductionPhaseCards'):{
                 if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
-                this.gameStateFacade.loadProductionPhaseCardList(event.loadProductionCardList, false)
                 break
             }
             case('loadProductionPhaseCardDouble'):{
                 if(!event.loadProductionCardList || event.loadProductionCardList.length===0){break}
-                this.gameStateFacade.loadProductionPhaseCardList(event.loadProductionCardList, true)
-                this.gameStateFacade.loadProductionPhaseCardList(event.firstCardProduction??[], false)
                 break
             }
             case('resourceConversion'):{

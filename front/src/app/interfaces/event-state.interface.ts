@@ -21,6 +21,7 @@ export interface EventStateContentOceanFlippedDTO extends EventStateContentDTO {
 export interface EventStateContentDrawResultDTO extends EventStateContentDTO {
 	cl: string[]
 	td: number
+	icp: boolean //is card production
 }
 export interface EventStateContentDiscardDTO extends EventStateContentDTO {
 	d: number

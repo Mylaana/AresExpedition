@@ -9,7 +9,7 @@ public class DrawContentDTO extends BaseContentDTO{
     Integer eventId;
     PlayerStateDTO playerState;
     Integer thenDiscard;
-    Boolean isCardProductionDouble;
+    Boolean isCardProduction;
     List<String> firstCardProductionList;
 
     public DrawContentDTO(){
@@ -18,7 +18,7 @@ public class DrawContentDTO extends BaseContentDTO{
     public DrawContentDTO(Integer drawNumber, Integer eventId, Boolean isProductionDouble, List<String> firstCardProductionList){
       this.drawNumber = drawNumber;
       this.eventId = eventId;
-      this.isCardProductionDouble = isProductionDouble;
+      this.isCardProduction = isProductionDouble;
       this.firstCardProductionList = firstCardProductionList;
     }
 
@@ -54,12 +54,12 @@ public class DrawContentDTO extends BaseContentDTO{
       this.thenDiscard = thenDiscard;
     }
 
-    public Boolean getIsCardProductionDouble() {
-      return isCardProductionDouble;
+    public Boolean getIsCardProduction() {
+      return isCardProduction;
     }
 
-    public void setIsCardProductionDouble(Boolean isProductionDouble) {
-      this.isCardProductionDouble = isProductionDouble;
+    public void setIsCardProduction(Boolean isProduction) {
+      this.isCardProduction = isProduction;
     }
 
     public List<String> getFirstCardProductionList() {

@@ -127,6 +127,7 @@ export class GameStateFacadeService{
 		switch(newPhase){
 			case(NonSelectablePhaseEnum.undefined):{return}
 			case(NonSelectablePhaseEnum.planification):{
+				this.getClientState().resetAllPhaseActivationBonusCollected()
 				let selected = this.getClientPhaseSelected()
 				if(selected && selected != SelectablePhaseEnum.undefined ){
 					events.push(EventFactory.createGeneric('waitingGroupReady'))
@@ -138,7 +139,6 @@ export class GameStateFacadeService{
 			case(NonSelectablePhaseEnum.construction):{events.push(EventFactory.createPhase('constructionPhase'));break}
 			case(NonSelectablePhaseEnum.action):{events.push(EventFactory.createPhase('actionPhase'));break}
 			case(NonSelectablePhaseEnum.production):{
-				this.cardProduction.next([])
 				events.push(EventFactory.createPhase('productionPhase'))
 				break
 			}
@@ -492,6 +492,7 @@ export class GameStateFacadeService{
         return this.getClientState().getResearch()
     }
     handleWsDrawResult(wsDrawResult: WsDrawResult): void {
+		console.log(wsDrawResult)
         let eventFound: boolean = false
         let drawQueue = this.drawQueue.getValue()
         for(let event of drawQueue){
@@ -500,6 +501,7 @@ export class GameStateFacadeService{
             event.drawResultCardList = wsDrawResult.cardIdList
 			event.scanKeepOptions = wsDrawResult.options
 			event.keepCardNumber = wsDrawResult.keep
+			event.isCardProduction = wsDrawResult.isCardProduction
             eventFound = true
             this.cleanAndNextDrawQueue()
             break
@@ -714,9 +716,6 @@ export class GameStateFacadeService{
 	setGameOver(){
 		this.gameOver.next(true)
 	}
-	loadProductionPhaseCardList(cardList: string[], addToHand: boolean){
-		this.addCardProduction(cardList, addToHand)
-	}
 	applyAverageStartingMegacredits(){
 		let clientState = this.getClientState()
 		let corps = clientState.getPlayedCorporations()
@@ -754,8 +753,9 @@ export class GameStateFacadeService{
 	applyDoubleProduction(card: PlayableCardModel){
 		if(!card){return}
 		let resources: RessourceStock[] = []
+		let clientState = this.getClientState()
 		if(card.cardCode in SCALING_PRODUCTION){
-			resources = SCALING_PRODUCTION[card.cardCode](this.getClientState())
+			resources = SCALING_PRODUCTION[card.cardCode](clientState)
 		} else {
 			resources = this.getFlatDoubleProduction(card)
 		}
@@ -772,13 +772,13 @@ export class GameStateFacadeService{
 		resources = resources.filter((el) => el.name!='card')
 		if(cardToDraw>0){
 			newEvents.push(EventFactory.createDeckQueryEvent('drawQuery', {
-				isCardProductionDouble:true,
+				isCardProduction:true,
 				drawDiscard: {draw:cardToDraw},
-				firstProductionCardList: this.cardProduction.getValue()
 			}))
 		}
 		if(resources.length>0){
 			newEvents.push(EventFactory.simple.addRessource(resources))
+			clientState.addProductionResourcesObtainedThisRound(resources)
 		}
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents, 'first')
@@ -832,10 +832,11 @@ export class GameStateFacadeService{
 	}
 	addCardProduction(cardList: string | string[], addToHand: boolean){
 		let cards: string[] = Utils.toArray(cardList)
-		let totalCards: string[] = this.cardProduction.getValue().concat(cards)
-		this.cardProduction.next(totalCards)
-		if(!addToHand)
-		this.getClientState().addCardsToHand(cardList)
+		//if(!addToHand){}
+		let clientState = this.getClientState()
+		clientState.addCardsToHand(cardList)
+		this.addProductionCardsObtainedThisRound(cards)
+		this.cardProduction.next(clientState.getProductionCardObtainedThisRound())
 	}
 	setDeckSize(size: number){
 		this.deck.next(size)
@@ -871,6 +872,8 @@ export class GameStateFacadeService{
 	getEventQueue(): EventBaseModel[] {
 		return this.gameEventQueueService.getCurrentEventQueue()
 	}
-	getConstructionBonusCollected(): boolean {return this.getClientState().getConstructionBonusCollected()}
-	setConstructionBonusCollected(collected: boolean) {this.getClientState().setConstructionBonusCollected(collected)}
+	getPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction'): boolean {return this.getClientState().getPhaseBonusCollected(phase)}
+	setPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction', collected: boolean) {this.getClientState().setPhaseBonusCollected(phase, collected)}
+	addProductionResourcesObtainedThisRound(resources: RessourceStock[]){this.getClientState().addProductionResourcesObtainedThisRound(resources)}
+	addProductionCardsObtainedThisRound(cards: string[]){this.getClientState().addProductionCardsObtainedThisRound(cards)}
 }
