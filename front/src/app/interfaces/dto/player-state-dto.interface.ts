@@ -53,6 +53,9 @@ export interface PlayerPhaseCardStateDTO {
 	pc : PhaseCardDTO[]
 	sp: SelectablePhaseEnum
 	psp: SelectablePhaseEnum
+	cbc: boolean // construction bonus collected
+	fpc: boolean // first production collected
+	spc: boolean // second production collected
 }
 export interface PlayerGlobalParameterStateDTO {
 	gp: GlobalParameterDTO[]

@@ -880,4 +880,6 @@ export class GameStateFacadeService{
 	getEventQueue(): EventBaseModel[] {
 		return this.gameEventQueueService.getCurrentEventQueue()
 	}
+	getConstructionBonusCollected(): boolean {return this.getClientState().getConstructionBonusCollected()}
+	setConstructionBonusCollected(collected: boolean) {this.getClientState().setConstructionBonusCollected(collected)}
 }

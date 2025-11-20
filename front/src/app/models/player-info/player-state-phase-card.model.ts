@@ -12,8 +12,12 @@ export class PlayerPhaseCardStateModel {
 	private phaseCardUpgradeCount: number = 0
 	private selectedPhase!: SelectablePhaseEnum
 	private previousSelectedPhase!: SelectablePhaseEnum
-
+	private constructionBonusCollected!: boolean
+	private firstProductionCollected!: boolean
+	private secondProductionCollected!: boolean
+	
 	private phaseService: PhaseCardInfoService
+
 
 	constructor(private injector: Injector, dto: PlayerPhaseCardStateDTO, instantiateEmpty: boolean = false){
 		this.phaseService = this.injector.get(PhaseCardInfoService)
@@ -28,6 +32,11 @@ export class PlayerPhaseCardStateModel {
 		this.selectedPhase = dto.sp
 		this.previousSelectedPhase = dto.psp
 		this.phaseGroups = this.phaseGroupFromJson(dto.pc)
+		
+		//load bonus collected from json
+		this.constructionBonusCollected = dto.cbc
+		this.firstProductionCollected = dto.fpc
+		this.secondProductionCollected = dto.spc
 	}
 
 	getPhaseCardUpgradedCount(): number { return this.phaseCardUpgradeCount}
@@ -64,12 +73,17 @@ export class PlayerPhaseCardStateModel {
 			}
 		}
 	}
+	getConstructionBonusCollected(): boolean { return this.constructionBonusCollected }
+	setConstructionBonusCollected(collected: boolean){this.constructionBonusCollected = collected}
 
 	toJson(): PlayerPhaseCardStateDTO {
 		return {
 			pc: this.phaseGroupToJson(this.phaseGroups),
 			sp: this.selectedPhase,
-			psp: this.previousSelectedPhase
+			psp: this.previousSelectedPhase,
+			cbc: this.constructionBonusCollected,
+			fpc: this.firstProductionCollected,
+			spc: this.secondProductionCollected
 		}
 	}
 	newGame(): void {
@@ -100,7 +114,7 @@ export class PlayerPhaseCardStateModel {
 		return phaseCards
 	}
 
-	private phaseGroupFromJson(phaseCards: PhaseCardDTO[]): PhaseCardGroupModel[] {
+	private phaseGroupFromJson(dto: PhaseCardDTO[]): PhaseCardGroupModel[] {
 		let groups: PhaseCardGroupModel[] = []
 		for(let groupName of GAME_SELECTABLE_PHASE_LIST){
 			groups.push(this.phaseService.getNewPhaseGroup(groupName))
@@ -108,7 +122,7 @@ export class PlayerPhaseCardStateModel {
 
 
 		//load upgraded from dto
-		for(let card of phaseCards) {
+		for(let card of dto) {
 			groups[card.pi].phaseCards[card.cl].setPhaseCardUpgraded(true)
 			if(card.cl!=0){
 				groups[card.pi].phaseIsUpgraded = true
@@ -125,7 +139,10 @@ export class PlayerPhaseCardStateModel {
 			{
 				pc: [],
 				sp: SelectablePhaseEnum.undefined,
-				psp: SelectablePhaseEnum.undefined
+				psp: SelectablePhaseEnum.undefined,
+				cbc: false,
+				fpc: false,
+				spc: false
 			},
 			true
 		)

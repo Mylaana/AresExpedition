@@ -20,7 +20,7 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 		}
 		status.push(s)
 	}
-
+	console.log(status)
 	switch(event.subType){
 		case('developmentPhaseBuilder'):{
 			stateType = EventStateTypeEnum.builderDevelopemntLocked

@@ -198,6 +198,8 @@ export class PlayerStateModel {
 		}
 		return false
 	}
+	getConstructionBonusCollected(): boolean {return this.phaseCardState.getConstructionBonusCollected()}
+	setConstructionBonusCollected(collected: boolean){this.phaseCardState.setConstructionBonusCollected(collected)}
 
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {

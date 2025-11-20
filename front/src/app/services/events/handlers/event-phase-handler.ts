@@ -3,12 +3,9 @@ import { GameStateFacadeService } from "../../game-state/game-state-facade.servi
 import { GameEventHandler } from "../../../interfaces/services.interface";
 import { EventBaseModel, EventPhase } from "../../../models/core-game/event.model";
 import { EventFactory } from "../../../factory/event/event-factory";
-import { GameParamService } from "../../core-game/game-param.service";
 import { SelectablePhaseEnum } from "../../../enum/phase.enum";
 import { RessourceStock, RessourceInfo, ScanKeep } from "../../../interfaces/global.interface";
 import { PhaseCardModel } from "../../../models/cards/phase-card.model";
-import { EventPhaseSubType } from "../../../types/event.type";
-import { myUUID } from "../../../types/global.type";
 import { BuilderType } from "../../../types/phase-card.type";
 import { Logger } from "../../../utils/utils";
 
@@ -80,6 +77,8 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		this.gameStateFacade.addEventQueue(EventFactory.createCardBuilder('constructionPhaseBuilder',builderType),'second')
 
 		if(builderType==='construction_draw_card'){
+			if(this.gameStateFacade.getConstructionBonusCollected()===true){return}
+			this.gameStateFacade.setConstructionBonusCollected(true)
 			this.gameStateFacade.addEventQueue(EventFactory.createDeckQueryEvent('drawQuery',{drawDiscard:{draw:1}}),'second')
 		}
 	}

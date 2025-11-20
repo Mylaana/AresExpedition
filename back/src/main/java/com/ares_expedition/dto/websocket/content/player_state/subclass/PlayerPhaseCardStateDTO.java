@@ -17,6 +17,14 @@ public class PlayerPhaseCardStateDTO {
     @JsonProperty("psp")
     private PhaseEnum previousSelectedPhase;
 
+    //upon phase activation bonus collected
+    @JsonProperty("cbc")
+    private Boolean constructionBonusCollected;
+    @JsonProperty("fpc")
+    private Boolean firstProductionCollected;
+    @JsonProperty("spc")
+    private Boolean secondProductionCollected;
+
     PlayerPhaseCardStateDTO() {
     }
 
@@ -26,6 +34,10 @@ public class PlayerPhaseCardStateDTO {
         }
         this.selectedPhase = state.getSelectedPhase();
         this.previousSelectedPhase = state.getPreviousSelectedPhase();
+
+        constructionBonusCollected = state.getConstructionBonusCollected();
+        firstProductionCollected = state.getFirstProductionCollected();
+        secondProductionCollected = state.getSecondProductionCollected();
     }
 
     public List<PhaseCardDTO> getPhaseCards() {
@@ -50,7 +62,29 @@ public class PlayerPhaseCardStateDTO {
 
     public void setPreviousSelectedPhase(PhaseEnum previousSelectedPhase) {
         this.previousSelectedPhase = previousSelectedPhase;
-    }    
+    }
 
-    
+    public Boolean getConstructionBonusCollected() {
+        return constructionBonusCollected;
+    }
+
+    public void setConstructionBonusCollected(Boolean constructionBonusCollected) {
+        this.constructionBonusCollected = constructionBonusCollected;
+    }
+
+    public Boolean getFirstProductionCollected() {
+        return firstProductionCollected;
+    }
+
+    public void setFirstProductionCollected(Boolean firstProductionCollected) {
+        this.firstProductionCollected = firstProductionCollected;
+    }
+
+    public Boolean getSecondProductionCollected() {
+        return secondProductionCollected;
+    }
+
+    public void setSecondProductionCollected(Boolean secondProductionCollected) {
+        this.secondProductionCollected = secondProductionCollected;
+    }  
 }

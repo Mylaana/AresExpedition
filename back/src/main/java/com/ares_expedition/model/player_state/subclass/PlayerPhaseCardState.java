@@ -13,6 +13,10 @@ public class PlayerPhaseCardState {
     private List<PhaseCard> phaseCards = new ArrayList<PhaseCard>();
     private PhaseEnum selectedPhase;
     private PhaseEnum previousSelectedPhase;
+    //upon phase activation bonus collected
+    private Boolean constructionBonusCollected;
+    private Boolean firstProductionCollected;
+    private Boolean secondProductionCollected;
 
     public PlayerPhaseCardState() {
     }
@@ -23,6 +27,10 @@ public class PlayerPhaseCardState {
         }
         this.selectedPhase = dto.getSelectedPhase();
         this.previousSelectedPhase = dto.getPreviousSelectedPhase();
+
+        this.constructionBonusCollected = dto.getConstructionBonusCollected();
+        this.firstProductionCollected = dto.getFirstProductionCollected();
+        this.secondProductionCollected = dto.getSecondProductionCollected();
     }
 
     public PhaseEnum getSelectedPhase() {
@@ -60,5 +68,29 @@ public class PlayerPhaseCardState {
     public void newRound() {
         this.previousSelectedPhase = this.selectedPhase;
         this.selectedPhase = PhaseEnum.UNDEFINED;
+    }
+
+    public Boolean getConstructionBonusCollected() {
+        return constructionBonusCollected;
+    }
+
+    public void setConstructionBonusCollected(Boolean constructionBonusCollected) {
+        this.constructionBonusCollected = constructionBonusCollected;
+    }
+
+    public Boolean getFirstProductionCollected() {
+        return firstProductionCollected;
+    }
+
+    public void setFirstProductionCollected(Boolean firstProductionCollected) {
+        this.firstProductionCollected = firstProductionCollected;
+    }
+
+    public Boolean getSecondProductionCollected() {
+        return secondProductionCollected;
+    }
+
+    public void setSecondProductionCollected(Boolean secondProductionCollected) {
+        this.secondProductionCollected = secondProductionCollected;
     }
 }
