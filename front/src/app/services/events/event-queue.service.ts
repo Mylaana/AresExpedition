@@ -62,7 +62,7 @@ export class EventQueueService {
     private applyEventStateDTO(queue: EventBaseModel[]): EventBaseModel[] {
         //create new events
         if(this.eventStateDTO.filter((e) => e.o!=EventStateOriginEnum.load).length>0){
-            queue = this.eventStateDeserializerService.createFromJson(this.eventStateDTO).concat(queue)
+            queue = this.eventStateDeserializerService.createFromJson(this.eventStateDTO, this.clientState).concat(queue)
             this.eventStateDTO = this.eventStateDTO.filter((e) => e.o!=EventStateOriginEnum.create)
         }
         //load data in existing events

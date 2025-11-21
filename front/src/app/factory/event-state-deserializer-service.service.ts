@@ -7,6 +7,8 @@ import { EventFactory } from "./event/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
+import { TriggerEffectEventFactory } from "./trigger-event.factoy";
+import { Utils } from "../utils/utils";
 
 
 const S = EventFactory.simple
@@ -81,7 +83,7 @@ export class EventStateDeserializerService{
 			}
 		}
 	}
-	public createFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
+	public createFromJson(eventStateList: EventStateDTO[], clientState: PlayerStateModel): EventBaseModel[] {
 		console.log(eventStateList)
 		let newEvents: EventBaseModel[] = []
 		let remainingStates: EventStateDTO[] = []
@@ -119,6 +121,12 @@ export class EventStateDeserializerService{
 					let content: EventStateContentDiscardDTO =  {
 						d: state.v['d'],
 						o: state.v['o'] as EventOrigin
+					}
+					//special case for Mars Univ
+					if(content.o?.originValue==='40'){
+						newEvents = newEvents.concat(TriggerEffectEventFactory.getTriggerred('ON_TAG_GAINED', ['40'], clientState, {tagList: [Utils.toTagId('science')]}))
+						console.log(newEvents)
+						break
 					}
 					newEvents.push(EventFactory.simple.discard(content.d, content.o?.originValue))
 					break

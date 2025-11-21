@@ -204,7 +204,6 @@ export class EventCardBuilder extends EventBaseCardSelector {
     private activateNextBuilder(){
         if(this.eventIsComplete){return}
         if(this.currentBuilder === this.cardBuilder[this.cardBuilder.length-1]){
-            console.log('here')
             this.setEventIsComplete()
             return
         }

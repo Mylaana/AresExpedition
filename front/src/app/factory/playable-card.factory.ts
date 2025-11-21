@@ -139,6 +139,7 @@ export const PlayableCard = {
 	getRepeatProductionCaption,
 	hasScalingProduction,
 	sortTriggerList,
+	getTriggerPriority: getPriority,
 	isEventGeneratingTrigger: TriggerEffectEventFactory.isEventGeneratingTrigger,
 	prerequisite: PlayableCardPrerequisite,
 	activable: PlayableCardActivativable

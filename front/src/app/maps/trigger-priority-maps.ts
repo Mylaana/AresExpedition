@@ -1,10 +1,12 @@
 export const TRIGGER_PRIORITY_DEFAULT_VALUE = 10;
+export const CARD_PLAYED_PRIORITY_VALUE = 9
 
 const DRAW = 11;
-const RESOURCES = 9;
-const RESOURCES_CONSUMPTION = 8;
-const DRAW_DISCARD = 7;
-const DISCARD_DRAW = 6;
+
+const RESOURCES = 8;
+const RESOURCES_CONSUMPTION = 7;
+const DRAW_DISCARD = 6;
+const DISCARD_DRAW = 5;
 
 export const TRIGGER_PRIORITY_MAP: Map<string, number> = new Map([
     //Draw cards

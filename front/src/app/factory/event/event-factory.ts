@@ -338,7 +338,6 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
-	console.trace(event)
 
 	return event
 }
@@ -695,7 +694,6 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
 			event.drawDiscard = args?.drawDiscard
 			event.drawThenDiscard = true
 			event.eventOrigin = args?.eventOrigin
-			console.log(event)
 			break
 		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}

@@ -156,7 +156,6 @@ export class RxStompService extends RxStomp {
     }
 
     public publishClientPlayerReady(ready: boolean): void {
-		console.log('enqueue client rdy', ready)
         this.enqueueMessage(WebsocketQueryMessageFactory.createReadyQuery(ready))
     }
 

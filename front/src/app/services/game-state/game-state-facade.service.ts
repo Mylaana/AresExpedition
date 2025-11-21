@@ -395,10 +395,11 @@ export class GameStateFacadeService{
 
         //check for triggers and add them to queue
 		let activeTriggers = state.getTriggersIdActive()
-        let eventsOnPlayed = PlayableCard.getOnTriggerredEvents(['ON_CARD_PLAYED', 'ON_TAG_GAINED'], activeTriggers, state, {tagList:card.tagsId, playedCard: card})
-        if(eventsOnPlayed.length>0){
-            events = events.concat(eventsOnPlayed)
-        }
+        let eventsOnPlayedBeforeCard = PlayableCard.getOnTriggerredEvents(['ON_CARD_PLAYED', 'ON_TAG_GAINED'], activeTriggers, state, {tagList:card.tagsId, playedCard: card}, 'beforeCardOnly')
+		let eventsOnPlayedAfterCard = PlayableCard.getOnTriggerredEvents(['ON_CARD_PLAYED', 'ON_TAG_GAINED'], activeTriggers, state, {tagList:card.tagsId, playedCard: card}, 'afterCardOnly')
+        
+		events = events.concat(eventsOnPlayedBeforeCard)
+		events = events.concat(eventsOnPlayedAfterCard)
 
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)
@@ -492,7 +493,6 @@ export class GameStateFacadeService{
         return this.getClientState().getResearch()
     }
     handleWsDrawResult(wsDrawResult: WsDrawResult): void {
-		console.log(wsDrawResult)
         let eventFound: boolean = false
         let drawQueue = this.drawQueue.getValue()
         for(let event of drawQueue){
@@ -505,7 +505,6 @@ export class GameStateFacadeService{
             eventFound = true
 			event.triggerOrigin = wsDrawResult.triggerOrigin
 			
-			console.log(event)
             this.cleanAndNextDrawQueue()
             break
         }
@@ -855,14 +854,14 @@ export class GameStateFacadeService{
 			state.addMoonTile(t)
 			totalTR += t.quantity
 		}
+		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){return}
+		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
 		this.updateClientState(state)
 
 		let newEvents = PlayableCard.getOnTriggerredEvents('ON_MOON_TILE_GAINED', state.getTriggersIdActive(), state, {moonTiles:tilesList})
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents, 'first')
 		}
-		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){return}
-		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
 	}
 	addCardSeenToClient(quantity: number){
 		let state = this.getClientState()

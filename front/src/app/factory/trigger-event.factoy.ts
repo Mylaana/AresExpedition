@@ -10,6 +10,7 @@ import { Utils } from "../utils/utils";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum";
 import { Checker } from "../utils/checker";
 import { PlayableCard } from "./playable-card.factory";
+import { CARD_PLAYED_PRIORITY_VALUE, TRIGGER_PRIORITY_DEFAULT_VALUE } from "../maps/trigger-priority-maps";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
@@ -520,12 +521,18 @@ function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {
 	}
 }
 export const TriggerEffectEventFactory = {
-	getTriggerred(hooks: HookType | HookType[], activeTriggers: string[], clientState: PlayerStateModel, input: Partial<TriggerInput>): EventBaseModel[] {
+	getTriggerred(hooks: HookType | HookType[], activeTriggers: string[], clientState: PlayerStateModel, input: Partial<TriggerInput>, triggerFilter: 'beforeCardOnly' | 'afterCardOnly' | 'all' = 'all'): EventBaseModel[] {
 		let relevantTriggers: string[] = []
 		let hookList = Utils.toArray(hooks) as HookType[]
 		for(let hook of hookList){
 			const handler = HANDLERS_BY_HOOK[hook] ?? {};
 			relevantTriggers = relevantTriggers.concat(activeTriggers.filter(trigger => trigger in handler))
+		}
+		if(triggerFilter==='afterCardOnly'){
+			relevantTriggers = relevantTriggers.filter(trigger => PlayableCard.getTriggerPriority(trigger) < CARD_PLAYED_PRIORITY_VALUE)
+		}
+		if(triggerFilter==='afterCardOnly'){
+			relevantTriggers = relevantTriggers.filter(trigger => PlayableCard.getTriggerPriority(trigger) > CARD_PLAYED_PRIORITY_VALUE)
 		}
 		relevantTriggers = PlayableCard.sortTriggerList(relevantTriggers)
 		const events: EventBaseModel[] = [];
