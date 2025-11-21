@@ -36,7 +36,7 @@ export class DrawEventHandler {
 		event.queried = true
 		switch(event.resolveEventSubType){
 			case('drawResult'):{
-				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, undefined, event.firstCardProduction)
+				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, undefined, event.triggerOrigin)
 				break
 			}
 			case('researchPhaseResult'):{
@@ -48,7 +48,14 @@ export class DrawEventHandler {
 				break
 			}
 			case('drawResultThenDiscard'):{
-				this.rxStompService.publishDraw(event.drawCardNumber, event.waiterId, this.gameStateService.getClientStateDTO(), event.isCardProduction, event.discardAfterDraw)
+				this.rxStompService.publishDraw(
+					event.drawCardNumber,
+					event.waiterId, 
+					this.gameStateService.getClientStateDTO(),
+					event.isCardProduction,
+					event.discardAfterDraw,
+					event.triggerOrigin
+				)
 				break
 			}
 			default:{
@@ -107,7 +114,9 @@ export class DrawEventHandler {
 					{
 						drawEventResult:drawEvent.drawResultCardList,
 						thenDiscard: drawEvent.discardAfterDraw,
-						waiterId:drawEvent.waiterId
+						waiterId:drawEvent.waiterId,
+						eventOrigin: {originType:'cardCode', originValue:drawEvent.triggerOrigin??''}
+						
 					}
 				)
 				break

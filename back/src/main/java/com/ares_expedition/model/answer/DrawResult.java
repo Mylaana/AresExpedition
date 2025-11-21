@@ -7,16 +7,20 @@ public class DrawResult {
     Integer thenDiscard;
     Boolean isCardProduction;
     List<String> firstCardProductionList;
+    String triggerOrigin;
 
     public DrawResult(){
     }
 
-    public DrawResult(List<String> cardIdList, Integer eventId, Integer thenDiscard, Boolean isCardProduction, List<String> firstCardProductionList) {
+    public DrawResult(List<String> cardIdList, Integer eventId, Integer thenDiscard, Boolean isCardProduction, List<String> firstCardProductionList, String triggerOrigin) {
         this.cardIdList = cardIdList;
         this.eventId = eventId;
         this.thenDiscard = thenDiscard;
         this.isCardProduction = isCardProduction;
         this.firstCardProductionList = firstCardProductionList;
+        if(triggerOrigin != ""){
+            this.triggerOrigin = triggerOrigin;
+        }
     }
 
     public List<String> getCardIdList() {
@@ -58,4 +62,13 @@ public class DrawResult {
     public void setFirstCardProductionList(List<String> firstCardProductionList) {
         this.firstCardProductionList = firstCardProductionList;
     }
+
+    public String getTriggerOrigin() {
+        return triggerOrigin;
+    }
+
+    public void setTriggerOrigin(String triggerOrigin) {
+        this.triggerOrigin = triggerOrigin;
+    }
+    
 }

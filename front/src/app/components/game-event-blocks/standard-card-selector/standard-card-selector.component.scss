@@ -16,12 +16,22 @@
     }
 }
 .list-background{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--color-ares-purple-dark3);
+    border-radius: calc(var(--card-height) * .07);
+    opacity: 50%;
+}
+.wrapper-list{
+    position: relative;
     width: fit-content;
     height: fit-content;
     padding: calc(var(--card-height) * .05);
     border-radius: calc(var(--card-height) * .07);
     border: white solid 2px;
-    background-color: rgba(255, 255, 255, 0.5);
 }
 app-playable-card-list{
     width: fit-content;

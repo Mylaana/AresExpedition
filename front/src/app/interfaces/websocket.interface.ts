@@ -41,6 +41,7 @@ export interface WsDrawQuery extends WsQuery {
 	thenDiscard: number
 	playerState: PlayerStateDTO
 	firstCardProductionList: string[]
+	triggerOrigin: string
 }
 export interface WsScanKeepQuery extends WsQuery {
     scan: number
@@ -70,9 +71,10 @@ export interface WsGroupReady extends WsResult {
 export interface WsDrawResult extends WsResult {
     cardIdList: string[]
     eventId: number
-	keep: number,
+	keep: number
 	options: DeckQueryOptionsEnum
 	isCardProduction: boolean
+	triggerOrigin: string
 }
 export interface WsOceanResult extends WsResult {
 	bonuses: OceanBonus[]

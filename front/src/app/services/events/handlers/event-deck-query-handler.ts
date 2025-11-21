@@ -59,9 +59,11 @@ export class EventDeckQueryHandler implements GameEventHandler<EventDeckQuery> {
             this.gameStateFacade.addDrawQueue(
                 DrawEventFactory.createDrawEvent(
                     resolveType,
-                    drawNumber,event.id,
+                    drawNumber,
+                    event.id,
                     event.isCardProduction,
                     event.drawThenDiscard?event.drawDiscard?.discard:0,
+                    event.eventOrigin?.originValue??''
                 )
             )
         }

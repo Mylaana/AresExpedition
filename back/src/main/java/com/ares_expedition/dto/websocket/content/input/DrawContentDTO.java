@@ -11,15 +11,17 @@ public class DrawContentDTO extends BaseContentDTO{
     Integer thenDiscard;
     Boolean isCardProduction;
     List<String> firstCardProductionList;
+    String triggerOrigin;
 
     public DrawContentDTO(){
     }
 
-    public DrawContentDTO(Integer drawNumber, Integer eventId, Boolean isProductionDouble, List<String> firstCardProductionList){
+    public DrawContentDTO(Integer drawNumber, Integer eventId, Boolean isProductionDouble, List<String> firstCardProductionList, String triggerOrigin){
       this.drawNumber = drawNumber;
       this.eventId = eventId;
       this.isCardProduction = isProductionDouble;
       this.firstCardProductionList = firstCardProductionList;
+      this.triggerOrigin = triggerOrigin;
     }
 
     public Integer getDrawNumber() {
@@ -69,6 +71,16 @@ public class DrawContentDTO extends BaseContentDTO{
     public void setFirstCardProductionList(List<String> firstCardProductionList) {
       this.firstCardProductionList = firstCardProductionList;
     }
+
+    public String getTriggerOrigin() {
+      return triggerOrigin;
+    }
+
+    public void setTriggerOrigin(String triggerOrigin) {
+      this.triggerOrigin = triggerOrigin;
+    }
+
+    
 }
 
 interface PlayerMessageDrawQuery {

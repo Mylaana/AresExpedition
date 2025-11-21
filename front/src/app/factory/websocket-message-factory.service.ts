@@ -7,7 +7,7 @@ import { PlayerMessage } from "../interfaces/websocket.interface";
 import { v4 as uuidv4 } from 'uuid';
 import { GameContentName, MilestoneState, myUUID } from "../types/global.type";
 import { AwardsEnum, DeckQueryOptionsEnum, OceanBonusEnum } from "../enum/global.enum";
-import { OceanBonus, ScanKeep } from "../interfaces/global.interface";
+import { EventOrigin, OceanBonus, ScanKeep } from "../interfaces/global.interface";
 import { EventUnionSubTypes } from "../types/event.type";
 import { GameOption } from "../services/core-game/create-game.service";
 
@@ -15,7 +15,8 @@ interface DrawQueryOptions {
 	isCardProduction?: boolean
 	thenDiscard?: number,
 	isCardProductionDouble?: boolean
-	firstCardProductionList?: string[]
+	firstCardProductionList?: string[],
+	triggerOrigin?: string
 }
 
 @Injectable({
@@ -31,14 +32,14 @@ export class WebsocketQueryMessageFactory{
         return message
     }
     public static createDrawQuery(drawNumber: number, eventId: number, dto: PlayerStateDTO, queryOptions?: DrawQueryOptions): PlayerMessage {
-
         let query: WsDrawQuery = {
 			drawNumber:drawNumber,
 			eventId: eventId,
 			playerState: dto,
 			isCardProduction: queryOptions?.isCardProduction??false,
 			thenDiscard: queryOptions?.thenDiscard??0,
-			firstCardProductionList: queryOptions?.firstCardProductionList??[]
+			firstCardProductionList: queryOptions?.firstCardProductionList??[],
+			triggerOrigin: queryOptions?.triggerOrigin??''
 		}
         return this.generatePlayerMessage(MessageContentQueryEnum.drawQuery, query)
     }
@@ -156,7 +157,8 @@ export class WebsocketResultMessageFactory{
 			keep:content['keep'],
 			options: content['options'],
 			eventId: content['eventId'],
-			isCardProduction: content['isCardProduction']
+			isCardProduction: content['isCardProduction'],
+			triggerOrigin: content['triggerOrigin']
 		}
 	}
 	public static inputToGameOption(content: any): Partial<Record<GameContentName, boolean>> {

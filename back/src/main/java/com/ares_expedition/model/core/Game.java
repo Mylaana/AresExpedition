@@ -494,8 +494,8 @@ public class Game {
     }
 
 
-    public void addEventDrawCardsToPlayer(String playerId, List<String> cards, Integer thenDiscard, Boolean isCardProduction){
-        this.groupPlayerState.get(playerId).addEventDrawCards(cards, thenDiscard, isCardProduction);
+    public void addEventDrawCardsToPlayer(String playerId, List<String> cards, Integer thenDiscard, Boolean isCardProduction, String triggerOrigin){
+        this.groupPlayerState.get(playerId).addEventDrawCards(cards, thenDiscard, isCardProduction, triggerOrigin);
     }
 
     public void addEventResearchCardsToPlayer(String playerId, List<String> cards, Integer keep){

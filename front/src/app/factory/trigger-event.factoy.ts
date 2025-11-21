@@ -42,8 +42,7 @@ const S = EventFactory.simple
 	function handleTrigger_P16(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardType!='greenProject'){return []}
 		return [
-			S.draw(1),
-			S.discard(1, trigger)
+			S.drawThenDiscard(1, 1, trigger)
 		]
 	}
 	//Spinoff Department

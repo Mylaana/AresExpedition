@@ -22,6 +22,7 @@ export interface EventStateContentDrawResultDTO extends EventStateContentDTO {
 	cl: string[]
 	td: number
 	icp: boolean //is card production
+	to: string // trigger Origin
 }
 export interface EventStateContentDiscardDTO extends EventStateContentDTO {
 	d: number

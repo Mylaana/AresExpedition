@@ -53,7 +53,7 @@ export class EventGenericHandler implements GameEventHandler<EventGeneric> {
                 if(event.drawResultList===undefined){break}
                 this.gameStateFacade.addCardsToClientHand(event.drawResultList)
                 if(event.thenDiscard && event.thenDiscard>0){
-                    this.gameStateFacade.addEventQueue(EventFactory.simple.discard(event.thenDiscard), 'first')
+                    this.gameStateFacade.addEventQueue(EventFactory.simple.discard(event.thenDiscard, event.eventOrigin?.originValue), 'first')
                 }
                 break
             }

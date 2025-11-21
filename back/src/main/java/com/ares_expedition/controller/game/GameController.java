@@ -58,15 +58,10 @@ public class GameController {
         }
         return cards;
     }
-    public List<String> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer thenDiscard, Boolean isCardProduction, List<String> firstCardProduction){
+    public List<String> drawCards(String gameId, Integer drawNumber, String playerId, ContentQueryEnum reason, Integer thenDiscard, Boolean isCardProduction, List<String> firstCardProduction, String triggerOrigin){
         List<String> cards = cardsFromDeck(gameId, drawNumber, playerId);
         Game game = this.getGameFromId(gameId);
-        game.addEventDrawCardsToPlayer(playerId, cards, thenDiscard, isCardProduction);
-        /*if(isCardProduction){
-            game.addEventCardDoubleProduction(playerId, cards, firstCardProduction);
-        } else {
-        }
-            */
+        game.addEventDrawCardsToPlayer(playerId, cards, thenDiscard, isCardProduction, triggerOrigin);
         return cards;
     }
 

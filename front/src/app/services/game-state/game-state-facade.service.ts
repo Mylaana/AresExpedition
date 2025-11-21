@@ -503,6 +503,9 @@ export class GameStateFacadeService{
 			event.keepCardNumber = wsDrawResult.keep
 			event.isCardProduction = wsDrawResult.isCardProduction
             eventFound = true
+			event.triggerOrigin = wsDrawResult.triggerOrigin
+			
+			console.log(event)
             this.cleanAndNextDrawQueue()
             break
         }

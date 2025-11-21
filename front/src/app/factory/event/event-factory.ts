@@ -62,6 +62,7 @@ interface CreateEventOptionsDeckQuery {
 	scanKeepOptions?: DeckQueryOptionsEnum,
 	drawThenDiscard?: boolean,
 	firstProductionCardList?: string[]
+	eventOrigin?: EventOrigin
 }
 
 function draw(drawNumber: number=1): EventBaseModel {
@@ -73,8 +74,12 @@ function discard(discardNumber: number, triggerOrigin?:string): EventComplexCard
 		eventOrigin:{originType:'cardCode', originValue:triggerOrigin??''}
 	})
 }
-function drawThenDiscard(drawNumber: number, discard: number): EventBaseModel {
-	return EventFactory.createDeckQueryEvent('drawThenDiscard', {drawDiscard:{draw:drawNumber,discard:discard}, drawThenDiscard: true})
+function drawThenDiscard(drawNumber: number, discard: number, triggerOrigin?:string): EventBaseModel {
+	return EventFactory.createDeckQueryEvent('drawThenDiscard', {
+		drawDiscard:{draw:drawNumber,discard:discard},
+		drawThenDiscard: true,
+		eventOrigin: {originType:'cardCode', originValue:triggerOrigin??''}
+	})
 }
 function discardOptions(discardNumber: number, treshold: MinMaxEqualType, discardOptions: DiscardOptionsEnum, eventOrigin?: string): EventComplexCardSelector {
 	return EventFactory.createCardSelectorComplex("discardCards", {
@@ -329,10 +334,11 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 	event.setSelectorInitialState(args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true})
 	event.lockSellButton = true
 	event.lockRollbackButton = true
+	event.eventOrigin = args?.eventOrigin
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
-	console.log(event)
+	console.trace(event)
 
 	return event
 }
@@ -635,6 +641,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
             event.drawResultList = args?.drawEventResult
             event.waiterId = args?.waiterId
 			event.thenDiscard = args?.thenDiscard??0
+			event.eventOrigin = args?.eventOrigin
             break
 		}
         case('effectPortal'):{
@@ -665,7 +672,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 	}
     return event
 }
-function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptionsDeckQuery ) : EventDeckQuery {
+function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptionsDeckQuery) : EventDeckQuery {
     let event = new EventDeckQuery
 
     event.subType = subType
@@ -687,6 +694,8 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
 		case('drawThenDiscard'):{
 			event.drawDiscard = args?.drawDiscard
 			event.drawThenDiscard = true
+			event.eventOrigin = args?.eventOrigin
+			console.log(event)
 			break
 		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}

@@ -17,7 +17,7 @@ public class PlayerEventState {
 
     public PlayerEventState(PlayerEventStateDTO playerStateDTO){
         for(EventStateDTO dto: playerStateDTO.getEvents()){
-            this.events.add(new EventState(dto));
+            this.events.addFirst(new EventState(dto));
         }
     }
 
@@ -30,33 +30,37 @@ public class PlayerEventState {
     }
 
     public void addEvent(EventState event) {
-        this.events.add(event);
+        this.events.addFirst(event);
     }
 
     public void addEventOceans(List<Ocean> oceans) {
         for(Ocean ocean: oceans){
-            this.events.add(new EventState(ocean));
+            this.events.addFirst(new EventState(ocean));
         }
     }
 
     public void addEventDrawCards(List<String> cards, Integer thenDiscard, Boolean isCardProduction) {
-        this.events.add(EventState.addEventDrawCards(cards, thenDiscard, isCardProduction));
+        this.events.addFirst(EventState.addEventDrawCards(cards, thenDiscard, isCardProduction));
+    }
+
+    public void addEventDrawCards(List<String> cards, Integer thenDiscard, Boolean isCardProduction, String triggerOrigin) {
+        this.events.addFirst(EventState.addEventDrawCards(cards, thenDiscard, isCardProduction, triggerOrigin));
     }
 
     public void addEventResearchCards(List<String> cards, Integer keep) {
-        this.events.add(EventState.addEventResearchCards(cards, keep));
+        this.events.addFirst(EventState.addEventResearchCards(cards, keep));
     }
 
     public void addEventScanKeepCards(List<String> cards, Integer keep, ScanKeepOptionsEnum options) {
-        this.events.add(EventState.addEventScanKeepCards(cards, keep, options));
+        this.events.addFirst(EventState.addEventScanKeepCards(cards, keep, options));
     }
 
     public void addEventProductionCards(List<String> cards) {
-        this.events.add(EventState.addEventProductionCards(cards));
+        this.events.addFirst(EventState.addEventProductionCards(cards));
     }
 
     public void addEventCardProductionDouble(List<String> cards, List<String> firstCardProduction) {
-        this.events.add(EventState.addEventCardProductionDouble(cards, firstCardProduction));
+        this.events.addFirst(EventState.addEventCardProductionDouble(cards, firstCardProduction));
     }
 
     public PlayerEventStateDTO toJson() {

@@ -44,4 +44,8 @@ public class DrawMessageDTO extends BaseMessageInputDTO<DrawContentDTO> {
     public List<String> getFirstCardProductionList(){
         return this.content.getFirstCardProductionList();
     }
+
+    public String getTriggerOrigin(){
+        return this.content.getTriggerOrigin();
+    }
 }

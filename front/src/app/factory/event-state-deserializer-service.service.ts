@@ -38,7 +38,6 @@ export class EventStateDeserializerService{
 	public loadFromJson(event: EventBaseModel, dto: EventStateDTO, clientState: PlayerStateModel) {
 		switch(dto.t){
 			case(EventStateTypeEnum.builderConstructionLocked):case(EventStateTypeEnum.builderDevelopemntLocked):{
-				console.log(dto)
 				let content = toContentDto<EventStateBuilderContentDTO>(dto.v);
 				let eventBuilder: EventCardBuilder = event as EventCardBuilder
 				for(let i=0; i<content.s.length; i++){
@@ -99,7 +98,8 @@ export class EventStateDeserializerService{
 					let content: EventStateContentDrawResultDTO =  {
 						cl: state.v['cardIdList'],
 						td: state.v['thenDiscard'],
-						icp: state.v['isCardProduction']
+						icp: state.v['isCardProduction'],
+						to: state.v['triggerOrigin']
 					}
 					if(content.td===0){
 						newEvents.push(EventFactory.createGeneric('drawResult', {
@@ -107,7 +107,11 @@ export class EventStateDeserializerService{
 							isCardProduction: content.icp
 						}))
 					} else{
-						newEvents.push(EventFactory.createGeneric('drawResultThenDiscard', {drawEventResult:content.cl, thenDiscard: content.td}))
+						newEvents.push(EventFactory.createGeneric('drawResultThenDiscard', {
+							drawEventResult:content.cl,
+							thenDiscard:content.td,
+							eventOrigin: {originType:'cardCode', originValue:content.to}
+						}))
 					}
 					break
 				}

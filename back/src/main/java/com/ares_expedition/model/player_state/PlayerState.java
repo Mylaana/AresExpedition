@@ -310,6 +310,10 @@ public class PlayerState {
         this.eventState.addEventDrawCards(cards, thenDiscard, isCardProduction);
     }
 
+    public void addEventDrawCards(List<String> cards, Integer thenDiscard, Boolean isCardProduction, String triggerOrigin){
+        this.eventState.addEventDrawCards(cards, thenDiscard, isCardProduction, triggerOrigin);
+    }
+
     public void addEventResearchCards(List<String> cards, Integer keep){
         this.eventState.addEventResearchCards(cards, keep);
     }

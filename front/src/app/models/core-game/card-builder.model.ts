@@ -1,6 +1,7 @@
 import { BuilderOption } from "../../enum/global.enum"
 import { BuilderStatusDTO } from "../../interfaces/event-state.interface"
 import { EventCardBuilderButtonNames, NonEventButtonNames } from "../../types/global.type"
+import { Utils } from "../../utils/utils"
 import { PlayableCardModel } from "../cards/project-card.model"
 import { EventCardBuilderButton } from "./button.model"
 
@@ -124,6 +125,7 @@ export class CardBuilder {
     }
     isEligibleForNext(): boolean {
         if(this.alternativeOptionUsed.length!=0){return false}
+        if(this.selectedCard && this.getBuilderIsLocked()){return false}
         return true
     }
     getIndex(): number {

@@ -202,9 +202,9 @@ public class InputRouter {
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), thenDiscard, isCardProduction, query.getFirstCardProductionList());
+        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), thenDiscard, isCardProduction, query.getFirstCardProductionList(), query.getTriggerOrigin());
         wsOutput.sendPushToPlayer(
-            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId(), thenDiscard, isCardProduction, query.getFirstCardProductionList())),
+            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId(), thenDiscard, isCardProduction, query.getFirstCardProductionList(), query.getTriggerOrigin())),
             query.getPlayerId()
             );
     }

@@ -365,6 +365,7 @@ export class DrawEvent {
 	scanKeepOptions?: DeckQueryOptionsEnum
 	discardAfterDraw?: number
 	firstCardProduction?: string []
+    triggerOrigin?: string
 }
 
 export class EventPhase extends EventBaseModel {
