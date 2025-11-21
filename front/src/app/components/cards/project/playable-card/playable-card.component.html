@@ -49,7 +49,10 @@
 							[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
 							[prerequisiteSummary]="projectCard.getPrerequisiteSummary()"
 							[prerequisiteText]="projectCard.getPrerequisiteText()"
-							[cardSize]="cardSize">
+							[cardSize]="cardSize"
+							[projectCard]="projectCard"
+							[refreshRequirements]="!isParentListExcludedFromRequirementCheck()"
+							[playerState]="_playerState">
 						</app-card-prerequisite>
 						<ng-container *ngIf="projectCard.hasPlayedText()">
 							<app-card-played-info

@@ -75,8 +75,8 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	@Input() authorizeSelection: boolean = false
 	@Input() checkCostSelector: boolean = false
 	private megacreditAvailable: number = 0
-	private playerState!: PlayerStateModel
-
+	
+	_playerState!: PlayerStateModel
 	_hovered: boolean = false
 	_activationCostPayable: boolean = false
 	_hasScalingProduction: boolean = false
@@ -127,7 +127,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 
 		// set playerstate as notClientstate so it can display scaled vp on other players played cards
 		if(this.notClientState){
-			this.playerState = this.notClientState
+			this._playerState = this.notClientState
 			this.updateVpScalingServiceState()
 			return
 		}
@@ -175,7 +175,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 	private updateplayerState(state: PlayerStateModel): void {
 		if(!state){return}
-		this.playerState = state
+		this._playerState = state
 		this.projectCardCostService.onClientStateUpdate(state)
 		this.updateVpScalingServiceState()
 		this.updateDiscount()
@@ -210,6 +210,10 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		let excluded: ProjectListType[] = ['none', 'builderSelectedZone', 'hand', 'played', 'statsRoute']
 		return excluded.includes(this.parentListType)
 	}
+	public isParentListExcludedFromRequirementCheck(): boolean {
+		let excluded: ProjectListType[] = ['none', 'builderSelectedZone', 'played', 'statsRoute']
+		return excluded.includes(this.parentListType)
+	}
 	public isSelectable(): boolean {
 		if(this.isDisabled()){return false}
 		if(this.authorizeSelection===false){return false}
@@ -223,13 +227,13 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		if(!this.projectCard.scalingVp){return}
 		let authorized: ProjectListType[] = ['hand', 'builderSelector', 'builderSelectedZone', 'played', 'playedSelector']
 		if(!authorized.includes(this.parentListType)){return}
-		this.projectCardVpService.updatePlayerState(this.playerState)
+		this.projectCardVpService.updatePlayerState(this._playerState)
 	}
 	public isRepeatProduction(): boolean {
 		return this.parentListSubType==='repeatProduction'
 	}
 	public getRepeatProductionCaption(): string {
-		return PlayableCard.getRepeatProductionCaption(this.projectCard.cardCode, this.playerState)
+		return PlayableCard.getRepeatProductionCaption(this.projectCard.cardCode, this._playerState)
 	}
 	public selectFromParent(){
 		this.setSelection(true)
