@@ -28,6 +28,7 @@ public class PlayerPhaseCardStateDTO {
     private Boolean secondProductionCollected;
     @JsonProperty("rbc")
     private Boolean researchBonusCollected;
+
     @JsonProperty("pcl")
     private List<String> producedCardList;
     @JsonProperty("pr")
@@ -47,7 +48,7 @@ public class PlayerPhaseCardStateDTO {
         actionBonusCollected = state.getActionBonusCollected();
         firstProductionCollected = state.getFirstProductionCollected();
         secondProductionCollected = state.getSecondProductionCollected();
-        researchBonusCollected = state.getActionBonusCollected();
+        researchBonusCollected = state.getResearchBonusCollected();
         producedCardList = state.getProducedCardList();
         producedResources = state.getProducedResources();
     }

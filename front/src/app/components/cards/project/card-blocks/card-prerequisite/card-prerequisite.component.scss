@@ -91,6 +91,8 @@ img{
 .background-box-color{
 	height: 100%;
 	flex: 1;
+	opacity: 70%;
+	border-right: black solid 1px;
 	&.purple{
 		background-color: purple;
 	}
@@ -102,5 +104,8 @@ img{
 	}
 	&.white{
 		background-color: white;
+	}
+	&.last{
+		border: 0;
 	}
 }

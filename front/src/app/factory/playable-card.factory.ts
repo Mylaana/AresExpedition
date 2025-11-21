@@ -5,12 +5,14 @@ import { ActivationOption } from "../types/project-card.type";
 import { DEBUG_IGNORE_PREREQUISITES } from "../global/global-const";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventCardBuilderButtonNames, NonEventButtonNames, StandardProjectButtonNames } from "../types/global.type";
-import { ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS, PLAY_REQUIREMENTS } from "../maps/playable-card-other-maps";
+import { ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS } from "../maps/playable-card-other-maps";
 import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION_NO_COST, ACTIVATION_SCALING_EFFECT_CAPTION, ACTIVATION_SCALING_EFFECT_VALUE } from "../maps/playable-card-activation-maps";
 import { STANDARD_PROJECT_CAPTION, STANDARD_PROJECT_COST } from "../maps/standard-project-maps";
 import { SCALING_PRODUCTION } from "../maps/playable-card-scaling-production-maps";
 import { ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS } from "../maps/card-builder-maps";
 import { TRIGGER_PRIORITY_DEFAULT_VALUE, TRIGGER_PRIORITY_MAP } from "../maps/trigger-priority-maps";
+import { PLAY_REQUIREMENTS_INTERFACE, PLAY_REQUIREMENTS_OK } from "../maps/playable-card-onplay-requirements-maps";
+import { CardRequirements } from "../interfaces/card.interface";
 
 function getOnPlayedEvents(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 	return PLAY_EVENTS[cardCode]?.(clientstate)
@@ -67,7 +69,7 @@ const PlayableCardPrerequisite = {
 	canBePlayed(card: PlayableCardModel, clientState: PlayerStateModel): boolean {
 		if (DEBUG_IGNORE_PREREQUISITES) return true
 
-		const checkFn = PLAY_REQUIREMENTS[card.cardCode]
+		const checkFn = PLAY_REQUIREMENTS_OK[card.cardCode]
 		return checkFn ? checkFn(clientState) : true
 	},
 	canBeActivated(card: PlayableCardModel, clientState: PlayerStateModel, activationOption: ActivationOption = 1): boolean {
@@ -77,6 +79,9 @@ const PlayableCardPrerequisite = {
 	},
 	canBeAlternativePaid(name: NonEventButtonNames, clientState: PlayerStateModel): boolean {
 		return ALTERNATIVE_PAY_REQUIREMENTS[name]?.(clientState) ?? false
+	},
+	getRequirements(cardCode: string): CardRequirements | undefined{
+		return PLAY_REQUIREMENTS_INTERFACE[cardCode]??undefined
 	}
 }
 function calculateCostModFromTrigger(triggerCode: string, card: PlayableCardModel, clientState: PlayerStateModel): number {

@@ -174,8 +174,10 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		return this.getPhaseCards()[3].phaseType === 'production_1mc_activate_card'
 	}
 	private resolveResearch(): void {
+		console.log('collected bonus research value on entering resolve research :',this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.research))
 		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.research)){return}
 		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.research, true)
+
 		let baseScanKeep: ScanKeep = {scan:2,keep:1}
 		let clientState = this.gameStateFacade.getClientState()
 		let modScanKeep: ScanKeep = clientState.getResearch()
@@ -206,6 +208,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 	private resolveAction(): void {
 		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.action)){return}
 		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.action, true)
+		console.log('collected bonus research value on entering resolve ACTION :',this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.research))
 		
 		let activatorEvent = EventFactory.createCardActivator('actionPhaseActivator')
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.action)){

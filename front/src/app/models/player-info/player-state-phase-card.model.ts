@@ -65,7 +65,7 @@ export class PlayerPhaseCardStateModel {
 	getPhaseSelected(): SelectablePhaseEnum { return this.selectedPhase}
 	setPhaseSelected(selection: SelectablePhaseEnum): void {this.selectedPhase = selection}
 	getPreviousPhaseSelected(): SelectablePhaseEnum { return this.previousSelectedPhase}
-	setPreviousPhaseSelected(selection: SelectablePhaseEnum): void {console.trace('set PREVIOUS phase selected',selection); this.previousSelectedPhase = selection}
+	setPreviousPhaseSelected(selection: SelectablePhaseEnum): void {this.previousSelectedPhase = selection}
 	getPhaseCards(onlyUpgraded: boolean):  PhaseCardModel[] {
 		let cards: PhaseCardModel[] = []
 		for(let group of this.phaseGroups){
