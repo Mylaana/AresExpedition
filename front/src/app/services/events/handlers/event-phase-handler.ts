@@ -9,10 +9,10 @@ import { PhaseCardModel } from "../../../models/cards/phase-card.model";
 import { BuilderType } from "../../../types/phase-card.type";
 import { Logger } from "../../../utils/utils";
 import { RessourceType } from "../../../types/global.type";
+import { DeckQueryOptionsEnum } from "../../../enum/global.enum";
 
 @Injectable()
 export class EventPhaseHandler implements GameEventHandler<EventPhase> {
-    private currentUpgradedPhaseCards!: PhaseCardModel[]
 
     constructor(
         private gameStateFacade: GameStateFacadeService,
@@ -39,7 +39,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
         Logger.logEventResolution('resolving event: ','finishEventPhase', event.subType)
 
         switch(event.subType){
-            case('developmentPhase'):case('constructionPhase'):case('researchPhase'):{
+            case('developmentPhase'):case('constructionPhase'):case('actionPhase'):case('researchPhase'):{
                 break
             }
             case('productionPhase'):{
@@ -52,23 +52,18 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
     private getPhaseCards(): PhaseCardModel[] {
 		return this.gameStateFacade.getClientPhaseCards(true)
 	}
-	private refreshCurrentUpgradedPhaseCard(): void {
-		this.currentUpgradedPhaseCards = this.getPhaseCards()
-	}
 	private shouldReceivePhaseCardSelectionBonus(phaseResolved: SelectablePhaseEnum): boolean {
 		return this.gameStateFacade.getClientCurrentSelectedPhase()===phaseResolved
 	}
 	private resolveDevelopment(): void {
-		this.refreshCurrentUpgradedPhaseCard()
-		let builderType: BuilderType = this.currentUpgradedPhaseCards[0].phaseType as BuilderType
+		let builderType: BuilderType = this.getPhaseCards()[0].phaseType as BuilderType
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.development)){
 			builderType = 'developmentAbilityOnly'
 		}
 		this.gameStateFacade.addEventQueue(EventFactory.createCardBuilder('developmentPhaseBuilder',builderType),'second')
 	}
 	private resolveConstruction(): void {
-		this.refreshCurrentUpgradedPhaseCard()
-		let builderType: BuilderType = this.currentUpgradedPhaseCards[1].phaseType as BuilderType
+		let builderType: BuilderType = this.getPhaseCards()[1].phaseType as BuilderType
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.construction)){
 			builderType = 'constructionAbilityOnly'
 		}
@@ -88,7 +83,6 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.production)===true){return}
 		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.production, true)
 
-		this.refreshCurrentUpgradedPhaseCard()
 
 		let clientState = this.gameStateFacade.getClientState()
 		let production: RessourceStock[] = []
@@ -165,7 +159,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.production)){return 0}
 
 		let bonus: number = 0
-		let productionPhaseCard = this.currentUpgradedPhaseCards[3]
+		let productionPhaseCard = this.getPhaseCards()[3]
 
 		switch(productionPhaseCard.phaseType){
 			case('production_base'):{bonus=4;break}
@@ -180,7 +174,8 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		return this.getPhaseCards()[3].phaseType === 'production_1mc_activate_card'
 	}
 	private resolveResearch(): void {
-		this.refreshCurrentUpgradedPhaseCard()
+		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.research)){return}
+		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.research, true)
 		let baseScanKeep: ScanKeep = {scan:2,keep:1}
 		let clientState = this.gameStateFacade.getClientState()
 		let modScanKeep: ScanKeep = clientState.getResearch()
@@ -199,7 +194,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.research)){return {scan:0, keep:0}}
 
 		let bonus: ScanKeep = {scan:0, keep:0}
-		let researchPhaseCard = this.currentUpgradedPhaseCards[4]
+		let researchPhaseCard = this.getPhaseCards()[4]
 
 		switch(researchPhaseCard.phaseType){
 			case('research_base'):{bonus={scan:3, keep:1};break}
@@ -209,15 +204,18 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		return bonus
 	}
 	private resolveAction(): void {
+		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.action)){return}
+		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.action, true)
+		
 		let activatorEvent = EventFactory.createCardActivator('actionPhaseActivator')
-		this.refreshCurrentUpgradedPhaseCard()
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.action)){
 			this.gameStateFacade.addEventQueue(activatorEvent,'first')
 			return
 		}
-
+		
 		let events: EventBaseModel[] = []
-		let actionPhaseCard = this.currentUpgradedPhaseCards[2]
+		let actionPhaseCard = this.getPhaseCards()[2]
+		console.log(actionPhaseCard)
 		switch(actionPhaseCard.phaseType){
 			case('action_base'):{
 				activatorEvent.doubleActivationMaxNumber = 1
@@ -225,6 +223,8 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 				break
 			}
 			case('action_scan_cards'):{
+				events.push(EventFactory.simple.scanKeep({scan:3, keep:1}, DeckQueryOptionsEnum.actionPhaseScan))
+				
 				activatorEvent.doubleActivationMaxNumber = 1
 				activatorEvent.hasScan = true
 				events.push(activatorEvent)

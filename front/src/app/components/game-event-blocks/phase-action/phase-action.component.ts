@@ -62,7 +62,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 		this._buyMine = this.actionPhaseService.getButton('buyMine')
 
 		this._actionEvent = this.event as EventCardActivator
-		this.applyPhaseCardBonusIfRelevant()
 		window.scroll({top:0})
 	}
 	ngOnDestroy(): void {
@@ -71,8 +70,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 	}
 	applyPhaseCardBonusIfRelevant() {
 		if(this._actionEvent.hasScan===false || this._actionEvent.scanUsed){return}
-		this._actionEvent.scanUsed=true
-		this.gameStateService.addEventQueue(EventFactory.simple.scanKeep({scan:3, keep:1}, DeckQueryOptionsEnum.actionPhaseScan), 'first')
 	}
 	onClick(button: NonEventButton): void {
 		this.actionPhaseService.onButtonClicked(button.name as StandardProjectButtonNames)

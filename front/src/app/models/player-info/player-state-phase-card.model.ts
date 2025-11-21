@@ -43,8 +43,11 @@ export class PlayerPhaseCardStateModel {
 		
 		//load bonus collected from json
 		this.constructionBonusCollected = dto.cbc
+		this.actionBonusCollected = dto.abc
 		this.productionCollected = dto.fpc
 		this.secondProductionCollected = dto.spc
+		this.researchBonusCollected = dto.rbc
+
 		this.cardsProducedThisRound = dto.pcl
 		this.resourcesProducedThisRound = dto.pr
 	}

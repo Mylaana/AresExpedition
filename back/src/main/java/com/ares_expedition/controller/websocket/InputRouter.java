@@ -229,10 +229,7 @@ public class InputRouter {
     }
 
     private void handleResearch(ScanKeepMessageDTO query){
-        if(this.gameController.isResearchResolved(query.getGameId(), query.getPlayerId())){
-            return;
-        }
-        
+
         Integer scan = query.getScan();
         Integer keep = query.getKeep();
         if (scan == 0) {

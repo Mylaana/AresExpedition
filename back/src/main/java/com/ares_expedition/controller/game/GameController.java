@@ -76,7 +76,6 @@ public class GameController {
 
         switch(reason){
             case RESEARCH_QUERY :
-                game.setResearchResolved(playerId, cards, keep);
                 game.addEventResearchCardsToPlayer(playerId, cards, keep);
                 break;
             case SCAN_KEEP_QUERY :
@@ -104,7 +103,7 @@ public class GameController {
         game.setAllPlayersNotReady();
         game.applyGlobalParameterIncreaseEop();
         game.fillDiscardPileFromPlayerDiscard();
-        game.resetResearchResolved();
+        //game.resetResearchResolved();
         game.claimMilestones();
         game.updateProgression();
         if(game.isGameOver()){
@@ -234,9 +233,11 @@ public class GameController {
         wsOutput.sendPushToPlayer(MessageOutputFactory.createOceanFlippedMessage(gameId, oceans, cardsToDraw), playerId);
     }
 
+    /*
     public Boolean isResearchResolved(String gameId, String playerId) {
         return getGameFromId(gameId).isResearchResolved(playerId);
     }
+    */
     public void cleanupOldGames() {
         logger.warn("\u001B[32m ------------ Scheduler - Old game cleanup ------------ \u001B[0m");
         Integer gamesCountBeforeCleaning = gameHolder.size();

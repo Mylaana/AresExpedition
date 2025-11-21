@@ -8,7 +8,6 @@ import com.ares_expedition.dto.websocket.content.player_state.subclass.PlayerPha
 import com.ares_expedition.dto.websocket.content.player_state.subclass.substates.PhaseCardDTO;
 import com.ares_expedition.enums.game.PhaseEnum;
 import com.ares_expedition.model.player_state.subclass.substates.PhaseCard;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlayerPhaseCardState {
     private List<PhaseCard> phaseCards = new ArrayList<PhaseCard>();

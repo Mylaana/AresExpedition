@@ -493,19 +493,6 @@ public class Game {
         }
     }
 
-    public Boolean isResearchResolved(String playerId){
-        return this.groupPlayerState.get(playerId).isResearchResolved();
-    }
-
-    public void setResearchResolved(String playerId, List<String> cardList, Integer keep){
-        this.groupPlayerState.get(playerId).setResearchResolved(cardList, keep);
-    }
-
-    public void resetResearchResolved() {
-        for(Entry<String, PlayerState> entry: groupPlayerState.entrySet()){
-            entry.getValue().resetResearchResolved();
-        }
-    }
 
     public void addEventDrawCardsToPlayer(String playerId, List<String> cards, Integer thenDiscard, Boolean isCardProduction){
         this.groupPlayerState.get(playerId).addEventDrawCards(cards, thenDiscard, isCardProduction);
