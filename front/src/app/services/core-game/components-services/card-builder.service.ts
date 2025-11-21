@@ -77,6 +77,7 @@ export class CardBuilderService{
     }
     public onCardBuilderButtonClicked(button: EventCardBuilderButton, nonCurrentBuilder?: CardBuilder){
         this.builderButtonCommand$.next({buttonName: button.name, commandType: 'base', builderIndex:nonCurrentBuilder?.getIndex()})
+        this.notifyRecalculateSelector$.next()
     }
     public onAlternativePayButtonClicked(button: NonEventButton){
         this.builderButtonCommand$.next({buttonName: button.name, commandType: 'alternativePay'})
@@ -85,16 +86,6 @@ export class CardBuilderService{
     public onAlternativeOptionButtonClicked(button: NonEventButton, builder: CardBuilder){
         this.builderButtonCommand$.next({buttonName: button.name, builderIndex: builder.getIndex(), commandType: 'alternativeOption'})
     }
-    /*
-    private checkIfComplete() {
-        if(!this._currentEvent){return}
-        if(this._currentEvent.isComplete()){
-            this.builderIsComplete$.next(true)
-        } else {
-            this.notifyRecalculateSelector$.next()
-        }
-    }
-    */
     public notifyRecalculateSelector(){
         this.notifyRecalculateSelector$.next()
     }
