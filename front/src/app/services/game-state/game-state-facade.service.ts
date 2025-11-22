@@ -67,6 +67,7 @@ export class GameStateFacadeService{
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
 	private round = new BehaviorSubject<number>(0)
 	private cardProduction = new BehaviorSubject<string[]>([])
+	private resourceProduction = new BehaviorSubject<RessourceStock[]>([])
 	private deck = new BehaviorSubject<number>(0)
 	private discard = new BehaviorSubject<number>(0)
 
@@ -85,6 +86,7 @@ export class GameStateFacadeService{
 	currentAwards = this.awards.asObservable()
 	currentRound = this.round.asObservable()
 	currentCardProduction = this.cardProduction.asObservable()
+	currentResourceProduction = this.resourceProduction.asObservable()
 	currentDeck = this.deck.asObservable()
 	currentDiscard = this.discard.asObservable()
 
@@ -780,11 +782,16 @@ export class GameStateFacadeService{
 		}
 		if(resources.length>0){
 			newEvents.push(EventFactory.simple.addRessource(resources))
-			clientState.addProductionResourcesObtainedThisRound(resources)
+			this.addProducedResourcesThisRound(resources)
 		}
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents, 'first')
 		}
+	}
+	addProducedResourcesThisRound(resources: RessourceStock[]){
+		let clientState = this.getClientState()
+		clientState.addProductionResourcesGainedThisRound(resources)
+		this.resourceProduction.next(clientState.getProductionResourcesGainedThisRound())
 	}
 	private getFlatDoubleProduction(card: PlayableCardModel): RessourceStock[] {
 		let playEvents: EventGeneric[] | undefined = PlayableCard.getOnPlayedEvents(card.cardCode, this.getClientState())
@@ -876,6 +883,5 @@ export class GameStateFacadeService{
 	}
 	getPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction'): boolean {return this.getClientState().getPhaseBonusCollected(phase)}
 	setPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction', collected: boolean) {this.getClientState().setPhaseBonusCollected(phase, collected)}
-	addProductionResourcesObtainedThisRound(resources: RessourceStock[]){this.getClientState().addProductionResourcesObtainedThisRound(resources)}
 	addProductionCardsObtainedThisRound(cards: string[]){this.getClientState().addProductionCardsObtainedThisRound(cards)}
 }

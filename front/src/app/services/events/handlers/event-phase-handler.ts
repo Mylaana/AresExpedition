@@ -116,7 +116,6 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		event.productionMegacreditFromPhaseCard = this.getProductionPhaseCardSelectionBonus()
 
 		newEvents = this.generateProductionEvents(production)
-		console.log(newEvents)
 		if(newEvents.length===0){return}
 		this.gameStateFacade.addEventQueue(newEvents, 'first')
 	}
@@ -143,7 +142,7 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 
 		if(production.length>0){
 			newEvents.push(EventFactory.createGeneric('addRessourceToPlayer', {baseRessource: production}))
-			this.gameStateFacade.addProductionResourcesObtainedThisRound(production)
+			this.gameStateFacade.addProducedResourcesThisRound(production)
 		}
 		if(cardProduction){
 			newEvents.push(EventFactory.createDeckQueryEvent('drawQuery',

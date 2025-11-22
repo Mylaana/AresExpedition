@@ -7,6 +7,7 @@ import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { EventBaseModel, EventPhase } from '../../../models/core-game/event.model';
 import { CommonModule } from '@angular/common';
 import { ProjectCardInfoService } from '../../../services/cards/project-card-info.service';
+import { RessourceStock } from '../../../interfaces/global.interface';
 
 @Component({
     selector: 'app-phase-production',
@@ -26,12 +27,15 @@ export class PhaseProductionComponent implements OnInit, OnDestroy{
 	){}
 	clientPlayerState!: PlayerStateModel;
 	_productionCardList: PlayableCardModel[] = []
+	_productionResourceList: RessourceStock[] = []
 	_phaseMegacreditProduction!: number
 	private destroy$ = new Subject<void>()
 
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateState(state))
 		this.gameStateService.currentCardProduction.pipe(takeUntil(this.destroy$)).subscribe(cards => this._productionCardList =  this.cardInfoService.getProjectCardList(cards))
+		this.gameStateService.currentResourceProduction.pipe(takeUntil(this.destroy$)).subscribe(prod => this._productionResourceList = prod)
+
 
 		let e = this.event as EventPhase
 		this._phaseMegacreditProduction = e.productionMegacreditFromPhaseCard??0
@@ -43,16 +47,7 @@ export class PhaseProductionComponent implements OnInit, OnDestroy{
 	updateState(state: PlayerStateModel): void {
 		this.clientPlayerState = state
 	}
-	/*
-	updateCardList(event: EventPhase){
-		this._productionCardList = event.productionCardList??[]
-	}*/
 	getProduction(index: number): number {
-		if(index>0){
-			return this.clientPlayerState.getRessourceInfoFromId(index)?.valueProd??0
-		}
-		let megacredit = this.clientPlayerState.getRessourceInfoFromId(0)?.valueProd??0
-		megacredit += this.clientPlayerState.getTR() + this._phaseMegacreditProduction
-		return megacredit
+		return this._productionResourceList[index].valueStock
 	}
 }

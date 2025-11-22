@@ -201,7 +201,8 @@ export class PlayerStateModel {
 	getPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction'): boolean {return this.phaseCardState.getPhaseBonusCollected(phase)}
 	setPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction', collected: boolean){this.phaseCardState.setPhaseBonusCollected(phase, collected)}
 	resetAllPhaseActivationBonusCollected(){this.phaseCardState.resetAllPhaseActivationBonusCollected()}
-	addProductionResourcesObtainedThisRound(resources: RessourceStock[]){this.phaseCardState.addProductionResourcesObtainedThisRound(resources)}
+	addProductionResourcesGainedThisRound(resources: RessourceStock[]){this.phaseCardState.addProductionResourcesGainedThisRound(resources)}
+	getProductionResourcesGainedThisRound(): RessourceStock[] {return this.phaseCardState.getProductionResourcesGainedThisRound()}
 	addProductionCardsObtainedThisRound(cards: string[]){this.phaseCardState.addProductionCardsObtainedThisRound(cards)}
 	getProductionCardObtainedThisRound(): string[] {return this.phaseCardState.getProductionCardsObtainedThisRound()}
 
