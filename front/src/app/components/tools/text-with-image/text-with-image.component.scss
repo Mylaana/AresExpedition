@@ -70,13 +70,24 @@
 	width: 100%;
 	&.small{
 		height: calc(var(--twi-effect-summary-image-height--small) + 3px);
+		& > p {
+			position: relative;
+			top: -3px;
+		}
 	}
 	&.medium{
 		height: var(--twi-effect-summary-image-height--medium);
 	}
+	& > img {
+		vertical-align: top;
+	}
 	& > .wrapper-megacredit{
 		position: relative;
 		text-align: center;
+		vertical-align: top;
+		&.small{
+			top: -3px;
+		}
 		& > p {
 			&.small{
 				left: var(--twi-megacredit-text-offset-left--small);
