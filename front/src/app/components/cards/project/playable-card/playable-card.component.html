@@ -51,7 +51,7 @@
 							[prerequisiteText]="projectCard.getPrerequisiteText()"
 							[cardSize]="cardSize"
 							[projectCard]="projectCard"
-							[refreshRequirements]="!isParentListExcludedFromRequirementCheck()"
+							[listType]="parentListType"
 							[playerState]="_playerState">
 						</app-card-prerequisite>
 						<ng-container *ngIf="projectCard.hasPlayedText()">

@@ -210,10 +210,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		let excluded: ProjectListType[] = ['none', 'builderSelectedZone', 'hand', 'played', 'statsRoute']
 		return excluded.includes(this.parentListType)
 	}
-	public isParentListExcludedFromRequirementCheck(): boolean {
-		let excluded: ProjectListType[] = ['none', 'builderSelectedZone', 'played', 'statsRoute']
-		return excluded.includes(this.parentListType)
-	}
 	public isSelectable(): boolean {
 		if(this.isDisabled()){return false}
 		if(this.authorizeSelection===false){return false}

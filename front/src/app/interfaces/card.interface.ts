@@ -1,5 +1,5 @@
 import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../enum/global.enum"
-import { AdvancedRessourceType, MinMaxEqualType } from "../types/global.type"
+import { AdvancedRessourceType, MinMaxEqualType, MoonTileType, TagType } from "../types/global.type"
 import { SummaryType, PrerequisiteTresholdType, PrerequisiteType, LocalizedText, CardType, CardTypeUndefined } from "../types/project-card.type"
 import { AdvancedRessourceStock } from "./global.interface"
 
@@ -75,6 +75,5 @@ export interface CardStats {
 export interface CardRequirements {
 	globalParameter?: GlobalParameterNameEnum
 	globalParameterColor?: GlobalParameterColorEnum
-	requirementQuantity?: number
 	treshold: MinMaxEqualType
 }

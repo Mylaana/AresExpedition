@@ -26,15 +26,6 @@
 	}
 	border: grey solid 1px;
 }
-/*
-.prerequisite-ok{
-		border-color: var(--color-ares-green-dark0);
-		//border-width: 2px;
-}
-.prerequisite-ko{
-		border-color: var(--color-ares-red-dark);
-}
-*/
 .wrapper-prerequisite-summary{
 	z-index: 2;
 	position: relative;
@@ -93,7 +84,7 @@ img{
 	height: 100%;
 	flex: 1;
 	opacity: 70%;
-	border-right: black solid 1px;
+	border-right: grey solid 1px;
 	&.purple{
 		background-color: purple;
 	}
