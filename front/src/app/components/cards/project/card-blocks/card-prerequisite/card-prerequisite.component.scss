@@ -26,6 +26,15 @@
 	}
 	border: grey solid 1px;
 }
+/*
+.prerequisite-ok{
+		border-color: var(--color-ares-green-dark0);
+		//border-width: 2px;
+}
+.prerequisite-ko{
+		border-color: var(--color-ares-red-dark);
+}
+*/
 .wrapper-prerequisite-summary{
 	z-index: 2;
 	position: relative;
@@ -49,21 +58,13 @@
 .summary-text{
 	z-index: 2;
 }
-.min{
-	border-color: gold;
-	border-right: 0;
-}
-.max{
-	border-color: orangered;
-	border-right: 0;
-}
 .wrapper-requirement-valid-icon{
 	z-index: 3;
 	position: absolute;
 	width: 12px;
 	aspect-ratio: 1;
 	top: calc(var(--card-height) * -.02);
-	right: calc(var(--card-width) * -.02);
+	right: calc(var(--card-width) * -.03);
 	border: 0;
 }
 img{
@@ -108,4 +109,12 @@ img{
 	&.last{
 		border: 0;
 	}
+}
+.min{
+	border-color: gold;
+	border-right: 0;
+}
+.max{
+	border-color: orangered;
+	border-right: 0;
 }
