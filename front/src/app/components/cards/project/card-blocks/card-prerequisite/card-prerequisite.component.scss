@@ -26,8 +26,13 @@
 	}
 	border: grey solid 1px;
 	&.prerequisite-ok{
-		border-color: var(--color-ares-green-dark0);
-		background-color: var(--color-ares-green-dark5);
+		border-color: rgb(136, 201, 65);
+		//border-width: 2px;
+		background-color: rgb(38, 55, 19);
+	}
+	&.prerequisite-ko{
+		border-color: rgb(222, 45, 0);
+		background-color: rgb(64, 13, 0);
 	}
 }
 .wrapper-prerequisite-summary{
@@ -47,7 +52,7 @@
 	margin-bottom: 5px;
 	width: calc(var(--card-height) * .10);
 	min-height: calc(var(--card-height) * .10);
-	border: grey solid 2px;
+	border: grey solid 1px;
 	border-right: 0;
 }
 .summary-text{
@@ -79,7 +84,7 @@ img{
 	height: 100%;
 	width: 100%;
 	display: flex;
-	border-radius: 3px;
+	border-radius: 4px;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 	overflow: hidden;

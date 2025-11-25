@@ -34,8 +34,8 @@ export class PlayerStatStateModel {
 	public getIncreasedParameters(): Map<GlobalParameterNameEnum, number> {return this.increasedParameter}
 	public addCardSeen(quantity: number){
 		this.cardSeen += quantity
-		console.log('total seen: ', this.cardSeen)
 	}
+	public getCardSeen(): number {return this.cardSeen}
 
 	static mapToObject<K extends string | number | symbol, V>(
 		map: Map<K, V>
