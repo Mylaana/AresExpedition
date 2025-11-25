@@ -25,6 +25,10 @@
 		border-bottom-right-radius: 0;
 	}
 	border: grey solid 1px;
+	&.prerequisite-ok{
+		border-color: var(--color-ares-green-dark0);
+		background-color: var(--color-ares-green-dark5);
+	}
 }
 .wrapper-prerequisite-summary{
 	z-index: 2;

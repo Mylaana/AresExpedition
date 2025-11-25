@@ -11,7 +11,7 @@ import { CardRequirements } from '../../../../../interfaces/card.interface';
 import { Checker } from '../../../../../utils/checker';
 
 const authorizedIconDisplayList: ProjectListType[] = ['none', 'played', 'statsRoute']
-const authorizedPrerequisiteCalcDisplayList: ProjectListType[] = ['hand', 'builderSelectedZone', 'selector']
+const authorizedPrerequisiteCalcDisplayList: ProjectListType[] = ['hand', 'builderSelectedZone', 'selector', 'builderSelector']
 
 @Component({
     selector: 'app-card-prerequisite',
@@ -43,8 +43,11 @@ export class CardPrerequisiteComponent implements OnInit{
         }
     }
     isPrerequisiteOk(): boolean {
-        if(!authorizedPrerequisiteCalcDisplayList.includes(this.listType)){return true}
+        if(!this.isDisplayPrerequisiteOk()){return true}
         return PlayableCard.prerequisite.canBePlayed(this.projectCard, this.playerState)
+    }
+    isDisplayPrerequisiteOk(): boolean {
+        return authorizedPrerequisiteCalcDisplayList.includes(this.listType)
     }
     getTresholdType(): string {
         if(!this._requirements){return ''}

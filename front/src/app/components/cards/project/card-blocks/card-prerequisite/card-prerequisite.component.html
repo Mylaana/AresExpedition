@@ -10,6 +10,6 @@
 		<div *ngFor="let c of getBackgroundColors()" [ngClass]="['background-box-color' ,c, getBackgroundColors()[getBackgroundColors().length-1]===c?'last':'']"></div>
 	</div>
 </div>
-<div [ngClass]="['wrapper-prerequisite-text shadowed-text' , prerequisiteTresholdType??'', cardSize, isPrerequisiteOk()?'prerequisite-ok':'prerequisite-ko']">
+<div [ngClass]="['wrapper-prerequisite-text shadowed-text' , prerequisiteTresholdType??'', cardSize, isPrerequisiteOk()&&isDisplayPrerequisiteOk()?'prerequisite-ok':'prerequisite-ko']">
 	<app-text-with-image *ngIf="prerequisiteText" [rawText]="prerequisiteText" [cardSize]="cardSize" [context]="'cardTextAndIcon'"></app-text-with-image>
 </div>
