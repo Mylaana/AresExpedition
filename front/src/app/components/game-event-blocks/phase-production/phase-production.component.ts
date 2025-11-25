@@ -34,8 +34,7 @@ export class PhaseProductionComponent implements OnInit, OnDestroy{
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.updateState(state))
 		this.gameStateService.currentCardProduction.pipe(takeUntil(this.destroy$)).subscribe(cards => this._productionCardList =  this.cardInfoService.getProjectCardList(cards))
-		this.gameStateService.currentResourceProduction.pipe(takeUntil(this.destroy$)).subscribe(prod => this._productionResourceList = prod)
-
+		this.gameStateService.currentResourceProduction.pipe(takeUntil(this.destroy$)).subscribe(prod => this.onUpdateProduction(prod))
 
 		let e = this.event as EventPhase
 		this._phaseMegacreditProduction = e.productionMegacreditFromPhaseCard??0
@@ -48,6 +47,10 @@ export class PhaseProductionComponent implements OnInit, OnDestroy{
 		this.clientPlayerState = state
 	}
 	getProduction(index: number): number {
+		if(this._productionResourceList.length===0){return 0}
 		return this._productionResourceList[index].valueStock
+	}
+	private onUpdateProduction(prod: RessourceStock[]){
+		this._productionResourceList = prod
 	}
 }

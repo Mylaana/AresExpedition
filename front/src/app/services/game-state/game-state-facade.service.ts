@@ -558,6 +558,7 @@ export class GameStateFacadeService{
 
 		for(let state of this.groupPlayerState.getValue()){
 			if(state.getId()===this.clientId){
+				this.resourceProduction.next(state.getProductionResourcesGainedThisRound())
 				this.updateClientState(state)
 			}
 		}

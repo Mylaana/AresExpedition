@@ -50,7 +50,7 @@ export class PlayerPhaseCardStateModel {
 		this.researchBonusCollected = dto.rbc
 
 		this.cardsProducedThisRound = dto.pcl
-		this.resourcesProducedThisRound = dto.pr
+		this.addProductionResourcesGainedThisRound(dto.pr)
 	}
 
 	getPhaseCardUpgradedCount(): number { return this.phaseCardUpgradeCount}
