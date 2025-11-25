@@ -19,14 +19,22 @@ describe('Service - Designers - Draw Event', () => {
                 expectedEvent.drawCardNumber = expectedDrawNumber
                 expectedEvent.resolveEventSubType = expectedResolveType
                 expectedEvent.waiterId = expectedWaiterId
-				expectedEvent.discardAfterDraw = 0
-				expectedEvent.firstCardProduction = []
+                expectedEvent.discardAfterDraw = 0
+                expectedEvent.triggerOrigin = ''
 
-                let event = DrawEventFactory.createDrawEvent(expectedResolveType, expectedDrawNumber, expectedWaiterId)
+                let event = DrawEventFactory.createDrawEvent(
+                    expectedResolveType,
+                    expectedDrawNumber,
+                    expectedWaiterId,
+                    false,
+                    undefined,
+                    ''
+                )
 
                 //date might differ on test so we exclude it
                 expect(event.drawDate).not.toBeUndefined()
                 event.drawDate = expectedEvent.drawDate
+
                 expect(event).toEqual(expectedEvent)
             })
             it('should create scanKeep event', () => {

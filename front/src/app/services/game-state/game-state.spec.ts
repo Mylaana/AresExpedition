@@ -8,7 +8,7 @@ import { ProjectCardScalingVPService } from '../cards/project-card-scaling-VP.se
 import { of } from 'rxjs'
 import { GameActiveContentService } from '../core-game/game-active-content.service'
 import { GameStateFacadeService } from './game-state-facade.service'
-import { GameStateEventService } from '../events/event-queue.service'
+import { EventQueueService } from '../events/event-queue.service'
 
 
 class MockRxStompService {
@@ -27,7 +27,7 @@ describe('Services - Core game - Game state', () => {
 		let rxStompService: RxStompService
 		let gameState: GameStateFacadeService
 		let gameParam: GameParamService
-		let gameStateEvent: GameStateEventService
+		let eventQueueService: EventQueueService
 		let scalingVp: ProjectCardScalingVPService
 		let gameModeContentService: GameActiveContentService
 
@@ -38,7 +38,7 @@ describe('Services - Core game - Game state', () => {
 					PhaseCardInfoService,
 					{ provide: RxStompService, useClass: MockRxStompService },
 					ProjectCardScalingVPService,
-					GameStateEventService,
+					EventQueueService,
 					GameActiveContentService
 				]
 			})
@@ -50,14 +50,14 @@ describe('Services - Core game - Game state', () => {
 			gameParam = injector.get(GameParamService)
 			scalingVp = injector.get(ProjectCardScalingVPService)
 			gameModeContentService = injector.get(GameActiveContentService)
-			gameStateEvent = injector.get(GameStateEventService)
+			eventQueueService = injector.get(EventQueueService)
 
 			gameState = new GameStateFacadeService(
 				projectCardService,
 				rxStompService,
 				gameParam,
 				gameModeContentService,
-				gameStateEvent,
+				eventQueueService,
 				injector,
 			)
 		})

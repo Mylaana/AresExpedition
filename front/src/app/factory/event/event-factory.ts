@@ -487,6 +487,7 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
     return event
 }
 function generateCardBuilder(builderType: BuilderType, option?:BuilderOption): CardBuilder[] {
+	if(!(builderType in BUILDER_LIST_CONFIG)){return []}
 	return BUILDER_LIST_CONFIG[builderType](option)
 }
 function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType, builderOption?: BuilderOption): EventCardBuilder {
