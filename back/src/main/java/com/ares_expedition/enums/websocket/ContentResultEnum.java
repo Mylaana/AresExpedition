@@ -13,6 +13,7 @@ public enum ContentResultEnum {
     READY_RESULT,
     NEXT_PHASE,
     GAME_STATE,
+    GAME_OVER,
 
     //Other
     SERVER_SIDE_UNHANDLED,

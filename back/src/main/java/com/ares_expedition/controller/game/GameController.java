@@ -107,7 +107,7 @@ public class GameController {
             logger.warn("\u001B[32m -------------------------------- \u001B[0m");
             game.setGameStatus(GameStatusEnum.GAME_OVER);
             JsonGameDataHandler.saveGame(game);
-            wsOutput.sendPushToGroup(MessageOutputFactory.createNextPhaseMessage(game.getGameId(), game.getGameState()));
+            wsOutput.sendPushToGroup(MessageOutputFactory.createGameOverMessage(game.getGameId(), game.getGameState()));
             return;
         } else {
             game.nextPhaseSelected();
