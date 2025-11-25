@@ -60,4 +60,8 @@ export class CardPrerequisiteComponent implements OnInit{
 		let excluded: ProjectListType[] = authorizedIconDisplayList
 		return !excluded.includes(this.listType)
 	}
+    getPrerequisiteTextStyle(): string {
+        if(!this.isDisplayPrerequisiteOk()){return ''}
+        return this.isPrerequisiteOk()?'prerequisite-ok':'prerequisite-ko'
+    }
 }
