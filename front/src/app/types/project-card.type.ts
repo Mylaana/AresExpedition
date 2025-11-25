@@ -19,10 +19,11 @@ export type TriggerLimit = {
 }
 
 export type ProjectListType = 'none' | 'hand' | 'played' | 'selector' | 'builderSelector' | 'builderSelectedZone' | 'playedSelector' | 'cardOverviewBalanced' | 'statsRoute'
-export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'selectMerger' | 'discard' | 'addRessource' | 'scanKeepResult'
+export type ProjectListSubType = 'none' | 'sell' | 'research' | 'recycleStartingProject' | 'selectCorporation' | 'selectMerger' | 'discard' | 'addRessource' | 'scanKeepResult' | 'repeatProduction'
 export type PlayedCardDTO = {[key: string]: PlayedCardStocksDTO}
 export type ActivationOption = 1 | 2
 export type LocalizedText = Partial<Record<SettingSupportedLanguage, string>>;
 export type StatsRanking = 'descending' | 'ascending'
 export type StatsCardSubFamily = 'activableProject' | 'triggerProject'
 export type CardType = 'redProject' | 'greenProject' | 'blueProject' | 'corporation' | 'triggerProject' | 'activableProject' | 'project' | 'blueProject'
+export type ListBehavior = 'display' | 'selector' | 'activator' | 'builder'

@@ -2,7 +2,7 @@ import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enu
 import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum } from "../enum/global.enum"
 import { EventCardSelectorSubType } from "../types/event.type"
 import { NonEventButtonNames, TagType } from "../types/global.type"
-import { AdvancedRessourceStock, GlobalParameterValue, MoonTile, RessourceStock, ScanKeep } from "./global.interface"
+import { AdvancedRessourceStock, EventOrigin, GlobalParameterValue, MoonTile, RessourceStock, ScanKeep } from "./global.interface"
 
 export interface EventStateDTO {
 	o: EventStateOriginEnum
@@ -11,10 +11,7 @@ export interface EventStateDTO {
 }
 export interface EventStateContentDTO {}
 export interface EventStateBuilderContentDTO extends EventStateContentDTO {
-	o: BuilderOption,
 	s: BuilderStatusDTO[],
-	ac: NonEventButtonNames[] // alternative cost used
-	d: number // discount
 }
 export interface EventStateContentOceanFlippedDTO extends EventStateContentDTO {
 	MEGACREDIT?: number,
@@ -24,9 +21,12 @@ export interface EventStateContentOceanFlippedDTO extends EventStateContentDTO {
 export interface EventStateContentDrawResultDTO extends EventStateContentDTO {
 	cl: string[]
 	td: number
+	icp: boolean //is card production
+	to: string // trigger Origin
 }
 export interface EventStateContentDiscardDTO extends EventStateContentDTO {
 	d: number
+	o?: EventOrigin
 }
 export interface EventStateContentResearchCardsQueriedDTO extends EventStateContentDTO {
 	keep: number
@@ -70,8 +70,12 @@ export interface EventStateGenericDTO extends EventStateContentDTO {
 	mt?: MoonTile | MoonTile[] // moon tile
 }
 export interface BuilderStatusDTO {
-	l: boolean,
-	cc: string | undefined
+	//l: boolean, // locked
+	cc: string | undefined // built card code
+	o: BuilderOption, // buidler option
+	ac: NonEventButtonNames[] // alternative cost used
+	ao: NonEventButtonNames[] // alternative option used
+	d: number // discount
 }
 export interface EventStateActivator extends EventStateContentDTO {
 	cl: {[key: string]: number}, //cardList

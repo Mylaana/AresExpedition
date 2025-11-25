@@ -1,8 +1,9 @@
 import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin, MoonTile } from "../../interfaces/global.interface"
+import { BUILDER_LIST_CONFIG, EVENT_FILTER_SPECIAL_BUILDER } from "../../maps/card-builder-maps"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
-import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, CardBuilder, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
-import { GameTextService } from "../../services/core-game/game-text.service"
+import { CardBuilder } from "../../models/core-game/card-builder.model"
+import { EventBaseModel, EventCardSelector, EventCardSelectorRessource, EventCardActivator, EventCardBuilder, EventTargetCard, EventGeneric, EventDeckQuery, EventWaiter, EventPhase, EventComplexCardSelector, EventTagSelector } from "../../models/core-game/event.model"
 import { EventCardSelectorSubType, EventCardActivatorSubType, EventCardBuilderSubType, EventTargetCardSubType, EventGenericSubType, EventDeckQuerySubType, EventWaiterSubType, EventPhaseSubType, EventComplexCardSelectorSubType } from "../../types/event.type"
 import { MinMaxEqualType, TagType } from "../../types/global.type"
 import { BuilderType } from "../../types/phase-card.type"
@@ -22,6 +23,7 @@ interface CreateEventOptionsSelectorComplex extends CreateEventOptionsSelector {
 	scanKeepOptions?: DeckQueryOptionsEnum,
 	discardOptions?: DiscardOptionsEnum,
 	authorizedTag?: TagType[]
+	eventOrigin?: EventOrigin
 }
 interface CreateEventOptionsTargetCard {
     advancedRessource?: AdvancedRessourceStock | AdvancedRessourceStock []
@@ -43,8 +45,7 @@ interface CreateEventOptionsGeneric {
 	increaseTr?: number
 	loadProductionCardList?: string[]
     effectPortal?: EffectPortalEnum
-	isCardProductionDouble?: boolean
-	firstProductionCardList?: string[]
+	isCardProduction?: boolean
 	portalActionMustBeResolvedToFinishEvent?: boolean,
 	resourceConversionInputRule?: InputRuleEnum
 	resourceConversionInputQuantity?: number
@@ -61,24 +62,33 @@ interface CreateEventOptionsDeckQuery {
 	scanKeepOptions?: DeckQueryOptionsEnum,
 	drawThenDiscard?: boolean,
 	firstProductionCardList?: string[]
+	eventOrigin?: EventOrigin
 }
 
 function draw(drawNumber: number=1): EventBaseModel {
 	return EventFactory.createDeckQueryEvent('drawQuery', {drawDiscard:{draw:drawNumber,discard:0}})
 }
-function discard(discardNumber: number): EventComplexCardSelector {
-	return EventFactory.createCardSelectorComplex("discardCards", {cardSelector: {selectionQuantity: discardNumber}})
+function discard(discardNumber: number, triggerOrigin?:string): EventComplexCardSelector {
+	return EventFactory.createCardSelectorComplex("discardCards", {
+		cardSelector: {selectionQuantity: discardNumber},
+		eventOrigin:{originType:'cardCode', originValue:triggerOrigin??''}
+	})
 }
-function drawThenDiscard(drawNumber: number, discard: number): EventBaseModel {
-	return EventFactory.createDeckQueryEvent('drawThenDiscard', {drawDiscard:{draw:drawNumber,discard:discard}, drawThenDiscard: true})
+function drawThenDiscard(drawNumber: number, discard: number, triggerOrigin?:string): EventBaseModel {
+	return EventFactory.createDeckQueryEvent('drawThenDiscard', {
+		drawDiscard:{draw:drawNumber,discard:discard},
+		drawThenDiscard: true,
+		eventOrigin: {originType:'cardCode', originValue:triggerOrigin??''}
+	})
 }
-function discardOptions(discardNumber: number, treshold: MinMaxEqualType, discardOptions: DiscardOptionsEnum): EventComplexCardSelector {
+function discardOptions(discardNumber: number, treshold: MinMaxEqualType, discardOptions: DiscardOptionsEnum, eventOrigin?: string): EventComplexCardSelector {
 	return EventFactory.createCardSelectorComplex("discardCards", {
 		cardSelector: {
 			selectionQuantity: discardNumber,
 			selectionQuantityTreshold: treshold
 		},
-		discardOptions: discardOptions
+		discardOptions: discardOptions,
+		eventOrigin: {originType:'cardCode', originValue:eventOrigin??''}
 	})
 }
 function upgradePhaseCard(phaseCardUpgradeCount: number, phaseCardList?: number[]): EventBaseModel {
@@ -300,7 +310,7 @@ function createCardSelectorComplex(subType: EventComplexCardSelectorSubType, arg
 function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): EventComplexCardSelector {
 	let event = new EventComplexCardSelector
 	let title = ''
-        event.setCardSelector(generateCardSelector(args?.cardSelector))
+	event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = 'discardCards'
 	event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	switch(event.getSelectorQuantityTreshold()){
@@ -319,10 +329,12 @@ function createDiscardOptionsResult(args?: CreateEventOptionsSelectorComplex): E
 			break
 		}
 	}
+	event.eventOrigin = args?.eventOrigin
 	event.title = title
 	event.setSelectorInitialState(args?.cardSelector?.cardInitialState?  args.cardSelector.cardInitialState:{selectable: true, ignoreCost: true})
 	event.lockSellButton = true
 	event.lockRollbackButton = true
+	event.eventOrigin = args?.eventOrigin
 	if(args?.discardOptions){
 		event.discardOptions = args.discardOptions
 	}
@@ -343,6 +355,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.button.startEnabled = true
 			event.scanKeepOptions = options
 			event.waiterId = waiter
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.celestior):{
@@ -358,7 +371,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.hasTagEvent})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.devTechs):{
@@ -374,7 +387,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.greenProject})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.advancedScreeningTechnology):{
@@ -390,7 +403,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.hasTagPlantOrScience})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.inventionContest):{
@@ -405,7 +418,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.button.startEnabled = false
 			event.scanKeepOptions = options
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.actionPhaseScan):{
@@ -421,7 +434,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		case(DeckQueryOptionsEnum.modPro):{
@@ -437,7 +450,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 			event.scanKeepOptions = options
 			event.setSelectorFilter({type: ProjectFilterNameEnum.authorizedTag, authorizedTag: authorizedTag})
 			event.waiterId = waiter
-			event.setSelectorStateFromParent({selectable: true, ignoreCost: true})
+			event.setSelectorInitialState({selectable: true, ignoreCost: true})
 			return event
 		}
 		default:{
@@ -448,9 +461,7 @@ function createScanKeepResult(cardList: PlayableCardModel[], keep: number, optio
 }
 function createCardSelectorRessource(ressource:AdvancedRessourceStock, args?: CreateEventOptionsSelector): EventCardSelectorRessource {
     let event = new EventCardSelectorRessource
-        event.setCardSelector(generateCardSelector(args?.cardSelector))
-
-	console.log(args)
+	event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = 'addRessourceToSelectedCard'
     event.advancedRessource = {name:ressource.name, valueStock:ressource.valueStock}
     event.title = args?.title? args.title: `Select a card to add ${event.advancedRessource?.valueStock} ${event.advancedRessource?.name}(s).`
@@ -468,141 +479,30 @@ function createCardActivator(subType: EventCardActivatorSubType, args?: CreateEv
     event.setCardSelector(generateCardSelector(args?.cardSelector))
     event.subType = subType
     event.setSelectorFilter({type: ProjectFilterNameEnum.action})
-    event.setSelectorInitialState({activable: true, selectable: false, buildable: false, ignoreCost:true})
+	event.setSelectorInitialState({activable: true, selectable: false, ignoreCost:true})
     event.titleKey = 'phaseAction'
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	event.scrollToTopOnActivation = false
 
     return event
 }
-function generateCardBuilder(builderId:number, option?:BuilderOption): CardBuilder {
-    let builder = new CardBuilder
-    builder.addButtons(ButtonDesigner.createEventCardBuilderButton(builderId, option))
-    option?builder.setOption(option):null
-    return builder
+function generateCardBuilder(builderType: BuilderType, option?:BuilderOption): CardBuilder[] {
+	if(!(builderType in BUILDER_LIST_CONFIG)){return []}
+	return BUILDER_LIST_CONFIG[builderType](option)
 }
 function createCardBuilder(subType:EventCardBuilderSubType, builderType: BuilderType, builderOption?: BuilderOption): EventCardBuilder {
     let event = new EventCardBuilder
     event.setCardSelector(generateCardSelector())
-    event.setSelectorInitialState({selectable: false, buildable: true})
+	event.setSelectorInitialState({selectable: true})
     event.subType = subType
     event.cardBuilder = []
     event.button = ButtonDesigner.createEventSelectorMainButton(event.subType)
 	event.builderType = builderType
+	event.cardBuilder = generateCardBuilder(builderType, builderOption)
 
-    let buildDiscountValue = 0
-    switch(builderType){
-        case('developmentAbilityOnly'):{
-            event.cardBuilder.push(generateCardBuilder(0))
-            break
-        }
-        case('development_base'):{
-            buildDiscountValue = 3
-            event.cardBuilder.push(generateCardBuilder(0))
-            break
-        }
-        case('development_6mc'):{
-            buildDiscountValue = 6
-            event.cardBuilder.push(generateCardBuilder(0))
-            break
-        }
-        case('development_second_card'):{
-            buildDiscountValue = 3
-			event.cardBuilder.push(generateCardBuilder(0))
-			event.cardBuilder.push(generateCardBuilder(1, BuilderOption.developmentSecondBuilder))
-            break
-        }
-
-        case('constructionAbilityOnly'):{
-            event.cardBuilder.push(generateCardBuilder(0))
-            break
-        }
-        case('construction_base'):{
-            event.cardBuilder.push(generateCardBuilder(0))
-            event.cardBuilder.push(generateCardBuilder(1,BuilderOption.drawCard))
-            break
-        }
-        case('construction_6mc'):{
-            event.cardBuilder.push(generateCardBuilder(0))
-            event.cardBuilder.push(generateCardBuilder(1,BuilderOption.gain6MC))
-            break
-        }
-        case('construction_draw_card'):{
-            for(let i=0; i<=1; i++){event.cardBuilder.push(generateCardBuilder(i))}
-            break
-        }
-		case('specialBuilder'):{
-			switch(builderOption){
-				case(BuilderOption.workCrews):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 11
-					event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
-
-					event.titleKey = 'builderWorkCrews'
-					break
-				}
-				case(BuilderOption.assetLiquidation):case(BuilderOption.researchGrant):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
-
-					event.titleKey = 'builderAssetLiquidation'
-					break
-
-				}
-				case(BuilderOption.green9MCFree):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 100
-					event.setSelectorFilter({type: ProjectFilterNameEnum.green9MCFree})
-
-					event.titleKey = 'builderGreen9MCFree'
-					break
-				}
-				case(BuilderOption.assortedEnterprises):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 2
-
-					event.titleKey = 'builderAssortedEnterprises'
-					break
-				}
-				case(BuilderOption.selfReplicatingBacteria):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 25
-
-					event.titleKey = 'builderSelfReplicatingBacteria'
-					break
-				}
-				case(BuilderOption.maiNiProductions):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 100
-					event.setSelectorFilter({type: ProjectFilterNameEnum.maiNiProductions})
-					event.titleKey = 'builderMaiNi'
-
-					break
-				}
-				case(BuilderOption.conscription):{
-					let builder = generateCardBuilder(0)
-					builder.setOption(builderOption)
-					event.cardBuilder.push(builder)
-					buildDiscountValue = 16
-					event.titleKey = 'builderConscription'
-					break
-				}
-			}
-			break
-		}
-        default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event builder type: ',event)}
+	//applying filters and other special rules for special builders
+	if(subType === 'specialBuilder' && builderOption && builderOption in EVENT_FILTER_SPECIAL_BUILDER){
+		event = EVENT_FILTER_SPECIAL_BUILDER[builderOption]!(event)
     }
 
     switch(subType){
@@ -622,8 +522,7 @@ function createCardBuilder(subType:EventCardBuilderSubType, builderType: Builder
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
     }
 
-    event.buildDiscountValue = buildDiscountValue
-    event.buildDiscountUsed = false
+	event.initialize()
 
     return event
 }
@@ -707,8 +606,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
         case('drawResult'):{
             event.drawResultList = args?.drawEventResult
             event.waiterId = args?.waiterId
-			event.isCardProductionDouble = args?.isCardProductionDouble
-			event.firstCardProduction = args?.firstProductionCardList
+			event.isCardProduction = args?.isCardProduction
             break
         }
         case('waitingGroupReady'):{
@@ -737,13 +635,13 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 		}
 		case('loadProductionPhaseCardDouble'):{
 			event.loadProductionCardList = args?.loadProductionCardList
-			event.firstCardProduction = args?.firstProductionCardList
 			break
 		}
 		case('drawResultThenDiscard'):{
             event.drawResultList = args?.drawEventResult
             event.waiterId = args?.waiterId
 			event.thenDiscard = args?.thenDiscard??0
+			event.eventOrigin = args?.eventOrigin
             break
 		}
         case('effectPortal'):{
@@ -774,7 +672,7 @@ function createGeneric(subType:EventGenericSubType, args?: CreateEventOptionsGen
 	}
     return event
 }
-function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptionsDeckQuery ) : EventDeckQuery {
+function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventOptionsDeckQuery) : EventDeckQuery {
     let event = new EventDeckQuery
 
     event.subType = subType
@@ -787,8 +685,6 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
         case('drawQuery'):{
             event.drawDiscard = args?.drawDiscard
             event.isCardProduction = args?.isCardProduction
-			event.isCardProductionDouble = args?.isCardProductionDouble
-			event.firstCardProduction = args?.firstProductionCardList
             break
         }
         case('researchPhaseQuery'):{
@@ -798,6 +694,7 @@ function createDeckQueryEvent(subType:EventDeckQuerySubType, args?: CreateEventO
 		case('drawThenDiscard'):{
 			event.drawDiscard = args?.drawDiscard
 			event.drawThenDiscard = true
+			event.eventOrigin = args?.eventOrigin
 			break
 		}
         default:{Logger.logText('EVENT DESIGNER ERROR: Unmapped event creation: ',event)}
@@ -833,8 +730,6 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
     switch(subType){
         case('productionPhase'):{
             event.autoFinalize = false
-            event.productionApplied = false
-			event.productionDoubleApplied = false
 			event.titleKey = 'phaseProduction'
             break
         }

@@ -1,18 +1,15 @@
 <app-card-builder-list
+	*ngIf="_currentEvent"
 	[ngClass]="[_cardSize]"
-	[event]="event"
 	[cardSize]="_cardSize"
 	(cardBuilderButtonClicked)="onEventCardBuilderListButtonClicked($event)"
 	(alternativePayButtonClicked)="onAlternativePayButtonClicked($event)">
 </app-card-builder-list>
-<app-playable-card-list
-	#cardListSelector
-	[event]="event"
-	[listType]="'builderSelector'"
-	[currentPhase]="currentPhase"
-	(updateSelectedCardList)="onUpdateSelectedCardList($event)">
-</app-playable-card-list>
-<app-hexed-background  *ngIf="event.getSelectionActive()"
+<app-playable-card-list-wrapper
+	[listBehavior]="'builder'"
+	(onSelectionUpdateForBuilderEvent)="onSelectionUpdate($event)">
+</app-playable-card-list-wrapper>
+<app-hexed-background  *ngIf="isSelectionActive()"
 	@fadeIn
 	[autoFillHexSize]="'large'">
 </app-hexed-background>

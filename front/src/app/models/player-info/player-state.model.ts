@@ -18,8 +18,8 @@ import { PlayerEventStateModel } from "./player-state-event";
 import { GlobalParameterColorEnum, GlobalParameterNameEnum, MilestonesEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
 import { EventStateActivator, EventStateDTO } from "../../interfaces/event-state.interface";
 import { Utils } from "../../utils/utils";
-import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
 import { PlayerStatStateModel } from "./player-state-stat";
+import { SCALING_PRODUCTION } from "../../maps/playable-card-scaling-production-maps";
 
 
 export class PlayerStateModel {
@@ -81,7 +81,7 @@ export class PlayerStateModel {
 	getMilestonesVp(): number {return this.getMilestoneCompleted() * 3}
 	getAwardsVp(): number {return this.scoreState.getAwardsVp()}
 	getBaseVP(): number {return this.scoreState.getBaseVP()}
-	getTotalVP(): number {return this.scoreState.getTotalVP()}
+	getTotalScore(): number {return this.scoreState.getTotalScore()}
 	addVP(vp: number){this.scoreState.addBaseVP(vp)}
 	setScalingVp(){
 		this.scoreState.updateCardScalingVPList(this)
@@ -198,6 +198,13 @@ export class PlayerStateModel {
 		}
 		return false
 	}
+	getPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction'): boolean {return this.phaseCardState.getPhaseBonusCollected(phase)}
+	setPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction', collected: boolean){this.phaseCardState.setPhaseBonusCollected(phase, collected)}
+	resetAllPhaseActivationBonusCollected(){this.phaseCardState.resetAllPhaseActivationBonusCollected()}
+	addProductionResourcesGainedThisRound(resources: RessourceStock[]){this.phaseCardState.addProductionResourcesGainedThisRound(resources)}
+	getProductionResourcesGainedThisRound(): RessourceStock[] {return this.phaseCardState.getProductionResourcesGainedThisRound()}
+	addProductionCardsObtainedThisRound(cards: string[]){this.phaseCardState.addProductionCardsObtainedThisRound(cards)}
+	getProductionCardObtainedThisRound(): string[] {return this.phaseCardState.getProductionCardsObtainedThisRound()}
 
 	//globalParameterState
 	addGlobalParameterStepEOP(parameter: GlobalParameterValue): void {
@@ -233,6 +240,7 @@ export class PlayerStateModel {
 	//cardState
 	getTriggersIdActive(): string[] {return this.projectCardState.getActivePlayedTriggersId()}
 	setTriggerInactive(trigger: string): void {this.projectCardState.setTriggerInactive(trigger)}
+	getTriggersIdPlayed(): string[] {return this.projectCardState.getPlayedTriggersId()}
 
 	addCardsToHand(cards: string | string[]) {this.projectCardState.addCardsToHand(cards)}
 	removeCardsFromHand(cardCodeList: string | string[], cardType: PlayableCardType, addRemovedCardsToDiscard: boolean = true): void {this.projectCardState.removeCardsFromHand(cardCodeList, cardType, addRemovedCardsToDiscard)}
@@ -290,7 +298,9 @@ export class PlayerStateModel {
 		return this.statState
 	}
 	getGlobalParameterContribution(): Map<GlobalParameterNameEnum, number> {return this.statState.getIncreasedParameters()}
-
+	addCardSeen(quantity: number){
+		this.statState.addCardSeen(quantity)
+	}
 	public toJson(eventStateDTO?: EventStateDTO[]): PlayerStateDTO {
 		return {
 			infoState: this.infoState.toJson(),

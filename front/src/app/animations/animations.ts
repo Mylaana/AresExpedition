@@ -54,3 +54,12 @@ export const fadeInFadeOut = trigger('fadeInFadeOut',[
 		animate('300ms ease-in', style({  opacity: 0 }))
 		])
 ])
+export const fadeOut = trigger('fadeOut',[
+	transition(':enter', [
+		style({ opacity: 0 }),
+		animate('100ms ease-out', style({ opacity: 1 }))
+		]),
+		transition(':leave', [
+		animate('300ms ease-in', style({  opacity: 0 }))
+		])
+])

@@ -5,16 +5,16 @@
 	<div class="wrapper-cards"
 		[ngClass]="listType">
 		<app-playable-card #projectCardComponent *ngFor="let card of _displayedCards"
-			[stateFromParent]="_cardSelector.stateFromParent"
 			[projectCard]="card"
-			[initialState]="_cardSelector.cardInitialState"
-			[buildDiscount]="_buildDiscount"
+			[initialState]="initialChildrenCardState"
+			[buildDiscount]="buildDiscount"
 			[parentListType]="listType"
 			[parentListSubType]="listSubType"
-			[filter]="_cardSelector.filter"
-			[activableTwice]="_activateTwiceRemaining>0"
+			[activableTwice]="doubleActivationRemaining>0"
 			[cardSize]="_cardSize"
 			[notClientState]="notClientState"
+			[authorizeSelection]="authorizeSelection"
+			[filter]="filter"
 			(cardStateChange)="cardStateChange($event)"
 			(cardActivated)="onProjectActivated($event)"></app-playable-card>
 	</div>

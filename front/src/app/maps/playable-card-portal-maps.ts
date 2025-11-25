@@ -554,7 +554,7 @@ export const EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS: Record<string, (clien
 				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:6},'min',clientState, 'CF3')
 			}
 			case(EffectPortalButtonEnum.clm_7):{
-				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:9},'min',clientState, 'CF3')
+				return Checker.isMinimumStockOnPlayedCardOk({name:'science', valueStock:7},'min',clientState, 'CF3')
 			}
 		}
 		return false

@@ -478,5 +478,11 @@
         "description": "activablecard",
         "imageUrl": "assets/other/activablecard.png",
         "name": "$other_activablecard$"
+    },
+    {
+        "id": 155,
+        "description": "all",
+        "imageUrl": "assets/other/all.png",
+        "name": "$other_all$"
     }
 ]

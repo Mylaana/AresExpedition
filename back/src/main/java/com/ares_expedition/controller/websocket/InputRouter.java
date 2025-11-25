@@ -196,15 +196,15 @@ public class InputRouter {
             return;
         }
         Integer thenDiscard = query.getThenDiscard();
-        Boolean isCardProductionDouble = query.isCardProductionDouble();
+        Boolean isCardProduction = query.isCardProduction();
         gameController.setPlayerState(
             query.getGameId(),
             query.getPlayerId(),
             PlayerState.fromJson(query.getContent().getPlayerState())
             );
-        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), thenDiscard, isCardProductionDouble, query.getFirstCardProductionList());
+        List<String> drawCards = this.gameController.drawCards(query.getGameId(), drawNumber, query.getPlayerId(), query.getContentEnum(), thenDiscard, isCardProduction, query.getFirstCardProductionList(), query.getTriggerOrigin());
         wsOutput.sendPushToPlayer(
-            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId(), thenDiscard, isCardProductionDouble, query.getFirstCardProductionList())),
+            MessageOutputFactory.createDrawResultMessage(query.getGameId(), new DrawResult(drawCards, query.getEventId(), thenDiscard, isCardProduction, query.getFirstCardProductionList(), query.getTriggerOrigin())),
             query.getPlayerId()
             );
     }
@@ -229,10 +229,7 @@ public class InputRouter {
     }
 
     private void handleResearch(ScanKeepMessageDTO query){
-        if(this.gameController.isResearchResolved(query.getGameId(), query.getPlayerId())){
-            return;
-        }
-        
+
         Integer scan = query.getScan();
         Integer keep = query.getKeep();
         if (scan == 0) {

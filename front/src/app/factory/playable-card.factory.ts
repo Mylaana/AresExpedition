@@ -4,10 +4,15 @@ import { TriggerEffectEventFactory } from "./trigger-event.factoy";
 import { ActivationOption } from "../types/project-card.type";
 import { DEBUG_IGNORE_PREREQUISITES } from "../global/global-const";
 import { PlayableCardModel } from "../models/cards/project-card.model";
-import { NonEventButtonNames, StandardProjectButtonNames } from "../types/global.type";
-import { ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS, ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS, PLAY_REQUIREMENTS } from "../maps/playable-card-other-maps";
+import { EventCardBuilderButtonNames, NonEventButtonNames, StandardProjectButtonNames } from "../types/global.type";
+import { ALTERNATIVE_PAY_TRIGGER_LIST, COST_MOD, PLAY_EVENTS } from "../maps/playable-card-other-maps";
 import { ACTIVATE_REQUIREMENTS, ACTIVATION_DOUBLE, ACTIVATION_EVENTS, ACTIVATION_NO_COST, ACTIVATION_SCALING_EFFECT_CAPTION, ACTIVATION_SCALING_EFFECT_VALUE } from "../maps/playable-card-activation-maps";
 import { STANDARD_PROJECT_CAPTION, STANDARD_PROJECT_COST } from "../maps/standard-project-maps";
+import { SCALING_PRODUCTION } from "../maps/playable-card-scaling-production-maps";
+import { ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS, ALTERNATIVE_PAY_BUTTON_NAME, ALTERNATIVE_PAY_REQUIREMENTS } from "../maps/card-builder-maps";
+import { TRIGGER_PRIORITY_DEFAULT_VALUE, TRIGGER_PRIORITY_MAP } from "../maps/trigger-priority-maps";
+import { PLAY_REQUIREMENTS_INTERFACE, PLAY_REQUIREMENTS_OK } from "../maps/playable-card-onplay-requirements-maps";
+import { CardRequirements } from "../interfaces/card.interface";
 
 function getOnPlayedEvents(cardCode: string, clientstate: PlayerStateModel): EventBaseModel[] | undefined{
 	return PLAY_EVENTS[cardCode]?.(clientstate)
@@ -27,7 +32,7 @@ function getActivationOption(cardCode: string): ActivationOption[]{
 }
 function getAlternativePayActiveCodeList(clientState: PlayerStateModel):string[]{
 	let result: string[] = []
-	for(let triggerCode of clientState.getTriggersIdActive()){
+	for(let triggerCode of clientState.getTriggersIdPlayed()){
 		if(ALTERNATIVE_PAY_TRIGGER_LIST.includes(triggerCode)){result.push(triggerCode)}
 	}
 	return result
@@ -40,6 +45,11 @@ function getAlternativePayButtonClickedEvents(buttonName: NonEventButtonNames): 
 function getAlternativePayCaption(cardCode: string): NonEventButtonNames | undefined{
 	if(!ALTERNATIVE_PAY_BUTTON_NAME[cardCode]){return}
 	return ALTERNATIVE_PAY_BUTTON_NAME[cardCode]()
+}
+function getBuilderAlternativeOptionButtonClickedEvents(buttonName: NonEventButtonNames): EventBaseModel[]{
+	const fn = ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS[buttonName as EventCardBuilderButtonNames]
+	if (typeof fn !== 'function') return []
+	return fn()
 }
 function getStandardProjectCost(key: StandardProjectButtonNames, clientState: PlayerStateModel): number {
 	return STANDARD_PROJECT_COST[key]?.(clientState)
@@ -59,7 +69,7 @@ const PlayableCardPrerequisite = {
 	canBePlayed(card: PlayableCardModel, clientState: PlayerStateModel): boolean {
 		if (DEBUG_IGNORE_PREREQUISITES) return true
 
-		const checkFn = PLAY_REQUIREMENTS[card.cardCode]
+		const checkFn = PLAY_REQUIREMENTS_OK[card.cardCode]
 		return checkFn ? checkFn(clientState) : true
 	},
 	canBeActivated(card: PlayableCardModel, clientState: PlayerStateModel, activationOption: ActivationOption = 1): boolean {
@@ -69,12 +79,49 @@ const PlayableCardPrerequisite = {
 	},
 	canBeAlternativePaid(name: NonEventButtonNames, clientState: PlayerStateModel): boolean {
 		return ALTERNATIVE_PAY_REQUIREMENTS[name]?.(clientState) ?? false
+	},
+	getRequirements(cardCode: string): CardRequirements | undefined{
+		return PLAY_REQUIREMENTS_INTERFACE[cardCode]??undefined
 	}
 }
 function calculateCostModFromTrigger(triggerCode: string, card: PlayableCardModel, clientState: PlayerStateModel): number {
 	if (!card) return 0
 	return COST_MOD[triggerCode]?.(card, clientState)??0
 }
+function hasScalingProduction(cardCode: string): boolean {
+	if(!SCALING_PRODUCTION[cardCode]){return false}
+	return true
+}
+function getRepeatProductionCaption(cardCode: string, clientState: PlayerStateModel): string {
+	if(hasScalingProduction(cardCode)===false){return '[NO SCALING PRODUCTION]'}
+	let production = SCALING_PRODUCTION[cardCode]?.(clientState)
+	let result: string = ''
+	for(let p of production){
+		if(result!=''){result +=' '}
+		switch(p.name){
+			case('steel'):case('titanium'):{
+				continue
+			}
+			case('megacredit'):{
+				result = result + `$ressource_megacreditvoid_+${p.valueStock}$`
+				break
+			}
+			default:{
+				result = result + `+${p.valueStock}$ressource_${p.name}$`
+			}
+		}
+	}
+	return result
+}
+
+function getPriority(code: string): number {
+  return TRIGGER_PRIORITY_MAP.get(code) ?? TRIGGER_PRIORITY_DEFAULT_VALUE;
+}
+
+function sortTriggerList(list: string[]): string[] {
+  return [...list].sort((a, b) => getPriority(b) - getPriority(a));
+}
+
 const CostModCalulator = {
 	getCostMod(activeTriggers: string[], projectCard: PlayableCardModel, clientState: PlayerStateModel): number {
 		let totalMod = 0
@@ -93,6 +140,12 @@ export const PlayableCard = {
 	getAlternativePayActiveCodeList,
 	getAlternativePayCaption,
 	getAlternativePayButtonClickedEvents,
+	getBuilderAlternativeOptionButtonClickedEvents,
+	getRepeatProductionCaption,
+	hasScalingProduction,
+	sortTriggerList,
+	getTriggerPriority: getPriority,
+	isEventGeneratingTrigger: TriggerEffectEventFactory.isEventGeneratingTrigger,
 	prerequisite: PlayableCardPrerequisite,
 	activable: PlayableCardActivativable
 }

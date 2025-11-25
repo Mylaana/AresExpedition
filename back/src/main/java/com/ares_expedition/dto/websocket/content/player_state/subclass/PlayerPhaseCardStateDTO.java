@@ -17,6 +17,23 @@ public class PlayerPhaseCardStateDTO {
     @JsonProperty("psp")
     private PhaseEnum previousSelectedPhase;
 
+    //upon phase activation bonus collected
+    @JsonProperty("cbc")
+    private Boolean constructionBonusCollected;
+    @JsonProperty("abc")
+    private Boolean actionBonusCollected;
+    @JsonProperty("fpc")
+    private Boolean firstProductionCollected;
+    @JsonProperty("spc")
+    private Boolean secondProductionCollected;
+    @JsonProperty("rbc")
+    private Boolean researchBonusCollected;
+
+    @JsonProperty("pcl")
+    private List<String> producedCardList;
+    @JsonProperty("pr")
+    private Object producedResources;
+
     PlayerPhaseCardStateDTO() {
     }
 
@@ -26,6 +43,14 @@ public class PlayerPhaseCardStateDTO {
         }
         this.selectedPhase = state.getSelectedPhase();
         this.previousSelectedPhase = state.getPreviousSelectedPhase();
+
+        constructionBonusCollected = state.getConstructionBonusCollected();
+        actionBonusCollected = state.getActionBonusCollected();
+        firstProductionCollected = state.getFirstProductionCollected();
+        secondProductionCollected = state.getSecondProductionCollected();
+        researchBonusCollected = state.getResearchBonusCollected();
+        producedCardList = state.getProducedCardList();
+        producedResources = state.getProducedResources();
     }
 
     public List<PhaseCardDTO> getPhaseCards() {
@@ -50,7 +75,61 @@ public class PlayerPhaseCardStateDTO {
 
     public void setPreviousSelectedPhase(PhaseEnum previousSelectedPhase) {
         this.previousSelectedPhase = previousSelectedPhase;
-    }    
+    }
 
-    
+    public Boolean getConstructionBonusCollected() {
+        return constructionBonusCollected;
+    }
+
+    public void setConstructionBonusCollected(Boolean constructionBonusCollected) {
+        this.constructionBonusCollected = constructionBonusCollected;
+    }
+
+    public Boolean getFirstProductionCollected() {
+        return firstProductionCollected;
+    }
+
+    public void setFirstProductionCollected(Boolean firstProductionCollected) {
+        this.firstProductionCollected = firstProductionCollected;
+    }
+
+    public Boolean getSecondProductionCollected() {
+        return secondProductionCollected;
+    }
+
+    public void setSecondProductionCollected(Boolean secondProductionCollected) {
+        this.secondProductionCollected = secondProductionCollected;
+    }
+
+    public Boolean getActionBonusCollected() {
+        return actionBonusCollected;
+    }
+
+    public void setActionBonusCollected(Boolean actionBonusCollected) {
+        this.actionBonusCollected = actionBonusCollected;
+    }
+
+    public Boolean getResearchBonusCollected() {
+        return researchBonusCollected;
+    }
+
+    public void setResearchBonusCollected(Boolean researchBonusCollected) {
+        this.researchBonusCollected = researchBonusCollected;
+    }
+
+    public List<String> getProducedCardList() {
+        return producedCardList;
+    }
+
+    public void setProducedCardList(List<String> producedCardList) {
+        this.producedCardList = producedCardList;
+    }
+
+    public Object getProducedResources() {
+        return producedResources;
+    }
+
+    public void setProducedResources(Object producedResources) {
+        this.producedResources = producedResources;
+    }  
 }

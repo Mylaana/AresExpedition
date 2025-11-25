@@ -14,6 +14,15 @@ public class PlayerPhaseCardState {
     private PhaseEnum selectedPhase;
     private PhaseEnum previousSelectedPhase;
 
+    //upon phase activation bonus collected
+    private Boolean constructionBonusCollected;
+    private Boolean actionBonusCollected;
+    private Boolean firstProductionCollected;
+    private Boolean secondProductionCollected;
+    private Boolean researchBonusCollected;
+    private List<String> producedCardList;
+    private Object producedResources;
+
     public PlayerPhaseCardState() {
     }
 
@@ -23,6 +32,14 @@ public class PlayerPhaseCardState {
         }
         this.selectedPhase = dto.getSelectedPhase();
         this.previousSelectedPhase = dto.getPreviousSelectedPhase();
+
+        this.constructionBonusCollected = dto.getConstructionBonusCollected();
+        this.actionBonusCollected = dto.getActionBonusCollected();
+        this.firstProductionCollected = dto.getFirstProductionCollected();
+        this.secondProductionCollected = dto.getSecondProductionCollected();
+        this.researchBonusCollected = dto.getResearchBonusCollected();
+        this.producedCardList = dto.getProducedCardList();
+        this.producedResources = dto.getProducedResources();
     }
 
     public PhaseEnum getSelectedPhase() {
@@ -61,4 +78,61 @@ public class PlayerPhaseCardState {
         this.previousSelectedPhase = this.selectedPhase;
         this.selectedPhase = PhaseEnum.UNDEFINED;
     }
+
+    public Boolean getConstructionBonusCollected() {
+        return constructionBonusCollected;
+    }
+
+    public void setConstructionBonusCollected(Boolean constructionBonusCollected) {
+        this.constructionBonusCollected = constructionBonusCollected;
+    }
+
+    public Boolean getFirstProductionCollected() {
+        return firstProductionCollected;
+    }
+
+    public void setFirstProductionCollected(Boolean firstProductionCollected) {
+        this.firstProductionCollected = firstProductionCollected;
+    }
+
+    public Boolean getSecondProductionCollected() {
+        return secondProductionCollected;
+    }
+
+    public void setSecondProductionCollected(Boolean secondProductionCollected) {
+        this.secondProductionCollected = secondProductionCollected;
+    }
+
+    public Boolean getActionBonusCollected() {
+        return actionBonusCollected;
+    }
+
+    public void setActionBonusCollected(Boolean actionBonusCollected) {
+        this.actionBonusCollected = actionBonusCollected;
+    }
+
+    public Boolean getResearchBonusCollected() {
+        return researchBonusCollected;
+    }
+
+    public void setResearchBonusCollected(Boolean researchBonusCollected) {
+        this.researchBonusCollected = researchBonusCollected;
+    }
+
+    public List<String> getProducedCardList() {
+        return producedCardList;
+    }
+
+    public void setProducedCardList(List<String> producedCardList) {
+        this.producedCardList = producedCardList;
+    }
+
+    public Object getProducedResources() {
+        return producedResources;
+    }
+
+    public void setProducedResources(Object producedResources) {
+        this.producedResources = producedResources;
+    }
+    
 }

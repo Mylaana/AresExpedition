@@ -30,7 +30,8 @@ export enum GroupMessageContentResultEnum {
 	selectCorporation = 'SELECT_CORPORATION',
 	selectCorporationMerger = 'SELECT_CORPORATION_MERGER',
     debug = 'DEBUG',
-    serverSideUnhandled = 'SERVER_SIDE_UNHANDLED'
+    serverSideUnhandled = 'SERVER_SIDE_UNHANDLED',
+	gameOver = 'GAME_OVER'
 }
 export enum SubscriptionEnum {
     player = 'PLAYER',

@@ -1,0 +1,193 @@
+import { BuilderOption, ProjectFilterNameEnum } from "../enum/global.enum";
+import { ButtonDesigner } from "../factory/button-designer.service";
+import { EventFactory } from "../factory/event/event-factory";
+import { ProjectFilter } from "../interfaces/global.interface";
+import { CardBuilder } from "../models/core-game/card-builder.model";
+import { EventBaseModel, EventCardBuilder } from "../models/core-game/event.model";
+import { PlayerStateModel } from "../models/player-info/player-state.model";
+import { EventCardBuilderButtonNames, NonEventButtonNames } from "../types/global.type";
+import { BuilderType } from "../types/phase-card.type";
+import { Checker } from "../utils/checker";
+
+
+function configBuilder(builderType: BuilderType, builderIndex:number=0, builderOption?:BuilderOption): CardBuilder{
+    let builder = new CardBuilder
+    if(BUILDER_CONFIG[builderType]){
+        builder = BUILDER_CONFIG[builderType](builder, builderOption)
+    }
+    builderOption?builder.setOption(builderOption):null
+    builder.addButton(ButtonDesigner.createEventCardBuilderButton('buildCard'))
+    builder.addButton(ButtonDesigner.createEventCardBuilderButton('discardSelectedCard'))
+    builder.setIndex(builderIndex)
+    return builder
+}
+export const BUILDER_LIST_CONFIG: Record<BuilderType, (builderOption?: BuilderOption) => CardBuilder[]> = {
+    'development_base':() => [
+        configBuilder('development_base')
+    ],
+    'development_6mc':() => [
+        configBuilder('development_6mc')
+    ],
+    'development_second_card':() => [
+        configBuilder('development_second_card'),
+        configBuilder('development_second_card', 1, BuilderOption.developmentSecondBuilder)
+    ],
+    'developmentAbilityOnly':() => [
+        configBuilder('developmentAbilityOnly')
+    ],
+    'construction_base':() => [
+        configBuilder('construction_base'),
+        configBuilder('construction_base', 1, BuilderOption.drawCard)
+    ],
+    'construction_6mc':() => [
+        configBuilder('construction_base'),
+        configBuilder('construction_6mc', 1, BuilderOption.gain6MC)
+    ],
+    'construction_draw_card':() => [
+        configBuilder('construction_base'),
+        configBuilder('construction_draw_card')
+    ],
+    'constructionAbilityOnly':() => [
+        configBuilder('constructionAbilityOnly')
+    ],
+    'specialBuilder':(builderOption) => [
+        configBuilder('specialBuilder', 0, builderOption)
+    ],
+}
+
+const BUILDER_CONFIG: Partial<Record<BuilderType, (builder: CardBuilder, builderOption?: BuilderOption) => CardBuilder>> = {
+    'development_base':(builder) => {
+        builder.addDiscount(3)
+        return builder
+    },
+    'development_6mc':(builder) => {
+        builder.addDiscount(6)
+        return builder
+    },
+    'development_second_card':(builder, builderOption) => {
+        if(!builderOption){
+            builder.addDiscount(3)
+        }
+        return builder
+    },
+    'construction_base': (builder, option) => {
+        if(option){
+            builder.addButton(ButtonDesigner.createEventCardBuilderButton(option), 'option')
+        }
+        return builder
+    },
+    'construction_6mc': (builder, option) => {
+        if(option){
+            builder.addButton(ButtonDesigner.createEventCardBuilderButton(option), 'option')
+        }
+        return builder
+    },
+    'specialBuilder':(builder, builderOption) => {
+        if(!builderOption || !SPECIAL_BUILDER_CONFIG[builderOption]){return builder}
+        return SPECIAL_BUILDER_CONFIG[builderOption](builder)
+    }
+}
+
+const SPECIAL_BUILDER_CONFIG: Partial<Record<BuilderOption, (builder: CardBuilder)=> CardBuilder>> = {
+    'assortedEnterprises':(builder) =>{
+        builder.addDiscount(2)
+        return builder
+    },
+    'conscription':(builder) =>{
+        builder.addDiscount(16)
+        return builder
+    },
+    'green9MCFree':(builder) =>{
+        builder.addDiscount(100)
+        return builder
+    },
+    'maiNiProductions':(builder) =>{
+        builder.addDiscount(100)
+        return builder
+    },
+    'selfReplicatingBacteria':(builder) =>{
+        builder.addDiscount(25)
+        return builder
+    },
+    'workCrews':(builder) =>{
+        builder.addDiscount(11)
+        return builder
+    },
+}
+
+export const ALTERNATIVE_PAY_EVENT: Partial<Record<NonEventButtonNames,  (cardBuilder: CardBuilder) => CardBuilder>> = {
+    'alternativePayAnaerobicMicroorganisms': (builder) => {
+        builder.addDiscount(10)
+        builder.setAlternativeCostUsed('alternativePayAnaerobicMicroorganisms')
+        return builder
+    },
+    'alternativePayRestructuredResources': (builder) => {
+        builder.addDiscount(5)
+        builder.setAlternativeCostUsed('alternativePayRestructuredResources')
+        return builder
+    },
+}
+
+export const ALTERNATIVE_PAY_BUTTON_NAME: Record<string,() => NonEventButtonNames> = {
+	//Anaerobic Microorganisms
+	'5': () => 'alternativePayAnaerobicMicroorganisms',
+		//Anaerobic Microorganisms
+	'52': () => 'alternativePayRestructuredResources'
+}
+export const ALTERNATIVE_PAY_BUTTON_CLICKED_EVENTS: Partial<Record<NonEventButtonNames, () => EventBaseModel[]>> ={
+	'alternativePayAnaerobicMicroorganisms': () => [EventFactory.simple.addRessourceToCardId({name:'microbe', valueStock:-2}, '5')],
+	'alternativePayRestructuredResources': () => [EventFactory.simple.addRessource({name:'plant', valueStock:-1})]
+}
+export const ALTERNATIVE_PAY_REQUIREMENTS: Partial<Record<NonEventButtonNames, (clientState: PlayerStateModel) => boolean>> ={
+	'alternativePayAnaerobicMicroorganisms': (c) => c.getProjectPlayedStock('5')[0].valueStock>=2,
+	'alternativePayRestructuredResources': (c) => Checker.isRessourceOk('plant', 1, 'min', c),
+}
+
+export const ALTERNATIVE_OPTION_BUTTON_CLICKED_EVENTS: Partial<Record<EventCardBuilderButtonNames, () => EventBaseModel[]>> = {
+    'drawCard': () => [
+        EventFactory.simple.draw(1)
+    ],
+    'gain6MC': () => [
+        EventFactory.simple.addRessource({name:'megacredit', valueStock: 6})
+    ]
+}
+
+export const EVENT_FILTER_SPECIAL_BUILDER: Partial<Record<BuilderOption, (event: EventCardBuilder) => EventCardBuilder>> = {
+    'workCrews': (event) => {
+        event.setSelectorFilter({ type: ProjectFilterNameEnum.blueOrRedProject})
+        event.titleKey = 'builderWorkCrews'
+        return event
+    },
+    'assetLiquidation':(event) => {
+        event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
+        event.titleKey = 'builderAssetLiquidation'
+        return event
+    },
+    'researchGrant':(event) => {
+        event.setSelectorFilter({type: ProjectFilterNameEnum.blueOrRedProject})
+        event.titleKey = 'builderResearchGrant'
+        return event
+    },
+    'green9MCFree': (event) => {
+        event.setSelectorFilter({type: ProjectFilterNameEnum.green9MCFree})
+        event.titleKey = 'builderGreen9MCFree'
+        return event
+    },
+    'maiNiProductions': (event) => {
+        event.setSelectorFilter({type: ProjectFilterNameEnum.maiNiProductions})
+        event.titleKey = 'builderMaiNi'
+        return event
+    },
+    'assortedEnterprises': (event) => {
+        event.titleKey = 'builderAssortedEnterprises'
+        return event
+    },
+    'conscription': (event) => {
+        event.titleKey = 'builderConscription'
+        return event
+    },
+    'selfReplicatingBacteria': (event) => {
+        event.titleKey = 'builderSelfReplicatingBacteria'
+        return event
+    },
+}

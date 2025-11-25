@@ -7,6 +7,7 @@ import { CardStats, PlayableCardEffect, PlayableCardInterface } from "../../inte
 import { Utils } from "../../utils/utils"
 import { ProjectFilterNameEnum } from "../../enum/global.enum"
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const"
+import { PlayableCard } from "../../factory/playable-card.factory"
 
 
 export class PlayableCardModel {
@@ -355,12 +356,14 @@ export class TriggerState {
         return this.activeCostModTrigger
     }
     playTrigger(cardCode: string): void {
-        this.playedCards.push(cardCode)
-        this.activeCards.push(cardCode)
+		this.playedCards.push(cardCode)
+		if(PlayableCard.isEventGeneratingTrigger(cardCode)){
+			this.activeCards.push(cardCode)
+		}
     }
     setTriggerInactive(cardCode: string): void {
         this.activeCards = this.activeCards.filter((e, i) => e !== cardCode)
-    }
+    }	
 	public static fromJson(data: TriggerStateDTO): TriggerState {
 		if (!data.a || !data.p){
 			throw new Error("Invalid TriggerStateDTO: Missing required fields")

@@ -49,7 +49,10 @@
 							[prerequisiteTresholdType]="projectCard.prerequisiteTresholdType"
 							[prerequisiteSummary]="projectCard.getPrerequisiteSummary()"
 							[prerequisiteText]="projectCard.getPrerequisiteText()"
-							[cardSize]="cardSize">
+							[cardSize]="cardSize"
+							[projectCard]="projectCard"
+							[listType]="parentListType"
+							[playerState]="_playerState">
 						</app-card-prerequisite>
 						<ng-container *ngIf="projectCard.hasPlayedText()">
 							<app-card-played-info
@@ -103,4 +106,10 @@
 		*ngIf="projectCard.stats"
 		[stats]="projectCard.stats">
 	</app-card-stats-list>
+	<app-card-scaling-production
+		*ngIf="isRepeatProduction()"
+		[production]="getRepeatProductionCaption()"
+		[hasScalingProduction]="_hasScalingProduction"
+		[cardSize]="cardSize">
+	</app-card-scaling-production>
 </div>

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { GroupMessageResult, PlayerMessageResult, WsDrawResult, WsGameState, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { GameStatusEnum, GroupMessageContentResultEnum, PlayerMessageContentResultEnum } from "../../enum/websocket.enum";
 import { WebsocketResultMessageFactory } from "../../factory/websocket-message-factory.service";
-import { GameState } from "../../services/core-game/game-state.service";
+import { GameStateFacadeService } from "../../services/game-state/game-state-facade.service";
 import { Logger } from "../../utils/utils";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
 import { myUUID } from "../../types/global.type";
@@ -14,7 +14,7 @@ export class WebsocketHandler {
     clientPlayerId: myUUID = ''
 
     constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private gameContentService: GameActiveContentService
 	){}
 
@@ -62,9 +62,6 @@ export class WebsocketHandler {
             }
             case(GroupMessageContentResultEnum.nextPhase):{
 				this.handleMessageStartedGameGroupGameState(message.content)
-				if(message.content.gameStatus===GameStatusEnum.gameOver){
-					this.gameStateService.setGameOver()
-				}
                 break
             }
             case(GroupMessageContentResultEnum.serverSideUnhandled):{
@@ -83,6 +80,11 @@ export class WebsocketHandler {
 				this.handleMessageSelectCorporation(message.content, true)
 				break
 			}
+			case(GroupMessageContentResultEnum.gameOver):{
+				this.gameStateService.setGameOver()
+				this.handleMessageGameOver(message.content)
+                break
+            }
             default:{
                 console.log('UNHANDLED GROUP MESSAGE RECEIVED: ', message)
             }
@@ -132,7 +134,22 @@ export class WebsocketHandler {
 			this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
 		}
 	}
-
+    private handleMessageGameOver(content: WsGameState): void {
+		this.gameStateService.reset()
+        this.gameStateService.clearEventQueue()
+		//this.gameStateService.setSelectedPhaseList(content.selectedPhase)
+		this.gameStateService.setRound(content.round)
+		this.gameStateService.setDeckSize(content.deck)
+		this.gameStateService.setDiscardSize(content.discard)
+		//this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
+		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
+		//this.gameStateService.setCurrentPhase(content.currentPhase, false)
+		this.gameContentService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
+		if(this.gameContentService.isContentActive('expansionDiscovery')){
+			this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))
+			this.gameStateService.setMilestone(WebsocketResultMessageFactory.inputToMilestone(content.milestones))
+		}
+    }
 	private handleMessageConnection(content: WsGameState): void {
 		this.gameContentService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
 		if(this.gameContentService.isContentActive('expansionDiscovery')){

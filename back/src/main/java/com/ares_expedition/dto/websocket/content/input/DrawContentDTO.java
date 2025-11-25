@@ -9,17 +9,19 @@ public class DrawContentDTO extends BaseContentDTO{
     Integer eventId;
     PlayerStateDTO playerState;
     Integer thenDiscard;
-    Boolean isCardProductionDouble;
+    Boolean isCardProduction;
     List<String> firstCardProductionList;
+    String triggerOrigin;
 
     public DrawContentDTO(){
     }
 
-    public DrawContentDTO(Integer drawNumber, Integer eventId, Boolean isProductionDouble, List<String> firstCardProductionList){
+    public DrawContentDTO(Integer drawNumber, Integer eventId, Boolean isProductionDouble, List<String> firstCardProductionList, String triggerOrigin){
       this.drawNumber = drawNumber;
       this.eventId = eventId;
-      this.isCardProductionDouble = isProductionDouble;
+      this.isCardProduction = isProductionDouble;
       this.firstCardProductionList = firstCardProductionList;
+      this.triggerOrigin = triggerOrigin;
     }
 
     public Integer getDrawNumber() {
@@ -54,12 +56,12 @@ public class DrawContentDTO extends BaseContentDTO{
       this.thenDiscard = thenDiscard;
     }
 
-    public Boolean getIsCardProductionDouble() {
-      return isCardProductionDouble;
+    public Boolean getIsCardProduction() {
+      return isCardProduction;
     }
 
-    public void setIsCardProductionDouble(Boolean isProductionDouble) {
-      this.isCardProductionDouble = isProductionDouble;
+    public void setIsCardProduction(Boolean isProduction) {
+      this.isCardProduction = isProduction;
     }
 
     public List<String> getFirstCardProductionList() {
@@ -69,6 +71,16 @@ public class DrawContentDTO extends BaseContentDTO{
     public void setFirstCardProductionList(List<String> firstCardProductionList) {
       this.firstCardProductionList = firstCardProductionList;
     }
+
+    public String getTriggerOrigin() {
+      return triggerOrigin;
+    }
+
+    public void setTriggerOrigin(String triggerOrigin) {
+      this.triggerOrigin = triggerOrigin;
+    }
+
+    
 }
 
 interface PlayerMessageDrawQuery {

@@ -170,10 +170,6 @@ app-card-builder-list{
 .wrapper-selectors{
     display: flex;
 	flex-grow: 1;
-	&.centered{
-		align-items: center;
-		justify-content: center;
-	}
 }
 .wrapper-event-description{
 	display: flex;

@@ -4,14 +4,12 @@ import { Subject, takeUntil } from 'rxjs';
 import { enterFromLeft, expandCollapseVertical, fadeIn, fadeInFadeOut } from '../../../../animations/animations';
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from '../../../../enum/phase.enum';
 import { PlayableCardModel } from '../../../../models/cards/project-card.model';
-import { ButtonBase, EventCardBuilderButton, NonEventButton } from '../../../../models/core-game/button.model';
+import { ButtonBase, EventCardBuilderButton, EventMainButton, NonEventButton } from '../../../../models/core-game/button.model';
 import { DrawEvent, EventBaseModel, EventPhase } from '../../../../models/core-game/event.model';
-import { DrawEventHandler, EventHandler } from '../../../../models/core-game/handlers.model';
-import { GameState } from '../../../../services/core-game/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { ButtonDesigner } from '../../../../factory/button-designer.service';
 import { ActivationOption, ProjectListType } from '../../../../types/project-card.type';
 import { PhaseCardUpgradeSelectorComponent } from '../../../cards/phase/phase-card-upgrade-selector/phase-card-upgrade-selector.component';
-import { PlayableCardListComponent } from '../../../cards/project/playable-card-list/playable-card-list.component';
 import { EventMainButtonComponent } from "../../../tools/button/event-main-button.component";
 import { NonEventButtonComponent } from '../../../tools/button/non-event-button.component';
 import { InitialDraftComponent } from '../../../game-initialization/initial-draft/initial-draft.component';
@@ -24,17 +22,27 @@ import { EventFactory } from '../../../../factory/event/event-factory';
 import { TagGainListComponent } from '../../../game-event-blocks/tag-gain-list/tag-gain-list.component';
 import { SellCardsComponent } from '../../../game-event-blocks/sell-cards/sell-cards.component';
 import { EffectPortalComponent } from '../../../game-event-blocks/effect-portal/effect-portal.component';
-import { GroupWaitingComponent } from '../../../game-event-blocks/group-waiting/group-waiting.component';
-import { PlayerReadyModel } from '../../../../models/player-info/player-state.model';
 import { LeftPannelComponent } from '../../../game-event-blocks/left-pannel/left-pannel.component';
 import { ConvertResourceComponent } from '../../../game-event-blocks/convert-resource/convert-resource.component';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
 import { SettingInterfaceSize } from '../../../../types/global.type';
 import { EventTitleKeyPipe } from '../../../../pipes/event-title.pipe';
 import { GameActiveContentService } from '../../../../services/core-game/game-active-content.service';
-import { EventPhaseSubType, EventUnionSubTypes } from '../../../../types/event.type';
+import { EventUnionSubTypes } from '../../../../types/event.type';
+import { StandardCardSelectorComponent } from '../../../game-event-blocks/standard-card-selector/standard-card-selector.component';
+import { CommandButtonStateService } from '../../../../services/game-state/command-button-state.service';
+import { EventProcessor } from '../../../../services/events/event-processor.service';
+import { DrawEventHandler } from '../../../../services/events/draw-event-processor.service';
 
-//this component is the main controller, and view
+//this component is the main view
+
+const dedicatedComponentEventSubtypeList: EventUnionSubTypes[] = [
+	'planificationPhase', 'productionPhase', 'actionPhaseActivator',
+	'upgradePhaseCards', 'selectStartingHand', 'selectCorporation',
+	'selectMerger', 'waitingGroupReady','tagSelector',
+	'selectCardOptionalSell', 'selectCardForcedSell', 'effectPortal',
+	'resourceConversion'
+]
 
 @Component({
     selector: 'app-game-event',
@@ -42,7 +50,6 @@ import { EventPhaseSubType, EventUnionSubTypes } from '../../../../types/event.t
         CommonModule,
         PhasePlanificationComponent,
         PhaseProductionComponent,
-        PlayableCardListComponent,
         PhaseCardUpgradeSelectorComponent,
         EventMainButtonComponent,
         NonEventButtonComponent,
@@ -55,23 +62,17 @@ import { EventPhaseSubType, EventUnionSubTypes } from '../../../../types/event.t
 		SellCardsComponent,
 		EffectPortalComponent,
 		ConvertResourceComponent,
-		EventTitleKeyPipe
+		EventTitleKeyPipe,
+		StandardCardSelectorComponent
     ],
     templateUrl: './game-event.component.html',
     styleUrl: './game-event.component.scss',
     animations: [expandCollapseVertical, enterFromLeft, fadeIn, fadeInFadeOut],
     providers: [
-        EventHandler,
         DrawEventHandler
     ]
 })
 export class GameEventComponent {
-	constructor(
-		private elRef: ElementRef, private renderer: Renderer2,
-		private gameStateService: GameState,
-		private gameParamService: GameParamService,
-		private gameContentService: GameActiveContentService
-	){}
 	delete: EventBaseModel[] = []
 
 	currentEvent!: EventBaseModel | undefined
@@ -101,12 +102,19 @@ export class GameEventComponent {
 
 	_selectedPhaseList: SelectablePhaseEnum[] = []
 	_interfaceSize!: SettingInterfaceSize
+	_mainButton!: EventMainButton | null
 
-	@ViewChild('cardListSelector') cardListSelector!: PlayableCardListComponent
-
-	private readonly eventHandler = inject(EventHandler)
 	private readonly drawHandler = inject(DrawEventHandler)
 	private destroy$ = new Subject<void>()
+
+	constructor(
+		private elRef: ElementRef, private renderer: Renderer2,
+		private gameStateService: GameStateFacadeService,
+		private gameParamService: GameParamService,
+		private gameContentService: GameActiveContentService,
+		private eventProcessor: EventProcessor,
+		private commandButtonService: CommandButtonStateService
+	){}
 
 	ngOnInit(): void {
 		this.currentButtonSelectorId = -1
@@ -119,10 +127,12 @@ export class GameEventComponent {
 
 		this.gameStateService.currentPhase.pipe(takeUntil(this.destroy$)).subscribe(phase => this.updatePhase(phase))
 		this.gameStateService.currentDrawQueue.pipe(takeUntil(this.destroy$)).subscribe(drawQueue => this.handleDrawQueueNext(drawQueue))
-		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 		this.gameStateService.currentSelectedPhaseList.pipe(takeUntil(this.destroy$)).subscribe(list => this._selectedPhaseList = list)
 
 		this.gameParamService.currentInterfaceSize.pipe(takeUntil(this.destroy$)).subscribe(size => this._interfaceSize = size)
+		this.eventProcessor.currentEventObs.subscribe(event => {this.currentEvent = event})
+		this.commandButtonService.currentEventMainButtonUpdated$.pipe(takeUntil(this.destroy$)).subscribe(button => this._mainButton = button)
+		this.eventProcessor.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(eventQueue => this.handleEventQueueNext(eventQueue))
 	}
 	ngOnDestroy(): void {
 		this.destroy$.next()
@@ -140,7 +150,6 @@ export class GameEventComponent {
 	}
 	handleDrawQueueNext(drawQueue: DrawEvent[]): void {this.drawHandler.handleQueueUpdate(drawQueue)}
 	handleEventQueueNext(eventQueue: EventBaseModel[]): void {
-		this.currentEvent = this.eventHandler.handleQueueUpdate(eventQueue)
 		this.scrollToTop()
 		if(!this.currentEvent){return}
 		this.resetValidateButtonState(this.currentEvent)
@@ -197,7 +206,7 @@ export class GameEventComponent {
 		console.log('game event button clicked:', button)
 	}
 	public onUpdateSelectedCardList(input: {selected: PlayableCardModel[], listType: ProjectListType}){
-		this.eventHandler.updateSelectedCardList(input.selected, input.listType)
+		this.eventProcessor.updateSelectedCardList(input.selected, input.listType)
 	}
 	public nonEventButtonClicked(button: NonEventButton){
 		switch(button.name){
@@ -208,7 +217,7 @@ export class GameEventComponent {
 				break
 			}
 			case('sellOptionalCardCancel'):{
-				this.eventHandler.cancelSellCardsOptional()
+				this.eventProcessor.cancelSellCardsOptional()
 				break
 			}
 			case('displayUpgradedPhase'):{
@@ -218,7 +227,7 @@ export class GameEventComponent {
 				break
 			}
 			case('displayUpgradedPhaseCancel'):{
-				this.eventHandler.cancelDisplayUpgradedPhase()
+				this.eventProcessor.cancelDisplayUpgradedPhase()
 				break
 			}
 			case('killCard'):{
@@ -237,13 +246,10 @@ export class GameEventComponent {
 		}
 	}
 	public onProjectActivated(input: {card: PlayableCardModel, option: ActivationOption, twice: boolean}){
-		this.eventHandler.onProjectActivated(input)
+		this.eventProcessor.onProjectActivated(input)
 	}
-	public eventMainButtonClicked(){this.eventHandler.eventMainButtonClicked()}
-	public onCardBuilderButtonClicked(button: EventCardBuilderButton){
-		this.eventHandler.cardBuilderButtonClicked(button)
-	}
-	public onPhaseSelected(): void {this.eventHandler.updateValidateButton(true)}
+	public eventMainButtonClicked(){this.eventProcessor.eventMainButtonClicked()}
+	public onPhaseSelected(): void {this.eventProcessor.updateValidateButton(true)}
 	isDiscoveryActive(): boolean {
 		return this.gameContentService.isContentActive('expansionDiscovery')
 	}
@@ -251,5 +257,16 @@ export class GameEventComponent {
 		if(!this.currentEvent){return}
 		if(this.currentEvent.scrollToTopOnActivation===false){return}
 		window.scroll({top:0})
+	}
+	isEventDedicatedComponent(): boolean {
+		if(!this.currentEvent){return false}
+		if(this.currentEvent.hasCardBuilder()){return true}
+		if(dedicatedComponentEventSubtypeList.includes(this.currentEvent.subType)){return true}
+		return false
+	}
+	isStandardSelectorComponent(): boolean {
+		if(!this.currentEvent){return false}
+		if(this.isEventDedicatedComponent()){return false}
+		return this.currentEvent.hasCardsToSelectFrom()
 	}
 }

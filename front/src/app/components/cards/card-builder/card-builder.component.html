@@ -2,46 +2,44 @@
 	<div [ngClass]="['wrapper-card-builder', 'ares-background', 'ares-border', cardSize]">
 		<div [ngClass]="['inner-decoration--side', cardSize]"></div>
 		<div [ngClass]="['selected-card-zone',getBackground(), cardSize]"
-			[class.locked]="cardBuilder.getBuilderIsLocked()">
+			[class.locked]="_currentBuilder.getBuilderIsLocked()">
 			<app-playable-card-list
-				*ngIf="cardBuilder.getSelectedCard()"
+				*ngIf="_currentBuilder.getSelectedCard()"
 				[ngClass]="['play-card-zone-list']"
-				[cardList]="[cardBuilder.getSelectedCard()]"
-				[listType]="'builderSelectedZone'"
-				[event]="event"
-				[selectedDiscount]="discount">
+				[cardList]="_currentBuilder.getSelectedCardAsList()"
+				[buildDiscount]="discount"
+				[listType]="'builderSelectedZone'">
 			</app-playable-card-list>
 		</div>
 		<div [ngClass]="['wrapper-buton-zone', cardSize]"
-			*ngIf="!cardBuilder.getBuilderIsLocked()">
-			<div [ngClass]="['wrapper-buttons', cardSize]">
-				<div *ngIf="cardBuilder.getButtons()[0].isEnabled() || cardBuilder.getButtons()[1].isEnabled()" class="wrapper-select-button">
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[0].isEnabled()" [button]="cardBuilder.getButtons()[0]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[0])"></app-event-card-builder-button>
-					<app-event-card-builder-button *ngIf="cardBuilder.getButtons()[1].isEnabled()" [button]="cardBuilder.getButtons()[1]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'large'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[1])"></app-event-card-builder-button>
-				</div>
-				<div *ngIf="cardBuilder.getButtons()[2].isEnabled() || cardBuilder.getButtons()[3].isEnabled()" class="wrapper-build-button">
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[2]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[2])"></app-event-card-builder-button>
-					<app-event-card-builder-button [button]="cardBuilder.getButtons()[3]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[3])"></app-event-card-builder-button>
-				</div>
+			*ngIf="!_currentBuilder.getBuilderIsLocked()">
+			<div [ngClass]="['buttons-hider', displayBuildOrCancel()?'':'hide']"
+				(mouseenter)="_hoveredBackground=true"
+				(mouseleave)="_hoveredBackground=false">
+				<img src="/assets/other/research_eye_black.png" alt="">
 			</div>
-			<ng-container *ngIf="hasOptionButton()">
-				<div [ngClass]="['inner-decoration--separator', cardSize]"></div>
-				<div class="wrapper-alternative">
-					<div class="wrapper-alternative-inner">
-						<h2>Or</h2>
-						<div [ngClass]="['wrapper-buttons', cardSize]">
-							<app-event-card-builder-button [button]="cardBuilder.getButtons()[4]" [context]="'builderButton'" [cardSize]="cardSize" [shape]="'small'" (buttonClicked)="cardBuilderButtonClicked(cardBuilder.getButtons()[4])"></app-event-card-builder-button>
-						</div>
-					</div>
-				</div>
-			</ng-container>
+			<div [ngClass]="['wrapper-buttons', cardSize]"
+				*ngIf="displayBuildOrCancel()"
+				(mouseenter)="_hoveredButtons=true"
+				(mouseleave)="_hoveredButtons=false">
+				<app-event-card-builder-button 
+					*ngFor="let b of _currentBuilder.getButtons()"
+					[button]="b" [context]="'builderButton'"
+					[cardSize]="cardSize"
+					(buttonClicked)="cardBuilderButtonClicked(b)">
+				</app-event-card-builder-button>
+			</div>
 		</div>
 	</div>
+	<app-card-builder-alternative-option
+		*ngIf="_hasOptions"
+		[builder]="_currentBuilder"
+		[cardSize]="cardSize">
+	</app-card-builder-alternative-option>
 	<app-card-builder-alternative-cost
 		#altCost
-		*ngIf="!cardBuilder.getBuilderIsLocked() && _hasAlternativeCost"
-		[event]="event"
-		[builder]="cardBuilder"
+		*ngIf="!_currentBuilder.getBuilderIsLocked() && _hasAlternativeCost"
+		[builder]="_currentBuilder"
 		[cardSize]="cardSize"
 		(buttonClicked)="onAlternativePayButtonClicked($event)">
 	</app-card-builder-alternative-cost>

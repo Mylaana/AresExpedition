@@ -1,19 +1,21 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayerStateModel } from '../../../models/player-info/player-state.model';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { CommonModule } from '@angular/common';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
-import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { EventBaseModel } from '../../../models/core-game/event.model';
 import { ProjectListType } from '../../../types/project-card.type';
 import { EventTitleKeyPipe } from '../../../pipes/event-title.pipe';
+import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
+import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 
 @Component({
     selector: 'app-initial-draft',
     imports: [
         CommonModule,
-        PlayableCardListComponent,
+        PlayableCardListWrapperComponent,
+		PlayableCardListComponent,
 		EventTitleKeyPipe
     ],
     templateUrl: './initial-draft.component.html',
@@ -27,7 +29,7 @@ export class InitialDraftComponent implements OnInit, OnDestroy{
 	_selectionList: PlayableCardModel[] =[]
 	private destroy$ = new Subject<void>()
 
-	constructor(private gameStateService: GameState){}
+	constructor(private gameStateService: GameStateFacadeService){}
 
 	ngOnInit(): void {
 		this.gameStateService.currentClientState.pipe(takeUntil(this.destroy$)).subscribe(state => this.onClientStateUpdate(state))

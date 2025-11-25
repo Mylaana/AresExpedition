@@ -1,4 +1,5 @@
-import { AdvancedRessourceType } from "../types/global.type"
+import { GlobalParameterColorEnum, GlobalParameterNameEnum } from "../enum/global.enum"
+import { AdvancedRessourceType, MinMaxEqualType, MoonTileType, TagType } from "../types/global.type"
 import { SummaryType, PrerequisiteTresholdType, PrerequisiteType, LocalizedText, CardType, CardTypeUndefined } from "../types/project-card.type"
 import { AdvancedRessourceStock } from "./global.interface"
 
@@ -7,7 +8,7 @@ export interface CardState{
 	selected: boolean
 	upgradable: boolean
 	upgraded: boolean
-	buildable: boolean
+	//buildable: boolean
 	activable: boolean
 	ignoreCost: boolean
 }
@@ -69,4 +70,10 @@ export interface CardStats {
 	winrate: number
 	score: number
 	duration: number
+}
+
+export interface CardRequirements {
+	globalParameter?: GlobalParameterNameEnum
+	globalParameterColor?: GlobalParameterColorEnum
+	treshold: MinMaxEqualType
 }

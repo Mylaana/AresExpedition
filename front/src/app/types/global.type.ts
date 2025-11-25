@@ -27,14 +27,17 @@ export type NonEventButtonNames = 'sellOptionalCard' | 'sellOptionalCardCancel' 
 | 'settingToggleDebug' | 'portalEffect'
 | 'createGamePlayerNumber' | 'tagGain' | 'displayUpgradedPhase' | 'killCard' | 'lockBuilder'
 | 'settingToggleDebug' | 'portalEffect' | 'settingToggleLanguage' | 'carouselLeft' | 'carouselRight'
-| 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
 | 'cardOverviewInvertTagSelection' | 'cardOverviewResetTagSelection' | 'cardOverviewNoneTag' | 'cardOverviewDisplayAll' | 'cardOverviewDisplayBalanced'
-| 'createGameOptionActivateAll' | 'createGameOptionDeactivateAll'
+| 'createGameOptionActivateAll' | 'createGameOptionDeactivateAll' | 'sellCardsSelectAll' | 'sellCardsSelectNone'
 | CardType
 | StandardProjectButtonNames
+| AltenativeCostButtonNames
+| EventCardBuilderButtonNames
 export type ToggleButtonNames = GameContentName
 export type CarouselButtonNames = 'carousel'
-export type EventCardBuilderButtonNames =  'selectCard' | 'cancelSelectCard' | 'discardSelectedCard' | 'buildCard' | BuilderOption
+export type EventCardBuilderButtonNames =  'discardSelectedCard' | 'buildCard' | BuilderOption
+export type AltenativeCostButtonNames = 'alternativePayAnaerobicMicroorganisms' | 'alternativePayRestructuredResources'
+
 export type RessourceType = 'megacredit' | 'plant' | 'heat' | 'steel' | 'titanium' | 'card'
 export type AdvancedRessourceType = 'microbe' | 'animal' | 'science'
 export type TagType = 'building' | 'space' | 'science' | 'power' | 'earth' | 'jovian' | 'plant' | 'animal' | 'microbe' | 'event'
@@ -52,7 +55,7 @@ export type SettingInterfaceSize = 'small' | 'medium'
 export type SettingPlayerPannelSize = 'small' | 'medium'
 export type TextWithImageContext = 'default' | 'cardEffectSummary' | 'cardTextAndIcon' | 'cardVpText' | 'portalButton' | 'wildButton'
 | 'commandButton' | 'commandButtonSmall' | 'convertButton' | 'convertButtonTwoLines' | 'activateCardButton' | 'builderButton' | 'cardPrerequisite'
-| 'milestone' | 'milestoneClaimed' | 'award' | 'milestoneAwardHelper' | 'convertResource' | 'filterPannel'
+| 'milestone' | 'milestoneClaimed' | 'award' | 'milestoneAwardHelper' | 'convertResource' | 'filterPannel' | 'repeatProduction'
 export type MilestoneState = Record<MilestonesEnum, boolean>
 export type InputRuleType = 'number' | 'string'
 export type GoToPage = 'cardOverviewBalanced'
@@ -64,3 +67,5 @@ export type GameContentName = 'expansionDiscovery' | 'expansionFoundations' | 'e
 | 'modeAdditionalAwards' | 'expansionMoon' | 'modeMoonMandatory'
 export type MoonTileType = 'habitat' | 'road' | 'mine'
 export type FilterPannelSelectedBehavior = 'all' | 'greyNotSelected'
+//export type ButtonGroupUpdateType = EventCardBuilderButtonNames | 'selectionCardSelected' | 'selectionCardDiscarded' | 'resetState'
+export type HexSize = 'xs' | 'small' | 'medium' | 'large'

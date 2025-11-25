@@ -7,6 +7,7 @@ import { MoonTileType } from "../../types/global.type"
 import { PlayerStateModel } from "./player-state.model"
 
 export class PlayerScoreStateModel {
+	private totalScore: number = 0
 	private vp: number = 0
 	private scalingVp: number = 0
 	private terraformingRating: number = 0
@@ -20,6 +21,7 @@ export class PlayerScoreStateModel {
 	private scaledVpList: CardScalingVP[]= []
 
 	constructor(data: PlayerScoreStateDTO){
+		this.totalScore = data.ts
 		this.vp = data.v
 		this.terraformingRating = data.tr
 		this.forest = data.f
@@ -38,17 +40,36 @@ export class PlayerScoreStateModel {
 		return this.claimedMilestones
 	}
 	getClaimedMilestoneCount(): number {return this.claimedMilestones.length}
-	setAwardsVp(vp: number){this.awardsVp = vp}
-	getAwardsVp(): number {return this.awardsVp}
-	addBaseVP(points: number): void {this.vp += points}
-	getBaseVP(): number {return this.vp }
-	getTotalVP(): number {
-		return this.vp + this.scalingVp + this.terraformingRating + this.forest + this.getClaimedMilestoneCount() * 3 + this.awardsVp
+	setAwardsVp(vp: number){
+		this.awardsVp = vp
+		this.setTotalScore()
 	}
-	setScalingVP(scalingVp: number){this.scalingVp = scalingVp}
-	addTR(tr: number): void {this.terraformingRating += tr}
+	getAwardsVp(): number {return this.awardsVp}
+	addBaseVP(points: number): void {
+		this.vp += points
+		this.setTotalScore()
+	}
+	getBaseVP(): number {return this.vp }
+	getTotalScore(): number {
+		return this.totalScore
+	}
+	private setTotalScore(): void {
+		this.totalScore = this.vp + this.scalingVp + this.terraformingRating
+		+ this.forest + this.getClaimedMilestoneCount() * 3 + this.awardsVp
+	}
+	setScalingVP(scalingVp: number){
+		this.scalingVp = scalingVp
+		this.setTotalScore()
+	}
+	addTR(tr: number): void {
+		this.terraformingRating += tr
+		this.setTotalScore()
+	}
 	getTR(): number {return this.terraformingRating}
-	addForest(forest: number): void {this.forest += forest}
+	addForest(forest: number): void {
+		this.forest += forest
+		this.setTotalScore()
+	}
 	getForest(): number {return this.forest}
 	addHabitat(quantity: number){this.habitat += quantity}
 	getHabitat(): number {return this.habitat}
@@ -84,9 +105,9 @@ export class PlayerScoreStateModel {
 	getTotalScalingVP(): number {
 		return this.scaledVpList.reduce((sum, entry) => sum + entry.vp, 0);
 	}
-
 	toJson(): PlayerScoreStateDTO {
 		return {
+			ts: this.totalScore,
 			cm: this.claimedMilestones,
 			v: this.vp,
 			tr: this.terraformingRating,
@@ -110,6 +131,7 @@ export class PlayerScoreStateModel {
 	static empty(): PlayerScoreStateModel {
 		return new PlayerScoreStateModel(
 			{
+				ts: 0,
 				cm: [],
 				tr: 0,
 				v:0,

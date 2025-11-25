@@ -4,7 +4,7 @@ import { PlayableCardModel } from '../../../../models/cards/project-card.model';
 import { CardBackgroundComponent } from '../card-blocks/card-background/card-background.component';
 import { ProjectCardCostService } from '../../../../services/cards/project-card-cost.service';
 import { BaseCardComponent } from '../../base/base-card/base-card.component';
-import { GameState } from '../../../../services/core-game/game-state.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
 import { PlayerStateModel } from '../../../../models/player-info/player-state.model';
 import { GlobalInfo } from '../../../../services/global/global-info.service';
 import { ActivationOption, ProjectListSubType, ProjectListType } from '../../../../types/project-card.type';
@@ -29,6 +29,8 @@ import { CardDisabledForegroundComponent } from '../card-blocks/card-disabled-fo
 import { SettingCardSize } from '../../../../types/global.type';
 import { ProjectCardScalingVPService } from '../../../../services/cards/project-card-scaling-VP.service';
 import { CardStatsListComponent } from '../card-blocks/card-stats/card-stats-list.component';
+import { CardScalingProductionComponent } from '../card-blocks/card-scaling-prod/card-scaling-production.component';
+import { PlayableCard } from '../../../../factory/playable-card.factory';
 
 @Component({
     selector: 'app-playable-card',
@@ -50,6 +52,7 @@ import { CardStatsListComponent } from '../card-blocks/card-stats/card-stats-lis
     CardStatusComponent,
     CardDisabledForegroundComponent,
     CardStatsListComponent,
+	CardScalingProductionComponent
 ],
     templateUrl: './playable-card.component.html',
     styleUrl: './playable-card.component.scss',
@@ -69,16 +72,20 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	@Input() filter?: ProjectFilter
 	@Input() cardSize!: SettingCardSize
 	@Input() notClientState!: PlayerStateModel | undefined
+	@Input() authorizeSelection: boolean = false
+	@Input() checkCostSelector: boolean = false
 	private megacreditAvailable: number = 0
-	private playerState!: PlayerStateModel
-
+	
+	_playerState!: PlayerStateModel
 	_hovered: boolean = false
 	_activationCostPayable: boolean = false
+	_hasScalingProduction: boolean = false
+	_canBePlayed: boolean = false
 
 	private destroy$ = new Subject<void>()
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private projectCardCostService: ProjectCardCostService,
 		private projectCardVpService: ProjectCardScalingVPService
 	){
@@ -90,8 +97,9 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.projectCard.tagsUrl = []
 		this.projectCardCostService.initialize(this.projectCard)
 		this.projectCardVpService.initialize(this.projectCard)
-
 		this.projectCard.tagsId = this.fillTagId(this.projectCard.tagsId)
+		this._hasScalingProduction = PlayableCard.hasScalingProduction(this.projectCard.cardCode)
+		
 		// fills tagUrl
 		for(let i = 0; i < this.projectCard.tagsId.length; i++) {
 			this.projectCard.tagsUrl.push(GlobalInfo.getUrlFromID(this.projectCard.tagsId[i]))
@@ -103,9 +111,6 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		if(!this._loaded){return}
 		if (changes['initialState'] && changes['initialState'].currentValue) {
 			this.state.resetStateToInitial()
-		}
-		if (changes['stateFromParent'] && changes['stateFromParent'].currentValue) {
-			this.changeStateFromParent()
 		}
 		if (changes['buildDiscount'] && changes['buildDiscount'].currentValue) {
 			this.updateDiscount()
@@ -122,7 +127,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 
 		// set playerstate as notClientstate so it can display scaled vp on other players played cards
 		if(this.notClientState){
-			this.playerState = this.notClientState
+			this._playerState = this.notClientState
 			this.updateVpScalingServiceState()
 			return
 		}
@@ -138,7 +143,9 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		this.setBuildable()
 	}
 	updateDiscount(){
-		this.projectCardCostService.setBuilderDiscount(this.buildDiscount)
+		if(this.buildDiscount){
+			this.projectCardCostService.setBuilderDiscount(this.buildDiscount)
+		}
 		this.setBuildable()
 	}
 	private fillTagId(tagsId:number[]): number[] {
@@ -160,23 +167,22 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		return newTagsId
 	}
 	cardClick(){
+		if(!this.authorizeSelection){return}
 		if(this.state.isSelectable()!=true){return}
 		if(this.isDisabled()){return}
-		if(this.state.isBuildable()===false && this.state.isIgnoreCost()!=true){return}
-		this.state.setSelected(this.state.isSelected()===false)
-		this.cardStateChange.emit({card:this.projectCard, state: this.state})
+		if(this._canBePlayed===false && this.state.isIgnoreCost()!=true){return}
+		this.setSelection(this.state.isSelected()===false)
 	}
 	private updateplayerState(state: PlayerStateModel): void {
 		if(!state){return}
-		this.playerState = state
-		this.projectCardCostService.setBuilderDiscount(this.buildDiscount)
+		this._playerState = state
 		this.projectCardCostService.onClientStateUpdate(state)
 		this.updateVpScalingServiceState()
 		this.updateDiscount()
 	}
 	public setBuildable(): void {
 		if(this.parentListType != 'builderSelector'){return}
-		this.state.setBuildable(this.projectCardCostService.getCanBePlayed())
+		this._canBePlayed = this.projectCardCostService.getCanBePlayed()
 	}
 	public onActivation(activation: {option: ActivationOption, twice: boolean}): void {
 		this.cardActivated.emit({card: this.projectCard, option: activation.option, twice: activation.twice})
@@ -189,13 +195,13 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		if(this.filter && !this.projectCard.isFilterOk(this.filter)){
 			return true
 		}
-		if(this.parentListType==='builderSelector' && this.state.isBuildable()===false && this.state.isIgnoreCost()!=false){
+		if(this.parentListType==='builderSelector' && this._canBePlayed===false && this.state.isIgnoreCost()!=false){
 			return true
 		}
 		if(this.state.isActivable()===true && !this.isActivable()){
 			return true
 		}
-		if(!this.state.isBuildable() && !this.state.isIgnoreCost()){
+		if(!this._canBePlayed && !this.state.isIgnoreCost()){
 			return true
 		}
 		return false
@@ -206,6 +212,7 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 	}
 	public isSelectable(): boolean {
 		if(this.isDisabled()){return false}
+		if(this.authorizeSelection===false){return false}
 		return this.state.isSelectable()
 	}
 	public isGreyedWhenSelected(): boolean {
@@ -216,6 +223,22 @@ export class PlayableCardComponent extends BaseCardComponent implements OnInit, 
 		if(!this.projectCard.scalingVp){return}
 		let authorized: ProjectListType[] = ['hand', 'builderSelector', 'builderSelectedZone', 'played', 'playedSelector']
 		if(!authorized.includes(this.parentListType)){return}
-		this.projectCardVpService.updatePlayerState(this.playerState)
+		this.projectCardVpService.updatePlayerState(this._playerState)
+	}
+	public isRepeatProduction(): boolean {
+		return this.parentListSubType==='repeatProduction'
+	}
+	public getRepeatProductionCaption(): string {
+		return PlayableCard.getRepeatProductionCaption(this.projectCard.cardCode, this._playerState)
+	}
+	public selectFromParent(){
+		this.setSelection(true)
+	}
+	public unselectFromParent(){
+		this.setSelection(false)
+	}
+	private setSelection(newSelection: boolean){
+		this.state.setSelected(newSelection)
+		this.cardStateChange.emit({card:this.projectCard, state: this.state})
 	}
 }

@@ -35,10 +35,19 @@ public class EventState {
         this.value = ocean.getBonuses();
     }
 
-    public static EventState addEventDrawCards(List<String> cards, Integer thenDiscard){
+    public static EventState addEventDrawCards(List<String> cards, Integer thenDiscard, Boolean isCardProduction){
         Map<String, Object> content = new HashMap<>();
         content.put("cardIdList", cards);
         content.put("thenDiscard", thenDiscard);
+        content.put("isCardProduction", isCardProduction);
+        return new EventState(EventStateTypeEnum.DRAW_CARDS, content);
+    }
+    public static EventState addEventDrawCards(List<String> cards, Integer thenDiscard, Boolean isCardProduction, String triggerOrigin){
+        Map<String, Object> content = new HashMap<>();
+        content.put("cardIdList", cards);
+        content.put("thenDiscard", thenDiscard);
+        content.put("isCardProduction", isCardProduction);
+        content.put("triggerOrigin", triggerOrigin);
         return new EventState(EventStateTypeEnum.DRAW_CARDS, content);
     }
 

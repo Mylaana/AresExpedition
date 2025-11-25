@@ -2,30 +2,29 @@ import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { PlayerStateModel, PlayerReadyModel } from "../../models/player-info/player-state.model";
 import { MilestoneState, myUUID, PlayableCardType, RessourceType, TagType } from "../../types/global.type";
-import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter, MoonTile,  } from "../../interfaces/global.interface";
+import { CardRessourceStock, GlobalParameterValue, PlayerPhase, ScanKeep, RessourceStock, ProjectFilter, MoonTile, } from "../../interfaces/global.interface";
 import { NonSelectablePhase } from "../../types/global.type";
 import { PhaseCardType, PhaseCardUpgradeType } from "../../types/phase-card.type";
-import { DrawEvent, EventBaseModel, EventGeneric, EventPhase } from "../../models/core-game/event.model";
-import { PlayableCardModel} from "../../models/cards/project-card.model";
+import { DrawEvent, EventBaseModel, EventGeneric } from "../../models/core-game/event.model";
+import { PlayableCardModel } from "../../models/cards/project-card.model";
 import { ProjectCardInfoService } from "../cards/project-card-info.service";
 import { WsDrawResult, WsGroupReady, WsOceanResult } from "../../interfaces/websocket.interface";
 import { RxStompService } from "../websocket/rx-stomp.service";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../../enum/phase.enum";
 import { PhaseCardModel } from "../../models/cards/phase-card.model";
 import { PlayerStateDTO } from "../../interfaces/dto/player-state-dto.interface";
-import { GameParamService } from "./game-param.service";
-import { EventStateDTO } from "../../interfaces/event-state.interface";
+import { GameParamService } from "../core-game/game-param.service";
 import { Utils } from "../../utils/utils";
 import { AwardsEnum, GlobalParameterNameEnum, MilestonesEnum } from "../../enum/global.enum";
-import { EventStateService } from "../../factory/event-state-service.service";
 import { EventFactory } from "../../factory/event/event-factory";
 import { ActivationOption } from "../../types/project-card.type";
 import { PlayableCard } from "../../factory/playable-card.factory";
-import { EventStateOriginEnum } from "../../enum/eventstate.enum";
 import { EventSerializer } from "../../utils/event-serializer.utils";
 import { GAME_CARD_SELL_VALUE } from "../../global/global-const";
-import { SCALING_PRODUCTION } from "../../maps/playable-card-other-maps";
-import { GameActiveContentService } from "./game-active-content.service";
+import { GameActiveContentService } from "../core-game/game-active-content.service";
+import { SCALING_PRODUCTION } from "../../maps/playable-card-scaling-production-maps";
+import { EventPileAddRule } from "../../types/event.type";
+import { EventQueueService } from "../events/event-queue.service";
 
 interface SelectedPhase {
     "undefined": boolean,
@@ -44,26 +43,23 @@ interface PhaseOrder {
     "5": NonSelectablePhase,
 }
 
-type EventPileAddRule = 'first' | 'second' | 'last'
-
 
 @Injectable({
     providedIn: 'root'
 })
-export class GameState{
+export class GameStateFacadeService{
     private loading = new BehaviorSubject<boolean>(true);
 	private gameStarted = new BehaviorSubject<boolean>(true);
 
     private clientId!: myUUID
     playerCount = new BehaviorSubject<myUUID[]>([]);
-	private eventQueueSavedState: EventStateDTO[] = []
 
     private groupPlayerState = new BehaviorSubject<PlayerStateModel[]>([]);
     private groupPlayerReady = new BehaviorSubject<PlayerReadyModel[]>([]);
     private groupPlayerSelectedPhase = new BehaviorSubject<PlayerPhase[]>([]);
     private phase = new BehaviorSubject<NonSelectablePhaseEnum>(NonSelectablePhaseEnum.undefined)
     private drawQueue = new BehaviorSubject<DrawEvent[]>([])
-    private eventQueue = new BehaviorSubject<EventBaseModel[]>([])
+
 	private clientState: BehaviorSubject<PlayerStateModel> = new BehaviorSubject<PlayerStateModel>(PlayerStateModel.empty(this.injector))
 	private selectedPhaseList = new BehaviorSubject<SelectablePhaseEnum[]>([])
 	private gameOver = new BehaviorSubject<boolean>(false)
@@ -71,6 +67,7 @@ export class GameState{
 	private awards = new BehaviorSubject<AwardsEnum[]>([])
 	private round = new BehaviorSubject<number>(0)
 	private cardProduction = new BehaviorSubject<string[]>([])
+	private resourceProduction = new BehaviorSubject<RessourceStock[]>([])
 	private deck = new BehaviorSubject<number>(0)
 	private discard = new BehaviorSubject<number>(0)
 
@@ -79,7 +76,6 @@ export class GameState{
     currentGroupPlayerSelectedPhase = this.groupPlayerSelectedPhase.asObservable()
     currentPhase = this.phase.asObservable()
     currentDrawQueue = this.drawQueue.asObservable()
-    currentEventQueue = this.eventQueue.asObservable()
     currentPlayerCount = this.playerCount.asObservable()
     currentLoadingState = this.loading.asObservable()
 	currentGameStartedState = this.gameStarted.asObservable()
@@ -90,6 +86,7 @@ export class GameState{
 	currentAwards = this.awards.asObservable()
 	currentRound = this.round.asObservable()
 	currentCardProduction = this.cardProduction.asObservable()
+	currentResourceProduction = this.resourceProduction.asObservable()
 	currentDeck = this.deck.asObservable()
 	currentDiscard = this.discard.asObservable()
 
@@ -116,8 +113,8 @@ export class GameState{
         private projectCardService: ProjectCardInfoService,
         private rxStompService: RxStompService,
 		private gameParam: GameParamService,
-		private eventStateService: EventStateService,
 		private gameModeContentService: GameActiveContentService,
+		private gameEventQueueService: EventQueueService,
 		private injector: Injector
 	){
 		this.gameParam.currentClientId.subscribe((id) => {if(id){this.clientId = id}})
@@ -132,6 +129,7 @@ export class GameState{
 		switch(newPhase){
 			case(NonSelectablePhaseEnum.undefined):{return}
 			case(NonSelectablePhaseEnum.planification):{
+				this.getClientState().resetAllPhaseActivationBonusCollected()
 				let selected = this.getClientPhaseSelected()
 				if(selected && selected != SelectablePhaseEnum.undefined ){
 					events.push(EventFactory.createGeneric('waitingGroupReady'))
@@ -143,7 +141,6 @@ export class GameState{
 			case(NonSelectablePhaseEnum.construction):{events.push(EventFactory.createPhase('constructionPhase'));break}
 			case(NonSelectablePhaseEnum.action):{events.push(EventFactory.createPhase('actionPhase'));break}
 			case(NonSelectablePhaseEnum.production):{
-				this.cardProduction.next([])
 				events.push(EventFactory.createPhase('productionPhase'))
 				break
 			}
@@ -219,18 +216,11 @@ export class GameState{
 	getClientStateDTO(): PlayerStateDTO {
 		return this.getClientState().toJson(
 			EventSerializer.eventQueueToJson(
-			this.eventQueue.getValue()))
+			this.gameEventQueueService.getCurrentEventQueue()))
 	}
-	/*
-    updatePlayerState(playerId:myUUID, playerState: PlayerStateModel): void{
-        this.groupPlayerState.getValue()[playerId] = playerState
-        //calls the groupState update to next subscriptions
-        this.updateGroupPlayerState(this.groupPlayerState.getValue())
-    }
-	*/
 
-    updateClientState(clientState: PlayerStateModel): void{
-        //this.updatePlayerState(this.clientPlayerId, clientState)
+	updateClientState(clientState: PlayerStateModel): void{
+		this.gameEventQueueService.updateClientState(clientState)
 		this.clientState.next(clientState)
     }
 
@@ -287,7 +277,6 @@ export class GameState{
      * @returns the player's current selected phase
      */
     getPlayerCurrentSelectedPhase(playerId: myUUID): SelectablePhaseEnum {
-		console.log(this.groupPlayerSelectedPhase.getValue(), playerId)
         for(let playerSelcted of this.groupPlayerSelectedPhase.getValue()){
             if(playerSelcted.playerId === playerId){
                 return playerSelcted.currentSelectedPhase
@@ -384,63 +373,7 @@ export class GameState{
 	 * adding one or multiple events in queue at the specified [addrule] position, if multiple events added this way, the received order is preserved.	 *
 	 */
     addEventQueue(events: EventBaseModel | EventBaseModel[], addRule: EventPileAddRule): void {
-        let newQueue: EventBaseModel[] = []
-        let addEvents: EventBaseModel[] = Utils.toArray(events)
-
-        switch(addRule){
-            case('last'):{
-                newQueue = newQueue.concat(this.eventQueue.getValue(), addEvents)
-                break
-            }
-            case('first'):{
-                newQueue = newQueue.concat(addEvents, this.eventQueue.getValue())
-                break
-            }
-            case('second'):{
-                let oldQueue = this.eventQueue.getValue()
-                let firstEvent = oldQueue.shift()
-                newQueue = newQueue.concat(firstEvent?[firstEvent]:[], addEvents, oldQueue)
-            }
-        }
-		if(this.eventQueueSavedState.length>0){
-			newQueue = this.applyEventQueueSavedState(newQueue)
-		}
-        this.eventQueue.next(newQueue)
-    }
-	private applyEventQueueSavedState(queue: EventBaseModel[]): EventBaseModel[] {
-		//create new events
-		if(this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.load).length>0){
-			queue = this.eventStateService.createFromJson(this.eventQueueSavedState).concat(queue)
-			this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e.o!=EventStateOriginEnum.create)
-		}
-		//load data in existing events
-		if(this.eventQueueSavedState.length>0){
-			for(let event of queue){
-				for(let dto of this.eventQueueSavedState){
-					if(this.eventStateService.shouldLoadEvent(event, dto)){
-						this.eventStateService.loadFromJson(event, dto, this.getClientState())
-						this.eventQueueSavedState = this.eventQueueSavedState.filter((e) => e!=dto)
-					}
-				}
-			}
-		}
-		return queue
-	}
-    /**
-     * gets nothing
-     * returns nothing
-     * emits a next signal for eventQueue.next()
-     */
-    cleanAndNextEventQueue(): void{
-        let newEventQueue: EventBaseModel[] = [];
-        //clean draw queue
-        for(let ticket of this.eventQueue.getValue()){
-            if(ticket.finalized!=true){
-                newEventQueue.push(ticket)
-            }
-        }
-
-        this.eventQueue.next(newEventQueue)
+		this.gameEventQueueService.addEventQueue(events, addRule)
     }
 	setClientPhaseCardUpgraded(upgrade: PhaseCardUpgradeType): void {
 		let state = this.getClientState()
@@ -464,14 +397,11 @@ export class GameState{
 
         //check for triggers and add them to queue
 		let activeTriggers = state.getTriggersIdActive()
-        let eventsOnPlayed = PlayableCard.getOnTriggerredEvents('ON_CARD_PLAYED', activeTriggers, state, {playedCard:card})
-        if(eventsOnPlayed.length>0){
-            events = events.concat(eventsOnPlayed)
-        }
-        let eventsOnTagGained =PlayableCard.getOnTriggerredEvents('ON_TAG_GAINED', activeTriggers, state, {tagList:card.tagsId, playedCard: card})
-        if(eventsOnTagGained.length>0){
-            events = events.concat(eventsOnTagGained)
-        }
+        let eventsOnPlayedBeforeCard = PlayableCard.getOnTriggerredEvents(['ON_CARD_PLAYED', 'ON_TAG_GAINED'], activeTriggers, state, {tagList:card.tagsId, playedCard: card}, 'beforeCardOnly')
+		let eventsOnPlayedAfterCard = PlayableCard.getOnTriggerredEvents(['ON_CARD_PLAYED', 'ON_TAG_GAINED'], activeTriggers, state, {tagList:card.tagsId, playedCard: card}, 'afterCardOnly')
+        
+		events = events.concat(eventsOnPlayedBeforeCard)
+		events = events.concat(eventsOnPlayedAfterCard)
 
         if(playedCardEvents!=undefined){
             events = events.concat(playedCardEvents)
@@ -573,7 +503,10 @@ export class GameState{
             event.drawResultCardList = wsDrawResult.cardIdList
 			event.scanKeepOptions = wsDrawResult.options
 			event.keepCardNumber = wsDrawResult.keep
+			event.isCardProduction = wsDrawResult.isCardProduction
             eventFound = true
+			event.triggerOrigin = wsDrawResult.triggerOrigin
+			
             this.cleanAndNextDrawQueue()
             break
         }
@@ -584,7 +517,7 @@ export class GameState{
 			eventFound = true
 		}
         if(eventFound===false){
-            console.log('event not found', wsDrawResult, drawQueue, this.eventQueue.getValue())
+            console.log('event not found', wsDrawResult, drawQueue)
         }
     }
     public setGroupReady(wsGroupReady: WsGroupReady[]): void {
@@ -599,19 +532,8 @@ export class GameState{
 		}
         this.groupPlayerReady.next(groupReady)
     }
-    public clearEventQueue(){
-		this.eventQueue.next([])
-	}
-    public finalizeEventWaitingGroupReady(){
-        if(this.eventQueue.getValue().length===0){return}
-
-        for(let event of this.eventQueue.getValue()){
-            if(event.subType==='waitingGroupReady'){
-                event.finalized = true
-            }
-        }
-        this.cleanAndNextEventQueue()
-    }
+    public clearEventQueue(){this.gameEventQueueService.clearEventQueue()}
+    public finalizeEventWaitingGroupReady(){this.gameEventQueueService.finalizeEventWaitingGroupReady()}
 	public setGameLoaded(){
 		this.loading.next(false)
 	}
@@ -624,7 +546,7 @@ export class GameState{
 
 			//add playerstate
 			if(playerStateDTO.infoState.i===this.clientId){
-				this.eventQueueSavedState = playerStateDTO.eventState?.e??[]
+				this.gameEventQueueService.loadEventStateDTOFromJson(playerStateDTO.eventState?.e??[])
 				playerStateDTO.eventState.e = []
 			}
 			groupPlayerState.push(PlayerStateModel.fromJson(playerStateDTO, this.injector))
@@ -636,6 +558,7 @@ export class GameState{
 
 		for(let state of this.groupPlayerState.getValue()){
 			if(state.getId()===this.clientId){
+				this.resourceProduction.next(state.getProductionResourcesGainedThisRound())
 				this.updateClientState(state)
 			}
 		}
@@ -684,7 +607,6 @@ export class GameState{
 		this.playCardFromClientHand(
 			corporation,
 			'corporation',
-			//this.mergerGame && isMerger || this.mergerGame===false
 		)
 	}
 	public initializeGroupReady(wsGroupReady: WsGroupReady[], wsGroupState: PlayerStateDTO[]): void {
@@ -794,13 +716,10 @@ export class GameState{
 		this.addEventQueue(newEvents,'first')
     }
 	endOfPhase() {
-		this.rxStompService.publishPlayerState(this.getClientState().toJson(EventSerializer.eventQueueToJson(this.eventQueue.getValue())))
+		this.rxStompService.publishPlayerState(this.getClientState().toJson(EventSerializer.eventQueueToJson(this.gameEventQueueService.getCurrentEventQueue())))
 	}
 	setGameOver(){
 		this.gameOver.next(true)
-	}
-	loadProductionPhaseCardList(cardList: string[], addToHand: boolean){
-		this.addCardProduction(cardList, addToHand)
 	}
 	applyAverageStartingMegacredits(){
 		let clientState = this.getClientState()
@@ -839,8 +758,9 @@ export class GameState{
 	applyDoubleProduction(card: PlayableCardModel){
 		if(!card){return}
 		let resources: RessourceStock[] = []
+		let clientState = this.getClientState()
 		if(card.cardCode in SCALING_PRODUCTION){
-			resources = SCALING_PRODUCTION[card.cardCode](this.getClientState())
+			resources = SCALING_PRODUCTION[card.cardCode](clientState)
 		} else {
 			resources = this.getFlatDoubleProduction(card)
 		}
@@ -857,17 +777,22 @@ export class GameState{
 		resources = resources.filter((el) => el.name!='card')
 		if(cardToDraw>0){
 			newEvents.push(EventFactory.createDeckQueryEvent('drawQuery', {
-				isCardProductionDouble:true,
+				isCardProduction:true,
 				drawDiscard: {draw:cardToDraw},
-				firstProductionCardList: this.cardProduction.getValue()
 			}))
 		}
 		if(resources.length>0){
 			newEvents.push(EventFactory.simple.addRessource(resources))
+			this.addProducedResourcesThisRound(resources)
 		}
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents, 'first')
 		}
+	}
+	addProducedResourcesThisRound(resources: RessourceStock[]){
+		let clientState = this.getClientState()
+		clientState.addProductionResourcesGainedThisRound(resources)
+		this.resourceProduction.next(clientState.getProductionResourcesGainedThisRound())
 	}
 	private getFlatDoubleProduction(card: PlayableCardModel): RessourceStock[] {
 		let playEvents: EventGeneric[] | undefined = PlayableCard.getOnPlayedEvents(card.cardCode, this.getClientState())
@@ -917,10 +842,11 @@ export class GameState{
 	}
 	addCardProduction(cardList: string | string[], addToHand: boolean){
 		let cards: string[] = Utils.toArray(cardList)
-		let totalCards: string[] = this.cardProduction.getValue().concat(cards)
-		this.cardProduction.next(totalCards)
-		if(!addToHand)
-		this.getClientState().addCardsToHand(cardList)
+		//if(!addToHand){}
+		let clientState = this.getClientState()
+		clientState.addCardsToHand(cardList)
+		this.addProductionCardsObtainedThisRound(cards)
+		this.cardProduction.next(clientState.getProductionCardObtainedThisRound())
 	}
 	setDeckSize(size: number){
 		this.deck.next(size)
@@ -936,13 +862,27 @@ export class GameState{
 			state.addMoonTile(t)
 			totalTR += t.quantity
 		}
+		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){return}
+		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
 		this.updateClientState(state)
 
 		let newEvents = PlayableCard.getOnTriggerredEvents('ON_MOON_TILE_GAINED', state.getTriggersIdActive(), state, {moonTiles:tilesList})
 		if(newEvents.length>0){
 			this.addEventQueue(newEvents, 'first')
 		}
-		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){return}
-		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
 	}
+	addCardSeenToClient(quantity: number){
+		let state = this.getClientState()
+		state.addCardSeen(quantity)
+		this.updateClientState(state)
+	}
+	cleanAndNextEventQueue() {
+		this.gameEventQueueService.cleanAndNextEventQueue()
+	}
+	getEventQueue(): EventBaseModel[] {
+		return this.gameEventQueueService.getCurrentEventQueue()
+	}
+	getPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction'): boolean {return this.getClientState().getPhaseBonusCollected(phase)}
+	setPhaseBonusCollected(phase: SelectablePhaseEnum | 'secondProduction', collected: boolean) {this.getClientState().setPhaseBonusCollected(phase, collected)}
+	addProductionCardsObtainedThisRound(cards: string[]){this.getClientState().addProductionCardsObtainedThisRound(cards)}
 }

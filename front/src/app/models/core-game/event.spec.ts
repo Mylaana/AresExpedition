@@ -3,8 +3,9 @@ import { ButtonDesigner } from "../../factory/button-designer.service";
 import { EventCardBuilderButtonNames } from "../../types/global.type";
 import { PlayableCardModel } from "../cards/project-card.model";
 import { EventCardBuilderButton } from "./button.model";
-import { CardBuilder, EventBaseCardSelector, EventBaseModel, EventCardBuilder } from "./event.model";
+import { EventBaseCardSelector, EventBaseModel, EventCardBuilder } from "./event.model";
 import { BuilderOption } from "../../enum/global.enum";
+import { CardBuilder } from "./card-builder.model";
 
 
 class testEventBaseModel extends EventBaseModel{}
@@ -123,17 +124,24 @@ describe('Models - Event', () => {
             })
             beforeEach(() => {
                 builder = new CardBuilder
-                buttonList = ButtonDesigner.createEventCardBuilderButton(0)
-                builder.addButtons(buttonList)
+                buttonList = [
+                    ButtonDesigner.createEventCardBuilderButton('buildCard'),
+                    ButtonDesigner.createEventCardBuilderButton('discardSelectedCard')
+                ]
+                for(let b of buttonList){
+                    builder.addButton(b)
+                }
             })
             it('should evaluate addButtons', () => {
                 builder = new CardBuilder
-                builder.addButtons(buttonList)
-                expect(builder.getButtons()).toBe(buttonList)
+                for(let b of buttonList){
+                    builder.addButton(b)
+                }
+                expect(builder.getButtons()).toEqual(buttonList)
             })
             it('should evaluate getButtons and buttons status', () => {
                 let resultButtonList = builder.getButtons()
-                expect(resultButtonList).toBe(buttonList)
+                expect(resultButtonList).toEqual(buttonList)
                 for(let i=0; i<resultButtonList.length; i++){
                     expect(resultButtonList[0].isEnabled()).toEqual(resultButtonList[0].startEnabled)
                 }
@@ -144,43 +152,6 @@ describe('Models - Event', () => {
             })
             it('should evaluate getButtonFromName to return undefined', () => {
                 expect(builder.getButtonFromName('non existing buttonName value' as EventCardBuilderButtonNames)).toEqual(undefined)
-            })
-
-            it('should evaluate resolveCardBuilderButtonClicked with select sent', () => {
-                expect(builder.getButtonFromName('selectCard')?.isEnabled()).toBeTrue()
-                expect(builder.getButtonFromName('buildCard')?.isEnabled()).toBeFalse()
-                expect(builder.getButtonFromName("discardSelectedCard")?.isEnabled()).toBeFalse()
-
-                let button = builder.getButtonFromName('selectCard') as EventCardBuilderButton
-                builder.resolveCardBuilderButtonClicked(button)
-                expect(builder.getButtonFromName('selectCard')?.isEnabled()).toBeFalse()
-				expect(builder.getButtonFromName('cancelSelectCard')?.isEnabled()).toBeTrue()
-                expect(builder.getButtonFromName('buildCard')?.isEnabled()).toBeFalse()
-                expect(builder.getButtonFromName('discardSelectedCard')?.isEnabled()).toBeFalse()
-            })
-            it('should evaluate resolveCardBuilderButtonClicked with discard sent', () => {
-                let card = new PlayableCardModel
-                builder.setSelectedCard(card)
-                expect(builder.getSelectedCard()).toEqual(card)
-
-                let button = builder.getButtonFromName('discardSelectedCard') as EventCardBuilderButton
-                builder.resolveCardBuilderButtonClicked(button)
-                expect(builder.getButtonFromName('selectCard')?.isEnabled()).toBeTrue()
-                expect(builder.getButtonFromName('buildCard')?.isEnabled()).toBeFalse()
-                expect(builder.getButtonFromName('discardSelectedCard')?.isEnabled()).toBeFalse()
-
-                expect(builder.getSelectedCard()).toBeUndefined()
-            })
-            it('should evaluate resolveCardBuilderButtonClicked with build sent', () => {
-                expect(builder.getBuilderIsLocked()).toBeFalse()
-
-                let button = builder.getButtonFromName('buildCard') as EventCardBuilderButton
-                builder.resolveCardBuilderButtonClicked(button)
-                expect(builder.getButtonFromName('selectCard')?.isEnabled()).toBeFalse()
-                expect(builder.getButtonFromName('buildCard')?.isEnabled()).toBeFalse()
-                expect(builder.getButtonFromName('discardSelectedCard')?.isEnabled()).toBeFalse()
-
-                expect(builder.getBuilderIsLocked()).toBeTrue()
             })
         })
     })
@@ -196,7 +167,10 @@ describe('Models - Event', () => {
             })
             beforeEach(() => {
                 event = new EventCardBuilder
-                buttonList = ButtonDesigner.createEventCardBuilderButton(0)
+                buttonList = [
+                    ButtonDesigner.createEventCardBuilderButton('buildCard'),
+                    ButtonDesigner.createEventCardBuilderButton('discardSelectedCard')
+                ]
             })
             it('should evaluate hasSelector', () => {
                 expect(event.hasSelector()).toBeTrue()

@@ -96,6 +96,24 @@ function isProductionOk(ressource: RessourceType, quantity: number, treshold: Mi
 function isMoonTileOk(tileType: MoonTileType, quantity: number, treshold: MinMaxEqualType, clientState: PlayerStateModel): boolean {
 	return Utils.getValueVsTreshold({treshold: treshold, tresholdValue: quantity, value:clientState.getMoonTileOfType(tileType)})
 }
+function getValidColorList(parameterTresholdColor: GlobalParameterColorEnum, tresholdType: MinMaxEqualType, offset: number): GlobalParameterColorEnum[]{
+	let tresholdIndex = parameterColorIndex.get(parameterTresholdColor)
+	if(!tresholdIndex){return []}
+	tresholdIndex += tresholdType==='max'? offset: 0
+	tresholdIndex -= tresholdType==='min'? offset: 0
+	let result: GlobalParameterColorEnum[] = []
+
+	for(let i=1; i<=4; i++){
+		let color = parameterColorIndexOffset.get(i)
+		if(tresholdType==='max' && i<=tresholdIndex){
+			if(color){result.push(color)}
+		}
+		if(tresholdType==='min' && i>=tresholdIndex){
+			if(color){result.push(color)}
+		}
+	}
+	return result
+}
 export const Checker = {
     isRessourceOk,
     isTagOk,
@@ -108,5 +126,7 @@ export const Checker = {
 	hasCardWithStockType,
 	hasCardWithStockQuantityPerType,
 	isProductionOk,
-	isMoonTileOk
+	isMoonTileOk,
+
+	getValidColorList
 }

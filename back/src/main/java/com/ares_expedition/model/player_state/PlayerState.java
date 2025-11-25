@@ -42,8 +42,6 @@ public class PlayerState {
     private PlayerStatState statState = new PlayerStatState();
     private PlayerOtherState otherState = new PlayerOtherState();
 
-    private List<String> researchResolved = new ArrayList<>();
-    private Integer researchResolvedKeep;
 
     PlayerState(){
     }
@@ -308,8 +306,12 @@ public class PlayerState {
         this.eventState.addEventOceans(oceans);
     }
 
-    public void addEventDrawCards(List<String> cards, Integer thenDiscard){
-        this.eventState.addEventDrawCards(cards, thenDiscard);
+    public void addEventDrawCards(List<String> cards, Integer thenDiscard, Boolean isCardProduction){
+        this.eventState.addEventDrawCards(cards, thenDiscard, isCardProduction);
+    }
+
+    public void addEventDrawCards(List<String> cards, Integer thenDiscard, Boolean isCardProduction, String triggerOrigin){
+        this.eventState.addEventDrawCards(cards, thenDiscard, isCardProduction, triggerOrigin);
     }
 
     public void addEventResearchCards(List<String> cards, Integer keep){
@@ -362,35 +364,17 @@ public class PlayerState {
         }
 
         return playerStates;
-    }
-
-    public List<String> getResearchResolved() {
-        return researchResolved;
-    }
-
-    public void setResearchResolved(List<String> researchResolved, Integer keep) {
-        this.researchResolved = researchResolved;
-        this.researchResolvedKeep = keep;
-    }
-
-    public Integer getResearchResolvedKeep(){
-        return this.researchResolvedKeep;
-    }
-
-    public void resetResearchResolved() {
-        this.researchResolved.clear();
-    }
-
-    public Boolean isResearchResolved() {
-        return this.researchResolved.size()!=0;
-    }
-    
+    }    
     public PlayerStatState getStatState() {
         return statState;
     }
 
     public void setStatState(PlayerStatState statState) {
         this.statState = statState;
+    }
+
+    public void addSeenCard(int quantity){
+        this.statState.addSeenCard(quantity);
     }
 
     public PlayerStateData toData(){

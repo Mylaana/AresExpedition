@@ -9,6 +9,8 @@ import { MoonTile, RessourceStock } from "../interfaces/global.interface";
 import { Utils } from "../utils/utils";
 import { NonSelectablePhaseEnum, SelectablePhaseEnum } from "../enum/phase.enum";
 import { Checker } from "../utils/checker";
+import { PlayableCard } from "./playable-card.factory";
+import { CARD_PLAYED_PRIORITY_VALUE, TRIGGER_PRIORITY_DEFAULT_VALUE } from "../maps/trigger-priority-maps";
 
 export type HookType =  'ON_TAG_GAINED' | 'ON_PRODUCTION_INCREASED' | 'ON_CARD_PLAYED' | 'ON_PARAMETER_INCREASED'
 | 'ON_RESSOURCE_ADDED_TO_CARD' | 'ON_CARD_ACTIVATED' | 'ON_FOREST_GAINED' | 'ON_TRIGGER_RESOLUTION' | 'ON_UPGRADED_PHASE_SELECTED'
@@ -41,8 +43,7 @@ const S = EventFactory.simple
 	function handleTrigger_P16(trigger: string, input: TriggerInput): EventBaseModel[] {
 		if(input.playedCard.cardType!='greenProject'){return []}
 		return [
-			S.draw(1),
-			S.discard(1)
+			S.drawThenDiscard(1, 1, trigger)
 		]
 	}
 	//Spinoff Department
@@ -54,7 +55,7 @@ const S = EventFactory.simple
 	}
 	//CLM
 	function handleTrigger_CF3_ON_PLAYED_CARD(trigger: string, input: TriggerInput): EventBaseModel[] {
-		return [S.addRessourceToCardId({name:'science', valueStock:2}, trigger)]
+		return [S.addRessourceToCardId({name:'science', valueStock:1}, trigger)]
 	}
 
 //ON_PARAMETER_INCREASED
@@ -172,7 +173,7 @@ const S = EventFactory.simple
 		if(quantity===0){return []}
 		let events: EventBaseModel[] = []
 		for(let i=0; i<quantity; i++){
-			events.push(S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity))
+			events.push(S.discardOptions(1, 'max', DiscardOptionsEnum.marsUniversity, trigger))
 		}
 		return events
 	}
@@ -520,18 +521,45 @@ function toFullTriggerInput(input: Partial<TriggerInput>): TriggerInput {
 	}
 }
 export const TriggerEffectEventFactory = {
-	getTriggerred(hook: HookType, activeTriggers: string[], clientState: PlayerStateModel, input: Partial<TriggerInput>): EventBaseModel[] {
-		const handlers = HANDLERS_BY_HOOK[hook] ?? {};
-		const relevantTriggers = activeTriggers.filter(trigger => trigger in handlers);
+	getTriggerred(hooks: HookType | HookType[], activeTriggers: string[], clientState: PlayerStateModel, input: Partial<TriggerInput>, triggerFilter: 'beforeCardOnly' | 'afterCardOnly' | 'all' = 'all'): EventBaseModel[] {
+		let relevantTriggers: string[] = []
+		let hookList = Utils.toArray(hooks) as HookType[]
+		for(let hook of hookList){
+			const handler = HANDLERS_BY_HOOK[hook] ?? {};
+			relevantTriggers = relevantTriggers.concat(activeTriggers.filter(trigger => trigger in handler))
+		}
+		if(triggerFilter==='afterCardOnly'){
+			relevantTriggers = relevantTriggers.filter(trigger => PlayableCard.getTriggerPriority(trigger) < CARD_PLAYED_PRIORITY_VALUE)
+		}
+		if(triggerFilter==='afterCardOnly'){
+			relevantTriggers = relevantTriggers.filter(trigger => PlayableCard.getTriggerPriority(trigger) > CARD_PLAYED_PRIORITY_VALUE)
+		}
+		relevantTriggers = PlayableCard.sortTriggerList(relevantTriggers)
 		const events: EventBaseModel[] = [];
 		const fullInput = toFullTriggerInput(input)
 
 		for (const trig of relevantTriggers) {
-			const handler = handlers[trig];
+			const handler = getHandlerForTrigger(trig, hookList);
 			if (handler) {
 				events.push(...handler(trig,  fullInput, clientState));
 			}
 		}
 		return events;
+	},
+	isEventGeneratingTrigger(triggerCode: string): boolean {
+		for (const hook in HANDLERS_BY_HOOK) {
+			if (triggerCode in HANDLERS_BY_HOOK[hook as HookType]) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
+function getHandlerForTrigger(triggerCode: string, hooks: HookType[]): any {
+	for(let hook of hooks){
+		let handler = HANDLERS_BY_HOOK[hook]
+		if(handler[triggerCode]){
+			return handler[triggerCode]
+		}
 	}
 }

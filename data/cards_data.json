@@ -84,8 +84,7 @@
         "origin": "base",
         "cost": 22,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "2",
@@ -696,8 +695,7 @@
         "origin": "base",
         "cost": 7,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -812,8 +810,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "V",
@@ -1330,8 +1327,7 @@
         "origin": "base",
         "cost": 10,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "1",
@@ -1504,8 +1500,7 @@
         "origin": "base",
         "cost": 5,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "vpNumber": "*",
@@ -1742,8 +1737,7 @@
         "origin": "base",
         "cost": 6,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "I-II",
@@ -5049,8 +5043,7 @@
         "origin": "base",
         "cost": 12,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "greenProject",
         "vpNumber": "1",
@@ -6348,7 +6341,6 @@
         "card_code": "214",
         "origin": "base",
         "tagsId": [
-            0,
             0
         ],
         "cardType": "corporation",
@@ -6383,7 +6375,6 @@
         "card_code": "214B",
         "origin": "base",
         "tagsId": [
-            0,
             0
         ],
         "cardType": "corporation",
@@ -6988,8 +6979,7 @@
         "origin": "discovery",
         "cost": 14,
         "tagsId": [
-            2,
-            0
+            2
         ],
         "cardType": "blueProject",
         "phaseUp": "III",
@@ -7813,7 +7803,7 @@
         },
         "playedText": {
             "en": "Chose a tag and add it to this card.",
-            "fr": "Choisissez un badge et ajoutez-le\u00e0 cette carte. "
+            "fr": "Choisissez un badge et ajoutez-le \u00e0 cette carte. "
         },
         "status": "validated",
         "vpScaling": "0"
@@ -9398,12 +9388,12 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_card$: $ressource_science$$ressource_science$",
+            "en": "$ressource_card$: $ressource_science$",
             "fr": ""
         },
         "effectText": {
-            "en": "EFFECT: When you play a card, add 2 $ressource_science$ here.",
-            "fr": "EFFET: Lorsque vous jouez une carte, ajoutez 2$ressource_science$ sur cette carte."
+            "en": "EFFECT: When you play a card, add $ressource_science$ here.",
+            "fr": "EFFET: Lorsque vous jouez une carte, ajoutez $ressource_science$ sur cette carte."
         },
         "effectSummaryType2": "action",
         "effectSummaryText2": {
@@ -11869,10 +11859,6 @@
             "en": "Luna Mining Federation",
             "fr": ""
         },
-        "vpText": {
-            "en": "/$ressource_steel$$ressource_steel$$skipline$/$ressource_titanium$$ressource_titanium$",
-            "fr": ""
-        },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
             "en": "$other_minetile$: $ressource_titanium$",
@@ -11883,10 +11869,10 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Gain $other_minetile$$other_minetile$.",
+            "en": "Gain $other_minetile$.",
             "fr": ""
         },
-        "startingMegacredits": 20,
+        "startingMegacredits": 25,
         "status": "validated",
         "vpScaling": "1"
     },

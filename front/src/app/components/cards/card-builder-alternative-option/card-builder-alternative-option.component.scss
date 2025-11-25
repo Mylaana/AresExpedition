@@ -1,0 +1,37 @@
+.small{
+	--card-height: var(--card-height--small);
+	--card-width: var(--card-height--width);
+}
+.medium{
+	--card-height: var(--card-height--medium);
+	--card-width: var(--card-width--medium);
+}
+:host{
+	display: flex;
+	justify-content: center;
+	width: 95%;
+	height: calc((var(--card-height) * .25));
+}
+p{
+	font-weight: 600;
+    font-size: calc(var(--card-height) * .09);
+}
+.wrapper-main{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+	border-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.wrapper-button{
+	display: flex;
+	justify-content: center;
+	margin: calc((var(--card-height) * .04));
+    height: 80%;
+}
+:host::ng-deep img {
+	height: 20px;
+}

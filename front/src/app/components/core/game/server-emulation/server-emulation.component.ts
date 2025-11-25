@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameState } from '../../../../services/core-game/game-state.service';
 import { ProjectCardInfoService } from '../../../../services/cards/project-card-info.service';
 import { DrawEvent, EventBaseModel } from '../../../../models/core-game/event.model';
 import { MessageContentQueryEnum } from '../../../../enum/websocket.enum';
@@ -12,6 +11,8 @@ import { PlayerReadyModel } from '../../../../models/player-info/player-state.mo
 import { myUUID, TagType } from '../../../../types/global.type';
 import { GlobalParameterNameEnum } from '../../../../enum/global.enum';
 import { GameParamService } from '../../../../services/core-game/game-param.service';
+import { GameStateFacadeService } from '../../../../services/game-state/game-state-facade.service';
+import { EventProcessor } from '../../../../services/events/event-processor.service';
 
 type Phase = "planification" | "development" | "construction" | "action" | "production" | "research"
 
@@ -43,10 +44,11 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 
 	private destroy$ = new Subject<void>()
 
-	constructor(private gameStateService: GameState,
+	constructor(private gameStateService: GameStateFacadeService,
 		private cardInfoService: ProjectCardInfoService,
 		private rxStompService: RxStompService,
-		private gameParam: GameParamService
+		private gameParam: GameParamService,
+		private eventProcessor: EventProcessor
 	){}
 
 	ngOnInit(){
@@ -62,7 +64,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		this.gameStateService.currentLoadingState.pipe(takeUntil(this.destroy$)).subscribe(
 			loading => this.loadingFinished(loading)
 		)
-		this.gameStateService.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(
+		this.eventProcessor.currentEventQueue.pipe(takeUntil(this.destroy$)).subscribe(
 			event => this.currentEventQueue = event
 		)
 		this.gameStateService.currentGroupPlayerReady.pipe(takeUntil(this.destroy$)).subscribe(
@@ -141,7 +143,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 		this.rxStompService.publish({ destination: '/app/player', body: JSON.stringify(message) });
 	}
 	printEventQueue(): void {
-		this.gameStateService.currentEventQueue.pipe(take(1)).subscribe(value => {console.log(value);});
+		this.eventProcessor.currentEventQueue.pipe(take(1)).subscribe(value => {console.log(value);});
 	}
 	printDrawQueue(): void {
 		this.gameStateService.currentDrawQueue.pipe(take(1)).subscribe(value => {console.log(value);});
@@ -154,7 +156,7 @@ export class ServerEmulationComponent implements OnInit, AfterViewInit, OnDestro
 	}
 	drawCards(): void {
 		//force draw card list for debug purpose
-		let cardDrawList: string[] = ['M85']
+		let cardDrawList: string[] = ['135']
 
 		this.gameStateService.addCardsToClientHand(cardDrawList)
 		this.gameStateService.updateClientState(this.gameStateService.getClientState())

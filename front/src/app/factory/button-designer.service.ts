@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { EventUnionSubTypes } from "../types/event.type";
 import { EventMainButton, EventMainButtonSelector, EventCardBuilderButton, NonEventButton, ColorButton, EffectPortalButton, ToggleButton, CarouselButton, ButtonBase } from "../models/core-game/button.model";
-import { ButtonNames, CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
+import { AltenativeCostButtonNames, ButtonNames, CarouselButtonNames, EventCardBuilderButtonNames, NonEventButtonNames, PlayerColor, ToggleButtonNames } from "../types/global.type";
 import { BuilderOption, EffectPortalButtonEnum } from "../enum/global.enum";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { EFFECT_PORTAL_BUTTON_ACTIVATION_REQUIREMENTS, EFFECT_PORTAL_BUTTON_CAPTION, EFFECT_PORTAL_BUTTON_ENUM_LIST } from "../maps/playable-card-portal-maps";
@@ -12,7 +12,7 @@ import { BUTTON_CAPTIONKEY_FROM_BUTTONNAME, BUTTON_CAPTIONKEY_FROM_EVENTSUBTYPE 
     providedIn: 'root'
 })
 export class ButtonDesigner{
-    private static getStartEnabled(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames) : boolean {
+    private static getStartEnabled(buttonRule: EventUnionSubTypes | NonEventButtonNames | CarouselButtonNames | AltenativeCostButtonNames) : boolean {
         let startEnabled: boolean
 
         switch(buttonRule){
@@ -33,7 +33,7 @@ export class ButtonDesigner{
 			case('doubleProduction'):{startEnabled=true;break}
 			case('effectPortal'):{startEnabled=true;break}
 			case('resourceConversion'):{startEnabled=true;break}
-
+			
 			//button name related rules
 			case('sellOptionalCard'):{startEnabled=true;break}
 			case('sellOptionalCardCancel'):{startEnabled=false;break}
@@ -53,6 +53,8 @@ export class ButtonDesigner{
 			case('cardOverviewDisplayBalanced'):{startEnabled=true; break}
 			case('createGameOptionActivateAll'):{startEnabled=true; break}
 			case('createGameOptionDeactivateAll'):{startEnabled=true; break}
+			case('sellCardsSelectAll'):{startEnabled=true; break}
+			case('sellCardsSelectNone'):{startEnabled=true; break}
 
 			//filter pannels
 			case('activableProject'):case('triggerProject'):case('greenProject'):case('redProject'):case('corporation'):case('project'):case('blueProject'):
@@ -112,8 +114,8 @@ export class ButtonDesigner{
 			case('displayUpgradedPhaseCancel'):{caption='other_cancel';break}
 			case('killCard'):{caption='kill cards';break}
 			case('lockBuilder'):{caption='$other_cancel$';break}
-			case('alternativePayAnaerobicMicroorganisms'):{caption='$ressource_microbe$$ressource_microbe$:  $ressource_megacreditvoid_-10$';break}
-			case('alternativePayRestructuredResources'):{caption='$ressource_plant$: -5$ressource_megacredit$';break}
+			case('alternativePayAnaerobicMicroorganisms'):{caption='-2$ressource_microbe$:  $ressource_megacreditvoid_-10$';break}
+			case('alternativePayRestructuredResources'):{caption='-$ressource_plant$: $ressource_megacreditvoid_-5$';break}
 			case('carouselLeft'):{caption='';break}
 			case('carouselRight'):{caption='';break}
 			case('cardOverviewInvertTagSelection'):{caption='$other_invert$';break}
@@ -122,6 +124,8 @@ export class ButtonDesigner{
 			case('cardOverviewDisplayBalanced'):{caption='Display$skipline$Balanced$skipline$only';break}
 			case('createGameOptionActivateAll'):{caption='Enable all';break}
 			case('createGameOptionDeactivateAll'):{caption='Disable all';break}
+			case('sellCardsSelectAll'):{caption='$other_all$';break}
+			case('sellCardsSelectNone'):{caption='$other_none$';break}
 
 			//settings
 			case('settings'):{caption='$other_settings$';break}
@@ -177,38 +181,25 @@ export class ButtonDesigner{
 		button.resetEnabledOnEventSwitch = this.getResetStartEnabledOnEventSwitch(eventSubType)
         return button
     }
-    public static createEventCardBuilderButton(zoneId:number, option?: BuilderOption): EventCardBuilderButton[] {
-        let buttons: EventCardBuilderButton[] = []
-        let buttonCount: number = 4
+    public static createEventCardBuilderButton(name:EventCardBuilderButtonNames, option?:BuilderOption): EventCardBuilderButton {
+		let button = new EventCardBuilderButton
 
-        for(let i=0; i<buttonCount; i++){
-            let button = new EventCardBuilderButton
-                switch(i){
-                    case(0):{button.name='selectCard';button.caption='Select a card';button.startEnabled=true;break}
-                    case(1):{button.name='cancelSelectCard';button.caption='$other_cancel$';break}
-                    case(2):{button.name='buildCard';button.caption='$other_validate$';break}
-					case(3):{button.name='discardSelectedCard';button.caption='$other_cancel$';break}
-                }
-            button.parentCardBuilderId=zoneId
-            button.setEnabled(button.startEnabled)
-            buttons.push(button)
-        }
+		switch(name){
+			case('buildCard'):{button.caption='$other_validate$';break}
+			case('discardSelectedCard'):{button.caption='$other_cancel$';break}
+			case(BuilderOption.gain6MC):{button.caption = '+ $ressource_megacreditvoid_6$';break}
+			case(BuilderOption.drawCard):{button.caption = '$ressource_card$';break}
+			default:{
+				button.caption = name
+				break
+			}
+		}
 
-        if(option===undefined){return buttons}
-        let button = new EventCardBuilderButton
-
-        button.parentCardBuilderId=zoneId
-        button.setEnabled(button.startEnabled)
-        switch(option){
-            case(BuilderOption.gain6MC):{button.caption = '+ $ressource_megacreditvoid_6$';break}
-            case(BuilderOption.drawCard):{button.caption = '$ressource_card$';break}
-        }
         button.startEnabled=true
-        button.name = option as EventCardBuilderButtonNames
-        button.setEnabled(button.startEnabled)
-        buttons.push(button)
+        button.name = name
+		button.setEnabled(button.startEnabled)
 
-        return buttons
+        return button
     }
 	public static createNonEventButton(name: NonEventButtonNames, caption?:string): NonEventButton {
 		let button = new NonEventButton

@@ -2,11 +2,13 @@ import { Injectable } from "@angular/core";
 import { EventStateActivator, EventStateBuilderContentDTO, EventStateCardProduction, EventStateContentCardSelectorDTO, EventStateContentDiscardDTO, EventStateContentDrawQueryDTO, EventStateContentDrawQueryThenDiscardDTO, EventStateContentDrawResultDTO, EventStateContentOceanFlippedDTO, EventStateContentResearchCardsQueriedDTO, EventStateContentScanKeepQueriedDTO, EventStateContentScanKeepUnqueriedDTO, EventStateContentTagSelectorDTO, EventStateContentTargetCardDTO, EventStateDTO, EventStateGenericDTO, EventStateIncreaseResearchScanKeep } from "../interfaces/event-state.interface";
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum";
 import { EventBaseModel, EventCardActivator, EventCardBuilder, EventPhase, EventTagSelector } from "../models/core-game/event.model";
-import { OceanBonus } from "../interfaces/global.interface";
+import { EventOrigin, OceanBonus } from "../interfaces/global.interface";
 import { EventFactory } from "./event/event-factory";
 import { ProjectCardInfoService } from "../services/cards/project-card-info.service";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
+import { TriggerEffectEventFactory } from "./trigger-event.factoy";
+import { Utils } from "../utils/utils";
 
 
 const S = EventFactory.simple
@@ -30,7 +32,7 @@ function toContentDto<T>(json: any): T {
 @Injectable({
 	providedIn: 'root'
 })
-export class EventStateService{
+export class EventStateDeserializerService{
 	constructor(private projectCardInfoService: ProjectCardInfoService){}
 	public shouldLoadEvent(event: EventBaseModel, eventState: EventStateDTO) : boolean {
 		return shouldLoadEvent(event,eventState)
@@ -42,28 +44,18 @@ export class EventStateService{
 				let eventBuilder: EventCardBuilder = event as EventCardBuilder
 				for(let i=0; i<content.s.length; i++){
 					if(content.s[i]){
+						//default
+						eventBuilder.cardBuilder[i].fromDto(content.s[i])
+						
 						let cardCode = content.s[i].cc
 						if(cardCode){
 							let card = this.projectCardInfoService.getCardById(cardCode)
 							card?eventBuilder.cardBuilder[i].setSelectedCard(card):null
+							eventBuilder.cardBuilder[i].setBuilderIsLocked(true)
 						}
-
-						/*special case with development second builder being locked without
-						being used due to eventstate saving triggerred by first built card*/
-						if(dto.t===EventStateTypeEnum.builderDevelopemntLocked){
-							if(i===1 && content.s[i].cc===undefined){
-								eventBuilder.setFirstCardBuilt()
-								//eventBuilder.cardBuilder[i].setBSuilderIsLocked(false)
-								continue
-							}
-						}
-
-						//default
-						eventBuilder.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
-						eventBuilder.alternativeCostUsedButtonName = dto.v['ac']
-						eventBuilder.buildDiscountValue = dto.v['d']
 					}
 				}
+				eventBuilder.fromJson(dto)
 				break
 			}
 			case(EventStateTypeEnum.cardActivator):{
@@ -84,7 +76,6 @@ export class EventStateService{
 			}
 			case(EventStateTypeEnum.productionPhase):{
 				let eventPhase = event as EventPhase
-				eventPhase.productionDoubleApplied = dto.v['pda']
 				break
 			}
 			default:{
@@ -92,7 +83,8 @@ export class EventStateService{
 			}
 		}
 	}
-	public createFromJson(eventStateList: EventStateDTO[]): EventBaseModel[] {
+	public createFromJson(eventStateList: EventStateDTO[], clientState: PlayerStateModel): EventBaseModel[] {
+		console.log(eventStateList)
 		let newEvents: EventBaseModel[] = []
 		let remainingStates: EventStateDTO[] = []
 		let treated: boolean
@@ -107,20 +99,36 @@ export class EventStateService{
 				case(EventStateTypeEnum.drawCards):{
 					let content: EventStateContentDrawResultDTO =  {
 						cl: state.v['cardIdList'],
-						td: state.v['thenDiscard']
+						td: state.v['thenDiscard'],
+						icp: state.v['isCardProduction'],
+						to: state.v['triggerOrigin']
 					}
 					if(content.td===0){
-						newEvents.push(EventFactory.createGeneric('drawResult', {drawEventResult:content.cl}))
+						newEvents.push(EventFactory.createGeneric('drawResult', {
+							drawEventResult:content.cl,
+							isCardProduction: content.icp
+						}))
 					} else{
-						newEvents.push(EventFactory.createGeneric('drawResultThenDiscard', {drawEventResult:content.cl, thenDiscard: content.td}))
+						newEvents.push(EventFactory.createGeneric('drawResultThenDiscard', {
+							drawEventResult:content.cl,
+							thenDiscard:content.td,
+							eventOrigin: {originType:'cardCode', originValue:content.to}
+						}))
 					}
 					break
 				}
 				case(EventStateTypeEnum.discard):{
 					let content: EventStateContentDiscardDTO =  {
-						d: state.v['d']
+						d: state.v['d'],
+						o: state.v['o'] as EventOrigin
 					}
-					newEvents.push(EventFactory.simple.discard(content.d))
+					//special case for Mars Univ
+					if(content.o?.originValue==='40'){
+						newEvents = newEvents.concat(TriggerEffectEventFactory.getTriggerred('ON_TAG_GAINED', ['40'], clientState, {tagList: [Utils.toTagId('science')]}))
+						console.log(newEvents)
+						break
+					}
+					newEvents.push(EventFactory.simple.discard(content.d, content.o?.originValue))
 					break
 				}
 				case(EventStateTypeEnum.researchCardsQueried):{
@@ -157,12 +165,12 @@ export class EventStateService{
 				}
 				case(EventStateTypeEnum.specialBuilder):{
 					let content = state.v as EventStateBuilderContentDTO
-					let event = EventFactory.simple.specialBuilder(content.o) as EventCardBuilder
+					let event = EventFactory.simple.specialBuilder(content.s[0].o) as EventCardBuilder
 					for(let i=0; i<content.s.length; i++){
 						let cardCode = content.s[i].cc
 						if(cardCode){
 							event.cardBuilder[i].setSelectedCard(this.projectCardInfoService.getCardById(cardCode)??new PlayableCardModel)
-							event.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
+							//event.cardBuilder[i].setBuilderIsLocked(content.s[i].l)
 						}
 					}
 					newEvents.push(event)
@@ -231,8 +239,7 @@ export class EventStateService{
 				}
 				case(EventStateTypeEnum.productionCardDouble):{
 					newEvents.push(EventFactory.createGeneric('loadProductionPhaseCardDouble', {
-						loadProductionCardList:state.v['scp'],
-						firstProductionCardList:state.v['fcp']
+						loadProductionCardList:state.v['scp']
 					}))
 					break
 				}

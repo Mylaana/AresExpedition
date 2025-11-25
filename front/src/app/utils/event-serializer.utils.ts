@@ -11,12 +11,16 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 	let eventStateOperation: EventStateOriginEnum
 	for(let builder of event.cardBuilder){
 		let s: BuilderStatusDTO = {
-			cc: builder.getBuitCardCode(),
-			l: builder.getBuilderIsLocked()
+			cc: builder.getBuitCardCode()??'',
+			//l: builder.getBuilderIsLocked(),
+			o: builder.getOption(),
+			ac: builder.getAlternativeCostUsed(),
+			d: builder.getDiscount(),	
+			ao: builder.getAlternativeOptionUsed()
 		}
 		status.push(s)
 	}
-
+	console.log(status)
 	switch(event.subType){
 		case('developmentPhaseBuilder'):{
 			stateType = EventStateTypeEnum.builderDevelopemntLocked
@@ -36,12 +40,9 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 		}
 		default:{return}
 	}
-
+	//console.error('UNTREATED BUILDER TO JSON', stateType, event.subType)
 	let content: EventStateBuilderContentDTO = {
-		s: status,
-		o: specialBuilderOption??'',
-		ac: event.alternativeCostUsedButtonName,
-		d: event.buildDiscountValue
+		s: status
 	}
 
 	return {
@@ -117,7 +118,8 @@ function eventComplexSelectorToJson(event: EventComplexCardSelector): EventState
 	switch(event.subType){
 		case('discardCards'):{
 			let content: EventStateContentDiscardDTO = {
-				d: event.getSelectorQuantity()
+				d: event.getSelectorQuantity(),
+				o: event.eventOrigin
 			}
 			return {
 				o: EventStateOriginEnum.create,
@@ -215,7 +217,7 @@ function eventPhaseToJson(event: EventPhase, cardList: string[]): EventStateDTO 
 	switch(event.subType){
 		case('productionPhase'):{
 			let content: EventStateContentPhaseDTO = {
-				pda: event.productionDoubleApplied??false,
+				pda: false,
 				cl: cardList
 			}
 			return {

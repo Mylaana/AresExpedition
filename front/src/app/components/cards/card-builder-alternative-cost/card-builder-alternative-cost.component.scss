@@ -10,10 +10,11 @@
 	display: flex;
 	justify-content: center;
 	width: 90%;
+	height: calc((var(--card-height) * .25));
 }
 .wrapper-main{
 	display: flex;
-	flex-direction: column;
+	//flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
@@ -21,13 +22,15 @@
 	border-top: 0;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+	gap: 2px;
 }
 .wrapper-button{
 	display: flex;
 	justify-content: center;
-	width: var(--card-width);
-	height: calc((var(--card-height) * .1));
 	margin: calc((var(--card-height) * .04));
+	margin-left: 0;
+	margin-right: 0;
+    height: 80%;
 }
 :host::ng-deep img {
 	height: 20px;

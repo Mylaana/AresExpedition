@@ -45,6 +45,7 @@ class PlayerStateResource(BaseModel):
 
 
 class PlayerStateScore(BaseModel):
+    totalScore: int
     vp: int
     terraformingRating: int
     forest: int
@@ -54,6 +55,8 @@ class PlayerStateScore(BaseModel):
     mine: int
 
     def getTotalScore(self):
+        if self.totalScore is not None:
+            return self.totalScore
         return (self.vp + self.terraformingRating + self.forest + self.award + len(self.claimedMilestone) * 3
                 + self.habitat + self.mine)
 

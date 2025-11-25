@@ -64,11 +64,6 @@ public class MessageOutputFactory {
         }
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.OCEAN_RESULT, content);
     }
-    /*
-    public static BaseMessageOutputDTO createStartGameMessage(String gameId, Object content) {
-        return new BaseMessageOutputDTO(gameId, ContentResultEnum.START_GAME, content);
-    }
-    */
     public static BaseMessageOutputDTO createSelectStartingHandMessage(String gameId,  GameStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.SELECT_STARTING_HAND, content);
     }
@@ -77,5 +72,9 @@ public class MessageOutputFactory {
     }
     public static BaseMessageOutputDTO createSelectCorporationMergerMessage(String gameId,  GameStateMessageOutputDTO content) {
         return new BaseMessageOutputDTO(gameId, ContentResultEnum.SELECT_CORPORATION_MERGER, content);
+    }
+
+    public static BaseMessageOutputDTO createGameOverMessage(String gameId, GameStateMessageOutputDTO content) {
+        return new BaseMessageOutputDTO(gameId, ContentResultEnum.GAME_OVER, content);
     }
 }

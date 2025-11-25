@@ -30,6 +30,7 @@ def main():
     excluded = 0
 
     for file in os.listdir(ARCHIVES_DIR):
+        print(file)
         with open(os.path.join(ARCHIVES_DIR, file), 'r', encoding='utf-8') as file:
             file_data = json.load(file)
             game = GameState(**file_data)
@@ -46,9 +47,7 @@ def main():
     with open(RESULT_PATH, "w") as outfile:
         outfile.write(stats.to_json())
 
-    print('GAMES ANALYZING DONE')
-    print('loaded: ', analyzed)
-    print('excluded(solo): ', excluded)
+    print('GAMES ANALYZING DONE:', '  loaded:', analyzed, '  excluded(solo):', excluded)
 
 
 if __name__ == '__main__':

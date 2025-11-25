@@ -9,7 +9,7 @@ export class ProjectCardCostService {
 	private projectCard!: PlayableCardModel
 	private clientState!: PlayerStateModel
 
-	private discount: number =0
+	private discount: number = 0
 	private canBePlayed: boolean = false
 
 	private megacreditsAvailable: number = 0
@@ -32,7 +32,7 @@ export class ProjectCardCostService {
 			this.projectCard.cost = this.projectCard.costInitial
 			return
 		}
-		let triggerList = this.clientState.getTriggersIdActive()
+		let triggerList = this.clientState.getTriggersIdPlayed()
 		let costMod = PlayableCard.getCostMod(triggerList, this.projectCard, this.clientState)
 		let steelAvailable = this.clientState.getRessourceInfoFromType('steel')
 		let titaniumAvailable = this.clientState.getRessourceInfoFromType('titanium')
@@ -51,7 +51,6 @@ export class ProjectCardCostService {
 	}
 	private setCanBePlayed(){
 		this.canBePlayed = this.checkCanBePlayed()
-		//console.trace(this.canBePlayed, this.megacreditsAvailable)
 	}
 	private checkCanBePlayed(): boolean {
 		if(this.megacreditsAvailable < this.projectCard.cost){return false}

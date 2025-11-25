@@ -2,25 +2,25 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { NonEventButtonComponent } from '../../tools/button/non-event-button.component';
 import { NonEventButton } from '../../../models/core-game/button.model';
 import { Subject } from 'rxjs';
-import { GameState } from '../../../services/core-game/game-state.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
 import { EventBaseModel, EventCardActivator } from '../../../models/core-game/event.model';
-import { PlayableCardListComponent } from '../../cards/project/playable-card-list/playable-card-list.component';
 import { PlayableCardModel } from '../../../models/cards/project-card.model';
 import { DeckQueryOptionsEnum } from '../../../enum/global.enum';
 import { ActivationOption } from '../../../types/project-card.type';
 import { EventFactory } from '../../../factory/event/event-factory';
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { CommonModule } from '@angular/common';
-import { ActionPhaseService } from '../../../services/core-game/action-phase.service';
 import { GameContentName, StandardProjectButtonNames } from '../../../types/global.type';
 import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
+import { PlayableCardListWrapperComponent } from '../../cards/project/playable-card-list-selector-wrapper/playable-card-list-wrapper.component';
+import { ActionPhaseService } from '../../../services/core-game/components-services/action-phase.service';
 
 @Component({
     selector: 'app-phase-action',
     imports: [
 		CommonModule,
         NonEventButtonComponent,
-        PlayableCardListComponent,
+        PlayableCardListWrapperComponent,
 		HexedBackgroundComponent
     ],
     templateUrl: './phase-action.component.html',
@@ -40,14 +40,11 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 	_buyHabitat!: NonEventButton
 	_buyMine!: NonEventButton
 
-	//_gameOptions!: GameOption
-
-
 	private _actionEvent!: EventCardActivator
 	private destroy$ = new Subject<void>()
 
 	constructor(
-		private gameStateService: GameState,
+		private gameStateService: GameStateFacadeService,
 		private actionPhaseService: ActionPhaseService,
 		private gameContentService: GameActiveContentService
 	){}
@@ -65,7 +62,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 		this._buyMine = this.actionPhaseService.getButton('buyMine')
 
 		this._actionEvent = this.event as EventCardActivator
-		this.applyPhaseCardBonusIfRelevant()
 		window.scroll({top:0})
 	}
 	ngOnDestroy(): void {
@@ -74,8 +70,6 @@ export class PhaseActionComponent implements OnInit, OnDestroy{
 	}
 	applyPhaseCardBonusIfRelevant() {
 		if(this._actionEvent.hasScan===false || this._actionEvent.scanUsed){return}
-		this._actionEvent.scanUsed=true
-		this.gameStateService.addEventQueue(EventFactory.simple.scanKeep({scan:3, keep:1}, DeckQueryOptionsEnum.actionPhaseScan), 'first')
 	}
 	onClick(button: NonEventButton): void {
 		this.actionPhaseService.onButtonClicked(button.name as StandardProjectButtonNames)

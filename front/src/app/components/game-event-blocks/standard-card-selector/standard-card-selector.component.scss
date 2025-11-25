@@ -1,0 +1,45 @@
+:host{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.wrapper-event-origin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 30%;
+    & > p {
+        color: white;
+        font-size: 80px;
+    }
+}
+.list-background{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--color-ares-purple-dark3);
+    border-radius: calc(var(--card-height) * .07);
+    opacity: 50%;
+}
+.wrapper-list{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    padding: calc(var(--card-height) * .05);
+    border-radius: calc(var(--card-height) * .07);
+    border: white solid 2px;
+}
+app-playable-card-list{
+    width: fit-content;
+}
+app-hexed-background{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
