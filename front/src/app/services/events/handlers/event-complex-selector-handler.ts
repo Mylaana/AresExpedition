@@ -40,6 +40,7 @@ export class EventComplexSelectorHandler implements GameEventHandler<EventComple
                 }
             }
         }
+        this.handleSelectFromInsuficientCardListSize(event)
         this.selectorService.notifyRecalculateSelector()
     }
     onFinalizeEvent(event: EventComplexCardSelector) {   
@@ -111,5 +112,15 @@ export class EventComplexSelectorHandler implements GameEventHandler<EventComple
                 }
             }
         }
+    }
+    private handleSelectFromInsuficientCardListSize(event: EventComplexCardSelector){
+        let selector = event.getCardSelector()
+        if(selector.selectionQuantityTreshold==='max'){return}
+        if(selector.selectFrom.length>=selector.selectionQuantity){return}
+        if(!event.button){return}
+
+        //force treshold to turn to max so it doesnt block the event resolution in case of not enough cards to select from
+        selector.selectionQuantityTreshold='max'
+        event.button.startEnabled = true
     }
 }
