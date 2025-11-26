@@ -939,7 +939,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	},
 	//Mining Guild
 	'214B': () => {
-		return [S.addProduction({name:'steel', valueStock:2})]
+		return [S.addProduction({name:'steel', valueStock:1})]
 	},
 	//Phobolog
 	'215': (clientstate) => {
@@ -1125,8 +1125,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Luna Train Station
 	'M14': () => [
-		S.addProduction({name:'megacredit', valueStock:4}),
-		S.addRoad()
+		S.addHabitat(),
+		S.addMine()
 	],
 	//Lunar Industry Complex
 	'M15': () => [
@@ -1302,7 +1302,7 @@ export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: Pla
 	//DevTechs
 	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
 	//Exocorp v2
-	'D02B': () => 1,
+	'D02B': () => 2,
 	//Solar Logistics
 	'FM2': (card) => {
 		return card.hasTag('space') && card.hasTag('event')?10:0

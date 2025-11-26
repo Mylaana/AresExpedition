@@ -214,7 +214,7 @@ export const PLAY_REQUIREMENTS_OK: Record<string, (clientState: PlayerStateModel
     //Luna Archives
     'M87': (s)=> Checker.isTagOk('science', 3, 'min', s),
     //Pets Acclimatization
-    'M90': (s)=> Checker.isMoonTileOk('habitat', 2, 'min', s),
+    'M90': (s)=> Checker.isMoonTileOk('habitat', 1, 'min', s),
     //Moon Tether
     'M120': (s)=> Checker.isTagOk('space', 4, 'min', s),
     //Mooncrate Block Factory
