@@ -42,7 +42,7 @@ export const SCALING_VP: Record<string, (card: PlayableCardModel, state: PlayerS
 		"M87": (card) => Math.floor(card.getStockValue('science') /2), //Luna Archives
 		"M89": (card) => Math.floor(card.getStockValue('microbe') / 3), //Rust Eating Bacteria
 		"M90": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets Acclimatization
-		"M91": (_, state) => Math.floor(state.getMine() /2), //3d printing mine facility
+		"M91": (_, state) => Math.floor(state.getMine() / 1), //3d printing mine facility
 		"M124": (_, state) => state.getTagsOfType('jovian')+state.getTagsOfType('moon'), //Jupiter Embassy
 
 		"MC1": (_, state) => Math.floor(state.getTagsOfType('moon')), //Crescent research association
