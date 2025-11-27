@@ -71,7 +71,7 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	//Luna Senate
 	'M13': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
 	//Luna Train Station
-	'M14': (s)=> [{name:'megacredit', valueStock:s.getMine()}],
+	'M14': (s)=> [{name:'megacredit', valueStock:s.getMine() + s.getHabitat()}],
 	//Orbital Power Grid
 	'M22': (s)=> [{name:'heat', valueStock:s.getTagsOfType('moon')}],
 	//Undermoon Drug Lords Network

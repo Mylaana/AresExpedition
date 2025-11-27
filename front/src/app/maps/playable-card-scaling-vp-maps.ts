@@ -31,9 +31,10 @@ export const SCALING_VP: Record<string, (card: PlayableCardModel, state: PlayerS
 		"FM13": (_, state) => state.getTagsOfType('jovian'), //Ganymede Colony
 		"FM15": (card) => Math.floor(card.getStockValue('microbe')/2), //Ants
 		"FM27": (card) => Math.floor(card.getStockValue('science') /2), //Jovian Lanterns
-		"M11": (_, state) => Math.floor(state.getMine() /2), //Luna Mining Hub
+		"M11": (_, state) => Math.floor(state.getMine() /1), //Luna Mining Hub
 		"M13": (_, state) => state.getTagsOfType('moon'), //Luna Senate
-		"M14": (_, state) => state.getHabitat(), //Luna Train Station
+		"M14": (_, state) => state.getHabitat() + state.getMine() , //Luna Train Station
+		"M19": (_, state) => Math.floor(state.getMine() /2), //Serenitatis
 		"M27": (_, state) => state.getHabitat(), //Luna Ecumenapolis
 		"M28": (_, state) => Math.floor(state.getTagsOfType('moon') /2), //Grand Luna academy
 		"M81": (card) => card.getStockValue('science'), //Moon Minerals Tradecenter
