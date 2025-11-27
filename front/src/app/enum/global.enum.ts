@@ -201,3 +201,8 @@ export enum MilestonesEnum {
 export enum InputRuleEnum {
 	powerInfrastructure
 }
+export enum WildTagResolutionEnum {
+	anyValidTag,
+	anyValidTagNotAlreadyStocked,
+	specifiedTagList
+}

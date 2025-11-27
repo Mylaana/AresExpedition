@@ -134,7 +134,8 @@ function eventTagSelectorToJson(event: EventTagSelector): EventStateDTO | undefi
 		case('tagSelector'):{
 			let content: EventStateContentTagSelectorDTO = {
 				atl: event.authorizedTagList,
-				cc: event.targetCardId
+				cc: event.targetCardId,
+				wtrm: event.tagResolutionMode
 			}
 			return {
 				o: EventStateOriginEnum.create,

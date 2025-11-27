@@ -6,7 +6,7 @@ import { PlayableCardModel } from "../cards/project-card.model";
 import { CardState } from "../../interfaces/card.interface";
 import { SelectablePhaseEnum } from "../../enum/phase.enum";
 import { EventStateDTO } from "../../interfaces/event-state.interface";
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum";
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, InputRuleEnum, ProjectFilterNameEnum, WildTagResolutionEnum } from "../../enum/global.enum";
 import { BuilderType } from "../../types/phase-card.type";
 import { Utils } from "../../utils/utils";
 import { SETTING_DEFAULT_LANGUAGE } from "../../global/global-const";
@@ -291,6 +291,7 @@ export class EventTagSelector extends EventBaseModel {
     targetCardId!: string
 	selectedTag!: TagType
 	authorizedTagList!: TagType[]
+    tagResolutionMode!: WildTagResolutionEnum
     override autoFinalize: boolean = false
 }
 

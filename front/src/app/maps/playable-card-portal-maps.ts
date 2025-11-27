@@ -1,4 +1,4 @@
-import { GlobalParameterNameEnum, EffectPortalEnum, EffectPortalButtonEnum, DiscardOptionsEnum, DeckQueryOptionsEnum, ProjectFilterNameEnum } from "../enum/global.enum";
+import { GlobalParameterNameEnum, EffectPortalEnum, EffectPortalButtonEnum, DiscardOptionsEnum, DeckQueryOptionsEnum, ProjectFilterNameEnum, WildTagResolutionEnum } from "../enum/global.enum";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
 import { Checker } from "../utils/checker";
@@ -184,7 +184,7 @@ export const EFFECT_PORTAL: Record<string, (button: EffectPortalButtonEnum) => E
 			case(EffectPortalButtonEnum.clm_7):{
 				return [
 					EventFactory.simple.addRessourceToCardId({name:'science', valueStock:-7}, 'CF3'),
-					EventFactory.simple.resolveWildTag('CF3')
+					EventFactory.simple.resolveWildTag('CF3', WildTagResolutionEnum.anyValidTag)
 				]
 			}
 		}

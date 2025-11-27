@@ -1,4 +1,4 @@
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum, BuilderOption, EffectPortalEnum } from "../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum, BuilderOption, EffectPortalEnum, WildTagResolutionEnum } from "../enum/global.enum";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
@@ -688,7 +688,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Topographic Mapping
 	'D20': () => [
-		S.resolveWildTag('D20'),
+		S.resolveWildTag('D20', WildTagResolutionEnum.anyValidTag),
 		S.upgradePhaseCard(1)
 	],
 	//3D printing
@@ -710,7 +710,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Local Market
 	'D26': () => [
 		S.addProduction({name:'megacredit', valueStock:2}),
-		S.resolveWildTag('D26')
+		S.resolveWildTag('D26', WildTagResolutionEnum.anyValidTag)
 	],
 	//Manufacturing Hub
 	'D27': () => [
@@ -788,7 +788,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Political Influence
 	'D39': () => [
 		S.addProduction({name:'megacredit', valueStock:3}),
-		S.resolveWildTag('D39')
+		S.resolveWildTag('D39', WildTagResolutionEnum.anyValidTag)
 	],
 	//Biological Factories
 	'D40': () => [
@@ -916,7 +916,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Modpro
 	'P32': () => [
-		S.resolveWildTag('P32'),
+		S.resolveWildTag('P32', WildTagResolutionEnum.anyValidTag),
 	],
 	//Ecoline
 	'210': () => [S.addProduction({name:'plant', valueStock:1})],
@@ -990,7 +990,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.upgradePhaseCard(1,[0,1])
 	],
 	//Aridor
-	'CF6': ()=>  [S.resolveWildTag('CF6')],
+	'CF6': ()=>  [
+		S.resolveWildTag('CF6', WildTagResolutionEnum.anyValidTag),
+		S.resolveWildTag('CF6', WildTagResolutionEnum.anyValidTag)
+	],
 	//Recyclon
 	'CF7': ()=>  [S.addProduction({name:'steel', valueStock:1})],
 	//Topsoil Contract
@@ -1065,7 +1068,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'FM28': () => [S.specialBuilder(BuilderOption.conscription)],
 	//Research coordination
 	'FM29': () => [
-		S.resolveWildTag('FM29'),
+		S.resolveWildTag('FM29', WildTagResolutionEnum.anyValidTag),
 		S.addProduction({name:'megacredit', valueStock:2})
 	],
 	//Solar wind power

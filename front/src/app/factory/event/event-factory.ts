@@ -1,4 +1,4 @@
-import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, InputRuleEnum, ProjectFilterNameEnum } from "../../enum/global.enum"
+import { BuilderOption, DeckQueryOptionsEnum, DiscardOptionsEnum, EffectPortalEnum, GlobalParameterNameEnum, InputRuleEnum, ProjectFilterNameEnum, WildTagResolutionEnum } from "../../enum/global.enum"
 import { CardSelector, AdvancedRessourceStock, GlobalParameterValue, RessourceStock, ScanKeep, DrawDiscard, EventOrigin, MoonTile } from "../../interfaces/global.interface"
 import { BUILDER_LIST_CONFIG, EVENT_FILTER_SPECIAL_BUILDER } from "../../maps/card-builder-maps"
 import { PlayableCardModel } from "../../models/cards/project-card.model"
@@ -144,8 +144,8 @@ function scanKeepResult(cardList: PlayableCardModel[], keep: number, option: Dec
 function specialBuilder(option: BuilderOption): EventCardBuilder {
 	return EventFactory.createCardBuilder('specialBuilder', 'specialBuilder', option)
 }
-function resolveWildTag(cardCode: string, authorizedTagList?: TagType[]) : EventTagSelector {
-	return EventFactory.createTagSelector(cardCode, authorizedTagList)
+function resolveWildTag(cardCode: string, tagResolutionMode: WildTagResolutionEnum, authorizedTagList?: TagType[]) : EventTagSelector {
+	return EventFactory.createTagSelector(cardCode, tagResolutionMode, authorizedTagList)
 }
 function addTagToCard(cardCode: string, tag: TagType): EventTargetCard {
 	return EventFactory.createTargetCard('addTagToCardId', cardCode, {addTagToCard:tag})
@@ -742,12 +742,13 @@ function createPhase(subType:EventPhaseSubType): EventPhase {
     event.button = ButtonDesigner.createEventMainButton(event.subType)
     return event
 }
-function createTagSelector(cardCode: string, authorizedTagList?: TagType[]): EventTagSelector {
+function createTagSelector(cardCode: string, tagResolutionMode: WildTagResolutionEnum, authorizedTagList?: TagType[]): EventTagSelector {
 	let event = new EventTagSelector
 	event.subType = 'tagSelector'
 	event.targetCardId = cardCode
 	event.button = ButtonDesigner.createEventMainButton(event.subType)
 	event.title = 'Select a tag to add to this card.'
+	event.tagResolutionMode = tagResolutionMode
 	if(authorizedTagList){
 		event.authorizedTagList = authorizedTagList
 	}

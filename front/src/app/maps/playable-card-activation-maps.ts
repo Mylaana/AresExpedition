@@ -1,4 +1,4 @@
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum, BuilderOption, EffectPortalEnum, InputRuleEnum } from "../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum, BuilderOption, EffectPortalEnum, InputRuleEnum, WildTagResolutionEnum } from "../enum/global.enum";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
 import { RessourceStock } from "../interfaces/global.interface";
 import { EventBaseModel } from "../models/core-game/event.model";
@@ -300,13 +300,9 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		let card = clientState.getPlayedProjectWithId(cardCode)
 		let tags = card?.tagStock
 		if(!tags){
-			return [S.resolveWildTag(cardCode)]
+			return [S.resolveWildTag(cardCode, WildTagResolutionEnum.anyValidTag)]
 		}
-		let authorizedTags = GAME_TAG_LIST
-		for(let t of tags){
-			authorizedTags = authorizedTags.filter((el) => el!= Utils.toTagType(t))
-		}
-		return [S.resolveWildTag(cardCode,authorizedTags)]
+		return [S.resolveWildTag(cardCode, WildTagResolutionEnum.anyValidTagNotAlreadyStocked)]
 	},
 	//Modpro
 	'P32': () => [
