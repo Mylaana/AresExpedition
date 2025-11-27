@@ -1015,7 +1015,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Bactoviral Research
 	'FM9': (state) => [
-		S.addRessourceToSelectedCard({name:'microbe',valueStock:state.getTagsOfType('science')})
+		S.addRessourceToSelectedCard({name:'microbe',valueStock:state.getTagsOfType('science')}),
+		S.draw()
 	],
 	//Ceres Spaceport
 	'FM10': (state) => [
