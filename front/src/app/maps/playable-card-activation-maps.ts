@@ -437,9 +437,9 @@ export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: Playe
 	//Gas-Cooled Reactors
 	'P23': (state) => 12 - state.getPhaseCardUpgradedCount() * 2,
 	//Pride of the earth Arkship
-	'FM11': (state) =>   Math.floor(state.getTagsOfType('science')/4),
+	'FM11': (state) =>   Math.floor(state.getTagsOfType('science')/3),
 	//Ants
-	'FM15': (state) =>  Math.floor(state.getTagsOfType('microbe')/2),
+	'FM15': (state) =>  Math.floor(state.getTagsOfType('microbe')),
 	//Jovian Lanterns
 	'FM27': (state) =>  Math.floor(state.getTagsOfType('jovian')/2),
 	//he3 refinery
