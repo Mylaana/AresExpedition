@@ -55,11 +55,11 @@ export class PlayerTagStateModel {
 		let excluded: number[] = [Utils.toTagId('none'), Utils.toTagId('wild')]
 		for(let t of tagsIds){
 			if(excluded.includes(t)){continue}
-			this.tags[t].valueCount -= 1
+			this.addTag(t, -1)
 		}
 	}
 	/**counts the number of different tag type possessed */
-	getDifferentTagTypeCount(): number {
+	getUniqueTagTypeCount(): number {
 		return this.tags.filter(tag => tag.valueCount>0).length
 	}
 	toJson(): PlayerTagStateDTO {

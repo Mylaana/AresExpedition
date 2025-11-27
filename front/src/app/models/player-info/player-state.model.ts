@@ -131,7 +131,7 @@ export class PlayerStateModel {
 	removeTag(tagsIds: number[]){
 		this.tagState.removeTags(tagsIds)
 	}
-	getDifferentTagTypeCount(): number {return this.tagState.getDifferentTagTypeCount()}
+	getDifferentTagTypeCount(): number {return this.tagState.getUniqueTagTypeCount()}
 
 	//ressourceState
 	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}
