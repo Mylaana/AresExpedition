@@ -39,7 +39,7 @@ export const SCALING_VP: Record<string, (card: PlayableCardModel, state: PlayerS
 		"M81": (card) => card.getStockValue('science'), //Moon Minerals Tradecenter
 		"M84": (_, state) => state.getTagsOfType('moon'), //Copernicus Tower
 		"M85": (card) => Math.floor(card.getStockValue('microbe') / 2), //Darkside Incubation Plant
-		"M87": (card) => card.getStockValue('science'), //Luna Archives
+		"M87": (card) => Math.floor(card.getStockValue('science') /2), //Luna Archives
 		"M89": (card) => Math.floor(card.getStockValue('microbe') / 3), //Rust Eating Bacteria
 		"M90": (card) => Math.floor(card.getStockValue('animal') / 2), //Pets Acclimatization
 		"M91": (_, state) => Math.floor(state.getMine() /2), //3d printing mine facility

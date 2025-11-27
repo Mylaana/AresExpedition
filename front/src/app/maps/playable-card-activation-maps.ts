@@ -453,7 +453,7 @@ export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: Playe
 	},
 	//Luna Archives
 	'M87': (state) => {
-		return Math.floor(state.getTagsOfType('moon')/3)
+		return Math.floor(state.getTagsOfType('moon')/2)
 	},
 	//Luna Trade Station
 	'M88': (state) => state.getHabitat(),

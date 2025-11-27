@@ -38,7 +38,6 @@ export class EventStateDeserializerService{
 		return shouldLoadEvent(event,eventState)
 	}
 	public loadFromJson(event: EventBaseModel, dto: EventStateDTO, clientState: PlayerStateModel) {
-		console.log(event)
 		switch(dto.t){
 			case(EventStateTypeEnum.builderConstructionLocked):case(EventStateTypeEnum.builderDevelopemntLocked):{
 				let content = toContentDto<EventStateBuilderContentDTO>(dto.v);
