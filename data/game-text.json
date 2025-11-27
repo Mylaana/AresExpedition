@@ -267,6 +267,10 @@
         "en": "Play an additional Blue or Red card",
         "fr": "Jouez une carte Bleu ou Rouge aditionnelle"
     },
+    "gameEventTitle.researchGrant": {
+        "en": "Play an additional Blue or Red card",
+        "fr": "Jouez une carte Bleu ou Rouge aditionnelle"
+    },
     "gameEventTitle.builderGreen9MCFree": {
         "en": "Play an additional Green card with a printed cost of 9MC or less without paying its cost",
         "fr": "Jouez gratuitement une carte Verte additionnelle dont le co\u00fbt initial est de 9MC ou moins"

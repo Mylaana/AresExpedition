@@ -9,7 +9,7 @@ import { PhaseCardDTO, PlayerPhaseCardStateDTO } from "../../interfaces/dto/play
 import { RessourceStock } from "../../interfaces/global.interface";
 import { RessourceType } from "../../types/global.type";
 
-export class PlayerPhaseCardStateModel {
+export class PlayerPhaseStateModel {
 	private phaseGroups!: PhaseCardGroupModel[]
 	private phaseCardUpgradeCount: number = 0
 	private selectedPhase!: SelectablePhaseEnum
@@ -208,11 +208,11 @@ export class PlayerPhaseCardStateModel {
 			this.phaseGroups.push(this.phaseService.getNewPhaseGroup(groupName))
 		}
 	}
-	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseCardStateModel {
+	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseStateModel {
 		if (!data.pc || !data.sp || !data.psp){
 			throw new Error("Invalid PlayerPhaseCardStateDTO: Missing required fields")
 		}
-		return new PlayerPhaseCardStateModel(injector, data)
+		return new PlayerPhaseStateModel(injector, data)
 	}
 
 	private phaseGroupToJson(phaseGroups: PhaseCardGroupModel[]): PhaseCardDTO[] {
@@ -250,8 +250,8 @@ export class PlayerPhaseCardStateModel {
 		return groups
 	}
 
-	static empty(injector: Injector): PlayerPhaseCardStateModel {
-		return new PlayerPhaseCardStateModel(
+	static empty(injector: Injector): PlayerPhaseStateModel {
+		return new PlayerPhaseStateModel(
 			injector,
 			{
 				pc: [],

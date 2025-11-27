@@ -1251,6 +1251,13 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addMine(2),
 		S.draw(2)
 	],
+	//
+	//Biological Lab implantation
+	'M67': () => [
+		S.addHabitat(),
+		S.draw(),
+		S.addRessourceToSelectedCard({name:'microbe', valueStock:5})
+	],
 	//Moon Minerals Tradecenter
 	'M92': () => [
 		S.draw(2)
@@ -1274,6 +1281,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Grand Luna Capital Group
 	'MC4': () => [
 		S.addHabitat(2),
+		S.addProduction({name:'steel', valueStock:1})
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: PlayerStateModel) => number> = {

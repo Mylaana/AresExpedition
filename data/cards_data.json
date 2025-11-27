@@ -2769,7 +2769,7 @@
         },
         "prerequisiteText": {
             "en": "Spend 3 Heat.",
-            "fr": "Reqiert que vous d\u00e9pensiez 3 chaleurs. "
+            "fr": "Requiert que vous d\u00e9pensiez 3 chaleurs. "
         },
         "prerequisiteSummaryText": {
             "en": "-3$ressource_heat$",
@@ -6384,12 +6384,12 @@
         },
         "effectSummaryType": "greyProduction",
         "effectSummaryText": {
-            "en": "$ressource_steel$$ressource_steel$",
-            "fr": "$ressource_steel$$ressource_steel$"
+            "en": "$ressource_steel$",
+            "fr": "$ressource_steel$"
         },
         "effectText": {
-            "en": "When you play an $tag_building$, you pay 4 MC less.",
-            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt est r\u00e9duit de 4 MC."
+            "en": "When you play an $tag_building$, you pay 2 MC less.",
+            "fr": "Lorsque vous jouez un $tag_building$, le co\u00fbt est r\u00e9duit de 2 MC."
         },
         "effectSummaryType2": "trigger",
         "effectSummaryText2": {
@@ -6400,7 +6400,7 @@
             "en": "EFFECT: For each $ressource_steel$ you gain, you also gain $other_tr$.",
             "fr": "EFFET: Pour chaque $ressource_steel$ que vous gagnez, gagnez \u00e9galement $other_tr$"
         },
-        "startingMegacredits": 27,
+        "startingMegacredits": 35,
         "status": "implemented",
         "vpScaling": "0",
         "balancedVersion": "add"
@@ -6665,6 +6665,9 @@
     {
         "card_code": "D02B",
         "origin": "discovery",
+        "tagsId": [
+            2
+        ],
         "cardType": "corporation",
         "title": {
             "en": "Exocorp B",
@@ -6672,18 +6675,18 @@
         },
         "effectSummaryType": "trigger",
         "effectSummaryText": {
-            "en": "$ressource_card$: $ressource_megacreditvoid_-1$",
-            "fr": "$ressource_card$: $ressource_megacreditvoid_-1$"
+            "en": "$ressource_card$: $ressource_megacreditvoid_-2$",
+            "fr": "$ressource_card$: $ressource_megacreditvoid_-2$"
         },
         "effectText": {
-            "en": "EFFECT: Whenever you play a card, you pay 1 MC less for it.",
-            "fr": "EFFET : Lorsque vous jouez une carte, le co\u00fbt associ\u00e9 est r\u00e9duit de 1 MC. "
+            "en": "EFFECT: Whenever you play a card, you pay 2 MC less for it.",
+            "fr": "EFFET : Lorsque vous jouez une carte, le co\u00fbt associ\u00e9 est r\u00e9duit de 2 MC. "
         },
         "playedText": {
             "en": "Upgrade your Phase card V.",
             "fr": "Am\u00e9liorez votre Phase V."
         },
-        "startingMegacredits": 20,
+        "startingMegacredits": 26,
         "status": "validated",
         "vpScaling": "0",
         "balancedVersion": "add"
@@ -9480,7 +9483,8 @@
         "card_code": "CF6",
         "origin": "fanmade",
         "tagsId": [
-            10
+            10,
+            1
         ],
         "cardType": "corporation",
         "title": {
@@ -9496,7 +9500,7 @@
             "en": "During the production phase, this card produces 1 MC per different tag you have.",
             "fr": "Lors de la phase de production, cette carte produit 1 MC par badge diff\u00e9rent en votre possession."
         },
-        "startingMegacredits": 28,
+        "startingMegacredits": 32,
         "status": "validated",
         "vpScaling": "0"
     },
@@ -10499,6 +10503,7 @@
         "origin": "moon",
         "cost": 12,
         "tagsId": [
+            0,
             11,
             6
         ],
@@ -10659,7 +10664,8 @@
         "origin": "moon",
         "cost": 23,
         "tagsId": [
-            0
+            0,
+            11
         ],
         "cardType": "greenProject",
         "vpNumber": "*",
@@ -10681,7 +10687,7 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Increase Moon structures by 1.",
+            "en": "Gain a $other_minetile$$other_habitattile$.",
             "fr": ""
         },
         "status": "validated",
@@ -10863,6 +10869,7 @@
         "cost": 23,
         "tagsId": [
             1,
+            11,
             3
         ],
         "cardType": "greenProject",
@@ -11031,7 +11038,7 @@
     {
         "card_code": "M28",
         "origin": "moon",
-        "cost": 13,
+        "cost": 12,
         "tagsId": [
             2,
             11
@@ -11063,6 +11070,7 @@
         "origin": "moon",
         "cost": 5,
         "tagsId": [
+            0,
             11
         ],
         "cardType": "greenProject",
@@ -11099,6 +11107,7 @@
         "origin": "moon",
         "cost": 12,
         "tagsId": [
+            0,
             11
         ],
         "cardType": "greenProject",
@@ -11223,6 +11232,7 @@
         "origin": "moon",
         "cost": 5,
         "tagsId": [
+            0,
             11,
             9
         ],
@@ -11325,7 +11335,7 @@
             "en": "Gain a $other_habitattile$.$skipline$Draw a card.$skipline$Add 5 $ressource_microbe$ to a card.",
             "fr": ""
         },
-        "status": "filled",
+        "status": "implemented",
         "vpScaling": "0"
     },
     {
@@ -11544,7 +11554,7 @@
     {
         "card_code": "M90",
         "origin": "moon",
-        "cost": 14,
+        "cost": 5,
         "tagsId": [
             11,
             7
@@ -11570,11 +11580,11 @@
         },
         "effectSummaryOption": "scalingCostActivation",
         "prerequisiteText": {
-            "en": "Requires that you have 2 $other_habitattile$.",
+            "en": "Requires that you have $other_habitattile$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "$other_habitattile$$other_habitattile$",
+            "en": "$other_habitattile$",
             "fr": ""
         },
         "stockable": [
@@ -11854,7 +11864,6 @@
             11
         ],
         "cardType": "corporation",
-        "vpNumber": "*",
         "title": {
             "en": "Luna Mining Federation",
             "fr": ""
@@ -11874,7 +11883,7 @@
         },
         "startingMegacredits": 25,
         "status": "validated",
-        "vpScaling": "1"
+        "vpScaling": "0"
     },
     {
         "card_code": "MC3",
@@ -11920,12 +11929,21 @@
             "en": "/ $other_habitattile$",
             "fr": ""
         },
-        "effectSummaryType": "trigger",
+        "effectSummaryType": "greyProduction",
         "effectSummaryText": {
-            "en": "$other_habitattile$: $ressource_card$",
+            "en": "$ressource_steel$",
             "fr": ""
         },
         "effectText": {
+            "en": "When you play a $tag_building$, you pay 2 MC less for it.",
+            "fr": ""
+        },
+        "effectSummaryType2": "trigger",
+        "effectSummaryText2": {
+            "en": "$other_habitattile$: $ressource_card$",
+            "fr": ""
+        },
+        "effectText2": {
             "en": "EFFECT: When you gain a $other_habitattile$, draw a card.",
             "fr": ""
         },

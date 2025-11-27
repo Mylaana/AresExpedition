@@ -862,8 +862,9 @@ export class GameStateFacadeService{
 			state.addMoonTile(t)
 			totalTR += t.quantity
 		}
-		if(state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){return}
-		this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
+		if(!state.isGlobalParameterMaxedOutAtPhaseBeginning(GlobalParameterNameEnum.moon)){
+			this.addGlobalParameterStepsEOPtoClient({name:GlobalParameterNameEnum.moon, steps:totalTR})
+		}
 		this.updateClientState(state)
 
 		let newEvents = PlayableCard.getOnTriggerredEvents('ON_MOON_TILE_GAINED', state.getTriggersIdActive(), state, {moonTiles:tilesList})
