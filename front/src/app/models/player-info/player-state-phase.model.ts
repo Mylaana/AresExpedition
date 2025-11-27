@@ -142,42 +142,8 @@ export class PlayerPhaseStateModel {
 			}
 		}
 	}
-	addProductionResourcesGainedThisRound(ressources: RessourceStock[]){
-		let result = this.generateEmptyResourceProductionList()
-		//add previous
-		for(let r of result){
-			r.valueStock += this.getResourceValueOfTypeFromList(r.name, this.resourcesProducedThisRound)
-		}
-
-		//add new
-		for(let r of result){
-			r.valueStock += this.getResourceValueOfTypeFromList(r.name, ressources)
-		}
-
-		this.resourcesProducedThisRound = result
-	}
-	private getResourceValueOfTypeFromList(t: RessourceType, lst: RessourceStock[]): number{
-		for(let r of lst){
-			if(r.name===t){return r.valueStock}
-		}
-		return 0
-	}
-	private generateEmptyResourceProductionList(): RessourceStock[] {
-		let result: RessourceStock[] = [
-			{
-				name: 'megacredit',
-				valueStock: 0
-			},
-			{
-				name: 'heat',
-				valueStock: 0 
-			},
-			{
-				name: 'plant',
-				valueStock: 0
-			}
-		]
-		return result
+	addProductionResourcesGainedThisRound(resources: RessourceStock[]){
+		this.resourcesProducedThisRound =  Utils.addUpBaseResources(this.resourcesProducedThisRound, resources)
 	}
 	getProductionResourcesGainedThisRound(): RessourceStock[]{
 		return this.resourcesProducedThisRound
