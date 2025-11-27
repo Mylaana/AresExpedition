@@ -66,7 +66,7 @@ gameEventTitle;phaseResearch;;Research Phase: Draw $0$ cards;Phase Recherche: Pi
 gameEventTitle;phaseCardUpgrade;;Upgrade Phase Cards;Améliorez vos cartes Phase
 gameEventTitle;builderWorkCrews;;Play an additional Blue or Red card with its cost reduced by 11MC;Jouez une carte Bleu ou Rouge aditionnelle son coût est réduit de 11MC
 gameEventTitle;builderAssetLiquidation;;Play an additional Blue or Red card;Jouez une carte Bleu ou Rouge aditionnelle
-gameEventTitle;researchGrant;;Play an additional Blue or Red card;Jouez une carte Bleu ou Rouge aditionnelle
+gameEventTitle;builderResearchGrant;;Play an additional Blue or Red card;Jouez une carte Bleu ou Rouge aditionnelle
 gameEventTitle;builderGreen9MCFree;;Play an additional Green card with a printed cost of 9MC or less without paying its cost;Jouez gratuitement une carte Verte additionnelle dont le coût initial est de 9MC ou moins
 gameEventTitle;builderAssortedEnterprises;;Play an aditionnal card of any color with it's cost reduced by 2MC;Jouez une carte aditionnelle de n'importe quelle couleur son coût est réduit de 2MC
 gameEventTitle;builderSelfReplicatingBacteria;;Play a card of any color with it's cost reduced by 25MC;Jouez une carte de n'importe quelle couleur son coût est réduit de 25MC

@@ -9808,17 +9808,17 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $ressource_science$",
-            "fr": "/ $ressource_science$"
+            "en": "/ $ressource_science$$ressource_science$",
+            "fr": "/ $ressource_science$$ressource_science$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_science$/4$tag_science$",
-            "fr": "$other_arrow$$skipline$$ressource_science$/4$tag_science$"
+            "en": "$other_arrow$$skipline$$ressource_science$/3$tag_science$",
+            "fr": "$other_arrow$$skipline$$ressource_science$/3$tag_science$"
         },
         "effectText": {
-            "en": "ACTION : Add 1$ressource_science$ here per 4 $tag_science$ you have.",
-            "fr": "ACTION : ajoutez 1 $ressource_science$ pour 4 $tag_science$ en votre possession."
+            "en": "ACTION : Add 1$ressource_science$ here per 3 $tag_science$ you have.",
+            "fr": "ACTION : ajoutez 1 $ressource_science$ pour 3 $tag_science$ en votre possession."
         },
         "effectSummaryOption": "scalingCostActivation",
         "prerequisiteText": {
@@ -9910,12 +9910,12 @@
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_microbe$/$tag_microbe$$tag_microbe$",
+            "en": "$other_arrow$$skipline$$ressource_microbe$/$tag_microbe$",
             "fr": ""
         },
         "effectText": {
-            "en": "ACTION: Add 1 $ressource_microbe$ to this card per 2 $tag_microbe$ you have, including this one.",
-            "fr": "ACTION: Ajoutez 1 microbe sur cette carte pour 2 $tag_microbe$ en votre possession, y compris celui-ci."
+            "en": "ACTION: Add 1 $ressource_microbe$ to this card per $tag_microbe$ you have, including this one.",
+            "fr": "ACTION: Ajoutez 1 microbe sur cette carte pour chaque $tag_microbe$ en votre possession, y compris celui-ci."
         },
         "effectSummaryOption": "scalingCostActivation",
         "stockable": [
@@ -10238,7 +10238,7 @@
     {
         "card_code": "FM27",
         "origin": "fanmade",
-        "cost": 20,
+        "cost": 8,
         "tagsId": [
             5
         ],
@@ -10249,17 +10249,17 @@
             "fr": "Lanternes Joviennes"
         },
         "vpText": {
-            "en": "/ $ressource_science$",
-            "fr": "/ $ressource_science$"
+            "en": "/ $ressource_science$$ressource_science$",
+            "fr": "/ $ressource_science$$ressource_science$"
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_science$/$tag_jovian$$tag_jovian$$tag_jovian$",
-            "fr": "$other_arrow$$skipline$$ressource_science$/$tag_jovian$$tag_jovian$$tag_jovian$"
+            "en": "$other_arrow$$skipline$$ressource_science$/$tag_jovian$$tag_jovian$",
+            "fr": "$other_arrow$$skipline$$ressource_science$/$tag_jovian$$tag_jovian$"
         },
         "effectText": {
-            "en": "ACTION: Add 1 $ressource_science$ here per 3 $tag_jovian$ you have.",
-            "fr": "ACTION: Ajoutez 1 $ressource_science$ sur cette carte pour 3 $tag_jovian$ en votre possession."
+            "en": "ACTION: Add 1 $ressource_science$ here per 2 $tag_jovian$ you have.",
+            "fr": "ACTION: Ajoutez 1 $ressource_science$ sur cette carte pour 2 $tag_jovian$ en votre possession."
         },
         "effectSummaryOption": "scalingCostActivation",
         "prerequisiteText": {
@@ -10593,7 +10593,7 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $other_minetile$$other_minetile$",
+            "en": "/ $other_minetile$",
             "fr": ""
         },
         "effectSummaryType": "greyProduction",
@@ -10674,7 +10674,7 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $other_habitattile$",
+            "en": "/ $other_habitattile$$skipline$/ $other_minetile$",
             "fr": ""
         },
         "effectSummaryType": "production",
@@ -10683,11 +10683,11 @@
             "fr": ""
         },
         "effectText": {
-            "en": "During the production phase, this card produces 1MC per $other_minetile$ you have.",
+            "en": "During the production phase, this card produces 1MC per $other_minetile$ and 1 MC per $other_habitattile$ you have.",
             "fr": ""
         },
         "playedText": {
-            "en": "Gain a $other_minetile$$other_habitattile$.",
+            "en": "Gain $other_minetile$$other_habitattile$.",
             "fr": ""
         },
         "status": "validated",
@@ -10833,10 +10833,14 @@
             11
         ],
         "cardType": "greenProject",
-        "vpNumber": "1",
+        "vpNumber": "*",
         "phaseUp": "IV",
         "title": {
             "en": "Mare Serenitatis Mine",
+            "fr": ""
+        },
+        "vpText": {
+            "en": "/ $other_minetile$$other_minetile$",
             "fr": ""
         },
         "effectSummaryType": "greyProduction",
@@ -10861,7 +10865,7 @@
             "fr": ""
         },
         "status": "validated",
-        "vpScaling": "0"
+        "vpScaling": "1"
     },
     {
         "card_code": "M21",
@@ -11450,23 +11454,22 @@
     {
         "card_code": "M86",
         "origin": "moon",
-        "cost": 8,
+        "cost": 3,
         "tagsId": [
             2
         ],
         "cardType": "blueProject",
-        "vpNumber": "1",
         "title": {
             "en": "Darkside Observatory",
             "fr": ""
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_science$$ressource_science$*",
+            "en": "$other_arrow$$skipline$$ressource_science$*",
             "fr": ""
         },
         "effectText": {
-            "en": "ACTION: Add 2 $ressource_science$ to another card.",
+            "en": "ACTION: Add $ressource_science$ to another card.",
             "fr": ""
         },
         "status": "validated",
@@ -11479,7 +11482,7 @@
     {
         "card_code": "M87",
         "origin": "moon",
-        "cost": 15,
+        "cost": 9,
         "tagsId": [
             2,
             11
@@ -11491,25 +11494,25 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/$ressource_science$",
+            "en": "/$ressource_science$$ressource_science$",
             "fr": ""
         },
         "effectSummaryType": "action",
         "effectSummaryText": {
-            "en": "$other_arrow$$skipline$$ressource_science$/$tag_moon$$tag_moon$$tag_moon$",
+            "en": "$other_arrow$$skipline$$ressource_science$/$tag_moon$$tag_moon$",
             "fr": ""
         },
         "effectText": {
-            "en": "ACTION: Add 1 $ressource_science$ here per 3 $tag_moon$ you have.",
+            "en": "ACTION: Add 1 $ressource_science$ here per 2 $tag_moon$ you have.",
             "fr": ""
         },
         "effectSummaryOption": "scalingCostActivation",
         "prerequisiteText": {
-            "en": "Requires 3 $tag_science$.",
+            "en": "Requires 2 $tag_science$.",
             "fr": ""
         },
         "prerequisiteSummaryText": {
-            "en": "3$tag_science$",
+            "en": "$tag_science$$tag_science$",
             "fr": ""
         },
         "stockable": [
@@ -11607,7 +11610,7 @@
             "fr": ""
         },
         "vpText": {
-            "en": "/ $other_minetile$$other_minetile$",
+            "en": "/ $other_minetile$",
             "fr": ""
         },
         "effectSummaryType": "action",
@@ -11733,14 +11736,6 @@
         },
         "effectText": {
             "en": "EFFECT: You pay 3 MC less for Moon standard actions that cost MC.",
-            "fr": ""
-        },
-        "prerequisiteText": {
-            "en": "Requires that you have 1 $other_minetile$.",
-            "fr": ""
-        },
-        "prerequisiteSummaryText": {
-            "en": "$other_minetile$",
             "fr": ""
         },
         "status": "validated",
