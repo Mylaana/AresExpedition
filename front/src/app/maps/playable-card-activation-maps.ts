@@ -360,7 +360,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		: [],
 	//Darkside Observatory
 	'M86': () => [
-		S.addRessourceToSelectedCard({name:'science', valueStock:2})
+		S.addRessourceToSelectedCard({name:'science', valueStock:1})
 	],
 	//Luna Archives
 	'M87': (card, state) => {
