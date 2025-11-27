@@ -30,7 +30,7 @@ export const SCALING_VP: Record<string, (card: PlayableCardModel, state: PlayerS
 		"FM11": (card) => card.getStockValue('science'), //Arkship
 		"FM13": (_, state) => state.getTagsOfType('jovian'), //Ganymede Colony
 		"FM15": (card) => Math.floor(card.getStockValue('microbe')/2), //Ants
-		"FM27": (card) => card.getStockValue('science'), //Jovian Lanterns
+		"FM27": (card) => Math.floor(card.getStockValue('science') /2), //Jovian Lanterns
 		"M11": (_, state) => Math.floor(state.getMine() /2), //Luna Mining Hub
 		"M13": (_, state) => state.getTagsOfType('moon'), //Luna Senate
 		"M14": (_, state) => state.getHabitat(), //Luna Train Station

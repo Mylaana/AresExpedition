@@ -441,7 +441,7 @@ export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: Playe
 	//Ants
 	'FM15': (state) =>  Math.floor(state.getTagsOfType('microbe')/2),
 	//Jovian Lanterns
-	'FM27': (state) =>  Math.floor(state.getTagsOfType('jovian')/3),
+	'FM27': (state) =>  Math.floor(state.getTagsOfType('jovian')/2),
 	//he3 refinery
 	'M80': (state) => state.getMine()*2,
 	//Moon Minerals Tradecenter
