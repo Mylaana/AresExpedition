@@ -9,7 +9,6 @@
 }
 .wrapper-row{
     display: flex;
-    //flex-direction: column;
 }
 .box{
     display: flex;
@@ -30,12 +29,14 @@
     }
 }
 .row-title{
-    min-width: 150px;
-    width: 100%;
+    width: 150px;
 }
-.column-title{
+.player-line{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
     height: 35px;
-    border: 0;
 }
 app-player-name{
     height: 30px;
@@ -52,7 +53,6 @@ p{
 .divider{
     height: 10px;
     width: 100%;
-    //background-color: red;
     border-left: 0;
     border-top: var(--color-ares-orange-dark) solid 1px;
 }

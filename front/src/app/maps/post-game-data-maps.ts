@@ -51,6 +51,7 @@ export const POST_GAME_ROW_RELEVANCY: Partial<Record<PostGameDataTitle,(activeCo
     'contributionMoonStructure': (content) => isContentActive('expansionMoon', content),
     'totalAwards': (content) => isContentActive('expansionDiscovery', content),
     'totalMilestones': (content) => isContentActive('expansionDiscovery', content),
+    'titleAwardsMilestones': (content) => isContentActive('expansionDiscovery', content),
 }
 export const POST_GAME_CATEGORY_TITLE: Partial<Record<PostGameDataTitle, string>> = {
     'titleCards': 'Total Cards:',

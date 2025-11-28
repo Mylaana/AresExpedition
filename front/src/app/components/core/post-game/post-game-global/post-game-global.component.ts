@@ -66,4 +66,9 @@ export class PostGameGlobalComponent implements OnInit{
 	isLineData(row: number): boolean {
 		return this.postGameService.isLineData(row)
 	}
+	getDataCellType(row: number, column: number): string {
+		if(column===0){return 'row-title box'}
+		if(row===0){return 'player-line'}
+		return 'box'
+	}
 }
