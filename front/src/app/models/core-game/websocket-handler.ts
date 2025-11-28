@@ -137,13 +137,10 @@ export class WebsocketHandler {
     private handleMessageGameOver(content: WsGameState): void {
 		this.gameStateService.reset()
         this.gameStateService.clearEventQueue()
-		//this.gameStateService.setSelectedPhaseList(content.selectedPhase)
 		this.gameStateService.setRound(content.round)
 		this.gameStateService.setDeckSize(content.deck)
 		this.gameStateService.setDiscardSize(content.discard)
-		//this.handleGroupMessageReadyResult(WebsocketResultMessageFactory.inputToGroupReady(content.groupReady))
 		this.handleGroupMessageGameState(WebsocketResultMessageFactory.inputToGroupStateDTO(content.groupPlayerStatePublic))
-		//this.gameStateService.setCurrentPhase(content.currentPhase, false)
 		this.gameContentService.setGameOptions(WebsocketResultMessageFactory.inputToGameOption(content.gameOptions))
 		if(this.gameContentService.isContentActive('expansionDiscovery')){
 			this.gameStateService.setAwards(WebsocketResultMessageFactory.inputToAwards(content.awards))

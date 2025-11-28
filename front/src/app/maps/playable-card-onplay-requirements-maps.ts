@@ -214,11 +214,9 @@ export const PLAY_REQUIREMENTS_OK: Record<string, (clientState: PlayerStateModel
     //Luna Archives
     'M87': (s)=> Checker.isTagOk('science', 3, 'min', s),
     //Pets Acclimatization
-    'M90': (s)=> Checker.isMoonTileOk('habitat', 2, 'min', s),
+    'M90': (s)=> Checker.isMoonTileOk('habitat', 1, 'min', s),
     //Moon Tether
     'M120': (s)=> Checker.isTagOk('space', 4, 'min', s),
-    //Mooncrate Block Factory
-    'M122': (s)=> Checker.isMoonTileOk('mine', 1, 'min', s),
     //Luna Archives
     'M123': (s)=> Checker.isTagOk('science', 2, 'min', s),
     //Jupiter Embassy
@@ -431,8 +429,6 @@ export const PLAY_REQUIREMENTS_INTERFACE: Record<string, CardRequirements> = {
     'M90': { treshold: 'min' },
     //Moon Tether
     'M120': { treshold: 'min' },
-    //Mooncrate Block Factory
-    'M122': { treshold: 'min' },
     //Luna Archives
     'M123': { treshold: 'min' },
     //Jupiter Embassy

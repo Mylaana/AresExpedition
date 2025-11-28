@@ -1,5 +1,5 @@
 import { EventStateOriginEnum, EventStateTypeEnum } from "../enum/eventstate.enum"
-import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum } from "../enum/global.enum"
+import { BuilderOption, DeckQueryOptionsEnum, EffectPortalEnum, WildTagResolutionEnum } from "../enum/global.enum"
 import { EventCardSelectorSubType } from "../types/event.type"
 import { NonEventButtonNames, TagType } from "../types/global.type"
 import { AdvancedRessourceStock, EventOrigin, GlobalParameterValue, MoonTile, RessourceStock, ScanKeep } from "./global.interface"
@@ -86,6 +86,7 @@ export interface EventStateActivator extends EventStateContentDTO {
 export interface EventStateContentTagSelectorDTO extends EventStateContentDTO {
 	atl: TagType[]
 	cc: string
+	wtrm: WildTagResolutionEnum//Wild tag resolution mode
 }
 export interface EventStateContentCardSelectorDTO extends EventStateContentDTO {
 	st: EventCardSelectorSubType //type

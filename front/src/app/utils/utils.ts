@@ -1,9 +1,9 @@
 import { SelectablePhaseEnum } from "../enum/phase.enum"
 import { DEBUG_LOG_EVENT_RESOLUTION, GAME_PHASE_ACTION_CARDS_LIST, GAME_PHASE_CONSTRUCTION_CARDS_LIST, GAME_PHASE_DEVELOPMENT_CARDS_LIST, GAME_PHASE_PRODUCTION_CARDS_LIST, GAME_PHASE_RESEARCH_CARDS_LIST, SETTING_DEFAULT_LANGUAGE } from "../global/global-const"
 import { CardState } from "../interfaces/card.interface"
-import { MinMaxEqualTreshold } from "../interfaces/global.interface"
+import { MinMaxEqualTreshold, RessourceStock } from "../interfaces/global.interface"
 import { PlayableCardModel } from "../models/cards/project-card.model"
-import { myUUID, SettingSupportedLanguage, TagType } from "../types/global.type"
+import { myUUID, RessourceType, SettingSupportedLanguage, TagType } from "../types/global.type"
 import { PhaseCardType, PhaseCardUpgradeType } from "../types/phase-card.type"
 import { v4 as uuidv4 } from 'uuid'
 import { CardTypeColor, CardTypeUndefined, LocalizedText } from "../types/project-card.type"
@@ -185,7 +185,46 @@ function countTagsOfTypeInIdList(currentTagIdList: number[], authorizedTags: Tag
 	}
 	return result
 }
+function generateEmptyResourceProductionList(includeCards: boolean = false, includeSteelAndTitanium: boolean = false): RessourceStock[] {
+		let result: RessourceStock[] = [
+			{
+				name: 'megacredit',
+				valueStock: 0
+			},
+			{
+				name: 'heat',
+				valueStock: 0 
+			},
+			{
+				name: 'plant',
+				valueStock: 0
+			}
+		]
+		if(includeCards){result.push({name: 'card', valueStock: 0})}
+		if(includeSteelAndTitanium){result.push({name: 'steel', valueStock: 0},{name: 'titanium', valueStock: 0})}
+		return result
+	}
 
+function addUpBaseResources(input1: RessourceStock[], input2: RessourceStock[], includeCards: boolean = false, includeSteelAndTitanium: boolean = false): RessourceStock[] {
+	let result = generateEmptyResourceProductionList(includeCards, includeSteelAndTitanium)
+	//add 1
+	for(let r of result){
+		r.valueStock += getResourceValueOfTypeFromList(r.name, input1)
+	}
+
+	//add 2
+	for(let r of result){
+		r.valueStock += getResourceValueOfTypeFromList(r.name, input2)
+	}
+
+	return result
+}
+function getResourceValueOfTypeFromList(t: RessourceType, lst: RessourceStock[]): number{
+	for(let r of lst){
+		if(r.name===t){return r.valueStock}
+	}
+	return 0
+}
 export const Logger = {
 	logText,
 	logEventResolution,
@@ -210,5 +249,6 @@ export const Utils = {
 	toTagId,
 	toTagType,
 	getLanguageOrFallback,
-	countTagsOfTypeInIdList
+	countTagsOfTypeInIdList,
+	addUpBaseResources
 }

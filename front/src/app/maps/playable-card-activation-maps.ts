@@ -1,4 +1,4 @@
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum, BuilderOption, EffectPortalEnum, InputRuleEnum } from "../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum, DiscardOptionsEnum, ProjectFilterNameEnum, GlobalParameterColorEnum, BuilderOption, EffectPortalEnum, InputRuleEnum, WildTagResolutionEnum } from "../enum/global.enum";
 import { SelectablePhaseEnum } from "../enum/phase.enum";
 import { RessourceStock } from "../interfaces/global.interface";
 import { EventBaseModel } from "../models/core-game/event.model";
@@ -300,13 +300,9 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		let card = clientState.getPlayedProjectWithId(cardCode)
 		let tags = card?.tagStock
 		if(!tags){
-			return [S.resolveWildTag(cardCode)]
+			return [S.resolveWildTag(cardCode, WildTagResolutionEnum.anyValidTag)]
 		}
-		let authorizedTags = GAME_TAG_LIST
-		for(let t of tags){
-			authorizedTags = authorizedTags.filter((el) => el!= Utils.toTagType(t))
-		}
-		return [S.resolveWildTag(cardCode,authorizedTags)]
+		return [S.resolveWildTag(cardCode, WildTagResolutionEnum.anyValidTagNotAlreadyStocked)]
 	},
 	//Modpro
 	'P32': () => [
@@ -360,7 +356,7 @@ export const ACTIVATION_EVENTS: Record<string, (cardCode: string, clientState: P
 		: [],
 	//Darkside Observatory
 	'M86': () => [
-		S.addRessourceToSelectedCard({name:'science', valueStock:2})
+		S.addRessourceToSelectedCard({name:'science', valueStock:1})
 	],
 	//Luna Archives
 	'M87': (card, state) => {
@@ -437,11 +433,11 @@ export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: Playe
 	//Gas-Cooled Reactors
 	'P23': (state) => 12 - state.getPhaseCardUpgradedCount() * 2,
 	//Pride of the earth Arkship
-	'FM11': (state) =>   Math.floor(state.getTagsOfType('science')/4),
+	'FM11': (state) =>   Math.floor(state.getTagsOfType('science')/3),
 	//Ants
-	'FM15': (state) =>  Math.floor(state.getTagsOfType('microbe')/2),
+	'FM15': (state) =>  Math.floor(state.getTagsOfType('microbe')),
 	//Jovian Lanterns
-	'FM27': (state) =>  Math.floor(state.getTagsOfType('jovian')/3),
+	'FM27': (state) =>  Math.floor(state.getTagsOfType('jovian')/2),
 	//he3 refinery
 	'M80': (state) => state.getMine()*2,
 	//Moon Minerals Tradecenter
@@ -453,7 +449,7 @@ export const ACTIVATION_SCALING_EFFECT_VALUE: Record<string, (clientstate: Playe
 	},
 	//Luna Archives
 	'M87': (state) => {
-		return Math.floor(state.getTagsOfType('moon')/3)
+		return Math.floor(state.getTagsOfType('moon')/2)
 	},
 	//Luna Trade Station
 	'M88': (state) => state.getHabitat(),

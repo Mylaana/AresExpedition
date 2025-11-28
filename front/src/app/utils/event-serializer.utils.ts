@@ -20,7 +20,6 @@ function eventBuilderToJson(event: EventCardBuilder): EventStateDTO | undefined{
 		}
 		status.push(s)
 	}
-	console.log(status)
 	switch(event.subType){
 		case('developmentPhaseBuilder'):{
 			stateType = EventStateTypeEnum.builderDevelopemntLocked
@@ -135,7 +134,8 @@ function eventTagSelectorToJson(event: EventTagSelector): EventStateDTO | undefi
 		case('tagSelector'):{
 			let content: EventStateContentTagSelectorDTO = {
 				atl: event.authorizedTagList,
-				cc: event.targetCardId
+				cc: event.targetCardId,
+				wtrm: event.tagResolutionMode
 			}
 			return {
 				o: EventStateOriginEnum.create,

@@ -8,7 +8,7 @@ import { PhaseSelectedPlayerPannelComponent } from '../../post-game/phase-select
 import { MilestoneAndAwardComponent } from '../../../player-info/milestone-and-award/milestone-and-award.component';
 import { GlobalParameterContributionPannelComponent } from '../../post-game/global-parameter-contribution-pannel/global-parameter-contribution-pannel.component';
 import { GameActiveContentService } from '../../../../services/core-game/game-active-content.service';
-import { PostGameCardsComponent } from '../../post-game/post-game-cards/post-game-cards.component';
+import { PostGameGlobalComponent } from '../../post-game/post-game-global/post-game-global.component';
 
 @Component({
   selector: 'app-game-over',
@@ -16,9 +16,7 @@ import { PostGameCardsComponent } from '../../post-game/post-game-cards/post-gam
 	CommonModule,
 	PlayerPannelComponent,
 	PhaseSelectedPlayerPannelComponent,
-	MilestoneAndAwardComponent,
-	GlobalParameterContributionPannelComponent,
-	PostGameCardsComponent
+	PostGameGlobalComponent
 ],
   templateUrl: './game-over.component.html',
   styleUrl: './game-over.component.scss'

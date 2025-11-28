@@ -6,7 +6,7 @@ import { PlayerScoreStateModel } from "./player-state-score.model";
 import { PlayerInfoStateModel } from "./player-state-info.model";
 import { PlayerTagStateModel } from "./player-state-tag.model";
 import { PlayerRessourceStateModel } from "./player-state-ressource.model";
-import { PlayerPhaseCardStateModel } from "./player-state-phase-card.model";
+import { PlayerPhaseStateModel } from "./player-state-phase.model";
 import { PhaseCardUpgradeType } from "../../types/phase-card.type";
 import { Injector } from "@angular/core";
 import { PhaseCardGroupModel, PhaseCardModel } from "../cards/phase-card.model";
@@ -28,7 +28,7 @@ export class PlayerStateModel {
 	private tagState: PlayerTagStateModel
 	private ressourceState: PlayerRessourceStateModel
 	private projectCardState: PlayerProjectCardStateModel
-	private phaseCardState: PlayerPhaseCardStateModel
+	private phaseCardState: PlayerPhaseStateModel
 	private globalParameterState: PlayerGlobalParameterStateModel
 	private eventState: PlayerEventStateModel
 	private statState: PlayerStatStateModel
@@ -44,7 +44,7 @@ export class PlayerStateModel {
 			this.tagState = new PlayerTagStateModel(dto.tagState)
 			this.ressourceState = new PlayerRessourceStateModel(dto.ressourceState)
 			this.projectCardState = new PlayerProjectCardStateModel(injector, dto.projectCardState)
-			this.phaseCardState = new PlayerPhaseCardStateModel(injector, dto.phaseCardState)
+			this.phaseCardState = new PlayerPhaseStateModel(injector, dto.phaseCardState)
 			this.globalParameterState = new PlayerGlobalParameterStateModel(dto.globalParameterState)
 			this.eventState = new PlayerEventStateModel(dto.eventState)
 			this.otherState = new PlayerOtherStateModel(dto.otherState)
@@ -56,7 +56,7 @@ export class PlayerStateModel {
 			this.tagState = PlayerTagStateModel.empty()
 			this.ressourceState = PlayerRessourceStateModel.empty()
 			this.projectCardState = PlayerProjectCardStateModel.empty(injector)
-			this.phaseCardState = PlayerPhaseCardStateModel.empty(injector)
+			this.phaseCardState = PlayerPhaseStateModel.empty(injector)
 			this.globalParameterState = PlayerGlobalParameterStateModel.empty()
 			this.eventState = PlayerEventStateModel.empty()
 			this.otherState = PlayerOtherStateModel.empty()
@@ -131,7 +131,7 @@ export class PlayerStateModel {
 	removeTag(tagsIds: number[]){
 		this.tagState.removeTags(tagsIds)
 	}
-	getDifferentTagTypeCount(): number {return this.tagState.getDifferentTagTypeCount()}
+	getDifferentTagTypeCount(): number {return this.tagState.getUniqueTagTypeCount()}
 
 	//ressourceState
 	getRessources(): RessourceInfo[] {return this.ressourceState.getRessources()}

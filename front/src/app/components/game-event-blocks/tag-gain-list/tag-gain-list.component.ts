@@ -11,6 +11,9 @@ import { EventBaseModel, EventTagSelector } from '../../../models/core-game/even
 import { HexedBackgroundComponent } from '../../tools/layouts/hexed-tooltip-background/hexed-background.component';
 import { TagType } from '../../../types/global.type';
 import { GameActiveContentService } from '../../../services/core-game/game-active-content.service';
+import { GameStateFacadeService } from '../../../services/game-state/game-state-facade.service';
+import { CardSelectorService } from '../../../services/core-game/components-services/card-selector.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tag-gain-list',
@@ -32,15 +35,24 @@ export class TagGainListComponent implements OnInit{
 	_authorizedTagList!: TagType[]
 
 	private tagListFromActiveContent!: TagType[]
+	private destory$ = new Subject<void>()
 
 	constructor(
-		private cardService: ProjectCardInfoService,
-		private gameContentService: GameActiveContentService
+		private gameContentService: GameActiveContentService,
+		private gameFacadeService: GameStateFacadeService,
+		private selectorService: CardSelectorService
 	){}
 	ngOnInit(): void {
+		this.selectorService.currentNotifyRecalculateSelector.pipe(takeUntil(this.destory$)).subscribe(() => this.initialize())
+		this.initialize()
+	}
+	private initialize(){
 		let index = 0
+		this._buttonsId = []
+		this.buttons = []
+		this._selected = -1
+		
 		this.tagListFromActiveContent = this.gameContentService.getTagListFromActiveContent()
-		console.log(this.tagListFromActiveContent)
 		this._authorizedTagList = this.getAuthorizedTagList()
 		for(let tag of this._authorizedTagList){
 			this.buttons.push(ButtonDesigner.createNonEventButton('tagGain', `$tag_${tag}$`))
@@ -48,7 +60,7 @@ export class TagGainListComponent implements OnInit{
 			index ++
 		}
 		let e = this.event as EventTagSelector
-		let card = this.cardService.getCardById(e.targetCardId)
+		let card = this.gameFacadeService.getClientState().getProjectPlayedModelFromId(e.targetCardId)
 		if(card){
 			this._card = card
 		}
@@ -67,6 +79,6 @@ export class TagGainListComponent implements OnInit{
 	private getAuthorizedTagList(): TagType[] {
 		if(!this.event){return this.tagListFromActiveContent}
 		let event = this.event as EventTagSelector
-		return event.authorizedTagList??this.tagListFromActiveContent
+		return event.authorizedTagList
 	}
 }

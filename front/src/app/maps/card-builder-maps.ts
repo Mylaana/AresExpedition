@@ -189,5 +189,5 @@ export const EVENT_FILTER_SPECIAL_BUILDER: Partial<Record<BuilderOption, (event:
     'selfReplicatingBacteria': (event) => {
         event.titleKey = 'builderSelfReplicatingBacteria'
         return event
-    },
+    }
 }

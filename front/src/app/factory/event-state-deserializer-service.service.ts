@@ -221,7 +221,8 @@ export class EventStateDeserializerService{
 				case(EventStateTypeEnum.tagSelection):{
 					let content: EventStateContentTagSelectorDTO = {
 						atl:state.v['atl'],
-						cc:state.v['cc']
+						cc:state.v['cc'],
+						wtrm: state.v['wtrm']
 					}
 					let event = this.createEventTagSelector(content)
 					if(!event){treated = false; break}
@@ -274,7 +275,7 @@ export class EventStateDeserializerService{
 		return newEvents
 	}
 	private createEventTagSelector(content: EventStateContentTagSelectorDTO):  EventTagSelector | undefined{
-		return S.resolveWildTag(content.cc)
+		return S.resolveWildTag(content.cc, content.wtrm)
 	}
 	private createGenericEvents(content: EventStateGenericDTO): EventBaseModel | undefined {
 		//add production

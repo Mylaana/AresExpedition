@@ -173,7 +173,6 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		return this.getPhaseCards()[3].phaseType === 'production_1mc_activate_card'
 	}
 	private resolveResearch(): void {
-		console.log('collected bonus research value on entering resolve research :',this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.research))
 		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.research)){return}
 		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.research, true)
 
@@ -207,7 +206,6 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 	private resolveAction(): void {
 		if(this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.action)){return}
 		this.gameStateFacade.setPhaseBonusCollected(SelectablePhaseEnum.action, true)
-		console.log('collected bonus research value on entering resolve ACTION :',this.gameStateFacade.getPhaseBonusCollected(SelectablePhaseEnum.research))
 		
 		let activatorEvent = EventFactory.createCardActivator('actionPhaseActivator')
 		if(!this.shouldReceivePhaseCardSelectionBonus(SelectablePhaseEnum.action)){
@@ -217,7 +215,6 @@ export class EventPhaseHandler implements GameEventHandler<EventPhase> {
 		
 		let events: EventBaseModel[] = []
 		let actionPhaseCard = this.getPhaseCards()[2]
-		console.log(actionPhaseCard)
 		switch(actionPhaseCard.phaseType){
 			case('action_base'):{
 				activatorEvent.doubleActivationMaxNumber = 1

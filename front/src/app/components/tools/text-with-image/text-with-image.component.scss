@@ -463,3 +463,26 @@
 		}
 	}
 }
+.wrapper-text-with-image::ng-deep .block-flex.gameOverText{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	height: 100%;
+	width: 100%;
+	& p{
+		color: white;
+		text-align: center;
+	}
+	& img {
+		height: 75%;
+	}
+	& > .wrapper-megacredit{
+		& > p {
+			padding-top: 5px;
+			text-align: center;
+			width: 100%;
+			font-size: 15px;
+		}
+	}
+}

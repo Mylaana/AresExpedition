@@ -9,7 +9,7 @@ import { PhaseCardDTO, PlayerPhaseCardStateDTO } from "../../interfaces/dto/play
 import { RessourceStock } from "../../interfaces/global.interface";
 import { RessourceType } from "../../types/global.type";
 
-export class PlayerPhaseCardStateModel {
+export class PlayerPhaseStateModel {
 	private phaseGroups!: PhaseCardGroupModel[]
 	private phaseCardUpgradeCount: number = 0
 	private selectedPhase!: SelectablePhaseEnum
@@ -142,42 +142,8 @@ export class PlayerPhaseCardStateModel {
 			}
 		}
 	}
-	addProductionResourcesGainedThisRound(ressources: RessourceStock[]){
-		let result = this.generateEmptyResourceProductionList()
-		//add previous
-		for(let r of result){
-			r.valueStock += this.getResourceValueOfTypeFromList(r.name, this.resourcesProducedThisRound)
-		}
-
-		//add new
-		for(let r of result){
-			r.valueStock += this.getResourceValueOfTypeFromList(r.name, ressources)
-		}
-
-		this.resourcesProducedThisRound = result
-	}
-	private getResourceValueOfTypeFromList(t: RessourceType, lst: RessourceStock[]): number{
-		for(let r of lst){
-			if(r.name===t){return r.valueStock}
-		}
-		return 0
-	}
-	private generateEmptyResourceProductionList(): RessourceStock[] {
-		let result: RessourceStock[] = [
-			{
-				name: 'megacredit',
-				valueStock: 0
-			},
-			{
-				name: 'heat',
-				valueStock: 0 
-			},
-			{
-				name: 'plant',
-				valueStock: 0
-			}
-		]
-		return result
+	addProductionResourcesGainedThisRound(resources: RessourceStock[]){
+		this.resourcesProducedThisRound =  Utils.addUpBaseResources(this.resourcesProducedThisRound, resources)
 	}
 	getProductionResourcesGainedThisRound(): RessourceStock[]{
 		return this.resourcesProducedThisRound
@@ -208,11 +174,11 @@ export class PlayerPhaseCardStateModel {
 			this.phaseGroups.push(this.phaseService.getNewPhaseGroup(groupName))
 		}
 	}
-	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseCardStateModel {
+	static fromJson(data: PlayerPhaseCardStateDTO, injector: Injector): PlayerPhaseStateModel {
 		if (!data.pc || !data.sp || !data.psp){
 			throw new Error("Invalid PlayerPhaseCardStateDTO: Missing required fields")
 		}
-		return new PlayerPhaseCardStateModel(injector, data)
+		return new PlayerPhaseStateModel(injector, data)
 	}
 
 	private phaseGroupToJson(phaseGroups: PhaseCardGroupModel[]): PhaseCardDTO[] {
@@ -250,8 +216,8 @@ export class PlayerPhaseCardStateModel {
 		return groups
 	}
 
-	static empty(injector: Injector): PlayerPhaseCardStateModel {
-		return new PlayerPhaseCardStateModel(
+	static empty(injector: Injector): PlayerPhaseStateModel {
+		return new PlayerPhaseStateModel(
 			injector,
 			{
 				pc: [],

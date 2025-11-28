@@ -484,5 +484,11 @@
         "description": "all",
         "imageUrl": "assets/other/all.png",
         "name": "$other_all$"
+    },
+    {
+        "id": 156,
+        "description": "award",
+        "imageUrl": "assets/other/award.png",
+        "name": "$other_award$"
     }
 ]

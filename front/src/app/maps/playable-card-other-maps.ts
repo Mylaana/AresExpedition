@@ -1,4 +1,4 @@
-import { DeckQueryOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum, BuilderOption, EffectPortalEnum } from "../enum/global.enum";
+import { DeckQueryOptionsEnum, GlobalParameterNameEnum, ProjectFilterNameEnum, BuilderOption, EffectPortalEnum, WildTagResolutionEnum } from "../enum/global.enum";
 import { PlayableCardModel } from "../models/cards/project-card.model";
 import { EventBaseModel } from "../models/core-game/event.model";
 import { PlayerStateModel } from "../models/player-info/player-state.model";
@@ -688,7 +688,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Topographic Mapping
 	'D20': () => [
-		S.resolveWildTag('D20'),
+		S.resolveWildTag('D20', WildTagResolutionEnum.anyValidTag),
 		S.upgradePhaseCard(1)
 	],
 	//3D printing
@@ -710,7 +710,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Local Market
 	'D26': () => [
 		S.addProduction({name:'megacredit', valueStock:2}),
-		S.resolveWildTag('D26')
+		S.resolveWildTag('D26', WildTagResolutionEnum.anyValidTag)
 	],
 	//Manufacturing Hub
 	'D27': () => [
@@ -788,7 +788,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Political Influence
 	'D39': () => [
 		S.addProduction({name:'megacredit', valueStock:3}),
-		S.resolveWildTag('D39')
+		S.resolveWildTag('D39', WildTagResolutionEnum.anyValidTag)
 	],
 	//Biological Factories
 	'D40': () => [
@@ -916,7 +916,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Modpro
 	'P32': () => [
-		S.resolveWildTag('P32'),
+		S.resolveWildTag('P32', WildTagResolutionEnum.anyValidTag),
 	],
 	//Ecoline
 	'210': () => [S.addProduction({name:'plant', valueStock:1})],
@@ -939,7 +939,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	},
 	//Mining Guild
 	'214B': () => {
-		return [S.addProduction({name:'steel', valueStock:2})]
+		return [S.addProduction({name:'steel', valueStock:1})]
 	},
 	//Phobolog
 	'215': (clientstate) => {
@@ -990,7 +990,10 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.upgradePhaseCard(1,[0,1])
 	],
 	//Aridor
-	'CF6': ()=>  [S.resolveWildTag('CF6')],
+	'CF6': ()=>  [
+		S.resolveWildTag('CF6', WildTagResolutionEnum.anyValidTag),
+		S.resolveWildTag('CF6', WildTagResolutionEnum.anyValidTag)
+	],
 	//Recyclon
 	'CF7': ()=>  [S.addProduction({name:'steel', valueStock:1})],
 	//Topsoil Contract
@@ -1015,7 +1018,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Bactoviral Research
 	'FM9': (state) => [
-		S.addRessourceToSelectedCard({name:'microbe',valueStock:state.getTagsOfType('science')})
+		S.addRessourceToSelectedCard({name:'microbe',valueStock:state.getTagsOfType('science')}),
+		S.draw()
 	],
 	//Ceres Spaceport
 	'FM10': (state) => [
@@ -1064,7 +1068,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	'FM28': () => [S.specialBuilder(BuilderOption.conscription)],
 	//Research coordination
 	'FM29': () => [
-		S.resolveWildTag('FM29'),
+		S.resolveWildTag('FM29', WildTagResolutionEnum.anyValidTag),
 		S.addProduction({name:'megacredit', valueStock:2})
 	],
 	//Solar wind power
@@ -1125,8 +1129,8 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Luna Train Station
 	'M14': () => [
-		S.addProduction({name:'megacredit', valueStock:4}),
-		S.addRoad()
+		S.addHabitat(),
+		S.addMine()
 	],
 	//Lunar Industry Complex
 	'M15': () => [
@@ -1251,6 +1255,13 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 		S.addMine(2),
 		S.draw(2)
 	],
+	//
+	//Biological Lab implantation
+	'M67': () => [
+		S.addHabitat(),
+		S.draw(),
+		S.addRessourceToSelectedCard({name:'microbe', valueStock:5})
+	],
 	//Moon Minerals Tradecenter
 	'M92': () => [
 		S.draw(2)
@@ -1265,7 +1276,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Luna Mining Federation
 	'MC2': () => [
-		S.addMine(1),
+		S.addMine(2),
 	],
 	//Luna first
 	'MC3': () => [
@@ -1274,6 +1285,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	//Grand Luna Capital Group
 	'MC4': () => [
 		S.addHabitat(2),
+		S.addProduction({name:'steel', valueStock:1})
 	],
 }
 export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: PlayerStateModel) => number> = {
@@ -1302,7 +1314,7 @@ export const COST_MOD: Record<string, (card: PlayableCardModel, clientState: Pla
 	//DevTechs
 	'P14': (card) => card.isFilterOk?.({ type: ProjectFilterNameEnum.greenProject }) ? 2 : 0,
 	//Exocorp v2
-	'D02B': () => 1,
+	'D02B': () => 2,
 	//Solar Logistics
 	'FM2': (card) => {
 		return card.hasTag('space') && card.hasTag('event')?10:0

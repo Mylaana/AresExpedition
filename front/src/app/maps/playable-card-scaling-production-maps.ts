@@ -46,7 +46,7 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	//Aridor
 	'CF6': (s)=> [{name:'megacredit', valueStock:s.getDifferentTagTypeCount()}],
 	//Lunar Embassy
-	'FM16': (s)=> [{name:'plant', valueStock:Math.floor(s.getTagsOfType('earth') /2)}],
+	'FM16': (s)=> [{name:'megacredit', valueStock:5}, {name:'plant', valueStock:Math.floor(s.getTagsOfType('earth') /2)}],
 	//Ecology Research
 	'FM17': (s)=> [{name:'plant', valueStock:Math.floor(s.getTagsOfType('science') /2)}],
 	//Galilean Waystation
@@ -71,7 +71,7 @@ export const SCALING_PRODUCTION: Record<string, (clientState: PlayerStateModel)=
 	//Luna Senate
 	'M13': (s)=> [{name:'megacredit', valueStock:s.getTagsOfType('moon')}],
 	//Luna Train Station
-	'M14': (s)=> [{name:'megacredit', valueStock:s.getMine()}],
+	'M14': (s)=> [{name:'megacredit', valueStock:s.getMine() + s.getHabitat()}],
 	//Orbital Power Grid
 	'M22': (s)=> [{name:'heat', valueStock:s.getTagsOfType('moon')}],
 	//Undermoon Drug Lords Network
