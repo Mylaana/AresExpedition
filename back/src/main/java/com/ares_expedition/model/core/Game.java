@@ -407,7 +407,7 @@ public class Game {
         if(this.getGameOptions().isContentActive(GameContentNameEnum.modeMerger)){
              corpNumber = Math.min(8, totalCorpNumber / playerNumber);
         } else {
-            corpNumber = 4;
+            corpNumber = Math.min(4, totalCorpNumber / playerNumber);
         }
 
         //distribute all corps if single player
