@@ -1276,7 +1276,7 @@ export const PLAY_EVENTS: Record<string, (clientstate: PlayerStateModel) => Even
 	],
 	//Luna Mining Federation
 	'MC2': () => [
-		S.addMine(1),
+		S.addMine(2),
 	],
 	//Luna first
 	'MC3': () => [

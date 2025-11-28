@@ -656,7 +656,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "-$ressource_animal$* / -$ressource_microbe$*:$skipline$$ressource_plant$$ressource_plant$$ressource_plant$",
             "fr": ""
@@ -1725,7 +1725,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "$ressource_microbe$",
             "fr": ""
@@ -6191,7 +6191,7 @@
             "en": "$other_oxygen$",
             "fr": "$other_oxygen$"
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -6410,7 +6410,7 @@
             "fr": "EFFET: Pour chaque $ressource_steel$ que vous gagnez, gagnez \u00e9galement $other_tr$"
         },
         "startingMegacredits": 35,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0",
         "balancedVersion": "add"
     },
@@ -9296,7 +9296,7 @@
             "fr": "Am\u00e9liorez une carte Phase."
         },
         "startingMegacredits": 25,
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11349,7 +11349,7 @@
             "en": "Gain a $other_habitattile$.$skipline$Draw a card.$skipline$Add 5 $ressource_microbe$ to a card.",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11450,7 +11450,7 @@
         "stockable": [
             "microbe"
         ],
-        "status": "implemented",
+        "status": "validated",
         "actionTextOption1": {
             "en": "$ressource_microbe$",
             "fr": ""
@@ -11484,7 +11484,7 @@
         },
         "status": "validated",
         "actionTextOption1": {
-            "en": "$ressource_science$$ressource_science$",
+            "en": "$ressource_science$",
             "fr": ""
         },
         "vpScaling": "0"
@@ -11697,7 +11697,7 @@
             "en": "4$tag_space$",
             "fr": ""
         },
-        "status": "implemented",
+        "status": "validated",
         "vpScaling": "0"
     },
     {
@@ -11883,10 +11883,10 @@
             "fr": ""
         },
         "playedText": {
-            "en": "Gain $other_minetile$.",
+            "en": "Gain $other_minetile$$other_minetile$.",
             "fr": ""
         },
-        "startingMegacredits": 25,
+        "startingMegacredits": 30,
         "status": "validated",
         "vpScaling": "0"
     },
