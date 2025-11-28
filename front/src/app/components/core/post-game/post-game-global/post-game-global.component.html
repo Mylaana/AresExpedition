@@ -1,0 +1,24 @@
+
+<ng-container *ngFor="let r of getRows()">
+    <div class="wrapper-row" >
+        <div class="divider" *ngIf="isLineSeparator(r)"></div>
+        <div class="category-title"
+            *ngIf="isLineCategoryTitle(r)">
+            <p>{{getCategoryTitle(r)}}</p>
+        </div>
+        <ng-container *ngIf="isLineData(r)">
+            <ng-container *ngFor="let c of getColumns()">
+                <div [ngClass]="['box', c===0?'row-title':'', r===0?'column-title':'',
+                        c!=_columns.length-1?'inner-right':'', r!=_rows.length-1?'inner-bottom':'',
+                        c===0&&r===0?'top-left-cell':'']">
+                    <app-player-name *ngIf="r===0" 
+                        [name]="getPlayerName(c)" 
+                        [color]="getPlayerColor(c)"
+                        [style]="'short'">
+                    </app-player-name>
+                    <app-text-with-image *ngIf="r!=0" [rawText]="getData(r, c)" [context]="'gameOverText'"></app-text-with-image>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-container>
